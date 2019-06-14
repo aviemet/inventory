@@ -16,7 +16,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.text :gpu
       t.decimal :gpu_speed
       t.decimal :gpu_memory
-      t.references :category, foreign_key: true
+      t.references :item_category, foreign_key: true
       t.references :brand, foreign_key: true
 
       t.timestamps

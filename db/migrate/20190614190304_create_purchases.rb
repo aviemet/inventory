@@ -2,12 +2,9 @@ class CreatePurchases < ActiveRecord::Migration[5.2]
   def change
     create_table :purchases do |t|
       t.references :item, foreign_key: true
-      t.decimal10 :price
-      t.decimal2 :price
-      t.decimal10 :shipping
-      t.decimal2 :shipping
-      t.decimal10 :tax
-      t.decimal2 :tax
+      t.decimal :price, precision: 10, scale: 2
+      t.decimal :shipping, precision: 10, scale: 2
+      t.decimal :tax, precision: 10, scale: 2
       t.integer :qty
       t.references :vendor, foreign_key: true
       t.text :notes
