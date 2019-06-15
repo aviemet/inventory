@@ -1,3 +1,14 @@
-const { environment } = require('@rails/webpacker')
+const { environment } = require('@rails/webpacker');
+const typescript =  require('./loaders/typescript');
 
-module.exports = environment
+environment.loaders.prepend('typescript', typescript);
+
+environment.config.merge({
+	resolve: {
+		alias: {
+			'react-native$': 'react-native-web'
+		}
+	}
+});
+
+module.exports = environment;
