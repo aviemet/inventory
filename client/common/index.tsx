@@ -3,7 +3,7 @@ import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { Text, View } from 'react-native';
 
-const client = new ApolloClient({ uri: '' });
+const client = new ApolloClient({ uri: '127.0.0.1' });
 
 const App: React.FC = () => {
 
