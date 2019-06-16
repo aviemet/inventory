@@ -1,12 +1,18 @@
+import ApolloClient from 'apollo-boost';
 import React from 'react';
+import { ApolloProvider } from 'react-apollo';
 import { Text, View } from 'react-native';
+
+const client = new ApolloClient({ uri: '' });
 
 const App: React.FC = () => {
 
 	return(
-		<View>
-			<Text>Hello React Native Web</Text>
-		</View>
+		<ApolloProvider client={client}>
+			<View>
+				<Text>Hello React Native Web</Text>
+			</View>
+		</ApolloProvider>
 	);
 }
 
