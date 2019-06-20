@@ -1,4 +1,4 @@
 class ItemAssignment < ApplicationRecord
-  belongs_to :item
-  belongs_to :person
+  has_one :item
+  has_one :person
 end

@@ -1,4 +1,4 @@
 class Purchase < ApplicationRecord
-  belongs_to :item
-  belongs_to :vendor
+  has_many :items
+  has_one :vendor
 end

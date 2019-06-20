@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_14_192309) do
+ActiveRecord::Schema.define(version: 2019_06_20_025856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,15 +40,6 @@ ActiveRecord::Schema.define(version: 2019_06_14_192309) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "company_departments", force: :cascade do |t|
-    t.bigint "company_id"
-    t.bigint "department_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_company_departments_on_company_id"
-    t.index ["department_id"], name: "index_company_departments_on_department_id"
   end
 
   create_table "contact_types", force: :cascade do |t|
@@ -83,8 +74,10 @@ ActiveRecord::Schema.define(version: 2019_06_14_192309) do
 
   create_table "departments", force: :cascade do |t|
     t.text "name"
+    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_departments_on_company_id"
   end
 
   create_table "emails", force: :cascade do |t|
@@ -106,13 +99,36 @@ ActiveRecord::Schema.define(version: 2019_06_14_192309) do
     t.index ["item_id"], name: "index_interfaces_on_item_id"
   end
 
-  create_table "ip_addresses", force: :cascade do |t|
-    t.text "ipv4"
-    t.text "ipv6"
+  create_table "interfaces_ipv4s", force: :cascade do |t|
     t.bigint "interface_id"
+    t.bigint "ipv4_address_id"
+    t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["interface_id"], name: "index_ip_addresses_on_interface_id"
+    t.index ["interface_id"], name: "index_interfaces_ipv4s_on_interface_id"
+    t.index ["ipv4_address_id"], name: "index_interfaces_ipv4s_on_ipv4_address_id"
+  end
+
+  create_table "interfaces_ipv6s", force: :cascade do |t|
+    t.bigint "interface_id"
+    t.bigint "ipv6_address_id"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["interface_id"], name: "index_interfaces_ipv6s_on_interface_id"
+    t.index ["ipv6_address_id"], name: "index_interfaces_ipv6s_on_ipv6_address_id"
+  end
+
+  create_table "ipv4_addresses", force: :cascade do |t|
+    t.text "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ipv6_addresses", force: :cascade do |t|
+    t.text "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "item_assignments", force: :cascade do |t|
@@ -252,14 +268,16 @@ ActiveRecord::Schema.define(version: 2019_06_14_192309) do
 
   add_foreign_key "addresses", "contact_types"
   add_foreign_key "addresses", "contacts"
-  add_foreign_key "company_departments", "companies"
-  add_foreign_key "company_departments", "departments"
   add_foreign_key "contracts", "contract_types"
   add_foreign_key "contracts", "vendors"
+  add_foreign_key "departments", "companies"
   add_foreign_key "emails", "contact_types"
   add_foreign_key "emails", "contacts"
   add_foreign_key "interfaces", "items"
-  add_foreign_key "ip_addresses", "interfaces"
+  add_foreign_key "interfaces_ipv4s", "interfaces"
+  add_foreign_key "interfaces_ipv4s", "ipv4_addresses"
+  add_foreign_key "interfaces_ipv6s", "interfaces"
+  add_foreign_key "interfaces_ipv6s", "ipv6_addresses"
   add_foreign_key "item_assignments", "items"
   add_foreign_key "item_assignments", "people"
   add_foreign_key "items", "brands"
