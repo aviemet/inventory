@@ -37,9 +37,10 @@ gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
 
 # Use Devise for authentication
-gem 'devise'
-gem 'omniauth-google-oauth2'
-gem "devise_ldap_authenticatable"
+gem 'devise', '>= 4.6.2'
+gem 'devise-token_authenticatable', '>= 1.1.0'
+gem 'omniauth-google-oauth2', '>= 0.7.0'
+gem "devise_ldap_authenticatable", '>= 0.8.6'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
