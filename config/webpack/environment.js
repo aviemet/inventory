@@ -7,7 +7,8 @@ environment.config.merge({
 	resolve: {
 		alias: {
 			'react-native$': 'react-native-web'
-		}
+		},
+		extensions: ['.jsx', '.js', '.tsx', '.ts']
 	}
 });
 
