@@ -1,22 +1,14 @@
-class Mutations::CreateUser < Mutations::BaseMutation
-	argument :email, String, required: true
-	argument :password, String, required: true
+module Mutations
+	class CreateUser < BaseMutation
+		argument :auth_input, Types::AuthEmailInput, required: true
 
-	field :user, Types::UserType, null: false
-	field :errors, [String], null: false
+		type Types::UserType
 
-	def resolve(email:, password:)
-		user = User.new(email: email, password: password)
-		if( user.save)
-			{
-				user: user,
-				errors: []
-			}
-		else
-			{
-				user: nul,
-				errors: user.errors.full_messages
-			}
+		def resolve(auth_input:)
+			User.create!(
+				email: auth_input[:email],
+				password: auth_input[:password]
+			)
 		end
 	end
 end

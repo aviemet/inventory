@@ -1,11 +1,9 @@
-['enum-typs', 'input-object-types', 'interface-types', 'object-types', 'scalar-types', 'union-types'].each do |dir|
-  Dir[File.dirname(__FILE__) + "/#{dir}/*.rb"].each {|file| require file }
-end
+# ['enum_typs', 'input_object_types', 'interface_types', 'object_types', 'scalar_types', 'union_types'].each do |dir|
+#   Dir[File.dirname(__FILE__) + "/#{dir}/*.rb"].each {|file| require file }
+# end
 
 module Types
-  class QueryType < Types::BaseObject
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+  class QueryType < BaseObject
 
     field :users, [Types::UserType], null: false
     def users
@@ -13,10 +11,16 @@ module Types
     end
 
     field :user, [Types::UserType], null: false do
-      argument :id, ID, required: true
+      argument :user_query_input, [Types::UserQueryInput], required: true
     end
-    def user(id:)
-      User.find(id)
+    def user(user_query_input:)
+      id = user_query_input[0]&.[](:id)
+      email = user_query_input[0]&.[](:email)
+      if id
+        [User.find(id)]
+      elsif email
+        [User.find_by_email(email)]
+      end
     end
   end
 end
