@@ -1,4 +1,4 @@
-# ['enum-typs', 'input-object-types', 'interface-types', 'object-types', 'scalar-types', 'union-types'].each do |dir|
+# ['enum_typs', 'input_object_types', 'interface_types', 'object_types', 'scalar_types', 'union_types'].each do |dir|
 #   Dir[File.dirname(__FILE__) + "/#{dir}/*.rb"].each {|file| require file }
 # end
 

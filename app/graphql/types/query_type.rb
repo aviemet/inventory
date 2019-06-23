@@ -16,6 +16,9 @@ module Types
     def user(user_query_input:)
       id = user_query_input[0]&.[](:id)
       email = user_query_input[0]&.[](:email)
+
+      puts "I made a change"
+
       if id
         [User.find(id)]
       elsif email
