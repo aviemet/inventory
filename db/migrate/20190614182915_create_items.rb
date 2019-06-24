@@ -2,11 +2,11 @@ class CreateItems < ActiveRecord::Migration[5.2]
   def change
     create_table :items do |t|
       t.text :title
-      t.text :mode
+      t.text :model
       t.text :serial
       t.text :description
       t.text :notes
-      t.boolean :consumeable
+      t.boolean :consumeable, default: false
       t.integer :qty
       t.text :os
       t.decimal :memory
