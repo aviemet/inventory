@@ -1,4 +1,4 @@
 class InventorySchema < GraphQL::Schema
-  mutation(Types::MutationType)
-  query(Types::QueryType)
+  mutation Types::MutationType
+  query Types::QueryType
 end

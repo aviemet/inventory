@@ -1,5 +1,5 @@
+import App from '@repo/common';
 import { AppRegistry } from 'react-native';
-import App from '../../common';
 import * as serviceWorker from '../serviceWorker';
 
 // register the app

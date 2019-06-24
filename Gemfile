@@ -9,11 +9,11 @@ gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 
-# Load environment variables https://github.com/bkeepers/dotenv
-gem 'dotenv-rails'
-
 # Use GraphQL to query the database from the front end
 gem 'graphql', '>= 1.9.6'
+
+# Load environment variables https://github.com/bkeepers/dotenv
+gem 'dotenv-rails'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
@@ -50,6 +50,8 @@ gem "devise_ldap_authenticatable", '>= 0.8.6'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+
+gem 'require_all'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

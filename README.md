@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Reference:
 
-Things you may want to cover:
+TSConfig Options:
+https://www.typescriptlang.org/docs/handbook/compiler-options.html
 
-* Ruby version
+Currently working from tutorials:
 
-* System dependencies
+React Native Web:
+https://www.youtube.com/watch?v=_CBYbEGvxYY&t=2925s
 
-* Configuration
+JWT Auth:
+https://www.youtube.com/watch?v=RUZB8tpyDbQ&list=PLN3n1USn4xlkWolE06ELeTW9XqGJ7oiOn&index=2
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Unique IDs within type:
+https://www.youtube.com/watch?v=pYbrI2zYR6U&list=PLQQMnHgG1zgHIoFiMlzb-lDgMK0tg379L&index=3&t=0s

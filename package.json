@@ -3,8 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "npm run dev:server",
-    "dev:server": "NODE_ENV=development foreman start -f Procfile.dev-server"
+    "dev": "NODE_ENV=development foreman start -f Procfile.dev-server"
   },
   "dependencies": {
     "mime": "^2.4.4",
