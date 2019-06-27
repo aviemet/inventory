@@ -1,10 +1,9 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  #  :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
 
-  has_one :person
+  belongs_to :person
 
   has_secure_token :refresh_secret
   has_secure_token :user_secret
@@ -14,12 +13,13 @@ class User < ApplicationRecord
   private
 
   def reference_person
+    # contact = Contact.create!
+    person = Person.create
+    self.person = person
+
     email = Email.find_by_email(self.email)
-    # If email is empty we need to go up the chain creating a contact, an email and a person
-    if email.blank?
-      contact = Contact.create!
-      email = Email.create!(email: self.email, contact: contact)
-      person = Person.create!(contact: contact)
+    if email.present?
+      email = Email.create(email: self.email, contact: contact)
     end
   end
 end

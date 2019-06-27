@@ -1,4 +1,4 @@
 class Location < ApplicationRecord
-  has_one :contact
+  include Contactable
   belongs_to :company
 end
