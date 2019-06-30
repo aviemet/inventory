@@ -2,6 +2,6 @@ module Contactable
 	extend ActiveSupport::Concern
 
 	included do
-		has_many :contacts, as: :contactable
+		has_one :contact, as: :contactable, dependent: :destroy
 	end
 end

@@ -8,17 +8,24 @@ class User < ApplicationRecord
   has_secure_token :refresh_secret
   has_secure_token :user_secret
 
-  before_save :reference_person
+  validates :email, presence: true
+  validates :person, presence: true
+
+  before_validation :reference_person
+  before_create :add_email_to_contact
 
   private
 
+  # Before validation, create an associated Person if not present
   def reference_person
-    person = Person.create!
-    self.person = person
+    self.person ||= Person.new
+  end
 
-    email = Email.find_by_email(self.email)
-    if email.present?
-      email = Email.create(email: self.email, contact: contact)
+  # Before create, add the new user's email to their contact card
+  def add_email_to_contact
+    if !self.person.contact.emails.exists?(:email => self.email)
+      self.person.contact.emails << Email.create(email: self.email)
     end
   end
+
 end
