@@ -51,7 +51,7 @@ gem "devise_ldap_authenticatable", '>= 0.8.6'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-gem 'require_all'
+gem 'active_type'
 
 group :development, :test do
   gem 'rspec-rails'
