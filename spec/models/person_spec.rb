@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'models/concerns/contactable_spec'
 
 RSpec.describe Person, type: :model do
   context 'Contactable' do
