@@ -6,9 +6,13 @@
     "@repo/common": "1.0.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
+    "react-art": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-native": "^0.59.9",
-    "react-native-web": "^0.11.4"
+    "react-native": "^0.60.3",
+    "react-native-web": "^0.11.5"
+  },
+  "devDependencies": {
+    "@types/react-native": "0.55.4"
   },
   "eslintConfig": {
     "extends": "react-app"

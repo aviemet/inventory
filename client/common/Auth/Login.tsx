@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, TextInput } from 'react-native-elements';
+import { TextInput } from 'react-native';
+import { Button } from 'react-native-elements';
 
 const Login: React.FC = () => {
 	const [ email, setEmail ] = useState('');
