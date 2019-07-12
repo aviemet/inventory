@@ -16,21 +16,26 @@
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
-
-/node_modules
-/yarn-error.log
-
 /public/assets
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Ignore compiled and npm libraries
 /public/packs
 /public/packs-test
 /node_modules
+**/node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
 
+# Ignore env files
 .env
+**/**.env
+
+# Ignore OS and IDE files
+.vscode
+**/.directory
+**/.DS_Store
