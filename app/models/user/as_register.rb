@@ -1,12 +1,12 @@
 class User::AsRegister < User
 
-  before_create :ensure_person_association
+  before_validation :ensure_person_association
   after_create :add_email_to_contact
 
   private
 
   def ensure_person_association
-    self.person ||= Person.create!
+    self.person ||= Person.new
   end
 
   # Before create, add the new user's email to their contact card

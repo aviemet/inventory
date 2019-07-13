@@ -5,10 +5,9 @@ class User < ApplicationRecord
 
   belongs_to :person, optional: true
 
-  has_secure_password
   has_secure_token :refresh_secret
   has_secure_token :user_secret
 
   validates :email, presence: true, uniqueness: true
-
+  validates :person, presence: true
 end

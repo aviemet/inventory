@@ -82,6 +82,11 @@ GEM
       railties (>= 3.2, < 6.1)
     erubi (1.8.0)
     execjs (2.7.0)
+    factory_bot (5.0.2)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.0.2)
+      factory_bot (~> 5.0.2)
+      railties (>= 4.2.0)
     ffi (1.11.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -233,6 +238,7 @@ DEPENDENCIES
   devise (>= 4.6.2)
   devise_ldap_authenticatable (>= 0.8.6)
   dotenv-rails
+  factory_bot_rails
   graphiql-rails (>= 1.7.0)
   graphql (>= 1.9.6)
   jwt (>= 2.2.1)

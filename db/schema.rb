@@ -203,10 +203,8 @@ ActiveRecord::Schema.define(version: 2019_06_27_055502) do
     t.text "last_name"
     t.boolean "active"
     t.bigint "department_id"
-    t.bigint "contact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["contact_id"], name: "index_people_on_contact_id"
     t.index ["department_id"], name: "index_people_on_department_id"
   end
 
@@ -293,7 +291,6 @@ ActiveRecord::Schema.define(version: 2019_06_27_055502) do
   add_foreign_key "items", "item_categories"
   add_foreign_key "locations", "companies"
   add_foreign_key "locations", "contacts"
-  add_foreign_key "people", "contacts"
   add_foreign_key "people", "departments"
   add_foreign_key "phones", "contact_types"
   add_foreign_key "phones", "contacts"
