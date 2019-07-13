@@ -9,5 +9,25 @@ class User < ApplicationRecord
   has_secure_token :user_secret
 
   validates :email, presence: true, uniqueness: true
+  validates :email, length: { maximum: 255 }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :person, presence: true
+
+  after_initialize :setup_new_user, if: :new_record?
+  after_create :add_email_to_contact
+
+  private
+
+  def setup_new_user
+    self.person ||= Person.new
+    # self.role ||= :customer
+  end
+
+  # Before create, add the new user's email to their contact card
+  def add_email_to_contact
+    if !self.person.contact.emails.exists?(:email => self.email)
+      self.person.contact.emails << Email.create(email: self.email)
+    end
+  end
+
 end
