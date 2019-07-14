@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@repo/common": "1.0.0"
+    "@repo/common": "1.0.0",
+    "react": "latest",
+    "react-art": "latest",
+    "react-dom": "latest",
+    "react-native": "latest",
+    "react-native-web": "latest",
+    "typescript": "latest"
   },
   "devDependencies": {
+    "@types/react-native": "latest"
   },
   "eslintConfig": {
     "extends": "react-app"

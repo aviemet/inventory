@@ -53,3 +53,8 @@ https://react-native-training.github.io/react-native-elements/blog/2018/12/13/re
 
 
 
+## Notes
+
+*Token salt for authentication is app_secret + user_secret
+*Refresh token is salted with app_secret + user_secret + refresh_secret
+*Can invalidate refresh token by changing refresh_secret on user record

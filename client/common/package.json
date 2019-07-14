@@ -11,11 +11,11 @@
     "@types/prop-types": "latest",
     "@types/react": "latest",
     "@types/react-native": "latest",
+    "@types/react-router": "^5.0.3",
     "apollo-boost": "latest",
     "apollo-client": "latest",
     "formik": "latest",
     "graphql": "latest",
-    "mime": "latest",
     "moment": "latest",
     "prop-types": "latest",
     "react": "latest",
@@ -26,6 +26,7 @@
     "react-native-elements": "latest",
     "react-native-vector-icons": "latest",
     "react-native-web": "latest",
+    "react-router": "^5.0.1",
     "ts-loader": "latest",
     "typescript": "latest",
     "webpack-dev-server": "latest"
@@ -35,6 +36,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-native": "latest",
+    "mime": "^2.4.4",
     "ts-loader": "latest",
     "typescript": "latest"
   }
