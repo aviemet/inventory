@@ -1,5 +1,5 @@
 module Types
-  class QueryType < BaseObject
+  class QueryType < Types::BaseObject
 
     field :users, [Types::UserType], null: false
     def users

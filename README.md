@@ -8,6 +8,9 @@ https://www.typescriptlang.org/docs/handbook/compiler-options.html
 React Native Elements UI Kit
 https://react-native-training.github.io/react-native-elements/blog/2018/12/13/react-native-web.html
 
+SQL Designer
+https://app.sqldbm.com/PostgreSQL/Edit/p69051/#
+
 Currently working from tutorials:
 
 React Native Web:
@@ -15,6 +18,7 @@ https://www.youtube.com/watch?v=_CBYbEGvxYY&t=2925s
 
 JWT Auth:
 https://www.youtube.com/watch?v=RUZB8tpyDbQ&list=PLN3n1USn4xlkWolE06ELeTW9XqGJ7oiOn&index=2
+https://www.pluralsight.com/guides/token-based-authentication-with-ruby-on-rails-5-api
 
 Unique IDs within type:
 https://www.youtube.com/watch?v=pYbrI2zYR6U&list=PLQQMnHgG1zgHIoFiMlzb-lDgMK0tg379L&index=3&t=0s
@@ -23,6 +27,8 @@ https://github.com/rmosolgo/graphql-ruby/blob/master/guides/relay/object_identif
 Potentially usefull reads:
 
 https://dev.to/brunolemos/tutorial-100-code-sharing-between-ios-android--web-using-react-native-web-andmonorepo-4pej
+
+https://jwt.io/introduction/
 
 ## Books
 

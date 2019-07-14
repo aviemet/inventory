@@ -17,12 +17,11 @@ class User < ApplicationRecord
 
   after_initialize :setup_new_user, if: :new_record?
   after_create :add_email_to_contact
-  
+
   private
 
   def setup_new_user
     self.person ||= Person.new
-    # self.role ||= :customer
   end
 
   # Before create, add the new user's email to their contact card

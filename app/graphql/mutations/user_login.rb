@@ -1,22 +1,26 @@
 module Mutations
-	class UserLogin < BaseMutation
+	class UserLogin < Mutations::BaseMutation
 		argument :auth_input, Types::AuthEmailInput, required: true
 
 		type Types::UserType
+		# field :auth_token, String
+		# field :refresh_token, String
 
 		def resolve(auth_input:)
-			user = User.find_for_authentication(auth_input[:email])
-			return unless user
-
-			is_valid_for_auth = user.valid_for_authentication?{
-        user.valid_password?(password)
-      }
-      return is_valid_for_auth ? user : nil 
+			user = User::TokenAuth.find_for_authentication(email: auth_input[:email])
+			return unless user && user.authenticate(auth_input[:password])
+			user
+			# { 
+			# 	user: user, 
+			# 	auth_token: user.auth_token, 
+			# 	refresh_token: user.refresh_token
+			# }
 		end
 	end
 end
 
-```
+__END__
+`
 ^So, basically we want to use the GQL mutation to send a 'sign in' request to the server with the user credentials (email, password)
 ^We find user by email, then check password is valid
 Issue both an auth token and a refresh token
@@ -34,4 +38,3 @@ If refresh token is invalid, redirecto to login again
 token salt for authentication is app_secret + user_secret
 refresh token is salted with app_secret + user_secret + refresh_secret
 Can invalidate refresh token by changing refresh_secret on user record
-```

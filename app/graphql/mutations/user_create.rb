@@ -1,5 +1,5 @@
 module Mutations
-	class UserCreate < BaseMutation
+	class UserCreate < Mutations::BaseMutation
 		argument :auth_input, Types::AuthEmailInput, required: true
 
 		type Types::UserType

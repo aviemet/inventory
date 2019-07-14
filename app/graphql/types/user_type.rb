@@ -1,6 +1,6 @@
 module Types
-  class UserType < BaseObject
+  class UserType < Types::BaseObject
     field :email, String, null: false
-    field :person, ID, null: true
+    field :person, Types::PersonType, null: true
   end
 end
