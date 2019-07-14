@@ -10,13 +10,15 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/react-router-native": "^4.2.4",
     "react": "latest",
-    "react-native": "latest"
+    "react-native": "latest",
+    "react-router-native": "^5.0.1"
   },
   "devDependencies": {
-    "@repo/common": "1.0.0",
     "@babel/core": "latest",
     "@babel/runtime": "latest",
+    "@repo/common": "1.0.0",
     "@types/jest": "latest",
     "@types/react": "latest",
     "@types/react-native": "latest",

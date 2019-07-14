@@ -1,4 +1,4 @@
-import App from '@repo/common';
+import App from '../app';
 import { AppRegistry } from 'react-native';
 import * as serviceWorker from '../serviceWorker';
 

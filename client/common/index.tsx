@@ -19,14 +19,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const App: React.FC = () => {
+const App: React.FC = ({ children }) => {
 
 	return(
 		<ApolloProvider client={ client }>
 			<ThemeProvider theme={ theme }>
-				<View>
-					<Login />
-				</View>
+				<>
+					{ children }
+				</>
 			</ThemeProvider>
 		</ApolloProvider>
 	);
