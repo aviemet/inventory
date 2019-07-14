@@ -3,6 +3,8 @@ class ApplicationSchema < GraphQL::Schema
   query Types::QueryType
 
   def self.id_from_object(obj, type, ctx)
+    puts "TYPE"
+    puts type.name
     GraphQL::Schema::UniqueWithinType.encode(type.name, obj.id)
   end
 
@@ -13,9 +15,21 @@ class ApplicationSchema < GraphQL::Schema
 
   # Must register resolver for all types using globaly unique id
   def self.resolve_type(type, obj, ctx)
+    puts "OBJ"
+    puts obj
     case obj
     when User
       Types::UserType
+    when Person
+      Types::PersonType
+    when Contact
+      Types::ContactType
+    when Email
+      Types::EmailType
+    when Phone
+      Types::PhoneType
+    when Address
+      Types::AddressType
     else
       raise("Unexpected objec: #{obj}")
     end

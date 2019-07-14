@@ -1,5 +1,6 @@
 module Types
   class AddressType < Types::BaseObject
+    global_id_field :id
     field :address, String, null: false
     field :address_2, String, null: true
     field :city, String, null: true
