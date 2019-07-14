@@ -11,8 +11,16 @@ export default gql`
 				password: $password
 			}
 		){
-			id
-			email
+			user {
+				id
+				email
+				person {
+					firstName
+					lastName
+				}
+			}
+			authToken
+			refreshToken
 		}
 	}
 `;

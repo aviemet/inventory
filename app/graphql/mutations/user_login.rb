@@ -3,13 +3,10 @@ module Mutations
 		argument :auth_input, Types::AuthEmailInput, required: true
 
 		type Types::TokenAuthType
-		# field :auth_token, String
-		# field :refresh_token, String
 
 		def resolve(auth_input:)
 			user = User::TokenAuth.find_for_authentication(email: auth_input[:email])
 			return unless user && user.authenticate(auth_input[:password])
-			# user
 			{ 
 				user: user, 
 				auth_token: user.auth_token, 

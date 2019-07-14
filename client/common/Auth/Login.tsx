@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+
+import { useMutation } from 'react-apollo-hooks';
+import { USER_LOGIN_MUTATION } from '../graphql/mutations';
+
 import { TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -6,8 +10,19 @@ const Login: React.FC = () => {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 
-	const loginUser = () => {
+	const [ userLogin, response ]: any = useMutation(USER_LOGIN_MUTATION);
 
+	const handleLogin = async () => {
+		if(password && email) {
+			const auth = await userLogin({
+				variables: { email, password }
+			});
+			if(auth) {
+				console.log({auth});
+			} else {
+				// TODO: Display error
+			}
+		}
 	}
 
 	return(
@@ -25,7 +40,7 @@ const Login: React.FC = () => {
 			/>
 			<Button
 				title="Login"
-				onPress={loginUser}
+				onPress={handleLogin}
 				accessibilityLabel="Login User"
 			/>
 		</>

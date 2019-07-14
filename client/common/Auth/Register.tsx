@@ -18,7 +18,11 @@ const Register: React.FC = () => {
 			const user = await userCreate({
 				variables: { email, password }
 			});
-			console.log({user, response});
+			if(user) {
+				// TODO: Log in new user
+			} else {
+				// TODO: Display error
+			}
 		}
 	}
 
