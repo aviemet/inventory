@@ -3,9 +3,10 @@ class User::TokenAuth < User::Authorization
 	def auth_token(payload: {})
 		JsonWebToken.encode(
 			payload: payload.merge({
-				uid: self.id
+				uid: GraphQL::Schema::UniqueWithinType.encode(User.name, self.id),
+				iat: Time.now.to_i
 			}),
-			exp: 2.minutes.to_i,
+			exp: 2.minutes.from_now.to_i,
 			salt: self.user_secret
 		)
 	end
@@ -13,9 +14,10 @@ class User::TokenAuth < User::Authorization
 	def refresh_token(payload: {})
 		JsonWebToken.encode(
 			payload: payload.merge({
-				uid: self.id
+				uid: GraphQL::Schema::UniqueWithinType.encode(User.name, self.id),
+				iat: Time.now.to_i
 			}),
-			exp: 6.months.to_i,
+			exp: 6.months.from_now.to_i,
 			salt: self.user_secret + refresh_secret
 		)
 	end
@@ -25,17 +27,6 @@ class User::TokenAuth < User::Authorization
 	end
 
 end
-
-  # private def aud_headers
-  #   token_headers[Warden::JWTAuth.config.aud_header]
-  # end
-
-  # private def token_headers
-  #   { 
-  #     'Accept' => 'application/json', 
-  #     'Content-Type' => 'application/json' 
-  #   }
-  # end
 
 __END__
 `
