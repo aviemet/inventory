@@ -1285,7 +1285,7 @@
     "@types/react" "*"
     "@types/react-router" "*"
 
-"@types/react-router-native@^4.2.4":
+"@types/react-router-native@latest":
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/@types/react-router-native/-/react-router-native-4.2.4.tgz#b86cb6e4e29d4055aea8e6ca3a3be9cb88b3f7c6"
   integrity sha512-AvRp1Uuxmewo3+3BHhYPnZS9WVff2bjvpTJEXyZJmnf3FvSzeJJwmBOTjs33y3Ux2Uzg+3HCcF3qBq/jmV16uA==
@@ -8582,7 +8582,7 @@ react-router-dom@^5.0.1:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-router-native@^5.0.1:
+react-router-native@latest:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-router-native/-/react-router-native-5.0.1.tgz#4469f83d450bd494d1cc023a574136a6f1869010"
   integrity sha512-DauJi4SbXwnZaLyUG9zSujwhfb6BwNh8viWiWIEsspvrL25I9JIMEZ1CPj658vlAnzN6uC1PBRnnUMzi6v9k6w==
@@ -8590,7 +8590,7 @@ react-router-native@^5.0.1:
     prop-types "^15.6.1"
     react-router "5.0.1"
 
-react-router@5.0.1, react-router@^5.0.1:
+react-router@5.0.1, react-router@^5.0.1, react-router@latest:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-5.0.1.tgz#04ee77df1d1ab6cb8939f9f01ad5702dbadb8b0f"
   integrity sha512-EM7suCPNKb1NxcTZ2LEOWFtQBQRQXecLxVpdsP4DW4PbbqYWeRiLyV/Tt1SdCrvT2jcyXAXmVTmzvSzrPR63Bg==

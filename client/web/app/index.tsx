@@ -7,9 +7,7 @@ import Routes from '@repo/common/routes';
 export default () => (
 	<App>
 		<BrowserRouter>
-			<Routes 
-				router={{Route, Switch, Link}}
-			/>
+			<Routes router={{Route, Switch, Link}} />
 		</BrowserRouter>
 	</App>
 );

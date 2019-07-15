@@ -16,6 +16,15 @@ module Inventory
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    # Enable cookies
+    config.middleware.use ActionDispatch::Cookies
+
+    # Auto load files on the lib folder
     config.autoload_paths << Rails.root.join('lib')
+
+    # Site wide configuration settings
+    config.auth_token_expiration = 5.minutes
+    config.refresh_token_expiration = 6.months
+    
   end
 end

@@ -41,6 +41,9 @@ gem 'devise', '>= 4.6.2'
 gem 'devise_ldap_authenticatable', '>= 0.8.6'
 gem 'jwt', '>= 2.2.1'
 
+# Allow cross origin requests
+gem 'rack-cors'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

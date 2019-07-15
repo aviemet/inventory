@@ -3,7 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "NODE_ENV=development foreman start -f Procfile.dev-server"
+    "dev": "NODE_ENV=development foreman start -f Procfile.dev-server",
+    "start:native": "yarn workspace inventory-native-client start",
+    "ios": "yarn workspace inventory-native-client ios",
+    "android": "yarn workspace inventory-native-client android"
   },
   "devDependencies": {
     "@babel/core": "latest",
