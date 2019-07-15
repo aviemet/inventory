@@ -4,6 +4,6 @@ class WebappController < ApplicationController
 	def index
 		props = {}
   	puts JSON.pretty_generate(props)
-    @webapp_props = props
+		@webapp_props = props
 	end
 end

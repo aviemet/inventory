@@ -1,5 +1,6 @@
-class GraphqlController < ApplicationController
-  protect_from_forgery with: :null_session
+class GraphqlController < ActionController::API
+  include ::ActionController::Cookies
+  # protect_from_forgery with: :null_session
   
   def execute
     variables = ensure_hash(params[:variables])
@@ -8,7 +9,9 @@ class GraphqlController < ApplicationController
     context = {
       # Query context goes here, for example:
       # current_user: current_user,
+      cookies: cookies,
     }
+    somevar = "val"
     result = ApplicationSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e

@@ -10,17 +10,17 @@ module Mutations
 			auth_token, refresh_token = user.issue_tokens
 
 			# Set the auth token cookie
-			cookies.signed[:auth_token] = {
+			@context[:cookies].signed[:auth_token] = {
 				value: auth_token,
 				httponly: true,
-				expires: Rails.application.config.auth_token_expiration.from_now.to_i
+				expires: Rails.application.config.auth_token_expiration.from_now
 			}
 
 			# Set the refresh token cookie
-			cookies.signed[:refresh_token] = {
+			@context[:cookies].signed[:refresh_token] = {
 				value: refresh_token,
-				httpOnly: true
-				expires: Rails.application.config.refresh_token_expiration.from_now.to_i
+				httpOnly: true,
+				expires: Rails.application.config.refresh_token_expiration.from_now
 			}
 
 			{ 
