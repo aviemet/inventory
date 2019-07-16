@@ -1,5 +1,5 @@
-import UserStore from './UserStore';
+import UserStoreContext from './UserStore';
 
 export {
-	UserStore
+	UserStoreContext
 };

@@ -12,7 +12,8 @@
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
-		"declaration": true
+    "declaration": true,
+    "noImplicitAny": false
   },
   "exclude": [
     "**/*.spec.ts",

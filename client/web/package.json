@@ -4,13 +4,14 @@
   "private": true,
   "dependencies": {
     "@repo/common": "1.0.0",
-    "@types/react-router-dom": "^4.3.4",
+    "@types/react-router": "latest",
+    "@types/react-router-dom": "latest",
     "react": "latest",
     "react-art": "latest",
     "react-dom": "latest",
     "react-native": "latest",
     "react-native-web": "latest",
-    "react-router-dom": "^5.0.1",
+    "react-router-dom": "latest",
     "typescript": "latest"
   },
   "devDependencies": {

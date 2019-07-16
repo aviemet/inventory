@@ -1,3 +1,6 @@
+import Login from './Login';
+import Register from './Register';
+
 function getCookie(cname: string) {
 	var name = cname + "=";
 	var ca = document.cookie.split(';');
@@ -15,4 +18,4 @@ const isLoggedIn = () => {
 	return !!getCookie("refresh_token");
 }
 
-export { isLoggedIn }
+export { isLoggedIn, Login, Register }

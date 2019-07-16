@@ -1,6 +1,7 @@
 import { observable, computed } from 'mobx';
+import { createContext } from 'react';
 
-export default class UserStore {
+class UserStore {
 	@observable user = null;
 
 	@computed get userLoggedIn() {
@@ -13,5 +14,6 @@ export default class UserStore {
 		};
 	}
 
-
 }
+
+export default createContext(new UserStore());
