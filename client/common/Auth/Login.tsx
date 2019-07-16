@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 
+import { UserStore } from '../stores';
+
 import { useMutation } from 'react-apollo-hooks';
 import { USER_LOGIN_MUTATION } from '../graphql/mutations';
 
@@ -22,9 +24,9 @@ const Login: React.FC<any> = (props): any => {
 				variables: { email, password }
 			});
 			if(auth) {
-				console.log({pathname: props.location.state.from.pathname})
+				// UserStore.user = auth.user;
+
 				if(props.location.state) {
-					console.log({authPathName: props.location.state.from.pathname})
 					setReferer(props.location.state.from.pathname);
 				}
 				setRedirect(true);
