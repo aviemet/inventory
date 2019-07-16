@@ -1,13 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
+import * as Router from 'react-router-dom'
 
 import App from '@repo/common';
 import Routes from '@repo/common/routes';
 
 export default () => (
 	<App>
-		<BrowserRouter>
-			<Routes router={{Route, Switch, Link}} />
-		</BrowserRouter>
+		<Router.BrowserRouter>
+			<Routes router={Router} />
+		</Router.BrowserRouter>
 	</App>
 );

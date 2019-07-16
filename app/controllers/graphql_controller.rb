@@ -1,6 +1,49 @@
 class GraphqlController < ActionController::API
   include ::ActionController::Cookies
-  # protect_from_forgery with: :null_session
+
+  before_action :authenticate_tokens_from_cookies
+
+  attr_accessor :current_user
+
+  def authenticate_tokens_from_cookies
+    if cookies[:auth_token] && cookies[:refresh_token]
+      auth_token = JsonWebToken::decode(cookies.signed[:auth_token])
+
+      if auth_token[:exp] > Time.now.to_i
+        # User auth token is valid
+        @current_user = auth_token[:uid]
+      else
+        # Auth token invalid, check the refresh token
+        type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(auth_token[:uid])
+        user = User::TokenAuth.select(:user_secret).find_by_id(obj_id)
+        refresh_token = JsonWebToken::decode(cookies.signed[:refresh_token], salt: user.user_secret)
+
+        if refresh_token && refresh_token[:exp] > Time.now.to_i
+          auth_token, refresh_token = user.issue_tokens
+
+          # Set the auth token cookie
+          cookies.signed[:auth_token] = {
+            value: auth_token,
+            httponly: true,
+            expires: Rails.application.config.auth_token_expiration.from_now
+          }
+
+          # Set the refresh token cookie
+          cookies.signed[:refresh_token] = {
+            value: refresh_token,
+            httpOnly: true,
+            expires: Rails.application.config.refresh_token_expiration.from_now
+          }
+        else
+          # Tokens invalid, delete cookies
+          cookies.delete :auth_token
+          cookies.delete :refresh_token
+        end
+
+      end
+
+    end
+  end
   
   def execute
     variables = ensure_hash(params[:variables])
@@ -8,7 +51,7 @@ class GraphqlController < ActionController::API
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: @current_user,
       cookies: cookies,
     }
     somevar = "val"

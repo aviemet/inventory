@@ -6,8 +6,7 @@ class User::TokenAuth < User::Authorization
 				uid: GraphQL::Schema::UniqueWithinType.encode(User.name, self.id),
 				iat: Time.now.to_i
 			}),
-			exp: Rails.application.config.auth_token_expiration.from_now.to_i,
-			salt: self.user_secret
+			exp: Rails.application.config.auth_token_expiration.from_now.to_i
 		)
 	end
 
@@ -18,7 +17,7 @@ class User::TokenAuth < User::Authorization
 				iat: Time.now.to_i
 			}),
 			exp: Rails.application.config.refresh_token_expiration.from_now.to_i,
-			salt: self.user_secret + refresh_secret
+			salt: self.user_secret
 		)
 	end
 
