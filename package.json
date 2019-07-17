@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "NODE_ENV=development foreman start -f Procfile.dev-server",
-    "start:native": "yarn workspace inventory-native-client start",
-    "ios": "yarn workspace inventory-native-client ios",
-    "android": "yarn workspace inventory-native-client android"
+    "start:native": "yarn workspace @repo/native start",
+    "ios": "yarn workspace @repo/native ios",
+    "android": "yarn workspace @repo/native android"
   },
   "devDependencies": {
     "@babel/core": "latest",

@@ -1,5 +1,5 @@
 {
-  "name": "inventory-native-client",
+  "name": "@repo/native",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,19 +10,29 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/react-router": "latest",
-    "@types/react-router-native": "latest",
+    "@repo/common": "1.0.0",
+    "apollo-boost": "latest",
+    "apollo-client": "latest",
+    "mobx": "latest",
+    "mobx-react": "latest",
     "react": "latest",
+    "react-apollo-hooks": "latest",
     "react-native": "latest",
+    "react-native-elements": "latest",
+    "react-native-vector-icons": "latest",
     "react-router": "latest",
+    "react-router-dom": "latest",
     "react-router-native": "latest"
   },
   "devDependencies": {
     "@babel/core": "latest",
     "@babel/runtime": "latest",
-    "@repo/common": "1.0.0",
+    "@babel/plugin-syntax-decorators": "latest",
+    "@babel/plugin-proposal-decorators": "latest",
     "@types/jest": "latest",
     "@types/react": "latest",
+    "@types/react-router": "latest",
+    "@types/react-router-native": "latest",
     "@types/react-native": "latest",
     "@types/react-test-renderer": "latest",
     "babel-jest": "latest",
@@ -37,11 +47,24 @@
   },
   "workspaces": {
     "nohoist": [
-      "react-native",
+      "**/react-native",
       "react-native/**",
-      "react",
+      "**/react",
       "react/**",
-      "@repo/common"
+      "**/apollo-boost",
+      "apollo-boost/**",
+      "**/react-apollo-hooks",
+      "react-apollo-hooks/**",
+      "**/react-native-elements",
+      "react-native-elements/**",
+      "**/react-router-dom",
+      "react-router-dom/**",
+      "**/react-router-native",
+      "react-router-native/**",
+      "**/react-native-vector-icons",
+      "react-native-vector-icons/**",
+      "**/mobx",
+      "mobx/**"
     ]
   }
 }

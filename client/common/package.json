@@ -5,21 +5,12 @@
   "main": "index.tsx",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "latest",
-    "@types/graphql": "latest",
-    "@types/jest": "latest",
-    "@types/prop-types": "latest",
-    "@types/react": "latest",
-    "@types/react-native": "latest",
-    "@types/react-router": "latest",
-    "@types/react-router-dom": "latest",
-    "@types/react-router-native": "latest",
     "apollo-boost": "latest",
     "apollo-client": "latest",
     "formik": "latest",
     "graphql": "latest",
-    "mobx": "^5.11.0",
-    "mobx-react": "^6.1.1",
+    "mobx": "latest",
+    "mobx-react": "latest",
     "moment": "latest",
     "prop-types": "latest",
     "react": "latest",
@@ -32,18 +23,22 @@
     "react-native-web": "latest",
     "react-router": "latest",
     "react-router-dom": "latest",
-    "react-router-native": "latest",
-    "ts-loader": "latest",
-    "typescript": "latest",
-    "webpack-dev-server": "latest"
+    "react-router-native": "latest"
   },
   "devDependencies": {
+    "@babel/core": "latest",
+    "@types/graphql": "latest",
+    "@types/prop-types": "latest",
+    "@types/react-router": "latest",
+    "@types/react-router-dom": "latest",
+    "@types/react-router-native": "latest",
     "@types/jest": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-native": "latest",
     "mime": "^2.4.4",
     "ts-loader": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "webpack-dev-server": "latest"
   }
 }

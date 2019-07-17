@@ -1,11 +1,9 @@
 {
-  "name": "inventory-web-client",
+  "name": "@repo/web",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@repo/common": "1.0.0",
-    "@types/react-router": "latest",
-    "@types/react-router-dom": "latest",
     "react": "latest",
     "react-art": "latest",
     "react-dom": "latest",
@@ -15,6 +13,8 @@
     "typescript": "latest"
   },
   "devDependencies": {
+    "@types/react-router": "latest",
+    "@types/react-router-dom": "latest",
     "@types/react-native": "latest"
   },
   "eslintConfig": {

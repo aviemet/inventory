@@ -29,7 +29,8 @@ module.exports = {
           return path.join(process.cwd(), `node_modules/${name}`);
         }
       }
-    )
+    ),
+    blacklistRE: /inventory\/node_modules\/react/
   },
   projectRoot: path.resolve(__dirname),
   watchFolders: [

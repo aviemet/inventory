@@ -1,5 +1,5 @@
-import ApolloClient from 'apollo-boost';
 import React from 'react';
+import ApolloClient from 'apollo-boost';
 
 import { ApolloProvider } from 'react-apollo-hooks';
 // import { HttpLink } from 'apollo-link-http';
@@ -8,7 +8,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ThemeProvider } from 'react-native-elements';
 import theme from './theme';
 
-import ApplicationRouter from './Router';
+import ApplicationRouter from './Router/Routes';
 
 const client = new ApolloClient({
   // ssrMode: true,
