@@ -5,11 +5,112 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Fonts and CSS Reset -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+
+    <!-- PrismJS: Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/themes/prism.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/plugins/normalize-whitespace/prism-normalize-whitespace.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/solid.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/fontawesome.css">
+
+    <!-- Mustard UI -->
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/">Examples</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <div class="container">
+        <div class="row row-reverse">
+
+        <div class="col col-lg-9">
+          <section class="section-tertiary">            
+            <%= yield %>
+          </section>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="sidebar sidebar-left">
+            <h3 class="sidebar-category">Components</h3>
+            <ul class="sidebar-links">
+                <li><a href="#">Alerts</a></li>
+                <li><a href="#">Breadcrumbs</a></li>
+                <li><a class="active" href="#">Cards</a></li>
+                <li><a href="#">Footer</a></li>
+                <li><a href="#">Header</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Modal</a></li>
+                <li><a href="#">Navigation</a></li>
+                <li><a href="#">Pagination</a></li>
+                <li><a href="#">Panels</a></li>
+                <li><a href="#">Progress Bars</a></li>
+                <li><a href="#">Sidebar</a></li>
+                <li><a href="#">Steppers</a></li>
+                <li><a href="#">Tabs</a></li>
+                <li><a href="#">Tags</a></li>
+                <li><a href="#">Tooltips</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col col-lg-5">
+          <div class="footer-text">
+            <p class="h3">Footer Example</p>
+            <p>This is an example of the footer component.  You don't have to use this layout, but it's a good example of what you can do with what's provided.  If you wanted to included more columns for links and remove this text block, you can.</p>
+          </div>
+        </div>
+        <div class="col col-sm-6 col-lg-3 col-lg-offset-1">
+          <h4 class="footer-links-category">Links Category 1</h4>
+          <ul class="footer-links">
+            <li><a href="#">Link #1</a></li>
+            <li><a href="#">Link #2</a></li>
+            <li><a href="#">Link #3</a></li>
+          </ul>
+        </div>
+
+        <div class="col col-sm-6 col-lg-3">
+          <h4 class="footer-links-category">Links Category 2</h4>
+          <ul class="footer-links">
+            <li><a href="#">Link #1</a></li>
+            <li><a href="#">Link #2</a></li>
+            <li><a href="#">Link #3</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="copyright align-center">Made with 🌭 by Kyle Logue. Licensed under the MIT License.</p>
+
+  </footer>
+
   </body>
 </html>

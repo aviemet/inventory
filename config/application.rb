@@ -26,5 +26,8 @@ module Inventory
     config.auth_token_expiration = 5.minutes
     config.refresh_token_expiration = 6.months
     
+    # Don't generate css or js
+    config.generators.stylesheets = false
+    config.generators.javascripts = false
   end
 end
