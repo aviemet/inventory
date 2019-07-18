@@ -209,8 +209,8 @@ ActiveRecord::Schema.define(version: 2019_06_27_055502) do
   end
 
   create_table "phones", force: :cascade do |t|
-    t.integer "number", null: false
-    t.integer "extension"
+    t.text "number", null: false
+    t.text "extension"
     t.text "notes"
     t.bigint "contact_type_id"
     t.bigint "contact_id"
