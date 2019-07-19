@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'company/index'
-  get 'network/index'
-  get 'vendors/index'
-  get 'tickets/index'
-  get 'people/index'
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
