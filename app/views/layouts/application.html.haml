@@ -1,0 +1,38 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Inventory
+    = csrf_meta_tags
+    = csp_meta_tag
+    / Fonts and CSS Reset
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700", rel: "stylesheet"}/
+    %link{href: "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css", rel: "stylesheet"}/
+    / PrismJS: Syntax Highlighting
+    %link{href: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/themes/prism.min.css", rel: "stylesheet"}/
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/prism.min.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/plugins/normalize-whitespace/prism-normalize-whitespace.js"}
+    / Font Awesome
+    %link{href: "https://use.fontawesome.com/releases/v5.0.9/css/solid.css", rel: "stylesheet"}/
+    %link{href: "https://use.fontawesome.com/releases/v5.0.9/css/fontawesome.css", rel: "stylesheet"}/
+    / Mustard UI
+    %link{href: "https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css", rel: "stylesheet"}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    #page-wrapper
+      %aside#sidebar
+        / Side Bar
+        .sidebar.sidebar-left
+          = render 'components/sidebar'
+      / Main Content
+      %main#main
+        / Navigation
+        %nav
+          = render 'components/top_bar'
+        / Content
+        %section
+          = yield
+      / Footer
+      %footer#footer
+        = render 'components/footer'

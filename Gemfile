@@ -18,6 +18,9 @@ gem 'dotenv-rails'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 
+# Use HAML for markup
+gem 'haml-rails', '~> 2.0'
+
 # Use SCSS for styles
 gem 'sass-rails'
 
