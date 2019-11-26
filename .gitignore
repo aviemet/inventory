@@ -40,3 +40,5 @@ yarn-debug.log*
 .vscode
 **/.directory
 **/.DS_Store
+
+notes.txt

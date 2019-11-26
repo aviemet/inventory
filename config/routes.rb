@@ -4,19 +4,19 @@ Rails.application.routes.draw do
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
   post "/graphql", to: "graphql#execute"
-  devise_for :users
+  # devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   ###
   # Moving from SPA to traditional rails app
   # Keep routing in case
   ###
-  # get '/', to: 'webapp#index'
-  # root to: 'webapp#index'
+  get '/', to: 'webapp#index'
+  root to: 'webapp#index'
 
   # Route all non-API requests to the React app
-  # get '*path', to: 'webapp#index', constraints: ->(request) do
-  #   !request.xhr? && request.format.html?
-  # end
+  get '*path', to: 'webapp#index', constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 
 end
