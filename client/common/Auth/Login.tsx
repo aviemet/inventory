@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router';
 
-import { UserStoreContext } from '../Stores';
+import { useUsers } from '../Stores';
 
 import { useMutation } from 'react-apollo-hooks';
 import { USER_LOGIN_MUTATION } from '../graphql/mutations';
@@ -10,14 +10,14 @@ import { TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 
 const Login: React.FC<any> = (props): any => {
-	console.log({state: props.location.state});
+	const users = useUsers();
+	console.log({ users });
+	
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 
 	const [ redirect, setRedirect ] = useState(false);
 	const [ referer, setReferer ] = useState('/');
-
-	const UserStore = useContext(UserStoreContext);
 
 	const [ userLogin, response ]: any = useMutation(USER_LOGIN_MUTATION);
 
@@ -27,8 +27,8 @@ const Login: React.FC<any> = (props): any => {
 				variables: { email, password }
 			});
 			if(auth) {
-				UserStore.user = auth.user;
-				console.log({user: UserStore.user});
+				console.log({ auth });
+				users.user = auth.user;
 				if(props.location.state) {
 					setReferer(props.location.state.from.pathname);
 				}
@@ -47,18 +47,18 @@ const Login: React.FC<any> = (props): any => {
 		<>
 			<TextInput
 				placeholder="Email"
-				onChangeText={text => setEmail(text)}
-				value={email}
+				onChangeText={ text => setEmail(text) }
+				value={ email }
 			/>
 			<TextInput
 				placeholder="Password"
-				secureTextEntry={true}
-				onChangeText={text => setPassword(text)}
-				value={password}
+				secureTextEntry={ true }
+				onChangeText={ text => setPassword(text) }
+				value={ password }
 			/>
 			<Button
 				title="Login"
-				onPress={handleLogin}
+				onPress={ handleLogin }
 				accessibilityLabel="Login User"
 			/>
 		</>
