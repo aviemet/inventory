@@ -27,7 +27,7 @@ const Login: React.FC<any> = (props): any => {
 			if(auth) {
 				user.user = auth.user;
 				if(props.location.state) {
-					setReferer(props.location.state.from.pathname);
+					setReferer(props.location.state.from.pathname || '/');
 				}
 				setRedirect(true);
 			} else {

@@ -17,6 +17,7 @@
     "react": "latest",
     "react-apollo": "latest",
     "react-apollo-hooks": "latest",
+    "react-cookie": "^4.0.1",
     "react-dom": "latest",
     "react-native": "latest",
     "react-native-elements": "latest",
@@ -40,7 +41,6 @@
     "@types/react-router-native": "latest",
     "mime": "^2.4.4",
     "ts-loader": "latest",
-    "typescript": "latest",
-    "webpack-dev-server": "latest"
+    "typescript": "latest"
   }
 }

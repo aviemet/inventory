@@ -7,7 +7,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ThemeProvider } from 'react-native-elements';
 import theme from './theme';
 import DataProvider from './Stores';
-import ApplicationRouter from './Router/Routes';
 
 const client = new ApolloClient({
   // ssrMode: true,

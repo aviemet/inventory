@@ -1,4 +1,6 @@
 import React from 'react'
+import { useCookies } from 'react-cookie';
+import { useUser } from '../Stores';
 
 import * as Auth from '../Auth';
 import { Login, Register } from '../Auth';
@@ -12,6 +14,8 @@ import { Inventory } from '../Pages';
  */
 const ApplicationRouter: React.FC<ApplicationRouterProps> = ({ router }) => {
 	const { Router, Route, Switch, Redirect } = router;
+	const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+	const user = useUser();
 
 	/**
 	 * This component is nested so the Router object passed to ApplicationRouter is in scope.
@@ -38,7 +42,10 @@ const ApplicationRouter: React.FC<ApplicationRouterProps> = ({ router }) => {
 				<Route exact path='/login' component={ Login } />
 				<Route exact path='/register' component={ Register } />
 				<Route exact path='/logout' render={() => {
-					return <h1>ok</h1>
+					removeCookie('auth_token');
+					removeCookie('refresh_token');
+					user.user = undefined;
+					return <Redirect to='/login' />
 				} } />
 				<PrivateRoute exact path='/' component={ Inventory } />
 			</Switch>
