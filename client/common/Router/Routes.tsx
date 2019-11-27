@@ -8,12 +8,11 @@ import { Route, Router, Switch, Redirect } from '../Router';
 
 interface PrivateRouteProps {
 	component: React.ComponentType,
-	path: String,
-	exact: Boolean
+	rest: any
 };
 
-const PrivateRoute: React.FC<any> = ({ component: Component, ...rest }): any => (
-	<Route {...rest} render={(props: any) => (
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...rest }): any => { console.log({ rest }); return (
+	<Route router={ Router } {...rest} render={(props: any) => (
 		Auth.isLoggedIn() ?
 			<Component {...props} />
 		:
@@ -23,21 +22,24 @@ const PrivateRoute: React.FC<any> = ({ component: Component, ...rest }): any => 
 			}} />
 		)}
 	/>
-);
+)};
 
-const ApplicationRouter: React.FC = () => {
+interface ApplicationRouterProps {
+	router: any
+}
+
+const ApplicationRouter: React.FC<ApplicationRouterProps> = ({ router }) => {
+	const Router = router;
+
 	return (
-		<Router>
-			<Switch>
-				<PrivateRoute exact path='/' component={ Inventory } />
-				<Route path='/login' component={ Login } />
-				<Route path='/register' component={ Register } />
-				<Route path='/logout' render={() => {
-
-					return <h1>ok</h1>
-				} } />
-			</Switch>
-		</Router>
+		<Switch>
+			<Route exact path='/login' component={ Login } />
+			<Route exact path='/register' component={ Register } />
+			<Route exact path='/logout' render={() => {
+				return <h1>ok</h1>
+			} } />
+			<PrivateRoute exact path='/' component={ Inventory } />
+		</Switch>
 	)
 };
 
