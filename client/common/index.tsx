@@ -19,13 +19,13 @@ const client = new ApolloClient({
 	credentials: 'include'
 });
 
-const App: React.FC = () => {
+const App: React.FC = ({ children }) => {
 
 	return(
 		<ApolloProvider client={ client }>
 			<ThemeProvider theme={ theme }>
 				<DataProvider>
-					<ApplicationRouter />
+					{ children }
 				</DataProvider>
 			</ThemeProvider>
 		</ApolloProvider>

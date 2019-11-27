@@ -1,5 +1,6 @@
 const { environment } = require('@rails/webpacker');
 const typescript =  require('./loaders/typescript');
+const less = require('./loaders/less');
 const path = require('path');
 
 environment.loaders.prepend('typescript', typescript);
@@ -16,5 +17,7 @@ environment.config.merge({
 		]
 	}
 });
+
+environment.loaders.append('less', less);
 
 module.exports = environment;

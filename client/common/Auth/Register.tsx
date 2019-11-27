@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from 'react-apollo-hooks';
 import { USER_CREATE_MUTATION } from '../graphql/mutations';
 
-import { TextInput } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Input } from 'react-native-elements';
 
 const Register: React.FC = () => {
 	const [ email, setEmail ] = useState('');
@@ -28,18 +27,18 @@ const Register: React.FC = () => {
 
 	return(
 		<>
-			<TextInput
+			<Input
 				placeholder="Email"
 				onChangeText={text => setEmail(text)}
 				value={email}
 			/>
-			<TextInput
+			<Input
 				placeholder="Password"
 				secureTextEntry={true}
 				onChangeText={text => setPassword(text)}
 				value={password}
 			/>
-			<TextInput
+			<Input
 				placeholder="Password again"
 				secureTextEntry={true}
 				onChangeText={text => setConfirmPassword(text)}

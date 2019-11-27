@@ -22,7 +22,8 @@ gem 'puma', '~> 3.12.1'
 gem 'haml-rails', '~> 2.0'
 
 # Use SCSS for styles
-gem 'sass-rails'
+gem "sass-rails"
+gem 'normalize-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 4.2.0'

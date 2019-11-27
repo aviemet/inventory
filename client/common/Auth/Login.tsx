@@ -1,17 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router';
 
-import { useUsers } from '../Stores';
+import { useUser } from '../Stores';
 
 import { useMutation } from 'react-apollo-hooks';
 import { USER_LOGIN_MUTATION } from '../graphql/mutations';
 
-import { TextInput } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Input } from 'react-native-elements';
 
 const Login: React.FC<any> = (props): any => {
-	const users = useUsers();
-	console.log({ users });
+	const user = useUser();
 	
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
@@ -27,8 +25,7 @@ const Login: React.FC<any> = (props): any => {
 				variables: { email, password }
 			});
 			if(auth) {
-				console.log({ auth });
-				users.user = auth.user;
+				user.user = auth.user;
 				if(props.location.state) {
 					setReferer(props.location.state.from.pathname);
 				}
@@ -45,12 +42,12 @@ const Login: React.FC<any> = (props): any => {
 
 	return(
 		<>
-			<TextInput
+			<Input
 				placeholder="Email"
 				onChangeText={ text => setEmail(text) }
 				value={ email }
 			/>
-			<TextInput
+			<Input
 				placeholder="Password"
 				secureTextEntry={ true }
 				onChangeText={ text => setPassword(text) }

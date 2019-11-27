@@ -1,9 +1,9 @@
 import React, { createContext, useContext } from 'react';
 import UserStore from './UserStore';
 
-const users = new UserStore();
-const UserContext: React.Context<UserStore> = React.createContext(users);
-const useUsers = () => useContext(UserContext);
+const user = new UserStore();
+const UserContext: React.Context<UserStore> = React.createContext(user);
+const useUser = () => useContext(UserContext);
 
 interface DataProviderProps {
 	children: any
@@ -11,7 +11,7 @@ interface DataProviderProps {
 
 const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
 	return (
-		<UserContext.Provider value={ users }>
+		<UserContext.Provider value={ user }>
 			{ children }
 		</UserContext.Provider>
 	)
@@ -19,6 +19,6 @@ const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
 export default DataProvider;
 
 export { 
-	UserStore, useUsers
+	UserStore, useUser
 
 };

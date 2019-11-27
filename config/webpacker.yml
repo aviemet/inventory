@@ -39,11 +39,8 @@ default: &default
     - .jsx
     - .mjs
     - .js
-    - .sass
-    - .scss
+    - .less
     - .css
-    - .module.sass
-    - .module.scss
     - .module.css
     - .png
     - .svg
