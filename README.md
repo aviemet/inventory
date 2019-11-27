@@ -42,19 +42,26 @@ React Native Elements
 https://react-native-training.github.io/react-native-elements/docs/customization.html
 https://react-native-training.github.io/react-native-elements/blog/2018/12/13/react-native-web.html
 
-
-
     "react": "^16.8.6",
     "react-art": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-native": "^0.60.3",
     "react-native-web": "^0.11.5"
 
-
-
-
 ## Notes
 
-*Token salt for authentication is app_secret + user_secret
-*Refresh token is salted with app_secret + user_secret + refresh_secret
-*Can invalidate refresh token by changing refresh_secret on user record
+* Token salt for authentication is app_secret + user_secret
+* Refresh token is salted with app_secret + user_secret + refresh_secret
+* Can invalidate refresh token by changing refresh_secret on user record
+
+
+## Structure
+
+Front end served from client folder. Mono-repo for sharing code between platforms (react-native, electron, react-web).
+
+Decouple platform code as much as possible, reuse platform independant components as much as possible. In other words, we're not quite at the point where using the same codebase for all platforms is possible. Makes more sense to build out the web application first, then reuse as much as possible when creating the native app. This will allow us to arrive at an MVP faster since we won't be running into the pitfalls of an experimental platform.
+
+/client
+    /web
+    /native
+    /common
