@@ -29,24 +29,24 @@ const Register: React.FC = () => {
 		<>
 			<Input
 				placeholder="Email"
-				onChangeText={text => setEmail(text)}
-				value={email}
+				onChangeText={ text => setEmail(text) }
+				value={ email }
 			/>
 			<Input
 				placeholder="Password"
-				secureTextEntry={true}
-				onChangeText={text => setPassword(text)}
-				value={password}
+				secureTextEntry={ true }
+				onChangeText={ text => setPassword(text) }
+				value={ password }
 			/>
 			<Input
 				placeholder="Password again"
-				secureTextEntry={true}
-				onChangeText={text => setConfirmPassword(text)}
-				value={confirmPassword}
+				secureTextEntry={ true }
+				onChangeText={ text => setConfirmPassword(text) }
+				value={ confirmPassword }
 			/>
 			<Button
 				title="Register"
-				onPress={registerUser}
+				onPress={ registerUser }
 				accessibilityLabel="Register User"
 			/>
 		</>

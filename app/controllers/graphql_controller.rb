@@ -54,7 +54,6 @@ class GraphqlController < ActionController::API
       current_user: @current_user,
       cookies: cookies,
     }
-    somevar = "val"
     result = ApplicationSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
