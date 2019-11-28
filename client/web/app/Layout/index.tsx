@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import './styles.less';
 import styled from 'styled-components';
-import { 
-	MenuRounded as MenuIcon
-} from '@material-ui/icons';
+import { 	MenuRounded as MenuIcon } from '@material-ui/icons';
 import NavMenu from './NavMenu';
 
 const WebLayout: React.FC = ({ children }) => {
@@ -55,6 +53,8 @@ const SideBar = styled.div`
 			li {
 				& span {
 					display: inline-block;
+					width: ${({ theme }) => theme.navMenu.width.open - theme.navMenu.link.leftPadding - theme.navMenu.width.closed }px;
+					padding-left: ${({ theme }) => theme.navMenu.width.closed + theme.navMenu.link.leftPadding }px;
 				}
 			}
 		}
@@ -62,7 +62,7 @@ const SideBar = styled.div`
 
 	#menuToggle {
 		text-align: right;
-		padding-right: 8px;
+		padding: 8px 8px 0 0;
 	}
 `;
 

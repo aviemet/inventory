@@ -100,12 +100,17 @@ const NavMenuContainer = styled.div`
 				top: ${({ theme }) => theme.navMenu.link.height }px;
 				left: ${({ theme }) => theme.navMenu.width.closed - theme.navMenu.link.border.left.width }px;
 				background: #333;
-				width: ${({ theme }) => theme.navMenu.link.width + theme.navMenu.link.border.left.width + theme.navMenu.link.leftPadding }px;
+				width: ${({ theme }) => theme.navMenu.width.open - theme.navMenu.width.closed - theme.navMenu.link.border.left.width + theme.navMenu.link.leftPadding }px;
 
 				& > li {
-					padding: 0 0 0 ${({ theme }) => theme.navMenu.link.leftPadding }px;
+					padding: 0;
 					line-height: ${({ theme }) => theme.navMenu.link.height - theme.navMenu.link.border.bottom.width }px;
 					border-bottom: ${({ theme }) => theme.navMenu.link.border.bottom.width }px solid ${({ theme }) => theme.navMenu.link.border.bottom.color };
+
+					a {
+						display: block;
+						padding-left: ${({ theme }) => theme.navMenu.link.leftPadding }px;
+					}
 				}
 			}
 
@@ -117,7 +122,6 @@ const NavMenuContainer = styled.div`
 
 			& span {
 				display: none;
-				width: ${({ theme }) => theme.navMenu.link.width }px;
 				height: ${({ theme }) => theme.navMenu.link.height }px;
 				position: absolute;
 				left: 0;
@@ -136,7 +140,8 @@ const NavMenuContainer = styled.div`
 				span {
 					display: block;
 					background: #222;
-					padding-left: ${({ theme }) => theme.navMenu.link.leftPadding + theme.navMenu.width.closed }px;
+					padding-left: ${({ theme }) => theme.navMenu.width.closed + theme.navMenu.link.leftPadding - theme.navMenu.link.border.left.width }px !important;
+					width: ${({ theme }) => theme.navMenu.width.open - theme.navMenu.width.closed - theme.navMenu.link.border.left.width }px;
 				}
 
 				& > ul {

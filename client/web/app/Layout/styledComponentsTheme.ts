@@ -6,8 +6,7 @@ const scTheme = {
 		},
 		link: {
 			height: 45,
-			width: 150,
-			leftPadding: 25,
+			leftPadding: 15,
 			border: {
 				left: {
 					width: 3,
