@@ -8,7 +8,7 @@ import { Inventory } from '../Pages';
 
 /**
  * Main Router for the application. Accpets an object of React Router elements.
- * The Router object must be renamed as Router, i.e. BrowserRouter as Router when destructuring from the import.
+ * The Router object must be renamed as Router, i.e. "BrowserRouter as Router"/"NativeRouter as Router" when destructuring from the import.
  * This allows the component to create routes which work on both web and native in the same code base.
  * @param router
  */

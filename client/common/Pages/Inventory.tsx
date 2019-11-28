@@ -1,10 +1,11 @@
 import React from 'react'
+import { View, Text } from 'react-native';
 
 const Inventory = () => {
 	return (
-		<div>
-			<h1>Inventory</h1>
-		</div>
+		<View>
+			<Text>Inventory</Text>
+		</View>
 	)
 }
 

@@ -7,6 +7,7 @@ import { useMutation } from 'react-apollo-hooks';
 import { USER_LOGIN_MUTATION } from '../graphql/mutations';
 
 import { Button, Input } from 'react-native-elements';
+import FormContainer from '@repo/common/Components/FormContainer';
 
 const Login: React.FC<any> = (props): any => {
 	const user = useUser();
@@ -41,7 +42,7 @@ const Login: React.FC<any> = (props): any => {
 	}
 
 	return(
-		<>
+		<FormContainer onSubmit={ handleLogin }>
 			<Input
 				placeholder="Email"
 				onChangeText={ text => setEmail(text) }
@@ -58,7 +59,7 @@ const Login: React.FC<any> = (props): any => {
 				onPress={ handleLogin }
 				accessibilityLabel="Login User"
 			/>
-		</>
+		</FormContainer>
 	);
 }
 

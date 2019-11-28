@@ -4,8 +4,6 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo-hooks';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-import { ThemeProvider } from 'react-native-elements';
-import theme from './theme';
 import DataProvider from './Stores';
 
 const client = new ApolloClient({
@@ -22,11 +20,9 @@ const App: React.FC = ({ children }) => {
 
 	return(
 		<ApolloProvider client={ client }>
-			<ThemeProvider theme={ theme }>
-				<DataProvider>
-					{ children }
-				</DataProvider>
-			</ThemeProvider>
+			<DataProvider>
+				{ children }
+			</DataProvider>
 		</ApolloProvider>
 	);
 }
