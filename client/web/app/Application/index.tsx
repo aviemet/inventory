@@ -1,30 +1,28 @@
 import React from 'react';
-import { useRouteMatch, Switch, Route } from 'react-router';
+import { Switch, Route } from 'react-router';
 import Layout from '../Layout';
 
-import Accessories from '../Application/Accessories';
-import Consumables from '../Application/Consumables';
-import Dashboard from '../Application/Dashboard';
-import Inventory from '../Application/Inventory';
-import Licenses from '../Application/Licenses';
-import People from '../Application/People';
-import Reports from '../Application/Reports';
-import Settings from '../Application/Settings';
+import { Accessories, Consumables, Dashboard, Inventory, Licenses, People, Reports, Settings } from './pages';
+import { Companies, Departments }from './Settings/pages';
 
 const Application = () => {
-	const match = useRouteMatch();
-
 	return (
 		<Layout>
 			<Switch>
 				<Route exact path={ ['/', `/inventory`] } component={ Inventory } />
-				<Route exact path={ `/accessories` } component={ Accessories } />
-				<Route exact path={ `/consumables` } component={ Consumables } />
-				<Route exact path={ `/dashboard` } component={ Dashboard } />
-				<Route exact path={ `/licenses` } component={ Licenses } />
-				<Route exact path={ `/people` } component={ People } />
-				<Route exact path={ `/reports` } component={ Reports } />
-				<Route exact path={ `/settings` } component={ Settings } />
+				<Route path={ '/accessories' } component={ Accessories } />
+				<Route path={ '/consumables' } component={ Consumables } />
+				<Route path={ '/dashboard' } component={ Dashboard } />
+				<Route path={ '/licenses' } component={ Licenses } />
+				<Route path={ '/people' } component={ People } />
+				<Route path={ '/reports' } component={ Reports } />
+				<Route path={ '/settings' } render={ ({ match }) => (
+					<>
+						<Route exact path={ match.url } component={ Settings } />
+						<Route path={ `${match.url}/companies` } component={ Companies } />
+						<Route path={ `${match.url}/departments` } component={ Departments } />
+					</>
+				 ) } />
 			</Switch>
 		</Layout>
 	);

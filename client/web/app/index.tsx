@@ -3,16 +3,20 @@ import { CookiesProvider } from 'react-cookie';
 
 import App from '@repo/common';
 import Routes from './Router/Routes';
-import { ThemeProvider } from '@material-ui/styles';
-import theme from './Layout/theme';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
+import { ThemeProvider as SCThemeProvider } from 'styled-components';
+import muiTheme from './Layout/muiTheme';
+import scTheme from './Layout/styledComponentsTheme';
 
 export default () => {
 	return (
 		<App>
 			<CookiesProvider>
-				<ThemeProvider theme={ theme }>
-					<Routes />
-				</ThemeProvider>
+				<MuiThemeProvider theme={ muiTheme }>
+					<SCThemeProvider theme={ scTheme }>
+						<Routes />
+					</SCThemeProvider>
+				</MuiThemeProvider>
 			</CookiesProvider>
 		</App>
 	);

@@ -15,10 +15,6 @@ const WebLayout: React.FC = ({ children }) => {
 
 	const onMenuNavigation = e => {
 		setIsMenuOpen(false);
-		const li = e.currentTarget;
-		// li.style.pointerEvents = 'none';
-		console.log({ li, pointerEvents: li.style.pointerEvents });
-		// setTimeout(() => li.style.pointerEvents = 'auto', 1);
 	};
 
 	return (
@@ -42,7 +38,7 @@ const WebLayoutContainer = styled.div`
 `;
 
 const SideBar = styled.div`
-	width: 50px;
+	width: ${({ theme }) => theme.navMenu.width.closed }px;
 	background: #222;
 	height: 100vh;
 	position: absolute;
@@ -53,7 +49,7 @@ const SideBar = styled.div`
 	z-index: 1000;
 
 	&.open {
-		width: 200px;
+		width: ${({ theme }) => theme.navMenu.width.open }px;
 
 		#navMenu {
 			li {

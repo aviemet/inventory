@@ -15,7 +15,7 @@ import {
 
 const NavMenu = ({ onNavigate }) => {
 
-	const NavMenuItem = ({ link, title, icon }) => {
+	const NavMenuItem = ({ link, title, icon, subNav }) => {
 		const Icon = icon;
 	
 		return (
@@ -24,6 +24,11 @@ const NavMenu = ({ onNavigate }) => {
 					<Icon color='primary' fontSize='small' />
 					<span>{ title }</span>
 				</Link>
+				{ subNav.length > 0 && <ul>
+					{ subNav.map((nav, i) => (
+						<li key={ i }><Link to={ nav.to }>{ nav.title }</Link></li>
+					)) }
+				</ul> }
 			</li>
 		);
 	};
@@ -31,60 +36,115 @@ const NavMenu = ({ onNavigate }) => {
 	return (
 		<NavMenuContainer id='navMenu'>
 			<ul>
-				<NavMenuItem link='/dashboard' title='Dashboard' icon={ DashboardIcon } />
-				<NavMenuItem link='/inventory' title='Inventory' icon={ DevicesIcon } />
-				<NavMenuItem link='/licenses' title='Licenses' icon={ SaveIcon } />
-				<NavMenuItem link='/accessories' title='Accessories' icon={ KeyboardIcon } />
-				<NavMenuItem link='/consumables' title='Consumables' icon={ DropIcon } />
-				<NavMenuItem link='/people' title='People' icon={ PeopleIcon } />
-				<NavMenuItem link='/settings' title='Settings' icon={ SettingsIcon } />
-				<NavMenuItem link='/reports' title='Reports' icon={ ChartIcon } />
+				<NavMenuItem link='/dashboard' title='Dashboard' icon={ DashboardIcon } subNav={ [
+
+				]} />
+				<NavMenuItem link='/inventory' title='Inventory' icon={ DevicesIcon } subNav={ [
+
+				]} />
+				<NavMenuItem link='/licenses' title='Licenses' icon={ SaveIcon } subNav={ [
+
+				]} />
+				<NavMenuItem link='/accessories' title='Accessories' icon={ KeyboardIcon } subNav={ [
+
+				]} />
+				<NavMenuItem link='/consumables' title='Consumables' icon={ DropIcon } subNav={ [
+
+				]} />
+				<NavMenuItem link='/people' title='People' icon={ PeopleIcon } subNav={ [
+
+				]} />
+				<NavMenuItem link='/settings' title='Settings' icon={ SettingsIcon } subNav={ [
+					{ title: 'Companies', to: '/settings/companies' },
+					{ title: 'Departments', to: '/settings/departments' }
+				]} />
+				<NavMenuItem link='/reports' title='Reports' icon={ ChartIcon } subNav={ [
+
+				]} />
 			</ul>
 		</NavMenuContainer>
 	);
 };
 
+const iconLeftPadding = 8;
+
 const NavMenuContainer = styled.div`
 	text-align: left;
+	
+	a {
+		color: #FFF;
+		text-decoration: none;
+		font-size: 1.2rem;
+		font-weight: normal;
+	}
 
 	ul {
 		list-style: none;
 		padding: 0;
 
 		li {
-			padding: 0 0 0 8px;
 			margin: 0;
+			height: ${({ theme }) => theme.navMenu.link.height }px;
+		}
+	}
+
+	& > ul {
+
+		& > li {
+			padding: 0 0 0 ${ iconLeftPadding }px;
 			position: relative;
 
+			& > ul {
+				display: none;
+				position: absolute;
+				top: ${({ theme }) => theme.navMenu.link.height }px;
+				left: ${({ theme }) => theme.navMenu.width.closed - theme.navMenu.link.border.left.width }px;
+				background: #333;
+				width: ${({ theme }) => theme.navMenu.link.width + theme.navMenu.link.border.left.width + theme.navMenu.link.leftPadding }px;
+
+				& > li {
+					padding: 0 0 0 ${({ theme }) => theme.navMenu.link.leftPadding }px;
+					line-height: ${({ theme }) => theme.navMenu.link.height - theme.navMenu.link.border.bottom.width }px;
+					border-bottom: ${({ theme }) => theme.navMenu.link.border.bottom.width }px solid ${({ theme }) => theme.navMenu.link.border.bottom.color };
+				}
+			}
+
 			& svg {
-				padding: 10px 0 3px 5px;
+				padding: 10px 0 ${ iconLeftPadding }px 5px;
+				position: relative;
+				z-index: 990;
 			}
 
 			& span {
 				display: none;
-				width: 147px;
-				height: 35px;
+				width: ${({ theme }) => theme.navMenu.link.width }px;
+				height: ${({ theme }) => theme.navMenu.link.height }px;
 				position: absolute;
-				left: 30px;
+				left: 0;
 				top: 0;
-
-				color: #FFF;
-				font-size: 1.2rem;
 				margin: 0;
-				padding: 9px 0 0 20px;
-				font-weight: normal;
-				text-decoration: none;
+				padding: 0;
+				line-height: ${({ theme }) => theme.navMenu.link.height }px;
+				z-index: 980;
 			}
 
-			&:hover:not(:focus):not(:active) {
+			&:hover {
 				display: inline-block;
-				padding-left: 5px;
-				border-left: 3px solid orange;
+				padding-left: ${({ theme }) => iconLeftPadding - theme.navMenu.link.border.left.width }px;
+				border-left: ${({ theme }) => theme.navMenu.link.border.left.width }px solid ${({ theme }) => theme.navMenu.link.border.left.color };
 
 				span {
 					display: block;
 					background: #222;
-					padding-left: 17px;
+					padding-left: ${({ theme }) => theme.navMenu.link.leftPadding + theme.navMenu.width.closed }px;
+				}
+
+				& > ul {
+					display: block;
+
+					& > li:hover {
+						background: #444;
+					}
 				}
 			}
 		}
