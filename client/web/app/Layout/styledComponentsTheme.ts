@@ -1,7 +1,7 @@
 const scTheme = {
 	navMenu: {
 		width: {
-			open: 210,
+			open: 220,
 			closed: 50
 		},
 		link: {
