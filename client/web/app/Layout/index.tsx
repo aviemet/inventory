@@ -13,13 +13,21 @@ const WebLayout: React.FC = ({ children }) => {
 		setIsMenuOpen(!isMenuOpen);
 	};
 
+	const onMenuNavigation = e => {
+		setIsMenuOpen(false);
+		const li = e.currentTarget;
+		// li.style.pointerEvents = 'none';
+		console.log({ li, pointerEvents: li.style.pointerEvents });
+		// setTimeout(() => li.style.pointerEvents = 'auto', 1);
+	};
+
 	return (
 		<WebLayoutContainer>
 			<SideBar className={ isMenuOpen ? 'open' : '' }>
 				<div id='menuToggle' onClick={ toggleMenu }>
 					<MenuIcon color='primary' fontSize='large' />
 				</div>
-				<NavMenu />
+				<NavMenu onNavigate={ onMenuNavigation } />
 			</SideBar>
 			<ContentContainer>
 				{ children }
@@ -40,7 +48,7 @@ const SideBar = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
-	transition: width 0.25s ease-in-out;
+	transition: width 0.1s ease-out;
 	cursor: pointer;
 	z-index: 1000;
 

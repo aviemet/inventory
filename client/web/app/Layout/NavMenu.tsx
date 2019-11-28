@@ -13,20 +13,21 @@ import {
 	BarChartOutlined as ChartIcon
 } from '@material-ui/icons';
 
-const NavMenuItem = ({ link, title, icon }) => {
-	const Icon = icon;
+const NavMenu = ({ onNavigate }) => {
 
-	return (
-		<li>
-			<Link to={ link }>
-				<Icon color='primary' fontSize='small' />
-				<span>{ title }</span>
-			</Link>
-		</li>
-	);
-};
+	const NavMenuItem = ({ link, title, icon }) => {
+		const Icon = icon;
+	
+		return (
+			<li onClick={ onNavigate }>
+				<Link to={ link }>
+					<Icon color='primary' fontSize='small' />
+					<span>{ title }</span>
+				</Link>
+			</li>
+		);
+	};
 
-const NavMenu = () => {
 	return (
 		<NavMenuContainer id='navMenu'>
 			<ul>
@@ -61,7 +62,7 @@ const NavMenuContainer = styled.div`
 
 			& span {
 				display: none;
-				width: 155px;
+				width: 147px;
 				height: 35px;
 				position: absolute;
 				left: 30px;
@@ -75,7 +76,7 @@ const NavMenuContainer = styled.div`
 				text-decoration: none;
 			}
 
-			&:hover {
+			&:hover:not(:focus):not(:active) {
 				display: inline-block;
 				padding-left: 5px;
 				border-left: 3px solid orange;
@@ -83,6 +84,7 @@ const NavMenuContainer = styled.div`
 				span {
 					display: block;
 					background: #222;
+					padding-left: 17px;
 				}
 			}
 		}
