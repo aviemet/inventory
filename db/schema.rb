@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_172807) do
+ActiveRecord::Schema.define(version: 2019_11_29_173214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -269,6 +269,17 @@ ActiveRecord::Schema.define(version: 2019_11_29_172807) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_companies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "role_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_users_companies_on_company_id"
+    t.index ["role_id"], name: "index_users_companies_on_role_id"
+    t.index ["user_id"], name: "index_users_companies_on_user_id"
+  end
+
   create_table "vendors", force: :cascade do |t|
     t.text "name", null: false
     t.text "url"
@@ -303,5 +314,8 @@ ActiveRecord::Schema.define(version: 2019_11_29_172807) do
   add_foreign_key "purchases", "items"
   add_foreign_key "purchases", "vendors"
   add_foreign_key "users", "people"
+  add_foreign_key "users_companies", "companies"
+  add_foreign_key "users_companies", "roles"
+  add_foreign_key "users_companies", "users"
   add_foreign_key "vendors", "contacts"
 end
