@@ -26,6 +26,8 @@ class ApplicationSchema < GraphQL::Schema
       Types::PhoneType
     when Address
       Types::AddressType
+    when Company
+      Types::CompanyType
     else
       raise("Unexpected objec: #{obj}")
     end

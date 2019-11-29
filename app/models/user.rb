@@ -2,6 +2,8 @@ class User < ApplicationRecord
   # include Tokenizable
 
   belongs_to :person, optional: true
+  has_many :user_companies
+  has_many :companies, :through => :user_companies
 
   validates :email, presence: true, uniqueness: true
   validates :email, length: { maximum: 255 }

@@ -13,16 +13,16 @@ import Application from '../Application';
  * @param rest Any other props will be sent to the Route object
  */
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...rest }) => (
-	<Route {...rest} render={(props: any) => (
-		Auth.isLoggedIn() ?
-			<Component {...props} />
-		:
-			<Redirect to={{
+	<Route {...rest} render={(props: any) => {
+		if(Auth.isLoggedIn()) {
+			return <Component {...props} />
+		} else {
+			return <Redirect to={{
 				pathname: '/login',
 				state: { from: props.location }
 			}} />
-		)}
-	/>
+		}
+	} } />
 );
 
 /**

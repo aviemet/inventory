@@ -1,6 +1,6 @@
-class CreateUsersCompanies < ActiveRecord::Migration[6.0]
+class CreateUserCompanies < ActiveRecord::Migration[6.0]
   def change
-    create_table :users_companies do |t|
+    create_table :user_companies do |t|
       t.references :user, null: false, foreign_key: true
       t.references :company, null: false, foreign_key: true
       t.references :role, null: false, foreign_key: true
