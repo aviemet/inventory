@@ -28,7 +28,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...re
 /**
  * Main Router for the application. 
  */
-const ApplicationRouter: React.FC<ApplicationRouterProps> = () => {
+const AuthRouter: React.FC<AuthRouterProps> = () => {
 	const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 	const user = useUser();
 
@@ -54,7 +54,7 @@ interface PrivateRouteProps {
 	[rest: string]: any
 };
 
-interface ApplicationRouterProps {
+interface AuthRouterProps {
 }
 
-export default ApplicationRouter;
+export default AuthRouter;

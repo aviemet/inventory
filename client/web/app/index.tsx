@@ -2,7 +2,7 @@ import React from 'react';
 import { CookiesProvider } from 'react-cookie';
 
 import App from '@repo/common';
-import Routes from './Router/Routes';
+import Routes from './Router/AuthRoutes';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
 import { ThemeProvider as SCThemeProvider } from 'styled-components';
 import muiTheme from './Layout/muiTheme';
