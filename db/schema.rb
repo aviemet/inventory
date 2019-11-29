@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_173214) do
     t.text "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_roles_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
