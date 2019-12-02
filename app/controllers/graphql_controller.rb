@@ -37,27 +37,23 @@ class GraphqlController < ActionController::API
 
         # Refresh token is valid
         if refresh_token && refresh_token[:exp] > Time.now.to_i
-          auth_token, refresh_token = user.issue_tokens
+          set_auth_cookies(user)
+          # auth_token, refresh_token = user.issue_tokens
+          
+          # # Set the auth token cookie
+          # cookies.signed[:auth_token] = {
+          #   value: auth_token,
+          #   httponly: false,
+          #   expires: Rails.application.config.auth_token_expiration.from_now
+          # }
 
-          # Set the auth token cookie
-          cookies.signed[:auth_token] = {
-            value: auth_token,
-            httponly: true,
-            expires: Rails.application.config.auth_token_expiration.from_now
-          }
+          # # Set the refresh token cookie
+          # cookies.signed[:refresh_token] = {
+          #   value: refresh_token,
+          #   httponly: false,
+          #   expires: Rails.application.config.refresh_token_expiration.from_now
+          # }
 
-          # Set the refresh token cookie
-          cookies.signed[:refresh_token] = {
-            value: refresh_token,
-            httpOnly: true,
-            expires: Rails.application.config.refresh_token_expiration.from_now
-          }
-
-          puts "Auth:"
-          puts auth_token
-          puts "Refresh:"
-          puts refresh_token
-          puts cookies.signed
           @current_user = auth_token["uid"]
         else
           # Tokens invalid, delete cookies
@@ -88,6 +84,27 @@ class GraphqlController < ActionController::API
   rescue => e
     raise e unless Rails.env.development?
     handle_error_in_development e
+  end
+
+  def set_auth_cookies(user)
+    puts "User"
+    puts user
+    
+    auth_token, refresh_token = user.issue_tokens
+          
+    # Set the auth token cookie
+    cookies.signed[:auth_token] = {
+      value: auth_token,
+      httponly: false,
+      expires: Rails.application.config.auth_token_expiration.from_now
+    }
+
+    # Set the refresh token cookie
+    cookies.signed[:refresh_token] = {
+      value: refresh_token,
+      httponly: false,
+      expires: Rails.application.config.refresh_token_expiration.from_now
+    }
   end
 
   private

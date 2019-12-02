@@ -3,7 +3,7 @@ class User::TokenAuth < User::Authorization
 	def auth_token(payload: {})
 		JsonWebToken.encode(
 			payload: payload.merge({
-				uid: GraphQL::Schema::UniqueWithinType.encode(User.name, self.id),
+				uid: encoded_uid,
 				iat: Time.now.to_i
 			}),
 			exp: Rails.application.config.auth_token_expiration.from_now.to_i
@@ -13,7 +13,7 @@ class User::TokenAuth < User::Authorization
 	def refresh_token(payload: {})
 		JsonWebToken.encode(
 			payload: payload.merge({
-				uid: GraphQL::Schema::UniqueWithinType.encode(User.name, self.id),
+				uid: encoded_uid,
 				iat: Time.now.to_i
 			}),
 			exp: Rails.application.config.refresh_token_expiration.from_now.to_i,
@@ -23,6 +23,11 @@ class User::TokenAuth < User::Authorization
 
 	def issue_tokens
 		[auth_token, refresh_token]
+	end
+
+	private
+	def encoded_uid
+		GraphQL::Schema::UniqueWithinType.encode(User.name, self.id)
 	end
 
 end

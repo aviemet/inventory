@@ -6,16 +6,9 @@ import * as Settings from '../Application/Settings/pages';
 import { useUser } from '@repo/common/Stores';
 
 import jwt from 'jsonwebtoken';
-import { getCookie } from '@repo/common/Auth';
+import { getCookie, decodeRailsCookie } from '@repo/common/Auth';
 import { useMutation, useQuery } from 'react-apollo-hooks';
 import GET_USER_QUERY from '@repo/common/graphql/queries/userQuery';
-
-const decodeRailsCookie = cookie => {
-	const encodedPayload = cookie.split('--')[0];
-	const decodedPayload = JSON.parse(window.atob(encodedPayload));
-	const originalValue = window.atob(decodedPayload._rails.message);
-	return originalValue.replace(/"/g, '');
-};
 
 const AppRoutes = () => {
 	const authToken = getCookie('auth_token');
@@ -24,33 +17,33 @@ const AppRoutes = () => {
 	const user = useUser();
 
 	let decode;
-	if(authToken) {
-		try {
-			decode = jwt.decode(authToken);
-		} catch(err) {
-			console.log({ err });
-		}
-	} else if(refreshToken) {
-		try {
+	try{
+		// Decode either the auth token or the refresh token
+		if(authToken) {
+			decode = jwt.decode(decodeRailsCookie(authToken));
+		} else if(refreshToken) {
 			decode = jwt.decode(decodeRailsCookie(refreshToken));
-		} catch(err) {
-			console.log({ err });
 		}
-	}
-	console.log({ decode });
-	if(decode) {
-		const userId = decode.uid;
-		console.log({ userId });
+	} catch(err) {
+		console.error("Token decode error: ", { err });
+	} finally {
+		console.log({ decode });
+		if(decode) {
+			const userId = decode.uid;
+	
+			// Get the user
+			const { loading, error, data } = useQuery(GET_USER_QUERY, { 
+				variables: { id: userId } 
+			});
 
-		const { loading, error, data } = useQuery(GET_USER_QUERY, { 
-			variables: { id: userId } 
-		});
+			console.log({ loading, error, data });
 
-		if(!loading && data) {
-			user.user = data.user[0];
+			// Save in Mobx data store
+			if(!loading && data) {
+				user.user = data.user[0];
+			}
+			console.log({ user: user.user });
 		}
-
-		console.log({ loading, error, data });
 	}
 
 	return (
@@ -61,6 +54,8 @@ const AppRoutes = () => {
 			<Route path={ '/dashboard' } component={ Pages.Dashboard } />
 			<Route path={ '/licenses' } component={ Pages.Licenses } />
 			<Route path={ '/people' } component={ Pages.People } />
+			<Route path={ '/vendors' } component={ Pages.Vendors } />
+			<Route path={ '/purchases' } component={ Pages.Purchases } />
 			<Route path={ '/reports' } component={ Pages.Reports } />
 			<Route path={ '/settings' } render={ ({ match }) => (
 				<>

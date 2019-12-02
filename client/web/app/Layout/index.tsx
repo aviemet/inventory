@@ -10,6 +10,8 @@ import {
 	KeyboardRounded as KeyboardIcon,
 	OpacityRounded as DropIcon,
 	PeopleRounded as PeopleIcon,
+	BusinessRounded as VendorsIcon,
+	ShoppingCart as PurchasesIcon,
 	SettingsRounded as SettingsIcon,
 	BarChartOutlined as ChartIcon,
 	TimeToLeave as LogoutIcon
@@ -19,17 +21,19 @@ import {
  * Less confusing way to represent the main navigation menu
  */
 const navigationMenuValues = [
-	{ to: '/dashboard', title: 'Dashboard', icon: DashboardIcon, subnav: [] },
-	{ to: '/inventory', title: 'Inventory', icon: DevicesIcon, subnav: [] },
-	{ to: '/licenses', title: 'Licenses', icon: SaveIcon, subnav: [] },
-	{ to: '/accessories', title: 'Accessories', icon: KeyboardIcon, subnav: [] },
-	{ to: '/consumables', title: 'Consumables', icon: DropIcon, subnav: [] },
-	{ to: '/people', title: 'People', icon: PeopleIcon, subnav: [] },
+	{ to: '/dashboard', title: 'Dashboard', icon: DashboardIcon },
+	{ to: '/inventory', title: 'Inventory', icon: DevicesIcon },
+	{ to: '/licenses', title: 'Licenses', icon: SaveIcon },
+	{ to: '/accessories', title: 'Accessories', icon: KeyboardIcon },
+	{ to: '/consumables', title: 'Consumables', icon: DropIcon },
+	{ to: '/people', title: 'People', icon: PeopleIcon },
+	{ to: '/vendors', title: 'Vendors', icon: VendorsIcon },
+	{ to: '/purchases', title: 'Purchases', icon: PurchasesIcon },
 	{ to: '/settings', title: 'Settings', icon: SettingsIcon, subnav: [
 		{ title: 'Companies', to: '/settings/companies' },
 		{ title: 'Departments', to: '/settings/departments' }
 	] },
-	{ to: '/reports', title: 'Reports', icon: ChartIcon, subnav: [] }
+	{ to: '/reports', title: 'Reports', icon: ChartIcon }
 ];
 
 const WebLayout: React.FC = ({ children }) => {
@@ -65,7 +69,7 @@ const WebLayout: React.FC = ({ children }) => {
 									</Link>
 
 									{/* Subnavigation menus */}
-									{ nav.subnav.length > 0 && <ul>
+									{ nav.subnav && <ul>
 										{ nav.subnav.map((nav, j) => (
 											<li key={ j }><Link to={ nav.to }>{ nav.title }</Link></li>
 										)) }

@@ -79,6 +79,8 @@ group :development do
   gem 'spring-watcher-listen'
 
   gem 'graphiql-rails'
+
+  gem 'solargraph'
 end
 
 group :test do
