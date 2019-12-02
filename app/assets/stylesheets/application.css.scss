@@ -14,3 +14,7 @@
  *= require_tree .
  *= require_self
  */
+
+ html, body, #app {
+	 min-height: 100vh;
+ }

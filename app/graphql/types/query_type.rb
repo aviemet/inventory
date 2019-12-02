@@ -11,10 +11,15 @@ module Types
     end
     def user(user_query_input:)
       id = user_query_input[0]&.[](:id)
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(id)
       email = user_query_input[0]&.[](:email)
 
+      puts "Unique"
+      puts type_name
+      puts obj_id
+
       if id
-        [User.find(id)]
+        [User.find(obj_id)]
       elsif email
         [User.find_by_email(email)]
       end

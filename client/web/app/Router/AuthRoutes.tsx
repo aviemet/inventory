@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 import * as Auth from '@repo/common/Auth';
 import { Login, Register } from '@repo/common/Auth';
+import AuthLayout from '../Layout/AuthLayout';
 import Application from '../Application';
 
 /**
@@ -35,14 +36,16 @@ const AuthRouter: React.FC<AuthRouterProps> = () => {
 	return (
 		<Router>
 			<Switch>
-				<Route exact path='/login' component={ Login } />
-				<Route exact path='/register' component={ Register } />
+				<Route exact path='/login' render={matchProps => <AuthLayout><Login { ...matchProps } /></AuthLayout> } />
+				<Route exact path='/register' render={() => <AuthLayout><Register /></AuthLayout> } />
+
 				<Route exact path='/logout' render={() => {
 					removeCookie('auth_token');
 					removeCookie('refresh_token');
 					user.user = undefined;
 					return <Redirect to='/login' />
 				} } />
+				
 				<PrivateRoute path='/' component={ Application } />
 			</Switch>
 		</Router>

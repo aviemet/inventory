@@ -5,6 +5,10 @@ class GraphqlController < ActionController::API
 
   attr_accessor :current_user
 
+  # Check auth and refresh tokens for validity
+  # Auth token is short lived and weakly signed with gloabl app secret. Easy check for user id. If exists, set current_user to user id
+  #
+  # Refresh token is signed with app secret and user secret. Need to get the user secret from User record to validate.
   def authenticate_tokens_from_cookies
     if auth_token_valid?(cookies[:auth_token])
       auth_token = JsonWebToken::decode(cookies.signed[:auth_token])
@@ -49,6 +53,11 @@ class GraphqlController < ActionController::API
             expires: Rails.application.config.refresh_token_expiration.from_now
           }
 
+          puts "Auth:"
+          puts auth_token
+          puts "Refresh:"
+          puts refresh_token
+          puts cookies.signed
           @current_user = auth_token["uid"]
         else
           # Tokens invalid, delete cookies

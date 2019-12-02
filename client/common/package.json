@@ -11,6 +11,7 @@
     "apollo-client": "latest",
     "formik": "latest",
     "graphql": "latest",
+    "jsonwebtoken": "^8.5.1",
     "mobx": "latest",
     "mobx-react": "latest",
     "moment": "latest",

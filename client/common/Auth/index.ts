@@ -18,4 +18,4 @@ const isLoggedIn = () => {
 	return !!getCookie("refresh_token");
 }
 
-export { isLoggedIn, Login, Register }
+export { getCookie, isLoggedIn, Login, Register }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './styles.less';
 import { Link } from 'react-router-dom';
-import './styles.less';
 import styled from 'styled-components';
 import { 
 	MenuRounded as MenuIcon,
@@ -12,7 +11,8 @@ import {
 	OpacityRounded as DropIcon,
 	PeopleRounded as PeopleIcon,
 	SettingsRounded as SettingsIcon,
-	BarChartOutlined as ChartIcon
+	BarChartOutlined as ChartIcon,
+	TimeToLeave as LogoutIcon
 } from '@material-ui/icons';
 
 /**
@@ -74,6 +74,10 @@ const WebLayout: React.FC = ({ children }) => {
 							);
 						} ) }
 					</ul>
+
+					<LogoutContainer>
+						<Link to='/logout'><LogoutIcon /></Link>
+					</LogoutContainer>
 				</div>
 			</SideBar>
 
@@ -218,6 +222,11 @@ const SideBar = styled.div`
 			}
 		}
 	} 
+`;
+
+const LogoutContainer = styled.div`
+	position: absolute;
+	bottom: 0;
 `;
 
 const ContentContainer = styled.div`

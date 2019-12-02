@@ -1,20 +1,10 @@
 import { observable, computed, action } from 'mobx';
 
 export default class UserStore {
-	@observable private _user: object;
+	@observable user: object;
 
-	@action set user(user) {
-		this._user = user;
-	}
-
-	@computed get userLoggedIn() {
-		return this._user === null;
-	}
-
-	@computed get currentUser() {
-		return {
-			id: this._user
-		};
+	@computed get loggedIn() {
+		return this.user === null;
 	}
 
 }
