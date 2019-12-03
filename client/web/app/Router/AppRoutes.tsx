@@ -13,6 +13,7 @@ import GET_USER_QUERY from '@repo/common/graphql/queries/userQuery';
 const AppRoutes = () => {
 	const authToken = getCookie('auth_token');
 	const refreshToken = getCookie('refresh_token');
+	console.log({ authToken, refreshToken });
 
 	const user = useUser();
 

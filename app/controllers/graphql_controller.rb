@@ -38,22 +38,22 @@ class GraphqlController < ActionController::API
 
         # Refresh token is valid
         if refresh_token && refresh_token[:exp] > Time.now.to_i
-          set_auth_cookies(user)
+          # set_auth_cookies(user)
           # auth_token, refresh_token = user.issue_tokens
           
           # # Set the auth token cookie
-          # cookies.signed[:auth_token] = {
-          #   value: auth_token,
-          #   httponly: false,
-          #   expires: Rails.application.config.auth_token_expiration.from_now
-          # }
+          cookies.signed[:auth_token] = {
+            value: auth_token,
+            httponly: false,
+            expires: Rails.application.config.auth_token_expiration.from_now
+          }
 
           # # Set the refresh token cookie
-          # cookies.signed[:refresh_token] = {
-          #   value: refresh_token,
-          #   httponly: false,
-          #   expires: Rails.application.config.refresh_token_expiration.from_now
-          # }
+          cookies.signed[:refresh_token] = {
+            value: refresh_token,
+            httponly: false,
+            expires: Rails.application.config.refresh_token_expiration.from_now
+          }
 
           @current_user = auth_token["uid"]
         else

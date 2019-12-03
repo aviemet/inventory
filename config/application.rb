@@ -34,6 +34,7 @@ module Inventory
 
     # Enable cookies
     config.middleware.use ActionDispatch::Cookies
+    config.middleware.use Rack::ContentLength
 
     # Auto load files on the lib folder
     config.autoload_paths << Rails.root.join('lib')
