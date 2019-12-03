@@ -5,13 +5,13 @@ module Mutations
 		type Types::TokenAuthType
 
 		def resolve(auth_input:)
-			puts "Logging in"
-			user = User::TokenAuth.find_for_authentication(email: auth_input[:email])
-			return unless user && user.authenticate(auth_input[:password])
-			# auth_token, refresh_token = user.issue_tokens
+			input = has_to_camel_case(auth_input)
+			@user = User::TokenAuth.find_for_authentication(email: input[:email])
+			return GraphQL::ExecutionError.new('Incorrect Email or Password') unless @user && @user.authenticate(input[:password])
+		
+			auth_token, refresh_token = @user.issue_tokens
 
-			puts "Context"
-			puts @context.set_auth_cookies
+			OpenStruct.new(auth_token: auth_token, refresh_token: refresh_token)
 
 			# # Set the auth token cookie
 			# @context[:cookies].signed[:auth_token] = {

@@ -10,8 +10,6 @@ module  Mutations
 			company = Company.create(name: name)
 			owner_role = Role.find_by_name(:owner)
 			user = User.find(obj_id)
-			puts "User:"
-			puts user
 			UserCompany.create(company: company, user: user, role: owner_role)
 			return company
 		end

@@ -5,10 +5,15 @@ module Mutations
 		type Types::UserType
 
 		def resolve(auth_input:)
-			User.create!(
-				email: auth_input[:email],
-				password: auth_input[:password]
-			)
+			input = hash_to_camel_case(auth_input)
+			begin
+				User.create!(
+					email: input[:email],
+					password: input[:password]
+				)
+			rescue ActiveRecord::RecordInvalid => invalid
+        GraphQL::ExecutionError.new("Invalid Attributes for #{invalid.record.class.name}: #{invalid.record.errors.full_messages.join(', ')}")
+      end
 		end
 	end
 end

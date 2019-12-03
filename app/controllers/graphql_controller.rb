@@ -6,7 +6,8 @@ class GraphqlController < ActionController::API
   attr_accessor :current_user
 
   # Check auth and refresh tokens for validity
-  # Auth token is short lived and weakly signed with gloabl app secret. Easy check for user id. If exists, set current_user to user id
+  # Auth token is short lived and weakly signed with gloabl app secret. Easy check for user id. 
+  # If exists, set current_user to user id
   #
   # Refresh token is signed with app secret and user secret. Need to get the user secret from User record to validate.
   def authenticate_tokens_from_cookies
@@ -87,9 +88,6 @@ class GraphqlController < ActionController::API
   end
 
   def set_auth_cookies(user)
-    puts "User"
-    puts user
-    
     auth_token, refresh_token = user.issue_tokens
           
     # Set the auth token cookie

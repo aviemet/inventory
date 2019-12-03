@@ -4,6 +4,7 @@ class User::TokenAuth < User::Authorization
 		JsonWebToken.encode(
 			payload: payload.merge({
 				uid: encoded_uid,
+				companies: self.user_companies.collect { |obj| { id: obj.id, role: obj.role.name } },
 				iat: Time.now.to_i
 			}),
 			exp: Rails.application.config.auth_token_expiration.from_now.to_i
