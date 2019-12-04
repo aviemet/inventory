@@ -9,10 +9,7 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  ###
-  # Moving from SPA to traditional rails app
-  # Keep routing in case
-  ###
+  get '/logout', to: 'webapp#logout_user'
   get '/', to: 'webapp#index'
   root to: 'webapp#index'
 

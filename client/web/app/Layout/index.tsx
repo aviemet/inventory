@@ -78,7 +78,7 @@ const WebLayout: React.FC = ({ children }) => {
 					</ul>
 
 					<LogoutContainer>
-						<Link to='/logout'><LogoutIcon /></Link>
+						<a href='/logout'><LogoutIcon /></a>
 					</LogoutContainer>
 				</nav>
 			</SideBar>

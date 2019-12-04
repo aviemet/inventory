@@ -5,8 +5,6 @@ class GraphqlController < ActionController::API
   attr_accessor :current_user
 
   def execute
-    puts "User"
-    puts @current_user
     variables = ensure_hash params[:variables]
     query = params[:query]
     operation_name = params[:operationName]

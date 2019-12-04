@@ -10,7 +10,7 @@ export default class UserStore {
 	@observable user: UserObject;
 
 	@computed get isLoggedIn(): boolean {
-		return this.user !== null;
+		return !!this.user;
 	}
 
 }

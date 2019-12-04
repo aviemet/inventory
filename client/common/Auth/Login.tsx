@@ -22,17 +22,20 @@ const Login: React.FC<any> = observer((props): any => {
 
 	const [ userLogin, response ]: any = useMutation(USER_LOGIN_MUTATION);
 	
+	/**
+	 * Perform user logion
+	 */
 	const handleLogin = async () => {
 		if(password && email) {
 			const auth = await userLogin({
 				variables: { email, password }
 			});
 			if(auth) {
-				user.user = auth.data.userLogin;
 				if(props.location.state) {
 					setReferer(props.location.state.from.pathname || '/');
 				}
 				setRedirect(true);
+				user.user = auth.data.userLogin;
 			} else {
 				// TODO: Display error
 			}

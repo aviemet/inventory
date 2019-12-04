@@ -10,6 +10,7 @@ import { Login, Register } from '@repo/common/Auth';
 import AuthLayout from '../Layout/AuthLayout';
 import Application from '../Application';
 import { observer } from 'mobx-react';
+import Loading from '../Components/Loading';
 
 /**
  * Main Router for the application. 
@@ -29,9 +30,10 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 	 * @param rest Any other props will be sent to the Route object
 	 */
 	const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...rest }) => (
-		// TODO: This is where the user fetch and logging in logic needs to live
 		<Route { ...rest } render={ (props: any) => {
-			console.log({ user });
+			if(loading) {
+				return <Loading />
+			}
 			if(user.isLoggedIn) {
 				return <Component { ...props } />
 			} else {
