@@ -1,13 +1,38 @@
-# require 'rails_helper'
+require 'rails_helper'
 
-# Rspec.describe UserCreateMigration, type: :request do
-# 	context '.resolve' do
-# 		it 'creates a new user' do
-# 			user = create(:user)
+module Mutations
+	module Users
+		RSpec.describe UserCreate, type: :request do
 
-# 			expect do
-# 				post '/graphql', params: { query: query(email: user.email, password: user.password) }
-# 			end.to change { User.count }.by(1)
-# 		end
-# 	end
-# end
+			describe '.resolve' do
+				it 'creates a user' do
+					user = create(:user)
+
+					expect do
+						post '/graphql', params: { query: query(email: user.email, password: user.password) }
+					end.to change { User.count }.by(1)
+				end
+
+				# it 'returns a user' do
+
+				# end
+
+			end
+			
+			def query(email:, password:)
+				<<~GQL
+					mutation {
+						userCreate(authInput: {email: "#{email}", password: "#{password}"}) {
+							id
+							email
+							person {
+								id
+							}
+						}
+					}
+				GQL
+			end
+
+		end
+	end
+end

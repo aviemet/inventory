@@ -102,13 +102,15 @@ GEM
     factory_bot_rails (5.1.1)
       factory_bot (~> 5.1.0)
       railties (>= 4.2.0)
+    faker (2.8.0)
+      i18n (>= 1.6, < 1.8)
     ffi (1.11.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     graphiql-rails (1.7.0)
       railties
       sprockets-rails
-    graphql (1.9.15)
+    graphql (1.9.16)
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
@@ -304,7 +306,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.20)
-    zeitwerk (2.2.1)
+    zeitwerk (2.2.2)
 
 PLATFORMS
   ruby
@@ -320,7 +322,8 @@ DEPENDENCIES
   devise_ldap_authenticatable (>= 0.8.6)
   dotenv-rails
   factory_bot_rails
-  graphiql-rails
+  faker
+  graphiql-rails (>= 1.7.0)
   graphql (>= 1.9.6)
   haml-rails (~> 2.0)
   jwt (>= 2.2.1)

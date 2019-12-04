@@ -19,8 +19,6 @@ export default gql`
 					lastName
 				}
 			}
-			authToken
-			refreshToken
 		}
 	}
 `;

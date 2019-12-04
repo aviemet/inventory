@@ -14,6 +14,7 @@ import Application from '../Application';
  * @param rest Any other props will be sent to the Route object
  */
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...rest }) => (
+	// TODO: This is where the user fetch and logging in logic needs to live
 	<Route {...rest} render={(props: any) => {
 		if(Auth.isLoggedIn()) {
 			return <Component {...props} />

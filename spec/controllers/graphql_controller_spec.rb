@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe PeopleController, type: :controller do
+RSpec.describe GraphqlController, type: :controller do
 
-  describe "GET #index" do
+  describe "POST #execute" do
     it "returns http success" do
-      get :index
+      post :execute
       expect(response).to have_http_status(:success)
     end
   end
