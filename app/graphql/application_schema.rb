@@ -3,12 +3,6 @@ class ApplicationSchema < GraphQL::Schema
   query Types::QueryType
 
   def self.id_from_object(obj, type, ctx)
-    puts "obj"
-    puts obj
-    puts "type"
-    puts type
-    puts "ctx"
-    puts ctx
     GraphQL::Schema::UniqueWithinType.encode(type.name, obj.id)
   end
 

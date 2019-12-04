@@ -41,7 +41,6 @@ class GraphqlController < ActionController::API
   end
 
   def handle_error_in_development(e)
-    puts "Error"
     logger.error e.message
     logger.error e.backtrace.join("\n")
 

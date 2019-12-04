@@ -1,1 +1,0 @@
-export { NativeRouter as Router, Route, Switch, Link, Redirect } from 'react-router-native';

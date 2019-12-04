@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-	query getUser($id: ID) {
-		user(userQueryInput: {id: $id}) {
+	query getLoggedInUser {
+		loggedInUser {
 			id
 			email
 			person {

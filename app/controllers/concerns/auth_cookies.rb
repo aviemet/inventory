@@ -9,19 +9,21 @@ module AuthCookies
 
   # Auth token signed with app secret
   def authenticate_tokens_from_cookies
+    puts "Checking tokens"
     @current_user = false
 
     if cookies.signed[:auth_token] && JsonWebToken::valid?(cookies.signed[:auth_token])
+      puts "We have an auth token"
       auth_token = JsonWebToken::decode(cookies.signed[:auth_token])
       @current_user = auth_token[:uid]
     elsif cookies.signed[:refresh_token]
+      puts "We have a refresh token"
       user = get_user_from_refresh_token
       if user && JsonWebToken.valid?(cookies.signed[:refresh_token], salt: user.user_secret)
         set_auth_cookies(user)
         @current_user = GraphQL::Schema::UniqueWithinType.encode(User.name, user.id)
       end
     end
-    puts "End?"
   end
 
   def get_user_from_refresh_token

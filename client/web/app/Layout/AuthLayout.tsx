@@ -1,14 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import { observer } from 'mobx-react';
+import { useUser } from '@repo/common/Stores';
+import { Redirect } from 'react-router';
 
-const AuthLayout = ({ children }) => {
+const AuthLayout = observer(({ children }) => {
+	const user = useUser();
+
+	if(user.isLoggedIn) {
+		return <Redirect to='/' />
+	}
 
 	return (
 		<Container>
 			{ children }
 		</Container>
 	);
-};
+});
 
 const Container = styled.div`
 	height: 100vh;

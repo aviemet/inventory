@@ -29,7 +29,6 @@ const Login: React.FC<any> = observer((props): any => {
 			});
 			if(auth) {
 				user.user = auth.data.userLogin;
-				console.log({ auth, user: user.user });
 				if(props.location.state) {
 					setReferer(props.location.state.from.pathname || '/');
 				}
