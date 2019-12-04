@@ -21,6 +21,7 @@ module AuthCookies
         @current_user = GraphQL::Schema::UniqueWithinType.encode(User.name, user.id)
       end
     end
+    puts "End?"
   end
 
   def get_user_from_refresh_token

@@ -21,14 +21,15 @@ const Login: React.FC<any> = observer((props): any => {
 	const [ referer, setReferer ] = useState('/');
 
 	const [ userLogin, response ]: any = useMutation(USER_LOGIN_MUTATION);
-
+	
 	const handleLogin = async () => {
 		if(password && email) {
 			const auth = await userLogin({
 				variables: { email, password }
 			});
 			if(auth) {
-				user.user = auth.data.userLogin.user;
+				user.user = auth.data.userLogin;
+				console.log({ auth, user: user.user });
 				if(props.location.state) {
 					setReferer(props.location.state.from.pathname || '/');
 				}

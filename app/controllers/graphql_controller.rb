@@ -5,8 +5,6 @@ class GraphqlController < ActionController::API
   attr_accessor :current_user
 
   def execute
-    puts "Params"
-    puts params.inspect
     variables = ensure_hash params[:variables]
     query = params[:query]
     operation_name = params[:operationName]
@@ -15,14 +13,7 @@ class GraphqlController < ActionController::API
       current_user: @current_user,
       cookies: cookies,
     }
-    puts "Query"
-    puts query.inspect
-    puts "Variables"
-    puts variables
-    puts "Operation"
-    puts operation_name
     result = ApplicationSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-    puts result.inspect
     render json: result
   rescue => e
     raise e unless Rails.env.development?

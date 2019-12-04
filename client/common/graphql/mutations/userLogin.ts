@@ -11,13 +11,12 @@ export default gql`
 				password: $password
 			}
 		){
-			user {
+			id
+			email
+			person {
 				id
-				email
-				person {
-					firstName
-					lastName
-				}
+				firstName
+				lastName
 			}
 		}
 	}
