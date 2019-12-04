@@ -17,7 +17,14 @@ const scTheme = {
 					color: '#494949'
 				}
 			}
+		},
+		transition: {
+			time: 100,
+			easing: 'ease-in-out'
 		}
+	},
+	topBar: {
+		height: 50
 	}
 };
 

@@ -16,10 +16,8 @@ import {
 	BarChartOutlined as ChartIcon,
 	TimeToLeave as LogoutIcon
 } from '@material-ui/icons';
+import UserMenu from './UserMenu';
 
-/**
- * Less confusing way to represent the main navigation menu
- */
 const navigationMenuValues = [
 	{ to: '/dashboard', title: 'Dashboard', icon: DashboardIcon },
 	{ to: '/inventory', title: 'Inventory', icon: DevicesIcon },
@@ -48,13 +46,13 @@ const WebLayout: React.FC = ({ children }) => {
 	};
 
 	return (
-		<WebLayoutContainer>
+		<WebLayoutContainer id="wrapper">
 			<SideBar className={ isMenuOpen ? 'open' : '' }>
 				<div id='menuToggle' onClick={ toggleMenu }>
 					<MenuIcon color='primary' fontSize='large' />
 				</div>
 
-				<div id='navMenu'>
+				<nav id='navMenu'>
 					<ul>
 						{/* Iterate through menu items to render links and subnav menus */}
 						{ navigationMenuValues.map((nav, i) => {
@@ -82,12 +80,18 @@ const WebLayout: React.FC = ({ children }) => {
 					<LogoutContainer>
 						<Link to='/logout'><LogoutIcon /></Link>
 					</LogoutContainer>
-				</div>
+				</nav>
 			</SideBar>
 
-			<ContentContainer>
-				{ children }
-			</ContentContainer>
+			<Content className={ isMenuOpen ? 'open' : '' }>
+				<TopBar>
+					<UserMenu />
+				</TopBar>
+
+				<ContentContainer>
+					{ children }
+				</ContentContainer>
+			</Content>
 
 		</WebLayoutContainer>
 	);
@@ -96,18 +100,18 @@ const WebLayout: React.FC = ({ children }) => {
 const iconLeftPadding = 8;
 
 const WebLayoutContainer = styled.div`
-	width: 100%;
-	height: 100%;
+	position: static;
+	overflow: hidden;
 `;
 
-const SideBar = styled.div`
+const SideBar = styled.aside`
 	width: ${({ theme }) => theme.navMenu.width.closed }px;
 	background: #222;
 	height: 100vh;
 	position: absolute;
 	top: 0;
 	left: 0;
-	transition: width 0.1s ease-out;
+	transition: width ${({ theme }) => theme.navMenu.transition.time }ms ${({ theme }) => theme.navMenu.transition.easing };
 	cursor: pointer;
 	z-index: 1000;
 
@@ -233,9 +237,34 @@ const LogoutContainer = styled.div`
 	bottom: 0;
 `;
 
-const ContentContainer = styled.div`
+const TopBar = styled.header`
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: ${({ theme }) => theme.topBar.height }px;
+	background: #CCC;
+`;
+
+const Content = styled.div`
+	position: relative;
+	margin-left: ${({ theme }) => theme.navMenu.width.closed}px;
+	transition: margin ${({ theme }) => theme.navMenu.transition.time }ms ${({ theme }) => theme.navMenu.transition.easing };
+
+	&.open {
+		margin-left: ${({ theme }) => theme.navMenu.width.open}px;
+	}
+
+	&:before {
+		content: ' ';
+		display: block;
+		width: 100%;
+		height: 1px;
+	}
+`;
+
+const ContentContainer = styled.main`
 	max-width: 1100px;
-	margin: 0 auto;
+	margin: ${({ theme }) => theme.topBar.height }px auto 0 auto;
 `;
 
 export default WebLayout;
