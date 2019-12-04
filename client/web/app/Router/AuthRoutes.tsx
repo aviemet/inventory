@@ -23,10 +23,6 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 		user.user = data.loggedInUser;
 	}
 
-	useEffect(() => {
-		console.log({ user, yeah: user.isLoggedIn });
-	}, []);
-
 	/**
 	 * Renders the login page if no user is logged in, redirects to passwed component otherwise.
 	 * @param component The component to render when user is logged in

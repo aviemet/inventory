@@ -1,5 +1,6 @@
 module Types
   class QueryType < Types::BaseObject
+    include ::ActionController::Cookies
 
     field :users, [Types::UserType], null: false
     def users
@@ -8,7 +9,12 @@ module Types
 
     field :logged_in_user, Types::UserType, null: false
     def logged_in_user
-      User.first
+      if context[:current_user]
+        type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+        User.find(obj_id)
+      else
+        return nil
+      end
     end
 
     field :user, Types::UserType, null: false do

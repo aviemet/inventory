@@ -8,7 +8,7 @@ const AuthLayout = observer(({ children }) => {
 	const user = useUser();
 
 	if(user.isLoggedIn) {
-		return <Redirect to='/' />
+		// return <Redirect to='/' />
 	}
 
 	return (
