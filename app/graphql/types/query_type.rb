@@ -32,6 +32,9 @@ module Types
       end
     end
 
+    field :companies, [Types::UserCompanyType], null: true
+    def companies(:user)
+    end
     
   end
 end
