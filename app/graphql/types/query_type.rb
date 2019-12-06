@@ -35,7 +35,7 @@ module Types
     def companies
       if context[:current_user]
         type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
-        return Company.where(:users => obj_id)
+        return User.find(obj_id).companies
       end
       return nil
     end

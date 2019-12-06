@@ -5,9 +5,13 @@ import { useQuery } from 'react-apollo-hooks';
 import { COMPANIES_QUERY } from '@repo/common/graphql/queries';
 
 const Companies = () => {
-	const { loading, error, data } = useQuery(COMPANIES_QUERY);
+	const { loading, error, data } = useQuery(COMPANIES_QUERY, {
+		fetchPolicy: 'no-cache'
+	});
 
-	console.log({ data });
+	if(!loading) {
+		console.log({ error, data });
+	}
 
 	return (
 		<>
