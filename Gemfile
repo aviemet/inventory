@@ -16,7 +16,7 @@ gem 'graphql', '>= 1.9.6'
 gem 'dotenv-rails'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.12.1'
+gem 'puma', '~> 3.12.2'
 
 # Use HAML for markup
 gem 'haml-rails', '~> 2.0'
