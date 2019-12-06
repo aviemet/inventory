@@ -19,7 +19,7 @@ import { toJS } from 'mobx';
 const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 	const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 	const user = useUser();
-
+	
 	const { loading, error, data } = useQuery(LOGGED_IN_USER_QUERY, {});
 	if(!loading && !error && data) {
 		user.setUser(data.loggedInUser);

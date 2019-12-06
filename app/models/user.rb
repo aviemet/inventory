@@ -8,7 +8,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :email, length: { maximum: 255 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :person, presence: true
 
   # Include default devise modules. Others available are:
   #  :lockable, :timeoutable, :trackable and :omniauthable

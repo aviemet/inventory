@@ -1,20 +1,9 @@
 import { observable, computed, action, extendObservable } from 'mobx';
 
-interface CompanyType {
-	company: {
-		id: string,
-		name: string
-	},
-	role: {
-		id: string,
-		name: string
-	}
-}
-
 export default class UserStore {
 	@observable id: string;
 	@observable email: string;
-	@observable person: object;
+	@observable person: PersonType;
 	@observable companies: Array<CompanyType>;
 	@observable activeCompany: string;
 
@@ -40,4 +29,27 @@ export default class UserStore {
 		return !!this.email;
 	}
 
+	@computed get shortName(): string {
+		if(this.person && this.person.firstName && this.person.lastName) {
+			return `${this.person.firstName[0]}${this.person.lastName[0]}`.toUpperCase();
+		}
+		return this.email.replace(/[^a-zA-z]/g, '')[0].toUpperCase();
+	}
+}
+
+interface CompanyType {
+	company: {
+		id: string,
+		name: string
+	},
+	role: {
+		id: string,
+		name: string
+	}
+}
+
+interface PersonType {
+	firstName: string,
+	lastName: string,
+	contact: object
 }

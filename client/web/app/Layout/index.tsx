@@ -263,8 +263,7 @@ const Content = styled.div`
 `;
 
 const ContentContainer = styled.main`
-	max-width: 1100px;
-	margin: ${({ theme }) => theme.topBar.height }px auto 0 auto;
+	margin: ${({ theme }) => theme.topBar.height + 10 }px 0 0 10px;
 `;
 
 export default WebLayout;
