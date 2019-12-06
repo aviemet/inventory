@@ -34,6 +34,16 @@ export default gql`
 					}
 				}
 			}
+			companies {
+				company{
+					id
+					name
+				}
+				role {
+					id
+					name
+				}
+			}
 		}
 	}
 `;

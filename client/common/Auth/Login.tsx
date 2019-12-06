@@ -35,7 +35,7 @@ const Login: React.FC<any> = observer((props): any => {
 					setReferer(props.location.state.from.pathname || '/');
 				}
 				setRedirect(true);
-				user.user = auth.data.userLogin;
+				user.setUser(auth.data.userLogin);
 			} else {
 				// TODO: Display error
 			}

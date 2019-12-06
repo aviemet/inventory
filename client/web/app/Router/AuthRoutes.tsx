@@ -11,6 +11,7 @@ import AuthLayout from '../Layout/AuthLayout';
 import Application from '../Application';
 import { observer } from 'mobx-react';
 import Loading from '../Components/Loading';
+import { toJS } from 'mobx';
 
 /**
  * Main Router for the application. 
@@ -21,7 +22,8 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 
 	const { loading, error, data } = useQuery(LOGGED_IN_USER_QUERY, {});
 	if(!loading && !error && data) {
-		user.user = data.loggedInUser;
+		user.setUser(data.loggedInUser);
+		console.log({ user: toJS(user) });
 	}
 
 	/**
@@ -54,7 +56,7 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 				<Route exact path='/logout' render={ () => {
 					removeCookie('auth_token');
 					removeCookie('refresh_token');
-					user.user = undefined;
+					user.unsetUser();
 					return <Redirect to='/login' />
 				} } />
 				

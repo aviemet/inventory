@@ -2,16 +2,16 @@ module Types
   class QueryType < Types::BaseObject
     include ::ActionController::Cookies
 
-    field :users, [Types::UserType], null: false
-    def users
-      User.all
-    end
+    # field :users, [Types::UserType], null: false
+    # def users
+    #   User.all
+    # end
 
     field :logged_in_user, Types::UserType, null: false
     def logged_in_user
       if context[:current_user]
         type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
-        User.find(obj_id)
+        user = User.find(obj_id)
       else
         return nil
       end
@@ -32,9 +32,9 @@ module Types
       end
     end
 
-    field :companies, [Types::UserCompanyType], null: true
-    def companies(:user)
-    end
+    # field :companies, [Types::UserCompanyType], null: true
+    # def companies(:user)
+    # end
     
   end
 end
