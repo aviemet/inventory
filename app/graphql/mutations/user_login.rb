@@ -12,25 +12,6 @@ module Mutations
 			return @user
 		end
 
-		private
-		def set_auth_cookies
-			auth_token, refresh_token = @user.issue_tokens
-	
-			# Set the auth token cookie
-			@context[:cookies].signed[:auth_token] = {
-				value: auth_token,
-				httponly: true,
-				expires: Rails.application.config.auth_token_expiration.from_now
-			}
-	
-			# Set the refresh token cookie
-			@context[:cookies].signed[:refresh_token] = {
-				value: refresh_token,
-				httponly: true,
-				expires: Rails.application.config.refresh_token_expiration.from_now
-			}
-		end
-
 	end
 end
 

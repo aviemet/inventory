@@ -7,10 +7,10 @@ import * as Settings from '../Application/Settings/pages';
 const AppRoutes = () => {
 	return (
 		<Switch>
-			<Route exact path={ ['/', `/inventory`] } component={ Pages.Inventory } />
+			<Route path={ ['/', '/dashboard'] } component={ Pages.Dashboard } />
+			<Route path={ '/inventory' } component={ Pages.Inventory } />
 			<Route path={ '/accessories' } component={ Pages.Accessories } />
 			<Route path={ '/consumables' } component={ Pages.Consumables } />
-			<Route path={ '/dashboard' } component={ Pages.Dashboard } />
 			<Route path={ '/licenses' } component={ Pages.Licenses } />
 			<Route path={ '/people' } component={ Pages.People } />
 			<Route path={ '/vendors' } component={ Pages.Vendors } />

@@ -10,6 +10,7 @@ import { Button, Input, Text } from 'react-native-elements';
 import FormContainer from '@repo/common/Components/FormContainer';
 
 import { observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 
 const Login: React.FC<any> = observer((props): any => {
 	const user = useUser();
@@ -47,25 +48,28 @@ const Login: React.FC<any> = observer((props): any => {
 	}
 
 	return(
-		<FormContainer onSubmit={ handleLogin }>
-			<Text>Please Log In</Text>
-			<Input
-				placeholder="Email"
-				onChangeText={ text => setEmail(text) }
-				value={ email }
-			/>
-			<Input
-				placeholder="Password"
-				secureTextEntry={ true }
-				onChangeText={ text => setPassword(text) }
-				value={ password }
-			/>
-			<Button
-				title="Login"
-				onPress={ handleLogin }
-				accessibilityLabel="Login User"
-			/>
-		</FormContainer>
+		<>
+			<FormContainer onSubmit={ handleLogin }>
+				<Text>Please Log In</Text>
+				<Input
+					placeholder="Email"
+					onChangeText={ text => setEmail(text) }
+					value={ email }
+				/>
+				<Input
+					placeholder="Password"
+					secureTextEntry={ true }
+					onChangeText={ text => setPassword(text) }
+					value={ password }
+				/>
+				<Button
+					title="Login"
+					onPress={ handleLogin }
+					accessibilityLabel="Login User"
+				/>
+			</FormContainer>
+			<Link to='/register'>Register</Link>
+		</>
 	);
 });
 

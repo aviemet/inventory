@@ -1,17 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import { Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, IconButton } from '@material-ui/core';
 import { useQuery } from 'react-apollo-hooks';
 import { COMPANIES_QUERY } from '@repo/common/graphql/queries';
+import red from '@material-ui/core/colors/red';
 
 const Companies = () => {
 	const { loading, error, data } = useQuery(COMPANIES_QUERY, {
 		fetchPolicy: 'no-cache'
 	});
-
-	if(!loading) {
-		console.log({ error, data });
-	}
 
 	return (
 		<>
@@ -29,6 +26,7 @@ const Companies = () => {
 							<TableCell>Accessories</TableCell>
 							<TableCell>Consumeables</TableCell>
 							<TableCell>Vendors</TableCell>
+							<TableCell>Actions</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -41,6 +39,9 @@ const Companies = () => {
 								<TableCell></TableCell>
 								<TableCell></TableCell>
 								<TableCell></TableCell>
+								<TableCell>
+									<IconButton name='trash' color={ red[0] } />
+								</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

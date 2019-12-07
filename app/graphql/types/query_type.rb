@@ -9,11 +9,18 @@ module Types
 
     field :logged_in_user, Types::UserType, null: false
     def logged_in_user
-      if context[:current_user]
-        type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+      puts "AAA"
+      puts context[:current_user]
+      return false unless context[:current_user]
+      puts "BBB"
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+      if User.exists?(obj_id)
+        puts "CCC"
         return User.find(obj_id)
       end
-      return nil
+
+      puts "DDD"
+      return false
     end
 
     field :user, Types::UserType, null: false do
@@ -35,7 +42,7 @@ module Types
     def companies
       if context[:current_user]
         type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
-        return User.find(obj_id).companies
+        return Company.joins(:users).where(users: {id: obj_id})
       end
       return nil
     end

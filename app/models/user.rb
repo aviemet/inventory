@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # include Tokenizable
 
-  belongs_to :person, optional: true
-  has_many :user_companies
+  belongs_to :person, :dependent => :destroy, optional: true
+  has_many :user_companies, :dependent => :delete_all
   has_many :companies, :through => :user_companies
 
   validates :email, presence: true, uniqueness: true

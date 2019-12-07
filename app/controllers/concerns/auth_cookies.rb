@@ -24,14 +24,14 @@ module AuthCookies
 
   def get_user_from_refresh_token
     refresh_token_decoded = JsonWebToken::decode(cookies.signed[:refresh_token])
-    return false if !refresh_token_decoded
 
-    type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(refresh_token_decoded["uid"])
-    if type_name == "User" && !obj_id.empty?
-      return User::TokenAuth.find_by_id(obj_id)
-    else
-      return false
+    if refresh_token_decoded
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(refresh_token_decoded["uid"])
+      return User::TokenAuth.find_by_id(obj_id) if type_name == "User" && !obj_id.empty? && User.exists?(obj_id)
     end
+    puts "Delete"
+    cookies.delete :refresh_token
+    return false
   end
 	
   def set_auth_cookies(user)

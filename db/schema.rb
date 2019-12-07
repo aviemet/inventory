@@ -209,8 +209,8 @@ ActiveRecord::Schema.define(version: 2019_12_06_192245) do
   end
 
   create_table "phones", force: :cascade do |t|
-    t.integer "number", null: false
-    t.integer "extension"
+    t.text "number", null: false
+    t.text "extension"
     t.text "notes"
     t.bigint "contact_type_id"
     t.bigint "contact_id"
@@ -238,6 +238,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_192245) do
 
   create_table "roles", force: :cascade do |t|
     t.text "name"
+    t.integer "level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_roles_on_name", unique: true

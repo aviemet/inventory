@@ -4,6 +4,8 @@ import { useMutation } from 'react-apollo-hooks';
 import { USER_CREATE_MUTATION } from '../graphql/mutations';
 
 import { Button, Input } from 'react-native-elements';
+import FormContainer from '@repo/common/Components/FormContainer';
+import { Redirect } from 'react-router';
 
 const Register: React.FC = () => {
 	const [ email, setEmail ] = useState('');
@@ -18,7 +20,7 @@ const Register: React.FC = () => {
 				variables: { email, password }
 			});
 			if(user) {
-				// TODO: Log in new user
+				return <Redirect to='/' />;
 			} else {
 				// TODO: Display error
 			}
@@ -26,7 +28,7 @@ const Register: React.FC = () => {
 	}
 
 	return(
-		<>
+		<FormContainer onSubmit={ registerUser }>
 			<Input
 				placeholder="Email"
 				onChangeText={ text => setEmail(text) }
@@ -49,7 +51,7 @@ const Register: React.FC = () => {
 				onPress={ registerUser }
 				accessibilityLabel="Register User"
 			/>
-		</>
+		</FormContainer>
 	);
 }
 
