@@ -12,6 +12,7 @@
     "formik": "latest",
     "graphql": "latest",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
     "mobx": "latest",
     "mobx-react": "latest",
     "moment": "latest",

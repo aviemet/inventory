@@ -14,12 +14,13 @@ import Loading from '../Components/Loading';
 import { toJS } from 'mobx';
 
 /**
- * Main Router for the application. 
+ * Top level Router for the application. 
  */
 const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 	const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 	const user = useUser();
 	
+	// On each page load, fetch user data from server using auth cookies to authenticate
 	const { loading, error, data } = useQuery(LOGGED_IN_USER_QUERY, {});
 	if(!loading && !error && data) {
 		user.setUser(data.loggedInUser);
@@ -53,13 +54,15 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 				<Route exact path='/login' render={ matchProps => <AuthLayout><Login { ...matchProps } /></AuthLayout> } />
 				<Route exact path='/register' render={ () => <AuthLayout><Register /></AuthLayout> } />
 
+				{/*
+				Logout is now handled by rails
 				<Route exact path='/logout' render={ () => {
 					removeCookie('auth_token');
 					removeCookie('refresh_token');
 					user.unsetUser();
 					return <Redirect to='/login' />
 				} } />
-				
+				*/}
 				<PrivateRoute path='/' component={ Application } />
 			</Switch>
 		</Router>
