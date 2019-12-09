@@ -29,7 +29,7 @@ class ApplicationSchema < GraphQL::Schema
     when Company
       Types::CompanyType
     else
-      raise("Unexpected objec: #{obj}")
+      raise("Unexpected object: #{obj}")
     end
   end
 end

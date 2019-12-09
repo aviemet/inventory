@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useCookies } from 'react-cookie';
 import { useUser } from '@repo/common/Stores';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
@@ -17,15 +16,16 @@ import { toJS } from 'mobx';
  * Top level Router for the application. 
  */
 const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
-	const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
 	const user = useUser();
 	
 	// On each page load, fetch user data from server using auth cookies to authenticate
 	const { loading, error, data } = useQuery(LOGGED_IN_USER_QUERY, {});
-	if(!loading && !error && data) {
-		user.setUser(data.loggedInUser);
-		console.log({ user: toJS(user) });
-	}
+	useEffect(() => {
+		if(!loading && !error && data) {
+			user.setUser(data.loggedInUser);
+			console.log({ user: toJS(user) });
+		}
+	}, [loading, error, data]);
 
 	/**
 	 * Renders the login page if no user is logged in, redirects to passwed component otherwise.

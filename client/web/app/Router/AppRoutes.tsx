@@ -7,7 +7,7 @@ import * as Settings from '../Application/Settings/pages';
 const AppRoutes = () => {
 	return (
 		<Switch>
-			<Route path={ ['/', '/dashboard'] } component={ Pages.Dashboard } />
+			<Route exact path={ ['/', '/dashboard'] } component={ Pages.Dashboard } />
 			<Route path={ '/inventory' } component={ Pages.Inventory } />
 			<Route path={ '/accessories' } component={ Pages.Accessories } />
 			<Route path={ '/consumables' } component={ Pages.Consumables } />

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { USER_COMPANY_FRAGMENT } from './userCompanyParts';
 
 export const USER_AUTH_FRAGMENT = gql`
 	fragment UserAuthDetails on User {
@@ -34,14 +35,8 @@ export const USER_AUTH_FRAGMENT = gql`
 			}
 		}
 		companies {
-			company{
-				id
-				name
-			}
-			role {
-				id
-				name
-			}
+			...UserCompanyParts
 		}
 	}
+	${USER_COMPANY_FRAGMENT}
 `;

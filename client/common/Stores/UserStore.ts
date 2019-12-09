@@ -35,6 +35,12 @@ export default class UserStore {
 		}
 		return this.email.replace(/[^a-zA-z]/g, '')[0].toUpperCase();
 	}
+
+	@action 
+	addCompany(company) {
+		console.log({ company });
+		this.companies.push(company);
+	}
 }
 
 interface CompanyType {
