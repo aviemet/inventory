@@ -29,7 +29,6 @@ module AuthCookies
       type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(refresh_token_decoded["uid"])
       return User::TokenAuth.find_by_id(obj_id) if type_name == "User" && !obj_id.empty? && User.exists?(obj_id)
     end
-    puts "Delete"
     cookies.delete :refresh_token
     return false
   end

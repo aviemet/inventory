@@ -4,6 +4,7 @@ import { Select, MenuItem, Button, Menu, Fab } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import CheckIcon from '@material-ui/icons/Check';
 
 const UserMenu = observer(() => {
 	const [ menuAnchor, setMenuAnchor ] = useState();
@@ -57,7 +58,10 @@ const UserMenu = observer(() => {
 						<MenuItem 
 							key={ company.id } 
 							onClick={ handleCompanySelect(company.id) }
-						>{ company.name }</MenuItem>
+						>
+							{ company.name }
+							{ user.getActiveCompany && user.getActiveCompany.id === company.id && <CheckIcon color='action' /> }
+						</MenuItem>
 					) ) }
 					<MenuItem><Link to='/settings/user'>User Account</Link></MenuItem>
 				</Menu>

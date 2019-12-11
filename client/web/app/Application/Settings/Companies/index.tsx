@@ -20,6 +20,8 @@ const Companies = () => {
 					<TableHead>
 						<TableRow>
 							<TableCell>Company Name</TableCell>
+							<TableCell>Locations</TableCell>
+							<TableCell>Departments</TableCell>
 							<TableCell>Users</TableCell>
 							<TableCell>Assets</TableCell>
 							<TableCell>Licenses</TableCell>
@@ -33,6 +35,8 @@ const Companies = () => {
 						{ !loading && !error && data.companies.map(company => (
 							<TableRow key={ company.id }>
 								<TableCell>{ company.name }</TableCell>
+								<TableCell></TableCell>
+								<TableCell></TableCell>
 								<TableCell></TableCell>
 								<TableCell></TableCell>
 								<TableCell></TableCell>

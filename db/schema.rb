@@ -276,7 +276,8 @@ ActiveRecord::Schema.define(version: 2019_12_06_192245) do
     t.string "refresh_secret"
     t.string "user_secret"
     t.boolean "active"
-    t.integer "active_company"
+    t.bigint "active_company_id"
+    t.index ["active_company_id"], name: "index_users_on_active_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
@@ -319,6 +320,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_192245) do
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "roles"
   add_foreign_key "user_companies", "users"
+  add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
   add_foreign_key "vendors", "contacts"
 end

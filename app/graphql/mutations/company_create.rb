@@ -15,7 +15,7 @@ module  Mutations
 				company = Company.create!(name: name)
 				userCompany = UserCompany.create!(company: company, user: user, role: owner_role)
 				if !user.active_company
-					user.update!(active_company: company.id)
+					user.update!(active_company: company)
 				end
 				return userCompany
 			end

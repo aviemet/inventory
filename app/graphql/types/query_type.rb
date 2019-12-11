@@ -37,6 +37,15 @@ module Types
       end
       return nil
     end
+
+    field :departments, [Types::DepartmentType], null: true
+    def departments
+      if context[:current_user]
+        type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+        return User.find(obj_id).active_company.departments
+      end
+      return nil
+    end
     
   end
 end

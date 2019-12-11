@@ -40,6 +40,10 @@ export default class UserStore {
 	addCompany(company) {
 		console.log({ company });
 		this.companies.push(company);
+
+		if(!this.activeCompany) {
+			this.activeCompany = company.id;
+		}
 	}
 
 	@computed get getActiveCompany(): CompanyType {

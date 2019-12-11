@@ -28,6 +28,8 @@ class ApplicationSchema < GraphQL::Schema
       Types::AddressType
     when Company
       Types::CompanyType
+    when UserCompany
+      Types::UserCompanyType
     else
       raise("Unexpected object: #{obj}")
     end
