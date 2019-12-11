@@ -23,7 +23,6 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 	useEffect(() => {
 		if(!loading && !error && data) {
 			user.setUser(data.loggedInUser);
-			console.log({ user: toJS(user) });
 		}
 	}, [loading, error, data]);
 
@@ -32,21 +31,26 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 	 * @param component The component to render when user is logged in
 	 * @param rest Any other props will be sent to the Route object
 	 */
-	const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...rest }) => (
+	const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...rest }) => { console.log({ rest }); return (
 		<Route { ...rest } render={ (props: any) => {
+			console.log({ props });
 			if(loading) {
+				console.log({ loading });
 				return <Loading />
 			}
-			if(user.isLoggedIn) {
+			
+			if(data.loggedInUser.id || user.isLoggedIn) {
+				console.log('logged in');
 				return <Component { ...props } />
 			} else {
+				console.log({ error, data });
 				return <Redirect to={ {
 					pathname: '/login',
 					state: { from: props.location }
 				} } />
 			}
 		} } />
-	);
+	)};
 
 	return (
 		<Router>
@@ -54,8 +58,8 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 				<Route exact path='/login' render={ matchProps => <AuthLayout><Login { ...matchProps } /></AuthLayout> } />
 				<Route exact path='/register' render={ () => <AuthLayout><Register /></AuthLayout> } />
 
-				{/*
-				Logout is now handled by rails
+				{/* Logout is now handled by rails
+
 				<Route exact path='/logout' render={ () => {
 					removeCookie('auth_token');
 					removeCookie('refresh_token');

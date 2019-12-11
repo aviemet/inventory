@@ -11,13 +11,10 @@ const UserMenu = observer(() => {
 
 	const user = useUser();
 
-	if(!user.isLoggedIn) return <></>
-
-	console.log({ active: user.activeCompany });
+	if(!user.isLoggedIn) return <></>;
 
 	const handleCompanySelect = companyId => e => {
 		user.activeCompany = companyId;
-		console.log({ target: e.target, ct: e.currentTarget });
 		// TODO: Persist activeCompany to DB
 	};
 

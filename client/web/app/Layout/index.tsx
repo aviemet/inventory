@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles.less';
+import './styles/styles.less';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { 

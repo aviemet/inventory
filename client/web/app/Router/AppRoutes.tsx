@@ -26,6 +26,7 @@ const AppRoutes = () => {
 					<Route exact path={ `${match.url}/companies/create` } component={ Settings.CreateCompany } />
 
 					<Route exact path={ `${match.url}/departments` } component={ Settings.Departments } />
+					<Route exact path={ `${match.url}/departments/create` } component={ Settings.CreateDepartment } />
 				</>
 				) } />
 		</Switch>
