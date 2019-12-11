@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_06_192245) do
+ActiveRecord::Schema.define(version: 2019_12_11_221018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,16 @@ ActiveRecord::Schema.define(version: 2019_12_06_192245) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ownerships", force: :cascade do |t|
+    t.bigint "company_id"
+    t.string "ownable_type"
+    t.bigint "ownable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_ownerships_on_company_id"
+    t.index ["ownable_type", "ownable_id"], name: "index_ownerships_on_ownable_type_and_ownable_id"
+  end
+
   create_table "people", force: :cascade do |t|
     t.text "first_name"
     t.text "last_name"
@@ -276,8 +286,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_192245) do
     t.string "refresh_secret"
     t.string "user_secret"
     t.boolean "active"
-    t.bigint "active_company_id"
-    t.index ["active_company_id"], name: "index_users_on_active_company_id"
+    t.integer "active_company"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
@@ -312,6 +321,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_192245) do
   add_foreign_key "items", "item_categories"
   add_foreign_key "locations", "companies"
   add_foreign_key "locations", "contacts"
+  add_foreign_key "ownerships", "companies"
   add_foreign_key "people", "departments"
   add_foreign_key "phones", "contact_types"
   add_foreign_key "phones", "contacts"
@@ -320,7 +330,6 @@ ActiveRecord::Schema.define(version: 2019_12_06_192245) do
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "roles"
   add_foreign_key "user_companies", "users"
-  add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
   add_foreign_key "vendors", "contacts"
 end
