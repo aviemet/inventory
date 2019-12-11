@@ -20,6 +20,8 @@ const AppRoutes = () => {
 				<>
 					<Route exact path={ match.url } component={ Pages.Settings } />
 
+					<Route exact path={ `${match.url}/user` } component={ Settings.User } />
+
 					<Route exact path={ `${match.url}/companies` } component={ Settings.Companies } />
 					<Route exact path={ `${match.url}/companies/create` } component={ Settings.CreateCompany } />
 

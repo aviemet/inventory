@@ -3,14 +3,21 @@ import { useUser } from '@repo/common/Stores';
 import { Select, MenuItem, Button, Menu, Fab } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const UserMenu = () => {
+const UserMenu = observer(() => {
 	const [ menuAnchor, setMenuAnchor ] = useState();
 
 	const user = useUser();
 
-	const handleCompanySelect = e => {
-		user.activeCompany = e.target.value;
+	if(!user.isLoggedIn) return <></>
+
+	console.log({ active: user.activeCompany });
+
+	const handleCompanySelect = companyId => e => {
+		user.activeCompany = companyId;
+		console.log({ target: e.target, ct: e.currentTarget });
+		// TODO: Persist activeCompany to DB
 	};
 
 	const openMenu = e => {
@@ -21,11 +28,11 @@ const UserMenu = () => {
 		setMenuAnchor(null);
 	}
 
-	if(!user.isLoggedIn) return <></>
+	const bannerTitle = user.getActiveCompany ? user.getActiveCompany.name : 'IT Asset Management';
 
 	return (
 		<MenuContainer>
-			<h1 id='logo'>IT Asset Management</h1>
+			<h1 id='logo'>{ bannerTitle }</h1>
 			<div className='right'>
 				<Fab
 					id='user-menu-button'
@@ -40,19 +47,24 @@ const UserMenu = () => {
 					keepMounted
 					open={ Boolean(menuAnchor) }
 					onClose={ closeMenu }
+					onClick={ closeMenu }
 					anchorOrigin={ { 
 						vertical: 'bottom',
 						horizontal: 'right'
 					} }
 				>
 					{ user.companies.map(({ company }) => (
-						<MenuItem key={ company.id } value={ company.id }>{ company.name }</MenuItem>
+						<MenuItem 
+							key={ company.id } 
+							onClick={ handleCompanySelect(company.id) }
+						>{ company.name }</MenuItem>
 					) ) }
+					<MenuItem><Link to='/settings/user'>User Account</Link></MenuItem>
 				</Menu>
 			</div>
 		</MenuContainer>
 	);
-};
+});
 
 const MenuContainer = styled.div`
 	display: flex;

@@ -4,7 +4,7 @@ export default class UserStore {
 	@observable id: string;
 	@observable email: string;
 	@observable person: PersonType;
-	@observable companies: Array<CompanyType>;
+	@observable companies: Array<UserCompanyType>;
 	@observable activeCompany: string;
 
 	@action
@@ -41,17 +41,27 @@ export default class UserStore {
 		console.log({ company });
 		this.companies.push(company);
 	}
+
+	@computed get getActiveCompany(): CompanyType {
+		const activeCompany = this.companies.find(company => company.company.id === this.activeCompany);
+		if(this.activeCompany) {
+			return activeCompany.company;
+		}
+		return null;
+	}
 }
 
-interface CompanyType {
-	company: {
-		id: string,
-		name: string
-	},
+interface UserCompanyType {
+	company: CompanyType,
 	role: {
 		id: string,
 		name: string
 	}
+}
+
+interface CompanyType {
+	id: string,
+	name: string
 }
 
 interface PersonType {
