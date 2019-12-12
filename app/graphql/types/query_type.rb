@@ -38,6 +38,13 @@ module Types
       return nil
     end
 
+    field :locations, [Types::LocationType], null: true
+    def locations
+      return nil unless context[:current_user]
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+      User.find(obj_id).active_company.locations      
+    end
+
     field :departments, [Types::DepartmentType], null: true
     def departments
       return nil unless context[:current_user]

@@ -29,6 +29,7 @@ const navigationMenuValues = [
 	{ to: '/purchases', title: 'Purchases', icon: PurchasesIcon },
 	{ to: '/settings', title: 'Settings', icon: SettingsIcon, subnav: [
 		{ title: 'Companies', to: '/settings/companies' },
+		{ title: 'Locations', to: '/settings/locations' },
 		{ title: 'Departments', to: '/settings/departments' }
 	] },
 	{ to: '/reports', title: 'Reports', icon: ChartIcon }

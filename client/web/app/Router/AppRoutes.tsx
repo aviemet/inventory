@@ -24,6 +24,9 @@ const AppRoutes = () => {
 
 					<Route exact path={ `${match.url}/companies` } component={ Settings.Companies } />
 					<Route exact path={ `${match.url}/companies/create` } component={ Settings.CreateCompany } />
+					
+					<Route exact path={ `${match.url}/locations` } component={ Settings.Locations } />
+					<Route exact path={ `${match.url}/locations/create` } component={ Settings.CreateLocation } />
 
 					<Route exact path={ `${match.url}/departments` } component={ Settings.Departments } />
 					<Route exact path={ `${match.url}/departments/create` } component={ Settings.CreateDepartment } />

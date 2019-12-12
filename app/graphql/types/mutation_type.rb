@@ -6,6 +6,8 @@ module Types
 
     field :company_create, mutation: Mutations::CompanyCreate
 
+    field :location_create, mutation: Mutations::LocationCreate
+
     field :department_create, mutation: Mutations::DepartmentCreate
   end
 end
