@@ -4,7 +4,7 @@ class User < ApplicationRecord
   belongs_to :person, :dependent => :destroy, optional: true
   has_many :user_companies, :dependent => :destroy
   has_many :companies, :through => :user_companies
-  belongs_to :active_company, class_name: "Company"
+  belongs_to :active_company, class_name: "Company", optional: true
 
   validates :email, presence: true, uniqueness: true
   validates :email, length: { maximum: 255 }

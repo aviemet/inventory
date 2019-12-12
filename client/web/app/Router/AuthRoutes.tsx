@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import _ from 'lodash';
+
 import { useUser } from '@repo/common/Stores';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
@@ -31,26 +33,21 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 	 * @param component The component to render when user is logged in
 	 * @param rest Any other props will be sent to the Route object
 	 */
-	const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...rest }) => { console.log({ rest }); return (
+	const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...rest }) => (
 		<Route { ...rest } render={ (props: any) => {
-			console.log({ props });
 			if(loading) {
-				console.log({ loading });
 				return <Loading />
 			}
-			
-			if(data.loggedInUser.id || user.isLoggedIn) {
-				console.log('logged in');
+			if(_.has(data, 'loggedInUser.id') || user.isLoggedIn) {
 				return <Component { ...props } />
 			} else {
-				console.log({ error, data });
 				return <Redirect to={ {
 					pathname: '/login',
 					state: { from: props.location }
 				} } />
 			}
 		} } />
-	)};
+	);
 
 	return (
 		<Router>
