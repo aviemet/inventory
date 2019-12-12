@@ -40,12 +40,45 @@ module Types
 
     field :departments, [Types::DepartmentType], null: true
     def departments
-      if context[:current_user]
-        type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
-        return User.find(obj_id).active_company.departments
-      end
-      return nil
+      return nil unless context[:current_user]
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+      User.find(obj_id).active_company.departments      
+    end
+
+    field :items, [Types::ItemType], null: true
+    def items
+      return nil unless context[:current_user]
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+      User.find(obj_id).active_company.items
     end
     
+    field :contracts, [Types::ContractType], null: true
+    def contracts
+      return nil unless context[:current_user]
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+      User.find(obj_id).active_company.contracts
+    end
+
+    field :vendors, [Types::VendorType], null: true
+    def vendors
+      return nil unless context[:current_user]
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+      User.find(obj_id).active_company.vendors
+    end
+
+    field :networks, [Types::NetworkType], null: true
+    def networks
+      return nil unless context[:current_user]
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+      User.find(obj_id).active_company.networks
+    end
+
+    field :people, [Types::PersonType], null: true
+    def people
+      return nil unless context[:current_user]
+      type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+      User.find(obj_id).active_company.people
+    end
+
   end
 end

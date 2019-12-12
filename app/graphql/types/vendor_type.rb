@@ -1,7 +1,7 @@
 module Types
   class VendorType < Types::BaseObject
-    field :name, Types::StringType, null: true
-    field :url, Types::StringType, null: true
+    field :name, String, null: true
+    field :url, String, null: true
     field :contact, Types::ContactType, null: true
   end
 end

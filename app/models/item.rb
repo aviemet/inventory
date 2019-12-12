@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   include Ownable
   
   belongs_to :purchase, optional: true
-  has_one :item_category
+  has_one :category, class_name: "ItemCategory"
   has_one :brand
   has_many :interfaces
   has_many :items_assignments
