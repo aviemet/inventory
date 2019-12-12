@@ -7,7 +7,7 @@ module  Mutations
 		def resolve(name: nil)
 			type_name, obj_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
 
-			Company.transaction do
+			Department.transaction do
 				User.find(obj_id).active_company.departments.create!(name: name)
 			end
 			

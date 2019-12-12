@@ -3,24 +3,24 @@ import _ from 'lodash';
 
 import { FormControl, TextField, Button } from '@material-ui/core';
 import { useMutation } from 'react-apollo-hooks';
-// import { DEPARTMENT_CREATE_MUTATION } from '@repo/common/graphql/mutations';
+import { DEPARTMENT_CREATE_MUTATION } from '@repo/common/graphql/mutations';
 import { Redirect } from 'react-router';
 import { useUser } from '@repo/common/Stores';
 
 const CreateDepartment = () => {
 	const [ departmentName, setDepartmentName ] = useState('');
-	// const [ departmentCreate, { data } ] = useMutation(DEPARTMENT_CREATE_MUTATION);
+	const [ departmentCreate, { data } ] = useMutation(DEPARTMENT_CREATE_MUTATION);
 
 	const user = useUser();
 
 	const submitNewDepartment = () => {
-		// DepartmentCreate({ variables: { name: departmentName } });
+		departmentCreate({ variables: { name: departmentName } });
 	};
+	console.log({ data });
 
-	// if(_.has(data, 'departmentCreate.Department.id')) {
-	// 	user.addDepartment(data.departmentCreate);
-	// 	return <Redirect to='/settings/companies' />
-	// }
+	if(_.has(data, 'departmentCreate.id')) {
+		return <Redirect to='/settings/departments' />
+	}
 
 	return (
 		<>
