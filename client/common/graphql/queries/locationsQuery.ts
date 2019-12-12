@@ -1,14 +1,11 @@
 import gql from 'graphql-tag';
+import { LOCATION_FRAGMENT } from '../fragments';
 
 export default gql`
 	query getLocations {
 		locations {
-			id
-			name
-			company {
-				id
-				name
-			}
+			...LocationParts
 		}
 	}
+	${LOCATION_FRAGMENT}
 `;

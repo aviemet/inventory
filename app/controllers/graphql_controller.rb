@@ -46,4 +46,14 @@ class GraphqlController < ActionController::API
 
     render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
   end
+
+  private
+
+  # Defeats the purpose of using auth tokens to avoid hitting the DB to authenticate the user on each request
+  def safe_fetch_user(current_user)
+    return current_user if !current_user
+
+    type_name, user_id = GraphQL::Schema::UniqueWithinType.decode(context[:current_user][:uid])
+    User.find(user_id)
+  end
 end

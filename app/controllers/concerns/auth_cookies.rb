@@ -11,6 +11,7 @@ module AuthCookies
   def authenticate_tokens_from_cookies
     @current_user = false
 
+    # Happy path, auth_token valid
     if cookies.signed[:auth_token] && JsonWebToken::valid?(cookies.signed[:auth_token])
       @current_user = JsonWebToken::decode(cookies.signed[:auth_token])
     elsif cookies.signed[:refresh_token]
