@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 import { LOCATION_FRAGMENT } from '../fragments';
 
-export default gql`
-	mutation LOCATION_CREATE_MUTATION(
+const LOCATION_CREATE_MUTATION = gql`
+	mutation locationCreate(
 		$name: String!
 		$parent: String
 	){
@@ -15,3 +15,5 @@ export default gql`
 	}
 	${LOCATION_FRAGMENT}
 `;
+
+export default LOCATION_CREATE_MUTATION;

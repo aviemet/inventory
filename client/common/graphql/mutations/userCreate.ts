@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 import { USER_AUTH_FRAGMENT } from '../fragments';
 
-export default gql`
-	mutation USER_CREATE_MUTATION(
+const USER_CREATE_MUTATION = gql`
+	mutation userCreate(
 		$email: String!
 		$password: String!
 	){
@@ -17,3 +17,5 @@ export default gql`
 	}
 	${USER_AUTH_FRAGMENT}
 `;
+
+export default USER_CREATE_MUTATION;

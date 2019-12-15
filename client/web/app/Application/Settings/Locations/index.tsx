@@ -1,16 +1,20 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
-import { Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, IconButton } from '@material-ui/core';
 import { useQuery } from 'react-apollo-hooks';
 import { LOCATIONS_QUERY } from '@repo/common/graphql/queries';
-import red from '@material-ui/core/colors/red';
+
+import { Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const Locations = () => {
 	const { loading, error, data } = useQuery(LOCATIONS_QUERY, {
 		fetchPolicy: 'no-cache'
 	});
 
-	console.log({ data });
+	const deleteLocation = id => () => {
+		console.log({ id });
+	}
 	
 	return (
 		<>
@@ -39,7 +43,9 @@ const Locations = () => {
 								<TableCell></TableCell>
 								<TableCell></TableCell>
 								<TableCell>
-									<IconButton name='trash' color={ red[0] } />
+									<IconButton onClick={ deleteLocation(location.id) }>
+										<DeleteIcon />
+									</IconButton>
 								</TableCell>
 							</TableRow>
 						))}

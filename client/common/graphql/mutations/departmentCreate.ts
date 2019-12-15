@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-export default gql`
-	mutation DEPARTMENT_CREATE_MUTATION(
+const DEPARTMENT_CREATE_MUTATION = gql`
+	mutation departmentCreate(
 		$name: String!
 	){
 		departmentCreate(
@@ -16,3 +16,5 @@ export default gql`
 		}
 	}
 `;
+
+export default DEPARTMENT_CREATE_MUTATION;

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 import { USER_COMPANY_FRAGMENT } from '../fragments';
 
-export default gql`
-	mutation COMPANY_CREATE_MUTATION(
+const COMPANY_CREATE_MUTATION = gql`
+	mutation companyCreate(
 		$name: String!
 	){
 		companyCreate(
@@ -13,3 +13,5 @@ export default gql`
 	}
 	${USER_COMPANY_FRAGMENT}
 `;
+
+export default COMPANY_CREATE_MUTATION;

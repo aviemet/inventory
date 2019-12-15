@@ -46,6 +46,11 @@ export default class UserStore {
 		}
 	}
 
+	@action
+	deleteCompany(company) {
+		
+	}
+
 	@computed get getActiveCompany(): CompanyType {
 		const activeCompany = this.companies.find(company => company.company.id === this.activeCompany);
 		if(this.activeCompany) {

@@ -4,31 +4,46 @@ import _ from 'lodash';
 import { FormControl, TextField, Button } from '@material-ui/core';
 import { useMutation } from 'react-apollo-hooks';
 import { COMPANY_CREATE_MUTATION } from '@repo/common/graphql/mutations';
+import { COMPANIES_QUERY } from '@repo/common/graphql/queries';
 import { Redirect } from 'react-router';
 import { useUser } from '@repo/common/Stores';
 
 const CreateCompany = () => {
 	const [ companyName, setCompanyName ] = useState('');
+	const [ doRedirect, setDoRedirect ] = useState(false);
 	const [ companyCreate, { data } ] = useMutation(COMPANY_CREATE_MUTATION);
 
 	const user = useUser();
 
-	const submitNewCompany = () => {
-		companyCreate({ variables: { name: companyName } });
+	const submitNewCompany = e => {
+		e.preventDefault();
+		companyCreate({ 
+			variables: { name: companyName },
+			update: (cache, { data: companyCreate }) => {
+				const { companies } = cache.readQuery({ query: COMPANIES_QUERY });
+				console.log({ cache, companyCreate, companies });
+				cache.writeQuery({
+					query: COMPANIES_QUERY,
+					data: { companies: companies.concat([companyCreate]) }
+				});
+				// user.addCompany(companyCreate);
+			},
+			refetchQueries: result => {
+				console.log({ result });
+				return ['companyCreate'];
+			}
+		}).then(() => {
+			setDoRedirect(true);
+		});
 	};
 
-	console.log({ data });
-
-	if(_.has(data, 'companyCreate.company.id')) {
-		user.addCompany(data.companyCreate);
-		return <Redirect to='/settings/companies' />
-	}
+	if(doRedirect) return <Redirect to='/settings/companies' />;
 
 	return (
 		<>
 			<h1>Create New Company</h1>
 
-			<form id='newCompanyForm'>
+			<form id='newCompanyForm' onSubmit={ submitNewCompany }>
 				<FormControl>
 					<TextField 
 						label='Company Name'

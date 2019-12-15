@@ -16,7 +16,6 @@ const CreateDepartment = () => {
 	const submitNewDepartment = () => {
 		departmentCreate({ variables: { name: departmentName } });
 	};
-	console.log({ data });
 
 	if(_.has(data, 'departmentCreate.id')) {
 		return <Redirect to='/settings/departments' />

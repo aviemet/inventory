@@ -1,10 +1,11 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
 import { useUser } from '@repo/common/Stores';
-import { Select, MenuItem, Button, Menu, Fab } from '@material-ui/core';
+import { MenuItem, Menu, Fab } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import CheckIcon from '@material-ui/icons/Check';
+import { toJS } from 'mobx';
 
 const UserMenu = observer(() => {
 	const [ menuAnchor, setMenuAnchor ] = useState();
@@ -25,6 +26,8 @@ const UserMenu = observer(() => {
 	const closeMenu = () => {
 		setMenuAnchor(null);
 	}
+
+	console.log({ user: toJS(user) });
 
 	const bannerTitle = user.getActiveCompany ? user.getActiveCompany.name : 'IT Asset Management';
 

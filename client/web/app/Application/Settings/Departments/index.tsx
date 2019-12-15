@@ -2,17 +2,20 @@ import React from 'react';
 import _ from 'lodash';
 
 import { Link } from 'react-router-dom';
-import { Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, IconButton } from '@material-ui/core';
 import { useQuery } from 'react-apollo-hooks';
 import { DEPARTMENTS_QUERY } from '@repo/common/graphql/queries';
-import red from '@material-ui/core/colors/red';
+
+import { Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, IconButton } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const Departments = () => {
 	const { loading, error, data } = useQuery(DEPARTMENTS_QUERY, {
 		fetchPolicy: 'no-cache'
 	});
-
-	console.log({ loading, error, data});
+	
+	const deleteDepartment = id => () => {
+		console.log({ id });
+	}
 	
 	return (
 		<>
@@ -42,7 +45,9 @@ const Departments = () => {
 								<TableCell></TableCell>
 								<TableCell></TableCell>
 								<TableCell>
-									<IconButton name='trash' color={ red[0] } />
+									<IconButton onClick={ deleteDepartment(department.id) }>
+										<DeleteIcon />
+									</IconButton>
 								</TableCell>
 							</TableRow>
 						))}

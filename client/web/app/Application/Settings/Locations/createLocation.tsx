@@ -23,7 +23,6 @@ const CreateLocation = () => {
 	const submitNewLocation = () => {
 		locationCreate({ variables: { name: locationName, parent: locationParent } });
 	};
-	if(createLocationResult) console.log({ createLocationResult });
 
 	if(_.has(createLocationResult, 'locationCreate.id')) {
 		return <Redirect to='/settings/locations' />
