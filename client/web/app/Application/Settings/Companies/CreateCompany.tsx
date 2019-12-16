@@ -20,13 +20,15 @@ const CreateCompany = () => {
 		companyCreate({ 
 			variables: { name: companyName },
 			update: (cache, { data: { companyCreate } }) => {
-				const { companies } = cache.readQuery({ query: COMPANIES_QUERY });
+				const { companies } = cache.readQuery({ 
+					query: COMPANIES_QUERY 
+				});
 				cache.writeQuery({
 					query: COMPANIES_QUERY,
 					data: { companies: companies.concat([companyCreate]) }
 				});
 			},
-			refetchQueries: ['companyCreate', 'loggedInUser']
+			refetchQueries: ['getCompanies']
 		}).then(({ data: { companyCreate } }) => {
 			user.addCompany({ ...companyCreate });
 			setDoRedirect(true);

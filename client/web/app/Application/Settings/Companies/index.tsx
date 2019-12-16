@@ -24,10 +24,9 @@ const Companies: React.FC = () => {
 	const deleteCompany = id => () => {
 		companyDelete({ 
 			variables: { id },
-			update: (store, { data: { companyDelete } }) => {
-				user.deleteCompany(companyDelete);
-			},
-			refetchQueries: [{ query: COMPANIES_QUERY }]
+			refetchQueries: ['getCompanies']
+		}).then(({ data: { companyDelete } }) => {
+			user.deleteCompany(companyDelete);
 		});
 	}
 

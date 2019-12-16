@@ -42,6 +42,7 @@ const Locations = () => {
 								<TableCell></TableCell>
 								<TableCell></TableCell>
 								<TableCell></TableCell>
+								<TableCell></TableCell>
 								<TableCell>
 									<IconButton onClick={ deleteLocation(location.id) }>
 										<DeleteIcon />
