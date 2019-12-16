@@ -1,4 +1,4 @@
-import { observable, computed, action, extendObservable } from 'mobx';
+import { observable, computed, action, extendObservable, toJS } from 'mobx';
 
 export default class UserStore {
 	@observable id: string;
@@ -38,9 +38,7 @@ export default class UserStore {
 
 	@action 
 	addCompany(company) {
-		console.log({ company });
 		this.companies.push(company);
-
 		if(!this.activeCompany) {
 			this.activeCompany = company.id;
 		}
@@ -48,12 +46,20 @@ export default class UserStore {
 
 	@action
 	deleteCompany(company) {
-		
+		let index = -1;
+		for(let i = 0; i < this.companies.length && index < 0; i++) {
+			if(this.companies[i].company.id === company.id) {
+				index = i;
+			}
+		}
+		if(index >= 0) {
+			this.companies.splice(index, 1);
+		}
 	}
 
 	@computed get getActiveCompany(): CompanyType {
 		const activeCompany = this.companies.find(company => company.company.id === this.activeCompany);
-		if(this.activeCompany) {
+		if(activeCompany) {
 			return activeCompany.company;
 		}
 		return null;

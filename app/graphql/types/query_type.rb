@@ -1,7 +1,10 @@
 module Types
   class QueryType < Types::BaseObject
-    include ::ActionController::Cookies
+    # include ::ActionController::Cookies
 
+    ##############################
+    #       LOGGED IN USER       #
+    ##############################
     field :logged_in_user, Types::UserType, null: false
     def logged_in_user
       if context[:current_user]
@@ -10,10 +13,12 @@ module Types
           return User.find(obj_id)
         end
       end
-
       return nil
     end
 
+    ##############################
+    #         SINGLE USER        #
+    ##############################
     field :user, Types::UserType, null: false do
       argument :user_query_input, [Types::UserQueryInput], required: true
     end
@@ -29,6 +34,9 @@ module Types
       end
     end
 
+    ##############################
+    #          COMPANIES         #
+    ##############################
     field :companies, [Types::CompanyType], null: true
     def companies
       if context[:current_user]
@@ -38,6 +46,9 @@ module Types
       return nil
     end
 
+    ##############################
+    #          LOCATIONS         #
+    ##############################
     field :locations, [Types::LocationType], null: true
     def locations
       return nil unless context[:current_user]
@@ -45,6 +56,9 @@ module Types
       User.find(obj_id).active_company.locations      
     end
 
+    ##############################
+    #         DEPARTMENTS        #
+    ##############################
     field :departments, [Types::DepartmentType], null: true
     def departments
       return nil unless context[:current_user]
@@ -52,6 +66,9 @@ module Types
       User.find(obj_id).active_company.departments      
     end
 
+    ##############################
+    #            ITEMS           #
+    ##############################
     field :items, [Types::ItemType], null: true
     def items
       return nil unless context[:current_user]
@@ -59,6 +76,9 @@ module Types
       User.find(obj_id).active_company.items
     end
     
+    ##############################
+    #          CONTRACTS         #
+    ##############################
     field :contracts, [Types::ContractType], null: true
     def contracts
       return nil unless context[:current_user]
@@ -66,6 +86,9 @@ module Types
       User.find(obj_id).active_company.contracts
     end
 
+    ##############################
+    #           VENDORS          #
+    ##############################
     field :vendors, [Types::VendorType], null: true
     def vendors
       return nil unless context[:current_user]
@@ -73,6 +96,9 @@ module Types
       User.find(obj_id).active_company.vendors
     end
 
+    ##############################
+    #          NETWORKS          #
+    ##############################
     field :networks, [Types::NetworkType], null: true
     def networks
       return nil unless context[:current_user]
@@ -80,6 +106,9 @@ module Types
       User.find(obj_id).active_company.networks
     end
 
+    ##############################
+    #           PEOPLE           #
+    ##############################
     field :people, [Types::PersonType], null: true
     def people
       return nil unless context[:current_user]

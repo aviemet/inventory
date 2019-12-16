@@ -18,17 +18,14 @@ const Companies: React.FC = () => {
 	const user = useUser();
 	
 	const { loading, error, data: companiesQueryResult } = useQuery(COMPANIES_QUERY);
-	if(companiesQueryResult) console.log({ companiesQueryResult });
 
 	const [ companyDelete, { data: companyDeleteResult } ] = useMutation(COMPANY_DELETE_MUTATION);
-	if(companyDeleteResult) console.log({ companyDeleteResult });
 	
 	const deleteCompany = id => () => {
 		companyDelete({ 
 			variables: { id },
-			update: (store, { data }) => {
-				user.deleteCompany(data);
-				console.log({ store, data });
+			update: (store, { data: { companyDelete } }) => {
+				user.deleteCompany(companyDelete);
 			},
 			refetchQueries: [{ query: COMPANIES_QUERY }]
 		});

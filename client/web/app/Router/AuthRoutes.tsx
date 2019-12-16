@@ -38,7 +38,7 @@ const AuthRouter: React.FC<AuthRouterProps> = observer(() => {
 			if(loading) {
 				return <Loading />
 			}
-			if(_.has(data, 'loggedInUser.id') || user.isLoggedIn) {
+			if(user.isLoggedIn || _.has(data, 'loggedInUser.id')) {
 				return <Component { ...props } />
 			} else {
 				return <Redirect to={ {

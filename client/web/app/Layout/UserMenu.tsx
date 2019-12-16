@@ -15,7 +15,7 @@ const UserMenu = observer(() => {
 	if(!user.isLoggedIn) return <></>;
 
 	const handleCompanySelect = companyId => e => {
-		user.activeCompany = companyId;
+		if(user.activeCompany !== companyId) user.activeCompany = companyId;
 		// TODO: Persist activeCompany to DB
 	};
 

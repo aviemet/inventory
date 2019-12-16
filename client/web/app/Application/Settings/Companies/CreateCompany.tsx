@@ -19,20 +19,16 @@ const CreateCompany = () => {
 		e.preventDefault();
 		companyCreate({ 
 			variables: { name: companyName },
-			update: (cache, { data: companyCreate }) => {
+			update: (cache, { data: { companyCreate } }) => {
 				const { companies } = cache.readQuery({ query: COMPANIES_QUERY });
-				console.log({ cache, companyCreate, companies });
 				cache.writeQuery({
 					query: COMPANIES_QUERY,
 					data: { companies: companies.concat([companyCreate]) }
 				});
-				// user.addCompany(companyCreate);
 			},
-			refetchQueries: result => {
-				console.log({ result });
-				return ['companyCreate'];
-			}
-		}).then(() => {
+			refetchQueries: ['companyCreate', 'loggedInUser']
+		}).then(({ data: { companyCreate } }) => {
+			user.addCompany({ ...companyCreate });
 			setDoRedirect(true);
 		});
 	};
