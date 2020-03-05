@@ -299,10 +299,8 @@ ActiveRecord::Schema.define(version: 2019_12_12_170217) do
   create_table "vendors", force: :cascade do |t|
     t.text "name", null: false
     t.text "url"
-    t.bigint "contact_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["contact_id"], name: "index_vendors_on_contact_id"
   end
 
   add_foreign_key "addresses", "contact_types"
@@ -336,5 +334,4 @@ ActiveRecord::Schema.define(version: 2019_12_12_170217) do
   add_foreign_key "user_companies", "users"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
-  add_foreign_key "vendors", "contacts"
 end
