@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @ownership.company_id %>
+</p>
+
+<p>
+  <strong>Ownable:</strong>
+  <%= @ownership.ownable_id %>
+</p>
+
+<%= link_to 'Edit', edit_ownership_path(@ownership) %> |
+<%= link_to 'Back', ownerships_path %>

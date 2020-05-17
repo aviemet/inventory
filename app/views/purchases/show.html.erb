@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Asset:</strong>
+  <%= @purchase.asset_id %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @purchase.price %>
+</p>
+
+<p>
+  <strong>Shipping:</strong>
+  <%= @purchase.shipping %>
+</p>
+
+<p>
+  <strong>Tax:</strong>
+  <%= @purchase.tax %>
+</p>
+
+<p>
+  <strong>Qty:</strong>
+  <%= @purchase.qty %>
+</p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @purchase.vendor_id %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @purchase.notes %>
+</p>
+
+<p>
+  <strong>Purchased at:</strong>
+  <%= @purchase.purchased_at %>
+</p>
+
+<p>
+  <strong>Received at:</strong>
+  <%= @purchase.received_at %>
+</p>
+
+<%= link_to 'Edit', edit_purchase_path(@purchase) %> |
+<%= link_to 'Back', purchases_path %>

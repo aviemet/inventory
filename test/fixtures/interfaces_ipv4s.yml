@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  network_interface: one
+  ipv4_address: one
+  active: false
+
+two:
+  network_interface: two
+  ipv4_address: two
+  active: false

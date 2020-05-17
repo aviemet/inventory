@@ -1,0 +1,2 @@
+module Ipv6AddressesHelper
+end

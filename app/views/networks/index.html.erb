@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Networks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Ipv4</th>
+      <th>V4 mask</th>
+      <th>V4 gateway</th>
+      <th>V4 dhcp start</th>
+      <th>V4 dhcp end</th>
+      <th>Vland</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @networks.each do |network| %>
+      <tr>
+        <td><%= network.name %></td>
+        <td><%= network.ipv4 %></td>
+        <td><%= network.v4_mask %></td>
+        <td><%= network.v4_gateway %></td>
+        <td><%= network.v4_dhcp_start %></td>
+        <td><%= network.v4_dhcp_end %></td>
+        <td><%= network.vland_id %></td>
+        <td><%= link_to 'Show', network %></td>
+        <td><%= link_to 'Edit', edit_network_path(network) %></td>
+        <td><%= link_to 'Destroy', network, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Network', new_network_path %>

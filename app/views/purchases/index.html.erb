@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Purchases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Asset</th>
+      <th>Price</th>
+      <th>Shipping</th>
+      <th>Tax</th>
+      <th>Qty</th>
+      <th>Vendor</th>
+      <th>Notes</th>
+      <th>Purchased at</th>
+      <th>Received at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @purchases.each do |purchase| %>
+      <tr>
+        <td><%= purchase.asset_id %></td>
+        <td><%= purchase.price %></td>
+        <td><%= purchase.shipping %></td>
+        <td><%= purchase.tax %></td>
+        <td><%= purchase.qty %></td>
+        <td><%= purchase.vendor_id %></td>
+        <td><%= purchase.notes %></td>
+        <td><%= purchase.purchased_at %></td>
+        <td><%= purchase.received_at %></td>
+        <td><%= link_to 'Show', purchase %></td>
+        <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
+        <td><%= link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Purchase', new_purchase_path %>

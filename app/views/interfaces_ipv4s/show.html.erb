@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Network interface:</strong>
+  <%= @interfaces_ipv4.network_interface_id %>
+</p>
+
+<p>
+  <strong>Ipv4 address:</strong>
+  <%= @interfaces_ipv4.ipv4_address_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @interfaces_ipv4.active %>
+</p>
+
+<%= link_to 'Edit', edit_interfaces_ipv4_path(@interfaces_ipv4) %> |
+<%= link_to 'Back', interfaces_ipv4s_path %>

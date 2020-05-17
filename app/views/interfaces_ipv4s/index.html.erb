@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Interfaces Ipv4s</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Network interface</th>
+      <th>Ipv4 address</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interfaces_ipv4s.each do |interfaces_ipv4| %>
+      <tr>
+        <td><%= interfaces_ipv4.network_interface_id %></td>
+        <td><%= interfaces_ipv4.ipv4_address_id %></td>
+        <td><%= interfaces_ipv4.active %></td>
+        <td><%= link_to 'Show', interfaces_ipv4 %></td>
+        <td><%= link_to 'Edit', edit_interfaces_ipv4_path(interfaces_ipv4) %></td>
+        <td><%= link_to 'Destroy', interfaces_ipv4, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Interfaces Ipv4', new_interfaces_ipv4_path %>

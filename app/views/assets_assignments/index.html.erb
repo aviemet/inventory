@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Assets Assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Asset</th>
+      <th>Person</th>
+      <th>Department</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assets_assignments.each do |assets_assignment| %>
+      <tr>
+        <td><%= assets_assignment.asset_id %></td>
+        <td><%= assets_assignment.person_id %></td>
+        <td><%= assets_assignment.department_id %></td>
+        <td><%= assets_assignment.active %></td>
+        <td><%= link_to 'Show', assets_assignment %></td>
+        <td><%= link_to 'Edit', edit_assets_assignment_path(assets_assignment) %></td>
+        <td><%= link_to 'Destroy', assets_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Assets Assignment', new_assets_assignment_path %>

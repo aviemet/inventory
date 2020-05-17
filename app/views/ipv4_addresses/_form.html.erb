@@ -1,0 +1,22 @@
+<%= form_with(model: ipv4_address, local: true) do |form| %>
+  <% if ipv4_address.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ipv4_address.errors.count, "error") %> prohibited this ipv4_address from being saved:</h2>
+
+      <ul>
+        <% ipv4_address.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_area :address %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

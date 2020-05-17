@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mac:</strong>
+  <%= @network_interface.mac %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @network_interface.item_id %>
+</p>
+
+<%= link_to 'Edit', edit_network_interface_path(@network_interface) %> |
+<%= link_to 'Back', network_interfaces_path %>

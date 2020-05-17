@@ -1,0 +1,37 @@
+<%= form_with(model: assets_assignment, local: true) do |form| %>
+  <% if assets_assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(assets_assignment.errors.count, "error") %> prohibited this assets_assignment from being saved:</h2>
+
+      <ul>
+        <% assets_assignment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :asset_id %>
+    <%= form.text_field :asset_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :person_id %>
+    <%= form.text_field :person_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :department_id %>
+    <%= form.text_field :department_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

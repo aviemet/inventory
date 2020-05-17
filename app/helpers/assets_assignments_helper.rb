@@ -1,0 +1,2 @@
+module AssetsAssignmentsHelper
+end

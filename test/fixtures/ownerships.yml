@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  ownable: one
+  ownable_type: Ownable
+
+two:
+  company: two
+  ownable: two
+  ownable_type: Ownable

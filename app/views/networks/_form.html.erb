@@ -1,0 +1,52 @@
+<%= form_with(model: network, local: true) do |form| %>
+  <% if network.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(network.errors.count, "error") %> prohibited this network from being saved:</h2>
+
+      <ul>
+        <% network.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_area :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ipv4 %>
+    <%= form.text_area :ipv4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :v4_mask %>
+    <%= form.text_area :v4_mask %>
+  </div>
+
+  <div class="field">
+    <%= form.label :v4_gateway %>
+    <%= form.text_area :v4_gateway %>
+  </div>
+
+  <div class="field">
+    <%= form.label :v4_dhcp_start %>
+    <%= form.text_area :v4_dhcp_start %>
+  </div>
+
+  <div class="field">
+    <%= form.label :v4_dhcp_end %>
+    <%= form.text_area :v4_dhcp_end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vland_id %>
+    <%= form.number_field :vland_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
