@@ -58,7 +58,13 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
+  # Language server for ruby
   gem "solargraph", "~> 0.39.7"
+
+  # Live reloading of server code
+  gem "guard", "~> 2.16"
+  gem "guard-livereload", "~> 2.5", require: false
+  gem "rack-livereload", "~> 0.3.17"
 end
 
 group :test do
@@ -71,3 +77,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data'
+
