@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @items_assignment.item_id %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @items_assignment.person_id %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @items_assignment.department_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @items_assignment.active %>
+</p>
+
+<%= link_to 'Edit', edit_items_assignment_path(@items_assignment) %> |
+<%= link_to 'Back', items_assignments_path %>

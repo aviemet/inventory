@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_020331) do
+ActiveRecord::Schema.define(version: 2020_05_19_044713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,60 +26,6 @@ ActiveRecord::Schema.define(version: 2020_05_17_020331) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["contact_id"], name: "index_addresses_on_contact_id"
-  end
-
-  create_table "asset_assignments", force: :cascade do |t|
-    t.bigint "asset_id", null: false
-    t.bigint "person_id", null: false
-    t.bigint "department_id", null: false
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["asset_id"], name: "index_asset_assignments_on_asset_id"
-    t.index ["department_id"], name: "index_asset_assignments_on_department_id"
-    t.index ["person_id"], name: "index_asset_assignments_on_person_id"
-  end
-
-  create_table "asset_categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "assets", force: :cascade do |t|
-    t.string "title"
-    t.string "model"
-    t.string "serial"
-    t.text "description"
-    t.text "notes"
-    t.boolean "consumeable", default: false
-    t.integer "qty"
-    t.string "os"
-    t.decimal "memory"
-    t.decimal "storage"
-    t.string "cpu"
-    t.decimal "cpu_speed"
-    t.string "gpu"
-    t.decimal "gpu_speed"
-    t.decimal "gpu_memory"
-    t.bigint "asset_category_id", null: false
-    t.bigint "brand_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["asset_category_id"], name: "index_assets_on_asset_category_id"
-    t.index ["brand_id"], name: "index_assets_on_brand_id"
-  end
-
-  create_table "assets_assignments", force: :cascade do |t|
-    t.bigint "asset_id", null: false
-    t.bigint "person_id", null: false
-    t.bigint "department_id", null: false
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["asset_id"], name: "index_assets_assignments_on_asset_id"
-    t.index ["department_id"], name: "index_assets_assignments_on_department_id"
-    t.index ["person_id"], name: "index_assets_assignments_on_person_id"
   end
 
   create_table "brands", force: :cascade do |t|
@@ -178,6 +124,48 @@ ActiveRecord::Schema.define(version: 2020_05_17_020331) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "item_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "title"
+    t.string "model"
+    t.string "serial"
+    t.text "description"
+    t.text "notes"
+    t.boolean "consumeable"
+    t.integer "qty"
+    t.string "os"
+    t.decimal "memory"
+    t.decimal "storage"
+    t.string "cpu"
+    t.decimal "cpu_speed"
+    t.string "gpu"
+    t.decimal "gpu_speed"
+    t.decimal "gpu_memory"
+    t.bigint "item_category_id", null: false
+    t.bigint "brand_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["brand_id"], name: "index_items_on_brand_id"
+    t.index ["item_category_id"], name: "index_items_on_item_category_id"
+  end
+
+  create_table "items_assignments", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "person_id", null: false
+    t.bigint "department_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_items_assignments_on_department_id"
+    t.index ["item_id"], name: "index_items_assignments_on_item_id"
+    t.index ["person_id"], name: "index_items_assignments_on_person_id"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "contact_id", null: false
@@ -192,10 +180,10 @@ ActiveRecord::Schema.define(version: 2020_05_17_020331) do
 
   create_table "network_interfaces", force: :cascade do |t|
     t.macaddr "mac"
-    t.bigint "asset_id", null: false
+    t.bigint "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["asset_id"], name: "index_network_interfaces_on_asset_id"
+    t.index ["item_id"], name: "index_network_interfaces_on_item_id"
   end
 
   create_table "networks", force: :cascade do |t|
@@ -207,6 +195,21 @@ ActiveRecord::Schema.define(version: 2020_05_17_020331) do
     t.integer "vland_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "number"
+    t.bigint "user_id", null: false
+    t.date "ordered_on"
+    t.date "delivered_on"
+    t.date "canceled_on"
+    t.date "returned_on"
+    t.decimal "shipping", precision: 10, scale: 2
+    t.bigint "vendor_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["vendor_id"], name: "index_orders_on_vendor_id"
   end
 
   create_table "ownerships", force: :cascade do |t|
@@ -241,19 +244,15 @@ ActiveRecord::Schema.define(version: 2020_05_17_020331) do
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.bigint "asset_id", null: false
+    t.bigint "item_id", null: false
     t.decimal "price", precision: 10, scale: 2
     t.decimal "shipping", precision: 10, scale: 2
     t.decimal "tax", precision: 10, scale: 2
     t.integer "qty"
-    t.bigint "vendor_id", null: false
     t.text "notes"
-    t.datetime "purchased_at"
-    t.datetime "received_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["asset_id"], name: "index_purchases_on_asset_id"
-    t.index ["vendor_id"], name: "index_purchases_on_vendor_id"
+    t.index ["item_id"], name: "index_purchases_on_item_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -314,14 +313,6 @@ ActiveRecord::Schema.define(version: 2020_05_17_020331) do
   end
 
   add_foreign_key "addresses", "contacts"
-  add_foreign_key "asset_assignments", "assets"
-  add_foreign_key "asset_assignments", "departments"
-  add_foreign_key "asset_assignments", "people"
-  add_foreign_key "assets", "asset_categories"
-  add_foreign_key "assets", "brands"
-  add_foreign_key "assets_assignments", "assets"
-  add_foreign_key "assets_assignments", "departments"
-  add_foreign_key "assets_assignments", "people"
   add_foreign_key "contracts", "contract_types"
   add_foreign_key "contracts", "vendors"
   add_foreign_key "departments", "companies"
@@ -330,15 +321,21 @@ ActiveRecord::Schema.define(version: 2020_05_17_020331) do
   add_foreign_key "interfaces_ipv4s", "network_interfaces"
   add_foreign_key "interfaces_ipv6s", "ipv6_addresses"
   add_foreign_key "interfaces_ipv6s", "network_interfaces"
+  add_foreign_key "items", "brands"
+  add_foreign_key "items", "item_categories"
+  add_foreign_key "items_assignments", "departments"
+  add_foreign_key "items_assignments", "items"
+  add_foreign_key "items_assignments", "people"
   add_foreign_key "locations", "companies"
   add_foreign_key "locations", "contacts"
   add_foreign_key "locations", "locations", column: "parent_id"
-  add_foreign_key "network_interfaces", "assets"
+  add_foreign_key "network_interfaces", "items"
+  add_foreign_key "orders", "users"
+  add_foreign_key "orders", "vendors"
   add_foreign_key "ownerships", "companies"
   add_foreign_key "people", "departments"
   add_foreign_key "phones", "contacts"
-  add_foreign_key "purchases", "assets"
-  add_foreign_key "purchases", "vendors"
+  add_foreign_key "purchases", "items"
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "roles"
   add_foreign_key "user_companies", "users"

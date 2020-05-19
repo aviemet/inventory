@@ -1,0 +1,102 @@
+<%= form_with(model: item, local: true) do |form| %>
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :model %>
+    <%= form.text_field :model %>
+  </div>
+
+  <div class="field">
+    <%= form.label :serial %>
+    <%= form.text_field :serial %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :consumeable %>
+    <%= form.check_box :consumeable %>
+  </div>
+
+  <div class="field">
+    <%= form.label :qty %>
+    <%= form.number_field :qty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :os %>
+    <%= form.text_field :os %>
+  </div>
+
+  <div class="field">
+    <%= form.label :memory %>
+    <%= form.text_field :memory %>
+  </div>
+
+  <div class="field">
+    <%= form.label :storage %>
+    <%= form.text_field :storage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cpu %>
+    <%= form.text_field :cpu %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cpu_speed %>
+    <%= form.text_field :cpu_speed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gpu %>
+    <%= form.text_field :gpu %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gpu_speed %>
+    <%= form.text_field :gpu_speed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gpu_memory %>
+    <%= form.text_field :gpu_memory %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_category_id %>
+    <%= form.text_field :item_category_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brand_id %>
+    <%= form.text_field :brand_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

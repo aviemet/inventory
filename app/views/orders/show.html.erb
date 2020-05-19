@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @order.number %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @order.user_id %>
+</p>
+
+<p>
+  <strong>Ordered on:</strong>
+  <%= @order.ordered_on %>
+</p>
+
+<p>
+  <strong>Delivered on:</strong>
+  <%= @order.delivered_on %>
+</p>
+
+<p>
+  <strong>Canceled on:</strong>
+  <%= @order.canceled_on %>
+</p>
+
+<p>
+  <strong>Returned on:</strong>
+  <%= @order.returned_on %>
+</p>
+
+<p>
+  <strong>Shipping:</strong>
+  <%= @order.shipping %>
+</p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @order.vendor_id %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

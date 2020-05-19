@@ -17,7 +17,7 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create purchase" do
     assert_difference('Purchase.count') do
-      post purchases_url, params: { purchase: { asset_id: @purchase.asset_id, notes: @purchase.notes, price: @purchase.price, purchased_at: @purchase.purchased_at, qty: @purchase.qty, received_at: @purchase.received_at, shipping: @purchase.shipping, tax: @purchase.tax, vendor_id: @purchase.vendor_id } }
+      post purchases_url, params: { purchase: { item_id: @purchase.item_id, notes: @purchase.notes, price: @purchase.price, qty: @purchase.qty, shipping: @purchase.shipping, tax: @purchase.tax } }
     end
 
     assert_redirected_to purchase_url(Purchase.last)
@@ -34,7 +34,7 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update purchase" do
-    patch purchase_url(@purchase), params: { purchase: { asset_id: @purchase.asset_id, notes: @purchase.notes, price: @purchase.price, purchased_at: @purchase.purchased_at, qty: @purchase.qty, received_at: @purchase.received_at, shipping: @purchase.shipping, tax: @purchase.tax, vendor_id: @purchase.vendor_id } }
+    patch purchase_url(@purchase), params: { purchase: { item_id: @purchase.item_id, notes: @purchase.notes, price: @purchase.price, qty: @purchase.qty, shipping: @purchase.shipping, tax: @purchase.tax } }
     assert_redirected_to purchase_url(@purchase)
   end
 

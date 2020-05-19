@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Model</th>
+      <th>Serial</th>
+      <th>Description</th>
+      <th>Notes</th>
+      <th>Consumeable</th>
+      <th>Qty</th>
+      <th>Os</th>
+      <th>Memory</th>
+      <th>Storage</th>
+      <th>Cpu</th>
+      <th>Cpu speed</th>
+      <th>Gpu</th>
+      <th>Gpu speed</th>
+      <th>Gpu memory</th>
+      <th>Item category</th>
+      <th>Brand</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.title %></td>
+        <td><%= item.model %></td>
+        <td><%= item.serial %></td>
+        <td><%= item.description %></td>
+        <td><%= item.notes %></td>
+        <td><%= item.consumeable %></td>
+        <td><%= item.qty %></td>
+        <td><%= item.os %></td>
+        <td><%= item.memory %></td>
+        <td><%= item.storage %></td>
+        <td><%= item.cpu %></td>
+        <td><%= item.cpu_speed %></td>
+        <td><%= item.gpu %></td>
+        <td><%= item.gpu_speed %></td>
+        <td><%= item.gpu_memory %></td>
+        <td><%= item.item_category_id %></td>
+        <td><%= item.brand_id %></td>
+        <td><%= link_to 'Show', item %></td>
+        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item', new_item_path %>

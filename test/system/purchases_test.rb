@@ -14,15 +14,12 @@ class PurchasesTest < ApplicationSystemTestCase
     visit purchases_url
     click_on "New Purchase"
 
-    fill_in "Asset", with: @purchase.asset_id
+    fill_in "Item", with: @purchase.item_id
     fill_in "Notes", with: @purchase.notes
     fill_in "Price", with: @purchase.price
-    fill_in "Purchased at", with: @purchase.purchased_at
     fill_in "Qty", with: @purchase.qty
-    fill_in "Received at", with: @purchase.received_at
     fill_in "Shipping", with: @purchase.shipping
     fill_in "Tax", with: @purchase.tax
-    fill_in "Vendor", with: @purchase.vendor_id
     click_on "Create Purchase"
 
     assert_text "Purchase was successfully created"
@@ -33,15 +30,12 @@ class PurchasesTest < ApplicationSystemTestCase
     visit purchases_url
     click_on "Edit", match: :first
 
-    fill_in "Asset", with: @purchase.asset_id
+    fill_in "Item", with: @purchase.item_id
     fill_in "Notes", with: @purchase.notes
     fill_in "Price", with: @purchase.price
-    fill_in "Purchased at", with: @purchase.purchased_at
     fill_in "Qty", with: @purchase.qty
-    fill_in "Received at", with: @purchase.received_at
     fill_in "Shipping", with: @purchase.shipping
     fill_in "Tax", with: @purchase.tax
-    fill_in "Vendor", with: @purchase.vendor_id
     click_on "Update Purchase"
 
     assert_text "Purchase was successfully updated"
