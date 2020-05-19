@@ -4,8 +4,8 @@ class Person < ApplicationRecord
 
   belongs_to :department, optional: true
   has_one :user
-  has_many :asset_assignments
-  has_many :assets, through: :asset_assignments
+  has_many :item_assignments
+  has_many :items, through: :item_assignments
 
   validates :contact, presence: true
 
