@@ -44,6 +44,9 @@ gem "dotenv-rails", "~> 2.7"
 gem "devise", "~> 4.7"
 gem "devise_ldap_authenticatable", "~> 0.8.6"
 
+# View layer Icon library
+gem "material_icons", "~> 2.2"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -77,4 +80,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data'
-

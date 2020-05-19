@@ -7,7 +7,7 @@ $colors: (
 
 $sidebar: (
 	"width-closed": 50px,
-	"width-open": 50px,
+	"width-open": 200px,
 	"background": map-get($colors, "secondary"),
 	"transition-time": 100ms
 );

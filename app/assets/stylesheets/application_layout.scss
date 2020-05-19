@@ -4,15 +4,23 @@
 
 $icon-left-padding: 8px;
 
+#flash {
+	position: fixed;
+	top: 30px;
+	width: 100vw;
+	z-index: 1001;
+	text-align: center;
+}
+
 #wrapper {
-	max-width: 1100px;
+	
 }
 
 aside#sidebar {
 	width: map-get($sidebar, "width-closed");
 	background: map-get($sidebar, "background");
 	height: 100vh;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	transition: width map-get($sidebar, "transition-time") ease-in-out;
@@ -26,12 +34,12 @@ aside#sidebar {
 	&.open {
 		width: map-get($sidebar, "width-open");
 
-		#navMenu {
+		#links {
 			& > ul {
 				& > li {
 					span {
 						display: inline-block;
-						width: map-get($sidebar, "width-open") - map-get($navbar, "link-padding-left") - map-get($sidebar, "width-closed");
+						width: (map-get($sidebar, "width-open") - map-get($navbar, "link-padding-left") - map-get($sidebar, "width-closed"));
 						padding-left: map-get($sidebar, "width-closed") + map-get($navbar, "link-padding-left");
 					}
 
@@ -46,7 +54,8 @@ aside#sidebar {
 		}
 	}
 
-	#navMenu {
+	#links {
+		width: map-get($sidebar, "width-closed");
 		text-align: left;
 	
 		a {
@@ -78,7 +87,7 @@ aside#sidebar {
 					top: map-get($navbar, "link-height");
 					left: map-get($sidebar, "width-closed") - map-get($navbar, "link-border-left");
 					background: #333;
-					width: map-get($sidebar, "width-open") - map-get($sidebar, "width-closed");
+					width: map-get($sidebar, "width-open") - map-get($navbar, "link-padding-left") + map-get($navbar, "link-border-left");
 
 					& > li {
 						padding: 0;
@@ -92,7 +101,7 @@ aside#sidebar {
 					}
 				}
 
-				& svg {
+				& .material-icons {
 					padding: 10px 0 $icon-left-padding 5px;
 					position: relative;
 					z-index: 990;
@@ -118,8 +127,8 @@ aside#sidebar {
 					span {
 						display: block;
 						background: #222;
-						padding-left: map-get($sidebar, "width-closed") + map-get($navbar, "link-padding-left") - map-get($navbar, "link-border-left") !important;
-						width: map-get($sidebar, "width-open") - map-get($sidebar, "width-closed") - map-get($navbar, "link-padding-left");
+						padding-left: (map-get($sidebar, "width-closed") + map-get($navbar, "link-padding-left") - map-get($navbar, "link-border-left"));
+						width: (map-get($sidebar, "width-open") + map-get($sidebar, "width-closed") - map-get($navbar, "link-padding-left"));
 					}
 
 					& > ul {
@@ -137,6 +146,7 @@ aside#sidebar {
 
 main#content {
 	position: relative;
+	min-height: 100vh;
 	margin-left: map-get($sidebar, "width-closed");
 	transition: margin map-get($sidebar, "transition-time") ease-in-out;
 

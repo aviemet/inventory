@@ -1,3 +1,20 @@
+<% link_file = "layouts/application/link" %>
+
 <nav id="links">
-	<%= render "layouts/application/link", locals: { link: link_to('Inventory', items_path), icon: :home } %>
+	<ul>
+		<%= render link_file, locals: { text: 'Inventory', path: items_path, icon: :important_devices } %>
+		<%= render link_file, locals: { text: 'Accessories', path: accessories_path, icon: :keyboard } %>
+		<%= render link_file, locals: { text: 'Consumeables', path: accessories_path, icon: :opacity } %>
+		<%= render link_file, locals: { text: 'Licenses', path: licenses_path, icon: :save } %>
+		<%= render link_file, locals: { text: 'People', path: people_path, icon: :people } %>
+		<%= render link_file, locals: { text: 'Vendors', path: vendors_path, icon: :business } %>
+		<%= render link_file, locals: { text: 'Purchases', path: purchases_path, icon: :shopping_cart } %>
+		<li><a href="/"><span>Settings</span><%= mi.settings %></a>
+			<ul>
+				<li><%= link_to 'Companies', companies_path %></li>
+				<li><%= link_to 'Locations', locations_path %></li>
+				<li><%= link_to 'Departments', departments_path %></li>
+			</ul>
+		</li>
+	</ul>
 </nav>

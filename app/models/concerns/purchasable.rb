@@ -1,4 +1,4 @@
-module Contactable
+module Purchasable
   extend ActiveSupport::Concern
 
   included do
