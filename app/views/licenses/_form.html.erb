@@ -1,0 +1,37 @@
+<%= form_with(model: license, local: true) do |form| %>
+  <% if license.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(license.errors.count, "error") %> prohibited this license from being saved:</h2>
+
+      <ul>
+        <% license.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seats %>
+    <%= form.number_field :seats %>
+  </div>
+
+  <div class="field">
+    <%= form.label :key %>
+    <%= form.text_area :key %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

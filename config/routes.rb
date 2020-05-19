@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :accessories
+  resources :licenses
   root to: "items#index"
 
   devise_for :users

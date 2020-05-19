@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_044713) do
+ActiveRecord::Schema.define(version: 2020_05_19_052814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accessories", force: :cascade do |t|
+    t.string "name"
+    t.bigint "item_id", null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_accessories_on_item_id"
+  end
 
   create_table "addresses", force: :cascade do |t|
     t.string "address", null: false
@@ -166,6 +175,15 @@ ActiveRecord::Schema.define(version: 2020_05_19_044713) do
     t.index ["person_id"], name: "index_items_assignments_on_person_id"
   end
 
+  create_table "licenses", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "seats"
+    t.text "key"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "contact_id", null: false
@@ -205,6 +223,8 @@ ActiveRecord::Schema.define(version: 2020_05_19_044713) do
     t.date "canceled_on"
     t.date "returned_on"
     t.decimal "shipping", precision: 10, scale: 2
+    t.decimal "tax", precision: 10, scale: 2
+    t.decimal "discount", precision: 10, scale: 2
     t.bigint "vendor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -244,15 +264,14 @@ ActiveRecord::Schema.define(version: 2020_05_19_044713) do
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.bigint "item_id", null: false
-    t.decimal "price", precision: 10, scale: 2
-    t.decimal "shipping", precision: 10, scale: 2
-    t.decimal "tax", precision: 10, scale: 2
+    t.string "purchasable_type", null: false
+    t.bigint "purchasable_id", null: false
+    t.decimal "cost", precision: 10, scale: 2
     t.integer "qty"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_purchases_on_item_id"
+    t.index ["purchasable_type", "purchasable_id"], name: "index_purchases_on_purchasable_type_and_purchasable_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -312,6 +331,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_044713) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "accessories", "items"
   add_foreign_key "addresses", "contacts"
   add_foreign_key "contracts", "contract_types"
   add_foreign_key "contracts", "vendors"
@@ -335,7 +355,6 @@ ActiveRecord::Schema.define(version: 2020_05_19_044713) do
   add_foreign_key "ownerships", "companies"
   add_foreign_key "people", "departments"
   add_foreign_key "phones", "contacts"
-  add_foreign_key "purchases", "items"
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "roles"
   add_foreign_key "user_companies", "users"

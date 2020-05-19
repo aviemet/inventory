@@ -1,3 +1,3 @@
 <nav id="links">
-	<%= link_to 'Inventory', items_path %>
+	<%= render "layouts/application/link", locals: { link: link_to('Inventory', items_path), icon: :home } %>
 </nav>
