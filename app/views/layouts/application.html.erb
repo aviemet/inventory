@@ -10,13 +10,17 @@
   </head>
 
   <body>
-    <% if notice %>
-     <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
+    <div id="wrapper">
+      <%= render "layouts/application/alerts" %>
 
-    <%= yield %>
+      <%= render "layouts/application/sidebar" %>
+
+      <main id="content">
+        <div id="content-wrapper">
+          <%= yield %>
+        </div>
+      </main>
+
+      </div>
   </body>
 </html>

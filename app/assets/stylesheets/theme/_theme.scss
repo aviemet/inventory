@@ -1,0 +1,24 @@
+@use "sass:map";
+
+$colors: (
+	"primary": orange,
+	"secondary": #222
+);
+
+$sidebar: (
+	"width-closed": 50px,
+	"width-open": 50px,
+	"background": map-get($colors, "secondary"),
+	"transition-time": 100ms
+);
+
+$navbar: (
+	"link-height": 45px,
+	"link-border-left": 3px,
+	"link-border-bottom": 1px,
+	"link-padding-left": 15px
+);
+
+$topbar: (
+	"height": 50px
+);
