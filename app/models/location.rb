@@ -1,5 +1,6 @@
 class Location < ApplicationRecord
   include Contactable
+  include Ownable
 
   belongs_to :company
   has_many :departments
