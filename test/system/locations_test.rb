@@ -14,9 +14,6 @@ class LocationsTest < ApplicationSystemTestCase
     visit locations_url
     click_on "New Location"
 
-    fill_in "Company", with: @location.company_id
-    fill_in "Contact", with: @location.contact_id
-    fill_in "Name", with: @location.name
     click_on "Create Location"
 
     assert_text "Location was successfully created"
@@ -27,9 +24,6 @@ class LocationsTest < ApplicationSystemTestCase
     visit locations_url
     click_on "Edit", match: :first
 
-    fill_in "Company", with: @location.company_id
-    fill_in "Contact", with: @location.contact_id
-    fill_in "Name", with: @location.name
     click_on "Update Location"
 
     assert_text "Location was successfully updated"

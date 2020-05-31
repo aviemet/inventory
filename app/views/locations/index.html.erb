@@ -6,8 +6,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Contact</th>
-      <th>Company</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,11 +14,9 @@
     <% @locations.each do |location| %>
       <tr>
         <td><%= location.name %></td>
-        <td><%= location.contact_id %></td>
-        <td><%= location.company_id %></td>
-        <td><%= link_to 'Show', location %></td>
-        <td><%= link_to 'Edit', edit_location_path(location) %></td>
-        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', company_location_path(@company_id, location) %></td>
+        <td><%= link_to 'Edit', edit_company_location_path(@company_id, location) %></td>
+        <td><%= link_to 'Destroy', company_location_path(@company_id, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Location', new_location_path %>
+<%= link_to 'New Location', new_company_location_path(@company_id) %>

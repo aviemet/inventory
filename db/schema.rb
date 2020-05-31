@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(version: 2020_05_19_052814) do
 
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "company_id", null: false
+    t.bigint "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_departments_on_company_id"
+    t.index ["location_id"], name: "index_departments_on_location_id"
   end
 
   create_table "emails", force: :cascade do |t|
@@ -186,13 +186,9 @@ ActiveRecord::Schema.define(version: 2020_05_19_052814) do
 
   create_table "locations", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "contact_id", null: false
-    t.bigint "company_id", null: false
     t.bigint "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_locations_on_company_id"
-    t.index ["contact_id"], name: "index_locations_on_contact_id"
     t.index ["parent_id"], name: "index_locations_on_parent_id"
   end
 
@@ -337,7 +333,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_052814) do
   add_foreign_key "addresses", "contacts"
   add_foreign_key "contracts", "contract_types"
   add_foreign_key "contracts", "vendors"
-  add_foreign_key "departments", "companies"
+  add_foreign_key "departments", "locations"
   add_foreign_key "emails", "contacts"
   add_foreign_key "interfaces_ipv4s", "ipv4_addresses"
   add_foreign_key "interfaces_ipv4s", "network_interfaces"
@@ -348,8 +344,6 @@ ActiveRecord::Schema.define(version: 2020_05_19_052814) do
   add_foreign_key "items_assignments", "departments"
   add_foreign_key "items_assignments", "items"
   add_foreign_key "items_assignments", "people"
-  add_foreign_key "locations", "companies"
-  add_foreign_key "locations", "contacts"
   add_foreign_key "locations", "locations", column: "parent_id"
   add_foreign_key "network_interfaces", "items"
   add_foreign_key "orders", "users"

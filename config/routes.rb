@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :locations
   root to: "items#index"
 
   get "pages/:page" => "pages#show"
@@ -15,10 +16,10 @@ Rails.application.routes.draw do
   resources :roles
   resources :ownerships
 
-  resources :companies
-  resources :departments
-  resources :locations
   resources :user_companies
+  resources :companies do
+    resources :departments, :locations
+  end
 
   resources :items
   resources :item_categories
