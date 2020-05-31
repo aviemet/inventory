@@ -62,13 +62,14 @@ class Ipv6AddressesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ipv6_address
-      @ipv6_address = Ipv6Address.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def ipv6_address_params
-      params.require(:ipv6_address).permit(:address)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ipv6_address
+    @ipv6_address = Ipv6Address.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def ipv6_address_params
+    params.require(:ipv6_address).permit(:address)
+  end
 end

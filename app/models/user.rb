@@ -21,8 +21,8 @@ class User < ApplicationRecord
   end
 
   def add_email_to_contact
-    return if self.person.contact.emails.exists?(email: self.email)
+    return if self.person.contact.emails.exists?(email: email)
 
-    self.person.contact.emails << Email.create(email: self.email)
+    self.person.contact.emails << Email.create(email: email)
   end
 end

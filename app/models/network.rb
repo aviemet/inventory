@@ -1,3 +1,3 @@
 class Network < ApplicationRecord
-	include Ownable
+  include Ownable
 end

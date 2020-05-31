@@ -62,13 +62,14 @@ class NetworksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_network
-      @network = Network.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def network_params
-      params.require(:network).permit(:name, :ipv4, :v4_mask, :v4_gateway, :v4_dhcp_start, :v4_dhcp_end, :vland_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_network
+    @network = Network.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def network_params
+    params.require(:network).permit(:name, :ipv4, :v4_mask, :v4_gateway, :v4_dhcp_start, :v4_dhcp_end, :vland_id)
+  end
 end

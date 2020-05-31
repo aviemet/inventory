@@ -62,13 +62,14 @@ class ContractsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contract
-      @contract = Contract.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def contract_params
-      params.require(:contract).permit(:contract_type_id, :vendor_id, :system, :description, :notes)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contract
+    @contract = Contract.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def contract_params
+    params.require(:contract).permit(:contract_type_id, :vendor_id, :system, :description, :notes)
+  end
 end

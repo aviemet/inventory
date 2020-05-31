@@ -234,11 +234,13 @@ ActiveRecord::Schema.define(version: 2020_05_19_052814) do
 
   create_table "ownerships", force: :cascade do |t|
     t.bigint "company_id", null: false
+    t.bigint "department_id"
     t.string "ownable_type", null: false
     t.bigint "ownable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_ownerships_on_company_id"
+    t.index ["department_id"], name: "index_ownerships_on_department_id"
     t.index ["ownable_type", "ownable_id"], name: "index_ownerships_on_ownable_type_and_ownable_id"
   end
 
@@ -247,7 +249,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_052814) do
     t.string "middle_name"
     t.string "last_name"
     t.boolean "active"
-    t.bigint "department_id", null: false
+    t.bigint "department_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["department_id"], name: "index_people_on_department_id"
@@ -353,6 +355,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_052814) do
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "vendors"
   add_foreign_key "ownerships", "companies"
+  add_foreign_key "ownerships", "departments"
   add_foreign_key "people", "departments"
   add_foreign_key "phones", "contacts"
   add_foreign_key "user_companies", "companies"

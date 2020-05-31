@@ -5,7 +5,7 @@ class CreatePeople < ActiveRecord::Migration[6.0]
       t.string :middle_name
       t.string :last_name
       t.boolean :active
-      t.references :department, null: false, foreign_key: true
+      t.references :department, null: true, foreign_key: true
 
       t.timestamps
     end

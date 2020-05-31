@@ -62,13 +62,14 @@ class InterfacesIpv4sController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_interfaces_ipv4
-      @interfaces_ipv4 = InterfacesIpv4.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def interfaces_ipv4_params
-      params.require(:interfaces_ipv4).permit(:network_interface_id, :ipv4_address_id, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_interfaces_ipv4
+    @interfaces_ipv4 = InterfacesIpv4.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def interfaces_ipv4_params
+    params.require(:interfaces_ipv4).permit(:network_interface_id, :ipv4_address_id, :active)
+  end
 end

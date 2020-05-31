@@ -62,13 +62,14 @@ class InterfacesIpv6sController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_interfaces_ipv6
-      @interfaces_ipv6 = InterfacesIpv6.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def interfaces_ipv6_params
-      params.require(:interfaces_ipv6).permit(:network_interface_id, :ipv6_address_id, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_interfaces_ipv6
+    @interfaces_ipv6 = InterfacesIpv6.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def interfaces_ipv6_params
+    params.require(:interfaces_ipv6).permit(:network_interface_id, :ipv6_address_id, :active)
+  end
 end

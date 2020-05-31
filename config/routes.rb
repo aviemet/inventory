@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :accessories
-  resources :licenses
   root to: "items#index"
+
+  get "pages/:page" => "pages#show"
 
   devise_for :users
 
@@ -14,27 +14,29 @@ Rails.application.routes.draw do
 
   resources :roles
   resources :ownerships
-  
+
   resources :companies
   resources :departments
   resources :locations
   resources :user_companies
-  
+
   resources :items
   resources :item_categories
   resources :items_assignments
   resources :brands
-  
+  resources :accessories
+  resources :licenses
+
   resources :network_interfaces
   resources :interfaces_ipv4s
   resources :interfaces_ipv6s
   resources :ipv4_addresses
   resources :ipv6_addresses
   resources :networks
-  
+
   resources :orders
   resources :purchases
-  
+
   resources :contracts
   resources :contract_types
   resources :vendors

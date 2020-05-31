@@ -62,13 +62,14 @@ class ContactTypesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact_type
-      @contact_type = ContactType.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def contact_type_params
-      params.require(:contact_type).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact_type
+    @contact_type = ContactType.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def contact_type_params
+    params.require(:contact_type).permit(:name)
+  end
 end

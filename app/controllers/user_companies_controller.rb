@@ -62,13 +62,14 @@ class UserCompaniesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_company
-      @user_company = UserCompany.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_company_params
-      params.require(:user_company).permit(:user_id, :company_id, :role_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user_company
+    @user_company = UserCompany.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_company_params
+    params.require(:user_company).permit(:user_id, :company_id, :role_id)
+  end
 end

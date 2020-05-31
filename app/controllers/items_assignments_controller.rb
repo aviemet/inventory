@@ -62,13 +62,14 @@ class ItemsAssignmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_items_assignment
-      @items_assignment = ItemsAssignment.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def items_assignment_params
-      params.require(:items_assignment).permit(:item_id, :person_id, :department_id, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_items_assignment
+    @items_assignment = ItemsAssignment.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def items_assignment_params
+    params.require(:items_assignment).permit(:item_id, :person_id, :department_id, :active)
+  end
 end

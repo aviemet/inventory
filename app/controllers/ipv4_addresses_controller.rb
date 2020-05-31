@@ -62,13 +62,14 @@ class Ipv4AddressesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ipv4_address
-      @ipv4_address = Ipv4Address.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def ipv4_address_params
-      params.require(:ipv4_address).permit(:address)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ipv4_address
+    @ipv4_address = Ipv4Address.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def ipv4_address_params
+    params.require(:ipv4_address).permit(:address)
+  end
 end

@@ -62,13 +62,14 @@ class NetworkInterfacesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_network_interface
-      @network_interface = NetworkInterface.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def network_interface_params
-      params.require(:network_interface).permit(:mac, :item_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_network_interface
+    @network_interface = NetworkInterface.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def network_interface_params
+    params.require(:network_interface).permit(:mac, :item_id)
+  end
 end

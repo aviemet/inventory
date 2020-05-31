@@ -62,13 +62,14 @@ class OwnershipsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ownership
-      @ownership = Ownership.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def ownership_params
-      params.require(:ownership).permit(:company_id, :ownable_id, :ownable_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ownership
+    @ownership = Ownership.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def ownership_params
+    params.require(:ownership).permit(:company_id, :ownable_id, :ownable_type)
+  end
 end
