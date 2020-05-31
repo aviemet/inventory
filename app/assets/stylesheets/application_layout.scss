@@ -12,10 +12,6 @@ $icon-left-padding: 8px;
 	text-align: center;
 }
 
-#wrapper {
-	
-}
-
 aside#sidebar {
 	width: map-get($sidebar, "width-closed");
 	background: map-get($sidebar, "background");
@@ -146,8 +142,8 @@ aside#sidebar {
 
 main#content {
 	position: relative;
-	min-height: 100vh;
-	margin-left: map-get($sidebar, "width-closed");
+	min-height: 100%;
+	margin: map-get($topbar, "height") 0 0 map-get($sidebar, "width-closed") + 10px;
 	transition: margin map-get($sidebar, "transition-time") ease-in-out;
 
 	&.open {
@@ -159,9 +155,5 @@ main#content {
 		display: block;
 		width: 100%;
 		height: 1px;
-	}
-
-	#content-wrapper {
-		margin: map-get($topbar, "height") 0 0 10px;
 	}
 }

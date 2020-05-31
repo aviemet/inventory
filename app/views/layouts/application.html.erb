@@ -6,17 +6,18 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div id="wrapper">
+    <div id="wrapper" class="flex">
       <%= render "layouts/application/alerts" %>
 
       <%= render "layouts/application/sidebar" %>
 
       <main id="content">
-        <div id="content-wrapper">
+        <div class="container mx-auto">
           <%= yield %>
         </div>
       </main>
