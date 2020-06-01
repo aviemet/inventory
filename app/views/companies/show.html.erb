@@ -1,9 +1,56 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-</p>
+<h1><%= @company.name %></h1>
+
+<h2>Locations</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company.locations.each do |location| %>
+      <tr>
+        <td><%= link_to location.name, company_location_path(@company, location) %></td>
+        <td><%= link_to 'Edit', edit_company_location_path(@company, location) %></td>
+        <td><%= link_to 'Destroy', company_location_path(@company, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Location', new_company_location_path(@company) %>
+
+<br />
+
+<h2>Departments</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company.departments.each do |department| %>
+      <tr>
+        <td><%= link_to department.name, company_department_path(@company, department) %></td>
+        <td><%= link_to 'Edit', edit_company_department_path(@company, department) %></td>
+        <td><%= link_to 'Destroy', company_department_path(@company, department), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Department', new_company_department_path(@company) %>
+
+<br />
 
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>

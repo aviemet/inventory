@@ -1,5 +1,5 @@
 class Ownership < ApplicationRecord
   belongs_to :company
-  belongs_to :department
-  belongs_to :ownable, polymorphic: true
+  belongs_to :department, optional: true
+  belongs_to :ownable, polymorphic: true, optional: true
 end

@@ -62,10 +62,9 @@ class CompaniesController < ApplicationController
   end
 
   private
-
   # Use callbacks to share common setup or constraints between actions.
   def set_company
-    @company = Company.includes(:departments).find(params[:id])
+    @company = Company.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

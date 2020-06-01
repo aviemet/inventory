@@ -31,6 +31,7 @@ class LocationsController < ApplicationController
   # POST /companies/:company_id/locations.json
   def create
     @location = Location.new(location_params)
+    @location.company = Company.find(params[:company_id])
 
     respond_to do |format|
       if @location.save
@@ -80,6 +81,6 @@ class LocationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def location_params
-    params.require(:location).permit(:name, :contact_id, :parent_id, :company_id, :id)
+    params.require(:location).permit(:name, :parent_id, :company)
   end
 end

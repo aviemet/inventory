@@ -7,8 +7,8 @@
 
 <p>
   <strong>Company:</strong>
-  <%= @department.company_id %>
+  <%= @department.company %>
 </p>
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
+<%= link_to 'Edit', edit_company_department_path(@company_id, @department) %> |
 <%= link_to 'Back', company_departments_path %>
