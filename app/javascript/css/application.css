@@ -1,13 +1,58 @@
 @import "tailwindcss/base";
-
 @import "tailwindcss/components";
-
 @import "tailwindcss/utilities";
 
 table {
-  @apply table-auto
+  @apply table-auto border;
+
+  &, thead, tr:first-child {
+    border-spacing: 0;
+    border-collapse: separate;
+    @apply rounded-t-md;
+
+    th:first-child {
+      @apply rounded-tl-md;
+    }
+
+    th:last-child {
+      @apply rounded-tr-md;
+    }
+  }
+
+  td, th {
+    @apply px-4 py-2 border;
+  }
 }
 
-table td, table th {
-  @apply border px-4 py-2
+
+h1 {
+  @apply text-4xl
+}
+
+h2 {
+  @apply text-3xl;
+}
+
+h3 {
+  @apply text-2xl;
+}
+
+h4 {
+  @apply text-xl;
+}
+
+h5 {
+  @apply text-lg;
+}
+
+h6 {
+  @apply text-base;
+}
+
+a {
+  @apply text-blue-600;
+
+  &:hover {
+    @apply text-blue-500;
+  }
 }

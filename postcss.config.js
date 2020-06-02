@@ -9,6 +9,7 @@ module.exports = {
       stage: 3
     }),
     require('tailwindcss')('./app/javascript/css/tailwind.js'),
+    require('postcss-nested'),
     require('autoprefixer'),
   ]
 }

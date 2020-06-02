@@ -43,6 +43,10 @@ gem "dotenv-rails", "~> 2.7"
 gem "devise", "~> 4.7"
 gem "devise_ldap_authenticatable", "~> 0.8.6"
 
+# User Authorization 
+gem "rolify", "~> 5.3"
+gem "cancancan", "~> 3.1"
+
 # View layer Icon library
 gem "material_icons", "~> 2.2"
 
