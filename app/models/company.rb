@@ -1,6 +1,6 @@
 class Company < ApplicationRecord
-  has_many :user_companies, dependent: :destroy
-  has_many :users, through: :user_companies
+  resourcify
+  has_many :users, through: :roles, class_name: 'User', source: :users
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
   # 	Company.items, Company.contracts, etc.

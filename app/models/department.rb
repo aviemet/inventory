@@ -2,6 +2,7 @@ class Department < ApplicationRecord
   include Contactable
   include Ownable
 
+  resourcify
   belongs_to :location, optional: true
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface

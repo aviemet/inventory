@@ -1,10 +1,9 @@
 class User < ApplicationRecord
+  rolify
   # Include default devise modules. Others available are: , :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :timeoutable, :trackable
 
   belongs_to :person, dependent: :destroy, optional: true
-  has_many :user_companies, dependent: :destroy
-  has_many :companies, through: :user_companies
   belongs_to :active_company, class_name: 'Company', optional: true
 
   validates :email, presence: true, uniqueness: true
