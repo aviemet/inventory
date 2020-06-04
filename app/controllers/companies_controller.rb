@@ -1,10 +1,11 @@
 class CompaniesController < ApplicationController
+  load_and_authorize_resource
+  skip_authorize_resource only: [:new, :create]
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /companies
   # GET /companies.json
   def index
-    set_companies
   end
 
   # GET /companies/1
@@ -14,7 +15,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   def new
-    @company = Company.new
+    # @company = Company.new
   end
 
   # GET /companies/1/edit
@@ -24,10 +25,13 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(company_params)
+    @company = Company.new company_params
 
     respond_to do |format|
       if @company.save
+        # Assign admin permissions to user creating the record
+        current_user.add_role :admin, @company
+
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
@@ -62,15 +66,6 @@ class CompaniesController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_company
-    @company = Company.find(params[:id])
-  end
-
-  def set_companies
-    @companies = Company.where(id: Company.find_roles(:any, current_user).pluck(:resource_id))
-  end
 
   # Only allow a list of trusted parameters through.
   def company_params

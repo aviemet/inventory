@@ -1,24 +1,14 @@
-<%
-	nav_links = {
-		"Inventory" => { path: items_path, icon: :important_devices },
-		"Accessories" => { path: accessories_path, icon: :keyboard },
-		"Consumeables" => { path: accessories_path, icon: :opacity },
-		"Licenses" => { path: licenses_path, icon: :save },
-		"Networks" => { path: networks_path, icon: :settings_ethernet },
-		"People" => { path: people_path, icon: :people },
-		"Vendors" => { path: vendors_path, icon: :business },
-		"Purchases" => { path: purchases_path, icon: :shopping_cart }
-	}
-%>
+<% link_file = "layouts/application/link" %>
 
-<nav id="links">
+<nav class="links">
 	<ul>
-		<% nav_links.each do |text, options| %>
-			<% icon = mi.public_send(options[:icon]) if options[:icon] %>
-			<li>
-				<%= link_to("<span>#{text}</span>#{icon}".html_safe, options[:path], class: :link) %>
-			</li>
-		<% end %>
+		<%= render link_file, locals: { text: 'Inventory', path: items_path, icon: :important_devices } %>
+		<%= render link_file, locals: { text: 'Accessories', path: accessories_path, icon: :keyboard } %>
+		<%= render link_file, locals: { text: 'Consumeables', path: accessories_path, icon: :opacity } %>
+		<%= render link_file, locals: { text: 'Licenses', path: licenses_path, icon: :save } %>
+		<%= render link_file, locals: { text: 'People', path: people_path, icon: :people } %>
+		<%= render link_file, locals: { text: 'Vendors', path: vendors_path, icon: :business } %>
+		<%= render link_file, locals: { text: 'Purchases', path: purchases_path, icon: :shopping_cart } %>
 		<li><a href="/"><span>Settings</span><%= mi.settings %></a>
 			<ul>
 				<li><%= link_to 'Companies', companies_path %></li>

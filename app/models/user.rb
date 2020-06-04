@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :email, length: { maximum: 255 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  after_initialize :create_associated_person_record
+  before_create :create_associated_person_record
   after_create :add_email_to_contact
 
   private

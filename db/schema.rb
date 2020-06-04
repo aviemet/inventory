@@ -186,7 +186,7 @@ ActiveRecord::Schema.define(version: 2020_06_02_034219) do
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
-    t.bigint "parent_id", null: false
+    t.bigint "parent_id"
     t.index ["parent_id"], name: "index_locations_on_parent_id"
   end
 

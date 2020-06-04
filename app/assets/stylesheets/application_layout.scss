@@ -30,7 +30,7 @@ aside#sidebar {
 	&.open {
 		width: map-get($sidebar, "width-open");
 
-		#links {
+		.links {
 			& > ul {
 				& > li {
 					span {
@@ -50,7 +50,7 @@ aside#sidebar {
 		}
 	}
 
-	#links {
+	.links {
 		width: map-get($sidebar, "width-closed");
 		text-align: left;
 	

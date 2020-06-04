@@ -8,4 +8,6 @@ class Company < ApplicationRecord
   { items: 'Item', departments: 'Department', locations: 'Location', contracts: 'Contract', networks: 'Network', people: 'Person', vendors: 'Vendor' }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
+
+  default_scope { includes(:ownerships) }
 end

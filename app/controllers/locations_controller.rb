@@ -27,15 +27,13 @@ class LocationsController < ApplicationController
     @company = Company.find(params[:company_id])
   end
 
-  # POST /companies/:company_id/locations
-  # POST /companies/:company_id/locations.json
   def create
     @location = Location.new(location_params)
     @location.company = Company.find(params[:company_id])
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to company_locations_url(params[:company_id]), notice: 'Location was successfully created.' }
+        format.html { redirect_to company_url(params[:company_id]), notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
