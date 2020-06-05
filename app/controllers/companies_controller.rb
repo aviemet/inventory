@@ -1,7 +1,6 @@
 class CompaniesController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource only: [:new, :create]
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /companies
   # GET /companies.json
