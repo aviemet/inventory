@@ -4,6 +4,11 @@
 
 $icon-left-padding: 8px;
 
+$link-height: 45px;
+$link-border-left: 3px;
+$link-border-bottom: 1px;
+$link-padding-left: 15px;
+
 #flash {
 	position: fixed;
 	top: 30px;
@@ -12,127 +17,48 @@ $icon-left-padding: 8px;
 	text-align: center;
 }
 
-aside#sidebar {
-	width: map-get($sidebar, "width-closed");
-	background: map-get($sidebar, "background");
+#grid-layout {
 	height: 100vh;
-	position: fixed;
-	top: 0;
-	left: 0;
-	transition: width map-get($sidebar, "transition-time") ease-in-out;
-	z-index: 1000;
+	grid-template-columns: map-get($sidebar, "width-open") 1fr;
+	grid-template-rows: 50px 1fr 50px;
+	grid-template-areas: 
+		"sidebar topbar" 
+		"sidebar content" 
+		"sidebar footer";
 
-	#menuToggle {
-		text-align: right;
-		padding: 8px 8px 0 0;
-	}
+	#sidebar{ grid-area: sidebar; }
+	#topbar{ grid-area: topbar; }
+	#content{ grid-area: content; }
+	#footer{ grid-area: footer; }
 
-	&.open {
-		width: map-get($sidebar, "width-open");
+	transition: map-get($sidebar, "transition-time");
 
-		.links {
-			& > ul {
-				& > li {
+	&.side-bar-closed {
+		grid-template-columns: map-get($sidebar, "width-closed") 1fr;
+
+		#sidebar .links {
+			span {
+				display: none;
+			}
+
+			& > ul > li {
+				position: relative;
+		
+				&:hover {
 					span {
 						display: inline-block;
-						width: (map-get($sidebar, "width-open") - map-get($navbar, "link-padding-left") - map-get($sidebar, "width-closed"));
-						padding-left: map-get($sidebar, "width-closed") + map-get($navbar, "link-padding-left");
-					}
-
-					/* Prevent showing the subnav on hover when nav menu is open */
-					&:hover {
-						ul {
-							display: none;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	.links {
-		width: map-get($sidebar, "width-closed");
-		text-align: left;
-	
-		a {
-			color: #FFF;
-			text-decoration: none;
-			font-size: 1.2rem;
-			font-weight: normal;
-		}
-
-		ul {
-			list-style: none;
-			padding: 0;
-
-			li {
-				margin: 0;
-				height: map-get($navbar, "link-height");
-			}
-		}
-
-		& > ul {
-
-			& > li {
-				padding: 0 0 0 $icon-left-padding;
-				position: relative;
-
-				& > ul {
-					display: none;
-					position: absolute;
-					top: map-get($navbar, "link-height");
-					left: map-get($sidebar, "width-closed") - map-get($navbar, "link-border-left");
-					background: #333;
-					width: map-get($sidebar, "width-open") - map-get($navbar, "link-padding-left") + map-get($navbar, "link-border-left");
-
-					& > li {
-						padding: 0;
-						line-height: map-get($navbar, "link-height") - map-get($navbar, "link-border-bottom");
-						border-bottom: map-get($navbar, "link-border-bottom") solid map-get($colors, "secondary");
-
-						a {
-							display: block;
-							padding-left: map-get($navbar, "link-padding-left");
-						}
-					}
-				}
-
-				& .material-icons {
-					padding: 10px 0 $icon-left-padding 5px;
-					position: relative;
-					z-index: 990;
-				}
-
-				& span {
-					display: none;
-					height: map-get($navbar, "link-height");
-					position: absolute;
-					left: 0;
-					top: 0;
-					margin: 0;
-					padding: 0;
-					line-height: map-get($navbar, "link-height");
-					z-index: 980;
-				}
-
-				&:hover {
-					display: inline-block;
-					padding-left: $icon-left-padding - map-get($navbar, "link-border-left");
-					border-left: map-get($navbar, "link-border-left") solid map-get($colors, "primary");
-
-					span {
-						display: block;
-						background: #222;
-						padding-left: (map-get($sidebar, "width-closed") + map-get($navbar, "link-padding-left") - map-get($navbar, "link-border-left"));
-						width: (map-get($sidebar, "width-open") + map-get($sidebar, "width-closed") - map-get($navbar, "link-padding-left"));
+						position: absolute;
+						background: rgba(26, 32, 44, var(--bg-opacity));
+						width: map-get($sidebar, "width-open") - map-get($sidebar, "width-closed") + $link-padding-left + $link-border-left;
 					}
 
 					& > ul {
-						display: block;
-
-						& > li:hover {
-							background: #444;
-						}
+						display: inline-block;
+						position: absolute;
+						top: $link-height;
+						left: map-get($sidebar, "width-closed") - $link-border-left;
+						width: map-get($sidebar, "width-open") - map-get($sidebar, "width-closed");
+						background: #333;
 					}
 				}
 			}
@@ -140,20 +66,62 @@ aside#sidebar {
 	}
 }
 
+#sidebar {
+
+	&, a, i {
+		color: white;
+	}
+
+	.links {
+		li {
+			height: $link-height;
+		}
+
+		& > ul > li {
+			line-height: $link-height - $link-border-bottom;
+			padding-left: $icon-left-padding;
+	
+			&:hover {
+				border-left: $link-border-left solid map-get($colors, "primary");
+				padding-left: $icon-left-padding - $link-border-left;
+			}
+
+			& > ul {
+				display: none;
+				position: absolute;
+				top: $link-height;
+				left: map-get($sidebar, "width-closed") - $link-border-left;
+				background: #333;
+				width: map-get($sidebar, "width-open") - $link-padding-left + $link-border-left;
+
+				& > li {
+					padding: 0;
+					line-height: $link-height - $link-border-bottom;
+					border-bottom: $link-border-bottom solid map-get($colors, "secondary");
+
+					a {
+						display: block;
+						padding-left: $link-padding-left;
+					}
+				}
+			}
+		}
+
+		.material-icons {
+			padding: 10px 0 $icon-left-padding 5px;
+			position: relative;
+			z-index: 990;
+			float: left;
+		}
+		
+		span {
+			position: absolute;
+			height: $link-height;
+			padding-left: $link-padding-left;
+		}
+	}
+}
+
 main#content {
-	position: relative;
-	min-height: 100%;
-	margin: map-get($topbar, "height") 0 0 map-get($sidebar, "width-closed") + 10px;
-	transition: margin map-get($sidebar, "transition-time") ease-in-out;
-
-	&.open {
-		margin-left: map-get($sidebar, "width-open");
-	}
-
-	&:before {
-		content: ' ';
-		display: block;
-		width: 100%;
-		height: 1px;
-	}
+	padding: 15px;
 }

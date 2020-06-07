@@ -55,3 +55,22 @@ a {
     @apply text-blue-500;
   }
 }
+
+input {
+  &[type=text], &[type=number], &[type=email], &[type=password] {
+    @apply appearance-none;
+    @apply shadow;
+    @apply border;
+    @apply rounded;
+    @apply w-full;
+    @apply py-2;
+    @apply px-3;
+    @apply text-gray-800;
+    @apply leading-tight;
+
+    &:focus {
+      @apply outline-none;
+      @apply shadow-outline;
+    }
+  }
+}
