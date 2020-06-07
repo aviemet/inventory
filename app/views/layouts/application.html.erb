@@ -6,7 +6,6 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -18,7 +17,7 @@
         <%= render "layouts/application/nav_links" %>
         <%= render "layouts/application/bottom_links" %>
       </aside>
-      <header id="topbar">Top Bar</header>
+      <header id="topbar" class="bg-gray-400 shadow p-3">Inventory Application</header>
       <main id="content" class="flex">
         <div class="flex-1">
           <%= yield %>
@@ -26,20 +25,7 @@
       </main>
       <footer id="footer">Footer</footer>
     </div>
-    <!--<div id="wrapper" class="flex">
-      <%= render "layouts/application/alerts" %>
 
-      <%= render "layouts/application/sidebar" %>
-
-      <main id="content" class="flex-1">
-        <div class="container mx-auto">
-          <%= yield %>
-        </div>
-      </main>
-
-    </div>-->
-
-    <%= javascript_pack_tag 'menu' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

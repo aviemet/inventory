@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Company</th>
+      <th>Department</th>
       <th>Ownable</th>
       <th colspan="3"></th>
     </tr>
@@ -15,6 +16,7 @@
     <% @ownerships.each do |ownership| %>
       <tr>
         <td><%= ownership.company_id %></td>
+        <td><%= ownership.department_id %></td>
         <td><%= ownership.ownable_id %></td>
         <td><%= link_to 'Show', ownership %></td>
         <td><%= link_to 'Edit', edit_ownership_path(ownership) %></td>

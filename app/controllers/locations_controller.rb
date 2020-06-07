@@ -17,7 +17,7 @@ class LocationsController < ApplicationController
   def new
     @company = Company.find(params[:company_id])
     @location = Location.new
-    @locations = Location.all
+    @locations = Location.all # Parent location options
   end
 
   # GET /companies/:company_id/locations/:id/edit
@@ -71,6 +71,7 @@ class LocationsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_location
     @location = Location.find(params[:id])
+    @location
   end
 
   def set_company_id
@@ -79,6 +80,6 @@ class LocationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def location_params
-    params.require(:location).permit(:name, :parent_id, :company)
+    params.require(:location).permit(:name, :parent_id)
   end
 end

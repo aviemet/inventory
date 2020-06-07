@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Parent</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -10,6 +11,7 @@
     <% locations.each do |location| %>
       <tr>
         <td><%= link_to location.name, company_location_path(@company, location) %></td>
+        <td><%= link_to location.parent.name, company_location_path(@company, location.parent) if location&.parent_id %></td>
         <td><%= link_to 'Edit', edit_company_location_path(@company, location) %></td>
         <td><%= link_to 'Destroy', company_location_path(@company, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

@@ -8,6 +8,7 @@ class CreateAddresses < ActiveRecord::Migration[6.0]
       t.string :zip
       t.text :notes
       t.references :contact, null: false, foreign_key: true
+      t.references :contact_type
 
       t.timestamps
     end

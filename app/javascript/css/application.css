@@ -57,6 +57,8 @@ a {
 }
 
 input {
+  margin-bottom: 10px;
+  
   &[type=text], &[type=number], &[type=email], &[type=password] {
     @apply appearance-none;
     @apply shadow;
@@ -72,5 +74,23 @@ input {
       @apply outline-none;
       @apply shadow-outline;
     }
+  }
+}
+
+button, input[type=submit] {
+  @apply bg-blue-500;
+  @apply text-white;
+  @apply font-bold;
+  @apply py-2;
+  @apply px-4;
+  @apply rounded;
+
+  &:hover {
+    @apply bg-blue-700;
+  }
+
+  &:focus {
+    @apply outline-none;
+    @apply shadow-outline;
   }
 }

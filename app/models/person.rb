@@ -1,6 +1,7 @@
 class Person < ApplicationRecord
-  include Contactable
   include Ownable
+  include Contactable
+  include Fieldable
 
   belongs_to :department, optional: true
   has_one :user

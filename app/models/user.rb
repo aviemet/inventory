@@ -16,7 +16,7 @@ class User < ApplicationRecord
   private
 
   def create_associated_person_record
-    self.person ||= Person.new
+    self.person ||= Person.create
   end
 
   def add_email_to_contact

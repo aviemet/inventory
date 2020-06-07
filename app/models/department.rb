@@ -11,4 +11,6 @@ class Department < ApplicationRecord
   { items: 'Item', contracts: 'Contract', people: 'Person', vendors: 'Vendor' }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
+
+  default_scope { includes(:ownerships) }
 end

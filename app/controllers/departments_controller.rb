@@ -28,11 +28,11 @@ class DepartmentsController < ApplicationController
   # POST /companies/:company_id/departments.json
   def create
     @department = Department.new(department_params)
-    @department.compahy = Company.find(params[:company_id])
+    @department.company = Company.find(params[:company_id])
 
     respond_to do |format|
       if @department.save
-        format.html { redirect_to company_department_url(@company, @department), notice: 'Department was successfully created.' }
+        format.html { redirect_to company_url(params[:company_id]), notice: 'Department was successfully created.' }
         format.json { render :show, status: :created, location: @department }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class DepartmentsController < ApplicationController
   def update
     respond_to do |format|
       if @department.update(department_params)
-        format.html { redirect_to company_department_url(params[:company_id], @department), notice: 'Department was successfully updated.' }
+        format.html { redirect_to company_url(params[:company_id]), notice: 'Department was successfully updated.' }
         format.json { render :show, status: :ok, location: @department }
       else
         format.html { render :edit }

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Custom fieldset:</strong>
+  <%= @custom_fieldset_association.custom_fieldset_id %>
+</p>
+
+<p>
+  <strong>Fieldable:</strong>
+  <%= @custom_fieldset_association.fieldable_id %>
+</p>
+
+<%= link_to 'Edit', edit_custom_fieldset_association_path(@custom_fieldset_association) %> |
+<%= link_to 'Back', custom_fieldset_associations_path %>

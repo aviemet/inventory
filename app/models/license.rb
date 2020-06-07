@@ -1,4 +1,5 @@
 class License < ApplicationRecord
-  include Purchasable
   include Ownable
+  include Purchasable
+  include Fieldable
 end

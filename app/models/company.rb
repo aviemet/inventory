@@ -1,5 +1,8 @@
 class Company < ApplicationRecord
   resourcify
+
+  include Contactable
+
   has_many :users, through: :roles, class_name: 'User', source: :users
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
