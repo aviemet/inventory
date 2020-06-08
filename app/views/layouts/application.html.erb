@@ -14,7 +14,9 @@
     <div class="grid gap-0 side-bar-closed" id="grid-layout">
 
       <aside id="sidebar" class="bg-gray-900">
-        <%= mi.public_send(:menu).html(id: "sidebar-menu-toggle") %>
+        <div class="text-right">
+          <%= mi.public_send(:menu).html(id: "sidebar-menu-toggle") %>
+        </div>
         <%= render "layouts/application/nav_links" %>
         <%= render "layouts/application/bottom_links" %>
       </aside>
