@@ -2,14 +2,12 @@ class CreateItems < ActiveRecord::Migration[6.0]
   def change
     create_table :items do |t|
       t.string :title
-      t.string :asset_tag
-      t.string :serial
-      t.text :description
+      t.string :asset_tag, index: { unique: true }
+      t.string :serial, index: { unique: true }
       t.text :notes
       t.boolean :consumeable
       t.boolean :accessory
       t.integer :qty
-      t.references :manufacturer, null: false, foreign_key: true
       t.references :model, null: false, foreign_key: true
       t.references :default_location, null: true, foreign_key: { to_table: :locations }
       t.references :parent, null: true, foreign_key: { to_table: :items }

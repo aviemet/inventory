@@ -4,7 +4,7 @@ class CreateLicenses < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :description
       t.integer :seats
-      t.text :key
+      t.text :key, index: { unique: true }
       t.references :model, null: true, foreign_key: true
 
       t.timestamps

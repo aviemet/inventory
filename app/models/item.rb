@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   include Purchasable
   include Fieldable
 
-  belongs_to :item_category
-  belongs_to :brand
+  belongs_to :model
+  belongs_to :default_location, class_name: "Location"
+  belongs_to :parent, class_name: "Item"
 end

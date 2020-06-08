@@ -1,7 +1,7 @@
 class CreateOrders < ActiveRecord::Migration[6.0]
   def change
     create_table :orders do |t|
-      t.string :number
+      t.string :number, index: { unique: true }
       t.references :user, null: false, foreign_key: true
       t.date :ordered_on
       t.date :delivered_on

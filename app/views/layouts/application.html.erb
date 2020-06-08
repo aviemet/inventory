@@ -12,18 +12,23 @@
     <%= render "layouts/application/alerts" %>
 
     <div class="grid gap-0 side-bar-closed" id="grid-layout">
+
       <aside id="sidebar" class="bg-gray-900">
         <%= mi.public_send(:menu).html(id: "sidebar-menu-toggle") %>
         <%= render "layouts/application/nav_links" %>
         <%= render "layouts/application/bottom_links" %>
       </aside>
+
       <header id="topbar" class="bg-gray-400 shadow p-3">Inventory Application</header>
+
       <main id="content" class="flex">
         <div class="flex-1">
           <%= yield %>
         </div>
       </main>
+
       <footer id="footer">Footer</footer>
+      
     </div>
 
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>

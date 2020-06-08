@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_190419) do
+ActiveRecord::Schema.define(version: 2020_06_07_235321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,12 +34,14 @@ ActiveRecord::Schema.define(version: 2020_06_07_190419) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_companies_on_name", unique: true
   end
 
   create_table "contact_types", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_contact_types_on_name", unique: true
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -60,7 +62,6 @@ ActiveRecord::Schema.define(version: 2020_06_07_190419) do
   create_table "contracts", force: :cascade do |t|
     t.bigint "contract_type_id", null: false
     t.bigint "vendor_id", null: false
-    t.string "system"
     t.text "description"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
@@ -94,10 +95,11 @@ ActiveRecord::Schema.define(version: 2020_06_07_190419) do
     t.bigint "manager_id"
     t.index ["location_id"], name: "index_departments_on_location_id"
     t.index ["manager_id"], name: "index_departments_on_manager_id"
+    t.index ["name"], name: "index_departments_on_name", unique: true
   end
 
   create_table "emails", force: :cascade do |t|
-    t.string "email", null: false
+    t.string "email"
     t.text "notes"
     t.bigint "contact_id", null: false
     t.bigint "contact_type_id"
@@ -153,27 +155,27 @@ ActiveRecord::Schema.define(version: 2020_06_07_190419) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_item_categories_on_name", unique: true
   end
 
   create_table "items", force: :cascade do |t|
     t.string "title"
     t.string "asset_tag"
     t.string "serial"
-    t.text "description"
     t.text "notes"
     t.boolean "consumeable"
     t.boolean "accessory"
     t.integer "qty"
-    t.bigint "manufacturer_id", null: false
     t.bigint "model_id", null: false
     t.bigint "default_location_id"
     t.bigint "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["asset_tag"], name: "index_items_on_asset_tag", unique: true
     t.index ["default_location_id"], name: "index_items_on_default_location_id"
-    t.index ["manufacturer_id"], name: "index_items_on_manufacturer_id"
     t.index ["model_id"], name: "index_items_on_model_id"
     t.index ["parent_id"], name: "index_items_on_parent_id"
+    t.index ["serial"], name: "index_items_on_serial", unique: true
   end
 
   create_table "items_assignments", force: :cascade do |t|
@@ -198,6 +200,7 @@ ActiveRecord::Schema.define(version: 2020_06_07_190419) do
     t.bigint "model_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["key"], name: "index_licenses_on_key", unique: true
     t.index ["model_id"], name: "index_licenses_on_model_id"
   end
 
@@ -211,6 +214,7 @@ ActiveRecord::Schema.define(version: 2020_06_07_190419) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_manufacturers_on_name", unique: true
   end
 
   create_table "models", force: :cascade do |t|
@@ -257,6 +261,7 @@ ActiveRecord::Schema.define(version: 2020_06_07_190419) do
     t.bigint "vendor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["number"], name: "index_orders_on_number", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
     t.index ["vendor_id"], name: "index_orders_on_vendor_id"
   end
@@ -315,6 +320,13 @@ ActiveRecord::Schema.define(version: 2020_06_07_190419) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
+  create_table "status_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_status_types_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -397,7 +409,6 @@ ActiveRecord::Schema.define(version: 2020_06_07_190419) do
   add_foreign_key "interfaces_ipv6s", "network_interfaces"
   add_foreign_key "items", "items", column: "parent_id"
   add_foreign_key "items", "locations", column: "default_location_id"
-  add_foreign_key "items", "manufacturers"
   add_foreign_key "items", "models"
   add_foreign_key "items_assignments", "departments"
   add_foreign_key "items_assignments", "items"

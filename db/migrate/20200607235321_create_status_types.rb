@@ -1,6 +1,6 @@
-class CreateManufacturers < ActiveRecord::Migration[6.0]
+class CreateStatusTypes < ActiveRecord::Migration[6.0]
   def change
-    create_table :manufacturers do |t|
+    create_table :status_types do |t|
       t.string :name, index: { unique: true }
 
       t.timestamps

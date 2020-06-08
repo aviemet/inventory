@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :status_types
   root to: "items#index"
 
   get "pages/:page" => "pages#show"
