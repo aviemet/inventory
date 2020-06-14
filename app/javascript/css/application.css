@@ -95,3 +95,47 @@ button, input[type=submit] {
     @apply shadow-outline;
   }
 }
+
+select {
+  display: block;
+  appearance: none;
+  width: 100%;
+  border-width: 1px;
+  background: transparent;
+  cursor: pointer;
+
+  @apply border-gray-200;
+  @apply bg-gray-200;
+  @apply text-gray-700;
+  @apply py-3;
+  @apply px-4;
+  @apply pr-8;
+  @apply rounded;
+  @apply leading-tight;
+
+  &:focus {
+    @apply outline-none;
+    @apply bg-white;
+  }
+
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+}
+
+.field.select {
+  position: relative;
+  cursor: pointer;
+
+  &::after {
+    content: url("data:image/svg+xml; utf8, <svg class='fill-current h-4 w-4' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/></svg>");
+    position: absolute;
+    top: 25%;
+    right: 1rem;
+    font-size: 1rem;
+    height: 50%;
+    width: 1.5rem;
+    pointer-events: none;
+  }
+}

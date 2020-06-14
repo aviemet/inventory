@@ -17,6 +17,10 @@
   </div>
 
   <div class="field">
+    <%= form.select :parent_id, options_for_select(@company.locations.collect{ |l| [l.name, l.id] }), prompt: "-- Location --" %>
+  </div>
+
+  <div class="field">
     <%= form.hidden_field :company_id, value: @company %>
   </div>
 
