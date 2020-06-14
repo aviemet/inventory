@@ -127,6 +127,14 @@ $link-padding-left: 15px;
 	cursor: pointer;
 }
 
-main#content {
+main#content-wrapper {
 	padding: 15px;
+	width: 100%;
+
+	& > #content {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+	}
 }
