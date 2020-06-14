@@ -69,6 +69,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Enable live reloading using guard
-  config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
-  config.middleware.use(Rack::LiveReload, source: :vendored)
+  config.middleware.use Rack::LiveReload, source: :vendored
 end
