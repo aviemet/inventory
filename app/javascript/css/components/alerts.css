@@ -1,0 +1,117 @@
+.alert {
+
+  label.close {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @apply py-2;
+    @apply px-4;
+    @apply shadow;
+  }
+}
+
+/*Banner open/load animation*/
+.alert-banner {
+  animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  width: 65%;
+  max-width: 1200px;
+  min-width: 200px;
+  margin: 0 auto;
+
+  &, label.close {
+    @apply rounded-lg;
+  }
+
+  &.warning {
+    border-width: 1px;
+    @apply border-red-500;
+    @apply text-red-900;
+    
+    label.close {
+      @apply bg-red-200;
+    }
+  }
+
+  &.success {
+    border-width: 1px;
+    @apply border-green-500;
+    @apply text-green-900;
+
+    label.close  {
+      @apply bg-green-200;
+    }
+  }
+
+  /*Banner close animation*/
+  input:checked ~ * {
+    animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  }
+}
+
+/*Footer open/load animation*/
+.alert-footer {
+  animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;	
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  /*Footer close animation*/
+  input:checked ~ * {
+    animation: slide-out-bottom 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  }
+}
+
+/*Toast open/load animation*/
+.alert-toast {
+  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  max-width: 400px;
+  @apply m-8;
+
+  label.close {
+    @apply bg-green-500;
+  }
+
+}
+
+/*Toast close animation*/
+.alert-toast input:checked ~ * {
+  animation: fade-out-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+/* -------------------------------------------------------------
+ * Animations generated using Animista * w: http://animista.net, 
+ * ---------------------------------------------------------- */
+  
+@keyframes slide-in-top{
+  0%{transform:translateY(-1000px);opacity:0}
+  100%{transform:translateY(0);opacity:1}
+}
+  
+@keyframes slide-out-top{
+  0%{transform:translateY(0);opacity:1}
+  100%{transform:translateY(-1000px);opacity:0}
+}
+  
+@keyframes slide-in-bottom{
+  0%{transform:translateY(1000px);opacity:0}
+  100%{transform:translateY(0);opacity:1}
+}
+  
+@keyframes slide-out-bottom{
+  0%{transform:translateY(0);opacity:1}
+  100%{transform:translateY(1000px);opacity:0}
+}
+  
+@keyframes slide-in-right{
+  0%{transform:translateX(1000px);opacity:0}
+  100%{transform:translateX(0);opacity:1}
+}
+  
+@keyframes fade-out-right{
+  0%{transform:translateX(0);opacity:1}
+  100%{transform:translateX(50px);opacity:0}
+}

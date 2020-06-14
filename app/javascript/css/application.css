@@ -2,25 +2,26 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "components/alerts";
+
 table {
-  @apply table-auto border;
-
-  &, thead, tr:first-child {
-    border-spacing: 0;
-    border-collapse: separate;
-    @apply rounded-t-md;
-
-    th:first-child {
-      @apply rounded-tl-md;
-    }
-
-    th:last-child {
-      @apply rounded-tr-md;
-    }
+  td {
+    @apply px-4 py-2;
   }
 
-  td, th {
-    @apply px-4 py-2 border;
+  th {
+    text-align: left;
+    @apply pl-4;
+  }
+
+  tbody {
+    td {
+      @apply border;
+    }
+
+    tr:nth-child(2) {
+      @apply bg-gray-200;
+    }
   }
 }
 
