@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3'
@@ -56,6 +56,9 @@ gem "active_type", "~> 1.3"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  # Foreman for running dev commands in parallale
+  gem "foreman", "~> 0.87.1"
 end
 
 group :development do
@@ -73,6 +76,7 @@ group :development do
 
   # Language server for ruby
   gem "solargraph", "~> 0.39.7"
+  gem "rubocop", "~> 0.85.1"
 
   # Live reloading of server code
   gem "guard", "~> 2.16"
