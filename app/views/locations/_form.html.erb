@@ -20,6 +20,10 @@
     <%= form.text_field :name %>
   </div>
 
+  <%= form.fields_for(:contact, location.contact || Contact.new) do |contact_form| %>
+    
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
