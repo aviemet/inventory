@@ -1,35 +1,40 @@
-<div class="flex flex-row flex-wrap justify-between">
-  <h1><%= @company.name %></h1>
-  <div>
-    <%= link_to 'Edit', edit_company_path(@company) %>
-  </div>
-</div>
+<div class="container">
+  <div class="column">
 
-<div class="flex flex-row flex-wrap w-full mb-2">
-
-  <div class="form-columns">
-    <h2>Locations</h2>
-
-    <div class="flex-1">
-      <%= render "locations/table", locations: @company.locations %>
+    <div class="row justify-between">
+      <h1 class="flex-initial"><%= @company.name %></h1>
+      <div class="flex-grow-0">
+        <%= link_to 'Edit', edit_company_path(@company) %>
+      </div>
     </div>
 
-    <%= link_to 'New Location', new_company_location_path(@company) %>
-  </div>
+    <div class="row">
 
-</div>
+      <div class="form-columns">
+        <h2>Locations</h2>
 
-<div class="flex flex-row flex-wrap w-full mb-2">
+        <div class="flex-1">
+          <%= render "locations/table", locations: @company.locations %>
+        </div>
 
-  <div class="form-columns">
-    <h2>Departments</h2>
+        <%= link_to 'New Location', new_company_location_path(@company) %>
+      </div>
 
-    <div class="flex-1">
-      <%= render "departments/table", departments: @company.departments %>    
     </div>
 
-    <%= link_to 'New Department', new_company_department_path(@company) %>
+    <div class="row">
+
+      <div class="form-columns">
+        <h2>Departments</h2>
+
+        <div class="flex-1">
+          <%= render "departments/table", departments: @company.departments %>    
+        </div>
+
+        <%= link_to 'New Department', new_company_department_path(@company) %>
+      </div>
+
+    </div>
+
   </div>
-
 </div>
-

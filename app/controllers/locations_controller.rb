@@ -47,7 +47,7 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to company_location_url(params[:company_id], @location), notice: 'Location was successfully updated.' }
+        format.html { redirect_to company_url(params[:company_id], @location), notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class LocationsController < ApplicationController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to company_locations_url(params[:company_id]), notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to company_url(params[:company_id]), notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

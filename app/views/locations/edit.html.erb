@@ -1,7 +1,14 @@
-<h1>Editing Location</h1>
+<div class="container">
+  <div class="column">
 
-<%= render 'form', location: @location %>
+    <div class="row">
+      <h1>Editing Location</h1>
+    </div>
 
-<%= link_to 'Back', company_locations_path(@company) %>
+    <%= render 'form', location: @location %>
 
-<svg class='fill-current h-4 w-4' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/></svg>
+
+  </div>
+
+  <%= link_to 'Back', company_locations_path(@company) %>
+</div>

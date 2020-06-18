@@ -1,9 +1,16 @@
+<div class="container">
+  <div class="column">
 
+    <div class="row">
+      <p>
+        <strong>Name:</strong>
+        <%= @location.name %>
+      </p>
+    </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @location.name %>
-</p>
+  </div>
 
-<%= link_to 'Edit', edit_company_location_path(@company_id, @location) %> |
-<%= link_to 'Back', company_locations_path(@company_id) %>
+  <%= link_to 'Edit', edit_company_location_path(@company_id, @location) %> |
+  <%= link_to 'Back', company_path(@company_id) %>
+  
+</div>

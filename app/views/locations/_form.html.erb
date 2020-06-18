@@ -20,11 +20,13 @@
     <%= form.text_field :name %>
   </div>
 
+  <button class="bg-white text-blue-600">+ Add Address</button>
+
   <%= form.fields_for(:contact, location.contact || Contact.new) do |contact_form| %>
-    
+
   <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Update Location', class: "secondary" %>
   </div>
 <% end %>

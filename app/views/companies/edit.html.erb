@@ -1,6 +1,15 @@
-<h1>Editing Company</h1>
+<div class="container">
+  <div class="column">
 
-<%= render 'form', company: @company %>
+    <div class="row">
+      <h1>Editing Company</h1>
+      </div>
 
-<%= link_to 'Show', @company %> |
-<%= link_to 'Back', companies_path %>
+    <div class="row">
+      <%= render 'form', company: @company %>
+    </div>
+
+  </div>
+
+  <%= link_to 'Back', @company %>
+</div>
