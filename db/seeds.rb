@@ -6,6 +6,24 @@
   { name: "Archived" }
 ].each{ |status| StatusType.create(status) } if StatusType.count == 0
 
+# Base contact types
+[
+  { name: "Work" },
+  { name: "Personal" }
+].each{ |type| EmailType.create(type) } if EmailType.count == 0
+
+[
+  { name: "Home" },
+  { name: "Mobile" },
+  { name: "Office" }
+].each{ |type| PhoneType.create(type) } if PhoneType.count == 0
+
+[
+  { name: "Home" },
+  { name: "Company" },
+  { name: "Billing" }
+].each{ |type| AddressType.create(type) } if AddressType.count == 0
+
 # Development data for testing with
 if Rails.env == "development"
 

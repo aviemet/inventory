@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :address_types
+  resources :phone_types
+  resources :email_types
   resources :status_types
   root to: "items#index"
 
@@ -8,7 +11,6 @@ Rails.application.routes.draw do
 
   resources :people
   resources :contacts
-  resources :contact_types
   resources :phones
   resources :emails
   resources :addresses

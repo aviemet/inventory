@@ -21,16 +21,17 @@
     <%= form.text_field :name %>
   </div>
 
-  <h2>Addresses</h2>
-  <%= form.fields_for :addresses do |address_form| %>
-    <%= render 'adresses/fields', form: address_form %>
+  <%= form.fields_for(:contact, location.contact || Contact.new) do |contact_form| %>
+
+    <h2>Addresses</h2>
+    <%= contact_form.fields_for :addresses do |address_form| %>
+      <%= render 'addresses/fields', form: address_form %>
+    <% end %>
+
   <% end %>
 
 
   <div class="actions">
-    <div class="links">
-      <%= link_to_add_association 'Add Address', form, :addresses %>
-    </div>
     <%= form.submit 'Update Location', class: "secondary" %>
   </div>
 <% end %>

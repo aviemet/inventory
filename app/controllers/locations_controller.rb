@@ -80,6 +80,10 @@ class LocationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def location_params
-    params.require(:location).permit(:name, :parent_id)
+    contact_attributes = { 
+      contact_attributes: Contact.attribute_names.map(&:to_sym)
+        .push(addresses: Address.attribute_names.map(&:to_sym))
+    }
+    params.require(:location).permit(:name, :parent_id, **contact_attributes)
   end
 end

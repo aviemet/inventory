@@ -15,6 +15,12 @@ ActiveRecord::Schema.define(version: 2020_06_07_235321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "address_types", force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "addresses", force: :cascade do |t|
     t.string "address", null: false
     t.string "address_2"
@@ -22,12 +28,13 @@ ActiveRecord::Schema.define(version: 2020_06_07_235321) do
     t.string "state"
     t.string "zip"
     t.text "notes"
+    t.boolean "primary"
     t.bigint "contact_id", null: false
-    t.bigint "contact_type_id"
+    t.bigint "address_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["address_type_id"], name: "index_addresses_on_address_type_id"
     t.index ["contact_id"], name: "index_addresses_on_contact_id"
-    t.index ["contact_type_id"], name: "index_addresses_on_contact_type_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -35,13 +42,6 @@ ActiveRecord::Schema.define(version: 2020_06_07_235321) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_companies_on_name", unique: true
-  end
-
-  create_table "contact_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_contact_types_on_name", unique: true
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -98,15 +98,22 @@ ActiveRecord::Schema.define(version: 2020_06_07_235321) do
     t.index ["name"], name: "index_departments_on_name", unique: true
   end
 
+  create_table "email_types", force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "emails", force: :cascade do |t|
     t.string "email"
     t.text "notes"
+    t.boolean "primary"
     t.bigint "contact_id", null: false
-    t.bigint "contact_type_id"
+    t.bigint "email_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["contact_id"], name: "index_emails_on_contact_id"
-    t.index ["contact_type_id"], name: "index_emails_on_contact_type_id"
+    t.index ["email_type_id"], name: "index_emails_on_email_type_id"
   end
 
   create_table "fieldset_associations", force: :cascade do |t|
@@ -289,16 +296,23 @@ ActiveRecord::Schema.define(version: 2020_06_07_235321) do
     t.index ["department_id"], name: "index_people_on_department_id"
   end
 
+  create_table "phone_types", force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "phones", force: :cascade do |t|
     t.string "number", null: false
     t.string "extension"
     t.text "notes"
+    t.boolean "primary"
     t.bigint "contact_id", null: false
-    t.bigint "contact_type_id"
+    t.bigint "phone_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["contact_id"], name: "index_phones_on_contact_id"
-    t.index ["contact_type_id"], name: "index_phones_on_contact_type_id"
+    t.index ["phone_type_id"], name: "index_phones_on_phone_type_id"
   end
 
   create_table "purchases", force: :cascade do |t|
