@@ -12,6 +12,7 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :parent %>
     <%= form.select :parent_id, options_for_select(@locations.collect{ |l| [l.name, l.id] }), prompt: "-- Parent --" %>
   </div>
 
@@ -20,13 +21,16 @@
     <%= form.text_field :name %>
   </div>
 
-  <button class="bg-white text-blue-600">+ Add Address</button>
-
-  <%= form.fields_for(:contact, location.contact || Contact.new) do |contact_form| %>
-
+  <h2>Addresses</h2>
+  <%= form.fields_for :addresses do |address_form| %>
+    <%= render 'adresses/fields', form: address_form %>
   <% end %>
 
+
   <div class="actions">
+    <div class="links">
+      <%= link_to_add_association 'Add Address', form, :addresses %>
+    </div>
     <%= form.submit 'Update Location', class: "secondary" %>
   </div>
 <% end %>
