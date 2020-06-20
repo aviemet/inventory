@@ -24,21 +24,21 @@
   }
 
   &.warning {
-    border-width: 1px;
-    @apply border-red-500;
     @apply text-red-900;
     
     label.close {
+      border-width: 1px;
+      @apply border-red-500;
       @apply bg-red-200;
     }
   }
 
   &.success {
-    border-width: 1px;
-    @apply border-green-500;
     @apply text-green-900;
 
     label.close  {
+      border-width: 1px;
+      @apply border-green-500;
       @apply bg-green-200;
     }
   }
