@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :nics_ips
+  resources :ips
+  resources :nics
   resources :address_types
   resources :phone_types
   resources :email_types
@@ -34,11 +37,7 @@ Rails.application.routes.draw do
   resources :licenses
   resources :warranties
 
-  resources :network_interfaces
   resources :interfaces_ipv4s
-  resources :interfaces_ipv6s
-  resources :ipv4_addresses
-  resources :ipv6_addresses
   resources :networks
 
   resources :orders

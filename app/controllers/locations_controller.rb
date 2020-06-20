@@ -1,4 +1,6 @@
 class LocationsController < ApplicationController
+  include ContactableConcern
+
   before_action :set_location, only: [:show, :edit, :update, :destroy]
   before_action :set_company_id, only: [:index, :show]
 
@@ -78,12 +80,8 @@ class LocationsController < ApplicationController
     @company_id = params[:company_id]
   end
 
-  # Only allow a list of trusted parameters through.
+  # Only allow a list of trusted parameters through. contact_attributes from Concern
   def location_params
-    contact_attributes = { 
-      contact_attributes: Contact.attribute_names.map(&:to_sym)
-        .push(addresses: Address.attribute_names.map(&:to_sym))
-    }
     params.require(:location).permit(:name, :parent_id, **contact_attributes)
   end
 end

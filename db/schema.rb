@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_235321) do
+ActiveRecord::Schema.define(version: 2020_06_20_212202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,34 +126,8 @@ ActiveRecord::Schema.define(version: 2020_06_07_235321) do
     t.index ["fieldable_type", "fieldable_id"], name: "index_fieldset_associations_on_fieldable_type_and_fieldable_id"
   end
 
-  create_table "interfaces_ipv4s", force: :cascade do |t|
-    t.bigint "network_interface_id", null: false
-    t.bigint "ipv4_address_id", null: false
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ipv4_address_id"], name: "index_interfaces_ipv4s_on_ipv4_address_id"
-    t.index ["network_interface_id"], name: "index_interfaces_ipv4s_on_network_interface_id"
-  end
-
-  create_table "interfaces_ipv6s", force: :cascade do |t|
-    t.bigint "network_interface_id", null: false
-    t.bigint "ipv6_address_id", null: false
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ipv6_address_id"], name: "index_interfaces_ipv6s_on_ipv6_address_id"
-    t.index ["network_interface_id"], name: "index_interfaces_ipv6s_on_network_interface_id"
-  end
-
-  create_table "ipv4_addresses", force: :cascade do |t|
-    t.inet "address", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "ipv6_addresses", force: :cascade do |t|
-    t.inet "address", null: false
+  create_table "ips", force: :cascade do |t|
+    t.inet "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -234,25 +208,36 @@ ActiveRecord::Schema.define(version: 2020_06_07_235321) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_category_id"], name: "index_models_on_item_category_id"
     t.index ["manufacturer_id"], name: "index_models_on_manufacturer_id"
-  end
-
-  create_table "network_interfaces", force: :cascade do |t|
-    t.macaddr "mac"
-    t.bigint "item_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_network_interfaces_on_item_id"
+    t.index ["name"], name: "index_models_on_name", unique: true
   end
 
   create_table "networks", force: :cascade do |t|
     t.string "name"
-    t.cidr "ipv4"
-    t.inet "v4_gateway"
-    t.inet "v4_dhcp_start"
-    t.inet "v4_dhcp_end"
+    t.cidr "ip"
+    t.inet "gateway"
+    t.inet "dhcp_start"
+    t.inet "dhcp_end"
     t.integer "vland_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "nics", force: :cascade do |t|
+    t.macaddr "mac"
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_nics_on_item_id"
+  end
+
+  create_table "nics_ips", force: :cascade do |t|
+    t.bigint "nic_id", null: false
+    t.bigint "ip_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ip_id"], name: "index_nics_ips_on_ip_id"
+    t.index ["nic_id"], name: "index_nics_ips_on_nic_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -417,10 +402,6 @@ ActiveRecord::Schema.define(version: 2020_06_07_235321) do
   add_foreign_key "departments", "people", column: "manager_id"
   add_foreign_key "emails", "contacts"
   add_foreign_key "fieldset_associations", "custom_fieldsets"
-  add_foreign_key "interfaces_ipv4s", "ipv4_addresses"
-  add_foreign_key "interfaces_ipv4s", "network_interfaces"
-  add_foreign_key "interfaces_ipv6s", "ipv6_addresses"
-  add_foreign_key "interfaces_ipv6s", "network_interfaces"
   add_foreign_key "items", "items", column: "parent_id"
   add_foreign_key "items", "locations", column: "default_location_id"
   add_foreign_key "items", "models"
@@ -432,7 +413,9 @@ ActiveRecord::Schema.define(version: 2020_06_07_235321) do
   add_foreign_key "locations", "locations", column: "parent_id"
   add_foreign_key "models", "item_categories"
   add_foreign_key "models", "manufacturers"
-  add_foreign_key "network_interfaces", "items"
+  add_foreign_key "nics", "items"
+  add_foreign_key "nics_ips", "ips"
+  add_foreign_key "nics_ips", "nics"
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "vendors"
   add_foreign_key "ownerships", "companies"

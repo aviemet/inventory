@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nic:</strong>
+  <%= @nics_ip.nic_id %>
+</p>
+
+<p>
+  <strong>Ip:</strong>
+  <%= @nics_ip.ip_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @nics_ip.active %>
+</p>
+
+<%= link_to 'Edit', edit_nics_ip_path(@nics_ip) %> |
+<%= link_to 'Back', nics_ips_path %>

@@ -13,37 +13,32 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_area :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :ipv4 %>
-    <%= form.text_area :ipv4 %>
+    <%= form.label :ip, "Network With Mask" %>
+    <%= form.text_field :ip, placeholder: "192.168.1.0/24" %>
   </div>
 
   <div class="field">
-    <%= form.label :v4_mask %>
-    <%= form.text_area :v4_mask %>
+    <%= form.label :gateway, "Gateway" %>
+    <%= form.text_field :gateway %>
   </div>
 
   <div class="field">
-    <%= form.label :v4_gateway %>
-    <%= form.text_area :v4_gateway %>
+    <%= form.label :dhcp_start, "DHCP Start" %>
+    <%= form.text_field :dhcp_start %>
   </div>
 
   <div class="field">
-    <%= form.label :v4_dhcp_start %>
-    <%= form.text_area :v4_dhcp_start %>
+    <%= form.label :dhcp_end, "DHCP End" %>
+    <%= form.text_field :dhcp_end %>
   </div>
 
   <div class="field">
-    <%= form.label :v4_dhcp_end %>
-    <%= form.text_area :v4_dhcp_end %>
-  </div>
-
-  <div class="field">
-    <%= form.label :vland_id %>
-    <%= form.number_field :vland_id %>
+    <%= form.label :vland_id, "VLAN ID" %>
+    <%= form.text_field :vland_id, pattern: "[0-9]{0,4}" %>
   </div>
 
   <div class="actions">

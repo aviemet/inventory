@@ -6,32 +6,27 @@
 </p>
 
 <p>
-  <strong>Ipv4:</strong>
-  <%= @network.ipv4 %>
+  <strong>IP:</strong>
+  <%= "#{@network.ip}/#{@network.ip.prefix}" %>
 </p>
 
 <p>
-  <strong>V4 mask:</strong>
-  <%= @network.v4_mask %>
+  <strong>Gateway:</strong>
+  <%= @network.gateway %>
 </p>
 
 <p>
-  <strong>V4 gateway:</strong>
-  <%= @network.v4_gateway %>
+  <strong>DHCP Start:</strong>
+  <%= @network.dhcp_start %>
 </p>
 
 <p>
-  <strong>V4 dhcp start:</strong>
-  <%= @network.v4_dhcp_start %>
+  <strong>DHCP End:</strong>
+  <%= @network.dhcp_end %>
 </p>
 
 <p>
-  <strong>V4 dhcp end:</strong>
-  <%= @network.v4_dhcp_end %>
-</p>
-
-<p>
-  <strong>Vland:</strong>
+  <strong>VLAN ID:</strong>
   <%= @network.vland_id %>
 </p>
 

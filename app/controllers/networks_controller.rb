@@ -41,6 +41,8 @@ class NetworksController < ApplicationController
   # PATCH/PUT /networks/1.json
   def update
     respond_to do |format|
+      puts "**********************************"
+      puts network_params
       if @network.update(network_params)
         format.html { redirect_to @network, notice: 'Network was successfully updated.' }
         format.json { render :show, status: :ok, location: @network }
@@ -70,6 +72,6 @@ class NetworksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def network_params
-    params.require(:network).permit(:name, :ipv4, :v4_mask, :v4_gateway, :v4_dhcp_start, :v4_dhcp_end, :vland_id)
+    params.require(:network).permit(:name, :ip, :gateway, :dhcp_start, :dhcp_end, :vland_id)
   end
 end

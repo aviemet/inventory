@@ -1,0 +1,32 @@
+<%= form_with(model: nics_ip, local: true) do |form| %>
+  <% if nics_ip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(nics_ip.errors.count, "error") %> prohibited this nics_ip from being saved:</h2>
+
+      <ul>
+        <% nics_ip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nic_id %>
+    <%= form.text_field :nic_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ip_id %>
+    <%= form.text_field :ip_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,2 +1,0 @@
-module InterfacesIpv6sHelper
-end
