@@ -62,9 +62,8 @@ group :development, :test do
   # Foreman for running dev commands in parallale
   gem "foreman", "~> 0.87.1"
 
-  # Testing and BDD
+  # Testing
   gem "rspec-rails", "~> 4.0"
-  gem "cucumber-rails", "~> 2.0"
   gem "database_cleaner", "~> 1.8"
   gem "factory_bot_rails", "~> 6.0"
 end
@@ -99,6 +98,10 @@ group :test do
 
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+
+  # Testing
+  gem "cucumber-rails", "~> 2.0", require: false
+  gem "shoulda-matchers", "~> 4.3"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

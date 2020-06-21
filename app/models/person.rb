@@ -8,7 +8,7 @@ class Person < ApplicationRecord
   has_many :item_assignments
   has_many :items, through: :item_assignments
 
-  validates :contact, presence: true
+  validates_presence_of :first_name, :last_name, :contact
 
   before_validation :ensure_associated_contact
 

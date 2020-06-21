@@ -13,4 +13,6 @@ class Company < ApplicationRecord
   end
 
   default_scope { includes(:ownerships) }
+
+  validates_presence_of :name
 end

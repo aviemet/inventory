@@ -275,10 +275,14 @@ ActiveRecord::Schema.define(version: 2020_06_20_212202) do
     t.string "middle_name"
     t.string "last_name"
     t.boolean "active"
+    t.string "employee_number"
+    t.string "title"
     t.bigint "department_id"
+    t.bigint "manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["department_id"], name: "index_people_on_department_id"
+    t.index ["manager_id"], name: "index_people_on_manager_id"
   end
 
   create_table "phone_types", force: :cascade do |t|
@@ -421,6 +425,7 @@ ActiveRecord::Schema.define(version: 2020_06_20_212202) do
   add_foreign_key "ownerships", "companies"
   add_foreign_key "ownerships", "departments"
   add_foreign_key "people", "departments"
+  add_foreign_key "people", "people", column: "manager_id"
   add_foreign_key "phones", "contacts"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
