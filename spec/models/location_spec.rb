@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'models/concerns/contactable_spec'
 
 RSpec.describe Location, type: :model do
 
