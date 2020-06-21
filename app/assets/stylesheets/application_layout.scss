@@ -9,6 +9,10 @@ $link-border-left: 3px;
 $link-border-bottom: 1px;
 $link-padding-left: 15px;
 
+body {
+	overflow: hidden;
+}
+
 #flash {
 	position: fixed;
 	top: 30px;
@@ -128,6 +132,7 @@ $link-padding-left: 15px;
 }
 
 main#content-wrapper {
+	overflow: auto;
 	padding: 15px;
 	width: 100%;
 

@@ -41,9 +41,7 @@ class NetworksController < ApplicationController
   # PATCH/PUT /networks/1.json
   def update
     respond_to do |format|
-      puts "**********************************"
-      puts network_params
-      if @network.update(network_params)
+      if @network.update!(network_params)
         format.html { redirect_to @network, notice: 'Network was successfully updated.' }
         format.json { render :show, status: :ok, location: @network }
       else

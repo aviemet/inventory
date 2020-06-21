@@ -1,34 +1,63 @@
+<div class="container">
+  
+  <h1 class="inline-block"><%= @network.name %></h1>
 
+  <div class="float-right inline-block">
+    <%= link_to 'Edit', edit_network_path(@network) %> |
+    <%= link_to 'Back', networks_path %>
+  </div>
+  
+  <div>
+    <table>
+      <tbody>
+        <tr>
+          <td>Network:</td>
+          <td><%= "#{@network.ip}/#{@network.ip.prefix}" %></td>
+        </tr>
 
-<p>
-  <strong>Name:</strong>
-  <%= @network.name %>
-</p>
+        <tr>
+          <td>Gateway:</td>
+          <td><%= @network.gateway %></td>
+        </tr>
 
-<p>
-  <strong>IP:</strong>
-  <%= "#{@network.ip}/#{@network.ip.prefix}" %>
-</p>
+        <tr>
+          <td>DHCP Start:</td>
+          <td><%= @network.dhcp_start %></td>
+        </tr>
 
-<p>
-  <strong>Gateway:</strong>
-  <%= @network.gateway %>
-</p>
+        <tr>
+          <td>DHCP End:</td>
+          <td><%= @network.dhcp_end %></td>
+        </tr>
 
-<p>
-  <strong>DHCP Start:</strong>
-  <%= @network.dhcp_start %>
-</p>
+        <tr>
+          <td>VLAN ID:</td>
+          <td><%= @network.vland_id %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<p>
-  <strong>DHCP End:</strong>
-  <%= @network.dhcp_end %>
-</p>
+  <h2>Addresses</h2>
 
-<p>
-  <strong>VLAN ID:</strong>
-  <%= @network.vland_id %>
-</p>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Host</th>
+        </tr>
+      </thead>
 
-<%= link_to 'Edit', edit_network_path(@network) %> |
-<%= link_to 'Back', networks_path %>
+      <tbody>
+        <% @network.ip.to_range.each do |ip| %>
+          <tr>
+            <td><%= ip %></td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
