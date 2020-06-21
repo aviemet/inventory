@@ -62,13 +62,14 @@ class CustomFieldsetsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_custom_fieldset
-      @custom_fieldset = CustomFieldset.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def custom_fieldset_params
-      params.require(:custom_fieldset).permit(:name, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_custom_fieldset
+    @custom_fieldset = CustomFieldset.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def custom_fieldset_params
+    params.require(:custom_fieldset).permit(:name, :description)
+  end
 end

@@ -62,13 +62,14 @@ class WarrantiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_warranty
-      @warranty = Warranty.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def warranty_params
-      params.require(:warranty).permit(:item_id, :length, :notes)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_warranty
+    @warranty = Warranty.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def warranty_params
+    params.require(:warranty).permit(:item_id, :length, :notes)
+  end
 end

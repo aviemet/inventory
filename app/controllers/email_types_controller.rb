@@ -62,13 +62,14 @@ class EmailTypesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_email_type
-      @email_type = EmailType.find(params[:id])
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_email_type
+    @email_type = EmailType.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def email_type_params
-      params.require(:email_type).permit(:name)
-    end
+  # Only allow a list of trusted parameters through.
+  def email_type_params
+    params.require(:email_type).permit(:name)
+  end
 end

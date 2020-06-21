@@ -62,13 +62,14 @@ class CustomFieldsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_custom_field
-      @custom_field = CustomField.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def custom_field_params
-      params.require(:custom_field).permit(:name, :format, :element, :descriptions)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_custom_field
+    @custom_field = CustomField.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def custom_field_params
+    params.require(:custom_field).permit(:name, :format, :element, :descriptions)
+  end
 end

@@ -62,13 +62,14 @@ class NicsIpsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_nics_ip
-      @nics_ip = NicsIp.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def nics_ip_params
-      params.require(:nics_ip).permit(:nic_id, :ip_id, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_nics_ip
+    @nics_ip = NicsIp.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def nics_ip_params
+    params.require(:nics_ip).permit(:nic_id, :ip_id, :active)
+  end
 end

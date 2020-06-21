@@ -62,13 +62,14 @@ class PhoneTypesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_phone_type
-      @phone_type = PhoneType.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def phone_type_params
-      params.require(:phone_type).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_phone_type
+    @phone_type = PhoneType.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def phone_type_params
+    params.require(:phone_type).permit(:name)
+  end
 end
