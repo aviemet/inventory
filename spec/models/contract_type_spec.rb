@@ -1,5 +1,9 @@
 require 'rails_helper'
+require 'models/concerns/ownable_spec'
 
 RSpec.describe ContractType, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe "Associations" do
+    it_behaves_like "ownable"
+  end
 end

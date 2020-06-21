@@ -1,3 +1,3 @@
-shared_examples "contactable" do
+shared_examples "ownable" do
   it { is_expected.to have_one(:owner) }
 end

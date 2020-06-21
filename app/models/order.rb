@@ -1,6 +1,4 @@
-class Order < ApplicationRecord
-  include Ownable
-  
+class Order < ApplicationRecord  
   belongs_to :user
   belongs_to :vendor
 end
