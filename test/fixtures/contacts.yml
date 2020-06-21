@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  notes: MyText
-  contact_type: one
-
-two:
-  notes: MyText
-  contact_type: two
