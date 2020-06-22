@@ -27,7 +27,7 @@
 # Development data for testing with
 if Rails.env == "development"
 
-  User.create({ email: "aviemet@gmail.com", password: "easytoremember", confirmed_at: Date.new }) if User.count == 0
+  User.create!({ email: "aviemet@gmail.com", password: "Complex1!", confirmed_at: Date.new }) if User.count == 0
 
   if Company.count == 0
     c = Company.create({ name: "Example Company" })

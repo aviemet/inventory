@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Assignable:</strong>
+  <%= @assignment.assignable_id %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @assignment.item_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @assignment.active %>
+</p>
+
+<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
+<%= link_to 'Back', assignments_path %>

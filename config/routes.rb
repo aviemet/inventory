@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :assignments
   resources :nics_ips
   resources :ips
   resources :nics
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
   resources :addresses
   resources :websites
 
-  resources :roles
   resources :ownerships
 
   resources :user_companies
@@ -31,7 +31,6 @@ Rails.application.routes.draw do
   resources :accessories, controller: :items
   resources :consumeables, controller: :items
   resources :item_categories
-  resources :items_assignments
   resources :models
   resources :manufacturers
   resources :licenses

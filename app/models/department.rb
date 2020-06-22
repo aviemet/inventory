@@ -1,6 +1,7 @@
 class Department < ApplicationRecord
   include Contactable
   include Ownable
+  include Assignable
 
   resourcify
   belongs_to :location, optional: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_20_212202) do
+ActiveRecord::Schema.define(version: 2020_06_22_041736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 2020_06_20_212202) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["address_type_id"], name: "index_addresses_on_address_type_id"
     t.index ["contact_id"], name: "index_addresses_on_contact_id"
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.string "assignable_type", null: false
+    t.bigint "assignable_id", null: false
+    t.bigint "item_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
+    t.index ["item_id"], name: "index_assignments_on_item_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -157,20 +168,6 @@ ActiveRecord::Schema.define(version: 2020_06_20_212202) do
     t.index ["model_id"], name: "index_items_on_model_id"
     t.index ["parent_id"], name: "index_items_on_parent_id"
     t.index ["serial"], name: "index_items_on_serial", unique: true
-  end
-
-  create_table "items_assignments", force: :cascade do |t|
-    t.bigint "item_id", null: false
-    t.bigint "person_id"
-    t.bigint "department_id"
-    t.bigint "location_id"
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["department_id"], name: "index_items_assignments_on_department_id"
-    t.index ["item_id"], name: "index_items_assignments_on_item_id"
-    t.index ["location_id"], name: "index_items_assignments_on_location_id"
-    t.index ["person_id"], name: "index_items_assignments_on_person_id"
   end
 
   create_table "licenses", force: :cascade do |t|
@@ -400,6 +397,7 @@ ActiveRecord::Schema.define(version: 2020_06_20_212202) do
   end
 
   add_foreign_key "addresses", "contacts"
+  add_foreign_key "assignments", "items"
   add_foreign_key "contracts", "contract_types"
   add_foreign_key "contracts", "vendors"
   add_foreign_key "departments", "locations"
@@ -409,10 +407,6 @@ ActiveRecord::Schema.define(version: 2020_06_20_212202) do
   add_foreign_key "items", "items", column: "parent_id"
   add_foreign_key "items", "locations", column: "default_location_id"
   add_foreign_key "items", "models"
-  add_foreign_key "items_assignments", "departments"
-  add_foreign_key "items_assignments", "items"
-  add_foreign_key "items_assignments", "locations"
-  add_foreign_key "items_assignments", "people"
   add_foreign_key "licenses", "models"
   add_foreign_key "locations", "locations", column: "parent_id"
   add_foreign_key "models", "item_categories"

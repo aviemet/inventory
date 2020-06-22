@@ -1,15 +1,18 @@
 class User < ApplicationRecord
   rolify
+
   # Include default devise modules. Others available are: , :omniauthable, :timeoutable, 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
 
   belongs_to :person, dependent: :destroy, optional: true
-  belongs_to :manager, class_name: 'Person', optional: true
   belongs_to :active_company, class_name: 'Company', optional: true
 
   validates :email, presence: true, uniqueness: true
   validates :email, length: { maximum: 255 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  password_complexity_regex = /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}\z/
+  validates :password, presence: true, format: { with: password_complexity_regex }, on: [:create, :update], if: :password
 
   before_create :create_associated_person_record
   after_create :add_email_to_contact
