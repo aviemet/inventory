@@ -1,15 +1,4 @@
 Rails.application.routes.draw do
-  resources :fieldset_associations
-  resources :fields
-  resources :fieldsets
-  resources :assignments
-  resources :nics_ips
-  resources :ips
-  resources :nics
-  resources :address_types
-  resources :phone_types
-  resources :email_types
-  resources :status_types
   root to: "items#index"
 
   get "pages/:page" => "pages#show"
@@ -19,7 +8,10 @@ Rails.application.routes.draw do
   resources :people
   resources :contacts
   resources :phones
+  resources :phone_types
   resources :emails
+  resources :email_types
+  resources :address_types
   resources :addresses
   resources :websites
 
@@ -31,15 +23,24 @@ Rails.application.routes.draw do
   end
 
   resources :items
-  resources :accessories, controller: :items
-  resources :consumeables, controller: :items
+  resources :accessories
+  resources :consumeables, controller: :accessories
+  resources :accessory_categories
   resources :item_categories
   resources :models
   resources :manufacturers
   resources :licenses
   resources :warranties
+  resources :assignments
+  resources :status_types
 
-  resources :interfaces_ipv4s
+  resources :fields
+  resources :fieldsets
+  resources :fieldset_associations
+
+  resources :nics
+  resources :nics_ips
+  resources :ips
   resources :networks
 
   resources :orders

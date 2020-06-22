@@ -1,0 +1,2 @@
+class AccessoryCategory < ApplicationRecord
+end

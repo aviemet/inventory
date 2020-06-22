@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_045433) do
+ActiveRecord::Schema.define(version: 2020_06_22_232454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accessories", force: :cascade do |t|
+    t.string "name"
+    t.string "serial"
+    t.string "model_number"
+    t.integer "min_qty"
+    t.integer "qty"
+    t.decimal "cost", precision: 10, scale: 2
+    t.date "purchase_date"
+    t.boolean "requestable"
+    t.boolean "consumable"
+    t.text "notes"
+    t.bigint "manufacturer_id", null: false
+    t.bigint "accessory_category_id", null: false
+    t.bigint "vendor_id"
+    t.bigint "default_location_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["accessory_category_id"], name: "index_accessories_on_accessory_category_id"
+    t.index ["default_location_id"], name: "index_accessories_on_default_location_id"
+    t.index ["manufacturer_id"], name: "index_accessories_on_manufacturer_id"
+    t.index ["vendor_id"], name: "index_accessories_on_vendor_id"
+  end
+
+  create_table "accessory_categories", force: :cascade do |t|
+    t.string "name"
+    t.string "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "address_types", force: :cascade do |t|
     t.text "name"
@@ -154,11 +184,12 @@ ActiveRecord::Schema.define(version: 2020_06_22_045433) do
     t.string "title"
     t.string "asset_tag"
     t.string "serial"
+    t.decimal "cost", precision: 10, scale: 2
+    t.date "purchase_date"
+    t.boolean "requestable", default: true
     t.text "notes"
-    t.boolean "consumeable"
-    t.boolean "accessory"
-    t.integer "qty"
     t.bigint "model_id", null: false
+    t.bigint "vendor_id"
     t.bigint "default_location_id"
     t.bigint "parent_id"
     t.datetime "created_at", precision: 6, null: false
@@ -168,6 +199,7 @@ ActiveRecord::Schema.define(version: 2020_06_22_045433) do
     t.index ["model_id"], name: "index_items_on_model_id"
     t.index ["parent_id"], name: "index_items_on_parent_id"
     t.index ["serial"], name: "index_items_on_serial", unique: true
+    t.index ["vendor_id"], name: "index_items_on_vendor_id"
   end
 
   create_table "licenses", force: :cascade do |t|
@@ -396,6 +428,9 @@ ActiveRecord::Schema.define(version: 2020_06_22_045433) do
     t.index ["contact_type_id"], name: "index_websites_on_contact_type_id"
   end
 
+  add_foreign_key "accessories", "accessory_categories"
+  add_foreign_key "accessories", "locations", column: "default_location_id"
+  add_foreign_key "accessories", "vendors"
   add_foreign_key "addresses", "contacts"
   add_foreign_key "assignments", "items"
   add_foreign_key "contracts", "contract_types"
@@ -407,6 +442,7 @@ ActiveRecord::Schema.define(version: 2020_06_22_045433) do
   add_foreign_key "items", "items", column: "parent_id"
   add_foreign_key "items", "locations", column: "default_location_id"
   add_foreign_key "items", "models"
+  add_foreign_key "items", "vendors"
   add_foreign_key "licenses", "models"
   add_foreign_key "locations", "locations", column: "parent_id"
   add_foreign_key "models", "item_categories"
