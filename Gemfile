@@ -53,7 +53,8 @@ gem "material_icons", "~> 2.2"
 # ActiveType to break out model concerns
 gem "active_type", "~> 1.3"
 
-# Cocoon for dynamic nested form inputs
+# A full featured IP address class
+gem "ipaddress", "~> 0.8.3"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -107,4 +108,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data'
-

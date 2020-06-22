@@ -34,6 +34,21 @@
           <td>VLAN ID:</td>
           <td><%= @network.vland_id %></td>
         </tr>
+
+        <tr>
+          <td>Network Address:</td>
+          <td><%= @network.ip.to_s %></td>
+        </tr>
+
+        <tr>
+          <td>Broadcast Address:</td>
+          <td><%= IPAddress("#{@network.ip.to_s}/#{@network.ip.prefix}").broadcast.to_s %></td>
+        </tr>
+
+        <tr>
+          <td>Number of Hosts</td>
+          <td><%= @network.ip.to_range.count - 2 %></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -50,7 +65,7 @@
       </thead>
 
       <tbody>
-        <% @network.ip.to_range.each do |ip| %>
+        <% @network.ip.to_range.to_a[1..-2].each do |ip| %>
           <tr>
             <td><%= ip %></td>
             <td></td>

@@ -105,3 +105,5 @@ Software Agents:
 Everyday Rails Testing with RSpec
 
 Growing Rails Applications in Practice
+
+[Using Cell for UI Components](https://getflywheel.com/layout/how-to-build-ui-components-in-rails/)
