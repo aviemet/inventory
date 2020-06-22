@@ -1,18 +1,36 @@
 # Base status types
-["Deployable", "Undeployable", "Pending", "Archived"].each{ |status| StatusType.create({ name: status }) } if StatusType.count == 0
+if StatusType.count == 0
+  ["Deployable", "Undeployable", "Pending", "Archived"].each do |status| 
+    StatusType.create({ name: status })
+  end
+end
 
 # Base contact types
-["Work", "Personal"].each{ |type| EmailType.create({ name: type }) } if EmailType.count == 0
+if EmailType.count == 0
+  ["Work", "Personal"].each do |type|
+    EmailType.create({ name: type })
+  end
+end
 
-["Home", "Mobile" ,"Office"].each{ |type| PhoneType.create({ name: type }) } if PhoneType.count == 0
+if PhoneType.count == 0
+  ["Home", "Mobile", "Office"].each do |type|
+    PhoneType.create({ name: type })
+  end
+end
 
-["Home", "Company", "Billing"].each{ |type| AddressType.create({ name: type }) } if AddressType.count == 0
+if AddressType.count == 0
+  ["Home", "Company", "Billing"].each do |type| 
+    AddressType.create({ name: type })
+  end
+end
 
 # Development data for testing with
 if Rails.env == "development"
 
-  person = Person.new({ first_name: "Avram", middle_name: "True", last_name: "Walden", employee_number: "1000", title: "IT Manager" })
-  User.create!({ email: "aviemet@gmail.com", password: "Complex1!", confirmed_at: Date.new, person: person }) if User.count == 0
+  if User.count == 0
+    person = Person.new({ first_name: "Avram", middle_name: "True", last_name: "Walden", employee_number: "1000", title: "IT Manager" })
+    User.create!({ email: "aviemet@gmail.com", password: "Complex1!", confirmed_at: Date.new, person: person })
+  end
 
   if Company.count == 0
     company = Company.create({ name: "Example Company" })
@@ -21,28 +39,21 @@ if Rails.env == "development"
     person.save
 
     [
-      { name: "San Francisco Office", company: c },
-      { name: "IT Office", company: c, parent_id: 1 }
+      { name: "San Francisco Office", company: company },
+      { name: "IT Office", company: company, parent_id: 1 }
     ].each{ |location| Location.create(location) } if Location.count == 0
 
     Department.create({ name: "IT Dept", location_id: 2, company: c }) if Department.count == 0
   end
 
   if Manufacturer.count == 0 && ItemCategory.count == 0 && Model.count == 0
-    [
-      { name: "Apple" },
-      { name: "Lenovo" },
-      { name: "Cisco" },
-      { name: "HP" }
-    ].each{ |manufacturer| Manufacturer.create(manufacturer) }
+    ["Apple", "Lenovo", "Cisco", "HP"].each do |manufacturer| 
+      Manufacturer.create({ name: manufacturer })
+    end
 
-    [
-      { name: "Laptops" },
-      { name: "Desktops" },
-      { name: "Network Devices" },
-      { name: "Mobile Phones" },
-      { name: "Tablets" }
-    ].each{ |item_type| ItemCategory.create(item_type) }
+    ["Laptops", "Desktops", "Network Devices", "Mobile Phones", "Tablets"].each do |item_type| 
+      ItemCategory.create({ name: item_type })
+    end
 
     [
       {
