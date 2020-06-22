@@ -85,6 +85,11 @@ input {
       @apply shadow-outline;
     }
   }
+
+  &:disabled {
+    @apply bg-gray-300;
+    @apply text-gray-600;
+  }
 }
 
 button, .button, input[type=submit] {

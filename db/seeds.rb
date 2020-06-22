@@ -1,37 +1,24 @@
 # Base status types
-[
-  { name: "Deployable" },
-  { name: "Undeployable" },
-  { name: "Pending" },
-  { name: "Archived" }
-].each{ |status| StatusType.create(status) } if StatusType.count == 0
+["Deployable", "Undeployable", "Pending", "Archived"].each{ |status| StatusType.create({ name: status }) } if StatusType.count == 0
 
 # Base contact types
-[
-  { name: "Work" },
-  { name: "Personal" }
-].each{ |type| EmailType.create(type) } if EmailType.count == 0
+["Work", "Personal"].each{ |type| EmailType.create({ name: type }) } if EmailType.count == 0
 
-[
-  { name: "Home" },
-  { name: "Mobile" },
-  { name: "Office" }
-].each{ |type| PhoneType.create(type) } if PhoneType.count == 0
+["Home", "Mobile" ,"Office"].each{ |type| PhoneType.create({ name: type }) } if PhoneType.count == 0
 
-[
-  { name: "Home" },
-  { name: "Company" },
-  { name: "Billing" }
-].each{ |type| AddressType.create(type) } if AddressType.count == 0
+["Home", "Company", "Billing"].each{ |type| AddressType.create({ name: type }) } if AddressType.count == 0
 
 # Development data for testing with
 if Rails.env == "development"
 
-  User.create!({ email: "aviemet@gmail.com", password: "Complex1!", confirmed_at: Date.new }) if User.count == 0
+  person = Person.new({ first_name: "Avram", middle_name: "True", last_name: "Walden", employee_number: "1000", title: "IT Manager" })
+  User.create!({ email: "aviemet@gmail.com", password: "Complex1!", confirmed_at: Date.new, person: person }) if User.count == 0
 
   if Company.count == 0
-    c = Company.create({ name: "Example Company" })
-    User.first.add_role :admin, c
+    company = Company.create({ name: "Example Company" })
+    User.first.add_role :admin, company
+    person.company = company
+    person.save
 
     [
       { name: "San Francisco Office", company: c },

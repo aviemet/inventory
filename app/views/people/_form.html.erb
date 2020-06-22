@@ -27,8 +27,12 @@
   </div>
 
   <div class="field">
+    <%= form.label :company_id %>
+    <%= form.select :company_id, options_for_select(@companies.collect{ |l| [l.name, l.id] }), prompt: "-- Company --" %>
+  </div>
+  
+  <div class="field">
     <%= form.label :department_id %>
-    <%= form.text_field :department_id %>
   </div>
 
   <div class="actions">

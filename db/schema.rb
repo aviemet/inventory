@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_041736) do
+ActiveRecord::Schema.define(version: 2020_06_22_045433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,23 +81,6 @@ ActiveRecord::Schema.define(version: 2020_06_22_041736) do
     t.index ["vendor_id"], name: "index_contracts_on_vendor_id"
   end
 
-  create_table "custom_fields", force: :cascade do |t|
-    t.string "name"
-    t.string "format"
-    t.string "element"
-    t.string "description"
-    t.text "notes"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "custom_fieldsets", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "location_id"
@@ -127,14 +110,31 @@ ActiveRecord::Schema.define(version: 2020_06_22_041736) do
     t.index ["email_type_id"], name: "index_emails_on_email_type_id"
   end
 
+  create_table "fields", force: :cascade do |t|
+    t.string "name"
+    t.string "format"
+    t.string "element"
+    t.string "description"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "fieldset_associations", force: :cascade do |t|
-    t.bigint "custom_fieldset_id", null: false
+    t.bigint "fieldset_id", null: false
     t.string "fieldable_type", null: false
     t.bigint "fieldable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["custom_fieldset_id"], name: "index_fieldset_associations_on_custom_fieldset_id"
     t.index ["fieldable_type", "fieldable_id"], name: "index_fieldset_associations_on_fieldable_type_and_fieldable_id"
+    t.index ["fieldset_id"], name: "index_fieldset_associations_on_fieldset_id"
+  end
+
+  create_table "fieldsets", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "ips", force: :cascade do |t|
@@ -403,7 +403,7 @@ ActiveRecord::Schema.define(version: 2020_06_22_041736) do
   add_foreign_key "departments", "locations"
   add_foreign_key "departments", "people", column: "manager_id"
   add_foreign_key "emails", "contacts"
-  add_foreign_key "fieldset_associations", "custom_fieldsets"
+  add_foreign_key "fieldset_associations", "fieldsets"
   add_foreign_key "items", "items", column: "parent_id"
   add_foreign_key "items", "locations", column: "default_location_id"
   add_foreign_key "items", "models"

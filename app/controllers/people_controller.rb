@@ -19,6 +19,7 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
+    @companies = Company.accessible_by(current_ability)
   end
 
   # POST /people

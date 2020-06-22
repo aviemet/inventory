@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :fieldset_associations
+  resources :fields
+  resources :fieldsets
   resources :assignments
   resources :nics_ips
   resources :ips
@@ -47,8 +50,6 @@ Rails.application.routes.draw do
   resources :vendors
 
   resources :custom_fieldset_associations
-  resources :custom_fields
-  resources :custom_fieldsets
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
