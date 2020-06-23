@@ -14,12 +14,17 @@
 
     <div class="grid gap-0 side-bar-closed" id="grid-layout" data-target="layout.sidebar">
 
-      <aside id="sidebar" class="bg-cyan-900">
-        <div class="text-right">
-          <%= mi.public_send(:menu).html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar") %>
+      <aside id="sidebar" class="bg-cyan-900 flex flex-col justify-between">
+        <div>
+          <div class="text-right">
+            <%= mi.public_send(:menu).html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar") %>
+          </div>
+          <%= render "layouts/application/nav_links" %>
         </div>
-        <%= render "layouts/application/nav_links" %>
-        <%= render "layouts/application/bottom_links" %>
+
+        <div>
+          <%= render "layouts/application/bottom_links" %>
+        </div>
       </aside>
 
       <header id="topbar" class="bg-cyan-400 shadow p-3">Inventory Application</header>
