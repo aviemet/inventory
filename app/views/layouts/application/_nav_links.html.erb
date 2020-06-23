@@ -8,7 +8,11 @@
 		<%= render link_file, locals: { text: 'Licenses', path: licenses_path, icon: :save } %>
 		<%= render link_file, locals: { text: 'Networks', path: networks_path, icon: :settings_ethernet } %>
 		<%= render link_file, locals: { text: 'People', path: people_path, icon: :people } %>
-		<%= render link_file, locals: { text: 'Vendors', path: vendors_path, icon: :business } %>
+		<li><a href="/"><span>Vendors</span><%= mi.business %></a>
+			<ul>
+				<li><%= link_to 'Contracts', contracts_path %></li>
+			</ul>
+		</li>
 		<%= render link_file, locals: { text: 'Purchases', path: purchases_path, icon: :shopping_cart } %>
 		<li><a href="/"><span>Settings</span><%= mi.settings %></a>
 			<ul>

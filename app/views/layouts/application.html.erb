@@ -14,7 +14,7 @@
 
     <div class="grid gap-0 side-bar-closed" id="grid-layout" data-target="layout.sidebar">
 
-      <aside id="sidebar" class="bg-gray-900">
+      <aside id="sidebar" class="bg-cyan-900">
         <div class="text-right">
           <%= mi.public_send(:menu).html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar") %>
         </div>
@@ -22,13 +22,13 @@
         <%= render "layouts/application/bottom_links" %>
       </aside>
 
-      <header id="topbar" class="bg-gray-400 shadow p-3">Inventory Application</header>
+      <header id="topbar" class="bg-cyan-400 shadow p-3">Inventory Application</header>
 
       <main id="content-wrapper">
         <%= yield %>
       </main>
 
-      <footer id="footer" class="border-gray-400 shadow pr-3 pt-1">
+      <footer id="footer" class="border-gray-500 shadow pr-3 pt-1">
         <div class="flex-row-reverse flex text-gray-600">
           &copy;2020
         </div>

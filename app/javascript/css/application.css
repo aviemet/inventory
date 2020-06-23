@@ -87,7 +87,7 @@ input {
   }
 
   &:disabled {
-    @apply bg-gray-300;
+    @apply bg-cyan-300;
     @apply text-gray-600;
   }
 }
@@ -168,7 +168,7 @@ select {
   cursor: pointer;
 
   @apply border-gray-200;
-  @apply bg-gray-200;
+  @apply bg-cyan-200;
   @apply text-gray-700;
   @apply py-3;
   @apply px-4;
