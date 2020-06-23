@@ -68,6 +68,9 @@ group :development, :test do
   gem "database_cleaner", "~> 1.8"
   gem "factory_bot_rails", "~> 6.0"
   gem "faker", "~> 2.12"
+
+  # Use pry as the rails console
+  gem "pry-rails", "~> 0.3.9"
 end
 
 group :development do
