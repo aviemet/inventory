@@ -42,7 +42,7 @@
 
         <tr>
           <td>Broadcast Address:</td>
-          <td><%= IPAddress("#{@network.ip.to_s}/#{@network.ip.prefix}").broadcast.to_s %></td>
+          <td><%= @network.ip | ~(IPAddr.new("255.255.255.255").mask(@network.ip.prefix)) %></td>
         </tr>
 
         <tr>
