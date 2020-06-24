@@ -61,7 +61,7 @@ table {
     }
 
     tr:nth-child(even) {
-      @apply bg-gray-200;
+      @apply bg-cyan-200;
     }
   }
 }

@@ -1,0 +1,4 @@
+<div class="field">
+  <%= form.label :department_id %>
+  <%= form.select :department_id, options_for_select(@departments.collect{ |c| [c.name, c.id] }), prompt: "-- Department --" %>
+</div>

@@ -1,4 +1,4 @@
-<%= form_with(model: person, local: true, html: { "data-controller": :personform }) do |form| %>
+<%= form_with(model: person, local: true, html: { "data-controller": :personform, "data-personform-departments-url": "/companies/:id/departments.json" }) do |form| %>
   <% if person.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
@@ -28,11 +28,10 @@
 
   <div class="field">
     <%= form.label :company_id %>
-    <%= form.select :company_id, options_for_select(@companies.collect{ |l| [l.name, l.id] }), { prompt: "-- Company --" }, { "data-action": "change->personform#dothing" } %>
+    <%= form.select :company_id, options_for_select(@companies.collect{ |l| [l.name, l.id] }), { prompt: "-- Company --" }, { "data-action": "change->personform#selectCompany" } %>
   </div>
 
-  <div class="field">
-    <%= form.label :department_id %>
+  <div class="field" data-target="personform.departmentField">
   </div>
 
   <div class="actions">

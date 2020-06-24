@@ -56,13 +56,15 @@ Layout/FirstHashElementIndentation:
   Enabled: false
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 Style/SlicingWithRange:
   Enabled: true
 Bundler/OrderedGems:
   Enabled: false
-
 
 Lint/MixedRegexpCaptureTypes:
   Enabled: true
