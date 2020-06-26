@@ -1,12 +1,33 @@
-<p>
-  <strong>Name:</strong>
-  <%= @department.name %>
-</p>
+<div class="container">
+  <div class="column">
+    <div class="row justify-between">
+      <h1><%= @department.name %></h1>
 
-<p>
-  <strong>Company:</strong>
-  <%= @department.company %>
-</p>
+      <%= link_to 'Edit', edit_company_department_path(@company_id, @department) %>
+    </div>
 
-<%= link_to 'Edit', edit_company_department_path(@company_id, @department) %> |
-<%= link_to 'Back', company_departments_path %>
+    <div class="row">
+      <table>
+        <thead>
+          <tr>
+            <th>Employee</th>
+            <th>Title</th>
+            <th>Assets</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @department.people.each do |person| %>
+            <tr>
+              <td><%= "#{person.first_name} #{person.last_name}" %></td>
+              <td><%= person.title %></td>
+              <td><%= person.items.count %></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

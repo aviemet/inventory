@@ -3,5 +3,6 @@ module Assignable
 
   included do
     has_many :assignments, as: :assignable
+    has_many :items, through: :assignments
   end
 end

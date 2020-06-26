@@ -7,8 +7,8 @@ class CompaniesController < ApplicationController
   def index
   end
 
-  # GET /companies/1
-  # GET /companies/1.json
+  # GET /companies/:id
+  # GET /companies/:id.json
   def show
   end
 
@@ -17,7 +17,7 @@ class CompaniesController < ApplicationController
     # @company = Company.new
   end
 
-  # GET /companies/1/edit
+  # GET /companies/:id/edit
   def edit
   end
 
@@ -40,8 +40,8 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /companies/1
-  # PATCH/PUT /companies/1.json
+  # PATCH/PUT /companies/:id
+  # PATCH/PUT /companies/:id.json
   def update
     respond_to do |format|
       if @company.update(company_params)
@@ -54,13 +54,20 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # DELETE /companies/1
-  # DELETE /companies/1.json
+  # DELETE /companies/:id
+  # DELETE /companies/:id.json
   def destroy
     @company.destroy
     respond_to do |format|
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /companies/:id/snippet/:snippet
+  def snippet
+    respond_to do |format|
+      format.html { render template: "companies/#{params[:snippet]}", layout: false }
     end
   end
 

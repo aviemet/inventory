@@ -43,7 +43,12 @@ if Rails.env == "development"
       { name: "IT Office", company: company, parent_id: 1 }
     ].each{ |location| Location.create(location) } if Location.count == 0
 
-    Department.create({ name: "IT Dept", location_id: 2, company: company }) if Department.count == 0
+    if Department.count == 0
+      [
+        { name: "IT Dept", location_id: 2, company: company },
+        { name: "Engineering", location_id: 2, company: company }
+      ].each{ |dept| Department.create(dept) }
+    end
   end
 
   if Manufacturer.count == 0 && ItemCategory.count == 0 && Model.count == 0

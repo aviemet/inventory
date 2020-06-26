@@ -306,11 +306,9 @@ ActiveRecord::Schema.define(version: 2020_06_22_232454) do
     t.boolean "active"
     t.string "employee_number"
     t.string "title"
-    t.bigint "department_id"
     t.bigint "manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["department_id"], name: "index_people_on_department_id"
     t.index ["manager_id"], name: "index_people_on_manager_id"
   end
 
@@ -454,7 +452,6 @@ ActiveRecord::Schema.define(version: 2020_06_22_232454) do
   add_foreign_key "orders", "vendors"
   add_foreign_key "ownerships", "companies"
   add_foreign_key "ownerships", "departments"
-  add_foreign_key "people", "departments"
   add_foreign_key "people", "people", column: "manager_id"
   add_foreign_key "phones", "contacts"
   add_foreign_key "users", "companies", column: "active_company_id"

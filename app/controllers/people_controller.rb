@@ -1,5 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :set_companies, only: [:new, :edit]
+  before_action :assign_company_and_department, only: [:create, :update]
 
   # GET /people
   # GET /people.json
@@ -19,7 +21,6 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
-    @companies = Company.accessible_by(current_ability)
   end
 
   # POST /people
@@ -69,8 +70,18 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
   end
 
+  def set_companies
+    @companies = Company.accessible_by(current_ability)
+  end
+
+  def assign_company_and_department
+    @person.company = Company.find(params[:company_id]) if params[:company_id]
+    @person.department = Department.find(params[:department_id]) if params[:department_id]
+    params[:person].extract!(:company_id, :department_id)
+  end
+
   # Only allow a list of trusted parameters through.
   def person_params
-    params.require(:person).permit(:first_name, :middle_name, :last_name, :active, :department_id)
+    params.require(:person).permit(:first_name, :middle_name, :last_name, :active, :company_id, :department_id)
   end
 end

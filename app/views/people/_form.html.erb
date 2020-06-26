@@ -1,4 +1,4 @@
-<%= form_with(model: person, local: true, html: { "data-controller": :personform, "data-personform-departments-url": "/companies/:id/departments.json" }) do |form| %>
+<%= form_with(model: person, local: true, html: { "data-controller": :personform, "data-personform-departments-url": "/companies/:id/snippet/_departments_select" }) do |form| %>
   <% if person.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
@@ -28,10 +28,14 @@
 
   <div class="field">
     <%= form.label :company_id %>
-    <%= form.select :company_id, options_for_select(@companies.collect{ |l| [l.name, l.id] }), { prompt: "-- Company --" }, { "data-action": "change->personform#selectCompany" } %>
+    <%= form.select :company_id, options_for_select(@companies.collect{ |c| [c.name, c.id, { selected: c.id }] }), { prompt: "-- Company --" }, { "data-action": "change->personform#selectCompany" } %>
   </div>
 
-  <div class="field" data-target="personform.departmentField">
+  <div class="field" data-target="personform.departmentSelect">
+    <%= form.label :department_id %>
+    <% select_options = person.company ? options_for_select(person.company.departments.collect{ |d| [d.name, d.id, { selected: d.id == person.department.id }] }) : [] %>
+    <%= form.select :department_id, select_options, { prompt: "-- Department --"}, { disabled: !person.company } %>
+
   </div>
 
   <div class="actions">

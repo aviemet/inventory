@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :companies do
     resources :departments, :locations
   end
+  get 'companies/:id/snippet/:snippet', to: 'companies#snippet'
 
   resources :items
   resources :accessories

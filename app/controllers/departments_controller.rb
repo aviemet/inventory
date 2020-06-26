@@ -8,8 +8,8 @@ class DepartmentsController < ApplicationController
     @departments = Department.all
   end
 
-  # GET /companies/:company_id/departments/1
-  # GET /companies/:company_id/departments/1.json
+  # GET /companies/:company_id/departments/:id
+  # GET /companies/:company_id/departments/:id.json
   def show
   end
 
@@ -19,7 +19,7 @@ class DepartmentsController < ApplicationController
     @department = Department.new
   end
 
-  # GET /companies/:company_id/departments/1/edit
+  # GET /companies/:company_id/departments/:id/edit
   def edit
     @company = Company.find(params[:company_id])
   end
@@ -41,8 +41,8 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /companies/:company_id/departments/1
-  # PATCH/PUT /companies/:company_id/departments/1.json
+  # PATCH/PUT /companies/:company_id/departments/:id
+  # PATCH/PUT /companies/:company_id/departments/:id.json
   def update
     respond_to do |format|
       if @department.update(department_params)
@@ -55,8 +55,8 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # DELETE /companies/:company_id/departments/1
-  # DELETE /companies/:company_id/departments/1.json
+  # DELETE /companies/:company_id/departments/:id
+  # DELETE /companies/:company_id/departments/:id.json
   def destroy
     @department.destroy
     respond_to do |format|
