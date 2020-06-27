@@ -1,0 +1,25 @@
+<div class="field">
+	<%= form.label :first_name %>
+	<%= form.text_field :first_name %>
+</div>
+
+<div class="field">
+	<%= form.label :middle_name %>
+	<%= form.text_field :middle_name %>
+</div>
+
+<div class="field">
+	<%= form.label :last_name %>
+	<%= form.text_field :last_name %>
+</div>
+
+<div class="field">
+	<%= form.label :company_id %>
+	<%= form.select :company_id, options_for_select(@companies.collect{ |c| [c.name, c.id, { selected: c.id }] }), { prompt: "-- Company --" }, { "data-action": "change->personform#selectCompany" } %>
+</div>
+
+<div class="field" data-target="personform.departmentSelect">
+	<%= form.label :department_id %>
+	<% select_options = person.company ? options_for_select(person.company.departments.collect{ |d| [d.name, d.id, { selected: d.id == person.department.id }] }) : [] %>
+	<%= form.select :department_id, select_options, { prompt: "-- Department --"}, { disabled: !person.company } %>
+</div>

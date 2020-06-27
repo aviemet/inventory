@@ -5,8 +5,10 @@ export default class extends Controller {
 	static targets = ["departmentSelect"]
 
 	selectCompany(e) {
+		if(!/^\d$/.test(e.target.value)) return
+		
 		const url = this.data.get("departmentsUrl").replace(":id", e.target.value)
-		console.log({ url, val: e.target.value })
+		
 		fetch(url)
 			.then(response => response.text())
 			.then(html => {
