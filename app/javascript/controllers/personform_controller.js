@@ -11,9 +11,16 @@ export default class extends Controller {
 		
 		fetch(url)
 			.then(response => response.text())
-			.then(html => {
-				console.log({ html })
-				this.departmentSelectTarget.innerHTML = html
+			.then(text => {
+				console.log({ text, json: JSON.parse(text) })
+				const json = JSON.parse(text)
+				
+				const options = ["<option>-- Department --</option>"]
+				json.forEach(option => {
+					options.push(`<option value=${option.id}>${option.name}</option>`)
+				})
+				this.departmentSelectTarget.innerHTML = options.join('')
+				this.departmentSelectTarget.removeAttribute('disabled')
 			})
 	}
 }

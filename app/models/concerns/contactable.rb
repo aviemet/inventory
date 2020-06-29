@@ -2,6 +2,7 @@ module Contactable
   extend ActiveSupport::Concern
 
   included do
+    # TODO: Should this be belongs_to?
     has_one :contact, as: :contactable, dependent: :destroy
     has_many :addresses, through: :contact
     has_many :phones, through: :contact
