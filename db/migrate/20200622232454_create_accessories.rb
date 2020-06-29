@@ -11,7 +11,7 @@ class CreateAccessories < ActiveRecord::Migration[6.0]
       t.boolean :requestable
       t.boolean :consumable
       t.text :notes
-      t.references :manufacturer, null: false
+      t.references :manufacturer, null: false, foreign_key: true
       t.references :accessory_category, null: false, foreign_key: true
       t.references :vendor, null: true, foreign_key: true
       t.references :default_location, null: true, foreign_key: { to_table: :locations }

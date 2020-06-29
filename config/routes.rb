@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   resources :items
   resources :accessories
-  resources :consumeables, controller: :accessories
+  resources :consumables
   resources :accessory_categories
   resources :item_categories
   resources :models

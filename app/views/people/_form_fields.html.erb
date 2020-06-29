@@ -18,6 +18,13 @@
 	<%= form.text_field :title %>
 </div>
 
+<div class="field">
+	<%= form.label :manager %>
+	<div class="select">
+		<%= form.select :manager, options_for_select(@people.collect{ |p| ["#{p.first_name} #{p.last_name}", p.id, { selected: person.manager&.id }] }), { prompt: "-- Manager --" }, { "data-action": "" } %>
+	</div>
+</div>
+
 <%= form.fields_for :owner do |owner_form| %>
 	<div class="field">
 		<%= owner_form.label :company_id %>

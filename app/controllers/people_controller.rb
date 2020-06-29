@@ -2,6 +2,7 @@ class PeopleController < ApplicationController
   # load_and_authorize_resource
   before_action :set_person, only: [:show, :edit, :update, :destroy]
   before_action :set_companies, only: [:new, :edit]
+  before_action :set_people, only: [:new, :edit]
 
   # GET /people
   # GET /people.json
@@ -73,6 +74,10 @@ class PeopleController < ApplicationController
 
   def set_companies
     @companies = Company.accessible_by(current_ability)
+  end
+
+  def set_people
+    @people = Person.where.not(id: current_user)
   end
 
   # Only allow a list of trusted parameters through.

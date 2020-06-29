@@ -1,0 +1,2 @@
+class Consumable < Accessory
+end
