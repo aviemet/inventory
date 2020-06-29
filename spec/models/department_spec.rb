@@ -1,6 +1,6 @@
 require 'rails_helper'
-require 'models/concerns/contactable_spec'
-require 'models/concerns/ownable_spec'
+require 'models/concerns/contactable'
+require 'models/concerns/ownable'
 
 RSpec.describe Department, type: :model do
 

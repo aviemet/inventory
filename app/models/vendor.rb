@@ -2,5 +2,5 @@ class Vendor < ApplicationRecord
   include Contactable
   include Ownable
 
-  belongs_to :contract
+  has_many :contracts
 end

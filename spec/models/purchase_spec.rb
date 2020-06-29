@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'models/concerns/ownable_spec'
+require 'models/concerns/ownable'
 
 RSpec.describe Purchase, type: :model do
 

@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'models/concerns/contactable_spec'
+require 'models/concerns/contactable'
 
 RSpec.describe Company, type: :model do
   subject { 
@@ -9,6 +9,7 @@ RSpec.describe Company, type: :model do
   }
 
   describe "Validations" do
+    it { should be_valid }
 
     it "is valid with valid attributes" do
       expect(subject).to be_valid
@@ -23,6 +24,11 @@ RSpec.describe Company, type: :model do
 
   describe "Associations" do
     it_behaves_like "contactable"
+
+    it { should have_many(:ownerships) }
+    { items: 'Item', departments: 'Department', locations: 'Location', contracts: 'Contract', networks: 'Network', people: 'Person', vendors: 'Vendor' }.each_pair do |assoc, _|
+      it { should have_many(assoc) }
+    end
   end
   
 end

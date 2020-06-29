@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'models/concerns/contactable_spec'
+require 'models/concerns/contactable'
 
 RSpec.describe Manufacturer, type: :model do
 
