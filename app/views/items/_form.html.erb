@@ -27,11 +27,17 @@
   </div>
 
   <div class="field">
-    <%= form.select :model_id, options_for_select(@models.collect{ |m| [m.name, m.id] }), prompt: "-- Model --" %>
+    <%= form.label :model_id %>
+    <div class="select">
+      <%= form.select :model_id, options_for_select(@models.collect{ |m| ["#{m.manufacturer.name} - #{m.name}", m.id] }), prompt: "-- Model --" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.select :default_location_id, options_for_select(@locations.collect{ |l| [l.name, l.id] }), prompt: "-- Default Location --" %>
+    <%= form.label :default_location_id %>
+    <div class="select">
+      <%= form.select :default_location_id, options_for_select(@locations.collect{ |l| [l.name, l.id] }), prompt: "-- Default Location --" %>
+    </div>
   </div>
 
   <div class="field">

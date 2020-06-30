@@ -55,10 +55,11 @@ table {
   }
 }
 
-input {
+input, textarea {
   margin-bottom: var(--input-margin-bottom);
   
-  &[type=text], &[type=number], &[type=email], &[type=password] {
+  /* &[type=text], &[type=number], &[type=email], &[type=password] { */
+  &:not([type=button]):not([type=checkbox]):not([type=color]):not([type=file]):not([type=hidden]):not([type=image]):not([type=radio]):not([type=reset]):not([type=submit]) {
     @apply appearance-none;
     @apply shadow;
     @apply border;
@@ -146,6 +147,10 @@ input[type=submit] {
   &:hover {
     @apply bg-blue-700;
   }
+}
+
+textarea {
+  @apply p-1;
 }
 
 select {

@@ -17,15 +17,3 @@ class CreateItems < ActiveRecord::Migration[6.0]
     end
   end
 end
-
-__END__
-Moving these out to a Fieldable model:
-
-t.string :os
-t.decimal :memory
-t.decimal :storage
-t.string :cpu
-t.decimal :cpu_speed
-t.string :gpu
-t.decimal :gpu_speed
-t.decimal :gpu_memory
