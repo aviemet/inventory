@@ -1,8 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_models, only: [:edit, :new, :update, :create]
-  before_action :set_vendors, only: [:edit, :new, :update, :create]
-  before_action :set_locations, only: [:edit, :new, :update, :create]
+  before_action :set_form_models, only: [:edit, :new, :update, :create]
+  before_action :set_company, only: [:update, :create]
 
   # GET /items
   # GET /items.json
@@ -71,20 +70,19 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def set_models
+  def set_form_models
     @models = Model.all
-  end
-
-  def set_vendors
     @vendors = Vendor.all
+    @locations = Location.all
+    @companies = Company.all
   end
 
-  def set_locations
-    @locations = Location.all
+  def set_company
+    @item.company = Company.find(params[:item][:company_attributes][:id]) if params[:item][:company_attributes]
   end
 
   # Only allow a list of trusted parameters through.
   def item_params
-    params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id)
+    params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id, company_attributes: [:id])
   end
 end

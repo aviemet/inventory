@@ -8,7 +8,7 @@
       <th>Departments</th>
       <th>Assets</th>
       <th>People</th>
-      <th colspan="2"></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -20,8 +20,10 @@
         <td><%= company.departments.count %></td>
         <td><%= company.items.count %></td>
         <td><%= company.people.count %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= render "shared/buttons/edit", path: edit_company_path(company) %>
+          <%= render "shared/buttons/delete", path: company %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -8,4 +8,6 @@ class Item < ApplicationRecord
   belongs_to :vendor
   belongs_to :default_location, class_name: "Location", required: false
   belongs_to :parent, class_name: "Item", required: false
+
+  validates :company, presence: true
 end

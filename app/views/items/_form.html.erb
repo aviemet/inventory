@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+  <%= form.fields_for :company, item.company || Company.new do |company_form| %>
+    <div class="field">
+      <%= company_form.label "Company" %>
+      <div class="select">
+        <%= company_form.select :id, options_for_select(@companies.collect{ |c| [c.name, c.id] }), prompt: "-- Company --" %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
