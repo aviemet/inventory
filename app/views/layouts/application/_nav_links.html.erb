@@ -8,7 +8,7 @@
 		<%= render link_file, locals: { text: 'Licenses', path: licenses_path, icon: :save } %>
 		<%= render link_file, locals: { text: 'Networks', path: networks_path, icon: :settings_ethernet } %>
 		<%= render link_file, locals: { text: 'People', path: people_path, icon: :people } %>
-		<li><a href="/"><span>Vendors</span><%= mi.business %></a>
+		<li><%= link_to "<span>Vendors</span>#{mi.business}".html_safe, vendors_path %>
 			<ul>
 				<li><%= link_to 'Contracts', contracts_path %></li>
 			</ul>

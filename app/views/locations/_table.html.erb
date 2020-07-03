@@ -13,8 +13,8 @@
         <td><%= link_to location.name, company_location_path(@company, location) %></td>
         <td><%= link_to location.parent.name, company_location_path(@company, location.parent) if location&.parent_id %></td>
         <td>
-          <%= link_to mi.public_send(:edit), edit_company_location_path(@company, location), class: "secondary button" %>
-          <%= link_to mi.public_send(:delete_forever), company_location_path(@company, location), method: :delete, data: { confirm: 'Are you sure?' }, class: "warning button" %>
+          <%= render "shared/buttons/edit_button", path: edit_company_location_path(@company, location) %>
+          <%= render "shared/buttons/delete_button", path: company_location_path(@company, location) %>
         </td>
       </tr>
     <% end %>

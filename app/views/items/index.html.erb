@@ -8,12 +8,11 @@
       <tr>
         <th>Title</th>
         <th>Model</th>
+        <th>Asset Tag</th>
         <th>Serial</th>
-        <th>Description</th>
-        <th>Notes</th>
-        <th>Item category</th>
-        <th>Brand</th>
-        <th colspan="2">Actions</th>
+        <th>Vendor</th>
+        <th>Cost</th>
+        <th>Actions</th>
       </tr>
     </thead>
 
@@ -21,14 +20,15 @@
       <% @items.each do |item| %>
         <tr>
           <td><%= link_to item.title, item %></td>
-          <td><%= item.model %></td>
+          <td><%= item.model.name %></td>
+          <td><%= item.asset_tag %></td>
           <td><%= item.serial %></td>
-          <td><%= item.description %></td>
-          <td><%= item.notes %></td>
-          <td><%= item.item_category_id %></td>
-          <td><%= item.brand_id %></td>
-          <td><%= link_to 'Edit', edit_item_path(item) %></td>
-          <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= item.vendor&.name %></td>
+          <td><%= number_to_currency(item.cost) %></td>
+          <td>
+            <%= render "shared/buttons/edit", path: edit_item_path(item) %>
+            <%= render "shared/buttons/delete", path: item %>
+          </td>
         </tr>
       <% end %>
     </tbody>

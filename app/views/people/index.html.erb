@@ -5,26 +5,23 @@
 <table>
   <thead>
     <tr>
-      <th>First name</th>
-      <th>Middle name</th>
-      <th>Last name</th>
-      <th>Active</th>
+      <th>Name</th>
       <th>Department</th>
-      <th colspan="3"></th>
+      <th>Items</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @people.each do |person| %>
       <tr>
-        <td><%= person.first_name %></td>
-        <td><%= person.middle_name %></td>
-        <td><%= person.last_name %></td>
-        <td><%= person.active %></td>
+        <td><%= link_to "#{person.first_name} #{person.last_name}", person %></td>
         <td><%= link_to person.department.name, company_department_path(person.company, person.department) if person.department %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= person.items.count %></td>
+        <td>
+          <%= render "shared/buttons/edit", path: edit_person_path(person) %>
+          <%= render "shared/buttons/delete", path: person %>
+        </td>
       </tr>
     <% end %>
   </tbody>

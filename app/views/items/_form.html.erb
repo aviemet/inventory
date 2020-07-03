@@ -34,6 +34,23 @@
   </div>
 
   <div class="field">
+    <%= form.label :vendor_id %>
+    <div class="select">
+      <%= form.select :vendor_id, options_for_select(@vendors.collect{ |v| [v.name, v.id] }), prompt: "-- Vendor --" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.text_field :cost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :purchase_date %>
+    <%= form.text_field :purchase_date %>
+  </div>
+
+  <div class="field">
     <%= form.label :default_location_id %>
     <div class="select">
       <%= form.select :default_location_id, options_for_select(@locations.collect{ |l| [l.name, l.id] }), prompt: "-- Default Location --" %>

@@ -107,3 +107,7 @@ Everyday Rails Testing with RSpec
 Growing Rails Applications in Practice
 
 [Using Cell for UI Components](https://getflywheel.com/layout/how-to-build-ui-components-in-rails/)
+
+#### Conventions
+
+Use `number_to_currency` for displaying prices. Later we will store the currency as a preference and this will make it possible to easily switch between regions

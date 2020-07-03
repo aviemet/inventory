@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_models, only: [:edit, :new, :update, :create]
+  before_action :set_vendors, only: [:edit, :new, :update, :create]
   before_action :set_locations, only: [:edit, :new, :update, :create]
 
   # GET /items
@@ -74,12 +75,16 @@ class ItemsController < ApplicationController
     @models = Model.all
   end
 
+  def set_vendors
+    @vendors = Vendor.all
+  end
+
   def set_locations
     @locations = Location.all
   end
 
   # Only allow a list of trusted parameters through.
   def item_params
-    params.require(:item).permit(:title, :asset_tag, :serial, :model, :notes, :model_id, :default_location_id)
+    params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id)
   end
 end
