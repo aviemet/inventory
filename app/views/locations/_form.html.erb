@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :parent %>
+    <%= form.label :parent_id %>
     <div class="select">
       <%= form.select :parent_id, options_for_select(@locations.collect{ |l| [l.name, l.id] }), prompt: "-- Parent --" %>
     </div>
@@ -23,9 +23,7 @@
     <%= form.text_field :name %>
   </div>
 
-  <%= render "contacts/fields", form: form, model: location %>
-
   <div class="actions">
-    <%= form.submit 'Update Location', class: "secondary" %>
+    <%= form.submit %>
   </div>
 <% end %>

@@ -29,25 +29,26 @@ if Rails.env == "development"
 
   if User.count == 0
     person = Person.new({ first_name: "Avram", middle_name: "True", last_name: "Walden", employee_number: "1000", title: "IT Manager" })
-    User.create!({ email: "aviemet@gmail.com", password: "Complex1!", confirmed_at: Date.new, person: person })
-  end
+    user = User.create!({ email: "aviemet@gmail.com", password: "Complex1!", confirmed_at: Date.new, person: person })
+    user.add_role :super_admin
 
-  if Company.count == 0
-    company = Company.create({ name: "Example Company" })
-    User.first.add_role :admin, company
-    person.company = company
-    person.save
+    if Company.count == 0
+      company = Company.create({ name: "Example Company" })
+      user.add_role :admin, company
+      person.company = company
+      person.save
 
-    [
-      { name: "San Francisco Office", company: company },
-      { name: "IT Office", company: company, parent_id: 1 }
-    ].each{ |location| Location.create(location) } if Location.count == 0
-
-    if Department.count == 0
       [
-        { name: "IT Dept", location_id: 2, company: company },
-        { name: "Engineering", location_id: 2, company: company }
-      ].each{ |dept| Department.create(dept) }
+        { name: "San Francisco Office", company: company },
+        { name: "IT Office", company: company, parent_id: 1 }
+      ].each{ |location| Location.create(location) } if Location.count == 0
+
+      if Department.count == 0
+        [
+          { name: "IT Dept", location_id: 2, company: company },
+          { name: "Engineering", location_id: 2, company: company }
+        ].each{ |dept| Department.create(dept) }
+      end
     end
   end
 

@@ -10,11 +10,11 @@
   <tbody>
     <% locations.each do |location| %>
       <tr>
-        <td><%= link_to location.name, company_location_path(@company, location) %></td>
-        <td><%= link_to location.parent.name, company_location_path(@company, location.parent) if location&.parent_id %></td>
+        <td><%= link_to location.name, location_path(location) %></td>
+        <td><%= link_to location.parent.name, location_path(location.parent) if location&.parent_id %></td>
         <td>
-          <%= render "shared/buttons/edit_button", path: edit_company_location_path(@company, location) %>
-          <%= render "shared/buttons/delete_button", path: company_location_path(@company, location) %>
+          <%= render "shared/buttons/edit", path: edit_location_path(location) %>
+          <%= render "shared/buttons/delete", path: location_path(location) %>
         </td>
       </tr>
     <% end %>

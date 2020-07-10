@@ -6,7 +6,7 @@ class Ability
   def initialize(user)
     # Allow super_admin full control
     user ||= User.new # guest user (not logged in)
-    if user.has_role? :super_admin?
+    if user.has_role? :super_admin
       can :manage, :all
     else
       can :manage, Company, id: Company.with_role(:admin, user).pluck(:id)

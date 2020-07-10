@@ -17,13 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :location_id %>
     <div class="select">
-      <%= form.select :parent_id, options_for_select(@company.locations.collect{ |l| [l.name, l.id] }), prompt: "-- Location --" %>
+      <% company = @company || department.company %>
+      <%= form.select :location_id, options_for_select(company.locations.collect{ |l| [l.name, l.id] }, department.location_id), prompt: "-- Location --" %>
     </div>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :company_id, value: @company %>
   </div>
 
   <div class="actions">

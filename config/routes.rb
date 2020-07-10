@@ -19,13 +19,15 @@ Rails.application.routes.draw do
 
   resources :user_companies
   resources :companies do
-    resources :departments, :locations
+    resources :departments, except: [:index], shallow: true
+    resources :locations, except: [:index], shallow: true
   end
 
   resources :items
   resources :accessories
   resources :consumables
   get "checkout/:asset_type/:asset_id" => "assignments#checkout", as: :checkout
+  # post "checkout/:asset_type/:asset_id" => "assignments#"
   resources :accessory_categories
   resources :item_categories
   resources :models
