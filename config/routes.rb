@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :departments, :locations
   end
 
-  resources :items, path: :assets
+  resources :items
   resources :accessories
   resources :consumables
   get "checkout/:asset_type/:asset_id" => "assignments#checkout", as: :checkout

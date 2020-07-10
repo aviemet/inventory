@@ -65,7 +65,7 @@ class AssignmentsController < ApplicationController
   def checkout
     asset_class = params[:asset_type].capitalize.constantize
     @asset = asset_class.find(params[:asset_id])
-    # render `#{params[:asset_type].pluralize.downcase}/checkout`
+    render "#{params[:asset_type].pluralize.downcase}/checkout"
   end
 
   private

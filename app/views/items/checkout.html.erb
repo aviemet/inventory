@@ -1,5 +1,5 @@
 <div class="container">
-	<h1>Checkout</h1>
+	<h1>Checkout Asset</h1>
 
 	<%= form_with(model: @asset, local: true) do |form| %>
 		<% if @asset.errors.any? %>
@@ -15,8 +15,10 @@
 		<% end %>
 
 		<div class="field">
-			<%= @asset.inspect %>
+			<label>Model:</label>
+			<div><%= @asset.model.name %></div>
 		</div>
+
 	<% end %>
 
 </div>
