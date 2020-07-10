@@ -1,1 +1,1 @@
-<button>Checkout</button>
+<%= link_to "Checkout", checkout_path(asset.class.name.demodulize.downcase, asset.id), class: :button %>

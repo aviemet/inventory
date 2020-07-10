@@ -7,8 +7,8 @@ class AssignmentsController < ApplicationController
     @assignments = Assignment.all
   end
 
-  # GET /assignments/1
-  # GET /assignments/1.json
+  # GET /assignments/:id
+  # GET /assignments/:id.json
   def show
   end
 
@@ -17,7 +17,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.new
   end
 
-  # GET /assignments/1/edit
+  # GET /assignments/:id/edit
   def edit
   end
 
@@ -37,8 +37,8 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assignments/1
-  # PATCH/PUT /assignments/1.json
+  # PATCH/PUT /assignments/:id
+  # PATCH/PUT /assignments/:id.json
   def update
     respond_to do |format|
       if @assignment.update(assignment_params)
@@ -51,8 +51,8 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # DELETE /assignments/1
-  # DELETE /assignments/1.json
+  # DELETE /assignments/:id
+  # DELETE /assignments/:id.json
   def destroy
     @assignment.destroy
     respond_to do |format|
@@ -61,14 +61,22 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_assignment
-      @assignment = Assignment.find(params[:id])
-    end
+  # GET /checkout/:asset_type/:asset_id
+  def checkout
+    asset_class = params[:asset_type].capitalize.constantize
+    @asset = asset_class.find(params[:asset_id])
+    # render `#{params[:asset_type].pluralize.downcase}/checkout`
+  end
 
-    # Only allow a list of trusted parameters through.
-    def assignment_params
-      params.require(:assignment).permit(:assignable_id, :assignable_type, :item_id, :active)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_assignment
+    @assignment = Assignment.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def assignment_params
+    params.require(:assignment).permit(:assignable_id, :assignable_type, :item_id, :active)
+  end
 end
