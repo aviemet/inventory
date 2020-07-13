@@ -1,5 +1,14 @@
-.alert {
+#flash {
+	position: fixed;
+	top: 30px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1001;
+  text-align: center;
+  width: min(900px, 90vw);
+}
 
+.alert {
   label.close {
     cursor: pointer;
     display: flex;
@@ -13,10 +22,7 @@
 
 /*Banner open/load animation*/
 .alert-banner {
-  animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  width: 65%;
-  max-width: 1200px;
-  min-width: 200px;
+  animation: slide-in-top var(--alert-animation-speed) cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   margin: 0 auto;
 
   &, label.close {

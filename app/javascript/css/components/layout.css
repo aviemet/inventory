@@ -2,14 +2,6 @@ body {
 	overflow: hidden;
 }
 
-#flash {
-	position: fixed;
-	top: 30px;
-	width: 100vw;
-	z-index: 1001;
-	text-align: center;
-}
-
 #grid-layout {
 	height: 100vh;
 	grid-template-columns: var(--sidebar-width-open) 1fr;

@@ -22,4 +22,6 @@
   --sidebar-link-border-left: 3px;
   --sidebar-link-border-bottom: 1px;
   --sidebar-link-padding-left: 15px;
+
+  --alert-animation-speed: 0.5s;
 }
