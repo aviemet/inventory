@@ -14,7 +14,7 @@
   <div class="field">
     <%= form.label :parent_id %>
     <div class="select">
-      <%= form.select :parent_id, options_for_select(@locations.collect{ |l| [l.name, l.id] }), prompt: "-- Parent --" %>
+      <%= form.select :parent_id, options_for_select(@locations.collect{ |l| [l.name, l.id] }, location.parent_id), prompt: "-- Parent --" %>
     </div>
   </div>
 
