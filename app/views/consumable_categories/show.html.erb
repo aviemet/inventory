@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @consumable_category.name %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @consumable_category.notes %>
+</p>
+
+<%= link_to 'Edit', edit_consumable_category_path(@consumable_category) %> |
+<%= link_to 'Back', consumable_categories_path %>

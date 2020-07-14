@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_232454) do
+ActiveRecord::Schema.define(version: 2020_07_14_035238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2020_06_22_232454) do
     t.decimal "cost", precision: 10, scale: 2
     t.date "purchase_date"
     t.boolean "requestable"
-    t.boolean "consumable"
     t.text "notes"
     t.bigint "manufacturer_id", null: false
     t.bigint "accessory_category_id", null: false
@@ -83,6 +82,33 @@ ActiveRecord::Schema.define(version: 2020_06_22_232454) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_companies_on_name", unique: true
+  end
+
+  create_table "consumable_categories", force: :cascade do |t|
+    t.string "name"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "consumables", force: :cascade do |t|
+    t.string "name"
+    t.string "model_number"
+    t.integer "min_qty"
+    t.integer "qty"
+    t.decimal "cost", precision: 10, scale: 2
+    t.boolean "requestable"
+    t.text "notes"
+    t.bigint "manufacturer_id", null: false
+    t.bigint "consumable_category_id", null: false
+    t.bigint "vendor_id", null: false
+    t.bigint "default_location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumable_category_id"], name: "index_consumables_on_consumable_category_id"
+    t.index ["default_location_id"], name: "index_consumables_on_default_location_id"
+    t.index ["manufacturer_id"], name: "index_consumables_on_manufacturer_id"
+    t.index ["vendor_id"], name: "index_consumables_on_vendor_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -428,9 +454,14 @@ ActiveRecord::Schema.define(version: 2020_06_22_232454) do
 
   add_foreign_key "accessories", "accessory_categories"
   add_foreign_key "accessories", "locations", column: "default_location_id"
+  add_foreign_key "accessories", "manufacturers"
   add_foreign_key "accessories", "vendors"
   add_foreign_key "addresses", "contacts"
   add_foreign_key "assignments", "items"
+  add_foreign_key "consumables", "consumable_categories"
+  add_foreign_key "consumables", "locations", column: "default_location_id"
+  add_foreign_key "consumables", "manufacturers"
+  add_foreign_key "consumables", "vendors"
   add_foreign_key "contracts", "contract_types"
   add_foreign_key "contracts", "vendors"
   add_foreign_key "departments", "locations"

@@ -3,7 +3,7 @@
     <tr>
       <th>Name</th>
       <th>Parent</th>
-      <th>Actions</th>
+      <th class="table-column-fit text-center">Actions</th>
     </tr>
   </thead>
 
@@ -12,7 +12,7 @@
       <tr>
         <td><%= link_to location.name, location_path(location) %></td>
         <td><%= link_to location.parent.name, location_path(location.parent) if location&.parent_id %></td>
-        <td>
+        <td nowrap>
           <%= render "shared/buttons/edit", path: edit_location_path(location) %>
           <%= render "shared/buttons/delete", path: location_path(location) %>
         </td>

@@ -11,6 +11,61 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :model_number %>
+    <%= form.text_field :model_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :min_qty %>
+    <%= form.number_field :min_qty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :qty %>
+    <%= form.number_field :qty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.text_field :cost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :requestable %>
+    <%= form.check_box :requestable %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manufacturer_id %>
+    <%= form.text_field :manufacturer_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :consumable_category_id %>
+    <%= form.text_field :consumable_category_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vendor_id %>
+    <%= form.text_field :vendor_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :default_location_id %>
+    <%= form.text_field :default_location_id %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

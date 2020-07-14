@@ -69,6 +69,6 @@ class ConsumablesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def consumable_params
-      params.fetch(:consumable, {})
+      params.require(:consumable).permit(:name, :model_number, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :consumable_category_id, :vendor_id, :default_location_id)
     end
 end

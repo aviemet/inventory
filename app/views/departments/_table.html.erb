@@ -3,7 +3,7 @@
     <tr>
       <th>Name</th>
       <th>Location</th>
-      <th colspan="2"></th>
+      <th class="table-column-fit text-center">Actions</th>
     </tr>
   </thead>
 
@@ -12,8 +12,10 @@
       <tr>
         <td><%= link_to department.name, department_path(department) %></td>
         <td><%= link_to department.location.name, location_path(department.location) if department.location %></td>
-        <td><%= link_to 'Edit', edit_department_path(department) %></td>
-        <td><%= link_to 'Destroy', department_path(department), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td nowrap>
+          <%= render "shared/buttons/edit", path: edit_department_path(department) %>
+          <%= render "shared/buttons/delete", path: department_path(department) %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -28,8 +28,9 @@ Rails.application.routes.draw do
   resources :consumables
   get "checkout/:asset_type/:asset_id" => "assignments#checkout", as: :checkout
   # post "checkout/:asset_type/:asset_id" => "assignments#"
-  resources :accessory_categories
   resources :item_categories
+  resources :accessory_categories
+  resources :consumable_categories
   resources :models
   resources :manufacturers
   resources :licenses
@@ -54,6 +55,4 @@ Rails.application.routes.draw do
   resources :vendors
 
   resources :custom_fieldset_associations
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

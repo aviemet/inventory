@@ -9,7 +9,6 @@ class CreateAccessories < ActiveRecord::Migration[6.0]
       t.decimal :cost, precision: 10, scale: 2
       t.date :purchase_date
       t.boolean :requestable
-      t.boolean :consumable
       t.text :notes
       t.references :manufacturer, null: false, foreign_key: true
       t.references :accessory_category, null: false, foreign_key: true

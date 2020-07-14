@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   include Ownable
+  include Assignable
   include Purchasable
   include Fieldable
 

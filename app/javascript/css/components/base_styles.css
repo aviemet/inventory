@@ -34,24 +34,34 @@ a {
   }
 }
 
-table {
+/**
+ * TABLE
+ **/
+
+th {
+  text-align: left;
+  @apply pl-4;
+  @apply pr-4;
+}
+
+td {
+  @apply px-4 py-2;
+}
+
+th, td {
+  &.table-column-fit {
+    width: 1px;
+    white-space: nowrap;
+  }
+}
+
+tbody {
   td {
-    @apply px-4 py-2;
+    @apply border;
   }
 
-  th {
-    text-align: left;
-    @apply pl-4;
-  }
-
-  tbody {
-    td {
-      @apply border;
-    }
-
-    tr:nth-child(even) {
-      @apply bg-cyan-200;
-    }
+  tr:nth-child(even) {
+    @apply bg-cyan-200;
   }
 }
 
