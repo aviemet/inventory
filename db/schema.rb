@@ -67,14 +67,15 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   end
 
   create_table "assignments", force: :cascade do |t|
+    t.string "receivable_type", null: false
+    t.bigint "receivable_id", null: false
     t.string "assignable_type", null: false
     t.bigint "assignable_id", null: false
-    t.bigint "item_id", null: false
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
-    t.index ["item_id"], name: "index_assignments_on_item_id"
+    t.index ["receivable_type", "receivable_id"], name: "index_assignments_on_receivable_type_and_receivable_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -457,7 +458,6 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   add_foreign_key "accessories", "manufacturers"
   add_foreign_key "accessories", "vendors"
   add_foreign_key "addresses", "contacts"
-  add_foreign_key "assignments", "items"
   add_foreign_key "consumables", "consumable_categories"
   add_foreign_key "consumables", "locations", column: "default_location_id"
   add_foreign_key "consumables", "manufacturers"
