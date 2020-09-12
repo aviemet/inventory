@@ -6,13 +6,13 @@
     "dev": "NODE_ENV=development foreman start -f Procfile.dev-server"
   },
   "dependencies": {
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
+    "@rails/actioncable": "^6.0.3",
+    "@rails/activestorage": "^6.0.3",
+    "@rails/ujs": "^6.0.3",
     "@rails/webpacker": "5.1.1",
-    "postcss-nested": "^4.2.1",
+    "postcss-nested": "^4.2.3",
     "stimulus": "^1.1.1",
-    "tailwindcss": "^1.4.6",
+    "tailwindcss": "^1.8.8",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
