@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development foreman start -f Procfile.dev-server"
+    "start": "NODE_ENV=development foreman start -f Procfile.dev-server"
   },
   "dependencies": {
     "@rails/actioncable": "^6.0.3",
