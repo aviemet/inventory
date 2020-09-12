@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :ip, "Network With Mask" %>
-    <%= form.text_field :ip, placeholder: "192.168.1.0/24" %>
+    <%= form.text_field :ip, value: @network.ip && "#{@network.ip}/#{@network.ip.prefix}", placeholder: "192.168.1.0/24" %>
   </div>
 
   <div class="field">
