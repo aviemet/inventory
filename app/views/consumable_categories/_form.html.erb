@@ -1,27 +1,5 @@
-<%= form_with(model: consumable_category, local: true) do |form| %>
-  <% if consumable_category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(consumable_category.errors.count, "error") %> prohibited this consumable_category from being saved:</h2>
-
-      <ul>
-        <% consumable_category.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_area :notes %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<%= simple_form_for consumable_category do |form| %>
+  <%= form.input :name %>
+  <%= form.input :notes %>
+  <%= form.submit %>
 <% end %>

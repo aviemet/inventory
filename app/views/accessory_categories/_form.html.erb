@@ -1,27 +1,5 @@
-<%= form_with(model: accessory_category, local: true) do |form| %>
-  <% if accessory_category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(accessory_category.errors.count, "error") %> prohibited this accessory_category from being saved:</h2>
-
-      <ul>
-        <% accessory_category.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_field :notes %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<%= simple_form_for accessory_category do |form| %>
+  <%= form.input :name %>
+  <%= form.input :notes %>
+  <%= form.submit %>
 <% end %>

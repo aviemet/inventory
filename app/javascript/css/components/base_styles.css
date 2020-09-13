@@ -191,7 +191,7 @@ select {
   }
 }
 
-.select {
+.select-wrapper {
   position: relative;
   cursor: pointer;
   appearance: none;
