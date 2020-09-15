@@ -111,3 +111,7 @@ Growing Rails Applications in Practice
 #### Conventions
 
 Use `number_to_currency` for displaying prices. Later we will store the currency as a preference and this will make it possible to easily switch between regions
+
+### Dev Notes
+
+Companies are essentially top level organizational units. All other objects can be considered to belong to a company with an "Ownership" relationship. Company association is polymorphic, so any forms must use the `form_for` method and handle the assignment in the controller. This could possibly be a method to include in a concern.

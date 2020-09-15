@@ -71,6 +71,10 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.bigint "receivable_id", null: false
     t.string "assignable_type", null: false
     t.bigint "assignable_id", null: false
+    t.date "date_assigned"
+    t.date "date_expected"
+    t.date "date_returned"
+    t.text "notes"
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

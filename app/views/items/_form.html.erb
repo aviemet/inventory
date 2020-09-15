@@ -1,77 +1,17 @@
-<%= form_with(model: item, local: true) do |form| %>
-  <% if item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-      <ul>
-        <% item.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= simple_form_for item do |form| %>
   <%= form.fields_for :company, item.company || Company.new do |company_form| %>
-    <div class="field">
-      <%= company_form.label "Company" %>
-      <div class="select">
-        <%= company_form.select :id, options_for_select(@companies.collect{ |c| [c.name, c.id] }), prompt: "-- Company --" %>
-      </div>
-    </div>
+    <%= company_form.input :id, as: :select, collection: @companies, prompt: "-- Company --", label: "Company" %>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+  <%= form.input :title %>
+  <%= form.input :asset_tag %>
+  <%= form.input :serial %>
+  <%= form.input :model_id, as: :select, collection: @models, prompt: "-- Model --" %>
+  <%= form.input :vendor_id, as: :select, collection: @vendors, prompt: "-- Vendor --" %>
 
-  <div class="field">
-    <%= form.label :asset_tag %>
-    <%= form.text_field :asset_tag %>
-  </div>
-
-  <div class="field">
-    <%= form.label :serial %>
-    <%= form.text_field :serial %>
-  </div>
-
-  <div class="field">
-    <%= form.label :model_id %>
-    <div class="select">
-      <%= form.select :model_id, options_for_select(@models.collect{ |m| ["#{m.manufacturer.name} - #{m.name}", m.id] }), prompt: "-- Model --" %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= form.label :vendor_id %>
-    <div class="select">
-      <%= form.select :vendor_id, options_for_select(@vendors.collect{ |v| [v.name, v.id] }), prompt: "-- Vendor --" %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= form.label :cost %>
-    <%= form.text_field :cost %>
-  </div>
-
-  <div class="field">
-    <%= form.label :purchase_date %>
-    <%= form.text_field :purchase_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :default_location_id %>
-    <div class="select">
-      <%= form.select :default_location_id, options_for_select(@locations.collect{ |l| [l.name, l.id] }), prompt: "-- Default Location --" %>
-    </div>
-  </div>
-
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_area :notes %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.input :cost, as: :currency %>
+  <%= form.input :purchase_date %>
+  <%= form.input :default_location_id, as: :select, collection: @locations, prompt: "-- Default Location --" %>
+  <%= form.input :notes %>
+  <%= form.submit %>
 <% end %>
