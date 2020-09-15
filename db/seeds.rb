@@ -77,4 +77,17 @@ if Rails.env == "development"
     ].each{ |model| Model.create(model) }
   end
 
+  if Vendor.count == 0
+    [
+      {
+        name: "Amazon",
+        url: "www.amazon.com"
+      }, 
+      {
+        name: "CDW",
+        url: "www.cdw.com"
+      }
+    ].each{ |vendor| Vendor.create(vendor) }
+  end
+
 end
