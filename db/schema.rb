@@ -67,10 +67,10 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   end
 
   create_table "assignments", force: :cascade do |t|
-    t.string "receivable_type", null: false
-    t.bigint "receivable_id", null: false
     t.string "assignable_type", null: false
     t.bigint "assignable_id", null: false
+    t.string "assign_toable_type", null: false
+    t.bigint "assign_toable_id", null: false
     t.date "date_assigned"
     t.date "date_expected"
     t.date "date_returned"
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["assign_toable_type", "assign_toable_id"], name: "index_assignments_on_assign_toable_type_and_assign_toable_id"
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
-    t.index ["receivable_type", "receivable_id"], name: "index_assignments_on_receivable_type_and_receivable_id"
   end
 
   create_table "companies", force: :cascade do |t|

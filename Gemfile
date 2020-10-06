@@ -74,6 +74,9 @@ group :development, :test do
 
   # Use pry as the rails console
   gem "pry-rails", "~> 0.3.9"
+
+  # Use rubocop for linting
+  gem "rubocop", "~> 0.85.1"
 end
 
 group :development do
@@ -91,7 +94,6 @@ group :development do
 
   # Language server for ruby
   gem "solargraph", "~> 0.39.7"
-  gem "rubocop", "~> 0.85.1"
 
   # Live reloading of server code
   gem "guard", "~> 2.16"

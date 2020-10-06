@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :items
   resources :accessories
   resources :consumables
+  resources :assignments
   get "checkout/:asset_type/:asset_id" => "assignments#checkout", as: :checkout
   # post "checkout/:asset_type/:asset_id" => "assignments#"
   resources :item_categories
@@ -35,7 +36,6 @@ Rails.application.routes.draw do
   resources :manufacturers
   resources :licenses
   resources :warranties
-  resources :assignments
   resources :status_types
 
   resources :fields

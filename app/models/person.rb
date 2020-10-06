@@ -1,7 +1,7 @@
 class Person < ApplicationRecord
   include Ownable
   include Contactable
-  include Receivable
+  include AssignToable
   include Fieldable
 
   belongs_to :manager, class_name: 'Person', optional: true
