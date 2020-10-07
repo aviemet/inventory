@@ -8,12 +8,18 @@
 		</div>
 	</div>
 
-	<%= simple_form_for @asset do |form| %>
-		<%= form.input :title, label: "Asset Name" %>
+	<%= simple_form_for @assignment do |form| %>
+
+		<%= form.simple_fields_for @asset do |asset| %>
+			<%= asset.input :title, label: "Asset Name" %>
+		<% end %>
+
 		<div>Checkout To:</div>
 		<%= form.input :date_assigned %>
 		<%= form.input :date_expected %>
 		<%= form.input :notes %>
+
+		<%= form.submit %>
 	<% end %>
 
 </div>

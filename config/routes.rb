@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :items
   resources :accessories
   resources :consumables
-  resources :assignments
+  resources :assignments, except: [:new]
   get "checkout/:asset_type/:asset_id" => "assignments#checkout", as: :checkout
   # post "checkout/:asset_type/:asset_id" => "assignments#"
   resources :item_categories

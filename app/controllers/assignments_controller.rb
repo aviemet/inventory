@@ -1,5 +1,5 @@
 class AssignmentsController < ApplicationController
-  before_action :set_assignment, only: [:show, :edit, :update, :destroy]
+  before_action :set_assignment, only: [:show, :edit, :update, :destroyt]
 
   # GET /assignments
   # GET /assignments.json
@@ -12,9 +12,12 @@ class AssignmentsController < ApplicationController
   def show
   end
 
-  # GET /assignments/new
-  def new
+  # GET /checkout/:asset_type/:asset_id
+  def checkout
     @assignment = Assignment.new
+    asset_class = params[:asset_type].capitalize.constantize
+    @asset = asset_class.find(params[:asset_id])
+    render "#{params[:asset_type].pluralize.downcase}/checkout"
   end
 
   # GET /assignments/:id/edit
@@ -59,13 +62,6 @@ class AssignmentsController < ApplicationController
       format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  # GET /checkout/:asset_type/:asset_id
-  def checkout
-    asset_class = params[:asset_type].capitalize.constantize
-    @asset = asset_class.find(params[:asset_id])
-    render "#{params[:asset_type].pluralize.downcase}/checkout"
   end
 
   private
