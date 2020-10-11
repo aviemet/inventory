@@ -22,6 +22,7 @@ import '../css/application.css'
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 
+// Load all StimulusJs controllers
 const application = Application.start()
 const context = require.context("controllers", true, /.js$/)
 application.load(definitionsFromContext(context))
