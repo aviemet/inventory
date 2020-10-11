@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :ownerships
 
   resources :user_companies
+  # Departments and Locations considered to belong to a Company
   resources :companies do
     resources :departments, except: [:index], shallow: true
     resources :locations, except: [:index], shallow: true
@@ -26,9 +27,12 @@ Rails.application.routes.draw do
   resources :items
   resources :accessories
   resources :consumables
-  resources :assignments, except: [:new]
-  get "checkout/:asset_type/:asset_id" => "assignments#checkout", as: :checkout
-  # post "checkout/:asset_type/:asset_id" => "assignments#"
+
+  # Use /checkout as a verb in the url to define asset assigments
+  scope :checkout do
+    resources :assignments, path: ":asset_type/:asset_id"
+  end
+
   resources :item_categories
   resources :accessory_categories
   resources :consumable_categories

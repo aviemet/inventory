@@ -13,7 +13,7 @@ class AssignmentsController < ApplicationController
   end
 
   # GET /checkout/:asset_type/:asset_id
-  def checkout
+  def new
     @assignment = Assignment.new
     asset_class = params[:asset_type].capitalize.constantize
     @asset = asset_class.find(params[:asset_id])
