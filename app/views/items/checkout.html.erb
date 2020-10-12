@@ -14,20 +14,7 @@
 			<%= asset.input :title, label: "Asset Name" %>
 		<% end %>
 
-		<div data-controller="checkout">
-			Checkout To:
-			<span class="radio-buttons" data-action="click->checkout#buttons">
-				<input type="radio" id="checkout_user" name="checkout_type" value="user" checked />
-				<label for="checkout_user">User</label>
-				<input type="radio" id="checkout_asset" name="checkout_type" value="asset" />
-				<label for="checkout_asset">Asset</label>
-				<input type="radio" id="checkout_location" name="checkout_type" value="location" />
-				<label for="checkout_location">Location</label>
-			</span>
-
-			<div data-target="checkout.input"></div>
-		</div>
-
+		<%= render "shared/buttons/checkout_type", form: form %>
 
 		<%= form.input :date_assigned %>
 		<%= form.input :date_expected %>

@@ -6,7 +6,7 @@
 @import "components/alerts";
 @import "components/grid";
 @import "components/base_styles";
-@import "components/special_components.css";
+@import "components/radio-buttons.css";
 
 
 :root {

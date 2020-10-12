@@ -1,8 +1,14 @@
 class DepartmentsController < ApplicationController
   before_action :set_department, only: [:show, :edit, :update, :destroy]
 
-  # GET /departments/:id
-  # GET /departments/:id.json
+  # GET /companies/:company_id/departments
+  # GET /companies/:company_id/departments.json
+  def index
+    @departments = Department.where(company: params[:company_id])
+  end
+
+  # GET /companies/:company_id/departments/:id
+  # GET /companies/:company_id/departments/:id.json
   def show
   end
 

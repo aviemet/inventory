@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   resources :user_companies
   # Departments and Locations considered to belong to a Company
   resources :companies do
-    resources :departments, except: [:index], shallow: true
-    resources :locations, except: [:index], shallow: true
+    resources :departments, shallow: true
+    resources :locations, shallow: true
   end
 
   resources :items

@@ -8,11 +8,11 @@ export default class extends Controller {
 		if(!/^\d$/.test(e.target.value)) return
 		
 		const url = this.data.get("departmentsUrl").replace(":id", e.target.value)
+		console.log({ url })
 		
 		fetch(url)
 			.then(response => response.text())
 			.then(text => {
-				console.log({ text, json: JSON.parse(text) })
 				const json = JSON.parse(text)
 				
 				const options = ["<option>-- Department --</option>"]
