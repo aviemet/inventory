@@ -9,6 +9,9 @@ class Person < ApplicationRecord
 
   before_validation :ensure_associated_contact
 
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+
   private
 
   def ensure_associated_contact

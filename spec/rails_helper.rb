@@ -82,4 +82,7 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  # FactoryBot
+  config.include FactoryBot::Syntax::Methods
 end

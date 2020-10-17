@@ -5,4 +5,6 @@ class Location < ApplicationRecord
 
   resourcify
   belongs_to :parent, class_name: "Location", required: false
+  
+  validates_presence_of :name
 end

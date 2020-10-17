@@ -334,7 +334,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.string "employee_number"
     t.string "title"
     t.bigint "manager_id"

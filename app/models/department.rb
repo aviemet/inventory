@@ -13,5 +13,7 @@ class Department < ApplicationRecord
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
 
+  validates_presence_of :name
+  
   default_scope { includes(:ownerships) }
 end
