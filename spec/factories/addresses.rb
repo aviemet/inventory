@@ -6,7 +6,7 @@ FactoryBot.define do
     zone { Faker::Address.state }
     postal { Faker::Address.zip }
     notes { Faker::Lorem.sentence }
-    contact { create(:contact) }
-    address_type { AddressType.first || create(:address_type) }
+    association :contact, factory: :contact
+    association :address_type, factory: :address_type
   end
 end
