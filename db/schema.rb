@@ -54,10 +54,10 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.string "address", null: false
     t.string "address_2"
     t.string "city"
-    t.string "state"
-    t.string "zip"
+    t.string "region"
+    t.string "country"
+    t.string "postal"
     t.text "notes"
-    t.boolean "primary"
     t.bigint "contact_id", null: false
     t.bigint "address_type_id"
     t.datetime "created_at", precision: 6, null: false
@@ -122,7 +122,13 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.bigint "contactable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "primary_address_id"
+    t.bigint "primary_phone_id"
+    t.bigint "primary_email_id"
     t.index ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id"
+    t.index ["primary_address_id"], name: "index_contacts_on_primary_address_id"
+    t.index ["primary_email_id"], name: "index_contacts_on_primary_email_id"
+    t.index ["primary_phone_id"], name: "index_contacts_on_primary_phone_id"
   end
 
   create_table "contract_types", force: :cascade do |t|
@@ -162,7 +168,6 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   create_table "emails", force: :cascade do |t|
     t.string "email"
     t.text "notes"
-    t.boolean "primary"
     t.bigint "contact_id", null: false
     t.bigint "email_type_id"
     t.datetime "created_at", precision: 6, null: false
@@ -219,6 +224,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.date "purchase_date"
     t.boolean "requestable", default: true
     t.text "notes"
+    t.bigint "item_category_id"
     t.bigint "model_id", null: false
     t.bigint "vendor_id"
     t.bigint "default_location_id"
@@ -227,6 +233,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["asset_tag"], name: "index_items_on_asset_tag", unique: true
     t.index ["default_location_id"], name: "index_items_on_default_location_id"
+    t.index ["item_category_id"], name: "index_items_on_item_category_id"
     t.index ["model_id"], name: "index_items_on_model_id"
     t.index ["parent_id"], name: "index_items_on_parent_id"
     t.index ["serial"], name: "index_items_on_serial", unique: true
@@ -353,7 +360,6 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.string "number", null: false
     t.string "extension"
     t.text "notes"
-    t.boolean "primary"
     t.bigint "contact_id", null: false
     t.bigint "phone_type_id"
     t.datetime "created_at", precision: 6, null: false
@@ -466,6 +472,9 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   add_foreign_key "consumables", "locations", column: "default_location_id"
   add_foreign_key "consumables", "manufacturers"
   add_foreign_key "consumables", "vendors"
+  add_foreign_key "contacts", "addresses", column: "primary_address_id"
+  add_foreign_key "contacts", "emails", column: "primary_email_id"
+  add_foreign_key "contacts", "phones", column: "primary_phone_id"
   add_foreign_key "contracts", "contract_types"
   add_foreign_key "contracts", "vendors"
   add_foreign_key "departments", "locations"

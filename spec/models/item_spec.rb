@@ -4,6 +4,16 @@ require 'models/concerns/purchasable'
 require 'models/concerns/fieldable'
 
 RSpec.describe Item, type: :model do
+  subject {
+    create(:item)
+  }
+  
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      subject.parent = create(:item)
+      expect(subject).to be_valid
+    end
+  end
 
   describe "Associations" do
     it_behaves_like "ownable"

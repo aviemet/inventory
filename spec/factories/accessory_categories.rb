@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :accessory_category do
-    name { "MyString" }
-    notes { "MyString" }
+    name { Faker::Company.buzzword }
+    notes { Faker::Lorem.sentence }
   end
 end

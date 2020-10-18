@@ -30,6 +30,11 @@ RSpec.describe Person, type: :model do
       expect(subject).to be_valid
     end
 
+    it "is valid without a manager" do
+      subject.manager = nil
+      expect(subject).to be_valid
+    end
+
     it "is not valid without a first name" do
       subject.first_name = nil
       expect(subject).to_not be_valid

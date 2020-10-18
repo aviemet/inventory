@@ -5,6 +5,7 @@ class Department < ApplicationRecord
 
   resourcify
   belongs_to :location, optional: true
+  belongs_to :manager, class_name: :Person, optional: true
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
   # 	Department.items, Department.contracts, etc.

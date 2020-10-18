@@ -17,6 +17,11 @@ RSpec.describe Department, type: :model do
       subject.location = nil
       expect(subject).to be_valid
     end
+
+    it "is valid without a manager" do
+      subject.manager = nil
+      expect(subject).to be_valid
+    end
   end
 
   describe "Associations" do

@@ -4,5 +4,7 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     employee_number { Faker::Number.number }
     title { Faker::Job.title }
+    active { true }
+    company { create(:company) }
   end
 end

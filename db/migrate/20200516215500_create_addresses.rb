@@ -4,10 +4,10 @@ class CreateAddresses < ActiveRecord::Migration[6.0]
       t.string :address, null: false
       t.string :address_2
       t.string :city
-      t.string :state
-      t.string :zip
+      t.string :region # state/province/territory etc
+      t.string :country
+      t.string :postal
       t.text :notes
-      t.boolean :primary
       t.references :contact, null: false, foreign_key: true
       t.references :address_type
 
