@@ -26,7 +26,6 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
-    set_company
 
     respond_to do |format|
       if @item.save
@@ -66,7 +65,6 @@ class ItemsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_item
     @item = Item.find(params[:id])
   end
@@ -75,14 +73,13 @@ class ItemsController < ApplicationController
     @models = Model.all
     @vendors = Vendor.all
     @locations = Location.all
-    @companies = Company.all.joins(:users).where(users: { id: current_user.id })
+    @companies = current_user.companies
   end
 
   def set_company
     @item.company = Company.find(params[:item][:company_attributes][:id]) if params[:item][:company_attributes]
   end
 
-  # Only allow a list of trusted parameters through.
   def item_params
     params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchase_date, :requestable)
   end
