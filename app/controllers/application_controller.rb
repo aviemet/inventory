@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
   # end
   # raise CanCan::AccessDenied.new("You are not authorized to perform this action!", :custom_action, Project)
 
+  def default_url_options
+    current_user.update(active_company: current_user.companies.first) unless current_user.active_company
+    { company: current_user.active_company || current_user.companies.first }
+  end
+
   private
 
   def record_not_found

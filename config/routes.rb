@@ -5,60 +5,63 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :people
-  resources :contacts
-  resources :phones
-  resources :phone_types
-  resources :emails
-  resources :email_types
-  resources :address_types
-  resources :addresses
-  resources :websites
-
   resources :ownerships
 
-  resources :user_companies
-  # Departments and Locations considered to belong to a Company
   resources :companies do
     resources :departments, shallow: true
     resources :locations, shallow: true
   end
 
-  resources :items
-  resources :accessories
-  resources :consumables
+  resources :phone_types
+  resources :email_types
+  resources :address_types
 
-  # Use /checkout as a verb in the url to define asset assigments
-  scope :checkout do
-    resources :assignments, path: ":asset_type/:asset_id"
-  end
+  resources :contract_types
 
   resources :item_categories
   resources :accessory_categories
   resources :consumable_categories
-  resources :models
-  resources :manufacturers
-  resources :licenses
-  resources :warranties
+
   resources :status_types
 
-  resources :fields
-  resources :fieldsets
-  resources :fieldset_associations
+  scope "/:company" do
+    resources :people do
+      resources :contacts
+    end
+    
+    resources :items do
+      resources :nics
+    end
 
-  resources :nics
-  resources :nics_ips
-  resources :ips
-  resources :networks
+    resources :accessories
+    resources :consumables
 
-  resources :orders
-  resources :purchases
+    # Use /checkout as a verb in the url to define asset assigments
+    scope :checkout do
+      resources :assignments, path: ":asset_type/:asset_id"
+    end
 
-  resources :contracts
-  resources :contract_types
-  resources :vendors
+    resources :models
+    resources :manufacturers
+    resources :licenses
+    resources :warranties
 
-  resources :custom_fieldset_associations
+    resources :fields
+    resources :fieldsets
+    resources :fieldset_associations
+
+    resources :ips
+    resources :nics_ips
+    resources :networks
+
+    resources :orders
+    resources :purchases
+
+    resources :contracts
+    resources :vendors
+
+    resources :custom_fieldset_associations
+  end
 
   scope "/partials" do
     scope "/dropdown" do
