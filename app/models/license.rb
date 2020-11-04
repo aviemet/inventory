@@ -3,4 +3,16 @@ class License < ApplicationRecord
   include Assignable
   include Purchasable
   include Fieldable
+
+  resourcify
+
+  belongs_to :license_category
+  belongs_to :vendor
+  belongs_to :manufacturer
+
+  validates_presence_of :name
+
+  def self.dropdown_display
+    "name"
+  end
 end

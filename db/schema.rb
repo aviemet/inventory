@@ -240,16 +240,33 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.index ["vendor_id"], name: "index_items_on_vendor_id"
   end
 
-  create_table "licenses", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.integer "seats"
-    t.text "key"
-    t.bigint "model_id"
+  create_table "license_categories", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["key"], name: "index_licenses_on_key", unique: true
-    t.index ["model_id"], name: "index_licenses_on_model_id"
+  end
+
+  create_table "licenses", force: :cascade do |t|
+    t.string "name"
+    t.integer "seats"
+    t.text "key"
+    t.string "licenser_name"
+    t.string "licenser_email"
+    t.boolean "reassignable"
+    t.decimal "cost", precision: 10, scale: 2
+    t.date "purchased_at"
+    t.date "expires_at"
+    t.date "terminates_at"
+    t.boolean "maintained"
+    t.text "notes"
+    t.bigint "license_category_id", null: false
+    t.bigint "vendor_id"
+    t.bigint "manufacturer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["license_category_id"], name: "index_licenses_on_license_category_id"
+    t.index ["manufacturer_id"], name: "index_licenses_on_manufacturer_id"
+    t.index ["vendor_id"], name: "index_licenses_on_vendor_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -485,7 +502,9 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   add_foreign_key "items", "locations", column: "default_location_id"
   add_foreign_key "items", "models"
   add_foreign_key "items", "vendors"
-  add_foreign_key "licenses", "models"
+  add_foreign_key "licenses", "license_categories"
+  add_foreign_key "licenses", "manufacturers"
+  add_foreign_key "licenses", "vendors"
   add_foreign_key "locations", "locations", column: "parent_id"
   add_foreign_key "models", "item_categories"
   add_foreign_key "models", "manufacturers"

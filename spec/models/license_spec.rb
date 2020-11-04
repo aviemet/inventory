@@ -5,6 +5,9 @@ require 'models/concerns/fieldable'
 require 'models/concerns/assignable'
 
 RSpec.describe License, type: :model do
+  subject {
+    create(:license)
+  }
 
   describe "Associations" do
     it_behaves_like "ownable"

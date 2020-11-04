@@ -1,24 +1,61 @@
-
-
 <p>
-  <strong>Title:</strong>
-  <%= @license.title %>
+  <strong>Name:</strong>
+  <%= @license.name %>
 </p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @license.description %>
-</p>
-
 <p>
   <strong>Seats:</strong>
   <%= @license.seats %>
 </p>
-
 <p>
   <strong>Key:</strong>
   <%= @license.key %>
 </p>
-
+<p>
+  <strong>Licensed to:</strong>
+  <ul>
+    <li>Name: <%= @license.licenser_name %></li>
+    <li>Email: <%= @license.licenser_email %></li>
+  </ul>
+</p>
+<p>
+  <strong>Reassignable:</strong>
+  <%= @license.reassignable %>
+</p>
+<p>
+  <strong>Maintained:</strong>
+  <%= @license.maintained %>
+</p>
+<p>
+  <strong>Cost:</strong>
+  <%= @license.cost %>
+</p>
+<p>
+  <strong>Purchase Date:</strong>
+  <%= @license.purchased_at %>
+</p>
+<p>
+  <strong>Expiration Date:</strong>
+  <%= @license.expires_at %>
+</p>
+<p>
+  <strong>Termination Date:</strong>
+  <%= @license.terminates_at %>
+</p>
+<p>
+  <strong>Category:</strong>
+  <%= @license.license_category.name %>
+</p>
+<p>
+  <strong>Vendor:</strong>
+  <%= @license.vendor.name %>
+</p>
+<p>
+  <strong>Manufacturer:</strong>
+  <%= @license.manufacturer.name %>
+</p>
+<p>
+  <strong>Notes:</strong>
+  <%= @license.notes %>
+</p>
 <%= link_to 'Edit', edit_license_path(@license) %> |
 <%= link_to 'Back', licenses_path %>

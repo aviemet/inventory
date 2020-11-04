@@ -8,7 +8,7 @@ if Rails.env == "development"
     user.add_role :super_admin
 
     if Company.count == 0
-      company = Company.create({ name: "Example Company" })
+      company = Company.create!({ name: "Example Company" })
       user.add_role :admin, company
       person.company = company
       person.save
@@ -17,22 +17,22 @@ if Rails.env == "development"
       [
         { name: "San Francisco Office", company: company },
         { name: "IT Office", company: company, parent_id: 1 }
-      ].each{ |location| Location.create(location) } if Location.count == 0
+      ].each{ |location| Location.create!(location) } if Location.count == 0
 
       [
         { name: "IT Dept", location_id: 2, company: company },
         { name: "Engineering", location_id: 2, company: company }
-      ].each{ |dept| Department.create(dept) }
+      ].each{ |dept| Department.create!(dept) }
     end
   end
 
   if Manufacturer.count == 0 && ItemCategory.count == 0 && Model.count == 0
     ["Apple", "Lenovo", "Cisco", "HP"].each do |manufacturer| 
-      Manufacturer.create({ name: manufacturer })
+      Manufacturer.create!({ name: manufacturer })
     end
 
     ["Laptops", "Desktops", "Servers", "Network Devices", "Mobile Phones", "Tablets"].each do |item_type| 
-      ItemCategory.create({ name: item_type })
+      ItemCategory.create!({ name: item_type })
     end
 
     [
@@ -48,7 +48,7 @@ if Rails.env == "development"
         manufacturer: Manufacturer.find_by_name(:HP),
         item_category: ItemCategory.find_by_name(:Laptops)
       }
-    ].each{ |model| Model.create(model) }
+    ].each{ |model| Model.create!(model) }
   end
 
   if Vendor.count == 0
@@ -65,11 +65,11 @@ if Rails.env == "development"
         name: "CDW",
         url: "www.cdw.com"
       }
-    ].each{ |vendor| Vendor.create(vendor) }
+    ].each{ |vendor| Vendor.create!(vendor.merge({ company: Company.first })) }
   end
 
   if Item.count == 0
-    Item.create({
+    Item.create!({
       title: "MacBook Pro 1",
       asset_tag: Faker::Device.serial,
       serial: Faker::Device.serial,
@@ -87,4 +87,22 @@ if Rails.env == "development"
     
   # end
 
+  if License.count == 0
+    License.create!({
+      name: "Microsoft Office",
+      seats: Faker::Number.digit,
+      key: Faker::Device.serial,
+      licenser_name: Faker::Name.name,
+      licenser_email: Faker::Internet.email,
+      reassignable: true,
+      cost: Faker::Number.decimal(l_digits: 2, r_digits: 2),
+      purchased_at: Date.yesterday,
+      expires_at: Date.today.next_year,
+      terminates_at: Date.today.next_year,
+      license_category: LicenseCategory.first,
+      vendor: Vendor.first,
+      manufacturer: Manufacturer.first,
+      company: Company.first
+    })
+  end
 end

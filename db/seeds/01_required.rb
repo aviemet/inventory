@@ -23,3 +23,9 @@ if AddressType.count == 0
     AddressType.create({ name: type })
   end
 end
+
+if LicenseCategory.count == 0
+  ["Office Software", "Graphics Software"].each do |category|
+    LicenseCategory.create({ name: category })
+  end
+end
