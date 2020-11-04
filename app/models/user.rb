@@ -5,7 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
 
   belongs_to :person, dependent: :destroy, optional: true
-  belongs_to :active_company, class_name: 'Company', optional: true
+  belongs_to :active_company, class_name: :Company, optional: true
+  has_many :companies, through: :roles, source: :resource, source_type: :Company
 
   validates :email, presence: true, uniqueness: true
   validates :email, length: { maximum: 255 }

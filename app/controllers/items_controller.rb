@@ -75,7 +75,7 @@ class ItemsController < ApplicationController
     @models = Model.all
     @vendors = Vendor.all
     @locations = Location.all
-    @companies = Company.all
+    @companies = Company.all.joins(:users).where(users: { id: current_user.id })
   end
 
   def set_company

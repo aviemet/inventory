@@ -18,6 +18,8 @@
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.12.1",
+    "eslint": "^7.12.1",
     "stylelint-config-recommended": "^3.0.0",
     "webpack-dev-server": "^3.11.0"
   }

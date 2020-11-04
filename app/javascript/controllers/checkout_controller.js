@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from "stimulus"
 
 export default class extends Controller {
   static targets = ["inputContainer"]
@@ -7,14 +7,14 @@ export default class extends Controller {
     if(e.target.tagName === "INPUT") {
       switch(e.target.value) {
         case "asset":
-          this._renderAssetSelect();
-          break;
+          this._renderAssetSelect()
+          break
         case "location":
-          this._renderLocationSelect();
-          break;
+          this._renderLocationSelect()
+          break
         case "user":
         default:
-          this._renderUserSelect();
+          this._renderUserSelect()
       }
     }
   }
@@ -30,6 +30,7 @@ export default class extends Controller {
   _renderLocationSelect() {
     this.inputContainerTarget.innerHTML = "Location"
   }
+
 }
 
 

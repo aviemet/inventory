@@ -10,11 +10,20 @@ class Department < ApplicationRecord
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
   # 	Department.items, Department.contracts, etc.
   has_many :ownerships
-  { items: 'Item', contracts: 'Contract', people: 'Person', vendors: 'Vendor' }.each_pair do |assoc, model|
+  { 
+    items: 'Item', 
+    contracts: 'Contract', 
+    people: 'Person', 
+    vendors: 'Vendor' 
+  }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
 
+  default_scope { includes(:ownerships) }
+
   validates_presence_of :name
   
-  default_scope { includes(:ownerships) }
+  def self.dropdown_display
+    "name"
+  end
 end

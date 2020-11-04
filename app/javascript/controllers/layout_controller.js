@@ -1,4 +1,4 @@
-import { Controller } from 'stimulus'
+import { Controller } from "stimulus"
 
 /**
  * Controller for managing general application layout interactions

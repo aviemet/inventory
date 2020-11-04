@@ -1,13 +1,13 @@
-import { Controller } from 'stimulus'
+import { Controller } from "stimulus"
 
 /**
  * Controller for managing general application layout interactions
  * This has the potential to grow out of hand, keep an eye on it
  */
 export default class extends Controller {
-	static targets = ["input"]
-	
-	msToShowAlert = 10 * 1000
+  static targets = ["input"]
+  
+  msToShowAlert = 10 * 1000
 
   connect() {
     this._removeAlertAfterTimeout(this.msToShowAlert)
@@ -22,7 +22,7 @@ export default class extends Controller {
 
   _removeAlert(ms) {
     setTimeout(() => {
-      this.element.remove();
+      this.element.remove()
     }, ms || 0)
   }
 

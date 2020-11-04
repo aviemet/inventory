@@ -59,4 +59,12 @@ Rails.application.routes.draw do
   resources :vendors
 
   resources :custom_fieldset_associations
+
+  scope "/partials" do
+    scope "/dropdown" do
+      get "/", to: "partials#show", format: false
+      get "/company", to: "partials#company_dropdown", format: false
+      get "/:company_id/:model", to: "partials#dropdown", format: false
+    end
+  end
 end

@@ -1,18 +1,18 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroyt]
 
-  # GET /assignments
-  # GET /assignments.json
+  # GET /checkout
+  # GET /checkout.json
   def index
     @assignments = Assignment.all
   end
 
-  # GET /assignments/:id
-  # GET /assignments/:id.json
+  # GET /checkout/:id
+  # GET /checkout/:id.json
   def show
   end
 
-  # GET /checkout/:asset_type/:asset_id
+  # GET /checkout/:asset_type/:asset_id/new
   def new
     @assignment = Assignment.new
     asset_class = params[:asset_type].capitalize.constantize
@@ -20,12 +20,12 @@ class AssignmentsController < ApplicationController
     render "#{params[:asset_type].pluralize.downcase}/checkout"
   end
 
-  # GET /assignments/:id/edit
+  # GET /checkout/:id/edit
   def edit
   end
 
-  # POST /assignments
-  # POST /assignments.json
+  # POST /checkout
+  # POST /checkout.json
   def create
     @assignment = Assignment.new(assignment_params)
 
@@ -40,8 +40,8 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assignments/:id
-  # PATCH/PUT /assignments/:id.json
+  # PATCH/PUT /checkout/:id
+  # PATCH/PUT /checkout/:id.json
   def update
     respond_to do |format|
       if @assignment.update(assignment_params)
@@ -54,8 +54,8 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # DELETE /assignments/:id
-  # DELETE /assignments/:id.json
+  # DELETE /checkout/:id
+  # DELETE /checkout/:id.json
   def destroy
     @assignment.destroy
     respond_to do |format|

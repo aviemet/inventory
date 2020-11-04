@@ -1,26 +1,23 @@
 <div class="container">
-	<h1>Checkout Asset</h1>
+  <h1>Checkout Asset</h1>
 
-	<div class="column">
-		<div class="row">
-			<div class="cell sm:w-1/6 sm:text-right">Model:</div>
-			<div class="cell sm:w-5/6"><%= @asset.model.name %></div>
-		</div>
-	</div>
+  <div class="column">
+    <div class="row">
+      <div class="cell sm:w-1/6 sm:text-right">Model:</div>
+      <div class="cell sm:w-5/6"><%= @asset.model.name %></div>
+    </div>
+  </div>
 
-	<%= simple_form_for @assignment do |form| %>
+  <%= simple_form_for @assignment do |form| %>
+    <%= form.simple_fields_for @asset do |asset| %>
+      <%= asset.input :title, label: "Asset Name" %>
+    <% end %>
 
-		<%= form.simple_fields_for @asset do |asset| %>
-			<%= asset.input :title, label: "Asset Name" %>
-		<% end %>
-
-		<%= render "shared/buttons/checkout_type", form: form %>
-
-		<%= form.input :date_assigned %>
-		<%= form.input :date_expected %>
-		<%= form.input :notes %>
-
-		<%= form.submit %>
-	<% end %>
+    <%= render "shared/buttons/checkout_type", form: form %>
+    <%= form.input :date_assigned %>
+    <%= form.input :date_expected %>
+    <%= form.input :notes %>
+    <%= form.submit "Complete Checkout" %>
+  <% end %>
 
 </div>

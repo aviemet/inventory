@@ -1,4 +1,4 @@
-import Flatpickr from 'stimulus-flatpickr'
+import Flatpickr from "stimulus-flatpickr"
 import "flatpickr/dist/flatpickr.css"
 
 export default class extends Flatpickr {

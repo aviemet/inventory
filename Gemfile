@@ -98,6 +98,7 @@ group :development do
 
   # Language server for ruby
   gem "solargraph", "~> 0.39.7"
+  gem "htmlbeautifier", "~> 1.3"
 
   # Live reloading of server code
   gem "guard", "~> 2.16"
