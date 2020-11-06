@@ -5,13 +5,13 @@ require 'models/concerns/assigntoable'
 
 RSpec.describe Location, type: :model do
   subject {
-    create(:location)
+    build(:location)
   }
 
   describe "Validations" do
 
     it "is valid with valid attributes" do
-      subject.parent = create(:location)
+      subject.parent = build(:location)
       expect(subject).to be_valid
     end
 

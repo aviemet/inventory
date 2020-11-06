@@ -1,11 +1,10 @@
 require 'rails_helper'
 require 'models/concerns/contactable'
+require 'models/concerns/ownable'
 
 RSpec.describe Manufacturer, type: :model do
   subject {
-    described_class.new(
-      name: "The Manufacturer"
-    )
+    build(:manufacturer)
   }
 
   describe "Validations" do
@@ -21,5 +20,6 @@ RSpec.describe Manufacturer, type: :model do
 
   describe "Associations" do
     it_behaves_like "contactable"
+    it_behaves_like "ownable"
   end
 end

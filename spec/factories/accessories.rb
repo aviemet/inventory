@@ -9,9 +9,9 @@ FactoryBot.define do
     purchase_date { Date.yesterday }
     requestable { true }
     notes { Faker::Lorem.sentence }
-    association :manufacturer, factory: :manufacturer
-    association :accessory_category, factory: :accessory_category
-    association :vendor, factory: :vendor
-    association :default_location, factory: :location
+    manufacturer
+    accessory_category
+    vendor
+    default_location
   end
 end

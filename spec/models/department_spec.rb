@@ -5,7 +5,7 @@ require 'models/concerns/assigntoable'
 
 RSpec.describe Department, type: :model do
   subject {
-    create(:department)
+    build(:department)
   }
 
   describe "Validations" do

@@ -5,12 +5,12 @@ require 'models/concerns/fieldable'
 
 RSpec.describe Item, type: :model do
   subject {
-    create(:item)
+    build(:item)
   }
   
   describe "Validations" do
     it "is valid with valid attributes" do
-      subject.parent = create(:item)
+      subject.parent = build(:item)
       expect(subject).to be_valid
     end
   end

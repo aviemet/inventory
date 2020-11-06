@@ -1,15 +1,15 @@
 FactoryBot.define do
   factory :consumable do
-    name { "MyString" }
-    model_number { "MyString" }
+    name { Faker::Device.model_name }
+    model_number { Faker::Device.serial }
     min_qty { 1 }
-    qty { 1 }
-    cost { "9.99" }
+    qty { Faker.number.digit }
+    cost { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
     requestable { false }
-    notes { "MyText" }
-    manufacturer { nil }
-    consumable_category { nil }
-    vendor { nil }
-    default_location { nil }
+    notes { Faker::Lorem.sentence }
+    manufacturer { Manufacturer.first || create(:manufacturer) }
+    consumable_category
+    vendor
+    default_location factory: :location
   end
 end

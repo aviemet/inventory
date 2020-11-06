@@ -11,9 +11,9 @@ FactoryBot.define do
     expires_at { Date.today.next_year }
     terminates_at { Date.today.next_year }
     notes { Faker::Lorem.sentence }
-    association :license_category, factory: :license_category
-    association :vendor, factory: :vendor
-    association :manufacturer, factory: :manufacturer
-    association :company, factory: :company
+    manufacturer { Manufacturer.first || create(:manufacturer) }
+    company
+    license_category
+    vendor
   end
 end

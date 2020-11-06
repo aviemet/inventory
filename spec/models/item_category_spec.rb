@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ItemCategory, type: :model do
   subject {
-    described_class.new(
-      name: "The Item Category"
-    )
+    build(:item_category)
   }
 
   describe "Validations" do

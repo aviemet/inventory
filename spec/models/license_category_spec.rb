@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LicenseCategory, type: :model do
   subject {
-    create(:license_category)
+    build(:license_category)
   }
 
   describe "Validations" do
