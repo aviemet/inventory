@@ -11,20 +11,18 @@ class PartialsController < ApplicationController
     end
   end
 
-  # GET /partials/dropdown/:company_id/:model
+  # GET /partials/dropdown/:model/(:company_id)
   def dropdown
     raise ActionController::RoutingError, 'Not Found' unless dropdown_model_allowed(params[:model])
-    
-    @company = Company.find(params[:company_id])
-    @model_string = params[:model].downcase
-    @model = params[:model].capitalize.constantize
-    render template: "partials/dropdown"
-  end
 
-  # GET /partials/dropdown/company
-  def company_dropdown
-    @companies = current_user.companies
-    render template: "partials/company_dropdown"
+    # :company_id means a request for model other than Company
+    if params.key? :company_id
+      @company = Company.find(params[:company_id])
+      @model = params[:model].downcase
+      render partial: "shared/dropdowns/dropdown"
+    else
+      render partial: "shared/dropdowns/company_dropdown"
+    end
   end
 
   private
@@ -35,6 +33,6 @@ class PartialsController < ApplicationController
   end
 
   def dropdown_model_allowed(model)
-    %w(department location item license accessory consumeable network person vendor purchase manufacturer model company).include? model
+    %w(department location item license accessory consumable network person vendor manufacturer company).include? model
   end
 end

@@ -1,4 +1,5 @@
 class Manufacturer < ApplicationRecord
+  include Ownable
   include Contactable
 
   validates_presence_of :name

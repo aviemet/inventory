@@ -17,7 +17,7 @@
           <%= render "locations/table", locations: @company.locations %>
         </div>
 
-        <%= link_to 'New Location', new_company_location_path(@company) %>
+        <%= link_to 'New Location', new_location_path(@company) %>
       </div>
 
     </div>
@@ -28,10 +28,10 @@
         <h2>Departments</h2>
 
         <div class="flex-1">
-          <%= render "departments/table", departments: @company.departments %>    
+          <%= render "departments/table", departments: @company.departments %>
         </div>
 
-        <%= link_to 'New Department', new_company_department_path(@company) %>
+        <%= link_to 'New Department', new_department_path(@company) %>
       </div>
 
     </div>

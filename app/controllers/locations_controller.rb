@@ -3,6 +3,12 @@ class LocationsController < ApplicationController
 
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
+  # GET /companies/:company_id/locations
+  # GET /companies/:company_id/locations.json
+  def index
+    @locations = current_user.active_company.locations
+  end
+
   # GET /locations/:id
   # GET /locations/:id.json
   def show

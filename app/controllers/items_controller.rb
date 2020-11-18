@@ -1,11 +1,13 @@
 class ItemsController < ApplicationController
+  include OwnableConcern
+
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_form_models, only: [:edit, :new, :update, :create]
 
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = current_user.active_company ? current_user.active_company.items : Item.all
   end
 
   # GET /items/1
@@ -26,7 +28,7 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
-
+    @item.company = Company.find(item_params[:company_attributes][:id])
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
@@ -41,7 +43,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    set_company
+    # set_company
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
@@ -76,11 +78,11 @@ class ItemsController < ApplicationController
     @companies = current_user.companies
   end
 
-  def set_company
-    @item.company = Company.find(params[:item][:company_attributes][:id]) if params[:item][:company_attributes]
-  end
+  # def set_company
+  #   @item.company = Company.find(params[:item][:company_attributes][:id]) if params[:item][:company_attributes]
+  # end
 
   def item_params
-    params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchase_date, :requestable)
+    params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchase_date, :requestable, company_attributes: [:id])
   end
 end

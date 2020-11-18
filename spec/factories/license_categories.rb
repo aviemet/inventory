@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :license_category do
-    name { Faker::IndustrySegments.industry }
+    name { LicenseCategory.first || Faker::IndustrySegments.industry }
   end
 end

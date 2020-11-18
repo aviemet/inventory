@@ -2,9 +2,11 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
+
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -64,20 +66,35 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # Database Cleaner
-  config.before(:suite) do
+  config.before :suite do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
+  # Request specs cannot use a transaction because Capybara runs in a
+  # separate thread with a different database connection.
+  config.before type: :request do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  # Reset so other non-request specs don't have to deal with slow truncation.
+  config.after type: :request  do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before do
+    DatabaseCleaner.start
+    # WebMock.disable_net_connect!(allow_localhost: true)
+    ActionMailer::Base.deliveries.clear
+  end
+
+  config.after do
+    DatabaseCleaner.clean
   end
 
   # Shoulda
-  Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
+  Shoulda::Matchers.configure do |c|
+    c.integrate do |with|
       with.test_framework :rspec
       with.library :rails
     end
@@ -85,4 +102,5 @@ RSpec.configure do |config|
 
   # FactoryBot
   config.include FactoryBot::Syntax::Methods
+
 end

@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :item do    
     title { Faker::Device.model_name }
-    asset_tag { Faker::Device.unique.serial }
-    serial { Faker::Device.unique.serial }
+    asset_tag { |n| Faker::Lorem.word + n.to_s }
+    serial { |n| Faker::Lorem.word + n.to_s }
     cost { Faker::Commerce.price(range: 500..2000.0) }
     purchase_date { Date.yesterday }
     requestable { true }

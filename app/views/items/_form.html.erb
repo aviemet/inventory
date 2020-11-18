@@ -1,7 +1,18 @@
 <%= simple_form_for item do |form| %>
-  <%= form.fields_for :company, item.company || Company.new do |company_form| %>
-    <%= company_form.input :id, as: :select, collection: @companies, prompt: "-- Company --", label: "Company" %>
+
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
+
+  <%= render 'shared/company_nested_input', form: form, model: item %>
 
   <%= form.input :title %>
   <%= form.input :asset_tag %>

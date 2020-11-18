@@ -1,10 +1,12 @@
 class DepartmentsController < ApplicationController
+  include ContactableConcern
+
   before_action :set_department, only: [:show, :edit, :update, :destroy]
 
   # GET /companies/:company_id/departments
   # GET /companies/:company_id/departments.json
   def index
-    @departments = Department.where(company: params[:company_id])
+    @departments = current_user.active_company.departments
   end
 
   # GET /companies/:company_id/departments/:id

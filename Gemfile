@@ -71,13 +71,12 @@ group :development, :test do
   gem "foreman", "~> 0.87.1"
 
   # Testing
-  gem "rspec-rails", "~> 4.0"
-  gem "database_cleaner", "~> 1.8"
-  gem "factory_bot_rails", "~> 6.0"
   gem "faker", "~> 2.12"
+  gem "factory_bot_rails", "~> 6.0"
 
-  # Use pry as the rails console
+  # Make console output prettier
   gem "pry-rails", "~> 0.3.9"
+  gem "amazing_print", "~> 1.2"
 
   # Use rubocop for linting
   gem "rubocop", "~> 0.85.1"
@@ -115,8 +114,11 @@ group :test do
   gem 'webdrivers'
 
   # Testing
+  gem "rspec-rails", "~> 4.0"
+  gem "database_cleaner", "~> 1.8"
   gem "cucumber-rails", "~> 2.0", require: false
   gem "shoulda-matchers", "~> 4.3"
+  gem "deep-cover", "~> 1.0"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

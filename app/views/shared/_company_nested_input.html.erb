@@ -1,0 +1,9 @@
+<%= form.fields_for :company, model.company || Company.new do |company_form| %>
+  <% # @active_company is set in application_controller %>
+  <% if @active_company %>
+    <%= company_form.input_field :id, as: :hidden, value: @active_company.id %>
+  <% else %>
+    <%= company_form.input :id, as: :select, collection: @companies, prompt: "-- Company --", label: "Company" %>
+  <% end %>
+
+<% end %>

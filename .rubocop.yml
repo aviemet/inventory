@@ -1,10 +1,10 @@
 AllCops:
-  Exclude: 
-    - 'bin/**/*'
-    - 'node_modules/**/*'
-    - 'tmp/**/*'
-    - 'vendor/**/*'
-    - '.git/**/*'
+  Exclude:
+    - "bin/**/*"
+    - "node_modules/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - ".git/**/*"
 
 Style/Documentation:
   Enabled: false
@@ -25,6 +25,8 @@ Style/NumericLiterals:
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/EmptyMethod:
+  Enabled: false
+Style/GuardClause:
   Enabled: false
 Layout/EmptyLinesAroundBlockBody:
   Enabled: false
@@ -72,8 +74,6 @@ Style/RedundantRegexpCharacterClass:
   Enabled: true
 Style/RedundantRegexpEscape:
   Enabled: true
-
-
 
 # Relaxed.Ruby.Style
 ## Version 2.5

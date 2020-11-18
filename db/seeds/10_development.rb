@@ -28,7 +28,7 @@ if Rails.env == "development"
 
   if Manufacturer.count == 0 && ItemCategory.count == 0 && Model.count == 0
     ["Apple", "Lenovo", "Cisco", "HP"].each do |manufacturer| 
-      Manufacturer.create!({ name: manufacturer })
+      Manufacturer.create!({ name: manufacturer, company: Company.first })
     end
 
     ["Laptops", "Desktops", "Servers", "Network Devices", "Mobile Phones", "Tablets"].each do |item_type| 

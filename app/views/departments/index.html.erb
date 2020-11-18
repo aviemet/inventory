@@ -14,9 +14,9 @@
       <tr>
         <td><%= department.name %></td>
         <td><%= department.company.id if department.has_attribute?(:company) %></td>
-        <td><%= link_to 'Show', company_department_path(@company_id, department) %></td>
-        <td><%= link_to 'Edit', edit_company_department_path(@company_id, department) %></td>
-        <td><%= link_to 'Destroy', company_department_path(@company_id, department), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', department_path(department) %></td>
+        <td><%= link_to 'Edit', edit_department_path(department) %></td>
+        <td><%= link_to 'Destroy', department_path(department), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Department', new_company_department_path %>
+<%= link_to 'New Department', new_department_path %>

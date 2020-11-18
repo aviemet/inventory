@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { FactoryBot.build(:user) }
+  subject { build(:user) }
 
   describe "Validations" do
+    it "has a valid factory" do
+      expect(subject).to be_valid
+    end
+
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:password) }
     it { should allow_value("1StrongPassword!").for(:password) }

@@ -224,7 +224,6 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.date "purchase_date"
     t.boolean "requestable", default: true
     t.text "notes"
-    t.bigint "item_category_id"
     t.bigint "model_id", null: false
     t.bigint "vendor_id"
     t.bigint "default_location_id"
@@ -233,7 +232,6 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["asset_tag"], name: "index_items_on_asset_tag", unique: true
     t.index ["default_location_id"], name: "index_items_on_default_location_id"
-    t.index ["item_category_id"], name: "index_items_on_item_category_id"
     t.index ["model_id"], name: "index_items_on_model_id"
     t.index ["parent_id"], name: "index_items_on_parent_id"
     t.index ["serial"], name: "index_items_on_serial", unique: true
@@ -301,7 +299,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.inet "gateway"
     t.inet "dhcp_start"
     t.inet "dhcp_end"
-    t.integer "vland_id"
+    t.integer "vlan_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

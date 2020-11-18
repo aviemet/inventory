@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :fieldset_association do
-    fieldset { nil }
-    fieldable { nil }
+    fieldset
+    fieldable factory: :item
   end
 end

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :assignment do
-    assignable { nil }
-    item { nil }
-    active { false }
+    assignable factory: :accessory
+    assign_toable factory: :person
+    active { true }
   end
 end

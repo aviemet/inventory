@@ -1,4 +1,6 @@
 class NetworksController < ApplicationController
+  include OwnableConcern
+
   before_action :set_network, only: [:show, :edit, :update, :destroy]
 
   # GET /networks
@@ -24,7 +26,11 @@ class NetworksController < ApplicationController
   # POST /networks
   # POST /networks.json
   def create
-    @network = Network.new(network_params)
+    save_params = network_params
+    company_attributes = save_params.delete(:company_attributes)
+    
+    @network = Network.new(save_params)
+    @network.company = Company.find(company_attributes[:id])
 
     respond_to do |format|
       if @network.save
@@ -70,6 +76,6 @@ class NetworksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def network_params
-    params.require(:network).permit(:name, :ip, :gateway, :dhcp_start, :dhcp_end, :vland_id)
+    params.require(:network).permit(:name, :ip, :gateway, :dhcp_start, :dhcp_end, :vlan_id, company_attributes: [:id])
   end
 end

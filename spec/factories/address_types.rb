@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :address_type do
-    name { AddressType.all.sample.name }
+    name { Faker::Lorem.word }
   end
 end

@@ -1,5 +1,0 @@
-<%= select_tag(
-  "#{@model_string}_id",
-  options_from_collection_for_select(@company.public_send(@model_string.pluralize), :id, @model.dropdown_display), 
-  prompt: "-- #{@model_string.capitalize} --"
-) %>

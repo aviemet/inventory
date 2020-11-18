@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :department do
-    name { Faker::Commerce.department(max: 1) }
+    name { Faker::Commerce.unique.department(max: 1) }
     manager factory: :person
     location
     company

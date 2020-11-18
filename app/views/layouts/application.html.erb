@@ -27,7 +27,20 @@
         </div>
       </aside>
 
-      <header id="topbar" class="bg-cyan-400 shadow p-3">Inventory Application</header>
+      <header id="topbar" class="bg-cyan-400 shadow p-1">
+        <div class="flex">
+          <div class="flex-1">
+            <% if current_user %>
+              <%= render "layouts/application/active_company_picker" %>
+            <% else %>
+              Inventory Application
+            <% end %>
+          </div>
+          <div class="min-w-50">
+
+          </div>
+        </div>
+      </header>
 
       <main id="content-wrapper">
         <%= yield %>
@@ -38,7 +51,7 @@
           &copy;2020
         </div>
       </footer>
-      
+
     </div>
   </body>
 </html>

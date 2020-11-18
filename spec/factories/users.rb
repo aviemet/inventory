@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
-    password { Faker::Internet.password }
+    password { '$trongPassw0rd!' }
     active { true }
+    person
+    active_company factory: :company
   end
 end

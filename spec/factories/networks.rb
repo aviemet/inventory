@@ -6,5 +6,6 @@ FactoryBot.define do
     dhcp_start { Faker::Internet.private_ip_v4_address }
     dhcp_end { Faker::Internet.private_ip_v4_address }
     vlan_id { Faker::Number.number(digits: 2) }
+    company
   end
 end

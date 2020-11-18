@@ -73,7 +73,7 @@ Departments:
 
 - Flat structure under company
 - References location (optional)
-
+7
 Help Desk:
 
 - Email integration
@@ -100,13 +100,19 @@ Software Agents:
 
 ---
 
-## Reference Books
+## Reference
+
+### Books
 
 Everyday Rails Testing with RSpec
 
 Growing Rails Applications in Practice
 
 [Using Cell for UI Components](https://getflywheel.com/layout/how-to-build-ui-components-in-rails/)
+
+### Sites
+
+[Better Spec](https://www.betterspecs.org/)
 
 ## Conventions
 

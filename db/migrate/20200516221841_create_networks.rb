@@ -6,7 +6,7 @@ class CreateNetworks < ActiveRecord::Migration[6.0]
       t.inet :gateway
       t.inet :dhcp_start
       t.inet :dhcp_end
-      t.integer :vland_id
+      t.integer :vlan_id
 
       t.timestamps
     end
