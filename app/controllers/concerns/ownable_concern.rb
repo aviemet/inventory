@@ -1,7 +1,7 @@
 module OwnableConcern
   extend ActiveSupport::Concern
 
-  # def company_params
-  #   params.require(:company_attributes).permit(:id)
-  # end
+  def company_params
+    params.require(:company).permit(:id)
+  end
 end

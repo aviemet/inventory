@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
-    @item.company = Company.find(item_params[:company_attributes][:id])
+    @item.company = Company.find(company_params[:id])
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
@@ -83,6 +83,6 @@ class ItemsController < ApplicationController
   # end
 
   def item_params
-    params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchase_date, :requestable, company_attributes: [:id])
+    params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchase_date, :requestable)
   end
 end
