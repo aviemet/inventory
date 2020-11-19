@@ -1,0 +1,45 @@
+.container
+  h1.inline-block= @network.name
+  .float-right.inline-block
+    = link_to 'Edit', edit_network_path(@network)
+    | \
+    | \#{link_to 'Back', networks_path}
+  div
+    table
+      tbody
+        tr
+          td Network:
+          td= "# @network.ip}/#{@network.ip.prefix "
+        tr
+          td Gateway:
+          td= @network.gateway
+        tr
+          td DHCP Start:
+          td= @network.dhcp_start
+        tr
+          td DHCP End:
+          td= @network.dhcp_end
+        tr
+          td VLAN ID:
+          td= @network.vlan_id
+        tr
+          td Network Address:
+          td= @network.ip.to_s
+        tr
+          td Broadcast Address:
+          td= @network.ip | ~(IPAddr.new("255.255.255.255").mask(@network.ip.prefix))
+        tr
+          td Number of Hosts
+          td= @network.ip.to_range.count - 2
+  h2 Addresses
+  div
+    table
+      thead
+        tr
+          th Address
+          th Host
+      tbody
+        - @network.ip.to_range.to_a[1..-2].each do |ip|
+          tr
+            td= ip
+            td

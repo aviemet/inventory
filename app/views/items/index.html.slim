@@ -1,0 +1,28 @@
+h1 Items
+
+div
+  table.table-auto
+    thead
+      tr
+        th Title
+        th Model
+        th Asset Tag
+        th Serial
+        th Vendor
+        th Cost
+        th.table-column-fit.text-center Actions
+    tbody
+      - @items.each do |item|
+        tr
+          td= link_to item.title, item
+          td= item.model.name
+          td= item.asset_tag
+          td= item.serial
+          td= item.vendor&.name
+          td= number_to_currency(item.cost)
+          td nowrap="nowrap" 
+            = render "shared/buttons/checkout", asset: item
+            = render "shared/buttons/edit", path: edit_item_path(item)
+            = render "shared/buttons/delete", path: item
+
+= link_to 'New Item', new_item_path

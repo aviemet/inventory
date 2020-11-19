@@ -1,0 +1,23 @@
+h1 Contracts
+table
+  thead
+    tr
+      th Contract type
+      th Vendor
+      th System
+      th Description
+      th Notes
+      th colspan: "3" 
+  tbody
+    - @contracts.each do |contract|
+      tr
+        td= contract.contract_type_id
+        td= contract.vendor_id
+        td= contract.system
+        td= contract.description
+        td= contract.notes
+        td= link_to 'Show', contract
+        td= link_to 'Edit', edit_contract_path(contract)
+        td= link_to 'Destroy', contract, method: :delete, data:   confirm: 'Are you sure?'  
+br/
+= link_to 'New Contract', new_contract_path

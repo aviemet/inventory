@@ -1,0 +1,27 @@
+p
+  strong Number:
+  = @order.number
+p
+  strong User:
+  = @order.user_id
+p
+  strong Ordered on:
+  = @order.ordered_on
+p
+  strong Delivered on:
+  = @order.delivered_on
+p
+  strong Canceled on:
+  = @order.canceled_on
+p
+  strong Returned on:
+  = @order.returned_on
+p
+  strong Shipping:
+  = @order.shipping
+p
+  strong Vendor:
+  = @order.vendor_id
+= link_to 'Edit', edit_order_path(@order)
+| |
+= link_to 'Back', orders_path

@@ -1,0 +1,17 @@
+= form_with(model: ownership, local: true) do |form|
+  - if ownership.errors.any?
+    #error_explanation
+      h2
+        = pluralize(ownership.errors.count, "error")
+        | prohibited this ownership from being saved:
+      ul
+        - ownership.errors.full_messages.each do |message|
+          li= message
+  .field
+    = form.label :company_id
+    = form.text_field :company_id
+  .field
+    = form.label :ownable_id
+    = form.text_field :ownable_id
+  .actions
+    = form.submit

@@ -47,6 +47,9 @@ gem "devise_ldap_authenticatable", "~> 0.8.6"
 gem "rolify", "~> 5.3"
 gem "cancancan", "~> 3.1"
 
+# Use Slim for view templating
+gem "slim", "~> 4.1"
+
 # View layer Icon library
 gem "material_icons", "~> 2.2"
 

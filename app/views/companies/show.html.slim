@@ -1,0 +1,18 @@
+.container
+  .column
+    .row.justify-between
+      h1.flex-initial= @company.name
+      .flex-grow-0
+        = link_to 'Edit', edit_company_path(@company)
+    .row
+      .form-columns
+        h2 Locations
+        .flex-1
+          = render "locations/table", locations: @company.locations
+        = link_to 'New Location', new_location_path(@company)
+    .row
+      .form-columns
+        h2 Departments
+        .flex-1
+          = render "departments/table", departments: @company.departments
+        = link_to 'New Department', new_department_path(@company)

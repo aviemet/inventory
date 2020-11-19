@@ -1,0 +1,20 @@
+= form_with(model: nics_ip, local: true) do |form|
+  - if nics_ip.errors.any?
+    #error_explanation
+      h2
+        = pluralize(nics_ip.errors.count, "error")
+        | prohibited this nics_ip from being saved:
+      ul
+        - nics_ip.errors.full_messages.each do |message|
+          li= message
+  .field
+    = form.label :nic_id
+    = form.text_field :nic_id
+  .field
+    = form.label :ip_id
+    = form.text_field :ip_id
+  .field
+    = form.label :active
+    = form.check_box :active
+  .actions
+    = form.submit

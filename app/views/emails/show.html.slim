@@ -1,0 +1,12 @@
+p
+  strong Email:
+  = @email.email
+p
+  strong Notes:
+  = @email.notes
+p
+  strong Contact:
+  = @email.contact_id
+= link_to 'Edit', edit_email_path(@email)
+| |
+= link_to 'Back', emails_path

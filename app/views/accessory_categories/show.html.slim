@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @accessory_category.name
+p
+  strong Notes:
+  = @accessory_category.notes
+  
+= link_to 'Edit', edit_accessory_category_path(@accessory_category)
+
+= link_to 'Back', accessory_categories_path

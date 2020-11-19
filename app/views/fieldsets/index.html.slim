@@ -1,0 +1,18 @@
+p#notice = notice
+h1 Fieldsets
+table
+  thead
+    tr
+      th Name
+      th Description
+      th colspan: "3" 
+  tbody
+    - @fieldsets.each do |fieldset|
+      tr
+        td= fieldset.name
+        td= fieldset.description
+        td= link_to 'Show', fieldset
+        td= link_to 'Edit', edit_fieldset_path(fieldset)
+        td= link_to 'Destroy', fieldset, method: :delete, data:   confirm: 'Are you sure?'  
+br/
+= link_to 'New Fieldset', new_fieldset_path

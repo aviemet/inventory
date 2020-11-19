@@ -1,0 +1,13 @@
+= simple_form_for consumable do |form|
+  = form.input :name
+  = form.input :model_number
+  = form.input :min_qty
+  = form.input :qty
+  = form.input :cost
+  = form.input :requestable
+  = form.input :notes
+  = form.input :manufacturer_id
+  = form.input :consumable_category_id
+  = form.input :vendor_id, as: :select
+  = form.input :default_location_id
+  = form.submit

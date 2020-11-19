@@ -1,0 +1,42 @@
+h1 Licenses
+table
+  thead
+    tr
+      th Title
+      th Seats
+      th Key
+      th Licensed To Name
+      th Licensed To Email
+      th Reassignabel
+      th Cost
+      th Purchase Date
+      th Expiration Date
+      th Termination Date
+      th Maintained
+      th Notes
+      th Category
+      th Vendor
+      th Manufacturer
+      th colspan: "2" 
+  tbody
+    - @licenses.each do |license|
+      tr
+        td= link_to license.name, license
+        td= license.seats
+        td= license.key
+        td= license.licenser_name
+        td= license.licenser_email
+        td= license.reassignable
+        td= license.cost
+        td= license.purchased_at
+        td= license.expires_at
+        td= license.terminates_at
+        td= license.maintained
+        td= license.notes
+        td= license.license_category.name
+        td= license.vendor.name
+        td= license.manufacturer.name
+        td= link_to 'Edit', edit_license_path(license)
+        td= link_to 'Destroy', license, method: :delete, data:   confirm: 'Are you sure?'  
+br/
+= link_to 'New License', new_license_path

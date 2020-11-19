@@ -1,0 +1,14 @@
+div data-controller="checkout" 
+  | Checkout To:
+
+  span.radio-buttons data-action="click->checkout#buttons"
+    input#checkout_user checked="checked" name="checkout_type" type="radio" value="user"
+    label for="checkout_user" User
+
+    input#checkout_asset name="checkout_type" type="radio" value="asset"
+    label for="checkout_asset" Asset
+
+    input#checkout_location name="checkout_type" type="radio" value="location"
+    label for="checkout_location" Location
+
+  div data-target="checkout.inputContainer"

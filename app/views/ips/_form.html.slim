@@ -1,0 +1,14 @@
+= form_with(model: ip, local: true) do |form|
+  - if ip.errors.any?
+    #error_explanation
+      h2
+        = pluralize(ip.errors.count, "error")
+        | prohibited this ip from being saved:
+      ul
+        - ip.errors.full_messages.each do |message|
+          li= message
+  .field
+    = form.label :address
+    = form.text_field :address
+  .actions
+    = form.submit

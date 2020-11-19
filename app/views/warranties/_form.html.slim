@@ -1,0 +1,20 @@
+= form_with(model: warranty, local: true) do |form|
+  - if warranty.errors.any?
+    #error_explanation
+      h2
+        = pluralize(warranty.errors.count, "error")
+        | prohibited this warranty from being saved:
+      ul
+        - warranty.errors.full_messages.each do |message|
+          li= message
+  .field
+    = form.label :item_id
+    = form.text_field :item_id
+  .field
+    = form.label :length
+    = form.text_field :length
+  .field
+    = form.label :notes
+    = form.text_area :notes
+  .actions
+    = form.submit

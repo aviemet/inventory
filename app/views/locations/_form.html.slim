@@ -1,0 +1,18 @@
+= form_with(model: [@company, location], local: true) do |form|
+  - if location.errors.any?
+    #error_explanation
+      h2
+        = pluralize(location.errors.count, "error")
+        | prohibited this location from being saved:
+      ul
+        - location.errors.full_messages.each do |message|
+          li= message
+  .field
+    = form.label :parent_id
+    .select
+      = form.select :parent_id, options_for_select(@locations.collect{ |l| [l.name, l.id] }, location.parent_id), prompt: "-- Parent --"
+  .field
+    = form.label :name
+    = form.text_field :name
+  .actions
+    = form.submit

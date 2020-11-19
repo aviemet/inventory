@@ -1,0 +1,17 @@
+= simple_form_for network do |form|
+  - if network.errors.any?
+    #error_explanation
+      h2
+        = pluralize(network.errors.count, "error")
+        | prohibited this network from being saved:
+      ul
+        - network.errors.full_messages.each do |message|
+          li= message
+  = render 'shared/company_nested_input', form: form, model: network
+  = form.input :name
+  = form.input :ip, as: :string, value: @network.ip && "#{@network.ip}/#{@network.ip.prefix}", placeholder: "192.168.1.0/24", label: "Network With Mask"
+  = form.input :gateway, as: :string
+  = form.input :dhcp_start, as: :string, label: "DHCP Start"
+  = form.input :dhcp_end, as: :string, label: "DHCP End"
+  = form.input :vlan_id, as: :string, pattern: "[0-9]{0,4}", label: "VLAN ID"
+  = form.submit

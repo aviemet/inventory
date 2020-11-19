@@ -1,0 +1,9 @@
+p
+  strong Name:
+  = @vendor.name
+p
+  strong Url:
+  = @vendor.url
+= link_to 'Edit', edit_vendor_path(@vendor)
+| |
+= link_to 'Back', vendors_path

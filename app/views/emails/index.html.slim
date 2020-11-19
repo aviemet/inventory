@@ -1,0 +1,19 @@
+h1 Emails
+table
+  thead
+    tr
+      th Email
+      th Notes
+      th Contact
+      th colspan: "3" 
+  tbody
+    - @emails.each do |email|
+      tr
+        td= email.email
+        td= email.notes
+        td= email.contact_id
+        td= link_to 'Show', email
+        td= link_to 'Edit', edit_email_path(email)
+        td= link_to 'Destroy', email, method: :delete, data:   confirm: 'Are you sure?'  
+br/
+= link_to 'New Email', new_email_path

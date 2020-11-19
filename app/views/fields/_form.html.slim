@@ -1,0 +1,26 @@
+= form_with(model: field, local: true) do |form|
+  - if field.errors.any?
+    #error_explanation
+      h2
+        = pluralize(field.errors.count, "error")
+        | prohibited this field from being saved:
+      ul
+        - field.errors.full_messages.each do |message|
+          li= message
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :format
+    = form.text_field :format
+  .field
+    = form.label :element
+    = form.text_field :element
+  .field
+    = form.label :description
+    = form.text_field :description
+  .field
+    = form.label :notes
+    = form.text_area :notes
+  .actions
+    = form.submit

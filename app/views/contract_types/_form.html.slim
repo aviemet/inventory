@@ -1,0 +1,14 @@
+= form_with(model: contract_type, local: true) do |form|
+  - if contract_type.errors.any?
+    #error_explanation
+      h2
+        = pluralize(contract_type.errors.count, "error")
+        | prohibited this contract_type from being saved:
+      ul
+        - contract_type.errors.full_messages.each do |message|
+          li= message
+  .field
+    = form.label :name
+    = form.text_area :name
+  .actions
+    = form.submit

@@ -1,0 +1,17 @@
+.container
+  h1 Checkout Asset
+  .column
+    .row
+      .cell class=["sm:text-right", "sm:w-1/6"]  Model:
+      .cell class="sm:w-5/6" = @asset.model.name
+
+  = simple_form_for @assignment do |form|
+    = form.simple_fields_for @asset do |asset|
+      = asset.input :title, label: "Asset Name"
+
+    = render "shared/buttons/checkout_type", form: form
+
+    = form.input :date_assigned
+    = form.input :date_expected
+    = form.input :notes
+    = form.submit "Complete Checkout"

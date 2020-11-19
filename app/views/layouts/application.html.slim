@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Inventory
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body data-controller="layout" 
+    = render "layouts/application/alerts"
+
+    #grid-layout.grid.gap-0.side-bar-closed data-target="layout.sidebar" 
+      aside#sidebar.bg-cyan-900.flex.flex-col.justify-between
+        div
+          .text-right
+            == mi.public_send(:menu).html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar")
+          = render "layouts/application/nav_links"
+        div
+          = render "layouts/application/bottom_links"
+          
+      header#topbar.bg-cyan-400.shadow.p-1
+        .flex
+          .flex-1
+            - if current_user
+              = render "layouts/application/active_company_picker"
+            - else
+              | Inventory Application
+          .min-w-50
+
+      main#content-wrapper
+        = yield
+
+      footer#footer.border-gray-500.shadow.pr-3.pt-1
+        .flex-row-reverse.flex.text-gray-600 ©2020

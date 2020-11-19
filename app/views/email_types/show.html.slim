@@ -1,0 +1,7 @@
+p#notice = notice
+p
+  strong Name:
+  = @email_type.name
+= link_to 'Edit', edit_email_type_path(@email_type)
+| |
+= link_to 'Back', email_types_path
