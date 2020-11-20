@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'models/concerns/ownable'
 require 'models/concerns/contactable'
-require 'models/concerns/assigntoable'
+require 'models/concerns/assign_toable'
 require 'models/concerns/fieldable'
 
 RSpec.describe Person, type: :model do
@@ -49,7 +49,7 @@ RSpec.describe Person, type: :model do
   describe "Associations" do
     it_behaves_like "ownable"
     it_behaves_like "contactable"
-    it_behaves_like "assigntoable"
+    it_behaves_like "assign_toable"
     it_behaves_like "fieldable"
 
     it { should belong_to(:manager).class_name('Person').optional }

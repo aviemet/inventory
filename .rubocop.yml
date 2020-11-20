@@ -76,6 +76,8 @@ Style/RedundantRegexpEscape:
   Enabled: true
 Style/RedundantParentheses:
   Enabled: false
+Style/RedundantSelf:
+  Enabled: false
 
 # Relaxed.Ruby.Style
 ## Version 2.5
