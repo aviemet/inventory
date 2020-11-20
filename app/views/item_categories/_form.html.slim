@@ -6,6 +6,7 @@
         | prohibited this item_category from being saved:
       ul
         - item_category.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .actions
     = form.submit

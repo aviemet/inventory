@@ -8,18 +8,18 @@ table
       th Tax
       th Qty
       th Notes
-      th colspan: "3" 
+      th colspan="3"
   tbody
     - @purchases.each do |purchase|
       tr
-        td= purchase.item_id
-        td= purchase.price
-        td= purchase.shipping
-        td= purchase.tax
-        td= purchase.qty
-        td= purchase.notes
-        td= link_to 'Show', purchase
-        td= link_to 'Edit', edit_purchase_path(purchase)
-        td= link_to 'Destroy', purchase, method: :delete, data:   confirm: 'Are you sure?'  
-br/
+        td = purchase.item_id
+        td = purchase.price
+        td = purchase.shipping
+        td = purchase.tax
+        td = purchase.qty
+        td = purchase.notes
+        td = link_to 'Show', purchase
+        td = link_to 'Edit', edit_purchase_path(purchase)
+        td = link_to 'Destroy', purchase, method: :delete, data: { confirm: 'Are you sure?' }
+
 = link_to 'New Purchase', new_purchase_path

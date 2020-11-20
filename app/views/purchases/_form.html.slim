@@ -6,7 +6,8 @@
         | prohibited this purchase from being saved:
       ul
         - purchase.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :item_id
     = form.text_field :item_id

@@ -6,7 +6,8 @@
         | prohibited this person from being saved:
       ul
         - person.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   = render "form_fields", form: form, person: person
   .actions
     = form.submit

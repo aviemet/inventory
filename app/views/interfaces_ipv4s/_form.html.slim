@@ -6,7 +6,8 @@
         | prohibited this interfaces_ipv4 from being saved:
       ul
         - interfaces_ipv4.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :network_interface_id
     = form.text_field :network_interface_id

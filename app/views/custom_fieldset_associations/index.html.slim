@@ -5,14 +5,14 @@ table
     tr
       th Custom fieldset
       th Fieldable
-      th colspan: "3" 
+      th colspan="3"
   tbody
     - @custom_fieldset_associations.each do |custom_fieldset_association|
       tr
-        td= custom_fieldset_association.custom_fieldset_id
-        td= custom_fieldset_association.fieldable_id
-        td= link_to 'Show', custom_fieldset_association
-        td= link_to 'Edit', edit_custom_fieldset_association_path(custom_fieldset_association)
-        td= link_to 'Destroy', custom_fieldset_association, method: :delete, data:   confirm: 'Are you sure?'  
-br/
+        td = custom_fieldset_association.custom_fieldset_id
+        td = custom_fieldset_association.fieldable_id
+        td = link_to 'Show', custom_fieldset_association
+        td = link_to 'Edit', edit_custom_fieldset_association_path(custom_fieldset_association)
+        td = link_to 'Destroy', custom_fieldset_association, method: :delete, data: { confirm: 'Are you sure?' }
+
 = link_to 'New Custom Fieldset Association', new_custom_fieldset_association_path

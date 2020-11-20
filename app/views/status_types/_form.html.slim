@@ -6,7 +6,8 @@
         | prohibited this status_type from being saved:
       ul
         - status_type.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :name
     = form.text_field :name

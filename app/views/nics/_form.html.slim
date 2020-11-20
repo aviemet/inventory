@@ -6,7 +6,8 @@
         | prohibited this nic from being saved:
       ul
         - nic.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :mac
     = form.text_field :mac

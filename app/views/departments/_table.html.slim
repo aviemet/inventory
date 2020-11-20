@@ -7,8 +7,8 @@ table.table-auto
   tbody
     - departments.each do |department|
       tr
-        td= link_to department.name, department_path(department)
-        td= link_to department.location.name, location_path(department.location) if department.location
-        td nowrap="nowrap" 
+        td = link_to department.name, department_path(department)
+        td = link_to department.location.name, location_path(department.location) if department.location
+        td nowrap="nowrap"
           = render "shared/buttons/edit", path: edit_department_path(department)
           = render "shared/buttons/delete", path: department_path(department)

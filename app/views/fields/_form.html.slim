@@ -6,7 +6,7 @@
         | prohibited this field from being saved:
       ul
         - field.errors.full_messages.each do |message|
-          li= message
+          li = message
   .field
     = form.label :name
     = form.text_field :name

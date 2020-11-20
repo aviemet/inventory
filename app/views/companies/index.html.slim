@@ -11,13 +11,13 @@ table
   tbody
     - @companies.each do |company|
       tr
-        td= link_to company.name, company
-        td= company.locations.count
-        td= company.departments.count
-        td= company.items.count
-        td= company.people.count
+        td = link_to company.name, company
+        td = company.locations.count
+        td = company.departments.count
+        td = company.items.count
+        td = company.people.count
         td
           = render "shared/buttons/edit", path: edit_company_path(company)
           = render "shared/buttons/delete", path: company
-br/
+
 = link_to 'New Company', new_company_path

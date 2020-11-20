@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   concern :contactable do
-    resources :contacts, except: [:index]
+    resources :contacts, except: [:index] do
+      resources :addresses
+      resources :phones
+      resources :emails
+      resources :websites
+    end
   end
 
   get "pages/:page" => "pages#show"

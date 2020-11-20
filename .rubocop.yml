@@ -35,7 +35,7 @@ Layout/LineLength:
 Layout/ExtraSpacing:
   Enabled: false
 Layout/TrailingWhitespace:
-  Enabled: false
+  Enabled: true
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 Layout/SpaceInsideHashLiteralBraces:
@@ -74,6 +74,8 @@ Style/RedundantRegexpCharacterClass:
   Enabled: true
 Style/RedundantRegexpEscape:
   Enabled: true
+Style/RedundantParentheses:
+  Enabled: false
 
 # Relaxed.Ruby.Style
 ## Version 2.5

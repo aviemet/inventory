@@ -6,7 +6,8 @@
         | prohibited this ownership from being saved:
       ul
         - ownership.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :company_id
     = form.text_field :company_id

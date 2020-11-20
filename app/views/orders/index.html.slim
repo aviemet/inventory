@@ -10,20 +10,20 @@ table
       th Returned on
       th Shipping
       th Vendor
-      th colspan: "3" 
+      th colspan="3"
   tbody
     - @orders.each do |order|
       tr
-        td= order.number
-        td= order.user_id
-        td= order.ordered_on
-        td= order.delivered_on
-        td= order.canceled_on
-        td= order.returned_on
-        td= order.shipping
-        td= order.vendor_id
-        td= link_to 'Show', order
-        td= link_to 'Edit', edit_order_path(order)
-        td= link_to 'Destroy', order, method: :delete, data:   confirm: 'Are you sure?'  
-br/
+        td = order.number
+        td = order.user_id
+        td = order.ordered_on
+        td = order.delivered_on
+        td = order.canceled_on
+        td = order.returned_on
+        td = order.shipping
+        td = order.vendor_id
+        td = link_to 'Show', order
+        td = link_to 'Edit', edit_order_path(order)
+        td = link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
+
 = link_to 'New Order', new_order_path

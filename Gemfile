@@ -43,7 +43,7 @@ gem "dotenv-rails", "~> 2.7"
 gem "devise", "~> 4.7"
 gem "devise_ldap_authenticatable", "~> 0.8.6"
 
-# User Authorization 
+# User Authorization
 gem "rolify", "~> 5.3"
 gem "cancancan", "~> 3.1"
 
@@ -81,8 +81,11 @@ group :development, :test do
   gem "pry-rails", "~> 0.3.9"
   gem "amazing_print", "~> 1.2"
 
-  # Use rubocop for linting
+  # Linting
   gem "rubocop", "~> 0.85.1"
+  gem "slim_lint", "~> 0.20.2"
+  gem "solargraph", "~> 0.39.7"
+  gem "htmlbeautifier", "~> 1.3"
 end
 
 group :development do
@@ -97,10 +100,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
-  # Language server for ruby
-  gem "solargraph", "~> 0.39.7"
-  gem "htmlbeautifier", "~> 1.3"
 
   # Live reloading of server code
   gem "guard", "~> 2.16"

@@ -6,7 +6,8 @@
         | prohibited this network from being saved:
       ul
         - network.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   = render 'shared/company_nested_input', form: form, model: network
   = form.input :name
   = form.input :ip, as: :string, value: @network.ip && "#{@network.ip}/#{@network.ip.prefix}", placeholder: "192.168.1.0/24", label: "Network With Mask"

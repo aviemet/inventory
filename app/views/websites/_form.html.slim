@@ -6,7 +6,8 @@
         | prohibited this website from being saved:
       ul
         - website.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :url
     = form.text_field :url

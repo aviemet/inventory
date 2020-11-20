@@ -6,7 +6,8 @@
         | prohibited this custom_fieldset_association from being saved:
       ul
         - custom_fieldset_association.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :custom_fieldset_id
     = form.text_field :custom_fieldset_id

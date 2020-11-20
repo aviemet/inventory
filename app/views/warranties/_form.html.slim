@@ -6,7 +6,8 @@
         | prohibited this warranty from being saved:
       ul
         - warranty.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :item_id
     = form.text_field :item_id

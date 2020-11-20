@@ -1,7 +1,7 @@
 .container
   .column
     .row.justify-between
-      h1= @department.name
+      h1 = @department.name
       = link_to 'Edit', edit_department_path(@department)
     .row
       table
@@ -14,7 +14,7 @@
         tbody
           - @department.people.each do |person|
             tr
-              td= "# person.first_name} #{person.last_name "
-              td= person.title
-              td= person.items.count
+              td = "#{person.first_name} #{person.last_name}"
+              td = person.title
+              td = person.items.count
               td

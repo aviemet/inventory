@@ -6,7 +6,8 @@
         | prohibited this nics_ip from being saved:
       ul
         - nics_ip.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :nic_id
     = form.text_field :nic_id

@@ -6,7 +6,8 @@
         | prohibited this ip from being saved:
       ul
         - ip.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :address
     = form.text_field :address

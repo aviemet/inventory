@@ -11,8 +11,8 @@ table
   tbody
     - @accessory_categories.each do |accessory_category|
       tr
-        td= link_to accessory_category.name, accessory_category
-        td= accessory_category.notes
+        td = link_to accessory_category.name, accessory_category
+        td = accessory_category.notes
         td
           = render "shared/buttons/edit", edit_accessory_category_path(accessory_category)
           = render "shared/buttons/delete", accessory_category

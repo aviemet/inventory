@@ -6,7 +6,8 @@
         | prohibited this model from being saved:
       ul
         - model.errors.full_messages.each do |message|
-          li= message
+          li =
+ message
   .field
     = form.label :name
     = form.text_field :name

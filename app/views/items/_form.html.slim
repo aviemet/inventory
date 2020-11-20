@@ -6,8 +6,10 @@
         | prohibited this item from being saved:
       ul
         - @item.errors.full_messages.each do |message|
-          li= message
-  = render 'shared/company_nested_input', form: form, model: item
+          li = message
+
+  = render "shared/company_nested_input", form: form, model: item
+
   = form.input :title
   = form.input :asset_tag
   = form.input :serial

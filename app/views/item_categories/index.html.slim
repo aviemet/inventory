@@ -2,12 +2,12 @@ h1 Item Categories
 table
   thead
     tr
-      th colspan: "3" 
+      th colspan="3"
   tbody
     - @item_categories.each do |item_category|
       tr
-        td= link_to 'Show', item_category
-        td= link_to 'Edit', edit_item_category_path(item_category)
-        td= link_to 'Destroy', item_category, method: :delete, data:   confirm: 'Are you sure?'  
-br/
+        td = link_to 'Show', item_category
+        td = link_to 'Edit', edit_item_category_path(item_category)
+        td = link_to 'Destroy', item_category, method: :delete, data: { confirm: 'Are you sure?' }
+
 = link_to 'New Item Category', new_item_category_path

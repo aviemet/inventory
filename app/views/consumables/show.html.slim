@@ -1,4 +1,5 @@
 p#notice = notice
+
 p
   strong Name:
   = @consumable.name
@@ -32,6 +33,7 @@ p
 p
   strong Default location:
   = @consumable.default_location_id
+
 = link_to 'Edit', edit_consumable_path(@consumable)
 | |
 = link_to 'Back', consumables_path

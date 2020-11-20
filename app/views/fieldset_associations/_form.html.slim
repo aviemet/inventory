@@ -6,7 +6,7 @@
         | prohibited this fieldset_association from being saved:
       ul
         - fieldset_association.errors.full_messages.each do |message|
-          li= message
+          li = message
   .field
     = form.label :fieldset_id
     = form.text_field :fieldset_id

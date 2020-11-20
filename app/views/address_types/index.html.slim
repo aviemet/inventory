@@ -8,7 +8,7 @@ table
   tbody
     - @address_types.each do |address_type|
       tr
-        td= link_to address_type.name, address_type
+        td = link_to address_type.name, address_type
         td
           = render "shared/buttons/edit", edit_address_type_path(address_type)
           = render "shared/buttons/delete", address_type

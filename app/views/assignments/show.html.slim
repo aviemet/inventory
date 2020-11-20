@@ -1,13 +1,17 @@
 p#notice = notice
+
 p
   strong Assignable:
   = @assignment.assignable_id
+
 p
   strong Item:
   = @assignment.item_id
+
 p
   strong Active:
   = @assignment.active
+
 = link_to 'Edit', edit_assignment_path(@assignment)
 | |
 = link_to 'Back', assignments_path
