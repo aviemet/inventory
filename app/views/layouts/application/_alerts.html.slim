@@ -1,3 +1,3 @@
 - if notice || alert
-  #flash data-controller="alerts" data-target="alerts.flash" 
+  #flash data-controller="alerts" data-target="alerts.flash"
     = render("layouts/application/alert", banner_class: notice ? :success : :warning){ notice || alert }

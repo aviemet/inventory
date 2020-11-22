@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  
+
   before_action :authenticate_user!
   before_action :set_active_company
 
@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_active_company
+    return if !current_user
+
     if current_user.companies.count > 0
       current_user.active_company = current_user.companies.first if !current_user.active_company
 

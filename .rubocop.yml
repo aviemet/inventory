@@ -61,6 +61,8 @@ Layout/EmptyLinesAroundAttributeAccessor:
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
+Layout/FirstArgumentIndentation:
+  Enabled: false
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 Style/SlicingWithRange:
