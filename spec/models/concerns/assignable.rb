@@ -31,4 +31,14 @@ shared_examples "assignable" do
       expect(subject.assigned_to).to eq(person)
     end
   end
+
+  describe "Unassignments" do
+    it "Can be unassigned" do
+      person = create(:person)
+      subject.assign_to(person)
+      expect(subject.assigned_to).to eq(person)
+      subject.unassign
+      expect(subject.assignment).to be(nil)
+    end
+  end
 end

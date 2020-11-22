@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.integer "min_qty"
     t.integer "qty"
     t.decimal "cost", precision: 10, scale: 2
-    t.date "purchase_date"
+    t.time "purchased_at"
     t.boolean "requestable"
     t.text "notes"
     t.bigint "manufacturer_id", null: false
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.string "asset_tag"
     t.string "serial"
     t.decimal "cost", precision: 10, scale: 2
-    t.date "purchase_date"
+    t.datetime "purchased_at"
     t.boolean "requestable", default: true
     t.text "notes"
     t.bigint "model_id", null: false
@@ -252,9 +252,9 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.string "licenser_email"
     t.boolean "reassignable"
     t.decimal "cost", precision: 10, scale: 2
-    t.date "purchased_at"
-    t.date "expires_at"
-    t.date "terminates_at"
+    t.datetime "purchased_at"
+    t.datetime "expires_at"
+    t.datetime "terminates_at"
     t.boolean "maintained"
     t.text "notes"
     t.bigint "license_category_id", null: false
@@ -325,10 +325,10 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   create_table "orders", force: :cascade do |t|
     t.string "number"
     t.bigint "user_id", null: false
-    t.date "ordered_on"
-    t.date "delivered_on"
-    t.date "canceled_on"
-    t.date "returned_on"
+    t.datetime "ordered_at"
+    t.datetime "delivered_at"
+    t.datetime "canceled_at"
+    t.datetime "returned_at"
     t.decimal "shipping", precision: 10, scale: 2
     t.decimal "tax", precision: 10, scale: 2
     t.decimal "discount", precision: 10, scale: 2

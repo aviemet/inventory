@@ -22,10 +22,12 @@ class Assignment < ApplicationRecord
   end
 
   def unique_active_assignment
+    return if !self.active
+
     active_assignments = Assignment.where({
       assignable: assignable,
       active: true
     }).count
-    errors.add(:assignable, "can only have one active assignment") unless active_assignments == 0
+    errors.add(:assignable, "can only have one active assignment") if active_assignments > 0
   end
 end

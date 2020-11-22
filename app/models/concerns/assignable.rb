@@ -4,7 +4,7 @@ module Assignable
   included do
     has_many :assignments, as: :assignable
 
-    def assign_to(assign_toable, assigned_at = Time.now, expected_at = nil)
+    def assign_to(assign_toable, assigned_at = DateTime.now, expected_at = nil)
       Assignment.create({
         assignable: self,
         assign_toable: assign_toable,
@@ -21,7 +21,7 @@ module Assignable
       self.assignment.assign_toable
     end
 
-    def unassign(returned_at = Time.now)
+    def unassign(returned_at = DateTime.now)
       self.assignment.update({
         active: false,
         returned_at: returned_at
