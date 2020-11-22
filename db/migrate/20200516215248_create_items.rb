@@ -5,7 +5,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.string :asset_tag, index: { unique: true }
       t.string :serial, index: { unique: true }
       t.decimal :cost, precision: 10, scale: 2
-      t.date :purchase_date
+      t.datetime :purchased_at
       t.boolean :requestable, default: true
       t.text :notes
       t.references :model, null: false, foreign_key: true

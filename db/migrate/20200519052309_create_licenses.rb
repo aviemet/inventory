@@ -8,9 +8,9 @@ class CreateLicenses < ActiveRecord::Migration[6.0]
       t.string :licenser_email
       t.boolean :reassignable
       t.decimal :cost, precision: 10, scale: 2
-      t.date :purchased_at
-      t.date :expires_at
-      t.date :terminates_at
+      t.datetime :purchased_at
+      t.datetime :expires_at
+      t.datetime :terminates_at
       t.boolean :maintained
       t.text :notes
       t.references :license_category, null: false, foreign_key: true

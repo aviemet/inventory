@@ -1,9 +1,9 @@
-- options ||= {}
-- options = options.merge({
-- controller: "flatpickr",
-- flatpickr_alt_input: true,
-- flatpickr_alt_format: t("date.formats.long")
-- })
+- options ||= {} \
+  options = options.merge({ \
+    controller: "flatpickr",
+    flatpickr_alt_input: true,
+    flatpickr_alt_format: t("date.formats.long") \
+  })
 = form.input name, as: :date, input_html_options: {data: options}
 javascript:
   | console.log({ options: JSON.parse("#{escape_javascript options.to_json.html_safe}") })

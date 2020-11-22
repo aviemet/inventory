@@ -7,7 +7,7 @@ class CreateAccessories < ActiveRecord::Migration[6.0]
       t.integer :min_qty
       t.integer :qty
       t.decimal :cost, precision: 10, scale: 2
-      t.date :purchase_date
+      t.time :purchased_at
       t.boolean :requestable
       t.text :notes
       t.references :manufacturer, null: false, foreign_key: true

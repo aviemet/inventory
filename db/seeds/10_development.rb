@@ -74,7 +74,7 @@ if Rails.env == "development"
       asset_tag: Faker::Device.serial,
       serial: Faker::Device.serial,
       cost: Faker::Number.decimal(l_digits: 4, r_digits: 2),
-      purchase_date: Date.yesterday,
+      purchased_at: DateTime.yesterday.end_of_day,
       model: Model.first,
       vendor: Vendor.first,
       default_location: Location.first,
@@ -84,7 +84,7 @@ if Rails.env == "development"
   end
 
   # if AccessoryCategory.count == 0 && Accessory.count == 0
-    
+
   # end
 
   if License.count == 0
@@ -96,9 +96,9 @@ if Rails.env == "development"
       licenser_email: Faker::Internet.email,
       reassignable: true,
       cost: Faker::Number.decimal(l_digits: 2, r_digits: 2),
-      purchased_at: Date.yesterday,
-      expires_at: Date.today.next_year,
-      terminates_at: Date.today.next_year,
+      purchased_at: DateTime.yesterday.end_of_day,
+      expires_at: DateTime.now.next_year,
+      terminates_at: DateTime.now.next_year,
       license_category: LicenseCategory.first,
       vendor: Vendor.first,
       manufacturer: Manufacturer.first,

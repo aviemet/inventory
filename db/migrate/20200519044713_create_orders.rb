@@ -3,10 +3,10 @@ class CreateOrders < ActiveRecord::Migration[6.0]
     create_table :orders do |t|
       t.string :number, index: { unique: true }
       t.references :user, null: false, foreign_key: true
-      t.date :ordered_on
-      t.date :delivered_on
-      t.date :canceled_on
-      t.date :returned_on
+      t.datetime :ordered_at
+      t.datetime :delivered_at
+      t.datetime :canceled_at
+      t.datetime :returned_at
       t.decimal :shipping, precision: 10, scale: 2
       t.decimal :tax, precision: 10, scale: 2
       t.decimal :discount, precision: 10, scale: 2

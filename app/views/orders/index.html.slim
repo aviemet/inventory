@@ -16,10 +16,10 @@ table
       tr
         td = order.number
         td = order.user_id
-        td = order.ordered_on
-        td = order.delivered_on
-        td = order.canceled_on
-        td = order.returned_on
+        td = order.ordered_at
+        td = order.delivered_at
+        td = order.canceled_at
+        td = order.returned_at
         td = order.shipping
         td = order.vendor_id
         td = link_to 'Show', order

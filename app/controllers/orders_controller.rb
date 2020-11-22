@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new(ordered_on: Time.zone.now)
+    @order = Order.new(ordered_at: Time.zone.now)
     @vendors = Vendor.all
   end
 
@@ -71,6 +71,6 @@ class OrdersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def order_params
-    params.require(:order).permit(:number, :user_id, :ordered_on, :delivered_on, :canceled_on, :returned_on, :shipping, :vendor_id)
+    params.require(:order).permit(:number, :user_id, :ordered_at, :delivered_at, :canceled_at, :returned_at, :shipping, :vendor_id)
   end
 end
