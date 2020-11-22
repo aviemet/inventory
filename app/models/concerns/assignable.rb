@@ -4,10 +4,8 @@ module Assignable
   included do
     has_many :assignments, as: :assignable
 
-    def assign_to(assignment_recipient)
-      return if self.assignments.count != 0
-
-      Assignment.create({ assignable: self, assign_toable: assignment_recipient })
+    def assign_to(assign_toable)
+      Assignment.create({ assignable: self, assign_toable: assign_toable })
     end
 
     def assignment

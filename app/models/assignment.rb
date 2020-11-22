@@ -4,6 +4,7 @@ class Assignment < ApplicationRecord
 
   validates_presence_of :assignable
   validates_presence_of :assign_toable
+  validate :unique_active_assignment
 
   ASSIGNABLE_TYPES = %w(Item License Accessory).freeze
   ASSIGN_TOABLE_TYPES = %w(Person Item Location).freeze
@@ -11,7 +12,6 @@ class Assignment < ApplicationRecord
   validates :assign_toable_type, inclusion: { in: ASSIGN_TOABLE_TYPES }
 
   after_initialize :defaults
-  before_save :deactivate_old_assignments
 
   private
 
@@ -21,10 +21,11 @@ class Assignment < ApplicationRecord
     self.active ||= true
   end
 
-  def deactivate_old_assignments
-    Assignment.where({ 
+  def unique_active_assignment
+    active_assignments = Assignment.where({
       assignable: assignable,
       active: true
-    }).each { |assignment| assignment.update({ active: false }) }
+    }).count
+    errors.add(:assignable, "can only have one active assignment") unless active_assignments == 0
   end
 end
