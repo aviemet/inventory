@@ -18,7 +18,7 @@ module Assignable
     end
 
     def assigned_to
-      self.assignment.assign_toable
+      self&.assignment&.assign_toable
     end
 
     def unassign(returned_at = DateTime.now)

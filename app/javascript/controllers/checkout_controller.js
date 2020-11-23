@@ -3,56 +3,24 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = ["inputContainer"]
 
-  buttons(e) {
-    if(e.target.tagName === "INPUT") {
-      switch(e.target.value) {
-        case "asset":
-          this._renderAssetSelect()
-          break
-        case "location":
-          this._renderLocationSelect()
-          break
-        case "user":
-        default:
-          this._renderUserSelect()
-      }
-    }
+  connect() {
+    this._renderDropdown("person")
   }
 
-  _renderUserSelect() {
-    this.inputContainerTarget.innerHTML = "User"
+  renderAssigntoableDropdown(e) {
+    if(e.target.tagName !== "INPUT") return
+
+    const model = e.target.value
+    this._renderDropdown(model)
   }
 
-  _renderAssetSelect() {
-    this.inputContainerTarget.innerHTML = "Asset"
-  }
-
-  _renderLocationSelect() {
-    this.inputContainerTarget.innerHTML = "Location"
-  }
-
-}
-
-
-/*
-
-selectCompany(e) {
-  if(!/^\d$/.test(e.target.value)) return
-  
-  const url = this.data.get("departmentsUrl").replace(":id", e.target.value)
-  
-  fetch(url)
-    .then(response => response.text())
-    .then(text => {
-      const json = JSON.parse(text)
-      
-      const options = ["<option>-- Department --</option>"]
-      json.forEach(option => {
-        options.push(`<option value=${option.id}>${option.name}</option>`)
+  _renderDropdown(model) {
+    fetch(`/partials/dropdown/${model.toLowerCase()}/${this.data.get("company")}`)
+      .then(response => response.text())
+      .then(text => {
+        const label = `<label class="string capitalize" for="assignment_assign_toable_type">${model}</label>`
+        this.inputContainerTarget.innerHTML = `${label}${text}`
       })
-      this.departmentSelectTarget.innerHTML = options.join('')
-      this.departmentSelectTarget.removeAttribute('disabled')
-    })
-}
+  }
 
-*/
+}
