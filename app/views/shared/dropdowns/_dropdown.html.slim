@@ -1,9 +1,10 @@
-= select_tag(                                        \
-    "#{@model}_id",                                  \
-    options_from_collection_for_select(              \
-      @company.public_send(@model.pluralize),        \
-      id,                                           |:
-      @model.capitalize.constantize.dropdown_display \
-    ),                                               \
-    prompt: "-- #{@model.capitalize} --"             \
-  )                                                  \
+- company = @active_company || @company
+= select_tag(                                       \
+    "#{model}_id",                                  \
+    options_from_collection_for_select(             \
+      company.public_send(model.pluralize),         \
+      :id,                                          \
+      model.capitalize.constantize.dropdown_display \
+    ),                                              \
+    prompt: "-- #{model.capitalize} --"             \
+  )

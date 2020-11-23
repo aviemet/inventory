@@ -20,21 +20,21 @@ Rails.application.routes.draw do
   resources :phone_types
   resources :email_types
   resources :address_types
-  
+
   resources :contract_types
-  
+
   resources :item_categories
   resources :accessory_categories
   resources :consumable_categories
-  
+
   resources :status_types
 
   resources :companies, concerns: :contactable
-  
+
 
   resources :departments, concerns: :contactable
   resources :locations, concerns: :contactable
-  
+
   resources :items do
     resources :nics
   end
@@ -43,12 +43,12 @@ Rails.application.routes.draw do
   resources :consumables
 
   # Use /checkout as a verb in the url to define asset assigments
-  scope :checkout do
-    resources :assignments, path: ":asset_type/:asset_id"
-  end
+  custom_path_actions = [:index, :create, :new]
+  resources :assignments, path: "assignments/:asset_type/:asset_id", only: custom_path_actions
+  resources :assignments, except: custom_path_actions
 
   resources :people, concerns: :contactable
-  
+
   resources :vendors, concerns: :contactable
 
   resources :models
@@ -73,7 +73,6 @@ Rails.application.routes.draw do
 
   scope "/partials" do
     scope "/dropdown" do
-      get "/", to: "partials#show", format: false
       get "/:model/(:company_id)", to: "partials#dropdown", format: false
     end
   end
