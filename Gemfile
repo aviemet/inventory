@@ -53,7 +53,7 @@ gem "slim", "~> 4.1"
 # View layer Icon library
 gem "material_icons", "~> 2.2"
 
-# SimpleForm for easier form building
+# Form building
 gem "simple_form", "~> 5.0"
 
 # ActiveType to break out model concerns
