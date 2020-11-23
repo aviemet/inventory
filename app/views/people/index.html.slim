@@ -9,11 +9,11 @@ table
   tbody
     - @people.each do |person|
       tr
-        td = link_to "# person.first_name} #{person.last_name ", person
+        td = link_to "#{person.first_name} #{person.last_name}", person
         td = link_to person.department.name, company_department_path(person.company, person.department) if person.department
         td = person.items.count
         td
           = render "shared/buttons/edit", path: edit_person_path(person)
           = render "shared/buttons/delete", path: person
-br/
+
 = link_to 'New Person', new_person_path

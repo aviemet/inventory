@@ -1,4 +1,6 @@
 = simple_form_for accessory do |form|
+  = render "shared/form/errors", record: accessory
+
   = form.input :name
   = form.input :serial
   = form.input :notes

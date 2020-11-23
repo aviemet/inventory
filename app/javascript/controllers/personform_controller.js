@@ -1,7 +1,4 @@
 import { Controller } from "stimulus"
-import Rails from "@rails/ujs"
-
-console.log({ Rails })
 
 export default class extends Controller {
   static targets = ["departmentSelect"]

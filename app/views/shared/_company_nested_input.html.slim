@@ -1,5 +1,5 @@
 = form.fields_for :company, model.company || Company.new do |company_form|
-  - # @active_company is set in application_controller
+  / @active_company is set in application_controller
   - if @active_company
     = company_form.input_field :id, as: :hidden, name: 'company[id]', value: @active_company.id
   - else

@@ -1,26 +1,23 @@
 .field
   = form.label :first_name
   = form.text_field :first_name
+
 .field
   = form.label :middle_name
   = form.text_field :middle_name
+
 .field
   = form.label :last_name
   = form.text_field :last_name
+
 .field
   = form.label :title
   = form.text_field :title
+
 .field
   = form.label :manager_id
-  .select
-    = form.select :manager_id, options_for_select(@people.collect{ |p| ["#{p.first_name} #{p.last_name}", p.id, { selected: person.manager&.id }] }), { prompt: "-- Manager --" }, { "data-action": "" }
-= form.fields_for :owner do |owner_form|
-  .field
-    = owner_form.label :company_id
-    .select
-      = owner_form.select :company_id, options_for_select(@companies.collect{ |c| [c.name, c.id, { selected: person.company&.id }] }), { prompt: "-- Company --" }, { "data-action": "change->personform#selectCompany" }
-  .field
-    = owner_form.label :department_id
-    - select_options = person.company ? options_for_select(person.company.departments.collect{ |d| [d.name, d.id, { selected: d.id == person.department&.id }] }) : []
-    .select
-      = owner_form.select :department_id, select_options, { prompt: "-- Department --" }, { disabled: !person.company, "data-target" => "personform.departmentSelect" }
+  = render "shared/dropdowns/dropdown", model: "person"
+
+.field
+  = form.label :department_id
+  = render "shared/dropdowns/dropdown", model: "department"

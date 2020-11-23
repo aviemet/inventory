@@ -1,4 +1,6 @@
 = simple_form_for accessory_category do |form|
+  = render "shared/form/errors", record: accessory_category
+
   = form.input :name
   = form.input :notes
   = form.submit

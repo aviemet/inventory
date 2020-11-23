@@ -1,13 +1,6 @@
 = form_with(model: person, local: true, html: { "data-controller": :personform, "data-personform-departments-url": "/companies/:id/departments.json" }) do |form|
-  - if person.errors.any?
-    #error_explanation
-      h2
-        = pluralize(person.errors.count, "error")
-        | prohibited this person from being saved:
-      ul
-        - person.errors.full_messages.each do |message|
-          li =
- message
+  = render "shared/form/errors", record: person
+
   = render "form_fields", form: form, person: person
   .actions
     = form.submit
