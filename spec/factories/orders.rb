@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :order do
     number { Faker::Number.number(digits: 10) }
-    ordered_at { DateTime.yesterday.end_of_day }
+    ordered_at { Time.yesterday.end_of_day }
     shipping { Faker::Commerce.price(range: 10..30.0) }
     tax { Faker::Commerce.price(range: 10..30.0) }
     user

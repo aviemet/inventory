@@ -1,5 +1,30 @@
-h1 New Assignment
+.container
+  h1 Checkout Asset
 
-= render 'form', assignment: @assignment
+  .column
+    .row
+      .cell class=["sm:text-right", "sm:w-1/6"]  Model:
+      .cell class="sm:w-5/6" = @asset.model.name
+
+    = simple_form_for @assignment do |form|
+      = render "shared/form/errors", record: @assignment
+
+      = form.simple_fields_for @asset do |asset|
+        = asset.input :title, label: "Asset Name"
+
+      = render "shared/buttons/checkout_type", form: form
+
+      = form.input :assigned_at, flatpickr: { \
+        max_date: Time.current.end_of_day,
+        enable_time: true,
+      }
+      = form.input :expected_at, flatpickr: { \
+        min_date: Time.current,
+        enable_time: true,
+      }
+      = form.input :notes
+
+      = form.submit "Complete Checkout"
+
 
 = link_to 'Back', assignments_path

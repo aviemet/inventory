@@ -27,7 +27,7 @@ Consumables:
 Purchases:
 
 - Tracks source, purchase date, cost, category
-  - Optional assignemtn to GL codes
+  - Optional assignment to GL codes
   - Optional purchase request generation to be printed or emailed
 
 Licenses:
@@ -73,21 +73,21 @@ Departments:
 
 - Flat structure under company
 - References location (optional)
-  7
-  Help Desk:
+
+Help Desk:
 
 - Email integration
   - Scans one email address, converts all incoming emails to tickets
-  - Scan sent email, perhaps can include in ticket info
+  - Scans sent mail to build full conversation in app
   - Respond to tickets in app, generates email
   - Filtering rules for what to ignore
-- Associate tickets with any other record
+- Associate tickets with other records
 - Bulk edit/update/close
 
 Documentation:
 
 - Wiki style living documentation
-  - Links to any record
+  - Links to other records
   - Revision history
   - WYSIWYG editor
 - Permissions set at the department level, overridden at the individual level
@@ -96,7 +96,7 @@ Software Agents:
 
 - Agent for Mac, Windows, Linux, iOS, Android
 - Connects to server using API key
-- Periodically reports asset data through GraphQL endpoints
+- Periodically reports asset data through REST API endpoints
 
 ---
 
@@ -113,6 +113,10 @@ Growing Rails Applications in Practice
 ### Sites
 
 [Better Spec](https://www.betterspecs.org/)
+
+### Maybe Useful
+
+[GTIN library for identifying code types](https://github.com/officeluv/gtin_extras)
 
 ## Conventions
 

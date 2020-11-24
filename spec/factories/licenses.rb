@@ -7,9 +7,9 @@ FactoryBot.define do
     licenser_email { Faker::Internet.email }
     reassignable { true }
     cost { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
-    purchased_at { DateTime.yesterday.end_of_day }
-    expires_at { DateTime.now.next_year }
-    terminates_at { DateTime.now.next_year }
+    purchased_at { Time.yesterday.end_of_day }
+    expires_at { Time.current.next_year }
+    terminates_at { Time.current.next_year }
     notes { Faker::Lorem.sentence }
     manufacturer { Manufacturer.first || create(:manufacturer) }
     company

@@ -1,17 +1,27 @@
 p#notice = notice
 
 p
-  strong Assignable:
-  = @assignment.assignable_id
+  strong Asset:
+  = @assignment.assignable.title
 
 p
-  strong Item:
-  = @assignment.item_id
+  strong Assigned To:
+  = @assignment.assign_toable.inspect
+
+p
+  strong Date Assigned:
+  = @assignment.assigned_at
+
+p
+  strong Expected Return Date
+  = @assignment.expected_at
+
+p
+  strong Notes:
+  = @assignment.notes
 
 p
   strong Active:
   = @assignment.active
 
 = link_to 'Edit', edit_assignment_path(@assignment)
-| |
-= link_to 'Back', assignments_path

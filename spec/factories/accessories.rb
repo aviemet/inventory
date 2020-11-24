@@ -6,7 +6,7 @@ FactoryBot.define do
     min_qty { 1 }
     qty { Faker::Number.non_zero_digit }
     cost { Faker::Commerce.price(range: 0..100.0) }
-    purchased_at { DateTime.yesterday.end_of_day }
+    purchased_at { Time.yesterday.end_of_day }
     requestable { true }
     notes { Faker::Lorem.sentence }
     default_location factory: :location

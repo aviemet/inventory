@@ -1,6 +1,7 @@
 - company = @active_company || @company
+- name = @input_name || "#{model}_id"
 = select_tag(                                       \
-    "#{model}_id",                                  \
+    name,                                  \
     options_from_collection_for_select(             \
       company.public_send(model.pluralize),         \
       :id,                                          \

@@ -1,7 +1,20 @@
-h1 Editing Assignment
+.container
+  h1 Editing Assignment
 
-= render 'form', assignment: @assignment
+  = simple_form_for @assignment do |form|
+    = render "shared/form/errors", record: @assignment
+
+    label Asset:
+    pre = @asset.inspect
+    label Assigned To:
+    pre = @assignment.assign_toable.inspect
+    = form.input :assigned_at, flatpickr: { \
+      max_date: Time.current.end_of_day,
+      enable_time: true,
+    }
+    = form.input :expected_at
+    = form.input :notes
+
+    = form.submit "Edit Assignment Details"
 
 = link_to 'Show', @assignment
-| |
-= link_to 'Back', assignments_path

@@ -1,10 +1,12 @@
 class PartialsController < ApplicationController
   layout false
 
-  # GET /partials/dropdown/:model/(:company_id)
+  # GET /partials/dropdown/:model/(:company_id)?(name=:name)
   # :model should be plural
   def dropdown
     raise ActionController::RoutingError, 'Not Found' unless dropdown_model_allowed(params[:model].singularize)
+
+    @input_name = request.params[:name]
 
     if params.key? :company_id
       @company = Company.find(params[:company_id])

@@ -21,7 +21,10 @@ div
           td = item.vendor&.name
           td = number_to_currency(item.cost)
           td nowrap="nowrap"
-            = render "shared/buttons/checkout", asset: item
+            - if item.assigned
+              = render "shared/buttons/checkin", asset: item
+            - else
+              = render "shared/buttons/checkout", asset: item
             = render "shared/buttons/edit", path: edit_item_path(item)
             = render "shared/buttons/delete", path: item
 

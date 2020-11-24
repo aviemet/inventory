@@ -44,8 +44,8 @@ Rails.application.routes.draw do
 
   # Use /checkout as a verb in the url to define asset assigments
   custom_path_actions = [:index, :create, :new]
-  resources :assignments, path: "assignments/:asset_type/:asset_id", only: custom_path_actions
   resources :assignments, except: custom_path_actions
+  resources :assignments, path: "assignments/:asset_type/:asset_id", only: custom_path_actions
 
   resources :people, concerns: :contactable
 

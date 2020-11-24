@@ -2,14 +2,15 @@ class Assignment < ApplicationRecord
   belongs_to :assignable, polymorphic: true
   belongs_to :assign_toable, polymorphic: true
 
-  validates_presence_of :assignable
-  validates_presence_of :assign_toable
-  validate :unique_active_assignment
-
   ASSIGNABLE_TYPES = %w(Item License Accessory).freeze
   ASSIGN_TOABLE_TYPES = %w(Person Item Location).freeze
   validates :assignable_type, inclusion: { in: ASSIGNABLE_TYPES }
   validates :assign_toable_type, inclusion: { in: ASSIGN_TOABLE_TYPES }
+  validates_presence_of :assignable_type
+  validates_presence_of :assignable_id
+  validates_presence_of :assign_toable_type
+  validates_presence_of :assign_toable_id
+  validates_uniqueness_of :active, if: :active
 
   after_initialize :defaults
 
@@ -18,16 +19,7 @@ class Assignment < ApplicationRecord
   def defaults
     return unless new_record?
 
+    self.assigned_at ||= Time.current
     self.active ||= true
-  end
-
-  def unique_active_assignment
-    return if !self.active
-
-    active_assignments = Assignment.where({
-      assignable: assignable,
-      active: true
-    }).count
-    errors.add(:assignable, "can only have one active assignment") if active_assignments > 0
   end
 end

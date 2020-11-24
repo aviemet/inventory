@@ -1,22 +1,22 @@
 p#notice = notice
 
-h1 Assignments
+h1 == "#{link_to @asset.title, @asset} History"
 
 table
   thead
     tr
-      th Assignable
-      th Item
+      th Assigned To
+      th Date Assigned
+      th Date Returned
       th Active
       th colspan="3"
   tbody
     - @assignments.each do |assignment|
       tr
-        td = assignment.assignable_id
-        td = assignment.item_id
+        td = link_to assignment.assign_toable.title, assignment.assign_toable
+        td = assignment.assigned_at
+        td = assignment.returned_at
         td = assignment.active
         td = link_to 'Show', assignment
         td = link_to 'Edit', edit_assignment_path(assignment)
-        td = link_to 'Destroy', assignment, method: :delete, data: {{ confirm: 'Are you sure?' }}
-
-= link_to 'New Assignment', new_assignment_path
+        td = link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' }

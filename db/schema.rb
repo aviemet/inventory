@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.bigint "assignable_id", null: false
     t.string "assign_toable_type", null: false
     t.bigint "assign_toable_id", null: false
-    t.time "assigned_at"
-    t.time "returned_at"
-    t.time "expected_at"
+    t.datetime "assigned_at"
+    t.datetime "returned_at"
+    t.datetime "expected_at"
     t.text "notes"
     t.boolean "active"
     t.datetime "created_at", precision: 6, null: false

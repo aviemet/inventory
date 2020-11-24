@@ -20,6 +20,10 @@ class Person < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def title
+    self.full_name
+  end
+
   private
 
   def ensure_associated_contact

@@ -12,14 +12,17 @@ class DateTimeInput < SimpleForm::Inputs::DateTimeInput
     input_html_options["data-controller"] = "flatpickr"
     input_html_options["data-flatpickr-alt-input"] = true
     input_html_options["data-flatpickr-alt-format"] = t("date.formats.long")
+    input_html_options["data-flatpickr-allow-input"] = true
 
     if @options.include? :flatpickr
       @options[:flatpickr].each do |key, val|
         input_html_options["data-flatpickr-#{key.to_s.sub('_', '-')}"] = val
       end
     end
-    
+
     merged_input_options = merge_wrapper_options(input_html_options, wrapper_options)
+
+    ap merged_input_options
 
     @builder.text_field(attribute_name, merged_input_options)
   end
