@@ -80,7 +80,11 @@ td {
 tbody {
   tr {
     &.checked {
-      @apply bg-gray-200;
+      @apply bg-gray-100;
+
+      &:nth-child(even) {
+        @apply bg-gray-200;
+      }
     }
   }
 
@@ -125,7 +129,9 @@ input[type="submit"] {
   @apply font-bold;
   @apply py-1;
   @apply px-2;
+  @apply m-1;
   @apply rounded;
+  @apply bg-white;
 
   &.primary {
     @apply bg-blue-500;

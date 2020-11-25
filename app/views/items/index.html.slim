@@ -1,10 +1,10 @@
-section.h-full.flex.flex-col
+section.h-full.flex.flex-col data-controller="filter"
 
   .flex
     h1.flex-1 Items
 
     .flex-1
-      input type="text"
+      input type="text" data-action="keyup->filter#filterResults" data-target="filter.input"
 
   .scroll-content.shadow
     table.table-auto data-controller="table"
@@ -20,7 +20,7 @@ section.h-full.flex.flex-col
           th.table-column-fit.text-center Actions
       tbody
         - @items.each do |item|
-          tr
+          tr data-target="filter.row"
             td = check_box_tag :selected, item.id, false, data: { action: "table#checked", target: "table.checkbox" }
             td = link_to item.title, item
             td = item.model.name

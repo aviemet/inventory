@@ -69,18 +69,20 @@ if Rails.env == "development"
   end
 
   if Item.count == 0
-    Item.create!({
-      title: "MacBook Pro 1",
-      asset_tag: Faker::Device.serial,
-      serial: Faker::Device.serial,
-      cost: Faker::Number.decimal(l_digits: 4, r_digits: 2),
-      purchased_at: Time.zone.yesterday.end_of_day,
-      model: Model.first,
-      vendor: Vendor.first,
-      default_location: Location.first,
-      item_category: ItemCategory.first,
-      company: Company.first
-    })
+    100.times do
+      Item.create!({
+        title: Faker::Device.model_name,
+        asset_tag: Faker::Blockchain::Bitcoin.unique.address,
+        serial: Faker::Blockchain::Bitcoin.unique.address,
+        cost: Faker::Number.decimal(l_digits: 4, r_digits: 2),
+        purchased_at: Time.zone.yesterday.end_of_day,
+        model: Model.first,
+        vendor: Vendor.first,
+        default_location: Location.first,
+        item_category: ItemCategory.first,
+        company: Company.first
+      })
+    end
   end
 
   # if AccessoryCategory.count == 0 && Accessory.count == 0

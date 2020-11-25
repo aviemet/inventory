@@ -79,8 +79,8 @@
       }
     }
 
-    &:checked + label {
+    /* &:checked + label {
       background-color: transparent;
-    }
+    } */
   }
 }
