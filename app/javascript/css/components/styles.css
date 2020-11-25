@@ -1,3 +1,10 @@
+.scroll-content {
+  @apply overflow-x-auto;
+  @apply overflow-y-auto;
+  @apply relative;
+  @apply max-h-full;
+}
+
 /* 
   Represents radio elements buttons
   Used to present a button interface to the user, but when only one selection is valid
@@ -12,7 +19,7 @@
     width: 0;
     height: 0;
     visibility: hidden;
-    
+
     & + label {
       @apply border-gray-600;
       border-right-width: 1px;
@@ -27,7 +34,7 @@
     }
 
     &:checked + label,
-    &:not(:checked) + label{
+    &:not(:checked) + label {
       margin: 0;
       flex: 1;
       position: relative;
@@ -45,9 +52,9 @@
       -webkit-transition: all 100ms linear;
       transition: all 100ms linear;
 
-      &::before{
+      &::before {
         position: absolute;
-        content: '';
+        content: "";
         top: 0;
         left: 0;
         width: 100%;
@@ -56,7 +63,7 @@
         z-index: -1;
       }
 
-      &.uil{
+      &.uil {
         font-size: 24px;
         line-height: 24px;
         display: block;
@@ -64,15 +71,15 @@
       }
     }
 
-    &:not(:checked) + label{
+    &:not(:checked) + label {
       @apply bg-cyan-500;
 
-      &:hover{
+      &:hover {
         @apply bg-cyan-600;
       }
     }
 
-    &:checked + label{
+    &:checked + label {
       background-color: transparent;
     }
   }

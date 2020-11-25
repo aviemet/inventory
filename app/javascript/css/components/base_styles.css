@@ -1,5 +1,6 @@
 body {
-  font-size: clamp(0.95rem, 1.325vw, 1.125rem);
+  font-size: clamp(0.85rem, 1.125vw, 1rem);
+  @apply bg-gray-100;
 }
 
 h1 {
@@ -34,14 +35,30 @@ a {
   }
 }
 
+section {
+  @apply bg-white;
+  @apply py-4;
+  @apply px-2;
+  @apply border-b-2;
+}
+
 /**
  * TABLE
  **/
 
+table {
+  @apply border-separate;
+  border-spacing: 0;
+}
+
 th {
   text-align: left;
-  @apply pl-4;
-  @apply pr-4;
+  @apply px-4;
+  @apply py-2;
+  @apply sticky;
+  @apply top-0;
+  @apply bg-white;
+  @apply border-b-2;
 }
 
 td {
@@ -58,7 +75,7 @@ td {
 
 tbody {
   td {
-    @apply border;
+    @apply border-b;
   }
 
   tr:nth-child(even) {
@@ -210,4 +227,9 @@ select {
     width: 1.5rem;
     pointer-events: none;
   }
+}
+
+[type="checkbox"] {
+  @apply box-border;
+  @apply rounded-none;
 }
