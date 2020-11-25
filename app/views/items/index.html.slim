@@ -1,12 +1,16 @@
 section.h-full.flex.flex-col
 
-  h1 Items
+  .flex
+    h1.flex-1 Items
+
+    .flex-1
+      input type="text"
 
   .scroll-content.shadow
-    table.table-auto data-controller="form"
+    table.table-auto data-controller="table"
       thead
         tr
-          th = check_box_tag :selecte_all
+          th = check_box_tag :select_all, "all", false, data: { action: "table#checkAll", target: "table.selectAll" }
           th Title
           th Model
           th Asset Tag
@@ -17,7 +21,7 @@ section.h-full.flex.flex-col
       tbody
         - @items.each do |item|
           tr
-            td = check_box_tag :selected
+            td = check_box_tag :selected, item.id, false, data: { action: "table#checked", target: "table.checkbox" }
             td = link_to item.title, item
             td = item.model.name
             td = item.asset_tag

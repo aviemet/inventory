@@ -3,8 +3,6 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = ["add_field", "template"]
 
-  index = 0
-
   add_association(event) {
     event.preventDefault()
     const content = this.templateTarget.innerHTML

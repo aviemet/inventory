@@ -38,7 +38,7 @@ a {
 section {
   @apply bg-white;
   @apply py-4;
-  @apply px-2;
+  @apply px-3;
   @apply border-b-2;
 }
 
@@ -61,6 +61,10 @@ th {
   @apply border-b-2;
 }
 
+tr:nth-child(even) {
+  @apply bg-cyan-200;
+}
+
 td {
   @apply px-4 py-2;
 }
@@ -74,12 +78,14 @@ td {
 }
 
 tbody {
-  td {
-    @apply border-b;
+  tr {
+    &.checked {
+      @apply bg-gray-200;
+    }
   }
 
-  tr:nth-child(even) {
-    @apply bg-cyan-200;
+  td {
+    @apply border-b;
   }
 }
 
