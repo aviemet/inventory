@@ -15,11 +15,3 @@ nav.links
         ul
           li = link_to 'Contracts', contracts_path(path_hash)
       = render link_file, locals: { text: 'Purchasing', path: orders_path(path_hash), icon: :shopping_cart }
-      li
-        a href="/"
-          span Settings
-          == mi.settings
-        ul
-          li = link_to 'Companies', companies_path
-          li = link_to 'Manufacturers', manufacturers_path(path_hash)
-          li = link_to 'Models', models_path(path_hash)

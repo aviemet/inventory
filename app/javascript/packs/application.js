@@ -16,6 +16,7 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 import "../css/application.css"
+// import "../css/tailwind_utilities.css"
 
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"

@@ -1,33 +1,69 @@
-module.exports = {
+const colors = require("tailwindcss/colors")
+
+const theme = {
   purge: [],
   theme: {
+    colors: {
+      ...colors
+    },
     extend: {
       colors: {
-        gray: {
-          100: "#e7e7e7",
-          200: "#cfcfcf",
-          300: "#b8b8b8",
-          400: "#a0a0a0",
-          500: "#888888",
-          600: "#6d6d6d",
-          700: "#525252",
-          800: "#363636",
-          900: "#1b1b1b"
+        brand: {
+          light: colors.blue["100"],
+          DEFAULT: colors.teal["600"],
+          dark: colors.coolGray["800"]
         },
-        cyan: {
-          100: "#f7fafc",
-          200: "#edf2f7",
-          300: "#e2e8f0",
-          400: "#cbd5e0",
-          500: "#a0aec0",
-          600: "#718096",
-          700: "#4a5568",
-          800: "#2d3748",
-          900: "#1a202c"
+        success: {
+          light: colors.green["200"],
+          DEFAULT: colors.emerald["400"],
+          dark: colors.emerald["700"]
         },
+        info: {
+          light: colors.cyan["100"],
+          DEFAULT: colors.lightBlue["400"],
+          dark: colors.blue["700"]
+        },
+        warning: {
+          light: colors.yellow["200"],
+          DEFAULT: colors.amber["400"],
+          dark: colors.orange["400"]
+        },
+        error: {
+          lights: colors.red["200"],
+          DEFAULT: colors.red["400"],
+          dark: colors.red["900"]
+        },
+        text: {
+          light: colors.blueGray["50"],
+          dark: colors.warmGray["900"]
+        },
+        link: {
+          dark: {
+            DEFAULT: colors.teal["900"],
+            hover: colors.teal["700"],
+            active: colors.fuchsia["800"],
+            visited: colors.blue["900"]
+          },
+          light: {
+            DEFAULT: colors.teal["100"],
+            hover: colors.teal["300"],
+            active: colors.fuchsia["200"],
+            visited: colors.blue["100"]
+          }
+        },
+        button: {
+          light: {
+            
+          },
+          dark: {
+            
+          }
+        }
       }
-    },
+    }
   },
   variants: {},
   plugins: [],
 }
+
+module.exports = theme

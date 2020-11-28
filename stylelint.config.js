@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['stylelint-config-recommended'],
+  extends: ["stylelint-config-recommended"],
   rules: {
     "declaration-block-trailing-semicolon": null,
     "no-descending-specificity": null,
@@ -13,9 +13,10 @@ module.exports = {
           "variants",
           "responsive",
           "screen",
-          "use"
+          "use",
+          "layer"
         ]
       }
     ]
   }
-};
+}

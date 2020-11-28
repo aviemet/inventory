@@ -28,10 +28,18 @@ h6 {
 }
 
 a {
-  @apply text-blue-600;
+  @apply text-link-dark;
 
   &:hover {
-    @apply text-blue-500;
+    @apply text-link-dark-hover;
+  }
+
+  &:active {
+    @apply text-link-dark-active;
+  }
+
+  &:visited {
+    @apply text-link-dark-visited;
   }
 }
 
@@ -61,10 +69,12 @@ th {
   @apply border-b-2;
 
   &.sortable {
-    --sort-button-width: 5px;
+    --sort-button-width: 6px;
+    --sort-button-height: 5px;
 
     @apply pr-1;
 
+    /* Triangle Icons */
     &:before,
     &:after {
       @apply absolute;
@@ -75,18 +85,18 @@ th {
       content: "";
       @apply border-gray-300;
       border-style: solid;
-      border-left: 5px solid transparent !important;
-      border-right: 5px solid transparent !important;
+      border-left: var(--sort-button-height) solid transparent !important;
+      border-right: var(--sort-button-height) solid transparent !important;
     }
 
     &:before {
-      top: calc(50% - (var(--sort-button-width) + 2px));
-      border-bottom-width: 6px;
+      top: calc(50% - (var(--sort-button-height) + 2px));
+      border-bottom-width: var(--sort-button-width);
     }
 
     &:after {
-      bottom: calc(50% - (var(--sort-button-width) + 2px));
-      border-top-width: 6px;
+      bottom: calc(50% - (var(--sort-button-height) + 2px));
+      border-top-width: var(--sort-button-width);
     }
 
     &.asc:before,
@@ -97,7 +107,7 @@ th {
 }
 
 tr:nth-child(even) {
-  @apply bg-cyan-200;
+  @apply bg-coolGray-100;
 }
 
 td {
@@ -115,10 +125,10 @@ td {
 tbody {
   tr {
     &.checked {
-      @apply bg-gray-100;
+      @apply bg-warmGray-100;
 
       &:nth-child(even) {
-        @apply bg-gray-200;
+        @apply bg-warmGray-200;
       }
     }
   }
@@ -141,12 +151,12 @@ textarea {
     @apply w-full;
     @apply py-2;
     @apply px-3;
-    @apply text-gray-800;
+    @apply text-text-dark;
     @apply leading-tight;
 
     &:focus {
       @apply outline-none;
-      @apply shadow-outline;
+      @apply ring;
     }
   }
 
@@ -166,47 +176,57 @@ input[type="submit"] {
   @apply px-2;
   @apply m-1;
   @apply rounded;
-  @apply bg-white;
 
-  &.primary {
-    @apply bg-blue-500;
-    @apply text-white;
+  @apply bg-brand;
+  @apply text-text-light;
 
-    &:hover {
-      @apply bg-blue-700;
-    }
+  &:visited {
+    @apply text-text-light;
   }
 
-  &.secondary {
-    @apply bg-orange-500;
-    @apply text-white;
-
-    &:hover {
-      @apply bg-orange-700;
-    }
+  &:hover {
+    @apply bg-brand-dark;
   }
 
   &.success {
-    @apply bg-green-500;
+    @apply bg-success;
     @apply text-white;
 
     &:hover {
-      @apply bg-green-700;
+      @apply bg-success-dark;
+    }
+  }
+
+  &.info {
+    @apply bg-info;
+    @apply text-white;
+
+    &:hover {
+      @apply bg-info-dark;
     }
   }
 
   &.warning {
-    @apply bg-red-500;
+    @apply bg-warning;
     @apply text-white;
 
     &:hover {
-      @apply bg-red-700;
+      @apply bg-warning-dark;
+    }
+  }
+
+  &.danger {
+    @apply bg-error;
+    @apply text-white;
+
+    &:hover {
+      @apply bg-error-dark;
     }
   }
 
   &:focus {
     @apply outline-none;
-    @apply shadow-outline;
+    @apply ring;
   }
 }
 
@@ -215,15 +235,6 @@ input[type="submit"] {
 
   i.material-icons {
     vertical-align: text-bottom;
-  }
-}
-
-input[type="submit"] {
-  @apply bg-blue-500;
-  @apply text-white;
-
-  &:hover {
-    @apply bg-blue-700;
   }
 }
 
@@ -249,7 +260,7 @@ select {
   @apply leading-tight;
 
   &:focus {
-    @apply shadow-outline;
+    @apply ring;
     @apply outline-none;
   }
 
