@@ -4,24 +4,17 @@ shared_examples "assignable" do
   end
 
   describe "Assignments" do
-    it "Can be assigned to a Person" do
-      subject.assign_to(create(:person))
-      expect(subject.assigned_to).to be_a(Person)
+    it "Can be assigned to an assign_toable" do
+      person = create(:person)
+      subject.assign_to(person)
+      expect(subject.assigned_to).to eq(person)
     end
 
-    it "Can be assigned to an Item" do
-      subject.assign_to(create(:item))
-      expect(subject.assigned_to).to be_a(Item)
-    end
-
-    it "Can be assigned to a Location" do
-      subject.assign_to(create(:location))
-      expect(subject.assigned_to).to be_a(Location)
-    end
-
-    it "Can not be assigned to a Department" do
-      assignment = Assignment.new({ assignable: subject, assign_toable: create(:department) })
-      expect(assignment.valid?).to be(false)
+    it "Has methods to access assignments" do
+      person = create(:person)
+      subject.assign_to(person)
+      expect(subject.assigned).to be(true)
+      expect(subject.assignment).to be_a(Assignment)
     end
 
     it "Can only have one active assignment" do
@@ -30,9 +23,7 @@ shared_examples "assignable" do
       subject.assign_to(create(:location))
       expect(subject.assigned_to).to eq(person)
     end
-  end
 
-  describe "Unassignments" do
     it "Can be unassigned" do
       person = create(:person)
       subject.assign_to(person)
@@ -41,4 +32,5 @@ shared_examples "assignable" do
       expect(subject.assignment).to be(nil)
     end
   end
+
 end

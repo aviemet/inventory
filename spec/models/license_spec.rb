@@ -6,7 +6,7 @@ require 'models/concerns/assignable'
 
 RSpec.describe License, type: :model do
   subject {
-    build(:license)
+    create(:license)
   }
 
   describe "Associations" do

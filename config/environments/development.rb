@@ -1,3 +1,5 @@
+require 'bullet'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -70,6 +72,18 @@ Rails.application.configure do
 
   # Enable live reloading using guard
   config.middleware.use Rack::LiveReload, source: :vendored
+
+  # Bullet
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.honeybadger = true
+    Bullet.add_footer = true
+    Bullet.skip_html_injection = false
+  end
 end
 
 # This will stop BetterErrors from trying to render larger objects, which can cause

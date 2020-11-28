@@ -10,7 +10,9 @@ class Assignment < ApplicationRecord
   validates_presence_of :assignable_id
   validates_presence_of :assign_toable_type
   validates_presence_of :assign_toable_id
-  validates_uniqueness_of :active, if: :active
+
+  validate :only_one_active_assignment
+  # validates_uniqueness_of :active, if: :active
 
   after_initialize :defaults
 
@@ -21,5 +23,11 @@ class Assignment < ApplicationRecord
 
     self.assigned_at ||= Time.current
     self.active ||= true
+  end
+
+  def only_one_active_assignment
+    if self.assignable.assigned
+      errors.add(:active, "can only have one active assignment")
+    end
   end
 end

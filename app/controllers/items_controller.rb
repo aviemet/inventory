@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = current_user.active_company ? current_user.active_company.items : Item.all
+    @items = current_user.active_company.items.includes(:assignments).joins([:model, :vendor]).order(order_by)
   end
 
   # GET /items/1
@@ -67,6 +67,14 @@ class ItemsController < ApplicationController
 
   private
 
+  SORTABLE_FIELDS = %w(title asset_tag serial cost purchased_at requestable models.name vendors.name).freeze
+
+  def order_by
+    return false unless SORTABLE_FIELDS.include?(params[:sort])
+
+    params[:sort] + ' ' + params[:direction] || "asc"
+  end
+
   def set_item
     @item = Item.find(params[:id])
   end
@@ -77,10 +85,6 @@ class ItemsController < ApplicationController
     @locations = Location.all
     @companies = current_user.companies
   end
-
-  # def set_company
-  #   @item.company = Company.find(params[:item][:company_attributes][:id]) if params[:item][:company_attributes]
-  # end
 
   def item_params
     params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable)

@@ -105,6 +105,7 @@ group :development do
   gem "guard", "~> 2.16"
   gem "guard-livereload", "~> 2.5", require: false
   gem "rack-livereload", "~> 0.3.17"
+
 end
 
 group :test do
@@ -121,6 +122,9 @@ group :test do
   gem "cucumber-rails", "~> 2.0", require: false
   gem "shoulda-matchers", "~> 4.3"
   gem "deep-cover", "~> 1.0"
+
+  # CI
+  gem "bullet", "~> 6.1"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -59,6 +59,41 @@ th {
   @apply top-0;
   @apply bg-white;
   @apply border-b-2;
+
+  &.sortable {
+    --sort-button-width: 5px;
+
+    @apply pr-1;
+
+    &:before,
+    &:after {
+      @apply absolute;
+      @apply block;
+      right: 0;
+      width: 0;
+      height: 0;
+      content: "";
+      @apply border-gray-300;
+      border-style: solid;
+      border-left: 5px solid transparent !important;
+      border-right: 5px solid transparent !important;
+    }
+
+    &:before {
+      top: calc(50% - (var(--sort-button-width) + 2px));
+      border-bottom-width: 6px;
+    }
+
+    &:after {
+      bottom: calc(50% - (var(--sort-button-width) + 2px));
+      border-top-width: 6px;
+    }
+
+    &.asc:before,
+    &.desc:after {
+      @apply border-gray-700;
+    }
+  }
 }
 
 tr:nth-child(even) {

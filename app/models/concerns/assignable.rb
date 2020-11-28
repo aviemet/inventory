@@ -14,20 +14,21 @@ module Assignable
     end
 
     def assignment
-      self.assignments.where(active: true).first
+      return if self.assignments.empty?
+
+      self.assignments.select(&:active).first
     end
 
     def assigned_to
-      self&.assignment&.assign_toable
+      self.assignment&.assign_toable
     end
 
     def assigned
-      count = self.assignments.where(active: true).count
-      self.assignments.where(active: true).count > 0
+      !self.assignment.nil?
     end
 
     def unassign(returned_at = Time.current)
-      self.assignment.update({
+      self.assignment&.update({
         active: false,
         returned_at: returned_at
       })

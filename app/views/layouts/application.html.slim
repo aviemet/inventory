@@ -8,10 +8,10 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
-  body data-controller="layout" 
+  body data-controller="layout"
     = render "layouts/application/alerts"
 
-    #grid-layout.grid.gap-0.side-bar-closed data-target="layout.sidebar" 
+    #grid-layout.grid.gap-0.side-bar-closed data-target="layout.sidebar"
       aside#sidebar.bg-cyan-900.flex.flex-col.justify-between
         div
           .text-right
@@ -19,7 +19,7 @@ html
           = render "layouts/application/nav_links"
         div
           = render "layouts/application/bottom_links"
-          
+
       header#topbar.bg-cyan-400.shadow.p-1
         .flex
           .flex-1

@@ -11,12 +11,12 @@ section.h-full.flex.flex-col data-controller="filter"
       thead
         tr
           th = check_box_tag :select_all, "all", false, data: { action: "table#checkAll", target: "table.selectAll" }
-          th Title
-          th Model
-          th Asset Tag
-          th Serial
-          th Vendor
-          th Cost
+          = th_sortable(:title)
+          = th_sortable(:model, { sort: "models.name" })
+          = th_sortable(:asset_tag)
+          = th_sortable(:serial)
+          = th_sortable(:vendor, { sort: "vendors.name" })
+          = th_sortable(:cost)
           th.table-column-fit.text-center Actions
       tbody
         - @items.each do |item|

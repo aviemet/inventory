@@ -15,6 +15,8 @@ class Item < ApplicationRecord
   has_one :item_category, through: :model
   has_one :warranty, required: false
 
+  scope :filter_by_category, ->(category) { where item_category: category }
+
   def self.dropdown_display
     "title"
   end
