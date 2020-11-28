@@ -9,20 +9,22 @@ module TableHelper
     title = options[:title] || column.to_s.titleize
     sort = options[:sort] || column
     direction = params[:sort] == sort.to_s && params[:direction] == "asc" ? "desc" : "asc"
-    classes = string_or_array_to_s(options[:class]) + " sortable"
+
+    classes = input_to_a(options[:class]).push("sortable")
+    classes.push(direction) if params[:sort] == sort.to_s
 
     content_tag(
       "th".freeze,
       link_to(title.titleize, sort: sort, direction: direction),
-      { class: classes.strip }
+      { class: classes.join(" ") }
     )
   end
 
   private
 
-  def string_or_array_to_s(input)
-    return "" unless input
-    return input.join(" ") if input.class == Array
-    return input.to_s if [String, Symbol].include? input.class
+  def input_to_a(input)
+    return input if input.class == Array
+
+    input.to_s.split(" ")
   end
 end

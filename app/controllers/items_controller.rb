@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
   def order_by
     return false unless SORTABLE_FIELDS.include?(params[:sort])
 
-    params[:sort] + ' ' + params[:direction] || "asc"
+    "#{params[:sort]} #{%w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'}"
   end
 
   def set_item

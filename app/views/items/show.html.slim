@@ -1,15 +1,15 @@
-p
-  strong Title:
-  = @item.title
-p
-  strong Model:
-  = "#{@item.model.manufacturer.name} - #{@item.model.name}"
-p
-  strong Serial:
-  = @item.serial
-p
-  strong Notes:
-  = @item.notes
-= link_to 'Edit', edit_item_path(@item)
-| |
-= link_to 'Back', items_path
+section.container
+  h1 = @item.title
+  
+  p
+    strong Model:
+    = "#{@item.model.manufacturer.name} - #{@item.model.name}"
+  p
+    strong Serial:
+    = @item.serial
+  p
+    strong Notes:
+    = @item.notes
+  = link_to 'Edit', edit_item_path(@item)
+  | |
+  = link_to 'Back', items_path
