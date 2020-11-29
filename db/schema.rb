@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_035238) do
+ActiveRecord::Schema.define(version: 2020_11_29_045138) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "fuzzystrmatch"
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "accessories", force: :cascade do |t|
     t.string "name"
@@ -203,10 +206,13 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "ips", force: :cascade do |t|
+  create_table "ip_leases", force: :cascade do |t|
+    t.bigint "nic_id", null: false
     t.inet "address"
+    t.boolean "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["nic_id"], name: "index_ip_leases_on_nic_id"
   end
 
   create_table "item_categories", force: :cascade do |t|
@@ -312,16 +318,6 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.index ["item_id"], name: "index_nics_on_item_id"
   end
 
-  create_table "nics_ips", force: :cascade do |t|
-    t.bigint "nic_id", null: false
-    t.bigint "ip_id", null: false
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ip_id"], name: "index_nics_ips_on_ip_id"
-    t.index ["nic_id"], name: "index_nics_ips_on_nic_id"
-  end
-
   create_table "orders", force: :cascade do |t|
     t.string "number"
     t.bigint "user_id", null: false
@@ -363,6 +359,15 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["manager_id"], name: "index_people_on_manager_id"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
   create_table "phone_types", force: :cascade do |t|
@@ -496,6 +501,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   add_foreign_key "departments", "people", column: "manager_id"
   add_foreign_key "emails", "contacts"
   add_foreign_key "fieldset_associations", "fieldsets"
+  add_foreign_key "ip_leases", "nics"
   add_foreign_key "items", "items", column: "parent_id"
   add_foreign_key "items", "locations", column: "default_location_id"
   add_foreign_key "items", "models"
@@ -507,8 +513,6 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   add_foreign_key "models", "item_categories"
   add_foreign_key "models", "manufacturers"
   add_foreign_key "nics", "items"
-  add_foreign_key "nics_ips", "ips"
-  add_foreign_key "nics_ips", "nics"
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "vendors"
   add_foreign_key "ownerships", "companies"

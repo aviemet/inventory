@@ -177,6 +177,8 @@ input[type="submit"] {
   @apply m-1;
   @apply rounded;
 
+  @apply transition;
+
   @apply bg-brand;
   @apply text-text-light;
 
@@ -185,7 +187,8 @@ input[type="submit"] {
   }
 
   &:hover {
-    @apply bg-brand-dark;
+    @apply bg-brand-hover;
+    @apply text-text-light;
   }
 
   &.success {
@@ -193,7 +196,7 @@ input[type="submit"] {
     @apply text-white;
 
     &:hover {
-      @apply bg-success-dark;
+      @apply bg-success-hover;
     }
   }
 
@@ -202,7 +205,7 @@ input[type="submit"] {
     @apply text-white;
 
     &:hover {
-      @apply bg-info-dark;
+      @apply bg-info-hover;
     }
   }
 
@@ -211,7 +214,7 @@ input[type="submit"] {
     @apply text-white;
 
     &:hover {
-      @apply bg-warning-dark;
+      @apply bg-warning-hover;
     }
   }
 
@@ -220,7 +223,7 @@ input[type="submit"] {
     @apply text-white;
 
     &:hover {
-      @apply bg-error-dark;
+      @apply bg-error-hover;
     }
   }
 

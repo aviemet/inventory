@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ip_leases
   root to: "pages#home"
 
   concern :contactable do
