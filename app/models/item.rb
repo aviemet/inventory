@@ -16,30 +16,6 @@ class Item < ApplicationRecord
   has_one :item_category, through: :model
   has_one :warranty, required: false
 
-  include PgSearch::Model
-  searchable_fields = [:title, :asset_tag, :serial, :cost, :requestable, :notes]
-  multisearchable against: searchable_fields
-  pg_search_scope :search,
-                  against: searchable_fields,
-                  associated_against: {
-                    model: [:name, :model_number, :notes],
-                    item_category: [:name],
-                    vendor: [:name, :url],
-                    nics: [:mac],
-                    ips: [:address]
-                  },
-                  using: {
-                    tsearch: {
-                      prefix: true,
-                      any_word: true,
-                      dictionary: "english"
-                    },
-                    dmetaphone: {},
-                    trigram: {
-                      threshold: 0.1
-                    }
-                  }
-
   scope :filter_by_category, ->(category) { where item_category: category }
   scope :filter_by_model, ->(model) { where model: model }
 
