@@ -1,2 +1,0 @@
-class PgSearchDocument < ApplicationRecord
-end
