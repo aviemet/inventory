@@ -17,9 +17,10 @@ class Item < ApplicationRecord
   has_one :warranty, required: false
 
   include PgSearch::Model
-  multisearchable against: [:title, :asset_tag, :serial, :cost, :requestable, :notes]
+  searchable_fields = [:title, :asset_tag, :serial, :cost, :requestable, :notes]
+  multisearchable against: searchable_fields
   pg_search_scope :search,
-                  against: [:title, :asset_tag, :serial, :cost, :requestable, :notes],
+                  against: searchable_fields,
                   associated_against: {
                     model: [:name, :model_number, :notes],
                     item_category: [:name],
@@ -30,7 +31,8 @@ class Item < ApplicationRecord
                   using: {
                     tsearch: {
                       prefix: true,
-                      any_word: true
+                      any_word: true,
+                      dictionary: "english"
                     },
                     dmetaphone: {},
                     trigram: {
