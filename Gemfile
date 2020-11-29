@@ -66,6 +66,10 @@ gem "ipaddress", "~> 0.8.3"
 gem "countries", "~> 3.0", require: 'countries/global'
 gem "money", "~> 6.13"
 
+# Search
+gem "sunspot_rails", "~> 2.5"
+gem "sunspot_solr", "~> 2.5"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
