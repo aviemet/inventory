@@ -5,16 +5,18 @@
         = f.label :email, html: { class: "block text-gray-700 text-sm font-bold mb-2" }
         br/
         = f.email_field :email, autofocus: true, autocomplete: "email"
+
       .mb-6
         = f.label :password, html: { class: "block text-gray-700 text-sm font-bold mb-2" }
         br/
         = f.password_field :password, autocomplete: "current-password"
+
       - if devise_mapping.rememberable?
         .field
           = f.check_box :remember_me
           = f.label :remember_me
+
       .flex.items-center.justify-between
         = f.submit "Log in"
         .inline-block.align-baseline.font-bold.text-sm.text-blue-500.hover:text-blue-800
           = link_to "Forgot your password?", new_password_path(resource_name)
-          div

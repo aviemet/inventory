@@ -1,15 +1,49 @@
 section.container
   h1 = @item.title
 
-  p
-    strong Model:
-    = "#{@item.model.manufacturer.name} - #{@item.model.name}"
-  p
-    strong Serial:
-    = @item.serial
-  p
-    strong Notes:
-    = @item.notes
+  nav.sticky class="bg-white p-3 border-b-2" style="top: -15px"
+    .inline.px-2 Details
+    .inline.px-2 History
+    .inline.px-2 Licenses
+
+  .item-details
+    .item-row
+      label Model:
+      .value
+        = link_to @item.model.manufacturer.name, @item.model.manufacturer
+        '  -
+        =  link_to @item.model.name, @item.model
+
+    .item-row
+      label Serial:
+      .value = @item.serial
+
+    .item-row
+      label Notes:
+      .value = @item.notes
+
+    .item-row
+      label Asset Tag:
+      .value = @item.asset_tag
+
+    .item-row
+      label Serial Number:
+      .value = @item.serial
+
+    .item-row
+      label Purchase Cost:
+      .value = "$#{@item.cost}"
+
+    .item-row
+      label Purchase Date:
+      .value = @item.purchased_at
+
+    .item-row
+      label Vendor:
+      .value = link_to @item.vendor.name, @item.vendor
+
+  div style="height: 150vh"
+
   = link_to 'Edit', edit_item_path(@item)
   | |
   = link_to 'Back', items_path

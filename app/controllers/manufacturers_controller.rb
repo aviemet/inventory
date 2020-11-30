@@ -1,4 +1,6 @@
 class ManufacturersController < ApplicationController
+  include OwnableConcern
+
   before_action :set_manufacturer, only: [:show, :edit, :update, :destroy]
 
   # GET /manufacturers
@@ -25,7 +27,7 @@ class ManufacturersController < ApplicationController
   # POST /manufacturers.json
   def create
     @manufacturer = Manufacturer.new(manufacturer_params)
-
+    @manufacturer.company = Company.find(company_params[:id])
     respond_to do |format|
       if @manufacturer.save
         format.html { redirect_to @manufacturer, notice: 'Manufacturer was successfully created.' }

@@ -1,23 +1,25 @@
-h1 Companies
-table
-  thead
-    tr
-      th Name
-      th Locations
-      th Departments
-      th Assets
-      th People
-      th Actions
-  tbody
-    - @companies.each do |company|
-      tr
-        td = link_to company.name, company
-        td = company.locations.count
-        td = company.departments.count
-        td = company.items.count
-        td = company.people.count
-        td
-          = render "shared/buttons/edit", path: edit_company_path(company)
-          = render "shared/buttons/delete", path: company
+section
+  h1 Companies
 
-= link_to 'New Company', new_company_path
+  table.table-auto data-controller="table"
+    thead
+      tr
+        th Name
+        th Locations
+        th Departments
+        th Assets
+        th People
+        th Actions
+    tbody
+      - @companies.each do |company|
+        tr
+          td = link_to company.name, company
+          td = company.locations.count
+          td = company.departments.count
+          td = company.items.count
+          td = company.people.count
+          td
+            = render "shared/buttons/edit", path: edit_company_path(company)
+            = render "shared/buttons/delete", path: company
+
+  = link_to 'New Company', new_company_path

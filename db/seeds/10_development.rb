@@ -60,7 +60,7 @@ if Rails.env == "development"
       {
         name: "Amazon",
         url: "www.amazon.com"
-      }, 
+      },
       {
         name: "CDW",
         url: "www.cdw.com"
@@ -106,5 +106,35 @@ if Rails.env == "development"
       manufacturer: Manufacturer.first,
       company: Company.first
     })
+  end
+
+  if Network.count == 0
+    [
+      {
+        name: "Normal /24",
+        ip: "10.10.10.0/24",
+        gateway: "10.10.10.1",
+        dhcp_start: "10.10.10.150",
+        dhcp_end: "10.10.10.254",
+        vlan_id: 10,
+        company: Company.first
+      },
+      {
+        name: "Large /16",
+        ip: "10.20.0.0/16",
+        gateway: "10.20.0.1",
+        dhcp_start: "10.20.1.1",
+        dhcp_end: "10.20.1.254",
+        vlan_id: 2,
+        company: Company.first
+      },
+      {
+        name: "Small /28",
+        ip: "10.10.40.0/28",
+        gateway: "10.10.40.1",
+        vlan_id: 40,
+        company: Company.first
+      }
+    ].each{ |network|  Network.create!(network) }
   end
 end

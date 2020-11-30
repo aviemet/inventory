@@ -1,36 +1,37 @@
-p#notice = notice
-h1 Consumables
-table
-  thead
-    tr
-      th Name
-      th Model number
-      th Min qty
-      th Qty
-      th Cost
-      th Requestable
-      th Notes
-      th Manufacturer
-      th Consumable category
-      th Vendor
-      th Default location
-      th colspan="3"
-  tbody
-    - @consumables.each do |consumable|
-      tr
-        td = consumable.name
-        td = consumable.model_number
-        td = consumable.min_qty
-        td = consumable.qty
-        td = consumable.cost
-        td = consumable.requestable
-        td = consumable.notes
-        td = consumable.manufacturer_id
-        td = consumable.consumable_category_id
-        td = consumable.vendor_id
-        td = consumable.default_location_id
-        td = link_to 'Show', consumable
-        td = link_to 'Edit', edit_consumable_path(consumable)
-        td = link_to 'Destroy', consumable, method: :delete, data: { confirm: 'Are you sure?' }
+section
+  h1 Consumables
 
-= link_to 'New Consumable', new_consumable_path
+  table.table-auto data-controller="table"
+    thead
+      tr
+        th Name
+        th Model number
+        th Min qty
+        th Qty
+        th Cost
+        th Requestable
+        th Notes
+        th Manufacturer
+        th Consumable category
+        th Vendor
+        th Default location
+        th colspan="3"
+    tbody
+      - @consumables.each do |consumable|
+        tr
+          td = consumable.name
+          td = consumable.model_number
+          td = consumable.min_qty
+          td = consumable.qty
+          td = consumable.cost
+          td = consumable.requestable
+          td = consumable.notes
+          td = consumable.manufacturer_id
+          td = consumable.consumable_category_id
+          td = consumable.vendor_id
+          td = consumable.default_location_id
+          td = link_to 'Show', consumable
+          td = link_to 'Edit', edit_consumable_path(consumable)
+          td = link_to 'Destroy', consumable, method: :delete, data: { confirm: 'Are you sure?' }
+
+  = link_to 'New Consumable', new_consumable_path

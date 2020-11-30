@@ -1,8 +1,6 @@
-= select_tag("company_id",              \
+= select_tag("company_id",
     options_from_collection_for_select( \
-      current_user.companies,           \
-      :id,                              \
+      current_user.companies,
+      :id,
       Company.dropdown_display          \
-    ),                                  \
-    prompt: "-- Companies --"           \
-  )
+    ), prompt: "-- Companies --")

@@ -1,38 +1,42 @@
 .container
-  h1.inline-block = @network.name
-  .float-right.inline-block
-    = link_to 'Edit', edit_network_path(@network)
-    | \
-    | \#{link_to 'Back', networks_path}
-  div
-    table
-      tbody
-        tr
-          td Network:
-          td = "#{@network.ip}/#{@network.ip.prefix}"
-        tr
-          td Gateway:
-          td = @network.gateway
-        tr
-          td DHCP Start:
-          td = @network.dhcp_start
-        tr
-          td DHCP End:
-          td = @network.dhcp_end
-        tr
-          td VLAN ID:
-          td = @network.vlan_id
-        tr
-          td Network Address:
-          td = @network.ip.to_s
-        tr
-          td Broadcast Address:
-          td = @network.ip | ~(IPAddr.new("255.255.255.255").mask(@network.ip.prefix))
-        tr
-          td Number of Hosts
-          td = @network.ip.to_range.count - 2
-  h2 Addresses
-  div
+  section
+    h1.inline-block = @network.name
+    .float-right.inline-block
+      = link_to 'Edit', edit_network_path(@network)
+      '  |
+      = link_to 'Back', networks_path
+
+    .item-details
+      .item-row
+        label Network
+        .value = "#{@network.ip}/#{@network.ip.prefix}"
+      .item-row
+        label Network Address:
+        .value = @network.ip.to_s
+      .item-row
+        label Broadcast Address:
+        .value = @network.ip | ~(IPAddr.new("255.255.255.255").mask(@network.ip.prefix))
+      .item-row
+        label Number of Hosts
+        .value = @network.ip.to_range.count - 2
+      .item-row
+        label Gateway:
+        .value = @network.gateway
+      .item-row
+        label DHCP Start:
+        .value = @network.dhcp_start
+      .item-row
+        label DHCP End:
+        .value = @network.dhcp_end
+      .item-row
+        label VLAN ID:
+        .value = @network.vlan_id
+
+  br/
+
+  section
+    h2 Addresses
+
     table
       thead
         tr

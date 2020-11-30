@@ -6,6 +6,9 @@ const theme = {
     colors: {
       ...colors
     },
+    container: {
+      center: true
+    },
     extend: {
       colors: {
         brand: {
@@ -30,12 +33,12 @@ const theme = {
           DEFAULT: colors.amber["400"],
           hover: colors.amber["600"],
           light: colors.yellow["200"],
-          dark: colors.orange["400"]
+          dark: colors.orange["500"]
         },
         error: {
           DEFAULT: colors.red["400"],
           hover: colors.red["600"],
-          lights: colors.red["200"],
+          light: colors.red["200"],
           dark: colors.red["900"]
         },
         text: {
@@ -60,7 +63,11 @@ const theme = {
     }
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/aspect-ratio"),
+    require("@tailwindcss/typography")
+  ],
 }
 
 module.exports = theme

@@ -190,3 +190,25 @@ main#content-wrapper {
 footer#footer {
   border-top-width: 1px;
 }
+
+.item-details {
+  @apply grid grid-cols-1 md:grid-cols-2 md:grid-rows-4 gap-3 md:grid-flow-col;
+
+  .item-row {
+    @apply flex;
+    @apply border-b;
+
+    label {
+      @apply font-bold;
+      text-align: right;
+      @apply flex-initial;
+      @apply pr-2;
+      min-width: 35%;
+    }
+
+    .value {
+      text-align: left;
+      @apply flex-1 flex-grow;
+    }
+  }
+}

@@ -1,19 +1,21 @@
-h1 People
-table
-  thead
-    tr
-      th Name
-      th Department
-      th Items
-      th Actions
-  tbody
-    - @people.each do |person|
-      tr
-        td = link_to "#{person.first_name} #{person.last_name}", person
-        td = link_to person.department.name, company_department_path(person.company, person.department) if person.department
-        td = person.items.count
-        td
-          = render "shared/buttons/edit", path: edit_person_path(person)
-          = render "shared/buttons/delete", path: person
+section
+  h1 People
 
-= link_to 'New Person', new_person_path
+  table.table-auto data-controller="table"
+    thead
+      tr
+        th Name
+        th Department
+        th Items
+        th Actions
+    tbody
+      - @people.each do |person|
+        tr
+          td = link_to "#{person.first_name} #{person.last_name}", person
+          td = link_to person.department.name, company_department_path(person.company, person.department) if person.department
+          td = person.items.count
+          td
+            = render "shared/buttons/edit", path: edit_person_path(person)
+            = render "shared/buttons/delete", path: person
+
+  = link_to 'New Person', new_person_path

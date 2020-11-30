@@ -26,11 +26,8 @@ class NetworksController < ApplicationController
   # POST /networks
   # POST /networks.json
   def create
-    save_params = network_params
-    company_attributes = save_params.delete(:company_attributes)
-    
-    @network = Network.new(save_params)
-    @network.company = Company.find(company_attributes[:id])
+    @network = Network.new(network_params)
+    @network.company = Company.find(company_params[:id])
 
     respond_to do |format|
       if @network.save
@@ -76,6 +73,6 @@ class NetworksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def network_params
-    params.require(:network).permit(:name, :ip, :gateway, :dhcp_start, :dhcp_end, :vlan_id, company_attributes: [:id])
+    params.require(:network).permit(:name, :ip, :gateway, :dhcp_start, :dhcp_end, :vlan_id)
   end
 end
