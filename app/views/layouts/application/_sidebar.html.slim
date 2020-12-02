@@ -27,8 +27,7 @@ aside#sidebar
         ul
           li
             a href="/"
-              span Settings
-              == mi.settings
+              = link_to "<span>Settings</span>#{mi.settings}".html_safe, "/settings"
             ul.up
               li = link_to 'Companies', companies_path
               li = link_to 'Manufacturers', manufacturers_path(path_hash)

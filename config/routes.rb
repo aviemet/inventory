@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :categories
-  resources :ip_leases
   root to: "pages#home"
 
   concern :contactable do
@@ -13,19 +11,16 @@ Rails.application.routes.draw do
   end
 
   get "pages/:page" => "pages#show"
+  get "settings" => "pages#show", page: "settings"
 
   devise_for :users, path: '/', path_names: { sign_in: 'login', sign_out: 'logout' }, only: [:sessions]
   devise_for :users, path_names: { sign_up: 'register' }, skip: [:sessions]
 
   resources :ownerships
 
-
-
-
   resources :status_types
 
   resources :companies, concerns: :contactable
-
 
   resources :departments, concerns: :contactable
   resources :locations, concerns: :contactable
@@ -36,6 +31,8 @@ Rails.application.routes.draw do
 
   resources :accessories
   resources :consumables
+
+  resources :categories
 
   # Use /checkout as a verb in the url to define asset assigments
   custom_path_actions = [:index, :create, :new]
@@ -57,6 +54,7 @@ Rails.application.routes.draw do
 
   resources :ips
   resources :nics_ips
+  resources :ip_leases
   resources :networks
 
   resources :orders
