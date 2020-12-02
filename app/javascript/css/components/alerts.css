@@ -1,14 +1,24 @@
-#flash {
+#flash-container {
   position: fixed;
-  top: 30px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1001;
   text-align: center;
-  width: min(900px, 90vw);
+
+  .message {
+    width: min(900px, 90vw);
+    @apply transition-all;
+  }
 }
 
-.alert {
+/*Banner open/load animation*/
+.alert-banner {
+  animation: slide-in-top var(--alert-animation-speed)
+    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  @apply m-auto my-2;
+  @apply transition-all;
+
   label.close {
     cursor: pointer;
     display: flex;
@@ -18,13 +28,6 @@
     @apply px-4;
     @apply shadow;
   }
-}
-
-/*Banner open/load animation*/
-.alert-banner {
-  animation: slide-in-top var(--alert-animation-speed)
-    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  margin: 0 auto;
 
   &,
   label.close {
@@ -35,9 +38,8 @@
     @apply text-info-dark;
 
     label.close {
-      border-width: 1px;
-      @apply border-info-light;
-      @apply bg-info;
+      @apply border border-info;
+      @apply bg-info-light;
     }
   }
 
@@ -45,19 +47,17 @@
     @apply text-success-dark;
 
     label.close {
-      border-width: 1px;
-      @apply border-success;
+      @apply border border-success;
       @apply bg-success-light;
     }
   }
 
-  &.warning {
+  &.alert {
     @apply text-warning-dark;
 
     label.close {
-      border-width: 1px;
-      @apply border-warning-light;
-      @apply bg-warning;
+      @apply border border-warning;
+      @apply bg-warning-light;
     }
   }
 
@@ -65,9 +65,8 @@
     @apply text-error-dark;
 
     label.close {
-      border-width: 1px;
-      @apply border-error-light;
-      @apply bg-error;
+      @apply border border-error;
+      @apply bg-error-light;
     }
   }
 

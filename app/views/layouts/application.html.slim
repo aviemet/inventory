@@ -10,9 +10,10 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body data-controller="layout"
-    - if notice || alert
-      #flash data-controller="alerts" data-target="alerts.flash"
-        = render("layouts/application/alert", banner_class: notice ? :success : :warning){ notice || alert }
+    - if !flash.empty?
+      #flash-container data-controller="alerts"
+        - flash.each_with_index do |(type, message), i|
+          = render("layouts/application/alert", banner_class: type, index: i){ message }
 
     #grid-layout.grid.gap-0.side-bar-closed data-target="layout.sidebar"
       = render "layouts/application/sidebar"

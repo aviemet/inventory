@@ -26,14 +26,14 @@ const theme = {
         info: {
           DEFAULT: colors.lightBlue["400"],
           hover: colors.lightBlue["600"],
-          light: colors.cyan["100"],
-          dark: colors.blue["700"]
+          light: colors.lightBlue["200"],
+          dark: colors.blue["800"]
         },
         warning: {
-          DEFAULT: colors.amber["400"],
+          DEFAULT: colors.yellow["500"],
           hover: colors.amber["600"],
           light: colors.yellow["200"],
-          dark: colors.orange["500"]
+          dark: colors.yellow["900"]
         },
         error: {
           DEFAULT: colors.red["400"],

@@ -5,31 +5,25 @@ import { Controller } from "stimulus"
  * This has the potential to grow out of hand, keep an eye on it
  */
 export default class extends Controller {
-  static targets = ["input"]
+  static targets = ["flash", "input"]
   
-  msToShowAlert = 10 * 1000
+  msToShowAlert = 5 * 1000
+  animationSpeed = 500
+  lag = 1500
 
   connect() {
-    this._removeAlertAfterTimeout(this.msToShowAlert)
+    this.inputTargets.forEach((target, i) => {
+      setTimeout(() => {
+        target.click()
+      }, this.msToShowAlert + (this.lag * i) || 0)    
+    })
   }
 
-  removeAlert(e) {
-    const ms = e.target.dataset.animationSpeed
-    this._removeAlert(parseInt(ms))
-  }
-
-  /** private **/
-
-  _removeAlert(ms) {
+  closeAlert(e) {
     setTimeout(() => {
-      this.element.remove()
-    }, ms || 0)
-  }
-
-  _removeAlertAfterTimeout(ms) {
-    setTimeout(() => {
-      this.inputTarget.click()
-    }, ms || 0)    
+      console.log({ target: e.target })
+      e.target.closest(".message").remove()
+    }, this.animationSpeed || 0)
   }
 
 }
