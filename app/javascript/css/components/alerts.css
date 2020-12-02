@@ -43,7 +43,7 @@
     }
   }
 
-  &.success {
+  &.notice {
     @apply text-success-dark;
 
     label.close {
