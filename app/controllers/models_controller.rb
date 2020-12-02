@@ -70,6 +70,6 @@ class ModelsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def model_params
-    params.require(:model).permit(:name, :manufacturer_id, :item_category_id, :model_number, :notes)
+    params.require(:model).permit(:name, :manufacturer_id, :category_id, :model_number, :notes)
   end
 end

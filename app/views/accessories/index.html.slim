@@ -10,7 +10,7 @@ table
       th Qty
       th Vendor
       th Default location
-      th Accessory category
+      th Category
       th Model number
       th Cost
       th Min qty
@@ -24,7 +24,7 @@ table
         td = accessory.qty
         td = accessory.vendor_id
         td = accessory.default_location_id
-        td = accessory.accessory_category_id
+        td = accessory.category.name
         td = accessory.model_number
         td = accessory.cost
         td = accessory.min_qty

@@ -13,16 +13,13 @@ class Item < ApplicationRecord
   belongs_to :vendor, required: false
   belongs_to :default_location, class_name: "Location", required: false
   belongs_to :parent, class_name: "Item", required: false
-  has_one :item_category, through: :model
+  has_one :category, through: :model
   has_one :warranty, required: false
-
-  scope :filter_by_category, ->(category) { where item_category: category }
-  scope :filter_by_model, ->(model) { where model: model }
 
   # against: [:title, :asset_tag, :serial, :cost, :requestable, :notes],
   # associated_against: {
   #   model: [:name, :model_number, :notes],
-  #   item_category: [:name],
+  #   category: [:name],
   #   vendor: [:name, :url],
   #   nics: [:mac],
   #   ips: [:address]

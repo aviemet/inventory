@@ -27,6 +27,6 @@ class User < ApplicationRecord
   def add_email_to_contact
     return if self.person.contact.emails.exists?(email: email)
 
-    self.person.contact.emails << Email.create(email: email)
+    self.person.contact.emails << Email.create(email: email, category: Category.find_by_slug(:email_work))
   end
 end

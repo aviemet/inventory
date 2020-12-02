@@ -10,16 +10,12 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body data-controller="layout"
-    = render "layouts/application/alerts"
+    - if notice || alert
+      #flash data-controller="alerts" data-target="alerts.flash"
+        = render("layouts/application/alert", banner_class: notice ? :success : :warning){ notice || alert }
 
     #grid-layout.grid.gap-0.side-bar-closed data-target="layout.sidebar"
-      aside#sidebar
-        div
-          .text-right.link-hover
-            == mi.public_send(:menu).html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar")
-          = render "layouts/application/nav_links"
-        div
-          = render "layouts/application/bottom_links"
+      = render "layouts/application/sidebar"
 
       header#topbar.bg-blueGray-400.shadow.p-1
         .flex

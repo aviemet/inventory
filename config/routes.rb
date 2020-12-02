@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   resources :ip_leases
   root to: "pages#home"
 
@@ -18,15 +19,8 @@ Rails.application.routes.draw do
 
   resources :ownerships
 
-  resources :phone_types
-  resources :email_types
-  resources :address_types
 
-  resources :contract_types
 
-  resources :item_categories
-  resources :accessory_categories
-  resources :consumable_categories
 
   resources :status_types
 

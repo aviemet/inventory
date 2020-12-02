@@ -13,7 +13,7 @@ FactoryBot.define do
     notes { Faker::Lorem.sentence }
     manufacturer { Manufacturer.first || create(:manufacturer) }
     company
-    license_category
+    category
     vendor
   end
 end

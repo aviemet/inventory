@@ -1,39 +1,38 @@
-p#notice = notice
+section.container
+  p
+    strong Name:
+    = @consumable.name
+  p
+    strong Model number:
+    = @consumable.model_number
+  p
+    strong Min qty:
+    = @consumable.min_qty
+  p
+    strong Qty:
+    = @consumable.qty
+  p
+    strong Cost:
+    = @consumable.cost
+  p
+    strong Requestable:
+    = @consumable.requestable
+  p
+    strong Notes:
+    = @consumable.notes
+  p
+    strong Manufacturer:
+    = @consumable.manufacturer_id
+  p
+    strong Consumable category:
+    = @consumable.category.name
+  p
+    strong Vendor:
+    = @consumable.vendor_id
+  p
+    strong Default location:
+    = @consumable.default_location_id
 
-p
-  strong Name:
-  = @consumable.name
-p
-  strong Model number:
-  = @consumable.model_number
-p
-  strong Min qty:
-  = @consumable.min_qty
-p
-  strong Qty:
-  = @consumable.qty
-p
-  strong Cost:
-  = @consumable.cost
-p
-  strong Requestable:
-  = @consumable.requestable
-p
-  strong Notes:
-  = @consumable.notes
-p
-  strong Manufacturer:
-  = @consumable.manufacturer_id
-p
-  strong Consumable category:
-  = @consumable.consumable_category_id
-p
-  strong Vendor:
-  = @consumable.vendor_id
-p
-  strong Default location:
-  = @consumable.default_location_id
-
-= link_to 'Edit', edit_consumable_path(@consumable)
-| |
-= link_to 'Back', consumables_path
+  = link_to 'Edit', edit_consumable_path(@consumable)
+  ' |
+  = link_to 'Back', consumables_path

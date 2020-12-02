@@ -23,10 +23,10 @@ section.h-full.flex.flex-col data-controller="filter"
           tr data-target="filter.row"
             td = check_box_tag :selected, item.id, false, data: { action: "table#checked", target: "table.checkbox" }
             td = link_to item.title, item
-            td = item.model.name
-            td = item.asset_tag
-            td = item.serial
-            td = item.vendor&.name
+            td = link_to item.model.name, item.model
+            td = item.asset_tag ? link_to(item.asset_tag, item) : ''
+            td = item.serial ? link_to(item.serial, item) : ''
+            td = item.vendor&.name ? link_to(item.vendor&.name, item.vendor) : ''
             td = number_to_currency(item.cost)
             td nowrap="nowrap"
               - if item.assigned

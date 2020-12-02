@@ -10,13 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_29_045138) do
+ActiveRecord::Schema.define(version: 2020_07_14_035238) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "fuzzystrmatch"
-  enable_extension "pg_trgm"
   enable_extension "plpgsql"
-  enable_extension "unaccent"
 
   create_table "accessories", force: :cascade do |t|
     t.string "name"
@@ -25,32 +22,18 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.integer "min_qty"
     t.integer "qty"
     t.decimal "cost", precision: 10, scale: 2
-    t.time "purchased_at"
     t.boolean "requestable"
     t.text "notes"
+    t.bigint "category_id", null: false
     t.bigint "manufacturer_id", null: false
-    t.bigint "accessory_category_id", null: false
     t.bigint "vendor_id"
     t.bigint "default_location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["accessory_category_id"], name: "index_accessories_on_accessory_category_id"
+    t.index ["category_id"], name: "index_accessories_on_category_id"
     t.index ["default_location_id"], name: "index_accessories_on_default_location_id"
     t.index ["manufacturer_id"], name: "index_accessories_on_manufacturer_id"
     t.index ["vendor_id"], name: "index_accessories_on_vendor_id"
-  end
-
-  create_table "accessory_categories", force: :cascade do |t|
-    t.string "name"
-    t.string "notes"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "address_types", force: :cascade do |t|
-    t.text "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "addresses", force: :cascade do |t|
@@ -62,10 +45,10 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.string "postal"
     t.text "notes"
     t.bigint "contact_id", null: false
-    t.bigint "address_type_id"
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["address_type_id"], name: "index_addresses_on_address_type_id"
+    t.index ["category_id"], name: "index_addresses_on_category_id"
     t.index ["contact_id"], name: "index_addresses_on_contact_id"
   end
 
@@ -85,18 +68,22 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
   end
 
-  create_table "companies", force: :cascade do |t|
-    t.string "name", null: false
+  create_table "categories", force: :cascade do |t|
+    t.string "categorizable_type", null: false
+    t.string "name"
+    t.string "slug", null: false
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_companies_on_name", unique: true
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
-  create_table "consumable_categories", force: :cascade do |t|
+  create_table "companies", force: :cascade do |t|
     t.string "name"
-    t.text "notes"
+    t.string "slug", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_companies_on_slug", unique: true
   end
 
   create_table "consumables", force: :cascade do |t|
@@ -107,13 +94,13 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.decimal "cost", precision: 10, scale: 2
     t.boolean "requestable"
     t.text "notes"
+    t.bigint "category_id", null: false
     t.bigint "manufacturer_id", null: false
-    t.bigint "consumable_category_id", null: false
     t.bigint "vendor_id", null: false
     t.bigint "default_location_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["consumable_category_id"], name: "index_consumables_on_consumable_category_id"
+    t.index ["category_id"], name: "index_consumables_on_category_id"
     t.index ["default_location_id"], name: "index_consumables_on_default_location_id"
     t.index ["manufacturer_id"], name: "index_consumables_on_manufacturer_id"
     t.index ["vendor_id"], name: "index_consumables_on_vendor_id"
@@ -134,49 +121,39 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.index ["primary_phone_id"], name: "index_contacts_on_primary_phone_id"
   end
 
-  create_table "contract_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "contracts", force: :cascade do |t|
-    t.bigint "contract_type_id", null: false
-    t.bigint "vendor_id", null: false
     t.text "description"
     t.text "notes"
+    t.bigint "vendor_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["contract_type_id"], name: "index_contracts_on_contract_type_id"
+    t.index ["category_id"], name: "index_contracts_on_category_id"
     t.index ["vendor_id"], name: "index_contracts_on_vendor_id"
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
+    t.string "slug", null: false
     t.bigint "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "manager_id"
     t.index ["location_id"], name: "index_departments_on_location_id"
     t.index ["manager_id"], name: "index_departments_on_manager_id"
-    t.index ["name"], name: "index_departments_on_name", unique: true
-  end
-
-  create_table "email_types", force: :cascade do |t|
-    t.text "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_departments_on_slug", unique: true
   end
 
   create_table "emails", force: :cascade do |t|
     t.string "email"
     t.text "notes"
     t.bigint "contact_id", null: false
-    t.bigint "email_type_id"
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_emails_on_category_id"
     t.index ["contact_id"], name: "index_emails_on_contact_id"
-    t.index ["email_type_id"], name: "index_emails_on_email_type_id"
+    t.index ["email"], name: "index_emails_on_email", unique: true
   end
 
   create_table "fields", force: :cascade do |t|
@@ -215,13 +192,6 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.index ["nic_id"], name: "index_ip_leases_on_nic_id"
   end
 
-  create_table "item_categories", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_item_categories_on_name", unique: true
-  end
-
   create_table "items", force: :cascade do |t|
     t.string "title"
     t.string "asset_tag"
@@ -244,12 +214,6 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.index ["vendor_id"], name: "index_items_on_vendor_id"
   end
 
-  create_table "license_categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "licenses", force: :cascade do |t|
     t.string "name"
     t.integer "seats"
@@ -263,40 +227,44 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.datetime "terminates_at"
     t.boolean "maintained"
     t.text "notes"
-    t.bigint "license_category_id", null: false
+    t.bigint "category_id", null: false
     t.bigint "vendor_id"
     t.bigint "manufacturer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["license_category_id"], name: "index_licenses_on_license_category_id"
+    t.index ["category_id"], name: "index_licenses_on_category_id"
     t.index ["manufacturer_id"], name: "index_licenses_on_manufacturer_id"
     t.index ["vendor_id"], name: "index_licenses_on_vendor_id"
   end
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
+    t.string "slug", null: false
     t.bigint "parent_id"
     t.index ["parent_id"], name: "index_locations_on_parent_id"
+    t.index ["slug"], name: "index_locations_on_slug", unique: true
   end
 
   create_table "manufacturers", force: :cascade do |t|
     t.string "name"
+    t.string "slug", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_manufacturers_on_name", unique: true
+    t.index ["slug"], name: "index_manufacturers_on_slug", unique: true
   end
 
   create_table "models", force: :cascade do |t|
     t.string "name"
+    t.string "slug", null: false
     t.string "model_number"
     t.text "notes"
+    t.bigint "category_id", null: false
     t.bigint "manufacturer_id", null: false
-    t.bigint "item_category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_category_id"], name: "index_models_on_item_category_id"
+    t.index ["category_id"], name: "index_models_on_category_id"
     t.index ["manufacturer_id"], name: "index_models_on_manufacturer_id"
-    t.index ["name"], name: "index_models_on_name", unique: true
+    t.index ["slug"], name: "index_models_on_slug", unique: true
   end
 
   create_table "networks", force: :cascade do |t|
@@ -354,26 +322,11 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.string "last_name"
     t.boolean "active", default: true
     t.string "employee_number"
-    t.string "title"
+    t.string "job_title"
     t.bigint "manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["manager_id"], name: "index_people_on_manager_id"
-  end
-
-  create_table "pg_search_documents", force: :cascade do |t|
-    t.text "content"
-    t.string "searchable_type"
-    t.bigint "searchable_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
-  end
-
-  create_table "phone_types", force: :cascade do |t|
-    t.text "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "phones", force: :cascade do |t|
@@ -381,11 +334,11 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.string "extension"
     t.text "notes"
     t.bigint "contact_id", null: false
-    t.bigint "phone_type_id"
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_phones_on_category_id"
     t.index ["contact_id"], name: "index_phones_on_contact_id"
-    t.index ["phone_type_id"], name: "index_phones_on_phone_type_id"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -411,9 +364,10 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
 
   create_table "status_types", force: :cascade do |t|
     t.string "name"
+    t.string "slug", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_status_types_on_name", unique: true
+    t.index ["slug"], name: "index_status_types_on_slug", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -457,9 +411,11 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
 
   create_table "vendors", force: :cascade do |t|
     t.string "name"
+    t.string "slug", null: false
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_vendors_on_slug", unique: true
   end
 
   create_table "warranties", force: :cascade do |t|
@@ -476,29 +432,29 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
     t.string "name"
     t.string "notes"
     t.bigint "contact_id", null: false
-    t.bigint "contact_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["contact_id"], name: "index_websites_on_contact_id"
-    t.index ["contact_type_id"], name: "index_websites_on_contact_type_id"
   end
 
-  add_foreign_key "accessories", "accessory_categories"
+  add_foreign_key "accessories", "categories"
   add_foreign_key "accessories", "locations", column: "default_location_id"
   add_foreign_key "accessories", "manufacturers"
   add_foreign_key "accessories", "vendors"
+  add_foreign_key "addresses", "categories"
   add_foreign_key "addresses", "contacts"
-  add_foreign_key "consumables", "consumable_categories"
+  add_foreign_key "consumables", "categories"
   add_foreign_key "consumables", "locations", column: "default_location_id"
   add_foreign_key "consumables", "manufacturers"
   add_foreign_key "consumables", "vendors"
   add_foreign_key "contacts", "addresses", column: "primary_address_id"
   add_foreign_key "contacts", "emails", column: "primary_email_id"
   add_foreign_key "contacts", "phones", column: "primary_phone_id"
-  add_foreign_key "contracts", "contract_types"
+  add_foreign_key "contracts", "categories"
   add_foreign_key "contracts", "vendors"
   add_foreign_key "departments", "locations"
   add_foreign_key "departments", "people", column: "manager_id"
+  add_foreign_key "emails", "categories"
   add_foreign_key "emails", "contacts"
   add_foreign_key "fieldset_associations", "fieldsets"
   add_foreign_key "ip_leases", "nics"
@@ -506,11 +462,11 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
   add_foreign_key "items", "locations", column: "default_location_id"
   add_foreign_key "items", "models"
   add_foreign_key "items", "vendors"
-  add_foreign_key "licenses", "license_categories"
+  add_foreign_key "licenses", "categories"
   add_foreign_key "licenses", "manufacturers"
   add_foreign_key "licenses", "vendors"
   add_foreign_key "locations", "locations", column: "parent_id"
-  add_foreign_key "models", "item_categories"
+  add_foreign_key "models", "categories"
   add_foreign_key "models", "manufacturers"
   add_foreign_key "nics", "items"
   add_foreign_key "orders", "users"
@@ -518,6 +474,7 @@ ActiveRecord::Schema.define(version: 2020_11_29_045138) do
   add_foreign_key "ownerships", "companies"
   add_foreign_key "ownerships", "departments"
   add_foreign_key "people", "people", column: "manager_id"
+  add_foreign_key "phones", "categories"
   add_foreign_key "phones", "contacts"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"

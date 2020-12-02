@@ -6,7 +6,7 @@ class License < ApplicationRecord
 
   resourcify
 
-  belongs_to :license_category
+  belongs_to :category
   belongs_to :vendor
   belongs_to :manufacturer
 

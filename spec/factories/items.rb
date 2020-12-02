@@ -7,7 +7,6 @@ FactoryBot.define do
     purchased_at { Time.zone.yesterday.end_of_day }
     requestable { true }
     notes { Faker::Lorem.sentence }
-    item_category { ItemCategory.first || create(:item_category) }
     default_location factory: :location
     model
     vendor

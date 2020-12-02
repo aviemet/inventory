@@ -9,7 +9,7 @@ class CreateAddresses < ActiveRecord::Migration[6.0]
       t.string :postal
       t.text :notes
       t.references :contact, null: false, foreign_key: true
-      t.references :address_type
+      t.references :category, null: false, foreign_key: true
 
       t.timestamps
     end

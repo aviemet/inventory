@@ -11,7 +11,7 @@ FactoryBot.define do
     notes { Faker::Lorem.sentence }
     default_location factory: :location
     manufacturer
-    accessory_category
+    category
     vendor
     company
   end

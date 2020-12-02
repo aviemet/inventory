@@ -13,7 +13,7 @@ class CreateLicenses < ActiveRecord::Migration[6.0]
       t.datetime :terminates_at
       t.boolean :maintained
       t.text :notes
-      t.references :license_category, null: false, foreign_key: true
+      t.references :category, null: false, foreign_key: true
       t.references :vendor, null: true, foreign_key: true
       t.references :manufacturer, null: false, foreign_key: true
 

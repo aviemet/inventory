@@ -9,7 +9,7 @@ FactoryBot.define do
     notes { Faker::Lorem.sentence }
     manufacturer { Manufacturer.first || create(:manufacturer) }
     default_location factory: :location
-    consumable_category
+    category
     vendor
   end
 end

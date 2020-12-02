@@ -1,0 +1,37 @@
+- link_file = "layouts/application/link"
+
+aside#sidebar
+  div
+    .text-right.link-hover
+      == mi.public_send(:menu).html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar")
+    nav.links
+      - if current_user&.active_company
+        - path_hash = {  }
+        ul
+          = render link_file, locals: { text: 'Inventory', path: items_path(path_hash), icon: :important_devices }
+          = render link_file, locals: { text: 'Accessories', path: accessories_path(path_hash), icon: :keyboard }
+          = render link_file, locals: { text: 'Consumables', path: consumables_path(path_hash), icon: :opacity }
+          = render link_file, locals: { text: 'Licenses', path: licenses_path(path_hash), icon: :save }
+          = render link_file, locals: { text: 'Networks', path: networks_path(path_hash), icon: :settings_ethernet }
+          = render link_file, locals: { text: 'People', path: people_path(path_hash), icon: :people }
+          li
+            = link_to "<span>Vendors</span>#{mi.business}".html_safe, vendors_path(path_hash)
+            ul
+              li = link_to 'Contracts', contracts_path(path_hash)
+          = render link_file, locals: { text: 'Purchasing', path: orders_path(path_hash), icon: :shopping_cart }
+
+  div
+    .links
+      - if current_user&.active_company
+        - path_hash = {  }
+        ul
+          li
+            a href="/"
+              span Settings
+              == mi.settings
+            ul.up
+              li = link_to 'Companies', companies_path
+              li = link_to 'Manufacturers', manufacturers_path(path_hash)
+              li = link_to 'Models', models_path(path_hash)
+              li = link_to 'Custom Fields', fields_path
+          = render link_file, locals: { text: 'Sign Out', path: destroy_user_session_path, icon: :exit_to_app }

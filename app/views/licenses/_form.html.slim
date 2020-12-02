@@ -1,13 +1,6 @@
 = form_with(model: license, local: true) do |form|
-  - if license.errors.any?
-    #error_explanation
-      h2
-        = pluralize(license.errors.count, "error")
-        | prohibited this license from being saved:
-      ul
-        - license.errors.full_messages.each do |message|
-          li =
- message
+  = render "shared/form/errors", record: license
+
   .field
     = form.label :name
     = form.text_field :name
@@ -45,8 +38,8 @@
     = form.label :notes
     = form.text_area :notes
   .field
-    = form.label :license_category
-    = form.text_area :license_category
+    = form.label :category
+    = form.text_area :category
   .field
     = form.label :vendor
     = form.text_area :vendor

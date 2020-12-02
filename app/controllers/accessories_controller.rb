@@ -62,13 +62,14 @@ class AccessoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_accessory
-      @accessory = Accessory.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def accessory_params
-      params.require(:accessory).permit(:name, :serial, :notes, :qty, :vendor_id, :default_location_id, :accessory_category_id, :model_number, :cost, :min_qty)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_accessory
+    @accessory = Accessory.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def accessory_params
+    params.require(:accessory).permit(:name, :serial, :notes, :qty, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :min_qty)
+  end
 end
