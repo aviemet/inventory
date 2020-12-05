@@ -5,6 +5,7 @@ section.h-full.flex.flex-col data-controller="filter"
 
     .flex-1
       input type="text" data-action="keyup->filter#filterResults" data-target="filter.input"
+      = render "shared/column_picker.html.erb"
 
   .scroll-content.shadow
     table.table-auto data-controller="table"

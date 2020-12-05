@@ -3,10 +3,11 @@
 @import "tailwindcss/utilities";
 
 @import "components/layout";
-@import "components/alerts";
-@import "components/grid";
 @import "components/base_styles";
-@import "components/styles.css";
+@import "components/styles";
+@import "components/grid";
+@import "components/alerts";
+@import "components/elements";
 
 :root {
   --input-margin-bottom: 10px;

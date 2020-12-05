@@ -1,0 +1,34 @@
+.dropdown {
+  z-index: 1000;
+
+  i {
+    @apply align-middle;
+  }
+
+  & > input[type="checkbox"] {
+    & + .options {
+      @apply hidden;
+
+      @supports (-moz-appearance: none) {
+        @apply pr-5;
+      }
+    }
+
+    &:checked + .options {
+      @apply block;
+    }
+  }
+
+  .options {
+    li {
+      div {
+        @apply whitespace-nowrap;
+
+        input[type="checkbox"] {
+          @apply mr-1;
+          @apply cursor-default;
+        }
+      }
+    }
+  }
+}
