@@ -14,6 +14,7 @@ class Item < ApplicationRecord
   belongs_to :default_location, class_name: "Location", required: false
   belongs_to :parent, class_name: "Item", required: false
   has_one :category, through: :model
+  has_one :manufacturer, through: :model
   has_one :warranty, required: false
 
   # against: [:title, :asset_tag, :serial, :cost, :requestable, :notes],

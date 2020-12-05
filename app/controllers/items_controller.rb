@@ -4,10 +4,13 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_form_models, only: [:edit, :new, :update, :create]
 
+
   # GET /items
   # GET /items.json
   def index
-    @items = current_user.active_company.items.includes(:assignments).joins([:model, :vendor]).order(order_by)
+    @hideable_fields = %w(asset_tag, serial cost purchased_at requestable category manufacturer model.name model.model_number).freeze
+    @items = current_user.active_company.items.joins([:category, :model]).left_outer_joins([:assignments, :department, :vendor, :manufacturer]).order(order_by)
+    # current_user.active_company.items.includes(:assignments, :department).joins([:model, :vendor]).order(order_by)
   end
 
   # GET /items/1
