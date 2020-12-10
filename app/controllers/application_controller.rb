@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
   # end
   # raise CanCan::AccessDenied.new("You are not authorized to perform this action!", :custom_action, Project)
 
+  def after_sign_out_path_for(*)
+    new_user_session_path
+  end
+
   private
 
   def set_active_company
