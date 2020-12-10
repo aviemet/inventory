@@ -80,6 +80,8 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     byebug (11.1.3)
+    cable_ready (4.4.3)
+      rails (>= 5.2)
     cancancan (3.1.0)
     capybara (3.34.0)
       addressable
@@ -402,6 +404,12 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stimulus_reflex (3.3.0)
+      cable_ready (>= 4.3.0)
+      nokogiri
+      rack
+      rails (>= 5.2)
+      redis
     sunspot (2.5.0)
       pr_geohash (~> 1.0)
       rsolr (>= 1.1.1, < 3)
@@ -508,6 +516,7 @@ DEPENDENCIES
   solargraph (~> 0.39.7)
   spring
   spring-watcher-listen (~> 2.0.0)
+  stimulus_reflex (~> 3.3)
   sunspot_rails (~> 2.5)
   sunspot_solr (~> 2.5)
   turbolinks (~> 5)
