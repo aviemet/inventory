@@ -7,4 +7,4 @@ div class="relative inline-block dropdown group"
     - columns.each do |column|
       li
         div
-          input type="checkbox" = column
+          input type="checkbox" checked="checked" data-action="change->table#toggleColumn" *{"data-table-field-name" => column} = column

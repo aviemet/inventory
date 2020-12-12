@@ -1,40 +1,42 @@
-section.h-full.flex.flex-col data-controller="filter"
+section.h-full.flex.flex-col data-controller="table"
 
   .flex
     h1.flex-1 Items
 
     .flex-1
-      input type="text" data-action="keyup->filter#filterResults" data-target="filter.input"
+      input type="text" data-action="keyup->filter#filterResults" data-target="table.filterInput"
       = render "shared/column_picker", columns: @hideable_fields
 
   .scroll-content.shadow
-    table.table-auto data-controller="table"
+    table.table-auto data-target="table.table"
       thead
         tr
           th = check_box_tag :select_all, "all", false, data: { action: "table#checkAll", target: "table.selectAll" }
-          = th_sortable(:title)
-          = th_sortable(:model, { sort: "models.name" })
-          = th_sortable(:asset_tag)
-          = th_sortable(:serial)
-          = th_sortable(:category, { sort: "categories.name" })
-          = th_sortable(:manufacturer, { sort: "manufacturers.name" })
-          = th_sortable(:vendor, { sort: "vendors.name" })
-          = th_sortable(:cost)
-          = th_sortable(:department, { sort: "departments.name" })
+          = data_heading(:title, hideable: false)
+          = data_heading("models.name", heading: "Model")
+          = data_heading(:asset_tag)
+          = data_heading(:serial)
+          = data_heading("categories.name", heading: "Category")
+          = data_heading("manufacturers.name", heading: "Manufacturer")
+          = data_heading("vendors.name", heading: "Vendor")
+          = data_heading(:cost)
+          = data_heading("departments.name", heading: Department)
           th.table-column-fit.text-center Actions
       tbody
         - @items.each do |item|
-          tr data-target="filter.row"
+          tr data-target="table.row"
             td = check_box_tag :selected, item.id, false, data: { action: "table#checked", target: "table.checkbox" }
-            td = link_to item.title, item
-            td = link_to item.model.name, item.model
-            td = item.asset_tag ? link_to(item.asset_tag, item) : ''
-            td = item.serial ? link_to(item.serial, item) : ''
-            td = link_to(item.category.name, item.category)
-            td = link_to(item.manufacturer.name, item.manufacturer)
-            td = item.vendor&.name ? link_to(item.vendor&.name, item.vendor) : ''
-            td = number_to_currency(item.cost)
-            td = item.department ? link_to(item.department.name, item.department) : ''
+            / td = link_to item.title, item
+            = data_cell(:title, link_to(item.title, item))
+            / td data-target="table.cell" data-table-field-name="model.name" = link_to item.model.name, item.model
+            = data_cell("models.name", link_to(item.model.name, item.model))
+            = data_cell(:asset_tag, item.asset_tag ? link_to(item.asset_tag, item) : '')
+            = data_cell(:serial, item.serial ? link_to(item.serial, item) : '')
+            = data_cell("categories.name", link_to(item.category.name, item.category))
+            = data_cell("manufacturers.name", link_to(item.manufacturer.name, item.manufacturer))
+            = data_cell("vendors.name", item.vendor&.name ? link_to(item.vendor&.name, item.vendor) : '')
+            = data_cell("cost", number_to_currency(item.cost))
+            = data_cell("departments.name", item.department ? link_to(item.department.name, item.department) : '')
             td nowrap="nowrap"
               - if item.assigned
                 = render "shared/buttons/checkin", asset: item
