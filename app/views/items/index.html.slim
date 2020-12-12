@@ -16,11 +16,11 @@ section.h-full.flex.flex-col data-controller="filter"
           = th_sortable(:model, { sort: "models.name" })
           = th_sortable(:asset_tag)
           = th_sortable(:serial)
-          = th_sortable(:category, { sort: "category.name" })
-          = th_sortable(:manufacturer, { sort: "manufacturer.name" })
-          = th_sortable(:vendor, { sort: "vendor.name" })
+          = th_sortable(:category, { sort: "categories.name" })
+          = th_sortable(:manufacturer, { sort: "manufacturers.name" })
+          = th_sortable(:vendor, { sort: "vendors.name" })
           = th_sortable(:cost)
-          = th_sortable(:department, { sort: "department.name" })
+          = th_sortable(:department, { sort: "departments.name" })
           th.table-column-fit.text-center Actions
       tbody
         - @items.each do |item|
@@ -44,3 +44,5 @@ section.h-full.flex.flex-col data-controller="filter"
               = render "shared/buttons/delete", path: item
 
   = link_to 'New Item', new_item_path
+
+  div = "Showing #{@items.count} Items"

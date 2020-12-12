@@ -8,7 +8,7 @@ module TableHelper
     classes.push(direction) if params[:sort] == sort.to_s
 
     content_tag(
-      "th".freeze,
+      :th,
       link_to(title.titleize, sort: sort, direction: direction),
       { class: classes.join(" ") }
     )
@@ -17,8 +17,6 @@ module TableHelper
   private
 
   def input_to_a(input)
-    return input if input.class == Array
-
-    input.to_s.split(" ")
+    input.class == Array ? input : input.to_s.split(" ")
   end
 end

@@ -30,7 +30,7 @@ table
         td = accessory.min_qty
         td
           = render "shared/buttons/edit", path: edit_accessory_path(accessory)
-          = render "shared/buttons/delete", accessory
+          = render "shared/buttons/delete", path: accessory
 br
 
 = link_to 'New Accessory', new_accessory_path
