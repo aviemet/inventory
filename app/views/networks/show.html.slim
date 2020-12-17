@@ -15,10 +15,10 @@
         .value = @network.ip.to_s
       .item-row
         label Broadcast Address:
-        .value = @network.ip | ~(IPAddr.new("255.255.255.255").mask(@network.ip.prefix))
+        .value = @network.ip.broadcast
       .item-row
         label Number of Hosts
-        .value = @network.ip.to_range.count - 2
+        .value = @network.ip.hosts.count
       .item-row
         label Gateway:
         .value = @network.gateway
@@ -43,7 +43,7 @@
           th Address
           th Host
       tbody
-        - @network.ip.to_range.to_a[1..-2].each do |ip|
+        - @network.ip.hosts.each do |ip|
           tr
             td = ip
             td
