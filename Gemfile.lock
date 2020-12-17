@@ -440,6 +440,8 @@ GEM
     unicode-display_width (1.7.0)
     unicode_utils (1.4.0)
     uniform_notifier (1.13.0)
+    view_component (2.23.2)
+      activesupport (>= 5.0.0, < 7.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)
@@ -521,6 +523,7 @@ DEPENDENCIES
   sunspot_solr (~> 2.5)
   turbolinks (~> 5)
   tzinfo-data
+  view_component (~> 2.23)
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
