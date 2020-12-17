@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1.0'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
@@ -46,6 +46,9 @@ gem "devise_ldap_authenticatable", "~> 0.8.6"
 # User Authorization
 gem "rolify", "~> 5.3"
 gem "cancancan", "~> 3.1"
+
+# Enforce slug validation on models
+gem "slug", "~> 4.1"
 
 # Use Slim for view templating
 gem "slim", "~> 4.1"
@@ -132,6 +135,7 @@ group :test do
   gem "cucumber-rails", "~> 2.0", require: false
   gem "shoulda-matchers", "~> 4.3"
   gem "deep-cover", "~> 1.0"
+  gem "sunspot_test", "~> 0.4.2"
 
   # CI
   gem "bullet", "~> 6.1"

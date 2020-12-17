@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :category do
-    name { Category.first || Faker::Computer.type }
+    name { Faker::Computer.type }
+    categorizable_type { "Item" }
   end
 end

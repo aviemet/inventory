@@ -44,7 +44,7 @@ module TableHelper
     attributes
   end
 
-  def input_to_a(input)
+  def input_to_a(input = nil)
     return [] if input.nil?
 
     input.class == Array ? input : input.to_s.split(" ")

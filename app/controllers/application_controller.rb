@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     return if !current_user
 
     if current_user.companies.count > 0
-      current_user.active_company = current_user.companies.first if !current_user.active_company
+      current_user.update(active_company: current_user.companies.first)  if !current_user.active_company
 
       @active_company = current_user.active_company
     end

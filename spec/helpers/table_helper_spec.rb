@@ -8,7 +8,7 @@ RSpec.describe TableHelper, type: :helper do
 
   describe "#input_to_a" do
     it "returns an empty array if passed nothing" do
-      expect(input_to_a()).to be_empty
+      expect(input_to_a).to be_empty
     end
   end
 end

@@ -20,8 +20,8 @@ RSpec.describe Person, type: :model do
       expect(subject).to be_valid
     end
 
-    it "is valid without a title" do
-      subject.title = nil
+    it "is valid without a job title" do
+      subject.job_title = nil
       expect(subject).to be_valid
     end
 

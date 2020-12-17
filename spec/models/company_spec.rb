@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'models/concerns/contactable'
 
 RSpec.describe Company, type: :model do
-  subject { 
+  subject {
     build(:company)
   }
 
@@ -21,17 +21,17 @@ RSpec.describe Company, type: :model do
     it_behaves_like "contactable"
 
     it { should have_many(:ownerships) }
-    { 
+    {
       items: 'Item', 
-      departments: 'Department', 
-      locations: 'Location', 
-      contracts: 'Contract', 
-      networks: 'Network', 
-      people: 'Person', 
-      vendors: 'Vendor' 
+      departments: 'Department',
+      locations: 'Location',
+      contracts: 'Contract',
+      networks: 'Network',
+      people: 'Person',
+      vendors: 'Vendor'
     }.each_pair do |assoc, _|
       it { should have_many(assoc) }
     end
   end
-  
+
 end

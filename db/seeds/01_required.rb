@@ -2,8 +2,7 @@
 if StatusType.count == 0
   ["Deployable", "Undeployable", "Pending", "Archived"].each do |status|
     StatusType.create({
-      name: status,
-      slug: status.parameterize(separator: "_")
+      name: status
     })
   end
 end
@@ -22,7 +21,6 @@ if Category.count == 0
     categories.each do |category|
       Category.create!({
         name: category,
-        slug: "#{type.to_s.parameterize(separator: '_')}_#{category.parameterize(separator: '_')}",
         categorizable_type: type
       })
     end

@@ -4,6 +4,7 @@ module RequestMacros
       user = FactoryBot.create(:user)
       user.confirm
       user.add_role(:super_admin)
+      user.add_role(:admin, Company.first)
       sign_in user
     end
   end
@@ -11,6 +12,7 @@ module RequestMacros
   def login_user
     user = FactoryBot.create(:user)
     user.confirm
+    user.add_role(:admin, Company.first)
     sign_in user
   end
 end

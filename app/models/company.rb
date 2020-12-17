@@ -1,7 +1,9 @@
 class Company < ApplicationRecord
-  resourcify
-
   include Contactable
+
+  slug :name
+
+  resourcify
 
   has_many :users, through: :roles, class_name: :User, source: :users
 
@@ -22,7 +24,7 @@ class Company < ApplicationRecord
     vendors: :Vendor,
     manufacturers: :Manufacturer
   }.each_pair do |assoc, model|
-    has_many assoc, through: :ownerships, source: :ownable, source_type: model
+    has_many assoc, through: :ownerships, source: :ownable, source_type: model.to_s
   end
 
   # default_scope { includes(:ownerships) }

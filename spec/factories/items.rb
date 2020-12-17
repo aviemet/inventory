@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :item do    
+  factory :item do
     title { Faker::Device.model_name }
     asset_tag { |n| Faker::Lorem.word + n.to_s }
     serial { |n| Faker::Lorem.word + n.to_s }

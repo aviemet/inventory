@@ -19,8 +19,7 @@ if Rails.env == "development"
     user.add_role :super_admin
 
     company = Company.create!({
-      name: "Example Company",
-      slug: "Example Company".parameterize(separator: "_")
+      name: "Example Company"
     })
     user.add_role :admin, company
     person.company = company
@@ -32,12 +31,10 @@ if Rails.env == "development"
     [
       {
         name: "San Francisco Office",
-        slug: "San Francisco Office".parameterize(separator: "_"),
         company: Company.first
       },
       {
         name: "IT Office",
-        slug: "IT Office".parameterize(separator: "_"),
         company: Company.first,
         parent_id: 1
       }
@@ -48,13 +45,11 @@ if Rails.env == "development"
     [
       {
         name: "IT Dept",
-        slug: "IT Dept".parameterize(separator: "_"),
         location: Location.first,
         company: Company.first
       },
       { 
         name: "Engineering",
-        slug: "Engineering".parameterize(separator: "_"),
         location: Location.second,
         company: Company.first
       }
@@ -65,7 +60,6 @@ if Rails.env == "development"
     ["Apple", "Lenovo", "Cisco", "HP", "SHARP"].each do |manufacturer|
       Manufacturer.create!({
         name: manufacturer,
-        slug: manufacturer.parameterize(separator: "_"),
         company: Company.first
       })
     end
@@ -76,16 +70,14 @@ if Rails.env == "development"
       {
         name: "MacBook Pro",
         model_number: "MacBookPro16,1",
-        slug: "MacBookPro16,1".parameterize(separator: '_'),
-        manufacturer: Manufacturer.find_by_slug(:apple),
-        category: Category.find_by_slug(:item_laptop)
+        manufacturer: Manufacturer.find_by_slug("apple"),
+        category: Category.find_by_slug("item-laptop")
       },
       {
         name: "HP EliteDesk 800 G3",
         model_number: "1FY84UT#ABA",
-        slug: "1FY84UT#ABA".parameterize(separator: '_'),
-        manufacturer: Manufacturer.find_by_slug(:hp),
-        category: Category.find_by_slug(:item_desktop)
+        manufacturer: Manufacturer.find_by_slug("hp"),
+        category: Category.find_by_slug("item-desktop")
       }
     ].each{ |model| Model.create!(model) }
   end
@@ -94,22 +86,18 @@ if Rails.env == "development"
     [
       {
         name: "Apple",
-        slug: :apple,
         url: "www.apple.com"
       },
       {
         name: "Amazon",
-        slug: :amazon,
         url: "www.amazon.com"
       },
       {
         name: "CDW",
-        slug: :cdw,
         url: "www.cdw.com"
       },
       {
         name: "SHARP",
-        slug: :sharp,
         url: "www.business.sharp.com"
       }
     ].each{ |vendor| Vendor.create!(vendor.merge({ company: Company.first })) }
@@ -143,7 +131,7 @@ if Rails.env == "development"
       purchased_at: Time.zone.yesterday.end_of_day,
       expires_at: Time.current.next_year,
       terminates_at: Time.current.next_year,
-      category: Category.find_by_slug(:license_operating_system),
+      category: Category.find_by_slug("license-operating-system"),
       vendor: Vendor.first,
       manufacturer: Manufacturer.first,
       company: Company.first
@@ -159,9 +147,9 @@ if Rails.env == "development"
       qty: 10,
       min_qty: 1,
       requestable: true,
-      category: Category.find_by_slug(:accessory_keyboard),
-      manufacturer: Manufacturer.find_by_slug(:apple),
-      vendor: Vendor.find_by_slug(:apple),
+      category: Category.find_by_slug("accessory-keyboard"),
+      manufacturer: Manufacturer.find_by_slug("apple"),
+      vendor: Vendor.find_by_slug("apple"),
       default_location: Location.first,
       company: Company.first
     })
@@ -175,9 +163,9 @@ if Rails.env == "development"
       min_qty: 2,
       cost: nil,
       requestable: true,
-      category: Category.find_by_slug(:consumable_toner),
-      manufacturer: Manufacturer.find_by_slug(:sharp),
-      vendor: Vendor.find_by_slug(:sharp),
+      category: Category.find_by_slug("consumable-toner"),
+      manufacturer: Manufacturer.find_by_slug("sharp"),
+      vendor: Vendor.find_by_slug("sharp"),
       default_location: Location.first,
       company: Company.first
     })
