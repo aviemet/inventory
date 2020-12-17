@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @hideable_fields = %w(models.name asset_tag serial cost purchased_at requestable categories.name manufacturers.name models.model_number vendors.name).freeze
+    @hideable_fields = %w(models.name asset_tag serial cost purchased_at requestable categories.name manufacturers.name models.model_number vendors.name departments.name).freeze
     @items = @active_company.items.includes([:category, :model, :assignments, :department, :vendor, :manufacturer]).order(order_by)
   end
 

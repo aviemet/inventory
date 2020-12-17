@@ -1,15 +1,18 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "heading", "cell", "checkbox", "selectAll" ]
+  static targets = [ "heading", "cell", "checkbox", "selectAll", "columnToggleMenu" ]
+  static values = { preferences: Object }
+
+  connect() {
+    console.log({ prefs: this.preferencesValue })
+  }
 
   /** TOGGLE COLUMNS */
   toggleColumn(e) {
     const field = e.target.dataset.tableFieldName
     const heading = this.headingTargets.find(el => el.dataset.tableFieldName === field)
     if(!heading) return
-
-    console.log({ field })
 
     if(e.target.checked) {
       this._showElement(heading)
@@ -34,6 +37,18 @@ export default class extends Controller {
 
   _showElement(el) {
     el.classList.remove("hidden")
+  }
+
+  onShowColumnMenu(e) {
+    document.addEventListener("click", clickEvent => this._bodyClickListener(clickEvent.target, e.target))
+  }
+
+  _bodyClickListener(clickTarget, checkboxToggle) {
+    const menu = this.columnToggleMenuTarget
+    if(menu.contains(clickTarget)) return false
+
+    checkboxToggle.checked = false
+    document.removeEventListener("click", this._bodyClickListener)
   }
   /** END TOGGLE COLUMNS */
 

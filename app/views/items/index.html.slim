@@ -1,14 +1,14 @@
-section.h-full.flex.flex-col data-controller="table"
+section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-value" => current_user.table_preferences }
 
   .flex
-    h1.flex-1 Items
+    h1.flex-1 Hardware Assets
 
     .flex-1
-      input type="text" data-action="keyup->filter#filterResults" data-target="table.filterInput"
-      = render "shared/column_picker", columns: @hideable_fields
+      input type="text" data-action="keyup->table#filterResults" data-target="table.filterInput"
+    = render "shared/column_picker", columns: @hideable_fields
 
   .scroll-content.shadow
-    table.table-auto data-target="table.table"
+    table.table-auto
       thead
         tr
           th = check_box_tag :select_all, "all", false, data: { action: "table#checkAll", target: "table.selectAll" }

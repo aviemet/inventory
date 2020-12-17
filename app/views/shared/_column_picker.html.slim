@@ -1,8 +1,8 @@
-div class="relative inline-block dropdown group"
+div class="relative inline-block dropdown group" data-target="table.columnToggleMenu"
   label class="inline-block px-3 py-2 bg-gray-100 border rounded" for="toggle-dropdown"
     == mi.view_column
 
-  input.hidden type="checkbox" id="toggle-dropdown"
+  input.hidden type="checkbox" id="toggle-dropdown" data-action="table#onShowColumnMenu"
   ul class="absolute right-0 min-w-full px-3 py-2 overflow-y-auto bg-gray-100 shadow options max-h-60"
     - columns.each do |column|
       li

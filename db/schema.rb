@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_035238) do
+ActiveRecord::Schema.define(version: 2020_12_12_211023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -393,11 +393,13 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.bigint "person_id", null: false
     t.bigint "active_company_id"
     t.boolean "active", default: true
+    t.jsonb "table_preferences", default: {}
     t.index ["active_company_id"], name: "index_users_on_active_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["table_preferences"], name: "index_users_on_table_preferences", using: :gin
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
