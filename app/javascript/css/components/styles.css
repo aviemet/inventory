@@ -18,3 +18,47 @@ a.button {
     @apply bg-lightBlue-800;
   }
 }
+
+#modal-overlay {
+  @apply hidden;
+  @apply fixed inset-0 z-40;
+  @apply w-full h-full;
+  @apply bg-white;
+
+  &.visible {
+    @apply flex;
+    @apply justify-center;
+    align-items: center;
+    @apply bg-opacity-80 bg-gray-800;
+  }
+
+  #modal-window-area {
+    @apply relative;
+    @apply max-h-full sm:max-h-5/6;
+    @apply w-full sm:w-10/12 lg:w-8/12;
+    @apply overflow-y-auto;
+    @apply bg-white rounded-lg;
+
+    #modal-close {
+      @apply text-gray-600 ease-in-out transition-colors;
+      @apply p-2 cursor-pointer;
+      @apply absolute top-1 right-1;
+
+      &:hover {
+        @apply text-brand-dark;
+      }
+    }
+
+    #modal-content-area {
+      .modal-header {
+        @apply w-full;
+        @apply px-4 pt-6 pb-0;
+        @apply border-b;
+      }
+
+      .modal-content {
+        @apply p-4;
+      }
+    }
+  }
+}

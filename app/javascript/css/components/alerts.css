@@ -3,8 +3,8 @@
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1001;
-  text-align: center;
+  @apply z-50;
+  @apply text-center;
 
   .message {
     width: min(900px, 90vw);

@@ -1,0 +1,8 @@
+a.button data-action="click->layout#modalOpen" data-layout-modal-id="#{@modal_id}" Modal
+
+template id="#{@modal_id}"
+  .template-content
+    .modal-header
+      h1 = @heading
+    .modal-content.w-
+      = content

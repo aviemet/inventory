@@ -1,5 +1,5 @@
 .dropdown {
-  z-index: 1000;
+  @apply z-30;
 
   i {
     @apply align-middle;

@@ -72,11 +72,8 @@ body {
 }
 
 #sidebar {
-  z-index: 1000;
+  @apply flex flex-col justify-between z-30;
   @apply bg-blueGray-900;
-  @apply flex;
-  @apply flex-col;
-  @apply justify-between;
 
   &,
   a,
@@ -156,7 +153,6 @@ body {
       @apply relative;
       @apply float-left;
       padding: 10px 0 var(--sidebar-icon-left-padding) 5px;
-      z-index: 990;
     }
 
     span {

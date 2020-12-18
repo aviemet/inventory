@@ -1,7 +1,9 @@
 section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-value" => current_user.table_preferences }
 
   .flex
-    h1.flex-1 Hardware Assets
+    .flex-1
+      h1.inline-block Hardware Assets
+      .inline-block.text-right.align-top = link_to '+ New Item', new_item_path, class: :button
 
     .flex-1
       input type="text" data-action="keyup->table#filterResults" data-target="table.filterInput"
@@ -39,7 +41,5 @@ section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-v
               = render Buttons::AssignmentButtonComponent.new(asset: item)
               = render "shared/buttons/edit", path: edit_item_path(item)
               = render "shared/buttons/delete", path: item
-
-  = link_to 'New Item', new_item_path
 
   div = "Showing #{@items.count} Items"
