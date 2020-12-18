@@ -16,8 +16,14 @@ module Inventory
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    config.generators.stylesheets = false
-    config.generators.javascripts = false
-    config.generators.helper = false
+    config.generators do |g|
+      g.template_engine     :slim
+      g.test_framework      :rspec
+
+      g.scaffold_stylesheet false
+      g.stylesheets         false
+      g.javascripts         false
+      g.helper              false
+    end
   end
 end

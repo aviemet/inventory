@@ -26,7 +26,7 @@ class Assignment < ApplicationRecord
   end
 
   def only_one_active_assignment
-    if self.assignable.assigned
+    if self.assignable.assigned?
       errors.add(:active, "can only have one active assignment")
     end
   end

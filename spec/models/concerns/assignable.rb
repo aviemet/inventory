@@ -13,7 +13,7 @@ shared_examples "assignable" do
     it "Has methods to access assignments" do
       person = create(:person)
       subject.assign_to(person)
-      expect(subject.assigned).to be(true)
+      expect(subject.assigned?).to be(true)
       expect(subject.assignment).to be_a(Assignment)
     end
 

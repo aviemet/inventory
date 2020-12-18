@@ -23,7 +23,7 @@ module Assignable
       self.assignment&.assign_toable
     end
 
-    def assigned
+    def assigned?
       !self.assignment.nil?
     end
 

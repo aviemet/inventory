@@ -26,9 +26,7 @@ section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-v
         - @items.each do |item|
           tr data-target="table.row"
             td = check_box_tag :selected, item.id, false, data: { action: "table#checked", target: "table.checkbox" }
-            / td = link_to item.title, item
             = data_cell(:title, link_to(item.title, item))
-            / td data-target="table.cell" data-table-field-name="model.name" = link_to item.model.name, item.model
             = data_cell("models.name", link_to(item.model.name, item.model))
             = data_cell(:asset_tag, item.asset_tag ? link_to(item.asset_tag, item) : '')
             = data_cell(:serial, item.serial ? link_to(item.serial, item) : '')
@@ -38,10 +36,7 @@ section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-v
             = data_cell("cost", number_to_currency(item.cost))
             = data_cell("departments.name", item.department ? link_to(item.department.name, item.department) : '')
             td nowrap="nowrap"
-              - if item.assigned
-                = render "shared/buttons/checkin", asset: item
-              - else
-                = render "shared/buttons/checkout", asset: item
+              = render Buttons::AssignmentButtonComponent.new(asset: item)
               = render "shared/buttons/edit", path: edit_item_path(item)
               = render "shared/buttons/delete", path: item
 
