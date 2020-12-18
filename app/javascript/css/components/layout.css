@@ -188,7 +188,8 @@ footer#footer {
 }
 
 .item-details {
-  @apply grid grid-cols-1 md:grid-cols-2 md:grid-rows-4 gap-3 md:grid-flow-col;
+  @apply grid grid-cols-1 md:grid-cols-2 gap-3;
+  @apply mb-4;
 
   .item-row {
     @apply flex;
