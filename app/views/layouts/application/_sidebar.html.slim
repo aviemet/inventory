@@ -8,12 +8,17 @@ aside#sidebar
       - if current_user&.active_company
         - path_hash = {  }
         ul
-          = render link_file, locals: { text: 'Inventory', path: items_path(path_hash), icon: :important_devices }
-          = render link_file, locals: { text: 'Accessories', path: accessories_path(path_hash), icon: :keyboard }
-          = render link_file, locals: { text: 'Consumables', path: consumables_path(path_hash), icon: :opacity }
+          li
+            = link_to "<span>Inventory</span>#{mi.important_devices}".html_safe, items_path(path_hash)
+            ul
+              li = link_to 'Hardware', items_path(path_hash)
+              li = link_to 'Accessories', accessories_path(path_hash)
+              li = link_to 'Consumables', consumables_path(path_hash)
+
           = render link_file, locals: { text: 'Licenses', path: licenses_path(path_hash), icon: :save }
           = render link_file, locals: { text: 'Networks', path: networks_path(path_hash), icon: :settings_ethernet }
           = render link_file, locals: { text: 'People', path: people_path(path_hash), icon: :people }
+          = render link_file, locals: { text: 'Tickets', path: people_path(path_hash), icon: :confirmation_number }
           li
             = link_to "<span>Vendors</span>#{mi.business}".html_safe, vendors_path(path_hash)
             ul

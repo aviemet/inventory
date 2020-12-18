@@ -17,7 +17,6 @@ class AssignmentsController < ApplicationController
   # GET /assignments/:asset_type/:asset_id/new
   def new
     @assignment = Assignment.new
-    # render "#{params[:asset_type].pluralize.downcase}/checkout"
   end
 
   # GET /assignments/:id/edit
@@ -28,17 +27,13 @@ class AssignmentsController < ApplicationController
   # POST /assignments/:asset_type/:asset_id
   # POST /assignments/:asset_type/:asset_id.json
   def create
-    @assignment = Assignment.new({
-      assignable_type: request.params[:asset_type].capitalize,
-      assignable_id: request.params[:asset_id],
-      assign_toable_type: assignment_params[:assign_toable_type].capitalize,
-      assign_toable_id: assignment_params[:assign_toable_id],
-      assigned_at: assignment_params[:assigned_at] || Time.current,
-      expected_at: assignment_params[:expected_at] || nil
-    })
+    assignable = request.params[:asset_type].capitalize.constantize.find( request.params[:asset_id])
+    assign_toable = assignment_params[:assign_toable_type].capitalize.constantize.find(assignment_params[:assign_toable_id])
+
+    @assignment = assignable.update(title: assignment_params[request.params[:asset_type]][:title])
 
     respond_to do |format|
-      if @assignment.save
+      if assignable.assign_to assign_toable, assigned_at: assignment_params[:assigned_at], expected_at: assignment_params[:expected_at]
         format.html { redirect_to @asset, notice: 'Assignment was successfully created.' }
         format.json { render :show, status: :created, location: @asset }
       else
@@ -92,6 +87,6 @@ class AssignmentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def assignment_params
-    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :assigned_at, :expected_at, :returned_at, :notes, :active, item: [:title], accessory: [:title])
+    params.require(:assignment).permit(:assign_toable_id, :assign_toable_type, :assigned_at, :expected_at, :returned_at, :notes, :active, item: [:title], accessory: [:title], consumable: [:title])
   end
 end

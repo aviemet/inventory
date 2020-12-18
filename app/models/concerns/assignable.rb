@@ -4,7 +4,7 @@ module Assignable
   included do
     has_many :assignments, as: :assignable
 
-    def assign_to(assign_toable, assigned_at = Time.current, expected_at = nil)
+    def assign_to(assign_toable, assigned_at: Time.current, expected_at: nil)
       Assignment.create({
         assignable: self,
         assign_toable: assign_toable,
