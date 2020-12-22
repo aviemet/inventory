@@ -1,6 +1,8 @@
 class Consumable < ApplicationRecord
   include Ownable
 
+  monetize :cost_cents
+
   belongs_to :manufacturer
   belongs_to :category
   belongs_to :vendor

@@ -6,6 +6,8 @@ class License < ApplicationRecord
 
   resourcify
 
+  monetize :cost_cents
+
   belongs_to :category
   belongs_to :vendor
   belongs_to :manufacturer

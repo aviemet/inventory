@@ -7,7 +7,7 @@ class CreateLicenses < ActiveRecord::Migration[6.0]
       t.string :licenser_name
       t.string :licenser_email
       t.boolean :reassignable
-      t.decimal :cost, precision: 10, scale: 2
+      t.monetize :cost, amount: { null: true, default: nil }
       t.datetime :purchased_at
       t.datetime :expires_at
       t.datetime :terminates_at

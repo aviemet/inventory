@@ -7,9 +7,9 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.datetime :delivered_at
       t.datetime :canceled_at
       t.datetime :returned_at
-      t.decimal :shipping, precision: 10, scale: 2
-      t.decimal :tax, precision: 10, scale: 2
-      t.decimal :discount, precision: 10, scale: 2
+      t.monetize :shipping, amount: { null: true, default: nil }
+      t.monetize :tax, amount: { null: true, default: nil }
+      t.monetize :discount, amount: { null: true, default: nil }
       t.references :vendor, null: false, foreign_key: true
 
       t.timestamps

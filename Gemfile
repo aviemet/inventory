@@ -67,7 +67,6 @@ gem "ipaddress", "~> 0.8.3"
 
 # Accurate regional data
 gem "countries", "~> 3.0", require: 'countries/global'
-gem "money", "~> 6.13"
 
 # Search
 gem "sunspot_rails", "~> 2.5"
@@ -78,6 +77,9 @@ gem "stimulus_reflex", "~> 3.3"
 
 # Component based rails view layer
 gem "view_component", "~> 2.23", require: "view_component/engine"
+
+# Currency formatting
+gem "money-rails", "~> 1.13"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

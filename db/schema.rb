@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_200444) do
+ActiveRecord::Schema.define(version: 2020_07_14_035238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,8 @@ ActiveRecord::Schema.define(version: 2020_12_17_200444) do
     t.string "model_number"
     t.integer "min_qty"
     t.integer "qty"
-    t.decimal "cost", precision: 10, scale: 2
+    t.integer "cost_cents"
+    t.string "cost_currency", default: "USD", null: false
     t.boolean "requestable"
     t.text "notes"
     t.bigint "category_id", null: false
@@ -91,7 +92,8 @@ ActiveRecord::Schema.define(version: 2020_12_17_200444) do
     t.string "model_number"
     t.integer "min_qty"
     t.integer "qty"
-    t.decimal "cost", precision: 10, scale: 2
+    t.integer "cost_cents"
+    t.string "cost_currency", default: "USD", null: false
     t.boolean "requestable"
     t.text "notes"
     t.bigint "category_id", null: false
@@ -196,7 +198,8 @@ ActiveRecord::Schema.define(version: 2020_12_17_200444) do
     t.string "title"
     t.string "asset_tag"
     t.string "serial"
-    t.decimal "cost", precision: 10, scale: 2
+    t.integer "cost_cents"
+    t.string "cost_currency", default: "USD", null: false
     t.datetime "purchased_at"
     t.boolean "requestable", default: true
     t.text "notes"
@@ -221,7 +224,8 @@ ActiveRecord::Schema.define(version: 2020_12_17_200444) do
     t.string "licenser_name"
     t.string "licenser_email"
     t.boolean "reassignable"
-    t.decimal "cost", precision: 10, scale: 2
+    t.integer "cost_cents"
+    t.string "cost_currency", default: "USD", null: false
     t.datetime "purchased_at"
     t.datetime "expires_at"
     t.datetime "terminates_at"
@@ -293,9 +297,12 @@ ActiveRecord::Schema.define(version: 2020_12_17_200444) do
     t.datetime "delivered_at"
     t.datetime "canceled_at"
     t.datetime "returned_at"
-    t.decimal "shipping", precision: 10, scale: 2
-    t.decimal "tax", precision: 10, scale: 2
-    t.decimal "discount", precision: 10, scale: 2
+    t.integer "shipping_cents"
+    t.string "shipping_currency", default: "USD", null: false
+    t.integer "tax_cents"
+    t.string "tax_currency", default: "USD", null: false
+    t.integer "discount_cents"
+    t.string "discount_currency", default: "USD", null: false
     t.bigint "vendor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -344,7 +351,8 @@ ActiveRecord::Schema.define(version: 2020_12_17_200444) do
   create_table "purchases", force: :cascade do |t|
     t.string "purchasable_type", null: false
     t.bigint "purchasable_id", null: false
-    t.decimal "cost", precision: 10, scale: 2
+    t.integer "cost_cents", default: 0, null: false
+    t.string "cost_currency", default: "USD", null: false
     t.integer "qty"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false

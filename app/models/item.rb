@@ -7,6 +7,8 @@ class Item < ApplicationRecord
 
   resourcify
 
+  monetize :cost_cents
+
   has_many :nics
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ips
   belongs_to :model
@@ -17,14 +19,7 @@ class Item < ApplicationRecord
   has_one :manufacturer, through: :model
   has_one :warranty, required: false
 
-  # against: [:title, :asset_tag, :serial, :cost, :requestable, :notes],
-  # associated_against: {
-  #   model: [:name, :model_number, :notes],
-  #   category: [:name],
-  #   vendor: [:name, :url],
-  #   nics: [:mac],
-  #   ips: [:address]
-  # }
+  scope :includes_associated, ->{ includes([:category, :model, :assignments, :department, :vendor, :manufacturer]) }
 
   searchable do
     text :title, :asset_tag, :serial, :notes

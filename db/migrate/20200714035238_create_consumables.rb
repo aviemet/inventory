@@ -5,7 +5,7 @@ class CreateConsumables < ActiveRecord::Migration[6.0]
       t.string :model_number
       t.integer :min_qty
       t.integer :qty
-      t.decimal :cost, precision: 10, scale: 2
+      t.monetize :cost, amount: { null: true, default: nil }
       t.boolean :requestable
       t.text :notes
       t.references :category, null: false, foreign_key: true

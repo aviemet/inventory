@@ -1,9 +1,9 @@
-require 'rails_helper'
-require 'models/concerns/ownable'
-require 'models/concerns/assignable'
-require 'models/concerns/assign_toable'
-require 'models/concerns/purchasable'
-require 'models/concerns/fieldable'
+require "rails_helper"
+require "models/concerns/ownable"
+require "models/concerns/assignable"
+require "models/concerns/assign_toable"
+require "models/concerns/purchasable"
+require "models/concerns/fieldable"
 
 RSpec.describe Item, type: :model do
   subject {
@@ -14,6 +14,10 @@ RSpec.describe Item, type: :model do
     it "is valid with valid attributes" do
       subject.parent = build(:item)
       expect(subject).to be_valid
+    end
+
+    it "uses money-rails to handle cost" do
+      expect(subject.cost).to be_a Money
     end
   end
 

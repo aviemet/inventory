@@ -4,7 +4,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :asset_tag, index: { unique: true }
       t.string :serial, index: { unique: true }
-      t.decimal :cost, precision: 10, scale: 2
+      t.monetize :cost, amount: { null: true, default: nil }
       t.datetime :purchased_at
       t.boolean :requestable, default: true
       t.text :notes

@@ -15,6 +15,10 @@ section.container
         =  link_to @item.model.name, @item.model
 
     .item-row
+      label Category:
+      .value = link_to @item.model.category.name, @item.model.category
+
+    .item-row
       label Serial:
       .value = @item.serial
 
@@ -27,16 +31,12 @@ section.container
       .value = @item.asset_tag
 
     .item-row
-      label Serial Number:
-      .value = @item.serial
-
-    .item-row
       label Purchase Cost:
-      .value = "$#{@item.cost}"
+      .value = @item.cost.format
 
     .item-row
       label Purchase Date:
-      .value = @item.purchased_at
+      .value = I18n.l(@item.purchased_at, format: :long)
 
     .item-row
       label Vendor:
