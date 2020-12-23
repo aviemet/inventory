@@ -19,6 +19,8 @@ class Item < ApplicationRecord
   has_one :manufacturer, through: :model
   has_one :warranty, required: false
 
+  accepts_nested_attributes_for :nics, reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
+
   scope :includes_associated, ->{ includes([:category, :model, :assignments, :department, :vendor, :manufacturer]) }
 
   searchable do

@@ -82,7 +82,6 @@ Rails.application.configure do
     Bullet.bullet_logger = true
     Bullet.console = true
     Bullet.rails_logger = true
-    Bullet.honeybadger = true
     Bullet.add_footer = true
     Bullet.skip_html_injection = false
   end

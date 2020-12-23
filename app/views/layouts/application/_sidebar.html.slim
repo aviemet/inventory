@@ -8,6 +8,7 @@ aside#sidebar
       - if current_user&.active_company
         - path_hash = {  }
         ul
+          = render link_file, locals: { text: 'Dashboard', path: '/pages/dashboard', icon: :dashboard }
           li
             = link_to "<span>Inventory</span>#{mi.important_devices}".html_safe, items_path(path_hash)
             ul

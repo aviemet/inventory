@@ -6,41 +6,56 @@ section.container
     .inline.px-2 History
     .inline.px-2 Licenses
 
-  .item-details
-    .item-row
-      label Model:
-      .value
-        = link_to @item.model.manufacturer.name, @item.model.manufacturer
-        '  -
-        =  link_to @item.model.name, @item.model
+  section
+    h3 Details
+    .item-details
+      .item-row
+        label Model:
+        .value
+          = link_to @item.model.manufacturer.name, @item.model.manufacturer
+          '  -
+          =  link_to @item.model.name, @item.model
 
-    .item-row
-      label Category:
-      .value = link_to @item.model.category.name, @item.model.category
+      .item-row
+        label Category:
+        .value = link_to @item.model.category.name, @item.model.category
 
-    .item-row
-      label Serial:
-      .value = @item.serial
+      .item-row
+        label Serial:
+        .value = @item.serial
 
-    .item-row
-      label Notes:
-      .value = @item.notes
+      .item-row
+        label Notes:
+        .value = @item.notes
 
-    .item-row
-      label Asset Tag:
-      .value = @item.asset_tag
+      .item-row
+        label Asset Tag:
+        .value = @item.asset_tag
 
-    .item-row
-      label Purchase Cost:
-      .value = @item.cost.format
+      .item-row
+        label Purchase Cost:
+        .value = @item.cost.format
 
-    .item-row
-      label Purchase Date:
-      .value = I18n.l(@item.purchased_at, format: :long)
+      .item-row
+        label Purchase Date:
+        .value = I18n.l(@item.purchased_at, format: :long)
 
-    .item-row
-      label Vendor:
-      .value = link_to @item.vendor.name, @item.vendor
+      .item-row
+        label Vendor:
+        .value = link_to @item.vendor.name, @item.vendor
+
+  section
+    h3 History
+    - if @item.assigned?
+      label Assigned To:
+      p = @item.assigned_to.to_s
+
+    - @item.assignments.each do |assignment|
+      - if assignment != @item.assignment
+        = assignment.assign_toable.to_s
+
+  section
+    h3 Licenses
 
   div style="height: 150vh"
 

@@ -3,8 +3,8 @@ class LocationsController < ApplicationController
 
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
-  # GET /companies/:company_id/locations
-  # GET /companies/:company_id/locations.json
+  # GET /locations
+  # GET /locations.json
   def index
     @locations = current_user.active_company.locations
   end
@@ -14,9 +14,8 @@ class LocationsController < ApplicationController
   def show
   end
 
-  # GET /companies/:company_id/locations/new
+  # GET /locations/new
   def new
-    @company = Company.find(params[:company_id])
     @location = Location.new
     @locations = Location.all # Parent location options
   end
@@ -26,11 +25,11 @@ class LocationsController < ApplicationController
     @locations = Location.where.not(id: params[:id]).all
   end
 
-  # POST /companies/:company_id/locations
-  # POST /companies/:company_id/locations.json
+  # POST /locations
+  # POST /locations.json
   def create
     @location = Location.new(location_params)
-    @location.company = Company.find(params[:company_id])
+    @location.company = @active_company
 
     respond_to do |format|
       if @location.save

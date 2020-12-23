@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   skip_authorize_resource only: [:new, :create]
 
   # GET /companies
@@ -10,6 +10,7 @@ class CompaniesController < ApplicationController
   # GET /companies/:id
   # GET /companies/:id.json
   def show
+    set_active_company(Company.find_by_slug(:id))
   end
 
   # GET /companies/new
@@ -30,6 +31,7 @@ class CompaniesController < ApplicationController
       if @company.save
         # Assign admin permissions to user creating the record
         current_user.add_role :admin, @company
+        current_user.update(active_company: @company)
 
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }

@@ -1,14 +1,22 @@
 class ItemsController < ApplicationController
   include OwnableConcern
 
+  before_action :set_view_data, only: [:index, :category]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_form_models, only: [:edit, :new, :update, :create]
 
   # GET /items
   # GET /items.json
   def index
-    @hideable_fields = %w(models.name asset_tag serial cost purchased_at requestable categories.name manufacturers.name models.model_number vendors.name departments.name).freeze
-    @items = @active_company.items.includes([:category, :model, :assignments, :department, :vendor, :manufacturer]).order(order_by)
+    @items = @active_company.items.includes_associated.order(order_by)
+  end
+
+  # GET /items/category/:category_id
+  # GET /items/category/:category_id.json
+  def category
+    @category = Category.find(request.params[:category_id])
+    @items = @active_company.items.includes_associated.where('model.category': @category).order(order_by)
+    render :index
   end
 
   # GET /items/1
@@ -69,6 +77,10 @@ class ItemsController < ApplicationController
   private
 
   SORTABLE_FIELDS = %w(title asset_tag serial cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+
+  def set_view_data
+    @hideable_fields = %w(models.name asset_tag serial cost purchased_at requestable categories.name manufacturers.name models.model_number vendors.name departments.name)
+  end
 
   def order_by
     return false unless SORTABLE_FIELDS.include?(params[:sort])

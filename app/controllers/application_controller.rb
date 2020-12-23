@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   add_flash_types :info, :error
 
+  before_action :set_locale
   before_action :authenticate_user!
   before_action :set_active_company
 
@@ -17,16 +18,25 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
 
-  private
+  protected
 
-  def set_active_company
+  def set_active_company(company = nil)
     return if !current_user
 
+    current_user.active_company = company if company
+
     if current_user.companies.count > 0
-      current_user.update(active_company: current_user.companies.first)  if !current_user.active_company
+      current_user.update(active_company: current_user.companies.first) if !current_user.active_company
 
       @active_company = current_user.active_company
     end
+  end
+
+  private
+
+  def set_locale
+    locale = params[:locale].to_s.strip.to_sym
+    I18n.locale = I18n.available_locales.include?(locale) ? locale : I18n.default_locale
   end
 
   def record_not_found

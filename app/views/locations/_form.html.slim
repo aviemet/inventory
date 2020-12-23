@@ -6,8 +6,7 @@
         | prohibited this location from being saved:
       ul
         - location.errors.full_messages.each do |message|
-          li =
- message
+          li = message
   .field
     = form.label :parent_id
     .select
