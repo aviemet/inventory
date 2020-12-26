@@ -1,0 +1,45 @@
+body#auth {
+  @apply min-h-screen;
+  background-image: url("../../assets/images/robots.svg");
+  /* background-blend-mode: screen; */
+
+  main {
+    @apply h-full;
+  }
+
+  #wrapper {
+    @apply grid gap-0;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 35px;
+    grid-template-areas:
+      "content"
+      "footer";
+
+    #content {
+      grid-area: content;
+    }
+    #footer {
+      grid-area: footer;
+    }
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="week"] {
+    @apply w-full;
+  }
+
+  .tile a.tile-footer.link-hover {
+    @apply transition-all duration-500;
+    @apply hover:bg-violet-50;
+  }
+}

@@ -3,6 +3,7 @@ body {
 }
 
 #grid-layout {
+  @apply grid gap-0;
   height: 100vh;
   grid-template-columns: var(--sidebar-width-open) 1fr;
   grid-template-rows: 50px 1fr 35px;
@@ -71,9 +72,18 @@ body {
   }
 }
 
+#topbar {
+  @apply px-2 py-1;
+  @apply bg-white shadow;
+
+  h2 {
+    @apply text-text-dark;
+  }
+}
+
 #sidebar {
   @apply flex flex-col justify-between z-30;
-  @apply bg-blueGray-900;
+  @apply bg-blueGray-700;
 
   &,
   a,
@@ -184,7 +194,9 @@ main#content-wrapper {
 }
 
 footer#footer {
-  border-top-width: 1px;
+  @apply border-t border-gray-300;
+  @apply bg-white shadow;
+  @apply pr-3 pt-1;
 }
 
 .item-details {

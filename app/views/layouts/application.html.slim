@@ -6,7 +6,6 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body data-controller="layout"
@@ -15,22 +14,22 @@ html
         - flash.each_with_index do |(type, message), i|
           = render("layouts/application/alert", banner_class: type, index: i){ message }
 
-    #grid-layout.grid.gap-0.side-bar-closed data-target="layout.sidebar"
+    #grid-layout.side-bar-closed data-target="layout.sidebar"
       = render "layouts/application/sidebar"
 
-      header#topbar.bg-blueGray-400.shadow.p-1
+      header#topbar
         .flex
           .flex-1
             - if current_user
               = render "layouts/application/active_company_picker"
             - else
-              | Inventory Application
+              h2 Inventory Application
           .min-w-50
 
       main#content-wrapper
         = yield
 
-      footer#footer.border-gray-500.shadow.pr-3.pt-1
+      footer#footer
         .flex-row-reverse.flex.text-gray-600 ©2020
 
     #modal-overlay data-target="layout.modalOverlay"

@@ -1,5 +1,5 @@
 body {
-  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+  /* font-size: clamp(0.85rem, 1.1vw, 0.95rem); */
   @apply bg-gray-100;
 }
 
@@ -167,30 +167,20 @@ html body {
 
 [type="checkbox"] {
   @apply cursor-pointer;
+  @apply text-brand-dark;
 
   &:focus {
     @apply ring-0;
     @apply outline-none;
   }
+
+  & + label {
+    @apply pl-2;
+  }
 }
 
 select {
   @apply cursor-pointer;
-}
-
-input,
-textarea {
-  /* &[type=text], &[type=number], &[type=email], &[type=password] { */
-  /* &:not([type="button"]):not([type="checkbox"]):not([type="color"]):not([type="file"]):not([type="hidden"]):not([type="image"]):not([type="radio"]):not([type="reset"]):not([type="submit"]) {
-    @apply appearance-none;
-    @apply shadow border rounded;
-    @apply w-full py-2 px-3;
-    @apply text-text-dark leading-tight;
-  } */
-
-  &:disabled {
-    @apply bg-cyan-300 text-gray-600;
-  }
 }
 
 button,
@@ -199,7 +189,7 @@ input[type="submit"] {
   @apply cursor-pointer;
   @apply border rounded;
   @apply font-bold;
-  @apply py-1 lg:py-2 px-2 lg:px-3 m-1;
+  @apply py-2 px-3;
 
   @apply transition;
 

@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Inventory
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body#auth
+    - if !flash.empty?
+      #flash-container data-controller="alerts"
+        - flash.each_with_index do |(type, message), i|
+          = render("layouts/application/alert", banner_class: type, index: i){ message }
+
+    #wrapper
+      main#content
+        = yield
+
+      footer#footer.border-gray-500.shadow.pr-3.pt-1
+        .flex-row-reverse.flex.text-gray-600 ©2020

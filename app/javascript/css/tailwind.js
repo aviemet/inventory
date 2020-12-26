@@ -41,10 +41,10 @@ const theme = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: colors.teal["600"],
-          hover: colors.teal["700"],
-          light: colors.blue["100"],
-          dark: colors.coolGray["800"]
+          DEFAULT: colors.purple["600"],
+          hover: colors.purple["700"],
+          light: colors.violet["200"],
+          dark: colors.violet["900"]
         },
         success: {
           DEFAULT: colors.emerald["400"],
@@ -76,10 +76,10 @@ const theme = {
         },
         link: {
           dark: {
-            DEFAULT: colors.teal["900"],
-            hover: colors.teal["700"],
-            active: colors.fuchsia["800"],
-            visited: colors.blue["900"]
+            DEFAULT: colors.violet["900"],
+            hover: colors.purple["800"],
+            active: colors.fuchsia["500"],
+            visited: colors.purple["800"]
           },
           light: {
             DEFAULT: colors.teal["100"],
