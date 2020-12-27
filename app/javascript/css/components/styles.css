@@ -64,7 +64,7 @@ a.button {
 }
 
 .tile {
-  @apply w-full max-w-xs;
+  @apply w-full max-w-sm;
   @apply bg-white shadow-md;
   @apply rounded-lg;
   @apply border-t-2 border-brand-light;
@@ -74,9 +74,22 @@ a.button {
   }
 
   .tile-footer {
-    @apply block;
+    @apply flex;
     @apply bg-gray-100;
-    @apply px-4 sm:px-8 py-3;
     @apply rounded-b-lg;
+
+    & > * {
+      @apply px-4 sm:px-8 py-3;
+    }
+  }
+
+  a.link-hover {
+    @apply border-t border-b border-gray-100;
+    @apply transition-all duration-500;
+
+    &:hover {
+      @apply bg-violet-50;
+      @apply border-gray-200;
+    }
   }
 }

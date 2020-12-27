@@ -1,14 +1,13 @@
-.flex.items-center.justify-center.h-full
-  .tile.mb-24
-    .tile-content.mb-3
-      .mb-2
-        h2 Reset Password
+.tile-content.mb-3
+  .mb-2
+    h2 Reset Password
 
-      = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-        .mb-2
-          = f.input :email, autofocus: true, autocomplete: "email", label: false, placeholder: "Email"
-        .mb-4
-          .actions
-            = f.submit "Send reset instructions", class: "w-full large"
+  = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    .mb-2
+      = f.input :email, autofocus: true, autocomplete: "email", label: false, placeholder: "Email"
+    .mb-4
+      .actions
+        = f.submit "Send reset instructions", class: "w-full large"
 
-      = render "devise/shared/links"
+.tile-footer.flex-col
+  = render "devise/shared/links"

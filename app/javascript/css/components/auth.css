@@ -38,9 +38,4 @@ body#auth {
   input[type="week"] {
     @apply w-full;
   }
-
-  .tile a.tile-footer.link-hover {
-    @apply transition-all duration-500;
-    @apply hover:bg-violet-50;
-  }
 }

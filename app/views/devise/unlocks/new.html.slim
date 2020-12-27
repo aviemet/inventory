@@ -1,10 +1,12 @@
-h2 Resend unlock instructions
-= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .actions
-    = f.submit "Resend unlock instructions"
-= render "devise/shared/links"
+.tile-content
+  h2 Resend unlock instructions
+  = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+    = render "devise/shared/error_messages", resource: resource
+
+    .mb-2
+      = f.input :email, autofocus: true, autocomplete: "email", label: false, placeholder: "Email"
+    .mb-4
+      = f.submit "Resend unlock instructions", class: "w-full large"
+
+.tile-footer.flex-col
+  = render "devise/shared/links"

@@ -16,7 +16,9 @@ html
 
     #wrapper
       main#content
-        = yield
+        .flex.items-center.justify-center.h-full
+          .tile.mb-24
+            = yield
 
       footer#footer.border-gray-500.shadow.pr-3.pt-1
         .flex-row-reverse.flex.text-gray-600 ©2020

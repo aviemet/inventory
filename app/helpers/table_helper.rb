@@ -27,6 +27,7 @@ module TableHelper
   # data_cell(:field, content)
   # data_cell(:title, link_to(item.title, item))
 
+  # options: { data: "html data attributes", id: "id", class: "class", nowrap: false }
   def data_cell(field, content, options = {})
     attributes = default_attributes(options)
 
@@ -41,6 +42,7 @@ module TableHelper
   def default_attributes(options)
     attributes = { class: input_to_a(options[:class]), data: {} }
     attributes[:id] = options[:id] if options[:id]
+    attributes[:nowrap] = "nowrap" unless options[:nowrap] == false
     attributes
   end
 
