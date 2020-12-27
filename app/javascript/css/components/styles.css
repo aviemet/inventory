@@ -80,3 +80,14 @@ a.button {
     @apply rounded-b-lg;
   }
 }
+
+table {
+  td.actions {
+    @apply flex justify-between gap-1;
+
+    button,
+    .button {
+      @apply py-1 px-2;
+    }
+  }
+}

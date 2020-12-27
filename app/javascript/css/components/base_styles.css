@@ -1,3 +1,7 @@
+*::selection {
+  @apply bg-brand-light;
+}
+
 body {
   /* font-size: clamp(0.85rem, 1.1vw, 0.95rem); */
   @apply bg-gray-100;
@@ -58,12 +62,16 @@ table {
   border-spacing: 0;
 }
 
+thead {
+  @apply shadow;
+  @apply sticky top-0;
+  @apply bg-white;
+}
+
 th {
   text-align: left;
   @apply px-4 py-2;
-  @apply sticky top-0;
-  @apply bg-white;
-  @apply border-b-2;
+  @apply border-t-2 border-gray-200;
 
   &.sortable {
     --sort-button-width: 6px;
@@ -193,9 +201,8 @@ select {
 button,
 .button,
 input[type="submit"] {
-  @apply cursor-pointer;
+  @apply font-bold cursor-pointer;
   @apply border rounded;
-  @apply font-bold;
   @apply py-2 px-3;
 
   @apply transition;
