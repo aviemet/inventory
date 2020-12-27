@@ -1,7 +1,8 @@
 body#auth {
   @apply min-h-screen;
-  background-image: url("../../assets/images/robots.svg");
-  /* background-blend-mode: screen; */
+  @apply bg-purple-600;
+  background-image: url("../../assets/images/robots-bw.svg");
+  background-blend-mode: lighten;
 
   main {
     @apply h-full;

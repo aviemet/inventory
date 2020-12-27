@@ -44,10 +44,9 @@ a {
 }
 
 section {
-  @apply bg-white;
-  @apply py-4;
-  @apply px-3;
-  @apply border-b-2;
+  @apply bg-white shadow;
+  @apply py-4 px-3;
+  @apply border-t-2 border-brand-light;
 }
 
 /**
@@ -71,6 +70,10 @@ th {
     --sort-button-height: 5px;
 
     @apply pr-3;
+
+    a {
+      @apply text-text-dark;
+    }
 
     /* Triangle Icons */
     &:before,
@@ -110,6 +113,10 @@ tr:nth-child(even) {
 
 td {
   @apply px-4 py-2;
+
+  a {
+    /* @apply text-yellow-800; */
+  }
 }
 
 th,
