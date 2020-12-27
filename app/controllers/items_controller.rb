@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = @active_company.items.includes_associated.order(order_by)
+    @items = @active_company.items.includes_associated.order(order_by).page(params[:page])
   end
 
   # GET /items/category/:category_id

@@ -40,9 +40,13 @@ section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-v
             = data_cell("vendors.name", item.vendor&.name ? link_to(item.vendor&.name, item.vendor) : '')
             = data_cell("cost", item.cost.format)
             = data_cell("departments.name", item.department ? link_to(item.department.name, item.department) : '')
-            td.actions nowrap="nowrap"
-              = render Buttons::AssignmentButtonComponent.new(asset: item)
-              = render "shared/buttons/edit", path: edit_item_path(item)
-              = render "shared/buttons/delete", path: item
+            td nowrap="nowrap"
+              .flex.justify-between.gap-1
+                = render Buttons::AssignmentButtonComponent.new(asset: item)
+                = render "shared/buttons/edit", path: edit_item_path(item)
+                = render "shared/buttons/delete", path: item
 
-  div = "Showing #{@items.count} Items"
+  .flex.pt-3
+    - start_record = ((@items.current_page - 1) * @items.limit_value) + 1
+    .flex-1 = "Showing #{start_record} - #{start_record - 1 + @items.count} / #{@items.total_count} Items"
+    .flex-1.text-right = paginate @items
