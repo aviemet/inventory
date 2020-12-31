@@ -44,8 +44,7 @@ export default class extends Controller {
   }
 
   _bodyClickListener(clickTarget, checkboxToggle) {
-    const menu = this.columnToggleMenuTarget
-    if(menu.contains(clickTarget)) return false
+    if(this.columnToggleMenuTarget.contains(clickTarget)) return false
 
     checkboxToggle.checked = false
     document.removeEventListener("click", this._bodyClickListener)

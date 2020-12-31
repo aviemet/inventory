@@ -10,8 +10,4 @@ class Location < ApplicationRecord
   belongs_to :parent, class_name: "Location", required: false
 
   validates_presence_of :name
-
-  def self.dropdown_display
-    "name"
-  end
 end

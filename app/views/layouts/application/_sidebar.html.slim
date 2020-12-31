@@ -3,7 +3,7 @@
 aside#sidebar
   div
     .text-right.link-hover
-      == mi.public_send(:menu).html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar")
+      == mi.menu.html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar")
     nav.links
       - if current_user&.active_company
         - path_hash = {  }

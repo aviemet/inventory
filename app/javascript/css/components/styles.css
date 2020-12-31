@@ -19,6 +19,10 @@ a.button {
   }
 }
 
+.input {
+  @apply mb-2;
+}
+
 #modal-overlay {
   @apply hidden;
   @apply fixed inset-0 z-40;
@@ -90,6 +94,58 @@ a.button {
     &:hover {
       @apply bg-violet-50;
       @apply border-gray-200;
+    }
+  }
+}
+
+.dropdown-search {
+  @apply relative inline-block;
+
+  .selector {
+    @apply inline-flex justify-center w-full;
+    @apply rounded-md;
+    @apply border border-gray-300 shadow-sm;
+    @apply bg-white hover:bg-gray-50;
+    @apply px-4 py-2;
+    @apply text-sm font-medium text-gray-700 hover:text-gray-700;
+
+    .contract {
+      @apply hidden;
+    }
+  }
+
+  input {
+    @apply m-0 p-0 border-0 focus:ring-0;
+  }
+
+  .options {
+    @apply hidden;
+    @apply overflow-y-auto;
+    @apply absolute left-0 w-full max-h-56;
+    @apply rounded-b-md py-1 shadow-lg bg-white;
+    @apply ring-1 ring-black ring-opacity-5;
+
+    .option {
+      @apply px-4 py-2 hover:bg-gray-100;
+      @apply text-sm text-gray-700 hover:text-gray-900;
+    }
+  }
+
+  &.open {
+    .selector {
+      @apply rounded-b-none;
+
+      .expand {
+        @apply hidden;
+      }
+
+      .contract {
+        @apply block;
+      }
+    }
+
+    .options {
+      @apply block;
     }
   }
 }

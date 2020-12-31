@@ -7,8 +7,4 @@ class Model < ApplicationRecord
   belongs_to :category
 
   validates_presence_of :name
-
-  def self.dropdown_display
-    "name"
-  end
 end

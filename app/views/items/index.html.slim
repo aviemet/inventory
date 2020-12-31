@@ -17,7 +17,7 @@ section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-v
       thead
         tr
           th = check_box_tag :select_all, "all", false, data: { action: "table#checkAll", target: "table.selectAll" }
-          = data_heading(:title, hideable: false)
+          = data_heading(:name, hideable: false)
           = data_heading("models.name", heading: "Model")
           = data_heading(:asset_tag)
           = data_heading(:serial)
@@ -31,7 +31,7 @@ section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-v
         - @items.each do |item|
           tr data-target="table.row"
             td = check_box_tag :selected, item.id, false, data: { action: "table#checked", target: "table.checkbox" }
-            = data_cell(:title, link_to(item.title, item))
+            = data_cell(:name, link_to(item.name, item))
             = data_cell("models.name", link_to(item.model.name, item.model))
             = data_cell(:asset_tag, item.asset_tag ? link_to(item.asset_tag, item) : '')
             = data_cell(:serial, item.serial ? link_to(item.serial, item) : '')

@@ -12,16 +12,14 @@ class Person < ApplicationRecord
   validates_presence_of :first_name
   validates_presence_of :last_name
 
-  def self.dropdown_display
-    "full_name"
-  end
+  delegate :to_s, to: :full_name
 
   def full_name
     "#{first_name} #{last_name}"
   end
 
-  def title
-    self.full_name
+  def self.to_s_field
+    :first_name
   end
 
   private

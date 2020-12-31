@@ -20,7 +20,7 @@ section.container
       = render "shared/form/errors", record: @assignment
 
       = form.simple_fields_for @asset do |asset|
-        = asset.input :title, label: "Asset Name"
+        = asset.input :name, label: "Asset Name"
 
       = render "shared/buttons/checkout_type", form: form
 

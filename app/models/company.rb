@@ -11,7 +11,7 @@ class Company < ApplicationRecord
   # 	Company.items, Company.contracts, etc.
   has_many :ownerships
   {
-    items: :Item, 
+    items: :Item,
     accessories: :Accessory,
     consumables: :Consumable,
     departments: :Department,
@@ -30,9 +30,5 @@ class Company < ApplicationRecord
   # default_scope { includes(:ownerships) }
 
   validates_presence_of :name
-
-  def self.dropdown_display
-    "name"
-  end
 
 end

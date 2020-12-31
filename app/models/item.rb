@@ -24,11 +24,7 @@ class Item < ApplicationRecord
   scope :includes_associated, ->{ includes([:category, :model, :assignments, :department, :vendor, :manufacturer]) }
 
   searchable do
-    text :title, :asset_tag, :serial, :notes
+    text :name, :asset_tag, :serial, :notes
     double :cost
-  end
-
-  def self.dropdown_display
-    "title"
   end
 end

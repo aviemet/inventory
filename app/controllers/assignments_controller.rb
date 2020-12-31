@@ -30,7 +30,7 @@ class AssignmentsController < ApplicationController
     assignable = request.params[:asset_type].capitalize.constantize.find( request.params[:asset_id])
     assign_toable = assignment_params[:assign_toable_type].capitalize.constantize.find(assignment_params[:assign_toable_id])
 
-    @assignment = assignable.update(title: assignment_params[request.params[:asset_type]][:title])
+    @assignment = assignable.update(name: assignment_params[request.params[:asset_type]][:name])
 
     respond_to do |format|
       if assignable.assign_to assign_toable, assigned_at: assignment_params[:assigned_at], expected_at: assignment_params[:expected_at]
@@ -87,6 +87,6 @@ class AssignmentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def assignment_params
-    params.require(:assignment).permit(:assign_toable_id, :assign_toable_type, :assigned_at, :expected_at, :returned_at, :notes, :active, item: [:title], accessory: [:title], consumable: [:title])
+    params.require(:assignment).permit(:assign_toable_id, :assign_toable_type, :assigned_at, :expected_at, :returned_at, :notes, :active, item: [:name], accessory: [:name], consumable: [:name])
   end
 end

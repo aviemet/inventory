@@ -25,8 +25,4 @@ class Department < ApplicationRecord
   # default_scope { includes(:ownerships) }
 
   validates_presence_of :name
-
-  def self.dropdown_display
-    "name"
-  end
 end

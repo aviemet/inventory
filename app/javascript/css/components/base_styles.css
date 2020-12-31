@@ -179,29 +179,26 @@ nav.pagination {
 /**
  * Inputs
  **/
-html body {
-  input[type="text"],
-  input[type="email"],
-  input[type="url"],
-  input[type="password"],
-  input[type="number"],
-  input[type="date"],
-  input[type="datetime-local"],
-  input[type="month"],
-  input[type="search"],
-  input[type="tel"],
-  input[type="time"],
-  input[type="week"],
-  input[multiple],
-  textarea,
-  select {
-    @apply rounded;
-    margin-bottom: var(--input-margin-bottom);
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="week"],
+input[multiple],
+textarea,
+select {
+  @apply rounded;
 
-    &:focus {
-      @apply ring-2 ring-brand;
-      @apply border-brand;
-    }
+  &:focus {
+    @apply ring-2 ring-brand;
+    @apply border-brand;
   }
 }
 

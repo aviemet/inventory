@@ -7,8 +7,6 @@
 @import "components/elements";
 
 :root {
-  --input-margin-bottom: 10px;
-
   --font-size-break: 6vw;
 
   --topbar-height: 50px;

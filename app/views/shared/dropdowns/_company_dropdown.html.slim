@@ -2,5 +2,5 @@
     options_from_collection_for_select( \
       current_user.companies,
       :id,
-      Company.dropdown_display          \
+      Company.to_s_field          \
     ), prompt: "-- Companies --")

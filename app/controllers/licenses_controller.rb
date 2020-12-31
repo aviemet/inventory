@@ -70,6 +70,6 @@ class LicensesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def license_params
-    params.require(:license).permit(:title, :description, :seats, :key)
+    params.require(:license).permit(:name, :description, :seats, :key)
   end
 end

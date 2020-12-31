@@ -76,7 +76,7 @@ class ItemsController < ApplicationController
 
   private
 
-  SORTABLE_FIELDS = %w(title asset_tag serial cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+  SORTABLE_FIELDS = %w(name asset_tag serial cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
 
   def set_view_data
     @hideable_fields = %w(models.name asset_tag serial cost purchased_at requestable categories.name manufacturers.name models.model_number vendors.name departments.name)
@@ -100,6 +100,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:title, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable)
+    params.require(:item).permit(:name, :asset_tag, :serial, :cost, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable)
   end
 end

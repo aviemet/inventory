@@ -1,6 +1,6 @@
 p#notice = notice
 
-h1 == "#{link_to @asset.title, @asset} History"
+h1 == "#{link_to @asset.name, @asset} History"
 
 table
   thead
@@ -13,7 +13,7 @@ table
   tbody
     - @assignments.each do |assignment|
       tr
-        td = link_to assignment.assign_toable.title, assignment.assign_toable
+        td = link_to assignment.assign_toable.name, assignment.assign_toable
         td = assignment.assigned_at
         td = assignment.returned_at
         td = assignment.active

@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
     t.string "asset_tag"
     t.string "serial"
     t.integer "cost_cents"

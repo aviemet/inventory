@@ -10,7 +10,7 @@
 
   = render "shared/company_nested_input", form: form, model: item
 
-  = form.input :title
+  = form.input :name
   = form.input :asset_tag
   = form.input :serial
   = form.input :model_id, as: :select, collection: @models, prompt: "-- Model --"

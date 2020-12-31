@@ -1,0 +1,11 @@
+.dropdown-search data-controller="dropdown-search" data-target="dropdown-search.parent"
+  - if @form && @name
+    = @form.input @name, as: :hidden, input_html: { data: { target: "dropdown-search.hiddenInput" } }
+  .selector data-target="dropdown-search.selector" data-action="click->dropdown-search#toggle"
+    input type="text" placeholder="Filter" data-target="dropdown-search.input"  data-action="focus->dropdown-search#focusInput keyup->dropdown-search#filter"
+    == mi.expand_more.css_class "cursor-pointer expand"
+    == mi.expand_less.css_class "cursor-pointer contract"
+
+  .options data-target="dropdown-search.options"
+    - @data.each do |option|
+      .option data-target="dropdown-search.option" data-action="click->dropdown-search#select" data-id=option.id = option

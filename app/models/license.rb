@@ -13,8 +13,4 @@ class License < ApplicationRecord
   belongs_to :manufacturer
 
   validates_presence_of :name
-
-  def self.dropdown_display
-    "name"
-  end
 end

@@ -5,8 +5,4 @@ class Vendor < ApplicationRecord
   slug :name
 
   has_many :contracts
-
-  def self.dropdown_display
-    "name"
-  end
 end

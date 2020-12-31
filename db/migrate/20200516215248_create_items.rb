@@ -1,7 +1,7 @@
 class CreateItems < ActiveRecord::Migration[6.0]
   def change
     create_table :items do |t|
-      t.string :title
+      t.string :name
       t.string :asset_tag, index: { unique: true }
       t.string :serial, index: { unique: true }
       t.monetize :cost, amount: { null: true, default: nil }
