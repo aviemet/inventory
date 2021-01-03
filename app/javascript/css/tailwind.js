@@ -1,4 +1,5 @@
 const colors = require("tailwindcss/colors")
+const plugin = require("tailwindcss/plugin")
 
 const ratios = {
   "1/2": "50%",
@@ -33,62 +34,60 @@ const theme = {
   purge: [],
   theme: {
     colors: {
-      ...colors
+      ...colors,
+      brand: {
+        DEFAULT: colors.purple["600"],
+        hover: colors.purple["700"],
+        light: colors.violet["200"],
+        dark: colors.violet["900"]
+      },
+      success: {
+        DEFAULT: colors.emerald["400"],
+        hover: colors.emerald["600"],
+        light: colors.green["200"],
+        dark: colors.emerald["700"]
+      },
+      info: {
+        DEFAULT: colors.lightBlue["400"],
+        hover: colors.lightBlue["600"],
+        light: colors.lightBlue["200"],
+        dark: colors.blue["800"]
+      },
+      warning: {
+        DEFAULT: colors.yellow["500"],
+        hover: colors.amber["600"],
+        light: colors.yellow["200"],
+        dark: colors.yellow["900"]
+      },
+      error: {
+        DEFAULT: colors.red["400"],
+        hover: colors.red["600"],
+        light: colors.red["200"],
+        dark: colors.red["900"]
+      },
+      text: {
+        light: colors.blueGray["50"],
+        dark: colors.warmGray["900"]
+      },
+      link: {
+        dark: {
+          DEFAULT: colors.violet["900"],
+          hover: colors.purple["800"],
+          active: colors.fuchsia["500"],
+          visited: colors.purple["800"]
+        },
+        light: {
+          DEFAULT: colors.teal["100"],
+          hover: colors.teal["300"],
+          active: colors.fuchsia["200"],
+          visited: colors.blue["100"]
+        }
+      }
     },
     container: {
       center: true
     },
     extend: {
-      colors: {
-        brand: {
-          DEFAULT: colors.purple["600"],
-          hover: colors.purple["700"],
-          light: colors.violet["200"],
-          dark: colors.violet["900"]
-        },
-        success: {
-          DEFAULT: colors.emerald["400"],
-          hover: colors.emerald["600"],
-          light: colors.green["200"],
-          dark: colors.emerald["700"]
-        },
-        info: {
-          DEFAULT: colors.lightBlue["400"],
-          hover: colors.lightBlue["600"],
-          light: colors.lightBlue["200"],
-          dark: colors.blue["800"]
-        },
-        warning: {
-          DEFAULT: colors.yellow["500"],
-          hover: colors.amber["600"],
-          light: colors.yellow["200"],
-          dark: colors.yellow["900"]
-        },
-        error: {
-          DEFAULT: colors.red["400"],
-          hover: colors.red["600"],
-          light: colors.red["200"],
-          dark: colors.red["900"]
-        },
-        text: {
-          light: colors.blueGray["50"],
-          dark: colors.warmGray["900"]
-        },
-        link: {
-          dark: {
-            DEFAULT: colors.violet["900"],
-            hover: colors.purple["800"],
-            active: colors.fuchsia["500"],
-            visited: colors.purple["800"]
-          },
-          light: {
-            DEFAULT: colors.teal["100"],
-            hover: colors.teal["300"],
-            active: colors.fuchsia["200"],
-            visited: colors.blue["100"]
-          }
-        }
-      },
       maxWidth: {
         ...ratios
       },
@@ -101,7 +100,26 @@ const theme = {
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/aspect-ratio"),
-    require("@tailwindcss/typography")
+    require("@tailwindcss/typography"),
+    plugin(({ addUtilities, theme }) => {
+      const themeColors = theme("colors")
+      const individualBorderColors = Object.keys(themeColors).map(colorName => ({
+        [`.border-b-${colorName}`]: {
+          borderBottomColor: themeColors[colorName]
+        },
+        [`.border-t-${colorName}`]: {
+          borderTopColor:  themeColors[colorName]
+        },
+        [`.border-l-${colorName}`]: {
+          borderLeftColor:  themeColors[colorName]
+        },
+        [`.border-r-${colorName}`]: {
+          borderRightColor:  themeColors[colorName]
+        }
+      }))
+
+      addUtilities(individualBorderColors)
+    }),
   ],
 }
 

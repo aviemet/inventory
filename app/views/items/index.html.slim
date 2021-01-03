@@ -1,13 +1,13 @@
-section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-value" => current_user.table_preferences }
+= render "shared/table/section"
 
   .flex
     .flex-1
       h1.inline-block Hardware Assets
-      .inline-block.text-right.align-top = link_to '+ New Item', new_item_path, class: :button
+      .inline-block.text-right.align-top = button_link '+ New Item', new_item_path
 
     .flex-1
-      input type="text" data-action="keyup->table#filterResults" data-target="table.filterInput"
-    = render "shared/column_picker", columns: @hideable_fields
+      = render "shared/table/search_input"
+    = render "shared/table/column_picker", columns: @hideable_fields
     / TODO: This needs to be a dropdown
     - if @category
       = @category.name.pluralize
@@ -17,29 +17,29 @@ section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-v
       thead
         tr
           th = check_box_tag :select_all, "all", false, data: { action: "table#checkAll", target: "table.selectAll" }
-          = data_heading(:name, hideable: false)
-          = data_heading("models.name", heading: "Model")
-          = data_heading(:asset_tag)
-          = data_heading(:serial)
-          = data_heading("categories.name", heading: "Category")
-          = data_heading("manufacturers.name", heading: "Manufacturer")
-          = data_heading("vendors.name", heading: "Vendor")
-          = data_heading(:cost)
-          = data_heading("departments.name", heading: Department)
+          = data_heading :name, hideable: false
+          = data_heading "models.name", heading: "Model"
+          = data_heading :asset_tag
+          = data_heading :serial
+          = data_heading "categories.name", heading: "Category"
+          = data_heading "manufacturers.name", heading: "Manufacturer"
+          = data_heading "vendors.name", heading: "Vendor"
+          = data_heading :cost
+          = data_heading "departments.name", heading: Department
           th.table-column-fit.text-center Actions
       tbody
         - @items.each do |item|
           tr data-target="table.row"
             td = check_box_tag :selected, item.id, false, data: { action: "table#checked", target: "table.checkbox" }
-            = data_cell(:name, link_to(item.name, item))
-            = data_cell("models.name", link_to(item.model.name, item.model))
-            = data_cell(:asset_tag, item.asset_tag ? link_to(item.asset_tag, item) : '')
-            = data_cell(:serial, item.serial ? link_to(item.serial, item) : '')
-            = data_cell("categories.name", link_to(item.category.name, item.category))
-            = data_cell("manufacturers.name", link_to(item.manufacturer.name, item.manufacturer))
-            = data_cell("vendors.name", item.vendor&.name ? link_to(item.vendor&.name, item.vendor) : '')
-            = data_cell("cost", item.cost.format)
-            = data_cell("departments.name", item.department ? link_to(item.department.name, item.department) : '')
+            = data_cell :name, link_to(item.name, item)
+            = data_cell "models.name", link_to(item.model, item.model)
+            = data_cell :asset_tag, item.asset_tag ? link_to(item.asset_tag, item) : ''
+            = data_cell :serial, item.serial ? link_to(item.serial, item) : ''
+            = data_cell "categories.name", link_to(item.category, item.category)
+            = data_cell "manufacturers.name", link_to(item.manufacturer, item.manufacturer)
+            = data_cell "vendors.name", item.vendor ? link_to(item.vendor, item.vendor) : ''
+            = data_cell "cost", item.cost.format
+            = data_cell "departments.name", item.department ? link_to(item.department, item.department) : ''
             td nowrap="nowrap"
               .flex.justify-between.gap-1
                 = render Buttons::AssignmentButtonComponent.new(asset: item)

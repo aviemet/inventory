@@ -6,8 +6,7 @@
         | prohibited this vendor from being saved:
       ul
         - vendor.errors.full_messages.each do |message|
-          li =
- message
+          li = message
   .field
     = form.label :name
     = form.text_field :name

@@ -6,4 +6,6 @@
   p = link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token)
 
 .tile-footer.flex-col
-  = render "devise/shared/links"
+  = link_to "Didn't receive unlock instructions?", new_unlock_path(@resource), class: "flex-1 link-hover w-full"
+  = link_to "Log in", new_session_path(@resource), class: "flex-1 link-hover"
+  = link_to "Sign up", new_registration_path(@resource), class: "flex-1 link-hover"

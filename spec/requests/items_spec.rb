@@ -1,17 +1,7 @@
 require 'rails_helper'
-require 'amazing_print'
 require_relative '../support/devise'
 
 RSpec.describe "Items", type: :request do
-  describe "GET /items" do
-    login_admin
-
-    it "renders" do
-      get items_path
-      expect(response).to have_http_status(200)
-    end
-  end
-
   describe "POST /items" do
     login_admin
 

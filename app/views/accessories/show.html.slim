@@ -1,36 +1,35 @@
-p#notice = notice
+section.container
+  p
+    strong Name:
+    = @accessory.name
+  p
+    strong Serial:
+    = @accessory.serial
+  p
+    strong Notes:
+    = @accessory.notes
+  p
+    strong Qty:
+    = @accessory.qty
+  p
+    strong Vendor:
+    = @accessory.vendor_id
+  p
+    strong Default location:
+    = @accessory.default_location_id
+  p
+    strong Category:
+    = @accessory.category
+  p
+    strong Model number:
+    = @accessory.model_number
+  p
+    strong Cost:
+    = @accessory.cost
+  p
+    strong Min qty:
+    = @accessory.min_qty
 
-p
-  strong Name:
-  = @accessory.name
-p
-  strong Serial:
-  = @accessory.serial
-p
-  strong Notes:
-  = @accessory.notes
-p
-  strong Qty:
-  = @accessory.qty
-p
-  strong Vendor:
-  = @accessory.vendor_id
-p
-  strong Default location:
-  = @accessory.default_location_id
-p
-  strong Category:
-  = @accessory.category
-p
-  strong Model number:
-  = @accessory.model_number
-p
-  strong Cost:
-  = @accessory.cost
-p
-  strong Min qty:
-  = @accessory.min_qty
+  = link_to 'Edit', edit_accessory_path(@accessory)
 
-= link_to 'Edit', edit_accessory_path(@accessory)
-
-= link_to 'Back', accessories_path
+  = link_to 'Back', accessories_path

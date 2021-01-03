@@ -8,5 +8,7 @@
     .mb-4
       = f.submit "Resend confirmation instructions", class: "w-full large"
 
-.tile-footer.flex-col
-  = render "devise/shared/links"
+.tile-footer
+  = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource), class: "flex-1 link-hover w-full"
+  = link_to "Log in", new_session_path(resource), class: "flex-1 link-hover"
+  = link_to "Sign up", new_registration_path(resource), class: "flex-1 link-hover"

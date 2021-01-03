@@ -1,1 +1,0 @@
-json.partial! "custom_fieldset_associations/custom_fieldset_association", custom_fieldset_association: @custom_fieldset_association

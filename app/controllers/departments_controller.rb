@@ -3,20 +3,19 @@ class DepartmentsController < ApplicationController
 
   before_action :set_department, only: [:show, :edit, :update, :destroy]
 
-  # GET /companies/:company_id/departments
-  # GET /companies/:company_id/departments.json
+  # GET /departments
+  # GET /departments.json
   def index
     @departments = current_user.active_company.departments
   end
 
-  # GET /companies/:company_id/departments/:id
-  # GET /companies/:company_id/departments/:id.json
+  # GET /departments/:id
+  # GET /departments/:id.json
   def show
   end
 
-  # GET /companies/:company_id/departments/new
+  # GET /departments/new
   def new
-    @company = Company.find(params[:company_id])
     @department = Department.new
   end
 
@@ -24,8 +23,8 @@ class DepartmentsController < ApplicationController
   def edit
   end
 
-  # POST /companies/:company_id/departments
-  # POST /companies/:company_id/departments.json
+  # POST /departments
+  # POST /departments.json
   def create
     @department = Department.new(department_params)
     @department.company = Company.find(params[:company_id])
@@ -69,7 +68,7 @@ class DepartmentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_department
-    @department = Department.find(params[:id])
+    @department = Department.find_by_slug(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

@@ -17,6 +17,7 @@
 require 'deep-cover'
 require 'sunspot_test/rspec'
 require "money-rails/test_helpers"
+require 'amazing_print'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

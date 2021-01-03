@@ -55,8 +55,6 @@ Rails.application.routes.draw do
   resources :fieldsets
   resources :fieldset_associations
 
-  resources :ips
-  resources :nics_ips
   resources :ip_leases
   resources :networks
 
@@ -65,7 +63,6 @@ Rails.application.routes.draw do
 
   resources :contracts
 
-  resources :custom_fieldset_associations
 
   scope "/partials" do
     scope "/dropdown" do

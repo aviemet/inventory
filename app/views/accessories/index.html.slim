@@ -1,36 +1,47 @@
-p#notice = notice
+= render "shared/table/section"
+  .flex
+    .flex-1
+      h1.inline-block Accessories
+      .inline-block.text-right.align-top = button_link '+ New Accessory', new_accessory_path
 
-h1 Accessories
-table
-  thead
-    tr
-      th Name
-      th Serial
-      th Notes
-      th Qty
-      th Vendor
-      th Default location
-      th Category
-      th Model number
-      th Cost
-      th Min qty
-      th Actions
-  tbody
-    - @accessories.each do |accessory|
-      tr
-        td = link_to accessory.name, accessory
-        td = accessory.serial
-        td = accessory.notes
-        td = accessory.qty
-        td = accessory.vendor_id
-        td = accessory.default_location_id
-        td = accessory.category.name
-        td = accessory.model_number
-        td = accessory.cost
-        td = accessory.min_qty
-        td
-          = render "shared/buttons/edit", path: edit_accessory_path(accessory)
-          = render "shared/buttons/delete", path: accessory
-br
+    .flex-1
+      = render "shared/table/search_input"
+    = render "shared/table/column_picker", columns: @hideable_fields
+    / TODO: This needs to be a dropdown
+    - if @category
+      = @category.name.pluralize
 
-= link_to 'New Accessory', new_accessory_path
+  .scroll-content.shadow
+    table.table-auto
+      thead
+        tr
+          th = check_box_tag :select_all, "all", false, data: { action: "table#checkAll", target: "table.selectAll" }
+          = data_heading :name, hideable: false
+          = data_heading :serial
+          = data_heading "vendors.name", heading: "Vendor"
+          = data_heading :default_location
+          = data_heading "categories.name", heading: "Category"
+          = data_heading :model_number
+          = data_heading :cost
+          = data_heading :qty
+          = data_heading :min_qty
+          th Actions
+      tbody
+        - @accessories.each do |accessory|
+          tr data-target="table.row"
+            td = check_box_tag :selected, accessory.id, false, data: { action: "table#checked", target: "table.checkbox" }
+            = data_cell :name, link_to(accessory.name, accessory)
+            = data_cell :serial, accessory.serial
+            = data_cell :vendor_id, accessory.vendor
+            = data_cell :default_location_id, accessory.default_location
+            = data_cell :category, accessory.category.name
+            = data_cell :model_number, accessory.model_number
+            = data_cell :cost, accessory.cost
+            = data_cell :qty, accessory.qty
+            = data_cell :min_qty, accessory.min_qty
+            td
+              = render "shared/buttons/edit", path: edit_accessory_path(accessory)
+              = render "shared/buttons/delete", path: accessory
+  br
+
+  = link_to 'New Accessory', new_accessory_path

@@ -1,0 +1,13 @@
+secion.container
+  p
+    strong Nic:
+    = @ip_lease.nic_id
+  p
+    strong Ip:
+    = @ip_lease.ip
+  p
+    strong Active:
+    = @ip_lease.active
+  = link_to 'Edit', edit_ip_lease_path(@ip_lease)
+  | \
+  = link_to 'Back', ip_leases_path

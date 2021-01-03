@@ -17,7 +17,6 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
-    @locations = Location.all # Parent location options
   end
 
   # GET /locations/:id/edit
@@ -70,7 +69,7 @@ class LocationsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_location
-    @location = Location.find(params[:id])
+    @location = Location.find_by_slug(params[:id])
   end
 
   # Only allow a list of trusted parameters through. contact_attributes from Concern

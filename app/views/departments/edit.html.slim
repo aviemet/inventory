@@ -1,3 +1,4 @@
-h1 Editing Department
-= render 'form', department: @department
-= link_to 'Back', company_path(@department.company)
+section.container
+  h1 Editing Department
+  = render 'form', department: @department
+  = link_to 'Back', company_path(@department.company)

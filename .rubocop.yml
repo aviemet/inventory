@@ -28,18 +28,20 @@ Style/EmptyMethod:
   Enabled: false
 Style/GuardClause:
   Enabled: false
-Layout/EmptyLinesAroundBlockBody:
-  Enabled: false
-Layout/LineLength:
-  Enabled: false
-Layout/ExtraSpacing:
-  Enabled: false
-Layout/TrailingWhitespace:
+Style/SlicingWithRange:
   Enabled: true
-Layout/SpaceAroundMethodCallOperator:
+Style/RedundantRegexpCharacterClass:
   Enabled: true
-Layout/SpaceInsideHashLiteralBraces:
+Style/RedundantRegexpEscape:
+  Enabled: true
+Style/RedundantParentheses:
   Enabled: false
+Style/RedundantSelf:
+  Enabled: false
+Style/SafeNavigation:
+  Enabled: true
+  Exclude:
+    - "*.html.slim"
 Metrics/AbcSize:
   Enabled: false
 Metrics/MethodLength:
@@ -63,22 +65,23 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/FirstArgumentIndentation:
   Enabled: false
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+Layout/LineLength:
+  Enabled: false
+Layout/ExtraSpacing:
+  Enabled: false
+Layout/TrailingWhitespace:
+  Enabled: true
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
-Style/SlicingWithRange:
-  Enabled: true
-Bundler/OrderedGems:
-  Enabled: false
-
 Lint/MixedRegexpCaptureTypes:
   Enabled: true
-Style/RedundantRegexpCharacterClass:
-  Enabled: true
-Style/RedundantRegexpEscape:
-  Enabled: true
-Style/RedundantParentheses:
-  Enabled: false
-Style/RedundantSelf:
+Bundler/OrderedGems:
   Enabled: false
 
 # Relaxed.Ruby.Style
@@ -103,10 +106,6 @@ Style/BlockDelimiters:
 Style/CommentAnnotation:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#stylecommentannotation
-
-Layout/DotPosition:
-  Enabled: false
-  StyleGuide: https://relaxed.ruby.style/#layoutdotposition
 
 Style/DoubleNegation:
   Enabled: false
@@ -176,14 +175,6 @@ Style/SingleLineMethods:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#stylesinglelinemethods
 
-Layout/SpaceBeforeBlockBraces:
-  Enabled: false
-  StyleGuide: https://relaxed.ruby.style/#layoutspacebeforeblockbraces
-
-Layout/SpaceInsideParens:
-  Enabled: false
-  StyleGuide: https://relaxed.ruby.style/#layoutspaceinsideparens
-
 Style/SpecialGlobalVars:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#stylespecialglobalvars
@@ -211,6 +202,18 @@ Style/WhileUntilModifier:
 Style/WordArray:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#stylewordarray
+
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+  StyleGuide: https://relaxed.ruby.style/#layoutspacebeforeblockbraces
+
+Layout/SpaceInsideParens:
+  Enabled: false
+  StyleGuide: https://relaxed.ruby.style/#layoutspaceinsideparens
+
+Layout/DotPosition:
+  Enabled: false
+  StyleGuide: https://relaxed.ruby.style/#layoutdotposition
 
 Lint/AmbiguousRegexpLiteral:
   Enabled: false

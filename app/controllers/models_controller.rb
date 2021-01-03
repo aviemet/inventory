@@ -65,7 +65,7 @@ class ModelsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_model
-    @model = Model.find(params[:id])
+    @model = Model.find_by_slug(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

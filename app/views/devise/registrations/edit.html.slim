@@ -24,7 +24,7 @@
       = f.submit "Update", class: "w-full large"
 
   h3 Delete account
-  p #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+  p #{button_to "Cancel my account", registration_path(resource), data: { confirm: "Are you sure?" }, method: :delete}
 
 .tile-footer.flex-col
-  = render "devise/shared/links"
+  = link_to "Log in", new_session_path(resource), class: "flex-1 link-hover"

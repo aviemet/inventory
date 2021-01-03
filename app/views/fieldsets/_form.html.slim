@@ -6,8 +6,7 @@
         | prohibited this fieldset from being saved:
       ul
         - fieldset.errors.full_messages.each do |message|
-          li =
- message
+          li = message
   .field
     = form.label :name
     = form.text_field :name

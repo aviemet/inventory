@@ -6,8 +6,7 @@
         | prohibited this email from being saved:
       ul
         - email.errors.full_messages.each do |message|
-          li =
- message
+          li = message
   .field
     = form.label :email
     = form.text_area :email

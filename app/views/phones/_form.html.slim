@@ -6,8 +6,7 @@
         | prohibited this phone from being saved:
       ul
         - phone.errors.full_messages.each do |message|
-          li =
- message
+          li = message
   .field
     = form.label :number
     = form.text_area :number

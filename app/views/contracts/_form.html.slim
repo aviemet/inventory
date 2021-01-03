@@ -6,8 +6,7 @@
         | prohibited this contract from being saved:
       ul
         - contract.errors.full_messages.each do |message|
-          li =
- message
+          li = message
   .field
     = form.label :contract_type_id
     = form.text_field :contract_type_id
