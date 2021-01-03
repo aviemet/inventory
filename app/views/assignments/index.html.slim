@@ -1,22 +1,21 @@
-p#notice = notice
+section.container
+  h1 == "#{link_to @asset.name, @asset} History"
 
-h1 == "#{link_to @asset.name, @asset} History"
-
-table
-  thead
-    tr
-      th Assigned To
-      th Date Assigned
-      th Date Returned
-      th Active
-      th colspan="3"
-  tbody
-    - @assignments.each do |assignment|
+  table
+    thead
       tr
-        td = link_to assignment.assign_toable.name, assignment.assign_toable
-        td = assignment.assigned_at
-        td = assignment.returned_at
-        td = assignment.active
-        td = link_to 'Show', assignment
-        td = link_to 'Edit', edit_assignment_path(assignment)
-        td = link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' }
+        th Assigned To
+        th Date Assigned
+        th Date Returned
+        th Active
+        th colspan="3"
+    tbody
+      - @assignments.each do |assignment|
+        tr
+          td = link_to assignment.assign_toable.name, assignment.assign_toable
+          td = assignment.assigned_at
+          td = assignment.returned_at
+          td = assignment.active
+          td = link_to 'Show', assignment
+          td = link_to 'Edit', edit_assignment_path(assignment)
+          td = link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' }

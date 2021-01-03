@@ -1,18 +1,19 @@
-p
-  strong First name:
-  = @person.first_name
-p
-  strong Middle name:
-  = @person.middle_name
-p
-  strong Last name:
-  = @person.last_name
-p
-  strong Active:
-  = @person.active
-p
-  strong Department:
-  = @person.department.name if @person.department
-= link_to 'Edit', edit_person_path(@person)
-| |
-= link_to 'Back', people_path
+section.container
+  p
+    strong First name:
+    = @person.first_name
+  p
+    strong Middle name:
+    = @person.middle_name
+  p
+    strong Last name:
+    = @person.last_name
+  p
+    strong Active:
+    = @person.active
+  p
+    strong Department:
+    = @person.department
+  = link_to 'Edit', edit_person_path(@person)
+  | |
+  = link_to 'Back', people_path

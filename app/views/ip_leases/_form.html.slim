@@ -1,20 +1,6 @@
-= form_with(model: ip_lease, local: true) do |form|
-  - if ip_lease.errors.any?
-    #error_explanation
-      h2
-        = pluralize(ip_lease.errors.count, "error")
-        | prohibited this ip_lease from being saved:
-      ul
-        - ip_lease.errors.full_messages.each do |message|
-          li = message
-  .field
-    = form.label :nic_id
-    = form.text_field :nic_id
-  .field
-    = form.label :ip
-    = form.text_field :ip
-  .field
-    = form.label :active
-    = form.check_box :active
-  .actions
-    = form.submit
+= simple_form_for ip_lease do |form|
+  = render "shared/form/errors", record: ip_lease
+
+  = form.input :nic_id
+  = form.input :active
+  = form.input :address, as: :string

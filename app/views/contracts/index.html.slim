@@ -4,20 +4,18 @@ section
   table.table-auto data-controller="table"
     thead
       tr
-        th Contract type
-        th Vendor
-        th System
         th Description
         th Notes
+        th Vendor
+        th Category
         th colspan="3"
     tbody
       - @contracts.each do |contract|
         tr
-          td = contract.contract_type_id
-          td = contract.vendor_id
-          td = contract.system
           td = contract.description
           td = contract.notes
+          td = contract.vendor
+          td = contract.category
           td = link_to 'Show', contract
           td = link_to 'Edit', edit_contract_path(contract)
           td = link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' }

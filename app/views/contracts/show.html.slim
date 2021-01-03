@@ -1,19 +1,17 @@
-p
-  strong Contract type:
-  = @contract.contract_type_id
-p
-  strong Vendor:
-  = @contract.vendor_id
-p
-  strong System:
-  = @contract.system
-p
-  strong Description:
-  = @contract.description
-p
-  strong Notes:
-  = @contract.notes
-  
-= link_to 'Edit', edit_contract_path(@contract)
-| |
-= link_to 'Back', contracts_path
+section.container
+  p
+    strong Description:
+    = @contract.description
+  p
+    strong Notes:
+    = @contract.notes
+  p
+    strong Vendor:
+    = @contract.vendor_id
+  p
+    strong Category:
+    = @contract.category
+
+  = link_to 'Edit', edit_contract_path(@contract)
+  | |
+  = link_to 'Back', contracts_path

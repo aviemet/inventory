@@ -1,17 +1,7 @@
-= form_with(model: fieldset_association, local: true) do |form|
-  - if fieldset_association.errors.any?
-    #error_explanation
-      h2
-        = pluralize(fieldset_association.errors.count, "error")
-        | prohibited this fieldset_association from being saved:
-      ul
-        - fieldset_association.errors.full_messages.each do |message|
-          li = message
-  .field
-    = form.label :fieldset_id
-    = form.text_field :fieldset_id
-  .field
-    = form.label :fieldable_id
-    = form.text_field :fieldable_id
-  .actions
-    = form.submit
+= simple_form_for fieldset_association do |form|
+  = render "shared/form/errors", record: fieldset_association
+
+  = form.input :fieldset_id
+  = form.input :fieldable_id
+
+  = form.submit

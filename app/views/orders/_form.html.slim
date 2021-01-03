@@ -1,4 +1,6 @@
 = simple_form_for order do |form|
+  = render "shared/form/errors", record: order
+
   = form.error_notification message: form.object.errors[:base].to_sentence
   = form.input :user_id, as: :hidden
   = form.input :vendor_id, as: :select, prompt: "-- Vendor --"

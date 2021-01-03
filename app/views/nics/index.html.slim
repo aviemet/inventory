@@ -1,18 +1,18 @@
-p#notice = notice
-h1 Nics
-table
-  thead
-    tr
-      th Mac
-      th Item
-      th colspan="3"
-  tbody
-    - @nics.each do |nic|
+section.container
+  h1 Nics
+  table
+    thead
       tr
-        td = nic.mac
-        td = nic.item_id
-        td = link_to 'Show', nic
-        td = link_to 'Edit', edit_nic_path(nic)
-        td = link_to 'Destroy', nic, method: :delete, data: { confirm: 'Are you sure?' }
+        th Mac
+        th Item
+        th colspan="3"
+    tbody
+      - @nics.each do |nic|
+        tr
+          td = nic.mac
+          td = nic.item_id
+          td = link_to 'Show', nic
+          td = link_to 'Edit', edit_nic_path(nic)
+          td = link_to 'Destroy', nic, method: :delete, data: { confirm: 'Are you sure?' }
 
-= link_to 'New Nic', new_nic_path
+  = link_to 'New Nic', new_nic_path

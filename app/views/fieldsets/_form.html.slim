@@ -1,17 +1,7 @@
-= form_with(model: fieldset, local: true) do |form|
-  - if fieldset.errors.any?
-    #error_explanation
-      h2
-        = pluralize(fieldset.errors.count, "error")
-        | prohibited this fieldset from being saved:
-      ul
-        - fieldset.errors.full_messages.each do |message|
-          li = message
-  .field
-    = form.label :name
-    = form.text_field :name
-  .field
-    = form.label :description
-    = form.text_area :description
-  .actions
-    = form.submit
+= simple_form_for fieldset do |form|
+  = render "shared/form/errors", record: fieldset
+
+  = form.input :name
+  = form.input :description
+
+  = form.submit

@@ -1,19 +1,19 @@
-p#notice = notice
-p
-  strong Name:
-  = @model.name
-p
-  strong Manufacturer:
-  = @model.manufacturer_id
-p
-  strong Item category:
-  = @model.category_id
-p
-  strong Model number:
-  = @model.model_number
-p
-  strong Notes:
-  = @model.notes
-= link_to 'Edit', edit_model_path(@model)
-| |
-= link_to 'Back', models_path
+section.container
+  p
+    strong Name:
+    = @model.name
+  p
+    strong Manufacturer:
+    = @model.manufacturer_id
+  p
+    strong Item category:
+    = @model.category_id
+  p
+    strong Model number:
+    = @model.model_number
+  p
+    strong Notes:
+    = @model.notes
+  = link_to 'Edit', edit_model_path(@model)
+  | |
+  = link_to 'Back', models_path

@@ -1,15 +1,16 @@
-p
-  strong Number:
-  = @phone.number
-p
-  strong Extension:
-  = @phone.extension
-p
-  strong Notes:
-  = @phone.notes
-p
-  strong Contact:
-  = @phone.contact_id
-= link_to 'Edit', edit_phone_path(@phone)
-| |
-= link_to 'Back', phones_path
+section.container
+  p
+    strong Number:
+    = @phone.number
+  p
+    strong Extension:
+    = @phone.extension
+  p
+    strong Notes:
+    = @phone.notes
+  p
+    strong Contact:
+    = @phone.contact_id
+  = link_to 'Edit', edit_phone_path(@phone)
+  | |
+  = link_to 'Back', phones_path

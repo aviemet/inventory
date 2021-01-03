@@ -1,18 +1,18 @@
-p#notice = notice
-h1 Fieldset Associations
-table
-  thead
-    tr
-      th Fieldset
-      th Fieldable
-      th colspan="3"
-  tbody
-    - @fieldset_associations.each do |fieldset_association|
+section.container
+  h1 Fieldset Associations
+  table
+    thead
       tr
-        td = fieldset_association.fieldset_id
-        td = fieldset_association.fieldable_id
-        td = link_to 'Show', fieldset_association
-        td = link_to 'Edit', edit_fieldset_association_path(fieldset_association)
-        td = link_to 'Destroy', fieldset_association, method: :delete, data: { confirm: 'Are you sure?' }
+        th Fieldset
+        th Fieldable
+        th colspan="3"
+    tbody
+      - @fieldset_associations.each do |fieldset_association|
+        tr
+          td = fieldset_association.fieldset_id
+          td = fieldset_association.fieldable_id
+          td = link_to 'Show', fieldset_association
+          td = link_to 'Edit', edit_fieldset_association_path(fieldset_association)
+          td = link_to 'Destroy', fieldset_association, method: :delete, data: { confirm: 'Are you sure?' }
 
-= link_to 'New Fieldset Association', new_fieldset_association_path
+  = link_to 'New Fieldset Association', new_fieldset_association_path

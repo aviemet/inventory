@@ -1,11 +1,4 @@
-- company = @active_company || @company
-- name = @input_name || "#{model}_id"
-= select_tag(                               \
-    name,                                   \
-    options_from_collection_for_select(     \
-      company.public_send(model.pluralize), \
-      :id,                                  \
-      model.capitalize.constantize.to_s     \
-    ),                                      \
-    prompt: "-- #{model.capitalize} --"     \
+= select_tag(@input_name,
+    options_from_collection_for_select(@models, :id, @display_field),
+    prompt: "-- #{@model_name.capitalize} --" \
   )

@@ -1,23 +1,9 @@
-= form_with(model: phone, local: true) do |form|
-  - if phone.errors.any?
-    #error_explanation
-      h2
-        = pluralize(phone.errors.count, "error")
-        | prohibited this phone from being saved:
-      ul
-        - phone.errors.full_messages.each do |message|
-          li = message
-  .field
-    = form.label :number
-    = form.text_area :number
-  .field
-    = form.label :extension
-    = form.text_area :extension
-  .field
-    = form.label :notes
-    = form.text_area :notes
-  .field
-    = form.label :contact_id
-    = form.text_field :contact_id
-  .actions
-    = form.submit
+= simple_form_for phone do |form|
+  = render "shared/form/errors", record: ip_lease
+
+  = form.input :number
+  = form.input :contact_id
+  = form.input :notes
+  = form.input :extension
+
+  = form.submit

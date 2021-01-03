@@ -1,26 +1,9 @@
-= form_with(model: contract, local: true) do |form|
-  - if contract.errors.any?
-    #error_explanation
-      h2
-        = pluralize(contract.errors.count, "error")
-        | prohibited this contract from being saved:
-      ul
-        - contract.errors.full_messages.each do |message|
-          li = message
-  .field
-    = form.label :contract_type_id
-    = form.text_field :contract_type_id
-  .field
-    = form.label :vendor_id
-    = form.text_field :vendor_id
-  .field
-    = form.label :system
-    = form.text_area :system
-  .field
-    = form.label :description
-    = form.text_area :description
-  .field
-    = form.label :notes
-    = form.text_area :notes
-  .actions
-    = form.submit
+= simple_form_for contract do |form|
+  = render "shared/form/errors", record: contract
+
+  = form.input :description
+  = form.input :notes
+  = form.input :vendor
+  = form.input :category_id
+
+  = form.submit

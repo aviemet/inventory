@@ -1,12 +1,5 @@
-= form_with(model: nic, local: true) do |form|
-  - if nic.errors.any?
-    #error_explanation
-      h2
-        = pluralize(nic.errors.count, "error")
-        | prohibited this nic from being saved:
-      ul
-        - nic.errors.full_messages.each do |message|
-          li = message
+= simple_form_for nic do |form|
+  = render "shared/form/errors", record: nic
   .field
     = form.label :mac
     = form.text_field :mac

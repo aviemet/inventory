@@ -1,50 +1,20 @@
-= form_with(model: license, local: true) do |form|
+= simple_form_for license do |form|
   = render "shared/form/errors", record: license
 
-  .field
-    = form.label :name
-    = form.text_field :name
-  .field
-    = form.label :seats
-    = form.number_field :seats
-  .field
-    = form.label :key
-    = form.text_field :key
-  .field
-    = form.label :licenser_name
-    = form.text_area :licenser_name
-  .field
-    = form.label :licenser_email
-    = form.text_area :licenser_email
-  .field
-    = form.label :reassignable
-    = form.text_area :reassignable
-  .field
-    = form.label :cost
-    = form.text_area :cost
-  .field
-    = form.label :purchased_at
-    = form.text_area :purchased_at
-  .field
-    = form.label :expires_at
-    = form.text_area :expires_at
-  .field
-    = form.label :terminates_at
-    = form.text_area :terminates_at
-  .field
-    = form.label :maintained
-    = form.text_area :maintained
-  .field
-    = form.label :notes
-    = form.text_area :notes
-  .field
-    = form.label :category
-    = form.text_area :category
-  .field
-    = form.label :vendor
-    = form.text_area :vendor
-  .field
-    = form.label :manufacturer
-    = form.text_area :manufacturer
-  .actions
-    = form.submit
+  = form.input :name
+  = form.input :manufacturer
+  = form.input :vendor
+  = form.input :seats
+  = form.input :category
+  = form.input :notes
+  = form.input :key
+  = form.input :maintained
+  = form.input :terminates_at
+  = form.input :licenser_name
+  = form.input :expires_at
+  = form.input :purchased_at
+  = form.input :licenser_email
+  = form.input :cost
+  = form.input :reassignable
+
+  = form.submit

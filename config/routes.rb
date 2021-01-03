@@ -40,8 +40,6 @@ Rails.application.routes.draw do
   resources :assignments, except: custom_path_actions
   resources :assignments, path: "assignments/:asset_type/:asset_id", only: custom_path_actions
 
-
-
   resources :people, concerns: :contactable
 
   resources :vendors, concerns: :contactable
@@ -63,9 +61,9 @@ Rails.application.routes.draw do
 
   resources :contracts
 
-
   scope "/partials" do
     scope "/dropdown" do
+      get "/company", to: "partials#company_dropdown", format: false
       get "/:model/(:company_id)", to: "partials#dropdown", format: false
     end
   end

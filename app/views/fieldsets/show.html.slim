@@ -1,10 +1,10 @@
-p#notice = notice
-p
-  strong Name:
-  = @fieldset.name
-p
-  strong Description:
-  = @fieldset.description
-= link_to 'Edit', edit_fieldset_path(@fieldset)
-| |
-= link_to 'Back', fieldsets_path
+section.container
+  p
+    strong Name:
+    = @fieldset.name
+  p
+    strong Description:
+    = @fieldset.description
+  = link_to 'Edit', edit_fieldset_path(@fieldset)
+  | |
+  = link_to 'Back', fieldsets_path

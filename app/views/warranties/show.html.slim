@@ -1,13 +1,13 @@
-p#notice = notice
-p
-  strong Item:
-  = @warranty.item_id
-p
-  strong Length:
-  = @warranty.length
-p
-  strong Notes:
-  = @warranty.notes
-= link_to 'Edit', edit_warranty_path(@warranty)
-| |
-= link_to 'Back', warranties_path
+section.container
+  p
+    strong Item:
+    = @warranty.item_id
+  p
+    strong Length:
+    = @warranty.length
+  p
+    strong Notes:
+    = @warranty.notes
+  = link_to 'Edit', edit_warranty_path(@warranty)
+  | |
+  = link_to 'Back', warranties_path

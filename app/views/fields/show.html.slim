@@ -1,19 +1,19 @@
-p#notice = notice
-p
-  strong Name:
-  = @field.name
-p
-  strong Format:
-  = @field.format
-p
-  strong Element:
-  = @field.element
-p
-  strong Description:
-  = @field.description
-p
-  strong Notes:
-  = @field.notes
-= link_to 'Edit', edit_field_path(@field)
-| |
-= link_to 'Back', fields_path
+section.container
+  p
+    strong Name:
+    = @field.name
+  p
+    strong Format:
+    = @field.format
+  p
+    strong Element:
+    = @field.element
+  p
+    strong Description:
+    = @field.description
+  p
+    strong Notes:
+    = @field.notes
+  = link_to 'Edit', edit_field_path(@field)
+  | |
+  = link_to 'Back', fields_path

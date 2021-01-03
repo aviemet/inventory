@@ -15,15 +15,13 @@ export default class extends Controller {
   }
 
   _renderDropdown(model) {
-    const lowerModel = model.toLowerCase()
     const company = this.data.get("company")
     const getParams = "name=assignment[assign_toable_id]"
-    fetch(`/partials/dropdown/${lowerModel}/${company}?${getParams}`)
+    fetch(`/partials/dropdown/${model.toLowerCase()}/${company}?${getParams}`)
       .then(response => response.text())
       .then(text => {
         const label = `<label class="string capitalize" for="assignment_assign_toable_type">${model}</label>`
         this.inputContainerTarget.innerHTML = `${label}${text}`
       })
   }
-
 }

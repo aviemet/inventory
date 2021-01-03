@@ -1,0 +1,7 @@
+= simple_form_for category do |form|
+  = render "shared/form/errors", record: category
+
+  = form.input :name
+  = form.input :description
+
+  = form.submit

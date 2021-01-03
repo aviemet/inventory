@@ -29,7 +29,7 @@ RSpec.describe "Request responses", type: :request do
 end
 
 def should_test_this_route(route)
-  ignore_routes_for = ["rails", "devise", "active_storage", "action_mailbox", "pages"]
+  ignore_routes_for = ["rails", "devise", "active_storage", "action_mailbox", "pages", "dropdown"]
 
   is_get_path_with_named_route(route) && !ignore_routes_for.include?(controller_name(route)) && route.required_parts.empty?
 end

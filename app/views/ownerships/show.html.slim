@@ -1,9 +1,10 @@
-p
-  strong Company:
-  = @ownership.company_id
-p
-  strong Ownable:
-  = @ownership.ownable_id
-= link_to 'Edit', edit_ownership_path(@ownership)
-| |
-= link_to 'Back', ownerships_path
+section.container
+  p
+    strong Company:
+    = @ownership.company_id
+  p
+    strong Ownable:
+    = @ownership.ownable_id
+  = link_to 'Edit', edit_ownership_path(@ownership)
+  | |
+  = link_to 'Back', ownerships_path

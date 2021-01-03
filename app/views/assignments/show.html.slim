@@ -1,27 +1,26 @@
-p#notice = notice
+section.container
+  p
+    strong Asset:
+    = @assignment.assignable.name
 
-p
-  strong Asset:
-  = @assignment.assignable.name
+  p
+    strong Assigned To:
+    = @assignment.assign_toable.inspect
 
-p
-  strong Assigned To:
-  = @assignment.assign_toable.inspect
+  p
+    strong Date Assigned:
+    = @assignment.assigned_at
 
-p
-  strong Date Assigned:
-  = @assignment.assigned_at
+  p
+    strong Expected Return Date
+    = @assignment.expected_at
 
-p
-  strong Expected Return Date
-  = @assignment.expected_at
+  p
+    strong Notes:
+    = @assignment.notes
 
-p
-  strong Notes:
-  = @assignment.notes
+  p
+    strong Active:
+    = @assignment.active
 
-p
-  strong Active:
-  = @assignment.active
-
-= link_to 'Edit', edit_assignment_path(@assignment)
+  = link_to 'Edit', edit_assignment_path(@assignment)
