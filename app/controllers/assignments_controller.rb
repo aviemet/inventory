@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
-  before_action :set_asset, only: [:index, :new, :create]
+  before_action :set_asset, only: [:index, :new, :create, :end]
   before_action :redirect_if_already_assigned, only: [:new, :create]
 
   # GET /assignments/:asset_type/:asset_id
@@ -14,7 +14,7 @@ class AssignmentsController < ApplicationController
   def show
   end
 
-  # GET /assignments/:asset_type/:asset_id/new
+  # GET /checkout/:asset_type/:asset_id
   def new
     @assignment = Assignment.new
   end
@@ -24,13 +24,18 @@ class AssignmentsController < ApplicationController
     @asset = @assignment.assignable
   end
 
+  # GET /checkin/:asset_type/:asset_id
+  def end
+    @assignment = @asset.assignment
+  end
+
   # POST /assignments/:asset_type/:asset_id
   # POST /assignments/:asset_type/:asset_id.json
   def create
-    assignable = request.params[:asset_type].capitalize.constantize.find( request.params[:asset_id])
+    assignable = params[:asset_type].capitalize.constantize.find( params[:asset_id])
     assign_toable = assignment_params[:assign_toable_type].capitalize.constantize.find(assignment_params[:assign_toable_id])
 
-    @assignment = assignable.update(name: assignment_params[request.params[:asset_type]][:name])
+    @assignment = assignable.update(name: assignment_params[params[:asset_type]][:name])
 
     respond_to do |format|
       if assignable.assign_to assign_toable, assigned_at: assignment_params[:assigned_at], expected_at: assignment_params[:expected_at]

@@ -1,5 +1,5 @@
 section.container
-  h1 Checkout Asset
+  h1 Checkin #{@asset}
 
   div
     .item-details.
@@ -22,16 +22,11 @@ section.container
       = form.simple_fields_for @asset do |asset|
         = asset.input :name, label: "Asset Name"
 
-      = render "shared/buttons/checkout_type", form: form
+      = form.input :returned_at, flatpickr: { \
+        max_date: Time.current,
+        enable_time: true,
+      }
 
-      = form.input :assigned_at, flatpickr: { \
-        max_date: Time.current.end_of_day,
-        enable_time: true,
-      }
-      = form.input :expected_at, flatpickr: { \
-        min_date: Time.current,
-        enable_time: true,
-      }
       = form.input :notes
 
       = form.submit "Complete Checkout"

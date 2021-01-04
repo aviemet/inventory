@@ -12,10 +12,11 @@ section.container
     tbody
       - @assignments.each do |assignment|
         tr
-          td = link_to assignment.assign_toable.name, assignment.assign_toable
+          td = link_to assignment.assign_toable, assignment.assign_toable
           td = assignment.assigned_at
           td = assignment.returned_at
           td = assignment.active
-          td = link_to 'Show', assignment
-          td = link_to 'Edit', edit_assignment_path(assignment)
-          td = link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' }
+          td = link_to 'Show', assignment_path(assignment.assignable_type, assignment.assignable_id, assignment.id)
+          td = link_to 'Edit', edit_assignment_path(assignment.assignable_type, assignment.assignable_id, assignment.id)
+          - if assignment.active
+            td = link_to "Checkin", end_assignment_path(@asset.assignment.assignable_type, @asset.id), class: [:button, :checkin]
