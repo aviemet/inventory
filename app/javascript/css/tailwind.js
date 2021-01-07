@@ -31,6 +31,7 @@ const ratios = {
 }
 
 const theme = {
+  darkMode: "class",
   purge: [],
   theme: {
     colors: {

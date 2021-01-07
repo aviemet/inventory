@@ -8,6 +8,9 @@ class User < ApplicationRecord
   belongs_to :active_company, class_name: :Company, optional: true
   has_many :companies, through: :roles, source: :resource, source_type: "Company"
 
+  store_accessor :table_preferences, :enable, :value
+  store_accessor :user_preferences, :enable, :value
+
   validates :email, presence: true, uniqueness: true
   validates :email, length: { maximum: 255 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }

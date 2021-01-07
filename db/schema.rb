@@ -402,6 +402,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.bigint "active_company_id"
     t.boolean "active", default: true
     t.jsonb "table_preferences", default: {}
+    t.jsonb "user_preferences", default: {}
     t.index ["active_company_id"], name: "index_users_on_active_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -409,6 +410,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["table_preferences"], name: "index_users_on_table_preferences", using: :gin
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+    t.index ["user_preferences"], name: "index_users_on_user_preferences", using: :gin
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

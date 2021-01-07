@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get "pages/:page" => "pages#show"
   get "settings" => "pages#show", page: "settings"
+  get "user/:id/settings" => "pages#show", page: "user_settings"
 
   devise_for :users, path: "/", path_names: { sign_in: "login", sign_out: "logout" }, only: [:sessions]
   devise_for :users, path_names: { sign_up: "register" }, skip: [:sessions]
