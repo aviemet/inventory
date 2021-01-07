@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :udpate, :destroy]
+  before_action :set_user, except: [:index, :new]
 
   # GET /users
   # GET /users.json
@@ -52,6 +52,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :person, :active_company, :active, :table_preferences, :user_preferences)
+    params.require(:user).permit(:email, :password, :person, :active_company, :active, :dark_mode)
   end
 end
