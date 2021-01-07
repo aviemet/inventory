@@ -149,3 +149,45 @@ a.button {
     }
   }
 }
+
+.dropdown-menu {
+  @apply inline-block relative;
+
+  .heading {
+    @apply pr-1 px-3 py-1;
+    @apply outline-none focus:outline-none border  bg-white rounded-md;
+    @apply flex items-center cursor-pointer;
+  }
+
+  svg {
+    @apply transition ease-in-out;
+  }
+
+  &.open {
+    .heading {
+      @apply rounded-b-none;
+
+      & > svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    & > ul {
+      @apply block;
+    }
+  }
+
+  ul {
+    @apply rounded-md rounded-tr-none;
+    @apply absolute hidden right-0 whitespace-nowrap;
+    @apply shadow bg-white border;
+
+    li {
+      @apply py-2 px-3 hover:bg-gray-100;
+    }
+
+    & > ul {
+      @apply hidden;
+    }
+  }
+}

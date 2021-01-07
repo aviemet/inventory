@@ -17,20 +17,12 @@ html
     #grid-layout.side-bar-closed data-target="layout.sidebar"
       = render "layouts/application/sidebar"
 
-      header#topbar
-        .flex
-          .flex-1
-            - if current_user
-              = render "layouts/application/active_company_picker"
-            - else
-              h2 Inventory Application
-          .min-w-50
+      = render "layouts/application/topbar"
 
       main#content-wrapper
         = yield
 
-      footer#footer
-        .flex-row-reverse.flex.text-gray-600 ©2020
+      = render "layouts/application/footer"
 
     #modal-overlay data-target="layout.modalOverlay"
       #modal-window-area data-target="layout.modalWindowArea"

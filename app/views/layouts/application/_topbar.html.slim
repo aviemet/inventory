@@ -1,0 +1,14 @@
+header#topbar
+  .flex
+    .flex-1
+      - if current_user
+        = render "layouts/application/active_company_picker"
+      - else
+        h2 Inventory Application
+    .min-w-50
+      = render DropdownMenuComponent.new do |menu|
+        = menu.with(:heading) do
+          div = @current_user.person
+        = menu.with(:options) do
+          li = link_to "User Profile & Settings", edit_user_path(@current_user)
+          li Change Password

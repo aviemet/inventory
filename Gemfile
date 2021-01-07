@@ -51,7 +51,7 @@ gem "cancancan", "~> 3.1"
 gem "slug", "~> 4.1"
 
 # Use Slim for view templating
-gem "slim", "~> 4.1"
+gem "slim-rails", "~> 3.2"
 
 # View layer Icon library
 gem "material_icons", "~> 2.2"

@@ -1,7 +1,15 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["sidebar", "modalOverlay", "modalWindowArea", "modalContentArea"]
+  static targets = ["body", "sidebar", "modalOverlay", "modalWindowArea", "modalContentArea"]
+
+  connect() {
+    this._setDarkMode()
+  }
+
+  _setDarkMode() {
+    
+  }
 
   toggleSidebar() {
     this.sidebarTarget.classList.toggle("side-bar-closed")
