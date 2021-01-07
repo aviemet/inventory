@@ -5,7 +5,6 @@
 
   body {
     /* font-size: clamp(0.85rem, 1.1vw, 0.95rem); */
-    @apply bg-gray-100;
   }
 
   h1 {
@@ -33,25 +32,25 @@
   }
 
   a {
-    @apply text-link-dark;
+    @apply text-link-dark dark:text-link-light;
 
     &:hover {
-      @apply text-link-dark-hover;
+      @apply text-link-dark-hover dark:text-link-light-hover;
     }
 
     &:active {
-      @apply text-link-dark-active;
+      @apply text-link-dark-active dark:text-link-light-active;
     }
 
     &:visited {
-      @apply text-link-dark-visited;
+      @apply text-link-dark-visited dark:text-link-light-visited;
     }
   }
 
   section {
-    @apply bg-white shadow;
+    @apply bg-white dark:bg-gray-600 shadow;
     @apply py-4 px-3;
-    @apply border-t-2 border-brand-light;
+    @apply border-t-2 border-brand-light dark:border-brand-dark;
   }
 
   /**
@@ -71,7 +70,7 @@
   thead {
     @apply shadow;
     @apply sticky top-0;
-    @apply bg-white;
+    @apply bg-white dark:bg-gray-800;
   }
 
   th {
@@ -123,7 +122,7 @@
   }
 
   tr:nth-child(even) {
-    @apply bg-coolGray-100;
+    @apply bg-coolGray-100 dark:bg-gray-700;
   }
 
   td {
@@ -196,7 +195,7 @@
   input[multiple],
   textarea,
   select {
-    @apply rounded;
+    @apply rounded dark:bg-gray-500;
 
     &:focus {
       @apply ring-0;

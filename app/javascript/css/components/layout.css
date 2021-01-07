@@ -1,5 +1,5 @@
 body {
-  overflow: hidden;
+  @apply overflow-hidden;
 }
 
 #grid-layout {
@@ -29,7 +29,7 @@ body {
 
 #topbar {
   @apply px-2 py-1;
-  @apply bg-white shadow;
+  @apply bg-white dark:bg-gray-600 shadow;
 
   h2 {
     @apply text-text-dark;
@@ -77,12 +77,12 @@ body {
 
 #sidebar {
   @apply flex flex-col justify-between z-30;
-  @apply bg-white shadow;
+  @apply bg-white dark:bg-gray-600 shadow;
 
   &,
   a,
   i {
-    @apply text-gray-700;
+    @apply text-gray-700 dark:text-white;
   }
 
   .link-hover:hover,
@@ -90,7 +90,7 @@ body {
     @apply border-l-2 border-brand;
 
     i.material-icons {
-      @apply text-gray-600;
+      @apply text-gray-600 dark:text-white;
     }
   }
 
@@ -111,7 +111,7 @@ body {
         padding-left: calc(
           var(--sidebar-icon-left-padding) - var(--sidebar-link-border-left)
         );
-        @apply bg-white;
+        @apply bg-white dark:bg-gray-600;
 
         span {
           padding-left: calc(
@@ -182,21 +182,19 @@ body {
 }
 
 main#content-wrapper {
-  overflow: auto;
-  padding: 15px;
-  width: 100%;
+  @apply overflow-auto p-4 w-full;
+  @apply bg-gray-100 dark:bg-gray-700 dark:text-white;
 
   & > #content {
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
+    @apply flex flex-col;
   }
 }
 
 footer#footer {
   @apply border-t border-gray-300;
-  @apply bg-white shadow;
+  @apply bg-white dark:bg-gray-600 shadow;
   @apply pr-3 pt-1;
 }
 
@@ -209,16 +207,14 @@ footer#footer {
     @apply border-b;
 
     label {
-      @apply font-bold;
-      text-align: right;
+      @apply font-bold text-right;
       @apply flex-initial;
       @apply pr-2;
       min-width: 35%;
     }
 
     .value {
-      text-align: left;
-      @apply flex-1 flex-grow;
+      @apply flex-1 flex-grow text-left;
     }
   }
 }

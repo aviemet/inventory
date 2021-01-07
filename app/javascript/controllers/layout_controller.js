@@ -8,7 +8,9 @@ export default class extends Controller {
   }
 
   _setDarkMode() {
-    
+    if(!this.bodyTarget.classList.contains("dark") && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      this.bodyTarget.classList.add("dark")
+    }
   }
 
   toggleSidebar() {
