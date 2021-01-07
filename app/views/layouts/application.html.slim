@@ -8,7 +8,7 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
-  body data-controller="layout" data-target="layout.body"
+  body data-controller="layout" data-target="layout.body" class="#{"dark" if @current_user&.dark_mode}"
     - if !flash.empty?
       #flash-container data-controller="alerts"
         - flash.each_with_index do |(type, message), i|

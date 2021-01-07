@@ -21,6 +21,8 @@ class User < ApplicationRecord
   before_create :create_associated_person_record
   after_create :add_email_to_contact
 
+  before_save :coerce_json
+
   private
 
   def create_associated_person_record
@@ -31,5 +33,9 @@ class User < ApplicationRecord
     return if self.person.contact.emails.exists?(email: email)
 
     self.person.contact.emails << Email.create(email: email, category: Category.find_by_slug("email-work"))
+  end
+
+  def coerce_json
+    self.dark_mode = ActiveModel::Type::Boolean.new.cast(self.dark_mode) if self.dark_mode
   end
 end
