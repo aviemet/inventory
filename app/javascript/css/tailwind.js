@@ -1,5 +1,6 @@
 const colors = require("tailwindcss/colors")
 const plugin = require("tailwindcss/plugin")
+const defaultConfig = require("tailwindcss/defaultConfig")
 
 const ratios = {
   "1/2": "50%",
@@ -90,10 +91,17 @@ const theme = {
     },
     extend: {
       maxWidth: {
-        ...ratios
+        ...ratios,
+        ...defaultConfig.theme.spacing
       },
       maxHeight: {
-        ...ratios
+        ...ratios,
+        ...defaultConfig.theme.spacing
+      },
+      flex: {
+        2: "2 1 0%",
+        3: "3 1 0%",
+        4: "4 1 0%"
       }
     }
   },

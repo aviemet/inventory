@@ -195,11 +195,10 @@
   input[multiple],
   textarea,
   select {
-    @apply rounded dark:bg-gray-500;
+    @apply rounded dark:bg-gray-500 border-gray-300;
 
     &:focus {
-      @apply ring-0;
-      @apply border-brand-light border-b-2;
+      @apply ring-0 border-brand;
     }
   }
 

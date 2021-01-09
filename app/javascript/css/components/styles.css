@@ -19,8 +19,44 @@ a.button {
   }
 }
 
-.input {
+div.input {
   @apply mb-2;
+
+  &:not(.text) {
+    @apply block w-full md:flex;
+  }
+
+  &.text {
+    label {
+      @apply block;
+      @apply max-w-none w-full;
+    }
+  }
+
+  label {
+    @apply bg-gray-100 px-3 py-2;
+    @apply block w-full rounded-t rounded-b-none;
+    @apply md:flex-1 md:rounded-l md:rounded-r-none md:text-right md:max-w-56;
+
+    & ~ input,
+    & ~ select,
+    & ~ .select-wrapper,
+    & ~ .select-wrapper select {
+      @apply md:flex-2 md:rounded-l-none;
+    }
+  }
+
+  label.text {
+    @apply text-left w-full rounded-t rounded-b-none;
+
+    & + textarea {
+      @apply rounded-t-none;
+    }
+  }
+
+  &.currency {
+    /* Add in the $ symbol */
+  }
 }
 
 #modal-overlay {
