@@ -173,7 +173,7 @@ a.button {
     }
 
     & > ul {
-      @apply block;
+      @apply block z-50;
     }
   }
 

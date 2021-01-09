@@ -3,6 +3,7 @@ body {
 }
 
 #grid-layout {
+  @apply bg-gray-100 dark:bg-gray-700;
   @apply grid gap-0;
   @apply h-screen;
   transition: var(--sidebar-transition-time);
@@ -28,8 +29,9 @@ body {
 }
 
 #topbar {
-  @apply px-2 py-1;
   @apply bg-white dark:bg-gray-600 shadow;
+  @apply px-2 py-1;
+  margin-bottom: 1px;
 
   h2 {
     @apply text-text-dark;
@@ -61,13 +63,17 @@ body {
         & > ul {
           @apply inline-block absolute;
           @apply bg-gray-100 shadow;
+          @apply border-b-2 border-t-0;
+          top: var(--sidebar-link-height);
+
           left: calc(
             var(--sidebar-width-closed) - var(--sidebar-link-border-left)
           );
           width: calc(var(--sidebar-width-open) - var(--sidebar-width-closed));
 
-          & > li:hover {
-            @apply bg-brand-light;
+          &.up {
+            @apply border-b-0 border-t-2;
+            bottom: 100%;
           }
         }
       }
@@ -111,7 +117,7 @@ body {
         padding-left: calc(
           var(--sidebar-icon-left-padding) - var(--sidebar-link-border-left)
         );
-        @apply bg-white dark:bg-gray-600;
+        @apply bg-gray-100 dark:bg-gray-600;
 
         span {
           padding-left: calc(
@@ -119,15 +125,28 @@ body {
           );
         }
 
-        & > ul.up {
-          top: unset;
-          bottom: 100%;
+        & > ul {
+          @apply block absolute bg-gray-100 shadow-sm;
+          top: -2px;
+          left: calc(
+            var(--sidebar-width-open) - var(--sidebar-link-border-left)
+          );
+
+          & > li:hover {
+            @apply bg-brand-light;
+          }
+
+          &.up {
+            top: unset !important;
+            bottom: 0;
+          }
         }
       }
 
       & > ul {
-        @apply hidden;
-        @apply absolute;
+        @apply hidden absolute;
+        @apply border-brand-light border-t-2;
+
         top: var(--sidebar-link-height);
         left: calc(
           var(--sidebar-width-closed) - var(--sidebar-link-border-left)
@@ -183,7 +202,7 @@ body {
 
 main#content-wrapper {
   @apply overflow-auto p-4 w-full;
-  @apply bg-gray-100 dark:bg-gray-700 dark:text-white;
+  @apply dark:text-white;
 
   & > #content {
     max-width: 1200px;
