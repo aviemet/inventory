@@ -63,12 +63,10 @@ class StatusTypesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_status_type
     @status_type = StatusType.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def status_type_params
     params.require(:status_type).permit(:name)
   end

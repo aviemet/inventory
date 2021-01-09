@@ -7,8 +7,8 @@ class ConsumablesController < ApplicationController
     @consumables = Consumable.all
   end
 
-  # GET /consumables/1
-  # GET /consumables/1.json
+  # GET /consumables/:id
+  # GET /consumables/:id.json
   def show
   end
 
@@ -17,7 +17,7 @@ class ConsumablesController < ApplicationController
     @consumable = Consumable.new
   end
 
-  # GET /consumables/1/edit
+  # GET /consumables/:id/edit
   def edit
   end
 
@@ -37,8 +37,8 @@ class ConsumablesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /consumables/1
-  # PATCH/PUT /consumables/1.json
+  # PATCH/PUT /consumables/:id
+  # PATCH/PUT /consumables/:id.json
   def update
     respond_to do |format|
       if @consumable.update(consumable_params)
@@ -51,8 +51,8 @@ class ConsumablesController < ApplicationController
     end
   end
 
-  # DELETE /consumables/1
-  # DELETE /consumables/1.json
+  # DELETE /consumables/:id
+  # DELETE /consumables/:id.json
   def destroy
     @consumable.destroy
     respond_to do |format|
@@ -62,13 +62,12 @@ class ConsumablesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_consumable
-      @consumable = Consumable.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def consumable_params
-      params.require(:consumable).permit(:name, :model_number, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :category_id, :vendor_id, :default_location_id)
-    end
+  def set_consumable
+    @consumable = Consumable.find(params[:id])
+  end
+
+  def consumable_params
+    params.require(:consumable).permit(:name, :model_number, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :category_id, :vendor_id, :default_location_id)
+  end
 end

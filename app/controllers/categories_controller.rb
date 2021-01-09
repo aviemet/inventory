@@ -7,8 +7,8 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-  # GET /categories/1
-  # GET /categories/1.json
+  # GET /categories/:id
+  # GET /categories/:id.json
   def show
   end
 
@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
-  # GET /categories/1/edit
+  # GET /categories/:id/edit
   def edit
   end
 
@@ -37,8 +37,8 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /categories/1
-  # PATCH/PUT /categories/1.json
+  # PATCH/PUT /categories/:id
+  # PATCH/PUT /categories/:id.json
   def update
     respond_to do |format|
       if @category.update(category_params)
@@ -51,8 +51,8 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # DELETE /categories/1
-  # DELETE /categories/1.json
+  # DELETE /categories/:id
+  # DELETE /categories/:id.json
   def destroy
     @category.destroy
     respond_to do |format|
@@ -62,13 +62,12 @@ class CategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def category_params
-      params.require(:category).permit(:categorizable_id, :categorizable_type, :name, :description)
-    end
+  def set_category
+    @category = Category.find_by_slug(params[:id])
+  end
+
+  def category_params
+    params.require(:category).permit(:categorizable_id, :categorizable_type, :name, :description)
+  end
 end

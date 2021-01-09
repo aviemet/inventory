@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   before_action :set_view_data, only: [:index, :category]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_form_models, only: [:edit, :new, :update, :create]
+  before_action :set_form_models, only: [:edit, :new, :update, :create, :clone]
 
   # GET /items
   # GET /items.json
@@ -19,8 +19,8 @@ class ItemsController < ApplicationController
     render :index
   end
 
-  # GET /items/1
-  # GET /items/1.json
+  # GET /items/:id
+  # GET /items/:id.json
   def show
   end
 
@@ -29,8 +29,14 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
-  # GET /items/1/edit
+  # GET /items/:id/edit
   def edit
+  end
+
+  # GET /items/:id/clone
+  def clone
+    @item = Item.find(params[:id]).dup
+    @item.serial = nil
   end
 
   # POST /items
@@ -49,8 +55,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /items/1
-  # PATCH/PUT /items/1.json
+  # PATCH/PUT /items/:id
+  # PATCH/PUT /items/:id.json
   def update
     # set_company
     respond_to do |format|
@@ -64,8 +70,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  # DELETE /items/1
-  # DELETE /items/1.json
+  # DELETE /items/:id
+  # DELETE /items/:id.json
   def destroy
     @item.destroy
     respond_to do |format|

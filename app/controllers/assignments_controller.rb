@@ -74,7 +74,6 @@ class AssignmentsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_assignment
     @assignment = Assignment.find(params[:id])
   end
@@ -90,7 +89,6 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # Only allow a list of trusted parameters through.
   def assignment_params
     params.require(:assignment).permit(:assign_toable_id, :assign_toable_type, :assigned_at, :expected_at, :returned_at, :notes, :active, item: [:name], accessory: [:name], consumable: [:name])
   end

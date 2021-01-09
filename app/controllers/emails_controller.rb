@@ -63,12 +63,10 @@ class EmailsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_email
     @email = Email.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def email_params
     params.require(:email).permit(:email, :notes, :contact_id)
   end

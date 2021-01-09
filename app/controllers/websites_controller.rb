@@ -63,12 +63,10 @@ class WebsitesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_website
     @website = Website.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def website_params
     params.require(:website).permit(:url, :name, :description, :notes)
   end

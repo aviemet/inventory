@@ -80,7 +80,6 @@ class PeopleController < ApplicationController
     @people = Person.where.not(id: current_user)
   end
 
-  # Only allow a list of trusted parameters through.
   def person_params
     params.require(:person).permit(:first_name, :middle_name, :last_name, :job_title, :manager_id, owner_attributes: [:id, :company_id, :department_id])
   end

@@ -63,12 +63,10 @@ class ModelsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_model
     @model = Model.find_by_slug(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def model_params
     params.require(:model).permit(:name, :manufacturer_id, :category_id, :model_number, :notes)
   end

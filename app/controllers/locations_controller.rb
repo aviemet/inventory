@@ -67,12 +67,10 @@ class LocationsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_location
     @location = Location.find_by_slug(params[:id])
   end
-
-  # Only allow a list of trusted parameters through. contact_attributes from Concern
+ contact_attributes from Concern
   def location_params
     params.require(:location).permit(:name, :parent_id)
   end

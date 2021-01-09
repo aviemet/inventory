@@ -7,8 +7,8 @@ class ContactsController < ApplicationController
     @contacts = Contact.all
   end
 
-  # GET /contacts/1
-  # GET /contacts/1.json
+  # GET /contacts/:id
+  # GET /contacts/:id.json
   def show
   end
 
@@ -17,7 +17,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new
   end
 
-  # GET /contacts/1/edit
+  # GET /contacts/:id/edit
   def edit
   end
 
@@ -37,8 +37,8 @@ class ContactsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contacts/1
-  # PATCH/PUT /contacts/1.json
+  # PATCH/PUT /contacts/:id
+  # PATCH/PUT /contacts/:id.json
   def update
     respond_to do |format|
       if @contact.update(contact_params)
@@ -51,8 +51,8 @@ class ContactsController < ApplicationController
     end
   end
 
-  # DELETE /contacts/1
-  # DELETE /contacts/1.json
+  # DELETE /contacts/:id
+  # DELETE /contacts/:id.json
   def destroy
     @contact.destroy
     respond_to do |format|
@@ -63,12 +63,10 @@ class ContactsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_contact
     @contact = Contact.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def contact_params
     params.require(:contact).permit(:notes)
   end

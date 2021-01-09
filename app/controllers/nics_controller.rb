@@ -63,12 +63,10 @@ class NicsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_nic
     @nic = Nic.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def nic_params
     params.require(:nic).permit(:mac, :item_id)
   end
