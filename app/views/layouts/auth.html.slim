@@ -12,7 +12,8 @@ html
     - if !flash.empty?
       #flash-container data-controller="alerts"
         - flash.each_with_index do |(type, message), i|
-          = render("layouts/application/alert", banner_class: type, index: i){ message }
+          = render AlertComponent.new(type: type, index: i, position: :header) do
+            = message
 
     #wrapper
       main#content

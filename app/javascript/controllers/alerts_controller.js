@@ -8,10 +8,18 @@ export default class extends Controller {
   lag = 1500
 
   connect() {
+    this._staggerClosingAlerts()
+  }
+
+  _staggerClosingAlerts() {
     this.inputTargets.forEach((target, i) => {
-      setTimeout(() => {
-        target.click()
-      }, this.msToShowAlert + (this.lag * i) || 0)    
+      console.log({ data: target.dataset.autoHide })
+
+      if(target.dataset.autoHide !== "false") {
+        setTimeout(() => {
+          target.click()
+        }, this.msToShowAlert + (this.lag * i) || 0)
+      }
     })
   }
 
