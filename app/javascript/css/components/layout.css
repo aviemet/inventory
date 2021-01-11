@@ -7,16 +7,15 @@ body {
   @apply grid gap-0;
   @apply h-screen;
   transition: var(--sidebar-transition-time);
-  grid-template-columns: var(--sidebar-width-open) 1fr;
+
+  /* Mobile Grid Definition */
+  grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr 35px;
   grid-template-areas:
-    "sidebar topbar"
-    "sidebar content"
-    "sidebar footer";
+    "topbar"
+    "content"
+    "footer";
 
-  #sidebar {
-    grid-area: sidebar;
-  }
   #topbar {
     grid-area: topbar;
   }
@@ -25,6 +24,33 @@ body {
   }
   #footer {
     grid-area: footer;
+  }
+
+  /* Desktop Grid Definition */
+  @screen sm {
+    grid-template-columns: var(--sidebar-width-open) 1fr;
+    grid-template-rows: 50px 1fr 35px;
+    grid-template-areas:
+      "sidebar topbar"
+      "sidebar content"
+      "sidebar footer";
+
+    &.side-bar-closed {
+      grid-template-columns: var(--sidebar-width-closed) 1fr;
+    }
+
+    #sidebar {
+      grid-area: sidebar;
+    }
+    #topbar {
+      grid-area: topbar;
+    }
+    #content {
+      grid-area: content;
+    }
+    #footer {
+      grid-area: footer;
+    }
   }
 }
 
@@ -39,41 +65,45 @@ body {
 }
 
 #grid-layout.side-bar-closed {
-  grid-template-columns: var(--sidebar-width-closed) 1fr;
+  #sidebar {
+    @apply -left-full;
 
-  #sidebar .links {
-    span {
-      @apply hidden;
-    }
+    .links {
+      span {
+        @apply hidden;
+      }
 
-    & > ul > li {
-      @apply relative;
+      & > ul > li {
+        @apply relative;
 
-      &:hover {
-        span {
-          @apply inline-block absolute left-0;
-          @apply bg-white shadow;
-          @apply border-b border-brand-light;
-          width: calc(
-            var(--sidebar-width-open) - var(--sidebar-link-border-left)
-          );
-          padding-left: var(--sidebar-width-closed);
-        }
+        &:hover {
+          span {
+            @apply inline-block absolute left-0;
+            @apply bg-white shadow;
+            @apply border-b border-brand-light;
+            width: calc(
+              var(--sidebar-width-open) - var(--sidebar-link-border-left)
+            );
+            padding-left: var(--sidebar-width-closed);
+          }
 
-        & > ul {
-          @apply inline-block absolute;
-          @apply bg-gray-100 shadow;
-          @apply border-b-2 border-t-0;
-          top: var(--sidebar-link-height);
+          & > ul {
+            @apply inline-block absolute;
+            @apply bg-gray-100 shadow;
+            @apply border-b-2 border-t-0;
+            top: var(--sidebar-link-height);
 
-          left: calc(
-            var(--sidebar-width-closed) - var(--sidebar-link-border-left)
-          );
-          width: calc(var(--sidebar-width-open) - var(--sidebar-width-closed));
+            left: calc(
+              var(--sidebar-width-closed) - var(--sidebar-link-border-left)
+            );
+            width: calc(
+              var(--sidebar-width-open) - var(--sidebar-width-closed)
+            );
 
-          &.up {
-            @apply border-b-0 border-t-2;
-            bottom: 100%;
+            &.up {
+              @apply border-b-0 border-t-2;
+              bottom: 100%;
+            }
           }
         }
       }
@@ -82,8 +112,19 @@ body {
 }
 
 #sidebar {
-  @apply flex flex-col justify-between z-30;
-  @apply bg-white dark:bg-gray-600 shadow;
+  @apply bg-white dark:bg-gray-600 shadow z-50;
+
+  @apply fixed w-screen h-screen left-0;
+  /* TODO: Extend Tailwind transitions to include "left" */
+  transition-property: left;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  @screen sm {
+    position: initial;
+    @apply flex flex-col justify-between;
+    @apply w-auto h-auto;
+  }
 
   &,
   a,
@@ -103,6 +144,10 @@ body {
   .links {
     li {
       min-height: var(--sidebar-link-height);
+
+      a {
+        @apply w-full inline-block sm:inline sm:w-auto;
+      }
     }
 
     & > ul > li {
@@ -113,48 +158,59 @@ body {
       position: relative;
 
       &:hover {
-        border-width: 0 0 0 var(--sidebar-link-border-left);
+        @screen sm {
+          span {
+            padding-left: calc(
+              var(--sidebar-width-closed) - var(--sidebar-link-border-left)
+            );
+          }
+        }
+
         padding-left: calc(
           var(--sidebar-icon-left-padding) - var(--sidebar-link-border-left)
         );
+        border-width: 0 0 0 var(--sidebar-link-border-left);
         @apply bg-gray-100 dark:bg-gray-600;
 
-        span {
-          padding-left: calc(
-            var(--sidebar-width-closed) - var(--sidebar-link-border-left)
-          );
-        }
-
         & > ul {
-          @apply block absolute bg-gray-100 shadow-sm;
-          top: -2px;
-          left: calc(
-            var(--sidebar-width-open) - var(--sidebar-link-border-left)
-          );
+          @apply block bg-gray-100 shadow-sm;
+
+          /* On Desktop set submenu to absolute position */
+          @screen sm {
+            @apply absolute;
+            top: -2px;
+            left: calc(
+              var(--sidebar-width-open) - var(--sidebar-link-border-left)
+            );
+
+            &.up {
+              top: unset !important;
+              bottom: 0;
+            }
+          }
 
           & > li:hover {
             @apply bg-brand-light;
-          }
-
-          &.up {
-            top: unset !important;
-            bottom: 0;
           }
         }
       }
 
       & > ul {
-        @apply hidden absolute;
-        @apply border-brand-light border-t-2;
+        @apply block border-brand-light border-t-2;
+        padding-left: 3.7rem;
 
-        top: var(--sidebar-link-height);
-        left: calc(
-          var(--sidebar-width-closed) - var(--sidebar-link-border-left)
-        );
-        width: calc(
-          var(--sidebar-width-open) - var(--sidebar-link-padding-left) +
-            var(--sidebar-link-border-left)
-        );
+        /* On Desktop hide submenus until hover state */
+        @screen sm {
+          @apply hidden absolute pl-0;
+          top: var(--sidebar-link-height);
+          left: calc(
+            var(--sidebar-width-closed) - var(--sidebar-link-border-left)
+          );
+          width: calc(
+            var(--sidebar-width-open) - var(--sidebar-link-padding-left) +
+              var(--sidebar-link-border-left)
+          );
+        }
 
         & > li {
           @apply p-0;
@@ -186,18 +242,24 @@ body {
     }
 
     span {
-      @apply absolute;
-      @apply w-full;
-      height: var(--sidebar-link-height);
+      /* On Desktop set link to absolute position */
+      @screen sm {
+        @apply absolute w-full;
+        left: 0;
+        height: var(--sidebar-link-height);
+      }
+
       padding-left: var(--sidebar-width-closed);
-      left: 0;
     }
   }
 }
 
 #sidebar-menu-toggle {
   padding: 10px 37px 0 0;
-  @apply cursor-pointer;
+}
+
+#topbar-menu-toggle {
+  padding: 6px 37px 0 5px;
 }
 
 main#content-wrapper {

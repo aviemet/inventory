@@ -1,5 +1,7 @@
 header#topbar
   .flex
+    .sm:hidden
+      .cursor-pointer == mi.menu.html(id: "topbar-menu-toggle", "data-action" => "click->layout#toggleSidebar")
     .flex-1
       - if current_user
         = render "layouts/application/active_company_picker"

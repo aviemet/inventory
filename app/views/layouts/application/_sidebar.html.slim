@@ -3,7 +3,7 @@
 aside#sidebar
   div
     .text-right.link-hover
-      == mi.menu.html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar")
+      .cursor-pointer == mi.menu.html(id: "sidebar-menu-toggle", "data-action" => "click->layout#toggleSidebar")
     nav.links
       - if current_user&.active_company
         - path_hash = {  }
@@ -32,8 +32,7 @@ aside#sidebar
         - path_hash = {  }
         ul
           li
-            a href="/"
-              = link_to "<span>Settings</span>#{mi.settings}".html_safe, "/settings"
+            = link_to "<span>Settings</span>#{mi.settings}".html_safe, "/settings"
             ul.up
               li = link_to 'Companies', companies_path
               li = link_to 'Manufacturers', manufacturers_path(path_hash)
