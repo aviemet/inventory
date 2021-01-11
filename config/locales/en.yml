@@ -33,3 +33,18 @@ en:
   simple_form:
     hints:
       currency: "$"
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+          zero: "No %{entry_name} found"
+          one: "Showing <b>1</b> %{entry_name}"
+          other: "Showing <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Showing <b>%{first} - %{last} / %{total}</b> %{entry_name}"

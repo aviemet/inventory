@@ -158,10 +158,18 @@
   }
 
   nav.pagination {
-    span {
+    @apply flex justify-end;
+
+    div {
       @apply font-bold cursor-pointer;
-      @apply py-2 px-3;
       @apply border border-r-0;
+      @apply w-8 h-8;
+
+      & > a,
+      & > span {
+        @apply flex justify-center items-center;
+        @apply w-full h-full;
+      }
 
       &:hover {
         @apply bg-brand-light;

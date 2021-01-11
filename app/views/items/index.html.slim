@@ -47,6 +47,5 @@
                 = render "shared/buttons/delete", path: item
 
   .flex.pt-3
-    - start_record = ((@items.current_page - 1) * @items.limit_value) + 1
-    .flex-1 = "Showing #{start_record} - #{start_record - 1 + @items.count} / #{@items.total_count} Items"
-    .flex-1.text-right = paginate @items
+    .flex-1 = page_entries_info @items
+    .flex-1 = paginate @items
