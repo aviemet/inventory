@@ -4,12 +4,23 @@
 
 Asset management for entire asset lifecycle. Track from purchase through active support to deprecation.
 
-Assets:
+Items:
 
 - Check in and out of active inventory
 - Assign to person, department or location
 - Indexed by serial number
 - Searchable fields for all hardware info including IP and MAC address
+
+Accessories:
+
+- Trackable quantity
+- Assignable to an asset, person or location
+- Check in and out of active inventory
+
+Consumables:
+
+- "Using" a consumable permanently remoes it from inventory
+- Logging of all incoming and outgoing usage
 
 Networks:
 
@@ -18,11 +29,6 @@ Networks:
   - Notes network infrastructure which defines the network
 - Provides a table view of all assets categorized by network segment/address
 - Network calculation tools
-
-Consumables:
-
-- Increment inventory with a purchase
-- Logging of all incoming and outgoing usage
 
 Purchases:
 
@@ -35,11 +41,6 @@ Licenses:
 - List of licenses by category
 - Assignable to an asset
   - Decrementable in the case of bulk licensing
-
-Accessories:
-
-- Assignable to an asset, person or location
-- Check in and out of active inventory
 
 People:
 
@@ -97,6 +98,10 @@ Software Agents:
 - Agent for Mac, Windows, Linux, iOS, Android
 - Connects to server using API key
 - Periodically reports asset data through REST API endpoints
+
+### Database Notes
+
+The main difference between an Item and an Accessory or Consumable is that an Item does not have a quantity field. Accessories and Consumables describes items whith an inventory level which can be increased through purchase or manual adjustment. Accessories represent items which generally accompany an asset such as mice (mouses?) and keyboards and can be returned after use. Consumables represent items which disappear after use such as paper or toner.
 
 ---
 
