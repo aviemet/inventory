@@ -7,7 +7,7 @@ class Network < ApplicationRecord
   private
 
   def ip_is_not_a_host
-    return unless ip.prefix == 32
+    return unless ip&.prefix == 32
 
     errors.add(:ip, "Must be a network, not a host")
   end

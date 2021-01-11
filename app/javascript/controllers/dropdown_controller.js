@@ -3,9 +3,7 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = ["parent", "heading"]
 
-  toggle(e) {
-    e.stopPropagation()
-
+  toggle() {
     if(this.parentTarget.classList.contains("open")) {
       this.hide()
     } else {

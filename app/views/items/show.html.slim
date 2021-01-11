@@ -1,7 +1,15 @@
 section.container
-  h1 = @item
+  header.flex
+    h1.flex-1 = @item
+    span
+      = render DropdownMenuComponent.new do |options_menu|
+        = options_menu.with(:heading) do
+          div Actions
+        = options_menu.with(:options) do
+          li = assignment_link @item
+          li = link_to "Edit Item", edit_item_path(@item)
 
-  nav.sticky class="bg-white p-3 border-b-2" style="top: -15px"
+  nav.sticky class="bg-white p-3 border-b-2 -top-4"
     .inline.px-2 Details
     .inline.px-2 History
     .inline.px-2 Licenses

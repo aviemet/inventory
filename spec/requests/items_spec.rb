@@ -12,7 +12,7 @@ RSpec.describe "Items", type: :request do
         item.default_location_id = create(:location).id
         item.vendor_id = create(:vendor).id
       }.attributes
-      expect { post "/items", params: { item: item_params, company: { id: company.id } }  }.to change(Item, :count).by(1)
+      expect { post "/items", params: { item: item_params, company: { id: company.id } } }.to change(Item, :count).by(1)
     end
   end
 end

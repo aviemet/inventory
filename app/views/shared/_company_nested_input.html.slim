@@ -1,6 +1,6 @@
-= form.fields_for :company, model.company || Company.new do |company_form|
+= form.simple_fields_for :company, model.company || Company.new do |company_form|
   / @active_company is set in application_controller
   - if @active_company
     = company_form.input_field :id, as: :hidden, name: 'company[id]', value: @active_company.id
   - else
-    = company_form.input :id, as: :select, name: 'company[id]', collection: @companies, prompt: "-- Company --", label: "Company"
+    = company_form.input :id, as: :select, name: 'company[id]', collection: @companies.map{ |c| [c.name, c.id] }, prompt: "-- Company --", label: "Company"

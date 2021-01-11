@@ -5,7 +5,7 @@ header#topbar
         = render "layouts/application/active_company_picker"
       - else
         h2 Inventory Application
-    .min-w-50
+    .div
       = render DropdownMenuComponent.new do |menu|
         = menu.with(:heading) do
           div = @current_user.person

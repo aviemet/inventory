@@ -3,7 +3,7 @@
     h1 Inventory
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .mb-2
-      = f.input :email, autofocus: true, autocomplete: "email", label: false, placeholder: "Email"
+      = f.text_field :email, autofocus: true, autocomplete: "email", label: false, placeholder: "Email"
 
     .mb-2
       = f.password_field :password, autocomplete: "current-password", label: false, placeholder: "Password"

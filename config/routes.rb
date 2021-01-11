@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resources :nics
     get "category/:category_id", to: "items#category", on: :collection
   end
+  get "items/:id/clone", to: "items#clone"
 
   resources :accessories
   resources :consumables
