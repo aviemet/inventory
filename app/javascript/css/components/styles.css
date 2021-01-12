@@ -175,7 +175,6 @@ div.input {
 
   .selector {
     @apply inline-flex justify-center w-full;
-    @apply rounded-md;
     @apply border border-gray-300 shadow-sm;
     @apply bg-white hover:bg-gray-50;
     @apply px-4 py-2;
@@ -194,7 +193,7 @@ div.input {
     @apply hidden;
     @apply overflow-y-auto;
     @apply absolute left-0 w-full max-h-56;
-    @apply rounded-b-md py-1 shadow-lg bg-white;
+    @apply py-1 shadow-lg bg-white;
     @apply ring-1 ring-black ring-opacity-5;
 
     .option {
@@ -205,8 +204,6 @@ div.input {
 
   &.open {
     .selector {
-      @apply rounded-b-none;
-
       .expand {
         @apply hidden;
       }
@@ -217,7 +214,7 @@ div.input {
     }
 
     .options {
-      @apply block;
+      @apply block z-10;
     }
   }
 }

@@ -1,6 +1,9 @@
 .dropdown-search data-controller="dropdown-search" data-target="dropdown-search.parent"
-  - if @form && @name
+  - if @form
     = @form.input @name, as: :hidden, input_html: { data: { target: "dropdown-search.hiddenInput" } }
+  - else
+    = hidden_field_tag @name, data: { target: "dropdown-search.hiddenInput" }
+
   .selector data-target="dropdown-search.selector" data-action="click->dropdown-search#toggle"
     input type="text" placeholder="Filter" data-target="dropdown-search.input"  data-action="focus->dropdown-search#focusInput keyup->dropdown-search#filter"
     == mi.expand_more.css_class "cursor-pointer expand"

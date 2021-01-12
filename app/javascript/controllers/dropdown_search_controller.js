@@ -3,6 +3,10 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = ["parent", "selector", "input", "hiddenInput", "option"]
 
+  connect() {
+    console.log({ hidden: this.hiddenInputTarget })
+  }
+
   toggle(e) {
     e.stopPropagation()
 
