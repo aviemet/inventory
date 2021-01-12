@@ -24,63 +24,46 @@ a.button {
 }
 
 div.input {
-  @apply mb-2 relative;
+  @apply bg-gray-200 mb-2 w-full;
+  /* Rounded corners on the top for mobile */
+  @apply border-brand-light border-t-2 rounded-t rounded-b-none;
 
-  &:not(.text) {
-    @apply block w-full md:flex;
+  &.required {
+    @apply border-brand;
   }
 
-  &.text {
-    label {
-      @apply block;
-      @apply max-w-none w-full;
-    }
-  }
-
-  span.error:before {
-    content: "";
+  &.field_with_errors {
+    @apply border-error;
   }
 
   .input_wrapper {
-    @apply relative;
+    @apply relative; /* Forces input icons to display correctly */
 
     select {
-      @apply w-full md:w-auto;
+      @apply w-full;
     }
   }
 
   label {
-    @apply border-brand-light border-t-2 md:border-t-0 md:border-l-2;
-    @apply bg-gray-200 px-3 py-2;
-    @apply block w-full rounded-t rounded-b-none;
-    @apply md:flex-1 md:rounded-l md:rounded-r-none md:text-right md:max-w-56;
+    @apply px-3 py-2;
 
-    & ~ .input_wrapper {
-      @apply md:flex-2 md:rounded-l-none;
-    }
+    &.text {
+      @apply text-left w-full rounded-t rounded-b-none;
 
-    &.required {
-      @apply border-warning;
+      & + textarea {
+        @apply rounded-t-none;
+      }
     }
   }
 
-  &.field_with_errors {
-    @apply mb-7;
-
-    label {
-      @apply border-error;
+  .feedback {
+    .error,
+    .hint {
+      width: calc(100% - 1px);
     }
-  }
-
-  span.error {
-    @apply absolute right-2 -bottom-6 text-error-dark;
-  }
-
-  label.text {
-    @apply text-left w-full rounded-t rounded-b-none;
-
-    & + textarea {
-      @apply rounded-t-none;
+    .error {
+      @apply py-1 px-2;
+      @apply text-error-dark bg-error-light border-l border-error-dark;
     }
   }
 
@@ -91,6 +74,27 @@ div.input {
 
     & + input {
       @apply pl-8;
+    }
+  }
+
+  /* On Desktop use a 2 column grid to show labels and inputs, with feedback elements below input */
+  @screen md {
+    &:not(.text) {
+      @apply grid;
+      grid-template-columns: 14rem 1fr;
+
+      /* Rounded corners on the left for desktop */
+      @apply border-t-0 border-l-2;
+      @apply rounded-l rounded-r-none;
+    }
+
+    label {
+      @apply flex-1 text-right max-w-56;
+      grid-row-start: span 2;
+
+      & ~ .input_wrapper {
+        @apply flex-2 rounded-l-none;
+      }
     }
   }
 }
