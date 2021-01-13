@@ -13,7 +13,7 @@ SimpleForm.setup do |config|
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
-  config.wrappers :default, class: :input,
+  config.wrappers :default, class: :field,
                             hint_class: :field_with_hint,
                             error_class: :field_with_errors,
                             valid_class: :field_without_errors do |b|
@@ -56,7 +56,7 @@ SimpleForm.setup do |config|
     ## Inputs
     # b.use :label_input
     b.use :label
-    b.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid', wrap_with: { tag: :div, class: :input_wrapper }
+    b.use :input, error_class: 'is-invalid', valid_class: 'is-valid', wrap_with: { tag: :div, class: :input }
     b.wrapper :feedback_wrapper, tag: :div, class: :feedback do |c|
       c.use :hint,  wrap_with: { tag: :div, class: :hint }
       c.use :error, wrap_with: { tag: :div, class: :error }

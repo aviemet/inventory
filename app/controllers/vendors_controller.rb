@@ -7,8 +7,8 @@ class VendorsController < ApplicationController
     @vendors = Vendor.all
   end
 
-  # GET /vendors/1
-  # GET /vendors/1.json
+  # GET /vendors/:id
+  # GET /vendors/:id.json
   def show
   end
 
@@ -17,7 +17,7 @@ class VendorsController < ApplicationController
     @vendor = Vendor.new
   end
 
-  # GET /vendors/1/edit
+  # GET /vendors/:id/edit
   def edit
   end
 
@@ -37,8 +37,8 @@ class VendorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /vendors/1
-  # PATCH/PUT /vendors/1.json
+  # PATCH/PUT /vendors/:id
+  # PATCH/PUT /vendors/:id.json
   def update
     respond_to do |format|
       if @vendor.update(vendor_params)
@@ -51,8 +51,8 @@ class VendorsController < ApplicationController
     end
   end
 
-  # DELETE /vendors/1
-  # DELETE /vendors/1.json
+  # DELETE /vendors/:id
+  # DELETE /vendors/:id.json
   def destroy
     @vendor.destroy
     respond_to do |format|
@@ -64,7 +64,7 @@ class VendorsController < ApplicationController
   private
 
   def set_vendor
-    @vendor = Vendor.find(params[:id])
+    @vendor = Vendor.find_by_slug(params[:id])
   end
 
   def vendor_params

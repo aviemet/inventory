@@ -23,7 +23,7 @@ a.button {
   @apply max-w-screen-lg;
 }
 
-div.input {
+div.field {
   @apply bg-gray-200 mb-2 w-full;
   /* Rounded corners on the top for mobile */
   @apply border-brand-light border-t-2 rounded-t rounded-b-none;
@@ -36,10 +36,11 @@ div.input {
     @apply border-error;
   }
 
-  .input_wrapper {
+  .input {
     @apply relative; /* Forces input icons to display correctly */
 
-    select {
+    select,
+    .dropdown-search {
       @apply w-full;
     }
   }

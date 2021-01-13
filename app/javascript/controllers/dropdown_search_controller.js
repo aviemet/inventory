@@ -45,8 +45,7 @@ export default class extends Controller {
 
   filter(e) {
     this.optionTargets.forEach(target => {
-      console.log({ target })
-      if(target.textContent.indexOf(e.target.value) < 0) {
+      if(target.textContent.toLowerCase().indexOf(e.target.value.toLowerCase()) < 0) {
         target.classList.add("hidden")
       } else {
         target.classList.remove("hidden")
