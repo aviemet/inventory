@@ -138,3 +138,7 @@ Ownership model also contains a field for Department, allowing an "ownable" to b
 - Depreciation
 - EULA
 - Images
+
+### Ideas
+
+- Add a preview icon to searchable dropdowns to either open the record in a new tab, or in a modal for a quick peek at the model data.

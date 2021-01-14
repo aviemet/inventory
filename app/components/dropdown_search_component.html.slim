@@ -8,18 +8,18 @@
     input {
       type="text"
       value=@display_value
-      placeholder="Filter"
       data-target="dropdown-search.input"
-      data-action="focus->dropdown-search#focusInput keyup->dropdown-search#filter"
+      data-action="focus->dropdown-search#focusInput keydown->dropdown-search#handleKeyDown keyup->dropdown-search#handleKeyUp"
     }
+
     == mi.expand_more.css_class "cursor-pointer expand"
     == mi.expand_less.css_class "cursor-pointer contract"
 
   .options data-target="dropdown-search.options"
-    - @data.each do |option|
+    - @data&.each do |option|
       .option {
         class="#{[!@value.nil? && option[1] == @value ? 'selected' : nil].join(' ')}"
         data-target="dropdown-search.option"
-        data-action="click->dropdown-search#select"
+        data-action="click->dropdown-search#select mouseover->dropdown-search#highlightOption"
         data-id=option[1]
       } = option[0]

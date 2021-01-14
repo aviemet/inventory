@@ -6,14 +6,12 @@
   = form.input :name
   = form.input :asset_tag
   = form.input :serial
-  = form.input :model_id, as: :select, collection: @models.map{ |m| [m.name, m.id] }, prompt: "-- Model --"
-  = form.input :vendor_id, as: :select, collection: @vendors.map{ |v| [v.name, v.id] }, prompt: "-- Vendor --"
+  = form.input :model_id, as: :select, collection: @models
+  = form.input :vendor_id, as: :select, collection: @vendors
 
   = form.input :cost
   = form.input :purchased_at
   = form.input :default_location_id, as: :select, collection: @locations.map{ |l| [l.name, l.id] }, prompt: "-- Default Location --"
   = form.input :notes
 
-  = render DropdownSearchComponent.new(data: @vendors, name: "vendor", form: form)
-  br /
   = form.submit
