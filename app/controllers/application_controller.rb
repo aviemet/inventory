@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   before_action :authenticate_user!
+  before_action :set_action_cable_identifier
   before_action :set_active_company
 
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
@@ -41,5 +42,9 @@ class ApplicationController < ActionController::Base
 
   def record_not_found
     raise ActionController::RoutingError, 'Not Found'
+  end
+
+  def set_action_cable_identifier
+    cookies.encrypted[:user_id] = current_user&.id
   end
 end

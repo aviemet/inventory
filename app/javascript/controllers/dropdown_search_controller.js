@@ -1,27 +1,32 @@
-import { Controller } from "stimulus"
+// import { Controller } from "stimulus"
+import ApplicationController from "./application_controller"
 
-export default class extends Controller {
-  static targets = ["parent", "selector", "input", "hiddenInput", "option"]
+export default class extends ApplicationController {
+  static targets = ["parent", "selector", "input", "hiddenInput", "options", "option"]
 
   connect() {
+    super.connect()
+
     // In the case of a page refresh where values have been entered, 
     // highlight the selected value
-    if(this.hiddenInputTarget.value.trim() !== "") {
-      this._applySelectedToOption(this._selectedOption())
-    }
+    this._highlightSelectedOption()
   }
 
+  // Called by click event, delegates opening and closing dropdown
   toggle(e) {
+    // Ignore clicks inside the search input
     if(e.target === this.inputTarget) return
 
     if(this._isOpen()) {
-      this.hide()
+      this._hide()
+    } else if(this.parentTarget.dataset.async === "true") {
+      this._stimulate()
     } else {
-      this.show()
+      this._show()
     }
   }
 
-  show(focus = true) {
+  _show(focus = true) {
     if(this._isOpen()) return
 
     this.parentTarget.classList.add("open")
@@ -30,12 +35,13 @@ export default class extends Controller {
     const selectedOption = this._selectedOption()
     const optionToActivate = selectedOption ? selectedOption : this.optionTargets[0]
 
-    optionToActivate.classList.add("active")
+    // Safe access in case of empty dropdown list
+    if(optionToActivate) optionToActivate.classList.add("active")
 
     document.addEventListener("click", bodyClick => this._bodyClickListener(bodyClick.target))
   }
 
-  hide() {
+  _hide() {
     this.parentTarget.classList.remove("open")
     this._removeHighlights()
     this._unfilter()
@@ -51,22 +57,25 @@ export default class extends Controller {
   _bodyClickListener(clickTarget) {
     if(this.parentTarget.contains(clickTarget)) return false
 
-    this.hide()
+    this._hide()
     document.removeEventListener("click", this._bodyClickListener)
   }
 
-  // Active the dropdown if the input was the clicked/focused element
+  // Activate the dropdown if the input was the clicked/focused element
   focusInput() {
-    this.show()
+    if(this.parentTarget.dataset.async === "true") {
+      this._stimulate()
+    } else {
+      this._show()
+    }
     this.inputTarget.select()
   }
 
   /**
-   * Because input value only changes on keyup, we need to attach the filter method
-   * to the keyup event.
+   * Because input values only changes on keyup, we need to attach 
+   * the filter method to the keyup event.
    * Keydown can handle the user interaction of navigating and choosing options
    */
-
   keysToIntercept = ["ArrowUp", "ArrowDown", "Enter", "Escape", "Tab", "ArrowLeft", "ArrowRight"]
   modifierKeys = ["Shift", "CapsLock", "Control", "Alt", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Insert", "Home", "End", "PageUp", "PageDown", "OS", "ContextMenu", "NumLock", "ScrollLock", "Pause"]
 
@@ -82,27 +91,27 @@ export default class extends Controller {
         if(this._isOpen()) {
           this._selectPreviousOption()
         } else {
-          this.show(false)
+          this._show(false)
         }
         break
       case "ArrowDown":
         if(this._isOpen()) {
           this._selectNextOption()
         } else {
-          this.show(false)
+          this._show(false)
         }
         break
       case "Enter":
         if(this._isOpen()) {
           this._selectOption(this._activeOption())
-          this.hide()
+          this._hide()
         } else {
-          this.show()
+          this._show()
         }
         break
       case "Escape":
       case "Tab":
-        this.hide()
+        this._hide()
         break
       default:
         break
@@ -113,7 +122,7 @@ export default class extends Controller {
     if(this.modifierKeys.concat(this.keysToIntercept).includes(e.key)) return
     
     // If the dropdown is hidden but the input is focused, open the dropdown on typing
-    this.show(false)
+    this._show(false)
 
     this._filter(e)
   }
@@ -155,7 +164,7 @@ export default class extends Controller {
 
     this.hiddenInputTarget.value = el.dataset.id
     this.inputTarget.value = el.textContent
-    this.hide()
+    this._hide()
   }
 
   highlightOption(e) {
@@ -164,6 +173,8 @@ export default class extends Controller {
   }
 
   _applySelectedToOption(el) {
+    if(!el) return
+
     this.optionTargets.forEach(option => option.classList.remove("selected"))
     el.classList.add("selected")
   }
@@ -171,6 +182,12 @@ export default class extends Controller {
   _selectedOption() {
     const selectedId = this.hiddenInputTarget.value.trim()
     return this.optionTargets.find(option => option.dataset.id === selectedId)
+  }
+
+  _highlightSelectedOption() {
+    if(this.hiddenInputTarget.value.trim() !== "") {
+      this._applySelectedToOption(this._selectedOption())
+    }
   }
 
   _activeOption() {
@@ -187,5 +204,19 @@ export default class extends Controller {
 
   _isOpen() {
     return this.parentTarget.classList.contains("open")
+  }
+
+  _stimulate() {
+    if(!this.isActionCableConnectionOpen()) return false
+
+    const id = this.optionsTarget.id
+    const model = this.selectorTarget.dataset.model
+    const value = this.hiddenInputTarget.value
+    this.stimulate("SelectOptions#options", id, model, value)
+      .then(() => {
+        // this._highlightSelectedOption()
+        this._show()
+      })
+      .catch(error => console.error({ error }))
   }
 }

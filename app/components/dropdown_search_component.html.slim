@@ -1,25 +1,30 @@
-.dropdown-search data-controller="dropdown-search" data-target="dropdown-search.parent"
+- id = SecureRandom.hex(4)
+.dropdown-search {
+  data-controller="dropdown-search"
+  data-target="dropdown-search.parent"
+  data-async=(@options[:async] ? "true" : "false")
+}
   - if @form
     = @form.input @name, as: :hidden, wrapper: false, input_html: { data: { target: "dropdown-search.hiddenInput" } }
   - else
     = hidden_field_tag @name, @value, data: { target: "dropdown-search.hiddenInput" }
 
-  .selector data-target="dropdown-search.selector" data-action="click->dropdown-search#toggle"
+  .selector {
+    data-target="dropdown-search.selector"
+    data-model=(@options[:async] ? @options[:url] : false)
+    data-action="click->dropdown-search#toggle"
+  }
     input {
       type="text"
       value=@display_value
       data-target="dropdown-search.input"
-      data-action="focus->dropdown-search#focusInput keydown->dropdown-search#handleKeyDown keyup->dropdown-search#handleKeyUp"
+      data-action="focus->dropdown-search#focusInput
+                   keydown->dropdown-search#handleKeyDown
+                   keyup->dropdown-search#handleKeyUp"
     }
 
     == mi.expand_more.css_class "cursor-pointer expand"
     == mi.expand_less.css_class "cursor-pointer contract"
 
-  .options data-target="dropdown-search.options"
-    - @data&.each do |option|
-      .option {
-        class="#{[!@value.nil? && option[1] == @value ? 'selected' : nil].join(' ')}"
-        data-target="dropdown-search.option"
-        data-action="click->dropdown-search#select mouseover->dropdown-search#highlightOption"
-        data-id=option[1]
-      } = option[0]
+  .options data-target="dropdown-search.options" id="options-#{id}"
+    = render SelectOptionsComponent.new(data: @data, value: @value)

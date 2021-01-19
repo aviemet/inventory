@@ -48,18 +48,5 @@ export default class extends Controller {
 
   afterReflex (element, reflex, noop, reflexId) {
     // document.body.classList.remove('wait')
-    this._autofocus()
-  }
-
-  _autofocus() {
-    const focusElement = this.element.querySelector("[autofocus]")
-    if (focusElement) {
-      focusElement.focus()
-
-      // shenanigans to ensure that the cursor is placed at the end of the existing value
-      const value = focusElement.value
-      focusElement.value = ""
-      focusElement.value = value
-    }
   }
 }

@@ -6,12 +6,15 @@
   = form.input :name
   = form.input :asset_tag
   = form.input :serial
-  = form.input :model_id, as: :select, collection: @models
-  = form.input :vendor_id, as: :select, collection: @vendors
+  = form.input :model_id, as: :select, collection: "models"
+  = form.input :vendor_id, as: :select, collection: "vendors"
 
   = form.input :cost
   = form.input :purchased_at
-  = form.input :default_location_id, as: :select, collection: @locations.map{ |l| [l.name, l.id] }, prompt: "-- Default Location --"
+  = form.input :default_location_id, as: :select, collection: "locations"
   = form.input :notes
+
+  br /
+  br /
 
   = form.submit
