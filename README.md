@@ -1,5 +1,9 @@
 # README
 
+## Installation
+
+Postgres and Redis must be installed prior to running
+
 ## Application Intention
 
 Asset management for entire asset lifecycle. Track from purchase through active support to deprecation.

@@ -3,106 +3,66 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+# Server
 gem 'rails', '~> 6.1.0'
-
-# Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
-
-# Use Puma as the app server
 gem 'puma', '~> 4.1'
-
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
-
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
-
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
-
-# Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
-
-# Use Active Model has_secure_password
+gem "dotenv-rails", "~> 2.7"
+gem "rack-cors", "~> 1.1"
 gem 'bcrypt', '~> 3.1.7'
-
-# Use Active Storage variant
-gem 'image_processing', '~> 1.2'
-
-# Reduces boot times through caching; required in co platforms: [:mingw, :mswin, :x64_mingw, :jruby]nfig/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-# Load environment variables https://github.com/bkeepers/dotenv
-gem "dotenv-rails", "~> 2.7"
-
-# Use Devise for authentication
-gem "devise", "~> 4.7"
-gem "devise_ldap_authenticatable", "~> 0.8.6"
-
-# User Authorization
-gem "rolify", "~> 5.3"
-gem "cancancan", "~> 3.1"
-
-# Enforce slug validation on models
+# Models
 gem "slug", "~> 4.1"
-
-# Use Slim for view templating
-gem "slim-rails", "~> 3.2"
-
-# View layer Icon library
-gem "material_icons", "~> 2.2"
-
-# Form building
-gem "simple_form", "~> 5.0"
-
-# ActiveType to break out model concerns
 gem "active_type", "~> 1.3"
-
-# A full featured IP address class
-gem "ipaddress", "~> 0.8.3"
-
-# Accurate regional data
-gem "countries", "~> 3.0", require: 'countries/global'
 
 # Search
 gem "sunspot_rails", "~> 2.5"
 gem "sunspot_solr", "~> 2.5"
 
-# Stimulus reflex
+# Assets
+gem 'turbolinks', '~> 5'
+gem 'sass-rails', '>= 6'
+gem 'jbuilder', '~> 2.7'
+gem "slim-rails", "~> 3.2"
+gem 'webpacker', '~> 4.0'
+gem 'image_processing', '~> 1.2'
+gem "material_icons", "~> 2.2"
+gem "simple_form", "~> 5.0"
 gem "stimulus_reflex", "~> 3.3"
-
-# Component based rails view layer
 gem "view_component", "~> 2.23", require: "view_component/engine"
 
-# Currency formatting
-gem "money-rails", "~> 1.13"
+# Authentication / Authorization
+gem "devise", "~> 4.7"
+gem "devise_ldap_authenticatable", "~> 0.8.6"
+gem "rolify", "~> 5.3"
+gem "cancancan", "~> 3.1"
 
-# Pagination
+# Helpers
+gem "ipaddress", "~> 0.8.3"
+gem "countries", "~> 3.0", require: 'countries/global'
+gem "money-rails", "~> 1.13"
 gem "kaminari", "~> 1.2"
+gem 'tzinfo-data'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-  # Foreman for running dev commands in parallale
+  # Foreman for running dev commands in parallel
   gem "foreman", "~> 0.87.1"
 
   # Testing
   gem "faker", "~> 2.12"
   gem "factory_bot_rails", "~> 6.0"
 
-  # Make console output prettier
+  # Console
   gem "pry-rails", "~> 0.3.9"
   gem "amazing_print", "~> 1.2"
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # Linting
   gem "rubocop", "~> 0.85.1"
+  gem "solargraph", "~> 0.39.17"
   gem "slim_lint", "~> 0.20.2"
-  gem "solargraph", "~> 0.39.7"
   gem "htmlbeautifier", "~> 1.3"
 end
 
@@ -127,13 +87,6 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
-
   # Testing
   gem "rspec-rails", "~> 4.0"
   gem "database_cleaner", "~> 1.8"
@@ -142,9 +95,13 @@ group :test do
   gem "deep-cover", "~> 1.0"
   gem "sunspot_test", "~> 0.4.2"
 
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 2.15'
+  gem 'selenium-webdriver'
+
+  # Easy installation and use of web drivers to run system tests with browsers
+  gem 'webdrivers'
+
   # CI
   gem "bullet", "~> 6.1"
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data'

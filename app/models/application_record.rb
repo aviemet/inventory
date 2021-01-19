@@ -3,9 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def self.to_s_field
     default_stringify_field = :name
-
     table = self.to_s.downcase.pluralize
-
     default_stringify_field if ActiveRecord::Base.connection.table_exists?(table) && ActiveRecord::Base.connection.column_exists?(table, default_stringify_field)
   end
 

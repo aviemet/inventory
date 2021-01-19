@@ -5,13 +5,11 @@ section.container
       = link_to 'Edit', edit_company_path(@company), class: "button"
 
   section.mb-4
-    .form-columns
-      h2 Locations
-      = render "locations/table", locations: @company.locations
-      = link_to 'New Location', new_location_path
+    h2 Locations
+    = render "locations/table", locations: @company.locations
+    = link_to 'New Location', new_location_path
 
   section
-    .form-columns
-      h2 Departments
-      = render "departments/table", departments: @company.departments
-      = link_to 'New Department', new_department_path
+    h2 Departments
+    = render "departments/table", departments: @company.departments
+    = link_to 'New Department', new_department_path
