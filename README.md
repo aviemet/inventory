@@ -10,98 +10,97 @@ Asset management for entire asset lifecycle. Track from purchase through active 
 
 Items:
 
-- Check in and out of active inventory
-- Assign to person, department or location
-- Indexed by serial number
-- Searchable fields for all hardware info including IP and MAC address
+- [x] Check in and out of active inventory
+- [x] Assign to person, department or location
+- [ ] Searchable fields for all hardware info including IP and MAC address
 
 Accessories:
 
-- Trackable quantity
-- Assignable to an asset, person or location
-- Check in and out of active inventory
+- [ ] Trackable quantity
+- [x] Assignable to an asset, person or location
+- [x] Check in and out of active inventory
 
 Consumables:
 
-- "Using" a consumable permanently remoes it from inventory
-- Logging of all incoming and outgoing usage
+- [ ] "Using" a consumable permanently removes it from inventory
+- [ ] Logging of all incoming and outgoing usage
 
 Networks:
 
-- Aggregates IP addresses of all assets
-- Tracks structure of local network
-  - Notes network infrastructure which defines the network
-- Provides a table view of all assets categorized by network segment/address
-- Network calculation tools
+- [ ] Aggregates IP addresses of all assets
+- [x] Tracks structure of local network
+  - [x] Notes network infrastructure which defines the network
+- [ ] Provides a table view of all assets categorized by network segment/address
+- [ ] Network calculation tools
 
 Purchases:
 
-- Tracks source, purchase date, cost, category
-  - Optional assignment to GL codes
-  - Optional purchase request generation to be printed or emailed
+- [ ] Tracks source, purchase date, cost, category
+  - [ ] Optional assignment to GL codes
+  - [ ] Optional purchase request generation to be printed or emailed
 
 Licenses:
 
-- List of licenses by category
-- Assignable to an asset
-  - Decrementable in the case of bulk licensing
+- [ ] List of licenses by category
+- [x] Assignable to an asset
+  - [ ] Decrementable in the case of bulk licensing
 
 People:
 
-- Person records can be pulled from LDAP/AD (not required)
-- User accounts reference a person always
+- [ ] Person records can be pulled from LDAP/AD (not required)
+- [x] User accounts reference a person always
 
 Vendors:
 
-- For item purchasing, service providers and software
-- Tracks company information
-  - Account rep/main contact, support lines and other contact info
-- Links to contracts
+- [ ] For item purchasing, service providers and software
+- [ ] Tracks company information
+  - [ ] Account rep/main contact, support lines and other contact info
+- [ ] Links to contracts
 
 Contracts:
 
-- Tracks contract terms
-  - Start/end dates
-  - Billing cycles and amounts
+- [ ] Tracks contract terms
+  - [ ] Start/end dates
+  - [ ] Billing cycles and amounts
 
 Companies:
 
-- Top level records
-- User permissions related to the company association
-- Brandable (logo, theme)
+- [x] Top level records
+- [x] User permissions related to the company association
+- [ ] Brandable (logo, theme)
 
 Locations:
 
-- Tree structure with Company as root
+- [x] Tree structure with Company as root
 
 Departments:
 
-- Flat structure under company
-- References location (optional)
+- [x] Flat structure under company
+- [x] References location (optional)
 
 Help Desk:
 
-- Email integration
-  - Scans one email address, converts all incoming emails to tickets
-  - Scans sent mail to build full conversation in app
-  - Respond to tickets in app, generates email
-  - Filtering rules for what to ignore
-- Associate tickets with other records
-- Bulk edit/update/close
+- [ ] Email integration
+  - [ ] Scans one email address, converts all incoming emails to tickets
+  - [ ] Scans sent mail to build full conversation in app
+  - [ ] Respond to tickets in app, generates email
+  - [ ] Filtering rules for what to ignore
+- [ ] Associate tickets with other records
+- [ ] Bulk edit/update/close
 
 Documentation:
 
-- Wiki style living documentation
-  - Links to other records
-  - Revision history
-  - WYSIWYG editor
-- Permissions set at the department level, overridden at the individual level
+- [ ] Wiki style living documentation
+  - [ ] Links to other records
+  - [ ] Revision history
+  - [ ] WYSIWYG editor
+- [ ] Permissions set at the department level, overridden at the individual level
 
 Software Agents:
 
-- Agent for Mac, Windows, Linux, iOS, Android
-- Connects to server using API key
-- Periodically reports asset data through REST API endpoints
+- [ ] Agent for Mac, Windows, Linux, iOS, Android
+- [ ] Connects to server using API key
+- [ ] Periodically reports asset data through REST API endpoints
 
 ### Database Notes
 

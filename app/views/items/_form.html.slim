@@ -6,12 +6,12 @@
   = form.input :name
   = form.input :asset_tag
   = form.input :serial
-  = form.input :model_id, as: :select, collection: "models"
-  = form.input :vendor_id, as: :select, collection: "vendors"
+  = form.association :model, collection: "models"
+  = form.association :vendor, collection: "vendors"
 
   = form.input :cost
   = form.input :purchased_at
-  = form.input :default_location_id, as: :select, collection: "locations"
+  = form.association :default_location, collection: "locations"
   = form.input :notes
 
   br /
