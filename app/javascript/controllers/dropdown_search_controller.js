@@ -7,8 +7,7 @@ export default class extends ApplicationController {
   connect() {
     super.connect()
 
-    // In the case of a page refresh where values have been entered, 
-    // highlight the selected value
+    // In the case of a page refresh where values have been entered, highlight the selected value
     this._highlightSelectedOption()
   }
 
@@ -20,7 +19,9 @@ export default class extends ApplicationController {
     if(this._isOpen()) {
       this._hide()
     } else if(this.parentTarget.dataset.async === "true") {
-      this._stimulate()
+      this._stimulate().then(() => {
+        this._show()
+      })
     } else {
       this._show()
     }
@@ -30,14 +31,15 @@ export default class extends ApplicationController {
     if(this._isOpen()) return
 
     this.parentTarget.classList.add("open")
+
     if(focus) this.inputTarget.focus()
 
+    // Highlight the selected option on show
     const selectedOption = this._selectedOption()
     const optionToActivate = selectedOption ? selectedOption : this.optionTargets[0]
-
-    // Safe access in case of empty dropdown list
     if(optionToActivate) optionToActivate.classList.add("active")
 
+    // Register click listener to close dropdown
     document.addEventListener("click", bodyClick => this._bodyClickListener(bodyClick.target))
   }
 
@@ -72,8 +74,7 @@ export default class extends ApplicationController {
   }
 
   /**
-   * Because input values only changes on keyup, we need to attach 
-   * the filter method to the keyup event.
+   * Because input values only changes on keyup, we need to attach the filter method to the keyup event.
    * Keydown can handle the user interaction of navigating and choosing options
    */
   keysToIntercept = ["ArrowUp", "ArrowDown", "Enter", "Escape", "Tab", "ArrowLeft", "ArrowRight"]
@@ -212,10 +213,11 @@ export default class extends ApplicationController {
     const id = this.optionsTarget.id
     const model = this.selectorTarget.dataset.model
     const value = this.hiddenInputTarget.value
-    this.stimulate("SelectOptions#options", id, model, value)
+
+    return this.stimulate("SelectOptions#options", id, model, value)
       .then(() => {
-        // this._highlightSelectedOption()
-        this._show()
+        this._highlightSelectedOption()
+        return value
       })
       .catch(error => console.error({ error }))
   }

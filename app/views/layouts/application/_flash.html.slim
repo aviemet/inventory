@@ -1,0 +1,5 @@
+- if !flash.empty?
+  #flash-container data-controller="alerts"
+    - flash.each_with_index do |(type, message), i|
+      = render AlertComponent.new(type: type, index: i) do
+        = message

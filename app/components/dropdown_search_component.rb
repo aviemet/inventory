@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DropdownSearchComponent < ApplicationComponent
-  def initialize(data:, name:, value: nil, form: nil, maxlength: false, minlength: false, pattern: false, min_max: false, readonly: false, placeholder: false)
+  def initialize(data:, name:, value: nil, display_value: nil, form: nil, maxlength: false, minlength: false, pattern: false, min_max: false, readonly: false, placeholder: false)
     @options = { maxlength: maxlength, minlength: minlength, pattern: pattern, min_max: min_max, readonly: readonly, placeholder: placeholder, async: false }
 
     if data.is_a? String
@@ -12,7 +12,7 @@ class DropdownSearchComponent < ApplicationComponent
     @data = data
     @name = name
     @value = value
-    @display_value = @data.detect { |e| e.last == value }.first rescue nil
+    @display_value = display_value || @data.detect { |e| e.last == value }.first rescue nil
     @form = form
   end
 end
