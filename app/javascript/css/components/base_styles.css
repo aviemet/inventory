@@ -58,6 +58,7 @@
   **/
 
   table {
+    @apply w-full table-fixed;
     @apply border-separate;
     border-spacing: 0;
 
@@ -188,6 +189,11 @@
   /**
   * Inputs
   **/
+  input,
+  textarea {
+    @apply w-full;
+  }
+
   input[type="text"],
   input[type="email"],
   input[type="url"],
