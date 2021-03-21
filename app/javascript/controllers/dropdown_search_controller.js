@@ -13,12 +13,13 @@ export default class extends ApplicationController {
 
   // Called by click event, delegates opening and closing dropdown
   toggle(e) {
-    // Ignore clicks inside the search input
-    if(e.target === this.inputTarget) return
-
-    if(this._isOpen()) {
+    // Ignore clicks inside the search input if open
+    if(this._isOpen() && e.target !== this.inputTarget) {
       this._hide()
-    } else if(this.parentTarget.dataset.async === "true") {
+      return
+    }
+    
+    if(this.parentTarget.dataset.async === "true") {
       this._stimulate().then(() => {
         this._show()
       })
