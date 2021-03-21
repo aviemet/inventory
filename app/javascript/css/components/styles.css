@@ -25,8 +25,9 @@ a.button {
 
 div.field {
   @apply bg-gray-200 mb-2 w-full;
+  @apply border-brand-light border-t-2;
   /* Rounded corners on the top for mobile */
-  @apply border-brand-light border-t-2 rounded-t rounded-b-none;
+  /* @apply rounded-t rounded-b-none; */
 
   &.required {
     @apply border-brand;
@@ -92,7 +93,7 @@ div.field {
 
       /* Rounded corners on the left for desktop */
       @apply border-t-0 border-l-2;
-      @apply rounded-l rounded-r-none;
+      /* @apply rounded-l rounded-r-none; */
     }
 
     label {
