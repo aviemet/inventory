@@ -20,7 +20,7 @@ export default class extends Controller {
 // Use in view as such:
 /*
 div data-controller="nested-form"
- template data-target="nested-form.template"
+ template data-nested-form-target="template"
    = form.fields_for :field, Model.new, child_index: Time.now.to_i do |model|
      = render "model_fields_from_partial"
 
@@ -28,7 +28,7 @@ div data-controller="nested-form"
  = form.fields_for :model do |model|
    = render "model_fields_from_partial"
   
- div data-target="nested-form.add_field"
+ div data-nested-form-target="add_field"
    = link_to "Add Model", "#", data: { action: "nested-form#add-association" }
 */
 

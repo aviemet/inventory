@@ -10,6 +10,8 @@ export default class extends Controller {
     const heading = this.headingTargets.find(el => el.dataset.tableFieldName === field)
     if(!heading) return
 
+    console.log({ field, heading })
+
     if(e.target.checked) {
       this._showElement(heading)
       this.cellTargets.forEach(cell => {
@@ -48,7 +50,9 @@ export default class extends Controller {
   /** END TOGGLE COLUMNS */
 
   /** SEARCH FILTER **/
-
+  filterResults(e) {
+    console.log({ e })
+  }
   /** END SEARCH FILTER **/
 
   /** CHECKBOXES **/

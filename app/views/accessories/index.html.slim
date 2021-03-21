@@ -28,7 +28,7 @@
           th Actions
       tbody
         - @accessories.each do |accessory|
-          tr data-target="table.row"
+          tr data-table-target="row"
             td = check_box_tag :selected, accessory.id, false, data: { action: "table#checked", target: "table.checkbox" }
             = data_cell :name, link_to(accessory.name, accessory)
             = data_cell :serial, accessory.serial

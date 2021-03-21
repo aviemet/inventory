@@ -41,7 +41,7 @@ Style/RedundantSelf:
 Style/SafeNavigation:
   Enabled: true
   Exclude:
-    - "*.html.slim"
+    - "/app/views/**/*.slim"
 Metrics/AbcSize:
   Enabled: false
 Metrics/MethodLength:

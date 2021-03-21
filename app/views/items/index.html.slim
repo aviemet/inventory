@@ -29,7 +29,7 @@
           th.table-column-fit.text-center Actions
       tbody
         - @items.each do |item|
-          tr data-target="table.row"
+          tr data-table-target="row"
             td = check_box_tag :selected, item.id, false, data: { action: "table#checked", target: "table.checkbox" }
             = data_cell :name, link_to(item.name, item)
             = data_cell "models.name", link_to(item.model, item.model)

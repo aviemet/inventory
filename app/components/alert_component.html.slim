@@ -1,6 +1,6 @@
-.message data-target="alerts.flash"
+.message data-alerts-target="flash"
   .alert-banner class=([@type, @position ? "alert-#{@position}" : nil]).compact.join(' ')
-    input.hidden id="banneralert-#{@index}" data-action="click->alerts#closeAlert" data-target="alerts.input" data-auto-hide="#{@auto_hide}" type="checkbox"
+    input.hidden id="banneralert-#{@index}" data-action="click->alerts#closeAlert" data-alerts-target="input" data-auto-hide="#{@auto_hide}" type="checkbox"
 
     label.close for="banneralert-#{@index}" title="close"
       .alert-content
