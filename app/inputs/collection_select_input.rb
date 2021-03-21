@@ -11,7 +11,7 @@ class CollectionSelectInput < SimpleForm::Inputs::CollectionSelectInput
 
   def filterable_select(merged_input_options)
     @builder.template.render(
-      DropdownSearchComponent.new(
+      Forms::DropdownSearch::DropdownSearchComponent.new(
         data: options[:collection],
         value: @builder&.object.try(attribute_name),
         display_value: @builder&.object.try(reflection.name),

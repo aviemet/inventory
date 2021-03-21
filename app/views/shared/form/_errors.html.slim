@@ -1,6 +1,6 @@
 - if record.errors.any?
   div data-controller="alerts"
-    = render AlertComponent.new type: :error, auto_hide: false do
+    = render Alert::AlertComponent.new type: :error, auto_hide: false do
         div = "#{pluralize(record.errors.count, 'error')} prevented this #{record.class.name} from being saved:"
         ul
           - record.errors.full_messages.each do |message|

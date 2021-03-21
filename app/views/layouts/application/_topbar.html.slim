@@ -8,7 +8,7 @@ header#topbar
       - else
         h2 Inventory Application
     .div
-      = render DropdownMenuComponent.new do |menu|
+      = render Forms::DropdownMenu::DropdownMenuComponent.new do |menu|
         = menu.with(:heading) do
           div = @current_user.person
         = menu.with(:options) do

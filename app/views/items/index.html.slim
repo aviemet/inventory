@@ -42,7 +42,7 @@
             = data_cell "departments.name", item.department ? link_to(item.department, item.department) : ''
             td nowrap="nowrap"
               .flex.justify-between.gap-1
-                = render Buttons::AssignmentButtonComponent.new(asset: item)
+                = render Buttons::AssignmentButton::AssignmentButtonComponent.new(asset: item)
                 = render "shared/buttons/edit", path: edit_item_path(item)
                 = render "shared/buttons/delete", path: item
 

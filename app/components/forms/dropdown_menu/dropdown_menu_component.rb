@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class DropdownMenuComponent < ApplicationComponent
+class Forms::DropdownMenu::DropdownMenuComponent < ApplicationComponent
   with_content_areas :heading, :options
 end

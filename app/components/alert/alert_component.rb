@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AlertComponent < ApplicationComponent
+class Alert::AlertComponent < ApplicationComponent
   def initialize(type: :alert, index: 0, position: nil, auto_hide: true)
     raise "Alert type must be one of \"notice\", \"info\", \"alert\", \"error\"; \"#{type}\" given." if !%w(notice info alert error).include?(type.to_s)
 

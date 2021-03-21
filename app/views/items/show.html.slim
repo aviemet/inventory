@@ -2,7 +2,7 @@ section.container
   header.flex
     h1.flex-1 = @item
     span
-      = render DropdownMenuComponent.new do |options_menu|
+      = render Forms::DropdownMenu::DropdownMenuComponent.new do |options_menu|
         = options_menu.with(:heading) do
           div Actions
         = options_menu.with(:options) do

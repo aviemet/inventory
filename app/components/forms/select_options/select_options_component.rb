@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SelectOptionsComponent < ApplicationComponent
+class Forms::SelectOptions::SelectOptionsComponent < ApplicationComponent
   def initialize(data: nil, value: nil)
     @data = if data.is_a? String
               []

@@ -5,7 +5,7 @@ class SelectOptionsReflex < ApplicationReflex
     raise "Method \"#{data}\" is not defined in SelectOptionsReflex" if !self.respond_to?(data) # This should probably error
 
     data = self.send(data)
-    morph "##{selector}", render(SelectOptionsComponent.new(data: data, value: value), layout: false)
+    morph "##{selector}", render(Forms::SelectOptions::SelectOptionsComponent.new(data: data, value: value), layout: false)
   end
 
   def vendors

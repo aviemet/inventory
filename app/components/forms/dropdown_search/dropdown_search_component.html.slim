@@ -27,4 +27,4 @@
     == mi.expand_less.css_class "cursor-pointer contract"
 
   .options data-dropdown-search-target="options" id="options-#{id}"
-    = render SelectOptionsComponent.new(data: @data, value: @value)
+    = render Forms::SelectOptions::SelectOptionsComponent.new(data: @data, value: @value)
