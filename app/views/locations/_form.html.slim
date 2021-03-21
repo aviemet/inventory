@@ -1,6 +1,6 @@
 = simple_form_for @location do |form|
   = render "shared/form/errors", record: @location
 
-  = form.input :parent, as: :select, collection: @active_company.locations.where.not(id: @location&.id), prompt: "-- Parent Location --"
+  = form.association :parent, collection: @active_company.locations.where.not(id: @location&.id)
   = form.input :name
   = form.submit

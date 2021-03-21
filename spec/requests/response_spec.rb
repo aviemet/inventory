@@ -5,7 +5,7 @@ RSpec.describe "Request responses", type: :request do
   describe "Page responeses behind authentication" do
     it "denies access if not logged in" do
       Rails.application.routes.routes.map do |route|
-        next unless should_test_this_route(route)
+        next unless route_should_be_tested(route)
 
         response = get public_send("#{route.name}_path")
         expect(response).to redirect_to new_user_session_url
@@ -18,7 +18,7 @@ RSpec.describe "Request responses", type: :request do
 
     it "all GET requests with no required params return success" do
       Rails.application.routes.routes.map do |route|
-        next unless should_test_this_route(route)
+        next unless route_should_be_tested(route)
 
         get public_send("#{route.name}_path")
         expect(response).to have_http_status(:success)
@@ -28,7 +28,7 @@ RSpec.describe "Request responses", type: :request do
 
 end
 
-def should_test_this_route(route)
+def route_should_be_tested(route)
   ignore_routes_for = ["rails", "devise", "active_storage", "action_mailbox", "pages", "dropdown"]
 
   is_get_path_with_named_route(route) && !ignore_routes_for.include?(controller_name(route)) && route.required_parts.empty?

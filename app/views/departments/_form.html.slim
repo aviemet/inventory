@@ -2,6 +2,6 @@
   = render "shared/form/errors", record: @department
 
   = form.input :name
-  = form.input :location, as: :select, collection: @active_company.locations, prompt: "-- Location --"
+  = form.association :location, collection: @active_company.locations
 
   = form.submit
