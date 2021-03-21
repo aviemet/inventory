@@ -4,10 +4,6 @@ export default class extends Controller {
   static targets = [ "heading", "cell", "checkbox", "selectAll", "columnToggleMenu" ]
   static values = { preferences: Object }
 
-  connect() {
-    console.log({ prefs: this.preferencesValue })
-  }
-
   /** TOGGLE COLUMNS */
   toggleColumn(e) {
     const field = e.target.dataset.tableFieldName

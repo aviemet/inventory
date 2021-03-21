@@ -38,15 +38,21 @@ div.field {
 
   .input {
     @apply relative; /* Forces input icons to display correctly */
+    line-height: 1;
 
     select,
     .dropdown-search {
       @apply w-full;
     }
+
+    input,
+    select {
+      line-height: 24px;
+    }
   }
 
   label {
-    @apply px-3 py-2;
+    @apply px-3 py-2 inline-block;
 
     &.text {
       @apply text-left w-full rounded-t rounded-b-none;
