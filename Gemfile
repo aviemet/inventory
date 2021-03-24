@@ -32,6 +32,7 @@ gem "material_icons", "~> 2.2"
 gem "simple_form", "~> 5.0"
 gem "stimulus_reflex", "~> 3.3"
 gem "view_component", "~> 2.23", require: "view_component/engine"
+gem "draper", "~> 4.0"
 
 # Authentication / Authorization
 gem "devise", "~> 4.7"
