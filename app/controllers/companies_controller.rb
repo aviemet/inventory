@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
   # GET /companies/:id
   # GET /companies/:id.json
   def show
-    set_active_company(Company.find_by_slug(:id))
+    set_active_company(Company.find_by_slug(:id).decorate)
   end
 
   # GET /companies/new
