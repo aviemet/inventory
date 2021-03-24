@@ -1,0 +1,12 @@
+section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-value" => @table_preferences }
+  .flex
+    .flex-1
+      = title
+
+    .flex-1
+      = render "shared/table/search_input"
+    = render "shared/table/column_picker", columns: @hideable_fields
+
+  = table
+
+  = pagination

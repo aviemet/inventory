@@ -1,0 +1,10 @@
+div *{class: @scroll ? "scroll-content shadow" : ""}
+  table.table-auto
+    = head
+    / thead
+    /   tr
+    /     - if @selectable
+    /       th = check_box_tag :select_all, "all", false, data: { action: "table#checkAll", target: "table.selectAll" }
+
+    tbody
+      = body

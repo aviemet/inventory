@@ -1,6 +1,6 @@
-import ApplicationController from "./application_controller"
+import ApplicationController from './application_controller'
 
-/* This is the custom StimulusReflex controller for the SelectOptions Reflex.
+/* This is the custom StimulusReflex controller for the SaveUserTablePreferences Reflex.
  * Learn more at: https://docs.stimulusreflex.com
  */
 export default class extends ApplicationController {
@@ -28,26 +28,26 @@ export default class extends ApplicationController {
    * need them.
    *
    * Important:
-   * Make sure to add data-controller="select-options" to your markup alongside
-   * data-reflex="SelectOptions#dance" for the lifecycle methods to fire properly.
+   * Make sure to add data-controller="save-user-table-preferences" to your markup alongside
+   * data-reflex="SaveUserTablePreferences#dance" for the lifecycle methods to fire properly.
    *
    * Example:
    *
-   *   <a href="#" data-reflex="click->SelectOptions#dance" data-controller="select-options">Dance!</a>
+   *   <a href="#" data-reflex="click->SaveUserTablePreferences#dance" data-controller="save-user-table-preferences">Dance!</a>
    *
    * Arguments:
    *
    *   element - the element that triggered the reflex
    *             may be different than the Stimulus controller's this.element
    *
-   *   reflex - the name of the reflex e.g. "SelectOptions#dance"
+   *   reflex - the name of the reflex e.g. "SaveUserTablePreferences#dance"
    *
    *   error/noop - the error message (for reflexError), otherwise null
    *
    *   reflexId - a UUID4 or developer-provided unique identifier for each Reflex
    */
 
-  // Assuming you create a "SelectOptions#dance" action in your Reflex class
+  // Assuming you create a "SaveUserTablePreferences#dance" action in your Reflex class
   // you'll be able to use the following lifecycle methods:
 
   // beforeDance(element, reflex, noop, reflexId) {
@@ -55,11 +55,19 @@ export default class extends ApplicationController {
   // }
 
   // danceSuccess(element, reflex, noop, reflexId) {
-  //   element.innerText = 'Danced like no one was watching! Was someone watching?'
+  //   element.innerText = '\nDanced like no one was watching! Was someone watching?'
   // }
 
   // danceError(element, reflex, error, reflexId) {
   //   console.error('danceError', error);
-  //   element.innerText = "Couldn't dance!"
+  //   element.innerText = "\nCouldn\'t dance!"
+  // }
+
+  // afterDance(element, reflex, noop, reflexId) {
+  //   element.innerText = '\nWhatever that was, it\'s over now.'
+  // }
+
+  // finalizeDance(element, reflex, noop, reflexId) {
+  //   element.innerText = '\nNow, the cleanup can begin!'
   // }
 }

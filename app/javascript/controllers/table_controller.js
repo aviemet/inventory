@@ -1,8 +1,14 @@
-import { Controller } from "stimulus"
+import ApplicationController from "./application_controller"
 
-export default class extends Controller {
+export default class extends ApplicationController {
   static targets = [ "heading", "cell", "checkbox", "selectAll", "columnToggleMenu" ]
   static values = { preferences: Object }
+
+  connect() {
+    super.connect()
+
+    console.log({ values: this })
+  }
 
   /** TOGGLE COLUMNS */
   toggleColumn(e) {
