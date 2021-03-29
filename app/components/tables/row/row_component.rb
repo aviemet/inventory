@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
 class Tables::Row::RowComponent < ApplicationComponent
-  renders_many :cells, Tables::HeaderCell::HeaderCellComponent
+  def initialize(classes: "", data: {})
+    @classes = classes
+    @data = data
+  end
 end

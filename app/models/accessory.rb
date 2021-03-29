@@ -1,6 +1,10 @@
 class Accessory < ApplicationRecord
   include Ownable
   include Assignable
+  include Purchasable
+  include Fieldable
+
+  resourcify
 
   monetize :cost_cents
 
@@ -8,4 +12,6 @@ class Accessory < ApplicationRecord
   belongs_to :vendor
   belongs_to :manufacturer
   belongs_to :default_location, class_name: "Location", required: false
+
+  scope :includes_associated, ->{ includes([:category, :assignments, :department, :vendor, :manufacturer]) }
 end

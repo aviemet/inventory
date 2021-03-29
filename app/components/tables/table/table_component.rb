@@ -2,7 +2,7 @@
 
 class Tables::Table::TableComponent < ApplicationComponent
   renders_one :head, Tables::Header::HeaderComponent
-  renders_one :body
+  renders_one :body, Tables::Body::BodyComponent
 
   def initialize(scroll: false)
     @scroll = scroll

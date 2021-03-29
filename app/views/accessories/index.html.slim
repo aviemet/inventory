@@ -1,47 +1,50 @@
-= render "shared/table/section"
-  .flex
-    .flex-1
+= view 'tables/section', table_preferences: current_user.table_preferences do |section|
+  = section.title
       h1.inline-block Accessories
       .inline-block.text-right.align-top = button_link '+ New Accessory', new_accessory_path
 
-    .flex-1
-      = render "shared/table/search_input"
-    = render "shared/table/column_picker", columns: @hideable_fields
-    / TODO: This needs to be a dropdown
-    - if @category
-      = @category.name.pluralize
+  = section.table(scroll: true) do |table|
+    = table.head do |head|
+      = head.row
+        = head.select_all_cell
+        = head.cell :name, hideable: false
+        = head.cell :serial
+        = head.cell "vendors.name", heading: "Vendor"
+        = head.cell :default_location
+        = head.cell "categories.name", heading: "Category"
+        = head.cell :model_number
+        = head.cell :cost
+        = head.cell :qty
+        = head.cell :min_qty
+        th.table-column-fit.text-center Actions
+    = table.body do |body|
+      - @accessories.each do |accessory|
+        = body.row
+          = body.select_cell accessory
+          = render body.cell :name
+            = link_to(accessory.name, accessory)
+          = render body.cell :serial
+            = accessory.serial
+          = render body.cell :vendor_id
+            = accessory.vendor
+          = render body.cell :default_location_id
+            = accessory.default_location
+          = render body.cell :category
+            = accessory.category.name
+          = render body.cell :model_number
+            = accessory.model_number
+          = render body.cell :cost
+            = accessory.cost
+          = render body.cell :qty
+            = accessory.qty
+          = render body.cell :min_qty
+            = accessory.min_qty
+          td nowrap="nowrap"
+            .flex.justify-between.gap-1
+              = view "buttons/edit", path: edit_accessory_path(accessory)
+              = view "buttons/delete", path: accessory
 
-  .scroll-content.shadow
-    table.table-auto
-      thead
-        tr
-          th = check_box_tag :select_all, "all", false, data: { action: "table#checkAll", target: "table.selectAll" }
-          = data_heading :name, hideable: false
-          = data_heading :serial
-          = data_heading "vendors.name", heading: "Vendor"
-          = data_heading :default_location
-          = data_heading "categories.name", heading: "Category"
-          = data_heading :model_number
-          = data_heading :cost
-          = data_heading :qty
-          = data_heading :min_qty
-          th Actions
-      tbody
-        - @accessories.each do |accessory|
-          tr data-table-target="row"
-            td = check_box_tag :selected, accessory.id, false, data: { action: "table#checked", target: "table.checkbox" }
-            = data_cell :name, link_to(accessory.name, accessory)
-            = data_cell :serial, accessory.serial
-            = data_cell :vendor_id, accessory.vendor
-            = data_cell :default_location_id, accessory.default_location
-            = data_cell :category, accessory.category.name
-            = data_cell :model_number, accessory.model_number
-            = data_cell :cost, accessory.cost
-            = data_cell :qty, accessory.qty
-            = data_cell :min_qty, accessory.min_qty
-            td
-              = render "shared/buttons/edit", path: edit_accessory_path(accessory)
-              = render "shared/buttons/delete", path: accessory
-  br
-
-  = link_to 'New Accessory', new_accessory_path
+  = section.pagination
+    .flex.pt-3
+      .flex-1 = page_entries_info @accessories
+      .flex-1 = paginate @accessories

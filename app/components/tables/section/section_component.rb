@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Tables::TableSection::TableSectionComponent < ApplicationComponent
+class Tables::Section::SectionComponent < ApplicationComponent
   renders_one :title
   renders_one :table, Tables::Table::TableComponent
   renders_one :pagination

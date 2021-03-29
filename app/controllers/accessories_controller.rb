@@ -4,7 +4,7 @@ class AccessoriesController < ApplicationController
   # GET /accessories
   # GET /accessories.json
   def index
-    @accessories = Accessory.all
+    @accessories = @active_company.accessories.includes_associated.order(order_by).page(params[:page])
   end
 
   # GET /accessories/1
@@ -62,6 +62,14 @@ class AccessoriesController < ApplicationController
   end
 
   private
+
+  SORTABLE_FIELDS = %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+
+  def order_by
+    return false unless SORTABLE_FIELDS.include?(params[:sort])
+
+    "#{params[:sort]} #{%w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'}"
+  end
 
   def set_accessory
     @accessory = Accessory.find(params[:id])

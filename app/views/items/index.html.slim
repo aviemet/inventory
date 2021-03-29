@@ -1,52 +1,50 @@
-= tester("thing", '/')
-
-= render Tables::TableSection::TableSectionComponent.new(table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields) do |section|
-  = section.title do
+= view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields do |section|
+  = section.title
     h1.inline-block Hardware Assets
     .inline-block.text-right.align-top = button_link '+ New Item', new_item_path
 
   = section.table(scroll: true) do |table|
     = table.head do |head|
-      = head.row do |row|
-        = row.cell :name, hideable: false
-        = row.cell "models.name", heading: "Model"
-        = row.cell :asset_tag
-        = row.cell :serial
-        = row.cell "categories.name", heading: "Category"
-        = row.cell "manufacturers.name", heading: "Manufacturer"
-        = row.cell "vendors.name", heading: "Vendor"
-        = row.cell :cost
-        = row.cell "departments.name", heading: Department
-          th.table-column-fit.text-center Actions
+      = head.row
+        = head.select_all_cell
+        = head.cell :name, hideable: false
+        = head.cell "models.name", heading: "Model"
+        = head.cell :asset_tag
+        = head.cell :serial
+        = head.cell "categories.name", heading: "Category"
+        = head.cell "manufacturers.name", heading: "Manufacturer"
+        = head.cell "vendors.name", heading: "Vendor"
+        = head.cell :cost
+        = head.cell "departments.name", heading: Department
+        th.table-column-fit.text-center Actions
 
-        / = data_heading :name, hideable: false
-        / = data_heading "models.name", heading: "Model"
-        / = data_heading :asset_tag
-        / = data_heading :serial
-        / = data_heading "categories.name", heading: "Category"
-        / = data_heading "manufacturers.name", heading: "Manufacturer"
-        / = data_heading "vendors.name", heading: "Vendor"
-        / = data_heading :cost
-        / = data_heading "departments.name", heading: Department
-        / th.table-column-fit.text-center Actions
-    = table.body do
+    = table.body do |body|
       - @items.each do |item|
-        tr data-table-target="row"
-          td = check_box_tag :selected, item.id, false, data: { action: "table#checked", target: "table.checkbox" }
-          = data_cell :name, link_to(item.name, item)
-          = data_cell "models.name", link_to(item.model, item.model)
-          = data_cell :asset_tag, item.asset_tag ? link_to(item.asset_tag, item) : ''
-          = data_cell :serial, item.serial ? link_to(item.serial, item) : ''
-          = data_cell "categories.name", link_to(item.category, item.category)
-          = data_cell "manufacturers.name", link_to(item.manufacturer, item.manufacturer)
-          = data_cell "vendors.name", item.vendor ? link_to(item.vendor, item.vendor) : ''
-          = data_cell "cost", item.cost.format
-          = data_cell "departments.name", item.department ? link_to(item.department, item.department) : ''
+        = body.row
+          = body.select_cell item
+          = render body.cell :name
+            = link_to(item.name, item)
+          = render body.cell "models.name"
+            = link_to(item.model, item.model)
+          = render body.cell :asset_tag
+            = item.asset_tag ? link_to(item.asset_tag, item) : ''
+          = render body.cell :serial
+            = item.serial ? link_to(item.serial, item) : ''
+          = render body.cell "categories.name"
+            = link_to(item.category, item.category)
+          = render body.cell "manufacturers.name"
+            = link_to(item.manufacturer, item.manufacturer)
+          = render body.cell "vendors.name"
+            = item.vendor ? link_to(item.vendor, item.vendor) : ''
+          = render body.cell "cost"
+             = item.cost.format
+          = render body.cell "departments.name"
+            = item.department ? link_to(item.department, item.department) : ''
           td nowrap="nowrap"
             .flex.justify-between.gap-1
-              = render Buttons::AssignmentButton::AssignmentButtonComponent.new(asset: item)
-              = render "shared/buttons/edit", path: edit_item_path(item)
-              = render "shared/buttons/delete", path: item
+              = view 'buttons/assignment', asset: item
+              = view 'buttons/edit', path: edit_item_path(item)
+              = view "buttons/delete", path: item
 
   = section.pagination
     .flex.pt-3

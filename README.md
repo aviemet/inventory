@@ -132,9 +132,35 @@ Use `number_to_currency` for displaying prices. Later we will store the currency
 
 ## Dev Notes
 
+### Companies
+
 Companies are essentially top level organizational units. All other objects can be considered to belong to a company with an "Ownership" relationship. Company association is polymorphic, so any forms must use the `form_for` method and handle the assignment in the controller. This could possibly be a method to include in a concern.
 
-Ownership model also contains a field for Department, allowing an "ownable" to be associated with a department as well. This association is how a person is associated with a department, but also allows records such as items to be associated with a second level of ownership. This way, if an item is checked in it still retains an association with the department for which it was purchased.
+### Ownerships
+
+Ownership model also contains a field for Department, allowing an "ownable" to be associated with a department as well. This association is how a person is associated with a department, but also allows records such as items to be associated with a second level of ownership. This way, when an item is checked in it still retains an association with the department for which it was purchased.
+
+### View Components
+
+View Components should all be namespaced to a folder for each component. This adds verbosity, which is addressed by the view_component_helper. For instance, to create a "share" button, you would use the generator:
+
+`rails g component Buttons::Share::Share`
+
+This creates the file structure:
+
+    | components
+    |\ buttons
+    ||\ share
+    |||\ share_component.rb
+    |||| share_component.html.slim
+
+This would then be used in a view as such:
+
+`= view 'buttons/share`
+
+This syntax is preferable to:
+
+`= render Buttons::Share::ShareCompnent.new`
 
 ### Features for another time
 

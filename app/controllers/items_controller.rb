@@ -86,7 +86,6 @@ class ItemsController < ApplicationController
 
   def set_view_data
     @hideable_fields = {"Model": "models.name", "Asset Tag": "asset_tag", "Serial": "serial", "Cost": "cost", "Purchase Date": "purchased_at", "Requestable": "requestable", "Category": "categories.name", "Manufacturer": "manufacturers.name", "Model Number": "models.model_number", "Vendor": "vendors.name", "Department": "departments.name"}
-    # @hideable_fields = %w(models.name asset_tag serial cost purchased_at requestable categories.name manufacturers.name models.model_number vendors.name departments.name)
   end
 
   def order_by

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Buttons::AssignmentButton::AssignmentButtonComponent < ViewComponent::Base
+class Buttons::Assignment::AssignmentComponent < ApplicationComponent
   def initialize(asset:)
     @asset = asset
   end
