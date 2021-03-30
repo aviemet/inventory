@@ -32,9 +32,6 @@ gem "material_icons", "~> 2.2"
 gem "simple_form", "~> 5.0"
 gem "stimulus_reflex", "~> 3.3"
 gem "view_component", "~> 2.23", require: "view_component/engine"
-gem "cells-rails", "~> 0.1.4"
-gem "cells-slim", "~> 0.1.1"
-gem "rspec-cells", "~> 0.3.5"
 
 # Authentication / Authorization
 gem "devise", "~> 4.7"
