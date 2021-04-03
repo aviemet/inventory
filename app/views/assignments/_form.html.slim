@@ -4,7 +4,6 @@
   = form.simple_fields_for asset do |a|
     = a.input :name, label: "Asset Name"
 
-  / = render "shared/buttons/checkout_type", form: form
   = view "buttons/checkout_type", company: @active_company
 
   = form.input :assigned_at, flatpickr: { \

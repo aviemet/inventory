@@ -10,5 +10,5 @@ table.table-auto
         td = link_to location.name, location_path(location)
         td = link_to location.parent.name, location_path(location.parent) if location&.parent_id
         td nowrap="nowrap" 
-          = render "shared/buttons/edit", path: edit_location_path(location)
-          = render "shared/buttons/delete", path: location_path(location)
+          = view "buttons/edit", path: edit_location_path(location)
+          = view "buttons/delete", path: location_path(location)

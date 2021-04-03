@@ -19,7 +19,7 @@ section.container
           td = company.items.count
           td = company.people.count
           td
-            = render "shared/buttons/edit", path: edit_company_path(company)
-            = render "shared/buttons/delete", path: company
+            = view "buttons/edit", path: edit_company_path(company)
+            = view "buttons/delete", path: company
 
   = link_to 'New Company', new_company_path
