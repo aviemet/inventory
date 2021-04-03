@@ -162,12 +162,22 @@ This syntax is preferable to:
 
 `= render Buttons::Share::ShareCompnent.new`
 
-### Features for another time
+### Decorators
+
+Draper is installed and a decorator object exists for each class, however we don't call `.decorate` on each query passed from the controller. There are things happening at the view layer which become compromised by this extra layer. When the methods in a decorator are needed, you can call `.decorate` on the record in the view template to gain access to its methods. For instance: `h1 = @person.decorate.full_name`.
+
+The current issues with calling `.decorate` by default:
+
+- The Item record has a field called 'model', which is also the interface for accessing the underlying object from a decorated record. This means accessing the Model association on an Item looks as such: `@item.model.model.name`, which is confusing at best and could easily lead to issues.
+
+- Custom helpers would either need to check if the model passed to them were decorated, or be passed the underlying model from the view. This would require calling `.model` on every record passed to a helper, making refactoring difficult. It also adds confusion for any records with a 'model' field.
+
+## Features for another time
 
 - Depreciation
 - EULA
 - Images
 
-### Ideas
+## Ideas
 
 - Add a preview icon to searchable dropdowns to either open the record in a new tab, or in a modal for a quick peek at the model data.
