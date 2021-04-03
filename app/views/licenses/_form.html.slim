@@ -1,5 +1,5 @@
 = simple_form_for license do |form|
-  = render "shared/form/errors", record: license
+  = view "forms/errors", record: license
 
   = form.input :name
   = form.input :manufacturer

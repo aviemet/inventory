@@ -1,5 +1,5 @@
 = simple_form_for contract do |form|
-  = render "shared/form/errors", record: contract
+  = view "forms/errors", record: contract
 
   = form.input :description
   = form.input :notes

@@ -1,5 +1,5 @@
 = simple_form_for website do |form|
-  = render "shared/form/errors", record: website
+  = view "forms/errors", record: website
 
   = form.input :url
   = form.input :notes

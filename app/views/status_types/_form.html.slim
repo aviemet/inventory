@@ -1,5 +1,5 @@
 = simple_form_for status_type do |form|
-  = render "shared/form/errors", record: status_type
+  = view "forms/errors", record: status_type
 
   = form.input :name
 

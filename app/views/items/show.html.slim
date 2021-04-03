@@ -6,7 +6,7 @@ section.container
         = options_menu.with(:heading) do
           div Actions
         = options_menu.with(:options) do
-          li = assignment_link @item
+          li = assignment_link @item.model
           li = link_to "Edit Item", edit_item_path(@item)
 
   nav.sticky class="bg-white p-3 border-b-2 -top-4"

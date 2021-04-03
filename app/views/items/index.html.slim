@@ -42,7 +42,7 @@
             = item.department ? link_to(item.department, item.department) : ''
           td nowrap="nowrap"
             .flex.justify-between.gap-1
-              = view 'buttons/assignment', asset: item
+              = view 'buttons/assignment', asset: item.model
               = view 'buttons/edit', path: edit_item_path(item)
               = view "buttons/delete", path: item
 

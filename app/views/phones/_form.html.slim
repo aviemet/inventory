@@ -1,5 +1,5 @@
 = simple_form_for phone do |form|
-  = render "shared/form/errors", record: ip_lease
+  = view "forms/errors", record: ip_lease
 
   = form.input :number
   = form.input :contact_id

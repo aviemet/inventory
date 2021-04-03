@@ -1,9 +1,10 @@
 = simple_form_for network do |form|
-  = render "shared/form/errors", record: network
+  = view "forms/errors", record: network
 
-  = render 'shared/company_nested_input', form: form, model: network
+  = view "forms/company_nested_input", form: form, company: network.company, companies: @companies, active_company: @active_company
+
   = form.input :name
-  = form.input :ip, as: :string, value: @network.ip && "#{@network.ip}/#{@network.ip.prefix}", placeholder: "192.168.1.0/24", label: "Network With Mask"
+  = form.input :ip, as: :string, value: network.ip && "#{network.ip}/#{network.ip.prefix}", placeholder: "192.168.1.0/24", label: "Network With Mask"
   = form.input :gateway, as: :string
   = form.input :dhcp_start, as: :string, label: "DHCP Start"
   = form.input :dhcp_end, as: :string, label: "DHCP End"

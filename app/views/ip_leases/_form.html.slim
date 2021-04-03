@@ -1,5 +1,5 @@
 = simple_form_for ip_lease do |form|
-  = render "shared/form/errors", record: ip_lease
+  = view "forms/errors", record: ip_lease
 
   = form.input :nic_id
   = form.input :active

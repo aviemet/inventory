@@ -1,5 +1,5 @@
 = simple_form_for model do |form|
-  = render "shared/form/errors", record: model
+  = view "forms/errors", record: model
 
     = form.input :notes
     = form.input :name

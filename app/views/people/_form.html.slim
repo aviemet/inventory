@@ -1,5 +1,5 @@
 = simple_form_for person, html: { "data-controller": :personform, "data-personform-departments-url": "/companies/:id/departments.json" } do |form|
-  = render "shared/form/errors", record: person
+  = view "forms/errors", record: person
 
   = form.input :first_name
   = form.input :department

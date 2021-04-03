@@ -1,5 +1,5 @@
 = simple_form_for warranty do |form|
-  = render "shared/form/errors", record: warranty
+  = view "forms/errors", record: warranty
 
   = form.input :item_id
   = form.input :notes

@@ -2,7 +2,7 @@ section.container
   h1 Editing Assignment
 
   = simple_form_for @assignment do |form|
-    = render "shared/form/errors", record: @assignment
+    = view "forms/errors", record: @assignment
 
     label Asset:
     pre = @asset.inspect

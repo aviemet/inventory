@@ -1,6 +1,7 @@
 = simple_form_for manufacturer do |form|
-  = render "shared/form/errors", record: manufacturer
+  = view "forms/errors", record: manufacturer
 
-  = render "shared/company_nested_input", form: form, model: manufacturer
+  = view "forms/company_nested_input", form: form, company: manufacturer.company, companies: @companies, active_company: @active_company
+
   = form.input :name
   = form.submit

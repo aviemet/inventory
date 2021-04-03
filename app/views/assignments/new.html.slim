@@ -17,7 +17,7 @@ section.container
         .value "@asset.asset_tag"
 
     = simple_form_for @assignment do |form|
-      = render "shared/form/errors", record: @assignment
+      = view "forms/errors", record: @assignment
 
       = form.simple_fields_for @asset do |asset|
         = asset.input :name, label: "Asset Name"

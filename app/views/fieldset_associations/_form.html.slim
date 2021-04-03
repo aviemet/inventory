@@ -1,5 +1,5 @@
 = simple_form_for fieldset_association do |form|
-  = render "shared/form/errors", record: fieldset_association
+  = view "forms/errors", record: fieldset_association
 
   = form.input :fieldset_id
   = form.input :fieldable_id

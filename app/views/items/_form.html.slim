@@ -1,7 +1,7 @@
-= simple_form_for @item do |form|
-  = render "shared/form/errors", record: @item
+= simple_form_for item do |form|
+  = view "forms/errors", record: item
 
-  = render "shared/company_nested_input", form: form, model: item
+  = view "forms/company_nested_input", form: form, company: item.company, companies: @companies, active_company: @active_company
 
   = form.input :name
   = form.input :asset_tag

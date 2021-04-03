@@ -1,5 +1,5 @@
 = simple_form_for nic do |form|
-  = render "shared/form/errors", record: nic
+  = view "forms/errors", record: nic
   .field
     = form.label :mac
     = form.text_field :mac
