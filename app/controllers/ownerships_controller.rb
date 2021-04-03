@@ -45,7 +45,7 @@ class OwnershipsController < ApplicationController
         format.html { redirect_to @ownership, notice: 'Ownership was successfully updated.' }
         format.json { render :show, status: :ok, location: @ownership }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @ownership.errors, status: :unprocessable_entity }
       end
     end

@@ -45,7 +45,7 @@ class IpLeasesController < ApplicationController
         format.html { redirect_to @ip_lease, notice: 'Ip lease was successfully updated.' }
         format.json { render :show, status: :ok, location: @ip_lease }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @ip_lease.errors, status: :unprocessable_entity }
       end
     end

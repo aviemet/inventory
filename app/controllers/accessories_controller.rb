@@ -45,7 +45,7 @@ class AccessoriesController < ApplicationController
         format.html { redirect_to @accessory, notice: 'Accessory was successfully updated.' }
         format.json { render :show, status: :ok, location: @accessory }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @accessory.errors, status: :unprocessable_entity }
       end
     end

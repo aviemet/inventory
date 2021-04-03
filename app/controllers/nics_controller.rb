@@ -45,7 +45,7 @@ class NicsController < ApplicationController
         format.html { redirect_to @nic, notice: 'Nic was successfully updated.' }
         format.json { render :show, status: :ok, location: @nic }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @nic.errors, status: :unprocessable_entity }
       end
     end

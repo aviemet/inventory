@@ -45,7 +45,7 @@ class ContractsController < ApplicationController
         format.html { redirect_to @contract, notice: 'Contract was successfully updated.' }
         format.json { render :show, status: :ok, location: @contract }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @contract.errors, status: :unprocessable_entity }
       end
     end

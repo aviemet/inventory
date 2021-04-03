@@ -45,7 +45,7 @@ class FieldsController < ApplicationController
         format.html { redirect_to @field, notice: 'Field was successfully updated.' }
         format.json { render :show, status: :ok, location: @field }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @field.errors, status: :unprocessable_entity }
       end
     end

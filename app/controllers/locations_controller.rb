@@ -49,7 +49,7 @@ class LocationsController < ApplicationController
         format.html { redirect_to company_url(@location.company), notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
     end

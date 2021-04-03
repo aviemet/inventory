@@ -48,7 +48,7 @@ class NetworksController < ApplicationController
         format.html { redirect_to @network, notice: 'Network was successfully updated.' }
         format.json { render :show, status: :ok, location: @network }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @network.errors, status: :unprocessable_entity }
       end
     end

@@ -45,7 +45,7 @@ class FieldsetsController < ApplicationController
         format.html { redirect_to @fieldset, notice: 'Fieldset was successfully updated.' }
         format.json { render :show, status: :ok, location: @fieldset }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @fieldset.errors, status: :unprocessable_entity }
       end
     end
@@ -62,13 +62,14 @@ class FieldsetsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_fieldset
-      @fieldset = Fieldset.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def fieldset_params
-      params.require(:fieldset).permit(:name, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_fieldset
+    @fieldset = Fieldset.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def fieldset_params
+    params.require(:fieldset).permit(:name, :description)
+  end
 end

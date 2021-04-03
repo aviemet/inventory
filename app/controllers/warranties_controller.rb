@@ -45,7 +45,7 @@ class WarrantiesController < ApplicationController
         format.html { redirect_to @warranty, notice: 'Warranty was successfully updated.' }
         format.json { render :show, status: :ok, location: @warranty }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @warranty.errors, status: :unprocessable_entity }
       end
     end

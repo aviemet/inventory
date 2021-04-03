@@ -45,7 +45,7 @@ class EmailsController < ApplicationController
         format.html { redirect_to @email, notice: 'Email was successfully updated.' }
         format.json { render :show, status: :ok, location: @email }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @email.errors, status: :unprocessable_entity }
       end
     end

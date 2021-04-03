@@ -47,7 +47,7 @@ class ManufacturersController < ApplicationController
         format.html { redirect_to @manufacturer, notice: 'Manufacturer was successfully updated.' }
         format.json { render :show, status: :ok, location: @manufacturer }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @manufacturer.errors, status: :unprocessable_entity }
       end
     end

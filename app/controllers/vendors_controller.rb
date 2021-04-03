@@ -45,7 +45,7 @@ class VendorsController < ApplicationController
         format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
         format.json { render :show, status: :ok, location: @vendor }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @vendor.errors, status: :unprocessable_entity }
       end
     end

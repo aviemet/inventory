@@ -45,7 +45,7 @@ class FieldsetAssociationsController < ApplicationController
         format.html { redirect_to @fieldset_association, notice: 'Fieldset association was successfully updated.' }
         format.json { render :show, status: :ok, location: @fieldset_association }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @fieldset_association.errors, status: :unprocessable_entity }
       end
     end

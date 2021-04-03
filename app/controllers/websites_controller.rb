@@ -45,7 +45,7 @@ class WebsitesController < ApplicationController
         format.html { redirect_to @website, notice: 'Website was successfully updated.' }
         format.json { render :show, status: :ok, location: @website }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @website.errors, status: :unprocessable_entity }
       end
     end

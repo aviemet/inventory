@@ -45,7 +45,7 @@ class ConsumablesController < ApplicationController
         format.html { redirect_to @consumable, notice: 'Consumable was successfully updated.' }
         format.json { render :show, status: :ok, location: @consumable }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @consumable.errors, status: :unprocessable_entity }
       end
     end
