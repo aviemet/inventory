@@ -7,6 +7,8 @@ class Item < ApplicationRecord
 
   resourcify
 
+  validates_presence_of :name
+
   monetize :cost_cents
 
   has_many :nics

@@ -8,14 +8,14 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = @active_company.items.includes_associated.order(order_by).page(params[:page]).decorate
+    @items = @active_company.items.includes_associated.order(order_by).page(params[:page])
   end
 
   # GET /items/category/:category_id
   # GET /items/category/:category_id.json
   def category
-    @category = Category.find(request.params[:category_id]).decorate
-    @items = @active_company.items.includes_associated.where('model.category': @category).order(order_by).decorate
+    @category = Category.find(request.params[:category_id])
+    @items = @active_company.items.includes_associated.where('model.category': @category).order(order_by)
     render :index
   end
 
@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
   def clone
     @item = Item.find(params[:id]).dup
     @item.serial = nil
-    @item.decorate
+    @item
   end
 
   # POST /items
@@ -96,7 +96,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id]).decorate
+    @item = Item.find(params[:id])
   end
 
   def set_form_models

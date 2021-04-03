@@ -2,33 +2,38 @@
 
 class Tables::HeaderCell::HeaderCellComponent < ApplicationComponent
   attr_reader :attributes
+  attr_reader :heading
+  attr_reader :sort
+  attr_reader :direction
+  attr_reader :sortable
 
-  def initialize(name, heading: nil, hideable: true, sortable: true, sort: nil, classes: "", data: {}, **attrs)
+  def initialize(name, heading: nil, sortable: true, sort: nil, classes: [], data: {}, **attrs)
     @name = name
-    @hideable = hideable
     @sortable = sortable
-    @sort = sort || name
+    @sort = sort&.to_s || name.to_s
     @heading = heading || name.to_s.titleize
-    @attributes = build_attributes(classes, data, hideable, sortable, sort, attrs)
+    @attributes = build_attributes(name, classes, data, sortable, attrs)
   end
 
   private
 
   def before_render
     if @sortable
-      attributes[:class] += direction if params[:sort] == @sort.downcase
+      @direction = params[:sort] == sort.to_s && params[:direction] == "asc" ? "desc" : "asc"
+      attributes[:class].push(@direction) if params[:sort] == @sort.downcase
     end
+    attributes[:class] = attributes[:class].join(" ")
   end
 
-  def build_attributes(classes, data, hideable, sortable, _sort, attrs)
+  def build_attributes(name, classes, data, sortable, attrs)
     attributes = attrs.each { |k, v| attributes[k] = v }
-    attributes[:class] = ""
-    attributes[:class] = classes.to_s if !classes.empty?
-    attributes[:class] += " sortable" if sortable
+
+    attributes[:class] = input_to_a(classes)
+    attributes[:class].push("sortable") if sortable
     attributes[:nowrap] = "nowrap"
 
-    if hideable
-      attributes[:data] = data.merge({ target: "table.heading", "table-field-name": @field })
+    if sortable
+      attributes[:data] = data.merge({ target: "table.heading", "table-field-name": name })
     end
     attributes
   end
