@@ -31,7 +31,7 @@ class AccessoriesController < ApplicationController
         format.html { redirect_to @accessory, notice: 'Accessory was successfully created.' }
         format.json { render :show, status: :created, location: @accessory }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @accessory.errors, status: :unprocessable_entity }
       end
     end

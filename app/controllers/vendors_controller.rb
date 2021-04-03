@@ -31,7 +31,7 @@ class VendorsController < ApplicationController
         format.html { redirect_to @vendor, notice: 'Vendor was successfully created.' }
         format.json { render :show, status: :created, location: @vendor }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @vendor.errors, status: :unprocessable_entity }
       end
     end

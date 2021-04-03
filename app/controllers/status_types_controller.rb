@@ -31,7 +31,7 @@ class StatusTypesController < ApplicationController
         format.html { redirect_to @status_type, notice: 'Status type was successfully created.' }
         format.json { render :show, status: :created, location: @status_type }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @status_type.errors, status: :unprocessable_entity }
       end
     end

@@ -31,7 +31,7 @@ class EmailsController < ApplicationController
         format.html { redirect_to @email, notice: 'Email was successfully created.' }
         format.json { render :show, status: :created, location: @email }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @email.errors, status: :unprocessable_entity }
       end
     end

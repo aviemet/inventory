@@ -31,7 +31,7 @@ class WarrantiesController < ApplicationController
         format.html { redirect_to @warranty, notice: 'Warranty was successfully created.' }
         format.json { render :show, status: :created, location: @warranty }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @warranty.errors, status: :unprocessable_entity }
       end
     end

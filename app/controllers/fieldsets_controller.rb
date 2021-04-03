@@ -31,7 +31,7 @@ class FieldsetsController < ApplicationController
         format.html { redirect_to @fieldset, notice: 'Fieldset was successfully created.' }
         format.json { render :show, status: :created, location: @fieldset }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @fieldset.errors, status: :unprocessable_entity }
       end
     end

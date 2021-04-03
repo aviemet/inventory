@@ -31,7 +31,7 @@ class OwnershipsController < ApplicationController
         format.html { redirect_to @ownership, notice: 'Ownership was successfully created.' }
         format.json { render :show, status: :created, location: @ownership }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @ownership.errors, status: :unprocessable_entity }
       end
     end

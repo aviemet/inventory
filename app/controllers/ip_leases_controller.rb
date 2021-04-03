@@ -31,7 +31,7 @@ class IpLeasesController < ApplicationController
         format.html { redirect_to @ip_lease, notice: 'Ip lease was successfully created.' }
         format.json { render :show, status: :created, location: @ip_lease }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @ip_lease.errors, status: :unprocessable_entity }
       end
     end
@@ -62,13 +62,14 @@ class IpLeasesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ip_lease
-      @ip_lease = IpLease.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def ip_lease_params
-      params.require(:ip_lease).permit(:nic_id, :ip, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ip_lease
+    @ip_lease = IpLease.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def ip_lease_params
+    params.require(:ip_lease).permit(:nic_id, :ip, :active)
+  end
 end

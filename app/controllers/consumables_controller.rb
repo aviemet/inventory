@@ -31,7 +31,7 @@ class ConsumablesController < ApplicationController
         format.html { redirect_to @consumable, notice: 'Consumable was successfully created.' }
         format.json { render :show, status: :created, location: @consumable }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @consumable.errors, status: :unprocessable_entity }
       end
     end

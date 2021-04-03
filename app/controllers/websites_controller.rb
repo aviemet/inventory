@@ -31,7 +31,7 @@ class WebsitesController < ApplicationController
         format.html { redirect_to @website, notice: 'Website was successfully created.' }
         format.json { render :show, status: :created, location: @website }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @website.errors, status: :unprocessable_entity }
       end
     end

@@ -31,7 +31,7 @@ class PhonesController < ApplicationController
         format.html { redirect_to @phone, notice: 'Phone was successfully created.' }
         format.json { render :show, status: :created, location: @phone }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @phone.errors, status: :unprocessable_entity }
       end
     end

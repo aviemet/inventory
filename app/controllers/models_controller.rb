@@ -31,7 +31,7 @@ class ModelsController < ApplicationController
         format.html { redirect_to @model, notice: 'Model was successfully created.' }
         format.json { render :show, status: :created, location: @model }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @model.errors, status: :unprocessable_entity }
       end
     end

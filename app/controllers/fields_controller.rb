@@ -31,7 +31,7 @@ class FieldsController < ApplicationController
         format.html { redirect_to @field, notice: 'Field was successfully created.' }
         format.json { render :show, status: :created, location: @field }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @field.errors, status: :unprocessable_entity }
       end
     end
@@ -62,13 +62,14 @@ class FieldsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_field
-      @field = Field.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def field_params
-      params.require(:field).permit(:name, :format, :element, :description, :notes)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_field
+    @field = Field.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def field_params
+    params.require(:field).permit(:name, :format, :element, :description, :notes)
+  end
 end

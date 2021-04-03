@@ -31,7 +31,7 @@ class FieldsetAssociationsController < ApplicationController
         format.html { redirect_to @fieldset_association, notice: 'Fieldset association was successfully created.' }
         format.json { render :show, status: :created, location: @fieldset_association }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @fieldset_association.errors, status: :unprocessable_entity }
       end
     end
@@ -62,13 +62,14 @@ class FieldsetAssociationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_fieldset_association
-      @fieldset_association = FieldsetAssociation.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def fieldset_association_params
-      params.require(:fieldset_association).permit(:fieldset_id, :fieldable_id, :fieldable_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_fieldset_association
+    @fieldset_association = FieldsetAssociation.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def fieldset_association_params
+    params.require(:fieldset_association).permit(:fieldset_id, :fieldable_id, :fieldable_type)
+  end
 end
