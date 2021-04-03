@@ -5,6 +5,9 @@ class Tables::Section::SectionComponent < ApplicationComponent
   renders_one :table, Tables::Table::TableComponent
   renders_one :pagination
 
+  attr_reader :hideable_fields
+  attr_reader :table_preferences
+
   def initialize(table_preferences: {}, hideable_fields: {}, hideable: true, filterable: true, sortable: true, paginate: true)
     @table_preferences = table_preferences
     @hideable_fields = hideable_fields
