@@ -22,7 +22,10 @@ gem "sunspot_rails", "~> 2.5"
 gem "sunspot_solr", "~> 2.5"
 
 # Assets
-gem 'turbolinks', '~> 5'
+gem "hotwire-rails", "~> 0.1.3"
+gem "turbo-rails", "~> 0.5.9"
+gem "stimulus-rails", "~> 0.2.3"
+gem "stimulus_reflex", "~> 3.3"
 gem 'sass-rails', '>= 6'
 gem 'jbuilder', '~> 2.7'
 gem "slim-rails", "~> 3.2"
@@ -30,7 +33,6 @@ gem 'webpacker', '~> 4.0'
 gem 'image_processing', '~> 1.2'
 gem "material_icons", "~> 2.2"
 gem "simple_form", "~> 5.0"
-gem "stimulus_reflex", "~> 3.3"
 gem "view_component", "~> 2.23", require: "view_component/engine"
 gem "draper", "~> 4.0"
 
