@@ -1,20 +1,20 @@
 section.container
-  h1 Checkout Asset
+  h1 = "Checkout #{@asset.class.to_s.titleize}"
 
   div
     .item-details.
       .item-row
         label Model
-        .value = @asset.model.name
+        .value "@asset.model.name"
       .item-row
         label Asset Tag
-        .value = @asset.asset_tag
+        .value "@asset.asset_tag"
       .item-row
         label Serial
         .value = @asset.serial
       .item-row
         label Other Useful Data
-        .value = @asset.asset_tag
+        .value "@asset.asset_tag"
 
     = simple_form_for @assignment do |form|
       = render "shared/form/errors", record: @assignment

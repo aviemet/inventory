@@ -41,6 +41,7 @@
             = accessory.min_qty
           td nowrap="nowrap"
             .flex.justify-between.gap-1
+              = view 'buttons/assignment', asset: accessory
               = view "buttons/edit", path: edit_accessory_path(accessory)
               = view "buttons/delete", path: accessory
 
