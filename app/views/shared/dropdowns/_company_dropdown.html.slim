@@ -1,6 +1,0 @@
-= select_tag(@input_name,
-    options_from_collection_for_select( \
-      current_user.companies,
-      :id,
-      Company.to_s_field \
-    ), prompt: "-- Companies --")

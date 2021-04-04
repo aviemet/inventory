@@ -7,7 +7,7 @@
     = table.head do |head|
       = head.row
         = head.select_all_cell
-        = head.cell :name, hideable: false
+        = head.cell :name
         = head.cell :serial
         = head.cell "vendors.name", heading: "Vendor"
         = head.cell :default_location
@@ -41,7 +41,7 @@
             = accessory.min_qty
           td nowrap="nowrap"
             .flex.justify-between.gap-1
-              = view 'buttons/assignment', asset: accessory.model
+              = view 'buttons/assignment', asset: accessory
               = view "buttons/edit", path: edit_accessory_path(accessory)
               = view "buttons/delete", path: accessory
 

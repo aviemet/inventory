@@ -64,11 +64,4 @@ Rails.application.routes.draw do
   resources :purchases
 
   resources :contracts
-
-  scope "/partials" do
-    scope "/dropdown" do
-      get "/company", to: "partials#company_dropdown", format: false
-      get "/:model/(:company_id)", to: "partials#dropdown", format: false
-    end
-  end
 end

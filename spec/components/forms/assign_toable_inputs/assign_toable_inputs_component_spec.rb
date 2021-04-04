@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Buttons::CheckoutType::CheckoutTypeComponent, type: :component do
+RSpec.describe Forms::AssignToableInputs::AssignToableInputsComponent, type: :component do
   pending "add some examples to (or delete) #{__FILE__}"
 
   # it "renders something useful" do

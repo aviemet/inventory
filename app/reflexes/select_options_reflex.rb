@@ -20,4 +20,12 @@ class SelectOptionsReflex < ApplicationReflex
     Location.all
   end
 
+  def people
+    Person.all
+  end
+
+  def items
+    Item.all
+  end
+
 end

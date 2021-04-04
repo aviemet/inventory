@@ -1,10 +1,11 @@
 import ApplicationController from "./application_controller"
 
 export default class extends ApplicationController {
-  static targets = ["parent", "selector", "input", "hiddenInput", "options", "option"]
+  static targets = ["selector", "input", "hiddenInput", "options", "option"]
 
   connect() {
     super.connect()
+    this.exposeController()
 
     // In the case of a page refresh where values have been entered, highlight the selected value
     this._highlightSelectedOption()
@@ -18,7 +19,7 @@ export default class extends ApplicationController {
       return
     }
     
-    if(this.parentTarget.dataset.async === "true") {
+    if(this.element.dataset.async === "true") {
       this._stimulate().then(() => {
         this._show()
       })
@@ -30,7 +31,7 @@ export default class extends ApplicationController {
   _show(focus = true) {
     if(this._isOpen()) return
 
-    this.parentTarget.classList.add("open")
+    this.element.classList.add("open")
 
     if(focus) this.inputTarget.focus()
 
@@ -44,7 +45,7 @@ export default class extends ApplicationController {
   }
 
   _hide() {
-    this.parentTarget.classList.remove("open")
+    this.element.classList.remove("open")
     this._removeHighlights()
     this._unfilter()
 
@@ -57,7 +58,7 @@ export default class extends ApplicationController {
   }
   
   _bodyClickListener(clickTarget) {
-    if(this.parentTarget.contains(clickTarget)) return false
+    if(this.element.contains(clickTarget)) return false
 
     this._hide()
     document.removeEventListener("click", this._bodyClickListener)
@@ -65,7 +66,7 @@ export default class extends ApplicationController {
 
   // Activate the dropdown if the input was the clicked/focused element
   focusInput() {
-    if(this.parentTarget.dataset.async === "true") {
+    if(this.element.dataset.async === "true") {
       this._stimulate()
     } else {
       this._show()
@@ -204,7 +205,7 @@ export default class extends ApplicationController {
   }
 
   _isOpen() {
-    return this.parentTarget.classList.contains("open")
+    return this.element.classList.contains("open")
   }
 
   _stimulate() {

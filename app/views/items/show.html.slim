@@ -2,12 +2,13 @@ section.container
   header.flex
     h1.flex-1 = @item
     span
-      = render Forms::DropdownMenu::DropdownMenuComponent.new do |options_menu|
-        = options_menu.with(:heading) do
+      = view "forms/dropdown_menu" do |options_menu|
+        = options_menu.heading
           div Actions
-        = options_menu.with(:options) do
-          li = assignment_link @item.model
-          li = link_to "Edit Item", edit_item_path(@item)
+        = options_menu.option
+          = assignment_link @item
+        = options_menu.option
+          = link_to "Edit Item", edit_item_path(@item)
 
   nav.sticky class="bg-white p-3 border-b-2 -top-4"
     .inline.px-2 Details

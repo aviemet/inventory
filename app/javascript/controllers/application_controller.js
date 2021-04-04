@@ -17,6 +17,21 @@ export default class extends Controller {
     StimulusReflex.register(this)
   }
 
+  exposeController(name) {
+    name = name || this._camelCase(this.identifier)
+    this.element[name] = this
+  }
+
+  _camelCase(str) {
+    return str
+      .split("--")
+      .slice(-1)[0]
+      .split(/[-_]/)
+      .map(w => w.replace(/./, m => m.toUpperCase()))
+      .join("")
+      .replace(/^\w/, c => c.toLowerCase())
+  }
+
   /* Application-wide lifecycle methods
    *
    * Use these methods to handle lifecycle concerns for the entire application.

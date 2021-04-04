@@ -1,17 +1,18 @@
-- id = SecureRandom.hex(4)
 .dropdown-search {
   data-controller="dropdown-search"
-  data-dropdown-search-target="parent"
-  data-async=(@options[:async] ? "true" : "false")
+  data-async=(options[:async] ? "true" : "false")
 }
-  - if @form
-    = @form.input @name, as: :hidden, wrapper: false, input_html: { data: { target: "dropdown-search.hiddenInput" } }
+  - if form
+    = form.input name, { \
+      as: :hidden,
+      wrapper: false,
+      input_html: { data: { "dropdown-search-target": "hiddenInput" } } }
   - else
-    = hidden_field_tag @name, @value, data: { target: "dropdown-search.hiddenInput" }
+    = hidden_field_tag name, @value, data: { target: "dropdown-search.hiddenInput" }
 
   .selector {
     data-dropdown-search-target="selector"
-    data-model=(@options[:async] ? @options[:url] : false)
+    data-model=(options[:async] ? options[:url] : false)
     data-action="click->dropdown-search#toggle"
   }
     input {
@@ -26,5 +27,5 @@
     == mi.expand_more.css_class "cursor-pointer expand"
     == mi.expand_less.css_class "cursor-pointer contract"
 
-  .options data-dropdown-search-target="options" id="options-#{id}"
-    = render Forms::SelectOptions::SelectOptionsComponent.new(data: @data, value: @value)
+  .options data-dropdown-search-target="options" id="options-#{@id}"
+    = view "forms/select_options", data: data, value: value
