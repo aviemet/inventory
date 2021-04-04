@@ -8,9 +8,10 @@ header#topbar
       - else
         h2 Inventory Application
     .div
-      = render Forms::DropdownMenu::DropdownMenuComponent.new do |menu|
-        = menu.with(:heading) do
+      = view "forms/dropdown_menu" do |menu|
+        = menu.heading do
           div = @current_user.person
-        = menu.with(:options) do
-          li = link_to "User Profile & Settings", edit_user_path(@current_user)
-          li Change Password
+        = menu.option
+          = link_to "User Profile & Settings", edit_user_path(@current_user)
+        = menu.option
+          | Change Password
