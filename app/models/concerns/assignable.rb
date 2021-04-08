@@ -27,11 +27,15 @@ module Assignable
       !self.assignment.nil?
     end
 
-    def unassign(returned_at = Time.current)
-      self.assignment&.update({
-        active: false,
-        returned_at: returned_at
-      })
+    def unassign(returned_at: nil, name: nil)
+      self.transaction do
+        self.update(name: name) if name && self.name != name
+
+        self.assignment&.update({
+          active: false,
+          returned_at: returned_at || Time.current
+        })
+      end
     end
   end
 end

@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   # Use /checkout & /checkin as a verb in the url to define asset assigments
   get "checkout/:asset_type/:asset_id", to: "assignments#new", as: :new_assignment
   get "checkin/:asset_type/:asset_id", to: "assignments#end", as: :end_assignment
+  patch "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
+  put "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
 
   resources :people, concerns: :contactable
 

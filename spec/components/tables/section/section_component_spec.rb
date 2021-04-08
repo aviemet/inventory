@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Tables::TableSection::TableSectionComponent, type: :component do
+RSpec.describe Tables::Section::SectionComponent, type: :component do
   pending "add some examples to (or delete) #{__FILE__}"
 
   # it "renders something useful" do

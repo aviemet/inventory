@@ -16,7 +16,7 @@ section.container
         label Other Useful Data
         .value = @asset.asset_tag
 
-    = simple_form_for @assignment do |form|
+    = simple_form_for @assignment, url: url_for(action: :checkin, controller: :assignments) do |form|
       = view "forms/errors", record: @assignment
 
       = form.simple_fields_for @asset do |asset|
