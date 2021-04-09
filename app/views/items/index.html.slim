@@ -36,7 +36,7 @@
             = link_to(item.manufacturer, item.manufacturer)
           = render body.cell "vendors.name"
             = item.vendor ? link_to(item.vendor, item.vendor) : ''
-          = render body.cell "cost"
+          = render body.cell :cost
              = item.cost.format
           = render body.cell "departments.name"
             = item.department ? link_to(item.department, item.department) : ''
