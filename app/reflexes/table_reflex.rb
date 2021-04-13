@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SaveUserTablePreferencesReflex < ApplicationReflex
+class TableReflex < ApplicationReflex
   # Add Reflex methods in this file.
   #
   # All Reflex instances include CableReady::Broadcaster and expose the following properties:
@@ -31,5 +31,12 @@ class SaveUserTablePreferencesReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com/reflexes#reflex-classes
+
+  def save_user_prefs(headings)
+    morph :nothing
+    key = headings.keys[0]
+    current_user.table_preferences[key] = headings[key]
+    current_user.save
+  end
 
 end
