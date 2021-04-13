@@ -5,9 +5,9 @@
   = form.input :qty
   = form.input :cost
   = form.input :requestable
+  = form.association :manufacturer, collection: "manufacturers"
+  = form.association :category, collection: "categories"
+  = form.association :vendor, collection: "vendors"
+  = form.association :default_location, collection: "locations"
   = form.input :notes
-  = form.input :manufacturer_id
-  = form.input :category_id
-  = form.input :vendor_id, as: :select
-  = form.input :default_location_id
   = form.submit
