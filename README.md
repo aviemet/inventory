@@ -12,7 +12,7 @@ Items:
 
 - [x] Check in and out of active inventory
 - [x] Assign to person, department or location
-- [ ] Searchable fields for all hardware info including IP and MAC address
+- [ ] Designate IP address info
 
 Accessories:
 
@@ -101,6 +101,14 @@ Software Agents:
 - [ ] Agent for Mac, Windows, Linux, iOS, Android
 - [ ] Connects to server using API key
 - [ ] Periodically reports asset data through REST API endpoints
+
+Table view for all models:
+
+- [x] Hide/Show column tables
+  - [ ] persistent per table per user
+- [x] Sortable column headings & Pagination
+- [ ] Custom fieldsets
+- [ ] Search bar filters by all fields, including custom fields
 
 ### Database Notes
 
