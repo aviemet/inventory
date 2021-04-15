@@ -83,7 +83,7 @@ class ItemsController < ApplicationController
 
   private
 
-  SORTABLE_FIELDS = %w(name asset_tag serial cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+  SORTABLE_FIELDS = %w(name asset_tag serial cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
 
   def set_view_data
     @hideable_fields = {"Model": "models.name", "Asset Tag": "asset_tag", "Serial": "serial", "Cost": "cost", "Purchase Date": "purchased_at", "Requestable": "requestable", "Category": "categories.name", "Manufacturer": "manufacturers.name", "Model Number": "models.model_number", "Vendor": "vendors.name", "Department": "departments.name"}
@@ -92,7 +92,10 @@ class ItemsController < ApplicationController
   def order_by
     return false unless SORTABLE_FIELDS.include?(params[:sort])
 
-    "#{params[:sort]} #{%w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'}"
+    direction = %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'
+    sort = %w(string text).freeze.include?(field_type(Item, params[:sort])) ? "lower(#{params[:sort]})" : params[:sort]
+    # sort = params[:sort]
+    "#{sort} #{direction}"
   end
 
   def set_item

@@ -47,4 +47,12 @@ class ApplicationController < ActionController::Base
   def set_action_cable_identifier
     cookies.encrypted[:user_id] = current_user&.id
   end
+
+  def field_type(model, column)
+    split_fields = params[:sort].split(".")
+    if split_fields.length > 1
+      model = split_fields[-2].titleize.singularize.constantize
+    end
+    model.column_for_attribute(column).type
+  end
 end
