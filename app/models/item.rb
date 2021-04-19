@@ -46,26 +46,26 @@ class Item < ApplicationRecord
     text :model do
       model.name if self.model
     end
-    string(:sort_model) { self.model&.name }
+    string(:sort_model) { self.model.name if self.model }
 
     text :department do
       department.name if self.department
     end
-    string(:sort_department) { self.department&.name }
+    string(:sort_department) { self.department.name if self.department }
 
     text :manufacturer do
       manufacturer.name if self.manufacturer
     end
-    string(:sort_manufacturer) { self.manufacturer&.name }
+    string(:sort_manufacturer) { self.manufacturer.name if self.manufacturer }
 
     text :vendor do
       vendor.name if self.vendor
     end
-    string(:sort_vendor) { self.vendor&.name }
+    string(:sort_vendor) { self.vendor.name if self.vendor }
 
     text :category do
       category.name if self.category
     end
-    string(:sort_category) { self.category&.name }
+    string(:sort_category) { self.category.name if self.category }
   end
 end

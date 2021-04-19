@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
                    query_phrase_slop 1
                  end
                  paginate page: params[:page]
-                 order_by "sort_#{sort}", direction
+                 order_by "sort_#{sort_solr}", direction
                end.results
              else
                searchable_object.order("#{sort} #{direction}").page(params[:page])
@@ -116,6 +116,17 @@ class ItemsController < ApplicationController
     return false unless SORTABLE_FIELDS.include?(params[:sort])
 
     %w(string text).freeze.include?(field_type(Item, params[:sort])) ? "lower(#{params[:sort]})" : params[:sort]
+  end
+
+  def sort_solr
+    return false unless SORTABLE_FIELDS.include?(params[:sort])
+
+    parts = params[:sort].split(".")
+    if parts.length > 1
+      parts[0].singularize
+    else
+      params[:sort]
+    end
   end
 
   def set_item
