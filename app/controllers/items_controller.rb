@@ -8,14 +8,29 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = @active_company.items.includes_associated.order(order_by).page(params[:page])
+    @items = if params[:search]
+               searchable_object.search do
+                 fulltext params[:search] do
+                   query_phrase_slop 1
+                 end
+                 paginate page: params[:page]
+                 order_by "sort_#{sort}", direction
+               end.results
+             else
+               searchable_object.order("#{sort} #{direction}").page(params[:page])
+             end
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
   end
 
   # GET /items/category/:category_id
   # GET /items/category/:category_id.json
   def category
     @category = Category.find(request.params[:category_id])
-    @items = @active_company.items.includes_associated.where('model.category': @category).order(order_by)
+    @items = searchable_object.where('model.category': @category).order(order_string)
     render :index
   end
 
@@ -83,19 +98,24 @@ class ItemsController < ApplicationController
 
   private
 
+  def searchable_object
+    @active_company.items.includes_associated
+  end
+
   SORTABLE_FIELDS = %w(name asset_tag serial cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
 
   def set_view_data
     @hideable_fields = {"Model": "models.name", "Asset Tag": "asset_tag", "Serial": "serial", "Cost": "cost", "Purchase Date": "purchased_at", "Requestable": "requestable", "Category": "categories.name", "Manufacturer": "manufacturers.name", "Model Number": "models.model_number", "Vendor": "vendors.name", "Department": "departments.name"}
   end
 
-  def order_by
+  def direction
+    %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+
+  def sort
     return false unless SORTABLE_FIELDS.include?(params[:sort])
 
-    direction = %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'
-    sort = %w(string text).freeze.include?(field_type(Item, params[:sort])) ? "lower(#{params[:sort]})" : params[:sort]
-    # sort = params[:sort]
-    "#{sort} #{direction}"
+    %w(string text).freeze.include?(field_type(Item, params[:sort])) ? "lower(#{params[:sort]})" : params[:sort]
   end
 
   def set_item

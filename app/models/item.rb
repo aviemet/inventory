@@ -26,7 +26,46 @@ class Item < ApplicationRecord
   scope :includes_associated, ->{ includes([:category, :model, :assignments, :department, :vendor, :manufacturer]) }
 
   searchable do
-    text :name, :asset_tag, :serial, :notes
-    double :cost
+    text :name
+    string(:sort_name) { self.name }
+
+    text :asset_tag
+    string(:sort_asset_tag) { self.asset_tag }
+
+    text :serial
+    string(:sort_serial) { self.serial }
+
+    text :notes
+    string(:sort_notes) { self.notes }
+
+    integer :cost do
+      self.cost_cents
+    end
+    string(:sort_cost) { self.cost_cents }
+
+    text :model do
+      model.name if self.model
+    end
+    string(:sort_model) { self.model&.name }
+
+    text :department do
+      department.name if self.department
+    end
+    string(:sort_department) { self.department&.name }
+
+    text :manufacturer do
+      manufacturer.name if self.manufacturer
+    end
+    string(:sort_manufacturer) { self.manufacturer&.name }
+
+    text :vendor do
+      vendor.name if self.vendor
+    end
+    string(:sort_vendor) { self.vendor&.name }
+
+    text :category do
+      category.name if self.category
+    end
+    string(:sort_category) { self.category&.name }
   end
 end

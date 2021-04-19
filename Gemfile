@@ -20,6 +20,7 @@ gem "active_type", "~> 1.3"
 # Search
 gem "sunspot_rails", "~> 2.5"
 gem "sunspot_solr", "~> 2.5"
+gem "progress_bar", "~> 1.3"
 
 # Assets
 gem "hotwire-rails", "~> 0.1.3"
