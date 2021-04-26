@@ -65,6 +65,7 @@ group :development, :test do
 
   # Linting
   gem "rubocop", "~> 0.85.1"
+  gem "rubocop-daemon", "~> 0.3.2", require: false
   gem "solargraph", "~> 0.39.17"
   gem "slim_lint", "~> 0.20.2"
   gem "htmlbeautifier", "~> 1.3"
