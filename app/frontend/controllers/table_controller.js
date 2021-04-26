@@ -1,13 +1,21 @@
 import ApplicationController from "./application_controller"
+import { useDebounce } from "stimulus-use"
 
 export default class extends ApplicationController {
-  static targets = [ "heading", "cell", "checkbox", "selectAll", "columnToggleMenu" ]
+  static targets = [ "filterForm", "filterInput", "heading", "cell", "checkbox", "selectAll", "columnToggleMenu" ]
   static values = { preferences: Object, name: String }
+  static debounces = [{ name: "filterResults", wait: 500 }]
+
+  depressedKeys = new Set()
 
   connect() {
     super.connect()
 
+    useDebounce(this)
+
     this._applyUserTablePreferences()
+
+    this.cursorPositionEnd(this.filterInputTarget)
   }
 
   _applyUserTablePreferences() {
@@ -96,8 +104,43 @@ export default class extends ApplicationController {
   /** END TOGGLE COLUMNS */
 
   /** SEARCH FILTER **/
+  listenKeyDown(e) {
+    this.depressedKeys.add(e.key)
+    console.log({ keys: Array.from(this.depressedKeys) })
+  }
+
   filterResults(e) {
-    console.log({ e })
+    this.depressedKeys.delete(e.key)
+
+    if(!this.shouldTriggerSearch(e)) return
+
+    const l = this.filterInputTarget.value.length
+    if((l === 0) || l > 2){
+      this.filterFormTarget.submit()
+    }
+  }
+
+  shouldTriggerSearch(e) {
+    if(Array.from(this.depressedKeys).some(key => ["Control", "Alt", "OS"].includes(key))) return false
+    const test = !/[\S]/g.test(e.key)
+    console.log({ test, key: e.key })
+    return !/[\S]/g.test(e.key)
+  }
+
+  cursorPositionEnd(input) {
+    var len = input.value.length
+      
+    // Mostly for Web Browsers
+    if (input.setSelectionRange) {
+      input.focus()
+      input.setSelectionRange(len, len)
+    } else if (input.createTextRange) {
+      var t = input.createTextRange()
+      t.collapse(true)
+      t.moveEnd("character", len)
+      t.moveStart("character", len)
+      t.select()
+    }
   }
   /** END SEARCH FILTER **/
 

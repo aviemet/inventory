@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   include OwnableConcern
+  include Sortable
+  include Searchable
 
   before_action :set_view_data, only: [:index, :category]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
@@ -8,22 +10,14 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = if params[:search]
-               searchable_object.search do
-                 fulltext params[:search] do
-                   query_phrase_slop 1
-                 end
-                 paginate page: params[:page]
-                 order_by "sort_#{sort_solr}", direction
-               end.results
-             else
-               searchable_object.order("#{sort} #{direction}").page(params[:page])
-             end
-
-    respond_to do |format|
-      format.turbo_stream
-      format.html
+    if current_user[:table_preferences]["items"]
+      Item.ignored_columns = current_user[:table_preferences]["items"].map{ |k, v| k unless v }
     end
+    @items = if params[:search]
+               search(Item, params[:search], params[:page])
+             else
+               searchable_object.order(sort(Item)).page(params[:page])
+             end
   end
 
   # GET /items/category/:category_id
@@ -102,31 +96,12 @@ class ItemsController < ApplicationController
     @active_company.items.includes_associated
   end
 
-  SORTABLE_FIELDS = %w(name asset_tag serial cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+  def sortable_fields
+    %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+  end
 
   def set_view_data
     @hideable_fields = {"Model": "models.name", "Asset Tag": "asset_tag", "Serial": "serial", "Cost": "cost", "Purchase Date": "purchased_at", "Requestable": "requestable", "Category": "categories.name", "Manufacturer": "manufacturers.name", "Model Number": "models.model_number", "Vendor": "vendors.name", "Department": "departments.name"}
-  end
-
-  def direction
-    %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'
-  end
-
-  def sort
-    return false unless SORTABLE_FIELDS.include?(params[:sort])
-
-    %w(string text).freeze.include?(field_type(Item, params[:sort])) ? "lower(#{params[:sort]})" : params[:sort]
-  end
-
-  def sort_solr
-    return false unless SORTABLE_FIELDS.include?(params[:sort])
-
-    parts = params[:sort].split(".")
-    if parts.length > 1
-      parts[0].singularize
-    else
-      params[:sort]
-    end
   end
 
   def set_item
@@ -141,6 +116,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :asset_tag, :serial, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable)
+    params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable)
   end
 end

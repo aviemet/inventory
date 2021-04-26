@@ -18,9 +18,6 @@ class Tables::Section::SectionComponent < ApplicationComponent
     @sortable = sortable
     @paginate = paginate
 
-    puts "PREFS"
-    puts table_preferences
-
     # TODO: Raise an error if the hideable fields don't match the fields on the table?
   end
 end

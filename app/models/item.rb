@@ -23,49 +23,57 @@ class Item < ApplicationRecord
 
   accepts_nested_attributes_for :nics, reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
 
-  scope :includes_associated, ->{ includes([:category, :model, :assignments, :department, :vendor, :manufacturer]) }
+  def self.associated_models
+    [:category, :model, :assignments, :department, :vendor, :manufacturer]
+  end
+
+  def self.highlight_fields
+    [:name, :asset_tag, :serial, :notes, :category, :model, :department, :vendor, :manufacturer]
+  end
+
+  scope :includes_associated, ->{ includes(self.associated_models) }
 
   searchable do
-    text :name
-    string(:sort_name) { self.name }
+    text :name, stored: true
+    string(:sort_name) { self.name&.downcase }
 
-    text :asset_tag
-    string(:sort_asset_tag) { self.asset_tag }
+    text :asset_tag, stored: true
+    string(:sort_asset_tag) { self.asset_tag&.downcase }
 
-    text :serial
-    string(:sort_serial) { self.serial }
+    text :serial, stored: true
+    string(:sort_serial) { self.serial&.downcase }
 
-    text :notes
-    string(:sort_notes) { self.notes }
+    text :notes, stored: true
+    string(:sort_notes) { self.notes&.downcase }
 
-    integer :cost do
+    integer :cost_cents, stored: true do
       self.cost_cents
     end
-    string(:sort_cost) { self.cost_cents }
+    string(:sort_cost_cents) { self.cost_cents }
 
-    text :model do
+    text :model, stored: true do
       model.name if self.model
     end
-    string(:sort_model) { self.model.name if self.model }
+    string(:sort_model) { self.model&.name&.downcase }
 
-    text :department do
+    text :department, stored: true do
       department.name if self.department
     end
-    string(:sort_department) { self.department.name if self.department }
+    string(:sort_department) { self.department&.name&.downcase }
 
-    text :manufacturer do
+    text :manufacturer, stored: true do
       manufacturer.name if self.manufacturer
     end
-    string(:sort_manufacturer) { self.manufacturer.name if self.manufacturer }
+    string(:sort_manufacturer) { self.manufacturer&.name&.downcase }
 
-    text :vendor do
+    text :vendor, stored: true do
       vendor.name if self.vendor
     end
-    string(:sort_vendor) { self.vendor.name if self.vendor }
+    string(:sort_vendor) { self.vendor&.name&.downcase }
 
-    text :category do
+    text :category, stored: true do
       category.name if self.category
     end
-    string(:sort_category) { self.category.name if self.category }
+    string(:sort_category) { self.category&.name&.downcase }
   end
 end

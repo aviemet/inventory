@@ -4,7 +4,8 @@ section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-v
       = title
 
     .flex-1
-      input type="text" data-action="keyup->table#filterResults" data-table-target="filterInput"
+      form data-turbo-frame="table" data-table-target="filterForm"
+        input type="text" name="search" data-action="keydown->table#listenKeyDown keyup->table#filterResults" data-table-target="filterInput" value=params[:search]
     = render Tables::ColumnPicker::ColumnPickerComponent.new(hideable_fields: hideable_fields)
 
   = table

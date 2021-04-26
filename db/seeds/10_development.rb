@@ -111,9 +111,9 @@ if Rails.env == "development"
         serial: Faker::Blockchain::Bitcoin.unique.address,
         cost: Faker::Number.decimal(l_digits: 4, r_digits: 2),
         purchased_at: Time.zone.yesterday.end_of_day,
-        model: Model.first,
-        vendor: Vendor.first,
-        default_location: Location.first,
+        model: Model.find(Model.pluck(:id).sample),
+        vendor: Vendor.find(Vendor.pluck(:id).sample),
+        default_location: Location.find(Location.pluck(:id).sample),
         company: Company.first
       })
     end

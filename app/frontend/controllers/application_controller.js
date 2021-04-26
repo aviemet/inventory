@@ -1,4 +1,5 @@
-import { Controller } from "stimulus"
+// import { Controller } from "stimulus"
+import { ApplicationController } from "stimulus-use"
 import StimulusReflex from "stimulus_reflex"
 
 /* This is your ApplicationController.
@@ -12,7 +13,7 @@ import StimulusReflex from "stimulus_reflex"
  *
  * Learn more at: https://docs.stimulusreflex.com
  */
-export default class extends Controller {
+export default class extends ApplicationController {
   connect () {
     StimulusReflex.register(this)
   }
