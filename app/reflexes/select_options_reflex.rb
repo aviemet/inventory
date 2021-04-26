@@ -8,6 +8,7 @@ class SelectOptionsReflex < ApplicationReflex
     morph "##{selector}", render(Forms::SelectOptions::SelectOptionsComponent.new(data: data, value: value), layout: false)
   end
 
+  # TODO: scope these queries to the active company and current user permissions
   def vendors
     Vendor.all
   end

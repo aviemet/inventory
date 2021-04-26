@@ -140,6 +140,10 @@ Use `number_to_currency` for displaying prices. Later we will store the currency
 
 ## Dev Notes
 
+### Searchable/Sortable and Table Components
+
+This needs to be fully documented, too much going on in the background
+
 ### Companies
 
 Companies are essentially top level organizational units. All other objects can be considered to belong to a company with an "Ownership" relationship. Company association is polymorphic, so any forms must use the `form_for` method and handle the assignment in the controller. This could possibly be a method to include in a concern.
