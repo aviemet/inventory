@@ -4,7 +4,7 @@ import { useDebounce } from "stimulus-use"
 export default class extends ApplicationController {
   static targets = [ "filterForm", "filterInput", "heading", "cell", "checkbox", "selectAll", "columnToggleMenu" ]
   static values = { preferences: Object, name: String }
-  static debounces = [{ name: "filterResults", wait: 500 }]
+  static debounces = [{ name: "submitSearch", wait: 500 }]
 
   depressedKeys = new Set()
 
@@ -15,7 +15,7 @@ export default class extends ApplicationController {
 
     this._applyUserTablePreferences()
 
-    this.cursorPositionEnd(this.filterInputTarget)
+    this._cursorPositionEnd(this.filterInputTarget)
   }
 
   _applyUserTablePreferences() {
@@ -112,34 +112,38 @@ export default class extends ApplicationController {
   filterResults(e) {
     this.depressedKeys.delete(e.key)
 
-    if(!this.shouldTriggerSearch(e)) return
+    if(!this._shouldTriggerSearch(e)) return
+    console.log("helloooooo....")
 
-    const l = this.filterInputTarget.value.length
-    if((l === 0) || l > 2){
-      this.filterFormTarget.submit()
-    }
+    this.submitSearch()
   }
 
-  shouldTriggerSearch(e) {
+  _shouldTriggerSearch(e) {
+    const MIN_SEARCH_LENGTH = 2
+    const len = this.filterInputTarget.value.length
+    if(len < MIN_SEARCH_LENGTH) return false
+
     if(Array.from(this.depressedKeys).some(key => ["Control", "Alt", "OS"].includes(key))) return false
-    const test = !/[\S]/g.test(e.key)
+
+    const test = /[\S]/g.test(e.key)
     console.log({ test, key: e.key })
-    return !/[\S]/g.test(e.key)
+    return /[\S]/g.test(e.key)
   }
 
-  cursorPositionEnd(input) {
+  submitSearch() {
+    this.filterInputTarget.value = this.filterInputTarget.value.trim()
+    this.filterFormTarget.submit()
+  }
+
+  _cursorPositionEnd(input) {
     var len = input.value.length
-      
-    // Mostly for Web Browsers
-    if (input.setSelectionRange) {
+
+    if(input.setSelectionRange) {
       input.focus()
       input.setSelectionRange(len, len)
     } else if (input.createTextRange) {
-      var t = input.createTextRange()
-      t.collapse(true)
-      t.moveEnd("character", len)
-      t.moveStart("character", len)
-      t.select()
+      var range = input.createTextRange()
+      range.collapse(true).moveEnd("character", len).moveStart("character", len).select()
     }
   }
   /** END SEARCH FILTER **/

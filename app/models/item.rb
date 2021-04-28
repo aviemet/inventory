@@ -23,6 +23,8 @@ class Item < ApplicationRecord
 
   accepts_nested_attributes_for :nics, reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
 
+  # Sunspot search #
+
   def self.associated_models
     [:category, :model, :assignments, :department, :vendor, :manufacturer]
   end
@@ -30,8 +32,6 @@ class Item < ApplicationRecord
   def self.highlight_fields
     [:name, :asset_tag, :serial, :notes, :category, :model, :department, :vendor, :manufacturer]
   end
-
-  scope :includes_associated, ->{ includes(self.associated_models) }
 
   searchable do
     text :name, stored: true
@@ -46,9 +46,7 @@ class Item < ApplicationRecord
     text :notes, stored: true
     string(:sort_notes) { self.notes&.downcase }
 
-    integer :cost_cents, stored: true do
-      self.cost_cents
-    end
+    integer :cost_cents, stored: true
     string(:sort_cost_cents) { self.cost_cents }
 
     text :model, stored: true do

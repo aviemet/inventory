@@ -1,10 +1,17 @@
 class ConsumablesController < ApplicationController
+  include Sortable
+  include Searchable
+
   before_action :set_consumable, only: [:show, :edit, :update, :destroy]
 
   # GET /consumables
   # GET /consumables.json
   def index
-    @consumables = Consumable.all
+    @consumables = if params[:search]
+                     search(Consumable, params[:search], params[:page])
+                   else
+                     searchable_object.order(sort(Consumable)).page(params[:page])
+                   end
   end
 
   # GET /consumables/:id
@@ -62,6 +69,14 @@ class ConsumablesController < ApplicationController
   end
 
   private
+
+  def searchable_object
+    @active_company.consumables.includes_associated
+  end
+
+  def sortable_fields
+    %w(name model_number min_qty qty cost requestable manufacturers.name categories.name vendors.name).freeze
+  end
 
   def set_consumable
     @consumable = Consumable.find(params[:id])
