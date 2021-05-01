@@ -1,0 +1,32 @@
+section.container
+  h1 = @asset.name
+
+  div
+    .item-details.
+      .item-row
+        label Key
+        .value = @asset.key
+      .item-row
+        label Vendor
+        .value = @asset.vendor.name
+      .item-row
+        label Manufacturer
+        .value = @asset.manufacturer.name
+      .item-row
+        label Licensed To
+        .value = @asset.licenser_name
+
+  = simple_form_for @assignment do |form|
+    = view "forms/errors", record: @assignment
+
+    = view "forms/assign_toable_inputs", form: form, company: @active_company
+
+    = form.input :assigned_at, flatpickr: { \
+      max_date: Time.current.end_of_day,
+      enable_time: true,
+    }
+    = form.input :notes
+
+    = form.submit "Complete Checkout"
+
+  = link_to 'Back', assignments_path

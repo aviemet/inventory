@@ -1,0 +1,39 @@
+section.container
+  h1 = "Checkout #{@asset.class.to_s.titleize}"
+
+  div
+    .item-details.
+      .item-row
+        label Model
+        .value = @asset.model.name
+      .item-row
+        label Asset Tag
+        .value = @asset.asset_tag
+      .item-row
+        label Serial
+        .value = @asset.serial
+      .item-row
+        label Other Useful Data
+        .value = @asset.asset_tag
+
+  = simple_form_for @assignment do |form|
+    = view "forms/errors", record: @assignment
+
+    = form.simple_fields_for @asset do |a|
+      = a.input :name, label: "Asset Name"
+
+    = view "forms/assign_toable_inputs", form: form, company: @active_company
+
+    = form.input :assigned_at, flatpickr: { \
+      max_date: Time.current.end_of_day,
+      enable_time: true,
+    }
+    = form.input :expected_at, flatpickr: { \
+      min_date: Time.current,
+      enable_time: true,
+    }
+    = form.input :notes
+
+    = form.submit "Complete Checkout"
+
+  = link_to 'Back', assignments_path

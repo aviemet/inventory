@@ -17,6 +17,7 @@ class AssignmentsController < ApplicationController
   # GET /checkout/:asset_type/:asset_id
   def new
     @assignment = Assignment.new
+    render "#{params[:asset_type].pluralize}/checkout"
   end
 
   # GET /assignments/:id/edit
@@ -96,6 +97,8 @@ class AssignmentsController < ApplicationController
 
   def set_asset
     asset_class = params[:asset_type].capitalize.constantize
+    raise "\"#{asset_class.name}\" is not an assignable asset type" unless asset_class.include?(Assignable)
+
     @asset = asset_class.find(params[:asset_id])
   end
 
