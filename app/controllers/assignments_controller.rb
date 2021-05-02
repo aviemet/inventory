@@ -35,16 +35,13 @@ class AssignmentsController < ApplicationController
   def create
     assign_toable = find_assign_toable(assign_toable_type: assignment_params[:assign_toable_type], assign_toable_id: assignment_params[:assign_toable_id])
 
-    @assignable.before_assignment(params) if @assignable.respond_to? :before_assignment
-
     respond_to do |format|
-      if assignable.assign_to assign_toable, assigned_at: assignment_params[:assigned_at], expected_at: assignment_params[:expected_at], created_by: current_user
-        assignable.after_assignment(params) if assignable.respond_to? :after_assignment
+      if @assignable.assign_to(assign_toable, assignment_params)
         format.html { redirect_to @assignable, notice: 'Assignment was successfully created.' }
         format.json { render :show, status: :created, location: @assignable }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: assignable.errors, status: :unprocessable_entity }
+        format.json { render json: @assignable.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -102,7 +99,7 @@ class AssignmentsController < ApplicationController
   end
 
   def redirect_if_already_assigned
-    if @assignable&.assigned_to
+    if @assignable.respond_to?(:assigned_to) && @assignable&.assigned_to
       redirect_back fallback_location: @assignable, alert: "An asset can only have one active assignment"
     end
   end

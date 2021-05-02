@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   include Ownable
-  include Assignable
+  include Assignable::Single
   include AssignToable
   include Purchasable
   include Fieldable
@@ -23,11 +23,11 @@ class Item < ApplicationRecord
 
   accepts_nested_attributes_for :nics, reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
 
-  def asset_with_quantity?; false; end
+  def before_assignment(_assignment, params)
+    name = params&.[](:assignment)&.[](:item)&.[](:name)
+    return if name.nil?
 
-  def before_assignment(params)
-    asset_class = params[:asset_type].downcase
-    self.update(name: params[:assignment][asset_class][:name])
+    self.update(name: name)
   end
 
   # Sunspot search #

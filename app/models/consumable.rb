@@ -1,6 +1,6 @@
 class Consumable < ApplicationRecord
   include Ownable
-  include Assignable
+  include Assignable::Consume
 
   monetize :cost_cents
 
@@ -9,11 +9,7 @@ class Consumable < ApplicationRecord
   belongs_to :vendor
   belongs_to :default_location, class_name: "Location", required: false
 
-  def asset_with_quantity?; true; end
-
-  def before_assignment
-    c.update(qt: self.qty - params[:qty])
-  end
+  validates :qty, numericality: { greater_than_or_equal_to: 0 }
 
   # Sunspot search #
 

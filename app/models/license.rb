@@ -1,6 +1,6 @@
 class License < ApplicationRecord
   include Ownable
-  include Assignable
+  include Assignable::Consume
   include Purchasable
   include Fieldable
 
@@ -14,9 +14,5 @@ class License < ApplicationRecord
 
   validates_presence_of :name
 
-  def asset_with_quantity?; true; end
-
-  def before_assignment
-    c.update(seats: self.seats - params[:qty])
-  end
+  alias_attribute :qty, :seats
 end
