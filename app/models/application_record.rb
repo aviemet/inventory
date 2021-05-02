@@ -1,6 +1,8 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
+  cattr_accessor :current_user
+
   def self.to_s_field
     default_stringify_field = :name
     table = self.to_s.downcase.pluralize

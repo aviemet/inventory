@@ -41,6 +41,7 @@
             = consumable.vendor ? link_to(consumable.vendor, consumable.vendor) : ''
           td nowrap="nowrap"
             .flex.justify-between.gap-1
+              = view 'buttons/assignment', asset: consumable
               = view 'buttons/edit', path: edit_consumable_path(consumable)
               = view "buttons/delete", path: consumable
 

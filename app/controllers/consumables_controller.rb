@@ -2,7 +2,7 @@ class ConsumablesController < ApplicationController
   include Sortable
   include Searchable
 
-  before_action :set_consumable, only: [:show, :edit, :update, :destroy]
+  before_action :set_consumable, only: [:show, :edit, :use, :update, :destroy]
 
   # GET /consumables
   # GET /consumables.json
@@ -26,6 +26,11 @@ class ConsumablesController < ApplicationController
 
   # GET /consumables/:id/edit
   def edit
+  end
+
+  # GET /checkout/consumable/:id
+  def checkout
+
   end
 
   # POST /consumables

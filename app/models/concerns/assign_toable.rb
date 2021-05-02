@@ -1,3 +1,4 @@
+# Include on a model which can be assigned another model
 module AssignToable
   extend ActiveSupport::Concern
 

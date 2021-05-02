@@ -19,4 +19,4 @@ section.container
           td = link_to 'Show', assignment_path(assignment.assignable_type, assignment.assignable_id, assignment.id)
           td = link_to 'Edit', edit_assignment_path(assignment.assignable_type, assignment.assignable_id, assignment.id)
           - if assignment.active
-            td = link_to "Checkin", end_assignment_path(@asset.assignment.assignable_type, @asset.id), class: [:button, :checkin]
+            td = link_to "Checkin", end_assignment_path(@assignable.assignment.assignable_type, @assignable.id), class: [:button, :checkin]

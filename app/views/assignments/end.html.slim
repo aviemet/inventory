@@ -1,26 +1,26 @@
 section.container
-  h1 Checkin #{@asset}
+  h1 Checkin #{@assignable}
 
   div
     .item-details.
       .item-row
         label Model
-        .value = @asset.model.name
+        .value = @assignable.model.name
       .item-row
         label Asset Tag
-        .value = @asset.asset_tag
+        .value = @assignable.asset_tag
       .item-row
         label Serial
-        .value = @asset.serial
+        .value = @assignable.serial
       .item-row
         label Other Useful Data
-        .value = @asset.asset_tag
+        .value = @assignable.asset_tag
 
     = simple_form_for @assignment, url: url_for(action: :checkin, controller: :assignments) do |form|
       = view "forms/errors", record: @assignment
 
-      = form.simple_fields_for @asset do |asset|
-        = asset.input :name, label: "Asset Name"
+      = form.simple_fields_for @assignable do |assignable|
+        = assignable.input :name, label: "Asset Name"
 
       = form.input :returned_at, flatpickr: { \
         max_date: Time.current,

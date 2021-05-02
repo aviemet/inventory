@@ -14,4 +14,10 @@ class Accessory < ApplicationRecord
   belongs_to :default_location, class_name: "Location", required: false
 
   scope :includes_associated, ->{ includes([:category, :assignments, :department, :vendor, :manufacturer]) }
+
+  def asset_with_quantity?; true; end
+
+  def before_assignment
+    c.update(qt: self.qty - params[:qty])
+  end
 end

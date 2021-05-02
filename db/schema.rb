@@ -58,15 +58,19 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
     t.bigint "assignable_id", null: false
     t.string "assign_toable_type", null: false
     t.bigint "assign_toable_id", null: false
+    t.integer "qty", default: 1
+    t.integer "status", default: 0
     t.datetime "assigned_at"
     t.datetime "returned_at"
     t.datetime "expected_at"
     t.text "notes"
     t.boolean "active"
+    t.bigint "created_by_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["assign_toable_type", "assign_toable_id"], name: "index_assignments_on_assign_toable_type_and_assign_toable_id"
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
+    t.index ["created_by_id"], name: "index_assignments_on_created_by_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -455,6 +459,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_035238) do
   add_foreign_key "accessories", "vendors"
   add_foreign_key "addresses", "categories"
   add_foreign_key "addresses", "contacts"
+  add_foreign_key "assignments", "users", column: "created_by_id"
   add_foreign_key "consumables", "categories"
   add_foreign_key "consumables", "locations", column: "default_location_id"
   add_foreign_key "consumables", "manufacturers"

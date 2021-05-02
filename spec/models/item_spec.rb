@@ -28,18 +28,4 @@ RSpec.describe Item, type: :model do
     it_behaves_like "purchasable"
     it_behaves_like "fieldable"
   end
-
-  describe "Searching" do
-    it "returns a paginated iterable object" do
-      results = Item.search do
-        fulltext "galaxy" do
-          query_phrase_slop 1
-        end
-        paginate page: 1
-        order_by :sort_serial, :asc
-      end
-
-      expect(results).to respond_to(:each) 
-    end
-  end
 end

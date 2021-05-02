@@ -1,7 +1,7 @@
 = simple_form_for assignment do |form|
   = view "forms/errors", record: assignment
 
-  = form.simple_fields_for asset do |a|
+  = form.simple_fields_for assignable do |a|
     = a.input :name, label: "Asset Name"
 
   = view "forms/assign_toable_inputs", form: form, company: @active_company

@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :departments, concerns: :contactable
   resources :locations, concerns: :contactable
 
+  resources :categories
+
   resources :items do
     resources :nics
     get "category/:category_id", to: "items#category", on: :collection
@@ -35,8 +37,6 @@ Rails.application.routes.draw do
 
   resources :accessories
   resources :consumables
-
-  resources :categories
 
   resources :assignments, path: "assignments/:asset_type/:asset_id", only: [:edit, :index, :create]
   resources :assignments, only: [:show, :update, :destroy]

@@ -5,7 +5,7 @@ section.container
     = view "forms/errors", record: @assignment
 
     label Asset:
-    pre = @asset.inspect
+    pre = @assignable.inspect
     label Assigned To:
     pre = @assignment.assign_toable.inspect
     = form.input :assigned_at, flatpickr: { \

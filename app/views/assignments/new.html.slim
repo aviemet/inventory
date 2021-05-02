@@ -1,21 +1,21 @@
 section.container
-  h1 = "Checkout #{@asset.class.to_s.titleize}"
+  h1 = "Checkout #{@assignable.class.to_s.titleize}"
 
   div
     .item-details.
       .item-row
         label Model
-        .value "@asset.model.name"
+        .value "@assignable.model.name"
       .item-row
         label Asset Tag
-        .value "@asset.asset_tag"
+        .value "@assignable.asset_tag"
       .item-row
         label Serial
-        .value = @asset.serial
+        .value = @assignable.serial
       .item-row
         label Other Useful Data
-        .value "@asset.asset_tag"
+        .value "@assignable.asset_tag"
 
-  = render 'form', assignment: @assignment, asset: @asset
+  = render 'form', assignment: @assignment, assignable: @assignable
 
   = link_to 'Back', assignments_path

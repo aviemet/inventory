@@ -1,4 +1,4 @@
-- if asset.assigned?
+- if asset&.assigned?
   = link_to "Checkin", end_assignment_path(asset.assignment.assignable_type, asset.id), class: [:button, :checkin]
 - else
   = link_to "Checkout", new_assignment_path(asset.class.name.demodulize.downcase, asset.id), class: [:button, :checkout]

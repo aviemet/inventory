@@ -7,9 +7,9 @@ class Item < ApplicationRecord
 
   resourcify
 
-  validates_presence_of :name
-
   monetize :cost_cents
+
+  validates_presence_of :name
 
   has_many :nics
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ips
@@ -22,6 +22,13 @@ class Item < ApplicationRecord
   has_one :warranty, required: false
 
   accepts_nested_attributes_for :nics, reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
+
+  def asset_with_quantity?; false; end
+
+  def before_assignment(params)
+    asset_class = params[:asset_type].downcase
+    self.update(name: params[:assignment][asset_class][:name])
+  end
 
   # Sunspot search #
 
