@@ -21,6 +21,8 @@
   --sidebar-link-padding-left: 15px;
 
   --alert-animation-speed: 0.5s;
+
+  --label-width: 12rem;
 }
 
 @layer utilities {

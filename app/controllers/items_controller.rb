@@ -5,26 +5,19 @@ class ItemsController < ApplicationController
 
   before_action :set_view_data, only: [:index, :category]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_items, only: [:index, :category]
   before_action :set_form_models, only: [:edit, :new, :update, :create, :clone]
 
   # GET /items
   # GET /items.json
   def index
-    if current_user[:table_preferences]["items"]
-      Item.ignored_columns = current_user[:table_preferences]["items"].map{ |k, v| k unless v }
-    end
-    @items = if params[:search]
-               search(Item, params[:search], params[:page])
-             else
-               searchable_object.order(sort(Item)).page(params[:page])
-             end
   end
 
   # GET /items/category/:category_id
   # GET /items/category/:category_id.json
   def category
     @category = Category.find(request.params[:category_id])
-    @items = searchable_object.where('model.category': @category).order(order_string)
+    @items = @items.where('model.category': @category)
     render :index
   end
 
@@ -106,6 +99,17 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def set_items
+    # if current_user[:table_preferences]["items"]
+    #   Item.ignored_columns = current_user[:table_preferences]["items"].map{ |k, v| k unless v }
+    # end
+    @items = if params[:search]
+               search(Item, params[:search], params[:page])
+             else
+               searchable_object.order(sort(Item)).page(params[:page])
+             end
   end
 
   def set_form_models

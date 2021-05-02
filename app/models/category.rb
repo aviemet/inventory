@@ -6,6 +6,8 @@ class Category < ApplicationRecord
 
   delegate :to_s, to: :category_with_type
 
+  scope :find_by_type, ->(type){ where(categorizable_type: type.to_s.downcase.singularize.capitalize) }
+
   def category_with_type
     "#{self.categorizable_type} - #{self.name}"
   end

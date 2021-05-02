@@ -3,49 +3,48 @@
     h1.inline-block Hardware Assets
     .inline-block.text-right.align-top = button_link '+ New Item', new_item_path
 
-  turbo_frame id="table"
-    = section.table(scroll: true) do |table|
-      = table.head do |head|
-        = head.row
-          = head.select_all_cell
-          = head.cell :name
-          = head.cell "models.name", heading: "Model"
-          = head.cell :asset_tag
-          = head.cell :serial
-          = head.cell "categories.name", heading: "Category"
-          = head.cell "manufacturers.name", heading: "Manufacturer"
-          = head.cell "vendors.name", heading: "Vendor"
-          = head.cell :cost, sort: :cost_cents
-          = head.cell "departments.name", heading: Department
-          th.table-column-fit.text-center Actions
+  = section.table(scroll: true) do |table|
+    = table.head do |head|
+      = head.row
+        = head.select_all_cell
+        = head.cell :name
+        = head.cell "models.name", heading: "Model"
+        = head.cell :asset_tag
+        = head.cell :serial
+        = head.cell "categories.name", heading: "Category"
+        = head.cell "manufacturers.name", heading: "Manufacturer"
+        = head.cell "vendors.name", heading: "Vendor"
+        = head.cell :cost, sort: :cost_cents
+        = head.cell "departments.name", heading: Department
+        th.table-column-fit.text-center Actions
 
-      = table.body do |body|
-        - @items.each do |item|
-          = body.row
-            = body.select_cell item
-            = render body.cell :name
-              = link_to(item.name, item)
-            = render body.cell "models.name"
-              = link_to(item.model, item.model)
-            = render body.cell :asset_tag
-              = item.asset_tag ? link_to(item.asset_tag, item) : ''
-            = render body.cell :serial
-              = item.serial ? link_to(item.serial, item) : ''
-            = render body.cell "categories.name"
-              = link_to(item.category, item.category)
-            = render body.cell "manufacturers.name"
-              = link_to(item.manufacturer, item.manufacturer)
-            = render body.cell "vendors.name"
-              = item.vendor ? link_to(item.vendor, item.vendor) : ''
-            = render body.cell :cost
-              = item.cost.format
-            = render body.cell "departments.name"
-              = item.department ? link_to(item.department, item.department) : ''
-            td nowrap="nowrap"
-              .flex.justify-between.gap-1
-                = view 'buttons/assignment', asset: item
-                = view 'buttons/edit', path: edit_item_path(item)
-                = view "buttons/delete", path: item
+    = table.body do |body|
+      - @items.each do |item|
+        = body.row
+          = body.select_cell item
+          = render body.cell :name
+            = link_to(item.name, item)
+          = render body.cell "models.name"
+            = link_to(item.model, item.model)
+          = render body.cell :asset_tag
+            = item.asset_tag ? link_to(item.asset_tag, item) : ''
+          = render body.cell :serial
+            = item.serial ? link_to(item.serial, item) : ''
+          = render body.cell "categories.name"
+            = link_to(item.category, category_items_path(item.category.id))
+          = render body.cell "manufacturers.name"
+            = link_to(item.manufacturer, item.manufacturer)
+          = render body.cell "vendors.name"
+            = item.vendor ? link_to(item.vendor, item.vendor) : ''
+          = render body.cell :cost
+            = item.cost.format
+          = render body.cell "departments.name"
+            = item.department ? link_to(item.department, item.department) : ''
+          td nowrap="nowrap"
+            .flex.justify-between.gap-1
+              = view 'buttons/assignment', asset: item
+              = view 'buttons/edit', path: edit_item_path(item)
+              = view "buttons/delete", path: item
 
     = section.pagination
       .flex.pt-3

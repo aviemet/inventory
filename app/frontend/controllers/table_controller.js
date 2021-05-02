@@ -29,12 +29,14 @@ export default class extends ApplicationController {
     // Uncheck menu checkboxes of hidden columns
     // I think it's slightly faster to query the menu items once and use them to loop through field names
     // than to loop through field names and perform a DOM query each time
-    this.columnToggleMenuTarget.querySelectorAll("li input[type=checkbox]").forEach(el => {
-      if(this.headings[this.nameValue][el.dataset.tableFieldName] === false) {
-        el.checked = false
-        this._hideColumn(el.dataset.tableFieldName)
-      }
-    })
+    if(this.hasColumnToggleMenuTarget) {
+      this.columnToggleMenuTarget.querySelectorAll("li input[type=checkbox]").forEach(el => {
+        if(this.headings[this.nameValue][el.dataset.tableFieldName] === false) {
+          el.checked = false
+          this._hideColumn(el.dataset.tableFieldName)
+        }
+      })
+    }
   }
 
   /** TOGGLE COLUMNS */

@@ -1,13 +1,21 @@
 = simple_form_for consumable do |form|
+  = view "forms/errors", record: consumable
+
+  = view "forms/company_nested_input", form: form, company: consumable.company, companies: @companies, active_company: @active_company
+
   = form.input :name
   = form.input :model_number
   = form.input :min_qty
   = form.input :qty
   = form.input :cost
-  = form.input :requestable
+
   = form.association :manufacturer, collection: "manufacturers"
-  = form.association :category, collection: "categories"
+  = form.association :category, collection: "categories#consumable"
   = form.association :vendor, collection: "vendors"
   = form.association :default_location, collection: "locations"
+
   = form.input :notes
+
+  = form.input :requestable
+
   = form.submit

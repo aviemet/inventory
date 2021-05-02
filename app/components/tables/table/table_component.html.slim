@@ -1,5 +1,6 @@
-div *{class: @scroll ? "scroll-content shadow" : ""}
-  table.table-auto
-    = head
+turbo_frame id="table" *{class: @scroll ? "scroll-content shadow" : ""}
+  div
+    table.table-auto
+      = head
 
-    = body
+      = body

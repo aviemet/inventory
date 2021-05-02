@@ -21,6 +21,20 @@ a.button {
 
 .simple_form {
   @apply max-w-screen-lg;
+
+  @screen lg {
+    fieldset {
+      @apply flex flex-wrap;
+
+      .field {
+        @apply ml-2 flex-1;
+
+        &:first-child {
+          @apply ml-0;
+        }
+      }
+    }
+  }
 }
 
 div.field {
@@ -89,7 +103,7 @@ div.field {
   @screen md {
     &:not(.text) {
       @apply grid;
-      grid-template-columns: 14rem 1fr;
+      grid-template-columns: var(--label-width) 1fr;
 
       /* Rounded corners on the left for desktop */
       @apply border-t-0 border-l-2;
@@ -97,7 +111,8 @@ div.field {
     }
 
     label {
-      @apply flex-1 text-right max-w-56;
+      @apply flex-1 text-right;
+      max-width: var(--label-width);
       grid-row-start: span 2;
 
       & ~ .input_wrapper {

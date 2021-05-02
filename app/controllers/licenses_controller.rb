@@ -1,10 +1,18 @@
 class LicensesController < ApplicationController
+  include OwnableConcern
+  include Sortable
+  include Searchable
+
   before_action :set_license, only: [:show, :edit, :update, :destroy]
 
   # GET /licenses
   # GET /licenses.json
   def index
-    @licenses = License.all
+    @licenses = if params[:search]
+                  search(License, params[:search], params[:page])
+                else
+                  searchable_object.order(sort(License)).page(params[:page])
+                end
   end
 
   # GET /licenses/1
@@ -62,6 +70,14 @@ class LicensesController < ApplicationController
   end
 
   private
+
+  def searchable_object
+    @active_company.licenses.includes_associated
+  end
+
+  def sortable_fields
+    %w(name key licenser_name licenser_email notes models.name vendors.name categories.name manufacturers.name departments.name).freeze
+  end
 
   def set_license
     @license = License.find(params[:id])

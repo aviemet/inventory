@@ -1,44 +1,66 @@
-section
-  h1 Licenses
+= view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :license do |section|
+  = section.title
+    h1.inline-block Licenses
+    .inline-block.text-right.align-top = button_link '+ New License', new_license_path
 
-  table.table-auto data-controller="table"
-    thead
-      tr
-        th Name
-        th Seats
-        th Key
-        th Licensed To Name
-        th Licensed To Email
-        th Reassignabel
-        th Cost
-        th Purchase Date
-        th Expiration Date
-        th Termination Date
-        th Maintained
-        th Notes
-        th Category
-        th Vendor
-        th Manufacturer
-        th colspan="2"
-    tbody
+  = section.table(scroll: true) do |table|
+    = table.head do |head|
+      = head.row
+        = head.select_all_cell
+        = head.cell :name
+        = head.cell :seats
+        = head.cell :key
+        = head.cell :licenser_name, heading: "Licensed To Name"
+        = head.cell :licenser_email, heading: "Licensed To Email"
+        = head.cell :reassignable
+        = head.cell :cost, sort: :cost_cents
+        = head.cell :purchased_at
+        = head.cell :expires_at
+        = head.cell :terminates_at
+        = head.cell :maintained
+        = head.cell "category.name", heading: "Category"
+        = head.cell "vendors.name", heading: "Vendor"
+        = head.cell "manufacturers.name", heading: "Manufacturer"
+        th.table-column-fit.text-center Actions
+    = table.body do |body|
       - @licenses.each do |license|
-        tr
-          td = link_to license.name, license
-          td = license.seats
-          td = license.key
-          td = license.licenser_name
-          td = license.licenser_email
-          td = license.reassignable
-          td = license.cost
-          td = license.purchased_at
-          td = license.expires_at
-          td = license.terminates_at
-          td = license.maintained
-          td = license.notes
-          td = license.category.name
-          td = license.vendor.name
-          td = license.manufacturer.name
-          td = link_to 'Edit', edit_license_path(license)
-          td = link_to 'Destroy', license, method: :delete, data: { confirm: 'Are you sure?' }
+        = body.row
+          = body.select_cell license
+          = render body.cell :name
+            = link_to(license.name, license)
+          = render body.cell :seats
+            = license.seats
+          = render body.cell :key
+            = license.key
+          = render body.cell :licenser_name
+            = license.licenser_name
+          = render body.cell :licenser_email
+            = license.licenser_email
+          = render body.cell :reassignable
+            = license.reassignable
+          = render body.cell :cost
+            = license.cost.format
+          = render body.cell :purchased_at
+            = license.purchased_at
+          = render body.cell :expires_at
+            = license.expires_at
+          = render body.cell :terminates_at
+            = license.terminates_at
+          = render body.cell :maintained
+            = license.maintained
+          = render body.cell "categories.name"
+            = license.category.name
+          = render body.cell "vendors.name"
+            = license.vendor.name
+          = render body.cell "manufacturers.name"
+            = license.manufacturer.name
+          td nowrap="nowrap"
+            .flex.justify-between.gap-1
+              = view 'buttons/assignment', asset: license
+              = view 'buttons/edit', path: edit_license_path(license)
+              = view "buttons/delete", path: license
 
-  = link_to 'New License', new_license_path
+    = section.pagination
+      .flex.pt-3
+        .flex-1 = page_entries_info @licenses, entry_name: "license"
+        .flex-1 = paginate @licenses

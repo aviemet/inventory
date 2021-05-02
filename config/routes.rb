@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "pages#home"
+  # CONCERNS #
 
   concern :contactable do
     resources :contacts, except: [:index] do
@@ -10,33 +10,45 @@ Rails.application.routes.draw do
     end
   end
 
+  concern :categoryable do
+    get "category/:category_id" => :category, on: :collection, as: :category
+  end
+
+  concern :clonable do
+    get ":id/clone" => :clone, on: :collection, as: :clone
+  end
+
+  # STATIC PATHS #
+
+  root to: "pages#home"
   get "pages/:page" => "pages#show"
   get "settings" => "pages#show", page: "settings"
+
+  # DEVISE PATHS #
 
   devise_for :users, path: "/", path_names: { sign_in: "login", sign_out: "logout" }, only: [:sessions]
   devise_for :users, path_names: { sign_up: "register" }, skip: [:sessions]
 
+  # RESOURCEFUL PATHS #
+
   resources :users, except: [:create]
-
-  resources :ownerships
-
-  resources :status_types
-
   resources :companies, concerns: :contactable
+  resources :ownerships
 
   resources :departments, concerns: :contactable
   resources :locations, concerns: :contactable
 
   resources :categories
+  resources :status_types
 
   resources :items do
     resources :nics
-    get "category/:category_id", to: "items#category", on: :collection
+    concerns :categoryable, :clonable
   end
-  get "items/:id/clone", to: "items#clone"
 
-  resources :accessories
-  resources :consumables
+  resources :accessories, concerns: :categoryable
+  resources :consumables, concerns: :categoryable
+  resources :licenses, concerns: :categoryable
 
   resources :assignments, path: "assignments/:asset_type/:asset_id", only: [:edit, :index, :create]
   resources :assignments, only: [:show, :update, :destroy]
@@ -52,7 +64,6 @@ Rails.application.routes.draw do
 
   resources :models
   resources :manufacturers, concerns: :contactable
-  resources :licenses
   resources :warranties, concerns: :contactable
 
   resources :fields

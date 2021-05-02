@@ -2,31 +2,67 @@
 
 class SelectOptionsReflex < ApplicationReflex
   def options(selector, data, value)
-    raise "Method \"#{data}\" is not defined in SelectOptionsReflex" if !self.respond_to?(data) # This should probably error
+    model, *args = data.split('#')
+    raise "Method \"#{model}\" is not defined in SelectOptionsReflex" if !self.respond_to?(model)
 
-    data = self.send(data)
-    morph "##{selector}", render(Forms::SelectOptions::SelectOptionsComponent.new(data: data, value: value), layout: false)
+    ap({data: data, model: model, args: args, value: value})
+    response = self.send(model, *args)
+    morph "##{selector}", render(Forms::SelectOptions::SelectOptionsComponent.new(data: response, value: value), layout: false)
   end
 
-  # TODO: scope these queries to the active company and current user permissions
-  def vendors
-    Vendor.all
+  def companies(*_args)
+    current_user&.companies&.all
   end
 
-  def models
-    Model.all
+  def departments(*_args)
+    current_user&.active_company&.departments&.all
   end
 
-  def locations
-    Location.all
+  def locations(*_args)
+    current_user&.active_company&.locations&.all
   end
 
-  def people
-    Person.all
+  def people(*_args)
+    current_user&.active_company&.people&.all
   end
 
-  def items
-    Item.all
+  def items(*_args)
+    current_user&.active_company&.items&.all
   end
 
+  def accessories(*_args)
+    current_user&.active_company&.accessories&.all
+  end
+
+  def consumables(*_args)
+    current_user&.active_company&.consumables&.all
+  end
+
+  def licenses(*_args)
+    current_user&.active_company&.licenses&.all
+  end
+
+  def vendors(*_args)
+    current_user&.active_company&.vendors&.all
+  end
+
+  def models(*_args)
+    current_user&.active_company&.models&.all
+  end
+
+  def manufacturers(*_args)
+    current_user&.active_company&.manufacturers&.all
+  end
+
+  def categories(*args)
+    if !args.empty?
+      Category.find_by_type(args[0])
+    else
+      Category.all
+    end
+  end
+
+  def purchases(*_args)
+    current_user&.active_company&.purchases&.all
+  end
 end
