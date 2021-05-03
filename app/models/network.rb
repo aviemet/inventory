@@ -1,6 +1,8 @@
 class Network < ApplicationRecord
   include Ownable
 
+  audited
+
   validates :ip, presence: true
   validate :ip_is_not_a_host
 

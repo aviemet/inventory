@@ -4,5 +4,7 @@ class Vendor < ApplicationRecord
 
   slug :name
 
+  audited
+
   has_many :contracts
 end

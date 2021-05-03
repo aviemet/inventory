@@ -3,6 +3,8 @@ class Person < ApplicationRecord
   include Contactable
   include AssignToable
   include Fieldable
+  
+  audited
 
   belongs_to :manager, class_name: 'Person', optional: true
   has_one :user

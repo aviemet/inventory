@@ -2,6 +2,8 @@ class Consumable < ApplicationRecord
   include Ownable
   include Assignable::Consume
 
+  audited
+
   monetize :cost_cents
 
   belongs_to :manufacturer

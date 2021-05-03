@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   include Fieldable
 
   resourcify
+  audited
 
   monetize :cost_cents
 

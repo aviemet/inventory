@@ -3,6 +3,8 @@ class Model < ApplicationRecord
 
   slug :name
 
+  audited
+
   belongs_to :manufacturer
   belongs_to :category
 

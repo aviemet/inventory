@@ -6,6 +6,7 @@ class Location < ApplicationRecord
   slug :name
 
   resourcify
+  audited
 
   belongs_to :parent, class_name: "Location", required: false
 

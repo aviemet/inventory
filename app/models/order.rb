@@ -1,4 +1,6 @@
-class Order < ApplicationRecord
+class Order < ApplicationRecord  
+  audited
+
   monetize :shipping_cents
   monetize :tax_cents
   monetize :discount_cents

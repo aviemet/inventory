@@ -4,6 +4,7 @@ class Company < ApplicationRecord
   slug :name
 
   resourcify
+  audited
 
   has_many :users, through: :roles, class_name: :User, source: :users
 

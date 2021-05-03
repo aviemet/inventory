@@ -1,6 +1,8 @@
 class Category < ApplicationRecord
   slug :slug_from_category_type
 
+  audited
+
   validates_presence_of :categorizable_type
   validates_presence_of :name
 

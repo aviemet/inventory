@@ -6,6 +6,7 @@ class Department < ApplicationRecord
   slug :name
 
   resourcify
+  audited
 
   belongs_to :location, optional: true
   belongs_to :manager, class_name: :Person, optional: true

@@ -16,6 +16,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Models
 gem "slug", "~> 4.1"
 gem "active_type", "~> 1.3"
+gem "audited", "~> 4.10"
 
 # Search
 gem "sunspot_rails", "~> 2.5"
