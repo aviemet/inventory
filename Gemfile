@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '2.7.3'
 
 # Server
 gem 'rails', '~> 6.1.0'
@@ -65,9 +65,9 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # Linting
-  gem "rubocop", "~> 0.85.1"
-  gem "rubocop-daemon", "~> 0.3.2", require: false
-  gem "solargraph", "~> 0.39.17"
+  gem "rubocop", require: false
+  gem "rubocop-daemon", require: false
+  gem "solargraph", require: false
   gem "slim_lint", "~> 0.20.2"
   gem "htmlbeautifier", "~> 1.3"
 end
