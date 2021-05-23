@@ -3,8 +3,8 @@
 class Tables::Header::HeaderComponent < ApplicationComponent
   renders_many :rows, Tables::Row::RowComponent
 
-  def cell(*args)
-    render Tables::HeaderCell::HeaderCellComponent.new(*args)
+  def cell(*args, **kwargs)
+    render Tables::HeaderCell::HeaderCellComponent.new(*args, **kwargs)
   end
 
   def select_all_cell

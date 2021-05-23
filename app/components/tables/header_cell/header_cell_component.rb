@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class Tables::HeaderCell::HeaderCellComponent < ApplicationComponent
-  attr_reader :attributes
-  attr_reader :heading
-  attr_reader :sort
-  attr_reader :direction
-  attr_reader :sortable
+  attr_reader :attributes, :heading, :sort, :direction, :sortable
 
   def initialize(name, heading: nil, sortable: true, sort: nil, classes: [], data: {}, **attrs)
     @name = name
@@ -41,6 +37,6 @@ class Tables::HeaderCell::HeaderCellComponent < ApplicationComponent
   def input_to_a(input = nil)
     return [] if input.nil?
 
-    input.class == Array ? input : input.to_s.split(" ")
+    input.instance_of?(Array) ? input : input.to_s.split
   end
 end
