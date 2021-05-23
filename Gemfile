@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '3.0.1'
 
 # Server
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 6.1.3'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5.1'
 gem 'redis', '~> 4.0'
 gem "dotenv-rails", "~> 2.7"
 gem "rack-cors", "~> 1.1"
 gem 'bcrypt', '~> 3.1.7'
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.4.4', require: false
 
 # Models
 gem "slug", "~> 4.1"
@@ -31,7 +31,7 @@ gem "stimulus_reflex", "~> 3.3"
 gem 'sass-rails', '>= 6'
 gem 'jbuilder', '~> 2.7'
 gem "slim-rails", "~> 3.2"
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.0'
 gem 'image_processing', '~> 1.2'
 gem "material_icons", "~> 2.2"
 gem "simple_form", "~> 5.0"
@@ -41,7 +41,7 @@ gem "draper", "~> 4.0"
 # Authentication / Authorization
 gem "devise", "~> 4.7"
 gem "devise_ldap_authenticatable", "~> 0.8.6"
-gem "rolify", "~> 5.3"
+gem "rolify", "~> 6.0"
 gem "cancancan", "~> 3.1"
 
 # Helpers
@@ -68,18 +68,17 @@ group :development, :test do
   gem "rubocop", require: false
   gem "rubocop-daemon", require: false
   gem "solargraph", require: false
-  gem "slim_lint", "~> 0.20.2"
+  gem "slim_lint", "~> 0.20"
   gem "htmlbeautifier", "~> 1.3"
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'listen', '~> 3.2'
-  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '~> 3.3'
+  gem 'web-console', '>= 4.1.0'
 
   # Better error pages
   gem "better_errors", "~> 2.7"
-  gem "binding_of_caller", "~> 0.8.0"
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -94,15 +93,15 @@ end
 
 group :test do
   # Testing
-  gem "rspec-rails", "~> 4.0"
-  gem "database_cleaner", "~> 1.8"
+  gem "rspec-rails", "~> 5.0"
+  gem "database_cleaner", "~> 2.0"
   gem "cucumber-rails", "~> 2.0", require: false
   gem "shoulda-matchers", "~> 4.3"
   gem "deep-cover", "~> 1.0"
   gem "sunspot_test", "~> 0.4.2"
 
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
 
   # Easy installation and use of web drivers to run system tests with browsers

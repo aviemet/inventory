@@ -17,6 +17,7 @@ module Inventory
     # in config/environments, which are processed later.
 
     config.time_zone = "Pacific Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
 
     config.generators do |g|
       g.template_engine     :slim
