@@ -2,7 +2,7 @@
 
 class ScrollingTabs::ScrollingTabsComponent < ApplicationComponent
   renders_one :tabs
-  renders_manu :sections
+  renders_many :sections
 
   attr_reader :section_names
 

@@ -1,12 +1,13 @@
 require 'bullet'
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   config.session_store :cache_store
 
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # In the development environment your application's code is reloaded on
-  # every request. This slows down response time but is perfect for development
+  # In the development environment your application's code is reloaded any time
+  # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
@@ -65,8 +66,14 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
-  # Raises error for missing translations.
-  # config.action_view.raise_on_missing_translations = true
+  # Raises error for missing translations.e
+  # config.i18n.raise_on_missing_translations = true
+
+  # Annotate rendered view with file names.
+  # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Uncomment if you wish to allow Action Cable access from any origin.
+  # config.action_cable.disable_request_forgery_protection = true
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
@@ -90,7 +97,7 @@ end
 # This will stop BetterErrors from trying to render larger objects, which can cause
 # slow loading times and browser performance problems. Stated size is in characters and refers
 # to the length of #inspect's payload for the given object. Please be aware that HTML escaping
-# modifies the size of this payload so setting this limit too precisely is not recommended.  
+# modifies the size of this payload so setting this limit too precisely is not recommended.
 # default value: 100_000
 BetterErrors.maximum_variable_inspect_size = 100_000
 
