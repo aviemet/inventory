@@ -1,0 +1,52 @@
+= view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :items do |section|
+  = section.title
+    h1.inline-block Hardware Assets
+    .inline-block.text-right.align-top = button_link '+ New Item', new_item_path
+
+  = section.table(scroll: true) do |table|
+    = table.head do |head|
+      = head.row
+        = head.select_all_cell
+        = head.cell :name
+        = head.cell :model_number
+        = head.cell :qty
+        = head.cell :min_qty
+        = head.cell "categories.name", heading: "Category"
+        = head.cell "manufacturers.name", heading: "Manufacturer"
+        = head.cell "vendors.name", heading: "Vendor"
+        = head.cell :cost, sort: :cost_cents
+        = head.cell "departments.name", heading: Department
+        th.table-column-fit.text-center Actions
+
+    = table.body do |body|
+      - @components.each do |component|
+        = body.row
+          = body.select_cell component
+          = render body.cell :name
+            = link_to(component.name, component)
+          = render body.cell :model_number
+            = link_to(component.model_number, component.model_number)
+          = render body.cell :qty
+            = component.qty
+          = render body.cell :min_qty
+            = component.min_qty
+          = render body.cell "categories.name"
+            = link_to(component.category, category_components_path(component.category.id))
+          = render body.cell "manufacturers.name"
+            = link_to(component.manufacturer, component.manufacturer)
+          = render body.cell "vendors.name"
+            = component.vendor ? link_to(component.vendor, component.vendor) : ''
+          = render body.cell :cost
+            = component.cost.format
+          = render body.cell "departments.name"
+            = component.department ? link_to(component.department, component.department) : ''
+          td nowrap="nowrap"
+            .flex.justify-between.gap-1
+              = view 'buttons/assignment', asset: component
+              = view 'buttons/edit', path: edit_component_path(component)
+              = view "buttons/delete", path: component
+
+    = section.pagination
+      .flex.pt-3
+        .flex-1 = page_entries_info @components, entry_name: "component"
+        .flex-1 = paginate @components

@@ -1,11 +1,11 @@
 class ConsumablesController < ApplicationController
+  include OwnableConcern
   include Sortable
   include Searchable
 
-  before_action :set_consumable, only: [:show, :edit, :use, :update, :destroy]
+  before_action :set_consumable, only: %i[show edit use update destroy]
 
-  # GET /consumables
-  # GET /consumables.json
+  # GET /consumables(.json)
   def index
     @consumables = if params[:search]
                      search(Consumable, params[:search], params[:page])
@@ -14,8 +14,7 @@ class ConsumablesController < ApplicationController
                    end
   end
 
-  # GET /consumables/:id
-  # GET /consumables/:id.json
+  # GET /consumables/:id(.json)
   def show
   end
 
@@ -30,13 +29,12 @@ class ConsumablesController < ApplicationController
 
   # GET /checkout/consumable/:id
   def checkout
-
   end
 
-  # POST /consumables
-  # POST /consumables.json
+  # POST /consumables(.json)
   def create
     @consumable = Consumable.new(consumable_params)
+    @consumable.company = Company.find(company_params[:id])
 
     respond_to do |format|
       if @consumable.save
@@ -49,8 +47,7 @@ class ConsumablesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /consumables/:id
-  # PATCH/PUT /consumables/:id.json
+  # PATCH/PUT /consumables/:id(.json)
   def update
     respond_to do |format|
       if @consumable.update(consumable_params)
@@ -63,8 +60,7 @@ class ConsumablesController < ApplicationController
     end
   end
 
-  # DELETE /consumables/:id
-  # DELETE /consumables/:id.json
+  # DELETE /consumables/:id(.json)
   def destroy
     @consumable.destroy
     respond_to do |format|

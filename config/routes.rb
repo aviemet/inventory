@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     concerns :categoryable, :clonable
   end
 
+  resources :components, concerns: :categoryable
   resources :accessories, concerns: :categoryable
   resources :consumables, concerns: :categoryable
   resources :licenses, concerns: :categoryable

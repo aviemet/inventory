@@ -14,6 +14,7 @@ aside#sidebar
             ul
               li = link_to 'Hardware', items_path(path_hash)
               li = link_to 'Accessories', accessories_path(path_hash)
+              li = link_to 'Components', components_path(path_hash)
               li = link_to 'Consumables', consumables_path(path_hash)
 
           = render link_file, locals: { text: 'Licenses', path: licenses_path(path_hash), icon: :save }

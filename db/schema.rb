@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_02_222038) do
+ActiveRecord::Schema.define(version: 2021_05_23_223644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,27 @@ ActiveRecord::Schema.define(version: 2021_05_02_222038) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["slug"], name: "index_companies_on_slug", unique: true
+  end
+
+  create_table "components", force: :cascade do |t|
+    t.string "name"
+    t.string "model_number"
+    t.integer "min_qty"
+    t.integer "qty"
+    t.integer "cost_cents"
+    t.string "cost_currency", default: "USD", null: false
+    t.text "notes"
+    t.bigint "category_id", null: false
+    t.bigint "manufacturer_id", null: false
+    t.bigint "vendor_id", null: false
+    t.bigint "default_location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "purchased_at"
+    t.index ["category_id"], name: "index_components_on_category_id"
+    t.index ["default_location_id"], name: "index_components_on_default_location_id"
+    t.index ["manufacturer_id"], name: "index_components_on_manufacturer_id"
+    t.index ["vendor_id"], name: "index_components_on_vendor_id"
   end
 
   create_table "consumables", force: :cascade do |t|
@@ -482,6 +503,10 @@ ActiveRecord::Schema.define(version: 2021_05_02_222038) do
   add_foreign_key "addresses", "categories"
   add_foreign_key "addresses", "contacts"
   add_foreign_key "assignments", "users", column: "created_by_id"
+  add_foreign_key "components", "categories"
+  add_foreign_key "components", "locations", column: "default_location_id"
+  add_foreign_key "components", "manufacturers"
+  add_foreign_key "components", "vendors"
   add_foreign_key "consumables", "categories"
   add_foreign_key "consumables", "locations", column: "default_location_id"
   add_foreign_key "consumables", "manufacturers"

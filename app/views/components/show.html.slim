@@ -1,0 +1,73 @@
+section.container.relative
+  header.flex
+    h1.flex-1 = @component
+    span
+      = view "forms/dropdown_menu" do |options_menu|
+        = options_menu.heading
+          div Actions
+        = options_menu.option
+          = assignment_link @component
+        = options_menu.option
+          = link_to "Edit Component", edit_component_path(@component)
+
+  nav.sticky class="bg-white p-3 border-b-2 -top-4" data-controller="navigation"
+    .inline.px-2
+      a href="#details" data-action="click->navigation#scroll" Details
+    .inline.px-2
+      a href="#history" data-action="click->navigation#scroll" History
+    .inline.px-2
+      a href="#licenses" data-action="click->navigation#scroll" Licenses
+
+  a name="details"
+  section
+    h3 Details
+    .item-details
+      .item-row
+        label Model:
+        .value
+          = link_to @component.manufacturer.name, @component.manufacturer
+
+      .item-row
+        label Category:
+        .value = link_to @component.category.name, @component.category
+
+      .item-row
+        label Model Number:
+        .value = @component.model_number
+
+      .item-row
+        label Notes:
+        .value = @component.notes
+
+      .item-row
+        label Quantity:
+        .value = @component.qty
+
+      .item-row
+        label Purchase Cost:
+        .value = @component.cost.format
+
+      .item-row
+        label Purchase Date:
+        .value = I18n.l(@component.purchased_at, format: :long) unless @component.purchased_at.nil?
+
+      .item-row
+        label Vendor:
+        .value = link_to @component.vendor.name, @component.vendor
+
+  a name="history"
+  section
+    h3 History
+    - @component.assignments.each do |assignment|
+      - if assignment != @component.assignment
+        = assignment.assign_toable.to_s
+
+  a name="licenses"
+  section
+    h3 Licenses
+
+  div style="height: 150vh"
+
+  = link_to 'Edit', edit_item_path(@component)
+  | |
+  = link_to 'Back', items_path

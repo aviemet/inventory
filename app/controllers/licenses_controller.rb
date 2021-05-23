@@ -33,6 +33,7 @@ class LicensesController < ApplicationController
   # POST /licenses.json
   def create
     @license = License.new(license_params)
+    @license.company = Company.find(company_params[:id])
 
     respond_to do |format|
       if @license.save

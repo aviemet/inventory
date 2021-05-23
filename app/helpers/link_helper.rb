@@ -10,7 +10,7 @@ module LinkHelper
   def assignment_link(asset)
     asset_type = asset.class
 
-    if asset.assigned?
+    if asset.respond_to?(:assigned) && asset.assigned?
       link_to "Checkin #{asset_type}", end_assignment_path(asset_type, asset.id)
     else
       link_to "Checkout #{asset_type}", new_assignment_path(asset_type, asset.id)

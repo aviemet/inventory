@@ -12,6 +12,7 @@ if Category.count == 0
     Item: ["Desktop", "Laptop", "Server"],
     Accessory: ["Keyboard", "Mouse"],
     Consumable: ["Toner", "Paper"],
+    Component: ["Memory", "SSD", "HDD"],
     License: ["Operating System", "Office Software"],
     Email: ["Work", "Personal"],
     Address: ["Work", "Personal"],
