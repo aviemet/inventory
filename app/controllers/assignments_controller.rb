@@ -6,7 +6,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/:asset_type/:asset_id
   # GET /assignments/:asset_type/:asset_id.json
   def index
-    @assignments = Assignment.all
+    @assignments = Assignment.where(assignable_type: params[:asset_type].capitalize, assignable_id: params[:asset_id])
   end
 
   # GET /assignments/:id
@@ -17,7 +17,7 @@ class AssignmentsController < ApplicationController
   # GET /checkout/:asset_type/:asset_id
   def new
     @assignment = Assignment.new
-    render "#{params[:asset_type].pluralize}/checkout"
+    render "#{params[:asset_type].downcase.pluralize}/checkout"
   end
 
   # GET /checkin/:asset_type/:asset_id

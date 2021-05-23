@@ -47,7 +47,7 @@ class SelectOptionsReflex < ApplicationReflex
   end
 
   def models(*_args)
-    current_user&.active_company&.models&.all
+    Model.all
   end
 
   def manufacturers(*_args)

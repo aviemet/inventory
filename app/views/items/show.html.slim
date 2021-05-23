@@ -1,4 +1,4 @@
-section.container
+section.container.relative
   header.flex
     h1.flex-1 = @item
     span
@@ -10,11 +10,15 @@ section.container
         = options_menu.option
           = link_to "Edit Item", edit_item_path(@item)
 
-  nav.sticky class="bg-white p-3 border-b-2 -top-4"
-    .inline.px-2 Details
-    .inline.px-2 History
-    .inline.px-2 Licenses
+  nav.sticky class="bg-white p-3 border-b-2 -top-4" data-controller="navigation"
+    .inline.px-2
+      a href="#details" data-action="click->navigation#scroll" Details
+    .inline.px-2
+      a href="#history" data-action="click->navigation#scroll" History
+    .inline.px-2
+      a href="#licenses" data-action="click->navigation#scroll" Licenses
 
+  a name="details"
   section
     h3 Details
     .item-details
@@ -53,6 +57,7 @@ section.container
         label Vendor:
         .value = link_to @item.vendor.name, @item.vendor
 
+  a name="history"
   section
     h3 History
     - if @item.assigned?
@@ -63,6 +68,7 @@ section.container
       - if assignment != @item.assignment
         = assignment.assign_toable.to_s
 
+  a name="licenses"
   section
     h3 Licenses
 
