@@ -19,15 +19,19 @@ module Assignable
         !self.assignment.nil?
       end
 
-      def unassign(returned_at: nil)
+      def unassign(returned_at: nil, name: nil)
         self._before_unassignment(assignment, params) if self.respond_to?(:_before_unassignment)
         self.before_unassignment(assignment, params) if self.respond_to?(:before_unassignment)
-        self.assignment&.update({
-          active: false,
-          returned_at: returned_at || Time.current
-        })
+        self.transaction do
+          self.assignment&.update({
+            active: false,
+            returned_at: returned_at || Time.current
+          })
+          self.update({ name: name }) unless name.nil?
+        end
         self._after_unassignment(assignment, params) if self.respond_to?(:_after_unassignment)
         self.after_unassignment(assignment, params) if self.respond_to?(:after_unassignment)
+        self
       end
     end
   end

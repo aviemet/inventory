@@ -18,6 +18,6 @@ div data-controller="checkout" data-checkout-company=company.id
   = form.association :assign_toable, { \
     collection: "people",
     label: "Person",
-    wrapper_html: { data: { "checkout-target": "inputContainer" } },
-    input_html: { data: { "checkout-target": "input" } },
-    label_html: { data: { "checkout-target": "label" } } }
+    wrapper_html: { data: { 'checkout-target': 'inputContainer' } },
+    input_html: { data: { 'checkout-target': 'input' } },
+    label_html: { data: { 'checkout-target': 'label' } } }
