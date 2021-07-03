@@ -38,8 +38,8 @@ section.container.relative
         .value = @item.serial
 
       .item-row
-        label Notes:
-        .value = @item.notes
+        label Assigned To:
+        .value = link_to @item.assigned_to.to_s, @item.assigned_to if @item.assigned?
 
       .item-row
         label Asset Tag:
@@ -57,20 +57,34 @@ section.container.relative
         label Vendor:
         .value = link_to @item.vendor.name, @item.vendor
 
+      p = @item.notes
+
   a name="history"
   section
-    h3 History
-    - if @item.assigned?
-      label Assigned To:
-      p = @item.assigned_to.to_s
+    h3 Assignment History
 
-    - @item.assignments.each do |assignment|
-      - if assignment != @item.assignment
-        = assignment.assign_toable.to_s
+    .inline-grid.grid-cols-2
+      - @item.assignments.reverse_each do |assignment|
+          div = link_to "#{assignment.assign_toable}: ", assignment.assign_toable
+          div == assignment.decorate.dates_string
+
+    h3 Audit History
+
+    ul
+      - @item.audits.includes(:user).reverse_each do |audit|
+        li.mb-1
+          == audit.decorate.details
+          ul.list-inside.list-disc
+            - audit.audited_changes.each do |change|
+              li == "#{change[0]}: #{change[1][1]}"
 
   a name="licenses"
   section
     h3 Licenses
+
+    ul
+      - @item.licenses.each do |license|
+        li = license.name
 
   div style="height: 150vh"
 

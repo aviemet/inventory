@@ -30,5 +30,13 @@ module Assignable
 
       assignment
     end
+
+    def history
+      Audited::Audit.where({ auditable_type: "Assignment" })
+        .where("audited_changes -> 'assignable_id' = ?", self.id.to_s)
+        .or(
+          Audited::Audit.where({ auditable_type: "Item", auditable_id: self.id })
+        )
+    end
   end
 end

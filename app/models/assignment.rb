@@ -1,4 +1,6 @@
 class Assignment < ApplicationRecord
+  audited
+
   enum status: %i(requested approved denied)
 
   belongs_to :assignable, polymorphic: true
