@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_223644) do
+ActiveRecord::Schema.define(version: 2021_05_23_211443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_223644) do
     t.integer "qty"
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
+    t.datetime "purchased_at"
     t.text "notes"
     t.bigint "category_id", null: false
     t.bigint "manufacturer_id", null: false
@@ -127,7 +128,6 @@ ActiveRecord::Schema.define(version: 2021_05_23_223644) do
     t.bigint "default_location_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "purchased_at"
     t.index ["category_id"], name: "index_components_on_category_id"
     t.index ["default_location_id"], name: "index_components_on_default_location_id"
     t.index ["manufacturer_id"], name: "index_components_on_manufacturer_id"

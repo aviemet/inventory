@@ -45,7 +45,7 @@ gem "rolify", "~> 6.0"
 gem "cancancan", "~> 3.1"
 
 # Helpers
-gem "ipaddress", "~> 0.8.3"
+gem "ipaddress_2", "~> 0.13.0"
 gem "countries", "~> 3.0", require: 'countries/global'
 gem "money-rails", "~> 1.13"
 gem "kaminari", "~> 1.2"

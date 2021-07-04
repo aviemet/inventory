@@ -4,13 +4,13 @@ class Network < ApplicationRecord
   audited
 
   validates :ip, presence: true
-  validate :ip_is_not_a_host
+  validate :is_network
 
   private
 
-  def ip_is_not_a_host
-    return unless ip&.prefix == 32
-
-    errors.add(:ip, "Must be a network, not a host")
+  def is_network
+    unless ip&.network?
+      errors.add(:ip, "Must be a valid network with nothing to the right of the network bits")
+    end
   end
 end
