@@ -74,9 +74,10 @@ section.container.relative
       - @item.audits.includes(:user).reverse_each do |audit|
         li.mb-1
           == audit.decorate.details
-          ul.list-inside.list-disc
-            - audit.audited_changes.each do |change|
-              li == "#{change[0]}: #{change[1][1]}"
+          - if audit.action == "update"
+            ul.list-inside.list-disc
+              - audit.audited_changes.each do |change|
+                li == "#{change[0]}: #{change[1][1]}"
 
   a name="licenses"
   section
