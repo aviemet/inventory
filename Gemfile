@@ -89,6 +89,8 @@ group :development do
   gem "guard-livereload", "~> 2.5", require: false
   gem "rack-livereload", "~> 0.3.17"
 
+  # To supress warnings
+  gem 'rubyzip', '2.3.0'
 end
 
 group :test do

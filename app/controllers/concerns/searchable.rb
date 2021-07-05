@@ -13,16 +13,12 @@
 #    returns an array of associated models to be included in the query
 
 # To add the ability to highlight the search text in search results, define the following method on the model:
-#  self.hightligh_fields:
+#  self.highlight_fields:
 #    returns an array of fields to enable highlighting for
 #    These fields must be set to `stored: true` in the search definition on the model
 
 module Searchable
   extend ActiveSupport::Concern
-
-  included do
-    SEARCHABLE_PARAMS = %i[search].freeze
-  end
 
   def search(model, terms, page = 1)
     searchable_object.search do

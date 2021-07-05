@@ -23,7 +23,7 @@ module Assignable
         self._before_assignment(assignment, params) if self.respond_to?(:_before_assignment)
         self.before_assignment(assignment, params) if self.respond_to?(:before_assignment)
         assignment.save
-        self.update({ name: params[asset_class][:name] }) if params[asset_class][:name]
+        self.update({ name: params&.[](asset_class)&.[](:name) }) if params&.[](asset_class)&.[](:name)
         self._after_assignment(assignment, params) if self.respond_to?(:_after_assignment)
         self.after_assignment(assignment, params) if self.respond_to?(:after_assignment)
       end

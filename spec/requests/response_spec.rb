@@ -1,13 +1,13 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Request responses", type: :request do
+RSpec.describe "GET request responses", type: :request do
   describe "Page responeses behind authentication" do
     it "denies access if not logged in" do
       Rails.application.routes.routes.map do |route|
         next unless route_should_be_tested(route)
 
-        response = get public_send("#{route.name}_path")
+        get public_send("#{route.name}_url")
         expect(response).to redirect_to new_user_session_url
       end
     end
@@ -20,7 +20,7 @@ RSpec.describe "Request responses", type: :request do
       Rails.application.routes.routes.map do |route|
         next unless route_should_be_tested(route)
 
-        get public_send("#{route.name}_path")
+        get public_send("#{route.name}_url")
         expect(response).to have_http_status(:success)
       end
     end
@@ -29,7 +29,7 @@ RSpec.describe "Request responses", type: :request do
 end
 
 def route_should_be_tested(route)
-  ignore_routes_for = ["rails", "devise", "active_storage", "action_mailbox", "pages", "dropdown"]
+  ignore_routes_for = ["rails", "devise", "active_storage", "action_mailbox", "pages", "dropdown", "view_components", "turbo"]
 
   is_get_path_with_named_route(route) && !ignore_routes_for.include?(controller_name(route)) && route.required_parts.empty?
 end

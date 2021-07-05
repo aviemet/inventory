@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
     t.bigint "category_id", null: false
     t.bigint "manufacturer_id", null: false
     t.bigint "vendor_id", null: false
-    t.bigint "default_location_id", null: false
+    t.bigint "default_location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_components_on_category_id"

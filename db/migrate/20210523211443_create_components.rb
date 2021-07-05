@@ -11,7 +11,7 @@ class CreateComponents < ActiveRecord::Migration[6.1]
       t.references :category, null: false, foreign_key: true
       t.references :manufacturer, null: false, foreign_key: true
       t.references :vendor, null: false, foreign_key: true
-      t.references :default_location, null: false, foreign_key: { to_table: :locations }
+      t.references :default_location, null: true, foreign_key: { to_table: :locations }
 
       t.timestamps
     end

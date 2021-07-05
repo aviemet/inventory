@@ -1,10 +1,6 @@
 module Sortable
   extend ActiveSupport::Concern
 
-  included do
-    SORTABLE_PARAMS = %i[sort direction].freeze
-  end
-
   protected
 
   def sort(model)

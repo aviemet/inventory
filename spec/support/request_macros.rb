@@ -1,11 +1,11 @@
 module RequestMacros
   def login_admin
     before(:each) do
-      user = FactoryBot.create(:user)
-      user.confirm
-      user.add_role(:super_admin)
-      user.add_role(:admin, Company.first)
-      sign_in user
+      admin = FactoryBot.create(:user)
+      admin.confirm
+      admin.add_role(:super_admin)
+      admin.add_role(:admin, Company.first)
+      sign_in admin
     end
   end
 
