@@ -22,7 +22,7 @@ class Item < ApplicationRecord
   has_one :manufacturer, through: :model
   has_one :warranty, required: false
 
-  accepts_nested_attributes_for :nics, reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :nics #, reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
 
   def before_assignment(_assignment, params)
     name = params&.[](:assignment)&.[](:item)&.[](:name)

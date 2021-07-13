@@ -8,10 +8,18 @@
   = form.input :serial
   = form.association :model, collection: "models"
   = form.association :vendor, collection: "vendors"
-
   = form.input :cost
   = form.input :purchased_at
   = form.association :default_location, collection: "locations"
+
+  div data-controller="nested-form"
+    template data-nested-form-target="template"
+      = form.simple_fields_for :nics, Nic.new do |n|
+        = n.input :mac, as: :string
+
+    = form.simple_fields_for :nics, Nic.new do |n|
+        = n.input :mac, as: :string
+
   = form.input :notes
   = form.input :requestable
 

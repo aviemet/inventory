@@ -139,7 +139,7 @@ SimpleForm.setup do |config|
   # matches the regexp as value.
   config.input_mappings = {
     /cost/ => :currency,
-    /price/ => :currency
+    /price/ => :currency,
   }
 
   # Custom wrappers for input types. This should be a hash containing an input

@@ -32,7 +32,7 @@ div data-controller="nested-form"
    = link_to "Add Model", "#", data: { action: "nested-form#add-association" }
 */
 
-// Example forme elements partial (model_fields_from_partial above)
+// Example form elements partial (model_fields_from_partial above)
 /*
 .form-group
   = form.hidden_field :_destroy

@@ -1,10 +1,13 @@
 class VendorsController < ApplicationController
+  include Sortable
+  include Searchable
+
   before_action :set_vendor, only: [:show, :edit, :update, :destroy]
+  before_action :set_vendors, only: [:index]
 
   # GET /vendors
   # GET /vendors.json
   def index
-    @vendors = Vendor.all
   end
 
   # GET /vendors/:id
@@ -63,8 +66,28 @@ class VendorsController < ApplicationController
 
   private
 
+  def searchable_object
+    @active_company.vendors
+  end
+
+  def sortable_fields
+    %w(name url items.count).freeze
+  end
+
+  def set_view_data
+    @hideable_fields = {URL: "url"}
+  end
+
   def set_vendor
-    @vendor = Vendor.find_by_slug(params[:id])
+    @vendor = searchable_object.find_by_slug(params[:id])
+  end
+
+  def set_vendors
+    @vendors =  if params[:search]
+                  search(Vendor, params[:search], params[:page])
+                else
+                  searchable_object.order(sort(Vendor)).page(params[:page])
+                end
   end
 
   def vendor_params

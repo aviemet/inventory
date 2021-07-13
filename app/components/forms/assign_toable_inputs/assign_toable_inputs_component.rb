@@ -6,6 +6,6 @@ class Forms::AssignToableInputs::AssignToableInputsComponent < ApplicationCompon
   def initialize(form:, company:, except: [])
     @form = form
     @company = company
-    @except = except
+    @except = except.kind_of?(Array) ? except : [except]
   end
 end
