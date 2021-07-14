@@ -329,13 +329,8 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "nics", force: :cascade do |t|
-    t.macaddr "mac"
-    t.bigint "item_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_nics_on_item_id"
-  end
+# Could not dump table "nics" because of following StandardError
+#   Unknown type 'nic_type' for column 'nic_type'
 
   create_table "orders", force: :cascade do |t|
     t.string "number"

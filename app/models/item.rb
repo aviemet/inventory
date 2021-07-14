@@ -13,7 +13,8 @@ class Item < ApplicationRecord
   validates_presence_of :name
 
   has_many :nics
-  has_many :ips, -> { where(active: true) }, through: :nics, source: :ips
+  has_many :ips, -> { where(active: true) }, through: :nics, source: :ip_leases
+  has_many :ip_leases, through: :nics
   belongs_to :model
   belongs_to :vendor, required: false
   belongs_to :default_location, class_name: "Location", required: false

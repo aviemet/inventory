@@ -8,18 +8,18 @@ if Rails.env == "development"
       middle_name: "True",
       last_name: "Walden",
       employee_number: "1000",
-      job_title: "IT Manager"
+      job_title: "IT Manager",
     })
     user = User.new({
       email: "aviemet@gmail.com",
       password: "Complex1!",
       confirmed_at: Date.new,
-      person: person
+      person: person,
     })
     user.add_role :super_admin
 
     company = Company.create!({
-      name: "Example Company"
+      name: "Example Company",
     })
     user.add_role :admin, company
     person.company = company
@@ -46,12 +46,12 @@ if Rails.env == "development"
       {
         name: "IT Dept",
         location: Location.first,
-        company: Company.first
+        company: Company.first,
       },
       { 
         name: "Engineering",
         location: Location.second,
-        company: Company.first
+        company: Company.first,
       }
     ].each{ |dept| Department.create!(dept) }
   end
@@ -60,7 +60,7 @@ if Rails.env == "development"
     ["Apple", "Lenovo", "Cisco", "HP", "SHARP"].each do |manufacturer|
       Manufacturer.create!({
         name: manufacturer,
-        company: Company.first
+        company: Company.first,
       })
     end
   end
@@ -71,13 +71,13 @@ if Rails.env == "development"
         name: "MacBook Pro",
         model_number: "MacBookPro16,1",
         manufacturer: Manufacturer.find_by_slug("apple"),
-        category: Category.find_by_slug("item-laptop")
+        category: Category.find_by_slug("item-laptop"),
       },
       {
         name: "HP EliteDesk 800 G3",
         model_number: "1FY84UT#ABA",
         manufacturer: Manufacturer.find_by_slug("hp"),
-        category: Category.find_by_slug("item-desktop")
+        category: Category.find_by_slug("item-desktop"),
       }
     ].each{ |model| Model.create!(model) }
   end
@@ -86,36 +86,50 @@ if Rails.env == "development"
     [
       {
         name: "Apple",
-        url: "www.apple.com"
+        url: "www.apple.com",
       },
       {
         name: "Amazon",
-        url: "www.amazon.com"
+        url: "www.amazon.com",
       },
       {
         name: "CDW",
-        url: "www.cdw.com"
+        url: "www.cdw.com",
       },
       {
         name: "SHARP",
-        url: "www.business.sharp.com"
+        url: "www.business.sharp.com",
       }
     ].each{ |vendor| Vendor.create!(vendor.merge({ company: Company.first })) }
   end
 
   if Item.count == 0
-    100.times do
-      Item.create!({
-        name: Faker::Device.model_name,
-        asset_tag: Faker::Blockchain::Bitcoin.unique.address,
-        serial: Faker::Blockchain::Bitcoin.unique.address,
-        cost: Faker::Number.decimal(l_digits: 4, r_digits: 2),
-        purchased_at: Time.zone.yesterday.end_of_day,
-        model: Model.find(Model.pluck(:id).sample),
-        vendor: Vendor.find(Vendor.pluck(:id).sample),
-        default_location: Location.find(Location.pluck(:id).sample),
-        company: Company.first
-      })
+    ActiveRecord::Base.transaction do
+      100.times do
+        i = Item.create!({
+          name: Faker::Device.model_name,
+          asset_tag: Faker::Blockchain::Bitcoin.unique.address,
+          serial: Faker::Blockchain::Bitcoin.unique.address,
+          cost: Faker::Number.decimal(l_digits: 4, r_digits: 2),
+          purchased_at: Time.zone.yesterday.end_of_day,
+          model: Model.find(Model.pluck(:id).sample),
+          vendor: Vendor.find(Vendor.pluck(:id).sample),
+          default_location: Location.find(Location.pluck(:id).sample),
+          company: Company.first,
+        })
+
+        nic = Nic.create({
+          nic_type: "ethernet",
+          mac: Faker::Internet.unique.mac_address,
+          item: i,
+        })
+
+        IpLease.create({
+          address: Faker::Internet.unique.private_ip_v4_address,
+          active: true,
+          nic: nic,
+        })
+      end
     end
   end
 
@@ -134,7 +148,7 @@ if Rails.env == "development"
       category: Category.find_by_slug("license-operating-system"),
       vendor: Vendor.first,
       manufacturer: Manufacturer.first,
-      company: Company.first
+      company: Company.first,
     })
   end
 
@@ -151,7 +165,7 @@ if Rails.env == "development"
       manufacturer: Manufacturer.find_by_slug("apple"),
       vendor: Vendor.find_by_slug("apple"),
       default_location: Location.first,
-      company: Company.first
+      company: Company.first,
     })
   end
 
@@ -167,7 +181,7 @@ if Rails.env == "development"
       manufacturer: Manufacturer.find_by_slug("sharp"),
       vendor: Vendor.find_by_slug("sharp"),
       default_location: Location.first,
-      company: Company.first
+      company: Company.first,
     })
   end
 
@@ -180,7 +194,7 @@ if Rails.env == "development"
         dhcp_start: "10.10.10.150",
         dhcp_end: "10.10.10.254",
         vlan_id: 10,
-        company: Company.first
+        company: Company.first,
       },
       {
         name: "Large /16",
@@ -189,14 +203,14 @@ if Rails.env == "development"
         dhcp_start: "10.20.1.1",
         dhcp_end: "10.20.1.254",
         vlan_id: 2,
-        company: Company.first
+        company: Company.first,
       },
       {
         name: "Small /28",
         ip: "10.10.40.0/28",
         gateway: "10.10.40.1",
         vlan_id: 40,
-        company: Company.first
+        company: Company.first,
       }
     ].each{ |network|  Network.create!(network) }
   end

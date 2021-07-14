@@ -1,0 +1,13 @@
+- nic = Nic.new unless nic.is_a?(Nic)
+
+= form.simple_fields_for :nics, nic do |nic_form|
+  - nic.ips.each do |ip|
+    = nic_form.simple_fields_for :ips, ip || IpLease.new do |ip_form|
+      = ip_form.input :address, label: "IP Address"
+
+  - if nic.ips.count == 0
+    = nic_form.simple_fields_for :ips, IpLease.new do |ip_form|
+      = ip_form.input :address, label: "IP Address"
+
+  = nic_form.input :nic_type, collection: Nic.nic_types, searchable: false
+  = nic_form.input :mac

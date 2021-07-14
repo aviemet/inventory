@@ -3,13 +3,13 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = ["add_field", "template"]
 
-  add_association(event) {
+  addAssociation(event) {
     event.preventDefault()
     const content = this.templateTarget.innerHTML
     this.add_fieldTarget.insertAdjacentHTML("beforebegin", content)
   }
 
-  remove_association(event) {
+  removeAssociation(event) {
     event.preventDefault()
     let item = event.target.closest(".nested-fields")
     item.querySelector("input[name='_destroy'").value = 1
@@ -29,7 +29,7 @@ div data-controller="nested-form"
    = render "model_fields_from_partial"
   
  div data-nested-form-target="add_field"
-   = link_to "Add Model", "#", data: { action: "nested-form#add-association" }
+   = link_to "Add Model", "#", data: { action: "nested-form#addAssociation" }
 */
 
 // Example form elements partial (model_fields_from_partial above)
@@ -38,5 +38,5 @@ div data-controller="nested-form"
   = form.hidden_field :_destroy
   = form.text_field :field_name, placeholder: "Placeholder Text", class: "form-control"
   small
-    = link_to "Remove", "#", data: { action: "click->nested-form#remove_association" }
+    = link_to "Remove", "#", data: { action: "click->nested-form#removeAssociation" }
 */

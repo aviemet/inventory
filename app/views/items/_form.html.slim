@@ -14,11 +14,17 @@
 
   div data-controller="nested-form"
     template data-nested-form-target="template"
-      = form.simple_fields_for :nics, Nic.new do |n|
-        = n.input :mac, as: :string
+      fieldset
+        legend NICs and Network Addresses
+        = render partial: "nic_form_partial", locals: { form: form }
 
-    = form.simple_fields_for :nics, Nic.new do |n|
-        = n.input :mac, as: :string
+    - item.nics.each do |nic|
+      fieldset
+        legend NICs and Network Addresses
+        = render partial: "nic_form_partial", locals: { form: form, nic: nic }
+
+    div data-nested-form-target="add_field"
+      button type="button" data-action="nested-form#addAssociation" Add Model
 
   = form.input :notes
   = form.input :requestable

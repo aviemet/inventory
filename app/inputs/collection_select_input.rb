@@ -14,7 +14,7 @@ class CollectionSelectInput < SimpleForm::Inputs::CollectionSelectInput
       Forms::DropdownSearch::DropdownSearchComponent.new(
         data: options[:collection],
         value: @builder&.object.try(attribute_name),
-        display_value: @builder&.object.try(reflection.name),
+        display_value: @builder&.object.try(reflection&.name),
         name: attribute_name,
         form: @builder
       ), merged_input_options
