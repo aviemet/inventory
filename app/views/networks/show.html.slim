@@ -10,27 +10,34 @@
       .item-row
         label Network
         .value = "#{@network.ip}/#{@network.ip.prefix}"
-      .item-row
-        label Network Address:
-        .value = @network.ip.to_s
-      .item-row
-        label Broadcast Address:
-        .value = @network.ip.broadcast
+
       .item-row
         label Number of Hosts
         .value = @network.ip.hosts.count
+
       .item-row
-        label Gateway:
-        .value = @network.gateway
-      .item-row
-        label DHCP Start:
-        .value = @network.dhcp_start
-      .item-row
-        label DHCP End:
-        .value = @network.dhcp_end
+        label Network Address:
+        .value = @network.ip.to_s
+
       .item-row
         label VLAN ID:
         .value = @network.vlan_id
+
+      .item-row
+        label Gateway:
+        .value = @network.gateway
+
+      .item-row
+        label DHCP Start:
+        .value = @network.dhcp_start
+
+      .item-row
+        label Broadcast Address:
+        .value = @network.ip.broadcast
+
+      .item-row
+        label DHCP End:
+        .value = @network.dhcp_end
 
   br/
 
@@ -38,7 +45,7 @@
     h2 Addresses
 
     table
-      thead
+      thead.-top-4
         tr
           th Address
           th Host
