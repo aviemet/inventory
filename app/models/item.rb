@@ -32,6 +32,10 @@ class Item < ApplicationRecord
     self.update(name: name)
   end
 
+  def self.no_nics
+    self.includes(:nics).where(nics: { id: nil})
+  end
+
   # Sunspot search #
 
   def self.associated_models

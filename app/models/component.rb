@@ -12,6 +12,7 @@ class Component < ApplicationRecord
   belongs_to :default_location, class_name: "Location", required: false
 
   validates :qty, numericality: { greater_than_or_equal_to: 0 }
+  validates_presence_of :name
 
   # Sunspot search #
 

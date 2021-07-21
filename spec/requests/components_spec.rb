@@ -15,17 +15,22 @@
 
 def valid_attributes_hash(company)
   {
-    name: Faker::Device.model_name ,
-    model_number: Faker::Device.serial,
-    qty: Faker::Number.number(digits: 1),
-    min_qty: Faker::Number.number(digits: 1),
-    cost: Faker::Commerce.price(range: 500..2000.0),
-    purchased_at:Time.zone.yesterday.end_of_day,
-    notes: Faker::Lorem.sentence,
-    manufacturer: create(:manufacturer),
-    category: create(:category),
-    vendor: create(:vendor),
-    company: company,
+    component: attributes_for(:component,
+      manufacturer_id: create(:manufacturer).id,
+      vendor_id: create(:vendor).id,
+      category_id: create(:category, categorizable_type: "Component").id
+    ),
+    company: { id: company.id },
+  }
+end
+
+def invalid_attributes_hash(company)
+  { 
+    component: {
+      name: "",
+      purchased_at: DateTime.now 
+    },
+    company: { id: company.id },
   }
 end
 
@@ -37,9 +42,7 @@ RSpec.describe "/components", type: :request do
   # adjust the attributes here as well.
   let(:valid_attributes) { valid_attributes_hash(company) }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) { invalid_attributes_hash(company) }
 
   describe "POST /create" do
     login_admin
@@ -47,12 +50,12 @@ RSpec.describe "/components", type: :request do
     context "with valid parameters" do
       it "creates a new Component" do
         expect {
-          post components_url, params: { component: valid_attributes }
+          post components_url, params: valid_attributes
         }.to change(Component, :count).by(1)
       end
 
       it "redirects to the created component" do
-        post components_url, params: { component: valid_attributes }
+        post components_url, params: valid_attributes
         expect(response).to redirect_to(component_url(Component.last))
       end
     end
@@ -60,13 +63,13 @@ RSpec.describe "/components", type: :request do
     context "with invalid parameters" do
       it "does not create a new Component" do
         expect {
-          post components_url, params: { component: invalid_attributes }
+          post components_url, params: invalid_attributes
         }.to change(Component, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post components_url, params: { component: invalid_attributes }
-        expect(response).to be_successful
+        post components_url, params: invalid_attributes
+        expect(response).to have_http_status(422)
       end
     end
   end
@@ -77,17 +80,17 @@ RSpec.describe "/components", type: :request do
     context "with valid parameters" do
       let(:new_attributes) { valid_attributes_hash(company) }
       it "updates the requested component" do
-        ap company
-        ap valid_attributes
-        ap new_attributes
-        component = Component.create! valid_attributes
+        # ap company
+        # ap valid_attributes
+        # ap new_attributes
+        component = create(:component)
         patch component_url(component), params: { component: new_attributes }
         component.reload
         # skip("Add assertions for updated state")
       end
 
       it "redirects to the component" do
-        component = Component.create! valid_attributes
+        component = create(:component)
         patch component_url(component), params: { component: new_attributes }
         component.reload
         expect(response).to redirect_to(component_url(component))
@@ -96,9 +99,9 @@ RSpec.describe "/components", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        component = Component.create! valid_attributes
-        patch component_url(component), params: { component: invalid_attributes }
-        expect(response).to be_successful
+        component = create(:component)
+        patch component_url(component), params: invalid_attributes
+        expect(response).to have_http_status(422)
       end
     end
   end
@@ -107,14 +110,14 @@ RSpec.describe "/components", type: :request do
     login_admin
 
     it "destroys the requested component" do
-      component = Component.create! valid_attributes
+      component = create(:component)
       expect {
         delete component_url(component)
       }.to change(Component, :count).by(-1)
     end
 
     it "redirects to the components list" do
-      component = Component.create! valid_attributes
+      component = create(:component)
       delete component_url(component)
       expect(response).to redirect_to(components_url)
     end

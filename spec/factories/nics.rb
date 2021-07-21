@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :nic do
     mac { Faker::Internet.mac_address }
-    item
+    nic_type { ["ethernet","wifi"].sample }
+    item { item }
   end
 end

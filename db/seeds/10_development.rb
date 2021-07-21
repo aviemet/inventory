@@ -105,7 +105,7 @@ if Rails.env == "development"
 
   if Item.count == 0
     ActiveRecord::Base.transaction do
-      100.times do
+      100.times do |n|
         i = Item.create!({
           name: Faker::Device.model_name,
           asset_tag: Faker::Blockchain::Bitcoin.unique.address,
@@ -118,17 +118,19 @@ if Rails.env == "development"
           company: Company.first,
         })
 
-        nic = Nic.create({
-          nic_type: "ethernet",
-          mac: Faker::Internet.unique.mac_address,
-          item: i,
-        })
+        if n % 4 != 0
+          nic = Nic.create({
+            nic_type: "ethernet",
+            mac: Faker::Internet.unique.mac_address,
+            item: i,
+          })
 
-        IpLease.create({
-          address: Faker::Internet.unique.private_ip_v4_address,
-          active: true,
-          nic: nic,
-        })
+          IpLease.create({
+            address: Faker::Internet.unique.private_ip_v4_address,
+            active: true,
+            nic: nic,
+          })
+        end
       end
     end
   end

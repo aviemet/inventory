@@ -1,7 +1,7 @@
 module RequestMacros
   def login_admin
     before(:each) do
-      admin = FactoryBot.create(:user)
+      admin = FactoryBot::create(:user)
       admin.confirm
       admin.add_role(:super_admin)
       admin.add_role(:admin, Company.first)
@@ -10,9 +10,11 @@ module RequestMacros
   end
 
   def login_user
-    user = FactoryBot.create(:user)
-    user.confirm
-    user.add_role(:admin, Company.first)
-    sign_in user
+    before(:each) do
+      user = FactoryBot::create(:user)
+      user.confirm
+      user.add_role(:admin, Company.first)
+      sign_in user
+    end
   end
 end
