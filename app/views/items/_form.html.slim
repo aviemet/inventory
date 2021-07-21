@@ -12,19 +12,7 @@
   = form.input :purchased_at
   = form.association :default_location, collection: "locations"
 
-  div data-controller="nested-form"
-    template data-nested-form-target="template"
-      fieldset
-        legend NICs and Network Addresses
-        = render partial: "nic_form_partial", locals: { form: form }
-
-    - item.nics.each do |nic|
-      fieldset
-        legend NICs and Network Addresses
-        = render partial: "nic_form_partial", locals: { form: form, nic: nic }
-
-    div data-nested-form-target="add_field"
-      button type="button" data-action="nested-form#addAssociation" Add Model
+  = view "forms/nested_partial", partial: "nic_form", form: form, field: item.nics, legend: "NICs and Network Addresses"
 
   = form.input :notes
   = form.input :requestable

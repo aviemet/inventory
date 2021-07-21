@@ -1,7 +1,7 @@
-= simple_form_for component do |form|
-  = view "forms/errors", record: component
+= simple_form_for @component do |form|
+  = view "forms/errors", record: @component
 
-  = view "forms/company_nested_input", form: form, company: component.company, companies: @companies, active_company: @active_company
+  = view "forms/company_nested_input", form: form, company: @component.company, companies: @companies, active_company: @active_company
 
   = form.input :name
   = form.input :model_number

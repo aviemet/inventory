@@ -6,7 +6,7 @@
     = form.input name, { \
       as: :hidden,
       wrapper: false,
-      input_html: { data: { "dropdown-search-target": "hiddenInput" } } }
+      input_html: { data: { 'dropdown-search-target': "hiddenInput" } } }
   - else
     = hidden_field_tag name, @value, data: { target: "dropdown-search.hiddenInput" }
 
