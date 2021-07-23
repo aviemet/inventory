@@ -6,7 +6,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.string :serial, index: { unique: true }
       t.monetize :cost, amount: { null: true, default: nil }
       t.datetime :purchased_at
-      t.boolean :requestable, default: true
+      t.boolean :requestable, null: false, default: true
       t.text :notes
       t.references :model, null: false, foreign_key: true
       t.references :vendor, null: true, foreign_key: true

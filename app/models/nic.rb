@@ -1,8 +1,8 @@
 class Nic < ApplicationRecord
   enum nic_type: {
-    ethernet: "ethernet",
-    wifi: "wifi",
-    fiber: "fiber",
+    ethernet: 0,
+    wifi: 1,
+    fiber: 2,
   }
 
   audited

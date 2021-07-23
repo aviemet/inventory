@@ -15,7 +15,7 @@ section
       - @networks.each do |network|
         tr
           td = link_to network.name, network
-          td = link_to "#{network.ip}/#{network.ip.prefix}", network
+          td = link_to "#{network.address}/#{network.address.prefix}", network
           td = network.gateway ? link_to(network.gateway, network) : "-"
           td = network.dhcp_start ? link_to(network.dhcp_start, network) : "-"
           td = network.dhcp_end ? link_to(network.dhcp_end, network) : "-"

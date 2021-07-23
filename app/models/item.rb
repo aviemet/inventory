@@ -27,10 +27,6 @@ class Item < ApplicationRecord
 
   scope :no_nics, -> { includes(:nics).where(nics: { id: nil }) }
 
-  # def self.in_network(network)
-  #   self.include(:nics).ips.where("") 
-  # end
-
   def before_assignment(_assignment, params)
     name = params&.[](:assignment)&.[](:item)&.[](:name)
     return if name.nil?

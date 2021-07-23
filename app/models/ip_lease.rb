@@ -9,7 +9,7 @@ class IpLease < ApplicationRecord
   def self.in_network(network)
     net_str = case network
               when Network
-                network.ip.to_string
+                network.address.to_string
               when IPAddress
                 network.to_string
               when String
@@ -18,7 +18,6 @@ class IpLease < ApplicationRecord
               else
                 raise ArgumentError.new("Invalid parameter #{network}: expected one of Network, IpAddress or String in format \"10.10.10.0/24\"")
               end
-    
-    self.where("address << '#{net_str}'")
+    self.where("'#{net_str}' >>= address")
   end
 end

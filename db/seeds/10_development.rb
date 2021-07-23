@@ -105,6 +105,8 @@ if Rails.env == "development"
 
   if Item.count == 0
     ActiveRecord::Base.transaction do
+      network = IPAddress.parse("10.10.10.0/24")
+
       100.times do |n|
         i = Item.create!({
           name: Faker::Device.model_name,
@@ -118,7 +120,7 @@ if Rails.env == "development"
           company: Company.first,
         })
 
-        if n % 4 != 0
+        if n % 2 != 0
           nic = Nic.create({
             nic_type: "ethernet",
             mac: Faker::Internet.unique.mac_address,
@@ -126,8 +128,7 @@ if Rails.env == "development"
           })
 
           IpLease.create({
-            address: Faker::Internet.unique.private_ip_v4_address,
-            active: true,
+            address: n < 80 ? network.to_a[n] : Faker::Internet.unique.private_ip_v4_address,
             nic: nic,
           })
         end
@@ -191,7 +192,7 @@ if Rails.env == "development"
     [
       {
         name: "Normal /24",
-        ip: "10.10.10.0/24",
+        address: "10.10.10.0/24",
         gateway: "10.10.10.1",
         dhcp_start: "10.10.10.150",
         dhcp_end: "10.10.10.254",
@@ -200,7 +201,7 @@ if Rails.env == "development"
       },
       {
         name: "Large /16",
-        ip: "10.20.0.0/16",
+        address: "10.20.0.0/16",
         gateway: "10.20.0.1",
         dhcp_start: "10.20.1.1",
         dhcp_end: "10.20.1.254",
@@ -209,7 +210,7 @@ if Rails.env == "development"
       },
       {
         name: "Small /28",
-        ip: "10.10.40.0/28",
+        address: "10.10.40.0/28",
         gateway: "10.10.40.1",
         vlan_id: 40,
         company: Company.first,

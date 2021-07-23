@@ -1,17 +1,20 @@
 class NetworksController < ApplicationController
   include OwnableConcern
+  include Sortable
+  include Searchable
 
   before_action :set_network, only: [:show, :edit, :update, :destroy]
 
   # GET /networks
   # GET /networks.json
   def index
-    @networks = Network.all
+    @networks = searchable_object
   end
 
   # GET /networks/1
   # GET /networks/1.json
   def show
+    @ips = IpLease.includes(:item).in_network(@network)
   end
 
   # GET /networks/new
@@ -66,8 +69,12 @@ class NetworksController < ApplicationController
 
   private
 
+  def searchable_object
+    @active_company.networks
+  end
+
   def set_network
-    @network = Network.find(params[:id])
+    @network = searchable_object.find(params[:id])
   end
 
   def network_params

@@ -39,6 +39,7 @@ class ItemsController < ApplicationController
   def clone
     @item = Item.find(params[:id]).dup
     @item.serial = nil
+    @item.asset_tag = nil
     @item
   end
 
@@ -98,7 +99,7 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = searchable_object.find(params[:id])
   end
 
   def set_items

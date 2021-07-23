@@ -9,15 +9,15 @@
     .item-details
       .item-row
         label Network
-        .value = "#{@network.ip}/#{@network.ip.prefix}"
+        .value = "#{@network.address}/#{@network.address.prefix}"
 
       .item-row
         label Number of Hosts
-        .value = @network.ip.hosts.count
+        .value = @network.address.hosts.count
 
       .item-row
         label Network Address:
-        .value = @network.ip.to_s
+        .value = @network.address.to_s
 
       .item-row
         label VLAN ID:
@@ -33,7 +33,7 @@
 
       .item-row
         label Broadcast Address:
-        .value = @network.ip.broadcast
+        .value = @network.address.broadcast
 
       .item-row
         label DHCP End:
@@ -44,13 +44,17 @@
   section
     h2 Addresses
 
-    table
-      thead.-top-4
-        tr
-          th Address
-          th Host
-      tbody
-        - @network.ip.hosts.each do |ip|
-          tr
-            td = ip
-            td
+    .flex.items-start
+      - count = @network.address.hosts.count
+      - 3.times do |n|
+        table.border-collapse.border
+          thead.-top-4
+            tr
+              th.w-28 Address
+              th Host
+          tbody
+            - @network.address.hosts[((count / 3) * n) + n, (count / 3) + 1].each do |address|
+              - ip_lease = @ips.detect { |ip| ip.address == address }
+              tr
+                td = address
+                td = link_to(ip_lease.item, ip_lease.item) if ip_lease

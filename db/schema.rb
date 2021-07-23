@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
     t.integer "qty"
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
-    t.boolean "requestable"
+    t.boolean "requestable", default: true, null: false
     t.text "notes"
     t.bigint "category_id", null: false
     t.bigint "manufacturer_id", null: false
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
     t.datetime "returned_at"
     t.datetime "expected_at"
     t.text "notes"
-    t.boolean "active"
+    t.boolean "active", default: true, null: false
     t.bigint "created_by_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
     t.integer "qty"
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
-    t.boolean "requestable"
+    t.boolean "requestable", default: true, null: false
     t.text "notes"
     t.bigint "category_id", null: false
     t.bigint "manufacturer_id", null: false
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
   create_table "ip_leases", force: :cascade do |t|
     t.bigint "nic_id", null: false
     t.inet "address"
-    t.boolean "active"
+    t.boolean "active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["nic_id"], name: "index_ip_leases_on_nic_id"
@@ -248,7 +248,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
     t.datetime "purchased_at"
-    t.boolean "requestable", default: true
+    t.boolean "requestable", default: true, null: false
     t.text "notes"
     t.bigint "model_id", null: false
     t.bigint "vendor_id"
@@ -270,13 +270,13 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
     t.text "key"
     t.string "licenser_name"
     t.string "licenser_email"
-    t.boolean "reassignable"
+    t.boolean "reassignable", default: false, null: false
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
     t.datetime "purchased_at"
     t.datetime "expires_at"
     t.datetime "terminates_at"
-    t.boolean "maintained"
+    t.boolean "maintained", default: false, null: false
     t.text "notes"
     t.bigint "category_id", null: false
     t.bigint "vendor_id"
@@ -320,7 +320,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
 
   create_table "networks", force: :cascade do |t|
     t.string "name"
-    t.cidr "ip"
+    t.cidr "address"
     t.inet "gateway"
     t.inet "dhcp_start"
     t.inet "dhcp_end"
@@ -329,8 +329,14 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-# Could not dump table "nics" because of following StandardError
-#   Unknown type 'nic_type' for column 'nic_type'
+  create_table "nics", force: :cascade do |t|
+    t.macaddr "mac"
+    t.integer "nic_type", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_nics_on_item_id"
+  end
 
   create_table "orders", force: :cascade do |t|
     t.string "number"
@@ -369,7 +375,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
-    t.boolean "active", default: true
+    t.boolean "active", default: true, null: false
     t.string "employee_number"
     t.string "job_title"
     t.bigint "manager_id"
