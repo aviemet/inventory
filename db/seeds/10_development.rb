@@ -122,7 +122,7 @@ if Rails.env == "development"
 
         if n % 2 != 0
           nic = Nic.create({
-            nic_type: "ethernet",
+            nic_type: 0,
             mac: Faker::Internet.unique.mac_address,
             item: i,
           })

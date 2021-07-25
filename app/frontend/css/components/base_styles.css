@@ -122,8 +122,10 @@
     }
   }
 
-  tr:nth-child(even) {
-    @apply bg-coolGray-100 dark:bg-gray-700;
+  tr {
+    &:nth-child(even) {
+      @apply bg-coolGray-100 dark:bg-gray-700;
+    }
   }
 
   td {
@@ -143,6 +145,16 @@
   }
 
   tbody {
+    &.inverted {
+      tr:nth-child(even) {
+        @apply bg-unset dark:bg-unset;
+      }
+
+      tr:nth-child(odd) {
+        @apply bg-coolGray-100 dark:bg-gray-700;
+      }
+    }
+
     tr {
       &.checked {
         @apply bg-warmGray-100;

@@ -1,26 +1,39 @@
-section
-  h1 Networks
+= view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :networks do |section|
+  = section.title
+    h1.inline-block Networks
+    .inline-block.text-right.align-top = button_link '+ New Network', new_network_path
 
-  table.table-auto data-controller="table"
-    thead
-      tr
-        th Name
-        th IP
-        th Gateway
-        th DHCP Start
-        th DHCP End
-        th VLAN ID
-        th colspan="2"
-    tbody
+  = section.table(scroll: true) do |table|
+    = table.head do |head|
+      = head.row
+        = head.select_all_cell
+        = head.cell :name
+        = head.cell :address, heading: "Network"
+        = head.cell :gateway
+        = head.cell :dhcp_start
+        = head.cell :dhcp_end
+        = head.cell :vlan_id, heading: "VLAN ID"
+        th.table-column-fit.text-center Actions
+
+    = table.body do |body|
       - @networks.each do |network|
-        tr
-          td = link_to network.name, network
-          td = link_to "#{network.address}/#{network.address.prefix}", network
-          td = network.gateway ? link_to(network.gateway, network) : "-"
-          td = network.dhcp_start ? link_to(network.dhcp_start, network) : "-"
-          td = network.dhcp_end ? link_to(network.dhcp_end, network) : "-"
-          td = network.vlan_id ? link_to(network.vlan_id, network) : "-"
-          td = link_to 'Edit', edit_network_path(network)
-          td = link_to 'Destroy', network, method: :delete, data: { confirm: 'Are you sure?' }
+        = body.row
+          = body.select_cell network
+          = render body.cell :name
+            = link_to network.name, network
+          = render body.cell :address
+            = link_to "#{network.address}/#{network.address.prefix}", network
+          = render body.cell :gateway
+            = network.gateway
+          = render body.cell :dhcp_start
+            = network.dhcp_start
+          = render body.cell :dhcp_end
+            = network.dhcp_end
+          = render body.cell :vlan_id
+            = network.vlan_id
+          td nowrap="nowrap"
+            .flex.justify-between.gap-1
+              = view 'buttons/edit', path: edit_network_path(network)
+              = view "buttons/delete", path: network
 
   = link_to 'New Network', new_network_path

@@ -3,12 +3,18 @@ class NetworksController < ApplicationController
   include Sortable
   include Searchable
 
+  before_action :set_view_data, only: [:index, :category]
   before_action :set_network, only: [:show, :edit, :update, :destroy]
 
   # GET /networks
   # GET /networks.json
   def index
-    @networks = searchable_object
+    ap({sort: sort(Network)})
+    @networks = if params[:search]
+                  search(Network, params[:search], params[:page])
+                else
+                  searchable_object.order(sort(Network)).page(params[:page])
+                end
   end
 
   # GET /networks/1
@@ -71,6 +77,14 @@ class NetworksController < ApplicationController
 
   def searchable_object
     @active_company.networks
+  end
+
+  def sortable_fields
+    %w(name address gateway dhcp_start dhcp_end vlan_id).freeze
+  end
+
+  def set_view_data
+    @hideable_fields = { Address: "address",Gateway: "gateway", "DHCP Start": "dhcp_start", "DHCP End": "dhcp_end", "VLAN ID": "vlan_id" }
   end
 
   def set_network

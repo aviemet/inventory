@@ -86,7 +86,7 @@ group :development do
 
   # Live reloading of server code
   gem "guard", "~> 2.16"
-  gem "guard-livereload", "~> 2.5", require: false
+  gem "guard-livereload", "~> 2.5.2", require: false
   gem "rack-livereload", "~> 0.3.17"
 
   # To supress warnings

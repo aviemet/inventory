@@ -50,9 +50,9 @@ const theme = {
         dark: colors.emerald["700"]
       },
       info: {
-        DEFAULT: colors.lightBlue["400"],
-        hover: colors.lightBlue["600"],
-        light: colors.lightBlue["200"],
+        DEFAULT: colors.sky["400"],
+        hover: colors.sky["600"],
+        light: colors.sky["200"],
         dark: colors.blue["800"]
       },
       warning: {
@@ -102,6 +102,9 @@ const theme = {
         2: "2 1 0%",
         3: "3 1 0%",
         4: "4 1 0%"
+      },
+      backgroundColor: {
+        unset: "unset"
       }
     }
   },

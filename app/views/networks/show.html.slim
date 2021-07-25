@@ -13,7 +13,7 @@
 
       .item-row
         label Number of Hosts
-        .value = @network.address.hosts.count
+        .value = number_with_delimiter(@network.address.hosts.count)
 
       .item-row
         label Network Address:
@@ -44,15 +44,15 @@
   section
     h2 Addresses
 
-    .flex.items-start
+    .flex.flex-wrap.items-start
       - count = @network.address.hosts.count
       - 3.times do |n|
-        table.border-collapse.border
-          thead.-top-4
+        table.border-collapse.border.w-full.md:w-auto.md:flex-1.md:text-sm
+          thead.-top-4 class=("hidden md:table-header-group" if n > 0)
             tr
               th.w-28 Address
               th Host
-          tbody
+          tbody class=("inverted" if n.odd?)
             - @network.address.hosts[((count / 3) * n) + n, (count / 3) + 1].each do |address|
               - ip_lease = @ips.detect { |ip| ip.address == address }
               tr

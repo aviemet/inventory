@@ -7,9 +7,9 @@ div data-controller="nested-form"
     - if legend
       legend = legend
 
-    - field.each do
+    - field.each do |f|
       .fields
-        = render partial: "nic_form", locals: { form: form, field: field }
+        = render partial: "nic_form", locals: { form: form, field: f }
 
   div data-nested-form-target="add_field"
     button type="button" data-action="nested-form#addAssociation" +

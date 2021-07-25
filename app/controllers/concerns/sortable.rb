@@ -6,8 +6,12 @@ module Sortable
   def sort(model)
     return unless sortable_fields.include?(params[:sort])
 
+    sort_str = "#{params[:sort]}"
     # Force case insensitive sorting if field type is a string
-    %w(string text).freeze.include?(field_type(model, params[:sort])) ? "lower(#{params[:sort]}) #{direction}" : params[:sort]
+    if %i(string text).freeze.include?(field_type(model, params[:sort]))
+      sort_str = "lower(#{sort_str})"
+    end
+    "#{sort_str} #{direction}"
   end
 
   def direction

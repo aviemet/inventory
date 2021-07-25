@@ -1,9 +1,5 @@
 class Nic < ApplicationRecord
-  enum nic_type: {
-    ethernet: 0,
-    wifi: 1,
-    fiber: 2,
-  }
+  enum nic_type: [:ethernet, :wifi, :fiber]
 
   audited
 

@@ -9,5 +9,5 @@
     = nic_form.simple_fields_for :ips, IpLease.new do |ip_form|
       = ip_form.input :address, label: "IP Address"
 
-  = nic_form.input :nic_type, collection: Nic.nic_types, searchable: false
+  = nic_form.input :nic_type, collection: Nic.nic_types.keys.map{ |k| [k.capitalize, k] }.to_h, searchable: false
   = nic_form.input :mac
