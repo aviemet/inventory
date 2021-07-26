@@ -1,12 +1,14 @@
-section.h-full.flex.flex-col data-controller="table" *{"data-table-preferences-value" => table_preferences, "data-table-name-value": name }
-  .flex
+section.h-full.flex.flex-col data-controller="table" *{'data-table-preferences-value' => table_preferences, 'data-table-name-value': name }
+  .flex.flex-wrap
     .flex-1
-      = title
+      h1.inline-block.align-text-top.md:align-middle
+        = title
+    = button_link
 
-    .flex-1
-      form autocomplete="off" data-turbo-frame="table" data-table-target="filterForm"
-        input type="text" name="search" data-action="keydown->table#listenKeyDown keyup->table#filterResults" data-table-target="filterInput" value=params[:search]
-    = render Tables::ColumnPicker::ColumnPickerComponent.new(hideable_fields: hideable_fields)
+    .flex.flex-1.flex-basis-full.md:flex-basis-0.order-3.mb-1.md:m-1
+      form.flex-1 autocomplete="off" data-turbo-frame="table" data-table-target="filterForm"
+        input.rounded-l type="text" name="search" data-action="keydown->table#listenKeyDown keyup->table#filterResults" data-table-target="filterInput" value=params[:search]
+      = render Tables::ColumnPicker::ColumnPickerComponent.new(hideable_fields: hideable_fields)
 
   = table
 

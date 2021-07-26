@@ -4,7 +4,7 @@
   }
 
   body {
-    /* font-size: clamp(0.85rem, 1.1vw, 0.95rem); */
+    font-size: clamp(0.875rem, 1.25vw, 1rem);
   }
 
   h1 {
@@ -249,7 +249,7 @@
   button,
   .button,
   input[type="submit"] {
-    @apply font-bold cursor-pointer;
+    @apply font-bold leading-6 cursor-pointer;
     @apply border rounded;
     @apply py-2 px-3;
 

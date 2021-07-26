@@ -1,7 +1,8 @@
 = view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :vendors do |section|
   = section.title
-    h1.inline-block Vendors
-    .inline-block.text-right.align-top = button_link '+ New Vendor', new_vendor_path
+    | Vendors
+  = section.button_link
+    = button_link '+ New Vendor', new_vendor_path
 
   = section.table(scroll: true) do |table|
     = table.head do |head|

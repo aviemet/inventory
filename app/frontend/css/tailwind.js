@@ -101,10 +101,10 @@ const theme = {
       flex: {
         2: "2 1 0%",
         3: "3 1 0%",
-        4: "4 1 0%"
+        4: "4 1 0%",
       },
       backgroundColor: {
-        unset: "unset"
+        unset: "unset",
       }
     }
   },
@@ -131,6 +131,23 @@ const theme = {
       }))
 
       addUtilities(individualBorderColors)
+
+      const flexBasis = {
+        ".flex-basis-auto": {
+          "flex-basis": "auto"
+        },
+        ".flex-basis-0": {
+          "flex-basis": "0%"
+        },
+        ".flex-basis-half": {
+          "flex-basis": "50%"
+        },
+        ".flex-basis-full": {
+          "flex-basis": "100%"
+        },
+      }
+
+      addUtilities(flexBasis, ["responsive"])
     }),
   ],
 }

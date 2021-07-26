@@ -1,7 +1,8 @@
 = view 'tables/section', table_preferences: current_user.table_preferences do |section|
   = section.title
-      h1.inline-block Accessories
-      .inline-block.text-right.align-top = button_link '+ New Accessory', new_accessory_path
+    | Accessories
+  = section.button_link
+    = button_link '+ New Accessory', new_accessory_path
 
   = section.table(scroll: true) do |table|
     = table.head do |head|

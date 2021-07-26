@@ -1,7 +1,8 @@
 = view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields do |section|
   = section.title
-    h1.inline-block Consumables
-    .inline-block.text-right.align-top = button_link '+ New Consumable', new_consumable_path
+    | Consumables
+  = section.button_link
+    = button_link '+ New Consumable', new_consumable_path
 
   = section.table(scroll: true) do |table|
     = table.head do |head|
@@ -43,6 +44,5 @@
             .flex.justify-between.gap-1
               = view 'buttons/assignment', asset: consumable
               = view 'buttons/edit', path: edit_consumable_path(consumable)
-              = view "buttons/delete", path: consumable
 
   = link_to 'New Consumable', new_consumable_path

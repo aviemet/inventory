@@ -1,7 +1,8 @@
 = view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :networks do |section|
   = section.title
-    h1.inline-block Networks
-    .inline-block.text-right.align-top = button_link '+ New Network', new_network_path
+    | Networks
+  = section.button_link
+    = button_link '+ New Network', new_network_path
 
   = section.table(scroll: true) do |table|
     = table.head do |head|
