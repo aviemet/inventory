@@ -1,11 +1,13 @@
 = simple_form_for order do |form|
   = view "forms/errors", record: order
 
-  = form.error_notification message: form.object.errors[:base].to_sentence
-  = form.input :user_id, as: :hidden
-  = form.input :vendor_id, as: :select, prompt: "-- Vendor --"
-  = form.input :ordered_at, flatpickr: { min_date: Time.zone.now }
+  = form.association :vendor, collection: "vendors"
   = form.input :number, label: "Order Number"
-  = form.input :shipping
+
+  details
+    summary Item 1
+    - item = Item.new
+    = simple_fields_for :purchases, item do |item_form|
+      = render partial: "items/inputs", locals: { form: item_form, item: item, nics: false }
 
   = form.submit

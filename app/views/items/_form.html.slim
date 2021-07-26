@@ -1,20 +1,10 @@
+- item ||= Item.new
+
 = simple_form_for item do |form|
   = view "forms/errors", record: item
 
   = view "forms/company_nested_input", form: form, company: item.company, companies: @companies, active_company: @active_company
 
-  = form.input :name
-  = form.input :asset_tag
-  = form.input :serial
-  = form.association :model, collection: "models"
-  = form.association :vendor, collection: "vendors"
-  = form.input :cost
-  = form.input :purchased_at
-  = form.association :default_location, collection: "locations"
-
-  = view "forms/nested_partial", partial: "nic_form", form: form, field: item.nics, legend: "NICs and Network Addresses"
-
-  = form.input :notes
-  = form.input :requestable
+  = render partial: "items/inputs", locals: { form: form, item: item }
 
   = form.submit

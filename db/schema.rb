@@ -341,10 +341,16 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
   create_table "orders", force: :cascade do |t|
     t.string "number"
     t.bigint "user_id", null: false
+    t.text "notes"
+    t.datetime "submitted_at"
     t.datetime "ordered_at"
+    t.datetime "expected_at"
     t.datetime "delivered_at"
     t.datetime "canceled_at"
     t.datetime "returned_at"
+    t.string "discount_decription"
+    t.string "returned_reason"
+    t.string "canceled_reason"
     t.integer "shipping_cents"
     t.string "shipping_currency", default: "USD", null: false
     t.integer "tax_cents"
@@ -399,12 +405,14 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
   create_table "purchases", force: :cascade do |t|
     t.string "purchasable_type", null: false
     t.bigint "purchasable_id", null: false
+    t.bigint "order_id"
     t.integer "cost_cents", default: 0, null: false
     t.string "cost_currency", default: "USD", null: false
     t.integer "qty"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_purchases_on_order_id"
     t.index ["purchasable_type", "purchasable_id"], name: "index_purchases_on_purchasable_type_and_purchasable_id"
   end
 
@@ -541,6 +549,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
   add_foreign_key "people", "people", column: "manager_id"
   add_foreign_key "phones", "categories"
   add_foreign_key "phones", "contacts"
+  add_foreign_key "purchases", "orders"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
   add_foreign_key "warranties", "items"

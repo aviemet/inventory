@@ -1,6 +1,8 @@
 class Component < ApplicationRecord
   include Ownable
   include Assignable::Quantity
+  include Purchasable
+  include Fieldable
 
   audited
 

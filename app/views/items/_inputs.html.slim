@@ -1,0 +1,14 @@
+= form.input :name
+= form.input :asset_tag
+= form.input :serial
+= form.association :model, collection: "models"
+= form.association :vendor, collection: "vendors"
+= form.input :cost
+= form.input :purchased_at
+= form.association :default_location, collection: "locations"
+
+- unless defined?(nics) && nics == false
+  = view "forms/nested_partial", partial: "items/nic_inputs", form: form, field: item.nics, legend: "NICs and Network Addresses"
+
+= form.input :notes
+= form.input :requestable

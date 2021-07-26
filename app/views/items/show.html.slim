@@ -51,7 +51,8 @@ section.container.relative
 
       .item-row
         label Purchase Date:
-        .value = I18n.l(@item.purchased_at, format: :long) unless @item.purchased_at.nil?
+        .value
+          = date_tag @item.purchased_at
 
       .item-row
         label Vendor:

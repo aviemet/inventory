@@ -1,6 +1,8 @@
 class Consumable < ApplicationRecord
   include Ownable
   include Assignable::Consume
+  include Purchasable
+  include Fieldable
 
   audited
 
