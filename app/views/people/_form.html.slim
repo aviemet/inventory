@@ -1,11 +1,12 @@
-= simple_form_for person, html: { "data-controller": :personform, "data-personform-departments-url": "/companies/:id/departments.json" } do |form|
+= simple_form_for person, html: { 'data-controller': :personform, 'data-personform-departments-url': '/companies/:id/departments.json' } do |form|
   = view "forms/errors", record: person
 
   = form.input :first_name
-  = form.input :department
-  = form.input :manager
-  = form.input :job_title
   = form.input :middle_name
   = form.input :last_name
+  = form.input :employee_number
+  = form.input :job_title
+  = form.input :department, as: :select, collection: "departments"
+  = form.association :manager, collection: "people"
 
   = form.submit

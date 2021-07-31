@@ -1,10 +1,18 @@
 class ContractsController < ApplicationController
+  include Sortable
+  include Searchable
+
   before_action :set_contract, only: [:show, :edit, :update, :destroy]
+  before_action :set_form_models, only: [:edit, :new, :update, :create]
 
   # GET /contracts
   # GET /contracts.json
   def index
-    @contracts = Contract.all
+    @contracts = if params[:search]
+               search(Contract, params[:search], params[:page])
+             else
+               searchable_object.order(sort(Contract)).page(params[:page])
+             end
   end
 
   # GET /contracts/1
@@ -63,8 +71,24 @@ class ContractsController < ApplicationController
 
   private
 
+  def searchable_object
+    @active_company.contracts.includes_associated
+  end
+
+  def sortable_fields
+    %w(name begins_at ends_at vendors.name categories.name).freeze
+  end
+
+  def set_view_data
+    @hideable_fields = {"Start Date": "begins_at", "End Date": "ends_at", Vendor: "vendors.name", Category: "categories.name"}
+  end
+
   def set_contract
     @contract = Contract.find(params[:id])
+  end
+
+  def set_form_models
+    @vendors = @active_company.vendors
   end
 
   def contract_params

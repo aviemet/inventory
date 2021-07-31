@@ -24,7 +24,8 @@ class Company < ApplicationRecord
     people: :Person,
     purchases: :Purchase,
     vendors: :Vendor,
-    manufacturers: :Manufacturer
+    manufacturers: :Manufacturer,
+    orders: :Order
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model.to_s
   end

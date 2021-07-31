@@ -1,13 +1,21 @@
 class PeopleController < ApplicationController
+  include OwnableConcern
+  include Sortable
+  include Searchable
   # load_and_authorize_resource
+
+  before_action :set_view_data, only: [:index, :category]
   before_action :set_person, only: [:show, :edit, :update, :destroy]
-  before_action :set_companies, only: [:new, :edit]
-  before_action :set_people, only: [:new, :edit]
+  before_action :set_form_models, only: [:edit, :new]
 
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    @people = if params[:search]
+               search(Person, params[:search], params[:page])
+             else
+               searchable_object.order(sort(Person)).page(params[:page])
+             end
   end
 
   # GET /people/1
@@ -67,17 +75,26 @@ class PeopleController < ApplicationController
 
   private
 
+  def searchable_object
+    @active_company.people.includes_associated
+  end
+
+  def sortable_fields
+    %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+  end
+
+  def set_view_data
+    @hideable_fields = {Model: "models.name", "Asset Tag": "asset_tag", Serial: "serial", Cost: "cost", "Purchase Date": "purchased_at", Requestable: "requestable", Category: "categories.name", Manufacturer: "manufacturers.name", "Model Number": "models.model_number", Vendor: "vendors.name", Department: "departments.name"}
+  end
+
   def set_person
-    @person = Person.find(params[:id])
-    @person.build_owner if !@person.owner
+    @person = searchable_object.find(params[:id])
+    @person.build_owner if !@person.owner # TODO: Why is this here?
   end
 
-  def set_companies
-    @companies = Company.accessible_by(current_ability)
-  end
-
-  def set_people
-    @people = Person.where.not(id: current_user)
+  def set_form_models
+    @people = searchable_object.where.not(id: current_user)
+    @departments = @active_company.departments
   end
 
   def person_params

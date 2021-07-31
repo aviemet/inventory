@@ -16,7 +16,7 @@
         = head.cell "manufacturers.name", heading: "Manufacturer"
         = head.cell "vendors.name", heading: "Vendor"
         = head.cell :cost, sort: :cost_cents
-        = head.cell "departments.name", heading: Department
+        = head.cell "departments.name", heading: "Department"
         th.table-column-fit.text-center Actions
 
     = table.body do |body|
@@ -36,11 +36,11 @@
           = render body.cell "manufacturers.name"
             = link_to(item.manufacturer, item.manufacturer)
           = render body.cell "vendors.name"
-            = item.vendor ? link_to(item.vendor, item.vendor) : ''
+            = link_to(item.vendor, item.vendor) if item.vendor
           = render body.cell :cost
             = item.cost.format
           = render body.cell "departments.name"
-            = item.department ? link_to(item.department, item.department) : ''
+            = link_to(item.department, item.department) if item.department
           td nowrap="nowrap"
             .flex.justify-between.gap-1
               = view 'buttons/assignment', asset: item

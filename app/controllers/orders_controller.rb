@@ -1,10 +1,18 @@
 class OrdersController < ApplicationController
+  include Sortable
+  include Searchable
+
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_view_data, only: [:index, :category]
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = if params[:search]
+      search(Order, params[:search], params[:page])
+    else
+      searchable_object.order(sort(Order)).page(params[:page])
+    end
   end
 
   # GET /orders/1
@@ -64,11 +72,23 @@ class OrdersController < ApplicationController
 
   private
 
+  def searchable_object
+    @active_company.orders.includes_associated
+  end
+
+  def sortable_fields
+    %w(number users.person.full_name submitted_at ordered_at delivered_at canceled_at returned_at vendors.name).freeze
+  end
+
+  def set_view_data
+    @hideable_fields = {"Purchased By": "users.person.full_name", "Submitted At": "submitted_at", "Ordered At": "ordered_at", "Delivered At": "delivered_at", "Canceled At": "canceled_at", "Returned At": "returned_at", Vendor: "vendors.name"}
+  end
+
   def set_order
-    @order = Order.find(params[:id])
+    @order = searchable_object.find(params[:id])
   end
 
   def order_params
-    params.require(:order).permit(:number, :user_id, :ordered_at, :delivered_at, :canceled_at, :returned_at, :shipping, :vendor_id)
+    params.require(:order).permit(:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping, :tax, :discount, :vendor_id)
   end
 end

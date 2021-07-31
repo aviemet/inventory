@@ -115,8 +115,8 @@ class ItemsController < ApplicationController
 
   def set_form_models
     @models = Model.all
-    @vendors = Vendor.all
-    @locations = Location.all
+    @vendors = @active_company.vendors
+    @locations = @active_company.locations
     @companies = current_user.companies
   end
 

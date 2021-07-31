@@ -1,21 +1,45 @@
-section
-  h1 People
+= view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :people do |section|
+  = section.title
+    | People
+  = section.button_link
+    = button_link '+ New Person', new_person_path
 
-  table.table-auto data-controller="table"
-    thead
-      tr
-        th Name
-        th Department
-        th Items
-        th Actions
-    tbody
+  = section.table(scroll: true) do |table|
+    = table.head do |head|
+      = head.row
+        = head.select_all_cell
+        = head.cell :first_name
+        = head.cell :last_name
+        = head.cell :employee_number
+        = head.cell :department
+        = head.cell :job_title
+        = head.cell :manager
+        = head.cell "items.count", heading: "Assigned Items"
+        th.table-column-fit.text-center Actions
+    = table.body do |body|
       - @people.each do |person|
-        tr
-          td = link_to "#{person.first_name} #{person.last_name}", person
-          td = link_to person.department.name, company_department_path(person.company, person.department) if person.department
-          td = person.items.count
-          td
-            = view "buttons/edit", path: edit_person_path(person)
-            = view "buttons/delete", path: person
+        = body.row
+          = body.select_cell person
+          = render body.cell :first_name
+            = link_to person.first_name, person
+          = render body.cell :last_name
+            = link_to person.last_name, person
+          = render body.cell :employee_number
+            = link_to(person.employee_number, person) if person.employee_number
+          = render body.cell :department
+            = link_to person.department.name, company_department_path(person.company, person.department) if person.department
+          = render body.cell :job_title
+            = person.job_title
+          = render body.cell :manager
+            = link_to(person.manager.full_name, person.manager) if person.manager
+          = render body.cell "items.count"
+            = person.items.count
+          td nowrap="nowrap"
+            .flex.justify-between.gap-1
+              = view 'buttons/edit', path: edit_person_path(person)
+              = view "buttons/delete", path: person
 
-  = link_to 'New Person', new_person_path
+    = section.pagination
+      .flex.pt-3
+        .flex-1 = page_entries_info @people, entry_name: "person"
+        .flex-1 = paginate @people

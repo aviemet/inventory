@@ -41,11 +41,11 @@
           = render body.cell :cost
             = license.cost.format
           = render body.cell :purchased_at
-            = license.purchased_at
+            = view "tags/date_time", date: license.purchased_at, format: :short
           = render body.cell :expires_at
-            = license.expires_at
+            = view "tags/date_time", date: license.expires_at, format: :short
           = render body.cell :terminates_at
-            = license.terminates_at
+            = view "tags/date_time", date: license.terminates_at, format: :short
           = render body.cell :maintained
             = license.maintained
           = render body.cell "categories.name"

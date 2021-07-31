@@ -171,8 +171,10 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
   end
 
   create_table "contracts", force: :cascade do |t|
-    t.text "description"
+    t.string "name"
     t.text "notes"
+    t.datetime "begins_at"
+    t.datetime "ends_at"
     t.bigint "vendor_id", null: false
     t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
