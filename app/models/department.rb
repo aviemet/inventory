@@ -2,6 +2,17 @@ class Department < ApplicationRecord
   include Contactable
   include Ownable
   include AssignToable
+  include PgSearch::Model
+
+  pg_search_scope(
+    :search, 
+    against: [:name], associated_against: { 
+      location: [:name]
+    }, using: {
+      tsearch: { prefix: true }, 
+      trigram: {}
+    }
+  )
 
   slug :name
 

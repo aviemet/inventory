@@ -1,7 +1,5 @@
 webpack-dev-server: bin/webpack-dev-server
 
-solr: rails sunspot:solr:run
-
 rails: rails s -b 0.0.0.0 -p 3000
 
 guard: bundle exec guard -g livereload -i

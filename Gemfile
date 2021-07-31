@@ -19,8 +19,7 @@ gem "active_type", "~> 1.3"
 gem "audited", "~> 4.10"
 
 # Search
-gem "sunspot_rails", "~> 2.5"
-gem "sunspot_solr", "~> 2.5"
+gem "pg_search", "~> 2.3"
 gem "progress_bar", "~> 1.3"
 
 # Assets

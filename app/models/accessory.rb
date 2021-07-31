@@ -3,6 +3,20 @@ class Accessory < ApplicationRecord
   include Assignable::Quantity
   include Purchasable
   include Fieldable
+  include PgSearch::Model
+
+  pg_search_scope(
+    :search, 
+    against: [:name, :serial, :model_number], associated_against: {
+      vendor: [:name],
+      default_location: [:name],
+      category: [:name],
+      manufacturer: [:name]
+    }, using: {
+      tsearch: { prefix: true }, 
+      trigram: {}
+    }
+  )
 
   resourcify
   audited
@@ -13,8 +27,6 @@ class Accessory < ApplicationRecord
   belongs_to :vendor
   belongs_to :manufacturer
   belongs_to :default_location, class_name: "Location", required: false
-
-  # Sunspot search #
 
   def self.associated_models
     [:category, :assignments, :department, :vendor, :manufacturer]

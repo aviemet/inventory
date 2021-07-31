@@ -1,6 +1,16 @@
 class Vendor < ApplicationRecord
   include Contactable
   include Ownable
+  include PgSearch::Model
+
+  pg_search_scope(
+    :search, 
+    against: [:name, :url],
+    using: {
+      tsearch: { prefix: true }, 
+      trigram: {}
+    }
+  )
 
   slug :name
 

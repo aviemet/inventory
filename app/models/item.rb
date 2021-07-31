@@ -4,6 +4,21 @@ class Item < ApplicationRecord
   include AssignToable
   include Purchasable
   include Fieldable
+  include PgSearch::Model
+
+  pg_search_scope(
+    :search, 
+    against: [:name, :asset_tag, :serial, :cost_cents], associated_against: { 
+      model: [:name, :model_number],
+      vendor: [:name],
+      default_location: [:name],
+      category: [:name],
+      manufacturer: [:name]
+    }, using: {
+      tsearch: { prefix: true }, 
+      trigram: {}
+    }
+  )
 
   resourcify
   audited
@@ -27,6 +42,7 @@ class Item < ApplicationRecord
 
   scope :no_nics, -> { includes(:nics).where(nics: { id: nil }) }
 
+  # Update Item name if changed during assignment
   def before_assignment(_assignment, params)
     name = params&.[](:assignment)&.[](:item)&.[](:name)
     return if name.nil?
@@ -34,55 +50,7 @@ class Item < ApplicationRecord
     self.update(name: name)
   end
 
-  # Sunspot search #
-
   def self.associated_models
     [:category, :model, :assignments, :department, :vendor, :manufacturer]
-  end
-
-  def self.highlight_fields
-    [:name, :asset_tag, :serial, :notes, :category, :model, :department, :vendor, :manufacturer]
-  end
-
-  searchable do
-    text :name, stored: true
-    string(:sort_name) { self.name&.downcase }
-
-    text :asset_tag, stored: true
-    string(:sort_asset_tag) { self.asset_tag&.downcase }
-
-    text :serial, stored: true
-    string(:sort_serial) { self.serial&.downcase }
-
-    text :notes, stored: true
-    string(:sort_notes) { self.notes&.downcase }
-
-    integer :cost_cents, stored: true
-    string(:sort_cost_cents) { self.cost_cents }
-
-    text :model, stored: true do
-      model.name if self.model
-    end
-    string(:sort_model) { self.model&.name&.downcase }
-
-    text :department, stored: true do
-      department.name if self.department
-    end
-    string(:sort_department) { self.department&.name&.downcase }
-
-    text :manufacturer, stored: true do
-      manufacturer.name if self.manufacturer
-    end
-    string(:sort_manufacturer) { self.manufacturer&.name&.downcase }
-
-    text :vendor, stored: true do
-      vendor.name if self.vendor
-    end
-    string(:sort_vendor) { self.vendor&.name&.downcase }
-
-    text :category, stored: true do
-      category.name if self.category
-    end
-    string(:sort_category) { self.category&.name&.downcase }
   end
 end

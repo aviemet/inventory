@@ -3,6 +3,18 @@ class Person < ApplicationRecord
   include Contactable
   include AssignToable
   include Fieldable
+  include PgSearch::Model
+
+  pg_search_scope(
+    :search, 
+    against: [:first_name, :middle_name, :last_name, :employee_number, :job_title], associated_against: {
+      manager: [:first_name, :middle_name, :last_name, :employee_number, :job_title],
+      user: [:email]
+    }, using: {
+      tsearch: { prefix: true }, 
+      trigram: {}
+    }
+  )
   
   audited
 
@@ -24,31 +36,8 @@ class Person < ApplicationRecord
     :first_name
   end
 
-  # Sunspot search #
-
   def self.associated_models
     [:user, :manager, :department]
-  end
-
-  searchable do
-    text :first_name, stored: true
-    string(:sort_first_name) { self.first_name&.downcase }
-
-    text :middle_name, stored: true
-    string(:sort_middle_name) { self.middle_name&.downcase }
-
-    text :last_name, stored: true
-    string(:sort_last_name) { self.last_name&.downcase }
-
-    text :employee_number, stored: true
-
-    text :job_title, stored: true
-    string(:sort_job_title) { self.job_title&.downcase }
-
-    text :manager, stored: true do
-      manager.full_name if self.manager
-    end
-    string(:sort_manager) { self.manager&.full_name&.downcase }
   end
 
   private

@@ -3,6 +3,20 @@ class Component < ApplicationRecord
   include Assignable::Quantity
   include Purchasable
   include Fieldable
+  include PgSearch::Model
+
+  pg_search_scope(
+    :search, 
+    against: [:name, :model_number], associated_against: { 
+      vendor: [:name],
+      default_location: [:name],
+      category: [:name],
+      manufacturer: [:name]
+    }, using: {
+      tsearch: { prefix: true }, 
+      trigram: {}
+    }
+  )
 
   audited
 
@@ -16,48 +30,7 @@ class Component < ApplicationRecord
   validates :qty, numericality: { greater_than_or_equal_to: 0 }
   validates_presence_of :name
 
-  # Sunspot search #
-
   def self.associated_models
     [:manufacturer, :category, :vendor]
-  end
-
-  def self.highlight_fields
-    [:name, :model_number, :manufacturer, :category, :vendor]
-  end
-
-  searchable do
-    text :name, stored: true
-    string(:sort_name) { self.name&.downcase }
-
-    text :model_number, stored: true
-    string(:sort_model_number) { self.model_number&.downcase }
-
-    integer :min_qty, stored: true
-    string(:sort_min_qty) { self.min_qty }
-
-    integer :qty, stored: true
-    string(:sort_qty) { self.qty }
-
-    text :notes, stored: true
-    string(:sort_notes) { self.notes&.downcase }
-
-    integer :cost_cents, stored: true
-    string(:sort_cost_cents) { self.cost_cents }
-
-    text :manufacturer, stored: true do
-      manufacturer.name if self.manufacturer
-    end
-    string(:sort_manufacturer) { self.manufacturer&.name&.downcase }
-
-    text :category, stored: true do
-      category.name if self.category
-    end
-    string(:sort_category) { self.category&.name&.downcase }
-
-    text :vendor, stored: true do
-      vendor.name if self.vendor
-    end
-    string(:sort_vendor) { self.vendor&.name&.downcase }
   end
 end

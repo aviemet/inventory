@@ -30,34 +30,11 @@ module Searchable
     page = params[:page] || 1
     return searchable_object.order(sort(model)).page(page) unless terms
 
-    searchable_object.search do
-      if model.associated_models
-        data_accessor_for(model).include = model.associated_models
-      end
-      fulltext terms do
-        query_phrase_slop 1
-        model.highlight_fields&.each do |field|
-          highlight field
-        end
-      end
-      paginate page: page
-      order_by(sunspot_sort_param, direction) if sortable_fields&.include?(params[:sort])
-    end.results
-  end
-
-  def sunspot_sort_param
-    return "" unless sortable_fields&.include?(params[:sort])
-
-    parts = params[:sort].split(".")
-    sort = parts.length > 1 ? parts[0].singularize : params[:sort]
-    "sort_#{sort}"
+    ids = searchable_object.search(terms).pluck(:id)
+    searchable_object.where(id: ids).order(sort(model)).page(page)
   end
 
   protected
-
-  def _unfiltered_results
-
-  end
 
   def sort(model)
     return unless sortable_fields.include?(params[:sort])

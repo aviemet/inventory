@@ -1,5 +1,15 @@
 class Network < ApplicationRecord
   include Ownable
+  include PgSearch::Model
+
+  pg_search_scope(
+    :search, 
+    against: [:name, :address, :gateway, :vlan_id], 
+    using: {
+      tsearch: { prefix: true }, 
+      trigram: {}
+    }
+  )
 
   audited
 
