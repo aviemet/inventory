@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   include OwnableConcern
-  include Sortable
   include Searchable
 
   before_action :set_view_data, only: [:index, :category]
@@ -106,11 +105,7 @@ class ItemsController < ApplicationController
     # if current_user[:table_preferences]["items"]
     #   Item.ignored_columns = current_user[:table_preferences]["items"].map{ |k, v| k unless v }
     # end
-    @items = if params[:search]
-               search(Item, params[:search], params[:page])
-             else
-               searchable_object.order(sort(Item)).page(params[:page])
-             end
+    @items = search(Item)
   end
 
   def set_form_models

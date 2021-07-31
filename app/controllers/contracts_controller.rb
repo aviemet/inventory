@@ -1,5 +1,4 @@
 class ContractsController < ApplicationController
-  include Sortable
   include Searchable
 
   before_action :set_contract, only: [:show, :edit, :update, :destroy]
@@ -92,6 +91,6 @@ class ContractsController < ApplicationController
   end
 
   def contract_params
-    params.require(:contract).permit(:contract_type_id, :vendor_id, :system, :description, :notes)
+    params.require(:contract).permit(:name, :begins_at, :ends_at, :notes, :category_id, :vendor_id)
   end
 end

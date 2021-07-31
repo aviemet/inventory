@@ -1,6 +1,5 @@
 class PeopleController < ApplicationController
   include OwnableConcern
-  include Sortable
   include Searchable
   # load_and_authorize_resource
 

@@ -1,6 +1,5 @@
 class ComponentsController < ApplicationController
   include OwnableConcern
-  include Sortable
   include Searchable
 
   before_action :set_component, only: %i[show edit update destroy]

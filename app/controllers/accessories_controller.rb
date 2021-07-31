@@ -1,10 +1,18 @@
 class AccessoriesController < ApplicationController
+  include OwnableConcern
+  include Searchable
+
+  before_action :set_view_data, only: [:index, :category]
   before_action :set_accessory, only: [:show, :edit, :update, :destroy]
 
   # GET /accessories
   # GET /accessories.json
   def index
-    @accessories = @active_company.accessories.includes_associated.order(order_by).page(params[:page])
+    @accessories = if params[:search]
+                     search(Accessory, params[:search], params[:page])
+                   else
+                     searchable_object.order(sort(Accessory)).page(params[:page])
+                   end
   end
 
   # GET /accessories/1
@@ -63,16 +71,20 @@ class AccessoriesController < ApplicationController
 
   private
 
-  SORTABLE_FIELDS = %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+  def searchable_object
+    @active_company.accessories.includes_associated
+  end
+  
+  def sortable_fields
+    %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+  end
 
-  def order_by
-    return false unless SORTABLE_FIELDS.include?(params[:sort])
-
-    "#{params[:sort]} #{%w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'}"
+  def set_view_data
+    @hideable_fields = {Model: "models.name", Serial: "serial", Cost: "cost", "Purchase Date": "purchased_at", Requestable: "requestable", Category: "categories.name", Manufacturer: "manufacturers.name", "Model Number": "models.model_number", Vendor: "vendors.name", Department: "departments.name"}
   end
 
   def set_accessory
-    @accessory = Accessory.find(params[:id])
+    @accessory = searchable_object.find(params[:id])
   end
 
   def accessory_params

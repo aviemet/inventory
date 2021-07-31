@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_211443) do
 
   create_table "contracts", force: :cascade do |t|
     t.string "name"
+    t.string "number"
     t.text "notes"
     t.datetime "begins_at"
     t.datetime "ends_at"

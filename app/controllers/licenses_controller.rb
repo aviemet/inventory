@@ -1,6 +1,5 @@
 class LicensesController < ApplicationController
   include OwnableConcern
-  include Sortable
   include Searchable
 
   before_action :set_license, only: [:show, :edit, :update, :destroy]

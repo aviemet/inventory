@@ -1,5 +1,4 @@
 class VendorsController < ApplicationController
-  include Sortable
   include Searchable
 
   before_action :set_vendor, only: [:show, :edit, :update, :destroy]

@@ -14,5 +14,9 @@ class Accessory < ApplicationRecord
   belongs_to :manufacturer
   belongs_to :default_location, class_name: "Location", required: false
 
-  scope :includes_associated, ->{ includes([:category, :assignments, :department, :vendor, :manufacturer]) }
+  # Sunspot search #
+
+  def self.associated_models
+    [:category, :assignments, :department, :vendor, :manufacturer]
+  end
 end

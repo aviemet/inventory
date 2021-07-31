@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  include Sortable
   include Searchable
 
   before_action :set_order, only: [:show, :edit, :update, :destroy]

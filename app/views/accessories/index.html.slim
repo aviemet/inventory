@@ -1,4 +1,4 @@
-= view 'tables/section', table_preferences: current_user.table_preferences do |section|
+= view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :accessories do |section|
   = section.title
     | Accessories
   = section.button_link

@@ -3,13 +3,13 @@ class Contract < ApplicationRecord
 
   audited
 
-  belongs_to :contract_type
+  belongs_to :category
   belongs_to :vendor
 
   # Sunspot search #
 
   def self.associated_models
-    [:vendor, :contract_type]
+    [:vendor, :category]
   end
 
 end

@@ -14,6 +14,7 @@ class CollectionSelectInput < SimpleForm::Inputs::CollectionSelectInput
     ap({builder: @builder})
     ap({reflection: reflection})
     ap({attribute_name: attribute_name})
+    ap({value: @builder&.object.try(attribute_name)})
 
     @builder.template.render(
       Forms::DropdownSearch::DropdownSearchComponent.new(

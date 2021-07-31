@@ -30,8 +30,8 @@ export default class extends Controller {
   renderAssigntoableDropdown(e) {
     if(e.target.tagName !== "INPUT") return
 
-    this.dropdownSearchController.inputTarget.value = undefined
-    this.dropdownSearchController.hiddenInputTarget.value = undefined
+    this.dropdownSearchController.inputTarget.value = ""
+    this.dropdownSearchController.hiddenInputTarget.value = ""
 
     this._renderDropdown(e.target.value)
   }

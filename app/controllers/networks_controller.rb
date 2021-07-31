@@ -1,6 +1,5 @@
 class NetworksController < ApplicationController
   include OwnableConcern
-  include Sortable
   include Searchable
 
   before_action :set_view_data, only: [:index, :category]

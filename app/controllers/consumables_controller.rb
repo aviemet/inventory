@@ -1,6 +1,5 @@
 class ConsumablesController < ApplicationController
   include OwnableConcern
-  include Sortable
   include Searchable
 
   before_action :set_consumable, only: %i[show edit use update destroy]

@@ -8,7 +8,7 @@
       wrapper: false,
       input_html: { data: { 'dropdown-search-target': "hiddenInput" } } }
   - else
-    = hidden_field_tag name, @value, data: { target: "dropdown-search.hiddenInput" }
+    = hidden_field_tag name, @value || "", data: { target: "dropdown-search.hiddenInput" }
 
   .selector {
     data-dropdown-search-target="selector"
