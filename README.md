@@ -27,14 +27,17 @@ Consumables:
 
 Networks:
 
-- [ ] Aggregates IP addresses of all assets
+- [x] Lists IP addresses of assets
 - [x] Tracks structure of local network
   - [x] Notes network infrastructure which defines the network
-- [ ] Provides a table view of all assets categorized by network segment/address
+- [x] Provides a table view of all assets categorized by network segment/address
+  - [ ] Paginates large subnets
 - [ ] Network calculation tools
 
 Purchases:
 
+- [ ] Purchase order creates an item/consumeable/accessory/component record
+  - [ ] Purchase orders for existing consumeables increases inventory count
 - [ ] Tracks source, purchase date, cost, category
   - [ ] Optional assignment to GL codes
   - [ ] Optional purchase request generation to be printed or emailed
@@ -62,6 +65,7 @@ Contracts:
 - [ ] Tracks contract terms
   - [ ] Start/end dates
   - [ ] Billing cycles and amounts
+- [ ] File uploads for signed contracts storage
 
 Companies:
 
@@ -110,9 +114,22 @@ Table view for all models:
 - [ ] Custom fieldsets
 - [ ] Search bar filters by all fields, including custom fields
 
+Form view for all models:
+
+- [x] Associated record dropdowns are lazy loaded
+- [ ] Associated records have a "New" button next to them
+
 ### Database Notes
 
+Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a compnay is considered to be "owned" by that company (yes, even people), defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner. In addition to permissions for Users and Companies, the User record has a field called `active_company` used to scope calls to the active Company.
+
 The main difference between an Item and an Accessory or Consumable is that an Item does not have a quantity field. Accessories and Consumables describes items whith an inventory level which can be increased through purchase or manual adjustment. Accessories represent items which generally accompany an asset such as mice (mouses?) and keyboards and can be returned after use. Consumables represent items which disappear after use such as paper or toner.
+
+These differences are represented by three subclasses of the Assignable polymorphic class:
+
+- `Assignable::Single`: Items, no count, can be reassigned.
+- `Assignable::Quantity`: Accessories, tracks quantity, can be reassigned.
+- `Assignable::Consume`: Consumables, tracks quantity, can not be reassigned.
 
 ---
 
@@ -154,7 +171,7 @@ Ownership model also contains a field for Department, allowing an "ownable" to b
 
 ### View Components
 
-View Components should all be namespaced to a folder for each component. This adds verbosity, which is addressed by the view_component_helper. For instance, to create a "share" button, you would use the generator:
+View Components should all be namespaced to a folder for each component. This adds verbosity, which is addressed by the `view_component_helper`. For instance, to create a "share" button, you would use the generator:
 
 `rails g component Buttons::Share::Share`
 
@@ -170,17 +187,21 @@ This would then be used in a view as such:
 
 `= view 'buttons/share`
 
-This syntax is preferable to:
+ This syntax is preferable to:
 
 `= render Buttons::Share::ShareCompnent.new`
+
+While the generator syntax looks unpleasant with the repeating component name, using the components becomes much more manageable as the convention allows some inference.
 
 ### Decorators
 
 Draper is installed and a decorator object exists for each class, however we don't call `.decorate` on each query passed from the controller. There are things happening at the view layer which become compromised by this extra layer. When the methods in a decorator are needed, you can call `.decorate` on the record in the view template to gain access to its methods. For instance: `h1 = @person.decorate.full_name`.
 
+In a view where many values in a decorated instance need to be used, we can create a decorated instance of the record and reference that.
+
 The current issues with calling `.decorate` by default:
 
-- The Item record has a field called 'model', which is also the interface for accessing the underlying object from a decorated record. This means accessing the Model association on an Item looks as such: `@item.model.model.name`, which is confusing at best and could easily lead to issues.
+- There is a Model record which is referenced by assets using the word 'model', but this is the interface for accessing the underlying object from a decorated record. This means accessing the Model association on an Item looks as such: `@item.model.model.name`, which is confusing at best and could easily lead to issues.
 
 - Custom helpers would either need to check if the model passed to them were decorated, or be passed the underlying model from the view. This would require calling `.model` on every record passed to a helper, making refactoring difficult. It also adds confusion for any records with a 'model' field.
 
