@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :status_types
 
-  resources :items do
+  resources :items, path: :hardware do
     resources :nics
     concerns :categoryable, :clonable
   end
