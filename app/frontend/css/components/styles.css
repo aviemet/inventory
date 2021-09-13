@@ -21,28 +21,11 @@ a.button {
 
 .simple_form {
   @apply max-w-screen-lg;
-
-  @screen lg {
-    /* what was i thinking */
-    /* fieldset {
-      @apply flex flex-wrap;
-
-      .field {
-        @apply ml-2 flex-1;
-
-        &:first-child {
-          @apply ml-0;
-        }
-      }
-    } */
-  }
 }
 
 div.field {
-  @apply bg-gray-200 mb-2 w-full;
+  @apply bg-gray-100 mb-2 w-full;
   @apply border-brand-light border-t-2;
-  /* Rounded corners on the top for mobile */
-  /* @apply rounded-t rounded-b-none; */
 
   &.required {
     @apply border-brand;
@@ -50,6 +33,12 @@ div.field {
 
   &.field_with_errors {
     @apply border-error;
+  }
+
+  &.boolean {
+    .input {
+      @apply inline-block;
+    }
   }
 
   .input {
@@ -106,12 +95,10 @@ div.field {
       @apply grid;
       grid-template-columns: var(--label-width) 1fr;
 
-      /* Rounded corners on the left for desktop */
       @apply border-t-0 border-l-2;
-      /* @apply rounded-l rounded-r-none; */
     }
 
-    label {
+    label, legend {
       @apply flex-1 text-right;
       max-width: var(--label-width);
       grid-row-start: span 2;
