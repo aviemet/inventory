@@ -6,8 +6,8 @@
     "start": "NODE_ENV=development foreman start -f Procfile.dev-server"
   },
   "dependencies": {
-    "@hotwired/turbo-rails": "^7.0.0-beta.5",
-    "@rails/actioncable": "^6.0.3",
+    "@hotwired/turbo-rails": "^7.0.0-rc.3",
+    "@rails/actioncable": "^6.1.4",
     "@rails/activestorage": "^6.0.3",
     "@rails/ujs": "^6.0.3",
     "@rails/webpacker": "^5.4.0",

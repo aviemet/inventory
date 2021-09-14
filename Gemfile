@@ -16,7 +16,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Models
 gem "slug", "~> 4.1"
 gem "active_type", "~> 1.3"
-gem "audited", "~> 4.10"
+gem "audited", "~> 5.0.1"
 
 # Search
 gem "pg_search", "~> 2.3"
@@ -25,8 +25,8 @@ gem "progress_bar", "~> 1.3"
 # Assets
 gem "hotwire-rails", "~> 0.1.3"
 gem "turbo-rails", "~> 0.5.9"
-gem "stimulus-rails", "~> 0.2.3"
-gem "stimulus_reflex", "~> 3.3"
+gem "stimulus-rails", "~> 0.5.2"
+gem "stimulus_reflex", "~> 3.4.1"
 gem 'sass-rails', '>= 6'
 gem 'jbuilder', '~> 2.7'
 gem "slim-rails", "~> 3.2"
@@ -44,9 +44,9 @@ gem "rolify", "~> 6.0"
 gem "cancancan", "~> 3.1"
 
 # Helpers
-gem "ipaddress_2", "~> 0.13.0"
-gem "countries", "~> 3.0", require: 'countries/global'
-gem "money-rails", "~> 1.13"
+gem "ipaddress_2", ">= 0.13.0"
+gem "countries", "~> 4.0.1", require: 'countries/global'
+gem "money-rails", "~> 1.14"
 gem "kaminari", "~> 1.2"
 gem 'tzinfo-data'
 
@@ -80,8 +80,7 @@ group :development do
   gem "better_errors", "~> 2.7"
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "spring", ">= 3.0.0"
 
   # Live reloading of server code
   gem "guard", "~> 2.16"
@@ -89,7 +88,7 @@ group :development do
   gem "rack-livereload", "~> 0.3.17"
 
   # To supress warnings
-  gem 'rubyzip', '2.3.0'
+  gem 'rubyzip', '~> 2.3.0'
 end
 
 group :test do
@@ -97,7 +96,7 @@ group :test do
   gem "rspec-rails", "~> 5.0"
   gem "database_cleaner", "~> 2.0"
   gem "cucumber-rails", "~> 2.0", require: false
-  gem "shoulda-matchers", "~> 4.3"
+  gem "shoulda-matchers", "~> 5.0.0"
   gem "deep-cover", "~> 1.0"
   gem "sunspot_test", "~> 0.4.2"
 
