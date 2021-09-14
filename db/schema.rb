@@ -19,22 +19,19 @@ ActiveRecord::Schema.define(version: 2021_07_31_153226) do
   create_table "accessories", force: :cascade do |t|
     t.string "name"
     t.string "serial"
-    t.string "model_number"
     t.integer "min_qty"
     t.integer "qty"
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
     t.boolean "requestable", default: true, null: false
     t.text "notes"
-    t.bigint "category_id", null: false
-    t.bigint "manufacturer_id", null: false
+    t.bigint "model_id", null: false
     t.bigint "vendor_id"
     t.bigint "default_location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_accessories_on_category_id"
     t.index ["default_location_id"], name: "index_accessories_on_default_location_id"
-    t.index ["manufacturer_id"], name: "index_accessories_on_manufacturer_id"
+    t.index ["model_id"], name: "index_accessories_on_model_id"
     t.index ["vendor_id"], name: "index_accessories_on_vendor_id"
   end
 
@@ -116,43 +113,39 @@ ActiveRecord::Schema.define(version: 2021_07_31_153226) do
 
   create_table "components", force: :cascade do |t|
     t.string "name"
-    t.string "model_number"
+    t.string "serial"
     t.integer "min_qty"
     t.integer "qty"
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
     t.datetime "purchased_at"
     t.text "notes"
-    t.bigint "category_id", null: false
-    t.bigint "manufacturer_id", null: false
+    t.bigint "model_id", null: false
     t.bigint "vendor_id", null: false
     t.bigint "default_location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_components_on_category_id"
     t.index ["default_location_id"], name: "index_components_on_default_location_id"
-    t.index ["manufacturer_id"], name: "index_components_on_manufacturer_id"
+    t.index ["model_id"], name: "index_components_on_model_id"
+    t.index ["serial"], name: "index_components_on_serial", unique: true
     t.index ["vendor_id"], name: "index_components_on_vendor_id"
   end
 
   create_table "consumables", force: :cascade do |t|
     t.string "name"
-    t.string "model_number"
     t.integer "min_qty"
     t.integer "qty"
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
     t.boolean "requestable", default: true, null: false
     t.text "notes"
-    t.bigint "category_id", null: false
-    t.bigint "manufacturer_id", null: false
+    t.bigint "model_id", null: false
     t.bigint "vendor_id", null: false
     t.bigint "default_location_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_consumables_on_category_id"
     t.index ["default_location_id"], name: "index_consumables_on_default_location_id"
-    t.index ["manufacturer_id"], name: "index_consumables_on_manufacturer_id"
+    t.index ["model_id"], name: "index_consumables_on_model_id"
     t.index ["vendor_id"], name: "index_consumables_on_vendor_id"
   end
 
@@ -257,13 +250,11 @@ ActiveRecord::Schema.define(version: 2021_07_31_153226) do
     t.bigint "model_id", null: false
     t.bigint "vendor_id"
     t.bigint "default_location_id"
-    t.bigint "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["asset_tag"], name: "index_items_on_asset_tag", unique: true
     t.index ["default_location_id"], name: "index_items_on_default_location_id"
     t.index ["model_id"], name: "index_items_on_model_id"
-    t.index ["parent_id"], name: "index_items_on_parent_id"
     t.index ["serial"], name: "index_items_on_serial", unique: true
     t.index ["vendor_id"], name: "index_items_on_vendor_id"
   end
@@ -518,20 +509,17 @@ ActiveRecord::Schema.define(version: 2021_07_31_153226) do
     t.index ["contact_id"], name: "index_websites_on_contact_id"
   end
 
-  add_foreign_key "accessories", "categories"
   add_foreign_key "accessories", "locations", column: "default_location_id"
-  add_foreign_key "accessories", "manufacturers"
+  add_foreign_key "accessories", "models"
   add_foreign_key "accessories", "vendors"
   add_foreign_key "addresses", "categories"
   add_foreign_key "addresses", "contacts"
   add_foreign_key "assignments", "users", column: "created_by_id"
-  add_foreign_key "components", "categories"
   add_foreign_key "components", "locations", column: "default_location_id"
-  add_foreign_key "components", "manufacturers"
+  add_foreign_key "components", "models"
   add_foreign_key "components", "vendors"
-  add_foreign_key "consumables", "categories"
   add_foreign_key "consumables", "locations", column: "default_location_id"
-  add_foreign_key "consumables", "manufacturers"
+  add_foreign_key "consumables", "models"
   add_foreign_key "consumables", "vendors"
   add_foreign_key "contacts", "addresses", column: "primary_address_id"
   add_foreign_key "contacts", "emails", column: "primary_email_id"
@@ -544,7 +532,6 @@ ActiveRecord::Schema.define(version: 2021_07_31_153226) do
   add_foreign_key "emails", "contacts"
   add_foreign_key "fieldset_associations", "fieldsets"
   add_foreign_key "ip_leases", "nics"
-  add_foreign_key "items", "items", column: "parent_id"
   add_foreign_key "items", "locations", column: "default_location_id"
   add_foreign_key "items", "models"
   add_foreign_key "items", "vendors"

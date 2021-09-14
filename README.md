@@ -131,8 +131,6 @@ These differences are represented by three subclasses of the Assignable polymorp
 - `Assignable::Quantity`: Accessories, tracks quantity, can be reassigned.
 - `Assignable::Consume`: Consumables, tracks quantity, can not be reassigned.
 
-Items are the only asset type with an associated Model record. The choice was made to store the model number, manufacturer and category within the other asset type records to avoid the possibility of duplicate records for the same Accessory, Consumable or Component. The records for these asset types track quantity, so there should only ever be one record of each.
-
 ---
 
 ## Reference

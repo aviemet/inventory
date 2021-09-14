@@ -11,7 +11,6 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.references :model, null: false, foreign_key: true
       t.references :vendor, null: true, foreign_key: true
       t.references :default_location, null: true, foreign_key: { to_table: :locations }
-      t.references :parent, null: true, foreign_key: { to_table: :items }
 
       t.timestamps
     end

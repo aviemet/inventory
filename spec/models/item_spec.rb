@@ -12,7 +12,6 @@ RSpec.describe Item, type: :model do
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      subject.parent = build(:item)
       expect(subject).to be_valid
     end
 

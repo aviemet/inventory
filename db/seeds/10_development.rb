@@ -57,7 +57,7 @@ if Rails.env == "development"
   end
 
   if Manufacturer.count == 0
-    ["Apple", "Lenovo", "Cisco", "HP", "SHARP"].each do |manufacturer|
+    ["Apple", "Lenovo", "Cisco", "HP", "Samsung", "SHARP"].each do |manufacturer|
       Manufacturer.create!({
         name: manufacturer,
         company: Company.first,
@@ -159,13 +159,16 @@ if Rails.env == "development"
     Accessory.create!({
       name: "Apple Keyboard",
       serial: Faker::Device.serial,
-      model_number: "AD897",
       cost: 80,
       qty: 10,
       min_qty: 1,
       requestable: true,
-      category: Category.find_by_slug("accessory-keyboard"),
-      manufacturer: Manufacturer.find_by_slug("apple"),
+      model: Model.create({
+        name: "Apple Keyboard",
+        model_number: "AD897",
+        manufacturer: Manufacturer.find_by_slug("apple"),
+        category: Category.find_by_slug("accessory-keyboard"),
+      }),
       vendor: Vendor.find_by_slug("apple"),
       default_location: Location.first,
       company: Company.first,
@@ -175,14 +178,35 @@ if Rails.env == "development"
   if Consumable.count == 0
     Consumable.create!({
       name: "Black Toner",
-      model_number: "MX768",
       qty: 3,
       min_qty: 2,
       cost: nil,
       requestable: true,
-      category: Category.find_by_slug("consumable-toner"),
-      manufacturer: Manufacturer.find_by_slug("sharp"),
+      model: Model.create({
+        name: "Black Toner",
+        model_number: "MX768",
+        manufacturer: Manufacturer.find_by_slug("sharp"),
+        category: Category.find_by_slug("consumable-toner"),
+      }),
       vendor: Vendor.find_by_slug("sharp"),
+      default_location: Location.first,
+      company: Company.first,
+    })
+  end
+
+  if Component.count == 0
+    Component.create!({
+      name: "Samsung Evo 850",
+      qty: 3,
+      min_qty: 2,
+      cost: nil,
+      model: Model.create({
+        name: "Samsung Evo 850",
+        model_number: "MZ-75E250",
+        manufacturer: Manufacturer.find_by_slug("samsung"),
+        category: Category.find_by_slug("component-ssd"),
+      }),
+      vendor: Vendor.find_by_slug("amazon"),
       default_location: Location.first,
       company: Company.first,
     })

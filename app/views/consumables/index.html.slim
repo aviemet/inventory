@@ -9,7 +9,7 @@
       = head.row
         = head.select_all_cell
         = head.cell :name
-        = head.cell :model_number
+        = head.cell "model.model_number", heading: "Model Number"
         = head.cell :min_qty
         = head.cell :qty
         = head.cell :cost
@@ -24,8 +24,8 @@
           = body.select_cell consumable
           = render body.cell :name
             = link_to(consumable.name, consumable)
-          = render body.cell :model_number
-            = consumable.model_number ? link_to(consumable.model_number, consumable) : ''
+          = render body.cell :model_id
+            = link_to(consumable.model.model_number, consumable.model)
           = render body.cell :min_qty
             = consumable.min_qty
           = render body.cell :qty
@@ -35,9 +35,9 @@
           = render body.cell :requestable
             = consumable.requestable
           = render body.cell "manufacturer.name"
-            = consumable.manufacturer ? link_to(consumable.manufacturer, consumable.manufacturer) : ''
+            = link_to(consumable.manufacturer, consumable.manufacturer)
           = render body.cell "category.name"
-            = consumable.category ? link_to(consumable.category, consumable.category) : ''
+            = link_to(consumable.category.name, consumable.category)
           = render body.cell "vendor.name"
             = consumable.vendor ? link_to(consumable.vendor, consumable.vendor) : ''
           td nowrap="nowrap"

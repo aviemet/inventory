@@ -13,7 +13,7 @@
         = head.cell "vendors.name", heading: "Vendor"
         = head.cell :default_location
         = head.cell "categories.name", heading: "Category"
-        = head.cell :model_number
+        = head.cell "model.model_number", heading: "Model Number"
         = head.cell :cost
         = head.cell :qty
         = head.cell :min_qty
@@ -27,13 +27,13 @@
           = render body.cell :serial
             = accessory.serial
           = render body.cell :vendor_id
-            = accessory.vendor
+            = link_to(accessory.vendor, accessory.vendor)
           = render body.cell :default_location_id
-            = accessory.default_location
+            = link_to(accessory.default_location, accessory.default_location)
           = render body.cell :category
-            = accessory.category.name
-          = render body.cell :model_number
-            = accessory.model_number
+            = link_to(accessory.category.name, accessory.category)
+          = render body.cell :model_id
+            = link_to(accessory.model.model_number, accessory.model)
           = render body.cell :cost
             = accessory.cost
           = render body.cell :qty

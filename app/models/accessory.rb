@@ -23,10 +23,11 @@ class Accessory < ApplicationRecord
 
   monetize :cost_cents
 
-  belongs_to :category
-  belongs_to :vendor
-  belongs_to :manufacturer
+  belongs_to :model
+  belongs_to :vendor, required: false
   belongs_to :default_location, class_name: "Location", required: false
+  has_one :category, through: :model
+  has_one :manufacturer, through: :model
 
   def self.associated_models
     [:category, :assignments, :department, :vendor, :manufacturer]

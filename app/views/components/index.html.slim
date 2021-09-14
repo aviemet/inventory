@@ -1,6 +1,6 @@
 = view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :items do |section|
   = section.title
-    | Hardware Assets
+    | Components
   = section.button_link
     = button_link '+ New Item', new_item_path
 
@@ -9,7 +9,7 @@
       = head.row
         = head.select_all_cell
         = head.cell :name
-        = head.cell :model_number
+        = head.cell "model.model_number", heading: "Model Number"
         = head.cell :qty
         = head.cell :min_qty
         = head.cell "categories.name", heading: "Category"
@@ -25,14 +25,14 @@
           = body.select_cell component
           = render body.cell :name
             = link_to(component.name, component)
-          = render body.cell :model_number
-            = link_to(component.model_number, component.model_number)
+          = render body.cell :model_id
+            = link_to(component.model.model_number, component.model)
           = render body.cell :qty
             = component.qty
           = render body.cell :min_qty
             = component.min_qty
           = render body.cell "categories.name"
-            = link_to(component.category, category_components_path(component.category.id))
+            = link_to(component.category.name, component.category)
           = render body.cell "manufacturers.name"
             = link_to(component.manufacturer, component.manufacturer)
           = render body.cell "vendors.name"

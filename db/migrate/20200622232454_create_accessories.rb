@@ -3,14 +3,12 @@ class CreateAccessories < ActiveRecord::Migration[6.0]
     create_table :accessories do |t|
       t.string :name
       t.string :serial
-      t.string :model_number
       t.integer :min_qty
       t.integer :qty
       t.monetize :cost, amount: { null: true, default: nil }
       t.boolean :requestable, null: false, default: true
       t.text :notes
-      t.references :category, null: false, foreign_key: true
-      t.references :manufacturer, null: false, foreign_key: true
+      t.references :model, null: false, foreign_key: true
       t.references :vendor, null: true, foreign_key: true
       t.references :default_location, null: true, foreign_key: { to_table: :locations }
 
