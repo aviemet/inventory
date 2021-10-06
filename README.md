@@ -119,18 +119,6 @@ Form view for all models:
 - [x] Associated record dropdowns are lazy loaded
 - [ ] Associated records have a "New" button next to them
 
-### Database Notes
-
-Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a compnay is considered to be "owned" by that company (yes, even people), defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner. In addition to permissions for Users and Companies, the User record has a field called `active_company` used to scope calls to the active Company.
-
-The main difference between an Item and an Accessory or Consumable is that an Item does not have a quantity field. Accessories and Consumables describes items whith an inventory level which can be increased through purchase or manual adjustment. Accessories represent items which generally accompany an asset such as mice (mouses?) and keyboards and can be returned after use. Consumables represent items which disappear after use such as paper or toner.
-
-These differences are represented by three subclasses of the Assignable polymorphic class:
-
-- `Assignable::Single`: Items, no count, can be reassigned.
-- `Assignable::Quantity`: Accessories, tracks quantity, can be reassigned.
-- `Assignable::Consume`: Consumables, tracks quantity, can not be reassigned.
-
 ---
 
 ## Reference
@@ -157,6 +145,14 @@ Use `number_to_currency` for displaying prices. Later we will store the currency
 
 ## Dev Notes
 
+The main difference between an Item and an Accessory or Consumable is that an Item does not have a quantity field. Accessories and Consumables describes items whith an inventory level which can be increased through purchase or manual adjustment. Accessories represent items which generally accompany an asset such as mice (mouses?) and keyboards and can be returned after use. Consumables represent items which disappear after use such as paper or toner.
+
+These differences are represented by three subclasses of the Assignable polymorphic class:
+
+- `Assignable::Single`: Items, no count, can be reassigned.
+- `Assignable::Quantity`: Accessories, tracks quantity, can be reassigned.
+- `Assignable::Consume`: Consumables, tracks quantity, can not be reassigned.
+
 ### Searchable/Sortable and Table Components
 
 This needs to be fully documented, too much going on in the background
@@ -167,11 +163,11 @@ Companies are essentially top level organizational units. All other objects can 
 
 ### Ownerships
 
-Ownership model also contains a field for Department, allowing an "ownable" to be associated with a department as well. This association is how a person is associated with a department, but also allows records such as items to be associated with a second level of ownership. This way, when an item is checked in it still retains an association with the department for which it was purchased.
+Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a compnay is considered to be "owned" by that company (yes, even people), defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner.
 
 ### View Components
 
-View Components should all be namespaced to a folder for each component. This adds verbosity, which is addressed by the `view_component_helper`. For instance, to create a "share" button, you would use the generator:
+View Components should all be namespaced to a folder for each component. However, this adds verbosity, which is addressed by the `view_component_helper`. For instance, to create a "share" button, you would use the generator:
 
 `rails g component Buttons::Share::Share`
 
@@ -195,15 +191,15 @@ While the generator syntax looks unpleasant with the repeating component name, u
 
 ### Decorators
 
-Draper is installed and a decorator object exists for each class, however we don't call `.decorate` on each query passed from the controller. There are things happening at the view layer which become compromised by this extra layer. When the methods in a decorator are needed, you can call `.decorate` on the record in the view template to gain access to its methods. For instance: `h1 = @person.decorate.full_name`.
+Draper is installed and a decorator object exists for each model, however we don't call `.decorate` on each query passed from the controller. There are things happening at the view layer which become compromised by this extra layer. When the methods in a decorator are needed, you can call `.decorate` on the record in the view template to gain access to its methods. For instance: `h1 = @person.decorate.full_name`.
 
 In a view where many values in a decorated instance need to be used, we can create a decorated instance of the record and reference that.
 
 The current issues with calling `.decorate` by default:
 
-- There is a Model record which is referenced by assets using the word 'model', but this is the interface for accessing the underlying object from a decorated record. This means accessing the Model association on an Item looks as such: `@item.model.model.name`, which is confusing at best and could easily lead to issues.
+- There is a Model record which is referenced by assets using the word 'model', but this is Draper's interface for accessing the underlying object from a decorated record. This means accessing the Model association on an Item looks as such: `@item.model.model.name`, which is confusing and could easily lead to issues.
 
-- Custom helpers would either need to check if the model passed to them were decorated, or be passed the underlying model from the view. This would require calling `.model` on every record passed to a helper, making refactoring difficult. It also adds confusion for any records with a 'model' field.
+- Custom helpers would either need to check if the model passed to them were decorated, or be passed the underlying model from the view. This would require calling `.model` on every record passed to a helper, making refactoring difficult. It also adds confusion for any helpers which need to access the model field on an asset.
 
 ## Features for another time
 

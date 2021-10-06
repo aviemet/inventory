@@ -88,7 +88,6 @@ class PeopleController < ApplicationController
 
   def set_person
     @person = searchable_object.find(params[:id])
-    @person.build_owner if !@person.owner # TODO: Why is this here?
   end
 
   def set_form_models
