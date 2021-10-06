@@ -179,7 +179,7 @@ This creates the file structure:
     |||\ share_component.rb
     |||| share_component.html.slim
 
-This would then be used in a view as such:
+This can then be used in a view through the helper method `view` as such:
 
 `= view 'buttons/share`
 
@@ -191,9 +191,14 @@ While the generator syntax looks unpleasant with the repeating component name, u
 
 ### Decorators
 
-Draper is installed and a decorator object exists for each model, however we don't call `.decorate` on each query passed from the controller. There are things happening at the view layer which become compromised by this extra layer. When the methods in a decorator are needed, you can call `.decorate` on the record in the view template to gain access to its methods. For instance: `h1 = @person.decorate.full_name`.
+Draper is installed and a decorator object exists for each model, however we don't pass a decorated model to the view from the controller. When the methods in a decorator are needed, you can call `.decorate` on the record in the view template to gain access to its methods.
 
-In a view where many values in a decorated instance need to be used, we can create a decorated instance of the record and reference that.
+In views where you only need to use a decorator method once, simply call `decorate` on the object at that line: `h1 = @person.decorate.full_name`. In a view where many values in a decorated instance need to be used, we can create a decorated instance of the record and reference that:
+
+    - person_decorated = person.decorate
+
+    div = person_decorated.full_name
+    div = person_decorated.catch_phrase
 
 The current issues with calling `.decorate` by default:
 
