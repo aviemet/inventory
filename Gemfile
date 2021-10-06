@@ -24,8 +24,8 @@ gem "progress_bar", "~> 1.3"
 
 # Assets
 gem "hotwire-rails", "~> 0.1.3"
-gem "turbo-rails", "~> 0.5.9"
-gem "stimulus-rails", "~> 0.5.2"
+gem "turbo-rails", "~> 0.8.1"
+gem "stimulus-rails", "~> 0.6.1"
 gem "stimulus_reflex", "~> 3.4.1"
 gem 'sass-rails', '>= 6'
 gem 'jbuilder', '~> 2.7'
