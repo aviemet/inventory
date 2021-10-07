@@ -2,7 +2,9 @@ class ComponentsController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  before_action :set_component, only: %i[show edit update destroy]
+  before_action :set_view_data, only: [:index, :category]
+  before_action :set_component, only: [:show, :edit, :update, :destroy]
+  before_action :set_components, only: [:index, :category]
 
   # GET /components(.json)
   def index
@@ -11,6 +13,14 @@ class ComponentsController < ApplicationController
                   else
                     searchable_object.order(sort(Component)).page(params[:page])
                   end
+  end
+
+  # GET /components/category/:category_id
+  # GET /components/category/:category_id.json
+  def category
+    @category = Category.find(request.params[:category_id])
+    @components = @components.where('model.category': @category)
+    render :index
   end
 
   # GET /components/:id(.json)
@@ -74,9 +84,17 @@ class ComponentsController < ApplicationController
     %w(name model_number min_qty qty cost manufacturers.name categories.name vendors.name).freeze
   end
 
+  def set_view_data
+    @hideable_fields = {Model: "models.name", "Model Number": "models.model_number", Qty: "qty", "Min Qty": "min_qty",Category: "categories.name", Manufacturer: "manufacturers.name",  Vendor: "vendors.name", Cost: "cost", Department: "departments.name"}
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_component
     @component = Component.find(params[:id])
+  end
+
+  def set_components
+    @components = search(Component)
   end
 
   # Only allow a list of trusted parameters through.

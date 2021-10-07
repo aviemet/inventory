@@ -4,13 +4,11 @@
   = view "forms/company_nested_input", form: form, company: @component.company, companies: @companies, active_company: @active_company
 
   = form.input :name
-  = form.input :model_number
+  = form.association :model, collection: "models"
   = form.input :min_qty
   = form.input :qty
   = form.input :cost
 
-  = form.association :manufacturer, collection: "manufacturers"
-  = form.association :category, collection: "categories#component"
   = form.association :vendor, collection: "vendors"
   = form.association :default_location, collection: "locations"
 

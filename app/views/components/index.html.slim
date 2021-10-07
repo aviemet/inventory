@@ -1,8 +1,8 @@
-= view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :items do |section|
+= view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :components do |section|
   = section.title
     | Components
   = section.button_link
-    = button_link '+ New Item', new_item_path
+    = button_link '+ New Component', new_component_path
 
   = section.table(scroll: true) do |table|
     = table.head do |head|
