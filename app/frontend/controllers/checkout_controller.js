@@ -19,7 +19,6 @@ export default class extends Controller {
   static targets = ["inputContainer", "input", "label"]
 
   connect() {
-    this._renderDropdown("Person")
     const dropdownSearchElement = this.inputContainerTarget.querySelector(".input > .dropdown-search")
     // Wait a tick for the child component to finish rendering
     setTimeout(() => {

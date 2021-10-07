@@ -8,22 +8,29 @@ Postgres and Redis must be installed prior to running
 
 Asset management for entire asset lifecycle. Track from purchase through active support to deprecation.
 
-Items:
+All hardware asset types:
 
 - [x] Check in and out of active inventory
 - [x] Assign to person, department or location
+- [x] Logging of all incoming and outgoing usage
+
+Items:
+
 - [ ] Designate IP address info
 
 Accessories:
 
 - [ ] Trackable quantity
-- [x] Assignable to an asset, person or location
-- [x] Check in and out of active inventory
 
 Consumables:
 
 - [ ] "Using" a consumable permanently removes it from inventory
-- [ ] Logging of all incoming and outgoing usage
+- [ ] Can replenish quantity using a purchase order (in very few steps)
+
+Components:
+
+- [ ] Trackable quantity
+- [ ] Can only be assigned to an item
 
 Networks:
 

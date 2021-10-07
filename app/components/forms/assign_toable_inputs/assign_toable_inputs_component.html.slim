@@ -1,23 +1,16 @@
 div data-controller="checkout" data-checkout-company=company.id
-  .field
-    label Checkout To
-    .w-full
-      span.radio-buttons data-action="click->checkout#renderAssigntoableDropdown"
-        - unless except.include? :person
-          input#checkout_user checked="checked" name="assignment[assign_toable_type]" type="radio" value="Person"
-          label for="checkout_user" Person
-
-        - unless except.include? :item
-          input#checkout_asset name="assignment[assign_toable_type]" type="radio" value="Item"
-          label for="checkout_asset" Asset
-
-        - unless except.include? :location
-          input#checkout_location name="assignment[assign_toable_type]" type="radio" value="Location"
-          label for="checkout_location" Location
+  div class=("hidden" if asset_types.length <= 1)
+    .field
+      label Checkout To
+      .w-full
+        span.radio-buttons data-action="click->checkout#renderAssigntoableDropdown"
+          - asset_types.each_with_index do |type, index|
+            input id="checkout_#{type}" name="assignment[assign_toable_type]" type="radio" value="#{type.capitalize}" checked=("checked" if index == 0)
+            label for="checkout_#{type}" = type.capitalize
 
   = form.association :assign_toable, { \
-    collection: "people",
-    label: "Person",
+    collection: asset_types[0].to_s.pluralize,
+    label: asset_types[0].capitalize,
     wrapper_html: { data: { 'checkout-target': 'inputContainer' } },
     input_html: { data: { 'checkout-target': 'input' } },
     label_html: { data: { 'checkout-target': 'label' } } }
