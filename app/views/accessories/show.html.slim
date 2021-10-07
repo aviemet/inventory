@@ -1,35 +1,76 @@
-section.container
-  p
-    strong Name:
-    = @accessory.name
-  p
-    strong Serial:
-    = @accessory.serial
-  p
-    strong Notes:
-    = @accessory.notes
-  p
-    strong Qty:
-    = @accessory.qty
-  p
-    strong Vendor:
-    = @accessory.vendor_id
-  p
-    strong Default location:
-    = @accessory.default_location_id
-  p
-    strong Category:
-    = @accessory.category
-  p
-    strong Model number:
-    = @accessory.model.model_number
-  p
-    strong Cost:
-    = @accessory.cost
-  p
-    strong Min qty:
-    = @accessory.min_qty
+section.container.relative
+  header.flex
+    h1.flex-1 = @accessory
+    span
+      = view "forms/dropdown_menu" do |options_menu|
+        = options_menu.heading
+          div Actions
+        = options_menu.option
+          = assignment_link @accessory
+        = options_menu.option
+          = link_to "Edit accessory", edit_accessory_path(@accessory)
+
+  nav.sticky class="bg-white p-3 border-b-2 -top-4" data-controller="navigation"
+    .inline.px-2
+      a href="#details" data-action="click->navigation#scroll" Details
+    .inline.px-2
+      a href="#history" data-action="click->navigation#scroll" History
+
+  a name="details"
+  section
+    h3 Details
+    .item-details
+      .item-row
+        label Model:
+        .value
+          = link_to @accessory.model.manufacturer.name, @accessory.model.manufacturer
+          '  -
+          =  link_to @accessory.model.name, @accessory.model
+
+      .item-row
+        label Category:
+        .value = link_to @accessory.model.category.name, @accessory.model.category
+
+      .item-row
+        label Serial:
+        .value = @accessory.serial
+
+      .item-row
+        label Number Assigned:
+        .value = @accessory.assignments.count
+
+      .item-row
+        label Purchase Cost:
+        .value = @accessory.cost.format
+
+      .item-row
+        label Vendor:
+        .value = link_to @accessory.vendor.name, @accessory.vendor
+
+      p = @accessory.notes
+
+  a name="history"
+  section
+    h3 Assignment History
+
+    .inline-grid.grid-cols-2
+      - @accessory.assignments.reverse_each do |assignment|
+          div = link_to "#{assignment.assign_toable}: ", assignment.assign_toable
+          div == assignment.decorate.dates_string
+
+    h3 Audit History
+
+    ul
+      - @accessory.audits.includes(:user).reverse_each do |audit|
+        li.mb-1
+          == audit.decorate.details
+          - if audit.action == "update"
+            ul.list-inside.list-disc
+              - audit.audited_changes.each do |change|
+                li == "#{change[0]}: #{change[1][1]}"
+
+  div style="height: 150vh"
 
   = link_to 'Edit', edit_accessory_path(@accessory)
-
+  | |
   = link_to 'Back', accessories_path

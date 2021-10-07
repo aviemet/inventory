@@ -1,38 +1,63 @@
-section.container
-  p
-    strong Name:
-    = @consumable.name
-  p
-    strong Model number:
-    = @consumable.model.model_number
-  p
-    strong Min qty:
-    = @consumable.min_qty
-  p
-    strong Qty:
-    = @consumable.qty
-  p
-    strong Cost:
-    = @consumable.cost
-  p
-    strong Requestable:
-    = @consumable.requestable
-  p
-    strong Notes:
-    = @consumable.notes
-  p
-    strong Manufacturer:
-    = @consumable.manufacturer_id
-  p
-    strong Consumable category:
-    = @consumable.category.name
-  p
-    strong Vendor:
-    = @consumable.vendor_id
-  p
-    strong Default location:
-    = @consumable.default_location_id
+section.container.relative
+  header.flex
+    h1.flex-1 = @consumable
+    span
+      = view "forms/dropdown_menu" do |options_menu|
+        = options_menu.heading
+          div Actions
+        = options_menu.option
+          = assignment_link @consumable
+        = options_menu.option
+          = link_to "Edit Consumable", edit_consumable_path(@consumable)
+
+  nav.sticky class="bg-white p-3 border-b-2 -top-4" data-controller="navigation"
+    .inline.px-2
+      a href="#details" data-action="click->navigation#scroll" Details
+    .inline.px-2
+      a href="#history" data-action="click->navigation#scroll" History
+    .inline.px-2
+      a href="#licenses" data-action="click->navigation#scroll" Licenses
+
+  a name="details"
+  section
+    h3 Details
+    .item-details
+      .item-row
+        label Model:
+        .value
+          = link_to @consumable.manufacturer.name, @consumable.manufacturer
+
+      .item-row
+        label Category:
+        .value = link_to @consumable.category.name, @consumable.category
+
+      .item-row
+        label Model Number:
+        .value = @consumable.model.model_number
+
+      .item-row
+        label Notes:
+        .value = @consumable.notes
+
+      .item-row
+        label Quantity:
+        .value = @consumable.qty
+
+      .item-row
+        label Vendor:
+        .value = link_to @consumable.vendor.name, @consumable.vendor
+
+  a name="history"
+  section
+    h3 Assignment History
+
+    .inline-grid.grid-cols-2
+      - @consumable.assignments.reverse_each do |assignment|
+          div = link_to "#{assignment.assign_toable}: ", assignment.assign_toable
+          div == assignment.decorate.dates_string
+
+  div style="height: 150vh"
 
   = link_to 'Edit', edit_consumable_path(@consumable)
-  ' |
+  | |
   = link_to 'Back', consumables_path

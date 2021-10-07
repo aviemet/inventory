@@ -57,17 +57,15 @@ section.container.relative
 
   a name="history"
   section
-    h3 History
-    - @component.assignments.each do |assignment|
-      - if assignment != @component.assignment
-        = assignment.assign_toable.to_s
+    h3 Assignment History
 
-  a name="licenses"
-  section
-    h3 Licenses
+    .inline-grid.grid-cols-2
+      - @component.assignments.reverse_each do |assignment|
+          div = link_to "#{assignment.assign_toable}: ", assignment.assign_toable
+          div == assignment.decorate.dates_string
 
   div style="height: 150vh"
 
-  = link_to 'Edit', edit_item_path(@component)
+  = link_to 'Edit', edit_component_path(@component)
   | |
-  = link_to 'Back', items_path
+  = link_to 'Back', components_path
