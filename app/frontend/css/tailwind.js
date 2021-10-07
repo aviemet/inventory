@@ -31,9 +31,12 @@ const ratios = {
   "11/12": "91.666667%"
 }
 
-const theme = {
+module.exports = {
   darkMode: "class",
-  purge: [],
+  purge: [
+    "../../views/**/*.slim",
+    "../controllers/**/*.js"
+  ],
   theme: {
     colors: {
       ...colors,
@@ -152,4 +155,3 @@ const theme = {
   ],
 }
 
-module.exports = theme
