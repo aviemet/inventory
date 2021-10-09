@@ -102,14 +102,11 @@ class ItemsController < ApplicationController
   end
 
   def set_items
-    # if current_user[:table_preferences]["items"]
-    #   Item.ignored_columns = current_user[:table_preferences]["items"].map{ |k, v| k unless v }
-    # end
-    @items = search(Item)
+    @items = search(searchable_object)
   end
 
   def set_form_models
-    @models = Model.all
+    @models = @active_company.models
     @vendors = @active_company.vendors
     @locations = @active_company.locations
     @companies = current_user.companies

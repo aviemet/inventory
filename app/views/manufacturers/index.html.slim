@@ -1,17 +1,42 @@
-section.container
-  h1 Manufacturers
+= view 'tables/section', table_preferences: current_user.table_preferences, hideable_fields: @hideable_fields, name: :manufacturers do |section|
+  = section.title
+    | Manufacturers
+  = section.button_link
+    = button_link '+ New Manufacturer', new_manufacturer_path
 
-  table
-    thead
-      tr
-        th Name
-        th colspan="3"
-    tbody
+  = section.table(scroll: true) do |table|
+    = table.head do |head|
+      = head.row
+        = head.select_all_cell
+        = head.cell :name
+        = head.cell :models
+        = head.cell :items
+        = head.cell :accessories
+        = head.cell :components
+        = head.cell :consumables
+        th.table-column-fit.text-center Actions
+    = table.body do |body|
       - @manufacturers.each do |manufacturer|
-        tr
-          td = manufacturer.name
-          td = link_to 'Show', manufacturer
-          td = link_to 'Edit', edit_manufacturer_path(manufacturer)
-          td = link_to 'Destroy', manufacturer, method: :delete, data: { confirm: 'Are you sure?' }
+        = body.row
+          = body.select_cell manufacturer
+          = render body.cell :name
+            = link_to(manufacturer.name, manufacturer)
+          = render body.cell :models
+            = manufacturer.models.count
+          = render body.cell :items
+            = manufacturer.items.count
+          = render body.cell :accessories
+            = manufacturer.accessories.count
+          = render body.cell :components
+            = manufacturer.components.count
+          = render body.cell :consumables
+            = manufacturer.consumables.count
+          td nowrap="nowrap"
+            .flex.justify-between.gap-1
+              = view 'buttons/edit', path: edit_manufacturer_path(manufacturer)
+              = view "buttons/delete", path: manufacturer
 
-  = link_to 'New Manufacturer', new_manufacturer_path
+    = section.pagination
+      .flex.pt-3
+        .flex-1 = page_entries_info @manufacturers, entry_name: "manufacturer"
+        .flex-1 = paginate @manufacturers

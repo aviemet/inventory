@@ -1,12 +1,14 @@
 class ManufacturersController < ApplicationController
   include OwnableConcern
+  include Searchable
 
+  before_action :set_view_data, only: [:index]
   before_action :set_manufacturer, only: [:show, :edit, :update, :destroy]
 
   # GET /manufacturers
   # GET /manufacturers.json
   def index
-    @manufacturers = Manufacturer.all
+    @manufacturers = search(searchable_object)
   end
 
   # GET /manufacturers/1
@@ -65,8 +67,20 @@ class ManufacturersController < ApplicationController
 
   private
 
+  def searchable_object
+    Manufacturer
+  end
+
+  def sortable_fields
+    %w(name).freeze
+  end
+
+  def set_view_data
+    @hideable_fields = {}
+  end
+  
   def set_manufacturer
-    @manufacturer = Manufacturer.find(params[:id])
+    @manufacturer = searchable_object.find(params[:id])
   end
 
   def manufacturer_params

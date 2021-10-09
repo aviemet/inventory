@@ -1,10 +1,14 @@
 class ModelsController < ApplicationController
+  include OwnableConcern
+  include Searchable
+
+  before_action :set_view_data, only: [:index]
   before_action :set_model, only: [:show, :edit, :update, :destroy]
 
   # GET /models
   # GET /models.json
   def index
-    @models = Model.all
+    @models = search(searchable_object)
   end
 
   # GET /models/1
@@ -63,8 +67,20 @@ class ModelsController < ApplicationController
 
   private
 
+  def searchable_object
+    Model
+  end
+
+  def sortable_fields
+    %w(name).freeze
+  end
+
+  def set_view_data
+    @hideable_fields = {}
+  end
+
   def set_model
-    @model = Model.find_by_slug(params[:id])
+    @model = searchable_object.find_by_slug(params[:id])
   end
 
   def model_params
