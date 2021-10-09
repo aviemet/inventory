@@ -7,15 +7,15 @@
   },
   "dependencies": {
     "@hotwired/turbo-rails": "^7.0.1",
-    "@rails/actioncable": "^6.1.4",
-    "@rails/activestorage": "^6.0.3",
-    "@rails/ujs": "^6.0.3",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
     "@tailwindcss/aspect-ratio": "^0.3.0",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^9",
     "flatpickr": "^4.6.6",
-    "stimulus": "^2.0.0",
+    "stimulus": "^3.0.1",
     "stimulus-flatpickr": "^1.3.0",
     "stimulus-use": "^0.41.0",
     "stimulus_reflex": "3.4.1",
@@ -23,11 +23,12 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.12.1",
-    "@rails/webpacker": "^5.4.0",
+    "@rails/webpacker": "^5.4.3",
     "eslint": "^7.12.1",
     "stylelint-config-recommended": "^5.0.0",
+    "webpack": "^4.46.0",
     "webpack-bundle-analyzer": "^4.4.2",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.3.1"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3"
   }
 }

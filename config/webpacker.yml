@@ -49,6 +49,9 @@ default: &default
     - .jpeg
     - .jpg
 
+build:
+  <<: *default
+
 development:
   <<: *default
   compile: true
