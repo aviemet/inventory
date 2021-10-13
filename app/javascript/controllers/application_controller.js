@@ -1,4 +1,3 @@
-// import { Controller } from "stimulus"
 import { ApplicationController } from "stimulus-use"
 import StimulusReflex from "stimulus_reflex"
 
@@ -16,6 +15,7 @@ import StimulusReflex from "stimulus_reflex"
 export default class extends ApplicationController {
   connect () {
     StimulusReflex.register(this)
+    this.exposeController()
   }
 
   exposeController(name) {
@@ -55,14 +55,23 @@ export default class extends ApplicationController {
   }
 
   reflexSuccess (element, reflex, noop, reflexId) {
-    // show success message etc...
+    // show success message
   }
 
   reflexError (element, reflex, error, reflexId) {
-    // show error message etc...
+    // show error message
+  }
+  
+  reflexHalted (element, reflex, error, reflexId) {
+    // handle aborted Reflex action
   }
 
   afterReflex (element, reflex, noop, reflexId) {
     // document.body.classList.remove('wait')
   }
+
+  finalizeReflex (element, reflex, noop, reflexId) {
+    // all operations have completed, animation etc is now safe
+  }
+    
 }

@@ -108,14 +108,12 @@ export default class extends ApplicationController {
   /** SEARCH FILTER **/
   listenKeyDown(e) {
     this.depressedKeys.add(e.key)
-    console.log({ keys: Array.from(this.depressedKeys) })
   }
 
   filterResults(e) {
     this.depressedKeys.delete(e.key)
 
     if(!this._shouldTriggerSearch(e)) return
-    console.log("helloooooo....")
 
     this.submitSearch()
   }
@@ -127,8 +125,6 @@ export default class extends ApplicationController {
 
     if(Array.from(this.depressedKeys).some(key => ["Control", "Alt", "OS"].includes(key))) return false
 
-    const test = /[\S]/g.test(e.key)
-    console.log({ test, key: e.key })
     return /[\S]/g.test(e.key)
   }
 

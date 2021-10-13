@@ -1,21 +1,23 @@
 class CompaniesController < ApplicationController
+  include Searchable
+
   load_and_authorize_resource find_by: :slug
   skip_authorize_resource only: [:new, :create]
 
   # GET /companies
   # GET /companies.json
   def index
+    @companies = search(Company)
   end
 
   # GET /companies/:id
   # GET /companies/:id.json
   def show
-    set_active_company(Company.find_by_slug(:id))
   end
 
   # GET /companies/new
   def new
-    # @company = Company.new
+    @company = Company.new
   end
 
   # GET /companies/:id/edit
@@ -74,6 +76,14 @@ class CompaniesController < ApplicationController
   end
 
   private
+
+  def searchable_object
+    Company
+  end
+
+  def sortable_fields
+    %w(name locations.count departments.count assets.count people.count).freeze
+  end
 
   def company_params
     params.require(:company).permit(:name)

@@ -1,5 +1,15 @@
 class Company < ApplicationRecord
   include Contactable
+  include PgSearch::Model
+
+  pg_search_scope(
+    :search, 
+    against: [:name], 
+    using: {
+      tsearch: { prefix: true }, 
+      trigram: {}
+    }
+  )
 
   slug :name
 

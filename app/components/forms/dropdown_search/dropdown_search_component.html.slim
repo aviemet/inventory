@@ -1,7 +1,4 @@
-.dropdown-search {
-  data-controller="dropdown-search"
-  data-async=(options[:async] ? "true" : "false")
-}
+.dropdown-search data-controller="dropdown-search" data-async=(options[:async] ? "true" : "false") *wrapper_attributes
   - if form
     = form.input name, { \
       as: :hidden,

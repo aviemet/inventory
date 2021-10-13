@@ -17,7 +17,6 @@ body {
 
   /* Mobile Grid Definition */
   grid-template-columns: 1fr;
-  grid-template-rows: 50px 1fr 35px;
   grid-template-areas:
     "topbar"
     "content"
@@ -36,7 +35,7 @@ body {
   /* Desktop Grid Definition */
   @screen sm {
     grid-template-columns: var(--sidebar-width-open) 1fr;
-    grid-template-rows: 50px 1fr 35px;
+    grid-template-rows: 53px 1fr 35px;
     grid-template-areas:
       "sidebar topbar"
       "sidebar content"
@@ -215,7 +214,7 @@ body {
           );
           width: calc(
             var(--sidebar-width-open) - var(--sidebar-link-padding-left) +
-              var(--sidebar-link-border-left)
+            var(--sidebar-link-border-left)
           );
         }
 

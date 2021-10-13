@@ -2,11 +2,10 @@ header#topbar
   .flex
     .sm:hidden
       .cursor-pointer == mi.menu.html(id: "topbar-menu-toggle", "data-action" => "click->layout#toggleSidebar")
-    .flex-1
-      - if current_user
-        = render "layouts/application/active_company_picker"
-      - else
-        h2 Inventory Application
+    .flex-1 data-controller="active-company-dropdown" data-action="dropdown-search:select->active-company-dropdown#setActiveCompany"
+      - unless current_user.companies.empty?
+        = view "forms/dropdown_search", data: current_user.companies, name: :active_company_picker, display_value: current_user.active_company.name, wrapper_attributes: {"data-active-company-dropdown-target" => "dropdown", :id => "active_company_select"}
+
     .div
       = view "forms/dropdown_menu" do |menu|
         = menu.heading do

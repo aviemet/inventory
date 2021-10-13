@@ -1,11 +1,12 @@
 import ApplicationController from "./application_controller"
+import { useDispatch } from "stimulus-use"
 
 export default class extends ApplicationController {
   static targets = ["selector", "input", "hiddenInput", "options", "option"]
 
   connect() {
     super.connect()
-    this.exposeController()
+    useDispatch(this)
 
     // In the case of a page refresh where values have been entered, highlight the selected value
     this._highlightSelectedOption()
@@ -167,6 +168,8 @@ export default class extends ApplicationController {
     this.hiddenInputTarget.value = el.dataset.id
     this.inputTarget.value = el.textContent
     this._hide()
+
+    this.dispatch("select", { id: el.dataset.id, value: el.textContent })
   }
 
   highlightOption(e) {
