@@ -610,7 +610,6 @@ DEPENDENCIES
   slug (~> 4.1)
   solargraph
   spring (>= 3.0.0)
-  stimulus-rails (~> 0.6.1)
   stimulus_reflex (~> 3.4.1)
   sunspot_test (~> 0.4.2)
   turbo-rails (~> 0.8.1)

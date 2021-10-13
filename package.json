@@ -6,6 +6,7 @@
     "start": "NODE_ENV=development foreman start -f Procfile.dev-server"
   },
   "dependencies": {
+    "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.0.1",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
