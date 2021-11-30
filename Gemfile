@@ -6,7 +6,7 @@ ruby '3.0.2'
 # Server
 gem 'rails', '~> 6.1.4'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.1'
+gem 'puma', '~> 5.5'
 gem 'redis', '~> 4.0'
 gem "dotenv-rails", "~> 2.7"
 gem "rack-cors", "~> 1.1"
