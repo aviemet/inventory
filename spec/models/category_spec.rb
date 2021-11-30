@@ -14,5 +14,10 @@ RSpec.describe Category, type: :model do
       subject.name = nil
       expect(subject).to_not be_valid
     end
+
+    it "is not valid without a categorizable_type" do
+      subject.categorizable_type = nil
+      expect(subject).to_not be_valid
+    end
   end
 end

@@ -99,6 +99,6 @@ class ComponentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def component_params
-    params.require(:component).permit(:name, :model_number, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id)
+    params.require(:component).permit(:name, :model_id, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id)
   end
 end

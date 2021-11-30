@@ -39,7 +39,7 @@
           = render body.cell :reassignable
             = license.reassignable
           = render body.cell :cost
-            = license.cost.format
+            = license.cost&.format
           = render body.cell :purchased_at
             = view "tags/date_time", date: license.purchased_at, format: :short
           = render body.cell :expires_at

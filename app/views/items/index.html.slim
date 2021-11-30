@@ -38,7 +38,7 @@
           = render body.cell "vendors.name"
             = link_to(item.vendor, item.vendor) if item.vendor
           = render body.cell :cost
-            = item.cost.format
+            = item.cost&.format
           = render body.cell "departments.name"
             = link_to(item.department, item.department) if item.department
           td nowrap="nowrap"

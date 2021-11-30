@@ -10,11 +10,11 @@ class CollectionSelectInput < SimpleForm::Inputs::CollectionSelectInput
   end
 
   def filterable_select(merged_input_options)
-    ap("***************BUILDER OBJECT***************")
-    ap({builder: @builder})
-    ap({reflection: reflection})
-    ap({attribute_name: attribute_name})
-    ap({value: @builder&.object.try(attribute_name)})
+    # ap("***************BUILDER OBJECT***************")
+    # ap({builder: @builder})
+    # ap({reflection: reflection})
+    # ap({attribute_name: attribute_name})
+    # ap({value: @builder&.object.try(attribute_name)})
 
     @builder.template.render(
       Forms::DropdownSearch::DropdownSearchComponent.new(

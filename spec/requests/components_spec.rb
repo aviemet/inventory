@@ -16,9 +16,8 @@
 def valid_attributes_hash(company)
   {
     component: attributes_for(:component,
-      manufacturer_id: create(:manufacturer).id,
       vendor_id: create(:vendor).id,
-      category_id: create(:category, categorizable_type: "Component").id
+      model_id: create(:model).id
     ),
     company: { id: company.id },
   }

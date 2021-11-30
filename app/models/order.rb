@@ -22,8 +22,8 @@ class Order < ApplicationRecord
   monetize :discount_cents
 
   belongs_to :user
-  belongs_to :person, through: :user
   belongs_to :vendor
+  has_one :person, through: :user
   has_many :purchases
 
   def cost

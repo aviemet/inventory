@@ -20,7 +20,7 @@ class Component < ApplicationRecord
 
   audited
 
-  monetize :cost_cents
+  monetize :cost_cents, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   belongs_to :model
   belongs_to :vendor, required: false
@@ -28,8 +28,9 @@ class Component < ApplicationRecord
   has_one :category, through: :model
   has_one :manufacturer, through: :model
 
-  validates :qty, numericality: { greater_than_or_equal_to: 0 }
+  validates :qty, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
   validates_presence_of :name
+  validates_presence_of :vendor_id
 
   def self.associated_models
     [:manufacturer, :category, :vendor]

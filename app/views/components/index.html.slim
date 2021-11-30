@@ -27,7 +27,7 @@
             = link_to(component.name, component)
           = render body.cell :model_id
             = link_to(component.model.model_number, component.model)
-          = render body.cell :qty
+          = render body.cell :qty 
             = component.qty
           = render body.cell :min_qty
             = component.min_qty
@@ -38,7 +38,7 @@
           = render body.cell "vendors.name"
             = component.vendor ? link_to(component.vendor, component.vendor) : ''
           = render body.cell :cost
-            = component.cost.format
+            = component.cost&.format
           = render body.cell "departments.name"
             = component.department ? link_to(component.department, component.department) : ''
           td nowrap="nowrap"

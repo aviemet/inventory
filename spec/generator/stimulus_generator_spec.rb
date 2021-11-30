@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'spec_helper'
 require 'generators/stimulus/stimulus_generator'
 
 class StimulusGeneratorTest < Rails::Generators::TestCase
