@@ -17,6 +17,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem "slug", "~> 4.1"
 gem "active_type", "~> 1.3"
 gem "audited", "~> 5.0.1"
+gem "decent_exposure", "~> 3.0"
 
 # Search
 gem "pg_search", "~> 2.3"

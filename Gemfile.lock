@@ -155,6 +155,8 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     debug_inspector (1.1.0)
+    decent_exposure (3.0.4)
+      activesupport (>= 4.0)
     deep-cover (1.1.0)
       deep-cover-core (= 1.1.0)
       highline
@@ -316,7 +318,7 @@ GEM
     options (2.3.2)
     orm_adapter (0.5.0)
     parallel (1.21.0)
-    parser (3.0.2.0)
+    parser (3.0.3.1)
       ast (~> 2.4.1)
     pg (1.2.3)
     pg_search (2.3.5)
@@ -459,7 +461,7 @@ GEM
       activerecord (> 3.0.0)
       activesupport (> 3.0.0)
       rake
-    solargraph (0.44.1)
+    solargraph (0.44.2)
       backport (~> 1.2)
       benchmark
       bundler (>= 1.17.2)
@@ -548,7 +550,8 @@ GEM
       ruby-progressbar (~> 1.4)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    yard (0.9.26)
+    yard (0.9.27)
+      webrick (~> 1.7.0)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -568,6 +571,7 @@ DEPENDENCIES
   countries (~> 4.0.1)
   cucumber-rails (~> 2.0)
   database_cleaner (~> 2.0)
+  decent_exposure (~> 3.0)
   deep-cover (~> 1.0)
   devise (~> 4.7)
   devise_ldap_authenticatable (~> 0.8.6)
