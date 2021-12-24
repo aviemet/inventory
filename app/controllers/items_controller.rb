@@ -2,21 +2,23 @@ class ItemsController < ApplicationController
   include OwnableConcern
   include Searchable
 
+  expose :items, -> { @active_company.items.includes_associated }
+  expose :item
+  expose :category, id: -> { request.params[:category_id] }
+
   before_action :set_view_data, only: [:index, :category]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_items, only: [:index, :category]
-  before_action :set_form_models, only: [:edit, :new, :update, :create, :clone]
 
   # GET /items
   # GET /items.json
   def index
+    self.items = search(items, sortable_fields)
   end
 
   # GET /items/category/:category_id
   # GET /items/category/:category_id.json
   def category
-    @category = Category.find(request.params[:category_id])
-    @items = @items.where('model.category': @category)
+    # TODO: Consider another way of filtering without using routes
+    self.items = items.where('model.category': Category.find(request.params[:category_id]))
     render :index
   end
 
@@ -27,7 +29,6 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    @item = Item.new
   end
 
   # GET /items/:id/edit
@@ -36,24 +37,23 @@ class ItemsController < ApplicationController
 
   # GET /items/:id/clone
   def clone
-    @item = Item.find(params[:id]).dup
-    @item.serial = nil
-    @item.asset_tag = nil
-    @item
+    self.item = Item.find(params[:id]).dup
+    self.item.serial = nil
+    self.item.asset_tag = nil
+    self.item
   end
 
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(item_params)
-    @item.company = Company.find(company_params[:id])
+    item.company = Company.find(company_params[:id])
     respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
+      if item.save
+        format.html { redirect_to item, notice: 'Item was successfully created.' }
+        format.json { render :show, status: :created, location: item }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+        format.json { render json: item.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,14 +61,13 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/:id
   # PATCH/PUT /items/:id.json
   def update
-    # set_company
     respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
+      if item.update(item_params)
+        format.html { redirect_to item, notice: 'Item was successfully updated.' }
+        format.json { render :show, status: :ok, location: item }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+        format.json { render json: item.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,7 +75,7 @@ class ItemsController < ApplicationController
   # DELETE /items/:id
   # DELETE /items/:id.json
   def destroy
-    @item.destroy
+    item.destroy
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
@@ -85,31 +84,12 @@ class ItemsController < ApplicationController
 
   private
 
-  def searchable_object
-    @active_company.items.includes_associated
-  end
-
   def sortable_fields
     %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
   def set_view_data
-    @hideable_fields = {Model: "models.name", "Asset Tag": "asset_tag", Serial: "serial", Cost: "cost", "Purchase Date": "purchased_at", Requestable: "requestable", Category: "categories.name", Manufacturer: "manufacturers.name", "Model Number": "models.model_number", Vendor: "vendors.name", Department: "departments.name"}
-  end
-
-  def set_item
-    @item = searchable_object.find(params[:id])
-  end
-
-  def set_items
-    @items = search(searchable_object)
-  end
-
-  def set_form_models
-    @models = Model.all
-    @vendors = @active_company.vendors
-    @locations = @active_company.locations
-    @companies = current_user.companies
+    @hideable_fields = { Model: "models.name", "Asset Tag": "asset_tag", Serial: "serial", Cost: "cost", "Purchase Date": "purchased_at", Requestable: "requestable", Category: "categories.name", Manufacturer: "manufacturers.name", "Model Number": "models.model_number", Vendor: "vendors.name", Department: "departments.name" }
   end
 
   def item_params

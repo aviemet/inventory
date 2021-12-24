@@ -1,14 +1,14 @@
 section.container.relative
   header.flex
-    h1.flex-1 = @item
+    h1.flex-1 = item
     span
       = view "forms/dropdown_menu" do |options_menu|
         = options_menu.heading
           div Actions
         = options_menu.option
-          = assignment_link @item
+          = assignment_link item
         = options_menu.option
-          = link_to "Edit Item", edit_item_path(@item)
+          = link_to "Edit Item", edit_item_path(item)
 
   nav.sticky class="bg-white p-3 border-b-2 -top-4" data-controller="navigation"
     .inline.px-2
@@ -25,54 +25,54 @@ section.container.relative
       .item-row
         label Model:
         .value
-          = link_to @item.model.manufacturer.name, @item.model.manufacturer
+          = link_to item.model.manufacturer.name, item.model.manufacturer
           '  -
-          =  link_to @item.model.name, @item.model
+          =  link_to item.model.name, item.model
 
       .item-row
         label Category:
-        .value = link_to @item.model.category.name, @item.model.category
+        .value = link_to item.model.category.name, item.model.category
 
       .item-row
         label Serial:
-        .value = @item.serial
+        .value = item.serial
 
       .item-row
         label Assigned To:
-        .value = link_to @item.assigned_to.to_s, @item.assigned_to if @item.assigned?
+        .value = link_to item.assigned_to.to_s, item.assigned_to if item.assigned?
 
       .item-row
         label Asset Tag:
-        .value = @item.asset_tag
+        .value = item.asset_tag
 
       .item-row
         label Purchase Cost:
-        .value = @item.cost&.format
+        .value = item.cost&.format
 
       .item-row
         label Purchase Date:
         .value
-          = date_tag @item.purchased_at
+          = date_tag item.purchased_at
 
       .item-row
         label Vendor:
-        .value = link_to @item.vendor.name, @item.vendor
+        .value = link_to item.vendor.name, item.vendor if item.vendor
 
-      p = @item.notes
+      p = item.notes
 
   a name="history"
   section
     h3 Assignment History
 
     .inline-grid.grid-cols-2
-      - @item.assignments.reverse_each do |assignment|
+      - item.assignments.reverse_each do |assignment|
           div = link_to "#{assignment.assign_toable}: ", assignment.assign_toable
           div == assignment.decorate.dates_string
 
     h3 Audit History
 
     ul
-      - @item.audits.includes(:user).reverse_each do |audit|
+      - item.audits.includes(:user).reverse_each do |audit|
         li.mb-1
           == audit.decorate.details
           - if audit.action == "update"
@@ -85,11 +85,11 @@ section.container.relative
     h3 Licenses
 
     ul
-      - @item.licenses.each do |license|
+      - item.licenses.each do |license|
         li = license.name
 
   div style="height: 150vh"
 
-  = link_to 'Edit', edit_item_path(@item)
+  = link_to 'Edit', edit_item_path(item)
   | |
   = link_to 'Back', items_path

@@ -16,13 +16,4 @@ class ApplicationRecord < ActiveRecord::Base
       super
     end
   end
-
-  def self.includes_associated
-    if defined? self.associated_models
-      includes(self.associated_models)
-    else
-      raise StandardError, "associated_models is not defined on #{self.class.name}"
-    end
-  end
-
 end

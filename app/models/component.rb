@@ -32,7 +32,5 @@ class Component < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :vendor_id
 
-  def self.associated_models
-    [:manufacturer, :category, :vendor]
-  end
+  scope :includes_associated, -> { includes([:manufacturer, :category, :vendor])}
 end

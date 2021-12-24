@@ -29,7 +29,6 @@ class Accessory < ApplicationRecord
   has_one :category, through: :model
   has_one :manufacturer, through: :model
 
-  def self.associated_models
-    [:category, :assignments, :department, :vendor, :manufacturer]
-  end
+  scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer]) }
+
 end

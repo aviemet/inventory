@@ -1,1 +1,1 @@
-json.array! @components, partial: "components/component", as: :component
+json.array! components, partial: "components/component", as: :component

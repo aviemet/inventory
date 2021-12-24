@@ -1,1 +1,1 @@
-json.partial! "consumables/consumable", consumable: @consumable
+json.partial! "consumables/consumable", consumable: consumable

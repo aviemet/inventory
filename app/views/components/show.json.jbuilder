@@ -1,1 +1,1 @@
-json.partial! "components/component", component: @component
+json.partial! "components/component", component: component

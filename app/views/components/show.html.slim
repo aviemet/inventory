@@ -1,14 +1,14 @@
 section.container.relative
   header.flex
-    h1.flex-1 = @component
+    h1.flex-1 = component
     span
       = view "forms/dropdown_menu" do |options_menu|
         = options_menu.heading
           div Actions
         = options_menu.option
-          = assignment_link @component
+          = assignment_link component
         = options_menu.option
-          = link_to "Edit Component", edit_component_path(@component)
+          = link_to "Edit Component", edit_component_path(component)
 
   nav.sticky class="bg-white p-3 border-b-2 -top-4" data-controller="navigation"
     .inline.px-2
@@ -25,47 +25,47 @@ section.container.relative
       .item-row
         label Model:
         .value
-          = link_to @component.manufacturer.name, @component.manufacturer
+          = link_to component.manufacturer.name, component.manufacturer
 
       .item-row
         label Category:
-        .value = link_to @component.category.name, @component.category
+        .value = link_to component.category.name, component.category
 
       .item-row
         label Model Number:
-        .value = @component.model.model_number
+        .value = component.model.model_number
 
       .item-row
         label Notes:
-        .value = @component.notes
+        .value = component.notes
 
       .item-row
         label Quantity:
-        .value = @component.qty
+        .value = component.qty
 
       .item-row
         label Purchase Cost:
-        .value = @component.cost&.format
+        .value = component.cost&.format
 
       .item-row
         label Purchase Date:
-        .value = I18n.l(@component.purchased_at, format: :long) unless @component.purchased_at.nil?
+        .value = I18n.l(component.purchased_at, format: :long) unless component.purchased_at.nil?
 
       .item-row
         label Vendor:
-        .value = link_to @component.vendor.name, @component.vendor
+        .value = link_to component.vendor.name, component.vendor
 
   a name="history"
   section
     h3 Assignment History
 
     .inline-grid.grid-cols-2
-      - @component.assignments.reverse_each do |assignment|
+      - component.assignments.reverse_each do |assignment|
           div = link_to "#{assignment.assign_toable}: ", assignment.assign_toable
           div == assignment.decorate.dates_string
 
   div style="height: 150vh"
 
-  = link_to 'Edit', edit_component_path(@component)
+  = link_to 'Edit', edit_component_path(component)
   | |
   = link_to 'Back', components_path

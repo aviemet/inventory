@@ -1,1 +1,1 @@
-json.array! @consumables, partial: "consumables/consumable", as: :consumable
+json.array! consumables, partial: "consumables/consumable", as: :consumable

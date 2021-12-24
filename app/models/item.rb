@@ -23,7 +23,7 @@ class Item < ApplicationRecord
   resourcify
   audited
 
-  monetize :cost_cents
+  monetize :cost_cents, allow_nil: true
 
   validates_presence_of :name
 
@@ -41,15 +41,11 @@ class Item < ApplicationRecord
 
   scope :no_nics, -> { includes(:nics).where(nics: { id: nil }) }
 
+  scope :includes_associated, -> { includes([:category, :model, :assignments, :department, :vendor, :manufacturer]) }
+
   # Update Item name if changed during assignment
-  def before_assignment(_assignment, params)
+  def before_assignment(_, params)
     name = params&.[](:assignment)&.[](:item)&.[](:name)
-    return if name.nil?
-
-    self.update(name: name)
-  end
-
-  def self.associated_models
-    [:category, :model, :assignments, :department, :vendor, :manufacturer]
+    self.update(name: name) unless name.nil?
   end
 end

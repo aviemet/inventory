@@ -2,17 +2,16 @@ class AccessoriesController < ApplicationController
   include OwnableConcern
   include Searchable
 
+  expose :accessories, -> { @active_company.accessories.includes_associated }
+  expose :accessory
+
   before_action :set_view_data, only: [:index, :category]
   before_action :set_accessory, only: [:show, :edit, :update, :destroy]
+  before_action :set_accessories, only: [:index]
 
   # GET /accessories
   # GET /accessories.json
   def index
-    @accessories = if params[:search]
-                     search(Accessory, params[:search], params[:page])
-                   else
-                     searchable_object.order(sort(Accessory)).page(params[:page])
-                   end
   end
 
   # GET /accessories/1
@@ -22,7 +21,6 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/new
   def new
-    @accessory = Accessory.new
   end
 
   # GET /accessories/1/edit
@@ -32,15 +30,13 @@ class AccessoriesController < ApplicationController
   # POST /accessories
   # POST /accessories.json
   def create
-    @accessory = Accessory.new(accessory_params)
-
     respond_to do |format|
-      if @accessory.save
-        format.html { redirect_to @accessory, notice: 'Accessory was successfully created.' }
-        format.json { render :show, status: :created, location: @accessory }
+      if accessory.save
+        format.html { redirect_to accessory, notice: 'Accessory was successfully created.' }
+        format.json { render :show, status: :created, location: accessory }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @accessory.errors, status: :unprocessable_entity }
+        format.json { render json: accessory.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -49,12 +45,12 @@ class AccessoriesController < ApplicationController
   # PATCH/PUT /accessories/1.json
   def update
     respond_to do |format|
-      if @accessory.update(accessory_params)
-        format.html { redirect_to @accessory, notice: 'Accessory was successfully updated.' }
-        format.json { render :show, status: :ok, location: @accessory }
+      if accessory.update(accessory_params)
+        format.html { redirect_to accessory, notice: 'Accessory was successfully updated.' }
+        format.json { render :show, status: :ok, location: accessory }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @accessory.errors, status: :unprocessable_entity }
+        format.json { render json: accessory.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -62,7 +58,7 @@ class AccessoriesController < ApplicationController
   # DELETE /accessories/1
   # DELETE /accessories/1.json
   def destroy
-    @accessory.destroy
+    accessory.destroy
     respond_to do |format|
       format.html { redirect_to accessories_url, notice: 'Accessory was successfully destroyed.' }
       format.json { head :no_content }
@@ -70,10 +66,6 @@ class AccessoriesController < ApplicationController
   end
 
   private
-
-  def searchable_object
-    @active_company.accessories.includes_associated
-  end
   
   def sortable_fields
     %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
@@ -84,7 +76,11 @@ class AccessoriesController < ApplicationController
   end
 
   def set_accessory
-    @accessory = searchable_object.find(params[:id])
+    @accessory = accessories.find(params[:id])
+  end
+
+  def set_accessories
+    @accessories = search(accessories, sortable_fields)
   end
 
   def accessory_params

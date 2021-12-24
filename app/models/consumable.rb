@@ -30,7 +30,6 @@ class Consumable < ApplicationRecord
 
   validates :qty, numericality: { greater_than_or_equal_to: 0 }
 
-  def self.associated_models
-    [:manufacturer, :category, :vendor]
-  end
+  scope :includes_associated, -> { includes([:manufacturer, :category, :vendor]) }
+
 end

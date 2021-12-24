@@ -20,14 +20,14 @@
         th.table-column-fit.text-center Actions
 
     = table.body do |body|
-      - @components.each do |component|
+      - components.each do |component|
         = body.row
           = body.select_cell component
           = render body.cell :name
             = link_to(component.name, component)
           = render body.cell :model_id
             = link_to(component.model.model_number, component.model)
-          = render body.cell :qty 
+          = render body.cell :qty
             = component.qty
           = render body.cell :min_qty
             = component.min_qty
@@ -49,5 +49,5 @@
 
     = section.pagination
       .flex.pt-3
-        .flex-1 = page_entries_info @components, entry_name: "component"
-        .flex-1 = paginate @components
+        .flex-1 = page_entries_info components, entry_name: "component"
+        .flex-1 = paginate components
