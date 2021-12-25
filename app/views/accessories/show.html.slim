@@ -1,14 +1,14 @@
 section.container.relative
   header.flex
-    h1.flex-1 = @accessory
+    h1.flex-1 = accessory
     span
       = view "forms/dropdown_menu" do |options_menu|
         = options_menu.heading
           div Actions
         = options_menu.option
-          = assignment_link @accessory
+          = assignment_link accessory
         = options_menu.option
-          = link_to "Edit accessory", edit_accessory_path(@accessory)
+          = link_to "Edit accessory", edit_accessory_path(accessory)
 
   nav.sticky class="bg-white p-3 border-b-2 -top-4" data-controller="navigation"
     .inline.px-2
@@ -23,45 +23,45 @@ section.container.relative
       .item-row
         label Model:
         .value
-          = link_to @accessory.model.manufacturer.name, @accessory.model.manufacturer
+          = link_to accessory.model.manufacturer.name, accessory.model.manufacturer
           '  -
-          =  link_to @accessory.model.name, @accessory.model
+          =  link_to accessory.model.name, accessory.model
 
       .item-row
         label Category:
-        .value = link_to @accessory.model.category.name, @accessory.model.category
+        .value = link_to accessory.model.category.name, accessory.model.category
 
       .item-row
         label Serial:
-        .value = @accessory.serial
+        .value = accessory.serial
 
       .item-row
         label Number Assigned:
-        .value = @accessory.assignments.count
+        .value = accessory.assignments.count
 
       .item-row
         label Purchase Cost:
-        .value = @accessory.cost&.format
+        .value = accessory.cost&.format
 
       .item-row
         label Vendor:
-        .value = link_to @accessory.vendor.name, @accessory.vendor
+        .value = link_to accessory.vendor.name, accessory.vendor
 
-      p = @accessory.notes
+      p = accessory.notes
 
   a name="history"
   section
     h3 Assignment History
 
     .inline-grid.grid-cols-2
-      - @accessory.assignments.reverse_each do |assignment|
+      - accessory.assignments.reverse_each do |assignment|
           div = link_to "#{assignment.assign_toable}: ", assignment.assign_toable
           div == assignment.decorate.dates_string
 
     h3 Audit History
 
     ul
-      - @accessory.audits.includes(:user).reverse_each do |audit|
+      - accessory.audits.includes(:user).reverse_each do |audit|
         li.mb-1
           == audit.decorate.details
           - if audit.action == "update"
@@ -71,6 +71,6 @@ section.container.relative
 
   div style="height: 150vh"
 
-  = link_to 'Edit', edit_accessory_path(@accessory)
+  = link_to 'Edit', edit_accessory_path(accessory)
   | |
   = link_to 'Back', accessories_path

@@ -6,12 +6,11 @@ class AccessoriesController < ApplicationController
   expose :accessory
 
   before_action :set_view_data, only: [:index, :category]
-  before_action :set_accessory, only: [:show, :edit, :update, :destroy]
-  before_action :set_accessories, only: [:index]
 
   # GET /accessories
   # GET /accessories.json
   def index
+    self.accessories = search(accessories, sortable_fields)
   end
 
   # GET /accessories/1
@@ -64,7 +63,7 @@ class AccessoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+ 
   private
   
   def sortable_fields
@@ -73,14 +72,6 @@ class AccessoriesController < ApplicationController
 
   def set_view_data
     @hideable_fields = {Model: "models.name", Serial: "serial", Cost: "cost", "Purchase Date": "purchased_at", Requestable: "requestable", Category: "categories.name", Manufacturer: "manufacturers.name", "Model Number": "models.model_number", Vendor: "vendors.name", Department: "departments.name"}
-  end
-
-  def set_accessory
-    @accessory = accessories.find(params[:id])
-  end
-
-  def set_accessories
-    @accessories = search(accessories, sortable_fields)
   end
 
   def accessory_params

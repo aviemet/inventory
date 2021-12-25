@@ -19,7 +19,7 @@
         = head.cell :min_qty
         th.table-column-fit.text-center Actions
     = table.body do |body|
-      - @accessories.each do |accessory|
+      - accessories.each do |accessory|
         = body.row
           = body.select_cell accessory
           = render body.cell :name
@@ -48,5 +48,5 @@
 
   = section.pagination
     .flex.pt-3
-      .flex-1 = page_entries_info @accessories
-      .flex-1 = paginate @accessories
+      .flex-1 = page_entries_info accessories, entry_name: "accessory"
+      .flex-1 = paginate accessories

@@ -1,1 +1,1 @@
-json.array! @accessories, partial: "accessories/accessory", as: :accessory
+json.array! accessories, partial: "accessories/accessory", as: :accessory
