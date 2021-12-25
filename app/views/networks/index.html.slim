@@ -17,7 +17,7 @@
         th.table-column-fit.text-center Actions
 
     = table.body do |body|
-      - @networks.each do |network|
+      - networks.each do |network|
         = body.row
           = body.select_cell network
           = render body.cell :name

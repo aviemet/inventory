@@ -3,28 +3,24 @@ class NetworksController < ApplicationController
   include Searchable
 
   before_action :set_view_data, only: [:index, :category]
-  before_action :set_network, only: [:show, :edit, :update, :destroy]
+
+  expose :networks, -> { @active_company.networks }
+  expose :network
 
   # GET /networks
   # GET /networks.json
   def index
-    ap({sort: sort(Network)})
-    @networks = if params[:search]
-                  search(Network, params[:search], params[:page])
-                else
-                  searchable_object.order(sort(Network)).page(params[:page])
-                end
+    self.networks = search(networks, sortable_fields)
   end
 
   # GET /networks/1
   # GET /networks/1.json
   def show
-    @ips = IpLease.includes(:item).in_network(@network)
+    @ips = IpLease.includes(:item).in_network(self.network)
   end
 
   # GET /networks/new
   def new
-    @network = Network.new
   end
 
   # GET /networks/1/edit
@@ -34,16 +30,14 @@ class NetworksController < ApplicationController
   # POST /networks
   # POST /networks.json
   def create
-    @network = Network.new(network_params)
-    @network.company = Company.find(company_params[:id])
-
+    network.company = Company.find(company_params[:id])
     respond_to do |format|
-      if @network.save
-        format.html { redirect_to @network, notice: 'Network was successfully created.' }
-        format.json { render :show, status: :created, location: @network }
+      if network.save
+        format.html { redirect_to network, notice: 'Network was successfully created.' }
+        format.json { render :show, status: :created, location: network }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @network.errors, status: :unprocessable_entity }
+        format.json { render json: network.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -52,12 +46,12 @@ class NetworksController < ApplicationController
   # PATCH/PUT /networks/1.json
   def update
     respond_to do |format|
-      if @network.update!(network_params)
-        format.html { redirect_to @network, notice: 'Network was successfully updated.' }
-        format.json { render :show, status: :ok, location: @network }
+      if network.update!(network_params)
+        format.html { redirect_to network, notice: 'Network was successfully updated.' }
+        format.json { render :show, status: :ok, location: network }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @network.errors, status: :unprocessable_entity }
+        format.json { render json: network.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,7 +59,7 @@ class NetworksController < ApplicationController
   # DELETE /networks/1
   # DELETE /networks/1.json
   def destroy
-    @network.destroy
+    network.destroy
     respond_to do |format|
       format.html { redirect_to networks_url, notice: 'Network was successfully destroyed.' }
       format.json { head :no_content }
@@ -74,20 +68,12 @@ class NetworksController < ApplicationController
 
   private
 
-  def searchable_object
-    @active_company.networks
-  end
-
   def sortable_fields
     %w(name address gateway dhcp_start dhcp_end vlan_id).freeze
   end
 
   def set_view_data
     @hideable_fields = { Address: "address",Gateway: "gateway", "DHCP Start": "dhcp_start", "DHCP End": "dhcp_end", "VLAN ID": "vlan_id" }
-  end
-
-  def set_network
-    @network = searchable_object.find(params[:id])
   end
 
   def network_params
