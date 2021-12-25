@@ -23,7 +23,7 @@
         = head.cell "manufacturers.name", heading: "Manufacturer"
         th.table-column-fit.text-center Actions
     = table.body do |body|
-      - @licenses.each do |license|
+      - licenses.each do |license|
         = body.row
           = body.select_cell license
           = render body.cell :name
@@ -62,5 +62,5 @@
 
     = section.pagination
       .flex.pt-3
-        .flex-1 = page_entries_info @licenses, entry_name: "license"
-        .flex-1 = paginate @licenses
+        .flex-1 = page_entries_info licenses, entry_name: "license"
+        .flex-1 = paginate licenses

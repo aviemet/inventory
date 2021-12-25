@@ -1,50 +1,50 @@
 section.container
   p
     strong Name:
-    = @license.name
+    = license.name
   p
     strong Seats:
-    = @license.seats
+    = license.seats
   p
     strong Key:
-    = @license.key
+    = license.key
   p
     strong Licensed to:
   ul
     li
-      | Name: #{@license.licenser_name}
+      | Name: #{license.licenser_name}
     li
-      | Email: #{@license.licenser_email}
+      | Email: #{license.licenser_email}
   p
     strong Reassignable:
-    = @license.reassignable
+    = license.reassignable
   p
     strong Maintained:
-    = @license.maintained
+    = license.maintained
   p
     strong Cost:
-    = @license.cost
+    = license.cost
   p
     strong Purchase Date:
-    = @license.purchased_at
+    = license.purchased_at
   p
     strong Expiration Date:
-    = @license.expires_at
+    = license.expires_at
   p
     strong Termination Date:
-    = @license.terminates_at
+    = license.terminates_at
   p
     strong Category:
-    = @license.category.name
+    = license.category.name
   p
     strong Vendor:
-    = @license.vendor.name
+    = license.vendor.name
   p
     strong Manufacturer:
-    = @license.manufacturer.name
+    = license.manufacturer.name
   p
     strong Notes:
-    = @license.notes
-  = link_to 'Edit', edit_license_path(@license)
+    = license.notes
+  = link_to 'Edit', edit_license_path(license)
   ' |
   = link_to 'Back', licenses_path

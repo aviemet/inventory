@@ -1,1 +1,1 @@
-json.array! @licenses, partial: "licenses/license", as: :license
+json.array! licenses, partial: "licenses/license", as: :license

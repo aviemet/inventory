@@ -1,1 +1,1 @@
-json.partial! "licenses/license", license: @license
+json.partial! "licenses/license", license: license

@@ -30,7 +30,5 @@ class License < ApplicationRecord
 
   alias_attribute :qty, :seats
 
-  def self.associated_models
-    [:category, :assignments, :department, :vendor, :manufacturer]
-  end
+  scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer])}
 end
