@@ -1,3 +1,3 @@
 .field
   = label_tag :department_id
-  = select_tag :department_id, options_for_select(@company.departments.collect{ |d| [d.name, d.id] }), prompt: "-- Department --"
+  = select_tag :department_id, options_for_select(company.departments.collect{ |d| [d.name, d.id] }), prompt: "-- Department --"

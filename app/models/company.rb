@@ -40,7 +40,7 @@ class Company < ApplicationRecord
     has_many assoc, through: :ownerships, source: :ownable, source_type: model.to_s
   end
 
-  # default_scope { includes(:ownerships) }
+  scope :includes_associated, -> { includes([:departments, :locations, :ownerships])}
 
   validates_presence_of :name
 
