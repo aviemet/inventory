@@ -25,4 +25,6 @@ class Manufacturer < ApplicationRecord
   has_many :accessories, through: :models
   has_many :consumables, through: :models
   has_many :components, through: :models
+
+  scope :includes_associated, -> { includes([:models, :items, :accessories, :consumables, :components]) }
 end

@@ -1,1 +1,1 @@
-json.partial! "manufacturers/manufacturer", manufacturer: @manufacturer
+json.partial! "manufacturers/manufacturer", manufacturer: manufacturer

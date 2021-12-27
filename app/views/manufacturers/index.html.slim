@@ -16,7 +16,7 @@
         = head.cell :consumables
         th.table-column-fit.text-center Actions
     = table.body do |body|
-      - @manufacturers.each do |manufacturer|
+      - manufacturers.each do |manufacturer|
         = body.row
           = body.select_cell manufacturer
           = render body.cell :name
@@ -38,5 +38,5 @@
 
     = section.pagination
       .flex.pt-3
-        .flex-1 = page_entries_info @manufacturers, entry_name: "manufacturer"
-        .flex-1 = paginate @manufacturers
+        .flex-1 = page_entries_info manufacturers, entry_name: "manufacturer"
+        .flex-1 = paginate manufacturers

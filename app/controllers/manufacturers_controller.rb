@@ -3,12 +3,14 @@ class ManufacturersController < ApplicationController
   include Searchable
 
   before_action :set_view_data, only: [:index]
-  before_action :set_manufacturer, only: [:show, :edit, :update, :destroy]
+
+  expose :manufacturers, -> { @active_company.manufacturers }
+  expose :manufacturer, find_by: :slug
 
   # GET /manufacturers
   # GET /manufacturers.json
   def index
-    @manufacturers = search(searchable_object)
+    self.manufacturers = search(manufacturers, sortable_fields)
   end
 
   # GET /manufacturers/1
@@ -18,7 +20,6 @@ class ManufacturersController < ApplicationController
 
   # GET /manufacturers/new
   def new
-    @manufacturer = Manufacturer.new
   end
 
   # GET /manufacturers/1/edit
@@ -28,15 +29,14 @@ class ManufacturersController < ApplicationController
   # POST /manufacturers
   # POST /manufacturers.json
   def create
-    @manufacturer = Manufacturer.new(manufacturer_params)
-    @manufacturer.company = Company.find(company_params[:id])
+    self.manufacturer.company = Company.find(company_params[:id])
     respond_to do |format|
-      if @manufacturer.save
-        format.html { redirect_to @manufacturer, notice: 'Manufacturer was successfully created.' }
-        format.json { render :show, status: :created, location: @manufacturer }
+      if manufacturer.save
+        format.html { redirect_to manufacturer, notice: 'Manufacturer was successfully created.' }
+        format.json { render :show, status: :created, location: manufacturer }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @manufacturer.errors, status: :unprocessable_entity }
+        format.json { render json: manufacturer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,12 +45,12 @@ class ManufacturersController < ApplicationController
   # PATCH/PUT /manufacturers/1.json
   def update
     respond_to do |format|
-      if @manufacturer.update(manufacturer_params)
-        format.html { redirect_to @manufacturer, notice: 'Manufacturer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @manufacturer }
+      if manufacturer.update(manufacturer_params)
+        format.html { redirect_to manufacturer, notice: 'Manufacturer was successfully updated.' }
+        format.json { render :show, status: :ok, location: manufacturer }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @manufacturer.errors, status: :unprocessable_entity }
+        format.json { render json: manufacturer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -58,7 +58,7 @@ class ManufacturersController < ApplicationController
   # DELETE /manufacturers/1
   # DELETE /manufacturers/1.json
   def destroy
-    @manufacturer.destroy
+    manufacturer.destroy
     respond_to do |format|
       format.html { redirect_to manufacturers_url, notice: 'Manufacturer was successfully destroyed.' }
       format.json { head :no_content }
@@ -67,20 +67,12 @@ class ManufacturersController < ApplicationController
 
   private
 
-  def searchable_object
-    Manufacturer
-  end
-
   def sortable_fields
     %w(name).freeze
   end
 
   def set_view_data
     @hideable_fields = {}
-  end
-  
-  def set_manufacturer
-    @manufacturer = searchable_object.find(params[:id])
   end
 
   def manufacturer_params
