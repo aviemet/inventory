@@ -6,14 +6,13 @@
   = form.input :name
   fieldset
     = form.input :serial
-    = form.input :model_number
+    = form.association :model, collection: "models"
   fieldset
     = form.input :qty
     = form.input :min_qty
   = form.input :cost
 
   = form.association :vendor, collection: "vendors"
-  = form.association :category, collection: "categories#acessory"
   = form.association :default_location, collection: "locations"
 
   = form.input :notes

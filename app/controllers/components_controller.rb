@@ -25,7 +25,6 @@ class ComponentsController < ApplicationController
 
   # GET /components/new
   def new
-    @component = Component.new
   end
 
   # GET /components/:id/edit

@@ -13,27 +13,28 @@
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-def valid_attributes_hash(company)
-  {
-    component: attributes_for(:component,
-      vendor_id: create(:vendor).id,
-      model_id: create(:model).id
-    ),
-    company: { id: company.id },
-  }
-end
-
-def invalid_attributes_hash(company)
-  { 
-    component: {
-      name: "",
-      purchased_at: DateTime.now 
-    },
-    company: { id: company.id },
-  }
-end
 
 RSpec.describe "/components", type: :request do
+
+  def valid_attributes_hash(company)
+    {
+      component: attributes_for(:component,
+        vendor_id: create(:vendor).id,
+        model_id: create(:model).id
+      ),
+      company: { id: company.id },
+    }
+  end
+  
+  def invalid_attributes_hash(company)
+    { 
+      component: {
+        name: "",
+        purchased_at: DateTime.now 
+      },
+      company: { id: company.id },
+    }
+  end
 
   let(:company) { create(:company) }
   

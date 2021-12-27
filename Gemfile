@@ -94,7 +94,7 @@ end
 group :test do
   # Testing
   gem "rspec-rails", "~> 5.0"
-  gem "database_cleaner", "~> 2.0"
+  gem "database_cleaner-active_record", "~> 2.0"
   gem "cucumber-rails", "~> 2.0", require: false
   gem "shoulda-matchers", "~> 5.0.0"
   gem "deep-cover", "~> 1.0"

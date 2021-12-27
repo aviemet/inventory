@@ -26,7 +26,7 @@ class Order < ApplicationRecord
   has_one :person, through: :user
   has_many :purchases
 
-  scope :includes_associated, -> { include([:purchase, :item, :accessory, :consumable, :component, :user, :vendor])}
+  scope :includes_associated, -> { includes([:purchase, :item, :accessory, :consumable, :component, :user, :vendor])}
 
   def cost
     self.joins(:purchases).select("SUM(purchases.cost) AS cost")

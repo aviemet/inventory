@@ -36,27 +36,28 @@ require_relative '../support/devise'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-def valid_attributes_hash(company)
-  {
-    item: attributes_for(:item,
-      model_id: create(:model).id,
-      vendor_id: create(:vendor).id,
-    ),
-    company: { id: company.id },
-  }
-end
-
-def invalid_attributes_hash(company)
- { 
-   item: {
-     name: "",
-   },
-   company: { id: company.id },
- }
-end
 
 RSpec.describe "/items", type: :request do
 
+  def valid_attributes_hash(company)
+    {
+      item: attributes_for(:item,
+        model_id: create(:model).id,
+        vendor_id: create(:vendor).id,
+      ),
+      company: { id: company.id },
+    }
+  end
+  
+  def invalid_attributes_hash(company)
+   { 
+     item: {
+       name: "",
+     },
+     company: { id: company.id },
+   }
+  end
+  
   let(:company) { create(:company) }
   
   # Item. As you add validations to Item, be sure to

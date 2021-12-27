@@ -47,10 +47,4 @@ yarn-debug.log*
 
 notes.txt
 
-# Solr
-solr/data
-solr/test/data
-solr/development/data
-solr/default/data
-solr/pids
-.java-version
+spec/examples.txt
