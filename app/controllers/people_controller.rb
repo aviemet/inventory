@@ -4,17 +4,15 @@ class PeopleController < ApplicationController
   # load_and_authorize_resource
 
   before_action :set_view_data, only: [:index, :category]
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
-  before_action :set_form_models, only: [:edit, :new]
+
+  expose :people, -> { @active_company.people.includes_associated }
+  expose :person, find_by: :slug
+  expose :departments, -> { @active_company.departments }
 
   # GET /people
   # GET /people.json
   def index
-    @people = if params[:search]
-               search(Person, params[:search], params[:page])
-             else
-               searchable_object.order(sort(Person)).page(params[:page])
-             end
+    self.people = search(people, sortable_fields)
   end
 
   # GET /people/1
@@ -24,8 +22,7 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
-    @person = Person.new
-    @person.owner = Ownership.new
+    self.person.owner = Ownership.new
   end
 
   # GET /people/1/edit
@@ -35,15 +32,13 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params)
-
     respond_to do |format|
-      if @person.save
-        format.html { redirect_to @person, notice: 'Person was successfully created.' }
-        format.json { render :show, status: :created, location: @person }
+      if person.save
+        format.html { redirect_to person, notice: 'Person was successfully created.' }
+        format.json { render :show, status: :created, location: person }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
+        format.json { render json: person.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -52,12 +47,12 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1.json
   def update
     respond_to do |format|
-      if @person.update(person_params)
-        format.html { redirect_to @person, notice: 'Person was successfully updated.' }
-        format.json { render :show, status: :ok, location: @person }
+      if person.update(person_params)
+        format.html { redirect_to person, notice: 'Person was successfully updated.' }
+        format.json { render :show, status: :ok, location: person }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
+        format.json { render json: person.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,7 +60,7 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.json
   def destroy
-    @person.destroy
+    person.destroy
     respond_to do |format|
       format.html { redirect_to people_url, notice: 'Person was successfully destroyed.' }
       format.json { head :no_content }
@@ -74,25 +69,12 @@ class PeopleController < ApplicationController
 
   private
 
-  def searchable_object
-    @active_company.people.includes_associated
-  end
-
   def sortable_fields
     %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
   def set_view_data
     @hideable_fields = {Model: "models.name", "Asset Tag": "asset_tag", Serial: "serial", Cost: "cost", "Purchase Date": "purchased_at", Requestable: "requestable", Category: "categories.name", Manufacturer: "manufacturers.name", "Model Number": "models.model_number", Vendor: "vendors.name", Department: "departments.name"}
-  end
-
-  def set_person
-    @person = searchable_object.find(params[:id])
-  end
-
-  def set_form_models
-    @people = searchable_object.where.not(id: current_user)
-    @departments = @active_company.departments
   end
 
   def person_params

@@ -28,16 +28,14 @@ class Person < ApplicationRecord
 
   delegate :to_s, to: :full_name
 
+  scope :includes_associated, -> { includes([:user, :manager, :department]) }
+
   def full_name
     "#{first_name} #{last_name}"
   end
 
   def self.to_s_field
     :first_name
-  end
-
-  def self.associated_models
-    [:user, :manager, :department]
   end
 
   private

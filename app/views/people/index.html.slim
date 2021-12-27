@@ -17,7 +17,7 @@
         = head.cell "items.count", heading: "Assigned Items"
         th.table-column-fit.text-center Actions
     = table.body do |body|
-      - @people.each do |person|
+      - people.each do |person|
         = body.row
           = body.select_cell person
           = render body.cell :first_name
@@ -41,5 +41,5 @@
 
     = section.pagination
       .flex.pt-3
-        .flex-1 = page_entries_info @people, entry_name: "person"
-        .flex-1 = paginate @people
+        .flex-1 = page_entries_info people, entry_name: "person"
+        .flex-1 = paginate people

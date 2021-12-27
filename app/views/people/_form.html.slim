@@ -7,6 +7,6 @@
   = form.input :employee_number
   = form.input :job_title
   = form.input :department, as: :select, collection: "departments"
-  = form.association :manager, collection: "people"
+  = form.association :manager, collection: people.where.not(id: current_user.id)
 
   = form.submit
