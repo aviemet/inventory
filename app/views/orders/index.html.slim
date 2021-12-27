@@ -20,7 +20,7 @@
         = head.cell :cost, heading: "Total"
         th.table-column-fit.text-center Actions
     = table.body do |body|
-      - @orders.each do |order|
+      - orders.each do |order|
         = body.row
           = body.select_cell order
           = render body.cell :number
@@ -48,5 +48,5 @@
 
     = section.pagination
       .flex.pt-3
-        .flex-1 = page_entries_info @orders, entry_name: "order"
-        .flex-1 = paginate @orders
+        .flex-1 = page_entries_info orders, entry_name: "order"
+        .flex-1 = paginate orders

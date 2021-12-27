@@ -1,28 +1,28 @@
 section.container
   p
     strong Number:
-    = @order.number
+    = order.number
   p
     strong User:
-    = @order.user_id
+    = order.user_id
   p
     strong Ordered on:
-    = @order.ordered_at
+    = order.ordered_at
   p
     strong Delivered on:
-    = @order.delivered_at
+    = order.delivered_at
   p
     strong Canceled on:
-    = @order.canceled_at
+    = order.canceled_at
   p
     strong Returned on:
-    = @order.returned_at
+    = order.returned_at
   p
     strong Shipping:
-    = @order.shipping
+    = order.shipping
   p
     strong Vendor:
-    = @order.vendor_id
-  = link_to 'Edit', edit_order_path(@order)
+    = order.vendor_id
+  = link_to 'Edit', edit_order_path(order)
   | |
   = link_to 'Back', orders_path
