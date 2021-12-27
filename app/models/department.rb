@@ -19,6 +19,8 @@ class Department < ApplicationRecord
   resourcify
   audited
 
+  validates_presence_of :name
+
   belongs_to :location, optional: true
   belongs_to :manager, class_name: :Person, optional: true
 
@@ -34,7 +36,5 @@ class Department < ApplicationRecord
     has_many assoc, through: :ownerships, source: :ownable, source_type: model.to_s
   end
 
-  # default_scope { includes(:ownerships) }
-
-  validates_presence_of :name
+  scope :includes_associated, -> { includes([:locations, :managers, :items, :contracts, :people, :vendors]) }
 end

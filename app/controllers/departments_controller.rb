@@ -1,12 +1,12 @@
 class DepartmentsController < ApplicationController
   include ContactableConcern
 
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
+  expose :departments, -> { current_user.active_company.departments }
+  expose :department, find_by: :slug
 
   # GET /departments
   # GET /departments.json
   def index
-    @departments = current_user.active_company.departments
   end
 
   # GET /departments/:id
@@ -16,7 +16,6 @@ class DepartmentsController < ApplicationController
 
   # GET /departments/new
   def new
-    @department = Department.new
   end
 
   # GET /departments/:id/edit
@@ -26,16 +25,14 @@ class DepartmentsController < ApplicationController
   # POST /departments
   # POST /departments.json
   def create
-    @department = Department.new(department_params)
-    @department.company = Company.find(params[:company_id])
-
+    self.department.company = Company.find(params[:company_id])
     respond_to do |format|
-      if @department.save
-        format.html { redirect_to company_url(@department.company), notice: 'Department was successfully created.' }
-        format.json { render :show, status: :created, location: @department }
+      if department.save
+        format.html { redirect_to company_url(department.company), notice: 'Department was successfully created.' }
+        format.json { render :show, status: :created, location: department }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @department.errors, status: :unprocessable_entity }
+        format.json { render json: department.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,12 +41,12 @@ class DepartmentsController < ApplicationController
   # PATCH/PUT /departments/:id.json
   def update
     respond_to do |format|
-      if @department.update(department_params)
-        format.html { redirect_to company_url(@department.company), notice: 'Department was successfully updated.' }
-        format.json { render :show, status: :ok, location: @department }
+      if department.update(department_params)
+        format.html { redirect_to company_url(department.company), notice: 'Department was successfully updated.' }
+        format.json { render :show, status: :ok, location: department }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @department.errors, status: :unprocessable_entity }
+        format.json { render json: department.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,18 +54,14 @@ class DepartmentsController < ApplicationController
   # DELETE /departments/:id
   # DELETE /departments/:id.json
   def destroy
-    @department.destroy
+    department.destroy
     respond_to do |format|
-      format.html { redirect_to company_url(@department.company), notice: 'Department was successfully destroyed.' }
+      format.html { redirect_to company_url(department.company), notice: 'Department was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-
-  def set_department
-    @department = Department.find_by_slug(params[:id])
-  end
 
   def department_params
     params.require(:department).permit(:name, :location_id)
