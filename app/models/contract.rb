@@ -13,13 +13,14 @@ class Contract < ApplicationRecord
     }
   )
 
+  resourcify
   audited
+
+  validates_presence_of :name
 
   belongs_to :category
   belongs_to :vendor
 
-  def self.associated_models
-    [:vendor, :category]
-  end
+  scope :includes_associated, -> { includes([:vendor, :category]) }
 
 end

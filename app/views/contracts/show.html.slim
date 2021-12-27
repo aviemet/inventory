@@ -1,17 +1,26 @@
 section.container
   p
-    strong Description:
-    = @contract.description
+    strong Name:
+    = contract.name
   p
-    strong Notes:
-    = @contract.notes
+    strong Number:
+    = contract.number
   p
     strong Vendor:
-    = @contract.vendor_id
+    = contract.vendor
   p
     strong Category:
-    = @contract.category
+    = contract.category
+  p
+    strong Starts At:
+    = date_tag contract.begins_at, format: :short
+  p
+    strong Ends At:
+    = date_tag contract.ends_at, format: :short
+  p
+    strong Notes:
+    = contract.notes
 
-  = link_to 'Edit', edit_contract_path(@contract)
+  = link_to 'Edit', edit_contract_path(contract)
   | |
   = link_to 'Back', contracts_path

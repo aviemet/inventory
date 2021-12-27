@@ -15,7 +15,7 @@
         = head.cell "categories.name", heading: "Category"
         th.table-column-fit.text-center Actions
     = table.body do |body|
-      - @contracts.each do |contract|
+      - contracts.each do |contract|
         = body.row
           = body.select_cell contract
           = render body.cell :name
@@ -35,5 +35,5 @@
 
     = section.pagination
       .flex.pt-3
-        .flex-1 = page_entries_info @contracts, entry_name: "contract"
-        .flex-1 = paginate @contracts
+        .flex-1 = page_entries_info contracts, entry_name: "contract"
+        .flex-1 = paginate contracts
