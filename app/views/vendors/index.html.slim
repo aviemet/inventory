@@ -14,7 +14,7 @@
         th.table-column-fit.text-center Actions
 
     = table.body do |body|
-      - @vendors.each do |vendor|
+      - vendors.each do |vendor|
         = body.row
           = body.select_cell vendor
           = render body.cell :name
@@ -30,5 +30,5 @@
 
     = section.pagination
       .flex.pt-3
-        .flex-1 = page_entries_info @vendors, entry_name: "vendor"
-        .flex-1 = paginate @vendors
+        .flex-1 = page_entries_info vendors, entry_name: "vendor"
+        .flex-1 = paginate vendors

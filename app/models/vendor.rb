@@ -5,7 +5,9 @@ class Vendor < ApplicationRecord
 
   pg_search_scope(
     :search, 
-    against: [:name, :url],
+    against: [:name, :url], associated_against: {
+      item: [:count]
+    },
     using: {
       tsearch: { prefix: true }, 
       trigram: {}
@@ -21,4 +23,6 @@ class Vendor < ApplicationRecord
   has_many :accessories
   has_many :consumables
   has_many :components
+
+  scope :includes_associated, -> { includes([:items]) }
 end
