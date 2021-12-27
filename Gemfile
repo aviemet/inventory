@@ -11,7 +11,7 @@ gem 'redis', '~> 4.0'
 gem "dotenv-rails", "~> 2.7"
 gem "rack-cors", "~> 1.1"
 gem 'bcrypt', '~> 3.1.7'
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bootsnap', '>= 1.9.3', require: false
 
 # Models
 gem "slug", "~> 4.1"
