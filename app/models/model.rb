@@ -26,4 +26,6 @@ class Model < ApplicationRecord
 
   validates_presence_of :name
   validates :name, uniqueness: { scope: :model_number, message: "Model already exists" }
+
+  scope :includes_associated, -> { includes([:manufacturer, :category]) }
 end

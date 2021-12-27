@@ -3,12 +3,14 @@ class ModelsController < ApplicationController
   include Searchable
 
   before_action :set_view_data, only: [:index]
-  before_action :set_model, only: [:show, :edit, :update, :destroy]
+
+  expose :models, -> { Model.includes_associated }
+  expose :model, find_by: :slug
 
   # GET /models
   # GET /models.json
   def index
-    @models = search(searchable_object)
+    self.models = search(models, sortable_fields)
   end
 
   # GET /models/1
@@ -18,7 +20,6 @@ class ModelsController < ApplicationController
 
   # GET /models/new
   def new
-    @model = Model.new
   end
 
   # GET /models/1/edit
@@ -28,8 +29,6 @@ class ModelsController < ApplicationController
   # POST /models
   # POST /models.json
   def create
-    @model = Model.new(model_params)
-
     respond_to do |format|
       if @model.save
         format.html { redirect_to @model, notice: 'Model was successfully created.' }
@@ -67,20 +66,12 @@ class ModelsController < ApplicationController
 
   private
 
-  def searchable_object
-    Model
-  end
-
   def sortable_fields
-    %w(name).freeze
+    %w(name model_number manufacturers.name categories.name).freeze
   end
 
   def set_view_data
     @hideable_fields = {}
-  end
-
-  def set_model
-    @model = searchable_object.find_by_slug(params[:id])
   end
 
   def model_params

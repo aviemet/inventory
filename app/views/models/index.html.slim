@@ -9,19 +9,19 @@
       = head.row
         = head.select_all_cell
         = head.cell :name
-        = head.cell :manufacturer
-        = head.cell :category
+        = head.cell "manufacturers.name", heading: "Manufacturer"
+        = head.cell "categories.name", heading: "Category"
         = head.cell :model_number
         th.table-column-fit.text-center Actions
     = table.body do |body|
-      - @models.each do |model|
+      - models.each do |model|
         = body.row
           = body.select_cell model
           = render body.cell :name
             = link_to(model.name, model)
-          = render body.cell :manufacturer_id
+          = render body.cell "manufacturers.name"
             = link_to(model.manufacturer.name, model.manufacturer)
-          = render body.cell :category_id
+          = render body.cell "categories.name"
             = link_to(model.category.name, model.category)
           = render body.cell :model_number
             = model.model_number
@@ -32,5 +32,5 @@
 
     = section.pagination
       .flex.pt-3
-        .flex-1 = page_entries_info @models, entry_name: "model"
-        .flex-1 = paginate @models
+        .flex-1 = page_entries_info models, entry_name: "model"
+        .flex-1 = paginate models
