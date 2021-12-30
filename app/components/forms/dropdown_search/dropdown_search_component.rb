@@ -2,14 +2,16 @@
 
 class Forms::DropdownSearch::DropdownSearchComponent < ApplicationComponent
   attr_reader :form
+  attr_reader :async
   attr_reader :name
   attr_reader :options
   attr_reader :data
   attr_reader :value
   attr_reader :wrapper_attributes
 
-  def initialize(data:, name:, value: nil, display_value: nil, form: nil, maxlength: false, minlength: false, pattern: false, min_max: false, readonly: false, placeholder: false, wrapper_attributes: {})
+  def initialize(data:, name:, value: nil, display_value: nil, form: nil, async: false, maxlength: false, minlength: false, pattern: false, min_max: false, readonly: false, placeholder: false, wrapper_attributes: {})
     @form = form
+    @async = async
     @data = data
     @name = name
     @value = value

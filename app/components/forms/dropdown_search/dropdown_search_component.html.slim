@@ -4,8 +4,10 @@
       as: :hidden,
       wrapper: false,
       input_html: { data: { 'dropdown-search-target': "hiddenInput" } } }
+  - elsif async
+    = hidden_field_tag name, @value || "", data: { "dropdown-search-target" => "hiddenInput" }
   - else
-    = hidden_field_tag name, @value || "", data: { target: "dropdown-search.hiddenInput" }
+    = hidden_field_tag name, @value || "", data: { "dropdown-target" => "hiddenInput" }
 
   .selector {
     data-dropdown-search-target="selector"
