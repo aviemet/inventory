@@ -29,6 +29,5 @@
               = view "buttons/delete", path: vendor
 
     = section.pagination
-      .flex.pt-3
-        .flex-1 = page_entries_info vendors, entry_name: "vendor"
-        .flex-1 = paginate vendors
+      .flex-1 = page_entries_info vendors, entry_name: "vendor"
+      .flex-1 = paginate vendors

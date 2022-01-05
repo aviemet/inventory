@@ -48,6 +48,5 @@
               = view "buttons/delete", path: component
 
     = section.pagination
-      .flex.pt-3
-        .flex-1 = page_entries_info components, entry_name: "component"
-        .flex-1 = paginate components
+      .flex-1 = page_entries_info components, entry_name: "component"
+      .flex-1 = paginate components

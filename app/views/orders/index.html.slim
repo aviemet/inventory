@@ -47,6 +47,5 @@
               = view "buttons/delete", path: order
 
     = section.pagination
-      .flex.pt-3
-        .flex-1 = page_entries_info orders, entry_name: "order"
-        .flex-1 = paginate orders
+      .flex-1 = page_entries_info orders, entry_name: "order"
+      .flex-1 = paginate orders

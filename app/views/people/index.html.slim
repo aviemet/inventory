@@ -40,6 +40,5 @@
               = view "buttons/delete", path: person
 
     = section.pagination
-      .flex.pt-3
-        .flex-1 = page_entries_info people, entry_name: "person"
-        .flex-1 = paginate people
+      .flex-1 = page_entries_info people, entry_name: "person"
+      .flex-1 = paginate people

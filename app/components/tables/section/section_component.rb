@@ -6,7 +6,7 @@ class Tables::Section::SectionComponent < ApplicationComponent
   renders_one :table, Tables::Table::TableComponent
   renders_one :pagination
 
-  attr_reader :hideable_fields, :table_preferences, :name
+  attr_reader :hideable_fields, :table_preferences, :name, :paginate
 
   def initialize(table_preferences: {}, hideable_fields: {}, name: nil, hideable: true, filterable: true, sortable: true, paginate: true)
     @table_preferences = table_preferences.to_json

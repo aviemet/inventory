@@ -37,6 +37,5 @@
               = view "buttons/delete", path: manufacturer
 
     = section.pagination
-      .flex.pt-3
-        .flex-1 = page_entries_info manufacturers, entry_name: "manufacturer"
-        .flex-1 = paginate manufacturers
+      .flex-1 = page_entries_info manufacturers, entry_name: "manufacturer"
+      .flex-1 = paginate manufacturers

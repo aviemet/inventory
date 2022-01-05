@@ -31,6 +31,5 @@
               = view "buttons/delete", path: model
 
     = section.pagination
-      .flex.pt-3
-        .flex-1 = page_entries_info models, entry_name: "model"
-        .flex-1 = paginate models
+      .flex-1 = page_entries_info models, entry_name: "model"
+      .flex-1 = paginate models

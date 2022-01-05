@@ -47,6 +47,5 @@
               = view "buttons/delete", path: accessory
 
   = section.pagination
-    .flex.pt-3
-      .flex-1 = page_entries_info accessories, entry_name: "accessory"
-      .flex-1 = paginate accessories
+    .flex-1 = page_entries_info accessories, entry_name: "accessory"
+    .flex-1 = paginate accessories
