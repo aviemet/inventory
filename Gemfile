@@ -31,7 +31,7 @@ gem 'sass-rails', '>= 6'
 gem 'jbuilder', '~> 2.7'
 gem "slim-rails", "~> 3.2"
 gem 'webpacker', '~> 5.0'
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 gem "material_icons", "~> 2.2"
 gem "simple_form", "~> 5.0"
 gem "view_component", "~> 2.23", require: "view_component/engine"
