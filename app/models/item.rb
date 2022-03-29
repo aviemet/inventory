@@ -7,15 +7,15 @@ class Item < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
-    against: [:name, :asset_tag, :serial, :cost_cents], associated_against: { 
+    :search,
+    against: [:name, :asset_tag, :serial, :cost_cents], associated_against: {
       model: [:name, :model_number],
       vendor: [:name],
       default_location: [:name],
       category: [:name],
       manufacturer: [:name]
     }, using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )
@@ -37,7 +37,7 @@ class Item < ApplicationRecord
   has_one :manufacturer, through: :model
   has_one :warranty, required: false
 
-  accepts_nested_attributes_for :nics #, reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :nics # , reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
 
   scope :no_nics, -> { includes(:nics).where(nics: { id: nil }) }
 

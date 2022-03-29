@@ -14,7 +14,7 @@
 module Searchable
   extend ActiveSupport::Concern
 
-  def search(model, sortable_fields=[])
+  def search(model, sortable_fields = [])
     terms = params[:search]
     page = params[:page] || 1
     return model.order(sort(model, sortable_fields)).page(page) unless terms
@@ -28,7 +28,7 @@ module Searchable
   def sort(model, sortable_fields)
     return unless sortable_fields&.include?(params[:sort])
 
-    sort_str = "#{params[:sort]}"
+    sort_str = params[:sort].to_s
     # Force case insensitive sorting if field type is a string
     if %i(string text).freeze.include?(field_type(model, params[:sort]))
       sort_str = "lower(#{sort_str})"

@@ -4,7 +4,7 @@ import { useDebounce } from "stimulus-use"
 export default class extends ApplicationController {
   static targets = [ "filterForm", "filterInput", "heading", "cell", "checkbox", "selectAll", "columnToggleMenu" ]
   static values = { preferences: Object, name: String }
-  static debounces = [{ name: "submitSearch", wait: 500 }]
+  static debounces = [{ name: "search", wait: 500 }]
 
   depressedKeys = new Set()
 
@@ -15,7 +15,7 @@ export default class extends ApplicationController {
 
     this._applyUserTablePreferences()
 
-    this._cursorPositionEnd(this.filterInputTarget)
+    // this._cursorPositionEnd(this.filterInputTarget)
   }
 
   _applyUserTablePreferences() {
@@ -106,10 +106,18 @@ export default class extends ApplicationController {
   /** END TOGGLE COLUMNS */
 
   /** SEARCH FILTER **/
+  search() {
+    this.stimulate("Table#search")
+      .then(response => console.log({ response }))
+      .catch(error => console.log({ error }))
+  }
+
+  // input#keyDown
   listenKeyDown(e) {
     this.depressedKeys.add(e.key)
   }
 
+  // input#keyUp
   filterResults(e) {
     this.depressedKeys.delete(e.key)
 
@@ -122,6 +130,8 @@ export default class extends ApplicationController {
     const MIN_SEARCH_LENGTH = 2
     const len = this.filterInputTarget.value.length
     if(len < MIN_SEARCH_LENGTH) return false
+
+    console.log({ keys: this.depressedKeys })
 
     if(Array.from(this.depressedKeys).some(key => ["Control", "Alt", "OS"].includes(key))) return false
 

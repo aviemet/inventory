@@ -39,4 +39,10 @@ class TableReflex < ApplicationReflex
     current_user.save
   end
 
+  def search
+    model = params[:controller].singularize.capitalize.constantize
+    records = model.where('name LIKE ?', "%#{params[:query]}%")
+    morph "#table"
+  end
+
 end
