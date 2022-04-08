@@ -1,0 +1,8 @@
+{
+	"editor.tabSize": 2,
+	"maven.executable.preferMavenWrapper": false,
+	"prettier.useTabs": false,
+	"editor.insertSpaces": true,
+	"css.validate": false,
+	"bloop.openOnSuggestionsAvailable": true
+}

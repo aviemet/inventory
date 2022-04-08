@@ -1,7 +1,9 @@
 class PagesController < ApplicationController
 
   def home
-    render template: "pages/home"
+    render inertia: "Home", props: {
+      name: "World",
+    }
   end
 
   def show
