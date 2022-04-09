@@ -32,7 +32,7 @@ gem "time_for_a_boolean", "~> 0.2.1"
 gem "factory_bot", "~> 6.2"
 gem "draper", "~> 4.0"
 gem "ipaddress_2", "~> 0.14.0"
-gem "ts_schema", "~> 0.1.8"
+gem "ts_schema", "~> 0.1.13"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"

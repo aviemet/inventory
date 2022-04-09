@@ -16,6 +16,16 @@ class ApplicationController < ActionController::Base
   # end
   # raise CanCan::AccessDenied.new("You are not authorized to perform this action!", :custom_action, Project)
 
+  inertia_share auth: lambda {
+    {
+      user: current_user.as_json({
+        except: [:password],
+        include: :person,
+      }),
+      form_authenticity_token: form_authenticity_token,
+    }
+  }
+
   def after_sign_out_path_for(*)
     new_user_session_path
   end

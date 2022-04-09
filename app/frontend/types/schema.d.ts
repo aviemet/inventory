@@ -2,7 +2,7 @@ declare namespace schema {
 	interface User {
 		id: number;
 		email: string;
-		encryptedPassword: string;
+		password?: string | null;
 		resetPasswordToken?: string | null;
 		resetPasswordSentAt?: string | null;
 		rememberCreatedAt?: string | null;
@@ -30,209 +30,6 @@ declare namespace schema {
 		person?: Person;
 		activeCompany?: Company;
 		companies?: Company[];
-	}
-
-	interface Accessory {
-		id: number;
-		name?: string | null;
-		serial?: string | null;
-		minQty?: number | null;
-		qty?: number | null;
-		costCents?: number | null;
-		costCurrency: string;
-		requestable: boolean;
-		notes?: string | null;
-		modelId: number;
-		vendorId?: number | null;
-		defaultLocationId?: number | null;
-		createdAt: string;
-		updatedAt: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		assignments?: Assignment[];
-		purchase?: Purchase;
-		fieldsetAssociations?: FieldsetAssociation[];
-		roles?: Role[];
-		audits?: AuditedAudit[];
-		model?: Model;
-		vendor?: Vendor;
-		defaultLocation?: Location;
-		category?: Category;
-		manufacturer?: Manufacturer;
-	}
-
-	interface Address {
-		id: number;
-		address: string;
-		address2?: string | null;
-		city?: string | null;
-		region?: string | null;
-		country?: string | null;
-		postal?: string | null;
-		notes?: string | null;
-		contactId: number;
-		categoryId: number;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-		contact?: Contact;
-		category?: Category;
-	}
-
-	interface Assignment {
-		id: number;
-		assignableType: string;
-		assignableId: number;
-		assignToableType: string;
-		assignToableId: number;
-		qty?: number | null;
-		status?: 'requested' | 'approved' | 'denied' | null;
-		assignedAt?: string | null;
-		returnedAt?: string | null;
-		expectedAt?: string | null;
-		notes?: string | null;
-		active: boolean;
-		createdById?: number | null;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-		createdBy?: User;
-	}
-
-	interface Category {
-		id: number;
-		categorizableType: string;
-		name?: string | null;
-		slug: string;
-		description?: string | null;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-	}
-
-	interface Company {
-		id: number;
-		name?: string | null;
-		slug: string;
-		createdAt: string;
-		updatedAt: string;
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		roles?: Role[];
-		audits?: AuditedAudit[];
-		users?: User[];
-		ownerships?: Ownership[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
-		departments?: Department[];
-		locations?: Location[];
-		licenses?: License[];
-		contracts?: Contract[];
-		networks?: Network[];
-		people?: Person[];
-		purchases?: Purchase[];
-		vendors?: Vendor[];
-		manufacturers?: Manufacturer[];
-		orders?: Order[];
-	}
-
-	interface Component {
-		id: number;
-		name?: string | null;
-		serial?: string | null;
-		minQty?: number | null;
-		qty?: number | null;
-		costCents?: number | null;
-		costCurrency: string;
-		purchasedAt?: string | null;
-		notes?: string | null;
-		modelId: number;
-		vendorId: number;
-		defaultLocationId?: number | null;
-		createdAt: string;
-		updatedAt: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		assignments?: Assignment[];
-		purchase?: Purchase;
-		fieldsetAssociations?: FieldsetAssociation[];
-		audits?: AuditedAudit[];
-		model?: Model;
-		vendor?: Vendor;
-		defaultLocation?: Location;
-		category?: Category;
-		manufacturer?: Manufacturer;
-	}
-
-	interface Consumable {
-		id: number;
-		name?: string | null;
-		minQty?: number | null;
-		qty?: number | null;
-		costCents?: number | null;
-		costCurrency: string;
-		requestable: boolean;
-		notes?: string | null;
-		modelId: number;
-		vendorId: number;
-		defaultLocationId: number;
-		createdAt: string;
-		updatedAt: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		assignments?: Assignment[];
-		purchase?: Purchase;
-		fieldsetAssociations?: FieldsetAssociation[];
-		audits?: AuditedAudit[];
-		model?: Model;
-		vendor?: Vendor;
-		defaultLocation?: Location;
-		category?: Category;
-		manufacturer?: Manufacturer;
-	}
-
-	interface Contact {
-		id: number;
-		notes?: string | null;
-		contactableType?: string | null;
-		contactableId?: number | null;
-		createdAt: string;
-		updatedAt: string;
-		primaryAddressId?: number | null;
-		primaryPhoneId?: number | null;
-		primaryEmailId?: number | null;
-		addresses?: Address[];
-		emails?: Email[];
-		phones?: Phone[];
-		websites?: Website[];
-	}
-
-	interface Contract {
-		id: number;
-		name?: string | null;
-		number?: string | null;
-		notes?: string | null;
-		beginsAt?: string | null;
-		endsAt?: string | null;
-		vendorId: number;
-		categoryId: number;
-		createdAt: string;
-		updatedAt: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-		audits?: AuditedAudit[];
-		category?: Category;
-		vendor?: Vendor;
 	}
 
 	interface Department {
@@ -265,61 +62,15 @@ declare namespace schema {
 		vendors?: Vendor[];
 	}
 
-	interface Email {
+	interface Category {
 		id: number;
-		email?: string | null;
-		notes?: string | null;
-		contactId: number;
-		categoryId: number;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-		contact?: Contact;
-		category?: Category;
-	}
-
-	interface Field {
-		id: number;
+		categorizableType: string;
 		name?: string | null;
-		format?: string | null;
-		element?: string | null;
-		description?: string | null;
-		notes?: string | null;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-	}
-
-	interface Fieldset {
-		id: number;
-		name?: string | null;
+		slug: string;
 		description?: string | null;
 		createdAt: string;
 		updatedAt: string;
 		audits?: AuditedAudit[];
-	}
-
-	interface FieldsetAssociation {
-		id: number;
-		fieldsetId: number;
-		fieldableType: string;
-		fieldableId: number;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-		fieldset?: Fieldset;
-	}
-
-	interface IpLease {
-		id: number;
-		nicId: number;
-		address?: string | null;
-		active: boolean;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-		nic?: Nic;
-		item?: Item;
 	}
 
 	interface Item {
@@ -360,6 +111,152 @@ declare namespace schema {
 		warranty?: Warranty;
 	}
 
+	interface Contact {
+		id: number;
+		notes?: string | null;
+		contactableType?: string | null;
+		contactableId?: number | null;
+		createdAt: string;
+		updatedAt: string;
+		primaryAddressId?: number | null;
+		primaryPhoneId?: number | null;
+		primaryEmailId?: number | null;
+		addresses?: Address[];
+		emails?: Email[];
+		phones?: Phone[];
+		websites?: Website[];
+	}
+
+	interface Website {
+		id: number;
+		url?: string | null;
+		name?: string | null;
+		notes?: string | null;
+		contactId: number;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+	}
+
+	interface Manufacturer {
+		id: number;
+		name?: string | null;
+		slug: string;
+		createdAt: string;
+		updatedAt: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		contact?: Contact;
+		addresses?: Address[];
+		phones?: Phone[];
+		emails?: Email[];
+		websites?: Website[];
+		roles?: Role[];
+		audits?: AuditedAudit[];
+		models?: Model[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
+	}
+
+	interface Fieldset {
+		id: number;
+		name?: string | null;
+		description?: string | null;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+	}
+
+	interface Nic {
+		id: number;
+		mac?: string | null;
+		nicType: 'ethernet'|'wifi'|'fiber';
+		itemId: number;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+		item?: Item;
+		ips?: IpLease[];
+		ipLeases?: IpLease[];
+	}
+
+	interface IpLease {
+		id: number;
+		nicId: number;
+		address?: string | null;
+		active: boolean;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+		nic?: Nic;
+		item?: Item;
+	}
+
+	interface Component {
+		id: number;
+		name?: string | null;
+		serial?: string | null;
+		minQty?: number | null;
+		qty?: number | null;
+		costCents?: number | null;
+		costCurrency: string;
+		purchasedAt?: string | null;
+		notes?: string | null;
+		modelId: number;
+		vendorId: number;
+		defaultLocationId?: number | null;
+		createdAt: string;
+		updatedAt: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		assignments?: Assignment[];
+		purchase?: Purchase;
+		fieldsetAssociations?: FieldsetAssociation[];
+		audits?: AuditedAudit[];
+		model?: Model;
+		vendor?: Vendor;
+		defaultLocation?: Location;
+		category?: Category;
+		manufacturer?: Manufacturer;
+	}
+
+	interface Contract {
+		id: number;
+		name?: string | null;
+		number?: string | null;
+		notes?: string | null;
+		beginsAt?: string | null;
+		endsAt?: string | null;
+		vendorId: number;
+		categoryId: number;
+		createdAt: string;
+		updatedAt: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		roles?: Role[];
+		audits?: AuditedAudit[];
+		category?: Category;
+		vendor?: Vendor;
+	}
+
+	interface Email {
+		id: number;
+		email?: string | null;
+		notes?: string | null;
+		contactId: number;
+		categoryId: number;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+		contact?: Contact;
+		category?: Category;
+	}
+
 	interface License {
 		id: number;
 		name?: string | null;
@@ -393,6 +290,42 @@ declare namespace schema {
 		manufacturer?: Manufacturer;
 	}
 
+	interface Network {
+		id: number;
+		name?: string | null;
+		address?: string | null;
+		gateway?: string | null;
+		dhcpStart?: string | null;
+		dhcpEnd?: string | null;
+		vlanId?: number | null;
+		createdAt: string;
+		updatedAt: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		audits?: AuditedAudit[];
+	}
+
+	interface Assignment {
+		id: number;
+		assignableType: string;
+		assignableId: number;
+		assignToableType: string;
+		assignToableId: number;
+		qty?: number | null;
+		status?: 'requested'|'approved'|'denied' | null;
+		assignedAt?: string | null;
+		returnedAt?: string | null;
+		expectedAt?: string | null;
+		notes?: string | null;
+		active: boolean;
+		createdById?: number | null;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+		createdBy?: User;
+	}
+
 	interface Location {
 		id: number;
 		name?: string | null;
@@ -415,27 +348,20 @@ declare namespace schema {
 		parent?: Location;
 	}
 
-	interface Manufacturer {
+	interface Warranty {
 		id: number;
-		name?: string | null;
-		slug: string;
+		itemId: number;
+		length?: number | null;
+		notes?: string | null;
 		createdAt: string;
 		updatedAt: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
 		emails?: Email[];
 		websites?: Website[];
-		roles?: Role[];
 		audits?: AuditedAudit[];
-		models?: Model[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
+		item?: Item;
 	}
 
 	interface Model {
@@ -458,123 +384,43 @@ declare namespace schema {
 		components?: Component[];
 	}
 
-	interface Network {
+	interface Accessory {
 		id: number;
 		name?: string | null;
-		address?: string | null;
-		gateway?: string | null;
-		dhcpStart?: string | null;
-		dhcpEnd?: string | null;
-		vlanId?: number | null;
-		createdAt: string;
-		updatedAt: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		audits?: AuditedAudit[];
-	}
-
-	interface Nic {
-		id: number;
-		mac?: string | null;
-		nicType: 'ethernet' | 'wifi' | 'fiber';
-		itemId: number;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-		item?: Item;
-		ips?: IpLease[];
-		ipLeases?: IpLease[];
-	}
-
-	interface Order {
-		id: number;
-		number?: string | null;
-		userId: number;
+		serial?: string | null;
+		minQty?: number | null;
+		qty?: number | null;
+		costCents?: number | null;
+		costCurrency: string;
+		requestable: boolean;
 		notes?: string | null;
-		submittedAt?: string | null;
-		orderedAt?: string | null;
-		expectedAt?: string | null;
-		deliveredAt?: string | null;
-		canceledAt?: string | null;
-		returnedAt?: string | null;
-		discountDecription?: string | null;
-		returnedReason?: string | null;
-		canceledReason?: string | null;
-		shippingCents?: number | null;
-		shippingCurrency: string;
-		taxCents?: number | null;
-		taxCurrency: string;
-		discountCents?: number | null;
-		discountCurrency: string;
-		vendorId: number;
+		modelId: number;
+		vendorId?: number | null;
+		defaultLocationId?: number | null;
 		createdAt: string;
 		updatedAt: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
+		assignments?: Assignment[];
+		purchase?: Purchase;
+		fieldsetAssociations?: FieldsetAssociation[];
 		roles?: Role[];
 		audits?: AuditedAudit[];
-		user?: User;
+		model?: Model;
 		vendor?: Vendor;
-		person?: Person;
-		purchases?: Purchase[];
-	}
-
-	interface Ownership {
-		id: number;
-		companyId: number;
-		departmentId?: number | null;
-		ownableType: string;
-		ownableId: number;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-		company?: Company;
-		department?: Department;
-	}
-
-	interface Person {
-		id: number;
-		firstName?: string | null;
-		middleName?: string | null;
-		lastName?: string | null;
-		active: boolean;
-		employeeNumber?: string | null;
-		jobTitle?: string | null;
-		managerId?: number | null;
-		createdAt: string;
-		updatedAt: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		posessions?: Assignment[];
-		items?: Item[];
-		accessories?: Accessory[];
-		licenses?: License[];
-		fieldsetAssociations?: FieldsetAssociation[];
-		audits?: AuditedAudit[];
-		manager?: Person;
-		user?: User;
-	}
-
-	interface Phone {
-		id: number;
-		number: string;
-		extension?: string | null;
-		notes?: string | null;
-		contactId: number;
-		categoryId: number;
-		createdAt: string;
-		updatedAt: string;
-		audits?: AuditedAudit[];
-		contact?: Contact;
+		defaultLocation?: Location;
 		category?: Category;
+		manufacturer?: Manufacturer;
+	}
+
+	interface StatusType {
+		id: number;
+		name?: string | null;
+		slug: string;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
 	}
 
 	interface Purchase {
@@ -611,13 +457,80 @@ declare namespace schema {
 		users?: User[];
 	}
 
-	interface StatusType {
+	interface FieldsetAssociation {
+		id: number;
+		fieldsetId: number;
+		fieldableType: string;
+		fieldableId: number;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+		fieldset?: Fieldset;
+	}
+
+	interface Order {
+		id: number;
+		number?: string | null;
+		userId: number;
+		notes?: string | null;
+		submittedAt?: string | null;
+		orderedAt?: string | null;
+		expectedAt?: string | null;
+		deliveredAt?: string | null;
+		canceledAt?: string | null;
+		returnedAt?: string | null;
+		discountDecription?: string | null;
+		returnedReason?: string | null;
+		canceledReason?: string | null;
+		shippingCents?: number | null;
+		shippingCurrency: string;
+		taxCents?: number | null;
+		taxCurrency: string;
+		discountCents?: number | null;
+		discountCurrency: string;
+		vendorId: number;
+		createdAt: string;
+		updatedAt: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		roles?: Role[];
+		audits?: AuditedAudit[];
+		user?: User;
+		vendor?: Vendor;
+		person?: Person;
+		purchases?: Purchase[];
+	}
+
+	interface Company {
 		id: number;
 		name?: string | null;
 		slug: string;
 		createdAt: string;
 		updatedAt: string;
+		contact?: Contact;
+		addresses?: Address[];
+		phones?: Phone[];
+		emails?: Email[];
+		websites?: Website[];
+		roles?: Role[];
 		audits?: AuditedAudit[];
+		users?: User[];
+		ownerships?: Ownership[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
+		departments?: Department[];
+		locations?: Location[];
+		licenses?: License[];
+		contracts?: Contract[];
+		networks?: Network[];
+		people?: Person[];
+		purchases?: Purchase[];
+		vendors?: Vendor[];
+		manufacturers?: Manufacturer[];
+		orders?: Order[];
 	}
 
 	interface Vendor {
@@ -643,31 +556,118 @@ declare namespace schema {
 		components?: Component[];
 	}
 
-	interface Warranty {
+	interface Person {
 		id: number;
-		itemId: number;
-		length?: number | null;
-		notes?: string | null;
+		firstName?: string | null;
+		middleName?: string | null;
+		lastName?: string | null;
+		active: boolean;
+		employeeNumber?: string | null;
+		jobTitle?: string | null;
+		managerId?: number | null;
 		createdAt: string;
 		updatedAt: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
 		emails?: Email[];
 		websites?: Website[];
+		posessions?: Assignment[];
+		items?: Item[];
+		accessories?: Accessory[];
+		licenses?: License[];
+		fieldsetAssociations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];
-		item?: Item;
+		manager?: Person;
+		user?: User;
 	}
 
-	interface Website {
+	interface Consumable {
 		id: number;
-		url?: string | null;
 		name?: string | null;
+		minQty?: number | null;
+		qty?: number | null;
+		costCents?: number | null;
+		costCurrency: string;
+		requestable: boolean;
 		notes?: string | null;
-		contactId: number;
+		modelId: number;
+		vendorId: number;
+		defaultLocationId: number;
+		createdAt: string;
+		updatedAt: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		assignments?: Assignment[];
+		purchase?: Purchase;
+		fieldsetAssociations?: FieldsetAssociation[];
+		audits?: AuditedAudit[];
+		model?: Model;
+		vendor?: Vendor;
+		defaultLocation?: Location;
+		category?: Category;
+		manufacturer?: Manufacturer;
+	}
+
+	interface Field {
+		id: number;
+		name?: string | null;
+		format?: string | null;
+		element?: string | null;
+		description?: string | null;
+		notes?: string | null;
 		createdAt: string;
 		updatedAt: string;
 		audits?: AuditedAudit[];
+	}
+
+	interface Ownership {
+		id: number;
+		companyId: number;
+		departmentId?: number | null;
+		ownableType: string;
+		ownableId: number;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+		company?: Company;
+		department?: Department;
+	}
+
+	interface Address {
+		id: number;
+		address: string;
+		address2?: string | null;
+		city?: string | null;
+		region?: string | null;
+		country?: string | null;
+		postal?: string | null;
+		notes?: string | null;
+		contactId: number;
+		categoryId: number;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+		contact?: Contact;
+		category?: Category;
+	}
+
+	interface Phone {
+		id: number;
+		number: string;
+		extension?: string | null;
+		notes?: string | null;
+		contactId: number;
+		categoryId: number;
+		createdAt: string;
+		updatedAt: string;
+		audits?: AuditedAudit[];
+		contact?: Contact;
+		category?: Category;
 	}
 
 	interface AuditedAudit {

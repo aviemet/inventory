@@ -13,6 +13,9 @@ export default defineConfig({
 		WindiCSS(),
 		svgrPlugin({
 			svgrOptions: {
+				icon: true,
+				typescript: true,
+				dimensions: false,
 			},
 		}),
 	],

@@ -1,0 +1,15 @@
+{
+  "application.js": "/packs-test/js/application-553a796ad80ba10eb2a0.js",
+  "application.js.map": "/packs-test/js/application-553a796ad80ba10eb2a0.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs-test/js/application-553a796ad80ba10eb2a0.js"
+      ],
+      "js.map": [
+        "/packs-test/js/application-553a796ad80ba10eb2a0.js.map"
+      ]
+    }
+  },
+  "media/images/robots-bw.svg": "/packs-test/media/images/robots-bw-ab8b46dc.svg"
+}

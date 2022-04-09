@@ -6,7 +6,7 @@ const createContext = <T extends {} | null>() => {
 	const useCtx = () => {
 		const c = React.useContext(ctx)
 		if(c === undefined) {
-			throw new Error("useCtx must be inside a Provider with a value")
+			throw new Error('useCtx must be inside a Provider with a value')
 		}
 		return c
 	}

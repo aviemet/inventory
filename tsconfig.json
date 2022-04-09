@@ -36,7 +36,9 @@
 			"./node_modules/@types", 
 			"./app/frontend/**/*.d.ts",
 			],
-    "types": ["vite-plugin-svgr/client"],                                      /* Specify type package names to be included without being referenced in a source file. */
+    "types": [                                         /* Specify type package names to be included without being referenced in a source file. */
+      "vite-plugin-svgr/client",
+    ],                 
     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
     "resolveJsonModule": true,                        /* Enable importing .json files */
     // "noResolve": true,                                /* Disallow `import`s, `require`s or `<reference>`s from expanding the number of files TypeScript should add to a project. */

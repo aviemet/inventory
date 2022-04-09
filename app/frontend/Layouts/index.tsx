@@ -18,6 +18,7 @@ interface InertiaPageProps extends PageProps {
 }
 
 const LayoutWrapper = React.memo(({ children, auth }: LayoutWrapperProps) => {
+	console.log({ auth })
 	return(
 		<Providers auth={ auth }>
 			{ children }

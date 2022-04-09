@@ -1,9 +1,18 @@
 import React from 'react'
 import { Link } from '@/Components'
 
-const MenuLink = ({ children, href, icon, ...props }) => {
+interface IMenuLinkProps {
+	children: string
+	href: string
+	icon?: JSX.Element
+}
+
+const MenuLink = ({ children, href, icon, ...props }: IMenuLinkProps) => {
 	return (
-		<Link href={ href } { ...props }>{ children }</Link>
+		<Link href={ href } { ...props }>
+			<span>{ children }</span>
+			{ icon  }
+		</Link>
 	)
 }
 
