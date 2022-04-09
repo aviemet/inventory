@@ -33,8 +33,8 @@
 		"rootDir": "app/frontend/",                                  /* Specify the root folder within your source files. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     "typeRoots": [                                    /* Specify multiple folders that act like `./node_modules/@types`. */
-			"./node_modules/@types", 
-			"./app/frontend/**/*.d.ts",
+			"./node_modules/@types",
+      "./app/frontend/types"
 			],
     "types": [                                         /* Specify type package names to be included without being referenced in a source file. */
       "vite-plugin-svgr/client",

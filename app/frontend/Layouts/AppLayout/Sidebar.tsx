@@ -15,7 +15,7 @@ import {
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
 import { Link } from '@/Components'
-import { useLayout } from './index'
+import { useLayout } from '@/Providers'
 import { IconContext } from 'react-icons'
 
 const Sidebar = () => {

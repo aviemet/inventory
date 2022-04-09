@@ -1,6 +1,6 @@
 import React from 'react'
 import type { PageProps } from '@inertiajs/inertia'
-import Providers from './Providers'
+import Providers from '@/Providers'
 
 import AppLayout from './AppLayout'
 import AuthLayout from './AuthLayout'
@@ -18,7 +18,6 @@ interface InertiaPageProps extends PageProps {
 }
 
 const LayoutWrapper = React.memo(({ children, auth }: LayoutWrapperProps) => {
-	console.log({ auth })
 	return(
 		<Providers auth={ auth }>
 			{ children }

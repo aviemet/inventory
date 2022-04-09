@@ -83,7 +83,7 @@ TsSchema.setup do |config|
 
   # Namespace for generated types
   #
-  # config.namespace = :schema
+  config.namespace = "Schema"
 
 
   # Output schema as types or interfaces: type|interface

@@ -1,34 +1,19 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
-import { createContext } from '@/Components/Hooks'
 import classnames from 'classnames'
-
-interface ILayoutSettings {
-	sidebarOpen: boolean
-}
-interface ILayoutContext {
-	layoutState: ILayoutSettings
-	setLayoutState: Function
-}
-
-const [useLayout, LayoutProvider] = createContext<ILayoutContext>()
-export { useLayout }
+import { useLayout, useAuth } from '@/Providers'
 
 const AppLayout = ({ children }) => {
-	const layoutReducer = (layoutState: ILayoutSettings, newlayoutState: Partial<ILayoutSettings>) => ({
-		...layoutState,
-		...newlayoutState,
-	})
+	const { layoutState } = useLayout()
+	const { user } = useAuth()
 
-	const [layoutState, setLayoutState] = useReducer(layoutReducer, {
-		sidebarOpen: false,
-	})
+	console.log({ user })
 
 	return (
-		<LayoutProvider value={ { layoutState, setLayoutState } }>
+		<>
 			<Head title="Inventory" />
 			<div id="grid-layout" className={ classnames({ 'side-bar-closed': !layoutState.sidebarOpen }) }>
 				<Sidebar />
@@ -38,7 +23,7 @@ const AppLayout = ({ children }) => {
 				</main>
 				<Footer />
 			</div>
-		</LayoutProvider>
+		</>
 	)
 }
 

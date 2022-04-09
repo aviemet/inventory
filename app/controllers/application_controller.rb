@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     {
       user: current_user.as_json({
         except: [:password],
-        include: :person,
+        include: [:person, :active_company],
       }),
       form_authenticity_token: form_authenticity_token,
     }
