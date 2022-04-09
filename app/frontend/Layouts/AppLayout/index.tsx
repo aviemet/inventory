@@ -10,27 +10,27 @@ interface ILayoutSettings {
 	sidebarOpen: boolean
 }
 interface ILayoutContext {
-	state: ILayoutSettings
-	setState: Function
+	layoutState: ILayoutSettings
+	setLayoutState: Function
 }
 
 const [useLayout, LayoutProvider] = createContext<ILayoutContext>()
 export { useLayout }
 
 const AppLayout = ({ children }) => {
-	const layoutReducer = (state: ILayoutSettings, newState: Partial<ILayoutSettings>) => ({
-		...state,
-		...newState,
+	const layoutReducer = (layoutState: ILayoutSettings, newlayoutState: Partial<ILayoutSettings>) => ({
+		...layoutState,
+		...newlayoutState,
 	})
 
-	const [state, setState] = useReducer(layoutReducer, {
+	const [layoutState, setLayoutState] = useReducer(layoutReducer, {
 		sidebarOpen: false,
 	})
 
 	return (
-		<LayoutProvider value={ { state, setState } }>
+		<LayoutProvider value={ { layoutState, setLayoutState } }>
 			<Head title="Inventory" />
-			<div id="grid-layout" className={ classnames({ 'side-bar-closed': !state.sidebarOpen }) }>
+			<div id="grid-layout" className={ classnames({ 'side-bar-closed': !layoutState.sidebarOpen }) }>
 				<Sidebar />
 				<Topbar />
 				<main id="content-wrapper">
