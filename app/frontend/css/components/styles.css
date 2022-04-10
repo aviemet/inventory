@@ -45,8 +45,7 @@ div.field {
     @apply relative; /* Forces input icons to display correctly */
     line-height: 1;
 
-    select,
-    .dropdown-search {
+    select {
       @apply w-full;
     }
 
@@ -200,12 +199,12 @@ div.field {
       @apply cursor-pointer;
     }
 
-    .contract {
-      @apply hidden;
-    }
-
-    i {
+    .icon {
       @apply pt-1;
+
+      svg {
+        transition: transform 250ms ease-in-out;
+      }
     }
   }
 
@@ -237,12 +236,9 @@ div.field {
   &.open {
     .selector {
       @apply cursor-default;
-      .expand {
-        @apply hidden;
-      }
 
-      .contract {
-        @apply block;
+      .icon > svg {
+        transform: rotate(180deg);
       }
 
       input {

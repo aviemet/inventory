@@ -22,7 +22,7 @@
 TsSchema.setup do |config|
   # Case options: camel|snake|pascal
   #
-  # config.case = :camel
+  config.case = :snake
 
 
   # Customize output path and file name

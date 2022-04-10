@@ -4,13 +4,10 @@ import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
 import classnames from 'classnames'
-import { useLayout, useAuth } from '@/Providers'
+import { useLayout } from '@/Providers'
 
 const AppLayout = ({ children }) => {
 	const { layoutState } = useLayout()
-	const { user } = useAuth()
-
-	console.log({ user })
 
 	return (
 		<>

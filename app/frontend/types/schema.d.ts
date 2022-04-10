@@ -3,32 +3,32 @@ declare namespace Schema {
 		id: number;
 		email: string;
 		password?: string | null;
-		resetPasswordToken?: string | null;
-		resetPasswordSentAt?: string | null;
-		rememberCreatedAt?: string | null;
-		signInCount: number;
-		currentSignInAt?: string | null;
-		lastSignInAt?: string | null;
-		currentSignInIp?: string | null;
-		lastSignInIp?: string | null;
-		confirmationToken?: string | null;
-		confirmedAt?: string | null;
-		confirmationSentAt?: string | null;
-		unconfirmedEmail?: string | null;
-		failedAttempts: number;
-		unlockToken?: string | null;
-		lockedAt?: string | null;
-		createdAt: string;
-		updatedAt: string;
-		personId: number;
-		activeCompanyId?: number | null;
+		reset_password_token?: string | null;
+		reset_password_sent_at?: string | null;
+		remember_created_at?: string | null;
+		sign_in_count: number;
+		current_sign_in_at?: string | null;
+		last_sign_in_at?: string | null;
+		current_sign_in_ip?: string | null;
+		last_sign_in_ip?: string | null;
+		confirmation_token?: string | null;
+		confirmed_at?: string | null;
+		confirmation_sent_at?: string | null;
+		unconfirmed_email?: string | null;
+		failed_attempts: number;
+		unlock_token?: string | null;
+		locked_at?: string | null;
+		created_at: string;
+		updated_at: string;
+		person_id: number;
+		active_company_id?: number | null;
 		active?: boolean | null;
-		tablePreferences?: Record<string, any> | null;
-		userPreferences?: Record<string, any> | null;
+		table_preferences?: Record<string, any> | null;
+		user_preferences?: Record<string, any> | null;
 		roles?: Role[];
 		audits?: AuditedAudit[];
 		person?: Person;
-		activeCompany?: Company;
+		active_company?: Company;
 		companies?: Company[];
 	}
 
@@ -36,28 +36,28 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		serial?: string | null;
-		minQty?: number | null;
+		min_qty?: number | null;
 		qty?: number | null;
-		costCents?: number | null;
-		costCurrency: string;
+		cost_cents?: number | null;
+		cost_currency: string;
 		requestable: boolean;
 		notes?: string | null;
-		modelId: number;
-		vendorId?: number | null;
-		defaultLocationId?: number | null;
-		createdAt: string;
-		updatedAt: string;
+		model_id: number;
+		vendor_id?: number | null;
+		default_location_id?: number | null;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
 		purchase?: Purchase;
-		fieldsetAssociations?: FieldsetAssociation[];
+		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
 		audits?: AuditedAudit[];
 		model?: Model;
 		vendor?: Vendor;
-		defaultLocation?: Location;
+		default_location?: Location;
 		category?: Category;
 		manufacturer?: Manufacturer;
 	}
@@ -65,16 +65,16 @@ declare namespace Schema {
 	interface Address {
 		id: number;
 		address: string;
-		address2?: string | null;
+		address_2?: string | null;
 		city?: string | null;
 		region?: string | null;
 		country?: string | null;
 		postal?: string | null;
 		notes?: string | null;
-		contactId: number;
-		categoryId: number;
-		createdAt: string;
-		updatedAt: string;
+		contact_id: number;
+		category_id: number;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 		contact?: Contact;
 		category?: Category;
@@ -82,41 +82,41 @@ declare namespace Schema {
 
 	interface Assignment {
 		id: number;
-		assignableType: string;
-		assignableId: number;
-		assignToableType: string;
-		assignToableId: number;
+		assignable_type: string;
+		assignable_id: number;
+		assign_toable_type: string;
+		assign_toable_id: number;
 		qty?: number | null;
 		status?: 'requested'|'approved'|'denied' | null;
-		assignedAt?: string | null;
-		returnedAt?: string | null;
-		expectedAt?: string | null;
+		assigned_at?: string | null;
+		returned_at?: string | null;
+		expected_at?: string | null;
 		notes?: string | null;
 		active: boolean;
-		createdById?: number | null;
-		createdAt: string;
-		updatedAt: string;
+		created_by_id?: number | null;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
-		createdBy?: User;
+		created_by?: User;
 	}
 
 	interface Category {
 		id: number;
-		categorizableType: string;
+		categorizable_type: string;
 		name?: string | null;
 		slug: string;
 		description?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 	}
 
 	interface Company {
 		id: number;
-		name?: string | null;
+		name: string;
 		slug: string;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -146,27 +146,27 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		serial?: string | null;
-		minQty?: number | null;
+		min_qty?: number | null;
 		qty?: number | null;
-		costCents?: number | null;
-		costCurrency: string;
-		purchasedAt?: string | null;
+		cost_cents?: number | null;
+		cost_currency: string;
+		purchased_at?: string | null;
 		notes?: string | null;
-		modelId: number;
-		vendorId: number;
-		defaultLocationId?: number | null;
-		createdAt: string;
-		updatedAt: string;
+		model_id: number;
+		vendor_id: number;
+		default_location_id?: number | null;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
 		purchase?: Purchase;
-		fieldsetAssociations?: FieldsetAssociation[];
+		fieldset_associations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];
 		model?: Model;
 		vendor?: Vendor;
-		defaultLocation?: Location;
+		default_location?: Location;
 		category?: Category;
 		manufacturer?: Manufacturer;
 	}
@@ -174,27 +174,27 @@ declare namespace Schema {
 	interface Consumable {
 		id: number;
 		name?: string | null;
-		minQty?: number | null;
+		min_qty?: number | null;
 		qty?: number | null;
-		costCents?: number | null;
-		costCurrency: string;
+		cost_cents?: number | null;
+		cost_currency: string;
 		requestable: boolean;
 		notes?: string | null;
-		modelId: number;
-		vendorId: number;
-		defaultLocationId: number;
-		createdAt: string;
-		updatedAt: string;
+		model_id: number;
+		vendor_id: number;
+		default_location_id: number;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
 		purchase?: Purchase;
-		fieldsetAssociations?: FieldsetAssociation[];
+		fieldset_associations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];
 		model?: Model;
 		vendor?: Vendor;
-		defaultLocation?: Location;
+		default_location?: Location;
 		category?: Category;
 		manufacturer?: Manufacturer;
 	}
@@ -202,13 +202,13 @@ declare namespace Schema {
 	interface Contact {
 		id: number;
 		notes?: string | null;
-		contactableType?: string | null;
-		contactableId?: number | null;
-		createdAt: string;
-		updatedAt: string;
-		primaryAddressId?: number | null;
-		primaryPhoneId?: number | null;
-		primaryEmailId?: number | null;
+		contactable_type?: string | null;
+		contactable_id?: number | null;
+		created_at: string;
+		updated_at: string;
+		primary_address_id?: number | null;
+		primary_phone_id?: number | null;
+		primary_email_id?: number | null;
 		addresses?: Address[];
 		emails?: Email[];
 		phones?: Phone[];
@@ -220,12 +220,12 @@ declare namespace Schema {
 		name?: string | null;
 		number?: string | null;
 		notes?: string | null;
-		beginsAt?: string | null;
-		endsAt?: string | null;
-		vendorId: number;
-		categoryId: number;
-		createdAt: string;
-		updatedAt: string;
+		begins_at?: string | null;
+		ends_at?: string | null;
+		vendor_id: number;
+		category_id: number;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -239,10 +239,10 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		slug: string;
-		locationId?: number | null;
-		createdAt: string;
-		updatedAt: string;
-		managerId?: number | null;
+		location_id?: number | null;
+		created_at: string;
+		updated_at: string;
+		manager_id?: number | null;
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -269,10 +269,10 @@ declare namespace Schema {
 		id: number;
 		email?: string | null;
 		notes?: string | null;
-		contactId: number;
-		categoryId: number;
-		createdAt: string;
-		updatedAt: string;
+		contact_id: number;
+		category_id: number;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 		contact?: Contact;
 		category?: Category;
@@ -285,8 +285,8 @@ declare namespace Schema {
 		element?: string | null;
 		description?: string | null;
 		notes?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 	}
 
@@ -294,29 +294,29 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		description?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 	}
 
 	interface FieldsetAssociation {
 		id: number;
-		fieldsetId: number;
-		fieldableType: string;
-		fieldableId: number;
-		createdAt: string;
-		updatedAt: string;
+		fieldset_id: number;
+		fieldable_type: string;
+		fieldable_id: number;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 		fieldset?: Fieldset;
 	}
 
 	interface IpLease {
 		id: number;
-		nicId: number;
+		nic_id: number;
 		address?: string | null;
 		active: boolean;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 		nic?: Nic;
 		item?: Item;
@@ -325,18 +325,18 @@ declare namespace Schema {
 	interface Item {
 		id: number;
 		name?: string | null;
-		assetTag?: string | null;
+		asset_tag?: string | null;
 		serial?: string | null;
-		costCents?: number | null;
-		costCurrency: string;
-		purchasedAt?: string | null;
+		cost_cents?: number | null;
+		cost_currency: string;
+		purchased_at?: string | null;
 		requestable: boolean;
 		notes?: string | null;
-		modelId: number;
-		vendorId?: number | null;
-		defaultLocationId?: number | null;
-		createdAt: string;
-		updatedAt: string;
+		model_id: number;
+		vendor_id?: number | null;
+		default_location_id?: number | null;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -346,15 +346,15 @@ declare namespace Schema {
 		accessories?: Accessory[];
 		licenses?: License[];
 		purchase?: Purchase;
-		fieldsetAssociations?: FieldsetAssociation[];
+		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
 		audits?: AuditedAudit[];
 		nics?: Nic[];
 		ips?: IpLease[];
-		ipLeases?: IpLease[];
+		ip_leases?: IpLease[];
 		model?: Model;
 		vendor?: Vendor;
-		defaultLocation?: Location;
+		default_location?: Location;
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
@@ -365,27 +365,27 @@ declare namespace Schema {
 		name?: string | null;
 		seats?: number | null;
 		key?: string | null;
-		licenserName?: string | null;
-		licenserEmail?: string | null;
+		licenser_name?: string | null;
+		licenser_email?: string | null;
 		reassignable: boolean;
-		costCents?: number | null;
-		costCurrency: string;
-		purchasedAt?: string | null;
-		expiresAt?: string | null;
-		terminatesAt?: string | null;
+		cost_cents?: number | null;
+		cost_currency: string;
+		purchased_at?: string | null;
+		expires_at?: string | null;
+		terminates_at?: string | null;
 		maintained: boolean;
 		notes?: string | null;
-		categoryId: number;
-		vendorId?: number | null;
-		manufacturerId: number;
-		createdAt: string;
-		updatedAt: string;
+		category_id: number;
+		vendor_id?: number | null;
+		manufacturer_id: number;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
 		purchase?: Purchase;
-		fieldsetAssociations?: FieldsetAssociation[];
+		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
 		audits?: AuditedAudit[];
 		category?: Category;
@@ -397,7 +397,7 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		slug: string;
-		parentId?: number | null;
+		parent_id?: number | null;
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -419,8 +419,8 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		slug: string;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -442,13 +442,13 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		slug: string;
-		modelNumber?: string | null;
+		model_number?: string | null;
 		notes?: string | null;
-		categoryId: number;
-		manufacturerId: number;
-		createdAt: string;
-		updatedAt: string;
-		fieldsetAssociations?: FieldsetAssociation[];
+		category_id: number;
+		manufacturer_id: number;
+		created_at: string;
+		updated_at: string;
+		fieldset_associations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];
 		manufacturer?: Manufacturer;
 		category?: Category;
@@ -463,11 +463,11 @@ declare namespace Schema {
 		name?: string | null;
 		address?: string | null;
 		gateway?: string | null;
-		dhcpStart?: string | null;
-		dhcpEnd?: string | null;
-		vlanId?: number | null;
-		createdAt: string;
-		updatedAt: string;
+		dhcp_start?: string | null;
+		dhcp_end?: string | null;
+		vlan_id?: number | null;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -477,39 +477,39 @@ declare namespace Schema {
 	interface Nic {
 		id: number;
 		mac?: string | null;
-		nicType: 'ethernet'|'wifi'|'fiber';
-		itemId: number;
-		createdAt: string;
-		updatedAt: string;
+		nic_type: 'ethernet'|'wifi'|'fiber';
+		item_id: number;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 		item?: Item;
 		ips?: IpLease[];
-		ipLeases?: IpLease[];
+		ip_leases?: IpLease[];
 	}
 
 	interface Order {
 		id: number;
 		number?: string | null;
-		userId: number;
+		user_id: number;
 		notes?: string | null;
-		submittedAt?: string | null;
-		orderedAt?: string | null;
-		expectedAt?: string | null;
-		deliveredAt?: string | null;
-		canceledAt?: string | null;
-		returnedAt?: string | null;
-		discountDecription?: string | null;
-		returnedReason?: string | null;
-		canceledReason?: string | null;
-		shippingCents?: number | null;
-		shippingCurrency: string;
-		taxCents?: number | null;
-		taxCurrency: string;
-		discountCents?: number | null;
-		discountCurrency: string;
-		vendorId: number;
-		createdAt: string;
-		updatedAt: string;
+		submitted_at?: string | null;
+		ordered_at?: string | null;
+		expected_at?: string | null;
+		delivered_at?: string | null;
+		canceled_at?: string | null;
+		returned_at?: string | null;
+		discount_decription?: string | null;
+		returned_reason?: string | null;
+		canceled_reason?: string | null;
+		shipping_cents?: number | null;
+		shipping_currency: string;
+		tax_cents?: number | null;
+		tax_currency: string;
+		discount_cents?: number | null;
+		discount_currency: string;
+		vendor_id: number;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -523,12 +523,12 @@ declare namespace Schema {
 
 	interface Ownership {
 		id: number;
-		companyId: number;
-		departmentId?: number | null;
-		ownableType: string;
-		ownableId: number;
-		createdAt: string;
-		updatedAt: string;
+		company_id: number;
+		department_id?: number | null;
+		ownable_type: string;
+		ownable_id: number;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 		company?: Company;
 		department?: Department;
@@ -536,15 +536,15 @@ declare namespace Schema {
 
 	interface Person {
 		id: number;
-		firstName?: string | null;
-		middleName?: string | null;
-		lastName?: string | null;
+		first_name?: string | null;
+		middle_name?: string | null;
+		last_name?: string | null;
 		active: boolean;
-		employeeNumber?: string | null;
-		jobTitle?: string | null;
-		managerId?: number | null;
-		createdAt: string;
-		updatedAt: string;
+		employee_number?: string | null;
+		job_title?: string | null;
+		manager_id?: number | null;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -557,7 +557,7 @@ declare namespace Schema {
 		items?: Item[];
 		accessories?: Accessory[];
 		licenses?: License[];
-		fieldsetAssociations?: FieldsetAssociation[];
+		fieldset_associations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];
 		manager?: Person;
 		user?: User;
@@ -568,10 +568,10 @@ declare namespace Schema {
 		number: string;
 		extension?: string | null;
 		notes?: string | null;
-		contactId: number;
-		categoryId: number;
-		createdAt: string;
-		updatedAt: string;
+		contact_id: number;
+		category_id: number;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 		contact?: Contact;
 		category?: Category;
@@ -579,15 +579,15 @@ declare namespace Schema {
 
 	interface Purchase {
 		id: number;
-		purchasableType: string;
-		purchasableId: number;
-		orderId?: number | null;
-		costCents: number;
-		costCurrency: string;
+		purchasable_type: string;
+		purchasable_id: number;
+		order_id?: number | null;
+		cost_cents: number;
+		cost_currency: string;
 		qty?: number | null;
 		notes?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -603,10 +603,10 @@ declare namespace Schema {
 	interface Role {
 		id: number;
 		name?: string | null;
-		resourceType?: string | null;
-		resourceId?: number | null;
-		createdAt: string;
-		updatedAt: string;
+		resource_type?: string | null;
+		resource_id?: number | null;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 		users?: User[];
 	}
@@ -615,8 +615,8 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		slug: string;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 	}
 
@@ -625,8 +625,8 @@ declare namespace Schema {
 		name?: string | null;
 		slug: string;
 		url?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -645,11 +645,11 @@ declare namespace Schema {
 
 	interface Warranty {
 		id: number;
-		itemId: number;
+		item_id: number;
 		length?: number | null;
 		notes?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		created_at: string;
+		updated_at: string;
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -664,28 +664,28 @@ declare namespace Schema {
 		url?: string | null;
 		name?: string | null;
 		notes?: string | null;
-		contactId: number;
-		createdAt: string;
-		updatedAt: string;
+		contact_id: number;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 	}
 
 	interface AuditedAudit {
 		id: number;
-		auditableId?: number | null;
-		auditableType?: string | null;
-		associatedId?: number | null;
-		associatedType?: string | null;
-		userId?: number | null;
-		userType?: string | null;
+		auditable_id?: number | null;
+		auditable_type?: string | null;
+		associated_id?: number | null;
+		associated_type?: string | null;
+		user_id?: number | null;
+		user_type?: string | null;
 		username?: string | null;
 		action?: string | null;
-		auditedChanges?: Record<string, any> | null;
+		audited_changes?: Record<string, any> | null;
 		version?: number | null;
 		comment?: string | null;
-		remoteAddress?: string | null;
-		requestUuid?: string | null;
-		createdAt?: string | null;
+		remote_address?: string | null;
+		request_uuid?: string | null;
+		created_at?: string | null;
 	}
 
 

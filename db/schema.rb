@@ -103,7 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

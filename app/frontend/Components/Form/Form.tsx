@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useForm as useInertiaForm, InertiaFormProps } from '@inertiajs/inertia-react'
 
 import { createContext } from '@/Components/Hooks'
@@ -20,7 +20,6 @@ export { useForm }
 
 const Form = ({ children, model, data, method = 'post', to, onSubmit, ...props }: IFormProps) => {
 	const form = { ...useInertiaForm(data), model }
-	console.log({ to })
 
 	const handleSubmit = e => {
 		e.preventDefault()
