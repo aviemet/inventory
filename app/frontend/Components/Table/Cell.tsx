@@ -7,9 +7,10 @@ import classnames from 'classnames'
 interface ICellProps extends TDProps {
 	checkbox?: boolean
 	sort?: string
+	nowrap?: boolean
 }
 
-const Cell = ({ children, checkbox = false, sort, ...props }: ICellProps) => {
+const Cell = ({ children, checkbox = false, sort, nowrap = false, ...props }: ICellProps) => {
 	const { tableState: { rows } } = useTableContext()
 
 	const { origin, pathname, search } = window.location
@@ -18,7 +19,14 @@ const Cell = ({ children, checkbox = false, sort, ...props }: ICellProps) => {
 	const paramsSort = params.get('sort')
 	const paramsDirection = params.get('direction')
 
+	if(sort) {
+		params.set('sort', sort)
+	} else {
+		params.delete('sort')
+	}
+
 	const direction = paramsSort === sort && paramsDirection === 'asc' ? 'desc' : 'asc'
+	params.set('direction', direction)
 
 	const showSortLink = sort && rows!.length > 1
 
@@ -29,11 +37,13 @@ const Cell = ({ children, checkbox = false, sort, ...props }: ICellProps) => {
 				{ 'sortable': showSortLink },
 				{ [direction]: showSortLink && paramsSort === sort }
 			) }
+			nowrap={ nowrap ? 'nowrap' : '' }
 			{ ...props }
 		>
 			{ showSortLink ?
 				<Link
-					href={ `${origin}${pathname}?sort=${sort}&direction=${direction}` }
+					href={ `${origin}${pathname}?${params.toString()}` }
+					preserveScroll={ true }
 				>{ children }</Link>
 				: children
 			}
@@ -43,7 +53,11 @@ const Cell = ({ children, checkbox = false, sort, ...props }: ICellProps) => {
 
 export default Cell
 
-const RenderedCell = ({ children, ...props }: TDProps) => {
+interface IRenderedCellProps extends TDProps {
+	nowrap?: string
+}
+
+const RenderedCell = ({ children, ...props }: IRenderedCellProps): JSX.Element => {
 	const { section } = useTableSectionContext()
 
 	const element = section === 'head' ? 'th' : 'td'

@@ -12,7 +12,9 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     self.items = search(items, sortable_fields)
-    render inertia: "Items/Index"
+    render inertia: "Items/Index", props: {
+      items: -> { ItemBlueprint.render_as_json(items, view: :associations) }
+    }
   end
 
   # GET /items/category/:category_id

@@ -19,6 +19,8 @@ module Searchable
     page = params[:page] || 1
     return model.order(sort(model, sortable_fields)).page(page) unless terms
 
+    ap({ params: params })
+
     ids = model.search(terms).pluck(:id)
     model.where(id: ids).order(sort(model, sortable_fields)).page(page)
   end

@@ -75,10 +75,11 @@ TsSchema.setup do |config|
   #   In that scenario, also specifying passwoord as an optional field will append a ? in the output
   # [:omit]     will omit the field from being output in the schema entirely
   #
-  # config.field_overrides: {
-  #   encrypted_password: :password,
-  #   password: :optional,
-  # }
+  config.field_overrides = {
+    encrypted_password: :password,
+    password: :optional,
+    cost_cents: :cost,
+  }
 
 
   # Namespace for generated types

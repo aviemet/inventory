@@ -9,10 +9,9 @@ class CompaniesController < ApplicationController
 
   # GET /companies
   # GET /companies.json
-  # @companies.as_json(include: [:locations, :departments, :items, :people])
   def index
     render inertia: "Companies/Index", props: {
-      companies: CompanyBlueprint.render_as_json(@companies, view: :counts)
+      companies: CompanyBlueprint.render_as_json(companies, view: :counts)
     }
   end
 
@@ -20,7 +19,7 @@ class CompaniesController < ApplicationController
   # GET /companies/:id.json
   def show
     render inertia: "Companies/Show", props: {
-      company: @company.as_json(include: [:locations, :departments, :items, :people])
+      company: company.as_json(include: [:locations, :departments, :items, :people])
     }
   end
 
@@ -32,7 +31,7 @@ class CompaniesController < ApplicationController
   # GET /companies/:id/edit
   def edit
     render inertia: "Companies/Edit", props: {
-      company: @company.as_json(include: [:locations, :departments, :items, :people])
+      company: company.as_json(include: [:locations, :departments, :items, :people])
     }
   end
 

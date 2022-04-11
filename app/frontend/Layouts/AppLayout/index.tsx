@@ -15,7 +15,7 @@ const AppLayout = ({ children }) => {
 			<div id="grid-layout" className={ classnames({ 'side-bar-closed': !layoutState.sidebarOpen }) }>
 				<Sidebar />
 				<Topbar />
-				<main id="content-wrapper">
+				<main id="content-wrapper" scroll-region="true">
 					{ children 	}
 				</main>
 				<Footer />

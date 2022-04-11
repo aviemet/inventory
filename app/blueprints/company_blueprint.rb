@@ -24,7 +24,7 @@ class CompanyBlueprint < Blueprinter::Base
     end
   end
 
-  view :associattions do
+  view :associations do
     # association :contact
   end
 end

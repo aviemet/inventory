@@ -28,7 +28,7 @@ const Index = ({ companies }: { companies: CompanyWithCounts[] }) => {
 			<section className="h-full flex flex-col">
 				<h1 className="inline-block align-text-top md:align-middle">Companies</h1>
 
-				<Table.Table scroll selectable rows={ companies }>
+				<Table.Table scroll selectable fixed rows={ companies }>
 					<Table.Head>
 						<Table.Row>
 							<Table.Cell sort="name">Name</Table.Cell>
