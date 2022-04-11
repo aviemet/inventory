@@ -11,28 +11,28 @@ gem "puma", "~> 5.0"
 
 # Assets
 gem "inertia_rails", "~> 1.11"
-gem "jbuilder"
 gem "vite_rails", "~> 3.0"
 
 # Models
-gem "countries", "~> 4.2"
-gem "money-rails", "~> 1.15"
 gem "active_type", "~> 2.1"
-gem "audited", "~> 5.0"
 gem "pg_search", "~> 2.3"
-gem "kaminari", "~> 1.2"
-gem "slug", "~> 4.1"
-gem "decent_exposure", "~> 3.0"
 gem "devise", "~> 4.8"
 gem "devise_ldap_authenticatable", "~> 0.8.7"
 gem "rolify", "~> 6.0"
 gem "cancancan", "~> 3.3"
+gem "blueprinter", "~> 0.25.3"
+gem "slug", "~> 4.1"
+gem "kaminari", "~> 1.2"
+gem "audited", "~> 5.0"
+gem "money-rails", "~> 1.15"
+gem "decent_exposure", "~> 3.0"
 gem "time_for_a_boolean", "~> 0.2.1"
 
 # Helpers
 gem "factory_bot", "~> 6.2"
 gem "draper", "~> 4.0"
 gem "ipaddress_2", "~> 0.14.0"
+gem "countries", "~> 4.2"
 gem "ts_schema", "~> 0.1.13"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
