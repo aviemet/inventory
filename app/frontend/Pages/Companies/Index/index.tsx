@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import * as Table from '@/Components/Table'
+import { MdEdit } from 'react-icons/md'
 
 interface CompanyWithCounts extends Schema.Company {
 	counts: {
@@ -21,7 +22,6 @@ interface CompanyWithCounts extends Schema.Company {
 }
 
 const Index = ({ companies }: { companies: CompanyWithCounts[] }) => {
-	console.log({ location: window.location })
 	return (
 		<>
 			<Head title="Companies"></Head>
@@ -51,8 +51,7 @@ const Index = ({ companies }: { companies: CompanyWithCounts[] }) => {
 								<Table.Cell>{ company!.counts.items }</Table.Cell>
 								<Table.Cell>{ company!.counts.people }</Table.Cell>
 								<Table.Cell className="table-column-fit text-right">
-									<button>edit</button>
-									<button>delete</button>
+									<Link as="button" href={ Routes.editCompany(company.slug) }><MdEdit /></Link>
 								</Table.Cell>
 							</Table.Row>
 						) } />
