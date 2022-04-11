@@ -21,21 +21,22 @@ interface CompanyWithCounts extends Schema.Company {
 }
 
 const Index = ({ companies }: { companies: CompanyWithCounts[] }) => {
+	console.log({ location: window.location })
 	return (
 		<>
 			<Head title="Companies"></Head>
-			<section className="container">
+			<section className="h-full flex flex-col">
 				<h1 className="inline-block align-text-top md:align-middle">Companies</h1>
 
 				<Table.Table scroll selectable rows={ companies }>
 					<Table.Head>
 						<Table.Row>
-							<Table.Cell>Name</Table.Cell>
-							<Table.Cell>Locations</Table.Cell>
-							<Table.Cell>Departments</Table.Cell>
-							<Table.Cell>Assets</Table.Cell>
-							<Table.Cell>People</Table.Cell>
-							<Table.Cell className="table-column-fit text-center">Actions</Table.Cell>
+							<Table.Cell sort="name">Name</Table.Cell>
+							<Table.Cell sort="locations">Locations</Table.Cell>
+							<Table.Cell sort="departments">Departments</Table.Cell>
+							<Table.Cell sort="items">Assets</Table.Cell>
+							<Table.Cell sort="people">People</Table.Cell>
+							<Table.Cell className="text-right">Actions</Table.Cell>
 						</Table.Row>
 					</Table.Head>
 
@@ -49,7 +50,7 @@ const Index = ({ companies }: { companies: CompanyWithCounts[] }) => {
 								<Table.Cell>{ company!.counts.departments }</Table.Cell>
 								<Table.Cell>{ company!.counts.items }</Table.Cell>
 								<Table.Cell>{ company!.counts.people }</Table.Cell>
-								<Table.Cell>
+								<Table.Cell className="table-column-fit text-right">
 									<button>edit</button>
 									<button>delete</button>
 								</Table.Cell>
