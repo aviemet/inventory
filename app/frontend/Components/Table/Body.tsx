@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { TableSectionContextProvider } from './Table'
+import { TableSectionContextProvider } from './TableContext'
 import { TBodyProps } from 'react-html-props'
 
 const Body = forwardRef<HTMLTableSectionElement, TBodyProps>(({ children, ...props }, ref) => {

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { TableSectionContextProvider } from './Table'
+import { TableSectionContextProvider } from './TableContext'
 import { TFootProps } from 'react-html-props'
 
 const Footer = forwardRef<HTMLTableSectionElement, TFootProps>(({ children, ...props }, ref) => {

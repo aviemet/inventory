@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTableSectionContext } from './Table'
+import { useTableSectionContext } from './TableContext'
 import { TDProps } from 'react-html-props'
 import classnames from 'classnames'
 

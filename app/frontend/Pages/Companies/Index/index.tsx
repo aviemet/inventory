@@ -21,20 +21,15 @@ interface CompanyWithCounts extends Schema.Company {
 }
 
 const Index = ({ companies }: { companies: CompanyWithCounts[] }) => {
-
-	console.log({ companies })
-
 	return (
 		<>
 			<Head title="Companies"></Head>
 			<section className="container">
 				<h1 className="inline-block align-text-top md:align-middle">Companies</h1>
 
-
-				<Table.Table scroll={ true }>
+				<Table.Table scroll selectable rows={ companies }>
 					<Table.Head>
 						<Table.Row>
-							<Table.Cell checkbox></Table.Cell>
 							<Table.Cell>Name</Table.Cell>
 							<Table.Cell>Locations</Table.Cell>
 							<Table.Cell>Departments</Table.Cell>
@@ -45,9 +40,8 @@ const Index = ({ companies }: { companies: CompanyWithCounts[] }) => {
 					</Table.Head>
 
 					<Table.Body>
-						{ companies.map(company => (
+						<Table.RowIterator render={ company => (
 							<Table.Row key={ company.id }>
-								<Table.Cell checkbox></Table.Cell>
 								<Table.Cell>
 									<Link href={ Routes.company(company.slug) }>{ company.name }</Link>
 								</Table.Cell>
@@ -60,7 +54,7 @@ const Index = ({ companies }: { companies: CompanyWithCounts[] }) => {
 									<button>delete</button>
 								</Table.Cell>
 							</Table.Row>
-						)) }
+						) } />
 					</Table.Body>
 				</Table.Table>
 			</section>
