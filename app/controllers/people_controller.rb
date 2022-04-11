@@ -13,20 +13,24 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     self.people = search(people, sortable_fields)
+    render inertia: "People/Index"
   end
 
   # GET /people/1
   # GET /people/1.json
   def show
+    render inertia: "People/Show"
   end
 
   # GET /people/new
   def new
     self.person.owner = Ownership.new
+    render inertia: "People/New"
   end
 
   # GET /people/1/edit
   def edit
+    render inertia: "People/Edit"
   end
 
   # POST /people

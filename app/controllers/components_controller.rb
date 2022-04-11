@@ -10,25 +10,31 @@ class ComponentsController < ApplicationController
   # GET /components(.json)
   def index
     self.components = search(components, sortable_fields)
+    render inertia: "Components/Index"
   end
 
+  # TODO: Decide if this is how I want to do category searches
   # GET /components/category/:category_id
   # GET /components/category/:category_id.json
-  def category
-    self.components = components.where('model.category': Category.find(request.params[:category_id]))
-    render :index
-  end
+  # def category
+  #   self.components = components.where('model.category': Category.find(request.params[:category_id]))
+  #   render :index
+  #   render inertia: "Components/Category"
+  # end
 
   # GET /components/:id(.json)
   def show
+    render inertia: "Components/Show"
   end
 
   # GET /components/new
   def new
+    render inertia: "Components/New"
   end
 
   # GET /components/:id/edit
   def edit
+    render inertia: "Components/Edit"
   end
 
   # POST /components(.json)

@@ -9,19 +9,23 @@ class ContractsController < ApplicationController
   # GET /contracts.json
   def index
     self.contracts = search(contracts, sortable_fields)
+    render inertia: "Contracts/Index"
   end
 
   # GET /contracts/1
   # GET /contracts/1.json
   def show
+    render inertia: "Contracts/Show"
   end
 
   # GET /contracts/new
   def new
+    render inertia: "Contracts/New"
   end
 
   # GET /contracts/1/edit
   def edit
+    render inertia: "Contracts/Edit"
   end
 
   # POST /contracts

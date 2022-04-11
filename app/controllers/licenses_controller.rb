@@ -9,19 +9,23 @@ class LicensesController < ApplicationController
   # GET /licenses.json
   def index
     self.licenses = search(licenses, sortable_fields)
+    render inertia: "Licenses/Index"
   end
 
   # GET /licenses/1
   # GET /licenses/1.json
   def show
+    render inertia: "Licenses/Show"
   end
 
   # GET /licenses/new
   def new
+    render inertia: "Licenses/New"
   end
 
   # GET /licenses/1/edit
   def edit
+    render inertia: "Licenses/Edit"
   end
 
   # POST /licenses

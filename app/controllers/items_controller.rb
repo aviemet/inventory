@@ -12,27 +12,31 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     self.items = search(items, sortable_fields)
+    render inertia: "Items/Index"
   end
 
   # GET /items/category/:category_id
   # GET /items/category/:category_id.json
-  def category
-    # TODO: Consider another way of filtering without using routes
-    self.items = items.where('model.category': Category.find(request.params[:category_id]))
-    render :index
-  end
+  # def category
+  #   # TODO: Consider another way of filtering without using routes
+  #   self.items = items.where('model.category': Category.find(request.params[:category_id]))
+  #   render :index
+  # end
 
   # GET /items/:id
   # GET /items/:id.json
   def show
+    render inertia: "Items/Show"
   end
 
   # GET /items/new
   def new
+    render inertia: "Items/New"
   end
 
   # GET /items/:id/edit
   def edit
+    render inertia: "Items/Edit"
   end
 
   # GET /items/:id/clone
@@ -41,6 +45,7 @@ class ItemsController < ApplicationController
     self.item.serial = nil
     self.item.asset_tag = nil
     self.item
+    render inertia: "Items/Clone"
   end
 
   # POST /items

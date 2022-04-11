@@ -10,19 +10,23 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
+    render inertia: "Companies/Index"
   end
 
   # GET /companies/:id
   # GET /companies/:id.json
   def show
+    render inertia: "Companies/Show"
   end
 
   # GET /companies/new
   def new
+    render inertia: "Companies/New"
   end
 
   # GET /companies/:id/edit
   def edit
+    render inertia: "Companies/Edit"
   end
 
   # POST /companies

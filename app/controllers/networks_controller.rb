@@ -11,20 +11,24 @@ class NetworksController < ApplicationController
   # GET /networks.json
   def index
     self.networks = search(networks, sortable_fields)
+    render inertia: "Networks/Index"
   end
 
   # GET /networks/1
   # GET /networks/1.json
   def show
     @ips = IpLease.includes(:item).in_network(self.network)
+    render inertia: "Networks/Show"
   end
 
   # GET /networks/new
   def new
+    render inertia: "Networks/New"
   end
 
   # GET /networks/1/edit
   def edit
+    render inertia: "Networks/Edit"
   end
 
   # POST /networks

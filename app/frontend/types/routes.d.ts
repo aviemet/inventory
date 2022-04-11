@@ -470,6 +470,16 @@ export const contracts: ((
 
 /**
  * Generates rails route to
+ * /dashboard(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const dashboard: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /departments/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options

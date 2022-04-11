@@ -9,19 +9,23 @@ class VendorsController < ApplicationController
   # GET /vendors.json
   def index
     self.vendors = search(vendors, sortable_fields)
+    render inertia: "Vendors/Index"
   end
 
   # GET /vendors/:id
   # GET /vendors/:id.json
   def show
+    render inertia: "Vendors/Show"
   end
 
   # GET /vendors/new
   def new
+    render inertia: "Vendors/New"
   end
 
   # GET /vendors/:id/edit
   def edit
+    render inertia: "Vendors/Edit"
   end
 
   # POST /vendors

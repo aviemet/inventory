@@ -7,27 +7,32 @@ class AssignmentsController < ApplicationController
   # GET /assignments/:asset_type/:asset_id.json
   def index
     @assignments = Assignment.where(assignable_type: params[:asset_type].capitalize, assignable_id: params[:asset_id])
+    render inertia: "Assignments/Index"
   end
 
   # GET /assignments/:id
   # GET /assignments/:id.json
   def show
+    render inertia: "Assignments/Show"
   end
 
   # GET /checkout/:asset_type/:asset_id
   def new
     @assignment = Assignment.new
-    render "#{params[:asset_type].downcase.pluralize}/checkout"
+    # render "#{params[:asset_type].downcase.pluralize}/checkout"
+    render inertia: "#{params[:asset_type].camelize.pluralize}/Index"
   end
 
   # GET /checkin/:asset_type/:asset_id
   def end
     @assignment = @assignable.assignment
+    render inertia: "Assignments/End"
   end
 
   # GET /assignments/:id/edit
   def edit
     @assignable = @assignment.assignable
+    render inertia: "Assignments/Edit"
   end
 
   # POST /assignments/:asset_type/:asset_id

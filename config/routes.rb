@@ -20,9 +20,9 @@ Rails.application.routes.draw do
 
   # STATIC PATHS #
 
-  root "pages#home"
-  get "pages/:page" => "pages#show"
-  get "settings" => "pages#show", page: "settings"
+  root "pages#dashboard"
+  get "dashboard" => "pages#dashboard", as: :dashboard
+  get "settings" => "pages#settings", as: :settings
 
   # DEVISE PATHS #
 

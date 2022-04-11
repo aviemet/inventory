@@ -8,22 +8,22 @@ class ConsumablesController < ApplicationController
   # GET /consumables(.json)
   def index
     self.consumables = search(consumables, sortable_fields)
+    render inertia: "Consumables/Index"
   end
 
   # GET /consumables/:id(.json)
   def show
+    render inertia: "Consumables/Show"
   end
 
   # GET /consumables/new
   def new
+    render inertia: "Consumables/New"
   end
 
   # GET /consumables/:id/edit
   def edit
-  end
-
-  # GET /checkout/consumable/:id
-  def checkout
+    render inertia: "Consumables/Edit"
   end
 
   # POST /consumables(.json)

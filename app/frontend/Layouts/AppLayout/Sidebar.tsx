@@ -31,49 +31,27 @@ const Sidebar = () => {
 
 					<nav className="links">
 						<ul>
-							<li>
-								<MenuLink href="pages/dashboard" icon={ <MdDashboard /> }>Dashboard</MenuLink>
-							</li>
+							<li><MenuLink href={ Routes.dashboard() } icon={ <MdDashboard /> }>Dashboard</MenuLink></li>
 							<li>
 								<MenuLink href={ Routes.items() } icon={ <MdImportantDevices /> }>Inventory</MenuLink>
 								<ul>
-									<li>
-										<Link href="/hardware">Hardware</Link>
-									</li>
-									<li>
-										<Link href="/accessories">Accessories</Link>
-									</li>
-									<li>
-										<Link href="/components">Components</Link>
-									</li>
-									<li>
-										<Link href="/consumables">Consumables</Link>
-									</li>
+									<li><Link href={ Routes.items() }>Hardware</Link></li>
+									<li><Link href={ Routes.accessories() }>Accessories</Link></li>
+									<li><Link href={ Routes.components() }>Components</Link></li>
+									<li><Link href={ Routes.consumables() }>Consumables</Link></li>
 								</ul>
 							</li>
-							<li>
-								<MenuLink href={ Routes.licenses() } icon={ <MdSave /> }>Licenses</MenuLink>
-							</li>
-							<li>
-								<MenuLink href={ Routes.networks() } icon={ <MdSettingsEthernet /> }>Networks</MenuLink>
-							</li>
-							<li>
-								<MenuLink href={ Routes.people() } icon={ <MdPeople /> }>People</MenuLink>
-							</li>
-							<li>
-								<MenuLink href={ Routes.people() } icon={ <MdConfirmationNumber /> }>Tickets</MenuLink>
-							</li>
+							<li><MenuLink href={ Routes.licenses() } icon={ <MdSave /> }>Licenses</MenuLink></li>
+							<li><MenuLink href={ Routes.networks() } icon={ <MdSettingsEthernet /> }>Networks</MenuLink></li>
+							<li><MenuLink href={ Routes.people() } icon={ <MdPeople /> }>People</MenuLink></li>
+							<li><MenuLink href={ Routes.people() } icon={ <MdConfirmationNumber /> }>Tickets</MenuLink></li>
 							<li>
 								<MenuLink href={ Routes.vendors() } icon={ <MdBusiness /> }>Vendors</MenuLink>
 								<ul>
-									<li>
-										<Link href={ Routes.contracts() }>Contracts</Link>
-									</li>
+									<li><Link href={ Routes.contracts() }>Contracts</Link></li>
 								</ul>
 							</li>
-							<li>
-								<MenuLink href={ Routes.orders() } icon={ <MdShoppingCart /> }>Purchasing</MenuLink>
-							</li>
+							<li><MenuLink href={ Routes.orders() } icon={ <MdShoppingCart /> }>Purchasing</MenuLink></li>
 						</ul>
 					</nav>
 				</div>
@@ -90,9 +68,7 @@ const Sidebar = () => {
 									<li><Link href={ Routes.fields() }>Custom Fields</Link></li>
 								</ul>
 							</li>
-							<li>
-								<MenuLink href={ Routes.destroyUserSession() } icon={ <MdExitToApp /> }>Settings</MenuLink>
-							</li>
+							<li><MenuLink href={ Routes.destroyUserSession() } icon={ <MdExitToApp /> }>Settings</MenuLink></li>
 						</ul>
 					</div>
 				</div>

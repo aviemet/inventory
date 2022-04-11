@@ -11,19 +11,23 @@ class AccessoriesController < ApplicationController
   # GET /accessories.json
   def index
     self.accessories = search(accessories, sortable_fields)
+    render inertia: "Accessories/Index"
   end
 
   # GET /accessories/1
   # GET /accessories/1.json
   def show
+    render inertia: "Accessories/Show"
   end
 
   # GET /accessories/new
   def new
+    render inertia: "Accessories/New"
   end
 
   # GET /accessories/1/edit
   def edit
+    render inertia: "Accessories/Edit"
   end
 
   # POST /accessories

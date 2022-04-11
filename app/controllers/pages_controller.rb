@@ -1,25 +1,14 @@
 class PagesController < ApplicationController
 
-  def home
-    render inertia: "Home", props: {
-      name: "World",
-    }
+  def dashboard
+    render inertia: "Dashboard"
   end
 
-  def show
-    if valid_page?
-      @categories = Category.all
-      render template: "pages/#{params[:page]}"
-    else
-      render file: "public/404.html", status: :not_found
-    end
+  def settings
+    render inertia: "Settings"
   end
 
   private
-
-  def valid_page?
-    File.exist?(Pathname.new(Rails.root + "app/views/pages/#{params[:page]}.html.slim"))
-  end
 
   def settings_params
     params.require(:settings).permit(:dark_mode)
