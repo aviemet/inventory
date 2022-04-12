@@ -11,8 +11,14 @@ class AccessoriesController < ApplicationController
   # GET /accessories.json
   def index
     self.accessories = search(accessories, sortable_fields)
+    paginated_accessories = accessories.page(params[:page] || 1)
+
     render inertia: "Accessories/Index", props: {
-      accessories: -> { AccessoryBlueprint.render_as_json(accessories, view: :associations) }
+      accessories: -> { AccessoryBlueprint.render_as_json(accessories, view: :associations) },
+      pagination: -> { {
+        count: accessories.count,
+        **pagination_data(paginated_accessories)
+      } }
     }
   end
 

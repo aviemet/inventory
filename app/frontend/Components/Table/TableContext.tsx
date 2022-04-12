@@ -36,12 +36,7 @@ interface ITableContextProviderProps {
 const [useTableContext, TableContextProvider] = createContext<ITableContext>()
 export { useTableContext }
 
-const TableProvider = ({
-	children,
-	selectable = false,
-	pagination,
-	rows = []
-}: ITableContextProviderProps) => {
+const TableProvider = ({ children, selectable = false, pagination, rows = [] }: ITableContextProviderProps) => {
 	const tableReducer = (tableState: ITableSettings, newTableState: Partial<ITableSettings>) => ({
 		...tableState,
 		...newTableState,

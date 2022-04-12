@@ -12,14 +12,16 @@ interface IItemsIndexProps {
 }
 
 const Index = ({ items, pagination }: IItemsIndexProps) => {
+	const title = 'Hardware Assets'
+
 	return (
 		<>
-			<Head title="Companies"></Head>
+			<Head title={ title }></Head>
 
 			<section className="h-full flex flex-col">
 				<Table.TableProvider selectable rows={ items } pagination={ pagination }>
 					<div className="flex justify-between items-center">
-						<h1 className="inline-block align-text-top md:align-middle">Hardware Assets</h1>
+						<h1 className="inline-block align-text-top md:align-middle">{ title }</h1>
 						<div>
 							<Table.SearchInput model="items" />
 
@@ -27,18 +29,12 @@ const Index = ({ items, pagination }: IItemsIndexProps) => {
 								<Option>
 									<Link href={ Routes.newItem() } key="new_asset">Create New Asset</Link>
 								</Option>
-
-								<Divider key="divider" />
-
-								<Option>
-									<Link href={ Routes.newItem() } key="new_asset_2">Create New Asset</Link>
-								</Option>
 							</Popover>
 
 						</div>
 					</div>
 
-					<Table.Table scroll fixed={ false } pagination={ pagination }>
+					<Table.Table scroll fixed={ false }>
 						<Table.Head>
 							<Table.Row>
 								<Table.Cell sort="name">Name</Table.Cell>

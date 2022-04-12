@@ -10,8 +10,14 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
+    paginated_companies = companies.page(params[:page] || 1)
+
     render inertia: "Companies/Index", props: {
-      companies: CompanyBlueprint.render_as_json(companies, view: :counts)
+      companies: CompanyBlueprint.render_as_json(companies, view: :counts),
+      pagination: -> { {
+        count: companies.count,
+        **pagination_data(paginated_companies)
+      } }
     }
   end
 

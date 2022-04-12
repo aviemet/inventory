@@ -30,7 +30,7 @@ const Table = ({
 					{ children }
 				</table>
 			</div>
-			{ pagination && <Pagination /> }
+			<Pagination />
 		</>
 	)
 }

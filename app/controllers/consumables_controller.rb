@@ -8,8 +8,14 @@ class ConsumablesController < ApplicationController
   # GET /consumables(.json)
   def index
     self.consumables = search(consumables, sortable_fields)
+    paginated_consumables = consumables.page(params[:page] || 1)
+
     render inertia: "Consumables/Index", props: {
-      consumables: -> { ConsumableBlueprint.render_as_json(consumables, view: :associations) }
+      consumables: -> { ConsumableBlueprint.render_as_json(consumables, view: :associations) },
+      pagination: -> { {
+        count: consumables.count,
+        **pagination_data(paginated_consumables)
+      } }
     }
   end
 
