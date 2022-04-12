@@ -1,8 +1,7 @@
 class ItemBlueprint < Blueprinter::Base
   identifier :id
 
-  fields :id,
-         :name,
+  fields :name,
          :asset_tag,
          :serial,
          :cost_currency,
@@ -16,31 +15,31 @@ class ItemBlueprint < Blueprinter::Base
          :updated_at
 
   field :cost do |item|
-    item.cost.amount.to_f
+    item.cost&.amount.to_f
   end
 
   view :associations do
-    association :owner, blueprint: OwnerBlueprint
+    # association :owner, blueprint: OwnershipBlueprint
     # association :company, blueprint: CompanyBlueprint
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint
     # association :posessions, blueprint: AssignmentBlueprint
-    association :items, blueprint: ItemBlueprint
-    association :accessories, blueprint: AccessoryBlueprint
-    association :licenses, blueprint: LicenseBlueprint
-    association :purchase, blueprint: PurchaseBlueprint
+    # association :items, blueprint: ItemBlueprint
+    # association :accessories, blueprint: AccessoryBlueprint
+    # association :licenses, blueprint: LicenseBlueprint
+    # association :purchase, blueprint: PurchaseBlueprint
     # association :fieldset_associations, blueprint: FieldAssociationBlueprint
-    association :roles, blueprint: RoleBlueprint
-    association :audits, blueprint: AuditBlueprint
-    association :nics, blueprint: NicBlueprint
-    association :ips, blueprint: IpBlueprint
-    association :ip_leases, blueprint: IpLeaseBlueprint
+    # association :roles, blueprint: RoleBlueprint
+    # association :audits, blueprint: AuditBlueprint
+    # association :nics, blueprint: NicBlueprint
+    # association :ips, blueprint: IpBlueprint
+    # association :ip_leases, blueprint: IpLeaseBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
-    association :default_location, blueprint: LocationBlueprint
+    # association :default_location, blueprint: LocationBlueprint
     association :category, blueprint: CategoryBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
-    association :warranty, blueprint: WarrantyBlueprint
+    # association :warranty, blueprint: WarrantyBlueprint
   end
 
 end

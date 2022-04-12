@@ -10,7 +10,9 @@ class ComponentsController < ApplicationController
   # GET /components(.json)
   def index
     self.components = search(components, sortable_fields)
-    render inertia: "Components/Index"
+    render inertia: "Components/Index", props: {
+      components: -> { ComponentBlueprint.render_as_json(components, view: :associations) }
+    }
   end
 
   # TODO: Decide if this is how I want to do category searches

@@ -6,7 +6,9 @@ import classnames from 'classnames'
 const RowIterator = ({ render }) => {
 	const { tableState: { selected, rows } } = useTableContext()
 
-	if(!rows || rows.length === 0) return <Row />
+	if(!rows || rows.length === 0) {
+		return <Row />
+	}
 
 	const handleRowProps = row => {
 		return React.cloneElement(

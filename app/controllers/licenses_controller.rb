@@ -9,7 +9,9 @@ class LicensesController < ApplicationController
   # GET /licenses.json
   def index
     self.licenses = search(licenses, sortable_fields)
-    render inertia: "Licenses/Index"
+    render inertia: "Licenses/Index", props: {
+      licenses: LicenseBlueprint.render_as_json(licenses, view: :associations)
+    }
   end
 
   # GET /licenses/1

@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
   create_table "accessories", force: :cascade do |t|
     t.string "name"
     t.string "serial"
+    t.string "asset_tag"
     t.integer "min_qty"
     t.integer "qty"
     t.integer "cost_cents"

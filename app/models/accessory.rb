@@ -7,10 +7,11 @@ class Accessory < ApplicationRecord
 
   pg_search_scope(
     :search, 
-    against: [:name, :serial, :model_number], associated_against: {
+    against: [:name, :serial, :asset_tag], associated_against: {
       vendor: [:name],
       default_location: [:name],
       category: [:name],
+      model: [:name, :model_number],
       manufacturer: [:name]
     }, using: {
       tsearch: { prefix: true }, 
@@ -29,6 +30,6 @@ class Accessory < ApplicationRecord
   has_one :category, through: :model
   has_one :manufacturer, through: :model
 
-  scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer]) }
+  scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer, :model]) }
 
 end

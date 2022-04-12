@@ -11,7 +11,9 @@ class AccessoriesController < ApplicationController
   # GET /accessories.json
   def index
     self.accessories = search(accessories, sortable_fields)
-    render inertia: "Accessories/Index"
+    render inertia: "Accessories/Index", props: {
+      accessories: -> { AccessoryBlueprint.render_as_json(accessories, view: :associations) }
+    }
   end
 
   # GET /accessories/1

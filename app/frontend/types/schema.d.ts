@@ -388,6 +388,7 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		serial?: string | null;
+		asset_tag?: string | null;
 		min_qty?: number | null;
 		qty?: number | null;
 		cost?: number | null;

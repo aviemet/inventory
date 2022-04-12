@@ -30,6 +30,6 @@ class Consumable < ApplicationRecord
 
   validates :qty, numericality: { greater_than_or_equal_to: 0 }
 
-  scope :includes_associated, -> { includes([:manufacturer, :category, :vendor]) }
+  scope :includes_associated, -> { includes([:manufacturer, :category, :vendor, :model]) }
 
 end
