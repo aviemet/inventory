@@ -2,6 +2,7 @@ import React from 'react'
 import { SearchableDropdown } from '@/Components/Inputs'
 import { MdMenu } from 'react-icons/md'
 import { useAuth } from '@/Providers'
+import Popover from '@/Components/Popover'
 
 const Topbar = () => {
 	const { user } = useAuth()
@@ -16,8 +17,6 @@ const Topbar = () => {
 				<div className="flex-1">
 					<ActiveCompany user={ user } />
 				</div>
-
-				<div>User Menu</div>
 			</div>
 		</header>
 	)

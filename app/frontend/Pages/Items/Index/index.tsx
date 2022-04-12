@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
+import { Popover, Divider, Option } from '@/Components/Popover'
 import { MdEdit } from 'react-icons/md'
 
 interface IItemsIndexProps {
@@ -10,17 +11,30 @@ interface IItemsIndexProps {
 	pagination: Schema.Pagination
 }
 
+
 const Index = ({ items, pagination }: IItemsIndexProps) => {
 	return (
 		<>
 			<Head title="Companies"></Head>
 
 			<section className="h-full flex flex-col">
-				<div className="flex justify-between">
-					<h1 className="inline-block align-text-top md:align-middle">Harware Assets</h1>
+				<div className="flex justify-between items-center">
+					<h1 className="inline-block align-text-top md:align-middle">Hardware Assets</h1>
 					<div>
 						<Table.SearchInput model="items" />
-						<Link as="button" href={ Routes.newItem() }>+ New Asset</Link>
+
+						<Popover>
+							<Option>
+								<Link href={ Routes.newItem() } key="new_asset">Create New Asset</Link>
+							</Option>
+
+							<Divider key="divider" />
+
+							<Option>
+								<Link href={ Routes.newItem() } key="new_asset_2">Create New Asset</Link>
+							</Option>
+						</Popover>
+
 					</div>
 				</div>
 
