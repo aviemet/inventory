@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import { createContext } from '../Hooks'
 
 /**
@@ -67,9 +67,33 @@ const TableProvider = ({
 
 	return (
 		<TableContextProvider value={ { tableState, setTableState } }>
-			{ children }
+
+			<StatePreservingRowUpdater rows={ rows } pagination={ pagination }>
+				{ children }
+
+			</StatePreservingRowUpdater>
 		</TableContextProvider>
 	)
+}
+
+interface IStatePreservingRowUpdaterProps {
+	rows?: Record<string,any>[]
+	pagination?: Schema.Pagination
+}
+
+/**
+ * This component's purpose is to allow props to be updated upon an inertia page navigation while using { preserveState: true }
+ * Without this explicitly updating rows with the fresh data response, the table wouldn't update with new rows
+ * This allows both sorting and filtering to work properly without losing input focus
+ */
+const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = ({ children, rows, pagination }) => {
+	const { setTableState } = useTableContext()
+
+	useEffect(() => {
+		setTableState({ rows, pagination })
+	}, [rows, pagination])
+
+	return <>{ children }</>
 }
 
 export default TableProvider
