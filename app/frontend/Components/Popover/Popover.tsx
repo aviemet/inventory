@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
+import { useClickAwayListener } from '@/Components/Hooks'
 import { MdMoreVert } from 'react-icons/md'
 import classnames from 'classnames'
 
@@ -10,11 +11,26 @@ interface IPopoverProps {
 const Popover = ({ children, width = 24 }: IPopoverProps) => {
 	const [visible, setVisible] = useState(false)
 
+	const outerElRef = useRef<HTMLDivElement>(null)
+
+	const { startClickListener, cancelClickListener } = useClickAwayListener(outerElRef, () => {
+		setVisible(false)
+	})
+
+	const handleShow = () => startClickListener(() => setVisible(true))
+	const handleHide = () => cancelClickListener(() => setVisible(false))
+
+	const handleToggle = () => {
+		if(visible) handleHide()
+		else handleShow()
+	}
+
 	return (
 		<div
 			className="popover cursor-pointer inline-block m-2 relative"
 			style={ { width: `${width}px`, height: `${width}px` } }
-			onClick={ () => setVisible(!visible) }
+			onClick={ handleToggle }
+			ref={ outerElRef }
 		>
 			<MdMoreVert />
 			<div
