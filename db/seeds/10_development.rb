@@ -125,7 +125,7 @@ if Rails.env == "development"
     ActiveRecord::Base.transaction do
       network = IPAddress.parse("10.10.10.0/24")
 
-      100.times do |n|
+      105.times do |n|
         i = Item.create!({
           name: Faker::Device.model_name,
           asset_tag: Faker::Blockchain::Bitcoin.unique.address,

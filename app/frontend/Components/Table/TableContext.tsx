@@ -16,8 +16,13 @@ export { useTableSectionContext, TableSectionContextProvider }
  */
 interface ITableSettings {
 	selectable: boolean
+	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
 	selected: Set<string>
+	url: {
+		base: string
+		params: URLSearchParams
+	}
 }
 
 interface ITableContext {
@@ -28,22 +33,36 @@ interface ITableContext {
 interface ITableContextProviderProps {
 	children: React.ReactNode
 	selectable: boolean
+	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
 }
 
 const [useTableContext, TableContextProvider] = createContext<ITableContext>()
 export { useTableContext }
 
-const TableProvider = ({ children, selectable = false, rows = [] }: ITableContextProviderProps) => {
+const TableProvider = ({
+	children,
+	selectable = false,
+	pagination,
+	rows = []
+}: ITableContextProviderProps) => {
 	const tableReducer = (tableState: ITableSettings, newTableState: Partial<ITableSettings>) => ({
 		...tableState,
 		...newTableState,
 	})
 
+	const { origin, pathname, search } = window.location
+	const params = new URLSearchParams(search)
+
 	const [tableState, setTableState] = useReducer(tableReducer, {
 		selectable,
 		rows,
-		selected: new Set<string>()
+		pagination,
+		selected: new Set<string>(),
+		url: {
+			base: `${origin}${pathname}`,
+			params
+		}
 	})
 
 	return (

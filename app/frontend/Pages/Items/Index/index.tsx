@@ -5,7 +5,12 @@ import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { MdEdit } from 'react-icons/md'
 
-const Index = ({ items }: { items: Schema.Item[] }) => {
+interface IItemsIndexProps {
+	items: Schema.Item[]
+	pagination: Schema.Pagination
+}
+
+const Index = ({ items, pagination }: IItemsIndexProps) => {
 	return (
 		<>
 			<Head title="Companies"></Head>
@@ -19,7 +24,7 @@ const Index = ({ items }: { items: Schema.Item[] }) => {
 					</div>
 				</div>
 
-				<Table.Table scroll selectable rows={ items } fixed={ false }>
+				<Table.Table scroll selectable rows={ items } fixed={ false } pagination={ pagination }>
 					<Table.Head>
 						<Table.Row>
 							<Table.Cell sort="name">Name</Table.Cell>

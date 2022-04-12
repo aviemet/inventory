@@ -2,10 +2,12 @@ import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { TableProps } from 'react-html-props'
 import TableProvider, { useTableContext } from './TableContext'
+import Pagination from './Pagination'
 
 interface ITableProps extends TableProps {
 	scroll?: boolean
 	selectable?: boolean
+	pagination?: Schema.Pagination
 	fixed?: boolean
 	rows?: Record<string,any>[]
 }
@@ -13,15 +15,16 @@ interface ITableProps extends TableProps {
 const Table = ({
 	children,
 	scroll = false,
-	fixed = false,
 	selectable = false,
+	pagination,
+	fixed = false,
 	rows = [],
 	...props
 }: ITableProps) => {
 	return (
-		<TableProvider selectable={ selectable } rows={ rows }>
+		<TableProvider selectable={ selectable } rows={ rows } pagination={ pagination }>
 			<StatePreservingRowUpdater rows={ rows }>
-				<div className={ classnames({ 'scroll-content': scroll }) }>
+				<div className={ classnames('h-full', { 'scroll-content': scroll }) }>
 					<table
 						className={ classnames(
 							'shadow',
@@ -33,6 +36,7 @@ const Table = ({
 						{ children }
 					</table>
 				</div>
+				{ pagination && <Pagination /> }
 			</StatePreservingRowUpdater>
 		</TableProvider>
 	)

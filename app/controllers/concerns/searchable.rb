@@ -16,11 +16,10 @@ module Searchable
 
   def search(model, sortable_fields = [])
     terms = params[:search]
-    page = params[:page] || 1
-    return model.order(sort(model, sortable_fields)).page(page) unless terms
+    return model.order(sort(model, sortable_fields)) unless terms
 
     ids = model.search(terms).pluck(:id)
-    model.where(id: ids).order(sort(model, sortable_fields)).page(page)
+    model.where(id: ids).order(sort(model, sortable_fields))
   end
 
   protected

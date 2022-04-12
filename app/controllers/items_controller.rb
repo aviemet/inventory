@@ -12,8 +12,19 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     self.items = search(items, sortable_fields)
+    paginated_items = items.page(params[:page] || 1)
     render inertia: "Items/Index", props: {
-      items: -> { ItemBlueprint.render_as_json(items, view: :associations) }
+      items: -> { ItemBlueprint.render_as_json(paginated_items, view: :associations) },
+      pagination: {
+        count: items.count,
+        pages: paginated_items.total_pages,
+        limit: paginated_items.limit_value,
+        current_page: paginated_items.current_page,
+        next_page: paginated_items.next_page,
+        prev_page: paginated_items.prev_page,
+        is_first_page: paginated_items.first_page?,
+        is_last_page: paginated_items.last_page?,
+      }
     }
   end
 
