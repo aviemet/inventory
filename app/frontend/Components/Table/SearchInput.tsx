@@ -13,7 +13,7 @@ const SearchInput = ({ model, rows }: { model?: string, rows?: Record<string, an
 			preserveScroll: true,
 			preserveState: true,
 		}
-		if(model) options.only = [model]
+		if(model) options.only = [model, 'pagination']
 		Inertia.get(path, {}, options)
 	}, 500), [])
 

@@ -12,7 +12,6 @@ interface IItemsIndexProps {
 }
 
 const Index = ({ items, pagination }: IItemsIndexProps) => {
-	console.log({ count: pagination.count, pages: pagination.pages })
 	return (
 		<>
 			<Head title="Companies"></Head>

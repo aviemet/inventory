@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
     paginated_items = items.page(params[:page] || 1)
     render inertia: "Items/Index", props: {
       items: -> { ItemBlueprint.render_as_json(paginated_items, view: :associations) },
-      pagination: {
+      pagination: -> { {
         count: items.count,
         pages: paginated_items.total_pages,
         limit: paginated_items.limit_value,
@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
         prev_page: paginated_items.prev_page,
         is_first_page: paginated_items.first_page?,
         is_last_page: paginated_items.last_page?,
-      }
+      } }
     }
   end
 

@@ -29,7 +29,7 @@ const Pagination = () => {
         Showing <b>{ recordStart } - { recordEnd } / { count }</b>
 			</div>
 
-			<div className="flex-1">
+			{ pages > 1 &&	<div className="flex-1">
 				<nav className="pagination">
 					{ !is_first_page && <PrevPageTags
 						currentPage={ current_page }
@@ -50,7 +50,7 @@ const Pagination = () => {
 						lastPage={ pages }
 					/> }
 				</nav>
-			</div>
+			</div> }
 
 		</div>
 	)
