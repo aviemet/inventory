@@ -19,10 +19,6 @@ interface ITableSettings {
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
 	selected: Set<string>
-	url: {
-		base: string
-		params: URLSearchParams
-	}
 }
 
 interface ITableContext {
@@ -51,26 +47,17 @@ const TableProvider = ({
 		...newTableState,
 	})
 
-	const { origin, pathname, search } = window.location
-	const params = new URLSearchParams(search)
-
 	const [tableState, setTableState] = useReducer(tableReducer, {
 		selectable,
 		rows,
 		pagination,
 		selected: new Set<string>(),
-		url: {
-			base: `${origin}${pathname}`,
-			params
-		}
 	})
 
 	return (
 		<TableContextProvider value={ { tableState, setTableState } }>
-
 			<StatePreservingRowUpdater rows={ rows } pagination={ pagination }>
 				{ children }
-
 			</StatePreservingRowUpdater>
 		</TableContextProvider>
 	)

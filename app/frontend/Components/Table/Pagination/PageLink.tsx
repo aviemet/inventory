@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from '@inertiajs/inertia-react'
-import { useTableContext } from '../TableContext'
 
 interface IPageLinkProps {
 	children?: React.ReactNode
@@ -9,13 +8,12 @@ interface IPageLinkProps {
 }
 
 const PageLink = ({ children, page, currentPage }: IPageLinkProps) => {
-	const { tableState: { url } } = useTableContext()
-	const{ base, params } = url
+	const url = new URL(window.location.href)
 
 	if(page === 1) {
-		params.delete('page')
+		url.searchParams.delete('page')
 	} else {
-		params.set('page', String(page))
+		url.searchParams.set('page', String(page))
 	}
 
 	const props: { rel?: 'next'|'prev' } = {}
@@ -26,7 +24,7 @@ const PageLink = ({ children, page, currentPage }: IPageLinkProps) => {
 	}
 
 	return (
-		<Link href={ `${base}?${params.toString()}` } { ...props }>
+		<Link href={ url.toString() } { ...props }>
 			{ children ? children : page }
 		</Link>
 	)

@@ -18,15 +18,18 @@ const SearchInput = ({ model, rows }: { model?: string, rows?: Record<string, an
 	}, 500), [])
 
 	useEffect(() => {
-		const { origin, pathname, search } = window.location
-		const params = new URLSearchParams(search)
-		const searchParam = params.get('search') || ''
+		const url = new URL(window.location.href)
 
-		if(searchParam === searchValue) return
+		if(url.searchParams.get('search') === searchValue) return
 
-		params.set('search', searchValue)
+		if(searchValue === '') {
+			url.searchParams.delete('search')
+		} else {
+			url.searchParams.set('search', searchValue)
+			url.searchParams.delete('page')
+		}
 
-		debouncedSearch(`${origin}${pathname}?${params.toString()}`)
+		debouncedSearch(url.toString())
 	}, [searchValue])
 
 	return (

@@ -82,9 +82,11 @@ class ApplicationController < ActionController::Base
     end
 
     if params.key?(:direction) && !params.key?(:sort)
+      ap(":direction NEEDS TO BE DELETED")
       dirty = true
       params.delete :direction
     end
-    redirect_to(params.permit(*query_string_params)) if dirty
+
+    redirect_to request.path, params: params if dirty
   end
 end

@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
   def index
     self.items = search(items, sortable_fields)
     paginated_items = items.page(params[:page] || 1)
+
     render inertia: "Items/Index", props: {
       items: -> { ItemBlueprint.render_as_json(paginated_items, view: :associations) },
       pagination: -> { {
