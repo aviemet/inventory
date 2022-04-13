@@ -24,10 +24,10 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 					if(onChange) onChange(e)
 					setData(name, e.target.value)
 				} }
+				value={ data[name] }
 				{ ...required }
 				{ ...props }
 			>
-				{ data[name] }
 			</textarea>
 			{ errors && <div className="feedback">
 

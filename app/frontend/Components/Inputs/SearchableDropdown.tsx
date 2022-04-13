@@ -37,7 +37,6 @@ const SearchableDropdown = ({ options, defaultValue, getLabel, getValue, onChang
 	const handleClose = () => cancelClickListener(() => {
 		setOpen(false)
 		setShouldFilter(false)
-		labelInputRef.current!.focus()
 		labelInputRef.current!.blur()
 		// if(label !== )
 	})
