@@ -1,5 +1,5 @@
 declare namespace Schema {
-	interface User {
+	type User = {
 		id: number;
 		email: string;
 		password?: string | null;
@@ -32,7 +32,7 @@ declare namespace Schema {
 		companies?: Company[];
 	}
 
-	interface Department {
+	type Department = {
 		id: number;
 		name?: string | null;
 		slug: string;
@@ -62,7 +62,7 @@ declare namespace Schema {
 		vendors?: Vendor[];
 	}
 
-	interface Category {
+	type Category = {
 		id: number;
 		categorizable_type: string;
 		name?: string | null;
@@ -73,7 +73,7 @@ declare namespace Schema {
 		audits?: AuditedAudit[];
 	}
 
-	interface Item {
+	type Item = {
 		id: number;
 		name?: string | null;
 		asset_tag?: string | null;
@@ -111,7 +111,7 @@ declare namespace Schema {
 		warranty?: Warranty;
 	}
 
-	interface Contact {
+	type Contact = {
 		id: number;
 		notes?: string | null;
 		contactable_type?: string | null;
@@ -127,7 +127,7 @@ declare namespace Schema {
 		websites?: Website[];
 	}
 
-	interface Website {
+	type Website = {
 		id: number;
 		url?: string | null;
 		name?: string | null;
@@ -138,7 +138,7 @@ declare namespace Schema {
 		audits?: AuditedAudit[];
 	}
 
-	interface Manufacturer {
+	type Manufacturer = {
 		id: number;
 		name?: string | null;
 		slug: string;
@@ -161,7 +161,7 @@ declare namespace Schema {
 		components?: Component[];
 	}
 
-	interface Fieldset {
+	type Fieldset = {
 		id: number;
 		name?: string | null;
 		description?: string | null;
@@ -170,7 +170,7 @@ declare namespace Schema {
 		audits?: AuditedAudit[];
 	}
 
-	interface Nic {
+	type Nic = {
 		id: number;
 		mac?: string | null;
 		nic_type: 'ethernet'|'wifi'|'fiber';
@@ -183,7 +183,7 @@ declare namespace Schema {
 		ip_leases?: IpLease[];
 	}
 
-	interface IpLease {
+	type IpLease = {
 		id: number;
 		nic_id: number;
 		address?: string | null;
@@ -195,7 +195,7 @@ declare namespace Schema {
 		item?: Item;
 	}
 
-	interface Component {
+	type Component = {
 		id: number;
 		name?: string | null;
 		serial?: string | null;
@@ -224,7 +224,7 @@ declare namespace Schema {
 		manufacturer?: Manufacturer;
 	}
 
-	interface Contract {
+	type Contract = {
 		id: number;
 		name?: string | null;
 		number?: string | null;
@@ -244,7 +244,7 @@ declare namespace Schema {
 		vendor?: Vendor;
 	}
 
-	interface Email {
+	type Email = {
 		id: number;
 		email?: string | null;
 		notes?: string | null;
@@ -257,7 +257,7 @@ declare namespace Schema {
 		category?: Category;
 	}
 
-	interface License {
+	type License = {
 		id: number;
 		name?: string | null;
 		seats?: number | null;
@@ -290,7 +290,7 @@ declare namespace Schema {
 		manufacturer?: Manufacturer;
 	}
 
-	interface Network {
+	type Network = {
 		id: number;
 		name?: string | null;
 		address?: string | null;
@@ -306,7 +306,7 @@ declare namespace Schema {
 		audits?: AuditedAudit[];
 	}
 
-	interface Assignment {
+	type Assignment = {
 		id: number;
 		assignable_type: string;
 		assignable_id: number;
@@ -326,7 +326,7 @@ declare namespace Schema {
 		created_by?: User;
 	}
 
-	interface Location {
+	type Location = {
 		id: number;
 		name?: string | null;
 		slug: string;
@@ -348,7 +348,7 @@ declare namespace Schema {
 		parent?: Location;
 	}
 
-	interface Warranty {
+	type Warranty = {
 		id: number;
 		item_id: number;
 		length?: number | null;
@@ -364,7 +364,7 @@ declare namespace Schema {
 		item?: Item;
 	}
 
-	interface Model {
+	type Model = {
 		id: number;
 		name?: string | null;
 		slug: string;
@@ -375,6 +375,7 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		fieldset_associations?: FieldsetAssociation[];
+		roles?: Role[];
 		audits?: AuditedAudit[];
 		manufacturer?: Manufacturer;
 		category?: Category;
@@ -384,7 +385,7 @@ declare namespace Schema {
 		components?: Component[];
 	}
 
-	interface Accessory {
+	type Accessory = {
 		id: number;
 		name?: string | null;
 		serial?: string | null;
@@ -415,7 +416,7 @@ declare namespace Schema {
 		manufacturer?: Manufacturer;
 	}
 
-	interface StatusType {
+	type StatusType = {
 		id: number;
 		name?: string | null;
 		slug: string;
@@ -424,7 +425,7 @@ declare namespace Schema {
 		audits?: AuditedAudit[];
 	}
 
-	interface Purchase {
+	type Purchase = {
 		id: number;
 		purchasable_type: string;
 		purchasable_id: number;
@@ -447,7 +448,7 @@ declare namespace Schema {
 		order?: Order;
 	}
 
-	interface Role {
+	type Role = {
 		id: number;
 		name?: string | null;
 		resource_type?: string | null;
@@ -458,7 +459,7 @@ declare namespace Schema {
 		users?: User[];
 	}
 
-	interface FieldsetAssociation {
+	type FieldsetAssociation = {
 		id: number;
 		fieldset_id: number;
 		fieldable_type: string;
@@ -469,7 +470,7 @@ declare namespace Schema {
 		fieldset?: Fieldset;
 	}
 
-	interface Order {
+	type Order = {
 		id: number;
 		number?: string | null;
 		user_id: number;
@@ -503,7 +504,7 @@ declare namespace Schema {
 		purchases?: Purchase[];
 	}
 
-	interface Company {
+	type Company = {
 		id: number;
 		name: string;
 		slug: string;
@@ -532,9 +533,10 @@ declare namespace Schema {
 		vendors?: Vendor[];
 		manufacturers?: Manufacturer[];
 		orders?: Order[];
+		models?: Model[];
 	}
 
-	interface Vendor {
+	type Vendor = {
 		id: number;
 		name?: string | null;
 		slug: string;
@@ -557,7 +559,7 @@ declare namespace Schema {
 		components?: Component[];
 	}
 
-	interface Person {
+	type Person = {
 		id: number;
 		first_name?: string | null;
 		middle_name?: string | null;
@@ -586,7 +588,7 @@ declare namespace Schema {
 		user?: User;
 	}
 
-	interface Consumable {
+	type Consumable = {
 		id: number;
 		name?: string | null;
 		min_qty?: number | null;
@@ -614,7 +616,7 @@ declare namespace Schema {
 		manufacturer?: Manufacturer;
 	}
 
-	interface Field {
+	type Field = {
 		id: number;
 		name?: string | null;
 		format?: string | null;
@@ -626,7 +628,7 @@ declare namespace Schema {
 		audits?: AuditedAudit[];
 	}
 
-	interface Ownership {
+	type Ownership = {
 		id: number;
 		company_id: number;
 		department_id?: number | null;
@@ -639,7 +641,7 @@ declare namespace Schema {
 		department?: Department;
 	}
 
-	interface Address {
+	type Address = {
 		id: number;
 		address: string;
 		address_2?: string | null;
@@ -657,7 +659,7 @@ declare namespace Schema {
 		category?: Category;
 	}
 
-	interface Phone {
+	type Phone = {
 		id: number;
 		number: string;
 		extension?: string | null;
@@ -671,7 +673,7 @@ declare namespace Schema {
 		category?: Category;
 	}
 
-	interface AuditedAudit {
+	type AuditedAudit = {
 		id: number;
 		auditable_id?: number | null;
 		auditable_type?: string | null;

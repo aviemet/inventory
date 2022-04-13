@@ -89,7 +89,7 @@ TsSchema.setup do |config|
 
   # Output schema as types or interfaces: type|interface
   #
-  # config.schema_type = :interface
+  config.schema_type = :type
 
 
   # Indentation options: tab|space

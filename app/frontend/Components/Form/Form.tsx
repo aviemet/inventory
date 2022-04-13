@@ -6,9 +6,9 @@ import { FormProps } from 'react-html-props'
 
 // TODO: Figure out how to use generics to pass down model type definitions to useInertiaForm
 
-interface IFormProps extends FormProps {
+interface IFormProps<T> extends FormProps {
 	model?: string
-	data: Record<string, any>
+	data: T
 	to: string
 	onSubmit?: (object) => boolean|void
 }
@@ -20,15 +20,16 @@ interface IInertiaFormProps extends InertiaFormProps {
 const [useForm, FormProvider] = createContext<IInertiaFormProps>()
 export { useForm }
 
-// const nullOrUndefined = data => data === null || data === undefined
+function fillEmptyValues<T extends Record<keyof T, unknown>>(data: T): T {
+	const sanitizedDefaultData = data
+	Object.keys(data).forEach(key => {
+		sanitizedDefaultData[key] = data === null || data === undefined ? '' : data[key]
+	})
+	return sanitizedDefaultData
+}
 
-const Form = ({ children, model, data, method = 'post', to, onSubmit, ...props }: IFormProps) => {
-	// const sanitizedDefaultData = {}
-	// Object.keys(data).forEach(key => {
-	// 	sanitizedDefaultData[key] = nullOrUndefined(data[key]) ? '' : data[key]
-	// })
-
-	const form = { ...useInertiaForm(data), model }
+function Form<T extends Record<keyof T, unknown>>({ children, model, data, method = 'post', to, onSubmit, ...props }: IFormProps<T>) {
+	const form = { ...useInertiaForm<Record<string, unknown>>(fillEmptyValues(data)), model }
 
 	const handleSubmit = e => {
 		e.preventDefault()
