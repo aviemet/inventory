@@ -10,7 +10,25 @@ interface IRowProps extends TRProps {
 }
 
 const Row = ({ children, render, name, ...props }: IRowProps) => {
-	const { tableState: { rows, selectable, selected } } = useTableContext()
+	try{
+		const { tableState: { rows, selectable, selected } } = useTableContext()
+		return (
+			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected }>
+				{ children }
+			</RowInContext>
+		)
+	} catch(e) {
+		return (
+			<NormalRow name={ name }>
+				{ children }
+			</NormalRow>
+		)
+	}
+}
+
+export default Row
+
+const RowInContext = ({ children, name, rows, selectable, selected, ...props }) => {
 	const { section } = useTableSectionContext()
 
 	const Checkbox = () => {
@@ -31,4 +49,10 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 	)
 }
 
-export default Row
+const NormalRow = ({ children,  ...props }) => {
+	return (
+		<tr { ...props }>
+			{ children }
+		</tr>
+	)
+}

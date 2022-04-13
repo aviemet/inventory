@@ -1,18 +1,26 @@
 import React from 'react'
 import { Link } from '@inertiajs/inertia-react'
-import { useTableSectionContext, useTableContext } from './TableContext'
-import { TDProps } from 'react-html-props'
+import { useTableContext } from '../TableContext'
+import { THProps } from 'react-html-props'
 import classnames from 'classnames'
+import { type ICellProps } from './index'
 
-interface ICellProps extends TDProps {
-	checkbox?: boolean
-	sort?: string
-	nowrap?: boolean
+const HeadCell = ({ children, ...props }: ICellProps) => {
+	try {
+		const { tableState: { rows } } = useTableContext()
+		return <CellWithContext { ...props } rows={ rows }>{ children }</CellWithContext>
+	} catch(e) {
+		return <NormalCell { ...props }>{ children }</NormalCell>
+	}
 }
 
-const Cell = ({ children, checkbox = false, sort, nowrap = false, ...props }: ICellProps) => {
-	const { tableState: { rows } } = useTableContext()
+export default HeadCell
 
+interface ICellWithContextProps extends ICellProps {
+	rows?: Record<string, any>[]
+}
+
+const CellWithContext = ({ children, checkbox = false, sort, nowrap, rows, ...props }: ICellWithContextProps) => {
 	const { origin, pathname, search } = window.location
 
 	const params = new URLSearchParams(search)
@@ -31,7 +39,7 @@ const Cell = ({ children, checkbox = false, sort, nowrap = false, ...props }: IC
 	const showSortLink = sort && rows!.length > 1
 
 	return (
-		<RenderedCell
+		<Th
 			className={ classnames(
 				{ 'table-column-fit': checkbox },
 				{ 'sortable': showSortLink },
@@ -47,20 +55,21 @@ const Cell = ({ children, checkbox = false, sort, nowrap = false, ...props }: IC
 				>{ children }</Link>
 				: children
 			}
-		</RenderedCell>
+		</Th>
 	)
 }
 
-export default Cell
+const NormalCell = ({ children, ...props }) => {
+	return (
+		<th>{ children }</th>
+	)
+}
 
-interface IRenderedCellProps extends TDProps {
+/**
+ * react-html-props doesn't seem to think that nowrap is a valid prop for table cells
+ */
+interface Th extends THProps {
 	nowrap?: string
 }
 
-const RenderedCell = ({ children, ...props }: IRenderedCellProps): JSX.Element => {
-	const { section } = useTableSectionContext()
-
-	const element = section === 'head' ? 'th' : 'td'
-
-	return React.createElement(element, props, children)
-}
+const Th = ({ children, ...props }) => <th { ...props }>{ children }</th>
