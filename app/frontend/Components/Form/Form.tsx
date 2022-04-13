@@ -44,5 +44,5 @@ export default React.memo(Form)
 
 export const useInputProps = (name) => {
 	const { model } = useForm()
-	return { inputId: `${model}[${name}]`, inputName: `${model}/${name}` }
+	return { inputId: `${model}_${name}`, inputName: `${model}/${name}` }
 }

@@ -15,6 +15,7 @@ class Model < ApplicationRecord
 
   slug :name
 
+  resourcify
   audited
 
   belongs_to :manufacturer
@@ -28,4 +29,6 @@ class Model < ApplicationRecord
   validates :name, uniqueness: { scope: :model_number, message: "Model already exists" }
 
   scope :includes_associated, -> { includes([:manufacturer, :category]) }
+
+  scope :find_by_category, ->(type){ joins(:category).where("category.categorizable_type" => type.to_s.singularize.camelize) }
 end

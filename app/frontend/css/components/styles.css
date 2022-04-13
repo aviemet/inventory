@@ -19,10 +19,6 @@ a.button {
   }
 }
 
-.simple_form {
-  @apply max-w-screen-lg;
-}
-
 div.field {
   @apply bg-gray-100 mb-2 w-full;
   @apply border-brand-light border-t-2;
@@ -90,7 +86,7 @@ div.field {
 
   /* On Desktop use a 2 column grid to show labels and inputs, with feedback elements below input */
   @screen md {
-    &:not(.text) {
+    &:not(.textarea) {
       @apply grid;
       grid-template-columns: var(--label-width) 1fr;
 
@@ -199,7 +195,7 @@ div.field {
       @apply cursor-pointer;
     }
 
-    .icon {
+    .expand-icon {
       @apply pt-1;
 
       svg {
@@ -237,7 +233,7 @@ div.field {
     .selector {
       @apply cursor-default;
 
-      .icon > svg {
+      .expand-icon > svg {
         transform: rotate(180deg);
       }
 

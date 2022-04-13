@@ -39,7 +39,12 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    render inertia: "Items/New"
+    render inertia: "Items/New", props: {
+      item: Item.new,
+      models: @active_company.models.find_by_category(:Item).as_json,
+      vendors: @active_company.vendors.as_json,
+      locations: @active_company.locations.as_json,
+    }
   end
 
   # GET /items/:id/edit

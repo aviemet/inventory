@@ -68,7 +68,7 @@ const Sidebar = () => {
 									<li><Link href={ Routes.fields() }>Custom Fields</Link></li>
 								</ul>
 							</li>
-							<li><MenuLink href={ Routes.destroyUserSession() } icon={ <MdExitToApp /> }>Settings</MenuLink></li>
+							<li><MenuLink href={ Routes.destroyUserSession() } icon={ <MdExitToApp /> }>Logout</MenuLink></li>
 						</ul>
 					</div>
 				</div>

@@ -1,4 +1,6 @@
 export { default as Form, useForm } from './Form'
 export { default as Input } from './Input'
+export { default as Textarea } from './Textarea'
 export { default as Submit } from './Submit'
 export { default as Checkbox } from './Checkbox'
+export { default as SearchableDropdown } from './SearchableDropdown'
