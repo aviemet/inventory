@@ -75,6 +75,7 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 							) } />
 						</Table.Body>
 					</Table.Table>
+					<Table.Pagination />
 				</Table.TableProvider>
 			</section>
 		</>

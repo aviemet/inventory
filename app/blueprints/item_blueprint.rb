@@ -18,6 +18,20 @@ class ItemBlueprint < Blueprinter::Base
     item.cost&.amount.to_f
   end
 
+  view :shallow do
+    exclude :serial
+    exclude :cost_currency
+    exclude :cost
+    exclude :purchased_at
+    exclude :requestable
+    exclude :notes
+    exclude :model_id
+    exclude :vendor_id
+    exclude :default_location_id
+    exclude :created_at
+    exclude :updated_at
+  end
+
   view :associations do
     # association :owner, blueprint: OwnershipBlueprint
     # association :company, blueprint: CompanyBlueprint
