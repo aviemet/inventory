@@ -6,9 +6,10 @@ import { InertiaProgress } from '@inertiajs/progress'
 import { AuthLayout, AppLayout } from '../Layouts'
 import dynamicImport from '../dynamicImport'
 
-import 'virtual:windi-devtools'
-import 'virtual:windi.css'
-import '@/css/windi.css'
+// import 'virtual:windi-devtools'
+// import 'virtual:windi.css'
+// import '@/css/windi.css'
+import '@/css/tailwind.css'
 
 document.addEventListener('DOMContentLoaded', () => {
 	const csrfToken = document.querySelector('meta[name=csrf-token]').content

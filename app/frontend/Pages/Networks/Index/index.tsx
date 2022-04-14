@@ -34,7 +34,7 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 						</div>
 					</div>
 
-					<Table.Table scroll fixed={ false }>
+					<Table.Table fixed={ false }>
 						<Table.Head>
 							<Table.Row>
 								<Table.Cell sort="name">Name</Table.Cell>

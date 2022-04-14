@@ -2,6 +2,7 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import classnames from 'classnames'
 import Footer from '../Footer'
+import tw from 'tailwind-styled-components'
 
 const AuthLayout = ({ children }) => {
 	return (
@@ -26,3 +27,9 @@ const AuthLayout = ({ children }) => {
 }
 
 export default AuthLayout
+
+const AuthPage = tw.div`
+	bg-purple-600
+  background-blend-mode: lighten;
+  background-image: url("/vite-dev/Images/robots-bw.svg");
+`
