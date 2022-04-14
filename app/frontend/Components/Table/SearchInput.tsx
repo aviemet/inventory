@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { Inertia, type VisitOptions } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
+import { Input } from '@/Components/Inputs'
 
 const SearchInput = ({ model, rows }: { model?: string, rows?: Record<string, any>[]}) => {
 	const { search } = window.location
@@ -33,16 +34,14 @@ const SearchInput = ({ model, rows }: { model?: string, rows?: Record<string, an
 	}, [searchValue])
 
 	return (
-		<div className="inline-block">
-			<input
-				className="rounded-l"
-				type="text"
-				name="search"
-				id="search"
-				value={ searchValue }
-				onChange={ e => setSearchValue(e.target.value) }
-			/>
-		</div>
+		<Input
+			className="rounded-l"
+			type="text"
+			name="search"
+			id="search"
+			value={ searchValue }
+			onChange={ e => setSearchValue(e.target.value) }
+		/>
 	)
 }
 

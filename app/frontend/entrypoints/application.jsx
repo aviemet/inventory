@@ -6,7 +6,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 import { AuthLayout, AppLayout } from '../Layouts'
 import dynamicImport from '../dynamicImport'
 
-// import 'virtual:windi-devtools'
+import 'virtual:windi-devtools'
 import 'virtual:windi.css'
 import '@/css/windi.css'
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	InertiaProgress.init()
 
 	createInertiaApp({
-		title: title => `ICR - ${title}`,
+		title: title => `Inventory - ${title}`,
 		resolve: async name => {
 			let checkedName = name
 			let layout = AppLayout

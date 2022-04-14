@@ -21,15 +21,17 @@ const Index = ({ items, pagination }: IItemsIndexProps) => {
 			<section className="h-full flex flex-col">
 				<Table.TableProvider selectable rows={ items } pagination={ pagination }>
 					<div className="flex justify-between items-center">
-						<h1 className="inline-block align-text-top md:align-middle">{ title }</h1>
-						<div>
+						<h1 className="md:inline-block align-text-top md:flex-1 md:align-middle">{ title }</h1>
+						<div className="flex md:flex-1">
 							<Table.SearchInput model="items" />
 
-							<Popover>
-								<Option>
-									<Link href={ Routes.newItem() } key="new_asset">Create New Asset</Link>
-								</Option>
-							</Popover>
+							<div className="inline-block">
+								<Popover>
+									<Option>
+										<Link href={ Routes.newItem() } key="new_asset">Create New Asset</Link>
+									</Option>
+								</Popover>
+							</div>
 
 						</div>
 					</div>

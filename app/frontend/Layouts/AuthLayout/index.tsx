@@ -7,6 +7,7 @@ const AuthLayout = ({ children }) => {
 	return (
 		<>
 			<Head title="Sign In" />
+
 			<div id="auth">
 				<div id="wrapper">
 					<main id="content">
