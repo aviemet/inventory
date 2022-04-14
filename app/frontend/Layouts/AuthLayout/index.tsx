@@ -1,35 +1,45 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import classnames from 'classnames'
 import Footer from '../Footer'
-import tw from 'tailwind-styled-components'
+import tw, { styled } from 'twin.macro'
 
 const AuthLayout = ({ children }) => {
 	return (
 		<>
 			<Head title="Sign In" />
 
-			<div id="auth">
-				<div id="wrapper">
-					<main id="content">
-						<div className={ classnames('flex', 'items-center', 'justify-center', 'h-full') }>
-							<div className={ classnames('tile', 'mb-24') }>
-								{ children }
-							</div>
+			<AuthPage id="auth" tw="bg-purple-600 min-h-screen">
+				<AuthWrapper tw="grid gap-0 min-h-screen w-full">
+					<main id="content" className="h-full">
+						<div className="flex items-center justify-center h-full">
+							{ children }
 						</div>
 					</main>
 
 					<Footer />
-				</div>
-			</div>
+				</AuthWrapper>
+			</AuthPage>
 		</>
 	)
 }
 
 export default AuthLayout
 
-const AuthPage = tw.div`
-	bg-purple-600
-  background-blend-mode: lighten;
-  background-image: url("/vite-dev/Images/robots-bw.svg");
+const AuthPage = styled.div`
+	background-blend-mode: lighten;
+  background-image: url("./Images/robots-bw.svg");
+`
+
+const AuthWrapper = styled.div`
+	grid-template-rows: 1fr 35px;
+	grid-template-areas:
+		"content"
+		"footer";
+
+	#content {
+		grid-area: content;
+	}
+	#footer {
+		grid-area: footer;
+	}
 `

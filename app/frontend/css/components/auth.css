@@ -1,8 +1,4 @@
-#auth {
-  @apply min-h-screen;
-  @apply bg-purple-600;
-  background-image: url("../../Images/robots-bw.svg");
-  background-blend-mode: lighten;
+/* #auth {
 
   main {
     @apply h-full;
@@ -38,4 +34,4 @@
   input[type="week"] {
     @apply w-full;
   }
-}
+} */

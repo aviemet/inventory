@@ -150,7 +150,7 @@ div.field {
     }
   }
 }
-
+/* 
 .tile {
   @apply w-full max-w-sm;
   @apply bg-white shadow-md;
@@ -180,7 +180,7 @@ div.field {
       @apply border-gray-200;
     }
   }
-}
+} */
 
 .dropdown-search {
   @apply relative inline-block;

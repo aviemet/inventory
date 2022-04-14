@@ -39,7 +39,7 @@ const ratios = {
 module.exports = {
 	darkMode: 'class', // or 'media'
 	theme: {
-		colors: ({ colors }) => ({
+		colors: () => ({
 			...colors,
 			brand: {
 				DEFAULT: colors.purple['600'],

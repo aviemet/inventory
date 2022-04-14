@@ -2,6 +2,8 @@ import React from 'react'
 import { Form, Input, Checkbox, Submit } from '@/Components/Form'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
+import { Tile } from '@/Components'
+import tw, { styled } from 'twin.macro'
 
 type TLoginFormData = {
 	email: string
@@ -29,36 +31,45 @@ const Login = () => {
 	}
 
 	return (
-		<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit }>
-			<div className="tile-content">
-				<div className="mb-2">
-					<h1 className="text-center">Inventory</h1>
-				</div>
+		<Tile.Container>
+			<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit }>
+				<Tile.Content>
+					<div tw="mb-2">
+						<h1 tw="text-center">Inventory</h1>
+					</div>
 
-				<div className="mb-2">
-					<Input name="email" placeholder="Email" autoFocus autoComplete="Email" />
-				</div>
+					<div tw="mb-2">
+						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" />
+					</div>
 
-				<div className="mb-2">
-					<Input name="password" type="password" placeholder="Password" autoComplete="current-password" />
-				</div>
+					<div tw="mb-2">
+						<Input name="password" type="password" placeholder="Password" autoComplete="current-password" />
+					</div>
 
-				<div className="mb-4">
-					<Submit className="large w-full">Log In</Submit>
-				</div>
+					<div tw="mb-4">
+						<Submit tw="w-full" className="large">Log In</Submit>
+					</div>
 
-				<div className="mb-2">
-					<Checkbox label="Remember Me" name="remember_me" />
-				</div>
+					<div tw="mb-2">
+						<Checkbox label="Remember Me" name="remember_me" />
+					</div>
 
-			</div>
+				</Tile.Content>
 
-			<div className="tile-footer flex">
-				<Link href={ Routes.newUserPassword() } className="link-hover flex-1">Reset Password</Link>
-				<Link href={ Routes.newUserRegistration() } className="link-hover flex-1">Register</Link>
-			</div>
-		</Form>
+				<Tile.Footer>
+					<HoverLink href={ Routes.newUserPassword() } tw="rounded-bl-lg">Reset Password</HoverLink>
+					<HoverLink href={ Routes.newUserRegistration() } tw="rounded-br-lg">Register</HoverLink>
+				</Tile.Footer>
+			</Form>
+		</Tile.Container>
 	)
 }
 
 export default Login
+
+const HoverLink = styled(Link)`
+	${tw`flex-1 text-center transition-all duration-500 border-t`}
+	&:hover {
+		${tw`bg-violet-100`}
+	}
+`
