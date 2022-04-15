@@ -2777,6 +2777,14 @@ export const statusTypes = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_types
 
 /**
  * Generates rails route to
+ * /test(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const test = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"test"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
  * /rails/active_storage/disk/:encoded_token(.:format)
  * @param {any} encodedToken
  * @param {object | undefined} options

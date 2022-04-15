@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useClickAwayListener } from '@/Components/Hooks'
 import { MdMoreVert } from 'react-icons/md'
-import classnames from 'classnames'
+import cx from 'classnames'
 
 interface IPopoverProps {
 	children?: React.ReactNode
@@ -34,7 +34,7 @@ const Popover = ({ children, width = 24 }: IPopoverProps) => {
 		>
 			<MdMoreVert />
 			<div
-				className={ classnames(
+				className={ cx(
 					{ 'visually-hidden': !visible },
 					'absolute',
 					'right-0',

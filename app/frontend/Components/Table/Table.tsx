@@ -1,5 +1,5 @@
 import React from 'react'
-import classnames from 'classnames'
+import cx from 'classnames'
 import { TableProps } from 'react-html-props'
 
 interface ITableProps extends TableProps {
@@ -16,7 +16,7 @@ const Table = ({
 	return (
 		<>
 			<table
-				className={ classnames(
+				className={ cx(
 					'shadow',
 					{ 'table-fixed': fixed },
 					{ 'table-auto': !fixed }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { InputProps } from 'react-html-props'
-import classnames from 'classnames'
+import cx from 'classnames'
 
 interface IInputProps extends InputProps {
 	label?: string
@@ -9,8 +9,8 @@ interface IInputProps extends InputProps {
 
 const Input = ({ label, required, value, onChange, type = 'text', id, ...props }: IInputProps) => {
 	return (
-		<div className={ classnames('field', type, { required }) }>
-			{ label && <label className={ classnames({ required }) } htmlFor={ id }>
+		<div className={ cx('field', type, { required }) }>
+			{ label && <label className={ cx({ required }) } htmlFor={ id }>
 				{ label }
 			</label> }
 			<input

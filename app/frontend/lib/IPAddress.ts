@@ -21,8 +21,6 @@ class IPAddress {
 
 	constructor(address: string) {
 		this.ip = this.parse(address)
-
-		console.log({ ip: this.ip })
 	}
 
 	parse(address: string) {
@@ -55,10 +53,9 @@ class IPAddress {
 export default IPAddress
 
 
-const v4 = new IPAddress('10.10.10.5')
-const v4cidr = new IPAddress('10.10.10.0/24')
-const v6 = new IPAddress('2001:db8:7fff:ffff:ffff:ffff:ffff:ffff')
-const v6cidr = new IPAddress('2001:db8:0:0:0:0:0:0/34')
+// const v4 = new IPAddress('10.10.10.5')
+// const v4cidr = new IPAddress('10.10.10.0/24')
+// const v6 = new IPAddress('2001:db8:7fff:ffff:ffff:ffff:ffff:ffff')
+// const v6cidr = new IPAddress('2001:db8:0:0:0:0:0:0/34')
 
 
-console.log({ type: v6cidr.type() })

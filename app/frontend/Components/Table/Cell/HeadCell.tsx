@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from '@inertiajs/inertia-react'
 import { useTableContext } from '../TableContext'
 import { THProps } from 'react-html-props'
-import classnames from 'classnames'
+import cx from 'classnames'
 import { type ICellProps } from './index'
 
 const HeadCell = ({ children, ...props }: ICellProps) => {
@@ -40,7 +40,7 @@ const CellWithContext = ({ children, checkbox = false, sort, nowrap, rows, ...pr
 
 	return (
 		<Th
-			className={ classnames(
+			className={ cx(
 				{ 'table-column-fit': checkbox },
 				{ 'sortable': showSortLink },
 				{ [direction]: showSortLink && paramsSort === sort }

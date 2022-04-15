@@ -1,16 +1,15 @@
-import React from 'react'
-import { useForm as useInertiaForm, InertiaFormProps } from '@inertiajs/inertia-react'
+import React, { useEffect } from 'react'
+import { useForm as useInertiaForm, type InertiaFormProps } from '@inertiajs/inertia-react'
 
 import { createContext } from '@/Components/Hooks'
 import { FormProps } from 'react-html-props'
-
-// TODO: Figure out how to use generics to pass down model type definitions to useInertiaForm
 
 interface IFormProps<T> extends FormProps {
 	model?: string
 	data: T
 	to: string
 	onSubmit?: (object) => boolean|void
+	onChange?: (object) => void
 }
 
 interface IInertiaFormProps extends InertiaFormProps {
@@ -20,39 +19,51 @@ interface IInertiaFormProps extends InertiaFormProps {
 const [useForm, FormProvider] = createContext<IInertiaFormProps>()
 export { useForm }
 
+const [useFormMetaData, FormMetaDataProvider] = createContext<Record<string, string>>()
+export const useInputProps = (name) => {
+	const { model } = useFormMetaData()
+	return { inputId: `${model}_${name}`, inputName: `${model}/${name}` }
+}
+
 function fillEmptyValues<T extends Record<keyof T, unknown>>(data: T): T {
 	const sanitizedDefaultData = data
 	Object.keys(data).forEach(key => {
-		sanitizedDefaultData[key] = data === null || data === undefined ? '' : data[key]
+		sanitizedDefaultData[key] = data[key] === null || data[key] === undefined ? '' : data[key]
 	})
 	return sanitizedDefaultData
 }
 
-function Form<T extends Record<keyof T, unknown>>({ children, model, data, method = 'post', to, onSubmit, ...props }: IFormProps<T>) {
-	const form = { ...useInertiaForm<Record<string, unknown>>(fillEmptyValues(data)), model }
+function Form<T extends Record<keyof T, unknown>>({ children, model, data, method = 'post', to, onSubmit, onChange, ...props }: IFormProps<T>) {
+	const form = useInertiaForm<Record<string, unknown>>(fillEmptyValues(data))
 
 	const handleSubmit = e => {
 		e.preventDefault()
+
 		let submit = true
 		if(onSubmit) {
 			const val = onSubmit(form)
 			if(val === true || val === false) submit = val
 		}
-		if(submit) form[method.toLocaleLowerCase()](to)
+		if(submit) form[method.toLowerCase()](to)
 	}
+
+	useEffect(() => {
+		if(onChange) onChange(form)
+	}, [form.data])
+
+	useEffect(() => {
+		console.log({ errors: form.errors })
+	}, [form.errors])
 
 	return (
 		<FormProvider value={ form }>
-			<form onSubmit={ handleSubmit } { ...props }>
-				{ children }
-			</form>
+			<FormMetaDataProvider value={ { model: model || 'form' } }>
+				<form onSubmit={ handleSubmit } { ...props }>
+					{ children }
+				</form>
+			</FormMetaDataProvider>
 		</FormProvider>
 	)
 }
 
 export default React.memo(Form)
-
-export const useInputProps = (name) => {
-	const { model } = useForm()
-	return { inputId: `${model}_${name}`, inputName: `${model}/${name}` }
-}

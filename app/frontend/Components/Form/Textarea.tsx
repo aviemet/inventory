@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextAreaProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
-import classnames from 'classnames'
+import cx from 'classnames'
 
 interface ITextareaProps extends TextAreaProps {
 	label?: string
@@ -13,8 +13,8 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 	const { inputId, inputName } = useInputProps(name)
 
 	return (
-		<div className={ classnames('field', 'textarea', { required }) }>
-			{ label && <label className={ classnames({ required }) } htmlFor={ id || inputId }>
+		<div className={ cx('field', 'textarea', { required }) }>
+			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
 				{ label }
 			</label> }
 			<textarea

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTableContext } from './TableContext'
 import Row from './Row'
-import classnames from 'classnames'
+import cx from 'classnames'
 
 const RowIterator = ({ render }) => {
 	const { tableState: { selected, rows } } = useTableContext()
@@ -15,7 +15,7 @@ const RowIterator = ({ render }) => {
 			row,
 			{
 				name: row.key,
-				className: classnames(
+				className: cx(
 					{ checked: selected.has(row.key) }
 				)
 			}

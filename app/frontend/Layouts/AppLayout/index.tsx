@@ -3,13 +3,13 @@ import { useLayout } from '@/Providers'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
-import classnames from 'classnames'
+import cx from 'classnames'
 import tw, { styled } from 'twin.macro'
 
 const AppLayout = ({ children }) => {
 	const { layoutState } = useLayout()
 	return (
-		<AppWrapper className={ classnames({ 'side-bar-closed': !layoutState.sidebarOpen }) }>
+		<AppWrapper className={ cx({ 'side-bar-closed': !layoutState.sidebarOpen }) }>
 			<Sidebar />
 			<Topbar />
 			<main id="content-wrapper" scroll-region="true">
@@ -50,8 +50,4 @@ const AppWrapper = styled.div`
 	#footer {
 		grid-area: footer;
 	}
-`
-
-const ContentWrapper = styled.div`
-
 `

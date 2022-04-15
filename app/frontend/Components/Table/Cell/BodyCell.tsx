@@ -1,12 +1,12 @@
 import React from 'react'
 import { TDProps } from 'react-html-props'
-import classnames from 'classnames'
+import cx from 'classnames'
 import { type ICellProps } from './index'
 
 const BodyCell = ({ children, nowrap, checkbox, ...props }: ICellProps) => {
 	return (
 		<Td
-			className={ classnames({ 'table-column-fit': checkbox }) }
+			className={ cx({ 'table-column-fit': checkbox }) }
 			nowrap={ nowrap ? 'nowrap' : '' }
 			{ ...props }
 		>

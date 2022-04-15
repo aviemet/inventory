@@ -1,21 +1,20 @@
 import React from 'react'
-import { InputProps } from 'react-html-props'
-import { useForm } from './Form'
+import { useForm, useInputProps } from './Form'
+import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
 
-interface IInputProps extends InputProps {
-	label?: string
+interface IFormCheckboxProps extends ICheckboxProps {
 	name: string
 }
 
-const Checkbox = ({ label, name, onChange, type, ...props }: IInputProps) => {
-	const { model, data, setData } = useForm()
-
-	const id = `${model}[${name}]`
+const Checkbox = ({ name, onChange, id, ...props }: IFormCheckboxProps) => {
+	const { data, setData, errors } = useForm()
+	const { inputId, inputName } = useInputProps(name)
 
 	return (
 		<>
-			<input
-				id={ id }
+			<CheckboxInput
+				id={ id || inputId }
+				name={ inputName }
 				type="checkbox"
 				value={ data[name] }
 				onChange={ e => {
@@ -24,7 +23,7 @@ const Checkbox = ({ label, name, onChange, type, ...props }: IInputProps) => {
 				} }
 				{ ...props }
 			/>
-			{ label && <label htmlFor={ id }>{ label }</label> }
+			{ errors && <div className="feedback"></div> }
 		</>
 	)
 }

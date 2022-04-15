@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     render inertia: "Items/New", props: {
-      item: Item.new,
+      item: ItemBlueprint.render_as_json(Item.new, view: :new),
       models: @active_company.models.find_by_category(:Item).as_json,
       vendors: @active_company.vendors.as_json,
       locations: @active_company.locations.as_json,
@@ -64,15 +64,12 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
+    ap({ params: params })
     item.company = Company.find(company_params[:id])
-    respond_to do |format|
-      if item.save
-        format.html { redirect_to item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: item }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: item.errors, status: :unprocessable_entity }
-      end
+    if item.save
+      redirect_to item
+    else
+      redirect_to new_item_path, inertia: { errors: item.errors }
     end
   end
 

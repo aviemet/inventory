@@ -2,7 +2,7 @@ import React from 'react'
 import { Input } from '../Inputs'
 import { InputProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
-import classnames from 'classnames'
+import cx from 'classnames'
 
 interface IInputProps extends InputProps {
 	label?: string

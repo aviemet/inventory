@@ -1,5 +1,13 @@
 import React from 'react'
-import { Form, Input, Textarea, SearchableDropdown, Checkbox, DateTime, Submit } from '@/Components/Form'
+import {
+	Form,
+	Input,
+	Textarea,
+	SearchableDropdown,
+	Checkbox,
+	DateTime,
+	Submit
+} from '@/Components/Form'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import { useAuth } from '@/Providers'
@@ -14,19 +22,28 @@ export interface IItemFormProps {
 const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 	const { user } = useAuth()
 
-	const handleSubmit = ({ transform, wasSuccesful }) => {
-		transform(data => {
-			console.log({ data })
-			return {
-				item: {
-				},
-				company: user.active_company_id
+	const handleSubmit = ({ data, transform, wasSuccesful }) => {
+		transform(data => ({
+			item: { ...data },
+			company: {
+				id: user.active_company_id
 			}
-		})
+		}))
+	}
+
+	const handleChange = ({ data }) => {
+		console.log({ data })
 	}
 
 	return (
-		<Form model="item" data={ item } to={ Routes.newItem() } onSubmit={ handleSubmit } className="max-w-5xl">
+		<Form
+			model="item"
+			data={ item }
+			to={ Routes.items() }
+			onSubmit={ handleSubmit }
+			onChange={ handleChange }
+			className="max-w-5xl"
+		>
 
 			<Input name="name" label="Name" required />
 
@@ -53,7 +70,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 
 			<Input name="cost" label="Cost" />
 
-			<DateTime label="Purchased At" />
+			{ /* <DateTime label="Purchased At" /> */ }
 
 			<SearchableDropdown
 				label="Default Location"
@@ -63,7 +80,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 				getValue={ option => option.id }
 			/>
 
-			<Input name="ip" label="IP Address" />
+			{ /* <Input name="ip" label="IP Address" /> */ }
 
 			<Checkbox name="requestable" label="Requestable" />
 
@@ -76,8 +93,3 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 }
 
 export default ItemForm
-
-/**
-  	<form className="simple_form new_item" id="new_item" noValidate action="/hardware" acceptCharset="UTF-8" method="post">
-		</form>
- */

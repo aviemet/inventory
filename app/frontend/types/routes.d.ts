@@ -3196,6 +3196,16 @@ export const statusTypes: ((
 
 /**
  * Generates rails route to
+ * /test(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const test: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /rails/active_storage/disk/:encoded_token(.:format)
  * @param {any} encodedToken
  * @param {object | undefined} options

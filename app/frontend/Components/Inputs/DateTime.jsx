@@ -1,7 +1,7 @@
 import React from 'react'
 import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle'
 import { useForm, useInputProps } from './Form'
-import classnames from 'classnames'
+import cx from 'classnames'
 
 import 'react-datetime-picker/dist/DateTimePicker.css'
 import 'react-calendar/dist/Calendar.css'
@@ -12,8 +12,8 @@ const DateTime = ({ label, name, required, onChange, type = 'text', id, ...props
 	const { inputId, inputName } = useInputProps(name)
 
 	return (
-		<div className={ classnames('field', type, { required }) }>
-			{ label && <label className={ classnames({ required }) } htmlFor={ id || inputId }>
+		<div className={ cx('field', type, { required }) }>
+			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
 				{ label }
 			</label> }
 			<DateTimePicker />

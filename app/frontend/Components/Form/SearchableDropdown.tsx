@@ -2,7 +2,7 @@ import React from 'react'
 import { InputProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
 import { SearchableDropdown as SearchableDropdownInput } from '../Inputs'
-import classnames from 'classnames'
+import cx from 'classnames'
 
 interface IInputProps extends InputProps {
 	options: Array<Record<string, any>>
@@ -23,8 +23,8 @@ const SearchableDropdown = ({ options, label, name, required, getLabel, getValue
 	}
 
 	return (
-		<div className={ classnames('field', 'select', { required }) }>
-			{ label && <label className={ classnames({ required }) } htmlFor={ id || inputId }>
+		<div className={ cx('field', 'select', { required }) }>
+			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
 				{ label }
 			</label> }
 			<SearchableDropdownInput

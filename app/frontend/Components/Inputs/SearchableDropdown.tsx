@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useClickAwayListener } from '@/Components/Hooks'
 import { MdExpandMore } from 'react-icons/md'
-import classnames from 'classnames'
+import cx from 'classnames'
 import { InputProps } from 'react-html-props'
 
 interface ISearchableDropdownProps extends InputProps {
@@ -73,7 +73,7 @@ const SearchableDropdown = ({ options, defaultValue, getLabel, getValue, onChang
 
 	return (
 		<div
-			className={ classnames('dropdown-search', { open }) }
+			className={ cx('dropdown-search', { open }) }
 			onClick={ handleClick }
 			ref={ outerElRef }
 		>
@@ -94,7 +94,7 @@ const SearchableDropdown = ({ options, defaultValue, getLabel, getValue, onChang
 				{ filterOptions(options).map(option => (
 					<div
 						key={ getValue(option) }
-						className={ classnames('option', { active: value === String(getValue(option)) } ) }
+						className={ cx('option', { active: value === String(getValue(option)) } ) }
 						onClick={ () => handleChoice(option) }
 					>
 						{ getLabel(option) }
