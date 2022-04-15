@@ -41,7 +41,6 @@ const AuthLayoutLayout = (page: InertiaPageProps) => {
 	)
 }
 
-
 export {
 	AppLayoutLayout as AppLayout,
 	AuthLayoutLayout as AuthLayout

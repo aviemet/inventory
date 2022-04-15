@@ -8,7 +8,12 @@ export {
 	useLayout,
 }
 
-const Providers = ({ children, auth }) => {
+interface IProviderProps {
+	children?: React.ReactNode
+	auth: any
+}
+
+const Providers = React.memo(({ children, auth }: IProviderProps) => {
 	return (
 		<AuthProvider auth={ auth }>
 			<LayoutProvider>
@@ -18,6 +23,6 @@ const Providers = ({ children, auth }) => {
 			</LayoutProvider>
 		</AuthProvider>
 	)
-}
+})
 
 export default Providers

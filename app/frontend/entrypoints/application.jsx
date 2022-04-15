@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	InertiaProgress.init()
 
+	console.log('loaded')
 	createInertiaApp({
 		title: title => `Inventory - ${title}`,
 		resolve: async name => {

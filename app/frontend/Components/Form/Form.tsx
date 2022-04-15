@@ -10,6 +10,7 @@ interface IFormProps<T> extends FormProps {
 	to: string
 	onSubmit?: (object) => boolean|void
 	onChange?: (object) => void
+	onSuccess?: (object) => void
 }
 
 interface IInertiaFormProps extends InertiaFormProps {
@@ -33,7 +34,17 @@ function fillEmptyValues<T extends Record<keyof T, unknown>>(data: T): T {
 	return sanitizedDefaultData
 }
 
-function Form<T extends Record<keyof T, unknown>>({ children, model, data, method = 'post', to, onSubmit, onChange, ...props }: IFormProps<T>) {
+function Form<T extends Record<keyof T, unknown>>({
+	children,
+	model,
+	data,
+	method = 'post',
+	to,
+	onSubmit,
+	onChange,
+	onSuccess,
+	...props
+}: IFormProps<T>) {
 	const form = useInertiaForm<Record<string, unknown>>(fillEmptyValues(data))
 
 	const handleSubmit = e => {
@@ -52,8 +63,14 @@ function Form<T extends Record<keyof T, unknown>>({ children, model, data, metho
 	}, [form.data])
 
 	useEffect(() => {
-		console.log({ errors: form.errors })
+		// console.log({ errors: form.errors })
 	}, [form.errors])
+
+	useEffect(() => {
+		if(onSuccess && form.wasSuccessful) {
+			onSuccess(form)
+		}
+	}, [form.wasSuccessful])
 
 	return (
 		<FormProvider value={ form }>

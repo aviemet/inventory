@@ -22,7 +22,7 @@ export interface IItemFormProps {
 const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 	const { user } = useAuth()
 
-	const handleSubmit = ({ data, transform, wasSuccesful }) => {
+	const handleSubmit = ({ transform }) => {
 		transform(data => ({
 			item: { ...data },
 			company: {
@@ -32,7 +32,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 	}
 
 	const handleChange = ({ data }) => {
-		console.log({ data })
+		// console.log({ data })
 	}
 
 	return (
@@ -68,7 +68,9 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 				getValue={ option => option.id }
 			/>
 
-			<Input name="cost" label="Cost" />
+			<Input name="cost" label="Cost" onChange={ ({ value, setData }) => {
+				console.log({ value })
+			} } />
 
 			{ /* <DateTime label="Purchased At" /> */ }
 
@@ -92,4 +94,4 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 	)
 }
 
-export default ItemForm
+export default React.memo(ItemForm)
