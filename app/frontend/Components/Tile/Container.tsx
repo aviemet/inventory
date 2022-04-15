@@ -1,8 +1,9 @@
 import React from 'react'
+import 'twin.macro'
 
 const Tile = ({ children }) => {
 	return (
-		<div className="tile border-brand-light w-full max-w-sm bg-white border-t-2 rounded-lg shadow-md">
+		<div tw="border-brand-light w-full max-w-sm bg-white border-t-2 rounded-lg shadow-md">
 			{ children }
 		</div>
 	)

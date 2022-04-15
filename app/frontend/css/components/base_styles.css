@@ -335,7 +335,7 @@
       }
     }
 
-    i.material-icons {
+    i.react-icons {
       @apply align-bottom;
       font-size: 21px;
     }

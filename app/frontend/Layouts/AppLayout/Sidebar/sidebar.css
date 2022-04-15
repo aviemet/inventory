@@ -1,0 +1,44 @@
+#sidebar.side-bar-closed {
+  @apply -left-full;
+
+  .links {
+    span {
+      @apply hidden;
+    }
+
+    & > ul > li {
+      @apply relative;
+
+      &:hover {
+        span {
+          @apply inline-block absolute left-0;
+          @apply bg-white shadow;
+          @apply border-b border-brand-light;
+          width: calc(
+            var(--sidebar-width-open) - var(--sidebar-link-border-left)
+          );
+          padding-left: var(--sidebar-width-closed);
+        }
+
+        & > ul {
+          @apply inline-block absolute;
+          @apply bg-gray-100 shadow;
+          @apply border-b-2 border-t-0;
+          top: var(--sidebar-link-height);
+
+          left: calc(
+            var(--sidebar-width-closed) - var(--sidebar-link-border-left)
+          );
+          width: calc(
+            var(--sidebar-width-open) - var(--sidebar-width-closed)
+          );
+
+          &.up {
+            @apply border-b-0 border-t-2;
+            bottom: 100%;
+          }
+        }
+      }
+    }
+  }
+}

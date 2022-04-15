@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Input, Checkbox, Submit } from '@/Components/Form'
-import { Link } from '@/Components'
+import HoverLink from '../HoverLink'
 import { Routes } from '@/lib'
 import { Tile } from '@/Components'
 import tw, { styled } from 'twin.macro'
@@ -67,9 +67,9 @@ const Login = () => {
 
 export default Login
 
-const HoverLink = styled(Link)`
-	${tw`flex-1 text-center transition-all duration-500 border-t`}
-	&:hover {
-		${tw`bg-violet-100`}
-	}
-`
+// const HoverLink = styled(Link)`
+// 	${tw`flex-1 text-center transition-all duration-500 border-t`}
+// 	&:hover {
+// 		${tw`bg-violet-100`}
+// 	}
+// `

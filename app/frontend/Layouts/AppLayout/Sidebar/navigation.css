@@ -1,0 +1,115 @@
+.links {
+  li {
+    min-height: var(--sidebar-link-height);
+
+    a {
+      @apply w-full inline-block sm:inline sm:w-auto;
+    }
+  }
+
+  & > ul > li {
+    line-height: calc(
+      var(--sidebar-link-height) - var(--sidebar-link-border-bottom)
+    );
+    padding-left: var(--sidebar-icon-left-padding);
+    position: relative;
+    @apply flex justify-start items-center;
+
+    &:hover {
+      @screen sm {
+        span {
+          padding-left: calc(
+            var(--sidebar-width-closed) - var(--sidebar-link-border-left)
+          );
+        }
+      }
+
+      padding-left: calc(
+        var(--sidebar-icon-left-padding) - var(--sidebar-link-border-left)
+      );
+      border-width: 0 0 0 var(--sidebar-link-border-left);
+      @apply bg-gray-100 dark:bg-gray-600;
+
+      & > ul {
+        @apply block bg-gray-100 shadow-sm;
+
+        @apply sm:absolute;
+
+        /* On Desktop set submenu to absolute position */
+        @screen sm {
+          /* @apply absolute; */
+          top: -2px;
+          left: calc(
+            var(--sidebar-width-open) - var(--sidebar-link-border-left)
+          );
+
+          &.up {
+            top: unset !important;
+            bottom: 0;
+          }
+        }
+
+        & > li:hover {
+          @apply bg-brand-light;
+        }
+      }
+    }
+
+    & > ul {
+      @apply block border-brand-light border-t-2;
+      padding-left: 3.7rem;
+
+      @apply sm:hidden sm:absolute sm:pl-0;
+        /* On Desktop hide submenus until h!over state */
+      @screen sm {
+        /* @apply hidden absolute pl-0; */
+        top: var(--sidebar-link-height);
+        left: calc(
+          var(--sidebar-width-closed) - var(--sidebar-link-border-left)
+        );
+        width: calc(
+          var(--sidebar-width-open) - var(--sidebar-link-padding-left) +
+          var(--sidebar-link-border-left)
+        );
+      }
+
+      & > li {
+        @apply p-0;
+        line-height: calc(
+          var(--sidebar-link-height) - var(--sidebar-link-border-bottom)
+        );
+        border-bottom: var(--sidebar-link-border-bottom) solid
+          map-get($colors, "secondary");
+
+        a {
+          @apply block;
+          padding-left: var(--sidebar-link-padding-left);
+        }
+
+        &:hover {
+          a {
+            padding-left: calc(var(--sidebar-link-padding-left) - 2px);
+          }
+        }
+      }
+    }
+  }
+
+  .react-icon {
+    @apply relative float-left transition-colors;
+  }
+
+  span {
+    @apply sm:absolute sm:w-full;
+
+    /* On Desktop set link to absolute position */
+    @screen sm {
+      /* @apply absolute w-full; */
+      top: 0;
+      left: 0;
+      height: var(--sidebar-link-height);
+    }
+
+    padding-left: var(--sidebar-width-closed);
+  }
+}

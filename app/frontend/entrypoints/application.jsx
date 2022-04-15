@@ -6,9 +6,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 import { AuthLayout, AppLayout } from '../Layouts'
 import dynamicImport from '../dynamicImport'
 
-import GlobalStyles from '../css/GlobalStyles'
-
-// import '@/css/tailwind.css'
+import '@/css/tailwind.css'
 
 document.addEventListener('DOMContentLoaded', () => {
 	const csrfToken = document.querySelector('meta[name=csrf-token]').content
@@ -34,10 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		},
 		setup({ el, App, props }) {
 			const root = createRoot(el)
-			root.render(<>
-				<GlobalStyles />
-				<App { ...props } />
-			</>)
+			root.render(<App { ...props } />)
 		},
 	})
 })

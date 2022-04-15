@@ -1,7 +1,9 @@
 import React from 'react'
 import { Form, Input, Submit } from '@/Components/Form'
-import { Link } from '@/Components'
+import HoverLink from '../../HoverLink'
 import { Routes } from '@/lib'
+import { Tile } from '@/Components'
+import tw, { styled } from 'twin.macro'
 
 type TPasswordsNewFormData = {
 	email: string
@@ -17,26 +19,28 @@ const PasswordsNew = () => {
 	}
 
 	return (
-		<Form model="user" data={ defaultData } to={ Routes.newUserPassword() } onSubmit={ handleSubmit }>
-			<div className="tile-content">
-				<div className="mb-2">
-					<h1 className="text-center">Reset Password</h1>
-				</div>
+		<Tile.Container>
+			<Form model="user" data={ defaultData } to={ Routes.newUserPassword() } onSubmit={ handleSubmit }>
+				<Tile.Content>
+					<div tw="mb-2">
+						<h1 tw="text-center">Reset Password</h1>
+					</div>
 
-				<div className="mb-2">
-					<Input name="email" placeholder="Email" autoFocus autoComplete="Email" />
-				</div>
+					<div tw="mb-2">
+						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" />
+					</div>
 
-				<div className="mb-4">
-					<Submit className="large w-full">Send Reset Instructions</Submit>
-				</div>
+					<div tw="mb-4">
+						<Submit className="large" tw="w-full">Send Reset Instructions</Submit>
+					</div>
 
-			</div>
+				</Tile.Content>
 
-			<div className="tile-footer flex">
-				<Link href={ Routes.newUserSession() } className="link-hover flex-1">Log In</Link>
-			</div>
-		</Form>
+				<Tile.Footer>
+					<HoverLink href={ Routes.newUserSession() } tw="rounded-b-lg">Log In</HoverLink>
+				</Tile.Footer>
+			</Form>
+		</Tile.Container>
 	)
 }
 
