@@ -1,3 +1,35 @@
+#sidebar {
+	@apply dark:bg-gray-600 left-0 z-50 w-screen h-screen bg-white shadow;
+	@apply sm:flex sm:flex-col sm:justify-between sm:w-auto sm:h-auto;
+	transition-property: left;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+
+	a {
+		@apply w-full inline-block;
+		/* @apply sm:inline sm:w-auto; */
+	}
+
+	a, .react-icon {
+		@apply dark:text-white text-gray-700;
+	}
+
+	.react-icon {
+		@apply ml-1;
+		margin-right: var(--sidebar-icon-left-padding);
+	}
+
+	li:hover {
+		@apply border-brand;
+    border-width: 0 0 0 var(--sidebar-link-border-left);
+
+		.react-icon {
+			@apply text-gray-600 dark:text-white;
+		}
+	} 
+}
+
+
 #sidebar.side-bar-closed {
   @apply -left-full;
 

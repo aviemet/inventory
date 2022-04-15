@@ -2,9 +2,9 @@
   li {
     min-height: var(--sidebar-link-height);
 
-    a {
-      @apply w-full inline-block sm:inline sm:w-auto;
-    }
+    /* a {
+      @apply h-full w-full inline-block sm:inline sm:w-auto;
+    } */
   }
 
   & > ul > li {

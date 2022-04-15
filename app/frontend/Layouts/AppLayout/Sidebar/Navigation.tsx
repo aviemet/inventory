@@ -82,16 +82,16 @@ const Navigation = () => {
 export default Navigation
 
 const MenuToggleButton = styled.div`
-	${tw`hover:border-brand flex items-center justify-end text-right cursor-pointer`}
+	${tw`flex items-center justify-end text-right cursor-pointer`}
+	${tw`hover:(border-brand)`}
 	padding-right: 5px;
 	height: var(--topbar-height);
 
 	&:hover {
-		${tw`border-brand`}
 		border-width: 0 0 0 var(--sidebar-link-border-left);
-
+/* 
 		.react-icon {
 			${tw`dark:text-white text-gray-600`}
-		}
+		} */
 	}
 `
