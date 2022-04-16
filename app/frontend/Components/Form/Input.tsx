@@ -2,6 +2,7 @@ import React from 'react'
 import { Input } from '../Inputs'
 import { InputProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
+import Feedback from './Feedback'
 import cx from 'classnames'
 
 interface IInputProps extends  Omit<InputProps, 'onChange'> {
@@ -10,10 +11,11 @@ interface IInputProps extends  Omit<InputProps, 'onChange'> {
 	onChange?: ({ value: unknown, setData: Function }) => void
 }
 
-const FormInput = ({ label, name, required, onChange, type = 'text', id, ...props }: IInputProps) => {
+const FormInput = ({ label, name, onChange, type = 'text', id, ...props }: IInputProps) => {
 	const { data, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
+	console.log(errors)
 	return (
 		<>
 			<Input
@@ -26,12 +28,9 @@ const FormInput = ({ label, name, required, onChange, type = 'text', id, ...prop
 					if(onChange) onChange({ value: data[name], setData })
 				} }
 				type={ type }
-				{ ...required }
 				{ ...props }
 			/>
-			{ errors && <div className="feedback">
-				{ errors[name] }
-			</div> }
+			<Feedback errors={ errors[name] } />
 		</>
 	)
 }

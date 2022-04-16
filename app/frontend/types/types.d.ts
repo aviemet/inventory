@@ -1,3 +1,4 @@
+import { type InertiaFormProps as DefaultInertiaFormProps } from '@inertiajs/inertia-react';
 declare namespace Schema {
   interface Pagination {
 		count: number
@@ -8,5 +9,11 @@ declare namespace Schema {
 		prev_page: number
 		is_first_page: boolean
 		is_last_page: boolean
+	}
+}
+
+declare global {
+	interface InertiaFormProps extends DefaultInertiaFormProps {
+		errors: Record<keyof TForm, string|string[]>
 	}
 }

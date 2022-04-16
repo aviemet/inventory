@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useForm as useInertiaForm, type InertiaFormProps } from '@inertiajs/inertia-react'
+import { useForm as useInertiaForm } from '@inertiajs/inertia-react'
 
 import { createContext } from '@/Components/Hooks'
 import { FormProps } from 'react-html-props'
