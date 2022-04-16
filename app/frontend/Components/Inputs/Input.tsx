@@ -9,18 +9,19 @@ interface IInputProps extends InputProps {
 
 const Input = ({ label, required = false, value, onChange, type = 'text', id, ...props }: IInputProps) => {
 	return (
-		<div className={ cx('field', type, { 'required': required }) }>
+		<>
 			{ label && <label className={ cx({ 'required': required }) } htmlFor={ id }>
 				{ label }
 			</label> }
 			<input
+				id={ id }
 				value={ value }
 				onChange={ onChange }
 				type={ type }
-				{ ...required }
+				required={ required }
 				{ ...props }
 			/>
-		</div>
+		</>
 	)
 }
 

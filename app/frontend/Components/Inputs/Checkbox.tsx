@@ -7,7 +7,7 @@ export interface ICheckboxProps extends InputProps {
 	name?: string
 }
 
-const Checkbox = ({ label, onChange, labelPosition = 'end', type, value, id, ...props }: ICheckboxProps) => {
+const Checkbox = ({ label, onChange, labelPosition = 'start', type, value, id, ...props }: ICheckboxProps) => {
 	return (
 		<>
 			{ label && labelPosition === 'start' && <label htmlFor={ id }>{ label }</label> }

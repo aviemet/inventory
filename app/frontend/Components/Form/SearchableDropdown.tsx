@@ -1,6 +1,8 @@
 import React from 'react'
 import { InputProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
+import Field from './Field'
+import Feedback from './Feedback'
 import { SearchableDropdown as SearchableDropdownInput } from '../Inputs'
 import cx from 'classnames'
 
@@ -23,7 +25,7 @@ const SearchableDropdown = ({ options, label, name, required, getLabel, getValue
 	}
 
 	return (
-		<div className={ cx('field', 'select', { required }) }>
+		<Field type="select" required={ required } errors={ !!errors?.[name] }>
 			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
 				{ label }
 			</label> }
@@ -36,9 +38,8 @@ const SearchableDropdown = ({ options, label, name, required, getLabel, getValue
 				onChange={ handleChange }
 				{ ...props }
 			/>
-			{ errors && <div className="feedback">
-			</div> }
-		</div>
+			<Feedback errors={ errors[name] } />
+		</Field>
 	)
 }
 

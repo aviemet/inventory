@@ -1,6 +1,9 @@
 import React from 'react'
 import { TextAreaProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
+import Field from './Field'
+import Feedback from './Feedback'
+import TextareaInput from '../Inputs/Textarea'
 import cx from 'classnames'
 
 interface ITextareaProps extends TextAreaProps {
@@ -13,11 +16,11 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 	const { inputId, inputName } = useInputProps(name)
 
 	return (
-		<div className={ cx('field', 'textarea', { required }) }>
+		<Field type="textarea" required={ required } errors={ !!errors?.[name] }>
 			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
 				{ label }
 			</label> }
-			<textarea
+			<TextareaInput
 				id={ id || inputId }
 				name={ inputName }
 				onChange={ e => {
@@ -28,11 +31,9 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 				{ ...required }
 				{ ...props }
 			>
-			</textarea>
-			{ errors && <div className="feedback">
-
-			</div> }
-		</div>
+			</TextareaInput>
+			<Feedback errors={ errors[name] } />
+		</Field>
 	)
 }
 

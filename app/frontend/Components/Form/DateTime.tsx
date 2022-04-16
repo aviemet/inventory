@@ -1,6 +1,7 @@
 import React from 'react'
 import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle'
 import { useForm, useInputProps } from './Form'
+import Field from './Field'
 import cx from 'classnames'
 
 import 'react-datetime-picker/dist/DateTimePicker.css'
@@ -12,16 +13,20 @@ const DateTime = ({ label, name, required, onChange, type = 'text', id, ...props
 	const { inputId, inputName } = useInputProps(name)
 
 	return (
-		<div className={ cx('field', type, { required }) }>
+		<Field type={ type } required={ required } errors={ !!errors?.[name] }>
 			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
 				{ label }
 			</label> }
-			<DateTimePicker />
+			<DateTimePicker
+				name={ inputName }
+				value={ data[name] }
+				onChange={ e => setData(name, e.target.value) }
+			/>
 
 			{ errors && <div className="feedback">
 
 			</div> }
-		</div>
+		</Field>
 	)
 }
 

@@ -45,7 +45,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 			className="max-w-5xl"
 		>
 
-			<Input name="name" label="Name" required />
+			<Input name="name" label="Name"  />
 
 			<Input name="asset_tag" label="Asset Tag" />
 
