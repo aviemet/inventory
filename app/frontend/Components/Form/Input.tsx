@@ -6,7 +6,7 @@ import Field from './Field'
 import Feedback from './Feedback'
 import cx from 'classnames'
 
-interface IInputProps extends  Omit<InputProps, 'onChange'> {
+interface IInputProps extends Omit<InputProps, 'onChange'> {
 	label?: string
 	name: string
 	onChange?: ({ value: unknown, setData: Function }) => void

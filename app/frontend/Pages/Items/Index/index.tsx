@@ -18,11 +18,11 @@ const Index = ({ items, pagination }: IItemsIndexProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="h-full flex flex-col">
+			<section className="flex flex-col h-full">
 				<Table.TableProvider selectable rows={ items } pagination={ pagination }>
-					<div className="flex justify-between items-center">
-						<h1 className="md:inline-block align-text-top md:flex-1 md:align-middle">{ title }</h1>
-						<div className="flex md:flex-1">
+					<div className="flex items-center justify-between">
+						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
+						<div className="md:flex-1 flex">
 							<Table.SearchInput model="items" />
 
 							<div className="inline-block">
@@ -36,7 +36,7 @@ const Index = ({ items, pagination }: IItemsIndexProps) => {
 						</div>
 					</div>
 
-					<div className="h-full scroll-content">
+					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>
 							<Table.Head>
 								<Table.Row>

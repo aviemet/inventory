@@ -89,6 +89,7 @@ div.field {
     &:not(.textarea) {
       @apply grid;
       grid-template-columns: var(--label-width) 1fr;
+      grid-template-rows: 1fr;
 
       @apply border-t-0 border-l-2;
     }

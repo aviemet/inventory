@@ -11,6 +11,7 @@ import {
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import { useAuth } from '@/Providers'
+import tw from 'twin.macro'
 
 export interface IItemFormProps {
 	item: Schema.Item
@@ -45,7 +46,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 			className="max-w-5xl"
 		>
 
-			<Input name="name" label="Name"  />
+			<Input name="name" label="Name" required />
 
 			<Input name="asset_tag" label="Asset Tag" />
 
@@ -55,6 +56,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 			<SearchableDropdown
 				label="Model"
 				name="model"
+				required
 				options={ models }
 				getLabel={ option => option.name }
 				getValue={ option => option.id }
@@ -68,11 +70,9 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 				getValue={ option => option.id }
 			/>
 
-			<Input name="cost" label="Cost" onChange={ ({ value, setData }) => {
-				console.log({ value })
-			} } />
+			<Input name="cost" label="Cost" />
 
-			{ /* <DateTime label="Purchased At" /> */ }
+			<DateTime label="Purchased At" name="purchased_at" />
 
 			<SearchableDropdown
 				label="Default Location"

@@ -15,7 +15,7 @@ class ItemBlueprint < Blueprinter::Base
          :updated_at
 
   field :cost do |item|
-    item.cost&.amount.to_f
+    item.cost&.amount.to_f if item.cost
   end
 
   view :shallow do

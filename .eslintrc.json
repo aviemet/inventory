@@ -67,6 +67,9 @@
 		"react/no-typos": [ "error" ],
 		"react/jsx-curly-spacing": [ "error", {"when": "always", "children": true} ],
 		"react/display-name": ["off"],
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "eqeqeq": "error",
+    "no-console": "warn",
+		"eol-last": ["error", "always"]
 	}
 }
