@@ -20,25 +20,24 @@ const SearchableDropdown = ({ options, defaultValue, getLabel, getValue, onChang
 	const [label, setLabel] = useState(defaultLabel)
 	const [open, setOpen] = useState(false)
 	const [shouldFilter, setShouldFilter] = useState(false)
-	// const [tempLabel, setTempLabel] = useState(defaultLabel)
 
 	const outerElRef = useRef<HTMLDivElement>(null)
 	const labelInputRef = useRef<HTMLInputElement>(null)
 
 	const { startClickListener, cancelClickListener } = useClickAwayListener(outerElRef, () => {
 		setOpen(false)
+		const prevOption = options.find(option => getValue(option) === value)
+		setLabel(prevOption ? getLabel(prevOption) : '')
 	})
 
 	const handleOpen = () => startClickListener(() => {
 		setOpen(true)
-		// setTempLabel(label)
 		labelInputRef.current!.select()
 	})
 	const handleClose = () => cancelClickListener(() => {
 		setOpen(false)
 		setShouldFilter(false)
 		labelInputRef.current!.blur()
-		// if(label !== )
 	})
 
 	const handleClick = () => {
@@ -46,11 +45,12 @@ const SearchableDropdown = ({ options, defaultValue, getLabel, getValue, onChang
 	}
 
 	const handleChoice = (option: Record<string, any>) => {
+		setValue(getValue(option))
+		setLabel(getLabel(option))
+
 		handleClose()
 
 		if(onChange) onChange(option)
-		setValue(getValue(option))
-		setLabel(getLabel(option))
 	}
 
 	const handleLabelChange = e => {
