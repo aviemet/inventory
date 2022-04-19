@@ -1,18 +1,25 @@
 import React from 'react'
 import { useForm, useInputProps } from './Form'
 import Field from './Field'
+import Feedback from './Feedback'
 import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
+import cx from 'classnames'
 
 interface IFormCheckboxProps extends ICheckboxProps {
 	name: string
 }
 
-const Checkbox = ({ name, onChange, id, required, ...props }: IFormCheckboxProps) => {
+const Checkbox = ({ name, onChange, id, required, className, ...props }: IFormCheckboxProps) => {
 	const { data, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
 	return (
-		<Field type="checkbox" required={ required } errors={ !!errors?.[name] }>
+		<Field
+			className="pl-2"
+			type="checkbox"
+			required={ required }
+			errors={ !!errors?.[name] }
+		>
 			<CheckboxInput
 				id={ id || inputId }
 				name={ inputName }
@@ -22,11 +29,13 @@ const Checkbox = ({ name, onChange, id, required, ...props }: IFormCheckboxProps
 					if(onChange) onChange(e)
 					setData(name, e.target.checked)
 				} }
+				className={ cx('mt-auto', 'mb-auto', className) }
 				{ ...props }
 			/>
-			{ errors && <div className="feedback"></div> }
+			<Feedback errors={ errors[name] } />
 		</Field>
 	)
 }
 
 export default Checkbox
+

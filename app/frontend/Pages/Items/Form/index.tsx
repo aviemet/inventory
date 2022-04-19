@@ -6,7 +6,8 @@ import {
 	SearchableDropdown,
 	Checkbox,
 	DateTime,
-	Submit
+	Submit,
+	Group,
 } from '@/Components/Form'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
@@ -48,43 +49,47 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 
 			<Input name="name" label="Name" required />
 
-			<Input name="asset_tag" label="Asset Tag" />
+			<Group legend="Item Details">
+				<SearchableDropdown
+					label="Model"
+					name="model"
+					required
+					options={ models }
+					getLabel={ option => option.name }
+					getValue={ option => option.id }
+				/>
 
-			<Input name="serial" label="Serial" />
+				<Input name="serial" label="Serial" />
 
+				<Input name="asset_tag" label="Asset Tag" />
+			</Group>
 
-			<SearchableDropdown
-				label="Model"
-				name="model"
-				required
-				options={ models }
-				getLabel={ option => option.name }
-				getValue={ option => option.id }
-			/>
+			<Group legend="Purchase Details">
+				<SearchableDropdown
+					label="Vendor"
+					name="vendor"
+					options={ vendors }
+					getLabel={ option => option.name }
+					getValue={ option => option.id }
+				/>
 
-			<SearchableDropdown
-				label="Vendor"
-				name="vendor"
-				options={ vendors }
-				getLabel={ option => option.name }
-				getValue={ option => option.id }
-			/>
+				<Input name="cost" label="Cost" />
 
-			<Input name="cost" label="Cost" />
+				<DateTime label="Purchased At" name="purchased_at" />
+			</Group>
 
-			<DateTime label="Purchased At" name="purchased_at" />
+			<Group legend="Usage Details">
+				<SearchableDropdown
+					label="Default Location"
+					name="default_location"
+					options={ locations }
+					getLabel={ option => option.name }
+					getValue={ option => option.id }
+				/>
 
-			<SearchableDropdown
-				label="Default Location"
-				name="default_location"
-				options={ locations }
-				getLabel={ option => option.name }
-				getValue={ option => option.id }
-			/>
+				<Checkbox name="requestable" label="Requestable" />
 
-			{ /* <Input name="ip" label="IP Address" /> */ }
-
-			<Checkbox name="requestable" label="Requestable" />
+			</Group>
 
 			<Textarea name="notes" label="Notes" />
 
