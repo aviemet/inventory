@@ -47,7 +47,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 			className="max-w-5xl"
 		>
 
-			<Input name="name" label="Name" required />
+			<Input name="name" label="Name" required autoFocus />
 
 			<Group legend="Item Details">
 				<SearchableDropdown
@@ -71,6 +71,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 					options={ vendors }
 					getLabel={ option => option.name }
 					getValue={ option => option.id }
+					filterMatchKeys={ ['name'] }
 				/>
 
 				<Input name="cost" label="Cost" />

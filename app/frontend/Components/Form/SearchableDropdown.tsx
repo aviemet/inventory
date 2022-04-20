@@ -3,16 +3,12 @@ import { InputProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
-import { SearchableDropdown as SearchableDropdownInput } from '../Inputs'
+import SearchableDropdownInput, { type ISearchableDropdownProps } from '../Inputs/SearchableDropdown'
 import cx from 'classnames'
 
-interface IInputProps extends InputProps {
-	options: Array<Record<string, any>>
+interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'> {
 	label?: string
 	name: string
-	getLabel: (option: Record<string, any>) => any
-	getValue: (option: Record<string, any>) => string
-	onChange?: (option: Record<string, any>) => void
 }
 
 const SearchableDropdown = ({ options, label, name, required, getLabel, getValue, onChange, id, ...props }: IInputProps) => {
