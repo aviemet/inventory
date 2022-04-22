@@ -29,7 +29,7 @@ export const useInputProps = (name) => {
 function fillEmptyValues<T extends Record<keyof T, unknown>>(data: T): T {
 	const sanitizedDefaultData = data
 	Object.keys(data).forEach(key => {
-		sanitizedDefaultData[key] = data[key] === null || data[key] === undefined ? '' : data[key]
+		sanitizedDefaultData[key] = data[key] ?? ''
 	})
 	return sanitizedDefaultData
 }

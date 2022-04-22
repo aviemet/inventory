@@ -34,7 +34,9 @@ class ItemsController < ApplicationController
   # GET /items/:id
   # GET /items/:id.json
   def show
-    render inertia: "Items/Show"
+    render inertia: "Items/Show", props: {
+      item: -> { ItemBlueprint.render_as_json(item, view: :associations) }
+    }
   end
 
   # GET /items/new

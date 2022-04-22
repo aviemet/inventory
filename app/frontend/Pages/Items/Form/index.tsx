@@ -52,7 +52,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 			<Group legend="Item Details">
 				<SearchableDropdown
 					label="Model"
-					name="model"
+					name="model_id"
 					required
 					options={ models }
 					getLabel={ option => option.name }
@@ -67,7 +67,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 			<Group legend="Purchase Details">
 				<SearchableDropdown
 					label="Vendor"
-					name="vendor"
+					name="vendor_id"
 					options={ vendors }
 					getLabel={ option => option.name }
 					getValue={ option => option.id }
@@ -82,7 +82,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 			<Group legend="Usage Details">
 				<SearchableDropdown
 					label="Default Location"
-					name="default_location"
+					name="default_location_id"
 					options={ locations }
 					getLabel={ option => option.name }
 					getValue={ option => option.id }
