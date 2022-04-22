@@ -95,6 +95,7 @@ const SearchableDropdown = ({ options, defaultValue, getLabel, getValue, onChang
 				handleOpen={ handleOpen }
 				handleClose={ handleClose }
 				onChange={ handleLabelChange }
+				{ ...props }
 				ref={ labelInputRef }
 			/>
 			<Options

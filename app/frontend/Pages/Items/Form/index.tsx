@@ -22,6 +22,7 @@ export interface IItemFormProps {
 }
 
 const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
+	console.log({ item })
 	const { user } = useAuth()
 
 	const handleSubmit = ({ transform }) => {
@@ -34,7 +35,7 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 	}
 
 	const handleChange = ({ data }) => {
-		// console.log({ data })
+		console.log({ data })
 	}
 
 	return (

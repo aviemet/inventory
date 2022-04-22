@@ -234,7 +234,7 @@ div.field {
     }
   }
 
-  &.open {
+  /* &.open {
     .selector {
       @apply cursor-default;
 
@@ -250,7 +250,7 @@ div.field {
     .options {
       @apply block z-10;
     }
-  }
+  } */
 }
 
 .dropdown-menu {

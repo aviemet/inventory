@@ -94,5 +94,5 @@ const OptionComponent = styled.div`
 	&:not(.active):hover {
 		${tw`bg-gray-50`}
 	}
-}
+
 `
