@@ -1,7 +1,7 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
-import { Routes } from '@/lib'
+import { formatter, Routes } from '@/lib'
 import tw from 'twin.macro'
 import { AProps } from 'react-html-props'
 
@@ -11,7 +11,7 @@ interface IShowItemProps {
 
 const Show = ({ item }: IShowItemProps) => {
 	const title = item.name ?? 'Item Details'
-
+	console.log({ item })
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -40,16 +40,117 @@ const Show = ({ item }: IShowItemProps) => {
 					<h3>Details</h3>
 
 					<div className="item-details">
+
 						<div className="item-row">
 							<label>Model:</label>
 							<div className="value">
-								<Link href={ Routes.manufacturer(item.manufacturer!) }>
+								{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer!) }>
 									{ item.manufacturer!.name }
-								</Link>
+								</Link> }
 							</div>
 						</div>
+
+						<div className="item-row">
+							<label>Category:</label>
+							<div className="value">
+								{ item.category && <Link href={ Routes.categories(item.category) }>
+									{ item.category!.name }
+								</Link> }
+							</div>
+						</div>
+
+						<div className="item-row">
+							<label>Serial:</label>
+							<div className="value">
+								{ item.serial }
+							</div>
+						</div>
+
+						<div className="item-row">
+							<label>Assigned To:</label>
+							<div className="value">
+								Figure this out
+							</div>
+						</div>
+
+						<div className="item-row">
+							<label>Asset Tag:</label>
+							<div className="value">
+								{ item.asset_tag }
+							</div>
+						</div>
+
+						<div className="item-row">
+							<label>Purchase Cost:</label>
+							<div className="value">
+								{ item.cost && formatter.currency(item.cost, item.cost_currency) }
+							</div>
+						</div>
+
+						<div className="item-row">
+							<label>Purchase Date:</label>
+							<div className="value">
+								{ item.purchased_at && formatter.date.short(item.purchased_at) }
+							</div>
+						</div>
+
+						<div className="item-row">
+							<label>Vendor:</label>
+							<div className="value">
+								{ item.vendor && <Link href={ Routes.vendor(item.vendor) }>
+									{ item.vendor.name }
+								</Link> }
+							</div>
+						</div>
+
 					</div>
 				</section>
+
+				<StickyTarget id="history" />
+				<section>
+					<h3>Assignment History</h3>
+
+					<div tw="inline-grid grid-cols-2">
+						{ item.assignments && item.assignments.reverse().map(assignment => (
+							<React.Fragment key={ assignment.id }>
+								<div>
+								Link to assigntoable object
+								</div>
+								<div>
+									{ assignment.assignable_type }
+								</div>
+							</React.Fragment>
+						)) }
+					</div>
+
+					<h3>Audit History</h3>
+
+					<ul>
+						{ item.audits?.reverse().map(audit => {
+							const message = audit.action === 'create' ? 'Created' : 'Updated'
+
+							return (
+								<li tw="mb-1" key={ audit.id }>
+									{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
+								</li>
+							)
+						}) }
+					</ul>
+
+				</section>
+
+				<StickyTarget id="licenses" />
+				<section>
+					<h3>Licenses</h3>
+
+					<ul>
+						{ item.licenses && item.licenses.map(license => (
+							<li key={ license.id }>{ license.name }</li>
+						)) }
+					</ul>
+				</section>
+
+
 			</section>
 		</>
 	)

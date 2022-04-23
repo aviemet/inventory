@@ -50,7 +50,7 @@ class ItemBlueprint < Blueprinter::Base
     # association :purchase, blueprint: PurchaseBlueprint
     # association :fieldset_associations, blueprint: FieldAssociationBlueprint
     # association :roles, blueprint: RoleBlueprint
-    # association :audits, blueprint: AuditBlueprint
+    association :audits, blueprint: AuditBlueprint
     # association :nics, blueprint: NicBlueprint
     # association :ips, blueprint: IpBlueprint
     # association :ip_leases, blueprint: IpLeaseBlueprint
