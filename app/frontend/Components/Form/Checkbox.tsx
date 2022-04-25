@@ -9,9 +9,11 @@ interface IFormCheckboxProps extends ICheckboxProps {
 	name: string
 }
 
-const Checkbox = ({ name, onChange, id, required, className, ...props }: IFormCheckboxProps) => {
+const Checkbox = ({ name, onChange, id, required, className, label, ...props }: IFormCheckboxProps) => {
 	const { data, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
+
+	console.log({ label })
 
 	return (
 		<Field
@@ -30,6 +32,7 @@ const Checkbox = ({ name, onChange, id, required, className, ...props }: IFormCh
 					setData(name, e.target.checked)
 				} }
 				className={ cx('mt-auto', 'mb-auto', className) }
+				label={ label }
 				{ ...props }
 			/>
 			<Feedback errors={ errors[name] } />

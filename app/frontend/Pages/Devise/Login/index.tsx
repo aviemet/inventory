@@ -32,7 +32,7 @@ const Login = () => {
 
 	return (
 		<Tile.Container>
-			<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit }>
+			<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
 						<h1 tw="text-center">Inventory</h1>
@@ -51,7 +51,7 @@ const Login = () => {
 					</div>
 
 					<div tw="mb-2">
-						<Checkbox label="Remember Me" name="remember_me" />
+						<Checkbox name="remember_me" label="Remember Me" labelPosition='end' />
 					</div>
 
 				</Tile.Content>
@@ -66,10 +66,3 @@ const Login = () => {
 }
 
 export default Login
-
-// const HoverLink = styled(Link)`
-// 	${tw`flex-1 text-center transition-all duration-500 border-t`}
-// 	&:hover {
-// 		${tw`bg-violet-100`}
-// 	}
-// `

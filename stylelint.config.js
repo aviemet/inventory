@@ -17,6 +17,9 @@ module.exports = {
 					'use',
 				]
 			}
-		]
+		],
+		'indentation': ['tab', {
+			baseIndentLevel: 1
+		}]
 	}
 }

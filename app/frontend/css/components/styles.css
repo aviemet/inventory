@@ -18,9 +18,21 @@ a.button {
     @apply bg-sky-800;
   }
 }
-
+/*
+form.format-grid {
+  div.field {
+    @screen md {
+      &:not(.textarea) {
+        @apply grid;
+        grid-template-columns: var(--label-width) 1fr;
+        grid-template-rows: 1fr;
+      }
+    }
+  }
+}
+*/
 div.field {
-  @apply bg-gray-100 mb-2 w-full;
+  /*@apply bg-gray-100 mb-2 w-full;
   @apply border-brand-light border-t-2;
 
   &.required {
@@ -38,7 +50,7 @@ div.field {
   }
 
   .input {
-    @apply relative; /* Forces input icons to display correctly */
+    @apply relative;
     line-height: 1;
 
     select {
@@ -82,15 +94,11 @@ div.field {
     & + input {
       @apply pl-8;
     }
-  }
+  }*/
 
   /* On Desktop use a 2 column grid to show labels and inputs, with feedback elements below input */
   @screen md {
-    &:not(.textarea) {
-      @apply grid;
-      grid-template-columns: var(--label-width) 1fr;
-      grid-template-rows: 1fr;
-
+   /* &:not(.textarea) {
       @apply border-t-0 border-l-2;
     }
 
@@ -102,7 +110,7 @@ div.field {
       & ~ .input_wrapper {
         @apply flex-2 rounded-l-none;
       }
-    }
+    }*/
   }
 }
 

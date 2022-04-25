@@ -4,7 +4,7 @@ import { InputProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
-import cx from 'classnames'
+import cn from 'classnames'
 
 interface IInputProps extends Omit<InputProps, 'onChange'> {
 	label?: string
@@ -18,7 +18,11 @@ const FormInput = ({ label, name, model, onChange, type = 'text', id, required, 
 	const { inputId, inputName } = useInputProps(name, model)
 
 	return (
-		<Field type={ type } required={ required } errors={ !!errors?.[name] }>
+		<Field
+			type={ type }
+			required={ required }
+			errors={ !!errors?.[name] }
+		>
 			<Input
 				id={ id || inputId }
 				name={ inputName }

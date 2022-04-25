@@ -24,7 +24,8 @@
 	"plugins": [
 		"react",
 		"@typescript-eslint",
-    "import"
+    "import",
+		"styled-components"
 	],
 	"ignorePatterns": [
 		"app/frontend/types/**/*",
@@ -70,6 +71,9 @@
     "react/prop-types": 0,
     "eqeqeq": "error",
     "no-console": "warn",
-		"eol-last": ["error", "always"]
+		"eol-last": ["error", "always"],
+		"styled-components/indentation": ["tab", {
+			"baseIndentLevel": 1
+		}]
 	}
 }

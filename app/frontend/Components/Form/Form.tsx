@@ -3,11 +3,15 @@ import { useForm as useInertiaForm } from '@inertiajs/inertia-react'
 
 import { createContext } from '@/Components/Hooks'
 import { FormProps } from 'react-html-props'
+import cn from 'classnames'
+
+import './form.css'
 
 interface IFormProps<T> extends FormProps {
 	model?: string
 	data: T
 	to: string
+	grid?: boolean
 	onSubmit?: (object) => boolean|void
 	onChange?: (object) => void
 	onSuccess?: (object) => void
@@ -41,9 +45,11 @@ function Form<T extends Record<keyof T, unknown>>({
 	data,
 	method = 'post',
 	to,
+	grid = true,
 	onSubmit,
 	onChange,
 	onSuccess,
+	className,
 	...props
 }: IFormProps<T>) {
 	const form = useInertiaForm<Record<string, unknown>>(fillEmptyValues(data))
@@ -76,7 +82,7 @@ function Form<T extends Record<keyof T, unknown>>({
 	return (
 		<FormProvider value={ form }>
 			<FormMetaDataProvider value={ { model: model || 'form' } }>
-				<form onSubmit={ handleSubmit } { ...props }>
+				<form onSubmit={ handleSubmit } className={ cn({ 'format-grid': grid }, className) } { ...props }>
 					{ children }
 				</form>
 			</FormMetaDataProvider>
