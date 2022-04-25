@@ -1,6 +1,4 @@
-class CompanyBlueprint < Blueprinter::Base
-  identifier :id
-
+class CompanyBlueprint < ApplicationBlueprint
   fields :name,
          :slug,
          :created_at,

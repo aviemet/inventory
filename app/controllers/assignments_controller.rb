@@ -3,6 +3,9 @@ class AssignmentsController < ApplicationController
   before_action :set_assignable, only: [:index, :new, :create, :end, :checkin]
   before_action :redirect_if_already_assigned, only: [:new, :create]
 
+  # expose :assignment, -> { Assignment.find(params[:id]) }
+  # expose :assignable, -> { }
+
   # GET /assignments/:asset_type/:asset_id
   # GET /assignments/:asset_type/:asset_id.json
   def index
@@ -14,19 +17,6 @@ class AssignmentsController < ApplicationController
   # GET /assignments/:id.json
   def show
     render inertia: "Assignments/Show"
-  end
-
-  # GET /checkout/:asset_type/:asset_id
-  def new
-    @assignment = Assignment.new
-    # render "#{params[:asset_type].downcase.pluralize}/checkout"
-    render inertia: "#{params[:asset_type].camelize.pluralize}/Index"
-  end
-
-  # GET /checkin/:asset_type/:asset_id
-  def end
-    @assignment = @assignable.assignment
-    render inertia: "Assignments/End"
   end
 
   # GET /assignments/:id/edit
@@ -97,6 +87,7 @@ class AssignmentsController < ApplicationController
   end
 
   def set_assignable
+    ap({ params: params })
     asset_class = params[:asset_type].capitalize.constantize
     raise "\"#{asset_class.name}\" is not an assignable asset type" unless asset_class.include?(Assignable)
 

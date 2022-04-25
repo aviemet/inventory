@@ -9,12 +9,13 @@ import cx from 'classnames'
 interface IInputProps extends Omit<InputProps, 'onChange'> {
 	label?: string
 	name: string
+	model?: string
 	onChange?: ({ value: unknown, setData: Function }) => void
 }
 
-const FormInput = ({ label, name, onChange, type = 'text', id, required, ...props }: IInputProps) => {
+const FormInput = ({ label, name, model, onChange, type = 'text', id, required, ...props }: IInputProps) => {
 	const { data, setData, errors } = useForm()
-	const { inputId, inputName } = useInputProps(name)
+	const { inputId, inputName } = useInputProps(name, model)
 
 	return (
 		<Field type={ type } required={ required } errors={ !!errors?.[name] }>

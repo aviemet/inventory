@@ -119,6 +119,7 @@ module.exports = {
 		require('@tailwindcss/aspect-ratio'),
 		plugin(({ addUtilities, theme }) => {
 			const themeColors = theme('colors')
+
 			const individualBorderColors = Object.keys(themeColors).map(colorName => ({
 				[`.border-b-${colorName}`]: {
 					borderBottomColor: themeColors[colorName]
@@ -133,7 +134,6 @@ module.exports = {
 					borderRightColor:  themeColors[colorName]
 				}
 			}))
-
 			addUtilities(individualBorderColors)
 
 			const flexBasis = {
@@ -150,8 +150,21 @@ module.exports = {
 					'flex-basis': '100%'
 				},
 			}
-
 			addUtilities(flexBasis, ['responsive'])
+
+			const visuallyHidden = {
+				'.visually-hidden': {
+					position: 'absolute',
+					overflow: 'hidden',
+					clip: 'rect(0 0 0 0)',
+					height: '1px',
+					width: '1px',
+					margin: '-1px',
+					padding: '0',
+					border: '0',
+				}
+			}
+			addUtilities(visuallyHidden)
 		}),
 	],
 	content: ['./**/*.{jsx,tsx}'],

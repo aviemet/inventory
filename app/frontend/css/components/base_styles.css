@@ -23,7 +23,7 @@
   --label-width: 12rem;
 }
 
-@layer utilities {
+/* @layer utilities {
   .visually-hidden {
     position: absolute;
     overflow: hidden;
@@ -34,7 +34,7 @@
     padding: 0;
     border: 0;
   }
-}
+} */
 
 @layer base {
   *::selection {

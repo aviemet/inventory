@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   include OwnableConcern
   include Searchable
+  include AssignableConcern
 
   expose :items, -> { @active_company.items.includes_associated }
   expose :item
@@ -8,8 +9,8 @@ class ItemsController < ApplicationController
 
   before_action :set_view_data, only: [:index, :category]
 
-  # GET /items
-  # GET /items.json
+  # GET /hardware
+  # GET /hardware.json
   def index
     self.items = search(items, sortable_fields)
     paginated_items = items.page(params[:page] || 1)
@@ -23,23 +24,23 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /items/category/:category_id
-  # GET /items/category/:category_id.json
+  # GET /hardware/category/:category_id
+  # GET /hardware/category/:category_id.json
   # def category
   #   # TODO: Consider another way of filtering without using routes
   #   self.items = items.where('model.category': Category.find(request.params[:category_id]))
   #   render :index
   # end
 
-  # GET /items/:id
-  # GET /items/:id.json
+  # GET /hardware/:id
+  # GET /hardware/:id.json
   def show
     render inertia: "Items/Show", props: {
       item: -> { ItemBlueprint.render_as_json(item, view: :associations) }
     }
   end
 
-  # GET /items/new
+  # GET /hardware/new
   def new
     render inertia: "Items/New", props: {
       item: ItemBlueprint.render_as_json(Item.new, view: :new),
@@ -49,12 +50,17 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /items/:id/edit
+  # GET /hardware/:id/edit
   def edit
-    render inertia: "Items/Edit"
+    render inertia: "Items/Edit", props: {
+      item: ItemBlueprint.render_as_json(item, view: :new),
+      models: @active_company.models.find_by_category(:Item).as_json,
+      vendors: @active_company.vendors.as_json,
+      locations: @active_company.locations.as_json,
+    }
   end
 
-  # GET /items/:id/clone
+  # GET /hardware/:id/clone
   def clone
     self.item = Item.find(params[:id]).dup
     self.item.serial = nil
@@ -63,8 +69,8 @@ class ItemsController < ApplicationController
     render inertia: "Items/Clone"
   end
 
-  # POST /items
-  # POST /items.json
+  # POST /hardware
+  # POST /hardware.json
   def create
     ap({ params: params })
     item.company = Company.find(company_params[:id])
@@ -75,8 +81,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /items/:id
-  # PATCH/PUT /items/:id.json
+  # PATCH/PUT /hardware/:id
+  # PATCH/PUT /hardware/:id.json
   def update
     respond_to do |format|
       if item.update(item_params)
@@ -89,8 +95,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  # DELETE /items/:id
-  # DELETE /items/:id.json
+  # DELETE /hardware/:id
+  # DELETE /hardware/:id.json
   def destroy
     item.destroy
     respond_to do |format|

@@ -1,6 +1,4 @@
-class ConsumableBlueprint < Blueprinter::Base
-  identifier :id
-
+class ConsumableBlueprint < ApplicationBlueprint
   fields :name,
          :min_qty,
          :qty,

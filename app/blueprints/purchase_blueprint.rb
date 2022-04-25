@@ -1,3 +1,2 @@
-class PurchaseBlueprint < Blueprinter::Base
-  identifier :id
+class PurchaseBlueprint < ApplicationBlueprint
 end

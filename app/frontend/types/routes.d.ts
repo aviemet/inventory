@@ -118,15 +118,13 @@ export const assignment: ((
 
 /**
  * Generates rails route to
- * /assignments/:asset_type/:asset_id(.:format)
- * @param {any} assetType
- * @param {any} assetId
+ * /assignments/:id(.:format)
+ * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const assignments: ((
-  assetType: RequiredRouteParameter,
-  assetId: RequiredRouteParameter,
+  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -219,6 +217,30 @@ export const categoryItems: ((
  */
 export const categoryLicenses: ((
   categoryId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /hardware/:id/checkin(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkinItem: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /hardware/:id/checkout(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkoutItem: ((
+  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -670,16 +692,14 @@ export const editAccessory: ((
 
 /**
  * Generates rails route to
- * /assignments/:asset_type/:asset_id/:id/edit(.:format)
- * @param {any} assetType
- * @param {any} assetId
+ * /assignments/:id/:id/edit(.:format)
+ * @param {any} id
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editAssignment: ((
-  assetType: RequiredRouteParameter,
-  assetId: RequiredRouteParameter,
+  id: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -1566,20 +1586,6 @@ export const editWarrantyContactWebsite: ((
 
 /**
  * Generates rails route to
- * /checkin/:asset_type/:asset_id(.:format)
- * @param {any} assetType
- * @param {any} assetId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const endAssignment: ((
-  assetType: RequiredRouteParameter,
-  assetId: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /fields/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -2123,20 +2129,6 @@ export const networks: ((
  * @returns {string} route path
  */
 export const newAccessory: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /checkout/:asset_type/:asset_id(.:format)
- * @param {any} assetType
- * @param {any} assetId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newAssignment: ((
-  assetType: RequiredRouteParameter,
-  assetId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

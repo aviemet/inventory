@@ -1,6 +1,4 @@
-class NetworkBlueprint < Blueprinter::Base
-  identifier :id
-
+class NetworkBlueprint < ApplicationBlueprint
   fields :name,
          :address,
          :vlan_id,

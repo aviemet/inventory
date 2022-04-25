@@ -1,6 +1,4 @@
-class CategoryBlueprint < Blueprinter::Base
-  identifier :id
-
+class CategoryBlueprint < ApplicationBlueprint
   fields :id,
          :categorizable_type,
          :name,

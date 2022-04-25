@@ -1,6 +1,4 @@
-class ItemBlueprint < Blueprinter::Base
-  identifier :id
-
+class ItemBlueprint < ApplicationBlueprint
   fields :name,
          :asset_tag,
          :serial,

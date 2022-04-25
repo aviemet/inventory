@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { Inertia } from '@inertiajs/inertia'
 import Input from './Input'
 import Options from './Options'
 import { handleUserActions } from './eventActions'
@@ -15,7 +16,7 @@ export interface ISearchableDropdownProps extends InputProps {
 	filterMatchKeys?: string[]
 }
 
-const SearchableDropdown = ({ options, defaultValue, getLabel, getValue, onChange, filterMatchKeys, ...props }: ISearchableDropdownProps) => {
+const SearchableDropdown = ({ options, src, defaultValue, getLabel, getValue, onChange, filterMatchKeys, ...props }: ISearchableDropdownProps) => {
 	const getOption = (val: string) => options.find(option => String(getValue(option)) === val)
 
 	const defaultOption = getOption(defaultValue)

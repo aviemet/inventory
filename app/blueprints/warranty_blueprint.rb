@@ -1,3 +1,2 @@
-class WarrantyBlueprint < Blueprinter::Base
-  identifier :id
+class WarrantyBlueprint < ApplicationBlueprint
 end

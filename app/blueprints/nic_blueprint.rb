@@ -1,3 +1,2 @@
-class NicBlueprint < Blueprinter::Base
-  identifier :id
+class NicBlueprint < ApplicationBlueprint
 end

@@ -1,6 +1,4 @@
-class AssignmentBlueprint < Blueprinter::Base
-  identifier :id
-
+class AssignmentBlueprint < ApplicationBlueprint
   fields :assignable_type,
          :assignable_id,
          :assign_toable_type,
@@ -10,7 +8,7 @@ class AssignmentBlueprint < Blueprinter::Base
          :assigned_at,
          :returned_at,
          :expected_at,
-         :note,
+         :notes,
          :active,
          :created_by_id,
          :created_at,

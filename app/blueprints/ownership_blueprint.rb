@@ -1,3 +1,2 @@
-class OwnershipBlueprint < Blueprinter::Base
-  identifier :id
+class OwnershipBlueprint < ApplicationBlueprint
 end

@@ -1,6 +1,4 @@
-class ManufacturerBlueprint < Blueprinter::Base
-  identifier :id
-
+class ManufacturerBlueprint < ApplicationBlueprint
   fields :id,
          :name,
          :slug,

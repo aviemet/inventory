@@ -1,6 +1,4 @@
-class IpLeaseBlueprint < Blueprinter::Base
-  identifier :id
-
+class IpLeaseBlueprint < ApplicationBlueprint
   fields :active,
          :created_at,
          :updated_at

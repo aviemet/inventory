@@ -1,6 +1,4 @@
-class AccessoryBlueprint < Blueprinter::Base
-  identifier :id
-
+class AccessoryBlueprint < ApplicationBlueprint
   fields :name,
          :serial,
          :asset_tag,

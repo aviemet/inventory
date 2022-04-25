@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   add_flash_types :info, :error
 
+  before_action :decode_id
   before_action :set_locale
   before_action :authenticate_user!
   before_action :set_action_cable_identifier
@@ -59,6 +60,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def decode_id
+    return if !params[:id]
+
+    str = ApplicationRecord.decode_id(params[:id])
+    params[:id] = str[:id]
+    params[:asset_type] = str[:model]
+  end
+
   def set_locale
     locale = params[:locale].to_s.strip.to_sym
     I18n.locale = I18n.available_locales.include?(locale) ? locale : I18n.default_locale
@@ -95,7 +104,6 @@ class ApplicationController < ActionController::Base
     end
 
     if params.key?(:direction) && !params.key?(:sort)
-      ap(":direction NEEDS TO BE DELETED")
       dirty = true
       params.delete :direction
     end

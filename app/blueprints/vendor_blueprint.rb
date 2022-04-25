@@ -1,6 +1,4 @@
-class VendorBlueprint < Blueprinter::Base
-  identifier :id
-
+class VendorBlueprint < ApplicationBlueprint
   fields :id,
          :name,
          :slug,

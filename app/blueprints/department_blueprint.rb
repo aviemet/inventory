@@ -1,6 +1,4 @@
-class DepartmentBlueprint < Blueprinter::Base
-  identifier :id
-
+class DepartmentBlueprint < ApplicationBlueprint
   fields :id,
          :name,
          :slug,

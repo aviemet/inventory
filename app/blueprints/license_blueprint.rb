@@ -1,6 +1,4 @@
-class LicenseBlueprint < Blueprinter::Base
-  identifier :id
-
+class LicenseBlueprint < ApplicationBlueprint
   fields :id,
          :name,
          :seats,

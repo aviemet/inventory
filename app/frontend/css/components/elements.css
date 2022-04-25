@@ -42,7 +42,7 @@
   @apply flex;
 
   input[type="radio"] {
-    /* @apply visually-hidden; */
+    @apply visually-hidden;
 
     & + label {
       @apply flex-1 max-w-none;

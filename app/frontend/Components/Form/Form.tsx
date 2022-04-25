@@ -21,15 +21,16 @@ const [useForm, FormProvider] = createContext<IInertiaFormProps>()
 export { useForm }
 
 const [useFormMetaData, FormMetaDataProvider] = createContext<Record<string, string>>()
-export const useInputProps = (name) => {
+export const useInputProps = (name: string, modelOverride?: string) => {
 	const { model } = useFormMetaData()
-	return { inputId: `${model}_${name}`, inputName: `${model}/${name}` }
+	const usedModel = modelOverride ?? model
+	return { inputId: `${usedModel}_${name}`, inputName: `${usedModel}/${name}` }
 }
 
 function fillEmptyValues<T extends Record<keyof T, unknown>>(data: T): T {
 	const sanitizedDefaultData = data
 	Object.keys(data).forEach(key => {
-		sanitizedDefaultData[key] = data[key] ?? ''
+		sanitizedDefaultData[key] = data[key] === undefined || data[key] === null ? '' : String(data[key])
 	})
 	return sanitizedDefaultData
 }

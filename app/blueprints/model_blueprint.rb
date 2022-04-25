@@ -1,6 +1,4 @@
-class ModelBlueprint < Blueprinter::Base
-  identifier :id
-
+class ModelBlueprint < ApplicationBlueprint
   fields :id,
         :name,
         :slug,

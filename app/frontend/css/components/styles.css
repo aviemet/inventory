@@ -94,7 +94,7 @@ div.field {
       @apply border-t-0 border-l-2;
     }
 
-    label, legend {
+    & > label, & > legend {
       @apply flex-1 text-right;
       max-width: var(--label-width);
       grid-row-start: span 2;

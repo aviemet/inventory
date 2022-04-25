@@ -1,6 +1,4 @@
-class ComponentBlueprint < Blueprinter::Base
-  identifier :id
-
+class ComponentBlueprint < ApplicationBlueprint
   fields :name,
          :serial,
          :min_qty,

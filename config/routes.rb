@@ -18,6 +18,11 @@ Rails.application.routes.draw do
     get ":id/clone" => :clone, on: :collection, as: :clone
   end
 
+  concern :assignable do
+    get "checkout", on: :member, as: :checkout
+    get "checkin", on: :member, as: :checkin
+  end
+
   # STATIC PATHS #
 
   root "pages#dashboard"
@@ -65,7 +70,7 @@ Rails.application.routes.draw do
 
   resources :items, path: :hardware do
     resources :nics
-    concerns :categoryable, :clonable
+    concerns :categoryable, :clonable, :assignable
   end
 
   resources :components, concerns: :categoryable
@@ -73,13 +78,13 @@ Rails.application.routes.draw do
   resources :consumables, concerns: :categoryable
   resources :licenses, concerns: :categoryable
 
-  resources :assignments, path: "assignments/:asset_type/:asset_id", only: [:edit, :index, :create]
+  resources :assignments, path: "assignments/:id", only: [:edit, :index, :create]
   resources :assignments, only: [:show, :update, :destroy]
   # Use /checkout & /checkin as a verb in the url to define asset assigments
-  get "checkout/:asset_type/:asset_id", to: "assignments#new", as: :new_assignment
-  get "checkin/:asset_type/:asset_id", to: "assignments#end", as: :end_assignment
-  patch "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
-  put "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
+  # get "checkout/:asset_type/:asset_id", to: "assignments#new", as: :new_assignment
+  # get "checkin/:asset_type/:asset_id", to: "assignments#end", as: :end_assignment
+  # patch "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
+  # put "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
 
   resources :people, concerns: :contactable
 

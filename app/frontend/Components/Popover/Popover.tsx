@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useClickAwayListener } from '@/Components/Hooks'
 import { MdMoreVert } from 'react-icons/md'
+import tw from 'twin.macro'
 import cx from 'classnames'
 
 interface IPopoverProps {
@@ -27,24 +28,16 @@ const Popover = ({ children, width = 24 }: IPopoverProps) => {
 
 	return (
 		<div
-			className="popover cursor-pointer inline-block m-2 relative"
+			className="popover"
+			tw="relative inline-block m-2 cursor-pointer"
 			style={ { width: `${width}px`, height: `${width}px` } }
 			onClick={ handleToggle }
 			ref={ outerElRef }
 		>
 			<MdMoreVert />
 			<div
-				className={ cx(
-					{ 'visually-hidden': !visible },
-					'absolute',
-					'right-0',
-					'bg-white',
-					'border-gray-300',
-					'border-1',
-					'rounded',
-					'z-50',
-					'shadow'
-				) }
+				className={ cx({ 'visually-hidden': !visible }) }
+				tw="absolute right-0 bg-white border-gray-300 border rounded z-50 shadow"
 			>
 				{ children }
 			</div>

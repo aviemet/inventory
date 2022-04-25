@@ -9,9 +9,10 @@ import cx from 'classnames'
 interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'> {
 	label?: string
 	name: string
+	defaultValue?: string
 }
 
-const SearchableDropdown = ({ options, label, name, required, getLabel, getValue, onChange, id, ...props }: IInputProps) => {
+const SearchableDropdown = ({ options, label, name, required, defaultValue, getLabel, getValue, onChange, id, ...props }: IInputProps) => {
 	const { data, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
@@ -28,7 +29,7 @@ const SearchableDropdown = ({ options, label, name, required, getLabel, getValue
 			<SearchableDropdownInput
 				name={ inputName }
 				options={ options }
-				defaultValue={ data[name] }
+				defaultValue={ defaultValue ?? data[name] }
 				getLabel={ getLabel }
 				getValue={ getValue }
 				onChange={ handleChange }

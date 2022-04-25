@@ -1,3 +1,2 @@
-class RoleBlueprint < Blueprinter::Base
-  identifier :id
+class RoleBlueprint < ApplicationBlueprint
 end

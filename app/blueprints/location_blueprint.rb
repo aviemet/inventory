@@ -1,3 +1,3 @@
-class LocationBlueprint < Blueprinter::Base
-  identifier :id
+class LocationBlueprint < ApplicationBlueprint
+  fields :name
 end

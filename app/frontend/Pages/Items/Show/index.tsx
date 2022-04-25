@@ -4,6 +4,7 @@ import { Link } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import tw from 'twin.macro'
 import { AProps } from 'react-html-props'
+import { Popover, Option } from '@/Components/Popover'
 
 interface IShowItemProps {
 	item: Schema.Item
@@ -12,16 +13,26 @@ interface IShowItemProps {
 const Show = ({ item }: IShowItemProps) => {
 	const title = item.name ?? 'Item Details'
 	console.log({ item })
+
 	return (
 		<>
 			<Head title={ title }></Head>
 
 			<section className="container relative">
-				<h1 tw="flex-1">{ title }</h1>
+				<div tw="flex">
+					<h1 tw="flex-1">{ title }</h1>
 
-				<span>
-					{ /* actions menu */ }
-				</span>
+					<div>
+						<Popover>
+							<Option>
+								<Link href={ Routes.checkoutItem(item) }>Checkout Item</Link>
+							</Option>
+							<Option>
+								<Link href={ Routes.editItem(item) }>Edit Item</Link>
+							</Option>
+						</Popover>
+					</div>
+				</div>
 
 				<nav className="sticky" tw="bg-white p-3 border-b-2 -top-4">
 					<div tw="inline px-2">
