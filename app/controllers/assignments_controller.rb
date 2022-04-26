@@ -28,16 +28,14 @@ class AssignmentsController < ApplicationController
   # POST /assignments/:asset_type/:asset_id
   # POST /assignments/:asset_type/:asset_id.json
   def create
-    assign_toable = find_assign_toable(assign_toable_type: assignment_params[:assign_toable_type], assign_toable_id: assignment_params[:assign_toable_id])
+    # assignable_params = ApplicationRecord.decode_id(params[:assignable_id])
+    assign_toable = find_assign_toable
 
-    respond_to do |format|
-      if @assignable.assign_to(assign_toable, assignment_params)
-        format.html { redirect_to @assignable, notice: 'Assignment was successfully created.' }
-        format.json { render :show, status: :created, location: @assignable }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @assignable.errors, status: :unprocessable_entity }
-      end
+    if @assignable.assign_to(assign_toable, assignment_params)
+      redirect_to @assignable
+    else
+      # TODO: Build assignment path from assignable type
+      redirect_to assignment_path, inertia: { errors: @assignment.errors }
     end
   end
 
@@ -88,10 +86,10 @@ class AssignmentsController < ApplicationController
 
   def set_assignable
     ap({ params: params })
-    asset_class = params[:asset_type].capitalize.constantize
+    asset_class = params[:assignable_type].capitalize.constantize
     raise "\"#{asset_class.name}\" is not an assignable asset type" unless asset_class.include?(Assignable)
 
-    @assignable = asset_class.find(params[:asset_id])
+    @assignable = asset_class.find(params[:assignable_id])
   end
 
   def redirect_if_already_assigned
@@ -108,7 +106,7 @@ class AssignmentsController < ApplicationController
     asset_type.capitalize.constantize.find(asset_id)
   end
 
-  def find_assign_toable(assign_toable_type:, assign_toable_id:)
-    assign_toable_type.capitalize.constantize.find(assign_toable_id)
+  def find_assign_toable
+    assignment_params[:assign_toable_type].capitalize.constantize.find(assignment_params[:assign_toable_id])
   end
 end

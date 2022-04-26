@@ -5,10 +5,6 @@ import Feedback from './Feedback'
 import DateTimeInput, { type IDateTimeProps } from '../Inputs/DateTime'
 import cx from 'classnames'
 
-import 'react-datetime-picker/dist/DateTimePicker.css'
-import 'react-calendar/dist/Calendar.css'
-import 'react-clock/dist/Clock.css'
-
 interface IDateTimeFormProps extends Omit<IDateTimeProps, 'name'> {
 	name: string
 }
@@ -18,7 +14,8 @@ const DateTime = ({ name, required, onChange, id, ...props }: IDateTimeFormProps
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = value => {
-		setData(name, value)
+		console.log({ value })
+		setData(name, value[0].toISOString())
 	}
 
 	return (

@@ -1,19 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Form, Input, RadioButtons, SearchableDropdown } from '@/Components/Form'
+import { DateTime, Form, Input, RadioButtons, Submit, Textarea } from '@/Components/Form'
 import AssignToableDropdown from './AssignToableDropdown'
 import { Routes } from '@/lib'
 
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
 	item: Schema.Item
+	items: Schema.Item[]
+	people: Schema.Person[]
+	locations: Schema.Location[]
 }
 
 const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Item'
-	console.log({ models })
 
-	const handleAssignToableChange = ({ value }) => {
+	// const [assignToableName, setAssignToableName] = useState('')
+
+	const handleFormChange = form => {
+		console.log({ form })
 	}
 
 	return (
@@ -50,11 +55,21 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 				</div>
 
 				<Form
-					data={ assignment }
+					data={ {
+						...assignment,
+						'item/name': item.name
+					} }
 					to={ Routes.assignments({ id: item.id }) }
 					model="assignment"
+					className="max-w-5xl"
+					onChange={ handleFormChange }
 				>
-					<Input model="item" name="name" label="Item Name" required />
+					<Input
+						model="item"
+						name="name"
+						label="Item Name"
+						required
+					/>
 
 					<RadioButtons
 						label="Checkout To"
@@ -64,10 +79,28 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 							{ label: 'Item', value: 'Item' },
 							{ label: 'Location', value: 'Location' },
 						] }
-						onChange={ handleAssignToableChange }
+						required
 					/>
 
 					<AssignToableDropdown { ...models } />
+
+					<DateTime
+						label="Assigned At"
+						name="assigned_at"
+						required
+					/>
+
+					<DateTime
+						label="Expected At"
+						name="expected_at"
+					/>
+
+					<Textarea
+						label="Notes"
+						name="notes"
+					/>
+
+					<Submit>Checkout { item.name }</Submit>
 
 				</Form>
 			</section>

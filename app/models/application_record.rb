@@ -4,7 +4,7 @@ class ApplicationRecord < ActiveRecord::Base
   @@separator = " "
 
   def encode_id
-    Base64.encode64("#{self.class.name}#{@@separator}#{self.id}")
+    Base64.strict_encode64("#{self.class.name}#{@@separator}#{self.id}")
   end
 
   def self.decode_id(encoded_id)

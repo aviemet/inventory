@@ -72,7 +72,6 @@ class ItemsController < ApplicationController
   # POST /hardware
   # POST /hardware.json
   def create
-    ap({ params: params })
     item.company = Company.find(company_params[:id])
     if item.save
       redirect_to item

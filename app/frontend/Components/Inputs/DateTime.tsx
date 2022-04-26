@@ -1,12 +1,10 @@
 import React from 'react'
-import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle'
+import Flatpickr from 'react-flatpickr'
 import { InputProps } from 'react-html-props'
 import tw, { styled } from 'twin.macro'
 import cx from 'classnames'
 
-import 'react-datetime-picker/dist/DateTimePicker.css'
-import 'react-calendar/dist/Calendar.css'
-import 'react-clock/dist/Clock.css'
+import 'flatpickr/dist/themes/material_green.css'
 
 export interface IDateTimeProps extends InputProps {
 	label?: string
@@ -20,12 +18,16 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 				{ label }
 			</label> }
 			<DateTimeComponent>
-				<DateTimePicker
+				<Flatpickr
+	        data-enable-time
 					name={ name }
 					id={ id }
 					required={ required }
 					onChange={ onChange }
 					value={ value }
+					options={ {
+						altInput: true
+					} }
 					{ ...props }
 				/>
 			</DateTimeComponent>

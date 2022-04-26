@@ -27,15 +27,15 @@ const FormInput = ({ label, name, model, onChange, type = 'text', id, required, 
 				id={ id || inputId }
 				name={ inputName }
 				label={ label }
-				value={ data[name] }
+				value={ data[inputName] }
 				onChange={ e => {
-					setData(name, e.target.value)
-					if(onChange) onChange({ value: data[name], setData })
+					setData(inputName, e.target.value)
+					if(onChange) onChange({ value: data[inputName], setData })
 				} }
 				type={ type }
 				{ ...props }
 			/>
-			<Feedback errors={ errors[name] } />
+			<Feedback errors={ errors[inputName] } />
 		</Field>
 	)
 }

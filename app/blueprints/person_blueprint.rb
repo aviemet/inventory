@@ -1,4 +1,4 @@
-class PersonBlueprint < Blueprinter::Base
+class PersonBlueprint < ApplicationBlueprint
   fields :first_name,
          :middle_name,
          :last_name,
