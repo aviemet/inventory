@@ -1,5 +1,4 @@
 import React from 'react'
-import { InputProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'

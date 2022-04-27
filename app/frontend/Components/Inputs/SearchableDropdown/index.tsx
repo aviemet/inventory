@@ -13,10 +13,11 @@ export interface ISearchableDropdownProps extends InputProps {
 	getLabel: (option: Record<string, any>) => any
 	getValue: (option: Record<string, any>) => string
 	onChange?: (option: Record<string, any>) => void
+	onOpen?: () => void
 	filterMatchKeys?: string[]
 }
 
-const SearchableDropdown = ({ options, src, defaultValue, getLabel, getValue, onChange, filterMatchKeys, ...props }: ISearchableDropdownProps) => {
+const SearchableDropdown = ({ options, src, defaultValue, getLabel, getValue, onChange, onOpen, filterMatchKeys, ...props }: ISearchableDropdownProps) => {
 	const getOption = (val: string) => options.find(option => String(getValue(option)) === val)
 
 	const defaultOption = getOption(defaultValue)
@@ -38,6 +39,8 @@ const SearchableDropdown = ({ options, src, defaultValue, getLabel, getValue, on
 		setOpen(true)
 		labelInputRef.current!.select()
 		setrevertLabel(label)
+
+		if(onOpen) onOpen()
 	}
 
 	const handleClose = () => {
