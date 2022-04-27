@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { SearchableDropdown, useForm } from '@/Components/Form'
 import { Inertia } from '@inertiajs/inertia'
 
@@ -12,30 +12,32 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 	const { data } = useForm()
 
 	const [optionsValues, setOptionsValues] = useState<Record<string, any>[]>(people)
+	const strModelNameRef = useRef('people')
+
+	const handleOpen = () => {
+		Inertia.reload({
+			preserveScroll: true,
+			only: [strModelNameRef.current]
+		})
+	}
 
 	useEffect(() => {
-		let str = ''
 		let obj: Record<string, any>[] = []
 
 		switch(data.assign_toable_type) {
 			case 'Person':
-				str = 'people'
+				strModelNameRef.current = 'people'
 				obj = people
 				break
 			case 'Item':
-				str = 'items'
+				strModelNameRef.current = 'items'
 				obj = items
 				break
 			case 'Location':
-				str = 'locations'
+				strModelNameRef.current = 'locations'
 				obj = locations
 				break
 		}
-
-		Inertia.reload({
-			preserveScroll: true,
-			only: [str]
-		})
 
 		setOptionsValues(obj)
 	}, [data.assign_toable_type])
@@ -47,6 +49,7 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 			name="assign_toable_id"
 			getLabel={ option => option.name }
 			getValue={ option => option.id }
+			onOpen={ handleOpen }
 			required
 		/>
 	)
