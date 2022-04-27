@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Inertia } from '@inertiajs/inertia'
 import Input from './Input'
 import Options from './Options'
 import { handleUserActions } from './eventActions'

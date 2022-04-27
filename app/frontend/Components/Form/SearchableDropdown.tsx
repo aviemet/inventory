@@ -26,6 +26,7 @@ const SearchableDropdown = ({ options, label, name, required, defaultValue, getL
 				{ label }
 			</label> }
 			<SearchableDropdownInput
+				id={ id || inputId }
 				name={ inputName }
 				options={ options }
 				defaultValue={ defaultValue ?? data[name] }

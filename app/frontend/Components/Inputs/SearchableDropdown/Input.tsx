@@ -11,7 +11,7 @@ interface ISearchableDropdownInputProps extends InputProps {
 }
 
 const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownInputProps>((
-	{ value, label, open, handleOpen, handleClose, onChange, ...props },
+	{ value, label, open, handleOpen, handleClose, onChange, id, ...props },
 	ref
 ) => {
 	return (
@@ -19,6 +19,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownInput
 			<input type="hidden" value={ value } { ...props } />
 			<SelectorComponent className="selector">
 				<input
+					id={ id }
 					type="text"
 					value={ label }
 					onChange={ onChange }

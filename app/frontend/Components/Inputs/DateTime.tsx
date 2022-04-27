@@ -21,7 +21,6 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 				<Flatpickr
 	        data-enable-time
 					name={ name }
-					id={ id }
 					required={ required }
 					onChange={ onChange }
 					value={ value }

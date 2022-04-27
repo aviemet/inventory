@@ -14,7 +14,6 @@ const DateTime = ({ name, required, onChange, id, ...props }: IDateTimeFormProps
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = value => {
-		console.log({ value })
 		setData(name, value[0].toISOString())
 	}
 
