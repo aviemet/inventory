@@ -18,4 +18,6 @@ declare global {
 			is_last_page: boolean
 		}
 	}
+
+	type HTTPVerb = 'POST'|'PUT'|'GET'|'PATCH'|'DESTROY'
 }

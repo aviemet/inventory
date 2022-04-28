@@ -13,8 +13,6 @@ const Checkbox = ({ name, onChange, id, required, className, label, ...props }: 
 	const { data, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
-	console.log({ label })
-
 	return (
 		<Field
 			className="pl-2"

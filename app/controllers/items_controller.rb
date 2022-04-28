@@ -53,7 +53,7 @@ class ItemsController < ApplicationController
   # GET /hardware/:id/edit
   def edit
     render inertia: "Items/Edit", props: {
-      item: ItemBlueprint.render_as_json(item, view: :new),
+      item: ItemBlueprint.render_as_json(item),
       models: @active_company.models.find_by_category(:Item).as_json,
       vendors: @active_company.vendors.as_json,
       locations: @active_company.locations.as_json,

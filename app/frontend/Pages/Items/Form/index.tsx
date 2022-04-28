@@ -10,18 +10,19 @@ import {
 	Group,
 } from '@/Components/Form'
 import { Link } from '@/Components'
-import { Routes } from '@/lib'
 import { useAuth } from '@/Providers'
 import tw from 'twin.macro'
 
 export interface IItemFormProps {
+	to: string
+	method?: HTTPVerb
 	item: Schema.Item
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
 }
 
-const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
+const ItemForm = ({ to, method = 'POST', item, models, vendors, locations }: IItemFormProps) => {
 	const { user } = useAuth()
 
 	const handleSubmit = ({ transform }) => {
@@ -37,7 +38,8 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 		<Form
 			model="item"
 			data={ item }
-			to={ Routes.items() }
+			to={ to }
+			method={ method }
 			onSubmit={ handleSubmit }
 			className="max-w-5xl"
 		>
@@ -89,7 +91,9 @@ const ItemForm = ({ item, models, vendors, locations }: IItemFormProps) => {
 
 			<Textarea name="notes" label="Notes" />
 
-			<Submit className="w-full">Create Item</Submit>
+			<Submit className="w-full">
+				{ item.id ? 'Update' : 'Create' } Item
+			</Submit>
 
 		</Form>
 	)

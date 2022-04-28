@@ -1,11 +1,17 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import ItemForm, { type IItemFormProps } from '../Form'
+import ItemForm from '../Form'
+import { Routes } from '@/lib'
 import { useAuth } from '@/Providers'
 
-interface INewItemProps extends IItemFormProps {}
+interface IUpdateItemProps{
+	item: Schema.Item
+	models: Schema.Model[]
+	vendors: Schema.Vendor[]
+	locations: Schema.Location[]
+}
 
-const New = ({ item, ...models }: INewItemProps) => {
+const New = ({ item, ...models }: IUpdateItemProps) => {
 	const title = `Edit ${item.name}`
 
 	const { user } = useAuth()
@@ -17,7 +23,7 @@ const New = ({ item, ...models }: INewItemProps) => {
 			<section className="container">
 				<h1>{ title } for { user.active_company!.name }</h1>
 
-				<ItemForm item={ item } { ...models } />
+				<ItemForm to={ Routes.item(item) } method="PATCH" item={ item } { ...models } />
 			</section>
 		</>
 	)

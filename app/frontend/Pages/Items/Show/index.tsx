@@ -12,7 +12,6 @@ interface IShowItemProps {
 
 const Show = ({ item }: IShowItemProps) => {
 	const title = item.name ?? 'Item Details'
-	console.log({ item })
 
 	return (
 		<>

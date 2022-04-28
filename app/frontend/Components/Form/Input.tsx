@@ -17,6 +17,8 @@ const FormInput = ({ label, name, model, onChange, type = 'text', id, required, 
 	const { data, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
 
+	console.log({ data, inputName })
+
 	return (
 		<Field
 			type={ type }
@@ -27,10 +29,10 @@ const FormInput = ({ label, name, model, onChange, type = 'text', id, required, 
 				id={ id || inputId }
 				name={ inputName }
 				label={ label }
-				value={ data[inputName] }
+				value={ data[name] }
 				onChange={ e => {
-					setData(inputName, e.target.value)
-					if(onChange) onChange({ value: data[inputName], setData })
+					setData(name, e.target.value)
+					if(onChange) onChange({ value: data[name], setData })
 				} }
 				type={ type }
 				{ ...props }
