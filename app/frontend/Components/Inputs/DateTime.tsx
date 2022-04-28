@@ -27,7 +27,7 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 					options={ {
 						altInput: true
 					} }
-					{ ...props }
+					id={ id }
 				/>
 			</DateTimeComponent>
 		</>

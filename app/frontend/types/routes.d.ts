@@ -118,13 +118,11 @@ export const assignment: ((
 
 /**
  * Generates rails route to
- * /assignments/:id(.:format)
- * @param {any} id
+ * /assignments(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const assignments: ((
-  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -692,14 +690,12 @@ export const editAccessory: ((
 
 /**
  * Generates rails route to
- * /assignments/:id/:id/edit(.:format)
- * @param {any} id
+ * /assignments/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editAssignment: ((
-  id: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;

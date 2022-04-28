@@ -4,6 +4,7 @@ class ApplicationRecord < ActiveRecord::Base
   @@separator = " "
 
   def encode_id
+    return if self.id.nil?
     Base64.strict_encode64("#{self.class.name}#{@@separator}#{self.id}")
   end
 

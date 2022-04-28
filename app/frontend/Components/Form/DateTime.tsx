@@ -3,7 +3,7 @@ import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 import DateTimeInput, { type IDateTimeProps } from '../Inputs/DateTime'
-import cx from 'classnames'
+import cn from 'classnames'
 
 interface IDateTimeFormProps extends Omit<IDateTimeProps, 'name'> {
 	name: string

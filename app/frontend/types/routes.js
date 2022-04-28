@@ -521,12 +521,11 @@ export const assignment = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[
 
 /**
  * Generates rails route to
- * /assignments/:id(.:format)
- * @param {any} id
+ * /assignments(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const assignments = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const assignments = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -943,13 +942,12 @@ export const editAccessory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[
 
 /**
  * Generates rails route to
- * /assignments/:id/:id/edit(.:format)
- * @param {any} id
+ * /assignments/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editAssignment = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const editAssignment = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to

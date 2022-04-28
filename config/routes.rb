@@ -78,13 +78,7 @@ Rails.application.routes.draw do
   resources :consumables, concerns: :categoryable
   resources :licenses, concerns: :categoryable
 
-  resources :assignments, path: "assignments/:id", only: [:edit, :index, :create]
-  resources :assignments, only: [:show, :update, :destroy]
-  # Use /checkout & /checkin as a verb in the url to define asset assigments
-  # get "checkout/:asset_type/:asset_id", to: "assignments#new", as: :new_assignment
-  # get "checkin/:asset_type/:asset_id", to: "assignments#end", as: :end_assignment
-  # patch "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
-  # put "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
+  resources :assignments, except: [:index, :new]
 
   resources :people, concerns: :contactable
 

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :decode_id
   before_action :set_locale
   before_action :authenticate_user!
-  before_action :set_action_cable_identifier
+  # before_action :set_action_cable_identifier
   before_action :set_active_company
   before_action :redirect_empty_params
 
@@ -61,11 +61,13 @@ class ApplicationController < ActionController::Base
   private
 
   def decode_id
+    ap({ decode_params: params })
+
     return if !params[:id]
 
-    str = ApplicationRecord.decode_id(params[:id])
-    params[:id] = str[:id]
-    params[:asset_type] = str[:model]
+    id_parts = ApplicationRecord.decode_id(params[:id])
+    params[:id] = id_parts[:id]
+    params[:asset_type] = id_parts[:model]
   end
 
   def set_locale

@@ -1,17 +1,10 @@
 class AssignmentsController < ApplicationController
-  before_action :set_assignment, only: [:show, :edit, :update, :destroy]
-  before_action :set_assignable, only: [:index, :new, :create, :end, :checkin]
-  before_action :redirect_if_already_assigned, only: [:new, :create]
+  # before_action :set_assignment, only: [:show, :edit, :update, :destroy]
+  before_action :set_assignable, only: [:create] #, :end, :checkin]
+  # before_action :redirect_if_already_assigned, only: [:create]
 
-  # expose :assignment, -> { Assignment.find(params[:id]) }
+  expose :assignment, -> { Assignment.find(params[:id]) }
   # expose :assignable, -> { }
-
-  # GET /assignments/:asset_type/:asset_id
-  # GET /assignments/:asset_type/:asset_id.json
-  def index
-    @assignments = Assignment.where(assignable_type: params[:asset_type].capitalize, assignable_id: params[:asset_id])
-    render inertia: "Assignments/Index"
-  end
 
   # GET /assignments/:id
   # GET /assignments/:id.json
@@ -21,7 +14,7 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/:id/edit
   def edit
-    @assignable = @assignment.assignable
+    @assignable = assignment.assignable
     render inertia: "Assignments/Edit"
   end
 
@@ -30,20 +23,22 @@ class AssignmentsController < ApplicationController
   def create
     # assignable_params = ApplicationRecord.decode_id(params[:assignable_id])
     assign_toable = find_assign_toable
+    ap({ assignable: @assignable, assign_toable: assign_toable })
 
-    if @assignable.assign_to(assign_toable, assignment_params)
-      redirect_to @assignable
-    else
-      # TODO: Build assignment path from assignable type
-      redirect_to assignment_path, inertia: { errors: @assignment.errors }
-    end
+
+    # if @assignable.assign_to(assign_toable, assignment_params)
+    #   redirect_to @assignable
+    # else
+    #   # TODO: Build assignment path from assignable type
+    #   redirect_to assignment_path, inertia: { errors: assignment.errors }
+    # end
   end
 
   # PATCH/PUT /assignments/:id
   # PATCH/PUT /assignments/:id.json
   def update
     respond_to do |format|
-      if @assignment.update(assignment_params)
+      if assignment.update(assignment_params)
         format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
         format.json { render :show, status: :ok, location: @assignment }
       else
@@ -53,25 +48,10 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assignments/checkin/:asset_type/:asset_id
-  # PATCH/PUT /assignments/checkin/:asset_type/:asset_id.json
-  def checkin
-    asset_class = params[:asset_type].downcase
-    respond_to do |format|
-      if @assignment = @assignable.unassign(returned_at: params[:returned_at], name: params[:assignment][asset_class][:name])
-        format.html { redirect_to @assignable, notice: "#{params[:asset_type].capitalize} has been checked in" }
-        format.json { render :show, status: :ok, location: @assignable }
-      else
-        format.html { render :end, status: :unprocessable_entity }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /assignments/:id
   # DELETE /assignments/:id.json
   def destroy
-    @assignment.destroy
+    assignment.destroy
     respond_to do |format|
       format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
       format.json { head :no_content }
@@ -79,10 +59,6 @@ class AssignmentsController < ApplicationController
   end
 
   private
-
-  def set_assignment
-    @assignment = Assignment.find(params[:id])
-  end
 
   def set_assignable
     ap({ params: params })

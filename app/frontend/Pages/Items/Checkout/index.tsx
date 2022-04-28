@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { DateTime, Form, Input, RadioButtons, Submit, Textarea } from '@/Components/Form'
 import AssignToableDropdown from './AssignToableDropdown'
 import { Routes } from '@/lib'
+
+import Flatpickr from 'react-flatpickr'
 
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
@@ -15,10 +17,25 @@ interface ICheckoutItemProps {
 const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Item'
 
-	// const [assignToableName, setAssignToableName] = useState('')
-
 	const handleFormChange = form => {
-		console.log({ form })
+
+	}
+
+	const handleSubmit = ({ transform }) => {
+		transform(data => {
+			const assignment = {}
+			const item = {}
+
+			for(const key in data) {
+				if(key.indexOf('/') >= 0) {
+					const parts = key.split('/')
+					item[parts[1]] = data[key]
+				} else {
+					assignment[key] = data[key]
+				}
+			}
+			return { assignment, item }
+		})
 	}
 
 	return (
@@ -63,6 +80,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 					model="assignment"
 					className="max-w-5xl"
 					onChange={ handleFormChange }
+					onSubmit={ handleSubmit }
 				>
 					<Input
 						model="item"

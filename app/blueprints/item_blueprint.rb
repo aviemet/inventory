@@ -30,12 +30,6 @@ class ItemBlueprint < ApplicationBlueprint
     exclude :updated_at
   end
 
-  view :new do
-    exclude :id
-    exclude :updated_at
-    exclude :created_at
-  end
-
   view :associations do
     # association :owner, blueprint: OwnershipBlueprint
     # association :company, blueprint: CompanyBlueprint
