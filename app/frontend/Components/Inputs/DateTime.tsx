@@ -1,5 +1,6 @@
 import React from 'react'
 import Flatpickr from 'react-flatpickr'
+import labelPlugin from 'flatpickr/dist/plugins/labelPlugin/labelPlugin'
 import { InputProps } from 'react-html-props'
 import tw, { styled } from 'twin.macro'
 import cx from 'classnames'
@@ -25,7 +26,8 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 					onChange={ onChange }
 					value={ value }
 					options={ {
-						altInput: true
+						altInput: true,
+						plugins: [labelPlugin()]
 					} }
 					id={ id }
 				/>
