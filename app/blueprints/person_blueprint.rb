@@ -30,6 +30,13 @@ class PersonBlueprint < ApplicationBlueprint
 	  association :audits, blueprint: AuditBlueprint
 	  association :manager, blueprint: PersonBlueprint
 	  # association :user, blueprint: UserBlueprint
+  end
 
+  view :as_options do
+    fields :id
+		
+		field :name do |person|
+			"#{person.first_name} #{person.last_name}"
+		end
   end
 end

@@ -24,9 +24,15 @@ const Show = ({ item }: IShowItemProps) => {
 
 					<div>
 						<Popover>
-							<Option>
-								<Link href={ Routes.checkoutItem(item) }>Checkout Item</Link>
-							</Option>
+							{ item.assignments ?
+								<Option>
+									<Link href={ Routes.checkinItem(item) }>Checkin Item</Link>
+								</Option>
+								:
+								<Option>
+									<Link href={ Routes.checkoutItem(item) }>Checkout Item</Link>
+								</Option>
+							}
 							<Option>
 								<Link href={ Routes.editItem(item) }>Edit Item</Link>
 							</Option>

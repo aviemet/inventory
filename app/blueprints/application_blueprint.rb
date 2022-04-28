@@ -5,6 +5,7 @@ class ApplicationBlueprint < Blueprinter::Base
 
   view :new do
     exclude :id
+    exclude :created_by_id
     exclude :updated_at
     exclude :created_at
   end

@@ -1,37 +1,36 @@
 class AssignmentsController < ApplicationController
   # before_action :set_assignment, only: [:show, :edit, :update, :destroy]
-  before_action :set_assignable, only: [:create] #, :end, :checkin]
+  # before_action :set_assignable, only: [:create] #, :end, :checkin]
   # before_action :redirect_if_already_assigned, only: [:create]
 
-  expose :assignment, -> { Assignment.find(params[:id]) }
+  expose :assignment
   # expose :assignable, -> { }
 
   # GET /assignments/:id
   # GET /assignments/:id.json
   def show
-    render inertia: "Assignments/Show"
+    render inertia: "Assignments/Show", props: {
+      assignment: assignment
+    }
   end
 
   # GET /assignments/:id/edit
   def edit
     @assignable = assignment.assignable
-    render inertia: "Assignments/Edit"
+    render inertia: "Assignments/Edit", props: {
+      assignment: assignment
+    }
   end
 
   # POST /assignments/:asset_type/:asset_id
   # POST /assignments/:asset_type/:asset_id.json
   def create
-    # assignable_params = ApplicationRecord.decode_id(params[:assignable_id])
-    assign_toable = find_assign_toable
-    ap({ assignable: @assignable, assign_toable: assign_toable })
-
-
-    # if @assignable.assign_to(assign_toable, assignment_params)
-    #   redirect_to @assignable
-    # else
-    #   # TODO: Build assignment path from assignable type
-    #   redirect_to assignment_path, inertia: { errors: assignment.errors }
-    # end
+    assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
+    if assignment.save
+      redirect_to assignable
+    else
+      redirect_to send("checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", id: assignable.encode_id)
+    end
   end
 
   # PATCH/PUT /assignments/:id
@@ -61,7 +60,6 @@ class AssignmentsController < ApplicationController
   private
 
   def set_assignable
-    ap({ params: params })
     asset_class = params[:assignable_type].capitalize.constantize
     raise "\"#{asset_class.name}\" is not an assignable asset type" unless asset_class.include?(Assignable)
 
@@ -75,7 +73,7 @@ class AssignmentsController < ApplicationController
   end
 
   def assignment_params
-    params.require(:assignment).permit(:assign_toable_id, :assign_toable_type, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name])
+    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name])
   end
 
   def find_assignable(asset_type:, asset_id:)

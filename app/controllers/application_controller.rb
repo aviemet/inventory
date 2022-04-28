@@ -61,8 +61,6 @@ class ApplicationController < ActionController::Base
   private
 
   def decode_id
-    ap({ decode_params: params })
-
     return if !params[:id]
 
     id_parts = ApplicationRecord.decode_id(params[:id])

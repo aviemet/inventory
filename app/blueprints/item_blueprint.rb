@@ -54,4 +54,8 @@ class ItemBlueprint < ApplicationBlueprint
     # association :warranty, blueprint: WarrantyBlueprint
   end
 
+  view :as_options do
+    fields :id, :name
+  end
+
 end

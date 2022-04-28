@@ -9,7 +9,7 @@ interface IAssignToableDropdownProps {
 }
 
 const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdownProps) => {
-	const { data } = useForm()
+	const { data, setData } = useForm()
 
 	const [optionsValues, setOptionsValues] = useState<Record<string, any>[]>(people)
 	const strModelNameRef = useRef('people')
@@ -39,6 +39,7 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 				break
 		}
 
+		setData('assign_toable_id', '')
 		setOptionsValues(obj)
 	}, [data.assign_toable_type])
 

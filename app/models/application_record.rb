@@ -1,6 +1,10 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
+  def to_param
+    encode_id
+  end
+
   @@separator = " "
 
   def encode_id
