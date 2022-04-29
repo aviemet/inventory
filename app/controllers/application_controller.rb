@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :set_active_company
   before_action :redirect_empty_params
 
-  # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # rescue_from CanCan::AccessDenied do |exception|
   #   flash[:warning] = exception.message
@@ -74,6 +74,7 @@ class ApplicationController < ActionController::Base
   end
 
   def record_not_found
+    ap("RECORD NOT FOUND")
     raise ActionController::RoutingError, 'Not Found'
   end
 

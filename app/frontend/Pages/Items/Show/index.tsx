@@ -113,7 +113,7 @@ const Show = ({ item }: IShowItemProps) => {
 						<div className="item-row">
 							<label>Vendor:</label>
 							<div className="value">
-								{ item.vendor && <Link href={ Routes.vendor(item.vendor) }>
+								{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
 									{ item.vendor.name }
 								</Link> }
 							</div>

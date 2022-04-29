@@ -1,37 +1,32 @@
 import React from 'react'
-import { InertiaLink, InertiaLinkProps } from '@inertiajs/inertia-react'
-import { Button } from '@/Components'
-import { Inertia, Method, Visit } from '@inertiajs/inertia'
+import { type InertiaLinkProps } from '@inertiajs/inertia-react'
+import { type Method, type Visit } from '@inertiajs/inertia'
+import InertiaLink from './InertiaLink'
+import ExternalLink from './ExternalLink'
 
 interface LinkProps extends InertiaLinkProps {
 	method?: Method
 	visit?: Omit<Visit, 'method'>
+	external?: boolean
 }
 
-const Link = ({ children, href, as = 'a', method, visit, ...props }: LinkProps) => {
-	const handleHTTP = e => {
-		Inertia.visit(href, {
-			method,
-			...visit
+const externalPrefix = ['http', 'www']
+
+const Link = ({ children, href, as = 'a', method, visit, external = false, ...props }: LinkProps) => {
+	let renderExternal = external
+
+	if(!external) {
+		externalPrefix.forEach(prefix => {
+			if(href.startsWith(prefix)) {
+				renderExternal = true
+			}
 		})
 	}
 
-	if(method !== undefined && method !== 'get') {
-		// Only present standard GET requests as anchor tags, all others as buttons
-
-		return (
-			<InertiaLink href={ href } onClick={ e => e.preventDefault() }>
-				<Button onClick={ handleHTTP }>{ children }</Button>
-			</InertiaLink>
-		)
-	}
-
-	const asButton = as === 'button'
-	return (
-		<InertiaLink href={ href } { ...props } as={ asButton ? 'a' : as }>
-			{ asButton ? <Button>{ children }</Button> : children }
-		</InertiaLink>
-	)
+	return renderExternal ?
+		<ExternalLink href={ href }>{ children }</ExternalLink>
+		:
+		<InertiaLink href={ href } as={ as } method={ method } visit={ visit } { ...props }>{ children }</InertiaLink>
 }
 
 export default Link

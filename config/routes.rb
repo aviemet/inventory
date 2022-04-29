@@ -82,7 +82,7 @@ Rails.application.routes.draw do
 
   resources :people, concerns: :contactable
 
-  resources :vendors, concerns: :contactable
+  resources :vendors, param: :slug, concerns: :contactable
 
   resources :models
   resources :manufacturers, concerns: :contactable

@@ -34,6 +34,7 @@ gem "draper", "~> 4.0"
 gem "ipaddress_2", "~> 0.14.0"
 gem "countries", "~> 4.2"
 gem "ts_schema", "~> 0.1.13"
+gem "js-routes", "~> 2.2"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"
@@ -70,8 +71,6 @@ group :development, :test do
 end
 
 group :development do
-  gem "js-routes", "~> 2.2"
-
   gem "guard-livereload", "~> 2.5", require: false
   gem "rack-livereload", "~> 0.3.17"
 

@@ -1,6 +1,12 @@
 import React from 'react'
 
-const Index = () => {
+interface IVendorIndexProps {
+	vendors: Schema.Vendor[]
+}
+
+const Index = ({ vendors }: IVendorIndexProps) => {
+	console.log({ vendors })
+
 	return (
 		<div>Index</div>
 	)
