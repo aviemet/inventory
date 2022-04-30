@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
+import { Popover, Divider, Option } from '@/Components/Popover'
 import { MdEdit } from 'react-icons/md'
 
 interface ILicensesIndexProps {
@@ -17,17 +18,23 @@ const Index = ({ licenses, pagination }: ILicensesIndexProps ) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="h-full flex flex-col">
+			<section className="flex flex-col h-full">
 				<Table.TableProvider selectable rows={ licenses } pagination={ pagination }>
-					<div className="flex justify-between items-center">
-						<h1 className="inline-block align-text-top md:align-middle">{ title }</h1>
-						<div>
+					<div className="flex items-center justify-between">
+						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
+						<div className="md:flex-1 flex">
 							<Table.SearchInput model="license" />
-							<Link as="button" href={ Routes.newLicense() }>+ New license</Link>
+							<div className="inline-block">
+								<Popover>
+									<Option>
+										<Link href={ Routes.newLicense() } key="new_license">Add New License</Link>
+									</Option>
+								</Popover>
+							</div>
 						</div>
 					</div>
 
-					<div className="h-full scroll-content">
+					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>
 							<Table.Head>
 								<Table.Row>

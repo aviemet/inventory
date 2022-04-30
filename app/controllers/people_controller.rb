@@ -6,14 +6,22 @@ class PeopleController < ApplicationController
   before_action :set_view_data, only: [:index, :category]
 
   expose :people, -> { @active_company.people.includes_associated }
-  expose :person, find_by: :slug
+  expose :person, -> { @active_company.people.find_by_slug params[:slug] }
   expose :departments, -> { @active_company.departments }
 
   # GET /people
   # GET /people.json
   def index
     self.people = search(people, sortable_fields)
-    render inertia: "People/Index"
+    paginated_people = people.page(params[:page] || 1)
+
+    render inertia: "People/Index", props: {
+      people: PersonBlueprint.render_as_json(paginated_people, view: :associations),
+      pagination: -> { {
+        count: people.count,
+        **pagination_data(paginated_people)
+      } }
+    }
   end
 
   # GET /people/1

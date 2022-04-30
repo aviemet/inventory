@@ -11,7 +11,7 @@ interface IItemsIndexProps {
 	pagination: Schema.Pagination
 }
 
-const Index = ({ items, pagination }: IItemsIndexProps) => {
+const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 	const title = 'Hardware Assets'
 
 	return (
@@ -98,4 +98,4 @@ const Index = ({ items, pagination }: IItemsIndexProps) => {
 	)
 }
 
-export default Index
+export default ItemsIndex

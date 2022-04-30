@@ -117,7 +117,7 @@ if Rails.env == "development"
       {
         name: "SHARP",
         url: "www.business.sharp.com",
-      }
+      },
     ].each{ |vendor| Vendor.create!(vendor.merge({ company: Company.first })) }
   end
 
@@ -126,10 +126,11 @@ if Rails.env == "development"
       network = IPAddress.parse("10.10.10.0/24")
 
       105.times do |n|
+        serial = Faker::Alphanumeric.alphanumeric(number: 8, min_alpha: 3, min_numeric: 3).upcase
         i = Item.create!({
           name: Faker::Device.model_name,
-          asset_tag: Faker::Blockchain::Bitcoin.unique.address,
-          serial: Faker::Blockchain::Bitcoin.unique.address,
+          asset_tag: serial,
+          serial: serial,
           cost: Faker::Number.decimal(l_digits: 4, r_digits: 2),
           purchased_at: Time.zone.yesterday.end_of_day,
           model: Model.find(Model.where('id <= ?', 2).pluck(:id).sample),
@@ -152,6 +153,24 @@ if Rails.env == "development"
         end
       end
     end
+  end
+
+  if Contract.count == 0
+    vendor = Vendor.create!({
+      name: "Unwired",
+      url: "www.unwired.com",
+      company: Company.first,
+    })
+
+    Contract.create!({
+      name: "Primary internet service",
+      number: Faker::Alphanumeric.alphanumeric(number: 6, min_alpha: 2, min_numeric: 2).upcase,
+      begins_at: 6.months.ago,
+      ends_at: 6.months.from_now,
+      vendor: vendor,
+      category: Category.where({name: "Utility"}).first,
+      company: Company.first,
+    })
   end
 
   if License.count == 0

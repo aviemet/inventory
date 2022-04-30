@@ -2,7 +2,7 @@ class CreateDepartments < ActiveRecord::Migration[6.0]
   def change
     create_table :departments do |t|
       t.string :name
-      t.string :slug, null: false, index: { unique: true}
+      t.string :slug, null: false, index: { unique: true }
       t.references :location, null: true, foreign_key: true
 
       t.timestamps

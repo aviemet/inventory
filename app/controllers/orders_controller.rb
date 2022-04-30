@@ -11,7 +11,15 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     self.orders = search(orders, sortable_fields)
-    render inertia: "Orders/Index"
+    paginated_orders = orders.page(params[:page] || 1)
+
+    render inertia: "Orders/Index", props: {
+      orders: ContractBlueprint.render_as_json(paginated_orders, view: :associations),
+      pagination: -> { {
+        count: orders.count,
+        **pagination_data(paginated_orders)
+      } }
+    }
   end
 
   # GET /orders/1

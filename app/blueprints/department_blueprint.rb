@@ -1,6 +1,5 @@
 class DepartmentBlueprint < ApplicationBlueprint
-  fields :id,
-         :name,
+  fields :name,
          :slug,
          :location_id,
          :created_at,

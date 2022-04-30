@@ -1,6 +1,5 @@
 class LicenseBlueprint < ApplicationBlueprint
-  fields :id,
-         :name,
+  fields :name,
          :seats,
          :key,
          :licenser_name,

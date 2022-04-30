@@ -58,10 +58,10 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 											<Link href={ Routes.accessory(accessory) }>{ accessory.model?.name }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											<Link href={ Routes.accessory(accessory) }>{ accessory.asset_tag }</Link>
+											<Link href={ Routes.accessory(accessory) }>{ accessory.serial }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											<Link href={ Routes.accessory(accessory) }>{ accessory.serial }</Link>
+											<Link href={ Routes.accessory(accessory) }>{ accessory.asset_tag }</Link>
 										</Table.Cell>
 										<Table.Cell>
 											<Link href={ Routes.accessory(accessory) }>{ accessory.category?.name }</Link>

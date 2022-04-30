@@ -14,22 +14,14 @@ class PersonBlueprint < ApplicationBlueprint
   end
 
   view :associations do
-	  # association :owner, blueprint: OwnershipBlueprint
-	  # association :company, blueprint: CompanyBlueprint
 	  association :department, blueprint: DepartmentBlueprint
-	  # association :contact, blueprint: ContactBlueprint
-	  # association :addresses, blueprint: AddressBlueprint
-	  # association :phones, blueprint: PhoneBlueprint
-	  # association :emails, blueprint: EmailBlueprint
-	  # association :websites, blueprint: WebsiteBlueprint
-	  # association :posessions, blueprint: AssignmentBlueprint
+	  association :contact, blueprint: ContactBlueprint
 	  association :items, blueprint: ItemBlueprint
 	  association :accessories, blueprint: AccessoryBlueprint
 	  association :licenses, blueprint: LicenseBlueprint
-	  # association :fieldset_associations, blueprint: FieldsetAssociationBlueprint
 	  association :audits, blueprint: AuditBlueprint
 	  association :manager, blueprint: PersonBlueprint
-	  # association :user, blueprint: UserBlueprint
+	  association :user, blueprint: UserBlueprint
   end
 
   view :as_options do

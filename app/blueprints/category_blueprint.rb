@@ -1,6 +1,5 @@
 class CategoryBlueprint < ApplicationBlueprint
-  fields :id,
-         :categorizable_type,
+  fields :categorizable_type,
          :name,
          :slug,
          :description,

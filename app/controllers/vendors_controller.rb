@@ -8,8 +8,14 @@ class VendorsController < ApplicationController
   # GET /vendors
   def index
     self.vendors = search(vendors, sortable_fields)
+    paginated_vendors = vendors.page(params[:page] || 1)
+
     render inertia: "Vendors/Index", props: {
-      vendors: vendors
+      vendors: VendorBlueprint.render_as_json(paginated_vendors, view: :associations),
+      pagination: -> { {
+        count: vendors.count,
+        **pagination_data(paginated_vendors)
+      } }
     }
   end
 
