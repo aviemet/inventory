@@ -10,25 +10,41 @@ class ComponentsController < ApplicationController
   # GET /components(.json)
   def index
     self.components = search(components, sortable_fields)
+    paginated_components = components.page(params[:page] || 1)
+
+    render inertia: "Components/Index", props: {
+      components: -> { ComponentBlueprint.render_as_json(paginated_components, view: :associations) },
+      pagination: -> { {
+        count: components.count,
+        **pagination_data(paginated_components)
+      } }
+    }
   end
 
+  # TODO: Decide if this is how I want to do category searches
   # GET /components/category/:category_id
   # GET /components/category/:category_id.json
-  def category
-    self.components = components.where('model.category': Category.find(request.params[:category_id]))
-    render :index
-  end
+  # def category
+  #   self.components = components.where('model.category': Category.find(request.params[:category_id]))
+  #   render :index
+  #   render inertia: "Components/Category"
+  # end
 
   # GET /components/:id(.json)
   def show
+    render inertia: "Components/Show", props: {
+      component: -> { ComponentBlueprint.render_as_json(component, view: :associations) }
+    }
   end
 
   # GET /components/new
   def new
+    render inertia: "Components/New"
   end
 
   # GET /components/:id/edit
   def edit
+    render inertia: "Components/Edit"
   end
 
   # POST /components(.json)

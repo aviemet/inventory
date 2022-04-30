@@ -5,19 +5,23 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
+    render inertia: "Categories/Index"
   end
 
   # GET /categories/:id
   # GET /categories/:id.json
   def show
+    render inertia: "Categories/Show"
   end
 
   # GET /categories/new
   def new
+    render inertia: "Categories/New"
   end
 
   # GET /categories/:id/edit
   def edit
+    render inertia: "Categories/Edit"
   end
 
   # POST /categories

@@ -9,19 +9,33 @@ class LicensesController < ApplicationController
   # GET /licenses.json
   def index
     self.licenses = search(licenses, sortable_fields)
+    paginated_licenses = licenses.page(params[:page] || 1)
+
+    render inertia: "Licenses/Index", props: {
+      licenses: LicenseBlueprint.render_as_json(licenses, view: :associations),
+      pagination: -> { {
+        count: licenses.count,
+        **pagination_data(paginated_licenses)
+      } }
+    }
   end
 
   # GET /licenses/1
   # GET /licenses/1.json
   def show
+    render inertia: "Licenses/Show", props: {
+      license: -> { LicenseBlueprint.render_as_json(license, view: :associations) }
+    }
   end
 
   # GET /licenses/new
   def new
+    render inertia: "Licenses/New"
   end
 
   # GET /licenses/1/edit
   def edit
+    render inertia: "Licenses/Edit"
   end
 
   # POST /licenses

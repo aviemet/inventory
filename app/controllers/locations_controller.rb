@@ -7,21 +7,25 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = current_user.active_company.locations
+    render inertia: "Locations/Index"
   end
 
   # GET /locations/:id
   # GET /locations/:id.json
   def show
+    render inertia: "Locations/Show"
   end
 
   # GET /locations/new
   def new
     @location = Location.new
+    render inertia: "Locations/New"
   end
 
   # GET /locations/:id/edit
   def edit
     @locations = Location.where.not(id: params[:id]).all
+    render inertia: "Locations/Edit"
   end
 
   # POST /locations

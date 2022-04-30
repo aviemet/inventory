@@ -1,7 +1,0 @@
-- @data&.each do |option|
-  .option {
-    class="#{[!@value.nil? && option[1] == @value ? 'selected' : nil].join(' ')}"
-    data-dropdown-search-target="option"
-    data-id=option[1]
-    data-action="click->dropdown-search#select mouseover->dropdown-search#highlightOption"
-  } = option[0]

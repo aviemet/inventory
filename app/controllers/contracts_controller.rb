@@ -9,19 +9,31 @@ class ContractsController < ApplicationController
   # GET /contracts.json
   def index
     self.contracts = search(contracts, sortable_fields)
+    paginated_contracts = contracts.page(params[:page] || 1)
+
+    render inertia: "Contracts/Index", props: {
+      contracts: ContractBlueprint.render_as_json(paginated_contracts, view: :associations),
+      pagination: -> { {
+        count: contracts.count,
+        **pagination_data(paginated_contracts)
+      } }
+    }
   end
 
   # GET /contracts/1
   # GET /contracts/1.json
   def show
+    render inertia: "Contracts/Show"
   end
 
   # GET /contracts/new
   def new
+    render inertia: "Contracts/New"
   end
 
   # GET /contracts/1/edit
   def edit
+    render inertia: "Contracts/Edit"
   end
 
   # POST /contracts

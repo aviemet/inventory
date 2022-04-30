@@ -5,20 +5,24 @@ class FieldsController < ApplicationController
   # GET /fields.json
   def index
     @fields = Field.all
+    render inertia: "Fields/Index"
   end
 
   # GET /fields/1
   # GET /fields/1.json
   def show
+    render inertia: "Fields/Show"
   end
 
   # GET /fields/new
   def new
     @field = Field.new
+    render inertia: "Fields/New"
   end
 
   # GET /fields/1/edit
   def edit
+    render inertia: "Fields/Edit"
   end
 
   # POST /fields

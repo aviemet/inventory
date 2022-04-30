@@ -1,6 +1,0 @@
-= simple_form_for @location do |form|
-  = view "forms/errors", record: @location
-
-  = form.association :parent, collection: @active_company.locations.where.not(id: @location&.id)
-  = form.input :name
-  = form.submit

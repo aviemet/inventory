@@ -10,19 +10,35 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
+    paginated_companies = companies.page(params[:page] || 1)
+
+    render inertia: "Companies/Index", props: {
+      companies: CompanyBlueprint.render_as_json(companies, view: :counts),
+      pagination: -> { {
+        count: companies.count,
+        **pagination_data(paginated_companies)
+      } }
+    }
   end
 
   # GET /companies/:id
   # GET /companies/:id.json
   def show
+    render inertia: "Companies/Show", props: {
+      company: company.as_json(include: [:locations, :departments, :items, :people])
+    }
   end
 
   # GET /companies/new
   def new
+    render inertia: "Companies/New"
   end
 
   # GET /companies/:id/edit
   def edit
+    render inertia: "Companies/Edit", props: {
+      company: company.as_json(include: [:locations, :departments, :items, :people])
+    }
   end
 
   # POST /companies

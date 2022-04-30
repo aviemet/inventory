@@ -1,19 +1,22 @@
 class ApplicationRecord < ActiveRecord::Base
-  self.abstract_class = true
+  primary_abstract_class
 
-  cattr_accessor :current_user
-
-  def self.to_s_field
-    default_stringify_field = :name
-    table = self.to_s.downcase.pluralize
-    default_stringify_field if ActiveRecord::Base.connection.table_exists?(table) && ActiveRecord::Base.connection.column_exists?(table, default_stringify_field)
+  def to_param
+    encode_id
   end
 
-  def to_s
-    if self.is_a?(ApplicationRecord) && self.class.to_s_field
-      self.public_send self.class.to_s_field
-    else
-      super
-    end
+  @@separator = " "
+
+  def encode_id
+    return if self.id.nil?
+    Base64.strict_encode64("#{self.class.name}#{@@separator}#{self.id}")
+  end
+
+  def self.decode_id(encoded_id)
+    parts = Base64.decode64(encoded_id).split(@@separator)
+    {
+      model: parts[0],
+      id: parts[1]
+    }
   end
 end

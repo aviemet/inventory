@@ -1,6 +1,7 @@
 class AccessoriesController < ApplicationController
   include OwnableConcern
   include Searchable
+  include AssignableConcern
 
   expose :accessories, -> { @active_company.accessories.includes_associated }
   expose :accessory
@@ -11,19 +12,33 @@ class AccessoriesController < ApplicationController
   # GET /accessories.json
   def index
     self.accessories = search(accessories, sortable_fields)
+    paginated_accessories = accessories.page(params[:page] || 1)
+
+    render inertia: "Accessories/Index", props: {
+      accessories: -> { AccessoryBlueprint.render_as_json(accessories, view: :associations) },
+      pagination: -> { {
+        count: accessories.count,
+        **pagination_data(paginated_accessories)
+      } }
+    }
   end
 
   # GET /accessories/1
   # GET /accessories/1.json
   def show
+    render inertia: "Accessories/Show", props: {
+      accessory: -> { AccessoryBlueprint.render_as_json(accessory, view: :associations) }
+    }
   end
 
   # GET /accessories/new
   def new
+    render inertia: "Accessories/New"
   end
 
   # GET /accessories/1/edit
   def edit
+    render inertia: "Accessories/Edit"
   end
 
   # POST /accessories

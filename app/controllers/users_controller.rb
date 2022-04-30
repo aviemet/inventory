@@ -5,20 +5,24 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    render inertia: "Purchases/Index"
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    render inertia: "Purchases/Show"
   end
 
   # GET /users/new
   def new
     @user = User.new
+    render inertia: "Purchases/New"
   end
 
   # GET /users/1/edit
   def edit
+    render inertia: "Purchases/Edit"
   end
 
   # PATCH/PUT /users/1

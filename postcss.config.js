@@ -1,15 +1,8 @@
 module.exports = {
-  plugins: [
-    require("postcss-import"),
-    require("tailwindcss")("./app/javascript/css/tailwind.js"),
-    require("postcss-flexbugs-fixes"),
-    require("postcss-preset-env")({
-      autoprefixer: {
-        flexbox: "no-2009"
-      },
-      stage: 3
-    }),
-    require("postcss-nested"),
-    require("autoprefixer"),
-  ]
+	plugins: {
+		'postcss-import': {},
+		'tailwindcss/nesting': {},
+		tailwindcss: {},
+		autoprefixer: {},
+	},
 }

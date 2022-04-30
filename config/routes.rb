@@ -18,16 +18,43 @@ Rails.application.routes.draw do
     get ":id/clone" => :clone, on: :collection, as: :clone
   end
 
+  concern :assignable do
+    get "checkout", on: :member, as: :checkout
+    get "checkin", on: :member, as: :checkin
+  end
+
   # STATIC PATHS #
 
-  root to: "pages#home"
-  get "pages/:page" => "pages#show"
-  get "settings" => "pages#show", page: "settings"
+  root "pages#dashboard"
+  get "dashboard" => "pages#dashboard", as: :dashboard
+  get "settings" => "pages#settings", as: :settings
 
   # DEVISE PATHS #
 
-  devise_for :users, path: "/", path_names: { sign_in: "login", sign_out: "logout" }, only: [:sessions]
-  devise_for :users, path_names: { sign_up: "register" }, skip: [:sessions]
+	devise_for :users, controllers: {
+		sessions: "users/sessions"
+	},
+	path: "/",
+	path_names: { 
+		sign_in: "login", 
+		sign_out: "logout"
+	}, 
+	only: [:sessions]
+
+	devise_for :users, controllers: {
+		passwords: "users/passwords",
+		registrations: "users/registrations",
+		unlocks: "users/unlocks",
+		confirmations: "users/confirmations",
+		# omniauth_callbacks: "users/omniauth_callbacks",
+	},
+	path_names: {
+		sign_up: :register,
+	}, 
+	skip: [:sessions]
+
+  # devise_for :users, path: "/", path_names: { sign_in: "login", sign_out: "logout" }, only: [:sessions]
+  # devise_for :users, path_names: { sign_up: "register" }, skip: [:sessions]
 
   # RESOURCEFUL PATHS #
 
@@ -43,25 +70,19 @@ Rails.application.routes.draw do
 
   resources :items, path: :hardware do
     resources :nics
-    concerns :categoryable, :clonable
+    concerns :categoryable, :clonable, :assignable
   end
 
-  resources :components, concerns: :categoryable
-  resources :accessories, concerns: :categoryable
-  resources :consumables, concerns: :categoryable
-  resources :licenses, concerns: :categoryable
+  resources :components, concerns: [:categoryable, :assignable]
+  resources :accessories, concerns: [:categoryable, :assignable]
+  resources :consumables, concerns: [:categoryable, :assignable]
+  resources :licenses, concerns: [:categoryable, :assignable]
 
-  resources :assignments, path: "assignments/:asset_type/:asset_id", only: [:edit, :index, :create]
-  resources :assignments, only: [:show, :update, :destroy]
-  # Use /checkout & /checkin as a verb in the url to define asset assigments
-  get "checkout/:asset_type/:asset_id", to: "assignments#new", as: :new_assignment
-  get "checkin/:asset_type/:asset_id", to: "assignments#end", as: :end_assignment
-  patch "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
-  put "assignments/checkin/:asset_type/:asset_id", to: "assignments#checkin"
+  resources :assignments, except: [:index, :new]
 
   resources :people, concerns: :contactable
 
-  resources :vendors, concerns: :contactable
+  resources :vendors, param: :slug, concerns: :contactable
 
   resources :models
   resources :manufacturers, concerns: :contactable

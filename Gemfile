@@ -1,112 +1,92 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.3'
+ruby "3.0.3"
 
 # Server
-gem 'rails', '~> 6.1.4'
-gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.1'
-gem 'redis', '~> 4.0'
-gem "dotenv-rails", "~> 2.7"
-gem "rack-cors", "~> 1.1"
-gem 'bcrypt', '~> 3.1.7'
-gem 'bootsnap', '>= 1.9.3', require: false
-
-# Models
-gem "slug", "~> 4.1"
-gem "active_type", "~> 1.3"
-gem "audited", "~> 5.0.1"
-gem "decent_exposure", "~> 3.0"
-
-# Search
-gem "pg_search", "~> 2.3"
-gem "progress_bar", "~> 1.3"
+gem "rails", "~> 7.0.1"
+gem "sprockets-rails"
+gem "pg", "~> 1.1"
+gem "puma", "~> 5.0"
 
 # Assets
-gem "hotwire-rails", "~> 0.1.3"
-gem "turbo-rails", "~> 0.8.1"
-gem "stimulus_reflex", "~> 3.4.1"
-gem 'sass-rails', '>= 6'
-gem 'jbuilder', '~> 2.7'
-gem "slim-rails", "~> 3.2"
-gem 'webpacker', '~> 5.0'
-gem 'image_processing', '~> 1.2'
-gem "material_icons", "~> 2.2"
-gem "simple_form", "~> 5.0"
-gem "view_component", "~> 2.23", require: "view_component/engine"
-gem "draper", "~> 4.0"
+gem "inertia_rails", "~> 1.11"
+gem "vite_rails", "~> 3.0"
 
-# Authentication / Authorization
-gem "devise", "~> 4.7"
-gem "devise_ldap_authenticatable", "~> 0.8.6"
+# Models
+gem "active_type", "~> 2.1"
+gem "pg_search", "~> 2.3"
+gem "devise", "~> 4.8"
+gem "devise_ldap_authenticatable", "~> 0.8.7"
 gem "rolify", "~> 6.0"
-gem "cancancan", "~> 3.1"
+gem "cancancan", "~> 3.3"
+gem "blueprinter", "~> 0.25.3"
+gem "slug", "~> 4.1"
+gem "kaminari", "~> 1.2"
+gem "audited", "~> 5.0"
+gem "money-rails", "~> 1.15"
+gem "decent_exposure", "~> 3.0"
+gem "time_for_a_boolean", "~> 0.2.1"
 
 # Helpers
-gem "ipaddress_2", ">= 0.13.0"
-gem "countries", "~> 4.0.1", require: 'countries/global'
-gem "money-rails", "~> 1.14"
-gem "kaminari", "~> 1.2"
-gem 'tzinfo-data'
+gem "factory_bot", "~> 6.2"
+gem "draper", "~> 4.0"
+gem "ipaddress_2", "~> 0.14.0"
+gem "countries", "~> 4.2"
+gem "ts_schema", "~> 0.1.13"
+gem "js-routes", "~> 2.2"
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data"
+
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", require: false
+
+# Use Redis adapter to run Action Cable in production
+# gem "redis", "~> 4.0"
+
+# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
+# gem "kredis"
+
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+# gem "bcrypt", "~> 3.1.7"
+
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  # Foreman for running dev commands in parallel
-  gem "foreman", "~> 0.87.1"
+  gem "rspec-rails", "~> 5.1"
+  gem "factory_bot_rails", "~> 6.2"
+  gem "faker", "~> 2.20"
+  gem "amazing_print", "~> 1.4"
 
-  # Testing
-  gem "faker", "~> 2.12"
-  gem "factory_bot_rails", "~> 6.0"
+  gem "solargraph", "~> 0.44.3"
+  gem "rubocop-rails", "~> 2.14", require: false
+  gem "rubocop-rspec", "~> 2.9", require: false
+  gem "rubocop-performance", "~> 1.13", require: false
+  gem "rubocop-daemon", "~> 0.3.2", require: false
 
-  # Console
-  gem "pry-rails", "~> 0.3.9"
-  gem "amazing_print", "~> 1.2"
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-  # Linting
-  gem "rubocop", require: false
-  gem "rubocop-daemon", require: false
-  gem "solargraph", require: false
-  gem "slim_lint", "~> 0.20"
-  gem "htmlbeautifier", "~> 1.3"
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'listen', '~> 3.3'
-  gem 'web-console', '>= 4.1.0'
-
-  # Better error pages
-  gem "better_errors", "~> 2.7"
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "spring", ">= 3.0.0"
-
-  # Live reloading of server code
-  gem "guard", "~> 2.16"
-  gem "guard-livereload", "~> 2.5.2", require: false
+  gem "guard-livereload", "~> 2.5", require: false
   gem "rack-livereload", "~> 0.3.17"
 
-  # To supress warnings
-  gem 'rubyzip', '~> 2.3.0'
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "web-console"
+
+  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
+  gem "spring"
+
+  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
+  # gem "rack-mini-profiler"
 end
 
 group :test do
-  # Testing
-  gem "rspec-rails", "~> 5.0"
-  gem "database_cleaner-active_record", "~> 2.0"
-  gem "cucumber-rails", "~> 2.0", require: false
-  gem "shoulda-matchers", "~> 5.0.0"
-  gem "deep-cover", "~> 1.0"
-  gem "sunspot_test", "~> 0.4.2"
-
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver'
-
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
-
-  # CI
-  gem "bullet", "~> 6.1"
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
 end

@@ -1,0 +1,2 @@
+class OwnershipBlueprint < ApplicationBlueprint
+end
