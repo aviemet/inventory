@@ -5,20 +5,24 @@ class WarrantiesController < ApplicationController
   # GET /warranties.json
   def index
     @warranties = Warranty.all
+    render inertia: "Warranties/Index"
   end
 
   # GET /warranties/1
   # GET /warranties/1.json
   def show
+    render inertia: "Warranties/Show"
   end
 
   # GET /warranties/new
   def new
     @warranty = Warranty.new
+    render inertia: "Warranties/New"
   end
 
   # GET /warranties/1/edit
   def edit
+    render inertia: "Warranties/Edit"
   end
 
   # POST /warranties

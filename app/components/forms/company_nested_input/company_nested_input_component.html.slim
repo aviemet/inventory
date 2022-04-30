@@ -1,5 +1,0 @@
-- form.simple_fields_for :company, company || Company.new do |company_form|
-  - if active_company
-    = company_form.input_field :id, as: :hidden, name: 'company[id]', value: active_company.id
-  - else
-    = company_form.input :id, as: :select, name: 'company[id]', collection: companies.map{ |c| [c.name, c.id] }, prompt: "-- Company --", label: "Company"

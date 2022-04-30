@@ -3,6 +3,7 @@ class CreateAccessories < ActiveRecord::Migration[6.0]
     create_table :accessories do |t|
       t.string :name
       t.string :serial
+      t.string :asset_tag
       t.integer :min_qty
       t.integer :qty
       t.monetize :cost, amount: { null: true, default: nil }

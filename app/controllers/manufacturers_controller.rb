@@ -11,19 +11,31 @@ class ManufacturersController < ApplicationController
   # GET /manufacturers.json
   def index
     self.manufacturers = search(manufacturers, sortable_fields)
+    paginated_manufacturers = manufacturers.page(params[:page] || 1)
+
+    render inertia: "Manufacturers/Index", props: {
+      manufacturers: ManufacturerBlueprint.render_as_json(paginated_manufacturers, view: :associations),
+      pagination: -> { {
+        count: manufacturers.count,
+        **pagination_data(paginated_manufacturers)
+      } }
+    }
   end
 
   # GET /manufacturers/1
   # GET /manufacturers/1.json
   def show
+    render inertia: "Manufacturers/Show"
   end
 
   # GET /manufacturers/new
   def new
+    render inertia: "Manufacturers/New"
   end
 
   # GET /manufacturers/1/edit
   def edit
+    render inertia: "Manufacturers/Edit"
   end
 
   # POST /manufacturers

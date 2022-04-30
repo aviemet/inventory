@@ -1,0 +1,2 @@
+class NicBlueprint < ApplicationBlueprint
+end

@@ -1,7 +1,0 @@
-= simple_form_for department do |form|
-  = view "forms/errors", record: department
-
-  = form.input :name
-  = form.association :location, collection: @active_company.locations
-
-  = form.submit

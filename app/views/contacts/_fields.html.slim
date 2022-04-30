@@ -1,5 +1,0 @@
-div data-controller="contacts-controller"
-  = form.fields_for(:contact, model.contact || Contact.new) do |contact_form|
-    h2 Addresses
-    = contact_form.fields_for :addresses do |address_form|
-      = render 'addresses/fields', form: address_form

@@ -11,19 +11,31 @@ class ModelsController < ApplicationController
   # GET /models.json
   def index
     self.models = search(models, sortable_fields)
+    paginated_models = models.page(params[:page] || 1)
+
+    render inertia: "Models/Index", props: {
+      models: ModelBlueprint.render_as_json(paginated_models, view: :associations),
+      pagination: -> { {
+        count: models.count,
+        **pagination_data(paginated_models)
+      } }
+    }
   end
 
   # GET /models/1
   # GET /models/1.json
   def show
+    render inertia: "Models/Show"
   end
 
   # GET /models/new
   def new
+    render inertia: "Models/New"
   end
 
   # GET /models/1/edit
   def edit
+    render inertia: "Models/Edit"
   end
 
   # POST /models

@@ -5,20 +5,24 @@ class PurchasesController < ApplicationController
   # GET /purchases.json
   def index
     @purchases = Purchase.all
+    render inertia: "Purchases/Index"
   end
 
   # GET /purchases/1
   # GET /purchases/1.json
   def show
+    render inertia: "Purchases/Show"
   end
 
   # GET /purchases/new
   def new
     @purchase = Purchase.new
+    render inertia: "Purchases/New"
   end
 
   # GET /purchases/1/edit
   def edit
+    render inertia: "Purchases/Edit"
   end
 
   # POST /purchases

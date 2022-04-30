@@ -7,19 +7,23 @@ class DepartmentsController < ApplicationController
   # GET /departments
   # GET /departments.json
   def index
+    render inertia: "Departments/Index"
   end
 
   # GET /departments/:id
   # GET /departments/:id.json
   def show
+    render inertia: "Departments/Show"
   end
 
   # GET /departments/new
   def new
+    render inertia: "Departments/New"
   end
 
   # GET /departments/:id/edit
   def edit
+    render inertia: "Departments/Edit"
   end
 
   # POST /departments
