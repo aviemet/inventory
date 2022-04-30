@@ -23,7 +23,9 @@ class LicensesController < ApplicationController
   # GET /licenses/1
   # GET /licenses/1.json
   def show
-    render inertia: "Licenses/Show"
+    render inertia: "Licenses/Show", props: {
+      license: -> { LicenseBlueprint.render_as_json(license, view: :associations) }
+    }
   end
 
   # GET /licenses/new

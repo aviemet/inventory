@@ -599,6 +599,33 @@ export const categoryLicenses = __jsr.r({"category_id":{"r":true},"format":{}}, 
 
 /**
  * Generates rails route to
+ * /accessories/:id/checkin(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkinAccessory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /components/:id/checkin(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkinComponent = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /consumables/:id/checkin(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkinConsumable = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"consumables"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /hardware/:id/checkin(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -608,12 +635,57 @@ export const checkinItem = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,
 
 /**
  * Generates rails route to
+ * /licenses/:id/checkin(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkinLicense = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /accessories/:id/checkout(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkoutAccessory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /components/:id/checkout(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkoutComponent = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /consumables/:id/checkout(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkoutConsumable = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"consumables"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /hardware/:id/checkout(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkoutItem = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /licenses/:id/checkout(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkoutLicense = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to

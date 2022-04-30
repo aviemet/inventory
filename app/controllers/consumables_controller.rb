@@ -21,7 +21,9 @@ class ConsumablesController < ApplicationController
 
   # GET /consumables/:id(.json)
   def show
-    render inertia: "Consumables/Show"
+    render inertia: "Consumables/Show", props: {
+      consumable: -> { ConsumableBlueprint.render_as_json(consumable, view: :associations) }
+    }
   end
 
   # GET /consumables/new

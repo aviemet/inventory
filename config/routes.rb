@@ -73,10 +73,10 @@ Rails.application.routes.draw do
     concerns :categoryable, :clonable, :assignable
   end
 
-  resources :components, concerns: :categoryable
-  resources :accessories, concerns: :categoryable
-  resources :consumables, concerns: :categoryable
-  resources :licenses, concerns: :categoryable
+  resources :components, concerns: [:categoryable, :assignable]
+  resources :accessories, concerns: [:categoryable, :assignable]
+  resources :consumables, concerns: [:categoryable, :assignable]
+  resources :licenses, concerns: [:categoryable, :assignable]
 
   resources :assignments, except: [:index, :new]
 

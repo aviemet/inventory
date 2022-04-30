@@ -1,6 +1,7 @@
 class AccessoriesController < ApplicationController
   include OwnableConcern
   include Searchable
+  include AssignableConcern
 
   expose :accessories, -> { @active_company.accessories.includes_associated }
   expose :accessory
@@ -25,7 +26,9 @@ class AccessoriesController < ApplicationController
   # GET /accessories/1
   # GET /accessories/1.json
   def show
-    render inertia: "Accessories/Show"
+    render inertia: "Accessories/Show", props: {
+      accessory: -> { AccessoryBlueprint.render_as_json(accessory, view: :associations) }
+    }
   end
 
   # GET /accessories/new

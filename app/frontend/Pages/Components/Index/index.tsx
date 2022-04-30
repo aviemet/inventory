@@ -11,17 +11,17 @@ interface IComponentsIndexProps {
 	pagination: Schema.Pagination
 }
 
-const Index = ({ components, pagination }: IComponentsIndexProps) => {
+const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 	const title = 'Components'
 
 	return (
 		<>
 			<Head title={ title }></Head>
 
-			<section className="h-full flex flex-col">
+			<section className="flex flex-col h-full">
 				<Table.TableProvider selectable rows={ components } pagination={ pagination }>
-					<div className="flex justify-between items-center">
-						<h1 className="inline-block align-text-top md:align-middle">{ title }</h1>
+					<div className="flex items-center justify-between">
+						<h1 className="md:align-middle inline-block align-text-top">{ title }</h1>
 						<div>
 							<Table.SearchInput model="components" />
 							<Popover>
@@ -32,7 +32,7 @@ const Index = ({ components, pagination }: IComponentsIndexProps) => {
 						</div>
 					</div>
 
-					<div className="h-full scroll-content">
+					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>
 							<Table.Head>
 								<Table.Row>
@@ -51,36 +51,36 @@ const Index = ({ components, pagination }: IComponentsIndexProps) => {
 							</Table.Head>
 
 							<Table.Body>
-								<Table.RowIterator render={ accessory => (
-									<Table.Row key={ accessory.id }>
+								<Table.RowIterator render={ component => (
+									<Table.Row key={ component.id }>
 										<Table.Cell nowrap>
-											<Link href={ Routes.accessory(accessory) }>{ accessory.name }</Link>
+											<Link href={ Routes.component(component) }>{ component.name }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											<Link href={ Routes.accessory(accessory) }>{ accessory.model?.name }</Link>
+											<Link href={ Routes.component(component) }>{ component.model?.name }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											<Link href={ Routes.accessory(accessory) }>{ accessory.asset_tag }</Link>
+											<Link href={ Routes.component(component) }>{ component.asset_tag }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											<Link href={ Routes.accessory(accessory) }>{ accessory.serial }</Link>
+											<Link href={ Routes.component(component) }>{ component.serial }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											<Link href={ Routes.accessory(accessory) }>{ accessory.category?.name }</Link>
+											<Link href={ Routes.component(component) }>{ component.category?.name }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											<Link href={ Routes.accessory(accessory) }>{ accessory.manufacturer?.name }</Link>
+											<Link href={ Routes.component(component) }>{ component.manufacturer?.name }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											<Link href={ Routes.accessory(accessory) }>{ accessory.vendor?.name }</Link>
+											<Link href={ Routes.component(component) }>{ component.vendor?.name }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											{ accessory.cost ? formatter.currency(accessory.cost, accessory.cost_currency) : '-' }
+											{ component.cost ? formatter.currency(component.cost, component.cost_currency) : '-' }
 										</Table.Cell>
-										<Table.Cell>{ accessory.qty }</Table.Cell>
-										<Table.Cell>{ accessory.min_qty }</Table.Cell>
+										<Table.Cell>{ component.qty }</Table.Cell>
+										<Table.Cell>{ component.min_qty }</Table.Cell>
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editAccessory(accessory) }><MdEdit /></Link>
+											<Link as="button" href={ Routes.editComponent(component) }><MdEdit /></Link>
 										</Table.Cell>
 									</Table.Row>
 								) } />
@@ -94,4 +94,4 @@ const Index = ({ components, pagination }: IComponentsIndexProps) => {
 	)
 }
 
-export default Index
+export default ComponentsIndex

@@ -10,8 +10,14 @@ class ComponentsController < ApplicationController
   # GET /components(.json)
   def index
     self.components = search(components, sortable_fields)
+    paginated_components = components.page(params[:page] || 1)
+
     render inertia: "Components/Index", props: {
-      components: -> { ComponentBlueprint.render_as_json(components, view: :associations) }
+      components: -> { ComponentBlueprint.render_as_json(paginated_components, view: :associations) },
+      pagination: -> { {
+        count: components.count,
+        **pagination_data(paginated_components)
+      } }
     }
   end
 
@@ -26,7 +32,9 @@ class ComponentsController < ApplicationController
 
   # GET /components/:id(.json)
   def show
-    render inertia: "Components/Show"
+    render inertia: "Components/Show", props: {
+      component: -> { ComponentBlueprint.render_as_json(component, view: :associations) }
+    }
   end
 
   # GET /components/new

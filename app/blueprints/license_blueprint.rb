@@ -19,18 +19,14 @@ class LicenseBlueprint < ApplicationBlueprint
          :updated_at
 
   field :cost do |license|
-    license.cost&.amount.to_f
+    license.cost&.amount.to_f if license.cost
   end
 
   view :associations do
-		# association :owner, blueprint: OwnershipBlueprint
-		# association :company, blueprint: CompanyBlueprint
 		association :department, blueprint: DepartmentBlueprint
 		association :assignments, blueprint: AssignmentBlueprint
-		# association :purchase, blueprint: PurchaseBlueprint
-		# association :fieldset_associations, blueprint: FieldsetBlueprint
-		# association :roles, blueprint: RoleBlueprint
-		# association :audits, blueprint: AuditBlueprint
+		association :purchase, blueprint: PurchaseBlueprint
+		association :audits, blueprint: AuditBlueprint
 		association :category, blueprint: CategoryBlueprint
 		association :vendor, blueprint: VendorBlueprint
 		association :manufacturer, blueprint: ManufacturerBlueprint

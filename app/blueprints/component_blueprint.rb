@@ -13,16 +13,13 @@ class ComponentBlueprint < ApplicationBlueprint
          :updated_at
 
   field :cost do |component|
-    component.cost&.amount.to_f
+    component.cost&.amount.to_f if component.cost
   end
 
   view :associations do
-    association :owner, blueprint: OwnershipBlueprint
-    association :company, blueprint: CompanyBlueprint
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint
     association :purchase, blueprint: PurchaseBlueprint
-    # association :fieldset_associations, blueprint: FieldAssociationBlueprint
     association :audits, blueprint: AuditBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint

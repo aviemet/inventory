@@ -3,8 +3,8 @@ import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import tw from 'twin.macro'
-import { AProps } from 'react-html-props'
 import { Popover, Option } from '@/Components/Popover'
+import { StickyLink, StickyTarget } from '@/Components/StickyContent/index'
 
 interface IShowItemProps {
 	item: Schema.Item
@@ -173,23 +173,3 @@ const Show = ({ item }: IShowItemProps) => {
 }
 
 export default Show
-
-interface IStickyLinkProps extends Omit<AProps, 'href'> {
-	section: string
-}
-
-const StickyLink = ({ children, section, ...props }: IStickyLinkProps) => {
-	return (
-		<a href={ `#${section}` } { ...props }>{ children }</a>
-	)
-}
-
-interface IStickyTarget {
-	id: string
-}
-
-const StickyTarget  = ({ id }: IStickyTarget) => {
-	return (
-		<a id={ id }></a>
-	)
-}
