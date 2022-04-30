@@ -11,15 +11,15 @@ interface IAccessoriesIndexProps {
 	pagination: Schema.Pagination
 }
 
-const Index = ({ accessories, pagination }: IAccessoriesIndexProps) => {
+const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) => {
 	return (
 		<>
 			<Head title="Accessories"></Head>
 
-			<section className="h-full flex flex-col">
+			<section className="flex flex-col h-full">
 				<Table.TableProvider selectable rows={ accessories } pagination={ pagination }>
 					<div className="flex justify-between">
-						<h1 className="inline-block align-text-top md:align-middle">Accessories</h1>
+						<h1 className="md:align-middle inline-block align-text-top">Accessories</h1>
 						<div>
 							<Table.SearchInput model="accessories" />
 							<Popover>
@@ -30,7 +30,7 @@ const Index = ({ accessories, pagination }: IAccessoriesIndexProps) => {
 						</div>
 					</div>
 
-					<div className="h-full scroll-content">
+					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>
 							<Table.Head>
 								<Table.Row>
@@ -92,4 +92,4 @@ const Index = ({ accessories, pagination }: IAccessoriesIndexProps) => {
 	)
 }
 
-export default Index
+export default AccessoriesIndex

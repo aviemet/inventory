@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Edit = () => {
+const EditAccessory = () => {
 	return (
-		<div>Edit</div>
+		<div>EditAccessory</div>
 	)
 }
 
-export default Edit
+export default EditAccessory

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Show = () => {
+const ShowAccessory = () => {
 	return (
-		<div>Show</div>
+		<div>ShowAccessory</div>
 	)
 }
 
-export default Show
+export default ShowAccessory

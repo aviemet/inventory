@@ -1,9 +1,9 @@
 import React from 'react'
 
-const New = () => {
+const NewAccessory = () => {
 	return (
-		<div>New</div>
+		<div>NewAccessory</div>
 	)
 }
 
-export default New
+export default NewAccessory

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Form = () => {
+const AccessoryForm = () => {
 	return (
-		<div>Form</div>
+		<div>AccessoryForm</div>
 	)
 }
 
-export default React.memo(Form)
+export default React.memo(AccessoryForm)
