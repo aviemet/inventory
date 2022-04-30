@@ -9,14 +9,24 @@ import tw, { styled } from 'twin.macro'
 export interface ISearchableDropdownProps extends InputProps {
 	options: Array<Record<string, any>>
 	defaultValue: string
-	getLabel: (option: Record<string, any>) => any
-	getValue: (option: Record<string, any>) => string
+	getLabel?: (option: Record<string, any>) => any
+	getValue?: (option: Record<string, any>) => string
 	onChange?: (option: Record<string, any>) => void
 	onOpen?: () => void
 	filterMatchKeys?: string[]
 }
 
-const SearchableDropdown = ({ options, src, defaultValue, getLabel, getValue, onChange, onOpen, filterMatchKeys, ...props }: ISearchableDropdownProps) => {
+const SearchableDropdown = ({
+	options,
+	src,
+	defaultValue,
+	getLabel = option => option.name,
+	getValue = option => String(option.id),
+	onChange,
+	onOpen,
+	filterMatchKeys,
+	...props
+}: ISearchableDropdownProps) => {
 	const getOption = (val: string) => options.find(option => String(getValue(option)) === val)
 
 	const defaultOption = getOption(defaultValue)

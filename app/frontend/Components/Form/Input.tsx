@@ -17,8 +17,6 @@ const FormInput = ({ label, name, model, onChange, type = 'text', id, required, 
 	const { data, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
 
-	console.log({ data, inputName })
-
 	return (
 		<Field
 			type={ type }

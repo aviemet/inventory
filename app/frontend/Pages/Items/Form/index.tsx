@@ -52,8 +52,6 @@ const ItemForm = ({ to, method = 'POST', item, models, vendors, locations }: IIt
 					name="model_id"
 					required
 					options={ models }
-					getLabel={ option => option.name }
-					getValue={ option => option.id }
 				/>
 
 				<Input name="serial" label="Serial" />
@@ -66,8 +64,6 @@ const ItemForm = ({ to, method = 'POST', item, models, vendors, locations }: IIt
 					label="Vendor"
 					name="vendor_id"
 					options={ vendors }
-					getLabel={ option => option.name }
-					getValue={ option => option.id }
 					filterMatchKeys={ ['name'] }
 				/>
 
@@ -81,8 +77,6 @@ const ItemForm = ({ to, method = 'POST', item, models, vendors, locations }: IIt
 					label="Default Location"
 					name="default_location_id"
 					options={ locations }
-					getLabel={ option => option.name }
-					getValue={ option => option.id }
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />
