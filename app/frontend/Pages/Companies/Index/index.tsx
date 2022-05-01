@@ -4,8 +4,7 @@ import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
-
+import { EditButton } from '@/Components/Button'
 interface CompanyWithCounts extends Schema.Company {
 	counts: {
 		locations: number
@@ -116,7 +115,7 @@ const Index = ({ companies, pagination }: ICompaniesIndexProps) => {
 										</Table.Cell>
 
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editCompany(company.slug) }><MdEdit /></Link>
+											<EditButton href={ Routes.editCompany(company.slug) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

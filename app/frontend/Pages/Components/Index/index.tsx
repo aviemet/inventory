@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface IComponentsIndexProps {
 	components: Schema.Item[]
@@ -80,7 +80,7 @@ const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 										<Table.Cell>{ component.qty }</Table.Cell>
 										<Table.Cell>{ component.min_qty }</Table.Cell>
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editComponent(component) }><MdEdit /></Link>
+											<EditButton as="button" href={ Routes.editComponent(component) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

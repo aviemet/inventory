@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface IModelsIndexProps {
 	models: Schema.Model[]
@@ -72,7 +72,7 @@ const ModelsIndex = ({ models, pagination }: IModelsIndexProps) => {
 										</Table.Cell>
 
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editModel(model.slug) }><MdEdit /></Link>
+											<EditButton href={ Routes.editModel(model.slug) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

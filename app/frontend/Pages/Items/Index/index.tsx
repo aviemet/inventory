@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface IItemsIndexProps {
 	items: Schema.Item[]
@@ -84,7 +84,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 											<Link href={ Routes.item(item) }>{ item.department?.name }</Link>
 										</Table.Cell>
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editItem(item) }><MdEdit /></Link>
+											<EditButton href={ Routes.editItem(item) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

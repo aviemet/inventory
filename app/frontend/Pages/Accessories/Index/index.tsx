@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface IAccessoriesIndexProps {
 	accessories: Schema.Accessory[]
@@ -78,7 +78,7 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 										<Table.Cell>{ accessory.qty }</Table.Cell>
 										<Table.Cell>{ accessory.min_qty }</Table.Cell>
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editAccessory(accessory) }><MdEdit /></Link>
+											<EditButton href={ Routes.editAccessory(accessory) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

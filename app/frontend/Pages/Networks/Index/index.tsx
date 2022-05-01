@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface INetworksIndexProps {
 	networks: Schema.Network[]
@@ -18,10 +18,10 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="h-full flex flex-col">
+			<section className="flex flex-col h-full">
 				<Table.TableProvider selectable rows={ networks } pagination={ pagination }>
-					<div className="flex justify-between networks-center">
-						<h1 className="inline-block align-text-top md:align-middle">{ title }</h1>
+					<div className="networks-center flex justify-between">
+						<h1 className="md:align-middle inline-block align-text-top">{ title }</h1>
 						<div>
 							<Table.SearchInput model="networks" />
 
@@ -69,7 +69,7 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 										<Link href={ Routes.network(network) }>{ network.vland_id }</Link>
 									</Table.Cell>
 									<Table.Cell className="table-column-fit text-right">
-										<Link as="button" href={ Routes.editNetwork(network) }><MdEdit /></Link>
+										<EditButton href={ Routes.editNetwork(network) } />
 									</Table.Cell>
 								</Table.Row>
 							) } />

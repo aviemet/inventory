@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface IManufacturersIndexProps {
 	manufacturers: Schema.Manufacturer[]
@@ -88,7 +88,7 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 										</Table.Cell>
 
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editManufacturer(manufacturer.slug) }><MdEdit /></Link>
+											<EditButton href={ Routes.editManufacturer(manufacturer.slug) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />
