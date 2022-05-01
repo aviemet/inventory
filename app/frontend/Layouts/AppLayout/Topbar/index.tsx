@@ -16,15 +16,21 @@ import ActiveCompanyDropdown from './ActiveCompanyDropdown'
 import { Option, Popover } from '@/Components/Popover'
 import tw, { styled } from 'twin.macro'
 import { Routes } from '@/lib'
+import { IconContext } from 'react-icons'
+import { useLayout } from '@/Providers'
 
 const Topbar = () => {
 	const { user } = useAuth()
+	const { layoutState, setLayoutState } = useLayout()
 
 	return (
-		<TopbarHeader id="topbar">
-			<div tw="flex">
-				<div tw="sm:hidden cursor-pointer">
-					<MenuBarsIcon id="topbar-menu-toggle" />
+		<IconContext.Provider value={ { size: '24px', className: 'react-icon' } }>
+			<TopbarHeader id="topbar"  tw="flex items-center">
+				<div
+					tw="sm:hidden cursor-pointer ml-1 mr-2"
+					onClick={ () => setLayoutState({ sidebarOpen: !layoutState.sidebarOpen }) }
+				>
+					<MenuBarsIcon />
 				</div>
 
 				<div tw="flex-1">
@@ -56,8 +62,8 @@ const Topbar = () => {
 						</Option>
 					</Popover>
 				</div>
-			</div>
-		</TopbarHeader>
+			</TopbarHeader>
+		</IconContext.Provider>
 	)
 }
 
@@ -67,8 +73,4 @@ const TopbarHeader = styled.header`
 	margin-bottom: 1px;
 
 	${tw`dark:bg-gray-600 px-2 py-1 bg-white shadow`}
-
-	#topbar-menu-toggle {
-		padding: 6px 37px 0 5px;
-	}
 `

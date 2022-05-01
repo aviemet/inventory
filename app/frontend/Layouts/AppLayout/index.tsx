@@ -3,20 +3,25 @@ import { useLayout } from '@/Providers'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
-import cx from 'classnames'
+import cn from 'classnames'
 import tw, { styled } from 'twin.macro'
+
+import './appLayout.css'
 
 const AppLayout = ({ children }) => {
 	const { layoutState } = useLayout()
 	return (
-		<AppWrapper className={ cx({ 'side-bar-closed': !layoutState.sidebarOpen }) }>
+		<div
+			id="grid-layout"
+			className={ cn({ 'side-bar-closed': !layoutState.sidebarOpen }) }
+		>
 			<Sidebar />
 			<Topbar />
 			<main id="content-wrapper" scroll-region="true">
 				{ children 	}
 			</main>
 			<Footer />
-		</AppWrapper>
+		</div>
 	)
 }
 
@@ -28,11 +33,22 @@ const AppWrapper = styled.div`
 	transition: var(--sidebar-transition-time);
 
 	grid-template-rows: var(--topbar-height) 1fr var(--footer-height);
-	grid-template-columns: var(--sidebar-width-open) 1fr;
-	grid-template-areas:
-		"sidebar topbar"
-		"sidebar content"
-		"sidebar footer";
+
+  /* Mobile Grid Definition */
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "topbar"
+    "content"
+    "footer";
+
+  /* Desktop Grid Definition */
+  @screen sm {
+		grid-template-columns: var(--sidebar-width-open) 1fr;
+		grid-template-areas:
+			"sidebar topbar"
+			"sidebar content"
+			"sidebar footer";
+	}
 
 	&.side-bar-closed {
 		grid-template-columns: var(--sidebar-width-closed) 1fr;

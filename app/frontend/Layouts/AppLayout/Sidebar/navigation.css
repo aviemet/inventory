@@ -1,10 +1,11 @@
 .links {
+  a {
+    @apply w-full inline-block;
+    @apply sm:block sm:w-auto;
+  }
+
   li {
     min-height: var(--sidebar-link-height);
-
-    /* a {
-      @apply h-full w-full inline-block sm:inline sm:w-auto;
-    } */
   }
 
   & > ul > li {
@@ -12,11 +13,15 @@
       var(--sidebar-link-height) - var(--sidebar-link-border-bottom)
     );
     padding-left: var(--sidebar-icon-left-padding);
-    position: relative;
-    @apply flex justify-start items-center;
+    @apply relative;
+    @apply sm:flex sm:justify-start sm:items-center;
 
     &:hover {
       @screen sm {
+        & {
+          border-width: 0 0 0 var(--sidebar-link-border-left);
+        }
+
         span {
           padding-left: calc(
             var(--sidebar-width-closed) - var(--sidebar-link-border-left)
@@ -27,12 +32,10 @@
       padding-left: calc(
         var(--sidebar-icon-left-padding) - var(--sidebar-link-border-left)
       );
-      border-width: 0 0 0 var(--sidebar-link-border-left);
       @apply bg-gray-100 dark:bg-gray-600;
 
       & > ul {
         @apply block bg-gray-100 shadow-sm;
-
         @apply sm:absolute;
 
         /* On Desktop set submenu to absolute position */
@@ -56,13 +59,11 @@
     }
 
     & > ul {
-      @apply block border-brand-light border-t-2;
-      padding-left: 3.7rem;
-
+      @apply block border-brand-light border-t-2 pl-8;
       @apply sm:hidden sm:absolute sm:pl-0;
+
         /* On Desktop hide submenus until h!over state */
       @screen sm {
-        /* @apply hidden absolute pl-0; */
         top: var(--sidebar-link-height);
         left: calc(
           var(--sidebar-width-closed) - var(--sidebar-link-border-left)
@@ -75,20 +76,18 @@
 
       & > li {
         @apply p-0;
-        line-height: calc(
-          var(--sidebar-link-height) - var(--sidebar-link-border-bottom)
-        );
+        line-height: calc(var(--sidebar-link-height) - var(--sidebar-link-border-bottom));
         border-bottom: var(--sidebar-link-border-bottom) solid
           map-get($colors, "secondary");
 
         a {
-          @apply block;
+          @apply block h-full;
           padding-left: var(--sidebar-link-padding-left);
         }
 
         &:hover {
           a {
-            padding-left: calc(var(--sidebar-link-padding-left) - 2px);
+            padding-left: calc(var(--sidebar-link-padding-left) - 3px);
           }
         }
       }
@@ -96,7 +95,7 @@
   }
 
   .react-icon {
-    @apply relative float-left transition-colors;
+    @apply relative inline-block transition-colors z-10;
   }
 
   span {
@@ -104,7 +103,6 @@
 
     /* On Desktop set link to absolute position */
     @screen sm {
-      /* @apply absolute w-full; */
       top: 0;
       left: 0;
       height: var(--sidebar-link-height);
