@@ -21,8 +21,8 @@ const Index = ({ consumables, pagination }: IConsumablesIndexProps) => {
 			<section className="flex flex-col h-full">
 				<Table.TableProvider selectable rows={ consumables } pagination={ pagination }>
 					<div className="flex items-center justify-between">
-						<h1 className="md:align-middle inline-block align-text-top">{ title }</h1>
-						<div>
+						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
+						<div className="md:flex-1 flex">
 							<Table.SearchInput model="consumables" />
 							<Popover>
 								<Option href={ Routes.newComponent() }>

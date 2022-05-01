@@ -1,14 +1,16 @@
 #sidebar {
 	@apply dark:bg-gray-600 left-0 z-50 w-screen h-screen bg-white shadow;
 	@apply sm:flex sm:flex-col sm:justify-between sm:w-auto sm:h-auto;
+  @apply fixed sm:static;
+
 	transition-property: left;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 150ms;
-
+/* 
 	a {
 		@apply w-full inline-block;
-		/* @apply sm:inline sm:w-auto; */
-	}
+		@apply sm:inline sm:w-auto;
+	} */
 
 	a, .react-icon {
 		@apply dark:text-white text-gray-700;
@@ -29,8 +31,7 @@
 	} 
 }
 
-
-#sidebar.side-bar-closed {
+.side-bar-closed #sidebar {
   @apply -left-full;
 
   .links {

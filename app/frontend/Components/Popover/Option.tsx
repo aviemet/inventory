@@ -10,7 +10,7 @@ const Option = ({ children, href, id, className, ...props }: IOptionProps) => {
 	if(href) {
 		return (
 			<Link
-				tw="block whitespace-nowrap w-full py-2 px-4 hover:bg-gray-100"
+				tw="block whitespace-nowrap w-full py-3 px-4 hover:bg-gray-100"
 				href={ href }
 				id={ id }
 				className={ className }

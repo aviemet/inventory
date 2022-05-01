@@ -1,7 +1,7 @@
 export {
 	MdDashboard as DashboardIcon,
-	MdImportantDevices as ItemsIcon,
-	MdSave as LicensesIcon,
+	MdDevices as ItemsIcon,
+	// MdSave as LicensesIcon,
 	MdPeople as PeopleIcon,
 	MdConfirmationNumber as TicketsIcon,
 	MdSettingsEthernet as NetworksIcon,
@@ -10,7 +10,7 @@ export {
 	MdSettings as SettingsIcon,
 	MdExitToApp as LogoutIcon,
 	MdWaterDrop as ConsumablesIcon,
-	MdMemory as ComponentsIcon,
+	// MdMemory as ComponentsIcon,
 	MdMenu as MenuBarsIcon,
 	MdMoreVert as MenuDotsIcon,
 	MdExpandMore as ExpandIcon,
@@ -22,6 +22,7 @@ export {
 
 export {
 	AiOutlinePlusCircle as PlusCircleIcon,
+	AiOutlineBarcode as AssetsIcon,
 } from 'react-icons/ai'
 
 
@@ -31,8 +32,17 @@ export {
 
 export {
 	IoTrashBinOutline as TrashIcon,
+	IoKey as LicensesIcon,
 } from 'react-icons/io5'
 
 export {
 	BsKeyboardFill as AccessoriesIcon
 } from 'react-icons/bs'
+
+export {
+	FaMemory as ComponentsIcon
+} from 'react-icons/fa'
+
+export {
+	RiFilePaperFill as ContractsIcon,
+} from 'react-icons/ri'

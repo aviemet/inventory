@@ -10,8 +10,8 @@ interface IMenuLinkProps {
 const MenuLink = ({ children, href, icon, ...props }: IMenuLinkProps) => {
 	return (
 		<Link href={ href } { ...props }>
-			<span>{ children }</span>
 			{ icon  }
+			<span>{ children }</span>
 		</Link>
 	)
 }

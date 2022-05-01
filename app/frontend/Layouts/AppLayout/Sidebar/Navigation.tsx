@@ -5,6 +5,7 @@ import { Link } from '@/Components'
 import {
 	MenuBarsIcon,
 	DashboardIcon,
+	AssetsIcon,
 	ItemsIcon,
 	LicensesIcon,
 	PeopleIcon,
@@ -14,6 +15,10 @@ import {
 	PurchasesIcon,
 	SettingsIcon,
 	LogoutIcon,
+	AccessoriesIcon,
+	ComponentsIcon,
+	ConsumablesIcon,
+	ContractsIcon,
 } from '@/Components/Icons'
 import { useLayout } from '@/Providers'
 import { IconContext } from 'react-icons'
@@ -24,6 +29,10 @@ import './navigation.css'
 const Navigation = () => {
 	const { layoutState, setLayoutState } = useLayout()
 
+	const handleNavClick = () => {
+		setLayoutState({ sidebarOpen: false })
+	}
+
 	return (
 		<IconContext.Provider value={ { size: '24px', className: 'react-icon' } }>
 			<div>
@@ -32,16 +41,16 @@ const Navigation = () => {
 					<MenuBarsIcon />
 				</MenuToggleButton>
 
-				<nav className="links">
+				<nav className="links" onClick={ handleNavClick }>
 					<ul>
 						<li><MenuLink href={ Routes.dashboard() } icon={ <DashboardIcon /> }>Dashboard</MenuLink></li>
 						<li>
-							<MenuLink href={ Routes.items() } icon={ <ItemsIcon /> }>Inventory</MenuLink>
+							<MenuLink href={ Routes.items() } icon={ <AssetsIcon /> }>Inventory</MenuLink>
 							<ul>
-								<li><Link href={ Routes.items() }>Hardware</Link></li>
-								<li><Link href={ Routes.accessories() }>Accessories</Link></li>
-								<li><Link href={ Routes.components() }>Components</Link></li>
-								<li><Link href={ Routes.consumables() }>Consumables</Link></li>
+								<li><Link href={ Routes.items() }><ItemsIcon />Hardware</Link></li>
+								<li><Link href={ Routes.accessories() }><AccessoriesIcon />Accessories</Link></li>
+								<li><Link href={ Routes.components() }><ComponentsIcon />Components</Link></li>
+								<li><Link href={ Routes.consumables() }><ConsumablesIcon />Consumables</Link></li>
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.licenses() } icon={ <LicensesIcon /> }>Licenses</MenuLink></li>
@@ -51,7 +60,7 @@ const Navigation = () => {
 						<li>
 							<MenuLink href={ Routes.vendors() } icon={ <VendorsIcon /> }>Vendors</MenuLink>
 							<ul>
-								<li><Link href={ Routes.contracts() }>Contracts</Link></li>
+								<li><Link href={ Routes.contracts() }><ContractsIcon />Contracts</Link></li>
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.orders() } icon={ <PurchasesIcon /> }>Purchasing</MenuLink></li>
@@ -60,7 +69,7 @@ const Navigation = () => {
 			</div>
 
 			<div>
-				<div className="links">
+				<div className="links" onClick={ handleNavClick }>
 					<ul>
 						<li>
 							<MenuLink href={ Routes.settings() } icon={ <SettingsIcon /> }>Settings</MenuLink>
@@ -89,9 +98,5 @@ const MenuToggleButton = styled.div`
 
 	&:hover {
 		border-width: 0 0 0 var(--sidebar-link-border-left);
-/* 
-		.react-icon {
-			${tw`dark:text-white text-gray-600`}
-		} */
 	}
 `
