@@ -1,12 +1,15 @@
 import React from 'react'
 import { Link } from '@/Components'
 import {
+	MenuBarsIcon,
+	PlusCircleIcon,
 	ItemsIcon,
 	LicensesIcon,
 	PeopleIcon,
 	TicketsIcon,
-	MenuBarsIcon,
-	PlusCircleIcon,
+	AccessoriesIcon,
+	ComponentsIcon,
+	ConsumablesIcon,
 } from '@/Components/Icons'
 import { useAuth } from '@/Providers'
 import ActiveCompanyDropdown from './ActiveCompanyDropdown'
@@ -30,26 +33,26 @@ const Topbar = () => {
 
 				<div>
 					<Popover icon={ PlusCircleIcon }>
-						<Option>
-							<Link href={ Routes.newItem() }><ItemsIcon />New Item</Link>
+						<Option href={ Routes.newItem() }>
+							<ItemsIcon />New Item
 						</Option>
-						<Option>
-							<Link href={ Routes.newAccessory() }>New Accessory</Link>
+						<Option href={ Routes.newAccessory() }>
+							<AccessoriesIcon />New Accessory
 						</Option>
-						<Option>
-							<Link href={ Routes.newComponent() }>New Component</Link>
+						<Option href={ Routes.newComponent() }>
+							<ComponentsIcon />New Component
 						</Option>
-						<Option>
-							<Link href={ Routes.newConsumable() }>New Consumable</Link>
+						<Option href={ Routes.newConsumable() }>
+							<ConsumablesIcon />New Consumable
 						</Option>
-						<Option>
-							<Link href={ Routes.newLicense() }><LicensesIcon />New License</Link>
+						<Option href={ Routes.newLicense() }>
+							<LicensesIcon />New License
 						</Option>
-						<Option>
-							<Link href={ Routes.newPerson() }><PeopleIcon />New Person</Link>
+						<Option href={ Routes.newPerson() }>
+							<PeopleIcon />New Person
 						</Option>
-						<Option>
-							<Link href={ '#'/*Routes.newTicket()*/ }><TicketsIcon />New Ticket</Link>
+						<Option href={ '#'/*Routes.newTicket()*/ }>
+							<TicketsIcon />New Ticket
 						</Option>
 					</Popover>
 				</div>

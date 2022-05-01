@@ -41,8 +41,8 @@ const Index = ({ companies, pagination }: ICompaniesIndexProps) => {
 							<Table.SearchInput model="items" />
 
 							<Popover>
-								<Option>
-									<Link href={ Routes.newItem() } key="new_company">Create New Company</Link>
+								<Option href={ Routes.newItem() }>
+									Create New Company
 								</Option>
 							</Popover>
 

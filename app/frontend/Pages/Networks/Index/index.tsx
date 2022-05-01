@@ -26,8 +26,8 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 							<Table.SearchInput model="networks" />
 
 							<Popover>
-								<Option>
-									<Link href={ Routes.newNetwork() } key="new_asset">Create New Network</Link>
+								<Option href={ Routes.newNetwork() }>
+									Create New Network
 								</Option>
 							</Popover>
 

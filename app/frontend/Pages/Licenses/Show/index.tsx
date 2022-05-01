@@ -19,16 +19,16 @@ const ShowLicense = ({ license }) => {
 					<div>
 						<Popover>
 							{ license.assignments ?
-								<Option>
-									<Link href={ Routes.checkinLicense(license) }>Checkin License</Link>
+								<Option href={ Routes.checkinLicense(license) }>
+									Checkin License
 								</Option>
 								:
-								<Option>
-									<Link href={ Routes.checkoutLicense(license) }>Checkout License</Link>
+								<Option href={ Routes.checkoutLicense(license) }>
+									Checkout License
 								</Option>
 							}
-							<Option>
-								<Link href={ Routes.editLicense(license) }>Edit License</Link>
+							<Option href={ Routes.editLicense(license) }>
+								Edit License
 							</Option>
 						</Popover>
 					</div>

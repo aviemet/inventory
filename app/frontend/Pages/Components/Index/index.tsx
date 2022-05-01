@@ -25,8 +25,8 @@ const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 						<div>
 							<Table.SearchInput model="components" />
 							<Popover>
-								<Option>
-									<Link href={ Routes.newComponent() }>New Component</Link>
+								<Option href={ Routes.newComponent() }>
+									New Component
 								</Option>
 							</Popover>
 						</div>

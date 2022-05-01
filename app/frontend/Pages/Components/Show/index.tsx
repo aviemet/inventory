@@ -19,16 +19,16 @@ const ShowComponent = ({ component }) => {
 					<div>
 						<Popover>
 							{ component.assignments ?
-								<Option>
-									<Link href={ Routes.checkinComponent(component) }>Checkin Component</Link>
+								<Option href={ Routes.checkinComponent(component) }>
+									Checkin Component
 								</Option>
 								:
-								<Option>
-									<Link href={ Routes.checkoutComponent(component) }>Checkout Component</Link>
+								<Option href={ Routes.checkoutComponent(component) }>
+									Checkout Component
 								</Option>
 							}
-							<Option>
-								<Link href={ Routes.editComponent(component) }>Edit Component</Link>
+							<Option href={ Routes.editComponent(component) }>
+								Edit Component
 							</Option>
 						</Popover>
 					</div>

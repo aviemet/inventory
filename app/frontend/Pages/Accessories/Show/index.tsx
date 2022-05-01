@@ -19,16 +19,16 @@ const ShowAccessory = ({ accessory }) => {
 					<div>
 						<Popover>
 							{ accessory.assignments ?
-								<Option>
-									<Link href={ Routes.checkinAccessory(accessory) }>Checkin Accessory</Link>
+								<Option href={ Routes.checkinAccessory(accessory) }>
+									Checkin Accessory
 								</Option>
 								:
-								<Option>
-									<Link href={ Routes.checkoutAccessory(accessory) }>Checkout Accessory</Link>
+								<Option href={ Routes.checkoutAccessory(accessory) }>
+									Checkout Accessory
 								</Option>
 							}
-							<Option>
-								<Link href={ Routes.editAccessory(accessory) }>Edit Accessory</Link>
+							<Option href={ Routes.editAccessory(accessory) }>
+								Edit Accessory
 							</Option>
 						</Popover>
 					</div>

@@ -27,8 +27,8 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 
 							<div className="inline-block">
 								<Popover>
-									<Option>
-										<Link href={ Routes.newPerson() } key="new_person">Add New Manufacturer</Link>
+									<Option href={ Routes.newPerson() }>
+										Add New Manufacturer
 									</Option>
 								</Popover>
 							</div>

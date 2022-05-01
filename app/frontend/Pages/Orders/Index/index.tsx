@@ -29,8 +29,8 @@ const OrdersIndex = ({ orders, pagination }: IOrdersIndexProps) => {
 
 							<div className="inline-block">
 								<Popover>
-									<Option>
-										<Link href={ Routes.newPerson() } key="new_person">Start New Order</Link>
+									<Option href={ Routes.newPerson() }>
+										Start New Order
 									</Option>
 								</Popover>
 							</div>
