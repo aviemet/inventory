@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface ILicensesIndexProps {
 	licenses: Schema.License[]
@@ -90,7 +90,7 @@ const Index = ({ licenses, pagination }: ILicensesIndexProps ) => {
 											<Link href={ Routes.license(license) }>{ license.manufacturer?.name }</Link>
 										</Table.Cell>
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editLicense(license) }><MdEdit /></Link>
+											<EditButton href={ Routes.editLicense(license) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

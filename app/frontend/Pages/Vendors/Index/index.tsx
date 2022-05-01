@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface IVendorsIndexProps {
 	vendors: Schema.Vendor[]
@@ -86,7 +86,7 @@ const VendorsIndex = ({ vendors, pagination }: IVendorsIndexProps) => {
 										</Table.Cell>
 
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editVendor(vendor) }><MdEdit /></Link>
+											<EditButton href={ Routes.editVendor(vendor) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

@@ -1,10 +1,18 @@
 import React from 'react'
-import { SearchableDropdown } from '@/Components/Inputs'
-import { MdMenu } from 'react-icons/md'
+import { Link } from '@/Components'
+import {
+	ItemsIcon,
+	LicensesIcon,
+	PeopleIcon,
+	TicketsIcon,
+	MenuBarsIcon,
+	PlusCircleIcon,
+} from '@/Components/Icons'
 import { useAuth } from '@/Providers'
 import ActiveCompanyDropdown from './ActiveCompanyDropdown'
-import { Popover } from '@/Components/Popover'
+import { Option, Popover } from '@/Components/Popover'
 import tw, { styled } from 'twin.macro'
+import { Routes } from '@/lib'
 
 const Topbar = () => {
 	const { user } = useAuth()
@@ -13,11 +21,37 @@ const Topbar = () => {
 		<TopbarHeader id="topbar">
 			<div tw="flex">
 				<div tw="sm:hidden cursor-pointer">
-					<MdMenu id="topbar-menu-toggle" />
+					<MenuBarsIcon id="topbar-menu-toggle" />
 				</div>
 
 				<div tw="flex-1">
 					<ActiveCompanyDropdown user={ user } />
+				</div>
+
+				<div>
+					<Popover icon={ PlusCircleIcon }>
+						<Option>
+							<Link href={ Routes.newItem() }><ItemsIcon />New Item</Link>
+						</Option>
+						<Option>
+							<Link href={ Routes.newAccessory() }>New Accessory</Link>
+						</Option>
+						<Option>
+							<Link href={ Routes.newComponent() }>New Component</Link>
+						</Option>
+						<Option>
+							<Link href={ Routes.newConsumable() }>New Consumable</Link>
+						</Option>
+						<Option>
+							<Link href={ Routes.newLicense() }><LicensesIcon />New License</Link>
+						</Option>
+						<Option>
+							<Link href={ Routes.newPerson() }><PeopleIcon />New Person</Link>
+						</Option>
+						<Option>
+							<Link href={ '#'/*Routes.newTicket()*/ }><TicketsIcon />New Ticket</Link>
+						</Option>
+					</Popover>
 				</div>
 			</div>
 		</TopbarHeader>

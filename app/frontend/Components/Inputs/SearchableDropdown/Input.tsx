@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { MdExpandMore } from 'react-icons/md'
+import { ExpandIcon } from '@/Components/Icons'
 import { InputProps } from 'react-html-props'
 import tw, { styled } from 'twin.macro'
 
@@ -28,7 +28,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownInput
 					tw="cursor-pointer m-0 py-1 pl-2 focus:border-brand"
 				/>
 				<div className="expand-icon" tw="cursor-pointer flex items-center" onClick={ () => { if(open) handleClose() } }>
-					<MdExpandMore tw="w-6" />
+					<ExpandIcon tw="w-6" />
 				</div>
 			</SelectorComponent>
 		</>

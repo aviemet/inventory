@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface IPeopleIndexProps {
 	people: Schema.Person[]
@@ -92,7 +92,7 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 										</Table.Cell>
 
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editPerson(person) }><MdEdit /></Link>
+											<EditButton href={ Routes.editPerson(person) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

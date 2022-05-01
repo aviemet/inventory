@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface IContractsIndexProps {
 	contracts: Schema.Contract[]
@@ -82,7 +82,7 @@ const ContractsIndex = ({ contracts, pagination }: IContractsIndexProps) => {
 										</Table.Cell>
 
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editContract(contract) }><MdEdit /></Link>
+											<EditButton as="button" href={ Routes.editContract(contract) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

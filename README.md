@@ -165,6 +165,10 @@ Growing Rails Applications in Practice
 
 ## Conventions
 
+### Icons
+
+In order to de-couple 3rd pary libraries from the project, Icons should be named and exported in `Components/Icons/index.tsx` for use in the rest of the site. This makes it very easy to change which icon is used for a particular purpose.
+
 ## Dev Notes
 
 The main difference between an Item and an Accessory or Consumable is that an Item does not have a quantity field. Accessories and Consumables describe items with an inventory level which can be increased through a purchase or manual adjustment. Accessories represent items which generally accompany an asset such as mice (mouses?) and keyboards and can be returned after use. Consumables represent items which disappear after use such as paper or toner.

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Divider = () => {
 	return (
-		<hr className="w-full pt-2 pb-2 text-gray-400 h-1 self-stretch" />
+		<hr className="self-stretch w-full h-1 pt-2 pb-2 text-gray-400" />
 	)
 }
 

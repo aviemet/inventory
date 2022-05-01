@@ -1,7 +1,7 @@
 import React from 'react'
 import normalizeUrl from 'normalize-url'
 import { AProps } from 'react-html-props'
-import { BiLinkExternal } from 'react-icons/bi'
+import { ExternalLinkIcon } from '@/Components/Icons'
 import { styled } from 'twin.macro'
 
 interface IExternalLinkProps extends Omit<AProps, 'href'> {
@@ -15,7 +15,7 @@ const ExternalLink = ({ children, href, as, ...props }: IExternalLinkProps) => {
 	return (
 		<LinkComponent href={ url } target="_blank" rel="noreferrer">
 			{ children }
-			<BiLinkExternal className="external" />
+			<ExternalLinkIcon className="external" />
 		</LinkComponent>
 	)
 }

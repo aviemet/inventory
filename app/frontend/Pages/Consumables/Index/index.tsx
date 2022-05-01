@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
-import { MdEdit } from 'react-icons/md'
+import { EditButton } from '@/Components/Button'
 
 interface IConsumablesIndexProps {
 	consumables: Schema.Consumable[]
@@ -18,10 +18,10 @@ const Index = ({ consumables, pagination }: IConsumablesIndexProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="h-full flex flex-col">
+			<section className="flex flex-col h-full">
 				<Table.TableProvider selectable rows={ consumables } pagination={ pagination }>
-					<div className="flex justify-between items-center">
-						<h1 className="inline-block align-text-top md:align-middle">{ title }</h1>
+					<div className="flex items-center justify-between">
+						<h1 className="md:align-middle inline-block align-text-top">{ title }</h1>
 						<div>
 							<Table.SearchInput model="consumables" />
 							<Popover>
@@ -32,7 +32,7 @@ const Index = ({ consumables, pagination }: IConsumablesIndexProps) => {
 						</div>
 					</div>
 
-					<div className="h-full scroll-content">
+					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>
 							<Table.Head>
 								<Table.Row>
@@ -80,7 +80,7 @@ const Index = ({ consumables, pagination }: IConsumablesIndexProps) => {
 										<Table.Cell>{ consumable.qty }</Table.Cell>
 										<Table.Cell>{ consumable.min_qty }</Table.Cell>
 										<Table.Cell className="table-column-fit text-right">
-											<Link as="button" href={ Routes.editConsumable(consumable) }><MdEdit /></Link>
+											<EditButton as="button" href={ Routes.editConsumable(consumable) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />
