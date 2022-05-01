@@ -26,8 +26,8 @@ const Index = ({ licenses, pagination }: ILicensesIndexProps ) => {
 							<Table.SearchInput model="license" />
 							<div className="inline-block">
 								<Popover>
-									<Option>
-										<Link href={ Routes.newLicense() } key="new_license">Add New License</Link>
+									<Option href={ Routes.newLicense() }>
+										Add New License
 									</Option>
 								</Popover>
 							</div>

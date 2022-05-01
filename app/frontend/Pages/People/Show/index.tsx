@@ -23,8 +23,8 @@ const Show = ({ person }: IShowPersonProps) => {
 
 					<div>
 						<Popover>
-							<Option>
-								<Link href={ Routes.editPerson(person) }>Edit Person</Link>
+							<Option href={ Routes.editPerson(person) }>
+								Edit Person
 							</Option>
 						</Popover>
 					</div>

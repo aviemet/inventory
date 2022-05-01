@@ -18,7 +18,6 @@ interface IShowNetworkProps {
 const Show = ({ network, ips }: IShowNetworkProps) => {
 	const title = 'Edit Network'
 	const tableRows = 3
-	console.log({ network, ips })
 
 	return (
 		<>
@@ -28,10 +27,10 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 				<section>
 					<h1 className="inline-block">{ network.name }</h1>
 
-					<div className="float-right inline-block">
+					<div className="inline-block float-right">
 						<Popover>
-							<Option>
-								<Link href={ Routes.editNetwork(network) }>{ title }</Link>
+							<Option href={ Routes.editNetwork(network) }>
+								{ title }
 							</Option>
 						</Popover>
 					</div>

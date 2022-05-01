@@ -25,8 +25,8 @@ const Index = ({ consumables, pagination }: IConsumablesIndexProps) => {
 						<div>
 							<Table.SearchInput model="consumables" />
 							<Popover>
-								<Option>
-									<Link href={ Routes.newComponent() }>New Consumable</Link>
+								<Option href={ Routes.newComponent() }>
+									New Consumable
 								</Option>
 							</Popover>
 						</div>

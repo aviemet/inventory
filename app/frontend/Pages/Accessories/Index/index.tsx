@@ -12,19 +12,20 @@ interface IAccessoriesIndexProps {
 }
 
 const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) => {
+	const title = 'Accessories'
 	return (
 		<>
-			<Head title="Accessories"></Head>
+			<Head title={ title }></Head>
 
 			<section className="flex flex-col h-full">
 				<Table.TableProvider selectable rows={ accessories } pagination={ pagination }>
-					<div className="flex justify-between">
-						<h1 className="md:align-middle inline-block align-text-top">Accessories</h1>
-						<div>
+					<div className="flex items-center justify-between">
+						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
+						<div className="md:flex-1 flex">
 							<Table.SearchInput model="accessories" />
 							<Popover>
-								<Option>
-									<Link href={ Routes.newAccessory() }>New Accessory</Link>
+								<Option href={ Routes.newAccessory() }>
+									New Accessory
 								</Option>
 							</Popover>
 						</div>

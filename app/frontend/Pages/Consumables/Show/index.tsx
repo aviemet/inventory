@@ -19,16 +19,16 @@ const ShowConsumable = ({ consumable }) => {
 					<div>
 						<Popover>
 							{ consumable.assignments ?
-								<Option>
-									<Link href={ Routes.checkinConsumable(consumable) }>Checkin Consumable</Link>
+								<Option href={ Routes.checkinConsumable(consumable) }>
+									Checkin Consumable
 								</Option>
 								:
-								<Option>
-									<Link href={ Routes.checkoutConsumable(consumable) }>Checkout Consumable</Link>
+								<Option href={ Routes.checkoutConsumable(consumable) }>
+									Checkout Consumable
 								</Option>
 							}
-							<Option>
-								<Link href={ Routes.editConsumable(consumable) }>Edit Consumable</Link>
+							<Option href={ Routes.editConsumable(consumable) }>
+								Edit Consumable
 							</Option>
 						</Popover>
 					</div>

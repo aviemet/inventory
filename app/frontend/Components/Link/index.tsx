@@ -4,7 +4,7 @@ import { type Method, type Visit } from '@inertiajs/inertia'
 import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
 
-interface LinkProps extends InertiaLinkProps {
+export interface LinkProps extends InertiaLinkProps {
 	method?: Method
 	visit?: Omit<Visit, 'method'>
 	external?: boolean

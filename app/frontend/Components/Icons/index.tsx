@@ -9,6 +9,8 @@ export {
 	MdShoppingCart as PurchasesIcon,
 	MdSettings as SettingsIcon,
 	MdExitToApp as LogoutIcon,
+	MdWaterDrop as ConsumablesIcon,
+	MdMemory as ComponentsIcon,
 	MdMenu as MenuBarsIcon,
 	MdMoreVert as MenuDotsIcon,
 	MdExpandMore as ExpandIcon,
@@ -30,3 +32,7 @@ export {
 export {
 	IoTrashBinOutline as TrashIcon,
 } from 'react-icons/io5'
+
+export {
+	BsKeyboardFill as AccessoriesIcon
+} from 'react-icons/bs'

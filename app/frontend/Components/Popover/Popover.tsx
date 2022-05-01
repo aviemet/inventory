@@ -41,7 +41,7 @@ const Popover = ({ children, width = 24, icon, ...props }: IPopoverProps) => {
 			<Icon />
 			<div
 				className={ cx({ 'visually-hidden': !visible }) }
-				tw="absolute right-0 bg-white border-gray-300 border rounded z-50 shadow px-2"
+				tw="absolute right-0 bg-white border-gray-300 border rounded z-50 shadow p-0"
 			>
 				{ children }
 			</div>

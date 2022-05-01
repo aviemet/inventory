@@ -27,8 +27,8 @@ const ModelsIndex = ({ models, pagination }: IModelsIndexProps) => {
 
 							<div className="inline-block">
 								<Popover>
-									<Option>
-										<Link href={ Routes.newPerson() } key="new_person">Add New Model</Link>
+									<Option href={ Routes.newPerson() }>
+										Add New Model
 									</Option>
 								</Popover>
 							</div>

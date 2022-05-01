@@ -27,8 +27,8 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 
 							<div className="inline-block">
 								<Popover>
-									<Option>
-										<Link href={ Routes.newPerson() } key="new_person">Add New Person</Link>
+									<Option href={ Routes.newPerson() }>
+										Add New Person
 									</Option>
 								</Popover>
 							</div>

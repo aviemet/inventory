@@ -27,8 +27,8 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 
 							<div className="inline-block">
 								<Popover>
-									<Option>
-										<Link href={ Routes.newItem() } key="new_asset">Create New Asset</Link>
+									<Option href={ Routes.newItem() }>
+										Create New Asset
 									</Option>
 								</Popover>
 							</div>
