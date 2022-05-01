@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   before_action :set_view_data, only: [:index, :category]
 
   expose :people, -> { @active_company.people.includes_associated }
-  expose :person, -> { @active_company.people.find_by_slug params[:slug] }
+  expose :person
   expose :departments, -> { @active_company.departments }
 
   # GET /people
@@ -27,7 +27,9 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
-    render inertia: "People/Show"
+    render inertia: "People/Show", props: {
+      person: PersonBlueprint.render_as_json(person, view: :associations)
+    }
   end
 
   # GET /people/new
