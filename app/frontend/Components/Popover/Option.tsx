@@ -4,9 +4,14 @@ import Link, { type LinkProps } from '@/Components/Link'
 
 interface IOptionProps extends Omit<LinkProps, 'href'> {
 	href?: string
+	bubble?: boolean
 }
 
-const Option = ({ children, href, id, className, ...props }: IOptionProps) => {
+const Option = ({ children, href, id, className, bubble = true, ...props }: IOptionProps) => {
+	const handleBubble = e => {
+		if(!bubble) e.stopPropagation()
+	}
+
 	if(href) {
 		return (
 			<Link
@@ -14,6 +19,7 @@ const Option = ({ children, href, id, className, ...props }: IOptionProps) => {
 				href={ href }
 				id={ id }
 				className={ className }
+				onClick={ handleBubble }
 				{ ...props }
 			>
 				{ children }
@@ -26,6 +32,7 @@ const Option = ({ children, href, id, className, ...props }: IOptionProps) => {
 			tw="whitespace-nowrap w-full py-2 px-4 hover:bg-gray-100"
 			id={ id }
 			className={ className }
+			onClick={ handleBubble }
 		>
 			{ children }
 		</div>

@@ -21,13 +21,16 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 				<Table.TableProvider selectable rows={ accessories } pagination={ pagination }>
 					<div className="flex items-center justify-between">
 						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
-						<div className="md:flex-1 flex">
+						<div className="md:flex-1 flex w-10 p-1">
 							<Table.SearchInput model="accessories" />
-							<Popover>
-								<Option href={ Routes.newAccessory() }>
-									New Accessory
-								</Option>
-							</Popover>
+
+							<div className="inline-block w-10 p-1">
+								<Popover>
+									<Option href={ Routes.newAccessory() }>
+										New Accessory
+									</Option>
+								</Popover>
+							</div>
 						</div>
 					</div>
 

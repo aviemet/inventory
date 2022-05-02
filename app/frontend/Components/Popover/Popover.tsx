@@ -32,8 +32,8 @@ const Popover = ({ children, width = 24, icon, ...props }: IPopoverProps) => {
 
 	return (
 		<PopoverComponent
-			tw="relative inline-block m-2 cursor-pointer"
-			style={ { width: `${width}px`, height: `${width}px` } }
+			id="POPOVER"
+			tw="relative inline-block cursor-pointer h-full w-full"
 			onClick={ handleToggle }
 			ref={ outerElRef }
 			{ ...props }
@@ -41,7 +41,7 @@ const Popover = ({ children, width = 24, icon, ...props }: IPopoverProps) => {
 			<Icon />
 			<div
 				className={ cx({ 'visually-hidden': !visible }) }
-				tw="absolute right-0 bg-white border-gray-300 border rounded z-50 shadow p-0"
+				tw="absolute right-0 bg-white border-gray-300 border rounded z-50 shadow p-0 mt-1"
 			>
 				{ children }
 			</div>

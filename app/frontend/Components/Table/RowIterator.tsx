@@ -4,8 +4,8 @@ import Row from './Row'
 import cx from 'classnames'
 
 const RowIterator = ({ render }) => {
-	const { tableState: { selected, rows } } = useTableContext()
-
+	const { tableState: { selected, rows, columns } } = useTableContext()
+	console.log({ columns })
 	if(!rows || rows.length === 0) {
 		return <Row />
 	}

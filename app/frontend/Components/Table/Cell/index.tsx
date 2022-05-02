@@ -8,14 +8,15 @@ export interface ICellProps extends TDProps {
 	checkbox?: boolean
 	sort?: string
 	nowrap?: boolean
+	hideable?: boolean
 }
 
-const RenderedCell = ({ children, ...props }: ICellProps) => {
+const RenderedCell = ({ children, hideable = true, ...props }: ICellProps) => {
 	const { section } = useTableSectionContext()
 
 	const CellComponent = section === 'head' ? HeadCell : BodyCell
 
-	return <CellComponent { ...props }>{ children }</CellComponent>
+	return <CellComponent hideable={ hideable } { ...props }>{ children }</CellComponent>
 }
 
 export default RenderedCell

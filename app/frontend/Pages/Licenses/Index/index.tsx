@@ -24,7 +24,7 @@ const Index = ({ licenses, pagination }: ILicensesIndexProps ) => {
 						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
 						<div className="md:flex-1 flex">
 							<Table.SearchInput model="license" />
-							<div className="inline-block">
+							<div className="inline-block w-10 p-1">
 								<Popover>
 									<Option href={ Routes.newLicense() }>
 										Add New License

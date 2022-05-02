@@ -24,11 +24,14 @@ const Index = ({ consumables, pagination }: IConsumablesIndexProps) => {
 						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
 						<div className="md:flex-1 flex">
 							<Table.SearchInput model="consumables" />
-							<Popover>
-								<Option href={ Routes.newComponent() }>
+
+							<div className="inline-block w-10 p-1">
+								<Popover>
+									<Option href={ Routes.newComponent() }>
 									New Consumable
-								</Option>
-							</Popover>
+									</Option>
+								</Popover>
+							</div>
 						</div>
 					</div>
 

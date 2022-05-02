@@ -25,7 +25,7 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 						<div className="md:flex-1 flex">
 							<Table.SearchInput model="items" />
 
-							<div className="inline-block">
+							<div className="inline-block w-10 p-1">
 								<Popover>
 									<Option href={ Routes.newPerson() }>
 										Add New Manufacturer

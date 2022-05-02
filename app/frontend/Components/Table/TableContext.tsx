@@ -18,6 +18,7 @@ interface ITableSettings {
 	selectable: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
+	columns: Set<string>
 	selected: Set<string>
 }
 
@@ -45,6 +46,7 @@ const TableProvider = ({ children, selectable = false, pagination, rows = [] }: 
 	const [tableState, setTableState] = useReducer(tableReducer, {
 		selectable,
 		rows,
+		columns: new Set<string>(),
 		pagination,
 		selected: new Set<string>(),
 	})
