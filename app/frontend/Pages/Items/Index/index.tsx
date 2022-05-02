@@ -5,6 +5,11 @@ import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
 import { EditButton } from '@/Components/Button'
+import { useAuth } from '@/Providers'
+import {
+	TableSection,
+	TableTitleSection,
+} from '@/Components/Layout/IndexPageComponents'
 
 interface IItemsIndexProps {
 	items: Schema.Item[]
@@ -13,34 +18,32 @@ interface IItemsIndexProps {
 
 const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 	const title = 'Hardware Assets'
+	const { user } = useAuth()
 
 	return (
 		<>
 			<Head title={ title }></Head>
 
-			<section className="flex flex-col h-full">
+			<TableSection>
 				<Table.TableProvider selectable rows={ items } pagination={ pagination }>
-					<div className="flex items-center justify-between">
-						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
-						<div className="md:flex-1 flex">
-							<Table.SearchInput model="items" />
 
-							<div className="inline-block">
-								<Popover>
-									<Option href={ Routes.newItem() }>
-										Create New Asset
-									</Option>
-								</Popover>
-							</div>
-
-						</div>
-					</div>
+					<TableTitleSection
+						title={ title }
+						model="items"
+						popover={
+							<Popover>
+								<Option href={ Routes.newItem() }>
+									Create New Asset
+								</Option>
+							</Popover>
+						}
+					/>
 
 					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>
 							<Table.Head>
 								<Table.Row>
-									<Table.Cell sort="name">Name</Table.Cell>
+									<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 									<Table.Cell sort="models.name">Model</Table.Cell>
 									<Table.Cell sort="asset_tag">Asset Tag</Table.Cell>
 									<Table.Cell sort="serial">Serial</Table.Cell>
@@ -93,7 +96,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 					</div>
 					<Table.Pagination />
 				</Table.TableProvider>
-			</section>
+			</TableSection>
 		</>
 	)
 }

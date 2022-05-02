@@ -40,11 +40,13 @@ const Index = ({ companies, pagination }: ICompaniesIndexProps) => {
 						<div className="md:flex-1 flex">
 							<Table.SearchInput model="items" />
 
-							<Popover>
-								<Option href={ Routes.newItem() }>
+							<div className="inline-block w-10 p-1">
+								<Popover>
+									<Option href={ Routes.newItem() }>
 									Create New Company
-								</Option>
-							</Popover>
+									</Option>
+								</Popover>
+							</div>
 
 						</div>
 					</div>

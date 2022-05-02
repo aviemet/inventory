@@ -20,16 +20,18 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 
 			<section className="flex flex-col h-full">
 				<Table.TableProvider selectable rows={ networks } pagination={ pagination }>
-					<div className="networks-center flex justify-between">
-						<h1 className="md:align-middle inline-block align-text-top">{ title }</h1>
-						<div>
+					<div className="flex items-center justify-between">
+						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
+						<div className="md:flex-1 flex">
 							<Table.SearchInput model="networks" />
 
-							<Popover>
-								<Option href={ Routes.newNetwork() }>
+							<div className="inline-block w-10 p-1">
+								<Popover>
+									<Option href={ Routes.newNetwork() }>
 									Create New Network
-								</Option>
-							</Popover>
+									</Option>
+								</Popover>
+							</div>
 
 						</div>
 					</div>

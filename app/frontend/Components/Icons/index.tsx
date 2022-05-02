@@ -17,6 +17,8 @@ export {
 	MdEdit as EditIcon,
 	MdOutlineAssignmentTurnedIn as CheckoutIcon,
 	MdOutlineAssignmentReturned as CheckinIcon,
+	MdOutlineSearch as SearchIcon,
+	MdViewColumn as ColumnsIcon,
 } from 'react-icons/md'
 
 
@@ -46,3 +48,7 @@ export {
 export {
 	RiFilePaperFill as ContractsIcon,
 } from 'react-icons/ri'
+
+export {
+	TiDeleteOutline as CrossIcon,
+} from 'react-icons/ti'
