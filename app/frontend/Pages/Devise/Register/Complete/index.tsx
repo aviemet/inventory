@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Input, Checkbox, Submit } from '@/Components/Form'
-import HoverLink from '../HoverLink'
+import HoverLink from '../../HoverLink'
 import { Routes } from '@/lib'
 import { Tile } from '@/Components'
 import tw, { styled } from 'twin.macro'
@@ -11,7 +11,7 @@ type TRegisterFormData = {
 	password_confirmation: string
 }
 
-const Register = () => {
+const CompleteRegistration = () => {
 	const defaultData: TRegisterFormData = {
 		email: '',
 		password: '',
@@ -19,31 +19,31 @@ const Register = () => {
 	}
 
 	const handleSubmit = ({ transform }) => {
-		transform(data => ({ user: data }))
+
 	}
 
 	return (
 		<Tile.Container>
-			<Form model="user" data={ defaultData } to={ Routes.userRegistration() } onSubmit={ handleSubmit } grid={ false }>
+			<Form model="person" data={ defaultData } to={ Routes.completeRegistration() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
-						<h1 tw="text-center">Sign Up</h1>
+						<h1 tw="text-center">Complete Registration</h1>
 					</div>
 
 					<div tw="mb-2">
-						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" required />
+						<Input name="first_name" placeholder="First Name" autoFocus autoComplete="first-name" />
 					</div>
 
 					<div tw="mb-2">
-						<Input name="password" type="password" placeholder="Password" autoComplete="new-password" required />
+						<Input name="last_name" placeholder="Last Name" autoComplete="last-name" />
 					</div>
 
 					<div tw="mb-2">
-						<Input name="password_confirmation" type="password" placeholder="Confirm Password" autoComplete="new-password" required />
+						<Input name="name" model="company" placeholder="Company Name" />
 					</div>
 
 					<div tw="mb-4">
-						<Submit className="large w-full">Sign Up</Submit>
+						<Submit className="large w-full">Complete and Log In!</Submit>
 					</div>
 
 				</Tile.Content>
@@ -56,4 +56,4 @@ const Register = () => {
 	)
 }
 
-export default Register
+export default CompleteRegistration

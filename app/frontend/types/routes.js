@@ -818,6 +818,14 @@ export const companyContacts = __jsr.r({"company_id":{"r":true},"format":{}}, [2
 
 /**
  * Generates rails route to
+ * /users/complete_registration(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const completeRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"complete_registration"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /components/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
