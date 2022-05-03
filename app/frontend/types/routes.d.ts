@@ -520,6 +520,16 @@ export const companyContacts: ((
 
 /**
  * Generates rails route to
+ * /users/complete_registration(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const completeRegistration: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /components/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options

@@ -34,7 +34,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_active_company(company = nil)
-    return if !current_user
+    return if !current_user || (company.nil? && current_user.active_company)
+
+    if Company.count === 0
+      redirect_to complete_registration_path
+    end
 
     current_user.active_company = company if company
 

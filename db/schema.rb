@@ -458,7 +458,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.datetime "locked_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "person_id", null: false
+    t.bigint "person_id"
     t.bigint "active_company_id"
     t.boolean "active", default: true
     t.jsonb "table_preferences", default: {}

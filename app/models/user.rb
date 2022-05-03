@@ -19,16 +19,11 @@ class User < ApplicationRecord
   password_complexity_regex = /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,70}\z/
   validates :password, presence: true, format: { with: password_complexity_regex }, on: [:create, :update], if: :password
 
-  before_create :create_associated_person_record
-  after_create :add_email_to_contact
+  # after_create :add_email_to_contact
 
   before_save :coerce_json
 
   private
-
-  def create_associated_person_record
-    self.person ||= Person.create
-  end
 
   def add_email_to_contact
     return if self.person.contact.emails.exists?(email: email)

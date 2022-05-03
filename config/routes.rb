@@ -53,6 +53,8 @@ Rails.application.routes.draw do
 	}, 
 	skip: [:sessions]
 
+  get "users/complete_registration" => "users#complete_registration", as: :complete_registration
+
   # devise_for :users, path: "/", path_names: { sign_in: "login", sign_out: "logout" }, only: [:sessions]
   # devise_for :users, path_names: { sign_up: "register" }, skip: [:sessions]
 

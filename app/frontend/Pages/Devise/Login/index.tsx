@@ -18,7 +18,7 @@ const Login = () => {
 		remember_me: false,
 	}
 
-	const handleSubmit = ({ transform, wasSuccesful }) => {
+	const handleSubmit = ({ transform }) => {
 		transform(data => {
 			return {
 				user: {
@@ -39,11 +39,11 @@ const Login = () => {
 					</div>
 
 					<div tw="mb-2">
-						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" />
+						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" required />
 					</div>
 
 					<div tw="mb-2">
-						<Input name="password" type="password" placeholder="Password" autoComplete="current-password" />
+						<Input name="password" type="password" placeholder="Password" autoComplete="current-password" required />
 					</div>
 
 					<div tw="mb-4">

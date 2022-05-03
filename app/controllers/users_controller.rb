@@ -25,6 +25,10 @@ class UsersController < ApplicationController
     render inertia: "Purchases/Edit"
   end
 
+  def complete_registration
+    render inertia: "Public/Devise/Register/Complete"
+  end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
