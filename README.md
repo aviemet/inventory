@@ -9,6 +9,12 @@ After cloning, install dependencies:
   bundle install
 ```
 
+For development and testing, also install mailcatcher:
+
+```bash
+  gem install mailcatcher
+```
+
 Then initialize the database:
 
 ```bash
@@ -208,4 +214,4 @@ The Blueprinter gem is used to shape data passed to Inertia components. Avoid pa
 ## Libraries
 
 React Icons:
-https://react-icons.github.io/react-icons
+<https://react-icons.github.io/react-icons>

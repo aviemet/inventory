@@ -2,6 +2,8 @@ import { type InertiaFormProps as DefaultInertiaFormProps } from '@inertiajs/ine
 
 
 declare global {
+	type HTTPVerb = 'POST'|'PUT'|'GET'|'PATCH'|'DESTROY'
+
 	interface InertiaFormProps extends DefaultInertiaFormProps {
 		errors: Record<keyof TForm, string|string[]>
 	}
@@ -19,5 +21,8 @@ declare global {
 		}
 	}
 
-	type HTTPVerb = 'POST'|'PUT'|'GET'|'PATCH'|'DESTROY'
+	interface SharedIndertiaProps {
+		flash: Record<'success'|'alert'|'info'|'warning',string>
+	}
+
 }

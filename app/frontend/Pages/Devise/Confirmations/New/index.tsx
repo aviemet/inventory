@@ -16,7 +16,8 @@ const ConfirmationsNew = () => {
 			<Form model="user" data={ { email: '' } } to={ Routes.userConfirmation() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
-						<h2 tw="text-center">Resend Confirmation Instructions</h2>
+						<h3 tw="text-center mb-2">Please Confirm Your Email</h3>
+						<p>Please check your email and follow the link to confirm you address. If you did not receive a confirmation message, submit your email address below to have it resent.</p>
 					</div>
 
 					<div tw="mb-2">

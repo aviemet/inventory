@@ -27,10 +27,7 @@ const ItemForm = ({ to, method = 'POST', item, models, vendors, locations }: IIt
 
 	const handleSubmit = ({ transform }) => {
 		transform(data => ({
-			item: { ...data },
-			company: {
-				id: user.active_company_id
-			}
+			item: { ...data }
 		}))
 	}
 
