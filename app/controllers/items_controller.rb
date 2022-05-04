@@ -83,14 +83,10 @@ class ItemsController < ApplicationController
   # PATCH/PUT /hardware/:id
   # PATCH/PUT /hardware/:id.json
   def update
-    respond_to do |format|
-      if item.update(item_params)
-        format.html { redirect_to item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: item }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: item.errors, status: :unprocessable_entity }
-      end
+    if item.update(item_params)
+      redirect_to item
+    else
+      redirect_to edit_item_path, inertia: { errors: item.errors }
     end
   end
 
