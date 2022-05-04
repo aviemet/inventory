@@ -30,7 +30,7 @@ class Component < ApplicationRecord
 
   validates :qty, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
   validates_presence_of :name
-  validates_presence_of :vendor_id
+  validates_presence_of :model_id
 
   scope :includes_associated, -> { includes([:manufacturer, :category, :vendor])}
 end

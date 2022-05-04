@@ -55,10 +55,11 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "rspec-rails", "~> 5.1"
+  gem "rspec-rails", "~> 6.0.0.rc1"
   gem "factory_bot_rails", "~> 6.2"
   gem "faker", "~> 2.20"
   gem "amazing_print", "~> 1.4"
+  gem "pry-rails", "~> 0.3.9"
 
   gem "solargraph", "~> 0.44.3"
   gem "rubocop-rails", "~> 2.14", require: false
@@ -75,6 +76,8 @@ group :development do
   gem "guard-livereload", "~> 2.5", require: false
   gem "rack-livereload", "~> 0.3.17"
 
+  gem "better_errors", "~> 2.9"
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
@@ -83,8 +86,6 @@ group :development do
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
-
-  gem "pry-rails", "~> 0.3.9"
 end
 
 group :test do
@@ -92,4 +93,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  gem "database_cleaner-active_record", "~> 2.0"
+  gem "shoulda-matchers", "~> 5.1"
+  gem "bullet", "~> 7.0"
 end

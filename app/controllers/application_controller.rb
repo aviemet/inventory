@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :set_active_company
   before_action :redirect_empty_params
 
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   include Inertia::Flash
   include Inertia::Auth
@@ -71,14 +71,13 @@ class ApplicationController < ActionController::Base
     I18n.locale = I18n.available_locales.include?(locale) ? locale : I18n.default_locale
   end
 
-  def record_not_found
-    ap("RECORD NOT FOUND")
-    raise ActionController::RoutingError, 'Not Found'
-  end
+  # def record_not_found
+  #   raise ActionController::RoutingError, 'Not Found'
+  # end
 
-  def set_action_cable_identifier
-    cookies.encrypted[:user_id] = current_user&.id
-  end
+  # def set_action_cable_identifier
+  #   cookies.encrypted[:user_id] = current_user&.id
+  # end
 
   # param `model` is a base model to check field types on
   # if `column` is in the form 'model.field', or further chained such as 'model1.model2.field',

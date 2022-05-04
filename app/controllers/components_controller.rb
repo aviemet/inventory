@@ -49,28 +49,20 @@ class ComponentsController < ApplicationController
 
   # POST /components(.json)
   def create
-    component.company = Company.find(company_params[:id])
-    respond_to do |format|
-      if component.save
-        format.html { redirect_to component, notice: "Component was successfully created." }
-        format.json { render :show, status: :created, location: component }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: component.errors, status: :unprocessable_entity }
-      end
+    component.company = @active_company
+    if component.save
+      redirect_to component
+    else
+      redirect_to new_component_path, inertia: { errors: component.errors }
     end
   end
 
   # PATCH/PUT /components/:id(.json)
   def update
-    respond_to do |format|
-      if component.update(component_params)
-        format.html { redirect_to component, notice: "Component was successfully updated." }
-        format.json { render :show, status: :ok, location: component }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: component.errors, status: :unprocessable_entity }
-      end
+    if component.update(component_params)
+      redirect_to component
+    else
+      redirect_to edit_component_path, inertia: { errors: component.errors }
     end
   end
 
