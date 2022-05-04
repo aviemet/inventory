@@ -11,6 +11,8 @@ type TLoginFormData = {
 	remember_me: boolean
 }
 
+interface ILoginProps extends SharedIndertiaProps {}
+
 const Login = () => {
 	const defaultData: TLoginFormData = {
 		email: '',

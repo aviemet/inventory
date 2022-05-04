@@ -11,21 +11,14 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
+  include Inertia::Flash
+  include Inertia::Auth
+
   # rescue_from CanCan::AccessDenied do |exception|
   #   flash[:warning] = exception.message
   #   redirect_to root_path
   # end
   # raise CanCan::AccessDenied.new("You are not authorized to perform this action!", :custom_action, Project)
-
-  inertia_share auth: lambda {
-    {
-      user: current_user.as_json({
-        except: [:password],
-        include: [:person, :companies, :active_company],
-      }),
-      form_authenticity_token: form_authenticity_token,
-    }
-  }
 
   def after_sign_out_path_for(*)
     new_user_session_path
@@ -34,11 +27,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_active_company(company = nil)
-    return if !current_user || (company.nil? && current_user.active_company)
+    flash[:info] = 'Some Info'
+    return if !current_user
 
-    if Company.count === 0
-      redirect_to complete_registration_path
-    end
+    # if Company.count === 0
+    #   redirect_to complete_registration_path
+    # end
 
     current_user.active_company = company if company
 

@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
   # POST /hardware
   # POST /hardware.json
   def create
-    item.company = Company.find(company_params[:id])
+    item.company = @active_company
     if item.save
       redirect_to item
     else

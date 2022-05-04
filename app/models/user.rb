@@ -22,7 +22,7 @@ class User < ApplicationRecord
   # after_create :add_email_to_contact
 
   before_save :coerce_json
-
+ 
   private
 
   def add_email_to_contact

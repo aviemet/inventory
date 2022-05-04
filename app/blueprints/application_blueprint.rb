@@ -1,6 +1,6 @@
 class ApplicationBlueprint < Blueprinter::Base
   identifier :id do |model|
-    model.encode_id unless model.id.nil?
+    model.encode_id unless model&.id.nil?
   end
 
   view :new do
