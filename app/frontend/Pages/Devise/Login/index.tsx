@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Form, Input, Checkbox, Submit } from '@/Components/Form'
 import HoverLink from '../HoverLink'
 import { Routes } from '@/lib'
@@ -14,19 +14,26 @@ type TLoginFormData = {
 interface ILoginProps extends SharedIndertiaProps {}
 
 const Login = () => {
+	const emailInputRef = useRef<HTMLInputElement>(null)
+
 	const defaultData: TLoginFormData = {
 		email: '',
 		password: '',
 		remember_me: false,
 	}
 
-	const handleSubmit = ({ transform }) => {
-		transform(data => {
+	const handleSubmit = ({ data, transform }) => {
+		if(data.email === '' || data.password === '') {
+			emailInputRef.current!.focus()
+			return false
+		}
+
+		transform(d => {
 			return {
 				user: {
-					email: data.email,
-					password: data.password,
-					remember_me: data.remember_me
+					email: d.email,
+					password: d.password,
+					remember_me: d.remember_me
 				}
 			}
 		})
@@ -41,7 +48,7 @@ const Login = () => {
 					</div>
 
 					<div tw="mb-2">
-						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" required />
+						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" required ref={ emailInputRef } />
 					</div>
 
 					<div tw="mb-2">

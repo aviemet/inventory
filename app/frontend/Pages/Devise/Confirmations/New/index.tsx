@@ -5,15 +5,15 @@ import { Routes } from '@/lib'
 import { Tile } from '@/Components'
 import tw, { styled } from 'twin.macro'
 
-const ConfirmationsNew = () => {
-
+const ConfirmationsNew = ({ user }) => {
+	console.log({ user })
 	const handleSubmit = ({ transform }) => {
 		transform(data => ({ user: data }))
 	}
 
 	return (
 		<Tile.Container>
-			<Form model="user" data={ { email: '' } } to={ Routes.userConfirmation() } onSubmit={ handleSubmit } grid={ false }>
+			<Form model="user" data={ { email: user.email || '' } } to={ Routes.userConfirmation() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
 						<h3 tw="text-center mb-2">Please Confirm Your Email</h3>
