@@ -16,7 +16,7 @@ const ShowAccessory = ({ accessory }) => {
 				<div tw="flex">
 					<h1 tw="flex-1">{ title }</h1>
 
-					<div>
+					<div tw="w-10 p-1">
 						<Popover>
 							{ accessory.assignments ?
 								<Option href={ Routes.checkinAccessory(accessory) }>

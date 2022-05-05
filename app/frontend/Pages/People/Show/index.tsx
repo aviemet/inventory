@@ -21,7 +21,7 @@ const Show = ({ person }: IShowPersonProps) => {
 				<div tw="flex">
 					<h1 tw="flex-1">{ title }</h1>
 
-					<div>
+					<div tw="w-10 p-1">
 						<Popover>
 							<Option href={ Routes.editPerson(person) }>
 								Edit Person

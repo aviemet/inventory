@@ -26,11 +26,14 @@ const Show = ({ vendor }: IVendorShowProps) => {
 							:
 							vendor.name
 					}</h1>
-					<Popover>
-						<Option href={ Routes.editVendor(vendor.slug) }>
+
+					<div tw="w-10 p-1">
+						<Popover>
+							<Option href={ Routes.editVendor(vendor.slug) }>
 							Edit
-						</Option>
-					</Popover>
+							</Option>
+						</Popover>
+					</div>
 				</div>
 			</section>
 
