@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_active_company(company = nil)
-    flash[:info] = 'Some Info'
     return if !current_user
 
     # if Company.count === 0

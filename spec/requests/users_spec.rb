@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Users", type: :request do
+RSpec.describe "Users", type: :request, inertia: true do
   let(:password) { '$trongPassw0rd!' }
   let(:confirmed_user) { create(:user, password: password, confirmed: true) }
   let(:unconfirmed_user) { create(:user, password: password) }
@@ -22,7 +22,7 @@ RSpec.describe "Users", type: :request do
 
   def invalid_user_params
     { user: {
-      email: 'ok@ok.com',
+      email: 'not@ok.com',
       password: 'abc123',
     } }
   end
@@ -38,14 +38,14 @@ RSpec.describe "Users", type: :request do
     context "unconfirmed with valid credentials" do
       it "redirects to the confirm email page" do
         post user_session_url, params: unconfirmed_user_params
-        expect(response).to redirect_to user_confirmation_url
+        expect_inertia.to render_component 'Public/Devise/Confirmations/New'
       end
     end
 
     context "invalid credentials" do
       it "redirects back to the login page" do
         post user_session_url, params: invalid_user_params
-        expect(response).to redirect_to user_session_url
+        expect_inertia.to render_component 'Public/Devise/Login'
       end
     end
   end

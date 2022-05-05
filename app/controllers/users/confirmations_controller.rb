@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
-  # GET /resource/confirmation/new
+  # GET /resource/confirmation/new(?email=:email)
   def new
-    self.resource = resource_class.new
     render inertia: "Public/Devise/Confirmations/New", props: {
-      resource: self.resource
+      user: {
+        email: params[:email]
+      }
     }
   end
 
