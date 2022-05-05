@@ -38,6 +38,9 @@ RSpec.describe "Users", type: :request, inertia: true do
     context "unconfirmed with valid credentials" do
       it "redirects to the confirm email page" do
         post user_session_url, params: unconfirmed_user_params
+        expect(response).to redirect_to new_user_session_url
+        follow_redirect!
+        expect(response).to redirect_to new_user_confirmation_url
         expect_inertia.to render_component 'Public/Devise/Confirmations/New'
       end
     end

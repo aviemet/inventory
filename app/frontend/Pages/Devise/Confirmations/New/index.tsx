@@ -6,22 +6,37 @@ import { Tile } from '@/Components'
 import tw, { styled } from 'twin.macro'
 
 const ConfirmationsNew = ({ user }) => {
-	console.log({ user })
-	const handleSubmit = ({ transform }) => {
+	const handleSubmitConfirmationCode = ({ transform }) => {
+
+	}
+
+	const handleResendConfirmation = ({ transform }) => {
 		transform(data => ({ user: data }))
 	}
 
 	return (
 		<Tile.Container>
-			<Form model="user" data={ { email: user.email || '' } } to={ Routes.userConfirmation() } onSubmit={ handleSubmit } grid={ false }>
+			<Form model="user" data={ { code: '' } } to={ Routes.userConfirmation() } onSubmit={ handleSubmitConfirmationCode } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
 						<h3 tw="text-center mb-2">Please Confirm Your Email</h3>
-						<p>Please check your email and follow the link to confirm you address. If you did not receive a confirmation message, submit your email address below to have it resent.</p>
+						<p>When you registered, we sent you an email with a confirmation code. Please enter that code below to complete registration.</p>
 					</div>
 
 					<div tw="mb-2">
-						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" required />
+						<Input name="code" placeholder="Confirmation Code" autoFocus required />
+					</div>
+				</Tile.Content>
+			</Form>
+
+			<Form model="user" data={ { email: user.email || '' } } to={ Routes.userConfirmation() } onSubmit={ handleResendConfirmation } grid={ false }>
+				<Tile.Content>
+					<div tw="mb-2">
+						<p>If you did not receive a confirmation message, submit your email address below to have it resent.</p>
+					</div>
+
+					<div tw="mb-2">
+						<Input name="email" placeholder="Email" autoComplete="Email" required />
 					</div>
 
 					<div tw="mb-4">
