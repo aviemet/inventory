@@ -1,9 +1,9 @@
 import React from 'react'
-import { Form, Input, Checkbox, Submit } from '@/Components/Form'
+import { Form, Input, Submit } from '@/Components/Form'
 import HoverLink from '../../HoverLink'
 import { Routes } from '@/lib'
 import { Tile } from '@/Components'
-import tw, { styled } from 'twin.macro'
+import tw from 'twin.macro'
 
 const ConfirmationsNew = ({ user }) => {
 	const handleSubmitConfirmationCode = ({ transform }) => {
