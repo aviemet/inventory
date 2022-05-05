@@ -17,7 +17,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 	{ label, name, model, onChange, type = 'text', id, required, ...props },
 	ref,
 ) => {
-	const { data, setData, errors } = useForm()
+	const { data, setData, errors, getData } = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
 
 	return (
@@ -30,10 +30,10 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 				id={ id || inputId }
 				name={ inputName }
 				label={ label }
-				value={ data[name] }
+				value={ getData(inputName) }
 				onChange={ e => {
-					setData(name, e.target.value)
-					if(onChange) onChange({ value: data[name], setData })
+					setData(inputName, e.target.value)
+					if(onChange) onChange({ value: data[inputName], setData })
 				} }
 				type={ type }
 				ref={ ref }
