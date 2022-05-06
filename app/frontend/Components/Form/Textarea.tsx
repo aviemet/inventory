@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextAreaProps } from 'react-html-props'
-import { useForm, useInputProps, setNestedValue } from './Form'
+import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 import TextareaInput from '../Inputs/Textarea'
@@ -16,7 +16,7 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = e => {
-		setData(data => setNestedValue(data, inputName, e.target.value))
+		setData(inputName, e.target.value)
 		if(onChange) onChange(e)
 	}
 
