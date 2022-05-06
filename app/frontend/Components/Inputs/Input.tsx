@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { InputProps } from 'react-html-props'
-import cx from 'classnames'
+import cn from 'classnames'
 
 interface IInputProps extends InputProps {
 	label?: string
@@ -13,7 +13,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>((
 ) => {
 	return (
 		<>
-			{ label && <label className={ cx({ 'required': required }) } htmlFor={ id }>
+			{ label && <label className={ cn({ 'required': required }) } htmlFor={ id }>
 				{ label }
 			</label> }
 			<input
