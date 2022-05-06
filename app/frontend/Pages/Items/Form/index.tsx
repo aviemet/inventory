@@ -25,16 +25,13 @@ export interface IItemFormProps {
 const ItemForm = ({ to, method = 'POST', item, models, vendors, locations }: IItemFormProps) => {
 	const { user } = useAuth()
 
-	const handleSubmit = ({ transform }) => {
-		transform(data => ({
-			item: { ...data }
-		}))
+	const handleSubmit = () => {
 	}
 
 	return (
 		<Form
 			model="item"
-			data={ item }
+			data={ { item } }
 			to={ to }
 			method={ method }
 			onSubmit={ handleSubmit }

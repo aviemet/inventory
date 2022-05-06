@@ -5,38 +5,22 @@ import { Routes } from '@/lib'
 import { Tile } from '@/Components'
 import tw, { styled } from 'twin.macro'
 
-type TLoginFormData = {
-	email: string
-	password: string
-	remember_me: boolean
-}
-
-interface ILoginProps extends SharedIndertiaProps {}
-
 const Login = () => {
 	const emailInputRef = useRef<HTMLInputElement>(null)
 
-	const defaultData: TLoginFormData = {
-		email: '',
-		password: '',
-		remember_me: false,
+	const defaultData = {
+		user: {
+			email: '',
+			password: '',
+			remember_me: false,
+		}
 	}
 
 	const handleSubmit = ({ data, transform }) => {
-		if(data.email === '' || data.password === '') {
+		if(data.user.email === '' || data.user.password === '') {
 			emailInputRef.current!.focus()
 			return false
 		}
-
-		transform(d => {
-			return {
-				user: {
-					email: d.email,
-					password: d.password,
-					remember_me: d.remember_me
-				}
-			}
-		})
 	}
 
 	return (

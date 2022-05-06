@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm, useInputProps } from './Form'
+import { useForm, useInputProps, setNestedValue } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 import SearchableDropdownInput, { type ISearchableDropdownProps } from '../Inputs/SearchableDropdown'
@@ -11,13 +11,24 @@ interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'> {
 	defaultValue?: string
 }
 
-const SearchableDropdown = ({ options, label, name, required, defaultValue, getLabel, getValue, onChange, id, ...props }: IInputProps) => {
-	const { data, setData, errors } = useForm()
+const SearchableDropdown = ({
+	options,
+	label,
+	name,
+	required,
+	defaultValue,
+	getLabel = option => option.name,
+	getValue = option => String(option.id),
+	onChange,
+	id,
+	...props
+}: IInputProps) => {
+	const { getData, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = option => {
+		setData(data => setNestedValue(data, inputName, getValue(option)))
 		if(onChange) onChange(option)
-		setData(name, getValue(option))
 	}
 
 	return (
@@ -29,7 +40,7 @@ const SearchableDropdown = ({ options, label, name, required, defaultValue, getL
 				id={ id || inputId }
 				name={ inputName }
 				options={ options }
-				defaultValue={ defaultValue ?? data[name] }
+				defaultValue={ defaultValue ?? getData[inputName] }
 				getLabel={ getLabel }
 				getValue={ getValue }
 				onChange={ handleChange }

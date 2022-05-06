@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextAreaProps } from 'react-html-props'
-import { useForm, useInputProps } from './Form'
+import { useForm, useInputProps, setNestedValue } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 import TextareaInput from '../Inputs/Textarea'
@@ -12,8 +12,13 @@ interface ITextareaProps extends TextAreaProps {
 }
 
 const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaProps) => {
-	const { data, setData, errors } = useForm()
+	const { getData, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
+
+	const handleChange = e => {
+		setData(data => setNestedValue(data, inputName, e.target.value))
+		if(onChange) onChange(e)
+	}
 
 	return (
 		<Field type="textarea" required={ required } errors={ !!errors?.[name] }>
@@ -23,12 +28,9 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 			<TextareaInput
 				id={ id || inputId }
 				name={ inputName }
-				onChange={ e => {
-					if(onChange) onChange(e)
-					setData(name, e.target.value)
-				} }
-				value={ data[name] }
-				{ ...required }
+				onChange={ handleChange }
+				value={ getData(inputName) }
+				required={ required }
 				{ ...props }
 			>
 			</TextareaInput>

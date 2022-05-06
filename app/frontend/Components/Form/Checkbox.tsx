@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm, useInputProps } from './Form'
+import { useForm, useInputProps, setNestedValue } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
@@ -10,8 +10,13 @@ interface IFormCheckboxProps extends ICheckboxProps {
 }
 
 const Checkbox = ({ name, onChange, id, required, className, label, ...props }: IFormCheckboxProps) => {
-	const { data, setData, errors } = useForm()
+	const { getData, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
+
+	const handleChange = e => {
+		setData(data => setNestedValue(data, inputName, e.target.checked))
+		if(onChange) onChange(e)
+	}
 
 	return (
 		<Field
@@ -24,11 +29,8 @@ const Checkbox = ({ name, onChange, id, required, className, label, ...props }: 
 				id={ id || inputId }
 				name={ inputName }
 				type="checkbox"
-				value={ data[name] }
-				onChange={ e => {
-					if(onChange) onChange(e)
-					setData(name, e.target.checked)
-				} }
+				value={ getData(inputName) }
+				onChange={ handleChange }
 				className={ cx('mt-auto', 'mb-auto', className) }
 				label={ label }
 				{ ...props }
