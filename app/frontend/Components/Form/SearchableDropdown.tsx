@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm, useInputProps, setNestedValue } from './Form'
+import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 import SearchableDropdownInput, { type ISearchableDropdownProps } from '../Inputs/SearchableDropdown'
@@ -27,7 +27,7 @@ const SearchableDropdown = ({
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = option => {
-		setData(data => setNestedValue(data, inputName, getValue(option)))
+		setData(inputName, getValue(option))
 		if(onChange) onChange(option)
 	}
 

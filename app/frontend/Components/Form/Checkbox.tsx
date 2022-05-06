@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm, useInputProps, setNestedValue } from './Form'
+import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
@@ -14,7 +14,7 @@ const Checkbox = ({ name, onChange, id, required, className, label, ...props }: 
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = e => {
-		setData(data => setNestedValue(data, inputName, e.target.checked))
+		setData(inputName, e.target.checked)
 		if(onChange) onChange(e)
 	}
 
@@ -29,7 +29,8 @@ const Checkbox = ({ name, onChange, id, required, className, label, ...props }: 
 				id={ id || inputId }
 				name={ inputName }
 				type="checkbox"
-				value={ getData(inputName) }
+				defaultChecked={ Boolean(getData(inputName)) }
+				value={ String(getData(inputName)) }
 				onChange={ handleChange }
 				className={ cx('mt-auto', 'mb-auto', className) }
 				label={ label }

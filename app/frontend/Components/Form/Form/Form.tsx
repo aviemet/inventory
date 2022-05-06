@@ -1,68 +1,32 @@
 import React, { useEffect, useCallback } from 'react'
 import { useForm as useInertiaForm } from '@inertiajs/inertia-react'
-import { FormProvider } from './useForm'
-import { isObj } from '@/lib'
-import { merge, isBoolean } from 'lodash'
+import { fillEmptyValues, getNestedValue, setNestedValue } from '@/lib'
 import { createContext } from '@/Components/Hooks'
 import { FormProps } from 'react-html-props'
 import cn from 'classnames'
 
 import './form.css'
 
-const INPUT_NAME_SEPARATOR = '.'
-
-export const setNestedValue = (data: Record<string, any>, key: string, value: unknown) => {
-	const parts = key.split('.')
-	let nestedData = {}
-
-	for(let i = parts.length - 1; i >= 0; i--) {
-		if(i === parts.length - 1) {
-			nestedData[parts[i]] = value
-		} else {
-			nestedData = {
-				[parts[i]]: nestedData
-			}
-		}
-	}
-
-	return merge({}, data, nestedData)
+interface IInertiaFormProps extends InertiaFormProps {
+	model?: string
+	getData: (data: string) => string|boolean
+	getErrors: (data: string) => string
+	separator: string
 }
 
-interface IFormProps<T> extends FormProps {
+const [useForm, FormProvider] = createContext<IInertiaFormProps>()
+export { useForm, FormProvider }
+
+interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'> {
 	model?: string
 	data: T
 	to: string
 	grid?: boolean
-	onSubmit?: (object) => boolean|void
-	onChange?: (object) => void
-	onSuccess?: (object) => void
-}
-
-const [useFormMetaData, FormMetaDataProvider] = createContext<Record<string, string>>()
-export const useInputProps = (name: string, modelOverride?: string) => {
-	const { model } = useFormMetaData()
-	const usedModel = modelOverride ?? model
-
-	return {
-		inputId: `${usedModel}_${name}`,
-		inputName: `${usedModel}${INPUT_NAME_SEPARATOR}${name}`
-	}
-}
-
-function fillEmptyValues<T extends Record<keyof T, unknown>>(data: T): T {
-	const sanitizedDefaultData = data
-	Object.keys(data).forEach(key => {
-		if(isObj(data[key])) {
-			sanitizedDefaultData[key] = fillEmptyValues(data[key])
-		} else if(data[key] === undefined || data[key] === null) {
-			sanitizedDefaultData[key] = ''
-		} else if(!isBoolean(data[key])) {
-			sanitizedDefaultData[key] = String(data[key])
-		} else {
-			sanitizedDefaultData[key] = data[key]
-		}
-	})
-	return sanitizedDefaultData
+	onSubmit?: (object: IInertiaFormProps) => boolean|void
+	onChange?: (object: IInertiaFormProps) => void
+	onSuccess?: (object: IInertiaFormProps) => void
+	onError?: (object: IInertiaFormProps) => void
+	separator?: string
 }
 
 function Form<T extends Record<keyof T, unknown>>({
@@ -75,61 +39,62 @@ function Form<T extends Record<keyof T, unknown>>({
 	onSubmit,
 	onChange,
 	onSuccess,
+	onError,
 	className,
+	separator = '.',
 	...props
 }: IFormProps<T>) {
 	const form = useInertiaForm<Record<string, unknown>>(fillEmptyValues(data))
 
-	const getData = useCallback((key) => {
-		const parts = key.split(INPUT_NAME_SEPARATOR)
-		let nestedData: Record<string, any> = form.data
-		let value = ''
-		parts.forEach(part => {
-			if(isObj(nestedData[part])) {
-				nestedData = nestedData[part]
-			} else {
-				value = nestedData[part]
-			}
-		})
-		return value
+	// This overrides the default form.setData method to allow for setting nested values
+	const setData: IInertiaFormProps['setData'] = (key, value?) => {
+		if(key.includes(separator)) {
+			form.setData(data => setNestedValue(data, key, value, separator))
+		} else {
+			form.setData(key, value)
+		}
+	}
+
+	const getData = useCallback((key: string) => {
+		return getNestedValue(form.data, key, separator)
 	}, [form.data])
 
-	const getErrors = useCallback((key) => {
-		// TODO: Implement getting nested error object from dot notation string
+	const getErrors = useCallback((key: string) => {
+		return getNestedValue(form.errors, key, separator)
 	}, [form.errors])
+
+	const contextValueObject = { ...form, setData, model, getData, getErrors, separator }
 
 	const handleSubmit = e => {
 		e.preventDefault()
 
 		let submit = true
 		if(onSubmit) {
-			const val = onSubmit(form)
+			const val = onSubmit(contextValueObject)
 			if(val === true || val === false) submit = val
 		}
 		if(submit) form[method.toLowerCase()](to)
 	}
 
 	useEffect(() => {
-		if(onChange) onChange(form)
+		if(onChange) onChange(contextValueObject)
 	}, [form.data])
 
 	useEffect(() => {
-		// console.log({ errors: form.errors })
+		if(onError) onError(contextValueObject)
 	}, [form.errors])
 
 	useEffect(() => {
 		if(onSuccess && form.wasSuccessful) {
-			onSuccess(form)
+			onSuccess(contextValueObject)
 		}
 	}, [form.wasSuccessful])
 
 	return (
-		<FormProvider value={ { ...form, getData } }>
-			<FormMetaDataProvider value={ { model: model || 'form' } }>
-				<form onSubmit={ handleSubmit } className={ cn({ 'format-grid': grid }, className) } { ...props }>
-					{ children }
-				</form>
-			</FormMetaDataProvider>
+		<FormProvider value={ contextValueObject }>
+			<form onSubmit={ handleSubmit } className={ cn({ 'format-grid': grid }, className) } { ...props }>
+				{ children }
+			</form>
 		</FormProvider>
 	)
 }

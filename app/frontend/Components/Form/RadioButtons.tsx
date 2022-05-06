@@ -2,7 +2,7 @@ import React from 'react'
 import RadioButtons, { type TOption } from '../Inputs/RadioButtons'
 import Field from './Field'
 import Feedback from './Feedback'
-import { useForm, useInputProps, setNestedValue } from './Form'
+import { useForm, useInputProps } from './Form'
 import { InputProps } from 'react-html-props'
 
 interface IFormRadioButtonsProps extends Omit<InputProps, 'onChange'> {
@@ -21,7 +21,7 @@ const FormRadioButtons = ({ options, name, id, model, onChange, required, ...pro
 	const { inputId, inputName } = useInputProps(name, model)
 
 	const handleChange = value => {
-		setData(data => setNestedValue(data, inputName, value))
+		setData(inputName, value)
 		if(onChange) onChange({ value, setData })
 	}
 

@@ -1,9 +1,8 @@
 import React from 'react'
-import { useForm, useInputProps, setNestedValue } from './Form'
+import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 import DateTimeInput, { type IDateTimeProps } from '../Inputs/DateTime'
-import cn from 'classnames'
 
 interface IDateTimeFormProps extends Omit<IDateTimeProps, 'name'> {
 	name: string
@@ -14,7 +13,7 @@ const DateTime = ({ name, required, onChange, id, ...props }: IDateTimeFormProps
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = value => {
-		setData(data => setNestedValue(data, inputName, value[0].toISOString()))
+		setData(inputName, value[0].toISOString())
 		if(onChange) onChange(value)
 
 	}
@@ -24,7 +23,7 @@ const DateTime = ({ name, required, onChange, id, ...props }: IDateTimeFormProps
 			<DateTimeInput
 				id={ id || inputId }
 				name={ inputName }
-				value={ getData(inputName) }
+				value={ String(getData(inputName)) }
 				onChange={ handleChange }
 				required={ required }
 				{ ...props }

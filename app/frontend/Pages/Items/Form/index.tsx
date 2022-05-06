@@ -9,9 +9,6 @@ import {
 	Submit,
 	Group,
 } from '@/Components/Form'
-import { Link } from '@/Components'
-import { useAuth } from '@/Providers'
-import tw from 'twin.macro'
 
 export interface IItemFormProps {
 	to: string
@@ -23,8 +20,6 @@ export interface IItemFormProps {
 }
 
 const ItemForm = ({ to, method = 'POST', item, models, vendors, locations }: IItemFormProps) => {
-	const { user } = useAuth()
-
 	const handleSubmit = () => {
 	}
 

@@ -1,10 +1,9 @@
 import React, { forwardRef } from 'react'
 import { Input } from '../Inputs'
 import { InputProps } from 'react-html-props'
-import { useForm, useInputProps, setNestedValue } from './Form'
+import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
-import cn from 'classnames'
 
 interface IInputProps extends Omit<InputProps, 'onChange'|'ref'> {
 	label?: string
@@ -21,7 +20,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 	const { inputId, inputName } = useInputProps(name, model)
 
 	const handleChange = e => {
-		setData(data => setNestedValue(data, inputName, e.target.value))
+		setData(inputName, e.target.value)
 		if(onChange) onChange(e.target.value)
 	}
 
@@ -35,7 +34,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 				id={ id || inputId }
 				name={ inputName }
 				label={ label }
-				value={ getData(inputName) }
+				value={ String(getData(inputName)) }
 				onChange={ handleChange }
 				type={ type }
 				ref={ ref }
