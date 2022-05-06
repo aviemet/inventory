@@ -245,7 +245,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
     t.datetime "purchased_at", precision: nil
-    t.boolean "requestable", default: true, null: false
+    t.boolean "requestable", default: false, null: false
     t.text "notes"
     t.integer "model_id", null: false
     t.integer "vendor_id"
