@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Input } from '../Inputs'
 import { InputProps } from 'react-html-props'
-import { useForm, useInputProps } from './Form'
+import { useForm, useInputProps, setNestedValue } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 import cn from 'classnames'
@@ -17,8 +17,13 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 	{ label, name, model, onChange, type = 'text', id, required, ...props },
 	ref,
 ) => {
-	const { data, setData, errors, getData } = useForm()
+	const { setData, errors, getData } = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
+
+	const handleChange = e => {
+		setData(data => setNestedValue(data, inputName, e.target.value))
+		if(onChange) onChange(e.target.value)
+	}
 
 	return (
 		<Field
@@ -31,10 +36,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 				name={ inputName }
 				label={ label }
 				value={ getData(inputName) }
-				onChange={ e => {
-					setData(inputName, e.target.value)
-					if(onChange) onChange({ value: data[inputName], setData })
-				} }
+				onChange={ handleChange }
 				type={ type }
 				ref={ ref }
 				{ ...props }

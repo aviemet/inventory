@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react'
 import { useForm as useInertiaForm } from '@inertiajs/inertia-react'
 import { FormProvider } from './useForm'
 import { isObj } from '@/lib'
-
+import { merge, isBoolean } from 'lodash'
 import { createContext } from '@/Components/Hooks'
 import { FormProps } from 'react-html-props'
 import cn from 'classnames'
@@ -10,6 +10,23 @@ import cn from 'classnames'
 import './form.css'
 
 const INPUT_NAME_SEPARATOR = '.'
+
+export const setNestedValue = (data: Record<string, any>, key: string, value: unknown) => {
+	const parts = key.split('.')
+	let nestedData = {}
+
+	for(let i = parts.length - 1; i >= 0; i--) {
+		if(i === parts.length - 1) {
+			nestedData[parts[i]] = value
+		} else {
+			nestedData = {
+				[parts[i]]: nestedData
+			}
+		}
+	}
+
+	return merge({}, data, nestedData)
+}
 
 interface IFormProps<T> extends FormProps {
 	model?: string
@@ -37,8 +54,12 @@ function fillEmptyValues<T extends Record<keyof T, unknown>>(data: T): T {
 	Object.keys(data).forEach(key => {
 		if(isObj(data[key])) {
 			sanitizedDefaultData[key] = fillEmptyValues(data[key])
+		} else if(data[key] === undefined || data[key] === null) {
+			sanitizedDefaultData[key] = ''
+		} else if(!isBoolean(data[key])) {
+			sanitizedDefaultData[key] = String(data[key])
 		} else {
-			sanitizedDefaultData[key] = data[key] === undefined || data[key] === null ? '' : String(data[key])
+			sanitizedDefaultData[key] = data[key]
 		}
 	})
 	return sanitizedDefaultData
@@ -59,11 +80,9 @@ function Form<T extends Record<keyof T, unknown>>({
 }: IFormProps<T>) {
 	const form = useInertiaForm<Record<string, unknown>>(fillEmptyValues(data))
 
-	const { setData, data: formData } = form
-
 	const getData = useCallback((key) => {
 		const parts = key.split(INPUT_NAME_SEPARATOR)
-		let nestedData: Record<string, any> = formData
+		let nestedData: Record<string, any> = form.data
 		let value = ''
 		parts.forEach(part => {
 			if(isObj(nestedData[part])) {
@@ -73,28 +92,11 @@ function Form<T extends Record<keyof T, unknown>>({
 			}
 		})
 		return value
-	}, [formData])
+	}, [form.data])
 
-	// TODO: Figure out how to type this properly
-	const setDataProxy: typeof setData = (name, value) => {
-		const parts = name.split(INPUT_NAME_SEPARATOR)
-		let nestedData = {}
-
-		for(let i = parts.length - 1; i >= 0; i--) {
-			if(i === parts.length - 1) {
-				nestedData[parts[i]] = value
-			} else {
-				nestedData = {
-					[parts[i]]: nestedData
-				}
-			}
-		}
-
-		setData({
-			...formData,
-			...nestedData
-		})
-	}
+	const getErrors = useCallback((key) => {
+		// TODO: Implement getting nested error object from dot notation string
+	}, [form.errors])
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -122,7 +124,7 @@ function Form<T extends Record<keyof T, unknown>>({
 	}, [form.wasSuccessful])
 
 	return (
-		<FormProvider value={ { ...form, getData, setData: setDataProxy } }>
+		<FormProvider value={ { ...form, getData } }>
 			<FormMetaDataProvider value={ { model: model || 'form' } }>
 				<form onSubmit={ handleSubmit } className={ cn({ 'format-grid': grid }, className) } { ...props }>
 					{ children }
