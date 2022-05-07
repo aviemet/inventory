@@ -7,19 +7,15 @@ import AuthLayout from './AuthLayout'
 
 interface LayoutWrapperProps {
 	children: React.ReactNode
-	auth: {
-		user: Record<string, string>
-		form_authenticity_token: string
-	}
 }
 
 interface InertiaPageProps extends PageProps {
 	props: LayoutWrapperProps
 }
 
-const LayoutWrapper = React.memo(({ children, auth }: LayoutWrapperProps) => {
+const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
 	return(
-		<Providers auth={ auth }>
+		<Providers>
 			{ children }
 		</Providers>
 	)
@@ -27,7 +23,7 @@ const LayoutWrapper = React.memo(({ children, auth }: LayoutWrapperProps) => {
 
 const AppLayoutLayout = (page: InertiaPageProps) => {
 	return(
-		<LayoutWrapper auth={ page.props.auth }>
+		<LayoutWrapper>
 			<AppLayout>{ page }</AppLayout>
 		</LayoutWrapper>
 	)
@@ -35,7 +31,7 @@ const AppLayoutLayout = (page: InertiaPageProps) => {
 
 const AuthLayoutLayout = (page: InertiaPageProps) => {
 	return(
-		<LayoutWrapper auth={ page.props.auth }>
+		<LayoutWrapper>
 			<AuthLayout>{ page }</AuthLayout>
 		</LayoutWrapper>
 	)
