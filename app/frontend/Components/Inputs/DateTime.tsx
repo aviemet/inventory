@@ -1,13 +1,12 @@
 import React from 'react'
-import Flatpickr from 'react-flatpickr'
+import Flatpickr, { type DateTimePickerProps } from 'react-flatpickr'
 import labelPlugin from 'flatpickr/dist/plugins/labelPlugin/labelPlugin'
-import { InputProps } from 'react-html-props'
 import tw, { styled } from 'twin.macro'
 import cx from 'classnames'
 
 import 'flatpickr/dist/themes/material_green.css'
 
-export interface IDateTimeProps extends InputProps {
+export interface IDateTimeProps extends DateTimePickerProps {
 	label?: string
 	name?: string
 }

@@ -3,9 +3,8 @@ import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
-import { Popover, Divider, Option } from '@/Components/Popover'
+import { Popover, Option } from '@/Components/Popover'
 import { EditButton } from '@/Components/Button'
-import { useAuth } from '@/Providers'
 import {
 	TableSection,
 	TableTitleSection,
@@ -18,7 +17,6 @@ interface IItemsIndexProps {
 
 const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 	const title = 'Hardware Assets'
-	const { user } = useAuth()
 
 	return (
 		<>
@@ -57,7 +55,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 							</Table.Head>
 
 							<Table.Body>
-								<Table.RowIterator render={ item => (
+								<Table.RowIterator render={ (item: Schema.Item) => (
 									<Table.Row key={ item.id }>
 										<Table.Cell nowrap>
 											<Link href={ Routes.item(item) }>{ item.name }</Link>
@@ -81,7 +79,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 											<Link href={ Routes.item(item) }>{ item.vendor?.name }</Link>
 										</Table.Cell>
 										<Table.Cell>
-											<Link href={ Routes.item(item) }>{ formatter.currency(item.cost, item.cost_currency) }</Link>
+											<Link href={ Routes.item(item) }>{ item.cost && formatter.currency(item.cost, item.cost_currency) }</Link>
 										</Table.Cell>
 										<Table.Cell>
 											<Link href={ Routes.item(item) }>{ item.department?.name }</Link>

@@ -22,10 +22,6 @@ const RadioButtons = ({ label, labelPosition = 'start', options, name, id, value
 		return `${name}_${value}`.trim().toLowerCase()
 	}
 
-	const handleChange = e => {
-		if(onChange) onChange(e.target.value)
-	}
-
 	return (
 		<>
 			{ label && labelPosition === 'start' && <label htmlFor={ id }>{ label }</label> }
@@ -41,7 +37,9 @@ const RadioButtons = ({ label, labelPosition = 'start', options, name, id, value
 								type="radio"
 								value={ option.value }
 								checked={ option.value === value }
-								onChange={ handleChange }
+								onChange={ e => {
+									if(onChange) onChange(e.target.value)
+								} }
 							/>
 							<OptionLabel htmlFor={ optionId }>
 								{ option.label }

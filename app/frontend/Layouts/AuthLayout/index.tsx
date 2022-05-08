@@ -1,9 +1,12 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
 import Footer from '../Footer'
 import { styled } from 'twin.macro'
 
-const AuthLayout = ({ children }) => {
+interface IAuthLayoutProps {
+	children: React.ReactElement
+}
+
+const AuthLayout: React.FC<IAuthLayoutProps> = ({ children }) => {
 	return (
 		<AuthPage id="auth" tw="bg-purple-600 min-h-screen">
 			<AuthWrapper tw="grid gap-0 min-h-screen w-full">
@@ -12,7 +15,6 @@ const AuthLayout = ({ children }) => {
 						{ children }
 					</div>
 				</main>
-
 				<Footer />
 			</AuthWrapper>
 		</AuthPage>

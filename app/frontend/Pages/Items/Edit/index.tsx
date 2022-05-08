@@ -1,8 +1,7 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
+import { Head, usePage } from '@inertiajs/inertia-react'
 import ItemForm from '../Form'
 import { Routes } from '@/lib'
-import { useAuth } from '@/Providers'
 
 interface IUpdateItemProps{
 	item: Schema.Item
@@ -14,7 +13,7 @@ interface IUpdateItemProps{
 const New = ({ item, ...models }: IUpdateItemProps) => {
 	const title = `Edit ${item.name}`
 
-	const { user } = useAuth()
+	const { props: { auth: { user } } } = usePage<InertiaPage>()
 
 	return (
 		<>
@@ -23,7 +22,7 @@ const New = ({ item, ...models }: IUpdateItemProps) => {
 			<section className="container">
 				<h1>{ title } for { user.active_company!.name }</h1>
 
-				<ItemForm to={ Routes.item(item) } method="PATCH" item={ item } { ...models } />
+				<ItemForm to={ Routes.item(item) } method="patch" item={ item } { ...models } />
 			</section>
 		</>
 	)

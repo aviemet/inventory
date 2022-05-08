@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from '@/Components'
 import {
 	MenuBarsIcon,
 	PlusCircleIcon,
@@ -11,16 +10,16 @@ import {
 	ComponentsIcon,
 	ConsumablesIcon,
 } from '@/Components/Icons'
-import { useAuth } from '@/Providers'
 import ActiveCompanyDropdown from './ActiveCompanyDropdown'
 import { Option, Popover } from '@/Components/Popover'
 import tw, { styled } from 'twin.macro'
 import { Routes } from '@/lib'
 import { IconContext } from 'react-icons'
 import { useLayout } from '@/Providers'
+import { usePage } from '@inertiajs/inertia-react'
 
 const Topbar = () => {
-	const { user } = useAuth()
+	const { props: { auth: { user } } } = usePage<InertiaPage>()
 	const { layoutState, setLayoutState } = useLayout()
 
 	return (

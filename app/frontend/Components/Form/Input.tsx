@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useCallback } from 'react'
 import { Input } from '../Inputs'
 import { InputProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
@@ -9,7 +9,7 @@ interface IInputProps extends Omit<InputProps, 'onChange'|'ref'> {
 	label?: string
 	name: string
 	model?: string
-	onChange?: ({ value: unknown, setData: Function }) => void
+	onChange?: (value: any) => void
 }
 
 const FormInput = forwardRef<HTMLInputElement, IInputProps>((
@@ -19,10 +19,10 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 	const { setData, errors, getData } = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
 
-	const handleChange = e => {
+	const handleChange = useCallback((e:  React.ChangeEvent<HTMLInputElement>) => {
 		setData(inputName, e.target.value)
 		if(onChange) onChange(e.target.value)
-	}
+	}, [onChange, inputName])
 
 	return (
 		<Field
@@ -34,7 +34,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 				id={ id || inputId }
 				name={ inputName }
 				label={ label }
-				value={ String(getData(inputName)) }
+				value={ getData(inputName) }
 				onChange={ handleChange }
 				type={ type }
 				ref={ ref }

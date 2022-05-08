@@ -9,7 +9,7 @@ import './form.css'
 
 interface IInertiaFormProps extends InertiaFormProps {
 	model?: string
-	getData: (data: string) => string|boolean
+	getData: (key: string) => any
 	getErrors: (data: string) => string
 	separator: string
 }
@@ -20,6 +20,7 @@ export { useForm, FormProvider }
 interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'> {
 	model?: string
 	data: T
+	method: HTTPVerb
 	to: string
 	grid?: boolean
 	onSubmit?: (object: IInertiaFormProps) => boolean|void
@@ -44,18 +45,22 @@ function Form<T extends Record<keyof T, unknown>>({
 	separator = '.',
 	...props
 }: IFormProps<T>) {
-	const form = useInertiaForm<Record<string, unknown>>(fillEmptyValues(data))
+	const form: IndexedInertiaFormProps = useInertiaForm<Record<string, unknown>>(fillEmptyValues(data))
 
 	// This overrides the default form.setData method to allow for setting nested values
-	const setData: IInertiaFormProps['setData'] = (key, value?) => {
-		if(key.includes(separator)) {
-			form.setData(data => setNestedValue(data, key, value, separator))
+	const setData: InertiaFormProps['setData'] = (key: Record<string, any>|string, value?: any) => {
+		if(typeof key === 'string'){
+			if(key.includes(separator)) {
+				form.setData((data: Record<string, any>) => setNestedValue(data, key, value, separator))
+			} else {
+				form.setData(key, value)
+			}
 		} else {
-			form.setData(key, value)
+			form.setData(key)
 		}
 	}
 
-	const getData = useCallback((key: string) => {
+	const getData = useCallback((key: string): any => {
 		return getNestedValue(form.data, key, separator)
 	}, [form.data])
 
@@ -65,7 +70,7 @@ function Form<T extends Record<keyof T, unknown>>({
 
 	const contextValueObject = { ...form, setData, model, getData, getErrors, separator }
 
-	const handleSubmit = e => {
+	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 
 		let submit = true
@@ -73,7 +78,7 @@ function Form<T extends Record<keyof T, unknown>>({
 			const val = onSubmit(contextValueObject)
 			if(val === true || val === false) submit = val
 		}
-		if(submit) form[method.toLowerCase()](to)
+		if(submit) form[method](to)
 	}
 
 	useEffect(() => {

@@ -19,7 +19,7 @@ export interface IItemFormProps {
 	locations: Schema.Location[]
 }
 
-const ItemForm = ({ to, method = 'POST', item, models, vendors, locations }: IItemFormProps) => {
+const ItemForm = ({ to, method = 'post', item, models, vendors, locations }: IItemFormProps) => {
 	const handleSubmit = () => {
 	}
 

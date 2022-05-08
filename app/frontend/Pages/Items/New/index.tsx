@@ -1,8 +1,7 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
+import { Head, usePage } from '@inertiajs/inertia-react'
 import ItemForm from '../Form'
 import { Routes } from '@/lib'
-import { useAuth } from '@/Providers'
 
 interface INewItemProps {
 	item: Schema.Item
@@ -14,7 +13,7 @@ interface INewItemProps {
 const New = ({ ...data }: INewItemProps) => {
 	const title = 'New Hardware Asset'
 
-	const { user } = useAuth()
+	const { props: { auth: { user } } } = usePage<InertiaPage>()
 
 	return (
 		<>

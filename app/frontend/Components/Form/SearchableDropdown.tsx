@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
@@ -26,10 +26,10 @@ const SearchableDropdown = ({
 	const { getData, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
-	const handleChange = option => {
+	const handleChange = useCallback((option: Record<string, any>) => {
 		setData(inputName, getValue(option))
 		if(onChange) onChange(option)
-	}
+	}, [onChange, inputName])
 
 	return (
 		<Field type="select" required={ required } errors={ !!errors?.[name] }>
@@ -40,7 +40,7 @@ const SearchableDropdown = ({
 				id={ id || inputId }
 				name={ inputName }
 				options={ options }
-				defaultValue={ defaultValue ?? getData[inputName] }
+				defaultValue={ defaultValue ?? getData(inputName) }
 				getLabel={ getLabel }
 				getValue={ getValue }
 				onChange={ handleChange }

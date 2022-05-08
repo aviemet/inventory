@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
@@ -13,10 +13,10 @@ const Checkbox = ({ name, onChange, id, required, className, label, ...props }: 
 	const { getData, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
-	const handleChange = e => {
+	const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 		setData(inputName, e.target.checked)
 		if(onChange) onChange(e)
-	}
+	}, [onChange, inputName])
 
 	return (
 		<Field
@@ -30,7 +30,7 @@ const Checkbox = ({ name, onChange, id, required, className, label, ...props }: 
 				name={ inputName }
 				type="checkbox"
 				defaultChecked={ Boolean(getData(inputName)) }
-				value={ String(getData(inputName)) }
+				value={ getData(inputName) }
 				onChange={ handleChange }
 				className={ cx('mt-auto', 'mb-auto', className) }
 				label={ label }
