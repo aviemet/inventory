@@ -3,14 +3,14 @@ export * as formatter from './formatters'
 import { merge, isBoolean } from 'lodash'
 // export { default as IPAddress } from './IPAddress'
 
-export const isObj = check => {
+export const isObj = (check: string) => {
 	return check !== null && check !== undefined && Object.getPrototypeOf(check) === Object.prototype
 }
 
 export const getNestedValue = (data: Record<string, any>, key: string, separator = '.') => {
 	const parts = key.split(separator)
 	let nestedData: Record<string, any> = data
-	let value = ''
+	let value: string|boolean = ''
 
 	parts.forEach(part => {
 		if(isObj(nestedData[part])) {
@@ -40,7 +40,26 @@ export const setNestedValue = (data: Record<string, any>, key: string, value: un
 	return merge({}, data, nestedData)
 }
 
-export function fillEmptyValues<T extends Record<keyof T, unknown>>(data: T): T {
+export const fillEmptyValues = <T extends Record<keyof T, any>>(data: T): T => {
+	const sanitizedDefaultData = data
+
+	for(const key in sanitizedDefaultData) {
+		if(isObj(sanitizedDefaultData[key])) {
+			sanitizedDefaultData[key] = fillEmptyValues(sanitizedDefaultData[key])
+		} else if(sanitizedDefaultData[key] === undefined || sanitizedDefaultData[key] === null) {
+			sanitizedDefaultData[key] = ''
+		} else if(!isBoolean(sanitizedDefaultData[key])) {
+			sanitizedDefaultData[key] = String(sanitizedDefaultData[key])
+		} else {
+			sanitizedDefaultData[key] = sanitizedDefaultData[key]
+		}
+	}
+
+	return sanitizedDefaultData
+}
+
+/*
+export const fillEmptyValuesOrig = <T extends Record<keyof T, unknown>>(data: T): T => {
 	const sanitizedDefaultData = data
 
 	Object.keys(data).forEach(key => {
@@ -57,3 +76,4 @@ export function fillEmptyValues<T extends Record<keyof T, unknown>>(data: T): T 
 
 	return sanitizedDefaultData
 }
+*/

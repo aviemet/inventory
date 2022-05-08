@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { TextAreaProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
 import Field from './Field'
@@ -15,10 +15,10 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 	const { getData, setData, errors } = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
-	const handleChange = e => {
+	const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setData(inputName, e.target.value)
 		if(onChange) onChange(e)
-	}
+	}, [onChange, inputName])
 
 	return (
 		<Field type="textarea" required={ required } errors={ !!errors?.[name] }>

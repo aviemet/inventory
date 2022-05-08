@@ -907,12 +907,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.3":
-  version: 18.0.3
-  resolution: "@types/react-dom@npm:18.0.3"
+"@types/react-dom@npm:^17":
+  version: 17.0.16
+  resolution: "@types/react-dom@npm:17.0.16"
+  dependencies:
+    "@types/react": ^17
+  checksum: 2f41a45ef955c8f68a7bcd22343715f15e1560a5e5ba941568b3c970d9151f78fe0975ecf4df7f691339af546555e0f23fa423a0a5bcd7ea4dd4f9c245509936
+  languageName: node
+  linkType: hard
+
+"@types/react-flatpickr@npm:^3.8.6":
+  version: 3.8.6
+  resolution: "@types/react-flatpickr@npm:3.8.6"
   dependencies:
     "@types/react": "*"
-  checksum: 5c87fb610e212f0942ebbf522dfca4c9dc2ac8afa4c601454415e7c42f993518868207faff7658d11974142937ba7af2f80e274c3a3f5e0e697bdd5547dbe1b0
+    flatpickr: ^4.0.6
+  checksum: 37faa667318b676bbe648ebaf35b39b7660df5580601479ea15c755d9bfc3bba08ed06f466d2a087d4252fe20153f70620d41e57210b5da4f117bf7ae1c113de
   languageName: node
   linkType: hard
 
@@ -927,14 +937,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.0.8":
-  version: 18.0.8
-  resolution: "@types/react@npm:18.0.8"
+"@types/react@npm:^17":
+  version: 17.0.45
+  resolution: "@types/react@npm:17.0.45"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 12d0e6bc390709926d8eaeb7d2edb4ef9c9fbe8eac41cb0619d958386700547bff91c880c2a12a9eb1e0d09afa4f1e86fd1b93164c627824465b72123f149f3b
+  checksum: 3cc13a02824c13f6fa4807a83abd065ac1d9943359e76bd995cc7cd2b4148c1176ebd54a30a9f4eb8a0f141ff359d712876f256c4fee707e4290607ef8410b3e
   languageName: node
   linkType: hard
 
@@ -2674,7 +2684,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flatpickr@npm:^4.6.13, flatpickr@npm:^4.6.2":
+"flatpickr@npm:^4.0.6, flatpickr@npm:^4.6.13, flatpickr@npm:^4.6.2":
   version: 4.6.13
   resolution: "flatpickr@npm:4.6.13"
   checksum: 2cca1b8dc974e7673b51174ee3f0679ae3a6b79525a0c53bf49b87455ef358354e64acfd60b312e44cef208aab9750a1a48df32a0914046a53de6d9403742304
@@ -3054,8 +3064,9 @@ __metadata:
     "@tailwindcss/line-clamp": ^0.4.0
     "@tailwindcss/typography": ^0.5.2
     "@types/lodash": ^4.14.182
-    "@types/react": ^18.0.8
-    "@types/react-dom": ^18.0.3
+    "@types/react": ^17
+    "@types/react-dom": ^17
+    "@types/react-flatpickr": ^3.8.6
     "@types/styled-components": ^5.1.25
     "@typescript-eslint/eslint-plugin": ^5.22.0
     "@typescript-eslint/parser": ^5.22.0

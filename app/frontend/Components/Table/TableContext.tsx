@@ -37,7 +37,7 @@ interface ITableContextProviderProps {
 const [useTableContext, TableContextProvider] = createContext<ITableContext>()
 export { useTableContext }
 
-const TableProvider = ({ children, selectable = false, pagination, rows = [] }: ITableContextProviderProps) => {
+const TableProvider: React.FC<ITableContextProviderProps> = ({ children, selectable = false, pagination, rows = [] }) => {
 	const tableReducer = (tableState: ITableSettings, newTableState: Partial<ITableSettings>) => ({
 		...tableState,
 		...newTableState,
@@ -54,13 +54,14 @@ const TableProvider = ({ children, selectable = false, pagination, rows = [] }: 
 	return (
 		<TableContextProvider value={ { tableState, setTableState } }>
 			<StatePreservingRowUpdater rows={ rows } pagination={ pagination }>
-				{ children }
+				<>{ children }</>
 			</StatePreservingRowUpdater>
 		</TableContextProvider>
 	)
 }
 
 interface IStatePreservingRowUpdaterProps {
+	children: React.ReactElement
 	rows?: Record<string,any>[]
 	pagination?: Schema.Pagination
 }
