@@ -7,26 +7,19 @@ import cn from 'classnames'
 
 import './form.css'
 
-interface IInertiaFormProps extends InertiaFormProps {
-	model?: string
-	getData: (key: string) => any
-	getErrors: (data: string) => string
-	separator: string
-}
-
-const [useForm, FormProvider] = createContext<IInertiaFormProps>()
+const [useForm, FormProvider] = createContext<Inertia.FormProps>()
 export { useForm, FormProvider }
 
 interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'> {
 	model?: string
 	data: T
-	method: HTTPVerb
+	method?: HTTPVerb
 	to: string
 	grid?: boolean
-	onSubmit?: (object: IInertiaFormProps) => boolean|void
-	onChange?: (object: IInertiaFormProps) => void
-	onSuccess?: (object: IInertiaFormProps) => void
-	onError?: (object: IInertiaFormProps) => void
+	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onChange?: (object: Inertia.FormProps) => void
+	onSuccess?: (object: Inertia.FormProps) => void
+	onError?: (object: Inertia.FormProps) => void
 	separator?: string
 }
 

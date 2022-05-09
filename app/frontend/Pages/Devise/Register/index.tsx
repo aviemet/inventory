@@ -5,20 +5,30 @@ import { Routes } from '@/lib'
 import { Tile } from '@/Components'
 import tw, { styled } from 'twin.macro'
 
-type TRegisterFormData = {
-	email: string
-	password: string
-	password_confirmation: string
-}
-
 const Register = () => {
-	const defaultData: TRegisterFormData = {
-		email: '',
-		password: '',
-		password_confirmation: '',
+	const defaultData = {
+		user: {
+			email: '',
+			password: '',
+			password_confirmation: '',
+		}
 	}
 
-	const handleSubmit = ({ transform }) => {
+	const handlePasswordChange = (value: string, { data, errors, clearErrors }: Inertia.FormProps) => {
+		if(errors['user.password'] || errors['user.password_confirmation']) {
+			if(data.user.password === data.user.password_confirmation) {
+				clearErrors('user.password', 'user.password_confirmation')
+			}
+		}
+	}
+
+	const handleSubmit = ({ data, setError, errors, transform }: InertiaFormProps) => {
+		if(data.user.password !== data.user.password_confirmation) {
+			setError('user.password', 'Passwords must match')
+			setError('user.password_confirmation', 'Passwords must match')
+			return false
+		}
+
 		transform(data => ({ user: data }))
 	}
 
@@ -35,11 +45,11 @@ const Register = () => {
 					</div>
 
 					<div tw="mb-2">
-						<Input name="password" type="password" placeholder="Password" autoComplete="new-password" required />
+						<Input name="password" type="password" placeholder="Password" autoComplete="new-password" required onChange={ handlePasswordChange } />
 					</div>
 
 					<div tw="mb-2">
-						<Input name="password_confirmation" type="password" placeholder="Confirm Password" autoComplete="new-password" required />
+						<Input name="password_confirmation" type="password" placeholder="Confirm Password" autoComplete="new-password" required onChange={ handlePasswordChange } />
 					</div>
 
 					<div tw="mb-4">

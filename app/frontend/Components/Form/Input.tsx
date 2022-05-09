@@ -9,38 +9,38 @@ interface IInputProps extends Omit<InputProps, 'onChange'|'ref'> {
 	label?: string
 	name: string
 	model?: string
-	onChange?: (value: any) => void
+	onChange?: (value: string, form: Inertia.FormProps) => void
 }
 
 const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 	{ label, name, model, onChange, type = 'text', id, required, ...props },
 	ref,
 ) => {
-	const { setData, errors, getData } = useForm()
+	const form = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
 
 	const handleChange = useCallback((e:  React.ChangeEvent<HTMLInputElement>) => {
-		setData(inputName, e.target.value)
-		if(onChange) onChange(e.target.value)
+		form.setData(inputName, e.target.value)
+		if(onChange) onChange(e.target.value, form)
 	}, [onChange, inputName])
 
 	return (
 		<Field
 			type={ type }
 			required={ required }
-			errors={ !!errors?.[name] }
+			errors={ !!form.errors?.[inputName] }
 		>
 			<Input
 				id={ id || inputId }
 				name={ inputName }
 				label={ label }
-				value={ getData(inputName) }
+				value={ form.getData(inputName) }
 				onChange={ handleChange }
 				type={ type }
 				ref={ ref }
 				{ ...props }
 			/>
-			<Feedback errors={ errors[inputName] } />
+			<Feedback errors={ form.errors[inputName] } />
 		</Field>
 	)
 })

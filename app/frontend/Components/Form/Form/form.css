@@ -54,17 +54,6 @@ div.field {
     }
   }
 
-  .feedback {
-    .error,
-    .hint {
-      width: calc(100% - 1px);
-    }
-    .error {
-      @apply py-1 px-2;
-      @apply text-error-dark bg-error-light border-l border-error-dark;
-    }
-  }
-
   .icon {
     @apply absolute flex justify-center items-center;
     @apply mt-px ml-px px-2 bg-gray-100;
