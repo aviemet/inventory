@@ -1,12 +1,11 @@
-import { 
-	type InertiaFormProps as DefaultInertiaFormProps
-} from '@inertiajs/inertia-react'
+import {  type InertiaFormProps as DefaultInertiaFormProps } from '@inertiajs/inertia-react'
 import {
 	Page, 
 	PageProps,
 	Errors,
 	ErrorBag,
 } from '@inertiajs/inertia'
+import { Instance } from 'flatpickr/dist/types'
 
 declare global {
 	type HTTPVerb = 'post'|'put'|'get'|'patch'|'destroy'
@@ -55,4 +54,14 @@ declare global {
 			separator: string
 		}
 	}
+
+	declare namespace Flatpicker {
+		export interface Instance extends Instance {}
+		export interface ChangeProps {
+			dates: Date[]
+			dateStr: string
+			instance: Instance
+		}
+	}
+
 }

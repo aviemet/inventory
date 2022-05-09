@@ -6,22 +6,23 @@ import Feedback from './Feedback'
 import TextareaInput from '../Inputs/Textarea'
 import cx from 'classnames'
 
-interface ITextareaProps extends TextAreaProps {
+interface ITextareaProps extends Omit<TextAreaProps, 'onChange'> {
 	label?: string
 	name: string
+	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>, form: Inertia.FormProps) => void
 }
 
 const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaProps) => {
-	const { getData, setData, errors } = useForm()
+	const form = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		setData(inputName, e.target.value)
-		if(onChange) onChange(e)
+		form.setData(inputName, e.target.value)
+		if(onChange) onChange(e, form)
 	}, [onChange, inputName])
 
 	return (
-		<Field type="textarea" required={ required } errors={ !!errors?.[name] }>
+		<Field type="textarea" required={ required } errors={ !!form.errors?.[name] }>
 			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
 				{ label }
 			</label> }
@@ -29,12 +30,12 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 				id={ id || inputId }
 				name={ inputName }
 				onChange={ handleChange }
-				value={ getData(inputName) }
+				value={ form.getData(inputName) }
 				required={ required }
 				{ ...props }
 			>
 			</TextareaInput>
-			<Feedback errors={ errors[name] } />
+			<Feedback errors={ form.errors[name] } />
 		</Field>
 	)
 }
