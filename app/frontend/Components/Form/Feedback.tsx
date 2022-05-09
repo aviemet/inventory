@@ -1,15 +1,19 @@
 import React from 'react'
-import cx from 'classnames'
+import cn from 'classnames'
 import { DivProps } from 'react-html-props'
+import tw from 'twin.macro'
 
 interface IFeedbackProps extends DivProps{
 	errors?: string | string[]
 }
 
-const Feedback = ({ errors, className, ...props }: IFeedbackProps) => {
+const Feedback = ({ errors, ...props }: IFeedbackProps) => {
 	return (
 		<>
-			{ errors && <div className={ cx('feedback', className) } { ...props }>
+			{ errors && <div
+				tw="py-1 px-2 text-error-dark bg-error-light"
+				{ ...props }
+			>
 				{ typeof errors === 'string' && errors }
 				{ Array.isArray(errors) && <ul>
 					{ errors.map((error, i) => <li key={ i }>{ error }</li>) }

@@ -44,4 +44,15 @@ declare global {
 	interface InertiaPage extends Page<PageProps> {
 		props: SharedInertiaProps
 	}
+
+	declare namespace Inertia {
+		type Errors = Record<string|number|symbol, string|string[]>
+		
+		interface FormProps extends InertiaFormProps {
+			model?: string
+			getData: (key: string) => any
+			getErrors: (data: string) => string
+			separator: string
+		}
+	}
 }
