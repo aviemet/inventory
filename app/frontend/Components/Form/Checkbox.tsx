@@ -5,17 +5,18 @@ import Feedback from './Feedback'
 import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
 import cx from 'classnames'
 
-interface IFormCheckboxProps extends ICheckboxProps {
+interface IFormCheckboxProps extends Omit<ICheckboxProps, 'onChange'> {
 	name: string
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>, form: Inertia.FormProps) => void
 }
 
 const Checkbox = ({ name, onChange, id, required, className, label, ...props }: IFormCheckboxProps) => {
-	const { getData, setData, errors } = useForm()
+	const form = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-		setData(inputName, e.target.checked)
-		if(onChange) onChange(e)
+		form.setData(inputName, e.target.checked)
+		if(onChange) onChange(e, form)
 	}, [onChange, inputName])
 
 	return (
@@ -23,20 +24,20 @@ const Checkbox = ({ name, onChange, id, required, className, label, ...props }: 
 			className="pl-2"
 			type="checkbox"
 			required={ required }
-			errors={ !!errors?.[name] }
+			errors={ !!form.errors?.[name] }
 		>
 			<CheckboxInput
 				id={ id || inputId }
 				name={ inputName }
 				type="checkbox"
-				defaultChecked={ Boolean(getData(inputName)) }
-				value={ getData(inputName) }
+				defaultChecked={ Boolean(form.getData(inputName)) }
+				value={ form.getData(inputName) }
 				onChange={ handleChange }
 				className={ cx('mt-auto', 'mb-auto', className) }
 				label={ label }
 				{ ...props }
 			/>
-			<Feedback errors={ errors[name] } />
+			<Feedback errors={ form.errors[name] } />
 		</Field>
 	)
 }

@@ -1,20 +1,21 @@
 import React, { forwardRef } from 'react'
 import cx from 'classnames'
 import tw, { styled, css } from 'twin.macro'
+import { InputProps } from 'react-html-props'
 
 export type TOption = {
 	label: string
 	value: string
 }
 
-interface IRadioButtonsProps {
+export interface IRadioButtonsProps extends InputProps {
 	label?: string
 	labelPosition?: 'start'|'end'
 	name: string
 	options: TOption[]
 	id?: string
 	value?: string | number | readonly string[]
-	onChange?: Function
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const RadioButtons = ({ label, labelPosition = 'start', options, name, id, value, onChange }: IRadioButtonsProps) => {
@@ -38,7 +39,7 @@ const RadioButtons = ({ label, labelPosition = 'start', options, name, id, value
 								value={ option.value }
 								checked={ option.value === value }
 								onChange={ e => {
-									if(onChange) onChange(e.target.value)
+									if(onChange) onChange(e)
 								} }
 							/>
 							<OptionLabel htmlFor={ optionId }>

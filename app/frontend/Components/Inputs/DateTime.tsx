@@ -6,12 +6,17 @@ import cx from 'classnames'
 
 import 'flatpickr/dist/themes/material_green.css'
 
-export interface IDateTimeProps extends DateTimePickerProps {
+export interface IDateTimeProps extends Omit<DateTimePickerProps, 'onChange'> {
 	label?: string
 	name?: string
+	onChange?: (values: Flatpicker.ChangeProps) => void
 }
 
 const DateTime = ({ label, name, required, value, onChange, type = 'text', id, ...props }: IDateTimeProps) => {
+	const handleChange = (dates: Date[], dateStr: string, instance: Flatpicker.Instance) => {
+		if(onChange) onChange({ dates, dateStr, instance })
+	}
+
 	return (
 		<>
 			{ label && <label className={ cx({ required }) } htmlFor={ id }>
@@ -22,7 +27,7 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 	        data-enable-time
 					name={ name }
 					required={ required }
-					onChange={ onChange }
+					onChange={ handleChange }
 					value={ value }
 					options={ {
 						altInput: true,

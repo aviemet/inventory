@@ -34,7 +34,8 @@
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     "typeRoots": [                                    /* Specify multiple folders that act like `./node_modules/@types`. */
 			"./node_modules/@types",
-      "./app/frontend/types"
+      "./app/frontend/types",
+      "./node_modules/flatpickr/dist/types",
 			],
     "types": [                                         /* Specify type package names to be included without being referenced in a source file. */
       "vite-plugin-svgr/client",
