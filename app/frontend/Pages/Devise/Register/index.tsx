@@ -24,17 +24,18 @@ const Register = () => {
 
 	const handleSubmit = ({ data, setError, errors, transform }: InertiaFormProps) => {
 		if(data.user.password !== data.user.password_confirmation) {
-			setError('user.password', 'Passwords must match')
 			setError('user.password_confirmation', 'Passwords must match')
 			return false
 		}
+	}
 
-		transform(data => ({ user: data }))
+	const handleError = ({ errors }) => {
+		console.log({ errors })
 	}
 
 	return (
 		<Tile.Container>
-			<Form model="user" data={ defaultData } to={ Routes.userRegistration() } onSubmit={ handleSubmit } grid={ false }>
+			<Form model="user" data={ defaultData } to={ Routes.userRegistration() } onSubmit={ handleSubmit } onError={ handleError } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
 						<h1 tw="text-center">Sign Up</h1>
