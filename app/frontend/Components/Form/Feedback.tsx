@@ -11,7 +11,7 @@ const Feedback = ({ errors, ...props }: IFeedbackProps) => {
 	return (
 		<>
 			{ errors && <div
-				tw="py-1 px-2 text-error-dark bg-error-light"
+				tw="py-1 px-2 text-alert-dark bg-alert-light"
 				{ ...props }
 			>
 				{ typeof errors === 'string' && errors }

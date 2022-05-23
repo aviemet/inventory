@@ -29,16 +29,14 @@ class ApplicationController < ActionController::Base
   def set_active_company(company = nil)
     return if !current_user
 
-    # if Company.count === 0
-    #   redirect_to complete_registration_path
-    # end
-
     current_user.active_company = company if company
 
     if current_user.companies.count > 0
       current_user.update(active_company: current_user.companies.first) if !current_user.active_company
 
       @active_company = current_user.active_company
+    elsif !['/companies/new', '/companies'].include? request.path
+      redirect_to new_company_path, alert: "You must have at least one company to work with. Please create a company or wait to be invited to a company by another user."
     end
   end
 
