@@ -65,7 +65,7 @@ module.exports = {
 				light: colors.yellow['200'],
 				dark: colors.yellow['900']
 			},
-			error: {
+			alert: {
 				DEFAULT: colors.red['400'],
 				hover: colors.red['600'],
 				light: colors.red['200'],

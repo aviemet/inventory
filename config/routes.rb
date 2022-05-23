@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   # RESOURCEFUL PATHS #
 
   resources :users, except: [:create]
-  resources :companies, concerns: :contactable
+  resources :companies, concerns: :contactable, param: :slug
   resources :ownerships
 
   resources :departments, concerns: :contactable

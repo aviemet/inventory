@@ -13,23 +13,21 @@ import {
 export interface IItemFormProps {
 	to: string
 	method?: HTTPVerb
+	onSubmit?: (object: Inertia.FormProps) => boolean|void
 	item: Schema.Item
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
 }
 
-const ItemForm = ({ to, method = 'post', item, models, vendors, locations }: IItemFormProps) => {
-	const handleSubmit = () => {
-	}
-
+const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locations }: IItemFormProps) => {
 	return (
 		<Form
 			model="item"
 			data={ { item } }
 			to={ to }
 			method={ method }
-			onSubmit={ handleSubmit }
+			onSubmit={ onSubmit }
 			className="max-w-5xl"
 		>
 
