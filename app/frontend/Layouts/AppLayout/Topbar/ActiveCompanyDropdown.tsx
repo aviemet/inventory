@@ -1,12 +1,12 @@
 import React from 'react'
 import { SearchableDropdown } from '@/Components/Inputs'
+import { isEmpty } from 'lodash'
 import 'twin.macro'
 
 const ActiveCompany = ({ user }: { user: Schema.User }) => {
-	if(!user || !user.companies) return <h3 tw="text-brand-dark">Inventory Application</h3>
+	if(!user || !user.companies || isEmpty(user.companies)) return <h3 tw="text-brand-dark">Inventory Application</h3>
 
-	// User model ensures active_company is not null if user has associated companies
-	if(user.companies.length <= 1) return <h3 tw="text-brand-dark">{ user.active_company!.name }</h3>
+	if(user.companies.length === 1) return <h3 tw="text-brand-dark">{ user.active_company!.name }</h3>
 
 	return (
 		<SearchableDropdown

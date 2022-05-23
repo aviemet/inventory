@@ -74,7 +74,7 @@ class ItemsController < ApplicationController
   def create
     item.company = @active_company
     if item.save
-      redirect_to item
+      redirect_to item, notice: 'Item was successfully created'
     else
       redirect_to new_item_path, inertia: { errors: item.errors }
     end
@@ -84,7 +84,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /hardware/:id.json
   def update
     if item.update(item_params)
-      redirect_to item
+      redirect_to item, notice: 'Item was successfully updated'
     else
       redirect_to edit_item_path, inertia: { errors: item.errors }
     end

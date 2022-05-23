@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLayout } from '@/Providers'
+import { Flash } from '@/Components/Flash'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
@@ -8,13 +9,14 @@ import tw, { styled } from 'twin.macro'
 
 import './appLayout.css'
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({ children }: { children: React.ReactNode }) => {
 	const { layoutState } = useLayout()
 	return (
 		<div
 			id="grid-layout"
 			className={ cn({ 'side-bar-closed': !layoutState.sidebarOpen }) }
 		>
+			<Flash />
 			<Sidebar />
 			<Topbar />
 			<main id="content-wrapper" scroll-region="true">

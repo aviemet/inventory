@@ -8,7 +8,7 @@ interface IInputProps extends InputProps {
 }
 
 const Input = forwardRef<HTMLInputElement, IInputProps>((
-	{ label, required = false, value, onChange, type = 'text', id, ...props },
+	{ label, required = false, value, onChange, type = 'text', id, pattern, ...props },
 	ref,
 ) => {
 	return (
@@ -23,6 +23,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>((
 				type={ type }
 				required={ required }
 				ref={ ref }
+				pattern={ pattern }
 				{ ...props }
 			/>
 		</>
