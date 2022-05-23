@@ -4,8 +4,8 @@ class CompaniesController < ApplicationController
   load_and_authorize_resource find_by: :slug
   skip_authorize_resource only: [:new, :create]
 
-  expose :companies, -> { search(Company, sortable_fields) }
-  expose :company, find_by: :slug
+  expose :companies, -> { search(current_user.companies, sortable_fields) }
+  expose :company, -> { current_user.companies.find_by_slug params[:slug] }
 
   # GET /companies
   # GET /companies.json
@@ -24,6 +24,7 @@ class CompaniesController < ApplicationController
   # GET /companies/:id
   # GET /companies/:id.json
   def show
+    ap({ slug: params[:company], company: company })
     render inertia: "Companies/Show", props: {
       company: company.as_json(include: [:locations, :departments, :items, :people])
     }
@@ -43,33 +44,25 @@ class CompaniesController < ApplicationController
 
   # POST /companies
   # POST /companies.json
-  def create
-    respond_to do |format|
+  def create    
       if company.save
         # Assign admin permissions to user creating the record
         current_user.add_role :admin, company
         current_user.update(active_company: company)
 
-        format.html { redirect_to company, notice: 'Company was successfully created.' }
-        format.json { render :show, status: :created, location: company }
+        redirect_to company, notice: 'Company was successfully created.'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: company.errors, status: :unprocessable_entity }
+        redirect_to new_company_path, inertia: { errors: company.errors }
       end
-    end
   end
 
   # PATCH/PUT /companies/:id
   # PATCH/PUT /companies/:id.json
   def update
-    respond_to do |format|
-      if company.update(company_params)
-        format.html { redirect_to company, notice: 'Company was successfully updated.' }
-        format.json { render :show, status: :ok, location: company }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: company.errors, status: :unprocessable_entity }
-      end
+    if company.update(company_params)
+      redirect_to company, notice: 'Company was successfully updated.'
+    else
+      redirect_to edit_company_path, inertia: { errors: company.errors }
     end
   end
 

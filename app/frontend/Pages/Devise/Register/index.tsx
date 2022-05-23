@@ -29,28 +29,45 @@ const Register = () => {
 		}
 	}
 
-	const handleError = ({ errors }) => {
-		console.log({ errors })
-	}
-
 	return (
 		<Tile.Container>
-			<Form model="user" data={ defaultData } to={ Routes.userRegistration() } onSubmit={ handleSubmit } onError={ handleError } grid={ false }>
+			<Form model="user" data={ defaultData } to={ Routes.userRegistration() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
+
 					<div tw="mb-2">
 						<h1 tw="text-center">Sign Up</h1>
 					</div>
 
 					<div tw="mb-2">
-						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" required />
+						<Input
+							name="email"
+							placeholder="Email"
+							autoFocus
+							autoComplete="Email"
+							required
+						/>
 					</div>
 
 					<div tw="mb-2">
-						<Input name="password" type="password" placeholder="Password" autoComplete="new-password" required onChange={ handlePasswordChange } />
+						<Input
+							name="password"
+							type="password"
+							placeholder="Password"
+							autoComplete="new-password"
+							required
+							onChange={ handlePasswordChange }
+						/>
 					</div>
 
 					<div tw="mb-2">
-						<Input name="password_confirmation" type="password" placeholder="Confirm Password" autoComplete="new-password" required onChange={ handlePasswordChange } />
+						<Input
+							name="password_confirmation"
+							type="password"
+							placeholder="Confirm Password"
+							autoComplete="new-password"
+							required
+							onChange={ handlePasswordChange }
+						/>
 					</div>
 
 					<div tw="mb-4">
