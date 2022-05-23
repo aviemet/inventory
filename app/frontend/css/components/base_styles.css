@@ -328,10 +328,10 @@
     }
 
     &.danger {
-      @apply bg-error text-white border-error-dark;
+      @apply bg-alert text-white border-alert-dark;
 
       &:hover {
-        @apply bg-error-hover;
+        @apply bg-alert-hover;
       }
     }
 

@@ -5,33 +5,21 @@ import { Routes } from '@/lib'
 import { Tile } from '@/Components'
 import tw from 'twin.macro'
 
-const ConfirmationsNew = ({ user }) => {
-	const handleSubmitConfirmationCode = ({ transform }) => {
+interface IConfirmationsNew {
+	user: Schema.User
+}
 
-	}
-
-	const handleResendConfirmation = ({ transform }) => {
+const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
+	const handleResendConfirmation = ({ transform }: InertiaFormProps) => {
 		transform(data => ({ user: data }))
 	}
 
 	return (
 		<Tile.Container>
-			<Form model="user" data={ { code: '' } } to={ Routes.userConfirmation() } onSubmit={ handleSubmitConfirmationCode } grid={ false }>
+			<Form model="user" data={ { user: { email: user.email || '' } } } to={ Routes.userConfirmation() } onSubmit={ handleResendConfirmation } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
-						<h3 tw="text-center mb-2">Please Confirm Your Email</h3>
-						<p>When you registered, we sent you an email with a confirmation code. Please enter that code below to complete registration.</p>
-					</div>
-
-					<div tw="mb-2">
-						<Input name="code" placeholder="Confirmation Code" autoFocus required />
-					</div>
-				</Tile.Content>
-			</Form>
-
-			<Form model="user" data={ { email: user.email || '' } } to={ Routes.userConfirmation() } onSubmit={ handleResendConfirmation } grid={ false }>
-				<Tile.Content>
-					<div tw="mb-2">
+						<h3 tw="mb-2">We need to confirm your email address</h3>
 						<p>If you did not receive a confirmation message, submit your email address below to have it resent.</p>
 					</div>
 
@@ -55,11 +43,3 @@ const ConfirmationsNew = ({ user }) => {
 }
 
 export default ConfirmationsNew
-
-/*
-
-<div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-  </div>
-	*/

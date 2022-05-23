@@ -7,17 +7,17 @@ class CompanyBlueprint < ApplicationBlueprint
   view :counts do
     field :counts do |company|
       {
-        locations: company.locations.count,
-        items: company.items.count,
-        accessories: company.accessories.count,
-        consumables: company.consumables.count,
-        components: company.components.count,
-        departments: company.departments.count,
-        licenses: company.licenses.count,
-        contracts: company.contracts.count,
-        people: company.people.count,
-        vendors: company.vendors.count,
-        manufacturers: company.manufacturers.count,
+        locations: company&.locations&.size || 0,
+        items: company&.items&.size || 0,
+        accessories: company&.accessories&.size || 0,
+        consumables: company&.consumables&.size || 0,
+        components: company&.components&.size || 0,
+        departments: company&.departments&.size || 0,
+        licenses: company&.licenses&.size || 0,
+        contracts: company&.contracts&.size || 0,
+        people: company&.people&.size || 0,
+        vendors: company&.vendors&.size || 0,
+        manufacturers: company&.manufacturers&.size || 0,
       }
     end
   end
