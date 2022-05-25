@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  skip_before_action :verify_authenticity_token, if: -> { request.inertia? }
+
   add_flash_types :info, :error
 
   before_action :decode_id
