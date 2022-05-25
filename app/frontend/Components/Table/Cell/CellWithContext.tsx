@@ -62,6 +62,6 @@ interface Th extends THProps {
 	nowrap?: string
 }
 
-const Th = ({ children, ...props }) => <th { ...props }>{ children }</th>
+const Th = ({ children, ...props }: Th) => <th { ...props }>{ children }</th>
 
 export default CellWithContext

@@ -16,16 +16,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.save
     yield resource if block_given?
     if resource.persisted?
+      ap "PERSISTED"
       if resource.active_for_authentication?
-        set_flash_message! :notice, :signed_up
+        ap "ACTIVE FOR AUTHENTICATION"
+        # set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
       else
+        ap "Not ACTIVE FOR AUTHENTICATION"
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        redirect_to after_inactive_sign_up_path_for(resource)
       end
     else
+      ap "Not PERSISTED"
       clean_up_passwords resource
       set_minimum_password_length
       redirect_to new_user_registration_path
@@ -75,6 +79,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    super(resource)
+    new_confirmation_path(resource, { email: resource.email })
   end
 end

@@ -1,65 +1,75 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:index, :new]
+  expose :user
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-    render inertia: "Purchases/Index"
+    render inertia: "Users/Index"
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    render inertia: "Purchases/Show"
+    render inertia: "Users/Show"
   end
 
   # GET /users/new
   def new
-    @user = User.new
-    render inertia: "Purchases/New"
+    render inertia: "Users/New"
   end
 
   # GET /users/1/edit
   def edit
-    render inertia: "Purchases/Edit"
+    render inertia: "Users/Edit"
   end
 
+  # GET /users/complete_registration
   def complete_registration
+    redirect_to root_path unless current_user.companies.empty?
+
     render inertia: "Public/Devise/Register/Complete"
+  end
+
+  # POST /users/complete_registration
+  def save_complete_registration
+    params.permit!
+    current_user.person ||= Person.new
+    current_user.person.assign_attributes params[:person]
+
+    current_user.transaction do
+      company = Company.create!(params[:company])
+      current_user.add_role :admin, company
+      current_user.active_company = company
+      if current_user.save
+        redirect_to root_path
+      end
+    end
+  rescue ActiveRecord::RecordInvalid
+    redirect_to complete_registration_path
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if user.update(user_params)
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      redirect_to edit_user_path(@user), inertia: { errors: @user.errors }
     end
   end
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
+    user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+      redirect_to users_url, notice: 'User was successfully destroyed.'
     end
   end
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
-  end
-
   def user_params
-    params.require(:user).permit(:email, :password, :person, :active_company, :active, :dark_mode)
+    params.require(:user).permit(:email, :password, :active_company, :active, :dark_mode, person: [:first_name, :last_name], company: [:name])
   end
 end

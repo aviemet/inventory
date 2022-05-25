@@ -45,15 +45,15 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create    
-      if company.save
-        # Assign admin permissions to user creating the record
-        current_user.add_role :admin, company
-        current_user.update(active_company: company)
+    if company.save
+      # Assign admin permissions to user creating the record
+      current_user.add_role :admin, company
+      current_user.update(active_company: company)
 
-        redirect_to company, notice: 'Company was successfully created.'
-      else
-        redirect_to new_company_path, inertia: { errors: company.errors }
-      end
+      redirect_to company, notice: 'Company was successfully created.'
+    else
+      redirect_to new_company_path, inertia: { errors: company.errors }
+    end
   end
 
   # PATCH/PUT /companies/:id

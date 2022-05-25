@@ -18,12 +18,13 @@ const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
 		<Tile.Container>
 			<Form model="user" data={ { user: { email: user.email || '' } } } to={ Routes.userConfirmation() } onSubmit={ handleResendConfirmation } grid={ false }>
 				<Tile.Content>
-					<div tw="mb-2">
-						<h3 tw="mb-2">We need to confirm your email address</h3>
-						<p>If you did not receive a confirmation message, submit your email address below to have it resent.</p>
+					<div tw="mb-3">
+						<h3 tw="mb-3">Please check your email</h3>
+						<p tw="mb-3">You will receive an email within the next couple minutes. Please follow the link to confirm your account.</p>
+						<p>If you don&apos;t receive an email, use the form below to resend it.</p>
 					</div>
 
-					<div tw="mb-2">
+					<div tw="mb-3">
 						<Input name="email" placeholder="Email" autoComplete="Email" required />
 					</div>
 

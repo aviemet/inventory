@@ -2837,6 +2837,14 @@ export const root = __jsr.r({}, [7,"/"]);
 
 /**
  * Generates rails route to
+ * /users/complete_registration(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const saveCompleteRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"complete_registration"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /settings(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
