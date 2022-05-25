@@ -3259,6 +3259,16 @@ export const root: ((
 
 /**
  * Generates rails route to
+ * /users/complete_registration(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const saveCompleteRegistration: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /settings(.:format)
  * @param {object | undefined} options
  * @returns {string} route path

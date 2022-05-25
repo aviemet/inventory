@@ -37,8 +37,8 @@ class ApplicationController < ActionController::Base
       current_user.update(active_company: current_user.companies.first) if !current_user.active_company
 
       @active_company = current_user.active_company
-    elsif !['/companies/new', '/companies'].include? request.path
-      redirect_to new_company_path, alert: "You must have at least one company to work with. Please create a company or wait to be invited to a company by another user."
+    elsif ! ['/logout', '/users/complete_registration'].include? request.path
+      redirect_to complete_registration_path
     end
   end
 

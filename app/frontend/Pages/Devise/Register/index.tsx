@@ -29,6 +29,7 @@ const Register = () => {
 		}
 	}
 
+	// TODO: Disable submit until all inputs are valid. Async check for existing email address on input blur
 	return (
 		<Tile.Container>
 			<Form model="user" data={ defaultData } to={ Routes.userRegistration() } onSubmit={ handleSubmit } grid={ false }>

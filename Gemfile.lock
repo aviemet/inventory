@@ -400,7 +400,7 @@ GEM
     time_for_a_boolean (0.2.1)
       activerecord
       railties
-    timeout (0.2.0)
+    timeout (0.3.0)
     ts_schema (0.1.13)
       rails (>= 6.0.0)
       railties (>= 4)

@@ -1,24 +1,37 @@
 import React from 'react'
-import { Form, Input, Checkbox, Submit } from '@/Components/Form'
+import { usePage } from '@inertiajs/inertia-react'
+import { Form, Input, Submit } from '@/Components/Form'
 import HoverLink from '../../HoverLink'
 import { Routes } from '@/lib'
 import { Tile } from '@/Components'
-import tw, { styled } from 'twin.macro'
+import 'twin.macro'
 
 type TRegisterFormData = {
-	email: string
-	password: string
-	password_confirmation: string
+	person: {
+		first_name: string
+		last_name: string
+	}
+	company: {
+		name: string
+	}
 }
 
 const CompleteRegistration = () => {
+	const { props: { auth: { user } } } = usePage<InertiaPage>()
+
+	console.log({ user })
+
 	const defaultData: TRegisterFormData = {
-		email: '',
-		password: '',
-		password_confirmation: '',
+		person: {
+			first_name: user.person?.first_name ?? '',
+			last_name: user.person?.last_name ?? '',
+		},
+		company: {
+			name: user.active_company?.name ?? '',
+		},
 	}
 
-	const handleSubmit = ({ transform }) => {
+	const handleSubmit = ({ transform }: InertiaFormProps) => {
 
 	}
 
@@ -27,7 +40,8 @@ const CompleteRegistration = () => {
 			<Form model="person" data={ defaultData } to={ Routes.completeRegistration() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
-						<h1 tw="text-center">Complete Registration</h1>
+						<h2 tw="text-center mb-2">Complete Registration</h2>
+						<p>Let&apos;s get a little more information about you.</p>
 					</div>
 
 					<div tw="mb-2">
@@ -36,6 +50,10 @@ const CompleteRegistration = () => {
 
 					<div tw="mb-2">
 						<Input name="last_name" placeholder="Last Name" autoComplete="last-name" />
+					</div>
+
+					<div tw="mb-2">
+						<p>And the name of the entity which owns the assets you&apos;ll be tracking.</p>
 					</div>
 
 					<div tw="mb-2">

@@ -23,6 +23,8 @@ class User < ApplicationRecord
   # after_create :add_email_to_contact
 
   before_save :coerce_json
+
+  accepts_nested_attributes_for :person
  
   private
 
