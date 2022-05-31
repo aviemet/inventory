@@ -33,7 +33,12 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/new
   def new
-    render inertia: "Accessories/New"
+    render inertia: "Accessories/New", props: {
+      accessory: AccessoryBlueprint.render_as_json(Accessory.new, view: :new),
+      models: @active_company.models.find_by_category(:Accessory).as_json,
+      vendors: @active_company.vendors.as_json,
+      locations: @active_company.locations.as_json,
+    }
   end
 
   # GET /accessories/1/edit

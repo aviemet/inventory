@@ -1,22 +1,11 @@
 import React from 'react'
-import {
-	MenuBarsIcon,
-	PlusCircleIcon,
-	ItemsIcon,
-	LicensesIcon,
-	PeopleIcon,
-	TicketsIcon,
-	AccessoriesIcon,
-	ComponentsIcon,
-	ConsumablesIcon,
-} from '@/Components/Icons'
+import { MenuBarsIcon } from '@/Components/Icons'
 import ActiveCompanyDropdown from './ActiveCompanyDropdown'
-import { Option, Popover } from '@/Components/Popover'
 import tw, { styled } from 'twin.macro'
-import { Routes } from '@/lib'
 import { IconContext } from 'react-icons'
 import { useLayout } from '@/Providers'
 import { usePage } from '@inertiajs/inertia-react'
+import QuickNewMenu from './QuickNewMenu'
 
 const Topbar = () => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
@@ -37,29 +26,7 @@ const Topbar = () => {
 				</div>
 
 				<div>
-					<Popover icon={ PlusCircleIcon }>
-						<Option href={ Routes.newItem() }>
-							<ItemsIcon />New Item
-						</Option>
-						<Option href={ Routes.newAccessory() }>
-							<AccessoriesIcon />New Accessory
-						</Option>
-						<Option href={ Routes.newComponent() }>
-							<ComponentsIcon />New Component
-						</Option>
-						<Option href={ Routes.newConsumable() }>
-							<ConsumablesIcon />New Consumable
-						</Option>
-						<Option href={ Routes.newLicense() }>
-							<LicensesIcon />New License
-						</Option>
-						<Option href={ Routes.newPerson() }>
-							<PeopleIcon />New Person
-						</Option>
-						<Option href={ '#'/*Routes.newTicket()*/ }>
-							<TicketsIcon />New Ticket
-						</Option>
-					</Popover>
+					<QuickNewMenu />
 				</div>
 			</TopbarHeader>
 		</IconContext.Provider>

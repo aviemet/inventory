@@ -6,8 +6,13 @@ import { formatter, Routes } from '@/lib'
 import tw from 'twin.macro'
 import { StickyLink, StickyTarget } from '@/Components/StickyContent/index'
 
-const ShowAccessory = ({ accessory }) => {
+interface IShowAccessoryProps {
+	accessory: Schema.Accessory
+}
+
+const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 	const title = accessory.name ?? 'Accessory Details'
+
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -78,9 +83,9 @@ const ShowAccessory = ({ accessory }) => {
 						</div>
 
 						<div className="item-row">
-							<label>Assigned To:</label>
+							<label>Quantity:</label>
 							<div className="value">
-								Figure this out
+								{ accessory.qty !== undefined && accessory.qty !== null && accessory.qty >= 0 ? accessory.qty - accessory?.assignments!.length : 0 } / { accessory.qty }
 							</div>
 						</div>
 
@@ -101,7 +106,7 @@ const ShowAccessory = ({ accessory }) => {
 						<div className="item-row">
 							<label>Purchase Date:</label>
 							<div className="value">
-								{ accessory.purchased_at && formatter.date.short(accessory.purchased_at) }
+
 							</div>
 						</div>
 
@@ -154,11 +159,7 @@ const ShowAccessory = ({ accessory }) => {
 				<section>
 					<h3>Licenses</h3>
 
-					<ul>
-						{ accessory.licenses && accessory.licenses.map(license => (
-							<li key={ license.id }>{ license.name }</li>
-						)) }
-					</ul>
+
 				</section>
 			</section>
 		</>

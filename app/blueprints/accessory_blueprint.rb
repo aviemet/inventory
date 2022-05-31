@@ -14,7 +14,7 @@ class AccessoryBlueprint < ApplicationBlueprint
          :updated_at
 
   field :cost do |accessory|
-    accessory.cost&.amount.to_f
+    accessory.cost&.amount.to_f if accessory.cost
   end
 
   view :associations do
