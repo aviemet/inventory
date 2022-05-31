@@ -25,7 +25,10 @@ class UsersController < ApplicationController
 
   # GET /users/complete_registration
   def complete_registration
-    redirect_to root_path unless current_user.companies.empty?
+    unless current_user.companies.empty?
+      redirect_to root_path 
+      return
+    end
 
     render inertia: "Public/Devise/Register/Complete"
   end
