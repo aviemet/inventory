@@ -1,21 +1,25 @@
 import React from 'react'
 import { useTableContext } from './TableContext'
 import Row from './Row'
-import cx from 'classnames'
+import cn from 'classnames'
 
-const RowIterator = ({ render }) => {
-	const { tableState: { selected, rows, columns } } = useTableContext()
-	console.log({ columns })
+interface IRowIteratorProps {
+	render: (row: any) => JSX.Element
+}
+
+const RowIterator = ({ render }: IRowIteratorProps) => {
+	const { tableState: { selected, rows } } = useTableContext()
+
 	if(!rows || rows.length === 0) {
 		return <Row />
 	}
 
-	const handleRowProps = row => {
+	const handleRowProps = (row: JSX.Element) => {
 		return React.cloneElement(
 			row,
 			{
 				name: row.key,
-				className: cx(
+				className: cn(
 					{ checked: selected.has(row.key) }
 				)
 			}

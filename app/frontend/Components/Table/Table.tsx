@@ -1,31 +1,23 @@
 import React from 'react'
-import cx from 'classnames'
+import cn from 'classnames'
 import { TableProps } from 'react-html-props'
 
 interface ITableProps extends TableProps {
-	pagination?: Schema.Pagination
 	fixed?: boolean
 }
 
-const Table = ({
-	children,
-	pagination,
-	fixed = false,
-	...props
-}: ITableProps) => {
+const Table = ({ children, fixed = false, ...props }: ITableProps) => {
 	return (
-		<>
-			<table
-				className={ cx(
-					'shadow',
-					{ 'table-fixed': fixed },
-					{ 'table-auto': !fixed }
-				) }
-				{ ...props }
-			>
-				{ children }
-			</table>
-		</>
+		<table
+			className={ cn(
+				'shadow',
+				{ 'table-fixed': fixed },
+				{ 'table-auto': !fixed }
+			) }
+			{ ...props }
+		>
+			{ children }
+		</table>
 	)
 }
 
