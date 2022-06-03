@@ -13,13 +13,13 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 	try{
 		const { tableState: { rows, selectable, selected } } = useTableContext()
 		return (
-			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected }>
+			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected } { ...props }>
 				{ children }
 			</RowInContext>
 		)
 	} catch(e) {
 		return (
-			<NormalRow name={ name }>
+			<NormalRow name={ name } { ...props }>
 				{ children }
 			</NormalRow>
 		)
@@ -28,7 +28,14 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 
 export default Row
 
-const RowInContext = ({ children, name, rows, selectable, selected, ...props }) => {
+interface IRowInContextProps extends TRProps {
+	name: string
+	rows: any[]
+	selectable: boolean
+	selected: Set<string>
+}
+
+const RowInContext = ({ children, name, rows, selectable, selected, ...props }: IRowInContextProps) => {
 	const { section } = useTableSectionContext()
 
 	const Checkbox = () => {
@@ -49,7 +56,7 @@ const RowInContext = ({ children, name, rows, selectable, selected, ...props }) 
 	)
 }
 
-const NormalRow = ({ children,  ...props }) => {
+const NormalRow = ({ children,  ...props }: TRProps) => {
 	return (
 		<tr { ...props }>
 			{ children }

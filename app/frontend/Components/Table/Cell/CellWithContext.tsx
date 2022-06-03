@@ -3,16 +3,12 @@ import { Link } from '@inertiajs/inertia-react'
 import { THProps } from 'react-html-props'
 import cn from 'classnames'
 import { type ICellProps } from './index'
-import { useTableContext } from '../TableContext'
 
 interface ICellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
 }
 
 const CellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hideable, ...props }: ICellWithContextProps) => {
-	const { tableState, setTableState } = useTableContext()
-
-	console.log({ tableState })
 
 	const { origin, pathname, search } = window.location
 
@@ -22,9 +18,6 @@ const CellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hidea
 
 	if(sort) {
 		params.set('sort', sort)
-		if(hideable && !tableState.columns.has(sort)) {
-			setTableState({ columns: tableState.columns.add(sort) })
-		}
 	} else {
 		params.delete('sort')
 	}

@@ -3,6 +3,7 @@ import { createContext } from '../Hooks'
 
 /**
  * Table Section Context
+ * Used by Cell component to determine which tag to use
  */
 interface ITableSectionContextProvider {
 	section: 'head'|'body'|'footer'
@@ -18,7 +19,6 @@ interface ITableSettings {
 	selectable: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
-	columns: Set<string>
 	selected: Set<string>
 }
 
@@ -46,7 +46,6 @@ const TableProvider: React.FC<ITableContextProviderProps> = ({ children, selecta
 	const [tableState, setTableState] = useReducer(tableReducer, {
 		selectable,
 		rows,
-		columns: new Set<string>(),
 		pagination,
 		selected: new Set<string>(),
 	})

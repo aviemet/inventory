@@ -3,7 +3,7 @@ import Footer from '../Footer'
 import { styled } from 'twin.macro'
 
 interface IAuthLayoutProps {
-	children: React.ReactElement
+	children: React.ReactNode
 }
 
 const AuthLayout: React.FC<IAuthLayoutProps> = ({ children }) => {
