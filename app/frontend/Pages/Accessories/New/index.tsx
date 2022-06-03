@@ -4,7 +4,7 @@ import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewAccessoryProps {
-	accessory: Schema.Item
+	accessory: Schema.Accessory
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
