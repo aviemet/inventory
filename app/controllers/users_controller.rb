@@ -2,13 +2,11 @@ class UsersController < ApplicationController
   expose :user
 
   # GET /users
-  # GET /users.json
   def index
     render inertia: "Users/Index"
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
     render inertia: "Users/Show", props: {
       user: UserBlueprint.render_as_json(user, view: :associations)
@@ -54,7 +52,6 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     if user.update(user_params)
       redirect_to user, notice: 'User was successfully updated.'
@@ -63,16 +60,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # PATCH /users/update_table_preferences/:id
   def update_table_preferences
-    ap({params: params[:user][:table_preferences] })
-    user.table_preferences = params[:user][:table_preferences]
-    if user.save
+    if user.update_column(:table_preferences, current_user.table_preferences.deep_merge(request.params[:user][:table_preferences]))
       head :ok, content_type: "text/html"
     end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     user.destroy
     respond_to do |format|
@@ -83,6 +78,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :active_company, :active, :dark_mode, :table_preferences, person: [:first_name, :last_name], company: [:name])
+    params.require(:user).permit(:email, :password, :active_company, :active, :dark_mode, person: [:first_name, :last_name], company: [:name])
   end
 end

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
+import { Head, usePage } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
@@ -17,6 +17,9 @@ interface IItemsIndexProps {
 
 const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 	const title = 'Hardware Assets'
+
+	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
+	console.log({ table_preferences })
 
 	return (
 		<>

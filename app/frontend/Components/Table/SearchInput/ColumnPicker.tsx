@@ -1,26 +1,36 @@
 import React from 'react'
 import { Inertia } from '@inertiajs/inertia'
+import axios from 'axios'
 import { usePage } from '@inertiajs/inertia-react'
 import { ColumnsIcon } from '@/Components/Icons'
 import { Popover, Option } from '@/Components/Popover'
 import { Checkbox } from '@/Components/Inputs'
 import { Routes } from '@/lib'
 import { useTableContext } from '../TableContext'
-import tsIgnoreUserData from './tsIgnoreUserData'
 import 'twin.macro'
 
 interface IColumnPickerProps {
 	model: string
 }
 
-
 const ColumnPicker = ({ model }: IColumnPickerProps) => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
 	const { tableState: { columns } } = useTableContext()
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		// @ts-ignore
-		Inertia.patch(Routes.updateTablePreferences(user.id), tsIgnoreUserData(model, user.table_preferences?.hide, e.target.name))
+		axios.patch( Routes.updateTablePreferences(user.id), {
+			user: {
+				table_preferences: {
+					[model]: {
+						hide: {
+							[e.target.name]: e.target.checked
+						}
+					}
+				}
+			}
+		}).then(response => {
+			Inertia.reload({ only: ['auth'] })
+		})
 	}
 
 	return (
@@ -33,6 +43,7 @@ const ColumnPicker = ({ model }: IColumnPickerProps) => {
 							label={ label }
 							labelPosition="end"
 							onChange={ handleChange }
+							checked={ user.table_preferences?.[model]?.hide?.[name] || false }
 						/>
 					</Option>)) }
 			</Popover>

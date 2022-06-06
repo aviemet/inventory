@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Children } from 'react'
 import { useTableContext, useTableSectionContext } from '../TableContext'
 import { TRProps } from 'react-html-props'
 import HeadCheckbox from './HeadCheckbox'
 import RowCheckbox from './RowCheckbox'
 
-interface IRowProps extends TRProps {
+interface IRowProps extends Omit<TRProps, 'children'> {
+	children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[]
 	render?: any
 	name?: string
 }
@@ -12,9 +13,15 @@ interface IRowProps extends TRProps {
 const Row = ({ children, render, name, ...props }: IRowProps) => {
 	try{
 		const { tableState: { rows, selectable, selected } } = useTableContext()
+
 		return (
 			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected } { ...props }>
-				{ children }
+				{ /* Inject data attribute to allow dynamically hiding columns */ }
+				{ Children.map(children, (child, index) => {
+					return React.cloneElement(child, {
+						'data-index': index
+					})
+				}) }
 			</RowInContext>
 		)
 	} catch(e) {
