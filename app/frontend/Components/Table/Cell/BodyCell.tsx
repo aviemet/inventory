@@ -3,7 +3,7 @@ import { TDProps } from 'react-html-props'
 import cx from 'classnames'
 import { type ICellProps } from './index'
 
-const BodyCell = ({ children, nowrap, checkbox, hideable, ...props }: ICellProps) => {
+const BodyCell = ({ children, nowrap, checkbox, ...props }: ICellProps) => {
 	return (
 		<Td
 			className={ cx({ 'table-column-fit': checkbox }) }
@@ -24,4 +24,4 @@ interface Td extends TDProps {
 	nowrap?: string
 }
 
-const Td = ({ children, ...props }) => <td { ...props }>{ children }</td>
+const Td = ({ children, ...props }: Td) => <td { ...props }>{ children }</td>

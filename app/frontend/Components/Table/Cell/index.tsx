@@ -11,12 +11,12 @@ export interface ICellProps extends TDProps {
 	hideable?: boolean
 }
 
-const RenderedCell = ({ children, hideable = true, ...props }: ICellProps) => {
+const RenderedCell = ({ children = true, ...props }: ICellProps) => {
 	const { section } = useTableSectionContext()
 
 	const CellComponent = section === 'head' ? HeadCell : BodyCell
 
-	return <CellComponent hideable={ hideable } { ...props }>{ children }</CellComponent>
+	return <CellComponent { ...props }>{ children }</CellComponent>
 }
 
 export default RenderedCell

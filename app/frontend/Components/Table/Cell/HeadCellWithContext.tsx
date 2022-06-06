@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from '@inertiajs/inertia-react'
 import { THProps } from 'react-html-props'
 import cn from 'classnames'
 import { type ICellProps } from './index'
+import { useTableContext } from '../TableContext'
 
-interface ICellWithContextProps extends ICellProps {
+interface IHeadCellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
 }
 
-const CellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hideable, ...props }: ICellWithContextProps) => {
+const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hideable = true, ...props }: IHeadCellWithContextProps) => {
+	const { tableState: { columns }, setTableState } = useTableContext()
+
+	useEffect(() => {
+		if(sort && hideable && !columns.has(sort)) {
+			columns.set(sort, String(children))
+			setTableState({ columns })
+		}
+	}, [])
 
 	const { origin, pathname, search } = window.location
 
@@ -57,4 +66,4 @@ interface Th extends THProps {
 
 const Th = ({ children, ...props }: Th) => <th { ...props }>{ children }</th>
 
-export default CellWithContext
+export default HeadCellWithContext

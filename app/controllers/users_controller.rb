@@ -10,7 +10,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    render inertia: "Users/Show"
+    render inertia: "Users/Show", props: {
+      user: UserBlueprint.render_as_json(user, view: :associations)
+    }
   end
 
   # GET /users/new
@@ -55,9 +57,17 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     if user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to user, notice: 'User was successfully updated.'
     else
-      redirect_to edit_user_path(@user), inertia: { errors: @user.errors }
+      redirect_to edit_user_path(user), inertia: { errors: user.errors }
+    end
+  end
+
+  def update_table_preferences
+    ap({params: params[:user][:table_preferences] })
+    user.table_preferences = params[:user][:table_preferences]
+    if user.save
+      head :ok, content_type: "text/html"
     end
   end
 
@@ -73,6 +83,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :active_company, :active, :dark_mode, person: [:first_name, :last_name], company: [:name])
+    params.require(:user).permit(:email, :password, :active_company, :active, :dark_mode, :table_preferences, person: [:first_name, :last_name], company: [:name])
   end
 end

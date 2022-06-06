@@ -41,7 +41,7 @@ class Item < ApplicationRecord
 
   scope :no_nics, -> { includes(:nics).where(nics: { id: nil }) }
 
-  scope :includes_associated, -> { includes([:category, :model, :assignments, :department, :vendor, :manufacturer]) }
+  scope :includes_associated, -> { includes([:category, :model, :assignments, :department, :vendor, :manufacturer, :audits]) }
 
   # Update Item name if changed during assignment
   def before_assignment(_, params)

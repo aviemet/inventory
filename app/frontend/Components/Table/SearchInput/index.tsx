@@ -59,7 +59,7 @@ const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) =>
 				value={ searchValue }
 				onChange={ e => setSearchValue(e.target.value) }
 			/>
-			{ columnPicker && <ColumnPicker /> }
+			{ model && columnPicker && <ColumnPicker model={ model } /> }
 		</div>
 	)
 }

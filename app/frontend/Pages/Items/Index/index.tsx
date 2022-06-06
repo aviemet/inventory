@@ -23,7 +23,11 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 			<Head title={ title }></Head>
 
 			<TableSection>
-				<Table.TableProvider selectable rows={ items } pagination={ pagination }>
+				<Table.TableProvider
+					selectable
+					rows={ items }
+					pagination={ pagination }
+				>
 
 					<TableTitleSection
 						title={ title }

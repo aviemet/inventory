@@ -19,7 +19,7 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 		)
 	} catch(e) {
 		return (
-			<NormalRow name={ name } { ...props }>
+			<NormalRow { ...props }>
 				{ children }
 			</NormalRow>
 		)
@@ -29,8 +29,8 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 export default Row
 
 interface IRowInContextProps extends TRProps {
-	name: string
-	rows: any[]
+	name?: string
+	rows?: Record<string, any>[]
 	selectable: boolean
 	selected: Set<string>
 }

@@ -19,7 +19,9 @@ interface ITableSettings {
 	selectable: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
+	columns: Map<string, string>
 	selected: Set<string>
+	hideable: boolean
 }
 
 interface ITableContext {
@@ -32,12 +34,19 @@ interface ITableContextProviderProps {
 	selectable: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
+	hideable?: boolean
 }
 
 const [useTableContext, TableContextProvider] = createContext<ITableContext>()
 export { useTableContext }
 
-const TableProvider: React.FC<ITableContextProviderProps> = ({ children, selectable = false, pagination, rows = [] }) => {
+const TableProvider: React.FC<ITableContextProviderProps> = ({
+	children,
+	selectable = false,
+	pagination,
+	rows = [],
+	hideable = true
+}) => {
 	const tableReducer = (tableState: ITableSettings, newTableState: Partial<ITableSettings>) => ({
 		...tableState,
 		...newTableState,
@@ -46,8 +55,10 @@ const TableProvider: React.FC<ITableContextProviderProps> = ({ children, selecta
 	const [tableState, setTableState] = useReducer(tableReducer, {
 		selectable,
 		rows,
+		columns: new Map<string, string>(),
 		pagination,
 		selected: new Set<string>(),
+		hideable,
 	})
 
 	return (
