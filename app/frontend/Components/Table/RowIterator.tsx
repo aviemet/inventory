@@ -1,22 +1,22 @@
 import React from 'react'
 import { useTableContext } from './TableContext'
 import Row from './Row'
-import cx from 'classnames'
+import cn from 'classnames'
 
-const RowIterator = ({ render }) => {
-	const { tableState: { selected, rows, columns } } = useTableContext()
-	console.log({ columns })
+const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
+	const { tableState: { selected, rows } } = useTableContext()
+
 	if(!rows || rows.length === 0) {
 		return <Row />
 	}
 
-	const handleRowProps = row => {
+	const handleRowProps = (row: JSX.Element) => {
 		return React.cloneElement(
 			row,
 			{
 				name: row.key,
-				className: cx(
-					{ checked: selected.has(row.key) }
+				className: cn(
+					{ checked: selected.has(String(row.key!)) }
 				)
 			}
 		)

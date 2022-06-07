@@ -3,6 +3,7 @@ import { createContext } from '../Hooks'
 
 /**
  * Table Section Context
+ * Used by Cell component to determine which tag to use
  */
 interface ITableSectionContextProvider {
 	section: 'head'|'body'|'footer'
@@ -18,8 +19,10 @@ interface ITableSettings {
 	selectable: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
-	columns: Set<string>
+	columns: Map<string, { label: string, index?: string }>
 	selected: Set<string>
+	hideable: boolean
+	model?: string
 }
 
 interface ITableContext {
@@ -32,12 +35,21 @@ interface ITableContextProviderProps {
 	selectable: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
+	hideable?: boolean
+	model?: string
 }
 
 const [useTableContext, TableContextProvider] = createContext<ITableContext>()
 export { useTableContext }
 
-const TableProvider: React.FC<ITableContextProviderProps> = ({ children, selectable = false, pagination, rows = [] }) => {
+const TableProvider: React.FC<ITableContextProviderProps> = ({
+	children,
+	selectable = false,
+	pagination,
+	rows = [],
+	hideable = false,
+	model,
+}) => {
 	const tableReducer = (tableState: ITableSettings, newTableState: Partial<ITableSettings>) => ({
 		...tableState,
 		...newTableState,
@@ -46,9 +58,11 @@ const TableProvider: React.FC<ITableContextProviderProps> = ({ children, selecta
 	const [tableState, setTableState] = useReducer(tableReducer, {
 		selectable,
 		rows,
-		columns: new Set<string>(),
+		columns: new Map<string, { label: string, index?: string }>(),
 		pagination,
 		selected: new Set<string>(),
+		hideable,
+		model,
 	})
 
 	return (

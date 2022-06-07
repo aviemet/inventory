@@ -1,25 +1,36 @@
-import React from 'react'
+import React, { Children } from 'react'
 import { useTableContext, useTableSectionContext } from '../TableContext'
 import { TRProps } from 'react-html-props'
 import HeadCheckbox from './HeadCheckbox'
 import RowCheckbox from './RowCheckbox'
 
-interface IRowProps extends TRProps {
+interface IRowProps extends Omit<TRProps, 'children'> {
+	children?: React.ReactElement<any, string | React.JSXElementConstructor<any>>[]
 	render?: any
 	name?: string
 }
 
 const Row = ({ children, render, name, ...props }: IRowProps) => {
 	try{
-		const { tableState: { rows, selectable, selected } } = useTableContext()
+		const { tableState: { rows, selectable, selected, hideable } } = useTableContext()
+
 		return (
-			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected }>
-				{ children }
+			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected } { ...props }>
+				{ hideable ? (
+					// Inject data attribute to allow dynamically hiding columns
+					children && Children.map(children, (child, index) => {
+						return React.cloneElement(child, {
+							'data-index': index
+						})
+					})
+				)
+					: children
+				}
 			</RowInContext>
 		)
 	} catch(e) {
 		return (
-			<NormalRow name={ name }>
+			<NormalRow { ...props }>
 				{ children }
 			</NormalRow>
 		)
@@ -28,7 +39,14 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 
 export default Row
 
-const RowInContext = ({ children, name, rows, selectable, selected, ...props }) => {
+interface IRowInContextProps extends TRProps {
+	name?: string
+	rows?: Record<string, any>[]
+	selectable: boolean
+	selected: Set<string>
+}
+
+const RowInContext = ({ children, name, rows, selectable, selected, ...props }: IRowInContextProps) => {
 	const { section } = useTableSectionContext()
 
 	const Checkbox = () => {
@@ -49,7 +67,7 @@ const RowInContext = ({ children, name, rows, selectable, selected, ...props }) 
 	)
 }
 
-const NormalRow = ({ children,  ...props }) => {
+const NormalRow = ({ children,  ...props }: TRProps) => {
 	return (
 		<tr { ...props }>
 			{ children }

@@ -1,10 +1,14 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
+import { Head, usePage } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Divider, Option } from '@/Components/Popover'
 import { EditButton } from '@/Components/Button'
+import {
+	TableSection,
+	TableTitleSection,
+} from '@/Components/Layout/IndexPageComponents'
 
 interface IAccessoriesIndexProps {
 	accessories: Schema.Accessory[]
@@ -13,12 +17,20 @@ interface IAccessoriesIndexProps {
 
 const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) => {
 	const title = 'Accessories'
+	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
+	console.log({ table_preferences })
 	return (
 		<>
 			<Head title={ title }></Head>
 
-			<section className="flex flex-col h-full">
-				<Table.TableProvider selectable rows={ accessories } pagination={ pagination }>
+			<TableSection>
+				<Table.TableProvider
+					selectable
+					hideable
+					model="accessories"
+					rows={ accessories }
+					pagination={ pagination }
+				>
 					<div className="flex items-center justify-between">
 						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
 						<div className="md:flex-1 flex w-10 p-1">
@@ -38,7 +50,7 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 						<Table.Table fixed={ false }>
 							<Table.Head>
 								<Table.Row>
-									<Table.Cell sort="name">Name</Table.Cell>
+									<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 									<Table.Cell sort="models.name">Model</Table.Cell>
 									<Table.Cell sort="serial">Serial</Table.Cell>
 									<Table.Cell sort="asset_tag">Asset Tag</Table.Cell>
@@ -91,7 +103,7 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 					</div>
 					<Table.Pagination />
 				</Table.TableProvider>
-			</section>
+			</TableSection>
 		</>
 	)
 }
