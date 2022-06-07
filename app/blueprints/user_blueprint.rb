@@ -31,4 +31,8 @@ class UserBlueprint < ApplicationBlueprint
     association :active_company, blueprint: CompanyBlueprint
     association :companies, blueprint: CompanyBlueprint
   end
+
+  view :shared do
+    include_view :associations
+  end
 end

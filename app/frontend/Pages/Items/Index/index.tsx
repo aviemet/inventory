@@ -1,5 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
+import { Head, usePage } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
@@ -23,11 +23,16 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 			<Head title={ title }></Head>
 
 			<TableSection>
-				<Table.TableProvider selectable rows={ items } pagination={ pagination }>
+				<Table.TableProvider
+					selectable
+					hideable
+					model="items"
+					rows={ items }
+					pagination={ pagination }
+				>
 
 					<TableTitleSection
 						title={ title }
-						model="items"
 						popover={
 							<Popover>
 								<Option href={ Routes.newItem() }>
