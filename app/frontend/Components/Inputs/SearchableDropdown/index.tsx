@@ -67,7 +67,7 @@ const SearchableDropdown = ({
 		setLabel(revertLabel)
 	}
 
-	const handleLabelChange = e => {
+	const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if(!shouldFilter) setShouldFilter(true)
 		setLabel(e.target.value)
 	}
@@ -81,7 +81,7 @@ const SearchableDropdown = ({
 		if(onChange) onChange(option)
 	}
 
-	const dispatchUserAction = e => handleUserActions(e, { handleOpen, handleClose, revertLabelAndClose, handleChoice, getOption }, { optionsParentRef, labelInputRef, outerElRef })
+	const dispatchUserAction = (e: MouseEvent | KeyboardEvent) => handleUserActions(e, { handleOpen, handleClose, revertLabelAndClose, handleChoice, getOption }, { optionsParentRef, labelInputRef, outerElRef })
 
 	useEffect(() => {
 		if(open){

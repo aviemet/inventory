@@ -39,7 +39,12 @@ class ComponentsController < ApplicationController
 
   # GET /components/new
   def new
-    render inertia: "Components/New"
+    render inertia: "Components/New", props: {
+      component: ComponentBlueprint.render_as_json(Component.new, view: :new),
+      models: @active_company.models.find_by_category(:Component).as_json,
+      vendors: @active_company.vendors.as_json,
+      locations: @active_company.locations.as_json,
+    }
   end
 
   # GET /components/:id/edit

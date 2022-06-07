@@ -13,7 +13,7 @@ const HeadCheckbox = ({ selected, rows }: IRowCheckBox) => {
 
 	const checkboxRef = useRef<HTMLInputElement>(null)
 
-	const handleClick = e => {
+	const handleClick = (e:  React.ChangeEvent<HTMLInputElement>) => {
 		if(!rows || rows.length === 0) return
 
 		if(selected.size === rows.length) {
