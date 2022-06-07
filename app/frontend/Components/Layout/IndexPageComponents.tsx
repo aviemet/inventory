@@ -1,8 +1,7 @@
 import React from 'react'
-import { Popover, Divider, Option } from '@/Components/Popover'
-import tw from 'twin.macro'
-import { Routes, formatter } from '@/lib'
-import * as Table from '@/Components/Table'
+import 'twin.macro'
+import { SearchInput } from '@/Components/Table'
+import { useTableContext } from '../Table/TableContext'
 
 export const TableSection = ({ children }: { children: React.ReactNode }) => (
 	<section tw="flex flex-col h-full">
@@ -12,20 +11,23 @@ export const TableSection = ({ children }: { children: React.ReactNode }) => (
 
 interface ITableTitleSectionProps {
 	title: string
-	model: string
 	popover: React.ReactNode
 }
 
-export const TableTitleSection = ({ title, model, popover }: ITableTitleSectionProps) => (
-	<div className="flex items-center justify-between">
-		<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
-		<div className="md:flex-1 flex">
-			<Table.SearchInput model={ model } />
+export const TableTitleSection = ({ title, popover }: ITableTitleSectionProps) => {
+	const { tableState: { hideable, model } } = useTableContext()
 
-			<div className="inline-block w-10 p-1">
-				{ popover }
+	return (
+		<div tw="flex items-center justify-between">
+			<h1 tw="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
+			<div tw="md:flex-1 flex">
+				<SearchInput model={ model } columnPicker={ hideable } />
+
+				<div tw="inline-block w-10 p-1">
+					{ popover }
+				</div>
+
 			</div>
-
 		</div>
-	</div>
-)
+	)
+}

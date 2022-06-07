@@ -25,6 +25,8 @@ class User < ApplicationRecord
   before_save :coerce_json
 
   accepts_nested_attributes_for :person
+
+  # jsonb_accessor :table_preferences, hide: :hash 
  
   private
 

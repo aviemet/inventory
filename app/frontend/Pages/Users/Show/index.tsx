@@ -1,9 +1,15 @@
 import React from 'react'
 
-const Show = () => {
+interface IShowUserProps {
+	user: Schema.User
+}
+
+const ShowUser = ({ user }: IShowUserProps) => {
 	return (
-		<div>Show</div>
+		<div>
+			User
+		</div>
 	)
 }
 
-export default Show
+export default ShowUser
