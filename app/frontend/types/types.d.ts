@@ -26,5 +26,4 @@ declare global {
 			instance: Instance
 		}
 	}
-
 }

@@ -2,15 +2,15 @@ class UsersController < ApplicationController
   expose :user
 
   # GET /users
-  # GET /users.json
   def index
     render inertia: "Users/Index"
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
-    render inertia: "Users/Show"
+    render inertia: "Users/Show", props: {
+      user: UserBlueprint.render_as_json(user, view: :associations)
+    }
   end
 
   # GET /users/new
@@ -52,17 +52,22 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     if user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to user, notice: 'User was successfully updated.'
     else
-      redirect_to edit_user_path(@user), inertia: { errors: @user.errors }
+      redirect_to edit_user_path(user), inertia: { errors: user.errors }
+    end
+  end
+
+  # PATCH /users/update_table_preferences/:id
+  def update_table_preferences
+    if user.update_column(:table_preferences, current_user.table_preferences.deep_merge(request.params[:user][:table_preferences]))
+      head :ok, content_type: "text/html"
     end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     user.destroy
     respond_to do |format|

@@ -27,6 +27,7 @@ gem "audited", "~> 5.0"
 gem "money-rails", "~> 1.15"
 gem "decent_exposure", "~> 3.0"
 gem "time_for_a_boolean", "~> 0.2.1"
+gem "jsonb_accessor", "~> 1.3"
 
 # Helpers
 gem "factory_bot", "~> 6.2"
@@ -98,3 +99,4 @@ group :test do
   gem "shoulda-matchers", "~> 5.1"
   gem "bullet", "~> 7.0"
 end
+

@@ -39,5 +39,4 @@ declare global {
 			separator: string
 		}
 	}
-
 }
