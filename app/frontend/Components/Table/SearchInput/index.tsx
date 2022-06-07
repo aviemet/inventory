@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { Inertia, type VisitOptions } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
+import { useTableContext } from '../TableContext'
 import { Input } from '@/Components/Inputs'
 import { SearchIcon, CrossIcon } from '@/Components/Icons'
 import ColumnPicker from './ColumnPicker'
@@ -13,6 +14,7 @@ interface ISearchInputProps {
 }
 
 const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) => {
+	const { tableState: { hideable } } = useTableContext()
 	const { search } = window.location
 	const params = new URLSearchParams(search)
 	const [searchValue, setSearchValue] = useState(params.get('search') || '')
@@ -59,7 +61,7 @@ const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) =>
 				value={ searchValue }
 				onChange={ e => setSearchValue(e.target.value) }
 			/>
-			{ model && columnPicker && <ColumnPicker model={ model } /> }
+			{ hideable && model && columnPicker && <ColumnPicker model={ model } /> }
 		</div>
 	)
 }

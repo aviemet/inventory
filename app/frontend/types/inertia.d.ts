@@ -38,7 +38,5 @@ declare global {
 			getErrors: (data: string) => string
 			separator: string
 		}
-
 	}
-	
 }

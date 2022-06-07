@@ -18,9 +18,6 @@ interface IItemsIndexProps {
 const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 	const title = 'Hardware Assets'
 
-	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
-	console.log({ table_preferences })
-
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -28,13 +25,14 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 			<TableSection>
 				<Table.TableProvider
 					selectable
+					hideable
+					model="items"
 					rows={ items }
 					pagination={ pagination }
 				>
 
 					<TableTitleSection
 						title={ title }
-						model="items"
 						popover={
 							<Popover>
 								<Option href={ Routes.newItem() }>

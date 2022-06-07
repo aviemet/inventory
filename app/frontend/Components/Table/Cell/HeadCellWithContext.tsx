@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { Link } from '@inertiajs/inertia-react'
-import { THProps } from 'react-html-props'
+import React, { useEffect, useRef } from 'react'
+import { Link, usePage } from '@inertiajs/inertia-react'
 import cn from 'classnames'
 import { type ICellProps } from './index'
 import { useTableContext } from '../TableContext'
@@ -10,14 +9,23 @@ interface IHeadCellWithContextProps extends ICellProps {
 }
 
 const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hideable = true, ...props }: IHeadCellWithContextProps) => {
-	const { tableState: { columns }, setTableState } = useTableContext()
+	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
+	const { tableState: { columns, model }, setTableState } = useTableContext()
+
+	const thRef = useRef<HTMLTableCellElement>(null)
 
 	useEffect(() => {
-		if(sort && hideable && !columns.has(sort)) {
-			columns.set(sort, String(children))
+		if(hideable && sort && !columns.has(sort)) {
+			columns.set(sort, { label: String(children), index: thRef.current?.dataset?.index })
 			setTableState({ columns })
+
 		}
 	}, [])
+
+	let hidden = false
+	if(hideable && sort && model && table_preferences?.[model]?.hide?.[sort]) {
+		hidden = true
+	}
 
 	const { origin, pathname, search } = window.location
 
@@ -37,13 +45,15 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 	const showSortLink = sort && rows!.length > 1
 
 	return (
-		<Th
+		<th
 			className={ cn(
 				{ 'table-column-fit': checkbox },
 				{ 'sortable': showSortLink },
-				{ [direction]: showSortLink && paramsSort === sort }
+				{ [direction]: showSortLink && paramsSort === sort },
+				{ 'whitespace-nowrap': nowrap },
+				{ 'hidden': hidden }
 			) }
-			nowrap={ nowrap ? 'nowrap' : '' }
+			ref={ thRef }
 			{ ...props }
 		>
 			{ showSortLink ?
@@ -53,17 +63,8 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 				>{ children }</Link>
 				: children
 			}
-		</Th>
+		</th>
 	)
 }
-
-/**
- * react-html-props doesn't seem to think that nowrap is a valid prop for table cells
- */
-interface Th extends THProps {
-	nowrap?: string
-}
-
-const Th = ({ children, ...props }: Th) => <th { ...props }>{ children }</th>
 
 export default HeadCellWithContext

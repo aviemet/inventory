@@ -5,23 +5,27 @@ import HeadCheckbox from './HeadCheckbox'
 import RowCheckbox from './RowCheckbox'
 
 interface IRowProps extends Omit<TRProps, 'children'> {
-	children: React.ReactElement<any, string | React.JSXElementConstructor<any>>[]
+	children?: React.ReactElement<any, string | React.JSXElementConstructor<any>>[]
 	render?: any
 	name?: string
 }
 
 const Row = ({ children, render, name, ...props }: IRowProps) => {
 	try{
-		const { tableState: { rows, selectable, selected } } = useTableContext()
+		const { tableState: { rows, selectable, selected, hideable } } = useTableContext()
 
 		return (
 			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected } { ...props }>
-				{ /* Inject data attribute to allow dynamically hiding columns */ }
-				{ Children.map(children, (child, index) => {
-					return React.cloneElement(child, {
-						'data-index': index
+				{ hideable ? (
+					// Inject data attribute to allow dynamically hiding columns
+					children && Children.map(children, (child, index) => {
+						return React.cloneElement(child, {
+							'data-index': index
+						})
 					})
-				}) }
+				)
+					: children
+				}
 			</RowInContext>
 		)
 	} catch(e) {

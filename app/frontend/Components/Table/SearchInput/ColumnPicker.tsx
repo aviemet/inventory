@@ -23,7 +23,7 @@ const ColumnPicker = ({ model }: IColumnPickerProps) => {
 				table_preferences: {
 					[model]: {
 						hide: {
-							[e.target.name]: e.target.checked
+							[e.target.name]: !e.target.checked
 						}
 					}
 				}
@@ -36,14 +36,14 @@ const ColumnPicker = ({ model }: IColumnPickerProps) => {
 	return (
 		<div tw="absolute top-0 right-0 w-10 h-full bg-brand-light">
 			<Popover icon={ ColumnsIcon } tw="p-1 h-full">
-				{ [...columns].map(([name, label]) => (
+				{ [...columns].map(([name, { label, index }]) => (
 					<Option key={ name } bubble={ false }>
 						<Checkbox
 							name={ name }
 							label={ label }
 							labelPosition="end"
 							onChange={ handleChange }
-							checked={ user.table_preferences?.[model]?.hide?.[name] || false }
+							checked={ !user.table_preferences?.[model]?.hide?.[name] }
 						/>
 					</Option>)) }
 			</Popover>

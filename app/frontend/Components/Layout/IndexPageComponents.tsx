@@ -11,12 +11,11 @@ export const TableSection = ({ children }: { children: React.ReactNode }) => (
 
 interface ITableTitleSectionProps {
 	title: string
-	model: string
 	popover: React.ReactNode
 }
 
-export const TableTitleSection = ({ title, model, popover }: ITableTitleSectionProps) => {
-	const { tableState: { hideable } } = useTableContext()
+export const TableTitleSection = ({ title, popover }: ITableTitleSectionProps) => {
+	const { tableState: { hideable, model } } = useTableContext()
 
 	return (
 		<div tw="flex items-center justify-between">
