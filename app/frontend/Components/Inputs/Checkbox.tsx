@@ -7,12 +7,17 @@ export interface ICheckboxProps extends InputProps {
 	name?: string
 }
 
-const Checkbox = ({ label, onChange, labelPosition = 'start', type, value, id, ...props }: ICheckboxProps) => {
+const Checkbox = ({ label, onChange, labelPosition = 'start', type, value, id, name, ...props }: ICheckboxProps) => {
+	const inputId = id ?? name
+
+	const Label = () => <label htmlFor={ inputId }>{ label }</label>
+
 	return (
 		<>
-			{ label && labelPosition === 'start' && <label htmlFor={ id }>{ label }</label> }
+			{ label && labelPosition === 'start' && <Label /> }
 			<input
-				id={ id }
+				name={ name }
+				id={ inputId }
 				type="checkbox"
 				value={ value }
 				onChange={ e => {
@@ -20,7 +25,7 @@ const Checkbox = ({ label, onChange, labelPosition = 'start', type, value, id, .
 				} }
 				{ ...props }
 			/>
-			{ label && labelPosition === 'end' && <label htmlFor={ id }>{ label }</label> }
+			{ label && labelPosition === 'end' && <Label /> }
 		</>
 	)
 }

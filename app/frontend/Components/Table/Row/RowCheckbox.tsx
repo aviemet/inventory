@@ -10,7 +10,7 @@ interface IRowCheckBox {
 const RowCheckbox = ({ name, selected }: IRowCheckBox) => {
 	const { setTableState } = useTableContext()
 
-	const handleClick = e => {
+	const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const checked = e.target.checked
 		if(checked) {
 			selected.add(name)
