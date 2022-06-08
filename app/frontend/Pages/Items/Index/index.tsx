@@ -1,5 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
+import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'

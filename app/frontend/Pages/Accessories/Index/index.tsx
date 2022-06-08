@@ -1,9 +1,9 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
+import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
-import { Popover, Divider, Option } from '@/Components/Popover'
+import { Popover, Option } from '@/Components/Popover'
 import { EditButton } from '@/Components/Button'
 import {
 	TableSection,
@@ -17,8 +17,7 @@ interface IAccessoriesIndexProps {
 
 const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) => {
 	const title = 'Accessories'
-	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
-	console.log({ table_preferences })
+
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -31,20 +30,17 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 					rows={ accessories }
 					pagination={ pagination }
 				>
-					<div className="flex items-center justify-between">
-						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
-						<div className="md:flex-1 flex w-10 p-1">
-							<Table.SearchInput model="accessories" />
 
-							<div className="inline-block w-10 p-1">
-								<Popover>
-									<Option href={ Routes.newAccessory() }>
-										New Accessory
-									</Option>
-								</Popover>
-							</div>
-						</div>
-					</div>
+					<TableTitleSection
+						title={ title }
+						popover={
+							<Popover>
+								<Option href={ Routes.newAccessory() }>
+									New Accessory
+								</Option>
+							</Popover>
+						}
+					/>
 
 					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>

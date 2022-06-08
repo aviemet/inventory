@@ -3,8 +3,13 @@ import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import * as Table from '@/Components/Table'
-import { Popover, Divider, Option } from '@/Components/Popover'
+import { Popover, Option } from '@/Components/Popover'
 import { EditButton } from '@/Components/Button'
+import {
+	TableSection,
+	TableTitleSection,
+} from '@/Components/Layout/IndexPageComponents'
+
 interface CompanyWithCounts extends Schema.Company {
 	counts: {
 		locations: number
@@ -33,23 +38,26 @@ const Index = ({ companies, pagination }: ICompaniesIndexProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="flex flex-col h-full">
-				<Table.TableProvider selectable rows={ companies } pagination={ pagination }>
-					<div className="flex items-center justify-between">
-						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
-						<div className="md:flex-1 flex">
-							<Table.SearchInput model="items" />
+			<TableSection>
+				<Table.TableProvider
+					selectable
+					hideable
+					model="companies"
+					rows={ companies }
+					pagination={ pagination }
+				>
 
-							<div className="inline-block w-10 p-1">
-								<Popover>
-									<Option href={ Routes.newItem() }>
-									Create New Company
-									</Option>
-								</Popover>
-							</div>
+					<TableTitleSection
+						title={ title }
+						popover={
+							<Popover>
+								<Option href={ Routes.newItem() }>
+								Create New Company
+								</Option>
+							</Popover>
+						}
+					/>
 
-						</div>
-					</div>
 					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>
 							<Table.Head>
@@ -126,7 +134,7 @@ const Index = ({ companies, pagination }: ICompaniesIndexProps) => {
 					</div>
 					<Table.Pagination />
 				</Table.TableProvider>
-			</section>
+			</TableSection>
 		</>
 	)
 }
