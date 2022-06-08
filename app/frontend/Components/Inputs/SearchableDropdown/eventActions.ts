@@ -71,7 +71,7 @@ const handleArrowKeys = (dir: 'up'|'down', methods: TMethods, refs: TRefs) => {
 }
 
 const handleEnterKey = (e: KeyboardEvent, methods: TMethods, refs: TRefs) => {
-	const active = refs.optionsParentRef.current!.querySelector('.active')
+	const active: HTMLElement|null = refs.optionsParentRef.current!.querySelector('.active')
 	if(!active) return
 
 	const v = active.dataset.value
@@ -87,8 +87,9 @@ const handleEnterKey = (e: KeyboardEvent, methods: TMethods, refs: TRefs) => {
 	}
 
 	methods.handleChoice(option)
-	if(e?.target?.tagName === 'INPUT') {
-		e.target.focus()
+	const element = e.target as HTMLElement
+	if(element && element.tagName === 'INPUT') {
+		element.focus()
 	}
 }
 

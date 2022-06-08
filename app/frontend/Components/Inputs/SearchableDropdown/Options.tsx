@@ -2,8 +2,10 @@ import React, { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 
 import cx from 'classnames'
 import tw, { styled } from 'twin.macro'
 
+type Option = Record<string, any>
+
 interface ISearchableDropdownOptionsProps {
-	options: Array<Record<string, any>>
+	options: Option[]
 	filterTerms: string
 	activeOption: any
 	getValue: Function
@@ -21,7 +23,9 @@ const SearchableDropdown = forwardRef<HTMLDivElement, ISearchableDropdownOptions
 
 	useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(ref, () => internalRef.current)
 
-	const filterByKeys = (option) => {
+	const filterByKeys = (option: Option) => {
+		if(!filterMatchKeys) return
+
 		for(const key in filterMatchKeys) {
 			if(option.hasOwnProperty(filterMatchKeys[key]) && option[filterMatchKeys[key]].toLowerCase().includes(filterTerms)) {
 				return true
@@ -29,18 +33,18 @@ const SearchableDropdown = forwardRef<HTMLDivElement, ISearchableDropdownOptions
 		}
 	}
 
-	const filterByLabel = (option) => {
+	const filterByLabel = (option: Option) => {
 		const optionLabel = String(getLabel(option)).toLowerCase()
 		const optionValue = String(getValue(option)).toLowerCase()
 
 		return optionLabel.includes(filterTerms) || optionValue.includes(filterTerms)
 	}
 
-	const optionsFilter = option => {
+	const optionsFilter = (option: Option) => {
 		return filterMatchKeys ? filterByKeys(option) : filterByLabel(option)
 	}
 
-	const filterOptions = options => {
+	const filterOptions = (options: Option[]) => {
 		return shouldFilter ? options.filter(optionsFilter) : options
 	}
 
@@ -60,7 +64,7 @@ const SearchableDropdown = forwardRef<HTMLDivElement, ISearchableDropdownOptions
 			ref={ internalRef }
 			tw="overflow-y-auto cursor-default absolute left-0 w-full max-h-56 shadow-lg bg-white"
 		>
-			{ filterOptions(options).map((option, i) => {
+			{ filterOptions(options).map((option: Option, i) => {
 				let active = getValue(option) === activeOption
 
 				return (
