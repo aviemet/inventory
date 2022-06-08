@@ -1,8 +1,7 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Form, Input } from '@/Components/Form'
 
-const Dashboard = ({ company }) => {
+const Dashboard = () => {
 	return (
 		<>
 			<Head title="Dashboard"></Head>
