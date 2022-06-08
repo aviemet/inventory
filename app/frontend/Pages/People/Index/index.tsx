@@ -1,10 +1,14 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
-import { Routes, formatter } from '@/lib'
+import { Routes } from '@/lib'
 import * as Table from '@/Components/Table'
-import { Popover, Divider, Option } from '@/Components/Popover'
+import { Popover, Option } from '@/Components/Popover'
 import { EditButton } from '@/Components/Button'
+import {
+	TableSection,
+	TableTitleSection,
+} from '@/Components/Layout/IndexPageComponents'
 
 interface IPeopleIndexProps {
 	people: Schema.Person[]
@@ -18,23 +22,25 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="flex flex-col h-full">
-				<Table.TableProvider selectable rows={ people } pagination={ pagination }>
-					<div className="flex items-center justify-between">
-						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
-						<div className="md:flex-1 flex">
-							<Table.SearchInput model="items" />
+			<TableSection>
+				<Table.TableProvider
+					selectable
+					hideable
+					model="people"
+					rows={ people }
+					pagination={ pagination }
+				>
 
-							<div className="inline-block w-10 p-1">
-								<Popover>
-									<Option href={ Routes.newPerson() }>
-										Add New Person
-									</Option>
-								</Popover>
-							</div>
-
-						</div>
-					</div>
+					<TableTitleSection
+						title={ title }
+						popover={
+							<Popover>
+								<Option href={ Routes.newPerson() }>
+									Add New Person
+								</Option>
+							</Popover>
+						}
+					/>
 
 					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>
@@ -101,7 +107,7 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 					</div>
 					<Table.Pagination />
 				</Table.TableProvider>
-			</section>
+			</TableSection>
 		</>
 	)
 }

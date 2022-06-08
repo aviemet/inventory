@@ -1,10 +1,14 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
-import { Routes, formatter } from '@/lib'
+import { Routes } from '@/lib'
 import * as Table from '@/Components/Table'
-import { Popover, Divider, Option } from '@/Components/Popover'
+import { Popover, Option } from '@/Components/Popover'
 import { EditButton } from '@/Components/Button'
+import {
+	TableSection,
+	TableTitleSection,
+} from '@/Components/Layout/IndexPageComponents'
 
 interface IManufacturersIndexProps {
 	manufacturers: Schema.Manufacturer[]
@@ -18,23 +22,26 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 		<>
 			<Head title={ title }></Head>
 
-			<section className="flex flex-col h-full">
-				<Table.TableProvider selectable rows={ manufacturers } pagination={ pagination }>
-					<div className="flex items-center justify-between">
-						<h1 className="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
-						<div className="md:flex-1 flex">
-							<Table.SearchInput model="items" />
+			<TableSection>
 
-							<div className="inline-block w-10 p-1">
-								<Popover>
-									<Option href={ Routes.newPerson() }>
-										Add New Manufacturer
-									</Option>
-								</Popover>
-							</div>
+				<Table.TableProvider
+					selectable
+					hideable
+					model="manufacturers"
+					rows={ manufacturers }
+					pagination={ pagination }
+				>
 
-						</div>
-					</div>
+					<TableTitleSection
+						title={ title }
+						popover={
+							<Popover>
+								<Option href={ Routes.newPerson() }>
+									Add New Manufacturer
+								</Option>
+							</Popover>
+						}
+					/>
 
 					<div className="scroll-content h-full">
 						<Table.Table fixed={ false }>
@@ -97,7 +104,7 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 					</div>
 					<Table.Pagination />
 				</Table.TableProvider>
-			</section>
+			</TableSection>
 		</>
 	)
 }
