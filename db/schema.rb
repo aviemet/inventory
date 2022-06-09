@@ -320,6 +320,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.inet "dhcp_start"
     t.inet "dhcp_end"
     t.integer "vlan_id"
+    t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
