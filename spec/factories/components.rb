@@ -10,6 +10,6 @@ FactoryBot.define do
     manufacturer
     category
     vendor
-    company
+    association :company, strategy: :create
   end
 end

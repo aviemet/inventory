@@ -5,6 +5,6 @@ FactoryBot.define do
     employee_number { Faker::Number.number }
     job_title { Faker::Job.title }
     active { true }
-    company
+    association :company, strategy: :create
   end
 end

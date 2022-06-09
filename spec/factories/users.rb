@@ -5,7 +5,7 @@ FactoryBot.define do
       confirmed { false }
     end
 
-    before(:create) do |user, options|
+    after(:build) do |user, options|
       user.password = options.password
     end
 

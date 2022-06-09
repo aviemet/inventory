@@ -10,6 +10,6 @@ FactoryBot.define do
     default_location factory: :location
     model
     vendor
-    company
+    association :company, strategy: :create
   end
 end

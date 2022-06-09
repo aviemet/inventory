@@ -6,7 +6,7 @@ module Inertia::Auth
   included do
     inertia_share auth: lambda {
       {
-        user: UserBlueprint.render_as_json(current_user, view: :shared),
+        user: current_user ? UserBlueprint.render_as_json(current_user, view: :shared) : nil,
         form_authenticity_token: form_authenticity_token,
       }
     }

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :ownership do
-    company
+    association :company, strategy: :create
     department
     ownable factory: :item
   end
