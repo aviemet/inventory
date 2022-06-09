@@ -2,8 +2,6 @@ class ModelsController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  before_action :set_view_data, only: [:index]
-
   expose :models, -> { Model.includes_associated }
   expose :model, find_by: :slug
 
@@ -80,10 +78,6 @@ class ModelsController < ApplicationController
 
   def sortable_fields
     %w(name model_number manufacturers.name categories.name).freeze
-  end
-
-  def set_view_data
-    @hideable_fields = {}
   end
 
   def model_params

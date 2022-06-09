@@ -5,8 +5,6 @@ class ComponentsController < ApplicationController
   expose :components, -> { @active_company.components.includes_associated }
   expose :component
 
-  before_action :set_view_data, only: [:index, :category]
-
   # GET /components(.json)
   def index
     self.components = search(components, sortable_fields)
@@ -84,10 +82,6 @@ class ComponentsController < ApplicationController
 
   def sortable_fields
     %w(name model_number min_qty qty cost manufacturers.name categories.name vendors.name).freeze
-  end
-
-  def set_view_data
-    @hideable_fields = { Model: "models.name", "Model Number": "models.model_number", Qty: "qty", "Min Qty": "min_qty",Category: "categories.name", Manufacturer: "manufacturers.name",  Vendor: "vendors.name", Cost: "cost", Department: "departments.name" }
   end
 
   def component_params

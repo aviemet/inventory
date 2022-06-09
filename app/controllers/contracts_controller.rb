@@ -80,10 +80,6 @@ class ContractsController < ApplicationController
     %w(name begins_at ends_at vendors.name categories.name).freeze
   end
 
-  def set_view_data
-    @hideable_fields = {"Start Date": "begins_at", "End Date": "ends_at", Vendor: "vendors.name", Category: "categories.name"}
-  end
-
   def contract_params
     params.require(:contract).permit(:name, :number, :begins_at, :ends_at, :notes, :category_id, :vendor_id)
   end

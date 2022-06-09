@@ -78,10 +78,6 @@ class VendorsController < ApplicationController
     %w(name url).freeze
   end
 
-  def set_view_data
-    @hideable_fields = {URL: "url"}
-  end
-
   def vendor_params
     params.require(:vendor).permit(:name, :url)
   end

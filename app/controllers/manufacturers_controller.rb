@@ -83,10 +83,6 @@ class ManufacturersController < ApplicationController
     %w(name).freeze
   end
 
-  def set_view_data
-    @hideable_fields = {}
-  end
-
   def manufacturer_params
     params.require(:manufacturer).permit(:name)
   end

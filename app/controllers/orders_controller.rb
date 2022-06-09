@@ -1,11 +1,8 @@
 class OrdersController < ApplicationController
   include Searchable
 
-  before_action :set_view_data, only: [:index, :category]
-
   expose :orders, -> { @active_company.orders.includes_associated }
   expose :order
-
 
   # GET /orders
   # GET /orders.json
@@ -82,10 +79,6 @@ class OrdersController < ApplicationController
 
   def sortable_fields
     %w(number users.person.full_name submitted_at ordered_at delivered_at canceled_at returned_at vendors.name).freeze
-  end
-
-  def set_view_data
-    @hideable_fields = {"Purchased By": "users.person.full_name", "Submitted At": "submitted_at", "Ordered At": "ordered_at", "Delivered At": "delivered_at", "Canceled At": "canceled_at", "Returned At": "returned_at", Vendor: "vendors.name"}
   end
   
   def order_params

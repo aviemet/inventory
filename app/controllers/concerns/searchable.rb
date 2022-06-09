@@ -5,11 +5,6 @@
 #  sortable_fields:
 #    returns an array of symbols or strings containing field names which the model can be sorted by.
 #    Associated models should be in the form "model.field"
-#
-# @hideable_fields
-#   A dictionary in the form { "Heading": "field", "Associated": "model.field" }
-#   The field names should correspond to the sortable fields and the table heading
-#     values, those will be used to hide and show the columns.
 
 module Searchable
   extend ActiveSupport::Concern

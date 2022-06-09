@@ -2,8 +2,6 @@ class NetworksController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  before_action :set_view_data, only: [:index, :category]
-
   expose :networks, -> { @active_company.networks }
   expose :network
 
@@ -85,10 +83,6 @@ class NetworksController < ApplicationController
 
   def sortable_fields
     %w(name address gateway dhcp_start dhcp_end vlan_id).freeze
-  end
-
-  def set_view_data
-    @hideable_fields = { Address: "address",Gateway: "gateway", "DHCP Start": "dhcp_start", "DHCP End": "dhcp_end", "VLAN ID": "vlan_id" }
   end
 
   def network_params

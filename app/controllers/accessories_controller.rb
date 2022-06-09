@@ -6,8 +6,6 @@ class AccessoriesController < ApplicationController
   expose :accessories, -> { @active_company.accessories.includes_associated }
   expose :accessory
 
-  before_action :set_view_data, only: [:index, :category]
-
   # GET /accessories
   # GET /accessories.json
   def index
@@ -88,10 +86,6 @@ class AccessoriesController < ApplicationController
   
   def sortable_fields
     %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
-  end
-
-  def set_view_data
-    @hideable_fields = {Model: "models.name", Serial: "serial", Cost: "cost", "Purchase Date": "purchased_at", Requestable: "requestable", Category: "categories.name", Manufacturer: "manufacturers.name", "Model Number": "models.model_number", Vendor: "vendors.name", Department: "departments.name"}
   end
 
   def accessory_params
