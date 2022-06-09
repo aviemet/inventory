@@ -5,5 +5,6 @@ FactoryBot.define do
     notes { Faker::Lorem.sentence }
     category
     manufacturer
+    association :company, strategy: :create
   end
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :location do
     name { Faker::Address.community }
-    company
+    association :company, strategy: :create
   end
 end

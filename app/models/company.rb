@@ -26,6 +26,7 @@ class Company < ApplicationRecord
     accessories: :Accessory,
     consumables: :Consumable,
     components: :Component,
+    models: :Model,
     departments: :Department,
     locations: :Location,
     licenses: :License,

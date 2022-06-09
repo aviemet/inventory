@@ -3,6 +3,6 @@ FactoryBot.define do
     name { Faker::Commerce.unique.department(max: 1) }
     manager factory: :person
     location
-    company
+    association :company, strategy: :create
   end
 end
