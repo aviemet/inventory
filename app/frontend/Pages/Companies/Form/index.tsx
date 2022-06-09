@@ -2,12 +2,7 @@ import React from 'react'
 import {
 	Form,
 	Input,
-	Textarea,
-	SearchableDropdown,
-	Checkbox,
-	DateTime,
 	Submit,
-	Group,
 } from '@/Components/Form'
 
 export interface ICompanyFormProps {
@@ -18,7 +13,6 @@ export interface ICompanyFormProps {
 }
 
 const CompanyForm = ({ to, method = 'post', onSubmit, company }: ICompanyFormProps) => {
-	console.log({ to })
 	return (
 		<Form
 			model="company"

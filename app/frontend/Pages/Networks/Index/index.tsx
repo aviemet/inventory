@@ -36,7 +36,7 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 						popover={
 							<Popover>
 								<Option href={ Routes.newNetwork() }>
-								Create New Network
+									Create New Network
 								</Option>
 							</Popover>
 						}

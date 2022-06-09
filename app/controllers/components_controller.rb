@@ -5,7 +5,7 @@ class ComponentsController < ApplicationController
   expose :components, -> { @active_company.components.includes_associated }
   expose :component
 
-  # GET /components(.json)
+  # GET /components
   def index
     self.components = search(components, sortable_fields)
     paginated_components = components.page(params[:page] || 1)
@@ -28,7 +28,7 @@ class ComponentsController < ApplicationController
   #   render inertia: "Components/Category"
   # end
 
-  # GET /components/:id(.json)
+  # GET /components/:id
   def show
     render inertia: "Components/Show", props: {
       component: -> { ComponentBlueprint.render_as_json(component, view: :associations) }
@@ -50,7 +50,7 @@ class ComponentsController < ApplicationController
     render inertia: "Components/Edit"
   end
 
-  # POST /components(.json)
+  # POST /components
   def create
     component.company = @active_company
     if component.save
@@ -60,7 +60,7 @@ class ComponentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /components/:id(.json)
+  # PATCH/PUT /components/:id
   def update
     if component.update(component_params)
       redirect_to component
@@ -69,7 +69,7 @@ class ComponentsController < ApplicationController
     end
   end
 
-  # DELETE /components/:id(.json)
+  # DELETE /components/:id
   def destroy
     component.destroy
     respond_to do |format|

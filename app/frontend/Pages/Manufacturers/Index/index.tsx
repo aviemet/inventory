@@ -36,7 +36,7 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 						title={ title }
 						popover={
 							<Popover>
-								<Option href={ Routes.newPerson() }>
+								<Option href={ Routes.newManufacturer() }>
 									Add New Manufacturer
 								</Option>
 							</Popover>

@@ -1,8 +1,27 @@
 import React from 'react'
+import { Head } from '@inertiajs/inertia-react'
+import PersonForm from '../Form'
+import { Routes } from '@/lib'
 
-const New = () => {
+interface INewPersonProps {
+	person: Schema.Person
+	departments: Schema.Department[]
+	people: Schema.Person[]
+}
+
+const New = ({ ...data }: INewPersonProps) => {
+	const title = 'New Person'
+
 	return (
-		<div>New</div>
+		<>
+			<Head title={ title }></Head>
+
+			<section className="container">
+				<h1>{ title }</h1>
+
+				<PersonForm to={ Routes.people() } { ...data } />
+			</section>
+		</>
 	)
 }
 

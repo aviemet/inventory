@@ -1,9 +1,30 @@
 import React from 'react'
+import { Head, usePage } from '@inertiajs/inertia-react'
+import ContractForm from '../Form'
+import { Routes } from '@/lib'
 
-const New = () => {
+interface INewContractProps {
+	contract: Schema.Contract
+	vendors: Schema.Vendor[]
+	categories: Schema.Category[]
+}
+
+const NewContract = ({ ...data }: INewContractProps) => {
+	const title = 'New Contract'
+
+	const { props: { auth: { user } } } = usePage<InertiaPage>()
+
 	return (
-		<div>New</div>
+		<>
+			<Head title={ title }></Head>
+
+			<section className="container">
+				<h1>{ title } for { user.active_company!.name }</h1>
+
+				<ContractForm to={ Routes.contracts() } { ...data } />
+			</section>
+		</>
 	)
 }
 
-export default New
+export default NewContract

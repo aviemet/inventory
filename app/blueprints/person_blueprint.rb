@@ -10,7 +10,7 @@ class PersonBlueprint < ApplicationBlueprint
          :updated_at
 
   field :name do |person|
-    "#{person.first_name} #{person.last_name}"
+    "#{person.first_name} #{person.last_name}" if person.first_name && person.last_name
   end
 
   view :associations do

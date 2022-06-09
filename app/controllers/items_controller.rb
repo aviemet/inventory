@@ -42,9 +42,9 @@ class ItemsController < ApplicationController
   def new
     render inertia: "Items/New", props: {
       item: ItemBlueprint.render_as_json(Item.new, view: :new),
-      models: @active_company.models.find_by_category(:Item).as_json,
-      vendors: @active_company.vendors.as_json,
-      locations: @active_company.locations.as_json,
+      models: -> { @active_company.models.find_by_category(:Item).as_json },
+      vendors: -> { @active_company.vendors.as_json },
+      locations: -> { @active_company.locations.as_json },
     }
   end
 
@@ -52,9 +52,9 @@ class ItemsController < ApplicationController
   def edit
     render inertia: "Items/Edit", props: {
       item: ItemBlueprint.render_as_json(item),
-      models: @active_company.models.find_by_category(:Item).as_json,
-      vendors: @active_company.vendors.as_json,
-      locations: @active_company.locations.as_json,
+      models: -> { @active_company.models.find_by_category(:Item).as_json },
+      vendors: -> { @active_company.vendors.as_json },
+      locations: -> { @active_company.locations.as_json },
     }
   end
 
@@ -92,10 +92,7 @@ class ItemsController < ApplicationController
   # DELETE /hardware/:id.json
   def destroy
     item.destroy
-    respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to items_url, notice: 'Item was successfully destroyed.'
   end
 
   private

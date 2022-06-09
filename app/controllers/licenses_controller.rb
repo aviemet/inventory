@@ -6,7 +6,6 @@ class LicensesController < ApplicationController
   expose :license
 
   # GET /licenses
-  # GET /licenses.json
   def index
     self.licenses = search(licenses, sortable_fields)
     paginated_licenses = licenses.page(params[:page] || 1)
@@ -21,7 +20,6 @@ class LicensesController < ApplicationController
   end
 
   # GET /licenses/1
-  # GET /licenses/1.json
   def show
     render inertia: "Licenses/Show", props: {
       license: -> { LicenseBlueprint.render_as_json(license, view: :associations) }
@@ -30,51 +28,47 @@ class LicensesController < ApplicationController
 
   # GET /licenses/new
   def new
-    render inertia: "Licenses/New"
+    render inertia: "Licenses/New", props: {
+      license: LicenseBlueprint.render_as_json(License.new, view: :new),
+      categories: -> { @active_company.categories.find_by_type(:License).as_json },
+      vendors: -> { @active_company.vendors.as_json },
+      manufacturers: -> { @active_company.manufacturers.as_json },
+    }
   end
 
   # GET /licenses/1/edit
   def edit
-    render inertia: "Licenses/Edit"
+    render inertia: "Licenses/Edit", props: {
+      license: LicenseBlueprint.render_as_json(license),
+      categories: -> { @active_company.categories.find_by_type(:License).as_json },
+      vendors: -> { @active_company.vendors.as_json },
+      manufacturers: -> { @active_company.manufacturers.as_json },
+    }
   end
 
   # POST /licenses
-  # POST /licenses.json
   def create
-    license.company = Company.find(company_params[:id])
-    respond_to do |format|
-      if license.save
-        format.html { redirect_to license, notice: 'License was successfully created.' }
-        format.json { render :show, status: :created, location: license }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: license.errors, status: :unprocessable_entity }
-      end
+    license.company = @active_company
+    if license.save
+      redirect_to license, notice: 'License was successfully created'
+    else
+      redirect_to new_license_path, inertia: { errors: license.errors }
     end
   end
 
   # PATCH/PUT /licenses/1
-  # PATCH/PUT /licenses/1.json
   def update
-    respond_to do |format|
-      if license.update(license_params)
-        format.html { redirect_to license, notice: 'License was successfully updated.' }
-        format.json { render :show, status: :ok, location: license }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: license.errors, status: :unprocessable_entity }
-      end
+    if license.update(license_params)
+      redirect_to license, notice: 'License was successfully updated'
+    else
+      redirect_to edit_license_path, inertia: { errors: license.errors }
     end
   end
 
   # DELETE /licenses/1
-  # DELETE /licenses/1.json
   def destroy
     license.destroy
-    respond_to do |format|
-      format.html { redirect_to licenses_url, notice: 'License was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to licenses_url, notice: 'License was successfully destroyed.'
   end
 
   private

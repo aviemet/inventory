@@ -9,6 +9,7 @@ import {
 	Submit,
 	Group,
 } from '@/Components/Form'
+import { Inertia } from '@inertiajs/inertia'
 
 export interface IItemFormProps {
 	to: string
@@ -39,6 +40,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					name="model_id"
 					required
 					options={ models }
+					onOpen={ () => Inertia.reload({ only: ['models'] }) }
 				/>
 
 				<Input name="serial" label="Serial" />
@@ -52,6 +54,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					name="vendor_id"
 					options={ vendors }
 					filterMatchKeys={ ['name'] }
+					onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
 				/>
 
 				<Input name="cost" label="Cost" />
@@ -64,6 +67,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					label="Default Location"
 					name="default_location_id"
 					options={ locations }
+					onOpen={ () => Inertia.reload({ only: ['locations'] }) }
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />

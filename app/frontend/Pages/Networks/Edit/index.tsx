@@ -1,9 +1,28 @@
 import React from 'react'
+import { Head, usePage } from '@inertiajs/inertia-react'
+import NetworkForm from '../Form'
+import { Routes } from '@/lib'
 
-const Edit = () => {
+interface IUpdateNetworkProps{
+	network: Schema.Network
+}
+
+const New = ({ network, ...models }: IUpdateNetworkProps) => {
+	const title = `Edit ${network.name}`
+
+	const { props: { auth: { user } } } = usePage<InertiaPage>()
+
 	return (
-		<div>Edit</div>
+		<>
+			<Head title={ title }></Head>
+
+			<section className="container">
+				<h1>{ title } for { user.active_company!.name }</h1>
+
+				<NetworkForm to={ Routes.networks(network) } method="patch" network={ network } { ...models } />
+			</section>
+		</>
 	)
 }
 
-export default Edit
+export default New

@@ -32,40 +32,36 @@ class NetworksController < ApplicationController
 
   # GET /networks/new
   def new
-    render inertia: "Networks/New"
+    render inertia: "Networks/New", props: {
+      network: -> { NetworkBlueprint.render_as_json(Network.new) },
+    }
   end
 
   # GET /networks/1/edit
   def edit
-    render inertia: "Networks/Edit"
+    render inertia: "Networks/Edit", props: {
+      network: -> { NetworkBlueprint.render_as_json(network) },
+    }
   end
 
   # POST /networks
   # POST /networks.json
   def create
-    network.company = Company.find(company_params[:id])
-    respond_to do |format|
-      if network.save
-        format.html { redirect_to network, notice: 'Network was successfully created.' }
-        format.json { render :show, status: :created, location: network }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: network.errors, status: :unprocessable_entity }
-      end
+    network.company = @active_company
+    if network.save
+      redirect_to network, notice: 'License was successfully created'
+    else
+      redirect_to new_network_path, inertia: { errors: network.errors }
     end
   end
 
   # PATCH/PUT /networks/1
   # PATCH/PUT /networks/1.json
   def update
-    respond_to do |format|
-      if network.update!(network_params)
-        format.html { redirect_to network, notice: 'Network was successfully updated.' }
-        format.json { render :show, status: :ok, location: network }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: network.errors, status: :unprocessable_entity }
-      end
+    if network.update(network_params)
+      redirect_to network, notice: 'License was successfully updated'
+    else
+      redirect_to edit_network_path, inertia: { errors: network.errors }
     end
   end
 

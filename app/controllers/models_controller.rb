@@ -3,10 +3,9 @@ class ModelsController < ApplicationController
   include Searchable
 
   expose :models, -> { Model.includes_associated }
-  expose :model, find_by: :slug
+  expose :model, -> { @active_company.models.find_by_slug params[:slug] }
 
   # GET /models
-  # GET /models.json
   def index
     self.models = search(models, sortable_fields)
     paginated_models = models.page(params[:page] || 1)
@@ -21,51 +20,50 @@ class ModelsController < ApplicationController
   end
 
   # GET /models/1
-  # GET /models/1.json
   def show
-    render inertia: "Models/Show"
+    render inertia: "Models/Show", props: {
+      model: ModelBlueprint.render_as_json(model, view: :associations)
+    }
   end
 
   # GET /models/new
   def new
-    render inertia: "Models/New"
+    render inertia: "Models/New", props: {
+      model: ModelBlueprint.render_as_json(model, view: :new),
+      categories: -> { @active_company.categories.find_by_type(:Model).as_json },
+      manufacturers: -> { @active_company.manufacturers.as_json },
+    }
   end
 
   # GET /models/1/edit
   def edit
-    render inertia: "Models/Edit"
+    render inertia: "Models/Edit", props: {
+      model: ModelBlueprint.render_as_json(model),
+      categories: -> { @active_company.categories.find_by_type(:Model).as_json },
+      manufacturers: -> { @active_company.manufacturers.as_json },
+    }
   end
 
   # POST /models
-  # POST /models.json
   def create
-    respond_to do |format|
-      if @model.save
-        format.html { redirect_to @model, notice: 'Model was successfully created.' }
-        format.json { render :show, status: :created, location: @model }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @model.errors, status: :unprocessable_entity }
-      end
+    model.company = @active_company
+    if model.save
+      redirect_to model, notice: 'License was successfully created'
+    else
+      redirect_to new_model_path, inertia: { errors: model.errors }
     end
   end
 
   # PATCH/PUT /models/1
-  # PATCH/PUT /models/1.json
   def update
-    respond_to do |format|
-      if @model.update(model_params)
-        format.html { redirect_to @model, notice: 'Model was successfully updated.' }
-        format.json { render :show, status: :ok, location: @model }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @model.errors, status: :unprocessable_entity }
-      end
+    if model.update(model_params)
+      redirect_to model, notice: 'License was successfully updated'
+    else
+      redirect_to edit_model_path, inertia: { errors: model.errors }
     end
   end
 
   # DELETE /models/1
-  # DELETE /models/1.json
   def destroy
     @model.destroy
     respond_to do |format|

@@ -1,9 +1,35 @@
 import React from 'react'
+import {
+	Form,
+	Input,
+	Submit,
+} from '@/Components/Form'
+import { Inertia } from '@inertiajs/inertia'
 
-const Form = () => {
+export interface IManufacturerFormProps {
+	to: string
+	method?: HTTPVerb
+	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	manufacturer: Schema.Manufacturer
+}
+
+const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer }: IManufacturerFormProps) => {
 	return (
-		<div>Form</div>
+		<Form
+			model="manufacturer"
+			data={ { manufacturer } }
+			to={ to }
+			method={ method }
+			onSubmit={ onSubmit }
+			className="max-w-5xl"
+		>
+			<Input name="name" label="Name" required autoFocus />
+
+			<Submit className="w-full">
+				{ manufacturer.id ? 'Update' : 'Create' } Manufacturer
+			</Submit>
+		</Form>
 	)
 }
 
-export default React.memo(Form)
+export default React.memo(ManufacturerForm)
