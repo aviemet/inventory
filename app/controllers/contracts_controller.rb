@@ -3,10 +3,8 @@ class ContractsController < ApplicationController
 
   expose :contracts, -> { @active_company.contracts.includes_associated }
   expose :contract
-  expose :vendors, -> { @active_company.vendors }
 
   # GET /contracts
-  # GET /contracts.json
   def index
     self.contracts = search(contracts, sortable_fields)
     paginated_contracts = contracts.page(params[:page] || 1)
@@ -21,57 +19,53 @@ class ContractsController < ApplicationController
   end
 
   # GET /contracts/1
-  # GET /contracts/1.json
   def show
-    render inertia: "Contracts/Show"
+    render inertia: "Contracts/Show", props: {
+      contract: ContractBlueprint.render_as_json(contract, view: :associations),
+    }
   end
 
   # GET /contracts/new
   def new
-    render inertia: "Contracts/New"
+    render inertia: "Contracts/New", props: {
+      contract: ContractBlueprint.render_as_json(Contract.new, view: :new),
+      vendors: -> { @active_company.vendors.as_json },
+      categories: -> { @active_company.categories.find_by_type(:Contract).as_json },
+    }
   end
 
   # GET /contracts/1/edit
   def edit
-    render inertia: "Contracts/Edit"
+    render inertia: "Contracts/Edit", props: {
+      contract: ContractBlueprint.render_as_json(contract),
+      vendors: -> { @active_company.vendors.as_json },
+      categories: -> { @active_company.categories.find_by_type(:Contract).as_json },
+    }
   end
 
   # POST /contracts
-  # POST /contracts.json
   def create
-    respond_to do |format|
-      if contract.save
-        format.html { redirect_to contract, notice: 'Contract was successfully created.' }
-        format.json { render :show, status: :created, location: contract }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: contract.errors, status: :unprocessable_entity }
-      end
+    contract.company = @active_company
+    if contract.save
+      redirect_to contract, notice: 'Contract was successfully created'
+    else
+      redirect_to new_contract_path, inertia: { errors: contract.errors }
     end
   end
 
   # PATCH/PUT /contracts/1
-  # PATCH/PUT /contracts/1.json
   def update
-    respond_to do |format|
-      if contract.update(contract_params)
-        format.html { redirect_to contract, notice: 'Contract was successfully updated.' }
-        format.json { render :show, status: :ok, location: contract }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: contract.errors, status: :unprocessable_entity }
-      end
+    if contract.update(contract_params)
+      redirect_to contract, notice: 'Contract was successfully updated'
+    else
+      redirect_to edit_contract_path, inertia: { errors: contract.errors }
     end
   end
 
   # DELETE /contracts/1
-  # DELETE /contracts/1.json
   def destroy
     contract.destroy
-    respond_to do |format|
-      format.html { redirect_to contracts_url, notice: 'Contract was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to contracts_url, notice: 'Contract was successfully destroyed.'
   end
 
   private

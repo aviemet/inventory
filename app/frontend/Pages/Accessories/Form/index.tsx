@@ -5,10 +5,10 @@ import {
 	Textarea,
 	SearchableDropdown,
 	Checkbox,
-	DateTime,
 	Submit,
 	Group,
 } from '@/Components/Form'
+import { Inertia } from '@inertiajs/inertia'
 
 export interface IAccessoryFormProps {
 	to: string
@@ -38,6 +38,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 					name="model_id"
 					required
 					options={ models }
+					onOpen={ () => Inertia.reload({ only: ['models'] }) }
 				/>
 
 				<Input name="serial" label="Serial" />
@@ -56,6 +57,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 					name="vendor_id"
 					options={ vendors }
 					filterMatchKeys={ ['name'] }
+					onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
 				/>
 
 				<Input name="cost" label="Cost" />
@@ -66,6 +68,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 					label="Default Location"
 					name="default_location_id"
 					options={ locations }
+					onOpen={ () => Inertia.reload({ only: ['locations'] }) }
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />

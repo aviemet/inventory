@@ -39,37 +39,27 @@ class VendorsController < ApplicationController
   # POST /vendors
   # POST /vendors.json
   def create
-    respond_to do |format|
-      if vendor.save
-        format.html { redirect_to vendor, notice: 'Vendor was successfully created.' }
-        format.json { render :show, status: :created, location: vendor }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: vendor.errors, status: :unprocessable_entity }
-      end
+    vendor.company = @active_company
+    if vendor.save
+      redirect_to vendor, notice: 'License was successfully created'
+    else
+      redirect_to new_vendor_path, inertia: { errors: vendor.errors }
     end
   end
 
   # PATCH/PUT /vendors/:id
   def update
-    respond_to do |format|
-      if vendor.update(vendor_params)
-        format.html { redirect_to vendor, notice: 'Vendor was successfully updated.' }
-        format.json { render :show, status: :ok, location: vendor }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: vendor.errors, status: :unprocessable_entity }
-      end
+    if vendor.update(vendor_params)
+      redirect_to vendor, notice: 'License was successfully updated'
+    else
+      redirect_to edit_vendor_path, inertia: { errors: vendor.errors }
     end
   end
 
   # DELETE /vendors/:id
   def destroy
     vendor.destroy
-    respond_to do |format|
-      format.html { redirect_to vendors_url, notice: 'Vendor was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to vendors_url, notice: 'Vendor was successfully destroyed.'
   end
 
   private

@@ -1,9 +1,62 @@
 import React from 'react'
+import {
+	Form,
+	Input,
+	SearchableDropdown,
+	Submit,
+} from '@/Components/Form'
+import { Inertia } from '@inertiajs/inertia'
 
-const Form = () => {
+export interface IPersonFormProps {
+	to: string
+	method?: HTTPVerb
+	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	person: Schema.Person
+	departments: Schema.Department[]
+	people: Schema.Person[]
+}
+
+const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people }: IPersonFormProps) => {
 	return (
-		<div>Form</div>
+		<Form
+			model="person"
+			data={ { person } }
+			to={ to }
+			method={ method }
+			onSubmit={ onSubmit }
+			className="max-w-5xl"
+		>
+			<Input name="first_name" label="First Name" required autoFocus />
+
+			<Input name="middle_name" label="Middle Name" required  />
+
+			<Input name="last_name" label="Last Name" required  />
+
+			<Input name="employee_number" label="Employee Number" required  />
+
+			<SearchableDropdown
+				label="Department"
+				name="department_id"
+				options={ departments }
+				filterMatchKeys={ ['name'] }
+				onOpen={ () => Inertia.reload({ only: ['departments'] }) }
+			/>
+
+			<Input name="job_title" label="Job Title" required  />
+
+			<SearchableDropdown
+				label="Manager"
+				name="manager_id"
+				options={ people }
+				filterMatchKeys={ ['first_name', 'last_name'] }
+				onOpen={ () => Inertia.reload({ only: ['people'] }) }
+			/>
+
+			<Submit className="w-full">
+				{ person.id ? 'Update' : 'Create' } Person
+			</Submit>
+		</Form>
 	)
 }
 
-export default React.memo(Form)
+export default React.memo(PersonForm)

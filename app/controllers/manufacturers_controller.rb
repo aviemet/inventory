@@ -2,13 +2,10 @@ class ManufacturersController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  before_action :set_view_data, only: [:index]
-
   expose :manufacturers, -> { @active_company.manufacturers }
-  expose :manufacturer, find_by: :slug
+  expose :manufacturer, -> { @active_company.manufacturers.find_by_slug params[:slug] }
 
   # GET /manufacturers
-  # GET /manufacturers.json
   def index
     self.manufacturers = search(manufacturers, sortable_fields)
     paginated_manufacturers = manufacturers.page(params[:page] || 1)
@@ -23,58 +20,49 @@ class ManufacturersController < ApplicationController
   end
 
   # GET /manufacturers/1
-  # GET /manufacturers/1.json
   def show
-    render inertia: "Manufacturers/Show"
+    render inertia: "Manufacturers/Show", props: {
+      manufacturer: ManufacturerBlueprint.render_as_json(paginated_manufacturers, view: :associations)
+    }
   end
 
   # GET /manufacturers/new
   def new
-    render inertia: "Manufacturers/New"
+    render inertia: "Manufacturers/New", props: {
+      manufacturer: ManufacturerBlueprint.render_as_json(Manufacturer.new, view: :new)
+    }
   end
 
   # GET /manufacturers/1/edit
   def edit
-    render inertia: "Manufacturers/Edit"
+    render inertia: "Manufacturers/Edit", props: {
+      manufacturer: ManufacturerBlueprint.render_as_json(manufacturer, view: :new)
+    }
   end
 
   # POST /manufacturers
-  # POST /manufacturers.json
   def create
-    self.manufacturer.company = Company.find(company_params[:id])
-    respond_to do |format|
-      if manufacturer.save
-        format.html { redirect_to manufacturer, notice: 'Manufacturer was successfully created.' }
-        format.json { render :show, status: :created, location: manufacturer }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: manufacturer.errors, status: :unprocessable_entity }
-      end
+    manufacturer.company = @active_company
+    if manufacturer.save
+      redirect_to manufacturer, notice: 'Manufacturer was successfully created'
+    else
+      redirect_to new_manufacturer_path, inertia: { errors: manufacturer.errors }
     end
   end
 
   # PATCH/PUT /manufacturers/1
-  # PATCH/PUT /manufacturers/1.json
   def update
-    respond_to do |format|
-      if manufacturer.update(manufacturer_params)
-        format.html { redirect_to manufacturer, notice: 'Manufacturer was successfully updated.' }
-        format.json { render :show, status: :ok, location: manufacturer }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: manufacturer.errors, status: :unprocessable_entity }
-      end
+    if manufacturer.update(manufacturer_params)
+      redirect_to manufacturer, notice: 'Manufacturer was successfully updated'
+    else
+      redirect_to edit_manufacturer_path, inertia: { errors: manufacturer.errors }
     end
   end
 
   # DELETE /manufacturers/1
-  # DELETE /manufacturers/1.json
   def destroy
     manufacturer.destroy
-    respond_to do |format|
-      format.html { redirect_to manufacturers_url, notice: 'Manufacturer was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to manufacturers_url, notice: 'Manufacturer was successfully destroyed.'
   end
 
   private

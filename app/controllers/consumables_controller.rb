@@ -5,7 +5,7 @@ class ConsumablesController < ApplicationController
   expose :consumables, -> { @active_company.consumables.includes_associated }
   expose :consumable
 
-  # GET /consumables(.json)
+  # GET /consumables
   def index
     self.consumables = search(consumables, sortable_fields)
     paginated_consumables = consumables.page(params[:page] || 1)
@@ -19,7 +19,7 @@ class ConsumablesController < ApplicationController
     }
   end
 
-  # GET /consumables/:id(.json)
+  # GET /consumables/:id
   def show
     render inertia: "Consumables/Show", props: {
       consumable: -> { ConsumableBlueprint.render_as_json(consumable, view: :associations) }
@@ -28,42 +28,44 @@ class ConsumablesController < ApplicationController
 
   # GET /consumables/new
   def new
-    render inertia: "Consumables/New"
+    render inertia: "Consumables/New", props: {
+      consumable: ConsumableBlueprint.render_as_json(Consumable.new, view: :new),
+      models: -> { @active_company.models.find_by_category(:Consumable).as_json },
+      vendors: -> { @active_company.vendors.as_json },
+      locations: -> { @active_company.locations.as_json },
+    }
   end
 
   # GET /consumables/:id/edit
   def edit
-    render inertia: "Consumables/Edit"
+    render inertia: "Consumables/Edit", props: {
+      consumable: ConsumableBlueprint.render_as_json(consumable),
+      models: -> { @active_company.models.find_by_category(:Consumable).as_json },
+      vendors: -> { @active_company.vendors.as_json },
+      locations: -> { @active_company.locations.as_json },
+    }
   end
 
-  # POST /consumables(.json)
+  # POST /consumables
   def create
-    consumable.company = Company.find(company_params[:id])
-    respond_to do |format|
-      if consumable.save
-        format.html { redirect_to consumable, notice: 'Consumable was successfully created.' }
-        format.json { render :show, status: :created, location: consumable }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: consumable.errors, status: :unprocessable_entity }
-      end
+    consumable.company = @active_company
+    if consumable.save
+      redirect_to consumable, notice: 'Consumable was successfully created'
+    else
+      redirect_to new_consumable_path, inertia: { errors: consumable.errors }
     end
   end
 
-  # PATCH/PUT /consumables/:id(.json)
+  # PATCH/PUT /consumables/:id
   def update
-    respond_to do |format|
-      if consumable.update(consumable_params)
-        format.html { redirect_to consumable, notice: 'Consumable was successfully updated.' }
-        format.json { render :show, status: :ok, location: consumable }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: consumable.errors, status: :unprocessable_entity }
-      end
+    if consumable.update(consumable_params)
+      redirect_to consumable, notice: 'Consumable was successfully updated'
+    else
+      redirect_to edit_consumable_path, inertia: { errors: consumable.errors }
     end
   end
 
-  # DELETE /consumables/:id(.json)
+  # DELETE /consumables/:id
   def destroy
     consumable.destroy
     respond_to do |format|

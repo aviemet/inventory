@@ -7,7 +7,6 @@ class AccessoriesController < ApplicationController
   expose :accessory
 
   # GET /accessories
-  # GET /accessories.json
   def index
     self.accessories = search(accessories, sortable_fields)
     paginated_accessories = accessories.page(params[:page] || 1)
@@ -22,7 +21,6 @@ class AccessoriesController < ApplicationController
   end
 
   # GET /accessories/1
-  # GET /accessories/1.json
   def show
     render inertia: "Accessories/Show", props: {
       accessory: -> { AccessoryBlueprint.render_as_json(accessory, view: :associations) }
@@ -45,41 +43,28 @@ class AccessoriesController < ApplicationController
   end
 
   # POST /accessories
-  # POST /accessories.json
   def create
-    respond_to do |format|
-      if accessory.save
-        format.html { redirect_to accessory, notice: 'Accessory was successfully created.' }
-        format.json { render :show, status: :created, location: accessory }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: accessory.errors, status: :unprocessable_entity }
-      end
+    accessory.company = @active_company
+    if accessory.save
+      redirect_to accessory, notice: 'License was successfully created'
+    else
+      redirect_to new_accessory_path, inertia: { errors: accessory.errors }
     end
   end
 
   # PATCH/PUT /accessories/1
-  # PATCH/PUT /accessories/1.json
   def update
-    respond_to do |format|
-      if accessory.update(accessory_params)
-        format.html { redirect_to accessory, notice: 'Accessory was successfully updated.' }
-        format.json { render :show, status: :ok, location: accessory }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: accessory.errors, status: :unprocessable_entity }
-      end
+    if accessory.update(accessory_params)
+      redirect_to accessory, notice: 'License was successfully updated'
+    else
+      redirect_to edit_accessory_path, inertia: { errors: accessory.errors }
     end
   end
 
   # DELETE /accessories/1
-  # DELETE /accessories/1.json
   def destroy
     accessory.destroy
-    respond_to do |format|
-      format.html { redirect_to accessories_url, notice: 'Accessory was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to accessories_url, notice: 'Accessory was successfully destroyed.'
   end
  
   private
