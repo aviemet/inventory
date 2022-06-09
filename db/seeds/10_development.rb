@@ -27,15 +27,17 @@ if Rails.env == "development"
     user.save
   end
 
+  company = Company.first
+
   if Location.count == 0
     [
       {
         name: "San Francisco Office",
-        company: Company.first
+        company: company
       },
       {
         name: "IT Office",
-        company: Company.first,
+        company: company,
         parent_id: 1
       }
     ].each{ |location| Location.create!(location) } if Location.count == 0
@@ -46,12 +48,12 @@ if Rails.env == "development"
       {
         name: "IT Dept",
         location: Location.first,
-        company: Company.first,
+        company: company,
       },
       { 
         name: "Engineering",
         location: Location.second,
-        company: Company.first,
+        company: company,
       }
     ].each{ |dept| Department.create!(dept) }
   end
@@ -71,7 +73,8 @@ if Rails.env == "development"
       categories.each do |category|
         Category.create!({
           name: category,
-          categorizable_type: type
+          categorizable_type: type,
+          company: company,
         })
       end
     end
@@ -81,7 +84,7 @@ if Rails.env == "development"
     ["Apple", "Lenovo", "Cisco", "HP", "Samsung", "SHARP"].each do |manufacturer|
       Manufacturer.create!({
         name: manufacturer,
-        company: Company.first,
+        company: company,
       })
     end
   end
@@ -139,7 +142,7 @@ if Rails.env == "development"
         name: "SHARP",
         url: "www.business.sharp.com",
       },
-    ].each{ |vendor| Vendor.create!(vendor.merge({ company: Company.first })) }
+    ].each{ |vendor| Vendor.create!(vendor.merge({ company: company })) }
   end
 
   if Item.count == 0
@@ -157,7 +160,7 @@ if Rails.env == "development"
           model: Model.find(Model.where('id <= ?', 2).pluck(:id).sample),
           vendor: Vendor.find(Vendor.pluck(:id).sample),
           default_location: Location.find(Location.pluck(:id).sample),
-          company: Company.first,
+          company: company,
         })
 
         if n % 2 != 0
@@ -180,7 +183,7 @@ if Rails.env == "development"
     vendor = Vendor.create!({
       name: "Unwired",
       url: "www.unwired.com",
-      company: Company.first,
+      company: company,
     })
 
     Contract.create!({
@@ -190,7 +193,7 @@ if Rails.env == "development"
       ends_at: 6.months.from_now,
       vendor: vendor,
       category: Category.where({name: "Utility"}).first,
-      company: Company.first,
+      company: company,
     })
   end
 
@@ -209,7 +212,7 @@ if Rails.env == "development"
       category: Category.find_by_slug("license-operating-system"),
       vendor: Vendor.first,
       manufacturer: Manufacturer.first,
-      company: Company.first,
+      company: company,
     })
   end
 
@@ -224,7 +227,7 @@ if Rails.env == "development"
       model: Model.find(3),
       vendor: Vendor.find_by_slug("apple"),
       default_location: Location.first,
-      company: Company.first,
+      company: company,
     })
   end
 
@@ -238,7 +241,7 @@ if Rails.env == "development"
       model: Model.find(4),
       vendor: Vendor.find_by_slug("sharp"),
       default_location: Location.first,
-      company: Company.first,
+      company: company,
     })
   end
 
@@ -251,7 +254,7 @@ if Rails.env == "development"
       model: Model.find(5),
       vendor: Vendor.find_by_slug("amazon"),
       default_location: Location.first,
-      company: Company.first,
+      company: company,
     })
   end
 
@@ -264,7 +267,7 @@ if Rails.env == "development"
         dhcp_start: "10.10.10.150",
         dhcp_end: "10.10.10.254",
         vlan_id: 10,
-        company: Company.first,
+        company: company,
       },
       {
         name: "Large /16",
@@ -273,14 +276,14 @@ if Rails.env == "development"
         dhcp_start: "10.20.1.1",
         dhcp_end: "10.20.1.254",
         vlan_id: 2,
-        company: Company.first,
+        company: company,
       },
       {
         name: "Small /28",
         address: "10.10.40.0/28",
         gateway: "10.10.40.1",
         vlan_id: 40,
-        company: Company.first,
+        company: company,
       }
     ].each{ |network|  Network.create!(network) }
   end

@@ -70,6 +70,10 @@ declare namespace Schema {
 		description?: string | null;
 		created_at: string;
 		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		fieldset_associations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];
 	}
 
@@ -298,6 +302,7 @@ declare namespace Schema {
 		dhcp_start?: string | null;
 		dhcp_end?: string | null;
 		vlan_id?: number | null;
+		notes?: string | null;
 		created_at: string;
 		updated_at: string;
 		owner?: Ownership;
@@ -533,6 +538,7 @@ declare namespace Schema {
 		vendors?: Vendor[];
 		manufacturers?: Manufacturer[];
 		orders?: Order[];
+		categories?: Category[];
 		models?: Model[];
 	}
 
