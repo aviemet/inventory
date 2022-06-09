@@ -379,6 +379,9 @@ declare namespace Schema {
 		manufacturer_id: number;
 		created_at: string;
 		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
 		audits?: AuditedAudit[];

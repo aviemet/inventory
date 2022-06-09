@@ -96,30 +96,35 @@ if Rails.env == "development"
         model_number: "MacBookPro16,1",
         manufacturer: Manufacturer.find_by_slug("apple"),
         category: Category.find_by_slug("item-laptop"),
+        company: company,
       },
       {
         name: "HP EliteDesk 800 G3",
         model_number: "1FY84UT#ABA",
         manufacturer: Manufacturer.find_by_slug("hp"),
         category: Category.find_by_slug("item-desktop"),
+        company: company,
       },
       {
         name: "Apple Keyboard",
         model_number: "AD897",
         manufacturer: Manufacturer.find_by_slug("apple"),
         category: Category.find_by_slug("accessory-keyboard"),
+        company: company,
       },
       {
         name: "Black Toner",
         model_number: "MX768",
         manufacturer: Manufacturer.find_by_slug("sharp"),
         category: Category.find_by_slug("consumable-toner"),
+        company: company,
       },
       {
         name: "Samsung Evo 850",
         model_number: "MZ-75E250",
         manufacturer: Manufacturer.find_by_slug("samsung"),
         category: Category.find_by_slug("component-ssd"),
+        company: company,
       }
     ].each{ |model| Model.create!(model) }
   end
