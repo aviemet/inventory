@@ -1,4 +1,17 @@
 class Category < ApplicationRecord
+  include Ownable
+  include Fieldable
+  include PgSearch::Model
+
+  pg_search_scope(
+    :search, 
+    against: [:name], 
+    using: {
+      tsearch: { prefix: true }, 
+      trigram: {}
+    }
+  )
+
   slug :slug_from_category_type
 
   audited
