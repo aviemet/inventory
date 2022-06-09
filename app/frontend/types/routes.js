@@ -556,12 +556,12 @@ export const categories = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"categories"],
 
 /**
  * Generates rails route to
- * /categories/:id(.:format)
- * @param {any} id
+ * /categories/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const category = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const category = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -896,115 +896,115 @@ export const dashboard = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"dashboard"],[1
 
 /**
  * Generates rails route to
- * /departments/:id(.:format)
+ * /departments/:slug(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const department = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /departments/:department_slug/contacts/:id(.:format)
+ * @param {any} departmentSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const department = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const departmentContact = __jsr.r({"department_slug":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:id(.:format)
- * @param {any} departmentId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const departmentContact = __jsr.r({"department_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/addresses/:id(.:format)
- * @param {any} departmentId
- * @param {any} contactId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const departmentContactAddress = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/addresses(.:format)
- * @param {any} departmentId
- * @param {any} contactId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const departmentContactAddresses = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/emails/:id(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/addresses/:id(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const departmentContactEmail = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const departmentContactAddress = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/emails(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/addresses(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const departmentContactEmails = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const departmentContactAddresses = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/phones/:id(.:format)
- * @param {any} departmentId
- * @param {any} contactId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const departmentContactPhone = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/phones(.:format)
- * @param {any} departmentId
- * @param {any} contactId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const departmentContactPhones = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/websites/:id(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/emails/:id(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const departmentContactWebsite = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const departmentContactEmail = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/websites(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/emails(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const departmentContactWebsites = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const departmentContactEmails = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/phones/:id(.:format)
+ * @param {any} departmentSlug
+ * @param {any} contactId
+ * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const departmentContacts = __jsr.r({"department_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const departmentContactPhone = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /departments/:department_slug/contacts/:contact_id/phones(.:format)
+ * @param {any} departmentSlug
+ * @param {any} contactId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const departmentContactPhones = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /departments/:department_slug/contacts/:contact_id/websites/:id(.:format)
+ * @param {any} departmentSlug
+ * @param {any} contactId
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const departmentContactWebsite = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /departments/:department_slug/contacts/:contact_id/websites(.:format)
+ * @param {any} departmentSlug
+ * @param {any} contactId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const departmentContactWebsites = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /departments/:department_slug/contacts(.:format)
+ * @param {any} departmentSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const departmentContacts = __jsr.r({"department_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1042,12 +1042,12 @@ export const editAssignment = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],
 
 /**
  * Generates rails route to
- * /categories/:id/edit(.:format)
- * @param {any} id
+ * /categories/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editCategory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editCategory = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1141,66 +1141,66 @@ export const editContract = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2
 
 /**
  * Generates rails route to
- * /departments/:id/edit(.:format)
+ * /departments/:slug/edit(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editDepartment = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /departments/:department_slug/contacts/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editDepartment = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editDepartmentContact = __jsr.r({"department_slug":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:id/edit(.:format)
- * @param {any} departmentId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editDepartmentContact = __jsr.r({"department_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/addresses/:id/edit(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/addresses/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editDepartmentContactAddress = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editDepartmentContactAddress = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/emails/:id/edit(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/emails/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editDepartmentContactEmail = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editDepartmentContactEmail = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/phones/:id/edit(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/phones/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editDepartmentContactPhone = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editDepartmentContactPhone = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/websites/:id/edit(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/websites/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editDepartmentContactWebsite = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editDepartmentContactWebsite = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1268,138 +1268,138 @@ export const editLicense = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,
 
 /**
  * Generates rails route to
- * /locations/:id/edit(.:format)
+ * /locations/:slug/edit(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editLocation = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /locations/:location_slug/contacts/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editLocation = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editLocationContact = __jsr.r({"location_slug":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:id/edit(.:format)
- * @param {any} locationId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editLocationContact = __jsr.r({"location_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/addresses/:id/edit(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/addresses/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editLocationContactAddress = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editLocationContactAddress = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/emails/:id/edit(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/emails/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editLocationContactEmail = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editLocationContactEmail = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/phones/:id/edit(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/phones/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editLocationContactPhone = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editLocationContactPhone = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/websites/:id/edit(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/websites/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editLocationContactWebsite = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editLocationContactWebsite = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:id/edit(.:format)
+ * /manufacturers/:slug/edit(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editManufacturer = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /manufacturers/:manufacturer_slug/contacts/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editManufacturer = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editManufacturerContact = __jsr.r({"manufacturer_slug":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:id/edit(.:format)
- * @param {any} manufacturerId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editManufacturerContact = __jsr.r({"manufacturer_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/addresses/:id/edit(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/addresses/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editManufacturerContactAddress = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editManufacturerContactAddress = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/emails/:id/edit(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/emails/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editManufacturerContactEmail = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editManufacturerContactEmail = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/phones/:id/edit(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/phones/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editManufacturerContactPhone = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editManufacturerContactPhone = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/websites/:id/edit(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/websites/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editManufacturerContactWebsite = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
+export const editManufacturerContactWebsite = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /models/:id/edit(.:format)
- * @param {any} id
+ * /models/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editModel = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"models"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editModel = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"models"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1792,115 +1792,115 @@ export const licenses = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[1,[
 
 /**
  * Generates rails route to
- * /locations/:id(.:format)
+ * /locations/:slug(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const location = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /locations/:location_slug/contacts/:id(.:format)
+ * @param {any} locationSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const location = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const locationContact = __jsr.r({"location_slug":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:id(.:format)
- * @param {any} locationId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const locationContact = __jsr.r({"location_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/addresses/:id(.:format)
- * @param {any} locationId
- * @param {any} contactId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const locationContactAddress = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/addresses(.:format)
- * @param {any} locationId
- * @param {any} contactId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const locationContactAddresses = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/emails/:id(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/addresses/:id(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const locationContactEmail = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const locationContactAddress = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/emails(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/addresses(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const locationContactEmails = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const locationContactAddresses = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/phones/:id(.:format)
- * @param {any} locationId
- * @param {any} contactId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const locationContactPhone = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/phones(.:format)
- * @param {any} locationId
- * @param {any} contactId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const locationContactPhones = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/websites/:id(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/emails/:id(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const locationContactWebsite = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const locationContactEmail = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/websites(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/emails(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const locationContactWebsites = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const locationContactEmails = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/phones/:id(.:format)
+ * @param {any} locationSlug
+ * @param {any} contactId
+ * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const locationContacts = __jsr.r({"location_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const locationContactPhone = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /locations/:location_slug/contacts/:contact_id/phones(.:format)
+ * @param {any} locationSlug
+ * @param {any} contactId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const locationContactPhones = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /locations/:location_slug/contacts/:contact_id/websites/:id(.:format)
+ * @param {any} locationSlug
+ * @param {any} contactId
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const locationContactWebsite = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /locations/:location_slug/contacts/:contact_id/websites(.:format)
+ * @param {any} locationSlug
+ * @param {any} contactId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const locationContactWebsites = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /locations/:location_slug/contacts(.:format)
+ * @param {any} locationSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const locationContacts = __jsr.r({"location_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1912,115 +1912,115 @@ export const locations = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"locations"],[1
 
 /**
  * Generates rails route to
- * /manufacturers/:id(.:format)
+ * /manufacturers/:slug(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const manufacturer = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /manufacturers/:manufacturer_slug/contacts/:id(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const manufacturer = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const manufacturerContact = __jsr.r({"manufacturer_slug":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:id(.:format)
- * @param {any} manufacturerId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const manufacturerContact = __jsr.r({"manufacturer_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/addresses/:id(.:format)
- * @param {any} manufacturerId
- * @param {any} contactId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const manufacturerContactAddress = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/addresses(.:format)
- * @param {any} manufacturerId
- * @param {any} contactId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const manufacturerContactAddresses = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/emails/:id(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/addresses/:id(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const manufacturerContactEmail = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const manufacturerContactAddress = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/emails(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/addresses(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const manufacturerContactEmails = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const manufacturerContactAddresses = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/phones/:id(.:format)
- * @param {any} manufacturerId
- * @param {any} contactId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const manufacturerContactPhone = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/phones(.:format)
- * @param {any} manufacturerId
- * @param {any} contactId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const manufacturerContactPhones = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/websites/:id(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/emails/:id(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const manufacturerContactWebsite = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const manufacturerContactEmail = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/websites(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/emails(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const manufacturerContactWebsites = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+export const manufacturerContactEmails = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/phones/:id(.:format)
+ * @param {any} manufacturerSlug
+ * @param {any} contactId
+ * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const manufacturerContacts = __jsr.r({"manufacturer_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const manufacturerContactPhone = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/phones(.:format)
+ * @param {any} manufacturerSlug
+ * @param {any} contactId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const manufacturerContactPhones = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/websites/:id(.:format)
+ * @param {any} manufacturerSlug
+ * @param {any} contactId
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const manufacturerContactWebsite = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/websites(.:format)
+ * @param {any} manufacturerSlug
+ * @param {any} contactId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const manufacturerContactWebsites = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /manufacturers/:manufacturer_slug/contacts(.:format)
+ * @param {any} manufacturerSlug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const manufacturerContacts = __jsr.r({"manufacturer_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2032,12 +2032,12 @@ export const manufacturers = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"manufactur
 
 /**
  * Generates rails route to
- * /models/:id(.:format)
- * @param {any} id
+ * /models/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const model = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"models"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const model = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"models"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2171,52 +2171,52 @@ export const newDepartment = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"department
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/new(.:format)
+ * @param {any} departmentSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newDepartmentContact = __jsr.r({"department_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const newDepartmentContact = __jsr.r({"department_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/addresses/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/addresses/new(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newDepartmentContactAddress = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newDepartmentContactAddress = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/emails/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/emails/new(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newDepartmentContactEmail = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newDepartmentContactEmail = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/phones/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/phones/new(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newDepartmentContactPhone = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newDepartmentContactPhone = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/websites/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/websites/new(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newDepartmentContactWebsite = __jsr.r({"department_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newDepartmentContactWebsite = __jsr.r({"department_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"department_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2285,52 +2285,52 @@ export const newLocation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"locations"],
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/new(.:format)
+ * @param {any} locationSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newLocationContact = __jsr.r({"location_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const newLocationContact = __jsr.r({"location_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/addresses/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/addresses/new(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newLocationContactAddress = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newLocationContactAddress = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/emails/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/emails/new(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newLocationContactEmail = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newLocationContactEmail = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/phones/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/phones/new(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newLocationContactPhone = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newLocationContactPhone = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/websites/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/websites/new(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newLocationContactWebsite = __jsr.r({"location_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newLocationContactWebsite = __jsr.r({"location_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"location_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2342,52 +2342,52 @@ export const newManufacturer = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"manufact
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newManufacturerContact = __jsr.r({"manufacturer_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const newManufacturerContact = __jsr.r({"manufacturer_slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/addresses/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/addresses/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newManufacturerContactAddress = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newManufacturerContactAddress = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"addresses"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/emails/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/emails/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newManufacturerContactEmail = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newManufacturerContactEmail = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"emails"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/phones/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/phones/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newManufacturerContactPhone = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newManufacturerContactPhone = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"phones"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/websites/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/websites/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newManufacturerContactWebsite = __jsr.r({"manufacturer_id":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_id"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
+export const newManufacturerContactWebsite = __jsr.r({"manufacturer_slug":{"r":true},"contact_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"manufacturer_slug"],[2,[7,"/"],[2,[6,"contacts"],[2,[7,"/"],[2,[3,"contact_id"],[2,[7,"/"],[2,[6,"websites"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to

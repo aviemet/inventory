@@ -64,10 +64,10 @@ Rails.application.routes.draw do
   resources :companies, concerns: :contactable, param: :slug
   resources :ownerships
 
-  resources :departments, concerns: :contactable
-  resources :locations, concerns: :contactable
+  resources :departments, concerns: :contactable, param: :slug
+  resources :locations, concerns: :contactable, param: :slug
 
-  resources :categories
+  resources :categories, param: :slug
   resources :status_types
 
   resources :items, path: :hardware do
@@ -84,10 +84,10 @@ Rails.application.routes.draw do
 
   resources :people, concerns: :contactable
 
-  resources :vendors, param: :slug, concerns: :contactable
+  resources :vendors, concerns: :contactable, param: :slug
 
-  resources :models
-  resources :manufacturers, concerns: :contactable
+  resources :models, param: :slug
+  resources :manufacturers, concerns: :contactable, param: :slug
   resources :warranties, concerns: :contactable
 
   resources :fields

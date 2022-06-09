@@ -149,13 +149,13 @@ export const categories: ((
 
 /**
  * Generates rails route to
- * /categories/:id(.:format)
- * @param {any} id
+ * /categories/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const category: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -607,41 +607,41 @@ export const dashboard: ((
 
 /**
  * Generates rails route to
- * /departments/:id(.:format)
- * @param {any} id
+ * /departments/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const department: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:id(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:id(.:format)
+ * @param {any} departmentSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContact: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/addresses/:id(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/addresses/:id(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContactAddress: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -649,29 +649,29 @@ export const departmentContactAddress: ((
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/addresses(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/addresses(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContactAddresses: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/emails/:id(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/emails/:id(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContactEmail: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -679,29 +679,29 @@ export const departmentContactEmail: ((
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/emails(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/emails(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContactEmails: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/phones/:id(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/phones/:id(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContactPhone: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -709,29 +709,29 @@ export const departmentContactPhone: ((
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/phones(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/phones(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContactPhones: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/websites/:id(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/websites/:id(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContactWebsite: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -739,27 +739,27 @@ export const departmentContactWebsite: ((
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/websites(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/websites(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContactWebsites: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts(.:format)
+ * @param {any} departmentSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const departmentContacts: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -809,13 +809,13 @@ export const editAssignment: ((
 
 /**
  * Generates rails route to
- * /categories/:id/edit(.:format)
- * @param {any} id
+ * /categories/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editCategory: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -947,41 +947,41 @@ export const editContract: ((
 
 /**
  * Generates rails route to
- * /departments/:id/edit(.:format)
- * @param {any} id
+ * /departments/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editDepartment: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:id/edit(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editDepartmentContact: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/addresses/:id/edit(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/addresses/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editDepartmentContactAddress: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -989,15 +989,15 @@ export const editDepartmentContactAddress: ((
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/emails/:id/edit(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/emails/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editDepartmentContactEmail: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1005,15 +1005,15 @@ export const editDepartmentContactEmail: ((
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/phones/:id/edit(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/phones/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editDepartmentContactPhone: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1021,15 +1021,15 @@ export const editDepartmentContactPhone: ((
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/websites/:id/edit(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/websites/:id/edit(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editDepartmentContactWebsite: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1123,41 +1123,41 @@ export const editLicense: ((
 
 /**
  * Generates rails route to
- * /locations/:id/edit(.:format)
- * @param {any} id
+ * /locations/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editLocation: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:id/edit(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editLocationContact: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/addresses/:id/edit(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/addresses/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editLocationContactAddress: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1165,15 +1165,15 @@ export const editLocationContactAddress: ((
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/emails/:id/edit(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/emails/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editLocationContactEmail: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1181,15 +1181,15 @@ export const editLocationContactEmail: ((
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/phones/:id/edit(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/phones/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editLocationContactPhone: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1197,15 +1197,15 @@ export const editLocationContactPhone: ((
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/websites/:id/edit(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/websites/:id/edit(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editLocationContactWebsite: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1213,41 +1213,41 @@ export const editLocationContactWebsite: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:id/edit(.:format)
- * @param {any} id
+ * /manufacturers/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editManufacturer: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:id/edit(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editManufacturerContact: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/addresses/:id/edit(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/addresses/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editManufacturerContactAddress: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1255,15 +1255,15 @@ export const editManufacturerContactAddress: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/emails/:id/edit(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/emails/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editManufacturerContactEmail: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1271,15 +1271,15 @@ export const editManufacturerContactEmail: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/phones/:id/edit(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/phones/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editManufacturerContactPhone: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1287,15 +1287,15 @@ export const editManufacturerContactPhone: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/websites/:id/edit(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/websites/:id/edit(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editManufacturerContactWebsite: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1303,13 +1303,13 @@ export const editManufacturerContactWebsite: ((
 
 /**
  * Generates rails route to
- * /models/:id/edit(.:format)
- * @param {any} id
+ * /models/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editModel: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -1847,41 +1847,41 @@ export const licenses: ((
 
 /**
  * Generates rails route to
- * /locations/:id(.:format)
- * @param {any} id
+ * /locations/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const location: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:id(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:id(.:format)
+ * @param {any} locationSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContact: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/addresses/:id(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/addresses/:id(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContactAddress: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1889,29 +1889,29 @@ export const locationContactAddress: ((
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/addresses(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/addresses(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContactAddresses: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/emails/:id(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/emails/:id(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContactEmail: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1919,29 +1919,29 @@ export const locationContactEmail: ((
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/emails(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/emails(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContactEmails: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/phones/:id(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/phones/:id(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContactPhone: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1949,29 +1949,29 @@ export const locationContactPhone: ((
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/phones(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/phones(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContactPhones: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/websites/:id(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/websites/:id(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContactWebsite: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -1979,27 +1979,27 @@ export const locationContactWebsite: ((
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/websites(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/websites(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContactWebsites: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts(.:format)
+ * @param {any} locationSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const locationContacts: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2015,41 +2015,41 @@ export const locations: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:id(.:format)
- * @param {any} id
+ * /manufacturers/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturer: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:id(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:id(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContact: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/addresses/:id(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/addresses/:id(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContactAddress: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -2057,29 +2057,29 @@ export const manufacturerContactAddress: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/addresses(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/addresses(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContactAddresses: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/emails/:id(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/emails/:id(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContactEmail: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -2087,29 +2087,29 @@ export const manufacturerContactEmail: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/emails(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/emails(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContactEmails: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/phones/:id(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/phones/:id(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContactPhone: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -2117,29 +2117,29 @@ export const manufacturerContactPhone: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/phones(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/phones(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContactPhones: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/websites/:id(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/websites/:id(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContactWebsite: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
@@ -2147,27 +2147,27 @@ export const manufacturerContactWebsite: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/websites(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/websites(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContactWebsites: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts(.:format)
+ * @param {any} manufacturerSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const manufacturerContacts: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2183,13 +2183,13 @@ export const manufacturers: ((
 
 /**
  * Generates rails route to
- * /models/:id(.:format)
- * @param {any} id
+ * /models/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const model: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2365,68 +2365,68 @@ export const newDepartment: ((
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/new(.:format)
+ * @param {any} departmentSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newDepartmentContact: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/addresses/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/addresses/new(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newDepartmentContactAddress: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/emails/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/emails/new(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newDepartmentContactEmail: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/phones/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/phones/new(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newDepartmentContactPhone: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /departments/:department_id/contacts/:contact_id/websites/new(.:format)
- * @param {any} departmentId
+ * /departments/:department_slug/contacts/:contact_id/websites/new(.:format)
+ * @param {any} departmentSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newDepartmentContactWebsite: ((
-  departmentId: RequiredRouteParameter,
+  departmentSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -2515,68 +2515,68 @@ export const newLocation: ((
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/new(.:format)
+ * @param {any} locationSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newLocationContact: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/addresses/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/addresses/new(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newLocationContactAddress: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/emails/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/emails/new(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newLocationContactEmail: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/phones/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/phones/new(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newLocationContactPhone: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /locations/:location_id/contacts/:contact_id/websites/new(.:format)
- * @param {any} locationId
+ * /locations/:location_slug/contacts/:contact_id/websites/new(.:format)
+ * @param {any} locationSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newLocationContactWebsite: ((
-  locationId: RequiredRouteParameter,
+  locationSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -2593,68 +2593,68 @@ export const newManufacturer: ((
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newManufacturerContact: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/addresses/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/addresses/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newManufacturerContactAddress: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/emails/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/emails/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newManufacturerContactEmail: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/phones/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/phones/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newManufacturerContactPhone: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /manufacturers/:manufacturer_id/contacts/:contact_id/websites/new(.:format)
- * @param {any} manufacturerId
+ * /manufacturers/:manufacturer_slug/contacts/:contact_id/websites/new(.:format)
+ * @param {any} manufacturerSlug
  * @param {any} contactId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newManufacturerContactWebsite: ((
-  manufacturerId: RequiredRouteParameter,
+  manufacturerSlug: RequiredRouteParameter,
   contactId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
