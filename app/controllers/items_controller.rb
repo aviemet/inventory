@@ -7,8 +7,6 @@ class ItemsController < ApplicationController
   expose :item
   expose :category, id: -> { request.params[:category_id] }
 
-  before_action :set_view_data, only: [:index, :category]
-
   # GET /hardware
   # GET /hardware.json
   def index
@@ -104,10 +102,6 @@ class ItemsController < ApplicationController
 
   def sortable_fields
     %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
-  end
-
-  def set_view_data
-    @hideable_fields = { Model: "models.name", "Asset Tag": "asset_tag", Serial: "serial", Cost: "cost", "Purchase Date": "purchased_at", Requestable: "requestable", Category: "categories.name", Manufacturer: "manufacturers.name", "Model Number": "models.model_number", Vendor: "vendors.name", Department: "departments.name" }
   end
 
   def item_params
