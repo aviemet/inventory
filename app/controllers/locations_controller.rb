@@ -1,82 +1,89 @@
 class LocationsController < ApplicationController
+  include OwnableConcern
+  include Searchable
   include ContactableConcern
 
-  before_action :set_location, only: [:show, :edit, :update, :destroy]
+  expose :locations, -> { @active_company.locations.includes_associated }
+  expose :location, find_by: :slug, id: :slug
 
   # GET /locations
-  # GET /locations.json
   def index
-    @locations = current_user.active_company.locations
-    render inertia: "Locations/Index"
+    self.locations = search(locations, sortable_fields)
+    paginated_locations = locations.page(params[:page] || 1)
+
+    render inertia: "Locations/Index", props: {
+      locations: LocationBlueprint.render_as_json(paginated_locations, view: :counts),
+      pagination: -> { {
+        count: locations.count,
+        **pagination_data(paginated_locations)
+      } }
+    }
   end
 
-  # GET /locations/:id
-  # GET /locations/:id.json
+  # GET /locations/:slug
   def show
-    render inertia: "Locations/Show"
+    render inertia: "Locations/Show", props: {
+      location: LocationBlueprint.render_as_json(location, view: :associations)
+    }
   end
 
   # GET /locations/new
   def new
-    @location = Location.new
-    render inertia: "Locations/New"
+    render inertia: "Locations/New", props: {
+      location: LocationBlueprint.render_as_json(Location.new, view: :new),
+      locations: -> { @active_company.locations.as_json },
+      departments: -> { @active_company.departments.as_json },
+      currencies: currencies,
+    }
   end
 
-  # GET /locations/:id/edit
+  # GET /locations/:slug/edit
   def edit
-    @locations = Location.where.not(id: params[:id]).all
-    render inertia: "Locations/Edit"
+    render inertia: "Locations/Edit", props: {
+      location: LocationBlueprint.render_as_json(location),
+      locations: -> { @active_company.locations.where.not(id: location.id) },
+      departments: -> { @active_company.departments.as_json },
+      currencies: currencies,
+    }
   end
 
   # POST /locations
-  # POST /locations.json
   def create
-    @location = Location.new(location_params)
-    @location.company = @active_company
-
-    respond_to do |format|
-      if @location.save
-        format.html { redirect_to company_url(@location.company), notice: 'Location was successfully created.' }
-        format.json { render :show, status: :created, location: @location }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
+    location.company = @active_company
+    if location.save
+      redirect_to location, notice: 'Location was successfully created'
+    else
+      redirect_to new_location_path, inertia: { errors: location.errors }
     end
   end
 
-  # PATCH/PUT /locations/:id
-  # PATCH/PUT /locations/:id.json
+  # PATCH/PUT /locations/:slug
   def update
-    respond_to do |format|
-      if @location.update(location_params)
-        format.html { redirect_to company_url(@location.company), notice: 'Location was successfully updated.' }
-        format.json { render :show, status: :ok, location: @location }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
+    if location.update(location_params)
+      redirect_to location, notice: 'Location was successfully updated'
+    else
+      redirect_to edit_location_path, inertia: { errors: location.errors }
     end
   end
 
-  # DELETE /locations/:id
-  # DELETE /locations/:id.json
+  # DELETE /locations/:slug
   def destroy
-    @location.destroy
-    respond_to do |format|
-      format.html { redirect_to company_url(@location.company), notice: 'Location was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    location.destroy
+    redirect_to locations_url, notice: 'Location was successfully destroyed.'
   end
 
   private
 
-  def set_location
-    @location = Location.find_by_slug(params[:id])
+  def currencies
+    Monetize::Parser::CURRENCY_SYMBOLS.map{ |sym, abbr| { symbol: sym, code: abbr } }
+  end
+
+  def sortable_fields
+    %w(name currency items accessories components consumables departments.name).freeze
   end
 
   # contact_attributes from Concern
   def location_params
-    params.require(:location).permit(:name, :parent_id)
+    params.require(:location).permit(:name, :parent_id, :currency, :department_id)
   end
 end

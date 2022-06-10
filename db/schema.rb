@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.bigint "assignable_id", null: false
     t.string "assign_toable_type", null: false
     t.bigint "assign_toable_id", null: false
+    t.bigint "location_id", null: false
     t.integer "qty", default: 1
     t.integer "status", default: 0
     t.datetime "assigned_at", precision: nil
@@ -69,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.index ["assign_toable_type", "assign_toable_id"], name: "index_assignments_on_assign_toable_type_and_assign_toable_id"
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable_type_and_assignable_id"
     t.index ["created_by_id"], name: "index_assignments_on_created_by_id"
+    t.index ["location_id"], name: "index_assignments_on_location_id"
   end
 
   create_table "audits", force: :cascade do |t|
@@ -286,7 +288,10 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.string "slug", null: false
+    t.string "currency"
     t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_locations_on_parent_id"
     t.index ["slug"], name: "index_locations_on_slug", unique: true
   end
@@ -381,8 +386,10 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.string "employee_number"
     t.string "job_title"
     t.bigint "manager_id"
+    t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_people_on_location_id"
     t.index ["manager_id"], name: "index_people_on_manager_id"
   end
 
@@ -515,6 +522,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
   add_foreign_key "accessories", "vendors"
   add_foreign_key "addresses", "categories"
   add_foreign_key "addresses", "contacts"
+  add_foreign_key "assignments", "locations"
   add_foreign_key "assignments", "users", column: "created_by_id"
   add_foreign_key "components", "locations", column: "default_location_id"
   add_foreign_key "components", "models"
@@ -547,6 +555,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
   add_foreign_key "orders", "vendors"
   add_foreign_key "ownerships", "companies"
   add_foreign_key "ownerships", "departments"
+  add_foreign_key "people", "locations"
   add_foreign_key "people", "people", column: "manager_id"
   add_foreign_key "phones", "categories"
   add_foreign_key "phones", "contacts"

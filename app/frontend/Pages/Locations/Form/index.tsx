@@ -1,9 +1,56 @@
 import React from 'react'
+import {
+	Form,
+	Input,
+	SearchableDropdown,
+	Submit,
+} from '@/Components/Form'
+import { Inertia } from '@inertiajs/inertia'
+import { omit } from 'lodash'
 
-const Form = () => {
+export interface ILocationFormProps {
+	to: string
+	method?: HTTPVerb
+	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	location: Partial<Schema.Location>
+	locations: Schema.Location[]
+	currencies: any
+}
+
+const LocationForm = ({ to, method = 'post', onSubmit, location, locations, currencies }: ILocationFormProps) => {
 	return (
-		<div>Form</div>
+		<Form
+			model="location"
+			data={ { location: omit(location, ['id', 'created_at', 'updated_at', 'slug']) } }
+			to={ to }
+			method={ method }
+			onSubmit={ onSubmit }
+			className="max-w-5xl"
+		>
+			<Input name="name" label="Location Name" required autoFocus />
+
+			<SearchableDropdown
+				label="Currency"
+				name="currency"
+				getLabel={ value => `${value.symbol} - ${value.code}` }
+				getValue={ value => value.symbol }
+				required
+				options={ currencies }
+			/>
+
+			<SearchableDropdown
+				label="Parent Location"
+				name="parent_id"
+				required
+				options={ locations }
+				onOpen={ () => Inertia.reload({ only: ['locations'] }) }
+			/>
+
+			<Submit className="w-full">
+				{ location.id ? 'Update' : 'Create' } Location
+			</Submit>
+		</Form>
 	)
 }
 
-export default React.memo(Form)
+export default React.memo(LocationForm)

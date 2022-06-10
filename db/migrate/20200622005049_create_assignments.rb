@@ -3,6 +3,7 @@ class CreateAssignments < ActiveRecord::Migration[6.0]
     create_table :assignments do |t|
       t.references :assignable, polymorphic: true, null: false
       t.references :assign_toable, polymorphic: true, null: false
+      t.references :location, null: false, foreign_key: true
       t.integer :qty, default: 1
       t.integer :status, default: 0
       t.datetime :assigned_at

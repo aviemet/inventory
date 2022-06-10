@@ -177,6 +177,8 @@ In order to de-couple 3rd pary libraries from the project, Icons should be named
 
 ## Dev Notes
 
+### Assignments
+
 The main difference between an Item and an Accessory or Consumable is that an Item does not have a quantity field. Accessories and Consumables describe items with an inventory level which can be increased through a purchase or manual adjustment. Accessories represent items which generally accompany an asset such as mice (mouses?) and keyboards and can be returned after use. Consumables represent items which disappear after use such as paper or toner.
 
 These differences are represented by three subclasses of the polymorphic Assignable class:
@@ -184,6 +186,8 @@ These differences are represented by three subclasses of the polymorphic Assigna
 - `Assignable::Single`: Items, no count, can be reassigned.
 - `Assignable::Quantity`: Accessories, tracks quantity, can be reassigned.
 - `Assignable::Consume`: Consumables, tracks quantity, can not be reassigned.
+
+Assignments have a `location` which should be derived from the User, Item or Location of the AssignToable model, but can be overridden by the user.
 
 ### Searchable/Sortable and Table Components
 

@@ -8,7 +8,7 @@ class CreatePeople < ActiveRecord::Migration[6.0]
       t.string :employee_number
       t.string :job_title
       t.references :manager, null: true, foreign_key: { to_table: :people }
-
+      t.references :location, null: true, foreign_key: true
       t.timestamps
     end
   end
