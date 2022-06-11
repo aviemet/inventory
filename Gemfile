@@ -99,4 +99,3 @@ group :test do
   gem "shoulda-matchers", "~> 5.1"
   gem "bullet", "~> 7.0"
 end
-

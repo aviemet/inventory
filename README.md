@@ -105,12 +105,11 @@ Companies:
 
 Locations:
 
-- [x] Tree structure with Company as root
+- [ ] Tree structure under company
 
 Departments:
 
 - [x] Flat structure under company
-- [x] References location (optional)
 
 Help Desk:
 
@@ -139,10 +138,10 @@ Software Agents:
 Table view for all models:
 
 - [x] Hide/Show column tables
-  - [ ] persistent per table per user
+  - [x] persistent per table per user
 - [x] Sortable column headings & Pagination
 - [ ] Custom fieldsets
-- [ ] Search bar filters by all fields, including custom fields
+- [x] Search bar filters by all fields, including custom fields
 
 Form view for all models:
 
