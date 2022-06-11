@@ -21,7 +21,7 @@ class Department < ApplicationRecord
 
   validates_presence_of :name
 
-  belongs_to :location, optional: true
+  belongs_to :location, optional: true # primary location, such as main office of department
   belongs_to :manager, class_name: :Person, optional: true
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
