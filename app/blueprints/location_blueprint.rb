@@ -8,6 +8,7 @@ class LocationBlueprint < ApplicationBlueprint
          :updated_at
 
   view :counts do
+    include_view :associations
     field :counts do |location|
       {
         items: location&.items&.size || 0,

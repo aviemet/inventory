@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
   include ContactableConcern
 
   expose :locations, -> { @active_company.locations.includes_associated }
-  expose :loc, model: Location, find_by: :slug, id: :slug # locaiton is used as a local variable by redirect_to
+  expose :loc, model: Location, find_by: :slug, id: :slug # location is used as a local variable by redirect_to
 
   # GET /locations
   def index

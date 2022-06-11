@@ -28,7 +28,7 @@ interface ICompaniesIndexProps {
 
 const Index = ({ locations, pagination }: ICompaniesIndexProps) => {
 	const title = 'Locations'
-
+	console.log({ locations })
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -58,6 +58,7 @@ const Index = ({ locations, pagination }: ICompaniesIndexProps) => {
 							<Table.Head>
 								<Table.Row>
 									<Table.Cell nowrap sort="name">Name</Table.Cell>
+									<Table.Cell sort="name">Parent</Table.Cell>
 									<Table.Cell sort="items">Assets</Table.Cell>
 									<Table.Cell sort="accessories">Accessories</Table.Cell>
 									<Table.Cell sort="consumables">Consumables</Table.Cell>
@@ -73,6 +74,10 @@ const Index = ({ locations, pagination }: ICompaniesIndexProps) => {
 									<Table.Row key={ location.id }>
 										<Table.Cell nowrap>
 											<Link href={ Routes.location(location.slug) }>{ location.name }</Link>
+										</Table.Cell>
+
+										<Table.Cell>
+											{ location.parent && <Link href={ Routes.location(location.parent.slug) }>{ location!.parent!.name }</Link> }
 										</Table.Cell>
 
 										<Table.Cell>
