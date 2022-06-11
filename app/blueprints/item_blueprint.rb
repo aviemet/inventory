@@ -16,6 +16,8 @@ class ItemBlueprint < ApplicationBlueprint
     item.cost&.amount.to_f if item.cost
   end
 
+  field :assigned, &:assigned?
+
   view :shallow do
     exclude :serial
     exclude :cost_currency
