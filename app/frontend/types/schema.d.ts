@@ -32,6 +32,217 @@ declare namespace Schema {
 		companies?: Company[];
 	}
 
+	type Accessory = {
+		id: number;
+		name?: string | null;
+		serial?: string | null;
+		asset_tag?: string | null;
+		min_qty?: number | null;
+		qty?: number | null;
+		cost?: number | null;
+		cost_currency: string;
+		requestable: boolean;
+		notes?: string | null;
+		model_id: number;
+		vendor_id?: number | null;
+		default_location_id?: number | null;
+		created_at: string;
+		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		assignments?: Assignment[];
+		purchase?: Purchase;
+		fieldset_associations?: FieldsetAssociation[];
+		roles?: Role[];
+		audits?: AuditedAudit[];
+		model?: Model;
+		vendor?: Vendor;
+		default_location?: Location;
+		category?: Category;
+		manufacturer?: Manufacturer;
+	}
+
+	type Address = {
+		id: number;
+		address: string;
+		address_2?: string | null;
+		city?: string | null;
+		region?: string | null;
+		country?: string | null;
+		postal?: string | null;
+		notes?: string | null;
+		contact_id: number;
+		category_id: number;
+		created_at: string;
+		updated_at: string;
+		audits?: AuditedAudit[];
+		contact?: Contact;
+		category?: Category;
+	}
+
+	type Assignment = {
+		id: number;
+		assignable_type: string;
+		assignable_id: number;
+		assign_toable_type: string;
+		assign_toable_id: number;
+		location_id: number;
+		qty?: number | null;
+		status?: 'requested'|'approved'|'denied' | null;
+		assigned_at?: string | null;
+		returned_at?: string | null;
+		expected_at?: string | null;
+		notes?: string | null;
+		active: boolean;
+		created_by_id?: number | null;
+		created_at: string;
+		updated_at: string;
+		audits?: AuditedAudit[];
+		created_by?: User;
+	}
+
+	type Category = {
+		id: number;
+		categorizable_type: string;
+		name?: string | null;
+		slug: string;
+		description?: string | null;
+		created_at: string;
+		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		fieldset_associations?: FieldsetAssociation[];
+		audits?: AuditedAudit[];
+	}
+
+	type Company = {
+		id: number;
+		name: string;
+		slug: string;
+		created_at: string;
+		updated_at: string;
+		contact?: Contact;
+		addresses?: Address[];
+		phones?: Phone[];
+		emails?: Email[];
+		websites?: Website[];
+		roles?: Role[];
+		audits?: AuditedAudit[];
+		users?: User[];
+		ownerships?: Ownership[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
+		departments?: Department[];
+		locations?: Location[];
+		licenses?: License[];
+		contracts?: Contract[];
+		networks?: Network[];
+		people?: Person[];
+		purchases?: Purchase[];
+		vendors?: Vendor[];
+		manufacturers?: Manufacturer[];
+		orders?: Order[];
+		categories?: Category[];
+		models?: Model[];
+	}
+
+	type Component = {
+		id: number;
+		name?: string | null;
+		serial?: string | null;
+		min_qty?: number | null;
+		qty?: number | null;
+		cost?: number | null;
+		cost_currency: string;
+		purchased_at?: string | null;
+		notes?: string | null;
+		model_id: number;
+		vendor_id: number;
+		default_location_id?: number | null;
+		created_at: string;
+		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		assignments?: Assignment[];
+		purchase?: Purchase;
+		fieldset_associations?: FieldsetAssociation[];
+		audits?: AuditedAudit[];
+		model?: Model;
+		vendor?: Vendor;
+		default_location?: Location;
+		category?: Category;
+		manufacturer?: Manufacturer;
+	}
+
+	type Consumable = {
+		id: number;
+		name?: string | null;
+		min_qty?: number | null;
+		qty?: number | null;
+		cost?: number | null;
+		cost_currency: string;
+		requestable: boolean;
+		notes?: string | null;
+		model_id: number;
+		vendor_id: number;
+		default_location_id: number;
+		created_at: string;
+		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		assignments?: Assignment[];
+		purchase?: Purchase;
+		fieldset_associations?: FieldsetAssociation[];
+		audits?: AuditedAudit[];
+		model?: Model;
+		vendor?: Vendor;
+		default_location?: Location;
+		category?: Category;
+		manufacturer?: Manufacturer;
+	}
+
+	type Contact = {
+		id: number;
+		notes?: string | null;
+		contactable_type?: string | null;
+		contactable_id?: number | null;
+		created_at: string;
+		updated_at: string;
+		primary_address_id?: number | null;
+		primary_phone_id?: number | null;
+		primary_email_id?: number | null;
+		addresses?: Address[];
+		emails?: Email[];
+		phones?: Phone[];
+		websites?: Website[];
+	}
+
+	type Contract = {
+		id: number;
+		name?: string | null;
+		number?: string | null;
+		notes?: string | null;
+		begins_at?: string | null;
+		ends_at?: string | null;
+		vendor_id: number;
+		category_id: number;
+		created_at: string;
+		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		roles?: Role[];
+		audits?: AuditedAudit[];
+		category?: Category;
+		vendor?: Vendor;
+	}
+
 	type Department = {
 		id: number;
 		name?: string | null;
@@ -64,19 +275,61 @@ declare namespace Schema {
 		vendors?: Vendor[];
 	}
 
-	type Category = {
+	type Email = {
 		id: number;
-		categorizable_type: string;
+		email?: string | null;
+		notes?: string | null;
+		contact_id: number;
+		category_id: number;
+		created_at: string;
+		updated_at: string;
+		audits?: AuditedAudit[];
+		contact?: Contact;
+		category?: Category;
+	}
+
+	type Field = {
+		id: number;
 		name?: string | null;
-		slug: string;
+		format?: string | null;
+		element?: string | null;
+		description?: string | null;
+		notes?: string | null;
+		created_at: string;
+		updated_at: string;
+		audits?: AuditedAudit[];
+	}
+
+	type Fieldset = {
+		id: number;
+		name?: string | null;
 		description?: string | null;
 		created_at: string;
 		updated_at: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		fieldset_associations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];
+	}
+
+	type FieldsetAssociation = {
+		id: number;
+		fieldset_id: number;
+		fieldable_type: string;
+		fieldable_id: number;
+		created_at: string;
+		updated_at: string;
+		audits?: AuditedAudit[];
+		fieldset?: Fieldset;
+	}
+
+	type IpLease = {
+		id: number;
+		nic_id: number;
+		address?: string | null;
+		active: boolean;
+		created_at: string;
+		updated_at: string;
+		audits?: AuditedAudit[];
+		nic?: Nic;
+		item?: Item;
 	}
 
 	type Item = {
@@ -119,152 +372,6 @@ declare namespace Schema {
 		warranty?: Warranty;
 	}
 
-	type Contact = {
-		id: number;
-		notes?: string | null;
-		contactable_type?: string | null;
-		contactable_id?: number | null;
-		created_at: string;
-		updated_at: string;
-		primary_address_id?: number | null;
-		primary_phone_id?: number | null;
-		primary_email_id?: number | null;
-		addresses?: Address[];
-		emails?: Email[];
-		phones?: Phone[];
-		websites?: Website[];
-	}
-
-	type Website = {
-		id: number;
-		url?: string | null;
-		name?: string | null;
-		notes?: string | null;
-		contact_id: number;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-	}
-
-	type Manufacturer = {
-		id: number;
-		name?: string | null;
-		slug: string;
-		created_at: string;
-		updated_at: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		roles?: Role[];
-		audits?: AuditedAudit[];
-		models?: Model[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
-	}
-
-	type Fieldset = {
-		id: number;
-		name?: string | null;
-		description?: string | null;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-	}
-
-	type Nic = {
-		id: number;
-		mac?: string | null;
-		nic_type: 'ethernet'|'wifi'|'fiber';
-		item_id: number;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-		item?: Item;
-		ips?: IpLease[];
-		ip_leases?: IpLease[];
-	}
-
-	type IpLease = {
-		id: number;
-		nic_id: number;
-		address?: string | null;
-		active: boolean;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-		nic?: Nic;
-		item?: Item;
-	}
-
-	type Component = {
-		id: number;
-		name?: string | null;
-		serial?: string | null;
-		min_qty?: number | null;
-		qty?: number | null;
-		cost?: number | null;
-		cost_currency: string;
-		purchased_at?: string | null;
-		notes?: string | null;
-		model_id: number;
-		vendor_id: number;
-		default_location_id?: number | null;
-		created_at: string;
-		updated_at: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		assignments?: Assignment[];
-		purchase?: Purchase;
-		fieldset_associations?: FieldsetAssociation[];
-		audits?: AuditedAudit[];
-		model?: Model;
-		vendor?: Vendor;
-		default_location?: Location;
-		category?: Category;
-		manufacturer?: Manufacturer;
-	}
-
-	type Contract = {
-		id: number;
-		name?: string | null;
-		number?: string | null;
-		notes?: string | null;
-		begins_at?: string | null;
-		ends_at?: string | null;
-		vendor_id: number;
-		category_id: number;
-		created_at: string;
-		updated_at: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-		audits?: AuditedAudit[];
-		category?: Category;
-		vendor?: Vendor;
-	}
-
-	type Email = {
-		id: number;
-		email?: string | null;
-		notes?: string | null;
-		contact_id: number;
-		category_id: number;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-		contact?: Contact;
-		category?: Category;
-	}
-
 	type License = {
 		id: number;
 		name?: string | null;
@@ -298,44 +405,6 @@ declare namespace Schema {
 		manufacturer?: Manufacturer;
 	}
 
-	type Network = {
-		id: number;
-		name?: string | null;
-		address?: string | null;
-		gateway?: string | null;
-		dhcp_start?: string | null;
-		dhcp_end?: string | null;
-		vlan_id?: number | null;
-		notes?: string | null;
-		created_at: string;
-		updated_at: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		audits?: AuditedAudit[];
-	}
-
-	type Assignment = {
-		id: number;
-		assignable_type: string;
-		assignable_id: number;
-		assign_toable_type: string;
-		assign_toable_id: number;
-		location_id: number;
-		qty?: number | null;
-		status?: 'requested'|'approved'|'denied' | null;
-		assigned_at?: string | null;
-		returned_at?: string | null;
-		expected_at?: string | null;
-		notes?: string | null;
-		active: boolean;
-		created_by_id?: number | null;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-		created_by?: User;
-	}
-
 	type Location = {
 		id: number;
 		name?: string | null;
@@ -362,22 +431,30 @@ declare namespace Schema {
 		roles?: Role[];
 		audits?: AuditedAudit[];
 		parent?: Location;
+		people?: Person[];
 	}
 
-	type Warranty = {
+	type Manufacturer = {
 		id: number;
-		item_id: number;
-		length?: number | null;
-		notes?: string | null;
+		name?: string | null;
+		slug: string;
 		created_at: string;
 		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
 		emails?: Email[];
 		websites?: Website[];
+		roles?: Role[];
 		audits?: AuditedAudit[];
-		item?: Item;
+		models?: Model[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
 	}
 
 	type Model = {
@@ -404,89 +481,34 @@ declare namespace Schema {
 		components?: Component[];
 	}
 
-	type Accessory = {
+	type Network = {
 		id: number;
 		name?: string | null;
-		serial?: string | null;
-		asset_tag?: string | null;
-		min_qty?: number | null;
-		qty?: number | null;
-		cost?: number | null;
-		cost_currency: string;
-		requestable: boolean;
-		notes?: string | null;
-		model_id: number;
-		vendor_id?: number | null;
-		default_location_id?: number | null;
-		created_at: string;
-		updated_at: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		assignments?: Assignment[];
-		purchase?: Purchase;
-		fieldset_associations?: FieldsetAssociation[];
-		roles?: Role[];
-		audits?: AuditedAudit[];
-		model?: Model;
-		vendor?: Vendor;
-		default_location?: Location;
-		category?: Category;
-		manufacturer?: Manufacturer;
-	}
-
-	type StatusType = {
-		id: number;
-		name?: string | null;
-		slug: string;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-	}
-
-	type Purchase = {
-		id: number;
-		purchasable_type: string;
-		purchasable_id: number;
-		order_id?: number | null;
-		cost: number;
-		cost_currency: string;
-		qty?: number | null;
+		address?: string | null;
+		gateway?: string | null;
+		dhcp_start?: string | null;
+		dhcp_end?: string | null;
+		vlan_id?: number | null;
 		notes?: string | null;
 		created_at: string;
 		updated_at: string;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
-		roles?: Role[];
+		audits?: AuditedAudit[];
+	}
+
+	type Nic = {
+		id: number;
+		mac?: string | null;
+		nic_type: 'ethernet'|'wifi'|'fiber';
+		item_id: number;
+		created_at: string;
+		updated_at: string;
 		audits?: AuditedAudit[];
 		item?: Item;
-		accessory?: Accessory;
-		component?: Component;
-		consumable?: Consumable;
-		order?: Order;
-	}
-
-	type Role = {
-		id: number;
-		name?: string | null;
-		resource_type?: string | null;
-		resource_id?: number | null;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-		users?: User[];
-	}
-
-	type FieldsetAssociation = {
-		id: number;
-		fieldset_id: number;
-		fieldable_type: string;
-		fieldable_id: number;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-		fieldset?: Fieldset;
+		ips?: IpLease[];
+		ip_leases?: IpLease[];
 	}
 
 	type Order = {
@@ -523,60 +545,17 @@ declare namespace Schema {
 		purchases?: Purchase[];
 	}
 
-	type Company = {
+	type Ownership = {
 		id: number;
-		name: string;
-		slug: string;
+		company_id: number;
+		department_id?: number | null;
+		ownable_type: string;
+		ownable_id: number;
 		created_at: string;
 		updated_at: string;
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		roles?: Role[];
 		audits?: AuditedAudit[];
-		users?: User[];
-		ownerships?: Ownership[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
-		departments?: Department[];
-		locations?: Location[];
-		licenses?: License[];
-		contracts?: Contract[];
-		networks?: Network[];
-		people?: Person[];
-		purchases?: Purchase[];
-		vendors?: Vendor[];
-		manufacturers?: Manufacturer[];
-		orders?: Order[];
-		categories?: Category[];
-		models?: Model[];
-	}
-
-	type Vendor = {
-		id: number;
-		name?: string | null;
-		slug: string;
-		url?: string | null;
-		created_at: string;
-		updated_at: string;
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		owner?: Ownership;
 		company?: Company;
 		department?: Department;
-		audits?: AuditedAudit[];
-		contracts?: Contract[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
 	}
 
 	type Person = {
@@ -608,78 +587,8 @@ declare namespace Schema {
 		fieldset_associations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];
 		manager?: Person;
+		location?: Location;
 		user?: User;
-	}
-
-	type Consumable = {
-		id: number;
-		name?: string | null;
-		min_qty?: number | null;
-		qty?: number | null;
-		cost?: number | null;
-		cost_currency: string;
-		requestable: boolean;
-		notes?: string | null;
-		model_id: number;
-		vendor_id: number;
-		default_location_id: number;
-		created_at: string;
-		updated_at: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		assignments?: Assignment[];
-		purchase?: Purchase;
-		fieldset_associations?: FieldsetAssociation[];
-		audits?: AuditedAudit[];
-		model?: Model;
-		vendor?: Vendor;
-		default_location?: Location;
-		category?: Category;
-		manufacturer?: Manufacturer;
-	}
-
-	type Field = {
-		id: number;
-		name?: string | null;
-		format?: string | null;
-		element?: string | null;
-		description?: string | null;
-		notes?: string | null;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-	}
-
-	type Ownership = {
-		id: number;
-		company_id: number;
-		department_id?: number | null;
-		ownable_type: string;
-		ownable_id: number;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-		company?: Company;
-		department?: Department;
-	}
-
-	type Address = {
-		id: number;
-		address: string;
-		address_2?: string | null;
-		city?: string | null;
-		region?: string | null;
-		country?: string | null;
-		postal?: string | null;
-		notes?: string | null;
-		contact_id: number;
-		category_id: number;
-		created_at: string;
-		updated_at: string;
-		audits?: AuditedAudit[];
-		contact?: Contact;
-		category?: Category;
 	}
 
 	type Phone = {
@@ -694,6 +603,99 @@ declare namespace Schema {
 		audits?: AuditedAudit[];
 		contact?: Contact;
 		category?: Category;
+	}
+
+	type Purchase = {
+		id: number;
+		purchasable_type: string;
+		purchasable_id: number;
+		order_id?: number | null;
+		cost: number;
+		cost_currency: string;
+		qty?: number | null;
+		notes?: string | null;
+		created_at: string;
+		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		roles?: Role[];
+		audits?: AuditedAudit[];
+		item?: Item;
+		accessory?: Accessory;
+		component?: Component;
+		consumable?: Consumable;
+		order?: Order;
+	}
+
+	type Role = {
+		id: number;
+		name?: string | null;
+		resource_type?: string | null;
+		resource_id?: number | null;
+		created_at: string;
+		updated_at: string;
+		audits?: AuditedAudit[];
+		users?: User[];
+	}
+
+	type StatusType = {
+		id: number;
+		name?: string | null;
+		slug: string;
+		created_at: string;
+		updated_at: string;
+		audits?: AuditedAudit[];
+	}
+
+	type Vendor = {
+		id: number;
+		name?: string | null;
+		slug: string;
+		url?: string | null;
+		created_at: string;
+		updated_at: string;
+		contact?: Contact;
+		addresses?: Address[];
+		phones?: Phone[];
+		emails?: Email[];
+		websites?: Website[];
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		audits?: AuditedAudit[];
+		contracts?: Contract[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
+	}
+
+	type Warranty = {
+		id: number;
+		item_id: number;
+		length?: number | null;
+		notes?: string | null;
+		created_at: string;
+		updated_at: string;
+		contact?: Contact;
+		addresses?: Address[];
+		phones?: Phone[];
+		emails?: Email[];
+		websites?: Website[];
+		audits?: AuditedAudit[];
+		item?: Item;
+	}
+
+	type Website = {
+		id: number;
+		url?: string | null;
+		name?: string | null;
+		notes?: string | null;
+		contact_id: number;
+		created_at: string;
+		updated_at: string;
+		audits?: AuditedAudit[];
 	}
 
 	type AuditedAudit = {

@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
   include ContactableConcern
 
   expose :locations, -> { @active_company.locations.includes_associated }
-  expose :location, find_by: :slug, id: :slug
+  expose :loc, model: Location, find_by: :slug, id: :slug # locaiton is used as a local variable by redirect_to
 
   # GET /locations
   def index
@@ -23,7 +23,7 @@ class LocationsController < ApplicationController
   # GET /locations/:slug
   def show
     render inertia: "Locations/Show", props: {
-      location: LocationBlueprint.render_as_json(location, view: :associations)
+      location: LocationBlueprint.render_as_json(loc, view: :associations)
     }
   end
 
@@ -40,8 +40,8 @@ class LocationsController < ApplicationController
   # GET /locations/:slug/edit
   def edit
     render inertia: "Locations/Edit", props: {
-      location: LocationBlueprint.render_as_json(location),
-      locations: -> { @active_company.locations.where.not(id: location.id) },
+      location: LocationBlueprint.render_as_json(loc),
+      locations: -> { @active_company.locations.where.not(id: loc.id) },
       departments: -> { @active_company.departments.as_json },
       currencies: currencies,
     }
@@ -49,26 +49,26 @@ class LocationsController < ApplicationController
 
   # POST /locations
   def create
-    location.company = @active_company
-    if location.save
-      redirect_to location, notice: 'Location was successfully created'
+    loc.company = @active_company
+    if loc.save
+      redirect_to loc, notice: 'Location was successfully created'
     else
-      redirect_to new_location_path, inertia: { errors: location.errors }
+      redirect_to new_location_path, inertia: { errors: loc.errors }
     end
   end
 
   # PATCH/PUT /locations/:slug
   def update
-    if location.update(location_params)
-      redirect_to location, notice: 'Location was successfully updated'
+    if loc.update(location_params)
+      redirect_to loc, notice: 'Location was successfully updated'
     else
-      redirect_to edit_location_path, inertia: { errors: location.errors }
+      redirect_to edit_location_path, inertia: { errors: loc.errors }
     end
   end
 
   # DELETE /locations/:slug
   def destroy
-    location.destroy
+    loc.destroy
     redirect_to locations_url, notice: 'Location was successfully destroyed.'
   end
 
