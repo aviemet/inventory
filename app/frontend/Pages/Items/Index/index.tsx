@@ -4,7 +4,7 @@ import { Link } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import * as Table from '@/Components/Table'
 import { Popover, Option } from '@/Components/Popover'
-import { EditButton } from '@/Components/Button'
+import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import {
 	TableSection,
 	TableTitleSection,
