@@ -69,38 +69,38 @@ const Index = ({ locations, pagination }: ICompaniesIndexProps) => {
 							</Table.Head>
 
 							<Table.Body>
-								<Table.RowIterator render={ company => (
-									<Table.Row key={ company.id }>
+								<Table.RowIterator render={ location => (
+									<Table.Row key={ location.id }>
 										<Table.Cell nowrap>
-											<Link href={ Routes.company(company.slug) }>{ company.name }</Link>
+											<Link href={ Routes.location(location.slug) }>{ location.name }</Link>
 										</Table.Cell>
 
 										<Table.Cell>
-											<Link href={ Routes.items() }>{ company!.counts.items }</Link>
+											<Link href={ Routes.items() }>{ location!.counts.items }</Link>
 										</Table.Cell>
 
 										<Table.Cell>
-											<Link href={ Routes.accessories() }>{ company!.counts.accessories }</Link>
+											<Link href={ Routes.accessories() }>{ location!.counts.accessories }</Link>
 										</Table.Cell>
 
 										<Table.Cell>
-											<Link href={ Routes.consumables() }>{ company!.counts.consumables }</Link>
+											<Link href={ Routes.consumables() }>{ location!.counts.consumables }</Link>
 										</Table.Cell>
 
 										<Table.Cell>
-											<Link href={ Routes.components() }>{ company!.counts.components }</Link>
+											<Link href={ Routes.components() }>{ location!.counts.components }</Link>
 										</Table.Cell>
 
 										<Table.Cell>
-											<Link href={ Routes.licenses() }>{ company!.counts.licenses }</Link>
+											<Link href={ Routes.licenses() }>{ location!.counts.licenses }</Link>
 										</Table.Cell>
 
 										<Table.Cell>
-											<Link href={ Routes.people() }>{ company!.counts.people }</Link>
+											<Link href={ Routes.people() }>{ location!.counts.people }</Link>
 										</Table.Cell>
 
 										<Table.Cell className="table-column-fit text-right">
-											<EditButton href={ Routes.editLocation(company.slug) } />
+											<EditButton href={ Routes.editLocation(location.slug) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />

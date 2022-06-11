@@ -34,14 +34,12 @@ const LocationForm = ({ to, method = 'post', onSubmit, location, locations, curr
 				name="currency"
 				getLabel={ value => `${value.symbol} - ${value.code}` }
 				getValue={ value => value.symbol }
-				required
 				options={ currencies }
 			/>
 
 			<SearchableDropdown
 				label="Parent Location"
 				name="parent_id"
-				required
 				options={ locations }
 				onOpen={ () => Inertia.reload({ only: ['locations'] }) }
 			/>
