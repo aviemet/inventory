@@ -32,6 +32,35 @@ declare namespace Schema {
 		companies?: Company[];
 	}
 
+	type Location = {
+		id: number;
+		name: string;
+		slug: string;
+		currency?: string | null;
+		parent_id?: number | null;
+		created_at: string;
+		updated_at: string;
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		posessions?: Assignment[];
+		items?: Item[];
+		accessories?: Accessory[];
+		components?: Component[];
+		consumables?: Consumable[];
+		licenses?: License[];
+		contact?: Contact;
+		addresses?: Address[];
+		phones?: Phone[];
+		emails?: Email[];
+		websites?: Website[];
+		fieldset_associations?: FieldsetAssociation[];
+		roles?: Role[];
+		audits?: AuditedAudit[];
+		parent?: Location;
+		people?: Person[];
+	}
+
 	type Accessory = {
 		id: number;
 		name?: string | null;
@@ -403,35 +432,6 @@ declare namespace Schema {
 		category?: Category;
 		vendor?: Vendor;
 		manufacturer?: Manufacturer;
-	}
-
-	type Location = {
-		id: number;
-		name?: string | null;
-		slug: string;
-		currency?: string | null;
-		parent_id?: number | null;
-		created_at: string;
-		updated_at: string;
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		posessions?: Assignment[];
-		items?: Item[];
-		accessories?: Accessory[];
-		components?: Component[];
-		consumables?: Consumable[];
-		licenses?: License[];
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		fieldset_associations?: FieldsetAssociation[];
-		roles?: Role[];
-		audits?: AuditedAudit[];
-		parent?: Location;
-		people?: Person[];
 	}
 
 	type Manufacturer = {
