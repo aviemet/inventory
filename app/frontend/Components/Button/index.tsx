@@ -1,5 +1,6 @@
 import React from 'react'
 import { ButtonProps } from 'react-html-props'
+import './button.css'
 
 const Button = ({ children, ...props }: ButtonProps) => {
 	return (

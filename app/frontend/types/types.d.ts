@@ -14,6 +14,10 @@ declare global {
 			is_first_page: boolean
 			is_last_page: boolean
 		}
+
+		interface Item {
+			assigned: boolean
+		}
 	}
 
 	type FlashMessage = Record<'success'|'alert'|'info'|'warning',string>

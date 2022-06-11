@@ -90,6 +90,11 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 											<Link href={ Routes.item(item) }>{ item.department?.name }</Link>
 										</Table.Cell>
 										<Table.Cell className="table-column-fit text-right">
+											{ item.assigned ?
+												<CheckinButton href={ Routes.checkinItem(item) } />
+												:
+												<CheckoutButton href={ Routes.checkoutItem(item) } />
+											}
 											<EditButton href={ Routes.editItem(item) } />
 										</Table.Cell>
 									</Table.Row>
