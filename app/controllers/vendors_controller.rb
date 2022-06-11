@@ -3,7 +3,7 @@ class VendorsController < ApplicationController
   include Searchable
 
   expose :vendors, -> { @active_company.vendors.includes_associated }
-  expose :vendor, -> { @active_company.vendors.find_by_slug params[:slug] }
+  expose :vendor, find_by: :slug, id: :slug
 
   # GET /vendors
   def index
@@ -28,12 +28,16 @@ class VendorsController < ApplicationController
 
   # GET /vendors/new
   def new
-    render inertia: "Vendors/New"
+    render inertia: "Vendors/New", props: {
+      vendor: VendorBlueprint.render_as_json(Vendor.new, view: :new)
+    }
   end
 
   # GET /vendors/:id/edit
   def edit
-    render inertia: "Vendors/Edit"
+    render inertia: "Vendors/Edit", props: {
+      vendor: VendorBlueprint.render_as_json(vendor)
+    }
   end
 
   # POST /vendors

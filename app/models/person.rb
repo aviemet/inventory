@@ -19,6 +19,7 @@ class Person < ApplicationRecord
   audited
 
   belongs_to :manager, class_name: 'Person', optional: true
+  belongs_to :location, optional: true
   has_one :user
 
   before_validation :ensure_associated_contact

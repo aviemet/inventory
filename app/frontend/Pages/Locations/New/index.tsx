@@ -1,9 +1,28 @@
 import React from 'react'
+import { Head } from '@inertiajs/inertia-react'
+import LocationForm from '../Form'
+import { Routes } from '@/lib'
 
-const New = () => {
+interface INewLocationProps {
+	location: Partial<Schema.Location>
+	locations: Schema.Location[]
+	currencies: any
+}
+
+const NewLocation = ({ ...data }: INewLocationProps) => {
+	const title = 'New Location'
+
 	return (
-		<div>New</div>
+		<>
+			<Head title={ title }></Head>
+
+			<section className="container">
+				<h1>{ title }</h1>
+
+				<LocationForm to={ Routes.locations() } { ...data } />
+			</section>
+		</>
 	)
 }
 
-export default New
+export default NewLocation

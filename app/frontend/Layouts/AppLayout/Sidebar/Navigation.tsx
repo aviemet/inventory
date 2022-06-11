@@ -75,6 +75,8 @@ const Navigation = () => {
 							<MenuLink href={ Routes.settings() } icon={ <SettingsIcon /> }>Settings</MenuLink>
 							<ul className="up">
 								<li><Link href={ Routes.companies() }>Companies</Link></li>
+								<li><Link href={ Routes.locations() }>Locations</Link></li>
+								<li><Link href={ Routes.departments() }>Departments</Link></li>
 								<li><Link href={ Routes.manufacturers() }>Manufacturers</Link></li>
 								<li><Link href={ Routes.models() }>Models</Link></li>
 								<li><Link href={ Routes.fields() }>Custom Fields</Link></li>

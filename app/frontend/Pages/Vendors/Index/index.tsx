@@ -35,8 +35,8 @@ const VendorsIndex = ({ vendors, pagination }: IVendorsIndexProps) => {
 						title={ title }
 						popover={
 							<Popover>
-								<Option href={ Routes.newPerson() }>
-									Add New Person
+								<Option href={ Routes.newVendor() }>
+									Add New Vendor
 								</Option>
 							</Popover>
 						}
@@ -61,7 +61,7 @@ const VendorsIndex = ({ vendors, pagination }: IVendorsIndexProps) => {
 								<Table.RowIterator render={ vendor => (
 									<Table.Row key={ vendor.id }>
 										<Table.Cell nowrap>
-											<Link href={ Routes.vendor(vendor) }>{ vendor.name }</Link>
+											<Link href={ Routes.vendor(vendor.slug) }>{ vendor.name }</Link>
 										</Table.Cell>
 
 										<Table.Cell nowrap>
@@ -91,7 +91,7 @@ const VendorsIndex = ({ vendors, pagination }: IVendorsIndexProps) => {
 										</Table.Cell>
 
 										<Table.Cell className="table-column-fit text-right">
-											<EditButton href={ Routes.editVendor(vendor) } />
+											<EditButton href={ Routes.editVendor(vendor.slug) } />
 										</Table.Cell>
 									</Table.Row>
 								) } />
