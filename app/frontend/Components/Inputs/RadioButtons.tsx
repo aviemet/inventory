@@ -1,6 +1,5 @@
-import React, { forwardRef } from 'react'
-import cx from 'classnames'
-import tw, { styled, css } from 'twin.macro'
+import React from 'react'
+import tw, { styled } from 'twin.macro'
 import { InputProps } from 'react-html-props'
 
 export type TOption = {

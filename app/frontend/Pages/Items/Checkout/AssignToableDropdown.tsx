@@ -10,6 +10,7 @@ interface IAssignToableDropdownProps {
 
 const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdownProps) => {
 	const { data, setData } = useForm()
+	const [ type, setType ] = useState<string>(data.assign_toable_type as string || 'Person')
 
 	const [optionsValues, setOptionsValues] = useState<Record<string, any>[]>(people)
 	const strModelNameRef = useRef('people')
@@ -22,9 +23,15 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 	}
 
 	useEffect(() => {
+		if(data.assign_toable_type && data.assign_toable_type !== type) {
+			setType(data.assign_toable_type)
+		}
+	}, [data.assign_toable_type])
+
+	useEffect(() => {
 		let obj: Record<string, any>[] = []
 
-		switch(data.assign_toable_type) {
+		switch(type) {
 			case 'Person':
 				strModelNameRef.current = 'people'
 				obj = people
@@ -41,12 +48,12 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 
 		setData('assign_toable_id', '')
 		setOptionsValues(obj)
-	}, [data.assign_toable_type])
+	}, [type])
 
 	return (
 		<SearchableDropdown
 			options={ optionsValues }
-			label={ data.assign_toable_type }
+			label={ type }
 			name="assign_toable_id"
 			getLabel={ option => option.name }
 			getValue={ option => option.id }

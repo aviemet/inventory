@@ -4,8 +4,6 @@ import { DateTime, Form, Input, RadioButtons, Submit, Textarea } from '@/Compone
 import AssignToableDropdown from './AssignToableDropdown'
 import { Routes } from '@/lib'
 
-import Flatpickr from 'react-flatpickr'
-
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
 	item: Schema.Item
@@ -17,26 +15,26 @@ interface ICheckoutItemProps {
 const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Item'
 
-	const handleFormChange = form => {
+	// const handleFormChange = form => {
 
-	}
+	// }
 
-	const handleSubmit = ({ transform }) => {
-		transform(data => {
-			const assignment = {}
-			const item = {}
+	// const handleSubmit = ({ transform }) => {
+	// 	transform(data => {
+	// 		const assignment = {}
+	// 		const item = {}
 
-			for(const key in data) {
-				if(key.indexOf('/') >= 0) {
-					const parts = key.split('/')
-					item[parts[1]] = data[key]
-				} else {
-					assignment[key] = data[key]
-				}
-			}
-			return { assignment, item }
-		})
-	}
+	// 		for(const key in data) {
+	// 			if(key.indexOf('/') >= 0) {
+	// 				const parts = key.split('/')
+	// 				item[parts[1]] = data[key]
+	// 			} else {
+	// 				assignment[key] = data[key]
+	// 			}
+	// 		}
+	// 		return { assignment, item }
+	// 	})
+	// }
 
 	return (
 		<>
@@ -79,8 +77,6 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 					to={ Routes.assignments({ id: item.id }) }
 					model="assignment"
 					className="max-w-5xl"
-					onChange={ handleFormChange }
-					onSubmit={ handleSubmit }
 				>
 					<Input
 						model="item"
