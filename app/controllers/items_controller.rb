@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
   expose :category, id: -> { request.params[:category_id] }
 
   # GET /hardware
-  # GET /hardware.json
   def index
     self.items = search(items, sortable_fields)
     paginated_items = items.page(params[:page] || 1)
@@ -23,7 +22,6 @@ class ItemsController < ApplicationController
   end
 
   # GET /hardware/category/:category_id
-  # GET /hardware/category/:category_id.json
   # def category
   #   # TODO: Consider another way of filtering without using routes
   #   self.items = items.where('model.category': Category.find(request.params[:category_id]))
@@ -31,7 +29,6 @@ class ItemsController < ApplicationController
   # end
 
   # GET /hardware/:id
-  # GET /hardware/:id.json
   def show
     render inertia: "Items/Show", props: {
       item: -> { ItemBlueprint.render_as_json(item, view: :associations) }
@@ -67,8 +64,17 @@ class ItemsController < ApplicationController
     render inertia: "Items/Clone"
   end
 
+  # Get /hardware/:id/checkout
+  def checkout
+    render inertia: "Items/Checkout", props: {
+      item: ItemBlueprint.render_as_json(item),
+      people: -> { @active_company.people },
+      items: -> { @active_company.items },
+      locations: -> { @active_company.locations },
+    }
+  end
+
   # POST /hardware
-  # POST /hardware.json
   def create
     item.company = @active_company
     if item.save
@@ -79,7 +85,6 @@ class ItemsController < ApplicationController
   end
 
   # PATCH/PUT /hardware/:id
-  # PATCH/PUT /hardware/:id.json
   def update
     if item.update(item_params)
       redirect_to item, notice: 'Item was successfully updated'
@@ -89,7 +94,6 @@ class ItemsController < ApplicationController
   end
 
   # DELETE /hardware/:id
-  # DELETE /hardware/:id.json
   def destroy
     item.destroy
     redirect_to items_url, notice: 'Item was successfully destroyed.'

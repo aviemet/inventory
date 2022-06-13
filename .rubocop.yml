@@ -80,6 +80,10 @@ Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
+Layout/CommentIndentation:
+  Enabled: false
+Layout/HashAlignment:
+  Enabled: false
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 Lint/MixedRegexpCaptureTypes:
