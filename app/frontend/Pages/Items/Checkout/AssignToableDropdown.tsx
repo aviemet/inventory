@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { SearchableDropdown, useForm } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
 
 interface IAssignToableDropdownProps {
 	items: Schema.Item[]
@@ -10,23 +9,10 @@ interface IAssignToableDropdownProps {
 
 const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdownProps) => {
 	const { data, setData } = useForm()
-	const [ type, setType ] = useState<string>(data.assign_toable_type as string || 'Person')
+	const { assignment: { assign_toable_type: type } } = data
 
 	const [optionsValues, setOptionsValues] = useState<Record<string, any>[]>(people)
 	const strModelNameRef = useRef('people')
-
-	const handleOpen = () => {
-		Inertia.reload({
-			preserveScroll: true,
-			only: [strModelNameRef.current]
-		})
-	}
-
-	useEffect(() => {
-		if(data.assign_toable_type && data.assign_toable_type !== type) {
-			setType(data.assign_toable_type)
-		}
-	}, [data.assign_toable_type])
 
 	useEffect(() => {
 		let obj: Record<string, any>[] = []
@@ -46,18 +32,17 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 				break
 		}
 
-		setData('assign_toable_id', '')
+		setData('assignment.assign_toable_id', '')
 		setOptionsValues(obj)
 	}, [type])
 
 	return (
 		<SearchableDropdown
 			options={ optionsValues }
-			label={ type }
+			label={ data.assignment.assign_toable_type }
 			name="assign_toable_id"
 			getLabel={ option => option.name }
 			getValue={ option => option.id }
-			onOpen={ handleOpen }
 			required
 		/>
 	)

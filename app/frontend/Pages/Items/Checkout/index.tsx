@@ -71,8 +71,11 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 
 				<Form
 					data={ {
-						...assignment,
-						'item/name': item.name
+						assignment: {
+							...assignment,
+							assign_toable_type: 'Person',
+						},
+						item,
 					} }
 					to={ Routes.assignments({ id: item.id }) }
 					model="assignment"
