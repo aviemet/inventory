@@ -66,11 +66,14 @@ class ItemsController < ApplicationController
 
   # Get /hardware/:id/checkout
   def checkout
+    assignment = Assignment.new
+    assignment.assignable = item
     render inertia: "Items/Checkout", props: {
       item: ItemBlueprint.render_as_json(item),
-      people: -> { @active_company.people },
-      items: -> { @active_company.items },
-      locations: -> { @active_company.locations },
+      assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
+      people: -> { PersonBlueprint.render_as_json(@active_company.people, view: :as_options) },
+      items: -> { ItemBlueprint.render_as_json(@active_company.items, view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
     }
   end
 

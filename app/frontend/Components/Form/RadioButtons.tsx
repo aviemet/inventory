@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import RadioButtons, { type IRadioButtonsProps } from '../Inputs/RadioButtons'
 import Field from './Field'
 import Feedback from './Feedback'
@@ -13,10 +13,10 @@ const FormRadioButtons = ({ options, name, id, model, onChange, required, ...pro
 	const form = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
 
-	const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		form.setData(inputName, e.target.value)
 		if(onChange) onChange(e, form)
-	}, [onChange, inputName])
+	}
 
 	return (
 		<Field type="radio" required={ required } errors={ !!form.errors?.[name] }>

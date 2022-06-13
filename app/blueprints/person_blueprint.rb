@@ -15,21 +15,21 @@ class PersonBlueprint < ApplicationBlueprint
 
   view :associations do
     association :posessions, blueprint: AssignmentBlueprint
-	  association :department, blueprint: DepartmentBlueprint
-	  association :contact, blueprint: ContactBlueprint
-	  association :items, blueprint: ItemBlueprint
-	  association :accessories, blueprint: AccessoryBlueprint
-	  association :licenses, blueprint: LicenseBlueprint
-	  association :audits, blueprint: AuditBlueprint
-	  association :manager, blueprint: PersonBlueprint
-	  association :user, blueprint: UserBlueprint
+    association :department, blueprint: DepartmentBlueprint
+    association :contact, blueprint: ContactBlueprint
+    association :items, blueprint: ItemBlueprint
+    association :accessories, blueprint: AccessoryBlueprint
+    association :licenses, blueprint: LicenseBlueprint
+    association :audits, blueprint: AuditBlueprint
+    association :manager, blueprint: PersonBlueprint
+    association :user, blueprint: UserBlueprint
   end
 
   view :as_options do
     fields :id
-		
-		field :name do |person|
-			"#{person.first_name} #{person.last_name}"
-		end
+
+    field :name do |person|
+      "#{person.first_name} #{person.last_name}"
+    end
   end
 end
