@@ -36,6 +36,60 @@
   }
 } */
 
+button, 
+.button,
+[type='button'], 
+[type='reset'], 
+[type='submit'],
+input[type="submit"] {
+  @apply font-bold leading-6 cursor-pointer;
+  @apply border rounded;
+  @apply py-2 px-3 mx-0.5;
+
+  @apply transition;
+
+  @apply bg-brand text-text-light border-brand-dark;
+  @apply hover:bg-brand-hover hover:text-text-light;
+  @apply visited:text-text-light;
+
+  &.success {
+    @apply bg-success text-white border-success-dark;
+
+    &:hover {
+      @apply bg-success-hover;
+    }
+  }
+
+  &.info {
+    @apply bg-info text-white border-info-dark;
+
+    &:hover {
+      @apply bg-info-hover;
+    }
+  }
+
+  &.warning {
+    @apply bg-warning text-white border-warning-dark;
+
+    &:hover {
+      @apply bg-warning-hover;
+    }
+  }
+
+  &.danger {
+    @apply bg-alert text-white border-alert-dark;
+
+    &:hover {
+      @apply bg-alert-hover;
+    }
+  }
+
+  i.react-icons {
+    @apply align-bottom;
+    font-size: 21px;
+  }
+}
+
 @layer base {
   *::selection {
     @apply bg-brand-light;

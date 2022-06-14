@@ -63,17 +63,25 @@ class ItemsController < ApplicationController
     self.item
     render inertia: "Items/Clone"
   end
-
-  # Get /hardware/:id/checkout
+    
+  # GET /hardware/:id/checkout
   def checkout
     assignment = Assignment.new
     assignment.assignable = item
     render inertia: "Items/Checkout", props: {
       item: ItemBlueprint.render_as_json(item),
       assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
-      people: -> { PersonBlueprint.render_as_json(@active_company.people, view: :as_options) },
-      items: -> { ItemBlueprint.render_as_json(@active_company.items, view: :as_options) },
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
+      people: -> { PersonBlueprint.render_as_json(@active_company.people.select([:id, :first_name, :last_name]), view: :as_options) },
+      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name]), view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :name]), view: :as_options) },
+    }
+  end
+
+  #GET /hardware/:id/checkin
+  def checkin
+    render inertia: "Items/Checkin", props: {
+      item: ItemBlueprint.render_as_json(item, view: :associations),
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :name]), view: :as_options) },
     }
   end
 

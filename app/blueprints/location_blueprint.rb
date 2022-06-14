@@ -29,6 +29,10 @@ class LocationBlueprint < ApplicationBlueprint
   end
 
   view :as_options do
-    fields :id, :name
+    excludes :slug,
+             :parent_id,
+             :currency,
+             :created_at,
+             :updated_at
   end
 end

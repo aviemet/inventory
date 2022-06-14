@@ -1,5 +1,8 @@
-button,
+button, 
 .button,
+[type='button'], 
+[type='reset'], 
+[type='submit'],
 input[type="submit"] {
   @apply font-bold leading-6 cursor-pointer;
   @apply border rounded;
@@ -8,14 +11,8 @@ input[type="submit"] {
   @apply transition;
 
   @apply bg-brand text-text-light border-brand-dark;
-
-  &:visited {
-    @apply text-text-light;
-  }
-
-  &:hover {
-    @apply bg-brand-hover text-text-light;
-  }
+  @apply hover:bg-brand-hover hover:text-text-light;
+  @apply visited:text-text-light;
 
   &.success {
     @apply bg-success text-white border-success-dark;

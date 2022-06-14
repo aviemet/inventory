@@ -21,17 +21,17 @@ class ItemBlueprint < ApplicationBlueprint
   end
 
   view :shallow do
-    exclude :serial
-    exclude :cost_currency
-    exclude :cost
-    exclude :purchased_at
-    exclude :requestable
-    exclude :notes
-    exclude :model_id
-    exclude :vendor_id
-    exclude :default_location_id
-    exclude :created_at
-    exclude :updated_at
+    excludes :serial,
+             :cost,
+             :cost_currency,
+             :purchased_at,
+             :requestable,
+             :notes,
+             :model_id,
+             :vendor_id,
+             :default_location_id,
+             :created_at,
+             :updated_at
   end
 
   view :associations do
@@ -45,7 +45,19 @@ class ItemBlueprint < ApplicationBlueprint
   end
 
   view :as_options do
-    fields :id, :name
+    excludes :asset_tag,
+             :serial,
+             :cost,
+             :cost_currency,
+             :assigned,
+             :purchased_at,
+             :requestable,
+             :notes,
+             :model_id,
+             :vendor_id,
+             :default_location_id,
+             :created_at,
+             :updated_at
   end
 
 end
