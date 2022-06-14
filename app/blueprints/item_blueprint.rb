@@ -12,26 +12,11 @@ class ItemBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  field :cost do |item|
-    item.cost&.amount.to_f if item.cost
-  end
-
-  field :assigned do |item|
-    item.assigned?
-  end
+  field(:cost) { |item| currency_for(item) }
+  field(:assigned) { |item| item.assigned? }
 
   view :shallow do
-    excludes :serial,
-             :cost,
-             :cost_currency,
-             :purchased_at,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
-             :created_at,
-             :updated_at
+    only :name, :asset_tag
   end
 
   view :associations do
@@ -45,19 +30,6 @@ class ItemBlueprint < ApplicationBlueprint
   end
 
   view :as_options do
-    excludes :asset_tag,
-             :serial,
-             :cost,
-             :cost_currency,
-             :assigned,
-             :purchased_at,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
-             :created_at,
-             :updated_at
+    only :id, :name, :default_location_id
   end
-
 end
