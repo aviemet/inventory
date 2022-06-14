@@ -29,7 +29,7 @@ class AssignmentsController < ApplicationController
     if assignment.save
       redirect_to assignable
     else
-      redirect_to send("checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", id: assignable.encode_id)
+      redirect_to send("checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", id: assignable.encode_id), inertia: { errors: assignment.errors }
     end
   end
 

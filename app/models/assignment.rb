@@ -6,6 +6,7 @@ class Assignment < ApplicationRecord
   belongs_to :assignable, polymorphic: true
   belongs_to :assign_toable, polymorphic: true
   belongs_to :created_by, class_name: "User", required: false
+  belongs_to :location
 
   ASSIGNABLE_TYPES = %w(Item License Accessory Consumable Component).freeze
   ASSIGN_TOABLE_TYPES = %w(Person Item Location).freeze

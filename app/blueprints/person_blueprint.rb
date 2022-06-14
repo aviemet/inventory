@@ -26,10 +26,14 @@ class PersonBlueprint < ApplicationBlueprint
   end
 
   view :as_options do
-    fields :id
-
-    field :name do |person|
-      "#{person.first_name} #{person.last_name}"
-    end
+    excludes :first_name,
+             :middle_name,
+             :last_name,
+             :active,
+             :employee_number,
+             :job_title,
+             :manager_id,
+             :created_at,
+             :updated_at
   end
 end

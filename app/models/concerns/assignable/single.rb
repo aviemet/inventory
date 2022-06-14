@@ -6,9 +6,7 @@ module Assignable
 
     included do
       def assignment
-        return if self.assignments.empty?
-
-        self.assignments.select(&:active).first
+        self.assignments.select(&:active).first if self.assignments
       end
 
       def assigned_to

@@ -1,35 +1,21 @@
 module AssignableConcern
-  def checkout
-    assignable = params[:asset_type].camelize.constantize.find(params[:id])
+  extend ActiveSupport::Concern
 
-    if assignable.assigned?
-      redirect_to assignable, warning: "Asset is already assigned, must be checked back in before it can be assigned again."
-    else
-      props = {
-        assignment: AssignmentBlueprint.render_as_json(Assignment.new({
-          assignable_id: params[:id],
-          assignable_type: params[:asset_type],
-          assign_toable_type: "Person", # Default type in form is Person
-        }), view: :new),
-        people: PersonBlueprint.render_as_json(@active_company.people, view: :as_options),
-        items: ItemBlueprint.render_as_json(@active_company.items, view: :as_options),
-        locations: LocationBlueprint.render_as_json(@active_company.locations, view: :as_options)
-      }
-      props[model_name] = self.send(model_name)
-      render inertia: "#{params[:asset_type].pluralize}/Checkout", props: props
+  included do
+    before_action :redirect_assigned_asset, only: [:checkout]
+    before_action :redirect_unassigned_asset, only: [:checkin]
+
+    def redirect_assigned_asset
+      redirect_to(assignable, warning: "Asset is already assigned, must be checked back in before it can be assigned again.") if assignable.assigned?
     end
-  end
 
-  def checkin
-    props = {
-      assignment: -> { @assignable.assignment }
-    }
-    render inertia: "#{params[:asset_type].pluralize}/Checkin", props: props
-  end
+    def redirect_unassigned_asset
+      redirect_to(assignable, warning: "Asset is not checked out.") unless assignable.assigned?
+    end
 
-  private
+    private
 
-  def model_name
-    params[:controller].singularize
+    def assignable = params[:asset_type].camelize.constantize.find(params[:id])
+
   end
 end

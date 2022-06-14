@@ -36,6 +36,10 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 		setOptionsValues(obj)
 	}, [type])
 
+	const handleChange = (value: Record<string, any>) => {
+		console.log({ value })
+	}
+
 	return (
 		<SearchableDropdown
 			options={ optionsValues }
@@ -43,6 +47,7 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 			name="assign_toable_id"
 			getLabel={ option => option.name }
 			getValue={ option => option.id }
+			onChange={ handleChange }
 			required
 		/>
 	)
