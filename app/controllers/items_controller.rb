@@ -71,9 +71,9 @@ class ItemsController < ApplicationController
     render inertia: "Items/Checkout", props: {
       item: ItemBlueprint.render_as_json(item),
       assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
-      people: -> { PersonBlueprint.render_as_json(@active_company.people.select([:id, :first_name, :last_name]), view: :as_options) },
-      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name]), view: :as_options) },
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :name]), view: :as_options) },
+      people: -> { PersonBlueprint.render_as_json(@active_company.people.select([:id, :first_name, :last_name, :location_id]), view: :as_options) },
+      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
     }
   end
 

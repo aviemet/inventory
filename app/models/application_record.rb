@@ -19,4 +19,8 @@ class ApplicationRecord < ActiveRecord::Base
       id: parts[1]
     }
   end
+
+  def blueprint
+    "#{self.class.name}Blueprint".constantize
+  end
 end

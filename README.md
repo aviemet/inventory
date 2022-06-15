@@ -188,6 +188,11 @@ These differences are represented by three subclasses of the polymorphic Assigna
 
 Assignments have a `location` which should be derived from the User, Item or Location of the AssignToable model, but can be overridden by the user.
 
+Assignable location is assigned to:
+  Location: assign_toable
+  Person: assign_toable.default_location
+  Item: assign_toable.default_location
+
 ### Searchable/Sortable and Table Components
 
 This needs to be fully documented, too much going on in the background

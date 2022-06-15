@@ -15,10 +15,6 @@ class ItemBlueprint < ApplicationBlueprint
   field(:cost) { |item| currency_for(item) }
   field(:assigned) { |item| item.assigned? }
 
-  view :shallow do
-    only :name, :asset_tag
-  end
-
   view :associations do
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint
@@ -29,6 +25,10 @@ class ItemBlueprint < ApplicationBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
   end
 
+  view :shallow do
+    only :name, :asset_tag
+  end
+  
   view :as_options do
     only :id, :name, :default_location_id
   end

@@ -41,10 +41,11 @@ const SearchableDropdown = ({
 				id={ id || inputId }
 				name={ inputName }
 				options={ options }
+				value={ form.getData(inputName) }
+				onChange={ handleChange }
 				defaultValue={ defaultValue ?? form.getData(inputName) }
 				getLabel={ getLabel }
 				getValue={ getValue }
-				onChange={ handleChange }
 				{ ...props }
 			/>
 			<Feedback errors={ form.errors[name] } />
