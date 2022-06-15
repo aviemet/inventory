@@ -11,6 +11,8 @@ const LocationDropdown = ({ locations }: ILocationDropdown) => {
 
 	console.log({ locations })
 
+	if(type === 'Location') return <></>
+
 	return (
 		<SearchableDropdown
 			options={ locations }

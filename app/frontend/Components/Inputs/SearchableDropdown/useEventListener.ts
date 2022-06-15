@@ -1,18 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
-const useEventListener = (ref, handler) => {
+const useEventListener = (ref, handler: () => void) => {
 
-	const handleClickAway = e => {
+	const handleClickAway = (e: MouseEvent) => {
 		if(!ref.current?.contains(e.target)) {
 			handler()
 		}
 	}
 
-	const handleKeyPress = e => {
-		console.log('keypress')
-		console.log({ key: e.key })
+	const handleKeyPress = (e: KeyboardEvent) => {
 		if(e.key === 'Escape' || e.key === 'Tab') {
-			console.log('open and escape or tab')
 			handler()
 		}
 	}

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
+import { Head, usePage } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { DateTime, Form, Input, RadioButtons, Submit, Textarea } from '@/Components/Form'
+import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
 import AssignToableDropdown from './AssignToableDropdown'
 import LocationDropdown from './LocationDropdown'
 
@@ -15,7 +15,8 @@ interface ICheckoutItemProps {
 
 const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Item'
-
+	const { props } = usePage<InertiaPage>()
+	console.log({ props })
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -65,17 +66,6 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 						model="item"
 						name="name"
 						label="Item Name"
-						required
-					/>
-
-					<RadioButtons
-						label="Checkout To"
-						name="assign_toable_type"
-						options={ [
-							{ label: 'Person', value: 'Person' },
-							{ label: 'Item', value: 'Item' },
-							{ label: 'Location', value: 'Location' },
-						] }
 						required
 					/>
 

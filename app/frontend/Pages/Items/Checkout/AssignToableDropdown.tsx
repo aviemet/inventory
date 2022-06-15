@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { SearchableDropdown, useForm } from '@/Components/Form'
+import { SearchableDropdown, RadioButtons, useForm } from '@/Components/Form'
 
 interface IAssignToableDropdownProps {
 	items: Schema.Item[]
@@ -36,20 +36,45 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 		setOptionsValues(obj)
 	}, [type])
 
-	const handleChange = (value: Record<string, any>) => {
-		console.log({ value })
+	const handleAssignToableChange = (value: Record<string, any>) => {
+		let location
+		switch(type) {
+			case 'Person':
+				location = value.location_id
+				break
+			case 'Item':
+				location = value.default_location_id
+				break
+			case 'Location':
+				location = value.id
+				break
+		}
+		console.log({ location })
 	}
 
 	return (
-		<SearchableDropdown
-			options={ optionsValues }
-			label={ data.assignment.assign_toable_type }
-			name="assign_toable_id"
-			getLabel={ option => option.name }
-			getValue={ option => option.id }
-			onChange={ handleChange }
-			required
-		/>
+		<>
+			<RadioButtons
+				label="Checkout To"
+				name="assign_toable_type"
+				options={ [
+					{ label: 'Person', value: 'Person' },
+					{ label: 'Item', value: 'Item' },
+					{ label: 'Location', value: 'Location' },
+				] }
+				required
+			/>
+
+			<SearchableDropdown
+				options={ optionsValues }
+				label={ data.assignment.assign_toable_type }
+				name="assign_toable_id"
+				getLabel={ option => option.name }
+				getValue={ option => option.id }
+				onChange={ handleAssignToableChange }
+				required
+			/>
+		</>
 	)
 }
 

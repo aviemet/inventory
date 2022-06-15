@@ -7,6 +7,14 @@ class LocationBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
+
+  view :associations do
+    association :parent, blueprint: LocationBlueprint
+    association :contact, blueprint: ContactBlueprint
+    association :audits, blueprint: AuditBlueprint
+    association :department, blueprint: DepartmentBlueprint
+  end
+
   view :counts do
     include_view :associations
     field :counts do |location|
@@ -21,18 +29,7 @@ class LocationBlueprint < ApplicationBlueprint
     end
   end
 
-  view :associations do
-    association :parent, blueprint: LocationBlueprint
-    association :contact, blueprint: ContactBlueprint
-    association :audits, blueprint: AuditBlueprint
-    association :department, blueprint: DepartmentBlueprint
-  end
-
   view :as_options do
-    excludes :slug,
-             :parent_id,
-             :currency,
-             :created_at,
-             :updated_at
+    only :id, :name
   end
 end
