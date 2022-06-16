@@ -1,6 +1,28 @@
+:root {
+  --font-size-break: 6vw;
+
+  --topbar-height: 50px;
+
+  --sidebar-width-closed: 50px;
+  --sidebar-width-open: 215px;
+  --sidebar-transition-time: 100ms;
+  --sidebar-icon-left-padding: 8px;
+  --sidebar-link-height: 45px;
+  --sidebar-link-border-left: 3px;
+  --sidebar-link-border-bottom: 1px;
+  --sidebar-link-padding-left: 15px;
+
+  --footer-height: 35px;
+
+  --alert-animation-speed: 0.5s;
+
+  --label-width: 12rem;
+}
+
 #grid-layout {
-  @apply grid gap-0 h-screen;
-  @apply bg-gray-100 dark:bg-gray-700;
+  display: grid;
+  gap: 0px;
+  height: 100vh;
   transition: var(--sidebar-transition-time);
 
 	grid-template-rows: var(--topbar-height) 1fr var(--footer-height);

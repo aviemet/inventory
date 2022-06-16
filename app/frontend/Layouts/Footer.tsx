@@ -1,15 +1,15 @@
 import React from 'react'
-import tw, { styled } from 'twin.macro'
+import { Footer } from '@mantine/core'
 
-const Footer = () => {
+const FooterComponent = () => {
 	return (
-		<footer id="footer" tw="pt-1 pr-3 border-gray-300 shadow border-t bg-white dark:bg-gray-600">
+		<Footer height={ 35 } p="xs">
 			<div className="flex flex-row-reverse text-gray-600">
 				©{ (new Date).getFullYear() }
 			</div>
-		</footer>
+		</Footer>
 	)
 }
 
-export default Footer
+export default FooterComponent
 
