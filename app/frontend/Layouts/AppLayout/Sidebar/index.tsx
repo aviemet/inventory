@@ -44,16 +44,35 @@ const Sidebar = () => {
 					root: {
 						transition: 'width 100ms ease-in-out, min-width 100ms ease-in-out',
 
-						'.links > ul > li': {
+						'&.closed': {
+							'span, ul ul': {
+								display: 'none',
+							},
+
+							'ul > li > ul': {
+								top: '100%',
+								left: 48,
+
+								'&.up': {
+									top: 'unset',
+									bottom: '100%',
+								},
+							},
+						},
+
+						'.links > ul > li:hover': {
+							width: 185,
+						},
+
+						'ul li': {
 							position: 'relative',
 							borderLeft: '2px solid transparent',
 
 							'&:hover': {
-								width: 185,
 								background: theme.colors.gray[1],
 								borderLeft: `2px solid ${theme.primaryColor}`,
 
-								'span, & > ul': {
+								'span, & ul': {
 									display: 'flex',
 									background: theme.colors.gray[1],
 								},
@@ -62,12 +81,23 @@ const Sidebar = () => {
 
 						'ul > li > ul': {
 							display: 'none',
+							flexDirection: 'column',
+							width: '100%',
+							left: 'calc(100% + 48px)',
+							top: 0,
+
+							'&.up': {
+								top: 'unset',
+								bottom: 0,
+							},
+
+							span: {
+								width: 'calc(100% - 48px)',
+							}
 						},
 
 						'span, ul > li > ul': {
 							position: 'absolute',
-							top: 0,
-							left: 48,
 							width: '100%',
 						},
 
@@ -75,13 +105,9 @@ const Sidebar = () => {
 							display: 'flex',
 							height: '100%',
 							alignItems: 'center',
+							top: 0,
+							left: 48,
 						},
-
-						'&.closed': {
-							'span, ul > li > ul': {
-								display: 'none',
-							}
-						}
 					}
 				} }
 			>
@@ -91,10 +117,10 @@ const Sidebar = () => {
 						<li>
 							<MenuLink href={ Routes.items() } icon={ <AssetsIcon /> }>Inventory</MenuLink>
 							<ul>
-								<li><Link href={ Routes.items() }><ItemsIcon />Hardware</Link></li>
-								<li><Link href={ Routes.accessories() }><AccessoriesIcon />Accessories</Link></li>
-								<li><Link href={ Routes.components() }><ComponentsIcon />Components</Link></li>
-								<li><Link href={ Routes.consumables() }><ConsumablesIcon />Consumables</Link></li>
+								<li><MenuLink href={ Routes.items() } icon={ <ItemsIcon /> }>Hardware</MenuLink></li>
+								<li><MenuLink href={ Routes.accessories() } icon={ <AccessoriesIcon /> }>Accessories</MenuLink></li>
+								<li><MenuLink href={ Routes.components() } icon={ <ComponentsIcon /> }>Components</MenuLink></li>
+								<li><MenuLink href={ Routes.consumables() } icon={ <ConsumablesIcon /> }>Consumables</MenuLink></li>
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.licenses() } icon={ <LicensesIcon /> }>Licenses</MenuLink></li>
@@ -104,7 +130,7 @@ const Sidebar = () => {
 						<li>
 							<MenuLink href={ Routes.vendors() } icon={ <VendorsIcon /> }>Vendors</MenuLink>
 							<ul>
-								<li><Link href={ Routes.contracts() }><ContractsIcon />Contracts</Link></li>
+								<li><MenuLink href={ Routes.contracts() } icon={ <ContractsIcon /> }>Contracts</MenuLink></li>
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.orders() } icon={ <PurchasesIcon /> }>Purchasing</MenuLink></li>
@@ -116,12 +142,12 @@ const Sidebar = () => {
 						<li>
 							<MenuLink href={ Routes.settings() } icon={ <SettingsIcon /> }>Settings</MenuLink>
 							<ul className="up">
-								<li><Link href={ Routes.companies() }>Companies</Link></li>
-								<li><Link href={ Routes.locations() }>Locations</Link></li>
-								<li><Link href={ Routes.departments() }>Departments</Link></li>
-								<li><Link href={ Routes.manufacturers() }>Manufacturers</Link></li>
-								<li><Link href={ Routes.models() }>Models</Link></li>
-								<li><Link href={ Routes.fields() }>Custom Fields</Link></li>
+								<li><MenuLink href={ Routes.companies() }>Companies</MenuLink></li>
+								<li><MenuLink href={ Routes.locations() }>Locations</MenuLink></li>
+								<li><MenuLink href={ Routes.departments() }>Departments</MenuLink></li>
+								<li><MenuLink href={ Routes.manufacturers() }>Manufacturers</MenuLink></li>
+								<li><MenuLink href={ Routes.models() }>Models</MenuLink></li>
+								<li><MenuLink href={ Routes.fields() }>Custom Fields</MenuLink></li>
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.destroyUserSession() } icon={ <LogoutIcon /> }>Logout</MenuLink></li>
