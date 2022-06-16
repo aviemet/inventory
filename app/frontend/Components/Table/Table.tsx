@@ -1,24 +1,12 @@
 import React from 'react'
-import cn from 'classnames'
-import { TableProps } from 'react-html-props'
+import { Table, type TableProps } from '@mantine/core'
 
-interface ITableProps extends TableProps {
-	fixed?: boolean
-}
-
-const Table = ({ children, fixed = false, ...props }: ITableProps) => {
+const TableComponent = ({ children, ...props }: TableProps) => {
 	return (
-		<table
-			className={ cn(
-				'shadow',
-				{ 'table-fixed': fixed },
-				{ 'table-auto': !fixed }
-			) }
-			{ ...props }
-		>
+		<Table { ...props }>
 			{ children }
-		</table>
+		</Table>
 	)
 }
 
-export default Table
+export default TableComponent

@@ -35,7 +35,7 @@
     border: 0;
   }
 } */
-
+/*
 button, 
 .button,
 [type='button'], 
@@ -89,7 +89,7 @@ input[type="submit"] {
     font-size: 21px;
   }
 }
-
+*/
 @layer base {
   *::selection {
     @apply bg-brand-light;

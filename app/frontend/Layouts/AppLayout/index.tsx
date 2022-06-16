@@ -1,71 +1,39 @@
 import React from 'react'
-import { useLayout } from '@/Providers'
-import { Flash } from '@/Components/Flash'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
-import cn from 'classnames'
-import tw, { styled } from 'twin.macro'
-
-import './appLayout.css'
+import {
+	AppShell,
+	useMantineTheme,
+} from '@mantine/core'
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
-	const { layoutState } = useLayout()
+	const theme = useMantineTheme()
+
 	return (
-		<div
-			id="grid-layout"
-			className={ cn({ 'side-bar-closed': !layoutState.sidebarOpen }) }
+		<AppShell
+			fixed
+			navbarOffsetBreakpoint="sm"
+			asideOffsetBreakpoint="sm"
+			padding="xs"
+
+			sx={ {
+				main: {
+					background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+					height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
+					overflow: 'scroll'
+				}
+			} }
+
+			header={ <Topbar /> }
+
+			navbar={ <Sidebar /> }
+
+			footer={ <Footer /> }
 		>
-			<Flash />
-			<Sidebar />
-			<Topbar />
-			<main id="content-wrapper" scroll-region="true">
-				{ children 	}
-			</main>
-			<Footer />
-		</div>
+			{ children }
+		</AppShell>
 	)
 }
 
 export default AppLayout
-
-const AppWrapper = styled.div`
-	${ tw`dark:bg-gray-700 grid h-screen gap-0 bg-gray-100`}
-
-	transition: var(--sidebar-transition-time);
-
-	grid-template-rows: var(--topbar-height) 1fr var(--footer-height);
-
-  /* Mobile Grid Definition */
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "topbar"
-    "content"
-    "footer";
-
-  /* Desktop Grid Definition */
-  @screen sm {
-		grid-template-columns: var(--sidebar-width-open) 1fr;
-		grid-template-areas:
-			"sidebar topbar"
-			"sidebar content"
-			"sidebar footer";
-	}
-
-	&.side-bar-closed {
-		grid-template-columns: var(--sidebar-width-closed) 1fr;
-	}
-
-	#sidebar {
-		grid-area: sidebar;
-	}
-	#topbar {
-		grid-area: topbar;
-	}
-	#content {
-		grid-area: content;
-	}
-	#footer {
-		grid-area: footer;
-	}
-`

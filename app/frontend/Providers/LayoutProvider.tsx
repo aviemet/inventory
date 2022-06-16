@@ -12,7 +12,7 @@ interface ILayoutContext {
 const [useLayout, LayoutContextProvider] = createContext<ILayoutContext>()
 export { useLayout }
 
-const LayoutProvider = ({ children }) => {
+const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
 	const layoutReducer = (layoutState: ILayoutSettings, newlayoutState: Partial<ILayoutSettings>) => ({
 		...layoutState,
 		...newlayoutState,
