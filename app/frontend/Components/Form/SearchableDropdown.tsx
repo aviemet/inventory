@@ -28,6 +28,7 @@ const SearchableDropdown = ({
 	const { inputId, inputName } = useInputProps(name)
 
 	const handleChange = useCallback((option: Record<string, any>) => {
+		console.log({ option })
 		form.setData(inputName, getValue(option))
 		if(onChange) onChange(option, form)
 	}, [onChange, inputName])
