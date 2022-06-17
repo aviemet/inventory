@@ -293,6 +293,7 @@ input[type="submit"] {
   /**
   * Inputs
   **/
+  /*
   input,
   textarea {
     @apply w-full;
@@ -338,4 +339,5 @@ input[type="submit"] {
     @apply cursor-pointer;
   }
 
+*/
 }

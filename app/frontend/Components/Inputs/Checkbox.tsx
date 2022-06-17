@@ -1,13 +1,14 @@
 import React from 'react'
 import { InputProps } from 'react-html-props'
+import { Checkbox, type CheckboxProps } from '@mantine/core'
 
-export interface ICheckboxProps extends InputProps {
+export interface ICheckboxProps extends CheckboxProps {
 	label?: string
 	labelPosition?: 'start'|'end'
 	name?: string
 }
 
-const Checkbox = ({ label, onChange, labelPosition = 'start', type, value, id, name, ...props }: ICheckboxProps) => {
+const CheckboxComponent = ({ label, onChange, labelPosition = 'start', value, id, name, ...props }: ICheckboxProps) => {
 	const inputId = id ?? name
 
 	const Label = () => <label htmlFor={ inputId }>{ label }</label>
@@ -15,10 +16,9 @@ const Checkbox = ({ label, onChange, labelPosition = 'start', type, value, id, n
 	return (
 		<>
 			{ label && labelPosition === 'start' && <Label /> }
-			<input
+			<Checkbox
 				name={ name }
 				id={ inputId }
-				type="checkbox"
 				value={ value }
 				onChange={ e => {
 					if(onChange) onChange(e)
@@ -30,4 +30,4 @@ const Checkbox = ({ label, onChange, labelPosition = 'start', type, value, id, n
 	)
 }
 
-export default Checkbox
+export default CheckboxComponent
