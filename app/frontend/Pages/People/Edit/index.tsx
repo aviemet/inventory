@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import PersonForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -16,11 +17,11 @@ const New = ({ person, ...models }: IUpdatePersonProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container">
+			<Section>
 				<h1>{ title }</h1>
 
 				<PersonForm to={ Routes.people(person) } method="patch" person={ person } { ...models } />
-			</section>
+			</Section>
 		</>
 	)
 }

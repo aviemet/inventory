@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import { Link } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import 'twin.macro'
@@ -17,7 +18,7 @@ const Show = ({ item }: IShowItemProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
+			<Section>
 				<div tw="flex">
 					<h1 tw="flex-1">{ title }</h1>
 
@@ -52,7 +53,7 @@ const Show = ({ item }: IShowItemProps) => {
 				</nav>
 
 				<StickyTarget id="details" />
-				<section>
+				<Section>
 					<h3>Details</h3>
 
 					<div className="item-details">
@@ -120,10 +121,10 @@ const Show = ({ item }: IShowItemProps) => {
 						</div>
 
 					</div>
-				</section>
+				</Section>
 
 				<StickyTarget id="history" />
-				<section>
+				<Section>
 					<h3>Assignment History</h3>
 
 					<div tw="inline-grid grid-cols-2">
@@ -153,10 +154,10 @@ const Show = ({ item }: IShowItemProps) => {
 						}) }
 					</ul>
 
-				</section>
+				</Section>
 
 				<StickyTarget id="licenses" />
-				<section>
+				<Section>
 					<h3>Licenses</h3>
 
 					<ul>
@@ -164,10 +165,10 @@ const Show = ({ item }: IShowItemProps) => {
 							<li key={ license.id }>{ license.name }</li>
 						)) }
 					</ul>
-				</section>
+				</Section>
 
 
-			</section>
+			</Section>
 		</>
 	)
 }

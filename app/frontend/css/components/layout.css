@@ -280,8 +280,8 @@ body {
 } */
 
 main#content-wrapper {
-	@apply overflow-auto p-4 w-full;
-	@apply dark:text-white;
+	/* @apply overflow-auto p-4 w-full;
+	@apply dark:text-white; */
 
 	& > #content {
 		/* max-width: 1200px; */

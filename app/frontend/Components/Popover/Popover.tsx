@@ -36,6 +36,7 @@ const Popover = ({ children, width = 24, icon, ...props }: IPopoverProps) => {
 			tw="relative inline-block cursor-pointer h-full w-full"
 			onClick={ handleToggle }
 			ref={ outerElRef }
+			style={ { display: 'none' } }
 			{ ...props }
 		>
 			<Icon />

@@ -9,7 +9,7 @@ import {
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
 	const theme = useMantineTheme()
-
+	console.log({ theme })
 	return (
 		<AppShell
 			fixed

@@ -3,9 +3,9 @@ import { useForm as useInertiaForm } from '@inertiajs/inertia-react'
 import { fillEmptyValues, getNestedValue, setNestedValue } from '@/lib'
 import { createContext } from '@/Components/Hooks'
 import { FormProps } from 'react-html-props'
-import cn from 'classnames'
-
-import './form.css'
+import { Box } from '@mantine/core'
+import useFormStyles from './useFormStyles'
+import cx from 'clsx'
 
 const [useForm, FormProvider] = createContext<Inertia.FormProps>()
 export { useForm, FormProvider }
@@ -39,6 +39,8 @@ function Form<T extends Record<keyof T, unknown>>({
 	...props
 }: IFormProps<T>) {
 	const form: IndexedInertiaFormProps = useInertiaForm<Record<string, unknown>>(fillEmptyValues(data))
+
+	const { classes } = useFormStyles()
 
 	// This overrides the default form.setData method to allow for setting nested values
 	const setData: InertiaFormProps['setData'] = (key: Record<string, any>|string, value?: any) => {
@@ -90,9 +92,11 @@ function Form<T extends Record<keyof T, unknown>>({
 
 	return (
 		<FormProvider value={ contextValueObject }>
-			<form onSubmit={ handleSubmit } className={ cn({ 'format-grid': grid }, className) } { ...props }>
-				{ children }
-			</form>
+			<Box className={ classes.form }>
+				<form onSubmit={ handleSubmit } className={ cx({ 'format-grid': grid }, className) } { ...props }>
+					{ children }
+				</form>
+			</Box>
 		</FormProvider>
 	)
 }

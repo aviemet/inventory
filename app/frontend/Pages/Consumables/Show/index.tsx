@@ -1,18 +1,22 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Popover, Option } from '@/Components/Popover'
-import { Link } from '@/Components'
+import { Link, Section } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import tw from 'twin.macro'
 import { StickyLink, StickyTarget } from '@/Components/StickyContent/index'
 
-const ShowConsumable = ({ consumable }) => {
+interface IShowConsumableProps {
+	consumable: Schema.Consumable
+}
+
+const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 	const title = consumable.name ?? 'Consumable Details'
 	return (
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
+			<Section>
 				<div tw="flex">
 					<h1 tw="flex-1">{ title }</h1>
 
@@ -47,7 +51,7 @@ const ShowConsumable = ({ consumable }) => {
 				</nav>
 
 				<StickyTarget id="details" />
-				<section>
+				<Section>
 					<h3>Details</h3>
 
 					<div className="item-details">
@@ -71,13 +75,6 @@ const ShowConsumable = ({ consumable }) => {
 						</div>
 
 						<div className="item-row">
-							<label>Serial:</label>
-							<div className="value">
-								{ consumable.serial }
-							</div>
-						</div>
-
-						<div className="item-row">
 							<label>Assigned To:</label>
 							<div className="value">
 								Figure this out
@@ -85,23 +82,9 @@ const ShowConsumable = ({ consumable }) => {
 						</div>
 
 						<div className="item-row">
-							<label>Asset Tag:</label>
-							<div className="value">
-								{ consumable.asset_tag }
-							</div>
-						</div>
-
-						<div className="item-row">
 							<label>Purchase Cost:</label>
 							<div className="value">
 								{ consumable.cost && formatter.currency(consumable.cost, consumable.cost_currency) }
-							</div>
-						</div>
-
-						<div className="item-row">
-							<label>Purchase Date:</label>
-							<div className="value">
-								{ consumable.purchased_at && formatter.date.short(consumable.purchased_at) }
 							</div>
 						</div>
 
@@ -115,14 +98,14 @@ const ShowConsumable = ({ consumable }) => {
 						</div>
 
 					</div>
-				</section>
+				</Section>
 
 				<StickyTarget id="history" />
-				<section>
+				<Section>
 					<h3>Assignment History</h3>
 
 					<div tw="inline-grid grid-cols-2">
-						{ consumable.assignments && consumable.assignments.reverse().map(assignment => (
+						{ consumable.assignments && consumable.assignments.reverse().map((assignment: Schema.Assignment) => (
 							<React.Fragment key={ assignment.id }>
 								<div>
 								Link to assigntoable object
@@ -137,7 +120,7 @@ const ShowConsumable = ({ consumable }) => {
 					<h3>Audit History</h3>
 
 					<ul>
-						{ consumable.audits?.reverse().map(audit => {
+						{ consumable.audits?.reverse().map((audit: Schema.AuditedAudit) => {
 							const message = audit.action === 'create' ? 'Created' : 'Updated'
 
 							return (
@@ -148,19 +131,19 @@ const ShowConsumable = ({ consumable }) => {
 						}) }
 					</ul>
 
-				</section>
+				</Section>
 
 				<StickyTarget id="licenses" />
-				<section>
+				<Section>
 					<h3>Licenses</h3>
 
 					<ul>
-						{ consumable.licenses && consumable.licenses.map(license => (
+						{ consumable.licenses && consumable.licenses.map((license: Schema.License) => (
 							<li key={ license.id }>{ license.name }</li>
 						)) }
 					</ul>
-				</section>
-			</section>
+				</Section>
+			</Section>
 		</>
 	)
 }

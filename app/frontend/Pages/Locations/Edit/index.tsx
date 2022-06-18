@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import LocationForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -16,11 +17,11 @@ const EditLocation = ({ location, ...models }: IEditLocationProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container">
+			<Section>
 				<h1>{ title }</h1>
 
 				<LocationForm to={ Routes.location(location.slug) } method="patch" location={ location } { ...models } />
-			</section>
+			</Section>
 		</>
 	)
 }

@@ -1,4 +1,4 @@
-.dropdown {
+/* .dropdown {
   @apply z-30;
 
   i {
@@ -8,10 +8,6 @@
   & > input[type="checkbox"] {
     & + .options {
       @apply hidden;
-/* 
-      @supports (-moz-appearance: none) {
-        @apply pr-5;
-      } */
     }
 
     &:checked + .options {
@@ -31,7 +27,7 @@
       }
     }
   }
-}
+} */
 
 /* 
   Represents radio elements buttons
