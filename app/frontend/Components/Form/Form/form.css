@@ -29,8 +29,8 @@ div.field {
   }
 
   .input {
-    @apply relative; /* Forces input icons to display correctly */
-    line-height: 1;
+    /*@apply relative; /* Forces input icons to display correctly */
+    /* line-height: 1;
 
     select {
       @apply w-full;
@@ -39,7 +39,7 @@ div.field {
     input,
     select {
       line-height: 24px;
-    }
+    } */
   }
 
   label {
@@ -54,7 +54,7 @@ div.field {
     }
   }
 
-  .icon {
+  /* .icon {
     @apply absolute flex justify-center items-center;
     @apply mt-px ml-px px-2 bg-gray-100;
     height: calc(100% - 2px);
@@ -62,7 +62,7 @@ div.field {
     & + input {
       @apply pl-8;
     }
-  }
+  } */
 
   /* On Desktop use a 2 column grid to show labels and inputs, with feedback elements below input */
   @screen md {
@@ -76,7 +76,7 @@ div.field {
       grid-row-start: span 2;
 
       & ~ .input_wrapper {
-        @apply flex-2 rounded-l-none;
+        /* @apply flex-2 rounded-l-none; */
       }
     }
   }

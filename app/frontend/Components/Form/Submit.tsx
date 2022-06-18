@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button } from '@/Components'
 import { useForm } from './Form'
-import { ButtonProps } from 'react-html-props'
+import { type ButtonProps } from '@mantine/core'
 
-const Submit = ({ children, ...props }: ButtonProps) => {
+const Submit = ({ children, ...props }: ButtonProps<'button'>) => {
 	const { processing } = useForm()
 
 	return (

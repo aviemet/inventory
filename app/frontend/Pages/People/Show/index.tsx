@@ -1,6 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link } from '@/Components'
+import { Link, Section } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import tw from 'twin.macro'
 import { Popover, Option } from '@/Components/Popover'
@@ -17,7 +17,7 @@ const Show = ({ person }: IShowPersonProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
+			<Section>
 				<div tw="flex">
 					<h1 tw="flex-1">{ title }</h1>
 
@@ -43,7 +43,7 @@ const Show = ({ person }: IShowPersonProps) => {
 				</nav>
 
 				<StickyTarget id="details" />
-				<section>
+				<Section>
 					<h3>Details</h3>
 
 					<div className="item-details">
@@ -63,10 +63,10 @@ const Show = ({ person }: IShowPersonProps) => {
 						</div>
 
 					</div>
-				</section>
+				</Section>
 
 				<StickyTarget id="assets" />
-				<section>
+				<Section>
 					<h3>Assets</h3>
 
 					<ul>
@@ -74,10 +74,10 @@ const Show = ({ person }: IShowPersonProps) => {
 							<li key={ assignment.id }>{ assignment.assignable_type }</li>
 						)) }
 					</ul>
-				</section>
+				</Section>
 
 				<StickyTarget id="history" />
-				<section>
+				<Section>
 					<h3>Assignment History</h3>
 
 					<div tw="inline-grid grid-cols-2">
@@ -107,9 +107,9 @@ const Show = ({ person }: IShowPersonProps) => {
 						}) }
 					</ul>
 
-				</section>
+				</Section>
 
-			</section>
+			</Section>
 		</>
 	)
 }

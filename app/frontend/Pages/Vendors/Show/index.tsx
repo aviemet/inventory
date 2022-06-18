@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Card } from '@/Components'
+import { Link, Card, Section } from '@/Components'
 import { Routes } from '@/lib'
 import tw from 'twin.macro'
 import { Option, Popover } from '@/Components/Popover'
@@ -18,7 +18,7 @@ interface IVendorShowProps {
 const Show = ({ vendor }: IVendorShowProps) => {
 	return (
 		<>
-			<section className="container" tw="mb-4">
+			<Section tw="mb-4">
 				<div tw="flex justify-between">
 					<h1>{
 						vendor.url ?
@@ -35,9 +35,9 @@ const Show = ({ vendor }: IVendorShowProps) => {
 						</Popover>
 					</div>
 				</div>
-			</section>
+			</Section>
 
-			<section className="container" tw="flex">
+			<Section tw="flex">
 				<Card>
 					<h3>Hardware</h3>
 					<p>{ vendor.items_count }</p>
@@ -57,7 +57,7 @@ const Show = ({ vendor }: IVendorShowProps) => {
 					<h3>Components</h3>
 					<p>{ vendor.components_count }</p>
 				</Card>
-			</section>
+			</Section>
 		</>
 	)
 }

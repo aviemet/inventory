@@ -1,6 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link } from '@/Components'
+import { Link, Section } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import { Popover, Divider, Option } from '@/Components/Popover'
 import NetworkDetailsTable from './NetworkDetailsTable'
@@ -24,7 +24,7 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
+			<Section>
 				<div tw="flex mb-2">
 					<h1 tw="flex-1">{ title }</h1>
 
@@ -78,18 +78,17 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 						<div className="value">{ network.dhcp_end }</div>
 					</div>
 				</div>
-			</section>
+			</Section>
 
 			<br />
 
-			<section>
+			<Section>
 				<h2>Addresses</h2>
 
 				<div className="flex flex-wrap items-start">
 					{ Array(tableRows).fill('').map((_, i) => {
 						const start = Math.ceil(network.hosts.length / tableRows * i)
 						const end = Math.ceil((network.hosts.length / tableRows) * (i + 1))
-						console.log({ start, end })
 						return (
 							<NetworkDetailsTable
 								key={ i }
@@ -100,7 +99,7 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 						)
 					}) }
 				</div>
-			</section>
+			</Section>
 		</>
 	)
 }

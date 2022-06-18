@@ -2,10 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { Inertia, type VisitOptions } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
 import { useTableContext } from '../TableContext'
-import { Input } from '@/Components/Inputs'
+import { TextInput } from '@/Components/Inputs'
 import { SearchIcon, CrossIcon } from '@/Components/Icons'
+import { Group } from '@mantine/core'
 import ColumnPicker from './ColumnPicker'
-import tw from 'twin.macro'
 
 interface ISearchInputProps {
 	model?: string
@@ -45,24 +45,27 @@ const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) =>
 	}, [searchValue])
 
 	return (
-		<div tw="flex-1 relative">
-			<div tw="absolute w-6 text-gray-700 h-full ml-2">
-				{ searchValue !== '' ?
-					<CrossIcon tw="w-full h-full cursor-pointer" onClick={ () => setSearchValue('') } />
-					:
-					<SearchIcon tw="w-full h-full" />
-				}
-			</div>
-			<Input
-				tw="rounded-l pl-9 h-full"
+		<Group>
+			<TextInput
 				type="text"
 				name="search"
 				id="search"
 				value={ searchValue }
 				onChange={ e => setSearchValue(e.target.value) }
+				rightSection={ <CrossIcon onClick={ () => setSearchValue('') } /> }
+				icon={ <SearchIcon size={ 24 } /> }
+				sx={ {
+					root: {
+						flex: '1',
+					},
+					input: {
+						borderTopRightRadius: 0,
+						borderBottomRightRadius: 0,
+					},
+				} }
 			/>
 			{ hideable && model && columnPicker && <ColumnPicker model={ model } /> }
-		</div>
+		</Group>
 	)
 }
 

@@ -1,18 +1,22 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Popover, Option } from '@/Components/Popover'
-import { Link } from '@/Components'
+import { Link, Section } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import tw from 'twin.macro'
 import { StickyLink, StickyTarget } from '@/Components/StickyContent/index'
 
-const ShowLicense = ({ license }) => {
+interface IShowLicenseProps {
+	license: Schema.License
+}
+
+const ShowLicense = ({ license }: IShowLicenseProps) => {
 	const title = license.name ?? 'License Details'
 	return (
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
+			<Section className="container relative">
 				<div tw="flex">
 					<h1 tw="flex-1">{ title }</h1>
 
@@ -44,7 +48,7 @@ const ShowLicense = ({ license }) => {
 				</nav>
 
 				<StickyTarget id="details" />
-				<section>
+				<Section>
 					<h3>Details</h3>
 
 					<div className="item-details">
@@ -68,23 +72,9 @@ const ShowLicense = ({ license }) => {
 						</div>
 
 						<div className="item-row">
-							<label>Serial:</label>
-							<div className="value">
-								{ license.serial }
-							</div>
-						</div>
-
-						<div className="item-row">
 							<label>Assigned To:</label>
 							<div className="value">
 								Figure this out
-							</div>
-						</div>
-
-						<div className="item-row">
-							<label>Asset Tag:</label>
-							<div className="value">
-								{ license.asset_tag }
 							</div>
 						</div>
 
@@ -112,10 +102,10 @@ const ShowLicense = ({ license }) => {
 						</div>
 
 					</div>
-				</section>
+				</Section>
 
 				<StickyTarget id="history" />
-				<section>
+				<Section>
 					<h3>Assignment History</h3>
 
 					<div tw="inline-grid grid-cols-2">
@@ -145,9 +135,9 @@ const ShowLicense = ({ license }) => {
 						}) }
 					</ul>
 
-				</section>
+				</Section>
 
-			</section>
+			</Section>
 		</>
 	)
 }

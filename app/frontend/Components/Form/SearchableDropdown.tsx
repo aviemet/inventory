@@ -9,7 +9,7 @@ interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onC
 	label?: string
 	name: string
 	defaultValue?: string
-	onChange?: (option: Record<string, any>, form: Inertia.FormProps) => void
+	onChange?: (option: string|null, form: Inertia.FormProps) => void
 }
 
 const SearchableDropdown = ({
@@ -27,9 +27,8 @@ const SearchableDropdown = ({
 	const form = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
-	const handleChange = useCallback((option: Record<string, any>) => {
-		console.log({ option })
-		form.setData(inputName, getValue(option))
+	const handleChange = useCallback((option: string|null) => {
+		form.setData(inputName, option)
 		if(onChange) onChange(option, form)
 	}, [onChange, inputName])
 

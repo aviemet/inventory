@@ -1,6 +1,7 @@
 import React from 'react'
 import Flatpickr, { type DateTimePickerProps } from 'react-flatpickr'
 import labelPlugin from 'flatpickr/dist/plugins/labelPlugin/labelPlugin'
+import { Input } from '@mantine/core'
 import tw, { styled } from 'twin.macro'
 import cx from 'classnames'
 
@@ -34,6 +35,11 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 						plugins: [labelPlugin()]
 					} }
 					id={ id }
+					render={
+						({ defaultValue, value, ...props }, ref) => {
+							return <Input defaultValue={ defaultValue } ref={ ref } size="md" { ...props } />
+						}
+					}
 				/>
 			</DateTimeComponent>
 		</>

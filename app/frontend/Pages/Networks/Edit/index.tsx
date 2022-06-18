@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head, usePage } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import NetworkForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -16,11 +17,11 @@ const New = ({ network, ...models }: IUpdateNetworkProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container">
+			<Section>
 				<h1>{ title } for { user.active_company!.name }</h1>
 
 				<NetworkForm to={ Routes.networks(network) } method="patch" network={ network } { ...models } />
-			</section>
+			</Section>
 		</>
 	)
 }

@@ -1,14 +1,13 @@
 import React from 'react'
-import { ButtonProps } from 'react-html-props'
-// import './button.css'
+import { Button, type ButtonProps } from '@mantine/core'
 
-const Button = ({ children, ...props }: ButtonProps) => {
+const ButtonComponent = ({ children, ...props }: ButtonProps<'button'>) => {
 	return (
-		<button { ...props }>{ children }</button>
+		<Button { ...props }>{ children }</Button>
 	)
 }
 
-export default Button
+export default ButtonComponent
 
 export { default as EditButton } from './EditButton'
 export { default as DeleteButton } from './DeleteButton'

@@ -5,7 +5,7 @@
   @apply max-h-full;
 }
 
-a.button {
+/* a.button {
   @apply inline-block;
   @apply text-center;
 
@@ -17,7 +17,7 @@ a.button {
   &.checkin {
     @apply bg-sky-800;
   }
-}
+} */
 /*
 form.format-grid {
   div.field {
@@ -114,7 +114,7 @@ div.field {
   }
 }
 
-#modal-overlay {
+/* #modal-overlay {
   @apply hidden;
   @apply fixed inset-0 z-40;
   @apply w-full h-full;
@@ -156,7 +156,7 @@ div.field {
       }
     }
   }
-}
+} */
 /* 
 .tile {
   @apply w-full max-w-sm;
@@ -261,7 +261,7 @@ div.field {
   } */
 }
 
-.dropdown-menu {
+/* .dropdown-menu {
   @apply inline-block relative;
 
   .heading {
@@ -301,4 +301,4 @@ div.field {
       @apply hidden;
     }
   }
-}
+} */

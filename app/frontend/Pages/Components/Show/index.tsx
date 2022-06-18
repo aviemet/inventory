@@ -1,18 +1,22 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Popover, Option } from '@/Components/Popover'
-import { Link } from '@/Components'
+import { Link, Section } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import tw from 'twin.macro'
 import { StickyLink, StickyTarget } from '@/Components/StickyContent/index'
 
-const ShowComponent = ({ component }) => {
+interface IShowComponentProps {
+	component: Schema.Component
+}
+
+const ShowComponent = ({ component }: IShowComponentProps) => {
 	const title = component.name ?? 'Component Details'
 	return (
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
+			<Section>
 				<div tw="flex">
 					<h1 tw="flex-1">{ title }</h1>
 
@@ -47,7 +51,7 @@ const ShowComponent = ({ component }) => {
 				</nav>
 
 				<StickyTarget id="details" />
-				<section>
+				<Section>
 					<h3>Details</h3>
 
 					<div className="item-details">
@@ -115,10 +119,10 @@ const ShowComponent = ({ component }) => {
 						</div>
 
 					</div>
-				</section>
+				</Section>
 
 				<StickyTarget id="history" />
-				<section>
+				<Section>
 					<h3>Assignment History</h3>
 
 					<div tw="inline-grid grid-cols-2">
@@ -148,10 +152,10 @@ const ShowComponent = ({ component }) => {
 						}) }
 					</ul>
 
-				</section>
+				</Section>
 
 				<StickyTarget id="licenses" />
-				<section>
+				<Section>
 					<h3>Licenses</h3>
 
 					<ul>
@@ -159,8 +163,8 @@ const ShowComponent = ({ component }) => {
 							<li key={ license.id }>{ license.name }</li>
 						)) }
 					</ul>
-				</section>
-			</section>
+				</Section>
+			</Section>
 		</>
 	)
 }

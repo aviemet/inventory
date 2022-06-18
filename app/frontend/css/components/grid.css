@@ -1,4 +1,4 @@
-.column {
+/* .column {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -14,4 +14,4 @@
 
 .cell {
   @apply w-full;
-}
+} */

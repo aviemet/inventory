@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import VendorForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,11 +15,11 @@ const New = ({ vendor, ...models }: IUpdateVendorProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container">
+			<Section>
 				<h1>{ title }</h1>
 
 				<VendorForm to={ Routes.vendor(vendor.slug) } method="patch" vendor={ vendor } { ...models } />
-			</section>
+			</Section>
 		</>
 	)
 }

@@ -29,7 +29,6 @@ const Checkbox = ({ name, onChange, id, required, className, label, ...props }: 
 			<CheckboxInput
 				id={ id || inputId }
 				name={ inputName }
-				type="checkbox"
 				defaultChecked={ Boolean(form.getData(inputName)) }
 				value={ form.getData(inputName) }
 				onChange={ handleChange }

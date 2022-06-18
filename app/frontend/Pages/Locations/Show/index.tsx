@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import { Popover, Option } from '@/Components/Popover'
 import { Routes } from '@/lib'
 import 'twin.macro'
@@ -15,7 +16,7 @@ const Show = ({ location }: IShowLocationProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
+			<Section>
 				<div tw="flex">
 					<h1 tw="flex-1">{ title }</h1>
 
@@ -28,7 +29,7 @@ const Show = ({ location }: IShowLocationProps) => {
 					</div>
 				</div>
 
-			</section>
+			</Section>
 		</>
 	)
 }

@@ -1,12 +1,13 @@
 import React from 'react'
+import { Section } from '@/Components'
 import 'twin.macro'
 import { SearchInput } from '@/Components/Table'
 import { useTableContext } from '../Table/TableContext'
 
 export const TableSection = ({ children }: { children: React.ReactNode }) => (
-	<section tw="flex flex-col h-full">
+	<Section tw="flex flex-col h-full">
 		{ children }
-	</section>
+	</Section>
 )
 
 interface ITableTitleSectionProps {

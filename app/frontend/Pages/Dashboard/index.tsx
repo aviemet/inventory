@@ -1,16 +1,17 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-
-import { TextInput } from '@mantine/core'
+import { Section } from '@/Components'
+import { CurrencyInput } from '@/Components/Inputs'
 
 const Dashboard = () => {
 	return (
 		<>
 			<Head title="Dashboard"></Head>
 
-			<section className="container">
+			<Section>
 				<h1>Dashboard!</h1>
-			</section>
+				<CurrencyInput />
+			</Section>
 		</>
 	)
 }

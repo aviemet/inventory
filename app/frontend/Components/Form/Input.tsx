@@ -1,11 +1,12 @@
 import React, { forwardRef, useCallback } from 'react'
-import { Input } from '../Inputs'
+import { TextInput, NumberInput, PasswordInput, CurrencyInput } from '../Inputs'
 import { InputProps } from 'react-html-props'
 import { useForm, useInputProps } from './Form'
 import Field from './Field'
 import Feedback from './Feedback'
 
 interface IInputProps extends Omit<InputProps, 'onChange'|'ref'> {
+	type?: 'text'|'password'|'number'|'currency'
 	label?: string
 	name: string
 	model?: string
@@ -24,19 +25,34 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 		if(onChange) onChange(e.target.value, form)
 	}, [onChange, inputName])
 
+	let InputComponent
+	switch(type) {
+		case 'password':
+			InputComponent = PasswordInput
+			break
+		case 'number':
+			InputComponent = NumberInput
+			break
+		case 'currency':
+			InputComponent = CurrencyInput
+			break
+		case 'text':
+		default:
+			InputComponent = TextInput
+	}
+
 	return (
 		<Field
 			type={ type }
 			required={ required }
 			errors={ !!form.errors?.[inputName] }
 		>
-			<Input
+			<InputComponent
 				id={ id || inputId }
 				name={ inputName }
 				label={ label }
 				value={ form.getData(inputName) }
 				onChange={ handleChange }
-				type={ type }
 				ref={ ref }
 				{ ...props }
 			/>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head, usePage } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
 import AssignToableDropdown from './AssignToableDropdown'
@@ -21,7 +22,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container">
+			<Section>
 				<h3>{ title }</h3>
 
 				<div>
@@ -92,7 +93,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 					<Submit>Checkout { item.name }</Submit>
 
 				</Form>
-			</section>
+			</Section>
 		</>
 	)
 }

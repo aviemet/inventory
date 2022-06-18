@@ -29,7 +29,6 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 
 			<Input name="name" label="Name" required autoFocus />

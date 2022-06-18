@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 
 interface IShowCompanyProps {
 	company: Schema.Company
@@ -12,9 +13,9 @@ const Show = ({ company }: IShowCompanyProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container">
+			<Section>
 				<h1>{ title }</h1>
-			</section>
+			</Section>
 		</>
 	)
 }
