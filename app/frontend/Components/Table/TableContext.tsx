@@ -85,7 +85,7 @@ interface IStatePreservingRowUpdaterProps {
  * Without this explicitly updating rows with the fresh data response, the table wouldn't update with new rows
  * This allows both sorting and filtering to work properly without losing input focus
  */
-const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = ({ children, rows, pagination }) => {
+const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = React.memo(({ children, rows, pagination }) => {
 	const { setTableState } = useTableContext()
 
 	useEffect(() => {
@@ -93,6 +93,6 @@ const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = ({ 
 	}, [rows, pagination])
 
 	return <>{ children }</>
-}
+})
 
-export default TableProvider
+export default React.memo(TableProvider)

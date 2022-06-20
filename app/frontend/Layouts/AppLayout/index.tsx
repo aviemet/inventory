@@ -2,10 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
-import {
-	AppShell,
-	useMantineTheme,
-} from '@mantine/core'
+import { AppShell, Box, TypographyStylesProvider, useMantineTheme } from '@mantine/core'
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
 	const theme = useMantineTheme()
@@ -21,7 +18,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 				main: {
 					background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
 					height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
-					overflow: 'scroll'
+					paddingTop: 'var(--mantine-header-height, 0px)',
+					paddingBottom: 'var(--mantine-footer-height, 0px)',
+					paddingLeft: 'var(--mantine-navbar-width, 0px)',
+					paddingRight: 'var(--mantine-aside-width, 0px)',
 				}
 			} }
 
@@ -31,7 +31,15 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 
 			footer={ <Footer /> }
 		>
-			{ children }
+			<Box p={ 10 } id="CONTENT_WRAPPER" sx={ theme => ({
+				backgroundColor: theme.colors.white,
+				overflow: 'auto',
+				height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
+			}) }>
+				<TypographyStylesProvider sx={ { 'h1, h2, h3, h4, h5, h6': { 'marginTop': 0 } } }>
+					{ children }
+				</TypographyStylesProvider>
+			</Box>
 		</AppShell>
 	)
 }

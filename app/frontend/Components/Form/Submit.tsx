@@ -7,7 +7,7 @@ const Submit = ({ children, ...props }: ButtonProps<'button'>) => {
 	const { processing } = useForm()
 
 	return (
-		<Button disabled={ processing } { ...props }>
+		<Button type="submit" disabled={ processing } sx={  { width: '100%' } } { ...props }>
 			{ children }
 		</Button>
 	)

@@ -17,7 +17,7 @@ const Login = () => {
 		}
 	}
 
-	const handleSubmit = ({ data, transform }: Inertia.FormProps) => {
+	const handleSubmit = ({ data }: Inertia.FormProps) => {
 		if(data.user.email === '' || data.user.password === '') {
 			emailInputRef.current!.focus()
 			return false
@@ -57,11 +57,11 @@ const Login = () => {
 					</div>
 
 					<div tw="mb-4">
-						<Submit tw="w-full" className="large">Log In</Submit>
+						<Submit>Log In</Submit>
 					</div>
 
 					<div tw="mb-2">
-						<Checkbox name="remember_me" label="Remember Me" labelPosition='end' />
+						<Checkbox name="remember_me" label="Remember Me" />
 					</div>
 
 				</Tile.Content>

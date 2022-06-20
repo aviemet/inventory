@@ -41,7 +41,6 @@ const ColumnPicker = ({ model }: IColumnPickerProps) => {
 						<Checkbox
 							name={ name }
 							label={ label }
-							labelPosition="end"
 							onChange={ handleChange }
 							checked={ !user.table_preferences?.[model]?.hide?.[name] }
 						/>

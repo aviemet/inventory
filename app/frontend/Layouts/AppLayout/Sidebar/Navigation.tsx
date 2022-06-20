@@ -24,7 +24,7 @@ import { useLayout } from '@/Providers'
 // import './divigation.css'
 
 const Navigation = () => {
-	const { layoutState, setLayoutState } = useLayout()
+	const { setLayoutState } = useLayout()
 
 	const handleNavClick = () => setLayoutState({ sidebarOpen: false })
 

@@ -12,4 +12,4 @@ const Head = forwardRef<HTMLTableSectionElement, THeadProps>(({ children, ...pro
 	)
 })
 
-export default Head
+export default React.memo(Head)

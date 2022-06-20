@@ -64,7 +64,7 @@ const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) =>
 					},
 				} }
 			/>
-			{ hideable && model && columnPicker && <ColumnPicker model={ model } /> }
+			{ /* { hideable && model && columnPicker && <ColumnPicker model={ model } /> } */ }
 		</Group>
 	)
 }

@@ -3,7 +3,7 @@ import { TextInput, type TextInputProps } from '@mantine/core'
 import cn from 'classnames'
 
 const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
-	{ label, required = false, value, onChange, id, pattern, size = 'md', ...props },
+	{ label, required = false, value, onChange, id, pattern, size = 'md', radius = 'xs', ...props },
 	ref
 ) => {
 	return (
@@ -19,6 +19,7 @@ const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
 				ref={ ref }
 				pattern={ pattern }
 				size={ size }
+				radius={ radius }
 				{ ...props }
 			/>
 		</>

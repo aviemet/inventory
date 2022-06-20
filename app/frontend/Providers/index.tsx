@@ -19,6 +19,9 @@ const Providers = React.memo(({ children }: IProviderProps) => {
 		<UiFrameworkProvider>
 
 			<Global styles={ theme => ({
+				'html, body': {
+					overflow: 'hidden',
+				},
 				'*::selection': {
 					backgroundColor: theme.colors[theme.primaryColor][2],
 				},
