@@ -60,8 +60,11 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 				<Link
 					href={ `${pathname}?${params.toString()}` }
 					preserveScroll={ true }
-				>{ children }</Link>
-				: children
+				>
+					{ children }
+				</Link>
+				:
+				children
 			}
 		</th>
 	)

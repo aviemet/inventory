@@ -19,7 +19,7 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 			position: 'sticky',
 			top: 0,
 			zIndex: 1,
-			background: theme.white,
+			backgroundColor: theme.colorScheme === 'dark' ? theme.colors.gray[9] : theme.white,
 		},
 
 		'th, td': {
@@ -34,10 +34,10 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 		'th': {
 			'&.sortable': {
 				position: 'relative',
-				paddingRight: 4,
+				paddingRight: '1rem',
 
 				a: {
-					color: theme.black,
+					color: theme.colorScheme === 'dark' ? theme.white : theme.black,
 				},
 
 				'&:before, &:after': {

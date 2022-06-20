@@ -1,15 +1,26 @@
-import React, { useEffect } from 'react'
-import { MantineProvider } from '@mantine/core'
-import { useLocalStorage } from '@mantine/hooks'
+import React from 'react'
+import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
+import { useColorScheme, useLocalStorage } from '@mantine/hooks'
 import { usePage } from '@inertiajs/inertia-react'
+import axios from 'axios'
+import { Routes } from '@/lib'
 
 const useTheme = (colorScheme: 'light'|'dark') => ({
 	colorScheme,
 	fontFamily: 'Roboto, sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
 	primaryColor: 'violet',
+	primaryShade: {
+		light: 6,
+		dark: 6,
+	},
 	defaultRadius: 'xs',
+	transitionTimingFunction: 'ease-in-out',
+	headings: {
+		fontFamily: 'Greycliff CF, Roboto, sans-serif',
+	},
 	other: {
+		colorSchemeOption: (light: any, dark: any) => colorScheme === 'dark' ? dark : light,
 		header: {
 			height: 50,
 		},
@@ -36,18 +47,34 @@ const useTheme = (colorScheme: 'light'|'dark') => ({
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
-	const [colorScheme, setColorScheme] = useLocalStorage<'dark'|'light'>({ key: 'colorScheme', defaultValue: 'light' })
+	const systemColorScheme = useColorScheme()
+	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+		key: 'colorScheme',
+		defaultValue: user?.user_preferences?.colorScheme || systemColorScheme
+	})
 
-	useEffect(() => {
-		if(colorScheme !== user?.user_preferences?.colorScheme) {
-			setColorScheme(user?.user_preferences?.colorScheme)
+	const toggleColorScheme = (value?: ColorScheme) => {
+		const scheme = value || (colorScheme === 'dark' ? 'light' : 'dark')
+
+		if(user) {
+			axios.patch(Routes.updateUserPreferences(user), {
+				user: {
+					user_preferences: {
+						colorScheme: scheme
+					}
+				}
+			})
 		}
-	}, [user?.user_preferences?.colorScheme])
+
+		setColorScheme(scheme)
+	}
 
 	return (
-		<MantineProvider theme={ useTheme(colorScheme) } withGlobalStyles withNormalizeCSS>
-			{ children }
-		</MantineProvider>
+		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
+			<MantineProvider theme={ useTheme(colorScheme) } withGlobalStyles withNormalizeCSS>
+				{ children }
+			</MantineProvider>
+		</ColorSchemeProvider>
 	)
 }
 
