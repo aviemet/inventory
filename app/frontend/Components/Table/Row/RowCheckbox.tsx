@@ -1,5 +1,6 @@
 import React from 'react'
 import Cell from '../Cell'
+import { Checkbox } from '@mantine/core'
 import { useTableContext } from '../TableContext'
 
 interface IRowCheckBox {
@@ -24,7 +25,7 @@ const RowCheckbox = ({ name, selected }: IRowCheckBox) => {
 
 	return (
 		<Cell checkbox>
-			<input type="checkbox" checked={ selected?.has(name) } onChange={ handleClick } />
+			<Checkbox checked={ selected?.has(name) } onChange={ handleClick } />
 		</Cell>
 	)
 }

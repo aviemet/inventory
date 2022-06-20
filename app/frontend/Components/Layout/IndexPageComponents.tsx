@@ -3,9 +3,14 @@ import { Section } from '@/Components'
 import 'twin.macro'
 import { SearchInput } from '@/Components/Table'
 import { useTableContext } from '../Table/TableContext'
+import { Box, Title } from '@mantine/core'
 
 export const TableSection = ({ children }: { children: React.ReactNode }) => (
-	<Section tw="flex flex-col h-full">
+	<Section fullHeight={ true } sx={ {
+		display: 'flex',
+		flexDirection: 'column',
+		height: '100%',
+	} }>
 		{ children }
 	</Section>
 )
@@ -19,16 +24,20 @@ export const TableTitleSection = ({ title, popover }: ITableTitleSectionProps) =
 	const { tableState: { hideable, model } } = useTableContext()
 
 	return (
-		<div tw="flex items-center justify-between">
-			<h1 tw="md:inline-block md:flex-1 md:align-middle align-text-top">{ title }</h1>
-			<div tw="md:flex-1 flex">
+		<Box sx={ {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'space-between'
+		} }>
+			<Title sx={ { flex: 2 } }>{ title }</Title>
+			<Box sx={ { flex: 1, display: 'flex' } }>
 				<SearchInput model={ model } columnPicker={ hideable } />
 
-				<div tw="inline-block w-10 p-1">
+				<Box sx={ { display: 'inline-block', width: 48, padding: 1 } } tw="inline-block w-10 p-1">
 					{ popover }
-				</div>
+				</Box>
 
-			</div>
-		</div>
+			</Box>
+		</Box>
 	)
 }

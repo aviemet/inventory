@@ -25,4 +25,4 @@ const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
 	return <>{ rows.map(row => handleRowProps(render(row))) }</>
 }
 
-export default RowIterator
+export default React.memo(RowIterator)

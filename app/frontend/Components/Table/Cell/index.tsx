@@ -9,6 +9,7 @@ export interface ICellProps extends TDProps {
 	sort?: string
 	nowrap?: boolean
 	hideable?: boolean
+	ref?: React.RefObject<HTMLTableCellElement>
 }
 
 const RenderedCell = ({ children = true, ...props }: ICellProps) => {

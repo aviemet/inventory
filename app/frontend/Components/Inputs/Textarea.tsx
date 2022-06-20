@@ -7,7 +7,7 @@ interface ITextareaProps extends TextareaProps {
 	name: string
 }
 
-const TextareaComponent = ({ label, name, required = false, value, onChange, id, ...props }: ITextareaProps) => {
+const TextareaComponent = ({ label, name, required = false, value, onChange, id, radius = 'xs', ...props }: ITextareaProps) => {
 	return (
 		<>
 			{ label && <label className={ cx({ required }) } htmlFor={ id }>
@@ -19,6 +19,7 @@ const TextareaComponent = ({ label, name, required = false, value, onChange, id,
 				onChange={ onChange }
 				value={ value }
 				required={ required }
+				radius={ radius }
 				{ ...props }
 			>
 			</Textarea>

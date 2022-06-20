@@ -1,14 +1,39 @@
 import React from 'react'
-import { Box } from '@mantine/core'
+import { Box, type BoxProps } from '@mantine/core'
+import { merge } from 'lodash'
 
-const Section = ({ children }: { children: React.ReactNode }) => {
+interface ISectionProps extends BoxProps<'section'> {
+	fullHeight?: boolean
+}
+
+const Section = ({ children, sx, fullHeight = false, ...props }: ISectionProps) => {
 	return (
-		<Box sx={ theme => ({
-			backgroundColor: theme.colors.white,
-			boxShadow: theme.shadows.md,
-			padding: '1rem 0.75rem',
-			borderTop: `2px solid ${theme.colors[theme.primaryColor][2]}`,
-		}) }>
+		<Box
+			component="section"
+			sx={ theme => {
+				let sectionStyles = {
+					backgroundColor: theme.white,
+					boxShadow: theme.shadows.xs,
+					padding: '1rem 0.75rem',
+					borderTop: `2px solid ${theme.colors[theme.primaryColor][2]}`,
+				}
+
+				if(sx) {
+					let propStyles = {}
+					propStyles = typeof sx === 'function' ? sx(theme) : sx
+					sectionStyles = merge(sectionStyles, propStyles)
+				}
+
+				if(fullHeight) {
+					sectionStyles = merge(sectionStyles, {
+						height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
+					})
+				}
+
+				return sectionStyles
+			} }
+			{ ...props }
+		>
 			{ children }
 		</Box>
 	)

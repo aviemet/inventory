@@ -62,6 +62,11 @@ const Sidebar = () => {
 
 						'.links > ul > li:hover': {
 							width: 185,
+
+							'& > ul': {
+								display: 'block',
+								boxShadow: theme.shadows.xs,
+							}
 						},
 
 						'ul li': {

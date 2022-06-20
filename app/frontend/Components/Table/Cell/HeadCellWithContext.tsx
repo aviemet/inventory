@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
-import { Link, usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/inertia-react'
+import { Link } from '@/Components'
 import cn from 'classnames'
 import { type ICellProps } from './index'
 import { useTableContext } from '../TableContext'
@@ -18,7 +19,6 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 		if(hideable && sort && !columns.has(sort)) {
 			columns.set(sort, { label: String(children), index: thRef.current?.dataset?.index })
 			setTableState({ columns })
-
 		}
 	}, [])
 
@@ -27,7 +27,7 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 		hidden = true
 	}
 
-	const { origin, pathname, search } = window.location
+	const { pathname, search } = window.location
 
 	const params = new URLSearchParams(search)
 	const paramsSort = params.get('sort')
@@ -58,7 +58,7 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 		>
 			{ showSortLink ?
 				<Link
-					href={ `${origin}${pathname}?${params.toString()}` }
+					href={ `${pathname}?${params.toString()}` }
 					preserveScroll={ true }
 				>{ children }</Link>
 				: children
@@ -67,4 +67,4 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 	)
 }
 
-export default HeadCellWithContext
+export default React.memo(HeadCellWithContext)
