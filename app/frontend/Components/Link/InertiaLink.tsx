@@ -25,9 +25,9 @@ const InertiaLinkComponent = ({ children, href, as = 'a', method, visit, externa
 	// Only present standard GET requests as anchor tags, all others as buttons
 	if(method !== undefined && method !== 'get') {
 		return (
-			<InertiaLink href={ href } onClick={ e => e.preventDefault() }>
+			<Anchor component={ InertiaLink } href={ href } onClick={ e => e.preventDefault() }>
 				<Button onClick={ handleHTTP }>{ children }</Button>
-			</InertiaLink>
+			</Anchor>
 		)
 	}
 

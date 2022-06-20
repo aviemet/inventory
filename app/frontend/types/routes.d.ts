@@ -3325,6 +3325,18 @@ export const updateTablePreferences: ((
 
 /**
  * Generates rails route to
+ * /users/update_user_preferences/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const updateUserPreferences: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /users/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options

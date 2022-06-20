@@ -4,6 +4,7 @@ import { useLayout } from '@/Providers'
 import { usePage } from '@inertiajs/inertia-react'
 import QuickNewMenu from './QuickNewMenu'
 import { Box, Header, Burger, useMantineTheme } from '@mantine/core'
+import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const Topbar = () => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
@@ -27,6 +28,7 @@ const Topbar = () => {
 				</Box>
 
 				<div>
+					<ToggleColorSchemeButton />
 					<QuickNewMenu />
 				</div>
 
