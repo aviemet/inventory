@@ -3,12 +3,16 @@ import { createStyles, Table, type TableProps } from '@mantine/core'
 import cn from 'classnames'
 
 const useTableStyles = (fixed: boolean) => createStyles(theme => ({
+	wrapper: {
+		overflow: 'auto',
+		position: 'relative',
+		maxHeight: '100%',
+	},
+
 	table: {
 		tableLayout: fixed ? 'fixed' : 'auto',
 		border: `1px solid ${theme.colors.gray[2]}`,
-		maxHeight: '100%',
-		display: 'block',
-		overflow: 'auto',
+		borderTop: 0,
 
 		thead: {
 			boxShadow: theme.shadows.xs,
@@ -77,9 +81,11 @@ const TableComponent = ({ children, className, fixed = false, ...props }: ITable
 	const { classes } = useTableStyles(fixed)
 
 	return (
-		<Table striped highlightOnHover className={ cn(className, classes.table) } { ...props }>
-			{ children }
-		</Table>
+		<div className={ classes.wrapper }>
+			<Table striped highlightOnHover className={ cn(className, classes.table) } { ...props }>
+				{ children }
+			</Table>
+		</div>
 	)
 }
 
