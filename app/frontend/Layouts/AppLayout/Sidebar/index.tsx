@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLayout } from '@/Providers'
-import { Navbar, useMantineTheme } from '@mantine/core'
+import { Group, Navbar, Text, ThemeIcon, useMantineTheme } from '@mantine/core'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
@@ -41,6 +41,14 @@ const Sidebar = () => {
 				width={ { sm: layoutState.sidebarOpen ? theme.other.navbar.width.open : theme.other.navbar.width.closed } }
 				className={ cx(classes.root, { closed: !layoutState.sidebarOpen }) }
 			>
+				<Navbar.Section m="xs">
+					<Group position='apart'>
+						<ThemeIcon radius="md" size="lg">
+							<ComponentsIcon />
+						</ThemeIcon>
+						{ layoutState.sidebarOpen && <Text>Inventory</Text> }
+					</Group>
+				</Navbar.Section>
 				<Navbar.Section grow onClick={ handleNavClick } className="links">
 					<ul>
 						<li><MenuLink href={ Routes.dashboard() } icon={ <DashboardIcon /> }>Dashboard</MenuLink></li>

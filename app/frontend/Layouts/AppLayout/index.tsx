@@ -16,6 +16,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 			padding="xs"
 
 			sx={ theme => ({
+				header: {
+					border: '1px solid orange'
+				},
+
 				main: {
 					background: theme.other.colorSchemeOption(theme.colors.gray[1], theme.black),
 					height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
