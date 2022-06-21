@@ -1,5 +1,6 @@
 import React from 'react'
 import { Select, type SelectProps } from '@mantine/core'
+import Label from './Label'
 
 export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 	options: Array<Record<string, any>>
@@ -18,6 +19,9 @@ const SearchableDropdownComponent = ({
 	onChange,
 	onOpen,
 	filterMatchKeys,
+	label,
+	required,
+	id,
 	...props
 }: ISearchableDropdownProps) => {
 	const data = options.map(option => ({ label: getLabel(option), value: getValue(option) }))
@@ -27,18 +31,25 @@ const SearchableDropdownComponent = ({
 	}
 
 	return (
-		<Select
-			size="md"
-			data={ data }
-			searchable
-			maxDropdownHeight={ 400 }
-			nothingFound="No Results"
-			onChange={ handleChange }
-			filter={ (value, item) =>
-				item?.label?.toLowerCase().includes(value.toLowerCase().trim()) ||
+		<>
+			{ label && <Label required={ required } htmlFor={ id }>
+				{ label }
+			</Label> }
+			<Select
+				size="md"
+				data={ data }
+				searchable
+				maxDropdownHeight={ 400 }
+				nothingFound="No Results"
+				onChange={ handleChange }
+				filter={ (value, item) =>
+					item?.label?.toLowerCase().includes(value.toLowerCase().trim()) ||
         item?.value?.toLowerCase().includes(value.toLowerCase().trim())
-			}
-		/>
+				}
+				id={ id }
+				{ ...props }
+			/>
+		</>
 	)
 }
 

@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react'
 import { TextAreaProps } from 'react-html-props'
-import { useForm, useInputProps } from './Form'
+import { useForm, useInputProps } from './index'
 import Field from './Field'
-import Feedback from './Feedback'
 import TextareaInput from '../Inputs/Textarea'
 import cx from 'classnames'
 
@@ -32,10 +31,10 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 				onChange={ handleChange }
 				value={ form.getData(inputName) }
 				required={ required }
+				error={ form.errors[name] }
 				{ ...props }
 			>
 			</TextareaInput>
-			<Feedback errors={ form.errors[name] } />
 		</Field>
 	)
 }

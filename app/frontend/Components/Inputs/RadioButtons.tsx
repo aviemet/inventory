@@ -1,88 +1,37 @@
 import React from 'react'
-import tw, { styled } from 'twin.macro'
-import { InputProps } from 'react-html-props'
+import { SegmentedControl, SegmentedControlProps } from '@mantine/core'
+import Label from './Label'
 
 export type TOption = {
 	label: string
 	value: string
 }
 
-export interface IRadioButtonsProps extends InputProps {
+export interface IRadioButtonsProps extends SegmentedControlProps {
 	label?: string
 	labelPosition?: 'start'|'end'
 	name: string
 	options: TOption[]
 	id?: string
-	value?: string | number | readonly string[]
-	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+	required?: boolean
 }
 
-const RadioButtons = ({ label, labelPosition = 'start', options, name, id, value, onChange }: IRadioButtonsProps) => {
-	const parseId = (value: string): string => {
-		return `${name}_${value}`.trim().toLowerCase()
-	}
+const RadioButtons = ({ label, labelPosition = 'start', options, name, id, value, required, onChange }: IRadioButtonsProps) => {
+	const LabelComponent = () => <Label required={ required } htmlFor={ id }>{ label }</Label>
 
 	return (
 		<>
-			{ label && labelPosition === 'start' && <label htmlFor={ id }>{ label }</label> }
-			<div tw="flex w-full">
-				{ options.map((option, i) => {
-					const optionId = parseId(option.value)
-
-					return (
-						<React.Fragment key={ option.value }>
-							<RadioInput
-								name={ name }
-								id={ optionId }
-								type="radio"
-								value={ option.value }
-								checked={ option.value === value }
-								onChange={ e => {
-									if(onChange) onChange(e)
-								} }
-							/>
-							<OptionLabel htmlFor={ optionId }>
-								{ option.label }
-							</OptionLabel>
-						</React.Fragment >
-					)
-				}) }
-			</div>
-			{ label && labelPosition === 'end' && <label htmlFor={ id }>{ label }</label> }
+			{ label && labelPosition === 'start' && <LabelComponent /> }
+			<SegmentedControl
+				value={ value }
+				onChange={ (choice: string) => {
+					if(onChange) onChange(choice)
+				} }
+				data={ options }
+			/>
+			{ label && labelPosition === 'end' && <LabelComponent /> }
 		</>
 	)
 }
 
 export default RadioButtons
-
-const OptionLabel = styled.label`
-	${tw`max-w-none relative flex-1 inline-block overflow-hidden`}
-	${tw`border-r border-gray-600`}
-	${tw`p-2 m-0`}
-	${tw`text-center text-white uppercase`}
-	${tw`cursor-pointer`}
-
-	&:first-of-type {
-		border-radius: 0.25rem 0 0 0.25rem;
-	}
-	&:last-of-type {
-		border-radius: 0 0.25rem 0.25rem 0;
-		border-right: none;
-	}
-`
-
-const RadioInput = styled.input`
-	${tw`visually-hidden`}
-	
-	&:not(:checked) + label {
-		${tw`bg-gray-400`}
-
-		&:hover {
-			${tw`bg-brand-light`}
-		}
-	}
-
-	&:checked + label {
-		${tw`bg-brand`}
-	}
-`

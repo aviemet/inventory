@@ -3,7 +3,6 @@ import { Form, Input, Checkbox, Submit } from '@/Components/Form'
 import HoverLink from '../HoverLink'
 import { Routes } from '@/lib'
 import { Tile } from '@/Components'
-import { AuthFlash } from '@/Components/Flash'
 import tw, { styled } from 'twin.macro'
 
 const Login = () => {
@@ -32,8 +31,6 @@ const Login = () => {
 					<div tw="mb-2">
 						<h1 tw="text-center">Inventory</h1>
 					</div>
-
-					<AuthFlash />
 
 					<div tw="mb-2">
 						<Input

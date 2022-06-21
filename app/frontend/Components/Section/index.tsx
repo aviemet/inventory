@@ -12,10 +12,10 @@ const Section = ({ children, sx, fullHeight = false, ...props }: ISectionProps) 
 			component="section"
 			sx={ theme => {
 				let sectionStyles = {
-					backgroundColor: theme.other.colorSchemeOption(theme.white, theme.black),
+					backgroundColor: theme.other.colorSchemeOption(theme.white, theme.colors.gray[9]),
 					boxShadow: theme.shadows.xs,
 					padding: '1rem 0.75rem',
-					borderTop: `2px solid ${theme.colors[theme.primaryColor][2]}`,
+					borderTop: `2px solid ${theme.other.colorSchemeOption(theme.colors[theme.primaryColor][2], theme.colors[theme.primaryColor][9])}`,
 				}
 
 				if(sx) {

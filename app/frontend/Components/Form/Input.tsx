@@ -1,16 +1,15 @@
 import React, { forwardRef, useCallback } from 'react'
 import { TextInput, NumberInput, PasswordInput, CurrencyInput } from '../Inputs'
-import { InputProps } from 'react-html-props'
-import { useForm, useInputProps } from './Form'
+import { useForm, useInputProps } from './index'
 import Field from './Field'
-import Feedback from './Feedback'
+import { type InputProps } from '@mantine/core'
 
-interface IInputProps extends Omit<InputProps, 'onChange'|'ref'> {
+interface IInputProps extends Omit<InputProps<'input'>, 'onChange'|'ref'> {
 	type?: 'text'|'password'|'number'|'currency'
 	label?: string
 	name: string
 	model?: string
-	onChange?: (value: string, form: Inertia.FormProps) => void
+	onChange?: (value: string|number, form: Inertia.FormProps) => void
 }
 
 const FormInput = forwardRef<HTMLInputElement, IInputProps>((
@@ -20,9 +19,14 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 	const form = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
 
-	const handleChange = useCallback((e:  React.ChangeEvent<HTMLInputElement>) => {
-		form.setData(inputName, e.target.value)
-		if(onChange) onChange(e.target.value, form)
+	const handleChange = useCallback((e?: number | React.ChangeEvent<HTMLInputElement>) => {
+		if(e === undefined) return
+
+		const value = typeof e === 'number' ? e : e.target.value
+
+		form.setData(inputName, value)
+
+		if(onChange) onChange(value, form)
 	}, [onChange, inputName])
 
 	let InputComponent
@@ -54,9 +58,9 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 				value={ form.getData(inputName) }
 				onChange={ handleChange }
 				ref={ ref }
+				error={ form.errors[name] }
 				{ ...props }
 			/>
-			<Feedback errors={ form.errors[inputName] } />
 		</Field>
 	)
 })

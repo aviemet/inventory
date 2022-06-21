@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { NumberInput, type NumberInputProps } from '@mantine/core'
-import cn from 'classnames'
+import Label from './Label'
 
 const NumberInputComponent = forwardRef<HTMLInputElement, NumberInputProps>((
 	{ label, required = false, value, onChange, id, pattern, size = 'md', ...props },
@@ -8,9 +8,9 @@ const NumberInputComponent = forwardRef<HTMLInputElement, NumberInputProps>((
 ) => {
 	return (
 		<>
-			{ label && <label className={ cn({ 'required': required }) } htmlFor={ id }>
+			{ label && <Label required={ required } htmlFor={ id }>
 				{ label }
-			</label> }
+			</Label> }
 			<NumberInput
 				id={ id }
 				value={ value }

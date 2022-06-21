@@ -7,6 +7,7 @@ import { AppShell, Box, TypographyStylesProvider, useMantineTheme } from '@manti
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
 	const theme = useMantineTheme()
 	console.log({ theme })
+
 	return (
 		<AppShell
 			fixed
@@ -14,16 +15,16 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 			asideOffsetBreakpoint="sm"
 			padding="xs"
 
-			sx={ {
+			sx={ theme => ({
 				main: {
-					background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+					background: theme.other.colorSchemeOption(theme.colors.gray[1], theme.black),
 					height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
 					paddingTop: 'var(--mantine-header-height, 0px)',
 					paddingBottom: 'var(--mantine-footer-height, 0px)',
 					paddingLeft: 'var(--mantine-navbar-width, 0px)',
 					paddingRight: 'var(--mantine-aside-width, 0px)',
 				}
-			} }
+			}) }
 
 			header={ <Topbar /> }
 
@@ -32,7 +33,6 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 			footer={ <Footer /> }
 		>
 			<Box p={ 10 } id="CONTENT_WRAPPER" sx={ theme => ({
-				backgroundColor: theme.colors.white,
 				overflow: 'auto',
 				height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
 			}) }>

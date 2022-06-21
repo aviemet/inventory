@@ -4,7 +4,7 @@ import { CheckinIcon } from '@/Components/Icons'
 
 const CheckinButton = ({ href }: {href: string}) => {
 	return (
-		<Link as="button" href={ href }><CheckinIcon /></Link>
+		<Link as="button" compact href={ href }><CheckinIcon /></Link>
 	)
 }
 

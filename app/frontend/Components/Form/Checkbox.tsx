@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
-import { useForm, useInputProps } from './Form'
+import { useForm, useInputProps } from './index'
 import Field from './Field'
-import Feedback from './Feedback'
 import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
-import cx from 'classnames'
+import cx from 'clsx'
+import { CheckboxGroup } from '@mantine/core'
 
 interface IFormCheckboxProps extends Omit<ICheckboxProps, 'onChange'> {
 	name: string
@@ -26,17 +26,20 @@ const Checkbox = ({ name, onChange, id, required, className, label, ...props }: 
 			required={ required }
 			errors={ !!form.errors?.[name] }
 		>
-			<CheckboxInput
-				id={ id || inputId }
-				name={ inputName }
-				defaultChecked={ Boolean(form.getData(inputName)) }
-				value={ form.getData(inputName) }
-				onChange={ handleChange }
-				className={ cx('mt-auto', 'mb-auto', className) }
-				label={ label }
-				{ ...props }
-			/>
-			<Feedback errors={ form.errors[name] } />
+			<CheckboxGroup
+				error={ form.errors[name] }
+			>
+				<CheckboxInput
+					id={ id || inputId }
+					name={ inputName }
+					defaultChecked={ Boolean(form.getData(inputName)) }
+					value={ form.getData(inputName) }
+					onChange={ handleChange }
+					className={ cx('mt-auto', 'mb-auto', className) }
+					label={ label }
+					{ ...props }
+				/>
+			</CheckboxGroup>
 		</Field>
 	)
 }

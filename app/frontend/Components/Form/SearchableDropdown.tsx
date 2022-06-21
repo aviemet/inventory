@@ -1,9 +1,7 @@
 import React, { useCallback } from 'react'
-import { useForm, useInputProps } from './Form'
+import { useForm, useInputProps } from './index'
 import Field from './Field'
-import Feedback from './Feedback'
 import SearchableDropdownInput, { type ISearchableDropdownProps } from '../Inputs/SearchableDropdown'
-import cx from 'classnames'
 
 interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onChange'> {
 	label?: string
@@ -34,9 +32,6 @@ const SearchableDropdown = ({
 
 	return (
 		<Field type="select" required={ required } errors={ !!form.errors?.[name] }>
-			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
-				{ label }
-			</label> }
 			<SearchableDropdownInput
 				id={ id || inputId }
 				name={ inputName }
@@ -46,9 +41,9 @@ const SearchableDropdown = ({
 				defaultValue={ defaultValue ?? form.getData(inputName) }
 				getLabel={ getLabel }
 				getValue={ getValue }
+				label={ label }
 				{ ...props }
 			/>
-			<Feedback errors={ form.errors[name] } />
 		</Field>
 	)
 }

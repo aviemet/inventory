@@ -1,15 +1,33 @@
 export {
-	MdDashboard as DashboardIcon,
-	MdDevices as ItemsIcon,
+	Key as LicensesIcon,
+	Dashboard as DashboardIcon,
+	Devices as ItemsIcon,
+	Users as PeopleIcon,
+	Ticket as TicketsIcon,
+	BuildingStore as VendorsIcon,
+	Receipt as PurchasesIcon,
+	Settings as SettingsIcon,
+	Keyboard as AccessoriesIcon,
+	Components as ComponentsIcon,
+	DropletFilled as ConsumablesIcon,
+	FileCertificate as ContractsIcon,
+	Building as CompaniesIcon,
+	BuildingFactory as ManufacturersIcon,
+	X as CrossIcon,
+} from 'tabler-icons-react'
+
+export {
+	// MdDashboard as DashboardIcon,
+	// MdDevices as ItemsIcon,
 	// MdSave as LicensesIcon,
-	MdPeople as PeopleIcon,
-	MdConfirmationNumber as TicketsIcon,
+	// MdPeople as PeopleIcon,
+	// MdConfirmationNumber as TicketsIcon,
 	MdSettingsEthernet as NetworksIcon,
-	MdBusiness as VendorsIcon,
-	MdShoppingCart as PurchasesIcon,
-	MdSettings as SettingsIcon,
+	// MdBusiness as VendorsIcon,
+	// MdShoppingCart as PurchasesIcon,
+	// MdSettings as SettingsIcon,
 	MdExitToApp as LogoutIcon,
-	MdWaterDrop as ConsumablesIcon,
+	// MdWaterDrop as ConsumablesIcon,
 	// MdMemory as ComponentsIcon,
 	MdMenu as MenuBarsIcon,
 	MdMoreVert as MenuDotsIcon,
@@ -34,21 +52,25 @@ export {
 
 export {
 	IoTrashBinOutline as TrashIcon,
-	IoKey as LicensesIcon,
+	// IoKey as LicensesIcon,
 } from 'react-icons/io5'
 
 export {
-	BsKeyboardFill as AccessoriesIcon
+	// BsKeyboardFill as AccessoriesIcon
 } from 'react-icons/bs'
 
 export {
-	FaMemory as ComponentsIcon
+	// FaMemory as ComponentsIcon
 } from 'react-icons/fa'
 
 export {
-	RiFilePaperFill as ContractsIcon,
+	// RiFilePaperFill as ContractsIcon,
 } from 'react-icons/ri'
 
 export {
-	TiDeleteOutline as CrossIcon,
+	// TiDeleteOutline as CrossIcon,
 } from 'react-icons/ti'
+
+export {
+	GrMapLocation as LocationsIcon,
+} from 'react-icons/gr'

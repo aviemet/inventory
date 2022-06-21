@@ -8,6 +8,7 @@ export interface LinkProps extends InertiaLinkProps {
 	method?: Method
 	visit?: Omit<Visit, 'method'>
 	external?: boolean
+	compact?: boolean
 }
 
 const externalPrefix = ['http', 'www']
@@ -16,7 +17,7 @@ const Link = ({ children, href, as = 'a', method, visit, external = false, ...pr
 	let renderExternal = external
 
 	if(!external) {
-		externalPrefix.forEach(prefix => {
+		externalPrefix.some(prefix => {
 			if(href.startsWith(prefix)) {
 				renderExternal = true
 			}

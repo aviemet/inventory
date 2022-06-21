@@ -12,9 +12,10 @@ interface LinkProps extends Omit<AnchorProps<any>, 'href'> {
 	method?: Method
 	visit?: Omit<Visit, 'method'>
 	external?: boolean
+	compact?: boolean
 }
 
-const InertiaLinkComponent = ({ children, href, as = 'a', method, visit, external = false, ...props }: LinkProps) => {
+const InertiaLinkComponent = ({ children, href, as = 'a', method, visit, external = false, compact, ...props }: LinkProps) => {
 	const handleHTTP = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		Inertia.visit(href, {
 			method,
@@ -34,7 +35,7 @@ const InertiaLinkComponent = ({ children, href, as = 'a', method, visit, externa
 	const asButton = as === 'button'
 	return (
 		<Anchor component={ InertiaLink } href={ href } { ...props } as={ asButton ? 'a' : as }>
-			{ asButton ? <Button>{ children }</Button> : children }
+			{ asButton ? <Button compact={ compact }>{ children }</Button> : children }
 		</Anchor>
 	)
 }

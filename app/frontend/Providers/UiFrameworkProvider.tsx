@@ -1,6 +1,7 @@
 import React from 'react'
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
+import { NotificationsProvider } from '@mantine/notifications'
 import { usePage } from '@inertiajs/inertia-react'
 import axios from 'axios'
 import { Routes } from '@/lib'
@@ -11,7 +12,7 @@ const useTheme = (colorScheme: 'light'|'dark') => ({
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
 	primaryColor: 'violet',
 	primaryShade: {
-		light: 6,
+		light: 8,
 		dark: 6,
 	},
 	defaultRadius: 'xs',
@@ -72,7 +73,9 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
 			<MantineProvider theme={ useTheme(colorScheme) } withGlobalStyles withNormalizeCSS>
-				{ children }
+				<NotificationsProvider>
+					{ children }
+				</NotificationsProvider>
 			</MantineProvider>
 		</ColorSchemeProvider>
 	)

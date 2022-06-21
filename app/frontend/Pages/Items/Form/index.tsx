@@ -56,7 +56,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
 				/>
 
-				<Input name="cost" label="Cost" />
+				<Input name="cost" label="Cost" type="currency" />
 
 				<DateTime label="Purchased At" name="purchased_at" />
 			</Group>
