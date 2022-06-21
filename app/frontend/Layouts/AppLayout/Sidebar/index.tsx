@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLayout } from '@/Providers'
-import { Navbar } from '@mantine/core'
+import { Navbar, useMantineTheme } from '@mantine/core'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
@@ -27,6 +27,7 @@ import useNavigationStyles from './useNavigationStyles'
 
 const Sidebar = () => {
 	const { layoutState, setLayoutState } = useLayout()
+	const theme = useMantineTheme()
 	const{ classes } = useNavigationStyles()
 
 	const handleNavClick = () => setLayoutState({ sidebarOpen: false })
@@ -37,7 +38,7 @@ const Sidebar = () => {
 				p={ 0 }
 				hiddenBreakpoint="sm"
 				hidden={ !layoutState.sidebarOpen }
-				width={ { sm: layoutState.sidebarOpen ? 235 : 50 } }
+				width={ { sm: layoutState.sidebarOpen ? theme.other.navbar.width.open : theme.other.navbar.width.closed } }
 				className={ cx(classes.root, { closed: !layoutState.sidebarOpen }) }
 			>
 				<Navbar.Section grow onClick={ handleNavClick } className="links">

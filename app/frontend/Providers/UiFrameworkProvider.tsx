@@ -28,7 +28,7 @@ const useTheme = (colorScheme: 'light'|'dark') => ({
 		navbar: {
 			width: {
 				closed: 50,
-				open: 215,
+				open: 200,
 			},
 		},
 		footer: {
