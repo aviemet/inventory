@@ -34,10 +34,10 @@ const Navigation = () => {
 					<li>
 						<MenuLink href={ Routes.items() } icon={ <AssetsIcon /> }>Inventory</MenuLink>
 						<ul>
-							<li><Link href={ Routes.items() }><ItemsIcon />Hardware</Link></li>
-							<li><Link href={ Routes.accessories() }><AccessoriesIcon />Accessories</Link></li>
-							<li><Link href={ Routes.components() }><ComponentsIcon />Components</Link></li>
-							<li><Link href={ Routes.consumables() }><ConsumablesIcon />Consumables</Link></li>
+							<li><MenuLink href={ Routes.items() } icon={ <ItemsIcon /> }>Hardware</MenuLink></li>
+							<li><MenuLink href={ Routes.accessories() }icon={ <AccessoriesIcon /> }>Accessories</MenuLink></li>
+							<li><MenuLink href={ Routes.components() }icon={ <ComponentsIcon /> }>Components</MenuLink></li>
+							<li><MenuLink href={ Routes.consumables() }icon={ <ConsumablesIcon /> }>Consumables</MenuLink></li>
 						</ul>
 					</li>
 					<li><MenuLink href={ Routes.licenses() } icon={ <LicensesIcon /> }>Licenses</MenuLink></li>
@@ -47,7 +47,7 @@ const Navigation = () => {
 					<li>
 						<MenuLink href={ Routes.vendors() } icon={ <VendorsIcon /> }>Vendors</MenuLink>
 						<ul>
-							<li><Link href={ Routes.contracts() }><ContractsIcon />Contracts</Link></li>
+							<li><MenuLink href={ Routes.contracts() } icon={ <ContractsIcon /> }>Contracts</MenuLink></li>
 						</ul>
 					</li>
 					<li><MenuLink href={ Routes.orders() } icon={ <PurchasesIcon /> }>Purchasing</MenuLink></li>
@@ -59,12 +59,12 @@ const Navigation = () => {
 					<li>
 						<MenuLink href={ Routes.settings() } icon={ <SettingsIcon /> }>Settings</MenuLink>
 						<ul className="up">
-							<li><Link href={ Routes.companies() }>Companies</Link></li>
-							<li><Link href={ Routes.locations() }>Locations</Link></li>
-							<li><Link href={ Routes.departments() }>Departments</Link></li>
-							<li><Link href={ Routes.manufacturers() }>Manufacturers</Link></li>
-							<li><Link href={ Routes.models() }>Models</Link></li>
-							<li><Link href={ Routes.fields() }>Custom Fields</Link></li>
+							<li><MenuLink href={ Routes.companies() } icon={ undefined }>Companies</MenuLink></li>
+							<li><MenuLink href={ Routes.locations() } icon={ undefined }>Locations</MenuLink></li>
+							<li><MenuLink href={ Routes.departments() } icon={ undefined }>Departments</MenuLink></li>
+							<li><MenuLink href={ Routes.manufacturers() } icon={ undefined }>Manufacturers</MenuLink></li>
+							<li><MenuLink href={ Routes.models() } icon={ undefined }>Models</MenuLink></li>
+							<li><MenuLink href={ Routes.fields() } icon={ undefined }>Custom Fields</MenuLink></li>
 						</ul>
 					</li>
 					<li><MenuLink href={ Routes.destroyUserSession() } icon={ <LogoutIcon /> }>Logout</MenuLink></li>

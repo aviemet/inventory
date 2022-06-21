@@ -8,6 +8,11 @@ export default createStyles(theme => {
 
 	return {
 		root: {
+			[`@media (min-width: ${theme.breakpoints.md}px)`]: {
+				top: 0,
+				height: `calc(100% - ${theme.other.footer.height}px)`,
+			},
+
 			transition: 'width 100ms ease-in-out, min-width 100ms ease-in-out',
 
 			'&.closed': {
@@ -50,12 +55,14 @@ export default createStyles(theme => {
 				},
 
 				'&:hover': {
-					background: theme.other.colorSchemeOption(theme.colors.gray[1], theme.colors.dark[6]),
-					borderLeftColor: theme.primaryColor,
+					borderLeftColor: theme.colors[theme.primaryColor][theme.primaryShade.light],
 
-					'span, & ul': {
+					'&, span, ul': {
+						backgroundColor: theme.other.colorSchemeOption(theme.fn.lighten(theme.colors.gray[1], 0.25), theme.colors.dark[6]),
+					},
+
+					'span, ul': {
 						display: 'flex',
-						background: theme.other.colorSchemeOption(theme.colors.gray[1], theme.colors.dark[6]),
 					},
 				},
 			},

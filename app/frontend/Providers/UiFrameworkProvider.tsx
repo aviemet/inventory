@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
+import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
 import { NotificationsProvider } from '@mantine/notifications'
 import { usePage } from '@inertiajs/inertia-react'
@@ -74,6 +74,18 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
 			<MantineProvider theme={ useTheme(colorScheme) } withGlobalStyles withNormalizeCSS>
 				<NotificationsProvider>
+
+					<Global styles={ theme => ({
+						'html, body': {
+							overflow: 'hidden',
+						},
+						'*::selection': {
+							backgroundColor: theme.colors[theme.primaryColor][2],
+						},
+						':root': {
+							colorScheme: theme.colorScheme,
+						},
+					}) } />
 					{ children }
 				</NotificationsProvider>
 			</MantineProvider>
