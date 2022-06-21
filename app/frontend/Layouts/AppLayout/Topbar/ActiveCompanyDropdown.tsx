@@ -1,12 +1,12 @@
 import React from 'react'
 import { SearchableDropdown } from '@/Components/Inputs'
+import { Title } from '@mantine/core'
 import { isEmpty } from 'lodash'
-import 'twin.macro'
 
 const ActiveCompany = ({ user }: { user: Schema.User }) => {
-	if(!user || !user.companies || isEmpty(user.companies)) return <h3 tw="text-brand-dark">Inventory Application</h3>
+	if(!user || !user.companies || isEmpty(user.companies)) return <Title order={ 3 }>Inventory Application</Title>
 
-	if(user.companies.length === 1) return <h3 tw="text-brand-dark">{ user.active_company!.name }</h3>
+	if(user.companies.length === 1) return <Title order={ 3 }>{ user.active_company!.name }</Title>
 
 	return (
 		<SearchableDropdown

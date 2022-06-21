@@ -1,5 +1,4 @@
 import React from 'react'
-// import { InputProps } from 'react-html-props'
 import { Checkbox, type CheckboxProps } from '@mantine/core'
 
 export interface ICheckboxProps extends CheckboxProps {

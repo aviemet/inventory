@@ -1,10 +1,9 @@
 import React from 'react'
 import { useLayout } from '@/Providers'
-import { Navbar, useMantineTheme } from '@mantine/core'
-import cn from 'classnames'
+import { Navbar } from '@mantine/core'
+import cx from 'clsx'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
-import { Link } from '@/Components'
 import {
 	DashboardIcon,
 	AssetsIcon,
@@ -23,12 +22,12 @@ import {
 	ContractsIcon,
 } from '@/Components/Icons'
 
-import './sidebar.css'
 import IconProvider from '@/Providers/IconProvider'
+import useNavigationStyles from './useNavigationStyles'
 
 const Sidebar = () => {
 	const { layoutState, setLayoutState } = useLayout()
-	const theme = useMantineTheme()
+	const{ classes } = useNavigationStyles()
 
 	const handleNavClick = () => setLayoutState({ sidebarOpen: false })
 
@@ -39,82 +38,7 @@ const Sidebar = () => {
 				hiddenBreakpoint="sm"
 				hidden={ !layoutState.sidebarOpen }
 				width={ { sm: layoutState.sidebarOpen ? 235 : 50 } }
-				className={ cn({ closed: !layoutState.sidebarOpen }) }
-				styles={ {
-					root: {
-						transition: 'width 100ms ease-in-out, min-width 100ms ease-in-out',
-
-						'&.closed': {
-							'span, ul ul': {
-								display: 'none',
-							},
-
-							'ul > li > ul': {
-								top: '100%',
-								left: 48,
-
-								'&.up': {
-									top: 'unset',
-									bottom: '100%',
-								},
-							},
-						},
-
-						'.links > ul > li:hover': {
-							width: 185,
-
-							'& > ul': {
-								display: 'block',
-								boxShadow: theme.shadows.xs,
-							}
-						},
-
-						'ul li': {
-							position: 'relative',
-							borderLeft: '2px solid transparent',
-
-							'&:hover': {
-								background: theme.colors.gray[1],
-								borderLeft: `2px solid ${theme.primaryColor}`,
-
-								'span, & ul': {
-									display: 'flex',
-									background: theme.colors.gray[1],
-								},
-							},
-						},
-
-						'ul > li > ul': {
-							display: 'none',
-							flexDirection: 'column',
-							width: '100%',
-							left: 'calc(100% + 48px)',
-							top: 0,
-
-							'&.up': {
-								top: 'unset',
-								bottom: 0,
-							},
-
-							span: {
-								width: 'calc(100% - 48px)',
-							}
-						},
-
-						'span, ul > li > ul': {
-							position: 'absolute',
-							width: '100%',
-						},
-
-						span: {
-							display: 'flex',
-							height: '100%',
-							alignItems: 'center',
-							top: 0,
-							left: 48,
-						},
-					}
-				} }
+				className={ cx(classes.root, { closed: !layoutState.sidebarOpen }) }
 			>
 				<Navbar.Section grow onClick={ handleNavClick } className="links">
 					<ul>

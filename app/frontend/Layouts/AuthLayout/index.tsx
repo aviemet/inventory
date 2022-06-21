@@ -4,7 +4,7 @@ import { createStyles } from '@mantine/core'
 
 const useAuthStyles = createStyles(theme => ({
 	page: {
-		backgroundBlendMode: 'lighten',
+		backgroundBlendMode: theme.other.colorSchemeOption('lighten', 'soft-light'), // 'soft-light' 'multiply'
 		backgroundImage: 'url("/Images/robots-bw.svg")',
 		backgroundColor: theme.colors[theme.primaryColor][6],
 		minHeight: '100vh',

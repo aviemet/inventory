@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react'
-import { useForm, useInputProps } from './Form'
+import React from 'react'
+import { useForm, useInputProps } from './index'
 import Field from './Field'
-import Feedback from './Feedback'
 import DateTimeInput, { type IDateTimeProps } from '../Inputs/DateTime'
 
 interface IDateTimeFormProps extends Omit<IDateTimeProps, 'name'|'onChange'> {
@@ -26,9 +25,9 @@ const DateTime = ({ name, required, onChange, id, ...props }: IDateTimeFormProps
 				value={ String(form.getData(inputName)) }
 				onChange={ handleChange }
 				required={ required }
+				error={ form.errors[name] }
 				{ ...props }
 			/>
-			<Feedback errors={ form.errors[name] } />
 		</Field>
 	)
 }

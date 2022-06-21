@@ -12,7 +12,12 @@ const Topbar = () => {
 	const theme = useMantineTheme()
 
 	return (
-		<Header height={ 50 } p="sm">
+		<Header height={ 50 } p="sm" sx={ theme => ({
+			backgroundColor: theme.other.colorSchemeOption(
+				theme.colors[theme.primaryColor][1],
+				theme.fn.darken(theme.colors[theme.primaryColor][9], 0.75)
+			),
+		}) }>
 			<Box sx={ { display: 'flex', alignItems: 'center', height: '100%' } }>
 
 				<Burger

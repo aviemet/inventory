@@ -21,8 +21,6 @@ import {
 } from '@/Components/Icons'
 import { useLayout } from '@/Providers'
 
-// import './divigation.css'
-
 const Navigation = () => {
 	const { setLayoutState } = useLayout()
 

@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react'
 import { PasswordInput, type PasswordInputProps } from '@mantine/core'
 import cn from 'classnames'
+import Label from './Label'
 
 const PasswordInputComponent = forwardRef<HTMLInputElement, PasswordInputProps>((
 	{ label, required = false, value, onChange, id, pattern, size = 'md', ...props },
@@ -8,9 +9,9 @@ const PasswordInputComponent = forwardRef<HTMLInputElement, PasswordInputProps>(
 ) => {
 	return (
 		<>
-			{ label && <label className={ cn({ 'required': required }) } htmlFor={ id }>
+			{ label && <Label required={ required } htmlFor={ id }>
 				{ label }
-			</label> }
+			</Label> }
 			<PasswordInput
 				id={ id }
 				value={ value }

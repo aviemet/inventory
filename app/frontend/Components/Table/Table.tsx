@@ -11,7 +11,7 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 
 	table: {
 		tableLayout: fixed ? 'fixed' : 'auto',
-		border: `1px solid ${theme.colors.gray[2]}`,
+		border: theme.other.colorSchemeOption(`1px solid ${theme.colors.gray[2]}`, `1px solid ${theme.colors.gray[9]}`),
 		borderTop: 0,
 
 		thead: {
@@ -19,7 +19,15 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 			position: 'sticky',
 			top: 0,
 			zIndex: 1,
-			backgroundColor: theme.colorScheme === 'dark' ? theme.colors.gray[9] : theme.white,
+			backgroundColor: theme.other.colorSchemeOption(theme.white, theme.colors.gray[9]),
+		},
+
+		'tbody, tbody a': {
+			fontSize: '0.9rem',
+		},
+
+		'tbody tr td': {
+			borderColor: theme.other.colorSchemeOption(theme.colors.gray[2], theme.colors.gray[9]),
 		},
 
 		'th, td': {
@@ -37,7 +45,7 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 				paddingRight: '1rem',
 
 				a: {
-					color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+					color: theme.other.colorSchemeOption(theme.black, theme.white),
 				},
 
 				'&:before, &:after': {
