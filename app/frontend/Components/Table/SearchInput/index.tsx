@@ -4,7 +4,7 @@ import { debounce } from 'lodash'
 import { useTableContext } from '../TableContext'
 import { TextInput } from '@/Components/Inputs'
 import { SearchIcon, CrossIcon } from '@/Components/Icons'
-import { ActionIcon, Group } from '@mantine/core'
+import { ActionIcon, Box } from '@mantine/core'
 import ColumnPicker from './ColumnPicker'
 
 interface ISearchInputProps {
@@ -45,15 +45,16 @@ const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) =>
 	}, [searchValue])
 
 	return (
-		<Group>
+		<Box sx={ {
+			display: 'flex'
+		} }>
 			<TextInput
-				type="text"
 				name="search"
 				id="search"
 				value={ searchValue }
 				onChange={ e => setSearchValue(e.target.value) }
 				rightSection={ <ActionIcon onClick={ () => setSearchValue('') }>
-					<CrossIcon />
+					<CrossIcon color="grey" />
 				</ActionIcon> }
 				icon={ <SearchIcon size={ 24 } /> }
 				sx={ {
@@ -66,9 +67,10 @@ const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) =>
 					},
 				} }
 			/>
-			{ /* { hideable && model && columnPicker && <ColumnPicker model={ model } /> } */ }
-		</Group>
+			{ hideable && model && columnPicker && <ColumnPicker model={ model } /> }
+		</Box>
 	)
 }
 
 export default SearchInput
+
