@@ -95,4 +95,4 @@ const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = Rea
 	return <>{ children }</>
 })
 
-export default React.memo(TableProvider)
+export default TableProvider

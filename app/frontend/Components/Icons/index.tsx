@@ -42,6 +42,7 @@ export {
 	MdOutlineAssignmentReturned as CheckinIcon,
 	MdOutlineSearch as SearchIcon,
 	MdViewColumn as ColumnsIcon,
+	MdAdd as NewIcon,
 } from 'react-icons/md'
 
 

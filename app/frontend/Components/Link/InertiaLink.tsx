@@ -1,11 +1,11 @@
 import React from 'react'
-import { InertiaLink } from '@inertiajs/inertia-react'
+import { InertiaLink, type InertiaLinkProps } from '@inertiajs/inertia-react'
 import { Anchor, type AnchorProps } from '@mantine/core'
 import { Button } from '@/Components'
 import { Inertia, Method, Visit } from '@inertiajs/inertia'
 
 
-interface LinkProps extends Omit<AnchorProps<any>, 'href'> {
+interface LinkProps extends Omit<AnchorProps<any>, 'href'>, Omit<InertiaLinkProps, 'color'|'size'> {
 	children: React.ReactNode
 	href: string
 	as: 'a'|'button'

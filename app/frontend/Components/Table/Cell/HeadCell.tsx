@@ -17,4 +17,4 @@ const HeadCell = ({ children, ...props }: ICellProps) => {
 	}
 }
 
-export default React.memo(HeadCell)
+export default HeadCell

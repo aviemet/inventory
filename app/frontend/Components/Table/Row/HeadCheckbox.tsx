@@ -34,4 +34,4 @@ const HeadCheckbox = ({ selected, rows, allChecked, indeterminate }: IRowCheckBo
 	)
 }
 
-export default React.memo(HeadCheckbox)
+export default HeadCheckbox
