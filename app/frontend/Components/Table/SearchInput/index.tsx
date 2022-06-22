@@ -57,15 +57,13 @@ const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) =>
 					<CrossIcon color="grey" />
 				</ActionIcon> }
 				icon={ <SearchIcon size={ 24 } /> }
-				sx={ {
-					root: {
-						flex: '1',
-					},
+				sx={ theme => ({
+					flex: 1,
 					input: {
 						borderTopRightRadius: 0,
 						borderBottomRightRadius: 0,
 					},
-				} }
+				}) }
 			/>
 			{ hideable && model && columnPicker && <ColumnPicker model={ model } /> }
 		</Box>
