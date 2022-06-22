@@ -46,7 +46,8 @@ const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) =>
 
 	return (
 		<Box sx={ {
-			display: 'flex'
+			display: 'flex',
+			flex: 1,
 		} }>
 			<TextInput
 				name="search"

@@ -36,4 +36,4 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 	}
 }
 
-export default React.memo(Row)
+export default Row

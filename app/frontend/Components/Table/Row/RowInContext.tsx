@@ -50,4 +50,4 @@ const RowInContext = ({ children, name, rows, selectable, selected, ...props }: 
 	)
 }
 
-export default React.memo(RowInContext)
+export default RowInContext

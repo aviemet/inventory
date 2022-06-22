@@ -4,6 +4,7 @@ import { Link } from '@/Components'
 import cx from 'clsx'
 import { type ICellProps } from './index'
 import { useTableContext } from '../TableContext'
+import { Box } from '@mantine/core'
 
 interface IHeadCellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
@@ -15,6 +16,7 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 
 	const thRef = useRef<HTMLTableCellElement>(null)
 
+	// Register hideable object with table context for column
 	useEffect(() => {
 		if(hideable && sort && !columns.has(sort)) {
 			columns.set(sort, { label: String(children), index: thRef.current?.dataset?.index })
@@ -27,8 +29,8 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 		hidden = true
 	}
 
+	// Build search params for column sorting
 	const { pathname, search } = window.location
-
 	const params = new URLSearchParams(search)
 	const paramsSort = params.get('sort')
 	const paramsDirection = params.get('direction')
@@ -44,20 +46,19 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 
 	const showSortLink = sort && rows!.length > 1
 
-	if(hidden) {
-		return <></>
-	}
-
 	return (
-		<th
+		<Box
+			component="th"
+			ref={ thRef }
 			className={ cx(
 				{ 'table-column-fit': checkbox },
 				{ 'sortable': showSortLink },
 				{ [direction]: showSortLink && paramsSort === sort },
-				{ 'whitespace-nowrap': nowrap },
-				{ 'hidden': hidden }
 			) }
-			ref={ thRef }
+			sx={ {
+				display: hidden ? 'none' : 'table-cell',
+				whiteSpace: nowrap ? 'nowrap' : 'normal',
+			} }
 			{ ...props }
 		>
 			{ showSortLink ?
@@ -70,8 +71,8 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 				:
 				children
 			}
-		</th>
+		</Box>
 	)
 }
 
-export default React.memo(HeadCellWithContext)
+export default HeadCellWithContext

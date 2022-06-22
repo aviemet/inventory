@@ -3,6 +3,7 @@ import cn from 'classnames'
 import { type ICellProps } from './index'
 import { useTableContext } from '../TableContext'
 import { usePage } from '@inertiajs/inertia-react'
+import { Box } from '@mantine/core'
 
 const BodyCell = ({ children, nowrap, checkbox, ...props }: ICellProps) => {
 	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
@@ -19,17 +20,18 @@ const BodyCell = ({ children, nowrap, checkbox, ...props }: ICellProps) => {
 	}
 
 	return (
-		<td
-			className={ cn(
-				{ 'table-column-fit': checkbox },
-				{ 'whitespace-nowrap': nowrap },
-				{ 'hidden': hidden }
-			) }
+		<Box
+			component="td"
 			ref={ tdRef }
+			className={ cn({ 'table-column-fit': checkbox }) }
+			sx={ {
+				display: hidden ? 'none' : 'table-cell',
+				whiteSpace: nowrap ? 'nowrap' : 'normal',
+			} }
 			{ ...props }
 		>
 			{ children }
-		</td>
+		</Box>
 	)
 }
 

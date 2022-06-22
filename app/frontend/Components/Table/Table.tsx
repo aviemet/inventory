@@ -15,6 +15,7 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 		border: theme.other.colorSchemeOption(`1px solid ${theme.colors.gray[2]}`, `1px solid ${theme.colors.gray[9]}`),
 		borderTop: 0,
 		marginBottom: '0 !important',
+		width: '100%',
 
 		thead: {
 			boxShadow: theme.shadows.xs,
