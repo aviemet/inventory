@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button, type ButtonProps } from '@mantine/core'
 
-const ButtonComponent = ({ children, ...props }: ButtonProps<'button'>) => {
+const ButtonComponent = ({ children, type = 'button', ...props }: ButtonProps<'button'>) => {
 	return (
-		<Button { ...props }>{ children }</Button>
+		<Button type={ type } { ...props }>{ children }</Button>
 	)
 }
 

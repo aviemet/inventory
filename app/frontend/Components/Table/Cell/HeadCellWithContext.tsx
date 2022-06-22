@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { usePage } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
-import cn from 'classnames'
+import cx from 'clsx'
 import { type ICellProps } from './index'
 import { useTableContext } from '../TableContext'
 
@@ -44,9 +44,13 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 
 	const showSortLink = sort && rows!.length > 1
 
+	if(hidden) {
+		return <></>
+	}
+
 	return (
 		<th
-			className={ cn(
+			className={ cx(
 				{ 'table-column-fit': checkbox },
 				{ 'sortable': showSortLink },
 				{ [direction]: showSortLink && paramsSort === sort },

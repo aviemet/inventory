@@ -7,12 +7,14 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 		overflow: 'auto',
 		position: 'relative',
 		maxHeight: '100%',
+		borderTop: `1px solid ${theme.other.colorSchemeOption(theme.colors.gray[2], theme.colors.gray[9])}`
 	},
 
 	table: {
 		tableLayout: fixed ? 'fixed' : 'auto',
 		border: theme.other.colorSchemeOption(`1px solid ${theme.colors.gray[2]}`, `1px solid ${theme.colors.gray[9]}`),
 		borderTop: 0,
+		marginBottom: '0 !important',
 
 		thead: {
 			boxShadow: theme.shadows.xs,
