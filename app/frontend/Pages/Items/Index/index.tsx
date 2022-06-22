@@ -33,7 +33,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 
 					<TableTitleSection
 						title={ title }
-						popover={
+						menu={
 							<Popover>
 								<Option href={ Routes.newItem() }>
 									Create New Asset

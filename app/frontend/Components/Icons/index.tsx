@@ -14,6 +14,11 @@ export {
 	Building as CompaniesIcon,
 	BuildingFactory as ManufacturersIcon,
 	X as CrossIcon,
+	// ChevronRight as NextIcon,
+	ChevronsRight as LastIcon,
+	// ChevronLeft as PreviousIcon,
+	ChevronsLeft as FirstIcon,
+	Dots as DotsIcon,
 } from 'tabler-icons-react'
 
 export {
@@ -73,4 +78,6 @@ export {
 
 export {
 	GrMapLocation as LocationsIcon,
+	GrFormNext as NextIcon,
+	GrFormPrevious as PreviousIcon,
 } from 'react-icons/gr'

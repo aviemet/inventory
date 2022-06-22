@@ -1,22 +1,24 @@
 import React from 'react'
-import { type InertiaLinkProps } from '@inertiajs/inertia-react'
 import { type Method, type Visit } from '@inertiajs/inertia'
 import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
+import { type AnchorProps } from '@mantine/core'
 
-export interface LinkProps extends InertiaLinkProps {
+export interface ILinkProps extends AnchorProps<'a'> {
+	href: string
 	method?: Method
 	visit?: Omit<Visit, 'method'>
 	external?: boolean
 	compact?: boolean
+	as?: 'a'|'button'
 }
 
 const externalPrefix = ['http', 'www']
 
-const Link = ({ children, href, as = 'a', method, visit, external = false, ...props }: LinkProps) => {
+const Link = ({ children, href, as = 'a', method, visit, external, ...props }: ILinkProps) => {
 	let renderExternal = external
 
-	if(!external) {
+	if(external === undefined) {
 		externalPrefix.some(prefix => {
 			if(href.startsWith(prefix)) {
 				renderExternal = true
@@ -25,7 +27,7 @@ const Link = ({ children, href, as = 'a', method, visit, external = false, ...pr
 	}
 
 	return renderExternal ?
-		<ExternalLink href={ href }>{ children }</ExternalLink>
+		<ExternalLink href={ href } { ...props }>{ children }</ExternalLink>
 		:
 		<InertiaLink href={ href } as={ as } method={ method } visit={ visit } { ...props }>{ children }</InertiaLink>
 }
