@@ -5,7 +5,7 @@ import { Anchor, type AnchorProps } from '@mantine/core'
 
 interface IExternalLinkProps extends AnchorProps<'a'> {
 	href: string
-	as?: string
+	as?: 'a'|'button'
 }
 
 const ExternalLink = ({ children, href, as, ...props }: IExternalLinkProps) => {

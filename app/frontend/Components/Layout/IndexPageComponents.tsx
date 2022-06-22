@@ -23,7 +23,7 @@ export const TableTitleSection = ({ title, menu }: ITableTitleSectionProps) => {
 	const { tableState: { hideable, model } } = useTableContext()
 
 	return (
-		<Group position="apart">
+		<Group position="apart" align="start">
 			<Title sx={ { flex: 2 } }>{ title }</Title>
 			<Box sx={ { flex: 1 } }>
 				<SearchInput model={ model } columnPicker={ hideable } />
