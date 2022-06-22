@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStyles, Table, type TableProps } from '@mantine/core'
-import cn from 'classnames'
+import cx from 'clsx'
 
 const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 	wrapper: {
@@ -92,7 +92,7 @@ const TableComponent = ({ children, className, fixed = false, ...props }: ITable
 
 	return (
 		<div className={ classes.wrapper }>
-			<Table striped highlightOnHover className={ cn(className, classes.table) } { ...props }>
+			<Table striped highlightOnHover className={ cx(className, classes.table) } { ...props }>
 				{ children }
 			</Table>
 		</div>
