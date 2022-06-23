@@ -21,7 +21,7 @@ const Topbar = () => {
 			),
 			color: theme.white,
 
-			[`@media (min-width: ${theme.breakpoints.md}px)`]: {
+			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
 				left: theme.other.navbar.width.open,
 
 				'&.closed': {

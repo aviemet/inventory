@@ -5,7 +5,7 @@ export default createStyles((theme) => ({
 		maxWidth: `${theme.breakpoints.md}px`,
 
 		'form.format-grid .field': {
-			[`@media (min-width: ${theme.breakpoints.md}px)`]: {
+			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
 				'&:not(.textarea)': {
 					display: 'grid',
 					gridTemplateColumns: `${theme.other.form.label.width} 1fr`,
@@ -46,7 +46,7 @@ export default createStyles((theme) => ({
 			},
 
 			// On Desktop use a 2 column grid to show labels and inputs, with feedback elements below input
-			[`@media (min-width: ${theme.breakpoints.md}px)`]: {
+			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
 				'&:not(.textarea)': {
 					borderTopWidth: 0,
 					borderLeftWidth: 2,
