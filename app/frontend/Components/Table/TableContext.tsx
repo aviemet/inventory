@@ -19,7 +19,7 @@ interface ITableSettings {
 	selectable: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
-	columns: Map<string, { label: string, index?: string }>
+	columns: Map<string, string>
 	selected: Set<string>
 	hideable: boolean
 	model?: string
@@ -58,7 +58,7 @@ const TableProvider: React.FC<ITableContextProviderProps> = ({
 	const [tableState, setTableState] = useReducer(tableReducer, {
 		selectable,
 		rows,
-		columns: new Map<string, { label: string, index?: string }>(),
+		columns: new Map<string, string>(),
 		pagination,
 		selected: new Set<string>(),
 		hideable,

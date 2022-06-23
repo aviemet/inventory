@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React from 'react'
 import { useTableContext } from '../TableContext'
 import { TRProps } from 'react-html-props'
 import RowInContext from './RowInContext'
@@ -11,20 +11,11 @@ interface IRowProps extends Omit<TRProps, 'children'|'ref'> {
 
 const Row = ({ children, render, name, ...props }: IRowProps) => {
 	try{
-		const { tableState: { rows, selectable, selected, hideable } } = useTableContext()
+		const { tableState: { rows, selectable, selected } } = useTableContext()
 
 		return (
 			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected } { ...props }>
-				{ hideable ? (
-					// Inject data attribute to allow dynamically hiding columns
-					children && Children.map(children, (child, index) => {
-						return React.cloneElement(child, {
-							'data-index': index
-						})
-					})
-				)
-					: children
-				}
+				{ children }
 			</RowInContext>
 		)
 	} catch(e) {

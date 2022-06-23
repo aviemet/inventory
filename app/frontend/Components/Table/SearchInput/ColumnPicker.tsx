@@ -43,7 +43,7 @@ const ColumnPicker = ({ model }: IColumnPickerProps) => {
 			placement="end"
 			spacing="xs"
 		>
-			{ [...columns].map(([name, { label }]) => (
+			{ [...columns].map(([name, label]) => (
 				<Box key={ name } p={ 4 }>
 					<Checkbox
 						name={ name }

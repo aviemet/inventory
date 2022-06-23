@@ -5,18 +5,17 @@ import { useTableContext } from '../TableContext'
 import { usePage } from '@inertiajs/inertia-react'
 import { Box } from '@mantine/core'
 
-const BodyCell = ({ children, nowrap, checkbox, ...props }: ICellProps) => {
+export interface IBodyCellProps extends Omit<ICellProps, 'hideable'> {
+	hideable?: string
+}
+
+const BodyCell = ({ children, nowrap, checkbox, hideable, ...props }: IBodyCellProps) => {
 	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
-	const { tableState: { columns, model } } = useTableContext()
+	const { tableState: { model } } = useTableContext()
 	const tdRef = useRef<HTMLTableCellElement>(null)
 
-	let hidden = false
-	if(model && tdRef.current?.dataset?.index && columns.size > 0) {
-		for(let [name, { index }] of columns.entries()) {
-			if(index === tdRef.current.dataset.index && table_preferences?.[model]?.hide?.[name]) {
-				hidden = true
-			}
-		}
+	if(hideable && model && table_preferences?.[model]?.hide?.[hideable]) {
+		return <></>
 	}
 
 	return (
@@ -25,7 +24,6 @@ const BodyCell = ({ children, nowrap, checkbox, ...props }: ICellProps) => {
 			ref={ tdRef }
 			className={ cn({ 'table-column-fit': checkbox }) }
 			sx={ {
-				display: hidden ? 'none' : 'table-cell',
 				whiteSpace: nowrap ? 'nowrap' : 'normal',
 			} }
 			{ ...props }

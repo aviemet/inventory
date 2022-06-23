@@ -10,23 +10,26 @@ interface IHeadCellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
 }
 
-const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hideable = true, ...props }: IHeadCellWithContextProps) => {
+const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hideable, ...props }: IHeadCellWithContextProps) => {
 	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
 	const { tableState: { columns, model }, setTableState } = useTableContext()
 
 	const thRef = useRef<HTMLTableCellElement>(null)
 
+	const hideableString = hideable || sort
+
 	// Register hideable object with table context for column
 	useEffect(() => {
-		if(hideable && sort && !columns.has(sort)) {
-			columns.set(sort, { label: String(children), index: thRef.current?.dataset?.index })
+		if(hideable === false) return
+
+		if(hideableString !== undefined && !columns.has(hideableString)) {
+			columns.set(hideableString, String(children))
 			setTableState({ columns })
 		}
 	}, [])
 
-	let hidden = false
-	if(hideable && sort && model && table_preferences?.[model]?.hide?.[sort]) {
-		hidden = true
+	if(hideableString !== undefined && model && table_preferences?.[model]?.hide?.[hideableString]) {
+		return <></>
 	}
 
 	// Build search params for column sorting
@@ -56,7 +59,6 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 				{ [direction]: showSortLink && paramsSort === sort },
 			) }
 			sx={ {
-				display: hidden ? 'none' : 'table-cell',
 				whiteSpace: nowrap ? 'nowrap' : 'normal',
 			} }
 			{ ...props }
