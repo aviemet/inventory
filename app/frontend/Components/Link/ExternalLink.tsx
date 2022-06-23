@@ -3,7 +3,7 @@ import normalizeUrl from 'normalize-url'
 import { ExternalLinkIcon } from '@/Components/Icons'
 import { Anchor, type AnchorProps } from '@mantine/core'
 
-interface IExternalLinkProps extends AnchorProps<'a'> {
+interface IExternalLinkProps extends Omit<AnchorProps<'a'>, 'component'> {
 	href: string
 	as?: 'a'|'button'
 }

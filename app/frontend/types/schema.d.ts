@@ -363,6 +363,7 @@ declare namespace Schema {
 		updated_at: string;
 		audits?: AuditedAudit[];
 		created_by?: User;
+		location?: Location;
 	}
 
 	interface Warranty {
