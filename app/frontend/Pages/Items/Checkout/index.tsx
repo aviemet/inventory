@@ -17,7 +17,7 @@ interface ICheckoutItemProps {
 const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Item'
 	const { props } = usePage<InertiaPage>()
-	console.log({ props })
+
 	return (
 		<>
 			<Head title={ title }></Head>

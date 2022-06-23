@@ -46,6 +46,7 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 			'&.sortable': {
 				position: 'relative',
 				paddingRight: '1rem',
+				whiteSpace: 'nowrap',
 
 				a: {
 					color: theme.other.colorSchemeOption(theme.black, theme.white),

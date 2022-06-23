@@ -60,7 +60,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 										<Link href={ Routes.item(item) }>{ item.name }</Link>
 									</Table.Cell>
 
-									<Table.Cell hideable="models.name">
+									<Table.Cell nowrap hideable="models.name">
 										<Link href={ Routes.item(item) }>{ item.model?.name }</Link>
 									</Table.Cell>
 
