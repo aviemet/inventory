@@ -3,7 +3,7 @@ import ActiveCompanyDropdown from './ActiveCompanyDropdown'
 import { useLayout } from '@/Providers'
 import { usePage } from '@inertiajs/inertia-react'
 import QuickNewMenu from './QuickNewMenu'
-import { Box, Header, Burger, useMantineTheme } from '@mantine/core'
+import { Box, Header, Burger, useMantineTheme, Group } from '@mantine/core'
 import { ToggleColorSchemeButton } from '@/Components/Button'
 import cx from 'clsx'
 
@@ -43,10 +43,10 @@ const Topbar = () => {
 					<ActiveCompanyDropdown user={ user } />
 				</Box>
 
-				<div>
+				<Group>
 					<ToggleColorSchemeButton />
 					<QuickNewMenu />
-				</div>
+				</Group>
 
 			</Box>
 		</Header>
