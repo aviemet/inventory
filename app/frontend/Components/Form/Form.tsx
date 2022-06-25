@@ -14,7 +14,7 @@ interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'>
 	model?: string
 	data: T
 	method?: HTTPVerb
-	to: string
+	to?: string
 	grid?: boolean
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
 	onChange?: (object: Inertia.FormProps) => void

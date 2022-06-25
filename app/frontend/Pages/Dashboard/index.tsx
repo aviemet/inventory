@@ -1,7 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Section } from '@/Components'
-import { CurrencyInput } from '@/Components/Inputs'
 
 const Dashboard = () => {
 	return (
@@ -10,7 +9,6 @@ const Dashboard = () => {
 
 			<Section>
 				<h1>Dashboard!</h1>
-				<CurrencyInput />
 			</Section>
 		</>
 	)

@@ -2,7 +2,7 @@ import React from 'react'
 import { Menu, Button, type MenuProps, ActionIcon } from '@mantine/core'
 
 interface IMenuComponentProps extends Omit<MenuProps, 'control'> {
-	icon?: React.ReactNode
+	icon?: JSX.Element
 	label?: string|React.ReactNode
 }
 
@@ -10,6 +10,7 @@ const MenuComponent = ({ children, icon, label, ...props }: IMenuComponentProps)
 	let control
 
 	if(icon && !label) {
+		icon.props.size = 16
 		control = <ActionIcon>{ icon }</ActionIcon>
 	} else if(icon || label) {
 		control = <Button>{ icon && icon }{ label && label }</Button>
