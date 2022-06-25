@@ -1,13 +1,8 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link } from '@/Components'
+import { Link, Table } from '@/Components'
 import { Routes, formatter } from '@/lib'
-import * as Table from '@/Components/Table'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
-import {
-	TableSection,
-	TableTitleSection,
-} from '@/Components/Layout/IndexPageComponents'
 
 interface IItemsIndexProps {
 	items: Schema.Item[]
@@ -21,7 +16,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<TableSection>
+			<Table.Section>
 				<Table.TableProvider
 					selectable
 					hideable
@@ -30,13 +25,13 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 					pagination={ pagination }
 				>
 
-					<TableTitleSection
+					<Table.Title
 						title={ title }
 						newLabel="Create New Asset"
 						newLink={ Routes.newItem() }
 					/>
 
-					<Table.Table>
+					<Table>
 						<Table.Head>
 							<Table.Row>
 								<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
@@ -104,11 +99,11 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 								</Table.Row>
 							) } />
 						</Table.Body>
-					</Table.Table>
+					</Table>
 
 					<Table.Pagination />
 				</Table.TableProvider>
-			</TableSection>
+			</Table.Section>
 		</>
 	)
 }

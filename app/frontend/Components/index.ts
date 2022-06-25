@@ -4,6 +4,9 @@ export { default as Card } from './Card'
 export { default as Section } from './Section'
 export { Container } from '@mantine/core'
 export { default as Menu } from './Menu'
-import Tile from './Tile'
-console.log({ Tile })
-export { Tile }
+export { default as Tile } from './Tile'
+export { default as Flex } from './Flex'
+export { default as Heading } from './Heading'
+export { default as Tabs } from './Tabs'
+export { default as Table } from './Table'
+
