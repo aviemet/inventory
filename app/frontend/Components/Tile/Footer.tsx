@@ -1,18 +1,27 @@
+import { Box } from '@mantine/core'
 import React from 'react'
-import tw, { styled } from 'twin.macro'
 
-const Footer = ({ children }) => {
+const Footer = ({ children }: { children: React.ReactNode }) => {
 	return (
-		<TileFooter tw="flex bg-gray-100 rounded-b-lg">
+		<Box
+			component="footer"
+			sx={ theme => ({
+				display: 'flex',
+				borderBottomRightRadius: 8,
+				borderBottomLeftRadius: 8,
+				backgroundColor: theme.other.colorSchemeOption(
+					theme.fn.lighten(theme.colors[theme.primaryColor][theme.primaryShade.light], 0.75),
+					theme.fn.darken(theme.colors[theme.primaryColor][theme.primaryShade.dark], 0.75),
+				),
+
+				'& > *': {
+					padding: '12px 24px !important',
+				},
+			}) }
+		>
 			{ children }
-		</TileFooter>
+		</Box>
 	)
 }
 
 export default Footer
-
-const TileFooter = styled.div`
-  & > * {
-    ${tw`sm:px-8 px-4 py-3`}
-  }
-`

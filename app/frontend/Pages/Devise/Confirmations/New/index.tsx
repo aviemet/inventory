@@ -15,7 +15,7 @@ const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
 	}
 
 	return (
-		<Tile.Container>
+		<Tile>
 			<Form model="user" data={ { user: { email: user.email || '' } } } to={ Routes.userConfirmation() } onSubmit={ handleResendConfirmation } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-3">
@@ -39,7 +39,7 @@ const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
 					<HoverLink href={ Routes.newUserSession() } tw="rounded-b-lg">Log In Instead</HoverLink>
 				</Tile.Footer>
 			</Form>
-		</Tile.Container>
+		</Tile>
 	)
 }
 

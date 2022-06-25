@@ -31,7 +31,7 @@ const Register = () => {
 
 	// TODO: Disable submit until all inputs are valid. Async check for existing email address on input blur
 	return (
-		<Tile.Container>
+		<Tile>
 			<Form model="user" data={ defaultData } to={ Routes.userRegistration() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 
@@ -81,7 +81,7 @@ const Register = () => {
 					<HoverLink href={ Routes.newUserSession() } tw="rounded-b-lg">Log In Instead</HoverLink>
 				</Tile.Footer>
 			</Form>
-		</Tile.Container>
+		</Tile>
 	)
 }
 

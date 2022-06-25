@@ -18,7 +18,7 @@ const PasswordsNew = () => {
 	}
 
 	return (
-		<Tile.Container>
+		<Tile>
 			<Form model="user" data={ defaultData } to={ Routes.newUserPassword() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
@@ -39,7 +39,7 @@ const PasswordsNew = () => {
 					<HoverLink href={ Routes.newUserSession() } tw="rounded-b-lg">Log In</HoverLink>
 				</Tile.Footer>
 			</Form>
-		</Tile.Container>
+		</Tile>
 	)
 }
 

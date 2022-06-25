@@ -1,11 +1,11 @@
 import React from 'react'
-import 'twin.macro'
+import { Box } from '@mantine/core'
 
-const Content = ({ children }) => {
+const Content = ({ children }: { children: React.ReactNode }) => {
 	return (
-		<div tw="sm:px-8 px-4 pt-6 pb-1">
+		<Box px={ 24 } pt={ 24 } pb={ 4 }>
 			{ children }
-		</div>
+		</Box>
 	)
 }
 

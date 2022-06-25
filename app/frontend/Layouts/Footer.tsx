@@ -1,12 +1,16 @@
 import React from 'react'
-import { Footer } from '@mantine/core'
+import { Footer, Group, useMantineTheme } from '@mantine/core'
+import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const FooterComponent = () => {
+	const theme = useMantineTheme()
+
 	return (
-		<Footer height={ 35 } p="xs">
-			<div className="flex flex-row-reverse text-gray-600">
-				©{ (new Date).getFullYear() }
-			</div>
+		<Footer height={ theme.other.footer.height } py={ 4 } px={ 8 }>
+			<Group position="apart">
+				<ToggleColorSchemeButton />
+				<div>©{ (new Date).getFullYear() }</div>
+			</Group>
 		</Footer>
 	)
 }

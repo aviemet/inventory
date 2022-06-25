@@ -36,7 +36,7 @@ const CompleteRegistration = () => {
 	}
 
 	return (
-		<Tile.Container>
+		<Tile>
 			<Form model="person" data={ defaultData } to={ Routes.completeRegistration() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
@@ -70,7 +70,7 @@ const CompleteRegistration = () => {
 					<HoverLink href={ Routes.newUserSession() } tw="rounded-b-lg">Log In Instead</HoverLink>
 				</Tile.Footer>
 			</Form>
-		</Tile.Container>
+		</Tile>
 	)
 }
 
