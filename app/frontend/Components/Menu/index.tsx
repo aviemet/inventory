@@ -1,5 +1,6 @@
 import React from 'react'
 import { Menu, Button, type MenuProps, ActionIcon } from '@mantine/core'
+import MenuItem from './MenuItem'
 
 interface IMenuComponentProps extends Omit<MenuProps, 'control'> {
 	icon?: JSX.Element
@@ -21,6 +22,6 @@ const MenuComponent = ({ children, icon, label, ...props }: IMenuComponentProps)
 	return <Menu { ...props }>{ children }</Menu>
 }
 
-MenuComponent.Item = Menu.Item
+MenuComponent.Item = MenuItem
 
 export default MenuComponent

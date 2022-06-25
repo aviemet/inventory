@@ -2,6 +2,16 @@ import React from 'react'
 import { createStyles, Table, type TableProps } from '@mantine/core'
 import cx from 'clsx'
 
+import Head from './Head'
+import Body from './Body'
+import RowIterator from './RowIterator'
+import Row from './Row'
+import Cell from './Cell'
+import Footer from './Footer'
+import Pagination from './Pagination'
+import TableProvider from './TableContext'
+import { TableSection, TableTitleSection } from './IndexPageComponents'
+
 const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 	wrapper: {
 		overflow: 'auto',
@@ -89,7 +99,24 @@ interface ITableProps extends TableProps {
 	fixed?: boolean
 }
 
-const TableComponent = ({ children, className, fixed = false, ...props }: ITableProps) => {
+type TableComponent = (({ children, className, fixed, ...props }: ITableProps) => JSX.Element)
+
+type TableObjects = {
+	Head: typeof Head
+	Body: typeof Body
+	RowIterator: typeof RowIterator
+	Row: typeof Row
+	Cell: typeof Cell
+	Footer: typeof Footer
+	Pagination: typeof Pagination
+	TableProvider: typeof TableProvider
+	Section: typeof TableSection
+	Title: typeof TableTitleSection
+}
+
+export type TableObject = TableComponent & TableObjects
+
+const TableComponent: TableComponent & TableObjects = ({ children, className, fixed = false, ...props }) => {
 	const { classes } = useTableStyles(fixed)
 
 	return (
@@ -100,5 +127,16 @@ const TableComponent = ({ children, className, fixed = false, ...props }: ITable
 		</div>
 	)
 }
+
+TableComponent.Head = Head
+TableComponent.Body = Body
+TableComponent.RowIterator = RowIterator
+TableComponent.Row = Row
+TableComponent.Cell = Cell
+TableComponent.Footer = Footer
+TableComponent.Pagination = Pagination
+TableComponent.TableProvider = TableProvider
+TableComponent.Section = TableSection
+TableComponent.Title = TableTitleSection
 
 export default TableComponent
