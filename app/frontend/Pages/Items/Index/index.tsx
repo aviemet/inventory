@@ -1,8 +1,9 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link, Table } from '@/Components'
 import { Routes, formatter } from '@/lib'
+import { Link, Table } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
+import { NewIcon } from '@/Components/Icons'
 
 interface IItemsIndexProps {
 	items: Schema.Item[]
@@ -27,8 +28,9 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 
 					<Table.Title
 						title={ title }
-						newLabel="Create New Asset"
-						newLink={ Routes.newItem() }
+						menuOptions={ [
+							{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+						] }
 					/>
 
 					<Table>

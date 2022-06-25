@@ -1,13 +1,9 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link } from '@/Components'
+import { Link, Table } from '@/Components'
 import { Routes, formatter } from '@/lib'
-import * as Table from '@/Components/Table'
-import { EditButton } from '@/Components/Button'
-import {
-	TableSection,
-	TableTitleSection,
-} from '@/Components/Layout/IndexPageComponents'
+import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
+import { NewIcon } from '@/Components/Icons'
 
 interface IAccessoriesIndexProps {
 	accessories: Schema.Accessory[]
@@ -21,7 +17,7 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 		<>
 			<Head title={ title }></Head>
 
-			<TableSection>
+			<Table.Section>
 				<Table.TableProvider
 					selectable
 					hideable
@@ -30,13 +26,14 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 					pagination={ pagination }
 				>
 
-					<TableTitleSection
+					<Table.Title
 						title={ title }
-						newLabel="Create New Accessory"
-						newLink={ Routes.newAccessory() }
+						menuOptions={ [
+							{ label: 'Create New Accessory', href: Routes.newAccessory(), icon: NewIcon },
+						] }
 					/>
 
-					<Table.Table>
+					<Table>
 						<Table.Head>
 							<Table.Row>
 								<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
@@ -49,7 +46,7 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 								<Table.Cell sort="cost_cents">Cost</Table.Cell>
 								<Table.Cell sort="departments.name">Qty</Table.Cell>
 								<Table.Cell sort="departments.name">Min Qty</Table.Cell>
-								<Table.Cell className="text-right">Actions</Table.Cell>
+								<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 							</Table.Row>
 						</Table.Head>
 
@@ -95,18 +92,23 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 
 									<Table.Cell>{ accessory.min_qty }</Table.Cell>
 
-									<Table.Cell className="table-column-fit text-right">
+									<Table.Cell className="table-column-fit">
+										{ accessory.assigned ?
+											<CheckinButton href={ Routes.checkinAccessory(accessory) } />
+											:
+											<CheckoutButton href={ Routes.checkoutAccessory(accessory) } />
+										}
 										<EditButton href={ Routes.editAccessory(accessory) } />
 									</Table.Cell>
 
 								</Table.Row>
 							) } />
 						</Table.Body>
-					</Table.Table>
+					</Table>
 
 					<Table.Pagination />
 				</Table.TableProvider>
-			</TableSection>
+			</Table.Section>
 		</>
 	)
 }

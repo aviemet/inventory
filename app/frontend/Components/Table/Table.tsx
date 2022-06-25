@@ -10,7 +10,8 @@ import Cell from './Cell'
 import Footer from './Footer'
 import Pagination from './Pagination'
 import TableProvider from './TableContext'
-import { TableSection, TableTitleSection } from './IndexPageComponents'
+import TableSection from './Section'
+import TableTitleSection from './Title'
 
 const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 	wrapper: {
