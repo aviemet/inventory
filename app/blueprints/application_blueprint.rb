@@ -26,7 +26,7 @@ class ApplicationBlueprint < Blueprinter::Base
   private
 
   def self.currency_for(obj)
-    obj&.cost&.amount.to_f
+    obj&.cost&.amount&.to_f unless obj.cost.nil?
   end
 
   def self.only(*keys)
