@@ -44,8 +44,8 @@ const Topbar = () => {
 				</Box>
 
 				<Group>
-					<ToggleColorSchemeButton />
 					<QuickNewMenu />
+					<ToggleColorSchemeButton />
 				</Group>
 
 			</Box>

@@ -24,7 +24,7 @@ const Login = () => {
 	}
 
 	return (
-		<Tile.Container>
+		<Tile>
 			<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 
@@ -68,7 +68,7 @@ const Login = () => {
 					<HoverLink href={ Routes.newUserRegistration() } tw="rounded-br-lg">Register</HoverLink>
 				</Tile.Footer>
 			</Form>
-		</Tile.Container>
+		</Tile>
 	)
 }
 

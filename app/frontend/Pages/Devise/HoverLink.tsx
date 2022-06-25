@@ -1,10 +1,22 @@
 import React from 'react'
-import { Link } from '@/Components'
-import tw, { styled } from 'twin.macro'
+import Link, { type ILinkProps } from '@/Components/Link'
+import tw from 'twin.macro'
+import styled from '@emotion/styled'
 
-export default styled(Link)`
-	${tw`flex-1 text-center transition-all duration-500 border-t`}
-	&:hover {
-		${tw`bg-violet-100`}
-	}
-`
+const HoverLink = ({ children, ...props }: ILinkProps) => <Link sx={ theme=>({
+	flex: 1,
+	textAlign: 'center',
+	transitionProperty: 'all',
+	transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+	transitionDuration: '500ms',
+	borderTopWidth: '1px',
+
+	'&:hover': {
+		backgroundColor: theme.other.colorSchemeOption(
+			theme.colors[theme.primaryColor][2],
+			theme.colors[theme.primaryColor][6]
+		),
+	},
+}) } { ...props }>{ children }</Link>
+
+export default HoverLink

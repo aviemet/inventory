@@ -15,7 +15,7 @@ import { Routes } from '@/lib'
 
 const QuickNewMenu = () => {
 	return (
-		<Menu control={ <Button>Mantine Button</Button> }>
+		<Menu label="New" icon={ <PlusCircleIcon /> }>
 			<Link href={ Routes.newItem() }>
 				<Menu.Item><ItemsIcon />New Item</Menu.Item>
 			</Link>
