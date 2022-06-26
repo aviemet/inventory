@@ -12,6 +12,7 @@ import Pagination from './Pagination'
 import TableProvider from './TableContext'
 import TableSection from './Section'
 import TableTitleSection from './Title'
+import ConditionalWrapper from '../ConditionalWrapper'
 
 const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 	wrapper: {
@@ -98,9 +99,10 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 
 interface ITableProps extends TableProps {
 	fixed?: boolean
+	wrapper?: boolean
 }
 
-type TableComponent = (({ children, className, fixed, ...props }: ITableProps) => JSX.Element)
+type TableComponent = (({ children, className, fixed, wrapper, ...props }: ITableProps) => JSX.Element)
 
 type TableObjects = {
 	Head: typeof Head
@@ -117,15 +119,18 @@ type TableObjects = {
 
 export type TableObject = TableComponent & TableObjects
 
-const TableComponent: TableComponent & TableObjects = ({ children, className, fixed = false, ...props }) => {
+const TableComponent: TableComponent & TableObjects = ({ children, className, wrapper = true, fixed = false, striped = true, highlightOnHover = true, ...props }) => {
 	const { classes } = useTableStyles(fixed)
 
 	return (
-		<div className={ classes.wrapper }>
-			<Table striped highlightOnHover className={ cx(className, classes.table) } { ...props }>
+		<ConditionalWrapper
+			condition={ wrapper }
+			wrapper={ children => <div className={ classes.wrapper }>{ children }</div> }
+		>
+			<Table striped={ striped } highlightOnHover={ highlightOnHover } className={ cx(className, classes.table) } { ...props }>
 				{ children }
 			</Table>
-		</div>
+		</ConditionalWrapper>
 	)
 }
 

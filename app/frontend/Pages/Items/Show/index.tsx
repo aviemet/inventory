@@ -36,125 +36,119 @@ const Show = ({ item }: IShowItemProps) => {
 
 				<Tabs>
 					<Tabs.Tab label="Details">
-						<Section>
-							<Heading order={ 3 }>Details</Heading>
+						<Heading order={ 3 }>Details</Heading>
 
-							<Table>
-								<Table.Head>
+						<Table>
+							<Table.Head>
 
-								</Table.Head>
-							</Table>
+							</Table.Head>
+						</Table>
 
-							<div className="item-details">
+						<div className="item-details">
 
-								<div className="item-row">
-									<label>Model:</label>
-									<div className="value">
-										{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer!) }>
-											{ item.manufacturer!.name }
-										</Link> }
-									</div>
+							<div className="item-row">
+								<label>Model:</label>
+								<div className="value">
+									{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer!) }>
+										{ item.manufacturer!.name }
+									</Link> }
 								</div>
-
-								<div className="item-row">
-									<label>Category:</label>
-									<div className="value">
-										{ item.category && <Link href={ Routes.category(item.category.slug) }>
-											{ item.category!.name }
-										</Link> }
-									</div>
-								</div>
-
-								<div className="item-row">
-									<label>Serial:</label>
-									<div className="value">
-										{ item.serial }
-									</div>
-								</div>
-
-								<div className="item-row">
-									<label>Assigned To:</label>
-									<div className="value">
-								Figure this out
-									</div>
-								</div>
-
-								<div className="item-row">
-									<label>Asset Tag:</label>
-									<div className="value">
-										{ item.asset_tag }
-									</div>
-								</div>
-
-								<div className="item-row">
-									<label>Purchase Cost:</label>
-									<div className="value">
-										{ item.cost && formatter.currency(item.cost, item.cost_currency) }
-									</div>
-								</div>
-
-								<div className="item-row">
-									<label>Purchase Date:</label>
-									<div className="value">
-										{ item.purchased_at && formatter.date.short(item.purchased_at) }
-									</div>
-								</div>
-
-								<div className="item-row">
-									<label>Vendor:</label>
-									<div className="value">
-										{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
-											{ item.vendor.name }
-										</Link> }
-									</div>
-								</div>
-
 							</div>
-						</Section>
+
+							<div className="item-row">
+								<label>Category:</label>
+								<div className="value">
+									{ item.category && <Link href={ Routes.category(item.category.slug) }>
+										{ item.category!.name }
+									</Link> }
+								</div>
+							</div>
+
+							<div className="item-row">
+								<label>Serial:</label>
+								<div className="value">
+									{ item.serial }
+								</div>
+							</div>
+
+							<div className="item-row">
+								<label>Assigned To:</label>
+								<div className="value">
+								Figure this out
+								</div>
+							</div>
+
+							<div className="item-row">
+								<label>Asset Tag:</label>
+								<div className="value">
+									{ item.asset_tag }
+								</div>
+							</div>
+
+							<div className="item-row">
+								<label>Purchase Cost:</label>
+								<div className="value">
+									{ item.cost && formatter.currency(item.cost, item.cost_currency) }
+								</div>
+							</div>
+
+							<div className="item-row">
+								<label>Purchase Date:</label>
+								<div className="value">
+									{ item.purchased_at && formatter.date.short(item.purchased_at) }
+								</div>
+							</div>
+
+							<div className="item-row">
+								<label>Vendor:</label>
+								<div className="value">
+									{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
+										{ item.vendor.name }
+									</Link> }
+								</div>
+							</div>
+
+						</div>
 					</Tabs.Tab>
 
 					<Tabs.Tab label="History">
-						<Section>
-							<Heading order={ 3 }>Assignment History</Heading>
+						<Heading order={ 3 }>Assignment History</Heading>
 
-							<div>
-								{ item.assignments && item.assignments.reverse().map(assignment => (
-									<React.Fragment key={ assignment.id }>
-										<div>Link to assigntoable object</div>
-										<div>
-											{ assignment.assignable_type }
-										</div>
-									</React.Fragment>
-								)) }
-							</div>
+						<div>
+							{ item.assignments && item.assignments.reverse().map(assignment => (
+								<React.Fragment key={ assignment.id }>
+									<div>Link to assigntoable object</div>
+									<div>
+										{ assignment.assignable_type }
+									</div>
+								</React.Fragment>
+							)) }
+						</div>
 
-							<h3>Audit History</h3>
+						<Heading order={ 3 }>Audit History</Heading>
 
-							<ul>
-								{ item.audits?.reverse().map(audit => {
-									const message = audit.action === 'create' ? 'Created' : 'Updated'
+						<ul>
+							{ item.audits?.reverse().map(audit => {
+								const message = audit.action === 'create' ? 'Created' : 'Updated'
 
-									return (
-										<li key={ audit.id }>
-											{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-										</li>
-									)
-								}) }
-							</ul>
+								return (
+									<li key={ audit.id }>
+										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
+									</li>
+								)
+							}) }
+						</ul>
 
-						</Section>
 					</Tabs.Tab>
 
 					<Tabs.Tab label="Associations">
-						<Section>
-							<Heading order={ 3 }>Licenses</Heading>
+						<Heading order={ 3 }>Licenses</Heading>
 
-							<ul>
-								{ item.licenses && item.licenses.map(license => (
-									<li key={ license.id }>{ license.name }</li>
-								)) }
-							</ul>
-						</Section>
+						<ul>
+							{ item.licenses && item.licenses.map(license => (
+								<li key={ license.id }>{ license.name }</li>
+							)) }
+						</ul>
 
 					</Tabs.Tab>
 				</Tabs>

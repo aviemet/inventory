@@ -2,8 +2,7 @@ import React from 'react'
 import { Form, Input, Checkbox, Submit } from '@/Components/Form'
 import HoverLink from '../HoverLink'
 import { Routes } from '@/lib'
-import { Tile } from '@/Components'
-import tw, { styled } from 'twin.macro'
+import { Heading, Tile } from '@/Components'
 
 const Register = () => {
 	const defaultData = {
@@ -35,11 +34,11 @@ const Register = () => {
 			<Form model="user" data={ defaultData } to={ Routes.userRegistration() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 
-					<div tw="mb-2">
-						<h1 tw="text-center">Sign Up</h1>
+					<div>
+						<Heading>Sign Up</Heading>
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<Input
 							name="email"
 							placeholder="Email"
@@ -49,7 +48,7 @@ const Register = () => {
 						/>
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<Input
 							name="password"
 							type="password"
@@ -60,7 +59,7 @@ const Register = () => {
 						/>
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<Input
 							name="password_confirmation"
 							type="password"
@@ -71,7 +70,7 @@ const Register = () => {
 						/>
 					</div>
 
-					<div tw="mb-4">
+					<div>
 						<Submit className="large w-full">Sign Up</Submit>
 					</div>
 

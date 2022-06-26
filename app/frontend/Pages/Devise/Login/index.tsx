@@ -2,8 +2,7 @@ import React, { useRef } from 'react'
 import { Form, Input, Checkbox, Submit } from '@/Components/Form'
 import HoverLink from '../HoverLink'
 import { Routes } from '@/lib'
-import { Tile } from '@/Components'
-import tw, { styled } from 'twin.macro'
+import { Heading, Tile } from '@/Components'
 
 const Login = () => {
 	const emailInputRef = useRef<HTMLInputElement>(null)
@@ -28,11 +27,11 @@ const Login = () => {
 			<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 
-					<div tw="mb-2">
-						<h1 tw="text-center">Inventory</h1>
+					<div>
+						<Heading>Inventory</Heading>
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<Input
 							name="email"
 							placeholder="Email"
@@ -43,7 +42,7 @@ const Login = () => {
 						/>
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<Input
 							name="password"
 							type="password"
@@ -53,19 +52,19 @@ const Login = () => {
 						/>
 					</div>
 
-					<div tw="mb-4">
+					<div>
 						<Submit>Log In</Submit>
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<Checkbox name="remember_me" label="Remember Me" />
 					</div>
 
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.newUserPassword() } tw="rounded-bl-lg">Reset Password</HoverLink>
-					<HoverLink href={ Routes.newUserRegistration() } tw="rounded-br-lg">Register</HoverLink>
+					<HoverLink href={ Routes.newUserPassword() }>Reset Password</HoverLink>
+					<HoverLink href={ Routes.newUserRegistration() }>Register</HoverLink>
 				</Tile.Footer>
 			</Form>
 		</Tile>
