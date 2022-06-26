@@ -9,4 +9,5 @@ export { default as Flex } from './Flex'
 export { default as Heading } from './Heading'
 export { default as Tabs } from './Tabs'
 export { default as Table } from './Table'
+export { default as ConditionalWrapper } from './ConditionalWrapper'
 

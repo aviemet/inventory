@@ -1,10 +1,8 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link, Section } from '@/Components'
-import { Routes, formatter } from '@/lib'
-import { Popover, Divider, Option } from '@/Components/Popover'
+import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
+import { formatter, Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
-import tw from 'twin.macro'
 
 interface INetworkDetails extends Schema.Network {
 	hosts: string[]
@@ -25,17 +23,15 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 			<Head title={ title }></Head>
 
 			<Section>
-				<div tw="flex mb-2">
-					<h1 tw="flex-1">{ title }</h1>
+				<Flex position="apart">
+					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-					<div tw="w-10 p-1">
-						<Popover>
-							<Option href={ Routes.editNetwork(network) }>
-								{ title }
-							</Option>
-						</Popover>
-					</div>
-				</div>
+					<Menu>
+						<Menu.Item href={ Routes.editNetwork(network) }>
+							{ title }
+						</Menu.Item>
+					</Menu>
+				</Flex>
 
 				<div className="item-details">
 					<div className="item-row">
@@ -83,9 +79,9 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 			<br />
 
 			<Section>
-				<h2>Addresses</h2>
+				<Heading order={ 2 }>Addresses</Heading>
 
-				<div className="flex flex-wrap items-start">
+				<Flex>
 					{ Array(tableRows).fill('').map((_, i) => {
 						const start = Math.ceil(network.hosts.length / tableRows * i)
 						const end = Math.ceil((network.hosts.length / tableRows) * (i + 1))
@@ -98,7 +94,7 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 							/>
 						)
 					}) }
-				</div>
+				</Flex>
 			</Section>
 		</>
 	)

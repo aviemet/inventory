@@ -1,7 +1,5 @@
 import React from 'react'
 import Link, { type ILinkProps } from '@/Components/Link'
-import tw from 'twin.macro'
-import styled from '@emotion/styled'
 
 const HoverLink = ({ children, ...props }: ILinkProps) => <Link sx={ theme=>({
 	flex: 1,
