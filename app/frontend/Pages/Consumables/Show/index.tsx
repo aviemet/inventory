@@ -1,166 +1,126 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Popover, Option } from '@/Components/Popover'
-import { Link } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
 import { formatter, Routes } from '@/lib'
-import tw from 'twin.macro'
-import { StickyLink, StickyTarget } from '@/Components/StickyContent/index'
 
-const ShowConsumable = ({ consumable }) => {
+interface IShowConsumableProps {
+	consumable: Schema.Consumable
+}
+
+const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 	const title = consumable.name ?? 'Consumable Details'
 	return (
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
-				<div tw="flex">
-					<h1 tw="flex-1">{ title }</h1>
+			<Section>
+				<Flex position="apart">
+					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-					<div tw="w-10 p-1">
-						<Popover>
-							{ consumable.assignments ?
-								<Option href={ Routes.checkinConsumable(consumable) }>
+					<Menu>
+						{ consumable.assignments ?
+							<Menu.Item href={ Routes.checkinConsumable(consumable) }>
 									Checkin Consumable
-								</Option>
-								:
-								<Option href={ Routes.checkoutConsumable(consumable) }>
+							</Menu.Item>
+							:
+							<Menu.Item href={ Routes.checkoutConsumable(consumable) }>
 									Checkout Consumable
-								</Option>
-							}
-							<Option href={ Routes.editConsumable(consumable) }>
+							</Menu.Item>
+						}
+						<Menu.Item href={ Routes.editConsumable(consumable) }>
 								Edit Consumable
-							</Option>
-						</Popover>
-					</div>
-				</div>
+						</Menu.Item>
+					</Menu>
+				</Flex>
 
-				<nav className="sticky" tw="bg-white p-3 border-b-2 -top-4">
-					<div tw="inline px-2">
-						<StickyLink section="details">Details</StickyLink>
-					</div>
-					<div tw="inline px-2">
-						<StickyLink section="history">History</StickyLink>
-					</div>
-					<div tw="inline px-2">
-						<StickyLink section="licenses">Licenses</StickyLink>
-					</div>
-				</nav>
+				<Tabs>
+					<Tabs.Tab label="Details">
+						<Heading order={ 3 }>Details</Heading>
 
-				<StickyTarget id="details" />
-				<section>
-					<h3>Details</h3>
 
-					<div className="item-details">
+						<div className="item-details">
 
-						<div className="item-row">
-							<label>Model:</label>
-							<div className="value">
-								{ consumable.manufacturer && <Link href={ Routes.manufacturer(consumable.manufacturer!) }>
-									{ consumable.manufacturer!.name }
-								</Link> }
+							<div className="item-row">
+								<label>Model:</label>
+								<div className="value">
+									{ consumable.manufacturer && <Link href={ Routes.manufacturer(consumable.manufacturer!) }>
+										{ consumable.manufacturer!.name }
+									</Link> }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Category:</label>
-							<div className="value">
-								{ consumable.category && <Link href={ Routes.categories(consumable.category) }>
-									{ consumable.category!.name }
-								</Link> }
+							<div className="item-row">
+								<label>Category:</label>
+								<div className="value">
+									{ consumable.category && <Link href={ Routes.category(consumable.category.slug) }>
+										{ consumable.category!.name }
+									</Link> }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Serial:</label>
-							<div className="value">
-								{ consumable.serial }
-							</div>
-						</div>
-
-						<div className="item-row">
-							<label>Assigned To:</label>
-							<div className="value">
+							<div className="item-row">
+								<label>Assigned To:</label>
+								<div className="value">
 								Figure this out
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Asset Tag:</label>
-							<div className="value">
-								{ consumable.asset_tag }
+							<div className="item-row">
+								<label>Purchase Cost:</label>
+								<div className="value">
+									{ consumable.cost && formatter.currency(consumable.cost, consumable.cost_currency) }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Purchase Cost:</label>
-							<div className="value">
-								{ consumable.cost && formatter.currency(consumable.cost, consumable.cost_currency) }
+							<div className="item-row">
+								<label>Vendor:</label>
+								<div className="value">
+									{ consumable.vendor && <Link href={ Routes.vendor(consumable.vendor.slug) }>
+										{ consumable.vendor.name }
+									</Link> }
+								</div>
 							</div>
+
 						</div>
+					</Tabs.Tab>
 
-						<div className="item-row">
-							<label>Purchase Date:</label>
-							<div className="value">
-								{ consumable.purchased_at && formatter.date.short(consumable.purchased_at) }
-							</div>
-						</div>
+					<Tabs.Tab label="History">
+						<Heading order={ 3 }>Assignment History</Heading>
 
-						<div className="item-row">
-							<label>Vendor:</label>
-							<div className="value">
-								{ consumable.vendor && <Link href={ Routes.vendor(consumable.vendor.slug) }>
-									{ consumable.vendor.name }
-								</Link> }
-							</div>
-						</div>
-
-					</div>
-				</section>
-
-				<StickyTarget id="history" />
-				<section>
-					<h3>Assignment History</h3>
-
-					<div tw="inline-grid grid-cols-2">
-						{ consumable.assignments && consumable.assignments.reverse().map(assignment => (
-							<React.Fragment key={ assignment.id }>
-								<div>
+						<div>
+							{ consumable.assignments && consumable.assignments.reverse().map((assignment: Schema.Assignment) => (
+								<React.Fragment key={ assignment.id }>
+									<div>
 								Link to assigntoable object
-								</div>
-								<div>
-									{ assignment.assignable_type }
-								</div>
-							</React.Fragment>
-						)) }
-					</div>
+									</div>
+									<div>
+										{ assignment.assignable_type }
+									</div>
+								</React.Fragment>
+							)) }
+						</div>
 
-					<h3>Audit History</h3>
+						<h3>Audit History</h3>
 
-					<ul>
-						{ consumable.audits?.reverse().map(audit => {
-							const message = audit.action === 'create' ? 'Created' : 'Updated'
+						<ul>
+							{ consumable.audits?.reverse().map((audit: Schema.AuditedAudit) => {
+								const message = audit.action === 'create' ? 'Created' : 'Updated'
 
-							return (
-								<li tw="mb-1" key={ audit.id }>
-									{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-								</li>
-							)
-						}) }
-					</ul>
+								return (
+									<li key={ audit.id }>
+										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
+									</li>
+								)
+							}) }
+						</ul>
 
-				</section>
+					</Tabs.Tab>
 
-				<StickyTarget id="licenses" />
-				<section>
-					<h3>Licenses</h3>
+					<Tabs.Tab label="Associations">
+					</Tabs.Tab>
+				</Tabs>
 
-					<ul>
-						{ consumable.licenses && consumable.licenses.map(license => (
-							<li key={ license.id }>{ license.name }</li>
-						)) }
-					</ul>
-				</section>
-			</section>
+			</Section>
 		</>
 	)
 }

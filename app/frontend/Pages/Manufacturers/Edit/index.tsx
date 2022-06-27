@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head, usePage } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import ManufacturerForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -16,11 +17,11 @@ const New = ({ manufacturer, ...models }: IUpdateManufacturerProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container">
+			<Section>
 				<h1>{ title } for { user.active_company!.name }</h1>
 
 				<ManufacturerForm to={ Routes.manufacturers(manufacturer) } method="patch" manufacturer={ manufacturer } { ...models } />
-			</section>
+			</Section>
 		</>
 	)
 }

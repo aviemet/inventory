@@ -53,6 +53,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    ap({ params: params })
     if user.update(user_params)
       redirect_to user, notice: 'User was successfully updated.'
     else
@@ -60,9 +61,16 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH /users/update_table_preferences/:id
+  # PATCH/PUT /users/update_table_preferences/:id
   def update_table_preferences
     if user.update_column(:table_preferences, current_user.table_preferences.deep_merge(request.params[:user][:table_preferences]))
+      head :ok, content_type: "text/html"
+    end
+  end
+
+  # PATCH/PUT /users/update_user_preferences/:id
+  def update_user_preferences
+    if user.update_column(:user_preferences, current_user.user_preferences.deep_merge(request.params[:user][:user_preferences]))
       head :ok, content_type: "text/html"
     end
   end
@@ -78,6 +86,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :active_company, :active, :dark_mode, person: [:first_name, :last_name], company: [:name])
+    params.require(:user).permit(:email, :password, :active_company, :active, :user_preferences, person: [:first_name, :last_name], company: [:name])
   end
 end

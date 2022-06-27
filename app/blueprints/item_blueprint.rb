@@ -25,6 +25,12 @@ class ItemBlueprint < ApplicationBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
   end
 
+  view :new do
+    include_view :new
+
+    exclude :assigned
+  end
+
   view :shallow do
     only :name, :asset_tag
   end

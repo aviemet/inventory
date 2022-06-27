@@ -3,8 +3,7 @@ import { usePage } from '@inertiajs/inertia-react'
 import { Form, Input, Submit } from '@/Components/Form'
 import HoverLink from '../../HoverLink'
 import { Routes } from '@/lib'
-import { Tile } from '@/Components'
-import 'twin.macro'
+import { Heading, Tile } from '@/Components'
 
 type TRegisterFormData = {
 	person: {
@@ -18,8 +17,6 @@ type TRegisterFormData = {
 
 const CompleteRegistration = () => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
-	console.log({ user })
 
 	const defaultData: TRegisterFormData = {
 		person: {
@@ -36,41 +33,41 @@ const CompleteRegistration = () => {
 	}
 
 	return (
-		<Tile.Container>
+		<Tile>
 			<Form model="person" data={ defaultData } to={ Routes.completeRegistration() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
-					<div tw="mb-2">
-						<h2 tw="text-center mb-2">Complete Registration</h2>
+					<div>
+						<Heading order={ 2 }>Complete Registration</Heading>
 						<p>Let&apos;s get a little more information about you.</p>
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<Input name="first_name" placeholder="First Name" autoFocus autoComplete="first-name" />
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<Input name="last_name" placeholder="Last Name" autoComplete="last-name" />
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<p>And the name of the entity which owns the assets you&apos;ll be tracking.</p>
 					</div>
 
-					<div tw="mb-2">
+					<div>
 						<Input name="name" model="company" placeholder="Company Name" />
 					</div>
 
-					<div tw="mb-4">
-						<Submit className="large w-full">Complete and Log In!</Submit>
+					<div>
+						<Submit>Complete and Log In!</Submit>
 					</div>
 
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.newUserSession() } tw="rounded-b-lg">Log In Instead</HoverLink>
+					<HoverLink href={ Routes.newUserSession() }>Log In Instead</HoverLink>
 				</Tile.Footer>
 			</Form>
-		</Tile.Container>
+		</Tile>
 	)
 }
 

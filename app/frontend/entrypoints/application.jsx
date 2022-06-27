@@ -6,8 +6,6 @@ import { InertiaProgress } from '@inertiajs/progress'
 import { AuthLayout, AppLayout } from '../Layouts'
 import dynamicImport from '../dynamicImport'
 
-import '@/css/tailwind.css'
-
 document.addEventListener('DOMContentLoaded', () => {
 	const csrfToken = document.querySelector('meta[name=csrf-token]').content
 	axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
@@ -16,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	createInertiaApp({
 		title: title => `Inventory - ${title}`,
+
 		resolve: async name => {
 			let checkedName = name
 			let layout = AppLayout
@@ -30,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			return page
 		},
+
 		setup({ el, App, props }) {
 			const root = createRoot(el)
 			root.render(<App { ...props } />)

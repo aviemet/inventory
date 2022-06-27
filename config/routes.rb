@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   post "users/complete_registration" => "users#save_complete_registration", as: :save_complete_registration
 
   patch "users/update_table_preferences/:id" => "users#update_table_preferences", as: :update_table_preferences
+  patch "users/update_user_preferences/:id" => "users#update_user_preferences", as: :update_user_preferences
 
   # RESOURCEFUL PATHS #
 

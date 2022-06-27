@@ -20,11 +20,10 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: ICompanyFormPro
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Company Name" required autoFocus />
 
-			<Submit className="w-full">
+			<Submit>
 				{ company.id ? 'Update' : 'Create' } Company
 			</Submit>
 		</Form>

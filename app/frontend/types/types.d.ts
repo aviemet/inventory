@@ -4,7 +4,7 @@ declare global {
 	type HTTPVerb = 'post'|'put'|'get'|'patch'|'destroy'
 
 	declare namespace Schema {
-		type Pagination = {
+		interface Pagination {
 			count: number
 			pages: number
 			limit: number
@@ -15,9 +15,15 @@ declare global {
 			is_last_page: boolean
 		}
 
-		interface Item {
+		interface Assignable {
 			assigned: boolean
 		}
+
+		interface Item extends Assignable {}
+		interface Accessory extends Assignable {}
+		interface Component extends Assignable {}
+		interface Consumable extends Assignable {}
+		interface License extends Assignable {}
 	}
 
 	type FlashMessage = Record<'success'|'alert'|'info'|'warning',string>

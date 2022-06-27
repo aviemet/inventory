@@ -1,42 +1,56 @@
 import React from 'react'
-import { MenuBarsIcon } from '@/Components/Icons'
 import ActiveCompanyDropdown from './ActiveCompanyDropdown'
-import tw, { styled } from 'twin.macro'
-import { IconContext } from 'react-icons'
 import { useLayout } from '@/Providers'
 import { usePage } from '@inertiajs/inertia-react'
 import QuickNewMenu from './QuickNewMenu'
+import { Box, Header, Burger, useMantineTheme, Group } from '@mantine/core'
+import { ToggleColorSchemeButton } from '@/Components/Button'
+import cx from 'clsx'
 
 const Topbar = () => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
 	const { layoutState, setLayoutState } = useLayout()
+	const theme = useMantineTheme()
 
 	return (
-		<IconContext.Provider value={ { size: '24px', className: 'react-icon' } }>
-			<TopbarHeader id="topbar"  tw="flex items-center">
-				<div
-					tw="sm:hidden cursor-pointer ml-1 mr-2"
+		<Header height={ 50 } p="sm" className={ cx({ closed: !layoutState.sidebarOpen }) } sx={ theme => ({
+			transition: 'left 100ms ease-in-out',
+			backgroundColor: theme.other.colorSchemeOption(
+				theme.colors[theme.primaryColor][9],
+				theme.fn.darken(theme.colors[theme.primaryColor][9], 0.75)
+			),
+			color: theme.white,
+
+			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+				left: theme.other.navbar.width.open,
+
+				'&.closed': {
+					left: theme.other.navbar.width.closed
+				}
+			},
+		}) }>
+			<Box sx={ { display: 'flex', alignItems: 'center', height: '100%' } }>
+
+				<Burger
+					opened={ layoutState.sidebarOpen }
 					onClick={ () => setLayoutState({ sidebarOpen: !layoutState.sidebarOpen }) }
-				>
-					<MenuBarsIcon />
-				</div>
+					size="sm"
+					color={ theme.colors.gray[6] }
+					mr="xl"
+				/>
 
-				<div tw="flex-1">
+				<Box sx={ { flex: 1 } }>
 					<ActiveCompanyDropdown user={ user } />
-				</div>
+				</Box>
 
-				<div>
+				<Group>
 					<QuickNewMenu />
-				</div>
-			</TopbarHeader>
-		</IconContext.Provider>
+					<ToggleColorSchemeButton />
+				</Group>
+
+			</Box>
+		</Header>
 	)
 }
 
 export default Topbar
-
-const TopbarHeader = styled.header`
-	margin-bottom: 1px;
-
-	${tw`dark:bg-gray-600 px-2 py-1 bg-white shadow`}
-`

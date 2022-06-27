@@ -25,7 +25,6 @@ const ModelForm = ({ to, method = 'post', onSubmit, model, categories, manufactu
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Name" required autoFocus />
 
@@ -49,7 +48,7 @@ const ModelForm = ({ to, method = 'post', onSubmit, model, categories, manufactu
 
 			<Textarea name="notes" label="Notes" />
 
-			<Submit className="w-full">
+			<Submit>
 				{ model.id ? 'Update' : 'Create' } Model
 			</Submit>
 		</Form>

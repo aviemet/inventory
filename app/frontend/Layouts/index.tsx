@@ -1,6 +1,7 @@
 import React from 'react'
 import type { PageProps } from '@inertiajs/inertia'
 import Providers from '@/Providers'
+import { Flash } from '@/Components/Flash'
 
 import AppLayout from './AppLayout'
 import AuthLayout from './AuthLayout'
@@ -16,6 +17,7 @@ interface InertiaPageProps extends PageProps {
 const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
 	return(
 		<Providers>
+			<Flash />
 			{ children }
 		</Providers>
 	)

@@ -1,15 +1,13 @@
 import React, { useCallback } from 'react'
-import { useForm, useInputProps } from './Form'
+import { useForm, useInputProps } from './index'
 import Field from './Field'
-import Feedback from './Feedback'
 import SearchableDropdownInput, { type ISearchableDropdownProps } from '../Inputs/SearchableDropdown'
-import cx from 'classnames'
 
 interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onChange'> {
 	label?: string
 	name: string
 	defaultValue?: string
-	onChange?: (option: Record<string, any>, form: Inertia.FormProps) => void
+	onChange?: (option: string|null, form: Inertia.FormProps) => void
 }
 
 const SearchableDropdown = ({
@@ -27,16 +25,13 @@ const SearchableDropdown = ({
 	const form = useForm()
 	const { inputId, inputName } = useInputProps(name)
 
-	const handleChange = useCallback((option: Record<string, any>) => {
-		form.setData(inputName, getValue(option))
+	const handleChange = useCallback((option: string|null) => {
+		form.setData(inputName, option)
 		if(onChange) onChange(option, form)
 	}, [onChange, inputName])
 
 	return (
 		<Field type="select" required={ required } errors={ !!form.errors?.[name] }>
-			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
-				{ label }
-			</label> }
 			<SearchableDropdownInput
 				id={ id || inputId }
 				name={ inputName }
@@ -46,9 +41,9 @@ const SearchableDropdown = ({
 				defaultValue={ defaultValue ?? form.getData(inputName) }
 				getLabel={ getLabel }
 				getValue={ getValue }
+				label={ label }
 				{ ...props }
 			/>
-			<Feedback errors={ form.errors[name] } />
 		</Field>
 	)
 }

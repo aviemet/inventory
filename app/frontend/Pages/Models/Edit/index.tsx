@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head, usePage } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import ModelForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -18,11 +19,11 @@ const New = ({ model, ...models }: IUpdateModelProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container">
+			<Section>
 				<h1>{ title } for { user.active_company!.name }</h1>
 
 				<ModelForm to={ Routes.models(model) } method="patch" model={ model } { ...models } />
-			</section>
+			</Section>
 		</>
 	)
 }

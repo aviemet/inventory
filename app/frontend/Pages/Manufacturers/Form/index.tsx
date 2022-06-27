@@ -21,11 +21,10 @@ const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer }: IManu
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Name" required autoFocus />
 
-			<Submit className="w-full">
+			<Submit>
 				{ manufacturer.id ? 'Update' : 'Create' } Manufacturer
 			</Submit>
 		</Form>

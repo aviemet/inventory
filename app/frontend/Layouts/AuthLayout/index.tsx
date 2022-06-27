@@ -1,43 +1,59 @@
 import React from 'react'
 import Footer from '../Footer'
-import { styled } from 'twin.macro'
+import { createStyles } from '@mantine/core'
+
+const useAuthStyles = createStyles(theme => ({
+	page: {
+		backgroundBlendMode: theme.other.colorSchemeOption('lighten', 'soft-light'), // 'soft-light' 'multiply'
+		backgroundImage: 'url("/Images/robots-bw.svg")',
+		backgroundColor: theme.colors[theme.primaryColor][6],
+		minHeight: '100vh',
+	},
+
+	wrapper: {
+		minHeight: '100vh',
+		width: '100%',
+		display: 'grid',
+		gap: '0px',
+		gridTemplateRows: '1fr 35px',
+		gridTemplateAreas: '"content" "footer"',
+
+		'#content': {
+			gridArea: 'content',
+			height: '100%',
+		},
+		'#footer': {
+			gridArea: 'footer',
+		},
+	},
+
+	content: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: '100%',
+	},
+}))
 
 interface IAuthLayoutProps {
 	children: React.ReactNode
 }
 
 const AuthLayout: React.FC<IAuthLayoutProps> = ({ children }) => {
+	const { classes } = useAuthStyles()
+
 	return (
-		<AuthPage id="auth" tw="bg-purple-600 min-h-screen">
-			<AuthWrapper tw="grid gap-0 min-h-screen w-full">
-				<main id="content" tw="h-full">
-					<div tw="flex items-center justify-center h-full">
+		<div id="auth" className={ classes.page }>
+			<div className={ classes.wrapper }>
+				<main id="content">
+					<div className={ classes.content }>
 						{ children }
 					</div>
 				</main>
 				<Footer />
-			</AuthWrapper>
-		</AuthPage>
+			</div>
+		</div>
 	)
 }
 
 export default AuthLayout
-
-const AuthPage = styled.div`
-	background-blend-mode: lighten;
-  background-image: url("/Images/robots-bw.svg");
-`
-
-const AuthWrapper = styled.div`
-	grid-template-rows: 1fr 35px;
-	grid-template-areas:
-		"content"
-		"footer";
-
-	#content {
-		grid-area: content;
-	}
-	#footer {
-		grid-area: footer;
-	}
-`

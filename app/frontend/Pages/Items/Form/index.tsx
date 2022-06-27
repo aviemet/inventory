@@ -29,7 +29,6 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 
 			<Input name="name" label="Name" required autoFocus />
@@ -57,7 +56,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
 				/>
 
-				<Input name="cost" label="Cost" />
+				<Input name="cost" label="Cost" type="currency" />
 
 				<DateTime label="Purchased At" name="purchased_at" />
 			</Group>
@@ -76,7 +75,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 
 			<Textarea name="notes" label="Notes" />
 
-			<Submit className="w-full">
+			<Submit>
 				{ item.id ? 'Update' : 'Create' } Item
 			</Submit>
 

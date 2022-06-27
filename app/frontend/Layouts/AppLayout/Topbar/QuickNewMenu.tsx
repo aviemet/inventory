@@ -1,5 +1,5 @@
 import React from 'react'
-import { Option, Popover } from '@/Components/Popover'
+import { Menu, Link } from '@/Components'
 import {
 	PlusCircleIcon,
 	ItemsIcon,
@@ -14,29 +14,29 @@ import { Routes } from '@/lib'
 
 const QuickNewMenu = () => {
 	return (
-		<Popover icon={ PlusCircleIcon }>
-			<Option href={ Routes.newItem() }>
-				<ItemsIcon />New Item
-			</Option>
-			<Option href={ Routes.newAccessory() }>
-				<AccessoriesIcon />New Accessory
-			</Option>
-			<Option href={ Routes.newComponent() }>
-				<ComponentsIcon />New Component
-			</Option>
-			<Option href={ Routes.newConsumable() }>
-				<ConsumablesIcon />New Consumable
-			</Option>
-			<Option href={ Routes.newLicense() }>
-				<LicensesIcon />New License
-			</Option>
-			<Option href={ Routes.newPerson() }>
-				<PeopleIcon />New Person
-			</Option>
-			<Option href={ '#'/*Routes.newTicket()*/ }>
-				<TicketsIcon />New Ticket
-			</Option>
-		</Popover>
+		<Menu label="New" icon={ <PlusCircleIcon /> }>
+			<Link href={ Routes.newItem() }>
+				<Menu.Item><ItemsIcon />New Item</Menu.Item>
+			</Link>
+			<Link href={ Routes.newAccessory() }>
+				<Menu.Item><AccessoriesIcon />New Accessory</Menu.Item>
+			</Link>
+			<Link href={ Routes.newComponent() }>
+				<Menu.Item><ComponentsIcon />New Component</Menu.Item>
+			</Link>
+			<Link href={ Routes.newConsumable() }>
+				<Menu.Item><ConsumablesIcon />New Consumable</Menu.Item>
+			</Link>
+			<Link href={ Routes.newLicense() }>
+				<Menu.Item><LicensesIcon />New License</Menu.Item>
+			</Link>
+			<Link href={ Routes.newPerson() }>
+				<Menu.Item><PeopleIcon />New Person</Menu.Item>
+			</Link>
+			<Link href={ '#'/*Routes.newTicket()*/ }>
+				<Menu.Item><TicketsIcon />New Ticket</Menu.Item>
+			</Link>
+		</Menu>
 	)
 }
 

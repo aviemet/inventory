@@ -1,10 +1,9 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link } from '@/Components'
-import { Routes, formatter } from '@/lib'
-import { Popover, Divider, Option } from '@/Components/Popover'
+import { Section, Menu, Flex, Heading } from '@/Components'
+import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
-import tw from 'twin.macro'
+import { EditIcon } from '@/Components/Icons'
 
 interface INetworkDetails extends Schema.Network {
 	hosts: string[]
@@ -24,18 +23,16 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
-				<div tw="flex mb-2">
-					<h1 tw="flex-1">{ title }</h1>
+			<Section>
+				<Flex position="apart">
+					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-					<div tw="w-10 p-1">
-						<Popover>
-							<Option href={ Routes.editNetwork(network) }>
-								{ title }
-							</Option>
-						</Popover>
-					</div>
-				</div>
+					<Menu>
+						<Menu.Item href={ Routes.editNetwork(network) } icon={ <EditIcon /> }>
+							Edit
+						</Menu.Item>
+					</Menu>
+				</Flex>
 
 				<div className="item-details">
 					<div className="item-row">
@@ -78,18 +75,17 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 						<div className="value">{ network.dhcp_end }</div>
 					</div>
 				</div>
-			</section>
+			</Section>
 
 			<br />
 
-			<section>
-				<h2>Addresses</h2>
+			<Section>
+				<Heading order={ 2 }>Addresses</Heading>
 
-				<div className="flex flex-wrap items-start">
+				<Flex align="start">
 					{ Array(tableRows).fill('').map((_, i) => {
 						const start = Math.ceil(network.hosts.length / tableRows * i)
 						const end = Math.ceil((network.hosts.length / tableRows) * (i + 1))
-						console.log({ start, end })
 						return (
 							<NetworkDetailsTable
 								key={ i }
@@ -99,8 +95,8 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 							/>
 						)
 					}) }
-				</div>
-			</section>
+				</Flex>
+			</Section>
 		</>
 	)
 }

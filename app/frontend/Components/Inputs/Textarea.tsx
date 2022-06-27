@@ -1,29 +1,30 @@
 import React from 'react'
-import { TextAreaProps } from 'react-html-props'
-import cx from 'classnames'
+import { Textarea, type TextareaProps } from '@mantine/core'
+import Label from './Label'
 
-interface ITextareaProps extends TextAreaProps {
+interface ITextareaProps extends TextareaProps {
 	label?: string
 	name: string
 }
 
-const Textarea = ({ label, name, required = false, value, onChange, id, ...props }: ITextareaProps) => {
+const TextareaComponent = ({ label, name, required = false, value, onChange, id, radius = 'xs', ...props }: ITextareaProps) => {
 	return (
 		<>
-			{ label && <label className={ cx({ required }) } htmlFor={ id }>
+			{ label && <Label required={ required } htmlFor={ id }>
 				{ label }
-			</label> }
-			<textarea
+			</Label> }
+			<Textarea
 				id={ id }
 				name={ name }
 				onChange={ onChange }
 				value={ value }
 				required={ required }
+				radius={ radius }
 				{ ...props }
 			>
-			</textarea>
+			</Textarea>
 		</>
 	)
 }
 
-export default Textarea
+export default TextareaComponent

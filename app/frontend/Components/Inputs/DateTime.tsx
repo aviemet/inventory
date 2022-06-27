@@ -1,15 +1,16 @@
 import React from 'react'
 import Flatpickr, { type DateTimePickerProps } from 'react-flatpickr'
 import labelPlugin from 'flatpickr/dist/plugins/labelPlugin/labelPlugin'
-import tw, { styled } from 'twin.macro'
-import cx from 'classnames'
+import { Box, Input } from '@mantine/core'
 
 import 'flatpickr/dist/themes/material_green.css'
+import Label from './Label'
 
-export interface IDateTimeProps extends Omit<DateTimePickerProps, 'onChange'> {
+export interface IDateTimeProps extends Omit<DateTimePickerProps, 'onChange'|'size'> {
 	label?: string
 	name?: string
 	onChange?: (values: Flatpicker.ChangeProps) => void
+	error?: string | string[]
 }
 
 const DateTime = ({ label, name, required, value, onChange, type = 'text', id, ...props }: IDateTimeProps) => {
@@ -19,10 +20,10 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 
 	return (
 		<>
-			{ label && <label className={ cx({ required }) } htmlFor={ id }>
+			{ label && <Label required={ required } htmlFor={ id }>
 				{ label }
-			</label> }
-			<DateTimeComponent>
+			</Label> }
+			<Box>
 				<Flatpickr
 	        data-enable-time
 					name={ name }
@@ -34,25 +35,15 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 						plugins: [labelPlugin()]
 					} }
 					id={ id }
+					render={
+						({ defaultValue, value, ...props }, ref) => {
+							return <Input defaultValue={ defaultValue } ref={ ref } size="md" { ...props } />
+						}
+					}
 				/>
-			</DateTimeComponent>
+			</Box>
 		</>
 	)
 }
 
 export default DateTime
-
-const DateTimeComponent = styled.div`
-	.react-datetime-picker {
-		height: 100%;
-		width: 100%;
-	}
-	
-	button, .button {
-		color: black;
-
-		&.react-calendar__month-view__days__day--weekend {
-			${tw`text-brand-dark`}
-		}
-	}
-`

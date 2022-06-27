@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from '@/Components'
+import { ActionIcon } from '@mantine/core'
 
 interface IMenuLinkProps {
 	children: string
@@ -10,7 +11,7 @@ interface IMenuLinkProps {
 const MenuLink = ({ children, href, icon, ...props }: IMenuLinkProps) => {
 	return (
 		<Link href={ href } { ...props }>
-			{ icon  }
+			<ActionIcon size="xl" variant="transparent">{ icon  }</ActionIcon>
 			<span>{ children }</span>
 		</Link>
 	)

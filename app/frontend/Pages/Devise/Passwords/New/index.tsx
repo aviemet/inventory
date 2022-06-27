@@ -3,7 +3,6 @@ import { Form, Input, Submit } from '@/Components/Form'
 import HoverLink from '../../HoverLink'
 import { Routes } from '@/lib'
 import { Tile } from '@/Components'
-import tw, { styled } from 'twin.macro'
 
 type TPasswordsNewFormData = {
 	email: string
@@ -14,13 +13,13 @@ const PasswordsNew = () => {
 		email: '',
 	}
 
-	const handleSubmit = ({ transform, wasSuccesful }) => {
+	const handleSubmit = ({ transform }: Inertia.FormProps) => {
 
 	}
 
 	return (
-		<Tile.Container>
-			<Form model="user" data={ defaultData } to={ Routes.newUserPassword() } onSubmit={ handleSubmit }>
+		<Tile>
+			<Form model="user" data={ defaultData } to={ Routes.newUserPassword() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
 					<div tw="mb-2">
 						<h1 tw="text-center">Reset Password</h1>
@@ -31,7 +30,7 @@ const PasswordsNew = () => {
 					</div>
 
 					<div tw="mb-4">
-						<Submit className="large" tw="w-full">Send Reset Instructions</Submit>
+						<Submit>Send Reset Instructions</Submit>
 					</div>
 
 				</Tile.Content>
@@ -40,7 +39,7 @@ const PasswordsNew = () => {
 					<HoverLink href={ Routes.newUserSession() } tw="rounded-b-lg">Log In</HoverLink>
 				</Tile.Footer>
 			</Form>
-		</Tile.Container>
+		</Tile>
 	)
 }
 
