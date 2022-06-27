@@ -75,7 +75,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 
 			<Textarea name="notes" label="Notes" />
 
-			<Submit className="w-full">
+			<Submit>
 				{ item.id ? 'Update' : 'Create' } Item
 			</Submit>
 

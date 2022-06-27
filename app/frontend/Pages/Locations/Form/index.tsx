@@ -25,7 +25,6 @@ const LocationForm = ({ to, method = 'post', onSubmit, location, locations, curr
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Location Name" required autoFocus />
 
@@ -44,7 +43,7 @@ const LocationForm = ({ to, method = 'post', onSubmit, location, locations, curr
 				onOpen={ () => Inertia.reload({ only: ['locations'] }) }
 			/>
 
-			<Submit className="w-full">
+			<Submit>
 				{ location.id ? 'Update' : 'Create' } Location
 			</Submit>
 		</Form>
