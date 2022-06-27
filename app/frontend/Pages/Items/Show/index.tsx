@@ -1,10 +1,8 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
 import { formatter, Routes } from '@/lib'
-import 'twin.macro'
-import { Popover, Option } from '@/Components/Popover'
-import { StickyLink, StickyTarget } from '@/Components/StickyContent/index'
+import { EditIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
 
 interface IShowItemProps {
 	item: Schema.Item
@@ -17,157 +15,141 @@ const Show = ({ item }: IShowItemProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container relative">
-				<div tw="flex">
-					<h1 tw="flex-1">{ title }</h1>
+			<Section>
+				<Flex position="apart">
+					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-					<div tw="w-10 p-1">
-						<Popover>
-							{ item.assignments ?
-								<Option href={ Routes.checkinItem(item) }>
+					<Menu>
+						{ item.assignments ?
+							<Menu.Item href={ Routes.checkinItem(item) } icon={ CheckinIcon }>
 									Checkin Item
-								</Option>
-								:
-								<Option href={ Routes.checkoutItem(item) }>
+							</Menu.Item>
+							:
+							<Menu.Item href={ Routes.checkoutItem(item) } icon={ CheckoutIcon }>
 									Checkout Item
-								</Option>
-							}
-							<Option href={ Routes.editItem(item) }>
+							</Menu.Item>
+						}
+						<Menu.Item href={ Routes.editItem(item) } icon={ <EditIcon /> }>
 								Edit Item
-							</Option>
-						</Popover>
-					</div>
-				</div>
+						</Menu.Item>
+					</Menu>
+				</Flex>
 
-				<nav className="sticky" tw="bg-white p-3 border-b-2 -top-4">
-					<div tw="inline px-2">
-						<StickyLink section="details">Details</StickyLink>
-					</div>
-					<div tw="inline px-2">
-						<StickyLink section="history">History</StickyLink>
-					</div>
-					<div tw="inline px-2">
-						<StickyLink section="licenses">Licenses</StickyLink>
-					</div>
-				</nav>
+				<Tabs>
+					<Tabs.Tab label="Details">
+						<Heading order={ 3 }>Details</Heading>
 
-				<StickyTarget id="details" />
-				<section>
-					<h3>Details</h3>
+						<div className="item-details">
 
-					<div className="item-details">
-
-						<div className="item-row">
-							<label>Model:</label>
-							<div className="value">
-								{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer!) }>
-									{ item.manufacturer!.name }
-								</Link> }
+							<div className="item-row">
+								<label>Model:</label>
+								<div className="value">
+									{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer!) }>
+										{ item.manufacturer!.name }
+									</Link> }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Category:</label>
-							<div className="value">
-								{ item.category && <Link href={ Routes.categories(item.category) }>
-									{ item.category!.name }
-								</Link> }
+							<div className="item-row">
+								<label>Category:</label>
+								<div className="value">
+									{ item.category && <Link href={ Routes.category(item.category.slug) }>
+										{ item.category!.name }
+									</Link> }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Serial:</label>
-							<div className="value">
-								{ item.serial }
+							<div className="item-row">
+								<label>Serial:</label>
+								<div className="value">
+									{ item.serial }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Assigned To:</label>
-							<div className="value">
+							<div className="item-row">
+								<label>Assigned To:</label>
+								<div className="value">
 								Figure this out
-							</div>
-						</div>
-
-						<div className="item-row">
-							<label>Asset Tag:</label>
-							<div className="value">
-								{ item.asset_tag }
-							</div>
-						</div>
-
-						<div className="item-row">
-							<label>Purchase Cost:</label>
-							<div className="value">
-								{ item.cost && formatter.currency(item.cost, item.cost_currency) }
-							</div>
-						</div>
-
-						<div className="item-row">
-							<label>Purchase Date:</label>
-							<div className="value">
-								{ item.purchased_at && formatter.date.short(item.purchased_at) }
-							</div>
-						</div>
-
-						<div className="item-row">
-							<label>Vendor:</label>
-							<div className="value">
-								{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
-									{ item.vendor.name }
-								</Link> }
-							</div>
-						</div>
-
-					</div>
-				</section>
-
-				<StickyTarget id="history" />
-				<section>
-					<h3>Assignment History</h3>
-
-					<div tw="inline-grid grid-cols-2">
-						{ item.assignments && item.assignments.reverse().map(assignment => (
-							<React.Fragment key={ assignment.id }>
-								<div>
-								Link to assigntoable object
 								</div>
-								<div>
-									{ assignment.assignable_type }
+							</div>
+
+							<div className="item-row">
+								<label>Asset Tag:</label>
+								<div className="value">
+									{ item.asset_tag }
 								</div>
-							</React.Fragment>
-						)) }
-					</div>
+							</div>
 
-					<h3>Audit History</h3>
+							<div className="item-row">
+								<label>Purchase Cost:</label>
+								<div className="value">
+									{ item.cost && formatter.currency(item.cost, item.cost_currency) }
+								</div>
+							</div>
 
-					<ul>
-						{ item.audits?.reverse().map(audit => {
-							const message = audit.action === 'create' ? 'Created' : 'Updated'
+							<div className="item-row">
+								<label>Purchase Date:</label>
+								<div className="value">
+									{ item.purchased_at && formatter.date.short(item.purchased_at) }
+								</div>
+							</div>
 
-							return (
-								<li tw="mb-1" key={ audit.id }>
-									{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-								</li>
-							)
-						}) }
-					</ul>
+							<div className="item-row">
+								<label>Vendor:</label>
+								<div className="value">
+									{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
+										{ item.vendor.name }
+									</Link> }
+								</div>
+							</div>
 
-				</section>
+						</div>
+					</Tabs.Tab>
 
-				<StickyTarget id="licenses" />
-				<section>
-					<h3>Licenses</h3>
+					<Tabs.Tab label="History">
+						<Heading order={ 3 }>Assignment History</Heading>
 
-					<ul>
-						{ item.licenses && item.licenses.map(license => (
-							<li key={ license.id }>{ license.name }</li>
-						)) }
-					</ul>
-				</section>
+						<div>
+							{ item.assignments && item.assignments.reverse().map(assignment => (
+								<React.Fragment key={ assignment.id }>
+									<div>Link to assigntoable object</div>
+									<div>
+										{ assignment.assignable_type }
+									</div>
+								</React.Fragment>
+							)) }
+						</div>
+
+						<Heading order={ 3 }>Audit History</Heading>
+
+						<ul>
+							{ item.audits?.reverse().map(audit => {
+								const message = audit.action === 'create' ? 'Created' : 'Updated'
+
+								return (
+									<li key={ audit.id }>
+										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
+									</li>
+								)
+							}) }
+						</ul>
+
+					</Tabs.Tab>
+
+					<Tabs.Tab label="Associations">
+						<Heading order={ 3 }>Licenses</Heading>
+
+						<ul>
+							{ item.licenses && item.licenses.map(license => (
+								<li key={ license.id }>{ license.name }</li>
+							)) }
+						</ul>
+
+					</Tabs.Tab>
+				</Tabs>
 
 
-			</section>
+			</Section>
 		</>
 	)
 }

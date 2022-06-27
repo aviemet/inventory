@@ -1,153 +1,133 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Popover, Option } from '@/Components/Popover'
-import { Link } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
 import { formatter, Routes } from '@/lib'
-import tw from 'twin.macro'
-import { StickyLink, StickyTarget } from '@/Components/StickyContent/index'
 
-const ShowLicense = ({ license }) => {
+interface IShowLicenseProps {
+	license: Schema.License
+}
+
+const ShowLicense = ({ license }: IShowLicenseProps) => {
 	const title = license.name ?? 'License Details'
 	return (
 		<>
 			<Head title={ title }></Head>
+			<Section>
+				<Flex position="apart">
+					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-			<section className="container relative">
-				<div tw="flex">
-					<h1 tw="flex-1">{ title }</h1>
-
-					<div tw="w-10 p-1">
-						<Popover>
-							{ license.assignments ?
-								<Option href={ Routes.checkinLicense(license) }>
+					<Menu>
+						{ license.assignments ?
+							<Menu.Item href={ Routes.checkinLicense(license) }>
 									Checkin License
-								</Option>
-								:
-								<Option href={ Routes.checkoutLicense(license) }>
+							</Menu.Item>
+							:
+							<Menu.Item href={ Routes.checkoutLicense(license) }>
 									Checkout License
-								</Option>
-							}
-							<Option href={ Routes.editLicense(license) }>
+							</Menu.Item>
+						}
+						<Menu.Item href={ Routes.editLicense(license) }>
 								Edit License
-							</Option>
-						</Popover>
-					</div>
-				</div>
+						</Menu.Item>
+					</Menu>
+				</Flex>
 
-				<nav className="sticky" tw="bg-white p-3 border-b-2 -top-4">
-					<div tw="inline px-2">
-						<StickyLink section="details">Details</StickyLink>
-					</div>
-					<div tw="inline px-2">
-						<StickyLink section="history">History</StickyLink>
-					</div>
-				</nav>
+				<Tabs>
+					<Tabs.Tab label="Details">
+						<Heading order={ 3 }>Details</Heading>
 
-				<StickyTarget id="details" />
-				<section>
-					<h3>Details</h3>
+						<div className="item-details">
 
-					<div className="item-details">
-
-						<div className="item-row">
-							<label>Model:</label>
-							<div className="value">
-								{ license.manufacturer && <Link href={ Routes.manufacturer(license.manufacturer!) }>
-									{ license.manufacturer!.name }
-								</Link> }
+							<div className="item-row">
+								<label>Model:</label>
+								<div className="value">
+									{ license.manufacturer && <Link href={ Routes.manufacturer(license.manufacturer!) }>
+										{ license.manufacturer!.name }
+									</Link> }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Category:</label>
-							<div className="value">
-								{ license.category && <Link href={ Routes.categories(license.category) }>
-									{ license.category!.name }
-								</Link> }
+							<div className="item-row">
+								<label>Category:</label>
+								<div className="value">
+									{ license.category && <Link href={ Routes.category(license.category.slug) }>
+										{ license.category!.name }
+									</Link> }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Serial:</label>
-							<div className="value">
-								{ license.serial }
-							</div>
-						</div>
-
-						<div className="item-row">
-							<label>Assigned To:</label>
-							<div className="value">
+							<div className="item-row">
+								<label>Assigned To:</label>
+								<div className="value">
 								Figure this out
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Asset Tag:</label>
-							<div className="value">
-								{ license.asset_tag }
+							<div className="item-row">
+								<label>Purchase Cost:</label>
+								<div className="value">
+									{ license.cost && formatter.currency(license.cost, license.cost_currency) }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Purchase Cost:</label>
-							<div className="value">
-								{ license.cost && formatter.currency(license.cost, license.cost_currency) }
+							<div className="item-row">
+								<label>Purchase Date:</label>
+								<div className="value">
+									{ license.purchased_at && formatter.date.short(license.purchased_at) }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Purchase Date:</label>
-							<div className="value">
-								{ license.purchased_at && formatter.date.short(license.purchased_at) }
+							<div className="item-row">
+								<label>Vendor:</label>
+								<div className="value">
+									{ license.vendor && <Link href={ Routes.vendor(license.vendor.slug) }>
+										{ license.vendor.name }
+									</Link> }
+								</div>
 							</div>
+
 						</div>
+					</Tabs.Tab>
 
-						<div className="item-row">
-							<label>Vendor:</label>
-							<div className="value">
-								{ license.vendor && <Link href={ Routes.vendor(license.vendor.slug) }>
-									{ license.vendor.name }
-								</Link> }
-							</div>
-						</div>
+					<Tabs.Tab label="History">
+						<Heading order={ 3 }>Assignment History</Heading>
 
-					</div>
-				</section>
-
-				<StickyTarget id="history" />
-				<section>
-					<h3>Assignment History</h3>
-
-					<div tw="inline-grid grid-cols-2">
-						{ license.assignments && license.assignments.reverse().map(assignment => (
-							<React.Fragment key={ assignment.id }>
-								<div>
+						<div>
+							{ license.assignments && license.assignments.reverse().map(assignment => (
+								<React.Fragment key={ assignment.id }>
+									<div>
 								Link to assigntoable object
-								</div>
-								<div>
-									{ assignment.assignable_type }
-								</div>
-							</React.Fragment>
-						)) }
-					</div>
+									</div>
+									<div>
+										{ assignment.assignable_type }
+									</div>
+								</React.Fragment>
+							)) }
+						</div>
 
-					<h3>Audit History</h3>
+						<h3>Audit History</h3>
 
-					<ul>
-						{ license.audits?.reverse().map(audit => {
-							const message = audit.action === 'create' ? 'Created' : 'Updated'
+						<ul>
+							{ license.audits?.reverse().map(audit => {
+								const message = audit.action === 'create' ? 'Created' : 'Updated'
 
-							return (
-								<li tw="mb-1" key={ audit.id }>
-									{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-								</li>
-							)
-						}) }
-					</ul>
+								return (
+									<li tw="mb-1" key={ audit.id }>
+										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
+									</li>
+								)
+							}) }
+						</ul>
+					</Tabs.Tab>
 
-				</section>
 
-			</section>
+					<Tabs.Tab label="Associations">
+						<Heading order={ 3 }>Licenses</Heading>
+
+					</Tabs.Tab>
+				</Tabs>
+
+			</Section>
 		</>
 	)
 }

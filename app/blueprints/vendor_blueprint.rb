@@ -34,6 +34,10 @@ class VendorBlueprint < ApplicationBlueprint
       vendor.components.count
     end
 
+    field :licenses_count do |vendor|
+      vendor.licenses.count
+    end
+
     association :contact, blueprint: ContactBlueprint
     association :contracts, blueprint: ContractBlueprint
   end

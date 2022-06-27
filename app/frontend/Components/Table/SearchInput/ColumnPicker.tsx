@@ -1,13 +1,13 @@
 import React from 'react'
 import { Inertia } from '@inertiajs/inertia'
-import axios from 'axios'
 import { usePage } from '@inertiajs/inertia-react'
-import { ColumnsIcon } from '@/Components/Icons'
-import { Popover, Option } from '@/Components/Popover'
-import { Checkbox } from '@/Components/Inputs'
 import { Routes } from '@/lib'
+import axios from 'axios'
+import { ColumnsIcon } from '@/Components/Icons'
+import { Checkbox } from '@/Components/Inputs'
 import { useTableContext } from '../TableContext'
-import 'twin.macro'
+import { Button, Popover, Box } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 
 interface IColumnPickerProps {
 	model: string
@@ -16,6 +16,7 @@ interface IColumnPickerProps {
 const ColumnPicker = ({ model }: IColumnPickerProps) => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
 	const { tableState: { columns } } = useTableContext()
+	const [open, handlers] = useDisclosure(false)
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		axios.patch( Routes.updateTablePreferences(user.id), {
@@ -28,26 +29,30 @@ const ColumnPicker = ({ model }: IColumnPickerProps) => {
 					}
 				}
 			}
-		}).then(response => {
+		}).then(() => {
 			Inertia.reload({ only: ['auth'] })
 		})
 	}
 
 	return (
-		<div tw="absolute top-0 right-0 w-10 h-full bg-brand-light">
-			<Popover icon={ ColumnsIcon } tw="p-1 h-full">
-				{ [...columns].map(([name, { label, index }]) => (
-					<Option key={ name } bubble={ false }>
-						<Checkbox
-							name={ name }
-							label={ label }
-							labelPosition="end"
-							onChange={ handleChange }
-							checked={ !user.table_preferences?.[model]?.hide?.[name] }
-						/>
-					</Option>)) }
-			</Popover>
-		</div>
+		<Popover
+			opened={ open }
+			onClose={ handlers.close }
+			target={ <Button onClick={ handlers.toggle } size="md" p="sm"><ColumnsIcon /></Button> }
+			position="bottom"
+			placement="end"
+			spacing="xs"
+		>
+			{ [...columns].map(([name, label]) => (
+				<Box key={ name } p={ 4 }>
+					<Checkbox
+						name={ name }
+						label={ label }
+						onChange={ handleChange }
+						checked={ !user.table_preferences?.[model]?.hide?.[name] }
+					/>
+				</Box>)) }
+		</Popover>
 	)
 }
 

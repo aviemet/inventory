@@ -1,5 +1,5 @@
 import React from 'react'
-import cx from 'classnames'
+import cx from 'clsx'
 import { DivProps } from 'react-html-props'
 
 interface IFieldProps extends DivProps {

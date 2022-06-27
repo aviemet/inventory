@@ -24,7 +24,6 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="first_name" label="First Name" required autoFocus />
 
@@ -52,7 +51,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 				onOpen={ () => Inertia.reload({ only: ['people'] }) }
 			/>
 
-			<Submit className="w-full">
+			<Submit>
 				{ person.id ? 'Update' : 'Create' } Person
 			</Submit>
 		</Form>

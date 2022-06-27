@@ -1,6 +1,9 @@
 import React from 'react'
 import IconProvider from './IconProvider'
 import LayoutProvider, { useLayout } from './LayoutProvider'
+import UiFrameworkProvider from './UiFrameworkProvider'
+
+import './reset.css'
 
 export {
 	useLayout,
@@ -12,11 +15,13 @@ interface IProviderProps {
 
 const Providers = React.memo(({ children }: IProviderProps) => {
 	return (
-		<LayoutProvider>
-			<IconProvider>
-				{ children }
-			</IconProvider>
-		</LayoutProvider>
+		<UiFrameworkProvider>
+			<LayoutProvider>
+				<IconProvider>
+					{ children }
+				</IconProvider>
+			</LayoutProvider>
+		</UiFrameworkProvider>
 	)
 })
 

@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import Cell from '../Cell'
+import { Checkbox } from '@mantine/core'
 import { useTableContext } from '../TableContext'
 
 interface IRowCheckBox {
 	selected: Set<string>
 	rows?: Record<string,any>[]
+	allChecked: boolean
+	indeterminate: boolean
 }
 
-const HeadCheckbox = ({ selected, rows }: IRowCheckBox) => {
+const HeadCheckbox = ({ selected, rows, allChecked, indeterminate }: IRowCheckBox) => {
 	const { setTableState } = useTableContext()
-	const [checkState, setCheckState] = useState(false)
-
-	const checkboxRef = useRef<HTMLInputElement>(null)
 
 	const handleClick = (e:  React.ChangeEvent<HTMLInputElement>) => {
 		if(!rows || rows.length === 0) return
@@ -27,21 +27,9 @@ const HeadCheckbox = ({ selected, rows }: IRowCheckBox) => {
 		setTableState({ selected })
 	}
 
-	useEffect(() => {
-		if(!rows || rows.length === 0) return
-
-		if(selected.size === rows.length) {
-			setCheckState(true)
-		} else if(selected.size === 0) {
-			setCheckState(false)
-		} else {
-			checkboxRef.current!.indeterminate = true
-		}
-	}, [selected.size])
-
 	return (
 		<Cell checkbox>
-			<input type="checkbox" onChange={ handleClick } checked={ checkState } ref={ checkboxRef } />
+			<Checkbox onChange={ handleClick } checked={ allChecked } indeterminate={ indeterminate } />
 		</Cell>
 	)
 }

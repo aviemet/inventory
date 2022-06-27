@@ -26,7 +26,6 @@ const ContractForm = ({ to, method = 'post', onSubmit, contract, vendors, catego
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Name" required autoFocus />
 
@@ -54,7 +53,7 @@ const ContractForm = ({ to, method = 'post', onSubmit, contract, vendors, catego
 
 			<Textarea name="notes" label="Notes" />
 
-			<Submit className="w-full">
+			<Submit>
 				{ contract.id ? 'Update' : 'Create' } Contract
 			</Submit>
 		</Form>

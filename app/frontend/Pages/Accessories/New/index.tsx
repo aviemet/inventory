@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head, usePage } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -19,11 +20,11 @@ const NewAccessory = ({ ...data }: INewAccessoryProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<section className="container">
+			<Section>
 				<h1>{ title } for { user.active_company!.name }</h1>
 
 				<AccessoryForm to={ Routes.accessories() } { ...data } />
-			</section>
+			</Section>
 		</>
 	)
 }

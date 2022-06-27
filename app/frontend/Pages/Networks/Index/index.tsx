@@ -1,14 +1,9 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link } from '@/Components'
-import { Routes } from '@/lib'
-import * as Table from '@/Components/Table'
-import { Popover, Option } from '@/Components/Popover'
-import { EditButton } from '@/Components/Button'
-import {
-	TableSection,
-	TableTitleSection,
-} from '@/Components/Layout/IndexPageComponents'
+import { Routes, formatter } from '@/lib'
+import { Link, Table } from '@/Components'
+import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
+import { NewIcon } from '@/Components/Icons'
 
 interface INetworksIndexProps {
 	networks: Schema.Network[]
@@ -22,7 +17,7 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 		<>
 			<Head title={ title }></Head>
 
-			<TableSection>
+			<Table.Section>
 				<Table.TableProvider
 					selectable
 					hideable
@@ -31,18 +26,14 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 					pagination={ pagination }
 				>
 
-					<TableTitleSection
+					<Table.Title
 						title={ title }
-						popover={
-							<Popover>
-								<Option href={ Routes.newNetwork() }>
-									Create New Network
-								</Option>
-							</Popover>
-						}
+						menuOptions={ [
+							{ label: 'New Network', href: Routes.newNetwork(), icon: NewIcon },
+						] }
 					/>
 
-					<Table.Table fixed={ false }>
+					<Table>
 						<Table.Head>
 							<Table.Row>
 								<Table.Cell sort="name">Name</Table.Cell>
@@ -51,41 +42,50 @@ const Index = ({ networks, pagination }: INetworksIndexProps) => {
 								<Table.Cell sort="dhcp_start">DHCP Start</Table.Cell>
 								<Table.Cell sort="dhcp_end">DHCP End</Table.Cell>
 								<Table.Cell sort="vland_id">VLAN Id</Table.Cell>
-								<Table.Cell className="text-right">Actions</Table.Cell>
+								<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 							</Table.Row>
 						</Table.Head>
 
 						<Table.Body>
 							<Table.RowIterator render={ network => (
 								<Table.Row key={ network.id }>
+
 									<Table.Cell nowrap>
 										<Link href={ Routes.network(network) }>{ network.name }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.network(network) }>{ network.address }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.network(network) }>{ network.gateway }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.network(network) }>{ network.dhcp_start }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.network(network) }>{ network.dhcp_end }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.network(network) }>{ network.vland_id }</Link>
 									</Table.Cell>
-									<Table.Cell className="table-column-fit text-right">
+
+									<Table.Cell className="table-column-fit">
 										<EditButton href={ Routes.editNetwork(network) } />
 									</Table.Cell>
+
 								</Table.Row>
 							) } />
 						</Table.Body>
-					</Table.Table>
+					</Table>
+
 					<Table.Pagination />
 				</Table.TableProvider>
-			</TableSection>
+			</Table.Section>
 		</>
 	)
 }

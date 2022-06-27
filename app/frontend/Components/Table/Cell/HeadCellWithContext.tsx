@@ -1,34 +1,39 @@
 import React, { useEffect, useRef } from 'react'
-import { Link, usePage } from '@inertiajs/inertia-react'
-import cn from 'classnames'
+import { usePage } from '@inertiajs/inertia-react'
+import { Link } from '@/Components'
+import cx from 'clsx'
 import { type ICellProps } from './index'
 import { useTableContext } from '../TableContext'
+import { Box } from '@mantine/core'
 
 interface IHeadCellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
 }
 
-const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hideable = true, ...props }: IHeadCellWithContextProps) => {
+const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hideable, ...props }: IHeadCellWithContextProps) => {
 	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
 	const { tableState: { columns, model }, setTableState } = useTableContext()
 
 	const thRef = useRef<HTMLTableCellElement>(null)
 
-	useEffect(() => {
-		if(hideable && sort && !columns.has(sort)) {
-			columns.set(sort, { label: String(children), index: thRef.current?.dataset?.index })
-			setTableState({ columns })
+	const hideableString = hideable || sort
 
+	// Register hideable object with table context for column
+	useEffect(() => {
+		if(hideable === false) return
+
+		if(hideableString !== undefined && !columns.has(hideableString)) {
+			columns.set(hideableString, String(children))
+			setTableState({ columns })
 		}
 	}, [])
 
-	let hidden = false
-	if(hideable && sort && model && table_preferences?.[model]?.hide?.[sort]) {
-		hidden = true
+	if(hideableString !== undefined && model && table_preferences?.[model]?.hide?.[hideableString]) {
+		return <></>
 	}
 
-	const { origin, pathname, search } = window.location
-
+	// Build search params for column sorting
+	const { pathname, search } = window.location
 	const params = new URLSearchParams(search)
 	const paramsSort = params.get('sort')
 	const paramsDirection = params.get('direction')
@@ -45,25 +50,30 @@ const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, h
 	const showSortLink = sort && rows!.length > 1
 
 	return (
-		<th
-			className={ cn(
+		<Box
+			component="th"
+			ref={ thRef }
+			className={ cx(
 				{ 'table-column-fit': checkbox },
 				{ 'sortable': showSortLink },
 				{ [direction]: showSortLink && paramsSort === sort },
-				{ 'whitespace-nowrap': nowrap },
-				{ 'hidden': hidden }
 			) }
-			ref={ thRef }
+			sx={ {
+				whiteSpace: nowrap ? 'nowrap' : 'normal',
+			} }
 			{ ...props }
 		>
 			{ showSortLink ?
 				<Link
-					href={ `${origin}${pathname}?${params.toString()}` }
+					href={ `${pathname}?${params.toString()}` }
 					preserveScroll={ true }
-				>{ children }</Link>
-				: children
+				>
+					{ children }
+				</Link>
+				:
+				children
 			}
-		</th>
+		</Box>
 	)
 }
 

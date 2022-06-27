@@ -19,7 +19,7 @@ interface ITableSettings {
 	selectable: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
-	columns: Map<string, { label: string, index?: string }>
+	columns: Map<string, string>
 	selected: Set<string>
 	hideable: boolean
 	model?: string
@@ -58,7 +58,7 @@ const TableProvider: React.FC<ITableContextProviderProps> = ({
 	const [tableState, setTableState] = useReducer(tableReducer, {
 		selectable,
 		rows,
-		columns: new Map<string, { label: string, index?: string }>(),
+		columns: new Map<string, string>(),
 		pagination,
 		selected: new Set<string>(),
 		hideable,
@@ -85,7 +85,7 @@ interface IStatePreservingRowUpdaterProps {
  * Without this explicitly updating rows with the fresh data response, the table wouldn't update with new rows
  * This allows both sorting and filtering to work properly without losing input focus
  */
-const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = ({ children, rows, pagination }) => {
+const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = React.memo(({ children, rows, pagination }) => {
 	const { setTableState } = useTableContext()
 
 	useEffect(() => {
@@ -93,6 +93,6 @@ const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = ({ 
 	}, [rows, pagination])
 
 	return <>{ children }</>
-}
+})
 
 export default TableProvider

@@ -1,14 +1,15 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
+import { Section } from '@/Components'
 
 const Dashboard = () => {
 	return (
 		<>
 			<Head title="Dashboard"></Head>
 
-			<section className="container">
+			<Section>
 				<h1>Dashboard!</h1>
-			</section>
+			</Section>
 		</>
 	)
 }

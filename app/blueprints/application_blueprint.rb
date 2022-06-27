@@ -12,30 +12,19 @@ class ApplicationBlueprint < Blueprinter::Base
 
   protected
 
-  # Override methods to remove included fields from excluded fields list
   def self.field(method, options={}, &block)
-    unexclude([method])
-    super(method, options={}, &block)
-  end
-
-  def self.fields(*field_names)
-    unexclude(field_names)
-    super(*field_names)
+    unexclude(method)
+    super
   end
 
   private
 
   def self.currency_for(obj)
-    obj&.cost&.amount.to_f
+    obj&.cost&.amount&.to_f unless obj.cost.nil?
   end
 
-  def self.only(*keys)
-    excludes(*keys.filter{ |f| !only.include? f })
-    fields(*keys)
-  end
-
-  def self.unexclude(*field_names)
-    field_names.each { |n| current_view.excluded_field_names.delete n }
+  def self.unexclude(field_name)
+    current_view.excluded_field_names.delete field_name
   end
 
   def self.only(*fields)

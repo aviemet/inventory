@@ -1,36 +1,20 @@
-import React, { useRef } from 'react'
-import cn from 'classnames'
-import { type ICellProps } from './index'
+import React from 'react'
 import { useTableContext } from '../TableContext'
-import { usePage } from '@inertiajs/inertia-react'
+import BodyCellWithContext from './BodyCellWithContext'
+import { type ICellProps } from './index'
 
-const BodyCell = ({ children, nowrap, checkbox, ...props }: ICellProps) => {
-	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
-	const { tableState: { columns, model } } = useTableContext()
-	const tdRef = useRef<HTMLTableCellElement>(null)
+const BodyCell = ({ children, ...props }: ICellProps) => {
+	try {
+		const { tableState: { model } } = useTableContext()
 
-	let hidden = false
-	if(model && tdRef.current?.dataset?.index && columns.size > 0) {
-		for(let [name, { index }] of columns.entries()) {
-			if(index === tdRef.current.dataset.index && table_preferences?.[model]?.hide?.[name]) {
-				hidden = true
-			}
-		}
+		return (
+			<BodyCellWithContext model={ model } { ...props }>
+				{ children }
+			</BodyCellWithContext>
+		)
+	} catch(e) {
+		return <td { ...props }>{ children }</td>
 	}
-
-	return (
-		<td
-			className={ cn(
-				{ 'table-column-fit': checkbox },
-				{ 'whitespace-nowrap': nowrap },
-				{ 'hidden': hidden }
-			) }
-			ref={ tdRef }
-			{ ...props }
-		>
-			{ children }
-		</td>
-	)
 }
 
 export default BodyCell
