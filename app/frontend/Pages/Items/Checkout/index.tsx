@@ -1,5 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
+import { Head } from '@inertiajs/inertia-react'
 import { Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
@@ -16,7 +16,6 @@ interface ICheckoutItemProps {
 
 const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Item'
-	const { props } = usePage<InertiaPage>()
 
 	return (
 		<>
@@ -61,7 +60,6 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 					} }
 					to={ Routes.assignments({ id: item.id }) }
 					model="assignment"
-					className="max-w-5xl"
 				>
 					<Input
 						model="item"

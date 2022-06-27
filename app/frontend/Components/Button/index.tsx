@@ -1,12 +1,4 @@
-import React from 'react'
-import { Button, type ButtonProps } from '@mantine/core'
-
-const ButtonComponent = ({ children, ...props }: ButtonProps<'button'>) => {
-	return (
-		<Button { ...props }>{ children }</Button>
-	)
-}
-
+import { Button } from '@mantine/core'
 export default Button
 
 export { default as EditButton } from './EditButton'
