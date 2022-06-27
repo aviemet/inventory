@@ -28,7 +28,6 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Name" required autoFocus />
 
@@ -77,7 +76,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 
 			<Textarea name="notes" label="Notes" />
 
-			<Submit className="w-full">
+			<Submit>
 				{ accessory.id ? 'Update' : 'Create' } Accessory
 			</Submit>
 		</Form>

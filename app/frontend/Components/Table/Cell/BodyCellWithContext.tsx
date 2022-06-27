@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import cn from 'classnames'
+import cx from 'clsx'
 import { type ICellProps } from './index'
 import { usePage } from '@inertiajs/inertia-react'
 import { Box } from '@mantine/core'
@@ -21,7 +21,7 @@ const BodyCell = ({ children, nowrap, checkbox, hideable, model, ...props }: IBo
 		<Box
 			component="td"
 			ref={ tdRef }
-			className={ cn({ 'table-column-fit': checkbox }) }
+			className={ cx({ 'table-column-fit': checkbox }) }
 			sx={ {
 				whiteSpace: nowrap ? 'nowrap' : 'normal',
 			} }

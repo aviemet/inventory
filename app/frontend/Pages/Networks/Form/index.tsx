@@ -21,7 +21,6 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network }: INetworkFormPro
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Name" required autoFocus />
 
@@ -37,7 +36,7 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network }: INetworkFormPro
 
 			<Textarea name="notes" label="Notes" />
 
-			<Submit className="w-full">
+			<Submit>
 				{ network.id ? 'Update' : 'Create' } Network
 			</Submit>
 		</Form>

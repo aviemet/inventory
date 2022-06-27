@@ -4,7 +4,7 @@ import { EditIcon } from '@/Components/Icons'
 
 const EditButton = ({ href }: {href: string}) => {
 	return (
-		<Link as="button" href={ href }><EditIcon /></Link>
+		<Link as="button" compact href={ href }><EditIcon /></Link>
 	)
 }
 

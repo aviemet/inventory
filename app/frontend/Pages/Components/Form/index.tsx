@@ -28,7 +28,6 @@ const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendo
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Name" required autoFocus />
 
@@ -76,7 +75,7 @@ const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendo
 
 			<Textarea name="notes" label="Notes" />
 
-			<Submit className="w-full">
+			<Submit>
 				{ component.id ? 'Update' : 'Create' } Component
 			</Submit>
 		</Form>

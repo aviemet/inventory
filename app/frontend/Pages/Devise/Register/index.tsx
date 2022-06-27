@@ -71,7 +71,7 @@ const Register = () => {
 					</div>
 
 					<div>
-						<Submit className="large w-full">Sign Up</Submit>
+						<Submit className="large">Sign Up</Submit>
 					</div>
 
 				</Tile.Content>

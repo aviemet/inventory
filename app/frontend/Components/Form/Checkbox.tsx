@@ -2,7 +2,6 @@ import React, { useCallback } from 'react'
 import { useForm, useInputProps } from './index'
 import Field from './Field'
 import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
-import cx from 'clsx'
 
 interface IFormCheckboxProps extends Omit<ICheckboxProps, 'onChange'> {
 	name: string
@@ -20,7 +19,6 @@ const FormCheckboxComponent = ({ name, onChange, id, required, className, ...pro
 
 	return (
 		<Field
-			className="pl-2"
 			type="checkbox"
 			required={ required }
 			errors={ !!form.errors?.[name] }
@@ -31,7 +29,7 @@ const FormCheckboxComponent = ({ name, onChange, id, required, className, ...pro
 				defaultChecked={ Boolean(form.getData(inputName)) }
 				value={ form.getData(inputName) }
 				onChange={ handleChange }
-				className={ cx('mt-auto', 'mb-auto', className) }
+				className={ className }
 				{ ...props }
 			/>
 		</Field>

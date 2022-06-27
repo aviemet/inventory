@@ -3,7 +3,7 @@ import { TextAreaProps } from 'react-html-props'
 import { useForm, useInputProps } from './index'
 import Field from './Field'
 import TextareaInput from '../Inputs/Textarea'
-import cx from 'classnames'
+import cx from 'clsx'
 
 interface ITextareaProps extends Omit<TextAreaProps, 'onChange'> {
 	label?: string

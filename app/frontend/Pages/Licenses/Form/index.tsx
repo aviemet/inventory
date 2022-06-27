@@ -28,7 +28,6 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Name" required autoFocus />
 
@@ -78,7 +77,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 
 			<Textarea name="notes" label="Notes" />
 
-			<Submit className="w-full">
+			<Submit>
 				{ license.id ? 'Update' : 'Create' } License
 			</Submit>
 		</Form>
