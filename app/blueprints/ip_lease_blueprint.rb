@@ -7,5 +7,5 @@ class IpLeaseBlueprint < ApplicationBlueprint
     ip.address.to_s
   end
 
-  association :item, blueprint: ItemBlueprint, options: { view: :shallow }
+  association :item, blueprint: ItemBlueprint, view: :shallow
 end
