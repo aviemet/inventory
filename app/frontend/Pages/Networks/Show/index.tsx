@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/inertia-react'
 import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
+import { EditIcon } from '@/Components/Icons'
 
 interface INetworkDetails extends Schema.Network {
 	hosts: string[]
@@ -27,8 +28,8 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu>
-						<Menu.Item href={ Routes.editNetwork(network) }>
-							{ title }
+						<Menu.Item href={ Routes.editNetwork(network) } icon={ <EditIcon /> }>
+							Edit
 						</Menu.Item>
 					</Menu>
 				</Flex>
@@ -81,7 +82,7 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 			<Section>
 				<Heading order={ 2 }>Addresses</Heading>
 
-				<Flex>
+				<Flex align="start">
 					{ Array(tableRows).fill('').map((_, i) => {
 						const start = Math.ceil(network.hosts.length / tableRows * i)
 						const end = Math.ceil((network.hosts.length / tableRows) * (i + 1))
