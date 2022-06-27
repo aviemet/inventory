@@ -1,7 +1,7 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
-import { formatter, Routes } from '@/lib'
+import { Section, Menu, Flex, Heading } from '@/Components'
+import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
 import { EditIcon } from '@/Components/Icons'
 

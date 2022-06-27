@@ -1,10 +1,8 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Link, Section } from '@/Components'
+import { Section, Menu, Flex, Heading, Tabs } from '@/Components'
 import { formatter, Routes } from '@/lib'
-import tw from 'twin.macro'
-import { Popover, Option } from '@/Components/Popover'
-import { StickyLink, StickyTarget } from '@/Components/StickyContent/index'
+import { EditIcon } from '@/Components/Icons'
 
 interface IShowPersonProps {
 	person: Schema.Person & { name: string }
@@ -18,97 +16,84 @@ const Show = ({ person }: IShowPersonProps) => {
 			<Head title={ title }></Head>
 
 			<Section>
-				<div tw="flex">
-					<h1 tw="flex-1">{ title }</h1>
+				<Flex position="apart">
+					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-					<div tw="w-10 p-1">
-						<Popover>
-							<Option href={ Routes.editPerson(person) }>
+					<Menu>
+						<Menu.Item href={ Routes.editPerson(person) } icon={ <EditIcon /> }>
 								Edit Person
-							</Option>
-						</Popover>
-					</div>
-				</div>
+						</Menu.Item>
+					</Menu>
+				</Flex>
 
-				<nav className="sticky" tw="bg-white p-3 border-b-2 -top-4">
-					<div tw="inline px-2">
-						<StickyLink section="details">Details</StickyLink>
-					</div>
-					<div tw="inline px-2">
-						<StickyLink section="assets">Assets</StickyLink>
-					</div>
-					<div tw="inline px-2">
-						<StickyLink section="history">History</StickyLink>
-					</div>
-				</nav>
+				<Tabs>
+					<Tabs.Tab label="Details">
+						<Heading order={ 3 }>Details</Heading>
 
-				<StickyTarget id="details" />
-				<Section>
-					<h3>Details</h3>
+						<div className="item-details">
 
-					<div className="item-details">
-
-						<div className="item-row">
-							<label>Name:</label>
-							<div className="value">
-								{ person.name }
+							<div className="item-row">
+								<label>Name:</label>
+								<div className="value">
+									{ person.name }
+								</div>
 							</div>
-						</div>
 
-						<div className="item-row">
-							<label>Employee #:</label>
-							<div className="value">
-								{ person.employee_number ?? person.employee_number }
+							<div className="item-row">
+								<label>Employee #:</label>
+								<div className="value">
+									{ person.employee_number ?? person.employee_number }
+								</div>
 							</div>
+
 						</div>
+						<h3>Assets</h3>
 
-					</div>
-				</Section>
+						<ul>
+							{ person.posessions && person.posessions.filter(assignment => assignment.active).map(assignment => (
+								<li key={ assignment.id }>{ assignment.assignable_type }</li>
+							)) }
+						</ul>
+					</Tabs.Tab>
 
-				<StickyTarget id="assets" />
-				<Section>
-					<h3>Assets</h3>
+					<Tabs.Tab label="History">
+						<Heading order={ 3 }>Assignment History</Heading>
 
-					<ul>
-						{ person.posessions && person.posessions.filter(assignment => assignment.active).map(assignment => (
-							<li key={ assignment.id }>{ assignment.assignable_type }</li>
-						)) }
-					</ul>
-				</Section>
-
-				<StickyTarget id="history" />
-				<Section>
-					<h3>Assignment History</h3>
-
-					<div tw="inline-grid grid-cols-2">
-						{ person.posessions && person.posessions.reverse().map(assignment => (
-							<React.Fragment key={ assignment.id }>
-								<div>
+						<div>
+							{ person.posessions && person.posessions.reverse().map(assignment => (
+								<React.Fragment key={ assignment.id }>
+									<div>
 								Link to assigntoable object
-								</div>
-								<div>
-									{ assignment.assignable_type }
-								</div>
-							</React.Fragment>
-						)) }
-					</div>
+									</div>
+									<div>
+										{ assignment.assignable_type }
+									</div>
+								</React.Fragment>
+							)) }
+						</div>
 
-					<h3>Audit History</h3>
+						<Heading order={ 3 }>Audit History</Heading>
 
-					<ul>
-						{ person.audits?.reverse().map(audit => {
-							const message = audit.action === 'create' ? 'Created' : 'Updated'
 
-							return (
-								<li tw="mb-1" key={ audit.id }>
-									{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-								</li>
-							)
-						}) }
-					</ul>
+						<ul>
+							{ person.audits?.reverse().map(audit => {
+								const message = audit.action === 'create' ? 'Created' : 'Updated'
 
-				</Section>
+								return (
+									<li key={ audit.id }>
+										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
+									</li>
+								)
+							}) }
+						</ul>
 
+					</Tabs.Tab>
+
+					<Tabs.Tab label="Associations">
+						<Heading order={ 3 }>Licenses</Heading>
+
+					</Tabs.Tab>
+				</Tabs>
 			</Section>
 		</>
 	)

@@ -1,14 +1,15 @@
 import React from 'react'
-import { Link, Card, Section } from '@/Components'
+import { Head } from '@inertiajs/inertia-react'
+import { Section, Link, Menu, Flex, Heading, Card, Tabs, Table } from '@/Components'
 import { Routes } from '@/lib'
-import tw from 'twin.macro'
-import { Option, Popover } from '@/Components/Popover'
+import { EditIcon } from '@/Components/Icons'
 
 type ShowPageVendor = Schema.Vendor & {
 	items_count: number
 	accessories_count: number
 	consumables_count: number
 	components_count: number
+	licenses_count: number
 }
 
 interface IVendorShowProps {
@@ -16,47 +17,48 @@ interface IVendorShowProps {
 }
 
 const Show = ({ vendor }: IVendorShowProps) => {
+	const title = vendor.name ?? 'Vendor Details'
+
 	return (
 		<>
-			<Section tw="mb-4">
-				<div tw="flex justify-between">
-					<h1>{
-						vendor.url ?
-							<Link href={ vendor.url } target="_blank" rel="noreferrer">{ vendor.name }</Link>
-							:
-							vendor.name
-					}</h1>
+			<Head title={ title }></Head>
 
-					<div tw="w-10 p-1">
-						<Popover>
-							<Option href={ Routes.editVendor(vendor.slug) }>
+			<Section>
+				<Flex position="apart">
+					<Heading sx={ { flex: 1 } }>{
+						vendor.url ?
+							<Link href={ vendor.url } target="_blank" rel="noreferrer">{ title }</Link>
+							:
+							title
+					}</Heading>
+
+					<Menu>
+						<Menu.Item href={ Routes.editVendor(vendor.slug) } icon={ <EditIcon /> }>
 							Edit
-							</Option>
-						</Popover>
-					</div>
-				</div>
+						</Menu.Item>
+					</Menu>
+				</Flex>
 			</Section>
 
-			<Section tw="flex">
-				<Card>
-					<h3>Hardware</h3>
-					<p>{ vendor.items_count }</p>
-				</Card>
+			<Section>
+				<Tabs>
+					<Tabs.Tab label={ `Hardware (${vendor.items_count})` }>
+						<Table></Table>
+					</Tabs.Tab>
+					<Tabs.Tab label={ `Accessories (${vendor.accessories_count})` }>
+						<Table></Table>
+					</Tabs.Tab>
+					<Tabs.Tab label={ `Consumables (${vendor.consumables_count})` }>
+						<Table></Table>
+					</Tabs.Tab>
+					<Tabs.Tab label={ `Components (${vendor.components_count})` }>
+						<Table></Table>
+					</Tabs.Tab>
+					<Tabs.Tab label={ `Licenses (${vendor.licenses_count})` }>
+						<Table></Table>
+					</Tabs.Tab>
+				</Tabs>
 
-				<Card>
-					<h3>Accessories</h3>
-					<p>{ vendor.accessories_count }</p>
-				</Card>
-
-				<Card>
-					<h3>Consumables</h3>
-					<p>{ vendor.consumables_count }</p>
-				</Card>
-
-				<Card>
-					<h3>Components</h3>
-					<p>{ vendor.components_count }</p>
-				</Card>
 			</Section>
 		</>
 	)

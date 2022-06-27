@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-	Form,
-	Input,
-	Submit,
-} from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
+import { Form, Input, Submit } from '@/Components/Form'
 
 export interface IVendorFormProps {
 	to: string
@@ -21,13 +16,12 @@ const VendorForm = ({ to, method = 'post', onSubmit, vendor }: IVendorFormProps)
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			className="max-w-5xl"
 		>
 			<Input name="name" label="Name" required autoFocus />
 
 			<Input name="url" label="Website" />
 
-			<Submit className="w-full">
+			<Submit>
 				{ vendor.id ? 'Update' : 'Create' } Vendor
 			</Submit>
 		</Form>
