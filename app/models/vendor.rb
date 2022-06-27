@@ -23,6 +23,7 @@ class Vendor < ApplicationRecord
   has_many :accessories
   has_many :consumables
   has_many :components
+  has_many :licenses
 
-  scope :includes_associated, -> { includes([:items]) }
+  scope :includes_associated, -> { includes([:contracts, :items, :accessories, :consumables, :components, :licenses]) }
 end

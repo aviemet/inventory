@@ -1,7 +1,8 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
 import { formatter, Routes } from '@/lib'
+import { EditIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
 
 interface IShowItemProps {
 	item: Schema.Item
@@ -20,15 +21,15 @@ const Show = ({ item }: IShowItemProps) => {
 
 					<Menu>
 						{ item.assignments ?
-							<Menu.Item href={ Routes.checkinItem(item) }>
+							<Menu.Item href={ Routes.checkinItem(item) } icon={ CheckinIcon }>
 									Checkin Item
 							</Menu.Item>
 							:
-							<Menu.Item href={ Routes.checkoutItem(item) }>
+							<Menu.Item href={ Routes.checkoutItem(item) } icon={ CheckoutIcon }>
 									Checkout Item
 							</Menu.Item>
 						}
-						<Menu.Item href={ Routes.editItem(item) }>
+						<Menu.Item href={ Routes.editItem(item) } icon={ <EditIcon /> }>
 								Edit Item
 						</Menu.Item>
 					</Menu>
@@ -37,12 +38,6 @@ const Show = ({ item }: IShowItemProps) => {
 				<Tabs>
 					<Tabs.Tab label="Details">
 						<Heading order={ 3 }>Details</Heading>
-
-						<Table>
-							<Table.Head>
-
-							</Table.Head>
-						</Table>
 
 						<div className="item-details">
 
