@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Menu, Link } from '@/Components'
+import { Menu, Link } from '@/Components'
 import {
 	PlusCircleIcon,
 	ItemsIcon,
@@ -11,7 +11,6 @@ import {
 	ConsumablesIcon,
 } from '@/Components/Icons'
 import { Routes } from '@/lib'
-// import { Button } from '@mantine/core'
 
 const QuickNewMenu = () => {
 	return (

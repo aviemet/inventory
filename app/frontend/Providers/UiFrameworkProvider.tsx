@@ -79,11 +79,17 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 						'html, body': {
 							overflow: 'hidden',
 						},
+
 						'*::selection': {
 							backgroundColor: theme.colors[theme.primaryColor][2],
 						},
+
 						':root': {
 							colorScheme: theme.colorScheme,
+						},
+
+						'.hidden': {
+							display: 'none',
 						},
 					}) } />
 					{ children }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { useLayout } from '@/Providers'
 import { Group, Navbar, Text, ThemeIcon, useMantineTheme } from '@mantine/core'
 import cx from 'clsx'
@@ -29,8 +29,17 @@ const Sidebar = () => {
 	const { layoutState, setLayoutState } = useLayout()
 	const theme = useMantineTheme()
 	const{ classes } = useNavigationStyles()
+	const [siteTitleHidden, setSiteTitleHidden] = useState(false)
 
 	const handleNavClick = () => setLayoutState({ sidebarOpen: false })
+
+	// Delay text to avoid layout shift when opening/closing sidebar
+	useLayoutEffect(() => {
+		const ms = layoutState.sidebarOpen ? 100 : 0
+		setTimeout(() => {
+			setSiteTitleHidden(!layoutState.sidebarOpen)
+		}, ms)
+	}, [layoutState.sidebarOpen])
 
 	return (
 		<IconProvider value={ { size: '24px' } }>
@@ -46,7 +55,7 @@ const Sidebar = () => {
 						<ThemeIcon radius="md" size="lg">
 							<ComponentsIcon />
 						</ThemeIcon>
-						{ layoutState.sidebarOpen && <Text>Inventory</Text> }
+						<Text className={ cx({ hidden: siteTitleHidden }) }>Inventory</Text>
 					</Group>
 				</Navbar.Section>
 				<Navbar.Section grow onClick={ handleNavClick } className="links">

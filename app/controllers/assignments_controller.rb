@@ -26,6 +26,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments/:asset_type/:asset_id.json
   def create
     assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
+    assignment.assign_toable_id = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])[:id]
     if assignment.save
       redirect_to assignable
     else
@@ -73,7 +74,7 @@ class AssignmentsController < ApplicationController
   end
 
   def assignment_params
-    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name])
+    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name])
   end
 
   def find_assignable(asset_type:, asset_id:)
