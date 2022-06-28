@@ -26,7 +26,7 @@ class AssignmentsController < ApplicationController
     assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
     assignment.assign_toable_id = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])[:id]
     assignment.created_by = current_user
-    
+
     if assignment.save
       redirect_to assignable
     else
@@ -45,6 +45,11 @@ class AssignmentsController < ApplicationController
         format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # PATCH/PUT /assignments/:id/checkin
+  def unassign
+    assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
   end
 
   # DELETE /assignments/:id
