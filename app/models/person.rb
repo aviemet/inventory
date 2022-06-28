@@ -39,6 +39,10 @@ class Person < ApplicationRecord
     :first_name
   end
 
+  def default_location
+    self&.location || self&.department&.location
+  end
+
   private
 
   def ensure_associated_contact

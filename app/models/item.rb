@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   include Fieldable
   include PgSearch::Model
 
+
   pg_search_scope(
     :search,
     against: [:name, :asset_tag, :serial, :cost_cents], associated_against: {
@@ -44,8 +45,9 @@ class Item < ApplicationRecord
   scope :includes_associated, -> { includes([:category, :model, :assignments, :department, :vendor, :manufacturer, :audits]) }
 
   # Update Item name if changed during assignment
-  def before_assignment(_, params)
-    name = params&.[](:assignment)&.[](:item)&.[](:name)
-    self.update(name: name) unless name.nil?
-  end
+  # def before_assignment(_, params)
+  #   name = params&.[](:assignment)&.[](:item)&.[](:name)
+  #   self.update(name: name) unless name.nil?
+  # end
+
 end

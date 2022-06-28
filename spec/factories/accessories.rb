@@ -8,6 +8,7 @@ FactoryBot.define do
     requestable { false }
     notes { Faker::Lorem.sentence }
     default_location factory: :location
+    status_type
     model
     manufacturer
     category

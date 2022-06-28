@@ -20,6 +20,7 @@ RSpec.describe "/items", type: :request do
       item: attributes_for(:item,
         model_id: create(:model).id,
         vendor_id: create(:vendor).id,
+        default_location_id: create(:location).id
       )
     }
   end

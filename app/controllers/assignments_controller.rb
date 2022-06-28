@@ -1,10 +1,7 @@
 class AssignmentsController < ApplicationController
-  # before_action :set_assignment, only: [:show, :edit, :update, :destroy]
-  # before_action :set_assignable, only: [:create] #, :end, :checkin]
   # before_action :redirect_if_already_assigned, only: [:create]
 
   expose :assignment
-  # expose :assignable, -> { }
 
   # GET /assignments/:id
   def show
@@ -24,10 +21,14 @@ class AssignmentsController < ApplicationController
   # POST /assignments/:asset_type/:asset_id
   def create
     assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
-    assignment.assign_toable_id = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])[:id]
-    assignment.created_by = current_user
+    assign_toable_decoded = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])
+    assign_toable = assign_toable_decoded[:model].constantize.find(assign_toable_decoded[:id])
 
-    if assignment.save
+    # assignment.assign_toable_id = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])[:id]
+    # assignment.created_by = current_user
+
+    # if assignment.save
+    if assignable.assign_to assign_toable, assignment_params.merge({ created_by: current_user })
       redirect_to assignable
     else
       redirect_to send("checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", id: assignable.encode_id), inertia: { errors: assignment.errors }
@@ -49,7 +50,7 @@ class AssignmentsController < ApplicationController
 
   # PATCH/PUT /assignments/:id/checkin
   def unassign
-    assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
+    # assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
   end
 
   # DELETE /assignments/:id
@@ -63,13 +64,6 @@ class AssignmentsController < ApplicationController
 
   private
 
-  def set_assignable
-    asset_class = params[:assignable_type].capitalize.constantize
-    raise "\"#{asset_class.name}\" is not an assignable asset type" unless asset_class.include?(Assignable)
-
-    @assignable = asset_class.find(params[:assignable_id])
-  end
-
   def redirect_if_already_assigned
     if @assignable.respond_to?(:assigned_to) && @assignable&.assigned_to
       redirect_back fallback_location: @assignable, alert: "An asset can only have one active assignment"
@@ -78,13 +72,5 @@ class AssignmentsController < ApplicationController
 
   def assignment_params
     params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name])
-  end
-
-  def find_assignable(asset_type:, asset_id:)
-    asset_type.capitalize.constantize.find(asset_id)
-  end
-
-  def find_assign_toable
-    assignment_params[:assign_toable_type].capitalize.constantize.find(assignment_params[:assign_toable_id])
   end
 end
