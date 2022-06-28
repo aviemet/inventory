@@ -123,10 +123,12 @@ declare namespace Schema {
 		default_location_id?: number | null;
 		created_at: string;
 		updated_at: string;
+		status_type_id?: number | null;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
+		status_type?: StatusType;
 		posessions?: Assignment[];
 		items?: Item[];
 		accessories?: Accessory[];
@@ -247,10 +249,12 @@ declare namespace Schema {
 		default_location_id?: number | null;
 		created_at: string;
 		updated_at: string;
+		status_type_id?: number | null;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
+		status_type?: StatusType;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];
@@ -314,10 +318,12 @@ declare namespace Schema {
 		manufacturer_id: number;
 		created_at: string;
 		updated_at: string;
+		status_type_id?: number | null;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
+		status_type?: StatusType;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
@@ -422,10 +428,12 @@ declare namespace Schema {
 		default_location_id?: number | null;
 		created_at: string;
 		updated_at: string;
+		status_type_id?: number | null;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
+		status_type?: StatusType;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
@@ -579,6 +587,7 @@ declare namespace Schema {
 		accessories?: Accessory[];
 		consumables?: Consumable[];
 		components?: Component[];
+		licenses?: License[];
 	}
 
 	interface Person {
@@ -628,10 +637,12 @@ declare namespace Schema {
 		default_location_id: number;
 		created_at: string;
 		updated_at: string;
+		status_type_id?: number | null;
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
+		status_type?: StatusType;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		audits?: AuditedAudit[];

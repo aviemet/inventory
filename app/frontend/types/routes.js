@@ -532,11 +532,12 @@ export const assignment = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[
 
 /**
  * Generates rails route to
- * /assignments(.:format)
+ * /assignments/:id(.:format)
+ * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const assignments = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[1,[2,[8,"."],[3,"format"]]]]]);
+export const assignments = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

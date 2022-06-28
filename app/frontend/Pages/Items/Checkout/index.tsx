@@ -42,11 +42,6 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 							<div className="value">{ item.serial }</div>
 						</div>
 
-						<div className="item-row">
-							<label>Other Userful Data</label>
-							<div className="value">Something Else?</div>
-						</div>
-
 					</div>
 				</div>
 
@@ -58,7 +53,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 						},
 						item,
 					} }
-					to={ Routes.assignments({ id: item.id }) }
+					to={ Routes.assignments(item.id) }
 					model="assignment"
 				>
 					<Input

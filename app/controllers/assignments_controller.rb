@@ -7,7 +7,6 @@ class AssignmentsController < ApplicationController
   # expose :assignable, -> { }
 
   # GET /assignments/:id
-  # GET /assignments/:id.json
   def show
     render inertia: "Assignments/Show", props: {
       assignment: assignment
@@ -23,10 +22,11 @@ class AssignmentsController < ApplicationController
   end
 
   # POST /assignments/:asset_type/:asset_id
-  # POST /assignments/:asset_type/:asset_id.json
   def create
     assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
     assignment.assign_toable_id = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])[:id]
+    assignment.created_by = current_user
+    
     if assignment.save
       redirect_to assignable
     else
@@ -35,7 +35,6 @@ class AssignmentsController < ApplicationController
   end
 
   # PATCH/PUT /assignments/:id
-  # PATCH/PUT /assignments/:id.json
   def update
     respond_to do |format|
       if assignment.update(assignment_params)
@@ -49,7 +48,6 @@ class AssignmentsController < ApplicationController
   end
 
   # DELETE /assignments/:id
-  # DELETE /assignments/:id.json
   def destroy
     assignment.destroy
     respond_to do |format|
