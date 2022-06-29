@@ -44,6 +44,14 @@ class Item < ApplicationRecord
 
   scope :includes_associated, -> { includes([:category, :model, :assignments, :department, :vendor, :manufacturer, :audits]) }
 
+  def location
+    if assigned?
+      assignment.location
+    else
+      self.default_location
+    end
+  end
+
   # Update Item name if changed during assignment
   # def before_assignment(_, params)
   #   name = params&.[](:assignment)&.[](:item)&.[](:name)
