@@ -15,41 +15,49 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 	const strModelNameRef = useRef('people')
 
 	useEffect(() => {
-		let obj: Record<string, any>[] = []
-
-		switch(type) {
-			case 'Person':
-				strModelNameRef.current = 'people'
-				obj = people
-				break
-			case 'Item':
-				strModelNameRef.current = 'items'
-				obj = items
-				break
-			case 'Location':
-				strModelNameRef.current = 'locations'
-				obj = locations
-				break
-		}
+		if(type === strModelNameRef) return
 
 		setData('assignment.assign_toable_id', '')
-		setOptionsValues(obj)
-	}, [type])
 
-	const handleAssignToableChange = (value: Record<string, any>) => {
-		let location
 		switch(type) {
 			case 'Person':
-				location = value.location_id
+				strModelNameRef.current = 'Person'
+				setOptionsValues(people)
 				break
 			case 'Item':
-				location = value.default_location_id
+				strModelNameRef.current = 'Item'
+				setOptionsValues(items)
 				break
 			case 'Location':
-				location = value.id
+				strModelNameRef.current = 'Location'
+				setOptionsValues(locations)
 				break
 		}
-		console.log({ location })
+	}, [type])
+
+	const handleAssignToableChange = (id: string) => {
+		let default_location: string|undefined
+
+		switch(type) {
+			case 'Person':
+				const person = people.find(person => String(person.id) === id)
+				default_location = person?.default_location_id
+				break
+			case 'Item':
+				const item = items.find(person => String(person.id) === id)
+				default_location = item?.default_location_id
+				break
+			case 'Location':
+				const location = locations.find(person => String(person.id) === id)
+				default_location = location?.id
+				break
+		}
+
+		if(default_location) {
+			console.log('set data')
+			setData('assignment.location_id', String(default_location))
+		}
+		console.log({ default_location })
 	}
 
 	return (
@@ -69,8 +77,6 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 				options={ optionsValues }
 				label={ data.assignment.assign_toable_type }
 				name="assign_toable_id"
-				getLabel={ option => option.name }
-				getValue={ option => option.id }
 				onChange={ handleAssignToableChange }
 				required
 			/>

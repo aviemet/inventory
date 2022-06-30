@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :info, :error
 
-  before_action :decode_id
+  # before_action :decode_id
   before_action :set_locale
   before_action :authenticate_user!
   # before_action :set_action_cable_identifier

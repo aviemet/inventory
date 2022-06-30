@@ -2,7 +2,6 @@ FactoryBot.define do
   factory :assignment do
     active { true }
     qty { Faker::Number.digit }
-    status { 1 }
     assigned_at { Time.current }
     created_by factory: :user
 

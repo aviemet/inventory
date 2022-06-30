@@ -160,7 +160,7 @@ example_id                                    | status  | run_time        |
 ./spec/models/warranty_spec.rb[1:1:1:4]       | passed  | 0.00153 seconds |
 ./spec/models/warranty_spec.rb[1:1:1:5]       | passed  | 0.00176 seconds |
 ./spec/models/warranty_spec.rb[1:1:2]         | passed  | 0.01126 seconds |
-./spec/requests/assignments_spec.rb[1:1:1:1]  | failed  | 1.26 seconds    |
+./spec/requests/assignments_spec.rb[1:1:1:1]  | passed  | 1.15 seconds    |
 ./spec/requests/components_spec.rb[1:1:1:1]   | failed  | 0.59028 seconds |
 ./spec/requests/components_spec.rb[1:1:1:2]   | failed  | 0.52484 seconds |
 ./spec/requests/components_spec.rb[1:1:2:1]   | passed  | 0.35586 seconds |

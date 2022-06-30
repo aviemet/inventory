@@ -2,7 +2,7 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Section } from '@/Components'
 
-const Dashboard = () => {
+const Dashboard = ({ people }: { people: Schema.Person[]}) => {
 	return (
 		<>
 			<Head title="Dashboard"></Head>

@@ -64,7 +64,7 @@ class ItemsController < ApplicationController
     render inertia: "Items/Clone"
   end
     
-  # GET /hardware/:slug/checkout
+  # GET /hardware/:id/checkout
   def checkout
     assignment = Assignment.new
     assignment.assignable = item
@@ -77,7 +77,7 @@ class ItemsController < ApplicationController
     }
   end
 
-  #GET /hardware/:slug/checkin
+  #GET /hardware/:id/checkin
   def checkin
     render inertia: "Items/Checkin", props: {
       item: ItemBlueprint.render_as_json(item),

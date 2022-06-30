@@ -18,21 +18,15 @@ class AssignmentsController < ApplicationController
     }
   end
 
-  # POST /assignments/:asset_type/:asset_id
+  # POST /assignments/
   def create
-    ap(({ params: assignment_params }))
     assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
-    assign_toable_decoded = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])
-    assign_toable = assign_toable_decoded[:model].constantize.find(assign_toable_decoded[:id])
-
-    # assignment.assign_toable_id = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])[:id]
-    # assignment.created_by = current_user
-
-    # if assignment.save
+    assign_toable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assign_toable_id])
+    
     if assignable.assign_to assign_toable, assignment_params.merge({ created_by: current_user })
       redirect_to assignable
     else
-      redirect_to send("checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", id: assignable.encode_id), inertia: { errors: assignment.errors }
+      redirect_to send("checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
     end
   end
 

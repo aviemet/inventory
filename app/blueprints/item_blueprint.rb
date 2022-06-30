@@ -23,6 +23,8 @@ class ItemBlueprint < ApplicationBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :category, blueprint: CategoryBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
+    association :default_location, blueprint: LocationBlueprint
+    association :location, blueprint: LocationBlueprint
   end
 
   view :new do

@@ -4,7 +4,6 @@ import Label from './Label'
 
 export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 	options: Array<Record<string, any>>
-	defaultValue: string
 	getLabel?: (option: Record<string, any>) => any
 	getValue?: (option: Record<string, any>) => string
 	onOpen?: () => void
@@ -13,7 +12,6 @@ export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 
 const SearchableDropdownComponent = ({
 	options,
-	defaultValue,
 	getLabel = option => option.name,
 	getValue = option => String(option.id),
 	onChange,

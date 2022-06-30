@@ -23,7 +23,7 @@ const New = ({ item, ...models }: IUpdateItemProps) => {
 			<Section>
 				<h1>{ title } for { user.active_company!.name }</h1>
 
-				<ItemForm to={ Routes.item(item) } method="patch" item={ item } { ...models } />
+				<ItemForm to={ Routes.item({ id: item.uid }) } method="patch" item={ item } { ...models } />
 			</Section>
 		</>
 	)

@@ -16,7 +16,6 @@ const LocationDropdown = ({ locations }: ILocationDropdown) => {
 			options={ locations }
 			label="Location"
 			name="location_id"
-			disabled={ type === 'Location' }
 			required
 		/>
 	)

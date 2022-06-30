@@ -7,7 +7,7 @@ export type TOption = {
 	value: string
 }
 
-export interface IRadioButtonsProps extends SegmentedControlProps {
+export interface IRadioButtonsProps extends Omit<SegmentedControlProps, 'data'> {
 	label?: string
 	labelPosition?: 'start'|'end'
 	name: string

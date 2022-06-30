@@ -119,13 +119,11 @@ export const assignment: ((
 
 /**
  * Generates rails route to
- * /assignments/:id(.:format)
- * @param {any} id
+ * /assignments(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const assignments: ((
-  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

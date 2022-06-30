@@ -55,7 +55,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 						},
 						item,
 					} }
-					to={ Routes.assignments }
+					to={ Routes.assignments() }
 					model="assignment"
 				>
 					<Input
