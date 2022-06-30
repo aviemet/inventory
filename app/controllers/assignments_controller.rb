@@ -20,6 +20,7 @@ class AssignmentsController < ApplicationController
 
   # POST /assignments/:asset_type/:asset_id
   def create
+    ap(({ params: assignment_params }))
     assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
     assign_toable_decoded = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])
     assign_toable = assign_toable_decoded[:model].constantize.find(assign_toable_decoded[:id])

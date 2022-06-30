@@ -81,8 +81,7 @@ Rails.application.routes.draw do
   resources :consumables, concerns: [:categoryable, :assignable]
   resources :licenses, concerns: [:categoryable, :assignable]
 
-  resources :assignments, except: [:index, :new, :create]
-  post "assignments/:id" => "assignments#create", as: :assignments
+  resources :assignments, except: [:index, :new]
 
   resources :people, concerns: :contactable
 

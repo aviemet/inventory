@@ -47,9 +47,9 @@ module Assignable
         )
     end
 
-    private
-
     def set_defaults
+      return unless self.has_attribute? :status_type
+      
       self.status_type ||= StatusType.find_by_name("Deployable")
     end
   end

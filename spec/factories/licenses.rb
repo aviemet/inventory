@@ -12,6 +12,7 @@ FactoryBot.define do
     terminates_at { Time.current.next_year }
     notes { Faker::Lorem.sentence }
     manufacturer { Manufacturer.first || create(:manufacturer) }
+    status_type
     category
     vendor
     association :company, strategy: :create

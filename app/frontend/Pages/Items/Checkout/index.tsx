@@ -49,11 +49,13 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 					data={ {
 						assignment: {
 							...assignment,
+							assignable_id: item.id,
+							assignable_type: 'Item',
 							assign_toable_type: 'Person',
 						},
 						item,
 					} }
-					to={ Routes.assignments(item.id) }
+					to={ Routes.assignments }
 					model="assignment"
 				>
 					<Input
