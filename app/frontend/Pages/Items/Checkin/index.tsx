@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Table } from '@/Components'
+import { Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
 import LocationDropdown from './LocationDropdown'
@@ -25,8 +25,9 @@ interface ICheckinItemsProps {
 }
 
 const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) => {
-	const title = 'Check In Item'
+	const [itemName, setItemName] = useState(item.name)
 	const { classes } = useTableStyles()
+	const title = 'Check In Item'
 
 	return (
 		<>
@@ -54,12 +55,13 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 			</Section>
 
 			<Section>
-				<h3>{ title }</h3>
+				<Heading order={ 3 }>{ title }</Heading>
 
 				<Form
 					data={ {
 						assignment: {
 							...assignment,
+							location_id: item?.default_location_id,
 						},
 						item,
 					} }
@@ -71,6 +73,7 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 						model="item"
 						name="name"
 						label="Item Name"
+						onChange={ name => setItemName(String(name)) }
 						required
 					/>
 
@@ -94,7 +97,7 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 						name="notes"
 					/>
 
-					<Submit>Checkout { item.name }</Submit>
+					<Submit>Check In { itemName }</Submit>
 
 				</Form>
 			</Section>

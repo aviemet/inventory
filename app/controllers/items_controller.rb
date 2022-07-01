@@ -66,8 +66,11 @@ class ItemsController < ApplicationController
     
   # GET /hardware/:id/checkout
   def checkout
+    redirect_to item if item.assigned?
+
     assignment = Assignment.new
     assignment.assignable = item
+
     render inertia: "Items/Checkout", props: {
       item: ItemBlueprint.render_as_json(item),
       assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
@@ -79,8 +82,16 @@ class ItemsController < ApplicationController
 
   #GET /hardware/:id/checkin
   def checkin
+    redirect_to item unless item.assigned?
+
+    ap({ item: item, assignment: item.assignment, assigned: item.assigned? })
+
+    item.assignment.returned_at = Time.current
+    item.assignment.active = false
+
     render inertia: "Items/Checkin", props: {
       item: ItemBlueprint.render_as_json(item),
+      assignment: AssignmentBlueprint.render_as_json(item.assignment),
       locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
       statuses: -> { StatusTypeBlueprint.render_as_json(StatusType.all) }
     }

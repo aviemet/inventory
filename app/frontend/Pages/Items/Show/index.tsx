@@ -21,12 +21,12 @@ const Show = ({ item }: IShowItemProps) => {
 
 					<Menu>
 						{ item.assignments ?
-							<Menu.Item href={ Routes.checkinItem(item) } icon={ CheckinIcon }>
-									Checkin Item
+							<Menu.Item href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
+								Checkin Item
 							</Menu.Item>
 							:
-							<Menu.Item href={ Routes.checkoutItem(item) } icon={ CheckoutIcon }>
-									Checkout Item
+							<Menu.Item href={ Routes.checkoutItem(item) } icon={ <CheckoutIcon /> }>
+								Checkout Item
 							</Menu.Item>
 						}
 						<Menu.Item href={ Routes.editItem(item) } icon={ <EditIcon /> }>

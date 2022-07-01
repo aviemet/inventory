@@ -59,7 +59,6 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 					} }
 					to={ Routes.assignments() }
 					model="assignment"
-					onChange={ ({ data }) => console.log({ data }) }
 				>
 					<Input
 						model="item"
