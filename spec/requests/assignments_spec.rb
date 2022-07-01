@@ -10,12 +10,12 @@ RSpec.describe "Assignments", type: :request do
     context "with valid parameters" do
       it "assigns an item to a person" do
         item = create(:item)
-        license = create(:license)
+        person = create(:person)
 
         assignment_params = attributes_for(
           :assignment, 
           assignable: item, 
-          assign_toable: license
+          assign_toable: person
         )
 
         expect {
