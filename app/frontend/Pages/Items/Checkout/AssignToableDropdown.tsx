@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { SearchableDropdown, RadioButtons, useForm } from '@/Components/Form'
+import { SearchableDropdown, useForm } from '@/Components/Form'
 
 interface IAssignToableDropdownProps {
 	items: Schema.Item[]
@@ -17,70 +17,53 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 	useEffect(() => {
 		if(type === strModelNameRef) return
 
-		setData('assignment.assign_toable_id', '')
-
 		switch(type) {
 			case 'Person':
-				strModelNameRef.current = 'Person'
 				setOptionsValues(people)
 				break
 			case 'Item':
-				strModelNameRef.current = 'Item'
 				setOptionsValues(items)
 				break
 			case 'Location':
-				strModelNameRef.current = 'Location'
 				setOptionsValues(locations)
 				break
 		}
+
+		strModelNameRef.current = type
+		setData('assignment.assign_toable_id', '')
 	}, [type])
 
-	const handleAssignToableChange = (id: string) => {
-		let default_location: string|undefined
+	const handleAssignToableChange = (id: string|null) => {
+		let default_location: number|null|undefined
 
 		switch(type) {
 			case 'Person':
 				const person = people.find(person => String(person.id) === id)
-				default_location = person?.default_location_id
+				default_location = person?.location_id
 				break
 			case 'Item':
-				const item = items.find(person => String(person.id) === id)
+				const item = items.find(item => String(item.id) === id)
 				default_location = item?.default_location_id
 				break
 			case 'Location':
-				const location = locations.find(person => String(person.id) === id)
+				const location = locations.find(location => String(location.id) === id)
 				default_location = location?.id
 				break
 		}
 
 		if(default_location) {
-			console.log('set data')
 			setData('assignment.location_id', String(default_location))
 		}
-		console.log({ default_location })
 	}
 
 	return (
-		<>
-			<RadioButtons
-				label="Checkout To"
-				name="assign_toable_type"
-				options={ [
-					{ label: 'Person', value: 'Person' },
-					{ label: 'Item', value: 'Item' },
-					{ label: 'Location', value: 'Location' },
-				] }
-				required
-			/>
-
-			<SearchableDropdown
-				options={ optionsValues }
-				label={ data.assignment.assign_toable_type }
-				name="assign_toable_id"
-				onChange={ handleAssignToableChange }
-				required
-			/>
-		</>
+		<SearchableDropdown
+			options={ optionsValues }
+			label={ data.assignment.assign_toable_type }
+			name="assign_toable_id"
+			onChange={ handleAssignToableChange }
+			required
+		/>
 	)
 }
 

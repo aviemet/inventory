@@ -2,7 +2,7 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Section } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
+import { DateTime, Form, Input, Submit, Textarea, RadioButtons } from '@/Components/Form'
 import AssignToableDropdown from './AssignToableDropdown'
 import LocationDropdown from './LocationDropdown'
 
@@ -53,10 +53,13 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 							assignable_type: 'Item',
 							assign_toable_type: 'Person',
 						},
-						item,
+						item: {
+							name: item.name
+						},
 					} }
 					to={ Routes.assignments() }
 					model="assignment"
+					onChange={ ({ data }) => console.log({ data }) }
 				>
 					<Input
 						model="item"
@@ -65,6 +68,16 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 						required
 					/>
 
+					<RadioButtons
+						label="Checkout To"
+						name="assign_toable_type"
+						options={ [
+							{ label: 'Person', value: 'Person' },
+							{ label: 'Item', value: 'Item' },
+							{ label: 'Location', value: 'Location' },
+						] }
+						required
+					/>
 					<AssignToableDropdown { ...models } />
 
 					<LocationDropdown locations={ models.locations } />

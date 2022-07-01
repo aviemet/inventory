@@ -24,6 +24,7 @@ class AssignmentsController < ApplicationController
     assign_toable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assign_toable_id])
     
     if assignable.assign_to assign_toable, assignment_params.merge({ created_by: current_user })
+      ap({ assignable: assignable })
       redirect_to assignable
     else
       redirect_to send("checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
