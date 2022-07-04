@@ -1,13 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { SearchableDropdown, useForm } from '@/Components/Form'
+import { SearchableDropdown, useForm, RadioButtons } from '@/Components/Form'
+
+type TAssignToable = 'Person'|'Item'|'Location'
 
 interface IAssignToableDropdownProps {
 	items: Schema.Item[]
 	people: Schema.Person[]
 	locations: Schema.Location[]
+	options: TAssignToable[]
 }
 
-const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdownProps) => {
+const AssignToableDropdown = ({ items, people, locations, options = ['Person', 'Item', 'Location'] }: IAssignToableDropdownProps) => {
 	const { data, setData } = useForm()
 	const { assignment: { assign_toable_type: type } } = data
 
@@ -57,13 +60,21 @@ const AssignToableDropdown = ({ items, people, locations }: IAssignToableDropdow
 	}
 
 	return (
-		<SearchableDropdown
-			options={ optionsValues }
-			label={ data.assignment.assign_toable_type }
-			name="assign_toable_id"
-			onChange={ handleAssignToableChange }
-			required
-		/>
+		<>
+			<RadioButtons
+				label="Checkout To"
+				name="assign_toable_type"
+				options={ options.map(option => ({ label: option, value: option })) }
+				required
+			/>
+			<SearchableDropdown
+				options={ optionsValues }
+				label={ data.assignment.assign_toable_type }
+				name="assign_toable_id"
+				onChange={ handleAssignToableChange }
+				required
+			/>
+		</>
 	)
 }
 

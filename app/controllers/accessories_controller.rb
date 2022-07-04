@@ -20,7 +20,7 @@ class AccessoriesController < ApplicationController
     }
   end
 
-  # GET /accessories/1
+  # GET /accessories/:id
   def show
     render inertia: "Accessories/Show", props: {
       accessory: -> { AccessoryBlueprint.render_as_json(accessory, view: :associations) }
@@ -31,15 +31,51 @@ class AccessoriesController < ApplicationController
   def new
     render inertia: "Accessories/New", props: {
       accessory: AccessoryBlueprint.render_as_json(Accessory.new, view: :new),
-      models: @active_company.models.find_by_category(:Accessory).as_json,
-      vendors: @active_company.vendors.as_json,
-      locations: @active_company.locations.as_json,
+      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
+      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
     }
   end
 
-  # GET /accessories/1/edit
+  # GET /accessories/:id/edit
   def edit
-    render inertia: "Accessories/Edit"
+    render inertia: "Accessories/Edit", props: {
+      accessory: AccessoryBlueprint.render_as_json(Aaccessory),
+      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
+      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
+    }
+  end
+
+  # GET /accessories/:id/checkout
+  def checkout
+    redirect_to accessory if accessory.qty == 0
+
+    assignment = Assignment.new
+    assignment.assignable = accessory
+
+    render inertia: "Accessory/Checkout", props: {
+      accessory: AccessoryBlueprint.render_as_json(accessory),
+      assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
+      people: -> { PersonBlueprint.render_as_json(@active_company.people.select([:id, :first_name, :last_name, :location_id]), view: :as_options) },
+      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+    }
+  end
+
+  #GET /accessories/:id/checkin
+  def checkin
+    redirect_to accessory unless accessory.assigned?
+    assignment = item.assignment
+    assignment.returned_at = Time.current
+    assignment.active = false
+
+    render inertia: "Items/Checkin", props: {
+      item: ItemBlueprint.render_as_json(item),
+      assignment: AssignmentBlueprint.render_as_json(assignment),
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+      statuses: -> { StatusTypeBlueprint.render_as_json(StatusType.all) }
+    }
   end
 
   # POST /accessories
