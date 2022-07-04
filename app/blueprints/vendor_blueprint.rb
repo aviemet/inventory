@@ -43,7 +43,7 @@ class VendorBlueprint < ApplicationBlueprint
   end
 
   view :as_options do
-    fields :id, :name
+    only :id, :name
   end
 
 end

@@ -21,7 +21,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments/
   def create
     assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
-    assign_toable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assign_toable_id])
+    assign_toable = assignment_params[:assign_toable_type].camelize.constantize.find(assignment_params[:assign_toable_id])
     
     if assignable.assign_to assign_toable, assignment_params.merge({ created_by: current_user })
       redirect_to assignable
@@ -32,29 +32,29 @@ class AssignmentsController < ApplicationController
 
   # PATCH/PUT /assignments/:id
   def update
-    respond_to do |format|
-      if assignment.update(assignment_params)
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @assignment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
-      end
+    assignable = assignment.assignable
+    if assignment.update(assignment_params)
+      redirect_to assignable
+    else
+      redirect_to send("checkin_#{assignment.assignable_type.downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
     end
   end
 
-  # PATCH/PUT /assignments/:id/checkin
+  # PATCH/PUT /assignments/:id/unassign
   def unassign
-    # assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
+    assignable = assignment.assignable
+    if assignable.unassign(assignment, returned_at: assignment_params&.[](:returned_at))
+      redirect_to assignable
+    else
+      redirect_to send("checkin_#{assignment.assignable_type.downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
+    end
   end
 
   # DELETE /assignments/:id
   def destroy
+    assignable = assignment.assignable
     assignment.destroy
-    respond_to do |format|
-      format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to assignable
   end
 
   private

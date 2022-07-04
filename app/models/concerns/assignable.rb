@@ -29,6 +29,7 @@ module Assignable
         self.before_assignment(assignment, params) if self.respond_to?(:before_assignment)
 
         assignment.save
+        self.assignments << assignment
 
         self.update({ name: params&.[](asset_class)&.[](:name) }) if params&.[](asset_class)&.[](:name)
 
@@ -48,9 +49,10 @@ module Assignable
     end
 
     def set_defaults
-      return unless self.has_attribute? :status_type
+      return unless self.has_attribute? :status_type_id
       
       self.status_type ||= StatusType.find_by_name("Deployable")
     end
+
   end
 end

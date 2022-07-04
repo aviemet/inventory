@@ -65,7 +65,7 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 						},
 						item,
 					} }
-					to={ Routes.assignment(item) }
+					to={ Routes.unassignAssignment(assignment) }
 					method="patch"
 					model="assignment"
 				>

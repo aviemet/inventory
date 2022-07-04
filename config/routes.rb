@@ -82,6 +82,7 @@ Rails.application.routes.draw do
   resources :licenses, concerns: [:categoryable, :assignable]
 
   resources :assignments, except: [:index, :new]
+  patch "assignments/:id/unassign" => "assignments#unassign", as: :unassign_assignment
 
   resources :people, concerns: :contactable
 

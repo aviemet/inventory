@@ -22,7 +22,7 @@ RSpec.describe Item, type: :model do
 
   describe "Associations" do
     it_behaves_like "ownable"
-    it_behaves_like "assignable"
+    it_behaves_like "assignable:single"
     it_behaves_like "assign_toable"
     it_behaves_like "purchasable"
     it_behaves_like "fieldable"

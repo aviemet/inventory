@@ -5,16 +5,16 @@ module Assignable
     include Assignable
 
     included do
-      def unassign(assignment_id, params = {})
+      def unassign(assignment = self.assignment.last, returned_at: Time.current)
         self.transaction do
-          assignment = self.assignments.find(assignment_id)
-
           self._before_unassignment(assignment, params) if self.respond_to?(:_before_unassignment)
           self.before_unassignment(assignment, params) if self.respond_to?(:before_unassignment)
+
           assignment.update({
             active: false,
-            returned_at: params&.[](:returned_at) || Time.current
+            returned_at: returned_at
           })
+
           self._after_unassignment(assignment, params) if self.respond_to?(:_after_unassignment)
           self.after_unassignment(assignment, params) if self.respond_to?(:after_unassignment)
         end
@@ -32,5 +32,6 @@ module Assignable
         self.update(qty: self.qty + assignment.qty)
       end
     end
+
   end
 end

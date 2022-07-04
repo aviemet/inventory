@@ -39,9 +39,9 @@ class ItemsController < ApplicationController
   def new
     render inertia: "Items/New", props: {
       item: ItemBlueprint.render_as_json(Item.new, view: :new),
-      models: -> { @active_company.models.find_by_category(:Item).as_json },
-      vendors: -> { @active_company.vendors.as_json },
-      locations: -> { @active_company.locations.as_json },
+      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
+      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
     }
   end
 
@@ -49,9 +49,9 @@ class ItemsController < ApplicationController
   def edit
     render inertia: "Items/Edit", props: {
       item: ItemBlueprint.render_as_json(item),
-      models: -> { @active_company.models.find_by_category(:Item).as_json },
-      vendors: -> { @active_company.vendors.as_json },
-      locations: -> { @active_company.locations.as_json },
+      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
+      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
     }
   end
 

@@ -17,4 +17,8 @@ class ModelBlueprint < ApplicationBlueprint
 		association :consumables, blueprint: ConsumableBlueprint
 		association :components, blueprint: ComponentBlueprint
   end
+
+  view :as_options do
+    only :id, :name
+  end
 end
