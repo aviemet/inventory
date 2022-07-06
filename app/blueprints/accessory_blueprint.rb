@@ -17,6 +17,10 @@ class AccessoryBlueprint < ApplicationBlueprint
     accessory.cost&.amount.to_f if accessory.cost
   end
 
+  field :active_assignments_count do |accessory|
+    accessory.assignments.where(active: true).size
+  end
+
   view :associations do
     # association :owner, blueprint: OwnershipBlueprint
     # association :company, blueprint: CompanyBlueprint

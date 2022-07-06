@@ -19,18 +19,6 @@ module Assignable
           self.after_unassignment(assignment, params) if self.respond_to?(:after_unassignment)
         end
       end
-
-      def _after_assignment(assignment, _params)
-        return if assignment.qty.nil?
-
-        self.update(qty: self.qty - assignment.qty)
-      end
-
-      def _after_unassignment(assignment, _params)
-        return if assignment.qty.nil?
-
-        self.update(qty: self.qty + assignment.qty)
-      end
     end
 
   end

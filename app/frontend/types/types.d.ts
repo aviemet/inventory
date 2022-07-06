@@ -31,7 +31,9 @@ declare global {
 		}
 
 		interface Item extends Assignable, AssignToable, UID {}
-		interface Accessory extends Assignable, UID {}
+		interface Accessory extends Assignable, UID {
+			active_assignments_count?: number
+		}
 		interface Component extends Assignable, UID {}
 		interface Consumable extends Assignable, UID {}
 		interface License extends Assignable, UID {}

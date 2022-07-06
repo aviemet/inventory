@@ -38,7 +38,7 @@ function Form<T extends Record<keyof T, unknown>>({
 	separator = '.',
 	...props
 }: IFormProps<T>) {
-	const form: IndexedInertiaFormProps = useInertiaForm<Record<string, unknown>>(fillEmptyValues(data))
+	const form: IndexedInertiaFormProps = useInertiaForm<Record<string, unknown>>(`${method}/${model}`, fillEmptyValues(data))
 
 	const { classes } = useFormStyles()
 
