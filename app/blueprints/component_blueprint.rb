@@ -16,6 +16,10 @@ class ComponentBlueprint < ApplicationBlueprint
     component.cost&.amount.to_f if component.cost
   end
 
+  field :active_assignments_count do |component|
+    component.assignments.where(active: true).size
+  end
+
   view :associations do
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint

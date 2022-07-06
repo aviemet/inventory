@@ -54,6 +54,37 @@ class ComponentsController < ApplicationController
       locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
     }
   end
+    
+  # GET /hardware/:id/checkout
+  def checkout
+    redirect_to component if component.qty == 0
+
+    assignment = Assignment.new
+    assignment.assignable = component
+    assignment.assign_toable_type = :Item
+
+    render inertia: "Components/Checkout", props: {
+      component: ComponentBlueprint.render_as_json(component),
+      assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
+      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+    }
+  end
+
+  #GET /hardware/:id/checkin
+  def checkin
+    redirect_to component unless component.assignments.size > 0
+    assignment = component.assignment
+    assignment.returned_at = Time.current
+    assignment.active = false
+
+    render inertia: "Components/Checkin", props: {
+      component: ComponentBlueprint.render_as_json(component),
+      assignment: AssignmentBlueprint.render_as_json(assignment),
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+      statuses: -> { StatusTypeBlueprint.render_as_json(StatusType.all) }
+    }
+  end
 
   # POST /components
   def create

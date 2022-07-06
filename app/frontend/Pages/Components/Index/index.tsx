@@ -4,6 +4,7 @@ import { Routes, formatter } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { NewIcon } from '@/Components/Icons'
+import { isNil } from 'lodash'
 
 interface IComponentsIndexProps {
 	components: Schema.Item[]
@@ -12,6 +13,15 @@ interface IComponentsIndexProps {
 
 const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 	const title = 'Components'
+
+	const qty = (accessory: Schema.Accessory) => {
+		if(isNil(accessory.qty)) {
+			return '-'
+		} else if(isNil(accessory.active_assignments_count)) {
+			return accessory.qty
+		}
+		return `${accessory.qty - accessory.active_assignments_count} / ${accessory.qty}`
+	}
 
 	return (
 		<>
@@ -53,32 +63,43 @@ const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 						<Table.Body>
 							<Table.RowIterator render={ component => (
 								<Table.Row key={ component.id }>
+
 									<Table.Cell nowrap>
 										<Link href={ Routes.component(component) }>{ component.name }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.component(component) }>{ component.model?.name }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.component(component) }>{ component.asset_tag }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.component(component) }>{ component.serial }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.component(component) }>{ component.category?.name }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.component(component) }>{ component.manufacturer?.name }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										<Link href={ Routes.component(component) }>{ component.vendor?.name }</Link>
 									</Table.Cell>
+
 									<Table.Cell>
 										{ component.cost ? formatter.currency(component.cost, component.cost_currency) : '-' }
 									</Table.Cell>
-									<Table.Cell>{ component.qty }</Table.Cell>
+
+									<Table.Cell nowrap>{ qty(component) }</Table.Cell>
+
 									<Table.Cell>{ component.min_qty }</Table.Cell>
+
 									<Table.Cell className="table-column-fit">
 										{ component.assigned ?
 											<CheckinButton href={ Routes.checkinComponent(component) } />
@@ -87,6 +108,7 @@ const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 										}
 										<EditButton as="button" href={ Routes.editComponent(component) } />
 									</Table.Cell>
+
 								</Table.Row>
 							) } />
 						</Table.Body>
