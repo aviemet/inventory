@@ -53,8 +53,9 @@ class AccessoriesController < ApplicationController
 
     assignment = Assignment.new
     assignment.assignable = accessory
+    assignment.assign_toable_type = :Item
 
-    render inertia: "Accessory/Checkout", props: {
+    render inertia: "Accessories/Checkout", props: {
       accessory: AccessoryBlueprint.render_as_json(accessory),
       assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
       people: -> { PersonBlueprint.render_as_json(@active_company.people.select([:id, :first_name, :last_name, :location_id]), view: :as_options) },
@@ -70,7 +71,7 @@ class AccessoriesController < ApplicationController
     assignment.returned_at = Time.current
     assignment.active = false
 
-    render inertia: "Items/Checkin", props: {
+    render inertia: "Accessories/Checkin", props: {
       item: ItemBlueprint.render_as_json(item),
       assignment: AssignmentBlueprint.render_as_json(assignment),
       locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },

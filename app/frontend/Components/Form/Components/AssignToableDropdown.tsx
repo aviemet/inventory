@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { SearchableDropdown, useForm, RadioButtons } from '@/Components/Form'
 
-type TAssignToable = 'Person'|'Item'|'Location'
-
 interface IAssignToableDropdownProps {
 	items: Schema.Item[]
 	people: Schema.Person[]
@@ -15,7 +13,7 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 	const { assignment: { assign_toable_type: type } } = data
 
 	const [optionsValues, setOptionsValues] = useState<Record<string, any>[]>(people)
-	const strModelNameRef = useRef('people')
+	const strModelNameRef = useRef('Person')
 
 	useEffect(() => {
 		if(type === strModelNameRef) return
