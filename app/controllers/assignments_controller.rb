@@ -20,13 +20,21 @@ class AssignmentsController < ApplicationController
 
   # POST /assignments/
   def create
-    assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
-    assign_toable = assignment_params[:assign_toable_type].camelize.constantize.find(assignment_params[:assign_toable_id])
-    
-    if assignable.assign_to assign_toable, assignment_params.merge({ created_by: current_user })
-      redirect_to assignable
+    # Assignable should always be valid
+    assignment.assignable_type = assignment_params[:assignable_type]
+    assignment.assignable_id = assignment_params[:assignable_id]
+
+    # Assigntoable could be empty
+    assignment.assign_toable_type = assignment_params[:assign_toable_type]
+    assignment.assign_toable_id = assignment_params[:assign_toable_id]
+
+    if assignment.valid? && assignment.assignable&.assign_to(assignment.assign_toable, assignment_params.merge({ created_by_id: current_user.id })).persisted?
+      redirect_to assignment.assignable
     else
-      redirect_to send("checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
+      redirect_to send(
+        "checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", 
+        id: assignment.assignable
+      ), inertia: { errors: assignment.errors }
     end
   end
 

@@ -18,8 +18,9 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 	if(locations) modelMapping.set('Location', locations)
 
 	const model = modelMapping.get(type)
-	console.log({ type, model })
+
 	if(model === undefined) return <></>
+
 	const [optionsValues, setOptionsValues] = useState<Schema.Item[]|Schema.Person[]|Schema.Location[]>(model)
 	const strModelNameRef = useRef<TAssignToable>('Person')
 

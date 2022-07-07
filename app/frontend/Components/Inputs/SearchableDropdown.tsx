@@ -37,6 +37,7 @@ const SearchableDropdownComponent = ({
 				size="md"
 				data={ data }
 				searchable
+				clearable
 				maxDropdownHeight={ 400 }
 				nothingFound="No Results"
 				onChange={ handleChange }

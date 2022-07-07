@@ -1,5 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
+import { Head, usePage } from '@inertiajs/inertia-react'
 import { Heading, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
@@ -16,6 +16,8 @@ interface ICheckoutItemProps {
 const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Item'
 
+	const { props } = usePage<InertiaPage>()
+	console.log({ props })
 	return (
 		<>
 			<Head title={ title }></Head>

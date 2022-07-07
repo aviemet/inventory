@@ -13,7 +13,7 @@ interface ICheckoutItemProps {
 }
 
 const Checkout = ({ assignment, component, ...models }: ICheckoutItemProps) => {
-	const title = 'Checkout Accessory'
+	const title = `Checkout ${component.name}`
 
 	return (
 		<>
@@ -24,11 +24,6 @@ const Checkout = ({ assignment, component, ...models }: ICheckoutItemProps) => {
 
 				<div>
 					<div className="item-details">
-
-						<div className="item-row">
-							<label>Model</label>
-							<div className="value">{ component.name }</div>
-						</div>
 
 						<div className="item-row">
 							<label>Serial</label>

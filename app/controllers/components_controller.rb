@@ -55,7 +55,7 @@ class ComponentsController < ApplicationController
     }
   end
     
-  # GET /hardware/:id/checkout
+  # GET /components/:id/checkout
   def checkout
     redirect_to component if component.qty == 0
 
@@ -71,7 +71,7 @@ class ComponentsController < ApplicationController
     }
   end
 
-  #GET /hardware/:id/checkin
+  #GET /components/:id/checkin
   def checkin
     redirect_to component unless component.assignments.size > 0
     assignment = component.assignment
