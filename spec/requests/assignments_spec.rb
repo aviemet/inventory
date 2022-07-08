@@ -33,24 +33,31 @@ RSpec.describe "Assignments", type: :request do
 
       it "assigns an accessory to a assignables" do
         assign_toables.each do |key, model|
-          expect {
-            post assignments_url, params: { assignment: assignment_params(:accessory, model) }
+          params = assignment_params(:accessory, model)
+
+          expect{
+            post assignments_url, params: { assignment: params }
           }.to change(Assignment, :count).by(1)
         end
       end
 
       it "assigns a consumable to a assignables" do
         assign_toables.each do |key, model|
+          params = assignment_params(:consumable, model)
+          params.qty = 2
+
           expect {
-            post assignments_url, params: { assignment: assignment_params(:consumable, model) }
+            post assignments_url, params: { assignment: params }
           }.to change(Assignment, :count).by(1)
         end
       end
 
       it "assigns a component to a assignables" do
         assign_toables.each do |key, model|
+          params = assignment_params(:component, model)
+
           expect {
-            post assignments_url, params: { assignment: assignment_params(:component, model) }
+            post assignments_url, params: { assignment: params }
           }.to change(Assignment, :count).by(1)
         end
       end
