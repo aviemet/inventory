@@ -60,7 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_000016) do
     t.bigint "assign_toable_id", null: false
     t.bigint "location_id", null: false
     t.integer "qty", default: 1
-    t.integer "status", default: 0
     t.datetime "assigned_at", precision: nil
     t.datetime "returned_at", precision: nil
     t.datetime "expected_at", precision: nil
@@ -140,7 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_000016) do
   create_table "consumables", force: :cascade do |t|
     t.string "name"
     t.integer "min_qty"
-    t.integer "qty"
+    t.integer "qty", null: false
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
     t.boolean "requestable", default: true, null: false

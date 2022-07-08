@@ -13,7 +13,7 @@ const NumberInputComponent = forwardRef<HTMLInputElement, NumberInputProps>((
 			</Label> }
 			<NumberInput
 				id={ id }
-				value={ value }
+				value={ Number(value) }
 				onChange={ onChange }
 				required={ required }
 				ref={ ref }

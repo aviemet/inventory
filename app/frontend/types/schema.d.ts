@@ -358,7 +358,6 @@ declare namespace Schema {
 		assign_toable_id: number;
 		location_id: number;
 		qty?: number | null;
-		status?: 'requested'|'approved'|'denied' | null;
 		assigned_at?: string | null;
 		returned_at?: string | null;
 		expected_at?: string | null;
@@ -627,7 +626,7 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		min_qty?: number | null;
-		qty?: number | null;
+		qty: number;
 		cost?: number | null;
 		cost_currency: string;
 		requestable: boolean;

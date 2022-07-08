@@ -15,6 +15,15 @@ interface ICheckoutItemProps {
 const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => {
 	const title = `Checkout ${consumable.name}`
 
+	const handleSubmit = ({ transform }: InertiaFormProps) => {
+		transform(data => {
+			data.assignment.qty = data.consumable.qty
+			data.consumable.qty = consumable.qty - data.consumable.qty
+			console.log({ data })
+			return data
+		})
+	}
+
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -38,12 +47,16 @@ const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => 
 						assignment: {
 							...assignment,
 							assignable_id: consumable.id,
-							assignable_type: 'Consumable'
+							assignable_type: 'Consumable',
 						},
-						consumable,
+						consumable: {
+							...consumable,
+							qty: 1,
+						},
 					} }
 					to={ Routes.assignments() }
 					model="assignment"
+					onSubmit={ handleSubmit }
 				>
 
 					<AssignToableDropdown
