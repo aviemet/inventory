@@ -9,7 +9,6 @@ module Assignable
     before_validation :set_defaults
 
     def assign_to(assign_toable, params = {})
-      ap({ params: params, location: params&.[](:location) || assign_toable&.default_location })
       assignment = Assignment.new({
         assignable: self,
         assign_toable: assign_toable,
@@ -37,8 +36,6 @@ module Assignable
         self._after_assignment(assignment, params) if self.respond_to?(:_after_assignment)
         self.after_assignment(assignment, params) if self.respond_to?(:after_assignment)
       end
-      
-      ap({ assignment: assignment, persisted: assignment.persisted?, valid: assignment.valid?, errors: assignment.errors })
 
       assignment
     end
