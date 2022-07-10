@@ -52,9 +52,9 @@ declare namespace Schema {
 
 	interface Assignment {
 		id: number;
-		assignable_type: string;
+		assignable_type: TAssignable;
 		assignable_id: number;
-		assign_toable_type: string;
+		assign_toable_type: TAssignToable;
 		assign_toable_id: number;
 		location_id: number;
 		qty?: number | null;

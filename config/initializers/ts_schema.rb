@@ -81,6 +81,11 @@ TsSchema.setup do |config|
     cost_cents: :cost,
   }
 
+  config.field_type_overrides = {
+    assignable_type: "TAssignable",
+    assign_toable_type: "TAssignToable",
+  }
+
 
   # Namespace for generated types
   #

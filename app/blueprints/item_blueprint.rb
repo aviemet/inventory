@@ -17,7 +17,7 @@ class ItemBlueprint < ApplicationBlueprint
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint
-    association :assignments, blueprint: AssignmentBlueprint
+    association :assignments, blueprint: AssignmentBlueprint, view: :associations
     association :audits, blueprint: AuditBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint

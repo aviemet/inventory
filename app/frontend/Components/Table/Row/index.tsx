@@ -3,8 +3,7 @@ import { useTableContext } from '../TableContext'
 import { TRProps } from 'react-html-props'
 import RowInContext from './RowInContext'
 
-interface IRowProps extends Omit<TRProps, 'children'|'ref'> {
-	children?: React.ReactElement<any, string | React.JSXElementConstructor<any>>[]
+interface IRowProps extends Omit<TRProps, 'ref'> {
 	render?: any
 	name?: string
 }
