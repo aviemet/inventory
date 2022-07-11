@@ -3,7 +3,6 @@ import { Head } from '@inertiajs/inertia-react'
 import { Section, Link, Menu, Flex, Heading, Tabs, Table, Box, History } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { EditIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
-import { Timeline } from '@mantine/core'
 
 interface IShowItemProps {
 	item: Schema.Item
