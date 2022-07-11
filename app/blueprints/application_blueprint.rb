@@ -1,9 +1,9 @@
 class ApplicationBlueprint < Blueprinter::Base
   identifier :id
 
-  # field :uid do |model|
-  #   model.encode_id unless model&.id.nil?
-  # end
+  field :uid do |model|
+    model.encode_id unless model&.id.nil?
+  end
 
   view :new do
     exclude :id

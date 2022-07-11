@@ -70,6 +70,11 @@ export const fillEmptyValues = <T extends Record<keyof T, any>>(data: T): T => {
 	return sanitizedDefaultData
 }
 
+export const capitalize = (str?: string|null): string => {
+	if(typeof str !== 'string') return ''
+	return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 /*
 export const fillEmptyValuesOrig = <T extends Record<keyof T, unknown>>(data: T): T => {
 	const sanitizedDefaultData = data

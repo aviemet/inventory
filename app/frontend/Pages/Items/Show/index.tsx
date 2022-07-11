@@ -1,27 +1,31 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Table, Box } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs, Table, Box, History } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { EditIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
+import { Timeline } from '@mantine/core'
 
 interface IShowItemProps {
 	item: Schema.Item
 }
 
+const AssignmentLink = ({ assignment }: { assignment?: Schema.Assignment }) => {
+	if(!assignment) return <></>
+
+	// @ts-ignore
+	const path = Routes[assignment.assign_toable_type.toLowerCase()]
+
+	return <Link href={ path(assignment.assign_toable_id) }>{ assignment.assign_toable.name }</Link>
+}
+
 const Show = ({ item }: IShowItemProps) => {
 	const title = item.name ?? 'Item Details'
 
-	const assignmentLink = (item: Schema.Item) => {
+	const itemAssignment = useCallback(() => {
 		if(!item.assigned || !item.assignments) return
 
-		const assignment = item.assignments.find(assignment => assignment.active)
-		if(!assignment) return
-
-		// @ts-ignore
-		const path = Routes[assignment.assign_toable_type.toLowerCase()]
-
-		return <Link href={ path(assignment.assign_toable_id) }>{ assignment.assign_toable.name }</Link>
-	}
+		return item.assignments.find(assignment => assignment.active)
+	}, [item])
 
 	return (
 		<>
@@ -59,10 +63,19 @@ const Show = ({ item }: IShowItemProps) => {
 								<Table.Body>
 
 									<Table.Row>
+										<Table.Cell>Manufacturer</Table.Cell>
+										<Table.Cell>
+											{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer.slug) }>
+												{ item.manufacturer!.name }
+											</Link> }
+										</Table.Cell>
+									</Table.Row>
+
+									<Table.Row>
 										<Table.Cell>Model</Table.Cell>
 										<Table.Cell>
-											{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer!) }>
-												{ item.manufacturer!.name }
+											{ item.model && <Link href={ Routes.model(item.model.slug) }>
+												{ item.model.name }
 											</Link> }
 										</Table.Cell>
 									</Table.Row>
@@ -71,7 +84,7 @@ const Show = ({ item }: IShowItemProps) => {
 										<Table.Cell>Category</Table.Cell>
 										<Table.Cell>
 											{ item.category && <Link href={ Routes.category(item.category.slug) }>
-												{ item.category!.name }
+												{ item.category.name }
 											</Link> }
 										</Table.Cell>
 									</Table.Row>
@@ -83,7 +96,7 @@ const Show = ({ item }: IShowItemProps) => {
 
 									<Table.Row>
 										<Table.Cell>Assigned To</Table.Cell>
-										<Table.Cell>{ assignmentLink(item) }</Table.Cell>
+										<Table.Cell><AssignmentLink assignment={ itemAssignment() } /></Table.Cell>
 									</Table.Row>
 
 									<Table.Row>
@@ -117,30 +130,7 @@ const Show = ({ item }: IShowItemProps) => {
 					<Tabs.Tab label="History">
 						<Heading order={ 3 }>Assignment History</Heading>
 
-						<div>
-							{ item.assignments && item.assignments.reverse().map(assignment => (
-								<React.Fragment key={ assignment.id }>
-									<div>Link to assigntoable object</div>
-									<div>
-										{ assignment.assignable_type }
-									</div>
-								</React.Fragment>
-							)) }
-						</div>
-
-						<Heading order={ 3 }>Audit History</Heading>
-
-						<ul>
-							{ item.audits?.reverse().map(audit => {
-								const message = audit.action === 'create' ? 'Created' : 'Updated'
-
-								return (
-									<li key={ audit.id }>
-										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-									</li>
-								)
-							}) }
-						</ul>
+						<History assignments={ item.assignments } audits={ item.audits } />
 
 					</Tabs.Tab>
 
