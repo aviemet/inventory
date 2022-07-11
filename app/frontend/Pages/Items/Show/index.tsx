@@ -128,7 +128,7 @@ const Show = ({ item }: IShowItemProps) => {
 					</Tabs.Tab>
 
 					<Tabs.Tab label="History">
-						<Heading order={ 3 }>Assignment History</Heading>
+						<Heading order={ 3 }>History</Heading>
 
 						<History assignments={ item.assignments } audits={ item.audits } />
 

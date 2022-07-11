@@ -37,7 +37,10 @@ declare global {
 		interface Assignment extends UID {
 			assign_toable: Schema.Person|Schema.Item|Schema.Location
 		}
-		interface AuditedAudited extends UID {}
+		interface AuditedAudit {
+			user?: Schema.User
+			person?: Schema.Person
+		}
 		interface Category extends UID {}
 		interface Company extends UID {}
 		interface Component extends Assignable, UID {}

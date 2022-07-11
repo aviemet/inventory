@@ -1,7 +1,8 @@
 import React from 'react'
 import { has } from 'lodash'
 import { Text, Timeline } from '@mantine/core'
-import { formatter, capitalize } from '@/lib'
+import { formatter, capitalize, Routes } from '@/lib'
+import { Link } from '@/Components'
 
 type THistoryArray = (Schema.Assignment|Schema.AuditedAudit)[]
 
@@ -11,7 +12,6 @@ interface IHistoryProps {
 }
 
 const History = ({ assignments, audits }: IHistoryProps) => {
-
 	const events: THistoryArray = []
 
 	if(Array.isArray(assignments)) events.push(...assignments)
@@ -26,14 +26,21 @@ const History = ({ assignments, audits }: IHistoryProps) => {
 	return (
 		<Timeline>
 			{ events.map((event, i) => {
+				// Audit
 				if(has(event, 'auditable_type')) {
 					const audit = event as Schema.AuditedAudit
 					return (
-						<Timeline.Item key={ i } title={ capitalize(audit.action) }>
-							{ audit.created_at && <Text>{ formatter.date.long(audit.created_at) }</Text> }
+						<Timeline.Item key={ i } title={ `${capitalize(audit.action)}d` }>
+							{ audit.person && <Text>
+								by: <Link href={ Routes.person(audit.person) }>{ audit.person.name }</Link>
+							</Text> }
+							{ audit.created_at && <Text>
+								{ formatter.date.long(audit.created_at) }
+							</Text> }
 						</Timeline.Item>
 					)
 				}
+				// Assignment
 				const assignment = event as Schema.Assignment
 				return (
 					<Timeline.Item key={ i } title="Assigned" active={ assignment.active }>
