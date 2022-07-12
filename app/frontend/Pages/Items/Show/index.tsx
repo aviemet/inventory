@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Table, Box, History } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs, Table, Box, History, Badge } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { EditIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
 
@@ -35,7 +35,7 @@ const Show = ({ item }: IShowItemProps) => {
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu>
-						{ item.assignments ?
+						{ item.assigned ?
 							<Menu.Item href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
 								Checkin Item
 							</Menu.Item>
@@ -62,6 +62,27 @@ const Show = ({ item }: IShowItemProps) => {
 								<Table.Body>
 
 									<Table.Row>
+										<Table.Cell>{ item.assigned ? 'Assigned To' : 'Status' }</Table.Cell>
+										<Table.Cell>
+											{ item.assigned ?
+												<AssignmentLink assignment={ itemAssignment() } />
+												:
+												<Badge>{ item.status_type?.name }</Badge>
+											}
+										</Table.Cell>
+									</Table.Row>
+
+									<Table.Row>
+										<Table.Cell>Serial</Table.Cell>
+										<Table.Cell>{ item.serial }</Table.Cell>
+									</Table.Row>
+
+									<Table.Row>
+										<Table.Cell>Asset Tag</Table.Cell>
+										<Table.Cell>{ item.asset_tag }</Table.Cell>
+									</Table.Row>
+
+									<Table.Row>
 										<Table.Cell>Manufacturer</Table.Cell>
 										<Table.Cell>
 											{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer.slug) }>
@@ -80,27 +101,21 @@ const Show = ({ item }: IShowItemProps) => {
 									</Table.Row>
 
 									<Table.Row>
+										<Table.Cell>Vendor</Table.Cell>
+										<Table.Cell>
+											{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
+												{ item.vendor.name }
+											</Link> }
+										</Table.Cell>
+									</Table.Row>
+
+									<Table.Row>
 										<Table.Cell>Category</Table.Cell>
 										<Table.Cell>
 											{ item.category && <Link href={ Routes.category(item.category.slug) }>
 												{ item.category.name }
 											</Link> }
 										</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Serial</Table.Cell>
-										<Table.Cell>{ item.serial }</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Assigned To</Table.Cell>
-										<Table.Cell><AssignmentLink assignment={ itemAssignment() } /></Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Asset Tag</Table.Cell>
-										<Table.Cell>{ item.asset_tag }</Table.Cell>
 									</Table.Row>
 
 									<Table.Row>
@@ -113,14 +128,6 @@ const Show = ({ item }: IShowItemProps) => {
 										<Table.Cell>{ item.purchased_at && formatter.date.short(item.purchased_at) }</Table.Cell>
 									</Table.Row>
 
-									<Table.Row>
-										<Table.Cell>Vendor</Table.Cell>
-										<Table.Cell>
-											{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
-												{ item.vendor.name }
-											</Link> }
-										</Table.Cell>
-									</Table.Row>
 								</Table.Body>
 							</Table>
 						</Box>
