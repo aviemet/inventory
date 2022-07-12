@@ -45,6 +45,37 @@ class ConsumablesController < ApplicationController
       locations: -> { @active_company.locations.as_json },
     }
   end
+    
+  # GET /consumables/:id/checkout
+  def checkout
+    redirect_to consumable if consumable.qty == 0
+
+    assignment = Assignment.new
+    assignment.assignable = consumable
+    assignment.assign_toable_type = :Item
+
+    render inertia: "Consumables/Checkout", props: {
+      consumable: ConsumableBlueprint.render_as_json(consumable),
+      assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
+      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+    }
+  end
+
+  #GET /consumables/:id/checkin
+  def checkin
+    redirect_to consumable unless consumable.assignments.size > 0
+    assignment = consumable.assignment
+    assignment.returned_at = Time.current
+    assignment.active = false
+
+    render inertia: "Consumables/Checkin", props: {
+      consumable: ConsumableBlueprint.render_as_json(consumable),
+      assignment: AssignmentBlueprint.render_as_json(assignment),
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+      statuses: -> { StatusTypeBlueprint.render_as_json(StatusType.all) }
+    }
+  end
 
   # POST /consumables
   def create

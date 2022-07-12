@@ -39,15 +39,51 @@ class ComponentsController < ApplicationController
   def new
     render inertia: "Components/New", props: {
       component: ComponentBlueprint.render_as_json(Component.new, view: :new),
-      models: @active_company.models.find_by_category(:Component).as_json,
-      vendors: @active_company.vendors.as_json,
-      locations: @active_company.locations.as_json,
+      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
+      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
     }
   end
 
   # GET /components/:id/edit
   def edit
-    render inertia: "Components/Edit"
+    render inertia: "Components/Edit", props: {
+      component: ComponentBlueprint.render_as_json(component),
+      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
+      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
+    }
+  end
+    
+  # GET /components/:id/checkout
+  def checkout
+    redirect_to component if component.qty == 0
+
+    assignment = Assignment.new
+    assignment.assignable = component
+    assignment.assign_toable_type = :Item
+
+    render inertia: "Components/Checkout", props: {
+      component: ComponentBlueprint.render_as_json(component),
+      assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
+      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+    }
+  end
+
+  #GET /components/:id/checkin
+  def checkin
+    redirect_to component unless component.assignments.size > 0
+    assignment = component.assignment
+    assignment.returned_at = Time.current
+    assignment.active = false
+
+    render inertia: "Components/Checkin", props: {
+      component: ComponentBlueprint.render_as_json(component),
+      assignment: AssignmentBlueprint.render_as_json(assignment),
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+      statuses: -> { StatusTypeBlueprint.render_as_json(StatusType.all) }
+    }
   end
 
   # POST /components

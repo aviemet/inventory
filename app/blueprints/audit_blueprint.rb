@@ -16,4 +16,12 @@ class AuditBlueprint < Blueprinter::Base
          :request_uuid,
          :created_at
 
+  view :with_user do
+    association :user, blueprint: UserBlueprint
+  
+    association :person, blueprint: PersonBlueprint do |audit|
+      audit.user&.person
+    end
+  end
+
 end

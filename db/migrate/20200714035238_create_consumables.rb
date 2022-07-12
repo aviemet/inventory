@@ -3,7 +3,7 @@ class CreateConsumables < ActiveRecord::Migration[6.0]
     create_table :consumables do |t|
       t.string :name
       t.integer :min_qty
-      t.integer :qty
+      t.integer :qty, null: false
       t.monetize :cost, amount: { null: true, default: nil }
       t.boolean :requestable, null: false, default: true
       t.text :notes

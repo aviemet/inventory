@@ -9,8 +9,12 @@ class PersonBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  field :name do |person|
-    "#{person.first_name} #{person.last_name}" if person.first_name && person.last_name
+  include_view :name
+
+  view :name do
+    field :name do |person|
+      "#{person.first_name} #{person.last_name}" if person.first_name && person.last_name
+    end
   end
 
   view :associations do
@@ -26,14 +30,11 @@ class PersonBlueprint < ApplicationBlueprint
   end
 
   view :as_options do
-    excludes :first_name,
-             :middle_name,
-             :last_name,
-             :active,
-             :employee_number,
-             :job_title,
-             :manager_id,
-             :created_at,
-             :updated_at
+    only :id
+    include_view :name
+
+    field :default_location_id do |person|
+      person.location.id unless person.location.nil?
+    end
   end
 end

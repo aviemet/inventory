@@ -10,7 +10,7 @@ interface IHeadCellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
 }
 
-const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap, rows, hideable, ...props }: IHeadCellWithContextProps) => {
+const HeadCellWithContext = ({ children, checkbox = false, sort, nowrap = true, rows, hideable, ...props }: IHeadCellWithContextProps) => {
 	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
 	const { tableState: { columns, model }, setTableState } = useTableContext()
 

@@ -10,7 +10,7 @@ export const currency = (amount: number, currency = 'USD') => {
 
 export const date = {
 	short: (date: string) => format(new Date(date), 'MM/dd/yy'),
-	long: (date: string) => format(new Date(date), 'MM/dd/yy'),
+	long: (date: string) => format(new Date(date), 'MM/dd/yy HH:mm:ss'),
 	relative: (date: string) => {
 		return format(new Date(date), 'MM/dd/yy')
 	},

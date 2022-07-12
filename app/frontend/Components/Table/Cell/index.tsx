@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTableSectionContext } from '../TableContext'
 import { TDProps } from 'react-html-props'
-import BodyCell, { type IBodyCellProps } from './BodyCell'
+import BodyCell from './BodyCell'
 import HeadCell from './HeadCell'
 
 export interface ICellProps extends TDProps {
@@ -19,7 +19,7 @@ const RenderedCell = ({ children = true, hideable, ...props }: ICellProps) => {
 		return <HeadCell hideable={ hideable } { ...props }>{ children }</HeadCell>
 	}
 
-	const bodyProps: IBodyCellProps = props
+	const bodyProps: ICellProps = props
 	if(typeof hideable === 'string') {
 		bodyProps.hideable = hideable
 	}

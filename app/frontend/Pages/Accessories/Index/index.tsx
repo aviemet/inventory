@@ -4,6 +4,7 @@ import { Link, Table } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { NewIcon } from '@/Components/Icons'
+import { isNil } from 'lodash'
 
 interface IAccessoriesIndexProps {
 	accessories: Schema.Accessory[]
@@ -12,6 +13,15 @@ interface IAccessoriesIndexProps {
 
 const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) => {
 	const title = 'Accessories'
+
+	const qty = (accessory: Schema.Accessory) => {
+		if(isNil(accessory.qty)) {
+			return '-'
+		} else if(isNil(accessory.active_assignments_count)) {
+			return accessory.qty
+		}
+		return `${accessory.qty - accessory.active_assignments_count} / ${accessory.qty}`
+	}
 
 	return (
 		<>
@@ -88,7 +98,7 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 										</Link> }
 									</Table.Cell>
 
-									<Table.Cell>{ accessory.qty }</Table.Cell>
+									<Table.Cell nowrap>{ qty(accessory) }</Table.Cell>
 
 									<Table.Cell>{ accessory.min_qty }</Table.Cell>
 

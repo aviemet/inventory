@@ -209,6 +209,10 @@ Given that an asset shouldn't belong to more than one company, a Company record 
 
 The Blueprinter gem is used to shape data passed to Inertia components. Avoid passing raw data as props, and instead prefer using a Blueprint to standardize the shape of data being passed to the client. Use `render_as_json` in the render method to parse the data properly.
 
+### UID
+
+Blueprinter base class provides a uid value derived from the id and model name of the record. This allows polymorphic records such as assignable and assign_toable to pass a single variable containing the values necessary to fetch a record. It also prevents naive sequential id attacks (since it's just a base64 encoding of the values, a program could still brute force it, but a human entering values into a url will be thwarted).
+
 ## Features for another time
 
 - Depreciation

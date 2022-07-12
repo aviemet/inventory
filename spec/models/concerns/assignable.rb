@@ -1,4 +1,5 @@
 shared_examples "assignable" do
+
   describe "Associations" do
     it { is_expected.to have_many(:assignments) }
   end
@@ -10,6 +11,7 @@ shared_examples "assignable" do
       expect(assignment.assign_toable_type).to eq("Person")
     end
   end
+
 end
 
 shared_examples "assignable:single" do
@@ -18,6 +20,7 @@ shared_examples "assignable:single" do
   describe "Assignments Single Item" do
     it "Can reference its current assignment"  do
       person = create(:person)
+      expect(subject.assigned?).to be(false)
       subject.assign_to(person)
       expect(subject.assigned?).to be(true)
       expect(subject.assignment).to be_a(Assignment)
@@ -25,9 +28,13 @@ shared_examples "assignable:single" do
 
     it "Can only have one active assignment" do
       person = create(:person)
+      location = create(:location)
+
       subject.assign_to(person)
-      subject.assign_to(create(:location))
-      expect(subject.assigned_to).to eq(person)
+      expect {
+        subject.assign_to(location)
+      }.to raise_error(StandardError)
+      expect(subject.assignments.size).to eq(1)
     end
 
     it "Can be unassigned" do
@@ -38,6 +45,7 @@ shared_examples "assignable:single" do
       expect(subject.assignment).to be(nil)
     end
   end
+
 end
 
 shared_examples "assignable:quantity" do
@@ -53,34 +61,66 @@ shared_examples "assignable:quantity" do
       expect(subject.assigned_to).to eq(location)
     end
 
+    it "Should reduce qty when assigned" do
+      person = create(:person)
+      expect{ subject.assign_to(person) }.to change{ subject.qty }.by(-1)
+      qty = 2
+      expect{ subject.assign_to(person, qty: qty) }.to change{ subject.qty }.by(-qty)
+    end
+
     it "Should not respond to assignment" do
       expect(subject.respond_to?(:assignment)).to be(false)
     end
 
     it "Can be unassigned" do
       person = create(:person)
-      expect{ subject.assign_to(person, { qty: 1 }) }.to change{ subject.qty }.by(-1)
-      expect{ subject.unassign(subject.assignments.first.id) }.to change{ subject.qty }.by(1)
+      subject.assign_to(person)
+      expect{ subject.unassign(subject.assignments.first) }.to change{ subject.qty }.by(1)
+    end
+
+    it "Cannot assign more than are available" do
+      subject.update qty: 1
+      expect{ 
+        subject.assign_to(person, qty: 2) 
+      }.to raise StandardError
     end
   end
+
 end
 
 shared_examples "assignable:consume" do
   it_behaves_like "assignable"
 
-  it "Can have multiple assignments" do
-    person = create(:person)
-    location = create(:location)
-    subject.assign_to(person)
-    subject.assign_to(location)
-    expect(subject.assignments.count).to eq(2)
+  describe "Consumables assets", if: @has_quantity do
+    it "Can have multiple assignments" do
+      person = create(:person)
+      location = create(:location)
+      subject.assign_to(person)
+      subject.assign_to(location)
+      expect(subject.assignments.count).to eq(2)
+    end
+
+    it "Should reduce qty when assigned" do
+      person = create(:person)
+      expect{ subject.assign_to(person) }.to change{ subject.qty }.by(-1)
+      qty = 2
+      expect{ subject.assign_to(person, qty: qty) }.to change{ subject.qty }.by(-qty)
+    end
+
+    it "Should not respond to assignment" do
+      expect(subject.respond_to?(:assignment)).to be(false)
+    end
+
+    it "Should not respond to unassign" do
+      expect(subject.respond_to?(:unassign)).to be(false)
+    end
+
+    it "Cannot assign more than are available" do
+      subject.update qty: 1
+      expect{ 
+        subject.assign_to(person, qty: 2) 
+      }.to raise StandardError
+    end
   end
 
-  it "Should not respond to assignment" do
-    expect(subject.respond_to?(:assignment)).to be(false)
-  end
-
-  it "Should not respond to unassign" do
-    expect(subject.respond_to?(:unassign)).to be(false)
-  end
 end

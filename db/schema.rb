@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_28_000016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -30,8 +30,10 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.bigint "default_location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "status_type_id"
     t.index ["default_location_id"], name: "index_accessories_on_default_location_id"
     t.index ["model_id"], name: "index_accessories_on_model_id"
+    t.index ["status_type_id"], name: "index_accessories_on_status_type_id"
     t.index ["vendor_id"], name: "index_accessories_on_vendor_id"
   end
 
@@ -58,7 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.bigint "assign_toable_id", null: false
     t.bigint "location_id", null: false
     t.integer "qty", default: 1
-    t.integer "status", default: 0
     t.datetime "assigned_at", precision: nil
     t.datetime "returned_at", precision: nil
     t.datetime "expected_at", precision: nil
@@ -127,16 +128,18 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.bigint "default_location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "status_type_id"
     t.index ["default_location_id"], name: "index_components_on_default_location_id"
     t.index ["model_id"], name: "index_components_on_model_id"
     t.index ["serial"], name: "index_components_on_serial", unique: true
+    t.index ["status_type_id"], name: "index_components_on_status_type_id"
     t.index ["vendor_id"], name: "index_components_on_vendor_id"
   end
 
   create_table "consumables", force: :cascade do |t|
     t.string "name"
     t.integer "min_qty"
-    t.integer "qty"
+    t.integer "qty", null: false
     t.integer "cost_cents"
     t.string "cost_currency", default: "USD", null: false
     t.boolean "requestable", default: true, null: false
@@ -146,8 +149,10 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.bigint "default_location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "status_type_id"
     t.index ["default_location_id"], name: "index_consumables_on_default_location_id"
     t.index ["model_id"], name: "index_consumables_on_model_id"
+    t.index ["status_type_id"], name: "index_consumables_on_status_type_id"
     t.index ["vendor_id"], name: "index_consumables_on_vendor_id"
   end
 
@@ -254,10 +259,12 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.bigint "default_location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "status_type_id"
     t.index ["asset_tag"], name: "index_items_on_asset_tag", unique: true
     t.index ["default_location_id"], name: "index_items_on_default_location_id"
     t.index ["model_id"], name: "index_items_on_model_id"
     t.index ["serial"], name: "index_items_on_serial", unique: true
+    t.index ["status_type_id"], name: "index_items_on_status_type_id"
     t.index ["vendor_id"], name: "index_items_on_vendor_id"
   end
 
@@ -280,8 +287,10 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
     t.bigint "manufacturer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "status_type_id"
     t.index ["category_id"], name: "index_licenses_on_category_id"
     t.index ["manufacturer_id"], name: "index_licenses_on_manufacturer_id"
+    t.index ["status_type_id"], name: "index_licenses_on_status_type_id"
     t.index ["vendor_id"], name: "index_licenses_on_vendor_id"
   end
 
@@ -519,6 +528,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
 
   add_foreign_key "accessories", "locations", column: "default_location_id"
   add_foreign_key "accessories", "models"
+  add_foreign_key "accessories", "status_types"
   add_foreign_key "accessories", "vendors"
   add_foreign_key "addresses", "categories"
   add_foreign_key "addresses", "contacts"
@@ -526,9 +536,11 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
   add_foreign_key "assignments", "users", column: "created_by_id"
   add_foreign_key "components", "locations", column: "default_location_id"
   add_foreign_key "components", "models"
+  add_foreign_key "components", "status_types"
   add_foreign_key "components", "vendors"
   add_foreign_key "consumables", "locations", column: "default_location_id"
   add_foreign_key "consumables", "models"
+  add_foreign_key "consumables", "status_types"
   add_foreign_key "consumables", "vendors"
   add_foreign_key "contacts", "addresses", column: "primary_address_id"
   add_foreign_key "contacts", "emails", column: "primary_email_id"
@@ -543,9 +555,11 @@ ActiveRecord::Schema[7.0].define(version: 2021_07_31_153226) do
   add_foreign_key "ip_leases", "nics"
   add_foreign_key "items", "locations", column: "default_location_id"
   add_foreign_key "items", "models"
+  add_foreign_key "items", "status_types"
   add_foreign_key "items", "vendors"
   add_foreign_key "licenses", "categories"
   add_foreign_key "licenses", "manufacturers"
+  add_foreign_key "licenses", "status_types"
   add_foreign_key "licenses", "vendors"
   add_foreign_key "locations", "locations", column: "parent_id"
   add_foreign_key "models", "categories"

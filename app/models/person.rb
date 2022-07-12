@@ -34,9 +34,14 @@ class Person < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+  alias :name :full_name
 
   def self.to_s_field
     :first_name
+  end
+
+  def default_location
+    self&.location || self&.department&.location
   end
 
   private

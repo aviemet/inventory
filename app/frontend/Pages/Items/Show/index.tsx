@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs, Table, Box, History } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { EditIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
 
@@ -8,8 +8,23 @@ interface IShowItemProps {
 	item: Schema.Item
 }
 
+const AssignmentLink = ({ assignment }: { assignment?: Schema.Assignment }) => {
+	if(!assignment) return <></>
+
+	// @ts-ignore
+	const path = Routes[assignment.assign_toable_type.toLowerCase()]
+
+	return <Link href={ path(assignment.assign_toable_id) }>{ assignment.assign_toable.name }</Link>
+}
+
 const Show = ({ item }: IShowItemProps) => {
 	const title = item.name ?? 'Item Details'
+
+	const itemAssignment = useCallback(() => {
+		if(!item.assigned || !item.assignments) return
+
+		return item.assignments.find(assignment => assignment.active)
+	}, [item])
 
 	return (
 		<>
@@ -21,12 +36,12 @@ const Show = ({ item }: IShowItemProps) => {
 
 					<Menu>
 						{ item.assignments ?
-							<Menu.Item href={ Routes.checkinItem(item) } icon={ CheckinIcon }>
-									Checkin Item
+							<Menu.Item href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
+								Checkin Item
 							</Menu.Item>
 							:
-							<Menu.Item href={ Routes.checkoutItem(item) } icon={ CheckoutIcon }>
-									Checkout Item
+							<Menu.Item href={ Routes.checkoutItem(item) } icon={ <CheckoutIcon /> }>
+								Checkout Item
 							</Menu.Item>
 						}
 						<Menu.Item href={ Routes.editItem(item) } icon={ <EditIcon /> }>
@@ -39,100 +54,82 @@ const Show = ({ item }: IShowItemProps) => {
 					<Tabs.Tab label="Details">
 						<Heading order={ 3 }>Details</Heading>
 
-						<div className="item-details">
+						<Box sx={ theme => ({
+							maxWidth: `${theme.breakpoints.sm}px`
+						}) }>
 
-							<div className="item-row">
-								<label>Model:</label>
-								<div className="value">
-									{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer!) }>
-										{ item.manufacturer!.name }
-									</Link> }
-								</div>
-							</div>
+							<Table>
+								<Table.Body>
 
-							<div className="item-row">
-								<label>Category:</label>
-								<div className="value">
-									{ item.category && <Link href={ Routes.category(item.category.slug) }>
-										{ item.category!.name }
-									</Link> }
-								</div>
-							</div>
+									<Table.Row>
+										<Table.Cell>Manufacturer</Table.Cell>
+										<Table.Cell>
+											{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer.slug) }>
+												{ item.manufacturer!.name }
+											</Link> }
+										</Table.Cell>
+									</Table.Row>
 
-							<div className="item-row">
-								<label>Serial:</label>
-								<div className="value">
-									{ item.serial }
-								</div>
-							</div>
+									<Table.Row>
+										<Table.Cell>Model</Table.Cell>
+										<Table.Cell>
+											{ item.model && <Link href={ Routes.model(item.model.slug) }>
+												{ item.model.name }
+											</Link> }
+										</Table.Cell>
+									</Table.Row>
 
-							<div className="item-row">
-								<label>Assigned To:</label>
-								<div className="value">
-								Figure this out
-								</div>
-							</div>
+									<Table.Row>
+										<Table.Cell>Category</Table.Cell>
+										<Table.Cell>
+											{ item.category && <Link href={ Routes.category(item.category.slug) }>
+												{ item.category.name }
+											</Link> }
+										</Table.Cell>
+									</Table.Row>
 
-							<div className="item-row">
-								<label>Asset Tag:</label>
-								<div className="value">
-									{ item.asset_tag }
-								</div>
-							</div>
+									<Table.Row>
+										<Table.Cell>Serial</Table.Cell>
+										<Table.Cell>{ item.serial }</Table.Cell>
+									</Table.Row>
 
-							<div className="item-row">
-								<label>Purchase Cost:</label>
-								<div className="value">
-									{ item.cost && formatter.currency(item.cost, item.cost_currency) }
-								</div>
-							</div>
+									<Table.Row>
+										<Table.Cell>Assigned To</Table.Cell>
+										<Table.Cell><AssignmentLink assignment={ itemAssignment() } /></Table.Cell>
+									</Table.Row>
 
-							<div className="item-row">
-								<label>Purchase Date:</label>
-								<div className="value">
-									{ item.purchased_at && formatter.date.short(item.purchased_at) }
-								</div>
-							</div>
+									<Table.Row>
+										<Table.Cell>Asset Tag</Table.Cell>
+										<Table.Cell>{ item.asset_tag }</Table.Cell>
+									</Table.Row>
 
-							<div className="item-row">
-								<label>Vendor:</label>
-								<div className="value">
-									{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
-										{ item.vendor.name }
-									</Link> }
-								</div>
-							</div>
+									<Table.Row>
+										<Table.Cell>Purchase Cost</Table.Cell>
+										<Table.Cell>{ item.cost && formatter.currency(item.cost, item.cost_currency) }</Table.Cell>
+									</Table.Row>
 
-						</div>
+									<Table.Row>
+										<Table.Cell>Purchase Date</Table.Cell>
+										<Table.Cell>{ item.purchased_at && formatter.date.short(item.purchased_at) }</Table.Cell>
+									</Table.Row>
+
+									<Table.Row>
+										<Table.Cell>Vendor</Table.Cell>
+										<Table.Cell>
+											{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
+												{ item.vendor.name }
+											</Link> }
+										</Table.Cell>
+									</Table.Row>
+								</Table.Body>
+							</Table>
+						</Box>
 					</Tabs.Tab>
 
 					<Tabs.Tab label="History">
-						<Heading order={ 3 }>Assignment History</Heading>
+						<Heading order={ 3 }>History</Heading>
 
-						<div>
-							{ item.assignments && item.assignments.reverse().map(assignment => (
-								<React.Fragment key={ assignment.id }>
-									<div>Link to assigntoable object</div>
-									<div>
-										{ assignment.assignable_type }
-									</div>
-								</React.Fragment>
-							)) }
-						</div>
-
-						<Heading order={ 3 }>Audit History</Heading>
-
-						<ul>
-							{ item.audits?.reverse().map(audit => {
-								const message = audit.action === 'create' ? 'Created' : 'Updated'
-
-								return (
-									<li key={ audit.id }>
-										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-									</li>
-								)
-							}) }
-						</ul>
+						<History assignments={ item.assignments } audits={ item.audits } />
 
 					</Tabs.Tab>
 

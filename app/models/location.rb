@@ -26,4 +26,8 @@ class Location < ApplicationRecord
   validates_presence_of :name
 
   scope :includes_associated, -> { includes([:parent, :department]) }
+
+  def default_location
+    self
+  end
 end

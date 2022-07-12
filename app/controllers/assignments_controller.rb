@@ -1,13 +1,9 @@
 class AssignmentsController < ApplicationController
-  # before_action :set_assignment, only: [:show, :edit, :update, :destroy]
-  # before_action :set_assignable, only: [:create] #, :end, :checkin]
   # before_action :redirect_if_already_assigned, only: [:create]
 
   expose :assignment
-  # expose :assignable, -> { }
 
   # GET /assignments/:id
-  # GET /assignments/:id.json
   def show
     render inertia: "Assignments/Show", props: {
       assignment: assignment
@@ -22,50 +18,54 @@ class AssignmentsController < ApplicationController
     }
   end
 
-  # POST /assignments/:asset_type/:asset_id
-  # POST /assignments/:asset_type/:asset_id.json
+  # POST /assignments/
   def create
-    assignable = assignment_params[:assignable_type].camelize.constantize.find(assignment_params[:assignable_id])
-    assignment.assign_toable_id = ApplicationRecord.decode_id(assignment_params[:assign_toable_id])[:id]
-    if assignment.save
-      redirect_to assignable
+    # Assignable should always be valid
+    assignment.assignable_type = assignment_params[:assignable_type]
+    assignment.assignable_id = assignment_params[:assignable_id]
+
+    # Assigntoable could be empty
+    assignment.assign_toable_type = assignment_params[:assign_toable_type]
+    assignment.assign_toable_id = assignment_params[:assign_toable_id]
+
+    if assignment.valid? && assignment.assignable&.assign_to(assignment.assign_toable, assignment_params.merge({ created_by_id: current_user.id })).persisted?
+      redirect_to assignment.assignable
     else
-      redirect_to send("checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", id: assignable.encode_id), inertia: { errors: assignment.errors }
+      redirect_to send(
+        "checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", 
+        id: assignment.assignable
+      ), inertia: { errors: assignment.errors }
     end
   end
 
   # PATCH/PUT /assignments/:id
-  # PATCH/PUT /assignments/:id.json
   def update
-    respond_to do |format|
-      if assignment.update(assignment_params)
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @assignment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
-      end
+    assignable = assignment.assignable
+    if assignment.update(assignment_params)
+      redirect_to assignable
+    else
+      redirect_to send("checkin_#{assignment.assignable_type.downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
+    end
+  end
+
+  # PATCH/PUT /assignments/:id/unassign
+  def unassign
+    assignable = assignment.assignable
+    if assignable.unassign(assignment, returned_at: assignment_params&.[](:returned_at))
+      redirect_to assignable
+    else
+      redirect_to send("checkin_#{assignment.assignable_type.downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
     end
   end
 
   # DELETE /assignments/:id
-  # DELETE /assignments/:id.json
   def destroy
+    assignable = assignment.assignable
     assignment.destroy
-    respond_to do |format|
-      format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to assignable
   end
 
   private
-
-  def set_assignable
-    asset_class = params[:assignable_type].capitalize.constantize
-    raise "\"#{asset_class.name}\" is not an assignable asset type" unless asset_class.include?(Assignable)
-
-    @assignable = asset_class.find(params[:assignable_id])
-  end
 
   def redirect_if_already_assigned
     if @assignable.respond_to?(:assigned_to) && @assignable&.assigned_to
@@ -74,14 +74,6 @@ class AssignmentsController < ApplicationController
   end
 
   def assignment_params
-    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name])
-  end
-
-  def find_assignable(asset_type:, asset_id:)
-    asset_type.capitalize.constantize.find(asset_id)
-  end
-
-  def find_assign_toable
-    assignment_params[:assign_toable_type].capitalize.constantize.find(assignment_params[:assign_toable_id])
+    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name], accessory: [:name], license: [:name], component: [:name], consumable: [:qty])
   end
 end
