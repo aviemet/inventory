@@ -1,6 +1,5 @@
 import { createStyles } from '@mantine/core'
 
-
 const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 	wrapper: {
 		overflow: 'auto',
@@ -24,7 +23,7 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 			backgroundColor: theme.other.colorSchemeOption(theme.white, theme.colors.gray[9]),
 		},
 
-		'tbody, tbody a': {
+		'thead, thead a, tbody, tbody a': {
 			fontSize: '0.9rem',
 		},
 
@@ -33,8 +32,6 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 		},
 
 		'th, td': {
-			width: 1,
-
 			'&.table-column-fit': {
 				width: 1,
 				whiteSpace: 'nowrap',
