@@ -1,6 +1,7 @@
 export * as Routes from '@/types/routes'
 export * as formatter from './formatters'
 import { merge, isBoolean } from 'lodash'
+import { Routes } from '@/lib'
 // export { default as IPAddress } from './IPAddress'
 
 const B64_SEPARATOR = ' '
@@ -59,8 +60,10 @@ export const fillEmptyValues = <T extends Record<keyof T, any>>(data: T): T => {
 		if(isObj(sanitizedDefaultData[key])) {
 			sanitizedDefaultData[key] = fillEmptyValues(sanitizedDefaultData[key])
 		} else if(sanitizedDefaultData[key] === undefined || sanitizedDefaultData[key] === null) {
+			// @ts-ignore
 			sanitizedDefaultData[key] = ''
 		} else if(!isBoolean(sanitizedDefaultData[key])) {
+			// @ts-ignore
 			sanitizedDefaultData[key] = String(sanitizedDefaultData[key])
 		} else {
 			sanitizedDefaultData[key] = sanitizedDefaultData[key]
@@ -75,22 +78,12 @@ export const capitalize = (str?: string|null): string => {
 	return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-/*
-export const fillEmptyValuesOrig = <T extends Record<keyof T, unknown>>(data: T): T => {
-	const sanitizedDefaultData = data
-
-	Object.keys(data).forEach(key => {
-		if(isObj(data[key])) {
-			sanitizedDefaultData[key] = fillEmptyValues(data[key])
-		} else if(data[key] === undefined || data[key] === null) {
-			sanitizedDefaultData[key] = ''
-		} else if(!isBoolean(data[key])) {
-			sanitizedDefaultData[key] = String(data[key])
-		} else {
-			sanitizedDefaultData[key] = data[key]
-		}
-	})
-
-	return sanitizedDefaultData
+export const camelize = (str?: string|null) => {
+	if(typeof str !== 'string') return ''
+	return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, char) => char.toUpperCase())
 }
-*/
+
+export const polymorphicRoute = (model: string, param: string|number) => {
+	// @ts-ignore
+	return Routes[camelize(model)](param)
+}

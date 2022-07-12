@@ -25,6 +25,7 @@ class ItemBlueprint < ApplicationBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
     association :default_location, blueprint: LocationBlueprint
     association :location, blueprint: LocationBlueprint
+    association :status_type, blueprint: StatusTypeBlueprint
   end
 
   view :new do
