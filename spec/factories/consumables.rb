@@ -8,6 +8,7 @@ FactoryBot.define do
     notes { Faker::Lorem.sentence }
     manufacturer { Manufacturer.first || create(:manufacturer) }
     default_location factory: :location
+    status_type
     model
     category
     vendor

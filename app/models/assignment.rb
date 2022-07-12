@@ -1,7 +1,7 @@
 class Assignment < ApplicationRecord
   audited
 
-  enum status: %i(requested approved denied)
+  enum status: %i(approved requested denied)
 
   belongs_to :assignable, polymorphic: true
   belongs_to :assign_toable, polymorphic: true
@@ -16,8 +16,12 @@ class Assignment < ApplicationRecord
   validates_presence_of :assignable_id
   validates_presence_of :assign_toable_type
   validates_presence_of :assign_toable_id
+  validates_presence_of :assigned_at
+  validates_presence_of :location_id
 
   after_initialize :defaults
+
+  scope :includes_associated, -> { includes([:location, :created_by, :status_type, :audits]) }
 
   private
 

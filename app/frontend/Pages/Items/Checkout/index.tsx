@@ -1,10 +1,9 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Head, usePage } from '@inertiajs/inertia-react'
+import { Heading, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
-import AssignToableDropdown from './AssignToableDropdown'
-import LocationDropdown from './LocationDropdown'
+import { AssignToableDropdown, LocationDropdown } from '@/Components/Form/Components'
 
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
@@ -17,12 +16,14 @@ interface ICheckoutItemProps {
 const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Item'
 
+	const { props } = usePage<InertiaPage>()
+	console.log({ props })
 	return (
 		<>
 			<Head title={ title }></Head>
 
 			<Section>
-				<h3>{ title }</h3>
+				<Heading order={ 3 }>{ title }</Heading>
 
 				<div>
 					<div className="item-details">
@@ -42,11 +43,6 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 							<div className="value">{ item.serial }</div>
 						</div>
 
-						<div className="item-row">
-							<label>Other Userful Data</label>
-							<div className="value">Something Else?</div>
-						</div>
-
 					</div>
 				</div>
 
@@ -54,11 +50,14 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 					data={ {
 						assignment: {
 							...assignment,
-							assign_toable_type: 'Person',
+							assignable_id: item.id,
+							assignable_type: 'Item',
 						},
-						item,
+						item: {
+							name: item.name
+						},
 					} }
-					to={ Routes.assignments({ id: item.id }) }
+					to={ Routes.assignments() }
 					model="assignment"
 				>
 					<Input
@@ -68,7 +67,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 						required
 					/>
 
-					<AssignToableDropdown { ...models } />
+					<AssignToableDropdown { ...models } options={ ['Person', 'Item', 'Location'] } />
 
 					<LocationDropdown locations={ models.locations } />
 

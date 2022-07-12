@@ -17,12 +17,14 @@ class ItemBlueprint < ApplicationBlueprint
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint
-    association :assignments, blueprint: AssignmentBlueprint
-    association :audits, blueprint: AuditBlueprint
+    association :assignments, blueprint: AssignmentBlueprint, view: :associations
+    association :audits, blueprint: AuditBlueprint, view: :with_user
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :category, blueprint: CategoryBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
+    association :default_location, blueprint: LocationBlueprint
+    association :location, blueprint: LocationBlueprint
   end
 
   view :new do

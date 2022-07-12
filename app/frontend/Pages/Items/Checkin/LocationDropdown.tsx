@@ -9,8 +9,6 @@ const LocationDropdown = ({ locations }: ILocationDropdown) => {
 	const { data } = useForm()
 	const { assignment: { assign_toable_type: type } } = data
 
-	console.log({ locations })
-
 	if(type === 'Location') return <></>
 
 	return (

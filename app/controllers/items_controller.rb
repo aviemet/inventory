@@ -39,9 +39,9 @@ class ItemsController < ApplicationController
   def new
     render inertia: "Items/New", props: {
       item: ItemBlueprint.render_as_json(Item.new, view: :new),
-      models: -> { @active_company.models.find_by_category(:Item).as_json },
-      vendors: -> { @active_company.vendors.as_json },
-      locations: -> { @active_company.locations.as_json },
+      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
+      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
     }
   end
 
@@ -49,9 +49,9 @@ class ItemsController < ApplicationController
   def edit
     render inertia: "Items/Edit", props: {
       item: ItemBlueprint.render_as_json(item),
-      models: -> { @active_company.models.find_by_category(:Item).as_json },
-      vendors: -> { @active_company.vendors.as_json },
-      locations: -> { @active_company.locations.as_json },
+      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
+      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
     }
   end
 
@@ -66,8 +66,11 @@ class ItemsController < ApplicationController
     
   # GET /hardware/:id/checkout
   def checkout
+    redirect_to item if item.assigned?
+
     assignment = Assignment.new
     assignment.assignable = item
+
     render inertia: "Items/Checkout", props: {
       item: ItemBlueprint.render_as_json(item),
       assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
@@ -79,15 +82,23 @@ class ItemsController < ApplicationController
 
   #GET /hardware/:id/checkin
   def checkin
+    redirect_to item unless item.assigned?
+    assignment = item.assignment
+    assignment.returned_at = Time.current
+    assignment.active = false
+
     render inertia: "Items/Checkin", props: {
-      item: ItemBlueprint.render_as_json(item, view: :associations),
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :name]), view: :as_options) },
+      item: ItemBlueprint.render_as_json(item),
+      assignment: AssignmentBlueprint.render_as_json(assignment),
+      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+      statuses: -> { StatusTypeBlueprint.render_as_json(StatusType.all) }
     }
   end
 
   # POST /hardware
   def create
     item.company = @active_company
+
     if item.save
       redirect_to item, notice: 'Item was successfully created'
     else

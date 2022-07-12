@@ -11,5 +11,6 @@ module Assignable
         self.update(qty: self.qty - assignment.qty)
       end
     end
+
   end
 end

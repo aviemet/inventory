@@ -22,7 +22,7 @@ class ManufacturersController < ApplicationController
   # GET /manufacturers/1
   def show
     render inertia: "Manufacturers/Show", props: {
-      manufacturer: ManufacturerBlueprint.render_as_json(paginated_manufacturers, view: :associations)
+      manufacturer: ManufacturerBlueprint.render_as_json(manufacturers, view: :associations)
     }
   end
 

@@ -19,8 +19,29 @@ const TableTitleSection = ({ title, menuOptions }: ITableTitleSectionProps) => {
 	const { tableState: { hideable, model, selected } } = useTableContext()
 
 	return (
-		<Group position="apart" align="start">
-			<Title sx={ { flex: 2 } }>
+		<Group position="apart" align="start" sx={ { marginBottom: 12 } } spacing="sm">
+			<Group position="apart" sx={ theme => ({
+				flex: '1 1 100%',
+				width: '100%',
+
+				[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+					flex: 1,
+					width: 'auto',
+				},
+
+				[`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+					'&&': {
+						marginBottom: 0,
+					},
+				},
+
+				h1: {
+					marginBottom: 0
+				}
+			}) }>
+				<Title>
+					{ title }
+				</Title>
 				<Menu position="bottom" placement="start">
 					{ menuOptions && menuOptions.map(({ label, href, icon }, index) => {
 						const Icon = icon
@@ -42,9 +63,16 @@ const TableTitleSection = ({ title, menuOptions }: ITableTitleSectionProps) => {
 					</> }
 
 				</Menu>
-				{ title }
-			</Title>
-			<Box sx={ { flex: 1, display: 'flex' } }>
+			</Group>
+			<Box sx={ theme=> ({
+				flex: '1 1 100%',
+				display: 'flex',
+
+				[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+					flex: 1,
+					width: 'auto',
+				},
+			}) }>
 				<SearchInput model={ model } columnPicker={ hideable } />
 			</Box>
 		</Group>

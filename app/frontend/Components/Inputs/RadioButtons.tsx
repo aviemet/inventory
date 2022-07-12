@@ -5,9 +5,10 @@ import Label from './Label'
 export type TOption = {
 	label: string
 	value: string
+	defaultModel?: TAssignToable
 }
 
-export interface IRadioButtonsProps extends SegmentedControlProps {
+export interface IRadioButtonsProps extends Omit<SegmentedControlProps, 'data'> {
 	label?: string
 	labelPosition?: 'start'|'end'
 	name: string

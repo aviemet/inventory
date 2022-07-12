@@ -19,6 +19,7 @@ export {
 	// ChevronLeft as PreviousIcon,
 	ChevronsLeft as FirstIcon,
 	Dots as DotsIcon,
+	Filter as FilterIcon,
 } from 'tabler-icons-react'
 
 export {

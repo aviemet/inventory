@@ -7,12 +7,12 @@ class LocationBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-
   view :associations do
     association :parent, blueprint: LocationBlueprint
     association :contact, blueprint: ContactBlueprint
     association :audits, blueprint: AuditBlueprint
     association :department, blueprint: DepartmentBlueprint
+    association :location, blueprint: LocationBlueprint
   end
 
   view :counts do
