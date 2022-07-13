@@ -365,6 +365,20 @@ declare namespace Schema {
 		warranty?: Warranty;
 	}
 
+	interface Ldap {
+		id: number;
+		host?: string | null;
+		port?: string | null;
+		username?: string | null;
+		password?: string | null;
+		tree_base?: string | null;
+		user_search?: string | null;
+		sync_interval?: string | null;
+		company_id: number;
+		created_at: string;
+		updated_at: string;
+	}
+
 	interface License {
 		id: number;
 		name?: string | null;

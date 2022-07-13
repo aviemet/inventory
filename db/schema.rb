@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_28_000016) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_12_230940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -266,6 +266,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_000016) do
     t.index ["serial"], name: "index_items_on_serial", unique: true
     t.index ["status_type_id"], name: "index_items_on_status_type_id"
     t.index ["vendor_id"], name: "index_items_on_vendor_id"
+  end
+
+  create_table "ldaps", force: :cascade do |t|
+    t.string "host"
+    t.string "port"
+    t.string "username"
+    t.string "password"
+    t.string "tree_base"
+    t.string "user_search"
+    t.string "sync_interval"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_ldaps_on_company_id"
   end
 
   create_table "licenses", force: :cascade do |t|
@@ -557,6 +571,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_000016) do
   add_foreign_key "items", "models"
   add_foreign_key "items", "status_types"
   add_foreign_key "items", "vendors"
+  add_foreign_key "ldaps", "companies"
   add_foreign_key "licenses", "categories"
   add_foreign_key "licenses", "manufacturers"
   add_foreign_key "licenses", "status_types"

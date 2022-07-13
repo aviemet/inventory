@@ -1825,6 +1825,28 @@ export const items: ((
 
 /**
  * Generates rails route to
+ * /ldaps/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ldap: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /ldaps(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ldaps: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /licenses/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options

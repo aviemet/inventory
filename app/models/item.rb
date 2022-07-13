@@ -52,10 +52,4 @@ class Item < ApplicationRecord
     end
   end
 
-  # Update Item name if changed during assignment
-  # def before_assignment(_, params)
-  #   name = params&.[](:assignment)&.[](:item)&.[](:name)
-  #   self.update(name: name) unless name.nil?
-  # end
-
 end
