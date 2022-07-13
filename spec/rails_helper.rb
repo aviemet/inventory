@@ -11,6 +11,9 @@ require 'inertia_rails/rspec'
 require 'bullet'
 require 'database_cleaner/active_record'
 
+require 'sidekiq/testing/inline'
+require 'sidekiq-status/testing/inline'
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -33,6 +36,7 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -116,4 +120,13 @@ RSpec.configure do |config|
     end
   end
 
+end
+
+RSpec::Sidekiq.configure do |config|
+  # Clears all job queues before each example
+  config.clear_all_enqueued_jobs = true # default => true
+  # Whether to use terminal colours when outputting messages
+  config.enable_terminal_colours = true # default => true
+  # Warn when jobs are not enqueued to Redis but to a job array
+  config.warn_when_jobs_not_processed_by_sidekiq = true # default => true
 end
