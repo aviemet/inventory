@@ -23,11 +23,11 @@ Rails.application.routes.draw do
     get "checkin", on: :member, as: :checkin
   end
 
-  # STATIC PATHS #
-
   root "pages#dashboard"
   get "dashboard" => "pages#dashboard", as: :dashboard
+
   get "settings" => "pages#settings", as: :settings
+  resources :ldaps, only: [:show, :create, :update]
 
   # DEVISE PATHS #
 

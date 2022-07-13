@@ -1,4 +1,8 @@
 class PagesController < ApplicationController
+  expose :ldap, -> { @active_company.ldap || Ldap.new({
+    host: '127.0.0.1',
+    port: 389,
+  }) }
 
   def dashboard
     render inertia: "Dashboard", props: {
@@ -8,7 +12,9 @@ class PagesController < ApplicationController
   end
 
   def settings
-    render inertia: "Settings"
+    render inertia: "Settings", props: {
+      ldap: LdapBlueprint.render_as_json(ldap, view: :new)
+    }
   end
 
   private
