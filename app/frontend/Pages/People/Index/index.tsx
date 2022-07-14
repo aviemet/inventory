@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { NewIcon } from '@/Components/Icons'
+import { NewIcon, SettingsIcon } from '@/Components/Icons'
 
 interface IPeopleIndexProps {
 	people: Schema.Person[]
@@ -30,6 +30,7 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 						title={ title }
 						menuOptions={ [
 							{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
+							{ label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon }
 						] }
 					/>
 
