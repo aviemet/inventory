@@ -75,7 +75,9 @@ Rails.application.configure do
   # Disable digests until LiveReload can handle them properly
   config.assets.digest = false
 
-  # Automatically update routes.js file
-  # when routes.rb is changed
+  # Automatically update routes.js file when routes.rb is changed
   config.middleware.use(JsRoutes::Middleware)
+
+  # Use Sidekiq as the job handler
+  config.active_job.queue_adapter = :sidekiq
 end
