@@ -2,7 +2,6 @@ import { Section } from '@/Components'
 import { Form, Input, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 import React from 'react'
-import { has } from 'lodash'
 
 interface ISettingsProps {
 	ldap: Schema.Ldap
