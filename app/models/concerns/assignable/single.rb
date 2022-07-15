@@ -6,7 +6,7 @@ module Assignable
 
     included do
       def assignment
-        self.assignments.select(&:active).first if self.assignments
+        self.assignments.select(&:active).first
       end
 
       def assigned_to

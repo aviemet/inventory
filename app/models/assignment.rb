@@ -22,6 +22,7 @@ class Assignment < ApplicationRecord
   after_initialize :defaults
 
   scope :includes_associated, -> { includes([:location, :created_by, :status_type, :audits]) }
+  scope :active, -> { where(active: true) }
 
   private
 
