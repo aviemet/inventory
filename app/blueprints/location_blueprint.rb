@@ -17,14 +17,14 @@ class LocationBlueprint < ApplicationBlueprint
 
   view :counts do
     include_view :associations
-    field :counts do |location|
+    field :counts do |loc|
       {
-        items: location&.items&.size || 0,
-        accessories: location&.accessories&.size || 0,
-        consumables: location&.consumables&.size || 0,
-        components: location&.components&.size || 0,
-        licenses: location&.licenses&.size || 0,
-        people: location&.people&.size || 0,
+        items: loc&.items&.size || 0,
+        accessories: loc&.accessories&.size || 0,
+        consumables: loc&.consumables&.size || 0,
+        components: loc&.components&.size || 0,
+        licenses: loc&.licenses&.size || 0,
+        people: loc&.people&.size || 0,
       }
     end
   end
