@@ -5,10 +5,15 @@ export interface IVendorFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
-	vendor: Schema.Vendor
+	vendor?: Partial<Schema.Vendor>
 }
 
-const VendorForm = ({ to, method = 'post', onSubmit, vendor }: IVendorFormProps) => {
+const emptyVendor = {
+	name: '',
+	url: '',
+}
+
+const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: IVendorFormProps) => {
 	return (
 		<Form
 			model="vendor"

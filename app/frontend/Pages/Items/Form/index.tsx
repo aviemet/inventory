@@ -7,9 +7,11 @@ import {
 	Checkbox,
 	DateTime,
 	Submit,
-	Group,
+	FormGroup,
 } from '@/Components/Form'
 import { Inertia } from '@inertiajs/inertia'
+import VendorsForm from '@/Pages/Vendors/Form'
+import { Routes } from '@/lib'
 
 export interface IItemFormProps {
 	to: string
@@ -33,45 +35,47 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 
 			<Input name="name" label="Name" required autoFocus />
 
-			<Group legend="Item Details">
+			<FormGroup legend="Item Details">
 				<SearchableDropdown
 					label="Model"
 					name="model_id"
 					required
 					options={ models }
-					onOpen={ () => Inertia.reload({ only: ['models'] }) }
+					fetchOnOpen="models"
 				/>
 
 				<Input name="serial" label="Serial" />
 
 				<Input name="asset_tag" label="Asset Tag" />
-			</Group>
+			</FormGroup>
 
-			<Group legend="Purchase Details">
+			<FormGroup legend="Purchase Details">
 				<SearchableDropdown
 					label="Vendor"
 					name="vendor_id"
 					options={ vendors }
 					filterMatchKeys={ ['name'] }
-					onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
+					fetchOnOpen="vendors"
+					newForm={ <VendorsForm to={ Routes.vendors() } /> }
 				/>
 
 				<Input name="cost" label="Cost" type="currency" />
 
 				<DateTime label="Purchased At" name="purchased_at" />
-			</Group>
+			</FormGroup>
 
-			<Group legend="Usage Details">
+			<FormGroup legend="Usage Details">
+
 				<SearchableDropdown
 					label="Default Location"
 					name="default_location_id"
 					options={ locations }
-					onOpen={ () => Inertia.reload({ only: ['locations'] }) }
+					fetchOnOpen="locations"
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />
 
-			</Group>
+			</FormGroup>
 
 			<Textarea name="notes" label="Notes" />
 
