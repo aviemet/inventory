@@ -67,6 +67,7 @@ function Form<T extends Record<keyof T, unknown>>({
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
+		e.stopPropagation()
 
 		let submit = true
 		if(onSubmit) {

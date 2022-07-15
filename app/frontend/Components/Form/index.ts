@@ -7,7 +7,7 @@ export { default as Checkbox } from './Checkbox'
 export { default as SearchableDropdown } from './SearchableDropdown'
 export { default as DateTime } from './DateTime'
 export { default as RadioButtons } from './RadioButtons'
-export { default as Group } from './Group'
+export { default as FormGroup } from './FormGroup'
 
 
 type IInputPropsStrategyOutput = {

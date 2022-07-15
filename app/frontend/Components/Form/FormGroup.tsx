@@ -1,11 +1,11 @@
 import React from 'react'
 import { DivProps } from 'react-html-props'
 
-interface IGroupProps extends DivProps {
+interface IFormGroupProps extends DivProps {
 	legend?: string
 }
 
-const Group = ({ children, legend }: IGroupProps) => {
+const FormGroup = ({ children, legend }: IFormGroupProps) => {
 	return (
 
 		<fieldset>
@@ -15,4 +15,4 @@ const Group = ({ children, legend }: IGroupProps) => {
 	)
 }
 
-export default Group
+export default FormGroup
