@@ -30,4 +30,8 @@ class Location < ApplicationRecord
   def default_location
     self
   end
+
+  def location
+    self
+  end
 end
