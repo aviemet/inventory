@@ -43,9 +43,14 @@ class VendorsController < ApplicationController
   # POST /vendors
   # POST /vendors.json
   def create
+    ap({ params: request.params })
     vendor.company = @active_company
     if vendor.save
-      redirect_to vendor, notice: 'License was successfully created'
+      if request.params&.[](:redirect) == false
+        vendor
+      else
+        redirect_to vendor, notice: 'License was successfully created'
+      end
     else
       redirect_to new_vendor_path, inertia: { errors: vendor.errors }
     end

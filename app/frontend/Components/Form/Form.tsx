@@ -21,6 +21,7 @@ interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'>
 	onSuccess?: (object: Inertia.FormProps) => void
 	onError?: (object: Inertia.FormProps) => void
 	separator?: string
+	redirect?: boolean
 }
 
 function Form<T extends Record<keyof T, unknown>>({
@@ -36,6 +37,7 @@ function Form<T extends Record<keyof T, unknown>>({
 	onError,
 	className,
 	separator = '.',
+	redirect = true,
 	...props
 }: IFormProps<T>) {
 	const form: IndexedInertiaFormProps = useInertiaForm<Record<string, unknown>>(`${method}/${model}`, fillEmptyValues(data))
@@ -74,7 +76,17 @@ function Form<T extends Record<keyof T, unknown>>({
 			const val = onSubmit(contextValueObject)
 			if(val === true || val === false) submit = val
 		}
-		if(submit) form[method](to)
+		if(submit) {
+			if(!redirect) {
+				form.transform(data => (
+					{
+						...data,
+						redirect,
+					}
+				))
+			}
+			form[method](to)
+		}
 	}
 
 	useEffect(() => {
