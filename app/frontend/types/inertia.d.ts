@@ -37,6 +37,8 @@ declare global {
 			getData: (key: string) => any
 			getErrors: (data: string) => string
 			separator: string
+			method: HTTPVerb
+			to?: string
 		}
 	}
 }

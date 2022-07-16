@@ -11,8 +11,8 @@ interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onC
 	name: string
 	defaultValue?: string
 	onChange?: (option: string|null, form: Inertia.FormProps) => void
-	newForm?: React.ReactElement
 	fetchOnOpen?: string
+	newForm?: React.ReactElement
 }
 
 const SearchableDropdown = ({
@@ -24,8 +24,8 @@ const SearchableDropdown = ({
 	getLabel = option => option.name,
 	getValue = option => String(option.id),
 	onChange,
-	newForm,
 	fetchOnOpen,
+	newForm,
 	id,
 	...props
 }: IInputProps) => {
@@ -63,13 +63,13 @@ const SearchableDropdown = ({
 					{ ...props }
 				/>
 			</Field>
-			{ newForm && <ModalFormButton model="Vendor" form={ newForm } /> }
+			{ newForm && <ModalFormButton title="Create New Vendor" form={ newForm } /> }
 		</Wrapper>
 	)
 }
 
 interface IWithChildren {
-	children?:React.ReactChild
+	children?:React.ReactNode
 }
 
 const EmptyWrapper = ({ children }: IWithChildren) => <>{ children }</>

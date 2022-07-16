@@ -1,7 +1,7 @@
 import { Instance } from 'flatpickr/dist/types'
 
 declare global {
-	type HTTPVerb = 'post'|'put'|'get'|'patch'|'destroy'
+	type HTTPVerb = 'post'|'put'|'get'|'patch'|'delete'
 
 	type TAssignToable = 'Person'|'Item'|'Location'
 	type TAssignable = 'Item'|'Accessory'|'Component'|'Consumable'|'License'
@@ -85,4 +85,5 @@ declare global {
 			instance: Instance
 		}
 	}
+
 }
