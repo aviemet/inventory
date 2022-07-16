@@ -33,7 +33,7 @@ gem "jsonb_accessor", "~> 1.3"
 gem "factory_bot", "~> 6.2"
 gem "draper", "~> 4.0"
 gem "ipaddress_2", "~> 0.14.0"
-gem "countries", "~> 4.2"
+gem "countries", ">= 4.2"
 gem "ts_schema", "~> 0.2.1"
 gem "js-routes", "~> 2.2"
 gem "net-ldap", "~> 0.17.1"
@@ -64,7 +64,7 @@ group :development, :test do
   gem "amazing_print", "~> 1.4"
   gem "pry-rails", "~> 0.3.9"
 
-  gem "solargraph", "~> 0.44.3"
+  gem "solargraph", ">= 0.44.3"
   gem "rubocop-rails", "~> 2.14", require: false
   gem "rubocop-rspec", "~> 2.9", require: false
   gem "rubocop-performance", "~> 1.13", require: false
