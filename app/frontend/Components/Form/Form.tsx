@@ -21,7 +21,6 @@ interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'>
 	onSuccess?: (object: Inertia.FormProps) => void
 	onError?: (object: Inertia.FormProps) => void
 	separator?: string
-	redirect?: boolean
 }
 
 function Form<T extends Record<keyof T, unknown>>({
@@ -37,14 +36,15 @@ function Form<T extends Record<keyof T, unknown>>({
 	onError,
 	className,
 	separator = '.',
-	redirect = true,
 	...props
 }: IFormProps<T>) {
 	const form: IndexedInertiaFormProps = useInertiaForm<Record<string, unknown>>(`${method}/${model}`, fillEmptyValues(data))
 
 	const { classes } = useFormStyles()
 
-	// This overrides the default form.setData method to allow for setting nested values
+	/**
+	 * Override Inertia's setData method to allow setting nested values
+	 */
 	const setData: InertiaFormProps['setData'] = (key: Record<string, any>|string, value?: any) => {
 		if(typeof key === 'string'){
 			if(key.includes(separator)) {
@@ -57,38 +57,39 @@ function Form<T extends Record<keyof T, unknown>>({
 		}
 	}
 
+	/**
+	 * Getter for nested values of form data
+	 */
 	const getData = useCallback((key: string): any => {
 		return getNestedValue(form.data, key, separator)
 	}, [form.data])
 
+	/**
+	 * Getter for nested error values of form errors
+	 */
 	const getErrors = useCallback((key: string) => {
 		return getNestedValue(form.errors, key, separator)
 	}, [form.errors])
 
-	const contextValueObject = { ...form, setData, model, getData, getErrors, separator }
+	// Expand Inertia's form object to include other useful data
+	// TS type definition is in app/frontend/types/inertia.d.ts
+	const contextValueObject = { ...form, setData, model, getData, getErrors, separator, method, to }
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
 		e.stopPropagation()
 
 		let submit = true
 		if(onSubmit) {
-			const val = onSubmit(contextValueObject)
-			if(val === true || val === false) submit = val
+			if(onSubmit(contextValueObject) === false) submit = false
 		}
-		if(submit) {
-			if(!redirect) {
-				form.transform(data => (
-					{
-						...data,
-						redirect,
-					}
-				))
-			}
+
+		if(submit && to) {
 			form[method](to)
 		}
 	}
 
+	// **** Conditional calls to callbacks **** \\
 	useEffect(() => {
 		if(onChange) onChange(contextValueObject)
 	}, [form.data])
@@ -98,15 +99,17 @@ function Form<T extends Record<keyof T, unknown>>({
 	}, [form.errors])
 
 	useEffect(() => {
-		if(onSuccess && form.wasSuccessful) {
-			onSuccess(contextValueObject)
-		}
+		if(onSuccess && form.wasSuccessful) onSuccess(contextValueObject)
 	}, [form.wasSuccessful])
 
 	return (
 		<FormProvider value={ contextValueObject }>
 			<Box className={ classes.form }>
-				<form onSubmit={ handleSubmit } className={ cx({ 'format-grid': grid }, className) } { ...props }>
+				<form
+					onSubmit={ handleSubmit }
+					className={ cx({ 'format-grid': grid }, className) }
+					{ ...props }
+				>
 					{ children }
 				</form>
 			</Box>
