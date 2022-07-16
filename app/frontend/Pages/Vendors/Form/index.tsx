@@ -6,6 +6,7 @@ export interface IVendorFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
 	vendor?: Partial<Schema.Vendor>
+	redirect?: boolean
 }
 
 const emptyVendor = {
@@ -13,7 +14,7 @@ const emptyVendor = {
 	url: '',
 }
 
-const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: IVendorFormProps) => {
+const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor, redirect = true }: IVendorFormProps) => {
 	return (
 		<Form
 			model="vendor"
@@ -21,6 +22,7 @@ const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: IVe
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
+			redirect={ redirect }
 		>
 			<Input name="name" label="Name" required autoFocus />
 

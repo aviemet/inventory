@@ -56,7 +56,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					options={ vendors }
 					filterMatchKeys={ ['name'] }
 					fetchOnOpen="vendors"
-					newForm={ <VendorsForm to={ Routes.vendors() } /> }
+					newForm={ <VendorsForm to={ Routes.vendors() } redirect={ false } /> }
 				/>
 
 				<Input name="cost" label="Cost" type="currency" />
