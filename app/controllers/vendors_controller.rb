@@ -43,16 +43,21 @@ class VendorsController < ApplicationController
   # POST /vendors
   # POST /vendors.json
   def create
-    ap({ params: request.params })
     vendor.company = @active_company
-    if vendor.save
-      if request.params&.[](:redirect) == false
-        vendor
+
+    if request.params&.[](:redirect) == false
+      if vendor.save
+        render json: VendorBlueprint.render_as_json(vendor), status: 200
       else
-        redirect_to vendor, notice: 'License was successfully created'
+        render json: { errors: vendor.errors }, status: 302
       end
     else
-      redirect_to new_vendor_path, inertia: { errors: vendor.errors }
+
+      if vendor.save
+        redirect_to vendor, notice: 'License was successfully created'
+      else
+        redirect_to new_vendor_path, inertia: { errors: vendor.errors }
+      end
     end
   end
 
