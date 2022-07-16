@@ -149,24 +149,6 @@ Form view for all models:
 
 ---
 
-## Reference
-
-### Books
-
-Everyday Rails Testing with RSpec
-
-Growing Rails Applications in Practice
-
-[Using Cell for UI Components](https://getflywheel.com/layout/how-to-build-ui-components-in-rails/)
-
-### Sites
-
-[Better Spec](https://www.betterspecs.org/)
-
-### Maybe Useful
-
-[GTIN library for identifying code types](https://github.com/officeluv/gtin_extras)
-
 ## Conventions
 
 ### Icons
@@ -183,7 +165,7 @@ These differences are represented by three subclasses of the polymorphic Assigna
 
 - `Assignable::Single`: Items, no count, can be reassigned.
 - `Assignable::Quantity`: Accessories, tracks quantity, can be reassigned.
-- `Assignable::Consume`: Consumables, tracks quantity, can not be reassigned.
+- `Assignable::Consume`: Consumables, tracks quantity, cannot be reassigned.
 
 Assignments have a `location` which should be derived from the User, Item or Location of the AssignToable model, but can be overridden by the user.
 
@@ -202,7 +184,7 @@ Companies are essentially top level organizational units. All other objects can 
 
 ### Ownerships
 
-Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a compnay is considered to be "owned" by that company (yes, even people), defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner.
+Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a compnay is considered to be "owned" by that company, defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner.
 
 ### Blueprinter
 
@@ -217,12 +199,24 @@ Blueprinter base class provides a uid value derived from the id and model name o
 - Depreciation
 - EULA
 - Images
+- File uploads
 
 ## Ideas
 
 - Add a preview icon to searchable dropdowns to either open the record in a new tab, or in a modal for a quick peek at the model data.
 
-## Libraries
+### Reference
 
-React Icons:
-<https://react-icons.github.io/react-icons>
+#### Books
+
+Everyday Rails Testing with RSpec
+
+Growing Rails Applications in Practice
+
+#### Sites
+
+[Better Spec](https://www.betterspecs.org/)
+
+#### Maybe Useful
+
+[GTIN library for identifying code types](https://github.com/officeluv/gtin_extras)
