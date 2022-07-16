@@ -43,17 +43,17 @@ Items:
 
 Accessories:
 
-- [ ] Trackable quantity
+- [x] Trackable quantity
 
 Consumables:
 
-- [ ] "Using" a consumable permanently removes it from inventory
+- [x] "Using" a consumable permanently removes it from inventory
 - [ ] Can replenish quantity using a purchase order (in very few steps)
 
 Components:
 
-- [ ] Trackable quantity
-- [ ] Can only be assigned to an item
+- [x] Trackable quantity
+- [x] Can only be assigned to an item
 
 Networks:
 
@@ -85,15 +85,14 @@ People:
 
 Vendors:
 
-- [ ] For item purchasing, service providers and software
-- [ ] Tracks company information
-  - [ ] Account rep/main contact, support lines and other contact info
-- [ ] Links to contracts
+- [x] Referenced and sortable by all assets
+- [ ] Stores useful details about the vendor
+- [x] Links to contracts
 
 Contracts:
 
-- [ ] Tracks contract terms
-  - [ ] Start/end dates
+- [x] Stores contract terms
+  - [x] Start/end dates
   - [ ] Billing cycles and amounts
 - [ ] File uploads for signed contracts storage
 
@@ -105,7 +104,7 @@ Companies:
 
 Locations:
 
-- [ ] Tree structure under company
+- [x] Tree structure under company
 
 Departments:
 
@@ -146,7 +145,7 @@ Table view for all models:
 Form view for all models:
 
 - [x] Associated record dropdowns are lazy loaded
-- [ ] Associated records have a "New" button next to them
+- [x] Associated records have a "New" button next to them
 
 ---
 
