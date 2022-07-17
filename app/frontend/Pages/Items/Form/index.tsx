@@ -9,9 +9,9 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
-import VendorsForm from '@/Pages/Vendors/Form'
 import { Routes } from '@/lib'
+import VendorsForm from '@/Pages/Vendors/Form'
+import ModelsForm from '@/Pages/Models/Form'
 
 export interface IItemFormProps {
 	to: string
@@ -42,6 +42,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					required
 					options={ models }
 					fetchOnOpen="models"
+					newForm={ <ModelsForm to={ Routes.models() } /> }
 				/>
 
 				<Input name="serial" label="Serial" />

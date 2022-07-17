@@ -11,7 +11,7 @@ export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 }
 
 const SearchableDropdownComponent = ({
-	options,
+	options = [],
 	getLabel = option => option.name,
 	getValue = option => String(option.id),
 	onChange,
