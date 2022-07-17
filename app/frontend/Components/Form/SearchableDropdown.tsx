@@ -63,7 +63,7 @@ const SearchableDropdown = ({
 					{ ...props }
 				/>
 			</Field>
-			{ newForm && <ModalFormButton title="Create New Vendor" form={ newForm } /> }
+			{ newForm && <ModalFormButton title={ `Create New ${label}` } form={ newForm } /> }
 		</Wrapper>
 	)
 }

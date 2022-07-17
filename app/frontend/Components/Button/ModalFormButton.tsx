@@ -3,6 +3,8 @@ import Button from './index'
 import { Modal } from '@/Components'
 import { useMantineTheme } from '@mantine/core'
 import axios from 'axios'
+import { Inertia } from '@inertiajs/inertia'
+import { Routes } from '@/lib'
 
 interface IModalFormButtonProps {
 	form: React.ReactElement
