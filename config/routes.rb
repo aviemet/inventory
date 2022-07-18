@@ -1,15 +1,6 @@
 Rails.application.routes.draw do
   # CONCERNS #
 
-  concern :contactable do
-    resources :contacts, except: [:index] do
-      resources :addresses
-      resources :phones
-      resources :emails
-      resources :websites
-    end
-  end
-
   concern :categoryable do
     get "category/:category_id" => :category, on: :collection, as: :category
   end
@@ -21,6 +12,12 @@ Rails.application.routes.draw do
   concern :assignable do
     get "checkout", on: :member, as: :checkout
     get "checkin", on: :member, as: :checkin
+  end
+
+  concern :bulk_delete do
+    collection do
+      delete :destroy
+    end
   end
 
   root "pages#dashboard"
@@ -61,46 +58,46 @@ Rails.application.routes.draw do
 
   # RESOURCEFUL PATHS #
 
-  resources :users, except: [:create]
-  resources :companies, concerns: :contactable, param: :slug
+  resources :users, concerns: :bulk_delete, except: [:create]
+  resources :companies, concerns: :bulk_delete, param: :slug
   resources :ownerships
 
-  resources :departments, concerns: :contactable, param: :slug
-  resources :locations, concerns: :contactable, param: :slug
+  resources :departments, concerns: :bulk_delete, param: :slug
+  resources :locations, concerns: :bulk_delete, param: :slug
 
-  resources :categories, param: :slug
+  resources :categories, concerns: :bulk_delete, param: :slug
   resources :status_types
 
   resources :items, path: :hardware do
     resources :nics
-    concerns :categoryable, :clonable, :assignable
+    concerns :bulk_delete, :categoryable, :clonable, :assignable
   end
 
-  resources :components, concerns: [:categoryable, :assignable]
-  resources :accessories, concerns: [:categoryable, :assignable]
-  resources :consumables, concerns: [:categoryable, :assignable]
-  resources :licenses, concerns: [:categoryable, :assignable]
+  resources :components, concerns: [:bulk_delete, :categoryable, :assignable]
+  resources :accessories, concerns: [:bulk_delete, :categoryable, :assignable]
+  resources :consumables, concerns: [:bulk_delete, :categoryable, :assignable]
+  resources :licenses, concerns: [:bulk_delete, :categoryable, :assignable]
 
   resources :assignments, except: [:index, :new]
   patch "assignments/:id/unassign" => "assignments#unassign", as: :unassign_assignment
 
-  resources :people, concerns: :contactable
+  resources :people, concerns: :bulk_delete
 
-  resources :vendors, concerns: :contactable, param: :slug
+  resources :vendors, concerns: :bulk_delete, param: :slug
 
-  resources :models, param: :slug
-  resources :manufacturers, concerns: :contactable, param: :slug
-  resources :warranties, concerns: :contactable
+  resources :models, concerns: :bulk_delete, param: :slug
+  resources :manufacturers, concerns: :bulk_delete, param: :slug
+  resources :warranties, concerns: :bulk_delete
 
   resources :fields
   resources :fieldsets
   resources :fieldset_associations
 
   resources :ip_leases
-  resources :networks
+  resources :networks, concerns: :bulk_delete
 
-  resources :orders
-  resources :purchases
+  resources :orders, concerns: :bulk_delete
+  resources :purchases, concerns: :bulk_delete
 
-  resources :contracts
+  resources :contracts, concerns: :bulk_delete
 end

@@ -4,6 +4,8 @@ import { useTableContext } from './TableContext'
 import { Menu, Box, Title, Group, Divider } from '@mantine/core'
 import { Link } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
+import { Inertia } from '@inertiajs/inertia'
+import { Routes } from '@/lib'
 
 // TODO: Figure out correct type for icon
 interface ITableTitleSectionProps {
@@ -17,6 +19,14 @@ interface ITableTitleSectionProps {
 
 const TableTitleSection = ({ title, menuOptions }: ITableTitleSectionProps) => {
 	const { tableState: { hideable, model, selected } } = useTableContext()
+
+	const deleteRecords = () => {
+		console.log({ selected })
+		Inertia.visit(Routes.vendors(), {
+			method: 'delete',
+			data: { ids: Array.from(selected) },
+		})
+	}
 
 	return (
 		<Group position="apart" align="start" sx={ { marginBottom: 12 } } spacing="sm">
@@ -57,7 +67,7 @@ const TableTitleSection = ({ title, menuOptions }: ITableTitleSectionProps) => {
 					{ selected.size > 0 && <>
 						<Divider />
 
-						<Menu.Item icon={ <TrashIcon size={ 14 } /> }>
+						<Menu.Item icon={ <TrashIcon size={ 14 } /> } onClick={ deleteRecords }>
 							Delete
 						</Menu.Item>
 					</> }
