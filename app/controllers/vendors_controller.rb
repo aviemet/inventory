@@ -33,7 +33,7 @@ class VendorsController < ApplicationController
     }
   end
 
-  # GET /vendors/:id/edit
+  # GET /vendors/:slug/edit
   def edit
     render inertia: "Vendors/Edit", props: {
       vendor: VendorBlueprint.render_as_json(vendor)
@@ -61,7 +61,7 @@ class VendorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /vendors/:id
+  # PATCH/PUT /vendors/:slug
   def update
     if vendor.update(vendor_params)
       redirect_to vendor, notice: 'License was successfully updated'
@@ -70,9 +70,14 @@ class VendorsController < ApplicationController
     end
   end
 
-  # DELETE /vendors/:id
+  # DELETE /vendors
+  # DELETE /vendors/:slug
   def destroy
-    vendor.destroy
+    if request.params[:slug]
+      vendor.destroy
+    else
+      @active_company.vendors.where(id: request.params&.[](:ids)).destroy_all
+    end
     redirect_to vendors_url, notice: 'Vendor was successfully destroyed.'
   end
 
