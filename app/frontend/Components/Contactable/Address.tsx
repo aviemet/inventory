@@ -17,9 +17,8 @@ const Address = () => {
 	}
 
 	return (
-		<FormGroup outline>
-
-			<Flex position='apart' sx={ { borderBottom: '1px solid grey' } }>
+		<>
+			<Flex position='apart'>
 				<div>Address</div>
 				<Button
 					onClick={ addInputGroup }
@@ -31,11 +30,14 @@ const Address = () => {
 			</Flex>
 
 			{ Array(addressCount).fill('').map((_, i) => (
-				<Box key={ i } p={ 10 } sx={ theme => ({
-					backgroundColor: theme.colors.gray[0],
-					boxShadow: theme.shadows.md
-				}) }>
-					<Input name={ `address_${i}` } label="Address" />
+				<FormGroup key={ i } compact>
+					<Flex>
+						<Input name="type" label="Type" />
+
+						<Input name="country" label="Country" />
+					</Flex>
+
+					<Input name={ `address_${i}` } label="Address" className='compact' />
 
 					<Input name="address_2" label="Address 2" />
 
@@ -47,19 +49,15 @@ const Address = () => {
 						<Input name="postal" label="Zip/Post" />
 					</Flex>
 
-					<Input name="country" label="Country" />
-
-					<Textarea name="notes" label="Notes" />
-
 					<Button onClick={ removeInputGroup } sx={ {
 						marginLeft: 'auto',
 						display: 'block',
 					} }>
 						<MinusCircleIcon />
 					</Button>
-				</Box>
+				</FormGroup>
 			)) }
-		</FormGroup>
+		</>
 	)
 }
 
