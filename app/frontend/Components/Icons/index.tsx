@@ -49,6 +49,7 @@ export {
 
 export {
 	AiOutlinePlusCircle as PlusCircleIcon,
+	AiOutlineMinusCircle as MinusCircleIcon,
 	AiOutlineBarcode as AssetsIcon,
 } from 'react-icons/ai'
 
