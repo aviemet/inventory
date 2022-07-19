@@ -4,6 +4,7 @@ import Address from './Address'
 import Phone from './Phone'
 import Email from './Email'
 import Website from './Website'
+import { Box } from '@mantine/core'
 
 interface IContactableFormProps {
 
@@ -15,12 +16,13 @@ const ContactableForm = ({  }: IContactableFormProps) => {
 	const [websiteCount, setWebsiteCount] = useState(0)
 
 	return (
-		<FormGroup legend='Contact Information'>
+		<>
+			<Box>Contact Information</Box>
 			<Address />
 			<Phone />
 			<Email />
 			<Website />
-		</FormGroup>
+		</>
 	)
 }
 
