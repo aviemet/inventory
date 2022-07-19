@@ -36,7 +36,7 @@ const useTheme = (colorScheme: 'light'|'dark') => ({
 		},
 		form: {
 			label: {
-				width: '12rem',
+				width: '10rem',
 			},
 		},
 		table: {

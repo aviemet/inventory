@@ -1,23 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Button, Box, Flex } from '@/Components'
 import { FormGroup, Input, Textarea } from '@/Components/Form'
+import { PlusCircleIcon, MinusCircleIcon } from '@/Components/Icons'
 
 const Address = () => {
+	const [addressCount, setAddressCount] = useState(0)
+
+	const addInputGroup = () => {
+		setAddressCount(count => count + 1)
+	}
+
+	const removeInputGroup = () => {
+		if(addressCount === 0) return
+
+		setAddressCount(count => count - 1)
+	}
+
 	return (
-		<>
-			<Input name="address" label="Address" />
+		<FormGroup outline>
 
-			<Input name="address_2" label="Address 2" />
+			<Flex position='apart' sx={ { borderBottom: '1px solid grey' } }>
+				<div>Address</div>
+				<Button
+					onClick={ addInputGroup }
+					size='xs'
+					mb={ 4 }
+				>
+					<PlusCircleIcon />
+				</Button>
+			</Flex>
 
-			<Input name="city" label="City" />
+			{ Array(addressCount).fill('').map((_, i) => (
+				<Box key={ i } p={ 10 } sx={ theme => ({
+					backgroundColor: theme.colors.gray[0],
+					boxShadow: theme.shadows.md
+				}) }>
+					<Input name={ `address_${i}` } label="Address" />
 
-			<Input name="region" label="State" />
+					<Input name="address_2" label="Address 2" />
 
-			<Input name="country" label="Country" />
+					<Flex>
+						<Input name="city" label="City" />
 
-			<Input name="postal" label="Zip/Post" />
+						<Input name="region" label="State" />
 
-			<Textarea name="notes" label="Notes" />
-		</>
+						<Input name="postal" label="Zip/Post" />
+					</Flex>
+
+					<Input name="country" label="Country" />
+
+					<Textarea name="notes" label="Notes" />
+
+					<Button onClick={ removeInputGroup } sx={ {
+						marginLeft: 'auto',
+						display: 'block',
+					} }>
+						<MinusCircleIcon />
+					</Button>
+				</Box>
+			)) }
+		</FormGroup>
 	)
 }
 

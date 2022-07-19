@@ -1,5 +1,5 @@
-import React from 'react'
-import { FormGroup, Input } from '@/Components/Form'
+import React, { useState } from 'react'
+import { FormGroup } from '@/Components/Form'
 import Address from './Address'
 import Phone from './Phone'
 import Email from './Email'
@@ -10,6 +10,10 @@ interface IContactableFormProps {
 }
 
 const ContactableForm = ({  }: IContactableFormProps) => {
+	const [phoneCount, setPhoneCount] = useState(0)
+	const [emailCount, setEmailCount] = useState(0)
+	const [websiteCount, setWebsiteCount] = useState(0)
+
 	return (
 		<FormGroup legend='Contact Information'>
 			<Address />
