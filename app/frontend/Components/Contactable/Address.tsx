@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Button, Box, Flex } from '@/Components'
-import { FormGroup, Input, Textarea } from '@/Components/Form'
+import { Button, Flex } from '@/Components'
+import { FormGroup, Input } from '@/Components/Form'
 import { PlusCircleIcon, MinusCircleIcon } from '@/Components/Icons'
 
 const Address = () => {
-	const [addressCount, setAddressCount] = useState(0)
+	const [addressCount, setAddressCount] = useState(1)
 
 	const addInputGroup = () => {
 		setAddressCount(count => count + 1)
@@ -30,23 +30,23 @@ const Address = () => {
 			</Flex>
 
 			{ Array(addressCount).fill('').map((_, i) => (
-				<FormGroup key={ i } compact>
+				<FormGroup key={ i }>
 					<Flex>
-						<Input name="type" label="Type" />
+						<Input name="type" label="Type" compact />
 
-						<Input name="country" label="Country" />
+						<Input name="country" label="Country" compact />
 					</Flex>
 
-					<Input name={ `address_${i}` } label="Address" className='compact' />
+					<Input name={ `address_${i}` } label="Address" compact />
 
-					<Input name="address_2" label="Address 2" />
+					<Input name="address_2" label="Address 2" compact />
 
 					<Flex>
-						<Input name="city" label="City" />
+						<Input name="city" label="City" compact />
 
-						<Input name="region" label="State" />
+						<Input name="region" label="State" compact />
 
-						<Input name="postal" label="Zip/Post" />
+						<Input name="postal" label="Zip/Post" compact />
 					</Flex>
 
 					<Button onClick={ removeInputGroup } sx={ {

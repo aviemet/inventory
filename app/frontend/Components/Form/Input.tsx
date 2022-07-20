@@ -3,6 +3,7 @@ import { TextInput, NumberInput, PasswordInput, CurrencyInput } from '../Inputs'
 import { useForm, useInputProps } from './index'
 import Field from './Field'
 import { type InputProps } from '@mantine/core'
+import cx from 'clsx'
 
 interface IInputProps extends Omit<InputProps<'input'>, 'onChange'|'ref'> {
 	type?: 'text'|'password'|'number'|'currency'
@@ -10,10 +11,11 @@ interface IInputProps extends Omit<InputProps<'input'>, 'onChange'|'ref'> {
 	name: string
 	model?: string
 	onChange?: (value: string|number, form: Inertia.FormProps) => void
+	compact?: boolean
 }
 
 const FormInput = forwardRef<HTMLInputElement, IInputProps>((
-	{ label, name, model, onChange, type = 'text', id, required, ...props },
+	{ label, name, model, onChange, type = 'text', id, required, compact = false, ...props },
 	ref,
 ) => {
 	const form = useForm()
@@ -49,6 +51,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 		<Field
 			type={ type }
 			required={ required }
+			className={ cx({ compact }) }
 			errors={ !!form.errors?.[inputName] }
 		>
 			<InputComponent
@@ -59,6 +62,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 				onChange={ handleChange }
 				ref={ ref }
 				error={ form.errors[name] }
+				className={ cx({ compact }) }
 				{ ...props }
 			/>
 		</Field>

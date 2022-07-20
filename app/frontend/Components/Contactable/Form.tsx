@@ -5,15 +5,14 @@ import Phone from './Phone'
 import Email from './Email'
 import Website from './Website'
 import { Box } from '@mantine/core'
+import { useListState } from '@/Components/Hooks'
 
 interface IContactableFormProps {
 
 }
 
 const ContactableForm = ({  }: IContactableFormProps) => {
-	const [phoneCount, setPhoneCount] = useState(0)
-	const [emailCount, setEmailCount] = useState(0)
-	const [websiteCount, setWebsiteCount] = useState(0)
+	const [addressInputs, inputHandler] = useListState([])
 
 	return (
 		<>
