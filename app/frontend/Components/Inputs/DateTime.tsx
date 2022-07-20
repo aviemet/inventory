@@ -23,7 +23,9 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 			{ label && <Label required={ required } htmlFor={ id }>
 				{ label }
 			</Label> }
-			<Box>
+			<Box sx={ {
+
+			} }>
 				<Flatpickr
 	        data-enable-time
 					name={ name }
