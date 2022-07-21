@@ -19,23 +19,27 @@ class VendorBlueprint < ApplicationBlueprint
 
   view :show_page do
     field :items_count do |vendor|
-      vendor.items.count
+      vendor.items.size
     end
 
     field :accessories_count do |vendor|
-      vendor.accessories.count
+      vendor.accessories.size
     end
 
     field :consumables_count do |vendor|
-      vendor.consumables.count
+      vendor.consumables.size
     end
 
     field :components_count do |vendor|
-      vendor.components.count
+      vendor.components.size
     end
 
     field :licenses_count do |vendor|
-      vendor.licenses.count
+      vendor.licenses.size
+    end
+
+    field :contracts_count do |vendor|
+      vendor.contracts.size
     end
 
     association :contact, blueprint: ContactBlueprint

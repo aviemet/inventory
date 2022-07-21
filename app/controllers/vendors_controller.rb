@@ -3,7 +3,7 @@ class VendorsController < ApplicationController
   include Searchable
 
   expose :vendors, -> { @active_company.vendors.includes_associated }
-  expose :vendor, find_by: :slug, id: :slug
+  expose :vendor, -> { @active_company.vendors.includes_associated.find_by_slug(request.params[:slug]) }
 
   # GET /vendors
   def index
@@ -22,7 +22,13 @@ class VendorsController < ApplicationController
   # GET /vendors/:slug
   def show
     render inertia: "Vendors/Show", props: {
-      vendor: VendorBlueprint.render_as_json(vendor, view: :show_page)
+      vendor: VendorBlueprint.render_as_json(vendor, view: :show_page),
+      items: -> { ItemBlueprint.render_as_json(vendor.items.includes_associated, view: :associations) },
+      accessories: -> { AccessoryBlueprint.render_as_json(vendor.accessories.includes_associated, view: :associations) },
+      consumables: -> { ConsumableBlueprint.render_as_json(vendor.consumables.includes_associated, view: :associations) },
+      components: -> { ComponentBlueprint.render_as_json(vendor.components.includes_associated, view: :associations) },
+      licenses: -> { LicenseBlueprint.render_as_json(vendor.licenses.includes_associated, view: :associations) },
+      contracts: -> { ContractBlueprint.render_as_json(vendor.contracts.includes_associated, view: :associations) },
     }
   end
 
