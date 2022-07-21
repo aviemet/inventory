@@ -1,8 +1,9 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Card, Tabs, Table } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { EditIcon } from '@/Components/Icons'
+import { NewIcon, EditIcon } from '@/Components/Icons'
+import ItemsTable from '@/Pages/Items/Table'
 
 type ShowPageVendor = Schema.Vendor & {
 	items_count: number
@@ -18,6 +19,12 @@ interface IVendorShowProps {
 
 const Show = ({ vendor }: IVendorShowProps) => {
 	const title = vendor.name ?? 'Vendor Details'
+
+	const handleTabChange = (i: number, key: string) => {
+		console.log({ i, key })
+	}
+
+	const pagination = {}
 
 	return (
 		<>
@@ -38,23 +45,46 @@ const Show = ({ vendor }: IVendorShowProps) => {
 						</Menu.Item>
 					</Menu>
 				</Flex>
-			</Section>
 
-			<Section>
-				<Tabs>
-					<Tabs.Tab label={ `Hardware (${vendor.items_count})` }>
+				<Tabs onTabChange={ handleTabChange }>
+					<Tabs.Tab tabKey="items" label={ `Hardware (${vendor.items_count})` }>
+
+						<Table.Section>
+							<Table.TableProvider
+								selectable
+								hideable
+								model="items"
+								rows={ vendor.items }
+								pagination={ pagination }
+							>
+
+								<Table.Title
+									title={ title }
+									menuOptions={ [
+										{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+									] }
+								/>
+
+								<ItemsTable items={ vendor.items ?? [] } pagination={ pagination } />
+
+								<Table.Pagination />
+							</Table.TableProvider>
+						</Table.Section>
+					</Tabs.Tab>
+
+					<Tabs.Tab tabKey="accessories" label={ `Accessories (${vendor.accessories_count})` }>
 						<Table></Table>
 					</Tabs.Tab>
-					<Tabs.Tab label={ `Accessories (${vendor.accessories_count})` }>
+
+					<Tabs.Tab tabKey="consumables" label={ `Consumables (${vendor.consumables_count})` }>
 						<Table></Table>
 					</Tabs.Tab>
-					<Tabs.Tab label={ `Consumables (${vendor.consumables_count})` }>
+
+					<Tabs.Tab tabKey="components" label={ `Components (${vendor.components_count})` }>
 						<Table></Table>
 					</Tabs.Tab>
-					<Tabs.Tab label={ `Components (${vendor.components_count})` }>
-						<Table></Table>
-					</Tabs.Tab>
-					<Tabs.Tab label={ `Licenses (${vendor.licenses_count})` }>
+
+					<Tabs.Tab tabKey="licenses" label={ `Licenses (${vendor.licenses_count})` }>
 						<Table></Table>
 					</Tabs.Tab>
 				</Tabs>
