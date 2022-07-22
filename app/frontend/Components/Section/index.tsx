@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, type BoxProps } from '@mantine/core'
 import { merge } from 'lodash'
+import cx from 'clsx'
 
 interface ISectionProps extends BoxProps<'section'> {
 	fullHeight?: boolean
@@ -28,14 +29,9 @@ const Section = ({ children, sx, fullHeight = false, ...props }: ISectionProps) 
 					sectionStyles = merge(sectionStyles, propStyles)
 				}
 
-				if(fullHeight) {
-					sectionStyles = merge(sectionStyles, {
-						height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
-					})
-				}
-
 				return sectionStyles
 			} }
+			className={ cx({ fullHeight }) }
 			{ ...props }
 		>
 			{ children }
