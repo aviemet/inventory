@@ -3,12 +3,7 @@ import { Routes, formatter } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 
-interface IItemsTableProps {
-	items: Schema.Item[]
-	pagination: Schema.Pagination
-}
-
-const ItemsTable = ({ items, pagination }: IItemsTableProps) => {
+const ItemsTable = () => {
 	return (
 		<Table>
 			<Table.Head>
