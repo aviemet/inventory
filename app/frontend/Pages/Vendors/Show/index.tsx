@@ -15,20 +15,23 @@ type ShowPageVendor = Schema.Vendor & {
 	contracts_count: number
 }
 
+type TPaginatedModel<T> = {
+	data: T
+	pagination: Schema.Pagination
+}
+
 interface IVendorShowProps {
 	vendor: ShowPageVendor
-	items?: Schema.Item[]
-	accessories?: Schema.Accessory[]
-	components?: Schema.Component[]
-	consumables?: Schema.Consumable[]
-	licenses?: Schema.License[]
-	contracts?: Schema.Contract[]
+	items?: TPaginatedModel<Schema.Item[]>
+	accessories?: TPaginatedModel<Schema.Accessory[]>
+	components?: TPaginatedModel<Schema.Component[]>
+	consumables?: TPaginatedModel<Schema.Consumable[]>
+	licenses?: TPaginatedModel<Schema.License[]>
+	contracts?: TPaginatedModel<Schema.Contract[]>
 }
 
 const Show = ({ vendor, items, accessories, components, consumables, licenses, contracts }: IVendorShowProps) => {
 	const title = vendor.name ?? 'Vendor Details'
-
-	const pagination = {}
 
 	return (
 		<>
@@ -59,8 +62,8 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 								selectable
 								hideable
 								model="items"
-								rows={ items }
-								pagination={ pagination }
+								rows={ items?.data }
+								pagination={ items?.pagination }
 							>
 								<Table.Title
 									title={ title }
@@ -80,8 +83,8 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							selectable
 							hideable
 							model="accessories"
-							rows={ accessories }
-							pagination={ pagination }
+							rows={ accessories?.data }
+							pagination={ accessories?.pagination }
 						>
 							<Table.Title
 								title={ title }
@@ -100,8 +103,8 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							selectable
 							hideable
 							model="consumables"
-							rows={ consumables }
-							pagination={ pagination }
+							rows={ consumables?.data }
+							pagination={ consumables?.pagination }
 						>
 							<Table.Title
 								title={ title }
@@ -120,8 +123,8 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							selectable
 							hideable
 							model="components"
-							rows={ components }
-							pagination={ pagination }
+							rows={ components?.data }
+							pagination={ components?.pagination }
 						>
 							<Table.Title
 								title={ title }
@@ -140,8 +143,8 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							selectable
 							hideable
 							model="licenses"
-							rows={ licenses }
-							pagination={ pagination }
+							rows={ licenses?.data }
+							pagination={ licenses?.pagination }
 						>
 							<Table.Title
 								title={ title }
@@ -160,8 +163,8 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							selectable
 							hideable
 							model="contracts"
-							rows={ contracts }
-							pagination={ pagination }
+							rows={ contracts?.data }
+							pagination={ contracts?.pagination }
 						>
 							<Table.Title
 								title={ title }

@@ -13,7 +13,7 @@ class VendorsController < ApplicationController
     render inertia: "Vendors/Index", props: {
       vendors: VendorBlueprint.render_as_json(paginated_vendors, view: :associations),
       pagination: -> { {
-        count: vendors.count,
+        count: vendors.size,
         **pagination_data(paginated_vendors)
       } }
     }
@@ -23,12 +23,66 @@ class VendorsController < ApplicationController
   def show
     render inertia: "Vendors/Show", props: {
       vendor: VendorBlueprint.render_as_json(vendor, view: :show_page),
-      items: -> { ItemBlueprint.render_as_json(vendor.items.includes_associated, view: :associations) },
-      accessories: -> { AccessoryBlueprint.render_as_json(vendor.accessories.includes_associated, view: :associations) },
-      consumables: -> { ConsumableBlueprint.render_as_json(vendor.consumables.includes_associated, view: :associations) },
-      components: -> { ComponentBlueprint.render_as_json(vendor.components.includes_associated, view: :associations) },
-      licenses: -> { LicenseBlueprint.render_as_json(vendor.licenses.includes_associated, view: :associations) },
-      contracts: -> { ContractBlueprint.render_as_json(vendor.contracts.includes_associated, view: :associations) },
+      items: -> {
+        paginated_items = vendor.items.includes_associated.page(params[:page] || 1)
+        {
+          data: ItemBlueprint.render_as_json(paginated_items, view: :associations),
+          pagination: {
+            count: vendor.items.size,
+            **pagination_data(paginated_items)
+          }
+        }
+      },
+      accessories: InertiaRails.lazy(-> { 
+        paginated_accessories = vendor.accessories.includes_associated.page(params[:page] || 1)
+        {
+          data: AccessoryBlueprint.render_as_json(paginated_accessories, view: :associations),
+          pagination: {
+            count: vendor.accessories.size,
+            **pagination_data(paginated_accessories)
+        }
+        }
+      }),
+      consumables: InertiaRails.lazy(-> { 
+        paginated_consumables = vendor.consumables.includes_associated.page(params[:page] || 1)
+        {
+          data: ConsumableBlueprint.render_as_json(paginated_consumables, view: :associations),
+          pagination: {
+            count: vendor.consumables.size,
+            **pagination_data(paginated_consumables)
+        }
+        }
+      }),
+      components: InertiaRails.lazy(-> { 
+        paginated_components = vendor.components.includes_associated.page(params[:page] || 1)
+        {
+          data: ComponentBlueprint.render_as_json(paginated_components, view: :associations),
+          pagination: {
+            count: vendor.components.size,
+            **pagination_data(paginated_components)
+        }
+        }
+      }),
+      licenses: InertiaRails.lazy(-> { 
+        paginated_licenses = vendor.licenses.includes_associated.page(params[:page] || 1)
+        {
+          data: LicenseBlueprint.render_as_json(paginated_licenses, view: :associations),
+          pagination: {
+            count: vendor.licenses.size,
+            **pagination_data(paginated_licenses)
+        }
+        }
+      }),
+      contracts: InertiaRails.lazy(-> { 
+        paginated_contracts = vendor.contracts.includes_associated.page(params[:page] || 1)
+        {
+          data: ContractBlueprint.render_as_json(paginated_contracts, view: :associations),
+          pagination: {
+            count: vendor.contracts.size,
+            **pagination_data(paginated_contracts)
+        }
+        }
+      }),
     }
   end
 
