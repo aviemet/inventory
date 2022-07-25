@@ -8,6 +8,11 @@ interface IUpdateVendorProps{
 	vendor: Schema.Vendor
 }
 
+const tabs = {
+	details: 'details',
+	contact: 'contact',
+}
+
 const New = ({ vendor, ...models }: IUpdateVendorProps) => {
 	const title = `Edit ${vendor.name}`
 
@@ -19,13 +24,23 @@ const New = ({ vendor, ...models }: IUpdateVendorProps) => {
 				<h1>{ title }</h1>
 
 				<Tabs>
-					<Tabs.Tab label="Details">
-						<VendorForm to={ Routes.vendor(vendor.slug) } method="patch" vendor={ vendor } { ...models } />
-					</Tabs.Tab>
+					<Tabs.List>
+						<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
+						<Tabs.Tab value={ tabs.contact }>Contact Info</Tabs.Tab>
+					</Tabs.List>
 
-					<Tabs.Tab label="Contact Info">
+					<Tabs.Panel value={ tabs.details }>
+						<VendorForm
+							to={ Routes.vendor(vendor.slug) }
+							method="patch"
+							vendor={ vendor }
+							{ ...models }
+						/>
+					</Tabs.Panel>
 
-					</Tabs.Tab>
+					<Tabs.Panel value={ tabs.contact }>
+
+					</Tabs.Panel>
 				</Tabs>
 			</Section>
 		</>

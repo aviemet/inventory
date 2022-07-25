@@ -2,16 +2,14 @@ import React from 'react'
 import { Menu, type MenuItemProps } from '@mantine/core'
 import { Link } from '@/Components'
 
-interface IMenuItemProps extends MenuItemProps<'button'> {
+interface IMenuItemProps extends MenuItemProps {
 	href?: string
 }
 
 const MenuItem = ({ children, href, ...props }: IMenuItemProps) => {
 	if(href) {
 		return (
-			<Link href={ href }>
-				<Menu.Item { ...props }>{ children }</Menu.Item>
-			</Link>
+			<Menu.Item component={ Link } href={ href } { ...props }>{ children }</Menu.Item>
 		)
 	}
 

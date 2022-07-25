@@ -6,6 +6,9 @@ import { NewIcon, EditIcon } from '@/Components/Icons'
 import ItemsTable from '@/Pages/Items/Table'
 import AccessoriesTable from '@/Pages/Accessories/Table'
 
+import { ActionIcon } from '@mantine/core'
+import { DotsIcon } from '@/Components/Icons'
+
 type ShowPageVendor = Schema.Vendor & {
 	items_count: number
 	accessories_count: number
@@ -30,6 +33,15 @@ interface IVendorShowProps {
 	contracts?: TPaginatedModel<Schema.Contract[]>
 }
 
+const tabs = {
+	items: 'items',
+	accessories: 'accessories',
+	components: 'components',
+	consumables: 'consumables',
+	licenses: 'licenses',
+	contracts: 'contracts',
+}
+
 const Show = ({ vendor, items, accessories, components, consumables, licenses, contracts }: IVendorShowProps) => {
 	const title = vendor.name ?? 'Vendor Details'
 
@@ -46,16 +58,34 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							title
 					}</Heading>
 
-					<Menu>
-						<Menu.Item href={ Routes.editVendor(vendor.slug) } icon={ <EditIcon /> }>
-							Edit
-						</Menu.Item>
+					<Menu position="bottom-end">
+						<Menu.Target>
+							<ActionIcon><DotsIcon /></ActionIcon>
+						</Menu.Target>
+
+						<Menu.Dropdown>
+							<Menu.Item
+								href={ Routes.editVendor(vendor.slug) }
+								icon={ <EditIcon /> }
+							>
+								Edit
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 
 				<Tabs useUrlHash={ true }>
+					<Tabs.List>
+						<Tabs.Tab value={ tabs.items }>Items ({ vendor.items_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.accessories }>Accessories ({ vendor.accessories_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.components }>Components ({ vendor.components_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.consumables }>Consumables ({ vendor.consumables_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.licenses }>Licenses ({ vendor.licenses_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.contracts }>Contracts ({ vendor.contracts_count })</Tabs.Tab>
+					</Tabs.List>
+
 					{ /*********** ITEMS ***********/ }
-					<Tabs.Tab tabKey="items" label={ `Hardware (${vendor.items_count})` }>
+					<Tabs.Panel value={ tabs.items }>
 
 						<div className='fullHeight'>
 							<Table.TableProvider
@@ -75,10 +105,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 								<Table.Pagination />
 							</Table.TableProvider>
 						</div>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** ACCESSORIES ***********/ }
-					<Tabs.Tab tabKey="accessories" label={ `Accessories (${vendor.accessories_count})` }>
+					<Tabs.Panel value={ tabs.accessories }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -95,10 +125,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** CONSUMABLES ***********/ }
-					<Tabs.Tab tabKey="consumables" label={ `Consumables (${vendor.consumables_count})` }>
+					<Tabs.Panel value={ tabs.consumables }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -115,10 +145,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** COMPONENTS ***********/ }
-					<Tabs.Tab tabKey="components" label={ `Components (${vendor.components_count})` }>
+					<Tabs.Panel value={ tabs.components }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -135,10 +165,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** LICENSES ***********/ }
-					<Tabs.Tab tabKey="licenses" label={ `Licenses (${vendor.licenses_count})` }>
+					<Tabs.Panel value={ tabs.licenses }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -155,10 +185,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** CONTRACTS ***********/ }
-					<Tabs.Tab tabKey="contracts" label={ `Contracts (${vendor.contracts_count})` }>
+					<Tabs.Panel value={ tabs.contracts }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -175,7 +205,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 				</Tabs>
 

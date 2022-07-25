@@ -13,6 +13,8 @@ const TabsComponent = ({ children, useUrlHash = false, ...props }: ITabsComponen
 		<Tabs { ...props }>{ children }</Tabs>
 }
 
+TabsComponent.List = Tabs.List
 TabsComponent.Tab = Tabs.Tab
+TabsComponent.Panel = Tabs.Panel
 
 export default TabsComponent

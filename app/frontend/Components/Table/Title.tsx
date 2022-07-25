@@ -51,26 +51,28 @@ const TableTitleSection = ({ title, menuOptions }: ITableTitleSectionProps) => {
 				<Title>
 					{ title }
 				</Title>
-				<Menu position="bottom" placement="start">
-					{ menuOptions && menuOptions.map(({ label, href, icon }, index) => {
-						const Icon = icon
-						return (
-							<Link key={ index } href={ href }>
-								<Menu.Item icon={ icon && <Icon size={ 14 } /> }>
+				<Menu position="bottom-end">
+					<Menu.Target />
+
+					<Menu.Dropdown>
+						{ menuOptions && menuOptions.map(({ label, href, icon }, index) => {
+							const Icon = icon
+							return (
+								<Menu.Item key={ index } href={ href } icon={ icon && <Icon size={ 14 } /> }>
 									{ label }
 								</Menu.Item>
-							</Link>
-						)
-					}) }
+							)
+						}) }
 
-					{ selected.size > 0 && <>
-						<Divider />
+						{ selected.size > 0 && <>
+							<Divider />
 
-						<Menu.Item icon={ <TrashIcon size={ 14 } /> } onClick={ deleteRecords }>
+							<Menu.Item icon={ <TrashIcon size={ 14 } /> } onClick={ deleteRecords }>
 							Delete
-						</Menu.Item>
-					</> }
+							</Menu.Item>
+						</> }
 
+					</Menu.Dropdown>
 				</Menu>
 			</Group>
 			<Box sx={ theme=> ({
