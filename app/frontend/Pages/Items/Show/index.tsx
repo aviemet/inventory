@@ -35,18 +35,21 @@ const Show = ({ item }: IShowItemProps) => {
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu>
-						{ item.assigned ?
-							<Menu.Item href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							{ item.assigned ?
+								<Menu.Item href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
 								Checkin Item
-							</Menu.Item>
-							:
-							<Menu.Item href={ Routes.checkoutItem(item) } icon={ <CheckoutIcon /> }>
+								</Menu.Item>
+								:
+								<Menu.Item href={ Routes.checkoutItem(item) } icon={ <CheckoutIcon /> }>
 								Checkout Item
-							</Menu.Item>
-						}
-						<Menu.Item href={ Routes.editItem(item) } icon={ <EditIcon /> }>
+								</Menu.Item>
+							}
+							<Menu.Item href={ Routes.editItem(item) } icon={ <EditIcon /> }>
 								Edit Item
-						</Menu.Item>
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 

@@ -6,9 +6,6 @@ import { NewIcon, EditIcon } from '@/Components/Icons'
 import ItemsTable from '@/Pages/Items/Table'
 import AccessoriesTable from '@/Pages/Accessories/Table'
 
-import { ActionIcon } from '@mantine/core'
-import { DotsIcon } from '@/Components/Icons'
-
 type ShowPageVendor = Schema.Vendor & {
 	items_count: number
 	accessories_count: number
@@ -59,9 +56,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					}</Heading>
 
 					<Menu position="bottom-end">
-						<Menu.Target>
-							<ActionIcon><DotsIcon /></ActionIcon>
-						</Menu.Target>
+						<Menu.Target />
 
 						<Menu.Dropdown>
 							<Menu.Item

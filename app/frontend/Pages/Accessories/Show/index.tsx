@@ -18,18 +18,21 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 				<Flex>
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 					<Menu>
-						{ accessory.assignments ?
-							<Menu.Item href={ Routes.checkinAccessory(accessory) }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							{ accessory.assignments ?
+								<Menu.Item href={ Routes.checkinAccessory(accessory) }>
 									Checkin Accessory
-							</Menu.Item>
-							:
-							<Menu.Item href={ Routes.checkoutAccessory(accessory) }>
+								</Menu.Item>
+								:
+								<Menu.Item href={ Routes.checkoutAccessory(accessory) }>
 									Checkout Accessory
-							</Menu.Item>
-						}
-						<Menu.Item href={ Routes.editAccessory(accessory) }>
+								</Menu.Item>
+							}
+							<Menu.Item href={ Routes.editAccessory(accessory) }>
 								Edit Accessory
-						</Menu.Item>
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 

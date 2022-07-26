@@ -19,18 +19,21 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu>
-						{ component.assignments ?
-							<Menu.Item href={ Routes.checkinComponent(component) }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							{ component.assignments ?
+								<Menu.Item href={ Routes.checkinComponent(component) }>
 									Checkin Component
-							</Menu.Item>
-							:
-							<Menu.Item href={ Routes.checkoutComponent(component) }>
+								</Menu.Item>
+								:
+								<Menu.Item href={ Routes.checkoutComponent(component) }>
 									Checkout Component
-							</Menu.Item>
-						}
-						<Menu.Item href={ Routes.editComponent(component) }>
+								</Menu.Item>
+							}
+							<Menu.Item href={ Routes.editComponent(component) }>
 								Edit Component
-						</Menu.Item>
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 

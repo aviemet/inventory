@@ -1,8 +1,8 @@
 import React from 'react'
 import SearchInput from '@/Components/Table/SearchInput'
 import { useTableContext } from './TableContext'
-import { Menu, Box, Title, Group, Divider } from '@mantine/core'
-import { Link } from '@/Components'
+import { Box, Title, Group, Divider } from '@mantine/core'
+import { Menu } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
 import { Inertia, Method } from '@inertiajs/inertia'
 import { Routes } from '@/lib'
@@ -68,7 +68,7 @@ const TableTitleSection = ({ title, menuOptions }: ITableTitleSectionProps) => {
 							<Divider />
 
 							<Menu.Item icon={ <TrashIcon size={ 14 } /> } onClick={ deleteRecords }>
-							Delete
+								Delete
 							</Menu.Item>
 						</> }
 

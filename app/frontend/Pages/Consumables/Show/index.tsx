@@ -18,18 +18,21 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu>
-						{ consumable.assignments ?
-							<Menu.Item href={ Routes.checkinConsumable(consumable) }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							{ consumable.assignments ?
+								<Menu.Item href={ Routes.checkinConsumable(consumable) }>
 									Checkin Consumable
-							</Menu.Item>
-							:
-							<Menu.Item href={ Routes.checkoutConsumable(consumable) }>
+								</Menu.Item>
+								:
+								<Menu.Item href={ Routes.checkoutConsumable(consumable) }>
 									Checkout Consumable
-							</Menu.Item>
-						}
-						<Menu.Item href={ Routes.editConsumable(consumable) }>
+								</Menu.Item>
+							}
+							<Menu.Item href={ Routes.editConsumable(consumable) }>
 								Edit Consumable
-						</Menu.Item>
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 

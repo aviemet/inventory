@@ -17,18 +17,21 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu>
-						{ license.assignments ?
-							<Menu.Item href={ Routes.checkinLicense(license) }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							{ license.assignments ?
+								<Menu.Item href={ Routes.checkinLicense(license) }>
 									Checkin License
-							</Menu.Item>
-							:
-							<Menu.Item href={ Routes.checkoutLicense(license) }>
+								</Menu.Item>
+								:
+								<Menu.Item href={ Routes.checkoutLicense(license) }>
 									Checkout License
-							</Menu.Item>
-						}
-						<Menu.Item href={ Routes.editLicense(license) }>
+								</Menu.Item>
+							}
+							<Menu.Item href={ Routes.editLicense(license) }>
 								Edit License
-						</Menu.Item>
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 
