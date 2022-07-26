@@ -2,6 +2,7 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
 import { Routes } from '@/lib'
+import { Inertia } from '@inertiajs/inertia'
 import { NewIcon, EditIcon } from '@/Components/Icons'
 import ItemsTable from '@/Pages/Items/Table'
 import AccessoriesTable from '@/Pages/Accessories/Table'
@@ -30,8 +31,24 @@ interface IVendorShowProps {
 	contracts?: TPaginatedModel<Schema.Contract[]>
 }
 
+const tabs = {
+	items: 'items',
+	accessories: 'accessories',
+	components: 'components',
+	consumables: 'consumables',
+	licenses: 'licenses',
+	contracts: 'contracts',
+}
+
 const Show = ({ vendor, items, accessories, components, consumables, licenses, contracts }: IVendorShowProps) => {
 	const title = vendor.name ?? 'Vendor Details'
+	const url = new URL(window.location.href)
+	if(!url.searchParams.get('tab')) {
+		Inertia.get(url.pathname, { tab: tabs.items }, {
+			preserveState: true,
+			preserveScroll: true,
+		})
+	}
 
 	return (
 		<>
@@ -46,16 +63,32 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							title
 					}</Heading>
 
-					<Menu>
-						<Menu.Item href={ Routes.editVendor(vendor.slug) } icon={ <EditIcon /> }>
-							Edit
-						</Menu.Item>
+					<Menu position="bottom-end">
+						<Menu.Target />
+
+						<Menu.Dropdown>
+							<Menu.Item
+								href={ Routes.editVendor(vendor.slug) }
+								icon={ <EditIcon /> }
+							>
+								Edit
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 
-				<Tabs useUrlHash={ true }>
+				<Tabs urlControlled={ true } defaultValue={ tabs.items } allowTabDeactivation={ true }>
+					<Tabs.List>
+						<Tabs.Tab value={ tabs.items }>Items ({ vendor.items_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.accessories }>Accessories ({ vendor.accessories_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.components }>Components ({ vendor.components_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.consumables }>Consumables ({ vendor.consumables_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.licenses }>Licenses ({ vendor.licenses_count })</Tabs.Tab>
+						<Tabs.Tab value={ tabs.contracts }>Contracts ({ vendor.contracts_count })</Tabs.Tab>
+					</Tabs.List>
+
 					{ /*********** ITEMS ***********/ }
-					<Tabs.Tab tabKey="items" label={ `Hardware (${vendor.items_count})` }>
+					<Tabs.Panel value={ tabs.items }>
 
 						<div className='fullHeight'>
 							<Table.TableProvider
@@ -75,10 +108,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 								<Table.Pagination />
 							</Table.TableProvider>
 						</div>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** ACCESSORIES ***********/ }
-					<Tabs.Tab tabKey="accessories" label={ `Accessories (${vendor.accessories_count})` }>
+					<Tabs.Panel value={ tabs.accessories }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -95,10 +128,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** CONSUMABLES ***********/ }
-					<Tabs.Tab tabKey="consumables" label={ `Consumables (${vendor.consumables_count})` }>
+					<Tabs.Panel value={ tabs.consumables }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -115,10 +148,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** COMPONENTS ***********/ }
-					<Tabs.Tab tabKey="components" label={ `Components (${vendor.components_count})` }>
+					<Tabs.Panel value={ tabs.components }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -135,10 +168,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** LICENSES ***********/ }
-					<Tabs.Tab tabKey="licenses" label={ `Licenses (${vendor.licenses_count})` }>
+					<Tabs.Panel value={ tabs.licenses }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -155,10 +188,10 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 					{ /*********** CONTRACTS ***********/ }
-					<Tabs.Tab tabKey="contracts" label={ `Contracts (${vendor.contracts_count})` }>
+					<Tabs.Panel value={ tabs.contracts }>
 						<Table.TableProvider
 							selectable
 							hideable
@@ -175,7 +208,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							<AccessoriesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
 				</Tabs>
 

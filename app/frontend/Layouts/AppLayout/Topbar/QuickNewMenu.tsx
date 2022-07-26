@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Link } from '@/Components'
+import { Menu, Button } from '@/Components'
 import {
 	PlusCircleIcon,
 	ItemsIcon,
@@ -14,28 +14,34 @@ import { Routes } from '@/lib'
 
 const QuickNewMenu = () => {
 	return (
-		<Menu label="New" icon={ <PlusCircleIcon /> }>
-			<Link href={ Routes.newItem() }>
-				<Menu.Item><ItemsIcon />New Item</Menu.Item>
-			</Link>
-			<Link href={ Routes.newAccessory() }>
-				<Menu.Item><AccessoriesIcon />New Accessory</Menu.Item>
-			</Link>
-			<Link href={ Routes.newComponent() }>
-				<Menu.Item><ComponentsIcon />New Component</Menu.Item>
-			</Link>
-			<Link href={ Routes.newConsumable() }>
-				<Menu.Item><ConsumablesIcon />New Consumable</Menu.Item>
-			</Link>
-			<Link href={ Routes.newLicense() }>
-				<Menu.Item><LicensesIcon />New License</Menu.Item>
-			</Link>
-			<Link href={ Routes.newPerson() }>
-				<Menu.Item><PeopleIcon />New Person</Menu.Item>
-			</Link>
-			<Link href={ '#'/*Routes.newTicket()*/ }>
-				<Menu.Item><TicketsIcon />New Ticket</Menu.Item>
-			</Link>
+		<Menu position="bottom-end">
+			<Menu.Target>
+				<Button><PlusCircleIcon /> New</Button>
+			</Menu.Target>
+
+			<Menu.Dropdown>
+				<Menu.Item href={ Routes.newItem() } icon={ <ItemsIcon /> }>
+					New Item
+				</Menu.Item>
+				<Menu.Item href={ Routes.newAccessory() } icon={ <AccessoriesIcon /> }>
+					New Accessory
+				</Menu.Item>
+				<Menu.Item href={ Routes.newComponent() } icon={ <ComponentsIcon /> }>
+					New Component
+				</Menu.Item>
+				<Menu.Item href={ Routes.newConsumable() } icon={ <ConsumablesIcon /> }>
+					New Consumable
+				</Menu.Item>
+				<Menu.Item href={ Routes.newLicense() } icon={ <LicensesIcon /> }>
+					New License
+				</Menu.Item>
+				<Menu.Item href={ Routes.newPerson() } icon={ <PeopleIcon /> }>
+					New Person
+				</Menu.Item>
+				<Menu.Item href={ '#'/*Routes.newTicket()*/ } icon={ <TicketsIcon /> }>
+					New Ticket
+				</Menu.Item>
+			</Menu.Dropdown>
 		</Menu>
 	)
 }

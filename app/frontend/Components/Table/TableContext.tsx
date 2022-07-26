@@ -89,7 +89,9 @@ const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = Rea
 	const { setTableState } = useTableContext()
 
 	useEffect(() => {
-		setTableState({ rows, pagination })
+		if(pagination) {
+			setTableState({ rows, pagination })
+		}
 	}, [rows, pagination])
 
 	return <>{ children }</>

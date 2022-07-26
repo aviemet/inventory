@@ -3,7 +3,7 @@ import { Box, type BoxProps } from '@mantine/core'
 import { merge } from 'lodash'
 import cx from 'clsx'
 
-interface ISectionProps extends BoxProps<'section'> {
+interface ISectionProps extends BoxProps {
 	fullHeight?: boolean
 }
 

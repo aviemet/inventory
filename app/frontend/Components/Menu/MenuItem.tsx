@@ -1,23 +1,25 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { Menu, type MenuItemProps } from '@mantine/core'
 import { Link } from '@/Components'
 
-interface IMenuItemProps extends MenuItemProps<'button'> {
+interface IMenuItemProps extends MenuItemProps {
 	href?: string
+	onClick?: (e: MouseEvent) => void
 }
 
-const MenuItem = ({ children, href, ...props }: IMenuItemProps) => {
+const MenuItem = forwardRef<HTMLButtonElement, IMenuItemProps>((
+	{ children, href, onClick, ...props },
+	ref
+) => {
 	if(href) {
 		return (
-			<Link href={ href }>
-				<Menu.Item { ...props }>{ children }</Menu.Item>
-			</Link>
+			<Menu.Item ref={ ref } component={ Link } href={ href } { ...props } { ...onClick }>{ children }</Menu.Item>
 		)
 	}
 
 	return (
-		<Menu.Item { ...props }>{ children }</Menu.Item>
+		<Menu.Item ref={ ref } { ...props } { ...onClick }>{ children }</Menu.Item>
 	)
-}
+})
 
 export default MenuItem

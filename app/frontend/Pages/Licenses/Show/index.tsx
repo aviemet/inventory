@@ -1,10 +1,16 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
 import { formatter, Routes } from '@/lib'
 
 interface IShowLicenseProps {
 	license: Schema.License
+}
+
+const tabs = {
+	details: 'details',
+	history: 'history',
+	associations: 'associations',
 }
 
 const ShowLicense = ({ license }: IShowLicenseProps) => {
@@ -17,23 +23,32 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu>
-						{ license.assignments ?
-							<Menu.Item href={ Routes.checkinLicense(license) }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							{ license.assignments ?
+								<Menu.Item href={ Routes.checkinLicense(license) }>
 									Checkin License
-							</Menu.Item>
-							:
-							<Menu.Item href={ Routes.checkoutLicense(license) }>
+								</Menu.Item>
+								:
+								<Menu.Item href={ Routes.checkoutLicense(license) }>
 									Checkout License
-							</Menu.Item>
-						}
-						<Menu.Item href={ Routes.editLicense(license) }>
+								</Menu.Item>
+							}
+							<Menu.Item href={ Routes.editLicense(license) }>
 								Edit License
-						</Menu.Item>
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 
-				<Tabs>
-					<Tabs.Tab label="Details">
+				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
+					<Tabs.List>
+						<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
+						<Tabs.Tab value={ tabs.history }>History</Tabs.Tab>
+						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
+					</Tabs.List>
+
+					<Tabs.Panel value="details">
 						<Heading order={ 3 }>Details</Heading>
 
 						<div className="item-details">
@@ -87,9 +102,9 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 							</div>
 
 						</div>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
-					<Tabs.Tab label="History">
+					<Tabs.Panel value="history">
 						<Heading order={ 3 }>Assignment History</Heading>
 
 						<div>
@@ -118,13 +133,14 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 								)
 							}) }
 						</ul>
-					</Tabs.Tab>
 
+					</Tabs.Panel>
 
-					<Tabs.Tab label="Associations">
+					<Tabs.Panel value="associations">
 						<Heading order={ 3 }>Licenses</Heading>
 
-					</Tabs.Tab>
+
+					</Tabs.Panel>
 				</Tabs>
 
 			</Section>
