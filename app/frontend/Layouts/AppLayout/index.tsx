@@ -17,7 +17,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
 
 			sx={ theme => ({
 				header: {
-					border: '1px solid orange'
+
 				},
 
 				main: {

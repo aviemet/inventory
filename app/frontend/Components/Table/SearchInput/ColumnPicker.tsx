@@ -3,11 +3,11 @@ import { Inertia } from '@inertiajs/inertia'
 import { usePage } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
 import axios from 'axios'
+import { Menu } from '@/Components'
 import { ColumnsIcon } from '@/Components/Icons'
 import { Checkbox } from '@/Components/Inputs'
 import { useTableContext } from '../TableContext'
-import { Button, Popover, Box } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { Button } from '@mantine/core'
 
 interface IColumnPickerProps {
 	model: string
@@ -16,7 +16,6 @@ interface IColumnPickerProps {
 const ColumnPicker = ({ model }: IColumnPickerProps) => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
 	const { tableState: { columns } } = useTableContext()
-	const [open, handlers] = useDisclosure(false)
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		axios.patch( Routes.updateTablePreferences(user.id), {
@@ -35,24 +34,23 @@ const ColumnPicker = ({ model }: IColumnPickerProps) => {
 	}
 
 	return (
-		<Popover
-			opened={ open }
-			onClose={ handlers.close }
-			target={ <Button onClick={ handlers.toggle } size="md" p="sm"><ColumnsIcon /></Button> }
-			position="bottom"
-			placement="end"
-			spacing="xs"
-		>
-			{ [...columns].map(([name, label]) => (
-				<Box key={ name } p={ 4 }>
-					<Checkbox
-						name={ name }
-						label={ label }
-						onChange={ handleChange }
-						checked={ !user.table_preferences?.[model]?.hide?.[name] }
-					/>
-				</Box>)) }
-		</Popover>
+		<Menu closeOnItemClick={ false } position="bottom-end">
+			<Menu.Target>
+				<Button size="md" p="xs"><ColumnsIcon size={ 24 } /></Button>
+			</Menu.Target>
+
+			<Menu.Dropdown>
+				{ [...columns].map(([name, label]) => (
+					<Menu.Item key={ name }>
+						<Checkbox
+							name={ name }
+							label={ label }
+							onChange={ handleChange }
+							checked={ !user.table_preferences?.[model]?.hide?.[name] }
+						/>
+					</Menu.Item>)) }
+			</Menu.Dropdown>
+		</Menu>
 	)
 }
 

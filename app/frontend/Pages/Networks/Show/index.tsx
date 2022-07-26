@@ -28,9 +28,12 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu>
-						<Menu.Item href={ Routes.editNetwork(network) } icon={ <EditIcon /> }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							<Menu.Item href={ Routes.editNetwork(network) } icon={ <EditIcon /> }>
 							Edit
-						</Menu.Item>
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 

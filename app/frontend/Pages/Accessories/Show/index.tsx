@@ -1,10 +1,16 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
 import { formatter, Routes } from '@/lib'
 
 interface IShowAccessoryProps {
 	accessory: Schema.Accessory
+}
+
+const tabs = {
+	details: 'details',
+	history: 'history',
+	associations: 'associations',
 }
 
 const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
@@ -18,23 +24,32 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 				<Flex>
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 					<Menu>
-						{ accessory.assignments ?
-							<Menu.Item href={ Routes.checkinAccessory(accessory) }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							{ accessory.assignments ?
+								<Menu.Item href={ Routes.checkinAccessory(accessory) }>
 									Checkin Accessory
-							</Menu.Item>
-							:
-							<Menu.Item href={ Routes.checkoutAccessory(accessory) }>
+								</Menu.Item>
+								:
+								<Menu.Item href={ Routes.checkoutAccessory(accessory) }>
 									Checkout Accessory
-							</Menu.Item>
-						}
-						<Menu.Item href={ Routes.editAccessory(accessory) }>
+								</Menu.Item>
+							}
+							<Menu.Item href={ Routes.editAccessory(accessory) }>
 								Edit Accessory
-						</Menu.Item>
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 
-				<Tabs>
-					<Tabs.Tab label="Details">
+				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
+					<Tabs.List>
+						<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
+						<Tabs.Tab value={ tabs.history }>History</Tabs.Tab>
+						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
+					</Tabs.List>
+
+					<Tabs.Panel value="details">
 						<Heading order={ 3 }>Details</Heading>
 
 						<div className="item-details">
@@ -102,8 +117,9 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 							</div>
 
 						</div>
-					</Tabs.Tab>
-					<Tabs.Tab label="History">
+					</Tabs.Panel>
+
+					<Tabs.Panel value="history">
 						<Heading order={ 3 }>Assignment History</Heading>
 
 						<div tw="inline-grid grid-cols-2">
@@ -133,13 +149,13 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 							}) }
 						</ul>
 
-					</Tabs.Tab>
+					</Tabs.Panel>
 
-					<Tabs.Tab label="Associations">
+					<Tabs.Panel value="associations">
 						<Heading order={ 3 }>Licenses</Heading>
 
 
-					</Tabs.Tab>
+					</Tabs.Panel>
 				</Tabs>
 			</Section>
 		</>

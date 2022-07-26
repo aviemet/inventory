@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { InertiaLink, type BaseInertiaLinkProps } from '@inertiajs/inertia-react'
 import { Anchor, type AnchorProps, type ButtonProps } from '@mantine/core'
 import { Button } from '@/Components'
 import { Inertia, Method, Visit } from '@inertiajs/inertia'
 
-interface LinkProps extends Omit<AnchorProps<any>, 'href'>, BaseInertiaLinkProps {
+interface LinkProps extends Omit<AnchorProps, 'href'>, BaseInertiaLinkProps {
 	children: React.ReactNode
 	href: string
 	as: 'a'|'button'
@@ -14,7 +14,10 @@ interface LinkProps extends Omit<AnchorProps<any>, 'href'>, BaseInertiaLinkProps
 	compact?: boolean
 }
 
-const InertiaLinkComponent = ({ children, href, as = 'a', method, visit, external = false, compact, color, ...props }: LinkProps) => {
+const InertiaLinkComponent = forwardRef((
+	{ children, href, as = 'a', method, visit, external = false, compact, color, ...props }: LinkProps,
+	ref
+) => {
 	const handleHTTP = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		Inertia.visit(href, {
 			method,
@@ -22,7 +25,7 @@ const InertiaLinkComponent = ({ children, href, as = 'a', method, visit, externa
 		})
 	}
 
-	const buttonProps: Partial<ButtonProps<'button'>> = {}
+	const buttonProps: Partial<ButtonProps> = {}
 	if(color) buttonProps.color = color
 
 	// Only present standard GET requests as anchor tags, all others as buttons
@@ -36,10 +39,10 @@ const InertiaLinkComponent = ({ children, href, as = 'a', method, visit, externa
 
 	const asButton = as === 'button'
 	return (
-		<Anchor component={ InertiaLink } href={ href } { ...props } as={ asButton ? 'a' : as }>
+		<Anchor component={ InertiaLink } href={ href } { ...props } as={ asButton ? 'a' : as } ref={ ref }>
 			{ asButton ? <Button { ...buttonProps } compact={ compact }>{ children }</Button> : children }
 		</Anchor>
 	)
-}
+})
 
 export default InertiaLinkComponent
