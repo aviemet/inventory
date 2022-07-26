@@ -2,6 +2,7 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
 import { Routes } from '@/lib'
+import { Inertia } from '@inertiajs/inertia'
 import { NewIcon, EditIcon } from '@/Components/Icons'
 import ItemsTable from '@/Pages/Items/Table'
 import AccessoriesTable from '@/Pages/Accessories/Table'
@@ -41,6 +42,13 @@ const tabs = {
 
 const Show = ({ vendor, items, accessories, components, consumables, licenses, contracts }: IVendorShowProps) => {
 	const title = vendor.name ?? 'Vendor Details'
+	const url = new URL(window.location.href)
+	if(!url.searchParams.get('tab')) {
+		Inertia.get(url.pathname, { tab: tabs.items }, {
+			preserveState: true,
+			preserveScroll: true,
+		})
+	}
 
 	return (
 		<>
