@@ -8,6 +8,12 @@ interface IShowPersonProps {
 	person: Schema.Person & { name: string }
 }
 
+const tabs = {
+	details: 'details',
+	history: 'history',
+	associations: 'associations',
+}
+
 const Show = ({ person }: IShowPersonProps) => {
 	const title = person.name ?? 'Person Details'
 
@@ -29,8 +35,14 @@ const Show = ({ person }: IShowPersonProps) => {
 					</Menu>
 				</Flex>
 
-				<Tabs>
-					<Tabs.Tab label="Details">
+				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
+					<Tabs.List>
+						<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
+						<Tabs.Tab value={ tabs.history }>History</Tabs.Tab>
+						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
+					</Tabs.List>
+
+					<Tabs.Panel value="details">
 						<Heading order={ 3 }>Details</Heading>
 
 						<div className="item-details">
@@ -57,9 +69,9 @@ const Show = ({ person }: IShowPersonProps) => {
 								<li key={ assignment.id }>{ assignment.assignable_type }</li>
 							)) }
 						</ul>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
-					<Tabs.Tab label="History">
+					<Tabs.Panel value="history">
 						<Heading order={ 3 }>Assignment History</Heading>
 
 						<div>
@@ -90,12 +102,13 @@ const Show = ({ person }: IShowPersonProps) => {
 							}) }
 						</ul>
 
-					</Tabs.Tab>
+					</Tabs.Panel>
 
-					<Tabs.Tab label="Associations">
+					<Tabs.Panel value="associations">
 						<Heading order={ 3 }>Licenses</Heading>
 
-					</Tabs.Tab>
+
+					</Tabs.Panel>
 				</Tabs>
 			</Section>
 		</>

@@ -1,10 +1,16 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Table } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
 import { formatter, Routes } from '@/lib'
 
 interface IShowComponentProps {
 	component: Schema.Component
+}
+
+const tabs = {
+	details: 'details',
+	history: 'history',
+	associations: 'associations',
 }
 
 const ShowComponent = ({ component }: IShowComponentProps) => {
@@ -37,9 +43,14 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 					</Menu>
 				</Flex>
 
-				<Tabs>
-					<Tabs.Tab label="Details">
+				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
+					<Tabs.List>
+						<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
+						<Tabs.Tab value={ tabs.history }>History</Tabs.Tab>
+						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
+					</Tabs.List>
 
+					<Tabs.Panel value="details">
 						<Heading order={ 3 }>Details</Heading>
 
 
@@ -101,10 +112,9 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 							</div>
 
 						</div>
+					</Tabs.Panel>
 
-					</Tabs.Tab>
-
-					<Tabs.Tab label="History">
+					<Tabs.Panel value="history">
 
 						<Heading order={ 3 }>Assignment History</Heading>
 
@@ -136,10 +146,13 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 						</ul>
 
 
-					</Tabs.Tab>
+					</Tabs.Panel>
 
-					<Tabs.Tab label="Associations">
-					</Tabs.Tab>
+					<Tabs.Panel value="associations">
+						<Heading order={ 3 }>Licenses</Heading>
+
+
+					</Tabs.Panel>
 				</Tabs>
 			</Section>
 		</>

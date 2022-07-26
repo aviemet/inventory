@@ -3,11 +3,11 @@ import { Tabs, type TabsProps } from '@mantine/core'
 import UrlTabs from './UrlTabs'
 
 interface ITabsComponentProps extends TabsProps {
-	useUrlHash?: boolean
+	urlControlled?: boolean
 }
 
-const TabsComponent = ({ children, useUrlHash = false, ...props }: ITabsComponentProps) => {
-	return useUrlHash ?
+const TabsComponent = ({ children, urlControlled = false, ...props }: ITabsComponentProps) => {
+	return urlControlled ?
 		<UrlTabs { ...props }>{ children }</UrlTabs>
 		:
 		<Tabs { ...props }>{ children }</Tabs>
