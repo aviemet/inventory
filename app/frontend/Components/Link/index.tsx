@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { type Method, type Visit, type Progress } from '@inertiajs/inertia'
 import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
 import { type AnchorProps } from '@mantine/core'
 import { type BaseInertiaLinkProps } from '@inertiajs/inertia-react'
 
-export interface ILinkProps extends Omit<AnchorProps<'a'>, 'onClick'|'onProgress'>, Omit<BaseInertiaLinkProps, 'onProgress'> {
+export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'>, Omit<BaseInertiaLinkProps, 'onProgress'> {
 	children: React.ReactNode
 	href: string
 	method?: Method
@@ -18,7 +18,10 @@ export interface ILinkProps extends Omit<AnchorProps<'a'>, 'onClick'|'onProgress
 
 const externalPrefix = ['http', 'www']
 
-const Link = ({ children, href, as = 'a', method, visit, external, onProgress, ...props }: ILinkProps) => {
+const Link = forwardRef((
+	{ children, href, as = 'a', method, visit, external, onProgress, ...props }: ILinkProps,
+	ref
+) => {
 	let renderExternal = external
 
 	if(external === undefined) {
@@ -31,9 +34,9 @@ const Link = ({ children, href, as = 'a', method, visit, external, onProgress, .
 
 	// TODO: Get onProgress back in the props object somehow
 	if(renderExternal) {
-		return <ExternalLink href={ href } { ...props }>{ children }</ExternalLink>
+		return <ExternalLink href={ href } { ...props } ref={ ref }>{ children }</ExternalLink>
 	}
-	return <InertiaLink href={ href } as={ as } method={ method } visit={ visit } { ...props }>{ children }</InertiaLink>
-}
+	return <InertiaLink href={ href } as={ as } method={ method } visit={ visit } { ...props } ref={ ref }>{ children }</InertiaLink>
+})
 
 export default Link
