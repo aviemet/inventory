@@ -69,7 +69,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					</Menu>
 				</Flex>
 
-				<Tabs urlControlled={ true } defaultValue={ tabs.items }>
+				<Tabs urlControlled={ true } defaultValue={ tabs.items } allowTabDeactivation={ true }>
 					<Tabs.List>
 						<Tabs.Tab value={ tabs.items }>Items ({ vendor.items_count })</Tabs.Tab>
 						<Tabs.Tab value={ tabs.accessories }>Accessories ({ vendor.accessories_count })</Tabs.Tab>

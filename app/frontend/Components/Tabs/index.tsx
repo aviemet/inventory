@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tabs, type TabsProps } from '@mantine/core'
 import UrlTabs from './UrlTabs'
+import TabsPanel from './TabsPanel'
 
 interface ITabsComponentProps extends TabsProps {
 	urlControlled?: boolean
@@ -15,6 +16,6 @@ const TabsComponent = ({ children, urlControlled = false, ...props }: ITabsCompo
 
 TabsComponent.List = Tabs.List
 TabsComponent.Tab = Tabs.Tab
-TabsComponent.Panel = Tabs.Panel
+TabsComponent.Panel = TabsPanel
 
 export default TabsComponent
