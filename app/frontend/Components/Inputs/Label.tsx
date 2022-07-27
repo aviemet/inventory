@@ -3,7 +3,7 @@ import { Box, type BoxProps } from '@mantine/core'
 import { merge } from 'lodash'
 import cx from 'clsx'
 
-interface ILabelProps extends BoxProps<'label'> {
+interface ILabelProps extends BoxProps {
 	required?: boolean
 }
 

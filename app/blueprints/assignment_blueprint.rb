@@ -5,6 +5,7 @@ class AssignmentBlueprint < ApplicationBlueprint
          :assign_toable_id,
          :qty,
          :status,
+         :location_id,
          :assigned_at,
          :returned_at,
          :expected_at,

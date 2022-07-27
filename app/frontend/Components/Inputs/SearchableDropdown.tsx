@@ -43,7 +43,7 @@ const SearchableDropdownComponent = ({
 				onChange={ handleChange }
 				filter={ (value, item) =>
 					item?.label?.toLowerCase().includes(value.toLowerCase().trim()) ||
-        item?.value?.toLowerCase().includes(value.toLowerCase().trim())
+        	item?.value?.toLowerCase().includes(value.toLowerCase().trim())
 				}
 				id={ id }
 				{ ...props }
