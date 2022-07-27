@@ -3,6 +3,7 @@ class CreateLdaps < ActiveRecord::Migration[7.0]
     create_table :ldaps do |t|
       t.string :host
       t.string :port
+      t.string :domain
       t.string :username
       t.string :password
       t.string :tree_base

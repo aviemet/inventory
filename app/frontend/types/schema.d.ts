@@ -370,6 +370,7 @@ declare namespace Schema {
 		id: number;
 		host?: string | null;
 		port?: string | null;
+		domain?: string | null;
 		username?: string | null;
 		password?: string | null;
 		tree_base?: string | null;

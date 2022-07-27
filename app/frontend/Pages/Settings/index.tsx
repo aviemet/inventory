@@ -22,6 +22,8 @@ const Settings = ({ ldap }: ISettingsProps) => {
 
 				<Input label="Port" name="port" />
 
+				<Input label="Domain" name="domain" />
+
 				<Input label="Username" name="username" />
 
 				<Input label="Password" name="password" type="password" />

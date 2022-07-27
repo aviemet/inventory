@@ -1,14 +1,23 @@
-import { Section, Table } from '@/Components'
+import { Button, Flex, Section, Table } from '@/Components'
 import React from 'react'
+import axios from 'axios'
+import { Routes } from '@/lib'
 
 interface IShowLdapProps {
 	ldap: Schema.Ldap
 }
 
 const ShowLdap = ({ ldap }: IShowLdapProps) => {
-	console.log({ ldap })
+	const handleLdapSync = () => {
+		axios.patch(Routes.ldapSync(ldap))
+	}
+
 	return (
 		<Section>
+			<Flex>
+				<Button onClick={ handleLdapSync }>Sync LDAP</Button>
+			</Flex>
+
 			<Table>
 				<Table.Body>
 					<Table.Row>
@@ -19,6 +28,11 @@ const ShowLdap = ({ ldap }: IShowLdapProps) => {
 					<Table.Row>
 						<Table.Cell>Port</Table.Cell>
 						<Table.Cell>{ ldap.port }</Table.Cell>
+					</Table.Row>
+
+					<Table.Row>
+						<Table.Cell>Domain</Table.Cell>
+						<Table.Cell>{ ldap.domain }</Table.Cell>
 					</Table.Row>
 
 					<Table.Row>

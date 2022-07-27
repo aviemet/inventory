@@ -1,6 +1,7 @@
 class LdapBlueprint < ApplicationBlueprint
   fields :host,
          :port,
+         :domain,
          :username,
          :password,
          :tree_base,

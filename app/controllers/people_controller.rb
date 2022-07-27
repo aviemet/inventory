@@ -80,7 +80,7 @@ class PeopleController < ApplicationController
   private
 
   def sortable_fields
-    %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+    %w(first_name last_name employee_number job_title guid manager.name location.name items.count accessories.count).freeze
   end
 
   def person_params
