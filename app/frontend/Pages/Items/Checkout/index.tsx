@@ -17,7 +17,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Item'
 
 	const { props } = usePage<InertiaPage>()
-	console.log({ props })
+
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -50,8 +50,6 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 					data={ {
 						assignment: {
 							...assignment,
-							assignable_id: item.id,
-							assignable_type: 'Item',
 						},
 						item: {
 							name: item.name

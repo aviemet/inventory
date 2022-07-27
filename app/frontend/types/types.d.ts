@@ -27,7 +27,7 @@ declare global {
 		}
 
 		interface UID {
-			uid: string
+			uid?: string
 		}
 
 		interface Accessory extends Assignable, UID {

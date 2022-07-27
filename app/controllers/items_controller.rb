@@ -68,8 +68,7 @@ class ItemsController < ApplicationController
   def checkout
     redirect_to item if item.assigned?
 
-    assignment = Assignment.new
-    assignment.assignable = item
+    assignment = Assignment.new({ assignable: item })
 
     render inertia: "Items/Checkout", props: {
       item: ItemBlueprint.render_as_json(item),

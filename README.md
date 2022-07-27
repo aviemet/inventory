@@ -80,7 +80,8 @@ Licenses:
 
 People:
 
-- [ ] Person records can be pulled from LDAP/AD (not required)
+- [x] Person records can be pulled from LDAP/AD (not required)
+  - [ ] Merges existing similar records (Person with no guid and same name can be merged)
 - [x] User accounts reference a person always
 
 Vendors:
