@@ -408,6 +408,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_230940) do
     t.boolean "active", default: true, null: false
     t.string "employee_number"
     t.string "job_title"
+    t.string "guid"
     t.bigint "manager_id"
     t.bigint "location_id"
     t.datetime "created_at", null: false
