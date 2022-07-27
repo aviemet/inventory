@@ -118,6 +118,7 @@ declare namespace Schema {
 		roles?: Role[];
 		audits?: AuditedAudit[];
 		users?: User[];
+		ldap?: Ldap;
 		ownerships?: Ownership[];
 		items?: Item[];
 		accessories?: Accessory[];
@@ -377,6 +378,9 @@ declare namespace Schema {
 		company_id: number;
 		created_at: string;
 		updated_at: string;
+		roles?: Role[];
+		audits?: AuditedAudit[];
+		company?: Company;
 	}
 
 	interface License {
@@ -575,6 +579,7 @@ declare namespace Schema {
 		active: boolean;
 		employee_number?: string | null;
 		job_title?: string | null;
+		guid?: string | null;
 		manager_id?: number | null;
 		location_id?: number | null;
 		created_at: string;
