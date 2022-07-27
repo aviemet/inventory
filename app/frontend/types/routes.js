@@ -1200,6 +1200,15 @@ export const ldap = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"lda
 
 /**
  * Generates rails route to
+ * /ldaps/:id/sync(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ldapSync = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"ldaps"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"sync"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /ldaps(.:format)
  * @param {object | undefined} options
  * @returns {string} route path

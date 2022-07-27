@@ -28,9 +28,14 @@ class LdapsController < ApplicationController
     end
   end
 
+  # PATCH /ldap/:id/sync
+  def sync
+    LdapJob.perform_now(ldap)
+  end
+
   private
 
   def ldap_params
-    params.require(:ldap).permit(:host, :port, :username, :password, :tree_base, :user_search, :sync_interval)
+    params.require(:ldap).permit(:host, :port, :domain, :username, :password, :tree_base, :user_search, :sync_interval)
   end
 end

@@ -271,6 +271,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_230940) do
   create_table "ldaps", force: :cascade do |t|
     t.string "host"
     t.string "port"
+    t.string "domain"
     t.string "username"
     t.string "password"
     t.string "tree_base"
@@ -413,6 +414,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_230940) do
     t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["guid"], name: "index_people_on_guid", unique: true
     t.index ["location_id"], name: "index_people_on_location_id"
     t.index ["manager_id"], name: "index_people_on_manager_id"
   end

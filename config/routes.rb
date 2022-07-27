@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   get "settings" => "pages#settings", as: :settings
   resources :ldaps, only: [:show, :create, :update]
+  patch "ldaps/:id/sync" => "ldaps#sync", as: :ldap_sync
 
   # DEVISE PATHS #
 

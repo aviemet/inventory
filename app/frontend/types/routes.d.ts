@@ -999,6 +999,18 @@ export const ldap: ((
 
 /**
  * Generates rails route to
+ * /ldaps/:id/sync(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ldapSync: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /ldaps(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
