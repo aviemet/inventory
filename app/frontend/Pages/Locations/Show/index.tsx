@@ -19,10 +19,12 @@ const Show = ({ location }: IShowLocationProps) => {
 					<Heading>{ title }</Heading>
 
 					<Menu>
-						<Menu.Item href={ Routes.editLocation(location) }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							<Menu.Item href={ Routes.editLocation(location) }>
 								Edit Location
-						</Menu.Item>
-
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Input, Submit } from '@/Components/Form'
-import { ContactableForm } from '@/Components/Contactable'
 
 export interface IVendorFormProps {
 	to: string
@@ -26,8 +25,6 @@ const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: IVe
 			<Input name="name" label="Name" required autoFocus />
 
 			<Input name="url" label="Website" />
-
-			<ContactableForm />
 
 			<Submit>
 				{ vendor.id ? 'Update' : 'Create' } Vendor

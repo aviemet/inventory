@@ -1,10 +1,11 @@
 import React from 'react'
 import { useTableContext } from '../TableContext'
-import { Group, Pagination } from '@mantine/core'
+import { Group, Pagination, useMantineTheme } from '@mantine/core'
 import PageItem from './PageItem'
 
 const PaginationComponent = () => {
 	const { tableState: { pagination } } = useTableContext()
+	const theme = useMantineTheme()
 
 	if(!pagination) return <></>
 
@@ -32,21 +33,13 @@ const PaginationComponent = () => {
 				total={ pages }
 				page={ current_page }
 				itemComponent={ props => <PageItem total={ pages } { ...props } /> }
+				color={ theme.primaryColor }
 				sx={ theme => ({
 					a: {
-						color: 'black',
-
-						'&.mantine-Pagination-active': {
-							color: 'white',
-
-							'&:hover': {
-								backgroundColor: theme.colors[theme.primaryColor][theme.primaryShade.dark]
-							}
-						},
+						color: theme.other.colorSchemeOption(theme.black, theme.white),
 
 						'&:hover': {
 							textDecoration: 'none',
-							backgroundColor: theme.colors[theme.primaryColor][1]
 						},
 					},
 				}) }

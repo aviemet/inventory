@@ -1,7 +1,6 @@
 import React from 'react'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
-import { Link } from '@/Components'
 import {
 	DashboardIcon,
 	AssetsIcon,
