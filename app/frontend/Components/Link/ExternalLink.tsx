@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import normalizeUrl from 'normalize-url'
 import { ExternalLinkIcon } from '@/Components/Icons'
 import { Anchor, type AnchorProps } from '@mantine/core'
 
-interface IExternalLinkProps extends Omit<AnchorProps<'a'>, 'component'> {
+interface IExternalLinkProps extends Omit<AnchorProps, 'component'> {
 	href: string
 	as?: 'a'|'button'
 }
 
-const ExternalLink = ({ children, href, as, ...props }: IExternalLinkProps) => {
+const ExternalLink = forwardRef<HTMLAnchorElement, IExternalLinkProps>((
+	{ children, href, as, ...props },
+	ref
+) => {
 	const url = normalizeUrl(href, { stripWWW: false })
 
 	return (
@@ -24,12 +27,13 @@ const ExternalLink = ({ children, href, as, ...props }: IExternalLinkProps) => {
 					verticalAlign: 'text-top',
 				}
 			} }
+			ref={ ref }
 			{ ...props }
 		>
 			{ children }
 			<ExternalLinkIcon className="external" />
 		</Anchor>
 	)
-}
+})
 
 export default ExternalLink

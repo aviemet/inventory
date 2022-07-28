@@ -14,12 +14,14 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'>, O
 	compact?: boolean
 	as?: 'a'|'button'
 	onProgress?: ((progress: Progress) => void) | React.ReactEventHandler<HTMLAnchorElement>
+	target: string
+	rel: string
 }
 
 const externalPrefix = ['http', 'www']
 
-const Link = forwardRef((
-	{ children, href, as = 'a', method, visit, external, onProgress, ...props }: ILinkProps,
+const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
+	{ children, href, as = 'a', method, visit, external, onProgress, ...props },
 	ref
 ) => {
 	let renderExternal = external
