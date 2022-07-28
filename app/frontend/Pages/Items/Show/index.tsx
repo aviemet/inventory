@@ -8,6 +8,12 @@ interface IShowItemProps {
 	item: Schema.Item
 }
 
+const tabs = {
+	details: 'details',
+	history: 'history',
+	associations: 'associations',
+}
+
 const AssignmentLink = ({ assignment }: { assignment?: Schema.Assignment }) => {
 	if(!assignment) return <></>
 
@@ -35,23 +41,32 @@ const Show = ({ item }: IShowItemProps) => {
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu>
-						{ item.assigned ?
-							<Menu.Item href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
+						<Menu.Target />
+						<Menu.Dropdown>
+							{ item.assigned ?
+								<Menu.Item href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
 								Checkin Item
-							</Menu.Item>
-							:
-							<Menu.Item href={ Routes.checkoutItem(item) } icon={ <CheckoutIcon /> }>
+								</Menu.Item>
+								:
+								<Menu.Item href={ Routes.checkoutItem(item) } icon={ <CheckoutIcon /> }>
 								Checkout Item
-							</Menu.Item>
-						}
-						<Menu.Item href={ Routes.editItem(item) } icon={ <EditIcon /> }>
+								</Menu.Item>
+							}
+							<Menu.Item href={ Routes.editItem(item) } icon={ <EditIcon /> }>
 								Edit Item
-						</Menu.Item>
+							</Menu.Item>
+						</Menu.Dropdown>
 					</Menu>
 				</Flex>
 
-				<Tabs>
-					<Tabs.Tab label="Details">
+				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
+					<Tabs.List>
+						<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
+						<Tabs.Tab value={ tabs.history }>History</Tabs.Tab>
+						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
+					</Tabs.List>
+
+					<Tabs.Panel value="details">
 						<Heading order={ 3 }>Details</Heading>
 
 						<Box sx={ theme => ({
@@ -131,16 +146,17 @@ const Show = ({ item }: IShowItemProps) => {
 								</Table.Body>
 							</Table>
 						</Box>
-					</Tabs.Tab>
+					</Tabs.Panel>
 
-					<Tabs.Tab label="History">
+					<Tabs.Panel value="history">
 						<Heading order={ 3 }>History</Heading>
 
 						<History assignments={ item.assignments } audits={ item.audits } />
 
-					</Tabs.Tab>
 
-					<Tabs.Tab label="Associations">
+					</Tabs.Panel>
+
+					<Tabs.Panel value="associations">
 						<Heading order={ 3 }>Licenses</Heading>
 
 						<ul>
@@ -149,7 +165,7 @@ const Show = ({ item }: IShowItemProps) => {
 							)) }
 						</ul>
 
-					</Tabs.Tab>
+					</Tabs.Panel>
 				</Tabs>
 
 

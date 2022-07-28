@@ -98,6 +98,12 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 						'.hidden': {
 							display: 'none',
 						},
+
+						'.fullHeight': {
+							display: 'flex',
+							flexDirection: 'column',
+							height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
+						}
 					}) } />
 					{ children }
 				</NotificationsProvider>

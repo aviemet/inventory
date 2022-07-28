@@ -1,14 +1,8 @@
 import React, { useCallback } from 'react'
 import { useMantineTheme } from '@mantine/styles'
-import { Button } from '@mantine/core'
+import { Button, PaginationItemProps } from '@mantine/core'
 import { NextIcon, LastIcon, PreviousIcon, FirstIcon, DotsIcon } from '@/Components/Icons'
 import Link from '@/Components/Link'
-
-export interface PaginationItemProps extends React.ComponentPropsWithoutRef<'button'> {
-	page: number | 'dots' | 'prev' | 'next' | 'first' | 'last'
-	active?: boolean
-	onClick?: () => void
-}
 
 const ltrIcons = {
 	dots: DotsIcon,
@@ -40,7 +34,7 @@ const getCurrentPage = (url: URL) => {
 	}
 }
 
-const DefaultItem = ({ page, total, active, onClick, className, tabIndex, ...aria }: IPageItemProps) => {
+const PageItem = ({ page, total, active, onClick, className, tabIndex, ...aria }: IPageItemProps) => {
 	const theme = useMantineTheme()
 	const icons = (theme.dir === 'rtl' ? rtlIcons : ltrIcons)
 
@@ -84,17 +78,33 @@ const DefaultItem = ({ page, total, active, onClick, className, tabIndex, ...ari
 
 	if((page === 'prev' && currentPage === 1) || (page === 'next' && currentPage === total)) {
 		return (
-			<Button disabled type="button" onClick={ onClick } className={ className } tabIndex={ tabIndex } { ...aria }>
+			<Button
+				disabled
+				type="button"
+				onClick={ onClick }
+				className={ className }
+				tabIndex={ tabIndex }
+				{ ...aria }
+			>
 				<Item />
 			</Button>
 		)
 	}
 
+	const dataActive: { ['data-active']?: boolean } = {}
+	if(active) dataActive['data-active'] = active
+
 	return (
-		<Link external={ false } href={ pageLink() } className={ className } tabIndex={ tabIndex }>
+		<Link
+			{ ...dataActive }
+			external={ false }
+			href={ pageLink() }
+			className={ className }
+			tabIndex={ tabIndex }
+		>
 			<Item />
 		</Link>
 	)
 }
 
-export default DefaultItem
+export default PageItem
