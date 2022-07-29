@@ -6,7 +6,7 @@ export default createStyles(theme => {
 	const borderWidth = 2
 	const navItemWidth = navbarWidth.open + iconWidth
 	const openSpanWidth = navbarWidth.open - iconWidth - borderWidth
-
+	const bgColor = theme.other.colorSchemeOption(theme.fn.lighten(theme.colors.gray[1], 0.25), theme.colors.dark[6])
 	return {
 		root: {
 			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
@@ -66,7 +66,7 @@ export default createStyles(theme => {
 					boxShadow: theme.shadows.lg,
 
 					'&, ul': {
-						backgroundColor: theme.other.colorSchemeOption(theme.fn.lighten(theme.colors.gray[1], 0.25), theme.colors.dark[6]),
+						backgroundColor: bgColor,
 					},
 
 					'span, ul': {
@@ -83,9 +83,24 @@ export default createStyles(theme => {
 				left: '100%',
 				top: 0,
 
+				'&:after': {
+					content: '""',
+					width: '100%',
+					height: '3px',
+					background: bgColor,
+					display: 'block',
+					position: 'absolute',
+					top: '-2px',
+				},
+
 				'&.up': {
 					top: 'unset',
 					bottom: 0,
+
+					'&:after': {
+						top: 'unset',
+						bottom: '-2px',
+					},
 				},
 
 				span: {
@@ -97,7 +112,6 @@ export default createStyles(theme => {
 				position: 'absolute',
 				top: 0,
 				left: iconWidth,
-				// width: '100%',
 				width: `${openSpanWidth}px`,
 				display: 'flex',
 				height: '100%',
