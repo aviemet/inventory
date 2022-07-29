@@ -11,7 +11,7 @@ interface IUpdateItemProps{
 	locations: Schema.Location[]
 }
 
-const New = ({ item, ...models }: IUpdateItemProps) => {
+const EditItem = ({ item, ...models }: IUpdateItemProps) => {
 	const title = `Edit ${item.name}`
 
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
@@ -29,4 +29,4 @@ const New = ({ item, ...models }: IUpdateItemProps) => {
 	)
 }
 
-export default New
+export default EditItem
