@@ -14,8 +14,8 @@ interface LinkProps extends Omit<AnchorProps, 'href'>, BaseInertiaLinkProps {
 	compact?: boolean
 }
 
-const InertiaLinkComponent = forwardRef((
-	{ children, href, as = 'a', method, visit, external = false, compact, color, ...props }: LinkProps,
+const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
+	{ children, href, as = 'a', method, visit, external = false, compact, color, ...props },
 	ref
 ) => {
 	const handleHTTP = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
