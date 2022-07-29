@@ -4,8 +4,9 @@ export default createStyles(theme => {
 	const navbarWidth = theme.other.navbar.width
 	const iconWidth = 48
 	const borderWidth = 2
-	const navItemWidth = navbarWidth.open - iconWidth - borderWidth
-
+	const navItemWidth = navbarWidth.open + iconWidth
+	const openSpanWidth = navbarWidth.open - iconWidth - borderWidth
+	const bgColor = theme.other.colorSchemeOption(theme.fn.lighten(theme.colors.gray[1], 0.25), theme.colors.dark[6])
 	return {
 		root: {
 			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
@@ -16,8 +17,14 @@ export default createStyles(theme => {
 			transition: 'width 100ms ease-in-out, min-width 100ms ease-in-out',
 
 			'&.closed': {
-				'.links > ul > li > a > span': {
-					width: `calc(100% + ${iconWidth}px)`,
+				'.links > ul > li': {
+					'&:hover': {
+						width: navItemWidth,
+					},
+
+					' & > a > span': {
+						width: `calc(100% - ${iconWidth}px)`,
+					},
 				},
 
 				'span, ul ul': {
@@ -36,7 +43,7 @@ export default createStyles(theme => {
 			},
 
 			'.links > ul > li:hover': {
-				width: navItemWidth,
+				width: '100%',
 
 				'& > ul': {
 					display: 'block',
@@ -56,9 +63,10 @@ export default createStyles(theme => {
 
 				'&:hover': {
 					borderLeftColor: theme.colors[theme.primaryColor][theme.primaryShade.light],
+					boxShadow: theme.shadows.lg,
 
-					'&, span, ul': {
-						backgroundColor: theme.other.colorSchemeOption(theme.fn.lighten(theme.colors.gray[1], 0.25), theme.colors.dark[6]),
+					'&, ul': {
+						backgroundColor: bgColor,
 					},
 
 					'span, ul': {
@@ -71,17 +79,32 @@ export default createStyles(theme => {
 				position: 'absolute',
 				display: 'none',
 				flexDirection: 'column',
-				width: `calc(100% + ${iconWidth}px)`,
-				left: `calc(100% + ${iconWidth}px)`,
+				width: `${navbarWidth.open - borderWidth}px`,
+				left: '100%',
 				top: 0,
+
+				'&:after': {
+					content: '""',
+					width: '100%',
+					height: '3px',
+					background: bgColor,
+					display: 'block',
+					position: 'absolute',
+					top: '-2px',
+				},
 
 				'&.up': {
 					top: 'unset',
 					bottom: 0,
+
+					'&:after': {
+						top: 'unset',
+						bottom: '-2px',
+					},
 				},
 
 				span: {
-					width: `calc(100% - ${iconWidth}px)`,
+					width: `calc(100% - ${iconWidth + borderWidth}px)`,
 				}
 			},
 
@@ -89,7 +112,7 @@ export default createStyles(theme => {
 				position: 'absolute',
 				top: 0,
 				left: iconWidth,
-				width: '100%',
+				width: `${openSpanWidth}px`,
 				display: 'flex',
 				height: '100%',
 				alignItems: 'center',

@@ -11,7 +11,7 @@ interface INewItemProps {
 	locations: Schema.Location[]
 }
 
-const New = ({ ...data }: INewItemProps) => {
+const NewItem = ({ ...data }: INewItemProps) => {
 	const title = 'New Hardware Asset'
 
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
@@ -29,4 +29,4 @@ const New = ({ ...data }: INewItemProps) => {
 	)
 }
 
-export default New
+export default NewItem
