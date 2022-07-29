@@ -22,19 +22,25 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    render inertia: "Orders/Show"
+    render inertia: "Orders/Show", props: {
+      order: -> { OrderBlueprint.render_as_json(order, view: :associations) }
+    }
   end
 
   # GET /orders/new
   def new
-    self.order = Order.new(ordered_at: Time.zone.now)
-    @vendors = @active_company.vendors
-    render inertia: "Orders/New"
+    render inertia: "Orders/New", props: {
+      order: OrderBlueprint.render_as_json(Order.new({ ordered_at: Time.zone.now })),
+      vendors: -> { @active_company.vendors }
+    }
   end
 
   # GET /orders/1/edit
   def edit
-    render inertia: "Orders/Edit"
+    render inertia: "Orders/Edit", props: {
+      order: OrderBlueprint.render_as_json(order),
+      vendors: -> { @active_company.vendors }
+    }
   end
 
   # POST /orders
