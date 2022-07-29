@@ -1,5 +1,5 @@
 class LdapSync
-  attr_reader :people, :groups, :managers
+  attr_reader :people, :groups, :managers, :connection
 
   def initialize(ldap)
     @ldap = ldap
@@ -34,60 +34,62 @@ class LdapSync
     return if !@connection
 
     @connection.search(base: @ldap.tree_base) do |entry|
-      if entry[:objectguid]
-        guid = GuidConverter::unpack_guid(entry[:objectguid].first)
-        person = Person.find_by_guid(guid) || Person.new({ company: @ldap.company })
-      else
-        person = Person.new({ company: @ldap.company })
-      end
-      ap({ person: person.as_json })
+      return unless entry[:objectclass].include?("user")
 
-      groups = []
-      email = ''
-      username = ''
-      phone = ''
+      guid = GuidConverter::unpack_guid(entry[:objectguid].first)
+      person = find_or_create_person guid
+      
+      person.first_name = entry[:givenname][0]
+      person.last_name = entry[:sn][0]
+      person.job_title = entry[:title] ? entry[:title][0] : nil
+      
+      username = entry[:samaccountname]
+      email = entry[:mail]
+      phone = entry[:telephonenumber]
+      
+      groups = entry[:memberof].map{ |group|
+        match = group.match(/CN=(\w+),/)
+        if(!match.nil? && match.length > 1)
+          match[1]
+        end
+      }
 
-      if entry[:objectclass].include?("user")
-        person.first_name = entry[:givenname][0]
-        person.last_name = entry[:sn][0]
-        person.job_title = entry[:title] ? entry[:title][0] : nil
-        person.guid = GuidConverter::unpack_guid(entry[:objectguid].first)
-        
-        username = entry[:samaccountname]
-        email = entry[:mail]
-        phone = entry[:telephonenumber]
-        
-        groups = entry[:memberof].map{ |group|
-          match = group.match(/CN=(\w+),/)
+      if entry[:manager]
+        entry[:manager].each{ |mgr|
+          match = mgr.match(/CN=([\w\s]+),/)
           if(!match.nil? && match.length > 1)
-            match[1]
+            name = match[1]
+            @managers[name] ||= []
+            @managers[name].push person.guid
           end
         }
-
-        if entry[:manager]
-          entry[:manager].each{ |mgr|
-            match = mgr.match(/CN=([\w\s]+),/)
-            if(!match.nil? && match.length > 1)
-              name = match[1]
-              @managers[name] ||= []
-              @managers[name].push person.guid
-            end
-          }
-        end
-        @people.push person
       end
 
+      @people.push person
     end
   end
 
+  def find_or_create_person(guid)
+    Person.find_by_guid(guid) || Person.new({ guid: guid, company: @ldap.company })
+  end
+
   def save
-    Person.transaction do
+    save_people
+    update_manager_data
+  end
+
+  private
+
+  def save_people
+    ActiveRecord::Base.transaction do
       @people.each do |person|
         person.save
       end
     end
+  end
 
-    Person.transaction do
+  def update_manager_data
+    ActiveRecord::Base.transaction do
       @managers.each do |mgr_name, user_guids|
         split = mgr_name.split(' ')
         manager = Person.where({ first_name: split[0], last_name: split[-1]}).first
@@ -98,6 +100,6 @@ class LdapSync
         end
       end
     end
-
   end
+
 end
