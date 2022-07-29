@@ -1,11 +1,13 @@
 FactoryBot.define do
+  domain = Faker::Internet.domain_name
+
   factory :ldap do
-    host { "MyString" }
-    port { "MyString" }
-    user { "MyString" }
-    password { "MyString" }
-    tree_base { "MyString" }
-    user_search { "MyString" }
-    sync_interval { "MyString" }
+    host { Faker::Internet.private_ip_v4_address }
+    port { 389 }
+    domain { domain }
+    username { "administrator" }
+    password { "Pa$$word" }
+    tree_base { domain }
+    association :company, strategy: :create
   end
 end
