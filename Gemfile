@@ -31,7 +31,6 @@ gem "jsonb_accessor", "~> 1.3"
 
 # Helpers
 gem "factory_bot", "~> 6.2"
-gem "draper", "~> 4.0"
 gem "ipaddress_2", "~> 0.14.0"
 gem "countries", ">= 4.2"
 gem "ts_schema", "~> 0.2.1"
