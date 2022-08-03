@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.3"
+ruby "3.1.2"
 
 # Server
 gem "rails", "~> 7.0.1"
@@ -37,6 +37,7 @@ gem "ts_schema", "~> 0.2.1"
 gem "js-routes", "~> 2.2"
 gem "net-ldap", "~> 0.17.1"
 gem "sidekiq", "~> 6.5"
+gem "foreman", "~> 0.87.2"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"
