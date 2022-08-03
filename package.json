@@ -65,9 +65,9 @@
     "postcss-import": "^14.1.0",
     "twin.macro": "^2.8.2",
     "typescript": "^4.7.4",
-    "vite": "^3.0.3",
+    "vite": "^3.0.0",
     "vite-plugin-dynamic-import": "^1.0.0",
-    "vite-plugin-ruby": "^3.1.2",
+    "vite-plugin-ruby": "^3.1.0",
     "vite-plugin-svgr": "^2.2.1",
     "vite-tsconfig-paths": "^3.5.0"
   },
