@@ -6,7 +6,7 @@ import {
 	SearchableDropdown,
 	Checkbox,
 	Submit,
-	Group,
+	FormGroup,
 } from '@/Components/Form'
 import { Inertia } from '@inertiajs/inertia'
 
@@ -32,7 +32,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 		>
 			<Input name="name" label="Name" required autoFocus />
 
-			<Group legend="Consumable Details">
+			<FormGroup legend="Consumable Details">
 				<SearchableDropdown
 					label="Model"
 					name="model_id"
@@ -48,9 +48,9 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 				<Input name="qty" label="Quantity" />
 
 				<Input name="min_qty" label="Minimum Quantity" />
-			</Group>
+			</FormGroup>
 
-			<Group legend="Purchase Details">
+			<FormGroup legend="Purchase Details">
 				<SearchableDropdown
 					label="Vendor"
 					name="vendor_id"
@@ -60,9 +60,9 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 				/>
 
 				<Input name="cost" label="Cost" />
-			</Group>
+			</FormGroup>
 
-			<Group legend="Usage Details">
+			<FormGroup legend="Usage Details">
 				<SearchableDropdown
 					label="Default Location"
 					name="default_location_id"
@@ -72,7 +72,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 
 				<Checkbox name="requestable" label="Requestable" />
 
-			</Group>
+			</FormGroup>
 
 			<Textarea name="notes" label="Notes" />
 
