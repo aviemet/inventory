@@ -24,7 +24,6 @@ class CompaniesController < ApplicationController
   # GET /companies/:id
   # GET /companies/:id.json
   def show
-    ap({ slug: params[:company], company: company })
     render inertia: "Companies/Show", props: {
       company: company.as_json(include: [:locations, :departments, :items, :people])
     }
