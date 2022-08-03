@@ -36,12 +36,7 @@ class LdapSync
     @connection.search(base: @ldap.tree_base) do |entry|
       return unless entry[:objectclass].include?("user")
 
-      guid = GuidConverter::unpack_guid(entry[:objectguid].first)
-      person = find_or_create_person guid
-      
-      person.first_name = entry[:givenname][0]
-      person.last_name = entry[:sn][0]
-      person.job_title = entry[:title] ? entry[:title][0] : nil
+      person = person_from_entry
       
       username = entry[:samaccountname]
       email = entry[:mail]
@@ -69,16 +64,24 @@ class LdapSync
     end
   end
 
-  def find_or_create_person(guid)
-    Person.find_by_guid(guid) || Person.new({ guid: guid, company: @ldap.company })
-  end
-
   def save
     save_people
     update_manager_data
   end
 
   private
+
+  def person_from_entry(entry)
+    guid = GuidConverter::unpack_guid(entry[:objectguid].first)
+    person = find_or_create_person guid
+    person.first_name = entry[:givenname][0]
+    person.last_name = entry[:sn][0]
+    person.job_title = entry[:title] ? entry[:title][0] : nil
+  end
+
+  def find_or_create_person(guid)
+    Person.find_by_guid(guid) || Person.new({ guid: guid, company: @ldap.company })
+  end
 
   def save_people
     ActiveRecord::Base.transaction do
