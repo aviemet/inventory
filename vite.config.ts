@@ -5,6 +5,13 @@ import react from '@vitejs/plugin-react'
 import svgrPlugin from 'vite-plugin-svgr'
 
 export default defineConfig({
+	build: {
+		rollupOptions: {
+			external: [
+				'./app/frontend/Images/*'
+			]
+		}
+	},
 	plugins: [
 		tsconfigPaths(),
 		RubyPlugin(),
