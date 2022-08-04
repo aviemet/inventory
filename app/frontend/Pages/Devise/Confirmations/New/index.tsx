@@ -9,13 +9,14 @@ interface IConfirmationsNew {
 }
 
 const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
-	const handleResendConfirmation = ({ transform }: InertiaFormProps) => {
-		transform(data => ({ user: data }))
-	}
-
 	return (
 		<Tile>
-			<Form model="user" data={ { user: { email: user.email || '' } } } to={ Routes.userConfirmation() } onSubmit={ handleResendConfirmation } grid={ false }>
+			<Form
+				model="user"
+				data={ { user } }
+				to={ Routes.userConfirmation() }
+				grid={ false }
+			>
 				<Tile.Content>
 					<div>
 						<Heading order={ 3 }>Please check your email</Heading>
