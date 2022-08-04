@@ -22,7 +22,7 @@ class CustomFailure < Devise::FailureApp
   end
 
   def http_auth
-    self.status = 401
+    self.status = 200
     self.headers["WWW-Authenticate"] = %(Basic realm=#{Devise.http_authentication_realm.inspect}) if http_auth_header?
     self.content_type = request.format.to_s
     self.response_body = http_auth_body

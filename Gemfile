@@ -38,6 +38,7 @@ gem "js-routes", "~> 2.2"
 gem "net-ldap", "~> 0.17.1"
 gem "sidekiq", "~> 6.5"
 gem "foreman", "~> 0.87.2"
+gem "amazing_print", "~> 1.4"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"
@@ -61,7 +62,6 @@ group :development, :test do
   gem "rspec-rails", "~> 6.0.0.rc1"
   gem "factory_bot_rails", "~> 6.2"
   gem "faker", "~> 2.20"
-  gem "amazing_print", "~> 1.4"
   gem "pry-rails", "~> 0.3.9"
 
   gem "solargraph", ">= 0.44.3"

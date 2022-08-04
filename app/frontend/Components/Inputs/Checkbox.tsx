@@ -11,10 +11,11 @@ const CheckboxComponent = ({ onChange, value, id, name, label, ...props }: IChec
 
 	return (
 		<>
-			{ label && <Label required={ props.required } htmlFor={ inputId }>
+			{ /* { label && <Label required={ props.required } htmlFor={ inputId }>
 				{ label }
-			</Label> }
+			</Label> } */ }
 			<Checkbox
+				label={ label }
 				name={ name }
 				id={ inputId }
 				value={ value }
@@ -25,6 +26,7 @@ const CheckboxComponent = ({ onChange, value, id, name, label, ...props }: IChec
 				sx={ theme => ({
 					paddingLeft: theme.spacing.xs
 				}) }
+				required={ props.required }
 			/>
 		</>
 	)
