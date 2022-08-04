@@ -1,11 +1,12 @@
 import React from 'react'
 import Footer from '../Footer'
 import { createStyles } from '@mantine/core'
+import BackgroundImageUrl from '@/Images/robots-bw.svg?url'
 
 const useAuthStyles = createStyles(theme => ({
 	page: {
 		backgroundBlendMode: theme.other.colorSchemeOption('lighten', 'soft-light'), // 'soft-light' 'multiply'
-		backgroundImage: 'url("/Images/robots-bw.svg")',
+		backgroundImage: `url("${BackgroundImageUrl}")`,
 		backgroundColor: theme.colors[theme.primaryColor][6],
 		minHeight: '100vh',
 	},
