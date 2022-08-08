@@ -14,6 +14,8 @@ class CustomFailure < Devise::FailureApp
 
     # Incorrect credentials - wrong username or password
     if message == :invalid || message == :not_found_in_database
+      flash.now[:alert] = i18n_message(:invalid)
+      flash.keep(:alert)
       redirect_to new_user_session_path
     # Account with unconfirmed email
     elsif message == :unconfirmed

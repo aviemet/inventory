@@ -3,6 +3,8 @@ FactoryBot.define do
     transient do
       password { '$trongPassw0rd!' }
       confirmed { false }
+      company { true }
+      person { true }
     end
 
     after(:build) do |user, options|
@@ -11,10 +13,16 @@ FactoryBot.define do
 
     email { Faker::Internet.email }
     active { true }
-    person
-    active_company factory: :company
 
     after(:create) do |user, options|
+      if options.person
+        user.person = create(:person)
+      end
+      if options.company
+        company = create(:company)
+        user.add_role :admin, company
+        user.active_company = company
+      end
       user.confirm if options.confirmed
     end
   end
