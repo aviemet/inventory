@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development foreman start -f Procfile.dev"
+    "start": "foreman start -f Procfile",
+    "dev": "RAILS_ENV=development PORT=3000 NODE_ENV=development foreman start -f Procfile.dev"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -73,10 +74,5 @@
   },
   "browserslist": [
     "defaults"
-  ],
-  "babelMacros": {
-    "twin": {
-      "preset": "styled-components"
-    }
-  }
+  ]
 }

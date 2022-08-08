@@ -1,4 +1,3 @@
 web:  bundle exec puma -C config/puma.rb
 vite: bin/vite dev
-guard: bundle exec guard -g livereload -i
 sidekiq: bundle exec sidekiq
