@@ -21,9 +21,11 @@ export interface IItemFormProps {
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
+	manufacturers: Schema.Manufacturer[]
+	categories: Schema.Category[]
 }
 
-const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locations }: IItemFormProps) => {
+const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locations, manufacturers, categories }: IItemFormProps) => {
 	return (
 		<Form
 			model="item"
@@ -31,6 +33,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
+			onChange={ form => console.log({ data: form.data }) }
 		>
 
 			<Input name="name" label="Name" required autoFocus />
@@ -42,7 +45,11 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					required
 					options={ models }
 					fetchOnOpen="models"
-					newForm={ <ModelsForm to={ Routes.models() } /> }
+					newForm={ <ModelsForm
+						to={ Routes.models() }
+						manufacturers={ manufacturers }
+						categories={ categories }
+					/> }
 				/>
 
 				<Input name="serial" label="Serial" />

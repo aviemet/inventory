@@ -39,9 +39,12 @@ const SearchableDropdown = ({
 
 
 	const handleDropdownOpen = () => {
-		if(fetchOnOpen) {
-			Inertia.reload({ only: [fetchOnOpen] })
-		}
+		if(fetchOnOpen) Inertia.reload({ only: [fetchOnOpen] })
+	}
+
+	const handleNewFormSuccess = (data: { id: string|number }) => {
+		if(fetchOnOpen) Inertia.reload({ only: [fetchOnOpen] })
+		form.setData(inputName, String(data.id))
 	}
 
 	const Wrapper = newForm ? FlexWrapper : EmptyWrapper
@@ -63,7 +66,11 @@ const SearchableDropdown = ({
 					{ ...props }
 				/>
 			</Field>
-			{ newForm && <ModalFormButton title={ `Create New ${label}` } form={ newForm } /> }
+			{ newForm && <ModalFormButton
+				title={ `Create New ${label}` }
+				form={ newForm }
+				onSuccess={ handleNewFormSuccess }
+			/> }
 		</Wrapper>
 	)
 }

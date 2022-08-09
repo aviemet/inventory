@@ -12,12 +12,19 @@ export interface IModelFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
-	model: Schema.Model
+	model?: Partial<Schema.Model>
 	categories: Schema.Category[]
 	manufacturers: Schema.Manufacturer[]
 }
 
-const ModelForm = ({ to, method = 'post', onSubmit, model, categories, manufacturers }: IModelFormProps) => {
+const emptyModel: Partial<Schema.Model> = {
+	name: '',
+	model_number: '',
+	manufacturer_id: '',
+	category_id: ''
+}
+
+const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categories, manufacturers }: IModelFormProps) => {
 	return (
 		<Form
 			model="model"
@@ -31,6 +38,7 @@ const ModelForm = ({ to, method = 'post', onSubmit, model, categories, manufactu
 			<Input name="model_number" label="Model Number" required />
 
 			<SearchableDropdown
+				required
 				label="Manufacturer"
 				name="manufacturer_id"
 				options={ manufacturers }
@@ -39,6 +47,7 @@ const ModelForm = ({ to, method = 'post', onSubmit, model, categories, manufactu
 			/>
 
 			<SearchableDropdown
+				required
 				label="Category"
 				name="category_id"
 				options={ categories }
