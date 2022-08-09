@@ -933,17 +933,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/spotlight@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "@mantine/spotlight@npm:5.0.0"
+"@mantine/spotlight@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "@mantine/spotlight@npm:5.1.1"
   dependencies:
-    "@mantine/utils": 5.0.0
+    "@mantine/utils": 5.1.1
   peerDependencies:
-    "@mantine/core": 5.0.0
-    "@mantine/hooks": 5.0.0
+    "@mantine/core": 5.1.1
+    "@mantine/hooks": 5.1.1
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 6a9280e7be74a01bed21ed9d5e95344bbe9a49b64da7ffef6f6650d2f4c5d5bc75ae800880e5948b223ced18984a7032b9f89a85575c54bd24acf366cc20d4d2
+  checksum: 19faea97e9a421fce8158b1a1e4bee77fbac995134c6016a7e0e3963ac97d7868c2f58f908a8e68b233861074ffde559c5941c233e95016f57a47a3c60f5ba09
   languageName: node
   linkType: hard
 
@@ -982,6 +982,15 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: 7d167dd40e02e6f2cb830ede1aad091af7bf9eb42fa1b47a08451286e98d3fa1a88f49a3e179d7969be450f70fc3d02f9851b8655d310499fa6bc431978ed232
+  languageName: node
+  linkType: hard
+
+"@mantine/utils@npm:5.1.1":
+  version: 5.1.1
+  resolution: "@mantine/utils@npm:5.1.1"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 0b8790e50ca534eb47a4997962582c5943a64fb8577b91f7c0d66800408adb7a678d615eb6dd7cd25240287c33a1731ed85c448a65e7714f9f890153223ee0c0
   languageName: node
   linkType: hard
 
@@ -3782,7 +3791,7 @@ __metadata:
     "@mantine/notifications": ^5.0.0
     "@mantine/prism": ^5.0.0
     "@mantine/rte": ^5.0.0
-    "@mantine/spotlight": ^5.0.0
+    "@mantine/spotlight": ^5.1.1
     "@types/lodash": ^4.14.182
     "@types/react": ^17.0.47
     "@types/react-dom": ^17.0.17
