@@ -3,7 +3,9 @@ class VendorsController < ApplicationController
   include Searchable
 
   expose :vendors, -> { @active_company.vendors.includes_associated }
-  expose :vendor, -> { @active_company.vendors.includes_associated.find_by_slug(request.params[:slug]) }
+  expose :vendor, -> { 
+    @active_company.vendors.includes_associated.find_by_slug(request.params[:slug]) || Vendor.new(vendor_params)
+  }
 
   # GET /vendors
   def index
@@ -107,10 +109,11 @@ class VendorsController < ApplicationController
 
     if request.params&.[](:redirect) == false
       if vendor.save
-        render json: VendorBlueprint.render_as_json(vendor), status: 200
+        render json: VendorBlueprint.render_as_json(vendor), status: 201
       else
-        render json: { errors: vendor.errors }, status: 302
+        render json: { errors: vendor.errors }, status: 303
       end
+
     else
 
       if vendor.save
@@ -118,6 +121,7 @@ class VendorsController < ApplicationController
       else
         redirect_to new_vendor_path, inertia: { errors: vendor.errors }
       end
+
     end
   end
 

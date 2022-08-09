@@ -8,7 +8,7 @@ export interface IVendorFormProps {
 	vendor?: Partial<Schema.Vendor>
 }
 
-const emptyVendor = {
+const emptyVendor: Partial<Schema.Vendor> = {
 	name: '',
 	url: '',
 }

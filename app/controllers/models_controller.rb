@@ -3,7 +3,7 @@ class ModelsController < ApplicationController
   include Searchable
 
   expose :models, -> { Model.includes_associated }
-  expose :model, -> { @active_company.models.find_by_slug params[:slug] }
+  expose :model, -> { @active_company.models.includes_associated.find_by_slug(request.params[:slug]) || Model.new(model_params) }
 
   # GET /models
   def index
@@ -46,18 +46,32 @@ class ModelsController < ApplicationController
 
   # POST /models
   def create
+    ap({ params: model_params })
     model.company = @active_company
-    if model.save
-      redirect_to model, notice: 'License was successfully created'
+
+    if request.params&.[](:redirect) == false
+      
+      if model.save
+        render json: ModelBlueprint.render_as_json(model), status: 201
+      else
+        render json: { errors: model.errors }, status: 303
+      end
+
     else
-      redirect_to new_model_path, inertia: { errors: model.errors }
+
+      if model.save
+        redirect_to model, notice: 'Model was successfully created'
+      else
+        redirect_to new_model_path, inertia: { errors: model.errors }
+      end
+
     end
   end
 
   # PATCH/PUT /models/1
   def update
     if model.update(model_params)
-      redirect_to model, notice: 'License was successfully updated'
+      redirect_to model, notice: 'Model was successfully updated'
     else
       redirect_to edit_model_path, inertia: { errors: model.errors }
     end
@@ -79,6 +93,6 @@ class ModelsController < ApplicationController
   end
 
   def model_params
-    params.require(:model).permit(:name, :manufacturer_id, :category_id, :model_number, :notes)
+    params.require(:model).permit(:name, :model_number, :manufacturer_id, :category_id, :notes)
   end
 end

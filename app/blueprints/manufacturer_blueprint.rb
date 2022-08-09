@@ -14,5 +14,10 @@ class ManufacturerBlueprint < ApplicationBlueprint
 		association :accessories, blueprint: AccessoryBlueprint
 		association :consumables, blueprint: ConsumableBlueprint
 		association :components, blueprint: ComponentBlueprint
+    association :categories, blueprint: CategoryBlueprint
+  end
+
+  view :as_options do
+    only :id, :name
   end
 end
