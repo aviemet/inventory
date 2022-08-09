@@ -34,6 +34,8 @@ class AccessoriesController < ApplicationController
       models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
       vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
       locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
+      manufacturers: -> { ManufacturerBlueprint.render_as_json(@active_company.manufacturers, view: :as_options) },
+      categories: -> { CategoryBlueprint.render_as_json(@active_company.categories.find_by_type(:item), view: :as_options) }
     }
   end
 
@@ -44,6 +46,8 @@ class AccessoriesController < ApplicationController
       models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
       vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
       locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
+      manufacturers: -> { ManufacturerBlueprint.render_as_json(@active_company.manufacturers, view: :as_options) },
+      categories: -> { CategoryBlueprint.render_as_json(@active_company.categories.find_by_type(:item), view: :as_options) }
     }
   end
 
