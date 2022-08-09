@@ -9,6 +9,7 @@ import {
 	FormGroup,
 } from '@/Components/Form'
 import { Inertia } from '@inertiajs/inertia'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
 
 export interface IAccessoryFormProps {
 	to: string
@@ -18,9 +19,11 @@ export interface IAccessoryFormProps {
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
+	manufacturers: Schema.Manufacturer[]
+	categories: Schema.Category[]
 }
 
-const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendors, locations }: IAccessoryFormProps) => {
+const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendors, locations, manufacturers, categories }: IAccessoryFormProps) => {
 	return (
 		<Form
 			model="accessory"
@@ -32,12 +35,10 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 			<Input name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Accessory Details">
-				<SearchableDropdown
-					label="Model"
-					name="model_id"
-					required
-					options={ models }
-					onOpen={ () => Inertia.reload({ only: ['models'] }) }
+				<ModelsDropdown
+					models={ models }
+					manufacturers={ manufacturers }
+					categories={ categories }
 				/>
 
 				<Input name="serial" label="Serial" />
@@ -51,24 +52,13 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<SearchableDropdown
-					label="Vendor"
-					name="vendor_id"
-					options={ vendors }
-					filterMatchKeys={ ['name'] }
-					onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
-				/>
+				<VendorsDropdown vendors={ vendors } />
 
 				<Input name="cost" label="Cost" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-				<SearchableDropdown
-					label="Default Location"
-					name="default_location_id"
-					options={ locations }
-					onOpen={ () => Inertia.reload({ only: ['locations'] }) }
-				/>
+				<LocationsDropdown label="Default Location" name="default_location_id" locations={ locations } currencies={ [] } />
 
 				<Checkbox name="requestable" label="Requestable" />
 
