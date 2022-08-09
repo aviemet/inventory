@@ -46,7 +46,6 @@ class ModelsController < ApplicationController
 
   # POST /models
   def create
-    ap({ params: model_params })
     model.company = @active_company
 
     if request.params&.[](:redirect) == false

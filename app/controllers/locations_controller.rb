@@ -4,7 +4,8 @@ class LocationsController < ApplicationController
   include ContactableConcern
 
   expose :locations, -> { @active_company.locations.includes_associated }
-  expose :loc, model: Location, find_by: :slug, id: :slug # location is used as a local variable by redirect_to
+  # location is used as a local variable by redirect_to
+  expose :loc, -> { @active_company.locations.includes_associated.find_by_slug(request.params[:slug]) || Location.new(location_params) }
 
   # GET /locations
   def index
@@ -50,10 +51,23 @@ class LocationsController < ApplicationController
   # POST /locations
   def create
     loc.company = @active_company
-    if loc.save
-      redirect_to loc, notice: 'Location was successfully created'
+
+    if request.params&.[](:redirect) == false
+
+      if loc.save
+        render json: LocationBlueprint.render_as_json(loc), status: 201
+      else
+        render json: { errors: loc.errors }, status: 303
+      end
+
     else
-      redirect_to new_location_path, inertia: { errors: loc.errors }
+
+      if loc.save
+        redirect_to loc, notice: 'Location was successfully created'
+      else
+        redirect_to new_location_path, inertia: { errors: loc.errors }
+      end
+
     end
   end
 

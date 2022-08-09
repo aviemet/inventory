@@ -22,15 +22,15 @@ const ModalFormButton = ({ form, title, onSubmit, onSuccess }: IModalFormButtonP
 
 		axios[method](to, { ...data, redirect: false })
 			.then(response => {
-				console.log({ response })
-				if(response.statusText === 'OK') {
+				// console.log({ response })
+				if(response.statusText === 'OK' || response.statusText === 'Created') {
 					setModalOpen(false)
 					if(onSuccess) onSuccess(response.data)
 				}
 			})
 			.catch(error => {
 				if(error.response.data?.errors) {
-					console.log({ errors: error.response.data.errors })
+					// console.log({ errors: error.response.data.errors })
 					setError(error.response.data.errors)
 				}
 			})

@@ -3,15 +3,12 @@ import {
 	Form,
 	Input,
 	Textarea,
-	SearchableDropdown,
 	Checkbox,
 	DateTime,
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { Routes } from '@/lib'
-import VendorsForm from '@/Pages/Vendors/Form'
-import ModelsForm from '@/Pages/Models/Form'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
 
 export interface IItemFormProps {
 	to: string
@@ -33,23 +30,15 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			onChange={ form => console.log({ data: form.data }) }
 		>
 
 			<Input name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Item Details">
-				<SearchableDropdown
-					label="Model"
-					name="model_id"
-					required
-					options={ models }
-					fetchOnOpen="models"
-					newForm={ <ModelsForm
-						to={ Routes.models() }
-						manufacturers={ manufacturers }
-						categories={ categories }
-					/> }
+				<ModelsDropdown
+					models={ models }
+					manufacturers={ manufacturers }
+					categories={ categories }
 				/>
 
 				<Input name="serial" label="Serial" />
@@ -58,14 +47,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<SearchableDropdown
-					label="Vendor"
-					name="vendor_id"
-					options={ vendors }
-					filterMatchKeys={ ['name'] }
-					fetchOnOpen="vendors"
-					newForm={ <VendorsForm to={ Routes.vendors() } /> }
-				/>
+				<VendorsDropdown vendors={ vendors } />
 
 				<Input name="cost" label="Cost" type="currency" />
 
@@ -74,12 +56,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 
 			<FormGroup legend="Usage Details">
 
-				<SearchableDropdown
-					label="Default Location"
-					name="default_location_id"
-					options={ locations }
-					fetchOnOpen="locations"
-				/>
+				<LocationsDropdown label="Default Location" name="default_location_id" locations={ locations } currencies={ [] } />
 
 				<Checkbox name="requestable" label="Requestable" />
 

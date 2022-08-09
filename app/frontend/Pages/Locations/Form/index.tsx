@@ -12,12 +12,18 @@ export interface ILocationFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
-	location: Partial<Schema.Location>
+	location?: Partial<Schema.Location>
 	locations: Schema.Location[]
 	currencies: any
 }
 
-const LocationForm = ({ to, method = 'post', onSubmit, location, locations, currencies }: ILocationFormProps) => {
+const emptyLocation: Partial<Schema.Location> = {
+	name: '',
+	parent_id: '',
+	currency: '',
+}
+
+const LocationForm = ({ to, method = 'post', onSubmit, location = emptyLocation, locations, currencies }: ILocationFormProps) => {
 	return (
 		<Form
 			model="location"
