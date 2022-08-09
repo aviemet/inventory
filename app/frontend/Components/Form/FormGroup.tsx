@@ -17,11 +17,10 @@ const FormGroup = ({ children, legend, outline = true, compact = false }: IFormG
 				padding: '10px 16px',
 				borderRadius: 10,
 				marginBottom: 10,
-				background: theme.other.colorSchemeOption(theme.colors.gray[0], theme.colors.gray[8])
 			},
 			legend: {
 				padding: '0 10px',
-				color: theme.white,
+				color: theme.other.colorSchemeOption(theme.black, theme.white),
 			},
 		}) }>
 			{ legend && <legend>{ legend }</legend> }
