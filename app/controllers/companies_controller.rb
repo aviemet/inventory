@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
   skip_authorize_resource only: [:new, :create]
 
   expose :companies, -> { search(current_user.companies, sortable_fields) }
-  expose :company, -> { current_user.companies.find_by_slug params[:slug] }
+  expose :company, -> { current_user.companies.find_by_slug(params[:slug]) || Company.new(company_params) }
 
   # GET /companies
   # GET /companies.json
@@ -43,7 +43,7 @@ class CompaniesController < ApplicationController
 
   # POST /companies
   # POST /companies.json
-  def create    
+  def create
     if company.save
       # Assign admin permissions to user creating the record
       current_user.add_role :admin, company
