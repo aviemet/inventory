@@ -44,7 +44,6 @@ RSpec.describe "Assignments", type: :request do
       it "assigns a consumable to a assignables" do
         assign_toables.each do |key, model|
           params = assignment_params(:consumable, model)
-          ap({ params: params })
           params[:qty] = 2
 
           expect {
