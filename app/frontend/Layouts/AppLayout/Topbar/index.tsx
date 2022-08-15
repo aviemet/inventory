@@ -40,7 +40,9 @@ const Topbar = () => {
 				/>
 
 				<Box sx={ { flex: 1 } }>
-					<ActiveCompanyDropdown user={ user } />
+					<div>
+						<ActiveCompanyDropdown user={ user } />
+					</div>
 				</Box>
 
 				<Group>

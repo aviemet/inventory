@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     render inertia: "Users/Index"
   end
 
-  # GET /users/1
+  # GET /users/:id
   def show
     render inertia: "Users/Show", props: {
       user: UserBlueprint.render_as_json(user, view: :associations)
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     }
   end
 
-  # GET /users/1/edit
+  # GET /users/:id/edit
   def edit
     render inertia: "Users/Edit", props: {
       user: UserBlueprint.render_as_json(user, view: :associations)
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
     redirect_to complete_registration_path
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /users/:id
   def update
     if user.update(user_params)
       redirect_to user, notice: 'User was successfully updated.'
@@ -88,7 +88,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
+  # DELETE /users/:id
   def destroy
     user.destroy
     respond_to do |format|

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useRef } from 'react'
 import { useForm as useInertiaForm } from '@inertiajs/inertia-react'
 import { fillEmptyValues, getNestedValue, setNestedValue } from '@/lib'
 import { createContext } from '@/Components/Hooks'
@@ -6,6 +6,7 @@ import { FormProps } from 'react-html-props'
 import { Box } from '@mantine/core'
 import useFormStyles from './useFormStyles'
 import cx from 'clsx'
+import axios from 'axios';
 
 const [useForm, FormProvider] = createContext<Inertia.FormProps>()
 export { useForm, FormProvider }
@@ -15,6 +16,7 @@ interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'>
 	data: T
 	method?: HTTPVerb
 	to?: string
+	async?: boolean
 	grid?: boolean
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
 	onChange?: (object: Inertia.FormProps) => void
@@ -29,6 +31,7 @@ function Form<T extends Record<keyof T, unknown>>({
 	data,
 	method = 'post',
 	to,
+	async = false,
 	grid = true,
 	onSubmit,
 	onChange,
@@ -71,22 +74,38 @@ function Form<T extends Record<keyof T, unknown>>({
 		return getNestedValue(form.errors, key, separator)
 	}, [form.errors])
 
+	const formRef = useRef<HTMLFormElement>(null)
+
+	/**
+	 * Submits the form. If async was passed to the Form component, submits using axios,
+	 * otherwise submits using Inertia's form methods
+	 * @returns Promise
+	 */
+	const submit = async () => {
+		let shouldSubmit = true
+		if(onSubmit) {
+			if(onSubmit(contextValueObject) === false) shouldSubmit = false
+		}
+
+		if(shouldSubmit && to) {
+			if(async) {
+				console.log({ async, method, to, data: form.data })
+				return axios[method](to, form.data)
+			} else {
+				form[method](to)
+			}
+		}
+	}
+
 	// Expand Inertia's form object to include other useful data
 	// TS type definition is in app/frontend/types/inertia.d.ts
-	const contextValueObject = { ...form, setData, model, getData, getErrors, separator, method, to }
+	const contextValueObject = { ...form, setData, model, getData, getErrors, separator, method, to, submit }
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 		e.stopPropagation()
 
-		let submit = true
-		if(onSubmit) {
-			if(onSubmit(contextValueObject) === false) submit = false
-		}
-
-		if(submit && to) {
-			form[method](to)
-		}
+		submit()
 	}
 
 	// **** Conditional calls to callbacks **** \\
@@ -108,6 +127,7 @@ function Form<T extends Record<keyof T, unknown>>({
 				<form
 					onSubmit={ handleSubmit }
 					className={ cx({ 'format-grid': grid }, className) }
+					ref={ formRef }
 					{ ...props }
 				>
 					{ children }

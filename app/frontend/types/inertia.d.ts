@@ -39,6 +39,7 @@ declare global {
 			separator: string
 			method: HTTPVerb
 			to?: string
+			submit: () => Promise
 		}
 	}
 }
