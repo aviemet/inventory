@@ -103,4 +103,6 @@ Rails.application.routes.draw do
   resources :purchases, concerns: :bulk_delete
 
   resources :contracts, concerns: :bulk_delete
+
+  draw(:api)
 end

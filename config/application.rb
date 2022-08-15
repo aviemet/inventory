@@ -24,9 +24,11 @@ module Inventory
     config.generators do |g|
       g.test_framework      :rspec
 
+      g.template_engine     nil
       g.scaffold_stylesheet false
       g.stylesheets         false
       g.javascripts         false
+      g.assets              false
       g.helper              false
     end
   end
