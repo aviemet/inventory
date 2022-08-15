@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   patch "users/update_table_preferences/:id" => "users#update_table_preferences", as: :update_table_preferences
   patch "users/update_user_preferences/:id" => "users#update_user_preferences", as: :update_user_preferences
 
+  patch "users/:id/set_active_company/:company_id" => "users#set_acttive_company", as: :set_active_company
+
   # RESOURCEFUL PATHS #
 
   resources :users, concerns: :bulk_delete, except: [:create]
