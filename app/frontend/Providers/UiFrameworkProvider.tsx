@@ -6,15 +6,11 @@ import { usePage } from '@inertiajs/inertia-react'
 import axios from 'axios'
 import { Routes } from '@/lib'
 
-const useTheme = (colorScheme: 'light'|'dark') => ({
+const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	colorScheme,
 	fontFamily: 'Roboto, sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
 	primaryColor: 'violet',
-	primaryShade: {
-		light: 8,
-		dark: 6,
-	},
 	defaultRadius: 'xs',
 	transitionTimingFunction: 'ease-in-out',
 	headings: {
@@ -52,6 +48,8 @@ const useTheme = (colorScheme: 'light'|'dark') => ({
 		},
 	},
 })
+
+export { useTheme }
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
