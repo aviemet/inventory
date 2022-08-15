@@ -47,24 +47,21 @@ class ModelsController < ApplicationController
   # POST /models
   def create
     model.company = @active_company
-
-    if request.params&.[](:redirect) == false
-      
-      if model.save
+    
+    if model.save
+      if request.params&.[](:redirect) == false
         render json: ModelBlueprint.render_as_json(model), status: 201
       else
-        render json: { errors: model.errors }, status: 303
-      end
-
-    else
-
-      if model.save
         redirect_to model, notice: 'Model was successfully created'
+      end
+    else
+      if request.params&.[](:redirect) == false
+        render json: { errors: model.errors }, status: 303
       else
         redirect_to new_model_path, inertia: { errors: model.errors }
       end
-
     end
+
   end
 
   # PATCH/PUT /models/1
