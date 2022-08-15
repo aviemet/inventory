@@ -6,11 +6,13 @@ import { Flex } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
 import { Inertia } from '@inertiajs/inertia'
 
-interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onChange'> {
+interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onChange'|'onDropdownOpen'|'onDropdownClose'> {
 	label?: string
 	name: string
 	defaultValue?: string
 	onChange?: (option: string|null, form: Inertia.FormProps) => void
+	onDropdownOpen?: (form: InertiaFormProps) => void
+	onDropdownClose?: (form: InertiaFormProps) => void
 	fetchOnOpen?: string
 	newForm?: React.ReactElement
 }
@@ -24,6 +26,8 @@ const SearchableDropdown = ({
 	getLabel = option => option.name,
 	getValue = option => String(option.id),
 	onChange,
+	onDropdownOpen,
+	onDropdownClose,
 	fetchOnOpen,
 	newForm,
 	id,
@@ -37,9 +41,13 @@ const SearchableDropdown = ({
 		if(onChange) onChange(option, form)
 	}, [onChange, inputName])
 
-
 	const handleDropdownOpen = () => {
 		if(fetchOnOpen) Inertia.reload({ only: [fetchOnOpen] })
+		if(onDropdownOpen) onDropdownOpen(form)
+	}
+
+	const handleDropdownClose = () => {
+		if(onDropdownClose) onDropdownClose(form)
 	}
 
 	const handleNewFormSuccess = (data: { id: string|number }) => {
@@ -59,6 +67,7 @@ const SearchableDropdown = ({
 					value={ form.getData(inputName) }
 					onChange={ handleChange }
 					onDropdownOpen={ handleDropdownOpen }
+					onDropdownClose={ handleDropdownClose }
 					defaultValue={ defaultValue ?? form.getData(inputName) }
 					getLabel={ getLabel }
 					getValue={ getValue }

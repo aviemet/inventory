@@ -16,11 +16,14 @@ export default createStyles((theme) => ({
 
 		'.field': {
 			backgroundColor: theme.other.colorSchemeOption(theme.colors.gray[1], theme.colors.dark[7]),
-			marginBottom: theme.spacing.md,
 			width: '100%',
 			flex: 1,
 			borderColor: theme.colors[theme.primaryColor][2],
 			borderTopWidth: 2,
+
+			'& + .field': {
+				marginBottom: theme.spacing.md,
+			},
 
 			'&.required': {
 				borderColor: theme.colors[theme.primaryColor][8],

@@ -5,12 +5,13 @@ import Field from './Field'
 import { type InputProps } from '@mantine/core'
 import cx from 'clsx'
 
-interface IInputProps extends Omit<InputProps<'input'>, 'onChange'|'ref'> {
+interface IInputProps extends Omit<InputProps, 'onChange'> {
 	type?: 'text'|'password'|'number'|'currency'
 	label?: string
 	name: string
 	model?: string
 	onChange?: (value: string|number, form: Inertia.FormProps) => void
+	id?: string
 	compact?: boolean
 }
 

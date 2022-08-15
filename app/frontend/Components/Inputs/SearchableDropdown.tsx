@@ -20,6 +20,8 @@ const SearchableDropdownComponent = ({
 	label,
 	required,
 	id,
+	searchable = true,
+	clearable = true,
 	...props
 }: ISearchableDropdownProps) => {
 	const data = options.map(option => ({ label: getLabel(option), value: getValue(option) }))
@@ -36,15 +38,9 @@ const SearchableDropdownComponent = ({
 			<Select
 				size="md"
 				data={ data }
-				searchable
-				clearable
 				maxDropdownHeight={ 400 }
 				nothingFound="No Results"
 				onChange={ handleChange }
-				filter={ (value, item) =>
-					item?.label?.toLowerCase().includes(value.toLowerCase().trim()) ||
-        	item?.value?.toLowerCase().includes(value.toLowerCase().trim())
-				}
 				id={ id }
 				{ ...props }
 			/>
