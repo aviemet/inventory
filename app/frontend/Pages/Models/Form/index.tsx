@@ -20,8 +20,8 @@ export interface IModelFormProps {
 const emptyModel: Partial<Schema.Model> = {
 	name: '',
 	model_number: '',
-	manufacturer_id: '',
-	category_id: ''
+	manufacturer_id: undefined,
+	category_id: undefined
 }
 
 const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categories, manufacturers }: IModelFormProps) => {
