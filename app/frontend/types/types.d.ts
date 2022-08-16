@@ -89,6 +89,7 @@ declare global {
 	interface IDropdownWithModalButton {
 		name?: string
 		label?: string
+		fetchOnOpen?: string
 	}
 
 }

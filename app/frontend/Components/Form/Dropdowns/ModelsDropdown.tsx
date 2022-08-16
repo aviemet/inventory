@@ -18,7 +18,7 @@ const ModelsDropdown = ({ label = 'Model', name = 'model_id',  models, manufactu
 			options={ models }
 			fetchOnOpen="models"
 			newForm={ <ModelsForm
-				to={ Routes.models() }
+				to={ Routes.apiModels() }
 				manufacturers={ manufacturers }
 				categories={ categories }
 			/> }

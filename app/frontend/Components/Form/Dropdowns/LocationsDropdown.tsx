@@ -5,7 +5,7 @@ import LocationsForm from '@/Pages/Locations/Form'
 
 interface ILocationsDropdown extends IDropdownWithModalButton {
 	locations: Schema.Location[]
-	currencies: any
+	currencies?: any
 }
 
 const LocationsDropdown = ({ label = 'Location', name = 'location_id', locations, currencies }: ILocationsDropdown) => {
