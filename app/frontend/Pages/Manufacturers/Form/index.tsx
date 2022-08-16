@@ -4,16 +4,19 @@ import {
 	Input,
 	Submit,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
 
 export interface IManufacturerFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
-	manufacturer: Schema.Manufacturer
+	manufacturer?: Partial<Schema.Manufacturer>
 }
 
-const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer }: IManufacturerFormProps) => {
+const emptyManufacturer: Partial<Schema.Manufacturer> = {
+	name: ''
+}
+
+const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer = emptyManufacturer }: IManufacturerFormProps) => {
 	return (
 		<Form
 			model="manufacturer"
@@ -22,7 +25,7 @@ const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer }: IManu
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<Input name="name" label="Name" required />
 
 			<Submit>
 				{ manufacturer.id ? 'Update' : 'Create' } Manufacturer

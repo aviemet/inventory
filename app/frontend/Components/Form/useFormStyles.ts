@@ -14,6 +14,7 @@ export default createStyles((theme) => ({
 			},
 		},
 
+
 		'.field': {
 			backgroundColor: theme.other.colorSchemeOption(theme.colors.gray[1], theme.colors.dark[7]),
 			width: '100%',
@@ -21,8 +22,8 @@ export default createStyles((theme) => ({
 			borderColor: theme.colors[theme.primaryColor][2],
 			borderTopWidth: 2,
 
-			'& + .field': {
-				marginBottom: theme.spacing.md,
+			'& ~ .field, & ~ * > .field, & + button[type=submit]': {
+				marginTop: theme.spacing.md,
 			},
 
 			'&.required': {

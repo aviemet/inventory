@@ -1,4 +1,5 @@
 import React from 'react'
+import ManufacturersDropdown from '../../../Components/Form/Dropdowns/ManufacturersDropdown';
 import {
 	Form,
 	Input,
@@ -6,7 +7,6 @@ import {
 	SearchableDropdown,
 	Submit,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
 
 export interface IModelFormProps {
 	to: string
@@ -33,17 +33,12 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categori
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<Input name="name" label="Name" required />
 
 			<Input name="model_number" label="Model Number" required />
 
-			<SearchableDropdown
-				required
-				label="Manufacturer"
-				name="manufacturer_id"
-				options={ manufacturers }
-				filterMatchKeys={ ['name'] }
-				fetchOnOpen="manufacturers"
+			<ManufacturersDropdown
+				manufacturers={ manufacturers }
 			/>
 
 			<SearchableDropdown

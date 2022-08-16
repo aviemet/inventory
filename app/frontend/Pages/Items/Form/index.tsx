@@ -32,7 +32,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 			onSubmit={ onSubmit }
 		>
 
-			<Input name="name" label="Name" required autoFocus />
+			<Input name="name" label="Name" required />
 
 			<FormGroup legend="Item Details">
 				<ModelsDropdown
