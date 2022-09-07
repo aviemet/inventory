@@ -6,19 +6,18 @@ class Api::ModelsController < ApplicationController
     model.company = @active_company
     
     if model.save
-        render json: ModelBlueprint.render_as_json(model), status: 201
+      render json: ModelBlueprint.render_as_json(model), status: 201
     else
-        render json: { errors: model.errors }, status: 303
+      render json: { errors: model.errors }, status: 303
     end
-
   end
 
   # PATCH/PUT api/models/:id
   def update
     if model.update(model_params)
-      redirect_to model, notice: 'Model was successfully updated'
+      render json: ModelBlueprint.render_as_json(model), status: 201
     else
-      redirect_to edit_model_path, inertia: { errors: model.errors }
+      render json: { errors: model.errors }, status: 303
     end
   end
 

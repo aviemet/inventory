@@ -189,7 +189,19 @@ Given that an asset shouldn't belong to more than one company, a Company record 
 
 ### Blueprinter
 
-The Blueprinter gem is used to shape data passed to Inertia components. Avoid passing raw data as props, and instead prefer using a Blueprint to standardize the shape of data being passed to the client. Use `render_as_json` in the render method to parse the data properly.
+The Blueprinter gem is used to shape data passed to Inertia components. Avoid passing raw data as props, and instead prefer using a Blueprint to standardize the shape of data being passed to the client. Use `render_as_json` in the render method to parse the data properly. On any ActiveRecord model or relation you can call `.blueprint` for that model's Blueprinter object, and `.render` to call `render_as_json` on that model or collection. These have been defined in `app/models/application_record.rb` for the model, and `config/initializers/activerecord_extensions.rb` for collections.
+
+These are functionally the same:
+
+```ruby
+ItemBlueprint.render_as_json(Item.first, view: :as_options)
+Item.first.render(Item.first, view: :as_options)
+```
+
+```ruby
+ItemBlueprint
+Item.blueprint
+```
 
 ### UID
 

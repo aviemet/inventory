@@ -19,7 +19,7 @@ class ManufacturersController < ApplicationController
     }
   end
 
-  # GET /manufacturers/1
+  # GET /manufacturers/:id
   def show
     render inertia: "Manufacturers/Show", props: {
       manufacturer: ManufacturerBlueprint.render_as_json(manufacturers, view: :associations)
@@ -33,7 +33,7 @@ class ManufacturersController < ApplicationController
     }
   end
 
-  # GET /manufacturers/1/edit
+  # GET /manufacturers/:id/edit
   def edit
     render inertia: "Manufacturers/Edit", props: {
       manufacturer: ManufacturerBlueprint.render_as_json(manufacturer, view: :new)
@@ -50,7 +50,7 @@ class ManufacturersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /manufacturers/1
+  # PATCH/PUT /manufacturers/:id
   def update
     if manufacturer.update(manufacturer_params)
       redirect_to manufacturer, notice: 'Manufacturer was successfully updated'
@@ -59,7 +59,7 @@ class ManufacturersController < ApplicationController
     end
   end
 
-  # DELETE /manufacturers/1
+  # DELETE /manufacturers/:id
   def destroy
     manufacturer.destroy
     redirect_to manufacturers_url, notice: 'Manufacturer was successfully destroyed.'
