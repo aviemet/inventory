@@ -20,7 +20,15 @@ class ApplicationRecord < ActiveRecord::Base
     }
   end
 
+  def self.blueprint
+    "#{self.name}Blueprint".constantize
+  end
+
   def blueprint
     "#{self.class.name}Blueprint".constantize
+  end
+
+  def render(**args)
+    self.blueprint.render_as_json(self, **args)
   end
 end
