@@ -1,64 +1,29 @@
 class Api::StatusTypesController < ApplicationController
-  def Api::Categories
+  expose :status_type, -> { @active_company.status_types.find_by_slug params[:slug] }
+
+  # POST /api/status_types
+  def create
+    status_type.company = @active_company
+
+    if status_type.save
+      render json: StatusTypeBlueprint.render_as_json(status_type), status: 201
+    else
+      render json: { errors: status_type.errors }, status: 303
+    end
   end
 
-  def Api::Locations
+  # PATCH/PUT /api/status_types/:id
+  def update
+    if status_type.update(status_type_params)
+      render json: StatusTypeBlueprint.render_as_json(status_type), status: 201
+    else
+      render json: { errors: status_type.errors }, status: 303
+    end
   end
 
-  def Api::Items
-  end
+  private
 
-  def Api::Nics
-  end
-
-  def Api::Components
-  end
-
-  def Api::Accessories
-  end
-
-  def Api::Consumables
-  end
-
-  def Api::Licenses
-  end
-
-  def Api::Assignments
-  end
-
-  def Api::People
-  end
-
-  def Api::Vendors
-  end
-
-  def Api::Models
-  end
-
-  def Api::Manufacturers
-  end
-
-  def Api::Warranties
-  end
-
-  def Api::Fields
-  end
-
-  def Api::Fieldsets
-  end
-
-  def Api::IpLeases
-  end
-
-  def Api::Networks
-  end
-
-  def Api::Orders
-  end
-
-  def Api::Purchases
-  end
-
-  def Api::Contracts
+  def status_type_params
+    params.require(:status_type).permit(:name)
   end
 end
