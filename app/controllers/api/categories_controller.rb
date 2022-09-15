@@ -1,5 +1,5 @@
 class Api::CategoriesController < ApplicationController
-  expose :category, -> { @active_company.categories.find_by_slug params[:slug] }
+  expose :category, -> { @active_company.categories.find_by_slug params[:slug] || Category.new(category_params) }
 
   # POST /api/categories
   def create

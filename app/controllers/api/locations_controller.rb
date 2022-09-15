@@ -1,5 +1,5 @@
 class Api::LocationsController < ApplicationController
-  expose :location, -> { @active_company.locations.find_by_slug params[:slug] }
+  expose :location, -> { @active_company.locations.find_by_slug params[:slug] || Location.new(location_params) }
 
   # POST /api/locations
   def create

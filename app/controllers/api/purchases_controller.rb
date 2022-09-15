@@ -1,5 +1,5 @@
 class Api::PurchasesController < ApplicationController
-  expose :purchase, -> { @active_company.purchases.find_by_slug params[:slug] }
+  expose :purchase, -> { @active_company.purchases.find_by_slug params[:slug] || Purchase.new(purchase_params) }
 
   # POST /api/purchases
   def create
