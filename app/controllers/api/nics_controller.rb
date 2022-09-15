@@ -1,5 +1,5 @@
 class Api::NicsController < ApplicationController
-  expose :nic, -> { @active_company.nics.find_by_slug params[:slug] }
+  expose :nic, -> { @active_company.nics.find_by_slug params[:slug] || Nic.new(nic_params) }
 
   # POST /api/nics
   def create
