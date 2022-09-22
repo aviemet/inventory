@@ -5,6 +5,10 @@ import { Routes } from '@/lib'
 import { NewIcon, EditIcon } from '@/Components/Icons'
 import ItemsTable from '@/Pages/Items/Table'
 import AccessoriesTable from '@/Pages/Accessories/Table'
+import ConsumablesTable from '@/Pages/Consumables/Table'
+import ComponentsTable from '@/Pages/Components/Table'
+import LicensesTable from '@/Pages/Licenses/Table'
+import ContractsTable from '@/Pages/Contracts/Table'
 
 type ShowPageVendor = Schema.Vendor & {
 	items_count: number
@@ -147,7 +151,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 									{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
 								] }
 							/>
-							<AccessoriesTable />
+							<ConsumablesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
 					</Section>
@@ -169,7 +173,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 									{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
 								] }
 							/>
-							<AccessoriesTable />
+							<ComponentsTable />
 							<Table.Pagination />
 						</Table.TableProvider>
 					</Section>
@@ -191,7 +195,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 									{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
 								] }
 							/>
-							<AccessoriesTable />
+							<LicensesTable />
 							<Table.Pagination />
 						</Table.TableProvider>
 					</Section>
@@ -213,7 +217,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 									{ label: 'New Contract', href: Routes.newContract(), icon: NewIcon },
 								] }
 							/>
-							<AccessoriesTable />
+							<ContractsTable />
 							<Table.Pagination />
 						</Table.TableProvider>
 					</Section>

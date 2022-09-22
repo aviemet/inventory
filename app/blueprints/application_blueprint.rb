@@ -12,6 +12,11 @@ class ApplicationBlueprint < Blueprinter::Base
     exclude :created_at
   end
 
+  view :edit do
+    exclude :updated_at
+    exclude :created_at
+  end
+
   protected
 
   def self.field(method, options={}, &block)

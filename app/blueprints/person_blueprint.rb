@@ -37,4 +37,12 @@ class PersonBlueprint < ApplicationBlueprint
       person.location.id unless person.location.nil?
     end
   end
+
+  view :edit do
+    excludes :updated_at, :created_at
+    
+    field :department_id do |person|
+      person.department&.id
+    end
+  end
 end

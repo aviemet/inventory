@@ -55,8 +55,12 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-
-				<LocationsDropdown label="Default Location" name="default_location_id" locations={ locations } currencies={ [] } />
+				<LocationsDropdown
+					label="Default Location"
+					name="default_location_id"
+					locations={ locations }
+					currencies={ [] }
+				/>
 
 				<Checkbox name="requestable" label="Requestable" />
 

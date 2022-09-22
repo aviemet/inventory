@@ -6,7 +6,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/:id
   def show
     render inertia: "Assignments/Show", props: {
-      assignment: assignment
+      assignment: assignment.render
     }
   end
 
@@ -14,7 +14,7 @@ class AssignmentsController < ApplicationController
   def edit
     @assignable = assignment.assignable
     render inertia: "Assignments/Edit", props: {
-      assignment: assignment
+      assignment: assignment.render(view: :edit)
     }
   end
 

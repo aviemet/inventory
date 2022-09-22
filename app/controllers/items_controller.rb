@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
     paginated_items = items.page(params[:page] || 1)
 
     render inertia: "Items/Index", props: {
-      items: -> { ItemBlueprint.render_as_json(paginated_items, view: :associations) },
+      items: -> { paginated_items.render(view: :associations) },
       pagination: -> { {
         count: items.count,
         **pagination_data(paginated_items)
@@ -31,31 +31,31 @@ class ItemsController < ApplicationController
   # GET /hardware/:id
   def show
     render inertia: "Items/Show", props: {
-      item: -> { ItemBlueprint.render_as_json(item, view: :associations) }
+      item: -> { item.render(view: :associations) }
     }
   end
 
   # GET /hardware/new
   def new
     render inertia: "Items/New", props: {
-      item: ItemBlueprint.render_as_json(Item.new, view: :new),
-      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
-      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
-      manufacturers: -> { ManufacturerBlueprint.render_as_json(@active_company.manufacturers, view: :as_options) },
-      categories: -> { CategoryBlueprint.render_as_json(@active_company.categories.find_by_type(:item), view: :as_options) }
+      item: Item.new.render(view: :new),
+      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
+      vendors: -> { @active_company.vendors.render(view: :as_options) },
+      locations: -> { @active_company.locations.render(view: :as_options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
+      categories: -> { @active_company.categories.find_by_type(:item).render(view: :as_options) }
     }
   end
 
   # GET /hardware/:id/edit
   def edit
     render inertia: "Items/Edit", props: {
-      item: ItemBlueprint.render_as_json(item),
-      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
-      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
-      manufacturers: -> { ManufacturerBlueprint.render_as_json(@active_company.manufacturers, view: :as_options) },
-      categories: -> { CategoryBlueprint.render_as_json(@active_company.categories.find_by_type(:model), view: :as_options) }
+      item: item.render(view: :edit),
+      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
+      vendors: -> { @active_company.vendors.render(view: :as_options) },
+      locations: -> { @active_company.locations.render(view: :as_options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
+      categories: -> { @active_company.categories.find_by_type(:item).render(view: :as_options) }
     }
   end
 
@@ -75,11 +75,11 @@ class ItemsController < ApplicationController
     assignment = Assignment.new({ assignable: item })
 
     render inertia: "Items/Checkout", props: {
-      item: ItemBlueprint.render_as_json(item),
-      assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
-      people: -> { PersonBlueprint.render_as_json(@active_company.people.select([:id, :first_name, :last_name, :location_id]), view: :as_options) },
-      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+      item: item.render,
+      assignment: assignment.render(view: :new),
+      people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
+      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
+      locations: -> { @active_company.locations.render(view: :as_options) },
     }
   end
 
@@ -91,10 +91,10 @@ class ItemsController < ApplicationController
     assignment.active = false
 
     render inertia: "Items/Checkin", props: {
-      item: ItemBlueprint.render_as_json(item),
-      assignment: AssignmentBlueprint.render_as_json(assignment),
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
-      statuses: -> { StatusTypeBlueprint.render_as_json(StatusType.all) }
+      item: item.render,
+      assignment: assignment.render,
+      locations: -> { @active_company.locations.render(view: :as_options) },
+      statuses: -> { StatusType.all.render } # TODO: Is this scoped to a Company?
     }
   end
 

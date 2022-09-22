@@ -17,6 +17,10 @@ class VendorBlueprint < ApplicationBlueprint
     association :components, blueprint: ComponentBlueprint
   end
 
+  view :as_options do
+    only :id, :name
+  end
+
   view :show_page do
     field :items_count do |vendor|
       vendor.items.size
@@ -44,10 +48,6 @@ class VendorBlueprint < ApplicationBlueprint
 
     association :contact, blueprint: ContactBlueprint
     association :contracts, blueprint: ContractBlueprint
-  end
-
-  view :as_options do
-    only :id, :name
   end
 
 end

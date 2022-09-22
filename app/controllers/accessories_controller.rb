@@ -12,7 +12,7 @@ class AccessoriesController < ApplicationController
     paginated_accessories = accessories.page(params[:page] || 1)
 
     render inertia: "Accessories/Index", props: {
-      accessories: -> { accessories.render(view: :associations) },
+      accessories: -> { paginated_accessories.render(view: :associations) },
       pagination: -> { {
         count: accessories.count,
         **pagination_data(paginated_accessories)
@@ -42,7 +42,7 @@ class AccessoriesController < ApplicationController
   # GET /accessories/:id/edit
   def edit
     render inertia: "Accessories/Edit", props: {
-      accessory: accessory.render(accessory),
+      accessory: accessory.render(view: :edit),
       models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
       vendors: -> { @active_company.vendors.render(view: :as_options) },
       locations: -> { @active_company.locations.render(view: :as_options) },

@@ -1,4 +1,6 @@
 import { Instance } from 'flatpickr/dist/types'
+import { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
+import { type SelectProps } from '@mantine/core'
 
 declare global {
 	type HTTPVerb = 'post'|'put'|'get'|'patch'|'delete'
@@ -88,8 +90,10 @@ declare global {
 
 	interface IDropdownWithModalButton {
 		name?: string
+		model?: string
 		label?: string
 		fetchOnOpen?: string
+		required?: boolean
 	}
 
 }

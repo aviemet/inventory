@@ -11,7 +11,7 @@ class ManufacturersController < ApplicationController
     paginated_manufacturers = manufacturers.page(params[:page] || 1)
 
     render inertia: "Manufacturers/Index", props: {
-      manufacturers: ManufacturerBlueprint.render_as_json(paginated_manufacturers, view: :associations),
+      manufacturers: paginated_manufacturers.render(view: :associations),
       pagination: -> { {
         count: manufacturers.count,
         **pagination_data(paginated_manufacturers)
@@ -22,21 +22,21 @@ class ManufacturersController < ApplicationController
   # GET /manufacturers/:id
   def show
     render inertia: "Manufacturers/Show", props: {
-      manufacturer: ManufacturerBlueprint.render_as_json(manufacturers, view: :associations)
+      manufacturer: manufacturers.render(view: :associations)
     }
   end
 
   # GET /manufacturers/new
   def new
     render inertia: "Manufacturers/New", props: {
-      manufacturer: ManufacturerBlueprint.render_as_json(Manufacturer.new, view: :new)
+      manufacturer: Manufacturer.new.render(view: :new)
     }
   end
 
   # GET /manufacturers/:id/edit
   def edit
     render inertia: "Manufacturers/Edit", props: {
-      manufacturer: ManufacturerBlueprint.render_as_json(manufacturer, view: :new)
+      manufacturer: manufacturer.render(view: :edit)
     }
   end
 

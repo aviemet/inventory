@@ -13,7 +13,7 @@ class CompaniesController < ApplicationController
     paginated_companies = companies.page(params[:page] || 1)
 
     render inertia: "Companies/Index", props: {
-      companies: CompanyBlueprint.render_as_json(companies, view: :counts),
+      companies: paginated_companies.render(view: :counts),
       pagination: -> { {
         count: companies.count,
         **pagination_data(paginated_companies)
@@ -25,24 +25,25 @@ class CompaniesController < ApplicationController
   # GET /companies/:id.json
   def show
     render inertia: "Companies/Show", props: {
-      company: company.as_json(include: [:locations, :departments, :items, :people])
+      company: -> { company.render(view: :associations) }
     }
   end
 
   # GET /companies/new
   def new
-    render inertia: "Companies/New"
+    render inertia: "Companies/New", props: {
+      company: Company.new.render(view: :new)
+    }
   end
 
   # GET /companies/:id/edit
   def edit
     render inertia: "Companies/Edit", props: {
-      company: company.as_json(include: [:locations, :departments, :items, :people])
+      company: -> { company.render(view: :edit) }
     }
   end
 
   # POST /companies
-  # POST /companies.json
   def create
     if company.save
       # Assign admin permissions to user creating the record
@@ -56,7 +57,6 @@ class CompaniesController < ApplicationController
   end
 
   # PATCH/PUT /companies/:id
-  # PATCH/PUT /companies/:id.json
   def update
     if company.update(company_params)
       redirect_to company, notice: 'Company was successfully updated.'
@@ -66,7 +66,6 @@ class CompaniesController < ApplicationController
   end
 
   # DELETE /companies/:id
-  # DELETE /companies/:id.json
   def destroy
     company.destroy
     respond_to do |format|

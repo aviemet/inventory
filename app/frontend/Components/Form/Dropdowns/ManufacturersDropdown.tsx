@@ -7,7 +7,7 @@ interface IManufacturersDropdown extends IDropdownWithModalButton {
 	manufacturers: Schema.Manufacturer[]
 }
 
-const ManufacturersDropdown = ({ label = 'Manufacturer', name = 'manufacturer_id',  manufacturers }: IManufacturersDropdown) => {
+const ManufacturersDropdown = ({ label = 'Manufacturer', name = 'manufacturer_id',  manufacturers, ...props }: IManufacturersDropdown) => {
 	return (
 		<SearchableDropdown
 			label={ label }
@@ -19,6 +19,7 @@ const ManufacturersDropdown = ({ label = 'Manufacturer', name = 'manufacturer_id
 			newForm={ <ManufacturersForm
 				to={ Routes.apiManufacturers() }
 			/> }
+			{ ...props }
 		/>
 	)
 }

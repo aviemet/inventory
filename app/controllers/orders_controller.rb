@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
     paginated_orders = orders.page(params[:page] || 1)
 
     render inertia: "Orders/Index", props: {
-      orders: ContractBlueprint.render_as_json(paginated_orders, view: :associations),
+      orders: paginated_orders.render(view: :associations),
       pagination: -> { {
         count: orders.count,
         **pagination_data(paginated_orders)
@@ -23,14 +23,14 @@ class OrdersController < ApplicationController
   # GET /orders/1.json
   def show
     render inertia: "Orders/Show", props: {
-      order: -> { OrderBlueprint.render_as_json(order, view: :associations) }
+      order: -> { order.render(view: :associations) }
     }
   end
 
   # GET /orders/new
   def new
     render inertia: "Orders/New", props: {
-      order: OrderBlueprint.render_as_json(Order.new({ ordered_at: Time.zone.now })),
+      order: Order.new({ ordered_at: Time.zone.now }).render(view: :new),
       vendors: -> { @active_company.vendors }
     }
   end
@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     render inertia: "Orders/Edit", props: {
-      order: OrderBlueprint.render_as_json(order),
+      order: order.render(view: :edit),
       vendors: -> { @active_company.vendors }
     }
   end

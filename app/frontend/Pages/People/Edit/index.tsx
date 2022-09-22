@@ -20,7 +20,7 @@ const New = ({ person, ...models }: IUpdatePersonProps) => {
 			<Section>
 				<h1>{ title }</h1>
 
-				<PersonForm to={ Routes.people(person) } method="patch" person={ person } { ...models } />
+				<PersonForm to={ Routes.person(person) } method="patch" person={ person } { ...models } />
 			</Section>
 		</>
 	)

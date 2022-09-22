@@ -82,13 +82,6 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 							</div>
 
 							<div className="item-row">
-								<label>Assigned To:</label>
-								<div className="value">
-								Figure this out
-								</div>
-							</div>
-
-							<div className="item-row">
 								<label>Purchase Cost:</label>
 								<div className="value">
 									{ component.cost && formatter.currency(component.cost, component.cost_currency) }
@@ -108,6 +101,13 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 									{ component.vendor && <Link href={ Routes.vendor(component.vendor.slug) }>
 										{ component.vendor.name }
 									</Link> }
+								</div>
+							</div>
+
+							<div className="item-row">
+								<label>Quantity:</label>
+								<div className="value">
+									{ component.qty || 0 } / { component.min_qty || 0 }
 								</div>
 							</div>
 

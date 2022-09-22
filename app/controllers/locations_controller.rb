@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
     paginated_locations = locations.page(params[:page] || 1)
 
     render inertia: "Locations/Index", props: {
-      locations: LocationBlueprint.render_as_json(paginated_locations, view: :counts),
+      locations: paginated_locations.render(view: :counts),
       pagination: -> { {
         count: locations.count,
         **pagination_data(paginated_locations)
@@ -24,16 +24,16 @@ class LocationsController < ApplicationController
   # GET /locations/:slug
   def show
     render inertia: "Locations/Show", props: {
-      location: LocationBlueprint.render_as_json(loc, view: :associations)
+      location: loc.render(view: :associations)
     }
   end
 
   # GET /locations/new
   def new
     render inertia: "Locations/New", props: {
-      location: LocationBlueprint.render_as_json(Location.new, view: :new),
-      locations: -> { @active_company.locations.as_json },
-      departments: -> { @active_company.departments.as_json },
+      location: Location.new.render(view: :new),
+      locations: -> { @active_company.locations.render(view: :as_options) },
+      departments: -> { @active_company.departments.render(view: :as_options) },
       currencies: currencies,
     }
   end
@@ -41,9 +41,9 @@ class LocationsController < ApplicationController
   # GET /locations/:slug/edit
   def edit
     render inertia: "Locations/Edit", props: {
-      location: LocationBlueprint.render_as_json(loc),
-      locations: -> { @active_company.locations.where.not(id: loc.id) },
-      departments: -> { @active_company.departments.as_json },
+      location: loc.render(view: :edit),
+      locations: -> { @active_company.locations.where.not(id: loc.id).render },
+      departments: -> { @active_company.departments.render(view: :as_options) },
       currencies: currencies,
     }
   end
@@ -55,7 +55,7 @@ class LocationsController < ApplicationController
     if request.params&.[](:redirect) == false
 
       if loc.save
-        render json: LocationBlueprint.render_as_json(loc), status: 201
+        render json: loc.render, status: 201
       else
         render json: { errors: loc.errors }, status: 303
       end
