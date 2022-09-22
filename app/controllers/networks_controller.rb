@@ -12,7 +12,7 @@ class NetworksController < ApplicationController
     paginated_networks = networks.page(params[:page] || 1)
 
     render inertia: "Networks/Index", props: {
-      networks: -> { NetworkBlueprint.render_as_json(paginated_networks) },
+      networks: -> { paginated_networks.render },
       pagination: -> { {
         count: networks.count,
         **pagination_data(paginated_networks)
@@ -23,24 +23,24 @@ class NetworksController < ApplicationController
   # GET /networks/1
   # GET /networks/1.json
   def show
-    @ips = IpLease.includes(:item).in_network(self.network)
+
     render inertia: "Networks/Show", props: {
-      network: -> { NetworkBlueprint.render_as_json(network, view: :details) },
-      ips: -> { IpLeaseBlueprint.render_as_json(IpLease.includes(:item).in_network(self.network))}
+      network: -> { network.render(view: :details) },
+      ips: -> { IpLease.includes(:item).in_network(self.network).render }
     }
   end
 
   # GET /networks/new
   def new
     render inertia: "Networks/New", props: {
-      network: -> { NetworkBlueprint.render_as_json(Network.new) },
+      network: -> { Network.new.render(view: :new) },
     }
   end
 
   # GET /networks/1/edit
   def edit
     render inertia: "Networks/Edit", props: {
-      network: -> { NetworkBlueprint.render_as_json(network) },
+      network: -> { network.render(view: :edit) },
     }
   end
 

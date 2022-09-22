@@ -11,7 +11,7 @@ class LicensesController < ApplicationController
     paginated_licenses = licenses.page(params[:page] || 1)
 
     render inertia: "Licenses/Index", props: {
-      licenses: LicenseBlueprint.render_as_json(licenses, view: :associations),
+      licenses: paginated_licenses.render(view: :associations),
       pagination: -> { {
         count: licenses.count,
         **pagination_data(paginated_licenses)
@@ -22,27 +22,27 @@ class LicensesController < ApplicationController
   # GET /licenses/1
   def show
     render inertia: "Licenses/Show", props: {
-      license: -> { LicenseBlueprint.render_as_json(license, view: :associations) }
+      license: -> { license.render(view: :associations) }
     }
   end
 
   # GET /licenses/new
   def new
     render inertia: "Licenses/New", props: {
-      license: LicenseBlueprint.render_as_json(License.new, view: :new),
-      categories: -> { @active_company.categories.find_by_type(:License).as_json },
-      vendors: -> { @active_company.vendors.as_json },
-      manufacturers: -> { @active_company.manufacturers.as_json },
+      license: License.new.render(view: :new),
+      categories: -> { @active_company.categories.find_by_type(:License).render(view: :as_options) },
+      vendors: -> { @active_company.vendors.render(view: :as_options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
     }
   end
 
   # GET /licenses/1/edit
   def edit
     render inertia: "Licenses/Edit", props: {
-      license: LicenseBlueprint.render_as_json(license),
-      categories: -> { @active_company.categories.find_by_type(:License).as_json },
-      vendors: -> { @active_company.vendors.as_json },
-      manufacturers: -> { @active_company.manufacturers.as_json },
+      license: license.render(view: :edit),
+      categories: -> { @active_company.categories.find_by_type(:License).render(view: :as_options) },
+      vendors: -> { @active_company.vendors.render(view: :as_options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
     }
   end
 

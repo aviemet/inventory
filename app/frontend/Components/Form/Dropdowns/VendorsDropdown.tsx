@@ -7,7 +7,7 @@ interface IVendorsDropdown extends IDropdownWithModalButton {
 	vendors: Schema.Vendor[]
 }
 
-const VendorsDropdown = ({ label = 'Vendor', name = 'vendor_id', vendors }: IVendorsDropdown) => {
+const VendorsDropdown = ({ label = 'Vendor', name = 'vendor_id', vendors, ...props }: IVendorsDropdown) => {
 	return (
 		<SearchableDropdown
 			label={ label }
@@ -16,6 +16,7 @@ const VendorsDropdown = ({ label = 'Vendor', name = 'vendor_id', vendors }: IVen
 			filterMatchKeys={ ['name'] }
 			fetchOnOpen="vendors"
 			newForm={ <VendorsForm to={ Routes.vendors() } /> }
+			{ ...props }
 		/>
 	)
 }

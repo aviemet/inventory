@@ -9,6 +9,7 @@ import {
 	FormGroup,
 } from '@/Components/Form'
 import { Inertia } from '@inertiajs/inertia'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
 
 export interface IComponentFormProps {
 	to: string
@@ -18,9 +19,11 @@ export interface IComponentFormProps {
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
+	manufacturers: Schema.Manufacturer[]
+	categories: Schema.Category[]
 }
 
-const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendors, locations }: IComponentFormProps) => {
+const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendors, locations, manufacturers, categories }: IComponentFormProps) => {
 	return (
 		<Form
 			model="component"
@@ -29,15 +32,13 @@ const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendo
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<Input name="name" label="Name" required />
 
 			<FormGroup legend="Component Details">
-				<SearchableDropdown
-					label="Model"
-					name="model_id"
-					required
-					options={ models }
-					onOpen={ () => Inertia.reload({ only: ['models'] }) }
+				<ModelsDropdown
+					models={ models }
+					manufacturers={ manufacturers }
+					categories={ categories }
 				/>
 
 				<Input name="serial" label="Serial" />
@@ -50,23 +51,17 @@ const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendo
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<SearchableDropdown
-					label="Vendor"
-					name="vendor_id"
-					options={ vendors }
-					filterMatchKeys={ ['name'] }
-					onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
-				/>
+				<VendorsDropdown vendors={ vendors } />
 
 				<Input name="cost" label="Cost" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-				<SearchableDropdown
+				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
-					options={ locations }
-					onOpen={ () => Inertia.reload({ only: ['locations'] }) }
+					locations={ locations }
+					currencies={ [] }
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />

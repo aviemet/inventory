@@ -1,10 +1,10 @@
 class CategoriesController < ApplicationController
+  expose :categories, -> {  @active_company.categories.all }
   expose :category
 
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
     render inertia: "Categories/Index"
   end
 

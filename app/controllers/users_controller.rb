@@ -9,21 +9,21 @@ class UsersController < ApplicationController
   # GET /users/:id
   def show
     render inertia: "Users/Show", props: {
-      user: UserBlueprint.render_as_json(user, view: :associations)
+      user: user.render(view: :associations)
     }
   end
 
   # GET /users/new
   def new
     render inertia: "Users/New", props: {
-      user: UserBlueprint.render_as_json(user)
+      user: user.render()
     }
   end
 
   # GET /users/:id/edit
   def edit
     render inertia: "Users/Edit", props: {
-      user: UserBlueprint.render_as_json(user, view: :associations)
+      user: user.render(view: :associations)
     }
   end
 

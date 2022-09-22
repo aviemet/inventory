@@ -9,6 +9,7 @@ import { Inertia } from '@inertiajs/inertia'
 interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onChange'|'onDropdownOpen'|'onDropdownClose'> {
 	label?: string
 	name: string
+	model?: string
 	defaultValue?: string
 	onChange?: (option: string|null, form: Inertia.FormProps) => void
 	onDropdownOpen?: (form: InertiaFormProps) => void
@@ -21,6 +22,7 @@ const SearchableDropdown = ({
 	options,
 	label,
 	name,
+	model,
 	required,
 	defaultValue,
 	getLabel = option => option.name,
@@ -34,7 +36,7 @@ const SearchableDropdown = ({
 	...props
 }: IInputProps) => {
 	const form = useForm()
-	const { inputId, inputName } = useInputProps(name)
+	const { inputId, inputName } = useInputProps(name, model)
 
 	const handleChange = useCallback((option: string|null) => {
 		form.setData(inputName, option)

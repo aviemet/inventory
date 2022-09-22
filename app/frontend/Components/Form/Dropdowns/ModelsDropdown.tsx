@@ -9,7 +9,7 @@ interface IModelsDropdown extends IDropdownWithModalButton {
 	categories: Schema.Category[]
 }
 
-const ModelsDropdown = ({ label = 'Model', name = 'model_id',  models, manufacturers, categories }: IModelsDropdown) => {
+const ModelsDropdown = ({ label = 'Model', name = 'model_id',  models, manufacturers, categories, ...props }: IModelsDropdown) => {
 	return (
 		<SearchableDropdown
 			label={ label }
@@ -22,6 +22,7 @@ const ModelsDropdown = ({ label = 'Model', name = 'model_id',  models, manufactu
 				manufacturers={ manufacturers }
 				categories={ categories }
 			/> }
+			{ ...props }
 		/>
 	)
 }

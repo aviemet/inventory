@@ -96,6 +96,13 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 								</div>
 							</div>
 
+							<div className="item-row">
+								<label>Quantity:</label>
+								<div className="value">
+									{ consumable.qty || 0 }
+								</div>
+							</div>
+
 						</div>
 					</Tabs.Panel>
 

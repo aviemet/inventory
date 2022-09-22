@@ -10,7 +10,7 @@ class ContractsController < ApplicationController
     paginated_contracts = contracts.page(params[:page] || 1)
 
     render inertia: "Contracts/Index", props: {
-      contracts: ContractBlueprint.render_as_json(paginated_contracts, view: :associations),
+      contracts: paginated_contracts.render(view: :associations),
       pagination: -> { {
         count: contracts.count,
         **pagination_data(paginated_contracts)
@@ -21,25 +21,25 @@ class ContractsController < ApplicationController
   # GET /contracts/1
   def show
     render inertia: "Contracts/Show", props: {
-      contract: ContractBlueprint.render_as_json(contract, view: :associations),
+      contract: contract.render(view: :associations),
     }
   end
 
   # GET /contracts/new
   def new
     render inertia: "Contracts/New", props: {
-      contract: ContractBlueprint.render_as_json(Contract.new, view: :new),
-      vendors: -> { @active_company.vendors.as_json },
-      categories: -> { @active_company.categories.find_by_type(:Contract).as_json },
+      contract: Contract.new.render(view: :new),
+      vendors: -> { @active_company.vendors.render },
+      categories: -> { @active_company.categories.find_by_type(:Contract).render },
     }
   end
 
   # GET /contracts/1/edit
   def edit
     render inertia: "Contracts/Edit", props: {
-      contract: ContractBlueprint.render_as_json(contract),
-      vendors: -> { @active_company.vendors.as_json },
-      categories: -> { @active_company.categories.find_by_type(:Contract).as_json },
+      contract: contract.render(view: :edit),
+      vendors: -> { @active_company.vendors.render(view: :as_options) },
+      categories: -> { @active_company.categories.find_by_type(:Contract).render(view: :as_options) },
     }
   end
 

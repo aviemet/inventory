@@ -11,7 +11,7 @@ class ComponentsController < ApplicationController
     paginated_components = components.page(params[:page] || 1)
 
     render inertia: "Components/Index", props: {
-      components: -> { ComponentBlueprint.render_as_json(paginated_components, view: :associations) },
+      components: -> { paginated_components.render(view: :associations) },
       pagination: -> { {
         count: components.count,
         **pagination_data(paginated_components)
@@ -31,27 +31,27 @@ class ComponentsController < ApplicationController
   # GET /components/:id
   def show
     render inertia: "Components/Show", props: {
-      component: -> { ComponentBlueprint.render_as_json(component, view: :associations) }
+      component: -> { component.render(view: :associations) }
     }
   end
 
   # GET /components/new
   def new
     render inertia: "Components/New", props: {
-      component: ComponentBlueprint.render_as_json(Component.new, view: :new),
-      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
-      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
+      component: Component.new.render(view: :new),
+      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
+      vendors: -> { @active_company.vendors.render(view: :as_options) },
+      locations: -> { @active_company.locations.render(view: :as_options) },
     }
   end
 
   # GET /components/:id/edit
   def edit
     render inertia: "Components/Edit", props: {
-      component: ComponentBlueprint.render_as_json(component),
-      models: -> { ModelBlueprint.render_as_json(@active_company.models.find_by_category(:Item), view: :as_options) },
-      vendors: -> { VendorBlueprint.render_as_json(@active_company.vendors, view: :as_options) },
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations, view: :as_options) },
+      component: component.render(view: :edit),
+      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
+      vendors: -> { @active_company.vendors.render(view: :as_options) },
+      locations: -> { @active_company.locations.render(view: :as_options) },
     }
   end
     
@@ -64,10 +64,10 @@ class ComponentsController < ApplicationController
     assignment.assign_toable_type = :Item
 
     render inertia: "Components/Checkout", props: {
-      component: ComponentBlueprint.render_as_json(component),
-      assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
+      component: component.render,
+      assignment: assignment.render(view: :new),
       items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
     }
   end
 
@@ -79,10 +79,10 @@ class ComponentsController < ApplicationController
     assignment.active = false
 
     render inertia: "Components/Checkin", props: {
-      component: ComponentBlueprint.render_as_json(component),
-      assignment: AssignmentBlueprint.render_as_json(assignment),
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
-      statuses: -> { StatusTypeBlueprint.render_as_json(StatusType.all) }
+      component: component.render,
+      assignment: assignment.render,
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+      statuses: -> { StatusType.all.render }
     }
   end
 

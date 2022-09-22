@@ -8,7 +8,7 @@ interface ILocationsDropdown extends IDropdownWithModalButton {
 	currencies?: any
 }
 
-const LocationsDropdown = ({ label = 'Location', name = 'location_id', locations, currencies }: ILocationsDropdown) => {
+const LocationsDropdown = ({ label = 'Location', name = 'location_id', locations, currencies, ...props }: ILocationsDropdown) => {
 	return (
 		<SearchableDropdown
 			label={ label }
@@ -20,6 +20,7 @@ const LocationsDropdown = ({ label = 'Location', name = 'location_id', locations
 				locations={ locations }
 				currencies={ currencies }
 			/> }
+			{ ...props }
 		/>
 	)
 }

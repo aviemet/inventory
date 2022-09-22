@@ -3,7 +3,7 @@ import { Routes, formatter } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 
-const Index = () => {
+const LicensesTable = () => {
 	return (
 		<Table>
 			<Table.Head>
@@ -74,4 +74,4 @@ const Index = () => {
 	)
 }
 
-export default Index
+export default LicensesTable

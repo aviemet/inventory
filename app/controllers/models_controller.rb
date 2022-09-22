@@ -11,7 +11,7 @@ class ModelsController < ApplicationController
     paginated_models = models.page(params[:page] || 1)
 
     render inertia: "Models/Index", props: {
-      models: ModelBlueprint.render_as_json(paginated_models, view: :associations),
+      models: paginated_models.render(view: :associations),
       pagination: -> { {
         count: models.count,
         **pagination_data(paginated_models)
@@ -22,25 +22,25 @@ class ModelsController < ApplicationController
   # GET /models/1
   def show
     render inertia: "Models/Show", props: {
-      model: ModelBlueprint.render_as_json(model, view: :associations)
+      model: model.render(view: :associations)
     }
   end
 
   # GET /models/new
   def new
     render inertia: "Models/New", props: {
-      model: ModelBlueprint.render_as_json(Model.new, view: :new),
-      categories: -> { @active_company.categories.find_by_type(:Model).as_json },
-      manufacturers: -> { @active_company.manufacturers.as_json },
+      model: Model.new.render(view: :new),
+      categories: -> { @active_company.categories.find_by_type(:Model).render(view: :as_options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
     }
   end
 
   # GET /models/1/edit
   def edit
     render inertia: "Models/Edit", props: {
-      model: ModelBlueprint.render_as_json(model),
-      categories: -> { @active_company.categories.find_by_type(:Model).as_json },
-      manufacturers: -> { @active_company.manufacturers.as_json },
+      model: model.render(view: :edit),
+      categories: -> { @active_company.categories.find_by_type(:Model).render(view: :as_options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
     }
   end
 
@@ -50,7 +50,7 @@ class ModelsController < ApplicationController
     
     if model.save
       if request.params&.[](:redirect) == false
-        render json: ModelBlueprint.render_as_json(model), status: 201
+        render json: model.render, status: 201
       else
         redirect_to model, notice: 'Model was successfully created'
       end

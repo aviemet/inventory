@@ -11,7 +11,7 @@ class ConsumablesController < ApplicationController
     paginated_consumables = consumables.page(params[:page] || 1)
 
     render inertia: "Consumables/Index", props: {
-      consumables: -> { ConsumableBlueprint.render_as_json(consumables, view: :associations) },
+      consumables: -> { paginated_consumables.render(view: :associations) },
       pagination: -> { {
         count: consumables.count,
         **pagination_data(paginated_consumables)
@@ -22,27 +22,29 @@ class ConsumablesController < ApplicationController
   # GET /consumables/:id
   def show
     render inertia: "Consumables/Show", props: {
-      consumable: -> { ConsumableBlueprint.render_as_json(consumable, view: :associations) }
+      consumable: -> { consumable.render(view: :associations) }
     }
   end
 
   # GET /consumables/new
   def new
     render inertia: "Consumables/New", props: {
-      consumable: ConsumableBlueprint.render_as_json(Consumable.new, view: :new),
-      models: -> { @active_company.models.find_by_category(:Consumable).as_json },
-      vendors: -> { @active_company.vendors.as_json },
-      locations: -> { @active_company.locations.as_json },
+      consumable: Consumable.new.render(view: :new),
+      models: -> { @active_company.models.find_by_category(:Consumable).render },
+      vendors: -> { @active_company.vendors.render },
+      locations: -> { @active_company.locations.render },
+      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
+      categories: -> { @active_company.categories.find_by_type(:item).render(view: :as_options) }
     }
   end
 
   # GET /consumables/:id/edit
   def edit
     render inertia: "Consumables/Edit", props: {
-      consumable: ConsumableBlueprint.render_as_json(consumable),
-      models: -> { @active_company.models.find_by_category(:Consumable).as_json },
-      vendors: -> { @active_company.vendors.as_json },
-      locations: -> { @active_company.locations.as_json },
+      consumable: consumable.render(view: :edit),
+      models: -> { @active_company.models.find_by_category(:Consumable).render },
+      vendors: -> { @active_company.vendors.render },
+      locations: -> { @active_company.locations.render },
     }
   end
     
@@ -55,10 +57,10 @@ class ConsumablesController < ApplicationController
     assignment.assign_toable_type = :Item
 
     render inertia: "Consumables/Checkout", props: {
-      consumable: ConsumableBlueprint.render_as_json(consumable),
-      assignment: AssignmentBlueprint.render_as_json(assignment, view: :new),
-      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
+      consumable: consumable.render,
+      assignment: assignment.render(view: :new),
+      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
     }
   end
 
@@ -70,10 +72,10 @@ class ConsumablesController < ApplicationController
     assignment.active = false
 
     render inertia: "Consumables/Checkin", props: {
-      consumable: ConsumableBlueprint.render_as_json(consumable),
-      assignment: AssignmentBlueprint.render_as_json(assignment),
-      locations: -> { LocationBlueprint.render_as_json(@active_company.locations.select([:id, :slug, :name]), view: :as_options) },
-      statuses: -> { StatusTypeBlueprint.render_as_json(StatusType.all) }
+      consumable: consumable.render,
+      assignment: assignment.render,
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+      statuses: -> { StatusType.all.render }
     }
   end
 

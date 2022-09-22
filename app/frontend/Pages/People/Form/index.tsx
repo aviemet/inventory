@@ -6,6 +6,7 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { Inertia } from '@inertiajs/inertia'
+import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
 
 export interface IPersonFormProps {
 	to: string
@@ -14,9 +15,11 @@ export interface IPersonFormProps {
 	person: Schema.Person
 	departments: Schema.Department[]
 	people: Schema.Person[]
+	locations: Schema.Location[]
 }
 
-const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people }: IPersonFormProps) => {
+const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people, locations }: IPersonFormProps) => {
+
 	return (
 		<Form
 			model="person"
@@ -25,7 +28,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="first_name" label="First Name" required autoFocus />
+			<Input name="first_name" label="First Name" required />
 
 			<Input name="middle_name" label="Middle Name" required  />
 
@@ -33,12 +36,11 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 
 			<Input name="employee_number" label="Employee Number" required  />
 
-			<SearchableDropdown
-				label="Department"
+			<DepartmentsDropdown
+				departments={ departments }
+				locations={ locations }
 				name="department_id"
-				options={ departments }
-				filterMatchKeys={ ['name'] }
-				onOpen={ () => Inertia.reload({ only: ['departments'] }) }
+				required
 			/>
 
 			<Input name="job_title" label="Job Title" required  />
