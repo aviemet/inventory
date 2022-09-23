@@ -2460,15 +2460,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inertiajs/inertia-react@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "@inertiajs/inertia-react@npm:0.8.0"
+"@inertiajs/inertia-react@npm:^0.8.1":
+  version: 0.8.1
+  resolution: "@inertiajs/inertia-react@npm:0.8.1"
   dependencies:
     lodash.isequal: ^4.5.0
   peerDependencies:
     "@inertiajs/inertia": ^0.11.0
-    react: ^16.9.0 || ^17.0.0
-  checksum: 1a736dc49c9fde67a547b92e6d556fb0e416c2bf12be54c2b1c1f0e47d642677fa60e9094b5c6d713827e916875a55c567acb3b05fcee36779c57d4ed76bcf9d
+    react: ^16.9.0 || ^17.0.0 || ^18.0.0
+  checksum: 31b1e07be2753658bd1ab8b3feb567b602098d992a14d4decf51d608d05d363a709e3b398f9030992ec3465d6ffa1a8407403fde586d956204732f3238e9dadf
   languageName: node
   linkType: hard
 
@@ -3117,6 +3117,18 @@ __metadata:
   peerDependencies:
     react: ^16.13.1 || ^17.0.0
   checksum: bc84bd514bc127f898819a0c6f1a6915d9541011bd8aefa1fcc1c9bea8939f31051409e546bdec92babfa5b56092a16d05ef6d318304ac029299df5181dc94c8
+  languageName: node
+  linkType: hard
+
+"@mdx-js/react@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "@mdx-js/react@npm:2.1.3"
+  dependencies:
+    "@types/mdx": ^2.0.0
+    "@types/react": ">=16"
+  peerDependencies:
+    react: ">=16"
+  checksum: 206124b74b75d9c7e124be6bc6b27b9759875d5824e3c8a0249e6ec717b49fae4d84ccea35c4ade479f30781487c53cf965372409256ead8379850f6250908b3
   languageName: node
   linkType: hard
 
@@ -5330,6 +5342,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mdx@npm:^2.0.0":
+  version: 2.0.2
+  resolution: "@types/mdx@npm:2.0.2"
+  checksum: a10b78946019fe78f7dba749e90924c29a59b23171e7c6aa41f3220a491723c14729212b99eb4e9e1f847d5f4a574ddc4e03c49a2621470e9c822082874eeafc
+  languageName: node
+  linkType: hard
+
 "@types/minimatch@npm:*":
   version: 3.0.5
   resolution: "@types/minimatch@npm:3.0.5"
@@ -5456,14 +5475,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17.0.47":
-  version: 17.0.47
-  resolution: "@types/react@npm:17.0.47"
+"@types/react@npm:>=16, @types/react@npm:^18.0.21":
+  version: 18.0.21
+  resolution: "@types/react@npm:18.0.21"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 2e7fe0eb630cb77da03b6da308c58728c01b38e878118e9ff5cd8045181c8d4f32dc936e328f46a62cadb56e1fe4c5a911b5113584f93a99e1f35df7f059246b
+  checksum: 36c1a7c9d507e81e2e629c1ad3db51d7b84d8b010c2d5008da411874286c6a5ccc711ae1d4c470efc0bdc77153cc8804a40e927e929e5164c669ca41b84b846d
   languageName: node
   linkType: hard
 
@@ -11904,7 +11923,7 @@ __metadata:
     "@emotion/react": ^11.10.4
     "@emotion/styled": ^11.10.4
     "@inertiajs/inertia": ^0.11.0
-    "@inertiajs/inertia-react": ^0.8.0
+    "@inertiajs/inertia-react": ^0.8.1
     "@inertiajs/progress": ^0.2.7
     "@mantine/core": ^5.4.0
     "@mantine/dates": ^5.4.0
@@ -11917,7 +11936,7 @@ __metadata:
     "@mantine/prism": ^5.4.0
     "@mantine/rte": ^5.4.0
     "@mantine/spotlight": ^5.4.0
-    "@mdx-js/react": ^1.6.22
+    "@mdx-js/react": ^2.1.3
     "@storybook/addon-actions": ^6.5.12
     "@storybook/addon-docs": ^6.5.12
     "@storybook/addon-essentials": ^6.5.12
@@ -11931,7 +11950,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.0.3
     "@types/lodash": ^4.14.185
-    "@types/react": ^17.0.47
+    "@types/react": ^18.0.21
     "@types/react-dom": ^18.0.6
     "@types/react-flatpickr": ^3.8.7
     "@types/styled-components": ^5.1.26
