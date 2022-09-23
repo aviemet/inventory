@@ -11,7 +11,7 @@ interface IMenuLinkProps {
 const MenuLink = ({ children, href, icon, ...props }: IMenuLinkProps) => {
 	return (
 		<Link href={ href } { ...props }>
-			<ActionIcon size="xl" variant="transparent">{ icon  }</ActionIcon>
+			<ActionIcon color="dark" size="xl" variant="transparent">{ icon  }</ActionIcon>
 			<span>{ children }</span>
 		</Link>
 	)

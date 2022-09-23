@@ -7,6 +7,7 @@ export default createStyles(theme => {
 	const navItemWidth = navbarWidth.open + iconWidth
 	const openSpanWidth = navbarWidth.open - iconWidth - borderWidth
 	const bgColor = theme.other.colorSchemeOption(theme.fn.lighten(theme.colors.gray[1], 0.25), theme.colors.dark[6])
+
 	return {
 		root: {
 			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
@@ -58,11 +59,11 @@ export default createStyles(theme => {
 				borderLeftColor: 'transparent',
 
 				'&.active': {
-					borderLeftColor: theme.colors[theme.primaryColor][theme.primaryShade.dark],
+					borderLeftColor: theme.colors[theme.primaryColor],
 				},
 
 				'&:hover': {
-					borderLeftColor: theme.colors[theme.primaryColor][theme.primaryShade.light],
+					borderLeftColor: theme.colors[theme.primaryColor],
 					boxShadow: theme.shadows.lg,
 
 					'&, ul': {
