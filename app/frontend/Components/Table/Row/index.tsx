@@ -2,8 +2,11 @@ import React from 'react'
 import { useTableContext } from '../TableContext'
 import { TRProps } from 'react-html-props'
 import RowInContext from './RowInContext'
+import { Box, type BoxProps } from '@mantine/core'
 
-interface IRowProps extends Omit<TRProps, 'ref'> {
+export interface ITableRow extends BoxProps, TRProps {}
+
+interface IRowProps extends Omit<ITableRow, 'ref'> {
 	render?: any
 	name?: string
 }
@@ -19,9 +22,9 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 		)
 	} catch(e) {
 		return (
-			<tr { ...props }>
+			<Box component="tr" { ...props }>
 				{ children }
-			</tr>
+			</Box>
 		)
 	}
 }

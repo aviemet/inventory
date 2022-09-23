@@ -3,8 +3,9 @@ import { useTableSectionContext } from '../TableContext'
 import { TDProps } from 'react-html-props'
 import BodyCell from './BodyCell'
 import HeadCell from './HeadCell'
+import { type BoxProps } from '@mantine/core'
 
-export interface ICellProps extends TDProps {
+export interface ICellProps extends TDProps, BoxProps {
 	checkbox?: boolean
 	sort?: string
 	nowrap?: boolean
