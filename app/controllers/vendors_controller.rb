@@ -42,7 +42,7 @@ class VendorsController < ApplicationController
           pagination: {
             count: vendor.accessories.size,
             **pagination_data(paginated_accessories)
-        }
+          }
         }
       }),
       consumables: InertiaRails.lazy(-> { 
@@ -52,7 +52,7 @@ class VendorsController < ApplicationController
           pagination: {
             count: vendor.consumables.size,
             **pagination_data(paginated_consumables)
-        }
+          }
         }
       }),
       components: InertiaRails.lazy(-> { 
@@ -62,7 +62,7 @@ class VendorsController < ApplicationController
           pagination: {
             count: vendor.components.size,
             **pagination_data(paginated_components)
-        }
+          }
         }
       }),
       licenses: InertiaRails.lazy(-> { 
@@ -72,7 +72,7 @@ class VendorsController < ApplicationController
           pagination: {
             count: vendor.licenses.size,
             **pagination_data(paginated_licenses)
-        }
+          }
         }
       }),
       contracts: InertiaRails.lazy(-> { 
@@ -82,7 +82,7 @@ class VendorsController < ApplicationController
           pagination: {
             count: vendor.contracts.size,
             **pagination_data(paginated_contracts)
-        }
+          }
         }
       }),
     }

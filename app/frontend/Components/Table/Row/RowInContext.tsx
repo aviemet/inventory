@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, forwardRef } from 'react'
 import { useTableSectionContext } from '../TableContext'
-import { TRProps } from 'react-html-props'
+import { type ITableRow } from './index'
+import { Box } from '@mantine/core'
 import HeadCheckbox from './HeadCheckbox'
 import RowCheckbox from './RowCheckbox'
 
-interface IRowInContextProps extends TRProps {
+interface IRowInContextProps extends ITableRow {
 	name?: string
 	rows?: Record<string, any>[]
 	selectable: boolean
 	selected: Set<string>
 }
 
-const RowInContext = ({ children, name, rows, selectable, selected, ...props }: IRowInContextProps) => {
+const RowInContext = forwardRef<HTMLTableRowElement, IRowInContextProps>((
+	{ children, name, rows, selectable, selected, ...props },
+	ref
+) => {
 	const { section } = useTableSectionContext()
 	const [allChecked, setAllChecked] = useState(false)
 	const [indeterminate, setIndeterminate] = useState(false)
@@ -43,11 +47,11 @@ const RowInContext = ({ children, name, rows, selectable, selected, ...props }: 
 	}
 
 	return (
-		<tr { ...props }>
+		<Box component="tr" { ...props } ref={ ref }>
 			{ selectable && <Checkbox /> }
 			{ children }
-		</tr>
+		</Box>
 	)
-}
+})
 
 export default RowInContext

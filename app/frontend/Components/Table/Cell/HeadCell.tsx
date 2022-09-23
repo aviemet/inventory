@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTableContext } from '../TableContext'
 import HeadCellWithContext from './HeadCellWithContext'
+import { Box } from '@mantine/core'
 import { type ICellProps } from './index'
 
 const HeadCell = ({ children, ...props }: ICellProps) => {
@@ -13,7 +14,7 @@ const HeadCell = ({ children, ...props }: ICellProps) => {
 			</HeadCellWithContext>
 		)
 	} catch(e) {
-		return <th { ...props }>{ children }</th>
+		return <Box component="th" { ...props }>{ children }</Box>
 	}
 }
 
