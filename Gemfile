@@ -10,7 +10,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 
 # Assets
-gem "inertia_rails", "~> 2.0.1"
+gem "inertia_rails", "~> 3.0.0"
 gem "vite_rails", "~> 3.0"
 
 # Models
