@@ -85,20 +85,10 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 			<Section>
 				<Heading order={ 2 }>Addresses</Heading>
 
-				<Flex align="start">
-					{ Array(tableRows).fill('').map((_, i) => {
-						const start = Math.ceil(network.hosts.length / tableRows * i)
-						const end = Math.ceil((network.hosts.length / tableRows) * (i + 1))
-						return (
-							<NetworkDetailsTable
-								key={ i }
-								n={ i }
-								hosts={ network.hosts.slice(start, end) }
-								ips={ ips }
-							/>
-						)
-					}) }
-				</Flex>
+				<NetworkDetailsTable
+					hosts={ network.hosts }
+					ips={ ips }
+				/>
 			</Section>
 		</>
 	)
