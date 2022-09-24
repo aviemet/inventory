@@ -12,6 +12,17 @@ module IPAddress
     def as_json(data="")
       to_string
     end
+
+    def paginate_hosts(page: 1, limit: 256, offset: 0)
+      i = 0
+      self.each_host do |host|
+        ap({ ip: host.to_s })
+        i += 1
+        if i > (page * limit) + offset
+          break 
+        end
+      end
+    end
   end
 
   IPv6.class_eval do

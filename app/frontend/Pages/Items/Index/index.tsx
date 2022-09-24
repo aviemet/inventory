@@ -33,7 +33,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 						] }
 					/>
 
-					<ItemsTable items={ items } pagination={ pagination } />
+					<ItemsTable />
 
 					<Table.Pagination />
 				</Table.TableProvider>

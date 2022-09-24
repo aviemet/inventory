@@ -13,11 +13,13 @@ interface INetworkDetails extends Schema.Network {
 interface IShowNetworkProps {
 	network: INetworkDetails
 	ips: Schema.IpLease[]
+	pagination: Schema.Pagination
 }
 
-const Show = ({ network, ips }: IShowNetworkProps) => {
+const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 	const title = network.name || 'Show Network'
-	const tableRows = 3
+
+	console.log({ network, ips, pagination })
 
 	return (
 		<>
@@ -88,6 +90,7 @@ const Show = ({ network, ips }: IShowNetworkProps) => {
 				<NetworkDetailsTable
 					hosts={ network.hosts }
 					ips={ ips }
+					pagination={ pagination }
 				/>
 			</Section>
 		</>

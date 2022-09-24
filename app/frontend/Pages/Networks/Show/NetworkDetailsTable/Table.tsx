@@ -6,10 +6,9 @@ import { Table } from '@/Components'
 interface INetworkDetailsTableProps {
 	hosts: string[]
 	ips: Schema.IpLease[]
-	n: number
 }
 
-const NetworkDetailsTable = ({ hosts, ips, n }: INetworkDetailsTableProps) => {
+const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 	return (
 		<Table wrapper={ false } sx={ { width: '100%', flex: 1 } }>
 			<Table.Head sx={ { top: '-10px !important' } }>

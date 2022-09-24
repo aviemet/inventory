@@ -43,7 +43,18 @@ class ApplicationController < ActionController::Base
   end
 
   def pagination_data(model)
+    ap "*******PAGINATION_DATA**********"
     return if !model.respond_to? :total_pages
+    ap({
+      pages: model.total_pages,
+      limit: model.limit_value,
+      current_page: model.current_page,
+      next_page: model.next_page,
+      prev_page: model.prev_page,
+      is_first_page: model.first_page?,
+      is_last_page: model.last_page?
+    })
+
     {
       pages: model.total_pages,
       limit: model.limit_value,
