@@ -2,10 +2,11 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
+import { ITableProps } from '@/Components/Table/Table'
 
-const PeopleTable = () => {
+const PeopleTable = (props: ITableProps) => {
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="first_name">First Name</Table.Cell>

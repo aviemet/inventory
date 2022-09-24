@@ -2,10 +2,11 @@ import React from 'react'
 import { Routes, formatter } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton, CheckoutButton } from '@/Components/Button'
+import { type ITableProps } from '@/Components/Table/Table'
 
-const Index = () => {
+const Index = (props: ITableProps) => {
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
@@ -64,7 +65,7 @@ const Index = () => {
 
 						<Table.Cell className="table-column-fit">
 							<CheckoutButton href={ Routes.checkoutConsumable(consumable) } />
-							<EditButton as="button" href={ Routes.editConsumable(consumable) } />
+							<EditButton href={ Routes.editConsumable(consumable) } />
 						</Table.Cell>
 
 					</Table.Row>

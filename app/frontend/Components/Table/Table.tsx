@@ -15,7 +15,7 @@ import TableSection from './Section'
 import TableTitleSection from './Title'
 import ConditionalWrapper from '../ConditionalWrapper'
 
-interface ITableProps extends TableProps {
+export interface ITableProps extends TableProps {
 	fixed?: boolean
 	wrapper?: boolean
 }
@@ -37,7 +37,16 @@ type TableObjects = {
 
 export type TableObject = TableComponent & TableObjects
 
-const TableComponent: TableComponent & TableObjects = ({ children, className, wrapper = true, fixed = false, striped = true, highlightOnHover = true, ...props }) => {
+const TableComponent: TableComponent & TableObjects = ({
+	children,
+	className,
+	wrapper = true,
+	fixed = false,
+	striped = true,
+	highlightOnHover = true,
+	sx,
+	...props
+}) => {
 	const { classes } = useTableStyles(fixed)
 
 	return (
@@ -45,7 +54,16 @@ const TableComponent: TableComponent & TableObjects = ({ children, className, wr
 			condition={ wrapper }
 			wrapper={ children => <div className={ classes.wrapper }>{ children }</div> }
 		>
-			<Table striped={ striped } highlightOnHover={ highlightOnHover } className={ cx(className, classes.table) } { ...props }>
+			<Table
+				striped={ striped }
+				highlightOnHover={ highlightOnHover }
+				className={ cx(className, classes.table) }
+				sx={ {
+					...(wrapper ? {} : { thead: { top: -10 } }),
+					...sx
+				} }
+				{ ...props }
+			>
 				{ children }
 			</Table>
 		</ConditionalWrapper>
