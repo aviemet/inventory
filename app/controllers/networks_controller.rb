@@ -14,19 +14,32 @@ class NetworksController < ApplicationController
     render inertia: "Networks/Index", props: {
       networks: -> { paginated_networks.render },
       pagination: -> { {
-        count: networks.count,
+        count: networks.size,
         **pagination_data(paginated_networks)
-      } }
+      } },
     }
   end
 
-  # GET /networks/1
-  # GET /networks/1.json
+  # GET /networks/:id
   def show
+    # page = (params[:page] || 1).to_i
+    # limit = page && page > 1 ? 256 : 255
+    # offset = page && page > 1 ? 1 : 0
+
+    ips = IpLease.includes(:item).in_network(self.network)
+    # paginated_hosts = Kaminari.paginate_array(network&.address&.hosts&.map(&:to_s)).page(page).per(limit).offset(offset)
+
+    # ap({ page: page, limit: limit, offset: offset, count: network&.address&.hosts&.size, pagination_data: pagination_data(paginated_hosts) })
+
+    network.address.paginate_hosts
 
     render inertia: "Networks/Show", props: {
       network: -> { network.render(view: :details) },
-      ips: -> { IpLease.includes(:item).in_network(self.network).render }
+      ips: -> { ips.render },
+      # pagination: -> { {
+      #   count: network&.address&.hosts&.size,
+      #   **pagination_data(paginated_hosts)
+      # } }
     }
   end
 
@@ -37,7 +50,7 @@ class NetworksController < ApplicationController
     }
   end
 
-  # GET /networks/1/edit
+  # GET /networks/:id/edit
   def edit
     render inertia: "Networks/Edit", props: {
       network: -> { network.render(view: :edit) },
@@ -45,7 +58,6 @@ class NetworksController < ApplicationController
   end
 
   # POST /networks
-  # POST /networks.json
   def create
     network.company = @active_company
     if network.save
@@ -55,8 +67,7 @@ class NetworksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /networks/1
-  # PATCH/PUT /networks/1.json
+  # PATCH/PUT /networks/:id
   def update
     if network.update(network_params)
       redirect_to network, notice: 'License was successfully updated'
@@ -65,8 +76,7 @@ class NetworksController < ApplicationController
     end
   end
 
-  # DELETE /networks/1
-  # DELETE /networks/1.json
+  # DELETE /networks/:id
   def destroy
     network.destroy
     respond_to do |format|
