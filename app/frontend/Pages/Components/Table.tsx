@@ -3,8 +3,9 @@ import { Routes, formatter } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { isNil } from 'lodash'
+import { type ITableProps } from '@/Components/Table/Table'
 
-const ComponentsIndex = () => {
+const ComponentsIndex = (props: ITableProps) => {
 	const qty = (accessory: Schema.Accessory) => {
 		if(isNil(accessory.qty)) {
 			return '-'
@@ -15,7 +16,7 @@ const ComponentsIndex = () => {
 	}
 
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
@@ -78,7 +79,7 @@ const ComponentsIndex = () => {
 								:
 								<CheckoutButton href={ Routes.checkoutComponent(component) } />
 							}
-							<EditButton as="button" href={ Routes.editComponent(component) } />
+							<EditButton href={ Routes.editComponent(component) } />
 						</Table.Cell>
 
 					</Table.Row>

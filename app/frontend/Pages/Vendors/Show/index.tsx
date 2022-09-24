@@ -92,24 +92,22 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 				{ /*********** ITEMS ***********/ }
 				<Tabs.Panel value={ tabs.items }>
 					<Section>
-						<div className='fullHeight'>
-							<Table.TableProvider
-								selectable
-								hideable
-								model="items"
-								rows={ items?.data }
-								pagination={ items?.pagination }
-							>
-								<Table.Title
-									title={ title }
-									menuOptions={ [
-										{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
-									] }
-								/>
-								<ItemsTable />
-								<Table.Pagination />
-							</Table.TableProvider>
-						</div>
+						<Table.TableProvider
+							selectable
+							hideable
+							model="items"
+							rows={ items?.data }
+							pagination={ items?.pagination }
+						>
+							<Table.Title
+								title={ title }
+								menuOptions={ [
+									{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+								] }
+							/>
+							<ItemsTable wrapper={ false } />
+							<Table.Pagination />
+						</Table.TableProvider>
 					</Section>
 				</Tabs.Panel>
 

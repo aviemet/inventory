@@ -2,10 +2,11 @@ import React from 'react'
 import { Routes, formatter } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
+import { type ITableProps } from '@/Components/Table/Table'
 
-const ContractsIndex = () => {
+const ContractsIndex = (props: ITableProps) => {
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
@@ -50,7 +51,7 @@ const ContractsIndex = () => {
 						</Table.Cell>
 
 						<Table.Cell className="table-column-fit">
-							<EditButton as="button" href={ Routes.editContract(contract) } />
+							<EditButton href={ Routes.editContract(contract) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

@@ -4,6 +4,7 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 	wrapper: {
 		overflow: 'auto',
 		position: 'relative',
+		height: '100%',
 		maxHeight: '100%',
 		borderTop: `1px solid ${theme.other.colorSchemeOption(theme.colors.gray[2], theme.colors.gray[9])}`
 	},
