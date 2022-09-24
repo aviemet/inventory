@@ -166,18 +166,15 @@ if Rails.env == "development"
           vendor: Vendor.find(Vendor.pluck(:id).sample),
           default_location: Location.find(Location.pluck(:id).sample),
           company: company,
+          nics: [ Nic.new({
+            nic_type: :ethernet,
+            mac: Faker::Internet.unique.mac_address
+          }) ]
         })
 
         if n % 2 != 0
-          nic = Nic.create({
-            nic_type: 0,
-            mac: Faker::Internet.unique.mac_address,
-            item: i,
-          })
-
-          IpLease.create({
+          i.nics.first.ip_leases << IpLease.new({
             address: n < 80 ? network.to_a[n] : Faker::Internet.unique.private_ip_v4_address,
-            nic: nic,
           })
         end
       end

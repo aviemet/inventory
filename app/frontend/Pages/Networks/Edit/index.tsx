@@ -20,7 +20,7 @@ const New = ({ network, ...models }: IUpdateNetworkProps) => {
 			<Section>
 				<h1>{ title } for { user.active_company!.name }</h1>
 
-				<NetworkForm to={ Routes.networks(network) } method="patch" network={ network } { ...models } />
+				<NetworkForm to={ Routes.network(network) } method="patch" network={ network } { ...models } />
 			</Section>
 		</>
 	)

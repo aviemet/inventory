@@ -43,18 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def pagination_data(model)
-    ap "*******PAGINATION_DATA**********"
     return if !model.respond_to? :total_pages
-    ap({
-      pages: model.total_pages,
-      limit: model.limit_value,
-      current_page: model.current_page,
-      next_page: model.next_page,
-      prev_page: model.prev_page,
-      is_first_page: model.first_page?,
-      is_last_page: model.last_page?
-    })
-
     {
       pages: model.total_pages,
       limit: model.limit_value,
@@ -63,6 +52,23 @@ class ApplicationController < ActionController::Base
       prev_page: model.prev_page,
       is_first_page: model.first_page?,
       is_last_page: model.last_page?
+    }
+  end
+
+  def host_pagination_data(address)
+    size = network&.address&.size
+    pages =  (size / 256).to_i
+    limit = params[:limit] || 256
+    current_page = params[:page].to_i || 1
+
+    {
+      pages: pages,
+      limit: limit,
+      current_page: current_page,
+      next_page: current_page + 1 > pages ? nil : current_page + 1,
+      prev_page: current_page - 1 < 0 ? nil : current_page - 1,
+      is_first_page: current_page == 1,
+      is_last_page: current_page == pages
     }
   end
 

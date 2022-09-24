@@ -7,6 +7,12 @@ import axios from 'axios'
 import { Routes } from '@/lib'
 
 const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
+	breakpoints: {
+		'2xs': 480,
+		lg: 1280,
+		xl: 1440,
+		'2xl': 1920,
+	},
 	colorScheme,
 	fontFamily: 'Roboto, sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',

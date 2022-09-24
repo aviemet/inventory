@@ -63,8 +63,6 @@ class PeopleController < ApplicationController
       person_params[:department] = @active_company.departments.find(person_params[:department_id])
     end
 
-    ap({ person_params: person_params })
-
     if person.update(person_params.except(:department_id).merge({
       department: @active_company.departments.find(person_params[:department_id]) || nil
     }))

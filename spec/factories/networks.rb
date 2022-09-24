@@ -1,10 +1,14 @@
 FactoryBot.define do
   factory :network do
+    transient do
+      subnet { 24 }
+    end
+
     name { Faker::Name.name }
-    ip { Faker::Internet.ip_v4_cidr }
-    gateway { Faker::Internet.private_ip_v4_address }
-    dhcp_start { Faker::Internet.private_ip_v4_address }
-    dhcp_end { Faker::Internet.private_ip_v4_address }
+    address { "10.0.0.1/#{subnet}" }
+    gateway { '10.0.0.1' }
+    dhcp_start { '10.0.0.100' }
+    dhcp_end { '10.0.0.254' }
     vlan_id { Faker::Number.number(digits: 2) }
     association :company, strategy: :create
   end

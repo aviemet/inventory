@@ -1,5 +1,7 @@
 class Nic < ApplicationRecord
-  enum nic_type: [:ethernet, :wifi, :fiber]
+  enum nic_type: [:ethernet, :wifi, :fiber, :cellular]
+
+  after_initialize :set_defaults
 
   audited
 
@@ -10,4 +12,10 @@ class Nic < ApplicationRecord
   has_many :ip_leases
 
   accepts_nested_attributes_for :ips
+
+  private
+
+  def set_defaults
+    self.nic_type ||= :wifi
+  end
 end

@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   include Fieldable
   include PgSearch::Model
 
+  after_create :ensure_nic
 
   pg_search_scope(
     :search,
@@ -50,6 +51,12 @@ class Item < ApplicationRecord
     else
       self.default_location
     end
+  end
+
+  private
+
+  def ensure_nic
+    self << Nic.new if self.nics.empty?
   end
 
 end

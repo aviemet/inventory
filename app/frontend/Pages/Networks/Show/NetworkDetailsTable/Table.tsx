@@ -24,7 +24,7 @@ const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 
 					return (
 						<Table.Row key={ host } sx={ { height: 40 } }>
-							<Table.Cell>{ host }</Table.Cell>
+							<Table.Cell fitContent>{ host }</Table.Cell>
 							<Table.Cell>{ item && <Link href={ Routes.item(item) }>{ item.name }</Link> }</Table.Cell>
 						</Table.Row>
 					)
