@@ -6,7 +6,7 @@ import HeadCell from './HeadCell'
 import { type BoxProps } from '@mantine/core'
 
 export interface ICellProps extends TDProps, BoxProps {
-	checkbox?: boolean
+	fitContent?: boolean
 	sort?: string
 	nowrap?: boolean
 	hideable?: false|string

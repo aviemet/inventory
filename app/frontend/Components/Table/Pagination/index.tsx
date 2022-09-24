@@ -31,7 +31,7 @@ const PaginationComponent = () => {
 
 			<Pagination
 				total={ pages }
-				page={ current_page }
+				page={ current_page || 1 }
 				itemComponent={ props => <PageItem total={ pages } { ...props } /> }
 				color={ theme.primaryColor }
 				sx={ theme => ({

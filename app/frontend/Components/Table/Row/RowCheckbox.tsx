@@ -24,7 +24,7 @@ const RowCheckbox = ({ name, selected }: IRowCheckBox) => {
 
 
 	return (
-		<Cell checkbox>
+		<Cell fitContent>
 			<Checkbox checked={ selected?.has(name) } onChange={ handleClick } />
 		</Cell>
 	)

@@ -26,6 +26,7 @@ class ItemBlueprint < ApplicationBlueprint
     association :default_location, blueprint: LocationBlueprint
     association :location, blueprint: LocationBlueprint
     association :status_type, blueprint: StatusTypeBlueprint
+    association :nics, blueprint: NicBlueprint
   end
 
   view :new do

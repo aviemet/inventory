@@ -22,24 +22,15 @@ class NetworksController < ApplicationController
 
   # GET /networks/:id
   def show
-    # page = (params[:page] || 1).to_i
-    # limit = page && page > 1 ? 256 : 255
-    # offset = page && page > 1 ? 1 : 0
-
     ips = IpLease.includes(:item).in_network(self.network)
-    # paginated_hosts = Kaminari.paginate_array(network&.address&.hosts&.map(&:to_s)).page(page).per(limit).offset(offset)
-
-    # ap({ page: page, limit: limit, offset: offset, count: network&.address&.hosts&.size, pagination_data: pagination_data(paginated_hosts) })
-
-    network.address.paginate_hosts
 
     render inertia: "Networks/Show", props: {
-      network: -> { network.render(view: :details) },
+      network: -> { network.render(view: :details, page: (params[:page] || 1).to_i) },
       ips: -> { ips.render },
-      # pagination: -> { {
-      #   count: network&.address&.hosts&.size,
-      #   **pagination_data(paginated_hosts)
-      # } }
+      pagination: -> { {
+        count: network&.address&.size - 2,
+        **host_pagination_data(network&.address)
+      } }
     }
   end
 
@@ -61,7 +52,7 @@ class NetworksController < ApplicationController
   def create
     network.company = @active_company
     if network.save
-      redirect_to network, notice: 'License was successfully created'
+      redirect_to network, notice: 'Network was successfully created'
     else
       redirect_to new_network_path, inertia: { errors: network.errors }
     end
@@ -70,7 +61,7 @@ class NetworksController < ApplicationController
   # PATCH/PUT /networks/:id
   def update
     if network.update(network_params)
-      redirect_to network, notice: 'License was successfully updated'
+      redirect_to network, notice: 'Network was successfully updated'
     else
       redirect_to edit_network_path, inertia: { errors: network.errors }
     end
@@ -86,6 +77,8 @@ class NetworksController < ApplicationController
   end
 
   private
+
+
 
   def sortable_fields
     %w(name address gateway dhcp_start dhcp_end vlan_id).freeze

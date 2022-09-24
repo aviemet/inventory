@@ -1,8 +1,11 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Table, Box, History, Badge } from '@/Components'
-import { formatter, Routes } from '@/lib'
+import { Section, Menu, Flex, Heading, Tabs } from '@/Components'
+import { Routes } from '@/lib'
 import { EditIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
+import Details from './Details'
+import ItemHistory from './ItemHistory'
+import Associations from './Associations'
 
 interface IShowItemProps {
 	item: Schema.Item
@@ -14,23 +17,9 @@ const tabs = {
 	associations: 'associations',
 }
 
-const AssignmentLink = ({ assignment }: { assignment?: Schema.Assignment }) => {
-	if(!assignment) return <></>
-
-	// @ts-ignore
-	const path = Routes[assignment.assign_toable_type.toLowerCase()]
-
-	return <Link href={ path(assignment.assign_toable_id) }>{ assignment.assign_toable.name }</Link>
-}
 
 const Show = ({ item }: IShowItemProps) => {
 	const title = item.name ?? 'Item Details'
-
-	const itemAssignment = useCallback(() => {
-		if(!item.assigned || !item.assignments) return
-
-		return item.assignments.find(assignment => assignment.active)
-	}, [item])
 
 	return (
 		<>
@@ -67,104 +56,15 @@ const Show = ({ item }: IShowItemProps) => {
 					</Tabs.List>
 
 					<Tabs.Panel value="details">
-						<Heading order={ 3 }>Details</Heading>
-
-						<Box sx={ theme => ({
-							maxWidth: `${theme.breakpoints.sm}px`
-						}) }>
-
-							<Table>
-								<Table.Body>
-
-									<Table.Row>
-										<Table.Cell>{ item.assigned ? 'Assigned To' : 'Status' }</Table.Cell>
-										<Table.Cell>
-											{ item.assigned ?
-												<AssignmentLink assignment={ itemAssignment() } />
-												:
-												<Badge>{ item.status_type?.name }</Badge>
-											}
-										</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Serial</Table.Cell>
-										<Table.Cell>{ item.serial }</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Asset Tag</Table.Cell>
-										<Table.Cell>{ item.asset_tag }</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Manufacturer</Table.Cell>
-										<Table.Cell>
-											{ item.manufacturer && <Link href={ Routes.manufacturer(item.manufacturer.slug) }>
-												{ item.manufacturer!.name }
-											</Link> }
-										</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Model</Table.Cell>
-										<Table.Cell>
-											{ item.model && <Link href={ Routes.model(item.model.slug) }>
-												{ item.model.name }
-											</Link> }
-										</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Vendor</Table.Cell>
-										<Table.Cell>
-											{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
-												{ item.vendor.name }
-											</Link> }
-										</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Category</Table.Cell>
-										<Table.Cell>
-											{ item.category && <Link href={ Routes.category(item.category.slug) }>
-												{ item.category.name }
-											</Link> }
-										</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Purchase Cost</Table.Cell>
-										<Table.Cell>{ item.cost && formatter.currency(item.cost, item.cost_currency) }</Table.Cell>
-									</Table.Row>
-
-									<Table.Row>
-										<Table.Cell>Purchase Date</Table.Cell>
-										<Table.Cell>{ item.purchased_at && formatter.date.short(item.purchased_at) }</Table.Cell>
-									</Table.Row>
-
-								</Table.Body>
-							</Table>
-						</Box>
+						<Details item={ item } />
 					</Tabs.Panel>
 
 					<Tabs.Panel value="history">
-						<Heading order={ 3 }>History</Heading>
-
-						<History assignments={ item.assignments } audits={ item.audits } />
-
-
+						<ItemHistory item={ item } />
 					</Tabs.Panel>
 
 					<Tabs.Panel value="associations">
-						<Heading order={ 3 }>Licenses</Heading>
-
-						<ul>
-							{ item.licenses && item.licenses.map(license => (
-								<li key={ license.id }>{ license.name }</li>
-							)) }
-						</ul>
-
+						<Associations item={ item } />
 					</Tabs.Panel>
 				</Tabs>
 

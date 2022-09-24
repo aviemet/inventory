@@ -23,8 +23,8 @@ class NetworkBlueprint < ApplicationBlueprint
   end
 
   view :details do
-    field :hosts do |network|
-      network&.address&.hosts&.map(&:to_s)
+    field :hosts do |network, options|
+      network&.address&.paginate_hosts(page: options[:page])&.map(&:to_s)
     end
   end
 end

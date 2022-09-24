@@ -1,6 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Menu, Flex, Heading } from '@/Components'
+import { Section, Menu, Flex, Heading, Table, Container } from '@/Components'
 import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
 import { EditIcon } from '@/Components/Icons'
@@ -18,9 +18,7 @@ interface IShowNetworkProps {
 
 const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 	const title = network.name || 'Show Network'
-
-	console.log({ network, ips, pagination })
-
+	console.log({ pagination })
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -39,47 +37,60 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 					</Menu>
 				</Flex>
 
-				<div className="item-details">
-					<div className="item-row">
-						<label>Network</label>
-						<div className="value">{ network.address }</div>
-					</div>
+				<Container>
+					<Flex>
+						<Table wrapper={ false } sx={ { flex: 1 } }>
+							<Table.Body>
 
-					<div className="item-row">
-						<label>Number of Hosts</label>
-						<div className="value">{ network.hosts.length }</div>
-					</div>
+								<Table.Row>
+									<Table.Cell>Network</Table.Cell>
+									<Table.Cell>{ network.address }</Table.Cell>
+								</Table.Row>
 
-					<div className="item-row">
-						<label>Network Address</label>
-						<div className="value">{ network.address!.split('/')[0] }</div>
-					</div>
+								<Table.Row>
+									<Table.Cell>Network Address</Table.Cell>
+									<Table.Cell>{ network.address!.split('/')[0] }</Table.Cell>
+								</Table.Row>
 
-					<div className="item-row">
-						<label>VLAN ID</label>
-						<div className="value">{ network.vlan_id }</div>
-					</div>
+								<Table.Row>
+									<Table.Cell>VLAN ID</Table.Cell>
+									<Table.Cell>{ network.vlan_id }</Table.Cell>
+								</Table.Row>
 
-					<div className="item-row">
-						<label>Gateway</label>
-						<div className="value">{ network.gateway }</div>
-					</div>
+								<Table.Row>
+									<Table.Cell>Number of Hosts</Table.Cell>
+									<Table.Cell>{ pagination.count.toLocaleString('en-US') }</Table.Cell>
+								</Table.Row>
 
-					<div className="item-row">
-						<label>DHCP Start</label>
-						<div className="value">{ network.dhcp_start }</div>
-					</div>
+							</Table.Body>
+						</Table>
 
-					<div className="item-row">
-						<label>Broadcast Address</label>
-						<div className="value">{ network.broadcast }</div>
-					</div>
+						<Table wrapper={ false } sx={ { flex: 1 } }>
+							<Table.Body>
+								<Table.Row>
+									<Table.Cell>Gateway</Table.Cell>
+									<Table.Cell>{ network.gateway }</Table.Cell>
+								</Table.Row>
 
-					<div className="item-row">
-						<label>DHCP End</label>
-						<div className="value">{ network.dhcp_end }</div>
-					</div>
-				</div>
+								<Table.Row>
+									<Table.Cell>Broadcast Address</Table.Cell>
+									<Table.Cell>{ network.broadcast }</Table.Cell>
+								</Table.Row>
+
+								<Table.Row>
+									<Table.Cell>DHCP Start</Table.Cell>
+									<Table.Cell>{ network.dhcp_start }</Table.Cell>
+								</Table.Row>
+
+								<Table.Row>
+									<Table.Cell>DHCP End</Table.Cell>
+									<Table.Cell>{ network.dhcp_end }</Table.Cell>
+								</Table.Row>
+
+							</Table.Body>
+						</Table>
+					</Flex>
+				</Container>
 			</Section>
 
 			<br />

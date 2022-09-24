@@ -8,4 +8,8 @@ class IpLeaseBlueprint < ApplicationBlueprint
   end
 
   association :item, blueprint: ItemBlueprint, view: :shallow
+
+  view :shallow do
+    exclude :item
+  end
 end

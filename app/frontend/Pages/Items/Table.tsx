@@ -25,7 +25,7 @@ const ItemsTable = () => {
 				<Table.RowIterator render={ (item: Schema.Item) => (
 					<Table.Row key={ item.id }>
 
-						<Table.Cell nowrap style={ { width: '100%' } }>
+						<Table.Cell nowrap>
 							<Link href={ Routes.item(item) }>{ item.name }</Link>
 						</Table.Cell>
 

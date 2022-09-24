@@ -9,7 +9,7 @@ export interface IBodyCellProps extends Omit<ICellProps, 'hideable'> {
 	model?: string
 }
 
-const BodyCell = ({ children, nowrap, checkbox, hideable, model, sx, ...props }: IBodyCellProps) => {
+const BodyCell = ({ children, nowrap, fitContent, hideable, model, sx, ...props }: IBodyCellProps) => {
 	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
 	const tdRef = useRef<HTMLTableCellElement>(null)
 
@@ -21,7 +21,7 @@ const BodyCell = ({ children, nowrap, checkbox, hideable, model, sx, ...props }:
 		<Box
 			component="td"
 			ref={ tdRef }
-			className={ cx({ 'table-column-fit': checkbox }) }
+			className={ cx({ 'table-column-fit': fitContent }) }
 			sx={ {
 				whiteSpace: nowrap ? 'nowrap' : 'normal',
 				...sx,
