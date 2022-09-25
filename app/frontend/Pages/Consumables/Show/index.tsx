@@ -23,7 +23,7 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 				<Flex position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-					<Menu>
+					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
 							{ consumable.assignments ?
