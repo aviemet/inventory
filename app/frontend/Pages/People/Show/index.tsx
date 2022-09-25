@@ -25,7 +25,7 @@ const Show = ({ person }: IShowPersonProps) => {
 				<Flex position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-					<Menu>
+					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Item href={ Routes.editPerson(person) } icon={ <EditIcon /> }>

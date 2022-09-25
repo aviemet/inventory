@@ -23,7 +23,8 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 			<Section>
 				<Flex>
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
-					<Menu>
+
+					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
 							{ accessory.assignments ?
@@ -122,7 +123,7 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 					<Tabs.Panel value="history">
 						<Heading order={ 3 }>Assignment History</Heading>
 
-						<div tw="inline-grid grid-cols-2">
+						<div>
 							{ accessory.assignments && accessory.assignments.reverse().map(assignment => (
 								<React.Fragment key={ assignment.id }>
 									<div>
@@ -142,7 +143,7 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 								const message = audit.action === 'create' ? 'Created' : 'Updated'
 
 								return (
-									<li tw="mb-1" key={ audit.id }>
+									<li key={ audit.id }>
 										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
 									</li>
 								)

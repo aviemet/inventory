@@ -18,7 +18,7 @@ interface IShowNetworkProps {
 
 const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 	const title = network.name || 'Show Network'
-	console.log({ pagination })
+
 	return (
 		<>
 			<Head title={ title }></Head>
@@ -27,7 +27,7 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 				<Flex position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-					<Menu>
+					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Item href={ Routes.editNetwork(network) } icon={ <EditIcon /> }>
