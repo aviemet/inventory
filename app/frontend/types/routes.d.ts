@@ -1261,6 +1261,18 @@ export const editItemNic: ((
 
 /**
  * Generates rails route to
+ * /settings/ldaps/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editLdap: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /licenses/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1585,7 +1597,7 @@ export const items: ((
 
 /**
  * Generates rails route to
- * /ldaps/:id(.:format)
+ * /settings/ldaps/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1597,7 +1609,7 @@ export const ldap: ((
 
 /**
  * Generates rails route to
- * /ldaps/:id/sync(.:format)
+ * /settings/ldaps/:id/sync(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1609,7 +1621,7 @@ export const ldapSync: ((
 
 /**
  * Generates rails route to
- * /ldaps(.:format)
+ * /settings/ldaps(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -1856,6 +1868,16 @@ export const newItem: ((
  */
 export const newItemNic: ((
   itemId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /settings/ldaps/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newLdap: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

@@ -20,12 +20,21 @@ Rails.application.routes.draw do
     end
   end
 
+  # ROOT PATH #
+
   root "pages#dashboard"
+  
+  # STATIC PAGES #
+
   get "dashboard" => "pages#dashboard", as: :dashboard
 
-  get "settings" => "pages#settings", as: :settings
-  resources :ldaps, only: [:show, :create, :update]
-  patch "ldaps/:id/sync" => "ldaps#sync", as: :ldap_sync
+  # SETTINGS PAGES #
+
+  get "settings" => "settings#index", as: :settings
+  scope :settings do
+    resources :ldaps
+    patch "ldaps/:id/sync" => "ldaps#sync", as: :ldap_sync
+  end
 
   # DEVISE PATHS #
 

@@ -118,12 +118,13 @@ declare namespace Schema {
 		roles?: Role[];
 		audits?: AuditedAudit[];
 		users?: User[];
-		ldap?: Ldap;
+		ldaps?: Ldap[];
 		ownerships?: Ownership[];
 		items?: Item[];
 		accessories?: Accessory[];
 		consumables?: Consumable[];
 		components?: Component[];
+		models?: Model[];
 		departments?: Department[];
 		locations?: Location[];
 		licenses?: License[];
@@ -135,7 +136,6 @@ declare namespace Schema {
 		manufacturers?: Manufacturer[];
 		orders?: Order[];
 		categories?: Category[];
-		models?: Model[];
 	}
 
 	interface Component {
@@ -368,6 +368,7 @@ declare namespace Schema {
 
 	interface Ldap {
 		id: number;
+		name: string;
 		host?: string | null;
 		port?: string | null;
 		domain?: string | null;
@@ -515,7 +516,7 @@ declare namespace Schema {
 	interface Nic {
 		id: number;
 		mac?: string | null;
-		nic_type: 'ethernet'|'wifi'|'fiber';
+		nic_type: 'ethernet'|'wifi'|'fiber'|'cellular';
 		item_id: number;
 		created_at: string;
 		updated_at: string;

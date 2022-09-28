@@ -1,4 +1,4 @@
-import { Section } from '@/Components'
+import { Heading, Section } from '@/Components'
 import { Form, Input, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 import React from 'react'
@@ -7,11 +7,12 @@ interface ISettingsProps {
 	ldap: Schema.Ldap
 }
 
-const Settings = ({ ldap }: ISettingsProps) => {
+const EditLdap = ({ ldap }: ISettingsProps) => {
 	const ldapNew = ldap.id === undefined
 
 	return (
 		<Section>
+			<Heading>LDAP Settings</Heading>
 			<Form
 				model="ldap"
 				data={ { ldap } }
@@ -41,4 +42,4 @@ const Settings = ({ ldap }: ISettingsProps) => {
 	)
 }
 
-export default Settings
+export default EditLdap
