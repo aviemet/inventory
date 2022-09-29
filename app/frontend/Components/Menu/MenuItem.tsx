@@ -7,7 +7,7 @@ interface IMenuItemProps extends MenuItemProps {
 	onClick?: (e: MouseEvent) => void
 }
 
-const MenuItem = forwardRef<HTMLButtonElement, IMenuItemProps>((
+const MenuItem = forwardRef<HTMLButtonElement | HTMLAnchorElement, IMenuItemProps>((
 	{ children, href, onClick, ...props },
 	ref
 ) => {
