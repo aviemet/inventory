@@ -269,6 +269,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_230940) do
   end
 
   create_table "ldaps", force: :cascade do |t|
+    t.string "name", null: false
     t.string "host"
     t.string "port"
     t.string "domain"

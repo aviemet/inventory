@@ -1406,6 +1406,15 @@ export const editItemNic = __jsr.r({"item_id":{"r":true},"id":{"r":true},"format
 
 /**
  * Generates rails route to
+ * /settings/ldaps/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editLdap = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldaps"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /licenses/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1652,29 +1661,29 @@ export const items = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[1,[2,[
 
 /**
  * Generates rails route to
- * /ldaps/:id(.:format)
+ * /settings/ldaps/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const ldap = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"ldaps"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const ldap = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldaps"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /ldaps/:id/sync(.:format)
+ * /settings/ldaps/:id/sync(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const ldapSync = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"ldaps"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"sync"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const ldapSync = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldaps"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"sync"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /ldaps(.:format)
+ * /settings/ldaps(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const ldaps = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"ldaps"],[1,[2,[8,"."],[3,"format"]]]]]);
+export const ldaps = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldaps"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1865,6 +1874,14 @@ export const newItem = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7
  * @returns {string} route path
  */
 export const newItemNic = __jsr.r({"item_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"item_id"],[2,[7,"/"],[2,[6,"nics"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /settings/ldaps/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newLdap = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldaps"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to

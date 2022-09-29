@@ -1,10 +1,25 @@
 class LdapsController < ApplicationController
-  expose :ldap, -> { @active_company.ldap || Ldap.new(ldap_params) }
+  expose :ldaps, -> { @active_company.ldaps }
+  expose :ldap, -> { @active_company.ldaps.find(params[:id]) || Ldap.new(ldap_params) }
 
-  # GET /ldap/:id
+  # GET /ldaps
+  def index
+    render inertia: "Ldap/Index", props: {
+      ldaps: ldaps.render
+    }
+  end
+
+  # GET /ldaps/:id
   def show
     render inertia: "Ldap/Show", props: {
-      ldap: -> { LdapBlueprint.render_as_json(ldap) }
+      ldap: ldap.render
+    }
+  end
+
+  # GET /ldaps/new
+  def edit
+    render inertia: "Ldap/Edit", props: {
+      ldap: ldap.render
     }
   end
 

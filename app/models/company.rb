@@ -19,7 +19,7 @@ class Company < ApplicationRecord
   audited
 
   has_many :users, through: :roles, class_name: :User, source: :users
-  has_one :ldap, dependent: :destroy
+  has_many :ldaps, dependent: :destroy
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
   # 	Company.items, Company.contracts, etc.

@@ -7,6 +7,7 @@ export default createStyles(theme => {
 	const navItemWidth = navbarWidth.open + iconWidth
 	const openSpanWidth = navbarWidth.open - iconWidth - borderWidth
 	const bgColor = theme.other.colorSchemeOption(theme.fn.lighten(theme.colors.gray[1], 0.25), theme.colors.dark[6])
+	const navItemHeight = 44
 
 	return {
 		root: {
@@ -23,7 +24,7 @@ export default createStyles(theme => {
 						width: navItemWidth,
 					},
 
-					' & > a > span': {
+					'& > a > span': {
 						width: `calc(100% - ${iconWidth}px)`,
 					},
 				},
@@ -48,8 +49,17 @@ export default createStyles(theme => {
 
 				'& > ul': {
 					display: 'block',
-					boxShadow: theme.shadows.xs,
-				}
+				},
+
+				// 'a:hover:after': {
+				// 	content: '""',
+				// 	position: 'absolute',
+				// 	top: 0,
+				// 	bottom: 0,
+				// 	left: 0,
+				// 	right: 0,
+				// 	boxShadow: theme.shadows.md,
+				// },
 			},
 
 			'ul li': {
@@ -87,20 +97,21 @@ export default createStyles(theme => {
 				'&:after': {
 					content: '""',
 					width: '100%',
-					height: '3px',
-					background: bgColor,
+					height: `calc(100% + ${navItemHeight}px)`,
 					display: 'block',
 					position: 'absolute',
-					top: '-2px',
+					top: `-${navItemHeight}px`,
+					boxShadow: theme.shadows.xs,
+					zIndex: -1,
 				},
 
 				'&.up': {
 					top: 'unset',
-					bottom: 0,
+					bottom: `-${navItemHeight}px`,
 
 					'&:after': {
 						top: 'unset',
-						bottom: '-2px',
+						bottom: `-${navItemHeight}px`,
 					},
 				},
 
