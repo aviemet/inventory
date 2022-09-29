@@ -1,11 +1,11 @@
-import React, { useEffect, useState, forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import { useTableSectionContext } from '../TableContext'
 import { type ITableRow } from './index'
-import { Box } from '@mantine/core'
-import HeadCheckbox from './HeadCheckbox'
-import RowCheckbox from './RowCheckbox'
 
-interface IRowInContextProps extends ITableRow {
+import HeadRow from './HeadRow'
+import BodyRow from './BodyRow'
+
+interface IRowInContextProps extends Omit<ITableRow, 'ref'> {
 	name?: string
 	rows?: Record<string, any>[]
 	selectable: boolean
@@ -13,45 +13,16 @@ interface IRowInContextProps extends ITableRow {
 }
 
 const RowInContext = forwardRef<HTMLTableRowElement, IRowInContextProps>((
-	{ children, name, rows, selectable, selected, ...props },
+	{ children, ...props },
 	ref
 ) => {
 	const { section } = useTableSectionContext()
-	const [allChecked, setAllChecked] = useState(false)
-	const [indeterminate, setIndeterminate] = useState(false)
 
-	useEffect(() => {
-		if(selectable && section === 'head' && rows !== undefined && rows.length > 0) {
-			if(selected.size === rows.length) {
-				setAllChecked(true)
-				setIndeterminate(false)
-			} else if(selected.size === 0) {
-				setAllChecked(false)
-				setIndeterminate(false)
-			} else {
-				if(!indeterminate) {
-					setIndeterminate(true)
-				}
-			}
-		}
-	}, [selected.size])
+	return section === 'head' ?
+		<HeadRow ref={ ref } { ...props }>{ children }</HeadRow>
+		:
+		<BodyRow ref={ ref } { ...props }>{ children }</BodyRow>
 
-	const Checkbox = () => {
-		if(section === 'head') {
-			return <HeadCheckbox rows={ rows } selected={ selected } allChecked={ allChecked } indeterminate={ indeterminate } />
-		} else if(rows && rows.length > 0) {
-			return <RowCheckbox name={ name || '' } selected={ selected } />
-		} else {
-			return <></>
-		}
-	}
-
-	return (
-		<Box component="tr" { ...props } ref={ ref }>
-			{ selectable && <Checkbox /> }
-			{ children }
-		</Box>
-	)
 })
 
 export default RowInContext
