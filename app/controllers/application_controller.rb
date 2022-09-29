@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+
+  # Inertia requests do not need authenticity verification as they are not
+  # subject to the same vulnerability as a standard web request
   skip_before_action :verify_authenticity_token, if: -> { request.inertia? }
 
   add_flash_types :info, :error
@@ -28,12 +31,15 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # Changes active company for user if provided
+  # Sets @active_company on Controller
+  # Redirects to complete_registration_path if no company exists for the current_user
   def set_active_company(company = nil)
     return if !current_user
 
     current_user.active_company = company if company
 
-    if current_user.companies.count > 0
+    if current_user.companies.size > 0
       current_user.update(active_company: current_user.companies.first) if !current_user.active_company
 
       @active_company = current_user.active_company
