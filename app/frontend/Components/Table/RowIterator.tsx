@@ -10,19 +10,16 @@ const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
 		return <Row />
 	}
 
-	const handleRowProps = (row: JSX.Element) => {
-		return React.cloneElement(
-			row,
-			{
-				name: row.key,
-				className: cx(
-					{ checked: selected.has(String(row.key!)) }
-				)
-			}
-		)
+	const injectRowProps = (row: JSX.Element) => {
+		return React.cloneElement(row, {
+			name: row.key,
+			className: cx(
+				{ checked: selected.has(String(row.key!)) }
+			)
+		})
 	}
 
-	return <>{ rows.map(row => handleRowProps(render(row))) }</>
+	return <>{ rows.map(row => injectRowProps(render(row))) }</>
 }
 
 export default RowIterator
