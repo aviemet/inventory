@@ -4,13 +4,18 @@ import { DotsIcon } from '@/Components/Icons'
 
 interface IMenuTargetProps extends Omit<MenuTargetProps, 'children'> {
 	children?: React.ReactNode
+	icon?: React.ReactNode
+	variant?: 'gradient' | 'subtle' | 'filled' | 'outline' | 'light' | 'default' | 'transparent'
+	color?: string
 }
 
-const MenuTarget = ({ children, ...props }: IMenuTargetProps) => {
+const MenuTarget = ({ children, icon, variant, color, ...props }: IMenuTargetProps) => {
 	if(!children) {
 		return (
 			<Menu.Target { ...props }>
-				<ActionIcon><DotsIcon /></ActionIcon>
+				<ActionIcon color={ color } variant={ variant } >
+					{ icon || <DotsIcon /> }
+				</ActionIcon>
 			</Menu.Target>
 		)
 	}
