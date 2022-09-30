@@ -27,7 +27,7 @@ const LicensesTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ license => (
+				<Table.RowIterator render={ (license: Schema.License) => (
 					<Table.Row key={ license.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.license(license) }>{ license.name }</Link>
@@ -47,9 +47,9 @@ const LicensesTable = (props: ITableProps) => {
 						<Table.Cell>
 							{ license.cost ? formatter.currency(license.cost, license.cost_currency) : '-' }
 						</Table.Cell>
-						<Table.Cell>{ formatter.date.short(license.purchased_at) }</Table.Cell>
-						<Table.Cell>{ formatter.date.short(license.expires_at) }</Table.Cell>
-						<Table.Cell>{ formatter.date.short(license.terminates_at) }</Table.Cell>
+						<Table.Cell>{ license.purchased_at && formatter.date.short(license.purchased_at) }</Table.Cell>
+						<Table.Cell>{ license.expires_at && formatter.date.short(license.expires_at) }</Table.Cell>
+						<Table.Cell>{ license.terminates_at && formatter.date.short(license.terminates_at) }</Table.Cell>
 						<Table.Cell>{ license.maintained }</Table.Cell>
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.category?.name }</Link>

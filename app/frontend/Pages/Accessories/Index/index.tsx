@@ -1,7 +1,8 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Table } from '@/Components'
 import { Routes } from '@/lib'
+import { Table } from '@/Components'
+import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import AccessoriesTable from '../Table'
 
@@ -26,12 +27,12 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 					pagination={ pagination }
 				>
 
-					<Table.Title
-						title={ title }
-						menuOptions={ [
-							{ label: 'Create New Accessory', href: Routes.newAccessory(), icon: NewIcon },
-						] }
-					/>
+					<TableTitleSection title={ title } menuOptions={ [
+						{ label: 'Create New Accessory', href: Routes.newAccessory(), icon: NewIcon },
+					] }>
+						<Table.SearchInput />
+						<Table.ColumnPicker />
+					</TableTitleSection>
 
 					<AccessoriesTable />
 

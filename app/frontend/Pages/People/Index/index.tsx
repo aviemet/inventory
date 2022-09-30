@@ -2,6 +2,7 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
 import { Table } from '@/Components'
+import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon, SettingsIcon } from '@/Components/Icons'
 import PeopleTable from '../Table'
 
@@ -26,13 +27,13 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 					pagination={ pagination }
 				>
 
-					<Table.Title
-						title={ title }
-						menuOptions={ [
-							{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
-							{ label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon }
-						] }
-					/>
+					<TableTitleSection title={ title } menuOptions={ [
+						{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
+						{ label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon }
+					] }>
+						<Table.SearchInput />
+						<Table.ColumnPicker />
+					</TableTitleSection>
 
 					<PeopleTable />
 

@@ -4,7 +4,7 @@ import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 
-const ContractsIndex = (props: ITableProps) => {
+const ContractsTable = (props: ITableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
@@ -20,7 +20,7 @@ const ContractsIndex = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ contract => (
+				<Table.RowIterator render={ (contract: Schema.Contract) => (
 					<Table.Row key={ contract.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.contract(contract) }>{ contract.name }</Link>
@@ -60,4 +60,4 @@ const ContractsIndex = (props: ITableProps) => {
 	)
 }
 
-export default ContractsIndex
+export default ContractsTable

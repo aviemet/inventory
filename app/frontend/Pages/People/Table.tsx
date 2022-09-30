@@ -22,7 +22,7 @@ const PeopleTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ person => (
+				<Table.RowIterator render={ (person: Schema.Person) => (
 					<Table.Row key={ person.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.person(person) }>{ person.first_name }</Link>
@@ -53,11 +53,11 @@ const PeopleTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.items() }>{ person.items.length }</Link>
+							{ person.items && <Link href={ Routes.items() }>{ person.items.length }</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.accessories() }>{ person.accessories.length }</Link>
+							{ person.accessories && <Link href={ Routes.accessories() }>{ person.accessories.length }</Link> }
 						</Table.Cell>
 
 						<Table.Cell className="table-column-fit">

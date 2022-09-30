@@ -2,6 +2,7 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
 import { Table } from '@/Components'
+import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import ItemsTable from '../Table'
 
@@ -26,12 +27,12 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 					pagination={ pagination }
 				>
 
-					<Table.Title
-						title={ title }
-						menuOptions={ [
-							{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
-						] }
-					/>
+					<TableTitleSection title={ title } menuOptions={ [
+						{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+					] }>
+						<Table.SearchInput />
+						<Table.ColumnPicker />
+					</TableTitleSection>
 
 					<ItemsTable />
 

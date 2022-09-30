@@ -2,15 +2,16 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
 import { Table } from '@/Components'
+import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
-import AccessoriesTable from '../Table'
+import LicensesTable from '../Table'
 
 interface ILicensesIndexProps {
 	licenses: Schema.License[]
 	pagination: Schema.Pagination
 }
 
-const Index = ({ licenses, pagination }: ILicensesIndexProps ) => {
+const LicencesIndex = ({ licenses, pagination }: ILicensesIndexProps ) => {
 	const title = 'Licenses'
 
 	return (
@@ -26,14 +27,14 @@ const Index = ({ licenses, pagination }: ILicensesIndexProps ) => {
 					pagination={ pagination }
 				>
 
-					<Table.Title
-						title={ title }
-						menuOptions={ [
-							{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
-						] }
-					/>
+					<TableTitleSection title={ title } menuOptions={ [
+						{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
+					] }>
+						<Table.SearchInput />
+						<Table.ColumnPicker />
+					</TableTitleSection>
 
-					<AccessoriesTable />
+					<LicensesTable />
 
 					<Table.Pagination />
 				</Table.TableProvider>
@@ -42,4 +43,4 @@ const Index = ({ licenses, pagination }: ILicensesIndexProps ) => {
 	)
 }
 
-export default Index
+export default LicencesIndex
