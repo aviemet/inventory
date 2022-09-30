@@ -5,14 +5,17 @@ import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { isNil } from 'lodash'
 import { type ITableProps } from '@/Components/Table/Table'
 
-const ComponentsIndex = (props: ITableProps) => {
-	const qty = (accessory: Schema.Accessory) => {
-		if(isNil(accessory.qty)) {
+const ComponentsTable = (props: ITableProps) => {
+	// TODO: Taken from Accessories table, fix for Components
+	const qty = (component: Schema.Component) => {
+		if(isNil(component.qty)) {
 			return '-'
-		} else if(isNil(accessory.active_assignments_count)) {
-			return accessory.qty
 		}
-		return `${accessory.qty - accessory.active_assignments_count} / ${accessory.qty}`
+		return component.qty
+		// } else if(isNil(component.active_assignments_count)) {
+		// 	return component.qty
+		// }
+		// return `${component.qty - component.active_assignments_count} / ${component.qty}`
 	}
 
 	return (
@@ -22,7 +25,6 @@ const ComponentsIndex = (props: ITableProps) => {
 					<Table.Cell sort="name">Name</Table.Cell>
 					<Table.Cell sort="models.name">Model</Table.Cell>
 					<Table.Cell sort="serial">Serial</Table.Cell>
-					<Table.Cell sort="asset_tag">Asset Tag</Table.Cell>
 					<Table.Cell sort="categories.name">Category</Table.Cell>
 					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
 					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
@@ -34,7 +36,7 @@ const ComponentsIndex = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ component => (
+				<Table.RowIterator render={ (component: Schema.Component) => (
 					<Table.Row key={ component.id }>
 
 						<Table.Cell nowrap>
@@ -43,10 +45,6 @@ const ComponentsIndex = (props: ITableProps) => {
 
 						<Table.Cell>
 							<Link href={ Routes.component(component) }>{ component.model?.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.component(component) }>{ component.asset_tag }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
@@ -89,4 +87,4 @@ const ComponentsIndex = (props: ITableProps) => {
 	)
 }
 
-export default ComponentsIndex
+export default ComponentsTable

@@ -1,9 +1,10 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Link, Table } from '@/Components'
-import { EditButton } from '@/Components/Button'
+import { Table } from '@/Components'
+import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
+import ModelsTable from '../Table'
 
 interface IModelsIndexProps {
 	models: Schema.Model[]
@@ -26,55 +27,14 @@ const ModelsIndex = ({ models, pagination }: IModelsIndexProps) => {
 					pagination={ pagination }
 				>
 
-					<Table.Title
-						title={ title }
-						menuOptions={ [
-							{ label: 'New Model', href: Routes.newModel(), icon: NewIcon },
-						] }
-					/>
+					<TableTitleSection title={ title } menuOptions={ [
+						{ label: 'New Model', href: Routes.newModel(), icon: NewIcon },
+					] }>
+						<Table.SearchInput />
+						<Table.ColumnPicker />
+					</TableTitleSection>
 
-
-					<Table>
-						<Table.Head>
-							<Table.Row>
-								<Table.Cell sort="name">Name</Table.Cell>
-								<Table.Cell sort="model_number">Model #</Table.Cell>
-								<Table.Cell sort="category.name">Category</Table.Cell>
-								<Table.Cell sort="manufacturer.name">Manufacturer</Table.Cell>
-								<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
-							</Table.Row>
-						</Table.Head>
-
-						<Table.Body>
-							<Table.RowIterator render={ model => (
-								<Table.Row key={ model.id }>
-									<Table.Cell nowrap>
-										<Link href={ Routes.model(model.slug) }>{ model.name }</Link>
-									</Table.Cell>
-
-									<Table.Cell nowrap>
-										<Link href={ Routes.model(model.slug) }>{ model.model_number }</Link>
-									</Table.Cell>
-
-									<Table.Cell>
-										<Link href={ Routes.categories(model.category.slug) }>
-											{ model.category.name }
-										</Link>
-									</Table.Cell>
-
-									<Table.Cell>
-										<Link href={ Routes.manufacturer(model.manufacturer.slug) }>
-											{ model.manufacturer.name }
-										</Link>
-									</Table.Cell>
-
-									<Table.Cell className="table-column-fit">
-										<EditButton href={ Routes.editModel(model.slug) } />
-									</Table.Cell>
-								</Table.Row>
-							) } />
-						</Table.Body>
-					</Table>
+					<ModelsTable />
 
 					<Table.Pagination />
 				</Table.TableProvider>

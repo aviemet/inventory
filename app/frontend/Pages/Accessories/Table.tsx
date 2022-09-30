@@ -5,7 +5,7 @@ import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { isNil } from 'lodash'
 import { type ITableProps } from '@/Components/Table/Table'
 
-const AccessoriesIndex = (props: ITableProps) => {
+const AccessoriesTable = (props: ITableProps) => {
 	const qty = (accessory: Schema.Accessory) => {
 		if(isNil(accessory.qty)) {
 			return '-'
@@ -16,7 +16,6 @@ const AccessoriesIndex = (props: ITableProps) => {
 	}
 
 	return (
-
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
@@ -92,4 +91,4 @@ const AccessoriesIndex = (props: ITableProps) => {
 	)
 }
 
-export default AccessoriesIndex
+export default AccessoriesTable

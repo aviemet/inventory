@@ -1,11 +1,12 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Link, Table } from '@/Components'
-import { EditButton } from '@/Components/Button'
+import { Table } from '@/Components'
+import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
+import DepartmentsTable from '../Table'
 
-interface DepartmentWithCounts extends Schema.Department {
+export interface DepartmentWithCounts extends Schema.Department {
 	counts: {
 		items: number
 		accessories: number
@@ -22,7 +23,7 @@ interface IDepartmentsIndexProps {
 	pagination: Schema.Pagination
 }
 
-const Index = ({ departments, pagination }: IDepartmentsIndexProps) => {
+const DepartmentsIndex = ({ departments, pagination }: IDepartmentsIndexProps) => {
 	const title = 'Departments'
 
 	return (
@@ -38,65 +39,14 @@ const Index = ({ departments, pagination }: IDepartmentsIndexProps) => {
 					pagination={ pagination }
 				>
 
-					<Table.Title
-						title={ title }
-						menuOptions={ [
-							{ label: 'New Department', href: Routes.newDepartment(), icon: NewIcon },
-						] }
-					/>
+					<TableTitleSection title={ title } menuOptions={ [
+						{ label: 'New Department', href: Routes.newDepartment(), icon: NewIcon },
+					] }>
+						<Table.SearchInput />
+						<Table.ColumnPicker />
+					</TableTitleSection>
 
-					<Table>
-						<Table.Head>
-							<Table.Row>
-								<Table.Cell nowrap sort="name">Name</Table.Cell>
-								<Table.Cell sort="items">Assets</Table.Cell>
-								<Table.Cell sort="accessories">Accessories</Table.Cell>
-								<Table.Cell sort="consumables">Consumables</Table.Cell>
-								<Table.Cell sort="components">Components</Table.Cell>
-								<Table.Cell sort="licenses">Licenses</Table.Cell>
-								<Table.Cell sort="people">People</Table.Cell>
-								<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
-							</Table.Row>
-						</Table.Head>
-
-						<Table.Body>
-							<Table.RowIterator render={ department => (
-								<Table.Row key={ department.id }>
-									<Table.Cell nowrap>
-										<Link href={ Routes.department(department.slug) }>{ department.name }</Link>
-									</Table.Cell>
-
-									<Table.Cell>
-										<Link href={ Routes.items() }>{ department!.counts.items }</Link>
-									</Table.Cell>
-
-									<Table.Cell>
-										<Link href={ Routes.accessories() }>{ department!.counts.accessories }</Link>
-									</Table.Cell>
-
-									<Table.Cell>
-										<Link href={ Routes.consumables() }>{ department!.counts.consumables }</Link>
-									</Table.Cell>
-
-									<Table.Cell>
-										<Link href={ Routes.components() }>{ department!.counts.components }</Link>
-									</Table.Cell>
-
-									<Table.Cell>
-										<Link href={ Routes.licenses() }>{ department!.counts.licenses }</Link>
-									</Table.Cell>
-
-									<Table.Cell>
-										<Link href={ Routes.people() }>{ department!.counts.people }</Link>
-									</Table.Cell>
-
-									<Table.Cell className="table-column-fit">
-										<EditButton href={ Routes.editDepartment(department.slug) } />
-									</Table.Cell>
-								</Table.Row>
-							) } />
-						</Table.Body>
-					</Table>
+					<DepartmentsTable />
 
 					<Table.Pagination />
 				</Table.TableProvider>
@@ -105,4 +55,4 @@ const Index = ({ departments, pagination }: IDepartmentsIndexProps) => {
 	)
 }
 
-export default Index
+export default DepartmentsIndex

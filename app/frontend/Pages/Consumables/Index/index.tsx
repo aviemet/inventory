@@ -2,6 +2,7 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
 import { Table } from '@/Components'
+import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import ConsumablesTable from '../Table'
 
@@ -10,7 +11,7 @@ interface IConsumablesIndexProps {
 	pagination: Schema.Pagination
 }
 
-const Index = ({ consumables, pagination }: IConsumablesIndexProps) => {
+const ConsumablesIndex = ({ consumables, pagination }: IConsumablesIndexProps) => {
 	const title = 'Consumables'
 
 	return (
@@ -20,12 +21,13 @@ const Index = ({ consumables, pagination }: IConsumablesIndexProps) => {
 			<Table.Section>
 				<Table.TableProvider selectable rows={ consumables } pagination={ pagination }>
 
-					<Table.Title
-						title={ title }
-						menuOptions={ [
-							{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
-						] }
-					/>
+
+					<TableTitleSection title={ title } menuOptions={ [
+						{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
+					] }>
+						<Table.SearchInput />
+						<Table.ColumnPicker />
+					</TableTitleSection>
 
 					<ConsumablesTable />
 
@@ -36,4 +38,4 @@ const Index = ({ consumables, pagination }: IConsumablesIndexProps) => {
 	)
 }
 
-export default Index
+export default ConsumablesIndex

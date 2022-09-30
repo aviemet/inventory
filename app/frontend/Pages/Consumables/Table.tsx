@@ -4,15 +4,13 @@ import { Link, Table } from '@/Components'
 import { EditButton, CheckoutButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 
-const Index = (props: ITableProps) => {
+const ConsumablesTable = (props: ITableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name">Name</Table.Cell>
 					<Table.Cell sort="models.name">Model</Table.Cell>
-					<Table.Cell sort="serial">Serial</Table.Cell>
-					<Table.Cell sort="asset_tag">Asset Tag</Table.Cell>
 					<Table.Cell sort="categories.name">Category</Table.Cell>
 					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
 					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
@@ -24,7 +22,7 @@ const Index = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ consumable => (
+				<Table.RowIterator render={ (consumable: Schema.Consumable) => (
 					<Table.Row key={ consumable.id }>
 
 						<Table.Cell nowrap>
@@ -33,14 +31,6 @@ const Index = (props: ITableProps) => {
 
 						<Table.Cell>
 							<Link href={ Routes.consumable(consumable) }>{ consumable.model?.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.consumable(consumable) }>{ consumable.asset_tag }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.consumable(consumable) }>{ consumable.serial }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
@@ -75,4 +65,4 @@ const Index = (props: ITableProps) => {
 	)
 }
 
-export default Index
+export default ConsumablesTable
