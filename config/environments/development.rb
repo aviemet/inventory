@@ -80,6 +80,6 @@ Rails.application.configure do
   # Automatically update routes.js file when routes.rb is changed
   config.middleware.use(JsRoutes::Middleware)
 
-  # Use Sidekiq as the job handler
-  config.active_job.queue_adapter = :sidekiq
+  # Use DelayedJob as the job handler
+  config.active_job.queue_adapter = :delayed_job
 end
