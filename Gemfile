@@ -36,9 +36,9 @@ gem "countries", ">= 4.2"
 gem "ts_schema", "~> 0.2.1"
 gem "js-routes", "~> 2.2"
 gem "net-ldap", "~> 0.17.1"
-gem "sidekiq", "~> 6.5"
 gem "foreman", "~> 0.87.2"
 gem "amazing_print", "~> 1.4"
+gem "delayed_job_active_record", "~> 4.1"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"
@@ -47,7 +47,6 @@ gem "tzinfo-data"
 gem "bootsnap", require: false
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
@@ -61,7 +60,6 @@ group :development, :test do
   gem "faker", "~> 2.20"
   gem "pry-rails", "~> 0.3.9"
 
-  gem "solargraph", ">= 0.44.3"
   gem "rubocop-rails", "~> 2.14", require: false
   gem "rubocop-rspec", "~> 2.9", require: false
   gem "rubocop-performance", "~> 1.13", require: false
@@ -97,6 +95,4 @@ group :test do
   gem "database_cleaner-active_record", "~> 2.0"
   gem "shoulda-matchers", "~> 5.1"
   gem "bullet", "~> 7.0"
-
-  gem "rspec-sidekiq", "~> 3.1"
 end
