@@ -1,6 +1,5 @@
 import React from 'react'
-import SearchInput from '@/Components/Table/SearchInput'
-import { useTableContext } from './TableContext'
+import { useTableContext } from '@/Components/Table/TableContext'
 import { Box, Title, Group, Divider } from '@mantine/core'
 import { Menu } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
@@ -8,7 +7,8 @@ import { Inertia, Method } from '@inertiajs/inertia'
 import { Routes } from '@/lib'
 
 // TODO: Figure out correct type for icon
-interface ITableTitleSectionProps {
+interface IIndexTableTitleSectionProps {
+	children: React.ReactNode
 	title: string
 	menuOptions?: {
 		label: string
@@ -17,8 +17,8 @@ interface ITableTitleSectionProps {
 	}[]
 }
 
-const TableTitleSection = ({ title, menuOptions }: ITableTitleSectionProps) => {
-	const { tableState: { hideable, model, selected } } = useTableContext()
+const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTitleSectionProps) => {
+	const { tableState: { selected } } = useTableContext()
 
 	const deleteRecords = () => {
 		Inertia.visit(Routes.vendors(), {
@@ -84,10 +84,10 @@ const TableTitleSection = ({ title, menuOptions }: ITableTitleSectionProps) => {
 					width: 'auto',
 				},
 			}) }>
-				<SearchInput model={ model } columnPicker={ hideable } />
+				{ children }
 			</Box>
 		</Group>
 	)
 }
 
-export default TableTitleSection
+export default IndexTableTitleSection

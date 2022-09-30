@@ -5,17 +5,15 @@ import { useTableContext } from '../TableContext'
 import { TextInput } from '@/Components/Inputs'
 import { SearchIcon, CrossIcon } from '@/Components/Icons'
 import { ActionIcon, Box } from '@mantine/core'
-import ColumnPicker from './ColumnPicker'
 
-interface ISearchInputProps {
-	model?: string
-	columnPicker?: boolean
-	rows?: Record<string, any>[]
-}
-
-const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) => {
-	const { tableState: { hideable } } = useTableContext()
+/**
+ * Performs an Inertia request to the current url (window.location), using the search params
+ * as query string with the key of 'search'
+ */
+const SearchInput = () => {
+	const { tableState: { model } } = useTableContext()
 	const { search } = window.location
+
 	const params = new URLSearchParams(search)
 	const [searchValue, setSearchValue] = useState(params.get('search') || '')
 
@@ -54,22 +52,20 @@ const SearchInput = ({ model, columnPicker = true, rows }: ISearchInputProps) =>
 				id="search"
 				value={ searchValue }
 				onChange={ e => setSearchValue(e.target.value) }
-				rightSection={ <ActionIcon onClick={ () => setSearchValue('') }>
+				rightSection={ searchValue !== '' && <ActionIcon onClick={ () => setSearchValue('') }>
 					<CrossIcon color="grey" />
 				</ActionIcon> }
 				icon={ <SearchIcon size={ 24 } /> }
-				sx={ theme => ({
+				sx={ {
 					flex: 1,
 					input: {
 						borderTopRightRadius: 0,
 						borderBottomRightRadius: 0,
 					},
-				}) }
+				} }
 			/>
-			{ hideable && model && columnPicker && <ColumnPicker model={ model } /> }
 		</Box>
 	)
 }
 
 export default SearchInput
-

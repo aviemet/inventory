@@ -6,16 +6,14 @@ import axios from 'axios'
 import { Menu } from '@/Components'
 import { ColumnsIcon } from '@/Components/Icons'
 import { Checkbox } from '@/Components/Inputs'
-import { useTableContext } from '../TableContext'
+import { useTableContext } from './TableContext'
 import { Button } from '@mantine/core'
 
-interface IColumnPickerProps {
-	model: string
-}
-
-const ColumnPicker = ({ model }: IColumnPickerProps) => {
+const ColumnPicker = () => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
-	const { tableState: { columns } } = useTableContext()
+	const { tableState: { hideable, columns, model } } = useTableContext()
+
+	if(!hideable || !model) return <></>
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		axios.patch( Routes.updateTablePreferences(user.id), {
