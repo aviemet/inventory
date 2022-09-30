@@ -12,7 +12,8 @@ import Footer from './Footer'
 import Pagination from './Pagination'
 import TableProvider from './TableContext'
 import TableSection from './Section'
-import TableTitleSection from './Title'
+import SearchInput from './SearchInput'
+import ColumnPicker from './ColumnPicker'
 import ConditionalWrapper from '../ConditionalWrapper'
 
 export interface ITableProps extends TableProps {
@@ -32,7 +33,8 @@ type TableObjects = {
 	Pagination: typeof Pagination
 	TableProvider: typeof TableProvider
 	Section: typeof TableSection
-	Title: typeof TableTitleSection
+	SearchInput: typeof SearchInput
+	ColumnPicker: typeof ColumnPicker
 }
 
 export type TableObject = TableComponent & TableObjects
@@ -79,6 +81,7 @@ TableComponent.Footer = Footer
 TableComponent.Pagination = Pagination
 TableComponent.TableProvider = TableProvider
 TableComponent.Section = TableSection
-TableComponent.Title = TableTitleSection
+TableComponent.SearchInput = SearchInput
+TableComponent.ColumnPicker = ColumnPicker
 
 export default TableComponent
