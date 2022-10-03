@@ -3,6 +3,9 @@ class Assignment < ApplicationRecord
 
   enum status: %i(approved requested denied)
 
+  attribute :assigned_at, default: Time.current
+  attribute :active, default: true
+
   belongs_to :assignable, polymorphic: true
   belongs_to :assign_toable, polymorphic: true
   belongs_to :created_by, class_name: "User", required: false
@@ -19,17 +22,6 @@ class Assignment < ApplicationRecord
   validates_presence_of :assigned_at
   validates_presence_of :location_id
 
-  after_initialize :defaults
-
   scope :includes_associated, -> { includes([:location, :created_by, :status_type, :audits]) }
   scope :active, -> { where(active: true) }
-
-  private
-
-  def defaults
-    return unless new_record?
-
-    self.assigned_at ||= Time.current
-    self.active ||= true
-  end
 end
