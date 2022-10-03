@@ -9,18 +9,10 @@ module Assignable
     before_validation :set_defaults
 
     def assign_to(assign_toable, params = {})
-      assignment = Assignment.new({
-        assignable: self,
-        assign_toable: assign_toable,
-        assigned_at: params&.[](:assigned_at) || Time.current,
-        expected_at: params&.[](:expected_at),
-        created_by_id: params&.[](:created_by_id),
-        status: params&.[](:status),
-        location_id: params&.[](:location_id) || assign_toable&.default_location&.id,
-        qty: params&.[](:qty),
-        notes: params&.[](:notes),
-        active: params&.[](:active),
-      })
+      assignment = Assignment.new(params)
+      assignment.assignable = self
+      assignment.assign_toable = assign_toable
+      assignment.location_id ||= assign_toable&.default_location&.id
 
       self.transaction do
         asset_class = self.class.name.downcase

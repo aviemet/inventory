@@ -9,6 +9,8 @@ interface IUpdateItemProps{
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
+	manufacturers: Schema.Manufacturer[]
+	categories: Schema.Category[]
 }
 
 const EditItem = ({ item, ...models }: IUpdateItemProps) => {

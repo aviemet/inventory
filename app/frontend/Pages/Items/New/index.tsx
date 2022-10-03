@@ -9,6 +9,8 @@ interface INewItemProps {
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
+	manufacturers: Schema.Manufacturer[]
+	categories: Schema.Category[]
 }
 
 const NewItem = ({ ...data }: INewItemProps) => {

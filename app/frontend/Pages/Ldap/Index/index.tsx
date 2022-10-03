@@ -2,8 +2,10 @@ import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
-import { EditButton } from '@/Components/Button'
+import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
+import { EditButton } from '@/Components/Button'
+
 interface ILdapIndexProps {
 	ldaps: Schema.Ldap[]
 }
@@ -17,16 +19,17 @@ const LdapIndex = ({ ldaps }: ILdapIndexProps) => {
 			<Table.Section>
 				<Table.TableProvider
 					selectable
+					hideable
 					model="ldaps"
 					rows={ ldaps }
 				>
 
-					<Table.Title
-						title={ title }
-						menuOptions={ [
-							{ label: 'New LDAP Connection', href: Routes.newLdap(), icon: NewIcon },
-						] }
-					/>
+					<TableTitleSection title={ title } menuOptions={ [
+						{ label: 'New LDAP Connection', href: Routes.newLdap(), icon: NewIcon },
+					] }>
+						<Table.SearchInput />
+						<Table.ColumnPicker />
+					</TableTitleSection>
 
 					<Table>
 						<Table.Head>
