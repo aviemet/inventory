@@ -2097,6 +2097,14 @@ export const purchases = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"purchases"],[1
 
 /**
  * Generates rails route to
+ * /reports(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const reports = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"reports"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
  * /
  * @param {object | undefined} options
  * @returns {string} route path

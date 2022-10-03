@@ -113,5 +113,7 @@ Rails.application.routes.draw do
 
   resources :contracts, concerns: :bulk_delete
 
+  resources :reports, only: [:index]
+
   draw(:api)
 end
