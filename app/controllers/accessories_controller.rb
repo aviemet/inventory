@@ -87,22 +87,22 @@ class AccessoriesController < ApplicationController
   def create
     accessory.company = @active_company
     if accessory.save
-      redirect_to accessory, notice: 'License was successfully created'
+      redirect_to accessory, notice: 'Accessory was successfully created'
     else
       redirect_to new_accessory_path, inertia: { errors: accessory.errors }
     end
   end
 
-  # PATCH/PUT /accessories/1
+  # PATCH/PUT /accessories/:id
   def update
     if accessory.update(accessory_params)
-      redirect_to accessory, notice: 'License was successfully updated'
+      redirect_to accessory, notice: 'Accessory was successfully updated'
     else
       redirect_to edit_accessory_path, inertia: { errors: accessory.errors }
     end
   end
 
-  # DELETE /accessories/1
+  # DELETE /accessories/:id
   def destroy
     accessory.destroy
     redirect_to accessories_url, notice: 'Accessory was successfully destroyed.'
