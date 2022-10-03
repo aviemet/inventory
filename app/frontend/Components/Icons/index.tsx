@@ -20,6 +20,7 @@ export {
 	ChevronsLeft as FirstIcon,
 	Dots as DotsIcon,
 	Filter as FilterIcon,
+	Report as ReportsIcon,
 } from 'tabler-icons-react'
 
 export {

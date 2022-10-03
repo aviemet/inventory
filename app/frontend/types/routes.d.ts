@@ -2151,6 +2151,16 @@ export const purchases: ((
 
 /**
  * Generates rails route to
+ * /reports(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const reports: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /
  * @param {object | undefined} options
  * @returns {string} route path
