@@ -2,7 +2,7 @@ import React from 'react'
 
 const ReportsIndex = () => {
 	return (
-		<div>ReportsIndex</div>
+		<div>Reports Index</div>
 	)
 }
 
