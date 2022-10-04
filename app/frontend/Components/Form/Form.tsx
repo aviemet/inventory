@@ -6,7 +6,7 @@ import { FormProps } from 'react-html-props'
 import { Box } from '@mantine/core'
 import useFormStyles from './useFormStyles'
 import cx from 'clsx'
-import axios from 'axios';
+import axios from 'axios'
 
 const [useForm, FormProvider] = createContext<Inertia.FormProps>()
 export { useForm, FormProvider }
@@ -89,7 +89,6 @@ function Form<T extends Record<keyof T, unknown>>({
 
 		if(shouldSubmit && to) {
 			if(async) {
-				console.log({ async, method, to, data: form.data })
 				return axios[method](to, form.data)
 			} else {
 				form[method](to)
@@ -107,6 +106,14 @@ function Form<T extends Record<keyof T, unknown>>({
 
 		submit()
 	}
+
+	// Set values from url search params. Allows for prefilling form data from a link
+	useEffect(() => {
+		const url = new URL(window.location.href)
+		url.searchParams.forEach((value, key) => {
+			setData(key, value)
+		})
+	}, [])
 
 	// **** Conditional calls to callbacks **** \\
 	useEffect(() => {
