@@ -35,10 +35,16 @@ const QuickNewMenu = () => {
 				<Menu.Item href={ Routes.newLicense() } icon={ <LicensesIcon /> }>
 					New License
 				</Menu.Item>
+
+				<Menu.Divider />
+
 				<Menu.Item href={ Routes.newPerson() } icon={ <PeopleIcon /> }>
 					New Person
 				</Menu.Item>
-				<Menu.Item href={ '#'/*Routes.newTicket()*/ } icon={ <TicketsIcon /> }>
+
+				<Menu.Divider />
+
+				<Menu.Item href={ Routes.newTicket() } icon={ <TicketsIcon /> }>
 					New Ticket
 				</Menu.Item>
 			</Menu.Dropdown>
