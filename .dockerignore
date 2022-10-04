@@ -1,0 +1,9 @@
+.git*
+.dockerignore
+.env
+.rubocop*
+.solargraph*
+.eslintrc.js
+.rspec
+.vscode
+Procfile.dev
