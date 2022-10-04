@@ -1405,6 +1405,18 @@ export const editStatusType: ((
 
 /**
  * Generates rails route to
+ * /tickets/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editTicket: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /users/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1983,6 +1995,16 @@ export const newStatusType: ((
 
 /**
  * Generates rails route to
+ * /tickets/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newTicket: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /users/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2222,6 +2244,28 @@ export const statusType: ((
  * @returns {string} route path
  */
 export const statusTypes: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /tickets/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ticket: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /tickets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const tickets: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

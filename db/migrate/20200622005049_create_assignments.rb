@@ -9,6 +9,7 @@ class CreateAssignments < ActiveRecord::Migration[6.0]
       t.datetime :returned_at
       t.datetime :expected_at
       t.text :notes
+      t.integer :status
       t.boolean :active, null: false, default: true
       t.references :created_by, null: true, foreign_key: { to_table: :users }
 

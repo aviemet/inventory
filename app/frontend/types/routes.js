@@ -1514,6 +1514,15 @@ export const editStatusType = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],
 
 /**
  * Generates rails route to
+ * /tickets/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editTicket = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1965,6 +1974,14 @@ export const newStatusType = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_typ
 
 /**
  * Generates rails route to
+ * /tickets/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newTicket = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2153,6 +2170,23 @@ export const statusType = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[
  * @returns {string} route path
  */
 export const statusTypes = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_types"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /tickets/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ticket = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /tickets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const tickets = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to

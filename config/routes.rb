@@ -115,5 +115,7 @@ Rails.application.routes.draw do
 
   resources :reports, only: [:index]
 
+  resources :tickets
+
   draw(:api)
 end

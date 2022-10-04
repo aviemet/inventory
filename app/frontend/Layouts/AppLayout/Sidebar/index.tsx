@@ -74,7 +74,7 @@ const Sidebar = () => {
 						<li><MenuLink href={ Routes.licenses() } icon={ <LicensesIcon /> }>Licenses</MenuLink></li>
 						<li><MenuLink href={ Routes.networks() } icon={ <NetworksIcon /> }>Networks</MenuLink></li>
 						<li><MenuLink href={ Routes.people() } icon={ <PeopleIcon /> }>People</MenuLink></li>
-						<li><MenuLink href="" icon={ <TicketsIcon /> }>Tickets</MenuLink></li>
+						<li><MenuLink href={ Routes.tickets() } icon={ <TicketsIcon /> }>Tickets</MenuLink></li>
 						<li>
 							<MenuLink href={ Routes.vendors() } icon={ <VendorsIcon /> }>Vendors</MenuLink>
 							<ul>

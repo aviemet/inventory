@@ -664,6 +664,25 @@ declare namespace Schema {
 		audits?: AuditedAudit[];
 	}
 
+	interface Ticket {
+		id: number;
+		subject?: string | null;
+		description?: string | null;
+		created_by_id?: number | null;
+		created_at: string;
+		updated_at: string;
+		created_by?: User;
+	}
+
+	interface TicketMessage {
+		id: number;
+		body?: string | null;
+		ticket_id: number;
+		created_at: string;
+		updated_at: string;
+		ticket?: Ticket;
+	}
+
 	interface User {
 		id: number;
 		email: string;

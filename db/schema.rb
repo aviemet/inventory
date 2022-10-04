@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_12_230940) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_03_203221) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -473,6 +473,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_230940) do
     t.index ["slug"], name: "index_status_types_on_slug", unique: true
   end
 
+  create_table "ticket_messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "ticket_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_ticket_messages_on_ticket_id"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "subject"
+    t.text "description"
+    t.bigint "created_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -593,6 +610,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_230940) do
   add_foreign_key "phones", "categories"
   add_foreign_key "phones", "contacts"
   add_foreign_key "purchases", "orders"
+  add_foreign_key "ticket_messages", "tickets"
+  add_foreign_key "tickets", "users", column: "created_by_id"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
   add_foreign_key "warranties", "items"
