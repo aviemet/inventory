@@ -42,6 +42,7 @@ declare global {
 		interface AuditedAudit {
 			user?: Schema.User
 			person?: Schema.Person
+			created_at: string
 		}
 		interface Category extends UID {}
 		interface Company extends UID {}
@@ -75,6 +76,24 @@ declare global {
 		interface Vendor extends UID {}
 		interface Warranty extends UID {}
 		interface Website extends UID {}
+
+		type CompanyCounts = {
+			locations: number
+			items: number
+			accessories: number
+			consumables: number
+			components: number
+			departments: number
+			licenses: number
+			contracts: number
+			people: number
+			vendors: number
+			manufacturers: number
+		}
+
+		interface CompanyWithCounts extends Schema.Company {
+			counts: CompanyCounts
+		}
 	}
 
 	type FlashMessage = Record<'success'|'alert'|'info'|'warning',string>
