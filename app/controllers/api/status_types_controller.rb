@@ -1,5 +1,5 @@
 class Api::StatusTypesController < ApplicationController
-  expose :status_type, -> { @active_company.status_types.find_by_slug params[:slug] || StatusType.new(status_type_params) }
+  expose :status_type, -> { @active_company.status_types.find_by_slug(params[:slug]) || StatusType.new(status_type_params) }
 
   # POST /api/status_types
   def create
