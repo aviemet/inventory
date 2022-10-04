@@ -16,6 +16,7 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'>, O
 	onProgress?: ((progress: Progress) => void) | React.ReactEventHandler<HTMLAnchorElement>
 	target?: string
 	rel?: string
+	tabIndex?: number
 }
 
 const externalPrefix = ['http', 'www']
