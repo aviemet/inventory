@@ -12,10 +12,13 @@ class Category < ApplicationRecord
     }
   )
 
+  @categorizable_types = %w(Accessory Address Component Consumable Contact Contract Department Email Item License Location Manufacturer Model Order Person Phone Ticket User Vendor Vendor Website)
+
   slug :slug_from_category_type
 
   audited
 
+  validates_inclusion_of :categorizable_type, in: @categorizable_types, allow_nil: false
   validates_presence_of :categorizable_type
   validates_presence_of :name
 
