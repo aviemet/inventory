@@ -1,5 +1,5 @@
 class Api::OrdersController < ApplicationController
-  expose :order, -> { @active_company.orders.find_by_slug params[:slug] || Order.new(order_params) }
+  expose :order, -> { @active_company.orders.find_by_slug(params[:slug]) || Order.new(order_params) }
 
   # POST /api/orders
   def create
