@@ -8,6 +8,7 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { Inertia } from '@inertiajs/inertia'
+import { CategoriesDropdown } from '@/Components/Form/Dropdowns'
 
 export interface IContractFormProps {
 	to: string
@@ -27,7 +28,7 @@ const ContractForm = ({ to, method = 'post', onSubmit, contract, vendors, catego
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<Input name="name" label="Name" required />
 
 			<Input name="number" label="Number" required />
 
@@ -43,13 +44,17 @@ const ContractForm = ({ to, method = 'post', onSubmit, contract, vendors, catego
 				onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
 			/>
 
-			<SearchableDropdown
+			<CategoriesDropdown
+				categories={ categories }
+			/>
+
+			{ /* <SearchableDropdown
 				label="Category"
 				name="category_id"
 				options={ categories }
 				filterMatchKeys={ ['name'] }
 				onOpen={ () => Inertia.reload({ only: ['categories'] }) }
-			/>
+			/> */ }
 
 			<Textarea name="notes" label="Notes" />
 
