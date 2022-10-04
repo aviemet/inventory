@@ -4,8 +4,6 @@ import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 
-import { type CompanyWithCounts } from './Index'
-
 const CompaniesTable = (props: ITableProps) => {
 	return (
 		<Table { ...props }>
@@ -27,7 +25,7 @@ const CompaniesTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (company: CompanyWithCounts) => (
+				<Table.RowIterator render={ (company: Schema.CompanyWithCounts) => (
 					<Table.Row key={ company.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.company(company.slug) }>{ company.name }</Link>

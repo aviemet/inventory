@@ -6,24 +6,8 @@ import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import CompaniesTable from '../Table'
 
-export interface CompanyWithCounts extends Schema.Company {
-	counts: {
-		locations: number
-		items: number
-		accessories: number
-		consumables: number
-		components: number
-		departments: number
-		licenses: number
-		contracts: number
-		people: number
-		vendors: number
-		manufacturers: number
-	}
-}
-
 interface ICompaniesIndexProps {
-	companies: CompanyWithCounts[]
+	companies: Schema.CompanyWithCounts[]
 	pagination: Schema.Pagination
 }
 

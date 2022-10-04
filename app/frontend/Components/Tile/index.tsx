@@ -6,7 +6,7 @@ import Footer from './Footer'
 const Tile = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<Paper radius="lg" sx={ theme => ({
-			borderColor: theme.other.colorSchemeOption(theme.colors[theme.primaryColor][theme.primaryShade.light], theme.colors[theme.primaryColor][theme.primaryShade.dark]),
+			borderColor: theme.fn.primaryColor(),
 			borderTopWidth: 2,
 			boxShadow: theme.shadows.md,
 			width: '100%',
