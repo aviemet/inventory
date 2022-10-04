@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Select, type SelectProps } from '@mantine/core'
 import Label from './Label'
 
@@ -24,7 +24,7 @@ const SearchableDropdownComponent = ({
 	clearable = true,
 	...props
 }: ISearchableDropdownProps) => {
-	const data = options.map(option => ({ label: getLabel(option), value: getValue(option) }))
+	const data = useMemo(() => options.map(option => ({ label: getLabel(option), value: getValue(option) })), [options])
 
 	const handleChange = (value: string|null) => {
 		if(onChange) onChange(value)
@@ -36,6 +36,7 @@ const SearchableDropdownComponent = ({
 				{ label }
 			</Label> }
 			<Select
+				searchable
 				size="md"
 				data={ data }
 				maxDropdownHeight={ 400 }
@@ -48,4 +49,4 @@ const SearchableDropdownComponent = ({
 	)
 }
 
-export default SearchableDropdownComponent
+export default React.memo(SearchableDropdownComponent)
