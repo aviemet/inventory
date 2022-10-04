@@ -28,7 +28,7 @@ const ContractForm = ({ to, method = 'post', onSubmit, contract, vendors, catego
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required />
+			<Input name="name" label="Name" required autoFocus />
 
 			<Input name="number" label="Number" required />
 

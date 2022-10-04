@@ -30,7 +30,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 			onSubmit={ onSubmit }
 			className="max-w-5xl"
 		>
-			<Input name="name" label="Name" required />
+			<Input name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Consumable Details">
 				<SearchableDropdown

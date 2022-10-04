@@ -3,7 +3,6 @@ import {
 	Form,
 	Input,
 	Textarea,
-	SearchableDropdown,
 	Checkbox,
 	Submit,
 	FormGroup,
@@ -32,7 +31,7 @@ const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendo
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required />
+			<Input name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Component Details">
 				<ModelsDropdown

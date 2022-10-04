@@ -25,7 +25,7 @@ const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer = emptyM
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required />
+			<Input name="name" label="Name" required autoFocus />
 
 			<Submit>
 				{ manufacturer.id ? 'Update' : 'Create' } Manufacturer
