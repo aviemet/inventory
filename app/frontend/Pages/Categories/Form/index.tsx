@@ -34,7 +34,7 @@ const CategoryForm = ({ to, method = 'post', onSubmit, category = emptyCategory 
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required />
+			<Input name="name" label="Name" required autoFocus />
 
 			<SearchableDropdown
 				label="Category Type"

@@ -28,7 +28,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="first_name" label="First Name" required />
+			<Input name="first_name" label="First Name" required autoFocus />
 
 			<Input name="middle_name" label="Middle Name" required  />
 

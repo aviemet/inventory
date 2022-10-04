@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input, Textarea, Submit } from '@/Components/Form'
 import { LocationsDropdown } from '@/Components/Form/Dropdowns'
 
-export interface IDepartmentFormProps { 
+export interface IDepartmentFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
@@ -24,7 +24,7 @@ const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepar
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required />
+			<Input name="name" label="Name" required autoFocus />
 
 			<LocationsDropdown locations={ locations } />
 

@@ -3,7 +3,6 @@ import {
 	Form,
 	Input,
 	Textarea,
-	SearchableDropdown,
 	Checkbox,
 	Submit,
 	FormGroup,

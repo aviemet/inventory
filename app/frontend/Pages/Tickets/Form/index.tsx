@@ -23,7 +23,7 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket }: ITicketFormProps)
 			onSubmit={ onSubmit }
 		>
 
-			<Input name="subject" label="Subject" required />
+			<Input name="subject" label="Subject" required autoFocus />
 
 			<Textarea name="description" label="Description" />
 

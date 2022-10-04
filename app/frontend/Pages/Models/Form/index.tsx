@@ -1,5 +1,5 @@
 import React from 'react'
-import ManufacturersDropdown from '../../../Components/Form/Dropdowns/ManufacturersDropdown';
+import ManufacturersDropdown from '../../../Components/Form/Dropdowns/ManufacturersDropdown'
 import {
 	Form,
 	Input,
@@ -33,7 +33,7 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categori
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required />
+			<Input name="name" label="Name" required autoFocus />
 
 			<Input name="model_number" label="Model Number" required />
 

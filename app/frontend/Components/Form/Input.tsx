@@ -13,6 +13,7 @@ interface IInputProps extends Omit<InputProps, 'onChange'> {
 	onChange?: (value: string|number, form: Inertia.FormProps) => void
 	id?: string
 	compact?: boolean
+	autoFocus?: boolean
 }
 
 const FormInput = forwardRef<HTMLInputElement, IInputProps>((
