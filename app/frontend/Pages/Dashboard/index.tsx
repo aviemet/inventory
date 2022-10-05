@@ -1,8 +1,8 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Table } from '@/Components'
+import { Link, Section, Table } from '@/Components'
 import Counts from './Counts'
-import { formatter } from '@/lib'
+import { formatter, Routes } from '@/lib'
 
 interface IDashboardProps {
 	company: Schema.CompanyWithCounts
@@ -10,6 +10,7 @@ interface IDashboardProps {
 }
 
 const Dashboard = ({ company, audits }: IDashboardProps) => {
+	console.log({ audits })
 	return (
 		<>
 			<Head title="Dashboard"></Head>
@@ -32,9 +33,17 @@ const Dashboard = ({ company, audits }: IDashboardProps) => {
 					<Table.Body>
 						{ audits.reverse().map(audit => (
 							<Table.Row key={ audit.id }>
-								<Table.Cell>{ audit.auditable_type }</Table.Cell>
+								<Table.Cell>
+									{ audit.route ?
+										<Link href={ audit.route }>{ audit.auditable_type }</Link>
+										:
+										audit.auditable_type
+									}
+								</Table.Cell>
 								<Table.Cell>{ audit.action }</Table.Cell>
-								<Table.Cell>{ audit.person?.name }</Table.Cell>
+								<Table.Cell>
+									{ audit.person && <Link href={ Routes.person(audit.person.id) }>{ audit.person?.name }</Link> }
+								</Table.Cell>
 								<Table.Cell>{ formatter.date.long(audit.created_at!) }</Table.Cell>
 							</Table.Row>
 						)) }

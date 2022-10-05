@@ -42,6 +42,7 @@ declare global {
 		interface AuditedAudit {
 			user?: Schema.User
 			person?: Schema.Person
+			route?: string
 			created_at: string
 		}
 		interface Category extends UID {}

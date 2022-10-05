@@ -72,7 +72,6 @@ Rails.application.routes.draw do
 
   resources :users, concerns: :bulk_delete, except: [:create]
   resources :companies, concerns: :bulk_delete, param: :slug
-  resources :ownerships
 
   resources :departments, concerns: :bulk_delete, param: :slug
   resources :locations, concerns: :bulk_delete, param: :slug
