@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/inertia-react'
 import { Section, Menu, Flex, Heading, Tabs, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { NewIcon, EditIcon } from '@/Components/Icons'
+import { TableTitleSection } from '@/Layouts/Components'
 import ItemsTable from '@/Pages/Items/Table'
 import AccessoriesTable from '@/Pages/Accessories/Table'
 import ConsumablesTable from '@/Pages/Consumables/Table'
@@ -76,11 +77,13 @@ const Show = ({ department, items, accessories, components, consumables, license
 										href={ Routes.editDepartment(department.slug) }
 										icon={ <EditIcon /> }
 									>
-								Edit
+										Edit
 									</Menu.Item>
 								</Menu.Dropdown>
 							</Menu>
 						</Flex>
+
+						<div>Location: { department.location?.name }</div>
 					</Section>
 				</Tabs.Panel>
 
@@ -95,14 +98,17 @@ const Show = ({ department, items, accessories, components, consumables, license
 								rows={ items?.data }
 								pagination={ items?.pagination }
 							>
-								<Table.Title
-									title={ title }
-									menuOptions={ [
-										{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
-									] }
-								/>
+								<TableTitleSection title={ `${title} Items` } menuOptions={ [
+									{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+								] }>
+									<Table.SearchInput />
+									<Table.ColumnPicker />
+								</TableTitleSection>
+
 								<ItemsTable />
+
 								<Table.Pagination />
+
 							</Table.TableProvider>
 						</div>
 					</Section>
@@ -118,14 +124,17 @@ const Show = ({ department, items, accessories, components, consumables, license
 							rows={ accessories?.data }
 							pagination={ accessories?.pagination }
 						>
-							<Table.Title
-								title={ title }
-								menuOptions={ [
-									{ label: 'New Accessory', href: Routes.newAccessory(), icon: NewIcon },
-								] }
-							/>
+							<TableTitleSection title={ `${title} Accessories` } menuOptions={ [
+								{ label: 'New Accessory', href: Routes.newAccessory(), icon: NewIcon },
+							] }>
+								<Table.SearchInput />
+								<Table.ColumnPicker />
+							</TableTitleSection>
+
 							<AccessoriesTable />
+
 							<Table.Pagination />
+
 						</Table.TableProvider>
 					</Section>
 				</Tabs.Panel>
@@ -140,14 +149,17 @@ const Show = ({ department, items, accessories, components, consumables, license
 							rows={ consumables?.data }
 							pagination={ consumables?.pagination }
 						>
-							<Table.Title
-								title={ title }
-								menuOptions={ [
-									{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
-								] }
-							/>
+							<TableTitleSection title={ `${title} Consumables` } menuOptions={ [
+								{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
+							] }>
+								<Table.SearchInput />
+								<Table.ColumnPicker />
+							</TableTitleSection>
+
 							<ConsumablesTable />
+
 							<Table.Pagination />
+
 						</Table.TableProvider>
 					</Section>
 				</Tabs.Panel>
@@ -162,14 +174,17 @@ const Show = ({ department, items, accessories, components, consumables, license
 							rows={ components?.data }
 							pagination={ components?.pagination }
 						>
-							<Table.Title
-								title={ title }
-								menuOptions={ [
-									{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
-								] }
-							/>
+							<TableTitleSection title={ `${title} Components` } menuOptions={ [
+								{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
+							] }>
+								<Table.SearchInput />
+								<Table.ColumnPicker />
+							</TableTitleSection>
+
 							<ComponentsTable />
+
 							<Table.Pagination />
+
 						</Table.TableProvider>
 					</Section>
 				</Tabs.Panel>
@@ -184,14 +199,17 @@ const Show = ({ department, items, accessories, components, consumables, license
 							rows={ licenses?.data }
 							pagination={ licenses?.pagination }
 						>
-							<Table.Title
-								title={ title }
-								menuOptions={ [
-									{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
-								] }
-							/>
+							<TableTitleSection title={ `${title} Licenses` } menuOptions={ [
+								{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
+							] }>
+								<Table.SearchInput />
+								<Table.ColumnPicker />
+							</TableTitleSection>
+
 							<LicensesTable />
+
 							<Table.Pagination />
+
 						</Table.TableProvider>
 					</Section>
 				</Tabs.Panel>
@@ -206,14 +224,17 @@ const Show = ({ department, items, accessories, components, consumables, license
 							rows={ people?.data }
 							pagination={ people?.pagination }
 						>
-							<Table.Title
-								title={ title }
-								menuOptions={ [
-									{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
-								] }
-							/>
+							<TableTitleSection title={ `${title} People` } menuOptions={ [
+								{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
+							] }>
+								<Table.SearchInput />
+								<Table.ColumnPicker />
+							</TableTitleSection>
+
 							<PeopleTable />
+
 							<Table.Pagination />
+
 						</Table.TableProvider>
 					</Section>
 				</Tabs.Panel>

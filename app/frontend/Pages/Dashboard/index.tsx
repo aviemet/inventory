@@ -10,7 +10,6 @@ interface IDashboardProps {
 }
 
 const Dashboard = ({ company, audits }: IDashboardProps) => {
-	console.log({ audits })
 	return (
 		<>
 			<Head title="Dashboard"></Head>

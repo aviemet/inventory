@@ -1,9 +1,21 @@
 class UsersController < ApplicationController
+  include Searchable
+  include ContactableConcern
+
+  expose :users, -> { search(User.all.includes_associated, sortable_fields)}
   expose :user
 
   # GET /users
   def index
-    render inertia: "Users/Index"
+    paginated_users = users.page(params[:page] || 1)
+
+    render inertia: "Users/Index", props: {
+      users: users.render(view: :associations),
+      pagination: -> { {
+        count: users.count,
+        **pagination_data(paginated_users)
+      } }
+    }
   end
 
   # GET /users/:id
@@ -16,7 +28,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     render inertia: "Users/New", props: {
-      user: user.render()
+      user: user.render
     }
   end
 
@@ -97,6 +109,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def sortable_fields
+    %w(email active person.name active_company.name).freeze
+  end
 
   def user_params
     params.require(:user).permit(:email, :password, :active_company, :active, :user_preferences, person: [:first_name, :last_name], company: [:name])

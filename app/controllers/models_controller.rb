@@ -2,12 +2,11 @@ class ModelsController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :models, -> { Model.includes_associated }
-  expose :model, -> { @active_company.models.includes_associated.find_by_slug(request.params[:slug]) || Model.new(model_params) }
+  expose :models, -> { search(@active_company.models.includes_associated, sortable_fields) }
+  expose :model, -> { @active_company.models.includes_associated.find_by_slug(request.params[:slug]) }
 
   # GET /models
   def index
-    self.models = search(models, sortable_fields)
     paginated_models = models.page(params[:page] || 1)
 
     render inertia: "Models/Index", props: {
@@ -46,6 +45,7 @@ class ModelsController < ApplicationController
 
   # POST /models
   def create
+    model = Model.new(model_params)
     model.company = @active_company
     
     if model.save

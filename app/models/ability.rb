@@ -4,13 +4,13 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Allow super_admin full control
-    user ||= User.new # guest user (not logged in)
-    if user.has_role? :super_admin
-      can :manage, :all
-    else
-      can :manage, Company, id: Company.with_role(:admin, user).pluck(:id)
-    end
+    user ||= User.new
+
+    can :manage, Company, id: Company.with_role(:admin, user).pluck(:id)
+
+    return unless user.has_role? :super_admin
+
+    can :manage, :all
 
     # The first argument to `can` is the action you are giving the user permission to do.
     # If you pass :manage it will apply to every action. Other common actions

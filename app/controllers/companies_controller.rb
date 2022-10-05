@@ -1,9 +1,6 @@
 class CompaniesController < ApplicationController
   include Searchable
 
-  load_and_authorize_resource find_by: :slug
-  skip_authorize_resource only: [:new, :create]
-
   expose :companies, -> { search(current_user.companies, sortable_fields) }
   expose :company, -> { current_user.companies.find_by_slug(params[:slug]) }
 
@@ -23,7 +20,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/:id
   def show
-    if !company
+    if company.nil?
       render inertia: "Error", props: { status: 404 }
     else
       render inertia: "Companies/Show", props: {

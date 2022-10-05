@@ -3,13 +3,11 @@ class ItemsController < ApplicationController
   include Searchable
   include AssignableConcern
 
-  expose :items, -> { @active_company.items.includes_associated }
+  expose :items, -> { search(@active_company.items.includes_associated, sortable_fields) }
   expose :item
-  expose :category, id: -> { request.params[:category_id] }
 
   # GET /hardware
   def index
-    self.items = search(items, sortable_fields)
     paginated_items = items.page(params[:page] || 1)
 
     render inertia: "Items/Index", props: {

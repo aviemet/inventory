@@ -3,13 +3,11 @@ class CategoriesController < ApplicationController
   expose :category
 
   # GET /categories
-  # GET /categories.json
   def index
     render inertia: "Categories/Index"
   end
 
   # GET /categories/:id
-  # GET /categories/:id.json
   def show
     render inertia: "Categories/Show"
   end
@@ -25,7 +23,6 @@ class CategoriesController < ApplicationController
   end
 
   # POST /categories
-  # POST /categories.json
   def create
     respond_to do |format|
       if category.save
@@ -39,7 +36,6 @@ class CategoriesController < ApplicationController
   end
 
   # PATCH/PUT /categories/:id
-  # PATCH/PUT /categories/:id.json
   def update
     respond_to do |format|
       if category.update(category_params)
@@ -53,7 +49,6 @@ class CategoriesController < ApplicationController
   end
 
   # DELETE /categories/:id
-  # DELETE /categories/:id.json
   def destroy
     category.destroy
     respond_to do |format|

@@ -2,13 +2,12 @@ class NetworksController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :networks, -> { @active_company.networks }
+  expose :networks, -> { search(@active_company.networks, sortable_fields) }
   expose :network
 
   # GET /networks
   # GET /networks.json
   def index
-    self.networks = search(networks, sortable_fields)
     paginated_networks = networks.page(params[:page] || 1)
 
     render inertia: "Networks/Index", props: {

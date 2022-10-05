@@ -34,13 +34,14 @@ class ApplicationController < ActionController::Base
   # Changes active company for user if provided
   # Sets @active_company on Controller
   # Redirects to complete_registration_path if no company exists for the current_user
-  def set_active_company(company = nil)
+  def set_active_company
     return if !current_user
 
-    current_user.active_company = company if company
-
     if current_user.companies.size > 0
-      current_user.update(active_company: current_user.companies.first) if !current_user.active_company
+      # TODO: This may be a stop-gap measure. May want to redirect to a view with choices to be more explicit
+      if !current_user.active_company
+        current_user.update(active_company: current_user.companies.first)
+      end
 
       @active_company = current_user.active_company
     elsif !['/logout', '/users/complete_registration'].include? request.path

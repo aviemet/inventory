@@ -3,13 +3,12 @@ class LocationsController < ApplicationController
   include Searchable
   include ContactableConcern
 
-  expose :locations, -> { @active_company.locations.includes_associated }
+  expose :locations, -> { search(@active_company.locations.includes_associated, sortable_fields) }
   # location is used as a local variable by redirect_to
-  expose :loc, -> { @active_company.locations.includes_associated.find_by_slug(request.params[:slug]) || Location.new(location_params) }
+  expose :loc, -> { @active_company.locations.includes_associated.find_by_slug(request.params[:slug]) }
 
   # GET /locations
   def index
-    self.locations = search(locations, sortable_fields)
     paginated_locations = locations.page(params[:page] || 1)
 
     render inertia: "Locations/Index", props: {
@@ -50,6 +49,7 @@ class LocationsController < ApplicationController
 
   # POST /locations
   def create
+    loc = Location.new(location_params)
     loc.company = @active_company
 
     if request.params&.[](:redirect) == false
