@@ -13,7 +13,7 @@ interface IRowCheckBox {
 const HeadCheckbox = ({ selected, rows, allChecked, indeterminate }: IRowCheckBox) => {
 	const { setTableState } = useTableContext()
 
-	const handleClick = (e:  React.ChangeEvent<HTMLInputElement>) => {
+	const handleClick = () => {
 		if(!rows || rows.length === 0) return
 
 		if(selected.size === rows.length) {
@@ -29,7 +29,7 @@ const HeadCheckbox = ({ selected, rows, allChecked, indeterminate }: IRowCheckBo
 
 	return (
 		<Cell fitContent>
-			<Checkbox onChange={ handleClick } checked={ allChecked } indeterminate={ indeterminate } />
+			<Checkbox onChange={ handleClick } checked={ allChecked } indeterminate={ indeterminate } disabled={ rows?.length === 0 } />
 		</Cell>
 	)
 }
