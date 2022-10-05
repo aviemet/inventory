@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { type Method, type Visit, type Progress } from '@inertiajs/inertia'
+import { type Method, type Visit } from '@inertiajs/inertia'
 import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
 import { type AnchorProps } from '@mantine/core'
@@ -13,7 +13,7 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'>, O
 	external?: boolean
 	compact?: boolean
 	as?: 'a'|'button'
-	onProgress?: ((progress: Progress) => void) | React.ReactEventHandler<HTMLAnchorElement>
+	onProgress?: React.ReactEventHandler<HTMLAnchorElement>
 	target?: string
 	rel?: string
 	tabIndex?: number
@@ -35,11 +35,11 @@ const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
 		})
 	}
 
-	// TODO: Get onProgress back in the props object somehow
 	if(renderExternal) {
-		return <ExternalLink href={ href } { ...props } ref={ ref }>{ children }</ExternalLink>
+		return <ExternalLink href={ href } ref={ ref } { ...onProgress } { ...props }>{ children }</ExternalLink>
 	}
-	return <InertiaLink href={ href } as={ as } method={ method } visit={ visit } { ...props } ref={ ref }>{ children }</InertiaLink>
+
+	return <InertiaLink href={ href } as={ as } method={ method } visit={ visit } ref={ ref } { ...onProgress } { ...props }>{ children }</InertiaLink>
 })
 
 export default Link

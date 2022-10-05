@@ -65,7 +65,7 @@ class ItemsController < ApplicationController
     self.item
     render inertia: "Items/Clone"
   end
-    
+
   # GET /hardware/:id/checkout
   def checkout
     redirect_to item if item.assigned?
