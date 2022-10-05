@@ -1345,18 +1345,6 @@ export const editOrder: ((
 
 /**
  * Generates rails route to
- * /ownerships/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editOwnership: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /people/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1955,16 +1943,6 @@ export const newOrder: ((
 
 /**
  * Generates rails route to
- * /ownerships/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newOwnership: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /people/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2102,28 +2080,6 @@ export const order: ((
  * @returns {string} route path
  */
 export const orders: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /ownerships/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const ownership: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /ownerships(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const ownerships: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
