@@ -62,6 +62,7 @@ declare namespace Schema {
 		returned_at?: string | null;
 		expected_at?: string | null;
 		notes?: string | null;
+		status?: 'approved'|'requested'|'denied' | null;
 		active: boolean;
 		created_by_id?: number | null;
 		created_at: string;
@@ -239,6 +240,7 @@ declare namespace Schema {
 		id: number;
 		name?: string | null;
 		slug: string;
+		notes?: string | null;
 		location_id?: number | null;
 		created_at: string;
 		updated_at: string;
@@ -668,6 +670,8 @@ declare namespace Schema {
 		id: number;
 		subject?: string | null;
 		description?: string | null;
+		assigned_to_type?: string | null;
+		assigned_to_id?: number | null;
 		created_by_id?: number | null;
 		created_at: string;
 		updated_at: string;
