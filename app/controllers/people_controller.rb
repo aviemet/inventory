@@ -1,15 +1,12 @@
 class PeopleController < ApplicationController
   include OwnableConcern
   include Searchable
-  # load_and_authorize_resource
 
-  expose :people, -> { @active_company.people.includes_associated }
+  expose :people, -> { search(@active_company.people.includes_associated, sortable_fields) }
   expose :person
-  expose :departments, -> { @active_company.departments }
 
   # GET /people
   def index
-    self.people = search(people, sortable_fields)
     paginated_people = people.page(params[:page] || 1)
 
     render inertia: "People/Index", props: {

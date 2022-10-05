@@ -1,12 +1,11 @@
 class ContractsController < ApplicationController
   include Searchable
 
-  expose :contracts, -> { @active_company.contracts.includes_associated }
+  expose :contracts, -> { search(@active_company.contracts.includes_associated, sortable_fields) }
   expose :contract
 
   # GET /contracts
   def index
-    self.contracts = search(contracts, sortable_fields)
     paginated_contracts = contracts.page(params[:page] || 1)
 
     render inertia: "Contracts/Index", props: {
@@ -46,6 +45,7 @@ class ContractsController < ApplicationController
   # POST /contracts
   def create
     contract.company = @active_company
+
     if contract.save
       redirect_to contract, notice: 'Contract was successfully created'
     else

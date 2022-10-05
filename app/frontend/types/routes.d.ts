@@ -2159,20 +2159,6 @@ export const saveCompleteRegistration: ((
 
 /**
  * Generates rails route to
- * /users/:id/set_active_company/:company_id(.:format)
- * @param {any} id
- * @param {any} companyId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const setActiveCompany: ((
-  id: RequiredRouteParameter,
-  companyId: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /settings(.:format)
  * @param {object | undefined} options
  * @returns {string} route path

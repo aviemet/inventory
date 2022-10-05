@@ -7,7 +7,8 @@ class Component < ApplicationRecord
 
   pg_search_scope(
     :search, 
-    against: [:name, :model_number], associated_against: { 
+    against: [:name, :serial], associated_against: { 
+      model: [:name, :model_number],
       vendor: [:name],
       default_location: [:name],
       category: [:name],

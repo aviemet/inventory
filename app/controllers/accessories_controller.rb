@@ -3,12 +3,11 @@ class AccessoriesController < ApplicationController
   include Searchable
   include AssignableConcern
 
-  expose :accessories, -> { @active_company.accessories.includes_associated }
+  expose :accessories, -> { search(@active_company.accessories.includes_associated, sortable_fields) }
   expose :accessory
 
   # GET /accessories
   def index
-    self.accessories = search(accessories, sortable_fields)
     paginated_accessories = accessories.page(params[:page] || 1)
 
     render inertia: "Accessories/Index", props: {

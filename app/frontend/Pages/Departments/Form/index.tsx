@@ -16,6 +16,7 @@ const emptyDepartment: Partial<Schema.Department> = {
 }
 
 const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment, locations }: IDepartmentFormProps) => {
+
 	return (
 		<Form
 			model="department"

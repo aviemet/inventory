@@ -2,12 +2,11 @@ class LicensesController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :licenses, -> { @active_company.licenses.includes_associated }
+  expose :licenses, -> { search(@active_company.licenses.includes_associated, sortable_fields) }
   expose :license
 
   # GET /licenses
   def index
-    self.licenses = search(licenses, sortable_fields)
     paginated_licenses = licenses.page(params[:page] || 1)
 
     render inertia: "Licenses/Index", props: {

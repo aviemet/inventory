@@ -21,6 +21,7 @@ import {
 	ConsumablesIcon,
 	ContractsIcon,
 	ReportsIcon,
+	UsersIcon,
 } from '@/Components/Icons'
 
 import IconProvider from '@/Providers/IconProvider'
@@ -73,7 +74,12 @@ const Sidebar = () => {
 						</li>
 						<li><MenuLink href={ Routes.licenses() } icon={ <LicensesIcon /> }>Licenses</MenuLink></li>
 						<li><MenuLink href={ Routes.networks() } icon={ <NetworksIcon /> }>Networks</MenuLink></li>
-						<li><MenuLink href={ Routes.people() } icon={ <PeopleIcon /> }>People</MenuLink></li>
+						<li>
+							<MenuLink href={ Routes.people() } icon={ <UsersIcon /> }>People</MenuLink>
+							<ul>
+								<li><MenuLink href={ Routes.users() } icon={ <PeopleIcon /> }>Users</MenuLink></li>
+							</ul>
+						</li>
 						<li><MenuLink href={ Routes.tickets() } icon={ <TicketsIcon /> }>Tickets</MenuLink></li>
 						<li>
 							<MenuLink href={ Routes.vendors() } icon={ <VendorsIcon /> }>Vendors</MenuLink>

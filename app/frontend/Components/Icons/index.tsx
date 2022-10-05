@@ -3,6 +3,7 @@ export {
 	Dashboard as DashboardIcon,
 	Devices as ItemsIcon,
 	Users as PeopleIcon,
+	UserCircle as UsersIcon,
 	Ticket as TicketsIcon,
 	BuildingStore as VendorsIcon,
 	Receipt as PurchasesIcon,
