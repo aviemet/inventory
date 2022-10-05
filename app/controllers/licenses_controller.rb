@@ -1,6 +1,7 @@
 class LicensesController < ApplicationController
   include OwnableConcern
   include Searchable
+  include AssignableConcern
 
   expose :licenses, -> { search(@active_company.licenses.includes_associated, sortable_fields) }
   expose :license
@@ -42,6 +43,21 @@ class LicensesController < ApplicationController
       categories: -> { @active_company.categories.find_by_type(:License).render(view: :as_options) },
       vendors: -> { @active_company.vendors.render(view: :as_options) },
       manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
+    }
+  end
+
+  # GET /licenses/:id/checkout
+  def checkout
+    redirect_to license if license.qty == 0
+
+    assignment = Assignment.new({ assignable: license })
+
+    render inertia: "Licenses/Checkout", props: {
+      license: license.render,
+      assignment: assignment.render(view: :new),
+      people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
+      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
+      locations: -> { @active_company.locations.render(view: :as_options) },
     }
   end
 

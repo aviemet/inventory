@@ -5,20 +5,29 @@ import { Link } from '@/Components'
 interface IMenuItemProps extends MenuItemProps {
 	href?: string
 	onClick?: (e: MouseEvent) => void
+	disabled?: boolean
 }
 
 const MenuItem = forwardRef<HTMLButtonElement | HTMLAnchorElement, IMenuItemProps>((
-	{ children, href, onClick, ...props },
+	{ children, href, disabled = false, ...props },
 	ref
 ) => {
-	if(href) {
-		return (
-			<Menu.Item ref={ ref } component={ Link } href={ href } { ...props } { ...onClick }>{ children }</Menu.Item>
-		)
+	const menutItemProps: Partial<typeof props & { component: typeof Link, href: string }> = props
+	if(href && !disabled) {
+		menutItemProps.component = Link
+		menutItemProps.href = href
 	}
 
 	return (
-		<Menu.Item ref={ ref } { ...props } { ...onClick }>{ children }</Menu.Item>
+		<Menu.Item ref={ ref } { ...menutItemProps } sx={ theme => {
+			if(disabled) return {
+				color: theme.colors.gray[theme.fn.primaryShade()],
+				textDecoration: 'line-through'
+			}
+			return {}
+		} }>
+			{ children }
+		</Menu.Item>
 	)
 })
 

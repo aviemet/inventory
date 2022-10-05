@@ -31,7 +31,7 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
 	// Only present standard GET requests as anchor tags, all others as buttons
 	if(method !== undefined && method !== 'get') {
 		return (
-			<Anchor component={ InertiaLink } href={ href } onClick={ e => e.preventDefault() }>
+			<Anchor component={ InertiaLink } href={ href } onClick={ e => e.preventDefault() } { ...props }>
 				<Button { ...buttonProps } onClick={ handleHTTP }>{ children }</Button>
 			</Anchor>
 		)
@@ -39,7 +39,7 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
 
 	const asButton = as === 'button'
 	return (
-		<Anchor component={ InertiaLink } href={ href } { ...props } as={ asButton ? 'a' : as } ref={ ref }>
+		<Anchor component={ InertiaLink } href={ href } as={ asButton ? 'a' : as } ref={ ref } { ...props }>
 			{ asButton ? <Button { ...buttonProps } compact={ compact }>{ children }</Button> : children }
 		</Anchor>
 	)
