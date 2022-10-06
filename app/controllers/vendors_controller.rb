@@ -2,10 +2,8 @@ class VendorsController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :vendors, -> { @active_company.vendors.includes_associated }
-  expose :vendor, -> { 
-    @active_company.vendors.includes_associated.find_by_slug(request.params[:slug]) || Vendor.new(vendor_params)
-  }
+  expose :vendors, -> { search(@active_company.vendors.includes_associated, sortable_fields) }
+  expose :vendor, -> { @active_company.vendors.includes_associated.find_by_slug(request.params[:slug]) }
 
   # GET /vendors
   def index
@@ -104,6 +102,7 @@ class VendorsController < ApplicationController
 
   # POST /vendors
   def create
+    vendor = Vendor.new(vendor_params)
     vendor.company = @active_company
 
     if request.params&.[](:redirect) == false

@@ -2,12 +2,11 @@ class ManufacturersController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :manufacturers, -> { @active_company.manufacturers }
+  expose :manufacturers, -> { search(@active_company.manufacturers, sortable_fields) }
   expose :manufacturer, -> { @active_company.manufacturers.find_by_slug params[:slug] }
 
   # GET /manufacturers
   def index
-    self.manufacturers = search(manufacturers, sortable_fields)
     paginated_manufacturers = manufacturers.page(params[:page] || 1)
 
     render inertia: "Manufacturers/Index", props: {

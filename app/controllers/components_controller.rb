@@ -2,12 +2,11 @@ class ComponentsController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :components, -> { @active_company.components.includes_associated }
+  expose :components, -> { search(@active_company.components.includes_associated, sortable_fields) }
   expose :component
 
   # GET /components
   def index
-    self.components = search(components, sortable_fields)
     paginated_components = components.page(params[:page] || 1)
 
     render inertia: "Components/Index", props: {
@@ -117,7 +116,7 @@ class ComponentsController < ApplicationController
   private
 
   def sortable_fields
-    %w(name model_number min_qty qty cost manufacturers.name categories.name vendors.name).freeze
+    %w(name min_qty qty cost model.name model.model_number manufacturers.name categories.name vendors.name).freeze
   end
 
   def component_params

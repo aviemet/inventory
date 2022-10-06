@@ -3,9 +3,11 @@ export {
 	Dashboard as DashboardIcon,
 	Devices as ItemsIcon,
 	Users as PeopleIcon,
+	UserCircle as UsersIcon,
 	Ticket as TicketsIcon,
 	BuildingStore as VendorsIcon,
-	Receipt as PurchasesIcon,
+	// Receipt as PurchasesIcon,
+	ShoppingCart as PurchasesIcon,
 	Settings as SettingsIcon,
 	Keyboard as AccessoriesIcon,
 	Components as ComponentsIcon,
@@ -24,18 +26,8 @@ export {
 } from 'tabler-icons-react'
 
 export {
-	// MdDashboard as DashboardIcon,
-	// MdDevices as ItemsIcon,
-	// MdSave as LicensesIcon,
-	// MdPeople as PeopleIcon,
-	// MdConfirmationNumber as TicketsIcon,
 	MdSettingsEthernet as NetworksIcon,
-	// MdBusiness as VendorsIcon,
-	// MdShoppingCart as PurchasesIcon,
-	// MdSettings as SettingsIcon,
 	MdExitToApp as LogoutIcon,
-	// MdWaterDrop as ConsumablesIcon,
-	// MdMemory as ComponentsIcon,
 	MdMenu as MenuBarsIcon,
 	MdMoreVert as MenuDotsIcon,
 	MdExpandMore as ExpandIcon,
@@ -61,7 +53,6 @@ export {
 
 export {
 	IoTrashBinOutline as TrashIcon,
-	// IoKey as LicensesIcon,
 } from 'react-icons/io5'
 
 export {

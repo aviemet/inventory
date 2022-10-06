@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link, Table } from '@/Components'
 import { Routes, formatter } from '@/lib'
-import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
+import { EditButton, CheckoutButton } from '@/Components/Button'
 import { isNil } from 'lodash'
 import { type ITableProps } from '@/Components/Table/Table'
+import { availableToCheckout } from './utils'
 
 const AccessoriesTable = (props: ITableProps) => {
 	const qty = (accessory: Schema.Accessory) => {
@@ -75,12 +76,13 @@ const AccessoriesTable = (props: ITableProps) => {
 
 						<Table.Cell>{ accessory.min_qty }</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
-							{ accessory.assigned ?
-								<CheckinButton href={ Routes.checkinAccessory(accessory) } />
-								:
-								<CheckoutButton href={ Routes.checkoutAccessory(accessory) } />
-							}
+						<Table.Cell fitContent>
+							<CheckoutButton
+								href={ Routes.checkoutAccessory(accessory) }
+								disabled={ !availableToCheckout(accessory) }
+								tooltipMessage={ !availableToCheckout(accessory) && 'None available to checkout' }
+							/>
+
 							<EditButton href={ Routes.editAccessory(accessory) } />
 						</Table.Cell>
 

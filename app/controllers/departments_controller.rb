@@ -2,12 +2,11 @@ class DepartmentsController < ApplicationController
   include Searchable
   include ContactableConcern
 
-  expose :departments, -> { @active_company.departments.includes_associated }
-  expose :department, -> { @active_company.departments.find_by_slug(params[:slug]) || Department.new(company_params) }
+  expose :departments, -> { search(@active_company.departments.includes_associated, sortable_fields) }
+  expose :department, -> { @active_company.departments.find_by_slug(params[:slug]) }
 
   # GET /departments
   def index
-    self.departments = search(departments, sortable_fields)
     paginated_departments = departments.page(params[:page] || 1)
 
     render inertia: "Departments/Index", props: {
@@ -89,61 +88,53 @@ class DepartmentsController < ApplicationController
   # GET /departments/new
   def new
     render inertia: "Departments/New", props: {
-      department: Department.new.render(view: :new)
+      department: Department.new.render(view: :new),
+      locations: -> { @active_company.locations.render(view: :as_options) }
     }
   end
 
   # GET /departments/:slug/edit
   def edit
     render inertia: "Departments/Edit", props: {
-      department: -> { department.render(view: :edit) }
+      department: department.render(view: :edit),
+      locations: -> { @active_company.locations.render(view: :as_options) }
     }
   end
 
   # POST /departments
   def create
-    department.company = Company.find(params[:company_id])
+    department = Department.new(department_params)
+    department.company = @active_company
 
-    respond_to do |format|
-      if department.save
-        format.html { redirect_to company_url(department.company), notice: 'Department was successfully created.' }
-        format.json { render :show, status: :created, location: department }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: department.errors, status: :unprocessable_entity }
-      end
+    if department.save
+      redirect_to department, notice: 'Department was successfully created'
+    else
+      redirect_to new_department_path, inertia: { errors: department.errors }
     end
   end
 
   # PATCH/PUT /departments/:slug
   def update
-    respond_to do |format|
-      if department.update(department_params)
-        format.html { redirect_to company_url(department.company), notice: 'Department was successfully updated.' }
-        format.json { render :show, status: :ok, location: department }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: department.errors, status: :unprocessable_entity }
-      end
+    if department.update(department_params)
+      redirect_to department, notice: 'Department was successfully updated'
+    else
+      redirect_to edit_department_path, inertia: { errors: department.errors }
     end
   end
 
   # DELETE /departments/:slug
   def destroy
     department.destroy
-    respond_to do |format|
-      format.html { redirect_to company_url(department.company), notice: 'Department was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to departments_url, notice: 'Department was successfully destroyed.'
   end
 
   private
 
   def sortable_fields
-    %w(name assets.count people.count).freeze
+    %w(name items.count accessories.count components.count consumables.count people.count).freeze
   end
 
   def department_params
-    params.require(:department).permit(:name, :location_id)
+    params.require(:department).permit(:name, :slug, :location_id, :notes)
   end
 end

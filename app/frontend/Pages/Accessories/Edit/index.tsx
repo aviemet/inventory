@@ -4,14 +4,16 @@ import { Section } from '@/Components'
 import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IUpdateAccessoryProps{
+interface IEditAccessoryProps{
 	accessory: Schema.Accessory
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
+	manufacturers: Schema.Manufacturer[]
+	categories: Schema.Category[]
 }
 
-const EditAccessory = ({ accessory, ...models }: IUpdateAccessoryProps) => {
+const EditAccessory = ({ accessory, ...models }: IEditAccessoryProps) => {
 	const title = `Edit ${accessory.name}`
 
 	const { props: { auth: { user } } } = usePage<InertiaPage>()

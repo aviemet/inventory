@@ -3,12 +3,11 @@ class AccessoriesController < ApplicationController
   include Searchable
   include AssignableConcern
 
-  expose :accessories, -> { @active_company.accessories.includes_associated }
+  expose :accessories, -> { search(@active_company.accessories.includes_associated, sortable_fields) }
   expose :accessory
 
   # GET /accessories
   def index
-    self.accessories = search(accessories, sortable_fields)
     paginated_accessories = accessories.page(params[:page] || 1)
 
     render inertia: "Accessories/Index", props: {
@@ -31,11 +30,11 @@ class AccessoriesController < ApplicationController
   def new
     render inertia: "Accessories/New", props: {
       accessory: Accessory.new.render(view: :new),
-      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
+      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :as_options) },
       vendors: -> { @active_company.vendors.render(view: :as_options) },
       locations: -> { @active_company.locations.render(view: :as_options) },
       manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:item).render(view: :as_options) }
+      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :as_options) }
     }
   end
 
@@ -43,11 +42,11 @@ class AccessoriesController < ApplicationController
   def edit
     render inertia: "Accessories/Edit", props: {
       accessory: accessory.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
+      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :as_options) },
       vendors: -> { @active_company.vendors.render(view: :as_options) },
       locations: -> { @active_company.locations.render(view: :as_options) },
       manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:item).render(view: :as_options) }
+      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :as_options) }
     }
   end
 
@@ -65,21 +64,6 @@ class AccessoriesController < ApplicationController
       people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
       items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
       locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
-    }
-  end
-
-  #GET /accessories/:id/checkin
-  def checkin
-    redirect_to accessory unless accessory.assigned?
-    assignment = item.assignment
-    assignment.returned_at = Time.current
-    assignment.active = false
-
-    render inertia: "Accessories/Checkin", props: {
-      item: item.render,
-      assignment: assignment.render,
-      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
-      statuses: -> { StatusType.all.render }
     }
   end
 
@@ -115,6 +99,6 @@ class AccessoriesController < ApplicationController
   end
 
   def accessory_params
-    params.require(:accessory).permit(:name, :serial, :notes, :qty, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :min_qty)
+    params.require(:accessory).permit(:name, :serial, :asset_tag, :notes, :qty, :model_id, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :cost_currency, :min_qty)
   end
 end

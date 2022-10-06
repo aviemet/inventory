@@ -3,8 +3,9 @@ class DepartmentBlueprint < ApplicationBlueprint
          :slug,
          :location_id,
          :created_at,
-         :updated_at,
-         :manager_id
+         :updated_at
+        # TODO: Not sure how to manage/track dept managers
+        #  :manager_id
 
   view :counts do
     field :counts do |department|
@@ -35,6 +36,8 @@ class DepartmentBlueprint < ApplicationBlueprint
   end
 
   view :show_page do
+    association :location, blueprint: LocationBlueprint
+
     field :items_count do |department|
       department.items.size
     end

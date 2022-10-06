@@ -64,6 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_203221) do
     t.datetime "returned_at", precision: nil
     t.datetime "expected_at", precision: nil
     t.text "notes"
+    t.integer "status"
     t.boolean "active", default: true, null: false
     t.bigint "created_by_id"
     t.datetime "created_at", null: false
@@ -188,6 +189,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_203221) do
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.string "slug", null: false
+    t.text "notes"
     t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -484,9 +486,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_203221) do
   create_table "tickets", force: :cascade do |t|
     t.string "subject"
     t.text "description"
+    t.string "assigned_to_type"
+    t.bigint "assigned_to_id"
     t.bigint "created_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assigned_to_type", "assigned_to_id"], name: "index_tickets_on_assigned_to"
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
   end
 

@@ -1469,15 +1469,6 @@ export const editOrder = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6
 
 /**
  * Generates rails route to
- * /ownerships/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editOwnership = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"ownerships"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
  * /people/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1942,14 +1933,6 @@ export const newOrder = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"orders"],[2,[7,
 
 /**
  * Generates rails route to
- * /ownerships/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newOwnership = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"ownerships"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
-
-/**
- * Generates rails route to
  * /people/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2063,23 +2046,6 @@ export const orders = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"orders"],[1,[2,[8
 
 /**
  * Generates rails route to
- * /ownerships/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const ownership = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"ownerships"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
-
-/**
- * Generates rails route to
- * /ownerships(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const ownerships = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"ownerships"],[1,[2,[8,"."],[3,"format"]]]]]);
-
-/**
- * Generates rails route to
  * /people(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2135,16 +2101,6 @@ export const root = __jsr.r({}, [7,"/"]);
  * @returns {string} route path
  */
 export const saveCompleteRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"complete_registration"],[1,[2,[8,"."],[3,"format"]]]]]]]);
-
-/**
- * Generates rails route to
- * /users/:id/set_active_company/:company_id(.:format)
- * @param {any} id
- * @param {any} companyId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const setActiveCompany = __jsr.r({"id":{"r":true},"company_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"set_active_company"],[2,[7,"/"],[2,[3,"company_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to

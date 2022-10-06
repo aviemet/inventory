@@ -17,8 +17,10 @@ class AccessoryBlueprint < ApplicationBlueprint
     accessory.cost&.amount.to_f if accessory.cost
   end
 
-  field :active_assignments_count do |accessory|
-    accessory.assignments.where(active: true).size
+  view :show do
+    field :active_assignments_count do |accessory|
+      accessory.assignments.where(active: true).size
+    end
   end
 
   view :associations do

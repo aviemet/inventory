@@ -1,13 +1,12 @@
 class OrdersController < ApplicationController
   include Searchable
 
-  expose :orders, -> { @active_company.orders.includes_associated }
+  expose :orders, -> { search(@active_company.orders.includes_associated, sortable_fields) }
   expose :order
 
   # GET /orders
   # GET /orders.json
   def index
-    self.orders = search(orders, sortable_fields)
     paginated_orders = orders.page(params[:page] || 1)
 
     render inertia: "Orders/Index", props: {

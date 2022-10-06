@@ -19,7 +19,7 @@ const HeadRow = forwardRef<HTMLTableRowElement, IHeadRowProps>((
 
 	// Set the status of the table head checkbox
 	useEffect(() => {
-		if(!selectable || !rows) return
+		if(!selectable || !rows || rows.length === 0) return
 
 		switch(selected.size) {
 			case rows.length: // All checked
