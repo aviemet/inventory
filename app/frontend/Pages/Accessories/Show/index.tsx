@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/inertia-react'
 import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { Tooltip } from '@mantine/core'
+import { availableToCheckout } from '../utils'
 
 interface IShowAccessoryProps {
 	accessory: Schema.Accessory
@@ -18,11 +19,6 @@ const tabs = {
 const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 	const title = accessory.name ?? 'Accessory Details'
 
-	const availableToCheckout = useCallback((accessory: Schema.Accessory) => {
-		if(accessory.qty === null || accessory.qty === undefined || accessory.assignments === undefined) return false
-
-		return accessory.qty - accessory.assignments.length < 0
-	}, [accessory])
 
 	return (
 		<>
@@ -35,7 +31,7 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Item href={ Routes.checkoutAccessory(accessory) } disabled={ !availableToCheckout(accessory) }>
+							<Menu.Item href={ Routes.checkoutAccessory(accessory) } disabled={ !useCallback((accessory: Schema.Accessory) => availableToCheckout(accessory), [accessory.qty, accessory.assignments]) }>
 								{ !availableToCheckout(accessory) ?
 									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Accessory</div></Tooltip>
 									:
