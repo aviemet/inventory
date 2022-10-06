@@ -6,7 +6,7 @@ class Department < ApplicationRecord
 
   pg_search_scope(
     :search, 
-    against: [:name], associated_against: { 
+    against: [:name, :notes], associated_against: { 
       location: [:name]
     }, using: {
       tsearch: { prefix: true }, 

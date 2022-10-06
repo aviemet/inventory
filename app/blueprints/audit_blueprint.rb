@@ -1,3 +1,5 @@
+include Rails.application.routes.url_helpers
+
 class AuditBlueprint < Blueprinter::Base
   identifier :id
 
@@ -15,6 +17,14 @@ class AuditBlueprint < Blueprinter::Base
          :remote_address,
          :request_uuid,
          :created_at
+
+  field :route do |audit|
+    begin
+      polymorphic_path(audit.auditable_type.constantize.find(audit.auditable_id), only_path: true)
+    rescue
+      nil
+    end
+  end
 
   view :with_user do
     association :user, blueprint: UserBlueprint

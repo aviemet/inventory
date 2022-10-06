@@ -1,13 +1,12 @@
 import React from 'react'
 import { useTableContext } from './TableContext'
-import Row from './Row'
 import cx from 'clsx'
 
 const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
 	const { tableState: { selected, rows } } = useTableContext()
 
 	if(!rows || rows.length === 0) {
-		return <Row />
+		return <></>
 	}
 
 	const injectRowProps = (row: JSX.Element) => {

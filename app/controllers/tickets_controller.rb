@@ -1,12 +1,11 @@
 class TicketsController < ApplicationController
   include Searchable
 
-  expose :tickets, -> { Ticket.all }
+  expose :tickets, -> { search(Ticket.all, sortable_fields) }
   expose :ticket
 
   # GET /tickets
   def index
-    self.tickets = search(tickets, sortable_fields)
     paginated_tickets = tickets.page(params[:page] || 1)
 
     render inertia: "Tickets/Index", props: {

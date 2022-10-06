@@ -2,12 +2,11 @@ class ConsumablesController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :consumables, -> { @active_company.consumables.includes_associated }
+  expose :consumables, -> { search(@active_company.consumables.includes_associated, sortable_fields) }
   expose :consumable
 
   # GET /consumables
   def index
-    self.consumables = search(consumables, sortable_fields)
     paginated_consumables = consumables.page(params[:page] || 1)
 
     render inertia: "Consumables/Index", props: {
@@ -110,10 +109,10 @@ class ConsumablesController < ApplicationController
   private
 
   def sortable_fields
-    %w(name model_number min_qty qty cost requestable manufacturers.name categories.name vendors.name).freeze
+    %w(name min_qty qty cost requestable model.name model.model_number manufacturers.name categories.name vendors.name).freeze
   end
 
   def consumable_params
-    params.require(:consumable).permit(:name, :model_number, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :category_id, :vendor_id, :default_location_id)
+    params.require(:consumable).permit(:name, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :category_id, :vendor_id, :default_location_id)
   end
 end

@@ -28,7 +28,15 @@ class User < ApplicationRecord
 
   # jsonb_accessor :table_preferences, hide: :hash 
  
+  delegate :can?, :cannot?, to: :ability
+
+  scope :includes_associated, -> { includes([:person, :companies]) }
+
   private
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
 
   def add_email_to_contact
     return if self.person.contact.emails.exists?(email: email)
@@ -40,3 +48,4 @@ class User < ApplicationRecord
     self.dark_mode = ActiveModel::Type::Boolean.new.cast(self.dark_mode) if self.dark_mode
   end
 end
+

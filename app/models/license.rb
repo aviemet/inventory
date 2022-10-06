@@ -1,6 +1,6 @@
 class License < ApplicationRecord
   include Ownable
-  include Assignable::Consume
+  include Assignable::Quantity
   include Purchasable
   include Fieldable
   include PgSearch::Model

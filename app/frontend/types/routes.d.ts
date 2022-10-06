@@ -1345,18 +1345,6 @@ export const editOrder: ((
 
 /**
  * Generates rails route to
- * /ownerships/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editOwnership: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /people/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1955,16 +1943,6 @@ export const newOrder: ((
 
 /**
  * Generates rails route to
- * /ownerships/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newOwnership: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /people/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2107,28 +2085,6 @@ export const orders: ((
 
 /**
  * Generates rails route to
- * /ownerships/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const ownership: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /ownerships(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const ownerships: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /people(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2198,20 +2154,6 @@ export const root: ((
  * @returns {string} route path
  */
 export const saveCompleteRegistration: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /users/:id/set_active_company/:company_id(.:format)
- * @param {any} id
- * @param {any} companyId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const setActiveCompany: ((
-  id: RequiredRouteParameter,
-  companyId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

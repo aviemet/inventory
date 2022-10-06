@@ -6,7 +6,9 @@ import { AppShell, Box, TypographyStylesProvider, useMantineTheme } from '@manti
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
 	const theme = useMantineTheme()
-	console.log({ theme })
+	if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+		console.log({ theme })
+	}
 
 	return (
 		<AppShell

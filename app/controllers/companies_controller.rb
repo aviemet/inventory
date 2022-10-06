@@ -1,11 +1,8 @@
 class CompaniesController < ApplicationController
   include Searchable
 
-  load_and_authorize_resource find_by: :slug
-  skip_authorize_resource only: [:new, :create]
-
   expose :companies, -> { search(current_user.companies, sortable_fields) }
-  expose :company, -> { current_user.companies.find_by_slug(params[:slug]) || Company.new(company_params) }
+  expose :company, -> { current_user.companies.find_by_slug(params[:slug]) }
 
   # GET /companies
   # GET /companies.json
@@ -22,11 +19,14 @@ class CompaniesController < ApplicationController
   end
 
   # GET /companies/:id
-  # GET /companies/:id.json
   def show
-    render inertia: "Companies/Show", props: {
-      company: -> { company.render(view: :associations) }
-    }
+    if company.nil?
+      render inertia: "Error", props: { status: 404 }
+    else
+      render inertia: "Companies/Show", props: {
+        company: -> { company.render(view: :associations) }
+      }
+    end
   end
 
   # GET /companies/new
@@ -45,7 +45,7 @@ class CompaniesController < ApplicationController
 
   # POST /companies
   def create
-    if company.save
+    if Company.new(company_params).save
       # Assign admin permissions to user creating the record
       current_user.add_role :admin, company
       current_user.update(active_company: company)
