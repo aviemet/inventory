@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useMantineTheme } from '@mantine/styles'
 import { Button, PaginationItemProps } from '@mantine/core'
 import { NextIcon, LastIcon, PreviousIcon, FirstIcon, DotsIcon } from '@/Components/Icons'
@@ -34,12 +34,9 @@ const getCurrentPage = (url: URL) => {
 	}
 }
 
-const PageItem = ({ page, total, active, onClick, className, tabIndex, ...aria }: IPageItemProps) => {
+const PageItem = ({ page, total, active, onClick, className, tabIndex, ...props }: IPageItemProps) => {
 	const theme = useMantineTheme()
 	const icons = (theme.dir === 'rtl' ? rtlIcons : ltrIcons)
-
-	const url = new URL(window.location.href)
-	const currentPage = getCurrentPage(url)
 
 	let Item: React.FC
 
@@ -49,7 +46,12 @@ const PageItem = ({ page, total, active, onClick, className, tabIndex, ...aria }
 		Item = icons[page]
 	}
 
-	const pageLink = useCallback(() => {
+	if(page === 'dots') return <Item />
+
+	const url = new URL(window.location.href)
+	const currentPage = getCurrentPage(url)
+
+	const pageLink = () => {
 		let linkPage
 
 		switch(page) {
@@ -74,17 +76,18 @@ const PageItem = ({ page, total, active, onClick, className, tabIndex, ...aria }
 		}
 
 		return url.toString()
-	}, [page])
+	}
 
-	if((page === 'prev' && currentPage === 1) || (page === 'next' && currentPage === total)) {
+
+	if((page === 'prev' && currentPage === 1) || (page === 'next' && currentPage === total) || (total && total <= 1)) {
 		return (
 			<Button
-				disabled
 				type="button"
 				onClick={ onClick }
 				className={ className }
 				tabIndex={ tabIndex }
-				{ ...aria }
+				{ ...props }
+				disabled
 			>
 				<Item />
 			</Button>
@@ -107,4 +110,4 @@ const PageItem = ({ page, total, active, onClick, className, tabIndex, ...aria }
 	)
 }
 
-export default PageItem
+export default React.memo(PageItem)
