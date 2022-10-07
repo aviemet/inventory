@@ -12,4 +12,5 @@ ENV RAILS_SERVE_STATIC_FILES true
 
 EXPOSE 3000
 
-CMD ["bash"]
+ENTRYPOINT ["./entrypoint.sh"]
+CMD ["bin/setup"]

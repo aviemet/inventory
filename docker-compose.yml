@@ -7,6 +7,7 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - postgres:/var/lib/postgresql/data
+    restart: always
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && yarn start"
@@ -17,6 +18,10 @@ services:
     depends_on:
       - db
     environment:
-      - RAILS_MASTER_KEY=key_goes_here
+      - RAILS_MASTER_KEY=secret_key
+      - INVENTORY_DATABASE_PASSWORD=password
+      - POSTGRES_USER=postgres
+    env_file: .env
+    restart: always
 volumes:
   postgres:
