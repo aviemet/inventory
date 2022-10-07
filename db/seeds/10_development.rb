@@ -20,6 +20,7 @@ if Rails.env == "development"
 
     company = Company.create!({
       name: "Example Company",
+      default_currency: "USD",
     })
     user.add_role :admin, company
     person.company = company
