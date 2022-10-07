@@ -81,5 +81,7 @@ test:
 #
 production:
   <<: *default
+  username: postgres
+  host: db
   database: inventory_production
   password: <%= ENV["INVENTORY_DATABASE_PASSWORD"] %>
