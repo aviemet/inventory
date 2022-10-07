@@ -110,6 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_203221) do
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
+    t.string "default_currency", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_companies_on_slug", unique: true

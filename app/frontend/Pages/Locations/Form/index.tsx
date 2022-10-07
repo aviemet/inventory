@@ -37,8 +37,8 @@ const LocationForm = ({ to, method = 'post', onSubmit, location = emptyLocation,
 			<SearchableDropdown
 				label="Currency"
 				name="currency"
-				getLabel={ value => `${value.symbol} - ${value.code}` }
-				getValue={ value => value.symbol }
+				getLabel={ value => `${value.code} (${value.symbol})` }
+				getValue={ value => value.code }
 				options={ currencies }
 			/>
 

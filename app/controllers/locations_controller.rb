@@ -30,7 +30,7 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     render inertia: "Locations/New", props: {
-      location: Location.new.render(view: :new),
+      location: Location.new(currency: @active_company.default_currency).render(view: :new),
       locations: -> { @active_company.locations.render(view: :as_options) },
       departments: -> { @active_company.departments.render(view: :as_options) },
       currencies: currencies,
@@ -87,10 +87,6 @@ class LocationsController < ApplicationController
   end
 
   private
-
-  def currencies
-    Monetize::Parser::CURRENCY_SYMBOLS.map{ |sym, abbr| { symbol: sym, code: abbr } }
-  end
 
   def sortable_fields
     %w(name currency items accessories components consumables departments.name).freeze
