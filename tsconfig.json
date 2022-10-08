@@ -41,7 +41,6 @@
       "./node_modules/@inertiajs/inertia-react"
     ],
     "types": [                                           /* Specify type package names to be included without being referenced in a source file. */
-      "vite-plugin-svgr/client",
       "vitest/globals",
     ],
     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */

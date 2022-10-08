@@ -13,6 +13,8 @@ const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 		xl: 1440,
 		'2xl': 1920,
 	},
+	black: '#111111',
+	white: '#FCFCFC',
 	colorScheme,
 	fontFamily: 'Roboto, sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
