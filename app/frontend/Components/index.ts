@@ -12,4 +12,4 @@ export { default as Tabs } from './Tabs'
 export { default as Tile } from './Tile'
 
 // Export UI library components as a proxy to allow easy refactoring
-export { Box, Badge, Container, Group, Modal, Stack } from '@mantine/core'
+export { Box, Badge, Container, Group, Modal, Stack, Image, BackgroundImage } from '@mantine/core'

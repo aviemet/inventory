@@ -1,17 +1,16 @@
 # Development data for testing with
 
-if Rails.env == "development"
+if Rails.env == "production"
 
   if User.count == 0 || Company.count == 0
     person = Person.new({
-      first_name: "Avram",
-      middle_name: "True",
-      last_name: "Walden",
+      first_name: "IT",
+      last_name: "Manager",
       employee_number: "1000",
       job_title: "IT Manager",
     })
     user = User.new({
-      email: "aviemet@gmail.com",
+      email: "demo@company.com",
       password: "Complex1!",
       confirmed_at: Date.new,
       person: person,
@@ -21,6 +20,7 @@ if Rails.env == "development"
     company = Company.create!({
       name: "Example Company",
     })
+
     user.add_role :admin, company
     person.company = company
     person.save
@@ -39,6 +39,16 @@ if Rails.env == "development"
         name: "IT Office",
         company: company,
         parent_id: 1
+      },
+      {
+        name: "Engineering",
+        company: company,
+        parent_id: 1
+      },
+      {
+        name: "Front Desk",
+        company: company,
+        parent_id: 1
       }
     ].each{ |location| Location.create!(location) }
   end
@@ -47,12 +57,17 @@ if Rails.env == "development"
     [
       {
         name: "IT Dept",
-        location: Location.first,
+        location: Location.second,
         company: company,
       },
       { 
         name: "Engineering",
-        location: Location.second,
+        location: Location.third,
+        company: company,
+      },
+      { 
+        name: "Front Desk",
+        location: Location.find(4),
         company: company,
       }
     ].each{ |dept| Department.create!(dept) }
