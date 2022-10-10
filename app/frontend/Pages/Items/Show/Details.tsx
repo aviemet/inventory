@@ -15,7 +15,7 @@ const AssignmentLink = ({ assignment }: { assignment?: Schema.Assignment }) => {
 	return <Link href={ path(assignment.assign_toable_id) }>{ assignment.assign_toable.name }</Link>
 }
 
-const Details = ({ item }: IItemDetailsProps) => {
+const ItemDetails = ({ item }: IItemDetailsProps) => {
 	const itemAssignment = useCallback(() => {
 		if(!item.assigned || !item.assignments) return
 
@@ -118,4 +118,4 @@ const Details = ({ item }: IItemDetailsProps) => {
 	)
 }
 
-export default Details
+export default ItemDetails

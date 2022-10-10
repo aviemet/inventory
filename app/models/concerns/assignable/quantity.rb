@@ -5,19 +5,25 @@ module Assignable
     include Assignable
 
     included do
-      def unassign(assignment = self.assignment.last, returned_at: Time.current)
+      def unassign(assignment = self.assignments.where(active: true).last, returned_at: Time.current)
+        success = false
+
         self.transaction do
           self._before_unassignment(assignment, params) if self.respond_to?(:_before_unassignment)
           self.before_unassignment(assignment, params) if self.respond_to?(:before_unassignment)
 
-          assignment.update({
+          if assignment.update({
             active: false,
             returned_at: returned_at
           })
+            success = true
+          end
 
           self._after_unassignment(assignment, params) if self.respond_to?(:_after_unassignment)
           self.after_unassignment(assignment, params) if self.respond_to?(:after_unassignment)
         end
+
+        return success
       end
     end
 
