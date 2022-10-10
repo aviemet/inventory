@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   include OwnableConcern
   include Searchable
-  include AssignableConcern
 
   expose :items, -> { search(@active_company.items.includes_associated, sortable_fields) }
   expose :item
