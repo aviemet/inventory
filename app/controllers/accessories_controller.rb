@@ -20,6 +20,7 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/:id
   def show
+    ap "SHOW ACCESSORY"
     render inertia: "Accessories/Show", props: {
       accessory: -> { accessory.render(view: :associations) }
     }
@@ -51,19 +52,39 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/:id/checkout
   def checkout
-    redirect_to accessory if accessory.qty == 0
+    if accessory.qty == 0
+      redirect_to accessory, warning: "There are none available to checkout"
+    else
+      assignment = Assignment.new
+      assignment.assignable = accessory
+      assignment.assign_toable_type = :Item
 
-    assignment = Assignment.new
-    assignment.assignable = accessory
-    assignment.assign_toable_type = :Item
+      render inertia: "Accessories/Checkout", props: {
+        accessory: accessory.render(view: :edit),
+        assignment: assignment.render(view: :new),
+        people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
+        items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
+        locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+      }
+    end
+  end
 
-    render inertia: "Accessories/Checkout", props: {
-      accessory: accessory.render,
-      assignment: assignment.render(view: :new),
-      people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
-      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
-      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
-    }
+  #GET /accessories/:id/checkin/:assignment_id
+  def checkin
+    assignment = Assignment.find(params[:assignment_id])
+
+    unless assignment&.assignable == accessory && assignment.active
+      redirect_to accessory, warning: 'Accessory assignment is unable to be checked in'
+    else
+      assignment.returned_at = Time.current
+      assignment.active = false
+
+      render inertia: "Accessories/Checkin", props: {
+        accessory: accessory.render(view: :edit),
+        assignment: assignment.render(view: :edit),
+        statuses: -> { StatusType.all.render } # TODO: Is this scoped to a Company?
+      }
+    end
   end
 
   # POST /accessories
@@ -98,6 +119,6 @@ class AccessoriesController < ApplicationController
   end
 
   def accessory_params
-    params.require(:accessory).permit(:name, :serial, :asset_tag, :notes, :qty, :model_id, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :cost_currency, :min_qty)
+    params.require(:accessory).permit(:name, :serial, :asset_tag, :notes, :qty, :model_id, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :cost_currency, :min_qty, :status_id)
   end
 end

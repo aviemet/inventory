@@ -67,32 +67,37 @@ class ItemsController < ApplicationController
 
   # GET /hardware/:id/checkout
   def checkout
-    redirect_to item if item.assigned?
+    if item.assigned?
+      redirect_to item, warning: 'Item is already checked out'
+    else
+      assignment = Assignment.new({ assignable: item })
 
-    assignment = Assignment.new({ assignable: item })
-
-    render inertia: "Items/Checkout", props: {
-      item: item.render,
-      assignment: assignment.render(view: :new),
-      people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
-      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
-    }
+      render inertia: "Items/Checkout", props: {
+        item: item.render,
+        assignment: assignment.render(view: :new),
+        people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
+        items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
+        locations: -> { @active_company.locations.render(view: :as_options) },
+      }
+    end
   end
 
   #GET /hardware/:id/checkin
   def checkin
-    redirect_to item unless item.assigned?
-    assignment = item.assignment
-    assignment.returned_at = Time.current
-    assignment.active = false
+    unless item.assigned?
+      redirect_to item, warning: 'Item is not yet checked out'
+    else
+      assignment = item.assignment
+      assignment.returned_at = Time.current
+      assignment.active = false
 
-    render inertia: "Items/Checkin", props: {
-      item: item.render,
-      assignment: assignment.render,
-      locations: -> { @active_company.locations.render(view: :as_options) },
-      statuses: -> { StatusType.all.render } # TODO: Is this scoped to a Company?
-    }
+      render inertia: "Items/Checkin", props: {
+        item: item.render,
+        assignment: assignment.render,
+        locations: -> { @active_company.locations.render(view: :as_options) },
+        statuses: -> { StatusType.all.render } # TODO: Is this scoped to a Company?
+      }
+    end
   end
 
   # POST /hardware

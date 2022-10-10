@@ -3,8 +3,8 @@ import { Head } from '@inertiajs/inertia-react'
 import { Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
-import { LocationsDropdown } from '@/Components/Form/Dropdowns'
 import { createStyles } from '@mantine/core'
+import { omit } from 'lodash'
 
 const useTableStyles = createStyles(theme => ({
 	table: {
@@ -17,17 +17,16 @@ const useTableStyles = createStyles(theme => ({
 	}
 }))
 
-interface ICheckinItemsProps {
+interface ICheckinAccessoriesProps {
 	assignment: Schema.Assignment
-	item: Schema.Item
-	locations: Schema.Location[]
+	accessory: Schema.Accessory
 	statuses: Schema.StatusType[]
 }
 
-const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) => {
-	const [itemName, setItemName] = useState(item.name)
+const Checkin = ({ assignment, accessory, statuses }: ICheckinAccessoriesProps) => {
+	const [accessoryName, setAccessoryName] = useState(accessory.name)
 	const { classes } = useTableStyles()
-	const title = 'Check In Item'
+	const title = 'Check In Accessory'
 
 	return (
 		<>
@@ -38,17 +37,17 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 					<Table.Body>
 						<Table.Row>
 							<Table.Cell className={ classes.firstCell }>Model</Table.Cell>
-							<Table.Cell>{ item.name }</Table.Cell>
+							<Table.Cell>{ accessory.name }</Table.Cell>
 						</Table.Row>
 
 						<Table.Row>
 							<Table.Cell className={ classes.firstCell }>Asset Tag</Table.Cell>
-							<Table.Cell>{ item.asset_tag }</Table.Cell>
+							<Table.Cell>{ accessory.asset_tag }</Table.Cell>
 						</Table.Row>
 
 						<Table.Row>
 							<Table.Cell className={ classes.firstCell }>Serial</Table.Cell>
-							<Table.Cell>{ item.serial }</Table.Cell>
+							<Table.Cell>{ accessory.serial }</Table.Cell>
 						</Table.Row>
 					</Table.Body>
 				</Table>
@@ -59,26 +58,22 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 
 				<Form
 					data={ {
-						assignment: {
-							...assignment,
-							location_id: item?.default_location_id,
-						},
-						item,
+						assignment: omit(assignment, 'id', 'created_by_id'),
+						accessory,
 					} }
 					to={ Routes.unassignAssignment(assignment) }
 					method="patch"
 					model="assignment"
 				>
 					<Input
-						model="item"
+						model="accessory"
 						name="name"
-						label="Item Name"
-						onChange={ name => setItemName(String(name)) }
+						label="Accessory Name"
+						onChange={ name => setAccessoryName(String(name)) }
 						required
 					/>
 
-					<LocationsDropdown locations={ locations } />
-
+					{ /* TODO: Deal with quantity return status assignments  */ }
 					<SearchableDropdown
 						options={ statuses }
 						label="Status"
@@ -97,7 +92,7 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 						name="notes"
 					/>
 
-					<Submit>Check In { itemName }</Submit>
+					<Submit>Check In { accessoryName }</Submit>
 
 				</Form>
 			</Section>

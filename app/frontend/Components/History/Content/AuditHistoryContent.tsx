@@ -10,7 +10,7 @@ const AuditHistoryContent = ({ event }: { event: Schema.AuditedAudit }) => {
 			by <Link href={ Routes.person(event.person) }>{ event.person.name }</Link>
 			</Text> }
 
-			{ event.created_at && <Text size="sm">
+			{ event.created_at && <Text size="sm" color="dimmed">
 				{ formatter.date.long(event.created_at) }
 			</Text> }
 		</>

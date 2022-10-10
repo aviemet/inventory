@@ -1071,30 +1071,23 @@ export const categoryLicenses = __jsr.r({"category_id":{"r":true},"format":{}}, 
 
 /**
  * Generates rails route to
- * /accessories/:id/checkin(.:format)
+ * /accessories/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinAccessory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const checkinAccessory = __jsr.r({"id":{"r":true},"assignment_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[2,[7,"/"],[2,[3,"assignment_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /components/:id/checkin(.:format)
+ * /components/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinComponent = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /consumables/:id/checkin(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const checkinConsumable = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"consumables"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const checkinComponent = __jsr.r({"id":{"r":true},"assignment_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[2,[7,"/"],[2,[3,"assignment_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1107,12 +1100,13 @@ export const checkinItem = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,
 
 /**
  * Generates rails route to
- * /licenses/:id/checkin(.:format)
+ * /licenses/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinLicense = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const checkinLicense = __jsr.r({"id":{"r":true},"assignment_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[2,[7,"/"],[2,[3,"assignment_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to

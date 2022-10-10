@@ -819,37 +819,29 @@ export const categoryLicenses: ((
 
 /**
  * Generates rails route to
- * /accessories/:id/checkin(.:format)
+ * /accessories/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkinAccessory: ((
   id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /components/:id/checkin(.:format)
+ * /components/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkinComponent: ((
   id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /consumables/:id/checkin(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const checkinConsumable: ((
-  id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -867,13 +859,15 @@ export const checkinItem: ((
 
 /**
  * Generates rails route to
- * /licenses/:id/checkin(.:format)
+ * /licenses/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkinLicense: ((
   id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
