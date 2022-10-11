@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Heading, Section, Table } from '@/Components'
+import { Breadcrumbs, Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
 import { createStyles } from '@mantine/core'
 import { omit } from 'lodash'
+import { breadcrumbs } from '../utils'
 
 const useTableStyles = createStyles(theme => ({
 	table: {
@@ -31,6 +32,8 @@ const Checkin = ({ assignment, accessory, statuses }: ICheckinAccessoriesProps) 
 	return (
 		<>
 			<Head title={ title }></Head>
+
+			<Breadcrumbs>{ breadcrumbs.checkin(accessory) }</Breadcrumbs>
 
 			<Section>
 				<Table className={ classes.table }>

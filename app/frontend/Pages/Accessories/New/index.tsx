@@ -1,8 +1,9 @@
 import React from 'react'
 import { Head, usePage } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Section, Breadcrumbs } from '@/Components'
 import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
+import { breadcrumbs } from '../utils'
 
 interface INewAccessoryProps {
 	accessory: Schema.Accessory
@@ -21,6 +22,8 @@ const NewAccessory = ({ ...data }: INewAccessoryProps) => {
 	return (
 		<>
 			<Head title={ title }></Head>
+
+			<Breadcrumbs>{ breadcrumbs.new() }</Breadcrumbs>
 
 			<Section>
 				<h1>{ title } for { user.active_company!.name }</h1>
