@@ -1,19 +1,15 @@
 import React from 'react'
-import { Form, Input, Checkbox, Submit } from '@/Components/Form'
+import { Form, Input, Submit, Field } from '@/Components/Form'
 import HoverLink from '../HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 
 const Register = () => {
-	const defaultData = {
-		user: {
-			email: '',
-			password: '',
-			password_confirmation: '',
-		}
+	const handleFormChange = ({ data }: Inertia.FormProps) => {
+		console.log({ data })
 	}
 
-	const handlePasswordChange = (value: string, { data, errors, clearErrors }: Inertia.FormProps) => {
+	const handlePasswordChange = (value: string|number, { data, errors, clearErrors }: Inertia.FormProps) => {
 		if(errors['user.password'] || errors['user.password_confirmation']) {
 			if(data.user.password === data.user.password_confirmation) {
 				clearErrors('user.password', 'user.password_confirmation')
@@ -28,27 +24,45 @@ const Register = () => {
 		}
 	}
 
+	const handleEmailBlur = (value: string|number, form: Inertia.FormProps) => {
+		console.log({ value, form })
+	}
+
 	// TODO: Disable submit until all inputs are valid. Async check for existing email address on input blur
 	return (
 		<Tile>
-			<Form model="user" data={ defaultData } to={ Routes.userRegistration() } onSubmit={ handleSubmit } grid={ false }>
+			<Form
+				data={ {
+					user: {
+						email: '',
+						password: '',
+						password_confirmation: '',
+					}
+				} }
+				model="user"
+				to={ Routes.userRegistration() }
+				onChange={ handleFormChange }
+				onSubmit={ handleSubmit }
+				grid={ false }
+			>
 				<Tile.Content>
 
 					<div>
 						<Heading>Sign Up</Heading>
 					</div>
 
-					<div>
+					<Field>
 						<Input
 							name="email"
 							placeholder="Email"
 							autoFocus
 							autoComplete="Email"
 							required
+							onBlur={ handleEmailBlur }
 						/>
-					</div>
+					</Field>
 
-					<div>
+					<Field>
 						<Input
 							name="password"
 							type="password"
@@ -57,9 +71,9 @@ const Register = () => {
 							required
 							onChange={ handlePasswordChange }
 						/>
-					</div>
+					</Field>
 
-					<div>
+					<Field>
 						<Input
 							name="password_confirmation"
 							type="password"
@@ -68,16 +82,16 @@ const Register = () => {
 							required
 							onChange={ handlePasswordChange }
 						/>
-					</div>
+					</Field>
 
-					<div>
+					<Field>
 						<Submit className="large">Sign Up</Submit>
-					</div>
+					</Field>
 
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.newUserSession() } tw="rounded-b-lg">Log In Instead</HoverLink>
+					<HoverLink href={ Routes.newUserSession() }>Log In Instead</HoverLink>
 				</Tile.Footer>
 			</Form>
 		</Tile>
