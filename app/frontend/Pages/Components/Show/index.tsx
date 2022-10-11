@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
-import { formatter, Routes } from '@/lib'
+import { Section, Menu, Flex, Heading, Tabs } from '@/Components'
+import { Routes } from '@/lib'
+import { Tooltip } from '@mantine/core'
+import { availableToCheckout } from '../utils'
+import Details from './Details'
+import History from './History'
+import Associations from './Associations'
 
 interface IShowComponentProps {
 	component: Schema.Component
@@ -21,21 +26,22 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 			<Head title={ title }></Head>
 
 			<Section>
-				<Flex position="apart">
+				<Flex>
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
-					<Menu>
+					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							{ component.assignments ?
-								<Menu.Item href={ Routes.checkinComponent(component) }>
-									Checkin Component
-								</Menu.Item>
-								:
-								<Menu.Item href={ Routes.checkoutComponent(component) }>
-									Checkout Component
-								</Menu.Item>
-							}
+							<Menu.Item
+								href={ Routes.checkoutComponent(component) }
+								disabled={ !useCallback((component: Schema.Component) => availableToCheckout(component), [component.qty, component.assignments]) }
+							>
+								{ !availableToCheckout(component) ?
+									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Component</div></Tooltip>
+									:
+									'Checkout Component'
+								}
+							</Menu.Item>
 							<Menu.Item href={ Routes.editComponent(component) }>
 								Edit Component
 							</Menu.Item>
@@ -51,107 +57,15 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 					</Tabs.List>
 
 					<Tabs.Panel value="details">
-						<Heading order={ 3 }>Details</Heading>
-
-
-						<div className="item-details">
-
-							<div className="item-row">
-								<label>Model:</label>
-								<div className="value">
-									{ component.manufacturer && <Link href={ Routes.manufacturer(component.manufacturer!) }>
-										{ component.manufacturer!.name }
-									</Link> }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Category:</label>
-								<div className="value">
-									{ component.category && <Link href={ Routes.category(component.category.slug) }>
-										{ component.category!.name }
-									</Link> }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Serial:</label>
-								<div className="value">
-									{ component.serial }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Purchase Cost:</label>
-								<div className="value">
-									{ component.cost && formatter.currency(component.cost, component.cost_currency) }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Purchase Date:</label>
-								<div className="value">
-									{ component.purchased_at && formatter.date.short(component.purchased_at) }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Vendor:</label>
-								<div className="value">
-									{ component.vendor && <Link href={ Routes.vendor(component.vendor.slug) }>
-										{ component.vendor.name }
-									</Link> }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Quantity:</label>
-								<div className="value">
-									{ component.qty || 0 } / { component.min_qty || 0 }
-								</div>
-							</div>
-
-						</div>
+						<Details component={ component } />
 					</Tabs.Panel>
 
 					<Tabs.Panel value="history">
-
-						<Heading order={ 3 }>Assignment History</Heading>
-
-						<div>
-							{ component.assignments && component.assignments.reverse().map(assignment => (
-								<React.Fragment key={ assignment.id }>
-									<div>
-								Link to assigntoable object
-									</div>
-									<div>
-										{ assignment.assignable_type }
-									</div>
-								</React.Fragment>
-							)) }
-						</div>
-
-						<Heading order={ 3 }>Audit History</Heading>
-
-						<ul>
-							{ component.audits?.reverse().map(audit => {
-								const message = audit.action === 'create' ? 'Created' : 'Updated'
-
-								return (
-									<li key={ audit.id }>
-										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-									</li>
-								)
-							}) }
-						</ul>
-
-
+						<History component={ component } />
 					</Tabs.Panel>
 
 					<Tabs.Panel value="associations">
-						<Heading order={ 3 }>Licenses</Heading>
-
-
+						<Associations component={ component } />
 					</Tabs.Panel>
 				</Tabs>
 			</Section>

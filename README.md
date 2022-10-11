@@ -48,7 +48,8 @@ Accessories:
 Consumables:
 
 - [x] "Using" a consumable permanently removes it from inventory
-- [ ] Can replenish quantity using a purchase order (in very few steps)
+- [x] Can replenish quantity
+  - [ ] Optionally create a purchase order
 
 Components:
 
@@ -61,7 +62,7 @@ Networks:
 - [x] Tracks structure of local network
   - [x] Notes network infrastructure which defines the network
 - [x] Provides a table view of all assets categorized by network segment/address
-  - [ ] Paginates large subnets
+  - [x] Paginates large subnets
 - [ ] Network calculation tools
 
 Purchases:
@@ -150,12 +151,6 @@ Form view for all models:
 
 ---
 
-## Conventions
-
-### Icons
-
-In order to de-couple 3rd pary libraries from the project, Icons should be named and exported in `Components/Icons/index.tsx` for use in the rest of the site. This makes it very easy to change which icon is used for a particular purpose.
-
 ## Dev Notes
 
 ### Assignments
@@ -187,6 +182,10 @@ Companies are essentially top level organizational units. All other objects can 
 
 Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a compnay is considered to be "owned" by that company, defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner.
 
+### Icons
+
+In order to de-couple 3rd pary libraries from the project, Icons should be named and exported in `Components/Icons/index.tsx` for use in the rest of the site. This makes it very easy to change which icon is used for a particular purpose.
+
 ### Blueprinter
 
 The Blueprinter gem is used to shape data passed to Inertia components. Avoid passing raw data as props, and instead prefer using a Blueprint to standardize the shape of data being passed to the client. Use `render_as_json` in the render method to parse the data properly. On any ActiveRecord model or relation you can call `.blueprint` for that model's Blueprinter object, and `.render` to call `render_as_json` on that model or collection. These have been defined in `app/models/application_record.rb` for the model, and `config/initializers/activerecord_extensions.rb` for collections.
@@ -195,7 +194,7 @@ These are functionally the same:
 
 ```ruby
 ItemBlueprint.render_as_json(Item.first, view: :as_options)
-Item.first.render(Item.first, view: :as_options)
+Item.first.render(view: :as_options)
 ```
 
 ```ruby

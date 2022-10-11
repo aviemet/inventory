@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # subject to the same vulnerability as a standard web request
   skip_before_action :verify_authenticity_token, if: -> { request.inertia? }
 
-  add_flash_types :info, :error, :warning
+  add_flash_types :success, :error, :warning
 
   # before_action :decode_id
   before_action :set_locale

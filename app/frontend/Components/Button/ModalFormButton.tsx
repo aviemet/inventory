@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import Button from './index'
 import { Modal } from '@/Components'
-import { useMantineTheme } from '@mantine/core'
+import { useMantineTheme, type ModalProps, type ButtonProps } from '@mantine/core'
 import axios from 'axios'
 import { Inertia } from '@inertiajs/inertia'
 
 interface IModalFormButtonProps {
+	children?: string | React.ReactElement
 	form: React.ReactElement
 	title: string
+	buttonProps?: ButtonProps
+	modalProps?: Partial<ModalProps>
 	onSubmit?: (form: Inertia.FormProps) => boolean|void
 	onSuccess?: (data: { id: string|number }) => void
 }
 
-const ModalFormButton = ({ form, title, onSubmit, onSuccess }: IModalFormButtonProps) => {
+const ModalFormButton = ({ children = 'New', form, title, buttonProps = {}, modalProps = {}, onSubmit, onSuccess }: IModalFormButtonProps) => {
 	const [modalOpen, setModalOpen] = useState(false)
 
 	const theme = useMantineTheme()
@@ -22,7 +25,6 @@ const ModalFormButton = ({ form, title, onSubmit, onSuccess }: IModalFormButtonP
 
 		axios[method](to, { ...data, redirect: false })
 			.then(response => {
-				// console.log({ response })
 				if(response.statusText === 'OK' || response.statusText === 'Created') {
 					setModalOpen(false)
 					if(onSuccess) onSuccess(response.data)
@@ -30,7 +32,6 @@ const ModalFormButton = ({ form, title, onSubmit, onSuccess }: IModalFormButtonP
 			})
 			.catch(error => {
 				if(error.response.data?.errors) {
-					// console.log({ errors: error.response.data.errors })
 					setError(error.response.data.errors)
 				}
 			})
@@ -40,12 +41,12 @@ const ModalFormButton = ({ form, title, onSubmit, onSuccess }: IModalFormButtonP
 
 	return (
 		<>
-			<Button onClick={ () => setModalOpen(true) } >New</Button>
+			<Button onClick={ () => setModalOpen(true) } { ...buttonProps } >{ children }</Button>
 			<Modal
 				opened={ modalOpen }
 				onClose={ () => setModalOpen(false) }
 				title={ title }
-				size={ theme.breakpoints.md }
+				{ ...Object.assign({ size: theme.breakpoints.md }, modalProps) }
 			>
 				{ React.cloneElement(form, {
 					onSubmit: onSubmit ? onSubmit : handleSubmit,

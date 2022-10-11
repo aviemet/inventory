@@ -14,6 +14,8 @@ interface IInputProps extends Omit<InputProps, 'onChange'> {
 	id?: string
 	compact?: boolean
 	autoFocus?: boolean
+	min?: number
+	max?: number
 }
 
 const FormInput = forwardRef<HTMLInputElement, IInputProps>((

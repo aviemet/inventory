@@ -20,5 +20,6 @@ export {
 	Modal,
 	Stack,
 	List,
+	Tooltip,
 	ThemeIcon as Icon,
 } from '@mantine/core'
