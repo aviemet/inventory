@@ -22,7 +22,7 @@ const CheckinButton = ({ href, disabled, tooltipMessage, ...props }: ICheckinBut
 
 	return (
 		<Tooltip withArrow label={ tooltipMessage || 'Check In' } position="left" transition="fade" color={ color }>
-			<Link as="button" compact href={ href } color={ color } size="md" p="xs" { ...finalProps }><CheckinIcon /></Link>
+			<Link as="button" compact href={ href } color={ color } size="md" p={ 0 } { ...finalProps }><CheckinIcon /></Link>
 		</Tooltip>
 	)
 }

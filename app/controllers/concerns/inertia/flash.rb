@@ -5,9 +5,9 @@ module Inertia::Flash
 
   included do
     inertia_share flash: -> { {
-      success: flash[:notice], # green
+      success: flash[:success], # green
       alert: flash[:alert], # red
-      info: flash[:info], # blue
+      info: flash[:notice], # blue
       warning: flash[:warning] # yellow
     } }
   end

@@ -9,18 +9,18 @@ namespace :api do
   resources :categories, only: [:create, :update]
   resources :status_types, only: [:create, :update]
 
-  resources :items, path: :hardware, only: [:create, :update] do
+  resources :items, path: :hardware, only: [:update] do
     resources :nics, only: [:create, :update]
   end
 
-  resources :components, only: [:create, :update]
-  resources :accessories, only: [:create, :update]
-  resources :consumables, only: [:create, :update]
-  resources :licenses, only: [:create, :update]
+  resources :components, only: [:update]
+  resources :accessories, only: [:update]
+  resources :consumables, only: [:update]
+  resources :licenses, only: [:update]
 
   resources :assignments, only: [:create, :update]
 
-  resources :people, only: [:create, :update]
+  resources :people, only: [:update]
 
   resources :vendors, only: [:create, :update]
 

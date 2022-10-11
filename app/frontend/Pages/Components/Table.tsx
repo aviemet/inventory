@@ -1,21 +1,17 @@
 import React from 'react'
 import { Routes, formatter } from '@/lib'
-import { Link, Table } from '@/Components'
-import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
+import { Link, Table, Tooltip } from '@/Components'
+import { EditButton, CheckoutButton } from '@/Components/Button'
 import { isNil } from 'lodash'
+import { availableToCheckout } from './utils'
 import { type ITableProps } from '@/Components/Table/Table'
 
 const ComponentsTable = (props: ITableProps) => {
-	// TODO: Taken from Accessories table, fix for Components
 	const qty = (component: Schema.Component) => {
 		if(isNil(component.qty)) {
 			return '-'
 		}
 		return component.qty
-		// } else if(isNil(component.active_assignments_count)) {
-		// 	return component.qty
-		// }
-		// return `${component.qty - component.active_assignments_count} / ${component.qty}`
 	}
 
 	return (
@@ -72,8 +68,8 @@ const ComponentsTable = (props: ITableProps) => {
 						<Table.Cell>{ component.min_qty }</Table.Cell>
 
 						<Table.Cell className="table-column-fit">
-							{ component.assigned ?
-								<CheckinButton href={ Routes.checkinComponent(component) } />
+							{ !availableToCheckout(component) ?
+								<Tooltip label="There are none in stock" position="left" withArrow><CheckoutButton href={ Routes.checkoutComponent(component) } disabled /></Tooltip>
 								:
 								<CheckoutButton href={ Routes.checkoutComponent(component) } />
 							}
