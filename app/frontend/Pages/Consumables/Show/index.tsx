@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
-import { formatter, Routes } from '@/lib'
+import { Section, Menu, Flex, Heading, Tabs, Breadcrumbs } from '@/Components'
+import { Routes } from '@/lib'
+import { Tooltip } from '@mantine/core'
+import { availableToCheckout, breadcrumbs } from '../utils'
+import Details from './Details'
+import History from './History'
+import Associations from './Associations'
 
 interface IShowConsumableProps {
 	consumable: Schema.Consumable
@@ -15,26 +20,30 @@ const tabs = {
 
 const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 	const title = consumable.name ?? 'Consumable Details'
+
 	return (
 		<>
 			<Head title={ title }></Head>
 
+			<Breadcrumbs>{ breadcrumbs.edit(consumable) }</Breadcrumbs>
+
 			<Section>
-				<Flex position="apart">
+				<Flex>
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							{ consumable.assignments ?
-								<Menu.Item href={ Routes.checkinConsumable(consumable) }>
-									Checkin Consumable
-								</Menu.Item>
-								:
-								<Menu.Item href={ Routes.checkoutConsumable(consumable) }>
-									Checkout Consumable
-								</Menu.Item>
-							}
+							<Menu.Item
+								href={ Routes.checkoutConsumable(consumable) }
+								disabled={ !useCallback((consumable: Schema.Consumable) => availableToCheckout(consumable), [consumable.qty, consumable.assignments]) }
+							>
+								{ !availableToCheckout(consumable) ?
+									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Consumable</div></Tooltip>
+									:
+									'Checkout Consumable'
+								}
+							</Menu.Item>
 							<Menu.Item href={ Routes.editConsumable(consumable) }>
 								Edit Consumable
 							</Menu.Item>
@@ -50,98 +59,15 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 					</Tabs.List>
 
 					<Tabs.Panel value="details">
-						<Heading order={ 3 }>Details</Heading>
-
-
-						<div className="item-details">
-
-							<div className="item-row">
-								<label>Model:</label>
-								<div className="value">
-									{ consumable.manufacturer && <Link href={ Routes.manufacturer(consumable.manufacturer!) }>
-										{ consumable.manufacturer!.name }
-									</Link> }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Category:</label>
-								<div className="value">
-									{ consumable.category && <Link href={ Routes.category(consumable.category.slug) }>
-										{ consumable.category!.name }
-									</Link> }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Assigned To:</label>
-								<div className="value">
-								Figure this out
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Purchase Cost:</label>
-								<div className="value">
-									{ consumable.cost && formatter.currency(consumable.cost, consumable.cost_currency) }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Vendor:</label>
-								<div className="value">
-									{ consumable.vendor && <Link href={ Routes.vendor(consumable.vendor.slug) }>
-										{ consumable.vendor.name }
-									</Link> }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Quantity:</label>
-								<div className="value">
-									{ consumable.qty || 0 }
-								</div>
-							</div>
-
-						</div>
+						<Details consumable={ consumable } />
 					</Tabs.Panel>
 
 					<Tabs.Panel value="history">
-						<Heading order={ 3 }>Assignment History</Heading>
-
-						<div>
-							{ consumable.assignments && consumable.assignments.reverse().map((assignment: Schema.Assignment) => (
-								<React.Fragment key={ assignment.id }>
-									<div>
-								Link to assigntoable object
-									</div>
-									<div>
-										{ assignment.assignable_type }
-									</div>
-								</React.Fragment>
-							)) }
-						</div>
-
-						<h3>Audit History</h3>
-
-						<ul>
-							{ consumable.audits?.reverse().map((audit: Schema.AuditedAudit) => {
-								const message = audit.action === 'create' ? 'Created' : 'Updated'
-
-								return (
-									<li key={ audit.id }>
-										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-									</li>
-								)
-							}) }
-						</ul>
-
+						<History consumable={ consumable } />
 					</Tabs.Panel>
 
 					<Tabs.Panel value="associations">
-						<Heading order={ 3 }>Licenses</Heading>
-
-
+						<Associations consumable={ consumable } />
 					</Tabs.Panel>
 				</Tabs>
 

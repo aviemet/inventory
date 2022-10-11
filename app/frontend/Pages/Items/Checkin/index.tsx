@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/inertia-react'
 import { Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
-import LocationDropdown from './LocationDropdown'
+import { LocationsDropdown } from '@/Components/Form/Dropdowns'
 import { createStyles } from '@mantine/core'
 
 const useTableStyles = createStyles(theme => ({
@@ -77,7 +77,7 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 						required
 					/>
 
-					<LocationDropdown locations={ locations } />
+					<LocationsDropdown locations={ locations } />
 
 					<SearchableDropdown
 						options={ statuses }

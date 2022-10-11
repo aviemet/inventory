@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-# When including Searchable in a controller, define the following methods:
-#
-#  sortable_fields:
-#    returns an array of symbols or strings containing field names which the model can be sorted by.
-#    Associated models should be in the form "model.field"
-
 module Searchable
   extend ActiveSupport::Concern
 
+  ##
+  # Searches and sorts model using search params
+  # model: ActiveRecord object
+  # sortable_fields: string array of field names which the model can be sorted by.
+  #   Sortable fields in nested models use dot-notation: "related_model.field"
+  #
   def search(model, sortable_fields = [])
     terms = params[:search]
     return model.order(sort(model, sortable_fields)) unless terms

@@ -25,7 +25,7 @@ class AccessoryBlueprint < ApplicationBlueprint
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint
-    association :assignments, blueprint: AssignmentBlueprint
+    association :assignments, blueprint: AssignmentBlueprint, view: :associations
     association :purchase, blueprint: PurchaseBlueprint
     association :audits, blueprint: AuditBlueprint
     association :model, blueprint: ModelBlueprint

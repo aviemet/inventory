@@ -18,7 +18,7 @@ const tabs = {
 }
 
 
-const Show = ({ item }: IShowItemProps) => {
+const ShowItem = ({ item }: IShowItemProps) => {
 	const title = item.name ?? 'Item Details'
 
 	return (
@@ -74,4 +74,4 @@ const Show = ({ item }: IShowItemProps) => {
 	)
 }
 
-export default Show
+export default ShowItem

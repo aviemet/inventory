@@ -1,10 +1,11 @@
 import React from 'react'
 import cx from 'clsx'
 import { DivProps } from 'react-html-props'
+import { type TInputType } from './Form'
 
 interface IFieldProps extends DivProps {
 	children: React.ReactNode
-	type: string
+	type?: TInputType
 	required?: boolean
 	errors?: boolean
 }
@@ -14,7 +15,7 @@ const Field = ({ children, type, required = false, errors = false, className, ..
 		<div
 			className={ cx(
 				'field',
-				type,
+				{ type: type },
 				{ 'required': required },
 				{ 'field_with_errors': errors },
 				className

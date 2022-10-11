@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # subject to the same vulnerability as a standard web request
   skip_before_action :verify_authenticity_token, if: -> { request.inertia? }
 
-  add_flash_types :info, :error
+  add_flash_types :success, :error, :warning
 
   # before_action :decode_id
   before_action :set_locale
@@ -77,6 +77,11 @@ class ApplicationController < ActionController::Base
       is_first_page: current_page == 1,
       is_last_page: current_page == pages
     }
+  end
+
+  def currencies
+    Monetize::Parser::CURRENCY_SYMBOLS.map{ |sym, abbr| { symbol: sym, code: abbr } }
+    # Money::Currency.table.values.map{ |c| { symbol: c[:symbol], code: c[:iso_code] } }
   end
 
   private

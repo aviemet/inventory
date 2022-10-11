@@ -11,6 +11,8 @@ import axios from 'axios'
 const [useForm, FormProvider] = createContext<Inertia.FormProps>()
 export { useForm, FormProvider }
 
+export type TInputType = 'button'|'checkbox'|'color'|'currency'|'date'|'datetime-local'|'email'|'file'|'hidden'|'image'|'month'|'number'|'password'|'radio'|'range'|'reset'|'search'|'submit'|'tel'|'text'|'time'|'url'
+
 interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'> {
 	model?: string
 	data: T

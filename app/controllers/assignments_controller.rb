@@ -1,6 +1,4 @@
 class AssignmentsController < ApplicationController
-  # before_action :redirect_if_already_assigned, only: [:create]
-
   expose :assignment
 
   # GET /assignments/:id
@@ -41,7 +39,10 @@ class AssignmentsController < ApplicationController
   # PATCH/PUT /assignments/:id
   def update
     assignable = assignment.assignable
+
     if assignment.update(assignment_params)
+      ap("UPDATE SUCCSS")
+      ap({ assignment_params: assignment_params })
       redirect_to assignable
     else
       redirect_to send("checkin_#{assignment.assignable_type.downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
@@ -51,10 +52,17 @@ class AssignmentsController < ApplicationController
   # PATCH/PUT /assignments/:id/unassign
   def unassign
     assignable = assignment.assignable
+
     if assignable.unassign(assignment, returned_at: assignment_params&.[](:returned_at))
       redirect_to assignable
     else
-      redirect_to send("checkin_#{assignment.assignable_type.downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
+      redirect_to(
+        send(
+          "checkin_#{assignment.assignable_type.downcase.singularize}_path", 
+          { id: assignable, assignment_id: assignment }
+        ), 
+        inertia: { errors: assignment.errors }
+      )
     end
   end
 
@@ -67,13 +75,7 @@ class AssignmentsController < ApplicationController
 
   private
 
-  def redirect_if_already_assigned
-    if @assignable.respond_to?(:assigned_to) && @assignable&.assigned_to
-      redirect_back fallback_location: @assignable, alert: "An asset can only have one active assignment"
-    end
-  end
-
   def assignment_params
-    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name], accessory: [:name], license: [:name], component: [:name], consumable: [:qty])
+    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status_id, :notes, :active, item: [:name], accessory: [:name], license: [:name], component: [:name], consumable: [:qty])
   end
 end

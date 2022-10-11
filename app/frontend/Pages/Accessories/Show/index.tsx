@@ -1,9 +1,11 @@
 import React, { useCallback } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
-import { formatter, Routes } from '@/lib'
-import { Tooltip } from '@mantine/core'
-import { availableToCheckout } from '../utils'
+import { Section, Menu, Flex, Heading, Tabs, Tooltip, Breadcrumbs } from '@/Components'
+import { Routes } from '@/lib'
+import { availableToCheckout, breadcrumbs } from '../utils'
+import Details from './Details'
+import History from './History'
+import Associations from './Associations'
 
 interface IShowAccessoryProps {
 	accessory: Schema.Accessory
@@ -15,14 +17,14 @@ const tabs = {
 	associations: 'associations',
 }
 
-
 const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 	const title = accessory.name ?? 'Accessory Details'
-
 
 	return (
 		<>
 			<Head title={ title }></Head>
+
+			<Breadcrumbs>{ breadcrumbs.show(accessory) }</Breadcrumbs>
 
 			<Section>
 				<Flex>
@@ -31,7 +33,10 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Item href={ Routes.checkoutAccessory(accessory) } disabled={ !useCallback((accessory: Schema.Accessory) => availableToCheckout(accessory), [accessory.qty, accessory.assignments]) }>
+							<Menu.Item
+								href={ Routes.checkoutAccessory(accessory) }
+								disabled={ !useCallback((accessory: Schema.Accessory) => availableToCheckout(accessory), [accessory.qty, accessory.assignments]) }
+							>
 								{ !availableToCheckout(accessory) ?
 									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Accessory</div></Tooltip>
 									:
@@ -53,111 +58,15 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 					</Tabs.List>
 
 					<Tabs.Panel value="details">
-						<Heading order={ 3 }>Details</Heading>
-
-						<div className="item-details">
-
-							<div className="item-row">
-								<label>Model:</label>
-								<div className="value">
-									{ accessory.manufacturer && <Link href={ Routes.manufacturer(accessory.manufacturer!) }>
-										{ accessory.manufacturer!.name }
-									</Link> }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Category:</label>
-								<div className="value">
-									{ accessory.category && <Link href={ Routes.category(accessory.category.slug) }>
-										{ accessory.category!.name }
-									</Link> }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Serial:</label>
-								<div className="value">
-									{ accessory.serial }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Quantity:</label>
-								<div className="value">
-									{ accessory.qty !== undefined && accessory.qty !== null && accessory.qty >= 0 ? accessory.qty - accessory?.assignments!.length : 0 } / { accessory.qty }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Asset Tag:</label>
-								<div className="value">
-									{ accessory.asset_tag }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Purchase Cost:</label>
-								<div className="value">
-									{ accessory.cost && formatter.currency(accessory.cost, accessory.cost_currency) }
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Purchase Date:</label>
-								<div className="value">
-
-								</div>
-							</div>
-
-							<div className="item-row">
-								<label>Vendor:</label>
-								<div className="value">
-									{ accessory.vendor && <Link href={ Routes.vendor(accessory.vendor.slug) }>
-										{ accessory.vendor.name }
-									</Link> }
-								</div>
-							</div>
-
-						</div>
+						<Details accessory={ accessory } />
 					</Tabs.Panel>
 
 					<Tabs.Panel value="history">
-						<Heading order={ 3 }>Assignment History</Heading>
-
-						<div>
-							{ accessory.assignments && accessory.assignments.reverse().map(assignment => (
-								<React.Fragment key={ assignment.id }>
-									<div>
-								Link to assigntoable object
-									</div>
-									<div>
-										{ assignment.assignable_type }
-									</div>
-								</React.Fragment>
-							)) }
-						</div>
-
-						<Heading order={ 3 }>Audit History</Heading>
-
-						<ul>
-							{ accessory.audits?.reverse().map(audit => {
-								const message = audit.action === 'create' ? 'Created' : 'Updated'
-
-								return (
-									<li key={ audit.id }>
-										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
-									</li>
-								)
-							}) }
-						</ul>
-
+						<History accessory={ accessory } />
 					</Tabs.Panel>
 
 					<Tabs.Panel value="associations">
-						<Heading order={ 3 }>Licenses</Heading>
-
-
+						<Associations accessory={ accessory } />
 					</Tabs.Panel>
 				</Tabs>
 			</Section>

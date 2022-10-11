@@ -23,6 +23,10 @@ export {
 	Dots as DotsIcon,
 	Filter as FilterIcon,
 	Report as ReportsIcon,
+	ArrowRightSquare as ArrowRightSquareIcon,
+	ArrowLeftSquare as ArrowRLeftSquareIcon,
+	CircleDot as CircleDotIcon,
+	SquarePlus as ReplenishIcon,
 } from 'tabler-icons-react'
 
 export {

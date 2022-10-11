@@ -1,7 +1,6 @@
 import React from 'react'
 import { Heading, History } from '@/Components'
 
-
 interface IItemHistoryProps {
 	item: Schema.Item
 }
