@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Menu, Flex, Heading, Tabs } from '@/Components'
+import { Section, Menu, Flex, Heading, Tabs, Breadcrumbs } from '@/Components'
 import { Routes } from '@/lib'
 import { Tooltip } from '@mantine/core'
-import { availableToCheckout } from '../utils'
+import { availableToCheckout, breadcrumbs } from '../utils'
 import Details from './Details'
 import History from './History'
 import Associations from './Associations'
@@ -24,6 +24,8 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 	return (
 		<>
 			<Head title={ title }></Head>
+
+			<Breadcrumbs>{ breadcrumbs.show(component) }</Breadcrumbs>
 
 			<Section>
 				<Flex>

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Breadcrumbs, Section } from '@/Components'
 import CompanyForm from '../Form'
 import { Routes } from '@/lib'
+import { breadcrumbs } from '../utils'
 
 const EditCompany = ({ company }: { company: Schema.Company}) => {
 	const title = 'Edit Company'
@@ -10,6 +11,8 @@ const EditCompany = ({ company }: { company: Schema.Company}) => {
 	return (
 		<>
 			<Head title={ title }></Head>
+
+			<Breadcrumbs>{ breadcrumbs.edit(company) }</Breadcrumbs>
 
 			<Section>
 				<h1>{ title }</h1>

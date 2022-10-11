@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section, Menu, Flex, Heading, Tabs } from '@/Components'
+import { Section, Menu, Flex, Heading, Tabs, Breadcrumbs } from '@/Components'
 import { Routes } from '@/lib'
 import { Tooltip } from '@mantine/core'
-import { availableToCheckout } from '../utils'
+import { availableToCheckout, breadcrumbs } from '../utils'
 import Details from './Details'
 import History from './History'
 import Associations from './Associations'
@@ -25,6 +25,8 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 		<>
 			<Head title={ title }></Head>
 
+			<Breadcrumbs>{ breadcrumbs.edit(consumable) }</Breadcrumbs>
+
 			<Section>
 				<Flex>
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
@@ -33,13 +35,13 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Item
-								href={ Routes.checkoutComponent(consumable) }
-								disabled={ !useCallback((consumable: Schema.Component) => availableToCheckout(consumable), [consumable.qty, consumable.assignments]) }
+								href={ Routes.checkoutConsumable(consumable) }
+								disabled={ !useCallback((consumable: Schema.Consumable) => availableToCheckout(consumable), [consumable.qty, consumable.assignments]) }
 							>
 								{ !availableToCheckout(consumable) ?
-									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Component</div></Tooltip>
+									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Consumable</div></Tooltip>
 									:
-									'Checkout Component'
+									'Checkout Consumable'
 								}
 							</Menu.Item>
 							<Menu.Item href={ Routes.editConsumable(consumable) }>
