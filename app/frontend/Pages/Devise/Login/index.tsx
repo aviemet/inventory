@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Form, Input, Checkbox, Submit } from '@/Components/Form'
+import { Form, Field, Input, Checkbox, Submit } from '@/Components/Form'
 import HoverLink from '../HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
@@ -31,18 +31,19 @@ const Login = () => {
 						<Heading>Inventory</Heading>
 					</div>
 
-					<div>
+					<Field>
 						<Input
 							name="email"
 							placeholder="Email"
 							autoFocus
 							autoComplete="Email"
-							required ref={ emailInputRef }
+							required
+							ref={ emailInputRef }
 							pattern=".+@.+\..+"
 						/>
-					</div>
+					</Field>
 
-					<div>
+					<Field>
 						<Input
 							name="password"
 							type="password"
@@ -50,15 +51,15 @@ const Login = () => {
 							autoComplete="current-password"
 							required
 						/>
-					</div>
+					</Field>
 
-					<div>
+					<Field>
 						<Submit>Log In</Submit>
-					</div>
+					</Field>
 
-					<div>
+					<Field>
 						<Checkbox name="remember_me" label="Remember Me" />
-					</div>
+					</Field>
 
 				</Tile.Content>
 

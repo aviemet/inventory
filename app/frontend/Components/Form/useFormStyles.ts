@@ -10,6 +10,7 @@ export default createStyles((theme) => ({
 					display: 'grid',
 					gridTemplateColumns: `${theme.other.form.label.width} 1fr`,
 					gridTemplateRows: '1fr',
+					borderLeftWidth: 2,
 				},
 			},
 		},
@@ -54,7 +55,7 @@ export default createStyles((theme) => ({
 			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
 				'&:not(.textarea, .compact)': {
 					borderTopWidth: 0,
-					borderLeftWidth: 2,
+					borderLeftWidth: 0,
 				},
 
 				'& > label, & > legend': {

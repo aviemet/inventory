@@ -1,7 +1,6 @@
 class LicensesController < ApplicationController
   include OwnableConcern
   include Searchable
-  include AssignableConcern
 
   expose :licenses, -> { search(@active_company.licenses.includes_associated, sortable_fields) }
   expose :license

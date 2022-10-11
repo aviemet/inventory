@@ -107,16 +107,6 @@ export const accessory: ((
 
 /**
  * Generates rails route to
- * /api/accessories(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiAccessories: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /api/accessories/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -207,16 +197,6 @@ export const apiComponent: ((
 
 /**
  * Generates rails route to
- * /api/components(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiComponents: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /api/consumables/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -224,16 +204,6 @@ export const apiComponents: ((
  */
 export const apiConsumable: ((
   id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /api/consumables(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiConsumables: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -409,16 +379,6 @@ export const apiItemNics: ((
 
 /**
  * Generates rails route to
- * /api/hardware(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiItems: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /api/licenses/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -426,16 +386,6 @@ export const apiItems: ((
  */
 export const apiLicense: ((
   id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /api/licenses(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiLicenses: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -568,16 +518,6 @@ export const apiOwnership: ((
  * @returns {string} route path
  */
 export const apiOwnerships: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /api/people(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiPeople: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -819,37 +759,29 @@ export const categoryLicenses: ((
 
 /**
  * Generates rails route to
- * /accessories/:id/checkin(.:format)
+ * /accessories/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkinAccessory: ((
   id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /components/:id/checkin(.:format)
+ * /components/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkinComponent: ((
   id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /consumables/:id/checkin(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const checkinConsumable: ((
-  id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -867,13 +799,15 @@ export const checkinItem: ((
 
 /**
  * Generates rails route to
- * /licenses/:id/checkin(.:format)
+ * /licenses/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkinLicense: ((
   id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

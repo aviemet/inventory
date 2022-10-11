@@ -1,8 +1,9 @@
 import React from 'react'
 import { Routes, formatter } from '@/lib'
-import { Link, Table } from '@/Components'
+import { Group, Link, Table } from '@/Components'
 import { EditButton, CheckoutButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
+import ReplenishButton from './ReplenishButton'
 
 const ConsumablesTable = (props: ITableProps) => {
 	return (
@@ -54,8 +55,11 @@ const ConsumablesTable = (props: ITableProps) => {
 						<Table.Cell>{ consumable.min_qty }</Table.Cell>
 
 						<Table.Cell className="table-column-fit">
-							<CheckoutButton href={ Routes.checkoutConsumable(consumable) } />
-							<EditButton href={ Routes.editConsumable(consumable) } />
+							<Group noWrap spacing="sm">
+								<CheckoutButton href={ Routes.checkoutConsumable(consumable) } />
+								<ReplenishButton consumable={ consumable } />
+								<EditButton href={ Routes.editConsumable(consumable) } />
+							</Group>
 						</Table.Cell>
 
 					</Table.Row>

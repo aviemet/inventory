@@ -11,7 +11,7 @@ const ReturnedHistoryContext = ({ event }: { event: TReturn }) => {
 			by <Link href={ polymorphicRoute(event.assign_toable_type, event.assign_toable_id) }>
 				{ event.assign_toable.name }
 			</Link>
-			{ event.created_at && <Text size="sm">
+			{ event.created_at && <Text size="sm" color="dimmed">
 				{ formatter.date.long(event.created_at) }
 			</Text> }
 		</>

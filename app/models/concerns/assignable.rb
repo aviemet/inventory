@@ -20,8 +20,9 @@ module Assignable
         self._before_assignment(assignment, params) if self.respond_to?(:_before_assignment)
         self.before_assignment(assignment, params) if self.respond_to?(:before_assignment)
 
-        assignment.save
+        # assignment.save
         self.assignments << assignment
+        self.save
 
         self.update({ name: params&.[](asset_class)&.[](:name) }) if params&.[](asset_class)&.[](:name)
 
@@ -35,9 +36,7 @@ module Assignable
     def history
       Audited::Audit.where({ auditable_type: "Assignment" })
         .where("audited_changes -> 'assignable_id' = ?", self.id.to_s)
-        .or(
-          Audited::Audit.where({ auditable_type: "Item", auditable_id: self.id })
-        )
+        .or(Audited::Audit.where({ auditable_type: "Item", auditable_id: self.id }))
     end
 
     def set_defaults

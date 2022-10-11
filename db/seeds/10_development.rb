@@ -20,6 +20,7 @@ if Rails.env == "development"
 
     company = Company.create!({
       name: "Example Company",
+      default_currency: "USD",
     })
     user.add_role :admin, company
     person.company = company
@@ -40,7 +41,7 @@ if Rails.env == "development"
         company: company,
         parent_id: 1
       }
-    ].each{ |location| Location.create!(location) } if Location.count == 0
+    ].each{ |location| Location.create!(location) }
   end
 
   if Department.count == 0

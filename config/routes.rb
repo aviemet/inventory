@@ -11,7 +11,14 @@ Rails.application.routes.draw do
 
   concern :assignable do
     get "checkout", on: :member, as: :checkout
+  end
+
+  concern :single_unassignable do
     get "checkin", on: :member, as: :checkin
+  end
+
+  concern :quantity_unassignable do
+    get "checkin/:assignment_id", action: :checkin, on: :member, as: :checkin
   end
 
   concern :bulk_delete do
@@ -82,13 +89,13 @@ Rails.application.routes.draw do
 
   resources :items, path: :hardware do
     resources :nics
-    concerns :bulk_delete, :categoryable, :clonable, :assignable
+    concerns :bulk_delete, :categoryable, :clonable, :assignable, :single_unassignable
   end
 
-  resources :components, concerns: [:bulk_delete, :categoryable, :assignable]
-  resources :accessories, concerns: [:bulk_delete, :categoryable, :assignable]
+  resources :components, concerns: [:bulk_delete, :categoryable, :assignable, :quantity_unassignable]
+  resources :accessories, concerns: [:bulk_delete, :categoryable, :assignable, :quantity_unassignable]
+  resources :licenses, concerns: [:bulk_delete, :categoryable, :assignable, :quantity_unassignable]
   resources :consumables, concerns: [:bulk_delete, :categoryable, :assignable]
-  resources :licenses, concerns: [:bulk_delete, :categoryable, :assignable]
 
   resources :assignments, except: [:index, :new]
   patch "assignments/:id/unassign" => "assignments#unassign", as: :unassign_assignment

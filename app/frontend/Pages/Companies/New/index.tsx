@@ -1,8 +1,9 @@
 import React from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Breadcrumbs, Section } from '@/Components'
 import CompanyForm from '../Form'
 import { Routes } from '@/lib'
+import { breadcrumbs } from '../utils'
 
 const NewCompany = () => {
 	const title = 'New Company'
@@ -10,6 +11,8 @@ const NewCompany = () => {
 	return (
 		<>
 			<Head title={ title }></Head>
+
+			<Breadcrumbs>{ breadcrumbs.new() }</Breadcrumbs>
 
 			<Section>
 				<h1>{ title }</h1>

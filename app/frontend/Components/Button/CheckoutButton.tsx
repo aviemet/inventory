@@ -23,7 +23,7 @@ const CheckoutButton = ({ href, disabled, tooltipMessage, ...props }: ICheckoutB
 
 	return (
 		<Tooltip withArrow label={ tooltipMessage || 'Checkout' } position="left" transition="fade" color={ color }>
-			<Link as="button" compact href={ href } color={ color } size="md" p="xs" { ...finalProps }><CheckoutIcon /></Link>
+			<Link as="button" compact href={ href } color={ color } size="md" p={ 0 } { ...finalProps }><CheckoutIcon /></Link>
 		</Tooltip>
 	)
 }

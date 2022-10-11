@@ -12,7 +12,7 @@ class Api::CategoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /api/categories/:id
+  # PATCH/PUT /api/categories/:slug
   def update
     if category.update(category_params)
       render json: category.render, status: 201

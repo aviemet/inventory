@@ -109,6 +109,7 @@ declare namespace Schema {
 		id: number;
 		name: string;
 		slug: string;
+		default_currency: string;
 		created_at: string;
 		updated_at: string;
 		contact?: Contact;
