@@ -13,7 +13,7 @@ const FormGroup = ({ children, legend, outline = true, compact = false }: IFormG
 	return (
 		<Box component='fieldset' className={ cx({ outline }) } sx={ theme => ({
 			'&.outline': {
-				border: `solid 1px ${theme.colors[theme.primaryColor][theme.primaryShade[theme.colorScheme]]}`,
+				border: `solid 1px ${theme.colors[theme.primaryColor][theme.fn.primaryShade()]}`,
 				padding: '10px 16px',
 				borderRadius: 10,
 				marginBottom: 10,

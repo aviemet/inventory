@@ -1,8 +1,8 @@
 import React from 'react'
-import { Form, Input, Submit } from '@/Components/Form'
+import { Field, Form, Input, Submit } from '@/Components/Form'
 import HoverLink from '../../HoverLink'
 import { Routes } from '@/lib'
-import { Tile } from '@/Components'
+import { Heading, Tile } from '@/Components'
 
 type TPasswordsNewFormData = {
 	email: string
@@ -21,22 +21,22 @@ const PasswordsNew = () => {
 		<Tile>
 			<Form model="user" data={ defaultData } to={ Routes.newUserPassword() } onSubmit={ handleSubmit } grid={ false }>
 				<Tile.Content>
-					<div tw="mb-2">
-						<h1 tw="text-center">Reset Password</h1>
+					<div>
+						<Heading>Reset Password</Heading>
 					</div>
 
-					<div tw="mb-2">
+					<Field>
 						<Input name="email" placeholder="Email" autoFocus autoComplete="Email" />
-					</div>
+					</Field>
 
-					<div tw="mb-4">
+					<Field>
 						<Submit>Send Reset Instructions</Submit>
-					</div>
+					</Field>
 
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.newUserSession() } tw="rounded-b-lg">Log In</HoverLink>
+					<HoverLink href={ Routes.newUserSession() }>Log In</HoverLink>
 				</Tile.Footer>
 			</Form>
 		</Tile>
