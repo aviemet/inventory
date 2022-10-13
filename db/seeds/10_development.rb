@@ -59,28 +59,6 @@ if Rails.env == "development"
     ].each{ |dept| Department.create!(dept) }
   end
 
-  if Category.count == 0
-    {
-      Item: ["Desktop", "Laptop", "Server"],
-      Accessory: ["Keyboard", "Mouse"],
-      Consumable: ["Toner", "Paper"],
-      Component: ["Memory", "SSD", "HDD"],
-      License: ["Operating System", "Office Software"],
-      Email: ["Work", "Personal"],
-      Address: ["Work", "Personal"],
-      Phone: ["Home", "Mobile", "Office"],
-      Contract: ["Utility", "Leasing", "SLA"]
-    }.each do |type, categories|
-      categories.each do |category|
-        Category.create!({
-          name: category,
-          categorizable_type: type,
-          company: company,
-        })
-      end
-    end
-  end  
-
   if Manufacturer.count == 0
     ["Apple", "Lenovo", "Cisco", "HP", "Samsung", "SHARP"].each do |manufacturer|
       Manufacturer.create!({
