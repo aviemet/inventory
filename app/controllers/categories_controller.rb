@@ -1,10 +1,19 @@
 class CategoriesController < ApplicationController
-  expose :categories, -> {  @active_company.categories.all }
+  include Searchable
+
+  expose :categories, -> {  search(@active_company.categories.all, sortable_fields) }
   expose :category
 
   # GET /categories
   def index
-    render inertia: "Categories/Index"
+    paginated_categories = categories.page(params[:page] || 1)
+    render inertia: "Categories/Index", props: {
+      categories: paginated_categories.render(view: :counts),
+      pagination: -> { {
+        count: categories.count,
+        **pagination_data(paginated_categories)
+      } }
+    }
   end
 
   # GET /categories/:id
@@ -58,6 +67,10 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  def sortable_fields
+    %w(name locations.count departments.count assets.count people.count).freeze
+  end
 
   def category_params
     params.require(:category).permit(:categorizable_id, :categorizable_type, :name, :description)

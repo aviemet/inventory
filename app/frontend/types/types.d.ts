@@ -95,6 +95,10 @@ declare global {
 		interface CompanyWithCounts extends Schema.Company {
 			counts: CompanyCounts
 		}
+
+		interface CategoryWithQty extends Schema.Category {
+			qty: number
+		}
 	}
 
 	type FlashMessage = Record<'success'|'alert'|'info'|'warning',string>
