@@ -1,7 +1,6 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Table } from '@/Components'
+import { Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon, SettingsIcon } from '@/Components/Icons'
 import PeopleTable from '../Table'
@@ -15,9 +14,7 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 	const title = 'People'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
@@ -26,7 +23,6 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 					rows={ people }
 					pagination={ pagination }
 				>
-
 					<TableTitleSection title={ title } menuOptions={ [
 						{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
 						{ label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon }
@@ -40,7 +36,7 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 					<Table.Pagination />
 				</Table.TableProvider>
 			</Table.Section>
-		</>
+		</Page>
 	)
 }
 

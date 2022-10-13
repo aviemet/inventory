@@ -1,7 +1,6 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Table } from '@/Components'
+import { Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import ComponentsTable from '../Table'
@@ -15,9 +14,7 @@ const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 	const title = 'Components'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
@@ -39,7 +36,7 @@ const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 					<Table.Pagination />
 				</Table.TableProvider>
 			</Table.Section>
-		</>
+		</Page>
 	)
 }
 

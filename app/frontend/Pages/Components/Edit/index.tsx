@@ -1,9 +1,7 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Breadcrumbs, Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import ComponentForm from '../Form'
 import { Routes } from '@/lib'
-import { breadcrumbs } from '../utils'
 
 interface IUpdateComponentProps{
 	component: Schema.Component
@@ -17,20 +15,18 @@ interface IUpdateComponentProps{
 const EditComponent = ({ component, ...models }: IUpdateComponentProps) => {
 	const title = `Edit ${component.name}`
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
-			<Breadcrumbs>{ breadcrumbs.edit(component) }</Breadcrumbs>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Components', href: Routes.components() },
+			{ title: component.name!, href: Routes.component(component) },
+			{ title: 'Edit Component' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
 				<ComponentForm to={ Routes.component(component) } method="patch" component={ component } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

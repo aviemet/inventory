@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import LocationForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,15 +13,17 @@ const EditLocation = ({ location, ...models }: IEditLocationProps) => {
 	const title = 'Edit Location'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Locations', href: Routes.locations() },
+			{ title: location.name!, href: Routes.location(location) },
+			{ title: 'Edit Location' },
+		] }>
 			<Section>
-				<h1>{ title }</h1>
+				<Heading>{ title }</Heading>
 
 				<LocationForm to={ Routes.location(location.slug) } method="patch" location={ location } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

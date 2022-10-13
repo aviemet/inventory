@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section, Link, Menu, Flex, Heading, Tabs } from '@/Components'
+import { Section, Link, Menu, Flex, Heading, Tabs, Page } from '@/Components'
 import { formatter, Routes } from '@/lib'
 
 interface IShowLicenseProps {
@@ -16,8 +15,10 @@ const tabs = {
 const ShowLicense = ({ license }: IShowLicenseProps) => {
 	const title = license.name ?? 'License Details'
 	return (
-		<>
-			<Head title={ title }></Head>
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Licenses', href: Routes.licenses() },
+			{ title: license.name! },
+		] }>
 			<Section>
 				<Flex position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
@@ -25,7 +26,7 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 					<Menu>
 						<Menu.Target />
 						<Menu.Dropdown>
-							{ license.assignments ?
+							{ /* license.assignments ?
 								<Menu.Item href={ Routes.checkinLicense(license) }>
 									Checkin License
 								</Menu.Item>
@@ -33,7 +34,7 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 								<Menu.Item href={ Routes.checkoutLicense(license) }>
 									Checkout License
 								</Menu.Item>
-							}
+							*/ }
 							<Menu.Item href={ Routes.editLicense(license) }>
 								Edit License
 							</Menu.Item>
@@ -127,7 +128,7 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 								const message = audit.action === 'create' ? 'Created' : 'Updated'
 
 								return (
-									<li tw="mb-1" key={ audit.id }>
+									<li key={ audit.id }>
 										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
 									</li>
 								)
@@ -144,7 +145,8 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 				</Tabs>
 
 			</Section>
-		</>
+
+		</Page>
 	)
 }
 

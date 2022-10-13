@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import ItemForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -16,18 +15,18 @@ interface IUpdateItemProps{
 const EditItem = ({ item, ...models }: IUpdateItemProps) => {
 	const title = `Edit ${item.name}`
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Hardware', href: Routes.items() },
+			{ title: item.name!, href: Routes.item(item) },
+			{ title: 'Edit Hardware' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
 				<ItemForm to={ Routes.item(item) } method="patch" item={ item } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

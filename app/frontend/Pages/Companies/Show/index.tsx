@@ -1,7 +1,6 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Breadcrumbs, Section } from '@/Components'
-import { breadcrumbs } from '../utils'
+import { Heading, Page, Section } from '@/Components'
+import { Routes } from '@/lib'
 
 interface IShowCompanyProps {
 	company: Schema.Company
@@ -11,15 +10,14 @@ const Show = ({ company }: IShowCompanyProps) => {
 	const title = company.name
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
-			<Breadcrumbs>{ breadcrumbs.show(company) }</Breadcrumbs>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Companies', href: Routes.companies() },
+			{ title: company.name! },
+		] }>
 			<Section>
-				<h1>{ title }</h1>
+				<Heading>{ title }</Heading>
 			</Section>
-		</>
+		</Page>
 	)
 }
 

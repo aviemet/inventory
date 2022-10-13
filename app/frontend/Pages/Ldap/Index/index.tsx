@@ -1,7 +1,6 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Link, Table } from '@/Components'
+import { Link, Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import { EditButton } from '@/Components/Button'
@@ -13,9 +12,10 @@ interface ILdapIndexProps {
 const LdapIndex = ({ ldaps }: ILdapIndexProps) => {
 	const title = 'LDAP Connections'
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Settings', href: Routes.settings() },
+			{ title: 'LDAP Connection' }
+		] }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
@@ -69,7 +69,7 @@ const LdapIndex = ({ ldaps }: ILdapIndexProps) => {
 					<Table.Pagination />
 				</Table.TableProvider>
 			</Table.Section>
-		</>
+		</Page>
 	)
 }
 

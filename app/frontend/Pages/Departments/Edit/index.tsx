@@ -1,9 +1,7 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import DepartmentForm from '../Form'
 import { Routes } from '@/lib'
-
 
 interface IEditDepartmentProps{
 	department: Schema.Department
@@ -14,15 +12,17 @@ const EditDepartment = ({ department, ...models }: IEditDepartmentProps) => {
 	const title = `Edit ${department.name}`
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Departments', href: Routes.departments() },
+			{ title: department.name!, href: Routes.department(department) },
+			{ title: 'Edit Department' },
+		] }>
 			<Section>
-				<h1>{ title }</h1>
+				<Heading>{ title }</Heading>
 
 				<DepartmentForm to={ Routes.department(department.slug) } method="patch" department={ department } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

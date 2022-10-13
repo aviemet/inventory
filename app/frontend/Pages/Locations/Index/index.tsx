@@ -1,7 +1,6 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Table } from '@/Components'
+import { Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import LocationsTable from '../Table'
@@ -26,9 +25,7 @@ const LocationsIndex = ({ locations, pagination }: ICompaniesIndexProps) => {
 	const title = 'Locations'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
@@ -50,7 +47,7 @@ const LocationsIndex = ({ locations, pagination }: ICompaniesIndexProps) => {
 					<Table.Pagination />
 				</Table.TableProvider>
 			</Table.Section>
-		</>
+		</Page>
 	)
 }
 

@@ -1,8 +1,7 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section, Tabs } from '@/Components'
-import VendorForm from '../Form'
+import { Heading, Page, Section, Tabs } from '@/Components'
 import { Routes } from '@/lib'
+import VendorForm from '../Form'
 
 interface IUpdateVendorProps{
 	vendor: Schema.Vendor
@@ -17,11 +16,13 @@ const New = ({ vendor, ...models }: IUpdateVendorProps) => {
 	const title = `Edit ${vendor.name}`
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Vendors', href: Routes.vendors() },
+			{ title: vendor.name!, href: Routes.vendor(vendor) },
+			{ title: 'Edit Vendor' },
+		] }>
 			<Section>
-				<h1>{ title }</h1>
+				<Heading>{ title }</Heading>
 
 				<Tabs>
 					<Tabs.List>
@@ -43,7 +44,7 @@ const New = ({ vendor, ...models }: IUpdateVendorProps) => {
 					</Tabs.Panel>
 				</Tabs>
 			</Section>
-		</>
+		</Page>
 	)
 }
 

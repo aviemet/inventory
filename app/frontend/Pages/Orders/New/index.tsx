@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Heading, Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import OrderForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -12,18 +11,17 @@ interface INewOrderProps {
 const NewOrder = ({ ...data }: INewOrderProps) => {
 	const title = 'New Purchase Order'
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Orders', href: Routes.orders() },
+			{ title: 'New Order' },
+		] }>
 			<Section>
-				<Heading>{ title } for { user.active_company!.name }</Heading>
+				<Heading>{ title }</Heading>
 
-				<OrderForm to={ Routes.items() } { ...data } />
+				<OrderForm to={ Routes.orders() } { ...data } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
+import { Page } from '@/Components'
 
 const Show = () => {
 	return (
-		<div>Show</div>
+		<Page>Show</Page>
 	)
 }
 

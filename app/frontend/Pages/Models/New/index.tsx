@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import ModelForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,18 +12,17 @@ interface INewModelProps {
 const New = ({ ...data }: INewModelProps) => {
 	const title = 'New Model'
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Models', href: Routes.models() },
+			{ title: 'New Model' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
 				<ModelForm to={ Routes.models() } { ...data } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section, Menu, Flex, Heading, Tabs, Table } from '@/Components'
+import { Section, Menu, Flex, Heading, Tabs, Table, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { NewIcon, EditIcon } from '@/Components/Icons'
 import { TableTitleSection } from '@/Layouts/Components'
@@ -49,10 +48,10 @@ const Show = ({ department, items, accessories, components, consumables, license
 	const title = department.name ?? 'Department Details'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Departments', href: Routes.departments() },
+			{ title: department.name! },
+		] }>
 			<Tabs urlControlled={ true } defaultValue={ tabs.details } allowTabDeactivation={ true }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
@@ -240,7 +239,7 @@ const Show = ({ department, items, accessories, components, consumables, license
 				</Tabs.Panel>
 
 			</Tabs>
-		</>
+		</Page>
 	)
 }
 

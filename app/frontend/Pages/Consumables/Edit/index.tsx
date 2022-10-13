@@ -1,9 +1,7 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Breadcrumbs, Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import ConsumableForm from '../Form'
 import { Routes } from '@/lib'
-import { breadcrumbs } from '../utils'
 
 interface IUpdateConsumableProps{
 	consumable: Schema.Consumable
@@ -15,20 +13,18 @@ interface IUpdateConsumableProps{
 const EditConsumable = ({ consumable, ...models }: IUpdateConsumableProps) => {
 	const title = `Edit ${consumable.name}`
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
-			<Breadcrumbs>{ breadcrumbs.edit(consumable) }</Breadcrumbs>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Consumables', href: Routes.consumables() },
+			{ title: consumable.name!, href: Routes.consumable(consumable) },
+			{ title: 'Edit Consumable' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
 				<ConsumableForm to={ Routes.consumable(consumable) } method="patch" consumable={ consumable } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

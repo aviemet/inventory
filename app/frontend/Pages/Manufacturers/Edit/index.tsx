@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import ManufacturerForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -11,18 +10,18 @@ interface IUpdateManufacturerProps{
 const New = ({ manufacturer, ...models }: IUpdateManufacturerProps) => {
 	const title = `Edit ${manufacturer.name}`
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Manufacturers', href: Routes.manufacturers() },
+			{ title: manufacturer.name!, href: Routes.manufacturer(manufacturer) },
+			{ title: 'Edit Manufacturer' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
-				<ManufacturerForm to={ Routes.manufacturers(manufacturer) } method="patch" manufacturer={ manufacturer } { ...models } />
+				<ManufacturerForm to={ Routes.manufacturer(manufacturer) } method="patch" manufacturer={ manufacturer } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
+import { Page } from '@/Components'
 
 const Index = () => {
 	return (
-		<div>Index</div>
+		<Page>Index</Page>
 	)
 }
 
