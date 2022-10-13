@@ -74,12 +74,13 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # TODO: This probably is unused and needs to go
   # GET /companies/:id/snippet/:snippet
-  def snippet
-    respond_to do |format|
-      format.html { render template: "companies/#{params[:snippet]}", layout: false }
-    end
-  end
+  # def snippet
+  #   respond_to do |format|
+  #     format.html { render template: "companies/#{params[:snippet]}", layout: false }
+  #   end
+  # end
 
   private
 

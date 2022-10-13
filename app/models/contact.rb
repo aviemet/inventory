@@ -5,4 +5,5 @@ class Contact < ApplicationRecord
   has_many :websites, dependent: :delete_all
 
   belongs_to :contactable, polymorphic: true
+
 end

@@ -9,4 +9,10 @@ class CategoryBlueprint < ApplicationBlueprint
   view :as_options do
     fields :id, :name
   end
+
+  view :counts do
+    field :qty do |category|
+      category.records.size
+    end
+  end
 end

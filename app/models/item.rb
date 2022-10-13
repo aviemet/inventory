@@ -32,9 +32,9 @@ class Item < ApplicationRecord
   has_many :nics
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ip_leases
   has_many :ip_leases, through: :nics
-  belongs_to :model
   belongs_to :vendor, required: false
   belongs_to :default_location, class_name: "Location", required: false
+  belongs_to :model
   has_one :category, through: :model
   has_one :manufacturer, through: :model
   has_one :warranty, required: false
@@ -51,6 +51,10 @@ class Item < ApplicationRecord
     else
       self.default_location
     end
+  end
+
+  def self.find_by_category(category)
+    self.includes(:model, :category).where('model.category' => category)
   end
 
   private

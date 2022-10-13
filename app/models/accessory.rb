@@ -32,4 +32,8 @@ class Accessory < ApplicationRecord
 
   scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer, :model]) }
 
+  def self.find_by_category(category)
+    self.includes(:model, :category).where('model.category' => category)
+  end
+
 end
