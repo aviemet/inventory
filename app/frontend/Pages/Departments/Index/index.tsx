@@ -1,7 +1,6 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Table } from '@/Components'
+import { Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import DepartmentsTable from '../Table'
@@ -27,9 +26,7 @@ const DepartmentsIndex = ({ departments, pagination }: IDepartmentsIndexProps) =
 	const title = 'Departments'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
@@ -51,7 +48,7 @@ const DepartmentsIndex = ({ departments, pagination }: IDepartmentsIndexProps) =
 					<Table.Pagination />
 				</Table.TableProvider>
 			</Table.Section>
-		</>
+		</Page>
 	)
 }
 

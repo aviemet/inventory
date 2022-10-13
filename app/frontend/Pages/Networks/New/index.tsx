@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import NetworkForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -11,18 +10,17 @@ interface INewNetworkProps {
 const New = ({ ...data }: INewNetworkProps) => {
 	const title = 'New Network'
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Networks', href: Routes.networks() },
+			{ title: 'New Network' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
 				<NetworkForm to={ Routes.networks() } { ...data } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

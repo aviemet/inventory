@@ -1,8 +1,15 @@
+import { Heading, Page, Section } from '@/Components'
 import React from 'react'
 
 const ShowTicket = () => {
+	const title = 'Show Ticket'
 	return (
-		<div>Show Ticket</div>
+		<Page title={ title }>
+			<Section>
+				<Heading>{ title }</Heading>
+				Show Ticket
+			</Section>
+		</Page>
 	)
 }
 

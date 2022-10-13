@@ -1,25 +1,23 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Breadcrumbs, Section } from '@/Components'
-import CompanyForm from '../Form'
+import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { breadcrumbs } from '../utils'
+import CompanyForm from '../Form'
 
 const EditCompany = ({ company }: { company: Schema.Company}) => {
 	const title = 'Edit Company'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
-			<Breadcrumbs>{ breadcrumbs.edit(company) }</Breadcrumbs>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Companies', href: Routes.companies() },
+			{ title: company.name!, href: Routes.company(company.slug) },
+			{ title: 'Edit Company' },
+		] }>
 			<Section>
-				<h1>{ title }</h1>
+				<Heading>{ title }</Heading>
 
 				<CompanyForm to={ Routes.companies() } company={ company } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

@@ -1,8 +1,9 @@
+import { Page } from '@/Components'
 import React from 'react'
 
 const Edit = () => {
 	return (
-		<div>Edit</div>
+		<Page>Edit</Page>
 	)
 }
 

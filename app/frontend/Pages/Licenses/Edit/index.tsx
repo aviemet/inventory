@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import LicenseForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,18 +13,18 @@ interface IUpdateLicenseProps{
 const New = ({ license, ...models }: IUpdateLicenseProps) => {
 	const title = `Edit ${license.name}`
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Licenses', href: Routes.licenses() },
+			{ title: license.name!, href: Routes.license(license) },
+			{ title: 'Edit Licenses' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
 				<LicenseForm to={ Routes.license(license) } method="patch" license={ license } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

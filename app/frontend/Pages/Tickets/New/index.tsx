@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import TicketForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -12,15 +11,16 @@ const NewTicket = ({ ...data }: INewTicketProps) => {
 	const title = 'New Support Ticket'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Tickets', href: Routes.tickets() },
+			{ title: 'New Ticket' },
+		] }>
 			<Section>
-				<h1>{ title }</h1>
+				<Heading>{ title }</Heading>
 
 				<TicketForm to={ Routes.tickets() } { ...data } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

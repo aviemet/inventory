@@ -7,6 +7,7 @@ import { CheckinButton } from '@/Components/Button'
 interface IAccessoryAssociationsProps {
 	accessory: Schema.Accessory
 }
+
 const Associations = ({ accessory }: IAccessoryAssociationsProps) => {
 	return (
 		<>

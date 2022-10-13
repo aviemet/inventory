@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import ModelForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,18 +12,18 @@ interface IUpdateModelProps{
 const New = ({ model, ...models }: IUpdateModelProps) => {
 	const title = `Edit ${model.name}`
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Models', href: Routes.models() },
+			{ title: model.name!, href: Routes.model(model) },
+			{ title: 'Edit Model' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
-				<ModelForm to={ Routes.models(model) } method="patch" model={ model } { ...models } />
+				<ModelForm to={ Routes.model(model) } method="patch" model={ model } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

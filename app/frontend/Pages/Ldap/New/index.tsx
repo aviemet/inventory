@@ -8,21 +8,20 @@ interface ISettingsProps {
 }
 
 const EditLdap = ({ ldap }: ISettingsProps) => {
-	const title = 'Edit LDAP Connection'
+	const title = 'New LDAP Connection'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Settings', href: Routes.settings() },
-			{ title: ldap.name, href: Routes.editLdap(ldap.id) },
-			{ title: 'Edit LDAP' },
+			{ title: 'New LDAP' },
 		] }>
 			<Section>
 				<Heading>LDAP Settings</Heading>
 				<Form
 					model="ldap"
 					data={ { ldap } }
-					to={ Routes.ldap(ldap) }
-					method={ 'patch' }
+					to={ Routes.ldaps() }
+					method={ 'post' }
 				>
 					<Input label="Host" name="host" />
 

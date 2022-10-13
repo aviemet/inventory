@@ -1,7 +1,6 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Table } from '@/Components'
+import { Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import OrdersTable from '../Table'
@@ -17,9 +16,7 @@ const OrdersIndex = ({ orders, pagination }: IOrdersIndexProps) => {
 	const title = 'Orders'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
@@ -28,7 +25,6 @@ const OrdersIndex = ({ orders, pagination }: IOrdersIndexProps) => {
 					rows={ orders }
 					pagination={ pagination }
 				>
-
 					<TableTitleSection title={ title } menuOptions={ [
 						{ label: 'New Order', href: Routes.newOrder(), icon: NewIcon },
 					] }>
@@ -41,7 +37,7 @@ const OrdersIndex = ({ orders, pagination }: IOrdersIndexProps) => {
 					<Table.Pagination />
 				</Table.TableProvider>
 			</Table.Section>
-		</>
+		</Page>
 	)
 }
 

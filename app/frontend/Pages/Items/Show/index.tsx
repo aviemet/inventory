@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section, Menu, Flex, Heading, Tabs } from '@/Components'
+import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
 import Details from './Details'
@@ -17,14 +16,14 @@ const tabs = {
 	associations: 'associations',
 }
 
-
 const ShowItem = ({ item }: IShowItemProps) => {
 	const title = item.name ?? 'Item Details'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Hardware', href: Routes.items() },
+			{ title: item.name! },
+		] }>
 			<Section>
 				<Flex position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
@@ -70,7 +69,7 @@ const ShowItem = ({ item }: IShowItemProps) => {
 
 
 			</Section>
-		</>
+		</Page>
 	)
 }
 

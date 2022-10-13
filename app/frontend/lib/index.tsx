@@ -90,14 +90,3 @@ export const polymorphicRoute = (model: string, param: string|number) => {
 	// @ts-ignore
 	return Routes[camelize(model)](param)
 }
-
-type TBreadcrumb = {
-	title: string
-	href?: string
-}
-
-export const breadcrumbLinks = (links: TBreadcrumb[]) => links.map((link, i) => link.href ?
-	<Link href={ link.href } key={ i }>{ link.title }</Link>
-	:
-	<React.Fragment key={ i }>{ link.title }</React.Fragment>
-)
