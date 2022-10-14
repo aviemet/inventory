@@ -15,4 +15,10 @@ class CategoryBlueprint < ApplicationBlueprint
       category.records.size
     end
   end
+
+  view :show do
+    field :plural do |category|
+      category.categorizable_type.pluralize
+    end
+  end
 end
