@@ -20,7 +20,7 @@ const CategoriesTable = (props: ITableProps) => {
 				<Table.RowIterator render={ (category: Schema.CategoryWithQty) => (
 					<Table.Row key={ category.id }>
 						<Table.Cell nowrap>
-							<Link href={ Routes.category(category) }>{ category.name }</Link>
+							<Link href={ Routes.category(category.slug) }>{ category.name }</Link>
 						</Table.Cell>
 
 						<Table.Cell nowrap>
@@ -32,7 +32,7 @@ const CategoriesTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell className="table-column-fit">
-							<EditButton href={ Routes.editContract(category) } />
+							<EditButton href={ Routes.editContract(category.slug) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />
