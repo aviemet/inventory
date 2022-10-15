@@ -16,15 +16,15 @@ class Category < ApplicationRecord
 
   audited
 
-  @categorizable_types = %w(Accessory Address Component Consumable Contact Contract Department Email Item License Location Manufacturer Model Order Person Phone Ticket User Vendor Website)
+  @categorizable_types = %w(Accessory Address Component Consumable Contact Contract Department Email Item License Location Model Order Person Phone Ticket User Vendor Website)
 
   validates_inclusion_of :categorizable_type, in: @categorizable_types, allow_nil: false
   validates_presence_of :categorizable_type
   validates_presence_of :name
 
-  has_many :items, through: :model
-
   scope :find_by_type, ->(type){ where(categorizable_type: type.to_s.singularize.camelize) }
+
+  scope :includes_associated, -> { includes([]) }
 
   delegate :to_s, to: :category_with_type
 
@@ -37,6 +37,10 @@ class Category < ApplicationRecord
   end
 
   def records
-    self.categorizable_type.constantize.find_by_category(self)
+    self.type.find_by_category(self)
+  end
+
+  def type
+    self.categorizable_type.constantize
   end
 end

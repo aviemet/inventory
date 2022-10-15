@@ -67,7 +67,6 @@ const ShowItem = ({ item }: IShowItemProps) => {
 					</Tabs.Panel>
 				</Tabs>
 
-
 			</Section>
 		</Page>
 	)

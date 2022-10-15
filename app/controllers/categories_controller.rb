@@ -23,7 +23,7 @@ class CategoriesController < ApplicationController
 
     render inertia: "Categories/Show", props: {
       category: category.render(view: :show),
-      records: paginated_records.render(view: :associations),
+      records: paginated_records.render(view: :index),
       pagination: -> { {
         count: category.records.size,
         **pagination_data(paginated_records)
@@ -33,12 +33,16 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
-    render inertia: "Categories/New"
+    render inertia: "Categories/New", props: {
+      category: Category.new.render(view: :new),
+    }
   end
 
   # GET /categories/:id/edit
   def edit
-    render inertia: "Categories/Edit"
+    render inertia: "Categories/Edit", props: {
+      category: category.render(view: :edit)
+    }
   end
 
   # POST /categories

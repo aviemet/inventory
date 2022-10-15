@@ -10,7 +10,7 @@ class AccessoriesController < ApplicationController
     paginated_accessories = accessories.page(params[:page] || 1)
 
     render inertia: "Accessories/Index", props: {
-      accessories: -> { paginated_accessories.render(view: :associations) },
+      accessories: -> { paginated_accessories.render(view: :index) },
       pagination: -> { {
         count: accessories.count,
         **pagination_data(paginated_accessories)
@@ -22,7 +22,7 @@ class AccessoriesController < ApplicationController
   def show
     ap "SHOW ACCESSORY"
     render inertia: "Accessories/Show", props: {
-      accessory: -> { accessory.render(view: :associations) }
+      accessory: -> { accessory.render(view: :show) }
     }
   end
 

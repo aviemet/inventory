@@ -31,4 +31,24 @@ class ComponentBlueprint < ApplicationBlueprint
     association :category, blueprint: CategoryBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
   end
+
+  view :index do
+    association :department, blueprint: DepartmentBlueprint
+    association :model, blueprint: ModelBlueprint
+    association :vendor, blueprint: VendorBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :manufacturer, blueprint: ManufacturerBlueprint
+  end
+
+  view :show do
+    association :department, blueprint: DepartmentBlueprint
+    association :assignments, blueprint: AssignmentBlueprint
+    association :purchase, blueprint: PurchaseBlueprint
+    association :audits, blueprint: AuditBlueprint
+    association :model, blueprint: ModelBlueprint
+    association :vendor, blueprint: VendorBlueprint
+    association :default_location, blueprint: LocationBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :manufacturer, blueprint: ManufacturerBlueprint
+  end
 end

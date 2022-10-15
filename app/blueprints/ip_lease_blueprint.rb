@@ -7,9 +7,8 @@ class IpLeaseBlueprint < ApplicationBlueprint
     ip.address.to_s
   end
 
-  association :item, blueprint: ItemBlueprint, view: :shallow
-
-  view :shallow do
-    exclude :item
+  view :with_item do
+    association :item, blueprint: ItemBlueprint, view: :shallow
   end
+
 end

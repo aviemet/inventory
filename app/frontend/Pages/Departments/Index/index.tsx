@@ -5,20 +5,8 @@ import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import DepartmentsTable from '../Table'
 
-export interface DepartmentWithCounts extends Schema.Department {
-	counts: {
-		items: number
-		accessories: number
-		consumables: number
-		components: number
-		departments: number
-		licenses: number
-		people: number
-	}
-}
-
 interface IDepartmentsIndexProps {
-	departments: DepartmentWithCounts[]
+	departments: Schema.DepartmentWithCounts[]
 	pagination: Schema.Pagination
 }
 

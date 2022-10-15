@@ -10,22 +10,13 @@ import ComponentsTable from '@/Pages/Components/Table'
 import LicensesTable from '@/Pages/Licenses/Table'
 import PeopleTable from '@/Pages/People/Table'
 
-type ShowPageDepartment = Schema.Department & {
-	items_count: number
-	accessories_count: number
-	consumables_count: number
-	components_count: number
-	licenses_count: number
-	people_count: number
-}
-
 type TPaginatedModel<T> = {
 	data: T
 	pagination: Schema.Pagination
 }
 
 interface IDepartmentShowProps {
-	department: ShowPageDepartment
+	department: Schema.DepartmentWithCounts
 	items?: TPaginatedModel<Schema.Item[]>
 	accessories?: TPaginatedModel<Schema.Accessory[]>
 	components?: TPaginatedModel<Schema.Component[]>
@@ -55,12 +46,12 @@ const Show = ({ department, items, accessories, components, consumables, license
 			<Tabs urlControlled={ true } defaultValue={ tabs.details } allowTabDeactivation={ true }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
-					<Tabs.Tab value={ tabs.items }>Items ({ department.items_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.accessories }>Accessories ({ department.accessories_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.components }>Components ({ department.components_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.consumables }>Consumables ({ department.consumables_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.licenses }>Licenses ({ department.licenses_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.people }>People ({ department.people_count })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.items }>Items ({ department.counts.items })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.accessories }>Accessories ({ department.counts.accessories })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.components }>Components ({ department.counts.components })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.consumables }>Consumables ({ department.counts.consumables })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.licenses }>Licenses ({ department.counts.licenses })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.people }>People ({ department.counts.people })</Tabs.Tab>
 				</Tabs.List>
 
 				<Tabs.Panel value={ tabs.details }>

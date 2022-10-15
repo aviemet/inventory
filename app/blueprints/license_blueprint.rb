@@ -31,5 +31,22 @@ class LicenseBlueprint < ApplicationBlueprint
 		association :vendor, blueprint: VendorBlueprint
 		association :manufacturer, blueprint: ManufacturerBlueprint
   end
-      
+
+  view :index do
+		association :department, blueprint: DepartmentBlueprint
+		association :category, blueprint: CategoryBlueprint
+		association :vendor, blueprint: VendorBlueprint
+		association :manufacturer, blueprint: ManufacturerBlueprint
+  end
+
+  view :show do
+		association :department, blueprint: DepartmentBlueprint
+		association :assignments, blueprint: AssignmentBlueprint
+		association :purchase, blueprint: PurchaseBlueprint
+		association :audits, blueprint: AuditBlueprint
+		association :category, blueprint: CategoryBlueprint
+		association :vendor, blueprint: VendorBlueprint
+		association :manufacturer, blueprint: ManufacturerBlueprint
+  end
+
 end

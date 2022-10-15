@@ -17,12 +17,6 @@ class AccessoryBlueprint < ApplicationBlueprint
     accessory.cost&.amount.to_f if accessory.cost
   end
 
-  view :show do
-    field :active_assignments_count do |accessory|
-      accessory.assignments.where(active: true).size
-    end
-  end
-
   view :associations do
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint, view: :associations
@@ -34,4 +28,21 @@ class AccessoryBlueprint < ApplicationBlueprint
     association :category, blueprint: CategoryBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
   end
+
+  view :index do
+    association :department, blueprint: DepartmentBlueprint
+    association :model, blueprint: ModelBlueprint
+    association :vendor, blueprint: VendorBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :manufacturer, blueprint: ManufacturerBlueprint
+  end
+
+  view :show do
+    include_view :associations
+
+    field :active_assignments_count do |accessory|
+      accessory.assignments.where(active: true).size
+    end
+  end
+
 end
