@@ -2,7 +2,7 @@ class ModelsController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :models, -> { search(@active_company.models.includes_associated, sortable_fields) }
+  expose :models, -> { search(@active_company.models, sortable_fields) }
   expose :model, -> { @active_company.models.includes_associated.find_by_slug(request.params[:slug]) }
 
   # GET /models
@@ -10,7 +10,7 @@ class ModelsController < ApplicationController
     paginated_models = models.page(params[:page] || 1)
 
     render inertia: "Models/Index", props: {
-      models: paginated_models.render(view: :associations),
+      models: paginated_models.render(view: :index),
       pagination: -> { {
         count: models.count,
         **pagination_data(paginated_models)
@@ -21,7 +21,7 @@ class ModelsController < ApplicationController
   # GET /models/1
   def show
     render inertia: "Models/Show", props: {
-      model: model.render(view: :associations)
+      model: model.render(view: :show)
     }
   end
 

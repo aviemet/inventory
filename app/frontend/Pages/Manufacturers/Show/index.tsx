@@ -14,7 +14,7 @@ const tabs = {
 }
 
 const Show = ({ manufacturer }: IShowManufacturerProps) => {
-	const title = manufacturer.name ?? 'Item Details'
+	const title = manufacturer.name ?? 'Manufacturer Details'
 
 	return (
 		<Page title={ title } breadcrumbs={ [

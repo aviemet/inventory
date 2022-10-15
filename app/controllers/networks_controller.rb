@@ -25,7 +25,7 @@ class NetworksController < ApplicationController
 
     render inertia: "Networks/Show", props: {
       network: -> { network.render(view: :details, page: (params[:page] || 1).to_i) },
-      ips: -> { ips.render },
+      ips: -> { ips.render(view: :with_item) },
       pagination: -> { {
         count: network&.address&.size - 2,
         **host_pagination_data(network&.address)

@@ -10,7 +10,7 @@ class ConsumablesController < ApplicationController
     paginated_consumables = consumables.page(params[:page] || 1)
 
     render inertia: "Consumables/Index", props: {
-      consumables: -> { paginated_consumables.render(view: :associations) },
+      consumables: -> { paginated_consumables.render(view: :index) },
       pagination: -> { {
         count: consumables.count,
         **pagination_data(paginated_consumables)
@@ -21,7 +21,7 @@ class ConsumablesController < ApplicationController
   # GET /consumables/:id
   def show
     render inertia: "Consumables/Show", props: {
-      consumable: -> { consumable.render(view: :associations) }
+      consumable: -> { consumable.render(view: :show) }
     }
   end
 

@@ -18,15 +18,15 @@ class AuditBlueprint < Blueprinter::Base
          :request_uuid,
          :created_at
 
-  field :route do |audit|
-    begin
-      polymorphic_path(audit.auditable_type.constantize.find(audit.auditable_id), only_path: true)
-    rescue
-      nil
+  view :dashboard do
+    field :route do |audit|
+      begin
+        polymorphic_path(audit.auditable_type.constantize.find(audit.auditable_id), only_path: true)
+      rescue
+        nil
+      end
     end
-  end
 
-  view :with_user do
     association :user, blueprint: UserBlueprint
   
     association :person, blueprint: PersonBlueprint do |audit|

@@ -13,13 +13,13 @@ const EditCategory = ({ category, ...models }: IUpdateCategoryProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Categories', href: Routes.categories() },
-			{ title: category.name!, href: Routes.category(category) },
+			{ title: category.name!, href: Routes.category(category.slug) },
 			{ title: 'Edit Category' },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<CategoryForm to={ Routes.category(category) } method="patch" category={ category } />
+				<CategoryForm to={ Routes.category(category.slug) } method="patch" category={ category } />
 			</Section>
 		</Page>
 	)

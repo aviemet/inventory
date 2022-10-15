@@ -13,12 +13,13 @@ const ModelsTable = (props: ITableProps) => {
 					<Table.Cell sort="model_number">Model #</Table.Cell>
 					<Table.Cell sort="category.name">Category</Table.Cell>
 					<Table.Cell sort="manufacturer.name">Manufacturer</Table.Cell>
+					<Table.Cell sort="count">#</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (model: Schema.Model) => (
+				<Table.RowIterator render={ (model: Schema.ModelWithCount) => (
 					<Table.Row key={ model.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.model(model.slug) }>{ model.name }</Link>
@@ -38,6 +39,10 @@ const ModelsTable = (props: ITableProps) => {
 							{ model.manufacturer && <Link href={ Routes.manufacturer(model.manufacturer.slug) }>
 								{ model.manufacturer.name }
 							</Link> }
+						</Table.Cell>
+
+						<Table.Cell>
+							{ model?.count && model.count }
 						</Table.Cell>
 
 						<Table.Cell className="table-column-fit">

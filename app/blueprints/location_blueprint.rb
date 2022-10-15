@@ -7,16 +7,7 @@ class LocationBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  view :associations do
-    association :parent, blueprint: LocationBlueprint
-    association :contact, blueprint: ContactBlueprint
-    association :audits, blueprint: AuditBlueprint
-    association :department, blueprint: DepartmentBlueprint
-    association :location, blueprint: LocationBlueprint
-  end
-
   view :counts do
-    include_view :associations
     field :counts do |loc|
       {
         items: loc&.items&.size || 0,
@@ -27,6 +18,31 @@ class LocationBlueprint < ApplicationBlueprint
         people: loc&.people&.size || 0,
       }
     end
+  end
+
+  view :associations do
+    association :parent, blueprint: LocationBlueprint
+    association :contact, blueprint: ContactBlueprint
+    association :audits, blueprint: AuditBlueprint
+    association :department, blueprint: DepartmentBlueprint
+    association :location, blueprint: LocationBlueprint
+  end
+
+  view :index do
+    include_view :counts
+
+    association :parent, blueprint: LocationBlueprint
+    association :contact, blueprint: ContactBlueprint
+    association :department, blueprint: DepartmentBlueprint
+    association :location, blueprint: LocationBlueprint
+  end
+
+  view :show do
+    association :parent, blueprint: LocationBlueprint
+    association :contact, blueprint: ContactBlueprint
+    association :audits, blueprint: AuditBlueprint
+    association :department, blueprint: DepartmentBlueprint
+    association :location, blueprint: LocationBlueprint
   end
 
   view :as_options do

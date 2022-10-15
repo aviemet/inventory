@@ -10,7 +10,7 @@ class LicensesController < ApplicationController
     paginated_licenses = licenses.page(params[:page] || 1)
 
     render inertia: "Licenses/Index", props: {
-      licenses: paginated_licenses.render(view: :associations),
+      licenses: paginated_licenses.render(view: :index),
       pagination: -> { {
         count: licenses.count,
         **pagination_data(paginated_licenses)
@@ -21,7 +21,7 @@ class LicensesController < ApplicationController
   # GET /licenses/1
   def show
     render inertia: "Licenses/Show", props: {
-      license: -> { license.render(view: :associations) }
+      license: -> { license.render(view: :show) }
     }
   end
 

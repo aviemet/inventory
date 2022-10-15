@@ -9,7 +9,7 @@ class ContractsController < ApplicationController
     paginated_contracts = contracts.page(params[:page] || 1)
 
     render inertia: "Contracts/Index", props: {
-      contracts: paginated_contracts.render(view: :associations),
+      contracts: paginated_contracts.render(view: :index),
       pagination: -> { {
         count: contracts.count,
         **pagination_data(paginated_contracts)
@@ -20,7 +20,7 @@ class ContractsController < ApplicationController
   # GET /contracts/1
   def show
     render inertia: "Contracts/Show", props: {
-      contract: contract.render(view: :associations),
+      contract: contract.render(view: :show),
     }
   end
 
