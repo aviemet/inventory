@@ -6,6 +6,7 @@ export { default as ConditionalWrapper } from './ConditionalWrapper'
 export { default as Flex } from './Flex' // TODO: Remove and refactor (favoring Group and Stack)
 export { default as Heading } from './Heading'
 export { default as History } from './History'
+export { default as Lazy } from './Lazy'
 export { default as Link } from './Link'
 export { default as Menu } from './Menu'
 export { default as Section } from './Section'
