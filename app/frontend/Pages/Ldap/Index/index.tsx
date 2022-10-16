@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Layouts/Components'
+import { TableTitleSection } from '@/Components/Layout'
 import { NewIcon } from '@/Components/Icons'
 import { EditButton } from '@/Components/Button'
 
@@ -28,7 +28,6 @@ const LdapIndex = ({ ldaps }: ILdapIndexProps) => {
 						{ label: 'New LDAP Connection', href: Routes.newLdap(), icon: NewIcon },
 					] }>
 						<Table.SearchInput />
-						<Table.ColumnPicker />
 					</TableTitleSection>
 
 					<Table>

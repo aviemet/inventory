@@ -10,11 +10,22 @@ module Searchable
   #   Sortable fields in nested models use dot-notation: "related_model.field"
   #
   def search(model, sortable_fields = [])
-    terms = params[:search]
-    return model.order(sort(model, sortable_fields)) unless terms
+    search_object = model
 
-    ids = model.search(terms).pluck(:id)
-    model.where(id: ids).order(sort(model, sortable_fields))
+    terms = params[:search]
+
+    if terms
+      ids = model.search(terms).pluck(:id)
+      search_object = model.where(id: ids)
+    end
+
+    if current_user.table_preferences[model.name.downcase.pluralize]
+      hidden_fields = current_user.table_preferences[model.name.downcase.pluralize]["hide"]
+      hidden_fields = hidden_fields.filter{|key, val| val == true}.map{|el| el[0]}
+      # search_object = hide(search_object, hidden_fields)
+    end
+
+    search_object.order(sort(model, sortable_fields))
   end
 
   protected
@@ -34,5 +45,24 @@ module Searchable
     return unless params[:direction]
 
     %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+
+  def hide(model, fields)
+    return model if fields.size < 1
+
+    # this needs to be done with a Map or something
+
+    # attributes = []
+    fields.each do |field|
+      parts = field.split(".")
+
+      if parts.size > 1
+        attributes = parts[-2].constantize.attribute_names
+      end
+
+
+    end
+
+    return model.select(fields.join(", "))
   end
 end

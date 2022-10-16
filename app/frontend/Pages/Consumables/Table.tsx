@@ -10,14 +10,14 @@ const ConsumablesTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="models.name">Model</Table.Cell>
 					<Table.Cell sort="categories.name">Category</Table.Cell>
 					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
 					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
 					<Table.Cell sort="cost_cents">Cost</Table.Cell>
-					<Table.Cell sort="departments.name">Qty</Table.Cell>
-					<Table.Cell sort="departments.name">Min Qty</Table.Cell>
+					<Table.Cell sort="qty">Qty</Table.Cell>
+					<Table.Cell sort="min_qty">Min Qty</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
@@ -30,29 +30,29 @@ const ConsumablesTable = (props: ITableProps) => {
 							<Link href={ Routes.consumable(consumable) }>{ consumable.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell>
+						<Table.Cell hideable="models.name">
 							<Link href={ Routes.consumable(consumable) }>{ consumable.model?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell>
+						<Table.Cell hideable="categories.name">
 							<Link href={ Routes.consumable(consumable) }>{ consumable.category?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell>
+						<Table.Cell hideable="manufacturers.name">
 							<Link href={ Routes.consumable(consumable) }>{ consumable.manufacturer?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell>
+						<Table.Cell hideable="vendors.name">
 							<Link href={ Routes.consumable(consumable) }>{ consumable.vendor?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell>
+						<Table.Cell hideable="cost_cents">
 							{ consumable.cost ? formatter.currency(consumable.cost, consumable.cost_currency) : '-' }
 						</Table.Cell>
 
-						<Table.Cell>{ consumable.qty }</Table.Cell>
+						<Table.Cell hideable="qty">{ consumable.qty }</Table.Cell>
 
-						<Table.Cell>{ consumable.min_qty }</Table.Cell>
+						<Table.Cell hideable="min_qty">{ consumable.min_qty }</Table.Cell>
 
 						<Table.Cell className="table-column-fit">
 							<Group noWrap spacing="sm">
