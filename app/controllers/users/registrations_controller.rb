@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       # ap "Not PERSISTED"
       clean_up_passwords resource
       set_minimum_password_length
-      redirect_to new_user_registration_path
+      redirect_to new_user_registration_path, inertia: { errors: resource.errors }
     end
   end
 
