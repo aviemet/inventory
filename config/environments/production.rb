@@ -63,15 +63,21 @@ Rails.application.configure do
   config.active_job.queue_adapter     = :delayed_job
   config.active_job.queue_name_prefix = "inventory_production"
 
-  config.action_mailer.delivery_method = :trustifi_mail
-  
-  config.action_mailer.perform_caching = false
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
-
+  config.action_mailer.smtp_settings = {
+    address: ENV["SMTP_ADDRESS"],
+    port: ENV["SMTP_PORT"],
+    domain: ENV["SMTP_DOMAIN"],
+    authentication: ENV["SMTP_AUTH"],
+    enable_starttls_auto: ENV["SMTP_TLS"],
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"]
+  }
   config.action_mailer.default_url_options = { host: ENV["SERVER_DOMAIN"] }
+  config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :smtp
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
