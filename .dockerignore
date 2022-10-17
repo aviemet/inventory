@@ -1,6 +1,6 @@
 .git*
 .dockerignore
-.env
+.env.*
 .rubocop*
 .solargraph*
 .eslintrc.js

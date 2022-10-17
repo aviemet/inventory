@@ -71,7 +71,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.default_url_options = { :host => "it-assets-inventory.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: ENV["SERVER_DOMAIN"] }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

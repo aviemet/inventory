@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# pull from git
+
+bundle install
+
+yarn install
+
+rails db:prepare
+
+rm -f tmp/pids/server.pid
+
+exec yarn start

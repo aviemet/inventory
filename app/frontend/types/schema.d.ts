@@ -361,9 +361,9 @@ declare namespace Schema {
 		nics?: Nic[];
 		ips?: IpLease[];
 		ip_leases?: IpLease[];
-		model?: Model;
 		vendor?: Vendor;
 		default_location?: Location;
+		model?: Model;
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
