@@ -7,7 +7,6 @@ class EmailBlueprint < ApplicationBlueprint
          :updated_at
 
   view :associations do
-    association :audits, blueprint: AuditBlueprint
     association :contact, blueprint: ContactBlueprint
     association :category, blueprint: CategoryBlueprint
   end

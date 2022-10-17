@@ -3,7 +3,6 @@ import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
-import { type DepartmentWithCounts } from './Index'
 
 const DepartmentsTable = (props: ITableProps) => {
 	return (
@@ -22,7 +21,7 @@ const DepartmentsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (department: DepartmentWithCounts) => (
+				<Table.RowIterator render={ (department: Schema.DepartmentWithCounts) => (
 					<Table.Row key={ department.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.department(department.slug) }>{ department.name }</Link>

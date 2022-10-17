@@ -20,7 +20,7 @@ const ManufacturersTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (manufacturer: Schema.Manufacturer) => (
+				<Table.RowIterator render={ (manufacturer: Schema.ManufacturerWithCounts) => (
 					<Table.Row key={ manufacturer.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.manufacturer(manufacturer.slug) }>{ manufacturer.name }</Link>
@@ -28,31 +28,31 @@ const ManufacturersTable = (props: ITableProps) => {
 
 						<Table.Cell>
 							<Link href={ Routes.models() }>
-								{ manufacturer.models?.length }
+								{ manufacturer.counts.models }
 							</Link>
 						</Table.Cell>
 
 						<Table.Cell>
 							<Link href={ Routes.items() }>
-								{ manufacturer.items?.length }
+								{ manufacturer.counts.items }
 							</Link>
 						</Table.Cell>
 
 						<Table.Cell>
 							<Link href={ Routes.accessories() }>
-								{ manufacturer.accessories?.length }
+								{ manufacturer.counts.accessories }
 							</Link>
 						</Table.Cell>
 
 						<Table.Cell>
 							<Link href={ Routes.consumables() }>
-								{ manufacturer.consumables?.length }
+								{ manufacturer.counts.consumables }
 							</Link>
 						</Table.Cell>
 
 						<Table.Cell>
 							<Link href={ Routes.components() }>
-								{ manufacturer.components?.length }
+								{ manufacturer.counts.components }
 							</Link>
 						</Table.Cell>
 

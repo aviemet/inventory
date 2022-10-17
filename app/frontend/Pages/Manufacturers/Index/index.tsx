@@ -1,13 +1,12 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Table } from '@/Components'
+import { Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import ManufacturersTable from '../Table'
 
 interface IManufacturersIndexProps {
-	manufacturers: Schema.Manufacturer[]
+	manufacturers: Schema.ManufacturerWithCounts[]
 	pagination: Schema.Pagination
 }
 
@@ -15,11 +14,8 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 	const title = 'Manufacturers'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title }>
 			<Table.Section>
-
 				<Table.TableProvider
 					selectable
 					hideable
@@ -27,8 +23,6 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 					rows={ manufacturers }
 					pagination={ pagination }
 				>
-
-
 					<TableTitleSection title={ title } menuOptions={ [
 						{ label: 'New Manufacturer', href: Routes.newManufacturer(), icon: NewIcon },
 					] }>
@@ -41,7 +35,7 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 					<Table.Pagination />
 				</Table.TableProvider>
 			</Table.Section>
-		</>
+		</Page>
 	)
 }
 

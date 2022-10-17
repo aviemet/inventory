@@ -18,7 +18,31 @@ class ItemBlueprint < ApplicationBlueprint
   view :associations do
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint, view: :associations
-    association :audits, blueprint: AuditBlueprint, view: :with_user
+    association :audits, blueprint: AuditBlueprint
+    association :model, blueprint: ModelBlueprint
+    association :vendor, blueprint: VendorBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :manufacturer, blueprint: ManufacturerBlueprint
+    association :default_location, blueprint: LocationBlueprint
+    association :location, blueprint: LocationBlueprint
+    association :status_type, blueprint: StatusTypeBlueprint
+    association :nics, blueprint: NicBlueprint
+  end
+
+  view :index do
+    association :department, blueprint: DepartmentBlueprint
+    association :model, blueprint: ModelBlueprint
+    association :vendor, blueprint: VendorBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :manufacturer, blueprint: ManufacturerBlueprint
+    association :location, blueprint: LocationBlueprint
+    association :status_type, blueprint: StatusTypeBlueprint
+  end
+
+  view :show do
+    association :department, blueprint: DepartmentBlueprint
+    association :assignments, blueprint: AssignmentBlueprint, view: :associations
+    association :audits, blueprint: AuditBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :category, blueprint: CategoryBlueprint

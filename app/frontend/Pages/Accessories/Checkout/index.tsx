@@ -1,10 +1,8 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Breadcrumbs, Heading, Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, LocationDropdown } from '@/Components/Form/Components'
-import { breadcrumbs } from '../utils'
 
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
@@ -18,10 +16,11 @@ const Checkout = ({ assignment, accessory, ...models }: ICheckoutItemProps) => {
 	const title = 'Checkout Accessory'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
-			<Breadcrumbs>{ breadcrumbs.checkout(accessory) }</Breadcrumbs>
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Accessories', href: Routes.accessories() },
+			{ title: accessory.name!, href: Routes.accessory(accessory) },
+			{ title: 'Check Out' },
+		] }>
 
 			<Section>
 				<Heading order={ 3 }>{ title }</Heading>
@@ -86,7 +85,7 @@ const Checkout = ({ assignment, accessory, ...models }: ICheckoutItemProps) => {
 
 				</Form>
 			</Section>
-		</>
+		</Page>
 	)
 }
 

@@ -15,4 +15,18 @@ class ContractBlueprint < ApplicationBlueprint
     association :category, blueprint: CategoryBlueprint
     association :vendor, blueprint: VendorBlueprint
   end
+
+  view :index do
+    association :department, blueprint: DepartmentBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :vendor, blueprint: VendorBlueprint
+  end
+
+  view :show do
+    association :department, blueprint: DepartmentBlueprint
+    association :audits, blueprint: AuditBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :vendor, blueprint: VendorBlueprint
+  end
+
 end

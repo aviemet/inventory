@@ -32,18 +32,19 @@ class Item < ApplicationRecord
   has_many :nics
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ip_leases
   has_many :ip_leases, through: :nics
-  belongs_to :model
   belongs_to :vendor, required: false
   belongs_to :default_location, class_name: "Location", required: false
+  belongs_to :model
   has_one :category, through: :model
   has_one :manufacturer, through: :model
   has_one :warranty, required: false
+  # has_one :location, through: :assignment
 
   accepts_nested_attributes_for :nics # , reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
 
   scope :no_nics, -> { includes(:nics).where(nics: { id: nil }) }
 
-  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_type, :audits]) }
+  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_type, :audits, :ips, :nics, :ip_leases]) }
 
   def location
     if assigned?
@@ -51,6 +52,10 @@ class Item < ApplicationRecord
     else
       self.default_location
     end
+  end
+
+  def self.find_by_category(category)
+    self.includes_associated.where('model.category' => category)
   end
 
   private

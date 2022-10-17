@@ -1,4 +1,4 @@
-import { type InertiaFormProps as DefaultInertiaFormProps } from '@inertiajs/inertia-react'
+import { type InertiaFormProps as DefaultInertiaFormProps, InertiaHeadProps } from '@inertiajs/inertia-react';
 import {
 	Page, 
 	PageProps,

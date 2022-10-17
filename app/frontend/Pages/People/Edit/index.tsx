@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import PersonForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -8,21 +7,24 @@ interface IUpdatePersonProps{
 	person: Schema.Person
 	departments: Schema.Department[]
 	people: Schema.Person[]
+	locations: Schema.Location[]
 }
 
 const New = ({ person, ...models }: IUpdatePersonProps) => {
 	const title = `Edit ${person.first_name}`
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'People', href: Routes.people() },
+			{ title: person.name!, href: Routes.person(person) },
+			{ title: 'Edit Person' },
+		] }>
 			<Section>
-				<h1>{ title }</h1>
+				<Heading>{ title }</Heading>
 
 				<PersonForm to={ Routes.person(person) } method="patch" person={ person } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

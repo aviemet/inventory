@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
     paginated_items = items.page(params[:page] || 1)
 
     render inertia: "Items/Index", props: {
-      items: -> { paginated_items.render(view: :associations) },
+      items: -> { paginated_items.render(view: :index) },
       pagination: -> { {
         count: items.count,
         **pagination_data(paginated_items)
@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
   # GET /hardware/:id
   def show
     render inertia: "Items/Show", props: {
-      item: -> { item.render(view: :associations) }
+      item: -> { item.render(view: :show) }
     }
   end
 

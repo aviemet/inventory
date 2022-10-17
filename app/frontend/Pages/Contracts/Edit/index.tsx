@@ -1,31 +1,30 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
-import ConsumableForm from '../Form'
+import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import ContractForm from '../Form'
 
-interface IUpdateConsumableProps{
+interface IUpdateContractProps{
 	contract: Schema.Contract
 	vendors: Schema.Vendor[]
 	categories: Schema.Category[]
 }
 
-const EditConsumable = ({ contract, ...models }: IUpdateConsumableProps) => {
+const EditContract = ({ contract, ...models }: IUpdateContractProps) => {
 	const title = `Edit ${contract.name}`
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Contracts', href: Routes.contracts() },
+			{ title: contract.name!, href: Routes.contract(contract) },
+			{ title: 'Edit Contract' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
-				<ConsumableForm to={ Routes.contract(contract) } method="patch" contract={ contract } { ...models } />
+				<ContractForm to={ Routes.contract(contract) } method="patch" contract={ contract } { ...models } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 
-export default EditConsumable
+export default EditContract

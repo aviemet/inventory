@@ -12,7 +12,7 @@ class LocationsController < ApplicationController
     paginated_locations = locations.page(params[:page] || 1)
 
     render inertia: "Locations/Index", props: {
-      locations: paginated_locations.render(view: :counts),
+      locations: paginated_locations.render(view: :index),
       pagination: -> { {
         count: locations.count,
         **pagination_data(paginated_locations)
@@ -23,7 +23,7 @@ class LocationsController < ApplicationController
   # GET /locations/:slug
   def show
     render inertia: "Locations/Show", props: {
-      location: loc.render(view: :associations)
+      location: loc.render(view: :show)
     }
   end
 

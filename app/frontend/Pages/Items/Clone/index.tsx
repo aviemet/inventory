@@ -1,8 +1,9 @@
 import React from 'react'
+import { Page } from '@/Components'
 
 const Clone = () => {
 	return (
-		<div>Clone</div>
+		<Page>Clone</Page>
 	)
 }
 

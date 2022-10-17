@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Link, Section, Table } from '@/Components'
+import { Link, Page, Section, Table } from '@/Components'
 import Counts from './Counts'
 import { formatter, Routes } from '@/lib'
 
@@ -11,9 +10,7 @@ interface IDashboardProps {
 
 const Dashboard = ({ company, audits }: IDashboardProps) => {
 	return (
-		<>
-			<Head title="Dashboard"></Head>
-
+		<Page title="Dashboard">
 			<Section>
 				<Counts counts={ company.counts } />
 			</Section>
@@ -49,7 +46,7 @@ const Dashboard = ({ company, audits }: IDashboardProps) => {
 					</Table.Body>
 				</Table>
 			</Section>
-		</>
+		</Page>
 	)
 }
 
