@@ -19,6 +19,8 @@ class Company < ApplicationRecord
   resourcify
   audited
 
+  attribute :default_currency, default: MoneyRails.default_currency
+
   has_many :users, through: :roles, class_name: :User, source: :users
   has_many :ldaps, dependent: :destroy
 
