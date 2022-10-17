@@ -44,6 +44,7 @@ node_modules
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
 *.env
+.env.*
 
 # Yarn files
 .yarn/*
