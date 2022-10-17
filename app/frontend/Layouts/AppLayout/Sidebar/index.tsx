@@ -22,6 +22,12 @@ import {
 	ContractsIcon,
 	ReportsIcon,
 	UsersIcon,
+	CompaniesIcon,
+	LocationsIcon,
+	DepartmentsIcon,
+	ManufacturersIcon,
+	ModelsIcon,
+	CategoriesIcon,
 } from '@/Components/Icons'
 
 import IconProvider from '@/Providers/IconProvider'
@@ -97,12 +103,12 @@ const Sidebar = () => {
 						<li>
 							<MenuLink href={ Routes.settings() } icon={ <SettingsIcon /> }>Settings</MenuLink>
 							<ul className="up">
-								<li><MenuLink href={ Routes.companies() }>Companies</MenuLink></li>
-								<li><MenuLink href={ Routes.locations() }>Locations</MenuLink></li>
-								<li><MenuLink href={ Routes.departments() }>Departments</MenuLink></li>
-								<li><MenuLink href={ Routes.manufacturers() }>Manufacturers</MenuLink></li>
-								<li><MenuLink href={ Routes.models() }>Models</MenuLink></li>
-								<li><MenuLink href={ Routes.fields() }>Custom Fields</MenuLink></li>
+								<li><MenuLink href={ Routes.companies() } icon={ <CompaniesIcon /> }>Companies</MenuLink></li>
+								<li><MenuLink href={ Routes.locations() } icon={ <LocationsIcon /> }>Locations</MenuLink></li>
+								<li><MenuLink href={ Routes.departments() } icon={ <DepartmentsIcon /> }>Departments</MenuLink></li>
+								<li><MenuLink href={ Routes.manufacturers() } icon={ <ManufacturersIcon /> }>Manufacturers</MenuLink></li>
+								<li><MenuLink href={ Routes.models() } icon={ <ModelsIcon /> }>Models</MenuLink></li>
+								<li><MenuLink href={ Routes.categories() } icon={ <CategoriesIcon /> }>Categories</MenuLink></li>
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.destroyUserSession() } icon={ <LogoutIcon /> }>Logout</MenuLink></li>

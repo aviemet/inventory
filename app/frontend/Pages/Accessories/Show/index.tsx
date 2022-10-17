@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section, Menu, Flex, Heading, Tabs, Tooltip, Breadcrumbs } from '@/Components'
+import { Section, Menu, Flex, Heading, Tabs, Tooltip, Page } from '@/Components'
 import { Routes } from '@/lib'
-import { availableToCheckout, breadcrumbs } from '../utils'
+import { availableToCheckout } from '../utils'
 import Details from './Details'
 import History from './History'
 import Associations from './Associations'
@@ -21,10 +20,10 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 	const title = accessory.name ?? 'Accessory Details'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
-			<Breadcrumbs>{ breadcrumbs.show(accessory) }</Breadcrumbs>
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Accessories', href: Routes.accessories() },
+			{ title: accessory.name! },
+		] }>
 
 			<Section>
 				<Flex>
@@ -70,7 +69,7 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 					</Tabs.Panel>
 				</Tabs>
 			</Section>
-		</>
+		</Page>
 	)
 }
 

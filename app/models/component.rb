@@ -33,5 +33,10 @@ class Component < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :model_id
 
-  scope :includes_associated, -> { includes([:manufacturer, :category, :vendor])}
+  scope :includes_associated, -> { includes([:manufacturer, :category, :vendor]) }
+
+  def self.find_by_category(category)
+    self.includes(:model, :category).where('model.category' => category)
+  end
+
 end

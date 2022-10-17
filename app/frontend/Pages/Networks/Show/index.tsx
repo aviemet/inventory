@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section, Menu, Flex, Heading, Table, Container } from '@/Components'
+import { Section, Menu, Flex, Heading, Table, Container, Page } from '@/Components'
 import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
 import { EditIcon } from '@/Components/Icons'
@@ -20,9 +19,10 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 	const title = network.name || 'Show Network'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Networks', href: Routes.networks() },
+			{ title: network.name! },
+		] }>
 			<Section>
 				<Flex position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
@@ -31,7 +31,7 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Item href={ Routes.editNetwork(network) } icon={ <EditIcon /> }>
-							Edit
+								Edit
 							</Menu.Item>
 						</Menu.Dropdown>
 					</Menu>
@@ -104,7 +104,7 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 					pagination={ pagination }
 				/>
 			</Section>
-		</>
+		</Page>
 	)
 }
 

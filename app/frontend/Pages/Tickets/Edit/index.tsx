@@ -1,8 +1,7 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
-import TicketForm from '../Form'
+import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import TicketForm from '../Form'
 
 interface IUpdateTicketProps{
 	ticket: Schema.Ticket
@@ -12,15 +11,17 @@ const EditTicket = ({ ticket }: IUpdateTicketProps) => {
 	const title = 'Edit Ticket'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Tickets', href: Routes.tickets() },
+			{ title: ticket.subject!, href: Routes.ticket(ticket) },
+			{ title: 'Edit Ticket' },
+		] }>
 			<Section>
-				<h1>{ title }</h1>
+				<Heading>{ title }</Heading>
 
 				<TicketForm to={ Routes.ticket(ticket) } method="patch" ticket={ ticket } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

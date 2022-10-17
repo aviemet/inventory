@@ -33,4 +33,8 @@ class Consumable < ApplicationRecord
 
   scope :includes_associated, -> { includes([:manufacturer, :category, :vendor, :model]) }
 
+  def self.find_by_category(category)
+    self.includes(:model, :category).where('model.category' => category)
+  end
+
 end

@@ -2,15 +2,15 @@ class ManufacturersController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :manufacturers, -> { search(@active_company.manufacturers, sortable_fields) }
-  expose :manufacturer, -> { @active_company.manufacturers.find_by_slug params[:slug] }
+  expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated, sortable_fields) }
+  expose :manufacturer, -> { @active_company.manufacturers.includes_associated.find_by_slug params[:slug] }
 
   # GET /manufacturers
   def index
     paginated_manufacturers = manufacturers.page(params[:page] || 1)
 
     render inertia: "Manufacturers/Index", props: {
-      manufacturers: paginated_manufacturers.render(view: :associations),
+      manufacturers: paginated_manufacturers.render(view: :index),
       pagination: -> { {
         count: manufacturers.count,
         **pagination_data(paginated_manufacturers)
@@ -21,7 +21,7 @@ class ManufacturersController < ApplicationController
   # GET /manufacturers/:id
   def show
     render inertia: "Manufacturers/Show", props: {
-      manufacturer: manufacturers.render(view: :associations)
+      manufacturer: manufacturer.render(view: :show)
     }
   end
 

@@ -30,5 +30,10 @@ class License < ApplicationRecord
 
   alias_attribute :qty, :seats
 
-  scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer])}
+  scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer]) }
+
+  def self.find_by_category(category)
+    self.where(category: category)
+  end
+
 end

@@ -10,7 +10,7 @@ class DepartmentsController < ApplicationController
     paginated_departments = departments.page(params[:page] || 1)
 
     render inertia: "Departments/Index", props: {
-      departments: paginated_departments.render(view: :counts),
+      departments: paginated_departments.render(view: :index),
       pagination: -> { {
         count: departments.count,
         **pagination_data(paginated_departments)
@@ -21,7 +21,7 @@ class DepartmentsController < ApplicationController
   # GET /departments/:slug
   def show
     render inertia: "Departments/Show", props: {
-      department:department.render(view: :show_page),
+      department:department.render(view: :show),
       items: -> {
         paginated_items = department.items.includes_associated.page(params[:page] || 1)
         {

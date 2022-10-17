@@ -41,6 +41,7 @@ export {
 	MdOutlineSearch as SearchIcon,
 	MdViewColumn as ColumnsIcon,
 	MdAdd as NewIcon,
+	MdOutlineScreenSearchDesktop as ModelsIcon,
 } from 'react-icons/md'
 
 
@@ -48,11 +49,13 @@ export {
 	AiOutlinePlusCircle as PlusCircleIcon,
 	AiOutlineMinusCircle as MinusCircleIcon,
 	AiOutlineBarcode as AssetsIcon,
+	AiOutlineDeploymentUnit as DepartmentsIcon,
 } from 'react-icons/ai'
 
 
 export {
 	BiLinkExternal as ExternalLinkIcon,
+	BiCategoryAlt as CategoriesIcon,
 } from 'react-icons/bi'
 
 export {
@@ -80,3 +83,4 @@ export {
 	GrFormNext as NextIcon,
 	GrFormPrevious as PreviousIcon,
 } from 'react-icons/gr'
+

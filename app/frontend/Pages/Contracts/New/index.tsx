@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import ContractForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,18 +12,17 @@ interface INewContractProps {
 const NewContract = ({ ...data }: INewContractProps) => {
 	const title = 'New Contract'
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Contracts', href: Routes.contracts() },
+			{ title: 'New Contract' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
 				<ContractForm to={ Routes.contracts() } { ...data } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

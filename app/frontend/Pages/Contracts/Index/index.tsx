@@ -1,7 +1,6 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
 import { Routes } from '@/lib'
-import { Table } from '@/Components'
+import { Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Layouts/Components'
 import { NewIcon } from '@/Components/Icons'
 import ContractsTable from '../Table'
@@ -15,9 +14,7 @@ const ContractsIndex = ({ contracts, pagination }: IContractsIndexProps) => {
 	const title = 'Contracts'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
@@ -26,8 +23,6 @@ const ContractsIndex = ({ contracts, pagination }: IContractsIndexProps) => {
 					rows={ contracts }
 					pagination={ pagination }
 				>
-
-
 					<TableTitleSection title={ title } menuOptions={ [
 						{ label: 'New Contract', href: Routes.newContract(), icon: NewIcon },
 					] }>
@@ -38,9 +33,10 @@ const ContractsIndex = ({ contracts, pagination }: IContractsIndexProps) => {
 					<ContractsTable />
 
 					<Table.Pagination />
+
 				</Table.TableProvider>
 			</Table.Section>
-		</>
+		</Page>
 	)
 }
 

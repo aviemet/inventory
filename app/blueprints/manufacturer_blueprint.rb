@@ -6,6 +6,18 @@ class ManufacturerBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
+  view :counts do
+    field :counts do |manufacturer|
+      {
+        models: manufacturer&.models&.size || 0,
+        items: manufacturer&.items&.size || 0,
+        accessories: manufacturer&.accessories&.size || 0,
+        consumables: manufacturer&.consumables&.size || 0,
+        components: manufacturer&.components&.size || 0,
+      }
+    end
+  end
+
   view :associations do
 		association :contact, blueprint: ContactBlueprint
 		association :audits, blueprint: AuditBlueprint
@@ -14,7 +26,20 @@ class ManufacturerBlueprint < ApplicationBlueprint
 		association :accessories, blueprint: AccessoryBlueprint
 		association :consumables, blueprint: ConsumableBlueprint
 		association :components, blueprint: ComponentBlueprint
-    association :categories, blueprint: CategoryBlueprint
+  end
+
+  view :index do
+    include_view :counts
+  end
+
+  view :show do
+		association :contact, blueprint: ContactBlueprint
+		association :audits, blueprint: AuditBlueprint
+		association :models, blueprint: ModelBlueprint
+		association :items, blueprint: ItemBlueprint
+		association :accessories, blueprint: AccessoryBlueprint
+		association :consumables, blueprint: ConsumableBlueprint
+		association :components, blueprint: ComponentBlueprint
   end
 
   view :as_options do

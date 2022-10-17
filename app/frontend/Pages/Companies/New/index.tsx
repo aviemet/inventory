@@ -1,25 +1,24 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Breadcrumbs, Section } from '@/Components'
-import CompanyForm from '../Form'
+import { Breadcrumbs, Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { breadcrumbs } from '../utils'
+import CompanyForm from '../Form'
 
 const NewCompany = () => {
 	const title = 'New Company'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
-			<Breadcrumbs>{ breadcrumbs.new() }</Breadcrumbs>
+		<Page title={ title }>
+			<Breadcrumbs crumbs={ [
+				{ title: 'Companies', href: Routes.companies() },
+				{ title: 'New Company' },
+			] } />
 
 			<Section>
-				<h1>{ title }</h1>
+				<Heading>{ title }</Heading>
 
 				<CompanyForm to={ Routes.companies() } company={ { name: '' } } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

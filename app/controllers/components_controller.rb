@@ -10,7 +10,7 @@ class ComponentsController < ApplicationController
     paginated_components = components.page(params[:page] || 1)
 
     render inertia: "Components/Index", props: {
-      components: -> { paginated_components.render(view: :associations) },
+      components: -> { paginated_components.render(view: :index) },
       pagination: -> { {
         count: components.count,
         **pagination_data(paginated_components)
@@ -30,7 +30,7 @@ class ComponentsController < ApplicationController
   # GET /components/:id
   def show
     render inertia: "Components/Show", props: {
-      component: -> { component.render(view: :associations) }
+      component: -> { component.render(view: :show) }
     }
   end
 

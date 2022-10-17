@@ -17,9 +17,16 @@ class LdapsController < ApplicationController
   end
 
   # GET /ldaps/new
+  def new
+    render inertia: "Ldap/New", props: {
+      ldap: Ldap.new.render(view: :new)
+    }
+  end
+
+  # GET /ldaps/edit
   def edit
     render inertia: "Ldap/Edit", props: {
-      ldap: ldap.render
+      ldap: ldap.render(view: :edit)
     }
   end
 

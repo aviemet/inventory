@@ -1,5 +1,5 @@
 import React from 'react'
-import { Footer, Group, useMantineTheme } from '@mantine/core'
+import { Box, Footer, Group, useMantineTheme } from '@mantine/core'
 import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const FooterComponent = () => {
@@ -7,13 +7,15 @@ const FooterComponent = () => {
 
 	return (
 		<Footer height={ theme.other.footer.height } py={ 4 } px={ 8 }>
-			<Group position="apart">
-				<ToggleColorSchemeButton />
-				<div>©{ (new Date).getFullYear() }</div>
+			<Group>
+				<Box sx={ { width: 32 } }>
+					<ToggleColorSchemeButton />
+				</Box>
+				<div id="footer-portal" />
+				<Box sx={ { marginLeft: 'auto' } }>©{ (new Date).getFullYear() }</Box>
 			</Group>
 		</Footer>
 	)
 }
 
 export default FooterComponent
-

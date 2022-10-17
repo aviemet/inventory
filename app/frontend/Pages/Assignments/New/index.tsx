@@ -1,8 +1,9 @@
 import React from 'react'
+import { Page } from '@/Components'
 
 const New = () => {
 	return (
-		<div>New</div>
+		<Page>New</Page>
 	)
 }
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Heading, Section, Table } from '@/Components'
+import { Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
 import { LocationsDropdown } from '@/Components/Form/Dropdowns'
@@ -30,9 +29,7 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 	const title = 'Check In Item'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title }>
 			<Section>
 				<Table className={ classes.table }>
 					<Table.Body>
@@ -101,7 +98,7 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 
 				</Form>
 			</Section>
-		</>
+		</Page>
 	)
 }
 

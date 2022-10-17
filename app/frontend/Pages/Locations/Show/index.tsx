@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Flex, Heading, Menu, Section } from '@/Components'
+import { Flex, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface IShowLocationProps {
@@ -11,9 +10,10 @@ const Show = ({ location }: IShowLocationProps) => {
 	const title = location.name
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Locations', href: Routes.locations() },
+			{ title: location.name! },
+		] }>
 			<Section>
 				<Flex position="apart">
 					<Heading>{ title }</Heading>
@@ -29,7 +29,7 @@ const Show = ({ location }: IShowLocationProps) => {
 				</Flex>
 
 			</Section>
-		</>
+		</Page>
 	)
 }
 

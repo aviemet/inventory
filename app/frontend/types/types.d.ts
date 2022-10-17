@@ -95,6 +95,40 @@ declare global {
 		interface CompanyWithCounts extends Schema.Company {
 			counts: CompanyCounts
 		}
+
+		type DepartmentCounts = {
+			items: number
+			accessories: number
+			consumables: number
+			components: number
+			licenses: number
+			contracts: number
+			people: number
+		}
+
+		interface DepartmentWithCounts extends Schema.Department {
+			counts: DepartmentCounts
+		}
+
+		type ManufacturerCounts = {
+			models: number
+			items: number
+			accessories: number
+			consumables: number
+			components: number
+		}
+
+		interface ManufacturerWithCounts extends Schema.Manufacturer {
+			counts: ManufacturerCounts
+		}
+
+		interface ModelWithCount extends Schema.Model {
+			count: number
+		}
+
+		interface CategoryWithQty extends Schema.Category {
+			qty: number
+		}
 	}
 
 	type FlashMessage = Record<'success'|'alert'|'info'|'warning',string>

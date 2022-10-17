@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section, Menu, Flex, Heading, Tabs, Breadcrumbs } from '@/Components'
+import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { Tooltip } from '@mantine/core'
-import { availableToCheckout, breadcrumbs } from '../utils'
+import { availableToCheckout } from '../utils'
 import Details from './Details'
 import History from './History'
 import Associations from './Associations'
@@ -22,11 +21,10 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 	const title = consumable.name ?? 'Consumable Details'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
-			<Breadcrumbs>{ breadcrumbs.edit(consumable) }</Breadcrumbs>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Consumables', href: Routes.consumables() },
+			{ title: consumable.name! },
+		] }>
 			<Section>
 				<Flex>
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
@@ -72,7 +70,7 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 				</Tabs>
 
 			</Section>
-		</>
+		</Page>
 	)
 }
 

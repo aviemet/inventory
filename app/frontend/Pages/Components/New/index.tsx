@@ -1,9 +1,7 @@
 import React from 'react'
-import { Head, usePage } from '@inertiajs/inertia-react'
-import { Breadcrumbs, Section } from '@/Components'
+import { Heading, Page, Section } from '@/Components'
 import ComponentForm from '../Form'
 import { Routes } from '@/lib'
-import { breadcrumbs } from '../utils'
 
 interface INewComponentProps {
 	component: Schema.Component
@@ -17,20 +15,17 @@ interface INewComponentProps {
 const NewComponent = ({ ...data }: INewComponentProps) => {
 	const title = 'New Component'
 
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
-
 	return (
-		<>
-			<Head title={ title }></Head>
-
-			<Breadcrumbs>{ breadcrumbs.new() }</Breadcrumbs>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Components', href: Routes.components() },
+			{ title: 'New Component' },
+		] }>
 			<Section>
-				<h1>{ title } for { user.active_company!.name }</h1>
+				<Heading>{ title }</Heading>
 
 				<ComponentForm to={ Routes.components() } { ...data } />
 			</Section>
-		</>
+		</Page>
 	)
 }
 

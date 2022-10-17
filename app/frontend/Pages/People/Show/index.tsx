@@ -1,6 +1,5 @@
 import React from 'react'
-import { Head } from '@inertiajs/inertia-react'
-import { Section, Menu, Flex, Heading, Tabs } from '@/Components'
+import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
@@ -18,9 +17,10 @@ const Show = ({ person }: IShowPersonProps) => {
 	const title = person.name ?? 'Person Details'
 
 	return (
-		<>
-			<Head title={ title }></Head>
-
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'People', href: Routes.people() },
+			{ title: person.name! },
+		] }>
 			<Section>
 				<Flex position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
@@ -111,7 +111,7 @@ const Show = ({ person }: IShowPersonProps) => {
 					</Tabs.Panel>
 				</Tabs>
 			</Section>
-		</>
+		</Page>
 	)
 }
 
