@@ -30,35 +30,35 @@ const ItemsTable = (props: ITableProps) => {
 							<Link href={ Routes.item(item) }>{ item.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell nowrap hideable="models.name">
+						<Table.Cell nowrap >
 							<Link href={ Routes.item(item) }>{ item.model?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="asset_tag">
+						<Table.Cell>
 							<Link href={ Routes.item(item) }>{ item.asset_tag }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="serial">
+						<Table.Cell>
 							<Link href={ Routes.item(item) }>{ item.serial }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="categories.name">
+						<Table.Cell>
 							<Link href={ Routes.item(item) }>{ item.category?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="manufacturer.name">
+						<Table.Cell>
 							<Link href={ Routes.item(item) }>{ item.manufacturer?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="vendor.name">
+						<Table.Cell>
 							<Link href={ Routes.item(item) }>{ item.vendor?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="cost">
+						<Table.Cell>
 							<Link href={ Routes.item(item) }>{ item.cost && formatter.currency(item.cost, item.cost_currency) }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="department.name">
+						<Table.Cell >
 							<Link href={ Routes.item(item) }>{ item.department?.name }</Link>
 						</Table.Cell>
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { usePage } from '@inertiajs/inertia-react'
 import { Link } from '@/Components'
 import cx from 'clsx'
@@ -10,23 +10,22 @@ interface IHeadCellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
 }
 
-const HeadCellWithContext = ({ children, fitContent = false, sort, nowrap = true, rows, hideable, sx, ...props }: IHeadCellWithContextProps) => {
+const HeadCellWithContext = ({
+	children,
+	fitContent = false,
+	sort,
+	nowrap = true,
+	rows,
+	hideable,
+	sx,
+	...props
+}: IHeadCellWithContextProps) => {
 	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
-	const { tableState: { columns, model }, setTableState } = useTableContext()
+	const { tableState: { model } } = useTableContext()
 
 	const thRef = useRef<HTMLTableCellElement>(null)
 
 	const hideableString = hideable || sort
-
-	// Register hideable object with table context for column
-	useEffect(() => {
-		if(hideable === false) return
-
-		if(hideableString !== undefined && !columns.has(hideableString)) {
-			columns.set(hideableString, String(children))
-			setTableState({ columns })
-		}
-	}, [])
 
 	if(hideableString !== undefined && model && table_preferences?.[model]?.hide?.[hideableString]) {
 		return <></>
