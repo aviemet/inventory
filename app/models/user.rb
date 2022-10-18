@@ -18,8 +18,8 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   password_complexity_regex = /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,70}\z/
-  validates :password, presence: true, format: { with: password_complexity_regex }, on: [:create, :update], if: :password
-
+  validates :password, presence: { message: "" }, format: { with: password_complexity_regex }, on: [:create, :update], if: :password
+  validates_confirmation_of :password, message: "Password did not match confirmation"
   # after_create :add_email_to_contact
 
   before_save :coerce_json
