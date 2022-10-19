@@ -22,7 +22,7 @@ const TicketsTable = (props: ITableProps) => {
 							<Link href={ Routes.ticket(ticket) }>{ ticket.subject }</Link>
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editTicket(ticket) } />
 						</Table.Cell>
 

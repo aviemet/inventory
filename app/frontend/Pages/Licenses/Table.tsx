@@ -9,7 +9,7 @@ const LicensesTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="seats">Seats</Table.Cell>
 					<Table.Cell sort="licenser_name">Licensed To Name</Table.Cell>
 					<Table.Cell sort="licenser_email">Licensed To Email</Table.Cell>
@@ -60,7 +60,7 @@ const LicensesTable = (props: ITableProps) => {
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.manufacturer?.name }</Link>
 						</Table.Cell>
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							{ license.assigned ?
 								<CheckinButton href={ Routes.checkinLicense(license) } />
 								:

@@ -10,7 +10,7 @@ const OrdersTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="number">Order #</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Order #</Table.Cell>
 					<Table.Cell sort="vendor.name">Vendor</Table.Cell>
 					<Table.Cell sort="cost">Total</Table.Cell>
 					<Table.Cell sort="ordered_at">Purchase Date</Table.Cell>
@@ -44,7 +44,7 @@ const OrdersTable = (props: ITableProps) => {
 							{ order.delivered_at && formatter.date.short(order.delivered_at) }
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editOrder(order) } />
 						</Table.Cell>
 					</Table.Row>

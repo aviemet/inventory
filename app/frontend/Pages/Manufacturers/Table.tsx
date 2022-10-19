@@ -9,7 +9,7 @@ const ManufacturersTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="models.count">Models</Table.Cell>
 					<Table.Cell sort="items.count">Items</Table.Cell>
 					<Table.Cell sort="accessories.count">Accessories</Table.Cell>
@@ -56,7 +56,7 @@ const ManufacturersTable = (props: ITableProps) => {
 							</Link>
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editManufacturer(manufacturer.slug) } />
 						</Table.Cell>
 					</Table.Row>

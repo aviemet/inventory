@@ -9,7 +9,7 @@ const CategoriesTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="number">Type</Table.Cell>
 					<Table.Cell sort="begins_at">Qty</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
@@ -31,7 +31,7 @@ const CategoriesTable = (props: ITableProps) => {
 							{ category.qty }
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editContract(category.slug) } />
 						</Table.Cell>
 					</Table.Row>

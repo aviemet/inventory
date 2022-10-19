@@ -1,6 +1,6 @@
 import React from 'react'
 import { Section, Link, Menu, Flex, Heading, Tabs, Table, Page } from '@/Components'
-import { TableTitleSection } from '@/Layouts/Components'
+import { TableTitleSection } from '@/Components/Layout'
 import { Routes } from '@/lib'
 import { NewIcon, EditIcon } from '@/Components/Icons'
 import ItemsTable from '@/Pages/Items/Table'

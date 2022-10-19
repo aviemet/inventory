@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Layouts/Components'
+import { TableTitleSection } from '@/Components/Layout'
 import { NewIcon } from '@/Components/Icons'
 import ConsumablesTable from '../Table'
 
@@ -16,12 +16,17 @@ const ConsumablesIndex = ({ consumables, pagination }: IConsumablesIndexProps) =
 	return (
 		<Page title={ title }>
 			<Table.Section>
-				<Table.TableProvider selectable rows={ consumables } pagination={ pagination }>
+				<Table.TableProvider
+					selectable
+					hideable
+					model="consumables"
+					rows={ consumables }
+					pagination={ pagination }
+				>
 					<TableTitleSection title={ title } menuOptions={ [
 						{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
 					] }>
 						<Table.SearchInput />
-						<Table.ColumnPicker />
 					</TableTitleSection>
 
 					<ConsumablesTable />
