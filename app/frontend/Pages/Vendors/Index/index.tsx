@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Layouts/Components'
+import { TableTitleSection } from '@/Components/Layout'
 import { NewIcon } from '@/Components/Icons'
 import VendorsTable from '../Table'
 
@@ -27,7 +27,6 @@ const VendorsIndex = ({ vendors, pagination }: IVendorsIndexProps) => {
 						{ label: 'New Vendor', href: Routes.newVendor(), icon: NewIcon },
 					] }>
 						<Table.SearchInput />
-						<Table.ColumnPicker />
 					</TableTitleSection>
 
 					<VendorsTable />

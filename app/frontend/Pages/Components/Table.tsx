@@ -18,7 +18,7 @@ const ComponentsTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="models.name">Model</Table.Cell>
 					<Table.Cell sort="serial">Serial</Table.Cell>
 					<Table.Cell sort="categories.name">Category</Table.Cell>
@@ -67,7 +67,7 @@ const ComponentsTable = (props: ITableProps) => {
 
 						<Table.Cell>{ component.min_qty }</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							{ !availableToCheckout(component) ?
 								<Tooltip label="There are none in stock" position="left" withArrow><CheckoutButton href={ Routes.checkoutComponent(component) } disabled /></Tooltip>
 								:

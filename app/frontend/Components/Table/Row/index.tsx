@@ -4,7 +4,9 @@ import { TRProps } from 'react-html-props'
 import RowInContext from './RowInContext'
 import { Box, type BoxProps } from '@mantine/core'
 
-export interface ITableRow extends BoxProps, TRProps {}
+export interface ITableRow extends BoxProps, TRProps {
+	children?: JSX.Element[]
+}
 
 interface IRowProps extends Omit<ITableRow, 'ref'> {
 	render?: any

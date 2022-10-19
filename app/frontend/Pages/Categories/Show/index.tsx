@@ -1,6 +1,6 @@
 import React from 'react'
 import { Lazy, Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Layouts/Components'
+import { TableTitleSection } from '@/Components/Layout'
 import { Routes } from '@/lib'
 
 type TRecord = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
@@ -33,7 +33,6 @@ const Show = ({ category, records, pagination }: IShowCategoryProps) => {
 						{ label: 'Edit Category', href: Routes.editCategory(category.slug) }
 					] }>
 						<Table.SearchInput />
-						<Table.ColumnPicker />
 					</TableTitleSection>
 
 					<Lazy path={ path } fallback={ <div>Loading</div> } />

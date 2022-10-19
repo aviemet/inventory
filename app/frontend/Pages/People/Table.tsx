@@ -9,7 +9,7 @@ const PeopleTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="first_name">First Name</Table.Cell>
+					<Table.Cell sort="first_name" hideable={ false }>First Name</Table.Cell>
 					<Table.Cell sort="last_name">Last Name</Table.Cell>
 					<Table.Cell sort="employee_number">Emp. #</Table.Cell>
 					<Table.Cell sort="job_title">Title</Table.Cell>
@@ -60,7 +60,7 @@ const PeopleTable = (props: ITableProps) => {
 							{ person.accessories && <Link href={ Routes.accessories() }>{ person.accessories.length }</Link> }
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editPerson(person) } />
 						</Table.Cell>
 					</Table.Row>

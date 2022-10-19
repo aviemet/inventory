@@ -10,14 +10,14 @@ const ConsumablesTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="models.name">Model</Table.Cell>
 					<Table.Cell sort="categories.name">Category</Table.Cell>
 					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
 					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
 					<Table.Cell sort="cost_cents">Cost</Table.Cell>
-					<Table.Cell sort="departments.name">Qty</Table.Cell>
-					<Table.Cell sort="departments.name">Min Qty</Table.Cell>
+					<Table.Cell sort="qty">Qty</Table.Cell>
+					<Table.Cell sort="min_qty">Min Qty</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
@@ -54,7 +54,7 @@ const ConsumablesTable = (props: ITableProps) => {
 
 						<Table.Cell>{ consumable.min_qty }</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<Group noWrap spacing="sm">
 								<CheckoutButton href={ Routes.checkoutConsumable(consumable) } />
 								<ReplenishButton consumable={ consumable } />

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Layouts/Components'
+import { TableTitleSection } from '@/Components/Layout'
 import { NewIcon } from '@/Components/Icons'
 import ItemsTable from '../Table'
 
@@ -23,12 +23,10 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 					rows={ items }
 					pagination={ pagination }
 				>
-
 					<TableTitleSection title={ title } menuOptions={ [
 						{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
 					] }>
 						<Table.SearchInput />
-						<Table.ColumnPicker />
 					</TableTitleSection>
 
 					<ItemsTable />

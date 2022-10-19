@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Layouts/Components'
+import { TableTitleSection } from '@/Components/Layout'
 import { NewIcon, SettingsIcon } from '@/Components/Icons'
 import PeopleTable from '../Table'
 
@@ -28,7 +28,6 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 						{ label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon }
 					] }>
 						<Table.SearchInput />
-						<Table.ColumnPicker />
 					</TableTitleSection>
 
 					<PeopleTable />
