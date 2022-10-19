@@ -5,5 +5,5 @@ class NicBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  association :ips, blueprint: IpLeaseBlueprint, view: :shallow
+  association :ips, blueprint: IpLeaseBlueprint
 end

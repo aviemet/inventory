@@ -9,7 +9,7 @@ const VendorsTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="url">Website</Table.Cell>
 					<Table.Cell sort="contracts.count">Contracts</Table.Cell>
 					<Table.Cell sort="items.count">Items</Table.Cell>
@@ -54,7 +54,7 @@ const VendorsTable = (props: ITableProps) => {
 							{ vendor.components && <Link href={ Routes.components() }>{ vendor.components.length }</Link> }
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editVendor(vendor.slug) } />
 						</Table.Cell>
 

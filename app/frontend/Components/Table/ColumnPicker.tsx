@@ -38,15 +38,16 @@ const ColumnPicker = () => {
 			</Menu.Target>
 
 			<Menu.Dropdown>
-				{ [...columns].map(([name, label]) => (
-					<Menu.Item key={ name }>
+				{ columns.filter(option => option.hideable).map(({ label, hideable }) => (
+					<Menu.Item key={ label }>
 						<Checkbox
-							name={ name }
+							name={ hideable }
 							label={ label }
 							onChange={ handleChange }
-							checked={ !user.table_preferences?.[model]?.hide?.[name] }
+							checked={ !user.table_preferences?.[model]?.hide?.[hideable] }
 						/>
-					</Menu.Item>)) }
+					</Menu.Item>
+				)) }
 			</Menu.Dropdown>
 		</Menu>
 	)

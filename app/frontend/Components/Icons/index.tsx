@@ -42,6 +42,7 @@ export {
 	MdViewColumn as ColumnsIcon,
 	MdAdd as NewIcon,
 	MdOutlineScreenSearchDesktop as ModelsIcon,
+	MdOutlineDelete as TrashIcon,
 } from 'react-icons/md'
 
 
@@ -59,7 +60,7 @@ export {
 } from 'react-icons/bi'
 
 export {
-	IoTrashBinOutline as TrashIcon,
+	// IoTrashBinOutline as TrashIcon,
 } from 'react-icons/io5'
 
 export {
@@ -84,3 +85,6 @@ export {
 	GrFormPrevious as PreviousIcon,
 } from 'react-icons/gr'
 
+export {
+	TbChevronsDown as DoubleDownArrowIcon,
+} from 'react-icons/tb'
