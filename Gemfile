@@ -7,7 +7,7 @@ ruby "3.1.2"
 gem "rails", "~> 7.0.1"
 gem "sprockets-rails"
 gem "pg", "~> 1.1"
-gem "puma", "~> 5.0"
+gem "puma", "~> 6.0"
 
 # Assets
 gem "inertia_rails", "~> 3.0.0"
@@ -55,7 +55,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "rspec-rails", "~> 6.0.0.rc1"
+  gem "rspec-rails", "~> 6.0.1"
   gem "factory_bot_rails", "~> 6.2"
   gem "faker", "~> 2.20"
   gem "pry-rails", "~> 0.3.9"
