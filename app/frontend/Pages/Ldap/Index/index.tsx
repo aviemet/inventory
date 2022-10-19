@@ -57,7 +57,7 @@ const LdapIndex = ({ ldaps }: ILdapIndexProps) => {
 
 									<Table.Cell>{ ldap.sync_interval }</Table.Cell>
 
-									<Table.Cell className="table-column-fit">
+									<Table.Cell fitContent>
 										<EditButton href={ Routes.editLdap(ldap.id) } />
 									</Table.Cell>
 								</Table.Row>

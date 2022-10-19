@@ -9,7 +9,7 @@ const NetworksTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="address">Network</Table.Cell>
 					<Table.Cell sort="gateway">Gateway</Table.Cell>
 					<Table.Cell sort="dhcp_start">DHCP Start</Table.Cell>
@@ -47,7 +47,7 @@ const NetworksTable = (props: ITableProps) => {
 							{ <Link href={ Routes.network(network) }>{ network.vlan_id }</Link> }
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editNetwork(network) } />
 						</Table.Cell>
 

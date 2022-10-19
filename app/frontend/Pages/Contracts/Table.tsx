@@ -9,7 +9,7 @@ const ContractsTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="number">#</Table.Cell>
 					<Table.Cell sort="begins_at">Start Date</Table.Cell>
 					<Table.Cell sort="ends_at">End Date</Table.Cell>
@@ -50,7 +50,7 @@ const ContractsTable = (props: ITableProps) => {
 							</Link> }
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editContract(contract) } />
 						</Table.Cell>
 					</Table.Row>

@@ -62,7 +62,7 @@ const ItemsTable = (props: ITableProps) => {
 							<Link href={ Routes.item(item) }>{ item.department?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							{ item.assigned ?
 								<CheckinButton href={ Routes.checkinItem(item) } />
 								:

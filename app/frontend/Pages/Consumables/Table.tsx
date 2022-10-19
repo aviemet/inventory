@@ -30,31 +30,31 @@ const ConsumablesTable = (props: ITableProps) => {
 							<Link href={ Routes.consumable(consumable) }>{ consumable.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="models.name">
+						<Table.Cell>
 							<Link href={ Routes.consumable(consumable) }>{ consumable.model?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="categories.name">
+						<Table.Cell>
 							<Link href={ Routes.consumable(consumable) }>{ consumable.category?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="manufacturers.name">
+						<Table.Cell>
 							<Link href={ Routes.consumable(consumable) }>{ consumable.manufacturer?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="vendors.name">
+						<Table.Cell>
 							<Link href={ Routes.consumable(consumable) }>{ consumable.vendor?.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell hideable="cost_cents">
+						<Table.Cell>
 							{ consumable.cost ? formatter.currency(consumable.cost, consumable.cost_currency) : '-' }
 						</Table.Cell>
 
-						<Table.Cell hideable="qty">{ consumable.qty }</Table.Cell>
+						<Table.Cell>{ consumable.qty }</Table.Cell>
 
-						<Table.Cell hideable="min_qty">{ consumable.min_qty }</Table.Cell>
+						<Table.Cell>{ consumable.min_qty }</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<Group noWrap spacing="sm">
 								<CheckoutButton href={ Routes.checkoutConsumable(consumable) } />
 								<ReplenishButton consumable={ consumable } />

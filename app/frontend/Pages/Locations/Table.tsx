@@ -10,7 +10,7 @@ const LocationsTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell nowrap sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="name">Parent</Table.Cell>
 					<Table.Cell sort="items">Assets</Table.Cell>
 					<Table.Cell sort="accessories">Accessories</Table.Cell>
@@ -57,7 +57,7 @@ const LocationsTable = (props: ITableProps) => {
 							<Link href={ Routes.people() }>{ location!.counts.people }</Link>
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editLocation(location.slug) } />
 						</Table.Cell>
 					</Table.Row>
