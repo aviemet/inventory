@@ -9,7 +9,7 @@ const ModelsTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="model_number">Model #</Table.Cell>
 					<Table.Cell sort="category.name">Category</Table.Cell>
 					<Table.Cell sort="manufacturer.name">Manufacturer</Table.Cell>
@@ -45,7 +45,7 @@ const ModelsTable = (props: ITableProps) => {
 							{ model?.count && model.count }
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editModel(model.slug) } />
 						</Table.Cell>
 					</Table.Row>

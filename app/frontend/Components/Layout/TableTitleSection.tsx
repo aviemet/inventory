@@ -67,7 +67,7 @@ const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTit
 						{ selected.size > 0 && <>
 							<Divider />
 
-							<Menu.Item icon={ <TrashIcon size={ 14 } /> } onClick={ deleteRecords }>
+							<Menu.Item icon={ <TrashIcon size={ 14 } color='red' /> } onClick={ deleteRecords }>
 								Delete
 							</Menu.Item>
 						</> }

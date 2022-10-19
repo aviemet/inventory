@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Layouts/Components'
+import { TableTitleSection } from '@/Components/Layout'
 import { NewIcon } from '@/Components/Icons'
 import CompaniesTable from '../Table'
 
@@ -28,7 +28,6 @@ const CompaniesIndex = ({ companies, pagination }: ICompaniesIndexProps) => {
 						{ label: 'New Company', href: Routes.newCompany(), icon: NewIcon },
 					] }>
 						<Table.SearchInput />
-						<Table.ColumnPicker />
 					</TableTitleSection>
 
 					<CompaniesTable />

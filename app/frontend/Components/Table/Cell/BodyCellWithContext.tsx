@@ -1,21 +1,15 @@
 import React, { useRef } from 'react'
 import cx from 'clsx'
 import { type ICellProps } from './index'
-import { usePage } from '@inertiajs/inertia-react'
 import { Box } from '@mantine/core'
 
-export interface IBodyCellProps extends Omit<ICellProps, 'hideable'> {
+export interface IBodyCellWithContextProps extends Omit<ICellProps, 'hideable'> {
 	hideable?: false|string
 	model?: string
 }
 
-const BodyCell = ({ children, nowrap, fitContent, hideable, model, sx, ...props }: IBodyCellProps) => {
-	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
+const BodyCellWithContext = ({ children, nowrap, fitContent, hideable, model, sx, ...props }: IBodyCellWithContextProps) => {
 	const tdRef = useRef<HTMLTableCellElement>(null)
-
-	if(hideable && model && table_preferences?.[model]?.hide?.[hideable]) {
-		return <></>
-	}
 
 	return (
 		<Box
@@ -33,4 +27,4 @@ const BodyCell = ({ children, nowrap, fitContent, hideable, model, sx, ...props 
 	)
 }
 
-export default BodyCell
+export default BodyCellWithContext

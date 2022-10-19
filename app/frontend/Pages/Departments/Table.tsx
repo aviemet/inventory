@@ -9,7 +9,7 @@ const DepartmentsTable = (props: ITableProps) => {
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell nowrap sort="name">Name</Table.Cell>
+					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="items">Assets</Table.Cell>
 					<Table.Cell sort="accessories">Accessories</Table.Cell>
 					<Table.Cell sort="consumables">Consumables</Table.Cell>
@@ -51,7 +51,7 @@ const DepartmentsTable = (props: ITableProps) => {
 							<Link href={ Routes.people() }>{ department!.counts.people }</Link>
 						</Table.Cell>
 
-						<Table.Cell className="table-column-fit">
+						<Table.Cell fitContent>
 							<EditButton href={ Routes.editDepartment(department.slug) } />
 						</Table.Cell>
 					</Table.Row>

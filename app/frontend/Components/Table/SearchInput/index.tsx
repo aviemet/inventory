@@ -3,14 +3,19 @@ import { Inertia, type VisitOptions } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
 import { useTableContext } from '../TableContext'
 import { TextInput } from '@/Components/Inputs'
-import { SearchIcon, CrossIcon } from '@/Components/Icons'
+import { SearchIcon, CrossIcon, DoubleDownArrowIcon } from '@/Components/Icons'
 import { ActionIcon, Box } from '@mantine/core'
+import { Table } from '@/Components'
+
+interface ISearchInputProps {
+	columnPicker?: boolean
+}
 
 /**
  * Performs an Inertia request to the current url (window.location), using the search params
  * as query string with the key of 'search'
  */
-const SearchInput = () => {
+const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 	const { tableState: { model } } = useTableContext()
 	const { search } = window.location
 
@@ -47,6 +52,9 @@ const SearchInput = () => {
 			display: 'flex',
 			flex: 1,
 		} }>
+			<ActionIcon size={ 42 } variant="filled" color="primary">
+				<DoubleDownArrowIcon size={ 24 } />
+			</ActionIcon>
 			<TextInput
 				name="search"
 				id="search"
@@ -64,6 +72,7 @@ const SearchInput = () => {
 					},
 				} }
 			/>
+			{ columnPicker && <Table.ColumnPicker /> }
 		</Box>
 	)
 }

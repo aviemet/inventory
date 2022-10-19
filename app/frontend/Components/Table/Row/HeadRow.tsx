@@ -2,6 +2,7 @@ import React, { useEffect, useState, forwardRef } from 'react'
 import { type ITableRow } from './index'
 import { Box } from '@mantine/core'
 import HeadCheckbox from './HeadCheckbox'
+import { useTableContext } from '../TableContext'
 
 interface IHeadRowProps extends ITableRow {
 	name?: string
@@ -14,6 +15,8 @@ const HeadRow = forwardRef<HTMLTableRowElement, IHeadRowProps>((
 	{ children, name, rows, selectable, selected, ...props },
 	ref
 ) => {
+	const { tableState: { columns }, setTableState } = useTableContext()
+
 	const [allChecked, setAllChecked] = useState(false)
 	const [indeterminate, setIndeterminate] = useState(false)
 
@@ -34,6 +37,17 @@ const HeadRow = forwardRef<HTMLTableRowElement, IHeadRowProps>((
 				if(!indeterminate) setIndeterminate(true)
 		}
 	}, [selected.size])
+
+	// Register hideable attributes in context
+	useEffect(() => {
+		if(!children) return
+
+		children.forEach(({ props }, i) => {
+			const hideable = (props.hideable ?? props.sort) ?? false
+			columns[i] = { label: props.children, hideable }
+		})
+		setTableState({ columns })
+	}, [])
 
 	return (
 		<Box component="tr" { ...props } ref={ ref }>

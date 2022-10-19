@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Layouts/Components'
+import { TableTitleSection } from '@/Components/Layout'
 import { NewIcon } from '@/Components/Icons'
 import LocationsTable from '../Table'
 
@@ -39,7 +39,6 @@ const LocationsIndex = ({ locations, pagination }: ICompaniesIndexProps) => {
 						{ label: 'New Location', href: Routes.newLocation(), icon: NewIcon },
 					] }>
 						<Table.SearchInput />
-						<Table.ColumnPicker />
 					</TableTitleSection>
 
 					<LocationsTable />

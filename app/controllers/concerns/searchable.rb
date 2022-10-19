@@ -10,11 +10,16 @@ module Searchable
   #   Sortable fields in nested models use dot-notation: "related_model.field"
   #
   def search(model, sortable_fields = [])
-    terms = params[:search]
-    return model.order(sort(model, sortable_fields)) unless terms
+    search_object = model
 
-    ids = model.search(terms).pluck(:id)
-    model.where(id: ids).order(sort(model, sortable_fields))
+    terms = params[:search]
+
+    if terms
+      ids = model.search(terms).pluck(:id)
+      search_object = model.where(id: ids)
+    end
+
+    search_object.order(sort(model, sortable_fields))
   end
 
   protected
@@ -35,4 +40,5 @@ module Searchable
 
     %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'
   end
+
 end
