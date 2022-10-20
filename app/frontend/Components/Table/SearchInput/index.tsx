@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo } from 'react'
 import { Inertia, type VisitOptions } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
 import { useTableContext } from '../TableContext'
@@ -17,22 +17,26 @@ interface ISearchInputProps {
  * as query string with the key of 'search'
  */
 const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
-	const { tableState: { model } } = useTableContext()
+	const { tableState: { model }, setTableState } = useTableContext()
 	const { search } = window.location
 
 	const params = new URLSearchParams(search)
 	const [searchValue, setSearchValue] = useSessionStorage({
 		key: `${model ?? 'standard'}-query`,
-		defaultValue: params.get('search') || ''
+		defaultValue: params.get('search') || '',
+		getInitialValueInEffect: false,
 	})
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const urlSearchString = params.get('search')
 
+		// Don't override a direct visit with a url search param
 		if(urlSearchString) {
+			// This doesn't trigger a server visit due to checks in the other useEffect
 			setSearchValue(urlSearchString)
 		// Don't persist searches for tables not scoped to a model
-		} else if(model && searchValue !== '' && !urlSearchString) {
+		} else if(model && searchValue) {
+			setTableState({ searching: true })
 			setSearchValue(searchValue)
 		}
 	}, [])
@@ -42,6 +46,12 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 			replace: true,
 			preserveScroll: true,
 			preserveState: true,
+			onStart: () => {
+				setTableState({ searching: true })
+			},
+			onSuccess: () => {
+				setTableState({ searching: false })
+			}
 		}
 		if(model) options.only = [model, 'pagination']
 		Inertia.get(path, {}, options)
@@ -50,7 +60,10 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 	useEffect(() => {
 		const url = new URL(window.location.href)
 
-		if(url.searchParams.get('search') === searchValue) return
+		if(
+			url.searchParams.get('search') === searchValue ||
+			(url.searchParams.get('search') === null && searchValue === '')
+		) return
 
 		if(searchValue === '') {
 			url.searchParams.delete('search')
