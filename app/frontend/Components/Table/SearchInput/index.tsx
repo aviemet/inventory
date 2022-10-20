@@ -22,7 +22,7 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 
 	const params = new URLSearchParams(search)
 	const [searchValue, setSearchValue] = useSessionStorage({
-		key: `${model}-query`,
+		key: `${model ?? 'standard'}-query`,
 		defaultValue: params.get('search') || ''
 	})
 
@@ -31,7 +31,8 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 
 		if(urlSearchString) {
 			setSearchValue(urlSearchString)
-		} else if(searchValue !== '' && !urlSearchString) {
+		// Don't persist searches for tables not scoped to a model
+		} else if(model && searchValue !== '' && !urlSearchString) {
 			setSearchValue(searchValue)
 		}
 	}, [])
