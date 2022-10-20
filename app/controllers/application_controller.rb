@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :success, :error, :warning
 
-  before_action :first_run
-
   # before_action :decode_id
   before_action :set_locale
   before_action :authenticate_user!

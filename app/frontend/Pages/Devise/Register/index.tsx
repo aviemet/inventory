@@ -1,12 +1,25 @@
 import React from 'react'
 import { Form, Input, Submit, Field } from '@/Components/Form'
-import HoverLink from '../HoverLink'
+import HoverLink from '../../../Components/Layout/HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
+import { usePage } from '@inertiajs/inertia-react'
+
+const firstRun = {
+	heading: 'Create Admin User',
+	description: 'Time to create your first user which  will be the admin for your inventory system'
+}
+
+const register = {
+	heading: 'Sign Up',
+	description: ''
+}
 
 const Register = () => {
+	const { props } = usePage()
+
 	const handleFormChange = ({ data }: Inertia.FormProps) => {
-		console.log({ data })
+		// console.log({ data })
 	}
 
 	const handlePasswordChange = (value: string|number, { data, errors, clearErrors }: Inertia.FormProps) => {
@@ -25,8 +38,10 @@ const Register = () => {
 	}
 
 	const handleEmailBlur = (value: string|number, form: Inertia.FormProps) => {
-		console.log({ value, form })
+		// console.log({ value, form })
 	}
+
+	const content = props?.first_run ? firstRun : register
 
 	// TODO: Disable submit until all inputs are valid. Async check for existing email address on input blur
 	return (
@@ -48,7 +63,8 @@ const Register = () => {
 				<Tile.Content>
 
 					<div>
-						<Heading>Sign Up</Heading>
+						<Heading>{ content.heading }</Heading>
+						<p>{ content.description }</p>
 					</div>
 
 					<Field>

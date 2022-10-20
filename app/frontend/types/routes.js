@@ -1554,14 +1554,6 @@ export const fieldsets = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"fieldsets"],[1
 
 /**
  * Generates rails route to
- * /first_run(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const firstRun = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"first_run"],[1,[2,[8,"."],[3,"format"]]]]]);
-
-/**
- * Generates rails route to
  * /ip_leases/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options

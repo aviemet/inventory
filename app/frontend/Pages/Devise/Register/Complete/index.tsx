@@ -1,7 +1,7 @@
 import React from 'react'
 import { usePage } from '@inertiajs/inertia-react'
-import { Form, Input, Submit } from '@/Components/Form'
-import HoverLink from '../../HoverLink'
+import { Field, Form, Input, Submit } from '@/Components/Form'
+import HoverLink from '../../../../Components/Layout/HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 
@@ -41,30 +41,30 @@ const CompleteRegistration = () => {
 						<p>Let&apos;s get a little more information about you.</p>
 					</div>
 
-					<div>
+					<Field>
 						<Input name="first_name" placeholder="First Name" autoFocus autoComplete="first-name" />
-					</div>
+					</Field>
 
-					<div>
+					<Field>
 						<Input name="last_name" placeholder="Last Name" autoComplete="last-name" />
-					</div>
+					</Field>
 
-					<div>
+					<Field>
 						<p>And the name of the entity which owns the assets you&apos;ll be tracking.</p>
-					</div>
 
-					<div>
 						<Input name="name" model="company" placeholder="Company Name" />
-					</div>
 
-					<div>
+						<p>If you will be tracking assets owned by multiple companies, enter the primary entity here, you&apos;ll have the opporutnity to create other companies later.</p>
+					</Field>
+
+					<Field>
 						<Submit>Complete and Log In!</Submit>
-					</div>
+					</Field>
 
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.newUserSession() }>Log In Instead</HoverLink>
+					<HoverLink href={ Routes.userRegistration() }>Register Instead</HoverLink>
 				</Tile.Footer>
 			</Form>
 		</Tile>
