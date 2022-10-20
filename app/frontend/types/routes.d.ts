@@ -1461,6 +1461,16 @@ export const fieldsets: ((
 
 /**
  * Generates rails route to
+ * /first_run(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const firstRun: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /ip_leases/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
