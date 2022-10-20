@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Page, Section, Table } from '@/Components'
+import { Heading, Link, Page, Section, Table } from '@/Components'
 import Counts from './Counts'
 import { formatter, Routes } from '@/lib'
 
@@ -16,7 +16,7 @@ const Dashboard = ({ company, audits }: IDashboardProps) => {
 			</Section>
 
 			<Section>
-				<div>Recent Activity!</div>
+				<Heading order={ 2 }>Recent Activity</Heading>
 				<Table>
 					<Table.Head>
 						<Table.Row>
