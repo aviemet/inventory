@@ -1,6 +1,6 @@
 import React from 'react'
 import ActiveCompanyDropdown from './ActiveCompanyDropdown'
-import { useLayout } from '@/Providers'
+import { useLayout } from '@/Layouts/Providers'
 import { usePage } from '@inertiajs/inertia-react'
 import QuickNewMenu from './QuickNewMenu'
 import { Box, Header, Burger, Group } from '@mantine/core'

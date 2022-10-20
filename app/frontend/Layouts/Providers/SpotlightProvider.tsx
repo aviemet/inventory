@@ -1,5 +1,5 @@
 import React from 'react'
-import { SpotlightProvider as MantineSpotlightProvider, openSpotlight } from '@mantine/spotlight'
+import { SpotlightProvider as MantineSpotlightProvider } from '@mantine/spotlight'
 import type { SpotlightAction } from '@mantine/spotlight'
 import { SearchIcon, DashboardIcon, ItemsIcon, SettingsIcon } from '@/Components/Icons'
 import { Inertia } from '@inertiajs/inertia'

@@ -60,18 +60,19 @@ const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 export { useTheme }
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
+	const { props: { auth } } = usePage<InertiaPage>()
+
 	const systemColorScheme = useColorScheme()
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
 		key: 'colorScheme',
-		defaultValue: user?.user_preferences?.colorScheme || systemColorScheme
+		defaultValue: auth?.user?.user_preferences?.colorScheme || systemColorScheme
 	})
 
 	const toggleColorScheme = (value?: ColorScheme) => {
 		const scheme = value || (colorScheme === 'dark' ? 'light' : 'dark')
 
-		if(user) {
-			axios.patch(Routes.updateUserPreferences(user), {
+		if(auth?.user) {
+			axios.patch(Routes.updateUserPreferences(auth?.user), {
 				user: {
 					user_preferences: {
 						colorScheme: scheme

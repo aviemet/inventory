@@ -1,6 +1,6 @@
 import React from 'react'
 import type { PageProps } from '@inertiajs/inertia'
-import Providers from '@/Providers'
+import Providers from '@/Layouts/Providers'
 import { Flash } from '@/Components/Flash'
 
 import AppLayout from './AppLayout'
