@@ -37,7 +37,7 @@ const useAuthStyles = createStyles(theme => ({
 }))
 
 interface IAuthLayoutProps {
-	children: React.ReactNode
+	children: any
 }
 
 const AuthLayout: React.FC<IAuthLayoutProps> = ({ children }) => {

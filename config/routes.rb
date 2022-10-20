@@ -34,7 +34,6 @@ Rails.application.routes.draw do
   # STATIC PAGES #
 
   get "dashboard" => "pages#dashboard", as: :dashboard
-  get "first_run" => "pages#first_run", as: :first_run
 
   # SETTINGS PAGES #
 

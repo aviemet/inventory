@@ -4,7 +4,7 @@ import Topbar from './Topbar'
 import Footer from '../Footer'
 import { AppShell, Box, TypographyStylesProvider, useMantineTheme } from '@mantine/core'
 
-const AppLayout = ({ children }: { children: React.ReactNode }) => {
+const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
 	if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
 		console.log({ theme })
