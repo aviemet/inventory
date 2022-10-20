@@ -23,6 +23,7 @@ interface ITableSettings {
 	selected: Set<string>
 	hideable: boolean
 	model?: string
+	searching: boolean
 }
 
 interface ITableContext {
@@ -63,6 +64,7 @@ const TableProvider: React.FC<ITableContextProviderProps> = ({
 		selected: new Set<string>(),
 		hideable,
 		model,
+		searching: false,
 	})
 
 	return (
