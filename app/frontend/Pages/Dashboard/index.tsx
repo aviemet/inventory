@@ -16,7 +16,7 @@ const Dashboard = ({ company, audits }: IDashboardProps) => {
 			</Section>
 
 			<Section>
-				<div>Recent Activity!</div>
+				<div>Recent Activity</div>
 				<Table>
 					<Table.Head>
 						<Table.Row>
