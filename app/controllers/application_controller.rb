@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :success, :error, :warning
 
+  before_action :first_run
+
   # before_action :decode_id
   before_action :set_locale
   before_action :authenticate_user!
@@ -135,5 +137,9 @@ class ApplicationController < ActionController::Base
     end
 
     redirect_to request.path, params: params if dirty
+  end
+
+  def first_run
+    redirect_to first_run_path if User.count == 0
   end
 end

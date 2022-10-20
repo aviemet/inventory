@@ -6,6 +6,10 @@ class PagesController < ApplicationController
     }
   end
 
+  def first_run
+    render inertia: "Public/Pages/FirstRun"
+  end
+
   private
 
   def settings_params
