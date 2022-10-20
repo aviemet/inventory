@@ -30,7 +30,7 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 		const urlSearchString = params.get('search')
 
 		if(urlSearchString) {
-			setSearchValue(searchValue)
+			setSearchValue(urlSearchString)
 		} else if(searchValue !== '' && !urlSearchString) {
 			setSearchValue(searchValue)
 		}
