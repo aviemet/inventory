@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Inertia, type VisitOptions } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
 import { useTableContext } from '../TableContext'
@@ -6,6 +6,7 @@ import { TextInput } from '@/Components/Inputs'
 import { SearchIcon, CrossIcon, DoubleDownArrowIcon } from '@/Components/Icons'
 import { ActionIcon, Box } from '@mantine/core'
 import { Table } from '@/Components'
+import { useSessionStorage } from '@mantine/hooks'
 
 interface ISearchInputProps {
 	columnPicker?: boolean
@@ -20,7 +21,20 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 	const { search } = window.location
 
 	const params = new URLSearchParams(search)
-	const [searchValue, setSearchValue] = useState(params.get('search') || '')
+	const [searchValue, setSearchValue] = useSessionStorage({
+		key: `${model}-query`,
+		defaultValue: params.get('search') || ''
+	})
+
+	useEffect(() => {
+		const urlSearchString = params.get('search')
+
+		if(urlSearchString) {
+			setSearchValue(searchValue)
+		} else if(searchValue !== '' && !urlSearchString) {
+			setSearchValue(searchValue)
+		}
+	}, [])
 
 	const debouncedSearch = useMemo(() => debounce((path) => {
 		const options: VisitOptions = {
