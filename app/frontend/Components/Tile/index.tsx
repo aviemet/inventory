@@ -2,10 +2,11 @@ import React from 'react'
 import { Paper } from '@mantine/core'
 import Content from './Content'
 import Footer from './Footer'
+import { DivProps } from 'react-html-props'
 
-const Tile = ({ children }: { children: React.ReactNode }) => {
+const Tile = ({ children, ...props }: Omit<DivProps, 'ref'>) => {
 	return (
-		<Paper radius="lg" sx={ theme => ({
+		<Paper radius="lg" { ...props } sx={ theme => ({
 			borderColor: theme.fn.primaryColor(),
 			borderTopWidth: 2,
 			boxShadow: theme.shadows.md,

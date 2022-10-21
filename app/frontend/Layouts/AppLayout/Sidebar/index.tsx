@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { useLayout } from '@/Providers'
+import { useLayout } from '@/Layouts/Providers'
 import { Group, Navbar, Text, ThemeIcon, useMantineTheme } from '@mantine/core'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
@@ -30,7 +30,7 @@ import {
 	CategoriesIcon,
 } from '@/Components/Icons'
 
-import IconProvider from '@/Providers/IconProvider'
+import IconProvider from '@/Layouts/Providers/IconProvider'
 import useNavigationStyles from './useNavigationStyles'
 
 const Sidebar = () => {

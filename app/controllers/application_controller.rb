@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
   # end
   # raise CanCan::AccessDenied.new("You are not authorized to perform this action!", :custom_action, Project)
 
+  def after_sign_up_path_for(user)
+    company_url(user.active_company)
+  end
+
   def after_sign_out_path_for(*)
     new_user_session_path
   end
@@ -135,5 +139,9 @@ class ApplicationController < ActionController::Base
     end
 
     redirect_to request.path, params: params if dirty
+  end
+
+  def first_run
+    redirect_to first_run_path if User.count == 0
   end
 end
