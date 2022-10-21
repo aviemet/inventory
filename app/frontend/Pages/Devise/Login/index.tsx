@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { Form, Field, Input, Checkbox, Submit } from '@/Components/Form'
-import HoverLink from '../HoverLink'
+import HoverLink from '../../../Components/Layout/HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 
