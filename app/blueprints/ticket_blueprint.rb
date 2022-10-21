@@ -4,7 +4,7 @@ class TicketBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  association :created_by, blueprint: UserBlueprint
+  association :created_by, blueprint: PersonBlueprint
 
   view :as_options do
     only :id, :subject

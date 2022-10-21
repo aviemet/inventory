@@ -617,7 +617,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_203221) do
   add_foreign_key "phones", "contacts"
   add_foreign_key "purchases", "orders"
   add_foreign_key "ticket_messages", "tickets"
-  add_foreign_key "tickets", "users", column: "created_by_id"
+  add_foreign_key "tickets", "people", column: "created_by_id"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
   add_foreign_key "warranties", "items"

@@ -11,7 +11,7 @@ class Ticket < ApplicationRecord
     }
   )
 
-  belongs_to :created_by, class_name: "User", required: false
+  belongs_to :created_by, class_name: "Person", required: false
 
-  validates_presence_of :subject, on: :create, message: "Subject can't be blank"
+  validates_presence_of :subject, message: "Subject can't be blank"
 end

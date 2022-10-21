@@ -57,8 +57,8 @@ gem "bootsnap", require: false
 group :development, :test do
   gem "rspec-rails", "~> 6.0.1"
   gem "factory_bot_rails", "~> 6.2"
-  gem "faker", "~> 2.20"
   gem "pry-rails", "~> 0.3.9"
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 
   gem "rubocop-rails", "~> 2.14", require: false
   gem "rubocop-rspec", "~> 2.9", require: false
