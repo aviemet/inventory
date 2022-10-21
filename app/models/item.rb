@@ -29,7 +29,7 @@ class Item < ApplicationRecord
 
   validates_presence_of :name
 
-  has_many :nics
+  has_many :nics, dependent: :destroy
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ip_leases
   has_many :ip_leases, through: :nics
   belongs_to :vendor, required: false
@@ -61,7 +61,7 @@ class Item < ApplicationRecord
   private
 
   def ensure_nic
-    self << Nic.new if self.nics.empty?
+    self.nics << Nic.new if self.nics.empty?
   end
 
 end

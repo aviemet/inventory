@@ -676,7 +676,7 @@ declare namespace Schema {
 		created_by_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		created_by?: User;
+		created_by?: Person;
 	}
 
 	interface TicketMessage {

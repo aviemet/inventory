@@ -4,7 +4,7 @@ class CreateTickets < ActiveRecord::Migration[7.0]
       t.string :subject, required: true
       t.text :description
       t.references :assigned_to, polymorphic: true, null: true
-      t.references :created_by, null: true, foreign_key: { to_table: :users }
+      t.references :created_by, null: true, foreign_key: { to_table: :people }
 
       t.timestamps
     end

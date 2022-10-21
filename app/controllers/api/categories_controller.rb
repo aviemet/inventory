@@ -14,6 +14,7 @@ class Api::CategoriesController < ApplicationController
 
   # PATCH/PUT /api/categories/:slug
   def update
+    ap({ category: category })
     if category.update(category_params)
       render json: category.render, status: 201
     else
