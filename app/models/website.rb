@@ -1,3 +1,3 @@
 class Website < ApplicationRecord
-  audited
+  tracked
 end

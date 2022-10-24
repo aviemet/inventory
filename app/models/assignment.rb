@@ -1,5 +1,5 @@
 class Assignment < ApplicationRecord
-  audited
+  tracked
 
   enum status: %i(approved requested denied)
 

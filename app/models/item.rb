@@ -23,7 +23,7 @@ class Item < ApplicationRecord
   )
 
   resourcify
-  audited
+  tracked
 
   monetize :cost_cents, allow_nil: true
 

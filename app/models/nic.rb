@@ -3,7 +3,7 @@ class Nic < ApplicationRecord
 
   after_initialize :set_defaults
 
-  audited
+  tracked
 
   validates_presence_of :nic_type
 

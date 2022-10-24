@@ -1,6 +1,8 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
+  include PublicActivity::Model
+
   # def to_param
   #   encode_id
   # end
