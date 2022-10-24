@@ -4,6 +4,8 @@ import { Routes } from '@/lib'
 import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, LocationDropdown } from '@/Components/Form/Components'
 
+import { omit } from 'lodash'
+
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
 	item: Schema.Item
@@ -48,7 +50,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 				<Form
 					data={ {
 						assignment: {
-							...assignment,
+							...omit(assignment, 'status'),
 						},
 						item: {
 							name: item.name

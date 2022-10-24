@@ -24,7 +24,7 @@ class PersonBlueprint < ApplicationBlueprint
     association :items, blueprint: ItemBlueprint
     association :accessories, blueprint: AccessoryBlueprint
     association :licenses, blueprint: LicenseBlueprint
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :manager, blueprint: PersonBlueprint
     association :user, blueprint: UserBlueprint
   end

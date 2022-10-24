@@ -1,5 +1,9 @@
 class Assignment < ApplicationRecord
-  tracked
+  tracked recipient: proc { |controller, a| a.assignable },
+          params: {
+            assign_toable_type: proc { |controller, a| a.assign_toable_type },
+            assign_toable_id: proc { |controller, a| a.assign_toable_id }
+          }
 
   enum status: %i(approved requested denied)
 
@@ -22,6 +26,6 @@ class Assignment < ApplicationRecord
   validates_presence_of :assigned_at
   validates_presence_of :location_id
 
-  scope :includes_associated, -> { includes([:location, :created_by, :status_type, :audits]) }
+  scope :includes_associated, -> { includes([:location, :created_by, :status_type, :activities]) }
   scope :active, -> { where(active: true) }
 end

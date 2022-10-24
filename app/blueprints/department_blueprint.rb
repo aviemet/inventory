@@ -22,7 +22,7 @@ class DepartmentBlueprint < ApplicationBlueprint
   end
 
   view :associations do
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :items, blueprint: ItemBlueprint
     association :accessories, blueprint: AccessoryBlueprint
     association :components, blueprint: ComponentBlueprint

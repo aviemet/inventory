@@ -44,7 +44,7 @@ class Item < ApplicationRecord
 
   scope :no_nics, -> { includes(:nics).where(nics: { id: nil }) }
 
-  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_type, :audits, :ips, :nics, :ip_leases]) }
+  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_type, :activities, :ips, :nics, :ip_leases]) }
 
   def location
     if assigned?

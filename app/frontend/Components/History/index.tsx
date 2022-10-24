@@ -19,10 +19,10 @@ export type THistory = Schema.Assignment|Schema.PublicActivityActivity|TReturn
 
 interface IHistoryProps {
 	assignments?: Schema.Assignment[]
-	audits?: Schema.PublicActivityActivity[]
+	activities?: Schema.PublicActivityActivity[]
 }
 
-const History = ({ assignments, audits }: IHistoryProps) => {
+const History = ({ assignments, activities }: IHistoryProps) => {
 
 	const sortedEvents = useCallback(() => {
 		const events: THistory[] = []
@@ -47,7 +47,7 @@ const History = ({ assignments, audits }: IHistoryProps) => {
 			})
 		}
 
-		if(Array.isArray(audits)) events.push(...audits)
+		if(Array.isArray(activities)) events.push(...activities)
 
 		events.sort((a, b) => {
 			if(a.created_at === b.created_at) return 0
@@ -55,7 +55,7 @@ const History = ({ assignments, audits }: IHistoryProps) => {
 		})
 
 		return events
-	}, [assignments, audits])
+	}, [assignments, activities])
 
 	// Timeline.Item components cannot be wrapped, so the content has been componentized instead
 	// https://mantine.dev/core/timeline/#wrap-timelineitem

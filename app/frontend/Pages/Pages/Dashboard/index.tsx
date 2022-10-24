@@ -5,10 +5,10 @@ import { formatter, Routes } from '@/lib'
 
 interface IDashboardProps {
 	company: Schema.CompanyWithCounts
-	audits: Schema.PublicActivityActivity[]
+	activities: Schema.PublicActivityActivity[]
 }
 
-const Dashboard = ({ company, audits }: IDashboardProps) => {
+const Dashboard = ({ company, activities }: IDashboardProps) => {
 	return (
 		<Page title="Dashboard">
 			<Section>
@@ -27,20 +27,20 @@ const Dashboard = ({ company, audits }: IDashboardProps) => {
 						</Table.Row>
 					</Table.Head>
 					<Table.Body>
-						{ audits.reverse().map(audit => (
-							<Table.Row key={ audit.id }>
+						{ activities.reverse().map(activity => (
+							<Table.Row key={ activity.id }>
 								<Table.Cell>
-									{ audit.route ?
-										<Link href={ audit.route }>{ audit.auditable_type }</Link>
+									{ activity.route ?
+										<Link href={ activity.route }>{ activity.trackable_type }</Link>
 										:
-										audit.auditable_type
+										activity.trackable_type
 									}
 								</Table.Cell>
-								<Table.Cell>{ audit.action }</Table.Cell>
+								<Table.Cell>{ activity.key }</Table.Cell>
 								<Table.Cell>
-									{ audit.person && <Link href={ Routes.person(audit.person.id) }>{ audit.person?.name }</Link> }
+									{ activity.person && <Link href={ Routes.person(activity.person.id) }>{ activity.person?.name }</Link> }
 								</Table.Cell>
-								<Table.Cell>{ formatter.date.long(audit.created_at!) }</Table.Cell>
+								<Table.Cell>{ formatter.date.long(activity.created_at!) }</Table.Cell>
 							</Table.Row>
 						)) }
 					</Table.Body>

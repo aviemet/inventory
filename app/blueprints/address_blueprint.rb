@@ -12,7 +12,7 @@ class AddressBlueprint < ApplicationBlueprint
          :updated_at
 
   view :associations do
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :contact, blueprint: ContactBlueprint
     association :category, blueprint: CategoryBlueprint
   end

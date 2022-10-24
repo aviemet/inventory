@@ -7,6 +7,6 @@ class WebsiteBlueprint < ApplicationBlueprint
          :updated_at
 
   view :associations do
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
   end
 end

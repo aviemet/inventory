@@ -30,7 +30,7 @@ class OrderBlueprint < ApplicationBlueprint
   end
 
   view :associations do
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :user, blueprint: UserBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :person, blueprint: PersonBlueprint

@@ -10,7 +10,7 @@ const ConsumableHistory = ({ consumable }: IConsumableHistoryProps) => {
 		<>
 			<Heading order={ 3 }>History</Heading>
 
-			<History assignments={ consumable.assignments } audits={ consumable.audits } />
+			<History assignments={ consumable.assignments } activities={ consumable.activities } />
 		</>
 	)
 }

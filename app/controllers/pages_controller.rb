@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   def dashboard
     render inertia: "Pages/Dashboard", props: {
       company: @active_company.render(view: :counts),
-      activity: ActivityBlueprint.render_as_json(PublicActivity::Activity.last(10), view: :dashboard)
+      activities: ActivityBlueprint.render_as_json(PublicActivity::Activity.last(10), view: :dashboard)
     }
   end
 

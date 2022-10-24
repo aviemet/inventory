@@ -23,7 +23,7 @@ class LocationBlueprint < ApplicationBlueprint
   view :associations do
     association :parent, blueprint: LocationBlueprint
     association :contact, blueprint: ContactBlueprint
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :department, blueprint: DepartmentBlueprint
     association :location, blueprint: LocationBlueprint
   end
@@ -40,7 +40,7 @@ class LocationBlueprint < ApplicationBlueprint
   view :show do
     association :parent, blueprint: LocationBlueprint
     association :contact, blueprint: ContactBlueprint
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :department, blueprint: DepartmentBlueprint
     association :location, blueprint: LocationBlueprint
   end

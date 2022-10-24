@@ -11,7 +11,7 @@ class ContractBlueprint < ApplicationBlueprint
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :category, blueprint: CategoryBlueprint
     association :vendor, blueprint: VendorBlueprint
   end
@@ -24,7 +24,7 @@ class ContractBlueprint < ApplicationBlueprint
 
   view :show do
     association :department, blueprint: DepartmentBlueprint
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :category, blueprint: CategoryBlueprint
     association :vendor, blueprint: VendorBlueprint
   end

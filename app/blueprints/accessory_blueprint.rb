@@ -21,7 +21,7 @@ class AccessoryBlueprint < ApplicationBlueprint
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint, view: :associations
     association :purchase, blueprint: PurchaseBlueprint
-    association :activity, blueprint: ActivityBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :default_location, blueprint: LocationBlueprint

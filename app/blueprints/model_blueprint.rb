@@ -9,7 +9,7 @@ class ModelBlueprint < ApplicationBlueprint
          :updated_at
   
   view :associations do
-		association :activity, blueprint: ActivityBlueprint
+		association :activities, blueprint: ActivityBlueprint
 		association :manufacturer, blueprint: ManufacturerBlueprint
     association :category, blueprint: CategoryBlueprint
 		association :items, blueprint: ItemBlueprint
@@ -28,7 +28,7 @@ class ModelBlueprint < ApplicationBlueprint
   end
 
   view :show do
-		association :activity, blueprint: ActivityBlueprint
+		association :activities, blueprint: ActivityBlueprint
 		association :manufacturer, blueprint: ManufacturerBlueprint
     association :category, blueprint: CategoryBlueprint
 		association :items, blueprint: ItemBlueprint

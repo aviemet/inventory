@@ -10,7 +10,7 @@ const ItemHistory = ({ item }: IItemHistoryProps) => {
 		<>
 			<Heading order={ 3 }>History</Heading>
 
-			<History assignments={ item.assignments } audits={ item.audits } />
+			<History assignments={ item.assignments } activities={ item.activities } />
 		</>
 	)
 }
