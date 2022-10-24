@@ -6,7 +6,7 @@ class RoleBlueprint < ApplicationBlueprint
          :updated_at
 
   view :associations do
-    association :audits, blueprint: AuditBlueprint
+    association :activity, blueprint: ActivityBlueprint
     association :users, blueprint: UserBlueprint
   end
 end

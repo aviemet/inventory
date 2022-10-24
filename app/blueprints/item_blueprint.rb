@@ -18,7 +18,7 @@ class ItemBlueprint < ApplicationBlueprint
   view :associations do
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint, view: :associations
-    association :audits, blueprint: AuditBlueprint
+    association :activity, blueprint: ActivityBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :category, blueprint: CategoryBlueprint
@@ -42,7 +42,7 @@ class ItemBlueprint < ApplicationBlueprint
   view :show do
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint, view: :associations
-    association :audits, blueprint: AuditBlueprint
+    association :activity, blueprint: ActivityBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :category, blueprint: CategoryBlueprint

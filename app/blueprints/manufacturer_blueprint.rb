@@ -20,7 +20,7 @@ class ManufacturerBlueprint < ApplicationBlueprint
 
   view :associations do
 		association :contact, blueprint: ContactBlueprint
-		association :audits, blueprint: AuditBlueprint
+		association :activity, blueprint: ActivityBlueprint
 		association :models, blueprint: ModelBlueprint
 		association :items, blueprint: ItemBlueprint
 		association :accessories, blueprint: AccessoryBlueprint
@@ -34,7 +34,7 @@ class ManufacturerBlueprint < ApplicationBlueprint
 
   view :show do
 		association :contact, blueprint: ContactBlueprint
-		association :audits, blueprint: AuditBlueprint
+		association :activity, blueprint: ActivityBlueprint
 		association :models, blueprint: ModelBlueprint
 		association :items, blueprint: ItemBlueprint
 		association :accessories, blueprint: AccessoryBlueprint

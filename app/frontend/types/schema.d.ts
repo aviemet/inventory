@@ -16,6 +16,7 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		status_type_id?: number | null;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -24,7 +25,6 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		model?: Model;
 		vendor?: Vendor;
 		default_location?: Location;
@@ -45,7 +45,7 @@ declare namespace Schema {
 		category_id: number;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		category?: Category;
 	}
@@ -67,27 +67,9 @@ declare namespace Schema {
 		created_by_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 		created_by?: User;
 		location?: Location;
-	}
-
-	interface AuditedAudit {
-		id: number;
-		auditable_id?: number | null;
-		auditable_type?: string | null;
-		associated_id?: number | null;
-		associated_type?: string | null;
-		user_id?: number | null;
-		user_type?: string | null;
-		username?: string | null;
-		action?: string | null;
-		audited_changes?: Record<string, any> | null;
-		version?: number | null;
-		comment?: string | null;
-		remote_address?: string | null;
-		request_uuid?: string | null;
-		created_at?: string | null;
 	}
 
 	interface Category {
@@ -98,11 +80,11 @@ declare namespace Schema {
 		description?: string | null;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		fieldset_associations?: FieldsetAssociation[];
-		audits?: AuditedAudit[];
 	}
 
 	interface Company {
@@ -112,13 +94,13 @@ declare namespace Schema {
 		default_currency: string;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
 		emails?: Email[];
 		websites?: Website[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		users?: User[];
 		ldaps?: Ldap[];
 		ownerships?: Ownership[];
@@ -156,6 +138,7 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		status_type_id?: number | null;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -163,7 +146,6 @@ declare namespace Schema {
 		status_type?: StatusType;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
-		audits?: AuditedAudit[];
 		model?: Model;
 		vendor?: Vendor;
 		default_location?: Location;
@@ -186,6 +168,7 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		status_type_id?: number | null;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -193,7 +176,6 @@ declare namespace Schema {
 		status_type?: StatusType;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
-		audits?: AuditedAudit[];
 		model?: Model;
 		vendor?: Vendor;
 		default_location?: Location;
@@ -211,6 +193,7 @@ declare namespace Schema {
 		primary_address_id?: number | null;
 		primary_phone_id?: number | null;
 		primary_email_id?: number | null;
+		activities?: PublicActivityActivity[];
 		addresses?: Address[];
 		emails?: Email[];
 		phones?: Phone[];
@@ -228,11 +211,11 @@ declare namespace Schema {
 		category_id: number;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		category?: Category;
 		vendor?: Vendor;
 	}
@@ -246,6 +229,7 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		manager_id?: number | null;
+		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -260,7 +244,6 @@ declare namespace Schema {
 		consumables?: Consumable[];
 		licenses?: License[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		location?: Location;
 		manager?: Person;
 		ownerships?: Ownership[];
@@ -278,7 +261,7 @@ declare namespace Schema {
 		category_id: number;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		category?: Category;
 	}
@@ -292,7 +275,7 @@ declare namespace Schema {
 		notes?: string | null;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 	}
 
 	interface Fieldset {
@@ -301,7 +284,7 @@ declare namespace Schema {
 		description?: string | null;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 	}
 
 	interface FieldsetAssociation {
@@ -311,7 +294,7 @@ declare namespace Schema {
 		fieldable_id: number;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 		fieldset?: Fieldset;
 	}
 
@@ -322,7 +305,7 @@ declare namespace Schema {
 		active: boolean;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 		nic?: Nic;
 		item?: Item;
 	}
@@ -343,6 +326,7 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		status_type_id?: number | null;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -357,7 +341,6 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		nics?: Nic[];
 		ips?: IpLease[];
 		ip_leases?: IpLease[];
@@ -383,8 +366,8 @@ declare namespace Schema {
 		company_id: number;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		company?: Company;
 	}
 
@@ -409,6 +392,7 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		status_type_id?: number | null;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -417,7 +401,6 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		category?: Category;
 		vendor?: Vendor;
 		manufacturer?: Manufacturer;
@@ -431,6 +414,7 @@ declare namespace Schema {
 		parent_id?: number | null;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -447,7 +431,6 @@ declare namespace Schema {
 		websites?: Website[];
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		parent?: Location;
 		people?: Person[];
 	}
@@ -458,6 +441,7 @@ declare namespace Schema {
 		slug: string;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -467,7 +451,6 @@ declare namespace Schema {
 		emails?: Email[];
 		websites?: Website[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		models?: Model[];
 		items?: Item[];
 		accessories?: Accessory[];
@@ -485,12 +468,12 @@ declare namespace Schema {
 		manufacturer_id: number;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		manufacturer?: Manufacturer;
 		category?: Category;
 		items?: Item[];
@@ -510,10 +493,10 @@ declare namespace Schema {
 		notes?: string | null;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
-		audits?: AuditedAudit[];
 	}
 
 	interface Nic {
@@ -523,7 +506,7 @@ declare namespace Schema {
 		item_id: number;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 		item?: Item;
 		ips?: IpLease[];
 		ip_leases?: IpLease[];
@@ -552,11 +535,11 @@ declare namespace Schema {
 		vendor_id: number;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		user?: User;
 		vendor?: Vendor;
 		person?: Person;
@@ -571,7 +554,7 @@ declare namespace Schema {
 		ownable_id: number;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 		company?: Company;
 		department?: Department;
 	}
@@ -589,6 +572,7 @@ declare namespace Schema {
 		location_id?: number | null;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
@@ -604,7 +588,6 @@ declare namespace Schema {
 		consumables?: Consumable[];
 		licenses?: License[];
 		fieldset_associations?: FieldsetAssociation[];
-		audits?: AuditedAudit[];
 		manager?: Person;
 		location?: Location;
 		user?: User;
@@ -619,9 +602,23 @@ declare namespace Schema {
 		category_id: number;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		category?: Category;
+	}
+
+	interface PublicActivityActivity {
+		id: number;
+		trackable_type?: string | null;
+		trackable_id?: number | null;
+		owner_type?: string | null;
+		owner_id?: number | null;
+		key?: string | null;
+		parameters?: string | null;
+		recipient_type?: string | null;
+		recipient_id?: number | null;
+		created_at: string;
+		updated_at: string;
 	}
 
 	interface Purchase {
@@ -635,11 +632,11 @@ declare namespace Schema {
 		notes?: string | null;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		item?: Item;
 		accessory?: Accessory;
 		component?: Component;
@@ -654,7 +651,7 @@ declare namespace Schema {
 		resource_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 		users?: User[];
 	}
 
@@ -664,7 +661,7 @@ declare namespace Schema {
 		slug: string;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 	}
 
 	interface Ticket {
@@ -676,6 +673,7 @@ declare namespace Schema {
 		created_by_id?: number | null;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		created_by?: Person;
 	}
 
@@ -685,6 +683,7 @@ declare namespace Schema {
 		ticket_id: number;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		ticket?: Ticket;
 	}
 
@@ -714,8 +713,8 @@ declare namespace Schema {
 		active?: boolean | null;
 		table_preferences?: Record<string, any> | null;
 		user_preferences?: Record<string, any> | null;
+		activities?: PublicActivityActivity[];
 		roles?: Role[];
-		audits?: AuditedAudit[];
 		person?: Person;
 		active_company?: Company;
 		companies?: Company[];
@@ -728,6 +727,7 @@ declare namespace Schema {
 		url?: string | null;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -736,7 +736,6 @@ declare namespace Schema {
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
-		audits?: AuditedAudit[];
 		contracts?: Contract[];
 		items?: Item[];
 		accessories?: Accessory[];
@@ -752,12 +751,12 @@ declare namespace Schema {
 		notes?: string | null;
 		created_at: string;
 		updated_at: string;
+		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
 		emails?: Email[];
 		websites?: Website[];
-		audits?: AuditedAudit[];
 		item?: Item;
 	}
 
@@ -769,7 +768,7 @@ declare namespace Schema {
 		contact_id: number;
 		created_at: string;
 		updated_at: string;
-		audits?: AuditedAudit[];
+		activities?: PublicActivityActivity[];
 	}
 
 

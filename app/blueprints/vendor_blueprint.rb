@@ -9,7 +9,7 @@ class VendorBlueprint < ApplicationBlueprint
 
   view :associations do
     association :contact, blueprint: ContactBlueprint
-    association :audits, blueprint: AuditBlueprint
+    association :activity, blueprint: ActivityBlueprint
     association :contracts, blueprint: ContractBlueprint
     association :items, blueprint: ItemBlueprint
     association :accessories, blueprint: AccessoryBlueprint

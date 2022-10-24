@@ -15,11 +15,11 @@ export type TReturn = {
 	qty?: number | null
 	created_at?: string | null
 }
-export type THistory = Schema.Assignment|Schema.AuditedAudit|TReturn
+export type THistory = Schema.Assignment|Schema.PublicActivityActivity|TReturn
 
 interface IHistoryProps {
 	assignments?: Schema.Assignment[]
-	audits?: Schema.AuditedAudit[]
+	audits?: Schema.PublicActivityActivity[]
 }
 
 const History = ({ assignments, audits }: IHistoryProps) => {

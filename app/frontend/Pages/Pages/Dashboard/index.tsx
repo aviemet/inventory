@@ -5,7 +5,7 @@ import { formatter, Routes } from '@/lib'
 
 interface IDashboardProps {
 	company: Schema.CompanyWithCounts
-	audits: Schema.AuditedAudit[]
+	audits: Schema.PublicActivityActivity[]
 }
 
 const Dashboard = ({ company, audits }: IDashboardProps) => {

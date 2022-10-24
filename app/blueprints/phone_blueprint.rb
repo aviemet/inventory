@@ -8,7 +8,7 @@ class PhoneBlueprint < ApplicationBlueprint
          :updated_at
 
   view :associations do
-    association :audits, blueprint: AuditBlueprint
+    association :activity, blueprint: ActivityBlueprint
     association :contact, blueprint: ContactBlueprint
     association :category, blueprint: CategoryBlueprint
   end

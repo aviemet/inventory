@@ -3,7 +3,7 @@ import { formatter, Routes } from '@/lib'
 import { Text } from '@mantine/core'
 import { Link } from '@/Components'
 
-const AuditHistoryContent = ({ event }: { event: Schema.AuditedAudit }) => {
+const AuditHistoryContent = ({ event }: { event: Schema.PublicActivityActivity }) => {
 	return (
 		<>
 			{ event.person && <Text>

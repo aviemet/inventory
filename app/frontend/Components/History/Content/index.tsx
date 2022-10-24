@@ -16,7 +16,7 @@ type TTimelineData = {
 	lineStyle: 'dashed'|'dotted'|'solid'
 }
 
-export const buildTimelineData = (event: Schema.Assignment|Schema.AuditedAudit|TReturn) => {
+export const buildTimelineData = (event: Schema.Assignment|Schema.PublicActivityActivity|TReturn) => {
 	const timelineData: TTimelineData = {
 		title: '',
 		content: <></>,
@@ -27,7 +27,7 @@ export const buildTimelineData = (event: Schema.Assignment|Schema.AuditedAudit|T
 
 	// Audit
 	if(has(event, 'auditable_type')) {
-		timelineData.title = `${capitalize((event as Schema.AuditedAudit).action)}d`
+		timelineData.title = `${capitalize((event as Schema.PublicActivityActivity).action)}d`
 		timelineData.content = <AuditHistoryContent event={ event } />
 		timelineData.lineStyle = 'dotted'
 
