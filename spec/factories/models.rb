@@ -3,8 +3,12 @@ FactoryBot.define do
     name { Faker::Device.model_name }
     model_number { Faker::Device.serial }
     notes { Faker::Lorem.sentence }
-    category
-    manufacturer
-    association :company, strategy: :create
+
+    transient do
+      company { company || create(:company) }
+    end
+    
+    category { association :category, company: company }
+    manufacturer { association :manufacturer, company: company }
   end
 end

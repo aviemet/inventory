@@ -12,7 +12,9 @@ RSpec.describe Item, type: :model do
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      valid_attributes = attributes_for(:item)
+      ap({ valid_attributes: valid_attributes })
+      expect(Item.new(valid_attributes)).to be_valid
     end
 
     it "uses money-rails to handle cost" do

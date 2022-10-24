@@ -9,8 +9,12 @@ FactoryBot.define do
     notes { Faker::Lorem.sentence }
     default_location factory: :location
     status_type
-    model
-    vendor
-    association :company, strategy: :create
+
+    transient do
+      company { company || create(:company) }
+    end
+
+    vendor { association :vendor, company: company }
+    model { association :model, company: company }
   end
 end
