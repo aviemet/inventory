@@ -7,7 +7,7 @@ class CreateActivities < ActiveRecord::Migration[5.0]
       t.belongs_to :trackable, polymorphic: true
       t.belongs_to :owner, polymorphic: true
       t.string :key
-      t.text :parameters
+      t.jsonb :parameters, default: {}
       t.belongs_to :recipient, polymorphic: true
 
       t.timestamps

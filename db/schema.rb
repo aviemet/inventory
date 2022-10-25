@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
     t.string "owner_type"
     t.integer "owner_id"
     t.string "key"
-    t.text "parameters"
+    t.jsonb "parameters", default: {}
     t.string "recipient_type"
     t.integer "recipient_id"
     t.datetime "created_at", precision: nil, null: false

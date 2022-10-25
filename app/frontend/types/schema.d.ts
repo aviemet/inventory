@@ -614,7 +614,7 @@ declare namespace Schema {
 		owner_type?: string | null;
 		owner_id?: number | null;
 		key?: string | null;
-		parameters?: string | null;
+		parameters?: Record<string, any> | null;
 		recipient_type?: string | null;
 		recipient_id?: number | null;
 		created_at: string;
