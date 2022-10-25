@@ -19,7 +19,7 @@ class Consumable < ApplicationRecord
     }
   )
 
-  audited
+  tracked
 
   monetize :cost_cents
 

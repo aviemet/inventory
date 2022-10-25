@@ -17,7 +17,7 @@ class Department < ApplicationRecord
   slug :name
 
   resourcify
-  audited
+  tracked
 
   validates_presence_of :name
 

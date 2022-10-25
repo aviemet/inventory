@@ -17,7 +17,7 @@ class Model < ApplicationRecord
   slug :name
 
   resourcify
-  audited
+  tracked
 
   belongs_to :manufacturer
   belongs_to :category

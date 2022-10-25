@@ -124,12 +124,15 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 						<h3>Audit History</h3>
 
 						<ul>
-							{ license.audits?.reverse().map(audit => {
-								const message = audit.action === 'create' ? 'Created' : 'Updated'
+							{ license.activities?.reverse().map(activity => {
+								let message = ''
+								if(activity.key) {
+									message = activity.key.split('.')[1].toUpperCase()
+								}
 
 								return (
-									<li key={ audit.id }>
-										{ audit.created_at && `${message} at ${formatter.date.long(audit.created_at)}` }
+									<li key={ activity.id }>
+										{ activity.created_at && `${message} at ${formatter.date.long(activity.created_at)}` }
 									</li>
 								)
 							}) }
