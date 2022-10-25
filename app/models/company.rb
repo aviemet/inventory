@@ -17,7 +17,7 @@ class Company < ApplicationRecord
   slug :name
 
   resourcify
-  audited
+  tracked
 
   attribute :default_currency, default: MoneyRails.default_currency
 

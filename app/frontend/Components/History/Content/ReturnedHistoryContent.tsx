@@ -3,16 +3,14 @@ import { formatter, polymorphicRoute } from '@/lib'
 import { Text } from '@mantine/core'
 import { Link } from '@/Components'
 
-import { type TReturn } from '../index'
-
-const ReturnedHistoryContext = ({ event }: { event: TReturn }) => {
+const ReturnedHistoryContext = ({ activity }: { activity: Schema.PublicActivityActivity }) => {
 	return (
 		<>
-			by <Link href={ polymorphicRoute(event.assign_toable_type, event.assign_toable_id) }>
-				{ event.assign_toable.name }
-			</Link>
-			{ event.created_at && <Text size="sm" color="dimmed">
-				{ formatter.date.long(event.created_at) }
+			{ /* by <Link href={ polymorphicRoute(activity.assign_toable_type, activity.assign_toable_id) }>
+				{ activity.assign_toable.name }
+			</Link>*/ }
+			{ activity.created_at && <Text size="sm" color="dimmed">
+				{ formatter.date.long(activity.created_at) }
 			</Text> }
 		</>
 	)

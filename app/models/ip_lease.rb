@@ -1,5 +1,5 @@
 class IpLease < ApplicationRecord
-  audited
+  tracked
 
   belongs_to :nic
   has_one :item, through: :nic

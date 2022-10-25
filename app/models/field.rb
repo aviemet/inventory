@@ -1,3 +1,3 @@
 class Field < ApplicationRecord
-  audited
+  tracked
 end

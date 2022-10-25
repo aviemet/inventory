@@ -20,7 +20,7 @@ class Accessory < ApplicationRecord
   )
 
   resourcify
-  audited
+  tracked
 
   monetize :cost_cents
 

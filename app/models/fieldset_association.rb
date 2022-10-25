@@ -1,5 +1,5 @@
 class FieldsetAssociation < ApplicationRecord
-  audited
+  tracked
 
   belongs_to :fieldset
   belongs_to :fieldable, polymorphic: true
