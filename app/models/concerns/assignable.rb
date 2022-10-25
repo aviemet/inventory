@@ -38,6 +38,8 @@ module Assignable
         .where("trackable_type='Assignment' and parameters LIKE '%assign_toable_type: " + self.class.name + "%' and parameters LIKE '%assign_toable_id: ?%'", self.id)
         .or(PublicActivity::Activity.where({ recipient_type: self.class.name, recipient_id: self.id }))
         .or(PublicActivity::Activity.where({ trackable_type: self.class.name, trackable_id: self.id }))
+        .order(:created_at)
+
     end
 
     def set_defaults
