@@ -10,7 +10,7 @@ const AccessoryHistory = ({ accessory }: IAccessoryHistoryProps) => {
 		<>
 			<Heading order={ 3 }>History</Heading>
 
-			<History assignments={ accessory.assignments } audits={ accessory.audits } />
+			<History assignments={ accessory.assignments } activities={ accessory.activities } />
 		</>
 	)
 }

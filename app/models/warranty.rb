@@ -1,7 +1,7 @@
 class Warranty < ApplicationRecord
   include Contactable
 
-  audited
+  tracked
 
   belongs_to :item, required: true
 end

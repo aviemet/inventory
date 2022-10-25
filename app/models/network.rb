@@ -11,7 +11,7 @@ class Network < ApplicationRecord
     }
   )
 
-  audited
+  tracked
 
   validates :address, presence: true
   validate :is_network

@@ -31,5 +31,7 @@ module Inventory
       g.assets              false
       g.helper              false
     end
+
+    config.active_record.yaml_column_permitted_classes = [Symbol, Hash, Array, Time, Date, ActiveRecord::Base, ActiveSupport::HashWithIndifferentAccess]
   end
 end

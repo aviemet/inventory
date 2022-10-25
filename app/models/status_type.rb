@@ -1,5 +1,5 @@
 class StatusType < ApplicationRecord
   slug :name
 
-  audited
+  tracked
 end

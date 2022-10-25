@@ -16,7 +16,7 @@ class Vendor < ApplicationRecord
 
   slug :name
 
-  audited
+  tracked
 
   has_many :contracts
   has_many :items
