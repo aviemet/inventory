@@ -3,10 +3,7 @@ require 'models/concerns/fieldable'
 
 RSpec.describe Model, type: :model do
   subject {
-    described_class.new({
-      name: "The Model",
-      model_number: 5
-    })
+    build_stubbed(:model)
   }
 
   describe "Associations" do

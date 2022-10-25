@@ -3,8 +3,6 @@ FactoryBot.define do
     name { Faker::Computer.type }
     categorizable_type { "Item" }
 
-    transient do
-      company { company || create(:company) }
-    end
+    company
   end
 end

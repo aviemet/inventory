@@ -4,7 +4,7 @@ require "models/concerns/assignable"
 
 RSpec.describe Component, type: :model do
   subject {
-    create(:component)
+    build_stubbed(:component)
   }
 
   describe "Associations" do

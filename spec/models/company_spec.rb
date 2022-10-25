@@ -3,7 +3,7 @@ require 'models/concerns/contactable'
 
 RSpec.describe Company, type: :model do
   subject {
-    build(:company)
+    build_stubbed(:company)
   }
 
   describe "Validations" do

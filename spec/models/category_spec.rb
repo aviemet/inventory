@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
   subject {
-    build(:category)
+    build_stubbed(:category)
   }
 
   describe "Validations" do

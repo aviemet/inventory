@@ -3,12 +3,12 @@ require 'models/concerns/ownable'
 
 RSpec.describe Network, type: :model do
   subject {
-    create(:network)
+    build_stubbed(:network)
   }
 
   describe "Pagination" do
     it "paginates hosts" do
-      network = create(:network, subnet: 22)
+      network = build_stubbed(:network, subnet: 22)
       hosts = network.address.paginate_hosts(page: 1)
       # ap({ hosts: hosts.size, first: hosts[0].address, last: hosts[-1].address })
       expect(hosts[0].address).to eq '10.0.0.1'

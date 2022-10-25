@@ -7,13 +7,12 @@ require "models/concerns/fieldable"
 
 RSpec.describe Item, type: :model do
   subject {
-    create(:item)
+    build_stubbed(:item)
   }
 
   describe "Validations" do
     it "is valid with valid attributes" do
       valid_attributes = attributes_for(:item)
-      ap({ valid_attributes: valid_attributes })
       expect(Item.new(valid_attributes)).to be_valid
     end
 
