@@ -18,7 +18,6 @@ class ItemBlueprint < ApplicationBlueprint
   view :associations do
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint, view: :associations
-    association :activities, blueprint: ActivityBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :category, blueprint: CategoryBlueprint
@@ -27,6 +26,8 @@ class ItemBlueprint < ApplicationBlueprint
     association :location, blueprint: LocationBlueprint
     association :status_type, blueprint: StatusTypeBlueprint
     association :nics, blueprint: NicBlueprint
+
+    association :activities, blueprint: ActivityBlueprint
   end
 
   view :index do
@@ -42,7 +43,6 @@ class ItemBlueprint < ApplicationBlueprint
   view :show do
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint, view: :associations
-    association :activities, blueprint: ActivityBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :category, blueprint: CategoryBlueprint
@@ -51,6 +51,8 @@ class ItemBlueprint < ApplicationBlueprint
     association :location, blueprint: LocationBlueprint
     association :status_type, blueprint: StatusTypeBlueprint
     association :nics, blueprint: NicBlueprint
+
+    association :history, name: :activities, blueprint: ActivityBlueprint
   end
 
   view :new do

@@ -41,6 +41,7 @@ module Assignable
         }.to_json)
         .or(PublicActivity::Activity.where({ recipient_type: self.class.name, recipient_id: self.id }))
         .or(PublicActivity::Activity.where({ trackable_type: self.class.name, trackable_id: self.id }))
+        .order(created_at: :desc)
     end
 
     def set_defaults

@@ -13,12 +13,12 @@ const History = ({ assignments, activities }: IHistoryProps) => {
 	return (
 		<>
 			{ activities && <Timeline active={ activities.length }>
-				{ activities.map((activity, i) => {
-					const timelineData = buildTimelineData(activity)
+				{ activities.map(activity => {
+					const timelineData = buildTimelineData(activity, assignments?.find(assignment => assignment.id === activity.trackable_id))
 
 					return (
 						<Timeline.Item
-							key={ i }
+							key={ activity.id }
 							title={ timelineData.title }
 							bullet={ timelineData.icon }
 							bulletSize={ 24 }
