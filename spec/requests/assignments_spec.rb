@@ -23,7 +23,7 @@ RSpec.describe "Assignments", type: :request do
     login_admin
 
     context "with valid parameters" do
-      it "assigns an item to a assignables" do
+      it "assigns an item to assignables" do
         assign_toables.each do |key, model|
           expect {
             post assignments_url, params: { assignment: assignment_params(:item, model) }

@@ -3,7 +3,7 @@ require 'models/concerns/fieldable'
 
 RSpec.describe Model, type: :model do
   subject {
-    build_stubbed(:model)
+    build(:model)
   }
 
   describe "Associations" do

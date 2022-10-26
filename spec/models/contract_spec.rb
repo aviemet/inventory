@@ -3,7 +3,7 @@ require 'models/concerns/ownable'
 
 RSpec.describe Contract, type: :model do
   subject {
-    build_stubbed(:contract)
+    build(:contract)
   }
 
   describe "Associations" do

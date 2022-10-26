@@ -4,7 +4,7 @@ require 'models/concerns/ownable'
 
 RSpec.describe Manufacturer, type: :model do
   subject {
-    build_stubbed(:manufacturer)
+    build(:manufacturer)
   }
 
   describe "Validations" do

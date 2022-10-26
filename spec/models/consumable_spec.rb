@@ -4,7 +4,7 @@ require "models/concerns/assignable"
 
 RSpec.describe Consumable, type: :model do
   subject {
-    build_stubbed(:consumable)
+    build(:consumable)
   }
 
   describe "Associations" do

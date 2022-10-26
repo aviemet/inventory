@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { build_stubbed(:user) }
+  subject { build(:user) }
 
   describe "Validations" do
     it "has a valid factory" do

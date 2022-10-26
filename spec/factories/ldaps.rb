@@ -9,6 +9,6 @@ FactoryBot.define do
     username { "administrator" }
     password { "Pa$$word" }
     tree_base { domain }
-    association :company, strategy: :create
+    company
   end
 end

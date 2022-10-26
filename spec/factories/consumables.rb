@@ -6,12 +6,12 @@ FactoryBot.define do
     cost { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
     requestable { false }
     notes { Faker::Lorem.sentence }
-    manufacturer { Manufacturer.first || create(:manufacturer) }
     default_location factory: :location
+    manufacturer
     status_type
     model
     category
     vendor
-    association :company, strategy: :create
+    company
   end
 end

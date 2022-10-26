@@ -6,12 +6,12 @@ require 'models/concerns/fieldable'
 
 RSpec.describe Person, type: :model do
   subject {
-    build_stubbed(:person)
+    build(:person)
   }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      subject.manager = build_stubbed(:person)
+      subject.manager = build(:person)
       expect(subject).to be_valid
     end
 
