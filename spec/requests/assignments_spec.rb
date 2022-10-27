@@ -4,9 +4,15 @@ require_relative '../support/devise'
 RSpec.describe "Assignments", type: :request do
   def assign_toables
     {
-      item: create(:item),
-      person: create(:person),
-      location: create(:location),
+      item: create(:item, { 
+        company: @admin.active_company
+      }),
+      person: create(:person, { 
+        company: @admin.active_company
+      }),
+      location: create(:location, { 
+        company: @admin.active_company
+      }),
     }
   end
 
