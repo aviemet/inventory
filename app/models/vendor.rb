@@ -25,5 +25,7 @@ class Vendor < ApplicationRecord
   has_many :components
   has_many :licenses
 
+  validates_presence_of :name
+
   scope :includes_associated, -> { includes([:contracts, :items, :accessories, :consumables, :components, :licenses]) }
 end
