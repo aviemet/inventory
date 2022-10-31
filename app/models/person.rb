@@ -16,7 +16,7 @@ class Person < ApplicationRecord
     }
   )
   
-  audited
+  tracked
 
   belongs_to :manager, class_name: 'Person', optional: true
   belongs_to :location, optional: true

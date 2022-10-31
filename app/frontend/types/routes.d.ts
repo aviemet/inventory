@@ -151,13 +151,13 @@ export const apiCategories: ((
 
 /**
  * Generates rails route to
- * /api/categories/:id(.:format)
- * @param {any} id
+ * /api/categories/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiCategory: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -173,13 +173,13 @@ export const apiCompanies: ((
 
 /**
  * Generates rails route to
- * /api/companies/:id(.:format)
- * @param {any} id
+ * /api/companies/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiCompany: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -231,13 +231,13 @@ export const apiContracts: ((
 
 /**
  * Generates rails route to
- * /api/departments/:id(.:format)
- * @param {any} id
+ * /api/departments/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiDepartment: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -391,13 +391,13 @@ export const apiLicense: ((
 
 /**
  * Generates rails route to
- * /api/locations/:id(.:format)
- * @param {any} id
+ * /api/locations/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiLocation: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

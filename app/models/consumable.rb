@@ -19,16 +19,17 @@ class Consumable < ApplicationRecord
     }
   )
 
-  audited
+  tracked
 
   monetize :cost_cents
 
-  belongs_to :model
   belongs_to :vendor, required: false
   belongs_to :default_location, class_name: "Location", required: false
+  belongs_to :model
   has_one :category, through: :model
   has_one :manufacturer, through: :model
 
+  validates_presence_of :name
   validates :qty, numericality: { greater_than_or_equal_to: 0 }
 
   scope :includes_associated, -> { includes([:manufacturer, :category, :vendor, :model]) }

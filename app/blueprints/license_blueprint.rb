@@ -26,7 +26,7 @@ class LicenseBlueprint < ApplicationBlueprint
 		association :department, blueprint: DepartmentBlueprint
 		association :assignments, blueprint: AssignmentBlueprint
 		association :purchase, blueprint: PurchaseBlueprint
-		association :audits, blueprint: AuditBlueprint
+		association :activities, blueprint: ActivityBlueprint
 		association :category, blueprint: CategoryBlueprint
 		association :vendor, blueprint: VendorBlueprint
 		association :manufacturer, blueprint: ManufacturerBlueprint
@@ -43,7 +43,7 @@ class LicenseBlueprint < ApplicationBlueprint
 		association :department, blueprint: DepartmentBlueprint
 		association :assignments, blueprint: AssignmentBlueprint
 		association :purchase, blueprint: PurchaseBlueprint
-		association :audits, blueprint: AuditBlueprint
+		association :activities, blueprint: ActivityBlueprint
 		association :category, blueprint: CategoryBlueprint
 		association :vendor, blueprint: VendorBlueprint
 		association :manufacturer, blueprint: ManufacturerBlueprint

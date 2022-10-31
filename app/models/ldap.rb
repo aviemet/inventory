@@ -1,6 +1,6 @@
 class Ldap < ApplicationRecord
   resourcify
-  audited
+  tracked
 
   attribute :host, default: '127.0.0.1'
   attribute :port, default: 389

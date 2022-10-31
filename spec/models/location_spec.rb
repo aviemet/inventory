@@ -9,14 +9,7 @@ RSpec.describe Location, type: :model do
   }
 
   describe "Validations" do
-
     it "is valid with valid attributes" do
-      subject.parent = build(:location)
-      expect(subject).to be_valid
-    end
-
-    it "is valid without a parent location" do
-      subject.parent = nil
       expect(subject).to be_valid
     end
 

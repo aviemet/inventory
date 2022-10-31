@@ -39,7 +39,7 @@ declare global {
 		interface Assignment extends UID {
 			assign_toable: Schema.Person|Schema.Item|Schema.Location
 		}
-		interface AuditedAudit {
+		interface PublicActivityActivity {
 			user?: Schema.User
 			person?: Schema.Person
 			route?: string

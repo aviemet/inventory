@@ -15,7 +15,7 @@ class Order < ApplicationRecord
   )
 
   resourcify
-  audited
+  tracked
 
   monetize :shipping_cents
   monetize :tax_cents

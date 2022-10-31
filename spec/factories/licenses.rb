@@ -11,10 +11,10 @@ FactoryBot.define do
     expires_at { Time.current.next_year }
     terminates_at { Time.current.next_year }
     notes { Faker::Lorem.sentence }
-    manufacturer { Manufacturer.first || create(:manufacturer) }
+    manufacturer
     status_type
     category
     vendor
-    association :company, strategy: :create
+    company
   end
 end

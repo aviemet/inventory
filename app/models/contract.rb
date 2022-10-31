@@ -14,7 +14,7 @@ class Contract < ApplicationRecord
   )
 
   resourcify
-  audited
+  tracked
 
   validates_presence_of :name
 
