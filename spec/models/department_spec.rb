@@ -13,14 +13,10 @@ RSpec.describe Department, type: :model do
       expect(subject).to be_valid
     end
 
-    it "is valid without a location" do
-      subject.location = nil
-      expect(subject).to be_valid
-    end
-
-    it "is valid without a manager" do
-      subject.manager = nil
-      expect(subject).to be_valid
+    it "is invalid with invalid attributes" do
+      expect(build(:department, {
+        name: nil
+      })).to_not be_valid
     end
   end
 

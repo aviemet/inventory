@@ -19,19 +19,18 @@ class Component < ApplicationRecord
     }
   )
 
-  audited
+  tracked
 
   monetize :cost_cents, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
-  belongs_to :model
   belongs_to :vendor, required: false
   belongs_to :default_location, class_name: "Location", required: false
+  belongs_to :model
   has_one :category, through: :model
   has_one :manufacturer, through: :model
 
-  validates :qty, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
   validates_presence_of :name
-  validates_presence_of :model_id
+  validates :qty, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
 
   scope :includes_associated, -> { includes([:manufacturer, :category, :vendor]) }
 

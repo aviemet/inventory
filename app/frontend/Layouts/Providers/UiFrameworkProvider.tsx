@@ -65,7 +65,8 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const systemColorScheme = useColorScheme()
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
 		key: 'colorScheme',
-		defaultValue: auth?.user?.user_preferences?.colorScheme || systemColorScheme
+		defaultValue: auth?.user?.user_preferences?.colorScheme || systemColorScheme,
+		getInitialValueInEffect: false,
 	})
 
 	const toggleColorScheme = (value?: ColorScheme) => {

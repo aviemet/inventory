@@ -34,9 +34,14 @@ module Assignable
     end
 
     def history
-      Audited::Audit.where({ auditable_type: "Assignment" })
-        .where("audited_changes -> 'assignable_id' = ?", self.id.to_s)
-        .or(Audited::Audit.where({ auditable_type: "Item", auditable_id: self.id }))
+      PublicActivity::Activity
+        .where("parameters @> ?", {
+          assign_toable_type: self.class.name,
+          assign_toable_id: self.id,
+        }.to_json)
+        .or(PublicActivity::Activity.where({ recipient_type: self.class.name, recipient_id: self.id }))
+        .or(PublicActivity::Activity.where({ trackable_type: self.class.name, trackable_id: self.id }))
+        .order(created_at: :desc)
     end
 
     def set_defaults

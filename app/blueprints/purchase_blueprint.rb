@@ -11,7 +11,7 @@ class PurchaseBlueprint < ApplicationBlueprint
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint
-    association :audits, blueprint: AuditBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :item, blueprint: ItemBlueprint
     association :accessory, blueprint: AccessoryBlueprint
     association :component, blueprint: ComponentBlueprint

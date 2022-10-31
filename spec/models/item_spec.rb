@@ -6,13 +6,21 @@ require "models/concerns/purchasable"
 require "models/concerns/fieldable"
 
 RSpec.describe Item, type: :model do
-  subject {
-    create(:item)
-  }
+  subject { build(:item) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
       expect(subject).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      expect(build(:item, {
+        name: nil
+      })).to_not be_valid
+
+      expect(build(:item, {
+        model: nil
+      })).to_not be_valid
     end
 
     it "uses money-rails to handle cost" do

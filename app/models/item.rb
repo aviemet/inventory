@@ -23,13 +23,13 @@ class Item < ApplicationRecord
   )
 
   resourcify
-  audited
+  tracked
 
   monetize :cost_cents, allow_nil: true
 
   validates_presence_of :name
 
-  has_many :nics
+  has_many :nics, dependent: :destroy
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ip_leases
   has_many :ip_leases, through: :nics
   belongs_to :vendor, required: false
@@ -44,7 +44,9 @@ class Item < ApplicationRecord
 
   scope :no_nics, -> { includes(:nics).where(nics: { id: nil }) }
 
-  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_type, :audits, :ips, :nics, :ip_leases]) }
+  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_type, :activities, :ips, :nics, :ip_leases]) }
+
+  scope :find_by_category, ->(category) { includes([:category]).where('model.category' => category) }
 
   def location
     if assigned?
@@ -54,14 +56,10 @@ class Item < ApplicationRecord
     end
   end
 
-  def self.find_by_category(category)
-    self.includes_associated.where('model.category' => category)
-  end
-
   private
 
   def ensure_nic
-    self << Nic.new if self.nics.empty?
+    self.nics << Nic.new if self.nics.empty?
   end
 
 end

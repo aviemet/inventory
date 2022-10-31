@@ -48,7 +48,8 @@ RSpec.describe "Users", type: :request, inertia: true do
 
     context "invalid credentials" do
       it "redirects back to the login page" do
-        post user_session_url, params: invalid_user_params
+        user = create(:user, password: password, confirmed: true, company: false, person: false)
+        post user_session_url, params: { user: { email: user.email, password: 'Wrong1!' } }
         expect_inertia.to render_component 'Public/Devise/Login'
       end
     end

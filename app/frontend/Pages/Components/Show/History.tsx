@@ -10,7 +10,7 @@ const ComponentHistory = ({ component }: IComponentHistoryProps) => {
 		<>
 			<Heading order={ 3 }>History</Heading>
 
-			<History assignments={ component.assignments } audits={ component.audits } />
+			<History assignments={ component.assignments } activities={ component.activities } />
 		</>
 	)
 }

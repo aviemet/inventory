@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require 'public_activity'
 
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
@@ -6,6 +7,14 @@ require "active_support/core_ext/integer/time"
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
+
+  # Disable auditing during tests
+  PublicActivity.enabled = false
+
+  # Logs all database queries to log/test.log
+  # ActiveRecord.verbose_query_logs = true
+  # config.log_level = :debug
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true.

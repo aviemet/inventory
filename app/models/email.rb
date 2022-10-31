@@ -1,5 +1,5 @@
 class Email < ApplicationRecord
-  audited
+  tracked
 
   belongs_to :contact
   belongs_to :category
