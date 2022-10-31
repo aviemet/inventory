@@ -4,9 +4,15 @@ require_relative '../support/devise'
 RSpec.describe "Assignments", type: :request do
   def assign_toables
     {
-      item: create(:item),
-      person: create(:person),
-      location: create(:location),
+      item: create(:item, { 
+        company: @admin.active_company
+      }),
+      person: create(:person, { 
+        company: @admin.active_company
+      }),
+      location: create(:location, { 
+        company: @admin.active_company
+      }),
     }
   end
 
@@ -23,7 +29,7 @@ RSpec.describe "Assignments", type: :request do
     login_admin
 
     context "with valid parameters" do
-      it "assigns an item to a assignables" do
+      it "assigns an item to assignables" do
         assign_toables.each do |key, model|
           expect {
             post assignments_url, params: { assignment: assignment_params(:item, model) }

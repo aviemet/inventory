@@ -6,6 +6,7 @@ class Nic < ApplicationRecord
   tracked
 
   validates_presence_of :nic_type
+  validates_presence_of :item
 
   belongs_to :item
   has_many :ips, ->{ where active: true }, class_name: "IpLease"

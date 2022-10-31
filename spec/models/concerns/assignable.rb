@@ -6,7 +6,7 @@ shared_examples "assignable" do
 
   describe "Assignments" do
     it "Can be assigned to an assign_toable" do
-      person = create(:person)
+      person = build(:person)
       assignment = subject.assign_to(person)
       expect(assignment.assign_toable_type).to eq("Person")
     end
@@ -19,7 +19,7 @@ shared_examples "assignable:single" do
 
   describe "Assignments Single Item" do
     it "Can reference its current assignment"  do
-      person = create(:person)
+      person = build(:person)
       expect(subject.assigned?).to be(false)
       subject.assign_to(person)
       expect(subject.assigned?).to be(true)
@@ -27,8 +27,8 @@ shared_examples "assignable:single" do
     end
 
     it "Can only have one active assignment" do
-      person = create(:person)
-      location = create(:location)
+      person = build(:person)
+      location = build(:location)
 
       subject.assign_to(person)
       expect {
@@ -38,7 +38,7 @@ shared_examples "assignable:single" do
     end
 
     it "Can be unassigned" do
-      person = create(:person)
+      person = build(:person)
       subject.assign_to(person)
       expect(subject.assigned_to).to eq(person)
       subject.unassign
@@ -53,8 +53,8 @@ shared_examples "assignable:quantity" do
 
   describe "Assets with quantiy assignments", if: @has_quantity do
     it "Can have multiple assignments" do
-      person = create(:person)
-      location = create(:location)
+      person = build(:person)
+      location = build(:location)
       subject.assign_to(person)
       subject.assign_to(location)
       expect(subject.assignments.count).to eq(2)
@@ -62,7 +62,7 @@ shared_examples "assignable:quantity" do
     end
 
     it "Should reduce qty when assigned" do
-      person = create(:person)
+      person = build(:person)
       expect{ subject.assign_to(person) }.to change{ subject.qty }.by(-1)
       qty = 2
       expect{ subject.assign_to(person, qty: qty) }.to change{ subject.qty }.by(-qty)
@@ -73,7 +73,7 @@ shared_examples "assignable:quantity" do
     end
 
     it "Can be unassigned" do
-      person = create(:person)
+      person = build(:person)
       subject.assign_to(person)
       expect{ subject.unassign(subject.assignments.first) }.to change{ subject.qty }.by(1)
     end
@@ -93,15 +93,15 @@ shared_examples "assignable:consume" do
 
   describe "Consumables assets", if: @has_quantity do
     it "Can have multiple assignments" do
-      person = create(:person)
-      location = create(:location)
+      person = build(:person)
+      location = build(:location)
       subject.assign_to(person)
       subject.assign_to(location)
       expect(subject.assignments.count).to eq(2)
     end
 
     it "Should reduce qty when assigned" do
-      person = create(:person)
+      person = build(:person)
       expect{ subject.assign_to(person) }.to change{ subject.qty }.by(-1)
       qty = 2
       expect{ subject.assign_to(person, qty: qty) }.to change{ subject.qty }.by(-qty)

@@ -46,16 +46,14 @@ class Item < ApplicationRecord
 
   scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_type, :activities, :ips, :nics, :ip_leases]) }
 
+  scope :find_by_category, ->(category) { includes([:category]).where('model.category' => category) }
+
   def location
     if assigned?
       assignment.location
     else
       self.default_location
     end
-  end
-
-  def self.find_by_category(category)
-    self.includes_associated.where('model.category' => category)
   end
 
   private
