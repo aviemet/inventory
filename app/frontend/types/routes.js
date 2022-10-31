@@ -557,12 +557,12 @@ export const apiCategories = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[
 
 /**
  * Generates rails route to
- * /api/categories/:id(.:format)
- * @param {any} id
+ * /api/categories/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCategory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const apiCategory = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -574,12 +574,12 @@ export const apiCompanies = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7
 
 /**
  * Generates rails route to
- * /api/companies/:id(.:format)
- * @param {any} id
+ * /api/companies/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCompany = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"companies"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const apiCompany = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"companies"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -618,12 +618,12 @@ export const apiContracts = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7
 
 /**
  * Generates rails route to
- * /api/departments/:id(.:format)
- * @param {any} id
+ * /api/departments/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiDepartment = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const apiDepartment = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -740,12 +740,12 @@ export const apiLicense = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[
 
 /**
  * Generates rails route to
- * /api/locations/:id(.:format)
- * @param {any} id
+ * /api/locations/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiLocation = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const apiLocation = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to

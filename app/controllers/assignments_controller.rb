@@ -41,8 +41,6 @@ class AssignmentsController < ApplicationController
     assignable = assignment.assignable
 
     if assignment.update(assignment_params)
-      ap("UPDATE SUCCSS")
-      ap({ assignment_params: assignment_params })
       redirect_to assignable
     else
       redirect_to send("checkin_#{assignment.assignable_type.downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }

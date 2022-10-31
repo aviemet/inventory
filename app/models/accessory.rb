@@ -24,9 +24,11 @@ class Accessory < ApplicationRecord
 
   monetize :cost_cents
 
-  belongs_to :model
+  validates_presence_of :name
+
   belongs_to :vendor, required: false
   belongs_to :default_location, class_name: "Location", required: false
+  belongs_to :model
   has_one :category, through: :model
   has_one :manufacturer, through: :model
 

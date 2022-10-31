@@ -5,44 +5,21 @@ require 'models/concerns/assign_toable'
 require 'models/concerns/fieldable'
 
 RSpec.describe Person, type: :model do
-  subject {
-    build(:person)
-  }
+  subject { build(:person) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      subject.manager = build(:person)
       expect(subject).to be_valid
     end
 
-    it "is valid without a manager" do
-      subject.manager = nil
-      expect(subject).to be_valid
-    end
-
-    it "is valid without a job title" do
-      subject.job_title = nil
-      expect(subject).to be_valid
-    end
-
-    it "is valid without an employee number" do
-      subject.employee_number = nil
-      expect(subject).to be_valid
-    end
-
-    it "is valid without a manager" do
-      subject.manager = nil
-      expect(subject).to be_valid
-    end
-
-    it "is not valid without a first name" do
-      subject.first_name = nil
-      expect(subject).to_not be_valid
-    end
-
-    it "is not valid without a last name" do
-      subject.last_name = nil
-      expect(subject).to_not be_valid
+    it "is invalid with invalid attributes" do
+      expect(build(:person, {
+        first_name: nil
+      })).to_not be_valid
+      
+      expect(build(:person, {
+        last_name: nil
+      })).to_not be_valid
     end
   end
 

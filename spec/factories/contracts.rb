@@ -3,6 +3,6 @@ FactoryBot.define do
     name { Faker::Name.name }
     vendor
     category
-    association :company, strategy: :create
+    company
   end
 end

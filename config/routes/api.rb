@@ -1,12 +1,12 @@
 namespace :api do
   resources :users, only: [:create, :update]
-  resources :companies, only: [:create, :update]
+  resources :companies, only: [:create, :update], param: :slug
   resources :ownerships, only: [:create, :update]
 
-  resources :departments, only: [:create, :update]
-  resources :locations, only: [:create, :update]
+  resources :departments, only: [:create, :update], param: :slug
+  resources :locations, only: [:create, :update], param: :slug
 
-  resources :categories, only: [:create, :update]
+  resources :categories, only: [:create, :update], param: :slug
   resources :status_types, only: [:create, :update]
 
   resources :items, path: :hardware, only: [:update] do

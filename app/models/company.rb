@@ -2,7 +2,6 @@ class Company < ApplicationRecord
   include Contactable
   include PgSearch::Model
 
-  after_create :seed_categories
   before_destroy :safely_orphan_or_destroy_dependencies
 
   pg_search_scope(
@@ -74,28 +73,6 @@ class Company < ApplicationRecord
       self.orders.destroy_all
       self.categories.destroy_all
       self.users.each{ |user| user.destroy }
-    end
-  end
-
-  def seed_categories
-    {
-      Item: ["Desktop", "Laptop", "Server"],
-      Accessory: ["Keyboard", "Mouse"],
-      Consumable: ["Toner", "Paper"],
-      Component: ["Memory", "SSD", "HDD"],
-      License: ["Operating System", "Office Software"],
-      Email: ["Work", "Personal"],
-      Address: ["Work", "Personal"],
-      Phone: ["Home", "Mobile", "Office"],
-      Contract: ["Utility", "Leasing", "SLA"]
-    }.each do |type, categories|
-      categories.each do |category|
-        Category.create!({
-          name: category,
-          categorizable_type: type,
-          company: self,
-        })
-      end
     end
   end
 
