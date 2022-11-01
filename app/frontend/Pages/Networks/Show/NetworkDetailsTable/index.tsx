@@ -4,6 +4,7 @@ import { useMantineTheme } from '@mantine/core'
 import { useDebouncedState, useViewportSize } from '@mantine/hooks'
 import { Table } from '@/Components'
 import NetworkTable from './Table'
+import { useNetworkContext } from '..'
 
 interface INetworkDetailsTableProps {
 	hosts: string[]
@@ -12,6 +13,8 @@ interface INetworkDetailsTableProps {
 }
 
 const NetworkDetailsTable = ({ hosts, ips, pagination }: INetworkDetailsTableProps) => {
+	const { network } = useNetworkContext()
+
 	const { breakpoints } = useMantineTheme()
 	const calculateNumTableRows = (width: number) => {
 		if(width === 0) return 3 // Default to 3 while browser window is loading

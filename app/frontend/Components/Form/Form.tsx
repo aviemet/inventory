@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useForm as useInertiaForm } from '@inertiajs/inertia-react'
 import { fillEmptyValues, getNestedValue, setNestedValue } from '@/lib'
 import { createContext } from '@/Components/Hooks'
@@ -11,7 +11,7 @@ import axios from 'axios'
 const [useForm, FormProvider] = createContext<Inertia.FormProps>()
 export { useForm, FormProvider }
 
-export type TInputType = 'button'|'checkbox'|'color'|'currency'|'date'|'datetime-local'|'email'|'file'|'hidden'|'image'|'month'|'number'|'password'|'radio'|'range'|'reset'|'search'|'submit'|'tel'|'text'|'time'|'url'
+export type TInputType = 'button'|'checkbox'|'color'|'currency'|'date'|'datetime-local'|'email'|'file'|'hidden'|'image'|'month'|'number'|'password'|'radio'|'range'|'reset'|'search'|'select'|'submit'|'tel'|'text'|'time'|'url'
 
 interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'> {
 	model?: string
@@ -27,22 +27,25 @@ interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'>
 	separator?: string
 }
 
-function Form<T extends Record<keyof T, unknown>>({
-	children,
-	model,
-	data,
-	method = 'post',
-	to,
-	async = false,
-	grid = true,
-	onSubmit,
-	onChange,
-	onSuccess,
-	onError,
-	className,
-	separator = '.',
-	...props
-}: IFormProps<T>) {
+const Form = <T extends Record<keyof T, unknown>>(
+	{
+		children,
+		model,
+		data,
+		method = 'post',
+		to,
+		async = false,
+		grid = true,
+		onSubmit,
+		onChange,
+		onSuccess,
+		onError,
+		className,
+		separator = '.',
+		...props
+	}: IFormProps<T>,
+	ref: React.ForwardedRef<HTMLFormElement>
+) => {
 	const form: IndexedInertiaFormProps = useInertiaForm<Record<string, unknown>>(`${method}/${model}`, fillEmptyValues(data))
 
 	const { classes } = useFormStyles()
@@ -75,8 +78,6 @@ function Form<T extends Record<keyof T, unknown>>({
 	const getErrors = useCallback((key: string) => {
 		return getNestedValue(form.errors, key, separator)
 	}, [form.errors])
-
-	const formRef = useRef<HTMLFormElement>(null)
 
 	/**
 	 * Submits the form. If async was passed to the Form component, submits using axios,
@@ -136,7 +137,7 @@ function Form<T extends Record<keyof T, unknown>>({
 				<form
 					onSubmit={ handleSubmit }
 					className={ cx({ 'format-grid': grid }, className) }
-					ref={ formRef }
+					ref={ ref }
 					{ ...props }
 				>
 					{ children }
@@ -146,4 +147,4 @@ function Form<T extends Record<keyof T, unknown>>({
 	)
 }
 
-export default React.memo(Form)
+export default React.memo(React.forwardRef(Form))

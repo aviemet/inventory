@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, forwardRef } from 'react'
 import { useForm, useInputProps } from './index'
 import Field from './Field'
 import SearchableDropdownInput, { type ISearchableDropdownProps } from '../Inputs/SearchableDropdown'
@@ -18,23 +18,26 @@ interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onC
 	newForm?: React.ReactElement
 }
 
-const SearchableDropdown = ({
-	options,
-	label,
-	name,
-	model,
-	required,
-	defaultValue,
-	getLabel = option => option.name,
-	getValue = option => String(option.id),
-	onChange,
-	onDropdownOpen,
-	onDropdownClose,
-	fetchOnOpen,
-	newForm,
-	id,
-	...props
-}: IInputProps) => {
+const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
+	{
+		options,
+		label,
+		name,
+		model,
+		required,
+		defaultValue,
+		getLabel = option => option.name,
+		getValue = option => String(option.id),
+		onChange,
+		onDropdownOpen,
+		onDropdownClose,
+		fetchOnOpen,
+		newForm,
+		id,
+		...props
+	},
+	ref
+) => {
 	const form = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
 
@@ -63,6 +66,7 @@ const SearchableDropdown = ({
 		<Wrapper>
 			<Field type="select" required={ required } errors={ !!form.errors?.[name] }>
 				<SearchableDropdownInput
+					ref={ ref }
 					id={ id || inputId }
 					name={ inputName }
 					options={ options }
@@ -84,7 +88,7 @@ const SearchableDropdown = ({
 			/> }
 		</Wrapper>
 	)
-}
+})
 
 interface IWithChildren {
 	children?:React.ReactNode
