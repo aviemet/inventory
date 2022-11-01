@@ -88,3 +88,7 @@ export {
 export {
 	TbChevronsDown as DoubleDownArrowIcon,
 } from 'react-icons/tb'
+
+export {
+	HiOutlineClock as ClockIcon,
+} from 'react-icons/hi'

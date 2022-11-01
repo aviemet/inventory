@@ -379,6 +379,16 @@ export const apiItemNics: ((
 
 /**
  * Generates rails route to
+ * /api/hardware(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiItems: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/licenses/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options

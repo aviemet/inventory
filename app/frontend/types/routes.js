@@ -731,6 +731,14 @@ export const apiItemNics = __jsr.r({"item_id":{"r":true},"format":{}}, [2,[7,"/"
 
 /**
  * Generates rails route to
+ * /api/hardware(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiItems = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"hardware"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /api/licenses/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options

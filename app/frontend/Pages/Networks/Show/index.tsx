@@ -1,8 +1,10 @@
 import React from 'react'
 import { Section, Menu, Flex, Heading, Table, Container, Page } from '@/Components'
+import { createContext } from '@/Components/Hooks'
 import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
 import { EditIcon } from '@/Components/Icons'
+import { Schema } from 'tabler-icons-react'
 
 interface INetworkDetails extends Schema.Network {
 	hosts: string[]
@@ -14,6 +16,9 @@ interface IShowNetworkProps {
 	ips: Schema.IpLease[]
 	pagination: Schema.Pagination
 }
+
+const [useNetworkContext, NetworkContextProvider] = createContext<{ network: Schema.Network }>()
+export { useNetworkContext }
 
 const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 	const title = network.name || 'Show Network'
@@ -98,11 +103,13 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 			<Section>
 				<Heading order={ 2 }>Addresses</Heading>
 
-				<NetworkDetailsTable
-					hosts={ network.hosts }
-					ips={ ips }
-					pagination={ pagination }
-				/>
+				<NetworkContextProvider value={ { network } }>
+					<NetworkDetailsTable
+						hosts={ network.hosts }
+						ips={ ips }
+						pagination={ pagination }
+					/>
+				</NetworkContextProvider>
 			</Section>
 		</Page>
 	)

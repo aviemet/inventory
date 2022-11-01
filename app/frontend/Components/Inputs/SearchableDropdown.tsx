@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { forwardRef, useMemo } from 'react'
 import { Select, type SelectProps } from '@mantine/core'
 import Label from './Label'
 
@@ -10,20 +10,23 @@ export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 	filterMatchKeys?: string[]
 }
 
-const SearchableDropdownComponent = ({
-	options = [],
-	getLabel = option => option.name,
-	getValue = option => String(option.id),
-	onChange,
-	onOpen,
-	filterMatchKeys,
-	label,
-	required,
-	id,
-	searchable = true,
-	clearable = true,
-	...props
-}: ISearchableDropdownProps) => {
+const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDropdownProps>((
+	{
+		options = [],
+		getLabel = option => option.name,
+		getValue = option => String(option.id),
+		onChange,
+		onOpen,
+		filterMatchKeys,
+		label,
+		required,
+		id,
+		searchable = true,
+		clearable = true,
+		...props
+	},
+	ref
+) => {
 	const data = useMemo(() => options.map(option => ({ label: getLabel(option), value: getValue(option) })), [options])
 
 	const handleChange = (value: string|null) => {
@@ -36,6 +39,7 @@ const SearchableDropdownComponent = ({
 				{ label }
 			</Label> }
 			<Select
+				ref={ ref }
 				searchable
 				size="md"
 				data={ data }
@@ -47,6 +51,6 @@ const SearchableDropdownComponent = ({
 			/>
 		</>
 	)
-}
+})
 
 export default React.memo(SearchableDropdownComponent)
