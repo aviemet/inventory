@@ -1,7 +1,5 @@
 import React, { forwardRef } from 'react'
 import { SearchableDropdown } from '@/Components/Form'
-import { Routes } from '@/lib'
-import ItemsForm from '@/Pages/Items/Form'
 
 interface IItemsDropdown extends IDropdownWithModalButton {
 	items?: Schema.Item[]
@@ -25,9 +23,3 @@ const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdown>((
 
 export default ItemsDropdown
 
-/*
-
-			newForm={ <ItemsForm
-				to={ Routes.items() }
-			/> }
-			 */
