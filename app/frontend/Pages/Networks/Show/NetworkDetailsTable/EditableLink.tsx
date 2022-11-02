@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { Routes } from '@/lib'
 import { Link, Group } from '@/Components'
 import { Form } from '@/Components/Form'
@@ -10,13 +10,19 @@ import { useClickOutside, useToggle } from '@mantine/hooks'
 import cx from 'classnames'
 import DhcpConfirmModal from './DhcpConfirmModal'
 
+import { useNetworkContext } from '..'
+import IPAddress from '@/lib/IPAddress'
+
 interface IEditableLinkProps {
 	item?: Schema.Item
-	withinDhcp?: boolean
+	ip?: string
 }
 
-const EditableLink = ({ item, withinDhcp = false }: IEditableLinkProps) => {
+const EditableLink = ({ item, ip }: IEditableLinkProps) => {
+	const { network } = useNetworkContext()
+
 	const [editing, toggleEditing] = useToggle([false, true])
+	const [confirmInDhcp, setConfirmInDhcp] = useState(false)
 	const [modalOpen, setModalOpen] = useState(false)
 	const clickOutsideRef = useClickOutside(useCallback(() => {
 		if(!modalOpen) {
@@ -25,11 +31,28 @@ const EditableLink = ({ item, withinDhcp = false }: IEditableLinkProps) => {
 	}, [modalOpen]))
 
 	const handleEdit = () => {
+		const withinDhcp = withinDhcpRange()
+
 		if(!editing && withinDhcp) {
 			setModalOpen(true)
+		} else {
+			toggleEditing()
 		}
-		toggleEditing()
 	}
+
+	const withinDhcpRange = () => {
+		if(!ip || !network.dhcp_start || !network.dhcp_end) return true
+
+		const host = new IPAddress(ip)
+
+		return host.between(new IPAddress(network.dhcp_start), new IPAddress(network.dhcp_end))
+	}
+
+	useEffect(() => {
+		if(!modalOpen && confirmInDhcp) {
+			toggleEditing()
+		}
+	}, [modalOpen])
 
 	return(
 		<>
@@ -71,7 +94,12 @@ const EditableLink = ({ item, withinDhcp = false }: IEditableLinkProps) => {
 					</ActionIcon>
 				</Box>
 			</Group>
-			<DhcpConfirmModal open={ modalOpen } setOpen={ setModalOpen } />
+
+			<DhcpConfirmModal
+				open={ modalOpen }
+				setOpen={ setModalOpen }
+				setConfirm={ setConfirmInDhcp }
+			/>
 		</>
 	)
 }
