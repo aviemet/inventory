@@ -31,10 +31,7 @@ const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 						}) }>
 							<Table.Cell fitContent>{ host }</Table.Cell>
 							<Table.Cell>
-								<EditableLink
-									item={ item }
-									withinDhcp={ true }
-								/>
+								<EditableLink item={ item } ip={ host } />
 							</Table.Cell>
 						</Table.Row>
 					)
