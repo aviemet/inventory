@@ -1,5 +1,16 @@
 import * as ipAddress from 'ip-address'
 
+// const v4ToBinary = (addr: number[]) => {
+// 	const outOfBounds = addr.some(octet => octet < 0 || octet > 255)
+// 	if(addr.length !== 3 || outOfBounds) {
+// 		throw 'Invalid argument. Must pass an array of length 4 containing integers between 0 and 255'
+// 	}
+
+// 	return addr.reduce((str, octet) => {
+// 		return str + (octet >>> 0).toString(2).padStart(8, '0')
+// 	}, '')
+// }
+
 class IPAddress {
 	address: ipAddress.Address4 | ipAddress.Address6
 
@@ -20,6 +31,7 @@ class IPAddress {
 
 	between(start: IPAddress, end: IPAddress) {
 		const binary = this.toBinary()
+
 		return binary >= start.toBinary() && binary <= end.toBinary()
 	}
 
@@ -39,5 +51,3 @@ class IPAddress {
 }
 
 export default IPAddress
-
-
