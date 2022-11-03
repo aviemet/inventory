@@ -12,7 +12,7 @@ const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdownProps>((
 	ref
 ) => {
 	const [items, setItems] = useState([])
-
+	console.log({ items })
 	useEffect(() => {
 		axios.get(Routes.apiItems())
 			.then(response => {

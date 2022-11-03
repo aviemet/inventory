@@ -3,29 +3,29 @@
 if Rails.env == "development"
 
   if User.count == 0 || Company.count == 0
-    person = Person.new({
+    company = Company::AsSetup.create!({
+      name: "Example Company",
+      default_currency: "USD",
+    })
+
+    person = Person.create!({
       first_name: "Avram",
       middle_name: "True",
       last_name: "Walden",
       employee_number: "1000",
       job_title: "IT Manager",
+      company: company,
     })
-    user = User.new({
+  
+    user = User.create!({
       email: "aviemet@gmail.com",
       password: "Complex1!",
       confirmed_at: Date.new,
       person: person,
     })
-    user.add_role :super_admin
 
-    company = Company.create!({
-      name: "Example Company",
-      default_currency: "USD",
-    })
+    # user.add_role :super_admin
     user.add_role :admin, company
-    person.company = company
-    person.save
-    user.save
   end
 
   company = Company.first
@@ -132,6 +132,7 @@ if Rails.env == "development"
   if Item.count == 0
     ActiveRecord::Base.transaction do
       network = IPAddress.parse("10.10.10.0/24")
+      network_array = network.to_a
 
       105.times do |n|
         serial = Faker::Alphanumeric.alphanumeric(number: 8, min_alpha: 3, min_numeric: 3).upcase
@@ -152,8 +153,15 @@ if Rails.env == "development"
         })
 
         if n % 2 != 0
+          if n < 80
+            ip = network_array[n]
+            ip.prefix = 32
+          else
+            ip = Faker::Internet.unique.private_ip_v4_address
+          end
+
           i.nics.first.ip_leases << IpLease.new({
-            address: n < 80 ? network.to_a[n] : Faker::Internet.unique.private_ip_v4_address,
+            address: ip,
           })
         end
       end
