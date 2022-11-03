@@ -25,9 +25,9 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
-		model?: Model;
 		vendor?: Vendor;
 		default_location?: Location;
+		model?: Model;
 		category?: Category;
 		manufacturer?: Manufacturer;
 	}
@@ -122,6 +122,41 @@ declare namespace Schema {
 		categories?: Category[];
 	}
 
+	interface CompanyAsSetup {
+		id: number;
+		name: string;
+		slug: string;
+		default_currency: string;
+		created_at: string;
+		updated_at: string;
+		activities?: PublicActivityActivity[];
+		contact?: Contact;
+		addresses?: Address[];
+		phones?: Phone[];
+		emails?: Email[];
+		websites?: Website[];
+		roles?: Role[];
+		users?: User[];
+		ldaps?: Ldap[];
+		ownerships?: Ownership[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
+		models?: Model[];
+		departments?: Department[];
+		locations?: Location[];
+		licenses?: License[];
+		contracts?: Contract[];
+		networks?: Network[];
+		people?: Person[];
+		purchases?: Purchase[];
+		vendors?: Vendor[];
+		manufacturers?: Manufacturer[];
+		orders?: Order[];
+		categories?: Category[];
+	}
+
 	interface Component {
 		id: number;
 		name?: string | null;
@@ -146,9 +181,9 @@ declare namespace Schema {
 		status_type?: StatusType;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
-		model?: Model;
 		vendor?: Vendor;
 		default_location?: Location;
+		model?: Model;
 		category?: Category;
 		manufacturer?: Manufacturer;
 	}
@@ -176,9 +211,9 @@ declare namespace Schema {
 		status_type?: StatusType;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
-		model?: Model;
 		vendor?: Vendor;
 		default_location?: Location;
+		model?: Model;
 		category?: Category;
 		manufacturer?: Manufacturer;
 	}

@@ -21,7 +21,6 @@ interface IEditableLinkProps {
 const EditableLink = ({ item, ip }: IEditableLinkProps) => {
 	const { network } = useNetworkContext()
 
-
 	const [editing, setEditing] = useState(false)
 	const [confirmInDhcp, setConfirmInDhcp] = useState(false)
 	const [modalOpen, setModalOpen] = useState(false)
