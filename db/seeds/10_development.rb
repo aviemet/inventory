@@ -24,11 +24,12 @@ if Rails.env == "development"
       person: person,
     })
 
-    # user.add_role :super_admin
+    user = User.first
+    company = Company.first
+
+    user.add_role :super_admin
     user.add_role :admin, company
   end
-
-  company = Company.first
 
   if Location.count == 0
     [
