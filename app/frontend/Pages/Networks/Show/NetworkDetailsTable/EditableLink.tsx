@@ -26,11 +26,11 @@ const EditableLink = ({ item, ip }: IEditableLinkProps) => {
 	const [modalOpen, setModalOpen] = useState(false)
 
 	const dropdownRef = useRef<HTMLInputElement>(null)
-	const clickOutsideRef = useClickOutside(useCallback(() => {
-		if(!modalOpen) {
-			setEditing(false)
-		}
-	}, [modalOpen]))
+	// const clickOutsideRef = useClickOutside(useCallback(() => {
+	// 	if(!modalOpen) {
+	// 		setEditing(false)
+	// 	}
+	// }, [modalOpen]))
 
 	const handleEditButton = () => {
 		const withinDhcp = withinDhcpRange()
@@ -73,7 +73,6 @@ const EditableLink = ({ item, ip }: IEditableLinkProps) => {
 					{
 						editing ?
 							<Form
-								ref={ clickOutsideRef }
 								model="items"
 								data={ { item: { id: '' }, ip: '' } }
 								grid={ false }

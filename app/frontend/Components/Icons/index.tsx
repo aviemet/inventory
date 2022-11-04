@@ -64,6 +64,7 @@ export {
 } from 'react-icons/io5'
 
 export {
+	BsCheck2Circle as CheckIcon,
 	// BsKeyboardFill as AccessoriesIcon
 } from 'react-icons/bs'
 
