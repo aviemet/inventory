@@ -1,15 +1,21 @@
-class CreateComponents < ActiveRecord::Migration[6.1]
+class CreateAssets < ActiveRecord::Migration[6.0]
   def change
-    create_table :components do |t|
+    create_table :assets do |t|
+      t.string :type, null: false
+
       t.string :name
+      t.string :asset_tag, index: { unique: true }
       t.string :serial, index: { unique: true }
-      t.integer :min_qty
-      t.integer :qty
       t.monetize :cost, amount: { null: true, default: nil }
       t.datetime :purchased_at
+      t.boolean :requestable, null: false, default: false
+
+      t.integer :min_qty
+      t.integer :qty
+
       t.text :notes
       t.references :model, null: false, foreign_key: true
-      t.references :vendor, null: false, foreign_key: true
+      t.references :vendor, null: true, foreign_key: true
       t.references :default_location, null: true, foreign_key: { to_table: :locations }
 
       t.timestamps

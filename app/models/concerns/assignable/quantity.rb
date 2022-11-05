@@ -5,6 +5,8 @@ module Assignable
     include Assignable
 
     included do
+      validates :qty, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
+
       def unassign(assignment = self.assignments.where(active: true).last, returned_at: Time.current)
         success = false
 

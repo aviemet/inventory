@@ -32,6 +32,8 @@ if Rails.env == "development"
   end
 
   if Location.count == 0
+    company = Company.first
+
     [
       {
         name: "San Francisco Office",
@@ -46,6 +48,8 @@ if Rails.env == "development"
   end
 
   if Department.count == 0
+    company = Company.first
+
     [
       {
         name: "IT Dept",
@@ -61,6 +65,8 @@ if Rails.env == "development"
   end
 
   if Manufacturer.count == 0
+    company = Company.first
+
     ["Apple", "Lenovo", "Cisco", "HP", "Samsung", "SHARP"].each do |manufacturer|
       Manufacturer.create!({
         name: manufacturer,
@@ -70,6 +76,8 @@ if Rails.env == "development"
   end
 
   if Model.count == 0
+    company = Company.first
+
     [
       {
         name: "MacBook Pro",
@@ -110,6 +118,8 @@ if Rails.env == "development"
   end
 
   if Vendor.count == 0
+    company = Company.first
+
     [
       {
         name: "Apple",
@@ -131,6 +141,8 @@ if Rails.env == "development"
   end
 
   if Item.count == 0
+    company = Company.first
+
     ActiveRecord::Base.transaction do
       network = IPAddress.parse("10.10.10.0/24")
       network_array = network.to_a
@@ -170,6 +182,8 @@ if Rails.env == "development"
   end
 
   if Contract.count == 0
+    company = Company.first
+
     vendor = Vendor.create!({
       name: "Unwired",
       url: "www.unwired.com",
@@ -188,6 +202,8 @@ if Rails.env == "development"
   end
 
   if License.count == 0
+    company = Company.first
+
     License.create!({
       name: "Microsoft Office",
       seats: Faker::Number.digit,
@@ -207,6 +223,8 @@ if Rails.env == "development"
   end
 
   if Accessory.count == 0
+    company = Company.first
+
     Accessory.create!({
       name: "Apple Keyboard",
       serial: Faker::Device.serial,
@@ -222,6 +240,8 @@ if Rails.env == "development"
   end
 
   if Consumable.count == 0
+    company = Company.first
+
     Consumable.create!({
       name: "Black Toner",
       qty: 3,
@@ -236,6 +256,8 @@ if Rails.env == "development"
   end
 
   if Component.count == 0
+    company = Company.first
+
     Component.create!({
       name: "Samsung Evo 850",
       qty: 3,
@@ -249,6 +271,8 @@ if Rails.env == "development"
   end
 
   if Network.count == 0
+    company = Company.first
+
     [
       {
         name: "Normal /24",
@@ -279,6 +303,8 @@ if Rails.env == "development"
   end
 
   if Ldap.count == 0
+    company = Company.first
+
     Ldap.create({
       host: "10.10.20.31",
       port: 389,

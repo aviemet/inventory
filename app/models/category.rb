@@ -16,7 +16,7 @@ class Category < ApplicationRecord
 
   tracked
 
-  @categorizable_types = %w(Accessory Address Component Consumable Contact Contract Department Email Item License Location Model Order Person Phone Ticket User Vendor Website)
+  @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Email License Location Model Order Person Phone Ticket User Vendor Website)
 
   validates_inclusion_of :categorizable_type, in: @categorizable_types, allow_nil: false
   validates_presence_of :categorizable_type

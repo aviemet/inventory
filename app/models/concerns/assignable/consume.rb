@@ -5,6 +5,8 @@ module Assignable
     include Assignable
 
     included do
+      validates :qty, numericality: { greater_than_or_equal_to: 0 }
+
       def _after_assignment(assignment, _params)
         return if assignment.qty.nil?
 

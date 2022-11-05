@@ -1,41 +1,10 @@
-class Consumable < ApplicationRecord
-  include Ownable
+class Consumable < Asset
   include Assignable::Consume
-  include Purchasable
-  include Fieldable
-  include PgSearch::Model
 
-  pg_search_scope(
-    :search, 
-    against: [:name], associated_against: {
-      model: [:name, :model_number],
-      vendor: [:name],
-      default_location: [:name],
-      category: [:name],
-      manufacturer: [:name]
-    }, using: {
-      tsearch: { prefix: true }, 
-      trigram: {}
-    }
-  )
+  attribute :type, default: :Consumable
 
-  tracked
+  default_scope { where(type: :Consumable) }
 
-  monetize :cost_cents
-
-  belongs_to :vendor, required: false
-  belongs_to :default_location, class_name: "Location", required: false
-  belongs_to :model
-  has_one :category, through: :model
-  has_one :manufacturer, through: :model
-
-  validates_presence_of :name
-  validates :qty, numericality: { greater_than_or_equal_to: 0 }
-
-  scope :includes_associated, -> { includes([:manufacturer, :category, :vendor, :model]) }
-
-  def self.find_by_category(category)
-    self.includes(:model, :category).where('model.category' => category)
-  end
+  scope :includes_associated, -> { includes([:manufacturer, :category, :vendor, :model, :activities]) }
 
 end
