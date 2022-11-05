@@ -11,7 +11,7 @@ class Network < ApplicationRecord
     }
   )
 
-  audited
+  tracked
 
   validates :address, presence: true
   validate :is_network
@@ -19,6 +19,8 @@ class Network < ApplicationRecord
   private
 
   def is_network
+    return unless self.address
+
     if self.address&.prefix != 32 && !self.address&.network?
       self.address = self.address.find_adjacent_subnet
     end

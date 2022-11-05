@@ -14,7 +14,7 @@ class Category < ApplicationRecord
 
   slug :slug_from_category_type
 
-  audited
+  tracked
 
   @categorizable_types = %w(Accessory Address Component Consumable Contact Contract Department Email Item License Location Model Order Person Phone Ticket User Vendor Website)
 

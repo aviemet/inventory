@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/items", type: :request do
-  def valid_attributes_hash
+  def valid_attributes
     {
       item: attributes_for(:item,
         model_id: create(:model).id,
@@ -12,19 +12,13 @@ RSpec.describe "/items", type: :request do
     }
   end
   
-  def invalid_attributes_hash
+  def invalid_attributes
    { 
      item: {
        name: "",
      }
    }
   end
-  
-  # Item. As you add validations to Item, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { valid_attributes_hash }
-
-  let(:invalid_attributes) { invalid_attributes_hash }
 
   describe "POST /create" do
     login_admin
@@ -60,17 +54,16 @@ RSpec.describe "/items", type: :request do
     login_admin
 
     context "with valid parameters" do
-      let(:new_attributes) { valid_attributes_hash }
-      # it "updates the requested item" do
-      #   item = create(:item)
-      #   patch item_url(item), params: { item: new_attributes }
-      #   item.reload
-      #   # skip("Add assertions for updated state")
-      # end
+      it "updates the requested item" do
+        item = create(:item)
+        patch item_url(item), params: { item: { name: "Changed" } }
+        item.reload
+        expect(item.name).to eq("Changed")
+      end
 
       it "redirects to the item" do
         item = create(:item)
-        patch item_url(item), params: { item: new_attributes }
+        patch item_url(item), params: { item: { name: "Changed" } }
         item.reload
         expect(response).to redirect_to(item_url(item))
       end

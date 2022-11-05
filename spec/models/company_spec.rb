@@ -2,9 +2,7 @@ require 'rails_helper'
 require 'models/concerns/contactable'
 
 RSpec.describe Company, type: :model do
-  subject {
-    build(:company)
-  }
+  subject { build(:company) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
