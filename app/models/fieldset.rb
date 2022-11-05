@@ -1,3 +1,3 @@
 class Fieldset < ApplicationRecord
-  audited
+  tracked
 end

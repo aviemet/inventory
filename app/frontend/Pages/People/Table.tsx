@@ -47,7 +47,7 @@ const PeopleTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							{ person.department && <Link href={ Routes.department(person.department) }>
+							{ person.department && <Link href={ Routes.department(person.department.slug) }>
 								{ person.department?.name }
 							</Link> }
 						</Table.Cell>

@@ -41,8 +41,6 @@ class AssignmentsController < ApplicationController
     assignable = assignment.assignable
 
     if assignment.update(assignment_params)
-      ap("UPDATE SUCCSS")
-      ap({ assignment_params: assignment_params })
       redirect_to assignable
     else
       redirect_to send("checkin_#{assignment.assignable_type.downcase.singularize}_path", id: assignable), inertia: { errors: assignment.errors }
@@ -51,9 +49,13 @@ class AssignmentsController < ApplicationController
 
   # PATCH/PUT /assignments/:id/unassign
   def unassign
+    PublicActivity.enabled = false
+
     assignable = assignment.assignable
 
     if assignable.unassign(assignment, returned_at: assignment_params&.[](:returned_at))
+      PublicActivity.enabled = true
+      assignment.create_activity key: 'assignment.end'
       redirect_to assignable
     else
       redirect_to(

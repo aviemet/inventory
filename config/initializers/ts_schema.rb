@@ -64,7 +64,7 @@ TsSchema.setup do |config|
   #  which don't have a model file. (as strings or symbols)
   #
   config.additional_models = [
-    "Audited::Audit"
+    "PublicActivity::Activity"
   ]
 
 

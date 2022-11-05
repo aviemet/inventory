@@ -26,7 +26,7 @@ class UserBlueprint < ApplicationBlueprint
 
   view :associations do
     association :roles, blueprint: RoleBlueprint
-    association :audits, blueprint: AuditBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :person, blueprint: PersonBlueprint
     association :active_company, blueprint: CompanyBlueprint
     association :companies, blueprint: CompanyBlueprint

@@ -24,7 +24,7 @@ class ComponentBlueprint < ApplicationBlueprint
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint
     association :purchase, blueprint: PurchaseBlueprint
-    association :audits, blueprint: AuditBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :default_location, blueprint: LocationBlueprint
@@ -44,7 +44,7 @@ class ComponentBlueprint < ApplicationBlueprint
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint
     association :purchase, blueprint: PurchaseBlueprint
-    association :audits, blueprint: AuditBlueprint
+    association :activities, blueprint: ActivityBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :default_location, blueprint: LocationBlueprint

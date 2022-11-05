@@ -16,7 +16,7 @@ class Vendor < ApplicationRecord
 
   slug :name
 
-  audited
+  tracked
 
   has_many :contracts
   has_many :items
@@ -24,6 +24,8 @@ class Vendor < ApplicationRecord
   has_many :consumables
   has_many :components
   has_many :licenses
+
+  validates_presence_of :name
 
   scope :includes_associated, -> { includes([:contracts, :items, :accessories, :consumables, :components, :licenses]) }
 end

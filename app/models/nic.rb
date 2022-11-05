@@ -3,9 +3,10 @@ class Nic < ApplicationRecord
 
   after_initialize :set_defaults
 
-  audited
+  tracked
 
   validates_presence_of :nic_type
+  validates_presence_of :item
 
   belongs_to :item
   has_many :ips, ->{ where active: true }, class_name: "IpLease"

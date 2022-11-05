@@ -1,50 +1,56 @@
 import React from 'react'
 import { has } from 'lodash'
-import { capitalize } from '@/lib'
+import { capitalize, polymorphicRoute } from '@/lib'
 import { CircleDotIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
 import AssignmentHistoryContent from './AssignmentHistoryContent'
 import AuditHistoryContent from './AuditHistoryContent'
 import ReturnedHistoryContent from './ReturnedHistoryContent'
-
-import { type TReturn } from '..'
+import Link from '@/Components/Link'
 
 type TTimelineData = {
-	title: string
+	title: React.ReactNode
 	content: React.ReactNode
 	icon: React.ReactNode
 	color: string
 	lineStyle: 'dashed'|'dotted'|'solid'
 }
 
-export const buildTimelineData = (event: Schema.Assignment|Schema.AuditedAudit|TReturn) => {
+export const buildTimelineData = (activity: Schema.PublicActivityActivity, assignment?: Schema.Assignment) => {
+	console.log({ activity, assignment })
 	const timelineData: TTimelineData = {
-		title: '',
+		title: activity.key ? `${capitalize(activity.key.split('.')[1])}d` : '',
 		content: <></>,
 		icon: <CircleDotIcon />,
 		color: '',
 		lineStyle: 'solid'
 	}
 
-	// Audit
-	if(has(event, 'auditable_type')) {
-		timelineData.title = `${capitalize((event as Schema.AuditedAudit).action)}d`
-		timelineData.content = <AuditHistoryContent event={ event } />
-		timelineData.lineStyle = 'dotted'
-
-	// Assignment Return
-	} else if(has(event, 'type') && (event as TReturn).type === 'return') {
-		timelineData.title = 'Returned'
-		timelineData.content = <ReturnedHistoryContent event={ event as TReturn } />
-		timelineData.icon = <CheckinIcon />
-		timelineData.color = 'teal'
-
 	// Assignment
-	} else {
-		timelineData.title = 'Assigned'
-		timelineData.content = <AssignmentHistoryContent event={ event as Schema.Assignment } />
+	if(activity.key === 'assignment.create') {
+		if(activity.parameters) {
+			timelineData.title = <>Assigned to <Link href={ polymorphicRoute(activity.parameters.assign_toable_type, activity.parameters.assign_toable_id) }>
+				{ assignment ? assignment.assign_toable.name : '' }
+			</Link> </>
+		}
+		timelineData.content = assignment ?
+			<AssignmentHistoryContent activity={ activity } />
+			:
+			<></>
 		timelineData.icon = <CheckoutIcon />
 		timelineData.color = 'teal'
 		timelineData.lineStyle = 'dashed'
+
+	// Assignment Return
+	} else if(activity.key === 'assignment.end') {
+		timelineData.title = 'Returned'
+		timelineData.content = <ReturnedHistoryContent activity={ activity } />
+		timelineData.icon = <CheckinIcon />
+		timelineData.color = 'teal'
+
+	// Audit
+	} else {
+		timelineData.content = <AuditHistoryContent activity={ activity as Schema.PublicActivityActivity } />
+		timelineData.lineStyle = 'dotted'
 	}
 
 	return timelineData

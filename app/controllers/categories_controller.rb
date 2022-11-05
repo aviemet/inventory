@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   include Searchable
 
   expose :categories, -> {  search(@active_company.categories.all, sortable_fields) }
-  expose :category, -> { @active_company.categories.find_by_slug(params[:slug]) }
+  expose :category, -> { @active_company.categories.includes_associated.find_by_slug(params[:slug]) }
 
   # GET /categories
   def index
@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
     }
   end
 
-  # GET /categories/:id
+  # GET /categories/:slug
   def show
     paginated_records = search(category.records).page(params[:page] || 1)
 
@@ -38,7 +38,7 @@ class CategoriesController < ApplicationController
     }
   end
 
-  # GET /categories/:id/edit
+  # GET /categories/:slug/edit
   def edit
     render inertia: "Categories/Edit", props: {
       category: category.render(view: :edit)
@@ -47,31 +47,25 @@ class CategoriesController < ApplicationController
 
   # POST /categories
   def create
-    respond_to do |format|
-      if category.save
-        format.html { redirect_to category, notice: 'Category was successfully created.' }
-        format.json { render :show, status: :created, location: category }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: category.errors, status: :unprocessable_entity }
-      end
+    category = Category.new category_params
+    category.company = @active_company
+    if category.save
+      redirect_to category, notice: 'Category was successfully created'
+    else
+      redirect_to new_category_path, inertia: { errors: category.errors }
     end
   end
 
-  # PATCH/PUT /categories/:id
+  # PATCH/PUT /categories/:slug
   def update
-    respond_to do |format|
-      if category.update(category_params)
-        format.html { redirect_to category, notice: 'Category was successfully updated.' }
-        format.json { render :show, status: :ok, location: category }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: category.errors, status: :unprocessable_entity }
-      end
+    if category.update(category_params)
+      redirect_to category, notice: 'Category was successfully updated'
+    else
+      redirect_to edit_category_path, inertia: { errors: category.errors }
     end
   end
 
-  # DELETE /categories/:id
+  # DELETE /categories/:slug
   def destroy
     category.destroy
     respond_to do |format|

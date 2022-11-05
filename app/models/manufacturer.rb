@@ -15,7 +15,7 @@ class Manufacturer < ApplicationRecord
   slug :name
 
   resourcify
-  audited
+  tracked
 
   validates :name, presence: true
   validates :name, uniqueness: true

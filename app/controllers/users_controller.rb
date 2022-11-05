@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     current_user.person.assign_attributes params[:person]
 
     current_user.transaction do
-      company = Company.create!(params[:company])
+      company = Company::AsSetup.create!(params[:company])
       current_user.add_role :admin, company
       current_user.active_company = company
 

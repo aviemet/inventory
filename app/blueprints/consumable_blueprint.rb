@@ -18,7 +18,7 @@ class ConsumableBlueprint < ApplicationBlueprint
 
   view :associations do
 		association :purchase, blueprint:  PurchaseBlueprint
-		association :audits, blueprint:  AuditBlueprint
+		association :activities, blueprint: ActivityBlueprint
 		association :model, blueprint:  ModelBlueprint
 		association :vendor, blueprint:  VendorBlueprint
 		association :default_location, blueprint: LocationBlueprint
@@ -36,7 +36,7 @@ class ConsumableBlueprint < ApplicationBlueprint
 
   view :show do
 		association :purchase, blueprint:  PurchaseBlueprint
-		association :audits, blueprint:  AuditBlueprint
+		association :activities, blueprint: ActivityBlueprint
 		association :model, blueprint:  ModelBlueprint
 		association :vendor, blueprint:  VendorBlueprint
 		association :default_location, blueprint: LocationBlueprint
