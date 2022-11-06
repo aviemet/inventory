@@ -5,7 +5,7 @@ class AssetsController < ApplicationController
   expose :assets, -> { search(@active_company.assets.includes_associated, sortable_fields) }
   expose :asset
 
-  # GET /hardware
+  # GET /assets
   def index
     paginated_assets = assets.page(params[:page] || 1)
 
@@ -18,46 +18,24 @@ class AssetsController < ApplicationController
     }
   end
 
-  # GET /hardware/category/:category_id
-  # def category
-  #   # TODO: Consider another way of filtering without using routes
-  #   self.assets = assets.where('model.category': Category.find(request.params[:category_id]))
-  #   render :index
-  # end
-
-  # GET /hardware/:id/checkout
-  def checkout
-    if asset.assigned?
-      redirect_to asset, warning: 'Asset is already checked out'
-    else
-      assignment = Assignment.new({ assignable: asset })
-
-      render inertia: "Assets/Checkout", props: {
-        asset: asset.render,
-        assignment: assignment.render(view: :new),
-        people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
-        assets: -> { @active_company.assets.select([:id, :name, :default_location_id]).render(view: :as_options) },
-        locations: -> { @active_company.locations.render(view: :as_options) },
-      }
-    end
+  # GET /assets/:id
+  def show
+    redirect_to controller: asset.type.downcase.pluralize, action: "show", id: asset
   end
 
-  #GET /hardware/:id/checkin
-  def checkin
-    unless asset.assigned?
-      redirect_to asset, warning: 'Asset is not yet checked out'
-    else
-      assignment = asset.assignment
-      assignment.returned_at = Time.current
-      assignment.active = false
+  # GET /assets/:id/edit
+  def edit
+    redirect_to controller: asset.type.downcase.pluralize, action: "edit", id: asset
+  end
 
-      render inertia: "Assets/Checkin", props: {
-        asset: asset.render,
-        assignment: assignment.render,
-        locations: -> { @active_company.locations.render(view: :as_options) },
-        statuses: -> { StatusType.all.render } # TODO: Is this scoped to a Company?
-      }
-    end
+  # GET /assets/:id/checkin
+  def checkout
+    redirect_to controller: asset.type.downcase.pluralize, action: "checkout", id: asset
+  end
+
+  # GET /assets/:id/checkout
+  def checkin
+    redirect_to controller: asset.type.downcase.pluralize, action: "checkin", id: asset
   end
 
   private

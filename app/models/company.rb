@@ -43,14 +43,14 @@ class Company < ApplicationRecord
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
-
+  
   {
     items: "Item",
     accessories: "Accessory",
     consumables: "Consumable",
     components: "Component",
   }.each_pair do |assoc, model|
-    has_many assoc, ->{ where(type: model) }, through: :ownerships, source: :ownable, source_type: :Item, class_name: model
+    has_many assoc, ->{ where(type: model) }, through: :ownerships, source: :ownable, source_type: :Asset, class_name: model
   end
 
   # has_many :models, through: :manufacturers

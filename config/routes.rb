@@ -87,9 +87,9 @@ Rails.application.routes.draw do
   resources :categories, concerns: :bulk_delete, param: :slug
   resources :status_types
 
-  resources :items, concerns: [:bulk_delete, :categoryable, :assignable, :quantity_unassignable]
+  resources :assets, concerns: [:bulk_delete, :categoryable, :assignable, :quantity_unassignable]
 
-  resources :assets do
+  resources :items, path: :hardware do
     resources :nics
     concerns :bulk_delete, :categoryable, :clonable, :assignable, :single_unassignable
   end

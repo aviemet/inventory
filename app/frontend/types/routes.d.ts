@@ -667,32 +667,6 @@ export const asset: ((
 
 /**
  * Generates rails route to
- * /assets/:asset_id/nics/:id(.:format)
- * @param {any} assetId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const assetNic: ((
-  assetId: RequiredRouteParameter,
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /assets/:asset_id/nics(.:format)
- * @param {any} assetId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const assetNics: ((
-  assetId: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /assets(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -805,7 +779,7 @@ export const categoryConsumables: ((
 
 /**
  * Generates rails route to
- * /items/category/:category_id(.:format)
+ * /hardware/category/:category_id(.:format)
  * @param {any} categoryId
  * @param {object | undefined} options
  * @returns {string} route path
@@ -843,13 +817,15 @@ export const checkinAccessory: ((
 
 /**
  * Generates rails route to
- * /assets/:id/checkin(.:format)
+ * /assets/:id/checkin/:assignment_id(.:format)
  * @param {any} id
+ * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkinAsset: ((
   id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -869,15 +845,13 @@ export const checkinComponent: ((
 
 /**
  * Generates rails route to
- * /items/:id/checkin/:assignment_id(.:format)
+ * /hardware/:id/checkin(.:format)
  * @param {any} id
- * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkinItem: ((
   id: RequiredRouteParameter,
-  assignmentId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -945,7 +919,7 @@ export const checkoutConsumable: ((
 
 /**
  * Generates rails route to
- * /items/:id/checkout(.:format)
+ * /hardware/:id/checkout(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -969,12 +943,12 @@ export const checkoutLicense: ((
 
 /**
  * Generates rails route to
- * /assets/:id/clone(.:format)
+ * /hardware/:id/clone(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const cloneAssets: ((
+export const cloneItems: ((
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -1145,20 +1119,6 @@ export const editAsset: ((
 
 /**
  * Generates rails route to
- * /assets/:asset_id/nics/:id/edit(.:format)
- * @param {any} assetId
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editAssetNic: ((
-  assetId: RequiredRouteParameter,
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /assignments/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1291,12 +1251,26 @@ export const editIpLease: ((
 
 /**
  * Generates rails route to
- * /items/:id/edit(.:format)
+ * /hardware/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editItem: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /hardware/:item_id/nics/:id/edit(.:format)
+ * @param {any} itemId
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editItemNic: ((
+  itemId: RequiredRouteParameter,
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -1591,7 +1565,7 @@ export const ipLeases: ((
 
 /**
  * Generates rails route to
- * /items/:id(.:format)
+ * /hardware/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1603,7 +1577,33 @@ export const item: ((
 
 /**
  * Generates rails route to
- * /items(.:format)
+ * /hardware/:item_id/nics/:id(.:format)
+ * @param {any} itemId
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const itemNic: ((
+  itemId: RequiredRouteParameter,
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /hardware/:item_id/nics(.:format)
+ * @param {any} itemId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const itemNics: ((
+  itemId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /hardware(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -1777,18 +1777,6 @@ export const newAsset: ((
 
 /**
  * Generates rails route to
- * /assets/:asset_id/nics/new(.:format)
- * @param {any} assetId
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newAssetNic: ((
-  assetId: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /categories/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1889,11 +1877,23 @@ export const newIpLease: ((
 
 /**
  * Generates rails route to
- * /items/new(.:format)
+ * /hardware/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newItem: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /hardware/:item_id/nics/new(.:format)
+ * @param {any} itemId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newItemNic: ((
+  itemId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

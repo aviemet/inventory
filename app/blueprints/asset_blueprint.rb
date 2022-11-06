@@ -5,15 +5,17 @@ class AssetBlueprint < ApplicationBlueprint
          :cost_currency,
          :purchased_at,
          :requestable,
+         :qty,
+         :min_qty,
          :notes,
          :model_id,
          :vendor_id,
          :default_location_id,
+         :type,
          :created_at,
          :updated_at
 
   field(:cost) { |item| currency_for(item) }
-  field(:assigned) { |item| item.assigned? }
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint
@@ -67,11 +69,5 @@ class AssetBlueprint < ApplicationBlueprint
   
   view :as_options do
     only :id, :name, :default_location_id
-  end
-
-  view :as_options_with_ip do
-    include_view :as_options
-
-    association :ips, blueprint: IpLeaseBlueprint, view: :as_options
   end
 end

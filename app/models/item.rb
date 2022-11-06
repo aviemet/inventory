@@ -2,11 +2,7 @@ class Item < Asset
   include Assignable::Single
   include AssignToable
 
-  attribute :type, default: :Item
-
-  default_scope { where(type: :Item) }
-
-  # after_create :ensure_nic
+  after_create :ensure_nic
 
   has_many :nics, dependent: :destroy
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ip_leases
@@ -29,8 +25,8 @@ class Item < Asset
   
   private
 
-  # def ensure_nic
-  #   self.nics << Nic.new if self.nics.empty?
-  # end
+  def ensure_nic
+    self.nics << Nic.new if self.nics.empty?
+  end
 
 end

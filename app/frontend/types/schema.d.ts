@@ -1,8 +1,8 @@
 declare namespace Schema {
 	interface Accessory {
 		id: number;
-		type: 'Item'|'Accessory'|'Component'|'Consumable';
-		name?: string | null;
+		type: string;
+		name: string;
 		asset_tag?: string | null;
 		serial?: string | null;
 		cost?: number | null;
@@ -24,6 +24,8 @@ declare namespace Schema {
 		department?: Department;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
+		assignments?: Assignment[];
+		status_type?: StatusType;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -31,8 +33,6 @@ declare namespace Schema {
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
-		assignments?: Assignment[];
-		status_type?: StatusType;
 	}
 
 	interface Address {
@@ -55,8 +55,8 @@ declare namespace Schema {
 
 	interface Asset {
 		id: number;
-		type: 'Item'|'Accessory'|'Component'|'Consumable';
-		name?: string | null;
+		type: string;
+		name: string;
 		asset_tag?: string | null;
 		serial?: string | null;
 		cost?: number | null;
@@ -78,6 +78,8 @@ declare namespace Schema {
 		department?: Department;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
+		assignments?: Assignment[];
+		status_type?: StatusType;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -141,7 +143,10 @@ declare namespace Schema {
 		users?: User[];
 		ldaps?: Ldap[];
 		ownerships?: Ownership[];
-		assets?: Asset[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
 		models?: Model[];
 		departments?: Department[];
 		locations?: Location[];
@@ -154,10 +159,6 @@ declare namespace Schema {
 		manufacturers?: Manufacturer[];
 		orders?: Order[];
 		categories?: Category[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
 	}
 
 	interface CompanyAsSetup {
@@ -177,7 +178,10 @@ declare namespace Schema {
 		users?: User[];
 		ldaps?: Ldap[];
 		ownerships?: Ownership[];
-		assets?: Asset[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
 		models?: Model[];
 		departments?: Department[];
 		locations?: Location[];
@@ -190,16 +194,12 @@ declare namespace Schema {
 		manufacturers?: Manufacturer[];
 		orders?: Order[];
 		categories?: Category[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
 	}
 
 	interface Component {
 		id: number;
-		type: 'Item'|'Accessory'|'Component'|'Consumable';
-		name?: string | null;
+		type: string;
+		name: string;
 		asset_tag?: string | null;
 		serial?: string | null;
 		cost?: number | null;
@@ -221,6 +221,8 @@ declare namespace Schema {
 		department?: Department;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
+		assignments?: Assignment[];
+		status_type?: StatusType;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -228,14 +230,12 @@ declare namespace Schema {
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
-		assignments?: Assignment[];
-		status_type?: StatusType;
 	}
 
 	interface Consumable {
 		id: number;
-		type: 'Item'|'Accessory'|'Component'|'Consumable';
-		name?: string | null;
+		type: string;
+		name: string;
 		asset_tag?: string | null;
 		serial?: string | null;
 		cost?: number | null;
@@ -257,6 +257,8 @@ declare namespace Schema {
 		department?: Department;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
+		assignments?: Assignment[];
+		status_type?: StatusType;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -264,8 +266,6 @@ declare namespace Schema {
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
-		assignments?: Assignment[];
-		status_type?: StatusType;
 	}
 
 	interface Contact {
@@ -323,7 +323,8 @@ declare namespace Schema {
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
-		posessions?: Assignment[];
+		assigned_assets?: Assignment[];
+		assets?: Asset[];
 		accessories?: Accessory[];
 		components?: Component[];
 		consumables?: Consumable[];
@@ -397,8 +398,8 @@ declare namespace Schema {
 
 	interface Item {
 		id: number;
-		type: 'Item'|'Accessory'|'Component'|'Consumable';
-		name?: string | null;
+		type: string;
+		name: string;
 		asset_tag?: string | null;
 		serial?: string | null;
 		cost?: number | null;
@@ -420,6 +421,8 @@ declare namespace Schema {
 		department?: Department;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
+		assignments?: Assignment[];
+		status_type?: StatusType;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -427,9 +430,8 @@ declare namespace Schema {
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
-		assignments?: Assignment[];
-		status_type?: StatusType;
-		posessions?: Assignment[];
+		assigned_assets?: Assignment[];
+		assets?: Asset[];
 		items?: Item[];
 		accessories?: Accessory[];
 		components?: Component[];
@@ -506,7 +508,8 @@ declare namespace Schema {
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
-		posessions?: Assignment[];
+		assigned_assets?: Assignment[];
+		assets?: Asset[];
 		items?: Item[];
 		accessories?: Accessory[];
 		components?: Component[];
@@ -669,7 +672,8 @@ declare namespace Schema {
 		phones?: Phone[];
 		emails?: Email[];
 		websites?: Website[];
-		posessions?: Assignment[];
+		assigned_assets?: Assignment[];
+		assets?: Asset[];
 		items?: Item[];
 		accessories?: Accessory[];
 		components?: Component[];

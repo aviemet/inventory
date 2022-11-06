@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
 
   create_table "assets", force: :cascade do |t|
     t.string "type", null: false
-    t.string "name"
+    t.string "name", null: false
     t.string "asset_tag"
     t.string "serial"
     t.integer "cost_cents"

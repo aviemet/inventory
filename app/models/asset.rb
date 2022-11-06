@@ -3,15 +3,7 @@ class Asset < ApplicationRecord
   include Purchasable
   include Fieldable
   include PgSearch::Model
-
-  enum type: {
-    Item: :Item,
-    Accessory: :Accessory,
-    Component: :Component,
-    Consumable: :Consumable,
-  }
-
-  # attribute :type, default: self.class.name
+  include Assignable
 
   pg_search_scope(
     :search,
@@ -40,18 +32,12 @@ class Asset < ApplicationRecord
   has_one :category, through: :model
   has_one :manufacturer, through: :model
   has_one :warranty, required: false
-  # has_one :location, through: :assignment
 
   scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_type, :activities]) }
 
   scope :find_by_category, ->(category) { includes([:category]).where('model.category' => category) }
 
   def location
-    if assigned?
-      assignment.location
-    else
-      self.default_location
-    end
+    self.default_location
   end
-
 end

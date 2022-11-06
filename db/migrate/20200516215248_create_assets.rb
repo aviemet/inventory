@@ -3,7 +3,7 @@ class CreateAssets < ActiveRecord::Migration[6.0]
     create_table :assets do |t|
       t.string :type, null: false
 
-      t.string :name
+      t.string :name, null: false
       t.string :asset_tag, index: { unique: true }
       t.string :serial, index: { unique: true }
       t.monetize :cost, amount: { null: true, default: nil }

@@ -3,15 +3,15 @@ import { Routes } from '@/lib'
 import { Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Components/Layout'
 import { NewIcon } from '@/Components/Icons'
-import HardwareTable from '../Table'
+import AssetTable from '../Table'
 
-interface IHardwaresIndexProps {
-	hardwares: Schema.Hardware[]
+interface IAssetsIndexProps {
+	assets: Schema.Asset[]
 	pagination: Schema.Pagination
 }
 
-const HardwaresIndex = ({ hardwares, pagination }: IHardwaresIndexProps) => {
-	const title = 'Hardware Assets'
+const AssetsIndex = ({ assets, pagination }: IAssetsIndexProps) => {
+	const title = 'Asset Assets'
 
 	return (
 		<Page title={ title }>
@@ -19,17 +19,17 @@ const HardwaresIndex = ({ hardwares, pagination }: IHardwaresIndexProps) => {
 				<Table.TableProvider
 					selectable
 					hideable
-					model="hardwares"
-					rows={ hardwares }
+					model="assets"
+					rows={ assets }
 					pagination={ pagination }
 				>
 					<TableTitleSection title={ title } menuOptions={ [
-						{ label: 'New Asset', href: Routes.newHardware(), icon: NewIcon },
+						{ label: 'New Asset', href: Routes.newAsset(), icon: NewIcon },
 					] }>
 						<Table.SearchInput />
 					</TableTitleSection>
 
-					<HardwareTable />
+					<AssetTable />
 
 					<Table.Pagination />
 				</Table.TableProvider>
@@ -38,4 +38,4 @@ const HardwaresIndex = ({ hardwares, pagination }: IHardwaresIndexProps) => {
 	)
 }
 
-export default HardwaresIndex
+export default AssetsIndex
