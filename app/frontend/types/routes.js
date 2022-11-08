@@ -944,6 +944,23 @@ export const apiWarranty = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,
 
 /**
  * Generates rails route to
+ * /assets/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const asset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /assets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const assets = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"assets"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
  * /assignments/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -995,6 +1012,15 @@ export const categoryAccessories = __jsr.r({"category_id":{"r":true},"format":{}
 
 /**
  * Generates rails route to
+ * /assets/category/:category_id(.:format)
+ * @param {any} categoryId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const categoryAssets = __jsr.r({"category_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[6,"category"],[2,[7,"/"],[2,[3,"category_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /components/category/:category_id(.:format)
  * @param {any} categoryId
  * @param {object | undefined} options
@@ -1041,6 +1067,15 @@ export const checkinAccessory = __jsr.r({"id":{"r":true},"assignment_id":{"r":tr
 
 /**
  * Generates rails route to
+ * /assets/:id/checkin(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkinAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /components/:id/checkin/:assignment_id(.:format)
  * @param {any} id
  * @param {any} assignmentId
@@ -1076,6 +1111,15 @@ export const checkinLicense = __jsr.r({"id":{"r":true},"assignment_id":{"r":true
  * @returns {string} route path
  */
 export const checkoutAccessory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /assets/:id/checkout(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkoutAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1239,6 +1283,15 @@ export const destroyUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"logou
  * @returns {string} route path
  */
 export const editAccessory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /assets/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1731,6 +1784,14 @@ export const networks = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"networks"],[1,[
  * @returns {string} route path
  */
 export const newAccessory = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /assets/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newAsset = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

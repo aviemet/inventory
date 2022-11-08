@@ -15,28 +15,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
-  create_table "accessories", force: :cascade do |t|
-    t.string "name"
-    t.string "serial"
-    t.string "asset_tag"
-    t.integer "min_qty"
-    t.integer "qty"
-    t.integer "cost_cents"
-    t.string "cost_currency", default: "USD", null: false
-    t.boolean "requestable", default: true, null: false
-    t.text "notes"
-    t.bigint "model_id", null: false
-    t.bigint "vendor_id"
-    t.bigint "default_location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "status_type_id"
-    t.index ["default_location_id"], name: "index_accessories_on_default_location_id"
-    t.index ["model_id"], name: "index_accessories_on_model_id"
-    t.index ["status_type_id"], name: "index_accessories_on_status_type_id"
-    t.index ["vendor_id"], name: "index_accessories_on_vendor_id"
-  end
-
   create_table "activities", id: :serial, force: :cascade do |t|
     t.string "trackable_type"
     t.integer "trackable_id"
@@ -70,6 +48,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_addresses_on_category_id"
     t.index ["contact_id"], name: "index_addresses_on_contact_id"
+  end
+
+  create_table "assets", force: :cascade do |t|
+    t.string "type", null: false
+    t.string "name", null: false
+    t.string "asset_tag"
+    t.string "serial"
+    t.integer "cost_cents"
+    t.string "cost_currency", default: "USD", null: false
+    t.datetime "purchased_at", precision: nil
+    t.boolean "requestable", default: false, null: false
+    t.integer "min_qty"
+    t.integer "qty"
+    t.text "notes"
+    t.bigint "model_id", null: false
+    t.bigint "vendor_id"
+    t.bigint "default_location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "status_type_id"
+    t.index ["asset_tag"], name: "index_assets_on_asset_tag", unique: true
+    t.index ["default_location_id"], name: "index_assets_on_default_location_id"
+    t.index ["model_id"], name: "index_assets_on_model_id"
+    t.index ["serial"], name: "index_assets_on_serial", unique: true
+    t.index ["status_type_id"], name: "index_assets_on_status_type_id"
+    t.index ["vendor_id"], name: "index_assets_on_vendor_id"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -111,48 +115,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_companies_on_slug", unique: true
-  end
-
-  create_table "components", force: :cascade do |t|
-    t.string "name"
-    t.string "serial"
-    t.integer "min_qty"
-    t.integer "qty"
-    t.integer "cost_cents"
-    t.string "cost_currency", default: "USD", null: false
-    t.datetime "purchased_at", precision: nil
-    t.text "notes"
-    t.bigint "model_id", null: false
-    t.bigint "vendor_id", null: false
-    t.bigint "default_location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "status_type_id"
-    t.index ["default_location_id"], name: "index_components_on_default_location_id"
-    t.index ["model_id"], name: "index_components_on_model_id"
-    t.index ["serial"], name: "index_components_on_serial", unique: true
-    t.index ["status_type_id"], name: "index_components_on_status_type_id"
-    t.index ["vendor_id"], name: "index_components_on_vendor_id"
-  end
-
-  create_table "consumables", force: :cascade do |t|
-    t.string "name"
-    t.integer "min_qty"
-    t.integer "qty", null: false
-    t.integer "cost_cents"
-    t.string "cost_currency", default: "USD", null: false
-    t.boolean "requestable", default: true, null: false
-    t.text "notes"
-    t.bigint "model_id", null: false
-    t.bigint "vendor_id", null: false
-    t.bigint "default_location_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "status_type_id"
-    t.index ["default_location_id"], name: "index_consumables_on_default_location_id"
-    t.index ["model_id"], name: "index_consumables_on_model_id"
-    t.index ["status_type_id"], name: "index_consumables_on_status_type_id"
-    t.index ["vendor_id"], name: "index_consumables_on_vendor_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -243,29 +205,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["nic_id"], name: "index_ip_leases_on_nic_id"
-  end
-
-  create_table "items", force: :cascade do |t|
-    t.string "name"
-    t.string "asset_tag"
-    t.string "serial"
-    t.integer "cost_cents"
-    t.string "cost_currency", default: "USD", null: false
-    t.datetime "purchased_at", precision: nil
-    t.boolean "requestable", default: false, null: false
-    t.text "notes"
-    t.bigint "model_id", null: false
-    t.bigint "vendor_id"
-    t.bigint "default_location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "status_type_id"
-    t.index ["asset_tag"], name: "index_items_on_asset_tag", unique: true
-    t.index ["default_location_id"], name: "index_items_on_default_location_id"
-    t.index ["model_id"], name: "index_items_on_model_id"
-    t.index ["serial"], name: "index_items_on_serial", unique: true
-    t.index ["status_type_id"], name: "index_items_on_status_type_id"
-    t.index ["vendor_id"], name: "index_items_on_vendor_id"
   end
 
   create_table "ldaps", force: :cascade do |t|
@@ -546,12 +485,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
   end
 
   create_table "warranties", force: :cascade do |t|
-    t.bigint "item_id", null: false
+    t.bigint "asset_id", null: false
     t.integer "length"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_warranties_on_item_id"
+    t.index ["asset_id"], name: "index_warranties_on_asset_id"
   end
 
   create_table "websites", force: :cascade do |t|
@@ -564,22 +503,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
     t.index ["contact_id"], name: "index_websites_on_contact_id"
   end
 
-  add_foreign_key "accessories", "locations", column: "default_location_id"
-  add_foreign_key "accessories", "models"
-  add_foreign_key "accessories", "status_types"
-  add_foreign_key "accessories", "vendors"
   add_foreign_key "addresses", "categories"
   add_foreign_key "addresses", "contacts"
+  add_foreign_key "assets", "locations", column: "default_location_id"
+  add_foreign_key "assets", "models"
+  add_foreign_key "assets", "status_types"
+  add_foreign_key "assets", "vendors"
   add_foreign_key "assignments", "locations"
   add_foreign_key "assignments", "users", column: "created_by_id"
-  add_foreign_key "components", "locations", column: "default_location_id"
-  add_foreign_key "components", "models"
-  add_foreign_key "components", "status_types"
-  add_foreign_key "components", "vendors"
-  add_foreign_key "consumables", "locations", column: "default_location_id"
-  add_foreign_key "consumables", "models"
-  add_foreign_key "consumables", "status_types"
-  add_foreign_key "consumables", "vendors"
   add_foreign_key "contacts", "addresses", column: "primary_address_id"
   add_foreign_key "contacts", "emails", column: "primary_email_id"
   add_foreign_key "contacts", "phones", column: "primary_phone_id"
@@ -591,10 +522,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
   add_foreign_key "emails", "contacts"
   add_foreign_key "fieldset_associations", "fieldsets"
   add_foreign_key "ip_leases", "nics"
-  add_foreign_key "items", "locations", column: "default_location_id"
-  add_foreign_key "items", "models"
-  add_foreign_key "items", "status_types"
-  add_foreign_key "items", "vendors"
   add_foreign_key "ldaps", "companies"
   add_foreign_key "licenses", "categories"
   add_foreign_key "licenses", "manufacturers"
@@ -603,7 +530,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
   add_foreign_key "locations", "locations", column: "parent_id"
   add_foreign_key "models", "categories"
   add_foreign_key "models", "manufacturers"
-  add_foreign_key "nics", "items"
+  add_foreign_key "nics", "assets", column: "item_id"
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "vendors"
   add_foreign_key "ownerships", "companies"
@@ -617,6 +544,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
   add_foreign_key "tickets", "people", column: "created_by_id"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
-  add_foreign_key "warranties", "items"
+  add_foreign_key "warranties", "assets"
   add_foreign_key "websites", "contacts"
 end
