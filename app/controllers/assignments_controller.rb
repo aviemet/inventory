@@ -28,11 +28,6 @@ class AssignmentsController < ApplicationController
 
     saved_assignment = assignment.assignable&.assign_to(assignment.assign_toable, assignment_params.merge({ created_by_id: current_user.id }))
 
-    ap({ params: assignment_params })
-
-    ap({ accessory: assignment.assignable, assign_to: assignment.assign_toable })
-    ap({ saved_assignment: saved_assignment, valid: saved_assignment.valid?, errors: saved_assignment.errors })
-
     if saved_assignment.persisted?
       redirect_to assignment.assignable
     else

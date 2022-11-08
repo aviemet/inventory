@@ -5,7 +5,7 @@ module Assignable
     include Assignable
 
     included do
-      validates :qty, numericality: { greater_than: 0 }, allow_blank: true
+      validates :qty, numericality: { greater_than: 0 }, allow_blank: false
 
       def available_to_checkout?
         self.assignments.active.sum(:qty) < self.qty
