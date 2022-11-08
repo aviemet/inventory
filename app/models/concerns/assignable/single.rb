@@ -15,6 +15,10 @@ module Assignable
         self.assignment&.assign_toable
       end
 
+      def available_to_checkout?
+        !assigned?
+      end
+
       def assigned?
         !self.assignment.nil?
       end

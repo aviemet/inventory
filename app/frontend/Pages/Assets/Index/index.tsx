@@ -13,6 +13,8 @@ interface IAssetsIndexProps {
 const AssetsIndex = ({ assets, pagination }: IAssetsIndexProps) => {
 	const title = 'Asset Assets'
 
+	console.log({ assets })
+
 	return (
 		<Page title={ title }>
 			<Table.Section>

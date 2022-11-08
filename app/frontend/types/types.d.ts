@@ -38,6 +38,7 @@ declare global {
 		interface Address extends UID {}
 		interface Assignment extends UID {
 			assign_toable: Schema.Person|Schema.Item|Schema.Location
+			available_to_checkout: boolean;
 		}
 		interface PublicActivityActivity {
 			user?: Schema.User

@@ -7,6 +7,10 @@ module Assignable
     included do
       validates :qty, numericality: { greater_than_or_equal_to: 0 }
 
+      def available_to_checkout?
+        self.qty > 0
+      end
+
       def _after_assignment(assignment, _params)
         return if assignment.qty.nil?
 

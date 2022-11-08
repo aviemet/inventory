@@ -143,10 +143,7 @@ declare namespace Schema {
 		users?: User[];
 		ldaps?: Ldap[];
 		ownerships?: Ownership[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
+		assets?: Asset[];
 		models?: Model[];
 		departments?: Department[];
 		locations?: Location[];
@@ -159,6 +156,10 @@ declare namespace Schema {
 		manufacturers?: Manufacturer[];
 		orders?: Order[];
 		categories?: Category[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
 	}
 
 	interface CompanyAsSetup {
@@ -178,10 +179,7 @@ declare namespace Schema {
 		users?: User[];
 		ldaps?: Ldap[];
 		ownerships?: Ownership[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
+		assets?: Asset[];
 		models?: Model[];
 		departments?: Department[];
 		locations?: Location[];
@@ -194,6 +192,10 @@ declare namespace Schema {
 		manufacturers?: Manufacturer[];
 		orders?: Order[];
 		categories?: Category[];
+		items?: Item[];
+		accessories?: Accessory[];
+		consumables?: Consumable[];
+		components?: Component[];
 	}
 
 	interface Component {
@@ -421,7 +423,6 @@ declare namespace Schema {
 		department?: Department;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
-		assignments?: Assignment[];
 		status_type?: StatusType;
 		roles?: Role[];
 		vendor?: Vendor;
@@ -430,6 +431,7 @@ declare namespace Schema {
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
+		assignments?: Assignment[];
 		assigned_assets?: Assignment[];
 		assets?: Asset[];
 		items?: Item[];

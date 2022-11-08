@@ -15,7 +15,8 @@ class AssetBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  field(:cost) { |item| currency_for(item) }
+  field(:cost) { |asset| currency_for(asset) }
+  field(:available_to_checkout) { |asset| asset.available_to_checkout? }
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint
@@ -33,6 +34,7 @@ class AssetBlueprint < ApplicationBlueprint
   end
 
   view :index do
+    association :assignments, blueprint: AssignmentBlueprint, view: :associations
     association :department, blueprint: DepartmentBlueprint
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
