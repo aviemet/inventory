@@ -15,8 +15,8 @@ class Assignment < ApplicationRecord
   belongs_to :created_by, class_name: "User", required: false
   belongs_to :location
 
-  ASSIGNABLE_TYPES = %w(Item License Accessory Consumable Component).freeze
-  ASSIGN_TOABLE_TYPES = %w(Person Item Location).freeze
+  ASSIGNABLE_TYPES = %w(Asset Item Accessory Component Consumable License).freeze
+  ASSIGN_TOABLE_TYPES = %w(Asset Person Item Location).freeze
   validates :assignable_type, inclusion: { in: ASSIGNABLE_TYPES }
   validates :assign_toable_type, inclusion: { in: ASSIGN_TOABLE_TYPES }
   validates_presence_of :assignable_type
@@ -26,6 +26,8 @@ class Assignment < ApplicationRecord
   validates_presence_of :assigned_at
   validates_presence_of :location_id
 
-  scope :includes_associated, -> { includes([:location, :created_by, :status_type, :activities]) }
+  scope :includes_associated, -> { includes([:location, :created_by, :activities]) }
   scope :active, -> { where(active: true) }
+
+  # delegate :available_to_checkout?, to: self.assignable
 end

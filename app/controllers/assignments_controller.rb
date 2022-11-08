@@ -26,7 +26,9 @@ class AssignmentsController < ApplicationController
     assignment.assign_toable_type = assignment_params[:assign_toable_type]
     assignment.assign_toable_id = assignment_params[:assign_toable_id]
 
-    if assignment.valid? && assignment.assignable&.assign_to(assignment.assign_toable, assignment_params.merge({ created_by_id: current_user.id })).persisted?
+    saved_assignment = assignment.assignable&.assign_to(assignment.assign_toable, assignment_params.merge({ created_by_id: current_user.id }))
+
+    if saved_assignment.persisted?
       redirect_to assignment.assignable
     else
       redirect_to send(
@@ -78,6 +80,6 @@ class AssignmentsController < ApplicationController
   private
 
   def assignment_params
-    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status_id, :notes, :active, item: [:name], accessory: [:name], license: [:name], component: [:name], consumable: [:qty])
+    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name], accessory: [:name], license: [:name], component: [:name], consumable: [:qty])
   end
 end
