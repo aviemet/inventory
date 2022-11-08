@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :warranty do
-    item
+    asset factory: :item
     length { Faker::Number.digit }
   end
 end

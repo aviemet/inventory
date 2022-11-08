@@ -3,7 +3,6 @@ import { Routes, formatter } from '@/lib'
 import { Link, Table, Tooltip } from '@/Components'
 import { EditButton, CheckoutButton } from '@/Components/Button'
 import { isNil } from 'lodash'
-import { availableToCheckout } from './utils'
 import { type ITableProps } from '@/Components/Table/Table'
 
 const ComponentsTable = (props: ITableProps) => {
@@ -68,7 +67,7 @@ const ComponentsTable = (props: ITableProps) => {
 						<Table.Cell>{ component.min_qty }</Table.Cell>
 
 						<Table.Cell fitContent>
-							{ !availableToCheckout(component) ?
+							{ !component.available_to_checkout ?
 								<Tooltip label="There are none in stock" position="left" withArrow><CheckoutButton href={ Routes.checkoutComponent(component) } disabled /></Tooltip>
 								:
 								<CheckoutButton href={ Routes.checkoutComponent(component) } />

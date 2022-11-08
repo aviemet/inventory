@@ -18,7 +18,13 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 		const { tableState: { rows, selectable, selected } } = useTableContext()
 
 		return (
-			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected } { ...props }>
+			<RowInContext
+				name={ name }
+				rows={ rows }
+				selectable={ selectable }
+				selected={ selected }
+				{ ...props }
+			>
 				{ children }
 			</RowInContext>
 		)

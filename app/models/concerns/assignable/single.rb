@@ -5,12 +5,18 @@ module Assignable
     include Assignable
 
     included do
+      has_many :assignments, as: :assignable
+
       def assignment
         self.assignments.select(&:active).first
       end
 
       def assigned_to
         self.assignment&.assign_toable
+      end
+
+      def available_to_checkout?
+        !assigned?
       end
 
       def assigned?

@@ -22,6 +22,7 @@ declare global {
 
 		interface Assignable {
 			assigned: boolean
+			available_to_checkout: boolean
 		}
 
 		interface AssignToable {
@@ -45,6 +46,7 @@ declare global {
 			route?: string
 			created_at: string
 		}
+		interface Asset extends Assignable, UID {}
 		interface Category extends UID {}
 		interface Company extends UID {}
 		interface Component extends Assignable, UID {}

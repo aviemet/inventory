@@ -3,48 +3,54 @@
 if Rails.env == "development"
 
   if User.count == 0 || Company.count == 0
-    person = Person.new({
+    company = Company::AsSetup.create!({
+      name: "Example Company",
+      default_currency: "USD",
+    })
+
+    if Location.count == 0
+      company = Company.first
+  
+      [
+        {
+          name: "San Francisco Office",
+          company: company
+        },
+        {
+          name: "IT Office",
+          company: company,
+          parent_id: 1
+        }
+      ].each{ |location| Location.create!(location) }
+    end
+
+    person = Person.create!({
       first_name: "Avram",
       middle_name: "True",
       last_name: "Walden",
       employee_number: "1000",
       job_title: "IT Manager",
+      location: Location.find_by_name("IT Office"),
+      company: company,
     })
-    user = User.new({
+  
+    user = User.create!({
       email: "aviemet@gmail.com",
       password: "Complex1!",
       confirmed_at: Date.new,
       person: person,
     })
+
+    user = User.first
+    company = Company.first
+
     user.add_role :super_admin
-
-    company = Company.create!({
-      name: "Example Company",
-      default_currency: "USD",
-    })
     user.add_role :admin, company
-    person.company = company
-    person.save
-    user.save
-  end
-
-  company = Company.first
-
-  if Location.count == 0
-    [
-      {
-        name: "San Francisco Office",
-        company: company
-      },
-      {
-        name: "IT Office",
-        company: company,
-        parent_id: 1
-      }
-    ].each{ |location| Location.create!(location) }
   end
 
   if Department.count == 0
+    company = Company.first
+
     [
       {
         name: "IT Dept",
@@ -60,6 +66,8 @@ if Rails.env == "development"
   end
 
   if Manufacturer.count == 0
+    company = Company.first
+
     ["Apple", "Lenovo", "Cisco", "HP", "Samsung", "SHARP"].each do |manufacturer|
       Manufacturer.create!({
         name: manufacturer,
@@ -69,6 +77,8 @@ if Rails.env == "development"
   end
 
   if Model.count == 0
+    company = Company.first
+
     [
       {
         name: "MacBook Pro",
@@ -109,6 +119,8 @@ if Rails.env == "development"
   end
 
   if Vendor.count == 0
+    company = Company.first
+
     [
       {
         name: "Apple",
@@ -130,8 +142,11 @@ if Rails.env == "development"
   end
 
   if Item.count == 0
+    company = Company.first
+
     ActiveRecord::Base.transaction do
       network = IPAddress.parse("10.10.10.0/24")
+      network_array = network.to_a
 
       105.times do |n|
         serial = Faker::Alphanumeric.alphanumeric(number: 8, min_alpha: 3, min_numeric: 3).upcase
@@ -152,8 +167,15 @@ if Rails.env == "development"
         })
 
         if n % 2 != 0
+          if n < 80
+            ip = network_array[n]
+            ip.prefix = 32
+          else
+            ip = Faker::Internet.unique.private_ip_v4_address
+          end
+
           i.nics.first.ip_leases << IpLease.new({
-            address: n < 80 ? network.to_a[n] : Faker::Internet.unique.private_ip_v4_address,
+            address: ip,
           })
         end
       end
@@ -161,6 +183,8 @@ if Rails.env == "development"
   end
 
   if Contract.count == 0
+    company = Company.first
+
     vendor = Vendor.create!({
       name: "Unwired",
       url: "www.unwired.com",
@@ -179,6 +203,8 @@ if Rails.env == "development"
   end
 
   if License.count == 0
+    company = Company.first
+
     License.create!({
       name: "Microsoft Office",
       seats: Faker::Number.digit,
@@ -198,6 +224,8 @@ if Rails.env == "development"
   end
 
   if Accessory.count == 0
+    company = Company.first
+
     Accessory.create!({
       name: "Apple Keyboard",
       serial: Faker::Device.serial,
@@ -213,6 +241,8 @@ if Rails.env == "development"
   end
 
   if Consumable.count == 0
+    company = Company.first
+
     Consumable.create!({
       name: "Black Toner",
       qty: 3,
@@ -227,6 +257,8 @@ if Rails.env == "development"
   end
 
   if Component.count == 0
+    company = Company.first
+
     Component.create!({
       name: "Samsung Evo 850",
       qty: 3,
@@ -240,6 +272,8 @@ if Rails.env == "development"
   end
 
   if Network.count == 0
+    company = Company.first
+
     [
       {
         name: "Normal /24",
@@ -270,6 +304,8 @@ if Rails.env == "development"
   end
 
   if Ldap.count == 0
+    company = Company.first
+
     Ldap.create({
       host: "10.10.20.31",
       port: 389,
