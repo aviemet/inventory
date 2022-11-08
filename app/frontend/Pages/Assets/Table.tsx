@@ -18,6 +18,7 @@ const AssetTable = (props: ITableProps) => {
 					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
 					<Table.Cell sort="cost_cents">Cost</Table.Cell>
 					<Table.Cell sort="departments.name">Department</Table.Cell>
+					<Table.Cell sort="type">Asset Type</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
@@ -35,13 +36,9 @@ const AssetTable = (props: ITableProps) => {
 								<Link href={ Routes.asset(asset) }>{ asset.model?.name }</Link>
 							</Table.Cell>
 
-							<Table.Cell>
-								<Link href={ Routes.asset(asset) }>{ asset.asset_tag }</Link>
-							</Table.Cell>
+							<Table.Cell>{ asset.asset_tag }</Table.Cell>
 
-							<Table.Cell>
-								<Link href={ Routes.asset(asset) }>{ asset.serial }</Link>
-							</Table.Cell>
+							<Table.Cell>{ asset.serial }</Table.Cell>
 
 							<Table.Cell>
 								<Link href={ Routes.asset(asset) }>{ asset.category?.name }</Link>
@@ -56,18 +53,26 @@ const AssetTable = (props: ITableProps) => {
 							</Table.Cell>
 
 							<Table.Cell>
-								<Link href={ Routes.asset(asset) }>{ asset.cost && formatter.currency(asset.cost, asset.cost_currency) }</Link>
+								{ asset.cost && asset.cost > 0 ?
+									formatter.currency(asset.cost, asset.cost_currency)
+									:
+									'-'
+								}
 							</Table.Cell>
 
 							<Table.Cell >
 								<Link href={ Routes.asset(asset) }>{ asset.department?.name }</Link>
 							</Table.Cell>
 
+							<Table.Cell >
+								<Link href={ Routes.asset(asset) }>{ asset.type }</Link>
+							</Table.Cell>
+
 							<Table.Cell fitContent>
-								{ asset.assigned ?
-									<CheckinButton href={ Routes.checkinAsset(asset) } />
-									:
+								{ asset.available_to_checkout ?
 									<CheckoutButton href={ Routes.checkoutAsset(asset) } />
+									:
+									<CheckinButton href={ Routes.checkinAsset(asset) } />
 								}
 								<EditButton href={ Routes.editAsset(asset) } />
 							</Table.Cell>

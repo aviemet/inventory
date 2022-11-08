@@ -33,5 +33,11 @@ module Assignable
       end
     end
 
+    def _after_assignment(assignment, _params)
+      return if assignment.qty.nil?
+
+      self.update(qty: self.qty - assignment.qty)
+    end
+
   end
 end

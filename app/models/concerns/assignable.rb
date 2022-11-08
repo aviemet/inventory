@@ -18,7 +18,6 @@ module Assignable
         self._before_assignment(assignment, params) if self.respond_to?(:_before_assignment)
         self.before_assignment(assignment, params) if self.respond_to?(:before_assignment)
 
-        # assignment.save
         self.assignments << assignment
         self.save
 

@@ -28,12 +28,12 @@ class AssetsController < ApplicationController
     redirect_to controller: asset.type.downcase.pluralize, action: "edit", id: asset
   end
 
-  # GET /assets/:id/checkin
+  # GET /assets/:id/checkout
   def checkout
     redirect_to controller: asset.type.downcase.pluralize, action: "checkout", id: asset
   end
 
-  # GET /assets/:id/checkout
+  # GET /assets/:id/checkin
   def checkin
     redirect_to controller: asset.type.downcase.pluralize, action: "checkin", id: asset
   end
@@ -41,7 +41,7 @@ class AssetsController < ApplicationController
   private
 
   def sortable_fields
-    %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+    %w(name asset_tag serial cost cost_cents purchased_at requestable type models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
   def asset_params

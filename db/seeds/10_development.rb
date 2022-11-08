@@ -8,12 +8,29 @@ if Rails.env == "development"
       default_currency: "USD",
     })
 
+    if Location.count == 0
+      company = Company.first
+  
+      [
+        {
+          name: "San Francisco Office",
+          company: company
+        },
+        {
+          name: "IT Office",
+          company: company,
+          parent_id: 1
+        }
+      ].each{ |location| Location.create!(location) }
+    end
+
     person = Person.create!({
       first_name: "Avram",
       middle_name: "True",
       last_name: "Walden",
       employee_number: "1000",
       job_title: "IT Manager",
+      location: Location.find_by_name("IT Office"),
       company: company,
     })
   
@@ -29,22 +46,6 @@ if Rails.env == "development"
 
     user.add_role :super_admin
     user.add_role :admin, company
-  end
-
-  if Location.count == 0
-    company = Company.first
-
-    [
-      {
-        name: "San Francisco Office",
-        company: company
-      },
-      {
-        name: "IT Office",
-        company: company,
-        parent_id: 1
-      }
-    ].each{ |location| Location.create!(location) }
   end
 
   if Department.count == 0

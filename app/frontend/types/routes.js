@@ -1067,13 +1067,12 @@ export const checkinAccessory = __jsr.r({"id":{"r":true},"assignment_id":{"r":tr
 
 /**
  * Generates rails route to
- * /assets/:id/checkin/:assignment_id(.:format)
+ * /assets/:id/checkin(.:format)
  * @param {any} id
- * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinAsset = __jsr.r({"id":{"r":true},"assignment_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[2,[7,"/"],[2,[3,"assignment_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+export const checkinAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to

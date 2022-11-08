@@ -817,15 +817,13 @@ export const checkinAccessory: ((
 
 /**
  * Generates rails route to
- * /assets/:id/checkin/:assignment_id(.:format)
+ * /assets/:id/checkin(.:format)
  * @param {any} id
- * @param {any} assignmentId
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const checkinAsset: ((
   id: RequiredRouteParameter,
-  assignmentId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
