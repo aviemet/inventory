@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react'
 import { Section, Menu, Flex, Heading, Tabs, Tooltip, Page } from '@/Components'
 import { Routes } from '@/lib'
-import { availableToCheckout } from '../utils'
 import Details from './Details'
 import History from './History'
 import Associations from './Associations'
@@ -34,9 +33,9 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 						<Menu.Dropdown>
 							<Menu.Item
 								href={ Routes.checkoutAccessory(accessory) }
-								disabled={ !useCallback((accessory: Schema.Accessory) => availableToCheckout(accessory), [accessory.qty, accessory.assignments]) }
+								disabled={ !useCallback((accessory: Schema.Accessory) => accessory.available_to_checkout, [accessory.qty, accessory.assignments]) }
 							>
-								{ !availableToCheckout(accessory) ?
+								{ !accessory.available_to_checkout ?
 									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Accessory</div></Tooltip>
 									:
 									'Checkout Accessory'

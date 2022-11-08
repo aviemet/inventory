@@ -12,9 +12,7 @@ class ComponentBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  field :cost do |component|
-    component.cost&.amount.to_f if component.cost
-  end
+  field(:cost) { |component| currency_for(component) }
 
   field :active_assignments_count do |component|
     component.assignments.where(active: true).size

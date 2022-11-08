@@ -64,6 +64,7 @@ export {
 } from 'react-icons/io5'
 
 export {
+	BsCheck2Circle as CheckIcon,
 	// BsKeyboardFill as AccessoriesIcon
 } from 'react-icons/bs'
 
@@ -88,3 +89,7 @@ export {
 export {
 	TbChevronsDown as DoubleDownArrowIcon,
 } from 'react-icons/tb'
+
+export {
+	HiOutlineClock as ClockIcon,
+} from 'react-icons/hi'

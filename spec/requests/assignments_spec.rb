@@ -37,7 +37,7 @@ RSpec.describe "Assignments", type: :request do
         end
       end
 
-      it "assigns an accessory to a assignables" do
+      it "assigns an accessory to an assignable" do
         assign_toables.each do |key, model|
           params = assignment_params(:accessory, model)
 

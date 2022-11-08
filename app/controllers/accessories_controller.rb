@@ -20,7 +20,6 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/:id
   def show
-    ap "SHOW ACCESSORY"
     render inertia: "Accessories/Show", props: {
       accessory: -> { accessory.render(view: :show) }
     }

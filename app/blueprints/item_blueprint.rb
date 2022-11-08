@@ -68,4 +68,10 @@ class ItemBlueprint < ApplicationBlueprint
   view :as_options do
     only :id, :name, :default_location_id
   end
+
+  view :as_options_with_ip do
+    include_view :as_options
+
+    association :ips, blueprint: IpLeaseBlueprint, view: :as_options
+  end
 end
