@@ -1,6 +1,6 @@
 import React from 'react'
 import { Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Components/Layout'
+import TableTitleSection from './TableTitleSection'
 
 interface IIndexPageTemplateProps {
 	children: React.ReactNode
