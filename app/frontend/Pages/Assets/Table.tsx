@@ -1,6 +1,6 @@
 import React from 'react'
-import { Routes, formatter } from '@/lib'
-import { Link, Table } from '@/Components'
+import { Routes } from '@/lib'
+import { Link, Money, Table } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 
@@ -53,11 +53,7 @@ const AssetTable = (props: ITableProps) => {
 							</Table.Cell>
 
 							<Table.Cell>
-								{ asset.cost && asset.cost > 0 ?
-									formatter.currency(asset.cost, asset.cost_currency)
-									:
-									'-'
-								}
+								<Money currency={ asset.cost_currency }>{ asset.cost }</Money>
 							</Table.Cell>
 
 							<Table.Cell >
