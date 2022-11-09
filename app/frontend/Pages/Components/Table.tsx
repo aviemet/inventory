@@ -1,6 +1,6 @@
 import React from 'react'
-import { Routes, formatter } from '@/lib'
-import { Link, Table, Tooltip } from '@/Components'
+import { Routes } from '@/lib'
+import { Link, Money, Table, Tooltip } from '@/Components'
 import { EditButton, CheckoutButton } from '@/Components/Button'
 import { isNil } from 'lodash'
 import { type ITableProps } from '@/Components/Table/Table'
@@ -59,7 +59,7 @@ const ComponentsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							{ component.cost ? formatter.currency(component.cost, component.cost_currency) : '-' }
+							<Money currency={ component.cost_currency }>{ component.cost }</Money>
 						</Table.Cell>
 
 						<Table.Cell nowrap>{ qty(component) }</Table.Cell>
