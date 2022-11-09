@@ -1,7 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Components/Layout'
+import { IndexPageTemplate } from '@/Components/Layout'
 import { NewIcon } from '@/Components/Icons'
 import LocationsTable from '../Table'
 
@@ -22,31 +21,18 @@ interface ICompaniesIndexProps {
 }
 
 const LocationsIndex = ({ locations, pagination }: ICompaniesIndexProps) => {
-	const title = 'Locations'
-
 	return (
-		<Page title={ title }>
-			<Table.Section>
-				<Table.TableProvider
-					selectable
-					hideable
-					model="locations"
-					rows={ locations }
-					pagination={ pagination }
-				>
-
-					<TableTitleSection title={ title } menuOptions={ [
-						{ label: 'New Location', href: Routes.newLocation(), icon: NewIcon },
-					] }>
-						<Table.SearchInput />
-					</TableTitleSection>
-
-					<LocationsTable />
-
-					<Table.Pagination />
-				</Table.TableProvider>
-			</Table.Section>
-		</Page>
+		<IndexPageTemplate
+			title="Locations"
+			model="locations"
+			rows={ locations }
+			pagination={ pagination }
+			menuOptions={ [
+				{ label: 'New Location', href: Routes.newLocation(), icon: NewIcon },
+			] }
+		>
+			<LocationsTable />
+		</IndexPageTemplate>
 	)
 }
 
