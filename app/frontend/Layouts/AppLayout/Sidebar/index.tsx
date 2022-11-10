@@ -70,7 +70,7 @@ const Sidebar = () => {
 					<ul>
 						<li><MenuLink href={ Routes.dashboard() } icon={ <DashboardIcon /> }>Dashboard</MenuLink></li>
 						<li>
-							<MenuLink href={ Routes.items() } icon={ <AssetsIcon /> }>Inventory</MenuLink>
+							<MenuLink href={ Routes.assets() } icon={ <AssetsIcon /> }>Inventory</MenuLink>
 							<ul>
 								<li><MenuLink href={ Routes.items() } icon={ <ItemsIcon /> }>Hardware</MenuLink></li>
 								<li><MenuLink href={ Routes.accessories() } icon={ <AccessoriesIcon /> }>Accessories</MenuLink></li>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Input, Submit, Field } from '@/Components/Form'
-import HoverLink from '../../../Components/Layout/HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 import { usePage } from '@inertiajs/inertia-react'
@@ -107,7 +106,7 @@ const Register = () => {
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.newUserSession() }>Log In Instead</HoverLink>
+					<Tile.HoverLink href={ Routes.newUserSession() }>Log In Instead</Tile.HoverLink>
 				</Tile.Footer>
 			</Form>
 		</Tile>

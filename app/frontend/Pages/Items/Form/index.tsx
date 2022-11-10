@@ -14,7 +14,7 @@ export interface IItemFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
-	item: Schema.Item
+	item: Partial<Schema.Item>
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]

@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   expose :items, -> { search(@active_company.items.includes_associated, sortable_fields) }
   expose :item
 
-  # GET /hardware
+  # GET /item
   def index
     paginated_items = items.page(params[:page] || 1)
 
@@ -18,21 +18,21 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /hardware/category/:category_id
+  # GET /item/category/:category_id
   # def category
   #   # TODO: Consider another way of filtering without using routes
   #   self.items = items.where('model.category': Category.find(request.params[:category_id]))
   #   render :index
   # end
 
-  # GET /hardware/:id
+  # GET /item/:id
   def show
     render inertia: "Items/Show", props: {
       item: -> { item.render(view: :show) }
     }
   end
 
-  # GET /hardware/new
+  # GET /item/new
   def new
     render inertia: "Items/New", props: {
       item: Item.new.render(view: :new),
@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /hardware/:id/edit
+  # GET /item/:id/edit
   def edit
     render inertia: "Items/Edit", props: {
       item: item.render(view: :edit),
@@ -56,16 +56,16 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /hardware/:id/clone
+  # GET /item/:id/clone
   def clone
     self.item = Item.find(params[:id]).dup
     self.item.serial = nil
-    self.item.asset_tag = nil
+    self.item.item_tag = nil
     self.item
     render inertia: "Items/Clone"
   end
 
-  # GET /hardware/:id/checkout
+  # GET /item/:id/checkout
   def checkout
     if item.assigned?
       redirect_to item, warning: 'Item is already checked out'
@@ -82,7 +82,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  #GET /hardware/:id/checkin
+  #GET /item/:id/checkin
   def checkin
     unless item.assigned?
       redirect_to item, warning: 'Item is not yet checked out'
@@ -100,7 +100,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  # POST /hardware
+  # POST /item
   def create
     item.company = @active_company
 
@@ -111,7 +111,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /hardware/:id
+  # PATCH/PUT /item/:id
   def update
     if item.update(item_params)
       redirect_to item, notice: 'Item was successfully updated'
@@ -120,7 +120,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  # DELETE /hardware/:id
+  # DELETE /item/:id
   def destroy
     item.destroy
     redirect_to items_url, notice: 'Item was successfully destroyed.'
@@ -129,10 +129,10 @@ class ItemsController < ApplicationController
   private
 
   def sortable_fields
-    %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+    %w(name item_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
   def item_params
-    params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable, nics: [:mac, :ip])
+    params.require(:item).permit(:name, :item_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable, nics: [:mac, :ip])
   end
 end

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Routes, formatter } from '@/lib'
-import { Link, Table } from '@/Components'
+import { Routes } from '@/lib'
+import { Link, Table, Money } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 
@@ -55,7 +55,7 @@ const ItemsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.item(item) }>{ item.cost && formatter.currency(item.cost, item.cost_currency) }</Link>
+							<Money currency={ item.cost_currency }>{ item.cost }</Money>
 						</Table.Cell>
 
 						<Table.Cell >

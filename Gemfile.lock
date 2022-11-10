@@ -6,6 +6,13 @@ GIT
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
 
+PATH
+  remote: ../ts_schema
+  specs:
+    ts_schema (0.2.1)
+      rails (>= 6.0.0)
+      railties (>= 4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -370,14 +377,13 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    store_base_sti_class (3.0.0)
+      activerecord (>= 6, < 7.1)
     thor (1.2.1)
     time_for_a_boolean (0.2.1)
       activerecord
       railties
     timeout (0.3.0)
-    ts_schema (0.2.1)
-      rails (>= 6.0.0)
-      railties (>= 4)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2022.5)
@@ -461,8 +467,9 @@ DEPENDENCIES
   slug (~> 4.1)
   spring
   sprockets-rails
+  store_base_sti_class (~> 3.0)
   time_for_a_boolean (~> 0.2.1)
-  ts_schema (~> 0.2.1)
+  ts_schema!
   tzinfo-data
   vite_rails (~> 3.0)
   web-console
