@@ -12,9 +12,7 @@ class ConsumableBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  field :cost do |consumable|
-    consumable.cost&.amount.to_f if consumable.cost
-  end
+  field(:cost) { |consumable| currency_for(consumable) }
 
   view :associations do
 		association :purchase, blueprint:  PurchaseBlueprint

@@ -10,12 +10,13 @@ export { default as RadioButtons } from './RadioButtons'
 export { default as Field } from './Field'
 export { default as FormGroup } from './FormGroup'
 
-
 type IInputPropsStrategyOutput = {
 	inputId: string
 	inputName: string
 }
+
 type TInputPropsStrategy = (model: string|undefined, name: string, separator: string) => IInputPropsStrategyOutput
+
 const inputPropsStrategy: TInputPropsStrategy = (model, name, separator) => {
 	if(!model) {
 		return {

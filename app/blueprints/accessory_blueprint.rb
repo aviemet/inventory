@@ -13,9 +13,8 @@ class AccessoryBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  field :cost do |accessory|
-    accessory.cost&.amount.to_f if accessory.cost
-  end
+  field(:cost) { |accessory| currency_for(accessory) }
+  field(:available_to_checkout) { |asset| asset.available_to_checkout? }
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint

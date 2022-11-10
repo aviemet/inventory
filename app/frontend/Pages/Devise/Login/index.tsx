@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { Form, Field, Input, Checkbox, Submit } from '@/Components/Form'
-import HoverLink from '../../../Components/Layout/HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 
@@ -64,8 +63,8 @@ const Login = () => {
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.newUserPassword() }>Reset Password</HoverLink>
-					<HoverLink href={ Routes.newUserRegistration() }>Register</HoverLink>
+					<Tile.HoverLink href={ Routes.newUserPassword() }>Reset Password</Tile.HoverLink>
+					<Tile.HoverLink href={ Routes.newUserRegistration() }>Register</Tile.HoverLink>
 				</Tile.Footer>
 			</Form>
 		</Tile>
