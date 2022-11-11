@@ -98,5 +98,3 @@ group :test do
   gem "bullet", "~> 7.0"
 end
 
-
-gem "store_base_sti_class", "~> 3.0"

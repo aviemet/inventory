@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 9bbaa54f9567d0a3dec7b4fc10a1f0faef15c6b5
+  revision: 6098379d79ff45226188598023d3bc0b7149ef9d
   branch: main
   specs:
-    faker (2.23.0)
+    faker (3.0.0)
       i18n (>= 1.8.11, < 2)
 
 PATH
@@ -101,7 +101,7 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     cancancan (3.4.0)
-    capybara (3.37.1)
+    capybara (3.38.0)
       addressable
       matrix
       mini_mime (>= 0.1.3)
@@ -113,14 +113,14 @@ GEM
     childprocess (4.1.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
-    countries (5.1.2)
-      sixarm_ruby_unaccent (~> 1.1)
+    countries (5.2.0)
+      unaccent (~> 0.3)
     crass (1.0.6)
     database_cleaner-active_record (2.0.1)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
-    debug (1.6.2)
+    debug (1.6.3)
       irb (>= 1.3.6)
       reline (>= 0.3.1)
     decent_exposure (3.0.4)
@@ -236,7 +236,7 @@ GEM
       net-protocol
     net-protocol (0.1.3)
       timeout
-    net-smtp (0.3.2)
+    net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
     nokogiri (1.13.9-x86_64-darwin)
@@ -314,14 +314,14 @@ GEM
       railties (>= 5.0)
     rexml (3.2.5)
     rolify (6.0.0)
-    rspec-core (3.11.0)
-      rspec-support (~> 3.11.0)
-    rspec-expectations (3.11.1)
+    rspec-core (3.12.0)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.11.0)
-    rspec-mocks (3.11.1)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.11.0)
+      rspec-support (~> 3.12.0)
     rspec-rails (6.0.1)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
@@ -330,33 +330,33 @@ GEM
       rspec-expectations (~> 3.11)
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
-    rspec-support (3.11.1)
-    rubocop (1.36.0)
+    rspec-support (3.12.0)
+    rubocop (1.38.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.20.1, < 2.0)
+      rubocop-ast (>= 1.23.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.22.0)
+    rubocop-ast (1.23.0)
       parser (>= 3.1.1.0)
     rubocop-daemon (0.3.2)
       rubocop
     rubocop-performance (1.15.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.16.1)
+    rubocop-rails (2.17.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    rubocop-rspec (2.13.2)
+    rubocop-rspec (2.15.0)
       rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
     rubyzip (2.3.2)
-    selenium-webdriver (4.5.0)
+    selenium-webdriver (4.6.1)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -364,7 +364,6 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (5.2.0)
       activesupport (>= 5.2.0)
-    sixarm_ruby_unaccent (1.2.0)
     slug (4.1.1)
       activerecord (> 3.0.0)
       activesupport (> 3.0.0)
@@ -377,8 +376,6 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    store_base_sti_class (3.0.0)
-      activerecord (>= 6, < 7.1)
     thor (1.2.1)
     time_for_a_boolean (0.2.1)
       activerecord
@@ -386,14 +383,15 @@ GEM
     timeout (0.3.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    tzinfo-data (1.2022.5)
+    tzinfo-data (1.2022.6)
       tzinfo (>= 1.0.0)
+    unaccent (0.4.0)
     unicode-display_width (2.3.0)
     uniform_notifier (1.16.0)
     vite_rails (3.0.12)
       railties (>= 5.1, < 8)
       vite_ruby (~> 3.0, >= 3.2.2)
-    vite_ruby (3.2.7)
+    vite_ruby (3.2.10)
       dry-cli (~> 0.7.0)
       rack-proxy (~> 0.6, >= 0.6.1)
       zeitwerk (~> 2.2)
@@ -414,7 +412,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.1)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   x86_64-darwin-20
@@ -467,7 +465,6 @@ DEPENDENCIES
   slug (~> 4.1)
   spring
   sprockets-rails
-  store_base_sti_class (~> 3.0)
   time_for_a_boolean (~> 0.2.1)
   ts_schema!
   tzinfo-data
