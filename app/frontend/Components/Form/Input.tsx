@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from 'react'
+import React, { forwardRef } from 'react'
 import { TextInput, NumberInput, PasswordInput, CurrencyInput } from '../Inputs'
 import { useForm, useInputProps } from './index'
 import Field from './Field'
@@ -30,7 +30,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 	const form = useForm()
 	const { inputId, inputName } = useInputProps(name, model)
 
-	const handleChange = useCallback((e?: number | React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e?: number | React.ChangeEvent<HTMLInputElement>) => {
 		if(e === undefined) return
 
 		const value = typeof e === 'number' ? e : e.target.value
@@ -38,15 +38,15 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 		form.setData(inputName, value)
 
 		if(onChange) onChange(value, form)
-	}, [onChange, inputName])
+	}
 
-	const handleBlur = useCallback((e?: number | React.FocusEvent<HTMLInputElement, Element>) => {
+	const handleBlur = (e?: number | React.FocusEvent<HTMLInputElement, Element>) => {
 		if(e === undefined) return
 
 		const value = typeof e === 'number' ? e : e.target.value
 
 		if(onBlur) onBlur(value, form)
-	}, [onBlur])
+	}
 
 	let InputComponent
 	switch(type) {

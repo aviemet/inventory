@@ -1,8 +1,6 @@
-import React from 'react'
-import { merge, isBoolean } from 'lodash'
+import { isBoolean, isPlainObject, cloneDeep } from 'lodash'
 import { Routes } from '@/lib'
-import { Link } from '@/Components'
-// export { default as IPAddress } from './IPAddress'
+export { default as IPAddress } from './IPAddress'
 
 export * as Routes from '@/types/routes'
 export * as formatter from './formatters'
@@ -19,48 +17,11 @@ export const decodeId = (id: string) => {
 	}
 }
 
-export const isObj = (check: string) => {
-	return check !== null && check !== undefined && Object.getPrototypeOf(check) === Object.prototype
-}
-
-export const getNestedValue = (data: Record<string, any>, key: string, separator = '.') => {
-	const parts = key.split(separator)
-	let nestedData: Record<string, any> = data
-	let value: string|boolean = ''
-
-	parts.forEach(part => {
-		if(isObj(nestedData[part])) {
-			nestedData = nestedData[part]
-		} else {
-			value = nestedData[part]
-		}
-	})
-
-	return value
-}
-
-export const setNestedValue = (data: Record<string, any>, key: string, value: unknown, separator = '.') => {
-	const parts = key.split(separator)
-	let nestedData: Record<string, any> = {}
-
-	for(let i = parts.length - 1; i >= 0; i--) {
-		if(i === parts.length - 1) {
-			nestedData[parts[i]] = value
-		} else {
-			nestedData = {
-				[parts[i]]: nestedData
-			}
-		}
-	}
-
-	return merge({}, data, nestedData)
-}
-
 export const fillEmptyValues = <T extends Record<keyof T, any>>(data: T): T => {
-	const sanitizedDefaultData = data
+	const sanitizedDefaultData = cloneDeep(data)
 
 	for(const key in sanitizedDefaultData) {
-		if(isObj(sanitizedDefaultData[key])) {
+		if(isPlainObject(sanitizedDefaultData[key])) {
 			sanitizedDefaultData[key] = fillEmptyValues(sanitizedDefaultData[key])
 		} else if(sanitizedDefaultData[key] === undefined || sanitizedDefaultData[key] === null) {
 			// @ts-ignore
@@ -68,8 +29,6 @@ export const fillEmptyValues = <T extends Record<keyof T, any>>(data: T): T => {
 		} else if(!isBoolean(sanitizedDefaultData[key])) {
 			// @ts-ignore
 			sanitizedDefaultData[key] = String(sanitizedDefaultData[key])
-		} else {
-			sanitizedDefaultData[key] = sanitizedDefaultData[key]
 		}
 	}
 
