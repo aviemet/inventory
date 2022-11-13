@@ -13,7 +13,11 @@ export default {
 const formArgs = {
 }
 
-const FormTemplate: ComponentStory<typeof FormComponent> = (args) => <Form { ...args } />
+const FormTemplate: ComponentStory<typeof FormComponent> = (args) => (
+
+	<Form { ...args } />
+
+)
 
 export const Form = FormTemplate.bind({})
 Form.args = formArgs
