@@ -10,11 +10,9 @@ import Button, {
 	ToggleColorSchemeButton,
 } from '@/Components/Button'
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
 	title: 'Example/Button',
 	component: Button,
-	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 	argTypes: {
 		loaderPosition: {
 			options: ['left', 'right']
@@ -31,7 +29,7 @@ export default {
 	},
 } as ComponentMeta<typeof Button>
 
-const buttonArgs = {
+const defaultArgs = {
 	children: 'Button',
 	size: undefined,
 	compact: false,
@@ -44,14 +42,12 @@ const buttonArgs = {
 	variant: undefined,
 }
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const ButtonTemplate: ComponentStory<typeof Button> = (args) => <Button { ...args } />
+const ButtonTemplate: ComponentStory<typeof Button> = args => <Button { ...args } />
 
 export const Standard = ButtonTemplate.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Standard.args = buttonArgs
+Standard.args = defaultArgs
 
-const EditButtonTemplate: ComponentStory<typeof Button> = (args) => <EditButton { ...args } />
+const EditButtonTemplate: ComponentStory<typeof Button> = args => <EditButton { ...args } />
 export const Edit = EditButtonTemplate.bind({})
 Edit.args = {
 	href: '/home'
