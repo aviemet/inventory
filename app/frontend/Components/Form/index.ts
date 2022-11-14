@@ -15,9 +15,9 @@ type IInputPropsStrategyOutput = {
 	inputName: string
 }
 
-type TInputPropsStrategy = (model: string|undefined, name: string, separator: string) => IInputPropsStrategyOutput
+type TInputPropsStrategy = (model: string|undefined, name: string) => IInputPropsStrategyOutput
 
-const inputPropsStrategy: TInputPropsStrategy = (model, name, separator) => {
+const inputPropsStrategy: TInputPropsStrategy = (model, name) => {
 	if(!model) {
 		return {
 			inputId: name,
@@ -27,13 +27,13 @@ const inputPropsStrategy: TInputPropsStrategy = (model, name, separator) => {
 
 	return {
 		inputId: `${model}_${name}`,
-		inputName: `${model}${separator}${name}`
+		inputName: `${model}.${name}`
 	}
 }
 
 export const useInputProps = (name: string, model?: string) => {
-	const { model: formModel, separator } = useForm()
+	const { model: formModel } = useForm()
 	const usedModel = model ?? formModel
 
-	return inputPropsStrategy(usedModel, name, separator)
+	return inputPropsStrategy(usedModel, name)
 }

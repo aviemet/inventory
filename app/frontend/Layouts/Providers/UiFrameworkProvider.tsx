@@ -6,7 +6,7 @@ import { usePage } from '@inertiajs/inertia-react'
 import axios from 'axios'
 import { Routes } from '@/lib'
 
-const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
+export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	breakpoints: {
 		'2xs': 480,
 		lg: 1280,
@@ -57,7 +57,29 @@ const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	},
 })
 
-export { useTheme }
+export const GlobalStyles = () => <Global styles={ theme => ({
+	'html, body': {
+		overflow: 'hidden',
+	},
+
+	'*::selection': {
+		backgroundColor: theme.colors[theme.primaryColor][2],
+	},
+
+	':root': {
+		colorScheme: theme.colorScheme,
+	},
+
+	'.hidden': {
+		display: 'none',
+	},
+
+	'.fullHeight': {
+		display: 'flex',
+		flexDirection: 'column',
+		height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
+	}
+}) } />
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const { props: { auth } } = usePage<InertiaPage>()
@@ -89,30 +111,8 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
 			<MantineProvider theme={ useTheme(colorScheme) } withGlobalStyles withNormalizeCSS>
 				<NotificationsProvider>
+					<GlobalStyles />
 
-					<Global styles={ theme => ({
-						'html, body': {
-							overflow: 'hidden',
-						},
-
-						'*::selection': {
-							backgroundColor: theme.colors[theme.primaryColor][2],
-						},
-
-						':root': {
-							colorScheme: theme.colorScheme,
-						},
-
-						'.hidden': {
-							display: 'none',
-						},
-
-						'.fullHeight': {
-							display: 'flex',
-							flexDirection: 'column',
-							height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
-						}
-					}) } />
 					{ children }
 				</NotificationsProvider>
 			</MantineProvider>
