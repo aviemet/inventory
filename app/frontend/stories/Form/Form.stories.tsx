@@ -1,23 +1,47 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import { Form as FormComponent } from '@/Components/Form'
+import { Checkbox, DateTime, Form, FormGroup, Input, RadioButtons } from '@/Components/Form'
 
 export default {
 	title: 'Example/Form',
-	component: FormComponent,
+	component: Form,
 	argTypes: {
 	},
-} as ComponentMeta<typeof FormComponent>
+} as ComponentMeta<typeof Form>
 
-const formArgs = {
+const defaultArgs = {
+	data: {
+		string: 'string',
+		date: new Date(),
+		number: 10,
+		checkbox: true,
+		choices: [
+			{ label: 'One', value: '1' },
+			{ label: 'Two', value: '2' },
+			{ label: 'Three', value: '3' },
+		],
+		grouped: 'One Value'
+	},
 }
 
-const FormTemplate: ComponentStory<typeof FormComponent> = (args) => (
+const FormTemplate: ComponentStory<typeof Form> = (args) => (
+	<Form { ...args }>
+		<Input label="String" name="string" />
 
-	<Form { ...args } />
+		<DateTime label="Date/Time" name="date" />
 
+		<Input label="Number" type="number" name="number" />
+
+		<Checkbox label="Checkbox" name="checkbox" />
+
+		<RadioButtons label="Radio Buttons" name="choices" options={ defaultArgs.data.choices } />
+
+		<FormGroup legend="Form Group">
+			<Input label="Group Member" name="grouped" />
+		</FormGroup>
+	</Form>
 )
 
-export const Form = FormTemplate.bind({})
-Form.args = formArgs
+export const WithLabels = FormTemplate.bind({})
+WithLabels.args = defaultArgs

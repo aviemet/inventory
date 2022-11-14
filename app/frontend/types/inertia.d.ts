@@ -34,11 +34,10 @@ declare global {
 		
 		interface FormProps extends InertiaFormProps {
 			model?: string
-			getData: (key: string) => any
-			getErrors: (data: string) => string
-			separator: string
 			method: HTTPVerb
 			to?: string
+			getData: (key: string) => any
+			getErrors: (data: string) => string
 			submit: () => Promise
 		}
 	}

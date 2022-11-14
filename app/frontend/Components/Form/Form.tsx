@@ -15,8 +15,8 @@ export { useForm, FormProvider }
 export type TInputType = 'button'|'checkbox'|'color'|'currency'|'date'|'datetime-local'|'email'|'file'|'hidden'|'image'|'month'|'number'|'password'|'radio'|'range'|'reset'|'search'|'select'|'submit'|'tel'|'text'|'time'|'url'
 
 interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'> {
-	model?: string
 	data: T
+	model?: string
 	method?: HTTPVerb
 	to?: string
 	async?: boolean
@@ -25,7 +25,6 @@ interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'>
 	onChange?: (object: Inertia.FormProps) => void
 	onSuccess?: (object: Inertia.FormProps) => void
 	onError?: (object: Inertia.FormProps) => void
-	separator?: string
 }
 
 const Form = <T extends Record<keyof T, unknown>>(
@@ -42,7 +41,6 @@ const Form = <T extends Record<keyof T, unknown>>(
 		onSuccess,
 		onError,
 		className,
-		separator = '.',
 		...props
 	}: IFormProps<T>,
 	ref: React.ForwardedRef<HTMLFormElement>
@@ -100,7 +98,7 @@ const Form = <T extends Record<keyof T, unknown>>(
 
 	// Expand Inertia's form object to include other useful data
 	// TS type definition is in app/frontend/types/inertia.d.ts
-	const contextValueObject = { ...form, setData, model, getData, getErrors, separator, method, to, submit }
+	const contextValueObject = { ...form, setData, model, getData, getErrors, method, to, submit }
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
