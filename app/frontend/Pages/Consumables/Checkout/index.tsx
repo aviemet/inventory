@@ -17,7 +17,7 @@ const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => 
 	const handleSubmit = ({ transform }: InertiaFormProps) => {
 		transform(data => {
 			data.assignment.qty = data.consumable.qty
-			data.consumable.qty = consumable.qty - data.consumable.qty
+			data.consumable.qty = consumable.qty! - data.consumable.qty
 			return data
 		})
 	}
