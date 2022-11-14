@@ -24,7 +24,8 @@ const CheckboxComponent = ({ onChange, value, id, name, label, ...props }: IChec
 				} }
 				{ ...props }
 				sx={ theme => ({
-					paddingLeft: theme.spacing.xs
+  				padding: '14px 10px 5px 10px'
+					// paddingLeft: theme.spacing.xs
 				}) }
 				required={ props.required }
 			/>

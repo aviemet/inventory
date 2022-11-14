@@ -151,5 +151,31 @@ declare global {
 		fetchOnOpen?: string
 		required?: boolean
 	}
+}
 
+declare module '@mantine/core' {
+	export interface MantineThemeOther {
+		colorSchemeOption: (light: any, dark: any) => any
+		header: {
+			height: number|string,
+		}
+		navbar: {
+			width: {
+				closed: number|string,
+				open: number|string,
+			}
+		}
+		footer: {
+			height: number|string,
+		}
+		form: {
+			label: {
+				width: number|string
+			}
+		}
+		table: {
+			sortButtonHeight: number|string,
+			sortButtonWidth: number|string,
+		}
+	}
 }
