@@ -2728,19 +2728,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/rte@npm:^5.7.1":
-  version: 5.7.1
-  resolution: "@mantine/rte@npm:5.7.1"
+"@mantine/rte@npm:^5.7.2":
+  version: 5.7.2
+  resolution: "@mantine/rte@npm:5.7.2"
   dependencies:
     "@tabler/icons": ^1.68.0
     quill-mention: ^3.0.8
     react-quill: 2.0.0
   peerDependencies:
-    "@mantine/core": 5.7.1
-    "@mantine/hooks": 5.7.1
+    "@mantine/core": 5.7.2
+    "@mantine/hooks": 5.7.2
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 306d097bfe2a123e9130c1b93e4259286989ac07c7e7d818f129b68f97eb40df99911cc41e60625873b904e025b04b454c5d00a75cda140e07267368bddae5dd
+  checksum: f6fe06526d262e189519818ad8c5177fbe5086771690816c97e2e71a454d4e3bea0a4acb00bfbe4fbbceeca2de9c7d2a4f56e9b089b931ff49a7a21edf2ffc0e
   languageName: node
   linkType: hard
 
@@ -11156,7 +11156,7 @@ __metadata:
     "@mantine/next": ^5.7.1
     "@mantine/notifications": ^5.7.1
     "@mantine/prism": ^5.7.1
-    "@mantine/rte": ^5.7.1
+    "@mantine/rte": ^5.7.2
     "@mantine/spotlight": ^5.7.1
     "@mdx-js/react": ^2.1.5
     "@storybook/addon-actions": ^6.5.13

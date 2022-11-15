@@ -2,7 +2,7 @@ import React from 'react'
 import { Textarea, type TextareaProps } from '@mantine/core'
 import Label from './Label'
 
-interface ITextareaProps extends TextareaProps {
+export interface ITextareaProps extends TextareaProps {
 	label?: string
 	name: string
 }
@@ -17,7 +17,7 @@ const TextareaComponent = ({ label, name, required = false, value, onChange, id,
 				id={ id }
 				name={ name }
 				onChange={ onChange }
-				value={ value }
+				value={ String(value) }
 				required={ required }
 				radius={ radius }
 				{ ...props }

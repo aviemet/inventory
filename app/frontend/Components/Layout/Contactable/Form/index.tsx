@@ -8,10 +8,10 @@ import { Box } from '@mantine/core'
 import { useListState } from '@/Components/Hooks'
 
 interface IContactableFormProps {
-
+	contact?: Schema.Contact
 }
 
-const ContactableForm = ({  }: IContactableFormProps) => {
+const ContactableForm = ({ contact }: IContactableFormProps) => {
 	const [addressInputs, inputHandler] = useListState([])
 
 	return (

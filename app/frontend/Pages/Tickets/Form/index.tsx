@@ -3,6 +3,7 @@ import {
 	Form,
 	Input,
 	Textarea,
+	RichText,
 	Submit,
 } from '@/Components/Form'
 
@@ -25,7 +26,7 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket }: ITicketFormProps)
 
 			<Input name="subject" label="Subject" required autoFocus />
 
-			<Textarea name="description" label="Description" />
+			<RichText name="description" label="Description" />
 
 			<Submit>
 				{ ticket.id ? 'Update' : 'Create' } Ticket

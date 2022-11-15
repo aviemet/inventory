@@ -2,6 +2,7 @@ import Form, { useForm } from './Form'
 export { Form, useForm }
 export { default as Input } from './Input'
 export { default as Textarea } from './Textarea'
+export { default as RichText } from './RichText'
 export { default as Submit } from './Submit'
 export { default as Checkbox } from './Checkbox'
 export { default as SearchableDropdown } from './SearchableDropdown'
@@ -15,10 +16,10 @@ type IInputPropsStrategyOutput = {
 	inputName: string
 }
 
-type TInputPropsStrategy = (model: string|undefined, name: string) => IInputPropsStrategyOutput
+type TInputPropsStrategy = (model: string | undefined, name: string) => IInputPropsStrategyOutput
 
 const inputPropsStrategy: TInputPropsStrategy = (model, name) => {
-	if(!model) {
+	if (!model) {
 		return {
 			inputId: name,
 			inputName: name

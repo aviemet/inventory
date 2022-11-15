@@ -1,5 +1,7 @@
 export { default as TextInput } from './TextInput'
 export { default as NumberInput } from './NumberInput'
+export { default as Textarea } from './Textarea'
+export { default as RichText } from './RichText'
 export { default as PasswordInput } from './PasswordInput'
 export { default as CurrencyInput } from './CurrencyInput'
 export { default as Checkbox } from './Checkbox'

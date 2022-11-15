@@ -4,6 +4,7 @@ import {
 	Input,
 	Submit,
 } from '@/Components/Form'
+import { ContactForm } from '@/Components/Layout/Contactable'
 
 export interface ICompanyFormProps {
 	to: string
@@ -22,6 +23,8 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: ICompanyFormPro
 			onSubmit={ onSubmit }
 		>
 			<Input name="name" label="Company Name" required autoFocus />
+
+			<ContactForm contact={ company.contact } />
 
 			<Submit>
 				{ company.id ? 'Update' : 'Create' } Company
