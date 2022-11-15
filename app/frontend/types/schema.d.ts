@@ -764,14 +764,16 @@ declare namespace Schema {
 		id: number;
 		subject: string;
 		description?: string | null;
+		priority?: 'urgent'|'high'|'standard'|'low' | null;
 		ticket_status_id?: number | null;
-		owner_id?: number | null;
+		primary_contact_id?: number | null;
 		created_by_id?: number | null;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
 		created_by?: Person;
 		status?: TicketStatus;
+		primary_contact?: Person;
 		assignments?: TicketAssignment[];
 		assignees?: Person[];
 	}

@@ -3,6 +3,8 @@ class CreateTicketMessages < ActiveRecord::Migration[7.0]
     create_table :ticket_messages do |t|
       t.text :body
       t.references :ticket, null: false, foreign_key: true
+      t.references :parent, null: true, foreign_key: { to_table: :ticket_messages }
+      t.references :created_by, null: true, foreign_key: { to_table: :people }
 
       t.timestamps
     end

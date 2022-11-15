@@ -2,9 +2,9 @@ import React from 'react'
 import {
 	Form,
 	Input,
-	Textarea,
 	RichText,
 	Submit,
+	SearchableDropdown,
 } from '@/Components/Form'
 
 export interface ITicketFormProps {
@@ -12,9 +12,11 @@ export interface ITicketFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
 	ticket: Schema.Ticket
+	people: Schema.Person[]
 }
 
-const TicketForm = ({ to, method = 'post', onSubmit, ticket }: ITicketFormProps) => {
+const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFormProps) => {
+	console.log({ ticket })
 	return (
 		<Form
 			model="ticket"
@@ -25,6 +27,12 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket }: ITicketFormProps)
 		>
 
 			<Input name="subject" label="Subject" required autoFocus />
+
+			<SearchableDropdown
+				options={ people }
+				label="Assign To"
+				name="assignees[]"
+			/>
 
 			<RichText name="description" label="Description" />
 
