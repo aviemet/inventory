@@ -27,7 +27,10 @@ class TicketsController < ApplicationController
   # GET /tickets/new
   def new
     render inertia: "Tickets/New", props: {
-      ticket: Ticket.new.render(view: :new)
+      ticket: Ticket.new.render(view: :new),
+      people: @active_company.people.render(view: :as_options),
+      assets: @active_company.assets.render(view: :as_options),
+      locations: @active_company.locations.render(view: :as_options),
     }
   end
 
