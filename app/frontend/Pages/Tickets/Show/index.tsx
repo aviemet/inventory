@@ -25,13 +25,12 @@ const ShowTicket = ({ ticket }: IShowTicketProps) => {
 			)) }
 
 			<Section>
-				<Heading order={ 3 }>Add Message</Heading>
 				<Form
 					data={ { message: { body: '' } } }
 					to={ Routes.ticketMessages(ticket.id) }
 					remember={ false }
 				>
-					<RichText name="body" label="Note" />
+					<RichText name="body" label="Add Message" />
 
 					<Submit>Add Message</Submit>
 				</Form>
