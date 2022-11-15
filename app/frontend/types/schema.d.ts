@@ -801,6 +801,7 @@ declare namespace Schema {
 		activities?: PublicActivityActivity[];
 		ticket?: Ticket;
 		created_by?: Person;
+		parent?: TicketMessage;
 	}
 
 	interface TicketStatus {
