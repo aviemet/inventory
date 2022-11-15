@@ -95,7 +95,7 @@ class ItemsController < ApplicationController
         item: item.render,
         assignment: assignment.render,
         locations: -> { @active_company.locations.render(view: :as_options) },
-        statuses: -> { StatusType.all.render } # TODO: Is this scoped to a Company?
+        statuses: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
       }
     end
   end

@@ -159,6 +159,7 @@ if Rails.env == "development"
           model: Model.find(Model.where('id <= ?', 2).pluck(:id).sample),
           vendor: Vendor.find(Vendor.pluck(:id).sample),
           default_location: Location.find(Location.pluck(:id).sample),
+          status_label: StatusLabel.first,
           company: company,
           nics: [ Nic.new({
             nic_type: :ethernet,
@@ -219,6 +220,7 @@ if Rails.env == "development"
       category: Category.find_by_slug("license-operating-system"),
       vendor: Vendor.first,
       manufacturer: Manufacturer.first,
+      status_label: StatusLabel.first,
       company: company,
     })
   end
@@ -236,6 +238,7 @@ if Rails.env == "development"
       model: Model.find(3),
       vendor: Vendor.find_by_slug("apple"),
       default_location: Location.first,
+      status_label: StatusLabel.first,
       company: company,
     })
   end
@@ -252,6 +255,7 @@ if Rails.env == "development"
       model: Model.find(4),
       vendor: Vendor.find_by_slug("sharp"),
       default_location: Location.first,
+      status_label: StatusLabel.first,
       company: company,
     })
   end
@@ -267,6 +271,7 @@ if Rails.env == "development"
       model: Model.find(5),
       vendor: Vendor.find_by_slug("amazon"),
       default_location: Location.first,
+      status_label: StatusLabel.first,
       company: company,
     })
   end

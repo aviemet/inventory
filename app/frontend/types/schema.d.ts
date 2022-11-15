@@ -17,7 +17,7 @@ declare namespace Schema {
 		default_location_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_type_id?: number | null;
+		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
@@ -25,7 +25,7 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
-		status_type?: StatusType;
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -71,7 +71,7 @@ declare namespace Schema {
 		default_location_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_type_id?: number | null;
+		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
@@ -79,7 +79,7 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
-		status_type?: StatusType;
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -216,7 +216,7 @@ declare namespace Schema {
 		default_location_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_type_id?: number | null;
+		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
@@ -224,7 +224,7 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
-		status_type?: StatusType;
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -252,7 +252,7 @@ declare namespace Schema {
 		default_location_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_type_id?: number | null;
+		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
@@ -260,7 +260,7 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
-		status_type?: StatusType;
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -416,14 +416,14 @@ declare namespace Schema {
 		default_location_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_type_id?: number | null;
+		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
-		status_type?: StatusType;
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -483,13 +483,13 @@ declare namespace Schema {
 		manufacturer_id: number;
 		created_at: string;
 		updated_at: string;
-		status_type_id?: number | null;
+		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		assignments?: Assignment[];
-		status_type?: StatusType;
+		status_label?: StatusLabel;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
@@ -749,10 +749,12 @@ declare namespace Schema {
 		users?: User[];
 	}
 
-	interface StatusType {
+	interface StatusLabel {
 		id: number;
 		name?: string | null;
+		status_type?: 'deployable'|'pending'|'undeployable'|'archived' | null;
 		slug: string;
+		description?: string | null;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -760,25 +762,50 @@ declare namespace Schema {
 
 	interface Ticket {
 		id: number;
-		subject?: string | null;
+		subject: string;
 		description?: string | null;
-		assigned_to_type?: string | null;
-		assigned_to_id?: number | null;
+		ticket_status_id?: number | null;
+		owner_id?: number | null;
 		created_by_id?: number | null;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
 		created_by?: Person;
+		status?: TicketStatus;
+		assignments?: TicketAssignment[];
+		assignees?: Person[];
+	}
+
+	interface TicketAssignment {
+		id: number;
+		person_id: number;
+		ticket_id: number;
+		created_at: string;
+		updated_at: string;
+		activities?: PublicActivityActivity[];
+		person?: Person;
+		ticket?: Ticket;
 	}
 
 	interface TicketMessage {
 		id: number;
 		body?: string | null;
 		ticket_id: number;
+		parent_id?: number | null;
+		created_by_id?: number | null;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
 		ticket?: Ticket;
+	}
+
+	interface TicketStatus {
+		id: number;
+		name?: string | null;
+		created_at: string;
+		updated_at: string;
+		activities?: PublicActivityActivity[];
+		tickets?: Ticket[];
 	}
 
 	interface User {

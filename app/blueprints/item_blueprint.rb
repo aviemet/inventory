@@ -24,7 +24,7 @@ class ItemBlueprint < ApplicationBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
     association :default_location, blueprint: LocationBlueprint
     association :location, blueprint: LocationBlueprint
-    association :status_type, blueprint: StatusTypeBlueprint
+    association :status_label, blueprint: StatusLabelBlueprint
     association :nics, blueprint: NicBlueprint
 
     association :activities, blueprint: ActivityBlueprint
@@ -37,7 +37,7 @@ class ItemBlueprint < ApplicationBlueprint
     association :category, blueprint: CategoryBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
     association :location, blueprint: LocationBlueprint
-    association :status_type, blueprint: StatusTypeBlueprint
+    association :status_label, blueprint: StatusLabelBlueprint
   end
 
   view :show do
@@ -49,7 +49,7 @@ class ItemBlueprint < ApplicationBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
     association :default_location, blueprint: LocationBlueprint
     association :location, blueprint: LocationBlueprint
-    association :status_type, blueprint: StatusTypeBlueprint
+    association :status_label, blueprint: StatusLabelBlueprint
     association :nics, blueprint: NicBlueprint
 
     association :history, name: :activities, blueprint: ActivityBlueprint

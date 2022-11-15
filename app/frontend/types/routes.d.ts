@@ -567,23 +567,23 @@ export const apiPurchases: ((
 
 /**
  * Generates rails route to
- * /api/status_types/:id(.:format)
+ * /api/status_labels/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiStatusType: ((
+export const apiStatusLabel: ((
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /api/status_types(.:format)
+ * /api/status_labels(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiStatusTypes: ((
+export const apiStatusLabels: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -1395,13 +1395,13 @@ export const editRailsConductorInboundEmail: ((
 
 /**
  * Generates rails route to
- * /status_types/:id/edit(.:format)
- * @param {any} id
+ * /status_labels/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editStatusType: ((
-  id: RequiredRouteParameter,
+export const editStatusLabel: ((
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -1987,11 +1987,11 @@ export const newPurchase: ((
 
 /**
  * Generates rails route to
- * /status_types/new(.:format)
+ * /status_labels/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newStatusType: ((
+export const newStatusLabel: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2193,23 +2193,23 @@ export const settings: ((
 
 /**
  * Generates rails route to
- * /status_types/:id(.:format)
- * @param {any} id
+ * /status_labels/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const statusType: ((
-  id: RequiredRouteParameter,
+export const statusLabel: ((
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /status_types(.:format)
+ * /status_labels(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const statusTypes: ((
+export const statusLabels: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

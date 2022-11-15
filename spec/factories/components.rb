@@ -6,7 +6,7 @@ FactoryBot.define do
     cost { Faker::Commerce.price(range: 500..2000.0) }
     purchased_at { Time.zone.yesterday.end_of_day }
     notes { Faker::Lorem.sentence }
-    status_type
+    status_label
     model
     manufacturer
     category

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :status_type do
+  factory :status_label do
     name { "Deployable" }
   end
 end

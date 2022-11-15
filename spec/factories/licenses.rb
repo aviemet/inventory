@@ -12,7 +12,7 @@ FactoryBot.define do
     terminates_at { Time.current.next_year }
     notes { Faker::Lorem.sentence }
     manufacturer
-    status_type
+    status_label
     category
     vendor
     company

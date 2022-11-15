@@ -39,7 +39,7 @@ const ItemDetails = ({ item }: IItemDetailsProps) => {
 								{ item.assigned ?
 									<AssignmentLink assignment={ itemAssignment() } />
 									:
-									<Badge>{ item.status_type?.name }</Badge>
+									<Badge>{ item.status_label?.name }</Badge>
 								}
 							</Table.Cell>
 						</Table.Row>
