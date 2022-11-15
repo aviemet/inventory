@@ -24,6 +24,23 @@ if Rails.env == "development"
       ].each{ |location| Location.create!(location) }
     end
 
+    if Department.count == 0
+      company = Company.first
+  
+      [
+        {
+          name: "IT Dept",
+          location: Location.first,
+          company: company,
+        },
+        { 
+          name: "Engineering",
+          location: Location.second,
+          company: company,
+        }
+      ].each{ |dept| Department.create!(dept) }
+    end
+
     person = Person.create!({
       first_name: "Avram",
       middle_name: "True",
@@ -31,6 +48,7 @@ if Rails.env == "development"
       employee_number: "1000",
       job_title: "IT Manager",
       location: Location.find_by_name("IT Office"),
+      department: Department.first,
       company: company,
     })
   
@@ -48,21 +66,16 @@ if Rails.env == "development"
     user.add_role :admin, company
   end
 
-  if Department.count == 0
-    company = Company.first
-
-    [
-      {
-        name: "IT Dept",
-        location: Location.first,
-        company: company,
-      },
-      { 
-        name: "Engineering",
-        location: Location.second,
-        company: company,
-      }
-    ].each{ |dept| Department.create!(dept) }
+  if Person.count == 1
+    Person.create!({
+      first_name: "Tommy",
+      last_name: "Scully",
+      employee_number: "1001",
+      job_title: "AV Manager",
+      location: Location.find_by_name("IT Office"),
+      department: Department.first,
+      company: company,
+    })
   end
 
   if Manufacturer.count == 0
@@ -273,6 +286,28 @@ if Rails.env == "development"
       default_location: Location.first,
       status_label: StatusLabel.first,
       company: company,
+    })
+  end
+
+  if Assignment.count == 0
+    Item.first.assign_to Person.first
+    Item.second.assign_to Location.first
+    Item.third.assign_to Item.fourth
+    Accessory.first.assign_to Item.second
+    Component.first.assign_to Item.third
+    Consumable.first.assign_to Person.first
+  end
+
+  if Ticket.count == 0
+    ticket = Ticket.create({
+      subject: "Support request",
+      created_by: Person.second,
+      primary_contact: Person.second,
+    })
+    ticket.assignees << Person.first
+    ticket.messages << TicketMessage.new({
+      body: "<p>Message regarding this ticket</p>",
+      created_by: Person.first,
     })
   end
 

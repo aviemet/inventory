@@ -4,7 +4,7 @@ class CreateTickets < ActiveRecord::Migration[7.0]
       t.string :subject, null: false
       t.text :description
       t.integer :priority
-      t.references :ticket_status
+      t.references :status, foreign_key: { to_table: :ticket_statuses }
       t.references :primary_contact, null: true, foreign_key: { to_table: :people }
       t.references :created_by, null: true, foreign_key: { to_table: :people }
 

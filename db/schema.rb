@@ -445,14 +445,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
     t.string "subject", null: false
     t.text "description"
     t.integer "priority"
-    t.bigint "ticket_status_id"
+    t.bigint "status_id"
     t.bigint "primary_contact_id"
     t.bigint "created_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
     t.index ["primary_contact_id"], name: "index_tickets_on_primary_contact_id"
-    t.index ["ticket_status_id"], name: "index_tickets_on_ticket_status_id"
+    t.index ["status_id"], name: "index_tickets_on_status_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -570,6 +570,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
   add_foreign_key "ticket_messages", "tickets"
   add_foreign_key "tickets", "people", column: "created_by_id"
   add_foreign_key "tickets", "people", column: "primary_contact_id"
+  add_foreign_key "tickets", "ticket_statuses", column: "status_id"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
   add_foreign_key "warranties", "assets"

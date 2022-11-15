@@ -765,7 +765,7 @@ declare namespace Schema {
 		subject: string;
 		description?: string | null;
 		priority?: 'urgent'|'high'|'standard'|'low' | null;
-		ticket_status_id?: number | null;
+		status_id?: number | null;
 		primary_contact_id?: number | null;
 		created_by_id?: number | null;
 		created_at: string;
@@ -776,6 +776,7 @@ declare namespace Schema {
 		primary_contact?: Person;
 		assignments?: TicketAssignment[];
 		assignees?: Person[];
+		messages?: TicketMessage[];
 	}
 
 	interface TicketAssignment {
