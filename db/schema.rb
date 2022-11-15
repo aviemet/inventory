@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
+ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -67,12 +67,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
     t.bigint "default_location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "status_type_id"
+    t.bigint "status_label_id"
     t.index ["asset_tag"], name: "index_assets_on_asset_tag", unique: true
     t.index ["default_location_id"], name: "index_assets_on_default_location_id"
     t.index ["model_id"], name: "index_assets_on_model_id"
     t.index ["serial"], name: "index_assets_on_serial", unique: true
-    t.index ["status_type_id"], name: "index_assets_on_status_type_id"
+    t.index ["status_label_id"], name: "index_assets_on_status_label_id"
     t.index ["vendor_id"], name: "index_assets_on_vendor_id"
   end
 
@@ -242,10 +242,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
     t.bigint "manufacturer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "status_type_id"
+    t.bigint "status_label_id"
     t.index ["category_id"], name: "index_licenses_on_category_id"
     t.index ["manufacturer_id"], name: "index_licenses_on_manufacturer_id"
-    t.index ["status_type_id"], name: "index_licenses_on_status_type_id"
+    t.index ["status_label_id"], name: "index_licenses_on_status_label_id"
     t.index ["vendor_id"], name: "index_licenses_on_vendor_id"
   end
 
@@ -404,32 +404,55 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
-  create_table "status_types", force: :cascade do |t|
+  create_table "status_labels", force: :cascade do |t|
     t.string "name"
+    t.integer "status_type", default: 0
     t.string "slug", null: false
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_status_types_on_slug", unique: true
+    t.index ["slug"], name: "index_status_labels_on_slug", unique: true
+  end
+
+  create_table "ticket_assignments", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "ticket_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_ticket_assignments_on_person_id"
+    t.index ["ticket_id"], name: "index_ticket_assignments_on_ticket_id"
   end
 
   create_table "ticket_messages", force: :cascade do |t|
     t.text "body"
     t.bigint "ticket_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ticket_id"], name: "index_ticket_messages_on_ticket_id"
-  end
-
-  create_table "tickets", force: :cascade do |t|
-    t.string "subject"
-    t.text "description"
-    t.string "assigned_to_type"
-    t.bigint "assigned_to_id"
+    t.bigint "parent_id"
     t.bigint "created_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["assigned_to_type", "assigned_to_id"], name: "index_tickets_on_assigned_to"
+    t.index ["created_by_id"], name: "index_ticket_messages_on_created_by_id"
+    t.index ["parent_id"], name: "index_ticket_messages_on_parent_id"
+    t.index ["ticket_id"], name: "index_ticket_messages_on_ticket_id"
+  end
+
+  create_table "ticket_statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string "subject", null: false
+    t.text "description"
+    t.integer "priority"
+    t.bigint "ticket_status_id"
+    t.bigint "primary_contact_id"
+    t.bigint "created_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
+    t.index ["primary_contact_id"], name: "index_tickets_on_primary_contact_id"
+    t.index ["ticket_status_id"], name: "index_tickets_on_ticket_status_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -507,7 +530,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
   add_foreign_key "addresses", "contacts"
   add_foreign_key "assets", "locations", column: "default_location_id"
   add_foreign_key "assets", "models"
-  add_foreign_key "assets", "status_types"
+  add_foreign_key "assets", "status_labels"
   add_foreign_key "assets", "vendors"
   add_foreign_key "assignments", "locations"
   add_foreign_key "assignments", "users", column: "created_by_id"
@@ -525,7 +548,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
   add_foreign_key "ldaps", "companies"
   add_foreign_key "licenses", "categories"
   add_foreign_key "licenses", "manufacturers"
-  add_foreign_key "licenses", "status_types"
+  add_foreign_key "licenses", "status_labels"
   add_foreign_key "licenses", "vendors"
   add_foreign_key "locations", "locations", column: "parent_id"
   add_foreign_key "models", "categories"
@@ -540,8 +563,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_190653) do
   add_foreign_key "phones", "categories"
   add_foreign_key "phones", "contacts"
   add_foreign_key "purchases", "orders"
+  add_foreign_key "ticket_assignments", "people"
+  add_foreign_key "ticket_assignments", "tickets"
+  add_foreign_key "ticket_messages", "people", column: "created_by_id"
+  add_foreign_key "ticket_messages", "ticket_messages", column: "parent_id"
   add_foreign_key "ticket_messages", "tickets"
   add_foreign_key "tickets", "people", column: "created_by_id"
+  add_foreign_key "tickets", "people", column: "primary_contact_id"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
   add_foreign_key "warranties", "assets"
