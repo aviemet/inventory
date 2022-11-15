@@ -81,7 +81,7 @@ class AccessoriesController < ApplicationController
       render inertia: "Accessories/Checkin", props: {
         accessory: accessory.render(view: :edit),
         assignment: assignment.render(view: :edit),
-        statuses: -> { StatusType.all.render } # TODO: Is this scoped to a Company?
+        statuses: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
       }
     end
   end

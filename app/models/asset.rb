@@ -33,7 +33,7 @@ class Asset < ApplicationRecord
   has_one :manufacturer, through: :model
   has_one :warranty, required: false
 
-  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_type, :activities]) }
+  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_label, :activities]) }
 
   scope :find_by_category, ->(category) { includes([:category]).where('model.category' => category) }
 

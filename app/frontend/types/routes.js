@@ -876,20 +876,20 @@ export const apiPurchases = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7
 
 /**
  * Generates rails route to
- * /api/status_types/:id(.:format)
+ * /api/status_labels/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiStatusType = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"status_types"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const apiStatusLabel = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"status_labels"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
- * /api/status_types(.:format)
+ * /api/status_labels(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiStatusTypes = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"status_types"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const apiStatusLabels = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"status_labels"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1503,12 +1503,12 @@ export const editRailsConductorInboundEmail = __jsr.r({"id":{"r":true},"format":
 
 /**
  * Generates rails route to
- * /status_types/:id/edit(.:format)
- * @param {any} id
+ * /status_labels/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editStatusType = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"status_types"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editStatusLabel = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"status_labels"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1964,11 +1964,11 @@ export const newPurchase = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"purchases"],
 
 /**
  * Generates rails route to
- * /status_types/new(.:format)
+ * /status_labels/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newStatusType = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_types"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const newStatusLabel = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_labels"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2127,20 +2127,20 @@ export const settings = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[1,[
 
 /**
  * Generates rails route to
- * /status_types/:id(.:format)
- * @param {any} id
+ * /status_labels/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const statusType = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"status_types"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const statusLabel = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"status_labels"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /status_types(.:format)
+ * /status_labels(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const statusTypes = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_types"],[1,[2,[8,"."],[3,"format"]]]]]);
+export const statusLabels = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_labels"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
