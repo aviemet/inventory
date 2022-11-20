@@ -16,14 +16,14 @@ const FlexMoney = ({ children, formatter, accounting }: IFlexMoneyProps) => {
 
 		return {
 			symbol: symbol?.value ?? '',
-			value: formattedValue
+			value: formattedValue,
 		}
 	}, [children])
 
 	const { symbol, value } = getParts(formatter, children)
 
 	return (
-		<Group>
+		<Group noWrap position="apart">
 			<div>{ symbol }</div>
 			<div>{ children < 0 && accounting ? `(${value})` : value }</div>
 		</Group>
