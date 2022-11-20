@@ -15,10 +15,10 @@ const Field = ({ children, type, required = false, errors = false, className, ..
 		<div
 			className={ cx(
 				'field',
-				{ type: type },
+				{ [String(type)]: type },
 				{ 'required': required },
 				{ 'field_with_errors': errors },
-				className
+				className,
 			) }
 			{ ...props }
 		>

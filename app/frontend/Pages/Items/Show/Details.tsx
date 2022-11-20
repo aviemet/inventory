@@ -9,10 +9,10 @@ interface IItemDetailsProps {
 const AssignmentLink = ({ assignment }: { assignment?: Schema.Assignment }) => {
 	if(!assignment) return <></>
 
-	// @ts-ignore
 	const path = Routes[assignment.assign_toable_type.toLowerCase()]
+	const param = assignment.assign_toable?.slug ?? assignment.assign_toable_id
 
-	return <Link href={ path(assignment.assign_toable_id) }>{ assignment.assign_toable.name }</Link>
+	return <Link href={ path(param) }>{ assignment.assign_toable.name }</Link>
 }
 
 const ItemDetails = ({ item }: IItemDetailsProps) => {
@@ -27,7 +27,7 @@ const ItemDetails = ({ item }: IItemDetailsProps) => {
 			<Heading order={ 3 }>Details</Heading>
 
 			<Box sx={ theme => ({
-				maxWidth: `${theme.breakpoints.sm}px`
+				maxWidth: `${theme.breakpoints.sm}px`,
 			}) }>
 
 				<Table>

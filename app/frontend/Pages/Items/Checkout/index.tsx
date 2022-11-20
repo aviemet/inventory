@@ -2,7 +2,7 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown, LocationDropdown } from '@/Components/Form/Components'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 
 import { omit } from 'lodash'
 
@@ -53,7 +53,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 							...omit(assignment, 'status'),
 						},
 						item: {
-							name: item.name
+							name: item.name,
 						},
 					} }
 					to={ Routes.assignments() }
@@ -68,7 +68,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 
 					<AssignToableDropdown { ...models } options={ ['Person', 'Item', 'Location'] } />
 
-					<LocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown locations={ models.locations } />
 
 					<DateTime
 						label="Assigned At"
