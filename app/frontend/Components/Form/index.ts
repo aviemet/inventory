@@ -10,38 +10,3 @@ export { default as DateTime } from './DateTime'
 export { default as RadioButtons } from './RadioButtons'
 export { default as Field } from './Field'
 export { default as FormGroup } from './FormGroup'
-
-type IInputPropsStrategyOutput = {
-	inputId: string
-	inputName: string
-}
-
-type TInputPropsStrategy = (model: string | undefined, name: string) => IInputPropsStrategyOutput
-
-const inputPropsStrategy: TInputPropsStrategy = (model, name) => {
-	if(!model) {
-		return {
-			inputId: name,
-			inputName: name,
-		}
-	}
-
-	let inputName: string
-	if(name.charAt(0) === '[') {
-		inputName = `${model}${name}`
-	} else {
-		inputName = `${model}.${name}`
-	}
-
-	return {
-		inputId: `${model}_${name}`,
-		inputName,
-	}
-}
-
-export const useInputProps = (name: string, model?: string) => {
-	const { model: formModel } = useForm()
-	const usedModel = model ?? formModel
-
-	return inputPropsStrategy(usedModel, name)
-}
