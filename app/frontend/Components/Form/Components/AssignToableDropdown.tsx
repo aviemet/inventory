@@ -12,7 +12,6 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 	const { data, setData } = useForm()
 	const type: TAssignToable = data.assignment.assign_toable_type
 
-
 	const modelMapping = new Map<TAssignToable, Schema.Item[]|Schema.Person[]|Schema.Location[]>()
 	if(items) modelMapping.set('Item', items)
 	if(people) modelMapping.set('Person' ,people)
@@ -25,11 +24,8 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 	const [optionsValues, setOptionsValues] = useState<Schema.Item[]|Schema.Person[]|Schema.Location[]>(model)
 	const strModelNameRef = useRef<TAssignToable>('Person')
 
-	console.log({ data, type, modelMapping, model, modelNameRef: strModelNameRef.current })
-
 	useEffect(() => {
 		if(type === strModelNameRef.current) return
-
 
 		setOptionsValues(model)
 		strModelNameRef.current = type
@@ -39,7 +35,7 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 	const handleAssignToableChange = (id: string|null) => {
 		let default_location: number|null|undefined
 
-		switch(type) {
+		switch (type) {
 			case 'Person':
 				const person = people!.find(person => String(person.id) === id)
 				default_location = person?.location_id

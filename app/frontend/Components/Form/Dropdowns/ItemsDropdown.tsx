@@ -7,7 +7,7 @@ interface IItemsDropdown extends IDropdownWithModalButton {
 
 const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdown>((
 	{ label = 'Item', name = 'item_id', items, ...props },
-	ref
+	ref,
 ) => {
 	return (
 		<SearchableDropdown

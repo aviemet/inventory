@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react'
 import { TextInput, NumberInput, PasswordInput, CurrencyInput } from '../Inputs'
-import { useForm, useInputProps } from './index'
 import Field from './Field'
 import cx from 'clsx'
 import { type InputProps } from '@mantine/core'
 import { type TInputType } from './Form'
+import useInertiaInput from './useInertiaInput'
 
 interface IInputProps extends Omit<InputProps, 'onChange'> {
 	type?: TInputType
@@ -27,29 +27,27 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 	{ label, name, model, onChange, onBlur, type = 'text', id, required, compact = false, ...props },
 	ref,
 ) => {
-	const form = useForm()
-	const { inputId, inputName } = useInputProps(name, model)
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput(name, model)
 
 	const handleChange = (e?: number | React.ChangeEvent<HTMLInputElement>) => {
 		if(e === undefined) return
 
-		const value = typeof e === 'number' ? e : e.target.value
+		const v = typeof e === 'number' ? e : e.target.value
+		setValue(v)
 
-		form.setData(inputName, value)
-
-		if(onChange) onChange(value, form)
+		if(onChange) onChange(v, form)
 	}
 
 	const handleBlur = (e?: number | React.FocusEvent<HTMLInputElement, Element>) => {
 		if(e === undefined) return
 
-		const value = typeof e === 'number' ? e : e.target.value
+		const v = typeof e === 'number' ? e : e.target.value
 
-		if(onBlur) onBlur(value, form)
+		if(onBlur) onBlur(v, form)
 	}
 
 	let InputComponent
-	switch(type) {
+	switch (type) {
 		case 'password':
 			InputComponent = PasswordInput
 			break
@@ -69,17 +67,17 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 			type={ type }
 			required={ required }
 			className={ cx({ compact }) }
-			errors={ !!form.errors?.[inputName] }
+			errors={ !!error }
 		>
 			<InputComponent
 				id={ id || inputId }
 				name={ inputName }
 				label={ label }
-				value={ form.getData(inputName) }
+				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				ref={ ref }
-				error={ form.errors[name] }
+				error={ error }
 				className={ cx({ compact }) }
 				{ ...props }
 			/>

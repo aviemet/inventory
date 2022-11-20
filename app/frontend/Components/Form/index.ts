@@ -19,16 +19,23 @@ type IInputPropsStrategyOutput = {
 type TInputPropsStrategy = (model: string | undefined, name: string) => IInputPropsStrategyOutput
 
 const inputPropsStrategy: TInputPropsStrategy = (model, name) => {
-	if (!model) {
+	if(!model) {
 		return {
 			inputId: name,
-			inputName: name
+			inputName: name,
 		}
+	}
+
+	let inputName: string
+	if(name.charAt(0) === '[') {
+		inputName = `${model}${name}`
+	} else {
+		inputName = `${model}.${name}`
 	}
 
 	return {
 		inputId: `${model}_${name}`,
-		inputName: `${model}.${name}`
+		inputName,
 	}
 }
 

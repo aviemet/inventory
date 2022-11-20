@@ -2,7 +2,7 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown, LocationDropdown } from '@/Components/Form/Components'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
@@ -39,7 +39,7 @@ const Checkout = ({ assignment, component, ...models }: ICheckoutItemProps) => {
 						assignment: {
 							...assignment,
 							assignable_id: component.id,
-							assignable_type: 'Component'
+							assignable_type: 'Component',
 						},
 					} }
 					to={ Routes.assignments() }
@@ -51,7 +51,7 @@ const Checkout = ({ assignment, component, ...models }: ICheckoutItemProps) => {
 						options={ ['Item'] }
 					/>
 
-					<LocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown locations={ models.locations } />
 
 					<DateTime
 						label="Assigned At"

@@ -6,6 +6,7 @@ import {
 	ErrorBag,
 } from '@inertiajs/inertia'
 
+
 declare global {
 
 	interface SharedInertiaProps extends PageProps {
@@ -25,19 +26,19 @@ declare global {
 		[key: string]: any
 	}
 
-	interface InertiaFormProps extends Omit<DefaultInertiaFormProps, 'errors'> {
+	interface InertiaFormProps<TForm = Record<string, any>> extends Omit<DefaultInertiaFormProps, 'errors'> {
 		errors: Record<keyof TForm, string|string[]>
 	}
 
 	declare namespace Inertia {
 		type Errors = Record<string|number|symbol, string|string[]>
 		
-		interface FormProps extends InertiaFormProps {
+		interface FormProps<TForm = Record<string, any>> extends InertiaFormProps {
 			model?: string
 			method: HTTPVerb
 			to?: string
 			getData: (key: string) => any
-			getErrors: (data: string) => string
+			getError: (data: string) => string
 			submit: () => Promise
 		}
 	}
