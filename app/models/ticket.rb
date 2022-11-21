@@ -23,4 +23,7 @@ class Ticket < ApplicationRecord
   validates_presence_of :subject, message: "Subject can't be blank"
 
   attribute :status_id, default: 1
+
+  accepts_nested_attributes_for :primary_contact
+  accepts_nested_attributes_for :assignees
 end

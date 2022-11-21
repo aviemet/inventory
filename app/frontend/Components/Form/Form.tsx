@@ -19,6 +19,7 @@ interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'>
 	to?: string
 	async?: boolean
 	grid?: boolean
+	remember?: boolean
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
 	onChange?: (object: Inertia.FormProps) => void
 	onSuccess?: (object: Inertia.FormProps) => void
@@ -34,6 +35,7 @@ const Form = <T extends Record<keyof T, unknown>>(
 		to,
 		async = false,
 		grid = true,
+		remember = true,
 		onSubmit,
 		onChange,
 		onSuccess,
@@ -43,7 +45,7 @@ const Form = <T extends Record<keyof T, unknown>>(
 	}: IFormProps<T>,
 	ref: React.ForwardedRef<HTMLFormElement>,
 ) => {
-	const form = useInertiaForm(`${method}/${model}`, data)
+	const form = remember ? useInertiaForm(`${method}/${model}`, data) : useInertiaForm(data)
 
 	const { classes } = useFormStyles()
 
@@ -78,6 +80,11 @@ const Form = <T extends Record<keyof T, unknown>>(
 
 		submit()
 	}
+
+	// Reset form after succesful submit
+	useEffect(() => {
+		form.reset()
+	}, [form.wasSuccessful])
 
 	// Set values from url search params. Allows for prefilling form data from a link
 	useEffect(() => {

@@ -28,6 +28,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def blueprint
+    ap({ name: self.class.name })
     "#{self.class.name}Blueprint".constantize
   end
 

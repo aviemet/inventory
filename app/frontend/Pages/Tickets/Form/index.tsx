@@ -16,7 +16,6 @@ export interface ITicketFormProps {
 }
 
 const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFormProps) => {
-	console.log({ ticket })
 	return (
 		<Form
 			model="ticket"
@@ -25,13 +24,18 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFo
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-
 			<Input name="subject" label="Subject" required autoFocus />
 
 			<SearchableDropdown
 				options={ people }
 				label="Assign To"
-				name="assignees[]"
+				name="assignees[0]"
+			/>
+
+			<SearchableDropdown
+				options={ people }
+				label="Primary Contact"
+				name="primary_contact_id"
 			/>
 
 			<RichText name="description" label="Description" />

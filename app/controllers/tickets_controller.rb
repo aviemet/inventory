@@ -71,8 +71,7 @@ class TicketsController < ApplicationController
     %w(subject created_by.name).freeze
   end
 
-    # Only allow a list of trusted parameters through.
-    def ticket_params
-      params.require(:ticket).permit(:subject, :description, :primary_contact, :ticket_status, :assignees)
-    end
+  def ticket_params
+    params.require(:ticket).permit(:subject, :description, :primary_contact_id, :status, :assignees)
+  end
 end

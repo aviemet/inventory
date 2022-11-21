@@ -2,6 +2,7 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import DangerousHtml from '@/Components/DangerousHtml'
 import { Form, RichText, Submit } from '@/Components/Form'
+import { Routes } from '@/lib'
 
 interface IShowTicketProps {
 	ticket: Schema.Ticket
@@ -16,10 +17,19 @@ const ShowTicket = ({ ticket }: IShowTicketProps) => {
 				<Heading>{ title }</Heading>
 				<DangerousHtml>{ ticket.description }</DangerousHtml>
 			</Section>
+
+			{ ticket.messages?.map(message => (
+				<Section key={ message.id }>
+					<DangerousHtml>{ message.body }</DangerousHtml>
+				</Section>
+			)) }
+
 			<Section>
 				<Heading order={ 3 }>Add Message</Heading>
 				<Form
 					data={ { message: { body: '' } } }
+					to={ Routes.ticketMessages(ticket.id) }
+					remember={ false }
 				>
 					<RichText name="body" label="Note" />
 

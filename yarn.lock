@@ -8485,6 +8485,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dinero.js@npm:^1.9.1":
+  version: 1.9.1
+  resolution: "dinero.js@npm:1.9.1"
+  checksum: f033ad0cda01cea40a890d67c99c6024b5caf69972afb3909c2894f218b05301e0df375ded45615032f459264821c16df0ff6e8a5840d5df2f5d91dd6e7b68a6
+  languageName: node
+  linkType: hard
+
 "dir-glob@npm:^2.2.2":
   version: 2.2.2
   resolution: "dir-glob@npm:2.2.2"
@@ -11187,6 +11194,7 @@ __metadata:
     classnames: ^2.3.2
     date-fns: ^2.29.3
     dayjs: ^1.11.6
+    dinero.js: ^1.9.1
     eslint: ^8.27.0
     eslint-import-resolver-typescript: ^3.5.2
     eslint-plugin-better-styled-components: ^1.1.2
