@@ -1,13 +1,15 @@
 class TicketBlueprint < ApplicationBlueprint
   fields :subject,
          :description,
-         :status,
+         :primary_contact_id,
          :created_at,
          :updated_at
 
+  association :messages, blueprint: TicketMessageBlueprint 
   association :created_by, blueprint: PersonBlueprint
   association :primary_contact, blueprint: PersonBlueprint
   association :assignees, blueprint: PersonBlueprint
+  association :status, blueprint: TicketStatusBlueprint
 
   view :as_options do
     only :id, :subject
@@ -22,6 +24,8 @@ class TicketBlueprint < ApplicationBlueprint
   view :new do
     include_view :new
 
-    exclude :created_by
+    # association :status, blueprint: TicketStatusBlueprint, view: :new
+
+    excludes :assignees, :status, :created_by
   end
 end

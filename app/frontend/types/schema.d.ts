@@ -800,6 +800,7 @@ declare namespace Schema {
 		updated_at: string;
 		activities?: PublicActivityActivity[];
 		ticket?: Ticket;
+		created_by?: Person;
 	}
 
 	interface TicketStatus {

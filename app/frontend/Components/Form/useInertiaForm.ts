@@ -21,9 +21,9 @@ function useInertiaForm<TForm = Record<string, any>>(rememberKey: string, initia
 
 function useInertiaForm(...args) {
 	const rememberKey = typeof args[0] === 'string' ? args[0] : null
-	const defaults = fillEmptyValues(typeof args[0] === 'string' ? args[1] : args[0]) || {}
+	const initialValues = fillEmptyValues(typeof args[0] === 'string' ? args[1] : args[0]) || {}
 
-	const formArgs = rememberKey ? [rememberKey, defaults] : [defaults]
+	const formArgs = rememberKey ? [rememberKey, initialValues] : [initialValues]
 	const form = useForm(...formArgs)
 
 	/**

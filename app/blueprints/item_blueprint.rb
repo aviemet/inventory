@@ -26,33 +26,17 @@ class ItemBlueprint < ApplicationBlueprint
     association :location, blueprint: LocationBlueprint
     association :status_label, blueprint: StatusLabelBlueprint
     association :nics, blueprint: NicBlueprint
-
     association :activities, blueprint: ActivityBlueprint
   end
 
   view :index do
-    association :department, blueprint: DepartmentBlueprint
-    association :model, blueprint: ModelBlueprint
-    association :vendor, blueprint: VendorBlueprint
-    association :category, blueprint: CategoryBlueprint
-    association :manufacturer, blueprint: ManufacturerBlueprint
-    association :location, blueprint: LocationBlueprint
-    association :status_label, blueprint: StatusLabelBlueprint
+    include_view :associations
+
+    excludes :assignments, :default_location, :nics, :activities
   end
 
   view :show do
-    association :department, blueprint: DepartmentBlueprint
-    association :assignments, blueprint: AssignmentBlueprint, view: :associations
-    association :model, blueprint: ModelBlueprint
-    association :vendor, blueprint: VendorBlueprint
-    association :category, blueprint: CategoryBlueprint
-    association :manufacturer, blueprint: ManufacturerBlueprint
-    association :default_location, blueprint: LocationBlueprint
-    association :location, blueprint: LocationBlueprint
-    association :status_label, blueprint: StatusLabelBlueprint
-    association :nics, blueprint: NicBlueprint
-
-    association :history, name: :activities, blueprint: ActivityBlueprint
+    include_view :associations
   end
 
   view :new do

@@ -2119,6 +2119,16 @@ export const saveCompleteRegistration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,
 
 /**
  * Generates rails route to
+ * /users/:id/set_active_company/:company_id(.:format)
+ * @param {any} id
+ * @param {any} companyId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const setActiveCompany = __jsr.r({"id":{"r":true},"company_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"set_active_company"],[2,[7,"/"],[2,[3,"company_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /settings(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2150,6 +2160,25 @@ export const statusLabels = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_labe
  * @returns {string} route path
  */
 export const ticket = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /tickets/:ticket_id/messages/:id(.:format)
+ * @param {any} ticketId
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ticketMessage = __jsr.r({"ticket_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"ticket_id"],[2,[7,"/"],[2,[6,"messages"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /tickets/:ticket_id/messages(.:format)
+ * @param {any} ticketId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ticketMessages = __jsr.r({"ticket_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"ticket_id"],[2,[7,"/"],[2,[6,"messages"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
