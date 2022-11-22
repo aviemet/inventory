@@ -26,6 +26,6 @@ class TicketBlueprint < ApplicationBlueprint
 
     # association :status, blueprint: TicketStatusBlueprint, view: :new
 
-    excludes :assignees, :status, :created_by
+    excludes :status, :created_by
   end
 end

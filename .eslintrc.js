@@ -73,6 +73,7 @@ module.exports = {
 				'if': { 'after': false },
 				'for': { 'after': false },
 				'while': { 'after': false },
+				'switch': { 'after': false },
 			},
 		}],
 		'comma-dangle': [2, 'always-multiline'],

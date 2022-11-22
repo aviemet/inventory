@@ -5,6 +5,7 @@ import {
 	RichText,
 	Submit,
 	SearchableDropdown,
+	NestedInputs,
 } from '@/Components/Form'
 
 export interface ITicketFormProps {
@@ -26,11 +27,13 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFo
 		>
 			<Input name="subject" label="Subject" required autoFocus />
 
-			<SearchableDropdown
-				options={ people }
-				label="Assign To"
-				name="assignees[0]"
-			/>
+			<NestedInputs model="assignees" label="Assignees">
+				<SearchableDropdown
+					options={ people }
+					label="Assign To"
+					name="id"
+				/>
+			</NestedInputs>
 
 			<SearchableDropdown
 				options={ people }

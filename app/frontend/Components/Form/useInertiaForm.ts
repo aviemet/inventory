@@ -15,7 +15,6 @@ const fillEmptyValues = (data: Record<string, any>) => {
 	return sanitizedDefaultData
 }
 
-
 function useInertiaForm<TForm = Record<string, any>>(initialValues?: TForm): Inertia.FormProps<TForm>
 function useInertiaForm<TForm = Record<string, any>>(rememberKey: string, initialValues?: TForm): Inertia.FormProps<TForm>
 
