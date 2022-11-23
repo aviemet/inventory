@@ -1,10 +1,9 @@
-import React, { useReducer, useState } from 'react'
+import React from 'react'
 import { useForm } from './Form'
 import { Button, Group } from '@/Components'
-import { PlusCircleIcon } from '@/Components/Icons'
-import useInertiaInput from './useInertiaInput'
 import { createContext } from '../Hooks'
 import Label from '../Inputs/Label'
+import { cloneDeep } from 'lodash'
 
 interface INestedInputsProps {
 	children: React.ReactNode
@@ -17,22 +16,20 @@ const [useNestedInputs, NestedInputsProvider] = createContext()
 export { useNestedInputs }
 
 const NestedInputs = ({ children, model, label, emptyData }: INestedInputsProps) => {
-	const { data, setData, model: formModel } = useForm()
-	const [n, setN] = useState(0)
-
-	console.log({ data, model, formModel, emptyData, nestedData: data[formModel][model] })
+	const { data, setData, unsetData, model: formModel } = useForm()
 
 	const handleAddInputs = () => {
-		setN(n => n + 1)
+		if(!formModel) return
 
-		setData(formData => {
-			formData[formModel][model].push(emptyData)
-			return formData
+		setData((formData: Record<string, any>) => {
+			const clone = cloneDeep(formData)
+			clone[formModel][model].push(emptyData)
+			return clone
 		})
 	}
 
-	const handleRemoveInputs = () => {
-
+	const handleRemoveInputs = (i: number) => {
+		unsetData(`${formModel}.${model}[${i}]`)
 	}
 
 	return (
@@ -41,9 +38,9 @@ const NestedInputs = ({ children, model, label, emptyData }: INestedInputsProps)
 				<Label>{ label }</Label>
 				<Button onClick={ handleAddInputs }>+</Button>
 			</Group>
-			<div>{ data[formModel][model].map((data, i) => {
+			<div>{ data[formModel!][model].map((data, i) => {
 				const name = `${model}[${i}].${children.props.name}`
-				console.log({ name })
+
 				return (
 					<Group key={ i }>
 						<div>
@@ -51,7 +48,7 @@ const NestedInputs = ({ children, model, label, emptyData }: INestedInputsProps)
 								name: name,
 							}) }
 						</div>
-						<Button onClick={ handleRemoveInputs }>-</Button>
+						<Button onClick={ () => handleRemoveInputs(i) }>-</Button>
 					</Group>
 				)
 			}) }</div>

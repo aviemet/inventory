@@ -1,5 +1,6 @@
+import { unsetCompact } from '@/lib'
 import { useForm } from '@inertiajs/inertia-react'
-import { cloneDeep, isPlainObject, set, get, unset } from 'lodash'
+import { cloneDeep, isPlainObject, set, get } from 'lodash'
 
 const fillEmptyValues = (data: Record<string, any>) => {
 	const sanitizedDefaultData = cloneDeep(data)
@@ -28,11 +29,9 @@ function useInertiaForm(...args): InertiaFormProps {
 	/**
 	 * Override Inertia's setData method to allow setting nested values
 	 */
-	const setData: InertiaFormProps['setData'] = (key: Record<string, any>|string, value?: any) => {
+	const setData: InertiaFormProps['setData'] = (key: Record<string, any>|string|((data: Record<string, any>) => Record<string, any>), value?: any) => {
 		if(typeof key === 'string'){
 			form.setData((data: Record<string, any>) => {
-				const d = set(cloneDeep(data), key, value)
-				console.log({ key, value, d })
 				return set(cloneDeep(data), key, value)
 			})
 		} else {
@@ -55,7 +54,10 @@ function useInertiaForm(...args): InertiaFormProps {
 	}
 
 	const unsetData = (key: string) => {
-		return unset(form.data, key)
+		const clone = cloneDeep(form.data)
+		unsetCompact(clone, key)
+
+		return setData(clone)
 	}
 
 	return { ...form, setData, getData, getError, unsetData }
