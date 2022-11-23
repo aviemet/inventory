@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { createContext } from '@/Components/Hooks'
 import { FormProps } from 'react-html-props'
 import { Box } from '@mantine/core'
@@ -45,9 +45,14 @@ const Form = <T extends Record<keyof T, unknown>>(
 	}: IFormProps<T>,
 	ref: React.ForwardedRef<HTMLFormElement>,
 ) => {
+	const { classes } = useFormStyles()
+
 	const form = remember ? useInertiaForm(`${method}/${model}`, data) : useInertiaForm(data)
 
-	const { classes } = useFormStyles()
+	// Expand Inertia's form object to include other useful data
+	// TS type definition is in app/frontend/types/inertia.d.ts
+	// const contextValueObject = { ...form, setData, model, getData, getErrors, method, to, submit }
+	const contextValueObject: () => Inertia.FormProps = useCallback(() => ({ ...form, model, method, to, submit }), [form.data])
 
 	/**
 	 * Submits the form. If async was passed to the Form component, submits using axios,
@@ -55,10 +60,7 @@ const Form = <T extends Record<keyof T, unknown>>(
 	 * @returns Promise
 	 */
 	const submit = async () => {
-		let shouldSubmit = true
-		if(onSubmit) {
-			if(onSubmit(contextValueObject) === false) shouldSubmit = false
-		}
+		let shouldSubmit = onSubmit && onSubmit(contextValueObject()) === false ? false : true
 
 		if(shouldSubmit && to) {
 			if(async) {
@@ -68,11 +70,6 @@ const Form = <T extends Record<keyof T, unknown>>(
 			}
 		}
 	}
-
-	// Expand Inertia's form object to include other useful data
-	// TS type definition is in app/frontend/types/inertia.d.ts
-	// const contextValueObject = { ...form, setData, model, getData, getErrors, method, to, submit }
-	const contextValueObject: Inertia.FormProps = { ...form, model, method, to, submit }
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -96,19 +93,19 @@ const Form = <T extends Record<keyof T, unknown>>(
 
 	// **** Conditional calls to callbacks **** \\
 	useEffect(() => {
-		if(onChange) onChange(contextValueObject)
+		if(onChange) onChange(contextValueObject())
 	}, [form.data])
 
 	useEffect(() => {
-		if(onError) onError(contextValueObject)
+		if(onError) onError(contextValueObject())
 	}, [form.errors])
 
 	useEffect(() => {
-		if(onSuccess && form.wasSuccessful) onSuccess(contextValueObject)
+		if(onSuccess && form.wasSuccessful) onSuccess(contextValueObject())
 	}, [form.wasSuccessful])
 
 	return (
-		<FormProvider value={ contextValueObject }>
+		<FormProvider value={ contextValueObject() }>
 			<Box className={ classes.form }>
 				<form
 					onSubmit={ handleSubmit }

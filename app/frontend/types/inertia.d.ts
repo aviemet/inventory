@@ -28,6 +28,9 @@ declare global {
 
 	interface InertiaFormProps<TForm = Record<string, any>> extends Omit<DefaultInertiaFormProps, 'errors'> {
 		errors: Record<keyof TForm, string|string[]>
+		getData: (key: string) => any
+		unsetData: (key: string) => boolean
+		getError: (data: string) => string
 	}
 
 	declare namespace Inertia {
@@ -39,6 +42,7 @@ declare global {
 			to?: string
 			getData: (key: string) => any
 			getError: (data: string) => string
+			unsetData: (key: string) => boolean
 			submit: () => Promise
 		}
 	}

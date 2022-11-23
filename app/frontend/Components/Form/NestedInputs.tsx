@@ -10,74 +10,48 @@ interface INestedInputsProps {
 	children: React.ReactNode
 	model: string
 	label: string | React.ReactNode
+	emptyData: Record<string, any>
 }
 
 const [useNestedInputs, NestedInputsProvider] = createContext()
 export { useNestedInputs }
 
-const ACTIONS = {
-	ADD: 'add',
-	REMOVE: 'remove',
-}
+const NestedInputs = ({ children, model, label, emptyData }: INestedInputsProps) => {
+	const { data, setData, model: formModel } = useForm()
+	const [n, setN] = useState(0)
 
-type TAction = {
-	type: typeof ACTIONS[keyof typeof ACTIONS]
-	payload: {
-		key: number
-		inputs: React.ReactNode
-		model: string
-	}
-}
+	console.log({ data, model, formModel, emptyData, nestedData: data[formModel][model] })
 
-const inputsReducer = (state: Map<number, React.ReactNode>, action: TAction) => {
-	const inputs = new Map(state)
+	const handleAddInputs = () => {
+		setN(n => n + 1)
 
-	switch(action.type) {
-		case ACTIONS.ADD:
-			const name = `${action.payload.model}[${inputs.size}]${action.payload.inputs.props.name}`
-			console.log({ name })
-
-			inputs.set(inputs.size, React.cloneElement(action.payload.inputs, {
-				name,
-			}))
-			break
-		case ACTIONS.REMOVE:
-			if(typeof action.payload === 'number') {
-				inputs.delete(action.payload)
-			}
-			break
-		default:
-			console.error('Invalid action passed to reducer')
+		setData(formData => {
+			formData[formModel][model].push(emptyData)
+			return formData
+		})
 	}
 
-	return inputs
-}
+	const handleRemoveInputs = () => {
 
-const NestedInputs = ({ children, model, label }: INestedInputsProps) => {
-	const [inputs, dispatch] = useReducer(inputsReducer, new Map<number, React.ReactNode>())
+	}
 
 	return (
 		<NestedInputsProvider value={ model }>
 			<Group>
 				<Label>{ label }</Label>
-				<Button onClick={ () => dispatch({
-					type: ACTIONS.ADD,
-					payload: {
-						inputs: children,
-						model,
-					},
-				}) }>+</Button>
+				<Button onClick={ handleAddInputs }>+</Button>
 			</Group>
-			<div>{ [...inputs].map(([key, input]) => {
+			<div>{ data[formModel][model].map((data, i) => {
+				const name = `${model}[${i}].${children.props.name}`
+				console.log({ name })
 				return (
-					<Group key={ key }>
+					<Group key={ i }>
 						<div>
-							{ input }
+							{ React.cloneElement(children, {
+								name: name,
+							}) }
 						</div>
-						<Button onClick={ () => dispatch({
-							type: ACTIONS.REMOVE,
-							payload: key,
-						}) }>-</Button>
+						<Button onClick={ handleRemoveInputs }>-</Button>
 					</Group>
 				)
 			}) }</div>

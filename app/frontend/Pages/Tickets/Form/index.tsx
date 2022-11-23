@@ -7,6 +7,7 @@ import {
 	SearchableDropdown,
 	NestedInputs,
 } from '@/Components/Form'
+import { set } from 'lodash'
 
 export interface ITicketFormProps {
 	to: string
@@ -17,22 +18,28 @@ export interface ITicketFormProps {
 }
 
 const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFormProps) => {
+	const testData = { ticket }
+	set(testData, 'ticket.assignees[0].id', 2)
+	console.log({ testData })
+
 	return (
 		<Form
 			model="ticket"
-			data={ { ticket } }
+			data={ testData }
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
 		>
 			<Input name="subject" label="Subject" required autoFocus />
 
-			<NestedInputs model="assignees" label="Assignees">
-				<SearchableDropdown
+			<NestedInputs model="assignees" label="Assignees" emptyData={ { id: '' } }>
+				{ /* <SearchableDropdown
 					options={ people }
 					label="Assign To"
 					name="id"
-				/>
+				/> */ }
+
+				<Input name="id" label="Id" />
 			</NestedInputs>
 
 			<SearchableDropdown
