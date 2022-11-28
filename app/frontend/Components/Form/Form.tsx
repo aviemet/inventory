@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 import { createContext } from '@/Components/Hooks'
 import { FormProps } from 'react-html-props'
 import { Box } from '@mantine/core'
@@ -6,9 +6,19 @@ import useFormStyles from './useFormStyles'
 import cx from 'clsx'
 import axios from 'axios'
 import useInertiaForm from './useInertiaForm'
+import { get, set, unset } from 'lodash'
 
 const [useForm, FormProvider] = createContext<Inertia.FormProps>()
-export { useForm, FormProvider }
+export { useForm }
+
+type TFormMetaValue = {
+	nestedAttributes: Set<string>
+	addAttribute: (attribute: string) => void
+	model?: string
+}
+
+const [useFormMeta, FormMetaProvider] = createContext<TFormMetaValue>()
+export { useFormMeta }
 
 export type TInputType = 'button'|'checkbox'|'color'|'currency'|'date'|'datetime-local'|'email'|'file'|'hidden'|'image'|'month'|'number'|'password'|'radio'|'range'|'reset'|'search'|'select'|'submit'|'tel'|'text'|'textarea'|'time'|'url'
 
@@ -45,13 +55,24 @@ const Form = <T extends Record<keyof T, unknown>>(
 	}: IFormProps<T>,
 	ref: React.ForwardedRef<HTMLFormElement>,
 ) => {
-	const { classes } = useFormStyles()
+	const attributesReducer = (state: Set<string>, attribute: string) => {
+		const newState = new Set(state)
+		newState.add(attribute)
+		return newState
+	}
+
+	const [nestedAttributes, addAttribute] = useReducer(attributesReducer, new Set<string>())
+	const metaValues: TFormMetaValue = {
+		nestedAttributes,
+		addAttribute,
+		model,
+	}
 
 	const form = remember ? useInertiaForm(`${method}/${model}`, data) : useInertiaForm(data)
 
 	// Expand Inertia's form object to include other useful data
 	// TS type definition is in app/frontend/types/inertia.d.ts
-	// const contextValueObject = { ...form, setData, model, getData, getErrors, method, to, submit }
+	// Uses useCallback to force re-render when form.data changes
 	const contextValueObject: () => Inertia.FormProps = useCallback(() => ({ ...form, model, method, to, submit }), [form.data])
 
 	/**
@@ -63,6 +84,21 @@ const Form = <T extends Record<keyof T, unknown>>(
 		let shouldSubmit = onSubmit && onSubmit(contextValueObject()) === false ? false : true
 
 		if(shouldSubmit && to) {
+
+			if(nestedAttributes.size > 0) {
+				form.transform(submitData => {
+					nestedAttributes.forEach(attribute => {
+						set(
+							submitData,
+							`${model}.${attribute}_attributes`,
+							get(submitData, `${model}.${attribute}`),
+						)
+						unset(submitData, `${model}.${attribute}`)
+					})
+					return submitData
+				})
+			}
+
 			if(async) {
 				return axios[method](to, form.data)
 			} else {
@@ -104,18 +140,22 @@ const Form = <T extends Record<keyof T, unknown>>(
 		if(onSuccess && form.wasSuccessful) onSuccess(contextValueObject())
 	}, [form.wasSuccessful])
 
+	const { classes } = useFormStyles()
+
 	return (
 		<FormProvider value={ contextValueObject() }>
-			<Box className={ classes.form }>
-				<form
-					onSubmit={ handleSubmit }
-					className={ cx({ 'format-grid': grid }, className) }
-					ref={ ref }
-					{ ...props }
-				>
-					{ children }
-				</form>
-			</Box>
+			<FormMetaProvider value={ metaValues }>
+				<Box className={ classes.form }>
+					<form
+						onSubmit={ handleSubmit }
+						className={ cx({ 'format-grid': grid }, className) }
+						ref={ ref }
+						{ ...props }
+					>
+						{ children }
+					</form>
+				</Box>
+			</FormMetaProvider>
 		</FormProvider>
 	)
 }

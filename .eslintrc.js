@@ -74,6 +74,7 @@ module.exports = {
 				'for': { 'after': false },
 				'while': { 'after': false },
 				'switch': { 'after': false },
+				'catch': { 'after': false },
 			},
 		}],
 		'comma-dangle': [2, 'always-multiline'],

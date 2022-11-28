@@ -6,6 +6,7 @@ import {
 	Submit,
 	SearchableDropdown,
 	NestedInputs,
+	FieldsFor,
 } from '@/Components/Form'
 
 export interface ITicketFormProps {
@@ -24,17 +25,17 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFo
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
+			onChange={ ({ data }) => { console.log({ data })} }
 		>
 			<Input name="subject" label="Subject" required autoFocus />
 
-			<NestedInputs model="assignees" label="Assignees" emptyData={ { id: '' } }>
-				{ /* <SearchableDropdown
+			<NestedInputs model="assignments" label="Assignees" emptyData={ { id: '' } }>
+				<SearchableDropdown
 					options={ people }
 					label="Assign To"
-					name="id"
-				/> */ }
+					name="person_id"
+				/>
 
-				<Input name="id" label="Id" />
 			</NestedInputs>
 
 			<SearchableDropdown

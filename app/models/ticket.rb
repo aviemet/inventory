@@ -24,6 +24,5 @@ class Ticket < ApplicationRecord
 
   attribute :status_id, default: 1
 
-  accepts_nested_attributes_for :primary_contact
-  accepts_nested_attributes_for :assignees
+  accepts_nested_attributes_for :assignments
 end

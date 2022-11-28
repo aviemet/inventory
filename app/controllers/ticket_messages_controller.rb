@@ -7,12 +7,10 @@ class TicketMessagesController < ApplicationController
   def create
     ticket_message.created_by = current_user.person
     ticket_message.ticket = ticket
-    ap({ message: ticket_message, ticket: ticket })
     if ticket_message.save
       ap "Saved"
       redirect_to ticket, notice: 'Message was successfully created'
     else
-      ap({ errors: ticket_message.errors })
       redirect_to ticket, inertia: { errors: ticket_message.errors }
     end
   end

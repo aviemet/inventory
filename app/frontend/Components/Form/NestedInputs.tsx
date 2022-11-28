@@ -1,9 +1,9 @@
 import React from 'react'
 import { useForm } from './Form'
 import { Button, Group } from '@/Components'
-import { createContext } from '../Hooks'
-import Label from '../Inputs/Label'
+import Label from '@/Components/Inputs/Label'
 import { cloneDeep } from 'lodash'
+import FieldsFor from './FieldsFor'
 
 interface INestedInputsProps {
 	children: React.ReactNode
@@ -11,9 +11,6 @@ interface INestedInputsProps {
 	label: string | React.ReactNode
 	emptyData: Record<string, any>
 }
-
-const [useNestedInputs, NestedInputsProvider] = createContext()
-export { useNestedInputs }
 
 const NestedInputs = ({ children, model, label, emptyData }: INestedInputsProps) => {
 	const { data, setData, unsetData, model: formModel } = useForm()
@@ -33,13 +30,13 @@ const NestedInputs = ({ children, model, label, emptyData }: INestedInputsProps)
 	}
 
 	return (
-		<NestedInputsProvider value={ model }>
+		<FieldsFor model={ model }>
 			<Group>
 				<Label>{ label }</Label>
 				<Button onClick={ handleAddInputs }>+</Button>
 			</Group>
 			<div>{ data[formModel!][model].map((data, i) => {
-				const name = `${model}[${i}].${children.props.name}`
+				const name = `[${i}].${children.props.name}`
 
 				return (
 					<Group key={ i }>
@@ -52,7 +49,7 @@ const NestedInputs = ({ children, model, label, emptyData }: INestedInputsProps)
 					</Group>
 				)
 			}) }</div>
-		</NestedInputsProvider>
+		</FieldsFor>
 	)
 }
 

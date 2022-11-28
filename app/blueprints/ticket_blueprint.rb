@@ -5,11 +5,13 @@ class TicketBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  association :messages, blueprint: TicketMessageBlueprint 
-  association :created_by, blueprint: PersonBlueprint
-  association :primary_contact, blueprint: PersonBlueprint
-  association :assignees, blueprint: PersonBlueprint
-  association :status, blueprint: TicketStatusBlueprint
+  view :associations do
+    association :messages, blueprint: TicketMessageBlueprint 
+    association :created_by, blueprint: PersonBlueprint
+    association :primary_contact, blueprint: PersonBlueprint
+    association :assignees, blueprint: PersonBlueprint
+    association :status, blueprint: TicketStatusBlueprint
+  end
 
   view :as_options do
     only :id, :subject
@@ -24,8 +26,10 @@ class TicketBlueprint < ApplicationBlueprint
   view :new do
     include_view :new
 
+    association :assignments, blueprint: TicketAssignmentBlueprint
+
     # association :status, blueprint: TicketStatusBlueprint, view: :new
 
-    excludes :status, :created_by
+    excludes :created_by
   end
 end

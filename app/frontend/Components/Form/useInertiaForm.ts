@@ -1,6 +1,7 @@
 import { unsetCompact } from '@/lib'
 import { useForm } from '@inertiajs/inertia-react'
 import { cloneDeep, isPlainObject, set, get } from 'lodash'
+import { useCallback } from 'react'
 
 const fillEmptyValues = (data: Record<string, any>) => {
 	const sanitizedDefaultData = cloneDeep(data)
@@ -53,6 +54,9 @@ function useInertiaForm(...args): InertiaFormProps {
 		return get(form.errors, key)
 	}
 
+	/**
+	 * Remove key/value pair by dot-notated key
+	 */
 	const unsetData = (key: string) => {
 		const clone = cloneDeep(form.data)
 		unsetCompact(clone, key)
@@ -60,7 +64,14 @@ function useInertiaForm(...args): InertiaFormProps {
 		return setData(clone)
 	}
 
-	return { ...form, setData, getData, getError, unsetData }
+	/**
+	 * Fix for transform method until Inertia team fixes it
+	 */
+	const transform = useCallback((cb) => {
+		form.transform(t => cb(cloneDeep(form.data)))
+	}, [form.data])
+
+	return { ...form, setData, getData, getError, unsetData, transform }
 }
 
 export default useInertiaForm
