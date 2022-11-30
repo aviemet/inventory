@@ -30,6 +30,7 @@ interface IFormProps<T> extends Omit<FormProps, 'onChange'|'onSubmit'|'onError'>
 	async?: boolean
 	grid?: boolean
 	remember?: boolean
+	transform?: boolean
 	onSubmit?: (object: Inertia.FormProps) => boolean|void
 	onChange?: (object: Inertia.FormProps) => void
 	onSuccess?: (object: Inertia.FormProps) => void
@@ -46,6 +47,7 @@ const Form = <T extends Record<keyof T, unknown>>(
 		async = false,
 		grid = true,
 		remember = true,
+		transform = true,
 		onSubmit,
 		onChange,
 		onSuccess,
@@ -85,7 +87,8 @@ const Form = <T extends Record<keyof T, unknown>>(
 
 		if(shouldSubmit && to) {
 
-			if(nestedAttributes.size > 0) {
+			// Transform nested attributes, concat'ing '_attributes' for Rails controllers
+			if(transform && nestedAttributes.size > 0) {
 				form.transform(submitData => {
 					nestedAttributes.forEach(attribute => {
 						set(

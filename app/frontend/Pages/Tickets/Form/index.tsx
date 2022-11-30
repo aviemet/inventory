@@ -5,7 +5,7 @@ import {
 	RichText,
 	Submit,
 	SearchableDropdown,
-	NestedInputs,
+	DynamicInputs,
 	FieldsFor,
 } from '@/Components/Form'
 
@@ -25,18 +25,19 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFo
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			onChange={ ({ data }) => { console.log({ data })} }
 		>
 			<Input name="subject" label="Subject" required autoFocus />
 
-			<NestedInputs model="assignments" label="Assignees" emptyData={ { id: '' } }>
-				<SearchableDropdown
-					options={ people }
-					label="Assign To"
-					name="person_id"
-				/>
+			<FieldsFor model="assignments" >
+				<DynamicInputs label="Assignees" emptyData={ { id: '' } }>
+					<SearchableDropdown
+						options={ people }
+						label="Assign To"
+						name="person_id"
+					/>
 
-			</NestedInputs>
+				</DynamicInputs>
+			</FieldsFor>
 
 			<SearchableDropdown
 				options={ people }

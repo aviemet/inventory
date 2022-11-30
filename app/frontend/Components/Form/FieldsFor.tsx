@@ -5,13 +5,19 @@ import { useFormMeta } from './Form'
 interface IFieldsForProps {
 	children: React.ReactNode
 	model: string
-	suffix?: false | string
 }
 
 const [useNestedAttribute, NestedAttributeProvider] = createContext<string>()
 export { useNestedAttribute }
 
 const FieldsFor = ({ children, model }: IFieldsForProps) => {
+	let inputModel = model
+
+	try {
+		const nested = useNestedAttribute()
+		inputModel = `${nested}.${model}`
+	} catch(e) {}
+
 	const { addAttribute } = useFormMeta()
 
 	useEffect(() => {
@@ -19,8 +25,8 @@ const FieldsFor = ({ children, model }: IFieldsForProps) => {
 	}, [])
 
 	return (
-		<NestedAttributeProvider value={ model }>
-			<div className={ `fields_for_${model}` }>{ children }</div>
+		<NestedAttributeProvider value={ inputModel }>
+			<div className="fields_for">{ children }</div>
 		</NestedAttributeProvider>
 	)
 }
