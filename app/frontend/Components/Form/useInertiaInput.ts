@@ -45,7 +45,6 @@ const useInertiaInput = (name: string, model?: string) => {
 		inputId,
 		value: form.getData(inputName),
 		setValue: (value: any) => {
-			console.log({ inputName })
 			return form.setData(inputName, value)
 		},
 		error: form.getError(inputName),

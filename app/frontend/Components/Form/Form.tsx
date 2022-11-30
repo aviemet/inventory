@@ -127,7 +127,7 @@ const Form = <T extends Record<keyof T, unknown>>(
 		})
 	}, [])
 
-	// **** Conditional calls to callbacks **** \\
+	// Conditional calls to callbacks
 	useEffect(() => {
 		if(onChange) onChange(contextValueObject())
 	}, [form.data])
