@@ -5,7 +5,6 @@ class TicketBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-<<<<<<< HEAD
   view :associations do
     association :messages, blueprint: TicketMessageBlueprint 
     association :created_by, blueprint: PersonBlueprint
@@ -13,13 +12,6 @@ class TicketBlueprint < ApplicationBlueprint
     association :assignees, blueprint: PersonBlueprint
     association :status, blueprint: TicketStatusBlueprint
   end
-=======
-  association :created_by, blueprint: PersonBlueprint
-  association :primary_contact, blueprint: PersonBlueprint
-  association :assignees, blueprint: PersonBlueprint
-  association :status, blueprint: TicketStatusBlueprint
-  association :messages, blueprint: TicketMessageBlueprint
->>>>>>> dad5450c (Adds messagse to ticket show page)
 
   view :as_options do
     only :id, :subject

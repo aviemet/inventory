@@ -685,6 +685,8 @@ declare namespace Schema {
 		manager?: Person;
 		location?: Location;
 		user?: User;
+		ticket_assignments?: TicketAssignment[];
+		tickets?: Ticket[];
 	}
 
 	interface Phone {
