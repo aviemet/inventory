@@ -29,14 +29,13 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFo
 			<Input name="subject" label="Subject" required autoFocus />
 
 			<FieldsFor model="assignments" >
-				<DynamicInputs label="Assignees" emptyData={ { id: '' } }>
+				<DynamicInputs label="Assignees" emptyData={ { id: '' } }>{ i => (
 					<SearchableDropdown
 						options={ people }
 						label="Assign To"
-						name="person_id"
+						name={ `[${i}]person_id` }
 					/>
-
-				</DynamicInputs>
+				) }</DynamicInputs>
 			</FieldsFor>
 
 			<SearchableDropdown

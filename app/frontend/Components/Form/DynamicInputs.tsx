@@ -44,15 +44,11 @@ const DynamicInputs = ({ children, label, emptyData }: IDynamicInputsProps) => {
 				<Button onClick={ handleAddInputs }>+</Button>
 			</Group>
 			{ getData(inputModel).map((data: any, i: number) => {
-				const DynamicNestedContext = React.createContext(i)
-
 				return (
-					<DynamicNestedContext.Provider key={ i } value={ i }>
-						<Group>
-							<div>{ children }</div>
-							<Button onClick={ () => handleRemoveInputs(i) }>-</Button>
-						</Group>
-					</DynamicNestedContext.Provider>
+					<Group key={ i }>
+						<div>{ children }</div>
+						<Button onClick={ () => handleRemoveInputs(i) }>-</Button>
+					</Group>
 				)
 			}) }
 		</>
