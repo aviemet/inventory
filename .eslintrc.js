@@ -4,6 +4,7 @@ module.exports = {
 		'es2021': true,
 	},
 	'extends': ['plugin:react/recommended', 'plugin:import/typescript', 'plugin:storybook/recommended'],
+	'plugins': ['react', '@typescript-eslint', 'import'],
 	'settings': {
 		'import/resolver': {
 			'typescript': {},
@@ -18,7 +19,6 @@ module.exports = {
 		'sourceType': 'module',
 		'requireConfigFile': false,
 	},
-	'plugins': ['react', '@typescript-eslint', 'import'],
 	'ignorePatterns': ['app/frontend/types/**/*', 'app/javascript/**/*'],
 	'rules': {
 		'indent': 'off',
@@ -73,6 +73,8 @@ module.exports = {
 				'if': { 'after': false },
 				'for': { 'after': false },
 				'while': { 'after': false },
+				'switch': { 'after': false },
+				'catch': { 'after': false },
 			},
 		}],
 		'comma-dangle': [2, 'always-multiline'],

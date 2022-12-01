@@ -47,7 +47,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 	}
 
 	let InputComponent
-	switch (type) {
+	switch(type) {
 		case 'password':
 			InputComponent = PasswordInput
 			break

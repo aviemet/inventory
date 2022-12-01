@@ -38,7 +38,6 @@ class StatusLabelsController < ApplicationController
 
   # GET /status_labels/:slug/edit
   def edit
-    ap({ status_label: status_label })
     render inertia: "StatusLabels/Edit", props: {
       status_label: -> { status_label.render(view: :edit) }
     }
