@@ -6,13 +6,13 @@ import { cloneDeep, get, set } from 'lodash'
 import { useNestedAttribute } from './FieldsFor'
 
 interface IDynamicInputsProps {
-	children: React.ReactNode
-	label: string | React.ReactNode
+	children: (i: number) => React.ReactNode
+	label?: string | React.ReactNode
 	emptyData: Record<string, any>
 }
 
 const DynamicInputs = ({ children, label, emptyData }: IDynamicInputsProps) => {
-	const { data, setData, unsetData, getData } = useForm()
+	const { setData, unsetData, getData } = useForm()
 	const { model: formModel } = useFormMeta()
 	let inputModel = formModel ?? ''
 
@@ -40,13 +40,13 @@ const DynamicInputs = ({ children, label, emptyData }: IDynamicInputsProps) => {
 	return (
 		<>
 			<Group>
-				<Label>{ label }</Label>
+				{ label && <Label>{ label }</Label> }
 				<Button onClick={ handleAddInputs }>+</Button>
 			</Group>
 			{ getData(inputModel).map((data: any, i: number) => {
 				return (
 					<Group key={ i }>
-						<div>{ children }</div>
+						<div>{ children(i) }</div>
 						<Button onClick={ () => handleRemoveInputs(i) }>-</Button>
 					</Group>
 				)

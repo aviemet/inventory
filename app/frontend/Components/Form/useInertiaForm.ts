@@ -3,6 +3,8 @@ import { useForm } from '@inertiajs/inertia-react'
 import { cloneDeep, isPlainObject, set, get } from 'lodash'
 import { useCallback } from 'react'
 
+type TCallBack = (data: Record<string, any>) => Record<string, any>
+
 const fillEmptyValues = (data: Record<string, any>) => {
 	const sanitizedDefaultData = cloneDeep(data)
 
@@ -67,8 +69,8 @@ function useInertiaForm(...args): InertiaFormProps {
 	/**
 	 * Fix for transform method until Inertia team fixes it
 	 */
-	const transform = useCallback((cb) => {
-		form.transform(t => cb(cloneDeep(form.data)))
+	const transform = useCallback((cb: TCallBack) => {
+		form.transform(() => cb(cloneDeep(form.data)))
 	}, [form.data])
 
 	return { ...form, setData, getData, getError, unsetData, transform }
