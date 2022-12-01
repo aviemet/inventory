@@ -5,6 +5,8 @@ import {
 	RichText,
 	Submit,
 	SearchableDropdown,
+	DynamicInputs,
+	FieldsFor,
 } from '@/Components/Form'
 
 export interface ITicketFormProps {
@@ -26,11 +28,15 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFo
 		>
 			<Input name="subject" label="Subject" required autoFocus />
 
-			<SearchableDropdown
-				options={ people }
-				label="Assign To"
-				name="assignees[0]"
-			/>
+			<FieldsFor model="assignments" >
+				<DynamicInputs label="Assignees" emptyData={ { id: '' } }>{ i => (
+					<SearchableDropdown
+						options={ people }
+						label="Assign To"
+						name={ `[${i}]person_id` }
+					/>
+				) }</DynamicInputs>
+			</FieldsFor>
 
 			<SearchableDropdown
 				options={ people }

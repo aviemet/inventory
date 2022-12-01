@@ -1,11 +1,10 @@
 import { useForm } from '.'
+import { useNestedAttribute } from './FieldsFor'
 
-type IInputPropsStrategyOutput = {
+type TInputPropsStrategy = (model: string | undefined, name: string) => {
 	inputId: string
 	inputName: string
 }
-
-type TInputPropsStrategy = (model: string | undefined, name: string) => IInputPropsStrategyOutput
 
 const inputPropsStrategy: TInputPropsStrategy = (model, name) => {
 	if(!model) {
@@ -31,7 +30,12 @@ const inputPropsStrategy: TInputPropsStrategy = (model, name) => {
 const useInertiaInput = (name: string, model?: string) => {
 	const form = useForm()
 
-	const usedModel = model ?? form.model
+	let usedModel = model ?? form.model
+
+	try {
+		const nested = useNestedAttribute()
+		usedModel += `.${nested}`
+	} catch(e) {}
 
 	const { inputName, inputId } = inputPropsStrategy(usedModel, name)
 
@@ -40,7 +44,9 @@ const useInertiaInput = (name: string, model?: string) => {
 		inputName,
 		inputId,
 		value: form.getData(inputName),
-		setValue: (value: any) => form.setData(inputName, value),
+		setValue: (value: any) => {
+			return form.setData(inputName, value)
+		},
 		error: form.getError(inputName),
 	}
 }

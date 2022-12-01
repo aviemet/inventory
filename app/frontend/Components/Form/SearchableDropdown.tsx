@@ -40,10 +40,10 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput(name, model)
 
-	const handleChange = useCallback((option: string|null) => {
+	const handleChange = (option: string|null) => {
 		setValue(option)
 		if(onChange) onChange(option, form)
-	}, [onChange, inputName])
+	}
 
 	const handleDropdownOpen = () => {
 		if(fetchOnOpen) Inertia.reload({ only: [fetchOnOpen] })

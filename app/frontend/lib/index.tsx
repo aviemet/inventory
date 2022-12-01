@@ -1,4 +1,4 @@
-import { isBoolean, isPlainObject, cloneDeep } from 'lodash'
+import { isBoolean, isPlainObject, cloneDeep, unset, get, set } from 'lodash'
 import { Routes } from '@/lib'
 export { default as IPAddress } from './IPAddress'
 
@@ -48,4 +48,20 @@ export const camelize = (str?: string|null) => {
 export const polymorphicRoute = (model: string, param: string|number) => {
 	// @ts-ignore
 	return Routes[camelize(model)](param)
+}
+
+type TArrType = string|number|Record<string, unknown>
+export const unsetCompact = (data: Record<string, any>, path: string) => {
+	unset(data, path)
+
+	let position = path.indexOf('[')
+	while(position >= 0) {
+		const arrPath = path.slice(0, position)
+		const arr = get(data, arrPath)
+		const compacted: TArrType[] = []
+		arr.forEach((a: TArrType) => compacted.push(a))
+		set(data, arrPath, compacted)
+
+		position = path.indexOf('[', position + 1)
+	}
 }

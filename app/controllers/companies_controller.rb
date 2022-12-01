@@ -38,7 +38,6 @@ class CompaniesController < ApplicationController
 
   # GET /companies/:slug/edit
   def edit
-    ap({ company: company })
     render inertia: "Companies/Edit", props: {
       company: -> { company.render(view: :edit) }
     }
