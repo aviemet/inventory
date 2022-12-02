@@ -13,8 +13,8 @@ const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
 		return React.cloneElement(row, {
 			name: row.key,
 			className: cx(
-				{ checked: selected.has(String(row.key!)) }
-			)
+				{ checked: selected.has(String(row.key!)) },
+			),
 		})
 	}
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
@@ -6,9 +6,12 @@ import { AppShell, Box, TypographyStylesProvider, useMantineTheme } from '@manti
 
 const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
-	if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
-		console.log({ theme })
-	}
+
+	useEffect(() => {
+		if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+			console.log({ theme })
+		}
+	}, [])
 
 	return (
 		<AppShell
@@ -29,7 +32,7 @@ const AppLayout = ({ children }: { children: any }) => {
 					paddingBottom: 'var(--mantine-footer-height, 0px)',
 					paddingLeft: 'var(--mantine-navbar-width, 0px)',
 					paddingRight: 'var(--mantine-aside-width, 0px)',
-				}
+				},
 			}) }
 
 			header={ <Topbar /> }

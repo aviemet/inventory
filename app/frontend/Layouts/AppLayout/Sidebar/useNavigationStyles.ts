@@ -117,7 +117,7 @@ export default createStyles(theme => {
 
 				span: {
 					width: `calc(100% - ${iconWidth + borderWidth}px)`,
-				}
+				},
 			},
 
 			span: {
@@ -129,6 +129,6 @@ export default createStyles(theme => {
 				height: '100%',
 				alignItems: 'center',
 			},
-		}
+		},
 	}
 })

@@ -4,7 +4,7 @@ import Label from './Label'
 
 const NumberInputComponent = forwardRef<HTMLInputElement, NumberInputProps>((
 	{ label, required = false, value, onChange, id, pattern, size = 'md', ...props },
-	ref
+	ref,
 ) => {
 	return (
 		<>

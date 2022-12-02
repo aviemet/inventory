@@ -31,7 +31,7 @@ const Money = ({ children, currency = 'USD', locale = 'en-US', accounting = fals
 				{ inputValue }
 			</FlexMoney>
 		)
-	} catch (e) {
+	} catch(e) {
 		// Otherwise, the standard branching logic is to use FlexMoney if accounting is set
 
 		if(accounting) {

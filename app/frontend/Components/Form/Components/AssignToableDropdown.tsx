@@ -35,7 +35,7 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 	const handleAssignToableChange = (id: string|null) => {
 		let default_location: number|null|undefined
 
-		switch (type) {
+		switch(type) {
 			case 'Person':
 				const person = people!.find(person => String(person.id) === id)
 				default_location = person?.location_id

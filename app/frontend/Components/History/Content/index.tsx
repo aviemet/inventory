@@ -1,5 +1,4 @@
 import React from 'react'
-import { has } from 'lodash'
 import { capitalize, polymorphicRoute } from '@/lib'
 import { CircleDotIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
 import AssignmentHistoryContent from './AssignmentHistoryContent'
@@ -16,13 +15,12 @@ type TTimelineData = {
 }
 
 export const buildTimelineData = (activity: Schema.PublicActivityActivity, assignment?: Schema.Assignment) => {
-	console.log({ activity, assignment })
 	const timelineData: TTimelineData = {
 		title: activity.key ? `${capitalize(activity.key.split('.')[1])}d` : '',
 		content: <></>,
 		icon: <CircleDotIcon />,
 		color: '',
-		lineStyle: 'solid'
+		lineStyle: 'solid',
 	}
 
 	// Assignment

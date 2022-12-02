@@ -36,7 +36,7 @@ import useNavigationStyles from './useNavigationStyles'
 const Sidebar = () => {
 	const { layoutState, setLayoutState } = useLayout()
 	const theme = useMantineTheme()
-	const{ classes } = useNavigationStyles()
+	const { classes } = useNavigationStyles()
 	const [siteTitleHidden, setSiteTitleHidden] = useState(false)
 
 	const handleNavClick = () => setLayoutState({ sidebarOpen: false })

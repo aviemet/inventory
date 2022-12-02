@@ -25,7 +25,7 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		clearable = true,
 		...props
 	},
-	ref
+	ref,
 ) => {
 	const data = useMemo(() => options.map(option => ({ label: getLabel(option), value: getValue(option) })), [options])
 

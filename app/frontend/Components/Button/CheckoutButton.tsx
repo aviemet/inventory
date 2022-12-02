@@ -17,7 +17,7 @@ const CheckoutButton = ({ href, disabled, tooltipMessage, ...props }: ICheckoutB
 	if(disabled) {
 		finalProps.disabled = disabled
 		finalProps.buttonProps = {
-			disabled: true
+			disabled: true,
 		}
 	}
 

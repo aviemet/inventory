@@ -14,7 +14,7 @@ interface IRowProps extends Omit<ITableRow, 'ref'> {
 }
 
 const Row = ({ children, render, name, ...props }: IRowProps) => {
-	try{
+	try {
 		const { tableState: { rows, selectable, selected } } = useTableContext()
 
 		return (

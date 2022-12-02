@@ -11,7 +11,7 @@ export type TBreadcrumb = {
 export const breadcrumbLinks = (links: TBreadcrumb[]) => links.map((link, i) => link.href ?
 	<Link href={ link.href } key={ i }>{ link.title }</Link>
 	:
-	<React.Fragment key={ i }>{ link.title }</React.Fragment>
+	<React.Fragment key={ i }>{ link.title }</React.Fragment>,
 )
 
 interface IBreadcrumbsProps extends Omit<BreadcrumbsProps, 'children'> {
@@ -38,7 +38,7 @@ const Breadcrumbs = ({ crumbs, children, separator = '>', ...props }: IBreadcrum
 				{ children && children }
 			</MantineBreadcrumbs>
 		</Group>,
-		footerElement
+		footerElement,
 	) }</>
 }
 

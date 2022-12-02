@@ -78,7 +78,7 @@ export const GlobalStyles = () => <Global styles={ theme => ({
 		display: 'flex',
 		flexDirection: 'column',
 		height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
-	}
+	},
 }) } />
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
@@ -98,9 +98,9 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 			axios.patch(Routes.updateUserPreferences(auth?.user), {
 				user: {
 					user_preferences: {
-						colorScheme: scheme
-					}
-				}
+						colorScheme: scheme,
+					},
+				},
 			})
 		}
 
@@ -112,7 +112,6 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 			<MantineProvider theme={ useTheme(colorScheme) } withGlobalStyles withNormalizeCSS>
 				<NotificationsProvider>
 					<GlobalStyles />
-
 					{ children }
 				</NotificationsProvider>
 			</MantineProvider>
