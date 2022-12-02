@@ -14,7 +14,7 @@ interface IRowInContextProps extends ITableRow {
 
 const RowInContext = forwardRef<HTMLTableRowElement, IRowInContextProps>((
 	{ children, name, rows, selectable, selected, ...props },
-	ref
+	ref,
 ) => {
 	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
 	const { tableState: { model, columns } } = useTableContext()

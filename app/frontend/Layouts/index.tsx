@@ -15,7 +15,7 @@ interface InertiaPageProps extends PageProps {
 }
 
 const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
-	return(
+	return (
 		<Providers>
 			<Flash />
 			{ children }
@@ -24,7 +24,7 @@ const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
 })
 
 const AppLayoutLayout = (page: InertiaPageProps) => {
-	return(
+	return (
 		<LayoutWrapper>
 			<AppLayout>{ page }</AppLayout>
 		</LayoutWrapper>
@@ -32,7 +32,7 @@ const AppLayoutLayout = (page: InertiaPageProps) => {
 }
 
 const AuthLayoutLayout = (page: InertiaPageProps) => {
-	return(
+	return (
 		<LayoutWrapper>
 			<AuthLayout>{ page }</AuthLayout>
 		</LayoutWrapper>
@@ -41,5 +41,5 @@ const AuthLayoutLayout = (page: InertiaPageProps) => {
 
 export {
 	AppLayoutLayout as AppLayout,
-	AuthLayoutLayout as AuthLayout
+	AuthLayoutLayout as AuthLayout,
 }

@@ -34,7 +34,7 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 					value={ value }
 					options={ {
 						altInput: true,
-						plugins: [labelPlugin()]
+						plugins: [labelPlugin()],
 					} }
 					id={ id }
 					render={

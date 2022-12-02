@@ -12,7 +12,7 @@ const HoverLink = ({ children, ...props }: ILinkProps) => <Link sx={ theme=>({
 	'&:hover': {
 		backgroundColor: theme.other.colorSchemeOption(
 			theme.colors[theme.primaryColor][2],
-			theme.colors[theme.primaryColor][6]
+			theme.colors[theme.primaryColor][6],
 		),
 	},
 }) } { ...props }>{ children }</Link>

@@ -9,7 +9,7 @@ interface IRichTextFormProps extends IRichTextProps {
 }
 
 const RichText = ( { label, name, required = false, id, onChange, model, ...props }: IRichTextFormProps) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput(name, model)
+	const { inputName, inputId, value, setValue, error } = useInertiaInput(name, model)
 
 	const handleChange: typeof onChange = (v, delta, sources, editor) => {
 		setValue(v)

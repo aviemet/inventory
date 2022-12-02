@@ -4,9 +4,8 @@ import Label from './Label'
 
 const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
 	{ label, required = false, value, onChange, id, pattern, size = 'md', radius = 'xs', className, ...props },
-	ref
+	ref,
 ) => {
-	if(className) console.log({ className })
 	return (
 		<>
 			{ label && <Label required={ required } htmlFor={ id }>

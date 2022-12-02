@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { createContext } from '../Hooks'
 import { useFormMeta } from './Form'
+import FormGroup from './FormGroup'
 
 interface IFieldsForProps {
 	children: React.ReactNode
@@ -26,7 +27,7 @@ const FieldsFor = ({ children, model }: IFieldsForProps) => {
 
 	return (
 		<NestedAttributeProvider value={ inputModel }>
-			<div className="fields_for">{ children }</div>
+			<FormGroup className="fields_for">{ children }</FormGroup>
 		</NestedAttributeProvider>
 	)
 }

@@ -10,8 +10,8 @@ const Footer = ({ children }: { children: React.ReactNode }) => {
 				borderBottomRightRadius: 8,
 				borderBottomLeftRadius: 8,
 				backgroundColor: theme.other.colorSchemeOption(
-					theme.fn.lighten(theme.colors[theme.primaryColor][theme.primaryShade.light], 0.75),
-					theme.fn.darken(theme.colors[theme.primaryColor][theme.primaryShade.dark], 0.75),
+					theme.fn.lighten(theme.fn.primaryColor(), 0.75),
+					theme.fn.darken(theme.fn.primaryColor(), 0.75),
 				),
 
 				'& > *': {

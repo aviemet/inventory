@@ -51,7 +51,7 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 			},
 			onSuccess: () => {
 				setTableState({ searching: false })
-			}
+			},
 		}
 		if(model) options.only = [model, 'pagination']
 		Inertia.get(path, {}, options)

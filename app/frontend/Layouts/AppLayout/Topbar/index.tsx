@@ -16,7 +16,7 @@ const Topbar = () => {
 			transition: 'left 100ms ease-in-out',
 			backgroundColor: theme.other.colorSchemeOption(
 				theme.colors[theme.primaryColor][9],
-				theme.fn.darken(theme.colors[theme.primaryColor][9], 0.75)
+				theme.fn.darken(theme.colors[theme.primaryColor][9], 0.75),
 			),
 			color: theme.white,
 
@@ -24,8 +24,8 @@ const Topbar = () => {
 				left: theme.other.navbar.width.open,
 
 				'&.closed': {
-					left: theme.other.navbar.width.closed
-				}
+					left: theme.other.navbar.width.closed,
+				},
 			},
 		}) }>
 			<Box sx={ { display: 'flex', alignItems: 'center', height: '100%' } }>
