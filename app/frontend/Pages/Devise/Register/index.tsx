@@ -6,12 +6,12 @@ import { usePage } from '@inertiajs/inertia-react'
 
 const firstRun = {
 	heading: 'Create Admin User',
-	description: 'Time to create your first user which  will be the admin for your inventory system'
+	description: 'Time to create your first user which  will be the admin for your inventory system',
 }
 
 const register = {
 	heading: 'Sign Up',
-	description: ''
+	description: '',
 }
 
 const Register = () => {
@@ -51,7 +51,7 @@ const Register = () => {
 						email: '',
 						password: '',
 						password_confirmation: '',
-					}
+					},
 				} }
 				model="user"
 				to={ Routes.userRegistration() }

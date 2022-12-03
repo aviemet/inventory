@@ -9,10 +9,10 @@ interface IItemsDropdownProps extends Omit<ISearchableDropdownProps, 'options'> 
 
 const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdownProps>((
 	{ ...props },
-	ref
+	ref,
 ) => {
 	const [items, setItems] = useState([])
-	console.log({ items })
+
 	useEffect(() => {
 		axios.get(Routes.apiItems())
 			.then(response => {

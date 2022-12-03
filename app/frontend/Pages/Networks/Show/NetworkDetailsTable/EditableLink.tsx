@@ -62,7 +62,7 @@ const EditableLink = ({ item, ip }: IEditableLinkProps) => {
 		}
 	}, [dropdownRef.current])
 
-	return(
+	return (
 		<>
 			<Group>
 				<Box sx={ {

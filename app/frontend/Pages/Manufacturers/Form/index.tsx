@@ -13,7 +13,7 @@ export interface IManufacturerFormProps {
 }
 
 const emptyManufacturer: Partial<Schema.Manufacturer> = {
-	name: ''
+	name: '',
 }
 
 const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer = emptyManufacturer }: IManufacturerFormProps) => {

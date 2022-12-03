@@ -18,7 +18,7 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 			pagination={ pagination }
 			menuOptions={ [
 				{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
-				{ label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon }
+				{ label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon },
 			] }
 		>
 			<PeopleTable />

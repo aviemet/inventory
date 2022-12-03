@@ -7,7 +7,6 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
 
 export interface IComponentFormProps {

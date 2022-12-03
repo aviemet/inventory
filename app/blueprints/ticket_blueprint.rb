@@ -20,6 +20,8 @@ class TicketBlueprint < ApplicationBlueprint
   view :edit do
     include_view :edit
 
+    association :assignments, blueprint: TicketAssignmentBlueprint
+
     exclude :created_by
   end
 
