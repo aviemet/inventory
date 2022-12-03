@@ -11,7 +11,7 @@ const Counts = ({ counts }: { counts: Schema.CompanyCounts }) => {
 				transition: 'background-color ease-in-out 250ms',
 
 				'&:hover': {
-					backgroundColor: theme.other.colorSchemeOption(theme.colors[theme.primaryColor][2], theme.colors[theme.primaryColor][8])
+					backgroundColor: theme.other.colorSchemeOption(theme.fn.primaryColor()[2], theme.fn.primaryColor()[8]),
 				},
 			},
 

@@ -12,7 +12,7 @@ export interface IDepartmentFormProps {
 
 const emptyDepartment: Partial<Schema.Department> = {
 	name: '',
-	location_id: undefined
+	location_id: undefined,
 }
 
 const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment, locations }: IDepartmentFormProps) => {

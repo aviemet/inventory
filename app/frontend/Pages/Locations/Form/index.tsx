@@ -19,8 +19,9 @@ export interface ILocationFormProps {
 
 const emptyLocation: Partial<Schema.Location> = {
 	name: '',
-	parent_id: '',
 	currency: '',
+	// @ts-ignore
+	parent_id: '',
 }
 
 const LocationForm = ({ to, method = 'post', onSubmit, location = emptyLocation, locations, currencies }: ILocationFormProps) => {

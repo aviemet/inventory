@@ -12,7 +12,7 @@ const ConsumableDetails = ({ consumable }: IConsumableDetailsProps) => {
 			<Heading order={ 3 }>Details</Heading>
 
 			<Box sx={ theme => ({
-				maxWidth: `${theme.breakpoints.sm}px`
+				maxWidth: `${theme.breakpoints.sm}px`,
 			}) }>
 
 				<Table>

@@ -7,13 +7,13 @@ import { createStyles } from '@mantine/core'
 
 const useTableStyles = createStyles(theme => ({
 	table: {
-		maxWidth: `${theme.breakpoints.md}px`
+		maxWidth: `${theme.breakpoints.md}px`,
 	},
 	firstCell: {
 		fontWeight: 'bold',
 		textAlign: 'right',
 		width: '1px',
-	}
+	},
 }))
 
 interface ICheckinItemsProps {

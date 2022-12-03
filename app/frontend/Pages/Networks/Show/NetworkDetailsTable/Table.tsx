@@ -26,8 +26,8 @@ const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 							height: 40,
 
 							'&:hover .item-ip-assign-button, & .item-ip-assign-button.editing': {
-								color: theme.colors.gray[4]
-							}
+								color: theme.colors.gray[4],
+							},
 						}) }>
 							<Table.Cell fitContent>{ host }</Table.Cell>
 							<Table.Cell>

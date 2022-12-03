@@ -11,7 +11,7 @@ const Login = () => {
 			email: '',
 			password: '',
 			remember_me: false,
-		}
+		},
 	}
 
 	const handleSubmit = ({ data }: Inertia.FormProps) => {

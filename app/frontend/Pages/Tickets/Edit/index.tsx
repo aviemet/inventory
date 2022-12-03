@@ -5,9 +5,10 @@ import TicketForm from '../Form'
 
 interface IUpdateTicketProps{
 	ticket: Schema.Ticket
+	people: Schema.Person[]
 }
 
-const EditTicket = ({ ticket }: IUpdateTicketProps) => {
+const EditTicket = ({ ticket, people }: IUpdateTicketProps) => {
 	const title = 'Edit Ticket'
 
 	return (
@@ -19,7 +20,12 @@ const EditTicket = ({ ticket }: IUpdateTicketProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<TicketForm to={ Routes.ticket(ticket) } method="patch" ticket={ ticket } />
+				<TicketForm
+					to={ Routes.ticket(ticket) }
+					method="patch"
+					ticket={ ticket }
+					people={ people }
+				/>
 			</Section>
 		</Page>
 	)

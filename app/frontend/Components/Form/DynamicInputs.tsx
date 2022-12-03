@@ -43,7 +43,7 @@ const DynamicInputs = ({ children, label, emptyData }: IDynamicInputsProps) => {
 				{ label && <Label>{ label }</Label> }
 				<Button onClick={ handleAddInputs }>+</Button>
 			</Group>
-			{ getData(inputModel).map((data: any, i: number) => {
+			{ Array.isArray(getData(inputModel)) && getData(inputModel).map((data: any, i: number) => {
 				return (
 					<Group key={ i }>
 						<div>{ children(i) }</div>

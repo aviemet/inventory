@@ -19,7 +19,7 @@ const Show = ({ category, records, pagination }: IShowCategoryProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Categories', href: Routes.categories() },
-			{ title: category.name! }
+			{ title: category.name! },
 		] }>
 			<Table.Section>
 				<Table.TableProvider
@@ -30,7 +30,7 @@ const Show = ({ category, records, pagination }: IShowCategoryProps) => {
 					pagination={ pagination }
 				>
 					<TableTitleSection title={ title } menuOptions={ [
-						{ label: 'Edit Category', href: Routes.editCategory(category.slug) }
+						{ label: 'Edit Category', href: Routes.editCategory(category.slug) },
 					] }>
 						<Table.SearchInput />
 					</TableTitleSection>

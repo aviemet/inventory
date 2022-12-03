@@ -14,7 +14,7 @@ const LdapIndex = ({ ldaps }: ILdapIndexProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Settings', href: Routes.settings() },
-			{ title: 'LDAP Connection' }
+			{ title: 'LDAP Connection' },
 		] }>
 			<Table.Section>
 				<Table.TableProvider

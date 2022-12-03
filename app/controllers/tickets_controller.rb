@@ -38,6 +38,9 @@ class TicketsController < ApplicationController
   def edit
     render inertia: "Tickets/Edit", props: {
       ticket: ticket.render(view: :edit),
+      people: @active_company.people.render(view: :as_options),
+      assets: @active_company.assets.render(view: :as_options),
+      locations: @active_company.locations.render(view: :as_options),
     }
   end
 

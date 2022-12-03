@@ -1,6 +1,9 @@
 import React, { useCallback } from 'react'
 import { Link, Heading, Table, Box, Badge } from '@/Components'
 import { formatter, Routes } from '@/lib'
+import { has } from 'lodash'
+
+type TPathOption = 'item'|'person'|'location'
 
 interface IItemDetailsProps {
 	item: Schema.Item
@@ -9,8 +12,9 @@ interface IItemDetailsProps {
 const AssignmentLink = ({ assignment }: { assignment?: Schema.Assignment }) => {
 	if(!assignment) return <></>
 
-	const path = Routes[assignment.assign_toable_type.toLowerCase()]
-	const param = assignment.assign_toable?.slug ?? assignment.assign_toable_id
+	const path = Routes[assignment.assign_toable_type.toLowerCase() as TPathOption]
+	// @ts-ignore
+	const param = has(assignment.assign_toable, 'slug') ? assignment.assign_toable.slug : assignment.assign_toable_id
 
 	return <Link href={ path(param) }>{ assignment.assign_toable.name }</Link>
 }
