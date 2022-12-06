@@ -107,9 +107,11 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		setColorScheme(scheme)
 	}
 
+	const mantineTheme = useTheme(colorScheme)
+
 	return (
 		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
-			<MantineProvider theme={ useTheme(colorScheme) } withGlobalStyles withNormalizeCSS>
+			<MantineProvider theme={ mantineTheme } withGlobalStyles withNormalizeCSS>
 				<NotificationsProvider>
 					<GlobalStyles />
 					{ children }
