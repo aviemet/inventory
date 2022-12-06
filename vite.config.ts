@@ -9,9 +9,9 @@ const config = defineConfig({
 	build: {
 		rollupOptions: {
 			external: [
-				'./app/frontend/Images/*'
-			]
-		}
+				'./app/frontend/Images/*',
+			],
+		},
 	},
 	plugins: [
 		tsconfigPaths(),
@@ -24,7 +24,7 @@ const config = defineConfig({
 	],
 	resolve: {
 		alias: {
-			'@': path.resolve(__dirname, 'app', 'frontend')
+			'@': path.resolve(__dirname, 'app', 'frontend'),
 		},
 	},
 	base: './',

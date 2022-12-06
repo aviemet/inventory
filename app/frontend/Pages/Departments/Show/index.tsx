@@ -1,14 +1,14 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Table, Page } from '@/Components'
+import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { NewIcon, EditIcon } from '@/Components/Icons'
-import { TableTitleSection } from '@/Components/Layout'
 import ItemsTable from '@/Pages/Items/Table'
 import AccessoriesTable from '@/Pages/Accessories/Table'
 import ConsumablesTable from '@/Pages/Consumables/Table'
 import ComponentsTable from '@/Pages/Components/Table'
 import LicensesTable from '@/Pages/Licenses/Table'
 import PeopleTable from '@/Pages/People/Table'
+import ShowPageTableTemplate from '@/Components/Layout/ShowPageTableTemplate'
 
 type TPaginatedModel<T> = {
 	data: T
@@ -17,12 +17,12 @@ type TPaginatedModel<T> = {
 
 interface IDepartmentShowProps {
 	department: Schema.DepartmentWithCounts
-	items?: TPaginatedModel<Schema.Item[]>
-	accessories?: TPaginatedModel<Schema.Accessory[]>
-	components?: TPaginatedModel<Schema.Component[]>
-	consumables?: TPaginatedModel<Schema.Consumable[]>
-	licenses?: TPaginatedModel<Schema.License[]>
-	people?: TPaginatedModel<Schema.Person[]>
+	items: TPaginatedModel<Schema.Item[]>
+	accessories: TPaginatedModel<Schema.Accessory[]>
+	components: TPaginatedModel<Schema.Component[]>
+	consumables: TPaginatedModel<Schema.Consumable[]>
+	licenses: TPaginatedModel<Schema.License[]>
+	people: TPaginatedModel<Schema.Person[]>
 }
 
 const tabs = {
@@ -43,7 +43,7 @@ const Show = ({ department, items, accessories, components, consumables, license
 			{ title: 'Departments', href: Routes.departments() },
 			{ title: department.name! },
 		] }>
-			<Tabs urlControlled={ true } defaultValue={ tabs.details } allowTabDeactivation={ true }>
+			<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
 					<Tabs.Tab value={ tabs.items }>Items ({ department.counts.items })</Tabs.Tab>
@@ -54,6 +54,7 @@ const Show = ({ department, items, accessories, components, consumables, license
 					<Tabs.Tab value={ tabs.people }>People ({ department.counts.people })</Tabs.Tab>
 				</Tabs.List>
 
+				{ /*********** Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
 						<Flex position="apart">
@@ -79,153 +80,103 @@ const Show = ({ department, items, accessories, components, consumables, license
 
 				{ /*********** ITEMS ***********/ }
 				<Tabs.Panel value={ tabs.items }>
-					<Section>
-						<div className='fullHeight'>
-							<Table.TableProvider
-								selectable
-								hideable
-								model="items"
-								rows={ items?.data }
-								pagination={ items?.pagination }
-							>
-								<TableTitleSection title={ `${title} Items` } menuOptions={ [
-									{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
-								] }>
-									<Table.SearchInput />
-									<Table.ColumnPicker />
-								</TableTitleSection>
-
-								<ItemsTable />
-
-								<Table.Pagination />
-
-							</Table.TableProvider>
-						</div>
-					</Section>
+					{ items && <Section>
+						<ShowPageTableTemplate
+							title={ `${department.name} Assets` }
+							model="items"
+							rows={ items.data }
+							pagination={ items.pagination }
+							menuOptions={ [
+								{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+							] }
+						>
+							<ItemsTable wrapper={ false } />
+						</ShowPageTableTemplate>
+					</Section> }
 				</Tabs.Panel>
 
 				{ /*********** ACCESSORIES ***********/ }
 				<Tabs.Panel value={ tabs.accessories }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${department.name} Accessories` }
 							model="accessories"
 							rows={ accessories?.data }
 							pagination={ accessories?.pagination }
-						>
-							<TableTitleSection title={ `${title} Accessories` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New Accessory', href: Routes.newAccessory(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<AccessoriesTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<AccessoriesTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
 				{ /*********** CONSUMABLES ***********/ }
 				<Tabs.Panel value={ tabs.consumables }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${department.name} Consumables` }
 							model="consumables"
 							rows={ consumables?.data }
 							pagination={ consumables?.pagination }
-						>
-							<TableTitleSection title={ `${title} Consumables` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<ConsumablesTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<ConsumablesTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
 				{ /*********** COMPONENTS ***********/ }
 				<Tabs.Panel value={ tabs.components }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${department.name} Components` }
 							model="components"
 							rows={ components?.data }
 							pagination={ components?.pagination }
-						>
-							<TableTitleSection title={ `${title} Components` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<ComponentsTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<ComponentsTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
 				{ /*********** LICENSES ***********/ }
 				<Tabs.Panel value={ tabs.licenses }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${department.name} Licenses` }
 							model="licenses"
 							rows={ licenses?.data }
 							pagination={ licenses?.pagination }
-						>
-							<TableTitleSection title={ `${title} Licenses` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<LicensesTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<LicensesTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
 				{ /*********** PEOPLE ***********/ }
 				<Tabs.Panel value={ tabs.people }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${department.name} People` }
 							model="people"
 							rows={ people?.data }
 							pagination={ people?.pagination }
-						>
-							<TableTitleSection title={ `${title} People` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<PeopleTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<PeopleTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
