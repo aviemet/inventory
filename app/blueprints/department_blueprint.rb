@@ -2,10 +2,11 @@ class DepartmentBlueprint < ApplicationBlueprint
   fields :name,
          :slug,
          :location_id,
+         :notes,
          :created_at,
          :updated_at
-        # TODO: Not sure how to manage/track dept managers
-        #  :manager_id
+
+  field :slug, name: :to_param
 
   view :counts do
     field :counts do |department|

@@ -10,9 +10,10 @@ interface ITicketsIndexProps {
 }
 
 const TicketsIndex = ({ tickets, pagination }: ITicketsIndexProps) => {
+	const title = 'Support Tickets'
 	return (
 		<IndexPageTemplate
-			title="Support Tickets"
+			title={ title }
 			model="tickets"
 			rows={ tickets }
 			pagination={ pagination }
