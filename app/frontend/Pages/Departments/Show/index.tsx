@@ -43,7 +43,14 @@ const Show = ({ department, items, accessories, components, consumables, license
 			{ title: 'Departments', href: Routes.departments() },
 			{ title: department.name! },
 		] }>
-			<Tabs urlControlled={ true } defaultValue={ tabs.details }>
+			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {
+				[tabs.items]: 'items',
+				[tabs.accessories]: 'accessories',
+				[tabs.components]: 'components',
+				[tabs.consumables]: 'consumables',
+				[tabs.licenses]: 'licenses',
+				[tabs.people]: 'people',
+			} }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
 					<Tabs.Tab value={ tabs.items }>Items ({ department.counts.items })</Tabs.Tab>
@@ -80,19 +87,19 @@ const Show = ({ department, items, accessories, components, consumables, license
 
 				{ /*********** ITEMS ***********/ }
 				<Tabs.Panel value={ tabs.items }>
-					{ items && <Section>
+					<Section>
 						<ShowPageTableTemplate
 							title={ `${department.name} Assets` }
 							model="items"
-							rows={ items.data }
-							pagination={ items.pagination }
+							rows={ items?.data }
+							pagination={ items?.pagination }
 							menuOptions={ [
 								{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
 							] }
 						>
 							<ItemsTable wrapper={ false } />
 						</ShowPageTableTemplate>
-					</Section> }
+					</Section>
 				</Tabs.Panel>
 
 				{ /*********** ACCESSORIES ***********/ }
