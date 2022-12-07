@@ -20,7 +20,7 @@ const EditDepartment = ({ department, ...models }: IEditDepartmentProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<DepartmentForm to={ Routes.department(department.slug) } method="patch" department={ department } { ...models } />
+				<DepartmentForm to={ Routes.department(department) } method="patch" department={ department } { ...models } />
 			</Section>
 		</Page>
 	)

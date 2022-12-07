@@ -12,7 +12,10 @@ const ShowTicket = ({ ticket }: IShowTicketProps) => {
 	const title = ticket.subject || 'Show Ticket'
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Support Tickets', href: Routes.tickets() },
+			{ title },
+		] }>
 			<Section>
 				<Heading>{ title }</Heading>
 				<DangerousHtml>{ ticket.description }</DangerousHtml>
