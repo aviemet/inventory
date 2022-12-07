@@ -65,3 +65,8 @@ export const unsetCompact = (data: Record<string, any>, path: string) => {
 		position = path.indexOf('[', position + 1)
 	}
 }
+
+export const coerceArray = (arg: string | string[]) => {
+	if(Array.isArray(arg)) return arg
+	return [arg]
+}
