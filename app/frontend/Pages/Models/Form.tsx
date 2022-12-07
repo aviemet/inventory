@@ -1,5 +1,5 @@
 import React from 'react'
-import ManufacturersDropdown from '../../../Components/Form/Dropdowns/ManufacturersDropdown'
+import ManufacturersDropdown from '../../Components/Form/Dropdowns/ManufacturersDropdown'
 import {
 	Form,
 	Input,
