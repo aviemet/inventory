@@ -15,7 +15,6 @@ export default createStyles((theme) => ({
 			},
 		},
 
-
 		'.field': {
 			backgroundColor: theme.other.colorSchemeOption(theme.colors.gray[1], theme.colors.dark[7]),
 			width: '100%',

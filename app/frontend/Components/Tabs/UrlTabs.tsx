@@ -24,15 +24,18 @@ const UrlTabs = ({ children, onTabChange, defaultValue, dependencies, ...props }
 		return url.searchParams.get('tab')
 	}, [window.location.href])
 
+	const navigateActiveTab = () => navigateTab(activeTab())
+
 	// Handle direct navigation to tabbed page
 	useEffect(() => {
 		if(!activeTab() && defaultValue) {
 			navigateTab(defaultValue, { replace: true })
 		} else {
-			document.addEventListener('inertia:navigate', () => {
-				navigateTab(activeTab())
-			}, { once: true })
+			document.addEventListener('inertia:navigate', navigateActiveTab, { once: true })
 		}
+
+		// @ts-ignore
+		return document.removeEventListener('inertia:navigate', navigateActiveTab, { once: true })
 	}, [])
 
 	const handleTabChange = (value: TabsValue) => {

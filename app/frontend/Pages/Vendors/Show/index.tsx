@@ -52,7 +52,14 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 			{ title: 'Vendors', href: Routes.vendors() },
 			{ title: vendor.name! },
 		] }>
-			<Tabs urlControlled={ true } defaultValue={ tabs.details } allowTabDeactivation={ true }>
+			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {
+				[tabs.items]: 'items',
+				[tabs.accessories]: 'accessories',
+				[tabs.components]: 'components',
+				[tabs.consumables]: 'consumables',
+				[tabs.licenses]: 'licenses',
+				[tabs.contracts]: 'contracts',
+			} }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
 					<Tabs.Tab value={ tabs.items }>Items ({ vendor.items_count })</Tabs.Tab>
@@ -96,8 +103,8 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 						<ShowPageTableTemplate
 							title={ `${vendor.name} Assets` }
 							model="items"
-							rows={ items.data }
-							pagination={ items.pagination }
+							rows={ items?.data }
+							pagination={ items?.pagination }
 							menuOptions={ [
 								{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
 							] }
