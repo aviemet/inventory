@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTableSectionContext } from '@/Components/Table/TableContext'
 import FlexMoney from './FlexMoney'
 
@@ -9,7 +9,8 @@ interface IMoneyProps {
 	accounting?: boolean
 }
 
-const Money = ({ children, currency = 'USD', locale = 'en-US', accounting = false }: IMoneyProps) => {
+const Money = ({ children, currency = 'USD', locale = 'en-US', accounting }: IMoneyProps) => {
+	const [inTable, setInTable] = useState(false)
 	const inputValue = children || 0
 
 	const currencyFormatter = new Intl.NumberFormat(locale, {
@@ -22,7 +23,10 @@ const Money = ({ children, currency = 'USD', locale = 'en-US', accounting = fals
 		// Throw if component is not being used inside of a table
 		// (when used in a table cell, always use FlexMoney. Throwing is easiest way to check context)
 		useTableSectionContext()
+		if(!inTable) setInTable(true)
+	} catch(e) {}
 
+	if(accounting || (inTable && accounting === undefined)) {
 		return (
 			<FlexMoney
 				formatter={ currencyFormatter }
@@ -31,22 +35,9 @@ const Money = ({ children, currency = 'USD', locale = 'en-US', accounting = fals
 				{ inputValue }
 			</FlexMoney>
 		)
-	} catch(e) {
-		// Otherwise, the standard branching logic is to use FlexMoney if accounting is set
-
-		if(accounting) {
-			return (
-				<FlexMoney
-					formatter={ currencyFormatter }
-					accounting={ accounting }
-				>
-					{ inputValue }
-				</FlexMoney>
-			)
-		}
-
-		return <>{ currencyFormatter.format(inputValue) }</>
 	}
+
+	return <>{ currencyFormatter.format(inputValue) }</>
 }
 
 export default Money
