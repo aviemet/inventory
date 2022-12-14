@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link, Heading, Table, Box } from '@/Components'
-import { formatter, Routes } from '@/lib'
+import { Link, Heading, Table, Box, Money } from '@/Components'
+import { Routes } from '@/lib'
 
 interface IAccessoryDetailsProps {
 	accessory: Schema.Accessory
@@ -17,7 +17,6 @@ const AccessoryDetails = ({ accessory }: IAccessoryDetailsProps) => {
 
 				<Table>
 					<Table.Body>
-
 						{ accessory.qty && <Table.Row>
 							<Table.Cell>Quantity</Table.Cell>
 							<Table.Cell>{ accessory.qty }</Table.Cell>
@@ -67,7 +66,9 @@ const AccessoryDetails = ({ accessory }: IAccessoryDetailsProps) => {
 
 						<Table.Row>
 							<Table.Cell>Purchase Cost</Table.Cell>
-							<Table.Cell>{ accessory.cost && formatter.currency(accessory.cost, accessory.cost_currency) }</Table.Cell>
+							<Table.Cell>
+								<Money accounting={ false } currency={ accessory.cost_currency }>{ accessory.cost }</Money>
+							</Table.Cell>
 						</Table.Row>
 
 						<Table.Row>
