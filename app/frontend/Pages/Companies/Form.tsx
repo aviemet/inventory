@@ -4,7 +4,7 @@ import {
 	Input,
 	Submit,
 } from '@/Components/Form'
-import { ContactForm } from '@/Components/Layout/Contactable'
+import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 
 export interface ICompanyFormProps {
 	to: string

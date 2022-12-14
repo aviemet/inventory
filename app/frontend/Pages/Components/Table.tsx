@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Link, Money, Table, Tooltip } from '@/Components'
+import { Link, Money, Table } from '@/Components'
 import { EditButton, CheckoutButton } from '@/Components/Button'
 import { isNil } from 'lodash'
 import { type ITableProps } from '@/Components/Table/Table'
@@ -39,7 +39,9 @@ const ComponentsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.component(component) }>{ component.model?.name }</Link>
+							{ component.model && <Link href={ Routes.model(component.model.slug) }>
+								{ component.model.name }
+							</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
@@ -47,15 +49,21 @@ const ComponentsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.component(component) }>{ component.category?.name }</Link>
+							{ component.category && <Link href={ Routes.category(component.category.slug) }>
+								{ component.category.name }
+							</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.component(component) }>{ component.manufacturer?.name }</Link>
+							{ component.manufacturer && <Link href={ Routes.manufacturer(component.manufacturer.slug) }>
+								{ component.manufacturer!.name }
+							</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.component(component) }>{ component.vendor?.name }</Link>
+							{ component.vendor && <Link href={ Routes.vendor(component.vendor.slug) }>
+								{ component.vendor.name }
+							</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
@@ -67,11 +75,12 @@ const ComponentsTable = (props: ITableProps) => {
 						<Table.Cell>{ component.min_qty }</Table.Cell>
 
 						<Table.Cell fitContent>
-							{ !component.available_to_checkout ?
-								<Tooltip label="There are none in stock" position="left" withArrow><CheckoutButton href={ Routes.checkoutComponent(component) } disabled /></Tooltip>
-								:
-								<CheckoutButton href={ Routes.checkoutComponent(component) } />
-							}
+							<CheckoutButton
+								href={ Routes.checkoutComponent(component) }
+								disabled={ !component.available_to_checkout }
+								tooltipMessage={ !component.available_to_checkout && 'There are none to checkout' }
+							/>
+
 							<EditButton href={ Routes.editComponent(component) } />
 						</Table.Cell>
 

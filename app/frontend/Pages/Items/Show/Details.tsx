@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Link, Heading, Table, Box, Badge } from '@/Components'
+import { Link, Heading, Table, Box, Badge, Money } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { has } from 'lodash'
 
@@ -96,7 +96,9 @@ const ItemDetails = ({ item }: IItemDetailsProps) => {
 
 						<Table.Row>
 							<Table.Cell>Purchase Cost</Table.Cell>
-							<Table.Cell>{ item.cost && formatter.currency(item.cost, item.cost_currency) }</Table.Cell>
+							<Table.Cell>
+								<Money accounting={ false } currency={ item.cost_currency }>{ item.cost }</Money>
+							</Table.Cell>
 						</Table.Row>
 
 						<Table.Row>
