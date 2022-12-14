@@ -4,6 +4,7 @@ import { Button, Group } from '@/Components'
 import Label from '@/Components/Inputs/Label'
 import { cloneDeep, get, set } from 'lodash'
 import { useNestedAttribute } from './FieldsFor'
+import { PlusCircleIcon, MinusCircleIcon } from '@/Components/Icons'
 
 interface IDynamicInputsProps {
 	children: (i: number) => React.ReactNode
@@ -26,9 +27,16 @@ const DynamicInputs = ({ children, label, emptyData }: IDynamicInputsProps) => {
 
 		setData((formData: Record<string, any>) => {
 			const clone = cloneDeep(formData)
-			const node = get(clone, inputModel)
+			let node = get(clone, inputModel)
+
+			if(!node) {
+				set(clone, inputModel, [])
+				node = get(clone, inputModel)
+			}
+
 			node.push(emptyData)
 			set(clone, inputModel, node)
+
 			return clone
 		})
 	}
@@ -41,13 +49,24 @@ const DynamicInputs = ({ children, label, emptyData }: IDynamicInputsProps) => {
 		<>
 			<Group>
 				{ label && <Label>{ label }</Label> }
-				<Button onClick={ handleAddInputs }>+</Button>
+				<Button
+					onClick={ handleAddInputs }
+					size='xs'
+					mb={ 4 }
+				>
+					<PlusCircleIcon />
+				</Button>
 			</Group>
 			{ Array.isArray(getData(inputModel)) && getData(inputModel).map((data: any, i: number) => {
 				return (
 					<Group key={ i }>
 						<div>{ children(i) }</div>
-						<Button onClick={ () => handleRemoveInputs(i) }>-</Button>
+						<Button onClick={ () => handleRemoveInputs(i) } sx={ {
+							marginLeft: 'auto',
+							display: 'block',
+						} }>
+							<MinusCircleIcon />
+						</Button>
 					</Group>
 				)
 			}) }
