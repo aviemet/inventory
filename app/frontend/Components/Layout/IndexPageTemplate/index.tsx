@@ -17,7 +17,9 @@ interface IIndexPageTemplateProps {
 
 const IndexPageTemplate = ({ children, title, model, rows, pagination, menuOptions }: IIndexPageTemplateProps) => {
 	return (
-		<Page title={ title }>
+		<Page title={ title } breadcrumbs={ [
+			{ title: title, href: window.location.href },
+		] }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
