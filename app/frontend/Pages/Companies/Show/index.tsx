@@ -1,6 +1,6 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
-import { ContactDetails } from '@/Components/Layout/Contactable'
+import { ContactDetails } from '@/Layouts/AppLayout/Components/Contactable'
 import { Routes } from '@/lib'
 
 interface IShowCompanyProps {

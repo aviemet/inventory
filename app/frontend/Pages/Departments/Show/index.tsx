@@ -8,7 +8,7 @@ import ConsumablesTable from '@/Pages/Consumables/Table'
 import ComponentsTable from '@/Pages/Components/Table'
 import LicensesTable from '@/Pages/Licenses/Table'
 import PeopleTable from '@/Pages/People/Table'
-import ShowPageTableTemplate from '@/Components/Layout/ShowPageTableTemplate'
+import ShowPageTableTemplate from '@/Layouts/AppLayout/Components/ShowPageTableTemplate'
 
 type TPaginatedModel<T> = {
 	data: T

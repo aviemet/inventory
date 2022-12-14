@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Components/Layout'
+import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon, SettingsIcon } from '@/Components/Icons'
 import PeopleTable from '../Table'
 
