@@ -1,7 +1,8 @@
 import React from 'react'
-import { Group } from '@/Components'
+import { Badge, Group } from '@/Components'
 import { Routes } from '@/lib'
 import CountsCard from './CountCard'
+import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from '@/Components/Icons'
 
 const Counts = ({ counts }: { counts: Schema.CompanyCounts }) => {
 	return (
@@ -20,45 +21,39 @@ const Counts = ({ counts }: { counts: Schema.CompanyCounts }) => {
 			},
 		}) }>
 			<CountsCard href={ Routes.items() }>
-				<Group>
-					<div>Hardware</div>
-					<div>{ counts.items }</div>
-				</Group>
+				<ItemsIcon />
+				<div>Hardware</div>
+				<div><Badge>{ counts.items }</Badge></div>
 			</CountsCard>
 
 			<CountsCard href={ Routes.accessories() }>
-				<Group>
-					<div>Accessories</div>
-					<div>{ counts.accessories }</div>
-				</Group>
+				<AccessoriesIcon />
+				<div>Accessories</div>
+				<div><Badge>{ counts.accessories }</Badge></div>
 			</CountsCard>
 
 			<CountsCard href={ Routes.components() }>
-				<Group>
-					<div>Components</div>
-					<div>{ counts.components }</div>
-				</Group>
+				<ComponentsIcon />
+				<div>Components</div>
+				<div><Badge>{ counts.components }</Badge></div>
 			</CountsCard>
 
 			<CountsCard href={ Routes.consumables() }>
-				<Group>
-					<div>Consumables</div>
-					<div>{ counts.consumables }</div>
-				</Group>
+				<ConsumablesIcon />
+				<div>Consumables</div>
+				<div><Badge>{ counts.consumables }</Badge></div>
 			</CountsCard>
 
 			<CountsCard href={ Routes.licenses() }>
-				<Group>
-					<div>Licenses</div>
-					<div>{ counts.licenses }</div>
-				</Group>
+				<LicensesIcon />
+				<div>Licenses</div>
+				<div><Badge>{ counts.licenses }</Badge></div>
 			</CountsCard>
 
 			<CountsCard href={ Routes.people() }>
-				<Group>
-					<div>People</div>
-					<div>{ counts.people }</div>
-				</Group>
+				<PeopleIcon />
+				<div>People</div>
+				<div><Badge>{ counts.people }</Badge></div>
 			</CountsCard>
 		</Group>
 	)
