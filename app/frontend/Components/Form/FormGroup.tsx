@@ -15,7 +15,7 @@ const FormGroup = ({ children, legend, outline = true, compact = false }: IFormG
 			const alphaAdjustment = 0.125
 
 			return {
-				marginTop: theme.spacing.xs,
+				marginTop: legend ? '2rem' : theme.spacing.xs,
 				padding: 10,
 				position: 'relative',
 				backgroundColor: theme.other.colorSchemeOption(
