@@ -16,7 +16,7 @@ const QuickNewMenu = () => {
 	return (
 		<Menu position="bottom-end">
 			<Menu.Target>
-				<Button><PlusCircleIcon /> New</Button>
+				<Button leftIcon={ <PlusCircleIcon /> }> New</Button>
 			</Menu.Target>
 
 			<Menu.Dropdown>
