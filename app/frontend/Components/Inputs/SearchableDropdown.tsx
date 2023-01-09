@@ -6,6 +6,7 @@ export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 	options: Array<Record<string, any>>
 	getLabel?: (option: Record<string, any>) => any
 	getValue?: (option: Record<string, any>) => string
+	disabledOptions?: (label: string, value: string | number) => boolean
 	onOpen?: () => void
 	filterMatchKeys?: string[]
 }
@@ -15,6 +16,7 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		options = [],
 		getLabel = option => option.name,
 		getValue = option => String(option.id),
+		disabledOptions,
 		onChange,
 		onOpen,
 		filterMatchKeys,
@@ -27,7 +29,19 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 	},
 	ref,
 ) => {
-	const data = useMemo(() => options.map(option => ({ label: getLabel(option), value: getValue(option) })), [options])
+	const data = useMemo(() => options.map(option => {
+		const optionPart = {
+			label: getLabel(option),
+			value: getValue(option),
+			disabled: false,
+		}
+
+		if(disabledOptions) {
+			optionPart.disabled = disabledOptions(optionPart.label, optionPart.value)
+		}
+
+		return optionPart
+	}), [options])
 
 	const handleChange = (value: string|null) => {
 		if(onChange) onChange(value)
