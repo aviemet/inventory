@@ -27,4 +27,5 @@ export {
 	List,
 	Tooltip,
 	ThemeIcon as Icon,
+	SimpleGrid,
 } from '@mantine/core'
