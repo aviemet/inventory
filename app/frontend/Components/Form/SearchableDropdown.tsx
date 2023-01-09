@@ -20,14 +20,11 @@ interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onC
 
 const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 	{
-		options,
-		label,
 		name,
+		label,
 		model,
 		required,
 		defaultValue,
-		getLabel = option => option.name,
-		getValue = option => String(option.id),
 		onChange,
 		onDropdownOpen,
 		onDropdownClose,
@@ -72,15 +69,12 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 					ref={ ref }
 					id={ id || inputId }
 					name={ inputName }
-					options={ options }
+					label={ label }
 					value={ String(value) }
 					onChange={ handleChange }
 					onDropdownOpen={ handleDropdownOpen }
 					onDropdownClose={ handleDropdownClose }
 					defaultValue={ defaultValue ?? value }
-					getLabel={ getLabel }
-					getValue={ getValue }
-					label={ label }
 					{ ...props }
 				/>
 			</Field>
