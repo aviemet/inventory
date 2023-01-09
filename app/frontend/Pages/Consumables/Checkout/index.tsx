@@ -2,7 +2,7 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown, LocationDropdown } from '@/Components/Form/Components'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
@@ -17,7 +17,7 @@ const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => 
 	const handleSubmit = ({ transform }: InertiaFormProps) => {
 		transform(data => {
 			data.assignment.qty = data.consumable.qty
-			data.consumable.qty = consumable.qty - data.consumable.qty
+			data.consumable.qty = consumable.qty! - data.consumable.qty
 			return data
 		})
 	}
@@ -64,7 +64,7 @@ const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => 
 						options={ ['Item', 'Person', 'Location'] }
 					/>
 
-					<LocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown locations={ models.locations } />
 
 					<DateTime
 						label="Assigned At"

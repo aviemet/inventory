@@ -23,7 +23,7 @@ class VendorsController < ApplicationController
   def show
     render inertia: "Vendors/Show", props: {
       vendor: vendor.render(view: :show_page),
-      items: -> {
+      items: InertiaRails.lazy(-> {
         paginated_items = vendor.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render(view: :associations),
@@ -32,7 +32,7 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      },
+      }),
       accessories: InertiaRails.lazy(-> { 
         paginated_accessories = vendor.accessories.includes_associated.page(params[:page] || 1)
         {

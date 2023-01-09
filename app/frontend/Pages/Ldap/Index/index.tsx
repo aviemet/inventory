@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Components/Layout'
+import { TableTitleSection } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import { EditButton } from '@/Components/Button'
 
@@ -14,7 +14,7 @@ const LdapIndex = ({ ldaps }: ILdapIndexProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Settings', href: Routes.settings() },
-			{ title: 'LDAP Connection' }
+			{ title: 'LDAP Connection' },
 		] }>
 			<Table.Section>
 				<Table.TableProvider

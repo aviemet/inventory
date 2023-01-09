@@ -1,6 +1,5 @@
 import React from 'react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Table, Page } from '@/Components'
-import { TableTitleSection } from '@/Components/Layout'
+import { Section, Link, Menu, Flex, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { NewIcon, EditIcon } from '@/Components/Icons'
 import ItemsTable from '@/Pages/Items/Table'
@@ -9,6 +8,7 @@ import ConsumablesTable from '@/Pages/Consumables/Table'
 import ComponentsTable from '@/Pages/Components/Table'
 import LicensesTable from '@/Pages/Licenses/Table'
 import ContractsTable from '@/Pages/Contracts/Table'
+import ShowPageTableTemplate from '@/Layouts/AppLayout/Components/ShowPageTableTemplate'
 
 type ShowPageVendor = Schema.Vendor & {
 	items_count: number
@@ -26,12 +26,12 @@ type TPaginatedModel<T> = {
 
 interface IVendorShowProps {
 	vendor: ShowPageVendor
-	items?: TPaginatedModel<Schema.Item[]>
-	accessories?: TPaginatedModel<Schema.Accessory[]>
-	components?: TPaginatedModel<Schema.Component[]>
-	consumables?: TPaginatedModel<Schema.Consumable[]>
-	licenses?: TPaginatedModel<Schema.License[]>
-	contracts?: TPaginatedModel<Schema.Contract[]>
+	items: TPaginatedModel<Schema.Item[]>
+	accessories: TPaginatedModel<Schema.Accessory[]>
+	components: TPaginatedModel<Schema.Component[]>
+	consumables: TPaginatedModel<Schema.Consumable[]>
+	licenses: TPaginatedModel<Schema.License[]>
+	contracts: TPaginatedModel<Schema.Contract[]>
 }
 
 const tabs = {
@@ -52,7 +52,14 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 			{ title: 'Vendors', href: Routes.vendors() },
 			{ title: vendor.name! },
 		] }>
-			<Tabs urlControlled={ true } defaultValue={ tabs.details } allowTabDeactivation={ true }>
+			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {
+				[tabs.items]: 'items',
+				[tabs.accessories]: 'accessories',
+				[tabs.components]: 'components',
+				[tabs.consumables]: 'consumables',
+				[tabs.licenses]: 'licenses',
+				[tabs.contracts]: 'contracts',
+			} }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
 					<Tabs.Tab value={ tabs.items }>Items ({ vendor.items_count })</Tabs.Tab>
@@ -63,6 +70,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					<Tabs.Tab value={ tabs.contracts }>Contracts ({ vendor.contracts_count })</Tabs.Tab>
 				</Tabs.List>
 
+				{ /*********** Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
 						<Flex position="apart">
@@ -81,7 +89,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 										href={ Routes.editVendor(vendor.slug) }
 										icon={ <EditIcon /> }
 									>
-								Edit
+										Edit
 									</Menu.Item>
 								</Menu.Dropdown>
 							</Menu>
@@ -92,150 +100,102 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 				{ /*********** ITEMS ***********/ }
 				<Tabs.Panel value={ tabs.items }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${vendor.name} Assets` }
 							model="items"
 							rows={ items?.data }
 							pagination={ items?.pagination }
-						>
-							<TableTitleSection title={ `${vendor.name} Assets` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
+							] }
+						>
 							<ItemsTable wrapper={ false } />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
 				{ /*********** ACCESSORIES ***********/ }
 				<Tabs.Panel value={ tabs.accessories }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${vendor.name} Accessories` }
 							model="accessories"
 							rows={ accessories?.data }
 							pagination={ accessories?.pagination }
-						>
-							<TableTitleSection title={ `${vendor.name} Accessories` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New Accessory', href: Routes.newAccessory(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<AccessoriesTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<AccessoriesTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
 				{ /*********** CONSUMABLES ***********/ }
 				<Tabs.Panel value={ tabs.consumables }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${vendor.name} Consumables` }
 							model="consumables"
 							rows={ consumables?.data }
 							pagination={ consumables?.pagination }
-						>
-							<TableTitleSection title={ `${vendor.name} Consumables` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<ConsumablesTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<ConsumablesTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
 				{ /*********** COMPONENTS ***********/ }
 				<Tabs.Panel value={ tabs.components }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${vendor.name} Components` }
 							model="components"
 							rows={ components?.data }
 							pagination={ components?.pagination }
-						>
-							<TableTitleSection title={ `${vendor.name} Components` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<ComponentsTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<ComponentsTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
 				{ /*********** LICENSES ***********/ }
 				<Tabs.Panel value={ tabs.licenses }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${vendor.name} Licenses` }
 							model="licenses"
 							rows={ licenses?.data }
 							pagination={ licenses?.pagination }
-						>
-							<TableTitleSection title={ `${vendor.name} Licenses` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<LicensesTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<LicensesTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 
 				{ /*********** CONTRACTS ***********/ }
 				<Tabs.Panel value={ tabs.contracts }>
 					<Section>
-						<Table.TableProvider
-							selectable
-							hideable
+						<ShowPageTableTemplate
+							title={ `${vendor.name} Contracts` }
 							model="contracts"
 							rows={ contracts?.data }
 							pagination={ contracts?.pagination }
-						>
-							<TableTitleSection title={ `${vendor.name} Contracts` } menuOptions={ [
+							menuOptions={ [
 								{ label: 'New Contract', href: Routes.newContract({ 'contract.vendor_id': vendor.id }), icon: NewIcon },
-							] }>
-								<Table.SearchInput />
-								<Table.ColumnPicker />
-							</TableTitleSection>
-
-							<ContractsTable />
-
-							<Table.Pagination />
-
-						</Table.TableProvider>
+							] }
+						>
+							<ContractsTable wrapper={ false } />
+						</ShowPageTableTemplate>
 					</Section>
 				</Tabs.Panel>
 

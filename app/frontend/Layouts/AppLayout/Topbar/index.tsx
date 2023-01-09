@@ -4,8 +4,8 @@ import { useLayout } from '@/Layouts/Providers'
 import { usePage } from '@inertiajs/inertia-react'
 import QuickNewMenu from './QuickNewMenu'
 import { Box, Header, Burger, Group } from '@mantine/core'
-import { ToggleColorSchemeButton } from '@/Components/Button'
 import cx from 'clsx'
+import AvatarMenu from './AvatarMenu'
 
 const Topbar = () => {
 	const { props: { auth: { user } } } = usePage<InertiaPage>()
@@ -16,7 +16,7 @@ const Topbar = () => {
 			transition: 'left 100ms ease-in-out',
 			backgroundColor: theme.other.colorSchemeOption(
 				theme.colors[theme.primaryColor][9],
-				theme.fn.darken(theme.colors[theme.primaryColor][9], 0.75)
+				theme.fn.darken(theme.colors[theme.primaryColor][9], 0.75),
 			),
 			color: theme.white,
 
@@ -24,8 +24,8 @@ const Topbar = () => {
 				left: theme.other.navbar.width.open,
 
 				'&.closed': {
-					left: theme.other.navbar.width.closed
-				}
+					left: theme.other.navbar.width.closed,
+				},
 			},
 		}) }>
 			<Box sx={ { display: 'flex', alignItems: 'center', height: '100%' } }>
@@ -45,7 +45,7 @@ const Topbar = () => {
 
 				<Group>
 					<QuickNewMenu />
-					<ToggleColorSchemeButton />
+					<AvatarMenu />
 				</Group>
 
 			</Box>

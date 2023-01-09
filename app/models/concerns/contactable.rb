@@ -9,5 +9,13 @@ module Contactable
     has_many :websites, through: :contact
 
     accepts_nested_attributes_for :contact, :addresses, :phones, :emails, :websites
+
+    validates_presence_of :contact
+
+    before_validation :ensure_associated_contact
+
+    def ensure_associated_contact
+      build_contact unless contact
+    end
   end
 end

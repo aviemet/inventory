@@ -24,35 +24,19 @@ class ItemBlueprint < ApplicationBlueprint
     association :manufacturer, blueprint: ManufacturerBlueprint
     association :default_location, blueprint: LocationBlueprint
     association :location, blueprint: LocationBlueprint
-    association :status_type, blueprint: StatusTypeBlueprint
+    association :status_label, blueprint: StatusLabelBlueprint
     association :nics, blueprint: NicBlueprint
-
     association :activities, blueprint: ActivityBlueprint
   end
 
   view :index do
-    association :department, blueprint: DepartmentBlueprint
-    association :model, blueprint: ModelBlueprint
-    association :vendor, blueprint: VendorBlueprint
-    association :category, blueprint: CategoryBlueprint
-    association :manufacturer, blueprint: ManufacturerBlueprint
-    association :location, blueprint: LocationBlueprint
-    association :status_type, blueprint: StatusTypeBlueprint
+    include_view :associations
+
+    excludes :assignments, :default_location, :nics, :activities
   end
 
   view :show do
-    association :department, blueprint: DepartmentBlueprint
-    association :assignments, blueprint: AssignmentBlueprint, view: :associations
-    association :model, blueprint: ModelBlueprint
-    association :vendor, blueprint: VendorBlueprint
-    association :category, blueprint: CategoryBlueprint
-    association :manufacturer, blueprint: ManufacturerBlueprint
-    association :default_location, blueprint: LocationBlueprint
-    association :location, blueprint: LocationBlueprint
-    association :status_type, blueprint: StatusTypeBlueprint
-    association :nics, blueprint: NicBlueprint
-
-    association :history, name: :activities, blueprint: ActivityBlueprint
+    include_view :associations
   end
 
   view :new do
@@ -67,5 +51,11 @@ class ItemBlueprint < ApplicationBlueprint
   
   view :as_options do
     only :id, :name, :default_location_id
+  end
+
+  view :as_options_with_ip do
+    include_view :as_options
+
+    association :ips, blueprint: IpLeaseBlueprint, view: :as_options
   end
 end

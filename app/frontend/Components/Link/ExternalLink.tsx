@@ -10,7 +10,7 @@ interface IExternalLinkProps extends Omit<AnchorProps, 'component'> {
 
 const ExternalLink = forwardRef<HTMLAnchorElement, IExternalLinkProps>((
 	{ children, href, as, ...props },
-	ref
+	ref,
 ) => {
 	const url = normalizeUrl(href, { stripWWW: false })
 
@@ -25,7 +25,7 @@ const ExternalLink = forwardRef<HTMLAnchorElement, IExternalLinkProps>((
 				'.react-icon.external': {
 					display: 'inline-block',
 					verticalAlign: 'text-top',
-				}
+				},
 			} }
 			ref={ ref }
 			{ ...props }

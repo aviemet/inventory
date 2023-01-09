@@ -1,6 +1,6 @@
 import React from 'react'
-import { Routes, formatter } from '@/lib'
-import { Link, Table } from '@/Components'
+import { Routes } from '@/lib'
+import { Link, Table, Money } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 
@@ -31,7 +31,9 @@ const ItemsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell nowrap >
-							<Link href={ Routes.item(item) }>{ item.model?.name }</Link>
+							{ item.model && <Link href={ Routes.model(item.model.slug) }>
+								{ item.model.name }
+							</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
@@ -43,7 +45,9 @@ const ItemsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.item(item) }>{ item.category?.name }</Link>
+							{ item.category && <Link href={ Routes.category(item.category.slug) }>
+								{ item.category.name }
+							</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
@@ -51,15 +55,19 @@ const ItemsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.item(item) }>{ item.vendor?.name }</Link>
+							{ item.vendor && <Link href={ Routes.vendor(item.vendor.slug) }>
+								{ item.vendor.name }
+							</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.item(item) }>{ item.cost && formatter.currency(item.cost, item.cost_currency) }</Link>
+							<Money currency={ item.cost_currency }>{ item.cost }</Money>
 						</Table.Cell>
 
 						<Table.Cell >
-							<Link href={ Routes.item(item) }>{ item.department?.name }</Link>
+							{ item.department && <Link href={ Routes.department(item.department) }>
+								{ item.department?.name }
+							</Link> }
 						</Table.Cell>
 
 						<Table.Cell fitContent>

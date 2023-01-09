@@ -27,10 +27,7 @@ class Company < ApplicationRecord
   # 	Company.items, Company.contracts, etc.
   has_many :ownerships
   {
-    items: "Item",
-    accessories: "Accessory",
-    consumables: "Consumable",
-    components: "Component",
+    assets: "Asset",
     models: "Model",
     departments: "Department",
     locations: "Location",
@@ -42,9 +39,18 @@ class Company < ApplicationRecord
     vendors: "Vendor",
     manufacturers: "Manufacturer",
     orders: "Order",
-    categories: "Category"
+    categories: "Category",
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
+  end
+  
+  {
+    items: "Item",
+    accessories: "Accessory",
+    consumables: "Consumable",
+    components: "Component",
+  }.each_pair do |assoc, model|
+    has_many assoc, ->{ where(type: model) }, through: :ownerships, source: :ownable, source_type: :Asset, class_name: model
   end
 
   # has_many :models, through: :manufacturers
@@ -57,9 +63,7 @@ class Company < ApplicationRecord
 
   def safely_orphan_or_destroy_dependencies
     self.transaction do
-      self.items.destroy_all
-      self.accessories.destroy_all
-      self.consumables.destroy_all
+      self.assets.destroy_all
       self.models.destroy_all
       self.departments.destroy_all
       self.locations.destroy_all

@@ -21,11 +21,11 @@ const ColumnPicker = () => {
 				table_preferences: {
 					[model]: {
 						hide: {
-							[e.target.name]: !e.target.checked
-						}
-					}
-				}
-			}
+							[e.target.name]: !e.target.checked,
+						},
+					},
+				},
+			},
 		}).then(() => {
 			Inertia.reload({ only: ['auth'] })
 		})

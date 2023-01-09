@@ -1,18 +1,17 @@
 import React from 'react'
 import { Form, Input, Submit, Field } from '@/Components/Form'
-import HoverLink from '../../../Components/Layout/HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 import { usePage } from '@inertiajs/inertia-react'
 
 const firstRun = {
 	heading: 'Create Admin User',
-	description: 'Time to create your first user which  will be the admin for your inventory system'
+	description: 'Time to create your first user which  will be the admin for your inventory system',
 }
 
 const register = {
 	heading: 'Sign Up',
-	description: ''
+	description: '',
 }
 
 const Register = () => {
@@ -52,7 +51,7 @@ const Register = () => {
 						email: '',
 						password: '',
 						password_confirmation: '',
-					}
+					},
 				} }
 				model="user"
 				to={ Routes.userRegistration() }
@@ -107,7 +106,7 @@ const Register = () => {
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.newUserSession() }>Log In Instead</HoverLink>
+					<Tile.HoverLink href={ Routes.newUserSession() }>Log In Instead</Tile.HoverLink>
 				</Tile.Footer>
 			</Form>
 		</Tile>

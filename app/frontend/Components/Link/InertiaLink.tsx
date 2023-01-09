@@ -19,12 +19,12 @@ interface ILinkProps extends Omit<AnchorProps, 'href'>, BaseInertiaLinkProps {
 
 const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 	{ children, href, as = 'a', method, visit, external = false, compact, color, disabled, buttonProps, ...props },
-	ref
+	ref,
 ) => {
 	const handleHTTP = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		Inertia.visit(href, {
 			method,
-			...visit
+			...visit,
 		})
 	}
 

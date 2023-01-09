@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 export const currency = (amount: number, currency = 'USD') => {
 	const formatter = new Intl.NumberFormat('en-US', {
 		style: 'currency',
-		currency
+		currency,
 	})
 	return formatter.format(amount)
 }

@@ -14,7 +14,7 @@ interface IRowInContextProps extends Omit<ITableRow, 'ref'> {
 
 const RowInContext = forwardRef<HTMLTableRowElement, IRowInContextProps>((
 	{ children, ...props },
-	ref
+	ref,
 ) => {
 	const { section } = useTableSectionContext()
 

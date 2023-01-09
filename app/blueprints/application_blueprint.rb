@@ -6,15 +6,11 @@ class ApplicationBlueprint < Blueprinter::Base
   # end
 
   view :new do
-    exclude :id
-    exclude :created_by_id
-    exclude :updated_at
-    exclude :created_at
+    excludes :id, :created_by_id, :updated_at, :created_at
   end
 
   view :edit do
-    exclude :updated_at
-    exclude :created_at
+    excludes :updated_at, :created_at
   end
 
   protected

@@ -2,9 +2,8 @@ import React from 'react'
 import { Form, SearchableDropdown } from '@/Components/Form'
 import { Title } from '@mantine/core'
 import { isEmpty } from 'lodash'
-import axios from 'axios';
-import { Routes } from '@/lib';
-import { Inertia } from '@inertiajs/inertia';
+import { Routes } from '@/lib'
+import { Inertia } from '@inertiajs/inertia'
 
 const ActiveCompany = ({ user }: { user: Schema.User }) => {
 	if(!user || !user.companies || isEmpty(user.companies)) return <Title order={ 3 }>Inventory Application</Title>
@@ -23,7 +22,7 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 		<Form
 			async
 			grid={ false }
-			data={ { user: { active_company_id: user.active_company?.id}  } }
+			data={ { user: { active_company_id: user.active_company?.id }  } }
 			to={ Routes.apiUser(user.id) }
 			method="patch"
 			model="user"

@@ -62,7 +62,7 @@ const TableComponent: TableComponent & TableObjects = ({
 				className={ cx(className, classes.table) }
 				sx={ {
 					...(wrapper ? {} : { thead: { top: -10 } }),
-					...sx
+					...sx,
 				} }
 				{ ...props }
 			>

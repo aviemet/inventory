@@ -5,6 +5,7 @@ import { Routes } from '@/lib'
 
 interface INewTicketProps {
 	ticket: Schema.Ticket
+	people: Schema.Person[]
 }
 
 const NewTicket = ({ ...data }: INewTicketProps) => {

@@ -7,9 +7,9 @@ namespace :api do
   resources :locations, only: [:create, :update], param: :slug
 
   resources :categories, only: [:create, :update], param: :slug
-  resources :status_types, only: [:create, :update]
+  resources :status_labels, only: [:create, :update]
 
-  resources :items, path: :hardware, only: [:update] do
+  resources :items, path: :hardware, only: [:index, :update] do
     resources :nics, only: [:create, :update]
   end
 

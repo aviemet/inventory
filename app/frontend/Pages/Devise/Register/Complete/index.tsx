@@ -1,7 +1,6 @@
 import React from 'react'
 import { usePage } from '@inertiajs/inertia-react'
 import { Field, Form, Input, Submit } from '@/Components/Form'
-import HoverLink from '../../../../Components/Layout/HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 
@@ -64,7 +63,7 @@ const CompleteRegistration = () => {
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.userRegistration() }>Register Instead</HoverLink>
+					<Tile.HoverLink href={ Routes.userRegistration() }>Register Instead</Tile.HoverLink>
 				</Tile.Footer>
 			</Form>
 		</Tile>

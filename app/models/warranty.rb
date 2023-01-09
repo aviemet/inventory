@@ -3,5 +3,5 @@ class Warranty < ApplicationRecord
 
   tracked
 
-  belongs_to :item, required: true
+  belongs_to :asset, required: true
 end

@@ -1,27 +1,30 @@
-import React, { useCallback } from 'react'
-import { TextAreaProps } from 'react-html-props'
-import { useForm, useInputProps } from './index'
+import React from 'react'
 import Field from './Field'
-import TextareaInput from '../Inputs/Textarea'
+import TextareaInput, { type ITextareaProps } from '../Inputs/Textarea'
 import cx from 'clsx'
+import useInertiaInput from './useInertiaInput'
 
-interface ITextareaProps extends Omit<TextAreaProps, 'onChange'> {
+interface IFormTextareaProps extends Omit<ITextareaProps, 'onChange'> {
 	label?: string
 	name: string
+	model?: string
 	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>, form: Inertia.FormProps) => void
 }
 
-const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaProps) => {
-	const form = useForm()
-	const { inputId, inputName } = useInputProps(name)
+const Textarea = ({ label, name, required, onChange, id, model, ...props }: IFormTextareaProps) => {
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput(name, model)
 
-	const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		form.setData(inputName, e.target.value)
+	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		setValue(e.target.value)
 		if(onChange) onChange(e, form)
-	}, [onChange, inputName])
+	}
 
 	return (
-		<Field type="textarea" required={ required } errors={ !!form.errors?.[name] }>
+		<Field
+			type="textarea"
+			required={ required }
+			errors={ !!error }
+		>
 			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
 				{ label }
 			</label> }
@@ -29,9 +32,9 @@ const Textarea = ({ label, name, required, onChange, id, ...props }: ITextareaPr
 				id={ id || inputId }
 				name={ inputName }
 				onChange={ handleChange }
-				value={ form.getData(inputName) }
+				value={ value }
 				required={ required }
-				error={ form.errors[name] }
+				error={ error }
 				{ ...props }
 			>
 			</TextareaInput>

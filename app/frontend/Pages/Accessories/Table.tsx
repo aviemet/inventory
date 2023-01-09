@@ -1,10 +1,9 @@
 import React from 'react'
-import { Link, Table } from '@/Components'
-import { Routes, formatter } from '@/lib'
+import { Link, Money, Table } from '@/Components'
+import { Routes } from '@/lib'
 import { EditButton, CheckoutButton } from '@/Components/Button'
 import { isNil } from 'lodash'
 import { type ITableProps } from '@/Components/Table/Table'
-import { availableToCheckout } from './utils'
 
 const AccessoriesTable = (props: ITableProps) => {
 	const qty = (accessory: Schema.Accessory) => {
@@ -35,59 +34,68 @@ const AccessoriesTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (accessory: Schema.Accessory) => (
-					<Table.Row key={ accessory.id }>
+				<Table.RowIterator render={ (accessory: Schema.Accessory) => {
 
-						<Table.Cell nowrap>
-							<Link href={ Routes.accessory(accessory) }>{ accessory.name }</Link>
-						</Table.Cell>
+					return (
+						<Table.Row key={ accessory.id }>
 
-						<Table.Cell>
-							<Link href={ Routes.accessory(accessory) }>{ accessory.model?.name }</Link>
-						</Table.Cell>
+							<Table.Cell nowrap>
+								<Link href={ Routes.accessory(accessory) }>{ accessory.name }</Link>
+							</Table.Cell>
 
-						<Table.Cell>
-							<Link href={ Routes.accessory(accessory) }>{ accessory.serial }</Link>
-						</Table.Cell>
+							<Table.Cell>
+								{ accessory.model && <Link href={ Routes.model(accessory.model.slug) }>
+									{ accessory.model.name }
+								</Link> }
+							</Table.Cell>
 
-						<Table.Cell>
-							<Link href={ Routes.accessory(accessory) }>{ accessory.asset_tag }</Link>
-						</Table.Cell>
+							<Table.Cell>
+								<Link href={ Routes.accessory(accessory) }>{ accessory.serial }</Link>
+							</Table.Cell>
 
-						<Table.Cell>
-							<Link href={ Routes.accessory(accessory) }>{ accessory.category?.name }</Link>
-						</Table.Cell>
+							<Table.Cell>
+								<Link href={ Routes.accessory(accessory) }>{ accessory.asset_tag }</Link>
+							</Table.Cell>
 
-						<Table.Cell>
-							<Link href={ Routes.accessory(accessory) }>{ accessory.manufacturer?.name }</Link>
-						</Table.Cell>
+							<Table.Cell>
+								{ accessory.category && <Link href={ Routes.category(accessory.category.slug) }>
+									{ accessory.category.name }
+								</Link> }
+							</Table.Cell>
 
-						<Table.Cell>
-							<Link href={ Routes.accessory(accessory) }>{ accessory.vendor?.name }</Link>
-						</Table.Cell>
+							<Table.Cell>
+								{ accessory.manufacturer && <Link href={ Routes.manufacturer(accessory.manufacturer.slug) }>
+									{ accessory.manufacturer!.name }
+								</Link> }
+							</Table.Cell>
 
-						<Table.Cell>
-							{ accessory.cost && <Link href={ Routes.accessory(accessory) }>
-								{ formatter.currency(accessory.cost, accessory.cost_currency) }
-							</Link> }
-						</Table.Cell>
+							<Table.Cell>
+								{ accessory.vendor && <Link href={ Routes.vendor(accessory.vendor.slug) }>
+									{ accessory.vendor.name }
+								</Link> }
+							</Table.Cell>
 
-						<Table.Cell nowrap>{ qty(accessory) }</Table.Cell>
+							<Table.Cell>
+								<Money currency={ accessory.cost_currency }>{ accessory.cost }</Money>
+							</Table.Cell>
 
-						<Table.Cell>{ accessory.min_qty }</Table.Cell>
+							<Table.Cell nowrap>{ qty(accessory) }</Table.Cell>
 
-						<Table.Cell fitContent>
-							<CheckoutButton
-								href={ Routes.checkoutAccessory(accessory) }
-								disabled={ !availableToCheckout(accessory) }
-								tooltipMessage={ !availableToCheckout(accessory) && 'None available to checkout' }
-							/>
+							<Table.Cell>{ accessory.min_qty }</Table.Cell>
 
-							<EditButton href={ Routes.editAccessory(accessory) } />
-						</Table.Cell>
+							<Table.Cell fitContent>
+								<CheckoutButton
+									href={ Routes.checkoutAccessory(accessory) }
+									disabled={ !accessory.available_to_checkout }
+									tooltipMessage={ !accessory.available_to_checkout && 'None available to checkout' }
+								/>
 
-					</Table.Row>
-				) } />
+								<EditButton href={ Routes.editAccessory(accessory) } />
+							</Table.Cell>
+
+						</Table.Row>
+					)
+				} } />
 			</Table.Body>
 		</Table>
 	)

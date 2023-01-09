@@ -9,7 +9,7 @@ interface ICountCardProps {
 const CountCard = ({ children, href }: ICountCardProps) => {
 	return (
 		<Card component={ Link } href={ href } shadow="sm">
-			<Group>{ children }</Group>
+			<Group position="apart">{ children }</Group>
 		</Card>
 
 	)

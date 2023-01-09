@@ -1,6 +1,6 @@
 import React from 'react'
-import { Routes, formatter } from '@/lib'
-import { Group, Link, Table } from '@/Components'
+import { Routes } from '@/lib'
+import { Group, Link, Money, Table } from '@/Components'
 import { EditButton, CheckoutButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 import ReplenishButton from './ReplenishButton'
@@ -47,7 +47,7 @@ const ConsumablesTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							{ consumable.cost ? formatter.currency(consumable.cost, consumable.cost_currency) : '-' }
+							<Money currency={ consumable.cost_currency }>{ consumable.cost }</Money>
 						</Table.Cell>
 
 						<Table.Cell>{ consumable.qty }</Table.Cell>

@@ -1,7 +1,6 @@
 import React from 'react'
-import { Routes } from '@/lib'
-import { Link } from '@/Components'
 import { Table } from '@/Components'
+import EditableLink from './EditableLink'
 
 interface INetworkDetailsTableProps {
 	hosts: string[]
@@ -23,9 +22,17 @@ const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 					const item = ips.find(ip => ip.address === host)?.item
 
 					return (
-						<Table.Row key={ host } sx={ { height: 40 } }>
+						<Table.Row key={ host } sx={ theme => ({
+							height: 40,
+
+							'&:hover .item-ip-assign-button, & .item-ip-assign-button.editing': {
+								color: theme.colors.gray[4],
+							},
+						}) }>
 							<Table.Cell fitContent>{ host }</Table.Cell>
-							<Table.Cell>{ item && <Link href={ Routes.item(item) }>{ item.name }</Link> }</Table.Cell>
+							<Table.Cell>
+								<EditableLink item={ item } ip={ host } />
+							</Table.Cell>
 						</Table.Row>
 					)
 				}) }

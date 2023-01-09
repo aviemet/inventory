@@ -1,6 +1,5 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
-import { Breadcrumbs as MantineBreadcrumbs, type BreadcrumbsProps, Group } from '@mantine/core'
+import React from 'react'
+import { Breadcrumbs as MantineBreadcrumbs, type BreadcrumbsProps, Portal } from '@mantine/core'
 import { Link } from '@/Components'
 
 export type TBreadcrumb = {
@@ -9,9 +8,9 @@ export type TBreadcrumb = {
 }
 
 export const breadcrumbLinks = (links: TBreadcrumb[]) => links.map((link, i) => link.href ?
-	<Link href={ link.href } key={ i }>{ link.title }</Link>
+	<Link external={ false } href={ link.href } key={ i }>{ link.title }</Link>
 	:
-	<React.Fragment key={ i }>{ link.title }</React.Fragment>
+	<React.Fragment key={ i }>{ link.title }</React.Fragment>,
 )
 
 interface IBreadcrumbsProps extends Omit<BreadcrumbsProps, 'children'> {
@@ -20,26 +19,14 @@ interface IBreadcrumbsProps extends Omit<BreadcrumbsProps, 'children'> {
 }
 
 const Breadcrumbs = ({ crumbs, children, separator = '>', ...props }: IBreadcrumbsProps) => {
-	const [footerElement, setFooterElement] = useState<HTMLElement>()
-
-	useLayoutEffect(() => {
-		if(footerElement) return
-
-		const node = document.getElementById('footer-portal')
-		if(node) {
-			setFooterElement(node)
-		}
-	}, [footerElement])
-
-	return <>{ footerElement && createPortal(
-		<Group position="right" sx={ { marginBottom: 6 } }>
+	return (
+		<Portal target="#footer-portal">
 			<MantineBreadcrumbs separator={ separator } { ...props }>
 				{ crumbs && breadcrumbLinks(crumbs) }
 				{ children && children }
 			</MantineBreadcrumbs>
-		</Group>,
-		footerElement
-	) }</>
+		</Portal>
+	)
 }
 
 export default Breadcrumbs

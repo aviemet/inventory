@@ -20,14 +20,17 @@ class TicketsController < ApplicationController
   # GET /tickets/:id
   def show
     render inertia: "Tickets/Show", props: {
-      ticket: -> { ticket.render }
+      ticket: ticket.render(view: :associations)
     }
   end
 
   # GET /tickets/new
   def new
     render inertia: "Tickets/New", props: {
-      ticket: Ticket.new.render(view: :new)
+      ticket: Ticket.new.render(view: :new),
+      people: @active_company.people.joins(:user).render(view: :as_options),
+      assets: @active_company.assets.render(view: :as_options),
+      locations: @active_company.locations.render(view: :as_options),
     }
   end
 
@@ -35,6 +38,9 @@ class TicketsController < ApplicationController
   def edit
     render inertia: "Tickets/Edit", props: {
       ticket: ticket.render(view: :edit),
+      people: @active_company.people.joins(:user).render(view: :as_options),
+      assets: @active_company.assets.render(view: :as_options),
+      locations: @active_company.locations.render(view: :as_options),
     }
   end
 
@@ -68,8 +74,7 @@ class TicketsController < ApplicationController
     %w(subject created_by.name).freeze
   end
 
-    # Only allow a list of trusted parameters through.
-    def ticket_params
-      params.require(:ticket).permit(:subject, :description, :created_by_id)
-    end
+  def ticket_params
+    params.require(:ticket).permit(:subject, :description, :status, :messages, :primary_contact_id, assignments_attributes: [:person_id])
+  end
 end

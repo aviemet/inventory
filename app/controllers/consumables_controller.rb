@@ -59,6 +59,7 @@ class ConsumablesController < ApplicationController
       consumable: consumable.render,
       assignment: assignment.render(view: :new),
       items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
+      people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
       locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
     }
   end
@@ -74,7 +75,7 @@ class ConsumablesController < ApplicationController
       consumable: consumable.render,
       assignment: assignment.render,
       locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
-      statuses: -> { StatusType.all.render }
+      statuses: -> { StatusLabel.all.render }
     }
   end
 

@@ -12,6 +12,7 @@ interface INetworkDetailsTableProps {
 }
 
 const NetworkDetailsTable = ({ hosts, ips, pagination }: INetworkDetailsTableProps) => {
+
 	const { breakpoints } = useMantineTheme()
 	const calculateNumTableRows = (width: number) => {
 		if(width === 0) return 3 // Default to 3 while browser window is loading
