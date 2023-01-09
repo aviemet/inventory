@@ -18,6 +18,8 @@ export interface ITicketFormProps {
 }
 
 const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFormProps) => {
+	const assigneeIds = ticket.assignees?.map(assignee => assignee.id) || []
+
 	return (
 		<Form
 			model="ticket"
@@ -34,6 +36,7 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFo
 						options={ people }
 						label="Assign To"
 						name={ `[${i}]person_id` }
+						disabledOptions={ (label, value) => assigneeIds.includes(Number(value)) }
 					/>
 				) }</DynamicInputs>
 			</FieldsFor>

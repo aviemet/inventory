@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Badge, Box, Heading, Page, Section } from '@/Components'
 import DangerousHtml from '@/Components/DangerousHtml'
 import { Form, RichText, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
@@ -18,6 +18,9 @@ const ShowTicket = ({ ticket }: IShowTicketProps) => {
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>
+				{ ticket.assignees && ticket.assignees.map(assignee => <Box key={ assignee.id }>
+					Assigned To: <Badge>{ assignee.name }</Badge>
+				</Box>) }
 				<DangerousHtml>{ ticket.description }</DangerousHtml>
 			</Section>
 

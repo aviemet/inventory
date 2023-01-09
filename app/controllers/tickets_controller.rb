@@ -20,7 +20,7 @@ class TicketsController < ApplicationController
   # GET /tickets/:id
   def show
     render inertia: "Tickets/Show", props: {
-      ticket: -> { ticket.render }
+      ticket: ticket.render(view: :associations)
     }
   end
 
@@ -28,7 +28,7 @@ class TicketsController < ApplicationController
   def new
     render inertia: "Tickets/New", props: {
       ticket: Ticket.new.render(view: :new),
-      people: @active_company.people.render(view: :as_options),
+      people: @active_company.people.joins(:user).render(view: :as_options),
       assets: @active_company.assets.render(view: :as_options),
       locations: @active_company.locations.render(view: :as_options),
     }
@@ -38,7 +38,7 @@ class TicketsController < ApplicationController
   def edit
     render inertia: "Tickets/Edit", props: {
       ticket: ticket.render(view: :edit),
-      people: @active_company.people.render(view: :as_options),
+      people: @active_company.people.joins(:user).render(view: :as_options),
       assets: @active_company.assets.render(view: :as_options),
       locations: @active_company.locations.render(view: :as_options),
     }
