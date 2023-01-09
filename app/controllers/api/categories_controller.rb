@@ -17,7 +17,6 @@ class Api::CategoriesController < ApplicationController
     if category.update(category_params)
       render json: category.render, status: 201
     else
-      ap({ errors: category.errors })
       render json: { errors: category.errors }, status: 303
     end
   end
