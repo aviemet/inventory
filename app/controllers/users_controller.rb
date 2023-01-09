@@ -63,11 +63,8 @@ class UsersController < ApplicationController
 
     current_user.transaction do
       company = Company::AsSetup.create!(params[:company])
-<<<<<<< HEAD
-=======
       company = Company.find(company.id)
 
->>>>>>> dev
       current_user.add_role :admin, company
       current_user.active_company = company
 
