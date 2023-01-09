@@ -6,8 +6,6 @@ import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/F
 
 import { omit } from 'lodash'
 
-import { omit } from 'lodash'
-
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
 	item: Schema.Item

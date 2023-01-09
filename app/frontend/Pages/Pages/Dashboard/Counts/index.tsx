@@ -1,25 +1,18 @@
 import React from 'react'
-import { Badge, Group } from '@/Components'
+import { Badge, SimpleGrid } from '@/Components'
 import { Routes } from '@/lib'
-import CountsCard from './CountCard'
+import CountsCard from './CountsCard'
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from '@/Components/Icons'
 
 const Counts = ({ counts }: { counts: Schema.CompanyCounts }) => {
 	return (
-		<Group sx={ theme => ({
-			'.mantine-Card-root': {
-				flex: 1,
-				transition: 'background-color ease-in-out 250ms',
-
-				'&:hover': {
-					backgroundColor: theme.other.colorSchemeOption(theme.fn.primaryColor()[2], theme.fn.primaryColor()[8]),
-				},
-			},
-
-			'a:hover': {
-				textDecoration: 'none',
-			},
-		}) }>
+		<SimpleGrid
+			cols={ 6 }
+			breakpoints={ [
+				{ maxWidth: 'lg', cols: 3 },
+				{ maxWidth: 'sm', cols: 2 },
+				{ maxWidth: 'xs', cols: 1 },
+			] }>
 			<CountsCard href={ Routes.items() }>
 				<ItemsIcon />
 				<div>Hardware</div>
@@ -55,7 +48,7 @@ const Counts = ({ counts }: { counts: Schema.CompanyCounts }) => {
 				<div>People</div>
 				<div><Badge>{ counts.people }</Badge></div>
 			</CountsCard>
-		</Group>
+		</SimpleGrid>
 	)
 }
 
