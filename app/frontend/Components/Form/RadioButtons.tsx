@@ -1,7 +1,7 @@
 import React from 'react'
 import RadioButtons, { type IRadioButtonsProps } from '../Inputs/RadioButtons'
 import Field from './Field'
-import { useForm, useInputProps } from './index'
+import useInertiaInput from './useInertiaInput'
 
 interface IFormRadioButtonsProps extends Omit<IRadioButtonsProps, 'onChange'> {
 	model?: string
@@ -10,21 +10,25 @@ interface IFormRadioButtonsProps extends Omit<IRadioButtonsProps, 'onChange'> {
 }
 
 const FormRadioButtons = ({ options, name, id, model, onChange, required, ...props }: IFormRadioButtonsProps) => {
-	const form = useForm()
-	const { inputId, inputName } = useInputProps(name, model)
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput(name, model)
 
 	const handleChange = (v: string) => {
-		form.setData(inputName, v)
+		setValue(v)
+
 		if(onChange) onChange(v, form)
 	}
 
 	return (
-		<Field type="radio" required={ required } errors={ !!form.errors?.[name] }>
+		<Field
+			type="radio"
+			required={ required }
+			errors={ !!error }
+		>
 			<RadioButtons
 				options={ options }
 				id={ id || inputId }
 				name={ inputName }
-				value={ form.getData(inputName) }
+				value={ value }
 				onChange={ handleChange }
 				{ ...props }
 			/>

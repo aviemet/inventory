@@ -23,6 +23,6 @@ class CompanyBlueprint < ApplicationBlueprint
   end
 
   view :associations do
-    # association :contact
+    association :contact, blueprint: ContactBlueprint
   end
 end

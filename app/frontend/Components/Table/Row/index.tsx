@@ -14,11 +14,17 @@ interface IRowProps extends Omit<ITableRow, 'ref'> {
 }
 
 const Row = ({ children, render, name, ...props }: IRowProps) => {
-	try{
+	try {
 		const { tableState: { rows, selectable, selected } } = useTableContext()
 
 		return (
-			<RowInContext name={ name } rows={ rows } selectable={ selectable } selected={ selected } { ...props }>
+			<RowInContext
+				name={ name }
+				rows={ rows }
+				selectable={ selectable }
+				selected={ selected }
+				{ ...props }
+			>
 				{ children }
 			</RowInContext>
 		)

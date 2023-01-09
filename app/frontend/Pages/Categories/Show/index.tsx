@@ -1,6 +1,6 @@
 import React from 'react'
 import { Lazy, Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Components/Layout'
+import { TableTitleSection } from '@/Layouts/AppLayout/Components'
 import { Routes } from '@/lib'
 
 type TRecord = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
@@ -19,7 +19,7 @@ const Show = ({ category, records, pagination }: IShowCategoryProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Categories', href: Routes.categories() },
-			{ title: category.name! }
+			{ title: category.name! },
 		] }>
 			<Table.Section>
 				<Table.TableProvider
@@ -30,7 +30,7 @@ const Show = ({ category, records, pagination }: IShowCategoryProps) => {
 					pagination={ pagination }
 				>
 					<TableTitleSection title={ title } menuOptions={ [
-						{ label: 'Edit Category', href: Routes.editCategory(category.slug) }
+						{ label: 'Edit Category', href: Routes.editCategory(category.slug) },
 					] }>
 						<Table.SearchInput />
 					</TableTitleSection>

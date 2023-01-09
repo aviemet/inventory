@@ -379,6 +379,16 @@ export const apiItemNics: ((
 
 /**
  * Generates rails route to
+ * /api/hardware(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiItems: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/licenses/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -557,23 +567,23 @@ export const apiPurchases: ((
 
 /**
  * Generates rails route to
- * /api/status_types/:id(.:format)
+ * /api/status_labels/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiStatusType: ((
+export const apiStatusLabel: ((
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /api/status_types(.:format)
+ * /api/status_labels(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiStatusTypes: ((
+export const apiStatusLabels: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -645,6 +655,28 @@ export const apiWarranty: ((
 
 /**
  * Generates rails route to
+ * /assets/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const asset: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /assets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const assets: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /assignments/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -705,6 +737,18 @@ export const category: ((
  * @returns {string} route path
  */
 export const categoryAccessories: ((
+  categoryId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /assets/category/:category_id(.:format)
+ * @param {any} categoryId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const categoryAssets: ((
   categoryId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -773,6 +817,18 @@ export const checkinAccessory: ((
 
 /**
  * Generates rails route to
+ * /assets/:id/checkin(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkinAsset: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /components/:id/checkin/:assignment_id(.:format)
  * @param {any} id
  * @param {any} assignmentId
@@ -819,6 +875,18 @@ export const checkinLicense: ((
  * @returns {string} route path
  */
 export const checkoutAccessory: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /assets/:id/checkout(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const checkoutAsset: ((
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -1031,6 +1099,18 @@ export const destroyUserSession: ((
  * @returns {string} route path
  */
 export const editAccessory: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /assets/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editAsset: ((
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -1315,13 +1395,13 @@ export const editRailsConductorInboundEmail: ((
 
 /**
  * Generates rails route to
- * /status_types/:id/edit(.:format)
- * @param {any} id
+ * /status_labels/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editStatusType: ((
-  id: RequiredRouteParameter,
+export const editStatusLabel: ((
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -1685,6 +1765,16 @@ export const newAccessory: ((
 
 /**
  * Generates rails route to
+ * /assets/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newAsset: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /categories/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1897,11 +1987,11 @@ export const newPurchase: ((
 
 /**
  * Generates rails route to
- * /status_types/new(.:format)
+ * /status_labels/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newStatusType: ((
+export const newStatusLabel: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2093,6 +2183,20 @@ export const saveCompleteRegistration: ((
 
 /**
  * Generates rails route to
+ * /users/:id/set_active_company/:company_id(.:format)
+ * @param {any} id
+ * @param {any} companyId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const setActiveCompany: ((
+  id: RequiredRouteParameter,
+  companyId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /settings(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2103,23 +2207,23 @@ export const settings: ((
 
 /**
  * Generates rails route to
- * /status_types/:id(.:format)
- * @param {any} id
+ * /status_labels/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const statusType: ((
-  id: RequiredRouteParameter,
+export const statusLabel: ((
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
- * /status_types(.:format)
+ * /status_labels(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const statusTypes: ((
+export const statusLabels: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2132,6 +2236,32 @@ export const statusTypes: ((
  */
 export const ticket: ((
   id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /tickets/:ticket_id/messages/:id(.:format)
+ * @param {any} ticketId
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ticketMessage: ((
+  ticketId: RequiredRouteParameter,
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /tickets/:ticket_id/messages(.:format)
+ * @param {any} ticketId
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const ticketMessages: ((
+  ticketId: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

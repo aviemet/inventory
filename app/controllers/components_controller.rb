@@ -81,7 +81,7 @@ class ComponentsController < ApplicationController
       component: component.render,
       assignment: assignment.render,
       locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
-      statuses: -> { StatusType.all.render }
+      statuses: -> { StatusLabel.all.render }
     }
   end
 

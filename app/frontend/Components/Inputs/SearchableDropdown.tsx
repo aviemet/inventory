@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { forwardRef, useMemo } from 'react'
 import { Select, type SelectProps } from '@mantine/core'
 import Label from './Label'
 
@@ -6,25 +6,42 @@ export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 	options: Array<Record<string, any>>
 	getLabel?: (option: Record<string, any>) => any
 	getValue?: (option: Record<string, any>) => string
+	disabledOptions?: (label: string, value: string | number) => boolean
 	onOpen?: () => void
 	filterMatchKeys?: string[]
 }
 
-const SearchableDropdownComponent = ({
-	options = [],
-	getLabel = option => option.name,
-	getValue = option => String(option.id),
-	onChange,
-	onOpen,
-	filterMatchKeys,
-	label,
-	required,
-	id,
-	searchable = true,
-	clearable = true,
-	...props
-}: ISearchableDropdownProps) => {
-	const data = useMemo(() => options.map(option => ({ label: getLabel(option), value: getValue(option) })), [options])
+const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDropdownProps>((
+	{
+		options = [],
+		getLabel = option => option.name,
+		getValue = option => String(option.id),
+		disabledOptions,
+		onChange,
+		onOpen,
+		filterMatchKeys,
+		label,
+		required,
+		id,
+		searchable = true,
+		clearable = true,
+		...props
+	},
+	ref,
+) => {
+	const data = useMemo(() => options.map(option => {
+		const optionPart = {
+			label: getLabel(option),
+			value: getValue(option),
+			disabled: false,
+		}
+
+		if(disabledOptions) {
+			optionPart.disabled = disabledOptions(optionPart.label, optionPart.value)
+		}
+
+		return optionPart
+	}), [options])
 
 	const handleChange = (value: string|null) => {
 		if(onChange) onChange(value)
@@ -36,6 +53,7 @@ const SearchableDropdownComponent = ({
 				{ label }
 			</Label> }
 			<Select
+				ref={ ref }
 				searchable
 				size="md"
 				data={ data }
@@ -47,6 +65,6 @@ const SearchableDropdownComponent = ({
 			/>
 		</>
 	)
-}
+})
 
 export default React.memo(SearchableDropdownComponent)

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link, Heading, Table, Box } from '@/Components'
-import { formatter, Routes } from '@/lib'
+import { Link, Heading, Table, Box, Money } from '@/Components'
+import { Routes } from '@/lib'
 
 interface IComponentDetailsProps {
 	component: Schema.Component
@@ -12,7 +12,7 @@ const ComponentDetails = ({ component }: IComponentDetailsProps) => {
 			<Heading order={ 3 }>Details</Heading>
 
 			<Box sx={ theme => ({
-				maxWidth: `${theme.breakpoints.sm}px`
+				maxWidth: `${theme.breakpoints.sm}px`,
 			}) }>
 
 				<Table>
@@ -62,7 +62,9 @@ const ComponentDetails = ({ component }: IComponentDetailsProps) => {
 
 						<Table.Row>
 							<Table.Cell>Purchase Cost</Table.Cell>
-							<Table.Cell>{ component.cost && formatter.currency(component.cost, component.cost_currency) }</Table.Cell>
+							<Table.Cell>
+								<Money currency={ component.cost_currency }>{ component.cost }</Money>
+							</Table.Cell>
 						</Table.Row>
 
 						<Table.Row>

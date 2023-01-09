@@ -13,7 +13,7 @@ interface IHeadRowProps extends ITableRow {
 
 const HeadRow = forwardRef<HTMLTableRowElement, IHeadRowProps>((
 	{ children, name, rows, selectable, selected, ...props },
-	ref
+	ref,
 ) => {
 	const { tableState: { columns }, setTableState } = useTableContext()
 

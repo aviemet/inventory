@@ -4,9 +4,7 @@ module Assignable
 
   included do
     has_many :assignments, as: :assignable
-    belongs_to :status_type
-
-    before_validation :set_defaults
+    belongs_to :status_label #, default: -> { StatusLabel.find_by_name("Deployable") }
 
     def assign_to(assign_toable, params = {})
       assignment = Assignment.new(params)
@@ -20,7 +18,6 @@ module Assignable
         self._before_assignment(assignment, params) if self.respond_to?(:_before_assignment)
         self.before_assignment(assignment, params) if self.respond_to?(:before_assignment)
 
-        # assignment.save
         self.assignments << assignment
         self.save
 
@@ -42,12 +39,6 @@ module Assignable
         .or(PublicActivity::Activity.where({ recipient_type: self.class.name, recipient_id: self.id }))
         .or(PublicActivity::Activity.where({ trackable_type: self.class.name, trackable_id: self.id }))
         .order(created_at: :desc)
-    end
-
-    def set_defaults
-      return unless self.has_attribute? :status_type_id
-      
-      self.status_type ||= StatusType.find_by_name("Deployable")
     end
 
   end

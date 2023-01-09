@@ -33,13 +33,23 @@ class ManufacturerBlueprint < ApplicationBlueprint
   end
 
   view :show do
+    field :items_count do |manufacturer|
+      manufacturer.items.size
+    end
+
+    field :accessories_count do |manufacturer|
+      manufacturer.accessories.size
+    end
+
+    field :consumables_count do |manufacturer|
+      manufacturer.consumables.size
+    end
+
+    field :components_count do |manufacturer|
+      manufacturer.components.size
+    end
+
 		association :contact, blueprint: ContactBlueprint
-		association :activities, blueprint: ActivityBlueprint
-		association :models, blueprint: ModelBlueprint
-		association :items, blueprint: ItemBlueprint
-		association :accessories, blueprint: AccessoryBlueprint
-		association :consumables, blueprint: ConsumableBlueprint
-		association :components, blueprint: ComponentBlueprint
   end
 
   view :as_options do

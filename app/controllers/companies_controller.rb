@@ -18,7 +18,7 @@ class CompaniesController < ApplicationController
     }
   end
 
-  # GET /companies/:id
+  # GET /companies/:slug
   def show
     if company.nil?
       render inertia: "Error", props: { status: 404 }
@@ -36,7 +36,7 @@ class CompaniesController < ApplicationController
     }
   end
 
-  # GET /companies/:id/edit
+  # GET /companies/:slug/edit
   def edit
     render inertia: "Companies/Edit", props: {
       company: -> { company.render(view: :edit) }
@@ -56,7 +56,7 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /companies/:id
+  # PATCH/PUT /companies/:slug
   def update
     if company.update(company_params)
       redirect_to company, notice: 'Company was successfully updated.'
@@ -65,7 +65,7 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # DELETE /companies/:id
+  # DELETE /companies/:slug
   def destroy
     company.destroy
     respond_to do |format|
@@ -75,7 +75,7 @@ class CompaniesController < ApplicationController
   end
 
   # TODO: This probably is unused and needs to go
-  # GET /companies/:id/snippet/:snippet
+  # GET /companies/:slug/snippet/:snippet
   # def snippet
   #   respond_to do |format|
   #     format.html { render template: "companies/#{params[:snippet]}", layout: false }

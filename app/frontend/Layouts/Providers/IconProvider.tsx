@@ -8,7 +8,7 @@ interface IIconProviderProps {
 
 const IconProvider = ({ children, value = {
 	className: 'react-icon',
-	size: '1rem'
+	size: '1rem',
 } }: IIconProviderProps) => {
 	return (
 		<IconContext.Provider value={ value }>

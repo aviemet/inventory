@@ -8,5 +8,6 @@
 	"gitHistory.logLevel": "None",
 	"gitHistory.sourceCodeProviderIntegrationLocation": "More Actions",
 	"gitHistory.showEditorTitleMenuBarIcons": false,
-	"gitHistory.showFileHistorySplit": false
+	"gitHistory.showFileHistorySplit": false,
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

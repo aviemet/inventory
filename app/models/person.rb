@@ -21,8 +21,8 @@ class Person < ApplicationRecord
   belongs_to :manager, class_name: 'Person', optional: true
   belongs_to :location, optional: true
   has_one :user
-
-  before_validation :ensure_associated_contact
+  has_many :ticket_assignments
+  has_many :tickets, through: :ticket_assignments, inverse_of: :assignees
 
   validates_presence_of :first_name
   validates_presence_of :last_name
@@ -44,9 +44,4 @@ class Person < ApplicationRecord
     self&.location || self&.department&.location
   end
 
-  private
-
-  def ensure_associated_contact
-    build_contact unless contact
-  end
 end

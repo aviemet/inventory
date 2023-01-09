@@ -52,6 +52,7 @@ class UsersController < ApplicationController
   # POST /users/complete_registration
   def save_complete_registration
     unless current_user.companies.empty?
+      ap "REDIRECTING"
       redirect_to root_path 
       return
     end
@@ -62,12 +63,17 @@ class UsersController < ApplicationController
 
     current_user.transaction do
       company = Company::AsSetup.create!(params[:company])
+<<<<<<< HEAD
+=======
+      company = Company.find(company.id)
+
+>>>>>>> dev
       current_user.add_role :admin, company
       current_user.active_company = company
 
       current_user.person.company = company
       current_user.person.save
-
+      
       if current_user.save
         redirect_to root_path
       end

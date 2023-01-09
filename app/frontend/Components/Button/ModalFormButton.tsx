@@ -3,7 +3,6 @@ import Button from './index'
 import { Modal } from '@/Components'
 import { useMantineTheme, type ModalProps, type ButtonProps } from '@mantine/core'
 import axios from 'axios'
-import { Inertia } from '@inertiajs/inertia'
 
 interface IModalFormButtonProps {
 	children?: string | React.ReactElement

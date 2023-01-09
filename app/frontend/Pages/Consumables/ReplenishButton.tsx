@@ -28,9 +28,9 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 
 		axios[method](to, {
 			consumable: {
-				qty: parseInt(data.consumable.qty) + consumable.qty,
+				qty: parseInt(data.consumable.qty) + (consumable.qty ?? 0),
 			},
-			redirect: false
+			redirect: false,
 		})
 			.then(response => {
 				if(response.statusText === 'OK' || response.statusText === 'Created') {

@@ -1,6 +1,9 @@
 import React, { useCallback } from 'react'
-import { Link, Heading, Table, Box, Badge } from '@/Components'
+import { Link, Heading, Table, Box, Badge, Money } from '@/Components'
 import { formatter, Routes } from '@/lib'
+import { has } from 'lodash'
+
+type TPathOption = 'item'|'person'|'location'
 
 interface IItemDetailsProps {
 	item: Schema.Item
@@ -9,10 +12,11 @@ interface IItemDetailsProps {
 const AssignmentLink = ({ assignment }: { assignment?: Schema.Assignment }) => {
 	if(!assignment) return <></>
 
+	const path = Routes[assignment.assign_toable_type.toLowerCase() as TPathOption]
 	// @ts-ignore
-	const path = Routes[assignment.assign_toable_type.toLowerCase()]
+	const param = has(assignment.assign_toable, 'slug') ? assignment.assign_toable.slug : assignment.assign_toable_id
 
-	return <Link href={ path(assignment.assign_toable_id) }>{ assignment.assign_toable.name }</Link>
+	return <Link href={ path(param) }>{ assignment.assign_toable.name }</Link>
 }
 
 const ItemDetails = ({ item }: IItemDetailsProps) => {
@@ -27,7 +31,7 @@ const ItemDetails = ({ item }: IItemDetailsProps) => {
 			<Heading order={ 3 }>Details</Heading>
 
 			<Box sx={ theme => ({
-				maxWidth: `${theme.breakpoints.sm}px`
+				maxWidth: `${theme.breakpoints.sm}px`,
 			}) }>
 
 				<Table>
@@ -39,7 +43,7 @@ const ItemDetails = ({ item }: IItemDetailsProps) => {
 								{ item.assigned ?
 									<AssignmentLink assignment={ itemAssignment() } />
 									:
-									<Badge>{ item.status_type?.name }</Badge>
+									<Badge>{ item.status_label?.name }</Badge>
 								}
 							</Table.Cell>
 						</Table.Row>
@@ -92,7 +96,9 @@ const ItemDetails = ({ item }: IItemDetailsProps) => {
 
 						<Table.Row>
 							<Table.Cell>Purchase Cost</Table.Cell>
-							<Table.Cell>{ item.cost && formatter.currency(item.cost, item.cost_currency) }</Table.Cell>
+							<Table.Cell>
+								<Money accounting={ false } currency={ item.cost_currency }>{ item.cost }</Money>
+							</Table.Cell>
 						</Table.Row>
 
 						<Table.Row>

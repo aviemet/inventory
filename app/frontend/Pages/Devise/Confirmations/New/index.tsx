@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Input, Submit } from '@/Components/Form'
-import HoverLink from '../../../../Components/Layout/HoverLink'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 
@@ -35,8 +34,8 @@ const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
 				</Tile.Content>
 
 				<Tile.Footer>
-					<HoverLink href={ Routes.newUserRegistration() }>Register</HoverLink>
-					<HoverLink href={ Routes.newUserSession() }>Log In Instead</HoverLink>
+					<Tile.HoverLink href={ Routes.newUserRegistration() }>Register</Tile.HoverLink>
+					<Tile.HoverLink href={ Routes.newUserSession() }>Log In Instead</Tile.HoverLink>
 				</Tile.Footer>
 			</Form>
 		</Tile>

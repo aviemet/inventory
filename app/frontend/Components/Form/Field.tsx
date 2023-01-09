@@ -1,9 +1,9 @@
 import React from 'react'
 import cx from 'clsx'
-import { DivProps } from 'react-html-props'
 import { type TInputType } from './Form'
+import { Box, BoxProps } from '@mantine/core'
 
-interface IFieldProps extends DivProps {
+interface IFieldProps extends BoxProps {
 	children: React.ReactNode
 	type?: TInputType
 	required?: boolean
@@ -12,18 +12,18 @@ interface IFieldProps extends DivProps {
 
 const Field = ({ children, type, required = false, errors = false, className, ...props }: IFieldProps) => {
 	return (
-		<div
+		<Box
 			className={ cx(
 				'field',
-				{ type: type },
+				{ [String(type)]: type },
 				{ 'required': required },
 				{ 'field_with_errors': errors },
-				className
+				className,
 			) }
 			{ ...props }
 		>
 			{ children }
-		</div>
+		</Box>
 	)
 }
 

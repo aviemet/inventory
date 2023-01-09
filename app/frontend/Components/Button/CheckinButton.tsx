@@ -16,7 +16,7 @@ const CheckinButton = ({ href, disabled, tooltipMessage, ...props }: ICheckinBut
 	const finalProps = props
 	if(disabled) {
 		finalProps.buttonProps = {
-			disabled: true
+			disabled: true,
 		}
 	}
 

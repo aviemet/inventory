@@ -15,17 +15,12 @@ export default createStyles((theme) => ({
 			},
 		},
 
-
 		'.field': {
 			backgroundColor: theme.other.colorSchemeOption(theme.colors.gray[1], theme.colors.dark[7]),
 			width: '100%',
-			flex: 1,
 			borderColor: theme.colors[theme.primaryColor][2],
 			borderTopWidth: 2,
-
-			'& ~ .field, & ~ * > .field, & + button[type=submit]': {
-				marginTop: theme.spacing.md,
-			},
+			marginTop: theme.spacing.xs,
 
 			'&.required': {
 				borderColor: theme.colors[theme.primaryColor][8],
@@ -65,6 +60,10 @@ export default createStyles((theme) => ({
 					gridRowStart: 'span 2',
 				},
 			},
+		},
+
+		'button[type=submit]': {
+			marginTop: theme.spacing.xs,
 		},
 	},
 

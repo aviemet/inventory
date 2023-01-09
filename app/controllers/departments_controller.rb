@@ -21,8 +21,8 @@ class DepartmentsController < ApplicationController
   # GET /departments/:slug
   def show
     render inertia: "Departments/Show", props: {
-      department:department.render(view: :show),
-      items: -> {
+      department: department.render(view: :show),
+      items: InertiaRails.lazy(-> {
         paginated_items = department.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render(view: :associations),
@@ -31,7 +31,7 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      },
+      }),
       accessories: InertiaRails.lazy(-> { 
         paginated_accessories = department.accessories.includes_associated.page(params[:page] || 1)
         {

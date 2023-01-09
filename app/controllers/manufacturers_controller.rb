@@ -21,7 +21,47 @@ class ManufacturersController < ApplicationController
   # GET /manufacturers/:id
   def show
     render inertia: "Manufacturers/Show", props: {
-      manufacturer: manufacturer.render(view: :show)
+      manufacturer: manufacturer.render(view: :show),
+      items: InertiaRails.lazy(-> {
+        paginated_items = manufacturer.items.includes_associated.page(params[:page] || 1)
+        {
+          data: paginated_items.render(view: :associations),
+          pagination: {
+            count: manufacturer.items.size,
+            **pagination_data(paginated_items)
+          }
+        }
+      }),
+      accessories: InertiaRails.lazy(-> { 
+        paginated_accessories = manufacturer.accessories.includes_associated.page(params[:page] || 1)
+        {
+          data: paginated_accessories.render(view: :associations),
+          pagination: {
+            count: manufacturer.accessories.size,
+            **pagination_data(paginated_accessories)
+          }
+        }
+      }),
+      consumables: InertiaRails.lazy(-> { 
+        paginated_consumables = manufacturer.consumables.includes_associated.page(params[:page] || 1)
+        {
+          data: paginated_consumables.render(view: :associations),
+          pagination: {
+            count: manufacturer.consumables.size,
+            **pagination_data(paginated_consumables)
+          }
+        }
+      }),
+      components: InertiaRails.lazy(-> { 
+        paginated_components = manufacturer.components.includes_associated.page(params[:page] || 1)
+        {
+          data: paginated_components.render(view: :associations),
+          pagination: {
+            count: manufacturer.components.size,
+            **pagination_data(paginated_components)
+          }
+        }
+      }),
     }
   end
 

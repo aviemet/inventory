@@ -6,7 +6,7 @@ import { usePage } from '@inertiajs/inertia-react'
 import axios from 'axios'
 import { Routes } from '@/lib'
 
-const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
+export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	breakpoints: {
 		'2xs': 480,
 		lg: 1280,
@@ -57,7 +57,29 @@ const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	},
 })
 
-export { useTheme }
+export const GlobalStyles = () => <Global styles={ theme => ({
+	'html, body': {
+		overflow: 'hidden',
+	},
+
+	'*::selection': {
+		backgroundColor: theme.colors[theme.primaryColor][2],
+	},
+
+	':root': {
+		colorScheme: theme.colorScheme,
+	},
+
+	'.hidden': {
+		display: 'none',
+	},
+
+	'.fullHeight': {
+		display: 'flex',
+		flexDirection: 'column',
+		height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
+	},
+}) } />
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const { props: { auth } } = usePage<InertiaPage>()
@@ -76,43 +98,22 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 			axios.patch(Routes.updateUserPreferences(auth?.user), {
 				user: {
 					user_preferences: {
-						colorScheme: scheme
-					}
-				}
+						colorScheme: scheme,
+					},
+				},
 			})
 		}
 
 		setColorScheme(scheme)
 	}
 
+	const mantineTheme = useTheme(colorScheme)
+
 	return (
 		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
-			<MantineProvider theme={ useTheme(colorScheme) } withGlobalStyles withNormalizeCSS>
+			<MantineProvider theme={ mantineTheme } withGlobalStyles withNormalizeCSS>
 				<NotificationsProvider>
-
-					<Global styles={ theme => ({
-						'html, body': {
-							overflow: 'hidden',
-						},
-
-						'*::selection': {
-							backgroundColor: theme.colors[theme.primaryColor][2],
-						},
-
-						':root': {
-							colorScheme: theme.colorScheme,
-						},
-
-						'.hidden': {
-							display: 'none',
-						},
-
-						'.fullHeight': {
-							display: 'flex',
-							flexDirection: 'column',
-							height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
-						}
-					}) } />
+					<GlobalStyles />
 					{ children }
 				</NotificationsProvider>
 			</MantineProvider>

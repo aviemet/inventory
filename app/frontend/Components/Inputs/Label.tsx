@@ -10,7 +10,7 @@ interface ILabelProps extends BoxProps, LabelProps {
 
 const Label = forwardRef<HTMLLabelElement, ILabelProps>((
 	{ children, sx, required = false, className, ...props },
-	ref
+	ref,
 ) => {
 	return (
 		<Box component="label" sx={ theme => {

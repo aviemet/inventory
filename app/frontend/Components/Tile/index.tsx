@@ -3,6 +3,7 @@ import { Paper } from '@mantine/core'
 import Content from './Content'
 import Footer from './Footer'
 import { DivProps } from 'react-html-props'
+import HoverLink from './HoverLink'
 
 const Tile = ({ children, ...props }: Omit<DivProps, 'ref'>) => {
 	return (
@@ -20,5 +21,6 @@ const Tile = ({ children, ...props }: Omit<DivProps, 'ref'>) => {
 
 Tile.Content = Content
 Tile.Footer = Footer
+Tile.HoverLink = HoverLink
 
 export default Tile
