@@ -20,25 +20,29 @@ class AssetsController < ApplicationController
 
   # GET /assets/:id
   def show
-    redirect_to controller: asset.type.downcase.pluralize, action: "show", id: asset
+    redirect_to_asset_type_controller(:show)
   end
 
   # GET /assets/:id/edit
   def edit
-    redirect_to controller: asset.type.downcase.pluralize, action: "edit", id: asset
+    redirect_to_asset_type_controller(:edit)
   end
 
   # GET /assets/:id/checkout
   def checkout
-    redirect_to controller: asset.type.downcase.pluralize, action: "checkout", id: asset
+    redirect_to_asset_type_controller(:checkout)
   end
 
   # GET /assets/:id/checkin
   def checkin
-    redirect_to controller: asset.type.downcase.pluralize, action: "checkin", id: asset
+    redirect_to_asset_type_controller(:checkin)
   end
 
   private
+
+  def redirect_to_asset_type_controller(action)
+    redirect_to controller: asset.type.downcase.pluralize, action: action, id: asset
+  end
 
   def sortable_fields
     %w(name asset_tag serial cost cost_cents purchased_at requestable type models.name vendors.name categories.name manufacturers.name departments.name).freeze
