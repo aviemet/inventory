@@ -655,7 +655,7 @@ export const apiWarranty: ((
 
 /**
  * Generates rails route to
- * /assets/:id(.:format)
+ * /inventory/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -667,7 +667,7 @@ export const asset: ((
 
 /**
  * Generates rails route to
- * /assets(.:format)
+ * /inventory(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -743,7 +743,7 @@ export const categoryAccessories: ((
 
 /**
  * Generates rails route to
- * /assets/category/:category_id(.:format)
+ * /inventory/category/:category_id(.:format)
  * @param {any} categoryId
  * @param {object | undefined} options
  * @returns {string} route path
@@ -817,7 +817,7 @@ export const checkinAccessory: ((
 
 /**
  * Generates rails route to
- * /assets/:id/checkin(.:format)
+ * /inventory/:id/checkin(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -881,7 +881,7 @@ export const checkoutAccessory: ((
 
 /**
  * Generates rails route to
- * /assets/:id/checkout(.:format)
+ * /inventory/:id/checkout(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1105,7 +1105,7 @@ export const editAccessory: ((
 
 /**
  * Generates rails route to
- * /assets/:id/edit(.:format)
+ * /inventory/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1765,7 +1765,7 @@ export const newAccessory: ((
 
 /**
  * Generates rails route to
- * /assets/new(.:format)
+ * /inventory/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
