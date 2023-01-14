@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { Menu, type MenuItemProps } from '@mantine/core'
+import { Menu, packSx, type MenuItemProps } from '@mantine/core'
 import { Link } from '@/Components'
 
 interface IMenuItemProps extends MenuItemProps {
@@ -10,12 +10,12 @@ interface IMenuItemProps extends MenuItemProps {
 	type?: string
 }
 
-const MenuItem = forwardRef<HTMLButtonElement, IMenuItemProps>((
-	{ children, href, disabled = false, component = Link, ...props },
+const MenuItem = forwardRef<HTMLButtonElement|HTMLLinkElement, IMenuItemProps>((
+	{ children, href, disabled = false, component = Link, sx, ...props },
 	ref,
 ) => {
 	return (
-		<Menu.Item ref={ ref } disabled={ disabled } { ...props } sx={ theme => {
+		<Menu.Item ref={ ref } disabled={ disabled } { ...props } sx={ [theme => {
 			if(disabled) return {
 				'& *': {
 					color: theme.colors.gray[theme.fn.primaryShade()],
@@ -26,7 +26,7 @@ const MenuItem = forwardRef<HTMLButtonElement, IMenuItemProps>((
 				},
 			}
 			return {}
-		} }>
+		}, ...packSx(sx)] }>
 			{ children }
 		</Menu.Item>
 	)
