@@ -944,20 +944,20 @@ export const apiWarranty = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,
 
 /**
  * Generates rails route to
- * /assets/:id(.:format)
+ * /inventory/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const asset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const asset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /assets(.:format)
+ * /inventory(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const assets = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"assets"],[1,[2,[8,"."],[3,"format"]]]]]);
+export const assets = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1012,12 +1012,12 @@ export const categoryAccessories = __jsr.r({"category_id":{"r":true},"format":{}
 
 /**
  * Generates rails route to
- * /assets/category/:category_id(.:format)
+ * /inventory/category/:category_id(.:format)
  * @param {any} categoryId
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const categoryAssets = __jsr.r({"category_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[6,"category"],[2,[7,"/"],[2,[3,"category_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const categoryAssets = __jsr.r({"category_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[6,"category"],[2,[7,"/"],[2,[3,"category_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1067,12 +1067,12 @@ export const checkinAccessory = __jsr.r({"id":{"r":true},"assignment_id":{"r":tr
 
 /**
  * Generates rails route to
- * /assets/:id/checkin(.:format)
+ * /inventory/:id/checkin(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const checkinAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1114,12 +1114,12 @@ export const checkoutAccessory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/
 
 /**
  * Generates rails route to
- * /assets/:id/checkout(.:format)
+ * /inventory/:id/checkout(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkoutAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const checkoutAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1286,12 +1286,12 @@ export const editAccessory = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[
 
 /**
  * Generates rails route to
- * /assets/:id/edit(.:format)
+ * /inventory/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editAsset = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1787,11 +1787,11 @@ export const newAccessory = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"accessories
 
 /**
  * Generates rails route to
- * /assets/new(.:format)
+ * /inventory/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newAsset = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const newAsset = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
