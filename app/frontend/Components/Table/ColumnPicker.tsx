@@ -39,12 +39,13 @@ const ColumnPicker = () => {
 
 			<Menu.Dropdown>
 				{ columns.filter(option => option.hideable).map(({ label, hideable }) => (
-					<Menu.Item key={ label }>
+					<Menu.Item key={ label } component="div" type="div" sx={ { cursor: 'default', padding: 0 } }>
 						<Checkbox
 							name={ hideable }
 							label={ label }
 							onChange={ handleChange }
 							checked={ !user.table_preferences?.[model]?.hide?.[hideable] }
+							sx={ { padding: 0 } }
 						/>
 					</Menu.Item>
 				)) }

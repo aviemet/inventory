@@ -4,7 +4,7 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD:
     volumes:
       - postgres:/var/lib/postgresql/data
     restart: always
