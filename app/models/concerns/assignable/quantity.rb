@@ -5,6 +5,8 @@ module Assignable
     include Assignable
 
     included do
+      belongs_to :status_label, default: -> { StatusLabel.find_by_name("Deployable") }
+
       validates :qty, numericality: { greater_than: 0 }, allow_blank: false
 
       def available_to_checkout?
