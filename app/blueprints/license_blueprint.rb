@@ -23,30 +23,30 @@ class LicenseBlueprint < ApplicationBlueprint
   end
 
   view :associations do
-		association :department, blueprint: DepartmentBlueprint
-		association :assignments, blueprint: AssignmentBlueprint
-		association :purchase, blueprint: PurchaseBlueprint
-		association :activities, blueprint: ActivityBlueprint
-		association :category, blueprint: CategoryBlueprint
-		association :vendor, blueprint: VendorBlueprint
-		association :manufacturer, blueprint: ManufacturerBlueprint
+    association :department, blueprint: DepartmentBlueprint
+    association :assignments, blueprint: AssignmentBlueprint
+    association :purchase, blueprint: PurchaseBlueprint
+    association :activities, blueprint: ActivityBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :vendor, blueprint: VendorBlueprint
+    association :manufacturer, blueprint: ManufacturerBlueprint
   end
 
   view :index do
-		association :department, blueprint: DepartmentBlueprint
-		association :category, blueprint: CategoryBlueprint
-		association :vendor, blueprint: VendorBlueprint
-		association :manufacturer, blueprint: ManufacturerBlueprint
+    association :department, blueprint: DepartmentBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :vendor, blueprint: VendorBlueprint
+    association :manufacturer, blueprint: ManufacturerBlueprint
   end
 
   view :show do
-		association :department, blueprint: DepartmentBlueprint
-		association :assignments, blueprint: AssignmentBlueprint
-		association :purchase, blueprint: PurchaseBlueprint
-		association :activities, blueprint: ActivityBlueprint
-		association :category, blueprint: CategoryBlueprint
-		association :vendor, blueprint: VendorBlueprint
-		association :manufacturer, blueprint: ManufacturerBlueprint
+    association :department, blueprint: DepartmentBlueprint
+    association :assignments, blueprint: AssignmentBlueprint
+    association :purchase, blueprint: PurchaseBlueprint
+    association :activities, blueprint: ActivityBlueprint
+    association :category, blueprint: CategoryBlueprint
+    association :vendor, blueprint: VendorBlueprint
+    association :manufacturer, blueprint: ManufacturerBlueprint
   end
 
 end

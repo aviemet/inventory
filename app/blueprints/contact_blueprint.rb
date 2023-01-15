@@ -8,11 +8,10 @@ class ContactBlueprint < ApplicationBlueprint
          :primary_phone_id,
          :primary_email_id
 
-
   view :associations do
-		association :addresses, blueprint: AddressBlueprint
-		association :emails, blueprint: EmailBlueprint
-		association :phones, blueprint: PhoneBlueprint
-		association :websites, blueprint: WebsiteBlueprint
+    association :addresses, blueprint: AddressBlueprint
+    association :emails, blueprint: EmailBlueprint
+    association :phones, blueprint: PhoneBlueprint
+    association :websites, blueprint: WebsiteBlueprint
   end
 end

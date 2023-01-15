@@ -1,6 +1,7 @@
 class ComponentBlueprint < ApplicationBlueprint
   fields :name,
          :serial,
+         :asset_tag,
          :min_qty,
          :qty,
          :cost_currency,

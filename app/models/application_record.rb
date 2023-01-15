@@ -2,7 +2,7 @@ class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
   include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model| controller&.current_user || nil }
+  tracked owner: proc{ |controller, _model| controller&.current_user || nil }
 
   # def to_param
   #   encode_id
@@ -12,6 +12,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def encode_id
     return if self.id.nil?
+
     Base64.strict_encode64("#{self.class.name}#{@@separator}#{self.id}")
   end
 

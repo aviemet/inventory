@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   rolify
-  
+
   tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token, :active_company]
 
   # Include default devise modules. Others available are: , :omniauthable, :timeoutable,
@@ -26,8 +26,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :person
 
-  # jsonb_accessor :table_preferences, hide: :hash 
- 
+  # jsonb_accessor :table_preferences, hide: :hash
+
   delegate :can?, :cannot?, to: :ability
 
   scope :includes_associated, -> { includes([:person, :companies]) }
@@ -39,13 +39,12 @@ class User < ApplicationRecord
   end
 
   def add_email_to_contact
-    return if self.person.contact.emails.exists?(email: email)
+    return if self.person.contact.emails.exists?(email:)
 
-    self.person.contact.emails << Email.create(email: email, category: Category.find_by_slug("email-work"))
+    self.person.contact.emails << Email.create(email:, category: Category.find_by_slug("email-work"))
   end
 
   def coerce_json
     self.dark_mode = ActiveModel::Type::Boolean.new.cast(self.dark_mode) if self.dark_mode
   end
 end
-

@@ -16,11 +16,10 @@ class ActivityBlueprint < Blueprinter::Base
 
   view :dashboard do
     field :route do |activity|
-      begin
-        polymorphic_path(activity.trackable_type.constantize.find(activity.trackable_id), only_path: true)
-      rescue
-        nil
-      end
+      polymorphic_path(activity.trackable_type.constantize.find(activity.trackable_id), only_path: true)
+    rescue StandardError
+      nil
+
     end
 
     association :owner, blueprint: UserBlueprint

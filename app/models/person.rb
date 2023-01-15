@@ -6,16 +6,16 @@ class Person < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
+    :search,
     against: [:first_name, :middle_name, :last_name, :employee_number, :job_title], associated_against: {
       manager: [:first_name, :middle_name, :last_name, :employee_number, :job_title],
       user: [:email]
     }, using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )
-  
+
   tracked
 
   belongs_to :manager, class_name: 'Person', optional: true

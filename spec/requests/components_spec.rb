@@ -6,24 +6,24 @@ RSpec.describe "/components", type: :request do
   def valid_attributes_hash(company)
     {
       component: attributes_for(:component,
-        vendor_id: create(:vendor).id,
-        model_id: create(:model).id,
-        company: company,
-      ),
+                                status_label_id: create(:status_label).id,
+                                vendor_id: create(:vendor).id,
+                                model_id: create(:model).id,
+                                company:),
     }
   end
-  
+
   def invalid_attributes_hash(company)
-    { 
+    {
       component: {
         name: "",
         purchased_at: DateTime.now,
-        company: company,
+        company:,
       }
     }
   end
 
-  let(:company) { create(:company) }
+  let(:company) { build_stubbed(:company) }
 
   let(:valid_attributes) { valid_attributes_hash(company) }
 
@@ -65,13 +65,9 @@ RSpec.describe "/components", type: :request do
     context "with valid parameters" do
       let(:new_attributes) { valid_attributes_hash(company) }
       it "updates the requested component" do
-        # ap company
-        # ap valid_attributes
-        # ap new_attributes
         component = create(:component)
         patch component_url(component), params: { component: new_attributes }
         component.reload
-        # skip("Add assertions for updated state")
       end
 
       it "redirects to the component" do

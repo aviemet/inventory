@@ -32,7 +32,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      accessories: InertiaRails.lazy(-> { 
+      accessories: InertiaRails.lazy(-> {
         paginated_accessories = department.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render(view: :associations),
@@ -42,7 +42,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      consumables: InertiaRails.lazy(-> { 
+      consumables: InertiaRails.lazy(-> {
         paginated_consumables = department.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render(view: :associations),
@@ -52,7 +52,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      components: InertiaRails.lazy(-> { 
+      components: InertiaRails.lazy(-> {
         paginated_components = department.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render(view: :associations),
@@ -62,7 +62,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      licenses: InertiaRails.lazy(-> { 
+      licenses: InertiaRails.lazy(-> {
         paginated_licenses = department.licenses.includes_associated.page(params[:page] || 1)
         {
           data: paginated_licenses.render(view: :associations),
@@ -72,7 +72,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      people: InertiaRails.lazy(-> { 
+      people: InertiaRails.lazy(-> {
         paginated_people = department.people.includes_associated.page(params[:page] || 1)
         {
           data: paginated_people.render(view: :associations),

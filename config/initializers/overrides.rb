@@ -9,7 +9,7 @@ module IPAddress
       self.obj_include?(oth)
     end
 
-    def as_json(data="")
+    def as_json(_data = "")
       to_string
     end
 
@@ -46,7 +46,7 @@ module IPAddress
       self.obj_include?(oth)
     end
 
-    def as_json(data="")
+    def as_json(_data = "")
       to_string
     end
   end

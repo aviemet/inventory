@@ -32,7 +32,7 @@ class AssignmentsController < ApplicationController
       redirect_to assignment.assignable
     else
       redirect_to send(
-        "checkout_#{assignment_params[:assignable_type].downcase.singularize}_path", 
+        "checkout_#{assignment_params[:assignable_type].downcase.singularize}_path",
         id: assignment.assignable
       ), inertia: { errors: assignment.errors }
     end
@@ -62,9 +62,9 @@ class AssignmentsController < ApplicationController
     else
       redirect_to(
         send(
-          "checkin_#{assignment.assignable_type.downcase.singularize}_path", 
+          "checkin_#{assignment.assignable_type.downcase.singularize}_path",
           { id: assignable, assignment_id: assignment }
-        ), 
+        ),
         inertia: { errors: assignment.errors }
       )
     end

@@ -34,13 +34,13 @@ class PersonBlueprint < ApplicationBlueprint
     include_view :name
 
     field :default_location_id do |person|
-      person.location.id unless person.location.nil?
+      person&.location&.id
     end
   end
 
   view :edit do
     excludes :updated_at, :created_at
-    
+
     field :department_id do |person|
       person.department&.id
     end

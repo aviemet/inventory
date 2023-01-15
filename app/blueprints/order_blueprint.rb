@@ -22,7 +22,7 @@ class OrderBlueprint < ApplicationBlueprint
          :updated_at
 
   field :cost do |order|
-    if order.purchases.size == 0
+    if order.purchases.empty?
       nil
     else
       order.purchases.reduce(0) { |sum, purchase| sum + purchase.cost } + order.tax + order.shipping

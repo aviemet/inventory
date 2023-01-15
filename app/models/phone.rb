@@ -5,6 +5,6 @@ class Phone < ApplicationRecord
   belongs_to :category
 
   def self.find_by_category(category)
-    self.where(category: category)
+    self.where(category:)
   end
 end

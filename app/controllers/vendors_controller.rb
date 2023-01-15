@@ -33,7 +33,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      accessories: InertiaRails.lazy(-> { 
+      accessories: InertiaRails.lazy(-> {
         paginated_accessories = vendor.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render(view: :associations),
@@ -43,7 +43,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      consumables: InertiaRails.lazy(-> { 
+      consumables: InertiaRails.lazy(-> {
         paginated_consumables = vendor.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render(view: :associations),
@@ -53,7 +53,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      components: InertiaRails.lazy(-> { 
+      components: InertiaRails.lazy(-> {
         paginated_components = vendor.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render(view: :associations),
@@ -63,7 +63,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      licenses: InertiaRails.lazy(-> { 
+      licenses: InertiaRails.lazy(-> {
         paginated_licenses = vendor.licenses.includes_associated.page(params[:page] || 1)
         {
           data: paginated_licenses.render(view: :associations),
@@ -73,7 +73,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      contracts: InertiaRails.lazy(-> { 
+      contracts: InertiaRails.lazy(-> {
         paginated_contracts = vendor.contracts.includes_associated.page(params[:page] || 1)
         {
           data: paginated_contracts.render(view: :associations),
@@ -112,13 +112,11 @@ class VendorsController < ApplicationController
         render json: { errors: vendor.errors }, status: 303
       end
 
-    else
+    elsif vendor.save
 
-      if vendor.save
-        redirect_to vendor, notice: 'License was successfully created'
-      else
-        redirect_to new_vendor_path, inertia: { errors: vendor.errors }
-      end
+      redirect_to vendor, notice: 'License was successfully created'
+    else
+      redirect_to new_vendor_path, inertia: { errors: vendor.errors }
 
     end
   end

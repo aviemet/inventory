@@ -4,10 +4,10 @@ class Manufacturer < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
-    against: [:name, :asset_tag, :serial, :cost_cents], 
+    :search,
+    against: [:name, :asset_tag, :serial, :cost_cents],
     using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )

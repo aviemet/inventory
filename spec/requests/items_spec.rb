@@ -5,19 +5,18 @@ RSpec.describe "/items", type: :request do
   def valid_attributes
     {
       item: attributes_for(:item,
-        model_id: create(:model).id,
-        vendor_id: create(:vendor).id,
-        default_location_id: create(:location).id
-      )
+                           model_id: create(:model).id,
+                           vendor_id: create(:vendor).id,
+                           default_location_id: create(:location).id)
     }
   end
-  
+
   def invalid_attributes
-   { 
-     item: {
-       name: "",
-     }
-   }
+    {
+      item: {
+        name: "",
+      }
+    }
   end
 
   describe "POST /create" do
