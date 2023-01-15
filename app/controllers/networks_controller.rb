@@ -27,7 +27,7 @@ class NetworksController < ApplicationController
       network: -> { network.render(view: :details, page: (params[:page] || 1).to_i) },
       ips: -> { ips.render(view: :with_item) },
       pagination: -> { {
-        count: network&.address&.size - 2,
+        count: (network&.address&.size || 2) - 2,
         **host_pagination_data(network&.address)
       } }
     }
@@ -76,8 +76,6 @@ class NetworksController < ApplicationController
   end
 
   private
-
-
 
   def sortable_fields
     %w(name address gateway dhcp_start dhcp_end vlan_id).freeze

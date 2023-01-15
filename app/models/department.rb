@@ -5,11 +5,11 @@ class Department < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
-    against: [:name, :notes], associated_against: { 
+    :search,
+    against: [:name, :notes], associated_against: {
       location: [:name]
     }, using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )

@@ -15,8 +15,6 @@ const AvatarMenu = () => {
 			</Menu.Target>
 
 			<Menu.Dropdown>
-				<Menu.Item>
-				</Menu.Item>
 				<ToggleColorSchemeButton />
 			</Menu.Dropdown>
 		</Menu>

@@ -20,7 +20,7 @@ module Assignable
 
           if assignment.update({
             active: false,
-            returned_at: returned_at
+            returned_at:
           })
             success = true
           end
@@ -29,7 +29,7 @@ module Assignable
           self.after_unassignment(assignment, params) if self.respond_to?(:after_unassignment)
         end
 
-        return success
+        success
       end
     end
 
@@ -38,6 +38,5 @@ module Assignable
 
       self.update(qty: self.qty - assignment.qty)
     end
-
   end
 end

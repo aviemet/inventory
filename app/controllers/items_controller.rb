@@ -82,11 +82,9 @@ class ItemsController < ApplicationController
     end
   end
 
-  #GET /item/:id/checkin
+  # GET /item/:id/checkin
   def checkin
-    unless item.assigned?
-      redirect_to item, warning: 'Item is not yet checked out'
-    else
+    if item.assigned?
       assignment = item.assignment
       assignment.returned_at = Time.current
       assignment.active = false
@@ -97,6 +95,8 @@ class ItemsController < ApplicationController
         locations: -> { @active_company.locations.render(view: :as_options) },
         statuses: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
       }
+    else
+      redirect_to item, warning: 'Item is not yet checked out'
     end
   end
 
@@ -133,6 +133,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :item_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable, nics: [:mac, :ip])
+    params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable, nics: [:mac, :ip])
   end
 end

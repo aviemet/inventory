@@ -24,33 +24,27 @@ TsSchema.setup do |config|
   #
   config.case = :snake
 
-
   # Customize output path and file name
   #
   config.output = Rails.root.join('app', 'frontend', 'types', 'schema.d.ts')
-
 
   # Whether to generate the schema file after running migrations
   #
   # config.auto_generate = true
 
-
   # Add custom type mappings or overrides
   #
   # config.custom_types = {
-  #   
+  #
   # }
-
 
   # Default type for unrecognized types
   #
   # config.default_type = :string
 
-
   # Whether to generate types for associated models
   #
   # config.include_associated = true
-
 
   # Parent classes of models to generate (as strings or symbols)
   # Only classes inheriting from those in this list will have types generated
@@ -59,14 +53,12 @@ TsSchema.setup do |config|
   #	  "ApplicationRecord",
   # ]
 
-
-  # Additional models to generate schema from, such as those added by other gems 
+  # Additional models to generate schema from, such as those added by other gems
   #  which don't have a model file. (as strings or symbols)
   #
   config.additional_models = [
     "PublicActivity::Activity"
   ]
-
 
   # Ignore certain fields, omitting them from the generated schema: :optional|(string)|false
   # Key is the name of the field to override options for.
@@ -86,21 +78,17 @@ TsSchema.setup do |config|
     assign_toable_type: "TAssignToable",
   }
 
-
   # Namespace for generated types
   #
   config.namespace = "Schema"
-
 
   # Output schema as types or interfaces: type|interface
   #
   # config.schema_type = :type
 
-
   # Indentation options: tab|space
   #
   # config.indent = :tab
-
 
   # If indent is spaces, specify how many
   #

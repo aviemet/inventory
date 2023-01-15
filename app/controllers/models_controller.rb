@@ -47,7 +47,7 @@ class ModelsController < ApplicationController
   def create
     model = Model.new(model_params)
     model.company = @active_company
-    
+
     if model.save
       if request.params&.[](:redirect) == false
         render json: model.render, status: 201
@@ -61,7 +61,6 @@ class ModelsController < ApplicationController
         redirect_to new_model_path, inertia: { errors: model.errors }
       end
     end
-
   end
 
   # PATCH/PUT /models/1

@@ -68,13 +68,11 @@ class AccessoriesController < ApplicationController
     end
   end
 
-  #GET /accessories/:id/checkin/:assignment_id
+  # GET /accessories/:id/checkin/:assignment_id
   def checkin
     assignment = Assignment.find(params[:assignment_id])
 
-    unless assignment&.assignable == accessory && assignment.active
-      redirect_to accessory, warning: 'Accessory assignment is unable to be checked in'
-    else
+    if assignment&.assignable == accessory && assignment.active
       assignment.returned_at = Time.current
       assignment.active = false
 
@@ -83,6 +81,8 @@ class AccessoriesController < ApplicationController
         assignment: assignment.render(view: :edit),
         statuses: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
       }
+    else
+      redirect_to accessory, warning: 'Accessory assignment is unable to be checked in'
     end
   end
 
@@ -110,9 +110,9 @@ class AccessoriesController < ApplicationController
     accessory.destroy
     redirect_to accessories_url, notice: 'Accessory was successfully destroyed.'
   end
- 
+
   private
-  
+
   def sortable_fields
     %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end

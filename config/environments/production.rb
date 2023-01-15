@@ -54,7 +54,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -67,15 +67,15 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
-    address: ENV["SMTP_ADDRESS"],
-    port: ENV["SMTP_PORT"],
-    domain: ENV["SMTP_DOMAIN"],
-    authentication: ENV["SMTP_AUTH"],
-    enable_starttls_auto: ENV["SMTP_TLS"],
-    user_name: ENV["SMTP_USERNAME"],
-    password: ENV["SMTP_PASSWORD"]
+    address: ENV.fetch("SMTP_ADDRESS", nil),
+    port: ENV.fetch("SMTP_PORT", nil),
+    domain: ENV.fetch("SMTP_DOMAIN", nil),
+    authentication: ENV.fetch("SMTP_AUTH", nil),
+    enable_starttls_auto: ENV.fetch("SMTP_TLS", nil),
+    user_name: ENV.fetch("SMTP_USERNAME", nil),
+    password: ENV.fetch("SMTP_PASSWORD", nil)
   }
-  config.action_mailer.default_url_options = { host: ENV["SERVER_DOMAIN"] }
+  config.action_mailer.default_url_options = { host: ENV.fetch("SERVER_DOMAIN", nil) }
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :smtp
 
@@ -87,7 +87,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"

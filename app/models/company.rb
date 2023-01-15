@@ -5,10 +5,10 @@ class Company < ApplicationRecord
   before_destroy :safely_orphan_or_destroy_dependencies
 
   pg_search_scope(
-    :search, 
-    against: [:name], 
+    :search,
+    against: [:name],
     using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )
@@ -43,7 +43,7 @@ class Company < ApplicationRecord
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
-  
+
   {
     items: "Item",
     accessories: "Accessory",
@@ -55,7 +55,7 @@ class Company < ApplicationRecord
 
   # has_many :models, through: :manufacturers
 
-  scope :includes_associated, -> { includes([:departments, :locations, :ownerships])}
+  scope :includes_associated, -> { includes([:departments, :locations, :ownerships]) }
 
   validates_presence_of :name
 

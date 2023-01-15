@@ -22,6 +22,7 @@ export interface IComponentFormProps {
 }
 
 const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendors, locations, manufacturers, categories }: IComponentFormProps) => {
+	console.log({ component })
 	return (
 		<Form
 			model="component"
@@ -29,6 +30,9 @@ const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendo
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
+			onChange={ form => {
+				console.log({ data: form.data })
+			} }
 		>
 			<Input name="name" label="Name" required autoFocus />
 

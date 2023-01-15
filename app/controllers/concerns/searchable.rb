@@ -40,5 +40,4 @@ module Searchable
 
     %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'
   end
-
 end

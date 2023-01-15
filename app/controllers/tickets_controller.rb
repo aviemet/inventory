@@ -69,7 +69,7 @@ class TicketsController < ApplicationController
   end
 
   private
-  
+
   def sortable_fields
     %w(subject created_by.name).freeze
   end

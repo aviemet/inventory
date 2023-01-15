@@ -39,13 +39,13 @@ Rails.application.configure do
   # ActionMailer settings for local SMTP server using mailcatcher
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: ENV["SMTP_ADDRESS"],
-    port: ENV["SMTP_PORT"],
-    domain: ENV["SMTP_DOMAIN"],
-    authentication: ENV["SMTP_AUTH"],
-    enable_starttls_auto: ENV["SMTP_TLS"],
-    user_name: ENV["SMTP_USERNAME"],
-    password: ENV["SMTP_PASSWORD"]
+    address: ENV.fetch("SMTP_ADDRESS", nil),
+    port: ENV.fetch("SMTP_PORT", nil),
+    domain: ENV.fetch("SMTP_DOMAIN", nil),
+    authentication: ENV.fetch("SMTP_AUTH", nil),
+    enable_starttls_auto: ENV.fetch("SMTP_TLS", nil),
+    user_name: ENV.fetch("SMTP_USERNAME", nil),
+    password: ENV.fetch("SMTP_PASSWORD", nil)
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: 'localhost:3000' }

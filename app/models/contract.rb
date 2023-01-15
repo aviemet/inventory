@@ -3,12 +3,12 @@ class Contract < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
-    against: [:name, :number], associated_against: { 
+    :search,
+    against: [:name, :number], associated_against: {
       vendor: [:name],
       category: [:name]
     }, using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )
@@ -24,6 +24,6 @@ class Contract < ApplicationRecord
   scope :includes_associated, -> { includes([:vendor, :category]) }
 
   def self.find_by_category(category)
-    self.where(category: category)
+    self.where(category:)
   end
 end

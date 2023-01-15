@@ -33,7 +33,7 @@ class LocationsController < ApplicationController
       location: Location.new(currency: @active_company.default_currency).render(view: :new),
       locations: -> { @active_company.locations.render(view: :as_options) },
       departments: -> { @active_company.departments.render(view: :as_options) },
-      currencies: currencies,
+      currencies:,
     }
   end
 
@@ -43,7 +43,7 @@ class LocationsController < ApplicationController
       location: loc.render(view: :edit),
       locations: -> { @active_company.locations.where.not(id: loc.id).render },
       departments: -> { @active_company.departments.render(view: :as_options) },
-      currencies: currencies,
+      currencies:,
     }
   end
 

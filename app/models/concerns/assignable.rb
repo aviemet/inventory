@@ -4,7 +4,7 @@ module Assignable
 
   included do
     has_many :assignments, as: :assignable
-    belongs_to :status_label #, default: -> { StatusLabel.find_by_name("Deployable") }
+    belongs_to :status_label # , default: -> { StatusLabel.find_by_name("Deployable") }
 
     def assign_to(assign_toable, params = {})
       assignment = Assignment.new(params)
@@ -14,7 +14,7 @@ module Assignable
 
       self.transaction do
         asset_class = self.class.name.downcase
-        
+
         self._before_assignment(assignment, params) if self.respond_to?(:_before_assignment)
         self.before_assignment(assignment, params) if self.respond_to?(:before_assignment)
 

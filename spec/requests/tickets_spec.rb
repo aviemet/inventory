@@ -67,12 +67,12 @@ RSpec.describe "/tickets", type: :request do
           post tickets_url, params: invalid_attributes
         }.to change(Ticket, :count).by(0)
       end
-    
+
       it "redirects back to the new ticket page" do
         post tickets_url, params: invalid_attributes
         expect(response).to redirect_to new_ticket_url
       end
-    
+
     end
   end
 

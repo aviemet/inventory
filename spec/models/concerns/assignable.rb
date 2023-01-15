@@ -65,7 +65,7 @@ shared_examples "assignable:quantity" do
       person = build(:person)
       expect{ subject.assign_to(person) }.to change{ subject.qty }.by(-1)
       qty = 2
-      expect{ subject.assign_to(person, qty: qty) }.to change{ subject.qty }.by(-qty)
+      expect{ subject.assign_to(person, qty:) }.to change{ subject.qty }.by(-qty)
     end
 
     it "Should not respond to assignment" do
@@ -80,8 +80,8 @@ shared_examples "assignable:quantity" do
 
     it "Cannot assign more than are available" do
       subject.update qty: 1
-      expect{ 
-        subject.assign_to(person, qty: 2) 
+      expect{
+        subject.assign_to(person, qty: 2)
       }.to raise StandardError
     end
   end
@@ -104,7 +104,7 @@ shared_examples "assignable:consume" do
       person = build(:person)
       expect{ subject.assign_to(person) }.to change{ subject.qty }.by(-1)
       qty = 2
-      expect{ subject.assign_to(person, qty: qty) }.to change{ subject.qty }.by(-qty)
+      expect{ subject.assign_to(person, qty:) }.to change{ subject.qty }.by(-qty)
     end
 
     it "Should not respond to assignment" do
@@ -117,8 +117,8 @@ shared_examples "assignable:consume" do
 
     it "Cannot assign more than are available" do
       subject.update qty: 1
-      expect{ 
-        subject.assign_to(person, qty: 2) 
+      expect{
+        subject.assign_to(person, qty: 2)
       }.to raise StandardError
     end
   end
