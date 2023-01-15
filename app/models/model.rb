@@ -4,12 +4,12 @@ class Model < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
-    against: [:name, :model_number], associated_against: { 
+    :search,
+    against: [:name, :model_number], associated_against: {
       category: [:name],
       manufacturer: [:name]
     }, using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )

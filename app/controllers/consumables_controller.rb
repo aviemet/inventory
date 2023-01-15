@@ -46,7 +46,7 @@ class ConsumablesController < ApplicationController
       locations: -> { @active_company.locations.render },
     }
   end
-    
+
   # GET /consumables/:id/checkout
   def checkout
     redirect_to consumable if consumable.qty == 0
@@ -64,9 +64,9 @@ class ConsumablesController < ApplicationController
     }
   end
 
-  #GET /consumables/:id/checkin
+  # GET /consumables/:id/checkin
   def checkin
-    redirect_to consumable unless consumable.assignments.size > 0
+    redirect_to consumable if consumable.assignments.empty?
     assignment = consumable.assignment
     assignment.returned_at = Time.current
     assignment.active = false

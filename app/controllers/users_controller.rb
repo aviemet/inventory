@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   include Searchable
   include ContactableConcern
 
-  expose :users, -> { search(User.all.includes_associated, sortable_fields)}
+  expose :users, -> { search(User.all.includes_associated, sortable_fields) }
   expose :user
 
   # GET /users
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   # GET /users/complete_registration
   def complete_registration
     unless current_user.companies.empty?
-      redirect_to root_path 
+      redirect_to root_path
       return
     end
 
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   def save_complete_registration
     unless current_user.companies.empty?
       ap "REDIRECTING"
-      redirect_to root_path 
+      redirect_to root_path
       return
     end
 
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
 
       current_user.person.company = company
       current_user.person.save
-      
+
       if current_user.save
         redirect_to root_path
       end
@@ -106,7 +106,7 @@ class UsersController < ApplicationController
   # DELETE /users/:id
   def destroy
     user.destroy
-    respond_to do |format|
+    respond_to do
       redirect_to users_url, notice: 'User was successfully destroyed.'
     end
   end

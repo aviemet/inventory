@@ -13,14 +13,10 @@ class ApplicationBlueprint < Blueprinter::Base
     excludes :updated_at, :created_at
   end
 
-  protected
-
-  def self.field(method, options={}, &block)
+  def self.field(method, options = {}, &)
     unexclude(method)
     super
   end
-
-  private
 
   def self.currency_for(obj)
     obj&.cost&.amount&.to_f unless obj.cost.nil?

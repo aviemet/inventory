@@ -22,7 +22,7 @@ class Item < Asset
       self.default_location
     end
   end
-  
+
   private
 
   def ensure_nic

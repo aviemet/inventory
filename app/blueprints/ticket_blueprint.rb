@@ -6,7 +6,7 @@ class TicketBlueprint < ApplicationBlueprint
          :updated_at
 
   view :associations do
-    association :messages, blueprint: TicketMessageBlueprint 
+    association :messages, blueprint: TicketMessageBlueprint
     association :created_by, blueprint: PersonBlueprint
     association :primary_contact, blueprint: PersonBlueprint
     association :assignees, blueprint: PersonBlueprint

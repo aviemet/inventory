@@ -4,10 +4,10 @@ class Category < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
-    against: [:name], 
+    :search,
+    against: [:name],
     using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )

@@ -29,7 +29,7 @@ module Assignable
 
         assignment&.update({
           active: false,
-          returned_at: returned_at
+          returned_at:
         })
 
         self._after_unassignment(assignment, params) if self.respond_to?(:_after_unassignment)
@@ -38,10 +38,9 @@ module Assignable
         self
       end
 
-      def _before_assignment(assignment, params)
+      def _before_assignment(_assignment, _params)
         raise StandardError, "Item is already assigned to #{self.assigned_to.name}" if self.assigned?
       end
     end
-
   end
 end

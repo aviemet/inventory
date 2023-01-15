@@ -3,10 +3,10 @@ class Network < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
-    against: [:name, :address, :gateway, :vlan_id], 
+    :search,
+    against: [:name, :address, :gateway, :vlan_id],
     using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )

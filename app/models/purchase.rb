@@ -3,7 +3,7 @@ class Purchase < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
+    :search,
     associated_against: {
       order: [:order_number],
       item: [:name, :asset_tag, :serial],
@@ -11,7 +11,7 @@ class Purchase < ApplicationRecord
       component: [:name, :serial, :model_number],
       consumable: [:name, :serial, :model_number],
     }, using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )
