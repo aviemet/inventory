@@ -6,6 +6,7 @@ module Assignable
 
     included do
       has_many :assignments, as: :assignable
+      belongs_to :status_label, default: -> { StatusLabel.find_by_name("Deployable") }
 
       def assignment
         self.assignments.select(&:active).first

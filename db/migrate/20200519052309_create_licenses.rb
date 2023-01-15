@@ -16,6 +16,7 @@ class CreateLicenses < ActiveRecord::Migration[6.0]
       t.references :category, null: false, foreign_key: true
       t.references :vendor, null: true, foreign_key: true
       t.references :manufacturer, null: false, foreign_key: true
+      t.references :status_label, null: true, foreign_key: true
 
       t.timestamps
     end
