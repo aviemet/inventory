@@ -6,13 +6,13 @@ class License < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
-    against: [:name, :seats, :key, :licenser_name, :licenser_email], associated_against: { 
+    :search,
+    against: [:name, :seats, :key, :licenser_name, :licenser_email], associated_against: {
       vendor: [:name],
       category: [:name],
       manufacturer: [:name]
     }, using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )
@@ -33,7 +33,7 @@ class License < ApplicationRecord
   scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer]) }
 
   def self.find_by_category(category)
-    self.where(category: category)
+    self.where(category:)
   end
 
 end

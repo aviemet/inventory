@@ -1,8 +1,8 @@
 class Assignment < ApplicationRecord
-  tracked recipient: proc { |controller, a| a.assignable },
+  tracked recipient: proc { |_controller, a| a.assignable },
           params: {
-            assign_toable_type: proc { |controller, a| a.assign_toable_type },
-            assign_toable_id: proc { |controller, a| a.assign_toable_id }
+            assign_toable_type: proc { |_controller, a| a.assign_toable_type },
+            assign_toable_id: proc { |_controller, a| a.assign_toable_id }
           }
 
   enum status: %i(approved requested denied)

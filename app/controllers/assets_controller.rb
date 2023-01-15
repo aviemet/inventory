@@ -41,7 +41,7 @@ class AssetsController < ApplicationController
   private
 
   def redirect_to_asset_type_controller(action)
-    redirect_to controller: asset.type.downcase.pluralize, action: action, id: asset
+    redirect_to controller: asset.type.downcase.pluralize, action:, id: asset
   end
 
   def sortable_fields

@@ -13,10 +13,11 @@ class IpLease < ApplicationRecord
               when IPAddress
                 network.to_string
               when String
-                raise ArgumentError.new("Invalid parameter, #{network} is not a valid network. When passing a string, use the format \"10.10.10.0/24\"") unless IPAddress(network).network?
+                raise ArgumentError, "Invalid parameter, #{network} is not a valid network. When passing a string, use the format \"10.10.10.0/24\"" unless IPAddress(network).network?
+
                 network
               else
-                raise ArgumentError.new("Invalid parameter #{network}: expected one of Network, IpAddress or String in format \"10.10.10.0/24\"")
+                raise ArgumentError, "Invalid parameter #{network}: expected one of Network, IpAddress or String in format \"10.10.10.0/24\""
               end
     self.where("'#{net_str}' >>= address")
   end

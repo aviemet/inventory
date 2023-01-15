@@ -1,15 +1,15 @@
-class Order < ApplicationRecord  
+class Order < ApplicationRecord
   include Ownable
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
-    against: [:number], associated_against: { 
+    :search,
+    against: [:number], associated_against: {
       user: [:email],
       person: [:first_name, :middle_name, :last_name, :employee_number, :job_title],
       vendor: [:name]
     }, using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )
@@ -26,7 +26,7 @@ class Order < ApplicationRecord
   has_one :person, through: :user
   has_many :purchases
 
-  scope :includes_associated, -> { includes([:purchase, :item, :accessory, :consumable, :component, :user, :vendor])}
+  scope :includes_associated, -> { includes([:purchase, :item, :accessory, :consumable, :component, :user, :vendor]) }
 
   def cost
     self.joins(:purchases).select("SUM(purchases.cost) AS cost")

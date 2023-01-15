@@ -63,6 +63,10 @@ Layout/FirstHashElementIndentation:
   Enabled: false
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
+Layout/MultilineBlockLayout:
+  Enabled: false
+Layout/BlockEndNewline:
+  Enabled: false
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
@@ -210,6 +214,10 @@ Style/WordArray:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#stylewordarray
 
+Layout/DotPosition:
+  Enabled: false
+  StyleGuide: https://relaxed.ruby.style/#layoutdotposition
+
 Layout/SpaceBeforeBlockBraces:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#layoutspacebeforeblockbraces
@@ -217,10 +225,6 @@ Layout/SpaceBeforeBlockBraces:
 Layout/SpaceInsideParens:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#layoutspaceinsideparens
-
-Layout/DotPosition:
-  Enabled: false
-  StyleGuide: https://relaxed.ruby.style/#layoutdotposition
 
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
@@ -231,6 +235,12 @@ Lint/AssignmentInCondition:
   StyleGuide: https://relaxed.ruby.style/#lintassignmentincondition
 
 Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Style/HashSyntax:
   Enabled: false
 
 Metrics:

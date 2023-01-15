@@ -19,13 +19,13 @@ class ManufacturerBlueprint < ApplicationBlueprint
   end
 
   view :associations do
-		association :contact, blueprint: ContactBlueprint
-		association :activities, blueprint: ActivityBlueprint
-		association :models, blueprint: ModelBlueprint
-		association :items, blueprint: ItemBlueprint
-		association :accessories, blueprint: AccessoryBlueprint
-		association :consumables, blueprint: ConsumableBlueprint
-		association :components, blueprint: ComponentBlueprint
+    association :contact, blueprint: ContactBlueprint
+    association :activities, blueprint: ActivityBlueprint
+    association :models, blueprint: ModelBlueprint
+    association :items, blueprint: ItemBlueprint
+    association :accessories, blueprint: AccessoryBlueprint
+    association :consumables, blueprint: ConsumableBlueprint
+    association :components, blueprint: ComponentBlueprint
   end
 
   view :index do
@@ -49,7 +49,7 @@ class ManufacturerBlueprint < ApplicationBlueprint
       manufacturer.components.size
     end
 
-		association :contact, blueprint: ContactBlueprint
+    association :contact, blueprint: ContactBlueprint
   end
 
   view :as_options do

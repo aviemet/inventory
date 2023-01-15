@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include PublicActivity::StoreController 
+  include PublicActivity::StoreController
 
   protect_from_forgery with: :exception
 
@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   def set_active_company
     return if !current_user
 
-    if current_user.companies.size > 0
+    if !current_user.companies.empty?
       # TODO: This may be a stop-gap measure. May want to redirect to a view with choices to be more explicit
       if !current_user.active_company
         current_user.update(active_company: current_user.companies.first)
@@ -57,6 +57,7 @@ class ApplicationController < ActionController::Base
 
   def pagination_data(model)
     return if !model.respond_to? :total_pages
+
     {
       pages: model.total_pages,
       limit: model.limit_value,
@@ -68,16 +69,16 @@ class ApplicationController < ActionController::Base
     }
   end
 
-  def host_pagination_data(address)
+  def host_pagination_data(_address)
     size = network&.address&.size
-    pages =  (size / 256).to_i
+    pages = (size / 256).to_i
     limit = params[:limit] || 256
     current_page = params[:page].to_i || 1
 
     {
-      pages: pages,
-      limit: limit,
-      current_page: current_page,
+      pages:,
+      limit:,
+      current_page:,
       next_page: current_page + 1 > pages ? nil : current_page + 1,
       prev_page: current_page - 1 < 0 ? nil : current_page - 1,
       is_first_page: current_page == 1,

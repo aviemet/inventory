@@ -32,7 +32,8 @@ const ShowTicket = ({ ticket }: IShowTicketProps) => {
 
 			<Section>
 				<Form
-					data={ { message: { body: '' } } }
+					model="ticket_message"
+					data={ { ticket_message: { body: '' } } }
 					to={ Routes.ticketMessages(ticket.id) }
 					remember={ false }
 				>

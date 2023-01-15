@@ -38,7 +38,7 @@ class ComponentsController < ApplicationController
   def new
     render inertia: "Components/New", props: {
       component: Component.new.render(view: :new),
-      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
+      models: -> { @active_company.models.find_by_category(:Component).render(view: :as_options) },
       vendors: -> { @active_company.vendors.render(view: :as_options) },
       locations: -> { @active_company.locations.render(view: :as_options) },
     }
@@ -48,12 +48,12 @@ class ComponentsController < ApplicationController
   def edit
     render inertia: "Components/Edit", props: {
       component: component.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
+      models: -> { @active_company.models.find_by_category(:Component).render(view: :as_options) },
       vendors: -> { @active_company.vendors.render(view: :as_options) },
       locations: -> { @active_company.locations.render(view: :as_options) },
     }
   end
-    
+
   # GET /components/:id/checkout
   def checkout
     redirect_to component if component.qty == 0
@@ -70,9 +70,10 @@ class ComponentsController < ApplicationController
     }
   end
 
-  #GET /components/:id/checkin
+  # GET /components/:id/checkin
   def checkin
-    redirect_to component unless component.assignments.size > 0
+    redirect_to component if component.assignments.empty?
+
     assignment = component.assignment
     assignment.returned_at = Time.current
     assignment.active = false
@@ -120,6 +121,6 @@ class ComponentsController < ApplicationController
   end
 
   def component_params
-    params.require(:component).permit(:name, :model_id, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id)
+    params.require(:component).permit(:name, :model_id, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id, :status_label_id)
   end
 end

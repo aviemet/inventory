@@ -16,7 +16,7 @@ RSpec.describe Person, type: :model do
       expect(build(:person, {
         first_name: nil
       })).to_not be_valid
-      
+
       expect(build(:person, {
         last_name: nil
       })).to_not be_valid

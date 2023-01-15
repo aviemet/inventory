@@ -37,28 +37,26 @@ class LdapSync
       return unless entry[:objectclass].include?("user")
 
       person = person_from_entry
-      
+
       username = entry[:samaccountname]
       email = entry[:mail]
       phone = entry[:telephonenumber]
-      
+
       groups = entry[:memberof].map{ |group|
         match = group.match(/CN=(\w+),/)
-        if(!match.nil? && match.length > 1)
+        if !match.nil? && match.length > 1
           match[1]
         end
       }
 
-      if entry[:manager]
-        entry[:manager].each{ |mgr|
-          match = mgr.match(/CN=([\w\s]+),/)
-          if(!match.nil? && match.length > 1)
-            name = match[1]
-            @managers[name] ||= []
-            @managers[name].push person.guid
-          end
-        }
-      end
+      entry&.[](:manager)&.each{ |mgr|
+        match = mgr.match(/CN=([\w\s]+),/)
+        next unless !match.nil? && match.length > 1
+
+        name = match[1]
+        @managers[name] ||= []
+        @managers[name].push person.guid
+      }
 
       @people.push person
     end
@@ -72,7 +70,7 @@ class LdapSync
   private
 
   def person_from_entry(entry)
-    guid = GuidConverter::unpack_guid(entry[:objectguid].first)
+    guid = GuidConverter.unpack_guid(entry[:objectguid].first)
     person = find_or_create_person guid
     person.first_name = entry[:givenname][0]
     person.last_name = entry[:sn][0]
@@ -80,26 +78,24 @@ class LdapSync
   end
 
   def find_or_create_person(guid)
-    Person.find_by_guid(guid) || Person.new({ guid: guid, company: @ldap.company })
+    Person.find_by_guid(guid) || Person.new({ guid:, company: @ldap.company })
   end
 
   def save_people
     ActiveRecord::Base.transaction do
-      @people.each do |person|
-        person.save
-      end
+      @people.each(&:save)
     end
   end
 
   def update_manager_data
     ActiveRecord::Base.transaction do
       @managers.each do |mgr_name, user_guids|
-        split = mgr_name.split(' ')
+        split = mgr_name.split
         manager = Person.where({ first_name: split[0], last_name: split[-1]}).first
-        if manager
-          user_guids.each do |guid|
+        next unless manager
+
+        user_guids.each do |_guid|
           Person.where({ guid: user_guids }).update_all({ manager_id: manager.id })
-          end
         end
       end
     end

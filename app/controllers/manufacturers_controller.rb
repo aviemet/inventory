@@ -32,7 +32,7 @@ class ManufacturersController < ApplicationController
           }
         }
       }),
-      accessories: InertiaRails.lazy(-> { 
+      accessories: InertiaRails.lazy(-> {
         paginated_accessories = manufacturer.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render(view: :associations),
@@ -42,7 +42,7 @@ class ManufacturersController < ApplicationController
           }
         }
       }),
-      consumables: InertiaRails.lazy(-> { 
+      consumables: InertiaRails.lazy(-> {
         paginated_consumables = manufacturer.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render(view: :associations),
@@ -52,7 +52,7 @@ class ManufacturersController < ApplicationController
           }
         }
       }),
-      components: InertiaRails.lazy(-> { 
+      components: InertiaRails.lazy(-> {
         paginated_components = manufacturer.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render(view: :associations),

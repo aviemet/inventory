@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   # ROOT PATH #
 
   root "pages#dashboard"
-  
+
   # STATIC PAGES #
 
   get "dashboard" => "pages#dashboard", as: :dashboard

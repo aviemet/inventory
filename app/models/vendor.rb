@@ -4,12 +4,12 @@ class Vendor < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope(
-    :search, 
+    :search,
     against: [:name, :url], associated_against: {
       item: [:count]
     },
     using: {
-      tsearch: { prefix: true }, 
+      tsearch: { prefix: true },
       trigram: {}
     }
   )

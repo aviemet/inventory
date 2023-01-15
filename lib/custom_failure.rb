@@ -13,7 +13,7 @@ class CustomFailure < Devise::FailureApp
     message = warden_message || :unauthenticated
 
     # Incorrect credentials - wrong username or password
-    if message == :invalid || message == :not_found_in_database
+    if [:invalid, :not_found_in_database].include?(message)
       flash.now[:alert] = i18n_message(:invalid)
       flash.keep(:alert)
       redirect_to new_user_session_path
@@ -32,20 +32,20 @@ class CustomFailure < Devise::FailureApp
 
   def recall
     header_info = if relative_url_root?
-      base_path = Pathname.new(relative_url_root)
-      full_path = Pathname.new(attempted_path)
+                    base_path = Pathname.new(relative_url_root)
+                    full_path = Pathname.new(attempted_path)
 
-      { "SCRIPT_NAME" => relative_url_root,
-        "PATH_INFO" => '/' + full_path.relative_path_from(base_path).to_s }
-    else
-      { "PATH_INFO" => attempted_path }
-    end
+                    { "SCRIPT_NAME" => relative_url_root,
+                      "PATH_INFO" => "/#{full_path.relative_path_from(base_path)}" }
+                  else
+                    { "PATH_INFO" => attempted_path }
+                  end
 
-    header_info.each do | var, value|
+    header_info.each do |var, value|
       if request.respond_to?(:set_header)
         request.set_header(var, value)
       else
-        request.env[var]  = value
+        request.env[var] = value
       end
     end
 
