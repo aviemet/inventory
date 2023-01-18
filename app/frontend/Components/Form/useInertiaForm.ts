@@ -3,6 +3,8 @@ import { useForm } from '@inertiajs/inertia-react'
 import { cloneDeep, isPlainObject, set, get } from 'lodash'
 import { useCallback } from 'react'
 
+import { type InertiaFormProps as DefaultInertiaFormProps } from '@inertiajs/inertia-react'
+
 type TCallBack = (data: Record<string, any>) => Record<string, any>
 
 const fillEmptyValues = (data: Record<string, any>) => {
@@ -22,12 +24,19 @@ const fillEmptyValues = (data: Record<string, any>) => {
 function useInertiaForm<TForm = Record<string, any>>(initialValues?: TForm): InertiaFormProps<TForm>
 function useInertiaForm<TForm = Record<string, any>>(rememberKey: string, initialValues?: TForm): InertiaFormProps<TForm>
 
-function useInertiaForm(...args): InertiaFormProps {
-	const rememberKey = typeof args[0] === 'string' ? args[0] : null
-	const initialValues = fillEmptyValues(typeof args[0] === 'string' ? args[1] : args[0]) || {}
+function useInertiaForm<TForm extends Record<string, unknown>>(
+	rememberKeyOrInitialValues?: string | TForm,
+	maybeInitialValues?: TForm,
+): InertiaFormProps {
+	const rememberKey = typeof rememberKeyOrInitialValues === 'string' ? rememberKeyOrInitialValues : null
+	const initialValues = fillEmptyValues(typeof rememberKeyOrInitialValues === 'string' ? (maybeInitialValues || {}) : rememberKeyOrInitialValues || {}) || {}
 
-	const formArgs = rememberKey ? [rememberKey, initialValues] : [initialValues]
-	const form = useForm<typeof initialValues>(...formArgs)
+	let form: DefaultInertiaFormProps
+	if(rememberKey) {
+		form = useForm<typeof initialValues>(rememberKey, initialValues)
+	} else {
+		form = useForm<typeof initialValues>(initialValues)
+	}
 
 	/**
 	 * Override Inertia's setData method to allow setting nested values
