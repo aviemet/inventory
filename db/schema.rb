@@ -65,9 +65,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
     t.bigint "model_id", null: false
     t.bigint "vendor_id"
     t.bigint "default_location_id"
+    t.bigint "status_label_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "status_label_id"
     t.index ["asset_tag"], name: "index_assets_on_asset_tag", unique: true
     t.index ["default_location_id"], name: "index_assets_on_default_location_id"
     t.index ["model_id"], name: "index_assets_on_model_id"
@@ -240,9 +240,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
     t.bigint "category_id", null: false
     t.bigint "vendor_id"
     t.bigint "manufacturer_id", null: false
+    t.bigint "status_label_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "status_label_id"
     t.index ["category_id"], name: "index_licenses_on_category_id"
     t.index ["manufacturer_id"], name: "index_licenses_on_manufacturer_id"
     t.index ["status_label_id"], name: "index_licenses_on_status_label_id"
@@ -437,8 +437,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
 
   create_table "ticket_statuses", force: :cascade do |t|
     t.string "name"
+    t.integer "status_type", default: 0
+    t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_ticket_statuses_on_slug", unique: true
   end
 
   create_table "tickets", force: :cascade do |t|

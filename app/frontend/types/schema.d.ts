@@ -15,9 +15,9 @@ declare namespace Schema {
 		model_id: number;
 		vendor_id?: number | null;
 		default_location_id?: number | null;
+		status_label_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
@@ -25,7 +25,6 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
-		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -33,6 +32,7 @@ declare namespace Schema {
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
+		status_label?: StatusLabel;
 	}
 
 	interface Address {
@@ -69,9 +69,9 @@ declare namespace Schema {
 		model_id: number;
 		vendor_id?: number | null;
 		default_location_id?: number | null;
+		status_label_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
@@ -79,7 +79,6 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
-		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -214,9 +213,9 @@ declare namespace Schema {
 		model_id: number;
 		vendor_id?: number | null;
 		default_location_id?: number | null;
+		status_label_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
@@ -224,7 +223,6 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
-		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -232,6 +230,7 @@ declare namespace Schema {
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
+		status_label?: StatusLabel;
 	}
 
 	interface Consumable {
@@ -250,9 +249,9 @@ declare namespace Schema {
 		model_id: number;
 		vendor_id?: number | null;
 		default_location_id?: number | null;
+		status_label_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
@@ -260,7 +259,6 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
-		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -414,16 +412,15 @@ declare namespace Schema {
 		model_id: number;
 		vendor_id?: number | null;
 		default_location_id?: number | null;
+		status_label_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
-		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -432,6 +429,7 @@ declare namespace Schema {
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
 		assignments?: Assignment[];
+		status_label?: StatusLabel;
 		assigned_assets?: Assignment[];
 		assets?: Asset[];
 		items?: Item[];
@@ -481,9 +479,9 @@ declare namespace Schema {
 		category_id: number;
 		vendor_id?: number | null;
 		manufacturer_id: number;
+		status_label_id?: number | null;
 		created_at: string;
 		updated_at: string;
-		status_label_id?: number | null;
 		activities?: PublicActivityActivity[];
 		owner?: Ownership;
 		company?: Company;
@@ -760,6 +758,11 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
+		assets?: Asset[];
+		items?: Item[];
+		accessories?: Accessory[];
+		components?: Component[];
+		licenses?: License[];
 	}
 
 	interface Ticket {
@@ -809,6 +812,8 @@ declare namespace Schema {
 	interface TicketStatus {
 		id: number;
 		name?: string | null;
+		status_type?: 'open'|'pending'|'closed' | null;
+		slug: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
