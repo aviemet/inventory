@@ -56,5 +56,5 @@ node_modules
 !.yarn/versions
 
 # Test results output
-/spec/examples.txt
+spec/examples.txt
 coverage
