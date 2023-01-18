@@ -1,3 +1,18 @@
+require 'simplecov'
+SimpleCov.start 'rails' do
+  enable_coverage :branch
+
+  add_filter "/spec/"
+  add_filter "/db/seeds.rb"
+  add_filter "/db/seeds/"
+
+  add_group "Models", "app/models"
+  add_group "Controllers", "app/controllers"
+  add_group "Blueprints", "app/blueprints"
+  add_group "Jobs", "app/jobs"
+  add_group "Services", "app/services"
+end
+
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -41,7 +56,7 @@ end
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_path = "#{Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

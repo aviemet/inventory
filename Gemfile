@@ -33,7 +33,7 @@ gem "public_activity", "~> 2.0"
 gem "factory_bot", "~> 6.2"
 gem "ipaddress_2", "~> 0.14.0"
 gem "countries", ">= 4.2"
-gem "ts_schema", path: "../ts_schema/" #"~> 0.2.1"
+gem "ts_schema", path: "../ts_schema/" # "~> 0.2.1"
 gem "js-routes", "~> 2.2"
 gem "net-ldap", "~> 0.17.1"
 gem "foreman", "~> 0.87.2"
@@ -96,4 +96,6 @@ group :test do
   gem "database_cleaner-active_record", "~> 2.0"
   gem "shoulda-matchers", "~> 5.1"
   gem "bullet", "~> 7.0"
+
+  gem "simplecov", "~> 0.22.0"
 end

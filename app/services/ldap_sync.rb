@@ -34,9 +34,9 @@ class LdapSync
     return if !@connection
 
     @connection.search(base: @ldap.tree_base) do |entry|
-      return unless entry[:objectclass].include?("user")
+      next unless entry[:objectclass].include?("user")
 
-      person = person_from_entry
+      person = person_from_entry(entry)
 
       username = entry[:samaccountname]
       email = entry[:mail]

@@ -5,19 +5,19 @@ RSpec.describe "Accessories", type: :request do
   def valid_attributes
     {
       accessory: attributes_for(:accessory,
-        model_id: create(:model).id,
-        vendor_id: create(:vendor).id,
-        default_location_id: create(:location).id
-      )
+                                status_label_id: create(:status_label).id,
+                                model_id: create(:model).id,
+                                vendor_id: create(:vendor).id,
+                                default_location_id: create(:location).id)
     }
   end
-  
+
   def invalid_attributes
-   { 
-     accessory: {
-       name: "",
-     }
-   }
+    {
+      accessory: {
+        name: "",
+      }
+    }
   end
 
   describe "POST /create" do

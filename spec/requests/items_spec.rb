@@ -5,6 +5,7 @@ RSpec.describe "/items", type: :request do
   def valid_attributes
     {
       item: attributes_for(:item,
+                           status_label_id: create(:status_label).id,
                            model_id: create(:model).id,
                            vendor_id: create(:vendor).id,
                            default_location_id: create(:location).id)

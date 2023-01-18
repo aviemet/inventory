@@ -268,7 +268,6 @@ if Rails.env == "development"
       model: Model.find(4),
       vendor: Vendor.find_by_slug("sharp"),
       default_location: Location.first,
-      status_label: StatusLabel.first,
       company:,
     })
   end
