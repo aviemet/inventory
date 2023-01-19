@@ -7,27 +7,9 @@ version: 2.1
 orbs:
   ruby-rails: sul-dlss/ruby-rails@3.1.2
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  build:
-    docker:
-      - image: cimg/ruby:3.1.0
-    executor: ruby/default
-    steps:
-      - checkout
-      - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
-
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
     test:
       jobs:
         - ruby-rails/test-rails
-    docker:
-      jobs:
-        - ruby-rails/docker-publish:
-            image: inventory
