@@ -3,26 +3,21 @@ import loadable from '@loadable/component'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '@/Components/Error'
 
-// If this file ever moves, this path will need to be updated
-const absolutePathToRelative = (path: string) => path.replace('@', '../..')
-
 interface ILazyProps {
-	path: string
+	children: React.ReactNode
 	fallback: React.ReactNode
 }
 
-const Lazy = ({ path, fallback, ...props }: ILazyProps) => {
-	const LazyComponent = loadable(() => import(absolutePathToRelative(path)))
-
+const Lazy = ({ children, fallback }: ILazyProps) => {
 	return (
-		<>
-			<ErrorBoundary FallbackComponent={ Error }>
-				<Suspense fallback={ fallback }>
-					<LazyComponent { ...props } />
-				</Suspense>
-			</ErrorBoundary>
-		</>
+		<ErrorBoundary FallbackComponent={ Error }>
+			<Suspense fallback={ fallback }>
+				{ children }
+			</Suspense>
+		</ErrorBoundary>
 	)
 }
+
+Lazy.loadable = loadable
 
 export default Lazy

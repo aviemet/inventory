@@ -3,14 +3,12 @@ import { Menu, packSx, createPolymorphicComponent, type MenuItemProps } from '@m
 import { Link } from '@/Components'
 import { ILinkProps } from '../Link'
 
-interface IMenuItemProps extends MenuItemProps {
-	href?: string
-	onClick?: (e: MouseEvent) => void
+interface IMenuItemProps extends MenuItemProps, Omit<ILinkProps, 'color'|'children'> {
 	disabled?: boolean
 	type?: string
 }
 
-const MenuItem = forwardRef<HTMLLinkElement, IMenuItemProps>((
+const MenuItem = forwardRef<HTMLAnchorElement, IMenuItemProps>((
 	{ children, disabled = false, sx, ...props },
 	ref,
 ) => {
@@ -37,4 +35,4 @@ const MenuItem = forwardRef<HTMLLinkElement, IMenuItemProps>((
 	)
 })
 
-export default createPolymorphicComponent<typeof Link, ILinkProps>(MenuItem)
+export default createPolymorphicComponent<typeof Link, IMenuItemProps>(MenuItem)
