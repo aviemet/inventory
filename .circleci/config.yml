@@ -1,15 +1,98 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
-# See: https://circleci.com/docs/2.0/orb-intro/
-orbs:
-  ruby-rails: sul-dlss/ruby-rails@3.1.2
+executors:
+  default:
+    working_directory: ~/inventory
+    docker:
+      - image: cimg/ruby:3.1.2
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_PATH: vendor/bundle
+          BUNDLE_RETRY: 3
+          BUNDLER_VERSION: 2.4.4
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          PG_HOST: 127.0.0.1
+          PGUSER: postrgres
+          CI: circleci
+      - image: cimg/postgres:14.5-postgis
+        environment:
+          POSTGRES_DB: inventory_postgresql_test
+          POSTGRES_USER: inventory
+      - image: cimg/node:16.13.1
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+commands:
+  configure_bundler:
+    description: Configure bundler
+    steps:
+      - run:
+          name: Configure bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+
+jobs:
+  build:
+    executor: default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - inventory-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - inventory-
+      - configure_bundler
+      - run:
+          name: Install bundle
+          command: bundle install --jobs=$BUNDLE_JOBS --retry=$BUNDLE_RETRY
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+      - run:
+          name: Setup DB
+          command: bundle exec rails db:create db:migrate db:seed
+      - run:
+          name: Precompile Assets
+          command: bundle exec rake assets:precompile
+      - save_cache:
+          key: inventory-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - ./inventory
+
+  test:
+    executor: default
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/inventory
+      - run: bundle config set --local path $BUNDLE_PATH
+      - run: bundle
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:migrate
+      - run: bundle exec rails db:seed
+
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --format progress \
+                            --format RspecJunitFormatter \
+                            --out /tmp/test-results/rspec.xml \
+                            --format progress \
+                            -- \
+                            $TEST_FILES
+      - store_test_results:
+          path: /tmp/test-results
+
 workflows:
-    test:
-      jobs:
-        - ruby-rails/test-rails
+  run_tests:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
