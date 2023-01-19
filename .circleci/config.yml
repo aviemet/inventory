@@ -17,7 +17,7 @@ executors:
           CI: circleci
       - image: cimg/postgres:14.5-postgis
         environment:
-          POSTGRES_DB: inventory_postgresql_test
+          POSTGRES_DB: inventory_test
           POSTGRES_USER: inventory
       - image: cimg/node:16.13.1
 
