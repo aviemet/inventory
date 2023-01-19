@@ -77,6 +77,10 @@ export {
 } from 'react-icons/ri'
 
 export {
+	RxClock as ClockIcon,
+} from 'react-icons/rx'
+
+export {
 	// TiDeleteOutline as CrossIcon,
 } from 'react-icons/ti'
 
@@ -91,5 +95,5 @@ export {
 } from 'react-icons/tb'
 
 export {
-	HiOutlineClock as ClockIcon,
+	// HiOutlineClock as ClockIcon,
 } from 'react-icons/hi'

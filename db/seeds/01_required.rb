@@ -18,9 +18,7 @@ if StatusLabel.count == 0
       status_type: :pending,
     },
   ].each do |status|
-    StatusLabel.create({
-      name: status
-    })
+    StatusLabel.create(status)
   end
 end
 
