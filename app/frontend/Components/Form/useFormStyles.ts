@@ -13,6 +13,12 @@ export default createStyles((theme) => ({
 					borderLeftWidth: 2,
 				},
 			},
+
+			'&:not(.checkbox)':{
+				label: {
+					padding: '0.5rem 0.75rem',
+				},
+			},
 		},
 
 		'.field': {
@@ -31,8 +37,6 @@ export default createStyles((theme) => ({
 			},
 
 			label: {
-				padding: '0.5rem 0.75rem',
-
 				'&.text': {
 					textAlign: 'left',
 					width: '100%',
