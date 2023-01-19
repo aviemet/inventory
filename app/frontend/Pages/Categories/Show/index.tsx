@@ -14,7 +14,7 @@ interface IShowCategoryProps {
 const Show = ({ category, records, pagination }: IShowCategoryProps) => {
 	const title = `Category: ${category.categorizable_type} - ${category.name}`
 
-	const path = `@/Pages/${category.plural}/Table`
+	const LazyTableComponent = Lazy.loadable(() => import(`../../${category.plural}/Table.tsx`))
 
 	return (
 		<Page title={ title } breadcrumbs={ [
@@ -35,7 +35,9 @@ const Show = ({ category, records, pagination }: IShowCategoryProps) => {
 						<Table.SearchInput />
 					</TableTitleSection>
 
-					<Lazy path={ path } fallback={ <div>Loading</div> } />
+					<Lazy fallback={ <div>Loading</div> }>
+						<LazyTableComponent />
+					</Lazy>
 
 					<Table.Pagination />
 
