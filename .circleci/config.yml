@@ -1,13 +1,10 @@
 version: 2.1
 
-orbs:
-  browser-tools: circleci/browser-tools@1.1
-
 executors:
   default:
     working_directory: ~/inventory
     docker:
-      - image: cimg/ruby:3.1.2-browsers
+      - image: cimg/ruby:3.1.2-node
         auth:
             username: $DOCKERHUB_USERNAME
             password: $DOCKERHUB_PASSWORD
