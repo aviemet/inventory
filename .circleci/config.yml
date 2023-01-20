@@ -5,6 +5,9 @@ executors:
     working_directory: ~/inventory
     docker:
       - image: cimg/ruby:3.1.2
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_PATH: vendor/bundle
@@ -15,10 +18,12 @@ executors:
           PG_HOST: 127.0.0.1
           PGUSER: postrgres
           CI: circleci
-      - image: cimg/postgres:14.5-postgis
+
+      - image: cimg/postgres:14.5
         environment:
           POSTGRES_DB: inventory_test
           POSTGRES_USER: inventory
+
       - image: cimg/node:16.13.1
 
 commands:
@@ -37,27 +42,37 @@ jobs:
     executor: default
     steps:
       - checkout
+
       - restore_cache:
           keys:
             - inventory-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - inventory-
+
       - configure_bundler
+
       - run:
           name: Install bundle
           command: bundle install --jobs=$BUNDLE_JOBS --retry=$BUNDLE_RETRY
+
+      - run: sudo apt install -y postgresql-client || true
+
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+      
       - run:
           name: Setup DB
           command: bundle exec rails db:create db:migrate db:seed
+      
       - run:
           name: Precompile Assets
           command: bundle exec rake assets:precompile
+      
       - save_cache:
           key: inventory-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+      
       - persist_to_workspace:
           root: ~/
           paths:
@@ -67,32 +82,33 @@ jobs:
     executor: default
     steps:
       - checkout
+      
       - attach_workspace:
           at: ~/inventory
+      
       - run: bundle config set --local path $BUNDLE_PATH
+      
       - run: bundle
+      
       - run: bundle exec rails db:create
+      
       - run: bundle exec rails db:migrate
+      
       - run: bundle exec rails db:seed
 
       - run:
           name: run tests
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            bundle exec rspec --format progress \
-                            --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec.xml \
-                            --format progress \
-                            -- \
-                            $TEST_FILES
+          command: bundle exec rspec
+
       - store_test_results:
           path: /tmp/test-results
 
 workflows:
   run_tests:
     jobs:
+      
       - build
+      
       - test:
           requires:
             - build
