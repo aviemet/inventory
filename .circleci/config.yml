@@ -59,7 +59,7 @@ jobs:
 
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+          command: dockerize -wait tcp://localhost:5432 -timeout 2m
       
       - run:
           name: Setup DB
@@ -90,12 +90,6 @@ jobs:
       - run: bundle config set --local path $BUNDLE_PATH
       
       - run: bundle
-      
-      - run: bundle exec rails db:create
-      
-      - run: bundle exec rails db:migrate
-      
-      - run: bundle exec rails db:seed
 
       - run:
           name: run tests
