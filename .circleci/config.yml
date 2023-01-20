@@ -17,7 +17,7 @@ executors:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
           PG_HOST: 127.0.0.1
-          DATABASE_URL: postgresql://root@localhost:5432/inventory_test
+          DATABASE_URL: postgresql://{$POSTGRES_USERNAME}@localhost:5432/inventory_test
 
       - image: cimg/postgres:15.1
         auth:
