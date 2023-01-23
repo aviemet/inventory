@@ -16,7 +16,6 @@ jobs:
     steps:
       - checkout
       - run: ruby --version
-      - run: sudo apt install -y postgresql-client || true
 
 # executors:
 #   default:
