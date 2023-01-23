@@ -4,7 +4,13 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:3.1.2-node
+        auth:
+            username: $DOCKERHUB_USERNAME
+            password: $DOCKERHUB_PASSWORD
       - image: cimg/postgres:13.2
+        auth:
+            username: $DOCKERHUB_USERNAME
+            password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: ruby --version
