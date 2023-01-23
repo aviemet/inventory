@@ -1,112 +1,123 @@
 version: 2.1
 
-executors:
-  default:
-    docker:
-      - image: cimg/ruby:3.1.2-node
-        auth:
-            username: $DOCKERHUB_USERNAME
-            password: $DOCKERHUB_PASSWORD
-        environment:
-          BUNDLE_PATH: vendor/bundle
-          GEM_HOME: vendor/bundle
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLER_VERSION: 2.4.4
-          RAILS_ENV: test
-          # DB_HOST: 127.0.0.1
-          # PG_HOST: 127.0.0.1
-          # PG_USER: $POSTGRES_USERNAME
-          DATABASE_URL: postgresql://localhost:5432/inventory_test
-
-      - image: cimg/postgres:15.1
-        auth:
-            username: $DOCKERHUB_USERNAME
-            password: $DOCKERHUB_PASSWORD
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: inventory_test
-
-commands:
-  configure_bundler:
-    description: Configure bundler
-    steps:
-      - run:
-          name: Configure bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
-
 jobs:
   build:
-    executor: default
-    working_directory: ~/inventory
+    docker:
+      - image: cimg/ruby:3.1.2-node
+      - image: cimg/postgres:13.2
     steps:
       - checkout
+      - run: ruby --version
+      - run: postgres --version
 
-      - restore_cache:
-          keys:
-            - inventory-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - inventory-
 
-      - configure_bundler
+# executors:
+#   default:
+#     docker:
+#       - image: cimg/ruby:3.1.2-node
+#         auth:
+#             username: $DOCKERHUB_USERNAME
+#             password: $DOCKERHUB_PASSWORD
+#         environment:
+#           BUNDLE_PATH: vendor/bundle
+#           GEM_HOME: vendor/bundle
+#           BUNDLE_JOBS: 3
+#           BUNDLE_RETRY: 3
+#           BUNDLER_VERSION: 2.4.4
+#           RAILS_ENV: test
+#           # DB_HOST: 127.0.0.1
+#           # PG_HOST: 127.0.0.1
+#           # PG_USER: $POSTGRES_USERNAME
+#           DATABASE_URL: postgresql://localhost:5432/inventory_test
 
-      - run:
-          name: Install bundle
-          command: bundle install --jobs=$BUNDLE_JOBS --retry=$BUNDLE_RETRY
+#       - image: cimg/postgres:15.1
+#         auth:
+#             username: $DOCKERHUB_USERNAME
+#             password: $DOCKERHUB_PASSWORD
+#         environment:
+#           POSTGRES_USER: postgres
+#           POSTGRES_DB: inventory_test
 
-      - run: sudo apt install -y postgresql-client || true
+# commands:
+#   configure_bundler:
+#     description: Configure bundler
+#     steps:
+#       - run:
+#           name: Configure bundler
+#           command: |
+#             echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+#             source $BASH_ENV
+#             gem install bundler
 
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 2m
+# jobs:
+#   build:
+#     executor: default
+#     working_directory: ~/inventory
+#     steps:
+#       - checkout
+
+#       - restore_cache:
+#           keys:
+#             - inventory-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+#             - inventory-
+
+#       - configure_bundler
+
+#       - run:
+#           name: Install bundle
+#           command: bundle install --jobs=$BUNDLE_JOBS --retry=$BUNDLE_RETRY
+
+#       - run: sudo apt install -y postgresql-client || true
+
+#       - run:
+#           name: Wait for DB
+#           command: dockerize -wait tcp://localhost:5432 -timeout 2m
       
-      - run:
-          name: Setup DB
-          command: bundle exec rails db:test:prepare
+#       - run:
+#           name: Setup DB
+#           command: bundle exec rails db:test:prepare
 
-      - run:
-          name: Precompile Assets
-          command: bundle exec rake assets:precompile
+#       - run:
+#           name: Precompile Assets
+#           command: bundle exec rake assets:precompile
       
-      - save_cache:
-          key: inventory-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+#       - save_cache:
+#           key: inventory-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+#           paths:
+#             - vendor/bundle
       
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - ./inventory
+#       - persist_to_workspace:
+#           root: ~/
+#           paths:
+#             - ./inventory
 
-  test:
-    executor: default
-    working_directory: ~/inventory
-    steps:
-      - checkout
+#   test:
+#     executor: default
+#     working_directory: ~/inventory
+#     steps:
+#       - checkout
       
-      - attach_workspace:
-          at: ~/inventory
+#       - attach_workspace:
+#           at: ~/inventory
       
-      - run: bundle config set --local path $BUNDLE_PATH
+#       - run: bundle config set --local path $BUNDLE_PATH
       
-      - run: bundle
+#       - run: bundle
 
-      - run:
-          name: run tests
-          command: bundle exec rspec
+#       - run:
+#           name: run tests
+#           command: bundle exec rspec
 
-      - store_test_results:
-          path: /tmp/test-results
+#       - store_test_results:
+#           path: /tmp/test-results
 
-workflows:
-  run_tests:
-    jobs:
+# workflows:
+#   run_tests:
+#     jobs:
       
-      - build
+#       - build
       
-      - test:
-          requires:
-            - build
+#       - test:
+#           requires:
+#             - build
 
