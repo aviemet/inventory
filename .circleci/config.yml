@@ -15,7 +15,17 @@ jobs:
           POSTGRES_USER: postgres
     steps:
       - checkout
-      - run: ruby --version
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client
+      - run: whoami
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "CREATE TABLE test (name char(25));"
+      - run: |
+          psql \
+          -d $TEST_DATABASE_URL \
+          -c "INSERT INTO test VALUES ('John'), ('Joanna'), ('Jennifer');"
 
 # executors:
 #   default:
