@@ -2,7 +2,6 @@ version: 2.1
 
 executors:
   default:
-    working_directory: ~/inventory
     docker:
       - image: cimg/ruby:3.1.2-node
         auth:
@@ -25,7 +24,7 @@ executors:
             username: $DOCKERHUB_USERNAME
             password: $DOCKERHUB_PASSWORD
         environment:
-          POSTGRES_USER: $POSTGRES_USERNAME
+          POSTGRES_USER: postgres
           POSTGRES_DB: inventory_test
 
 commands:
@@ -42,6 +41,7 @@ commands:
 jobs:
   build:
     executor: default
+    working_directory: ~/inventory
     steps:
       - checkout
 
@@ -82,6 +82,7 @@ jobs:
 
   test:
     executor: default
+    working_directory: ~/inventory
     steps:
       - checkout
       
