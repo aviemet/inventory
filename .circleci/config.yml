@@ -61,7 +61,7 @@ jobs:
       - run:
           name: Yarn Install
           command: |
-            yarn --ignore-engines --cache-folder ~/.cache/yarn
+            yarn --cache-folder ~/.cache/yarn install
 
       - save_cache:
           key: sell-more-yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
