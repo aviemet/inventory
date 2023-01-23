@@ -11,9 +11,12 @@ jobs:
         auth:
             username: $DOCKERHUB_USERNAME
             password: $DOCKERHUB_PASSWORD
+        environment:
+          POSTGRES_USER: postgres
     steps:
       - checkout
       - run: ruby --version
+      - run: sudo apt install -y postgresql-client || true
 
 # executors:
 #   default:
