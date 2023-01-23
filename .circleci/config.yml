@@ -2,23 +2,74 @@ version: 2.1
 
 jobs:
   build:
-    working_directory: ~/inventory
     docker:
+      # specify the version you desire here
       - image: cimg/ruby:3.1.2-node
-        auth:
-            username: $DOCKERHUB_USERNAME
-            password: $DOCKERHUB_PASSWORD
-      - image: cimg/postgres:15.1
-        auth:
-            username: $DOCKERHUB_USERNAME
-            password: $DOCKERHUB_PASSWORD
         environment:
-          POSTGRES_USER: postgres
+          PGHOST: 127.0.0.1
+          PGUSER: inventory
+          RAILS_ENV: test
+          BUNDLER_VERSION: 2.0.2
+      - image: cimg/postgres:15.1
+        environment:
+          POSTGRES_USER: inventory
+          POSTGRES_DB: inventory_test
+          POSTGRES_PASSWORD: inventory
+
+    working_directory: ~/inventory
+
     steps:
       - checkout
-      - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client
-      - run: whoami
+
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle config set --local path 'vendor/bundle'
+            bundle install --jobs=4 --retry=3 
+
+      # Database setup
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:test:prepare
+     
+      - run:
+          name: Yarn Install
+          command: |
+            yarn install
+
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            bundle exec rspec \
+              --out test_results/rspec.xml \
+              --format progress \
+              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+          
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+
+
+
+
+
 
 # executors:
 #   default:
