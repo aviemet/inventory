@@ -18,7 +18,7 @@ executors:
           # DB_HOST: 127.0.0.1
           # PG_HOST: 127.0.0.1
           # PG_USER: $POSTGRES_USERNAME
-          # DATABASE_URL: postgresql://postgres@localhost:5432/inventory_test
+          DATABASE_URL: postgresql://localhost:5432/inventory_test
 
       - image: cimg/postgres:15.1
         auth:
