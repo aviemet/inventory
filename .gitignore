@@ -58,3 +58,5 @@ node_modules
 # Test results output
 spec/examples.txt
 coverage
+
+/db/seeds/99_local.rb

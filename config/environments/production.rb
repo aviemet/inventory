@@ -73,7 +73,8 @@ Rails.application.configure do
     authentication: ENV.fetch("SMTP_AUTH", nil),
     enable_starttls_auto: ENV.fetch("SMTP_TLS", nil),
     user_name: ENV.fetch("SMTP_USERNAME", nil),
-    password: ENV.fetch("SMTP_PASSWORD", nil)
+    password: ENV.fetch("SMTP_PASSWORD", nil),
+    ssl: true,
   }
   config.action_mailer.default_url_options = { host: ENV.fetch("SERVER_DOMAIN", nil) }
   config.action_mailer.perform_caching = false
@@ -94,7 +95,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger           = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
