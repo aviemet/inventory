@@ -59,7 +59,6 @@ if Rails.env == "development"
       person:,
     })
 
-    user = User.first
     company = Company.first
 
     user.add_role :super_admin
@@ -342,17 +341,4 @@ if Rails.env == "development"
     ].each{ |network|  Network.create!(network) }
   end
 
-  if Ldap.count == 0
-    company = Company.first
-
-    Ldap.create({
-      host: "10.10.20.31",
-      port: 389,
-      domain: "thebatterysf.com",
-      username: "administrator",
-      password: "temp",
-      tree_base: "ou=Battery Users, dc=thebatterysf, dc=com",
-      company: Company.first,
-    })
-  end
 end
