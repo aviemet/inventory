@@ -4,6 +4,9 @@ class Company < ApplicationRecord
 
   before_destroy :safely_orphan_or_destroy_dependencies
 
+  SETTINGS_KEYS = %i[primary_color secondary_color company_field_name department_field_name default_eula enable_2fa].freeze
+  store_accessor :settings, *SETTINGS_KEYS
+
   pg_search_scope(
     :search,
     against: [:name],
@@ -40,6 +43,7 @@ class Company < ApplicationRecord
     manufacturers: "Manufacturer",
     orders: "Order",
     categories: "Category",
+    smtps: "Smtp",
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
@@ -52,8 +56,6 @@ class Company < ApplicationRecord
   }.each_pair do |assoc, model|
     has_many assoc, ->{ where(type: model) }, through: :ownerships, source: :ownable, source_type: :Asset, class_name: model
   end
-
-  # has_many :models, through: :manufacturers
 
   scope :includes_associated, -> { includes([:departments, :locations, :ownerships]) }
 
@@ -76,7 +78,8 @@ class Company < ApplicationRecord
       self.manufacturers.destroy_all
       self.orders.destroy_all
       self.categories.destroy_all
-      self.users.each{ |user| user.destroy }
+      self.smtps.destroy_all
+      self.users.each(&:destroy)
     end
   end
 
