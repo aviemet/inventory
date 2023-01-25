@@ -1,6 +1,6 @@
 import React from 'react'
 import { Menu } from '@/Components'
-import { Avatar } from '@mantine/core'
+import { Avatar, Box } from '@mantine/core'
 import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const AvatarMenu = () => {
@@ -15,7 +15,9 @@ const AvatarMenu = () => {
 			</Menu.Target>
 
 			<Menu.Dropdown>
-				<ToggleColorSchemeButton />
+				<Menu.Item>
+					<Box sx={ { whiteSpace: 'nowrap' } }>Toggle Color Scheme <ToggleColorSchemeButton /></Box>
+				</Menu.Item>
 			</Menu.Dropdown>
 		</Menu>
 	)
