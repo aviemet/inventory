@@ -132,6 +132,9 @@ declare namespace Schema {
 		default_currency: string;
 		created_at: string;
 		updated_at: string;
+		settings?: Record<string, any> | null;
+		tickets_smtp_id?: number | null;
+		app_smtp_id?: number | null;
 		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		addresses?: Address[];
@@ -168,6 +171,9 @@ declare namespace Schema {
 		default_currency: string;
 		created_at: string;
 		updated_at: string;
+		settings?: Record<string, any> | null;
+		tickets_smtp_id?: number | null;
+		app_smtp_id?: number | null;
 		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		addresses?: Address[];
@@ -747,6 +753,26 @@ declare namespace Schema {
 		updated_at: string;
 		activities?: PublicActivityActivity[];
 		users?: User[];
+	}
+
+	interface Smtp {
+		id: number;
+		name?: string | null;
+		address?: string | null;
+		port?: number | null;
+		domain?: string | null;
+		auth?: string | null;
+		tls?: boolean | null;
+		username?: string | null;
+		password?: string | null;
+		notes?: string | null;
+		created_at: string;
+		updated_at: string;
+		activities?: PublicActivityActivity[];
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		roles?: Role[];
 	}
 
 	interface StatusLabel {

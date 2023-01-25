@@ -35,4 +35,4 @@ const MenuItemProxy = forwardRef<HTMLButtonElement|HTMLAnchorElement, IMenuItemP
 	/>
 })
 
-export default createPolymorphicComponent<'button', IMenuItemProps>(MenuItemProxy)
+export default createPolymorphicComponent<'div', IMenuItemProps>(MenuItemProxy)
