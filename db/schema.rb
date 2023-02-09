@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -114,7 +114,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
     t.string "default_currency", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "settings", default: {}
+    t.bigint "tickets_smtp_id"
+    t.bigint "app_smtp_id"
+    t.index ["app_smtp_id"], name: "index_companies_on_app_smtp_id"
     t.index ["slug"], name: "index_companies_on_slug", unique: true
+    t.index ["tickets_smtp_id"], name: "index_companies_on_tickets_smtp_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -404,6 +409,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "smtps", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.integer "port"
+    t.string "domain"
+    t.string "auth"
+    t.boolean "tls"
+    t.string "username"
+    t.string "password"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "status_labels", force: :cascade do |t|
     t.string "name"
     t.integer "status_type", default: 0
@@ -537,6 +556,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_16_24_190653) do
   add_foreign_key "assets", "vendors"
   add_foreign_key "assignments", "locations"
   add_foreign_key "assignments", "users", column: "created_by_id"
+  add_foreign_key "companies", "smtps", column: "app_smtp_id"
+  add_foreign_key "companies", "smtps", column: "tickets_smtp_id"
   add_foreign_key "contacts", "addresses", column: "primary_address_id"
   add_foreign_key "contacts", "emails", column: "primary_email_id"
   add_foreign_key "contacts", "phones", column: "primary_phone_id"

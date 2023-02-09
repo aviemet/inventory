@@ -6,7 +6,7 @@ const ToggleColorSchemeButton = () => {
 	const { colorScheme, toggleColorScheme } = useMantineColorScheme()
 
 	return (
-		<ActionIcon color={ colorScheme === 'dark' ? 'yellow' : 'blue' } onClick={ () => toggleColorScheme() } title="Toggle color scheme">
+		<ActionIcon color={ colorScheme === 'dark' ? 'yellow' : 'blue' } onClick={ () => toggleColorScheme() } title="Toggle color scheme" sx={ { display: 'inline-flex' } }>
 			{ colorScheme === 'dark' ? <Sun size={ 18 } /> : <MoonStars size={ 18 } /> }
 		</ActionIcon>
 	)

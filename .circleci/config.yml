@@ -1,15 +1,84 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
-# See: https://circleci.com/docs/2.0/orb-intro/
-orbs:
-  ruby-rails: sul-dlss/ruby-rails@3.1.2
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.1.2-node 
+        environment:
+          PGHOST: 127.0.0.1
+          PGUSER: inventory
+          RAILS_ENV: test
+          BUNDLER_VERSION: 2.4.4
+      - image: cimg/postgres:15.1
+        environment:
+          POSTGRES_USER: inventory
+          POSTGRES_DB: inventory_test
+          POSTGRES_PASSWORD: inventory
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+    working_directory: ~/inventory
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+
+      - run:
+          name: Install dependencies
+          command: |
+            bundle config set --local path 'vendor/bundle'
+            bundle install --jobs=4 --retry=3
+
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run: 
+          name: Database setup
+          command: |
+            bundle exec rails db:create
+            bundle exec rails db:test:prepare
+
+      # Frontend
+      - restore_cache:
+          keys:
+            - inventory-yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - inventory-yarn-cache-{{ .Branch }}-
+            - inventory-yarn-cache-
+     
+      - run:
+          name: Yarn Install
+          command: |
+            yarn install
+
+      - run:
+          name: Run tests
+          command: |
+            bundle exec rspec \
+              --out test_results/rspec.xml \
+              --format progress \
+              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
 workflows:
-    test:
-      jobs:
-        - ruby-rails/test-rails
+  build-and-deploy:
+    jobs:
+      - build
