@@ -48,7 +48,7 @@
     "react-icons": "^4.7.1",
     "styled-components": "^5.3.6",
     "tabler-icons-react": "^1.56.0",
-    "useInertiaForm": "/media/avram/Dev/javascript/useInertiaForm"
+    "useInertiaForm": "/Users/avram/Development/javascript/useInertiaForm"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
