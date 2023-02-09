@@ -2,8 +2,8 @@ class Ldap < ApplicationRecord
   resourcify
   tracked
 
-  encrypts :username
-  encrypts :password
+  # encrypts :username
+  # encrypts :password
 
   attribute :host, default: '127.0.0.1'
   attribute :port, default: 389

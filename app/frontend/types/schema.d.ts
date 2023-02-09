@@ -129,9 +129,9 @@ declare namespace Schema {
 		id: number;
 		name: string;
 		slug: string;
-		default_currency: string;
 		created_at: string;
 		updated_at: string;
+		default_currency: string;
 		settings?: Record<string, any> | null;
 		tickets_smtp_id?: number | null;
 		app_smtp_id?: number | null;
@@ -158,6 +158,7 @@ declare namespace Schema {
 		manufacturers?: Manufacturer[];
 		orders?: Order[];
 		categories?: Category[];
+		smtps?: Smtp[];
 		items?: Item[];
 		accessories?: Accessory[];
 		consumables?: Consumable[];
@@ -168,9 +169,9 @@ declare namespace Schema {
 		id: number;
 		name: string;
 		slug: string;
-		default_currency: string;
 		created_at: string;
 		updated_at: string;
+		default_currency: string;
 		settings?: Record<string, any> | null;
 		tickets_smtp_id?: number | null;
 		app_smtp_id?: number | null;
@@ -197,6 +198,7 @@ declare namespace Schema {
 		manufacturers?: Manufacturer[];
 		orders?: Order[];
 		categories?: Category[];
+		smtps?: Smtp[];
 		items?: Item[];
 		accessories?: Accessory[];
 		consumables?: Consumable[];
