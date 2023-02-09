@@ -20,33 +20,33 @@ const QuickNewMenu = () => {
 			</Menu.Target>
 
 			<Menu.Dropdown>
-				<Menu.Item href={ Routes.newItem() } icon={ <ItemsIcon /> }>
+				<Menu.Link href={ Routes.newItem() } icon={ <ItemsIcon /> }>
 					New Item
-				</Menu.Item>
-				<Menu.Item href={ Routes.newAccessory() } icon={ <AccessoriesIcon /> }>
+				</Menu.Link>
+				<Menu.Link href={ Routes.newAccessory() } icon={ <AccessoriesIcon /> }>
 					New Accessory
-				</Menu.Item>
-				<Menu.Item href={ Routes.newComponent() } icon={ <ComponentsIcon /> }>
+				</Menu.Link>
+				<Menu.Link href={ Routes.newComponent() } icon={ <ComponentsIcon /> }>
 					New Component
-				</Menu.Item>
-				<Menu.Item href={ Routes.newConsumable() } icon={ <ConsumablesIcon /> }>
+				</Menu.Link>
+				<Menu.Link href={ Routes.newConsumable() } icon={ <ConsumablesIcon /> }>
 					New Consumable
-				</Menu.Item>
-				<Menu.Item href={ Routes.newLicense() } icon={ <LicensesIcon /> }>
+				</Menu.Link>
+				<Menu.Link href={ Routes.newLicense() } icon={ <LicensesIcon /> }>
 					New License
-				</Menu.Item>
+				</Menu.Link>
 
 				<Menu.Divider />
 
-				<Menu.Item href={ Routes.newPerson() } icon={ <PeopleIcon /> }>
+				<Menu.Link href={ Routes.newPerson() } icon={ <PeopleIcon /> }>
 					New Person
-				</Menu.Item>
+				</Menu.Link>
 
 				<Menu.Divider />
 
-				<Menu.Item href={ Routes.newTicket() } icon={ <TicketsIcon /> }>
+				<Menu.Link href={ Routes.newTicket() } icon={ <TicketsIcon /> }>
 					New Ticket
-				</Menu.Item>
+				</Menu.Link>
 			</Menu.Dropdown>
 		</Menu>
 	)

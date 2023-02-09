@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
-import { NewIcon } from '@/Components/Icons'
+import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from '@/Components/Icons'
 import AssetTable from '../Table'
 
 interface IAssetsIndexProps {
@@ -17,7 +17,10 @@ const AssetsIndex = ({ assets, pagination }: IAssetsIndexProps) => {
 			rows={ assets }
 			pagination={ pagination }
 			menuOptions={ [
-				{ label: 'New Asset', href: Routes.newAsset(), icon: NewIcon },
+				{ label: 'New Hardware', href: Routes.newItem(), icon: ItemsIcon },
+				{ label: 'New Accessory', href: Routes.newAccessory(), icon: AccessoriesIcon },
+				{ label: 'New Component', href: Routes.newComponent(), icon: ComponentsIcon },
+				{ label: 'New Consumable', href: Routes.newConsumable(), icon: ConsumablesIcon },
 			] }
 		>
 			<AssetTable />

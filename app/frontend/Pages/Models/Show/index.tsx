@@ -29,9 +29,9 @@ const Show = ({ model }: IShowModelProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Item href={ Routes.editModel(model) } icon={ <EditIcon /> }>
+							<Menu.Link href={ Routes.editModel(model) } icon={ <EditIcon /> }>
 								Edit Model
-							</Menu.Item>
+							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Flex>

@@ -32,17 +32,17 @@ const ShowItem = ({ item }: IShowItemProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							{ item.assigned ?
-								<Menu.Item href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
+								<Menu.Link href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
 								Checkin Item
-								</Menu.Item>
+								</Menu.Link>
 								:
-								<Menu.Item href={ Routes.checkoutItem(item) } icon={ <CheckoutIcon /> }>
+								<Menu.Link href={ Routes.checkoutItem(item) } icon={ <CheckoutIcon /> }>
 								Checkout Item
-								</Menu.Item>
+								</Menu.Link>
 							}
-							<Menu.Item href={ Routes.editItem(item) } icon={ <EditIcon /> }>
+							<Menu.Link href={ Routes.editItem(item) } icon={ <EditIcon /> }>
 								Edit Item
-							</Menu.Item>
+							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Flex>
