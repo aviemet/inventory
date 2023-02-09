@@ -59,9 +59,9 @@ const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTit
 						{ menuOptions && menuOptions.map(({ label, href, icon }, index) => {
 							const Icon = icon
 							return (
-								<Menu.Item key={ index } href={ href } icon={ icon && <Icon size={ 14 } /> }>
+								<Menu.Link key={ index } href={ href } icon={ icon && <Icon size={ 14 } /> }>
 									{ label }
-								</Menu.Item>
+								</Menu.Link>
 							)
 						}) }
 

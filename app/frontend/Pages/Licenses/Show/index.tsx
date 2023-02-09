@@ -27,17 +27,17 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							{ /* license.assignments ?
-								<Menu.Item href={ Routes.checkinLicense(license) }>
+								<Menu.Link href={ Routes.checkinLicense(license) }>
 									Checkin License
-								</Menu.Item>
+								</Menu.Link>
 								:
-								<Menu.Item href={ Routes.checkoutLicense(license) }>
+								<Menu.Link href={ Routes.checkoutLicense(license) }>
 									Checkout License
-								</Menu.Item>
+								</Menu.Link>
 							*/ }
-							<Menu.Item href={ Routes.editLicense(license) }>
+							<Menu.Link href={ Routes.editLicense(license) }>
 								Edit License
-							</Menu.Item>
+							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Flex>

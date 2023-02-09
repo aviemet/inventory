@@ -85,12 +85,12 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 								<Menu.Target />
 
 								<Menu.Dropdown>
-									<Menu.Item
+									<Menu.Link
 										href={ Routes.editVendor(vendor.slug) }
 										icon={ <EditIcon /> }
 									>
 										Edit
-									</Menu.Item>
+									</Menu.Link>
 								</Menu.Dropdown>
 							</Menu>
 						</Flex>

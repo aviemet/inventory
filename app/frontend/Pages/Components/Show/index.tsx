@@ -31,7 +31,7 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Item
+							<Menu.Link
 								href={ Routes.checkoutComponent(component) }
 								disabled={ !useCallback((component: Schema.Component) => component.available_to_checkout, [component.qty, component.assignments]) }
 							>
@@ -40,10 +40,10 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 									:
 									'Checkout Component'
 								}
-							</Menu.Item>
-							<Menu.Item href={ Routes.editComponent(component) }>
+							</Menu.Link>
+							<Menu.Link href={ Routes.editComponent(component) }>
 								Edit Component
-							</Menu.Item>
+							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Flex>
