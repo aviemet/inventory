@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react'
-import { InertiaLink, type BaseInertiaLinkProps } from '@inertiajs/inertia-react'
+import { Link, router } from '@inertiajs/react'
+import { Method, Visit } from '@inertiajs/core'
 import { Anchor, type AnchorProps, type ButtonProps } from '@mantine/core'
 import { Button } from '@/Components'
-import { Inertia, Method, Visit } from '@inertiajs/inertia'
 import { omit } from 'lodash'
 
-interface ILinkProps extends Omit<AnchorProps, 'href'>, BaseInertiaLinkProps {
+interface ILinkProps extends Omit<AnchorProps, 'href'> {
 	children: React.ReactNode
 	href: string
 	as: 'a'|'button'
@@ -22,7 +22,7 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 	ref,
 ) => {
 	const handleHTTP = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-		Inertia.visit(href, {
+		router.visit(href, {
 			method,
 			...visit,
 		})
@@ -41,7 +41,7 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 		}
 
 		return (
-			<Anchor component={ InertiaLink } href={ href } onClick={ e => e.preventDefault() } { ...props }>
+			<Anchor component={ Link } href={ href } onClick={ e => e.preventDefault() } { ...props }>
 				{ button }
 			</Anchor>
 		)
@@ -53,7 +53,7 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 	}
 
 	return (
-		<Anchor component={ InertiaLink } href={ href } ref={ ref } { ...props }>{ content }</Anchor>
+		<Anchor component={ Link } href={ href } ref={ ref } { ...props }>{ content }</Anchor>
 	)
 })
 

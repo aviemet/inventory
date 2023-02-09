@@ -1,16 +1,13 @@
-import { createInertiaApp } from '@inertiajs/inertia-react'
+import { createInertiaApp } from '@inertiajs/react'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import axios from 'axios'
-import { InertiaProgress } from '@inertiajs/progress'
 import { AuthLayout, AppLayout } from '../Layouts'
 import dynamicImport from '../dynamicImport'
 
 document.addEventListener('DOMContentLoaded', () => {
 	const csrfToken = document.querySelector('meta[name=csrf-token]').content
 	axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
-
-	InertiaProgress.init()
 
 	createInertiaApp({
 		title: title => `Inventory - ${title}`,

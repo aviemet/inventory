@@ -1,11 +1,10 @@
 import React, { forwardRef } from 'react'
-import { type Method, type Visit } from '@inertiajs/inertia'
+import { type Method, type Visit } from '@inertiajs/core'
 import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
 import { type AnchorProps, type ButtonProps } from '@mantine/core'
-import { type BaseInertiaLinkProps } from '@inertiajs/inertia-react'
 
-export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'>, Omit<BaseInertiaLinkProps, 'onProgress'> {
+export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	children: React.ReactNode
 	href: string
 	method?: Method

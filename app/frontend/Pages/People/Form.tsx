@@ -5,7 +5,7 @@ import {
 	SearchableDropdown,
 	Submit,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
 
 export interface IPersonFormProps {
@@ -50,7 +50,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 				name="manager_id"
 				options={ people }
 				filterMatchKeys={ ['first_name', 'last_name'] }
-				onOpen={ () => Inertia.reload({ only: ['people'] }) }
+				onOpen={ () => router.reload({ only: ['people'] }) }
 			/>
 
 			<Submit>

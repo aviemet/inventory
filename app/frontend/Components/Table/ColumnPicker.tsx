@@ -1,6 +1,5 @@
 import React from 'react'
-import { Inertia } from '@inertiajs/inertia'
-import { usePage } from '@inertiajs/inertia-react'
+import { router, usePage } from '@inertiajs/react'
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { Menu } from '@/Components'
@@ -10,7 +9,7 @@ import { useTableContext } from './TableContext'
 import { Button } from '@mantine/core'
 
 const ColumnPicker = () => {
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
+	const { auth: { user } } = usePage().props as SharedInertiaProps
 	const { tableState: { hideable, columns, model } } = useTableContext()
 
 	if(!hideable || !model) return <></>
@@ -27,7 +26,7 @@ const ColumnPicker = () => {
 				},
 			},
 		}).then(() => {
-			Inertia.reload({ only: ['auth'] })
+			router.reload({ only: ['auth'] })
 		})
 	}
 

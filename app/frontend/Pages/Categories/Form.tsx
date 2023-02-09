@@ -6,7 +6,7 @@ import {
 	SearchableDropdown,
 	Submit,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 
 export interface ICategoryFormProps {
 	to: string
@@ -40,7 +40,7 @@ const CategoryForm = ({ to, method = 'post', onSubmit, category = emptyCategory 
 				label="Category Type"
 				name="categorizable_type"
 				options={ types }
-				onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
+				onOpen={ () => router.reload({ only: ['vendors'] }) }
 				required
 			/>
 

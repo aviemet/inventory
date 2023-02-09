@@ -8,7 +8,7 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 
 export interface IConsumableFormProps {
 	to: string
@@ -38,7 +38,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 					name="model_id"
 					required
 					options={ models }
-					onOpen={ () => Inertia.reload({ only: ['models'] }) }
+					onOpen={ () => router.reload({ only: ['models'] }) }
 				/>
 
 				<Input name="serial" label="Serial" />
@@ -56,7 +56,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 					name="vendor_id"
 					options={ vendors }
 					filterMatchKeys={ ['name'] }
-					onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
+					onOpen={ () => router.reload({ only: ['vendors'] }) }
 				/>
 
 				<Input name="cost" label="Cost" />
@@ -67,7 +67,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 					label="Default Location"
 					name="default_location_id"
 					options={ locations }
-					onOpen={ () => Inertia.reload({ only: ['locations'] }) }
+					onOpen={ () => router.reload({ only: ['locations'] }) }
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />

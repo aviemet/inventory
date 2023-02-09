@@ -3,7 +3,7 @@ import { Form, SearchableDropdown } from '@/Components/Form'
 import { Title } from '@mantine/core'
 import { isEmpty } from 'lodash'
 import { Routes } from '@/lib'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 
 const ActiveCompany = ({ user }: { user: Schema.User }) => {
 	if(!user || !user.companies || isEmpty(user.companies)) return <Title order={ 3 }>Inventory Application</Title>
@@ -14,7 +14,7 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 		if(String(form.data.user.active_company_id) === String(user.active_company_id)) return
 
 		form.submit().then(() => {
-			Inertia.reload()
+			router.reload()
 		})
 	}
 

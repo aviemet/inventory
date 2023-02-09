@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 import { Tabs, type TabsValue } from '@mantine/core'
-import { Inertia, type VisitOptions } from '@inertiajs/inertia'
+import { type VisitOptions } from '@inertiajs/core'
+import { router } from '@inertiajs/react'
 import { ITabsComponentProps } from '.'
 import { coerceArray } from '@/lib'
 
@@ -11,7 +12,7 @@ const UrlTabs = ({ children, onTabChange, defaultValue, dependencies, ...props }
 			only = coerceArray(dependencies[value])
 		}
 
-		Inertia.reload(Object.assign({
+		router.reload(Object.assign({
 			preserveState: true,
 			preserveScroll: true,
 			data: { tab: value },
