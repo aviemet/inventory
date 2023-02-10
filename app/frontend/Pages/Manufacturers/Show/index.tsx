@@ -68,8 +68,8 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: ISh
 								<Menu.Target />
 
 								<Menu.Dropdown>
-									<Menu.Item href={ Routes.editManufacturer(manufacturer.slug) } icon={ <EditIcon /> }>Edit
-									</Menu.Item>
+									<Menu.Link href={ Routes.editManufacturer(manufacturer.slug) } icon={ <EditIcon /> }>Edit
+									</Menu.Link>
 								</Menu.Dropdown>
 							</Menu>
 						</Flex>

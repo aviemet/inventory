@@ -3,7 +3,7 @@ import Field from './Field'
 import SearchableDropdownInput, { type ISearchableDropdownProps } from '../Inputs/SearchableDropdown'
 import { Flex } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 import useInertiaInput from './useInertiaInput'
 
 interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onChange'|'onDropdownOpen'|'onDropdownClose'> {
@@ -43,7 +43,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 	}
 
 	const handleDropdownOpen = () => {
-		if(fetchOnOpen) Inertia.reload({ only: [fetchOnOpen] })
+		if(fetchOnOpen) router.reload({ only: [fetchOnOpen] })
 		if(onDropdownOpen) onDropdownOpen(form)
 	}
 
@@ -52,7 +52,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 	}
 
 	const handleNewFormSuccess = (data: { id: string|number }) => {
-		if(fetchOnOpen) Inertia.reload({ only: [fetchOnOpen] })
+		if(fetchOnOpen) router.reload({ only: [fetchOnOpen] })
 		setValue(String(data.id))
 	}
 

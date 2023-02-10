@@ -31,7 +31,7 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Item
+							<Menu.Link
 								href={ Routes.checkoutConsumable(consumable) }
 								disabled={ !useCallback((consumable: Schema.Consumable) => consumable.available_to_checkout, [consumable.qty, consumable.assignments]) }
 							>
@@ -40,10 +40,10 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 									:
 									'Checkout Consumable'
 								}
-							</Menu.Item>
-							<Menu.Item href={ Routes.editConsumable(consumable) }>
+							</Menu.Link>
+							<Menu.Link href={ Routes.editConsumable(consumable) }>
 								Edit Consumable
-							</Menu.Item>
+							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Flex>

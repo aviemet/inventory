@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/react'
 import { Link } from '@/Components'
 import cx from 'clsx'
 import { type ICellProps } from './index'

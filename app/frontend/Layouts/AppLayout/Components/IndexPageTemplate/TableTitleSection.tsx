@@ -3,7 +3,8 @@ import { useTableContext } from '@/Components/Table/TableContext'
 import { Box, Title, Group, Divider } from '@mantine/core'
 import { Menu } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
-import { Inertia, Method } from '@inertiajs/inertia'
+import { Method } from '@inertiajs/core'
+import { router } from '@inertiajs/react'
 import { Routes } from '@/lib'
 
 // TODO: Figure out correct type for icon
@@ -21,7 +22,7 @@ const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTit
 	const { tableState: { selected } } = useTableContext()
 
 	const deleteRecords = () => {
-		Inertia.visit(Routes.vendors(), {
+		router.visit(Routes.vendors(), {
 			method: Method.DELETE,
 			data: { ids: Array.from(selected) },
 		})
@@ -45,8 +46,8 @@ const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTit
 				},
 
 				h1: {
-					marginBottom: 0
-				}
+					marginBottom: 0,
+				},
 			}) }>
 				<Title>
 					{ title }
@@ -58,9 +59,9 @@ const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTit
 						{ menuOptions && menuOptions.map(({ label, href, icon }, index) => {
 							const Icon = icon
 							return (
-								<Menu.Item key={ index } href={ href } icon={ icon && <Icon size={ 14 } /> }>
+								<Menu.Link key={ index } href={ href } icon={ icon && <Icon size={ 14 } /> }>
 									{ label }
-								</Menu.Item>
+								</Menu.Link>
 							)
 						}) }
 

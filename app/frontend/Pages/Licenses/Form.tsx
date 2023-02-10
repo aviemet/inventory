@@ -8,7 +8,7 @@ import {
 	Checkbox,
 	Submit,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 
 export interface ILicenseFormProps {
 	to: string
@@ -56,7 +56,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				name="manufacturer_id"
 				options={ manufacturers }
 				filterMatchKeys={ ['name'] }
-				onOpen={ () => Inertia.reload({ only: ['manufacturers'] }) }
+				onOpen={ () => router.reload({ only: ['manufacturers'] }) }
 			/>
 
 			<SearchableDropdown
@@ -64,7 +64,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				name="vendor_id"
 				options={ vendors }
 				filterMatchKeys={ ['name'] }
-				onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
+				onOpen={ () => router.reload({ only: ['vendors'] }) }
 			/>
 
 			<SearchableDropdown
@@ -72,7 +72,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				name="category_id"
 				options={ categories }
 				filterMatchKeys={ ['name'] }
-				onOpen={ () => Inertia.reload({ only: ['categories'] }) }
+				onOpen={ () => router.reload({ only: ['categories'] }) }
 			/>
 
 			<Textarea name="notes" label="Notes" />

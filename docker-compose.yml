@@ -3,8 +3,8 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD:
+      POSTGRES_USER: "${PG_USERNAME}"
+      POSTGRES_PASSWORD: "${PG_PASSWORD}"
     volumes:
       - postgres:/var/lib/postgresql/data
     restart: always
@@ -18,9 +18,8 @@ services:
     depends_on:
       - db
     environment:
-      - RAILS_MASTER_KEY=secret_key
-      - POSTGRES_USER=postgres
-      - INVENTORY_DATABASE_PASSWORD=password
+      - POSTGRES_USER=$${PG_USERNAME}
+      - INVENTORY_DATABASE_PASSWORD=$${PG_PASSWORD}
     env_file: .env
     restart: always
 volumes:

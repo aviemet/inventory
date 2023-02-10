@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import { type ITableRow } from './index'
 import { Box } from '@mantine/core'
 import RowCheckbox from './RowCheckbox'
-import { usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/react'
 import { useTableContext } from '../TableContext'
 
 interface IRowInContextProps extends ITableRow {

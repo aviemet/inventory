@@ -2,26 +2,26 @@ import React from 'react'
 import { SpotlightProvider as MantineSpotlightProvider } from '@mantine/spotlight'
 import type { SpotlightAction } from '@mantine/spotlight'
 import { SearchIcon, DashboardIcon, ItemsIcon, SettingsIcon } from '@/Components/Icons'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 import { Routes } from '@/lib'
 
 const actions: SpotlightAction[] = [
 	{
 		title: 'Dashboard',
 		description: 'Get full information about current system status',
-		onTrigger: () => Inertia.get(Routes.root()),
+		onTrigger: () => router.get(Routes.root()),
 		icon: <DashboardIcon size={ 18 } />,
 	},
 	{
 		title: 'Hardware',
 		description: 'View hardware items',
-		onTrigger: () => Inertia.get(Routes.items()),
+		onTrigger: () => router.get(Routes.items()),
 		icon: <ItemsIcon size={ 18 } />,
 	},
 	{
 		title: 'Settings',
 		description: 'Visit documentation to lean more about all features',
-		onTrigger: () => Inertia.get(Routes.settings()),
+		onTrigger: () => router.get(Routes.settings()),
 		icon: <SettingsIcon size={ 18 } />,
 	},
 ]

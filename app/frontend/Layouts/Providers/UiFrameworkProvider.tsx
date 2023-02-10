@@ -2,7 +2,7 @@ import React from 'react'
 import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
 import { NotificationsProvider } from '@mantine/notifications'
-import { usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/react'
 import axios from 'axios'
 import { Routes } from '@/lib'
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useMemo } from 'react'
-import { Inertia, type VisitOptions } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
+import { type VisitOptions } from '@inertiajs/core'
 import { debounce } from 'lodash'
 import { useTableContext } from '../TableContext'
 import { TextInput } from '@/Components/Inputs'
@@ -54,7 +55,7 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 			},
 		}
 		if(model) options.only = [model, 'pagination']
-		Inertia.get(path, {}, options)
+		router.get(path, {}, options)
 	}, 500), [])
 
 	useEffect(() => {

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import { usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/react'
 import { showNotification } from '@mantine/notifications'
 
 const Flash = () => {
-	const { props: { flash } } = usePage<InertiaPage>()
+	const { flash } = usePage().props as SharedInertiaProps
 
 	useEffect(() => {
 		let key: keyof FlashMessage

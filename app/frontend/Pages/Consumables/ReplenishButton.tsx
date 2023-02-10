@@ -6,7 +6,7 @@ import { ReplenishIcon } from '@/Components/Icons'
 import { Tooltip, type ButtonProps } from '@mantine/core'
 import { Routes } from '@/lib'
 import axios from 'axios'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 
 interface IReplenishButtonProps extends ButtonProps {
 	consumable: Schema.Consumable
@@ -35,7 +35,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 			.then(response => {
 				if(response.statusText === 'OK' || response.statusText === 'Created') {
 					setOpened(false)
-					Inertia.reload({ only: ['flash', 'consumables'] })
+					router.reload({ only: ['flash', 'consumables'] })
 				}
 			})
 			.catch(error => {

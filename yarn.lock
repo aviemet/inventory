@@ -2329,37 +2329,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inertiajs/inertia-react@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "@inertiajs/inertia-react@npm:0.8.1"
+"@inertiajs/core@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@inertiajs/core@npm:1.0.0"
   dependencies:
+    axios: ^1.2.0
+    deepmerge: ^4.0.0
+    nprogress: ^0.2.0
+    qs: ^6.9.0
+  checksum: 8f38d92cf80c6635baea9bfa3170c4da4ab35c29fdc73f92a9ecb97a41ca04abcf637890c7c032b17989ab2382d1fc709c7a240ff1fb224085628724caaa005f
+  languageName: node
+  linkType: hard
+
+"@inertiajs/react@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@inertiajs/react@npm:1.0.0"
+  dependencies:
+    "@inertiajs/core": 1.0.0
     lodash.isequal: ^4.5.0
   peerDependencies:
-    "@inertiajs/inertia": ^0.11.0
     react: ^16.9.0 || ^17.0.0 || ^18.0.0
-  checksum: 31b1e07be2753658bd1ab8b3feb567b602098d992a14d4decf51d608d05d363a709e3b398f9030992ec3465d6ffa1a8407403fde586d956204732f3238e9dadf
-  languageName: node
-  linkType: hard
-
-"@inertiajs/inertia@npm:^0.11.1":
-  version: 0.11.1
-  resolution: "@inertiajs/inertia@npm:0.11.1"
-  dependencies:
-    axios: ^0.21.1
-    deepmerge: ^4.0.0
-    qs: ^6.9.0
-  checksum: 516f41e84216dc4ab483d0fd1cf86464dee9ef0605a01a894e9a02546ae169f9954cc4cc25234ac8817cf88b5c5558c1e8da9109dd443d3513d18e20647c1304
-  languageName: node
-  linkType: hard
-
-"@inertiajs/progress@npm:^0.2.7":
-  version: 0.2.7
-  resolution: "@inertiajs/progress@npm:0.2.7"
-  dependencies:
-    nprogress: ^0.2.0
-  peerDependencies:
-    "@inertiajs/inertia": ^0.6.0 || ^0.7.0 || ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0
-  checksum: 8c89d506b096000e5b621e3d3465fa7d07855ec45e275d9475a8f47b0431478439a838a860927c764e9d5d5600bd7f9f3bba4ccea2ef5f739d7d7f25caa96ca1
+  checksum: e4a7a6b90b3ca0bbc8959cde792c8872d0eada75c4564623183ea9de6830f13f5763841c1b7fd773cc60d30cfa60bce4a9c7e9bc24e34425d8ed55c84a16dc6d
   languageName: node
   linkType: hard
 
@@ -6723,12 +6713,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.21.1":
-  version: 0.21.4
-  resolution: "axios@npm:0.21.4"
+"axios@npm:^1.2.0":
+  version: 1.3.2
+  resolution: "axios@npm:1.3.2"
   dependencies:
-    follow-redirects: ^1.14.0
-  checksum: 44245f24ac971e7458f3120c92f9d66d1fc695e8b97019139de5b0cc65d9b8104647db01e5f46917728edfc0cfd88eb30fc4c55e6053eef4ace76768ce95ff3c
+    follow-redirects: ^1.15.0
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: 9791af75a6df137b15ef45d13ad11eb357b3860d2496347ee18778db9d0abc2320362a4452f1e070e3160f1dbcc518fcefdc9e005be097e7db39acb22cf608e5
   languageName: node
   linkType: hard
 
@@ -10168,7 +10160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.14.0":
+"follow-redirects@npm:^1.15.0":
   version: 1.15.2
   resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
@@ -11234,9 +11226,7 @@ __metadata:
     "@babel/core": ^7.20.12
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
-    "@inertiajs/inertia": ^0.11.1
-    "@inertiajs/inertia-react": ^0.8.1
-    "@inertiajs/progress": ^0.2.7
+    "@inertiajs/react": ^1.0.0
     "@loadable/component": ^5.15.2
     "@mantine/core": ^5.10.0
     "@mantine/dates": ^5.10.0
@@ -15190,6 +15180,13 @@ __metadata:
     forwarded: 0.2.0
     ipaddr.js: 1.9.1
   checksum: 29c6990ce9364648255454842f06f8c46fcd124d3e6d7c5066df44662de63cdc0bad032e9bf5a3d653ff72141cc7b6019873d685708ac8210c30458ad99f2b74
+  languageName: node
+  linkType: hard
+
+"proxy-from-env@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "proxy-from-env@npm:1.1.0"
+  checksum: ed7fcc2ba0a33404958e34d95d18638249a68c430e30fcb6c478497d72739ba64ce9810a24f53a7d921d0c065e5b78e3822759800698167256b04659366ca4d4
   languageName: node
   linkType: hard
 

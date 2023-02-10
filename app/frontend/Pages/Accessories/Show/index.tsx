@@ -31,7 +31,7 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Item
+							<Menu.Link
 								href={ Routes.checkoutAccessory(accessory) }
 								disabled={ !useCallback((accessory: Schema.Accessory) => accessory.available_to_checkout, [accessory.qty, accessory.assignments]) }
 							>
@@ -40,10 +40,10 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 									:
 									'Checkout Accessory'
 								}
-							</Menu.Item>
-							<Menu.Item href={ Routes.editAccessory(accessory) }>
+							</Menu.Link>
+							<Menu.Link href={ Routes.editAccessory(accessory) }>
 								Edit Accessory
-							</Menu.Item>
+							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Flex>
