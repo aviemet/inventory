@@ -1,11 +1,5 @@
-import { type InertiaFormProps as DefaultInertiaFormProps, InertiaHeadProps } from '@inertiajs/inertia-react';
-import {
-	Page, 
-	PageProps,
-	Errors,
-	ErrorBag,
-} from '@inertiajs/inertia'
-
+import { type InertiaFormProps as DefaultInertiaFormProps, InertiaHeadProps } from '@inertiajs/core-react';
+import { Page, PageProps, Errors, ErrorBag } from '@inertiajs/core'
 
 declare global {
 
@@ -16,10 +10,6 @@ declare global {
 		}
 		flash: FlashMessage,
 		errors: Errors & ErrorBag
-	}
-
-	interface InertiaPage<T = void> extends Page<PageProps> {
-		props: SharedInertiaProps & T
 	}
 
 	interface IndexedInertiaFormProps extends DefaultInertiaFormProps{

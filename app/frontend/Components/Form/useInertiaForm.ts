@@ -1,9 +1,9 @@
 import { unsetCompact } from '@/lib'
-import { useForm } from '@inertiajs/inertia-react'
+import { useForm } from '@inertiajs/react'
 import { cloneDeep, isPlainObject, set, get } from 'lodash'
 import { useCallback } from 'react'
 
-import { type InertiaFormProps as DefaultInertiaFormProps } from '@inertiajs/inertia-react'
+import { type InertiaFormProps as DefaultInertiaFormProps } from '@inertiajs/react'
 
 type TCallBack = (data: Record<string, any>) => Record<string, any>
 

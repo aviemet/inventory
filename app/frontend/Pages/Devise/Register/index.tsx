@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input, Submit, Field } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
-import { usePage } from '@inertiajs/inertia-react'
+import { usePage } from '@inertiajs/react'
 
 const firstRun = {
 	heading: 'Create Admin User',

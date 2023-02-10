@@ -5,7 +5,7 @@ import {
 	SearchableDropdown,
 	Submit,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 import { omit } from 'lodash'
 
 export interface ILocationFormProps {
@@ -47,7 +47,7 @@ const LocationForm = ({ to, method = 'post', onSubmit, location = emptyLocation,
 				label="Parent Location"
 				name="parent_id"
 				options={ locations }
-				onOpen={ () => Inertia.reload({ only: ['locations'] }) }
+				onOpen={ () => router.reload({ only: ['locations'] }) }
 			/>
 
 			<Submit>

@@ -7,7 +7,7 @@ import {
 	DateTime,
 	Submit,
 } from '@/Components/Form'
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 import { CategoriesDropdown } from '@/Components/Form/Dropdowns'
 
 export interface IContractFormProps {
@@ -41,7 +41,7 @@ const ContractForm = ({ to, method = 'post', onSubmit, contract, vendors, catego
 				name="vendor_id"
 				options={ vendors }
 				filterMatchKeys={ ['name'] }
-				onOpen={ () => Inertia.reload({ only: ['vendors'] }) }
+				onOpen={ () => router.reload({ only: ['vendors'] }) }
 			/>
 
 			<CategoriesDropdown

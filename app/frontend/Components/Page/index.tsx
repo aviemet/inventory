@@ -1,6 +1,6 @@
 import React from 'react'
 import Breadcrumbs, { type TBreadcrumb } from '@/Components/Breadcrumbs'
-import { Head } from '@inertiajs/inertia-react'
+import { Head } from '@inertiajs/react'
 
 interface IPageProps {
 	children?: React.ReactNode
