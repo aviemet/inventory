@@ -89,7 +89,7 @@ const Form = <T extends Record<keyof T, unknown>>(
 
 			// Transform nested attributes, concat'ing '_attributes' for Rails controllers
 			if(transform && nestedAttributes.size > 0) {
-				form.transform(submitData => {
+				form.transform((submitData: any) => {
 					nestedAttributes.forEach(attribute => {
 						set(
 							submitData,
