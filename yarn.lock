@@ -2341,29 +2341,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inertiajs/inertia-react@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "@inertiajs/inertia-react@npm:0.8.1"
-  dependencies:
-    lodash.isequal: ^4.5.0
-  peerDependencies:
-    "@inertiajs/inertia": ^0.11.0
-    react: ^16.9.0 || ^17.0.0 || ^18.0.0
-  checksum: 31b1e07be2753658bd1ab8b3feb567b602098d992a14d4decf51d608d05d363a709e3b398f9030992ec3465d6ffa1a8407403fde586d956204732f3238e9dadf
-  languageName: node
-  linkType: hard
-
-"@inertiajs/inertia@npm:^0.11.1":
-  version: 0.11.1
-  resolution: "@inertiajs/inertia@npm:0.11.1"
-  dependencies:
-    axios: ^0.21.1
-    deepmerge: ^4.0.0
-    qs: ^6.9.0
-  checksum: 516f41e84216dc4ab483d0fd1cf86464dee9ef0605a01a894e9a02546ae169f9954cc4cc25234ac8817cf88b5c5558c1e8da9109dd443d3513d18e20647c1304
-  languageName: node
-  linkType: hard
-
 "@inertiajs/react@npm:^1.0.0":
   version: 1.0.0
   resolution: "@inertiajs/react@npm:1.0.0"
@@ -6736,15 +6713,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.21.1":
-  version: 0.21.4
-  resolution: "axios@npm:0.21.4"
-  dependencies:
-    follow-redirects: ^1.14.0
-  checksum: 44245f24ac971e7458f3120c92f9d66d1fc695e8b97019139de5b0cc65d9b8104647db01e5f46917728edfc0cfd88eb30fc4c55e6053eef4ace76768ce95ff3c
-  languageName: node
-  linkType: hard
-
 "axios@npm:^1.2.0":
   version: 1.3.2
   resolution: "axios@npm:1.3.2"
@@ -10192,7 +10160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.14.0, follow-redirects@npm:^1.15.0":
+"follow-redirects@npm:^1.15.0":
   version: 1.15.2
   resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
@@ -11329,7 +11297,6 @@ __metadata:
     tabler-icons-react: ^1.56.0
     ts-jest: ^29.0.3
     typescript: ^4.9.4
-    useInertiaForm: /Users/avram/Development/javascript/useInertiaForm
     vite: ^4.0.4
     vite-plugin-dynamic-import: ^1.2.4
     vite-plugin-ruby: ^3.1.3
@@ -18195,19 +18162,6 @@ __metadata:
   version: 3.1.1
   resolution: "use@npm:3.1.1"
   checksum: 08a130289f5238fcbf8f59a18951286a6e660d17acccc9d58d9b69dfa0ee19aa038e8f95721b00b432c36d1629a9e32a464bf2e7e0ae6a244c42ddb30bdd8b33
-  languageName: node
-  linkType: hard
-
-"useInertiaForm@file:/Users/avram/Development/javascript/useInertiaForm::locator=icr%40workspace%3A.":
-  version: 0.0.0-development
-  resolution: "useInertiaForm@file:/Users/avram/Development/javascript/useInertiaForm#/Users/avram/Development/javascript/useInertiaForm::hash=129ef1&locator=icr%40workspace%3A."
-  dependencies:
-    "@inertiajs/inertia": ^0.11.1
-    "@inertiajs/inertia-react": ^0.8.1
-    lodash: ^4.17.21
-  peerDependencies:
-    react: ^16.8.0
-  checksum: 0d8a97a92f95e7f82a4d19545994020d8ed2b982f14198b131a0eefde679a3881824d6ccd929ab209787fbbe332ca19f52e23fd39664100924455a7b95dd932d
   languageName: node
   linkType: hard
 
