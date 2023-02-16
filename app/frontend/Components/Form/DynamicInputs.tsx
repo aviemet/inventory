@@ -1,75 +1,29 @@
 import React from 'react'
-import { useForm, useFormMeta } from './Form'
 import { Button, Group } from '@/Components'
 import Label from '@/Components/Inputs/Label'
-import { cloneDeep, get, set } from 'lodash'
-import { useNestedAttribute } from './FieldsFor'
+// import { useNestedAttribute } from './FieldsFor'
 import { PlusCircleIcon, MinusCircleIcon } from '@/Components/Icons'
+import { DynamicInputs as InertiaDynamicInputs } from 'use-inertia-form'
 
 interface IDynamicInputsProps {
-	children: (i: number) => React.ReactNode
+	children: React.ReactNode | React.ReactElement[]
 	label?: string | React.ReactNode
-	emptyData: Record<string, any>
+	emptyData: Record<string, unknown>
 }
 
 const DynamicInputs = ({ children, label, emptyData }: IDynamicInputsProps) => {
-	const { setData, unsetData, getData } = useForm()
-	const { model: formModel } = useFormMeta()
-	let inputModel = formModel ?? ''
-
-	try {
-		const nestedModel = useNestedAttribute()
-		inputModel = formModel ? `${inputModel}.${nestedModel}` : nestedModel
-	} catch(e) {}
-
-	const handleAddInputs = () => {
-		if(!formModel) return
-
-		setData((formData: Record<string, any>) => {
-			const clone = cloneDeep(formData)
-			let node = get(clone, inputModel)
-
-			if(!node) {
-				set(clone, inputModel, [])
-				node = get(clone, inputModel)
-			}
-
-			node.push(emptyData)
-			set(clone, inputModel, node)
-
-			return clone
-		})
-	}
-
-	const handleRemoveInputs = (i: number) => {
-		unsetData(`${inputModel}[${i}]`)
-	}
-
 	return (
 		<>
 			<Group>
 				{ label && <Label>{ label }</Label> }
-				<Button
-					onClick={ handleAddInputs }
-					size='xs'
-					mb={ 4 }
-				>
-					<PlusCircleIcon />
-				</Button>
 			</Group>
-			{ Array.isArray(getData(inputModel)) && getData(inputModel).map((data: any, i: number) => {
-				return (
-					<Group key={ i }>
-						<div>{ children(i) }</div>
-						<Button onClick={ () => handleRemoveInputs(i) } sx={ {
-							marginLeft: 'auto',
-							display: 'block',
-						} }>
-							<MinusCircleIcon />
-						</Button>
-					</Group>
-				)
-			}) }
+			<InertiaDynamicInputs
+				emptyData={ emptyData }
+				addInputButton={ <Button size='xs' mb={ 4 }><PlusCircleIcon /></Button> }
+				removeInputButton={ <Button size='xs' mb={ 4 }><MinusCircleIcon /></Button> }
+			>
+				{ children }
+			</InertiaDynamicInputs>
 		</>
 	)
 }

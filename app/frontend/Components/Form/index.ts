@@ -1,5 +1,4 @@
-import Form, { useForm } from './Form'
-export { Form, useForm }
+export { default as Form } from './Form'
 export { default as Input } from './Input'
 export { default as Textarea } from './Textarea'
 export { default as RichText } from './RichText'

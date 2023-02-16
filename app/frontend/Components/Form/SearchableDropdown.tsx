@@ -4,16 +4,16 @@ import SearchableDropdownInput, { type ISearchableDropdownProps } from '../Input
 import { Flex } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
 import { router } from '@inertiajs/react'
-import useInertiaInput from './useInertiaInput'
+import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 
 interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onChange'|'onDropdownOpen'|'onDropdownClose'> {
 	label?: string
 	name: string
 	model?: string
 	defaultValue?: string
-	onChange?: (option: string|null, form: Inertia.FormProps) => void
-	onDropdownOpen?: (form: InertiaFormProps) => void
-	onDropdownClose?: (form: InertiaFormProps) => void
+	onChange?: (option: string|null, form: UseFormProps) => void
+	onDropdownOpen?: (form: UseFormProps) => void
+	onDropdownClose?: (form: UseFormProps) => void
 	fetchOnOpen?: string
 	newForm?: React.ReactElement
 }
@@ -35,7 +35,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 	},
 	ref,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput(name, model)
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model })
 
 	const handleChange = (option: string|null) => {
 		setValue(option)

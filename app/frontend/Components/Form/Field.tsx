@@ -1,6 +1,5 @@
 import React from 'react'
 import cx from 'clsx'
-import { type TInputType } from './Form'
 import { Box, BoxProps } from '@mantine/core'
 
 interface IFieldProps extends BoxProps {
