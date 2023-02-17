@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, Group } from '@/Components'
 import Label from '@/Components/Inputs/Label'
-// import { useNestedAttribute } from './FieldsFor'
 import { PlusCircleIcon, MinusCircleIcon } from '@/Components/Icons'
 import { DynamicInputs as InertiaDynamicInputs } from 'use-inertia-form'
 

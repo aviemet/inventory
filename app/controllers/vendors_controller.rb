@@ -114,7 +114,7 @@ class VendorsController < ApplicationController
 
     elsif vendor.save
 
-      redirect_to vendor, notice: 'License was successfully created'
+      redirect_to vendor, notice: 'Vendor was successfully created'
     else
       redirect_to new_vendor_path, inertia: { errors: vendor.errors }
 
@@ -124,7 +124,7 @@ class VendorsController < ApplicationController
   # PATCH/PUT /vendors/:slug
   def update
     if vendor.update(vendor_params)
-      redirect_to vendor, notice: 'License was successfully updated'
+      redirect_to vendor, notice: 'Vendor was successfully updated'
     else
       redirect_to edit_vendor_path, inertia: { errors: vendor.errors }
     end

@@ -13,7 +13,6 @@ interface IContactableFormProps {
 const ContactableForm = ({ contact }: IContactableFormProps) => {
 	return (
 		<>
-			<Phone />
 			<FieldsFor model="contacts">
 				<Box>Contact Information</Box>
 				<Phone />
