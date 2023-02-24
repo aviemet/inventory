@@ -1,5 +1,7 @@
 import React, { forwardRef } from 'react'
 import { TextInput, NumberInput, PasswordInput, CurrencyInput } from '../Inputs'
+import React, { forwardRef } from 'react'
+import { TextInput, NumberInput, PasswordInput, CurrencyInput } from '../Inputs'
 import Field from './Field'
 import cx from 'clsx'
 import { type InputProps } from '@mantine/core'
@@ -7,7 +9,9 @@ import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 
 interface IInputProps extends Omit<InputProps, 'onChange'> {
 	type?: TInputType
+	type?: TInputType
 	label?: string
+	placeholder?: string
 	placeholder?: string
 	name: string
 	model?: string
@@ -67,7 +71,10 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 			required={ required }
 			className={ cx({ compact }) }
 			errors={ !!error }
+			className={ cx({ compact }) }
+			errors={ !!error }
 		>
+			<InputComponent
 			<InputComponent
 				id={ id || inputId }
 				name={ inputName }
@@ -78,10 +85,17 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps>((
 				ref={ ref }
 				error={ error }
 				className={ cx({ compact }) }
+				value={ value }
+				onChange={ handleChange }
+				onBlur={ handleBlur }
+				ref={ ref }
+				error={ error }
+				className={ cx({ compact }) }
 				{ ...props }
 			/>
 		</Field>
 	)
+})
 })
 
 export default FormInput

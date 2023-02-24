@@ -5,6 +5,7 @@ import cx from 'clsx'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 
 interface IFormTextareaProps extends Omit<ITextareaProps, 'onChange'> {
+interface IFormTextareaProps extends Omit<ITextareaProps, 'onChange'> {
 	label?: string
 	name: string
 	model?: string
@@ -25,12 +26,21 @@ const Textarea = ({ label, name, required, onChange, id, model, ...props }: IFor
 			required={ required }
 			errors={ !!error }
 		>
+		<Field
+			type="textarea"
+			required={ required }
+			errors={ !!error }
+		>
 			{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
 				{ label }
 			</label> }
 			<TextareaInput
 				id={ id || inputId }
 				name={ inputName }
+				onChange={ handleChange }
+				value={ value }
+				required={ required }
+				error={ error }
 				onChange={ handleChange }
 				value={ value }
 				required={ required }
