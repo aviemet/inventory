@@ -1,7 +1,7 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	Textarea,
 	SearchableDropdown,
 	DateTime,
@@ -9,11 +9,12 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface ILicenseFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	license: Schema.License
 	categories: Schema.Category[]
 	vendors: Schema.Vendor[]
@@ -29,19 +30,19 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
-			<Input name="key" label="Key" required />
+			<TextInput name="key" label="Key" required />
 
-			<Input name="seats" label="Seats" required />
+			<TextInput name="seats" label="Seats" required />
 
-			<Input name="licenser_name" label="Licenser Name" required />
+			<TextInput name="licenser_name" label="Licenser Name" required />
 
-			<Input name="licenser_email" label="Licenser Email" required />
+			<TextInput name="licenser_email" label="Licenser Email" required />
 
 			<Checkbox name="reassignable" label="Reassignable" />
 
-			<Input name="cost" label="Cost" />
+			<TextInput name="cost" label="Cost" />
 
 			<DateTime name="purchased_at" label="Purchase Date" />
 
@@ -57,6 +58,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				options={ manufacturers }
 				filterMatchKeys={ ['name'] }
 				onOpen={ () => router.reload({ only: ['manufacturers'] }) }
+				onOpen={ () => router.reload({ only: ['manufacturers'] }) }
 			/>
 
 			<SearchableDropdown
@@ -65,6 +67,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				options={ vendors }
 				filterMatchKeys={ ['name'] }
 				onOpen={ () => router.reload({ only: ['vendors'] }) }
+				onOpen={ () => router.reload({ only: ['vendors'] }) }
 			/>
 
 			<SearchableDropdown
@@ -72,6 +75,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				name="category_id"
 				options={ categories }
 				filterMatchKeys={ ['name'] }
+				onOpen={ () => router.reload({ only: ['categories'] }) }
 				onOpen={ () => router.reload({ only: ['categories'] }) }
 			/>
 

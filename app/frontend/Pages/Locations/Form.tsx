@@ -1,17 +1,18 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	SearchableDropdown,
 	Submit,
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
 import { omit } from 'lodash'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface ILocationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	location?: Partial<Schema.Location>
 	locations: Schema.Location[]
 	currencies: any
@@ -33,7 +34,7 @@ const LocationForm = ({ to, method = 'post', onSubmit, location = emptyLocation,
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Location Name" required autoFocus />
+			<TextInput name="name" label="Location Name" required autoFocus />
 
 			<SearchableDropdown
 				label="Currency"

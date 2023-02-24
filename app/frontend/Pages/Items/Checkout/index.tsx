@@ -1,7 +1,7 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
+import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 
 import { omit } from 'lodash'
@@ -59,7 +59,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 					to={ Routes.assignments() }
 					model="assignment"
 				>
-					<Input
+					<TextInput
 						model="item"
 						name="name"
 						label="Item Name"

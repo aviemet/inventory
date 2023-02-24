@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Modal } from '@/Components'
-import { Form, Input, Submit } from '@/Components/Form'
+import { Form, NumberInput, Submit } from '@/Components/Form'
 import { Checkbox } from '@/Components/Inputs'
 import { ReplenishIcon } from '@/Components/Icons'
 import { Tooltip, type ButtonProps } from '@mantine/core'
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { router } from '@inertiajs/react'
+import { type UseFormProps } from 'use-inertia-form'
 
 interface IReplenishButtonProps extends ButtonProps {
 	consumable: Schema.Consumable
@@ -23,7 +24,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 
 	}
 
-	const handleSubmit = ({ data, method, to, setError }: Inertia.FormProps) => {
+	const handleSubmit = ({ data, method, to, setError }: UseFormProps) => {
 		if(!to) return
 
 		axios[method](to, {
@@ -61,7 +62,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 					to={ Routes.apiConsumable(consumable) }
 					onSubmit={ handleSubmit }
 				>
-					<Input name="qty" label="Quantity" type="number" min={ 0 } />
+					<NumberInput name="qty" label="Quantity" min={ 0 } />
 
 					<Checkbox label="Create Purchase Order" onChange={ handleTogglePurchaseOrder } />
 

@@ -1,8 +1,9 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
+import { DateTime, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
+import { type UseFormProps } from 'use-inertia-form'
 
 interface ICheckoutItemProps {
 	assignment: Schema.Assignment
@@ -14,7 +15,7 @@ interface ICheckoutItemProps {
 const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => {
 	const title = `Checkout ${consumable.name}`
 
-	const handleSubmit = ({ transform }: InertiaFormProps) => {
+	const handleSubmit = ({ transform }: UseFormProps) => {
 		transform(data => {
 			data.assignment.qty = data.consumable.qty
 			data.consumable.qty = consumable.qty! - data.consumable.qty
@@ -72,11 +73,10 @@ const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => 
 						required
 					/>
 
-					<Input
+					<NumberInput
 						label="Quantity"
 						model="consumable"
 						name="qty"
-						type="number"
 						min={ 1 }
 						max={ consumable.qty ? consumable.qty : 1 }
 					/>

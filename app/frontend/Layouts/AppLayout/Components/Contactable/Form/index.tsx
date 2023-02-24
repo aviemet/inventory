@@ -12,13 +12,15 @@ interface IContactableFormProps {
 
 const ContactableForm = ({ contact }: IContactableFormProps) => {
 	return (
-		<FieldsFor model="contacts">
-			<Box>Contact Information</Box>
-			<Phone />
-			<Email />
+		<>
+			<FieldsFor model="contacts">
+				<Box>Contact Information</Box>
+				<Phone />
+				{ /* <Email />
 			<Website />
-			<Address />
-		</FieldsFor>
+			<Address /> */ }
+			</FieldsFor>
+		</>
 	)
 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
-import { SearchableDropdown, useForm } from '@/Components/Form'
+import { useForm } from 'use-inertia-form'
+import { SearchableDropdown } from '@/Components/Form'
 
 interface ILocationDropdown {
 	locations: Schema.Location[]

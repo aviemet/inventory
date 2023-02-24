@@ -1,7 +1,8 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
+	CurrencyInput,
 	Textarea,
 	Checkbox,
 	DateTime,
@@ -9,11 +10,12 @@ import {
 	FormGroup,
 } from '@/Components/Form'
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface IItemFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	item: Partial<Schema.Item>
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
@@ -32,7 +34,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 			onSubmit={ onSubmit }
 		>
 
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Item Details">
 				<ModelsDropdown
@@ -41,15 +43,15 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					categories={ categories }
 				/>
 
-				<Input name="serial" label="Serial" />
+				<TextInput name="serial" label="Serial" />
 
-				<Input name="asset_tag" label="Asset Tag" />
+				<TextInput name="asset_tag" label="Asset Tag" />
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
 				<VendorsDropdown vendors={ vendors } />
 
-				<Input name="cost" label="Cost" type="currency" />
+				<CurrencyInput name="cost" label="Cost" />
 
 				<DateTime label="Purchased At" name="purchased_at" />
 			</FormGroup>

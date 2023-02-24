@@ -54,7 +54,21 @@ node_modules
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+*.env
+.env.*
 
+# Yarn files
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Test results output
+spec/examples.txt
+coverage
 # Test results output
 spec/examples.txt
 coverage

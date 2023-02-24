@@ -1,7 +1,7 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, Input, Submit, Textarea } from '@/Components/Form'
+import { DateTime, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 
 interface ICheckoutItemProps {
@@ -66,7 +66,7 @@ const Checkout = ({ assignment, accessory, ...models }: ICheckoutItemProps) => {
 
 					<AssignmentLocationDropdown locations={ models.locations } />
 
-					<Input type="number" label="Quantity" name="qty" />
+					<NumberInput label="Quantity" name="qty" />
 
 					<DateTime
 						label="Assigned At"

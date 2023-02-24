@@ -1,19 +1,17 @@
-import { DynamicInputs, Input } from '@/Components/Form'
 import React from 'react'
+import { DynamicInputs, TextInput } from '@/Components/Form'
+// import { NestedFields } from 'use-inertia-form'
 
 const Phone = () => {
 	return (
-		<DynamicInputs emptyData={ {
+		<DynamicInputs label="Phone Numbers" emptyData={ {
 			number: '',
-			extenstion: '',
+			extension: '',
 			notes: '',
 			category_id: '',
-		} } >{ i => (
-				<>
-					<Input label="Number" name={ `[${i}]number` } />
-					<Input label="Extension" name={ `[${i}]extension` } />
-				</>
-			) }
+		} } >
+			<TextInput label="Number" name="number" />
+			<TextInput label="Extension" name="extension" />
 		</DynamicInputs>
 	)
 }
