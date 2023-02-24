@@ -73,4 +73,4 @@ coverage
 spec/examples.txt
 coverage
 
-/db/seeds/99_local.rb
+db/seeds/99_local.rb

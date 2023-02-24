@@ -47,6 +47,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 
 	const handleDropdownOpen = () => {
 		if(fetchOnOpen) router.reload({ only: [fetchOnOpen] })
+		if(fetchOnOpen) router.reload({ only: [fetchOnOpen] })
 		if(onDropdownOpen) onDropdownOpen(form)
 	}
 

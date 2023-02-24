@@ -59,8 +59,6 @@ if Rails.env == "development"
       person:,
     })
 
-    company = Company.first
-
     user.add_role :super_admin
     user.add_role :admin, company
   end
