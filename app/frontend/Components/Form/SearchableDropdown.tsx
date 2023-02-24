@@ -54,6 +54,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 
 	const handleNewFormSuccess = (data: { id: string|number }) => {
 		if(fetchOnOpen) router.reload({ only: [fetchOnOpen] })
+		if(fetchOnOpen) router.reload({ only: [fetchOnOpen] })
 		setValue(String(data.id))
 	}
 
