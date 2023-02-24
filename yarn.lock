@@ -11297,7 +11297,6 @@ __metadata:
     tabler-icons-react: ^1.56.0
     ts-jest: ^29.0.3
     typescript: ^4.9.4
-    useInertiaForm: /media/avram/Dev/javascript/useInertiaForm
     vite: ^4.0.4
     vite-plugin-dynamic-import: ^1.2.4
     vite-plugin-ruby: ^3.1.3
@@ -18163,19 +18162,6 @@ __metadata:
   version: 3.1.1
   resolution: "use@npm:3.1.1"
   checksum: 08a130289f5238fcbf8f59a18951286a6e660d17acccc9d58d9b69dfa0ee19aa038e8f95721b00b432c36d1629a9e32a464bf2e7e0ae6a244c42ddb30bdd8b33
-  languageName: node
-  linkType: hard
-
-"useInertiaForm@file:/media/avram/Dev/javascript/useInertiaForm::locator=icr%40workspace%3A.":
-  version: 0.0.0-development
-  resolution: "useInertiaForm@file:/media/avram/Dev/javascript/useInertiaForm#/media/avram/Dev/javascript/useInertiaForm::hash=5a5e80&locator=icr%40workspace%3A."
-  dependencies:
-    "@inertiajs/inertia": ^0.11.1
-    "@inertiajs/inertia-react": ^0.8.1
-    lodash: ^4.17.21
-  peerDependencies:
-    react: ^16.8.0
-  checksum: 88bac9b1803814fcca0f76a0f9c084b8c3c6a60bedf588896f708ce13e29c487867ea506416fdb0598b116beabb789fbb73ecc1a2ad3b5e64f335ca15ba0d3c7
   languageName: node
   linkType: hard
 
