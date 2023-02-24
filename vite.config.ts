@@ -27,11 +27,6 @@ const config = defineConfig({
 			'@': path.resolve(__dirname, 'app', 'frontend'),
 		},
 	},
-	server: {
-		fs: {
-			allow: ['/Users/avram/Development/javascript/useInertiaForm'],
-		},
-	},
 	base: './',
 	test: {
 		globals: true,
