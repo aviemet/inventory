@@ -1,17 +1,18 @@
 import React, { useMemo } from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	Textarea,
 	SearchableDropdown,
 	Submit,
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface ICategoryFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	category?: Partial<Schema.Category>
 }
 
@@ -34,7 +35,7 @@ const CategoryForm = ({ to, method = 'post', onSubmit, category = emptyCategory 
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
 			<SearchableDropdown
 				label="Category Type"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Submit } from '@/Components/Form'
+import { Form, TextInput, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 
@@ -24,7 +24,7 @@ const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
 					</div>
 
 					<div>
-						<Input name="email" placeholder="Email" autoComplete="Email" required />
+						<TextInput name="email" placeholder="Email" autoComplete="Email" required />
 					</div>
 
 					<div>

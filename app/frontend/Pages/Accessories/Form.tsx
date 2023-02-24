@@ -1,18 +1,19 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	Textarea,
 	Checkbox,
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface IAccessoryFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	accessory: Schema.Accessory
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
@@ -30,7 +31,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Accessory Details">
 				<ModelsDropdown
@@ -39,20 +40,20 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 					categories={ categories }
 				/>
 
-				<Input name="serial" label="Serial" />
+				<TextInput name="serial" label="Serial" />
 
-				<Input name="asset_tag" label="Asset Tag" />
+				<TextInput name="asset_tag" label="Asset Tag" />
 
-				<Input name="qty" label="Quantity" />
+				<TextInput name="qty" label="Quantity" />
 
 				{ /* TODO: Alert options dialog */ }
-				<Input name="min_qty" label="Minimum Quantity" />
+				<TextInput name="min_qty" label="Minimum Quantity" />
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
 				<VendorsDropdown vendors={ vendors } />
 
-				<Input name="cost" label="Cost" />
+				<TextInput name="cost" label="Cost" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">

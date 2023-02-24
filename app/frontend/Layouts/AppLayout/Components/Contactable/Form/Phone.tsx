@@ -1,5 +1,5 @@
 import React from 'react'
-import { DynamicInputs, Input } from '@/Components/Form'
+import { DynamicInputs, TextInput } from '@/Components/Form'
 // import { NestedFields } from 'use-inertia-form'
 
 const Phone = () => {
@@ -10,8 +10,8 @@ const Phone = () => {
 			notes: '',
 			category_id: '',
 		} } >
-			<Input label="Number" name="number" />
-			<Input label="Extension" name="extension" />
+			<TextInput label="Number" name="number" />
+			<TextInput label="Extension" name="extension" />
 		</DynamicInputs>
 	)
 }

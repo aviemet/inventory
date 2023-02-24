@@ -1,15 +1,16 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	Submit,
 } from '@/Components/Form'
 import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface ICompanyFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	company: Partial<Schema.Company>
 }
 
@@ -22,7 +23,7 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: ICompanyFormPro
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Company Name" required autoFocus />
+			<TextInput name="name" label="Company Name" required autoFocus />
 
 			<ContactForm contact={ company.contact } />
 

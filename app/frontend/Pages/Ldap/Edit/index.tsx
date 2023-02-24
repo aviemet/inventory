@@ -1,5 +1,5 @@
 import { Heading, Page, Section } from '@/Components'
-import { Form, Input, Submit } from '@/Components/Form'
+import { Form, TextInput, Submit, PasswordInput } from '@/Components/Form'
 import { Routes } from '@/lib'
 import React from 'react'
 
@@ -24,21 +24,21 @@ const EditLdap = ({ ldap }: ISettingsProps) => {
 					to={ Routes.ldap(ldap) }
 					method={ 'patch' }
 				>
-					<Input label="Host" name="host" />
+					<TextInput label="Host" name="host" />
 
-					<Input label="Port" name="port" />
+					<TextInput label="Port" name="port" />
 
-					<Input label="Domain" name="domain" />
+					<TextInput label="Domain" name="domain" />
 
-					<Input label="Username" name="username" />
+					<TextInput label="Username" name="username" />
 
-					<Input label="Password" name="password" type="password" />
+					<PasswordInput label="Password" name="password" />
 
-					<Input label="Tree Base" name="tree_base" />
+					<TextInput label="Tree Base" name="tree_base" />
 
-					<Input label="Search Path" name="user_search" />
+					<TextInput label="Search Path" name="user_search" />
 
-					<Input label="Sync Interval" name="sync_interval" />
+					<TextInput label="Sync Interval" name="sync_interval" />
 
 					<Submit>Save LDAP Settings</Submit>
 

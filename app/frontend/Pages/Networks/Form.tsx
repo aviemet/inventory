@@ -1,15 +1,16 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	Textarea,
 	Submit,
 } from '@/Components/Form'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface INetworkFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	network: Schema.Network
 }
 
@@ -22,17 +23,17 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network }: INetworkFormPro
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
-			<Input name="vlan_id" label="VLAN ID" />
+			<TextInput name="vlan_id" label="VLAN ID" />
 
-			<Input name="address" label="Network Addres" placeholder="e.g. 192.168.1.0/24" required />
+			<TextInput name="address" label="Network Addres" placeholder="e.g. 192.168.1.0/24" required />
 
-			<Input name="gateway" label="Gateway Addres" placeholder="e.g. 192.168.1.1" />
+			<TextInput name="gateway" label="Gateway Addres" placeholder="e.g. 192.168.1.1" />
 
-			<Input name="dhcp_start" label="DHCP Start" placeholder="e.g. 192.168.1.100" />
+			<TextInput name="dhcp_start" label="DHCP Start" placeholder="e.g. 192.168.1.100" />
 
-			<Input name="dhcp_end" label="DHCP End" placeholder="e.g. 192.168.1.254" />
+			<TextInput name="dhcp_end" label="DHCP End" placeholder="e.g. 192.168.1.254" />
 
 			<Textarea name="notes" label="Notes" />
 

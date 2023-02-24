@@ -8,21 +8,21 @@ export interface ICheckboxProps extends CheckboxProps {
 const CheckboxComponent = ({ onChange, value, id, name, label, ...props }: ICheckboxProps) => {
 	const inputId = id ?? name
 
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if(onChange) onChange(e)
+	}
+
 	return (
 		<>
 			<Checkbox
+				id={ inputId }
 				label={ label }
 				name={ name }
-				id={ inputId }
 				value={ value }
+				onChange={ handleChange }
 				required={ props.required }
-				onChange={ e => {
-					if(onChange) onChange(e)
-				} }
 				{ ...props }
-				sx={ theme => ({
-  				padding: '14px 10px 5px 10px',
-				}) }
+				sx={ { padding: '14px 10px 5px 10px' } }
 			/>
 		</>
 	)

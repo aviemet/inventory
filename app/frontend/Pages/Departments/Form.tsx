@@ -1,11 +1,12 @@
 import React from 'react'
-import { Form, Input, Textarea, Submit } from '@/Components/Form'
+import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
 import { LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface IDepartmentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	department?: Partial<Schema.Department>
 	locations: Schema.Location[]
 }
@@ -25,7 +26,7 @@ const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepar
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
 			<LocationsDropdown locations={ locations } />
 

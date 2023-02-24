@@ -1,18 +1,19 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	RichText,
 	Submit,
 	SearchableDropdown,
 	DynamicInputs,
 	FieldsFor,
 } from '@/Components/Form'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface ITicketFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	ticket: Schema.Ticket
 	people: Schema.Person[]
 }
@@ -28,17 +29,17 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFo
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="subject" label="Subject" required autoFocus />
+			<TextInput name="subject" label="Subject" required autoFocus />
 
 			<FieldsFor model="assignments" >
-				<DynamicInputs label="Assignees" emptyData={ { id: '' } }>{ i => (
+				<DynamicInputs label="Assignees" emptyData={ { id: '' } }>
 					<SearchableDropdown
 						options={ people }
 						label="Assign To"
-						name={ `[${i}]person_id` }
+						name="person_id"
 						disabledOptions={ (label, value) => assigneeIds.includes(Number(value)) }
 					/>
-				) }</DynamicInputs>
+				</DynamicInputs>
 			</FieldsFor>
 
 			<SearchableDropdown

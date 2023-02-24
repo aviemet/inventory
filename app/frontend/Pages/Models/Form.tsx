@@ -2,16 +2,17 @@ import React from 'react'
 import ManufacturersDropdown from '../../Components/Form/Dropdowns/ManufacturersDropdown'
 import {
 	Form,
-	Input,
+	TextInput,
 	Textarea,
 	SearchableDropdown,
 	Submit,
 } from '@/Components/Form'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface IModelFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	model?: Partial<Schema.Model>
 	categories: Schema.Category[]
 	manufacturers: Schema.Manufacturer[]
@@ -33,9 +34,9 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categori
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
-			<Input name="model_number" label="Model Number" required />
+			<TextInput name="model_number" label="Model Number" required />
 
 			<ManufacturersDropdown
 				manufacturers={ manufacturers }

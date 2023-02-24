@@ -2,10 +2,8 @@ import React from 'react'
 import cx from 'clsx'
 import { Box, BoxProps } from '@mantine/core'
 
-interface IFieldProps extends BoxProps {
-interface IFieldProps extends BoxProps {
+export interface IFieldProps extends BoxProps {
 	children: React.ReactNode
-	type?: TInputType
 	type?: TInputType
 	required?: boolean
 	errors?: boolean
@@ -13,7 +11,6 @@ interface IFieldProps extends BoxProps {
 
 const Field = ({ children, type, required = false, errors = false, className, ...props }: IFieldProps) => {
 	return (
-		<Box
 		<Box
 			className={ cx(
 				'field',
@@ -27,7 +24,6 @@ const Field = ({ children, type, required = false, errors = false, className, ..
 			{ ...props }
 		>
 			{ children }
-		</Box>
 		</Box>
 	)
 }

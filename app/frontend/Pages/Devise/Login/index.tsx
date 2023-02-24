@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
-import { Form, Field, Input, Checkbox, Submit } from '@/Components/Form'
+import { Form, Field, TextInput, PasswordInput, Checkbox, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
+import { type UseFormProps } from 'use-inertia-form'
 
 const Login = () => {
 	const emailInputRef = useRef<HTMLInputElement>(null)
@@ -14,7 +15,7 @@ const Login = () => {
 		},
 	}
 
-	const handleSubmit = ({ data }: Inertia.FormProps) => {
+	const handleSubmit = ({ data }: UseFormProps) => {
 		if(data.user.email === '' || data.user.password === '') {
 			emailInputRef.current!.focus()
 			return false
@@ -31,7 +32,7 @@ const Login = () => {
 					</div>
 
 					<Field>
-						<Input
+						<TextInput
 							name="email"
 							placeholder="Email"
 							autoFocus
@@ -43,9 +44,8 @@ const Login = () => {
 					</Field>
 
 					<Field>
-						<Input
+						<PasswordInput
 							name="password"
-							type="password"
 							placeholder="Password"
 							autoComplete="current-password"
 							required

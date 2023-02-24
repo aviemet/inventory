@@ -1,8 +1,9 @@
 import React from 'react'
-import { Form, Input, Submit, Field } from '@/Components/Form'
+import { Form, TextInput, PasswordInput, Submit, Field } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 import { usePage } from '@inertiajs/react'
+import { type UseFormProps } from 'use-inertia-form'
 
 const firstRun = {
 	heading: 'Create Admin User',
@@ -17,11 +18,11 @@ const register = {
 const Register = () => {
 	const { props } = usePage()
 
-	const handleFormChange = ({ data }: Inertia.FormProps) => {
+	const handleFormChange = ({ data }: UseFormProps) => {
 		// console.log({ data })
 	}
 
-	const handlePasswordChange = (value: string|number, { data, errors, clearErrors }: Inertia.FormProps) => {
+	const handlePasswordChange = (value: string|number, { data, errors, clearErrors }: UseFormProps) => {
 		if(errors['user.password'] || errors['user.password_confirmation']) {
 			if(data.user.password === data.user.password_confirmation) {
 				clearErrors('user.password', 'user.password_confirmation')
@@ -29,14 +30,14 @@ const Register = () => {
 		}
 	}
 
-	const handleSubmit = ({ data, setError, errors, transform }: InertiaFormProps) => {
+	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps) => {
 		if(data.user.password !== data.user.password_confirmation) {
 			setError('user.password_confirmation', 'Passwords must match')
 			return false
 		}
 	}
 
-	const handleEmailBlur = (value: string|number, form: Inertia.FormProps) => {
+	const handleEmailBlur = (value: string|number, form: UseFormProps) => {
 		// console.log({ value, form })
 	}
 
@@ -67,7 +68,7 @@ const Register = () => {
 					</div>
 
 					<Field>
-						<Input
+						<TextInput
 							name="email"
 							placeholder="Email"
 							autoFocus
@@ -78,9 +79,8 @@ const Register = () => {
 					</Field>
 
 					<Field>
-						<Input
+						<PasswordInput
 							name="password"
-							type="password"
 							placeholder="Password"
 							autoComplete="new-password"
 							required
@@ -89,9 +89,8 @@ const Register = () => {
 					</Field>
 
 					<Field>
-						<Input
+						<PasswordInput
 							name="password_confirmation"
-							type="password"
 							placeholder="Confirm Password"
 							autoComplete="new-password"
 							required

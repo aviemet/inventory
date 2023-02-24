@@ -1,15 +1,16 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	Textarea,
 	Submit,
 } from '@/Components/Form'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface IStatusLabelFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	status_label: Schema.StatusLabel
 }
 
@@ -23,7 +24,7 @@ const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label }: IStatu
 			onSubmit={ onSubmit }
 		>
 
-			<Input name="name" label="Status Name" required autoFocus />
+			<TextInput name="name" label="Status Name" required autoFocus />
 
 			<Textarea name="description" label="Description" />
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	Textarea,
 	SearchableDropdown,
 	DateTime,
@@ -9,11 +9,12 @@ import {
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
 import { CategoriesDropdown } from '@/Components/Form/Dropdowns'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface IContractFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	contract: Schema.Contract
 	vendors: Schema.Vendor[]
 	categories: Schema.Category[]
@@ -28,9 +29,9 @@ const ContractForm = ({ to, method = 'post', onSubmit, contract, vendors, catego
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
-			<Input name="number" label="Number" required />
+			<TextInput name="number" label="Number" required />
 
 			<DateTime name="begins_at" label="Contract Start" />
 

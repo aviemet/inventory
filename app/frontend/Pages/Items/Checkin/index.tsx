@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, Input, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
+import { DateTime, Form, TextInput, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
 import { LocationsDropdown } from '@/Components/Form/Dropdowns'
 import { createStyles } from '@mantine/core'
 
@@ -66,7 +66,7 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 					method="patch"
 					model="assignment"
 				>
-					<Input
+					<TextInput
 						model="item"
 						name="name"
 						label="Item Name"

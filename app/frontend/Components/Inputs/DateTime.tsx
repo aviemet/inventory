@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import Flatpickr, { type DateTimePickerProps } from 'react-flatpickr'
 import labelPlugin from 'flatpickr/dist/plugins/labelPlugin/labelPlugin'
 import { Box, Input } from '@mantine/core'
@@ -13,7 +13,10 @@ export interface IDateTimeProps extends Omit<DateTimePickerProps, 'onChange'|'si
 	error?: string | string[]
 }
 
-const DateTime = ({ label, name, required, value, onChange, type = 'text', id, ...props }: IDateTimeProps) => {
+const DateTime = forwardRef<Flatpickr, IDateTimeProps>((
+	{ label, name, required, value, onChange, type = 'text', id, ...props },
+	ref,
+) => {
 	const handleChange = (dates: Date[], dateStr: string, instance: Flatpicker.Instance) => {
 		if(onChange) onChange({ dates, dateStr, instance })
 	}
@@ -27,6 +30,7 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 
 			} }>
 				<Flatpickr
+					id={ id }
 	        data-enable-time
 					name={ name }
 					required={ required }
@@ -36,16 +40,16 @@ const DateTime = ({ label, name, required, value, onChange, type = 'text', id, .
 						altInput: true,
 						plugins: [labelPlugin()],
 					} }
-					id={ id }
 					render={
 						({ defaultValue, value, ...props }, ref) => {
 							return <Input defaultValue={ defaultValue } ref={ ref } size="md" { ...props } />
 						}
 					}
+					ref={ ref }
 				/>
 			</Box>
 		</>
 	)
-}
+})
 
 export default DateTime

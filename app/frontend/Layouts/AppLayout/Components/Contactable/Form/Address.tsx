@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Flex } from '@/Components'
-import { FormGroup, Input } from '@/Components/Form'
+import { FormGroup, TextInput } from '@/Components/Form'
 import { PlusCircleIcon, MinusCircleIcon } from '@/Components/Icons'
 
 const Address = () => {
@@ -32,21 +32,21 @@ const Address = () => {
 			{ Array(addressCount).fill('').map((_, i) => (
 				<FormGroup key={ i }>
 					<Flex>
-						<Input name="type" label="Type" compact />
+						<TextInput name="type" label="Type" compact />
 
-						<Input name="country" label="Country" compact />
+						<TextInput name="country" label="Country" compact />
 					</Flex>
 
-					<Input name={ `address_${i}` } label="Address" compact />
+					<TextInput name={ `address_${i}` } label="Address" compact />
 
-					<Input name="address_2" label="Address 2" compact />
+					<TextInput name="address_2" label="Address 2" compact />
 
 					<Flex>
-						<Input name="city" label="City" compact />
+						<TextInput name="city" label="City" compact />
 
-						<Input name="region" label="State" compact />
+						<TextInput name="region" label="State" compact />
 
-						<Input name="postal" label="Zip/Post" compact />
+						<TextInput name="postal" label="Zip/Post" compact />
 					</Flex>
 
 					<Button onClick={ removeInputGroup } sx={ {

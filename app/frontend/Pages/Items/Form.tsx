@@ -1,7 +1,8 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
+	CurrencyInput,
 	Textarea,
 	Checkbox,
 	DateTime,
@@ -33,7 +34,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 			onSubmit={ onSubmit }
 		>
 
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Item Details">
 				<ModelsDropdown
@@ -42,15 +43,15 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					categories={ categories }
 				/>
 
-				<Input name="serial" label="Serial" />
+				<TextInput name="serial" label="Serial" />
 
-				<Input name="asset_tag" label="Asset Tag" />
+				<TextInput name="asset_tag" label="Asset Tag" />
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
 				<VendorsDropdown vendors={ vendors } />
 
-				<Input name="cost" label="Cost" type="currency" />
+				<CurrencyInput name="cost" label="Cost" />
 
 				<DateTime label="Purchased At" name="purchased_at" />
 			</FormGroup>

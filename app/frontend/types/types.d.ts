@@ -1,6 +1,6 @@
 import { Instance } from 'flatpickr/dist/types'
 import { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
-import { type SelectProps } from '@mantine/core'
+import { type SelectProps, type InputProps } from '@mantine/core'
 
 declare global {
 	type HTTPVerb = 'post' | 'put' | 'get' | 'patch' | 'delete'
@@ -137,13 +137,22 @@ declare global {
 
 	type FlashMessage = Record<'success' | 'alert' | 'info' | 'warning', string>
 
-	declare namespace Flatpicker {
-		export interface Instance extends Instance { }
-		export interface ChangeProps {
-			dates: Date[]
-			dateStr: string
-			instance: Instance
-		}
+	// Inputs
+
+	interface IInputProps<T> extends Omit<InputProps, 'onChange'> {
+		label?: string
+		placeholder?: string
+		name: string
+		model?: string
+		onChange?: (value: T, form: UseFormProps) => void
+		onBlur?: (value: T, form: UseFormProps) => void
+		pattern?: string
+		id?: string
+		compact?: boolean
+		autoFocus?: boolean
+		autoComplete?: string
+		min?: number
+		max?: number
 	}
 
 	interface IDropdownWithModalButton {
@@ -152,6 +161,15 @@ declare global {
 		label?: string
 		fetchOnOpen?: string
 		required?: boolean
+	}
+
+	declare namespace Flatpicker {
+		export interface Instance extends Instance { }
+		export interface ChangeProps {
+			dates: Date[]
+			dateStr: string
+			instance: Instance
+		}
 	}
 }
 

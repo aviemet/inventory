@@ -1,18 +1,19 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	Textarea,
 	Checkbox,
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface IComponentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	component: Schema.Component
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
@@ -30,7 +31,7 @@ const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendo
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Component Details">
 				<ModelsDropdown
@@ -39,19 +40,19 @@ const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendo
 					categories={ categories }
 				/>
 
-				<Input name="serial" label="Serial" />
+				<TextInput name="serial" label="Serial" />
 
-				<Input name="asset_tag" label="Asset Tag" />
+				<TextInput name="asset_tag" label="Asset Tag" />
 
-				<Input name="qty" label="Quantity" />
+				<TextInput name="qty" label="Quantity" />
 
-				<Input name="min_qty" label="Minimum Quantity" />
+				<TextInput name="min_qty" label="Minimum Quantity" />
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
 				<VendorsDropdown vendors={ vendors } />
 
-				<Input name="cost" label="Cost" />
+				<TextInput name="cost" label="Cost" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">

@@ -1,6 +1,6 @@
 import React from 'react'
-import Field from './Field'
-import RichTextInput, { type IRichTextProps } from '../Inputs/RichText'
+import Field from '../Field'
+import RichTextInput, { type IRichTextProps } from '../../Inputs/RichText'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
 
@@ -8,8 +8,8 @@ interface IRichTextFormProps extends IRichTextProps {
 	model?: string
 }
 
-const RichText = ( { label, name, required = false, id, onChange, model, ...props }: IRichTextFormProps) => {
-	const { inputName, inputId, value, setValue, error } = useInertiaInput({ name, model })
+const RichText = ({ label, name, required = false, id, onChange, model, ...props }: IRichTextFormProps) => {
+	const { inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
 
 	const handleChange: typeof onChange = (v, delta, sources, editor) => {
 		setValue(v)

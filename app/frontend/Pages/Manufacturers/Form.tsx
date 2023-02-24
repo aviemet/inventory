@@ -1,14 +1,15 @@
 import React from 'react'
 import {
 	Form,
-	Input,
+	TextInput,
 	Submit,
 } from '@/Components/Form'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface IManufacturerFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	manufacturer?: Partial<Schema.Manufacturer>
 }
 
@@ -25,7 +26,7 @@ const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer = emptyM
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<Input name="name" label="Name" required autoFocus />
+			<TextInput name="name" label="Name" required autoFocus />
 
 			<Submit>
 				{ manufacturer.id ? 'Update' : 'Create' } Manufacturer
