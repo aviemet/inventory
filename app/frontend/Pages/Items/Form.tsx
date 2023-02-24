@@ -9,11 +9,12 @@ import {
 	FormGroup,
 } from '@/Components/Form'
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { type UseFormProps } from 'use-inertia-form'
 
 export interface IItemFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: Inertia.FormProps) => boolean|void
+	onSubmit?: (object: UseFormProps) => boolean|void
 	item: Partial<Schema.Item>
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]

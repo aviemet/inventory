@@ -1,27 +1,26 @@
 import React, { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import { Button } from '@/Components'
-import { useForm } from './Form'
+import { Submit as SubmitButton } from 'use-inertia-form'
 import { Box, type ButtonProps } from '@mantine/core'
 
 const Submit = forwardRef<HTMLButtonElement, ButtonProps>((
 	{ children, ...props },
 	ref,
 ) => {
-	const { processing } = useForm()
-
 	return (
 		<Box className="submit">
-			<Button
-				type="submit"
-				disabled={ processing }
+			<SubmitButton
+				component={ <Button /> }
+				ref={ ref }
 				sx={ { width: '100%' } }
 				{ ...props }
-				ref={ ref }
 			>
 				{ children }
-			</Button>
+			</SubmitButton>
 		</Box>
 	)
+})
 })
 
 export default Submit

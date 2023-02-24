@@ -1,34 +1,12 @@
-import React, { useEffect } from 'react'
-import { createContext } from '../Hooks'
-import { useFormMeta } from './Form'
+import React from 'react'
 import FormGroup from './FormGroup'
+import { NestedFields, NestedFieldsProps } from 'use-inertia-form'
 
-interface IFieldsForProps {
-	children: React.ReactNode
-	model: string
-}
-
-const [useNestedAttribute, NestedAttributeProvider] = createContext<string>()
-export { useNestedAttribute }
-
-const FieldsFor = ({ children, model }: IFieldsForProps) => {
-	let inputModel = model
-
-	try {
-		const nested = useNestedAttribute()
-		inputModel = `${nested}.${model}`
-	} catch(e) {}
-
-	const { addAttribute } = useFormMeta()
-
-	useEffect(() => {
-		addAttribute(model)
-	}, [])
-
+const FieldsFor = ({ children, model }: NestedFieldsProps) => {
 	return (
-		<NestedAttributeProvider value={ inputModel }>
+		<NestedFields model={ model }>
 			<FormGroup className="fields_for">{ children }</FormGroup>
-		</NestedAttributeProvider>
+		</NestedFields>
 	)
 }
 
