@@ -49,7 +49,7 @@ const CompleteRegistration = () => {
 
 						<TextInput name="name" model="company" placeholder="Company Name" />
 
-						<p>If you will be tracking assets owned by multiple companies, enter the primary entity here, you&apos;ll have the opporutnity to create other companies later.</p>
+						<p>If you will be tracking assets owned by multiple companies, enter the primary entity here, you&apos;ll have the opportunity to create other companies later.</p>
 					</Field>
 
 					<Field>

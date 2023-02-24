@@ -2351,9 +2351,7 @@ __metadata:
   resolution: "@inertiajs/core@npm:1.0.2"
   dependencies:
     axios: ^1.2.0
-    axios: ^1.2.0
     deepmerge: ^4.0.0
-    nprogress: ^0.2.0
     nprogress: ^0.2.0
     qs: ^6.9.0
   checksum: 98240f40b06454601a4aaaa997c73b871578d05ce1e3978ab874064cff6ad94cb278a5b3b4034ac10bf7d78e4926c4850f69f31b29e488b71ac33f4dc0c066cc
@@ -3289,22 +3287,6 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
   checksum: fcdc8cfa79bd45766ebe3de11039c58abe3fed968cb39c12b2efce5d88013c76fe096ea4cee464d42576d02fe7697779b682b4268459bca3c4e48644f5b4ac5e
-  languageName: node
-  linkType: hard
-
-"@rollup/plugin-terser@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@rollup/plugin-terser@npm:0.4.0"
-  dependencies:
-    serialize-javascript: ^6.0.0
-    smob: ^0.0.6
-    terser: ^5.15.1
-  peerDependencies:
-    rollup: ^2.x || ^3.x
-  peerDependenciesMeta:
-    rollup:
-      optional: true
-  checksum: 0988472b3cd15756cd8d630a7f133526167d4226f47608a12e7d6744f59f23704170a064213efc1a4286636c206c3e1528de0e944e48d28ab98cc84ee09fa480
   languageName: node
   linkType: hard
 
@@ -10327,7 +10309,6 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.15.0":
-"follow-redirects@npm:^1.15.0":
   version: 1.15.2
   resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
@@ -11596,7 +11577,7 @@ __metadata:
     tabler-icons-react: ^1.56.0
     ts-jest: ^29.0.5
     typescript: ^4.9.5
-    use-inertia-form: ^1.0.3
+    use-inertia-form: ^1.0.4
     vite: ^4.1.4
     vite-plugin-dynamic-import: ^1.2.7
     vite-plugin-ruby: ^3.1.3
@@ -15794,13 +15775,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proxy-from-env@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "proxy-from-env@npm:1.1.0"
-  checksum: ed7fcc2ba0a33404958e34d95d18638249a68c430e30fcb6c478497d72739ba64ce9810a24f53a7d921d0c065e5b78e3822759800698167256b04659366ca4d4
-  languageName: node
-  linkType: hard
-
 "prr@npm:~1.0.1":
   version: 1.0.1
   resolution: "prr@npm:1.0.1"
@@ -17296,13 +17270,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"smob@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "smob@npm:0.0.6"
-  checksum: 360b8b72896974411ec6ca9a352b306bd4233aea44309dbebaeb41fc822cf770b094589e42a8a025ae291f043cbfc4199fc01dd909e45c7bd3c23d287c7e5bac
-  languageName: node
-  linkType: hard
-
 "snapdragon-node@npm:^2.0.1":
   version: 2.1.1
   resolution: "snapdragon-node@npm:2.1.1"
@@ -18156,7 +18123,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.14.1, terser@npm:^5.15.1, terser@npm:^5.3.4":
+"terser@npm:^5.14.1, terser@npm:^5.3.4":
   version: 5.16.5
   resolution: "terser@npm:5.16.5"
   dependencies:
@@ -18994,17 +18961,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-inertia-form@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "use-inertia-form@npm:1.0.3"
+"use-inertia-form@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "use-inertia-form@npm:1.0.4"
   dependencies:
     "@inertiajs/react": ^1.0.2
-    "@rollup/plugin-terser": ^0.4.0
     lodash: ^4.17.21
   peerDependencies:
     "@inertiajs/react": ^1.0.0
     react: ^16.8.0
-  checksum: 448661f26caefeed5acd131c11592001ea63832906ebe25c6edaae52003ff4ed47bf907469c7315de5e47b72228e9f5fa354456618a7bfdf8df96b1d4a943730
+  checksum: 2f672a1ffeffb109edabba17f663e87012b895654bf2364037c1ed2a877ccb748591b25ad69ee8903f7e3b7e0218cdb779041222b412d8d93222fcde89851bfc
   languageName: node
   linkType: hard
 
