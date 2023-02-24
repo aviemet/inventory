@@ -8375,6 +8375,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cz-git@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "cz-git@npm:1.5.0"
+  checksum: 3b53a85f9bb166bcd627bce8434852b30e038f10999f1127a21c6845d54b9fb8f9b45bb4cf84d4b74132acd3e6f3edfd37fe5581dc47ad77afcf31d24a745523
+  languageName: node
+  linkType: hard
+
 "damerau-levenshtein@npm:^1.0.8":
   version: 1.0.8
   resolution: "damerau-levenshtein@npm:1.0.8"
@@ -11486,6 +11493,7 @@ __metadata:
     classnames: ^2.3.2
     commitizen: ^4.3.0
     cz-conventional-changelog: ^3.3.0
+    cz-git: ^1.5.0
     date-fns: ^2.29.3
     dayjs: ^1.11.7
     dinero.js: ^1.9.1

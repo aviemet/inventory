@@ -82,6 +82,7 @@
     "babel-plugin-styled-components": "^2.0.7",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "cz-git": "^1.5.0",
     "eslint": "^8.34.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-better-styled-components": "^1.1.2",
@@ -112,7 +113,8 @@
   ],
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "./node_modules/cz-git",
+      "useEmoji": true
     }
   }
 }
