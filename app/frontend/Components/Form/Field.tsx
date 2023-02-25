@@ -15,10 +15,8 @@ const Field = ({ children, type, required = false, errors = false, className, ..
 			className={ cx(
 				'field',
 				{ [String(type)]: type },
-				{ [String(type)]: type },
 				{ 'required': required },
 				{ 'field_with_errors': errors },
-				className,
 				className,
 			) }
 			{ ...props }
