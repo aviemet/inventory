@@ -16,7 +16,7 @@ class TicketMessagesController < ApplicationController
 
   # PATCH/PUT /tickets/:ticket_id/messages/:id
   def update
-    if ticket_message.update(ticket_params)
+    if ticket_message.update(ticket_message_params)
       redirect_to ticket, notice: 'Message was successfully updated'
     else
       redirect_to ticket, inertia: { errors: ticket.errors }
