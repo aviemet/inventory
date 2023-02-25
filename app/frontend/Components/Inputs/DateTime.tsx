@@ -1,55 +1,31 @@
-import React, { forwardRef } from 'react'
-import Flatpickr, { type DateTimePickerProps } from 'react-flatpickr'
-import labelPlugin from 'flatpickr/dist/plugins/labelPlugin/labelPlugin'
-import { Box, Input } from '@mantine/core'
-
-import 'flatpickr/dist/themes/material_green.css'
+import React from 'react'
+import { type InputProps } from '@mantine/core'
+import { DateTimePicker } from 'mantine-dates-6'
 import Label from './Label'
 
-export interface IDateTimeProps extends Omit<DateTimePickerProps, 'onChange'|'size'> {
+export interface IDateTimeProps extends InputProps {
 	label?: string
 	name?: string
-	onChange?: (values: Flatpicker.ChangeProps) => void
+	id?: string
+	value?: Date
+	onChange?: (value: Date) => void
 	error?: string | string[]
 }
 
-const DateTime = forwardRef<Flatpickr, IDateTimeProps>((
-	{ label, name, required, value, onChange, type = 'text', id, ...props },
-	ref,
-) => {
-	const handleChange = (dates: Date[], dateStr: string, instance: Flatpicker.Instance) => {
-		if(onChange) onChange({ dates, dateStr, instance })
-	}
-
+const DateTime = ({ label, id, required, value = new Date(), size = 'md', radius = 'xs', ...props }: IDateTimeProps) => {
 	return (
 		<>
 			{ label && <Label required={ required } htmlFor={ id }>
 				{ label }
 			</Label> }
-			<Box sx={ {
-
-			} }>
-				<Flatpickr
-					id={ id }
-	        data-enable-time
-					name={ name }
-					required={ required }
-					onChange={ handleChange }
-					value={ value }
-					options={ {
-						altInput: true,
-						plugins: [labelPlugin()],
-					} }
-					render={
-						({ defaultValue, value, ...props }, ref) => {
-							return <Input defaultValue={ defaultValue } ref={ ref } size="md" { ...props } />
-						}
-					}
-					ref={ ref }
-				/>
-			</Box>
+			<DateTimePicker
+				defaultValue={ new Date() }
+				radius={ radius }
+				size={ size }
+				{ ...props }
+			/>
 		</>
 	)
-})
+}
 
 export default DateTime

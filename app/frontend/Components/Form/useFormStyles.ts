@@ -37,6 +37,8 @@ export default createStyles((theme) => ({
 			},
 
 			label: {
+				display: 'block',
+
 				'&.text': {
 					textAlign: 'left',
 					width: '100%',
@@ -55,13 +57,13 @@ export default createStyles((theme) => ({
 				'&:not(.textarea, .compact)': {
 					borderTopWidth: 0,
 					borderLeftWidth: 0,
-				},
 
-				'& > label, & > legend': {
-					flex: '1 1 0%',
-					textAlign: 'right',
-					maxWidth: theme.other.form.label.width,
-					gridRowStart: 'span 2',
+					'& > label, & > legend': {
+						flex: '1 1 0%',
+						textAlign: 'right',
+						maxWidth: theme.other.form.label.width,
+						gridRowStart: 'span 2',
+					},
 				},
 			},
 		},
