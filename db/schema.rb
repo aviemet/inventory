@@ -471,8 +471,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
     t.bigint "status_id"
     t.bigint "primary_contact_id"
     t.bigint "created_by_id"
+    t.bigint "asset_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_tickets_on_asset_id"
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
     t.index ["primary_contact_id"], name: "index_tickets_on_primary_contact_id"
     t.index ["status_id"], name: "index_tickets_on_status_id"
@@ -593,6 +595,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
   add_foreign_key "ticket_messages", "people", column: "created_by_id"
   add_foreign_key "ticket_messages", "ticket_messages", column: "parent_id"
   add_foreign_key "ticket_messages", "tickets"
+  add_foreign_key "tickets", "assets"
   add_foreign_key "tickets", "people", column: "created_by_id"
   add_foreign_key "tickets", "people", column: "primary_contact_id"
   add_foreign_key "tickets", "ticket_statuses", column: "status_id"

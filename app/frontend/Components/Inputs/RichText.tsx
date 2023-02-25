@@ -15,7 +15,12 @@ const RichText = ( { label, name, required = false, id, ...props }: IRichTextPro
 			{ label && <Label required={ required } htmlFor={ id }>
 				{ label }
 			</Label> }
-			<RichTextEditor id={ id } { ...props } />
+			<RichTextEditor id={ id } { ...props } sx={ {
+				minHeight: '500px',
+				'.quill': {
+					height: '100%',
+				},
+			} } />
 		</>
 	)
 }

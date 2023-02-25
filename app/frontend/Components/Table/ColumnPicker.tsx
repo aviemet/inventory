@@ -9,7 +9,7 @@ import { useTableContext } from './TableContext'
 import { Button } from '@mantine/core'
 
 const ColumnPicker = () => {
-	const { auth: { user } } = usePage().props as SharedInertiaProps
+	const { auth: { user } } = usePage<SharedInertiaProps>().props
 	const { tableState: { hideable, columns, model } } = useTableContext()
 
 	if(!hideable || !model) return <></>

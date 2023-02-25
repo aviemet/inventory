@@ -16,7 +16,7 @@ const RowInContext = forwardRef<HTMLTableRowElement, IRowInContextProps>((
 	{ children, name, rows, selectable, selected, ...props },
 	ref,
 ) => {
-	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
+	const { props: { auth: { user: { table_preferences } } } } = usePage<SharedInertiaProps>()
 	const { tableState: { model, columns } } = useTableContext()
 
 	return (

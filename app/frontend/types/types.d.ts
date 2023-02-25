@@ -76,6 +76,9 @@ declare global {
 		interface Phone extends UID { }
 		interface Purchase extends UID { }
 		interface Role extends UID { }
+		interface Ticket extends UID {
+			asset?: Asset
+		}
 		interface StatusType extends UID { }
 		interface User extends UID { }
 		interface Vendor extends UID { }

@@ -2,6 +2,7 @@ class TicketBlueprint < ApplicationBlueprint
   fields :subject,
          :description,
          :primary_contact_id,
+         :asset_id,
          :created_at,
          :updated_at
 
@@ -9,6 +10,7 @@ class TicketBlueprint < ApplicationBlueprint
     association :messages, blueprint: TicketMessageBlueprint
     association :created_by, blueprint: PersonBlueprint
     association :primary_contact, blueprint: PersonBlueprint
+    association :asset, blueprint: AssetBlueprint
     association :assignees, blueprint: PersonBlueprint
     association :status, blueprint: TicketStatusBlueprint
   end

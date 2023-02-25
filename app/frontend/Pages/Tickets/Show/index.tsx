@@ -1,5 +1,6 @@
 import React from 'react'
-import { Badge, Box, Heading, Page, Section } from '@/Components'
+import { Badge, Box, Heading, Link, Page, Section } from '@/Components'
+import TicketMessage from './TicketMessage'
 import DangerousHtml from '@/Components/DangerousHtml'
 import { Form, RichText, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
@@ -18,16 +19,27 @@ const ShowTicket = ({ ticket }: IShowTicketProps) => {
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>
-				{ ticket.assignees && ticket.assignees.map(assignee => <Box key={ assignee.id }>
-					Assigned To: <Badge>{ assignee.name }</Badge>
-				</Box>) }
+				<Box>
+					Primary Contact:&nbsp;
+					{ ticket.primary_contact && <Link href={ Routes.person(ticket.primary_contact.id ) }>{ ticket.primary_contact.name }</Link> }
+				</Box>
+				<Box>
+					Assigned To:&nbsp;
+					{ ticket.assignees && ticket.assignees.map(assignee => <Badge key={ assignee.id }>{ assignee.name }</Badge>) }
+				</Box>
+
+				{ ticket.asset && <Box>
+					Asset:&nbsp;
+					<Link href={ Routes.asset(ticket.asset.id) }>{ ticket.asset.name }</Link>
+				</Box> }
+			</Section>
+
+			<Section>
 				<DangerousHtml>{ ticket.description }</DangerousHtml>
 			</Section>
 
 			{ ticket.messages?.map(message => (
-				<Section key={ message.id }>
-					<DangerousHtml>{ message.body }</DangerousHtml>
-				</Section>
+				<TicketMessage key={ message.id } message={ message } />
 			)) }
 
 			<Section>

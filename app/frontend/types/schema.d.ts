@@ -801,6 +801,7 @@ declare namespace Schema {
 		status_id?: number | null;
 		primary_contact_id?: number | null;
 		created_by_id?: number | null;
+		asset_id?: number | null;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
