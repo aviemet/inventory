@@ -16,9 +16,10 @@ export interface ITicketFormProps {
 	onSubmit?: (object: UseFormProps) => boolean|void
 	ticket: Schema.Ticket
 	people: Schema.Person[]
+	assets: Schema.Asset[]
 }
 
-const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFormProps) => {
+const TicketForm = ({ to, method = 'post', onSubmit, ticket, people, assets }: ITicketFormProps) => {
 	const assigneeIds = ticket.assignees?.map(assignee => assignee.id) || []
 
 	return (
@@ -46,6 +47,12 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people }: ITicketFo
 				options={ people }
 				label="Primary Contact"
 				name="primary_contact_id"
+			/>
+
+			<SearchableDropdown
+				options={ assets }
+				label="Asset"
+				name="asset_id"
 			/>
 
 			<RichText name="description" label="Description" />

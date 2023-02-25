@@ -1,7 +1,7 @@
 import React from 'react'
 import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
-import { EditIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
+import { EditIcon, CheckinIcon, CheckoutIcon, TicketsIcon } from '@/Components/Icons'
 import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'
@@ -43,6 +43,10 @@ const ShowItem = ({ item }: IShowItemProps) => {
 							<Menu.Link href={ Routes.editItem(item) } icon={ <EditIcon /> }>
 								Edit Item
 							</Menu.Link>
+
+							<Menu.Divider />
+
+							<Menu.Link href={ Routes.newTicket({ 'ticket.asset_id': item.id }) } icon={ <TicketsIcon /> }>Open New Ticket</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Flex>
