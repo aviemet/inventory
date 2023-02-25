@@ -2,7 +2,6 @@ import React from 'react'
 import Field from '../Field'
 import DateTimeInput, { type IDateTimeProps } from '@/Components/Inputs/DateTime'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
-// import Flatpickr from 'react-flatpickr'
 
 interface IDateTimeFormProps extends Omit<IDateTimeProps, 'name'|'onChange'> {
 	name: string
