@@ -16,7 +16,7 @@ const register = {
 }
 
 const Register = () => {
-	const { props } = usePage()
+	const { props } = usePage<SharedInertiaProps>()
 
 	const handleFormChange = ({ data }: UseFormProps) => {
 		// console.log({ data })

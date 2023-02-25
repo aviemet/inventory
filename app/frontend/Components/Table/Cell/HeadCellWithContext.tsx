@@ -20,7 +20,7 @@ const HeadCellWithContext = ({
 	sx,
 	...props
 }: IHeadCellWithContextProps) => {
-	const { props: { auth: { user: { table_preferences } } } } = usePage<InertiaPage>()
+	const { props: { auth: { user: { table_preferences } } } } = usePage<SharedInertiaProps>()
 	const { tableState: { model } } = useTableContext()
 
 	const thRef = useRef<HTMLTableCellElement>(null)

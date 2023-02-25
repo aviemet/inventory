@@ -8,7 +8,7 @@ import cx from 'clsx'
 import AvatarMenu from './AvatarMenu'
 
 const Topbar = () => {
-	const { props: { auth: { user } } } = usePage<InertiaPage>()
+	const { props: { auth: { user } } } = usePage<SharedInertiaProps>()
 	const { layoutState, setLayoutState } = useLayout()
 
 	return (

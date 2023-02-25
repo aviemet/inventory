@@ -18,12 +18,13 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	tabIndex?: number
 	disabled?: boolean
 	buttonProps?: ButtonProps
+	preserveScroll?: boolean
 }
 
 const externalPrefix = ['http', 'www']
 
 const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', method, visit, external, onProgress, ...props },
+	{ children, href, as = 'a', method, visit, external, onProgress, preserveScroll, ...props },
 	ref,
 ) => {
 	let renderExternal = external
@@ -40,7 +41,7 @@ const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
 		return <ExternalLink href={ href } ref={ ref } { ...onProgress } { ...props }>{ children }</ExternalLink>
 	}
 
-	return <InertiaLink href={ href } as={ as } method={ method } visit={ visit } ref={ ref } { ...onProgress } { ...props }>{ children }</InertiaLink>
+	return <InertiaLink href={ href } as={ as } method={ method } visit={ visit } ref={ ref } preserveScroll={ preserveScroll } { ...onProgress } { ...props }>{ children }</InertiaLink>
 })
 
 export default Link

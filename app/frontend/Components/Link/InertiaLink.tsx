@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react'
-import { Link, router } from '@inertiajs/react'
+import { Link, router, type InertiaLinkProps } from '@inertiajs/react'
 import { Method, Visit } from '@inertiajs/core'
 import { Anchor, type AnchorProps, type ButtonProps } from '@mantine/core'
 import { Button } from '@/Components'
 import { omit } from 'lodash'
 
-interface ILinkProps extends Omit<AnchorProps, 'href'> {
+interface ILinkProps extends Omit<InertiaLinkProps, 'color'|'size'|'span'>, Omit<AnchorProps, 'href'> {
 	children: React.ReactNode
 	href: string
 	as: 'a'|'button'

@@ -16,6 +16,7 @@ class Ticket < ApplicationRecord
   belongs_to :created_by, class_name: "Person", required: false
   belongs_to :status, class_name: "TicketStatus", required: true
   belongs_to :primary_contact, class_name: "Person", required: false
+  belongs_to :asset, required: false
   has_many :assignments, class_name: "TicketAssignment"
   has_many :assignees, through: :assignments, source: :person
   has_many :messages, class_name: "TicketMessage"

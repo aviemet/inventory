@@ -3,7 +3,7 @@ import { usePage } from '@inertiajs/react'
 import { showNotification } from '@mantine/notifications'
 
 const Flash = () => {
-	const { flash } = usePage().props as SharedInertiaProps
+	const { flash } = usePage<SharedInertiaProps>().props
 
 	useEffect(() => {
 		let key: keyof FlashMessage
