@@ -3,7 +3,6 @@ import { useTableContext } from '@/Components/Table/TableContext'
 import { Box, Title, Group, Divider } from '@mantine/core'
 import { Menu } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
-import { Method } from '@inertiajs/core'
 import { router } from '@inertiajs/react'
 import { Routes } from '@/lib'
 
@@ -23,7 +22,7 @@ const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTit
 
 	const deleteRecords = () => {
 		router.visit(Routes.vendors(), {
-			method: Method.DELETE,
+			method: 'delete',
 			data: { ids: Array.from(selected) },
 		})
 	}

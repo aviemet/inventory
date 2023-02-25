@@ -9,7 +9,7 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 		borderTop: `1px solid ${theme.other.colorSchemeOption(theme.colors.gray[2], theme.colors.gray[9])}`,
 	},
 
-	table: {
+	'table': {
 		tableLayout: fixed ? 'fixed' : 'auto',
 		border: theme.other.colorSchemeOption(`1px solid ${theme.colors.gray[2]}`, `1px solid ${theme.colors.gray[9]}`),
 		borderTop: 0,
