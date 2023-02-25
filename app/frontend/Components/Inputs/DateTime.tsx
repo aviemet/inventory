@@ -22,6 +22,7 @@ const DateTime = ({ label, id, required, value = new Date(), size = 'md', radius
 				defaultValue={ new Date() }
 				radius={ radius }
 				size={ size }
+				valueFormat='L LT'
 				{ ...props }
 			/>
 		</>
