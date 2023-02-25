@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
-import Field from './Field'
-import SearchableDropdownInput, { type ISearchableDropdownProps } from '../Inputs/SearchableDropdown'
+import Field from '../Field'
+import SearchableDropdownInput, { type ISearchableDropdownProps } from '../../Inputs/SearchableDropdown'
 import { Flex } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
 import { router } from '@inertiajs/react'

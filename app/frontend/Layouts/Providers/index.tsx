@@ -6,9 +6,7 @@ import SpotlightProvider from './SpotlightProvider'
 
 import './reset.css'
 
-export {
-	useLayout,
-}
+export { useLayout }
 
 interface IProviderProps {
 	children?: React.ReactNode

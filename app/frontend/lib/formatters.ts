@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import dayjs from 'dayjs'
 
 export const currency = (amount: number, currency = 'USD') => {
 	const formatter = new Intl.NumberFormat('en-US', {
@@ -9,10 +9,10 @@ export const currency = (amount: number, currency = 'USD') => {
 }
 
 export const date = {
-	short: (date: string) => format(new Date(date), 'MM/dd/yy'),
-	long: (date: string) => format(new Date(date), 'MM/dd/yy HH:mm:ss'),
+	short: (date: string) => dayjs(new Date(date)).format('MM/DD/YYYY'),
+	long: (date: string) => dayjs(new Date(date)).format('MM/DD/YYYY HH:mm:ss'),
 	relative: (date: string) => {
-		return format(new Date(date), 'MM/dd/yy')
+		return dayjs(new Date(date)).format('MM/DD/YYYY')
 	},
-	english: (date: string) => format(new Date(date), 'MM/dd/yy'),
+	english: (date: string) => dayjs(new Date(date)).format('MM/DD/YYYY'),
 }

@@ -1,5 +1,7 @@
 import { createStyles } from '@mantine/core'
 
+const fieldsetAlphaAdjustment = 0.125
+
 export default createStyles((theme) => ({
 	form: {
 		maxWidth: `${theme.breakpoints.md}px`,
@@ -70,6 +72,33 @@ export default createStyles((theme) => ({
 
 		'button[type=submit]': {
 			marginTop: theme.spacing.xs,
+		},
+
+	},
+
+	fieldset: {
+		marginTop: theme.spacing.xs,
+		padding: 10,
+		position: 'relative',
+		backgroundColor: theme.other.colorSchemeOption(
+			theme.fn.darken(theme.white, fieldsetAlphaAdjustment),
+			theme.fn.lighten(theme.black, fieldsetAlphaAdjustment),
+		),
+		borderTop: `2px solid ${theme.other.colorSchemeOption(theme.white, theme.black)}`,
+
+		'&:has(legend)': {
+			marginTop: '2rem',
+		},
+
+		legend: {
+			position: 'absolute',
+			top: '-1.75rem',
+			display: 'inline-block',
+			color: theme.other.colorSchemeOption(theme.black, theme.white),
+		},
+
+		'.field': {
+			flex: 1,
 		},
 	},
 
