@@ -6,6 +6,11 @@ import { Flash } from '@/Components/Flash'
 import AppLayout from './AppLayout'
 import AuthLayout from './AuthLayout'
 
+import dayjs from 'dayjs'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(localizedFormat)
+
 interface LayoutWrapperProps {
 	children: React.ReactNode
 }
