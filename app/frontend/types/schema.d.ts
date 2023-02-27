@@ -808,6 +808,7 @@ declare namespace Schema {
 		created_by?: Person;
 		status?: TicketStatus;
 		primary_contact?: Person;
+		asset?: Asset;
 		assignments?: TicketAssignment[];
 		assignees?: Person[];
 		messages?: TicketMessage[];

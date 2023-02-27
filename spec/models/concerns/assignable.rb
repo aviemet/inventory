@@ -5,10 +5,22 @@ shared_examples "assignable" do
   end
 
   describe "Assignments" do
-    it "Can be assigned to an assign_toable" do
+    it "Can be assigned to a person" do
       person = build(:person)
       assignment = subject.assign_to(person)
-      expect(assignment.assign_toable_type).to eq("Person")
+      expect(subject.assignments.first).to eq(assignment)
+    end
+
+    it "Can be assigned to an item" do
+      item = build(:item)
+      assignment = subject.assign_to(item)
+      expect(subject.assignments.first).to eq(assignment)
+    end
+
+    it "Can be assigned to a location" do
+      location = build(:location)
+      assignment = subject.assign_to(location)
+      expect(subject.assignments.first).to eq(assignment)
     end
   end
 
