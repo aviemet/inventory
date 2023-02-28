@@ -331,7 +331,7 @@ declare namespace Schema {
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
-		assigned_assets?: Assignment[];
+		possessions?: Assignment[];
 		assets?: Asset[];
 		accessories?: Accessory[];
 		components?: Component[];
@@ -438,9 +438,8 @@ declare namespace Schema {
 		warranty?: Warranty;
 		assignments?: Assignment[];
 		status_label?: StatusLabel;
-		assigned_assets?: Assignment[];
+		possessions?: Assignment[];
 		assets?: Asset[];
-		items?: Item[];
 		accessories?: Accessory[];
 		components?: Component[];
 		consumables?: Consumable[];
@@ -516,9 +515,8 @@ declare namespace Schema {
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
-		assigned_assets?: Assignment[];
+		possessions?: Assignment[];
 		assets?: Asset[];
-		items?: Item[];
 		accessories?: Accessory[];
 		components?: Component[];
 		consumables?: Consumable[];
@@ -680,9 +678,8 @@ declare namespace Schema {
 		phones?: Phone[];
 		emails?: Email[];
 		websites?: Website[];
-		assigned_assets?: Assignment[];
+		possessions?: Assignment[];
 		assets?: Asset[];
-		items?: Item[];
 		accessories?: Accessory[];
 		components?: Component[];
 		consumables?: Consumable[];

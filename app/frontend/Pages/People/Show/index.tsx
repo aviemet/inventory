@@ -65,7 +65,7 @@ const Show = ({ person }: IShowPersonProps) => {
 						<h3>Assets</h3>
 
 						<ul>
-							{ person.assigned_assets && person.assigned_assets.filter(assignment => assignment.active).map(assignment => (
+							{ person.possessions && person.possessions.filter(assignment => assignment.active).map(assignment => (
 								<li key={ assignment.id }>{ assignment.assignable_type }</li>
 							)) }
 						</ul>
@@ -75,7 +75,7 @@ const Show = ({ person }: IShowPersonProps) => {
 						<Heading order={ 3 }>Assignment History</Heading>
 
 						<div>
-							{ person.assigned_assets && person.assigned_assets.reverse().map(assignment => (
+							{ person.possessions && person.possessions.reverse().map(assignment => (
 								<React.Fragment key={ assignment.id }>
 									<div>
 								Link to assigntoable object

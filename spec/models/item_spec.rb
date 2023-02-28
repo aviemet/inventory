@@ -6,11 +6,11 @@ require "models/concerns/purchasable"
 require "models/concerns/fieldable"
 
 RSpec.describe Item, type: :model do
-  subject { build(:item) }
+  subject { create(:item) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(build(:item)).to be_valid
     end
 
     it "is invalid with invalid attributes" do

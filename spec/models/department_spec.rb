@@ -1,7 +1,6 @@
 require 'rails_helper'
 require 'models/concerns/contactable'
 require 'models/concerns/ownable'
-require 'models/concerns/assign_toable'
 
 RSpec.describe Department, type: :model do
   subject {
@@ -23,6 +22,5 @@ RSpec.describe Department, type: :model do
   describe "Associations" do
     it_behaves_like "contactable"
     it_behaves_like "ownable"
-    it_behaves_like "assign_toable"
   end
 end

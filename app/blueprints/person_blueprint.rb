@@ -18,7 +18,7 @@ class PersonBlueprint < ApplicationBlueprint
   end
 
   view :associations do
-    association :assigned_assets, blueprint: AssignmentBlueprint
+    association :possessions, blueprint: AssignmentBlueprint
     association :department, blueprint: DepartmentBlueprint
     association :contact, blueprint: ContactBlueprint
     association :items, blueprint: ItemBlueprint
