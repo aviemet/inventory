@@ -4,13 +4,18 @@ import { Title } from '@mantine/core'
 import { isEmpty } from 'lodash'
 import { Routes } from '@/lib'
 import { router } from '@inertiajs/react'
+import { type UseFormProps } from 'use-inertia-form'
 
 const ActiveCompany = ({ user }: { user: Schema.User }) => {
-	if(!user || !user.companies || isEmpty(user.companies)) return <Title order={ 3 }>Inventory Application</Title>
+	if(!user?.companies || isEmpty(user.companies)) {
+		return <Title order={ 3 }>Inventory Application</Title>
+	}
 
-	if(user.companies.length === 1) return <Title order={ 3 }>{ user.active_company!.name }</Title>
+	if(user.companies.length === 1) {
+		return <Title order={ 3 }>{ user.active_company!.name }</Title>
+	}
 
-	const handlelFormChange = (form: Inertia.FormProps) => {
+	const handleFormChange = (form: UseFormProps) => {
 		if(String(form.data.user.active_company_id) === String(user.active_company_id)) return
 
 		form.submit().then(() => {
@@ -26,7 +31,7 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 			to={ Routes.apiUser(user.id) }
 			method="patch"
 			model="user"
-			onChange={ handlelFormChange }
+			onChange={ handleFormChange }
 		>
 			<SearchableDropdown
 				name="active_company_id"
