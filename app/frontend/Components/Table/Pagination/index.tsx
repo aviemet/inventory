@@ -2,11 +2,13 @@ import React from 'react'
 import { useTableContext } from '../TableContext'
 import { Group, Pagination, useMantineTheme, packSx, type PaginationProps, Select } from '@mantine/core'
 import PageItem from './PageItem'
+import usePaginationStyles from './usePaginationStyles'
 
 interface IPaginationComponent extends Omit<PaginationProps, 'total'> {}
 
 const PaginationComponent = ({ sx, boundaries = 2, siblings = 2, ...props }: IPaginationComponent) => {
 	const { tableState: { pagination } } = useTableContext()
+	const { classes } = usePaginationStyles()
 	const theme = useMantineTheme()
 
 	if(!pagination) return <></>
@@ -44,15 +46,7 @@ const PaginationComponent = ({ sx, boundaries = 2, siblings = 2, ...props }: IPa
 				color={ theme.primaryColor }
 				siblings={ siblings }
 				boundaries={ boundaries }
-				sx={ [{
-					a: {
-						color: theme.other.colorSchemeOption(theme.black, theme.white),
-
-						'&:hover': {
-							textDecoration: 'none',
-						},
-					},
-				}, ...packSx(sx)] }
+				className={ classes.pagination }
 				{ ...props }
 			/>
 		</Group>

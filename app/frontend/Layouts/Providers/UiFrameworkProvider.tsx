@@ -82,7 +82,7 @@ export const GlobalStyles = () => <Global styles={ theme => ({
 }) } />
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
-	const { props: { auth } } = usePage<SharedInertiaProps>()
+	const { auth } = usePage<SharedInertiaProps>().props
 
 	const systemColorScheme = useColorScheme()
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({

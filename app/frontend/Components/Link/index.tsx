@@ -38,10 +38,28 @@ const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
 	}
 
 	if(renderExternal) {
-		return <ExternalLink href={ href } ref={ ref } { ...onProgress } { ...props }>{ children }</ExternalLink>
+		return <ExternalLink
+			href={ href }
+			ref={ ref }
+			{ ...onProgress }
+			{ ...props }
+		>
+			{ children }
+		</ExternalLink>
 	}
 
-	return <InertiaLink href={ href } as={ as } method={ method } visit={ visit } ref={ ref } preserveScroll={ preserveScroll } { ...onProgress } { ...props }>{ children }</InertiaLink>
+	return <InertiaLink
+		href={ href }
+		as={ as }
+		method={ method }
+		visit={ visit }
+		ref={ ref }
+		preserveScroll={ preserveScroll }
+		{ ...onProgress }
+		{ ...props }
+	>
+		{ children }
+	</InertiaLink>
 })
 
 export default Link

@@ -5,6 +5,7 @@ import { Menu } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
 import { router } from '@inertiajs/react'
 import { Routes } from '@/lib'
+import useIndexPageStyles from './useIndexPageStyles'
 
 // TODO: Figure out correct type for icon
 interface IIndexTableTitleSectionProps {
@@ -19,6 +20,7 @@ interface IIndexTableTitleSectionProps {
 
 const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTitleSectionProps) => {
 	const { tableState: { selected } } = useTableContext()
+	const { classes } = useIndexPageStyles()
 
 	const deleteRecords = () => {
 		router.visit(Routes.vendors(), {
@@ -29,25 +31,7 @@ const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTit
 
 	return (
 		<Group position="apart" align="start" sx={ { marginBottom: 12 } } spacing="sm">
-			<Group position="apart" sx={ theme => ({
-				flex: '1 1 100%',
-				width: '100%',
-
-				[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
-					flex: 1,
-					width: 'auto',
-				},
-
-				[`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-					'&&': {
-						marginBottom: 0,
-					},
-				},
-
-				h1: {
-					marginBottom: 0,
-				},
-			}) }>
+			<Group position="apart" className={ classes.title }>
 				<Title>
 					{ title }
 				</Title>
@@ -75,15 +59,7 @@ const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTit
 					</Menu.Dropdown>
 				</Menu>
 			</Group>
-			<Box sx={ theme=> ({
-				flex: '1 1 100%',
-				display: 'flex',
-
-				[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
-					flex: 1,
-					width: 'auto',
-				},
-			}) }>
+			<Box className={ classes.content }>
 				{ children }
 			</Box>
 		</Group>

@@ -2,6 +2,8 @@ import React, { forwardRef } from 'react'
 import normalizeUrl from 'normalize-url'
 import { ExternalLinkIcon } from '@/Components/Icons'
 import { Anchor, type AnchorProps } from '@mantine/core'
+import useLinkStyles from './useLinkStyles'
+import cx from 'clsx'
 
 interface IExternalLinkProps extends Omit<AnchorProps, 'component'> {
 	href: string
@@ -9,24 +11,18 @@ interface IExternalLinkProps extends Omit<AnchorProps, 'component'> {
 }
 
 const ExternalLink = forwardRef<HTMLAnchorElement, IExternalLinkProps>((
-	{ children, href, as, ...props },
+	{ children, href, as, className, ...props },
 	ref,
 ) => {
 	const url = normalizeUrl(href, { stripWWW: false })
+	const { classes } = useLinkStyles()
 
 	return (
 		<Anchor
 			href={ url }
 			target="_blank"
 			rel="noreferrer"
-			styles={ {
-				display: 'inline-block',
-
-				'.react-icon.external': {
-					display: 'inline-block',
-					verticalAlign: 'text-top',
-				},
-			} }
+			className={ cx(classes.external, className ) }
 			ref={ ref }
 			{ ...props }
 		>
