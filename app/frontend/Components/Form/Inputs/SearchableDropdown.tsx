@@ -38,12 +38,11 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model })
 
 	const handleChange = (option: string|null) => {
-		setValue(option)
+		setValue(option ? option : '')
 		if(onChange) onChange(option, form)
 	}
 
 	const handleDropdownOpen = () => {
-		if(fetchOnOpen) router.reload({ only: [fetchOnOpen] })
 		if(fetchOnOpen) router.reload({ only: [fetchOnOpen] })
 		if(onDropdownOpen) onDropdownOpen(form)
 	}
@@ -75,7 +74,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 					onChange={ handleChange }
 					onDropdownOpen={ handleDropdownOpen }
 					onDropdownClose={ handleDropdownClose }
-					defaultValue={ defaultValue ?? value }
+					defaultValue={ defaultValue ?? String(value) }
 					{ ...props }
 				/>
 			</Field>

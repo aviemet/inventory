@@ -1,7 +1,6 @@
 class Department < ApplicationRecord
   include Contactable
   include Ownable
-  include AssignToable
   include PgSearch::Model
 
   pg_search_scope(

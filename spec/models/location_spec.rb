@@ -5,12 +5,12 @@ require 'models/concerns/assign_toable'
 
 RSpec.describe Location, type: :model do
   subject {
-    build(:location)
+    create(:location)
   }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(build(:location)).to be_valid
     end
 
     it "is not valid without a name" do
