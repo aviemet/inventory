@@ -6,6 +6,7 @@ FactoryBot.define do
     cost { Faker::Commerce.price(range: 500..2000.0) }
     purchased_at { Time.zone.yesterday.end_of_day }
     notes { Faker::Lorem.sentence }
+    default_location factory: :location
     status_label
     model
     manufacturer

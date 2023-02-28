@@ -17,10 +17,10 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 
 	return (
 		<Section>
-			<Flex position="apart">
+			<Flex position="apart" align="start">
 				<Box>
 					{ message.created_by && <Box>
-				From:&nbsp;
+						From:&nbsp;
 						<Link href={ Routes.person(message.created_by.id) }>{ message.created_by.name }</Link>
 					</Box> }
 					<Box>Sent At: { formatter.date.long(message.created_at) }</Box>
@@ -36,11 +36,12 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 
 			{ isEditing ?
 				<Form
+					method="patch"
 					model="ticket_message"
-					data={ { ticket_message: message } }
-					to={ Routes.ticketMessages(message.ticket_id) }
-					async
+					data={ { ticket_message: { body: message.body } } }
+					to={ Routes.ticketMessage(message.ticket_id, message.id) }
 					remember={ false }
+					onSubmit={ () => toggleIsEditing() }
 				>
 					<RichText name="body" />
 
