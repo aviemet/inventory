@@ -1,20 +1,14 @@
 import React from 'react'
 import Link, { type ILinkProps } from '@/Components/Link'
+import cx from 'clsx'
+import useTileStyles from './useTileStyles'
 
-const HoverLink = ({ children, ...props }: ILinkProps) => <Link sx={ theme=>({
-	flex: 1,
-	textAlign: 'center',
-	transitionProperty: 'all',
-	transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-	transitionDuration: '500ms',
-	borderTopWidth: '1px',
+const HoverLink = ({ children, className, ...props }: ILinkProps) => {
+	const { classes } = useTileStyles()
 
-	'&:hover': {
-		backgroundColor: theme.other.colorSchemeOption(
-			theme.colors[theme.primaryColor][2],
-			theme.colors[theme.primaryColor][6],
-		),
-	},
-}) } { ...props }>{ children }</Link>
+	return (
+		<Link className={ cx(classes.link, className) } { ...props }>{ children }</Link>
+	)
+}
 
 export default HoverLink

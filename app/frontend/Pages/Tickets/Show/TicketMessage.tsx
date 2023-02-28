@@ -12,7 +12,7 @@ interface ITicketMessageProps {
 }
 
 const TicketMessage = ({ message }: ITicketMessageProps) => {
-	const { props: { auth: { user } } } = usePage<SharedInertiaProps>()
+	const { auth: { user } } = usePage<SharedInertiaProps>().props
 	const [isEditing, toggleIsEditing] = useToggle()
 
 	return (

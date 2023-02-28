@@ -1,5 +1,5 @@
-import React from 'react'
-import { Table, type TableProps } from '@mantine/core'
+import React, { useMemo } from 'react'
+import { packSx, Table, type Sx, type TableProps } from '@mantine/core'
 import cx from 'clsx'
 import useTableStyles from './useTableStyles'
 
@@ -51,6 +51,17 @@ const TableComponent: TableComponent & TableObjects = ({
 }) => {
 	const { classes } = useTableStyles(fixed)
 
+	const stylesArray = useMemo(() => {
+		const arr: (Sx | undefined)[] = []
+		if(wrapper) {
+			arr.push({ thead: { top: -10 } })
+		}
+		if(sx) {
+			arr.push(...packSx(sx))
+		}
+		return arr
+	}, [wrapper, sx])
+
 	return (
 		<ConditionalWrapper
 			condition={ wrapper }
@@ -60,10 +71,7 @@ const TableComponent: TableComponent & TableObjects = ({
 				striped={ striped }
 				highlightOnHover={ highlightOnHover }
 				className={ cx(className, classes.table) }
-				sx={ {
-					...(wrapper ? {} : { thead: { top: -10 } }),
-					...sx,
-				} }
+				sx={ stylesArray }
 				{ ...props }
 			>
 				{ children }

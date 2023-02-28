@@ -9,6 +9,7 @@ import {
 	AccessoriesIcon,
 	ComponentsIcon,
 	ConsumablesIcon,
+	VendorsIcon,
 } from '@/Components/Icons'
 import { Routes } from '@/lib'
 
@@ -40,6 +41,9 @@ const QuickNewMenu = () => {
 
 				<Menu.Link href={ Routes.newPerson() } icon={ <PeopleIcon /> }>
 					New Person
+				</Menu.Link>
+				<Menu.Link href={ Routes.newVendor() } icon={ <VendorsIcon /> }>
+					New Vendor
 				</Menu.Link>
 
 				<Menu.Divider />

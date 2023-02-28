@@ -15,7 +15,7 @@ type TRegisterFormData = {
 }
 
 const CompleteRegistration = () => {
-	const { props: { auth: { user } } } = usePage<SharedInertiaProps>()
+	const { auth: { user } } = usePage<SharedInertiaProps>().props
 
 	const defaultData: TRegisterFormData = {
 		person: {
