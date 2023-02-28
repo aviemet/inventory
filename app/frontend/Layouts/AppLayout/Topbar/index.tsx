@@ -9,7 +9,7 @@ import AvatarMenu from './AvatarMenu'
 import useTopbarStyles from './useTopbarStyles'
 
 const Topbar = () => {
-	const { props: { auth: { user } } } = usePage<SharedInertiaProps>()
+	const { auth: { user } } = usePage<SharedInertiaProps>().props
 	const { layoutState, setLayoutState } = useLayout()
 	const { classes } = useTopbarStyles()
 

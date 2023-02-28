@@ -1,37 +1,19 @@
 import React from 'react'
 import { Box, type BoxProps } from '@mantine/core'
-import { merge } from 'lodash'
 import cx from 'clsx'
+import useSectionStyles from './useSectionStyles'
 
 interface ISectionProps extends BoxProps {
 	fullHeight?: boolean
 }
 
-const Section = ({ children, sx, fullHeight = false, ...props }: ISectionProps) => {
+const Section = ({ children, fullHeight = false, className, ...props }: ISectionProps) => {
+	const { classes } = useSectionStyles()
+
 	return (
 		<Box
 			component="section"
-			sx={ theme => {
-				let sectionStyles = {
-					backgroundColor: theme.other.colorSchemeOption(theme.white, theme.colors.gray[9]),
-					boxShadow: theme.shadows.xs,
-					padding: '1rem 0.75rem',
-					borderTop: `2px solid ${theme.other.colorSchemeOption(theme.colors[theme.primaryColor][2], theme.colors[theme.primaryColor][9])}`,
-
-					'& + &': {
-						marginTop: 10,
-					},
-				}
-
-				if(sx) {
-					let propStyles = {}
-					propStyles = typeof sx === 'function' ? sx(theme) : sx
-					sectionStyles = merge(sectionStyles, propStyles)
-				}
-
-				return sectionStyles
-			} }
-			className={ cx({ fullHeight }) }
+			className={ cx(classes.section, className, { fullHeight }) }
 			{ ...props }
 		>
 			{ children }

@@ -11,14 +11,13 @@ interface ILinkProps extends Omit<InertiaLinkProps, 'color'|'size'|'span'>, Omit
 	as: 'a'|'button'
 	method?: Method
 	visit?: Omit<Visit, 'method'>
-	external?: boolean
 	compact?: boolean
 	buttonProps?: ButtonProps
 	disabled?: boolean
 }
 
 const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', method, visit, external = false, compact, color, disabled, buttonProps, ...props },
+	{ children, href, as = 'a', method, visit, compact, color, disabled, buttonProps, ...props },
 	ref,
 ) => {
 	const handleHTTP = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

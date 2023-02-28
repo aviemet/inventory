@@ -1,19 +1,16 @@
 import React from 'react'
-import { Paper } from '@mantine/core'
+import { Paper, type PaperProps } from '@mantine/core'
 import Content from './Content'
 import Footer from './Footer'
-import { DivProps } from 'react-html-props'
 import HoverLink from './HoverLink'
+import cx from 'clsx'
+import useTileStyles from './useTileStyles'
 
-const Tile = ({ children, ...props }: Omit<DivProps, 'ref'>) => {
+const Tile = ({ children, className, ...props }: PaperProps) => {
+	const { classes } = useTileStyles()
+
 	return (
-		<Paper radius="lg" { ...props } sx={ theme => ({
-			borderColor: theme.fn.primaryColor(),
-			borderTopWidth: 2,
-			boxShadow: theme.shadows.md,
-			width: '100%',
-			maxWidth: '24rem',
-		}) }>
+		<Paper radius="lg" className={ cx(classes.tile, className) } { ...props }>
 			{ children }
 		</Paper>
 	)

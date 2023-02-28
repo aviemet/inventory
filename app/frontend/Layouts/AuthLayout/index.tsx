@@ -1,47 +1,14 @@
 import React from 'react'
 import Footer from '../Footer'
-import { createStyles } from '@mantine/core'
 import BackgroundImageUrl from '@/images/robots-bw.svg'
-
-const useAuthStyles = createStyles(theme => ({
-	page: {
-		backgroundBlendMode: theme.other.colorSchemeOption('lighten', 'soft-light'), // 'soft-light' 'multiply'
-		backgroundImage: `url("${BackgroundImageUrl}")`,
-		backgroundColor: theme.colors[theme.primaryColor][6],
-		minHeight: '100vh',
-	},
-
-	wrapper: {
-		minHeight: '100vh',
-		width: '100%',
-		display: 'grid',
-		gap: '0px',
-		gridTemplateRows: '1fr 35px',
-		gridTemplateAreas: '"content" "footer"',
-
-		'#content': {
-			gridArea: 'content',
-			height: '100%',
-		},
-		'#footer': {
-			gridArea: 'footer',
-		},
-	},
-
-	content: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		height: '100%',
-	},
-}))
+import useAuthStyles from './useAuthStyles'
 
 interface IAuthLayoutProps {
 	children: any
 }
 
 const AuthLayout: React.FC<IAuthLayoutProps> = ({ children }) => {
-	const { classes } = useAuthStyles()
+	const { classes } = useAuthStyles(BackgroundImageUrl)
 
 	return (
 		<div id="auth" className={ classes.page }>

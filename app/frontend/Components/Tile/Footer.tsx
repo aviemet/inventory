@@ -1,23 +1,19 @@
-import { Box } from '@mantine/core'
+import { Box, type BoxProps } from '@mantine/core'
 import React from 'react'
+import cx from 'clsx'
+import { FooterProps } from 'react-html-props'
+import useTileStyles from './useTileStyles'
 
-const Footer = ({ children }: { children: React.ReactNode }) => {
+interface ITileFooterProps extends BoxProps, Omit<FooterProps, 'ref'> {}
+
+const Footer = ({ children, className, ...props }: ITileFooterProps) => {
+	const { classes } = useTileStyles()
+
 	return (
 		<Box
 			component="footer"
-			sx={ theme => ({
-				display: 'flex',
-				borderBottomRightRadius: 8,
-				borderBottomLeftRadius: 8,
-				backgroundColor: theme.other.colorSchemeOption(
-					theme.fn.lighten(theme.fn.primaryColor(), 0.75),
-					theme.fn.darken(theme.fn.primaryColor(), 0.75),
-				),
-
-				'& > *': {
-					padding: '12px 24px !important',
-				},
-			}) }
+			className={ cx(classes.footer, className) }
+			{ ...props }
 		>
 			{ children }
 		</Box>

@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core'
 
-const useTableStyles = (fixed: boolean) => createStyles(theme => ({
+const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 	wrapper: {
 		overflow: 'auto',
 		position: 'relative',
@@ -9,7 +9,7 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 		borderTop: `1px solid ${theme.other.colorSchemeOption(theme.colors.gray[2], theme.colors.gray[9])}`,
 	},
 
-	'table': {
+	table: {
 		tableLayout: fixed ? 'fixed' : 'auto',
 		border: theme.other.colorSchemeOption(`1px solid ${theme.colors.gray[2]}`, `1px solid ${theme.colors.gray[9]}`),
 		borderTop: 0,
@@ -78,6 +78,25 @@ const useTableStyles = (fixed: boolean) => createStyles(theme => ({
 					borderColor: theme.colors.gray[7],
 				},
 			},
+		},
+	},
+
+	section: {
+		display: 'flex',
+		flexDirection: 'column',
+		height: '100%',
+	},
+
+	searchWrapper: {
+		display: 'flex',
+		flex: 1,
+	},
+
+	searchInput: {
+		flex: 1,
+		input: {
+			borderTopRightRadius: 0,
+			borderBottomRightRadius: 0,
 		},
 	},
 }))()
