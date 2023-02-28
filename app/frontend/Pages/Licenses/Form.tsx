@@ -40,7 +40,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 
 			<TextInput name="licenser_email" label="Licenser Email" required />
 
-			<Checkbox name="reassignable" label="Reassignable" />
+			<Checkbox name="reassignable" label="Re-Assignable" />
 
 			<TextInput name="cost" label="Cost" />
 
@@ -58,7 +58,6 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				options={ manufacturers }
 				filterMatchKeys={ ['name'] }
 				onOpen={ () => router.reload({ only: ['manufacturers'] }) }
-				onOpen={ () => router.reload({ only: ['manufacturers'] }) }
 			/>
 
 			<SearchableDropdown
@@ -67,7 +66,6 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				options={ vendors }
 				filterMatchKeys={ ['name'] }
 				onOpen={ () => router.reload({ only: ['vendors'] }) }
-				onOpen={ () => router.reload({ only: ['vendors'] }) }
 			/>
 
 			<SearchableDropdown
@@ -75,7 +73,6 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				name="category_id"
 				options={ categories }
 				filterMatchKeys={ ['name'] }
-				onOpen={ () => router.reload({ only: ['categories'] }) }
 				onOpen={ () => router.reload({ only: ['categories'] }) }
 			/>
 

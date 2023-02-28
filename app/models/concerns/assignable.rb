@@ -9,7 +9,7 @@ module Assignable
       assignment = Assignment.new(params)
       assignment.assignable = self
       assignment.assign_toable = assign_toable
-      assignment.location_id ||= assign_toable_location(assign_toable)
+      assignment.location_id ||= assign_toable_location_id(assign_toable)
 
       self.transaction do
         asset_class = self.class.name.downcase
@@ -39,11 +39,11 @@ module Assignable
         .order(created_at: :desc)
     end
 
-    def assign_toable_location(asset)
+    def assign_toable_location_id(asset)
       if asset.respond_to? :location
-        asset.location
+        asset.location.id
       elsif asset.respond_to? :default_location
-        asset.default_location
+        asset.default_location.id
       end
     end
 

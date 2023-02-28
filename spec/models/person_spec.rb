@@ -5,11 +5,11 @@ require 'models/concerns/assign_toable'
 require 'models/concerns/fieldable'
 
 RSpec.describe Person, type: :model do
-  subject { build(:person) }
+  subject { create(:person) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(build(:person)).to be_valid
     end
 
     it "is invalid with invalid attributes" do
