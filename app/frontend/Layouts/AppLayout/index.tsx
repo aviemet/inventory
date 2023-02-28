@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
+import { AppShell, Box, useMantineTheme } from '@mantine/core'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
-import { AppShell, Box, TypographyStylesProvider, useMantineTheme } from '@mantine/core'
+import useAppLayoutStyles from './useAppLayoutStyles'
 
 const AppLayout = ({ children }: { children: any }) => {
+	const { classes } = useAppLayoutStyles()
 	const theme = useMantineTheme()
 
 	useEffect(() => {
@@ -21,10 +23,6 @@ const AppLayout = ({ children }: { children: any }) => {
 			padding="xs"
 
 			sx={ theme => ({
-				header: {
-
-				},
-
 				main: {
 					background: theme.other.colorSchemeOption(theme.colors.gray[1], theme.black),
 					height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
@@ -41,13 +39,8 @@ const AppLayout = ({ children }: { children: any }) => {
 
 			footer={ <Footer /> }
 		>
-			<Box p={ 10 } id="CONTENT_WRAPPER" sx={ theme => ({
-				overflow: 'auto',
-				height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
-			}) }>
-				<TypographyStylesProvider sx={ { 'h1, h2, h3, h4, h5, h6': { 'marginTop': 0 } } }>
-					{ children }
-				</TypographyStylesProvider>
+			<Box p={ 10 } id="CONTENT_WRAPPER" className={ classes.wrapper }>
+				{ children }
 			</Box>
 		</AppShell>
 	)
