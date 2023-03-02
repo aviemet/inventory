@@ -5,7 +5,7 @@ import ExternalLink from './ExternalLink'
 import { type AnchorProps, type ButtonProps } from '@mantine/core'
 
 export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
-	children: React.ReactNode
+	children?: React.ReactNode
 	href: string
 	method?: Method
 	visit?: Omit<Visit, 'method'>

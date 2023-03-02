@@ -1,17 +1,17 @@
 import React from 'react'
 import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
-import { NotificationsProvider } from '@mantine/notifications'
+import { Notifications } from '@mantine/notifications'
 import { usePage } from '@inertiajs/react'
 import axios from 'axios'
 import { Routes } from '@/lib'
 
 export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	breakpoints: {
-		'2xs': 480,
-		lg: 1280,
-		xl: 1440,
-		'2xl': 1920,
+		'2xs': '480',
+		lg: '1280',
+		xl: '1440',
+		'2xl': '1920',
 	},
 	black: '#111111',
 	white: '#FCFCFC',
@@ -112,10 +112,9 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
 			<MantineProvider theme={ mantineTheme } withGlobalStyles withNormalizeCSS>
-				<NotificationsProvider>
-					<GlobalStyles />
-					{ children }
-				</NotificationsProvider>
+				<Notifications />
+				<GlobalStyles />
+				{ children }
 			</MantineProvider>
 		</ColorSchemeProvider>
 	)
