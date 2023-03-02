@@ -4,10 +4,10 @@ const fieldsetAlphaAdjustment = 0.125
 
 export default createStyles((theme) => ({
 	form: {
-		maxWidth: `${theme.breakpoints.md}px`,
+		maxWidth: `${theme.breakpoints.md}`,
 
 		'form.format-grid .field': {
-			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+			[`@media (min-width: ${theme.breakpoints.sm})`]: {
 				'&:not(.textarea, .compact)': {
 					display: 'grid',
 					gridTemplateColumns: `${theme.other.form.label.width} 1fr`,
@@ -55,7 +55,7 @@ export default createStyles((theme) => ({
 			},
 
 			// On Desktop use a 2 column grid to show labels and inputs, with feedback elements below input
-			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+			[`@media (min-width: ${theme.breakpoints.sm})`]: {
 				'&:not(.textarea, .compact)': {
 					borderTopWidth: 0,
 					borderLeftWidth: 0,

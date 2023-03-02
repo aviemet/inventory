@@ -30,10 +30,7 @@ const ItemDetails = ({ item }: IItemDetailsProps) => {
 		<>
 			<Heading order={ 3 }>Details</Heading>
 
-			<Box sx={ theme => ({
-				maxWidth: `${theme.breakpoints.sm}px`,
-			}) }>
-
+			<Box sx={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 				<Table>
 					<Table.Body>
 

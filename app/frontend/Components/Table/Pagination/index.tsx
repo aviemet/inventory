@@ -51,7 +51,7 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 					sx={ { 'a:hover': {
 						textDecoration: 'none',
 					} } }>
-					<Pagination.First component={ Link } href={ pageLink(0) } />
+					<Pagination.First component={ Link } href={ pageLink(1) } />
 					<Pagination.Previous component={ Link } href={ pageLink(next_page) } />
 					<Pagination.Items />
 					<Pagination.Next component={ Link } href={ pageLink(prev_page) } />
