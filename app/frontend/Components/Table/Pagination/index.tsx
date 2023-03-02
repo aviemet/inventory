@@ -1,29 +1,28 @@
 import React from 'react'
 import { useTableContext } from '../TableContext'
-import { Group, Pagination, useMantineTheme, packSx, type PaginationProps, Select } from '@mantine/core'
-import PageItem from './PageItem'
-import usePaginationStyles from './usePaginationStyles'
+import { Group, Pagination, type PaginationProps } from '@mantine/core'
+import Link from '@/Components/Link'
+
+const pageLink = (page: number) => {
+	const url = new URL(window.location.href)
+
+	if(page === 1) {
+		url.searchParams.delete('page')
+	} else {
+		url.searchParams.set('page', String(page))
+	}
+
+	return `${url.pathname}${url.search}`
+}
 
 interface IPaginationComponent extends Omit<PaginationProps, 'total'> {}
 
-const PaginationComponent = ({ sx, boundaries = 2, siblings = 2, ...props }: IPaginationComponent) => {
+const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPaginationComponent) => {
 	const { tableState: { pagination } } = useTableContext()
-	const { classes } = usePaginationStyles()
-	const theme = useMantineTheme()
 
 	if(!pagination) return <></>
 
-	const {
-		count,
-		pages,
-		limit,
-		current_page,
-		// next_page,
-		// prev_page,
-		// is_first_page,
-		// is_last_page,
-	} = pagination
-
+	const { count, pages, limit, current_page, next_page, prev_page, is_first_page, is_last_page } = pagination
 	const recordStart = ((current_page - 1) * limit) + 1
 	const recordEnd = Math.min(current_page * limit, count)
 
@@ -39,16 +38,26 @@ const PaginationComponent = ({ sx, boundaries = 2, siblings = 2, ...props }: IPa
         Showing <b>{ recordStart } - { recordEnd } / { count }</b>
 			</div>
 
-			<Pagination
+			<Pagination.Root
 				total={ pages }
-				page={ current_page || 1 }
-				itemComponent={ itemProps => <PageItem total={ pages } { ...itemProps } /> }
-				color={ theme.primaryColor }
-				siblings={ siblings }
-				boundaries={ boundaries }
-				className={ classes.pagination }
+				getItemProps={ (page) => ({
+					component: Link,
+					href: pageLink(page),
+				}) }
+				defaultValue={ current_page }
 				{ ...props }
-			/>
+			>
+				<Group spacing={ 7 } position="center"
+					sx={ { 'a:hover': {
+						textDecoration: 'none',
+					} } }>
+					<Pagination.First component={ Link } href={ pageLink(1) } />
+					<Pagination.Previous component={ Link } href={ pageLink(next_page) } />
+					<Pagination.Items />
+					<Pagination.Next component={ Link } href={ pageLink(prev_page) } />
+					<Pagination.Last component={ Link } href={ pageLink(pages) } />
+				</Group>
+			</Pagination.Root>
 		</Group>
 	)
 }

@@ -7,7 +7,7 @@ import { omit } from 'lodash'
 
 const useTableStyles = createStyles(theme => ({
 	table: {
-		maxWidth: `${theme.breakpoints.md}px`,
+		maxWidth: `${theme.breakpoints.md}`,
 	},
 	firstCell: {
 		fontWeight: 'bold',

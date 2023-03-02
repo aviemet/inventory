@@ -5,12 +5,12 @@ export default createStyles((theme) => ({
 		flex: '1 1 100%',
 		width: '100%',
 
-		[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+		[`@media (min-width: ${theme.breakpoints.sm})`]: {
 			flex: 1,
 			width: 'auto',
 		},
 
-		[`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+		[`@media (max-width: ${theme.breakpoints.sm})`]: {
 			'&&': {
 				marginBottom: 0,
 			},
@@ -25,7 +25,7 @@ export default createStyles((theme) => ({
 		flex: '1 1 100%',
 		display: 'flex',
 
-		[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+		[`@media (min-width: ${theme.breakpoints.sm})`]: {
 			flex: 1,
 			width: 'auto',
 		},

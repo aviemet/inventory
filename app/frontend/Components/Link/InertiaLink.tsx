@@ -6,7 +6,7 @@ import { Button } from '@/Components'
 import { omit } from 'lodash'
 
 interface ILinkProps extends Omit<InertiaLinkProps, 'color'|'size'|'span'>, Omit<AnchorProps, 'href'> {
-	children: React.ReactNode
+	children?: React.ReactNode
 	href: string
 	as: 'a'|'button'
 	method?: Method

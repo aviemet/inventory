@@ -29,6 +29,35 @@ RSpec.describe "/components", type: :request do
 
   let(:invalid_attributes) { invalid_attributes_hash(company) }
 
+  describe "GET /" do
+    login_admin
+
+    context "index page" do
+      it "lists all components" do
+        component = create(:component, { company: User.first.active_company })
+
+        get components_url
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(CGI.escapeHTML(component.name))
+      end
+    end
+
+    context "index page with search params" do
+      it "returns a filtered list of components" do
+        component1 = create(:component, { name: "Include", company: User.first.active_company })
+        component2 = create(:component, { name: "Exclue", company: User.first.active_company })
+
+        get components_url, params: { search: component1.name }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(CGI.escapeHTML(component1.name))
+        expect(response.body).not_to include(CGI.escapeHTML(component2.name))
+      end
+    end
+
+  end
+
   describe "POST /create" do
     login_admin
 
@@ -63,7 +92,8 @@ RSpec.describe "/components", type: :request do
     login_admin
 
     context "with valid parameters" do
-      let(:new_attributes) { valid_attributes_hash(company) }
+      let(:new_attributes) { valid_attributes_hash(User.first.active_company) }
+
       it "updates the requested component" do
         component = create(:component)
         patch component_url(component), params: { component: new_attributes }

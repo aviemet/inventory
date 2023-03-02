@@ -11,7 +11,7 @@ export default createStyles(theme => {
 
 	return {
 		root: {
-			[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+			[`@media (min-width: ${theme.breakpoints.sm})`]: {
 				top: 0,
 				height: `calc(100% - ${theme.other.footer.height}px)`,
 			},

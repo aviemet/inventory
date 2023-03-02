@@ -9,7 +9,7 @@ export default createStyles((theme) => ({
 		),
 		color: theme.white,
 
-		[`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+		[`@media (min-width: ${theme.breakpoints.sm})`]: {
 			left: theme.other.navbar.width.open,
 
 			'&.closed': {
