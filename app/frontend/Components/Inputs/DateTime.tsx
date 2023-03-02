@@ -1,7 +1,7 @@
 import React from 'react'
 import Label from './Label'
 import { type InputProps } from '@mantine/core'
-import { DateTimePicker } from 'mantine-dates-6'
+import { DateTimePicker } from '@mantine/dates'
 
 export interface IDateTimeProps extends InputProps {
 	label?: string
