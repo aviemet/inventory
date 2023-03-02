@@ -1,7 +1,7 @@
 class CreateLicenses < ActiveRecord::Migration[6.0]
   def change
     create_table :licenses do |t|
-      t.string :name
+      t.string :name, null: false
       t.integer :seats
       t.text :key
       t.string :licenser_name

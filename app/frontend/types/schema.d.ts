@@ -25,6 +25,7 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -32,7 +33,6 @@ declare namespace Schema {
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
-		status_label?: StatusLabel;
 	}
 
 	interface Address {
@@ -79,6 +79,7 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -231,6 +232,7 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -238,7 +240,6 @@ declare namespace Schema {
 		category?: Category;
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
-		status_label?: StatusLabel;
 	}
 
 	interface Consumable {
@@ -267,6 +268,7 @@ declare namespace Schema {
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
 		assignments?: Assignment[];
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -295,7 +297,7 @@ declare namespace Schema {
 
 	interface Contract {
 		id: number;
-		name?: string | null;
+		name: string;
 		number?: string | null;
 		notes?: string | null;
 		begins_at?: string | null;
@@ -331,12 +333,6 @@ declare namespace Schema {
 		owner?: Ownership;
 		company?: Company;
 		department?: Department;
-		possessions?: Assignment[];
-		assets?: Asset[];
-		accessories?: Accessory[];
-		components?: Component[];
-		consumables?: Consumable[];
-		licenses?: License[];
 		roles?: Role[];
 		location?: Location;
 		manager?: Person;
@@ -429,6 +425,7 @@ declare namespace Schema {
 		department?: Department;
 		purchase?: Purchase;
 		fieldset_associations?: FieldsetAssociation[];
+		status_label?: StatusLabel;
 		roles?: Role[];
 		vendor?: Vendor;
 		default_location?: Location;
@@ -437,13 +434,13 @@ declare namespace Schema {
 		manufacturer?: Manufacturer;
 		warranty?: Warranty;
 		assignments?: Assignment[];
-		status_label?: StatusLabel;
 		possessions?: Assignment[];
 		assets?: Asset[];
-		accessories?: Accessory[];
-		components?: Component[];
-		consumables?: Consumable[];
-		licenses?: License[];
+		items?: Asset[];
+		accessories?: Asset[];
+		components?: Asset[];
+		consumables?: Asset[];
+		licenses?: Asset[];
 		nics?: Nic[];
 		ips?: IpLease[];
 		ip_leases?: IpLease[];
@@ -470,7 +467,7 @@ declare namespace Schema {
 
 	interface License {
 		id: number;
-		name?: string | null;
+		name: string;
 		seats?: number | null;
 		key?: string | null;
 		licenser_name?: string | null;
@@ -517,10 +514,11 @@ declare namespace Schema {
 		department?: Department;
 		possessions?: Assignment[];
 		assets?: Asset[];
-		accessories?: Accessory[];
-		components?: Component[];
-		consumables?: Consumable[];
-		licenses?: License[];
+		items?: Asset[];
+		accessories?: Asset[];
+		components?: Asset[];
+		consumables?: Asset[];
+		licenses?: Asset[];
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -680,10 +678,11 @@ declare namespace Schema {
 		websites?: Website[];
 		possessions?: Assignment[];
 		assets?: Asset[];
-		accessories?: Accessory[];
-		components?: Component[];
-		consumables?: Consumable[];
-		licenses?: License[];
+		items?: Asset[];
+		accessories?: Asset[];
+		components?: Asset[];
+		consumables?: Asset[];
+		licenses?: Asset[];
 		fieldset_associations?: FieldsetAssociation[];
 		manager?: Person;
 		location?: Location;
@@ -882,7 +881,7 @@ declare namespace Schema {
 
 	interface Vendor {
 		id: number;
-		name?: string | null;
+		name: string;
 		slug: string;
 		url?: string | null;
 		created_at: string;
