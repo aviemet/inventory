@@ -20,6 +20,35 @@ RSpec.describe "/items", type: :request do
     }
   end
 
+  describe "GET /" do
+    login_admin
+
+    context "index page" do
+      it "lists all items" do
+        item = create(:item, { company: User.first.active_company })
+
+        get items_url
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(CGI.escapeHTML(item.name))
+      end
+    end
+
+    context "index page with search params" do
+      it "returns a filtered list of items" do
+        item1 = create(:item, { name: "Include", company: User.first.active_company })
+        item2 = create(:item, { name: "Exclue", company: User.first.active_company })
+
+        get items_url, params: { search: item1.name }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(CGI.escapeHTML(item1.name))
+        expect(response.body).not_to include(CGI.escapeHTML(item2.name))
+      end
+    end
+
+  end
+
   describe "POST /create" do
     login_admin
 

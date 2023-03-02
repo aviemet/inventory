@@ -20,6 +20,35 @@ RSpec.describe "Accessories", type: :request do
     }
   end
 
+  describe "GET /" do
+    login_admin
+
+    context "index page" do
+      it "lists all accessories" do
+        accessory = create(:accessory, { company: User.first.active_company })
+
+        get accessories_url
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(CGI.escapeHTML(accessory.name))
+      end
+    end
+
+    context "index page with search params" do
+      it "returns a filtered list of accessories" do
+        accessory1 = create(:accessory, { name: "Include", company: User.first.active_company })
+        accessory2 = create(:accessory, { name: "Exclue", company: User.first.active_company })
+
+        get accessories_url, params: { search: accessory1.name }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(CGI.escapeHTML(accessory1.name))
+        expect(response.body).not_to include(CGI.escapeHTML(accessory2.name))
+      end
+    end
+
+  end
+
   describe "POST /create" do
     login_admin
 
