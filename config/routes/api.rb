@@ -39,4 +39,6 @@ namespace :api do
   resources :purchases, only: [:create, :update]
 
   resources :contracts, only: [:create, :update]
+
+  resources :spotlights, only: [:index]
 end
