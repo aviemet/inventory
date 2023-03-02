@@ -139,7 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
   end
 
   create_table "contracts", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "number"
     t.text "notes"
     t.datetime "begins_at", precision: nil
@@ -230,7 +230,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
   end
 
   create_table "licenses", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "seats"
     t.text "key"
     t.string "licenser_name"
@@ -524,7 +524,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
   end
 
   create_table "vendors", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "slug", null: false
     t.string "url"
     t.datetime "created_at", null: false

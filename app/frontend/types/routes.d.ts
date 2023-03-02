@@ -567,6 +567,16 @@ export const apiPurchases: ((
 
 /**
  * Generates rails route to
+ * /api/spotlights(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiSpotlights: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/status_labels/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
