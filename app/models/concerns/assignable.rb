@@ -36,7 +36,8 @@ module Assignable
           assign_toable_type: self.class.name,
           assign_toable_id: self.id,
         }.to_json)
-        .or(PublicActivity::Activity.where({ recipient_type: self.class.name, recipient_id: self.id }))
+        .or(PublicActivity::Activity.where({ recipient_type: self.class.base_class.name, recipient_id: self.id }))
+        .or(PublicActivity::Activity.where({ trackable_type: self.class.base_class.name, trackable_id: self.id }))
         .order(created_at: :desc)
     end
 

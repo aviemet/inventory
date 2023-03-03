@@ -21,7 +21,7 @@ class ComponentBlueprint < ApplicationBlueprint
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint
-    association :assignments, blueprint: AssignmentBlueprint
+    association :assignments, blueprint: AssignmentBlueprint, view: :associations
     association :purchase, blueprint: PurchaseBlueprint
     association :activities, blueprint: ActivityBlueprint
     association :model, blueprint: ModelBlueprint
@@ -40,14 +40,6 @@ class ComponentBlueprint < ApplicationBlueprint
   end
 
   view :show do
-    association :department, blueprint: DepartmentBlueprint
-    association :assignments, blueprint: AssignmentBlueprint
-    association :purchase, blueprint: PurchaseBlueprint
-    association :activities, blueprint: ActivityBlueprint
-    association :model, blueprint: ModelBlueprint
-    association :vendor, blueprint: VendorBlueprint
-    association :default_location, blueprint: LocationBlueprint
-    association :category, blueprint: CategoryBlueprint
-    association :manufacturer, blueprint: ManufacturerBlueprint
+    include_view :associations
   end
 end

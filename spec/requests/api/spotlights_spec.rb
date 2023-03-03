@@ -7,7 +7,7 @@ RSpec.describe "Api::Spotlights", type: :request do
 
     it "responds with many records as json" do
       get api_spotlights_url
-      ap({ response: response.body })
+
       expect(response.body).to include("items")
       expect(response.body).to include("accessories")
       expect(response.body).to include("components")

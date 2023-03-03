@@ -26,7 +26,7 @@ class ItemBlueprint < ApplicationBlueprint
     association :location, blueprint: LocationBlueprint
     association :status_label, blueprint: StatusLabelBlueprint
     association :nics, blueprint: NicBlueprint
-    association :activities, blueprint: ActivityBlueprint
+    association :history, name: :activities, blueprint: ActivityBlueprint
   end
 
   view :index do
@@ -37,6 +37,12 @@ class ItemBlueprint < ApplicationBlueprint
 
   view :show do
     include_view :associations
+
+    association :items, blueprint: ItemBlueprint
+    association :accessories, blueprint: AccessoryBlueprint
+    association :components, blueprint: ComponentBlueprint
+    association :consumables, blueprint: ConsumableBlueprint
+    association :licenses, blueprint: LicenseBlueprint
   end
 
   view :new do
