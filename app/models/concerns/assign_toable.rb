@@ -9,6 +9,6 @@ module AssignToable
     has_many :accessories, -> { where(type: :Accessory) }, through: :possessions, source: :assignable, source_type: "Asset"
     has_many :components, -> { where(type: :Component) }, through: :possessions, source: :assignable, source_type: "Asset"
     has_many :consumables, -> { where(type: :Consumable) }, through: :possessions, source: :assignable, source_type: "Asset"
-    has_many :licenses, -> { where(type: :License) }, through: :possessions, source: :assignable, source_type: "Asset"
+    has_many :licenses, through: :possessions, source: :assignable, source_type: "License"
   end
 end

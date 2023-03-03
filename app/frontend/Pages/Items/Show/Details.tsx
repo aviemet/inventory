@@ -1,31 +1,13 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Link, Heading, Table, Box, Badge, Money } from '@/Components'
+import AssignmentLink from './AssignmentLink'
 import { formatter, Routes } from '@/lib'
-import { has } from 'lodash'
-
-type TPathOption = 'item'|'person'|'location'
 
 interface IItemDetailsProps {
 	item: Schema.Item
 }
 
-const AssignmentLink = ({ assignment }: { assignment?: Schema.Assignment }) => {
-	if(!assignment) return <></>
-
-	const path = Routes[assignment.assign_toable_type.toLowerCase() as TPathOption]
-	// @ts-ignore
-	const param = has(assignment.assign_toable, 'slug') ? assignment.assign_toable.slug : assignment.assign_toable_id
-
-	return <Link href={ path(param) }>{ assignment.assign_toable.name }</Link>
-}
-
 const ItemDetails = ({ item }: IItemDetailsProps) => {
-	const itemAssignment = useCallback(() => {
-		if(!item.assigned || !item.assignments) return
-
-		return item.assignments.find(assignment => assignment.active)
-	}, [item])
-
 	return (
 		<>
 			<Heading order={ 3 }>Details</Heading>
@@ -38,7 +20,7 @@ const ItemDetails = ({ item }: IItemDetailsProps) => {
 							<Table.Cell>{ item.assigned ? 'Assigned To' : 'Status' }</Table.Cell>
 							<Table.Cell>
 								{ item.assigned ?
-									<AssignmentLink assignment={ itemAssignment() } />
+									<AssignmentLink item={ item } />
 									:
 									<Badge>{ item.status_label?.name }</Badge>
 								}
