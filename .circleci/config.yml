@@ -4,6 +4,10 @@ parallelism: 2
 
 jobs:
   build:
+    # The resource_class feature allows configuring CPU and RAM resources for each job. 
+    # Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+    resource_class: large
+
     docker:
       - image: cimg/ruby:3.1.2-node
         environment:
@@ -78,8 +82,6 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
-    # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
-    resource_class: large
 
 workflows:
   build-and-deploy:
