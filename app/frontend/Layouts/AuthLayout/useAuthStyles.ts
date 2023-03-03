@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core'
 
-export default createStyles((theme, { backgroundImageUrl }: { backgroundImageUrl?: string } ) => ({
+export default createStyles((theme, backgroundImageUrl: string) => ({
 	page: {
 		backgroundBlendMode: theme.other.colorSchemeOption('lighten', 'soft-light'), // 'soft-light' 'multiply'
 		backgroundImage: backgroundImageUrl ? `url("${backgroundImageUrl}")` : '',
