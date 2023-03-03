@@ -55,6 +55,7 @@ export {
 
 
 export {
+	BiMap as LocationsIcon,
 	BiLinkExternal as ExternalLinkIcon,
 	BiCategoryAlt as CategoriesIcon,
 } from 'react-icons/bi'
@@ -85,7 +86,7 @@ export {
 } from 'react-icons/ti'
 
 export {
-	GrMapLocation as LocationsIcon,
+	// GrMapLocation as LocationsIcon,
 	GrFormNext as NextIcon,
 	GrFormPrevious as PreviousIcon,
 } from 'react-icons/gr'
