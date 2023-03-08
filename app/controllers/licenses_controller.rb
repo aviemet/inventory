@@ -56,7 +56,6 @@ class LicensesController < ApplicationController
       assignment: assignment.render(view: :new),
       people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
       items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
     }
   end
 

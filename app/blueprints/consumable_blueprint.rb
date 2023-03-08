@@ -33,7 +33,7 @@ class ConsumableBlueprint < ApplicationBlueprint
 
   view :show do
     association :purchase, blueprint:  PurchaseBlueprint
-    association :activities, blueprint: ActivityBlueprint
+    association :assignments, blueprint: AssignmentBlueprint, view: :associations
     association :model, blueprint:  ModelBlueprint
     association :vendor, blueprint:  VendorBlueprint
     association :default_location, blueprint: LocationBlueprint

@@ -41,7 +41,7 @@ class LicenseBlueprint < ApplicationBlueprint
 
   view :show do
     association :department, blueprint: DepartmentBlueprint
-    association :assignments, blueprint: AssignmentBlueprint
+    association :assignments, blueprint: AssignmentBlueprint, view: :associations
     association :purchase, blueprint: PurchaseBlueprint
     association :activities, blueprint: ActivityBlueprint
     association :category, blueprint: CategoryBlueprint
