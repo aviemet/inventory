@@ -7,11 +7,14 @@ import { Box, Header, Burger, Group } from '@mantine/core'
 import cx from 'clsx'
 import AvatarMenu from './AvatarMenu'
 import useTopbarStyles from './useTopbarStyles'
+import { useViewportSize } from '@mantine/hooks'
 
 const Topbar = () => {
 	const { auth: { user } } = usePage<SharedInertiaProps>().props
 	const { layoutState, setLayoutState } = useLayout()
 	const { classes } = useTopbarStyles()
+
+	const { width } = useViewportSize()
 
 	return (
 		<Header height={ 50 } p="sm" className={ cx(classes.topbar, { closed: !layoutState.sidebarOpen }) }>
@@ -31,6 +34,7 @@ const Topbar = () => {
 				</Box>
 
 				<Group>
+					<div>{ width }</div>
 					<QuickNewMenu />
 					<AvatarMenu />
 				</Group>

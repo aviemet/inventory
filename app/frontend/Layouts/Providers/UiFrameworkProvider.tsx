@@ -8,10 +8,14 @@ import { Routes } from '@/lib'
 
 export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	breakpoints: {
-		'2xs': '480',
-		lg: '1280',
-		xl: '1440',
-		'2xl': '1920',
+		'hd': '120rem', // 1920px,
+		'2xl': '110rem', // 1760px,
+		xl: '90rem', // 1440px, default 88rem
+		lg: '80rem', // 1280px, default 75rem
+		md: '62rem',
+		sm: '48rem',
+		xs: '36rem',
+		'2xs': '30rem', // 480px
 	},
 	black: '#111111',
 	white: '#FCFCFC',
