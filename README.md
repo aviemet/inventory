@@ -39,7 +39,7 @@ All hardware asset types:
 
 Items:
 
-- [ ] Designate IP address info
+- [x] Designate IP address info
 
 Accessories:
 
@@ -77,7 +77,7 @@ Licenses:
 
 - [ ] List of licenses by category
 - [x] Assignable to an asset
-  - [ ] Decrementable in the case of bulk licensing
+  - [x] Decrementable in the case of bulk licensing
 
 People:
 
@@ -119,7 +119,7 @@ Help Desk:
   - [ ] Scans sent mail to build full conversation in app
   - [ ] Respond to tickets in app, generates email
   - [ ] Filtering rules for what to ignore
-- [ ] Associate tickets with other records
+- [x] Associate tickets with other records
 - [ ] Bulk edit/update/close
 
 Documentation:
