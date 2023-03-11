@@ -5,7 +5,6 @@ class CompaniesController < ApplicationController
   expose :company, -> { current_user.companies.find_by_slug(params[:slug]) }
 
   # GET /companies
-  # GET /companies.json
   def index
     paginated_companies = companies.page(params[:page] || 1)
 

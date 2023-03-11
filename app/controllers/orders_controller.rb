@@ -5,7 +5,6 @@ class OrdersController < ApplicationController
   expose :order
 
   # GET /orders
-  # GET /orders.json
   def index
     paginated_orders = orders.page(params[:page] || 1)
 
@@ -18,8 +17,7 @@ class OrdersController < ApplicationController
     }
   end
 
-  # GET /orders/1
-  # GET /orders/1.json
+  # GET /orders/:id
   def show
     render inertia: "Orders/Show", props: {
       order: -> { order.render(view: :associations) }
@@ -34,7 +32,7 @@ class OrdersController < ApplicationController
     }
   end
 
-  # GET /orders/1/edit
+  # GET /orders/:id/edit
   def edit
     render inertia: "Orders/Edit", props: {
       order: order.render(view: :edit),
@@ -43,7 +41,6 @@ class OrdersController < ApplicationController
   end
 
   # POST /orders
-  # POST /orders.json
   def create
     respond_to do |format|
       if order.save
@@ -56,8 +53,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /orders/1
-  # PATCH/PUT /orders/1.json
+  # PATCH/PUT /orders/:id
   def update
     respond_to do |format|
       if order.update(order_params)
@@ -70,8 +66,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  # DELETE /orders/1
-  # DELETE /orders/1.json
+  # DELETE /orders/:id
   def destroy
     order.destroy
     respond_to do |format|

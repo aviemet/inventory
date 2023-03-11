@@ -1,19 +1,19 @@
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
-  before_action :set_<%= singular_table_name %>, only: %i[ show edit update destroy ]
-  before_action :set_<%= plural_table_name %>, only: %i[ index ]
+  expose :<%= plural_table_name %>
+  expose :<%= singular_table_name %>
 
   # GET <%= route_url %>
   def index
 		render inertia: "<%= controller_class_name %>/Index", props: {
-			<%= plural_table_name %>: @<%= plural_table_name %>.as_json
+			<%= plural_table_name %>: -> { <%= plural_table_name %>.render }
 		}
   end
 
   # GET <%= route_url %>/:id
   def show
 		render inertia: "<%= controller_class_name %>/Show", props: {
-			<%= singular_table_name %>: @<%= singular_table_name %>.as_json
+			<%= singular_table_name %>: -> { <%= singular_table_name %>.render }
 		}
   end
 
