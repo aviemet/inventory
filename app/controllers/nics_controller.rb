@@ -2,13 +2,11 @@ class NicsController < ApplicationController
   before_action :set_nic, only: [:show, :edit, :update, :destroy]
 
   # GET /nics
-  # GET /nics.json
   def index
     @nics = Nic.all
   end
 
-  # GET /nics/1
-  # GET /nics/1.json
+  # GET /nics/:id
   def show
   end
 
@@ -17,12 +15,11 @@ class NicsController < ApplicationController
     @nic = Nic.new
   end
 
-  # GET /nics/1/edit
+  # GET /nics/:id/edit
   def edit
   end
 
   # POST /nics
-  # POST /nics.json
   def create
     @nic = Nic.new(nic_params)
 
@@ -37,8 +34,7 @@ class NicsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /nics/1
-  # PATCH/PUT /nics/1.json
+  # PATCH/PUT /nics/:id
   def update
     respond_to do |format|
       if @nic.update(nic_params)
@@ -51,8 +47,7 @@ class NicsController < ApplicationController
     end
   end
 
-  # DELETE /nics/1
-  # DELETE /nics/1.json
+  # DELETE /nics/:id
   def destroy
     @nic.destroy
     respond_to do |format|

@@ -5,7 +5,6 @@ class StatusLabelsController < ApplicationController
   expose :status_label, -> { StatusLabel.find_by_slug(params[:slug]) }
 
   # GET /status_labels
-  # GET /status_labels.json
   def index
     paginated_status_labels = status_labels.page(params[:page] || 1)
 

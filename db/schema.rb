@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -480,6 +480,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
     t.index ["status_id"], name: "index_tickets_on_status_id"
   end
 
+  create_table "user_group_assignments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "user_group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_group_id"], name: "index_user_group_assignments_on_user_group_id"
+    t.index ["user_id"], name: "index_user_group_assignments_on_user_id"
+  end
+
+  create_table "user_groups", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -599,6 +615,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
   add_foreign_key "tickets", "people", column: "created_by_id"
   add_foreign_key "tickets", "people", column: "primary_contact_id"
   add_foreign_key "tickets", "ticket_statuses", column: "status_id"
+  add_foreign_key "user_group_assignments", "user_groups"
+  add_foreign_key "user_group_assignments", "users"
   add_foreign_key "users", "companies", column: "active_company_id"
   add_foreign_key "users", "people"
   add_foreign_key "warranties", "assets"

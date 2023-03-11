@@ -2,13 +2,11 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   # GET /contacts
-  # GET /contacts.json
   def index
     @contacts = Contact.all
   end
 
   # GET /contacts/:id
-  # GET /contacts/:id.json
   def show
   end
 
@@ -22,7 +20,6 @@ class ContactsController < ApplicationController
   end
 
   # POST /contacts
-  # POST /contacts.json
   def create
     @contact = Contact.new(contact_params)
 
@@ -38,7 +35,6 @@ class ContactsController < ApplicationController
   end
 
   # PATCH/PUT /contacts/:id
-  # PATCH/PUT /contacts/:id.json
   def update
     respond_to do |format|
       if @contact.update(contact_params)
@@ -52,7 +48,6 @@ class ContactsController < ApplicationController
   end
 
   # DELETE /contacts/:id
-  # DELETE /contacts/:id.json
   def destroy
     @contact.destroy
     respond_to do |format|

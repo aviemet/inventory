@@ -6,7 +6,6 @@ class NetworksController < ApplicationController
   expose :network
 
   # GET /networks
-  # GET /networks.json
   def index
     paginated_networks = networks.page(params[:page] || 1)
 
