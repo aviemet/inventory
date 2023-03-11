@@ -9,6 +9,8 @@ class User < ApplicationRecord
   belongs_to :person, dependent: :destroy, optional: true
   belongs_to :active_company, class_name: :Company, optional: true
   has_many :companies, through: :roles, source: :resource, source_type: "Company"
+  has_many :user_group_assignments
+  has_many :groups, through: :user_group_assignments, source: :user_group
 
   # store_accessor :table_preferences
   store_accessor :user_preferences, :dark_mode
