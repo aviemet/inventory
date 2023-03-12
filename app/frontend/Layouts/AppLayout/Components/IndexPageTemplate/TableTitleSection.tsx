@@ -59,9 +59,9 @@ const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTit
 					</Menu.Dropdown>
 				</Menu>
 			</Group>
-			<Box className={ classes.content }>
+			{ !!children && <Box className={ classes.content }>
 				{ children }
-			</Box>
+			</Box> }
 		</Group>
 	)
 }

@@ -1538,6 +1538,15 @@ export const editUser = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,
 
 /**
  * Generates rails route to
+ * /users/groups/:slug/edit(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editUserGroup = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/password/edit(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2004,6 +2013,14 @@ export const newUserConfirmation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"user
 
 /**
  * Generates rails route to
+ * /users/groups/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newUserGroup = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/password/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2248,6 +2265,23 @@ export const user = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"use
  * @returns {string} route path
  */
 export const userConfirmation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"confirmation"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /users/groups/:slug(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const userGroup = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /users/groups(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const userGroups = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"groups"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

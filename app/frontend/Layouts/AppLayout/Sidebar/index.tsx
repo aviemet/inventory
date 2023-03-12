@@ -28,6 +28,7 @@ import {
 	ManufacturersIcon,
 	ModelsIcon,
 	CategoriesIcon,
+	UserGroupIcon,
 } from '@/Components/Icons'
 
 import IconProvider from '@/Layouts/Providers/IconProvider'
@@ -84,6 +85,7 @@ const Sidebar = () => {
 							<MenuLink href={ Routes.people() } icon={ <UsersIcon /> }>People</MenuLink>
 							<ul>
 								<li><MenuLink href={ Routes.users() } icon={ <PeopleIcon /> }>Users</MenuLink></li>
+								<li><MenuLink href={ Routes.userGroups() } icon={ <UserGroupIcon /> }>Groups</MenuLink></li>
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.tickets() } icon={ <TicketsIcon /> }>Tickets</MenuLink></li>

@@ -160,6 +160,7 @@ declare namespace Schema {
 		orders?: Order[];
 		categories?: Category[];
 		smtps?: Smtp[];
+		user_groups?: UserGroup[];
 		items?: Item[];
 		accessories?: Accessory[];
 		consumables?: Consumable[];
@@ -200,6 +201,7 @@ declare namespace Schema {
 		orders?: Order[];
 		categories?: Category[];
 		smtps?: Smtp[];
+		user_groups?: UserGroup[];
 		items?: Item[];
 		accessories?: Accessory[];
 		consumables?: Consumable[];
@@ -440,7 +442,7 @@ declare namespace Schema {
 		accessories?: Asset[];
 		components?: Asset[];
 		consumables?: Asset[];
-		licenses?: Asset[];
+		licenses?: License[];
 		nics?: Nic[];
 		ips?: IpLease[];
 		ip_leases?: IpLease[];
@@ -518,7 +520,7 @@ declare namespace Schema {
 		accessories?: Asset[];
 		components?: Asset[];
 		consumables?: Asset[];
-		licenses?: Asset[];
+		licenses?: License[];
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -682,7 +684,7 @@ declare namespace Schema {
 		accessories?: Asset[];
 		components?: Asset[];
 		consumables?: Asset[];
-		licenses?: Asset[];
+		licenses?: License[];
 		fieldset_associations?: FieldsetAssociation[];
 		manager?: Person;
 		location?: Location;
@@ -877,6 +879,34 @@ declare namespace Schema {
 		person?: Person;
 		active_company?: Company;
 		companies?: Company[];
+		user_group_assignments?: UserGroupAssignment[];
+		groups?: UserGroup[];
+	}
+
+	interface UserGroup {
+		id: number;
+		name?: string | null;
+		slug: string;
+		description?: string | null;
+		created_at: string;
+		updated_at: string;
+		activities?: PublicActivityActivity[];
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		user_group_assignments?: UserGroupAssignment[];
+		users?: User[];
+	}
+
+	interface UserGroupAssignment {
+		id: number;
+		user_id: number;
+		user_group_id: number;
+		created_at: string;
+		updated_at: string;
+		activities?: PublicActivityActivity[];
+		user?: User;
+		user_group?: UserGroup;
 	}
 
 	interface Vendor {

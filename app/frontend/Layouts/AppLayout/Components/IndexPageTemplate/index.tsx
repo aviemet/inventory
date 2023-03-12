@@ -1,6 +1,7 @@
 import React from 'react'
 import { Page, Table } from '@/Components'
 import TableTitleSection from './TableTitleSection'
+import { type TBreadcrumb } from '@/Components/Breadcrumbs'
 
 interface IIndexPageTemplateProps {
 	children: React.ReactNode
@@ -8,6 +9,8 @@ interface IIndexPageTemplateProps {
 	model: string
 	rows: Record<string, any>[]
 	pagination: Schema.Pagination
+	search?: boolean
+	breadcrumbs?: TBreadcrumb[]
 	menuOptions?: {
 		label: string
 		href: string
@@ -15,21 +18,29 @@ interface IIndexPageTemplateProps {
 	}[]
 }
 
-const IndexPageTemplate = ({ children, title, model, rows, pagination, menuOptions }: IIndexPageTemplateProps) => {
+const IndexPageTemplate = ({
+	children,
+	title,
+	model,
+	rows,
+	pagination,
+	search = true,
+	breadcrumbs,
+	menuOptions,
+}: IIndexPageTemplateProps) => {
 	return (
-		<Page title={ title } breadcrumbs={ [
-			{ title: title, href: window.location.href },
+		<Page title={ title } breadcrumbs={ breadcrumbs ?? [
+			{ title, href: window.location.href },
 		] }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
-					hideable
 					model={ model }
 					rows={ rows }
 					pagination={ pagination }
 				>
 					<TableTitleSection title={ title } menuOptions={ menuOptions }>
-						<Table.SearchInput />
+						{ search && <Table.SearchInput /> }
 					</TableTitleSection>
 
 					{ children }

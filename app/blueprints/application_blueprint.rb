@@ -13,6 +13,14 @@ class ApplicationBlueprint < Blueprinter::Base
     excludes :updated_at, :created_at
   end
 
+  view :show do
+    include_view :associations
+  end
+
+  view :index do
+    include_view :associations
+  end
+
   def self.field(method, options = {}, &)
     unexclude(method)
     super

@@ -34,8 +34,8 @@ class AssetBlueprint < ApplicationBlueprint
   end
 
   view :index do
-    association :assignments, blueprint: AssignmentBlueprint, view: :associations
     association :department, blueprint: DepartmentBlueprint
+    association :assignments, blueprint: AssignmentBlueprint, view: :associations
     association :model, blueprint: ModelBlueprint
     association :vendor, blueprint: VendorBlueprint
     association :category, blueprint: CategoryBlueprint
@@ -45,16 +45,7 @@ class AssetBlueprint < ApplicationBlueprint
   end
 
   view :show do
-    association :department, blueprint: DepartmentBlueprint
-    association :assignments, blueprint: AssignmentBlueprint, view: :associations
-    association :model, blueprint: ModelBlueprint
-    association :vendor, blueprint: VendorBlueprint
-    association :category, blueprint: CategoryBlueprint
-    association :manufacturer, blueprint: ManufacturerBlueprint
-    association :default_location, blueprint: LocationBlueprint
-    association :location, blueprint: LocationBlueprint
-    association :status_label, blueprint: StatusLabelBlueprint
-    association :nics, blueprint: NicBlueprint
+    include_view :associations
 
     association :history, name: :activities, blueprint: ActivityBlueprint
   end

@@ -79,8 +79,10 @@ Rails.application.routes.draw do
 
   # RESOURCEFUL PATHS #
 
-  resources :users, concerns: :bulk_delete, except: [:create]
   resources :companies, concerns: :bulk_delete, param: :slug
+
+  resources :user_groups, path: "/users/groups", param: :slug
+  resources :users, concerns: :bulk_delete, except: [:create]
 
   resources :departments, concerns: :bulk_delete, param: :slug
   resources :locations, concerns: :bulk_delete, param: :slug

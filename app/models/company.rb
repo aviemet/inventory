@@ -44,6 +44,7 @@ class Company < ApplicationRecord
     orders: "Order",
     categories: "Category",
     smtps: "Smtp",
+    user_groups: "UserGroup",
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end

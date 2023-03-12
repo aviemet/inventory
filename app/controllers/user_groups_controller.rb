@@ -2,19 +2,35 @@ class UserGroupsController < ApplicationController
   include OwnableConcern
 
   expose :user_groups, -> { @active_company.user_groups.includes_associated }
-  expose :user_group
+  expose :user_group, -> { @active_company.user_groups.includes_associated.find_by_slug(request.params[:slug]) }
 
   # GET /user_group
   def index
+    paginated_user_groups = user_groups.page(params[:page] || 1)
+
     render inertia: "UserGroups/Index", props: {
-      user_groups: -> { user_groups.render(view: :index) }
+      user_groups: -> { paginated_user_groups.render(view: :index) },
+      pagination: -> { {
+        count: user_groups.size,
+        **pagination_data(paginated_user_groups)
+      } }
     }
   end
 
   # GET /user_group/:id
   def show
     render inertia: "UserGroups/Show", props: {
-      user_group: -> { user_group.render(view: :show) }
+      user_group: -> { user_group.render(view: :show) },
+      users: InertiaRails.lazy(-> {
+        paginated_users = user_group.users.includes_associated.page(params[:page] || 1)
+        {
+          data: paginated_users.render(view: :associations),
+          pagination: {
+            count: user_group.users.size,
+            **pagination_data(paginated_users)
+          }
+        }
+      }),
     }
   end
 
@@ -34,6 +50,8 @@ class UserGroupsController < ApplicationController
 
   # POST /user_group
   def create
+    user_group.company = @active_company
+    ap({ user_group:})
     if user_group.save
       redirect_to user_group, notice: 'UserGroup was successfully created'
     else

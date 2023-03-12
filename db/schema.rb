@@ -490,10 +490,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
   end
 
   create_table "user_groups", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
+    t.string "slug", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_user_groups_on_slug", unique: true
   end
 
   create_table "users", force: :cascade do |t|
