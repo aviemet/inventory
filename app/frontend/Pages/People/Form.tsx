@@ -35,7 +35,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 
 			<TextInput name="last_name" label="Last Name" required  />
 
-			<TextInput name="employee_number" label="Employee Number" required  />
+			<TextInput name="employee_number" label="Employee #" required  />
 
 			<DepartmentsDropdown
 				departments={ departments }

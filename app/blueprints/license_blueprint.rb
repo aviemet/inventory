@@ -1,6 +1,6 @@
-class LicenseBlueprint < ApplicationBlueprint
+class LicenseBlueprint < Assignable::QuantityBlueprint
   fields :name,
-         :seats,
+         :qty,
          :key,
          :licenser_name,
          :licenser_email,
@@ -40,13 +40,9 @@ class LicenseBlueprint < ApplicationBlueprint
   end
 
   view :show do
-    association :department, blueprint: DepartmentBlueprint
+    include_view :associations
+
     association :assignments, blueprint: AssignmentBlueprint, view: :associations
-    association :purchase, blueprint: PurchaseBlueprint
-    association :activities, blueprint: ActivityBlueprint
-    association :category, blueprint: CategoryBlueprint
-    association :vendor, blueprint: VendorBlueprint
-    association :manufacturer, blueprint: ManufacturerBlueprint
   end
 
 end

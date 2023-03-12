@@ -28,7 +28,6 @@ class AssetBlueprint < ApplicationBlueprint
     association :default_location, blueprint: LocationBlueprint
     association :location, blueprint: LocationBlueprint
     association :status_label, blueprint: StatusLabelBlueprint
-    association :nics, blueprint: NicBlueprint
 
     association :activities, blueprint: ActivityBlueprint
   end

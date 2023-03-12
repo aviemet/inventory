@@ -34,7 +34,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 
 			<TextInput name="key" label="Key" required />
 
-			<TextInput name="seats" label="Seats" required />
+			<TextInput name="qty" label="Seats" required />
 
 			<TextInput name="licenser_name" label="Licenser Name" required />
 

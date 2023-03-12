@@ -23,8 +23,18 @@ declare global {
 		}
 
 		interface Assignable {
-			assigned: boolean
 			available_to_checkout: boolean
+			assignments?: Assignment[]
+		}
+
+		interface AssignableSingle extends Assignable {
+			assigned: boolean
+		}
+		interface AssignableQuantity extends Assignable {
+			qty_available: number
+		}
+		interface AssignableConsume extends Assignable {
+			qty_available: number
 		}
 
 		interface AssignToable {
@@ -35,9 +45,7 @@ declare global {
 			uid?: string
 		}
 
-		interface Accessory extends Assignable, UID {
-			active_assignments_count?: number
-		}
+		interface Accessory extends AssignableQuantity, UID {}
 		interface Address extends UID { }
 		interface Assignment extends UID {
 			assign_toable: Schema.Person | Schema.Item | Schema.Location
@@ -51,8 +59,8 @@ declare global {
 		interface Asset extends Assignable, UID { }
 		interface Category extends UID { }
 		interface Company extends UID { }
-		interface Component extends Assignable, UID { }
-		interface Consumable extends Assignable, UID { }
+		interface Component extends AssignableQuantity, UID { }
+		interface Consumable extends AssignableConsume, UID { }
 		interface Contact extends UID { }
 		interface Contract extends UID { }
 		interface Department extends UID { }
@@ -61,8 +69,8 @@ declare global {
 		interface Fieldset extends UID { }
 		interface FieldsetAssociation extends UID { }
 		interface IpLease extends UID { }
-		interface Item extends Assignable, AssignToable, UID { }
-		interface License extends Assignable, UID { }
+		interface Item extends AssignableSingle, AssignToable, UID { }
+		interface License extends AssignableQuantity, UID { }
 		interface Location extends AssignToable, UID { }
 		interface Manufacturer extends UID { }
 		interface Model extends UID { }

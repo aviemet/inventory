@@ -1,4 +1,4 @@
-class ItemBlueprint < ApplicationBlueprint
+class ItemBlueprint < Assignable::SingleBlueprint
   fields :name,
          :asset_tag,
          :serial,

@@ -30,7 +30,7 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							{ (license?.seats || 0) > (license?.assignments?.length || 0) &&
+							{ (license?.qty || 0) > (license?.assignments?.length || 0) &&
 								<Menu.Link href={ Routes.checkoutLicense(license) }>
 								Checkout License
 								</Menu.Link>

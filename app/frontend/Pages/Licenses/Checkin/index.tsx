@@ -1,20 +1,19 @@
-import React from 'react'
-import { Box, Flex, Heading, Page, Section, Table } from '@/Components'
-import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown } from '@/Components/Form/Components'
+import React, { useState } from 'react'
+import { Flex, Heading, Page, Section, Table, Box } from '@/Components'
 import { Routes, formatter } from '@/lib'
+import { DateTime, Form, TextInput, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
+import { LocationsDropdown } from '@/Components/Form/Dropdowns'
 
-import { omit } from 'lodash'
-
-interface ICheckoutLicenseProps {
+interface ICheckinLicensesProps {
 	assignment: Schema.Assignment
 	license: Schema.License
-	items: Schema.Item[]
-	people: Schema.Person[]
+	locations: Schema.Location[]
+	statuses: Schema.StatusType[]
 }
 
-const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => {
-	const title = 'Checkout License'
+const Checkin = ({ assignment, license, locations, statuses }: ICheckinLicensesProps) => {
+	const [licenseName, setLicenseName] = useState(license.name)
+	const title = 'Check In License'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
@@ -82,36 +81,40 @@ const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => 
 			</Section>
 
 			<Section>
+				<Heading order={ 3 }>{ title }</Heading>
+
 				<Form
 					data={ {
 						assignment: {
-							...omit(assignment, 'status'),
+							...assignment,
 						},
-						license: {
-							name: license.name,
-						},
+						license,
 					} }
-					to={ Routes.assignments() }
+					to={ Routes.unassignAssignment(assignment) }
+					method="patch"
 					model="assignment"
 				>
 					<TextInput
 						model="license"
 						name="name"
-						label="Item Name"
+						label="License Name"
+						onChange={ name => setLicenseName(String(name)) }
 						required
 					/>
 
-					<AssignToableDropdown { ...models } options={ ['Person', 'Item'] } />
+					<LocationsDropdown locations={ locations } />
 
-					<DateTime
-						label="Assigned At"
-						name="assigned_at"
+					<SearchableDropdown
+						options={ statuses }
+						label="Status"
+						name="status_id"
 						required
 					/>
 
 					<DateTime
-						label="Expected At"
-						name="expected_at"
+						label="Returned At"
+						name="returned_at"
+						required
 					/>
 
 					<Textarea
@@ -119,7 +122,7 @@ const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => 
 						name="notes"
 					/>
 
-					<Submit>Checkout { license.name }</Submit>
+					<Submit>Check In { licenseName }</Submit>
 
 				</Form>
 			</Section>
@@ -127,4 +130,4 @@ const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => 
 	)
 }
 
-export default Checkout
+export default Checkin

@@ -1,4 +1,4 @@
-class AccessoryBlueprint < ApplicationBlueprint
+class AccessoryBlueprint < Assignable::QuantityBlueprint
   fields :name,
          :serial,
          :asset_tag,
@@ -14,7 +14,6 @@ class AccessoryBlueprint < ApplicationBlueprint
          :updated_at
 
   field(:cost) { |accessory| currency_for(accessory) }
-  field(:available_to_checkout) { |asset| asset.available_to_checkout? }
 
   view :associations do
     association :department, blueprint: DepartmentBlueprint

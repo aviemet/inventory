@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, formatter } from '@/lib'
-import { Link, Table } from '@/Components'
-import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
+import { Group, Link, Table } from '@/Components'
+import { CheckoutButton } from '@/Components/Button'
 import { ITableProps } from '@/Components/Table/Table'
 
 const LicensesTable = (props: ITableProps) => {
@@ -10,7 +10,7 @@ const LicensesTable = (props: ITableProps) => {
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="seats">Seats</Table.Cell>
+					<Table.Cell sort="qty">Seats</Table.Cell>
 					<Table.Cell sort="licenser_name">Licensed To Name</Table.Cell>
 					<Table.Cell sort="licenser_email">Licensed To Email</Table.Cell>
 					<Table.Cell sort="reassignable">Reassignable</Table.Cell>
@@ -33,7 +33,7 @@ const LicensesTable = (props: ITableProps) => {
 							<Link href={ Routes.license(license) }>{ license.name }</Link>
 						</Table.Cell>
 						<Table.Cell>
-							<Link href={ Routes.license(license) }>{ license.seats }</Link>
+							<Link href={ Routes.license(license) }>{ license.qty }</Link>
 						</Table.Cell>
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.licenser_name }</Link>
@@ -61,12 +61,13 @@ const LicensesTable = (props: ITableProps) => {
 							<Link href={ Routes.license(license) }>{ license.manufacturer?.name }</Link>
 						</Table.Cell>
 						<Table.Cell fitContent>
-							{ license.assigned ?
-								<CheckinButton href={ Routes.checkinLicense(license) } />
-								:
-								<CheckoutButton href={ Routes.checkoutLicense(license) } />
-							}
-							<EditButton href={ Routes.editLicense(license) } />
+							<Group noWrap spacing="sm">
+								{ license.qty_available && <CheckoutButton
+									href={ Routes.checkoutLicense(license) }
+									disabled={ license.qty_available < 1 }
+									tooltipMessage={ license.qty_available < 1 && 'There are none to checkout' }
+								/> }
+							</Group>
 						</Table.Cell>
 					</Table.Row>
 				) } />

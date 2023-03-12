@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Section, Menu, Flex, Heading, Tabs, Tooltip, Page } from '@/Components'
 import { Routes } from '@/lib'
 import Details from './Details'
@@ -33,9 +33,9 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 						<Menu.Dropdown>
 							<Menu.Link
 								href={ Routes.checkoutAccessory(accessory) }
-								disabled={ !useCallback((accessory: Schema.Accessory) => accessory.available_to_checkout, [accessory.qty, accessory.assignments]) }
+								disabled={ accessory.qty_available < 1 }
 							>
-								{ !accessory.available_to_checkout ?
+								{ accessory.qty_available < 1 ?
 									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Accessory</div></Tooltip>
 									:
 									'Checkout Accessory'

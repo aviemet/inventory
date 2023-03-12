@@ -220,7 +220,7 @@ if Rails.env == "development"
 
     License.create!({
       name: "Microsoft Office",
-      seats: Faker::Number.digit,
+      qty: 5,
       key: Faker::Device.serial,
       licenser_name: Faker::Name.name,
       licenser_email: Faker::Internet.email,

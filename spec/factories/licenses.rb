@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :license do
     name { Faker::Device.model_name }
-    seats { Faker::Number.digit }
+    qty { 1 }
     key { Faker::Device.serial }
     licenser_name { Faker::Name.name }
     licenser_email { Faker::Internet.email }

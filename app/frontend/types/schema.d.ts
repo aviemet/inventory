@@ -470,7 +470,7 @@ declare namespace Schema {
 	interface License {
 		id: number;
 		name: string;
-		seats?: number | null;
+		qty?: number | null;
 		key?: string | null;
 		licenser_name?: string | null;
 		licenser_email?: string | null;

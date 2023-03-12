@@ -231,7 +231,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
 
   create_table "licenses", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "seats"
+    t.integer "qty"
     t.text "key"
     t.string "licenser_name"
     t.string "licenser_email"

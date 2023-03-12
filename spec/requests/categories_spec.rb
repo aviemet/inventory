@@ -7,13 +7,13 @@ RSpec.describe "Categories", type: :request do
       category: attributes_for(:category)
     }
   end
-  
+
   def invalid_attributes
-   { 
-     category: {
-       name: "",
-     }
-   }
+    {
+      category: {
+        name: "",
+      }
+    }
   end
 
   describe "POST /create" do

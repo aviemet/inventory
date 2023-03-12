@@ -59,9 +59,31 @@ class LicensesController < ApplicationController
     }
   end
 
+  # GET /licenses/:id/checkin/:assignment_id
+  def checkin
+    assignment = Assignment.find(params[:assignment_id])
+
+    if assignment&.assignable == license && assignment.active
+      assignment.returned_at = Time.current
+      assignment.active = false
+
+      render inertia: "Licenses/Checkin", props: {
+        license: license.render(view: :edit),
+        assignment: assignment.render(view: :edit),
+      }
+    else
+      redirect_to license, warning: 'License assignment is unable to be checked in'
+    end
+  end
+
   # POST /licenses
   def create
     license.company = @active_company
+
+    # if !license.valid?
+    #   ap({ license:, errors: license.errors.to_hash })
+    # end
+
     if license.save
       redirect_to license, notice: 'License was successfully created'
     else
@@ -91,6 +113,6 @@ class LicensesController < ApplicationController
   end
 
   def license_params
-    params.require(:license).permit(:name, :description, :seats, :key)
+    params.require(:license).permit(:name, :description, :qty, :cost, :category_id, :vendor_id, :manufacturer_id, :key)
   end
 end

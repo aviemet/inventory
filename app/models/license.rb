@@ -7,7 +7,7 @@ class License < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:name, :seats, :key, :licenser_name, :licenser_email], associated_against: {
+    against: [:name, :qty, :key, :licenser_name, :licenser_email], associated_against: {
       vendor: [:name],
       category: [:name],
       manufacturer: [:name]
@@ -28,7 +28,7 @@ class License < ApplicationRecord
 
   validates_presence_of :name
 
-  alias_attribute :qty, :seats
+  alias_attribute :seats, :qty
 
   scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer]) }
 

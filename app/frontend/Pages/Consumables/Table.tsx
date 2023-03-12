@@ -56,7 +56,11 @@ const ConsumablesTable = (props: ITableProps) => {
 
 						<Table.Cell fitContent>
 							<Group noWrap spacing="sm">
-								<CheckoutButton href={ Routes.checkoutConsumable(consumable) } />
+								<CheckoutButton
+									href={ Routes.checkoutConsumable(consumable) }
+									disabled={ consumable.qty_available < 1 }
+									tooltipMessage={ consumable.qty_available < 1 && 'There are none to checkout' }
+								/>
 								<ReplenishButton consumable={ consumable } />
 								<EditButton href={ Routes.editConsumable(consumable) } />
 							</Group>

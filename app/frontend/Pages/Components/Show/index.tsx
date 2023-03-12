@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { Tooltip } from '@mantine/core'
@@ -33,9 +33,9 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 						<Menu.Dropdown>
 							<Menu.Link
 								href={ Routes.checkoutComponent(component) }
-								disabled={ !useCallback((component: Schema.Component) => component.available_to_checkout, [component.qty, component.assignments]) }
+								disabled={ component.qty_available < 1 }
 							>
-								{ !component.available_to_checkout ?
+								{ component.qty_available < 1 ?
 									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Component</div></Tooltip>
 									:
 									'Checkout Component'

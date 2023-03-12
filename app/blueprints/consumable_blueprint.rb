@@ -1,4 +1,4 @@
-class ConsumableBlueprint < ApplicationBlueprint
+class ConsumableBlueprint < Assignable::ConsumeBlueprint
   fields :name,
          :min_qty,
          :qty,

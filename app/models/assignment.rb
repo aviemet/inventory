@@ -28,6 +28,4 @@ class Assignment < ApplicationRecord
 
   scope :includes_associated, -> { includes([:location, :created_by, :activities]) }
   scope :active, -> { where(active: true) }
-
-  # delegate :available_to_checkout?, to: self.assignable
 end

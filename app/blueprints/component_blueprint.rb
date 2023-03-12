@@ -1,4 +1,4 @@
-class ComponentBlueprint < ApplicationBlueprint
+class ComponentBlueprint < Assignable::QuantityBlueprint
   fields :name,
          :serial,
          :asset_tag,
