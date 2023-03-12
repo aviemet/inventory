@@ -92,10 +92,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-
+  gem "generator_spec", "~> 0.9.4"
   gem "database_cleaner-active_record", "~> 2.0"
   gem "shoulda-matchers", "~> 5.1"
   gem "bullet", "~> 7.0"
-
   gem "simplecov", "~> 0.22.0"
 end

@@ -7,7 +7,9 @@ module Inertia
 
       argument :actions, type: :array, default: [], banner: "action action"
       class_option :skip_routes, type: :boolean, desc: "Don't add routes to config/routes.rb."
-      class_option :assets, type: :boolean
+      class_option :helper, type: :boolean, default: false
+      class_option :parent, type: :string, default: "ApplicationController", desc: "The parent class for the generated controller"
+      class_option :assets, type: :boolean, default: false
 
       check_class_collision suffix: "Controller"
 

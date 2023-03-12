@@ -1,32 +1,32 @@
 <% module_namespacing do -%>
-class <%= controller_class_name %>Controller < ApplicationController
+class <%= class_name %>Controller < ApplicationController
   expose :<%= plural_table_name %>
   expose :<%= singular_table_name %>
 
   # GET <%= route_url %>
   def index
-		render inertia: "<%= controller_class_name %>/Index", props: {
+		render inertia: "<%= class_name %>/Index", props: {
 			<%= plural_table_name %>: -> { <%= plural_table_name %>.render }
 		}
   end
 
   # GET <%= route_url %>/:id
   def show
-		render inertia: "<%= controller_class_name %>/Show", props: {
+		render inertia: "<%= class_name %>/Show", props: {
 			<%= singular_table_name %>: -> { <%= singular_table_name %>.render }
 		}
   end
 
   # GET <%= route_url %>/new
   def new
-		render inertia: "<%= controller_class_name %>/New", props: {
+		render inertia: "<%= class_name %>/New", props: {
     	@<%= singular_table_name %> = <%= orm_class.build(class_name) %>
 		}
   end
 
   # GET <%= route_url %>/:id/edit
   def edit
-		render inertia: "<%= controller_class_name %>/Edit", props: {
+		render inertia: "<%= class_name %>/Edit", props: {
 			<%= singular_table_name %>: @<%= singular_table_name %>.as_json
 		}
   end

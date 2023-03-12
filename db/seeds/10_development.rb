@@ -1,4 +1,6 @@
-# Development data for testing with
+# Development data
+
+# Reminder: Category data is created in an after_save hook on Company::AsSetup
 
 if Rails.env == "development"
 

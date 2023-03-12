@@ -49,4 +49,5 @@ class User < ApplicationRecord
   def coerce_json
     self.dark_mode = ActiveModel::Type::Boolean.new.cast(self.dark_mode) if self.dark_mode
   end
+
 end
