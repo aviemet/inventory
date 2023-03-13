@@ -44,5 +44,8 @@ class PersonBlueprint < ApplicationBlueprint
     field :department_id do |person|
       person.department&.id
     end
+
+    association :contact, blueprint: ContactBlueprint
+    association :user, blueprint: UserBlueprint
   end
 end

@@ -37,10 +37,6 @@ class AccessoryBlueprint < Assignable::QuantityBlueprint
 
   view :show do
     include_view :associations
-
-    field :active_assignments_count do |accessory|
-      accessory.assignments.where(active: true).size
-    end
   end
 
 end

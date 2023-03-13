@@ -15,10 +15,6 @@ class ComponentBlueprint < Assignable::QuantityBlueprint
 
   field(:cost) { |component| currency_for(component) }
 
-  field :active_assignments_count do |component|
-    component.assignments.where(active: true).size
-  end
-
   view :associations do
     association :department, blueprint: DepartmentBlueprint
     association :assignments, blueprint: AssignmentBlueprint, view: :associations

@@ -88,7 +88,9 @@ declare global {
 			asset?: Asset
 		}
 		interface StatusType extends UID { }
-		interface User extends UID { }
+		interface User extends UID {
+			check_password?: string
+		}
 		interface Vendor extends UID { }
 		interface Warranty extends UID { }
 		interface Website extends UID { }
