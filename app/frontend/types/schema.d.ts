@@ -440,7 +440,7 @@ declare namespace Schema {
 		accessories?: Asset[];
 		components?: Asset[];
 		consumables?: Asset[];
-		licenses?: Asset[];
+		licenses?: License[];
 		nics?: Nic[];
 		ips?: IpLease[];
 		ip_leases?: IpLease[];
@@ -518,7 +518,7 @@ declare namespace Schema {
 		accessories?: Asset[];
 		components?: Asset[];
 		consumables?: Asset[];
-		licenses?: Asset[];
+		licenses?: License[];
 		contact?: Contact;
 		addresses?: Address[];
 		phones?: Phone[];
@@ -682,7 +682,7 @@ declare namespace Schema {
 		accessories?: Asset[];
 		components?: Asset[];
 		consumables?: Asset[];
-		licenses?: Asset[];
+		licenses?: License[];
 		fieldset_associations?: FieldsetAssociation[];
 		manager?: Person;
 		location?: Location;
