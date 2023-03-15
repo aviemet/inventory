@@ -107,6 +107,7 @@ class ItemsController < ApplicationController
     if item.save
       redirect_to item, notice: 'Item was successfully created'
     else
+      ap({ errors: item.errors })
       redirect_to new_item_path, inertia: { errors: item.errors }
     end
   end

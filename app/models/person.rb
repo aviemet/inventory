@@ -28,6 +28,7 @@ class Person < ApplicationRecord
   validates_presence_of :last_name
 
   accepts_nested_attributes_for :user
+  accepts_nested_attributes_for :contact
 
   delegate :to_s, to: :full_name
 

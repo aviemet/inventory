@@ -27,4 +27,4 @@ const Form = <T extends Record<keyof T, unknown>>(
 	)
 }
 
-export default React.forwardRef(Form)
+export default React.memo(React.forwardRef(Form))

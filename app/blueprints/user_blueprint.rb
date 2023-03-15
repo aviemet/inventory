@@ -32,6 +32,13 @@ class UserBlueprint < ApplicationBlueprint
     association :companies, blueprint: CompanyBlueprint
   end
 
+  view :as_form_data do
+    only :email,
+         :active
+
+    exclude :id
+  end
+
   view :shared do
     include_view :associations
   end

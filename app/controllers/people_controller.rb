@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   include OwnableConcern
   include Searchable
+  include ContactableConcern
 
   expose :people, -> { search(@active_company.people.includes_associated, sortable_fields) }
   expose :person
@@ -29,7 +30,7 @@ class PeopleController < ApplicationController
   def new
     self.person.owner = Ownership.new
     render inertia: "People/New", props: {
-      person: Person.new.render(view: :new),
+      person: Person.new(user: User.new).render(view: :new),
       departments: -> { @active_company.departments.render(view: :as_options) },
       people: -> { @active_company.people.render(view: :as_options) },
     }
@@ -47,18 +48,22 @@ class PeopleController < ApplicationController
   # POST /people
   def create
     person.company = @active_company
+    ap({ params: })
     if person.save
       redirect_to person, notice: 'Person was successfully created'
     else
-      redirect_to new_license_path, inertia: { errors: person.errors }
+      ap({ errors: person.errors })
+      redirect_to new_person_path, inertia: { errors: person.errors }
     end
   end
 
   # PATCH/PUT /people/1
   def update
+    ap({ params: })
     if person_params[:department_id]
       person_params[:department] = @active_company.departments.find(person_params[:department_id])
     end
+    return # Temp for testing
 
     if person.update(person_params.except(:department_id).merge({
       department: @active_company.departments.find(person_params[:department_id]) || nil
@@ -82,6 +87,10 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id, user: [:email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active])
+    params.require(:person).permit(
+      :id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id,
+      user_attributes: [:email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active],
+      contact_attributes: [**contact_attributes]
+    )
   end
 end

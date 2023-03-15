@@ -27,8 +27,10 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 
 	const personData = useCallback(() => {
 		const data = { person: { ...person } }
-		data.person.user!.password = ''
-		data.person.user!.check_password = ''
+		if(data.person.user) {
+			data.person.user.password = ''
+			data.person.user.check_password = ''
+		}
 		return data
 	}, [person])
 
@@ -40,21 +42,26 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 			form.setError('person.user.check_password', 'Passwords must match')
 			return false
 		}
+		console.log({ data: form.data })
+		// if(password === '') {
+		// 	form.transform(data => {
+		// 		const strippedData = { ...data }
+		// 		delete strippedData.person.user.password
+		// 		delete strippedData.person.user.check_password
+		// 		console.log({ strippedData })
+		// 		return strippedData
+		// 	})
+		// }
 
-		if(password === '') {
-			form.transform(data => {
-				const strippedData = { ...data }
-				delete strippedData.person.user.password
-				delete strippedData.person.user.check_password
-				console.log({ strippedData })
-				return strippedData
-			})
-		}
-		return false
+		form.transform(data => {
+			return { nothing: 'value' }
+		})
+
 		if(onSubmit) onSubmit(form)
 	}
 
-	const handleChange = ({ getData, setData, setError, clearErrors }: UseFormProps) => {
+	const handleChange = ({ data, getData, setData, setError, clearErrors }: UseFormProps) => {
+		console.log({ data })
 		const password = getData('person.user.password')
 		const checkPassword = getData('person.user.check_password')
 
@@ -79,7 +86,6 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 			setError('person.user.check_password', 'Passwords must match')
 		}
 	}
-
 	return (
 		<Form
 			model="person"
