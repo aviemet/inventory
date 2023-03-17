@@ -12,6 +12,7 @@ import {
 import { router } from '@inertiajs/react'
 import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
+import { ResetButton } from '@/Components/Form/Components'
 
 export interface IPersonFormProps {
 	to: string
@@ -42,7 +43,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 			form.setError('person.user.check_password', 'Passwords must match')
 			return false
 		}
-		console.log({ data: form.data })
+		// console.log({ data: form.data })
 		// if(password === '') {
 		// 	form.transform(data => {
 		// 		const strippedData = { ...data }
@@ -60,8 +61,8 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 		if(onSubmit) onSubmit(form)
 	}
 
-	const handleChange = ({ data, getData, setData, setError, clearErrors }: UseFormProps) => {
-		console.log({ data })
+	const handleChange = ({ data, getData, setData, setError, clearErrors, reset }: UseFormProps) => {
+		// console.log({ data })
 		const password = getData('person.user.password')
 		const checkPassword = getData('person.user.check_password')
 

@@ -9,7 +9,7 @@ interface IFormProps<T extends Record<keyof T, unknown>> extends FormComponentPr
 }
 
 const Form = <T extends Record<keyof T, unknown>>(
-	{ children, grid = true, className, ...props }: IFormProps<T>,
+	{ children, grid = true, className, railsAttributes = true, ...props }: IFormProps<T>,
 	ref: React.ForwardedRef<HTMLFormElement>,
 ) => {
 	const { classes } = useFormStyles()
@@ -19,6 +19,7 @@ const Form = <T extends Record<keyof T, unknown>>(
 			<InertiaForm
 				ref={ ref }
 				className={ cx({ 'format-grid': grid }, className) }
+				railsAttributes={ railsAttributes }
 				{ ...props }
 			>
 				{ children }

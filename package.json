@@ -45,8 +45,7 @@
     "react-html-props": "^2.0.2",
     "react-icons": "^4.8.0",
     "styled-components": "^5.3.9",
-    "tabler-icons-react": "^1.56.0",
-    "use-inertia-form": "^1.0.7"
+    "tabler-icons-react": "^1.56.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
