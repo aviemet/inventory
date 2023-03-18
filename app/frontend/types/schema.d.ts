@@ -3,19 +3,19 @@ declare namespace Schema {
 		id: number;
 		type: string;
 		name: string;
-		asset_tag?: string | null;
-		serial?: string | null;
-		cost?: number | null;
+		asset_tag?: string;
+		serial?: string;
+		cost?: number;
 		cost_currency: string;
-		purchased_at?: string | null;
+		purchased_at?: string;
 		requestable: boolean;
-		min_qty?: number | null;
-		qty?: number | null;
-		notes?: string | null;
+		min_qty?: number;
+		qty?: number;
+		notes?: string;
 		model_id: number;
-		vendor_id?: number | null;
-		default_location_id?: number | null;
-		status_label_id?: number | null;
+		vendor_id?: number;
+		default_location_id?: number;
+		status_label_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -38,12 +38,12 @@ declare namespace Schema {
 	interface Address {
 		id: number;
 		address: string;
-		address_2?: string | null;
-		city?: string | null;
-		region?: string | null;
-		country?: string | null;
-		postal?: string | null;
-		notes?: string | null;
+		address_2?: string;
+		city?: string;
+		region?: string;
+		country?: string;
+		postal?: string;
+		notes?: string;
 		contact_id: number;
 		category_id: number;
 		created_at: string;
@@ -57,19 +57,19 @@ declare namespace Schema {
 		id: number;
 		type: string;
 		name: string;
-		asset_tag?: string | null;
-		serial?: string | null;
-		cost?: number | null;
+		asset_tag?: string;
+		serial?: string;
+		cost?: number;
 		cost_currency: string;
-		purchased_at?: string | null;
+		purchased_at?: string;
 		requestable: boolean;
-		min_qty?: number | null;
-		qty?: number | null;
-		notes?: string | null;
+		min_qty?: number;
+		qty?: number;
+		notes?: string;
 		model_id: number;
-		vendor_id?: number | null;
-		default_location_id?: number | null;
-		status_label_id?: number | null;
+		vendor_id?: number;
+		default_location_id?: number;
+		status_label_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -96,14 +96,14 @@ declare namespace Schema {
 		assign_toable_type: TAssignToable;
 		assign_toable_id: number;
 		location_id: number;
-		qty?: number | null;
-		assigned_at?: string | null;
-		returned_at?: string | null;
-		expected_at?: string | null;
-		notes?: string | null;
-		status?: 'approved'|'requested'|'denied' | null;
+		qty?: number;
+		assigned_at?: string;
+		returned_at?: string;
+		expected_at?: string;
+		notes?: string;
+		status?: 'approved'|'requested'|'denied';
 		active: boolean;
-		created_by_id?: number | null;
+		created_by_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -114,9 +114,9 @@ declare namespace Schema {
 	interface Category {
 		id: number;
 		categorizable_type: string;
-		name?: string | null;
+		name?: string;
 		slug: string;
-		description?: string | null;
+		description?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -133,9 +133,9 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		default_currency: string;
-		settings?: Record<string, any> | null;
-		tickets_smtp_id?: number | null;
-		app_smtp_id?: number | null;
+		settings?: Record<string, any>;
+		tickets_smtp_id?: number;
+		app_smtp_id?: number;
 		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		addresses?: Address[];
@@ -174,9 +174,9 @@ declare namespace Schema {
 		created_at: string;
 		updated_at: string;
 		default_currency: string;
-		settings?: Record<string, any> | null;
-		tickets_smtp_id?: number | null;
-		app_smtp_id?: number | null;
+		settings?: Record<string, any>;
+		tickets_smtp_id?: number;
+		app_smtp_id?: number;
 		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		addresses?: Address[];
@@ -212,19 +212,19 @@ declare namespace Schema {
 		id: number;
 		type: string;
 		name: string;
-		asset_tag?: string | null;
-		serial?: string | null;
-		cost?: number | null;
+		asset_tag?: string;
+		serial?: string;
+		cost?: number;
 		cost_currency: string;
-		purchased_at?: string | null;
+		purchased_at?: string;
 		requestable: boolean;
-		min_qty?: number | null;
-		qty?: number | null;
-		notes?: string | null;
+		min_qty?: number;
+		qty?: number;
+		notes?: string;
 		model_id: number;
-		vendor_id?: number | null;
-		default_location_id?: number | null;
-		status_label_id?: number | null;
+		vendor_id?: number;
+		default_location_id?: number;
+		status_label_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -248,19 +248,19 @@ declare namespace Schema {
 		id: number;
 		type: string;
 		name: string;
-		asset_tag?: string | null;
-		serial?: string | null;
-		cost?: number | null;
+		asset_tag?: string;
+		serial?: string;
+		cost?: number;
 		cost_currency: string;
-		purchased_at?: string | null;
+		purchased_at?: string;
 		requestable: boolean;
-		min_qty?: number | null;
-		qty?: number | null;
-		notes?: string | null;
+		min_qty?: number;
+		qty?: number;
+		notes?: string;
 		model_id: number;
-		vendor_id?: number | null;
-		default_location_id?: number | null;
-		status_label_id?: number | null;
+		vendor_id?: number;
+		default_location_id?: number;
+		status_label_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -282,14 +282,14 @@ declare namespace Schema {
 
 	interface Contact {
 		id: number;
-		notes?: string | null;
-		contactable_type?: string | null;
-		contactable_id?: number | null;
+		notes?: string;
+		contactable_type?: string;
+		contactable_id?: number;
 		created_at: string;
 		updated_at: string;
-		primary_address_id?: number | null;
-		primary_phone_id?: number | null;
-		primary_email_id?: number | null;
+		primary_address_id?: number;
+		primary_phone_id?: number;
+		primary_email_id?: number;
 		activities?: PublicActivityActivity[];
 		addresses?: Address[];
 		emails?: Email[];
@@ -300,10 +300,10 @@ declare namespace Schema {
 	interface Contract {
 		id: number;
 		name: string;
-		number?: string | null;
-		notes?: string | null;
-		begins_at?: string | null;
-		ends_at?: string | null;
+		number?: string;
+		notes?: string;
+		begins_at?: string;
+		ends_at?: string;
 		vendor_id: number;
 		category_id: number;
 		created_at: string;
@@ -319,13 +319,13 @@ declare namespace Schema {
 
 	interface Department {
 		id: number;
-		name?: string | null;
+		name?: string;
 		slug: string;
-		notes?: string | null;
-		location_id?: number | null;
+		notes?: string;
+		location_id?: number;
 		created_at: string;
 		updated_at: string;
-		manager_id?: number | null;
+		manager_id?: number;
 		activities?: PublicActivityActivity[];
 		contact?: Contact;
 		addresses?: Address[];
@@ -347,8 +347,8 @@ declare namespace Schema {
 
 	interface Email {
 		id: number;
-		email?: string | null;
-		notes?: string | null;
+		email?: string;
+		notes?: string;
 		contact_id: number;
 		category_id: number;
 		created_at: string;
@@ -360,11 +360,11 @@ declare namespace Schema {
 
 	interface Field {
 		id: number;
-		name?: string | null;
-		format?: string | null;
-		element?: string | null;
-		description?: string | null;
-		notes?: string | null;
+		name?: string;
+		format?: string;
+		element?: string;
+		description?: string;
+		notes?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -372,8 +372,8 @@ declare namespace Schema {
 
 	interface Fieldset {
 		id: number;
-		name?: string | null;
-		description?: string | null;
+		name?: string;
+		description?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -393,7 +393,7 @@ declare namespace Schema {
 	interface IpLease {
 		id: number;
 		nic_id: number;
-		address?: string | null;
+		address?: string;
 		active: boolean;
 		created_at: string;
 		updated_at: string;
@@ -406,19 +406,19 @@ declare namespace Schema {
 		id: number;
 		type: string;
 		name: string;
-		asset_tag?: string | null;
-		serial?: string | null;
-		cost?: number | null;
+		asset_tag?: string;
+		serial?: string;
+		cost?: number;
 		cost_currency: string;
-		purchased_at?: string | null;
+		purchased_at?: string;
 		requestable: boolean;
-		min_qty?: number | null;
-		qty?: number | null;
-		notes?: string | null;
+		min_qty?: number;
+		qty?: number;
+		notes?: string;
 		model_id: number;
-		vendor_id?: number | null;
-		default_location_id?: number | null;
-		status_label_id?: number | null;
+		vendor_id?: number;
+		default_location_id?: number;
+		status_label_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -451,14 +451,14 @@ declare namespace Schema {
 	interface Ldap {
 		id: number;
 		name: string;
-		host?: string | null;
-		port?: string | null;
-		domain?: string | null;
-		username?: string | null;
-		password?: string | null;
-		tree_base?: string | null;
-		user_search?: string | null;
-		sync_interval?: string | null;
+		host?: string;
+		port?: string;
+		domain?: string;
+		username?: string;
+		password?: string;
+		tree_base?: string;
+		user_search?: string;
+		sync_interval?: string;
 		company_id: number;
 		created_at: string;
 		updated_at: string;
@@ -470,22 +470,22 @@ declare namespace Schema {
 	interface License {
 		id: number;
 		name: string;
-		qty?: number | null;
-		key?: string | null;
-		licenser_name?: string | null;
-		licenser_email?: string | null;
+		qty?: number;
+		key?: string;
+		licenser_name?: string;
+		licenser_email?: string;
 		reassignable: boolean;
-		cost?: number | null;
+		cost?: number;
 		cost_currency: string;
-		purchased_at?: string | null;
-		expires_at?: string | null;
-		terminates_at?: string | null;
+		purchased_at?: string;
+		expires_at?: string;
+		terminates_at?: string;
 		maintained: boolean;
-		notes?: string | null;
+		notes?: string;
 		category_id: number;
-		vendor_id?: number | null;
+		vendor_id?: number;
 		manufacturer_id: number;
-		status_label_id?: number | null;
+		status_label_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -506,8 +506,8 @@ declare namespace Schema {
 		id: number;
 		name: string;
 		slug: string;
-		currency?: string | null;
-		parent_id?: number | null;
+		currency?: string;
+		parent_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -534,7 +534,7 @@ declare namespace Schema {
 
 	interface Manufacturer {
 		id: number;
-		name?: string | null;
+		name?: string;
 		slug: string;
 		created_at: string;
 		updated_at: string;
@@ -557,10 +557,10 @@ declare namespace Schema {
 
 	interface Model {
 		id: number;
-		name?: string | null;
+		name?: string;
 		slug: string;
-		model_number?: string | null;
-		notes?: string | null;
+		model_number?: string;
+		notes?: string;
 		category_id: number;
 		manufacturer_id: number;
 		created_at: string;
@@ -581,13 +581,13 @@ declare namespace Schema {
 
 	interface Network {
 		id: number;
-		name?: string | null;
-		address?: string | null;
-		gateway?: string | null;
-		dhcp_start?: string | null;
-		dhcp_end?: string | null;
-		vlan_id?: number | null;
-		notes?: string | null;
+		name?: string;
+		address?: string;
+		gateway?: string;
+		dhcp_start?: string;
+		dhcp_end?: string;
+		vlan_id?: number;
+		notes?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -598,7 +598,7 @@ declare namespace Schema {
 
 	interface Nic {
 		id: number;
-		mac?: string | null;
+		mac?: string;
 		nic_type: 'ethernet'|'wifi'|'fiber'|'cellular';
 		item_id: number;
 		created_at: string;
@@ -611,23 +611,23 @@ declare namespace Schema {
 
 	interface Order {
 		id: number;
-		number?: string | null;
+		number?: string;
 		user_id: number;
-		notes?: string | null;
-		submitted_at?: string | null;
-		ordered_at?: string | null;
-		expected_at?: string | null;
-		delivered_at?: string | null;
-		canceled_at?: string | null;
-		returned_at?: string | null;
-		discount_decription?: string | null;
-		returned_reason?: string | null;
-		canceled_reason?: string | null;
-		shipping_cents?: number | null;
+		notes?: string;
+		submitted_at?: string;
+		ordered_at?: string;
+		expected_at?: string;
+		delivered_at?: string;
+		canceled_at?: string;
+		returned_at?: string;
+		discount_decription?: string;
+		returned_reason?: string;
+		canceled_reason?: string;
+		shipping_cents?: number;
 		shipping_currency: string;
-		tax_cents?: number | null;
+		tax_cents?: number;
 		tax_currency: string;
-		discount_cents?: number | null;
+		discount_cents?: number;
 		discount_currency: string;
 		vendor_id: number;
 		created_at: string;
@@ -646,7 +646,7 @@ declare namespace Schema {
 	interface Ownership {
 		id: number;
 		company_id: number;
-		department_id?: number | null;
+		department_id?: number;
 		ownable_type: string;
 		ownable_id: number;
 		created_at: string;
@@ -658,15 +658,15 @@ declare namespace Schema {
 
 	interface Person {
 		id: number;
-		first_name?: string | null;
-		middle_name?: string | null;
-		last_name?: string | null;
+		first_name?: string;
+		middle_name?: string;
+		last_name?: string;
 		active: boolean;
-		employee_number?: string | null;
-		job_title?: string | null;
-		guid?: string | null;
-		manager_id?: number | null;
-		location_id?: number | null;
+		employee_number?: string;
+		job_title?: string;
+		guid?: string;
+		manager_id?: number;
+		location_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -696,8 +696,8 @@ declare namespace Schema {
 	interface Phone {
 		id: number;
 		number: string;
-		extension?: string | null;
-		notes?: string | null;
+		extension?: string;
+		notes?: string;
 		contact_id: number;
 		category_id: number;
 		created_at: string;
@@ -709,14 +709,14 @@ declare namespace Schema {
 
 	interface PublicActivityActivity {
 		id: number;
-		trackable_type?: string | null;
-		trackable_id?: number | null;
-		owner_type?: string | null;
-		owner_id?: number | null;
-		key?: string | null;
-		parameters?: Record<string, any> | null;
-		recipient_type?: string | null;
-		recipient_id?: number | null;
+		trackable_type?: string;
+		trackable_id?: number;
+		owner_type?: string;
+		owner_id?: number;
+		key?: string;
+		parameters?: Record<string, any>;
+		recipient_type?: string;
+		recipient_id?: number;
 		created_at: string;
 		updated_at: string;
 	}
@@ -725,11 +725,11 @@ declare namespace Schema {
 		id: number;
 		purchasable_type: string;
 		purchasable_id: number;
-		order_id?: number | null;
+		order_id?: number;
 		cost: number;
 		cost_currency: string;
-		qty?: number | null;
-		notes?: string | null;
+		qty?: number;
+		notes?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -746,9 +746,9 @@ declare namespace Schema {
 
 	interface Role {
 		id: number;
-		name?: string | null;
-		resource_type?: string | null;
-		resource_id?: number | null;
+		name?: string;
+		resource_type?: string;
+		resource_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -757,15 +757,15 @@ declare namespace Schema {
 
 	interface Smtp {
 		id: number;
-		name?: string | null;
-		address?: string | null;
-		port?: number | null;
-		domain?: string | null;
-		auth?: string | null;
-		tls?: boolean | null;
-		username?: string | null;
-		password?: string | null;
-		notes?: string | null;
+		name?: string;
+		address?: string;
+		port?: number;
+		domain?: string;
+		auth?: string;
+		tls?: boolean;
+		username?: string;
+		password?: string;
+		notes?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -777,10 +777,10 @@ declare namespace Schema {
 
 	interface StatusLabel {
 		id: number;
-		name?: string | null;
-		status_type?: 'deployable'|'pending'|'undeployable'|'archived' | null;
+		name?: string;
+		status_type?: 'deployable'|'pending'|'undeployable'|'archived';
 		slug: string;
-		description?: string | null;
+		description?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -794,12 +794,12 @@ declare namespace Schema {
 	interface Ticket {
 		id: number;
 		subject: string;
-		description?: string | null;
-		priority?: 'urgent'|'high'|'standard'|'low' | null;
-		status_id?: number | null;
-		primary_contact_id?: number | null;
-		created_by_id?: number | null;
-		asset_id?: number | null;
+		description?: string;
+		priority?: 'urgent'|'high'|'standard'|'low';
+		status_id?: number;
+		primary_contact_id?: number;
+		created_by_id?: number;
+		asset_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -825,10 +825,10 @@ declare namespace Schema {
 
 	interface TicketMessage {
 		id: number;
-		body?: string | null;
+		body?: string;
 		ticket_id: number;
-		parent_id?: number | null;
-		created_by_id?: number | null;
+		parent_id?: number;
+		created_by_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -839,8 +839,8 @@ declare namespace Schema {
 
 	interface TicketStatus {
 		id: number;
-		name?: string | null;
-		status_type?: 'open'|'pending'|'closed' | null;
+		name?: string;
+		status_type?: 'open'|'pending'|'closed';
 		slug: string;
 		created_at: string;
 		updated_at: string;
@@ -851,29 +851,29 @@ declare namespace Schema {
 	interface User {
 		id: number;
 		email: string;
-		password?: string | null;
-		reset_password_token?: string | null;
-		reset_password_sent_at?: string | null;
-		remember_created_at?: string | null;
+		password?: string;
+		reset_password_token?: string;
+		reset_password_sent_at?: string;
+		remember_created_at?: string;
 		sign_in_count: number;
-		current_sign_in_at?: string | null;
-		last_sign_in_at?: string | null;
-		current_sign_in_ip?: string | null;
-		last_sign_in_ip?: string | null;
-		confirmation_token?: string | null;
-		confirmed_at?: string | null;
-		confirmation_sent_at?: string | null;
-		unconfirmed_email?: string | null;
+		current_sign_in_at?: string;
+		last_sign_in_at?: string;
+		current_sign_in_ip?: string;
+		last_sign_in_ip?: string;
+		confirmation_token?: string;
+		confirmed_at?: string;
+		confirmation_sent_at?: string;
+		unconfirmed_email?: string;
 		failed_attempts: number;
-		unlock_token?: string | null;
-		locked_at?: string | null;
+		unlock_token?: string;
+		locked_at?: string;
 		created_at: string;
 		updated_at: string;
-		person_id?: number | null;
-		active_company_id?: number | null;
-		active?: boolean | null;
-		table_preferences?: Record<string, any> | null;
-		user_preferences?: Record<string, any> | null;
+		person_id?: number;
+		active_company_id?: number;
+		active?: boolean;
+		table_preferences?: Record<string, any>;
+		user_preferences?: Record<string, any>;
 		activities?: PublicActivityActivity[];
 		roles?: Role[];
 		person?: Person;
@@ -885,9 +885,9 @@ declare namespace Schema {
 
 	interface UserGroup {
 		id: number;
-		name?: string | null;
+		name?: string;
 		slug: string;
-		description?: string | null;
+		description?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -913,7 +913,7 @@ declare namespace Schema {
 		id: number;
 		name: string;
 		slug: string;
-		url?: string | null;
+		url?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -936,8 +936,8 @@ declare namespace Schema {
 	interface Warranty {
 		id: number;
 		asset_id: number;
-		length?: number | null;
-		notes?: string | null;
+		length?: number;
+		notes?: string;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -951,9 +951,9 @@ declare namespace Schema {
 
 	interface Website {
 		id: number;
-		url?: string | null;
-		name?: string | null;
-		notes?: string | null;
+		url?: string;
+		name?: string;
+		notes?: string;
 		contact_id: number;
 		created_at: string;
 		updated_at: string;

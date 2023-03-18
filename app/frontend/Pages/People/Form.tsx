@@ -12,7 +12,20 @@ import {
 import { router } from '@inertiajs/react'
 import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
-import { ResetButton } from '@/Components/Form/Components'
+
+// interface UserDataWithPasswordFields extends Schema.User {
+// 	password?: string
+// 	check_password?: string
+// }
+
+// interface PersonWithModifiedUser extends Omit<Schema.Person, 'user'> {
+// 	user?: UserDataWithPasswordFields
+// 	user_attributes?: UserDataWithPasswordFields
+// }
+
+// type PersonFormData = {
+// 	person: Partial<PersonWithModifiedUser>
+// }
 
 export interface IPersonFormProps {
 	to: string
@@ -23,6 +36,7 @@ export interface IPersonFormProps {
 	people: Schema.Person[]
 	locations: Schema.Location[]
 }
+
 
 const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people, locations }: IPersonFormProps) => {
 
@@ -43,20 +57,15 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 			form.setError('person.user.check_password', 'Passwords must match')
 			return false
 		}
-		// console.log({ data: form.data })
-		// if(password === '') {
-		// 	form.transform(data => {
-		// 		const strippedData = { ...data }
-		// 		delete strippedData.person.user.password
-		// 		delete strippedData.person.user.check_password
-		// 		console.log({ strippedData })
-		// 		return strippedData
-		// 	})
-		// }
 
-		form.transform(data => {
-			return { nothing: 'value' }
-		})
+		if(password === '') {
+			form.transform(data => {
+				const clone = structuredClone(data)
+				delete clone.person.user_attributes!.password
+				delete clone.person.user_attributes!.check_password
+				return clone
+			})
+		}
 
 		if(onSubmit) onSubmit(form)
 	}
@@ -87,6 +96,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 			setError('person.user.check_password', 'Passwords must match')
 		}
 	}
+
 	return (
 		<Form
 			model="person"

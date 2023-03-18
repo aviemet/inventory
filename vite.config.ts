@@ -31,6 +31,11 @@ const config = defineConfig({
 	test: {
 		globals: true,
 	},
+	server: {
+		fs: {
+			allow: ['/media/avram/Dev/javascript/useInertiaForm/dist/'],
+		},
+	},
 })
 
 export default config
