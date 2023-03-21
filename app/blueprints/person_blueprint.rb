@@ -41,7 +41,7 @@ class PersonBlueprint < ApplicationBlueprint
   view :new do
     excludes :updated_at, :created_at
 
-    association :contact, blueprint: ContactBlueprint
+    # association :contact, blueprint: ContactBlueprint
     association :user, blueprint: UserBlueprint, view: :as_form_data
   end
 
@@ -52,7 +52,7 @@ class PersonBlueprint < ApplicationBlueprint
       person.department&.id
     end
 
-    association :contact, blueprint: ContactBlueprint
+    # association :contact, blueprint: ContactBlueprint
     association :user, blueprint: UserBlueprint, view: :as_form_data
   end
 end

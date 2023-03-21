@@ -57,15 +57,12 @@ const PersonForm = ({
 	}
 
 	const handleEnableLogin = (form: UseFormProps<PersonFormData>) => {
-		if(!loginEnabled && !person.user) {
-			form.setData('person.user', emptyUser)
-		}
+		const userData = person.user ?? emptyUser
+		form.setData('person.user', userData)
 	}
 
 	const handleDisableLogin = (form: UseFormProps<PersonFormData>) => {
-		if(loginEnabled && person.user) {
-			form.unsetData('person.user')
-		}
+		form.unsetData('person.user')
 	}
 
 	const personData = useCallback((): PersonFormData => {
@@ -100,7 +97,6 @@ const PersonForm = ({
 	}
 
 	const handleChange = ({ data, getData, clearErrors }: UseFormProps<PersonFormData>) => {
-		// console.log({ data })
 		const password = getData('person.user.password')
 		const checkPassword = getData('person.user.check_password')
 
