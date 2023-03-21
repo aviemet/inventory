@@ -8,25 +8,64 @@ import {
 	FormGroup,
 	PasswordInput,
 	Checkbox,
+	FormConsumer,
 } from '@/Components/Form'
+import { Checkbox as CheckboxInput } from '@/Components/Inputs'
+import { useBooleanToggle } from '@/Components/Hooks'
 import { router } from '@inertiajs/react'
 import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
-import { ResetButton } from '@/Components/Form/Components'
+
+type PersonFormData = {
+	person: Schema.Person
+}
+
+const emptyUser: Partial<Schema.User> = {
+	email: '',
+	password: '',
+	check_password: '',
+}
 
 export interface IPersonFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
+	onSubmit?: (object: UseFormProps<PersonFormData>) => boolean|void
 	person: Schema.Person
 	departments: Schema.Department[]
 	people: Schema.Person[]
 	locations: Schema.Location[]
 }
 
-const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people, locations }: IPersonFormProps) => {
+const PersonForm = ({
+	to,
+	method = 'post',
+	onSubmit,
+	person,
+	departments,
+	people,
+	locations,
+}: IPersonFormProps) => {
+	const [loginEnabled, toggleLoginEnabled] = useBooleanToggle(!!person.user)
 
-	const personData = useCallback(() => {
+	const handleToggleLogin = (form: UseFormProps<PersonFormData>) => {
+		if(!loginEnabled) {
+			handleEnableLogin(form)
+		} else {
+			handleDisableLogin(form)
+		}
+		toggleLoginEnabled()
+	}
+
+	const handleEnableLogin = (form: UseFormProps<PersonFormData>) => {
+		const userData = person.user ?? emptyUser
+		form.setData('person.user', userData)
+	}
+
+	const handleDisableLogin = (form: UseFormProps<PersonFormData>) => {
+		form.unsetData('person.user')
+	}
+
+	const personData = useCallback((): PersonFormData => {
 		const data = { person: { ...person } }
 		if(data.person.user) {
 			data.person.user.password = ''
@@ -35,7 +74,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 		return data
 	}, [person])
 
-	const handleSubmit = (form: UseFormProps) => {
+	const handleSubmit = (form: UseFormProps<PersonFormData>) => {
 		const password = form.getData('person.user.password')
 		const checkPassword = form.getData('person.user.check_password')
 
@@ -43,26 +82,21 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 			form.setError('person.user.check_password', 'Passwords must match')
 			return false
 		}
-		// console.log({ data: form.data })
-		// if(password === '') {
-		// 	form.transform(data => {
-		// 		const strippedData = { ...data }
-		// 		delete strippedData.person.user.password
-		// 		delete strippedData.person.user.check_password
-		// 		console.log({ strippedData })
-		// 		return strippedData
-		// 	})
-		// }
 
-		form.transform(data => {
-			return { nothing: 'value' }
-		})
+		if(password === '') {
+			form.transform(data => {
+				if(data.person.user) {
+					delete data.person.user.password
+					delete data.person.user.check_password
+				}
+				return data
+			})
+		}
 
 		if(onSubmit) onSubmit(form)
 	}
 
-	const handleChange = ({ data, getData, setData, setError, clearErrors, reset }: UseFormProps) => {
-		// console.log({ data })
+	const handleChange = ({ data, getData, clearErrors }: UseFormProps<PersonFormData>) => {
 		const password = getData('person.user.password')
 		const checkPassword = getData('person.user.check_password')
 
@@ -72,7 +106,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 		}
 	}
 
-	const handlePasswordBlur = (password: string, { getData, setData, setError, clearErrors }: UseFormProps) => {
+	const handlePasswordBlur = (password: string, { getData, setError }: UseFormProps<PersonFormData>) => {
 		const checkPassword = getData('person.user.check_password')
 
 		if(checkPassword !== '' && password !== checkPassword) {
@@ -80,13 +114,14 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 		}
 	}
 
-	const handleCheckPasswordBlur = (checkPassword: string, { getData, setData, setError, clearErrors }: UseFormProps) => {
+	const handleCheckPasswordBlur = (checkPassword: string, { getData, setError }: UseFormProps<PersonFormData>) => {
 		const password = getData('person.user.password')
 
 		if(password !== checkPassword) {
 			setError('person.user.check_password', 'Passwords must match')
 		}
 	}
+
 	return (
 		<Form
 			model="person"
@@ -121,7 +156,15 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 				onOpen={ () => router.reload({ only: ['people'] }) }
 			/>
 
-			<FormGroup legend="Login Details">
+			<FormConsumer>{ form => (
+				<CheckboxInput
+					label="Login Enabled"
+					checked={ loginEnabled }
+					onChange={ () => handleToggleLogin(form) }
+				/>) }
+			</FormConsumer>
+
+			{ loginEnabled && <FormGroup legend="Login Details">
 				<FieldsFor model="user">
 
 					<TextInput name="email" label="Email" />
@@ -132,7 +175,7 @@ const PersonForm = ({ to, method = 'post', onSubmit, person, departments, people
 					<Checkbox name="active" label="Active" />
 
 				</FieldsFor>
-			</FormGroup>
+			</FormGroup> }
 
 			<Submit>
 				{ person.id ? 'Update' : 'Create' } Person

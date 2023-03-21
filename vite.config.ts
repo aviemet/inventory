@@ -35,7 +35,7 @@ const config = defineConfig({
 	},
 	server: {
 		fs: {
-			allow: ['/Users/avram/Development/javascript/useInertiaForm/dist/'],
+			allow: ['/media/avram/Dev/javascript/useInertiaForm/dist/'],
 		},
 	},
 })
