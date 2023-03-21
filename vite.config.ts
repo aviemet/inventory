@@ -5,6 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import FullReload from 'vite-plugin-full-reload'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import allowList from './vite-local-allow.json'
 
 const config = defineConfig({
 	build: {
@@ -35,7 +36,7 @@ const config = defineConfig({
 	},
 	server: {
 		fs: {
-			allow: ['/media/avram/Dev/javascript/useInertiaForm/dist/'],
+			allow: allowList || [],
 		},
 	},
 })

@@ -65,4 +65,8 @@ coverage
 spec/examples.txt
 coverage
 
+# Seeds specific for a local dev environment
 db/seeds/99_local.rb
+
+# List of allow locations for local dev environment
+vite-local-allow.json
