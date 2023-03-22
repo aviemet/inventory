@@ -147,6 +147,8 @@ declare global {
 		}
 	}
 
+	interface NewFormData<T> extends Omit<T, 'id', 'slug', 'created_at', 'updated_at'> {}
+
 	type FlashMessage = Record<'success' | 'alert' | 'info' | 'warning', string>
 
 	// Inputs
