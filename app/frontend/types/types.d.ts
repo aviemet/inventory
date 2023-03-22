@@ -1,4 +1,3 @@
-import { Instance } from 'flatpickr/dist/types'
 import { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
 import { type SelectProps, type InputProps } from '@mantine/core'
 
@@ -174,15 +173,6 @@ declare global {
 		label?: string
 		fetchOnOpen?: string
 		required?: boolean
-	}
-
-	declare namespace Flatpicker {
-		export interface Instance extends Instance { }
-		export interface ChangeProps {
-			dates: Date[]
-			dateStr: string
-			instance: Instance
-		}
 	}
 }
 
