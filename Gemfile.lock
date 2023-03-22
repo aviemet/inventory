@@ -81,10 +81,6 @@ GEM
     amazing_print (1.4.0)
     ast (2.4.2)
     bcrypt (3.1.18)
-    better_errors (2.9.1)
-      coderay (>= 1.0.0)
-      erubi (>= 1.0.0)
-      rack (>= 0.9.0)
     bindex (0.8.1)
     blueprinter (0.25.3)
     bootsnap (1.16.0)
@@ -399,7 +395,6 @@ PLATFORMS
 DEPENDENCIES
   active_type (~> 2.1)
   amazing_print (~> 1.4)
-  better_errors (~> 2.9)
   blueprinter (~> 0.25.3)
   bootsnap
   bullet (~> 7.0)

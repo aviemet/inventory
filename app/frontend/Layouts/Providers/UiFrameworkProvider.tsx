@@ -51,7 +51,7 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 		},
 		form: {
 			label: {
-				width: '10rem',
+				width: '12rem',
 			},
 		},
 		table: {

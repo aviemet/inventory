@@ -12,7 +12,7 @@ class CategoryBlueprint < ApplicationBlueprint
 
   view :counts do
     field :qty do |category|
-      category.records.size
+      category.qty
     end
   end
 

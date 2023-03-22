@@ -73,7 +73,6 @@ end
 
 group :development do
 
-  gem "better_errors", "~> 2.9"
 
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"

@@ -40,6 +40,10 @@ class Category < ApplicationRecord
     self.type.find_by_category(self)
   end
 
+  def qty
+    records.count
+  end
+
   def type
     self.categorizable_type.constantize
   end

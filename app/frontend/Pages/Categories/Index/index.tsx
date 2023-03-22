@@ -14,7 +14,9 @@ const CategoriesIndex = ({ categories, pagination }: ICategoriesIndexProps) => {
 	const title = 'Categories'
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Categories', href: Routes.categories() },
+		] }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
