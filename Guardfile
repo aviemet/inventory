@@ -17,14 +17,11 @@
 
 guard "livereload" do
   extensions = {
-    css: :css,
-    js: :js,
     html: :html,
     png: :png,
     gif: :gif,
     jpg: :jpg,
     jpeg: :jpeg,
-    # less: :less, # uncomment if you want LESS stylesheets done in browser
   }
 
   rails_view_exts = %w[erb haml slim]
@@ -47,6 +44,6 @@ guard "livereload" do
 
   # file needing a full reload of the page anyway
   watch(%r{app/views/.+\.(#{rails_view_exts * '|'})$})
-  watch(%r{app/helpers/.+\.rb})
+  watch(%r{app/blueprints/.+\.rb})
   watch(%r{config/locales/.+\.yml})
 end

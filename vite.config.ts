@@ -26,6 +26,7 @@ const config = defineConfig({
 		}),
 	],
 	resolve: {
+		dedupe: ['axios'],
 		alias: {
 			'@': path.resolve(__dirname, 'app', 'frontend'),
 		},

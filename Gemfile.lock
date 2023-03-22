@@ -469,7 +469,7 @@ DEPENDENCIES
   public_activity (~> 2.0)
   puma (~> 6.0)
   rack-livereload (~> 0.3.17)
-  rails (~> 7.0.1)
+  rails (~> 7.0.4, >= 7.0.4.3)
   rolify (~> 6.0)
   rspec-rails (~> 6.0.1)
   rubocop-daemon (~> 0.3.2)

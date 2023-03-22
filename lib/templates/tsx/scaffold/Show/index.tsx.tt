@@ -1,0 +1,22 @@
+import React from 'react'
+import { Container, Link } from '@/Components'
+import { Routes } from '@/lib'
+
+interface Show<%= singular_table_name.camelize %>Props {
+	<%= singular_table_name %>: Schema.<%= singular_table_name.camelize %>
+}
+
+const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }: Show<%= singular_table_name.camelize %>Props) => {
+	return (
+		<Container>
+			<h1><%= singular_table_name.camelize %></h1>
+
+			<div>
+				<Link href={ Routes.edit<%= singular_table_name.camelize %>(<%= singular_table_name %>) }>Edit</Link>
+				<Link href={ Routes.<%= singular_table_name.camelize(:lower).pluralize %>() }>Index</Link>
+			</div>
+		</Container>
+	)
+}
+
+export default Show<%= singular_table_name.camelize %>

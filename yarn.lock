@@ -2815,7 +2815,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:^6.0.2":
+"@mantine/core@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/core@npm:6.0.4"
   dependencies:
@@ -2833,7 +2833,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/dates@npm:^6.0.2":
+"@mantine/dates@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/dates@npm:6.0.4"
   dependencies:
@@ -2847,7 +2847,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/dropzone@npm:^6.0.2":
+"@mantine/dropzone@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/dropzone@npm:6.0.4"
   dependencies:
@@ -2862,7 +2862,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/form@npm:^6.0.2":
+"@mantine/form@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/form@npm:6.0.4"
   dependencies:
@@ -2874,7 +2874,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:^6.0.2":
+"@mantine/hooks@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/hooks@npm:6.0.4"
   peerDependencies:
@@ -2883,7 +2883,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/modals@npm:^6.0.2":
+"@mantine/modals@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/modals@npm:6.0.4"
   dependencies:
@@ -2897,7 +2897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/next@npm:^6.0.2":
+"@mantine/next@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/next@npm:6.0.4"
   dependencies:
@@ -2911,7 +2911,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/notifications@npm:^6.0.2":
+"@mantine/notifications@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/notifications@npm:6.0.4"
   dependencies:
@@ -2926,7 +2926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/prism@npm:^6.0.2":
+"@mantine/prism@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/prism@npm:6.0.4"
   dependencies:
@@ -2957,7 +2957,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/spotlight@npm:^6.0.2":
+"@mantine/spotlight@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/spotlight@npm:6.0.4"
   dependencies:
@@ -4911,7 +4911,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*, @types/jest@npm:^29.4.1":
+"@types/jest@npm:*, @types/jest@npm:^29.5.0":
   version: 29.5.0
   resolution: "@types/jest@npm:29.5.0"
   dependencies:
@@ -5227,7 +5227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.55.0":
+"@typescript-eslint/eslint-plugin@npm:^5.56.0":
   version: 5.56.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.56.0"
   dependencies:
@@ -5251,7 +5251,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.55.0":
+"@typescript-eslint/parser@npm:^5.56.0":
   version: 5.56.0
   resolution: "@typescript-eslint/parser@npm:5.56.0"
   dependencies:
@@ -11529,17 +11529,17 @@ __metadata:
     "@emotion/styled": ^11.10.6
     "@inertiajs/react": ^1.0.2
     "@loadable/component": ^5.15.3
-    "@mantine/core": ^6.0.2
-    "@mantine/dates": ^6.0.2
-    "@mantine/dropzone": ^6.0.2
-    "@mantine/form": ^6.0.2
-    "@mantine/hooks": ^6.0.2
-    "@mantine/modals": ^6.0.2
-    "@mantine/next": ^6.0.2
-    "@mantine/notifications": ^6.0.2
-    "@mantine/prism": ^6.0.2
+    "@mantine/core": ^6.0.4
+    "@mantine/dates": ^6.0.4
+    "@mantine/dropzone": ^6.0.4
+    "@mantine/form": ^6.0.4
+    "@mantine/hooks": ^6.0.4
+    "@mantine/modals": ^6.0.4
+    "@mantine/next": ^6.0.4
+    "@mantine/notifications": ^6.0.4
+    "@mantine/prism": ^6.0.4
     "@mantine/rte": ^5.10.5
-    "@mantine/spotlight": ^6.0.2
+    "@mantine/spotlight": ^6.0.4
     "@mdx-js/react": ^2.3.0
     "@storybook/addon-actions": ^6.5.16
     "@storybook/addon-docs": ^6.5.16
@@ -11552,14 +11552,14 @@ __metadata:
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.4.3
-    "@types/jest": ^29.4.1
+    "@types/jest": ^29.5.0
     "@types/loadable__component": ^5.13.4
     "@types/lodash": ^4.14.191
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
     "@types/styled-components": ^5.1.26
-    "@typescript-eslint/eslint-plugin": ^5.55.0
-    "@typescript-eslint/parser": ^5.55.0
+    "@typescript-eslint/eslint-plugin": ^5.56.0
+    "@typescript-eslint/parser": ^5.56.0
     "@vitejs/plugin-react": ^3.1.0
     autoprefixer: ^10.4.14
     babel-loader: ^9.1.2
@@ -11592,19 +11592,20 @@ __metadata:
     postcss-import: ^15.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
-    react-error-boundary: ^3.1.4
+    react-error-boundary: ^4.0.0
     react-html-props: ^2.0.2
     react-icons: ^4.8.0
     styled-components: ^5.3.9
     tabler-icons-react: ^1.56.0
     ts-jest: ^29.0.5
-    typescript: ^4.9.5
-    vite: ^4.2.0
+    typescript: ^5.0.2
+    use-inertia-form: ^2.0.5
+    vite: ^4.2.1
     vite-plugin-dynamic-import: ^1.2.7
     vite-plugin-full-reload: ^1.0.5
-    vite-plugin-ruby: ^3.1.3
+    vite-plugin-ruby: ^3.2.1
     vite-tsconfig-paths: ^4.0.7
-    vitest: ^0.29.2
+    vitest: ^0.29.7
   languageName: unknown
   linkType: soft
 
@@ -13543,6 +13544,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.get@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "lodash.get@npm:4.4.2"
+  checksum: e403047ddb03181c9d0e92df9556570e2b67e0f0a930fcbbbd779370972368f5568e914f913e93f3b08f6d492abc71e14d4e9b7a18916c31fa04bd2306efe545
+  languageName: node
+  linkType: hard
+
 "lodash.isequal@npm:^4.5.0":
   version: 4.5.0
   resolution: "lodash.isequal@npm:4.5.0"
@@ -13596,6 +13604,13 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.mergewith@npm:4.6.2"
   checksum: a6db2a9339752411f21b956908c404ec1e088e783a65c8b29e30ae5b3b6384f82517662d6f425cc97c2070b546cc2c7daaa8d33f78db7b6e9be06cd834abdeb8
+  languageName: node
+  linkType: hard
+
+"lodash.set@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "lodash.set@npm:4.3.2"
+  checksum: a9122f49eef9f2d0fc9061a33d87f8e5b8c6b23d46e8b9e9ce1529d3588d79741bd1145a3abdfa3b13082703e65af27ff18d8a07bfc22b9be32f3fc36f763f70
   languageName: node
   linkType: hard
 
@@ -16145,14 +16160,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-error-boundary@npm:^3.1.4":
-  version: 3.1.4
-  resolution: "react-error-boundary@npm:3.1.4"
+"react-error-boundary@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "react-error-boundary@npm:4.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
   peerDependencies:
     react: ">=16.13.1"
-  checksum: f36270a5d775a25c8920f854c0d91649ceea417b15b5bc51e270a959b0476647bb79abb4da3be7dd9a4597b029214e8fe43ea914a7f16fa7543c91f784977f1b
+  checksum: b21102fb7dca7ec43a9271cc1485265826b0fc2a0d4c940a8367f597ae655938e8be8f2ebf77d17681532f9fdcd3a988820e1ab2b1a12d23c59a7e96cd87fe4e
   languageName: node
   linkType: hard
 
@@ -18722,7 +18737,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.4, typescript@npm:^4.9.5":
+"typescript@npm:^4.6.4":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -18732,13 +18747,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
+"typescript@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "typescript@npm:5.0.2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: bef1dcd166acfc6934b2ec4d72f93edb8961a5fab36b8dd2aaf6f4f4cd5c0210f2e0850aef4724f3b4913d5aef203a94a28ded731b370880c8bcff7e4ff91fc1
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=bda367"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 2eee5c37cad4390385db5db5a8e81470e42e8f1401b0358d7390095d6f681b410f2c4a0c496c6ff9ebd775423c7785cdace7bcdad76c7bee283df3d9718c0f20
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^5.0.2#~builtin<compat/typescript>":
+  version: 5.0.2
+  resolution: "typescript@patch:typescript@npm%3A5.0.2#~builtin<compat/typescript>::version=5.0.2&hash=bda367"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: bdbf3d0aac0d6cf010fbe0536753dc19f278eb4aba88140dcd25487dfe1c56ca8b33abc0dcd42078790a939b08ebc4046f3e9bb961d77d3d2c3cfa9829da4d53
   languageName: node
   linkType: hard
 
@@ -19094,6 +19129,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-inertia-form@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "use-inertia-form@npm:2.0.5"
+  dependencies:
+    "@inertiajs/react": ^1.0.2
+    lodash.get: ^4.4.2
+    lodash.set: ^4.3.2
+    react-dom: ^18.2.0
+  peerDependencies:
+    "@inertiajs/react": ^1.0.0
+    lodash.isequal: ^4.5.0
+    react: ^16.8.0
+  checksum: 4a64fc2ffb856e123edf409cb9e9194044382f7e9efef5d6362f21b471792b8840dd376b55ca8f20551e43a544dc02e8690206114ce2467148328e11f311b152
+  languageName: node
+  linkType: hard
+
 "use-isomorphic-layout-effect@npm:^1.1.1":
   version: 1.1.2
   resolution: "use-isomorphic-layout-effect@npm:1.1.2"
@@ -19316,7 +19367,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-ruby@npm:^3.1.3":
+"vite-plugin-ruby@npm:^3.2.1":
   version: 3.2.1
   resolution: "vite-plugin-ruby@npm:3.2.1"
   dependencies:
@@ -19344,7 +19395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.2.0":
+"vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.2.1":
   version: 4.2.1
   resolution: "vite@npm:4.2.1"
   dependencies:
@@ -19382,7 +19433,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:^0.29.2":
+"vitest@npm:^0.29.7":
   version: 0.29.7
   resolution: "vitest@npm:0.29.7"
   dependencies:
