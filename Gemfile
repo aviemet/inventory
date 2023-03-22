@@ -72,8 +72,6 @@ group :development, :test do
 end
 
 group :development do
-  gem "guard-livereload", "~> 2.5", require: false
-  gem "rack-livereload", "~> 0.3.17"
 
   gem "better_errors", "~> 2.9"
 

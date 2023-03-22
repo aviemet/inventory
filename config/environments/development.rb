@@ -79,11 +79,8 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  # Allow Guard to live reload page on changes
-  config.middleware.insert_before Rack::Runtime, Rack::LiveReload
-
   # Disable digests until LiveReload can handle them properly
-  config.assets.digest = false
+  # config.assets.digest = false
 
   # Automatically update routes.js file when routes.rb is changed
   config.middleware.use(JsRoutes::Middleware)
