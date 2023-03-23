@@ -169,7 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.string "email"
     t.text "notes"
     t.bigint "contact_id", null: false
-    t.bigint "category_id", null: false
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_emails_on_category_id"
@@ -214,7 +214,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
   end
 
   create_table "ldaps", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.string "host"
     t.string "port"
     t.string "domain"
@@ -523,9 +523,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.boolean "active", default: true
     t.jsonb "table_preferences", default: {}
     t.jsonb "user_preferences", default: {}
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count", default: 0
     t.index ["active_company_id"], name: "index_users_on_active_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["table_preferences"], name: "index_users_on_table_preferences", using: :gin

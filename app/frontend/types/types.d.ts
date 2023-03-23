@@ -147,6 +147,11 @@ declare global {
 		}
 	}
 
+	type PaginatedModel<T> = {
+		data: T
+		pagination: Schema.Pagination
+	}
+
 	interface NewFormData<T> extends Omit<T, 'id', 'slug', 'created_at', 'updated_at'> {}
 
 	type FlashMessage = Record<'success' | 'alert' | 'info' | 'warning', string>

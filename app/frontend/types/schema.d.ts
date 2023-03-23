@@ -339,7 +339,12 @@ declare namespace Schema {
 		location?: Location;
 		manager?: Person;
 		ownerships?: Ownership[];
+		assets?: Asset[];
 		items?: Item[];
+		accessories?: Accessory[];
+		components?: Component[];
+		consumables?: Consumable[];
+		licenses?: License[];
 		contracts?: Contract[];
 		people?: Person[];
 		vendors?: Vendor[];
@@ -350,7 +355,7 @@ declare namespace Schema {
 		email?: string;
 		notes?: string;
 		contact_id: number;
-		category_id: number;
+		category_id?: number;
 		created_at: string;
 		updated_at: string;
 		activities?: PublicActivityActivity[];
@@ -450,7 +455,7 @@ declare namespace Schema {
 
 	interface Ldap {
 		id: number;
-		name: string;
+		name?: string;
 		host?: string;
 		port?: string;
 		domain?: string;
@@ -693,6 +698,43 @@ declare namespace Schema {
 		tickets?: Ticket[];
 	}
 
+	interface PersonAsCreate {
+		id: number;
+		first_name?: string;
+		middle_name?: string;
+		last_name?: string;
+		active: boolean;
+		employee_number?: string;
+		job_title?: string;
+		guid?: string;
+		manager_id?: number;
+		location_id?: number;
+		created_at: string;
+		updated_at: string;
+		activities?: PublicActivityActivity[];
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		contact?: Contact;
+		addresses?: Address[];
+		phones?: Phone[];
+		emails?: Email[];
+		websites?: Website[];
+		possessions?: Assignment[];
+		assets?: Asset[];
+		items?: Asset[];
+		accessories?: Asset[];
+		components?: Asset[];
+		consumables?: Asset[];
+		licenses?: License[];
+		fieldset_associations?: FieldsetAssociation[];
+		manager?: Person;
+		location?: Location;
+		user?: User;
+		ticket_assignments?: TicketAssignment[];
+		tickets?: Ticket[];
+	}
+
 	interface Phone {
 		id: number;
 		number: string;
@@ -874,6 +916,14 @@ declare namespace Schema {
 		active?: boolean;
 		table_preferences?: Record<string, any>;
 		user_preferences?: Record<string, any>;
+		invitation_token?: string;
+		invitation_created_at?: string;
+		invitation_sent_at?: string;
+		invitation_accepted_at?: string;
+		invitation_limit?: number;
+		invited_by_type?: string;
+		invited_by_id?: number;
+		invitations_count?: number;
 		activities?: PublicActivityActivity[];
 		roles?: Role[];
 		person?: Person;

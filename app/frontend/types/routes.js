@@ -513,6 +513,14 @@ export const serialize = __jsr.serialize;
 
 /**
  * Generates rails route to
+ * /users/invitation/accept(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const acceptUserInvitation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"invitation"],[2,[7,"/"],[2,[6,"accept"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /accessories(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2028,6 +2036,14 @@ export const newUserGroup = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,
 
 /**
  * Generates rails route to
+ * /users/invitation/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newUserInvitation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"invitation"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/password/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2124,6 +2140,14 @@ export const purchase = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,
  * @returns {string} route path
  */
 export const purchases = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"purchases"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /users/invitation/remove(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const removeUserInvitation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"invitation"],[2,[7,"/"],[2,[6,"remove"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2289,6 +2313,14 @@ export const userGroup = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,
  * @returns {string} route path
  */
 export const userGroups = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"groups"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /users/invitation(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const userInvitation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"invitation"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

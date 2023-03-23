@@ -27,7 +27,12 @@ class Department < ApplicationRecord
   # 	Department.items, Department.contracts, etc.
   has_many :ownerships
   {
+    assets: 'Asset',
     items: 'Item',
+    accessories: 'Accessory',
+    components: 'Component',
+    consumables: 'Consumable',
+    licenses: 'License',
     contracts: 'Contract',
     people: 'Person',
     vendors: 'Vendor'

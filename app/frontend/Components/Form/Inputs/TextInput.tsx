@@ -4,8 +4,12 @@ import Field from '../Field'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
 
-const FormInput = forwardRef<HTMLInputElement, IInputProps<string>>((
-	{ label, name, model, onChange, onBlur, id, required, compact = false, ...props },
+interface ITextInputProps extends IInputProps<string> {
+	errorKey?: string
+}
+
+const FormInput = forwardRef<HTMLInputElement, ITextInputProps>((
+	{ label, name, model, onChange, onBlur, id, required, compact = false, errorKey, ...props },
 	ref,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
@@ -39,7 +43,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps<string>>((
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
-				error={ error }
+				error={ errorKey ? form.getError(errorKey) : error }
 				ref={ ref }
 				{ ...props }
 			/>

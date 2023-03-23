@@ -43,7 +43,6 @@ const Register = () => {
 
 	const content = props?.first_run ? firstRun : register
 
-	// TODO: Disable submit until all inputs are valid. Async check for existing email address on input blur
 	return (
 		<Tile>
 			<Form
@@ -98,7 +97,7 @@ const Register = () => {
 						/>
 					</Field>
 
-					<Field>
+					<Field mb={ 16 }>
 						<Submit className="large">Sign Up</Submit>
 					</Field>
 

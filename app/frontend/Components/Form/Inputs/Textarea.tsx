@@ -8,10 +8,11 @@ interface IFormTextareaProps extends Omit<ITextareaProps, 'onChange'> {
 	label?: string
 	name: string
 	model?: string
+	errorKey?: string
 	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>, form: UseFormProps) => void
 }
 
-const Textarea = ({ label, name, required, onChange, id, model, ...props }: IFormTextareaProps) => {
+const Textarea = ({ label, name, required, onChange, id, model, errorKey, ...props }: IFormTextareaProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
 
 	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -34,7 +35,7 @@ const Textarea = ({ label, name, required, onChange, id, model, ...props }: IFor
 				onChange={ handleChange }
 				value={ value }
 				required={ required }
-				error={ error }
+				error={ errorKey ? form.getError(errorKey) : error }
 				{ ...props }
 			>
 			</TextareaInput>

@@ -10,10 +10,8 @@ class LdapBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
-  association :company, blueprint: CompanyBlueprint
-
-  view :new do
-    field :id
-    excludes :created_at, :updated_at
+  view :associations do
+    association :company, blueprint: CompanyBlueprint
   end
+
 end

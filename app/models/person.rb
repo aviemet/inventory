@@ -20,7 +20,7 @@ class Person < ApplicationRecord
 
   belongs_to :manager, class_name: 'Person', optional: true
   belongs_to :location, optional: true
-  has_one :user
+  has_one :user, inverse_of: :person
   has_many :ticket_assignments
   has_many :tickets, through: :ticket_assignments, inverse_of: :assignees
 

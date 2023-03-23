@@ -52,12 +52,12 @@ class UsersController < ApplicationController
   # POST /users/complete_registration
   def save_complete_registration
     unless current_user.companies.empty?
-      ap "REDIRECTING"
       redirect_to root_path
       return
     end
 
     params.permit!
+
     current_user.person ||= Person.new
     current_user.person.assign_attributes params[:person]
 
@@ -70,6 +70,8 @@ class UsersController < ApplicationController
 
       current_user.person.company = company
       current_user.person.save
+
+      ap({ current_user: current_user })
 
       if current_user.save
         redirect_to root_path

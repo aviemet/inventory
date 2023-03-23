@@ -4,9 +4,9 @@ class User < ApplicationRecord
   tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token, :active_company]
 
   # Include default devise modules. Others available are: , :omniauthable, :timeoutable,
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable, :invitable
 
-  belongs_to :person, dependent: :destroy, optional: true
+  belongs_to :person, inverse_of: :user, dependent: :destroy, optional: true
   belongs_to :active_company, class_name: :Company, optional: true
   has_many :companies, through: :roles, source: :resource, source_type: "Company"
   has_many :user_group_assignments
@@ -20,11 +20,11 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   password_complexity_regex = /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,70}\z/
-  validates :password, format: { with: password_complexity_regex }, on: [:create, :update], if: :password, confirmation: true
+  validates :password, format: { with: password_complexity_regex }, on: [:create, :update], confirmation: true, if: :password
+  # validates :password, presence: true, if: "id.nil?"
   # after_create :add_email_to_contact
 
   before_save :coerce_json
-  before_save :fill_empty_passwords
 
   accepts_nested_attributes_for :person
 
@@ -40,21 +40,13 @@ class User < ApplicationRecord
     @ability ||= Ability.new(self)
   end
 
-  def add_email_to_contact
-    return if self.person.contact.emails.exists?(email:)
+  # def add_email_to_contact
+  #   return if self&.person&.contact&.emails&.exists?(email:)
 
-    self.person.contact.emails << Email.create(email:, category: Category.find_by_slug("email-work"))
-  end
+  #   self.person.contact.emails << Email.create(email:))
+  # end
 
   def coerce_json
     self.dark_mode = ActiveModel::Type::Boolean.new.cast(self.dark_mode) if self.dark_mode
   end
-
-  def fill_empty_passwords
-    return if self.password
-
-    self.password = Devise.friendly_token
-    self.send_reset_password_instructions
-  end
-
 end

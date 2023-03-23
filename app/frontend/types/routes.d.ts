@@ -86,6 +86,16 @@ export const serialize: RouterExposedMethods['serialize'];
 
 /**
  * Generates rails route to
+ * /users/invitation/accept(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const acceptUserInvitation: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /accessories(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2060,6 +2070,16 @@ export const newUserGroup: ((
 
 /**
  * Generates rails route to
+ * /users/invitation/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newUserInvitation: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /users/password/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2181,6 +2201,16 @@ export const purchase: ((
  * @returns {string} route path
  */
 export const purchases: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /users/invitation/remove(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const removeUserInvitation: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2397,6 +2427,16 @@ export const userGroup: ((
  * @returns {string} route path
  */
 export const userGroups: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /users/invitation(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const userInvitation: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

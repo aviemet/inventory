@@ -35,7 +35,6 @@ const UrlTabs = ({ children, onTabChange, defaultValue, dependencies, ...props }
 				document.removeEventListener('inertia:navigate', reloadActiveTab)
 			})
 		}
-
 	}, [])
 
 	const handleTabChange = (value: TabsValue) => {

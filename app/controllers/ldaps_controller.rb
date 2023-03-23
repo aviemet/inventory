@@ -1,11 +1,10 @@
 class LdapsController < ApplicationController
-  expose :ldaps, -> { @active_company.ldaps }
-  expose :ldap, -> { @active_company.ldaps.find(params[:id]) || Ldap.new(ldap_params) }
+  expose :ldap, -> { @active_company.ldap }
 
   # GET /ldaps
   def index
     render inertia: "Ldap/Index", props: {
-      ldaps: ldaps.render
+      ldap: ldap.render
     }
   end
 
@@ -35,18 +34,22 @@ class LdapsController < ApplicationController
     ldap.company = @active_company
 
     if ldap.save
-      redirect_to ldap, notice: 'LDAP settings successfully saved'
+      redirect_to settings_path(tab: :ldap), notice: 'LDAP settings successfully saved'
     else
-      redirect_to settings_path, inertia: { errors: ldap.errors }
+      redirect_to settings_path(tab: :ldap), inertia: {
+        errors: ldap.errors
+      }
     end
   end
 
   # PATCH/PUT /ldap/:id
   def update
     if ldap.update(ldap_params)
-      redirect_to ldap, notice: 'LDAP settings successfully saved'
+      redirect_to settings_path(tab: :ldap), notice: 'LDAP settings successfully saved'
     else
-      redirect_to settings_path, inertia: { errors: ldap.errors }
+      redirect_to settings_path(tab: :ldap), inertia: {
+        errors: ldap.errors
+      }
     end
   end
 

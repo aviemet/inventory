@@ -43,6 +43,8 @@ const PersonForm = ({
 			onSubmit={ ({ transform }) => transform(data => {
 				if(data.person.user?.active) {
 					data.person.user.email = data?.person?.contact?.emails?.[0].email || ''
+				} else {
+					delete data.person.user
 				}
 				return data
 			}) }
@@ -61,7 +63,7 @@ const PersonForm = ({
 				name="department_id"
 			/>
 
-			<TextInput name="job_title" label="Job Title" required />
+			<TextInput name="job_title" label="Job Title" />
 
 			<PeopleDropdown
 				label="Manager"
@@ -70,7 +72,12 @@ const PersonForm = ({
 			/>
 
 			<FormConsumer>{ ({ data }) => (
-				<TextInput name="contact.emails[0].email" label="Email" required={ data.person.user.active  } />
+				<TextInput
+					name="contact.emails[0].email"
+					label="Email"
+					required={ data.person.user?.active }
+					errorKey={ data.person.user?.active ? 'user.password' : undefined }
+				/>
 			) }</FormConsumer>
 
 			<FieldsFor model="user">

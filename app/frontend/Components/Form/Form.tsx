@@ -9,7 +9,7 @@ interface IFormProps<TForm> extends FormProps<TForm> {
 }
 
 const Form = <TForm extends NestedObject>(
-	{ children, data, grid = true, className, railsAttributes = true, onChange, ...props }: IFormProps<TForm>,
+	{ children, data, grid = true, className, railsAttributes = true, ...props }: IFormProps<TForm>,
 ) => {
 	const { classes } = useFormStyles()
 
@@ -19,10 +19,6 @@ const Form = <TForm extends NestedObject>(
 				data={ data }
 				className={ cx({ 'format-grid': grid }, className) }
 				railsAttributes={ railsAttributes }
-				onChange={ (form) => {
-					console.log({ data: form.data })
-					if(onChange) onChange(form)
-				} }
 				{ ...props }
 			>
 				{ children }

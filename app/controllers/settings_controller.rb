@@ -1,6 +1,8 @@
 class SettingsController < ApplicationController
   def index
-    render inertia: "Settings/Index"
+    render inertia: "Settings/Index", props: {
+      ldap: InertiaRails.lazy( -> { @active_company&.ldap&.render(view: :edit) || Ldap.new.render(view: :new) })
+    }
   end
 
   private

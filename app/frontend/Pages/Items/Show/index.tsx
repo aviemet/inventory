@@ -58,15 +58,15 @@ const ShowItem = ({ item }: IShowItemProps) => {
 						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
 					</Tabs.List>
 
-					<Tabs.Panel value="details">
+					<Tabs.Panel value={ tabs.details }>
 						<Details item={ item } />
 					</Tabs.Panel>
 
-					<Tabs.Panel value="history">
+					<Tabs.Panel value={ tabs.history }>
 						<ItemHistory item={ item } />
 					</Tabs.Panel>
 
-					<Tabs.Panel value="associations">
+					<Tabs.Panel value={ tabs.associations }>
 						<Associations item={ item } />
 					</Tabs.Panel>
 				</Tabs>

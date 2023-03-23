@@ -1,7 +1,7 @@
 import { Heading, Page, Section } from '@/Components'
-import { Form, TextInput, Submit, PasswordInput } from '@/Components/Form'
 import { Routes } from '@/lib'
 import React from 'react'
+import LdapForm from '../Form'
 
 interface ISettingsProps {
 	ldap: Schema.Ldap
@@ -13,36 +13,14 @@ const EditLdap = ({ ldap }: ISettingsProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Settings', href: Routes.settings() },
-			{ title: ldap.name, href: Routes.editLdap(ldap.id) },
+			{ title: ldap.name || ldap.host || 'LDAP', href: Routes.editLdap(ldap.id) },
 			{ title: 'Edit LDAP' },
 		] }>
 			<Section>
 				<Heading>LDAP Settings</Heading>
-				<Form
-					model="ldap"
-					data={ { ldap } }
-					to={ Routes.ldap(ldap) }
-					method={ 'patch' }
-				>
-					<TextInput label="Host" name="host" />
 
-					<TextInput label="Port" name="port" />
+				<LdapForm ldap={ ldap } to={ Routes.ldap(ldap) } method='put' />
 
-					<TextInput label="Domain" name="domain" />
-
-					<TextInput label="Username" name="username" />
-
-					<PasswordInput label="Password" name="password" />
-
-					<TextInput label="Tree Base" name="tree_base" />
-
-					<TextInput label="Search Path" name="user_search" />
-
-					<TextInput label="Sync Interval" name="sync_interval" />
-
-					<Submit>Save LDAP Settings</Submit>
-
-				</Form>
 			</Section>
 		</Page>
 	)

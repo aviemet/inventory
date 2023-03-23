@@ -24,7 +24,7 @@ class Company < ApplicationRecord
   attribute :default_currency, default: MoneyRails.default_currency
 
   has_many :users, through: :roles, class_name: :User, source: :users
-  has_many :ldaps, dependent: :destroy
+  has_one :ldap, dependent: :destroy
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
   # 	Company.items, Company.contracts, etc.
