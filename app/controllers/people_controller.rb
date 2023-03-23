@@ -28,11 +28,11 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
-    self.person.owner = Ownership.new
     render inertia: "People/New", props: {
-      person: Person.new(user: User.new).render(view: :new),
-      departments: -> { @active_company.departments.render(view: :as_options) },
-      people: -> { @active_company.people.render(view: :as_options) },
+      person: Person::AsCreate.new.render(view: :new),
+      departments: InertiaRails.lazy(-> { @active_company.departments.render(view: :as_options) }),
+      locations: InertiaRails.lazy(-> { @active_company.locations.render(view: :as_options) }),
+      people: InertiaRails.lazy(-> { @active_company.people.render(view: :as_options) }),
     }
   end
 
@@ -41,33 +41,28 @@ class PeopleController < ApplicationController
     render inertia: "People/Edit", props: {
       person: person.render(view: :edit),
       departments: -> { @active_company.departments.render(view: :as_options) },
+      locations: -> { @active_company.locations.render(view: :as_options) },
       people: -> { @active_company.people.render(view: :as_options) },
     }
   end
 
   # POST /people
   def create
+    ap({ person_params: })
+    person = Person.new(handle_department_params)
+
     person.company = @active_company
-    ap({ params: })
+
     if person.save
       redirect_to person, notice: 'Person was successfully created'
     else
-      ap({ errors: person.errors })
       redirect_to new_person_path, inertia: { errors: person.errors }
     end
   end
 
   # PATCH/PUT /people/1
   def update
-    ap({ params: })
-    if person_params[:department_id]
-      person_params[:department] = @active_company.departments.find(person_params[:department_id])
-    end
-    return # Temp for testing
-
-    if person.update(person_params.except(:department_id).merge({
-      department: @active_company.departments.find(person_params[:department_id]) || nil
-    }))
+    if person.update(handle_department_params)
       redirect_to person, notice: 'Person was successfully updated'
     else
       redirect_to edit_person_path, inertia: { errors: person.errors }
@@ -82,6 +77,17 @@ class PeopleController < ApplicationController
 
   private
 
+  def handle_department_params
+    adjusted_params = person_params.except(:department_id)
+
+    if person_params[:department_id]
+      department = @active_company.departments.find(person_params[:department_id])
+      adjusted_params[:department] = department if department
+    end
+
+    adjusted_params
+  end
+
   def sortable_fields
     %w(first_name last_name employee_number job_title guid manager.name location.name items.count accessories.count department.name).freeze
   end
@@ -90,7 +96,12 @@ class PeopleController < ApplicationController
     params.require(:person).permit(
       :id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id,
       user_attributes: [:email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active],
-      contact_attributes: [**contact_attributes]
+      contact_attributes: [
+        emails_attributes: [:id, :email, :_destroy],
+        phones_attributes: [:id, :number, :_destroy],
+        addresses_attributes: [:id, :address, :_destroy],
+        websites_attributes: [:id, :url, :_destroy],
+      ]
     )
   end
 end

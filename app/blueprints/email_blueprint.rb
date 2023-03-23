@@ -10,4 +10,8 @@ class EmailBlueprint < ApplicationBlueprint
     association :contact, blueprint: ContactBlueprint
     association :category, blueprint: CategoryBlueprint
   end
+
+  view :new do
+    excludes :notes, :contact_id, :category_id
+  end
 end

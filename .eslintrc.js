@@ -61,6 +61,13 @@ module.exports = {
 			'when': 'always',
 			'children': true,
 		}],
+		// 'react/jsx-space-before-closing': 2,
+		'react/jsx-tag-spacing': ['error', {
+			'closingSlash': 'never',
+			'beforeSelfClosing': 'always',
+			'afterOpening': 'never',
+			'beforeClosing': 'allow',
+		}],
 		'react/display-name': ['off'],
 		'react/prop-types': 0,
 		'eqeqeq': 'error',

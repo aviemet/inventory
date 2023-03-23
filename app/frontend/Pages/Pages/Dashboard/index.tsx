@@ -10,7 +10,9 @@ interface IDashboardProps {
 
 const Dashboard = ({ company, activities }: IDashboardProps) => {
 	return (
-		<Page title="Dashboard">
+		<Page title="Dashboard" breadcrumbs={ [
+			{ href: '/dashboard', title: 'Dashboard' },
+		] }>
 			<Section>
 				<Counts counts={ company.counts } />
 			</Section>

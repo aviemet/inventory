@@ -114,17 +114,6 @@ class ApplicationController < ActionController::Base
   #   cookies.encrypted[:user_id] = current_user&.id
   # end
 
-  # param `model` is a base model to check field types on
-  # if `column` is in the form 'model.field', or further chained such as 'model1.model2.field',
-  # ignore the passed `model` param and use the last chained model sent in `column`
-  def field_type(model, column)
-    split_fields = column.split(".")
-    if split_fields.length > 1
-      model = split_fields[-2].titleize.singularize.constantize
-    end
-    model.column_for_attribute(column).type
-  end
-
   def redirect_empty_params
     dirty = false
 

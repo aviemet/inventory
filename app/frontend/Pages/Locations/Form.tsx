@@ -12,7 +12,7 @@ import { type UseFormProps } from 'use-inertia-form'
 export interface ILocationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
+	onSubmit?: (object: UseFormProps<Schema.Location>) => boolean|void
 	location?: Partial<Schema.Location>
 	locations: Schema.Location[]
 	currencies: any
@@ -21,11 +21,17 @@ export interface ILocationFormProps {
 const emptyLocation: Partial<Schema.Location> = {
 	name: '',
 	currency: '',
-	// @ts-ignore
-	parent_id: '',
+	parent_id: undefined,
 }
 
-const LocationForm = ({ to, method = 'post', onSubmit, location = emptyLocation, locations, currencies }: ILocationFormProps) => {
+const LocationForm = ({
+	to,
+	method = 'post',
+	onSubmit,
+	location = emptyLocation,
+	locations,
+	currencies,
+}: ILocationFormProps) => {
 	return (
 		<Form
 			model="location"

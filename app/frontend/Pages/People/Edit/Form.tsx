@@ -2,7 +2,6 @@ import React, { useCallback } from 'react'
 import {
 	Form,
 	TextInput,
-	SearchableDropdown,
 	Submit,
 	FieldsFor,
 	FormGroup,
@@ -12,9 +11,10 @@ import {
 } from '@/Components/Form'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { useBooleanToggle } from '@/Components/Hooks'
-import { router } from '@inertiajs/react'
 import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
+import PeopleDropdown from '@/Components/Form/Dropdowns/PeopleDropdown'
+import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 
 type PersonFormData = {
 	person: Schema.Person
@@ -23,7 +23,7 @@ type PersonFormData = {
 const emptyUser: Partial<Schema.User> = {
 	email: '',
 	password: '',
-	check_password: '',
+	password_confirmation: '',
 }
 
 export interface IPersonFormProps {
@@ -69,7 +69,7 @@ const PersonForm = ({
 		const data = { person: { ...person } }
 		if(data.person.user) {
 			data.person.user.password = ''
-			data.person.user.check_password = ''
+			data.person.user.password_confirmation = ''
 		}
 		return data
 	}, [person])
@@ -87,7 +87,7 @@ const PersonForm = ({
 			form.transform(data => {
 				if(data.person.user) {
 					delete data.person.user.password
-					delete data.person.user.check_password
+					delete data.person.user.password_confirmation
 				}
 				return data
 			})
@@ -133,27 +133,24 @@ const PersonForm = ({
 		>
 			<TextInput name="first_name" label="First Name" required autoFocus />
 
-			<TextInput name="middle_name" label="Middle Name" required  />
+			<TextInput name="middle_name" label="Middle Name" />
 
-			<TextInput name="last_name" label="Last Name" required  />
+			<TextInput name="last_name" label="Last Name" required />
 
-			<TextInput name="employee_number" label="Employee #" required  />
+			<TextInput name="employee_number" label="Employee #" />
 
 			<DepartmentsDropdown
 				departments={ departments }
 				locations={ locations }
 				name="department_id"
-				required
 			/>
 
-			<TextInput name="job_title" label="Job Title" required  />
+			<TextInput name="job_title" label="Job Title" required />
 
-			<SearchableDropdown
+			<PeopleDropdown
 				label="Manager"
 				name="manager_id"
-				options={ people }
-				filterMatchKeys={ ['first_name', 'last_name'] }
-				onOpen={ () => router.reload({ only: ['people'] }) }
+				people={ people }
 			/>
 
 			<FormConsumer>{ form => (
@@ -170,7 +167,7 @@ const PersonForm = ({
 					<TextInput name="email" label="Email" />
 
 					<PasswordInput name="password" label={ `${person.id ? 'New' : ''} Password` } onBlur={ handlePasswordBlur } />
-					<PasswordInput name="check_password" label="Check Password" onBlur={ handleCheckPasswordBlur } />
+					<PasswordInput name="password_confirmation" label="Check Password" onBlur={ handleCheckPasswordBlur } />
 
 					<Checkbox name="active" label="Active" />
 

@@ -88,7 +88,7 @@ declare global {
 		}
 		interface StatusType extends UID { }
 		interface User extends UID {
-			check_password?: string
+			password_confirmation?: string
 		}
 		interface Vendor extends UID { }
 		interface Warranty extends UID { }
@@ -165,6 +165,7 @@ declare global {
 		compact?: boolean
 		autoFocus?: boolean
 		autoComplete?: string
+		hidden?: boolean
 		min?: number
 		max?: number
 	}

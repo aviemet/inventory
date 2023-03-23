@@ -20,11 +20,11 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   password_complexity_regex = /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,70}\z/
-  validates :password, presence: { message: "" }, format: { with: password_complexity_regex }, on: [:create, :update], if: :password
-  validates_confirmation_of :password, message: "Password did not match confirmation"
+  validates :password, format: { with: password_complexity_regex }, on: [:create, :update], if: :password, confirmation: true
   # after_create :add_email_to_contact
 
   before_save :coerce_json
+  before_save :fill_empty_passwords
 
   accepts_nested_attributes_for :person
 
@@ -48,6 +48,13 @@ class User < ApplicationRecord
 
   def coerce_json
     self.dark_mode = ActiveModel::Type::Boolean.new.cast(self.dark_mode) if self.dark_mode
+  end
+
+  def fill_empty_passwords
+    return if self.password
+
+    self.password = Devise.friendly_token
+    self.send_reset_password_instructions
   end
 
 end

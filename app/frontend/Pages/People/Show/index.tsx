@@ -15,7 +15,7 @@ const tabs = {
 
 const Show = ({ person }: IShowPersonProps) => {
 	const title = person.name ?? 'Person Details'
-
+	console.log({ person })
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'People', href: Routes.people() },

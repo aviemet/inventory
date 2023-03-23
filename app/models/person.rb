@@ -29,6 +29,7 @@ class Person < ApplicationRecord
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :contact
+  accepts_nested_attributes_for :owner
 
   delegate :to_s, to: :full_name
 

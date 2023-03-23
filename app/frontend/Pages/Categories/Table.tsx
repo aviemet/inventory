@@ -11,7 +11,7 @@ const CategoriesTable = (props: ITableProps) => {
 				<Table.Row>
 					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="categorizable_type">Type</Table.Cell>
-					<Table.Cell sort="qty">Qty</Table.Cell>
+					<Table.Cell>Qty</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>

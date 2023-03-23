@@ -55,6 +55,7 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 			<Select
 				ref={ ref }
 				searchable
+				clearable={ clearable }
 				size="md"
 				data={ data }
 				maxDropdownHeight={ 400 }
