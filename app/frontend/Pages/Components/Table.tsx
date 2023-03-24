@@ -72,9 +72,10 @@ const ComponentsTable = (props: ITableProps) => {
 									href={ Routes.checkoutComponent(component) }
 									disabled={ component.qty_available < 1 }
 									tooltipMessage={ component.qty_available < 1 && 'There are none to checkout' }
+									label={ component.name }
 								/>
 
-								<EditButton href={ Routes.editComponent(component) } />
+								<EditButton href={ Routes.editComponent(component) } label={ component.name } />
 							</Group>
 						</Table.Cell>
 

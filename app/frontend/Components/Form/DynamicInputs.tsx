@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, Group } from '@/Components'
-import Label from '@/Components/Inputs/Label'
+import { Button, Group, Label } from '@/Components'
 import { PlusCircleIcon, MinusCircleIcon } from '@/Components/Icons'
 import { DynamicInputs as InertiaDynamicInputs } from 'use-inertia-form'
 

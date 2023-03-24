@@ -16,6 +16,7 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 			model="people"
 			rows={ people }
 			pagination={ pagination }
+			deleteRoute={ Routes.people() }
 			menuOptions={ [
 				{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
 				// { label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon },

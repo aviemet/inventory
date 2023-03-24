@@ -60,9 +60,10 @@ const ConsumablesTable = (props: ITableProps) => {
 									href={ Routes.checkoutConsumable(consumable) }
 									disabled={ consumable.qty_available < 1 }
 									tooltipMessage={ consumable.qty_available < 1 && 'There are none to checkout' }
+									label={ consumable.name }
 								/>
 								<ReplenishButton consumable={ consumable } />
-								<EditButton href={ Routes.editConsumable(consumable) } />
+								<EditButton href={ Routes.editConsumable(consumable) } label={ consumable.name } />
 							</Group>
 						</Table.Cell>
 

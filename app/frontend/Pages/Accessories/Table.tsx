@@ -79,9 +79,10 @@ const AccessoriesTable = (props: ITableProps) => {
 										href={ Routes.checkoutAccessory(accessory) }
 										disabled={ accessory.qty_available < 1 }
 										tooltipMessage={ accessory.qty_available < 1 && 'None available to checkout' }
+										label={ accessory.name }
 									/>
 
-									<EditButton href={ Routes.editAccessory(accessory) } />
+									<EditButton href={ Routes.editAccessory(accessory) } label={ accessory.name } />
 								</Group>
 							</Table.Cell>
 

@@ -24,7 +24,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 
 	}
 
-	const handleSubmit = ({ data, method, to, setError }: UseFormProps) => {
+	const handleSubmit = ({ data, method, to, setError }: UseFormProps<any>) => {
 		if(!to) return
 
 		axios[method](to, {
@@ -69,7 +69,14 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 					<Submit>Replenish</Submit>
 				</Form>
 			</Modal>
-			<Tooltip withArrow label={ tooltipMessage || 'Replenish' } position="left" transition="fade" color={ color }>
+			<Tooltip
+				withArrow
+				label={ tooltipMessage || 'Replenish' }
+				position="left"
+				transitionProps={ { transition: 'fade' } }
+				color={ color }
+				aria-label={ `Replenish ${consumable.name}` }
+			>
 				<Button compact color={ color } { ...props } size="sm" p={ 0 } onClick={ () => setOpened(true) }>
 					<ReplenishIcon />
 				</Button>

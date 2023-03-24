@@ -43,11 +43,11 @@ const VendorsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							{ vendor.accessories && <Link href={ Routes.accessories() }>{ vendor.accessories.length }</ Link> }
+							{ vendor.accessories && <Link href={ Routes.accessories() }>{ vendor.accessories.length }</Link> }
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							{ vendor.consumables && <Link href={ Routes.consumables() }>{ vendor.consumables.length }</ Link> }
+							{ vendor.consumables && <Link href={ Routes.consumables() }>{ vendor.consumables.length }</Link> }
 						</Table.Cell>
 
 						<Table.Cell nowrap>
@@ -55,7 +55,7 @@ const VendorsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editVendor(vendor.slug) } />
+							<EditButton href={ Routes.editVendor(vendor.slug) } label={ vendor.name } />
 						</Table.Cell>
 
 					</Table.Row>

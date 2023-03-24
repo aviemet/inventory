@@ -67,11 +67,11 @@ const AssetTable = (props: ITableProps) => {
 							<Table.Cell fitContent>
 								<Group noWrap spacing="sm">
 									{ asset.available_to_checkout ?
-										<CheckoutButton href={ Routes.checkoutAsset(asset) } />
+										<CheckoutButton href={ Routes.checkoutAsset(asset) } label={ asset.name } />
 										:
-										<CheckinButton href={ Routes.checkinAsset(asset) } />
+										<CheckinButton href={ Routes.checkinAsset(asset) } label={ asset.name } />
 									}
-									<EditButton href={ Routes.editAsset(asset) } />
+									<EditButton href={ Routes.editAsset(asset) } label={ asset.name } />
 								</Group>
 							</Table.Cell>
 						</Table.Row>

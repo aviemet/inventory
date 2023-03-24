@@ -72,7 +72,7 @@ const PeopleTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editPerson(person) } />
+							<EditButton href={ Routes.editPerson(person) } label={ person.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

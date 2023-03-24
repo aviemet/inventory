@@ -58,7 +58,7 @@ const LocationsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editLocation(location.slug) } />
+							<EditButton href={ Routes.editLocation(location.slug) } label={ location.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

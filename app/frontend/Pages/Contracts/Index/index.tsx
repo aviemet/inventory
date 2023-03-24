@@ -16,6 +16,7 @@ const ContractsIndex = ({ contracts, pagination }: IContractsIndexProps) => {
 			model="contracts"
 			rows={ contracts }
 			pagination={ pagination }
+			deleteRoute={ Routes.contracts() }
 			menuOptions={ [
 				{ label: 'New Contract', href: Routes.newContract(), icon: NewIcon },
 			] }

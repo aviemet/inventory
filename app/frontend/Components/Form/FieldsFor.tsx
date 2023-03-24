@@ -1,6 +1,6 @@
 import React from 'react'
-import FormGroup from './FormGroup'
 import { NestedFields, NestedFieldsProps } from 'use-inertia-form'
+import FormGroup from './FormGroup'
 
 interface IFieldsForProps extends NestedFieldsProps {
 	legend?: string

@@ -1,6 +1,6 @@
 import React from 'react'
 import Field from '../Field'
-import RichTextInput, { type IRichTextProps } from '../../Inputs/RichText'
+import RichTextInput, { type IRichTextProps } from '@/Components/Inputs/RichText'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
 

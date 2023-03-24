@@ -16,15 +16,17 @@ const LdapForm = ({ ldap, method = 'post', ...props }: ILdapFormProps) => {
 			method={ method }
 			{ ...props }
 		>
-			<TextInput label="Host" name="host" />
+			<TextInput label="Name" name="name" required />
 
-			<TextInput label="Port" name="port" />
+			<TextInput label="Host" name="host" required />
 
-			<TextInput label="Domain" name="domain" />
+			<TextInput label="Port" name="port" required />
 
-			<TextInput label="Username" name="username" />
+			<TextInput label="Domain" name="domain" required />
 
-			<PasswordInput label="Password" name="password" />
+			<TextInput label="Username" name="username" required />
+
+			<PasswordInput label="Password" name="password" required />
 
 			<TextInput label="Tree Base" name="tree_base" />
 

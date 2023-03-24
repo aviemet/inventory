@@ -16,6 +16,7 @@ const UserIndex = ({ users, pagination }: IUserIndexProps) => {
 			model="users"
 			rows={ users }
 			pagination={ pagination }
+			deleteRoute={ Routes.users() }
 			menuOptions={ [
 				{ label: 'Invite New User', href: Routes.newUser(), icon: NewIcon },
 			] }

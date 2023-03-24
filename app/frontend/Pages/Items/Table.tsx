@@ -73,11 +73,11 @@ const ItemsTable = (props: ITableProps) => {
 						<Table.Cell fitContent>
 							<Group noWrap spacing="sm">
 								{ item.assigned ?
-									<CheckinButton href={ Routes.checkinItem(item) } />
+									<CheckinButton href={ Routes.checkinItem(item) } label={ item.name } />
 									:
-									<CheckoutButton href={ Routes.checkoutItem(item) } />
+									<CheckoutButton href={ Routes.checkoutItem(item) } label={ item.name } />
 								}
-								<EditButton href={ Routes.editItem(item) } />
+								<EditButton href={ Routes.editItem(item) } label={ item.name } />
 							</Group>
 						</Table.Cell>
 

@@ -16,6 +16,7 @@ const AssetsIndex = ({ assets, pagination }: IAssetsIndexProps) => {
 			model="assets"
 			rows={ assets }
 			pagination={ pagination }
+			deleteRoute={ Routes.assets() }
 			menuOptions={ [
 				{ label: 'New Hardware', href: Routes.newItem(), icon: ItemsIcon },
 				{ label: 'New Accessory', href: Routes.newAccessory(), icon: AccessoriesIcon },

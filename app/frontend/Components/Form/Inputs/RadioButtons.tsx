@@ -1,5 +1,5 @@
 import React from 'react'
-import RadioButtons, { type IRadioButtonsProps } from '../../Inputs/RadioButtons'
+import RadioButtons, { type IRadioButtonsProps } from '@/Components/Inputs/RadioButtons'
 import Field from '../Field'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 

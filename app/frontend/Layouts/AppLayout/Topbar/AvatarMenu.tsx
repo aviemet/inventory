@@ -1,17 +1,19 @@
 import React from 'react'
 import { Menu } from '@/Components'
-import { Avatar, Box } from '@mantine/core'
+import { Avatar, Box, UnstyledButton } from '@mantine/core'
 import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const AvatarMenu = () => {
 	return (
 		<Menu>
 			<Menu.Target>
-				<Avatar
-					radius="xl"
-					color="primary"
-					variant="filled"
-				/>
+				<UnstyledButton aria-label="User Menu">
+					<Avatar
+						radius="xl"
+						color="primary"
+						variant="filled"
+					/>
+				</UnstyledButton>
 			</Menu.Target>
 
 			<Menu.Dropdown>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Field from '../Field'
-import TextareaInput, { type ITextareaProps } from '../../Inputs/Textarea'
+import TextareaInput, { type ITextareaProps } from '@/Components/Inputs/Textarea'
 import cx from 'clsx'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 

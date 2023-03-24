@@ -16,6 +16,7 @@ const DepartmentsIndex = ({ departments, pagination }: IDepartmentsIndexProps) =
 			model="departments"
 			rows={ departments }
 			pagination={ pagination }
+			deleteRoute={ Routes.departments() }
 			menuOptions={ [
 				{ label: 'New Department', href: Routes.newDepartment(), icon: NewIcon },
 			] }

@@ -13,7 +13,7 @@ const FormCheckboxComponent = forwardRef<HTMLInputElement, IFormCheckboxProps>((
 	{ name, onChange, id, required, className, model, ...props },
 	ref,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean>({ name, model })
 
 	const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)

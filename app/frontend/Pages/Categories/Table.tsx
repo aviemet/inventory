@@ -32,7 +32,7 @@ const CategoriesTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editCategory(category.slug) } />
+							<EditButton href={ Routes.editCategory(category.slug) } label={ category.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

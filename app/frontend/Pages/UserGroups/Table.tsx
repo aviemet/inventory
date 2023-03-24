@@ -28,7 +28,7 @@ const GroupsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editUserGroup(user_group.slug) } />
+							<EditButton href={ Routes.editUserGroup(user_group.slug) } label={ user_group.name } />
 						</Table.Cell>
 
 					</Table.Row>

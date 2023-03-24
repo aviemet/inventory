@@ -1,7 +1,7 @@
 import React from 'react'
-import { DivProps } from 'react-html-props'
-import cx from 'clsx'
 import { Box } from '@mantine/core'
+import cx from 'clsx'
+import { DivProps } from 'react-html-props'
 
 interface IFormGroupProps extends DivProps {
 	legend?: string

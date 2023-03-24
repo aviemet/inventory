@@ -66,6 +66,7 @@ const LicensesTable = (props: ITableProps) => {
 									href={ Routes.checkoutLicense(license) }
 									disabled={ license.qty_available < 1 }
 									tooltipMessage={ license.qty_available < 1 && 'There are none to checkout' }
+									label={ license.name }
 								/> }
 							</Group>
 						</Table.Cell>

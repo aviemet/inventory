@@ -23,7 +23,7 @@ const StatusLabelsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editStatusLabel(status_label.slug) } />
+							<EditButton href={ Routes.editStatusLabel(status_label.slug) } label={ status_label.name } />
 						</Table.Cell>
 
 					</Table.Row>

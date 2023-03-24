@@ -4,13 +4,13 @@ import { Box, Title, Group, Divider } from '@mantine/core'
 import { Menu } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
 import { router } from '@inertiajs/react'
-import { Routes } from '@/lib'
 import useIndexPageStyles from './useIndexPageStyles'
 
 // TODO: Figure out correct type for icon
-interface IIndexTableTitleSectionProps {
+export interface IIndexTableTitleSectionProps {
 	children: React.ReactNode
 	title: string
+	deleteRoute: string
 	menuOptions?: {
 		label: string
 		href: string
@@ -18,12 +18,12 @@ interface IIndexTableTitleSectionProps {
 	}[]
 }
 
-const IndexTableTitleSection = ({ children, title, menuOptions }: IIndexTableTitleSectionProps) => {
+const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: IIndexTableTitleSectionProps) => {
 	const { tableState: { selected } } = useTableContext()
 	const { classes } = useIndexPageStyles()
 
 	const deleteRecords = () => {
-		router.visit(Routes.vendors(), {
+		router.visit(deleteRoute, {
 			method: 'delete',
 			data: { ids: Array.from(selected) },
 		})

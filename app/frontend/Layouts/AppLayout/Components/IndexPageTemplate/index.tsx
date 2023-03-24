@@ -1,21 +1,14 @@
 import React from 'react'
 import { Page, Table } from '@/Components'
-import TableTitleSection from './TableTitleSection'
+import TableTitleSection, { IIndexTableTitleSectionProps } from './TableTitleSection'
 import { type TBreadcrumb } from '@/Components/Breadcrumbs'
 
-interface IIndexPageTemplateProps {
-	children: React.ReactNode
-	title: string
+interface IIndexPageTemplateProps extends IIndexTableTitleSectionProps {
 	model: string
 	rows: Record<string, any>[]
 	pagination: Schema.Pagination
 	search?: boolean
 	breadcrumbs?: TBreadcrumb[]
-	menuOptions?: {
-		label: string
-		href: string
-		icon?: any
-	}[]
 }
 
 const IndexPageTemplate = ({
@@ -27,6 +20,7 @@ const IndexPageTemplate = ({
 	search = true,
 	breadcrumbs,
 	menuOptions,
+	deleteRoute,
 }: IIndexPageTemplateProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ breadcrumbs ?? [
@@ -39,7 +33,7 @@ const IndexPageTemplate = ({
 					rows={ rows }
 					pagination={ pagination }
 				>
-					<TableTitleSection title={ title } menuOptions={ menuOptions }>
+					<TableTitleSection title={ title } menuOptions={ menuOptions } deleteRoute={ deleteRoute }>
 						{ search && <Table.SearchInput /> }
 					</TableTitleSection>
 

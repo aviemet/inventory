@@ -72,7 +72,7 @@ const CompaniesTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editCompany(company.slug) } />
+							<EditButton href={ Routes.editCompany(company.slug) } label={ company.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />
