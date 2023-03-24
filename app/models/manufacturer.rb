@@ -17,8 +17,7 @@ class Manufacturer < ApplicationRecord
   resourcify
   tracked
 
-  validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 
   has_many :models
   has_many :items, through: :models

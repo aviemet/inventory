@@ -3,7 +3,7 @@ class Ticket < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:subject], associated_against: {
+    against: [:number, :subject], associated_against: {
       created_by: [:email]
     }, using: {
       tsearch: { prefix: true },

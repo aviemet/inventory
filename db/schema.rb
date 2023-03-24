@@ -214,7 +214,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
   end
 
   create_table "ldaps", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "host"
     t.string "port"
     t.string "domain"
@@ -466,6 +466,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
 
   create_table "tickets", force: :cascade do |t|
     t.string "subject", null: false
+    t.serial "number", null: false
     t.text "description"
     t.integer "priority"
     t.bigint "status_id"
@@ -476,6 +477,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.datetime "updated_at", null: false
     t.index ["asset_id"], name: "index_tickets_on_asset_id"
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
+    t.index ["number"], name: "index_tickets_on_number", unique: true
     t.index ["primary_contact_id"], name: "index_tickets_on_primary_contact_id"
     t.index ["status_id"], name: "index_tickets_on_status_id"
   end

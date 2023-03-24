@@ -455,7 +455,7 @@ declare namespace Schema {
 
 	interface Ldap {
 		id: number;
-		name?: string;
+		name: string;
 		host?: string;
 		port?: string;
 		domain?: string;
@@ -836,6 +836,7 @@ declare namespace Schema {
 	interface Ticket {
 		id: number;
 		subject: string;
+		number: number;
 		description?: string;
 		priority?: 'urgent'|'high'|'standard'|'low';
 		status_id?: number;
