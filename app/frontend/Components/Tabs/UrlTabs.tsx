@@ -25,6 +25,7 @@ const UrlTabs = ({ children, onTabChange, defaultValue, dependencies, ...props }
 		return url.searchParams.get('tab')
 	}, [window.location.href])
 
+
 	// Handle direct navigation to tabbed page
 	useEffect(() => {
 		if(!activeTab() && defaultValue) {
@@ -37,10 +38,10 @@ const UrlTabs = ({ children, onTabChange, defaultValue, dependencies, ...props }
 		}
 	}, [])
 
-	const handleTabChange = (value: TabsValue) => {
-		navigateTab(value)
+	const handleTabChange = (value?: TabsValue) => {
+		navigateTab(value || activeTab())
 
-		if(onTabChange) onTabChange(value)
+		if(onTabChange) onTabChange(value || activeTab())
 	}
 
 	return (

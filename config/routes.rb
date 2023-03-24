@@ -37,10 +37,18 @@ Rails.application.routes.draw do
 
   # SETTINGS PAGES #
 
-  get "settings" => "settings#index", as: :settings
-  scope :settings do
-    resources :ldaps
+  namespace :settings do
+    resources :general
+    resources :appearance
+    resources :localizations
+    resources :notifications
+    resources :integrations
+    resources :asset_tags
+    resources :barcodes
+    resources :ldaps, path: :ldap
     patch "ldaps/:id/sync" => "ldaps#sync", as: :ldap_sync
+    resources :backups
+    resources :logs
   end
 
   # DEVISE PATHS #
