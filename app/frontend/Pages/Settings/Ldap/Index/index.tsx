@@ -9,7 +9,6 @@ interface ILdapSettingsProps {
 }
 
 const Ldap = ({ ldap }: ILdapSettingsProps) => {
-
 	const handleLdapSync = () => {
 		axios.patch(Routes.settingsLdapSync(ldap))
 	}

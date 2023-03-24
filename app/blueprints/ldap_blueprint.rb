@@ -1,5 +1,6 @@
 class LdapBlueprint < ApplicationBlueprint
-  fields :host,
+  fields :name,
+         :host,
          :port,
          :domain,
          :username,

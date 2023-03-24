@@ -32,26 +32,26 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<Page title={ title }>
 			<Section fullHeight>
-				<Heading>{ title }</Heading>
+				<Heading mb={ 24 }>{ title }</Heading>
 
-				<Section sx={ { height: '100%' } }>
-					<Tabs
-						orientation="vertical"
-						variant="pills"
-						defaultValue={ page.url.replace('/settings/', '') }
-						onTabChange={ handleTabChange }
-					>
-						<Tabs.List>{ tabs.map(tab => (
-							<Tabs.Tab key={ tab.name } value={ tab.name }>{ tab.label }</Tabs.Tab>
-						)) }</Tabs.List>
+				<Tabs
+					orientation="vertical"
+					variant="pills"
+					defaultValue={ page.url.replace('/settings/', '') }
+					onTabChange={ handleTabChange }
+				>
+					<Tabs.List>{ tabs.map(tab => (
+						<Tabs.Tab key={ tab.name } value={ tab.name }>{ tab.label }</Tabs.Tab>
+					)) }</Tabs.List>
 
-						{ tabs.map(tab => (
-							<Tabs.Panel key={ tab.name } value={ tab.name } pl="sm">
+					{ tabs.map(tab => (
+						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs">
+							<Section sx={ { height: '100%' } }>
 								{ children }
-							</Tabs.Panel>
-						)) }
-					</Tabs>
-				</Section>
+							</Section>
+						</Tabs.Panel>
+					)) }
+				</Tabs>
 			</Section>
 		</Page>
 	)

@@ -3,8 +3,10 @@ class Settings::LdapsController < ApplicationController
 
   # GET /settings/ldaps
   def index
+    ldap = @active_company&.ldap
+
     render inertia: "Settings/Ldap/Index", props: {
-      ldap: -> { @active_company&.ldap&.render(view: :edit) || Ldap.new.render(view: :new) }
+      ldap: ldap&.render(view: :edit) || Ldap.new.render(view: :new)
     }
   end
 
@@ -24,9 +26,9 @@ class Settings::LdapsController < ApplicationController
   # PATCH/PUT /settings/ldap/:id
   def update
     if ldap.update(ldap_params)
-      redirect_to settings_path(tab: :ldap), notice: 'LDAP settings successfully saved'
+      redirect_to settings_ldaps_path, notice: 'LDAP settings successfully saved'
     else
-      redirect_to settings_path(tab: :ldap), inertia: {
+      redirect_to settings_ldaps_path, inertia: {
         errors: ldap.errors
       }
     end
@@ -46,6 +48,6 @@ class Settings::LdapsController < ApplicationController
   private
 
   def ldap_params
-    params.require(:ldap).permit(:host, :port, :domain, :username, :password, :tree_base, :user_search, :sync_interval)
+    params.require(:ldap).permit(:name, :host, :port, :domain, :username, :password, :tree_base, :user_search, :sync_interval)
   end
 end
