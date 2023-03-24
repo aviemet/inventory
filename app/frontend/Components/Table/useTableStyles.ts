@@ -21,7 +21,7 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 			position: 'sticky',
 			top: 0,
 			zIndex: 1,
-			backgroundColor: theme.other.colorSchemeOption(theme.white, theme.colors.gray[9]),
+			backgroundColor: theme.other.colorSchemeOption(theme.white, theme.colors.dark[7]),
 		},
 
 		'thead, thead a, tbody, tbody a': {

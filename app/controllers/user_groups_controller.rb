@@ -50,6 +50,7 @@ class UserGroupsController < ApplicationController
 
   # POST /user_group
   def create
+    user_group = UserGroup.new(user_group_params)
     user_group.company = @active_company
     ap({ user_group:})
     if user_group.save

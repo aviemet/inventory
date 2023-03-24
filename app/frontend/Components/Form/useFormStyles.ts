@@ -9,7 +9,9 @@ export default createStyles((theme) => ({
 		'form.format-grid .field': {
 			[`@media (min-width: ${theme.breakpoints.sm})`]: {
 				'&:not(.textarea, .compact)': {
-					display: 'grid',
+					'&:not(.no-grid)': {
+						display: 'grid',
+					},
 					gridTemplateColumns: `${theme.other.form.label.width} 1fr`,
 					gridTemplateRows: '1fr',
 					borderLeftWidth: 2,
@@ -38,7 +40,7 @@ export default createStyles((theme) => ({
 				borderColor: theme.colors.red[6],
 			},
 
-			label: {
+			' & > label': {
 				display: 'block',
 
 				'&.text': {

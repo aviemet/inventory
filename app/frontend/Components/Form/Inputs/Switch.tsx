@@ -1,16 +1,19 @@
 import React, { forwardRef, useCallback } from 'react'
 import Field from '../Field'
-import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
+import SwitchInput, { type ISwitchProps } from '@/Components/Inputs/Switch'
+import cx from 'clsx'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
+import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-interface IFormCheckboxProps extends Omit<ICheckboxProps, 'onChange'> {
+interface IFormSwitchProps extends Omit<ISwitchProps, 'onChange'> {
 	name: string
 	model?: string
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>, form: UseFormProps) => void
+	field?: boolean
 }
 
-const FormCheckboxComponent = forwardRef<HTMLInputElement, IFormCheckboxProps>((
-	{ name, onChange, id, required, className, model, ...props },
+const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
+	{ name, onChange, id, required, className, model, label, field = true, ...props },
 	ref,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean>({ name, model })
@@ -21,13 +24,13 @@ const FormCheckboxComponent = forwardRef<HTMLInputElement, IFormCheckboxProps>((
 	}, [onChange, inputName])
 
 	return (
-		<Field
+		<ConditionalWrapper wrapper={ children => <Field
 			type="checkbox"
 			required={ required }
 			errors={ !!error }
 			grid={ false }
-		>
-			<CheckboxInput
+		>{ children }</Field> } condition={ field }>
+			<SwitchInput
 				id={ id || inputId }
 				className={ className }
 				name={ inputName }
@@ -36,10 +39,11 @@ const FormCheckboxComponent = forwardRef<HTMLInputElement, IFormCheckboxProps>((
 				onChange={ handleChange }
 				error={ error }
 				ref={ ref }
+				label={ label }
 				{ ...props }
 			/>
-		</Field>
+		</ConditionalWrapper>
 	)
 })
 
-export default FormCheckboxComponent
+export default FormSwitchComponent

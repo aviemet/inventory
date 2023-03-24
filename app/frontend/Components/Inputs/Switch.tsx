@@ -1,11 +1,11 @@
 import React from 'react'
-import { Checkbox, type CheckboxProps } from '@mantine/core'
+import { Switch, type SwitchProps } from '@mantine/core'
 
-export interface ICheckboxProps extends CheckboxProps {
+export interface ISwitchProps extends SwitchProps {
 	name?: string
 }
 
-const CheckboxComponent = ({ onChange, value, id, name, label, ...props }: ICheckboxProps) => {
+const SwitchComponent = ({ onChange, value, id, name, label, ...props }: ISwitchProps) => {
 	const inputId = id ?? name
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +14,7 @@ const CheckboxComponent = ({ onChange, value, id, name, label, ...props }: IChec
 
 	return (
 		<>
-			<Checkbox
+			<Switch
 				id={ inputId }
 				label={ label }
 				name={ name }
@@ -28,4 +28,4 @@ const CheckboxComponent = ({ onChange, value, id, name, label, ...props }: IChec
 	)
 }
 
-export default CheckboxComponent
+export default SwitchComponent

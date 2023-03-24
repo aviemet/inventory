@@ -7,9 +7,10 @@ export interface IFieldProps extends BoxProps {
 	type?: TInputType
 	required?: boolean
 	errors?: boolean
+	grid?: boolean
 }
 
-const Field = ({ children, type, required = false, errors = false, className, ...props }: IFieldProps) => {
+const Field = ({ children, type, required = false, errors = false, className, grid, ...props }: IFieldProps) => {
 	return (
 		<Box
 			className={ cx(
@@ -17,7 +18,7 @@ const Field = ({ children, type, required = false, errors = false, className, ..
 				{ [String(type)]: type },
 				{ 'required': required },
 				{ 'field_with_errors': errors },
-				className,
+				{ 'no-grid': grid === false },
 			) }
 			{ ...props }
 		>

@@ -28,6 +28,13 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	headings: {
 		fontFamily: 'Greycliff CF, Roboto, sans-serif',
 	},
+	fontSizes: {
+		xs: '0.75rem',
+		sm: '0.9rem',
+		md: '1rem',
+		lg: '1.2rem',
+		xl: '1.4rem',
+	},
 	shadows: {
 		xs: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
 		sm: '0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)',
@@ -82,6 +89,10 @@ export const GlobalStyles = () => <Global styles={ theme => ({
 		display: 'flex',
 		flexDirection: 'column',
 		height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
+	},
+
+	'label': {
+		fontSize: '1rem',
 	},
 }) } />
 
