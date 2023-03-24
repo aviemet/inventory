@@ -1,6 +1,7 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Heading, Page, Section, Tabs } from '@/Components'
 import { router, usePage } from '@inertiajs/react'
+import { TabsValue } from '@mantine/core'
 
 type TTab = {
 	name: string
@@ -24,6 +25,10 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 	const title = 'Settings'
 	const page = usePage()
 
+	const handleTabChange = (value: TabsValue) => {
+		router.get(`/settings/${value}`)
+	}
+
 	return (
 		<Page title={ title }>
 			<Section fullHeight>
@@ -34,9 +39,7 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 						orientation="vertical"
 						variant="pills"
 						defaultValue={ page.url.replace('/settings/', '') }
-						onTabChange={ value => {
-							router.get(`/settings/${value}`)
-						} }
+						onTabChange={ handleTabChange }
 					>
 						<Tabs.List>{ tabs.map(tab => (
 							<Tabs.Tab key={ tab.name } value={ tab.name }>{ tab.label }</Tabs.Tab>

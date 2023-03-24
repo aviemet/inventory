@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     resources :integrations
     resources :asset_tags
     resources :barcodes
-    resources :ldaps, path: :ldap
+    resources :ldaps, path: :ldap, except: [:show, :new, :edit]
     patch "ldaps/:id/sync" => "ldaps#sync", as: :ldap_sync
     resources :backups
     resources :logs

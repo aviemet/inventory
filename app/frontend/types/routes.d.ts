@@ -1476,18 +1476,6 @@ export const editSettingsIntegration: ((
 
 /**
  * Generates rails route to
- * /settings/ldap/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editSettingsLdap: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /settings/localizations/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -2139,16 +2127,6 @@ export const newSettingsGeneral: ((
  * @returns {string} route path
  */
 export const newSettingsIntegration: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /settings/ldap/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newSettingsLdap: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

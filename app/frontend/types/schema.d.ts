@@ -144,7 +144,7 @@ declare namespace Schema {
 		websites?: Website[];
 		roles?: Role[];
 		users?: User[];
-		ldaps?: Ldap[];
+		ldap?: Ldap;
 		ownerships?: Ownership[];
 		assets?: Asset[];
 		models?: Model[];
@@ -185,7 +185,7 @@ declare namespace Schema {
 		websites?: Website[];
 		roles?: Role[];
 		users?: User[];
-		ldaps?: Ldap[];
+		ldap?: Ldap;
 		ownerships?: Ownership[];
 		assets?: Asset[];
 		models?: Model[];

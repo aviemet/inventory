@@ -1571,15 +1571,6 @@ export const editSettingsIntegration = __jsr.r({"id":{"r":true},"format":{}}, [2
 
 /**
  * Generates rails route to
- * /settings/ldap/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editSettingsLdap = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldap"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
-
-/**
- * Generates rails route to
  * /settings/localizations/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -2088,14 +2079,6 @@ export const newSettingsGeneral = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"setti
  * @returns {string} route path
  */
 export const newSettingsIntegration = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"integrations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /settings/ldap/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newSettingsLdap = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldap"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to

@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react'
-import { Box } from '@/Components'
+import React from 'react'
 import { Routes } from '@/lib'
-import LdapForm from '@/Pages/Ldap/Form'
-import { router, usePage } from '@inertiajs/react'
-import { LoadingOverlay } from '@mantine/core'
+import LdapForm from '../Form'
 import SettingsLayout from '../../SettingsLayout'
 
 interface ILdapSettingsProps {
