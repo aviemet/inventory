@@ -3,7 +3,7 @@ import Field from '../Field'
 import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 
-interface IFormCheckboxProps extends Omit<ICheckboxProps, 'onChange'> {
+interface IFormCheckboxProps extends Omit<ICheckboxProps, 'onChange'|'defaultChecked'> {
 	name: string
 	model?: string
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>, form: UseFormProps) => void
@@ -31,8 +31,8 @@ const FormCheckboxComponent = forwardRef<HTMLInputElement, IFormCheckboxProps>((
 				id={ id || inputId }
 				className={ className }
 				name={ inputName }
-				defaultChecked={ Boolean(value) }
-				value={ value }
+				value={ name }
+				checked={ value }
 				onChange={ handleChange }
 				error={ error }
 				ref={ ref }

@@ -4,19 +4,19 @@ import Label from './Label'
 
 export interface ITextareaProps extends TextareaProps {
 	label?: string
-	name: string
 }
 
-const TextareaComponent = ({ label, name, required = false, value, onChange, id, radius = 'xs', ...props }: ITextareaProps) => {
+const TextareaComponent = ({ label, name, required = false, value, id, radius = 'xs', ...props }: ITextareaProps) => {
+	const inputId = id || name
+
 	return (
 		<>
-			{ label && <Label required={ required } htmlFor={ id }>
+			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
 			<Textarea
-				id={ id }
+				id={ inputId }
 				name={ name }
-				onChange={ onChange }
 				value={ String(value) }
 				required={ required }
 				radius={ radius }

@@ -17,18 +17,19 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		getLabel = option => option.name,
 		getValue = option => String(option.id),
 		disabledOptions,
-		onChange,
-		onOpen,
 		filterMatchKeys,
 		label,
 		required,
 		id,
+		name,
 		searchable = true,
 		clearable = true,
 		...props
 	},
 	ref,
 ) => {
+	const inputId = id || name
+
 	const data = useMemo(() => options.map(option => {
 		const optionPart = {
 			label: getLabel(option),
@@ -43,25 +44,22 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		return optionPart
 	}), [options])
 
-	const handleChange = (value: string|null) => {
-		if(onChange) onChange(value)
-	}
-
 	return (
 		<>
-			{ label && <Label required={ required } htmlFor={ id }>
+			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
 			<Select
 				ref={ ref }
-				searchable
+				id={ inputId }
+				name={ name }
+				searchable={ searchable }
 				clearable={ clearable }
 				size="md"
 				data={ data }
+				required={ required }
 				maxDropdownHeight={ 400 }
 				nothingFound="No Results"
-				onChange={ handleChange }
-				id={ id }
 				{ ...props }
 			/>
 		</>

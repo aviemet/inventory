@@ -84,6 +84,6 @@ module.exports = {
 				'catch': { 'after': false },
 			},
 		}],
-		'comma-dangle': [2, 'always-multiline'],
+		'comma-dangle': ['error', 'always-multiline'],
 	},
 }

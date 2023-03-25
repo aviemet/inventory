@@ -1,30 +1,20 @@
 import React from 'react'
-import { Checkbox, type CheckboxProps } from '@mantine/core'
+import { Checkbox, Sx, type CheckboxProps } from '@mantine/core'
 
 export interface ICheckboxProps extends CheckboxProps {
-	name?: string
+	sx?: Sx
 }
 
-const CheckboxComponent = ({ onChange, value, id, name, label, ...props }: ICheckboxProps) => {
+const CheckboxComponent = ({ id, name, sx, ...props }: ICheckboxProps) => {
 	const inputId = id ?? name
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if(onChange) onChange(e)
-	}
-
 	return (
-		<>
-			<Checkbox
-				id={ inputId }
-				label={ label }
-				name={ name }
-				value={ value }
-				onChange={ handleChange }
-				required={ props.required }
-				{ ...props }
-				sx={ { padding: '14px 10px' } }
-			/>
-		</>
+		<Checkbox
+			id={ inputId }
+			name={ name }
+			sx={ [{ padding: '14px 10px' }, sx] }
+			{ ...props }
+		/>
 	)
 }
 

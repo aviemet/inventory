@@ -15,6 +15,7 @@ export { default as Section } from './Section'
 export { default as Table } from './Table'
 export { default as Tabs } from './Tabs'
 export { default as Tile } from './Tile'
+export { default as RichTextEditor } from './RichTextEditor'
 export { default as Label } from './Inputs/Label'
 
 // Export UI library components as a proxy to allow easy refactoring
