@@ -12,11 +12,10 @@ type TTab = {
 const tabs: TTab[] = [
 	{ name: 'general', label: 'General' },
 	{ name: 'appearance', label: 'Appearance' },
-	{ name: 'localization', label: 'Localization' },
 	{ name: 'notifications', label: 'Notifications' },
 	// { name: 'integrations', label: 'Integrations' },
 	{ name: 'asset_tags', label: 'Asset Tags' },
-	{ name: 'barcodes', label: 'Barcodes' },
+	// { name: 'barcodes', label: 'Barcodes' },
 	{ name: 'ldap', label: 'LDAP' },
 	{ name: 'backups', label: 'Backups' },
 	{ name: 'logs', label: 'Logs' },

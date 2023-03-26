@@ -1,4 +1,6 @@
 require 'simplecov'
+require "pundit/rspec"
+
 SimpleCov.start 'rails' do
   enable_coverage :branch
 
@@ -137,4 +139,18 @@ RSpec.configure do |config|
     end
   end
 
+  # Pundit
+  RSpec::Matchers.define :authorize do |action|
+    match do |policy|
+      policy.public_send("#{action}?")
+    end
+
+    failure_message do |policy|
+      "#{policy.class} does not authorize #{action} on #{policy.record} for #{policy.user.inspect}."
+    end
+
+    failure_message_when_negated do |policy|
+      "#{policy.class} does not forbid #{action} on #{policy.record} for #{policy.user.inspect}."
+    end
+  end
 end

@@ -5,7 +5,20 @@ FactoryBot.define do
     employee_number { Faker::Number.number }
     job_title { Faker::Job.title }
     active { true }
-    location
-    company
+
+    transient do
+      company { true }
+    end
+
+    after(:build) do |person, options|
+      if person&.user&.company
+        person.company = person.user.company
+      elsif options.company == true
+        person.company = create(:company)
+      elsif options.company
+        person.company = options.company
+      end
+    end
+
   end
 end
