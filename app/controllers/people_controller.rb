@@ -48,7 +48,6 @@ class PeopleController < ApplicationController
 
   # POST /people
   def create
-    ap({ person_params: })
     person = Person.new(handle_department_params)
 
     person.company = @active_company

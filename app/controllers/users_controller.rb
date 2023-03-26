@@ -71,8 +71,6 @@ class UsersController < ApplicationController
       current_user.person.company = company
       current_user.person.save
 
-      ap({ current_user: current_user })
-
       if current_user.save
         redirect_to root_path
       end

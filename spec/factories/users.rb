@@ -20,7 +20,6 @@ FactoryBot.define do
       end
 
       if options.person == true
-        ap({ company: user&.active_company })
         user.person = create(:person, company: user&.active_company)
       elsif options.person
         user.person = options.person

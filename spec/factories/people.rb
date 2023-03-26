@@ -18,6 +18,10 @@ FactoryBot.define do
       elsif options.company
         person.company = options.company
       end
+
+      if person.company
+        person.location = create(:location, company: person.company)
+      end
     end
 
   end

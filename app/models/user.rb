@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :user_group_assignments
   has_many :groups, through: :user_group_assignments, source: :user_group
 
+  delegate :company, to: :active_company
+
   # store_accessor :table_preferences
   store_accessor :user_preferences, :dark_mode
 
@@ -25,19 +27,20 @@ class User < ApplicationRecord
   # after_create :add_email_to_contact
 
   before_save :coerce_json
+  before_save :set_active_company
 
   accepts_nested_attributes_for :person
 
   # jsonb_accessor :table_preferences, hide: :hash
 
-  delegate :can?, :cannot?, to: :ability
-
   scope :includes_associated, -> { includes([:person, :companies]) }
 
   private
 
-  def ability
-    @ability ||= Ability.new(self)
+  def set_active_company
+    return if self.active_company
+
+    self.active_company = self.person ? self.person.company : self.companies.first
   end
 
   # def add_email_to_contact

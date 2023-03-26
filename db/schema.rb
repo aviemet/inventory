@@ -520,11 +520,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.datetime "locked_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "person_id"
-    t.bigint "active_company_id"
-    t.boolean "active", default: true
-    t.jsonb "table_preferences", default: {}
-    t.jsonb "user_preferences", default: {}
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -533,6 +528,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.bigint "person_id"
+    t.bigint "active_company_id"
+    t.boolean "active", default: true
+    t.jsonb "table_preferences", default: {}
+    t.jsonb "user_preferences", default: {}
     t.index ["active_company_id"], name: "index_users_on_active_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

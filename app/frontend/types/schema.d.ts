@@ -912,11 +912,6 @@ declare namespace Schema {
 		locked_at?: string;
 		created_at: string;
 		updated_at: string;
-		person_id?: number;
-		active_company_id?: number;
-		active?: boolean;
-		table_preferences?: Record<string, any>;
-		user_preferences?: Record<string, any>;
 		invitation_token?: string;
 		invitation_created_at?: string;
 		invitation_sent_at?: string;
@@ -925,6 +920,11 @@ declare namespace Schema {
 		invited_by_type?: string;
 		invited_by_id?: number;
 		invitations_count?: number;
+		person_id?: number;
+		active_company_id?: number;
+		active?: boolean;
+		table_preferences?: Record<string, any>;
+		user_preferences?: Record<string, any>;
 		activities?: PublicActivityActivity[];
 		roles?: Role[];
 		person?: Person;

@@ -11,7 +11,7 @@ RSpec.describe CompanyPolicy, type: :policy do
     it "should allow an admin to see the company" do
       company_two = create(:company)
       scope = CompanyPolicy::Scope.new(user, Company)
-      ap({ size: scope.resolve.size, roles: user.roles })
+
       expect(scope.resolve.size).to eq(1)
     end
   end
