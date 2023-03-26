@@ -27,4 +27,12 @@ class NetworkBlueprint < ApplicationBlueprint
       network&.address&.paginate_hosts(page: options[:page])&.map(&:to_s)
     end
   end
+
+  view :new do
+    excludes :id, :broadcast
+  end
+
+  view :edit do
+    excludes :id, :broadcast
+  end
 end

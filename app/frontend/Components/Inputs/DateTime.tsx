@@ -1,6 +1,7 @@
 import React from 'react'
 import Label from './Label'
 import { DateTimePicker, DateTimePickerProps } from '@mantine/dates'
+import { isEmpty } from 'lodash'
 
 export interface IDateTimeProps extends DateTimePickerProps {
 	label?: string
@@ -32,7 +33,7 @@ const DateTime = ({
 			<DateTimePicker
 				id={ inputId }
 				name={ name }
-				defaultValue={ value }
+				value={ isEmpty(value) ? null : new Date(value) }
 				radius={ radius }
 				size={ size }
 				valueFormat={ valueFormat }

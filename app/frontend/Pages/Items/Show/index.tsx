@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon, CheckinIcon, CheckoutIcon, TicketsIcon } from '@/Components/Icons'
 import Details from './Details'
@@ -25,7 +25,7 @@ const ShowItem = ({ item }: IShowItemProps) => {
 			{ title: item.name! },
 		] }>
 			<Section>
-				<Flex position="apart">
+				<Group position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu position="bottom-end">
@@ -49,7 +49,7 @@ const ShowItem = ({ item }: IShowItemProps) => {
 							<Menu.Link href={ Routes.newTicket({ 'ticket.asset_id': item.id }) } icon={ <TicketsIcon /> }>Open New Ticket</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 					<Tabs.List>

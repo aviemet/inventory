@@ -81,6 +81,6 @@ class NetworksController < ApplicationController
   end
 
   def network_params
-    params.require(:network).permit(:name, :ip, :gateway, :dhcp_start, :dhcp_end, :vlan_id)
+    params.require(:network).permit(:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes)
   end
 end

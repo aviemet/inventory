@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Link, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { NewIcon, EditIcon } from '@/Components/Icons'
 import ItemsTable from '@/Pages/Items/Table'
@@ -73,8 +73,8 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 				{ /*********** Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
-						<Flex position="apart">
-							<Heading sx={ { flex: 1 } }>{
+						<Group position="apart">
+							<Heading>{
 								vendor.url ?
 									<Link href={ vendor.url } target="_blank" rel="noreferrer">{ title }</Link>
 									:
@@ -93,7 +93,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 									</Menu.Link>
 								</Menu.Dropdown>
 							</Menu>
-						</Flex>
+						</Group>
 					</Section>
 				</Tabs.Panel>
 

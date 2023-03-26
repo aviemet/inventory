@@ -1,5 +1,5 @@
 
-import { Flex, Heading, Menu, Section } from '@/Components'
+import { Group, Heading, Menu, Section } from '@/Components'
 import { EditIcon } from '@/Components/Icons'
 import { Routes } from '@/lib'
 import React from 'react'
@@ -13,8 +13,8 @@ const Details = ({ title, department }: IDetailsProps) => {
 
 	return (
 		<Section>
-			<Flex position="apart">
-				<Heading sx={ { flex: 1 } }>{ title }</Heading>
+			<Group position="apart">
+				<Heading>{ title }</Heading>
 
 				<Menu position="bottom-end">
 					<Menu.Target />
@@ -28,7 +28,7 @@ const Details = ({ title, department }: IDetailsProps) => {
 						</Menu.Link>
 					</Menu.Dropdown>
 				</Menu>
-			</Flex>
+			</Group>
 
 			<div>Location: { department.location?.name }</div>
 		</Section>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'
@@ -24,8 +24,8 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 			{ title: license.name! },
 		] }>
 			<Section>
-				<Flex position="apart">
-					<Heading sx={ { flex: 1 } }>{ title }</Heading>
+				<Group position="apart">
+					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -40,7 +40,7 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 					<Tabs.List>

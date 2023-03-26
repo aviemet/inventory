@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Heading, Menu, Page, Section } from '@/Components'
+import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface IShowLocationProps {
@@ -15,7 +15,7 @@ const Show = ({ location }: IShowLocationProps) => {
 			{ title: location.name! },
 		] }>
 			<Section>
-				<Flex position="apart">
+				<Group position="apart">
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
@@ -26,7 +26,7 @@ const Show = ({ location }: IShowLocationProps) => {
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 			</Section>
 		</Page>

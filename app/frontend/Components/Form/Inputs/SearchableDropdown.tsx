@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import Field from '../Field'
 import SearchableDropdownInput, { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
-import { Flex } from '@/Components'
+import { Group } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
 import { router } from '@inertiajs/react'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
@@ -94,7 +94,7 @@ interface IWithChildren {
 const EmptyWrapper = ({ children }: IWithChildren) => <>{ children }</>
 
 const FlexWrapper = ({ children }: IWithChildren) => (
-	<Flex noWrap align="baseline" position="apart">{ children }</Flex>
+	<Group noWrap align="baseline" position="apart">{ children }</Group>
 )
 
 export default SearchableDropdown

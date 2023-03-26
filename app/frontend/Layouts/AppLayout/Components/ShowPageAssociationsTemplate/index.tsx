@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Link, List, Icon, Box, Flex } from '@/Components'
+import { Heading, Link, List, Icon, Box, Group } from '@/Components'
 import { polymorphicRoute, formatter } from '@/lib'
 import { ArrowRightSquareIcon, CheckoutIcon } from '@/Components/Icons'
 import { CheckinButton } from '@/Components/Button'
@@ -22,7 +22,7 @@ const ShowPageAssociations = ({ assignToable, checkinRoute }: IShowPageAssociati
 				{ assignToable.assignments.map(assignment => (
 					assignment.active && (
 						<List.Item key={ assignment.id }>
-							<Flex>
+							<Group>
 								{ formatter.date.relative(assignment.created_at) }
 
 								<Box sx={ { padding: '0 8px' } }><ArrowRightSquareIcon /></Box>
@@ -34,7 +34,7 @@ const ShowPageAssociations = ({ assignToable, checkinRoute }: IShowPageAssociati
 								</Link>
 
 								{ checkinRoute && <CheckinButton href={ checkinRoute(assignToable.id, assignment.id) } /> }
-							</Flex>
+							</Group>
 						</List.Item>
 					)
 				)) }

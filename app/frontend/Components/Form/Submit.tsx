@@ -11,7 +11,7 @@ const Submit = forwardRef<HTMLButtonElement, ButtonProps>((
 	return (
 		<Box className="submit">
 			<SubmitButton
-				component={ <Button /> }
+				component={ Button }
 				ref={ ref }
 				sx={ { width: '100%' } }
 				disabled={ disabled || processing || !isDirty }

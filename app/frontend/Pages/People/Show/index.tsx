@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
@@ -15,15 +15,15 @@ const tabs = {
 
 const Show = ({ person }: IShowPersonProps) => {
 	const title = person.name ?? 'Person Details'
-	console.log({ person })
+
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'People', href: Routes.people() },
 			{ title: person.name! },
 		] }>
 			<Section>
-				<Flex position="apart">
-					<Heading sx={ { flex: 1 } }>{ title }</Heading>
+				<Group position="apart">
+					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -33,7 +33,7 @@ const Show = ({ person }: IShowPersonProps) => {
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 					<Tabs.List>

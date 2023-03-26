@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Container, Section, Heading, Page, Flex, Menu } from '@/Components'
+import { Table, Container, Section, Heading, Page, Group, Menu } from '@/Components'
 import { Routes } from '@/lib'
 import UsersTable from '@/Pages/Users/Table'
 import { EditIcon } from '@/Components/Icons'
@@ -20,8 +20,8 @@ const ShowUser = ({ user_group }: IShowUserProps) => {
 			<Section>
 				<Container>
 
-					<Flex position="apart">
-						<Heading sx={ { flex: 1 } }>{ title }</Heading>
+					<Group position="apart">
+						<Heading>{ title }</Heading>
 
 						<Menu position="bottom-end">
 							<Menu.Target />
@@ -31,7 +31,7 @@ const ShowUser = ({ user_group }: IShowUserProps) => {
 								</Menu.Link>
 							</Menu.Dropdown>
 						</Menu>
-					</Flex>
+					</Group>
 
 					<Table.TableProvider
 						selectable

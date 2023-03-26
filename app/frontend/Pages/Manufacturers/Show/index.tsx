@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon, NewIcon } from '@/Components/Icons'
 import ShowPageTableTemplate from '@/Layouts/AppLayout/Components/ShowPageTableTemplate'
@@ -61,8 +61,8 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: ISh
 				{ /*********** Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
-						<Flex position="apart">
-							<Heading sx={ { flex: 1 } }>{ title }</Heading>
+						<Group position="apart">
+							<Heading>{ title }</Heading>
 
 							<Menu position="bottom-end">
 								<Menu.Target />
@@ -72,7 +72,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: ISh
 									</Menu.Link>
 								</Menu.Dropdown>
 							</Menu>
-						</Flex>
+						</Group>
 					</Section>
 				</Tabs.Panel>
 

@@ -3,7 +3,6 @@ export { default as Button } from './Button'
 export { default as Card } from './Card'
 export { default as ConditionalWrapper } from './ConditionalWrapper'
 export { default as DangerousHtml } from './DangerousHtml'
-export { default as Flex } from './Flex'
 export { default as Heading } from './Heading'
 export { default as History } from './History'
 export { default as Lazy } from './Lazy'
@@ -23,11 +22,13 @@ export {
 	Box,
 	Badge,
 	Container,
+	Flex,
 	Group,
-	Modal,
-	Stack,
 	List,
+	Modal,
+	Paper,
+	SimpleGrid,
+	Stack,
 	Tooltip,
 	ThemeIcon as Icon,
-	SimpleGrid,
 } from '@mantine/core'

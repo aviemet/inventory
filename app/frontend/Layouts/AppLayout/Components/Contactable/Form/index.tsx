@@ -13,7 +13,7 @@ interface IContactableFormProps {
 const ContactableForm = ({ contact }: IContactableFormProps) => {
 	return (
 		<>
-			<FieldsFor model="contacts" legend="Contact Information">
+			<FieldsFor model="contact" legend="Contact Information">
 				<Phone />
 				{ /* <Email />
 			<Website />
