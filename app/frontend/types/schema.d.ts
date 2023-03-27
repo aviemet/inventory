@@ -1034,6 +1034,8 @@ declare namespace Schema {
 		updated_at: string;
 		activities?: PublicActivityActivity[];
 		roles?: Role[];
+		contact?: Contact;
+		category?: Category;
 	}
 
 
