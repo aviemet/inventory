@@ -46,3 +46,11 @@ if TicketStatus.count == 0
     })
   end
 end
+
+if UserGroup.count == 0
+  group = UserGroup.create({
+    name: "Site Administrator",
+    description: "Super user permissions for the entire site."
+  })
+
+end

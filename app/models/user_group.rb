@@ -13,9 +13,10 @@ class UserGroup < ApplicationRecord
     }
   )
 
-  slug :name
-
   tracked
+  resourcify
+  
+  slug :name
 
   has_many :user_group_assignments
   has_many :users, through: :user_group_assignments

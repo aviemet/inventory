@@ -12,6 +12,7 @@ class Network < ApplicationRecord
   )
 
   tracked
+  resourcify
 
   validates :address, presence: true
   validate :is_network

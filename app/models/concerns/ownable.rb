@@ -10,6 +10,6 @@ module Ownable
     accepts_nested_attributes_for :company
     accepts_nested_attributes_for :department
 
-    validates :company, presence: true
+    validates_presence_of :company
   end
 end

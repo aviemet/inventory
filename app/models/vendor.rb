@@ -14,9 +14,10 @@ class Vendor < ApplicationRecord
     }
   )
 
-  slug :name
-
   tracked
+  resourcify
+
+  slug :name
 
   has_many :contracts
   has_many :items

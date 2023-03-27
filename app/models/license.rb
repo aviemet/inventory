@@ -17,8 +17,8 @@ class License < ApplicationRecord
     }
   )
 
-  resourcify
   tracked
+  resourcify
 
   monetize :cost_cents
 

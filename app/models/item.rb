@@ -2,6 +2,9 @@ class Item < Asset
   include Assignable::Single
   include AssignToable
 
+  tracked
+  resourcify
+
   after_create :ensure_nic
 
   has_many :nics, dependent: :destroy

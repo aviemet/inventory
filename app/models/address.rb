@@ -1,5 +1,6 @@
 class Address < ApplicationRecord
   tracked
+  resourcify
 
   belongs_to :contact
   belongs_to :category

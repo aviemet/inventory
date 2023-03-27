@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  rolify
-
   tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token, :active_company]
+  resourcify
+  rolify
 
   # Include default devise modules. Others available are: , :omniauthable, :timeoutable,
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable, :invitable
@@ -34,6 +34,10 @@ class User < ApplicationRecord
   # jsonb_accessor :table_preferences, hide: :hash
 
   scope :includes_associated, -> { includes([:person, :companies]) }
+
+  def authorized?(action, record)
+    self.has_role?(action, record)
+  end
 
   private
 

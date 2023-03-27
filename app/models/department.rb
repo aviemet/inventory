@@ -15,8 +15,8 @@ class Department < ApplicationRecord
 
   slug :name
 
-  resourcify
   tracked
+  resourcify
 
   validates_presence_of :name
 

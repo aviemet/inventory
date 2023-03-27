@@ -10,6 +10,7 @@ FactoryBot.define do
     dhcp_start { '10.0.0.100' }
     dhcp_end { '10.0.0.254' }
     vlan_id { Faker::Number.number(digits: 2) }
+
     company
   end
 end

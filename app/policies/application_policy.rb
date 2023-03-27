@@ -9,15 +9,15 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    standard_auth(:index)
   end
 
   def show?
-    false
+    standard_auth(:show)
   end
 
   def create?
-    false
+    standard_auth(:create)
   end
 
   def new?
@@ -25,7 +25,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    standard_auth(:update)
   end
 
   def edit?
@@ -33,7 +33,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    standard_auth(:destroy)
   end
 
   class Scope
@@ -49,5 +49,11 @@ class ApplicationPolicy
     private
 
     attr_reader :user, :scope
+  end
+
+  private
+
+  def standard_auth(action)
+    user.authorized?(action, record)
   end
 end

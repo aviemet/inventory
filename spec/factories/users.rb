@@ -5,25 +5,14 @@ FactoryBot.define do
 
     transient do
       confirmed { false }
-      company { true }
-      person { true }
+      company { create(:company) }
     end
 
-    after(:build) do |user, options|
-      if options.company == true
-        company = create(:company)
-        user.add_role :admin, company
-        user.active_company = company
-      elsif options.company
-        user.add_role :admin, options.company
-        user.active_company = options.company
-      end
+    person { association :person, company: company }
 
-      if options.person == true
-        user.person = create(:person, company: user&.active_company)
-      elsif options.person
-        user.person = options.person
-      end
+    after(:build) do |user, options|
+      user.add_role :admin, options.company
+      user.active_company = options.company
 
       user.confirm if options.confirmed
     end

@@ -6,23 +6,7 @@ FactoryBot.define do
     job_title { Faker::Job.title }
     active { true }
 
-    transient do
-      company { true }
-    end
-
-    after(:build) do |person, options|
-      if person&.user&.company
-        person.company = person.user.company
-      elsif options.company == true
-        person.company = create(:company)
-      elsif options.company
-        person.company = options.company
-      end
-
-      if person.company
-        person.location = create(:location, company: person.company)
-      end
-    end
-
+    company
+    location { association :location, company: company }
   end
 end

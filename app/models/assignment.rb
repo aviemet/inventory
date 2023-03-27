@@ -4,6 +4,7 @@ class Assignment < ApplicationRecord
             assign_toable_type: proc { |_controller, a| a.assign_toable_type },
             assign_toable_id: proc { |_controller, a| a.assign_toable_id }
           }
+  resourcify
 
   enum status: %i(approved requested denied)
 

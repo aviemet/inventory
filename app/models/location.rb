@@ -17,8 +17,8 @@ class Location < ApplicationRecord
 
   slug :name
 
-  resourcify
   tracked
+  resourcify
 
   belongs_to :parent, class_name: "Location", required: false
   has_many :people

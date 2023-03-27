@@ -1,6 +1,6 @@
 class Ldap < ApplicationRecord
-  resourcify
   tracked
+  resourcify
 
   attribute :port, default: 389
 
