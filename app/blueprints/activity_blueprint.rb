@@ -19,7 +19,6 @@ class ActivityBlueprint < Blueprinter::Base
       polymorphic_path(activity.trackable_type.constantize.find(activity.trackable_id), only_path: true)
     rescue StandardError
       nil
-
     end
 
     association :owner, blueprint: UserBlueprint

@@ -810,6 +810,7 @@ declare namespace Schema {
 		updated_at: string;
 		activities?: PublicActivityActivity[];
 		users?: User[];
+		user_groups?: UserGroup[];
 	}
 
 	interface Smtp {

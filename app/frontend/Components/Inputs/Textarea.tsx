@@ -17,7 +17,7 @@ const TextareaComponent = ({ label, name, required = false, value, id, radius = 
 			<Textarea
 				id={ inputId }
 				name={ name }
-				value={ String(value) }
+				value={ value ? String(value) : '' }
 				required={ required }
 				radius={ radius }
 				{ ...props }

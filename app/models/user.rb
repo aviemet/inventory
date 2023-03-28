@@ -35,10 +35,6 @@ class User < ApplicationRecord
 
   scope :includes_associated, -> { includes([:person, :companies]) }
 
-  def authorized?(action, record)
-    self.has_role?(action, record)
-  end
-
   private
 
   def set_active_company

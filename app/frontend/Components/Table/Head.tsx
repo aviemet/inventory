@@ -4,7 +4,7 @@ import { THeadProps } from 'react-html-props'
 import { Box, type BoxProps, Sx } from '@mantine/core'
 
 interface ITableHead extends BoxProps, THeadProps {
-	sx: Sx
+	sx?: Sx
 }
 
 const Head = forwardRef<HTMLTableSectionElement, ITableHead>(({ children, sx, ...props }, ref) => {

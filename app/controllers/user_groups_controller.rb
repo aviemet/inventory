@@ -36,9 +36,7 @@ class UserGroupsController < ApplicationController
 
   # GET /user_group/new
   def new
-    render inertia: "UserGroups/New", props: {
-      user_group: UserGroup.new.render(view: :new),
-    }
+    render inertia: "UserGroups/New"
   end
 
   # GET /user_group/:id/edit
@@ -50,10 +48,17 @@ class UserGroupsController < ApplicationController
 
   # POST /user_group
   def create
-    user_group = UserGroup.new(user_group_params)
+    user_group = UserGroup.new(user_group_params.except(:permissions))
     user_group.company = @active_company
 
-    if user_group.save
+    ap({user_group_params:, params:})
+
+    user_group.transaction do
+      user_group.set_permissions(user_group_params[:permissions])
+      user_group.save
+    end
+
+    if user_group.persisted?
       redirect_to user_group, notice: 'UserGroup was successfully created'
     else
       redirect_to user_group_path, inertia: { errors: user_group.errors }
@@ -78,6 +83,22 @@ class UserGroupsController < ApplicationController
   private
 
   def user_group_params
-    params.require(:user_group).permit(:name, :description)
+    params.require(:user_group).permit(
+      :name, :description, permissions: [
+        items: [:index, :show, :create, :update, :delete, :checkout, :checkin],
+        accessories: [:index, :show, :create, :update, :delete, :checkout, :checkin],
+        components: [:index, :show, :create, :update, :delete, :checkout, :checkin],
+        consumables: [:index, :show, :create, :update, :delete, :checkout],
+        licenses: [:index, :show, :create, :update, :delete, :checkout, :checkin],
+        networks: [:index, :show, :create, :update, :delete, :checkout],
+        vendors: [:index, :show, :create, :update, :delete, :checkout],
+        contracts: [:index, :show, :create, :update, :delete, :checkout],
+        categories: [:index, :show, :create, :update, :delete, :checkout],
+        models: [:index, :show, :create, :update, :delete, :checkout],
+        manufacturers: [:index, :show, :create, :update, :delete, :checkout],
+        departments: [:index, :show, :create, :update, :delete, :checkout],
+        locations: [:index, :show, :create, :update, :delete, :checkout],
+      ]
+    )
   end
 end

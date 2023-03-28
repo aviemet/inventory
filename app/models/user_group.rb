@@ -15,7 +15,8 @@ class UserGroup < ApplicationRecord
 
   tracked
   resourcify
-  
+  rolify
+
   slug :name
 
   has_many :user_group_assignments
@@ -25,10 +26,17 @@ class UserGroup < ApplicationRecord
 
   scope :includes_associated, -> { includes([:users]) }
 
-  def assign(user)
-    UserGroupAssignment.create!({
-      user:,
-      user_group: self
-    })
+  def set_permissions(permissions)
+    permissions.each do |model, actions|
+      constant = model.singularize.camelize.constantize
+
+      actions.each do |action, enabled|
+        if enabled
+          self.add_role action, constant
+        else
+          self.remove_role action, constant
+        end
+      end
+    end
   end
 end
