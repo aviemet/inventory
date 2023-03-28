@@ -3,9 +3,25 @@ import { NumberInput } from '@/Components/Inputs'
 import Field from '../Field'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
+import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-const FormInput = forwardRef<HTMLInputElement, IInputProps<number>>((
-	{ label, name, model, onChange, onBlur, id, required, compact = false, ...props },
+interface INumberInputProps extends IInputProps<number> {
+	field?: boolean
+}
+
+const FormInput = forwardRef<HTMLInputElement, INumberInputProps>((
+	{
+		label,
+		name,
+		model,
+		onChange,
+		onBlur,
+		id,
+		required,
+		compact = false,
+		field = true,
+		...props
+	},
 	ref,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model })
@@ -22,11 +38,18 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps<number>>((
 	}
 
 	return (
-		<Field
-			type="number"
-			required={ required }
-			className={ cx({ compact }) }
-			errors={ !!error }
+		<ConditionalWrapper
+			wrapper={ children => (
+				<Field
+					type="number"
+					required={ required }
+					className={ cx({ compact }) }
+					errors={ !!error }
+				>
+					{ children }
+				</Field>
+			) }
+			condition={ field }
 		>
 			<NumberInput
 				id={ id || inputId }
@@ -40,7 +63,7 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps<number>>((
 				ref={ ref }
 				{ ...props }
 			/>
-		</Field>
+		</ConditionalWrapper>
 	)
 })
 

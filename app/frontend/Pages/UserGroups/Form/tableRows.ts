@@ -1,67 +1,77 @@
 export default [
 	{
-		model: 'items',
+		model: 'item',
 		label: 'Items',
 		permissions: ['index', 'show', 'create', 'update', 'delete', 'checkout', 'checkin'],
 	},
 	{
-		model: 'accessories',
+		model: 'accessory',
 		label: 'Accessories',
 		permissions: ['index', 'show', 'create', 'update', 'delete', 'checkout', 'checkin'],
 	},
 	{
-		model: 'components',
+		model: 'component',
 		label: 'Components',
 		permissions: ['index', 'show', 'create', 'update', 'delete', 'checkout', 'checkin'],
 	},
 	{
-		model: 'consumables',
+		model: 'consumable',
 		label: 'Consumables',
 		permissions: ['index', 'show', 'create', 'update', 'delete', 'checkout'],
 	},
 	{
-		model: 'licenses',
+		model: 'license',
 		label: 'Licenses',
 		permissions: ['index', 'show', 'create', 'update', 'delete', 'checkout', 'checkin'],
 	},
 	{
-		model: 'networks',
+		model: 'network',
 		label: 'Networks',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
 	{
-		model: 'vendors',
+		model: 'vendor',
 		label: 'Vendors',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
 	{
-		model: 'contracts',
+		model: 'contract',
 		label: 'Contracts',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
 	{
-		model: 'categories',
+		model: 'category',
 		label: 'Categories',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
 	{
-		model: 'models',
+		model: 'model',
 		label: 'Models',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
 	{
-		model: 'manufacturers',
+		model: 'manufacturer',
 		label: 'Manufacturers',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
 	{
-		model: 'departments',
+		model: 'department',
 		label: 'Departments',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
 	{
-		model: 'locations',
+		model: 'location',
 		label: 'Locations',
+		permissions: ['index', 'show', 'create', 'update', 'delete'],
+	},
+	{
+		model: 'person',
+		label: 'People',
+		permissions: ['index', 'show', 'create', 'update', 'delete'],
+	},
+	{
+		model: 'user',
+		label: 'Users',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
 ]

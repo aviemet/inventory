@@ -3,13 +3,26 @@ import { TextInput } from '@/Components/Inputs'
 import Field from '../Field'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
+import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
 interface ITextInputProps extends IInputProps<string> {
 	errorKey?: string
+	field?: boolean
 }
 
 const FormInput = forwardRef<HTMLInputElement, ITextInputProps>((
-	{ label, name, model, onChange, onBlur, id, required, compact = false, errorKey, ...props },
+	{
+		label,
+		name,
+		model,
+		onChange,
+		onBlur,
+		id,
+		required,
+		compact = false,
+		errorKey,
+		field = true, ...props
+	},
 	ref,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
@@ -29,11 +42,18 @@ const FormInput = forwardRef<HTMLInputElement, ITextInputProps>((
 	}
 
 	return (
-		<Field
-			type="text"
-			required={ required }
-			className={ cx({ compact }) }
-			errors={ !!error }
+		<ConditionalWrapper
+			wrapper={ children => (
+				<Field
+					type="text"
+					required={ required }
+					className={ cx({ compact }) }
+					errors={ !!error }
+				>
+					{ children }
+				</Field>
+			) }
+			condition={ field }
 		>
 			<TextInput
 				id={ id || inputId }
@@ -47,7 +67,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextInputProps>((
 				ref={ ref }
 				{ ...props }
 			/>
-		</Field>
+		</ConditionalWrapper>
 	)
 })
 

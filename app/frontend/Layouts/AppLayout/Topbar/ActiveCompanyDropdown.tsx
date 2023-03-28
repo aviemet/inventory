@@ -40,6 +40,13 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 				getValue={ option => String(option.id) }
 				clearable={ false }
 				searchable={ false }
+				field={ false }
+				sx={ {
+					width: 'fit-content',
+					input:{
+						backgroundColor: 'transparent',
+					},
+				} }
 			/>
 		</Form>
 	)

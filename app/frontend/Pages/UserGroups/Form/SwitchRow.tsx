@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react'
+import { NestedFields, useForm } from 'use-inertia-form'
 import { Table } from '@/Components'
 import { Checkbox } from '@/Components/Inputs'
-import { NestedFields, useForm } from 'use-inertia-form'
-import { usePermissionsForm } from '.'
 import { Switch } from '@/Components/Form'
+import { useCheckboxState } from '@/Components/Hooks'
+import { usePermissionsForm } from '.'
 
 interface ISwitchRowProps {
 	label: string
@@ -13,18 +14,26 @@ interface ISwitchRowProps {
 
 const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
 	const { isCompanyAdmin, columns } = usePermissionsForm()
-	const { data, setData, getData, onBeforeChange } = useForm()
+	const { data, setData, getData } = useForm()
+
+	const columnProperties = useCallback(() => {
+		return permissions.reduce(({ length, selected }, permission) => {
+			length++
+			if(getData(`user_group.permissions.${model}.${permission}`)) {
+				selected++
+			}
+			return { length, selected }
+		}, { length: 0, selected: 0 })
+	}, [data?.user_group?.permissions[model]])
+
+	const { length, selected } = columnProperties()
+	const { allChecked, indeterminate } = useCheckboxState(length, selected)
 
 	const setRow = useCallback((model: string, checked: boolean) => {
 		permissions.forEach(permission => {
 			setData(`${model}.${permission}`, checked)
 		})
-	}, [data.user_group.permissions['model']])
-
-	// TODO: Set intermediate flag on checkbox
-	// onBeforeChange((key, value, prev) => {
-	// 	if(!key) return
-	// })
+	}, [data?.user_group?.permissions[model]])
 
 	let checked = {}
 	if(isCompanyAdmin) {
@@ -37,6 +46,8 @@ const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
 				<Table.Cell>
 					<Checkbox
 						onChange={ e => setRow(`user_group.permissions.${model}`, e.target.checked) }
+						checked={ allChecked }
+						indeterminate={ indeterminate }
 						disabled={ isCompanyAdmin }
 					/>
 				</Table.Cell>

@@ -51,25 +51,35 @@ class UserGroupsController < ApplicationController
     user_group = UserGroup.new(user_group_params.except(:permissions))
     user_group.company = @active_company
 
-    ap({user_group_params:, params:})
-
     user_group.transaction do
       user_group.set_permissions(user_group_params[:permissions])
-      user_group.save
-    end
-
-    if user_group.persisted?
-      redirect_to user_group, notice: 'UserGroup was successfully created'
-    else
+      if user_group.save?
+        redirect_to user_group, notice: 'UserGroup was successfully created'
+      else
+        redirect_to user_group_path, inertia: { errors: user_group.errors }
+      end
+    rescue StandardError
       redirect_to user_group_path, inertia: { errors: user_group.errors }
     end
+
+    # if user_group.persisted?
+    #   redirect_to user_group, notice: 'UserGroup was successfully created'
+    # else
+    #   redirect_to user_group_path, inertia: { errors: user_group.errors }
+    # end
   end
 
   # PATCH/PUT /user_group/:id
   def update
-    if user_group.update(user_group_params)
-      redirect_to user_group, notice: 'UserGroup was successfully updated'
-    else
+    user_group.transaction do
+      user_group.set_permissions(user_group_params[:permissions])
+
+      if user_group.update(user_group_params.except(:permissions))
+        redirect_to user_group, notice: 'UserGroup was successfully updated'
+      else
+        redirect_to user_group_path, inertia: { errors: user_group.errors }
+      end
+    rescue StandardError
       redirect_to user_group_path, inertia: { errors: user_group.errors }
     end
   end
@@ -85,19 +95,21 @@ class UserGroupsController < ApplicationController
   def user_group_params
     params.require(:user_group).permit(
       :name, :description, permissions: [
-        items: [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        accessories: [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        components: [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        consumables: [:index, :show, :create, :update, :delete, :checkout],
-        licenses: [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        networks: [:index, :show, :create, :update, :delete, :checkout],
-        vendors: [:index, :show, :create, :update, :delete, :checkout],
-        contracts: [:index, :show, :create, :update, :delete, :checkout],
-        categories: [:index, :show, :create, :update, :delete, :checkout],
-        models: [:index, :show, :create, :update, :delete, :checkout],
-        manufacturers: [:index, :show, :create, :update, :delete, :checkout],
-        departments: [:index, :show, :create, :update, :delete, :checkout],
-        locations: [:index, :show, :create, :update, :delete, :checkout],
+        item:         [:index, :show, :create, :update, :delete, :checkout, :checkin],
+        accessory:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
+        component:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
+        consumable:   [:index, :show, :create, :update, :delete, :checkout],
+        license:      [:index, :show, :create, :update, :delete, :checkout, :checkin],
+        network:      [:index, :show, :create, :update, :delete],
+        vendor:       [:index, :show, :create, :update, :delete],
+        contract:     [:index, :show, :create, :update, :delete],
+        category:     [:index, :show, :create, :update, :delete],
+        model:        [:index, :show, :create, :update, :delete],
+        manufacturer: [:index, :show, :create, :update, :delete],
+        department:   [:index, :show, :create, :update, :delete],
+        location:     [:index, :show, :create, :update, :delete],
+        person:       [:index, :show, :create, :update, :delete],
+        user:         [:index, :show, :create, :update, :delete],
       ]
     )
   end

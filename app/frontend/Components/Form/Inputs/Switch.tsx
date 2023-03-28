@@ -24,12 +24,18 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 	}, [onChange, inputName])
 
 	return (
-		<ConditionalWrapper wrapper={ children => <Field
-			type="checkbox"
-			required={ required }
-			errors={ !!error }
-			grid={ false }
-		>{ children }</Field> } condition={ field }>
+		<ConditionalWrapper wrapper={ children => (
+			<Field
+				type="checkbox"
+				required={ required }
+				errors={ !!error }
+				grid={ false }
+			>
+				{ children }
+			</Field>
+		) }
+		condition={ field }
+		>
 			<SwitchInput
 				id={ id || inputId }
 				className={ className }

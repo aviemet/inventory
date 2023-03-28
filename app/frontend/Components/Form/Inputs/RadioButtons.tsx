@@ -2,14 +2,25 @@ import React from 'react'
 import RadioButtons, { type IRadioButtonsProps } from '@/Components/Inputs/RadioButtons'
 import Field from '../Field'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
+import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
 interface IFormRadioButtonsProps extends Omit<IRadioButtonsProps, 'onChange'> {
 	model?: string
 	onChange?: (v: string, form: UseFormProps) => void
 	required?: boolean
+	field?: boolean
 }
 
-const FormRadioButtons = ({ options, name, id, model, onChange, required, ...props }: IFormRadioButtonsProps) => {
+const FormRadioButtons = ({
+	options,
+	name,
+	id,
+	model,
+	onChange,
+	required,
+	field = true,
+	...props
+}: IFormRadioButtonsProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model })
 
 	const handleChange = (v: string) => {
@@ -20,10 +31,17 @@ const FormRadioButtons = ({ options, name, id, model, onChange, required, ...pro
 	}
 
 	return (
-		<Field
-			type="radio"
-			required={ required }
-			errors={ !!error }
+		<ConditionalWrapper
+			wrapper={ children => (
+				<Field
+					type="radio"
+					required={ required }
+					errors={ !!error }
+				>
+					{ children }
+				</Field>
+			) }
+			condition={ field }
 		>
 			<RadioButtons
 				options={ options }
@@ -33,7 +51,7 @@ const FormRadioButtons = ({ options, name, id, model, onChange, required, ...pro
 				onChange={ handleChange }
 				{ ...props }
 			/>
-		</Field>
+		</ConditionalWrapper>
 	)
 }
 

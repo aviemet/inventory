@@ -1,34 +1,49 @@
 import React, { useCallback, useState } from 'react'
-import {
-	Form,
-	TextInput,
-	Submit,
-	FormGroup,
-	Switch,
-	Textarea,
-	FormConsumer,
-} from '@/Components/Form'
+import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import { Group, Table } from '@/Components'
+import { Table } from '@/Components'
 import { usePage } from '@inertiajs/react'
 import { createContext } from '@/Components/Hooks'
 import SwitchRow from './SwitchRow'
-import { Checkbox } from '@/Components/Inputs'
 import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'
 
-type TFormData = {
-	user_group: Schema.UserGroup
+export type TPermissions = {
+	index?: boolean
+	show?: boolean
+	create?: boolean
+	update?: boolean
+	delete?: boolean
+	checkout?: boolean
+	checkin?: boolean
+}
+
+export type TPermissionsFormData = Schema.UserGroup & {
+	permissions: {
+		items: TPermissions
+		accessories: TPermissions
+		components: TPermissions
+		consumables: TPermissions
+		licenses: TPermissions
+		networks: TPermissions
+		vendors: TPermissions
+		contracts: TPermissions
+		categories: TPermissions
+		models: TPermissions
+		manufacturers: TPermissions
+		departments: TPermissions
+		locations: TPermissions
+	}
 }
 
 export interface IGroupFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TFormData>) => boolean|void
-	user_group?: Partial<Schema.UserGroup>
+	onSubmit?: (object: UseFormProps<{ user_group: TPermissionsFormData}>) => boolean|void
+	user_group?: TPermissionsFormData
 }
 
-const emptyGroup: Partial<Schema.UserGroup> = {
+const emptyGroup: Omit<TPermissionsFormData, 'id'|'slug'|'created_at'|'updated_at'> = {
 	name: '',
 	description: '',
 	permissions: {
@@ -74,7 +89,6 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 				method={ method }
 				onSubmit={ onSubmit }
 				railsAttributes={ false }
-				onChange={ ({ data }) => console.log({ data }) }
 				remember={ false }
 			>
 				<TextInput name="name" label="Name" required autoFocus />
@@ -93,7 +107,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 							<Table.Row>
 								<Table.Cell>All</Table.Cell>
 								<Table.Cell>Record Type</Table.Cell>
-								<Table.Cell nowrap>
+								<Table.Cell>
 									List <ColumnToggle permission="index" />
 								</Table.Cell>
 								<Table.Cell>
@@ -103,7 +117,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 									Create <ColumnToggle permission="create" />
 								</Table.Cell>
 								<Table.Cell>
-									Edit <ColumnToggle permission="edit" />
+									Edit <ColumnToggle permission="update" />
 								</Table.Cell>
 								<Table.Cell>
 									Delete <ColumnToggle permission="delete" />
