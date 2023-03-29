@@ -21,7 +21,7 @@ export { usePermissionsForm }
 export interface IGroupFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<{ user_group: Schema.UserGroupPermissions}>) => boolean|void
+	onSubmit?: (object: UseFormProps<{ user_group: FormData }>) => boolean|void
 	user_group?: Schema.UserGroupPermissions
 }
 

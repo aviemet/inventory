@@ -4,7 +4,7 @@ import GroupForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IUpdateGroupProps{
-	user_group: Schema.UserGroup
+	user_group: Schema.UserGroupPermissions
 	users: Schema.User[]
 }
 
