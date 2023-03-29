@@ -20,7 +20,7 @@ gem "devise", "~> 4.8"
 gem "devise_invitable", "~> 2.0"
 gem "devise_ldap_authenticatable", "~> 0.8.7"
 gem "rolify", "~> 6.0"
-gem "cancancan", "~> 3.3"
+gem "pundit", "~> 2.3"
 gem "blueprinter", "~> 0.25.3"
 gem "slug", "~> 4.1"
 gem "kaminari", "~> 1.2"
@@ -73,8 +73,6 @@ group :development, :test do
 end
 
 group :development do
-
-
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
@@ -96,5 +94,3 @@ group :test do
   gem "bullet", "~> 7.0"
   gem "simplecov", "~> 0.22.0"
 end
-
-gem "pundit", "~> 2.3"
