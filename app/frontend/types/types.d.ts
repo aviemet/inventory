@@ -90,6 +90,7 @@ declare global {
 		interface User extends UID {
 			password_confirmation?: string
 		}
+		interface UserGroup extends UID { }
 		interface Vendor extends UID { }
 		interface Warranty extends UID { }
 		interface Website extends UID { }
@@ -145,14 +146,43 @@ declare global {
 		interface CategoryWithQty extends Schema.Category {
 			qty: number
 		}
+
+		interface UserGroupPermissions extends Schema.UserGroup {
+			permissions: {
+				company_admin: boolean
+				item: TPermissions
+				accessory: TPermissions
+				component: TPermissions
+				consumable: TPermissions
+				license: TPermissions
+				network: TPermissions
+				vendor: TPermissions
+				contract: TPermissions
+				category: TPermissions
+				model: TPermissions
+				manufacturer: TPermissions
+				department: TPermissions
+				location: TPermissions
+				person: TPermissions
+				user: TPermissions
+			}
+		}
+	}
+
+	type Permissions = {
+		index?: boolean
+		show?: boolean
+		create?: boolean
+		update?: boolean
+		delete?: boolean
+		checkout?: boolean
+		checkin?: boolean
 	}
 
 	type PaginatedModel<T> = {
 		data: T
 		pagination: Schema.Pagination
 	}
-
-	interface NewFormData<T> extends Omit<T, 'id', 'slug', 'created_at', 'updated_at'> {}
 
 	type FlashMessage = Record<'success' | 'alert' | 'info' | 'warning', string>
 

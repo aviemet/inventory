@@ -7,61 +7,10 @@ import { createContext } from '@/Components/Hooks'
 import SwitchRow from './SwitchRow'
 import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'
+import { emptyGroup } from './formData'
+import { exclude } from '@/lib'
 
-export type TPermissions = {
-	index?: boolean
-	show?: boolean
-	create?: boolean
-	update?: boolean
-	delete?: boolean
-	checkout?: boolean
-	checkin?: boolean
-}
-
-export type TPermissionsFormData = Schema.UserGroup & {
-	permissions: {
-		items: TPermissions
-		accessories: TPermissions
-		components: TPermissions
-		consumables: TPermissions
-		licenses: TPermissions
-		networks: TPermissions
-		vendors: TPermissions
-		contracts: TPermissions
-		categories: TPermissions
-		models: TPermissions
-		manufacturers: TPermissions
-		departments: TPermissions
-		locations: TPermissions
-	}
-}
-
-export interface IGroupFormProps {
-	to: string
-	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<{ user_group: TPermissionsFormData}>) => boolean|void
-	user_group?: TPermissionsFormData
-}
-
-const emptyGroup: Omit<TPermissionsFormData, 'id'|'slug'|'created_at'|'updated_at'> = {
-	name: '',
-	description: '',
-	permissions: {
-		items:         { index: true, show: true, create: false, update: false, delete: false, checkout: true, checkin: true },
-		accessories:   { index: true, show: true, create: false, update: false, delete: false, checkout: true, checkin: true },
-		components:    { index: true, show: true, create: false, update: false, delete: false, checkout: true, checkin: true },
-		consumables:   { index: true, show: true, create: false, update: false, delete: false, checkout: true },
-		licenses:      { index: true, show: true, create: false, update: false, delete: false, checkout: true, checkin: true },
-		networks:      { index: true, show: true, create: false, update: false, delete: false },
-		vendors:       { index: true, show: true, create: false, update: false, delete: false },
-		contracts:     { index: true, show: true, create: false, update: false, delete: false },
-		categories:    { index: true, show: true, create: false, update: false, delete: false },
-		models:        { index: true, show: true, create: false, update: false, delete: false },
-		manufacturers: { index: true, show: true, create: false, update: false, delete: false },
-		departments:   { index: true, show: true, create: false, update: false, delete: false },
-		locations:     { index: true, show: true, create: false, update: false, delete: false },
-	},
-}
+type FormData = Omit<Schema.UserGroupPermissions, 'id'|'slug'|'created_at'|'updated_at'>
 
 const [usePermissionsForm, PermissionsFormContext] = createContext<{
 	isCompanyAdmin: boolean
@@ -69,10 +18,18 @@ const [usePermissionsForm, PermissionsFormContext] = createContext<{
 }>()
 export { usePermissionsForm }
 
-const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: IGroupFormProps) => {
-	const page = usePage()
+export interface IGroupFormProps {
+	to: string
+	method?: HTTPVerb
+	onSubmit?: (object: UseFormProps<{ user_group: Schema.UserGroupPermissions}>) => boolean|void
+	user_group?: Schema.UserGroupPermissions
+}
 
-	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(user_group?.permissions?.admin || false)
+const GroupForm = ({ to, method = 'post', onSubmit, user_group }: IGroupFormProps) => {
+	const page = usePage<SharedInertiaProps>()
+
+	const formData = (user_group ? exclude(user_group, 'id') : emptyGroup) as FormData
+	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData!.permissions?.company_admin || false)
 
 	const longestPermissionsArray = useCallback(() => {
 		return tableRows.reduce((length, row) => {
@@ -84,7 +41,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 		<PermissionsFormContext value={ { isCompanyAdmin, columns: longestPermissionsArray() } }>
 			<Form
 				model="user_group"
-				data={ { user_group } }
+				data={ { user_group: formData } }
 				to={ to }
 				method={ method }
 				onSubmit={ onSubmit }
@@ -137,7 +94,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 				</FormGroup>
 
 				<Submit>
-					{ user_group.id ? 'Update' : 'Create' } Group
+					{ user_group?.id ? 'Update' : 'Create' } Group
 				</Submit>
 			</Form>
 		</PermissionsFormContext>

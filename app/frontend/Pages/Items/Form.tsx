@@ -15,8 +15,8 @@ import { type UseFormProps } from 'use-inertia-form'
 export interface IItemFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<Schema.Item>) => boolean|void
-	item: Partial<Schema.Item>
+	onSubmit?: (object: UseFormProps<{ item: Schema.Item }>) => boolean|void
+	item: Schema.Item
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
