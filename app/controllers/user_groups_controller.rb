@@ -50,39 +50,24 @@ class UserGroupsController < ApplicationController
   def create
     user_group = UserGroup.new(user_group_params.except(:permissions))
     user_group.company = @active_company
+    user_group.save
 
-    # TODO: Group needs to be succesfully saved before adding permissions, permissions aren't rolled back by transaction failure
-
-    user_group.transaction do
+    if user_group.persisted?
       user_group.set_permissions(user_group_params[:permissions])
-      if user_group.save?
-        redirect_to user_group, notice: 'UserGroup was successfully created'
-      else
-        redirect_to user_group_path, inertia: { errors: user_group.errors }
-      end
-    rescue StandardError
-      ap({errors: user_group.errors})
-      redirect_to new_user_group_path, inertia: { errors: user_group.errors }
-    end
 
-    # if user_group.persisted?
-    #   redirect_to user_group, notice: 'UserGroup was successfully created'
-    # else
-    #   redirect_to user_group_path, inertia: { errors: user_group.errors }
-    # end
+      redirect_to user_group, notice: 'User group was successfully created'
+    else
+      redirect_to user_group_path, inertia: { errors: user_group.errors }
+    end
   end
 
   # PATCH/PUT /user_group/:id
   def update
-    user_group.transaction do
+    if user_group.update(user_group_params.except(:permissions))
       user_group.set_permissions(user_group_params[:permissions])
 
-      if user_group.update(user_group_params.except(:permissions))
-        redirect_to user_group, notice: 'UserGroup was successfully updated'
-      else
-        redirect_to user_group_path, inertia: { errors: user_group.errors }
-      end
-    rescue StandardError
+      redirect_to user_group, notice: 'User group was successfully updated'
+    else
       redirect_to user_group_path, inertia: { errors: user_group.errors }
     end
   end
@@ -90,7 +75,7 @@ class UserGroupsController < ApplicationController
   # DELETE /user_group/:id
   def destroy
     user_group.destroy
-    redirect_to user_groups_url, notice: 'UserGroup was successfully destroyed.'
+    redirect_to user_groups_url, notice: 'User group was successfully destroyed.'
   end
 
   private
@@ -98,7 +83,7 @@ class UserGroupsController < ApplicationController
   def user_group_params
     params.require(:user_group).permit(
       :name, :description, permissions: [
-        :company_admin,
+        company:      [:admin],
         item:         [:index, :show, :create, :update, :delete, :checkout, :checkin],
         accessory:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
         component:    [:index, :show, :create, :update, :delete, :checkout, :checkin],

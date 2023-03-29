@@ -151,22 +151,24 @@ declare global {
 
 		interface UserGroupPermissions extends Schema.UserGroup {
 			permissions: {
-				company_admin: boolean
-				item: TPermissions
-				accessory: TPermissions
-				component: TPermissions
-				consumable: TPermissions
-				license: TPermissions
-				network: TPermissions
-				vendor: TPermissions
-				contract: TPermissions
-				category: TPermissions
-				model: TPermissions
-				manufacturer: TPermissions
-				department: TPermissions
-				location: TPermissions
-				person: TPermissions
-				user: TPermissions
+				company: {
+					admin?: boolean
+				}
+				item: TPermissions | []
+				accessory: TPermissions | []
+				component: TPermissions | []
+				consumable: TPermissions | []
+				license: TPermissions | []
+				network: TPermissions | []
+				vendor: TPermissions | []
+				contract: TPermissions | []
+				category: TPermissions | []
+				model: TPermissions | []
+				manufacturer: TPermissions | []
+				department: TPermissions | []
+				location: TPermissions | []
+				person: TPermissions | []
+				user: TPermissions | []
 			}
 		}
 	}

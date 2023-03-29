@@ -31,13 +31,28 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 	const page = usePage<SharedInertiaProps>()
 
 	const formData = { user_group: (user_group ? exclude(user_group, 'id') : emptyGroup) } as FormData
-	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData.user_group.permissions?.company_admin || false)
+	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData.user_group.permissions?.company?.admin || false)
 
 	const longestPermissionsArray = useCallback(() => {
 		return tableRows.reduce((length, row) => {
 			return Math.max(row.permissions.length, length)
 		}, 0)
 	}, [tableRows])
+
+	const handleSubmit = (form: UseFormProps<FormData>) => {
+		if(form.getData('user_group.permissions.company.admin')) {
+			form.transform(data => {
+				const keys = Object.keys(data.user_group.permissions) as Array<keyof typeof data.user_group.permissions>
+				keys.forEach(key => {
+					if(key !== 'company') {
+						data.user_group.permissions[key] = []
+					}
+				})
+				return data
+			})
+		}
+		if(onSubmit) onSubmit(form)
+	}
 
 	return (
 		<PermissionsFormContext value={ { isCompanyAdmin, columns: longestPermissionsArray() } }>
@@ -46,8 +61,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 				data={ formData }
 				to={ to }
 				method={ method }
-				onSubmit={ onSubmit }
-				onChange={ ({ data }) => console.log({ data }) }
+				onSubmit={ handleSubmit }
 				railsAttributes={ false }
 				remember={ false }
 			>
@@ -57,7 +71,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 
 				<FormGroup legend="Permissions" model="permissions">
 					<Switch
-						name="company_admin"
+						name="company.admin"
 						label={ `Set as administrator group for ${page.props.auth?.user?.active_company?.name}` }
 						onChange={ e => setIsCompanyAdmin(e.target.checked) }
 					/>

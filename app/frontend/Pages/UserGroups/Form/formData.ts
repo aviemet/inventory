@@ -2,7 +2,9 @@ export const emptyGroup: Omit<Schema.UserGroupPermissions, 'id'|'slug'|'created_
 	name: '',
 	description: '',
 	permissions: {
-		company_admin: false,
+		company: {
+			admin: false,
+		},
 		item:         { index: true, show: true, create: false, update: false, delete: false, checkout: true, checkin: true },
 		accessory:    { index: true, show: true, create: false, update: false, delete: false, checkout: true, checkin: true },
 		component:    { index: true, show: true, create: false, update: false, delete: false, checkout: true, checkin: true },
