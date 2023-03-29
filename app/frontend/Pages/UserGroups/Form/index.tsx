@@ -47,6 +47,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 				to={ to }
 				method={ method }
 				onSubmit={ onSubmit }
+				onChange={ ({ data }) => console.log({ data }) }
 				railsAttributes={ false }
 				remember={ false }
 			>
@@ -56,7 +57,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 
 				<FormGroup legend="Permissions" model="permissions">
 					<Switch
-						name="admin"
+						name="company_admin"
 						label={ `Set as administrator group for ${page.props.auth?.user?.active_company?.name}` }
 						onChange={ e => setIsCompanyAdmin(e.target.checked) }
 					/>

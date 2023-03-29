@@ -51,6 +51,8 @@ class UserGroupsController < ApplicationController
     user_group = UserGroup.new(user_group_params.except(:permissions))
     user_group.company = @active_company
 
+    # TODO: Group needs to be succesfully saved before adding permissions, permissions aren't rolled back by transaction failure
+
     user_group.transaction do
       user_group.set_permissions(user_group_params[:permissions])
       if user_group.save?
@@ -59,7 +61,8 @@ class UserGroupsController < ApplicationController
         redirect_to user_group_path, inertia: { errors: user_group.errors }
       end
     rescue StandardError
-      redirect_to user_group_path, inertia: { errors: user_group.errors }
+      ap({errors: user_group.errors})
+      redirect_to new_user_group_path, inertia: { errors: user_group.errors }
     end
 
     # if user_group.persisted?
@@ -95,6 +98,7 @@ class UserGroupsController < ApplicationController
   def user_group_params
     params.require(:user_group).permit(
       :name, :description, permissions: [
+        :company_admin,
         item:         [:index, :show, :create, :update, :delete, :checkout, :checkin],
         accessory:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
         component:    [:index, :show, :create, :update, :delete, :checkout, :checkin],

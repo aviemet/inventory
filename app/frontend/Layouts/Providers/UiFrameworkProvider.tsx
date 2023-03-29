@@ -6,7 +6,7 @@ import { usePage } from '@inertiajs/react'
 import axios from 'axios'
 import { Routes } from '@/lib'
 
-export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
+export const useTheme = (colorScheme: 'light'|'dark' = 'light', primaryColor = 'violet') => ({
 	breakpoints: {
 		'hd': '120rem', // 1920px,
 		'2xl': '110rem', // 1760px,
@@ -22,7 +22,7 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 	colorScheme,
 	fontFamily: 'Roboto, sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
-	primaryColor: 'violet',
+	primaryColor: primaryColor,
 	defaultRadius: 'xs',
 	transitionTimingFunction: 'ease-in-out',
 	headings: {
@@ -102,7 +102,15 @@ export const GlobalStyles = () => <Global styles={ theme => ({
 }) } />
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
-	const { auth } = usePage<SharedInertiaProps>().props
+	const page = usePage<SharedInertiaProps>().props
+	const { auth } = page
+
+	let companyColor
+	let activeCompanyId = page.auth.user.active_company_id
+	if(activeCompanyId !== undefined) {
+		const company = page.auth.user?.companies?.find(company => company.id === activeCompanyId)
+		companyColor = company?.settings?.primary_color
+	}
 
 	const systemColorScheme = useColorScheme()
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -127,7 +135,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		setColorScheme(scheme)
 	}
 
-	const mantineTheme = useTheme(colorScheme)
+	const mantineTheme = useTheme(colorScheme, companyColor)
 
 	return (
 		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>

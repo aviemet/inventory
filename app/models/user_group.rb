@@ -28,15 +28,23 @@ class UserGroup < ApplicationRecord
 
   def set_permissions(permissions)
     permissions.each do |model, actions|
-      constant = model.singularize.camelize.constantize
+      if model == "company_admin" && actions == true
+        ap({ model:, actions:, company: self.company })
+        self.add_role :admin, self.company
+      else
+        ap({ model:, actions: })
+        constant = model.singularize.camelize.constantize
 
-      actions.each do |action, enabled|
-        if enabled
-          self.add_role action, constant
-        else
-          self.remove_role action, constant
+        actions.each do |action, enabled|
+          if enabled
+            self.add_role action, constant
+          else
+            self.remove_role action, constant
+          end
         end
       end
+
     end
   end
+
 end

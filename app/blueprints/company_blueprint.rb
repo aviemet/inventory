@@ -1,6 +1,7 @@
 class CompanyBlueprint < ApplicationBlueprint
   fields :name,
          :slug,
+         :settings,
          :created_at,
          :updated_at
 
