@@ -19,7 +19,7 @@ module.exports = {
 		'sourceType': 'module',
 		'requireConfigFile': false,
 	},
-	'ignorePatterns': ['app/frontend/types/**/*', 'app/javascript/**/*'],
+	'ignorePatterns': ['app/javascript/**/*'],
 	'rules': {
 		'indent': 'off',
 		'@typescript-eslint/indent': ['error', 'tab', {

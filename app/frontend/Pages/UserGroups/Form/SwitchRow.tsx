@@ -4,17 +4,17 @@ import { Table } from '@/Components'
 import { Checkbox } from '@/Components/Inputs'
 import { Switch } from '@/Components/Form'
 import { useCheckboxState } from '@/Components/Hooks'
-import { usePermissionsForm } from '.'
+import { usePermissionsForm, type FormData } from '.'
 
 interface ISwitchRowProps {
 	label: string
-	model: string
+	model: keyof FormData['user_group']['permissions']
 	permissions: string[]
 }
 
 const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
 	const { isCompanyAdmin, columns } = usePermissionsForm()
-	const { data, setData, getData } = useForm()
+	const { data, setData, getData } = useForm<FormData>()
 
 	const columnProperties = useCallback(() => {
 		return permissions.reduce(({ length, selected }, permission) => {

@@ -1,3 +1,11 @@
+import { FormData } from '.'
+
+type TTableRow = {
+	model: keyof FormData['user_group']['permissions']
+	label: string
+	permissions: (keyof TPermissions)[]
+}
+
 export default [
 	{
 		model: 'item',
@@ -74,4 +82,4 @@ export default [
 		label: 'Users',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
-]
+] as TTableRow[]

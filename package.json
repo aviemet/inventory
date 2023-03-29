@@ -19,7 +19,7 @@
     "@emotion/styled": "^11.10.6",
     "@inertiajs/react": "^1.0.2",
     "@loadable/component": "^5.15.3",
-    "@mantine/core": "^6.0.4",
+    "@mantine/core": "^6.0.5",
     "@mantine/dates": "^6.0.4",
     "@mantine/dropzone": "^6.0.4",
     "@mantine/form": "^6.0.4",

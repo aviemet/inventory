@@ -1,17 +1,17 @@
 import React, { useCallback, useRef } from 'react'
 import { Checkbox } from '@/Components/Inputs'
 import { useForm } from 'use-inertia-form'
-import { usePermissionsForm } from '.'
+import { usePermissionsForm, type FormData } from '.'
 import tableRows from './tableRows'
 import { useCheckboxState } from '@/Components/Hooks'
 
 interface IColumnToggleProps {
-	permission: string
+	permission: keyof TPermissions
 }
 
 const ColumnToggle = ({ permission }: IColumnToggleProps) => {
 	const { isCompanyAdmin } = usePermissionsForm()
-	const { data, setData, getData } = useForm()
+	const { data, setData, getData } = useForm<FormData>()
 	const checkboxRef = useRef<HTMLInputElement>(null)
 
 	const columnProperties = useCallback(() => {

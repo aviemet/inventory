@@ -10,7 +10,9 @@ import ColumnToggle from './ColumnToggle'
 import { emptyGroup } from './formData'
 import { exclude } from '@/lib'
 
-type FormData = Omit<Schema.UserGroupPermissions, 'id'|'slug'|'created_at'|'updated_at'>
+export type FormData = {
+	user_group: Omit<Schema.UserGroupPermissions, 'id'|'slug'|'created_at'|'updated_at'>
+}
 
 const [usePermissionsForm, PermissionsFormContext] = createContext<{
 	isCompanyAdmin: boolean
@@ -21,15 +23,15 @@ export { usePermissionsForm }
 export interface IGroupFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<{ user_group: FormData }>) => boolean|void
-	user_group?: Schema.UserGroupPermissions
+	onSubmit?: (object: UseFormProps<FormData>) => boolean|void
+	user_group?: Partial<Schema.UserGroupPermissions>
 }
 
-const GroupForm = ({ to, method = 'post', onSubmit, user_group }: IGroupFormProps) => {
+const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: IGroupFormProps) => {
 	const page = usePage<SharedInertiaProps>()
 
-	const formData = (user_group ? exclude(user_group, 'id') : emptyGroup) as FormData
-	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData!.permissions?.company_admin || false)
+	const formData = { user_group: (user_group ? exclude(user_group, 'id') : emptyGroup) } as FormData
+	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData.user_group.permissions?.company_admin || false)
 
 	const longestPermissionsArray = useCallback(() => {
 		return tableRows.reduce((length, row) => {
@@ -41,7 +43,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group }: IGroupFormProp
 		<PermissionsFormContext value={ { isCompanyAdmin, columns: longestPermissionsArray() } }>
 			<Form
 				model="user_group"
-				data={ { user_group: formData } }
+				data={ formData }
 				to={ to }
 				method={ method }
 				onSubmit={ onSubmit }

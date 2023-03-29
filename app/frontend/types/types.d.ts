@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: 0 */
+
 import { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
 import { type SelectProps, type InputProps } from '@mantine/core'
 
@@ -169,7 +171,7 @@ declare global {
 		}
 	}
 
-	type Permissions = {
+	type TPermissions = {
 		index?: boolean
 		show?: boolean
 		create?: boolean
@@ -218,16 +220,16 @@ declare module '@mantine/core' {
 	export interface MantineThemeOther {
 		colorSchemeOption: (light: any, dark: any) => any
 		header: {
-			height: number,
+			height: number
 		}
 		navbar: {
 			width: {
-				closed: number,
-				open: number,
+				closed: number
+				open: number
 			}
 		}
 		footer: {
-			height: number,
+			height: number
 		}
 		form: {
 			label: {
@@ -235,8 +237,13 @@ declare module '@mantine/core' {
 			}
 		}
 		table: {
-			sortButtonHeight: number | string,
-			sortButtonWidth: number | string,
+			sortButtonHeight: number | string
+			sortButtonWidth: number | string
+		}
+		colors: {
+			checkoutButtonColor: string
+			checkinButtonColor: string
+			replenishButtonColor: string
 		}
 	}
 

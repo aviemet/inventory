@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from '@/Components'
 import { type ILinkProps } from '../Link'
 import { CheckinIcon } from '@/Components/Icons'
-import { Tooltip } from '@mantine/core'
+import { Tooltip, useMantineTheme } from '@mantine/core'
 
 interface ICheckinButtonProps extends Omit<ILinkProps, 'children'> {
 	href: string
@@ -11,9 +11,9 @@ interface ICheckinButtonProps extends Omit<ILinkProps, 'children'> {
 	tooltipMessage?: string | false | null
 }
 
-const color = 'cyan'
-
 const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: ICheckinButtonProps) => {
+	const { other: { colors: { checkinButtonColor } } } = useMantineTheme()
+
 	const finalProps = props
 	if(disabled) {
 		finalProps.buttonProps = {
@@ -27,13 +27,13 @@ const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: IChe
 			label={ tooltipMessage || 'Check In' }
 			position="left"
 			transitionProps={ { transition: 'fade' } }
-			color={ color }
+			color={ checkinButtonColor }
 		>
 			<Link
 				as="button"
 				compact
 				href={ href }
-				color={ color }
+				color={ checkinButtonColor }
 				size="md"
 				p={ 0 }
 				aria-label={ `Check in ${label}` }

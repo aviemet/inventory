@@ -65,6 +65,11 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 			sortButtonHeight: 5,
 			sortButtonWidth: 6,
 		},
+		colors: {
+			replenishButtonColor: 'yellow',
+			checkoutButtonColor: 'pink',
+			checkinButtonColor: 'cyan',
+		},
 	},
 })
 
