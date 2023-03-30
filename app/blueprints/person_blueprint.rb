@@ -6,6 +6,7 @@ class PersonBlueprint < ApplicationBlueprint
          :employee_number,
          :job_title,
          :manager_id,
+         :user_id,
          :created_at,
          :updated_at
 

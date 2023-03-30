@@ -5,16 +5,16 @@ import UsersTable from '@/Pages/Users/Table'
 import { EditIcon } from '@/Components/Icons'
 
 interface IShowUserProps {
-	user_group: Schema.UserGroup
+	person_group: Schema.PersonGroup
 }
 
-const ShowUser = ({ user_group }: IShowUserProps) => {
-	const title = `${user_group.name}`
+const ShowUser = ({ person_group }: IShowUserProps) => {
+	const title = `${person_group.name}`
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Users', href: Routes.users() },
-			{ title: 'Groups', href: Routes.userGroups() },
+			{ title: 'People', href: Routes.people() },
+			{ title: 'Groups', href: Routes.personGroups() },
 			{ title },
 		] }>
 			<Section>
@@ -26,7 +26,7 @@ const ShowUser = ({ user_group }: IShowUserProps) => {
 						<Menu position="bottom-end">
 							<Menu.Target />
 							<Menu.Dropdown>
-								<Menu.Link href={ Routes.editUserGroup(user_group.slug) } icon={ <EditIcon /> }>
+								<Menu.Link href={ Routes.editPersonGroup(person_group.slug) } icon={ <EditIcon /> }>
 								Edit
 								</Menu.Link>
 							</Menu.Dropdown>
@@ -37,7 +37,7 @@ const ShowUser = ({ user_group }: IShowUserProps) => {
 						selectable
 						hideable
 						model='user'
-						rows={ user_group.users }
+						rows={ person_group.people }
 					>
 						<UsersTable />
 					</Table.TableProvider>

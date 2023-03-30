@@ -10,25 +10,25 @@ const GroupsTable = (props: ITableProps) => {
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell hideable={ false }>Group Name</Table.Cell>
-					<Table.Cell>Users</Table.Cell>
+					<Table.Cell>People</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (user_group: Schema.UserGroup) => (
-					<Table.Row key={ user_group.id }>
+				<Table.RowIterator render={ (person_group: Schema.PersonGroup) => (
+					<Table.Row key={ person_group.id }>
 
 						<Table.Cell nowrap>
-							<Link href={ Routes.userGroup(user_group.slug) }>{ user_group.name }</Link>
+							<Link href={ Routes.personGroup(person_group.slug) }>{ person_group.name }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							{ user_group.users?.length }
+							{ person_group.people?.length }
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editUserGroup(user_group.slug) } label={ user_group.name } />
+							<EditButton href={ Routes.editPersonGroup(person_group.slug) } label={ person_group.name } />
 						</Table.Cell>
 
 					</Table.Row>

@@ -1,11 +1,11 @@
-class UserGroup < ApplicationRecord
+class PersonGroup < ApplicationRecord
   include Ownable
   include PgSearch::Model
 
   pg_search_scope(
     :search,
     against: [:name], associated_against: {
-      user: [:email, :count]
+      person: [:first_name, :last_name],
     },
     using: {
       tsearch: { prefix: true },
@@ -19,17 +19,17 @@ class UserGroup < ApplicationRecord
 
   slug :name
 
-  has_many :user_group_assignments
-  has_many :users, through: :user_group_assignments
+  has_many :person_group_assignments
+  has_many :people, through: :person_group_assignments
 
   validates_presence_of :name
 
-  scope :includes_associated, -> { includes([:users]) }
+  scope :includes_associated, -> { includes([:people]) }
 
-  def assign(user)
-    UserGroupAssignment.create({
-      user: user,
-      user_group: self
+  def assign(person)
+    PersonGroupAssignment.create({
+      person: person,
+      person_group: self
     })
   end
 

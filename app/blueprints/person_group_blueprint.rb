@@ -1,4 +1,4 @@
-class UserGroupBlueprint < ApplicationBlueprint
+class PersonGroupBlueprint < ApplicationBlueprint
   identifier :slug
 
   fields :id,
@@ -8,7 +8,7 @@ class UserGroupBlueprint < ApplicationBlueprint
          :updated_at
 
   view :associations do
-    association :users, blueprint: UserBlueprint
+    association :people, blueprint: PersonBlueprint
   end
 
   view :as_options do
@@ -20,8 +20,8 @@ class UserGroupBlueprint < ApplicationBlueprint
   end
 
   view :edit do
-    field :permissions do |user_group|
-      user_group.roles.each_with_object({}) do |role, h|
+    field :permissions do |person_group|
+      person_group.roles.each_with_object({}) do |role, h|
         h[role.resource_type.downcase] ||= {}
         h[role.resource_type.downcase][role.name] = true
       end

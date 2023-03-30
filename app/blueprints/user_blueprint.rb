@@ -14,7 +14,6 @@ class UserBlueprint < ApplicationBlueprint
          :locked_at,
          :created_at,
          :updated_at,
-         :person_id,
          :active_company_id,
          :active,
          :table_preferences,
@@ -27,7 +26,7 @@ class UserBlueprint < ApplicationBlueprint
   view :associations do
     association :roles, blueprint: RoleBlueprint
     association :activities, blueprint: ActivityBlueprint
-    association :person, blueprint: PersonBlueprint
+    association :people, blueprint: PersonBlueprint
     association :active_company, blueprint: CompanyBlueprint
     association :companies, blueprint: CompanyBlueprint
   end

@@ -89,7 +89,7 @@ Rails.application.routes.draw do
 
   resources :companies, concerns: :bulk_delete, param: :slug
 
-  resources :user_groups, path: "/users/groups", param: :slug
+  resources :person_groups, path: "/people/groups", param: :slug
   resources :users, concerns: :bulk_delete, except: [:create]
 
   resources :departments, concerns: :bulk_delete, param: :slug

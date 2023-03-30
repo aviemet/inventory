@@ -44,7 +44,7 @@ class Company < ApplicationRecord
     orders: "Order",
     categories: "Category",
     smtps: "Smtp",
-    user_groups: "UserGroup",
+    person_groups: "PersonGroup",
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
@@ -80,7 +80,6 @@ class Company < ApplicationRecord
       self.orders.destroy_all
       self.categories.destroy_all
       self.smtps.destroy_all
-      self.users.each(&:destroy)
     end
   end
 

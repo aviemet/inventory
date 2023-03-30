@@ -4,24 +4,24 @@ import GroupForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IUpdateGroupProps{
-	user_group: Schema.UserGroupPermissions
-	users: Schema.User[]
+	person_group: Schema.PersonGroupPermissions
+	people: Schema.Person[]
 }
 
-const EditGroup = ({ user_group, ...models }: IUpdateGroupProps) => {
-	const title = `Edit ${user_group.name}`
+const EditGroup = ({ person_group, ...models }: IUpdateGroupProps) => {
+	const title = `Edit ${person_group.name}`
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Users', href: Routes.users() },
-			{ title: 'Groups', href: Routes.userGroups() },
-			{ title: user_group.name!, href: Routes.userGroup(user_group.slug) },
+			{ title: 'People', href: Routes.people() },
+			{ title: 'Groups', href: Routes.personGroups() },
+			{ title: person_group.name!, href: Routes.personGroup(person_group.slug) },
 			{ title: 'Edit Hardware' },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<GroupForm to={ Routes.userGroup(user_group.slug) } method="patch" user_group={ user_group } { ...models } />
+				<GroupForm to={ Routes.personGroup(person_group.slug) } method="patch" person_group={ person_group } { ...models } />
 			</Section>
 		</Page>
 	)

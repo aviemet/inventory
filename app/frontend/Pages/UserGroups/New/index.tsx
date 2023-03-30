@@ -4,21 +4,21 @@ import GroupForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewGroupProps {
-	user_group: Schema.UserGroupPermissions
+	person_group: Schema.PersonGroupPermissions
 }
 
 const New = ({ ...data }: INewGroupProps) => {
-	const title = 'New User Group'
+	const title = 'New People Group'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Groups', href: Routes.userGroups() },
-			{ title: 'New User Group' },
+			{ title: 'Groups', href: Routes.personGroups() },
+			{ title: 'New People Group' },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<GroupForm to={ Routes.userGroups() } { ...data } />
+				<GroupForm to={ Routes.personGroups() } { ...data } />
 			</Section>
 		</Page>
 	)

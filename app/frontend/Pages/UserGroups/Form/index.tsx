@@ -11,7 +11,7 @@ import { emptyGroup } from './formData'
 import { exclude } from '@/lib'
 
 export type FormData = {
-	user_group: Omit<Schema.UserGroupPermissions, 'id'|'slug'|'created_at'|'updated_at'>
+	person_group: Omit<Schema.PersonGroupPermissions, 'id'|'slug'|'created_at'|'updated_at'>
 }
 
 const [usePermissionsForm, PermissionsFormContext] = createContext<{
@@ -24,14 +24,14 @@ export interface IGroupFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<FormData>) => boolean|void
-	user_group?: Partial<Schema.UserGroupPermissions>
+	person_group?: Partial<Schema.PersonGroupPermissions>
 }
 
-const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: IGroupFormProps) => {
+const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }: IGroupFormProps) => {
 	const page = usePage<SharedInertiaProps>()
 
-	const formData = { user_group: (user_group ? exclude(user_group, 'id') : emptyGroup) } as FormData
-	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData.user_group.permissions?.company?.admin || false)
+	const formData = { person_group: (person_group ? exclude(person_group, 'id') : emptyGroup) } as FormData
+	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData.person_group.permissions?.company?.admin || false)
 
 	const longestPermissionsArray = useCallback(() => {
 		return tableRows.reduce((length, row) => {
@@ -40,12 +40,12 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 	}, [tableRows])
 
 	const handleSubmit = (form: UseFormProps<FormData>) => {
-		if(form.getData('user_group.permissions.company.admin')) {
+		if(form.getData('person_group.permissions.company.admin')) {
 			form.transform(data => {
-				const keys = Object.keys(data.user_group.permissions) as Array<keyof typeof data.user_group.permissions>
+				const keys = Object.keys(data.person_group.permissions) as Array<keyof typeof data.person_group.permissions>
 				keys.forEach(key => {
 					if(key !== 'company') {
-						data.user_group.permissions[key] = []
+						data.person_group.permissions[key] = []
 					}
 				})
 				return data
@@ -57,7 +57,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 	return (
 		<PermissionsFormContext value={ { isCompanyAdmin, columns: longestPermissionsArray() } }>
 			<Form
-				model="user_group"
+				model="person_group"
 				data={ formData }
 				to={ to }
 				method={ method }
@@ -111,7 +111,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, user_group = emptyGroup }: I
 				</FormGroup>
 
 				<Submit>
-					{ user_group?.id ? 'Update' : 'Create' } Group
+					{ person_group?.id ? 'Update' : 'Create' } Group
 				</Submit>
 			</Form>
 		</PermissionsFormContext>

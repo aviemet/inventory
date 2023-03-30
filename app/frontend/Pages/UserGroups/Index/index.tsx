@@ -5,18 +5,18 @@ import { NewIcon } from '@/Components/Icons'
 import GroupsTable from '../Table'
 
 interface IGroupIndexProps {
-	user_groups: Schema.UserGroup[]
+	person_groups: Schema.PersonGroup[]
 	pagination: Schema.Pagination
 }
 
-const GroupIndex = ({ user_groups, pagination }: IGroupIndexProps) => {
+const GroupIndex = ({ person_groups, pagination }: IGroupIndexProps) => {
 	const title = 'Groups'
 
 	return (
 		<IndexPageTemplate
 			title={ title }
-			model="user_groups"
-			rows={ user_groups }
+			model="person_groups"
+			rows={ person_groups }
 			pagination={ pagination }
 			search={ false }
 			deleteRoute={ Routes.userGroups() }
@@ -25,7 +25,7 @@ const GroupIndex = ({ user_groups, pagination }: IGroupIndexProps) => {
 				{ title, href: window.location.href },
 			] }
 			menuOptions={ [
-				{ label: 'Create New Group', href: Routes.newUserGroup(), icon: NewIcon },
+				{ label: 'Create New Group', href: Routes.newPersonGroup(), icon: NewIcon },
 			] }
 		>
 			<GroupsTable />

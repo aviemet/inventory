@@ -82,6 +82,7 @@ declare global {
 		interface Person extends AssignToable, UID {
 			name?: string
 		}
+		interface PersonGroup extends UID { }
 		interface Phone extends UID { }
 		interface Purchase extends UID { }
 		interface Role extends UID { }
@@ -92,7 +93,6 @@ declare global {
 		interface User extends UID {
 			password_confirmation?: string
 		}
-		interface UserGroup extends UID { }
 		interface Vendor extends UID { }
 		interface Warranty extends UID { }
 		interface Website extends UID { }
@@ -149,7 +149,7 @@ declare global {
 			qty: number
 		}
 
-		interface UserGroupPermissions extends Schema.UserGroup {
+		interface PersonGroupPermissions extends Schema.PersonGroup {
 			permissions: {
 				company: {
 					admin?: boolean

@@ -47,9 +47,9 @@ if TicketStatus.count == 0
   end
 end
 
-if UserGroup.count == 0
-  UserGroup.create({
-    name: "Site Administrator",
-    description: "Super user permissions for the entire site."
+if PersonGroup.count == 0
+  PersonGroup.create({
+    name: "Company Administrator",
+    description: "Full priveldges for company"
   })
 end
