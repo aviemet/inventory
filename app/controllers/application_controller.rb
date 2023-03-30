@@ -22,6 +22,11 @@ class ApplicationController < ActionController::Base
   include Inertia::Flash
   include Inertia::Auth
 
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    flash[:warning] = exception.message
+    redirect_to root_path
+  end
+
   # rescue_from CanCan::AccessDenied do |exception|
   #   flash[:warning] = exception.message
   #   redirect_to root_path

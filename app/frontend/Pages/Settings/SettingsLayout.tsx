@@ -1,7 +1,7 @@
 import React from 'react'
-import { Heading, Page, Section, Tabs } from '@/Components'
+import { Heading, Page, Box, Section, Tabs } from '@/Components'
 import { router, usePage } from '@inertiajs/react'
-import { TabsValue } from '@mantine/core'
+import { Paper, TabsValue } from '@mantine/core'
 
 type TTab = {
 	name: string
@@ -30,24 +30,32 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 
 	return (
 		<Page title={ title }>
-			<Section fullHeight>
-				<Heading mb={ 24 }>{ title }</Heading>
-
+			<Section sx={ { height: '100%' } }>
 				<Tabs
 					orientation="vertical"
 					variant="pills"
 					defaultValue={ page.url.replace('/settings/', '') }
 					onTabChange={ handleTabChange }
+					sx={ { height: '100%' } }
 				>
 					<Tabs.List>{ tabs.map(tab => (
-						<Tabs.Tab key={ tab.name } value={ tab.name }>{ tab.label }</Tabs.Tab>
+						<Tabs.Tab key={ tab.name } value={ tab.name } role="link">{ tab.label }</Tabs.Tab>
 					)) }</Tabs.List>
 
 					{ tabs.map(tab => (
-						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs">
-							<Section sx={ { height: '100%' } }>
+						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs" sx={ { position: 'relative' } }>
+
+							<Paper
+								component="section"
+								p='lg'
+								withBorder
+								shadow="sm"
+								sx={ {
+									height: '100%',
+								} }
+							>
 								{ children }
-							</Section>
+							</Paper>
 						</Tabs.Panel>
 					)) }
 				</Tabs>

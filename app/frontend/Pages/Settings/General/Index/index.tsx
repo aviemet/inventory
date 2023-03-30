@@ -1,10 +1,11 @@
 import React from 'react'
 import SettingsLayout from '../../SettingsLayout'
+import { Heading } from '@/Components'
 
 const General = () => {
 	return (
 		<SettingsLayout>
-			<div>General</div>
+			<Heading mb={ 24 }>General Settings</Heading>
 		</SettingsLayout>
 	)
 }

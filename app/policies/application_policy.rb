@@ -53,7 +53,8 @@ class ApplicationPolicy
 
   private
 
-  def standard_auth(_action)
-    user.has_role? :super_admin
+  def standard_auth(action)
+    ap({ record:, action: })
+    user.has_role?(:super_admin)
   end
 end

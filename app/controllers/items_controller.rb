@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
 
   # GET /item
   def index
+    authorize items
     paginated_items = items.page(params[:page] || 1)
 
     render inertia: "Items/Index", props: {
@@ -27,6 +28,7 @@ class ItemsController < ApplicationController
 
   # GET /item/:id
   def show
+    authorize item
     render inertia: "Items/Show", props: {
       item: -> { item.render(view: :show) }
     }
@@ -34,6 +36,7 @@ class ItemsController < ApplicationController
 
   # GET /item/new
   def new
+    authorize Item
     render inertia: "Items/New", props: {
       item: Item.new.render(view: :new),
       models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
@@ -46,6 +49,7 @@ class ItemsController < ApplicationController
 
   # GET /item/:id/edit
   def edit
+    authorize item
     render inertia: "Items/Edit", props: {
       item: item.render(view: :edit),
       models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
@@ -58,15 +62,17 @@ class ItemsController < ApplicationController
 
   # GET /item/:id/clone
   def clone
-    self.item = Item.find(params[:id]).dup
-    self.item.serial = nil
-    self.item.item_tag = nil
-    self.item
+    authorize item
+    cloned_item = item.dup
+    cloned_item.serial = nil
+    cloned_item.item_tag = nil
+
     render inertia: "Items/Clone"
   end
 
   # GET /item/:id/checkout
   def checkout
+    authorize item
     if item.assigned?
       redirect_to item, warning: 'Item is already checked out'
     else
@@ -84,6 +90,7 @@ class ItemsController < ApplicationController
 
   # GET /item/:id/checkin
   def checkin
+    authorize item
     if item.assigned?
       assignment = item.assignment
       assignment.returned_at = Time.current
@@ -102,6 +109,7 @@ class ItemsController < ApplicationController
 
   # POST /item
   def create
+    authorize item
     item.company = @active_company
 
     if item.save
@@ -113,6 +121,7 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /item/:id
   def update
+    authorize item
     if item.update(item_params)
       redirect_to item, notice: 'Item was successfully updated'
     else
@@ -122,6 +131,7 @@ class ItemsController < ApplicationController
 
   # DELETE /item/:id
   def destroy
+    authorize item
     item.destroy
     redirect_to items_url, notice: 'Item was successfully destroyed.'
   end

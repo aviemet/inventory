@@ -5,7 +5,7 @@ import { Heading } from '@/Components'
 const Appearance = () => {
 	return (
 		<SettingsLayout>
-			<Heading mb={ 24 }>Appearance Settings</Heading>
+			<Heading mb={ 24 }>Logs</Heading>
 		</SettingsLayout>
 	)
 }

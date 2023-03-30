@@ -1,19 +1,19 @@
 class Settings::BackupsController < ApplicationController
 
   def index
-    render inertia: "Settings::Backups/Index"
+    render inertia: "Settings/Backups/Index"
   end
 
   def show
-    render inertia: "Settings::Backups/Show"
+    render inertia: "Settings/Backups/Show"
   end
 
   def new
-    render inertia: "Settings::Backups/New"
+    render inertia: "Settings/Backups/New"
   end
 
   def edit
-    render inertia: "Settings::Backups/Edit"
+    render inertia: "Settings/Backups/Edit"
   end
 
   def create

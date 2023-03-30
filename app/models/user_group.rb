@@ -26,6 +26,13 @@ class UserGroup < ApplicationRecord
 
   scope :includes_associated, -> { includes([:users]) }
 
+  def assign(user)
+    UserGroupAssignment.create({
+      user: user,
+      user_group: self
+    })
+  end
+
   def set_permissions(permissions)
     permissions.each do |model, actions|
       constant = if model == 'company'
