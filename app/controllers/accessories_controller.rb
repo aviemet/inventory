@@ -7,6 +7,7 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories
   def index
+    authorize accessories
     paginated_accessories = accessories.page(params[:page] || 1)
 
     render inertia: "Accessories/Index", props: {
@@ -20,6 +21,7 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/:id
   def show
+    authorize accessory
     render inertia: "Accessories/Show", props: {
       accessory: -> { accessory.render(view: :show) }
     }
@@ -27,6 +29,7 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/new
   def new
+    authorize Accessory
     render inertia: "Accessories/New", props: {
       accessory: Accessory.new.render(view: :new),
       models: -> { @active_company.models.find_by_category(:Accessory).render(view: :as_options) },
@@ -39,6 +42,7 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/:id/edit
   def edit
+    authorize accessory
     render inertia: "Accessories/Edit", props: {
       accessory: accessory.render(view: :edit),
       models: -> { @active_company.models.find_by_category(:Accessory).render(view: :as_options) },
@@ -51,6 +55,7 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/:id/checkout
   def checkout
+    authorize accessory
     if accessory.qty == 0
       redirect_to accessory, warning: "There are none available to checkout"
     else
@@ -70,6 +75,7 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/:id/checkin/:assignment_id
   def checkin
+    authorize accessory
     assignment = Assignment.find(params[:assignment_id])
 
     if assignment&.assignable == accessory && assignment.active
@@ -88,6 +94,7 @@ class AccessoriesController < ApplicationController
 
   # POST /accessories
   def create
+    authorize Accessory
     accessory.company = @active_company
     if accessory.save
       redirect_to accessory, notice: 'Accessory was successfully created'
@@ -98,6 +105,7 @@ class AccessoriesController < ApplicationController
 
   # PATCH/PUT /accessories/:id
   def update
+    authorize accessory
     if accessory.update(accessory_params)
       redirect_to accessory, notice: 'Accessory was successfully updated'
     else
@@ -107,6 +115,7 @@ class AccessoriesController < ApplicationController
 
   # DELETE /accessories/:id
   def destroy
+    authorize accessory
     accessory.destroy
     redirect_to accessories_url, notice: 'Accessory was successfully destroyed.'
   end

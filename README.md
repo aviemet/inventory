@@ -190,6 +190,14 @@ ItemBlueprint
 Item.blueprint
 ```
 
+### Roles
+
+User record can have one role, `:super_admin`.
+
+Person record can have `:admin` role set for specific Companies.
+
+PersonGroup record is where all other roles will be applied.
+
 ### UID
 
 Blueprinter base class provides a uid value derived from the id and model name of the record. This allows polymorphic records such as assignable and assign_toable to pass a single variable containing the values necessary to fetch a record. It also prevents naive sequential id attacks (since it's just a base64 encoding of the values, a program could still brute force it, but a human entering values into a url will be thwarted).

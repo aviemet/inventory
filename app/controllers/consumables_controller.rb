@@ -7,6 +7,7 @@ class ConsumablesController < ApplicationController
 
   # GET /consumables
   def index
+    authorize consumables
     paginated_consumables = consumables.page(params[:page] || 1)
 
     render inertia: "Consumables/Index", props: {
@@ -20,6 +21,7 @@ class ConsumablesController < ApplicationController
 
   # GET /consumables/:id
   def show
+    authorize consumable
     render inertia: "Consumables/Show", props: {
       consumable: -> { consumable.render(view: :show) }
     }
@@ -27,6 +29,7 @@ class ConsumablesController < ApplicationController
 
   # GET /consumables/new
   def new
+    authorize Consumable
     render inertia: "Consumables/New", props: {
       consumable: Consumable.new.render(view: :new),
       models: -> { @active_company.models.find_by_category(:Consumable).render },
@@ -39,6 +42,7 @@ class ConsumablesController < ApplicationController
 
   # GET /consumables/:id/edit
   def edit
+    authorize consumable
     render inertia: "Consumables/Edit", props: {
       consumable: consumable.render(view: :edit),
       models: -> { @active_company.models.find_by_category(:Consumable).render },
@@ -49,6 +53,7 @@ class ConsumablesController < ApplicationController
 
   # GET /consumables/:id/checkout
   def checkout
+    authorize consumable
     redirect_to consumable if consumable.qty == 0
 
     assignment = Assignment.new
@@ -66,6 +71,7 @@ class ConsumablesController < ApplicationController
 
   # GET /consumables/:id/checkin
   def checkin
+    authorize consumable
     redirect_to consumable if consumable.assignments.empty?
     assignment = consumable.assignment
     assignment.returned_at = Time.current
@@ -81,6 +87,7 @@ class ConsumablesController < ApplicationController
 
   # POST /consumables
   def create
+    authorize Consumable
     consumable.company = @active_company
     if consumable.save
       redirect_to consumable, notice: 'Consumable was successfully created'
@@ -91,6 +98,7 @@ class ConsumablesController < ApplicationController
 
   # PATCH/PUT /consumables/:id
   def update
+    authorize consumable
     if consumable.update(consumable_params)
       redirect_to consumable, notice: 'Consumable was successfully updated'
     else
@@ -100,6 +108,7 @@ class ConsumablesController < ApplicationController
 
   # DELETE /consumables/:id
   def destroy
+    authorize consumable
     consumable.destroy
     respond_to do |format|
       format.html { redirect_to consumables_url, notice: 'Consumable was successfully destroyed.' }

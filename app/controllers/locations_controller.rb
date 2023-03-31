@@ -9,6 +9,7 @@ class LocationsController < ApplicationController
 
   # GET /locations
   def index
+    authorize locations
     paginated_locations = locations.page(params[:page] || 1)
 
     render inertia: "Locations/Index", props: {
@@ -22,6 +23,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/:slug
   def show
+    authorize loc
     render inertia: "Locations/Show", props: {
       location: loc.render(view: :show)
     }
@@ -29,6 +31,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/new
   def new
+    authorize Location
     render inertia: "Locations/New", props: {
       location: Location.new(currency: @active_company.default_currency).render(view: :new),
       locations: -> { @active_company.locations.render(view: :as_options) },
@@ -39,6 +42,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/:slug/edit
   def edit
+    authorize loc
     render inertia: "Locations/Edit", props: {
       location: loc.render(view: :edit),
       locations: -> { @active_company.locations.where.not(id: loc.id).render },
@@ -49,6 +53,7 @@ class LocationsController < ApplicationController
 
   # POST /locations
   def create
+    authorize Location
     loc = Location.new(location_params)
     loc.company = @active_company
 
@@ -60,19 +65,18 @@ class LocationsController < ApplicationController
         render json: { errors: loc.errors }, status: 303
       end
 
-    else
+    elsif loc.save
 
-      if loc.save
-        redirect_to loc, notice: 'Location was successfully created'
-      else
-        redirect_to new_location_path, inertia: { errors: loc.errors }
-      end
+      redirect_to loc, notice: 'Location was successfully created'
+    else
+      redirect_to new_location_path, inertia: { errors: loc.errors }
 
     end
   end
 
   # PATCH/PUT /locations/:slug
   def update
+    authorize loc
     if loc.update(location_params)
       redirect_to loc, notice: 'Location was successfully updated'
     else
@@ -82,6 +86,7 @@ class LocationsController < ApplicationController
 
   # DELETE /locations/:slug
   def destroy
+    authorize loc
     loc.destroy
     redirect_to locations_url, notice: 'Location was successfully destroyed.'
   end

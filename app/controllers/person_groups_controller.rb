@@ -6,6 +6,7 @@ class PersonGroupsController < ApplicationController
 
   # GET /person_group
   def index
+    authorize person_groups
     paginated_person_groups = person_groups.page(params[:page] || 1)
 
     render inertia: "PersonGroups/Index", props: {
@@ -19,6 +20,7 @@ class PersonGroupsController < ApplicationController
 
   # GET /person_group/:id
   def show
+    authorize person_group
     render inertia: "PersonGroups/Show", props: {
       person_group: -> { person_group.render(view: :show) },
       people: InertiaRails.lazy(-> {
@@ -36,6 +38,7 @@ class PersonGroupsController < ApplicationController
 
   # GET /person_group/new
   def new
+    authorize PersonGroup
     render inertia: "PersonGroups/New"
   end
 
@@ -48,6 +51,7 @@ class PersonGroupsController < ApplicationController
 
   # POST /person_group
   def create
+    authorize PersonGroup
     person_group = PersonGroup.new(person_group_params.except(:permissions))
     person_group.company = @active_company
     person_group.save
@@ -63,6 +67,7 @@ class PersonGroupsController < ApplicationController
 
   # PATCH/PUT /person_group/:id
   def update
+    authorize person_group
     if person_group.update(person_group_params.except(:permissions))
       person_group.set_permissions(person_group_params[:permissions])
 
@@ -74,6 +79,7 @@ class PersonGroupsController < ApplicationController
 
   # DELETE /person_group/:id
   def destroy
+    authorize person_group
     person_group.destroy
     redirect_to person_groups_url, notice: 'Group was successfully destroyed.'
   end

@@ -7,6 +7,7 @@ class VendorsController < ApplicationController
 
   # GET /vendors
   def index
+    authorize vendors
     self.vendors = search(vendors, sortable_fields)
     paginated_vendors = vendors.page(params[:page] || 1)
 
@@ -21,6 +22,7 @@ class VendorsController < ApplicationController
 
   # GET /vendors/:slug
   def show
+    authorize vendor
     render inertia: "Vendors/Show", props: {
       vendor: vendor.render(view: :show_page),
       items: InertiaRails.lazy(-> {
@@ -88,6 +90,7 @@ class VendorsController < ApplicationController
 
   # GET /vendors/new
   def new
+    authorize Vendor
     render inertia: "Vendors/New", props: {
       vendor: Vendor.new.render(view: :new)
     }
@@ -95,6 +98,7 @@ class VendorsController < ApplicationController
 
   # GET /vendors/:slug/edit
   def edit
+    authorize vendor
     render inertia: "Vendors/Edit", props: {
       vendor: vendor.render(view: :edit)
     }
@@ -102,6 +106,7 @@ class VendorsController < ApplicationController
 
   # POST /vendors
   def create
+    authorize Vendor
     vendor = Vendor.new(vendor_params)
     vendor.company = @active_company
 
@@ -120,6 +125,7 @@ class VendorsController < ApplicationController
 
   # PATCH/PUT /vendors/:slug
   def update
+    authorize vendor
     if vendor.update(vendor_params)
       redirect_to vendor, notice: 'Vendor was successfully updated'
     else
@@ -130,6 +136,7 @@ class VendorsController < ApplicationController
   # DELETE /vendors
   # DELETE /vendors/:slug
   def destroy
+    authorize vendor
     if request.params[:slug]
       vendor.destroy
     else

@@ -7,6 +7,7 @@ class ManufacturersController < ApplicationController
 
   # GET /manufacturers
   def index
+    authorize manufacturers
     paginated_manufacturers = manufacturers.page(params[:page] || 1)
 
     render inertia: "Manufacturers/Index", props: {
@@ -20,6 +21,7 @@ class ManufacturersController < ApplicationController
 
   # GET /manufacturers/:id
   def show
+    authorize manufacturer
     render inertia: "Manufacturers/Show", props: {
       manufacturer: manufacturer.render(view: :show),
       items: InertiaRails.lazy(-> {
@@ -67,6 +69,7 @@ class ManufacturersController < ApplicationController
 
   # GET /manufacturers/new
   def new
+    authorize Manufacturer
     render inertia: "Manufacturers/New", props: {
       manufacturer: Manufacturer.new.render(view: :new)
     }
@@ -74,6 +77,7 @@ class ManufacturersController < ApplicationController
 
   # GET /manufacturers/:id/edit
   def edit
+    authorize manufacturer
     render inertia: "Manufacturers/Edit", props: {
       manufacturer: manufacturer.render(view: :edit)
     }
@@ -81,6 +85,7 @@ class ManufacturersController < ApplicationController
 
   # POST /manufacturers
   def create
+    authorize Manufacturer
     manufacturer.company = @active_company
     if manufacturer.save
       redirect_to manufacturer, notice: 'Manufacturer was successfully created'
@@ -91,6 +96,7 @@ class ManufacturersController < ApplicationController
 
   # PATCH/PUT /manufacturers/:id
   def update
+    authorize manufacturer
     if manufacturer.update(manufacturer_params)
       redirect_to manufacturer, notice: 'Manufacturer was successfully updated'
     else
@@ -100,6 +106,7 @@ class ManufacturersController < ApplicationController
 
   # DELETE /manufacturers/:id
   def destroy
+    authorize manufacturer
     manufacturer.destroy
     redirect_to manufacturers_url, notice: 'Manufacturer was successfully destroyed.'
   end

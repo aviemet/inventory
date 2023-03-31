@@ -7,6 +7,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments
   def index
+    authorize departments
     paginated_departments = departments.page(params[:page] || 1)
 
     render inertia: "Departments/Index", props: {
@@ -20,6 +21,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments/:slug
   def show
+    authorize department
     render inertia: "Departments/Show", props: {
       department: department.render(view: :show),
       items: InertiaRails.lazy(-> {
@@ -87,6 +89,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments/new
   def new
+    authorize Department
     render inertia: "Departments/New", props: {
       department: Department.new.render(view: :new),
       locations: -> { @active_company.locations.render(view: :as_options) }
@@ -95,6 +98,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments/:slug/edit
   def edit
+    authorize department
     render inertia: "Departments/Edit", props: {
       department: department.render(view: :edit),
       locations: -> { @active_company.locations.render(view: :as_options) }
@@ -103,6 +107,7 @@ class DepartmentsController < ApplicationController
 
   # POST /departments
   def create
+    authorize Department
     department = Department.new(department_params)
     department.company = @active_company
 
@@ -115,6 +120,7 @@ class DepartmentsController < ApplicationController
 
   # PATCH/PUT /departments/:slug
   def update
+    authorize department
     if department.update(department_params)
       redirect_to department, notice: 'Department was successfully updated'
     else
@@ -124,6 +130,7 @@ class DepartmentsController < ApplicationController
 
   # DELETE /departments/:slug
   def destroy
+    authorize department
     department.destroy
     redirect_to departments_url, notice: 'Department was successfully destroyed.'
   end

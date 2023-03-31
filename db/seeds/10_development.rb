@@ -74,6 +74,12 @@ if Rails.env == "development"
   end
 
   if Person.count == 1
+    user = User.create!({
+      email: "tommy@email.com",
+      password: "Complex1!",
+      confirmed_at: Date.new,
+    })
+
     Person.create!({
       first_name: "Tommy",
       last_name: "Scully",
@@ -81,6 +87,7 @@ if Rails.env == "development"
       job_title: "AV Manager",
       location: Location.find_by_name("IT Office"),
       department: Department.first,
+      user:,
       company:,
     })
   end

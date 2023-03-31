@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
+    authorize users
     paginated_users = users.page(params[:page] || 1)
 
     render inertia: "Users/Index", props: {
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
 
   # GET /users/:id
   def show
+    authorize user
     render inertia: "Users/Show", props: {
       user: user.render(view: :associations)
     }
@@ -27,6 +29,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    authorize User
     render inertia: "Users/New", props: {
       user: user.render
     }
@@ -34,6 +37,7 @@ class UsersController < ApplicationController
 
   # GET /users/:id/edit
   def edit
+    authorize user
     render inertia: "Users/Edit", props: {
       user: user.render(view: :associations)
     }
@@ -82,6 +86,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/:id
   def update
+    authorize user
     if user.update(user_params)
       redirect_to user, notice: 'User was successfully updated.'
     else
@@ -91,6 +96,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/update_table_preferences/:id
   def update_table_preferences
+    authorize user
     if user.update_column(:table_preferences, current_user.table_preferences.deep_merge(request.params[:user][:table_preferences]))
       head :ok, content_type: "text/html"
     end
@@ -98,6 +104,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/update_user_preferences/:id
   def update_user_preferences
+    authorize user
     if user.update_column(:user_preferences, current_user.user_preferences.deep_merge(request.params[:user][:user_preferences]))
       head :ok, content_type: "text/html"
     end
@@ -105,6 +112,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/:id
   def destroy
+    authorize user
     user.destroy
     respond_to do
       redirect_to users_url, notice: 'User was successfully destroyed.'

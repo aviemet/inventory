@@ -7,6 +7,7 @@ class LicensesController < ApplicationController
 
   # GET /licenses
   def index
+    authorize licenses
     paginated_licenses = licenses.page(params[:page] || 1)
 
     render inertia: "Licenses/Index", props: {
@@ -20,6 +21,7 @@ class LicensesController < ApplicationController
 
   # GET /licenses/1
   def show
+    authorize license
     render inertia: "Licenses/Show", props: {
       license: -> { license.render(view: :show) }
     }
@@ -27,6 +29,7 @@ class LicensesController < ApplicationController
 
   # GET /licenses/new
   def new
+    authorize License
     render inertia: "Licenses/New", props: {
       license: License.new.render(view: :new),
       categories: -> { @active_company.categories.find_by_type(:License).render(view: :as_options) },
@@ -37,6 +40,7 @@ class LicensesController < ApplicationController
 
   # GET /licenses/1/edit
   def edit
+    authorize license
     render inertia: "Licenses/Edit", props: {
       license: license.render(view: :edit),
       categories: -> { @active_company.categories.find_by_type(:License).render(view: :as_options) },
@@ -47,6 +51,7 @@ class LicensesController < ApplicationController
 
   # GET /licenses/:id/checkout
   def checkout
+    authorize license
     redirect_to license if license.qty == 0
 
     assignment = Assignment.new({ assignable: license })
@@ -61,6 +66,7 @@ class LicensesController < ApplicationController
 
   # GET /licenses/:id/checkin/:assignment_id
   def checkin
+    authorize license
     assignment = Assignment.find(params[:assignment_id])
 
     if assignment&.assignable == license && assignment.active
@@ -78,6 +84,7 @@ class LicensesController < ApplicationController
 
   # POST /licenses
   def create
+    authorize License
     license.company = @active_company
 
     # if !license.valid?
@@ -93,6 +100,7 @@ class LicensesController < ApplicationController
 
   # PATCH/PUT /licenses/1
   def update
+    authorize license
     if license.update(license_params)
       redirect_to license, notice: 'License was successfully updated'
     else
@@ -102,6 +110,7 @@ class LicensesController < ApplicationController
 
   # DELETE /licenses/1
   def destroy
+    authorize license
     license.destroy
     redirect_to licenses_url, notice: 'License was successfully destroyed.'
   end

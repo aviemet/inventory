@@ -109,7 +109,7 @@ class ItemsController < ApplicationController
 
   # POST /item
   def create
-    authorize item
+    authorize Item
     item.company = @active_company
 
     if item.save
