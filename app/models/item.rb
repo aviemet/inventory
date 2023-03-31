@@ -7,6 +7,8 @@ class Item < Asset
 
   after_create :ensure_nic
 
+  validates_presence_of :model
+
   has_many :nics, dependent: :destroy
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ip_leases
   has_many :ip_leases, through: :nics

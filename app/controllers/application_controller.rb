@@ -52,7 +52,6 @@ class ApplicationController < ActionController::Base
     if current_user.active_company
       @active_company = current_user.active_company
     elsif !['/logout', '/users/complete_registration'].include? request.path
-      ap({current_user:})
       redirect_to complete_registration_path
     end
   end

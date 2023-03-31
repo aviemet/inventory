@@ -58,8 +58,8 @@ class UsersController < ApplicationController
 
     params.permit!
 
-    current_user.person ||= Person.new
-    current_user.person.assign_attributes params[:person]
+    person = Person.new(params[:person])
+    person.user = current_user
 
     current_user.transaction do
       company = Company::AsSetup.create!(params[:company])

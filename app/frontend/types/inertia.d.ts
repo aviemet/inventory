@@ -1,4 +1,4 @@
-import { type InertiaFormProps as DefaultInertiaFormProps, InertiaHeadProps } from '@inertiajs/core-react';
+import { type InertiaFormProps as DefaultInertiaFormProps, InertiaHeadProps } from '@inertiajs/core-react'
 import { Page, PageProps, Errors, ErrorBag } from '@inertiajs/core'
 
 declare global {
@@ -8,7 +8,7 @@ declare global {
 			form_authenticity_token: string
 			user: Schema.User
 		}
-		flash: FlashMessage,
+		flash: FlashMessage
 		errors: Errors & ErrorBag
 	}
 
@@ -24,8 +24,8 @@ declare global {
 	}
 
 	declare namespace Inertia {
-		type Errors = Record<string|number|symbol, string|string[]>
-		
+		type Errors = Record<string|number, string|string[]>
+
 		interface FormProps<TForm = Record<string, any>> extends InertiaFormProps {
 			model?: string
 			method: HTTPVerb

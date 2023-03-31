@@ -705,11 +705,13 @@ declare namespace Schema {
 		licenses?: License[];
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
+		user?: User;
 		manager?: Person;
 		location?: Location;
-		user?: User;
 		ticket_assignments?: TicketAssignment[];
 		tickets?: Ticket[];
+		person_group_assignments?: PersonGroupAssignment[];
+		groups?: PersonGroup[];
 	}
 
 	interface PersonAsCreate {
@@ -744,11 +746,13 @@ declare namespace Schema {
 		licenses?: License[];
 		fieldset_associations?: FieldsetAssociation[];
 		roles?: Role[];
+		user?: User;
 		manager?: Person;
 		location?: Location;
-		user?: User;
 		ticket_assignments?: TicketAssignment[];
 		tickets?: Ticket[];
+		person_group_assignments?: PersonGroupAssignment[];
+		groups?: PersonGroup[];
 	}
 
 	interface PersonGroup {
@@ -983,6 +987,7 @@ declare namespace Schema {
 		companies?: Company[];
 		person_group_assignments?: PersonGroupAssignment[];
 		groups?: PersonGroup[];
+		person?: Person;
 	}
 
 	interface Vendor {

@@ -1,7 +1,7 @@
 import { FormData } from '.'
 
 type TTableRow = {
-	model: keyof FormData['user_group']['permissions']
+	model: keyof FormData['person_group']['permissions']
 	label: string
 	permissions: (keyof TPermissions)[]
 }

@@ -22,7 +22,8 @@ RSpec.describe User, type: :model do
   end
 
   describe "Associations" do
-    it { should belong_to(:person).optional }
+    it { should have_many(:people) }
+    it { should have_one(:person) }
     it { should belong_to(:active_company).optional }
   end
 end
