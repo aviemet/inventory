@@ -355,7 +355,7 @@ GEM
       activerecord
       railties
     timeout (0.3.2)
-    ts_schema (1.0.0)
+    ts_schema (1.0.1)
       rails (>= 6.0.0)
       railties (>= 4)
     tzinfo (2.0.6)

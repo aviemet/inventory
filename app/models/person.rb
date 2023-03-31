@@ -20,11 +20,15 @@ class Person < ApplicationRecord
   resourcify
   rolify
 
+  belongs_to :user, optional: true
   belongs_to :manager, class_name: 'Person', optional: true
   belongs_to :location, optional: true
-  belongs_to :user, optional: true
+
   has_many :ticket_assignments
   has_many :tickets, through: :ticket_assignments, inverse_of: :assignees
+
+  has_many :person_group_assignments
+  has_many :groups, through: :person_group_assignments, source: :person_group
 
   validates_presence_of :first_name
   validates_presence_of :last_name

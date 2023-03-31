@@ -29,7 +29,10 @@ RSpec.describe Person, type: :model do
     it_behaves_like "assign_toable"
     it_behaves_like "fieldable"
 
+    it { should belong_to(:user).optional }
     it { should belong_to(:manager).class_name('Person').optional }
-    it { should have_one(:user) }
+    it { should belong_to(:location).optional }
+    it { should have_many(:tickets) }
+    it { should have_many(:groups) }
   end
 end
