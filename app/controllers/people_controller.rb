@@ -94,7 +94,7 @@ class PeopleController < ApplicationController
   def person_params
     params.require(:person).permit(
       :id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id,
-      user_attributes: [:email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active],
+      user_attributes: [:id, :email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active],
       contact_attributes: [
         emails_attributes: [:id, :email, :_destroy],
         phones_attributes: [:id, :number, :_destroy],

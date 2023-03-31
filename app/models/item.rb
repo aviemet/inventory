@@ -10,7 +10,6 @@ class Item < Asset
   has_many :nics, dependent: :destroy
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ip_leases
   has_many :ip_leases, through: :nics
-  # has_one :location, through: :assignment
 
   accepts_nested_attributes_for :nics # , reject_if: ->(attributes){ attributes[:ip].blank? && attributes[:mac].blank? }, allow_destroy: true
 

@@ -6,6 +6,7 @@ FactoryBot.define do
     status_label
 
     company
+    default_location { association :location, company: company }
     model { association :model, company: company }
     vendor { association :vendor, company: company }
     manufacturer { association :manufacturer, company: company }

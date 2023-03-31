@@ -32,10 +32,9 @@ class UserBlueprint < ApplicationBlueprint
   end
 
   view :as_form_data do
-    only :email,
+    only :id,
+         :email,
          :active
-
-    exclude :id
   end
 
   view :shared do

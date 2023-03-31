@@ -14,16 +14,18 @@ import { useBooleanToggle } from '@/Components/Hooks'
 import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 import PeopleDropdown from '@/Components/Form/Dropdowns/PeopleDropdown'
-import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
-
-type PersonFormData = {
-	person: Schema.Person
-}
+// import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 
 const emptyUser: Partial<Schema.User> = {
 	email: '',
 	password: '',
 	password_confirmation: '',
+}
+
+type PersonFormData = {
+	person: Schema.Person & {
+		user?: typeof emptyUser
+	}
 }
 
 export interface IPersonFormProps {
@@ -71,6 +73,7 @@ const PersonForm = ({
 			data.person.user.password = ''
 			data.person.user.password_confirmation = ''
 		}
+		console.log({ data })
 		return data
 	}, [person])
 
@@ -78,7 +81,7 @@ const PersonForm = ({
 		const password = form.getData('person.user.password')
 		const checkPassword = form.getData('person.user.check_password')
 
-		if(password !== checkPassword) {
+		if((password && password !== '') && (password !== checkPassword)) {
 			form.setError('person.user.check_password', 'Passwords must match')
 			return false
 		}
@@ -97,7 +100,7 @@ const PersonForm = ({
 	}
 
 	const handleChange = ({ data, getData, clearErrors }: UseFormProps<PersonFormData>) => {
-		const password = getData('person.user.password')
+		const password = getData('person.user.')
 		const checkPassword = getData('person.user.check_password')
 
 		if(password === checkPassword) {
@@ -153,7 +156,7 @@ const PersonForm = ({
 				people={ people }
 			/>
 
-			<FormConsumer>{ form => (
+			<FormConsumer>{ (form: UseFormProps<PersonFormData>) => (
 				<CheckboxInput
 					label="Login Enabled"
 					checked={ loginEnabled }

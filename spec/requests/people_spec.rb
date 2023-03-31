@@ -94,12 +94,13 @@ RSpec.describe "/people", type: :request do
 
     context "with valid parameters" do
       it "updates the requested person and redirects to the show page" do
+        name_change = "Changed"
         person = create(:person, { company: User.first.active_company })
-        patch person_url(person), params: { person: { name: "Changed" } }
+        patch person_url(person), params: { person: { first_name: name_change } }
 
         person.reload
 
-        expect(person.name).to eq("Changed")
+        expect(person.first_name).to eq(name_change)
         expect(response).to redirect_to(person_url(person))
       end
     end

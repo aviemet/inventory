@@ -35,14 +35,14 @@ class PersonBlueprint < ApplicationBlueprint
   end
 
   view :new do
-    excludes :name
+    excludes :name, :user_id
 
     association :contact, blueprint: ContactBlueprint, view: :new
     association :user, blueprint: UserBlueprint, view: :as_form_data
   end
 
   view :edit do
-    excludes :name
+    excludes :name, :user_id
 
     field :department_id do |person|
       person.department&.id

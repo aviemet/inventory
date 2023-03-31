@@ -15,7 +15,7 @@ const New = ({ person, ...models }: IUpdatePersonProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'People', href: Routes.people() },
+			{ title: 'People', href: Routes.person(person) },
 			{ title: `${person.first_name} ${person.last_name}`, href: Routes.person(person) },
 			{ title: 'Edit Person' },
 		] }>
