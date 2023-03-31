@@ -9,8 +9,8 @@ class User < ApplicationRecord
   belongs_to :active_company, class_name: :Company, optional: true
   has_many :people
   has_many :companies, through: :roles, source: :resource, source_type: "Company"
-  has_many :user_group_assignments
-  has_many :groups, through: :user_group_assignments, source: :user_group
+  has_many :person_group_assignments
+  has_many :groups, through: :person_group_assignments, source: :person_group
 
   delegate :company, to: :active_company
 

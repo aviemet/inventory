@@ -163,7 +163,7 @@ declare namespace Schema {
 		orders?: Order[];
 		categories?: Category[];
 		smtps?: Smtp[];
-		user_groups?: UserGroup[];
+		person_groups?: PersonGroup[];
 		items?: Item[];
 		accessories?: Accessory[];
 		consumables?: Consumable[];
@@ -204,7 +204,7 @@ declare namespace Schema {
 		orders?: Order[];
 		categories?: Category[];
 		smtps?: Smtp[];
-		user_groups?: UserGroup[];
+		person_groups?: PersonGroup[];
 		items?: Item[];
 		accessories?: Accessory[];
 		consumables?: Consumable[];
@@ -653,9 +653,9 @@ declare namespace Schema {
 		company?: Company;
 		department?: Department;
 		roles?: Role[];
-		user?: User;
-		vendor?: Vendor;
 		person?: Person;
+		vendor?: Vendor;
+		user?: User;
 		purchases?: Purchase[];
 	}
 
@@ -682,6 +682,7 @@ declare namespace Schema {
 		employee_number?: string;
 		job_title?: string;
 		guid?: string;
+		user_id?: number;
 		manager_id?: number;
 		location_id?: number;
 		created_at: string;
@@ -720,6 +721,7 @@ declare namespace Schema {
 		employee_number?: string;
 		job_title?: string;
 		guid?: string;
+		user_id?: number;
 		manager_id?: number;
 		location_id?: number;
 		created_at: string;
@@ -747,6 +749,34 @@ declare namespace Schema {
 		user?: User;
 		ticket_assignments?: TicketAssignment[];
 		tickets?: Ticket[];
+	}
+
+	interface PersonGroup {
+		id: number;
+		name?: string;
+		slug: string;
+		description?: string;
+		created_at: string;
+		updated_at: string;
+		activities?: PublicActivityActivity[];
+		owner?: Ownership;
+		company?: Company;
+		department?: Department;
+		roles?: Role[];
+		person_group_assignments?: PersonGroupAssignment[];
+		people?: Person[];
+	}
+
+	interface PersonGroupAssignment {
+		id: number;
+		person_id: number;
+		person_group_id: number;
+		created_at: string;
+		updated_at: string;
+		activities?: PublicActivityActivity[];
+		roles?: Role[];
+		person?: Person;
+		person_group?: PersonGroup;
 	}
 
 	interface Phone {
@@ -810,7 +840,8 @@ declare namespace Schema {
 		updated_at: string;
 		activities?: PublicActivityActivity[];
 		users?: User[];
-		user_groups?: UserGroup[];
+		people?: Person[];
+		person_groups?: PersonGroup[];
 	}
 
 	interface Smtp {
@@ -941,46 +972,17 @@ declare namespace Schema {
 		invited_by_type?: string;
 		invited_by_id?: number;
 		invitations_count?: number;
-		person_id?: number;
 		active_company_id?: number;
 		active?: boolean;
 		table_preferences?: Record<string, any>;
 		user_preferences?: Record<string, any>;
 		activities?: PublicActivityActivity[];
 		roles?: Role[];
-		person?: Person;
 		active_company?: Company;
+		people?: Person[];
 		companies?: Company[];
-		user_group_assignments?: UserGroupAssignment[];
-		groups?: UserGroup[];
-	}
-
-	interface UserGroup {
-		id: number;
-		name?: string;
-		slug: string;
-		description?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-		user_group_assignments?: UserGroupAssignment[];
-		users?: User[];
-	}
-
-	interface UserGroupAssignment {
-		id: number;
-		user_id: number;
-		user_group_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		user?: User;
-		user_group?: UserGroup;
+		person_group_assignments?: PersonGroupAssignment[];
+		groups?: PersonGroup[];
 	}
 
 	interface Vendor {
