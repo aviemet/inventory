@@ -1380,6 +1380,18 @@ export const editPerson: ((
 
 /**
  * Generates rails route to
+ * /people/groups/:slug/edit(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editPersonGroup: ((
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /purchases/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1543,18 +1555,6 @@ export const editTicket: ((
  */
 export const editUser: ((
   id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /users/groups/:slug/edit(.:format)
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editUserGroup: ((
-  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2062,6 +2062,16 @@ export const newPerson: ((
 
 /**
  * Generates rails route to
+ * /people/groups/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newPersonGroup: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /purchases/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2202,16 +2212,6 @@ export const newUserConfirmation: ((
 
 /**
  * Generates rails route to
- * /users/groups/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newUserGroup: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /users/invitation/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2321,6 +2321,28 @@ export const people: ((
  */
 export const person: ((
   id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /people/groups/:slug(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const personGroup: ((
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /people/groups(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const personGroups: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2769,28 +2791,6 @@ export const user: ((
  * @returns {string} route path
  */
 export const userConfirmation: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /users/groups/:slug(.:format)
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const userGroup: ((
-  slug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /users/groups(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const userGroups: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

@@ -43,6 +43,12 @@ if Rails.env == "development"
       ].each{ |dept| Department.create!(dept) }
     end
 
+    user = User.create!({
+      email: "aviemet@gmail.com",
+      password: "Complex1!",
+      confirmed_at: Date.new,
+    })
+
     person = Person.create!({
       first_name: "Avram",
       middle_name: "True",
@@ -51,18 +57,12 @@ if Rails.env == "development"
       job_title: "IT Manager",
       location: Location.find_by_name("IT Office"),
       department: Department.first,
+      user:,
       company:,
     })
 
-    user = User.create!({
-      email: "aviemet@gmail.com",
-      password: "Complex1!",
-      confirmed_at: Date.new,
-      person:,
-    })
-
     user.add_role :super_admin
-    user.add_role :admin, company
+    person.add_role :admin, company
   end
 
   if Person.count == 1

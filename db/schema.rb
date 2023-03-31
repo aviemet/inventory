@@ -367,6 +367,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
+  create_table "people_roles", id: false, force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "role_id"
+    t.index ["person_id", "role_id"], name: "index_people_roles_on_person_id_and_role_id"
+    t.index ["person_id"], name: "index_people_roles_on_person_id"
+    t.index ["role_id"], name: "index_people_roles_on_role_id"
+  end
+
   create_table "person_group_assignments", force: :cascade do |t|
     t.bigint "person_id", null: false
     t.bigint "person_group_id", null: false
@@ -383,6 +391,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_person_groups_on_slug", unique: true
+  end
+
+  create_table "person_groups_roles", id: false, force: :cascade do |t|
+    t.bigint "person_group_id"
+    t.bigint "role_id"
+    t.index ["person_group_id", "role_id"], name: "index_person_groups_roles_on_person_group_id_and_role_id"
+    t.index ["person_group_id"], name: "index_person_groups_roles_on_person_group_id"
+    t.index ["role_id"], name: "index_person_groups_roles_on_role_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -500,14 +516,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.index ["number"], name: "index_tickets_on_number", unique: true
     t.index ["primary_contact_id"], name: "index_tickets_on_primary_contact_id"
     t.index ["status_id"], name: "index_tickets_on_status_id"
-  end
-
-  create_table "user_groups_roles", id: false, force: :cascade do |t|
-    t.bigint "user_group_id"
-    t.bigint "role_id"
-    t.index ["role_id"], name: "index_user_groups_roles_on_role_id"
-    t.index ["user_group_id", "role_id"], name: "index_user_groups_roles_on_user_group_id_and_role_id"
-    t.index ["user_group_id"], name: "index_user_groups_roles_on_user_group_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1499,6 +1499,15 @@ export const editPerson = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[
 
 /**
  * Generates rails route to
+ * /people/groups/:slug/edit(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editPersonGroup = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /purchases/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1622,15 +1631,6 @@ export const editTicket = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[
  * @returns {string} route path
  */
 export const editUser = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /users/groups/:slug/edit(.:format)
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editUserGroup = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2026,6 +2026,14 @@ export const newPerson = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7
 
 /**
  * Generates rails route to
+ * /people/groups/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newPersonGroup = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /purchases/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2138,14 +2146,6 @@ export const newUserConfirmation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"user
 
 /**
  * Generates rails route to
- * /users/groups/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newUserGroup = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
  * /users/invitation/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2233,6 +2233,23 @@ export const people = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[1,[2,[8
  * @returns {string} route path
  */
 export const person = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /people/groups/:slug(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const personGroup = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /people/groups(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const personGroups = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"groups"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2577,23 +2594,6 @@ export const user = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"use
  * @returns {string} route path
  */
 export const userConfirmation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"confirmation"],[1,[2,[8,"."],[3,"format"]]]]]]]);
-
-/**
- * Generates rails route to
- * /users/groups/:slug(.:format)
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const userGroup = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
- * /users/groups(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const userGroups = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"groups"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
