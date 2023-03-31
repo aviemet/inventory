@@ -61,6 +61,14 @@ if Rails.env == "development"
       company:,
     })
 
+    group = PersonGroup.create({
+      name: "Company Administrator",
+      description: "Full priveldges for company",
+      company:
+    })
+
+    group.people << person
+
     user.add_role :super_admin
     person.add_role :admin, company
   end

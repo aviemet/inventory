@@ -26,13 +26,6 @@ class PersonGroup < ApplicationRecord
 
   scope :includes_associated, -> { includes([:people]) }
 
-  def assign(person)
-    PersonGroupAssignment.create({
-      person: person,
-      person_group: self
-    })
-  end
-
   def set_permissions(permissions)
     permissions.each do |model, actions|
       constant = if model == 'company'

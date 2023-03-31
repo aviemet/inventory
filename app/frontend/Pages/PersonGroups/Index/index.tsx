@@ -19,9 +19,9 @@ const GroupIndex = ({ person_groups, pagination }: IGroupIndexProps) => {
 			rows={ person_groups }
 			pagination={ pagination }
 			search={ false }
-			deleteRoute={ Routes.userGroups() }
+			deleteRoute={ Routes.personGroups() }
 			breadcrumbs={ [
-				{ title: 'Users', href: Routes.users() },
+				{ title: 'People', href: Routes.people() },
 				{ title, href: window.location.href },
 			] }
 			menuOptions={ [

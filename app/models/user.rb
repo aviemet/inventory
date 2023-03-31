@@ -8,11 +8,15 @@ class User < ApplicationRecord
 
   belongs_to :active_company, class_name: :Company, optional: true
   has_many :people
-  has_many :companies, through: :roles, source: :resource, source_type: "Company"
+  has_many :companies, through: :people
   has_many :person_group_assignments
   has_many :groups, through: :person_group_assignments, source: :person_group
 
-  delegate :company, to: :active_company
+  has_one :person do
+    self.people.joins(:owner).where({owner: {company: self.active_company}}).take
+  end
+
+  alias company active_company
 
   # store_accessor :table_preferences
   store_accessor :user_preferences, :dark_mode
@@ -36,10 +40,6 @@ class User < ApplicationRecord
   scope :includes_associated, -> { includes([:people, :companies]) }
 
   private
-
-  def person
-    self.people.first
-  end
 
   def set_active_company
     return if self.active_company

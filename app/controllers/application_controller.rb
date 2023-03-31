@@ -49,14 +49,10 @@ class ApplicationController < ActionController::Base
   def set_active_company
     return if !current_user
 
-    if !current_user.companies.empty?
-      # TODO: This may be a stop-gap measure. May want to redirect to a view with choices to be more explicit
-      if !current_user.active_company
-        current_user.update(active_company: current_user.companies.first)
-      end
-
+    if current_user.active_company
       @active_company = current_user.active_company
     elsif !['/logout', '/users/complete_registration'].include? request.path
+      ap({current_user:})
       redirect_to complete_registration_path
     end
   end

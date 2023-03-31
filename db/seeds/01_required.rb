@@ -46,10 +46,3 @@ if TicketStatus.count == 0
     })
   end
 end
-
-if PersonGroup.count == 0
-  PersonGroup.create({
-    name: "Company Administrator",
-    description: "Full priveldges for company"
-  })
-end

@@ -9,12 +9,6 @@ After cloning, install dependencies:
   bundle install
 ```
 
-For development and testing, also install mailcatcher:
-
-```bash
-  gem install mailcatcher
-```
-
 Then initialize the database:
 
 ```bash
@@ -24,7 +18,7 @@ Then initialize the database:
 Use the npm script to run the developement server processes through Foreman:
 
 ```bash
-  yarn start
+  yarn dev
 ```
 
 ## Application Intention
@@ -75,7 +69,6 @@ Purchases:
 
 Licenses:
 
-- [ ] List of licenses by category
 - [x] Assignable to an asset
   - [x] Decrementable in the case of bulk licensing
 
@@ -83,7 +76,6 @@ People:
 
 - [x] Person records can be pulled from LDAP/AD (not required)
   - [ ] Merges existing similar records (Person with no guid and same name can be merged)
-- [x] User accounts reference a person always
 
 Vendors:
 
@@ -143,6 +135,7 @@ Table view for all models:
 - [x] Sortable column headings & Pagination
 - [ ] Custom fieldsets
 - [x] Search bar filters by all fields, including custom fields
+- [ ] Advanced search options
 
 Form view for all models:
 
@@ -153,22 +146,19 @@ Form view for all models:
 
 ## Dev Notes
 
+### Assets
+
+All assignable asset types inherit from a base Asset class. This allows for easy searching across the entire inventory of assets. The base Asset class is not assignable, only children with Assignable concerns.
+
 ### Assignments
 
-The main difference between an Item and an Accessory or Consumable is that an Item does not have a quantity field. Accessories and Consumables describe items with an inventory level which can be increased through a purchase or manual adjustment. Accessories represent items which generally accompany an asset such as mice (mouses?) and keyboards and can be returned after use. Consumables represent items which disappear after use such as paper or toner.
-
-These differences are represented by three subclasses of the polymorphic Assignable class:
+There are three subclasses of the polymorphic Assignable class:
 
 - `Assignable::Single`: Items, no count, can be reassigned.
-- `Assignable::Quantity`: Accessories, tracks quantity, can be reassigned.
+- `Assignable::Quantity`: Accessories and Components, tracks quantity, can be reassigned.
 - `Assignable::Consume`: Consumables, tracks quantity, cannot be reassigned.
 
-Assignments have a `location` which should be derived from the User, Item or Location of the AssignToable model, but can be overridden by the user.
-
-Assignable location is assigned to:
-  Location: assign_toable
-  Person: assign_toable.default_location
-  Item: assign_toable.default_location
+Assignments have a `location` which should be derived from the Person, Item or Location of the AssignToable model, but can be overridden during assignment.
 
 ### Searchable/Sortable and Table Components
 
@@ -176,19 +166,15 @@ This needs to be fully documented, too much going on in the background
 
 ### Companies
 
-Companies are essentially top level organizational units. All other objects can be considered to belong to a company with an "Ownership" relationship.
+Companies are top level organizational units. All other objects can be considered to belong to a company via an "Ownership" relationship.
 
 ### Ownerships
 
-Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a compnay is considered to be "owned" by that company, defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner.
-
-### Icons
-
-In order to de-couple 3rd pary libraries from the project, Icons should be named and exported in `Components/Icons/index.tsx` for use in the rest of the site. This makes it very easy to change which icon is used for a particular purpose.
+Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a company is considered to be "owned" by that company, defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner.
 
 ### Blueprinter
 
-The Blueprinter gem is used to shape data passed to Inertia components. Avoid passing raw data as props, and instead prefer using a Blueprint to standardize the shape of data being passed to the client. Use `render_as_json` in the render method to parse the data properly. On any ActiveRecord model or relation you can call `.blueprint` for that model's Blueprinter object, and `.render` to call `render_as_json` on that model or collection. These have been defined in `app/models/application_record.rb` for the model, and `config/initializers/activerecord_extensions.rb` for collections.
+The Blueprinter gem is used to shape data passed to Inertia components. Use `render_as_json` in the render method to parse the data properly. On any ActiveRecord model or relation you can call `.blueprint` for that model's Blueprinter object, and `.render` to call `render_as_json` on that model's or collection's blueprint. These have been defined in `app/models/application_record.rb` for the model, and `config/initializers/activerecord_extensions.rb` for collections.
 
 These are functionally the same:
 
@@ -196,6 +182,8 @@ These are functionally the same:
 ItemBlueprint.render_as_json(Item.first, view: :as_options)
 Item.first.render(view: :as_options)
 ```
+
+As are these:
 
 ```ruby
 ItemBlueprint
