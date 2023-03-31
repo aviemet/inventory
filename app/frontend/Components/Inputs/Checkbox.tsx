@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Checkbox, Sx, type CheckboxProps } from '@mantine/core'
 
-export interface ICheckboxProps extends CheckboxProps {
+export interface ICheckboxProps extends CheckboxProps, IInertiaInputProps {
 	sx?: Sx
 }
 

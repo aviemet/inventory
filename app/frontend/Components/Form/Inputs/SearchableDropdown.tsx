@@ -17,6 +17,7 @@ interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onC
 	fetchOnOpen?: string
 	newForm?: React.ReactElement
 	field?: boolean
+	errorKey?: string
 }
 
 const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
@@ -33,11 +34,12 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 		newForm,
 		field = true,
 		id,
+		errorKey,
 		...props
 	},
 	ref,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model, errorKey })
 
 	const handleChange = (option: string|null) => {
 		setValue(option ? option : '')
@@ -86,6 +88,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 						onDropdownOpen={ handleDropdownOpen }
 						onDropdownClose={ handleDropdownClose }
 						defaultValue={ defaultValue ?? String(value) }
+						error={ error }
 						{ ...props }
 					/>
 				</ConditionalWrapper>

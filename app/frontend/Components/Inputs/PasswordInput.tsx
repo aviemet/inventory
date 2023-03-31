@@ -2,7 +2,9 @@ import React, { forwardRef } from 'react'
 import { PasswordInput, type PasswordInputProps } from '@mantine/core'
 import Label from './Label'
 
-const PasswordInputComponent = forwardRef<HTMLInputElement, PasswordInputProps>((
+interface IPasswordInputProps extends PasswordInputProps, IInertiaInputProps {}
+
+const PasswordInputComponent = forwardRef<HTMLInputElement, IPasswordInputProps>((
 	{ label, name, required = false, id, size = 'md', ...props },
 	ref,
 ) => {

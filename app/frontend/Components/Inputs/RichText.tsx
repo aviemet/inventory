@@ -3,7 +3,7 @@ import React from 'react'
 import RichTextEditor, { type IRichTextEditorProps } from '../RichTextEditor'
 import Label from './Label'
 
-export interface IRichTextProps extends IRichTextEditorProps {
+export interface IRichTextProps extends IRichTextEditorProps, IInertiaInputProps {
 	label?: string
 	required?: boolean
 	id?: string
