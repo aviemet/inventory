@@ -8,7 +8,7 @@ import SwitchRow from './SwitchRow'
 import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'
 import { emptyGroup } from './formData'
-import { exclude } from '@/lib'
+import { Routes, exclude } from '@/lib'
 
 export type FormData = {
 	person_group: Omit<Schema.PersonGroupPermissions, 'id'|'slug'|'created_at'|'updated_at'>
@@ -110,7 +110,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 					</Table>
 				</FormGroup>
 
-				<Submit>
+				<Submit cancelRoute={ Routes.personGroups() }>
 					{ person_group?.id ? 'Update' : 'Create' } Group
 				</Submit>
 			</Form>

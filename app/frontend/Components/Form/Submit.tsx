@@ -1,25 +1,33 @@
 import React, { forwardRef } from 'react'
-import { Button } from '@/Components'
+import { Button, Link } from '@/Components'
 import { Submit as SubmitButton, useForm } from 'use-inertia-form'
-import { Box, type ButtonProps } from '@mantine/core'
+import { Flex, type Sx, type ButtonProps } from '@mantine/core'
 
-const Submit = forwardRef<HTMLButtonElement, ButtonProps>((
-	{ children, disabled, ...props },
+interface ISubmitButtonProps extends ButtonProps {
+	wrapperSx?: Sx
+	cancelRoute?: string
+}
+
+const Submit = forwardRef<HTMLButtonElement, ISubmitButtonProps>((
+	{ children, disabled, wrapperSx, sx, cancelRoute, ...props },
 	ref,
 ) => {
 	const { processing, isDirty } = useForm()
 	return (
-		<Box className="submit">
+		<Flex gap="md" className="submit" sx={ wrapperSx }>
 			<SubmitButton
 				component={ Button }
 				ref={ ref }
-				sx={ { width: '100%' } }
+				sx={ [{ flex: 1 }, sx] }
 				disabled={ disabled || processing || !isDirty }
 				{ ...props }
 			>
 				{ children }
 			</SubmitButton>
-		</Box>
+			{ cancelRoute && (
+				<Link mt={ 10 } href={ cancelRoute } as="button">Cancel</Link>
+			) }
+		</Flex>
 	)
 })
 
