@@ -2,7 +2,7 @@ import React, { forwardRef, useMemo } from 'react'
 import { Select, type SelectProps } from '@mantine/core'
 import Label from './Label'
 
-export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
+export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'>, IInertiaInputProps {
 	options: Array<Record<string, any>>
 	getLabel?: (option: Record<string, any>) => any
 	getValue?: (option: Record<string, any>) => string

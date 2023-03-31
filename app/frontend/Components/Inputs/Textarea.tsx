@@ -2,7 +2,7 @@ import React from 'react'
 import { Textarea, type TextareaProps } from '@mantine/core'
 import Label from './Label'
 
-export interface ITextareaProps extends TextareaProps {
+export interface ITextareaProps extends TextareaProps, IInertiaInputProps {
 	label?: string
 }
 

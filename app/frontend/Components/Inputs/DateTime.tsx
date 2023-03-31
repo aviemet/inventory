@@ -3,7 +3,7 @@ import Label from './Label'
 import { DateTimePicker, DateTimePickerProps } from '@mantine/dates'
 import { isEmpty } from 'lodash'
 
-export interface IDateTimeProps extends DateTimePickerProps {
+export interface IDateTimeProps extends DateTimePickerProps, IInertiaInputProps {
 	label?: string
 	name?: string
 	id?: string

@@ -7,7 +7,7 @@ import ConditionalWrapper from '@/Components/ConditionalWrapper'
 interface IFormCheckboxProps extends Omit<ICheckboxProps, 'onChange'|'defaultChecked'> {
 	name: string
 	model?: string
-	onChange?: (e: React.ChangeEvent<HTMLInputElement>, form: UseFormProps<any>) => void
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>, form: UseFormProps) => void
 	field?: boolean
 }
 

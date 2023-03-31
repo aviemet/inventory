@@ -106,7 +106,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const { auth } = page
 
 	let companyColor
-	let activeCompanyId = page.auth.user.active_company_id
+	let activeCompanyId = page.auth?.user?.active_company_id
 	if(activeCompanyId !== undefined) {
 		const company = page.auth.user?.companies?.find(company => company.id === activeCompanyId)
 		companyColor = company?.settings?.primary_color

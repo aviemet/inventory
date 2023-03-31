@@ -192,6 +192,11 @@ declare global {
 
 	// Inputs
 
+	interface IInertiaInputProps {
+		model?: string
+		errorKey?: string
+	}
+
 	interface IInputProps<T> extends Omit<InputProps, 'onChange'> {
 		label?: string
 		placeholder?: string
@@ -207,6 +212,7 @@ declare global {
 		hidden?: boolean
 		min?: number
 		max?: number
+		errorKey?: string
 	}
 
 	interface IDropdownWithModalButton {
@@ -215,6 +221,7 @@ declare global {
 		label?: string
 		fetchOnOpen?: string
 		required?: boolean
+		errorKey?: string
 	}
 }
 

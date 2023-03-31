@@ -24,14 +24,13 @@ export interface IItemFormProps {
 	categories: Schema.Category[]
 }
 
-const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locations, manufacturers, categories }: IItemFormProps) => {
+const ItemForm = ({ method = 'post', item, models, vendors, locations, manufacturers, categories, ...props }: IItemFormProps) => {
 	return (
 		<Form
 			model="item"
 			data={ { item } }
-			to={ to }
 			method={ method }
-			onSubmit={ onSubmit }
+			{ ...props }
 		>
 
 			<TextInput name="name" label="Name" required autoFocus />
@@ -41,6 +40,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					models={ models }
 					manufacturers={ manufacturers }
 					categories={ categories }
+					errorKey="item.model"
 				/>
 
 				<TextInput name="serial" label="Serial" />

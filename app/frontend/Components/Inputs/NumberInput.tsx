@@ -2,7 +2,9 @@ import React, { forwardRef } from 'react'
 import { NumberInput, type NumberInputProps } from '@mantine/core'
 import Label from './Label'
 
-const NumberInputComponent = forwardRef<HTMLInputElement, NumberInputProps>((
+interface INumberInputProps extends NumberInputProps, IInertiaInputProps {}
+
+const NumberInputComponent = forwardRef<HTMLInputElement, INumberInputProps>((
 	{ label, name, required = false, value, id, size = 'md', ...props },
 	ref,
 ) => {
