@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Box, Heading } from '@/Components'
 import { Form, SwatchInput } from '@/Components/Form'
 import { ColorInput, DEFAULT_THEME, useMantineTheme } from '@mantine/core'
@@ -9,13 +9,19 @@ import { useLayout } from '@/Layouts/Providers'
 const Appearance = () => {
 	const theme = useMantineTheme()
 	const { layoutState, setLayoutState } = useLayout()
-	console.log({ layoutState })
+	const PrimaryColorRef = useRef(layoutState.primaryColor)
+
 	const handleChange = (color: string) => {
-		console.log({ color })
 		setLayoutState({
 			primaryColor: color,
 		})
 	}
+
+	useEffect(() => {
+		return () => setLayoutState({
+			primaryColor: PrimaryColorRef.current,
+		})
+	}, [])
 
 	return (
 		<SettingsLayout>
