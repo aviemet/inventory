@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Heading, Page, Box, Section, Tabs } from '@/Components'
 import { router, usePage } from '@inertiajs/react'
-import { Paper, TabsValue } from '@mantine/core'
+import { Paper, TabsValue, px, useMantineTheme } from '@mantine/core'
+import { useViewportSize } from '@mantine/hooks'
 
 type TTab = {
 	name: string
@@ -24,38 +25,52 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 	const title = 'Settings'
 	const page = usePage()
 
+	const { width } = useViewportSize()
+	const theme = useMantineTheme()
+	const [mobileFormat, setMobileFormat] = useState(window.innerWidth < px(theme.breakpoints.sm))
+
+	useEffect(() => {
+		if(width === 0) return
+		setMobileFormat(width < px(theme.breakpoints.sm))
+	}, [width])
+
 	const handleTabChange = (value: TabsValue) => {
-		router.get(`/settings/${value}`)
+		router.get(`/settings/${value}`, {}, { preserveState: true })
 	}
 
 	return (
 		<Page title={ title }>
 			<Section sx={ { height: '100%' } }>
 				<Tabs
-					orientation="vertical"
+					orientation={ mobileFormat ? 'horizontal' : 'vertical' }
 					variant="pills"
 					defaultValue={ page.url.replace('/settings/', '') }
 					onTabChange={ handleTabChange }
 					sx={ { height: '100%' } }
 				>
-					<Tabs.List>{ tabs.map(tab => (
-						<Tabs.Tab key={ tab.name } value={ tab.name } role="link">{ tab.label }</Tabs.Tab>
-					)) }</Tabs.List>
-
+					<Paper
+						p='xs'
+						withBorder
+						shadow="sm"
+					>
+						<Tabs.List sx={ mobileFormat ? {
+							flexWrap: 'nowrap',
+							overflow: 'auto',
+						} : {} }>{ tabs.map(tab => (
+								<Tabs.Tab key={ tab.name } value={ tab.name } role="link">{ tab.label }</Tabs.Tab>
+							)) }</Tabs.List>
+					</Paper>
 					{ tabs.map(tab => (
 						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs" sx={ { position: 'relative' } }>
 
-							<Paper
-								component="section"
+							<Box
 								p='lg'
-								withBorder
-								shadow="sm"
 								sx={ {
 									height: '100%',
 								} }
 							>
 								{ children }
-							</Paper>
+							</Box>
 						</Tabs.Panel>
 					)) }
 				</Tabs>
@@ -64,4 +79,4 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 	)
 }
 
-export default SettingsLayout
+export default React.memo(SettingsLayout)

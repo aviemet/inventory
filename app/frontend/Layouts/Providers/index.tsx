@@ -14,15 +14,15 @@ interface IProviderProps {
 
 const Providers = React.memo(({ children }: IProviderProps) => {
 	return (
-		<UiFrameworkProvider>
-			<SpotlightProvider>
-				<LayoutProvider>
+		<LayoutProvider>
+			<UiFrameworkProvider>
+				<SpotlightProvider>
 					<IconProvider>
 						{ children }
 					</IconProvider>
-				</LayoutProvider>
-			</SpotlightProvider>
-		</UiFrameworkProvider>
+				</SpotlightProvider>
+			</UiFrameworkProvider>
+		</LayoutProvider>
 	)
 })
 

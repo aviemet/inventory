@@ -1,27 +1,28 @@
-import React, { forwardRef, useCallback } from 'react'
+import React, { forwardRef } from 'react'
 import Field from '../Field'
 import SwitchInput, { type ISwitchProps } from '@/Components/Inputs/Switch'
-import cx from 'clsx'
-import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
+import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-interface IFormSwitchProps extends Omit<ISwitchProps, 'onChange'> {
-	name: string
-	model?: string
-	onChange?: (e: React.ChangeEvent<HTMLInputElement>, form: UseFormProps) => void
+interface IFormSwitchProps extends Omit<ISwitchProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
 	field?: boolean
 }
 
 const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
-	{ name, onChange, id, required, className, model, label, field = true, ...props },
+	{ name, onChange, onBlur, id, required, model, field = true, ...props },
 	ref,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean>({ name, model })
 
-	const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
 		if(onChange) onChange(e, form)
-	}, [onChange, inputName])
+	}
+
+	const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setValue(e.target.checked)
+		if(onBlur) onBlur(e, form)
+	}
 
 	return (
 		<ConditionalWrapper wrapper={ children => (
@@ -38,15 +39,14 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 		>
 			<SwitchInput
 				id={ id || inputId }
-				className={ className }
 				name={ inputName }
 				defaultChecked={ Boolean(value) }
 				checked={ value }
 				value={ name }
 				onChange={ handleChange }
+				onBlur={ handleBlur }
 				error={ error }
 				ref={ ref }
-				label={ label }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

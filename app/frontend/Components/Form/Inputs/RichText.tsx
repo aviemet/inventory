@@ -5,9 +5,7 @@ import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-interface IRichTextFormProps extends IRichTextProps {
-	name: string
-	model?: string
+interface IRichTextFormProps extends Omit<IRichTextProps, 'name'|'onBlur'|'onChange'>, IInertiaInputProps {
 	field?: boolean
 }
 
@@ -17,15 +15,19 @@ const RichText = ({
 	required = false,
 	id,
 	onChange,
+	onBlur,
 	model,
 	field = true,
 	...props
 }: IRichTextFormProps) => {
-	const { inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
 
-	const handleChange: typeof onChange = (v, delta, sources, editor) => {
+	const handleChange = (v, delta, sources, editor) => {
 		setValue(v)
-		if(onChange) onChange(v, delta, sources, editor)
+		if(onChange) onChange(v, form)
+	}
+	const handleBlur = () => {
+		if(onBlur) onBlur(value, form )
 	}
 
 	return (
@@ -49,6 +51,7 @@ const RichText = ({
 					id={ id }
 					name={ inputName }
 					onChange={ handleChange }
+					onBlur={ handleBlur }
 					value={ value }
 					{ ...props }
 				/>

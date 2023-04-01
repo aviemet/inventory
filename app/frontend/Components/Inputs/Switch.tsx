@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Sx, type SwitchProps } from '@mantine/core'
 
-export interface ISwitchProps extends SwitchProps, IInertiaInputProps {
+export interface ISwitchProps extends SwitchProps {
 	sx?: Sx
 }
 

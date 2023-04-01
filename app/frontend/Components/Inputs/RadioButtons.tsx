@@ -8,7 +8,7 @@ export type TOption = {
 	defaultModel?: TAssignToable
 }
 
-export interface IRadioButtonsProps extends Omit<SegmentedControlProps, 'data'>, IInertiaInputProps {
+export interface IRadioButtonsProps extends Omit<SegmentedControlProps, 'data'> {
 	label?: string
 	labelPosition?: 'start'|'end'
 	name: string

@@ -193,26 +193,12 @@ declare global {
 	// Inputs
 
 	interface IInertiaInputProps {
-		model?: string
-		errorKey?: string
-	}
-
-	interface IInputProps<T> extends Omit<InputProps, 'onChange'> {
-		label?: string
-		placeholder?: string
 		name: string
 		model?: string
+		errorKey?: string
+		compact?: boolean
 		onChange?: (value: T, form: UseFormProps) => void
 		onBlur?: (value: T, form: UseFormProps) => void
-		pattern?: string
-		id?: string
-		compact?: boolean
-		autoFocus?: boolean
-		autoComplete?: string
-		hidden?: boolean
-		min?: number
-		max?: number
-		errorKey?: string
 	}
 
 	interface IDropdownWithModalButton {
@@ -255,5 +241,4 @@ declare module '@mantine/core' {
 			replenishButtonColor: string
 		}
 	}
-
 }

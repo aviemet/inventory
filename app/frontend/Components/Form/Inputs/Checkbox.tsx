@@ -1,13 +1,10 @@
 import React, { forwardRef } from 'react'
 import Field from '../Field'
 import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
-import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
+import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-interface IFormCheckboxProps extends Omit<ICheckboxProps, 'onChange'|'defaultChecked'> {
-	name: string
-	model?: string
-	onChange?: (e: React.ChangeEvent<HTMLInputElement>, form: UseFormProps) => void
+interface IFormCheckboxProps extends Omit<ICheckboxProps, 'name'|'onBlur'|'onChange'|'defaultChecked'>, IInertiaInputProps {
 	field?: boolean
 }
 
@@ -15,6 +12,7 @@ const FormCheckboxComponent = forwardRef<HTMLInputElement, IFormCheckboxProps>((
 	{
 		name,
 		onChange,
+		onBlur,
 		id,
 		required,
 		className,
@@ -29,6 +27,10 @@ const FormCheckboxComponent = forwardRef<HTMLInputElement, IFormCheckboxProps>((
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
 		if(onChange) onChange(e, form)
+	}
+
+	const handleBlur = () => {
+		if(onBlur) onBlur(value, form)
 	}
 
 	return (
@@ -52,6 +54,7 @@ const FormCheckboxComponent = forwardRef<HTMLInputElement, IFormCheckboxProps>((
 				value={ name }
 				checked={ value }
 				onChange={ handleChange }
+				onBlur={ handleBlur }
 				error={ error }
 				ref={ ref }
 				{ ...props }

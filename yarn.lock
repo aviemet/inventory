@@ -2610,6 +2610,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/ds@npm:^6.0.5":
+  version: 6.0.5
+  resolution: "@mantine/ds@npm:6.0.5"
+  dependencies:
+    "@mantine/utils": 6.0.5
+  peerDependencies:
+    "@mantine/core": 6.0.5
+    "@mantine/hooks": 6.0.5
+    "@mantine/prism": 6.0.5
+    "@tabler/icons-react": "*"
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: c7258563bde500a78fd9d923ba0b700cdf80ca6d9d9d3942422df8a5f11227a0eb616fe419ba77d2109f0f433b674f7bcc635bd1eece11a786a955a7cf951a57
+  languageName: node
+  linkType: hard
+
 "@mantine/form@npm:^6.0.4":
   version: 6.0.4
   resolution: "@mantine/form@npm:6.0.4"
@@ -11515,6 +11531,7 @@ __metadata:
     "@mantine/core": ^6.0.5
     "@mantine/dates": ^6.0.4
     "@mantine/dropzone": ^6.0.4
+    "@mantine/ds": ^6.0.5
     "@mantine/form": ^6.0.4
     "@mantine/hooks": ^6.0.4
     "@mantine/modals": ^6.0.4

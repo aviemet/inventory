@@ -1,18 +1,16 @@
 import React, { forwardRef } from 'react'
-import { TextInput } from '@/Components/Inputs'
-import Field from '../Field'
+import TextInput, { type ITextInputProps } from '@/Components/Inputs/TextInput'
 import cx from 'clsx'
+import Field from '../Field'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-interface ITextInputProps extends IInputProps<string> {
-	errorKey?: string
+interface ITextFormInputProps extends Omit<ITextInputProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
 	field?: boolean
 }
 
-const FormInput = forwardRef<HTMLInputElement, ITextInputProps>((
+const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 	{
-		label,
 		name,
 		model,
 		onChange,
@@ -53,13 +51,12 @@ const FormInput = forwardRef<HTMLInputElement, ITextInputProps>((
 					{ children }
 				</Field>
 			) }
-			condition={ field }
+			condition={ props.hidden !== true && field }
 		>
 			<TextInput
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
-				label={ label }
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }

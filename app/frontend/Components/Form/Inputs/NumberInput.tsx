@@ -1,17 +1,16 @@
 import React, { forwardRef } from 'react'
-import { NumberInput } from '@/Components/Inputs'
+import NumberInput, { type INumberInputProps } from '@/Components/Inputs/NumberInput'
 import Field from '../Field'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-interface INumberInputProps extends IInputProps<number> {
+interface INumberFormInputProps extends Omit<INumberInputProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
 	field?: boolean
 }
 
-const FormInput = forwardRef<HTMLInputElement, INumberInputProps>((
+const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 	{
-		label,
 		name,
 		model,
 		onChange,
@@ -55,7 +54,6 @@ const FormInput = forwardRef<HTMLInputElement, INumberInputProps>((
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
-				label={ label }
 				value={ value as number }
 				onChange={ handleChange }
 				onBlur={ handleBlur }

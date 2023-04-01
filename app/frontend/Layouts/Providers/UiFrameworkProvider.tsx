@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
 import { Notifications } from '@mantine/notifications'
 import { usePage } from '@inertiajs/react'
 import axios from 'axios'
 import { Routes } from '@/lib'
+import { useLayout } from './LayoutProvider'
 
 export const useTheme = (colorScheme: 'light'|'dark' = 'light', primaryColor = 'violet') => ({
 	breakpoints: {
@@ -105,12 +106,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const page = usePage<SharedInertiaProps>().props
 	const { auth } = page
 
-	let companyColor
-	let activeCompanyId = page.auth?.user?.active_company_id
-	if(activeCompanyId !== undefined) {
-		const company = page.auth.user?.companies?.find(company => company.id === activeCompanyId)
-		companyColor = company?.settings?.primary_color
-	}
+	const { layoutState } = useLayout()
 
 	const systemColorScheme = useColorScheme()
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -135,10 +131,13 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		setColorScheme(scheme)
 	}
 
-	const mantineTheme = useTheme(colorScheme, companyColor)
+	const mantineTheme = useTheme(colorScheme, layoutState.primaryColor)
 
 	return (
-		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
+		<ColorSchemeProvider
+			colorScheme={ colorScheme }
+			toggleColorScheme={ toggleColorScheme }
+		>
 			<MantineProvider theme={ mantineTheme } withGlobalStyles withNormalizeCSS>
 				<Notifications />
 				<GlobalStyles />

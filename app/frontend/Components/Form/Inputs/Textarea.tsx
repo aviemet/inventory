@@ -2,15 +2,10 @@ import React from 'react'
 import Field from '../Field'
 import TextareaInput, { type ITextareaProps } from '@/Components/Inputs/Textarea'
 import cx from 'clsx'
-import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
+import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-interface IFormTextareaProps extends Omit<ITextareaProps, 'onChange'> {
-	label?: string
-	name: string
-	model?: string
-	errorKey?: string
-	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>, form: UseFormProps) => void
+interface IFormTextareaProps extends Omit<ITextareaProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
 	field?: boolean
 }
 
@@ -19,6 +14,7 @@ const Textarea = ({
 	name,
 	required,
 	onChange,
+	onBlur,
 	id,
 	model,
 	errorKey,
@@ -29,7 +25,10 @@ const Textarea = ({
 
 	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setValue(e.target.value)
-		if(onChange) onChange(e, form)
+		if(onChange) onChange(e.target.value, form)
+	}
+	const handleBlur = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		if(onBlur) onBlur(e.target.value, form)
 	}
 
 	return (
@@ -43,7 +42,7 @@ const Textarea = ({
 					{ children }
 				</Field>
 			) }
-			condition={ field }
+			condition={ props.hidden !== true && field }
 		>
 			<>
 				{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
@@ -53,6 +52,7 @@ const Textarea = ({
 					id={ id || inputId }
 					name={ inputName }
 					onChange={ handleChange }
+					onBlur={ handleBlur }
 					value={ value }
 					required={ required }
 					error={ errorKey ? form.getError(errorKey) : error }

@@ -12,8 +12,17 @@ import {
 	VendorsIcon,
 } from '@/Components/Icons'
 import { Routes } from '@/lib'
+import { useViewportSize } from '@mantine/hooks'
+import { px, useMantineTheme } from '@mantine/core'
 
 const QuickNewMenu = () => {
+	const { width } = useViewportSize()
+	const theme = useMantineTheme()
+
+	if(width < px(theme.breakpoints.sm)) {
+		return <></>
+	}
+
 	return (
 		<Menu position="bottom-end">
 			<Menu.Target>
