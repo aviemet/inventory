@@ -147,4 +147,4 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	)
 }
 
-export default UiFrameworkProvider
+export default React.memo(UiFrameworkProvider)

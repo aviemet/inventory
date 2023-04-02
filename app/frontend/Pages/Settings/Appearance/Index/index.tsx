@@ -1,15 +1,23 @@
 import React, { useEffect, useRef } from 'react'
 import { Box, Heading } from '@/Components'
-import { Form, SwatchInput } from '@/Components/Form'
-import { ColorInput, DEFAULT_THEME, useMantineTheme } from '@mantine/core'
+import { Form, Submit, SwatchInput } from '@/Components/Form'
+import { useMantineTheme } from '@mantine/core'
 import SettingsLayout from '@/Pages/Settings/SettingsLayout'
 import { useLayout } from '@/Layouts/Providers'
+import { Routes } from '@/lib'
+import { defaults } from 'lodash'
+import { usePage } from '@inertiajs/react'
 
-// console.log({ colors: DEFAULT_THEME.colors })
-const Appearance = () => {
+interface IAppearanceSettingsProps {
+	settings: {
+		primary_color?: string
+	}
+}
+
+const AppearanceSettings = ({ settings }: IAppearanceSettingsProps) => {
 	const theme = useMantineTheme()
-	const { layoutState, setLayoutState } = useLayout()
-	const PrimaryColorRef = useRef(layoutState.primaryColor)
+	const { setLayoutState } = useLayout()
+	const page = usePage<SharedInertiaProps>()
 
 	const handleChange = (color: string) => {
 		setLayoutState({
@@ -18,34 +26,36 @@ const Appearance = () => {
 	}
 
 	useEffect(() => {
-		return () => setLayoutState({
-			primaryColor: PrimaryColorRef.current,
-		})
+		return () => {
+			setLayoutState({
+				primaryColor: page.props.auth?.user?.active_company?.settings?.primary_color,
+			})
+		}
 	}, [])
+
+	const defaultFormData = {
+		settings: {
+			primary_color: theme.primaryColor,
+		},
+	}
 
 	return (
 		<SettingsLayout>
 			<Heading mb={ 24 }>Appearance Settings</Heading>
 			<Box>
 				<Heading order={ 2 }>Company Theme</Heading>
-				<ColorInput
-					label="Company Color"
-					disallowInput
-					withPicker={ false }
-					swatches={ Object.keys(DEFAULT_THEME.colors).map(color => {
-						return DEFAULT_THEME.colors[color][6]
-					}) }
-				/>
 				<Form
 					model="settings"
-					data={ { settings: { color: theme.primaryColor } } }
-					method="patch"
+					data={ { ...defaults(defaultFormData, settings) } }
+					method="put"
+					to={ Routes.settingsAppearance() }
 				>
-					<SwatchInput label="Company Color" name="color" onChange={ handleChange } />
+					<SwatchInput label="Company Color" name="primary_color" onChange={ handleChange } />
+					<Submit>Save Appearance Settings</Submit>
 				</Form>
 			</Box>
 		</SettingsLayout>
 	)
 }
 
-export default Appearance
+export default AppearanceSettings

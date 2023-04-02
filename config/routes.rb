@@ -39,7 +39,8 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resources :general
-    resources :appearance
+    resources :appearance, only: [:index]
+    match :appearance, to: "appearance#update", via: [:put, :patch]
     resources :localizations
     resources :notifications
     resources :integrations

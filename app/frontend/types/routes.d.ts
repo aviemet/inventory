@@ -1416,18 +1416,6 @@ export const editRailsConductorInboundEmail: ((
 
 /**
  * Generates rails route to
- * /settings/appearance/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editSettingsAppearance: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /settings/asset_tags/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -2082,16 +2070,6 @@ export const newPurchase: ((
 
 /**
  * Generates rails route to
- * /settings/appearance/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newSettingsAppearance: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /settings/asset_tags/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2424,13 +2402,11 @@ export const setActiveCompany: ((
 
 /**
  * Generates rails route to
- * /settings/appearance/:id(.:format)
- * @param {any} id
+ * /settings/appearance(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const settingsAppearance: ((
-  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

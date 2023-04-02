@@ -49,4 +49,4 @@ const AppLayout = ({ children }: { children: any }) => {
 	)
 }
 
-export default AppLayout
+export default React.memo(AppLayout)

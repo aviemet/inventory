@@ -1526,15 +1526,6 @@ export const editRailsConductorInboundEmail = __jsr.r({"id":{"r":true},"format":
 
 /**
  * Generates rails route to
- * /settings/appearance/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editSettingsAppearance = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"appearance"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
-
-/**
- * Generates rails route to
  * /settings/asset_tags/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -2042,14 +2033,6 @@ export const newPurchase = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"purchases"],
 
 /**
  * Generates rails route to
- * /settings/appearance/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newSettingsAppearance = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"appearance"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
-
-/**
- * Generates rails route to
  * /settings/asset_tags/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2312,12 +2295,11 @@ export const setActiveCompany = __jsr.r({"id":{"r":true},"company_id":{"r":true}
 
 /**
  * Generates rails route to
- * /settings/appearance/:id(.:format)
- * @param {any} id
+ * /settings/appearance(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsAppearance = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"appearance"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const settingsAppearance = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"appearance"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

@@ -1,5 +1,6 @@
 import { cloneDeep, unset, get, set } from 'lodash'
 import { Routes } from '@/lib'
+import { NestedObject } from 'use-inertia-form'
 export { default as IPAddress } from './IPAddress'
 
 export * as Routes from '@/types/routes'
