@@ -41,7 +41,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: ISh
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Manufacturer', href: Routes.manufacturers() },
+			{ title: 'Manufacturers', href: Routes.manufacturers() },
 			{ title: manufacturer.name! },
 		] }>
 			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {

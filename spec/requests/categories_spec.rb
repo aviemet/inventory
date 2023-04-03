@@ -16,6 +16,25 @@ RSpec.describe "Categories", type: :request do
     }
   end
 
+  describe "GET /" do
+    login_admin
+
+    it "renders" do
+      get categories_url
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe "GET /show" do
+    login_admin
+
+    it "renders" do
+      category = create(:category, company: Company.first)
+      get category_url({ slug: category.slug })
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe "POST /create" do
     login_admin
 

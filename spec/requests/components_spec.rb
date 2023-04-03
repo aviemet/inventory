@@ -58,6 +58,16 @@ RSpec.describe "/components", type: :request do
 
   end
 
+  describe "GET /show" do
+    login_admin
+
+    it "renders" do
+      component = create(:component, company: Company.first)
+      get component_url({ id: component.id })
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe "POST /create" do
     login_admin
 

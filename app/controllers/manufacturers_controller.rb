@@ -19,7 +19,7 @@ class ManufacturersController < ApplicationController
     }
   end
 
-  # GET /manufacturers/:id
+  # GET /manufacturers/:slug
   def show
     authorize manufacturer
     render inertia: "Manufacturers/Show", props: {
@@ -75,7 +75,7 @@ class ManufacturersController < ApplicationController
     }
   end
 
-  # GET /manufacturers/:id/edit
+  # GET /manufacturers/:slug/edit
   def edit
     authorize manufacturer
     render inertia: "Manufacturers/Edit", props: {
@@ -86,6 +86,7 @@ class ManufacturersController < ApplicationController
   # POST /manufacturers
   def create
     authorize Manufacturer
+    manufacturer = Manufacturer.new(manufacturer_params)
     manufacturer.company = @active_company
     if manufacturer.save
       redirect_to manufacturer, notice: 'Manufacturer was successfully created'
@@ -94,7 +95,7 @@ class ManufacturersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /manufacturers/:id
+  # PATCH/PUT /manufacturers/:slug
   def update
     authorize manufacturer
     if manufacturer.update(manufacturer_params)
@@ -104,7 +105,7 @@ class ManufacturersController < ApplicationController
     end
   end
 
-  # DELETE /manufacturers/:id
+  # DELETE /manufacturers/:slug
   def destroy
     authorize manufacturer
     manufacturer.destroy

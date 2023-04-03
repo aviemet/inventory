@@ -49,6 +49,40 @@ RSpec.describe "Accessories", type: :request do
 
   end
 
+  describe "GET /show" do
+    login_admin
+
+    it "renders" do
+      accessory = create(:accessory, company: Company.first)
+      get accessory_url({ id: accessory.id })
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe "GET /checkout" do
+    login_admin
+
+    it "renders" do
+      accessory = create(:accessory, company: Company.first)
+      get checkout_accessory_url({id: accessory.id })
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe "GET /checkin" do
+    login_admin
+
+    it "renders" do
+      company = Company.first
+      accessory = create(:accessory, company:)
+      item = create(:item, company:)
+      assignment = accessory.assign_to item
+
+      get checkin_accessory_url({id: accessory.id, assignment_id: assignment.id })
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe "POST /create" do
     login_admin
 

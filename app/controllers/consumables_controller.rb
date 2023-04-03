@@ -36,7 +36,7 @@ class ConsumablesController < ApplicationController
       vendors: -> { @active_company.vendors.render },
       locations: -> { @active_company.locations.render },
       manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:item).render(view: :as_options) }
+      categories: -> { @active_company.categories.find_by_type(:consumable).render(view: :as_options) }
     }
   end
 
@@ -123,6 +123,6 @@ class ConsumablesController < ApplicationController
   end
 
   def consumable_params
-    params.require(:consumable).permit(:name, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :category_id, :vendor_id, :default_location_id)
+    params.require(:consumable).permit(:name, :min_qty, :qty, :cost, :serial, :asset_tag, :cost_currency, :requestable, :notes, :model_id, :manufacturer_id, :category_id, :vendor_id, :default_location_id)
   end
 end

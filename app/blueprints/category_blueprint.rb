@@ -6,6 +6,8 @@ class CategoryBlueprint < ApplicationBlueprint
          :created_at,
          :updated_at
 
+  view :associations do; end
+
   view :as_options do
     fields :id, :name
   end
