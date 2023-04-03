@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { useLayout } from '@/Layouts/Providers'
+import { useLayoutStore } from '@/Layouts/Providers'
 import { Group, Navbar, Text, ThemeIcon, useMantineTheme } from '@mantine/core'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
@@ -9,7 +9,6 @@ import {
 	AssetsIcon,
 	ItemsIcon,
 	LicensesIcon,
-	PeopleIcon,
 	TicketsIcon,
 	NetworksIcon,
 	VendorsIcon,
@@ -35,29 +34,29 @@ import IconProvider from '@/Layouts/Providers/IconProvider'
 import useNavigationStyles from './useNavigationStyles'
 
 const Sidebar = () => {
-	const { layoutState, setLayoutState } = useLayout()
+	const { sidebarOpen, toggleSidebarOpen } = useLayoutStore()
 	const theme = useMantineTheme()
 	const { classes } = useNavigationStyles()
 	const [siteTitleHidden, setSiteTitleHidden] = useState(false)
 
-	const handleNavClick = () => setLayoutState({ sidebarOpen: false })
+	const handleNavClick = () => toggleSidebarOpen(false)
 
 	// Delay text to avoid layout shift when opening/closing sidebar
 	useLayoutEffect(() => {
-		const ms = layoutState.sidebarOpen ? 100 : 0
+		const ms = sidebarOpen ? 100 : 0
 		setTimeout(() => {
-			setSiteTitleHidden(!layoutState.sidebarOpen)
+			setSiteTitleHidden(!sidebarOpen)
 		}, ms)
-	}, [layoutState.sidebarOpen])
+	}, [sidebarOpen])
 
 	return (
 		<IconProvider value={ { size: '24px' } }>
 			<Navbar
 				p={ 0 }
 				hiddenBreakpoint="sm"
-				hidden={ !layoutState.sidebarOpen }
-				width={ { sm: layoutState.sidebarOpen ? theme.other.navbar.width.open : theme.other.navbar.width.closed } }
-				className={ cx(classes.root, { closed: !layoutState.sidebarOpen }) }
+				hidden={ !sidebarOpen }
+				width={ { sm: sidebarOpen ? theme.other.navbar.width.open : theme.other.navbar.width.closed } }
+				className={ cx(classes.root, { closed: !sidebarOpen }) }
 			>
 				<Navbar.Section m="xs">
 					<Group position='apart'>

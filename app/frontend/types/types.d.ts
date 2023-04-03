@@ -1,5 +1,6 @@
 /* eslint no-unused-vars: 0 */
 
+import React from 'react'
 import { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
 import { type SelectProps, type InputProps } from '@mantine/core'
 
@@ -240,5 +241,21 @@ declare module '@mantine/core' {
 			checkinButtonColor: string
 			replenishButtonColor: string
 		}
+	}
+
+	// https://phelipetls.github.io/posts/polymorphic-components-react-typescript/
+
+	type PropsOf<T extends React.ElementType> = React.ComponentPropsWithoutRef<T>
+
+	type PolymorphicProps<
+		T extends React.ElementType = React.ElementType,
+		TProps = {}
+	> = {
+		as?: T
+	} & TProps &
+	Omit<PropsOf<T>, keyof TProps & 'as'>
+
+	interface PolymorphicComponent<T extends React.Element> {
+		as: T
 	}
 }

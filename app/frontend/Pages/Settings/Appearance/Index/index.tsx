@@ -1,12 +1,17 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { Box, Heading } from '@/Components'
 import { Form, Submit, SwatchInput } from '@/Components/Form'
-import { useMantineTheme } from '@mantine/core'
 import SettingsLayout from '@/Pages/Settings/SettingsLayout'
-import { useLayout } from '@/Layouts/Providers'
 import { Routes } from '@/lib'
 import { defaults } from 'lodash'
-import { usePage } from '@inertiajs/react'
+import useLayoutStore from '@/Layouts/AppLayout/store/LayoutStore'
+import { type UseFormProps } from 'use-inertia-form'
+
+interface IAppearanceFormData {
+	settings: {
+		primary_color: string
+	}
+}
 
 interface IAppearanceSettingsProps {
 	settings: {
@@ -15,28 +20,30 @@ interface IAppearanceSettingsProps {
 }
 
 const AppearanceSettings = ({ settings }: IAppearanceSettingsProps) => {
-	const theme = useMantineTheme()
-	const { setLayoutState } = useLayout()
-	const page = usePage<SharedInertiaProps>()
+	const { primaryColor, setPrimaryColor } = useLayoutStore()
+	const RevertColorRef = useRef<string>(primaryColor!)
 
 	const handleChange = (color: string) => {
-		setLayoutState({
-			primaryColor: color,
-		})
+		setPrimaryColor(color)
 	}
 
 	useEffect(() => {
 		return () => {
-			setLayoutState({
-				primaryColor: page.props.auth?.user?.active_company?.settings?.primary_color,
-			})
+			setPrimaryColor(RevertColorRef.current)
 		}
 	}, [])
 
-	const defaultFormData = {
-		settings: {
-			primary_color: theme.primaryColor,
-		},
+	const defaultFormData = useCallback(() => {
+		const merged = defaults({
+			settings: {
+				primary_color: primaryColor!,
+			},
+		}, { settings })
+		return merged
+	}, [])
+
+	const handleSubmit = ({ getData }: UseFormProps<IAppearanceFormData>) => {
+		RevertColorRef.current = getData('settings.primary_color')
 	}
 
 	return (
@@ -46,9 +53,11 @@ const AppearanceSettings = ({ settings }: IAppearanceSettingsProps) => {
 				<Heading order={ 2 }>Company Theme</Heading>
 				<Form
 					model="settings"
-					data={ { ...defaults(defaultFormData, settings) } }
+					data={ defaultFormData() }
 					method="put"
 					to={ Routes.settingsAppearance() }
+					onSubmit={ handleSubmit }
+					remember={ false }
 				>
 					<SwatchInput label="Company Color" name="primary_color" onChange={ handleChange } />
 					<Submit>Save Appearance Settings</Submit>

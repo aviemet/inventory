@@ -2,7 +2,7 @@ class Settings::AppearanceController < ApplicationController
   def index
     render inertia: "Settings/Appearance/Index", props: {
       settings: {
-        primary_color: @active_company.settings&.[](:primary_color)
+        primary_color: @active_company.settings&.[]("primary_color")
       }
     }
   end
