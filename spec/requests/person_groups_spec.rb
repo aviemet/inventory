@@ -1,10 +1,136 @@
 require 'rails_helper'
+require_relative '../support/devise'
 
-RSpec.describe "PersonGroups", type: :request do
-  describe "GET /person_groups" do
-    it "works! (now write some real specs)" do
-      get person_groups_index_path
-      expect(response).to have_http_status(200)
+RSpec.describe "/person_groups", type: :request do
+  def valid_attributes
+    {
+      person_group: attributes_for(:person_group, {
+        category_id: create(:category).id,
+        manufacturer_id: create(:manufacturer).id
+      })
+    }
+  end
+
+  def invalid_attributes
+    {
+      person_group: {
+        name: "",
+      }
+    }
+  end
+
+  describe "GET /" do
+    login_admin
+
+    context "index page" do
+      it "lists all person_groups" do
+        person_group = create(:person_group, { company: User.first.active_company })
+
+        get person_groups_url
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(CGI.escapeHTML(person_group.name))
+      end
+    end
+
+    context "index page with search params" do
+      it "returns a filtered list of person_groups" do
+        person_group1 = create(:person_group, { name: "Include", company: User.first.active_company })
+        person_group2 = create(:person_group, { name: "Exclue", company: User.first.active_company })
+
+        get person_groups_url, params: { search: person_group1.name }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(CGI.escapeHTML(person_group1.name))
+        expect(response.body).not_to include(CGI.escapeHTML(person_group2.name))
+      end
+    end
+
+    context "new page" do
+      it "displays form to create a new person_group" do
+        get new_person_group_url
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "edit page" do
+      it "displays form to edit a person_group" do
+        person_group = create(:person_group, company: User.first.active_company)
+
+        get edit_person_group_url(person_group)
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+  end
+
+  describe "POST /create" do
+    login_admin
+
+    context "with valid parameters" do
+      it "creates a new Group and redirects to show page" do
+        expect{
+          post person_groups_url, params: valid_attributes
+        }.to change(Group, :count).by(1)
+        expect(response).to redirect_to(person_group_url(Group.last))
+      end
+    end
+
+    context "with invalid parameters" do
+      it "does not create a new Group" do
+        expect {
+          post person_groups_url, params: invalid_attributes
+        }.to change(Group, :count).by(0)
+      end
+
+      it "redirects back to the new person_group page" do
+        post person_groups_url, params: invalid_attributes
+        expect(response).to redirect_to new_person_group_url
+      end
+    end
+  end
+
+  describe "PATCH /update" do
+    login_admin
+
+    context "with valid parameters" do
+      it "updates the requested person_group and redirects to the show page" do
+        name_change = "Changed"
+        person_group = create(:person_group, company: User.first.active_company )
+        patch person_group_url(person_group.slug), params: { person_group: { name: name_change } }
+
+        person_group.reload
+
+        expect(person_group.name).to eq(name_change)
+        expect(response).to redirect_to(person_group_url(person_group))
+      end
+    end
+
+    context "with invalid parameters" do
+      it "redirects back to the edit person_group page" do
+        person_group = create(:person_group, company: User.first.active_company)
+        patch person_group_url(person_group), params: invalid_attributes
+        expect(response).to redirect_to edit_person_group_url(person_group)
+      end
+    end
+  end
+
+  describe "DELETE /destroy" do
+    login_admin
+
+    it "destroys the requested person_group" do
+      person_group = create(:person_group, company: User.first.active_company)
+      expect {
+        delete person_group_url({slug: person_group.slug})
+      }.to change(Group, :count).by(-1)
+    end
+
+    it "redirects to the person_groups list" do
+      person_group = create(:person_group, company: User.first.active_company)
+      delete person_group_url({slug: person_group.slug})
+      expect(response).to redirect_to(person_groups_url)
     end
   end
 end

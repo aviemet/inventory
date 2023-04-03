@@ -79,7 +79,7 @@ class ModelsController < ApplicationController
   # DELETE /models/1
   def destroy
     authorize model
-    @model.destroy
+    model.destroy
     respond_to do |format|
       format.html { redirect_to models_url, notice: 'Model was successfully destroyed.' }
       format.json { head :no_content }

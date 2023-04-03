@@ -711,7 +711,7 @@ declare namespace Schema {
 		ticket_assignments?: TicketAssignment[];
 		tickets?: Ticket[];
 		person_group_assignments?: PersonGroupAssignment[];
-		groups?: PersonGroup[];
+		person_groups?: PersonGroup[];
 	}
 
 	interface PersonAsCreate {
@@ -752,7 +752,7 @@ declare namespace Schema {
 		ticket_assignments?: TicketAssignment[];
 		tickets?: Ticket[];
 		person_group_assignments?: PersonGroupAssignment[];
-		groups?: PersonGroup[];
+		person_groups?: PersonGroup[];
 	}
 
 	interface PersonGroup {

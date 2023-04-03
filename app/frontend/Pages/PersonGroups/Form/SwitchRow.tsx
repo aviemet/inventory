@@ -8,7 +8,7 @@ import { usePermissionsForm, type FormData } from '.'
 
 interface ISwitchRowProps {
 	label: string
-	model: keyof FormData['user_group']['permissions']
+	model: keyof FormData['person_group']['permissions']
 	permissions: string[]
 }
 
@@ -19,12 +19,12 @@ const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
 	const columnProperties = useCallback(() => {
 		return permissions.reduce(({ length, selected }, permission) => {
 			length++
-			if(getData(`user_group.permissions.${model}.${permission}`)) {
+			if(getData(`person_group.permissions.${model}.${permission}`)) {
 				selected++
 			}
 			return { length, selected }
 		}, { length: 0, selected: 0 })
-	}, [data?.user_group?.permissions[model]])
+	}, [data?.person_group?.permissions[model]])
 
 	const { length, selected } = columnProperties()
 	const { allChecked, indeterminate } = useCheckboxState(length, selected)
@@ -33,7 +33,7 @@ const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
 		permissions.forEach(permission => {
 			setData(`${model}.${permission}`, checked)
 		})
-	}, [data?.user_group?.permissions[model]])
+	}, [data?.person_group?.permissions[model]])
 
 	let checked = {}
 	if(isCompanyAdmin) {
@@ -45,7 +45,7 @@ const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
 			<Table.Row>
 				<Table.Cell>
 					<Checkbox
-						onChange={ e => setRow(`user_group.permissions.${model}`, e.target.checked) }
+						onChange={ e => setRow(`person_group.permissions.${model}`, e.target.checked) }
 						checked={ allChecked }
 						indeterminate={ indeterminate }
 						disabled={ isCompanyAdmin }

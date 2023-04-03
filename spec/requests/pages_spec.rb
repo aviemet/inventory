@@ -1,10 +1,16 @@
 require 'rails_helper'
+require_relative '../support/devise'
 
 RSpec.describe "Pages", type: :request do
-  describe "GET /pages" do
-    it "works! (now write some real specs)" do
-      get pages_index_path
-      expect(response).to have_http_status(200)
+  describe "GET /dashboard" do
+    login_admin
+
+    context "dashboard page" do
+      it "lists renders" do
+        get dashboard_url
+
+        expect(response).to have_http_status(:ok)
+      end
     end
   end
 end

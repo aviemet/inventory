@@ -5,8 +5,8 @@ RSpec.describe "/models", type: :request do
   def valid_attributes
     {
       model: attributes_for(:model, {
-        category: create(:category),
-        manufacturer: create(:manufacturer)
+        category_id: create(:category).id,
+        manufacturer_id: create(:manufacturer).id
       })
     }
   end
@@ -94,19 +94,19 @@ RSpec.describe "/models", type: :request do
 
   describe "PATCH /update" do
     login_admin
-# TODO: Not working
-    # context "with valid parameters" do
-    #   it "updates the requested model and redirects to the show page" do
-    #     name_change = "Changed"
-    #     model = create(:model, company: User.first.active_company )
-    #     patch model_url(model.slug), params: { model: { name: name_change } }
 
-    #     model.reload
+    context "with valid parameters" do
+      it "updates the requested model and redirects to the show page" do
+        name_change = "Changed"
+        model = create(:model, company: User.first.active_company )
+        patch model_url(model.slug), params: { model: { name: name_change } }
 
-    #     expect(model.name).to eq(name_change)
-    #     expect(response).to redirect_to(model_url(model))
-    #   end
-    # end
+        model.reload
+
+        expect(model.name).to eq(name_change)
+        expect(response).to redirect_to(model_url(model))
+      end
+    end
 
     context "with invalid parameters" do
       it "redirects back to the edit model page" do
@@ -117,21 +117,20 @@ RSpec.describe "/models", type: :request do
     end
   end
 
-# TODO: Not working
-  # describe "DELETE /destroy" do
-  #   login_admin
+  describe "DELETE /destroy" do
+    login_admin
 
-  #   it "destroys the requested model" do
-  #     model = create(:model, company: User.first.active_company)
-  #     expect {
-  #       delete model_url({slug: model.slug})
-  #     }.to change(Model, :count).by(-1)
-  #   end
+    it "destroys the requested model" do
+      model = create(:model, company: User.first.active_company)
+      expect {
+        delete model_url({slug: model.slug})
+      }.to change(Model, :count).by(-1)
+    end
 
-  #   it "redirects to the models list" do
-  #     model = create(:model, company: User.first.active_company)
-  #     delete model_url({slug: model.slug})
-  #     expect(response).to redirect_to(models_url)
-  #   end
-  # end
+    it "redirects to the models list" do
+      model = create(:model, company: User.first.active_company)
+      delete model_url({slug: model.slug})
+      expect(response).to redirect_to(models_url)
+    end
+  end
 end

@@ -18,13 +18,13 @@ const ColumnToggle = ({ permission }: IColumnToggleProps) => {
 		return tableRows.reduce(({ length, selected }, row) => {
 			if(row.permissions.includes(permission)) {
 				length++
-				if(getData(`user_group.permissions.${row.model}.${permission}`)) {
+				if(getData(`person_group.permissions.${row.model}.${permission}`)) {
 					selected++
 				}
 			}
 			return { length, selected }
 		}, { length: 0, selected: 0 })
-	}, [data?.user_group?.permissions])
+	}, [data?.person_group?.permissions])
 
 	const { length, selected } = columnProperties()
 	const { allChecked, indeterminate } = useCheckboxState(length, selected)
@@ -32,7 +32,7 @@ const ColumnToggle = ({ permission }: IColumnToggleProps) => {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		tableRows.forEach(row => {
 			if(row.permissions.includes(permission)) {
-				setData(`user_group.permissions.${row.model}.${permission}`, e.target.checked)
+				setData(`person_group.permissions.${row.model}.${permission}`, e.target.checked)
 			}
 		})
 	}
