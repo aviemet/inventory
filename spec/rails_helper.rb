@@ -127,6 +127,11 @@ RSpec.configure do |config|
   # FactoryBot
   config.include FactoryBot::Syntax::Methods
 
+  # Faker
+  config.before(:all) do
+    Faker::UniqueGenerator.clear
+  end
+
   # Bullet
   if Bullet.enable?
     config.before(:each) do

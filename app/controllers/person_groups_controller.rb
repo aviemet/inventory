@@ -7,14 +7,9 @@ class PersonGroupsController < ApplicationController
   # GET /person_group
   def index
     authorize person_groups
-    paginated_person_groups = person_groups.page(params[:page] || 1)
 
     render inertia: "PersonGroups/Index", props: {
-      person_groups: -> { paginated_person_groups.render(view: :index) },
-      pagination: -> { {
-        count: person_groups.size,
-        **pagination_data(paginated_person_groups)
-      } }
+      person_groups: -> { person_groups.render(view: :index) },
     }
   end
 
@@ -61,7 +56,7 @@ class PersonGroupsController < ApplicationController
 
       redirect_to person_group, notice: 'Group was successfully created'
     else
-      redirect_to person_group_path, inertia: { errors: person_group.errors }
+      redirect_to new_person_group_path, inertia: { errors: person_group.errors }
     end
   end
 
@@ -73,7 +68,7 @@ class PersonGroupsController < ApplicationController
 
       redirect_to person_group, notice: 'Group was successfully updated'
     else
-      redirect_to person_group_path, inertia: { errors: person_group.errors }
+      redirect_to edit_person_group_path, inertia: { errors: person_group.errors }
     end
   end
 

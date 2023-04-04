@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :manufacturer do
-    name { Faker::Lorem.word }
+    name { Faker::Lorem.unique.word }
 
     company
   end

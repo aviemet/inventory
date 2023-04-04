@@ -8,7 +8,6 @@ class VendorsController < ApplicationController
   # GET /vendors
   def index
     authorize vendors
-    self.vendors = search(vendors, sortable_fields)
     paginated_vendors = vendors.page(params[:page] || 1)
 
     render inertia: "Vendors/Index", props: {

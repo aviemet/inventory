@@ -3,8 +3,8 @@ require_relative '../support/devise'
 
 RSpec.describe "Users", type: :request, inertia: true do
   let(:password) { '$trongPassw0rd!' }
-  let(:confirmed_user) { create(:user, password: password, confirmed: true) }
-  let(:unconfirmed_user) { create(:user, password: password, company: false, person: false) }
+  let(:confirmed_user) { create(:user, password: password) }
+  let(:unconfirmed_user) { create(:user, password: password, company: false, person: false, confirmed: false) }
 
   def confirmed_user_params
     { user: {

@@ -27,7 +27,7 @@ class PersonGroup < ApplicationRecord
   scope :includes_associated, -> { includes([:people]) }
 
   def set_permissions(permissions)
-    permissions.each do |model, actions|
+    permissions&.each do |model, actions|
       constant = if model == 'company'
                    model.singularize.camelize.constantize
                  else

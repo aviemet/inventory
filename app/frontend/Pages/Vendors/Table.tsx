@@ -11,11 +11,11 @@ const VendorsTable = (props: ITableProps) => {
 				<Table.Row>
 					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="url">Website</Table.Cell>
-					<Table.Cell sort="contracts.count">Contracts</Table.Cell>
-					<Table.Cell sort="items.count">Items</Table.Cell>
-					<Table.Cell sort="accessories.count">Accessories</Table.Cell>
-					<Table.Cell sort="consumables.count">Consumables</Table.Cell>
-					<Table.Cell sort="components.count">Components</Table.Cell>
+					<Table.Cell>Contracts</Table.Cell>
+					<Table.Cell>Items</Table.Cell>
+					<Table.Cell>Accessories</Table.Cell>
+					<Table.Cell>Consumables</Table.Cell>
+					<Table.Cell>Components</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>

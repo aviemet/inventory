@@ -11,4 +11,6 @@ class StatusLabel < ApplicationRecord
   has_many :accessories
   has_many :components
   has_many :licenses
+
+  validates_presence_of :name
 end

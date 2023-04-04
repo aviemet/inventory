@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :user do
     password { '$trongPassw0rd!' }
-    email { Faker::Internet.email }
+    email { Faker::Internet.unique.email }
 
     transient do
-      confirmed { false }
+      confirmed { true }
       company { create(:company) }
     end
 

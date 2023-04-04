@@ -28,7 +28,7 @@ class Person < ApplicationRecord
   has_many :tickets, through: :ticket_assignments, inverse_of: :assignees
 
   has_many :person_group_assignments
-  has_many :person_groups, through: :person_group_assignments, source: :person_group
+  has_many :groups, through: :person_group_assignments, source: :person_group
 
   validates_presence_of :first_name
   validates_presence_of :last_name

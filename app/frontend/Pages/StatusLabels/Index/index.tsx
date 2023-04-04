@@ -14,11 +14,12 @@ const StatusLabelsIndex = ({ status_labels, pagination }: IStatusLabelsIndexProp
 		<IndexPageTemplate
 			title="Support StatusLabels"
 			model="status_labels"
+			search={ false }
 			rows={ status_labels }
 			pagination={ pagination }
 			deleteRoute={ Routes.statusLabels() }
 			menuOptions={ [
-				{ label: 'New StatusLabel', href: Routes.newStatusLabel(), icon: NewIcon },
+				{ label: 'New Status Label', href: Routes.newStatusLabel(), icon: NewIcon },
 			] }
 		>
 			<StatusLabelsTable />
