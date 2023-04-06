@@ -3,7 +3,7 @@ class LicensesController < ApplicationController
   include Searchable
 
   expose :licenses, -> { search(@active_company.licenses.includes_associated, sortable_fields) }
-  expose :license
+  expose :license, scope: ->{ @active_company.licenses }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /licenses
   def index
@@ -32,9 +32,9 @@ class LicensesController < ApplicationController
     authorize License
     render inertia: "Licenses/New", props: {
       license: License.new.render(view: :new),
-      categories: -> { @active_company.categories.find_by_type(:License).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
+      categories: -> { @active_company.categories.find_by_type(:License).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 
@@ -43,9 +43,9 @@ class LicensesController < ApplicationController
     authorize license
     render inertia: "Licenses/Edit", props: {
       license: license.render(view: :edit),
-      categories: -> { @active_company.categories.find_by_type(:License).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
+      categories: -> { @active_company.categories.find_by_type(:License).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 
@@ -59,8 +59,8 @@ class LicensesController < ApplicationController
     render inertia: "Licenses/Checkout", props: {
       license: license.render,
       assignment: assignment.render(view: :new),
-      people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
-      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
+      people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
+      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
     }
   end
 

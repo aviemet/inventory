@@ -3,7 +3,7 @@ class ComponentsController < ApplicationController
   include Searchable
 
   expose :components, -> { search(@active_company.components.includes_associated, sortable_fields) }
-  expose :component
+  expose :component, scope: ->{ @active_company.components }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /components
   def index
@@ -41,9 +41,9 @@ class ComponentsController < ApplicationController
     authorize Component
     render inertia: "Components/New", props: {
       component: Component.new.render(view: :new),
-      models: -> { @active_company.models.find_by_category(:Component).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
+      models: -> { @active_company.models.find_by_category(:Component).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
     }
   end
 
@@ -52,9 +52,9 @@ class ComponentsController < ApplicationController
     authorize component
     render inertia: "Components/Edit", props: {
       component: component.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Component).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
+      models: -> { @active_company.models.find_by_category(:Component).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
     }
   end
 
@@ -70,8 +70,8 @@ class ComponentsController < ApplicationController
     render inertia: "Components/Checkout", props: {
       component: component.render,
       assignment: assignment.render(view: :new),
-      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
-      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :options) },
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
     }
   end
 
@@ -87,7 +87,7 @@ class ComponentsController < ApplicationController
     render inertia: "Components/Checkin", props: {
       component: component.render,
       assignment: assignment.render,
-      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
       statuses: -> { StatusLabel.all.render }
     }
   end

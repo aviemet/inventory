@@ -13,7 +13,7 @@ class Ticket < ApplicationRecord
 
   tracked
   resourcify
-  
+
   enum :priority, %i(urgent high standard low)
 
   belongs_to :created_by, class_name: "Person", required: false

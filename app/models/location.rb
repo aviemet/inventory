@@ -12,7 +12,7 @@ class Location < ApplicationRecord
     }, using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   slug :name
@@ -25,7 +25,7 @@ class Location < ApplicationRecord
 
   validates_presence_of :name
 
-  scope :includes_associated, -> { includes([:parent, :department]) }
+  scope :includes_associated, -> { includes([:parent, :department, :activities]) }
 
   def default_location
     self

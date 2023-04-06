@@ -3,7 +3,7 @@ class ManufacturersController < ApplicationController
   include Searchable
 
   expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated, sortable_fields) }
-  expose :manufacturer, -> { @active_company.manufacturers.includes_associated.find_by_slug params[:slug] }
+  expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
 
   # GET /manufacturers
   def index
@@ -27,7 +27,7 @@ class ManufacturersController < ApplicationController
       items: InertiaRails.lazy(-> {
         paginated_items = manufacturer.items.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_items.render(view: :associations),
+          data: paginated_items.render,
           pagination: {
             count: manufacturer.items.size,
             **pagination_data(paginated_items)
@@ -37,7 +37,7 @@ class ManufacturersController < ApplicationController
       accessories: InertiaRails.lazy(-> {
         paginated_accessories = manufacturer.accessories.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_accessories.render(view: :associations),
+          data: paginated_accessories.render,
           pagination: {
             count: manufacturer.accessories.size,
             **pagination_data(paginated_accessories)
@@ -47,7 +47,7 @@ class ManufacturersController < ApplicationController
       consumables: InertiaRails.lazy(-> {
         paginated_consumables = manufacturer.consumables.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_consumables.render(view: :associations),
+          data: paginated_consumables.render,
           pagination: {
             count: manufacturer.consumables.size,
             **pagination_data(paginated_consumables)
@@ -57,7 +57,7 @@ class ManufacturersController < ApplicationController
       components: InertiaRails.lazy(-> {
         paginated_components = manufacturer.components.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_components.render(view: :associations),
+          data: paginated_components.render,
           pagination: {
             count: manufacturer.components.size,
             **pagination_data(paginated_components)

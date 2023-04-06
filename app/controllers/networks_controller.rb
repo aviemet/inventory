@@ -3,7 +3,7 @@ class NetworksController < ApplicationController
   include Searchable
 
   expose :networks, -> { search(@active_company.networks, sortable_fields) }
-  expose :network
+  expose :network, scope: ->{ @active_company.networks }, find: ->(id, scope){ scope.find(id) }
 
   # GET /networks
   def index

@@ -3,6 +3,6 @@ class Component < Asset
 
   tracked
   resourcify
-  
+
   scope :includes_associated, -> { includes([:manufacturer, :category, :vendor, :activities]) }
 end

@@ -20,7 +20,7 @@ RSpec.describe Company, type: :model do
 
     it { should have_many(:ownerships) }
     {
-      items: 'Item', 
+      items: 'Item',
       departments: 'Department',
       locations: 'Location',
       contracts: 'Contract',

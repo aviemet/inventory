@@ -21,7 +21,7 @@ RSpec.describe "/manufacturers", type: :request do
 
     context "index page" do
       it "lists all manufacturers" do
-        manufacturer = create(:manufacturer, { company: User.first.active_company })
+        manufacturer = create(:manufacturer, company: @admin.active_company )
 
         get manufacturers_url
 
@@ -32,8 +32,8 @@ RSpec.describe "/manufacturers", type: :request do
 
     context "index page with search params" do
       it "returns a filtered list of manufacturers" do
-        manufacturer1 = create(:manufacturer, { name: "Include", company: User.first.active_company })
-        manufacturer2 = create(:manufacturer, { name: "Exclue", company: User.first.active_company })
+        manufacturer1 = create(:manufacturer, { name: "Include", company: @admin.active_company })
+        manufacturer2 = create(:manufacturer, { name: "Exclue", company: @admin.active_company })
 
         get manufacturers_url, params: { search: manufacturer1.name }
 
@@ -53,7 +53,7 @@ RSpec.describe "/manufacturers", type: :request do
 
     context "edit page" do
       it "displays form to edit a manufacturer" do
-        manufacturer = create(:manufacturer, company: User.first.active_company)
+        manufacturer = create(:manufacturer, company: @admin.active_company)
 
         get edit_manufacturer_url(manufacturer)
 
@@ -95,7 +95,7 @@ RSpec.describe "/manufacturers", type: :request do
     context "with valid parameters" do
       it "updates the requested manufacturer and redirects to the show page" do
         name_change = "Changed"
-        manufacturer = create(:manufacturer, company: User.first.active_company )
+        manufacturer = create(:manufacturer, company: @admin.active_company )
         patch manufacturer_url(manufacturer.slug), params: { manufacturer: { name: name_change } }
 
         manufacturer.reload
@@ -107,7 +107,7 @@ RSpec.describe "/manufacturers", type: :request do
 
     context "with invalid parameters" do
       it "redirects back to the edit manufacturer page" do
-        manufacturer = create(:manufacturer, company: User.first.active_company)
+        manufacturer = create(:manufacturer, company: @admin.active_company)
         patch manufacturer_url(manufacturer), params: invalid_attributes
         expect(response).to redirect_to edit_manufacturer_url(manufacturer)
       end
@@ -118,14 +118,14 @@ RSpec.describe "/manufacturers", type: :request do
     login_admin
 
     it "destroys the requested manufacturer" do
-      manufacturer = create(:manufacturer, company: User.first.active_company)
+      manufacturer = create(:manufacturer, company: @admin.active_company)
       expect {
         delete manufacturer_url({slug: manufacturer.slug})
       }.to change(Manufacturer, :count).by(-1)
     end
 
     it "redirects to the manufacturers list" do
-      manufacturer = create(:manufacturer, company: User.first.active_company)
+      manufacturer = create(:manufacturer, company: @admin.active_company)
       delete manufacturer_url({slug: manufacturer.slug})
       expect(response).to redirect_to(manufacturers_url)
     end

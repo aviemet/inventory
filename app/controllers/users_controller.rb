@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     paginated_users = users.page(params[:page] || 1)
 
     render inertia: "Users/Index", props: {
-      users: users.render(view: :associations),
+      users: users.render(view: :index),
       pagination: -> { {
         count: users.count,
         **pagination_data(paginated_users)
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def show
     authorize user
     render inertia: "Users/Show", props: {
-      user: user.render(view: :associations)
+      user: user.render(view: :show)
     }
   end
 
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   def edit
     authorize user
     render inertia: "Users/Edit", props: {
-      user: user.render(view: :associations)
+      user: user.render(view: :edit)
     }
   end
 

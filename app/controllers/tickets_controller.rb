@@ -22,7 +22,7 @@ class TicketsController < ApplicationController
   def show
     authorize ticket
     render inertia: "Tickets/Show", props: {
-      ticket: ticket.render(view: :associations)
+      ticket: ticket.render(view: :show)
     }
   end
 
@@ -31,9 +31,9 @@ class TicketsController < ApplicationController
     authorize Ticket
     render inertia: "Tickets/New", props: {
       ticket: Ticket.new.render(view: :new),
-      people: @active_company.people.joins(:user).render(view: :as_options),
-      assets: @active_company.assets.render(view: :as_options),
-      locations: @active_company.locations.render(view: :as_options),
+      people: @active_company.people.joins(:user).render(view: :options),
+      assets: @active_company.assets.render(view: :options),
+      locations: @active_company.locations.render(view: :options),
     }
   end
 
@@ -42,9 +42,9 @@ class TicketsController < ApplicationController
     authorize ticket
     render inertia: "Tickets/Edit", props: {
       ticket: ticket.render(view: :edit),
-      people: @active_company.people.joins(:user).render(view: :as_options),
-      assets: @active_company.assets.render(view: :as_options),
-      locations: @active_company.locations.render(view: :as_options),
+      people: @active_company.people.joins(:user).render(view: :options),
+      assets: @active_company.assets.render(view: :options),
+      locations: @active_company.locations.render(view: :options),
     }
   end
 

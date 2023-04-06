@@ -5,7 +5,7 @@ class ComponentPolicy < ApplicationPolicy
   def checkout?
     standard_auth(:checkout)
   end
-  
+
   def checkin?
     standard_auth(:checkin)
   end

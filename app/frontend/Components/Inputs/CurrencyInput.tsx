@@ -22,7 +22,6 @@ const TextInputComponent = forwardRef<HTMLInputElement, ICurrencyInputProps>((
 				size={ size }
 				name={ name }
 				value={ value }
-				pattern="[0-9.,]"
 				icon='$'
 				{ ...props }
 			/>

@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
   include ContactableConcern
 
   expose :people, -> { search(@active_company.people.includes_associated, sortable_fields) }
-  expose :person
+  expose :person, scope: ->{ @active_company.people }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /people
   def index
@@ -12,7 +12,7 @@ class PeopleController < ApplicationController
     paginated_people = people.page(params[:page] || 1)
 
     render inertia: "People/Index", props: {
-      people: paginated_people.render(view: :associations),
+      people: paginated_people.render(view: :index),
       pagination: -> { {
         count: people.count,
         **pagination_data(paginated_people)
@@ -24,7 +24,7 @@ class PeopleController < ApplicationController
   def show
     authorize person
     render inertia: "People/Show", props: {
-      person: person.render(view: :associations)
+      person: person.render(view: :show)
     }
   end
 
@@ -32,10 +32,10 @@ class PeopleController < ApplicationController
   def new
     authorize Person
     render inertia: "People/New", props: {
-      person: Person::AsCreate.new.render(view: :new),
-      departments: InertiaRails.lazy(-> { @active_company.departments.render(view: :as_options) }),
-      locations: InertiaRails.lazy(-> { @active_company.locations.render(view: :as_options) }),
-      people: InertiaRails.lazy(-> { @active_company.people.render(view: :as_options) }),
+      person: People::NewSerializer.render(Person::AsCreate.new),
+      departments: InertiaRails.lazy(-> { @active_company.departments.render(view: :options) }),
+      locations: InertiaRails.lazy(-> { @active_company.locations.render(view: :options) }),
+      people: InertiaRails.lazy(-> { @active_company.people.render(view: :options) }),
     }
   end
 
@@ -44,9 +44,9 @@ class PeopleController < ApplicationController
     authorize person
     render inertia: "People/Edit", props: {
       person: person.render(view: :edit),
-      departments: -> { @active_company.departments.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
-      people: -> { @active_company.people.render(view: :as_options) },
+      departments: -> { @active_company.departments.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
+      people: -> { @active_company.people.render(view: :options) },
     }
   end
 
@@ -107,7 +107,7 @@ class PeopleController < ApplicationController
         phones_attributes: [:id, :number, :_destroy],
         addresses_attributes: [:id, :address, :_destroy],
         websites_attributes: [:id, :url, :_destroy],
-      ]
+      ],
     )
   end
 end

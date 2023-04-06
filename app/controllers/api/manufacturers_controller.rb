@@ -1,7 +1,8 @@
 class Api::ManufacturersController < ApplicationController
+  expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
+
   # POST /api/manufacturers
   def create
-    manufacturer = Manufacturer.new(manufacturer_params)
     manufacturer.company = @active_company
 
     if manufacturer.save
@@ -13,8 +14,6 @@ class Api::ManufacturersController < ApplicationController
 
   # PATCH/PUT /api/manufacturers/:id
   def update
-    manufacturer = @active_company.manufacturers.find_by_slug params[:slug]
-
     if manufacturer?.update(manufacturer_params)
       render json: ManufacturerBlueprint.render_as_json(manufacturer), status: 201
     else

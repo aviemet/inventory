@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :nic do
-    nic_type { ["ethernet","wifi"].sample }
+    nic_type { ["ethernet", "wifi"].sample }
     item
 
     trait :mac do

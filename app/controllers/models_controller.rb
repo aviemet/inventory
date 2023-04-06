@@ -2,9 +2,8 @@ class ModelsController < ApplicationController
   include OwnableConcern
   include Searchable
 
-  expose :models, -> { search(@active_company.models, sortable_fields) }
-  expose :model, -> { @active_company.models.includes_associated.find_by_slug(request.params[:slug]) }
-
+  expose :models, -> { search(@active_company.models.includes_associated, sortable_fields) }
+  expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, find_by: :slug
   # GET /models
   def index
     authorize models
@@ -19,7 +18,7 @@ class ModelsController < ApplicationController
     }
   end
 
-  # GET /models/1
+  # GET /models/:slug
   def show
     authorize model
     render inertia: "Models/Show", props: {
@@ -32,18 +31,18 @@ class ModelsController < ApplicationController
     authorize Model
     render inertia: "Models/New", props: {
       model: Model.new.render(view: :new),
-      categories: -> { @active_company.categories.find_by_type(:Model).render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
+      categories: -> { @active_company.categories.find_by_type(:Model).render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 
-  # GET /models/1/edit
+  # GET /models/:slug/edit
   def edit
     authorize model
     render inertia: "Models/Edit", props: {
       model: model.render(view: :edit),
-      categories: -> { @active_company.categories.find_by_type(:Model).render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
+      categories: -> { @active_company.categories.find_by_type(:Model).render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 
@@ -66,7 +65,7 @@ class ModelsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /models/1
+  # PATCH/PUT /models/:slug
   def update
     authorize model
     if model.update(model_params)
@@ -76,7 +75,7 @@ class ModelsController < ApplicationController
     end
   end
 
-  # DELETE /models/1
+  # DELETE /models/:slug
   def destroy
     authorize model
     model.destroy

@@ -5,7 +5,7 @@ class CreateLocations < ActiveRecord::Migration[6.0]
       t.string :slug, null: false, index: { unique: true }
       t.string :currency
       t.references :parent, null: true, foreign_key: { to_table: :locations }
-      
+
       t.timestamps
     end
   end

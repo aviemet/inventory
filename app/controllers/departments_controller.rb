@@ -3,7 +3,7 @@ class DepartmentsController < ApplicationController
   include ContactableConcern
 
   expose :departments, -> { search(@active_company.departments.includes_associated, sortable_fields) }
-  expose :department, -> { @active_company.departments.find_by_slug(params[:slug]) }
+  expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
 
   # GET /departments
   def index
@@ -27,7 +27,7 @@ class DepartmentsController < ApplicationController
       items: InertiaRails.lazy(-> {
         paginated_items = department.items.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_items.render(view: :associations),
+          data: paginated_items.render,
           pagination: {
             count: department.items.size,
             **pagination_data(paginated_items)
@@ -37,7 +37,7 @@ class DepartmentsController < ApplicationController
       accessories: InertiaRails.lazy(-> {
         paginated_accessories = department.accessories.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_accessories.render(view: :associations),
+          data: paginated_accessories.render,
           pagination: {
             count: department.accessories.size,
             **pagination_data(paginated_accessories)
@@ -47,7 +47,7 @@ class DepartmentsController < ApplicationController
       consumables: InertiaRails.lazy(-> {
         paginated_consumables = department.consumables.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_consumables.render(view: :associations),
+          data: paginated_consumables.render,
           pagination: {
             count: department.consumables.size,
             **pagination_data(paginated_consumables)
@@ -57,7 +57,7 @@ class DepartmentsController < ApplicationController
       components: InertiaRails.lazy(-> {
         paginated_components = department.components.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_components.render(view: :associations),
+          data: paginated_components.render,
           pagination: {
             count: department.components.size,
             **pagination_data(paginated_components)
@@ -67,7 +67,7 @@ class DepartmentsController < ApplicationController
       licenses: InertiaRails.lazy(-> {
         paginated_licenses = department.licenses.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_licenses.render(view: :associations),
+          data: paginated_licenses.render,
           pagination: {
             count: department.licenses.size,
             **pagination_data(paginated_licenses)
@@ -77,7 +77,7 @@ class DepartmentsController < ApplicationController
       people: InertiaRails.lazy(-> {
         paginated_people = department.people.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_people.render(view: :associations),
+          data: paginated_people.render,
           pagination: {
             count: department.people.size,
             **pagination_data(paginated_people)
@@ -92,7 +92,7 @@ class DepartmentsController < ApplicationController
     authorize Department
     render inertia: "Departments/New", props: {
       department: Department.new.render(view: :new),
-      locations: -> { @active_company.locations.render(view: :as_options) }
+      locations: -> { @active_company.locations.render(view: :options) }
     }
   end
 
@@ -101,7 +101,7 @@ class DepartmentsController < ApplicationController
     authorize department
     render inertia: "Departments/Edit", props: {
       department: department.render(view: :edit),
-      locations: -> { @active_company.locations.render(view: :as_options) }
+      locations: -> { @active_company.locations.render(view: :options) }
     }
   end
 

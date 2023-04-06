@@ -21,7 +21,7 @@ RSpec.describe "/locations", type: :request do
 
     context "index page" do
       it "lists all locations" do
-        location = create(:location, { company: User.first.active_company })
+        location = create(:location, company: @admin.active_company)
 
         get locations_url
 
@@ -32,8 +32,8 @@ RSpec.describe "/locations", type: :request do
 
     context "index page with search params" do
       it "returns a filtered list of locations" do
-        location1 = create(:location, { name: "Include", company: User.first.active_company })
-        location2 = create(:location, { name: "Exclue", company: User.first.active_company })
+        location1 = create(:location, { name: "Include", company: @admin.active_company })
+        location2 = create(:location, { name: "Exclue", company: @admin.active_company })
 
         get locations_url, params: { search: location1.name }
 
@@ -53,7 +53,7 @@ RSpec.describe "/locations", type: :request do
 
     context "edit page" do
       it "displays form to edit a location" do
-        location = create(:location, company: User.first.active_company)
+        location = create(:location, company: @admin.active_company)
 
         get edit_location_url(location)
 
@@ -95,7 +95,7 @@ RSpec.describe "/locations", type: :request do
     context "with valid parameters" do
       it "updates the requested location and redirects to the show page" do
         name_change = "Changed"
-        location = create(:location, company: User.first.active_company )
+        location = create(:location, company: @admin.active_company )
         patch location_url(location.slug), params: { location: { name: name_change } }
 
         location.reload
@@ -107,7 +107,7 @@ RSpec.describe "/locations", type: :request do
 
     context "with invalid parameters" do
       it "redirects back to the edit location page" do
-        location = create(:location, company: User.first.active_company)
+        location = create(:location, company: @admin.active_company)
         patch location_url(location), params: invalid_attributes
         expect(response).to redirect_to edit_location_url(location)
       end
@@ -118,14 +118,14 @@ RSpec.describe "/locations", type: :request do
     login_admin
 
     it "destroys the requested location" do
-      location = create(:location, company: User.first.active_company)
+      location = create(:location, company: @admin.active_company)
       expect {
         delete location_url({slug: location.slug})
       }.to change(Location, :count).by(-1)
     end
 
     it "redirects to the locations list" do
-      location = create(:location, company: User.first.active_company)
+      location = create(:location, company: @admin.active_company)
       delete location_url({slug: location.slug})
       expect(response).to redirect_to(locations_url)
     end

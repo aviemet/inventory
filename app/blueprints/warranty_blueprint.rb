@@ -1,2 +1,0 @@
-class WarrantyBlueprint < ApplicationBlueprint
-end
