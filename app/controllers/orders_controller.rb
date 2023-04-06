@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     paginated_orders = orders.page(params[:page] || 1)
 
     render inertia: "Orders/Index", props: {
-      orders: paginated_orders.render(view: :associations),
+      orders: paginated_orders.render(view: :index),
       pagination: -> { {
         count: orders.count,
         **pagination_data(paginated_orders)
@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   # GET /orders/:id
   def show
     render inertia: "Orders/Show", props: {
-      order: -> { order.render(view: :associations) }
+      order: -> { order.render(view: :show) }
     }
   end
 

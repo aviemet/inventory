@@ -7,7 +7,7 @@ RSpec.describe "/licenses", type: :request do
       license: attributes_for(:license,
                               vendor_id: create(:vendor).id,
                               manufacturer_id: create(:manufacturer).id,
-                              category_id: create(:category).id),
+                              category_id: create(:category).id,),
     }
   end
 
@@ -25,7 +25,7 @@ RSpec.describe "/licenses", type: :request do
 
     context "index page" do
       it "lists all licenses" do
-        license = create(:license, { company: User.first.active_company })
+        license = create(:license, company: @admin.active_company)
 
         get licenses_url
 
@@ -36,8 +36,8 @@ RSpec.describe "/licenses", type: :request do
 
     context "index page with search params" do
       it "returns a filtered list of licenses" do
-        license1 = create(:license, { name: "Include", company: User.first.active_company })
-        license2 = create(:license, { name: "Exclue", company: User.first.active_company })
+        license1 = create(:license, { name: "Include", company: @admin.active_company })
+        license2 = create(:license, { name: "Exclue", company: @admin.active_company })
 
         get licenses_url, params: { search: license1.name }
 
@@ -57,7 +57,7 @@ RSpec.describe "/licenses", type: :request do
 
     context "edit page" do
       it "displays form to edit a license" do
-        license = create(:license, { company: User.first.active_company })
+        license = create(:license, { company: @admin.active_company })
 
         get edit_license_url(license)
 
@@ -98,7 +98,7 @@ RSpec.describe "/licenses", type: :request do
 
     context "with valid parameters" do
       it "updates the requested license and redirects to the show page" do
-        license = create(:license, { company: User.first.active_company })
+        license = create(:license, { company: @admin.active_company })
         patch license_url(license), params: { license: { name: "Changed" } }
 
         license.reload
@@ -110,7 +110,7 @@ RSpec.describe "/licenses", type: :request do
 
     context "with invalid parameters" do
       it "redirects back to the edit license page" do
-        license = create(:license)
+        license = create(:license, company: @admin.active_company)
         patch license_url(license), params: invalid_attributes
         expect(response).to redirect_to edit_license_url(license)
       end
@@ -121,14 +121,14 @@ RSpec.describe "/licenses", type: :request do
     login_admin
 
     it "destroys the requested license" do
-      license = create(:license)
+      license = create(:license, company: @admin.active_company)
       expect {
         delete license_url(license)
       }.to change(License, :count).by(-1)
     end
 
     it "redirects to the licenses list" do
-      license = create(:license)
+      license = create(:license, company: @admin.active_company)
       delete license_url(license)
       expect(response).to redirect_to(licenses_url)
     end

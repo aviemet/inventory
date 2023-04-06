@@ -11,10 +11,6 @@ class People::NewSerializer < ApplicationSerializer
      :manager_id,
    )
 
-  attribute :name do
-    "#{person.first_name} #{person.last_name}".strip
-  end
-
-  has_one :contact, serializer: ContactSerializer
-  belongs_to :user, serializer: UserSerializer
+  has_one :contact, serializer: Contacts::NewSerializer
+  belongs_to :user, serializer: Users::NewSerializer
 end

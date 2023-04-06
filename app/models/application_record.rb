@@ -24,22 +24,12 @@ class ApplicationRecord < ActiveRecord::Base
     }
   end
 
-  def self.blueprint
-    "#{self.name}Blueprint".constantize
-  end
-
-  def blueprint
-    "#{self.class.name}Blueprint".constantize
-  end
-
   def self.serializer(view = nil)
     serializer_with_view(self.name, view).constantize
-    # "#{self.name}Serializer".constantize
   end
 
   def serializer(view = nil)
     serializer_with_view(self.class.name, view).constantize
-    # "#{self.class.name}Serializer".constantize
   end
 
   def serializer_with_view(name, view)
@@ -53,8 +43,4 @@ class ApplicationRecord < ActiveRecord::Base
   def render(view: nil)
     self.serializer(view).render(self)
   end
-
-  # def render(**args)
-  #   self.blueprint.render_as_json(self, **args)
-  # end
 end

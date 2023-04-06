@@ -11,9 +11,9 @@ class Locations::ShowSerializer < ApplicationSerializer
      :updated_at,
    )
 
+  has_many :activities, serializer: ActivitySerializer
   belongs_to :parent, serializer: LocationSerializer
   belongs_to :contact, serializer: ContactSerializer
-  belongs_to :activities, serializer: ActivitySerializer
   belongs_to :department, serializer: DepartmentSerializer
   belongs_to :location, serializer: LocationSerializer
 end

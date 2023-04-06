@@ -1,5 +1,5 @@
 class Api::DepartmentsController < ApplicationController
-  expose :department, -> { @active_company.departments.find_by_slug(params[:slug]) || Department.new(department_params) }
+  expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
 
   # POST /api/departments
   def create

@@ -3,7 +3,7 @@ class VendorsController < ApplicationController
   include Searchable
 
   expose :vendors, -> { search(@active_company.vendors.includes_associated, sortable_fields) }
-  expose :vendor, scope: ->{ @active_company.vendors }, find: ->(id, scope){ scope.includes_associated.find_by_slug(id) }
+  expose :vendor, id: ->{ params[:slug] }, scope: ->{ @active_company.vendors.includes_associated }, find_by: :slug
 
   # GET /vendors
   def index
@@ -21,6 +21,8 @@ class VendorsController < ApplicationController
 
   # GET /vendors/:slug
   def show
+    # manual = @active_company.vendors.includes_associated.find_by_slug!(params[:slug])
+    ap({ vendor:, slug: params[:slug] })
     authorize vendor
     render inertia: "Vendors/Show", props: {
       vendor: vendor.render(view: :show),

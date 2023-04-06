@@ -11,17 +11,17 @@ class Api::SpotlightsController < ApplicationController
   expose :contracts, -> { @active_company.contracts }
 
   def index
-    render json: SpotlightBlueprint.render_as_json({
-      items:,
-      accessories:,
-      components:,
-      consumables:,
-      licenses:,
-      people:,
-      tickets:,
-      networks:,
-      vendors:,
-      contracts:,
-    })
+    render json: {
+      items: ItemSerializer.render(items),
+      accessories: AccessorySerializer.render(accessories),
+      components: ComponentSerializer.render(components),
+      consumables: ConsumableSerializer.render(consumables),
+      licenses: LicenseSerializer.render(licenses),
+      people: PersonSerializer.render(people),
+      tickets: TicketSerializer.render(tickets),
+      networks: NetworkSerializer.render(networks),
+      vendors: VendorSerializer.render(vendors),
+      contracts: ContractSerializer.render(contracts),
+    }
   end
 end

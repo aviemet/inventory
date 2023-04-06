@@ -1,8 +1,6 @@
-include Rails.application.routes.url_helpers
+# include Rails.application.routes.url_helpers
 
 class ActivitySerializer < ApplicationSerializer
-  identifier :id
-
   attributes(
     :trackable_type,
     :trackable_id,

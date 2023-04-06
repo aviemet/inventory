@@ -3,7 +3,7 @@ class DepartmentsController < ApplicationController
   include ContactableConcern
 
   expose :departments, -> { search(@active_company.departments.includes_associated, sortable_fields) }
-  expose :department, scope: ->{ @active_company.departments }, find: ->(id, scope){ scope.includes_associated.find_by_slug(id) }
+  expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
 
   # GET /departments
   def index
@@ -27,63 +27,63 @@ class DepartmentsController < ApplicationController
       items: InertiaRails.lazy(-> {
         paginated_items = department.items.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_items.render(view: :associations),
+          data: paginated_items.render,
           pagination: {
             count: department.items.size,
             **pagination_data(paginated_items)
           }
         }
-      },),
+      }),
       accessories: InertiaRails.lazy(-> {
         paginated_accessories = department.accessories.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_accessories.render(view: :associations),
+          data: paginated_accessories.render,
           pagination: {
             count: department.accessories.size,
             **pagination_data(paginated_accessories)
           }
         }
-      },),
+      }),
       consumables: InertiaRails.lazy(-> {
         paginated_consumables = department.consumables.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_consumables.render(view: :associations),
+          data: paginated_consumables.render,
           pagination: {
             count: department.consumables.size,
             **pagination_data(paginated_consumables)
           }
         }
-      },),
+      }),
       components: InertiaRails.lazy(-> {
         paginated_components = department.components.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_components.render(view: :associations),
+          data: paginated_components.render,
           pagination: {
             count: department.components.size,
             **pagination_data(paginated_components)
           }
         }
-      },),
+      }),
       licenses: InertiaRails.lazy(-> {
         paginated_licenses = department.licenses.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_licenses.render(view: :associations),
+          data: paginated_licenses.render,
           pagination: {
             count: department.licenses.size,
             **pagination_data(paginated_licenses)
           }
         }
-      },),
+      }),
       people: InertiaRails.lazy(-> {
         paginated_people = department.people.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_people.render(view: :associations),
+          data: paginated_people.render,
           pagination: {
             count: department.people.size,
             **pagination_data(paginated_people)
           }
         }
-      },),
+      }),
     }
   end
 

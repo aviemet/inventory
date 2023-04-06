@@ -22,7 +22,7 @@ class TicketsController < ApplicationController
   def show
     authorize ticket
     render inertia: "Tickets/Show", props: {
-      ticket: ticket.render(view: :associations)
+      ticket: ticket.render(view: :show)
     }
   end
 

@@ -2,7 +2,7 @@ class PersonGroupsController < ApplicationController
   include OwnableConcern
 
   expose :person_groups, -> { @active_company.person_groups.includes_associated }
-  expose :person_group, scope: ->{ @active_company.person_groups }, find: ->(id, scope){ scope.includes_associated.find_by_slug(id) }
+  expose :person_group, id: ->{ params[:slug] }, scope: ->{ @active_company.person_groups.includes_associated }, find_by: :slug
 
   # GET /person_group
   def index
@@ -13,7 +13,7 @@ class PersonGroupsController < ApplicationController
     }
   end
 
-  # GET /person_group/:id
+  # GET /person_group/:slug
   def show
     authorize person_group
     render inertia: "PersonGroups/Show", props: {
@@ -21,13 +21,13 @@ class PersonGroupsController < ApplicationController
       people: InertiaRails.lazy(-> {
         paginated_people = person_group.people.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_people.render(view: :associations),
+          data: paginated_people.render,
           pagination: {
             count: person_group.people.size,
             **pagination_data(paginated_people)
           }
         }
-      },),
+      }),
     }
   end
 
@@ -37,7 +37,7 @@ class PersonGroupsController < ApplicationController
     render inertia: "PersonGroups/New"
   end
 
-  # GET /person_group/:id/edit
+  # GET /person_group/:slug/edit
   def edit
     render inertia: "PersonGroups/Edit", props: {
       person_group: person_group.render(view: :edit),
@@ -60,7 +60,7 @@ class PersonGroupsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /person_group/:id
+  # PATCH/PUT /person_group/:slug
   def update
     authorize person_group
     if person_group.update(person_group_params.except(:permissions))
@@ -72,7 +72,7 @@ class PersonGroupsController < ApplicationController
     end
   end
 
-  # DELETE /person_group/:id
+  # DELETE /person_group/:slug
   def destroy
     authorize person_group
     person_group.destroy
@@ -100,7 +100,7 @@ class PersonGroupsController < ApplicationController
         location:     [:index, :show, :create, :update, :delete],
         person:       [:index, :show, :create, :update, :delete],
         user:         [:index, :show, :create, :update, :delete],
-      ]
+      ],
     )
   end
 end
