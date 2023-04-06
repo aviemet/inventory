@@ -5,6 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import FullReload from 'vite-plugin-full-reload'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+// @ts-ignore
 import allowList from './vite-local-allow.json'
 
 const config = defineConfig({
