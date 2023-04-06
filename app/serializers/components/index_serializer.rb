@@ -19,10 +19,9 @@ class Components::IndexSerializer < Assignable::QuantitySerializer
     currency_for(component)
   end
 
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
-
+  belongs_to :department, serializer: DepartmentSerializer
+  belongs_to :model, serializer: ModelSerializer
+  belongs_to :vendor, serializer: VendorSerializer
+  belongs_to :category, serializer: CategorySerializer
+  belongs_to :manufacturer, serializer: ManufacturerSerializer
 end

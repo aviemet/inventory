@@ -1,17 +1,7 @@
-class Accessories::NewSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Users::NewSerializer < ApplicationSerializer
+  object_as :user
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id
-
+  attributes :email,
+             :active_company_id,
+             :active
 end

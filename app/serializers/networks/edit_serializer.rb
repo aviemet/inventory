@@ -1,19 +1,20 @@
-class Accessories::EditSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Networks::EditSerializer < ApplicationSerializer
+  object_as :network
 
   attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id
+             :address,
+             :vlan_id,
+             :notes
 
-  attribute :cost do
-    currency_for(component)
+  attribute :gateway do
+    network.gateway.to_s
+  end
+
+  attribute :dhcp_start do
+    network&.dhcp_start&.to_s
+  end
+
+  attribute :dhcp_end do
+    network&.dhcp_end&.to_s
   end
 end

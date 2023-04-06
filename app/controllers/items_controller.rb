@@ -11,7 +11,8 @@ class ItemsController < ApplicationController
     paginated_items = items.page(params[:page] || 1)
 
     render inertia: "Items/Index", props: {
-      items: -> { paginated_items.render(view: :index) },
+      # items: -> { paginated_items.render(view: :index) },
+      items: -> { Items::IndexSerializer.many(paginated_items) },
       pagination: -> { {
         count: items.count,
         **pagination_data(paginated_items)

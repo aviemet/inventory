@@ -1,19 +1,16 @@
-class Accessories::EditSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class PersonGroups::EditSerializer < ApplicationSerializer
+  object_as :person_group
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id
+  identifier :slug
 
-  attribute :cost do
-    currency_for(component)
+  attributes :id,
+             :name,
+             :description
+
+  attribute :permissions do
+    person_group.roles.each_with_object({}) do |role, h|
+      h[role.resource_type.downcase] ||= {}
+      h[role.resource_type.downcase][role.name] = true
+    end
   end
 end

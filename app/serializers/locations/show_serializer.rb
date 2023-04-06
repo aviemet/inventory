@@ -1,31 +1,17 @@
-class Accessories::ShowSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Locations::ShowSerializer < ApplicationSerializer
+  object_as :location
+
+  identifier :slug
 
   attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
+             :parent_id,
+             :currency,
              :created_at,
              :updated_at
 
-  attribute :cost do
-    currency_for(component)
-  end
-
-  association :assignments, serializer: AssignmentSerializer
-  association :purchase, serializer: PurchaseSerializer
-  association :activities, serializer: ActivitySerializer
-  association :default_location, serializer: LocationSerializer
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  belongs_to :parent, serializer: LocationSerializer
+  belongs_to :contact, serializer: ContactSerializer
+  belongs_to :activities, serializer: ActivitySerializer
+  belongs_to :department, serializer: DepartmentSerializer
+  belongs_to :location, serializer: LocationSerializer
 end

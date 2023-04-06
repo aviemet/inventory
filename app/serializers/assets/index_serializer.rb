@@ -25,12 +25,12 @@ class Assets::IndexSerializer < ApplicationSerializer
     asset.available_to_checkout?
   end
 
-  association :department, serializer: DepartmentSerializer
-  association :assignments, serializer: AssignmentSerializer, view: :associations
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
-  association :location, serializer: LocationSerializer
-  association :status_label, serializer: StatusLabelSerializer
+  belongs_to :department, serializer: DepartmentSerializer
+  has_many :assignments, serializer: AssignmentSerializer, view: :associations
+  belongs_to :model, serializer: ModelSerializer
+  belongs_to :vendor, serializer: VendorSerializer
+  belongs_to :category, serializer: CategorySerializer
+  belongs_to :manufacturer, serializer: ManufacturerSerializer
+  belongs_to :location, serializer: LocationSerializer
+  belongs_to :status_label, serializer: StatusLabelSerializer
 end

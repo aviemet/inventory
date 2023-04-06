@@ -1,27 +1,26 @@
-class Accessories::IndexSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Networks::IndexSerializer < ApplicationSerializer
+  object_as :network
 
   attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
+             :address,
+             :vlan_id,
              :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
              :created_at,
              :updated_at
 
-  attribute :cost do
-    currency_for(component)
+  attribute :gateway do |network|
+    network.gateway.to_s
   end
 
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  attribute :broadcast do |network|
+    network&.address&.broadcast&.to_s
+  end
+
+  attribute :dhcp_start do |network|
+    network&.dhcp_start&.to_s
+  end
+
+  attribute :dhcp_end do |network|
+    network&.dhcp_end&.to_s
+  end
 end

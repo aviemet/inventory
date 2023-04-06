@@ -11,8 +11,8 @@ class Contracts::ShowSerializer < ApplicationSerializer
              :created_at,
              :updated_at
 
-  association :department, serializer: DepartmentSerializer
-  association :activities, serializer: ActivitySerializer
-  association :category, serializer: CategorySerializer
-  association :vendor, serializer: VendorSerializer
+  belongs_to :department, serializer: DepartmentSerializer
+  belongs_to :activities, serializer: ActivitySerializer
+  belongs_to :category, serializer: CategorySerializer
+  belongs_to :vendor, serializer: VendorSerializer
 end

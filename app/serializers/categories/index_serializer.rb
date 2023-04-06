@@ -8,5 +8,4 @@ class Categories::IndexSerializer < ApplicationSerializer
              :description,
              :created_at,
              :updated_at
-
 end

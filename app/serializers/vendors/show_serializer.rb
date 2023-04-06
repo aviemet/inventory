@@ -1,31 +1,43 @@
-class Accessories::ShowSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class VendorSerializer < ApplicationSerializer
+  object_as :vendor
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
+  identifier :slug
+
+  attributes :id,
+             :name,
+             :url,
              :created_at,
              :updated_at
 
-  attribute :cost do
-    currency_for(component)
+  attribute :items_count do
+    vendor.items.size
   end
 
-  association :assignments, serializer: AssignmentSerializer
-  association :purchase, serializer: PurchaseSerializer
-  association :activities, serializer: ActivitySerializer
-  association :default_location, serializer: LocationSerializer
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  attribute :accessories_count do
+    vendor.accessories.size
+  end
+
+  attribute :consumables_count do
+    vendor.consumables.size
+  end
+
+  attribute :components_count do
+    vendor.components.size
+  end
+
+  attribute :licenses_count do
+    vendor.licenses.size
+  end
+
+  attribute :contracts_count do
+    vendor.contracts.size
+  end
+
+  has_one :contact, serializer: ContactSerializer
+  has_many :activities, serializer: ActivitySerializer
+  has_many :contracts, serializer: ContractSerializer
+  has_many :items, serializer: ItemSerializer
+  has_many :accessories, serializer: AccessorySerializer
+  has_many :consumables, serializer: ConsumableSerializer
+  has_many :components, serializer: ComponentSerializer
 end

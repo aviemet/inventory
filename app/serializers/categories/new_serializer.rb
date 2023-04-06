@@ -4,5 +4,4 @@ class Categories::NewSerializer < ApplicationSerializer
   attributes :categorizable_type,
              :name,
              :description
-
 end

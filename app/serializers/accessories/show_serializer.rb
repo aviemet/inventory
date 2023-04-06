@@ -16,7 +16,7 @@ class Accessories::ShowSerializer < Assignable::QuantitySerializer
              :updated_at
 
   attribute :cost do
-    currency_for(component)
+    currency_for(accessory)
   end
 
   association :assignments, serializer: AssignmentSerializer

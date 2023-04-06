@@ -18,9 +18,8 @@ class Consumables::IndexSerializer < Assignable::QuantitySerializer
     currency_for(component)
   end
 
-  association :model, serializer:  ModelSerializer
-  association :vendor, serializer:  VendorSerializer
-  association :category, serializer:  CategorySerializer
-  association :manufacturer, serializer:  ManufacturerSerializer
-
+  belongs_to :model, serializer:  ModelSerializer
+  belongs_to :vendor, serializer:  VendorSerializer
+  belongs_to :category, serializer:  CategorySerializer
+  belongs_to :manufacturer, serializer:  ManufacturerSerializer
 end

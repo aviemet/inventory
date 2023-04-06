@@ -19,14 +19,14 @@ class Components::ShowSerializer < Assignable::QuantitySerializer
     currency_for(component)
   end
 
-  association :department, serializer: DepartmentSerializer
-  association :assignments, serializer: AssignmentSerializer, view: :associations
-  association :purchase, serializer: PurchaseSerializer
-  association :activities, serializer: ActivitySerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :default_location, serializer: LocationSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  has_many :assignments, serializer: AssignmentSerializer, view: :associations
+  has_one :purchase, serializer: PurchaseSerializer
+  has_many :activities, serializer: ActivitySerializer
+  belongs_to :default_location, serializer: LocationSerializer
 
+  belongs_to :department, serializer: DepartmentSerializer
+  belongs_to :model, serializer: ModelSerializer
+  belongs_to :vendor, serializer: VendorSerializer
+  belongs_to :category, serializer: CategorySerializer
+  belongs_to :manufacturer, serializer: ManufacturerSerializer
 end

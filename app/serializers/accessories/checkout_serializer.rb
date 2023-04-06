@@ -14,6 +14,6 @@ class Accessories::CheckoutSerializer < Assignable::QuantitySerializer
              :default_location_id
 
   attribute :cost do
-    currency_for(component)
+    currency_for(accessory)
   end
 end

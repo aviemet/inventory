@@ -1,4 +1,4 @@
-class Assignable::QuantitySerializer < AssetSerializer
+class Assignable::QuantitySerializer < ApplicationSerializer
   attribute :qty_available do
     asset.qty_available
   end

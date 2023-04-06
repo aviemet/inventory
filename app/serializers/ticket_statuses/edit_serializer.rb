@@ -1,19 +1,5 @@
-class Accessories::EditSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class TicketStatuses::EditSerializer < ApplicationSerializer
+  object_as :ticket_status
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id
-
-  attribute :cost do
-    currency_for(component)
-  end
+  attribute :name
 end

@@ -1,17 +1,11 @@
-class Accessories::NewSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Tickets::NewSerializer < ApplicationSerializer
+  object_as :ticket
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id
+  attributes :subject,
+             :description,
+             :primary_contact_id,
+             :asset_id
 
+  has_many :assignments, serializer: TicketAssignmentSerializer
+  belongs_to :status, serializer: TicketStatusSerializer, view: :new
 end

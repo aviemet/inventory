@@ -5,5 +5,4 @@ class Categories::EditSerializer < ApplicationSerializer
              :name,
              :slug,
              :description
-
 end

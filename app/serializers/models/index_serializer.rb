@@ -1,27 +1,19 @@
-class Accessories::IndexSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Models::IndexSerializer < ApplicationSerializer
+  object_as :model
 
   attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
+             :slug,
+             :model_number,
              :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
+             :category_id,
+             :manufacturer_id,
              :created_at,
              :updated_at
 
-  attribute :cost do
-    currency_for(component)
+  attribute :count do
+    model.types.size
   end
 
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  belongs_to :manufacturer, serializer: ManufacturerSerializer
+  belongs_to :category, serializer: CategorySerializer
 end

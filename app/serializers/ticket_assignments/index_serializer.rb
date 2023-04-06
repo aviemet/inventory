@@ -1,27 +1,11 @@
-class Accessories::IndexSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class TicketAssignments::IndexSerializer < ApplicationSerializer
+  object_as :ticket_assignment
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
+  attributes :person_id,
+             :ticket_id,
              :created_at,
              :updated_at
 
-  attribute :cost do
-    currency_for(component)
-  end
-
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  belongs_to :person, serializer: PersonSerializer
+  belongs_to :ticket, serializer: TicketSerializer
 end

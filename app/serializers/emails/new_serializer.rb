@@ -4,5 +4,4 @@ class Emails::NewSerializer < ApplicationSerializer
   attributes :email,
              :contact_id,
              :category_id
-
 end

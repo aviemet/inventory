@@ -1,27 +1,16 @@
-class Accessories::IndexSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class PersonGroups::IndexSerializer < ApplicationSerializer
+  object_as :person_group
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
-             :created_at,
-             :updated_at
+  identifier :slug
 
-  attribute :cost do
-    currency_for(component)
+  attributes :id,
+             :name,
+             :description
+
+  attribute :permissions do
+    person_group.roles.each_with_object({}) do |role, h|
+      h[role.resource_type.downcase] ||= {}
+      h[role.resource_type.downcase][role.name] = true
+    end
   end
-
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
 end

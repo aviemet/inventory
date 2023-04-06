@@ -1,5 +1,5 @@
-class ItemSerializer < Assignable::SingleSerializer
-  object_as :ip_lease
+class Items::ShowSerializer < Assignable::SingleSerializer
+  object_as :item
 
   attributes :name,
              :asset_tag,
@@ -15,29 +15,30 @@ class ItemSerializer < Assignable::SingleSerializer
              :updated_at
 
   attribute :cost do
-    currency_for(component)
+    currency_for(item)
   end
 
   attribute :assigned do
     item.assigned?
   end
 
-  association :department, serializer: DepartmentSerializer
-  association :assignments, serializer: AssignmentSerializer, view: :associations
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
-  association :default_location, serializer: LocationSerializer
-  association :location, serializer: LocationSerializer
-  association :status_label, serializer: StatusLabelSerializer
-  association :nics, serializer: NicSerializer
-  association :history, name: :activities, serializer: ActivitySerializer
+  has_one :department, serializer: DepartmentSerializer
+  belongs_to :model, serializer: ModelSerializer
+  belongs_to :vendor, serializer: VendorSerializer
+  has_one :category, serializer: CategorySerializer
+  belongs_to :manufacturer, serializer: ManufacturerSerializer
+  has_one :location, serializer: LocationSerializer
+  belongs_to :status_label, serializer: StatusLabelSerializer
 
-  association :items, serializer: ItemSerializer
-  association :accessories, serializer: AccessorySerializer
-  association :components, serializer: ComponentSerializer
-  association :consumables, serializer: ConsumableSerializer
-  association :licenses, serializer: LicenseSerializer
+  has_many :assignments, serializer: AssignmentSerializer
+  belongs_to :default_location, serializer: LocationSerializer
+  has_many :nics, serializer: NicSerializer
+  has_many :history, name: :activities, serializer: ActivitySerializer
+
+  has_many :items, serializer: ItemSerializer
+  has_many :accessories, serializer: AccessorySerializer
+  has_many :components, serializer: ComponentSerializer
+  has_many :consumables, serializer: ConsumableSerializer
+  has_many :licenses, serializer: LicenseSerializer
 
 end

@@ -1,17 +1,18 @@
-class Accessories::NewSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class People::NewSerializer < ApplicationSerializer
+  object_as :person
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id
+  attributes :first_name,
+             :middle_name,
+             :last_name,
+             :active,
+             :employee_number,
+             :job_title,
+             :manager_id
 
+  attribute :name do
+    "#{person.first_name} #{person.last_name}".strip
+  end
+
+  has_one :contact, serializer: ContactSerializer, view: :new
+  belongs_to :user, serializer: UserSerializer, view: :as_form_data
 end

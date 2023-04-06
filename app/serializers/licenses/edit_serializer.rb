@@ -1,19 +1,23 @@
-class Accessories::EditSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Licenses::EditSerializer < Assignable::QuantitySerializer
+  object_as :license
 
   attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
              :qty,
+             :key,
+             :licenser_name,
+             :licenser_email,
+             :reassignable,
              :cost_currency,
-             :requestable,
+             :purchased_at,
+             :expires_at,
+             :terminates_at,
+             :maintained,
              :notes,
-             :model_id,
+             :category_id,
              :vendor_id,
-             :default_location_id
+             :manufacturer_id
 
   attribute :cost do
-    currency_for(component)
+    currency_for(license)
   end
 end

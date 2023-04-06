@@ -15,6 +15,6 @@ class Consumables::CheckinSerializer < Assignable::QuantitySerializer
              :updated_at
 
   attribute :cost do
-    currency_for(component)
+    currency_for(consumable)
   end
 end

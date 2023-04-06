@@ -1,17 +1,9 @@
-class Accessories::NewSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Vendors::NewSerializer < ApplicationSerializer
+  object_as :vendor
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id
+  identifier :slug
 
+  attributes :id,
+             :name,
+             :url
 end

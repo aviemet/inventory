@@ -1,31 +1,28 @@
-class Accessories::ShowSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class People::ShowSerializer < ApplicationSerializer
+  object_as :person
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
+  attributes :first_name,
+             :middle_name,
+             :last_name,
+             :active,
+             :employee_number,
+             :job_title,
+             :manager_id,
+             :user_id,
              :created_at,
              :updated_at
 
-  attribute :cost do
-    currency_for(component)
+  attribute :name do
+    "#{person.first_name} #{person.last_name}".strip
   end
 
-  association :assignments, serializer: AssignmentSerializer
-  association :purchase, serializer: PurchaseSerializer
-  association :activities, serializer: ActivitySerializer
-  association :default_location, serializer: LocationSerializer
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  has_one :contact, serializer: ContactSerializer
+  has_many :possessions, serializer: AssignmentSerializer
+  has_many :items, serializer: ItemSerializer
+  has_many :accessories, serializer: AccessorySerializer
+  has_many :licenses, serializer: LicenseSerializer
+  has_many :activities, serializer: ActivitySerializer
+  belongs_to :manager, serializer: PersonSerializer
+  belongs_to :user, serializer: UserSerializer
+  belongs_to :department, serializer: DepartmentSerializer
 end

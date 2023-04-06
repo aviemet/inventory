@@ -1,27 +1,33 @@
-class Accessories::IndexSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Users::IndexSerializer < ApplicationSerializer
+  object_as :user
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
+  attributes :email,
+             :reset_password_sent_at,
+             :remember_created_at,
+             :sign_in_count,
+             :current_sign_in_at,
+             :last_sign_in_at,
+             :current_sign_in_ip,
+             :last_sign_in_ip,
+             :confirmed_at,
+             :confirmation_sent_at,
+             :unconfirmed_email,
+             :failed_attempts,
+             :locked_at,
              :created_at,
-             :updated_at
+             :updated_at,
+             :active_company_id,
+             :active,
+             :table_preferences,
+             :user_preferences
+         # :password,
+         # :reset_password_token,
+         # :confirmation_token,
+         # :unlock_token,
 
-  attribute :cost do
-    currency_for(component)
-  end
-
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  has_many :roles, serializer: RoleSerializer
+  has_many :activities, serializer: ActivitySerializer
+  has_many :people, serializer: PersonSerializer
+  belongs_to :active_company, serializer: CompanySerializer
+  has_many :companies, serializer: CompanySerializer
 end

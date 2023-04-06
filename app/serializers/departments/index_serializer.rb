@@ -10,12 +10,12 @@ class Departments::IndexSerializer < ApplicationSerializer
 
   # attribute :slug, name: :to_param
 
-  association :items, serializer: ItemSerializer
-  association :accessories, serializer: AccessorySerializer
-  association :components, serializer: ComponentSerializer
-  association :consumables, serializer: ConsumableSerializer
-  association :licenses, serializer: LicenseSerializer
-  association :people, serializer: PersonSerializer
+  has_many :items, serializer: ItemSerializer
+  has_many :accessories, serializer: AccessorySerializer
+  has_many :components, serializer: ComponentSerializer
+  has_many :consumables, serializer: ConsumableSerializer
+  has_many :licenses, serializer: LicenseSerializer
+  has_many :people, serializer: PersonSerializer
 
   attribute :counts do |department|
     {

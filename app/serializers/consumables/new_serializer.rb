@@ -13,6 +13,6 @@ class Consumables::NewSerializer < Assignable::QuantitySerializer
              :default_location_id
 
   attribute :cost do
-    currency_for(component)
+    currency_for(consumable)
   end
 end

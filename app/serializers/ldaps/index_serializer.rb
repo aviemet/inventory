@@ -1,27 +1,17 @@
-class Accessories::IndexSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Ldaps::IndexSerializer < ApplicationSerializer
+  object_as :ldap
 
   attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
+             :host,
+             :port,
+             :domain,
+             :username,
+             :password,
+             :tree_base,
+             :user_search,
+             :sync_interval,
              :created_at,
              :updated_at
 
-  attribute :cost do
-    currency_for(component)
-  end
-
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  belongs_to :company, serializer: CompanySerializer
 end

@@ -20,9 +20,9 @@ class Activities::DashboardSerializer < ApplicationSerializer
     nil
   end
 
-  association :owner, serializer: UserSerializer
+  belongs_to :owner, serializer: UserSerializer
 
-  association :person, serializer: PersonSerializer do |activity|
+  belongs_to :person, serializer: PersonSerializer do
     activity.owner&.person
   end
 

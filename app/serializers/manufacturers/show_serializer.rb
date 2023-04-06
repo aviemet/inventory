@@ -1,31 +1,28 @@
-class Accessories::ShowSerializer < Assignable::QuantitySerializer
-  object_as :accessory
+class Manufacturers::ShowSerializer < ApplicationSerializer
+  object_as :manufacturer
 
-  attributes :name,
-             :serial,
-             :asset_tag,
-             :min_qty,
-             :qty,
-             :cost_currency,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
+  identifier :slug
+
+  attributes :id,
+             :name,
              :created_at,
              :updated_at
 
-  attribute :cost do
-    currency_for(component)
+  attribute :items_count do
+    manufacturer.items.size
   end
 
-  association :assignments, serializer: AssignmentSerializer
-  association :purchase, serializer: PurchaseSerializer
-  association :activities, serializer: ActivitySerializer
-  association :default_location, serializer: LocationSerializer
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
+  attribute :accessories_count do
+    manufacturer.accessories.size
+  end
+
+  attribute :consumables_count do
+    manufacturer.consumables.size
+  end
+
+  attribute :components_count do
+    manufacturer.components.size
+  end
+
+  has_one :contact, serializer: ContactSerializer
 end

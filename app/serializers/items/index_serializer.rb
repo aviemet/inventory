@@ -1,5 +1,5 @@
 class Items::IndexSerializer < Assignable::SingleSerializer
-  object_as :ip_lease
+  object_as :item
 
   attributes :name,
              :asset_tag,
@@ -14,19 +14,21 @@ class Items::IndexSerializer < Assignable::SingleSerializer
              :created_at,
              :updated_at
 
-  attribute :cost do
-    currency_for(component)
+  type :number
+  def cost
+    currency_for(item)
   end
 
-  attribute :assigned do
+  type :boolean
+  def assigned
     item.assigned?
   end
 
-  association :department, serializer: DepartmentSerializer
-  association :model, serializer: ModelSerializer
-  association :vendor, serializer: VendorSerializer
-  association :category, serializer: CategorySerializer
-  association :manufacturer, serializer: ManufacturerSerializer
-  association :location, serializer: LocationSerializer
-  association :status_label, serializer: StatusLabelSerializer
+  belongs_to :department, serializer: DepartmentSerializer
+  belongs_to :model, serializer: ModelSerializer
+  belongs_to :vendor, serializer: VendorSerializer
+  has_one :category, serializer: CategorySerializer
+  belongs_to :manufacturer, serializer: ManufacturerSerializer
+  has_one :location, serializer: LocationSerializer
+  belongs_to :status_label, serializer: StatusLabelSerializer
 end

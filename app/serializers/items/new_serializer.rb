@@ -1,5 +1,5 @@
-class ItemSerializer < Assignable::SingleSerializer
-  object_as :ip_lease
+class Items::NewSerializer < Assignable::SingleSerializer
+  object_as :item
 
   attributes :name,
              :asset_tag,
@@ -13,7 +13,7 @@ class ItemSerializer < Assignable::SingleSerializer
              :default_location_id
 
   attribute :cost do
-    currency_for(component)
+    currency_for(item)
   end
 
 end

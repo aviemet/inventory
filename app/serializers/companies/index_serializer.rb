@@ -1,4 +1,4 @@
-class CompanySerializer < ApplicationSerializer
+class Companies::IndexSerializer < ApplicationSerializer
   object_as :company
 
   attributes :name,
