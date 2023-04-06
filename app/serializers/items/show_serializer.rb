@@ -1,18 +1,20 @@
 class Items::ShowSerializer < Assignable::SingleSerializer
   object_as :item
 
-  attributes :name,
-             :asset_tag,
-             :serial,
-             :cost_currency,
-             :purchased_at,
-             :requestable,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
-             :created_at,
-             :updated_at
+  attributes(
+     :name,
+     :asset_tag,
+     :serial,
+     :cost_currency,
+     :purchased_at,
+     :requestable,
+     :notes,
+     :model_id,
+     :vendor_id,
+     :default_location_id,
+     :created_at,
+     :updated_at,
+   )
 
   attribute :cost do
     currency_for(item)
@@ -33,7 +35,7 @@ class Items::ShowSerializer < Assignable::SingleSerializer
   has_many :assignments, serializer: AssignmentSerializer
   belongs_to :default_location, serializer: LocationSerializer
   has_many :nics, serializer: NicSerializer
-  has_many :history, name: :activities, serializer: ActivitySerializer
+  has_many :activities, serializer: ActivitySerializer
 
   has_many :items, serializer: ItemSerializer
   has_many :accessories, serializer: AccessorySerializer

@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   include Searchable
 
   expose :companies, -> { search(current_user.companies, sortable_fields) }
-  expose :company, -> { current_user.companies.find_by_slug(params[:slug]) }
+  expose :company, scope: ->{ current_user.companies }, find: ->(id, scope){ scope.find_by_slug(id) }
 
   # GET /companies
   def index
@@ -25,7 +25,7 @@ class CompaniesController < ApplicationController
       render inertia: "Error", props: { status: 404 }
     else
       render inertia: "Companies/Show", props: {
-        company: -> { company.render(view: :associations) }
+        company: -> { company.render }
       }
     end
   end

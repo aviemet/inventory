@@ -15,7 +15,7 @@ class TicketBlueprint < ApplicationBlueprint
     association :status, blueprint: TicketStatusBlueprint
   end
 
-  view :as_options do
+  view :options do
     only :id, :subject
   end
 

@@ -37,7 +37,7 @@ class ModelBlueprint < ApplicationBlueprint
     association :components, blueprint: ComponentBlueprint
   end
 
-  view :as_options do
+  view :options do
     only :id, :name
   end
 end

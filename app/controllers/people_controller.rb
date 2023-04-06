@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
   include ContactableConcern
 
   expose :people, -> { search(@active_company.people.includes_associated, sortable_fields) }
-  expose :person
+  expose :person, scope: ->{ @active_company.people }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /people
   def index
@@ -33,9 +33,9 @@ class PeopleController < ApplicationController
     authorize Person
     render inertia: "People/New", props: {
       person: Person::AsCreate.new.render(view: :new),
-      departments: InertiaRails.lazy(-> { @active_company.departments.render(view: :as_options) }),
-      locations: InertiaRails.lazy(-> { @active_company.locations.render(view: :as_options) }),
-      people: InertiaRails.lazy(-> { @active_company.people.render(view: :as_options) }),
+      departments: InertiaRails.lazy(-> { @active_company.departments.render(view: :options) }),
+      locations: InertiaRails.lazy(-> { @active_company.locations.render(view: :options) }),
+      people: InertiaRails.lazy(-> { @active_company.people.render(view: :options) }),
     }
   end
 
@@ -44,9 +44,9 @@ class PeopleController < ApplicationController
     authorize person
     render inertia: "People/Edit", props: {
       person: person.render(view: :edit),
-      departments: -> { @active_company.departments.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
-      people: -> { @active_company.people.render(view: :as_options) },
+      departments: -> { @active_company.departments.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
+      people: -> { @active_company.people.render(view: :options) },
     }
   end
 

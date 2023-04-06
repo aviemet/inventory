@@ -3,9 +3,11 @@ class PersonGroups::IndexSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id,
-             :name,
-             :description
+  attributes(
+     :id,
+     :name,
+     :description,
+   )
 
   attribute :permissions do
     person_group.roles.each_with_object({}) do |role, h|

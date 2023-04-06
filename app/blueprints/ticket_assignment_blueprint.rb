@@ -9,7 +9,7 @@ class TicketAssignmentBlueprint < ApplicationBlueprint
     association :ticket, blueprint: TicketBlueprint
   end
 
-  view :as_options do
+  view :options do
     only :id, :person_id
   end
 

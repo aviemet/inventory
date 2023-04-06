@@ -4,7 +4,7 @@ class Api::ModelsController < ApplicationController
   # POST api/models
   def create
     model.company = @active_company
-    
+
     if model.save
       render json: ModelBlueprint.render_as_json(model), status: 201
     else

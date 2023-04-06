@@ -3,7 +3,7 @@ class ConsumablesController < ApplicationController
   include Searchable
 
   expose :consumables, -> { search(@active_company.consumables.includes_associated, sortable_fields) }
-  expose :consumable
+  expose :consumable, scope: ->{ @active_company.consumables }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /consumables
   def index
@@ -35,8 +35,8 @@ class ConsumablesController < ApplicationController
       models: -> { @active_company.models.find_by_category(:Consumable).render },
       vendors: -> { @active_company.vendors.render },
       locations: -> { @active_company.locations.render },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:consumable).render(view: :as_options) }
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
+      categories: -> { @active_company.categories.find_by_type(:consumable).render(view: :options) }
     }
   end
 
@@ -63,9 +63,9 @@ class ConsumablesController < ApplicationController
     render inertia: "Consumables/Checkout", props: {
       consumable: consumable.render,
       assignment: assignment.render(view: :new),
-      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
-      people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
-      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
+      people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
     }
   end
 
@@ -80,7 +80,7 @@ class ConsumablesController < ApplicationController
     render inertia: "Consumables/Checkin", props: {
       consumable: consumable.render,
       assignment: assignment.render,
-      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
       statuses: -> { StatusLabel.all.render }
     }
   end

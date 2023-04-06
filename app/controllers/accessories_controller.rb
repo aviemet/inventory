@@ -3,7 +3,7 @@ class AccessoriesController < ApplicationController
   include Searchable
 
   expose :accessories, -> { search(@active_company.accessories.includes_associated, sortable_fields) }
-  expose :accessory
+  expose :accessory, scope: ->{ @active_company.accessories }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /accessories
   def index
@@ -32,11 +32,11 @@ class AccessoriesController < ApplicationController
     authorize Accessory
     render inertia: "Accessories/New", props: {
       accessory: Accessory.new.render(view: :new),
-      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :as_options) }
+      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
+      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :options) }
     }
   end
 
@@ -45,11 +45,11 @@ class AccessoriesController < ApplicationController
     authorize accessory
     render inertia: "Accessories/Edit", props: {
       accessory: accessory.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :as_options) }
+      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
+      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :options) }
     }
   end
 
@@ -66,9 +66,9 @@ class AccessoriesController < ApplicationController
       render inertia: "Accessories/Checkout", props: {
         accessory: accessory.render(view: :edit),
         assignment: assignment.render(view: :new),
-        people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
-        items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
-        locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+        people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
+        items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
+        locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
       }
     end
   end

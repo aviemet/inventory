@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   include Searchable
 
   expose :categories, -> { search(@active_company.categories.all, sortable_fields) }
-  expose :category, -> { @active_company.categories.includes_associated.find_by_slug(params[:slug]) }
+  expose :category, scope: ->{ @active_company.categories }, find: ->(id, scope){ scope.find_by_slug(id) }
 
   # GET /categories
   def index

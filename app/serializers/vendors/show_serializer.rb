@@ -3,11 +3,13 @@ class Vendors::ShowSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id,
-             :name,
-             :url,
-             :created_at,
-             :updated_at
+  attributes(
+    :id,
+    :name,
+    :url,
+    :created_at,
+    :updated_at,
+  )
 
   attribute :items_count do
     vendor.items.size

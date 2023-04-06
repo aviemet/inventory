@@ -3,7 +3,9 @@ class Vendors::EditSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id,
-             :name,
-             :url
+  attributes(
+    :id,
+    :name,
+    :url,
+  )
 end

@@ -3,11 +3,13 @@ class Locations::IndexSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :name,
-             :parent_id,
-             :currency,
-             :created_at,
-             :updated_at
+  attributes(
+     :name,
+     :parent_id,
+     :currency,
+     :created_at,
+     :updated_at,
+   )
 
   attribute :counts do |loc|
     {

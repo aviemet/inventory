@@ -2,7 +2,7 @@ class PersonGroupsController < ApplicationController
   include OwnableConcern
 
   expose :person_groups, -> { @active_company.person_groups.includes_associated }
-  expose :person_group, -> { @active_company.person_groups.includes_associated.find_by_slug(request.params[:slug]) }
+  expose :person_group, scope: ->{ @active_company.person_groups }, find: ->(id, scope){ scope.includes_associated.find_by_slug(id) }
 
   # GET /person_group
   def index
@@ -27,7 +27,7 @@ class PersonGroupsController < ApplicationController
             **pagination_data(paginated_people)
           }
         }
-      }),
+      },),
     }
   end
 

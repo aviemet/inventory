@@ -2,7 +2,7 @@ class StatusLabelsController < ApplicationController
   include Searchable
 
   expose :status_labels, -> { search(StatusLabel.all, sortable_fields) }
-  expose :status_label, -> { StatusLabel.find_by_slug(params[:slug]) }
+  expose :status_label, find: ->(id, scope){ scope.find_by_slug(id) }
 
   # GET /status_labels
   def index

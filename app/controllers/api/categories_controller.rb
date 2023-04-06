@@ -6,7 +6,7 @@ class Api::CategoriesController < ApplicationController
     category.company = @active_company
 
     if category.save
-      render json: category.render(view: :as_options), status: 201
+      render json: category.render(view: :options), status: 201
     else
       render json: { errors: category.errors }, status: 303
     end

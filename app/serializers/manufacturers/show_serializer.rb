@@ -3,10 +3,12 @@ class Manufacturers::ShowSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id,
-             :name,
-             :created_at,
-             :updated_at
+  attributes(
+     :id,
+     :name,
+     :created_at,
+     :updated_at,
+   )
 
   attribute :items_count do
     manufacturer.items.size

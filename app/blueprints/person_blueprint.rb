@@ -26,7 +26,7 @@ class PersonBlueprint < ApplicationBlueprint
     association :user, blueprint: UserBlueprint
   end
 
-  view :as_options do
+  view :options do
     only :id, :name
 
     field :default_location_id do |person|

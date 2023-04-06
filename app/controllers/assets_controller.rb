@@ -3,7 +3,7 @@ class AssetsController < ApplicationController
   include Searchable
 
   expose :assets, -> { search(@active_company.assets.includes_associated, sortable_fields) }
-  expose :asset
+  expose :asset, scope: ->{ @active_company.assets }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /assets
   def index

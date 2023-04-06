@@ -1,14 +1,16 @@
 class Models::IndexSerializer < ApplicationSerializer
   object_as :model
 
-  attributes :name,
-             :slug,
-             :model_number,
-             :notes,
-             :category_id,
-             :manufacturer_id,
-             :created_at,
-             :updated_at
+  attributes(
+     :name,
+     :slug,
+     :model_number,
+     :notes,
+     :category_id,
+     :manufacturer_id,
+     :created_at,
+     :updated_at,
+   )
 
   attribute :count do
     model.types.size

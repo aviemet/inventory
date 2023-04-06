@@ -59,7 +59,7 @@ class AssetBlueprint < ApplicationBlueprint
     only :name, :asset_tag
   end
 
-  view :as_options do
+  view :options do
     only :id, :name, :default_location_id
   end
 end

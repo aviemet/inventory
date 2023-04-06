@@ -8,7 +8,7 @@ class CategoryBlueprint < ApplicationBlueprint
 
   view :associations do; end
 
-  view :as_options do
+  view :options do
     fields :id, :name
   end
 

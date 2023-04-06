@@ -1,12 +1,14 @@
 class Departments::IndexSerializer < ApplicationSerializer
   object_as :department
 
-  attributes :name,
-             :slug,
-             :location_id,
-             :notes,
-             :created_at,
-             :updated_at
+  attributes(
+     :name,
+     :slug,
+     :location_id,
+     :notes,
+     :created_at,
+     :updated_at,
+   )
 
   # attribute :slug, name: :to_param
 

@@ -1,15 +1,17 @@
 class PurchaseSerializer < ApplicationSerializer
   object_as :purchase
 
-  attributes :purchasable_type,
-             :purchasable_id,
-             :order_id,
-             :cost,
-             :cost_currency,
-             :qty,
-             :notes,
-             :created_at,
-             :updated_at
+  attributes(
+    :purchasable_type,
+    :purchasable_id,
+    :order_id,
+    :cost,
+    :cost_currency,
+    :qty,
+    :notes,
+    :created_at,
+    :updated_at,
+  )
 
   has_one :company, serializer: CompanySerializer
   has_one :department, serializer: DepartmentSerializer

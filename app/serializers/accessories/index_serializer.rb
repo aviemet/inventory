@@ -1,21 +1,23 @@
 class Accessories::IndexSerializer < Assignable::QuantitySerializer
   object_as :accessory
 
-  attributes :name,
-             :asset_tag,
-             :serial,
-             :cost_currency,
-             :purchased_at,
-             :requestable,
-             :qty,
-             :min_qty,
-             :notes,
-             :model_id,
-             :vendor_id,
-             :default_location_id,
-             :type,
-             :created_at,
-             :updated_at
+  attributes(
+    :name,
+    :asset_tag,
+    :serial,
+    :cost_currency,
+    :purchased_at,
+    :requestable,
+    :qty,
+    :min_qty,
+    :notes,
+    :model_id,
+    :vendor_id,
+    :default_location_id,
+    :type,
+    :created_at,
+    :updated_at,
+  )
 
   attribute :cost do
     currency_for(accessory)

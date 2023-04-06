@@ -1,10 +1,12 @@
 class Models::NewSerializer < ApplicationSerializer
   object_as :model
 
-  attributes :name,
-             :slug,
-             :model_number,
-             :notes,
-             :category_id,
-             :manufacturer_id
+  attributes(
+     :name,
+     :slug,
+     :model_number,
+     :notes,
+     :category_id,
+     :manufacturer_id,
+   )
 end

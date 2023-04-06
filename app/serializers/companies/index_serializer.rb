@@ -1,11 +1,13 @@
 class Companies::IndexSerializer < ApplicationSerializer
   object_as :company
 
-  attributes :name,
-             :slug,
-             :settings,
-             :created_at,
-             :updated_at
+  attributes(
+    :name,
+    :slug,
+    :settings,
+    :created_at,
+    :updated_at,
+  )
 
   attribute :counts do
     {

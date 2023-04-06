@@ -193,7 +193,7 @@ Style/SpecialGlobalVars:
   StyleGuide: https://relaxed.ruby.style/#stylespecialglobalvars
 
 Style/TrailingCommaInArguments:
-  Enabled: false
+  EnforcedStyleForMultiline: consistent_comma
   StyleGuide: https://relaxed.ruby.style/#styletrailingcommainarguments
 
 Style/TrailingCommaInArrayLiteral:

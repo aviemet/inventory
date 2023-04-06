@@ -1,5 +1,8 @@
 class Categories::OptionsSerializer < ApplicationSerializer
   object_as :category
 
-  attributes :id, :name
+  attributes(
+    :id,
+    :name,
+  )
 end

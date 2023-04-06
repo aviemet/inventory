@@ -3,7 +3,7 @@ class DepartmentsController < ApplicationController
   include ContactableConcern
 
   expose :departments, -> { search(@active_company.departments.includes_associated, sortable_fields) }
-  expose :department, -> { @active_company.departments.find_by_slug(params[:slug]) }
+  expose :department, scope: ->{ @active_company.departments }, find: ->(id, scope){ scope.includes_associated.find_by_slug(id) }
 
   # GET /departments
   def index
@@ -33,7 +33,7 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      }),
+      },),
       accessories: InertiaRails.lazy(-> {
         paginated_accessories = department.accessories.includes_associated.page(params[:page] || 1)
         {
@@ -43,7 +43,7 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_accessories)
           }
         }
-      }),
+      },),
       consumables: InertiaRails.lazy(-> {
         paginated_consumables = department.consumables.includes_associated.page(params[:page] || 1)
         {
@@ -53,7 +53,7 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_consumables)
           }
         }
-      }),
+      },),
       components: InertiaRails.lazy(-> {
         paginated_components = department.components.includes_associated.page(params[:page] || 1)
         {
@@ -63,7 +63,7 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_components)
           }
         }
-      }),
+      },),
       licenses: InertiaRails.lazy(-> {
         paginated_licenses = department.licenses.includes_associated.page(params[:page] || 1)
         {
@@ -73,7 +73,7 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_licenses)
           }
         }
-      }),
+      },),
       people: InertiaRails.lazy(-> {
         paginated_people = department.people.includes_associated.page(params[:page] || 1)
         {
@@ -83,7 +83,7 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_people)
           }
         }
-      }),
+      },),
     }
   end
 
@@ -92,7 +92,7 @@ class DepartmentsController < ApplicationController
     authorize Department
     render inertia: "Departments/New", props: {
       department: Department.new.render(view: :new),
-      locations: -> { @active_company.locations.render(view: :as_options) }
+      locations: -> { @active_company.locations.render(view: :options) }
     }
   end
 
@@ -101,7 +101,7 @@ class DepartmentsController < ApplicationController
     authorize department
     render inertia: "Departments/Edit", props: {
       department: department.render(view: :edit),
-      locations: -> { @active_company.locations.render(view: :as_options) }
+      locations: -> { @active_company.locations.render(view: :options) }
     }
   end
 

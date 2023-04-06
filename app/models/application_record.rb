@@ -32,7 +32,29 @@ class ApplicationRecord < ActiveRecord::Base
     "#{self.class.name}Blueprint".constantize
   end
 
-  def render(**args)
-    self.blueprint.render_as_json(self, **args)
+  def self.serializer(view = nil)
+    serializer_with_view(self.name, view).constantize
+    # "#{self.name}Serializer".constantize
   end
+
+  def serializer(view = nil)
+    serializer_with_view(self.class.name, view).constantize
+    # "#{self.class.name}Serializer".constantize
+  end
+
+  def serializer_with_view(name, view)
+    if view
+      "#{name.pluralize.camelize}::#{view.to_s.camelize}Serializer"
+    else
+      "#{name}Serializer"
+    end
+  end
+
+  def render(view: nil)
+    self.serializer(view).render(self)
+  end
+
+  # def render(**args)
+  #   self.blueprint.render_as_json(self, **args)
+  # end
 end

@@ -3,7 +3,7 @@ class ManufacturersController < ApplicationController
   include Searchable
 
   expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated, sortable_fields) }
-  expose :manufacturer, -> { @active_company.manufacturers.includes_associated.find_by_slug params[:slug] }
+  expose :manufacturer, scope: ->{ @active_company.manufacturers }, find: ->(id, scope){ scope.includes_associated.find_by_slug(id) }
 
   # GET /manufacturers
   def index
@@ -33,7 +33,7 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      }),
+      },),
       accessories: InertiaRails.lazy(-> {
         paginated_accessories = manufacturer.accessories.includes_associated.page(params[:page] || 1)
         {
@@ -43,7 +43,7 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_accessories)
           }
         }
-      }),
+      },),
       consumables: InertiaRails.lazy(-> {
         paginated_consumables = manufacturer.consumables.includes_associated.page(params[:page] || 1)
         {
@@ -53,7 +53,7 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_consumables)
           }
         }
-      }),
+      },),
       components: InertiaRails.lazy(-> {
         paginated_components = manufacturer.components.includes_associated.page(params[:page] || 1)
         {
@@ -63,7 +63,7 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_components)
           }
         }
-      }),
+      },),
     }
   end
 

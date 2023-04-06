@@ -3,11 +3,13 @@ class PersonGroups::ShowSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id,
-             :name,
-             :description,
-             :created_at,
-             :updated_at
+  attributes(
+     :id,
+     :name,
+     :description,
+     :created_at,
+     :updated_at,
+   )
 
   has_many :people, serializer: PersonSerializer
 end

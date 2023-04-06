@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   include Searchable
 
   expose :items, -> { search(@active_company.items.includes_associated, sortable_fields) }
-  expose :item
+  expose :item, scope: ->{ @active_company.items }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /item
   def index
@@ -40,11 +40,11 @@ class ItemsController < ApplicationController
     authorize Item
     render inertia: "Items/New", props: {
       item: Item.new.render(view: :new),
-      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:item).render(view: :as_options) }
+      models: -> { @active_company.models.find_by_category(:Item).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
+      categories: -> { @active_company.categories.find_by_type(:item).render(view: :options) }
     }
   end
 
@@ -53,11 +53,11 @@ class ItemsController < ApplicationController
     authorize item
     render inertia: "Items/Edit", props: {
       item: item.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Item).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:item).render(view: :as_options) }
+      models: -> { @active_company.models.find_by_category(:Item).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
+      categories: -> { @active_company.categories.find_by_type(:item).render(view: :options) }
     }
   end
 
@@ -82,9 +82,9 @@ class ItemsController < ApplicationController
       render inertia: "Items/Checkout", props: {
         item: item.render,
         assignment: assignment.render(view: :new),
-        people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
-        items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
-        locations: -> { @active_company.locations.render(view: :as_options) },
+        people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
+        items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
+        locations: -> { @active_company.locations.render(view: :options) },
       }
     end
   end
@@ -100,7 +100,7 @@ class ItemsController < ApplicationController
       render inertia: "Items/Checkin", props: {
         item: item.render,
         assignment: assignment.render,
-        locations: -> { @active_company.locations.render(view: :as_options) },
+        locations: -> { @active_company.locations.render(view: :options) },
         statuses: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
       }
     else
@@ -111,6 +111,7 @@ class ItemsController < ApplicationController
   # POST /item
   def create
     authorize Item
+    item = Item.new(item_params)
     item.company = @active_company
 
     if item.save

@@ -3,7 +3,9 @@ class Locations::EditSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :name,
-             :parent_id,
-             :currency
+  attributes(
+     :name,
+     :parent_id,
+     :currency,
+   )
 end

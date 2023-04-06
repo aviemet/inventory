@@ -1,10 +1,12 @@
 class Networks::NewSerializer < ApplicationSerializer
   object_as :network
 
-  attributes :name,
-             :address,
-             :vlan_id,
-             :notes
+  attributes(
+     :name,
+     :address,
+     :vlan_id,
+     :notes,
+   )
 
   attribute :gateway do |network|
     network.gateway.to_s

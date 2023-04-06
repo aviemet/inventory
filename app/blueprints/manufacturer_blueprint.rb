@@ -52,7 +52,7 @@ class ManufacturerBlueprint < ApplicationBlueprint
     association :contact, blueprint: ContactBlueprint
   end
 
-  view :as_options do
+  view :options do
     only :id, :name
   end
 end

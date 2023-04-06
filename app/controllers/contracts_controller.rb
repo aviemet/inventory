@@ -2,7 +2,7 @@ class ContractsController < ApplicationController
   include Searchable
 
   expose :contracts, -> { search(@active_company.contracts.includes_associated, sortable_fields) }
-  expose :contract
+  expose :contract, scope: ->{ @active_company.contracts }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /contracts
   def index
@@ -41,8 +41,8 @@ class ContractsController < ApplicationController
     authorize contract
     render inertia: "Contracts/Edit", props: {
       contract: contract.render(view: :edit),
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:Contract).render(view: :as_options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      categories: -> { @active_company.categories.find_by_type(:Contract).render(view: :options) },
     }
   end
 

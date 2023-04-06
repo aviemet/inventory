@@ -1,6 +1,6 @@
 class Api::ItemsController < ApplicationController
   def index
-    render json: @active_company.items.render(view: :as_options_with_ip)
+    render json: @active_company.items.render(view: :options_with_ip)
   end
 
   def update

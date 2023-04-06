@@ -11,7 +11,7 @@ class IpLeaseBlueprint < ApplicationBlueprint
     association :item, blueprint: ItemBlueprint, view: :shallow
   end
 
-  view :as_options do
+  view :options do
     only :id, :address
   end
 

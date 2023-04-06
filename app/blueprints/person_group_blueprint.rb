@@ -11,7 +11,7 @@ class PersonGroupBlueprint < ApplicationBlueprint
     association :people, blueprint: PersonBlueprint
   end
 
-  view :as_options do
+  view :options do
     only :id, :name
   end
 

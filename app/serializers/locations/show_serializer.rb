@@ -3,11 +3,13 @@ class Locations::ShowSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :name,
-             :parent_id,
-             :currency,
-             :created_at,
-             :updated_at
+  attributes(
+     :name,
+     :parent_id,
+     :currency,
+     :created_at,
+     :updated_at,
+   )
 
   belongs_to :parent, serializer: LocationSerializer
   belongs_to :contact, serializer: ContactSerializer

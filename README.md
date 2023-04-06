@@ -179,8 +179,8 @@ The Blueprinter gem is used to shape data passed to Inertia components. Use `ren
 These are functionally the same:
 
 ```ruby
-ItemBlueprint.render_as_json(Item.first, view: :as_options)
-Item.first.render(view: :as_options)
+ItemBlueprint.render_as_json(Item.first, view: :options)
+Item.first.render(view: :options)
 ```
 
 As are these:

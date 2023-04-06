@@ -3,11 +3,13 @@ class Vendors::IndexSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id,
-             :name,
-             :url,
-             :created_at,
-             :updated_at
+  attributes(
+    :id,
+    :name,
+    :url,
+    :created_at,
+    :updated_at,
+  )
 
   has_one :contact, serializer: ContactSerializer
   has_many :activities, serializer: ActivitySerializer

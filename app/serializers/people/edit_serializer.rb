@@ -1,18 +1,20 @@
 class People::EditSerializer < ApplicationSerializer
   object_as :person
 
-  attributes :first_name,
-             :middle_name,
-             :last_name,
-             :active,
-             :employee_number,
-             :job_title,
-             :manager_id
+  attributes(
+     :first_name,
+     :middle_name,
+     :last_name,
+     :active,
+     :employee_number,
+     :job_title,
+     :manager_id,
+   )
 
   attribute :department_id do
     person.department&.id
   end
 
   has_one :contact, serializer: ContactSerializer
-  belongs_to :user, serializer: UserSerializer, view: :as_form_data
+  belongs_to :user, serializer: UserSerializer
 end

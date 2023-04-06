@@ -3,10 +3,12 @@ class Manufacturers::IndexSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id,
-             :name,
-             :created_at,
-             :updated_at
+  attributes(
+     :id,
+     :name,
+     :created_at,
+     :updated_at,
+   )
 
   attribute :counts do
     {
