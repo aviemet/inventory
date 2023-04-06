@@ -1,1050 +1,150 @@
 declare namespace Schema {
-	interface Accessory {
-		id: number;
-		type: string;
-		name: string;
-		asset_tag?: string;
-		serial?: string;
-		cost?: number;
-		cost_currency: string;
-		purchased_at?: string;
-		requestable: boolean;
-		min_qty?: number;
-		qty?: number;
-		notes?: string;
-		model_id: number;
-		vendor_id?: number;
-		default_location_id?: number;
-		status_label_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		purchase?: Purchase;
-		fieldset_associations?: FieldsetAssociation[];
-		assignments?: Assignment[];
-		status_label?: StatusLabel;
-		vendor?: Vendor;
-		default_location?: Location;
-		model?: Model;
-		category?: Category;
-		manufacturer?: Manufacturer;
-		warranty?: Warranty;
-		roles?: Role[];
-	}
-
-	interface Address {
-		id: number;
-		address: string;
-		address_2?: string;
-		city?: string;
-		region?: string;
-		country?: string;
-		postal?: string;
-		notes?: string;
-		contact_id: number;
-		category_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		contact?: Contact;
-		category?: Category;
-	}
-
-	interface Asset {
-		id: number;
-		type: string;
-		name: string;
-		asset_tag?: string;
-		serial?: string;
-		cost?: number;
-		cost_currency: string;
-		purchased_at?: string;
-		requestable: boolean;
-		min_qty?: number;
-		qty?: number;
-		notes?: string;
-		model_id: number;
-		vendor_id?: number;
-		default_location_id?: number;
-		status_label_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		purchase?: Purchase;
-		fieldset_associations?: FieldsetAssociation[];
-		assignments?: Assignment[];
-		status_label?: StatusLabel;
-		roles?: Role[];
-		vendor?: Vendor;
-		default_location?: Location;
-		model?: Model;
-		category?: Category;
-		manufacturer?: Manufacturer;
-		warranty?: Warranty;
-	}
-
-	interface Assignment {
-		id: number;
-		assignable_type: TAssignable;
-		assignable_id: number;
-		assign_toable_type: TAssignToable;
-		assign_toable_id: number;
-		location_id: number;
-		qty?: number;
-		assigned_at?: string;
-		returned_at?: string;
-		expected_at?: string;
-		notes?: string;
-		status?: 'approved'|'requested'|'denied';
-		active: boolean;
-		created_by_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		created_by?: User;
-		location?: Location;
-	}
-
-	interface Category {
-		id: number;
-		categorizable_type: string;
-		name?: string;
-		slug: string;
-		description?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		fieldset_associations?: FieldsetAssociation[];
-		roles?: Role[];
-	}
-
-	interface Company {
-		id: number;
-		name: string;
-		slug: string;
-		created_at: string;
-		updated_at: string;
-		default_currency: string;
-		settings?: Record<string, any>;
-		tickets_smtp_id?: number;
-		app_smtp_id?: number;
-		activities?: PublicActivityActivity[];
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		roles?: Role[];
-		users?: User[];
-		ldap?: Ldap;
-		ownerships?: Ownership[];
-		assets?: Asset[];
-		models?: Model[];
-		departments?: Department[];
-		locations?: Location[];
-		licenses?: License[];
-		contracts?: Contract[];
-		networks?: Network[];
-		people?: Person[];
-		purchases?: Purchase[];
-		vendors?: Vendor[];
-		manufacturers?: Manufacturer[];
-		orders?: Order[];
-		categories?: Category[];
-		smtps?: Smtp[];
-		person_groups?: PersonGroup[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
-	}
-
-	interface CompanyAsSetup {
-		id: number;
-		name: string;
-		slug: string;
-		created_at: string;
-		updated_at: string;
-		default_currency: string;
-		settings?: Record<string, any>;
-		tickets_smtp_id?: number;
-		app_smtp_id?: number;
-		activities?: PublicActivityActivity[];
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		roles?: Role[];
-		users?: User[];
-		ldap?: Ldap;
-		ownerships?: Ownership[];
-		assets?: Asset[];
-		models?: Model[];
-		departments?: Department[];
-		locations?: Location[];
-		licenses?: License[];
-		contracts?: Contract[];
-		networks?: Network[];
-		people?: Person[];
-		purchases?: Purchase[];
-		vendors?: Vendor[];
-		manufacturers?: Manufacturer[];
-		orders?: Order[];
-		categories?: Category[];
-		smtps?: Smtp[];
-		person_groups?: PersonGroup[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
-	}
-
-	interface Component {
-		id: number;
-		type: string;
-		name: string;
-		asset_tag?: string;
-		serial?: string;
-		cost?: number;
-		cost_currency: string;
-		purchased_at?: string;
-		requestable: boolean;
-		min_qty?: number;
-		qty?: number;
-		notes?: string;
-		model_id: number;
-		vendor_id?: number;
-		default_location_id?: number;
-		status_label_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		purchase?: Purchase;
-		fieldset_associations?: FieldsetAssociation[];
-		assignments?: Assignment[];
-		status_label?: StatusLabel;
-		vendor?: Vendor;
-		default_location?: Location;
-		model?: Model;
-		category?: Category;
-		manufacturer?: Manufacturer;
-		warranty?: Warranty;
-		roles?: Role[];
-	}
-
-	interface Consumable {
-		id: number;
-		type: string;
-		name: string;
-		asset_tag?: string;
-		serial?: string;
-		cost?: number;
-		cost_currency: string;
-		purchased_at?: string;
-		requestable: boolean;
-		min_qty?: number;
-		qty?: number;
-		notes?: string;
-		model_id: number;
-		vendor_id?: number;
-		default_location_id?: number;
-		status_label_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		purchase?: Purchase;
-		fieldset_associations?: FieldsetAssociation[];
-		assignments?: Assignment[];
-		status_label?: StatusLabel;
-		vendor?: Vendor;
-		default_location?: Location;
-		model?: Model;
-		category?: Category;
-		manufacturer?: Manufacturer;
-		warranty?: Warranty;
-		roles?: Role[];
-	}
-
-	interface Contact {
-		id: number;
-		notes?: string;
-		contactable_type?: string;
-		contactable_id?: number;
-		created_at: string;
-		updated_at: string;
-		primary_address_id?: number;
-		primary_phone_id?: number;
-		primary_email_id?: number;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		addresses?: Address[];
-		emails?: Email[];
-		phones?: Phone[];
-		websites?: Website[];
-	}
-
-	interface Contract {
-		id: number;
-		name: string;
-		number?: string;
-		notes?: string;
-		begins_at?: string;
-		ends_at?: string;
-		vendor_id: number;
-		category_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-		category?: Category;
-		vendor?: Vendor;
-	}
-
-	interface Department {
-		id: number;
-		name?: string;
-		slug: string;
-		notes?: string;
-		location_id?: number;
-		created_at: string;
-		updated_at: string;
-		manager_id?: number;
-		activities?: PublicActivityActivity[];
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-		location?: Location;
-		manager?: Person;
-		ownerships?: Ownership[];
-		assets?: Asset[];
-		items?: Item[];
-		accessories?: Accessory[];
-		components?: Component[];
-		consumables?: Consumable[];
-		licenses?: License[];
-		contracts?: Contract[];
-		people?: Person[];
-		vendors?: Vendor[];
-	}
-
-	interface Email {
-		id: number;
-		email?: string;
-		notes?: string;
-		contact_id: number;
-		category_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		contact?: Contact;
-		category?: Category;
-	}
-
-	interface Field {
-		id: number;
-		name?: string;
-		format?: string;
-		element?: string;
-		description?: string;
-		notes?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-	}
-
-	interface Fieldset {
-		id: number;
-		name?: string;
-		description?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-	}
-
-	interface FieldsetAssociation {
-		id: number;
-		fieldset_id: number;
-		fieldable_type: string;
-		fieldable_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		fieldset?: Fieldset;
-	}
-
-	interface IpLease {
-		id: number;
-		nic_id: number;
-		address?: string;
-		active: boolean;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		nic?: Nic;
-		item?: Asset;
-	}
-
-	interface Item {
-		id: number;
-		type: string;
-		name: string;
-		asset_tag?: string;
-		serial?: string;
-		cost?: number;
-		cost_currency: string;
-		purchased_at?: string;
-		requestable: boolean;
-		min_qty?: number;
-		qty?: number;
-		notes?: string;
-		model_id: number;
-		vendor_id?: number;
-		default_location_id?: number;
-		status_label_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		purchase?: Purchase;
-		fieldset_associations?: FieldsetAssociation[];
-		status_label?: StatusLabel;
-		vendor?: Vendor;
-		default_location?: Location;
-		model?: Model;
-		category?: Category;
-		manufacturer?: Manufacturer;
-		warranty?: Warranty;
-		assignments?: Assignment[];
-		possessions?: Assignment[];
-		assets?: Asset[];
-		items?: Asset[];
-		accessories?: Asset[];
-		components?: Asset[];
-		consumables?: Asset[];
-		licenses?: License[];
-		roles?: Role[];
-		nics?: Nic[];
-		ips?: IpLease[];
-		ip_leases?: IpLease[];
-	}
-
-	interface Ldap {
-		id: number;
-		name: string;
-		host?: string;
-		port?: string;
-		domain?: string;
-		username?: string;
-		password?: string;
-		tree_base?: string;
-		user_search?: string;
-		sync_interval?: string;
-		company_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		company?: Company;
-	}
-
-	interface License {
-		id: number;
-		name: string;
-		qty?: number;
-		key?: string;
-		licenser_name?: string;
-		licenser_email?: string;
-		reassignable: boolean;
-		cost?: number;
-		cost_currency: string;
-		purchased_at?: string;
-		expires_at?: string;
-		terminates_at?: string;
-		maintained: boolean;
-		notes?: string;
-		category_id: number;
-		vendor_id?: number;
-		manufacturer_id: number;
-		status_label_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		assignments?: Assignment[];
-		status_label?: StatusLabel;
-		purchase?: Purchase;
-		fieldset_associations?: FieldsetAssociation[];
-		roles?: Role[];
-		category?: Category;
-		vendor?: Vendor;
-		manufacturer?: Manufacturer;
-	}
-
-	interface Location {
-		id: number;
-		name: string;
-		slug: string;
-		currency?: string;
-		parent_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		possessions?: Assignment[];
-		assets?: Asset[];
-		items?: Asset[];
-		accessories?: Asset[];
-		components?: Asset[];
-		consumables?: Asset[];
-		licenses?: License[];
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		fieldset_associations?: FieldsetAssociation[];
-		roles?: Role[];
-		parent?: Location;
-		people?: Person[];
-	}
-
-	interface Manufacturer {
-		id: number;
-		name?: string;
-		slug: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		roles?: Role[];
-		models?: Model[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
-	}
-
-	interface Model {
-		id: number;
-		name?: string;
-		slug: string;
-		model_number?: string;
-		notes?: string;
-		category_id: number;
-		manufacturer_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		fieldset_associations?: FieldsetAssociation[];
-		roles?: Role[];
-		manufacturer?: Manufacturer;
-		category?: Category;
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
-	}
-
-	interface Network {
-		id: number;
-		name?: string;
-		address?: string;
-		gateway?: string;
-		dhcp_start?: string;
-		dhcp_end?: string;
-		vlan_id?: number;
-		notes?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-	}
-
-	interface Nic {
-		id: number;
-		mac?: string;
-		nic_type: 'ethernet'|'wifi'|'fiber'|'cellular';
-		item_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		item?: Asset;
-		ips?: IpLease[];
-		ip_leases?: IpLease[];
-	}
-
-	interface Order {
-		id: number;
-		number?: string;
-		user_id: number;
-		notes?: string;
-		submitted_at?: string;
-		ordered_at?: string;
-		expected_at?: string;
-		delivered_at?: string;
-		canceled_at?: string;
-		returned_at?: string;
-		discount_decription?: string;
-		returned_reason?: string;
-		canceled_reason?: string;
-		shipping_cents?: number;
-		shipping_currency: string;
-		tax_cents?: number;
-		tax_currency: string;
-		discount_cents?: number;
-		discount_currency: string;
-		vendor_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-		person?: Person;
-		vendor?: Vendor;
-		user?: User;
-		purchases?: Purchase[];
-	}
-
-	interface Ownership {
-		id: number;
-		company_id: number;
-		department_id?: number;
-		ownable_type: string;
-		ownable_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		company?: Company;
-		department?: Department;
-	}
-
-	interface Person {
-		id: number;
-		first_name?: string;
-		middle_name?: string;
-		last_name?: string;
-		active: boolean;
-		employee_number?: string;
-		job_title?: string;
-		guid?: string;
-		user_id?: number;
-		manager_id?: number;
-		location_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		possessions?: Assignment[];
-		assets?: Asset[];
-		items?: Asset[];
-		accessories?: Asset[];
-		components?: Asset[];
-		consumables?: Asset[];
-		licenses?: License[];
-		fieldset_associations?: FieldsetAssociation[];
-		roles?: Role[];
-		user?: User;
-		manager?: Person;
-		location?: Location;
-		ticket_assignments?: TicketAssignment[];
-		tickets?: Ticket[];
-		person_group_assignments?: PersonGroupAssignment[];
-		person_groups?: PersonGroup[];
-	}
-
-	interface PersonAsCreate {
-		id: number;
-		first_name?: string;
-		middle_name?: string;
-		last_name?: string;
-		active: boolean;
-		employee_number?: string;
-		job_title?: string;
-		guid?: string;
-		user_id?: number;
-		manager_id?: number;
-		location_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		possessions?: Assignment[];
-		assets?: Asset[];
-		items?: Asset[];
-		accessories?: Asset[];
-		components?: Asset[];
-		consumables?: Asset[];
-		licenses?: License[];
-		fieldset_associations?: FieldsetAssociation[];
-		roles?: Role[];
-		user?: User;
-		manager?: Person;
-		location?: Location;
-		ticket_assignments?: TicketAssignment[];
-		tickets?: Ticket[];
-		person_group_assignments?: PersonGroupAssignment[];
-		person_groups?: PersonGroup[];
-	}
-
-	interface PersonGroup {
-		id: number;
-		name?: string;
-		slug: string;
-		description?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-		person_group_assignments?: PersonGroupAssignment[];
-		people?: Person[];
-	}
-
-	interface PersonGroupAssignment {
-		id: number;
-		person_id: number;
-		person_group_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		person?: Person;
-		person_group?: PersonGroup;
-	}
-
-	interface Phone {
-		id: number;
-		number: string;
-		extension?: string;
-		notes?: string;
-		contact_id: number;
-		category_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		contact?: Contact;
-		category?: Category;
-	}
-
-	interface PublicActivityActivity {
-		id: number;
-		trackable_type?: string;
-		trackable_id?: number;
-		owner_type?: string;
-		owner_id?: number;
-		key?: string;
-		parameters?: Record<string, any>;
-		recipient_type?: string;
-		recipient_id?: number;
-		created_at: string;
-		updated_at: string;
-	}
-
-	interface Purchase {
-		id: number;
-		purchasable_type: string;
-		purchasable_id: number;
-		order_id?: number;
-		cost: number;
-		cost_currency: string;
-		qty?: number;
-		notes?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-		item?: Item;
-		accessory?: Accessory;
-		component?: Component;
-		consumable?: Consumable;
-		order?: Order;
-	}
-
-	interface Role {
-		id: number;
-		name?: string;
-		resource_type?: string;
-		resource_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		users?: User[];
-		people?: Person[];
-		person_groups?: PersonGroup[];
-	}
-
-	interface Smtp {
-		id: number;
-		name?: string;
-		address?: string;
-		port?: number;
-		domain?: string;
-		auth?: string;
-		tls?: boolean;
-		username?: string;
-		password?: string;
-		notes?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-	}
-
-	interface StatusLabel {
-		id: number;
-		name?: string;
-		status_type?: 'deployable'|'pending'|'undeployable'|'archived';
-		slug: string;
-		description?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		assets?: Asset[];
-		items?: Item[];
-		accessories?: Accessory[];
-		components?: Component[];
-		licenses?: License[];
-	}
-
-	interface Ticket {
-		id: number;
-		subject: string;
-		number: number;
-		description?: string;
-		priority?: 'urgent'|'high'|'standard'|'low';
-		status_id?: number;
-		primary_contact_id?: number;
-		created_by_id?: number;
-		asset_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		created_by?: Person;
-		status?: TicketStatus;
-		primary_contact?: Person;
-		asset?: Asset;
-		assignments?: TicketAssignment[];
-		assignees?: Person[];
-		messages?: TicketMessage[];
-	}
-
-	interface TicketAssignment {
-		id: number;
-		person_id: number;
-		ticket_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		person?: Person;
-		ticket?: Ticket;
-	}
-
-	interface TicketMessage {
-		id: number;
-		body?: string;
-		ticket_id: number;
-		parent_id?: number;
-		created_by_id?: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		ticket?: Ticket;
-		created_by?: Person;
-		parent?: TicketMessage;
-	}
-
-	interface TicketStatus {
-		id: number;
-		name?: string;
-		status_type?: 'open'|'pending'|'closed';
-		slug: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		tickets?: Ticket[];
-	}
-
-	interface User {
-		id: number;
-		email: string;
-		password?: string;
-		reset_password_token?: string;
-		reset_password_sent_at?: string;
-		remember_created_at?: string;
-		sign_in_count: number;
-		current_sign_in_at?: string;
-		last_sign_in_at?: string;
-		current_sign_in_ip?: string;
-		last_sign_in_ip?: string;
-		confirmation_token?: string;
-		confirmed_at?: string;
-		confirmation_sent_at?: string;
-		unconfirmed_email?: string;
-		failed_attempts: number;
-		unlock_token?: string;
-		locked_at?: string;
-		created_at: string;
-		updated_at: string;
-		invitation_token?: string;
-		invitation_created_at?: string;
-		invitation_sent_at?: string;
-		invitation_accepted_at?: string;
-		invitation_limit?: number;
-		invited_by_type?: string;
-		invited_by_id?: number;
-		invitations_count?: number;
-		active_company_id?: number;
-		active?: boolean;
-		table_preferences?: Record<string, any>;
-		user_preferences?: Record<string, any>;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		active_company?: Company;
-		people?: Person[];
-		companies?: Company[];
-		person_group_assignments?: PersonGroupAssignment[];
-		groups?: PersonGroup[];
-		person?: Person;
-	}
-
-	interface Vendor {
-		id: number;
-		name: string;
-		slug: string;
-		url?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		owner?: Ownership;
-		company?: Company;
-		department?: Department;
-		roles?: Role[];
-		contracts?: Contract[];
-		items?: Item[];
-		accessories?: Accessory[];
-		consumables?: Consumable[];
-		components?: Component[];
-		licenses?: License[];
-	}
-
-	interface Warranty {
-		id: number;
-		asset_id: number;
-		length?: number;
-		notes?: string;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		contact?: Contact;
-		addresses?: Address[];
-		phones?: Phone[];
-		emails?: Email[];
-		websites?: Website[];
-		roles?: Role[];
-		asset?: Asset;
-	}
-
-	interface Website {
-		id: number;
-		url?: string;
-		name?: string;
-		notes?: string;
-		contact_id: number;
-		created_at: string;
-		updated_at: string;
-		activities?: PublicActivityActivity[];
-		roles?: Role[];
-		contact?: Contact;
-		category?: Category;
-	}
-
-
+	export type { default as AccessoriesCheckin } from './Accessories/Checkin'
+	export type { default as AccessoriesCheckout } from './Accessories/Checkout'
+	export type { default as AccessoriesEdit } from './Accessories/Edit'
+	export type { default as AccessoriesIndex } from './Accessories/Index'
+	export type { default as AccessoriesNew } from './Accessories/New'
+	export type { default as AccessoriesShow } from './Accessories/Show'
+	export type { default as Accessory } from './Accessory'
+	export type { default as ActivitiesDashboard } from './Activities/Dashboard'
+	export type { default as Activity } from './Activity'
+	export type { default as Address } from './Address'
+	export type { default as Asset } from './Asset'
+	export type { default as AssetsIndex } from './Assets/Index'
+	export type { default as AssignableConsume } from './Assignable/Consume'
+	export type { default as AssignableQuantity } from './Assignable/Quantity'
+	export type { default as AssignableSingle } from './Assignable/Single'
+	export type { default as Assignment } from './Assignment'
+	export type { default as AssignmentsNew } from './Assignments/New'
+	export type { default as CategoriesEdit } from './Categories/Edit'
+	export type { default as CategoriesIndex } from './Categories/Index'
+	export type { default as CategoriesNew } from './Categories/New'
+	export type { default as CategoriesOptions } from './Categories/Options'
+	export type { default as CategoriesShow } from './Categories/Show'
+	export type { default as Category } from './Category'
+	export type { default as CompaniesEdit } from './Companies/Edit'
+	export type { default as CompaniesIndex } from './Companies/Index'
+	export type { default as CompaniesNew } from './Companies/New'
+	export type { default as CompaniesShow } from './Companies/Show'
+	export type { default as Company } from './Company'
+	export type { default as Component } from './Component'
+	export type { default as ComponentsCheckin } from './Components/Checkin'
+	export type { default as ComponentsCheckout } from './Components/Checkout'
+	export type { default as ComponentsEdit } from './Components/Edit'
+	export type { default as ComponentsIndex } from './Components/Index'
+	export type { default as ComponentsNew } from './Components/New'
+	export type { default as ComponentsShow } from './Components/Show'
+	export type { default as Consumable } from './Consumable'
+	export type { default as ConsumablesCheckin } from './Consumables/Checkin'
+	export type { default as ConsumablesCheckout } from './Consumables/Checkout'
+	export type { default as ConsumablesEdit } from './Consumables/Edit'
+	export type { default as ConsumablesIndex } from './Consumables/Index'
+	export type { default as ConsumablesNew } from './Consumables/New'
+	export type { default as ConsumablesShow } from './Consumables/Show'
+	export type { default as Contact } from './Contact'
+	export type { default as Contract } from './Contract'
+	export type { default as ContractsEdit } from './Contracts/Edit'
+	export type { default as ContractsIndex } from './Contracts/Index'
+	export type { default as ContractsNew } from './Contracts/New'
+	export type { default as ContractsShow } from './Contracts/Show'
+	export type { default as Department } from './Department'
+	export type { default as DepartmentsEdit } from './Departments/Edit'
+	export type { default as DepartmentsIndex } from './Departments/Index'
+	export type { default as DepartmentsNew } from './Departments/New'
+	export type { default as DepartmentsOptions } from './Departments/Options'
+	export type { default as DepartmentsShow } from './Departments/Show'
+	export type { default as Email } from './Email'
+	export type { default as EmailsNew } from './Emails/New'
+	export type { default as IpLease } from './IpLease'
+	export type { default as IpLeasesOptions } from './IpLeases/Options'
+	export type { default as Item } from './Item'
+	export type { default as ItemsCheckin } from './Items/Checkin'
+	export type { default as ItemsCheckout } from './Items/Checkout'
+	export type { default as ItemsEdit } from './Items/Edit'
+	export type { default as ItemsIndex } from './Items/Index'
+	export type { default as ItemsNew } from './Items/New'
+	export type { default as ItemsOptions } from './Items/Options'
+	export type { default as ItemsShow } from './Items/Show'
+	export type { default as Ldap } from './Ldap'
+	export type { default as LdapsIndex } from './Ldaps/Index'
+	export type { default as License } from './License'
+	export type { default as LicensesCheckin } from './Licenses/Checkin'
+	export type { default as LicensesCheckout } from './Licenses/Checkout'
+	export type { default as LicensesEdit } from './Licenses/Edit'
+	export type { default as LicensesIndex } from './Licenses/Index'
+	export type { default as LicensesNew } from './Licenses/New'
+	export type { default as LicensesShow } from './Licenses/Show'
+	export type { default as Location } from './Location'
+	export type { default as LocationsEdit } from './Locations/Edit'
+	export type { default as LocationsIndex } from './Locations/Index'
+	export type { default as LocationsNew } from './Locations/New'
+	export type { default as LocationsOptions } from './Locations/Options'
+	export type { default as LocationsShow } from './Locations/Show'
+	export type { default as Manufacturer } from './Manufacturer'
+	export type { default as ManufacturersEdit } from './Manufacturers/Edit'
+	export type { default as ManufacturersIndex } from './Manufacturers/Index'
+	export type { default as ManufacturersNew } from './Manufacturers/New'
+	export type { default as ManufacturersOptions } from './Manufacturers/Options'
+	export type { default as ManufacturersShow } from './Manufacturers/Show'
+	export type { default as Model } from './Model'
+	export type { default as ModelsEdit } from './Models/Edit'
+	export type { default as ModelsIndex } from './Models/Index'
+	export type { default as ModelsNew } from './Models/New'
+	export type { default as ModelsOptions } from './Models/Options'
+	export type { default as ModelsShow } from './Models/Show'
+	export type { default as Network } from './Network'
+	export type { default as NetworksEdit } from './Networks/Edit'
+	export type { default as NetworksIndex } from './Networks/Index'
+	export type { default as NetworksNew } from './Networks/New'
+	export type { default as NetworksShow } from './Networks/Show'
+	export type { default as Nic } from './Nic'
+	export type { default as Order } from './Order'
+	export type { default as Ownership } from './Ownership'
+	export type { default as PeopleEdit } from './People/Edit'
+	export type { default as PeopleIndex } from './People/Index'
+	export type { default as PeopleNew } from './People/New'
+	export type { default as PeopleOptions } from './People/Options'
+	export type { default as PeopleShow } from './People/Show'
+	export type { default as PersonGroup } from './PersonGroup'
+	export type { default as PersonGroupsEdit } from './PersonGroups/Edit'
+	export type { default as PersonGroupsIndex } from './PersonGroups/Index'
+	export type { default as PersonGroupsNew } from './PersonGroups/New'
+	export type { default as PersonGroupsOptions } from './PersonGroups/Options'
+	export type { default as PersonGroupsShow } from './PersonGroups/Show'
+	export type { default as Person } from './Person'
+	export type { default as Phone } from './Phone'
+	export type { default as Purchase } from './Purchase'
+	export type { default as Role } from './Role'
+	export type { default as Spotlight } from './Spotlight'
+	export type { default as StatusLabel } from './StatusLabel'
+	export type { default as TicketAssignment } from './TicketAssignment'
+	export type { default as TicketAssignmentsEdit } from './TicketAssignments/Edit'
+	export type { default as TicketAssignmentsIndex } from './TicketAssignments/Index'
+	export type { default as TicketAssignmentsNew } from './TicketAssignments/New'
+	export type { default as TicketAssignmentsShow } from './TicketAssignments/Show'
+	export type { default as TicketMessage } from './TicketMessage'
+	export type { default as Ticket } from './Ticket'
+	export type { default as TicketStatus } from './TicketStatus'
+	export type { default as TicketStatusesEdit } from './TicketStatuses/Edit'
+	export type { default as TicketStatusesIndex } from './TicketStatuses/Index'
+	export type { default as TicketStatusesNew } from './TicketStatuses/New'
+	export type { default as TicketStatusesShow } from './TicketStatuses/Show'
+	export type { default as TicketsEdit } from './Tickets/Edit'
+	export type { default as TicketsIndex } from './Tickets/Index'
+	export type { default as TicketsNew } from './Tickets/New'
+	export type { default as TicketsOptions } from './Tickets/Options'
+	export type { default as TicketsShow } from './Tickets/Show'
+	export type { default as User } from './User'
+	export type { default as UsersEdit } from './Users/Edit'
+	export type { default as UsersIndex } from './Users/Index'
+	export type { default as UsersNew } from './Users/New'
+	export type { default as UsersShow } from './Users/Show'
+	export type { default as Vendor } from './Vendor'
+	export type { default as VendorsEdit } from './Vendors/Edit'
+	export type { default as VendorsIndex } from './Vendors/Index'
+	export type { default as VendorsNew } from './Vendors/New'
+	export type { default as VendorsOptions } from './Vendors/Options'
+	export type { default as VendorsShow } from './Vendors/Show'
+	export type { default as Warranty } from './Warranty'
+	export type { default as Website } from './Website'
 }

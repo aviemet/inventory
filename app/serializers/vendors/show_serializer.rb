@@ -1,4 +1,4 @@
-class VendorSerializer < ApplicationSerializer
+class Vendors::ShowSerializer < ApplicationSerializer
   object_as :vendor
 
   identifier :slug

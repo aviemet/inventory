@@ -1,4 +1,4 @@
-class ModelSerializer < ApplicationSerializer
+class Models::ShowSerializer < ApplicationSerializer
   object_as :model
 
   attributes :name,

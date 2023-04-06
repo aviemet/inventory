@@ -1,4 +1,4 @@
-class Departments::ShowSerializer < ApplicationSerializer
+class Departments::OptionsSerializer < ApplicationSerializer
   object_as :department
 
   attributes :name

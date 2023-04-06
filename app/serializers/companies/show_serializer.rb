@@ -23,5 +23,5 @@ class Companies::ShowSerializer < ApplicationSerializer
     }
   end
 
-  association :contact, serializer: ContactSerializer
+  has_one :contact, serializer: ContactSerializer
 end

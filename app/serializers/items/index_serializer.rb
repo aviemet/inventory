@@ -27,7 +27,7 @@ class Items::IndexSerializer < Assignable::SingleSerializer
   belongs_to :department, serializer: DepartmentSerializer
   belongs_to :model, serializer: ModelSerializer
   belongs_to :vendor, serializer: VendorSerializer
-  has_one :category, serializer: CategorySerializer
+  belongs_to :category, serializer: CategorySerializer
   belongs_to :manufacturer, serializer: ManufacturerSerializer
   has_one :location, serializer: LocationSerializer
   belongs_to :status_label, serializer: StatusLabelSerializer

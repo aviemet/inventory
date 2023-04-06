@@ -365,9 +365,6 @@ GEM
       activerecord
       railties
     timeout (0.3.2)
-    ts_schema (1.0.1)
-      rails (>= 6.0.0)
-      railties (>= 4)
     types_from_serializers (2.0.1)
       listen (~> 3.2)
       oj_serializers (~> 2.0, >= 2.0.2)
@@ -459,7 +456,6 @@ DEPENDENCIES
   spring
   sprockets-rails
   time_for_a_boolean (~> 0.2.1)
-  ts_schema (~> 1)
   types_from_serializers (~> 2.0)
   tzinfo-data
   vite_rails (~> 3.0)

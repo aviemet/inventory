@@ -1,4 +1,4 @@
-class AssignmentsSerializer < ApplicationSerializer
+class AssignmentSerializer < ApplicationSerializer
   object_as :assignment
 
   attributes :assignable_type,

@@ -23,7 +23,7 @@ const ItemsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (item: Schema.Item) => (
+				<Table.RowIterator render={ (item: Schema.ItemsIndex) => (
 					<Table.Row key={ item.id }>
 
 						<Table.Cell nowrap>

@@ -1,4 +1,4 @@
-class LicenseSerializer < Assignable::QuantitySerializer
+class Licenses::NewSerializer < Assignable::QuantitySerializer
   object_as :license
 
   attributes :name,

@@ -1,4 +1,4 @@
-class Component::CheckoutSerializer < Assignable::QuantitySerializer
+class Components::CheckoutSerializer < Assignable::QuantitySerializer
   object_as :component
 
   attributes :name,

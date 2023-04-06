@@ -1,4 +1,4 @@
-class LocationSerializer < ApplicationSerializer
+class Locations::NewSerializer < ApplicationSerializer
   object_as :location
 
   identifier :slug

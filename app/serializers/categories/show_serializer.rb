@@ -1,4 +1,4 @@
-class CategorySerializer < ApplicationSerializer
+class Categories::ShowSerializer < ApplicationSerializer
   object_as :category
 
   attributes :categorizable_type,

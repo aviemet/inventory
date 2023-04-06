@@ -1,4 +1,4 @@
-class CategorySerializer < ApplicationSerializer
+class Categories::OptionsSerializer < ApplicationSerializer
   object_as :category
 
   attributes :id, :name

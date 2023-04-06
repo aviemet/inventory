@@ -1,4 +1,4 @@
-class UserSerializer < ApplicationSerializer
+class Users::ShowSerializer < ApplicationSerializer
   object_as :user
 
   attributes :email,

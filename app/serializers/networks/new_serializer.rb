@@ -1,4 +1,4 @@
-class NetworkSerializer < ApplicationSerializer
+class Networks::NewSerializer < ApplicationSerializer
   object_as :network
 
   attributes :name,

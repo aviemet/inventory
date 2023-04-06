@@ -8,7 +8,6 @@ class RoleSerializer < ApplicationSerializer
              :updated_at
 
   has_many :activities, serializer: ActivitySerializer
-  has_many :users, serializer: UserSerializer
-  has_many :user_groups, serializer: UserGroupsSerializer
-  has_many :people, serializer: PeopleSerializer
+  has_many :people, serializer: PersonSerializer
+  has_many :person_groups, serializer: PersonGroupSerializer
 end
