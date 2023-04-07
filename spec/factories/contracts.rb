@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :contract do
     name { Faker::Name.name }
-    vendor
-    category
+
     company
+    vendor { association :vendor, company: company }
+    category { association :category, company: company }
   end
 end

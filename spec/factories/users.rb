@@ -1,24 +1,18 @@
 FactoryBot.define do
   factory :user do
     password { '$trongPassw0rd!' }
-    email { Faker::Internet.email }
+    email { Faker::Internet.unique.email }
 
     transient do
-      confirmed { false }
-      company { true }
-      person { true }
+      confirmed { true }
+      company { create(:company) }
     end
 
-    after(:build) do |user, options|
-      if options.person
-        user.person = create(:person)
-      end
+    person { association :person, company: company }
 
-      if options.company
-        company = create(:company)
-        user.add_role :admin, company
-        user.active_company = company
-      end
+    after(:build) do |user, options|
+      user.add_role :admin, options.company
+      user.active_company = options.company
 
       user.confirm if options.confirmed
     end

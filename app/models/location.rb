@@ -12,20 +12,20 @@ class Location < ApplicationRecord
     }, using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   slug :name
 
-  resourcify
   tracked
+  resourcify
 
   belongs_to :parent, class_name: "Location", required: false
   has_many :people
 
   validates_presence_of :name
 
-  scope :includes_associated, -> { includes([:parent, :department]) }
+  scope :includes_associated, -> { includes([:parent, :department, :activities]) }
 
   def default_location
     self

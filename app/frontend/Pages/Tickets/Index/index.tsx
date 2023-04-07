@@ -17,6 +17,7 @@ const TicketsIndex = ({ tickets, pagination }: ITicketsIndexProps) => {
 			model="tickets"
 			rows={ tickets }
 			pagination={ pagination }
+			deleteRoute={ Routes.tickets() }
 			menuOptions={ [
 				{ label: 'New Ticket', href: Routes.newTicket(), icon: NewIcon },
 			] }

@@ -3,11 +3,11 @@ class NetworksController < ApplicationController
   include Searchable
 
   expose :networks, -> { search(@active_company.networks, sortable_fields) }
-  expose :network
+  expose :network, scope: ->{ @active_company.networks }, find: ->(id, scope){ scope.find(id) }
 
   # GET /networks
-  # GET /networks.json
   def index
+    authorize networks
     paginated_networks = networks.page(params[:page] || 1)
 
     render inertia: "Networks/Index", props: {
@@ -21,6 +21,7 @@ class NetworksController < ApplicationController
 
   # GET /networks/:id
   def show
+    authorize network
     ips = IpLease.includes(:item).in_network(self.network)
 
     render inertia: "Networks/Show", props: {
@@ -35,6 +36,7 @@ class NetworksController < ApplicationController
 
   # GET /networks/new
   def new
+    authorize Network
     render inertia: "Networks/New", props: {
       network: -> { Network.new.render(view: :new) },
     }
@@ -42,6 +44,7 @@ class NetworksController < ApplicationController
 
   # GET /networks/:id/edit
   def edit
+    authorize network
     render inertia: "Networks/Edit", props: {
       network: -> { network.render(view: :edit) },
     }
@@ -49,6 +52,7 @@ class NetworksController < ApplicationController
 
   # POST /networks
   def create
+    authorize Network
     network.company = @active_company
     if network.save
       redirect_to network, notice: 'Network was successfully created'
@@ -59,6 +63,7 @@ class NetworksController < ApplicationController
 
   # PATCH/PUT /networks/:id
   def update
+    authorize network
     if network.update(network_params)
       redirect_to network, notice: 'Network was successfully updated'
     else
@@ -68,6 +73,7 @@ class NetworksController < ApplicationController
 
   # DELETE /networks/:id
   def destroy
+    authorize network
     network.destroy
     respond_to do |format|
       format.html { redirect_to networks_url, notice: 'Network was successfully destroyed.' }
@@ -82,6 +88,6 @@ class NetworksController < ApplicationController
   end
 
   def network_params
-    params.require(:network).permit(:name, :ip, :gateway, :dhcp_start, :dhcp_end, :vlan_id)
+    params.require(:network).permit(:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes)
   end
 end

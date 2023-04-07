@@ -1,8 +1,9 @@
-import React, { useEffect, useState, forwardRef } from 'react'
+import React, { useEffect, forwardRef } from 'react'
 import { type ITableRow } from './index'
 import { Box } from '@mantine/core'
 import HeadCheckbox from './HeadCheckbox'
 import { useTableContext } from '../TableContext'
+import { useCheckboxState } from '@/Components/Hooks'
 
 interface IHeadRowProps extends ITableRow {
 	name?: string
@@ -17,26 +18,12 @@ const HeadRow = forwardRef<HTMLTableRowElement, IHeadRowProps>((
 ) => {
 	const { tableState: { columns }, setTableState } = useTableContext()
 
-	const [allChecked, setAllChecked] = useState(false)
-	const [indeterminate, setIndeterminate] = useState(false)
-
-	// Set the status of the table head checkbox
-	useEffect(() => {
-		if(!selectable || !rows || rows.length === 0) return
-
-		switch(selected.size) {
-			case rows.length: // All checked
-				setAllChecked(true)
-				setIndeterminate(false)
-				break
-			case 0: // None checked
-				setAllChecked(false)
-				setIndeterminate(false)
-				break
-			default: // Some checked
-				if(!indeterminate) setIndeterminate(true)
-		}
-	}, [selected.size])
+	let { length, selectedCount } = { length: 0, selectedCount: 0 }
+	if(selectable) {
+		length = rows?.length || 0
+		selectedCount = selected.size || 0
+	}
+	const { allChecked, indeterminate } = useCheckboxState(length, selectedCount)
 
 	// Register hideable attributes in context
 	useEffect(() => {

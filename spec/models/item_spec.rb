@@ -18,9 +18,9 @@ RSpec.describe Item, type: :model do
         name: nil
       })).to_not be_valid
 
-      expect(build(:item, {
-        model: nil
-      })).to_not be_valid
+      item = build(:item, {model: nil })
+      item.model = nil
+      expect(item).to_not be_valid
     end
 
     it "uses money-rails to handle cost" do

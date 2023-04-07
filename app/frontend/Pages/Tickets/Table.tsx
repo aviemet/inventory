@@ -23,7 +23,7 @@ const TicketsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editTicket(ticket) } />
+							<EditButton href={ Routes.editTicket(ticket) } label={ `ticket number ${ticket.number}` } />
 						</Table.Cell>
 
 					</Table.Row>

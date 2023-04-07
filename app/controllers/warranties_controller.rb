@@ -2,14 +2,12 @@ class WarrantiesController < ApplicationController
   before_action :set_warranty, only: [:show, :edit, :update, :destroy]
 
   # GET /warranties
-  # GET /warranties.json
   def index
     @warranties = Warranty.all
     render inertia: "Warranties/Index"
   end
 
-  # GET /warranties/1
-  # GET /warranties/1.json
+  # GET /warranties/:id
   def show
     render inertia: "Warranties/Show"
   end
@@ -20,13 +18,12 @@ class WarrantiesController < ApplicationController
     render inertia: "Warranties/New"
   end
 
-  # GET /warranties/1/edit
+  # GET /warranties/:id/edit
   def edit
     render inertia: "Warranties/Edit"
   end
 
   # POST /warranties
-  # POST /warranties.json
   def create
     @warranty = Warranty.new(warranty_params)
 
@@ -41,8 +38,7 @@ class WarrantiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /warranties/1
-  # PATCH/PUT /warranties/1.json
+  # PATCH/PUT /warranties/:id
   def update
     respond_to do |format|
       if @warranty.update(warranty_params)
@@ -55,8 +51,7 @@ class WarrantiesController < ApplicationController
     end
   end
 
-  # DELETE /warranties/1
-  # DELETE /warranties/1.json
+  # DELETE /warranties/:id
   def destroy
     @warranty.destroy
     respond_to do |format|

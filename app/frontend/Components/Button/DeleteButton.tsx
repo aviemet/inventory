@@ -1,10 +1,15 @@
 import React from 'react'
 import { Link } from '@/Components'
+import { type ILinkProps } from '../Link'
 import { TrashIcon } from '@/Components/Icons'
 
-const DeleteButton = ({ href }: {href: string}) => {
+interface IDeleteButtonProps extends Omit<ILinkProps, 'children'> {
+	label?: string
+}
+
+const DeleteButton = ({ href, label }: IDeleteButtonProps) => {
 	return (
-		<Link as="button" href={ href }><TrashIcon /></Link>
+		<Link as="button" href={ href } aria-label={ `Delete ${label}` }><TrashIcon /></Link>
 	)
 }
 

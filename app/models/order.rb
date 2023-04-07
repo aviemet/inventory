@@ -14,16 +14,16 @@ class Order < ApplicationRecord
     }
   )
 
-  resourcify
   tracked
+  resourcify
 
   monetize :shipping_cents
   monetize :tax_cents
   monetize :discount_cents
 
-  belongs_to :user
+  belongs_to :person
   belongs_to :vendor
-  has_one :person, through: :user
+  has_one :user, through: :person
   has_many :purchases
 
   scope :includes_associated, -> { includes([:purchase, :item, :accessory, :consumable, :component, :user, :vendor]) }

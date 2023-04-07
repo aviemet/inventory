@@ -51,7 +51,7 @@ const ContractsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editContract(contract) } />
+							<EditButton href={ Routes.editContract(contract) } label={ contract.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

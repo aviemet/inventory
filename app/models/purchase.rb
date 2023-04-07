@@ -16,8 +16,8 @@ class Purchase < ApplicationRecord
     }
   )
 
-  resourcify
   tracked
+  resourcify
 
   monetize :cost_cents
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Table, Container, Page } from '@/Components'
+import { Section, Menu, Flex, Group, Heading, Table, Container, Page, Paper } from '@/Components'
 import { createContext } from '@/Components/Hooks'
 import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
@@ -29,7 +29,7 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 			{ title: network.name! },
 		] }>
 			<Section>
-				<Flex position="apart">
+				<Group position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu position="bottom-end">
@@ -40,7 +40,7 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 				<Container>
 					<Flex>
@@ -95,6 +95,9 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 							</Table.Body>
 						</Table>
 					</Flex>
+
+					{ network.notes && <Paper p="sm" my="sm">{ network.notes }</Paper> }
+
 				</Container>
 			</Section>
 

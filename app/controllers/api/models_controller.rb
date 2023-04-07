@@ -1,10 +1,10 @@
 class Api::ModelsController < ApplicationController
-  expose :model, -> { @active_company.models.includes_associated.find_by_slug(request.params[:slug]) || Model.new(model_params) }
+  expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, find_by: :slug
 
   # POST api/models
   def create
     model.company = @active_company
-    
+
     if model.save
       render json: ModelBlueprint.render_as_json(model), status: 201
     else

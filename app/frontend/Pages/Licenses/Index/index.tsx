@@ -16,6 +16,7 @@ const LicencesIndex = ({ licenses, pagination }: ILicensesIndexProps ) => {
 			model="licenses"
 			rows={ licenses }
 			pagination={ pagination }
+			deleteRoute={ Routes.licenses() }
 			menuOptions={ [
 				{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
 			] }

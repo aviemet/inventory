@@ -16,6 +16,7 @@ const NetworksIndex = ({ networks, pagination }: INetworksIndexProps) => {
 			model="networks"
 			rows={ networks }
 			pagination={ pagination }
+			deleteRoute={ Routes.networks() }
 			menuOptions={ [
 				{ label: 'New Network', href: Routes.newNetwork(), icon: NewIcon },
 			] }

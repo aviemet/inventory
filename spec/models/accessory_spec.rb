@@ -27,7 +27,7 @@ RSpec.describe Accessory, type: :model do
     end
   end
 
-  describe "Associations" do
+  describe "Associations:" do
     it_behaves_like "ownable"
     it_behaves_like "assignable:quantity"
   end

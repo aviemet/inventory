@@ -6,6 +6,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets
   def index
+    authorize tickets
     paginated_tickets = tickets.page(params[:page] || 1)
 
     render inertia: "Tickets/Index", props: {
@@ -19,33 +20,37 @@ class TicketsController < ApplicationController
 
   # GET /tickets/:id
   def show
+    authorize ticket
     render inertia: "Tickets/Show", props: {
-      ticket: ticket.render(view: :associations)
+      ticket: ticket.render(view: :show)
     }
   end
 
   # GET /tickets/new
   def new
+    authorize Ticket
     render inertia: "Tickets/New", props: {
       ticket: Ticket.new.render(view: :new),
-      people: @active_company.people.joins(:user).render(view: :as_options),
-      assets: @active_company.assets.render(view: :as_options),
-      locations: @active_company.locations.render(view: :as_options),
+      people: @active_company.people.joins(:user).render(view: :options),
+      assets: @active_company.assets.render(view: :options),
+      locations: @active_company.locations.render(view: :options),
     }
   end
 
   # GET /tickets/:id/edit
   def edit
+    authorize ticket
     render inertia: "Tickets/Edit", props: {
       ticket: ticket.render(view: :edit),
-      people: @active_company.people.joins(:user).render(view: :as_options),
-      assets: @active_company.assets.render(view: :as_options),
-      locations: @active_company.locations.render(view: :as_options),
+      people: @active_company.people.joins(:user).render(view: :options),
+      assets: @active_company.assets.render(view: :options),
+      locations: @active_company.locations.render(view: :options),
     }
   end
 
   # POST /tickets
   def create
+    authorize Ticket
     if ticket.save
       redirect_to ticket, notice: 'Ticket was successfully created'
     else
@@ -55,6 +60,7 @@ class TicketsController < ApplicationController
 
   # PATCH/PUT /tickets/:id
   def update
+    authorize ticket
     if ticket.update(ticket_params)
       redirect_to ticket, notice: 'Ticket was successfully updated'
     else
@@ -64,6 +70,7 @@ class TicketsController < ApplicationController
 
   # DELETE /tickets/:id
   def destroy
+    authorize ticket
     ticket.destroy
     redirect_to tickets_url, notice: "Ticket was successfully destroyed."
   end

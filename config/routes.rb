@@ -37,10 +37,19 @@ Rails.application.routes.draw do
 
   # SETTINGS PAGES #
 
-  get "settings" => "settings#index", as: :settings
-  scope :settings do
-    resources :ldaps
+  namespace :settings do
+    resources :general
+    resources :appearance, only: [:index]
+    match :appearance, to: "appearance#update", via: [:put, :patch]
+    resources :localizations
+    resources :notifications
+    resources :integrations
+    resources :asset_tags
+    resources :barcodes
+    resources :ldaps, path: :ldap, except: [:show, :new, :edit]
     patch "ldaps/:id/sync" => "ldaps#sync", as: :ldap_sync
+    resources :backups
+    resources :logs
   end
 
   # DEVISE PATHS #
@@ -79,8 +88,10 @@ Rails.application.routes.draw do
 
   # RESOURCEFUL PATHS #
 
-  resources :users, concerns: :bulk_delete, except: [:create]
   resources :companies, concerns: :bulk_delete, param: :slug
+
+  resources :person_groups, path: "/people/groups", param: :slug
+  resources :users, concerns: :bulk_delete, except: [:create]
 
   resources :departments, concerns: :bulk_delete, param: :slug
   resources :locations, concerns: :bulk_delete, param: :slug

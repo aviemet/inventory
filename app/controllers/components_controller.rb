@@ -3,10 +3,11 @@ class ComponentsController < ApplicationController
   include Searchable
 
   expose :components, -> { search(@active_company.components.includes_associated, sortable_fields) }
-  expose :component
+  expose :component, scope: ->{ @active_company.components }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /components
   def index
+    authorize components
     paginated_components = components.page(params[:page] || 1)
 
     render inertia: "Components/Index", props: {
@@ -29,6 +30,7 @@ class ComponentsController < ApplicationController
 
   # GET /components/:id
   def show
+    authorize component
     render inertia: "Components/Show", props: {
       component: -> { component.render(view: :show) }
     }
@@ -36,26 +38,29 @@ class ComponentsController < ApplicationController
 
   # GET /components/new
   def new
+    authorize Component
     render inertia: "Components/New", props: {
       component: Component.new.render(view: :new),
-      models: -> { @active_company.models.find_by_category(:Component).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
+      models: -> { @active_company.models.find_by_category(:Component).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
     }
   end
 
   # GET /components/:id/edit
   def edit
+    authorize component
     render inertia: "Components/Edit", props: {
       component: component.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Component).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
+      models: -> { @active_company.models.find_by_category(:Component).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
     }
   end
 
   # GET /components/:id/checkout
   def checkout
+    authorize component
     redirect_to component if component.qty == 0
 
     assignment = Assignment.new
@@ -65,13 +70,14 @@ class ComponentsController < ApplicationController
     render inertia: "Components/Checkout", props: {
       component: component.render,
       assignment: assignment.render(view: :new),
-      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :as_options) },
-      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :options) },
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
     }
   end
 
   # GET /components/:id/checkin
   def checkin
+    authorize component
     redirect_to component if component.assignments.empty?
 
     assignment = component.assignment
@@ -81,13 +87,14 @@ class ComponentsController < ApplicationController
     render inertia: "Components/Checkin", props: {
       component: component.render,
       assignment: assignment.render,
-      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+      locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
       statuses: -> { StatusLabel.all.render }
     }
   end
 
   # POST /components
   def create
+    authorize Component
     component.company = @active_company
     if component.save
       redirect_to component
@@ -98,6 +105,7 @@ class ComponentsController < ApplicationController
 
   # PATCH/PUT /components/:id
   def update
+    authorize component
     if component.update(component_params)
       redirect_to component
     else
@@ -107,6 +115,7 @@ class ComponentsController < ApplicationController
 
   # DELETE /components/:id
   def destroy
+    authorize component
     component.destroy
     respond_to do |format|
       format.html { redirect_to components_url, notice: "Component was successfully destroyed." }

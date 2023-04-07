@@ -1,21 +1,6 @@
 class AssignmentsController < ApplicationController
   expose :assignment
 
-  # GET /assignments/:id
-  def show
-    render inertia: "Assignments/Show", props: {
-      assignment: assignment.render
-    }
-  end
-
-  # GET /assignments/:id/edit
-  def edit
-    @assignable = assignment.assignable
-    render inertia: "Assignments/Edit", props: {
-      assignment: assignment.render(view: :edit)
-    }
-  end
-
   # POST /assignments/
   def create
     # Assignable should always be valid

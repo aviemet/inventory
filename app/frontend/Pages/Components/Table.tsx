@@ -1,18 +1,10 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Link, Money, Table } from '@/Components'
+import { Group, Link, Money, Table } from '@/Components'
 import { EditButton, CheckoutButton } from '@/Components/Button'
-import { isNil } from 'lodash'
 import { type ITableProps } from '@/Components/Table/Table'
 
 const ComponentsTable = (props: ITableProps) => {
-	const qty = (component: Schema.Component) => {
-		if(isNil(component.qty)) {
-			return '-'
-		}
-		return component.qty
-	}
-
 	return (
 		<Table { ...props }>
 			<Table.Head>
@@ -24,7 +16,7 @@ const ComponentsTable = (props: ITableProps) => {
 					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
 					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
 					<Table.Cell sort="cost_cents">Cost</Table.Cell>
-					<Table.Cell sort="departments.name">Qty</Table.Cell>
+					<Table.Cell sort="departments.name">Avail. / Qty</Table.Cell>
 					<Table.Cell sort="departments.name">Min Qty</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
@@ -70,18 +62,21 @@ const ComponentsTable = (props: ITableProps) => {
 							<Money currency={ component.cost_currency }>{ component.cost }</Money>
 						</Table.Cell>
 
-						<Table.Cell nowrap>{ qty(component) }</Table.Cell>
+						<Table.Cell nowrap>{ `${component.qty_available} / ${component.qty}` }</Table.Cell>
 
 						<Table.Cell>{ component.min_qty }</Table.Cell>
 
 						<Table.Cell fitContent>
-							<CheckoutButton
-								href={ Routes.checkoutComponent(component) }
-								disabled={ !component.available_to_checkout }
-								tooltipMessage={ !component.available_to_checkout && 'There are none to checkout' }
-							/>
+							<Group noWrap spacing="sm">
+								<CheckoutButton
+									href={ Routes.checkoutComponent(component) }
+									disabled={ component.qty_available < 1 }
+									tooltipMessage={ component.qty_available < 1 && 'There are none to checkout' }
+									label={ component.name }
+								/>
 
-							<EditButton href={ Routes.editComponent(component) } />
+								<EditButton href={ Routes.editComponent(component) } label={ component.name } />
+							</Group>
 						</Table.Cell>
 
 					</Table.Row>

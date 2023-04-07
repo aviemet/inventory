@@ -1,31 +1,25 @@
-import React from 'react'
-import { Checkbox, type CheckboxProps } from '@mantine/core'
+import React, { forwardRef } from 'react'
+import { Checkbox, Sx, type CheckboxProps } from '@mantine/core'
 
 export interface ICheckboxProps extends CheckboxProps {
-	name?: string
+	sx?: Sx
 }
 
-const CheckboxComponent = ({ onChange, value, id, name, label, ...props }: ICheckboxProps) => {
+const CheckboxComponent = forwardRef<HTMLInputElement, ICheckboxProps>((
+	{ id, name, sx, ...props },
+	ref,
+) => {
 	const inputId = id ?? name
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if(onChange) onChange(e)
-	}
-
 	return (
-		<>
-			<Checkbox
-				id={ inputId }
-				label={ label }
-				name={ name }
-				value={ value }
-				onChange={ handleChange }
-				required={ props.required }
-				{ ...props }
-				sx={ { padding: '14px 10px 5px 10px' } }
-			/>
-		</>
+		<Checkbox
+			ref={ ref }
+			id={ inputId }
+			name={ name }
+			sx={ [{ padding: '14px 10px' }, sx] }
+			{ ...props }
+		/>
 	)
-}
+})
 
 export default CheckboxComponent

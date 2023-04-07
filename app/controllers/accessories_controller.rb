@@ -3,10 +3,11 @@ class AccessoriesController < ApplicationController
   include Searchable
 
   expose :accessories, -> { search(@active_company.accessories.includes_associated, sortable_fields) }
-  expose :accessory
+  expose :accessory, scope: ->{ @active_company.accessories }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /accessories
   def index
+    authorize accessories
     paginated_accessories = accessories.page(params[:page] || 1)
 
     render inertia: "Accessories/Index", props: {
@@ -20,6 +21,7 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/:id
   def show
+    authorize accessory
     render inertia: "Accessories/Show", props: {
       accessory: -> { accessory.render(view: :show) }
     }
@@ -27,30 +29,33 @@ class AccessoriesController < ApplicationController
 
   # GET /accessories/new
   def new
+    authorize Accessory
     render inertia: "Accessories/New", props: {
       accessory: Accessory.new.render(view: :new),
-      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :as_options) }
+      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
+      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :options) }
     }
   end
 
   # GET /accessories/:id/edit
   def edit
+    authorize accessory
     render inertia: "Accessories/Edit", props: {
       accessory: accessory.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :as_options) },
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      locations: -> { @active_company.locations.render(view: :as_options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :as_options) }
+      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      locations: -> { @active_company.locations.render(view: :options) },
+      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
+      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :options) }
     }
   end
 
   # GET /accessories/:id/checkout
   def checkout
+    authorize accessory
     if accessory.qty == 0
       redirect_to accessory, warning: "There are none available to checkout"
     else
@@ -61,15 +66,16 @@ class AccessoriesController < ApplicationController
       render inertia: "Accessories/Checkout", props: {
         accessory: accessory.render(view: :edit),
         assignment: assignment.render(view: :new),
-        people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :as_options) },
-        items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :as_options) },
-        locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :as_options) },
+        people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
+        items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
+        locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
       }
     end
   end
 
   # GET /accessories/:id/checkin/:assignment_id
   def checkin
+    authorize accessory
     assignment = Assignment.find(params[:assignment_id])
 
     if assignment&.assignable == accessory && assignment.active
@@ -88,6 +94,7 @@ class AccessoriesController < ApplicationController
 
   # POST /accessories
   def create
+    authorize Accessory
     accessory.company = @active_company
     if accessory.save
       redirect_to accessory, notice: 'Accessory was successfully created'
@@ -98,6 +105,7 @@ class AccessoriesController < ApplicationController
 
   # PATCH/PUT /accessories/:id
   def update
+    authorize accessory
     if accessory.update(accessory_params)
       redirect_to accessory, notice: 'Accessory was successfully updated'
     else
@@ -107,6 +115,7 @@ class AccessoriesController < ApplicationController
 
   # DELETE /accessories/:id
   def destroy
+    authorize accessory
     accessory.destroy
     redirect_to accessories_url, notice: 'Accessory was successfully destroyed.'
   end

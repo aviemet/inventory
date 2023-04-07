@@ -14,7 +14,9 @@ const CategoriesIndex = ({ categories, pagination }: ICategoriesIndexProps) => {
 	const title = 'Categories'
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } breadcrumbs={ [
+			{ title: 'Categories', href: Routes.categories() },
+		] }>
 			<Table.Section>
 				<Table.TableProvider
 					selectable
@@ -23,9 +25,11 @@ const CategoriesIndex = ({ categories, pagination }: ICategoriesIndexProps) => {
 					rows={ categories }
 					pagination={ pagination }
 				>
-					<TableTitleSection title={ title } menuOptions={ [
-						{ label: 'New Category', href: Routes.newCategory(), icon: NewIcon },
-					] }>
+					<TableTitleSection title={ title }
+						deleteRoute={ Routes.categories() }
+						menuOptions={ [
+							{ label: 'New Category', href: Routes.newCategory(), icon: NewIcon },
+						] }>
 						<Table.SearchInput />
 					</TableTitleSection>
 

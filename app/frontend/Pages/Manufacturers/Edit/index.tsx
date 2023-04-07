@@ -13,7 +13,7 @@ const New = ({ manufacturer, ...models }: IUpdateManufacturerProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Manufacturers', href: Routes.manufacturers() },
-			{ title: manufacturer.name!, href: Routes.manufacturer(manufacturer) },
+			{ title: manufacturer.name!, href: Routes.manufacturer(manufacturer.slug) },
 			{ title: 'Edit Manufacturer' },
 		] }>
 			<Section>

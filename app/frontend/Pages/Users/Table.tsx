@@ -23,7 +23,7 @@ const UsersTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editUser(user) } />
+							<EditButton href={ Routes.editUser(user) } label={ user.person?.name || user.email } />
 						</Table.Cell>
 
 					</Table.Row>

@@ -3,10 +3,9 @@ FactoryBot.define do
     name { Faker::Device.unique.model_name }
     cost { Faker::Commerce.price(range: 0..100.0) }
     qty { 10 }
-    default_location factory: :location
     status_label
-    model
-    vendor
     company
+    model { association :model, company: company }
+    vendor { association :vendor, company: company }
   end
 end

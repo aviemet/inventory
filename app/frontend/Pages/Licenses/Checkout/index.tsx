@@ -57,7 +57,7 @@ const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => 
 							<Table.Body>
 								<Table.Row>
 									<Table.HeadCell>Seats</Table.HeadCell>
-									<Table.Cell>{ license.seats }</Table.Cell>
+									<Table.Cell>{ license.qty }</Table.Cell>
 								</Table.Row>
 
 								<Table.Row>

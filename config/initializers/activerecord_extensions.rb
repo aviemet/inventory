@@ -8,4 +8,4 @@ module ActiveRecordExtensions
   end
 end
 
-ActiveRecord::Relation.send(:include, ActiveRecordExtensions)
+ActiveRecord::Relation.include ActiveRecordExtensions

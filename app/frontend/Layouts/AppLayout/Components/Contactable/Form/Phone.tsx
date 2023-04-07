@@ -1,10 +1,9 @@
 import React from 'react'
 import { DynamicInputs, TextInput } from '@/Components/Form'
-// import { NestedFields } from 'use-inertia-form'
 
 const Phone = () => {
 	return (
-		<DynamicInputs label="Phone Numbers" emptyData={ {
+		<DynamicInputs model="phones" label="Phone Numbers" emptyData={ {
 			number: '',
 			extension: '',
 			notes: '',

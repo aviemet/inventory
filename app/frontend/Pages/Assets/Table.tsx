@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Link, Money, Table } from '@/Components'
+import { Group, Link, Money, Table } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 
@@ -65,14 +65,15 @@ const AssetTable = (props: ITableProps) => {
 							</Table.Cell>
 
 							<Table.Cell fitContent>
-								{ asset.available_to_checkout ?
-									<CheckoutButton href={ Routes.checkoutAsset(asset) } />
-									:
-									<CheckinButton href={ Routes.checkinAsset(asset) } />
-								}
-								<EditButton href={ Routes.editAsset(asset) } />
+								<Group noWrap spacing="sm">
+									{ asset.available_to_checkout ?
+										<CheckoutButton href={ Routes.checkoutAsset(asset) } label={ asset.name } />
+										:
+										<CheckinButton href={ Routes.checkinAsset(asset) } label={ asset.name } />
+									}
+									<EditButton href={ Routes.editAsset(asset) } label={ asset.name } />
+								</Group>
 							</Table.Cell>
-
 						</Table.Row>
 					)
 				} } />

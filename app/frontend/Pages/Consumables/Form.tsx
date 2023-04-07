@@ -10,6 +10,7 @@ import {
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
+import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Components/Form/Dropdowns'
 
 export interface IConsumableFormProps {
 	to: string
@@ -19,9 +20,11 @@ export interface IConsumableFormProps {
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
+	manufacturers: Schema.Manufacturer[]
+	categories: Schema.Category[]
 }
 
-const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, vendors, locations }: IConsumableFormProps) => {
+const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, vendors, locations, manufacturers, categories }: IConsumableFormProps) => {
 	return (
 		<Form
 			model="consumable"
@@ -34,12 +37,11 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Consumable Details">
-				<SearchableDropdown
-					label="Model"
-					name="model_id"
-					required
-					options={ models }
-					onOpen={ () => router.reload({ only: ['models'] }) }
+				<ModelsDropdown
+					models={ models }
+					manufacturers={ manufacturers }
+					categories={ categories }
+					errorKey="consumable.model"
 				/>
 
 				<TextInput name="serial" label="Serial" />
@@ -52,23 +54,17 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<SearchableDropdown
-					label="Vendor"
-					name="vendor_id"
-					options={ vendors }
-					filterMatchKeys={ ['name'] }
-					onOpen={ () => router.reload({ only: ['vendors'] }) }
-				/>
+				<VendorsDropdown vendors={ vendors } />
 
 				<TextInput name="cost" label="Cost" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-				<SearchableDropdown
+				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
-					options={ locations }
-					onOpen={ () => router.reload({ only: ['locations'] }) }
+					locations={ locations }
+					currencies={ [] }
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />

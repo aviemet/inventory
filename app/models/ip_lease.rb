@@ -1,5 +1,6 @@
 class IpLease < ApplicationRecord
   tracked
+  resourcify
 
   belongs_to :nic
   has_one :item, through: :nic

@@ -1,28 +1,29 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
-import { NewIcon, EditIcon } from '@/Components/Icons'
-import ItemsTable from '@/Pages/Items/Table'
+import { NewIcon } from '@/Components/Icons'
 import AccessoriesTable from '@/Pages/Accessories/Table'
 import ConsumablesTable from '@/Pages/Consumables/Table'
 import ComponentsTable from '@/Pages/Components/Table'
 import LicensesTable from '@/Pages/Licenses/Table'
 import PeopleTable from '@/Pages/People/Table'
 import ShowPageTableTemplate from '@/Layouts/AppLayout/Components/ShowPageTableTemplate'
-
-type TPaginatedModel<T> = {
-	data: T
-	pagination: Schema.Pagination
-}
+import Details from './Details'
+import Items from './Items'
+import Accessories from './Accessories'
+import Components from './Components'
+import Consumables from './Consumables'
+import Licenses from './Licenses'
+import People from './People'
 
 interface IDepartmentShowProps {
 	department: Schema.DepartmentWithCounts
-	items: TPaginatedModel<Schema.Item[]>
-	accessories: TPaginatedModel<Schema.Accessory[]>
-	components: TPaginatedModel<Schema.Component[]>
-	consumables: TPaginatedModel<Schema.Consumable[]>
-	licenses: TPaginatedModel<Schema.License[]>
-	people: TPaginatedModel<Schema.Person[]>
+	items: PaginatedModel<Schema.Item[]>
+	accessories: PaginatedModel<Schema.Accessory[]>
+	components: PaginatedModel<Schema.Component[]>
+	consumables: PaginatedModel<Schema.Consumable[]>
+	licenses: PaginatedModel<Schema.License[]>
+	people: PaginatedModel<Schema.Person[]>
 }
 
 const tabs = {
@@ -63,128 +64,37 @@ const Show = ({ department, items, accessories, components, consumables, license
 
 				{ /*********** Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
-					<Section>
-						<Flex position="apart">
-							<Heading sx={ { flex: 1 } }>{ title }</Heading>
-
-							<Menu position="bottom-end">
-								<Menu.Target />
-
-								<Menu.Dropdown>
-									<Menu.Link
-										href={ Routes.editDepartment(department.slug) }
-										icon={ <EditIcon /> }
-									>
-										Edit
-									</Menu.Link>
-								</Menu.Dropdown>
-							</Menu>
-						</Flex>
-
-						<div>Location: { department.location?.name }</div>
-					</Section>
+					<Details title={ title } department={ department } />
 				</Tabs.Panel>
 
 				{ /*********** ITEMS ***********/ }
 				<Tabs.Panel value={ tabs.items }>
-					<Section>
-						<ShowPageTableTemplate
-							title={ `${department.name} Assets` }
-							model="items"
-							rows={ items?.data }
-							pagination={ items?.pagination }
-							menuOptions={ [
-								{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
-							] }
-						>
-							<ItemsTable wrapper={ false } />
-						</ShowPageTableTemplate>
-					</Section>
+					<Items items={ items } department={ department } />
 				</Tabs.Panel>
 
 				{ /*********** ACCESSORIES ***********/ }
 				<Tabs.Panel value={ tabs.accessories }>
-					<Section>
-						<ShowPageTableTemplate
-							title={ `${department.name} Accessories` }
-							model="accessories"
-							rows={ accessories?.data }
-							pagination={ accessories?.pagination }
-							menuOptions={ [
-								{ label: 'New Accessory', href: Routes.newAccessory(), icon: NewIcon },
-							] }
-						>
-							<AccessoriesTable wrapper={ false } />
-						</ShowPageTableTemplate>
-					</Section>
+					<Accessories accessories={ accessories } department={ department } />
 				</Tabs.Panel>
 
 				{ /*********** CONSUMABLES ***********/ }
 				<Tabs.Panel value={ tabs.consumables }>
-					<Section>
-						<ShowPageTableTemplate
-							title={ `${department.name} Consumables` }
-							model="consumables"
-							rows={ consumables?.data }
-							pagination={ consumables?.pagination }
-							menuOptions={ [
-								{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
-							] }
-						>
-							<ConsumablesTable wrapper={ false } />
-						</ShowPageTableTemplate>
-					</Section>
+					<Consumables consumables={ consumables } department={ department } />
 				</Tabs.Panel>
 
 				{ /*********** COMPONENTS ***********/ }
 				<Tabs.Panel value={ tabs.components }>
-					<Section>
-						<ShowPageTableTemplate
-							title={ `${department.name} Components` }
-							model="components"
-							rows={ components?.data }
-							pagination={ components?.pagination }
-							menuOptions={ [
-								{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
-							] }
-						>
-							<ComponentsTable wrapper={ false } />
-						</ShowPageTableTemplate>
-					</Section>
+					<Components components={ components } department={ department } />
 				</Tabs.Panel>
 
 				{ /*********** LICENSES ***********/ }
 				<Tabs.Panel value={ tabs.licenses }>
-					<Section>
-						<ShowPageTableTemplate
-							title={ `${department.name} Licenses` }
-							model="licenses"
-							rows={ licenses?.data }
-							pagination={ licenses?.pagination }
-							menuOptions={ [
-								{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
-							] }
-						>
-							<LicensesTable wrapper={ false } />
-						</ShowPageTableTemplate>
-					</Section>
+					<Licenses licenses={ licenses } department={ department } />
 				</Tabs.Panel>
 
 				{ /*********** PEOPLE ***********/ }
 				<Tabs.Panel value={ tabs.people }>
-					<Section>
-						<ShowPageTableTemplate
-							title={ `${department.name} People` }
-							model="people"
-							rows={ people?.data }
-							pagination={ people?.pagination }
-							menuOptions={ [
-								{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
-							] }
-						>
-							<PeopleTable wrapper={ false } />
-						</ShowPageTableTemplate>
-					</Section>
+					<People people={ people } department={ department } />
 				</Tabs.Panel>
 
 			</Tabs>

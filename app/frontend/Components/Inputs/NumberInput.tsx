@@ -2,22 +2,24 @@ import React, { forwardRef } from 'react'
 import { NumberInput, type NumberInputProps } from '@mantine/core'
 import Label from './Label'
 
-const NumberInputComponent = forwardRef<HTMLInputElement, NumberInputProps>((
-	{ label, required = false, value, onChange, id, pattern, size = 'md', ...props },
+export interface INumberInputProps extends NumberInputProps {}
+
+const NumberInputComponent = forwardRef<HTMLInputElement, INumberInputProps>((
+	{ label, name, required = false, value, id, size = 'md', ...props },
 	ref,
 ) => {
+	const inputId = id || name
+
 	return (
 		<>
-			{ label && <Label required={ required } htmlFor={ id }>
+			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
 			<NumberInput
-				id={ id }
+				id={ inputId }
 				value={ Number(value) }
-				onChange={ onChange }
 				required={ required }
 				ref={ ref }
-				pattern={ pattern }
 				size={ size }
 				{ ...props }
 			/>

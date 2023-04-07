@@ -6,6 +6,12 @@ import { Routes } from '@/lib'
 import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
 
+type ActiveCompanyFormData = {
+	user: {
+		active_company_id: number|string
+	}
+}
+
 const ActiveCompany = ({ user }: { user: Schema.User }) => {
 	if(!user?.companies || isEmpty(user.companies)) {
 		return <Title order={ 3 }>Inventory Application</Title>
@@ -15,7 +21,7 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 		return <Title order={ 3 }>{ user.active_company!.name }</Title>
 	}
 
-	const handleFormChange = (form: UseFormProps) => {
+	const handleFormChange = (form: UseFormProps<ActiveCompanyFormData>) => {
 		if(String(form.data.user.active_company_id) === String(user.active_company_id)) return
 
 		form.submit().then(() => {
@@ -27,7 +33,7 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 		<Form
 			async
 			grid={ false }
-			data={ { user: { active_company_id: user.active_company?.id }  } }
+			data={ { user: { active_company_id: user.active_company?.id || '' }  } }
 			to={ Routes.apiUser(user.id) }
 			method="patch"
 			model="user"
@@ -40,6 +46,13 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 				getValue={ option => String(option.id) }
 				clearable={ false }
 				searchable={ false }
+				field={ false }
+				sx={ {
+					width: 'fit-content',
+					input:{
+						backgroundColor: 'transparent',
+					},
+				} }
 			/>
 		</Form>
 	)

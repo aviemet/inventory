@@ -11,6 +11,8 @@ Style/Documentation:
   Enabled: false
 Style/ExponentialNotation:
   Enabled: true
+Style/HashAsLastArrayItem: 
+  Enabled: false
 Style/HashEachMethods:
   Enabled: true
 Style/HashTransformKeys:
@@ -191,7 +193,7 @@ Style/SpecialGlobalVars:
   StyleGuide: https://relaxed.ruby.style/#stylespecialglobalvars
 
 Style/TrailingCommaInArguments:
-  Enabled: false
+  EnforcedStyleForMultiline: consistent_comma
   StyleGuide: https://relaxed.ruby.style/#styletrailingcommainarguments
 
 Style/TrailingCommaInArrayLiteral:

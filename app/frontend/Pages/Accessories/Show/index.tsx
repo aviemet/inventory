@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Tooltip, Page } from '@/Components'
+import React from 'react'
+import { Section, Menu, Group, Heading, Tabs, Tooltip, Page } from '@/Components'
 import { Routes } from '@/lib'
 import Details from './Details'
 import History from './History'
@@ -25,17 +25,17 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 		] }>
 
 			<Section>
-				<Flex>
-					<Heading sx={ { flex: 1 } }>{ title }</Heading>
+				<Group position="apart">
+					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Link
 								href={ Routes.checkoutAccessory(accessory) }
-								disabled={ !useCallback((accessory: Schema.Accessory) => accessory.available_to_checkout, [accessory.qty, accessory.assignments]) }
+								disabled={ accessory.qty_available < 1 }
 							>
-								{ !accessory.available_to_checkout ?
+								{ accessory.qty_available < 1 ?
 									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Accessory</div></Tooltip>
 									:
 									'Checkout Accessory'
@@ -46,7 +46,7 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 					<Tabs.List>

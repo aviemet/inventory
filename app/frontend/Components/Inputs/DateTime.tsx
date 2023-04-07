@@ -1,10 +1,9 @@
 import React from 'react'
 import Label from './Label'
-import { type InputProps } from '@mantine/core'
-import { DateTimePicker } from '@mantine/dates'
+import { DateTimePicker, DateTimePickerProps } from '@mantine/dates'
+import { isEmpty } from 'lodash'
 
-export interface IDateTimeProps extends InputProps {
-	label?: string
+export interface IDateTimeProps extends DateTimePickerProps {
 	name?: string
 	id?: string
 	value?: Date
@@ -12,17 +11,31 @@ export interface IDateTimeProps extends InputProps {
 	error?: string | string[]
 }
 
-const DateTime = ({ label, id, required, value = new Date(), size = 'md', radius = 'xs', ...props }: IDateTimeProps) => {
+const DateTime = ({
+	label,
+	id,
+	name,
+	required,
+	value = new Date(),
+	size = 'md',
+	radius = 'xs',
+	valueFormat = 'L LT',
+	...props
+}: IDateTimeProps) => {
+	const inputId = id || name
+
 	return (
 		<>
-			{ label && <Label required={ required } htmlFor={ id }>
+			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
 			<DateTimePicker
-				defaultValue={ new Date() }
+				id={ inputId }
+				name={ name }
+				value={ isEmpty(value) ? null : new Date(value) }
 				radius={ radius }
 				size={ size }
-				valueFormat='L LT'
+				valueFormat={ valueFormat }
 				{ ...props }
 			/>
 		</>
@@ -30,3 +43,4 @@ const DateTime = ({ label, id, required, value = new Date(), size = 'md', radius
 }
 
 export default DateTime
+

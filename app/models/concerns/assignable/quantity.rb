@@ -7,8 +7,14 @@ module Assignable
     included do
       validates :qty, numericality: { greater_than: 0 }, allow_blank: false
 
+      def qty_available
+        return 0 if self.qty.nil?
+
+        self.qty - self.assignments.active.sum(:qty)
+      end
+
       def available_to_checkout?
-        self.assignments.active.sum(:qty) < self.qty
+        self.qty_available > 0
       end
 
       def unassign(assignment = self.assignments.where(active: true).last, returned_at: Time.current)
@@ -31,12 +37,6 @@ module Assignable
 
         success
       end
-    end
-
-    def _after_assignment(assignment, _params)
-      return if assignment.qty.nil?
-
-      self.update(qty: self.qty - assignment.qty)
     end
   end
 end
