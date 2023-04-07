@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -169,7 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
     t.string "email"
     t.text "notes"
     t.bigint "contact_id", null: false
-    t.bigint "category_id", null: false
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_emails_on_category_id"
@@ -231,7 +231,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
 
   create_table "licenses", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "seats"
+    t.integer "qty"
     t.text "key"
     t.string "licenser_name"
     t.string "licenser_email"
@@ -356,6 +356,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
     t.string "employee_number"
     t.string "job_title"
     t.string "guid"
+    t.bigint "user_id"
     t.bigint "manager_id"
     t.bigint "location_id"
     t.datetime "created_at", null: false
@@ -363,6 +364,41 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
     t.index ["guid"], name: "index_people_on_guid", unique: true
     t.index ["location_id"], name: "index_people_on_location_id"
     t.index ["manager_id"], name: "index_people_on_manager_id"
+    t.index ["user_id"], name: "index_people_on_user_id"
+  end
+
+  create_table "people_roles", id: false, force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "role_id"
+    t.index ["person_id", "role_id"], name: "index_people_roles_on_person_id_and_role_id"
+    t.index ["person_id"], name: "index_people_roles_on_person_id"
+    t.index ["role_id"], name: "index_people_roles_on_role_id"
+  end
+
+  create_table "person_group_assignments", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "person_group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_group_id"], name: "index_person_group_assignments_on_person_group_id"
+    t.index ["person_id"], name: "index_person_group_assignments_on_person_id"
+  end
+
+  create_table "person_groups", force: :cascade do |t|
+    t.string "name"
+    t.string "slug", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_person_groups_on_slug", unique: true
+  end
+
+  create_table "person_groups_roles", id: false, force: :cascade do |t|
+    t.bigint "person_group_id"
+    t.bigint "role_id"
+    t.index ["person_group_id", "role_id"], name: "index_person_groups_roles_on_person_group_id_and_role_id"
+    t.index ["person_group_id"], name: "index_person_groups_roles_on_person_group_id"
+    t.index ["role_id"], name: "index_person_groups_roles_on_role_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -466,6 +502,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
 
   create_table "tickets", force: :cascade do |t|
     t.string "subject", null: false
+    t.serial "number", null: false
     t.text "description"
     t.integer "priority"
     t.bigint "status_id"
@@ -476,6 +513,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
     t.datetime "updated_at", null: false
     t.index ["asset_id"], name: "index_tickets_on_asset_id"
     t.index ["created_by_id"], name: "index_tickets_on_created_by_id"
+    t.index ["number"], name: "index_tickets_on_number", unique: true
     t.index ["primary_contact_id"], name: "index_tickets_on_primary_contact_id"
     t.index ["status_id"], name: "index_tickets_on_status_id"
   end
@@ -500,7 +538,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
     t.datetime "locked_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "person_id"
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count", default: 0
     t.bigint "active_company_id"
     t.boolean "active", default: true
     t.jsonb "table_preferences", default: {}
@@ -508,7 +553,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
     t.index ["active_company_id"], name: "index_users_on_active_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["person_id"], name: "index_users_on_person_id"
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["table_preferences"], name: "index_users_on_table_preferences", using: :gin
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
@@ -587,6 +634,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
   add_foreign_key "ownerships", "departments"
   add_foreign_key "people", "locations"
   add_foreign_key "people", "people", column: "manager_id"
+  add_foreign_key "people", "users"
+  add_foreign_key "person_group_assignments", "people"
+  add_foreign_key "person_group_assignments", "person_groups"
   add_foreign_key "phones", "categories"
   add_foreign_key "phones", "contacts"
   add_foreign_key "purchases", "orders"
@@ -600,7 +650,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_010929) do
   add_foreign_key "tickets", "people", column: "primary_contact_id"
   add_foreign_key "tickets", "ticket_statuses", column: "status_id"
   add_foreign_key "users", "companies", column: "active_company_id"
-  add_foreign_key "users", "people"
   add_foreign_key "warranties", "assets"
   add_foreign_key "websites", "contacts"
 end

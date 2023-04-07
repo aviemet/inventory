@@ -6,7 +6,7 @@ import { type UseFormProps } from 'use-inertia-form'
 export interface IDepartmentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
+	onSubmit?: (object: UseFormProps<Schema.Department>) => boolean|void
 	department?: Partial<Schema.Department>
 	locations: Schema.Location[]
 }
@@ -14,6 +14,7 @@ export interface IDepartmentFormProps {
 const emptyDepartment: Partial<Schema.Department> = {
 	name: '',
 	location_id: undefined,
+	notes: '',
 }
 
 const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment, locations }: IDepartmentFormProps) => {

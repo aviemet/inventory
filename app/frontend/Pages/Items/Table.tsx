@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Link, Table, Money } from '@/Components'
+import { Link, Table, Money, Group } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
 
@@ -23,7 +23,7 @@ const ItemsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (item: Schema.Item) => (
+				<Table.RowIterator render={ (item: Schema.ItemsIndex) => (
 					<Table.Row key={ item.id }>
 
 						<Table.Cell nowrap>
@@ -71,12 +71,14 @@ const ItemsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							{ item.assigned ?
-								<CheckinButton href={ Routes.checkinItem(item) } />
-								:
-								<CheckoutButton href={ Routes.checkoutItem(item) } />
-							}
-							<EditButton href={ Routes.editItem(item) } />
+							<Group noWrap spacing="sm">
+								{ item.assigned ?
+									<CheckinButton href={ Routes.checkinItem(item) } label={ item.name } />
+									:
+									<CheckoutButton href={ Routes.checkoutItem(item) } label={ item.name } />
+								}
+								<EditButton href={ Routes.editItem(item) } label={ item.name } />
+							</Group>
 						</Table.Cell>
 
 					</Table.Row>

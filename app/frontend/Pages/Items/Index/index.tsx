@@ -16,6 +16,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 			model="items"
 			rows={ items }
 			pagination={ pagination }
+			deleteRoute={ Routes.items() }
 			menuOptions={ [
 				{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
 			] }

@@ -13,8 +13,8 @@ class Contract < ApplicationRecord
     }
   )
 
-  resourcify
   tracked
+  resourcify
 
   validates_presence_of :name
 

@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import React from 'react'
+import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { Tooltip } from '@mantine/core'
 import Details from './Details'
@@ -25,17 +25,17 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 			{ title: component.name! },
 		] }>
 			<Section>
-				<Flex>
-					<Heading sx={ { flex: 1 } }>{ title }</Heading>
+				<Group position="apart">
+					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
 							<Menu.Link
 								href={ Routes.checkoutComponent(component) }
-								disabled={ !useCallback((component: Schema.Component) => component.available_to_checkout, [component.qty, component.assignments]) }
+								disabled={ component.qty_available < 1 }
 							>
-								{ !component.available_to_checkout ?
+								{ component.qty_available < 1 ?
 									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Component</div></Tooltip>
 									:
 									'Checkout Component'
@@ -46,7 +46,7 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 					<Tabs.List>

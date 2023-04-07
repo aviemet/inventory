@@ -1,20 +1,10 @@
 import React from 'react'
-import { Link, Money, Table } from '@/Components'
+import { Group, Link, Money, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { EditButton, CheckoutButton } from '@/Components/Button'
-import { isNil } from 'lodash'
 import { type ITableProps } from '@/Components/Table/Table'
 
 const AccessoriesTable = (props: ITableProps) => {
-	const qty = (accessory: Schema.Accessory) => {
-		if(isNil(accessory.qty)) {
-			return '-'
-		} else if(isNil(accessory.active_assignments_count)) {
-			return accessory.qty
-		}
-		return `${accessory.qty - accessory.active_assignments_count} / ${accessory.qty}`
-	}
-
 	return (
 		<Table { ...props }>
 			<Table.Head>
@@ -27,7 +17,7 @@ const AccessoriesTable = (props: ITableProps) => {
 					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
 					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
 					<Table.Cell sort="cost_cents">Cost</Table.Cell>
-					<Table.Cell sort="departments.name">Qty</Table.Cell>
+					<Table.Cell sort="departments.name">Avail. / Qty</Table.Cell>
 					<Table.Cell sort="departments.name">Min Qty</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
@@ -79,18 +69,21 @@ const AccessoriesTable = (props: ITableProps) => {
 								<Money currency={ accessory.cost_currency }>{ accessory.cost }</Money>
 							</Table.Cell>
 
-							<Table.Cell nowrap>{ qty(accessory) }</Table.Cell>
+							<Table.Cell nowrap>{ `${accessory.qty_available} / ${accessory.qty}` }</Table.Cell>
 
 							<Table.Cell>{ accessory.min_qty }</Table.Cell>
 
 							<Table.Cell fitContent>
-								<CheckoutButton
-									href={ Routes.checkoutAccessory(accessory) }
-									disabled={ !accessory.available_to_checkout }
-									tooltipMessage={ !accessory.available_to_checkout && 'None available to checkout' }
-								/>
+								<Group noWrap spacing="sm">
+									<CheckoutButton
+										href={ Routes.checkoutAccessory(accessory) }
+										disabled={ accessory.qty_available < 1 }
+										tooltipMessage={ accessory.qty_available < 1 && 'None available to checkout' }
+										label={ accessory.name }
+									/>
 
-								<EditButton href={ Routes.editAccessory(accessory) } />
+									<EditButton href={ Routes.editAccessory(accessory) } label={ accessory.name } />
+								</Group>
 							</Table.Cell>
 
 						</Table.Row>

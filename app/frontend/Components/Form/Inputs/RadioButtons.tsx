@@ -1,29 +1,48 @@
 import React from 'react'
-import RadioButtons, { type IRadioButtonsProps } from '../../Inputs/RadioButtons'
+import RadioButtons, { type IRadioButtonsProps } from '@/Components/Inputs/RadioButtons'
 import Field from '../Field'
-import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
+import { useInertiaInput } from 'use-inertia-form'
+import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-interface IFormRadioButtonsProps extends Omit<IRadioButtonsProps, 'onChange'> {
-	model?: string
-	onChange?: (v: string, form: UseFormProps) => void
-	required?: boolean
+interface IFormRadioButtonsProps extends Omit<IRadioButtonsProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
+	field?: boolean
 }
 
-const FormRadioButtons = ({ options, name, id, model, onChange, required, ...props }: IFormRadioButtonsProps) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model })
+const FormRadioButtons = ({
+	options,
+	name,
+	id,
+	model,
+	onChange,
+	onBlur,
+	required,
+	field = true,
+	...props
+}: IFormRadioButtonsProps) => {
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
 
 	const handleChange = (v: string) => {
 		setValue(v)
 
 		if(onChange) onChange(v, form)
-		if(onChange) onChange(v, form)
+	}
+
+	const handleBlur = (e: React.FocusEvent<HTMLDivElement, Element>) => {
+		if(onBlur) onBlur(value, form)
 	}
 
 	return (
-		<Field
-			type="radio"
-			required={ required }
-			errors={ !!error }
+		<ConditionalWrapper
+			wrapper={ children => (
+				<Field
+					type="radio"
+					required={ required }
+					errors={ !!error }
+				>
+					{ children }
+				</Field>
+			) }
+			condition={ field }
 		>
 			<RadioButtons
 				options={ options }
@@ -31,9 +50,10 @@ const FormRadioButtons = ({ options, name, id, model, onChange, required, ...pro
 				name={ inputName }
 				value={ value }
 				onChange={ handleChange }
+				onBlur={ handleBlur }
 				{ ...props }
 			/>
-		</Field>
+		</ConditionalWrapper>
 	)
 }
 

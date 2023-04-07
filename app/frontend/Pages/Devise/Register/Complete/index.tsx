@@ -52,15 +52,11 @@ const CompleteRegistration = () => {
 						<p>If you will be tracking assets owned by multiple companies, enter the primary entity here, you&apos;ll have the opportunity to create other companies later.</p>
 					</Field>
 
-					<Field>
+					<Field mb={ 16 }>
 						<Submit>Complete and Log In!</Submit>
 					</Field>
 
 				</Tile.Content>
-
-				<Tile.Footer>
-					<Tile.HoverLink href={ Routes.userRegistration() }>Register Instead</Tile.HoverLink>
-				</Tile.Footer>
 			</Form>
 		</Tile>
 	)

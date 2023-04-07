@@ -3,15 +3,15 @@ class VendorsController < ApplicationController
   include Searchable
 
   expose :vendors, -> { search(@active_company.vendors.includes_associated, sortable_fields) }
-  expose :vendor, -> { @active_company.vendors.includes_associated.find_by_slug(request.params[:slug]) }
+  expose :vendor, id: ->{ params[:slug] }, scope: ->{ @active_company.vendors.includes_associated }, find_by: :slug
 
   # GET /vendors
   def index
-    self.vendors = search(vendors, sortable_fields)
+    authorize vendors
     paginated_vendors = vendors.page(params[:page] || 1)
 
     render inertia: "Vendors/Index", props: {
-      vendors: paginated_vendors.render(view: :associations),
+      vendors: paginated_vendors.render(view: :index),
       pagination: -> { {
         count: vendors.size,
         **pagination_data(paginated_vendors)
@@ -21,12 +21,15 @@ class VendorsController < ApplicationController
 
   # GET /vendors/:slug
   def show
+    # manual = @active_company.vendors.includes_associated.find_by_slug!(params[:slug])
+    ap({ vendor:, slug: params[:slug] })
+    authorize vendor
     render inertia: "Vendors/Show", props: {
-      vendor: vendor.render(view: :show_page),
+      vendor: vendor.render(view: :show),
       items: InertiaRails.lazy(-> {
         paginated_items = vendor.items.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_items.render(view: :associations),
+          data: paginated_items.render,
           pagination: {
             count: vendor.items.size,
             **pagination_data(paginated_items)
@@ -36,7 +39,7 @@ class VendorsController < ApplicationController
       accessories: InertiaRails.lazy(-> {
         paginated_accessories = vendor.accessories.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_accessories.render(view: :associations),
+          data: paginated_accessories.render,
           pagination: {
             count: vendor.accessories.size,
             **pagination_data(paginated_accessories)
@@ -46,7 +49,7 @@ class VendorsController < ApplicationController
       consumables: InertiaRails.lazy(-> {
         paginated_consumables = vendor.consumables.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_consumables.render(view: :associations),
+          data: paginated_consumables.render,
           pagination: {
             count: vendor.consumables.size,
             **pagination_data(paginated_consumables)
@@ -56,7 +59,7 @@ class VendorsController < ApplicationController
       components: InertiaRails.lazy(-> {
         paginated_components = vendor.components.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_components.render(view: :associations),
+          data: paginated_components.render,
           pagination: {
             count: vendor.components.size,
             **pagination_data(paginated_components)
@@ -66,7 +69,7 @@ class VendorsController < ApplicationController
       licenses: InertiaRails.lazy(-> {
         paginated_licenses = vendor.licenses.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_licenses.render(view: :associations),
+          data: paginated_licenses.render,
           pagination: {
             count: vendor.licenses.size,
             **pagination_data(paginated_licenses)
@@ -76,7 +79,7 @@ class VendorsController < ApplicationController
       contracts: InertiaRails.lazy(-> {
         paginated_contracts = vendor.contracts.includes_associated.page(params[:page] || 1)
         {
-          data: paginated_contracts.render(view: :associations),
+          data: paginated_contracts.render,
           pagination: {
             count: vendor.contracts.size,
             **pagination_data(paginated_contracts)
@@ -88,6 +91,7 @@ class VendorsController < ApplicationController
 
   # GET /vendors/new
   def new
+    authorize Vendor
     render inertia: "Vendors/New", props: {
       vendor: Vendor.new.render(view: :new)
     }
@@ -95,6 +99,7 @@ class VendorsController < ApplicationController
 
   # GET /vendors/:slug/edit
   def edit
+    authorize vendor
     render inertia: "Vendors/Edit", props: {
       vendor: vendor.render(view: :edit)
     }
@@ -102,6 +107,7 @@ class VendorsController < ApplicationController
 
   # POST /vendors
   def create
+    authorize Vendor
     vendor = Vendor.new(vendor_params)
     vendor.company = @active_company
 
@@ -120,6 +126,7 @@ class VendorsController < ApplicationController
 
   # PATCH/PUT /vendors/:slug
   def update
+    authorize vendor
     if vendor.update(vendor_params)
       redirect_to vendor, notice: 'Vendor was successfully updated'
     else
@@ -130,6 +137,7 @@ class VendorsController < ApplicationController
   # DELETE /vendors
   # DELETE /vendors/:slug
   def destroy
+    authorize vendor
     if request.params[:slug]
       vendor.destroy
     else

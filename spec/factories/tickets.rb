@@ -2,6 +2,11 @@ FactoryBot.define do
   factory :ticket do
     subject { Faker::ChuckNorris.fact }
     description { Faker::Movies::HitchhikersGuideToTheGalaxy.quote }
-    created_by factory: :person, strategy: :create
+
+    transient do
+      company { create(:company) }
+    end
+
+    created_by { association :person, company: company }
   end
 end

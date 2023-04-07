@@ -2,8 +2,8 @@ class Smtp < ApplicationRecord
   include Ownable
   include PgSearch::Model
 
-  resourcify
   tracked
+  resourcify
 
   pg_search_scope(
     :search,

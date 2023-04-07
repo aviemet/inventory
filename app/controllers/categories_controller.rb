@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
   include Searchable
 
-  expose :categories, -> {  search(@active_company.categories.all, sortable_fields) }
-  expose :category, -> { @active_company.categories.includes_associated.find_by_slug(params[:slug]) }
+  expose :categories, -> { search(@active_company.categories.all, sortable_fields) }
+  expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories.includes_associated }, find_by: :slug
 
   # GET /categories
   def index
@@ -77,7 +77,7 @@ class CategoriesController < ApplicationController
   private
 
   def sortable_fields
-    %w(name locations.count departments.count assets.count people.count).freeze
+    %w(name categorizable_type qty).freeze
   end
 
   def category_params

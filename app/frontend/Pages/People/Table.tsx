@@ -1,8 +1,9 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Link, Table } from '@/Components'
+import { Badge, Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { ITableProps } from '@/Components/Table/Table'
+import { CheckIcon, CrossIcon } from '@/Components/Icons'
 
 const PeopleTable = (props: ITableProps) => {
 	return (
@@ -17,6 +18,8 @@ const PeopleTable = (props: ITableProps) => {
 					<Table.Cell sort="department.name">Department</Table.Cell>
 					<Table.Cell sort="items.count">Items</Table.Cell>
 					<Table.Cell sort="accessories.count">Accessories</Table.Cell>
+					<Table.Cell>Groups</Table.Cell>
+					<Table.Cell>Login Enabled</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
@@ -60,8 +63,16 @@ const PeopleTable = (props: ITableProps) => {
 							{ person.accessories && <Link href={ Routes.accessories() }>{ person.accessories.length }</Link> }
 						</Table.Cell>
 
+						<Table.Cell>
+							{ person.user?.groups?.map(group => <Badge key={ group.id }>{ group.name }</Badge>) }
+						</Table.Cell>
+
+						<Table.Cell>
+							{ person.user && person.user.active ? <CheckIcon /> : <CrossIcon /> }
+						</Table.Cell>
+
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editPerson(person) } />
+							<EditButton href={ Routes.editPerson(person) } label={ person.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

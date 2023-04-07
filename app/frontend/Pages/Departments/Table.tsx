@@ -52,7 +52,7 @@ const DepartmentsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editDepartment(department.slug) } />
+							<EditButton href={ Routes.editDepartment(department.slug) } label={ department.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

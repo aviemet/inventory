@@ -15,7 +15,7 @@ const DepartmentsDropdown = ({ label = 'Department', name = 'department_id',  de
 			name={ name }
 			options={ departments }
 			filterMatchKeys={ ['name'] }
-			fetchOnOpen="department"
+			fetchOnOpen="departments"
 			newForm={ <DepartmentsForm
 				to={ Routes.apiDepartments() }
 				locations={ locations }

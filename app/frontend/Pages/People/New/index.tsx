@@ -1,6 +1,6 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
-import PersonForm from '../Form'
+import PersonForm from './Form'
 import { Routes } from '@/lib'
 
 interface INewPersonProps {

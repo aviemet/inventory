@@ -8,7 +8,7 @@ RSpec.describe "/items", type: :request do
                            status_label_id: create(:status_label).id,
                            model_id: create(:model).id,
                            vendor_id: create(:vendor).id,
-                           default_location_id: create(:location).id)
+                           default_location_id: create(:location).id,)
     }
   end
 
@@ -25,7 +25,7 @@ RSpec.describe "/items", type: :request do
 
     context "index page" do
       it "lists all items" do
-        item = create(:item, { company: User.first.active_company })
+        item = create(:item, { company: @admin.active_company })
 
         get items_url
 
@@ -36,8 +36,8 @@ RSpec.describe "/items", type: :request do
 
     context "index page with search params" do
       it "returns a filtered list of items" do
-        item1 = create(:item, { name: "Include", company: User.first.active_company })
-        item2 = create(:item, { name: "Exclue", company: User.first.active_company })
+        item1 = create(:item, { name: "Include", company: @admin.active_company })
+        item2 = create(:item, { name: "Exclue", company: @admin.active_company })
 
         get items_url, params: { search: item1.name }
 
@@ -84,14 +84,14 @@ RSpec.describe "/items", type: :request do
 
     context "with valid parameters" do
       it "updates the requested item" do
-        item = create(:item)
+        item = create(:item, company: @admin.active_company)
         patch item_url(item), params: { item: { name: "Changed" } }
         item.reload
         expect(item.name).to eq("Changed")
       end
 
       it "redirects to the item" do
-        item = create(:item)
+        item = create(:item, company: @admin.active_company)
         patch item_url(item), params: { item: { name: "Changed" } }
         item.reload
         expect(response).to redirect_to(item_url(item))
@@ -100,7 +100,7 @@ RSpec.describe "/items", type: :request do
 
     context "with invalid parameters" do
       it "redirects back to the edit item page" do
-        item = create(:item)
+        item = create(:item, company: @admin.active_company)
         patch item_url(item), params: invalid_attributes
         expect(response).to redirect_to(edit_item_url(item))
       end
@@ -111,14 +111,14 @@ RSpec.describe "/items", type: :request do
     login_admin
 
     it "destroys the requested item" do
-      item = create(:item)
+      item = create(:item, company: @admin.active_company)
       expect {
         delete item_url(item)
       }.to change(Item, :count).by(-1)
     end
 
     it "redirects to the items list" do
-      item = create(:item)
+      item = create(:item, company: @admin.active_company)
       delete item_url(item)
       expect(response).to redirect_to(items_url)
     end

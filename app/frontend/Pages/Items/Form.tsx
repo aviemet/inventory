@@ -15,8 +15,8 @@ import { type UseFormProps } from 'use-inertia-form'
 export interface IItemFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	item: Partial<Schema.Item>
+	onSubmit?: (object: UseFormProps<{ item: Schema.Item }>) => boolean|void
+	item: Schema.Item
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]
 	locations: Schema.Location[]
@@ -24,14 +24,13 @@ export interface IItemFormProps {
 	categories: Schema.Category[]
 }
 
-const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locations, manufacturers, categories }: IItemFormProps) => {
+const ItemForm = ({ method = 'post', item, models, vendors, locations, manufacturers, categories, ...props }: IItemFormProps) => {
 	return (
 		<Form
 			model="item"
 			data={ { item } }
-			to={ to }
 			method={ method }
-			onSubmit={ onSubmit }
+			{ ...props }
 		>
 
 			<TextInput name="name" label="Name" required autoFocus />
@@ -41,6 +40,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					models={ models }
 					manufacturers={ manufacturers }
 					categories={ categories }
+					errorKey="item.model"
 				/>
 
 				<TextInput name="serial" label="Serial" />

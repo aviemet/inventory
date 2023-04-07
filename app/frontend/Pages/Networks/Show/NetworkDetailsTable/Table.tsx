@@ -10,7 +10,7 @@ interface INetworkDetailsTableProps {
 const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 	return (
 		<Table wrapper={ false } sx={ { width: '100%', flex: 1 } }>
-			<Table.Head sx={ { top: '-10px !important' } }>
+			<Table.Head>
 				<Table.Row>
 					<Table.Cell>Address</Table.Cell>
 					<Table.Cell>Host</Table.Cell>

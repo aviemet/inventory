@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
     end
 
     it { should validate_presence_of(:email) }
-    it { should validate_presence_of(:password) }
+    # it { should validate_presence_of(:password) }
     it { should allow_value("1StrongPassword!").for(:password) }
     # Require uppercase letter
     it { should_not allow_value("1weakpassword!").for(:password) }
@@ -22,7 +22,8 @@ RSpec.describe User, type: :model do
   end
 
   describe "Associations" do
-    it { should belong_to(:person).optional }
+    it { should have_many(:people) }
+    it { should have_one(:person) }
     it { should belong_to(:active_company).optional }
   end
 end

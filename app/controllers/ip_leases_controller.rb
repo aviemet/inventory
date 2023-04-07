@@ -2,13 +2,11 @@ class IpLeasesController < ApplicationController
   before_action :set_ip_lease, only: [:show, :edit, :update, :destroy]
 
   # GET /ip_leases
-  # GET /ip_leases.json
   def index
     @ip_leases = IpLease.all
   end
 
-  # GET /ip_leases/1
-  # GET /ip_leases/1.json
+  # GET /ip_leases/:id
   def show
   end
 
@@ -17,12 +15,11 @@ class IpLeasesController < ApplicationController
     @ip_lease = IpLease.new
   end
 
-  # GET /ip_leases/1/edit
+  # GET /ip_leases/:id/edit
   def edit
   end
 
   # POST /ip_leases
-  # POST /ip_leases.json
   def create
     @ip_lease = IpLease.new(ip_lease_params)
 
@@ -37,8 +34,7 @@ class IpLeasesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /ip_leases/1
-  # PATCH/PUT /ip_leases/1.json
+  # PATCH/PUT /ip_leases/:id
   def update
     respond_to do |format|
       if @ip_lease.update(ip_lease_params)
@@ -51,8 +47,7 @@ class IpLeasesController < ApplicationController
     end
   end
 
-  # DELETE /ip_leases/1
-  # DELETE /ip_leases/1.json
+  # DELETE /ip_leases/:id
   def destroy
     @ip_lease.destroy
     respond_to do |format|

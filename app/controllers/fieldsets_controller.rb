@@ -2,13 +2,11 @@ class FieldsetsController < ApplicationController
   before_action :set_fieldset, only: [:show, :edit, :update, :destroy]
 
   # GET /fieldsets
-  # GET /fieldsets.json
   def index
     @fieldsets = Fieldset.all
   end
 
-  # GET /fieldsets/1
-  # GET /fieldsets/1.json
+  # GET /fieldsets/:id
   def show
   end
 
@@ -17,12 +15,11 @@ class FieldsetsController < ApplicationController
     @fieldset = Fieldset.new
   end
 
-  # GET /fieldsets/1/edit
+  # GET /fieldsets/:id/edit
   def edit
   end
 
   # POST /fieldsets
-  # POST /fieldsets.json
   def create
     @fieldset = Fieldset.new(fieldset_params)
 
@@ -37,8 +34,7 @@ class FieldsetsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /fieldsets/1
-  # PATCH/PUT /fieldsets/1.json
+  # PATCH/PUT /fieldsets/:id
   def update
     respond_to do |format|
       if @fieldset.update(fieldset_params)
@@ -51,8 +47,7 @@ class FieldsetsController < ApplicationController
     end
   end
 
-  # DELETE /fieldsets/1
-  # DELETE /fieldsets/1.json
+  # DELETE /fieldsets/:id
   def destroy
     @fieldset.destroy
     respond_to do |format|

@@ -1,4 +1,6 @@
-# Development data for testing with
+# Development data
+
+# Reminder: Category data is created in an after_save hook on Company::AsSetup
 
 if Rails.env == "development"
 
@@ -41,6 +43,12 @@ if Rails.env == "development"
       ].each{ |dept| Department.create!(dept) }
     end
 
+    user = User.create!({
+      email: "aviemet@gmail.com",
+      password: "Complex1!",
+      confirmed_at: Date.new,
+    })
+
     person = Person.create!({
       first_name: "Avram",
       middle_name: "True",
@@ -49,21 +57,29 @@ if Rails.env == "development"
       job_title: "IT Manager",
       location: Location.find_by_name("IT Office"),
       department: Department.first,
+      user:,
       company:,
     })
 
-    user = User.create!({
-      email: "aviemet@gmail.com",
-      password: "Complex1!",
-      confirmed_at: Date.new,
-      person:,
+    group = PersonGroup.create({
+      name: "Company Administrator",
+      description: "Full priveldges for company",
+      company:
     })
 
+    group.people << person
+
     user.add_role :super_admin
-    user.add_role :admin, company
+    person.add_role :admin, company
   end
 
   if Person.count == 1
+    user = User.create!({
+      email: "tommy@email.com",
+      password: "Complex1!",
+      confirmed_at: Date.new,
+    })
+
     Person.create!({
       first_name: "Tommy",
       last_name: "Scully",
@@ -71,6 +87,7 @@ if Rails.env == "development"
       job_title: "AV Manager",
       location: Location.find_by_name("IT Office"),
       department: Department.first,
+      user:,
       company:,
     })
   end
@@ -218,7 +235,7 @@ if Rails.env == "development"
 
     License.create!({
       name: "Microsoft Office",
-      seats: Faker::Number.digit,
+      qty: 5,
       key: Faker::Device.serial,
       licenser_name: Faker::Name.name,
       licenser_email: Faker::Internet.email,

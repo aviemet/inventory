@@ -16,6 +16,7 @@ const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 			model="components"
 			rows={ components }
 			pagination={ pagination }
+			deleteRoute={ Routes.components() }
 			menuOptions={ [
 				{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
 			] }

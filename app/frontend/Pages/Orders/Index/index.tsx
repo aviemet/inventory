@@ -18,6 +18,7 @@ const OrdersIndex = ({ orders, pagination }: IOrdersIndexProps) => {
 			model="orders"
 			rows={ orders }
 			pagination={ pagination }
+			deleteRoute={ Routes.orders() }
 			menuOptions={ [
 				{ label: 'New Order', href: Routes.newOrder(), icon: NewIcon },
 			] }

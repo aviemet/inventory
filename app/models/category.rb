@@ -15,6 +15,7 @@ class Category < ApplicationRecord
   slug :slug_from_category_type
 
   tracked
+  resourcify
 
   @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Email License Location Model Order Person Phone Ticket User Vendor Website)
 
@@ -38,6 +39,10 @@ class Category < ApplicationRecord
 
   def records
     self.type.find_by_category(self)
+  end
+
+  def qty
+    records.count
   end
 
   def type

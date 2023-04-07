@@ -1,12 +1,12 @@
 class Api::CategoriesController < ApplicationController
-  expose :category, -> { @active_company.categories.find_by_slug(params[:slug]) || Category.new(category_params) }
+  expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories }, find_by: :slug
 
   # POST /api/categories
   def create
     category.company = @active_company
 
     if category.save
-      render json: category.render(view: :as_options), status: 201
+      render json: category.render(view: :options), status: 201
     else
       render json: { errors: category.errors }, status: 303
     end

@@ -1,21 +1,19 @@
 import React, { forwardRef } from 'react'
 import Field from '../Field'
-import SearchableDropdownInput, { type ISearchableDropdownProps } from '../../Inputs/SearchableDropdown'
-import { Flex } from '@/Components'
+import SearchableDropdownInput, { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
+import { ConditionalWrapper, Group } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
 import { router } from '@inertiajs/react'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 
-interface IInputProps extends Omit<ISearchableDropdownProps, 'defaultValue'|'onChange'|'onDropdownOpen'|'onDropdownClose'> {
-	label?: string
-	name: string
-	model?: string
+type OmittedDropdownTypes = 'name'|'defaultValue'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
+interface IInputProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IInertiaInputProps {
 	defaultValue?: string
-	onChange?: (option: string|null, form: UseFormProps) => void
 	onDropdownOpen?: (form: UseFormProps) => void
 	onDropdownClose?: (form: UseFormProps) => void
 	fetchOnOpen?: string
 	newForm?: React.ReactElement
+	field?: boolean
 }
 
 const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
@@ -26,20 +24,27 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 		required,
 		defaultValue,
 		onChange,
+		onBlur,
 		onDropdownOpen,
 		onDropdownClose,
 		fetchOnOpen,
 		newForm,
+		field = true,
 		id,
+		errorKey,
 		...props
 	},
 	ref,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model, errorKey })
 
 	const handleChange = (option: string|null) => {
 		setValue(option ? option : '')
 		if(onChange) onChange(option, form)
+	}
+
+	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+		if(onChange) onChange(value, form)
 	}
 
 	const handleDropdownOpen = () => {
@@ -56,45 +61,47 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 		setValue(String(data.id))
 	}
 
-	const Wrapper = newForm ? FlexWrapper : EmptyWrapper
-
 	return (
-		<Wrapper>
-			<Field
-				type="select"
-				required={ required }
-				errors={ !!error }
-			>
-				<SearchableDropdownInput
-					ref={ ref }
-					id={ id || inputId }
-					name={ inputName }
-					label={ label }
-					value={ String(value) }
-					onChange={ handleChange }
-					onDropdownOpen={ handleDropdownOpen }
-					onDropdownClose={ handleDropdownClose }
-					defaultValue={ defaultValue ?? String(value) }
-					{ ...props }
-				/>
-			</Field>
-			{ newForm && <ModalFormButton
-				title={ `Create New ${label}` }
-				form={ newForm }
-				onSuccess={ handleNewFormSuccess }
-			/> }
-		</Wrapper>
+		<ConditionalWrapper
+			wrapper={ children => <Group noWrap align="baseline" position="apart">{ children }</Group> }
+			condition={ newForm !== undefined }
+		>
+			<>
+				<ConditionalWrapper
+					wrapper={ children => (
+						<Field
+							type="select"
+							required={ required }
+							errors={ !!error }
+						>
+							{ children }
+						</Field>
+					) }
+					condition={ field }
+				>
+					<SearchableDropdownInput
+						ref={ ref }
+						id={ id || inputId }
+						name={ inputName }
+						label={ label }
+						value={ String(value) }
+						onChange={ handleChange }
+						onBlur={ handleBlur }
+						onDropdownOpen={ handleDropdownOpen }
+						onDropdownClose={ handleDropdownClose }
+						defaultValue={ defaultValue ?? String(value) }
+						error={ error }
+						{ ...props }
+					/>
+				</ConditionalWrapper>
+				{ newForm && <ModalFormButton
+					title={ `Create New ${label}` }
+					form={ newForm }
+					onSuccess={ handleNewFormSuccess }
+				/> }
+			</>
+		</ConditionalWrapper>
 	)
 })
-
-interface IWithChildren {
-	children?:React.ReactNode
-}
-
-const EmptyWrapper = ({ children }: IWithChildren) => <>{ children }</>
-
-const FlexWrapper = ({ children }: IWithChildren) => (
-	<Flex noWrap align="baseline" position="apart">{ children }</Flex>
-)
 
 export default SearchableDropdown

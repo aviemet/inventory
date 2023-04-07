@@ -45,7 +45,7 @@ const OrdersTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editOrder(order) } />
+							<EditButton href={ Routes.editOrder(order) } label={ `Order number ${order.number}` } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

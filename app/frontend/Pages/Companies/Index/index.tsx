@@ -16,6 +16,7 @@ const CompaniesIndex = ({ companies, pagination }: ICompaniesIndexProps) => {
 			model="companies"
 			rows={ companies }
 			pagination={ pagination }
+			deleteRoute={ Routes.companies() }
 			menuOptions={ [
 				{ label: 'New Company', href: Routes.newCompany(), icon: NewIcon },
 			] }

@@ -6,7 +6,12 @@ class Vendor < ApplicationRecord
   pg_search_scope(
     :search,
     against: [:name, :url], associated_against: {
-      item: [:count]
+      items: [:name],
+      contracts: [:name],
+      accessories: [:name],
+      consumables: [:name],
+      components: [:name],
+      licenses: [:name],
     },
     using: {
       tsearch: { prefix: true },
@@ -14,9 +19,10 @@ class Vendor < ApplicationRecord
     }
   )
 
-  slug :name
-
   tracked
+  resourcify
+
+  slug :name
 
   has_many :contracts
   has_many :items

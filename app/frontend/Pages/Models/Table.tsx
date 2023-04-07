@@ -46,7 +46,7 @@ const ModelsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editModel(model.slug) } />
+							<EditButton href={ Routes.editModel(model.slug) } label={ model.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

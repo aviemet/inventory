@@ -1,14 +1,22 @@
 class User < ApplicationRecord
+  tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token, :active_company]
+  resourcify
   rolify
 
-  tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token, :active_company]
-
   # Include default devise modules. Others available are: , :omniauthable, :timeoutable,
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable, :invitable
 
-  belongs_to :person, dependent: :destroy, optional: true
   belongs_to :active_company, class_name: :Company, optional: true
-  has_many :companies, through: :roles, source: :resource, source_type: "Company"
+  has_many :people
+  has_many :companies, through: :people
+  has_many :person_group_assignments
+  has_many :groups, through: :person_group_assignments, source: :person_group
+
+  has_one :person do
+    self.people.joins(:owner).where({owner: {company: self.active_company}}).take
+  end
+
+  alias company active_company
 
   # store_accessor :table_preferences
   store_accessor :user_preferences, :dark_mode
@@ -18,31 +26,32 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   password_complexity_regex = /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,70}\z/
-  validates :password, presence: { message: "" }, format: { with: password_complexity_regex }, on: [:create, :update], if: :password
-  validates_confirmation_of :password, message: "Password did not match confirmation"
+  validates :password, format: { with: password_complexity_regex }, on: [:create, :update], confirmation: true, if: :password
+  # validates :password, presence: true, if: "id.nil?"
   # after_create :add_email_to_contact
 
   before_save :coerce_json
+  before_save :set_active_company
 
-  accepts_nested_attributes_for :person
+  # accepts_nested_attributes_for :person
 
   # jsonb_accessor :table_preferences, hide: :hash
 
-  delegate :can?, :cannot?, to: :ability
-
-  scope :includes_associated, -> { includes([:person, :companies]) }
+  scope :includes_associated, -> { includes([:people, :companies]) }
 
   private
 
-  def ability
-    @ability ||= Ability.new(self)
+  def set_active_company
+    return if self.active_company
+
+    self.active_company = self.person ? self.person.company : self.companies.first
   end
 
-  def add_email_to_contact
-    return if self.person.contact.emails.exists?(email:)
+  # def add_email_to_contact
+  #   return if self&.person&.contact&.emails&.exists?(email:)
 
-    self.person.contact.emails << Email.create(email:, category: Category.find_by_slug("email-work"))
-  end
+  #   self.person.contact.emails << Email.create(email:))
+  # end
 
   def coerce_json
     self.dark_mode = ActiveModel::Type::Boolean.new.cast(self.dark_mode) if self.dark_mode

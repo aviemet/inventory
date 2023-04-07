@@ -5,6 +5,11 @@ FactoryBot.define do
     shipping { Faker::Commerce.price(range: 10..30.0) }
     tax { Faker::Commerce.price(range: 10..30.0) }
     user
-    vendor
+
+    transient do
+      company { create(:company) }
+    end
+
+    vendor { association :vendor, company: company }
   end
 end

@@ -10,10 +10,14 @@ import {
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
+interface AccessoryFormProps {
+	accessory: Schema.Accessory
+}
+
 export interface IAccessoryFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
+	onSubmit?: (object: UseFormProps<AccessoryFormProps>) => boolean|void
 	accessory: Schema.Accessory
 	models: Schema.Model[]
 	vendors: Schema.Vendor[]

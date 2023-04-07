@@ -8,36 +8,69 @@ module Searchable
   # model: ActiveRecord object
   # sortable_fields: string array of field names which the model can be sorted by.
   #   Sortable fields in nested models use dot-notation: "related_model.field"
-  #
+  #   To sort by a method on the model class which is not a database field, use `self`: "self.calculated_number"
+  ##
   def search(model, sortable_fields = [])
-    search_object = model
-
-    terms = params[:search]
-
-    if terms
-      ids = model.search(terms).pluck(:id)
-      search_object = model.where(id: ids)
-    end
-
-    search_object.order(sort(model, sortable_fields))
+    sort(search_by_params(model), model, sortable_fields)
   end
 
   protected
 
-  def sort(model, sortable_fields)
+  ##
+  # Filters ActiveRecord relation by search params
+  ##
+  def search_by_params(model)
+    return model unless params[:search]
+
+    model.where(id: model.search(params[:search]).pluck(:id))
+  end
+
+  ##
+  # Sorts ActiveRecord relation by sort params
+  ##
+  def sort(obj, model, sortable_fields)
+    # With empty sort params, don't sort
+    return obj unless params[:sort]
+
+    # Sort using db query
+    obj.order(sort_string(model, sortable_fields))
+  end
+
+  ##
+  # Returns a string to be used in an `order` statement
+  ##
+  def sort_string(model, sortable_fields)
     return unless sortable_fields&.include?(params[:sort])
 
-    sort_str = params[:sort].to_s
+    field_type = get_field_type(model, params[:sort])
+
+    # Don't error if field doesn't exist on model
+    return if field_type.nil?
+
     # Force case insensitive sorting if field type is a string
-    if %i(string text).freeze.include?(field_type(model, params[:sort]))
+    sort_str = params[:sort].to_s
+    if %i(string text).freeze.include?(field_type)
       sort_str = "lower(#{sort_str})"
     end
+
     "#{sort_str} #{direction}"
   end
 
-  def direction
-    return unless params[:direction]
+  ##
+  # Returns the data type of a database field
+  ##
+  def get_field_type(model, column)
+    # if `column` is in the form 'model.field', or further chained such as 'model1.model2.field',
+    # ignore the passed `model` param and use the last chained model sent in `column`
+    split_fields = column.split(".")
+    if split_fields.length > 1
+      model = split_fields[-2].titleize.singularize.constantize
+    end
 
+    model.column_for_attribute(column).type
+  end
+
+  def direction
     %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end

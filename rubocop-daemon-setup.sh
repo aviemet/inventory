@@ -3,4 +3,4 @@ sudo mkdir -p /usr/local/bin/rubocop-daemon-wrapper
 sudo mv /tmp/rubocop-daemon-wrapper /usr/local/bin/rubocop-daemon-wrapper/rubocop
 sudo chmod +x /usr/local/bin/rubocop-daemon-wrapper/rubocop
 
-ln -fs /usr/local/bin/rubocop-daemon-wrapper $(which rubocop)
+ln -fs /usr/local/bin/rubocop-daemon-wrapper/rubocop $(which rubocop)

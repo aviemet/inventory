@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
@@ -22,8 +22,8 @@ const Show = ({ order }: IShowOrderProps) => {
 			{ title: String(order.id) },
 		] }>
 			<Section>
-				<Flex position="apart">
-					<Heading sx={ { flex: 1 } }>{ title }</Heading>
+				<Group position="apart">
+					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -33,7 +33,7 @@ const Show = ({ order }: IShowOrderProps) => {
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 					<Tabs.List>

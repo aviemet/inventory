@@ -66,7 +66,7 @@ shared_examples "assignable:quantity" do
   describe "Assets with quantiy assignments", if: @has_quantity do
     it "Can have multiple assignments" do
       person = build(:person)
-      location = build(:location)
+      location = person.location
       subject.assign_to(person)
       subject.assign_to(location)
       expect(subject.assignments.count).to eq(2)

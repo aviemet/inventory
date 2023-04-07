@@ -4,6 +4,7 @@ class Nic < ApplicationRecord
   attribute :nic_type, default: :wifi
 
   tracked
+  resourcify
 
   validates_presence_of :nic_type
   # validates_presence_of :item

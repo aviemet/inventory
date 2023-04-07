@@ -11,11 +11,11 @@ const VendorsTable = (props: ITableProps) => {
 				<Table.Row>
 					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
 					<Table.Cell sort="url">Website</Table.Cell>
-					<Table.Cell sort="contracts.count">Contracts</Table.Cell>
-					<Table.Cell sort="items.count">Items</Table.Cell>
-					<Table.Cell sort="accessories.count">Accessories</Table.Cell>
-					<Table.Cell sort="consumables.count">Consumables</Table.Cell>
-					<Table.Cell sort="components.count">Components</Table.Cell>
+					<Table.Cell>Contracts</Table.Cell>
+					<Table.Cell>Items</Table.Cell>
+					<Table.Cell>Accessories</Table.Cell>
+					<Table.Cell>Consumables</Table.Cell>
+					<Table.Cell>Components</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
@@ -43,11 +43,11 @@ const VendorsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							{ vendor.accessories && <Link href={ Routes.accessories() }>{ vendor.accessories.length }</ Link> }
+							{ vendor.accessories && <Link href={ Routes.accessories() }>{ vendor.accessories.length }</Link> }
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							{ vendor.consumables && <Link href={ Routes.consumables() }>{ vendor.consumables.length }</ Link> }
+							{ vendor.consumables && <Link href={ Routes.consumables() }>{ vendor.consumables.length }</Link> }
 						</Table.Cell>
 
 						<Table.Cell nowrap>
@@ -55,7 +55,7 @@ const VendorsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editVendor(vendor.slug) } />
+							<EditButton href={ Routes.editVendor(vendor.slug) } label={ vendor.name } />
 						</Table.Cell>
 
 					</Table.Row>

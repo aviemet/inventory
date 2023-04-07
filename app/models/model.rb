@@ -16,8 +16,8 @@ class Model < ApplicationRecord
 
   slug :name
 
-  resourcify
   tracked
+  resourcify
 
   belongs_to :manufacturer
   belongs_to :category
