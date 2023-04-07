@@ -6,7 +6,7 @@ class Api::LocationsController < ApplicationController
     loc.company = @active_company
 
     if loc.save
-      render json: LocationBlueprint.render_as_json(loc), status: 201
+      render json: loc.render, status: 201
     else
       render json: { errors: loc.errors }, status: 303
     end
@@ -15,7 +15,7 @@ class Api::LocationsController < ApplicationController
   # PATCH/PUT /api/locations/:id
   def update
     if loc.update(location_params)
-      render json: LocationBlueprint.render_as_json(loc), status: 201
+      render json: loc.render, status: 201
     else
       render json: { errors: loc.errors }, status: 303
     end

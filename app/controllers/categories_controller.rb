@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
     paginated_categories = categories.page(params[:page] || 1)
 
     render inertia: "Categories/Index", props: {
-      categories: paginated_categories.render(view: :counts),
+      categories: paginated_categories.render(view: :index),
       pagination: -> { {
         count: categories.size,
         **pagination_data(paginated_categories)

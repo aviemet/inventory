@@ -6,7 +6,7 @@ class Api::OrdersController < ApplicationController
     order.company = @active_company
 
     if order.save
-      render json: OrderBlueprint.render_as_json(order), status: 201
+      render json: order.render, status: 201
     else
       render json: { errors: order.errors }, status: 303
     end
@@ -15,7 +15,7 @@ class Api::OrdersController < ApplicationController
   # PATCH/PUT /api/orders/:id
   def update
     if order.update(order_params)
-      render json: OrderBlueprint.render_as_json(order), status: 201
+      render json: order.render, status: 201
     else
       render json: { errors: order.errors }, status: 303
     end

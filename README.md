@@ -172,23 +172,6 @@ Companies are top level organizational units. All other objects can be considere
 
 Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a company is considered to be "owned" by that company, defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner.
 
-### Blueprinter
-
-The Blueprinter gem is used to shape data passed to Inertia components. Use `render_as_json` in the render method to parse the data properly. On any ActiveRecord model or relation you can call `.blueprint` for that model's Blueprinter object, and `.render` to call `render_as_json` on that model's or collection's blueprint. These have been defined in `app/models/application_record.rb` for the model, and `config/initializers/activerecord_extensions.rb` for collections.
-
-These are functionally the same:
-
-```ruby
-ItemBlueprint.render_as_json(Item.first, view: :options)
-Item.first.render(view: :options)
-```
-
-As are these:
-
-```ruby
-ItemBlueprint
-Item.blueprint
-```
 
 ### Roles
 
@@ -197,10 +180,6 @@ User record can have one role, `:super_admin`.
 Person record can have `:admin` role set for specific Companies.
 
 PersonGroup record is where all other roles will be applied.
-
-### UID
-
-Blueprinter base class provides a uid value derived from the id and model name of the record. This allows polymorphic records such as assignable and assign_toable to pass a single variable containing the values necessary to fetch a record. It also prevents naive sequential id attacks (since it's just a base64 encoding of the values, a program could still brute force it, but a human entering values into a url will be thwarted).
 
 ## Features for another time
 

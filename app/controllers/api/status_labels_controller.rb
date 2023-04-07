@@ -6,7 +6,7 @@ class Api::StatusLabelsController < ApplicationController
     status_label.company = @active_company
 
     if status_label.save
-      render json: StatusLabelBlueprint.render_as_json(status_label), status: 201
+      render json: status_label.render, status: 201
     else
       render json: { errors: status_label.errors }, status: 303
     end
@@ -15,7 +15,7 @@ class Api::StatusLabelsController < ApplicationController
   # PATCH/PUT /api/status_labels/:id
   def update
     if status_label.update(status_label_params)
-      render json: StatusLabelBlueprint.render_as_json(status_label), status: 201
+      render json: status_label.render, status: 201
     else
       render json: { errors: status_label.errors }, status: 303
     end

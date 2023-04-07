@@ -113,7 +113,7 @@ class VendorsController < ApplicationController
 
     if request.params&.[](:redirect) == false
       if vendor.save
-        render json: VendorBlueprint.render_as_json(vendor), status: 201
+        render json: vendor.render, status: 201
       else
         render json: { errors: vendor.errors }, status: 303
       end

@@ -10,7 +10,7 @@ SimpleCov.start 'rails' do
 
   add_group "Models", "app/models"
   add_group "Controllers", "app/controllers"
-  add_group "Blueprints", "app/blueprints"
+  add_group "Serializers", "app/serializers"
   add_group "Jobs", "app/jobs"
   add_group "Services", "app/services"
 end

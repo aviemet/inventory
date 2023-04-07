@@ -6,7 +6,7 @@ class Api::ModelsController < ApplicationController
     model.company = @active_company
 
     if model.save
-      render json: ModelBlueprint.render_as_json(model), status: 201
+      render json: model.render, status: 201
     else
       render json: { errors: model.errors }, status: 303
     end
@@ -15,7 +15,7 @@ class Api::ModelsController < ApplicationController
   # PATCH/PUT api/models/:id
   def update
     if model.update(model_params)
-      render json: ModelBlueprint.render_as_json(model), status: 201
+      render json: model.render, status: 201
     else
       render json: { errors: model.errors }, status: 303
     end

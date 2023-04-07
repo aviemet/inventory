@@ -6,7 +6,7 @@ class Api::DepartmentsController < ApplicationController
     department.company = @active_company
 
     if department.save
-      render json: DepartmentBlueprint.render_as_json(department), status: 201
+      render json: department.render, status: 201
     else
       render json: { errors: department.errors }, status: 303
     end
@@ -15,7 +15,7 @@ class Api::DepartmentsController < ApplicationController
   # PATCH/PUT /api/departments/:id
   def update
     if department.update(department_params)
-      render json: DepartmentBlueprint.render_as_json(department), status: 201
+      render json: department.render, status: 201
     else
       render json: { errors: department.errors }, status: 303
     end

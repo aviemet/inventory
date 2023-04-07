@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
     paginated_companies = companies.page(params[:page] || 1)
 
     render inertia: "Companies/Index", props: {
-      companies: paginated_companies.render(view: :counts),
+      companies: paginated_companies.render(view: :index),
       pagination: -> { {
         count: companies.count,
         **pagination_data(paginated_companies)

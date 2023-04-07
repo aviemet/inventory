@@ -70,7 +70,7 @@ class ComponentsController < ApplicationController
     render inertia: "Components/Checkout", props: {
       component: component.render,
       assignment: assignment.render(view: :new),
-      items: -> { ItemBlueprint.render_as_json(@active_company.items.select([:id, :name, :default_location_id]), view: :options) },
+      items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
       locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
     }
   end

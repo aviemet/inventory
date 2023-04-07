@@ -10,7 +10,7 @@ class TicketsController < ApplicationController
     paginated_tickets = tickets.page(params[:page] || 1)
 
     render inertia: "Tickets/Index", props: {
-      tickets: -> { paginated_tickets.render },
+      tickets: -> { paginated_tickets.render(view: :index) },
       pagination: -> { {
         count: tickets.count,
         **pagination_data(paginated_tickets)

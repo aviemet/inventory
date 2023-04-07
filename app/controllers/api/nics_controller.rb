@@ -6,7 +6,7 @@ class Api::NicsController < ApplicationController
     nic.company = @active_company
 
     if nic.save
-      render json: NicBlueprint.render_as_json(nic), status: 201
+      render json: nic, status: 201
     else
       render json: { errors: nic.errors }, status: 303
     end
@@ -15,7 +15,7 @@ class Api::NicsController < ApplicationController
   # PATCH/PUT /api/nics/:id
   def update
     if nic.update(nic_params)
-      render json: NicBlueprint.render_as_json(nic), status: 201
+      render json: nic, status: 201
     else
       render json: { errors: nic.errors }, status: 303
     end

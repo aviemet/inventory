@@ -6,7 +6,7 @@ class Api::PurchasesController < ApplicationController
     purchase.company = @active_company
 
     if purchase.save
-      render json: PurchaseBlueprint.render_as_json(purchase), status: 201
+      render json: purchase.render, status: 201
     else
       render json: { errors: purchase.errors }, status: 303
     end
@@ -15,7 +15,7 @@ class Api::PurchasesController < ApplicationController
   # PATCH/PUT /api/purchases/:id
   def update
     if purchase.update(purchase_params)
-      render json: PurchaseBlueprint.render_as_json(purchase), status: 201
+      render json: purchase.render, status: 201
     else
       render json: { errors: purchase.errors }, status: 303
     end

@@ -8,5 +8,5 @@ class Tickets::EditSerializer < ApplicationSerializer
      :asset_id,
    )
 
-  has_many :assignments, serializer: TicketAssignmentSerializer
+  has_many :assignments, serializer: TicketAssignments::EditSerializer
 end

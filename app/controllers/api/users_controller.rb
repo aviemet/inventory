@@ -5,7 +5,7 @@ module Api
     # PATCH/PUT /api/users/:id
     def update
       if user.update(user_params)
-        render json: UserBlueprint.render_as_json(user), status: 201
+        render json: user.render, status: 201
       else
         render json: { errors: user.errors }, status: 303
       end
