@@ -11,8 +11,8 @@ module ActiveRecordExtensions
     end
   end
 
-  def render(view: nil)
-    self.serializer(view).render(self)
+  def render(view: nil, options: {})
+    self.serializer(view).render(self, options)
   end
 end
 

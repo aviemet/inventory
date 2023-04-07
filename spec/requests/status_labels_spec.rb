@@ -48,6 +48,13 @@ RSpec.describe "/status_labels", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        status_label = create(:status_label)
+        get status_label_url({ slug: status_label.slug })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do

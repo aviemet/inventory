@@ -22,7 +22,7 @@ class Licenses::ShowSerializer < Assignable::QuantitySerializer
    )
 
   attribute :cost do
-    currency_for(component)
+    currency_for(license)
   end
 
   belongs_to :department, serializer: DepartmentSerializer
@@ -32,5 +32,4 @@ class Licenses::ShowSerializer < Assignable::QuantitySerializer
   belongs_to :category, serializer: CategorySerializer
   belongs_to :vendor, serializer: VendorSerializer
   belongs_to :manufacturer, serializer: ManufacturerSerializer
-  belongs_to :assignments, serializer: AssignmentSerializer
 end

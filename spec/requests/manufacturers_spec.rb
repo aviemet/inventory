@@ -61,6 +61,13 @@ RSpec.describe "/manufacturers", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        manufacturer = create(:manufacturer, company: @admin.active_company)
+        get manufacturer_url({ slug: manufacturer.slug })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do

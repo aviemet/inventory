@@ -21,8 +21,6 @@ class VendorsController < ApplicationController
 
   # GET /vendors/:slug
   def show
-    # manual = @active_company.vendors.includes_associated.find_by_slug!(params[:slug])
-    ap({ vendor:, slug: params[:slug] })
     authorize vendor
     render inertia: "Vendors/Show", props: {
       vendor: vendor.render(view: :show),

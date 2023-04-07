@@ -65,6 +65,13 @@ RSpec.describe "/licenses", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        license = create(:license, company: @admin.active_company)
+        get license_url({ id: license.id })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do

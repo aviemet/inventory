@@ -11,7 +11,7 @@ class NetworksController < ApplicationController
     paginated_networks = networks.page(params[:page] || 1)
 
     render inertia: "Networks/Index", props: {
-      networks: -> { paginated_networks.render },
+      networks: -> { paginated_networks.render(view: :index) },
       pagination: -> { {
         count: networks.size,
         **pagination_data(paginated_networks)
@@ -25,8 +25,10 @@ class NetworksController < ApplicationController
     ips = IpLease.includes(:item).in_network(self.network)
 
     render inertia: "Networks/Show", props: {
-      network: -> { network.render(view: :details, page: (params[:page] || 1).to_i) },
-      ips: -> { ips.render(view: :with_item) },
+      network: -> { network.render(view: :show, options: {
+        page: (params[:page] || 1).to_i
+      },) },
+      ips: -> { ips.render(view: :options) },
       pagination: -> { {
         count: (network&.address&.size || 2) - 2,
         **host_pagination_data(network&.address)

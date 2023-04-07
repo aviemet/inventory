@@ -7,7 +7,7 @@ RSpec.describe "/models", type: :request do
       model: attributes_for(:model, {
         category_id: create(:category).id,
         manufacturer_id: create(:manufacturer).id
-      })
+      },)
     }
   end
 
@@ -64,6 +64,13 @@ RSpec.describe "/models", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        model = create(:model, company: @admin.active_company)
+        get model_url({ slug: model.slug })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do

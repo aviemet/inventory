@@ -48,6 +48,13 @@ RSpec.describe "/person_groups", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        person_group = create(:person_group, company: @admin.active_company)
+        get person_group_url({ slug: person_group.slug })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do

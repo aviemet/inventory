@@ -61,6 +61,13 @@ RSpec.describe "/locations", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        location = create(:location, company: @admin.active_company)
+        get location_url({ slug: location.slug })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do

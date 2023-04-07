@@ -61,6 +61,13 @@ RSpec.describe "/networks", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        network = create(:network, company: @admin.active_company)
+        get network_url({ id: network.id })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do

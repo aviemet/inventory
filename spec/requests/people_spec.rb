@@ -61,6 +61,13 @@ RSpec.describe "/people", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        person = create(:person, company: @admin.active_company)
+        get person_url({ id: person.id })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do

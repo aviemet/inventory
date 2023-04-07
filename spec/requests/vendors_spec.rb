@@ -61,6 +61,13 @@ RSpec.describe "/vendors", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        vendor = create(:vendor, company: @admin.active_company)
+        get vendor_url({ slug: vendor.slug })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do

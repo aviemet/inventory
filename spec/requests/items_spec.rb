@@ -47,6 +47,32 @@ RSpec.describe "/items", type: :request do
       end
     end
 
+    context "new page" do
+      it "displays form to create a new item" do
+        get new_item_url
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "edit page" do
+      it "displays form to edit a item" do
+        item = create(:item, company: @admin.active_company)
+
+        get edit_item_url(item)
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "show page" do
+      it "renders" do
+        item = create(:item, company: @admin.active_company)
+        get item_url({ id: item.id })
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
   end
 
   describe "POST /create" do

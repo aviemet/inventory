@@ -21,7 +21,7 @@ RSpec.describe "/departments", type: :request do
 
     context "index page" do
       it "lists all departments" do
-        department = create(:department, { company: User.first.active_company })
+        department = create(:department, { company: @admin.active_company })
 
         get departments_url
 
@@ -32,8 +32,8 @@ RSpec.describe "/departments", type: :request do
 
     context "index page with search params" do
       it "returns a filtered list of departments" do
-        department1 = create(:department, { name: "Include", company: User.first.active_company })
-        department2 = create(:department, { name: "Exclue", company: User.first.active_company })
+        department1 = create(:department, { name: "Include", company: @admin.active_company })
+        department2 = create(:department, { name: "Exclue", company: @admin.active_company })
 
         get departments_url, params: { search: department1.name }
 
@@ -53,7 +53,7 @@ RSpec.describe "/departments", type: :request do
 
     context "edit page" do
       it "displays form to edit a department" do
-        department = create(:department, company: User.first.active_company)
+        department = create(:department, company: @admin.active_company)
 
         get edit_department_url(department)
 
@@ -61,6 +61,13 @@ RSpec.describe "/departments", type: :request do
       end
     end
 
+    context "show page" do
+      it "renders" do
+        department = create(:department, company: @admin.active_company)
+        get department_url({ slug: department.slug })
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe "POST /create" do
@@ -95,7 +102,7 @@ RSpec.describe "/departments", type: :request do
     context "with valid parameters" do
       it "updates the requested department and redirects to the show page" do
         name_change = "Changed"
-        department = create(:department, company: User.first.active_company )
+        department = create(:department, company: @admin.active_company )
         patch department_url(department.slug), params: { department: { name: name_change } }
 
         department.reload
@@ -107,7 +114,7 @@ RSpec.describe "/departments", type: :request do
 
     context "with invalid parameters" do
       it "redirects back to the edit department page" do
-        department = create(:department, company: User.first.active_company)
+        department = create(:department, company: @admin.active_company)
         patch department_url(department), params: invalid_attributes
         expect(response).to redirect_to edit_department_url(department)
       end
@@ -118,14 +125,14 @@ RSpec.describe "/departments", type: :request do
     login_admin
 
     it "destroys the requested department" do
-      department = create(:department, company: User.first.active_company)
+      department = create(:department, company: @admin.active_company)
       expect {
         delete department_url({slug: department.slug})
       }.to change(Department, :count).by(-1)
     end
 
     it "redirects to the departments list" do
-      department = create(:department, company: User.first.active_company)
+      department = create(:department, company: @admin.active_company)
       delete department_url({slug: department.slug})
       expect(response).to redirect_to(departments_url)
     end
