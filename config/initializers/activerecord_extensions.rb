@@ -1,9 +1,17 @@
+require_relative '../../app/lib/renderable'
+
 module ActiveRecordExtensions
+  # extend ActiveSupport::Concern
+
+  # included do
+  #   include Renderable::ClassMethods
+  # end
+
   def serializer(view = nil)
-    serializer_with_view(self.name, view).constantize
+    serializer_name(self.name, view).constantize
   end
 
-  def serializer_with_view(name, view)
+  def serializer_name(name, view)
     if view
       "#{name.pluralize.camelize}::#{view.to_s.camelize}Serializer"
     else

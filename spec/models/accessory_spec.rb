@@ -15,11 +15,11 @@ RSpec.describe Accessory, type: :model do
     it "is invalid with invalid attributes" do
       expect(build(:accessory, {
         name: nil
-      })).to_not be_valid
+      },)).to_not be_valid
 
       expect(build(:accessory, {
         model: nil
-      })).to_not be_valid
+      },)).to_not be_valid
     end
 
     it "uses money-rails to handle cost" do
@@ -30,5 +30,13 @@ RSpec.describe Accessory, type: :model do
   describe "Associations:" do
     it_behaves_like "ownable"
     it_behaves_like "assignable:quantity"
+  end
+
+  describe "Serializer" do
+    it "infers the correct serializer" do
+      expect(subject.serializer).to equal(AccessorySerializer)
+      expect(Accessory.serializer).to equal(AccessorySerializer)
+      expect(Accessory.all.serializer).to equal(AccessorySerializer)
+    end
   end
 end
