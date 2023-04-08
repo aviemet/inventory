@@ -4,6 +4,6 @@ class ApplicationSerializer < Oj::Serializer
   identifier
 
   def currency_for(obj)
-    obj&.cost&.amount&.to_f unless obj.cost.nil?
+    obj.cost&.amount&.to_f
   end
 end

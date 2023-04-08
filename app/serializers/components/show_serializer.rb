@@ -17,7 +17,8 @@ class Components::ShowSerializer < Assignable::QuantitySerializer
      :updated_at,
    )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(component)
   end
 

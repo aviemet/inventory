@@ -1,11 +1,13 @@
 class People::OptionsSerializer < ApplicationSerializer
   object_as :person
 
-  attribute :name do
+  type :string
+  def name
     "#{person.first_name} #{person.last_name}".strip
   end
 
-  attribute :default_location_id do
+  type :number
+  def default_location_id
     person&.location&.id
   end
 end

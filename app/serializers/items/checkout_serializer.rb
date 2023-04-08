@@ -16,7 +16,8 @@ class Items::CheckoutSerializer < Assignable::SingleSerializer
     :updated_at,
   )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(item)
   end
 

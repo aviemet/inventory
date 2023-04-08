@@ -17,7 +17,7 @@ const useTableStyles = createStyles(theme => ({
 }))
 
 interface ICheckinAccessoriesProps {
-	accessory: Schema.AccessoriesCheckin
+	accessory: Schema.AccessoriesEdit
 	assignment: Schema.AssignmentsEdit
 	statuses: Schema.StatusLabel[]
 }

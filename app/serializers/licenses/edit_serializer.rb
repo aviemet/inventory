@@ -19,7 +19,8 @@ class Licenses::EditSerializer < Assignable::QuantitySerializer
      :manufacturer_id,
    )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(license)
   end
 end

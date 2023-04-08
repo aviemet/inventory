@@ -91,8 +91,6 @@ class NetworksController < ApplicationController
     limit = params[:limit] || 256
     current_page = params[:page] ? params[:page].to_i : 1
 
-    ap({ size:, pages:, limit:, current_page:})
-
     {
       pages:,
       limit:,

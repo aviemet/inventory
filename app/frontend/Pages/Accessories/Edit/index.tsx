@@ -6,10 +6,10 @@ import { Routes } from '@/lib'
 interface IEditAccessoryProps{
 	accessory: Schema.AccessoriesEdit
 	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
 	manufacturers: Schema.ManufacturersOptions[]
 	categories: Schema.CategoriesOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const EditAccessory = ({ accessory, ...models }: IEditAccessoryProps) => {
@@ -25,7 +25,12 @@ const EditAccessory = ({ accessory, ...models }: IEditAccessoryProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<AccessoryForm to={ Routes.accessory(accessory) } method="patch" accessory={ accessory } { ...models } />
+				<AccessoryForm
+					to={ Routes.accessory(accessory) }
+					method="patch"
+					accessory={ accessory }
+					{ ...models }
+				/>
 			</Section>
 		</Page>
 	)

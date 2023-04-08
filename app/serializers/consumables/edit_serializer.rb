@@ -14,7 +14,8 @@ class Consumables::EditSerializer < Assignable::QuantitySerializer
      :default_location_id,
    )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(consumable)
   end
 end

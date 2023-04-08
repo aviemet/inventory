@@ -85,7 +85,7 @@ class AccessoriesController < ApplicationController
       render inertia: "Accessories/Checkin", props: {
         accessory: accessory.render(view: :checkin),
         assignment: assignment.render(view: :edit),
-        statuses: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
+        statuses: -> { StatusLabel.all.render }
       }
     else
       redirect_to accessory, warning: 'Accessory assignment is unable to be checked in'

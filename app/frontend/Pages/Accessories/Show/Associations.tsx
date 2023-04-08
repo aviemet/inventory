@@ -1,12 +1,9 @@
 import React from 'react'
 import { ShowPageAssociations } from '@/Layouts/AppLayout/Components'
 import { Routes } from '@/lib'
+import { IShowAccessoryProps } from '.'
 
-interface IAccessoryAssociationsProps {
-	accessory: Schema.Accessory
-}
-
-const Associations = ({ accessory }: IAccessoryAssociationsProps) => {
+const Associations = ({ accessory }: IShowAccessoryProps) => {
 	return <ShowPageAssociations assignToable={ accessory } checkinRoute={ Routes.checkinAccessory } />
 }
 

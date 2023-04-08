@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import VendorsForm from '@/Pages/Vendors/Form'
 
 interface IVendorsDropdown extends IDropdownWithModalButton {
-	vendors: Schema.Vendor[]
+	vendors: Schema.VendorsOptions[]
 }
 
 const VendorsDropdown = ({ label = 'Vendor', name = 'vendor_id', vendors, ...props }: IVendorsDropdown) => {

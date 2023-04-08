@@ -14,7 +14,8 @@ class Items::EditSerializer < Assignable::SingleSerializer
      :default_location_id,
    )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(item)
   end
 

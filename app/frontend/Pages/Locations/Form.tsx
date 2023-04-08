@@ -6,19 +6,22 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
-import { omit } from 'lodash'
 import { type UseFormProps } from 'use-inertia-form'
+
+export type TLocationFormData = {
+	location: Schema.LocationsNew
+}
 
 export interface ILocationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<Schema.Location>) => boolean|void
-	location?: Partial<Schema.Location>
-	locations: Schema.Location[]
+	onSubmit?: (object: UseFormProps<TLocationFormData>) => boolean|void
+	location?: Schema.LocationsNew
+	locations: Schema.LocationsOptions[]
 	currencies: any
 }
 
-const emptyLocation: Partial<Schema.Location> = {
+const emptyLocation: Schema.LocationsNew = {
 	name: '',
 	currency: '',
 	parent_id: undefined,
@@ -35,7 +38,7 @@ const LocationForm = ({
 	return (
 		<Form
 			model="location"
-			data={ { location: omit(location, ['id', 'created_at', 'updated_at', 'slug']) } }
+			data={ { location } }
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }

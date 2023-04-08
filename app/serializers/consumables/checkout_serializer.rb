@@ -16,7 +16,8 @@ class Consumables::CheckoutSerializer < Assignable::QuantitySerializer
      :updated_at,
    )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(consumable)
   end
 end

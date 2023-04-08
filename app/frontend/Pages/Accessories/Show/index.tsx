@@ -6,7 +6,7 @@ import History from './History'
 import Associations from './Associations'
 
 export interface IShowAccessoryProps {
-	accessory: Schema.AccessoriesShow
+	accessory: Schema.Accessory
 }
 
 const tabs = {

@@ -21,7 +21,8 @@ class Licenses::ShowSerializer < Assignable::QuantitySerializer
      :updated_at,
    )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(license)
   end
 

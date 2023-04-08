@@ -13,12 +13,12 @@ export interface IModelFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps) => boolean|void
-	model?: Partial<Schema.Model>
-	categories: Schema.Category[]
-	manufacturers: Schema.Manufacturer[]
+	model?: Schema.ModelsEdit
+	categories: Schema.CategoriesOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
 }
 
-const emptyModel: Partial<Schema.Model> = {
+const emptyModel: Schema.ModelsNew = {
 	name: '',
 	model_number: '',
 	manufacturer_id: undefined,

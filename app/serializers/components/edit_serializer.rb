@@ -15,7 +15,8 @@ class Components::EditSerializer < Assignable::QuantitySerializer
      :default_location_id,
    )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(component)
   end
 end
