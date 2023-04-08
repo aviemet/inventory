@@ -4,9 +4,9 @@ import { Routes } from '@/lib'
 import ContractForm from '../Form'
 
 interface IUpdateContractProps{
-	contract: Schema.Contract
-	vendors: Schema.Vendor[]
-	categories: Schema.Category[]
+	contract: Schema.ContractsEdit
+	vendors: Schema.VendorsOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const EditContract = ({ contract, ...models }: IUpdateContractProps) => {
@@ -21,7 +21,12 @@ const EditContract = ({ contract, ...models }: IUpdateContractProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<ContractForm to={ Routes.contract(contract) } method="patch" contract={ contract } { ...models } />
+				<ContractForm
+					to={ Routes.contract(contract) }
+					method="patch"
+					contract={ contract }
+					{ ...models }
+				/>
 			</Section>
 		</Page>
 	)

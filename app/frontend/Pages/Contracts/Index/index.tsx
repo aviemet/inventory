@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import ContractsTable from '../Table'
 
 interface IContractsIndexProps {
-	contracts: Schema.Contract[]
+	contracts: Schema.ContractsIndex[]
 	pagination: Schema.Pagination
 }
 

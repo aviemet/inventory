@@ -3,25 +3,27 @@ import {
 	Form,
 	TextInput,
 	Textarea,
-	SearchableDropdown,
 	Checkbox,
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
 import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Components/Form/Dropdowns'
+
+type TConsumableFormData = {
+	consumable: Schema.ConsumablesFormData
+}
 
 export interface IConsumableFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	consumable: Schema.Consumable
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
-	manufacturers: Schema.Manufacturer[]
-	categories: Schema.Category[]
+	onSubmit?: (object: UseFormProps<TConsumableFormData>) => boolean|void
+	consumable: Schema.ConsumablesFormData
+	models: Schema.ModelsOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, vendors, locations, manufacturers, categories }: IConsumableFormProps) => {

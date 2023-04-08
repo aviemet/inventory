@@ -4,8 +4,8 @@ import DepartmentForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IEditDepartmentProps{
-	department: Schema.Department
-	locations: Schema.Location[]
+	department: Schema.DepartmentsEdit
+	locations: Schema.LocationsOptions[]
 }
 
 const EditDepartment = ({ department, ...models }: IEditDepartmentProps) => {

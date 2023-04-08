@@ -11,4 +11,9 @@ class Contacts::FormDataSerializer < ApplicationSerializer
     :primary_phone_id,
     :primary_email_id,
   )
+
+  has_many :addresses, serializer: Addresses::FormDataSerializer
+  has_many :emails, serializer: Emails::FormDataSerializer
+  has_many :phones, serializer: Phones::FormDataSerializer
+  has_many :websites, serializer: Websites::FormDataSerializer
 end

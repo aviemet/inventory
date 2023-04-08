@@ -3,7 +3,6 @@ import { Page, Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, TextInput, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
 import { createStyles } from '@mantine/core'
-import { omit } from 'lodash'
 
 const useTableStyles = createStyles(theme => ({
 	table: {
@@ -60,7 +59,7 @@ const Checkin = ({ assignment, accessory, statuses }: ICheckinAccessoriesProps) 
 
 				<Form
 					data={ {
-						assignment: omit(assignment, 'id', 'created_by_id'),
+						assignment,
 						accessory,
 					} }
 					to={ Routes.unassignAssignment(assignment) }

@@ -7,7 +7,7 @@ import ComponentsTable from '@/Pages/Components/Table'
 
 interface IDetailsProps {
 	department: Schema.Department
-	components: PaginatedModel<Schema.Accessory[]>
+	components: PaginatedModel<Schema.Component[]>
 }
 
 const Details = ({ department, components }: IDetailsProps) => {

@@ -1,12 +1,9 @@
 import React from 'react'
 import { Link, Heading, Table, Box } from '@/Components'
 import { formatter, Routes } from '@/lib'
+import { IShowConsumableProps } from '.'
 
-interface IConsumableDetailsProps {
-	consumable: Schema.Consumable
-}
-
-const ConsumableDetails = ({ consumable }: IConsumableDetailsProps) => {
+const ConsumableDetails = ({ consumable }: IShowConsumableProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>Details</Heading>

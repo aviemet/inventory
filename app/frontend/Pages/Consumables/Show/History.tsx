@@ -1,11 +1,8 @@
 import React from 'react'
 import { Heading, History } from '@/Components'
+import { IShowConsumableProps } from '.'
 
-interface IConsumableHistoryProps {
-	consumable: Schema.Consumable
-}
-
-const ConsumableHistory = ({ consumable }: IConsumableHistoryProps) => {
+const ConsumableHistory = ({ consumable }: IShowConsumableProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>History</Heading>

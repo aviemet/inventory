@@ -17,7 +17,7 @@ export interface ICategoryFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<CategoryFormData>) => boolean|void
-	category: Schema.CategoriesFormData
+	category?: Schema.CategoriesFormData
 }
 
 const emptyCategory: Schema.CategoriesFormData = {

@@ -2,6 +2,7 @@ class ContactSerializer < ApplicationSerializer
   object_as :contact
 
   attributes(
+    :id,
     :notes,
     :contactable_type,
     :contactable_id,

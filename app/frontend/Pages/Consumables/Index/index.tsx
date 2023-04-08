@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import ConsumablesTable from '../Table'
 
 interface IConsumablesIndexProps {
-	consumables: Schema.Consumable[]
+	consumables: Schema.ConsumablesIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -19,6 +19,7 @@ const ConsumablesIndex = ({ consumables, pagination }: IConsumablesIndexProps) =
 			menuOptions={ [
 				{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
 			] }
+			deleteRoute={ Routes.consumables() }
 		>
 			<ConsumablesTable />
 		</IndexPageTemplate>

@@ -6,8 +6,8 @@ import Details from './Details'
 import History from './History'
 import Associations from './Associations'
 
-interface IShowConsumableProps {
-	consumable: Schema.Consumable
+export interface IShowConsumableProps {
+	consumable: Schema.ConsumablesShow
 }
 
 const tabs = {

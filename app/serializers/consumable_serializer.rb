@@ -2,6 +2,7 @@ class ConsumableSerializer < Assignable::ConsumeSerializer
   object_as :consumable
 
   attributes(
+    :id,
     :name,
     :min_qty,
     :qty,
