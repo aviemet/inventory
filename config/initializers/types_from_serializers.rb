@@ -7,5 +7,6 @@ if Rails.env.development?
     )
     config.namespace = "Schema"
     config.indentation = :tabs
+    config.transform_keys = ->(key) { key }
   end
 end

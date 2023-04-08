@@ -2,6 +2,7 @@ class Accessories::IndexSerializer < Assignable::QuantitySerializer
   object_as :accessory
 
   attributes(
+    :id,
     :name,
     :asset_tag,
     :serial,

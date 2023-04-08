@@ -2,6 +2,7 @@ class Accessories::CheckoutSerializer < Assignable::QuantitySerializer
   object_as :accessory
 
   attributes(
+    :id,
     :name,
     :serial,
     :asset_tag,
