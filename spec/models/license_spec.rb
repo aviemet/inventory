@@ -15,4 +15,8 @@ RSpec.describe License, type: :model do
     it_behaves_like "fieldable"
     it_behaves_like "assignable"
   end
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
+  end
 end

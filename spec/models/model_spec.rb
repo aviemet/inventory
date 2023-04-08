@@ -9,4 +9,8 @@ RSpec.describe Model, type: :model do
   describe "Associations" do
     it_behaves_like "fieldable"
   end
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
+  end
 end

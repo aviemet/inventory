@@ -24,4 +24,8 @@ RSpec.describe Location, type: :model do
     it_behaves_like "contactable"
     it_behaves_like "assign_toable"
   end
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
+  end
 end

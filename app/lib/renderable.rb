@@ -3,7 +3,15 @@ module Renderable
     self.class.serializer_name(view).constantize
   end
 
+  def render(view: nil, options: {})
+    serializer(view).render(self, options)
+  end
+
   module ClassMethods
+    def serializer(view = nil)
+      serializer_name(view).constantize
+    end
+
     def serializer_name(view = nil)
       if view
         "#{name.pluralize.camelize}::#{view.to_s.camelize}Serializer"
@@ -12,13 +20,9 @@ module Renderable
       end
     end
 
-    def serializer(view = nil)
-      serializer_name(view).constantize
+    def render(view: nil, options: {})
+      serializer(view).render(self, options)
     end
-  end
-
-  def render(view: nil, options: {})
-    serializer(view).render(self, options)
   end
 
   def self.included(base)

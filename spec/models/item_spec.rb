@@ -16,7 +16,7 @@ RSpec.describe Item, type: :model do
     it "is invalid with invalid attributes" do
       expect(build(:item, {
         name: nil
-      })).to_not be_valid
+      },)).to_not be_valid
 
       item = build(:item, {model: nil })
       item.model = nil
@@ -34,5 +34,9 @@ RSpec.describe Item, type: :model do
     it_behaves_like "assign_toable"
     it_behaves_like "purchasable"
     it_behaves_like "fieldable"
+  end
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
   end
 end

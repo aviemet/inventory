@@ -15,11 +15,11 @@ RSpec.describe Person, type: :model do
     it "is invalid with invalid attributes" do
       expect(build(:person, {
         first_name: nil
-      })).to_not be_valid
+      },)).to_not be_valid
 
       expect(build(:person, {
         last_name: nil
-      })).to_not be_valid
+      },)).to_not be_valid
     end
   end
 
@@ -34,5 +34,9 @@ RSpec.describe Person, type: :model do
     it { should belong_to(:location).optional }
     it { should have_many(:tickets) }
     it { should have_many(:groups) }
+  end
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
   end
 end

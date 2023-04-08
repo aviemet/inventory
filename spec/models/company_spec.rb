@@ -32,4 +32,7 @@ RSpec.describe Company, type: :model do
     end
   end
 
+  describe "Serializer" do
+    it_behaves_like "serializable"
+  end
 end

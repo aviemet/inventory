@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import AccessoriesTable from '../Table'
 
 interface IAccessoriesIndexProps {
-	accessories: Schema.Accessory[]
+	accessories: Schema.AccessoriesIndex[]
 	pagination: Schema.Pagination
 }
 

@@ -12,11 +12,11 @@ RSpec.describe Network, type: :model do
     it "is invalid with invalid attributes" do
       expect(build(:network, {
         address: nil
-      })).to_not be_valid
+      },)).to_not be_valid
 
       expect(build(:network, {
         address: "10.10.10.1"
-      })).to_not be_valid
+      },)).to_not be_valid
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe Network, type: :model do
     it "fixes network address inputs to find the closest network address" do
       network = build(:network, {
         address: "10.10.10.1/24"
-      })
+      },)
       expect(network).to be_valid
       expect(network.address.to_s).to eq("10.10.10.0")
     end
@@ -53,5 +53,9 @@ RSpec.describe Network, type: :model do
 
   describe "Associations" do
     it_behaves_like "ownable"
+  end
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
   end
 end

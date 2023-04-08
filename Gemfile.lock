@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/aviemet/types_from_serializers
+  revision: 3ad9264bc53ef3575f17794a962681536d62c060
+  specs:
+    types_from_serializers (2.0.2)
+      listen (~> 3.2)
+      oj_serializers (~> 2.0, >= 2.0.2)
+      railties (>= 5.1)
+
+GIT
   remote: https://github.com/faker-ruby/faker.git
   revision: 82d7a86832601508932dcb727b4965afc5b9b6a5
   branch: main
@@ -362,10 +371,6 @@ GEM
       activerecord
       railties
     timeout (0.3.2)
-    types_from_serializers (2.0.2)
-      listen (~> 3.2)
-      oj_serializers (~> 2.0, >= 2.0.2)
-      railties (>= 5.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2023.3)
@@ -451,7 +456,7 @@ DEPENDENCIES
   spring
   sprockets-rails
   time_for_a_boolean (~> 0.2.1)
-  types_from_serializers (~> 2.0)
+  types_from_serializers (~> 2.0)!
   tzinfo-data
   vite_rails (~> 3.0)
   web-console

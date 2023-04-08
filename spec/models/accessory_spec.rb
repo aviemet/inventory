@@ -1,6 +1,7 @@
 require 'rails_helper'
 require "models/concerns/ownable"
 require "models/concerns/assignable"
+require "models/concerns/serializable"
 
 RSpec.describe Accessory, type: :model do
   subject {
@@ -33,10 +34,6 @@ RSpec.describe Accessory, type: :model do
   end
 
   describe "Serializer" do
-    it "infers the correct serializer" do
-      expect(subject.serializer).to equal(AccessorySerializer)
-      expect(Accessory.serializer).to equal(AccessorySerializer)
-      expect(Accessory.all.serializer).to equal(AccessorySerializer)
-    end
+    it_behaves_like "serializable"
   end
 end

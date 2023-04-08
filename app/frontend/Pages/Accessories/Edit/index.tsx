@@ -4,12 +4,12 @@ import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IEditAccessoryProps{
-	accessory: Schema.Accessory
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
-	manufacturers: Schema.Manufacturer[]
-	categories: Schema.Category[]
+	accessory: Schema.AccessoriesEdit
+	models: Schema.ModelsOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const EditAccessory = ({ accessory, ...models }: IEditAccessoryProps) => {

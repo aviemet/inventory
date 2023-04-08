@@ -5,11 +5,11 @@ import { DateTime, Form, NumberInput, Submit, Textarea } from '@/Components/Form
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 
 interface ICheckoutItemProps {
-	assignment: Schema.Assignment
-	accessory: Schema.Accessory
-	items: Schema.Item[]
-	people: Schema.Person[]
-	locations: Schema.Location[]
+	accessory: Schema.AccessoriesCheckout
+	assignment: Schema.AssignmentsNew
+	people: Schema.PeopleOptions[]
+	items: Schema.ItemsOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const Checkout = ({ assignment, accessory, ...models }: ICheckoutItemProps) => {

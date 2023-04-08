@@ -7,4 +7,8 @@ RSpec.describe Warranty, type: :model do
   describe "Associations" do
     it_behaves_like "contactable"
   end
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
+  end
 end

@@ -17,7 +17,7 @@ class Departments::ShowSerializer < ApplicationSerializer
   has_many :consumables, serializer: ConsumableSerializer
   has_many :licenses, serializer: LicenseSerializer
   has_many :people, serializer: PersonSerializer
-  has_many :location, serializer: LocationSerializer
+  has_one :location, serializer: LocationSerializer
 
   attribute :counts do
     {
