@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
   def new
     authorize Item
     render inertia: "Items/New", props: {
-      item: Item.new.render(view: :new),
+      item: Item.new.render(view: :form_data),
       models: -> { @active_company.models.find_by_category(:Item).render(view: :options) },
       vendors: -> { @active_company.vendors.render(view: :options) },
       locations: -> { @active_company.locations.render(view: :options) },
@@ -81,7 +81,7 @@ class ItemsController < ApplicationController
 
       render inertia: "Items/Checkout", props: {
         item: item.render,
-        assignment: assignment.render(view: :new),
+        assignment: assignment.render(view: :form_data),
         people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
         items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
         locations: -> { @active_company.locations.render(view: :options) },

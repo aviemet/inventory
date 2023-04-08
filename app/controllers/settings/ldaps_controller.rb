@@ -6,7 +6,7 @@ class Settings::LdapsController < ApplicationController
     ldap = @active_company&.ldap
 
     render inertia: "Settings/Ldap/Index", props: {
-      ldap: ldap&.render(view: :edit) || Ldap.new.render(view: :new)
+      ldap: ldap&.render(view: :edit) || Ldap.new.render(view: :form_data)
     }
   end
 

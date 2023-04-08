@@ -31,7 +31,7 @@ class StatusLabelsController < ApplicationController
   # GET /status_labels/new
   def new
     render inertia: "StatusLabels/New", props: {
-      status_label: StatusLabel.new.render(view: :new)
+      status_label: StatusLabel.new.render(view: :form_data)
     }
   end
 

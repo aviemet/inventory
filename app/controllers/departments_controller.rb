@@ -91,7 +91,7 @@ class DepartmentsController < ApplicationController
   def new
     authorize Department
     render inertia: "Departments/New", props: {
-      department: Department.new.render(view: :new),
+      department: Department.new.render(view: :form_data),
       locations: -> { @active_company.locations.render(view: :options) }
     }
   end

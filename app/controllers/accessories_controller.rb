@@ -31,7 +31,7 @@ class AccessoriesController < ApplicationController
   def new
     authorize Accessory
     render inertia: "Accessories/New", props: {
-      accessory: Accessory.new.render(view: :new),
+      accessory: Accessory.new.render(view: :form_data),
       models: -> { @active_company.models.find_by_category(:Accessory).render(view: :options) },
       vendors: -> { @active_company.vendors.render(view: :options) },
       locations: -> { @active_company.locations.render(view: :options) },
@@ -65,7 +65,7 @@ class AccessoriesController < ApplicationController
 
       render inertia: "Accessories/Checkout", props: {
         accessory: accessory.render(view: :checkout),
-        assignment: assignment.render(view: :new),
+        assignment: assignment.render(view: :form_data),
         people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
         items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
         locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },

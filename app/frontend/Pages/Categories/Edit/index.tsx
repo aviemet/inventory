@@ -4,7 +4,7 @@ import CategoryForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IUpdateCategoryProps{
-	category: Schema.Category
+	category: Schema.CategoriesEdit
 }
 
 const EditCategory = ({ category, ...models }: IUpdateCategoryProps) => {

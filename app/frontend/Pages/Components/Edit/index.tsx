@@ -4,12 +4,12 @@ import ComponentForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IUpdateComponentProps{
-	component: Schema.Component
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
-	manufacturers: Schema.Manufacturer[]
-	categories: Schema.Category[]
+	component: Schema.ComponentsEdit
+	models: Schema.ModelsOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const EditComponent = ({ component, ...models }: IUpdateComponentProps) => {

@@ -17,7 +17,7 @@ const CategoriesTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (category: Schema.CategoryWithQty) => (
+				<Table.RowIterator render={ (category: Schema.Category) => (
 					<Table.Row key={ category.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.category(category.slug) }>{ category.name }</Link>

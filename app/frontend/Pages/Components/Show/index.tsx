@@ -6,8 +6,8 @@ import Details from './Details'
 import History from './History'
 import Associations from './Associations'
 
-interface IShowComponentProps {
-	component: Schema.Component
+export interface IShowComponentProps {
+	component: Schema.ComponentsShow
 }
 
 const tabs = {

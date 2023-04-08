@@ -34,7 +34,7 @@ class CompaniesController < ApplicationController
   def new
     authorize Company
     render inertia: "Companies/New", props: {
-      company: Company.new.render(view: :new)
+      company: Company.new.render(view: :form_data)
     }
   end
 

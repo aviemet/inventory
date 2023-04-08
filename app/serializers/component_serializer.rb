@@ -1,5 +1,8 @@
 class ComponentSerializer < Assignable::QuantitySerializer
+  object_as :component
+
   attributes(
+    :id,
     :name,
     :serial,
     :asset_tag,

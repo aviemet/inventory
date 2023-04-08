@@ -91,7 +91,7 @@ class VendorsController < ApplicationController
   def new
     authorize Vendor
     render inertia: "Vendors/New", props: {
-      vendor: Vendor.new.render(view: :new)
+      vendor: Vendor.new.render(view: :form_data)
     }
   end
 

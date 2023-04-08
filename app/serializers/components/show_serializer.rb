@@ -2,20 +2,21 @@ class Components::ShowSerializer < Assignable::QuantitySerializer
   object_as :component
 
   attributes(
-     :name,
-     :serial,
-     :asset_tag,
-     :min_qty,
-     :qty,
-     :cost_currency,
-     :purchased_at,
-     :notes,
-     :model_id,
-     :vendor_id,
-     :default_location_id,
-     :created_at,
-     :updated_at,
-   )
+    :id,
+    :name,
+    :serial,
+    :asset_tag,
+    :min_qty,
+    :qty,
+    :cost_currency,
+    :purchased_at,
+    :notes,
+    :model_id,
+    :vendor_id,
+    :default_location_id,
+    :created_at,
+    :updated_at,
+  )
 
   type :number
   def cost

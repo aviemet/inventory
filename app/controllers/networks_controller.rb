@@ -40,7 +40,7 @@ class NetworksController < ApplicationController
   def new
     authorize Network
     render inertia: "Networks/New", props: {
-      network: -> { Network.new.render(view: :new) },
+      network: -> { Network.new.render(view: :form_data) },
     }
   end
 

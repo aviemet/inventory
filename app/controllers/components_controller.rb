@@ -40,7 +40,7 @@ class ComponentsController < ApplicationController
   def new
     authorize Component
     render inertia: "Components/New", props: {
-      component: Component.new.render(view: :new),
+      component: Component.new.render(view: :form_data),
       models: -> { @active_company.models.find_by_category(:Component).render(view: :options) },
       vendors: -> { @active_company.vendors.render(view: :options) },
       locations: -> { @active_company.locations.render(view: :options) },
@@ -69,7 +69,7 @@ class ComponentsController < ApplicationController
 
     render inertia: "Components/Checkout", props: {
       component: component.render,
-      assignment: assignment.render(view: :new),
+      assignment: assignment.render(view: :form_data),
       items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
       locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },
     }

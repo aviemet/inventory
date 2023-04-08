@@ -71,7 +71,7 @@ class ManufacturersController < ApplicationController
   def new
     authorize Manufacturer
     render inertia: "Manufacturers/New", props: {
-      manufacturer: Manufacturer.new.render(view: :new)
+      manufacturer: Manufacturer.new.render(view: :form_data)
     }
   end
 

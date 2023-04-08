@@ -2,6 +2,7 @@ class AssetSerializer < ApplicationSerializer
   object_as :asset
 
   attributes(
+    :id,
     :name,
     :asset_tag,
     :serial,

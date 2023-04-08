@@ -3,7 +3,7 @@ import { Breadcrumbs, Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CompanyForm from '../Form'
 
-const NewCompany = () => {
+const NewCompany = ({ company }: { company: Schema.CompaniesFormData }) => {
 	const title = 'New Company'
 
 	return (
@@ -16,7 +16,7 @@ const NewCompany = () => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<CompanyForm to={ Routes.companies() } company={ { name: '' } } />
+				<CompanyForm to={ Routes.companies() } company={ company } />
 			</Section>
 		</Page>
 	)

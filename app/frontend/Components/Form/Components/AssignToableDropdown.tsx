@@ -6,13 +6,13 @@ type TAssignToableOptions = Schema.ItemsOptions[]|Schema.PeopleOptions[]|Schema.
 
 interface IAssignToableDropdownProps {
 	items: Schema.ItemsOptions[]
-	people: Schema.PeopleOptions[]
+	people?: Schema.PeopleOptions[]
 	locations: Schema.LocationsOptions[]
 	options: TAssignToable[]
 }
 
 const AssignToableDropdown = ({ items, people, locations, options = ['Person', 'Item', 'Location'] }: IAssignToableDropdownProps) => {
-	const { data, setData } = useForm<{ assignment: Schema.AssignmentsNew}>()
+	const { data, setData } = useForm<{ assignment: Schema.AssignmentsFormData }>()
 	const type: TAssignToable = data.assignment.assign_toable_type
 
 	const modelMapping = new Map<TAssignToable, TAssignToableOptions>()
@@ -40,7 +40,7 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 
 		switch(type) {
 			case 'Person':
-				const person = people.find(person => String(person.id) === id)
+				const person = people?.find(person => String(person.id) === id)
 				default_location = person?.default_location_id
 				break
 			case 'Item':

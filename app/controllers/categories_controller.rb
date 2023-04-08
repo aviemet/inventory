@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     render inertia: "Categories/New", props: {
-      category: Category.new.render(view: :new),
+      category: Category.new.render(view: :form_data),
     }
   end
 

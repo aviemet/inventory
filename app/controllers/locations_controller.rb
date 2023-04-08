@@ -33,7 +33,7 @@ class LocationsController < ApplicationController
   def new
     authorize Location
     render inertia: "Locations/New", props: {
-      location: Location.new(currency: @active_company.default_currency).render(view: :new),
+      location: Location.new(currency: @active_company.default_currency).render(view: :form_data),
       locations: -> { @active_company.locations.render(view: :options) },
       departments: -> { @active_company.departments.render(view: :options) },
       currencies:,

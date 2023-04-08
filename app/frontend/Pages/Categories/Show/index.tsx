@@ -6,7 +6,7 @@ import { Routes } from '@/lib'
 type TRecord = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
 
 interface IShowCategoryProps {
-	category: Schema.Category & { plural: string }
+	category: Schema.Category
 	records: TRecord[]
 	pagination: Schema.Pagination
 }
@@ -29,9 +29,13 @@ const Show = ({ category, records, pagination }: IShowCategoryProps) => {
 					rows={ records }
 					pagination={ pagination }
 				>
-					<TableTitleSection title={ title } menuOptions={ [
-						{ label: 'Edit Category', href: Routes.editCategory(category.slug) },
-					] }>
+					<TableTitleSection
+						title={ title }
+						menuOptions={ [
+							{ label: 'Edit Category', href: Routes.editCategory(category.slug) },
+						] }
+						deleteRoute={ Routes.categories() }
+					>
 						<Table.SearchInput />
 					</TableTitleSection>
 

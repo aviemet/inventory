@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     render inertia: "Orders/New", props: {
-      order: Order.new({ ordered_at: Time.zone.now }).render(view: :new),
+      order: Order.new({ ordered_at: Time.zone.now }).render(view: :form_data),
       vendors: -> { @active_company.vendors }
     }
   end

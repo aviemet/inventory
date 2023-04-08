@@ -30,7 +30,7 @@ class TicketsController < ApplicationController
   def new
     authorize Ticket
     render inertia: "Tickets/New", props: {
-      ticket: Ticket.new.render(view: :new),
+      ticket: Ticket.new.render(view: :form_data),
       people: @active_company.people.joins(:user).render(view: :options),
       assets: @active_company.assets.render(view: :options),
       locations: @active_company.locations.render(view: :options),
