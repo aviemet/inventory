@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'models/concerns/contactable'
+require "models/concerns/serializable"
 
 RSpec.describe Warranty, type: :model do
   subject { build(:warranty) }

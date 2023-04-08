@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'models/concerns/fieldable'
+require "models/concerns/serializable"
 
 RSpec.describe Model, type: :model do
   subject {

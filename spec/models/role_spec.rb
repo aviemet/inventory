@@ -1,4 +1,5 @@
 require 'rails_helper'
+require "models/concerns/serializable"
 
 RSpec.describe Role, type: :model do
 

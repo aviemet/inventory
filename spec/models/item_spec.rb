@@ -4,6 +4,7 @@ require "models/concerns/assignable"
 require "models/concerns/assign_toable"
 require "models/concerns/purchasable"
 require "models/concerns/fieldable"
+require "models/concerns/serializable"
 
 RSpec.describe Item, type: :model do
   subject { create(:item) }

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require "models/concerns/serializable"
 
 RSpec.describe Contact, type: :model do
 

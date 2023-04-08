@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'models/concerns/contactable'
 require 'models/concerns/ownable'
+require "models/concerns/serializable"
 
 RSpec.describe Manufacturer, type: :model do
   subject {

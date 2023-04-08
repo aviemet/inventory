@@ -1,6 +1,7 @@
 require 'rails_helper'
 require "models/concerns/ownable"
 require "models/concerns/assignable"
+require "models/concerns/serializable"
 
 RSpec.describe Component, type: :model do
   subject { build(:component) }

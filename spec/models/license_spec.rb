@@ -3,6 +3,7 @@ require 'models/concerns/ownable'
 require 'models/concerns/purchasable'
 require 'models/concerns/fieldable'
 require 'models/concerns/assignable'
+require "models/concerns/serializable"
 
 RSpec.describe License, type: :model do
   subject {

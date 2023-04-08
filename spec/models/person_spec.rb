@@ -3,6 +3,7 @@ require 'models/concerns/ownable'
 require 'models/concerns/contactable'
 require 'models/concerns/assign_toable'
 require 'models/concerns/fieldable'
+require "models/concerns/serializable"
 
 RSpec.describe Person, type: :model do
   subject { create(:person) }
