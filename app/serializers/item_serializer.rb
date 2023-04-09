@@ -2,6 +2,7 @@ class ItemSerializer < Assignable::SingleSerializer
   object_as :item
 
   attributes(
+    :id,
     :name,
     :asset_tag,
     :serial,
@@ -21,7 +22,8 @@ class ItemSerializer < Assignable::SingleSerializer
     currency_for(item)
   end
 
-  attribute :assigned do
+  type :boolean
+  def assigned
     item.assigned?
   end
 end

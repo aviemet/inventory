@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, TextInput, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
+import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
 import { LocationsDropdown } from '@/Components/Form/Dropdowns'
 import { createStyles } from '@mantine/core'
+import StatusLabelsDropdown from '@/Components/Form/Dropdowns/StatusLabelsDropdown'
 
 const useTableStyles = createStyles(theme => ({
 	table: {
@@ -17,13 +18,13 @@ const useTableStyles = createStyles(theme => ({
 }))
 
 interface ICheckinItemsProps {
-	assignment: Schema.Assignment
-	item: Schema.Item
-	locations: Schema.Location[]
-	statuses: Schema.StatusType[]
+	assignment: Schema.AssignmentsEdit
+	item: Schema.ItemsEdit
+	locations: Schema.LocationsOptions[]
+	status_labels: Schema.StatusLabelsOptions[]
 }
 
-const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) => {
+const Checkin = ({ assignment, item, locations, status_labels }: ICheckinItemsProps) => {
 	const [itemName, setItemName] = useState(item.name)
 	const { classes } = useTableStyles()
 	const title = 'Check In Item'
@@ -76,12 +77,7 @@ const Checkin = ({ assignment, item, locations, statuses }: ICheckinItemsProps) 
 
 					<LocationsDropdown locations={ locations } />
 
-					<SearchableDropdown
-						options={ statuses }
-						label="Status"
-						name="status_id"
-						required
-					/>
+					<StatusLabelsDropdown status_labels={ status_labels } />
 
 					<DateTime
 						label="Returned At"

@@ -5,11 +5,11 @@ import { NewIcon } from '@/Components/Icons'
 import LicensesTable from '../Table'
 
 interface ILicensesIndexProps {
-	licenses: Schema.License[]
+	licenses: Schema.LicensesIndex[]
 	pagination: Schema.Pagination
 }
 
-const LicencesIndex = ({ licenses, pagination }: ILicensesIndexProps ) => {
+const LicensesIndex = ({ licenses, pagination }: ILicensesIndexProps ) => {
 	return (
 		<IndexPageTemplate
 			title="Licenses"
@@ -26,4 +26,4 @@ const LicencesIndex = ({ licenses, pagination }: ILicensesIndexProps ) => {
 	)
 }
 
-export default LicencesIndex
+export default LicensesIndex

@@ -4,13 +4,20 @@ class Manufacturers::IndexSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-     :id,
-     :name,
-     :created_at,
-     :updated_at,
-   )
+    :id,
+    :name,
+    :created_at,
+    :updated_at,
+  )
 
-  attribute :counts do
+  type "{
+    models: number
+    items: number
+    accessories: number
+    consumables: number
+    components: number
+  }"
+  def counts
     {
       models: manufacturer&.models&.size || 0,
       items: manufacturer&.items&.size || 0,

@@ -5,9 +5,9 @@ import { useForm } from 'use-inertia-form'
 type TAssignToableOptions = Schema.ItemsOptions[]|Schema.PeopleOptions[]|Schema.LocationsOptions[]
 
 interface IAssignToableDropdownProps {
-	items: Schema.ItemsOptions[]
+	items?: Schema.ItemsOptions[]
 	people?: Schema.PeopleOptions[]
-	locations: Schema.LocationsOptions[]
+	locations?: Schema.LocationsOptions[]
 	options: TAssignToable[]
 }
 
@@ -44,11 +44,11 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 				default_location = person?.default_location_id
 				break
 			case 'Item':
-				const item = items.find(item => String(item.id) === id)
+				const item = items?.find(item => String(item.id) === id)
 				default_location = item?.default_location_id
 				break
 			case 'Location':
-				const location = locations.find(location => String(location.id) === id)
+				const location = locations?.find(location => String(location.id) === id)
 				default_location = location?.id
 				break
 		}

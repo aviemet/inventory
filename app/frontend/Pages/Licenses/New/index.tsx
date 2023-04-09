@@ -4,10 +4,10 @@ import LicenseForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewLicenseProps {
-	license: Schema.License
-	categories: Schema.Category[]
-	vendors: Schema.Vendor[]
-	manufacturers: Schema.Manufacturer[]
+	license: Schema.LicensesFormData
+	categories: Schema.CategoriesOptions[]
+	vendors: Schema.VendorsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
 }
 
 const New = ({ ...data }: INewLicenseProps) => {

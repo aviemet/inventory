@@ -1,11 +1,8 @@
 import React from 'react'
 import { Heading, History } from '@/Components'
+import { IShowItemProps } from '.'
 
-interface IItemHistoryProps {
-	item: Schema.Item
-}
-
-const ItemHistory = ({ item }: IItemHistoryProps) => {
+const ItemHistory = ({ item }: IShowItemProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>History</Heading>

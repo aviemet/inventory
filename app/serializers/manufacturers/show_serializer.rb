@@ -4,26 +4,28 @@ class Manufacturers::ShowSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-     :id,
-     :name,
-     :created_at,
-     :updated_at,
-   )
+    :id,
+    :slug,
+    :name,
+    :created_at,
+    :updated_at,
+  )
 
-  attribute :items_count do
-    manufacturer.items.size
-  end
-
-  attribute :accessories_count do
-    manufacturer.accessories.size
-  end
-
-  attribute :consumables_count do
-    manufacturer.consumables.size
-  end
-
-  attribute :components_count do
-    manufacturer.components.size
+  type "{
+    models: number
+    items: number
+    accessories: number
+    consumables: number
+    components: number
+  }"
+  def counts
+    {
+      models: manufacturer&.models&.size || 0,
+      items: manufacturer&.items&.size || 0,
+      accessories: manufacturer&.accessories&.size || 0,
+      consumables: manufacturer&.consumables&.size || 0,
+      components: manufacturer&.components&.size || 0,
+    }
   end
 
   has_one :contact, serializer: ContactSerializer

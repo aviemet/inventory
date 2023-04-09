@@ -3,7 +3,7 @@ import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface IShowLocationProps {
-	location: Schema.Location
+	location: Schema.LocationsShow
 }
 
 const Show = ({ location }: IShowLocationProps) => {

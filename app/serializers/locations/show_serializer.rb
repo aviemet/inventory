@@ -4,12 +4,14 @@ class Locations::ShowSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-     :name,
-     :parent_id,
-     :currency,
-     :created_at,
-     :updated_at,
-   )
+    :id,
+    :slug,
+    :name,
+    :parent_id,
+    :currency,
+    :created_at,
+    :updated_at,
+  )
 
   has_many :activities, serializer: ActivitySerializer
   belongs_to :parent, serializer: LocationSerializer

@@ -2,6 +2,7 @@ class LicenseSerializer < Assignable::QuantitySerializer
   object_as :license
 
   attributes(
+    :id,
     :name,
     :qty,
     :key,

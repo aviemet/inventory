@@ -5,14 +5,14 @@ import ItemHistory from './ItemHistory'
 import Associations from './Associations'
 import { Routes } from '@/lib'
 
-interface IShowLicenseProps {
-	license: Schema.License
-}
-
 const tabs = {
 	details: 'details',
 	history: 'history',
 	associations: 'associations',
+}
+
+export interface IShowLicenseProps {
+	license: Schema.LicensesShow
 }
 
 const ShowLicense = ({ license }: IShowLicenseProps) => {

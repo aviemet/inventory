@@ -1,11 +1,8 @@
 import React from 'react'
 import { Heading, History } from '@/Components'
+import { IShowLicenseProps } from '.'
 
-interface ILicenseHistoryProps {
-	license: Schema.License
-}
-
-const LicenseHistory = ({ license }: ILicenseHistoryProps) => {
+const LicenseHistory = ({ license }: IShowLicenseProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>History</Heading>

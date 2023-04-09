@@ -9,19 +9,19 @@ import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
 
 export type TLocationFormData = {
-	location: Schema.LocationsNew
+	location: Schema.LocationsFormData
 }
 
 export interface ILocationFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TLocationFormData>) => boolean|void
-	location?: Schema.LocationsNew
+	location?: Schema.LocationsFormData
 	locations: Schema.LocationsOptions[]
 	currencies: any
 }
 
-const emptyLocation: Schema.LocationsNew = {
+const emptyLocation: Schema.LocationsFormData = {
 	name: '',
 	currency: '',
 	parent_id: undefined,

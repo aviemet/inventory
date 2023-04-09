@@ -27,7 +27,7 @@ const LicensesTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (license: Schema.License) => (
+				<Table.RowIterator render={ (license: Schema.LicensesIndex) => (
 					<Table.Row key={ license.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.license(license) }>{ license.name }</Link>
