@@ -4,7 +4,7 @@ import GroupForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewGroupProps {
-	person_group: Schema.PersonGroupPermissions
+	person_group: Schema.PersonGroupsFormData
 }
 
 const New = ({ ...data }: INewGroupProps) => {

@@ -9,5 +9,6 @@
 	"gitHistory.sourceCodeProviderIntegrationLocation": "More Actions",
 	"gitHistory.showEditorTitleMenuBarIcons": false,
 	"gitHistory.showFileHistorySplit": false,
-	"typescript.tsdk": "node_modules/typescript/lib"
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"easynpm.packageManager": "yarn"
 }

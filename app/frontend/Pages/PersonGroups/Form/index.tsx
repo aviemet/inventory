@@ -9,9 +9,10 @@ import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'
 import { emptyGroup } from './formData'
 import { Routes, exclude } from '@/lib'
+import { Prism } from '@mantine/prism'
 
 export type FormData = {
-	person_group: Omit<Schema.PersonGroupPermissions, 'id'|'slug'|'created_at'|'updated_at'>
+	person_group: Schema.PersonGroupsFormData
 }
 
 const [usePermissionsForm, PermissionsFormContext] = createContext<{
@@ -24,7 +25,7 @@ export interface IGroupFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<FormData>) => boolean|void
-	person_group?: Partial<Schema.PersonGroupPermissions>
+	person_group?: Schema.PersonGroupsFormData
 }
 
 const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }: IGroupFormProps) => {
@@ -56,6 +57,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 
 	return (
 		<PermissionsFormContext value={ { isCompanyAdmin, columns: longestPermissionsArray() } }>
+			<Prism language="json">{ JSON.stringify(person_group, null, 2) }</Prism>
 			<Form
 				model="person_group"
 				data={ formData }

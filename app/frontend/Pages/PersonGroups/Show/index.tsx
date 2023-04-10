@@ -1,11 +1,11 @@
 import React from 'react'
-import { Table, Container, Section, Heading, Page, Group, Menu } from '@/Components'
+import { Table, Section, Heading, Page, Group, Menu } from '@/Components'
 import { Routes } from '@/lib'
 import PeopleTable from '@/Pages/People/Table'
 import { EditIcon } from '@/Components/Icons'
 
 interface IShowUserProps {
-	person_group: Schema.PersonGroup
+	person_group: Schema.PersonGroupsShow
 }
 
 const ShowUser = ({ person_group }: IShowUserProps) => {

@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import GroupsTable from '../Table'
 
 interface IGroupIndexProps {
-	person_groups: Schema.PersonGroup[]
+	person_groups: Schema.PersonGroupsIndex[]
 	pagination: Schema.Pagination
 }
 

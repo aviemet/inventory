@@ -16,7 +16,7 @@ const GroupsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (person_group: Schema.PersonGroup) => (
+				<Table.RowIterator render={ (person_group: Schema.PersonGroupsIndex) => (
 					<Table.Row key={ person_group.id }>
 
 						<Table.Cell nowrap>
