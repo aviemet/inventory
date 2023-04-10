@@ -21,7 +21,7 @@ class People::IndexSerializer < ApplicationSerializer
   end
 
   has_one :contact, serializer: ContactSerializer
-  has_many :person_groups, as: :groups, serializer: PersonGroupSerializer
+  has_many :groups, serializer: PersonGroupSerializer
   has_many :possessions, serializer: AssignmentSerializer
   has_many :items, serializer: ItemSerializer
   has_many :accessories, serializer: AccessorySerializer

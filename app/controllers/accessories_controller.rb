@@ -64,7 +64,7 @@ class AccessoriesController < ApplicationController
       assignment.assign_toable_type = :Item
 
       render inertia: "Accessories/Checkout", props: {
-        accessory: accessory.render(view: :checkout),
+        accessory: accessory.render(view: :edit),
         assignment: assignment.render(view: :form_data),
         people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
         items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
@@ -83,7 +83,7 @@ class AccessoriesController < ApplicationController
       assignment.active = false
 
       render inertia: "Accessories/Checkin", props: {
-        accessory: accessory.render(view: :checkin),
+        accessory: accessory.render(view: :edit),
         assignment: assignment.render(view: :edit),
         statuses: -> { StatusLabel.all.render }
       }
