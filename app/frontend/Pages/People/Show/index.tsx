@@ -4,7 +4,7 @@ import { formatter, Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
 interface IShowPersonProps {
-	person: Schema.Person & { name: string }
+	person: Schema.PeopleShow
 }
 
 const tabs = {
@@ -78,7 +78,7 @@ const Show = ({ person }: IShowPersonProps) => {
 							{ person.possessions && person.possessions.reverse().map(assignment => (
 								<React.Fragment key={ assignment.id }>
 									<div>
-								Link to assigntoable object
+										Link to assigntoable object
 									</div>
 									<div>
 										{ assignment.assignable_type }

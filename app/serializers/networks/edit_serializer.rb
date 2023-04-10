@@ -2,21 +2,25 @@ class Networks::EditSerializer < ApplicationSerializer
   object_as :network
 
   attributes(
-     :name,
-     :address,
-     :vlan_id,
-     :notes,
-   )
+    :id,
+    :name,
+    :address,
+    :vlan_id,
+    :notes,
+  )
 
-  attribute :gateway do
+  type :string
+  def gateway
     network.gateway.to_s
   end
 
-  attribute :dhcp_start do
+  type :string
+  def dhcp_start
     network&.dhcp_start&.to_s
   end
 
-  attribute :dhcp_end do
+  type :string
+  def dhcp_end
     network&.dhcp_end&.to_s
   end
 end

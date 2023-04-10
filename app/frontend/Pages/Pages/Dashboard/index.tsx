@@ -4,8 +4,8 @@ import Counts from './Counts'
 import RecentActivityTable from './RecentActivityTable'
 
 interface IDashboardProps {
-	company: Schema.CompanyWithCounts
-	activities: Schema.PublicActivityActivity[]
+	company: Schema.CompaniesDashboard
+	activities: Schema.ActivitiesDashboard[]
 }
 
 const Dashboard = ({ company, activities }: IDashboardProps) => {

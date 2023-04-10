@@ -5,7 +5,7 @@ import { NewIcon, SettingsIcon } from '@/Components/Icons'
 import PeopleTable from '../Table'
 
 interface IPeopleIndexProps {
-	people: Schema.Person[]
+	people: Schema.PeopleIndex[]
 	pagination: Schema.Pagination
 }
 

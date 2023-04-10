@@ -5,5 +5,7 @@ class Users::FormDataSerializer < ApplicationSerializer
     :email,
     :active_company_id,
     :active,
+    :password,
+    :password_confirmation,
   )
 end

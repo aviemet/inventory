@@ -49,15 +49,15 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
 					</Tabs.List>
 
-					<Tabs.Panel value="details">
+					<Tabs.Panel value={ tabs.details }>
 						<Details license={ license } />
 					</Tabs.Panel>
 
-					<Tabs.Panel value="history">
+					<Tabs.Panel value={ tabs.history }>
 						<ItemHistory license={ license } />
 					</Tabs.Panel>
 
-					<Tabs.Panel value="associations">
+					<Tabs.Panel value={ tabs.associations }>
 						<Associations license={ license } />
 					</Tabs.Panel>
 

@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import ModelsTable from '../Table'
 
 interface IModelsIndexProps {
-	models: Schema.Model[]
+	models: Schema.ModelsIndex[]
 	pagination: Schema.Pagination
 }
 

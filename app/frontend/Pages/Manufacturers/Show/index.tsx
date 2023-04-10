@@ -7,6 +7,7 @@ import ItemsTable from '@/Pages/Items/Table'
 import AccessoriesTable from '@/Pages/Accessories/Table'
 import ConsumablesTable from '@/Pages/Consumables/Table'
 import ComponentsTable from '@/Pages/Components/Table'
+import { omit } from 'lodash'
 
 type TPaginatedModel<T> = {
 	data: T
@@ -37,12 +38,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: ISh
 			{ title: 'Manufacturers', href: Routes.manufacturers() },
 			{ title: manufacturer.name! },
 		] }>
-			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {
-				[tabs.items]: 'items',
-				[tabs.accessories]: 'accessories',
-				[tabs.components]: 'components',
-				[tabs.consumables]: 'consumables',
-			} }>
+			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ omit(tabs, 'details') }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
 					<Tabs.Tab value={ tabs.items }>Items ({ manufacturer.counts.items })</Tabs.Tab>

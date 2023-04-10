@@ -1,13 +1,13 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
-import PersonForm from './Form'
+import EditPersonForm from './Form'
 import { Routes } from '@/lib'
 
 interface IUpdatePersonProps{
-	person: Schema.Person
-	departments: Schema.Department[]
-	people: Schema.Person[]
-	locations: Schema.Location[]
+	person: Schema.PeopleEdit
+	departments: Schema.DepartmentsOptions[]
+	people: Schema.PeopleOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const New = ({ person, ...models }: IUpdatePersonProps) => {
@@ -22,7 +22,7 @@ const New = ({ person, ...models }: IUpdatePersonProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<PersonForm
+				<EditPersonForm
 					to={ Routes.person(person) }
 					method="patch"
 					person={ person }

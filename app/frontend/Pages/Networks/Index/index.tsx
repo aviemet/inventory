@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import NetworksTable from '../Table'
 
 interface INetworksIndexProps {
-	networks: Schema.Network[]
+	networks: Schema.NetworksIndex[]
 	pagination: Schema.Pagination
 }
 

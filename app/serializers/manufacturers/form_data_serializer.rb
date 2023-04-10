@@ -3,5 +3,5 @@ class Manufacturers::FormDataSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id, :name
+  attributes :name
 end

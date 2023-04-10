@@ -5,6 +5,7 @@ class Manufacturers::IndexSerializer < ApplicationSerializer
 
   attributes(
     :id,
+    :slug,
     :name,
     :created_at,
     :updated_at,

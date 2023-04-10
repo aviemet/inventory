@@ -25,7 +25,7 @@ const PeopleTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (person: Schema.Person) => (
+				<Table.RowIterator render={ (person: Schema.PeopleIndex) => (
 					<Table.Row key={ person.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.person(person) }>{ person.first_name }</Link>
@@ -44,7 +44,7 @@ const PeopleTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							{ person.manager && <Link href={ Routes.person(person.manager) }>
+							{ person?.manager?.id && <Link href={ Routes.person(person.manager.id) }>
 								{ person.manager.name }
 							</Link> }
 						</Table.Cell>
@@ -64,7 +64,7 @@ const PeopleTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							{ person.user?.groups?.map(group => <Badge key={ group.id }>{ group.name }</Badge>) }
+							{ person.groups?.map(group => <Badge key={ group.id }>{ group.name }</Badge>) }
 						</Table.Cell>
 
 						<Table.Cell>

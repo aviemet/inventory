@@ -4,9 +4,9 @@ import ModelForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IUpdateModelProps{
-	model: Schema.Model
-	categories: Schema.Category[]
-	manufacturers: Schema.Manufacturer[]
+	model: Schema.ModelsEdit
+	categories: Schema.CategoriesOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
 }
 
 const New = ({ model, ...models }: IUpdateModelProps) => {

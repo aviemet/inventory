@@ -7,14 +7,28 @@ import {
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TNetworkFormData = {
+	network: Schema.NetworksFormData
+}
+
 export interface INetworkFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	network: Schema.Network
+	onSubmit?: (object: UseFormProps<TNetworkFormData>) => boolean|void
+	network: Schema.NetworksFormData
 }
 
-const NetworkForm = ({ to, method = 'post', onSubmit, network }: INetworkFormProps) => {
+const emptyNetwork: Schema.NetworksFormData = {
+	name: '',
+	vlan_id: '',
+	address: '',
+	gateway: '',
+	dhcp_start: '',
+	dhcp_end: '',
+	notes: '',
+}
+
+const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: INetworkFormProps) => {
 	return (
 		<Form
 			model="network"
@@ -27,9 +41,9 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network }: INetworkFormPro
 
 			<TextInput name="vlan_id" label="VLAN ID" />
 
-			<TextInput name="address" label="Network Addres" placeholder="e.g. 192.168.1.0/24" required />
+			<TextInput name="address" label="Network Address" placeholder="e.g. 192.168.1.0/24" required />
 
-			<TextInput name="gateway" label="Gateway Addres" placeholder="e.g. 192.168.1.1" />
+			<TextInput name="gateway" label="Gateway Address" placeholder="e.g. 192.168.1.1" />
 
 			<TextInput name="dhcp_start" label="DHCP Start" placeholder="e.g. 192.168.1.100" />
 
