@@ -15,7 +15,7 @@ const StatusLabelsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (status_label: Schema.StatusLabel) => (
+				<Table.RowIterator render={ (status_label: Schema.StatusLabelsIndex) => (
 					<Table.Row key={ status_label.id }>
 
 						<Table.Cell nowrap>

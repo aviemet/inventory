@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Heading, Page, Box, Section, Tabs } from '@/Components'
+import { Page, Box, Section, Tabs } from '@/Components'
 import { router, usePage } from '@inertiajs/react'
 import { Paper, TabsValue, px, useMantineTheme } from '@mantine/core'
 import { useViewportSize } from '@mantine/hooks'

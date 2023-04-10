@@ -6,12 +6,14 @@ import axios from 'axios'
 import { Heading } from '@/Components'
 
 interface ILdapSettingsProps {
-	ldap: Schema.Ldap
+	ldap: Schema.LdapsFormData
 }
 
 const Ldap = ({ ldap }: ILdapSettingsProps) => {
 	const handleLdapSync = () => {
-		axios.patch(Routes.settingsLdapSync(ldap))
+		if(!ldap.id) return
+
+		axios.patch(Routes.settingsLdapSync(ldap.id))
 	}
 
 	return (

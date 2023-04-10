@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import StatusLabelsTable from '../Table'
 
 interface IStatusLabelsIndexProps {
-	status_labels: Schema.StatusLabel[]
+	status_labels: Schema.StatusLabelsIndex[]
 	pagination: Schema.Pagination
 }
 

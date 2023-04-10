@@ -2,8 +2,8 @@ import React from 'react'
 import { Form, TextInput, Submit, PasswordInput } from '@/Components/Form'
 import { FormProps } from 'use-inertia-form'
 
-interface ILdapFormProps extends Omit<FormProps<{ ldap: Schema.Ldap}>, 'data'> {
-	ldap: Schema.Ldap
+interface ILdapFormProps extends Omit<FormProps<{ ldap: Schema.LdapsFormData}>, 'data'> {
+	ldap: Schema.LdapsFormData
 	to: string
 	method?: HTTPVerb
 }
