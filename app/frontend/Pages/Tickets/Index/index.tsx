@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import TicketsTable from '../Table'
 
 interface ITicketsIndexProps {
-	tickets: Schema.Ticket[]
+	tickets: Schema.TicketsIndex[]
 	pagination: Schema.Pagination
 }
 

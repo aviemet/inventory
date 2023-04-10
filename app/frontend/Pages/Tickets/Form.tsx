@@ -10,13 +10,17 @@ import {
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TTicketFormData = {
+	ticket: Schema.TicketsFormData
+}
+
 export interface ITicketFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	ticket: Schema.Ticket
-	people: Schema.Person[]
-	assets: Schema.Asset[]
+	onSubmit?: (object: UseFormProps<TTicketFormData>) => boolean|void
+	ticket: Schema.TicketsFormData
+	people: Schema.PeopleOptions[]
+	assets: Schema.AssetsOptions[]
 }
 
 const TicketForm = ({ to, method = 'post', onSubmit, ticket, people, assets }: ITicketFormProps) => {

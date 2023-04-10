@@ -15,7 +15,7 @@ const TicketsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (ticket: Schema.Ticket) => (
+				<Table.RowIterator render={ (ticket: Schema.TicketsIndex) => (
 					<Table.Row key={ ticket.id }>
 
 						<Table.Cell nowrap>

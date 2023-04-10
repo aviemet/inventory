@@ -4,11 +4,12 @@ import { Routes } from '@/lib'
 import TicketForm from '../Form'
 
 interface IUpdateTicketProps{
-	ticket: Schema.Ticket
-	people: Schema.Person[]
+	ticket: Schema.TicketsEdit
+	people: Schema.PeopleOptions[]
+	assets: Schema.AssetsOptions[]
 }
 
-const EditTicket = ({ ticket, people }: IUpdateTicketProps) => {
+const EditTicket = ({ ticket, ...data }: IUpdateTicketProps) => {
 	const title = 'Edit Ticket'
 
 	return (
@@ -24,7 +25,7 @@ const EditTicket = ({ ticket, people }: IUpdateTicketProps) => {
 					to={ Routes.ticket(ticket) }
 					method="patch"
 					ticket={ ticket }
-					people={ people }
+					{ ...data }
 				/>
 			</Section>
 		</Page>

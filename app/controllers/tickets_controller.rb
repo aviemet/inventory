@@ -33,7 +33,7 @@ class TicketsController < ApplicationController
       ticket: Ticket.new.render(view: :form_data),
       people: @active_company.people.joins(:user).render(view: :options),
       assets: @active_company.assets.render(view: :options),
-      locations: @active_company.locations.render(view: :options),
+      # locations: @active_company.locations.render(view: :options),
     }
   end
 
@@ -44,7 +44,7 @@ class TicketsController < ApplicationController
       ticket: ticket.render(view: :edit),
       people: @active_company.people.joins(:user).render(view: :options),
       assets: @active_company.assets.render(view: :options),
-      locations: @active_company.locations.render(view: :options),
+      # locations: @active_company.locations.render(view: :options),
     }
   end
 

@@ -6,7 +6,7 @@ import { Form, RichText, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 
 interface IShowTicketProps {
-	ticket: Schema.Ticket
+	ticket: Schema.TicketsShow
 }
 
 const ShowTicket = ({ ticket }: IShowTicketProps) => {
@@ -21,7 +21,7 @@ const ShowTicket = ({ ticket }: IShowTicketProps) => {
 				<Heading>{ title }</Heading>
 				<Box>
 					Primary Contact:&nbsp;
-					{ ticket.primary_contact && <Link href={ Routes.person(ticket.primary_contact.id ) }>{ ticket.primary_contact.name }</Link> }
+					{ ticket.primary_contact?.id && <Link href={ Routes.person(ticket.primary_contact.id ) }>{ ticket.primary_contact.name }</Link> }
 				</Box>
 				<Box>
 					Assigned To:&nbsp;
