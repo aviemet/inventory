@@ -1,7 +1,8 @@
 class Items::OptionsSerializer < Assignable::SingleSerializer
-  object_as :ip_lease
+  object_as :item
 
   attributes(
+    :id,
     :name,
     :default_location_id,
   )

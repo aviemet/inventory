@@ -5,6 +5,7 @@ class StatusLabels::EditSerializer < ApplicationSerializer
 
   attributes(
     :id,
+    :slug,
     :name,
     :status_type,
     :description,

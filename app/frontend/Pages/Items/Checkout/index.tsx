@@ -7,11 +7,11 @@ import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/F
 import { omit } from 'lodash'
 
 interface ICheckoutItemProps {
-	assignment: Schema.Assignment
-	item: Schema.Item
-	items: Schema.Item[]
-	people: Schema.Person[]
-	locations: Schema.Location[]
+	assignment: Schema.AssignmentsFormData
+	item: Schema.ItemsEdit
+	items: Schema.ItemsOptions[]
+	people: Schema.PeopleOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {

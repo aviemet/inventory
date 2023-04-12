@@ -5,6 +5,7 @@ class VendorSerializer < ApplicationSerializer
 
   attributes(
     :id,
+    :slug,
     :name,
     :url,
     :created_at,

@@ -4,12 +4,16 @@ import { Routes } from '@/lib'
 import { DateTime, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 
+export type TAccessoryCheckoutFormData = {
+	assignment: Schema.AssignmentsFormData
+}
+
 interface ICheckoutItemProps {
-	assignment: Schema.Assignment
-	accessory: Schema.Accessory
-	items: Schema.Item[]
-	people: Schema.Person[]
-	locations: Schema.Location[]
+	accessory: Schema.AccessoriesEdit
+	assignment: Schema.AssignmentsFormData
+	items: Schema.ItemsOptions[]
+	people: Schema.PeopleOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const Checkout = ({ assignment, accessory, ...models }: ICheckoutItemProps) => {

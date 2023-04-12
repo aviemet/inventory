@@ -20,7 +20,7 @@ class <%= class_name %>Controller < ApplicationController
   # GET <%= route_url %>/new
   def new
     render inertia: "<%= class_name %>/New", props: {
-      <%= singular_table_name %>: <%= orm_class.build(class_name) %>.render(view: :new)
+      <%= singular_table_name %>: <%= orm_class.build(class_name) %>.render(view: :form_data)
     }
   end
 

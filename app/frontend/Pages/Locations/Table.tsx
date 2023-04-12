@@ -3,7 +3,6 @@ import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { ITableProps } from '@/Components/Table/Table'
-import { type LocationWithCounts } from './Index'
 
 const LocationsTable = (props: ITableProps) => {
 	return (
@@ -23,14 +22,14 @@ const LocationsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (location: LocationWithCounts) => (
+				<Table.RowIterator render={ (location: Schema.LocationsIndex) => (
 					<Table.Row key={ location.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.location(location.slug) }>{ location.name }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							{ location.parent && <Link href={ Routes.location(location.parent.slug) }>{ location!.parent!.name }</Link> }
+							{ location.parent && <Link href={ Routes.location(location.parent.slug!) }>{ location!.parent!.name }</Link> }
 						</Table.Cell>
 
 						<Table.Cell>

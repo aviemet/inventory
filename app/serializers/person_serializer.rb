@@ -14,7 +14,8 @@ class PersonSerializer < ApplicationSerializer
     :updated_at,
   )
 
-  attribute :name do
+  type :string
+  def name
     "#{person.first_name} #{person.last_name}".strip
   end
 end

@@ -1,12 +1,9 @@
 import React from 'react'
 import { Link, Heading, Table, Box, Money } from '@/Components'
 import { formatter, Routes } from '@/lib'
+import { IShowLicenseProps } from '.'
 
-interface ILicenseDetailsProps {
-	license: Schema.License
-}
-
-const LicenseDetails = ({ license }: ILicenseDetailsProps) => {
+const LicenseDetails = ({ license }: IShowLicenseProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>Details</Heading>

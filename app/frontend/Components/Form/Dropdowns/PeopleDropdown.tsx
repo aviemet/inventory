@@ -2,7 +2,7 @@ import React from 'react'
 import { SearchableDropdown } from '@/Components/Form'
 
 interface IPeopleDropdown extends IDropdownWithModalButton {
-	people: Schema.Person[]
+	people: Schema.PeopleOptions[]
 	currencies?: any
 }
 

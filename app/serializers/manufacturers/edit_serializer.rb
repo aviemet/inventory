@@ -3,5 +3,5 @@ class Manufacturers::EditSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id, :name
+  attributes :id, :slug, :name
 end

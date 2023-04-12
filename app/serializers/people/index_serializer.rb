@@ -2,23 +2,26 @@ class People::IndexSerializer < ApplicationSerializer
   object_as :person
 
   attributes(
-     :first_name,
-     :middle_name,
-     :last_name,
-     :active,
-     :employee_number,
-     :job_title,
-     :manager_id,
-     :user_id,
-     :created_at,
-     :updated_at,
-   )
+    :id,
+    :first_name,
+    :middle_name,
+    :last_name,
+    :active,
+    :employee_number,
+    :job_title,
+    :manager_id,
+    :user_id,
+    :created_at,
+    :updated_at,
+  )
 
-  attribute :name do
+  type :string
+  def name
     "#{person.first_name} #{person.last_name}".strip
   end
 
   has_one :contact, serializer: ContactSerializer
+  has_many :groups, serializer: PersonGroupSerializer
   has_many :possessions, serializer: AssignmentSerializer
   has_many :items, serializer: ItemSerializer
   has_many :accessories, serializer: AccessorySerializer

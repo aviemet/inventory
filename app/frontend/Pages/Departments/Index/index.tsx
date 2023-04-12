@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import DepartmentsTable from '../Table'
 
 interface IDepartmentsIndexProps {
-	departments: Schema.DepartmentWithCounts[]
+	departments: Schema.DepartmentsIndex[]
 	pagination: Schema.Pagination
 }
 

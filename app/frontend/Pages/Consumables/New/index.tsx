@@ -4,10 +4,12 @@ import ConsumableForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewConsumableProps {
-	consumable: Schema.Consumable
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
+	consumable: Schema.ConsumablesFormData
+	models: Schema.ModelsOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const NewConsumable = ({ ...data }: INewConsumableProps) => {

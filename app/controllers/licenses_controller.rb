@@ -31,7 +31,7 @@ class LicensesController < ApplicationController
   def new
     authorize License
     render inertia: "Licenses/New", props: {
-      license: License.new.render(view: :new),
+      license: License.new.render(view: :form_data),
       categories: -> { @active_company.categories.find_by_type(:License).render(view: :options) },
       vendors: -> { @active_company.vendors.render(view: :options) },
       manufacturers: -> { @active_company.manufacturers.render(view: :options) },
@@ -58,7 +58,7 @@ class LicensesController < ApplicationController
 
     render inertia: "Licenses/Checkout", props: {
       license: license.render,
-      assignment: assignment.render(view: :new),
+      assignment: assignment.render(view: :form_data),
       people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
       items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
     }

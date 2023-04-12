@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import CategoriesForm from '@/Pages/Categories/Form'
 
 interface ICategoriesDropdown extends IDropdownWithModalButton {
-	categories: Schema.Category[]
+	categories: Schema.CategoriesOptions[]
 	categorizable_type?: 'Accessory' | 'Address' | 'Component' | 'Consumable' | 'Contact' | 'Contract' | 'Department' | 'Email' | 'Item' | 'License' | 'Location' | 'Manufacturer' | 'Model' | 'Order' | 'Person' | 'Phone' | 'Ticket' | 'User' | 'Vendor' | 'Vendor' | 'Website'
 }
 

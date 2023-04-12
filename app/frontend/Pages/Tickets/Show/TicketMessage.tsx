@@ -19,7 +19,7 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 		<Section>
 			<Group position="apart" align="start">
 				<Box>
-					{ message.created_by && <Box>
+					{ message.created_by?.id && <Box>
 						From:&nbsp;
 						<Link href={ Routes.person(message.created_by.id) }>{ message.created_by.name }</Link>
 					</Box> }
@@ -39,7 +39,7 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 					method="patch"
 					model="ticket_message"
 					data={ { ticket_message: { body: message.body } } }
-					to={ Routes.ticketMessage(message.ticket_id, message.id) }
+					to={ Routes.ticketMessage(message.ticket_id, message.id!) }
 					remember={ false }
 					onSubmit={ () => toggleIsEditing() }
 				>

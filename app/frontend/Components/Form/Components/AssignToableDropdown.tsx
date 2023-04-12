@@ -2,18 +2,20 @@ import React, { useEffect, useState, useRef } from 'react'
 import { SearchableDropdown, RadioButtons } from '@/Components/Form'
 import { useForm } from 'use-inertia-form'
 
+type TAssignToableOptions = Schema.ItemsOptions[]|Schema.PeopleOptions[]|Schema.LocationsOptions[]
+
 interface IAssignToableDropdownProps {
-	items?: Schema.Item[]
-	people?: Schema.Person[]
-	locations?: Schema.Location[]
+	items?: Schema.ItemsOptions[]
+	people?: Schema.PeopleOptions[]
+	locations?: Schema.LocationsOptions[]
 	options: TAssignToable[]
 }
 
 const AssignToableDropdown = ({ items, people, locations, options = ['Person', 'Item', 'Location'] }: IAssignToableDropdownProps) => {
-	const { data, setData } = useForm()
+	const { data, setData } = useForm<{ assignment: Schema.AssignmentsFormData }>()
 	const type: TAssignToable = data.assignment.assign_toable_type
 
-	const modelMapping = new Map<TAssignToable, Schema.Item[]|Schema.Person[]|Schema.Location[]>()
+	const modelMapping = new Map<TAssignToable, TAssignToableOptions>()
 	if(items) modelMapping.set('Item', items)
 	if(people) modelMapping.set('Person' ,people)
 	if(locations) modelMapping.set('Location', locations)
@@ -22,7 +24,7 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 
 	if(model === undefined) return <></>
 
-	const [optionsValues, setOptionsValues] = useState<Schema.Item[]|Schema.Person[]|Schema.Location[]>(model)
+	const [optionsValues, setOptionsValues] = useState<TAssignToableOptions>(model)
 	const strModelNameRef = useRef<TAssignToable>('Person')
 
 	useEffect(() => {
@@ -38,15 +40,15 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 
 		switch(type) {
 			case 'Person':
-				const person = people!.find(person => String(person.id) === id)
-				default_location = person?.location_id
+				const person = people?.find(person => String(person.id) === id)
+				default_location = person?.default_location_id
 				break
 			case 'Item':
-				const item = items!.find(item => String(item.id) === id)
+				const item = items?.find(item => String(item.id) === id)
 				default_location = item?.default_location_id
 				break
 			case 'Location':
-				const location = locations!.find(location => String(location.id) === id)
+				const location = locations?.find(location => String(location.id) === id)
 				default_location = location?.id
 				break
 		}

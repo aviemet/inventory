@@ -2,9 +2,7 @@ class Assignments::ShallowSerializer < ApplicationSerializer
   object_as :assignment
 
   attributes(
-    :assignable_type,
     :assignable_id,
-    :assign_toable_type,
     :assign_toable_id,
     :qty,
     :status,
@@ -17,5 +15,7 @@ class Assignments::ShallowSerializer < ApplicationSerializer
     :created_by_id,
     :created_at,
     :updated_at,
+    assign_toable_type: { type: :TAssignToable },
+    assignable_type: { type: :TAssignable },
   )
 end

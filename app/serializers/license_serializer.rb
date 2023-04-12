@@ -2,6 +2,7 @@ class LicenseSerializer < Assignable::QuantitySerializer
   object_as :license
 
   attributes(
+    :id,
     :name,
     :qty,
     :key,
@@ -21,7 +22,8 @@ class LicenseSerializer < Assignable::QuantitySerializer
     :updated_at,
   )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(license)
   end
 end

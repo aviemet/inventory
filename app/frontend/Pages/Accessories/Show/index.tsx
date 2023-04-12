@@ -5,8 +5,8 @@ import Details from './Details'
 import History from './History'
 import Associations from './Associations'
 
-interface IShowAccessoryProps {
-	accessory: Schema.Accessory
+export interface IShowAccessoryProps {
+	accessory: Schema.AccessoriesShow
 }
 
 const tabs = {

@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import LocationsForm from '@/Pages/Locations/Form'
 
 interface ILocationsDropdown extends IDropdownWithModalButton {
-	locations: Schema.Location[]
+	locations: Schema.LocationsOptions[]
 	currencies?: any
 }
 

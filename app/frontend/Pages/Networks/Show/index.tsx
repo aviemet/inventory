@@ -6,13 +6,8 @@ import NetworkDetailsTable from './NetworkDetailsTable'
 import { EditIcon } from '@/Components/Icons'
 import { Schema } from 'tabler-icons-react'
 
-interface INetworkDetails extends Schema.Network {
-	hosts: string[]
-	broadcast: string
-}
-
 interface IShowNetworkProps {
-	network: INetworkDetails
+	network: Schema.NetworksShow
 	ips: Schema.IpLease[]
 	pagination: Schema.Pagination
 }

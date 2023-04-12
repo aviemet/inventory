@@ -4,9 +4,9 @@ import { Routes } from '@/lib'
 import ModelsForm from '@/Pages/Models/Form'
 
 interface IModelsDropdown extends IDropdownWithModalButton {
-	models: Schema.Model[]
-	manufacturers: Schema.Manufacturer[]
-	categories: Schema.Category[]
+	models: Schema.ModelsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const ModelsDropdown = ({ label = 'Model', name = 'model_id',  models, manufacturers, categories, ...props }: IModelsDropdown) => {

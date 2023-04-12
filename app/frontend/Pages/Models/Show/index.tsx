@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
 interface IShowModelProps {
-	model: Schema.Model
+	model: Schema.ModelsShow
 }
 
 const tabs = {

@@ -70,23 +70,6 @@ class ApplicationController < ActionController::Base
     }
   end
 
-  def host_pagination_data(_address)
-    size = network&.address&.size
-    pages = (size / 256).to_i
-    limit = params[:limit] || 256
-    current_page = params[:page].to_i || 1
-
-    {
-      pages:,
-      limit:,
-      current_page:,
-      next_page: current_page + 1 > pages ? nil : current_page + 1,
-      prev_page: current_page - 1 < 0 ? nil : current_page - 1,
-      is_first_page: current_page == 1,
-      is_last_page: current_page == pages
-    }
-  end
-
   def currencies
     Monetize::Parser::CURRENCY_SYMBOLS.map{ |sym, abbr| { symbol: sym, code: abbr } }
     # Money::Currency.table.values.map{ |c| { symbol: c[:symbol], code: c[:iso_code] } }

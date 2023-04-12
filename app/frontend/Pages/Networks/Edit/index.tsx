@@ -4,7 +4,7 @@ import NetworkForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IUpdateNetworkProps{
-	network: Schema.Network
+	network: Schema.NetworksEdit
 }
 
 const New = ({ network, ...models }: IUpdateNetworkProps) => {

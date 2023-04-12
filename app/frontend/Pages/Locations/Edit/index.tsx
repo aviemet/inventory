@@ -4,8 +4,8 @@ import LocationForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IEditLocationProps {
-	location: Schema.Location
-	locations: Schema.Location[]
+	location: Schema.LocationsEdit
+	locations: Schema.LocationsOptions[]
 	currencies: any
 }
 

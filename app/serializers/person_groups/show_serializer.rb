@@ -5,6 +5,7 @@ class PersonGroups::ShowSerializer < ApplicationSerializer
 
   attributes(
      :id,
+     :slug,
      :name,
      :description,
      :created_at,

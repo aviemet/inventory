@@ -1,12 +1,9 @@
 import React from 'react'
 import { ShowPageAssociations } from '@/Layouts/AppLayout/Components'
 import { Routes } from '@/lib'
+import { IShowComponentProps } from '.'
 
-interface IComponentAssociationsProps {
-	component: Schema.Component
-}
-
-const Associations = ({ component }: IComponentAssociationsProps) => {
+const Associations = ({ component }: IShowComponentProps) => {
 	return <ShowPageAssociations assignToable={ component } checkinRoute={ Routes.checkinComponent } />
 }
 

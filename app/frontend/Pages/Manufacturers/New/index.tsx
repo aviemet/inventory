@@ -4,7 +4,7 @@ import ManufacturerForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewManufacturerProps {
-	manufacturer: Schema.Manufacturer
+	manufacturer: Schema.ManufacturersFormData
 }
 
 const New = ({ ...data }: INewManufacturerProps) => {

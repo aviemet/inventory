@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import UsersTable from '../Table'
 
 interface IUserIndexProps {
-	users: Schema.User[]
+	users: Schema.UsersIndex[]
 	pagination: Schema.Pagination
 }
 

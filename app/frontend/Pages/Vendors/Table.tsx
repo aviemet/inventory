@@ -21,7 +21,7 @@ const VendorsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (vendor: Schema.Vendor) => (
+				<Table.RowIterator render={ (vendor: Schema.VendorsIndex) => (
 					<Table.Row key={ vendor.id }>
 
 						<Table.Cell nowrap>

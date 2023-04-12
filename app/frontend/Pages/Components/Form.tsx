@@ -10,19 +10,33 @@ import {
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TComponentFormData = {
+	component: Schema.ComponentsFormData
+}
+
 export interface IComponentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	component: Schema.Component
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
-	manufacturers: Schema.Manufacturer[]
-	categories: Schema.Category[]
+	onSubmit?: (object: UseFormProps<TComponentFormData>) => boolean|void
+	component: Schema.ComponentsFormData
+	models: Schema.ModelsOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
-const ComponentForm = ({ to, method = 'post', onSubmit, component, models, vendors, locations, manufacturers, categories }: IComponentFormProps) => {
+const ComponentForm = ({
+	to,
+	method = 'post',
+	onSubmit,
+	component,
+	models,
+	vendors,
+	locations,
+	manufacturers,
+	categories,
+}: IComponentFormProps) => {
 	return (
 		<Form
 			model="component"

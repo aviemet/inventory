@@ -5,7 +5,7 @@ import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from '@/C
 import AssetTable from '../Table'
 
 interface IAssetsIndexProps {
-	assets: Schema.Asset[]
+	assets: Schema.AssetsIndex[]
 	pagination: Schema.Pagination
 }
 

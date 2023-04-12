@@ -1,4 +1,4 @@
-export const emptyGroup: Omit<Schema.PersonGroupPermissions, 'id'|'slug'|'created_at'|'updated_at'> = {
+export const emptyGroup: Schema.PersonGroupsFormData = {
 	name: '',
 	description: '',
 	permissions: {

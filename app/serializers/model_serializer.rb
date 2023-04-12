@@ -1,9 +1,12 @@
 class ModelSerializer < ApplicationSerializer
   object_as :model
 
+  identifier :slug
+
   attributes(
-    :name,
+    :id,
     :slug,
+    :name,
     :model_number,
     :notes,
     :category_id,

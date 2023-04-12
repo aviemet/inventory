@@ -2,6 +2,7 @@ class Accessories::ShowSerializer < Assignable::QuantitySerializer
   object_as :accessory
 
   attributes(
+    :id,
     :name,
     :serial,
     :asset_tag,
@@ -17,7 +18,8 @@ class Accessories::ShowSerializer < Assignable::QuantitySerializer
     :updated_at,
   )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(accessory)
   end
 

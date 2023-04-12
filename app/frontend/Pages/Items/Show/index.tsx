@@ -6,8 +6,8 @@ import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'
 
-interface IShowItemProps {
-	item: Schema.Item
+export interface IShowItemProps {
+	item: Schema.ItemsShow
 }
 
 const tabs = {

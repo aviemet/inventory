@@ -2,13 +2,14 @@ class Departments::ShowSerializer < ApplicationSerializer
   object_as :department
 
   attributes(
-     :name,
-     :slug,
-     :location_id,
-     :notes,
-     :created_at,
-     :updated_at,
-   )
+    :id,
+    :name,
+    :slug,
+    :location_id,
+    :notes,
+    :created_at,
+    :updated_at,
+  )
 
   has_many :activities, serializer: ActivitySerializer
   has_many :items, serializer: ItemSerializer
@@ -17,9 +18,18 @@ class Departments::ShowSerializer < ApplicationSerializer
   has_many :consumables, serializer: ConsumableSerializer
   has_many :licenses, serializer: LicenseSerializer
   has_many :people, serializer: PersonSerializer
-  has_many :location, serializer: LocationSerializer
+  has_one :location, serializer: LocationSerializer
 
-  attribute :counts do
+  type "{
+    items: number
+    accessories: number
+    consumables: number
+    components: number
+    licenses: number
+    contracts: number
+    people: number
+  }"
+  def counts
     {
       items: department&.items&.size || 0,
       accessories: department&.accessories&.size || 0,
@@ -30,5 +40,4 @@ class Departments::ShowSerializer < ApplicationSerializer
       people: department&.people&.size || 0,
     }
   end
-
 end

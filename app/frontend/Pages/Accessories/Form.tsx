@@ -11,19 +11,19 @@ import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components
 import { type UseFormProps } from 'use-inertia-form'
 
 interface AccessoryFormProps {
-	accessory: Schema.Accessory
+	accessory: Schema.AccessoriesFormData
 }
 
 export interface IAccessoryFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<AccessoryFormProps>) => boolean|void
-	accessory: Schema.Accessory
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
-	manufacturers: Schema.Manufacturer[]
-	categories: Schema.Category[]
+	accessory: Schema.AccessoriesFormData
+	models: Schema.ModelsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendors, locations, manufacturers, categories }: IAccessoryFormProps) => {
@@ -61,7 +61,12 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-				<LocationsDropdown label="Default Location" name="default_location_id" locations={ locations } currencies={ [] } />
+				<LocationsDropdown
+					label="Default Location"
+					name="default_location_id"
+					locations={ locations }
+					currencies={ [] }
+				/>
 
 				<Checkbox name="requestable" label="Requestable" />
 

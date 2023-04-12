@@ -4,8 +4,8 @@ import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewDepartmentProps {
-	department: Partial<Schema.Department>
-	locations: Schema.Location[]
+	department: Schema.DepartmentsFormData
+	locations: Schema.LocationsOptions[]
 }
 
 const NewDepartment = ({ ...data }: INewDepartmentProps) => {

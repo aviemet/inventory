@@ -4,14 +4,24 @@ class Locations::IndexSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-     :name,
-     :parent_id,
-     :currency,
-     :created_at,
-     :updated_at,
-   )
+    :id,
+    :slug,
+    :name,
+    :parent_id,
+    :currency,
+    :created_at,
+    :updated_at,
+  )
 
-  attribute :counts do
+  type "{
+    items: number
+    accessories: number
+    consumables: number
+    components: number
+    licenses: number
+    people: number
+  }"
+  def counts
     {
       items: location.items.size || 0,
       accessories: location.accessories.size || 0,

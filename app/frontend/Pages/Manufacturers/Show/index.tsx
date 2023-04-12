@@ -7,13 +7,7 @@ import ItemsTable from '@/Pages/Items/Table'
 import AccessoriesTable from '@/Pages/Accessories/Table'
 import ConsumablesTable from '@/Pages/Consumables/Table'
 import ComponentsTable from '@/Pages/Components/Table'
-
-type ShowPageManufacturer = Schema.Manufacturer & {
-	items_count: number
-	accessories_count: number
-	consumables_count: number
-	components_count: number
-}
+import { omit } from 'lodash'
 
 type TPaginatedModel<T> = {
 	data: T
@@ -21,11 +15,11 @@ type TPaginatedModel<T> = {
 }
 
 interface IShowManufacturerProps {
-	manufacturer: ShowPageManufacturer
-	items: TPaginatedModel<Schema.Item[]>
-	accessories: TPaginatedModel<Schema.Accessory[]>
-	components: TPaginatedModel<Schema.Component[]>
-	consumables: TPaginatedModel<Schema.Consumable[]>
+	manufacturer: Schema.ManufacturersShow
+	items: TPaginatedModel<Schema.ItemsIndex[]>
+	accessories: TPaginatedModel<Schema.AccessoriesIndex[]>
+	components: TPaginatedModel<Schema.ComponentsIndex[]>
+	consumables: TPaginatedModel<Schema.ConsumablesIndex[]>
 }
 
 const tabs = {
@@ -44,18 +38,13 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: ISh
 			{ title: 'Manufacturers', href: Routes.manufacturers() },
 			{ title: manufacturer.name! },
 		] }>
-			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {
-				[tabs.items]: 'items',
-				[tabs.accessories]: 'accessories',
-				[tabs.components]: 'components',
-				[tabs.consumables]: 'consumables',
-			} }>
+			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ omit(tabs, 'details') }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
-					<Tabs.Tab value={ tabs.items }>Items ({ manufacturer.items_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.accessories }>Accessories ({ manufacturer.accessories_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.components }>Components ({ manufacturer.components_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.consumables }>Consumables ({ manufacturer.consumables_count })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.items }>Items ({ manufacturer.counts.items })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.accessories }>Accessories ({ manufacturer.counts.accessories })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.components }>Components ({ manufacturer.counts.components })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.consumables }>Consumables ({ manufacturer.counts.consumables })</Tabs.Tab>
 				</Tabs.List>
 
 				{ /*********** Details ***********/ }

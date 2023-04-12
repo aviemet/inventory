@@ -1,4 +1,5 @@
 require 'rails_helper'
+require "models/concerns/serializable"
 
 RSpec.describe User, type: :model do
   subject { build(:user) }
@@ -25,5 +26,9 @@ RSpec.describe User, type: :model do
     it { should have_many(:people) }
     it { should have_one(:person) }
     it { should belong_to(:active_company).optional }
+  end
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
   end
 end

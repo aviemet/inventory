@@ -2,16 +2,17 @@ import React from 'react'
 import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import { has } from 'lodash'
+import { IShowItemProps } from '.'
 
 type TPathOption = 'item'|'person'|'location'
 
-const itemAssignment = (item: Schema.Item) => {
+const itemAssignment = (item: Schema.ItemsShow) => {
 	if(!item.assigned || !item.assignments) return
 
 	return item.assignments.find(assignment => assignment.active)
 }
 
-const AssignmentLink = ({ item }: { item: Schema.Item }) => {
+const AssignmentLink = ({ item }: IShowItemProps) => {
 	const assignment = itemAssignment(item)
 
 	if(!assignment) return <></>

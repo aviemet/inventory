@@ -6,14 +6,18 @@ import {
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TManufacturerFormData = {
+	manufacturer: Schema.ManufacturersFormData
+}
+
 export interface IManufacturerFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	manufacturer?: Partial<Schema.Manufacturer>
+	onSubmit?: (object: UseFormProps<TManufacturerFormData>) => boolean|void
+	manufacturer?: Schema.ManufacturersFormData
 }
 
-const emptyManufacturer: Partial<Schema.Manufacturer> = {
+const emptyManufacturer: Schema.ManufacturersFormData = {
 	name: '',
 }
 

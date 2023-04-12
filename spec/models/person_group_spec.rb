@@ -1,5 +1,9 @@
 require 'rails_helper'
+require "models/concerns/serializable"
 
 RSpec.describe PersonGroup, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
+  end
 end

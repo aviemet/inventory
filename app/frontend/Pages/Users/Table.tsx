@@ -15,7 +15,7 @@ const UsersTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (user: Schema.User) => (
+				<Table.RowIterator render={ (user: Schema.UsersIndex) => (
 					<Table.Row key={ user.id }>
 
 						<Table.Cell nowrap>

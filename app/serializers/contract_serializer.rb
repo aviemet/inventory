@@ -2,6 +2,7 @@ class ContractSerializer < ApplicationSerializer
   object_as :contract
 
   attributes(
+    :id,
     :name,
     :number,
     :notes,

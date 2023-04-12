@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Routes } from '@/lib'
 import { Link, Group } from '@/Components'
 import { Form } from '@/Components/Form'
@@ -6,7 +6,6 @@ import { EditIcon, CrossIcon } from '@/Components/Icons'
 // import ItemsDropdown from '@/Components/Form/Dropdowns/ItemsDropdown'
 import ItemsDropdown from './ItemsDropdown'
 import { ActionIcon, Box } from '@mantine/core'
-import { useClickOutside } from '@mantine/hooks'
 import cx from 'classnames'
 import DhcpConfirmModal from './DhcpConfirmModal'
 

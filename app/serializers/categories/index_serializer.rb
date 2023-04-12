@@ -5,9 +5,9 @@ class Categories::IndexSerializer < ApplicationSerializer
     :categorizable_type,
     :name,
     :slug,
-    :qty,
     :description,
     :created_at,
     :updated_at,
+    qty: { type: :number },
   )
 end

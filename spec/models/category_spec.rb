@@ -1,4 +1,5 @@
 require 'rails_helper'
+require "models/concerns/serializable"
 
 RSpec.describe Category, type: :model do
   subject {
@@ -19,5 +20,9 @@ RSpec.describe Category, type: :model do
       subject.categorizable_type = nil
       expect(subject).to_not be_valid
     end
+  end
+
+  describe "Serializer" do
+    it_behaves_like "serializable"
   end
 end

@@ -7,10 +7,10 @@ import { Routes, formatter } from '@/lib'
 import { omit } from 'lodash'
 
 interface ICheckoutLicenseProps {
-	assignment: Schema.Assignment
-	license: Schema.License
-	items: Schema.Item[]
-	people: Schema.Person[]
+	assignment: Schema.AssignmentsFormData
+	license: Schema.LicensesEdit
+	items: Schema.ItemsOptions[]
+	people: Schema.PeopleOptions[]
 }
 
 const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => {

@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import ManufacturersTable from '../Table'
 
 interface IManufacturersIndexProps {
-	manufacturers: Schema.ManufacturerWithCounts[]
+	manufacturers: Schema.ManufacturersIndex[]
 	pagination: Schema.Pagination
 }
 

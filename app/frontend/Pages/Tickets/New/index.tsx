@@ -4,8 +4,9 @@ import TicketForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewTicketProps {
-	ticket: Schema.Ticket
-	people: Schema.Person[]
+	ticket: Schema.TicketsFormData
+	people: Schema.PeopleOptions[]
+	assets: Schema.AssetsOptions[]
 }
 
 const NewTicket = ({ ...data }: INewTicketProps) => {

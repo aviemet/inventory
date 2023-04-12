@@ -4,7 +4,7 @@ import NetworkForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewNetworkProps {
-	network: Schema.Network
+	network: Schema.NetworksFormData
 }
 
 const New = ({ ...data }: INewNetworkProps) => {

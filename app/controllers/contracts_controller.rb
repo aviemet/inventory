@@ -30,7 +30,7 @@ class ContractsController < ApplicationController
   def new
     authorize Contract
     render inertia: "Contracts/New", props: {
-      contract: Contract.new.render(view: :new),
+      contract: Contract.new.render(view: :form_data),
       vendors: -> { @active_company.vendors.render },
       categories: -> { @active_company.categories.find_by_type(:Contract).render },
     }

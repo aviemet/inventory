@@ -31,7 +31,7 @@ class ConsumablesController < ApplicationController
   def new
     authorize Consumable
     render inertia: "Consumables/New", props: {
-      consumable: Consumable.new.render(view: :new),
+      consumable: Consumable.new.render(view: :form_data),
       models: -> { @active_company.models.find_by_category(:Consumable).render },
       vendors: -> { @active_company.vendors.render },
       locations: -> { @active_company.locations.render },
@@ -62,7 +62,7 @@ class ConsumablesController < ApplicationController
 
     render inertia: "Consumables/Checkout", props: {
       consumable: consumable.render,
-      assignment: assignment.render(view: :new),
+      assignment: assignment.render(view: :form_data),
       items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
       people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },
       locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },

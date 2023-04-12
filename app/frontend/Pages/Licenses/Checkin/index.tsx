@@ -5,13 +5,13 @@ import { DateTime, Form, TextInput, SearchableDropdown, Submit, Textarea } from 
 import { LocationsDropdown } from '@/Components/Form/Dropdowns'
 
 interface ICheckinLicensesProps {
-	assignment: Schema.Assignment
-	license: Schema.License
-	locations: Schema.Location[]
-	statuses: Schema.StatusType[]
+	assignment: Schema.AssignmentsEdit
+	license: Schema.LicensesEdit
+	locations: Schema.LocationsOptions[]
+	status_labels: Schema.StatusLabelsOptions[]
 }
 
-const Checkin = ({ assignment, license, locations, statuses }: ICheckinLicensesProps) => {
+const Checkin = ({ assignment, license, locations, status_labels }: ICheckinLicensesProps) => {
 	const [licenseName, setLicenseName] = useState(license.name)
 	const title = 'Check In License'
 
@@ -105,7 +105,7 @@ const Checkin = ({ assignment, license, locations, statuses }: ICheckinLicensesP
 					<LocationsDropdown locations={ locations } />
 
 					<SearchableDropdown
-						options={ statuses }
+						options={ status_labels }
 						label="Status"
 						name="status_id"
 						required

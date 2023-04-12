@@ -20,7 +20,7 @@ const ContractsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (contract: Schema.Contract) => (
+				<Table.RowIterator render={ (contract: Schema.ContractsIndex) => (
 					<Table.Row key={ contract.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.contract(contract) }>{ contract.name }</Link>

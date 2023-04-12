@@ -7,7 +7,7 @@ import Website from './Website'
 import { Box } from '@mantine/core'
 
 interface IContactableFormProps {
-	contact?: Schema.Contact
+	contact: Schema.ContactsFormData
 }
 
 const ContactableForm = ({ contact }: IContactableFormProps) => {

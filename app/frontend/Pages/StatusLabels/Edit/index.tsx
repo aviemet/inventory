@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import StatusLabelForm from '../Form'
 
 interface IUpdateStatusLabelProps{
-	status_label: Schema.StatusLabel
+	status_label: Schema.StatusLabelsEdit
 }
 
 const EditStatusLabel = ({ status_label }: IUpdateStatusLabelProps) => {

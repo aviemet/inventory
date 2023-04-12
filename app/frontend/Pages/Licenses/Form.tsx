@@ -11,14 +11,18 @@ import {
 import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TLicenseFormData = {
+	license: Schema.LicensesFormData
+}
+
 export interface ILicenseFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	license: Schema.License
-	categories: Schema.Category[]
-	vendors: Schema.Vendor[]
-	manufacturers: Schema.Manufacturer[]
+	onSubmit?: (object: UseFormProps<TLicenseFormData>) => boolean|void
+	license: Schema.LicensesFormData
+	categories: Schema.CategoriesOptions[]
+	vendors: Schema.VendorsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
 }
 
 const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendors, manufacturers }: ILicenseFormProps) => {

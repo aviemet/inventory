@@ -4,8 +4,8 @@ import LocationForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewLocationProps {
-	location: Partial<Schema.Location>
-	locations: Schema.Location[]
+	location: Schema.LocationsFormData
+	locations: Schema.LocationsOptions[]
 	currencies: any
 }
 

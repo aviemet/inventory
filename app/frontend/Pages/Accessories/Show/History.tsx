@@ -1,11 +1,8 @@
 import React from 'react'
 import { Heading, History } from '@/Components'
+import { IShowAccessoryProps } from '.'
 
-interface IAccessoryHistoryProps {
-	accessory: Schema.Accessory
-}
-
-const AccessoryHistory = ({ accessory }: IAccessoryHistoryProps) => {
+const AccessoryHistory = ({ accessory }: IShowAccessoryProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>History</Heading>

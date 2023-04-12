@@ -1,13 +1,6 @@
 import React from 'react'
-import { Section, Tabs, Page } from '@/Components'
+import { Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
-import { NewIcon } from '@/Components/Icons'
-import AccessoriesTable from '@/Pages/Accessories/Table'
-import ConsumablesTable from '@/Pages/Consumables/Table'
-import ComponentsTable from '@/Pages/Components/Table'
-import LicensesTable from '@/Pages/Licenses/Table'
-import PeopleTable from '@/Pages/People/Table'
-import ShowPageTableTemplate from '@/Layouts/AppLayout/Components/ShowPageTableTemplate'
 import Details from './Details'
 import Items from './Items'
 import Accessories from './Accessories'
@@ -17,7 +10,7 @@ import Licenses from './Licenses'
 import People from './People'
 
 interface IDepartmentShowProps {
-	department: Schema.DepartmentWithCounts
+	department: Schema.DepartmentsShow
 	items: PaginatedModel<Schema.Item[]>
 	accessories: PaginatedModel<Schema.Accessory[]>
 	components: PaginatedModel<Schema.Component[]>

@@ -6,7 +6,7 @@ import { NewIcon } from '@/Components/Icons'
 import CategoriesTable from '../Table'
 
 interface ICategoriesIndexProps {
-	categories: Schema.Category[]
+	categories: Schema.CategoriesIndex[]
 	pagination: Schema.Pagination
 }
 

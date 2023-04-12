@@ -3,15 +3,19 @@ import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
 import { LocationsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TDepartmentForData = {
+	department: Schema.DepartmentsFormData
+}
+
 export interface IDepartmentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<Schema.Department>) => boolean|void
-	department?: Partial<Schema.Department>
-	locations: Schema.Location[]
+	onSubmit?: (object: UseFormProps<TDepartmentForData>) => boolean|void
+	department?: Schema.DepartmentsFormData
+	locations: Schema.LocationsOptions[]
 }
 
-const emptyDepartment: Partial<Schema.Department> = {
+const emptyDepartment: Schema.DepartmentsFormData = {
 	name: '',
 	location_id: undefined,
 	notes: '',

@@ -9,7 +9,20 @@ class Companies::IndexSerializer < ApplicationSerializer
     :updated_at,
   )
 
-  attribute :counts do
+  type "{
+    locations: number
+    items: number
+    accessories: number
+    consumables: number
+    components: number
+    departments: number
+    licenses: number
+    contracts: number
+    people: number
+    vendors: number
+    manufacturers: number
+  }"
+  def counts
     {
       locations: company.locations.size || 0,
       items: company.items.size || 0,

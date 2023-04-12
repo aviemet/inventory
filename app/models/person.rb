@@ -13,7 +13,7 @@ class Person < ApplicationRecord
     }, using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   tracked

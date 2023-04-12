@@ -2,6 +2,7 @@ class AssetSerializer < ApplicationSerializer
   object_as :asset
 
   attributes(
+    :id,
     :name,
     :asset_tag,
     :serial,
@@ -19,7 +20,8 @@ class AssetSerializer < ApplicationSerializer
     :updated_at,
   )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(asset)
   end
 

@@ -32,7 +32,7 @@ class PeopleController < ApplicationController
   def new
     authorize Person
     render inertia: "People/New", props: {
-      person: People::NewSerializer.render(Person::AsCreate.new),
+      person: People::FormDataSerializer.render(Person::AsCreate.new),
       departments: InertiaRails.lazy(-> { @active_company.departments.render(view: :options) }),
       locations: InertiaRails.lazy(-> { @active_company.locations.render(view: :options) }),
       people: InertiaRails.lazy(-> { @active_company.people.render(view: :options) }),

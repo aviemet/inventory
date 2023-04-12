@@ -5,10 +5,10 @@ import { DateTime, Form, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 
 interface ICheckoutItemProps {
-	assignment: Schema.Assignment
+	assignment: Schema.AssignmentsFormData
 	component: Schema.Component
-	items: Schema.Item[]
-	locations: Schema.Location[]
+	items: Schema.ItemsOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const Checkout = ({ assignment, component, ...models }: ICheckoutItemProps) => {
@@ -17,7 +17,7 @@ const Checkout = ({ assignment, component, ...models }: ICheckoutItemProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Components', href: Routes.components() },
-			{ title: component.name!, href: Routes.component(component) },
+			{ title: component.name, href: Routes.component(component) },
 			{ title: 'Check Out' },
 		] }>
 			<Section>

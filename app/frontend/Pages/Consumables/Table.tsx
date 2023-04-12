@@ -23,7 +23,7 @@ const ConsumablesTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (consumable: Schema.Consumable) => (
+				<Table.RowIterator render={ (consumable: Schema.ConsumablesIndex) => (
 					<Table.Row key={ consumable.id }>
 
 						<Table.Cell nowrap>

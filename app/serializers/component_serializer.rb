@@ -1,5 +1,8 @@
 class ComponentSerializer < Assignable::QuantitySerializer
+  object_as :component
+
   attributes(
+    :id,
     :name,
     :serial,
     :asset_tag,
@@ -15,7 +18,8 @@ class ComponentSerializer < Assignable::QuantitySerializer
     :updated_at,
   )
 
-  attribute :cost do
+  type :number
+  def cost
     currency_for(component)
   end
 end

@@ -5,20 +5,25 @@ import { DateTime, Form, NumberInput, Submit, Textarea } from '@/Components/Form
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 import { type UseFormProps } from 'use-inertia-form'
 
-interface ICheckoutItemProps {
-	assignment: Schema.Assignment
+type TCheckoutConsumableFormData = {
+	assignment: Schema.AssignmentsFormData
 	consumable: Schema.Consumable
-	items: Schema.Item[]
-	locations: Schema.Location[]
+}
+
+interface ICheckoutItemProps {
+	assignment: Schema.AssignmentsFormData
+	consumable: Schema.Consumable
+	items: Schema.ItemsOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => {
 	const title = `Checkout ${consumable.name}`
 
-	const handleSubmit = ({ transform }: UseFormProps) => {
+	const handleSubmit = ({ transform }: UseFormProps<TCheckoutConsumableFormData>) => {
 		transform(data => {
-			data.assignment.qty = data.consumable.qty
-			data.consumable.qty = consumable.qty! - data.consumable.qty
+			data.assignment.qty = data.consumable.qty!
+			data.consumable.qty = consumable.qty! - data.consumable.qty!
 			return data
 		})
 	}

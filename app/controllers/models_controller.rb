@@ -30,7 +30,7 @@ class ModelsController < ApplicationController
   def new
     authorize Model
     render inertia: "Models/New", props: {
-      model: Model.new.render(view: :new),
+      model: Model.new.render(view: :form_data),
       categories: -> { @active_company.categories.find_by_type(:Model).render(view: :options) },
       manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }

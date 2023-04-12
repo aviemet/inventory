@@ -1,8 +1,12 @@
 import React from 'react'
 import { type UseFormProps, useForm } from 'use-inertia-form'
 
-const FormConsumer = ({ children }: { children: (form: UseFormProps<any>) => React.ReactNode }) => {
-	const form = useForm()
+interface TFormComponentProps<TForm = any> {
+	children: (form: UseFormProps<TForm>) => React.ReactNode
+}
+
+function FormConsumer <TForm>({ children }: TFormComponentProps<TForm>) {
+	const form = useForm<TForm>()
 
 	return (
 		<>{ children(form) }</>
