@@ -5,7 +5,7 @@ import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from '@/C
 import AssetTable from '../Table'
 
 interface IAssetsIndexProps {
-	assets: Schema.Asset[]
+	assets: Schema.AssetsIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -16,6 +16,7 @@ const AssetsIndex = ({ assets, pagination }: IAssetsIndexProps) => {
 			model="assets"
 			rows={ assets }
 			pagination={ pagination }
+			deleteRoute={ Routes.assets() }
 			menuOptions={ [
 				{ label: 'New Hardware', href: Routes.newItem(), icon: ItemsIcon },
 				{ label: 'New Accessory', href: Routes.newAccessory(), icon: AccessoriesIcon },

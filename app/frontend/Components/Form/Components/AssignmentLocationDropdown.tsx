@@ -3,11 +3,11 @@ import { useForm } from 'use-inertia-form'
 import { SearchableDropdown } from '@/Components/Form'
 
 interface ILocationDropdown {
-	locations: Schema.Location[]
+	locations: Schema.LocationsOptions[]
 }
 
 const LocationDropdown = ({ locations }: ILocationDropdown) => {
-	const { data } = useForm()
+	const { data } = useForm<{ assignment: Schema.AssignmentsNew}>()
 	const { assignment: { assign_toable_type: type } } = data
 
 	if(type === 'Location') return <></>

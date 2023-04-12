@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import VendorsTable from '../Table'
 
 interface IVendorsIndexProps {
-	vendors: Schema.Vendor[]
+	vendors: Schema.VendorsIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -16,6 +16,7 @@ const VendorsIndex = ({ vendors, pagination }: IVendorsIndexProps) => {
 			model="vendors"
 			rows={ vendors }
 			pagination={ pagination }
+			deleteRoute={ Routes.vendors() }
 			menuOptions={ [
 				{ label: 'New Vendor', href: Routes.newVendor(), icon: NewIcon },
 			] }

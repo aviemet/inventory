@@ -1,23 +1,23 @@
 class Api::LocationsController < ApplicationController
-  expose :location, -> { @active_company.locations.find_by_slug(params[:slug]) || Location.new(location_params) }
+  expose :loc, id: ->{ params[:slug] }, scope: ->{ @active_company.items.includes_associated }, find_by: :slug
 
   # POST /api/locations
   def create
-    location.company = @active_company
+    loc.company = @active_company
 
-    if location.save
-      render json: LocationBlueprint.render_as_json(location), status: 201
+    if loc.save
+      render json: loc.render, status: 201
     else
-      render json: { errors: location.errors }, status: 303
+      render json: { errors: loc.errors }, status: 303
     end
   end
 
   # PATCH/PUT /api/locations/:id
   def update
-    if location.update(location_params)
-      render json: LocationBlueprint.render_as_json(location), status: 201
+    if loc.update(location_params)
+      render json: loc.render, status: 201
     else
-      render json: { errors: location.errors }, status: 303
+      render json: { errors: loc.errors }, status: 303
     end
   end
 

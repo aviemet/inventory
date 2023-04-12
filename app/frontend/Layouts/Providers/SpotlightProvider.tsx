@@ -64,7 +64,7 @@ const defaultActions: SpotlightAction[] = [
 		title: 'Settings',
 		description: 'Site configuration and settings',
 		group: 'Settings',
-		onTrigger: () => router.get(Routes.settings()),
+		onTrigger: () => router.get(Routes.settingsGeneralIndex()),
 		icon: <SettingsIcon size={ 18 } />,
 	},
 ]

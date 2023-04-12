@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { Tooltip } from '@mantine/core'
@@ -6,8 +6,8 @@ import Details from './Details'
 import History from './History'
 import Associations from './Associations'
 
-interface IShowConsumableProps {
-	consumable: Schema.Consumable
+export interface IShowConsumableProps {
+	consumable: Schema.ConsumablesShow
 }
 
 const tabs = {
@@ -33,9 +33,9 @@ const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
 						<Menu.Dropdown>
 							<Menu.Link
 								href={ Routes.checkoutConsumable(consumable) }
-								disabled={ !useCallback((consumable: Schema.Consumable) => consumable.available_to_checkout, [consumable.qty, consumable.assignments]) }
+								disabled={ consumable.qty_available < 1 }
 							>
-								{ !consumable.available_to_checkout ?
+								{ consumable.qty_available < 1 ?
 									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Consumable</div></Tooltip>
 									:
 									'Checkout Consumable'

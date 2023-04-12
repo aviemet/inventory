@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import DepartmentsTable from '../Table'
 
 interface IDepartmentsIndexProps {
-	departments: Schema.DepartmentWithCounts[]
+	departments: Schema.DepartmentsIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -16,6 +16,7 @@ const DepartmentsIndex = ({ departments, pagination }: IDepartmentsIndexProps) =
 			model="departments"
 			rows={ departments }
 			pagination={ pagination }
+			deleteRoute={ Routes.departments() }
 			menuOptions={ [
 				{ label: 'New Department', href: Routes.newDepartment(), icon: NewIcon },
 			] }

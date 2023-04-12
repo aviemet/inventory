@@ -8,6 +8,7 @@ import Body from './Body'
 import RowIterator from './RowIterator'
 import Row from './Row'
 import Cell from './Cell'
+import HeadCell from './Cell/HeadCell'
 import Footer from './Footer'
 import Pagination from './Pagination'
 import TableProvider from './TableContext'
@@ -29,6 +30,7 @@ type TableObjects = {
 	RowIterator: typeof RowIterator
 	Row: typeof Row
 	Cell: typeof Cell
+	HeadCell: typeof HeadCell
 	Footer: typeof Footer
 	Pagination: typeof Pagination
 	TableProvider: typeof TableProvider
@@ -85,6 +87,7 @@ TableComponent.Body = Body
 TableComponent.RowIterator = RowIterator
 TableComponent.Row = Row
 TableComponent.Cell = Cell
+TableComponent.HeadCell = HeadCell
 TableComponent.Footer = Footer
 TableComponent.Pagination = Pagination
 TableComponent.TableProvider = TableProvider

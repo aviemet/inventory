@@ -4,9 +4,9 @@ import { Routes } from '@/lib'
 import CategoryForm from '../Form'
 
 interface INewCategoryProps {
-	category: Schema.Category
-	vendors: Schema.Vendor[]
-	categories: Schema.Category[]
+	category: Schema.CategoriesFormData
+	vendors: Schema.VendorsOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const NewCategory = ({ ...data }: INewCategoryProps) => {

@@ -1,12 +1,12 @@
 class Api::NicsController < ApplicationController
-  expose :nic, -> { @active_company.nics.find_by_slug(params[:slug]) || Nic.new(nic_params) }
+  expose :nic, id: ->{ params[:slug] }, scope: ->{ @active_company.nics.includes_associated }, find_by: :slug
 
   # POST /api/nics
   def create
     nic.company = @active_company
 
     if nic.save
-      render json: NicBlueprint.render_as_json(nic), status: 201
+      render json: nic, status: 201
     else
       render json: { errors: nic.errors }, status: 303
     end
@@ -15,7 +15,7 @@ class Api::NicsController < ApplicationController
   # PATCH/PUT /api/nics/:id
   def update
     if nic.update(nic_params)
-      render json: NicBlueprint.render_as_json(nic), status: 201
+      render json: nic, status: 201
     else
       render json: { errors: nic.errors }, status: 303
     end

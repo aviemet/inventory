@@ -2,14 +2,12 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
   # GET /purchases
-  # GET /purchases.json
   def index
     @purchases = Purchase.all
     render inertia: "Purchases/Index"
   end
 
-  # GET /purchases/1
-  # GET /purchases/1.json
+  # GET /purchases/:id
   def show
     render inertia: "Purchases/Show"
   end
@@ -20,13 +18,12 @@ class PurchasesController < ApplicationController
     render inertia: "Purchases/New"
   end
 
-  # GET /purchases/1/edit
+  # GET /purchases/:id/edit
   def edit
     render inertia: "Purchases/Edit"
   end
 
   # POST /purchases
-  # POST /purchases.json
   def create
     @purchase = Purchase.new(purchase_params)
 
@@ -41,8 +38,7 @@ class PurchasesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /purchases/1
-  # PATCH/PUT /purchases/1.json
+  # PATCH/PUT /purchases/:id
   def update
     respond_to do |format|
       if @purchase.update(purchase_params)
@@ -55,8 +51,7 @@ class PurchasesController < ApplicationController
     end
   end
 
-  # DELETE /purchases/1
-  # DELETE /purchases/1.json
+  # DELETE /purchases/:id
   def destroy
     @purchase.destroy
     respond_to do |format|

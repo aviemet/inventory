@@ -12,26 +12,29 @@ import {
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TItemFormData = {
+	item: Schema.ItemsFormData
+}
+
 export interface IItemFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	item: Partial<Schema.Item>
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
-	manufacturers: Schema.Manufacturer[]
-	categories: Schema.Category[]
+	onSubmit?: (object: UseFormProps<TItemFormData>) => boolean|void
+	item: Schema.ItemsFormData
+	models: Schema.ModelsOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
-const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locations, manufacturers, categories }: IItemFormProps) => {
+const ItemForm = ({ method = 'post', item, models, vendors, locations, manufacturers, categories, ...props }: IItemFormProps) => {
 	return (
 		<Form
 			model="item"
 			data={ { item } }
-			to={ to }
 			method={ method }
-			onSubmit={ onSubmit }
+			{ ...props }
 		>
 
 			<TextInput name="name" label="Name" required autoFocus />
@@ -41,6 +44,7 @@ const ItemForm = ({ to, method = 'post', onSubmit, item, models, vendors, locati
 					models={ models }
 					manufacturers={ manufacturers }
 					categories={ categories }
+					errorKey="item.model"
 				/>
 
 				<TextInput name="serial" label="Serial" />

@@ -21,7 +21,7 @@ const DepartmentsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (department: Schema.DepartmentWithCounts) => (
+				<Table.RowIterator render={ (department: Schema.DepartmentsIndex) => (
 					<Table.Row key={ department.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.department(department.slug) }>{ department.name }</Link>
@@ -52,7 +52,7 @@ const DepartmentsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editDepartment(department.slug) } />
+							<EditButton href={ Routes.editDepartment(department.slug) } label={ department.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

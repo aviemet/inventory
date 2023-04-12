@@ -3,9 +3,13 @@ FactoryBot.define do
     name { Faker::Device.model_name }
     cost { Faker::Commerce.price(range: 500..2000.0) }
     purchased_at { Time.zone.yesterday.end_of_day }
-    default_location factory: :location
     status_label
-    model
+
     company
+    default_location { association :location, company: company }
+    model { association :model, company: company }
+    vendor { association :vendor, company: company }
+    manufacturer { association :manufacturer, company: company }
+    category { association :category, company: company }
   end
 end

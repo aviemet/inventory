@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import UsersTable from '../Table'
 
 interface IUserIndexProps {
-	users: Schema.User[]
+	users: Schema.UsersIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -16,6 +16,7 @@ const UserIndex = ({ users, pagination }: IUserIndexProps) => {
 			model="users"
 			rows={ users }
 			pagination={ pagination }
+			deleteRoute={ Routes.users() }
 			menuOptions={ [
 				{ label: 'Invite New User', href: Routes.newUser(), icon: NewIcon },
 			] }

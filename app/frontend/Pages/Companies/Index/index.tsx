@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import CompaniesTable from '../Table'
 
 interface ICompaniesIndexProps {
-	companies: Schema.CompanyWithCounts[]
+	companies: Schema.CompaniesIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -16,6 +16,7 @@ const CompaniesIndex = ({ companies, pagination }: ICompaniesIndexProps) => {
 			model="companies"
 			rows={ companies }
 			pagination={ pagination }
+			deleteRoute={ Routes.companies() }
 			menuOptions={ [
 				{ label: 'New Company', href: Routes.newCompany(), icon: NewIcon },
 			] }

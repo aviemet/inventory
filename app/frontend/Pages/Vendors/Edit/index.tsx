@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import VendorForm from '../Form'
 
 interface IUpdateVendorProps{
-	vendor: Schema.Vendor
+	vendor: Schema.VendorsEdit
 }
 
 const EditVendor = ({ vendor, ...models }: IUpdateVendorProps) => {

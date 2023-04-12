@@ -1,12 +1,9 @@
 import React from 'react'
 import { Link, Heading, Table, Box, Money } from '@/Components'
 import { Routes } from '@/lib'
+import { IShowComponentProps } from '.'
 
-interface IComponentDetailsProps {
-	component: Schema.Component
-}
-
-const ComponentDetails = ({ component }: IComponentDetailsProps) => {
+const ComponentDetails = ({ component }: IShowComponentProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>Details</Heading>

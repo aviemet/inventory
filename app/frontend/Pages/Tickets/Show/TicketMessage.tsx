@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, DangerousHtml, Flex, Link, Section } from '@/Components'
+import { Box, DangerousHtml, Group, Link, Section } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import { Form, RichText, Submit } from '@/Components/Form'
 import { EditIcon, CrossIcon } from '@/Components/Icons'
@@ -17,9 +17,9 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 
 	return (
 		<Section>
-			<Flex position="apart" align="start">
+			<Group position="apart" align="start">
 				<Box>
-					{ message.created_by && <Box>
+					{ message.created_by?.id && <Box>
 						From:&nbsp;
 						<Link href={ Routes.person(message.created_by.id) }>{ message.created_by.name }</Link>
 					</Box> }
@@ -30,7 +30,7 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 						{ isEditing ? <CrossIcon /> : <EditIcon />  }
 					</IconButton>
 				</Box> }
-			</Flex>
+			</Group>
 
 			<br />
 
@@ -39,7 +39,7 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 					method="patch"
 					model="ticket_message"
 					data={ { ticket_message: { body: message.body } } }
-					to={ Routes.ticketMessage(message.ticket_id, message.id) }
+					to={ Routes.ticketMessage(message.ticket_id, message.id!) }
 					remember={ false }
 					onSubmit={ () => toggleIsEditing() }
 				>

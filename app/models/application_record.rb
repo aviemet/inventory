@@ -1,6 +1,8 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
+  include Renderable
+
   include PublicActivity::Model
   tracked owner: proc{ |controller, _model| controller&.current_user || nil }
 
@@ -22,17 +24,5 @@ class ApplicationRecord < ActiveRecord::Base
       model: parts[0],
       id: parts[1]
     }
-  end
-
-  def self.blueprint
-    "#{self.name}Blueprint".constantize
-  end
-
-  def blueprint
-    "#{self.class.name}Blueprint".constantize
-  end
-
-  def render(**args)
-    self.blueprint.render_as_json(self, **args)
   end
 end

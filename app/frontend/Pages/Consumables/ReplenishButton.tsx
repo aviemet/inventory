@@ -3,11 +3,13 @@ import { Button, Modal } from '@/Components'
 import { Form, NumberInput, Submit } from '@/Components/Form'
 import { Checkbox } from '@/Components/Inputs'
 import { ReplenishIcon } from '@/Components/Icons'
-import { Tooltip, type ButtonProps } from '@mantine/core'
+import { Tooltip, type ButtonProps, useMantineTheme } from '@mantine/core'
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
+
+const defaultData = { consumable: { qty: 1 } }
 
 interface IReplenishButtonProps extends ButtonProps {
 	consumable: Schema.Consumable
@@ -15,21 +17,19 @@ interface IReplenishButtonProps extends ButtonProps {
 	tooltipMessage?: string | false | null
 }
 
-const color = 'yellow'
-
 const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IReplenishButtonProps) => {
 	const [opened, setOpened] = useState(false)
+	const { other: { colors: { replenishButtonColor } } } = useMantineTheme()
 
 	const handleTogglePurchaseOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 	}
 
-	const handleSubmit = ({ data, method, to, setError }: UseFormProps) => {
+	const handleSubmit = ({ method, to, getData, setError }: UseFormProps<typeof defaultData>) => {
 		if(!to) return
-
 		axios[method](to, {
 			consumable: {
-				qty: parseInt(data.consumable.qty) + (consumable.qty ?? 0),
+				qty: Math.floor(getData('consumable.qty')) + (consumable.qty ?? 0),
 			},
 			redirect: false,
 		})
@@ -45,7 +45,8 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 				}
 			})
 
-		return false // Returning false prevents the default form action
+		// Return false to prevent page navigation
+		return false
 	}
 
 	return (
@@ -57,7 +58,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 			>
 				<Form
 					model="consumable"
-					data={ { consumable: { qty: 1 } } }
+					data={ defaultData }
 					method="patch"
 					to={ Routes.apiConsumable(consumable) }
 					onSubmit={ handleSubmit }
@@ -69,8 +70,15 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 					<Submit>Replenish</Submit>
 				</Form>
 			</Modal>
-			<Tooltip withArrow label={ tooltipMessage || 'Replenish' } position="left" transition="fade" color={ color }>
-				<Button compact color={ color } { ...props } size="sm" p={ 0 } onClick={ () => setOpened(true) }>
+			<Tooltip
+				withArrow
+				label={ tooltipMessage || 'Replenish' }
+				position="left"
+				transitionProps={ { transition: 'fade' } }
+				color={ replenishButtonColor }
+				aria-label={ `Replenish ${consumable.name}` }
+			>
+				<Button compact color={ replenishButtonColor } { ...props } size="sm" p={ 0 } onClick={ () => setOpened(true) }>
 					<ReplenishIcon />
 				</Button>
 			</Tooltip>

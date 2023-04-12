@@ -1,5 +1,5 @@
 class Api::ConsumablesController < ApplicationController
-  expose :consumable, -> { @active_company.consumables.find(params[:id]) }
+  expose :consumable, id: ->{ params[:slug] }, scope: ->{ @active_company.consumables }, find_by: :slug
 
   # PATCH/PUT /api/consumables/:id
   def update

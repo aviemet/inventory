@@ -4,7 +4,7 @@ import StatusLabelForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewStatusLabelProps {
-	status_label: Schema.StatusLabel
+	status_label: Schema.StatusLabelsFormData
 }
 
 const NewStatusLabel = ({ ...data }: INewStatusLabelProps) => {

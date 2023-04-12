@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Flex } from '@/Components'
-import { useMantineTheme } from '@mantine/core'
+import { useMantineTheme, px, MantineSizes } from '@mantine/core'
 import { useDebouncedState, useViewportSize } from '@mantine/hooks'
 import { Table } from '@/Components'
 import NetworkTable from './Table'
@@ -11,27 +11,32 @@ interface INetworkDetailsTableProps {
 	pagination: Schema.Pagination
 }
 
-const NetworkDetailsTable = ({ hosts, ips, pagination }: INetworkDetailsTableProps) => {
+const calculateNumTableRows = (width: number, breakpoints: MantineSizes) => {
+	if(width === 0) return 3 // Default to 3 while browser window is loading
 
-	const { breakpoints } = useMantineTheme()
-	const calculateNumTableRows = (width: number) => {
-		if(width === 0) return 3 // Default to 3 while browser window is loading
-
-		if(width <= breakpoints.xs) {
-			return 1
-		} else if(width <= breakpoints.md) {
-			return 2
-		} else if(width <= breakpoints.xl) {
-			return 3
-		}
+	if(width <= px(breakpoints.sm)) {
+		return 1
+	} else if(width <= px(breakpoints.md)) {
+		return 2
+	} else if(width <= px(breakpoints.xl)) {
+		return 3
+	} else if(width <= px(breakpoints['2xl'])) {
 		return 4
+	} else if(width <= px(breakpoints['hd'])) {
+		return 5
 	}
+	return 6
+}
+
+const NetworkDetailsTable = ({ hosts, ips, pagination }: INetworkDetailsTableProps) => {
+	const { breakpoints } = useMantineTheme()
 
 	const { width } = useViewportSize()
-	const [tableRows, setTableRows] = useDebouncedState(calculateNumTableRows(width), 500)
+
+	const [tableRows, setTableRows] = useDebouncedState(3, 500)
 
 	useEffect(() => {
-		setTableRows(calculateNumTableRows(width))
+		setTableRows(calculateNumTableRows(width, breakpoints))
 	}, [width])
 
 	return (

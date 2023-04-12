@@ -4,8 +4,8 @@ import { Routes } from '@/lib'
 import DepartmentsForm from '@/Pages/Departments/Form'
 
 interface IDepartmentsDropdown extends IDropdownWithModalButton {
-	departments: Schema.Department[]
-	locations: Schema.Location[]
+	departments: Schema.DepartmentsOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const DepartmentsDropdown = ({ label = 'Department', name = 'department_id',  departments, locations, ...props }: IDepartmentsDropdown) => {
@@ -15,7 +15,7 @@ const DepartmentsDropdown = ({ label = 'Department', name = 'department_id',  de
 			name={ name }
 			options={ departments }
 			filterMatchKeys={ ['name'] }
-			fetchOnOpen="department"
+			fetchOnOpen="departments"
 			newForm={ <DepartmentsForm
 				to={ Routes.apiDepartments() }
 				locations={ locations }

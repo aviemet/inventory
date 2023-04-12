@@ -1,0 +1,22 @@
+import React from 'react'
+import { Link } from '@/Components'
+import { Routes } from '@/lib'
+import Table from '../Table'
+
+interface <%= singular_table_name.camelize %>IndexProps {
+	<%= plural_table_name %>: Schema.<%= singular_table_name.camelize %>
+}
+
+const <%= singular_table_name.camelize %>IndexProps = ({ <%= plural_table_name %> }: <%= singular_table_name.camelize %>IndexProps) => {
+	return (
+		<div>
+			<h1><%= human_name.pluralize.titleize %></h1>
+
+			<Table <%= plural_table_name %>={ <%= plural_table_name %> } />
+
+			<Link href={ Routes.new<%= singular_table_name.camelize %>() }>New <%= human_name.titleize %></Link>
+		</div>
+	)
+}
+
+export default <%= singular_table_name.camelize %>IndexProps

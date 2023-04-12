@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { AppShell, Box, useMantineTheme } from '@mantine/core'
+import { AppShell, Box, px, useMantineTheme } from '@mantine/core'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
@@ -12,6 +12,9 @@ const AppLayout = ({ children }: { children: any }) => {
 	useEffect(() => {
 		if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
 			console.log({ theme })
+			console.log({ breakpointsPx: Object.fromEntries(
+				Object.entries(theme.breakpoints).map(([key, val]) => [key, px(val)]),
+			) })
 		}
 	}, [])
 
@@ -46,4 +49,4 @@ const AppLayout = ({ children }: { children: any }) => {
 	)
 }
 
-export default AppLayout
+export default React.memo(AppLayout)

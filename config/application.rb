@@ -35,5 +35,10 @@ module Inventory
     config.active_storage.service = :local
 
     config.active_record.yaml_column_permitted_classes = [Symbol, Hash, Array, Time, Date, ActiveRecord::Base, ActiveSupport::HashWithIndifferentAccess]
+
+    # Establish db connection upon entering rails console
+    console do
+      ActiveRecord::Base.connection
+    end
   end
 end

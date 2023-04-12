@@ -20,7 +20,7 @@ const ManufacturersTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (manufacturer: Schema.ManufacturerWithCounts) => (
+				<Table.RowIterator render={ (manufacturer: Schema.ManufacturersIndex) => (
 					<Table.Row key={ manufacturer.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.manufacturer(manufacturer.slug) }>{ manufacturer.name }</Link>
@@ -57,7 +57,7 @@ const ManufacturersTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editManufacturer(manufacturer.slug) } />
+							<EditButton href={ Routes.editManufacturer(manufacturer.slug) } label={ manufacturer.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

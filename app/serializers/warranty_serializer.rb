@@ -1,0 +1,2 @@
+class WarrantySerializer < ApplicationSerializer
+end

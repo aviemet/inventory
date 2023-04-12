@@ -23,7 +23,7 @@ const ConsumablesTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (consumable: Schema.Consumable) => (
+				<Table.RowIterator render={ (consumable: Schema.ConsumablesIndex) => (
 					<Table.Row key={ consumable.id }>
 
 						<Table.Cell nowrap>
@@ -56,9 +56,14 @@ const ConsumablesTable = (props: ITableProps) => {
 
 						<Table.Cell fitContent>
 							<Group noWrap spacing="sm">
-								<CheckoutButton href={ Routes.checkoutConsumable(consumable) } />
+								<CheckoutButton
+									href={ Routes.checkoutConsumable(consumable) }
+									disabled={ consumable.qty_available < 1 }
+									tooltipMessage={ consumable.qty_available < 1 && 'There are none to checkout' }
+									label={ consumable.name }
+								/>
 								<ReplenishButton consumable={ consumable } />
-								<EditButton href={ Routes.editConsumable(consumable) } />
+								<EditButton href={ Routes.editConsumable(consumable) } label={ consumable.name } />
 							</Group>
 						</Table.Cell>
 

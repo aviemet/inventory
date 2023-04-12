@@ -7,11 +7,15 @@ import {
 import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TCompanyFormData = {
+	company: Schema.CompaniesFormData
+}
+
 export interface ICompanyFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	company: Partial<Schema.Company>
+	onSubmit?: (object: UseFormProps<TCompanyFormData>) => boolean|void
+	company: Schema.CompaniesFormData
 }
 
 const CompanyForm = ({ to, method = 'post', onSubmit, company }: ICompanyFormProps) => {

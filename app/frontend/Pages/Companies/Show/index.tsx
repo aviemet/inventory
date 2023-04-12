@@ -4,7 +4,7 @@ import { ContactDetails } from '@/Layouts/AppLayout/Components/Contactable'
 import { Routes } from '@/lib'
 
 interface IShowCompanyProps {
-	company: Schema.Company
+	company: Schema.CompaniesShow
 }
 
 const Show = ({ company }: IShowCompanyProps) => {

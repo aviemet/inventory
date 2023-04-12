@@ -7,14 +7,24 @@ import {
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TStatusLabelFormData = {
+	status_label: Schema.StatusLabelsFormData
+}
+
+const emptyStatusLabel: Schema.StatusLabelsFormData = {
+	name: '',
+	description: '',
+	status_type: 1,
+}
+
 export interface IStatusLabelFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	status_label: Schema.StatusLabel
+	onSubmit?: (object: UseFormProps<TStatusLabelFormData>) => boolean|void
+	status_label?: Schema.StatusLabelsFormData
 }
 
-const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label }: IStatusLabelFormProps) => {
+const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label = emptyStatusLabel }: IStatusLabelFormProps) => {
 	return (
 		<Form
 			model="status_label"

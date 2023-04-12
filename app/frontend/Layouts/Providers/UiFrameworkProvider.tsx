@@ -1,28 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
 import { Notifications } from '@mantine/notifications'
 import { usePage } from '@inertiajs/react'
 import axios from 'axios'
 import { Routes } from '@/lib'
+import useLayoutStore from '../AppLayout/store/LayoutStore'
 
-export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
+export const useTheme = (colorScheme: 'light'|'dark' = 'light', primaryColor = 'violet') => ({
 	breakpoints: {
-		'2xs': '480',
-		lg: '1280',
-		xl: '1440',
-		'2xl': '1920',
+		'hd': '120rem', // 1920px,
+		'2xl': '110rem', // 1760px,
+		xl: '90rem', // 1440px, default 88rem
+		lg: '80rem', // 1280px, default 75rem
+		md: '62rem',
+		sm: '48rem',
+		xs: '36rem',
+		'2xs': '30rem', // 480px
 	},
 	black: '#111111',
 	white: '#FCFCFC',
 	colorScheme,
 	fontFamily: 'Roboto, sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
-	primaryColor: 'violet',
+	primaryColor: primaryColor,
 	defaultRadius: 'xs',
 	transitionTimingFunction: 'ease-in-out',
 	headings: {
 		fontFamily: 'Greycliff CF, Roboto, sans-serif',
+	},
+	fontSizes: {
+		xs: '0.75rem',
+		sm: '0.9rem',
+		md: '1rem',
+		lg: '1.2rem',
+		xl: '1.4rem',
 	},
 	shadows: {
 		xs: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
@@ -47,12 +59,17 @@ export const useTheme = (colorScheme: 'light'|'dark' = 'light') => ({
 		},
 		form: {
 			label: {
-				width: '10rem',
+				width: '12rem',
 			},
 		},
 		table: {
 			sortButtonHeight: 5,
 			sortButtonWidth: 6,
+		},
+		colors: {
+			replenishButtonColor: 'yellow',
+			checkoutButtonColor: 'pink',
+			checkinButtonColor: 'cyan',
 		},
 	},
 })
@@ -79,10 +96,23 @@ export const GlobalStyles = () => <Global styles={ theme => ({
 		flexDirection: 'column',
 		height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
 	},
+
+	'label': {
+		fontSize: '1rem',
+	},
 }) } />
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const { auth } = usePage<SharedInertiaProps>().props
+
+	const { primaryColor, setPrimaryColor } = useLayoutStore()
+
+	useEffect(() => {
+		const companyColor = auth?.user?.active_company?.settings?.primary_color || 'violet'
+		if(companyColor === primaryColor) return
+
+		setPrimaryColor(companyColor)
+	}, [auth?.user?.active_company?.settings?.primary_color])
 
 	const systemColorScheme = useColorScheme()
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -107,10 +137,15 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		setColorScheme(scheme)
 	}
 
-	const mantineTheme = useTheme(colorScheme)
+	if(primaryColor === undefined) return <></>
+
+	const mantineTheme = useTheme(colorScheme, primaryColor)
 
 	return (
-		<ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
+		<ColorSchemeProvider
+			colorScheme={ colorScheme }
+			toggleColorScheme={ toggleColorScheme }
+		>
 			<MantineProvider theme={ mantineTheme } withGlobalStyles withNormalizeCSS>
 				<Notifications />
 				<GlobalStyles />
@@ -120,4 +155,4 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	)
 }
 
-export default UiFrameworkProvider
+export default React.memo(UiFrameworkProvider)

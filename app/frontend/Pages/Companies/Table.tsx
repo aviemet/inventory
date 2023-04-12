@@ -25,54 +25,54 @@ const CompaniesTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (company: Schema.CompanyWithCounts) => (
+				<Table.RowIterator render={ (company: Schema.CompaniesIndex) => (
 					<Table.Row key={ company.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.company(company.slug) }>{ company.name }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.locations() }>{ company!.counts.locations }</Link>
+							<Link href={ Routes.locations() }>{ company.counts.locations }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.departments() }>{ company!.counts.departments }</Link>
+							<Link href={ Routes.departments() }>{ company.counts.departments }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.items() }>{ company!.counts.items }</Link>
+							<Link href={ Routes.items() }>{ company.counts.items }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.accessories() }>{ company!.counts.accessories }</Link>
+							<Link href={ Routes.accessories() }>{ company.counts.accessories }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.consumables() }>{ company!.counts.consumables }</Link>
+							<Link href={ Routes.consumables() }>{ company.counts.consumables }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.components() }>{ company!.counts.components }</Link>
+							<Link href={ Routes.components() }>{ company.counts.components }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.licenses() }>{ company!.counts.licenses }</Link>
+							<Link href={ Routes.licenses() }>{ company.counts.licenses }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.contracts() }>{ company!.counts.contracts }</Link>
+							<Link href={ Routes.contracts() }>{ company.counts.contracts }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.vendors() }>{ company!.counts.vendors }</Link>
+							<Link href={ Routes.vendors() }>{ company.counts.vendors }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.people() }>{ company!.counts.people }</Link>
+							<Link href={ Routes.people() }>{ company.counts.people }</Link>
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editCompany(company.slug) } />
+							<EditButton href={ Routes.editCompany(company.slug) } label={ company.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

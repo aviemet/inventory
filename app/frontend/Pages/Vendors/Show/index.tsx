@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Link, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Link, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { NewIcon, EditIcon } from '@/Components/Icons'
 import ItemsTable from '@/Pages/Items/Table'
@@ -10,28 +10,19 @@ import LicensesTable from '@/Pages/Licenses/Table'
 import ContractsTable from '@/Pages/Contracts/Table'
 import ShowPageTableTemplate from '@/Layouts/AppLayout/Components/ShowPageTableTemplate'
 
-type ShowPageVendor = Schema.Vendor & {
-	items_count: number
-	accessories_count: number
-	consumables_count: number
-	components_count: number
-	licenses_count: number
-	contracts_count: number
-}
-
 type TPaginatedModel<T> = {
 	data: T
 	pagination: Schema.Pagination
 }
 
 interface IVendorShowProps {
-	vendor: ShowPageVendor
-	items: TPaginatedModel<Schema.Item[]>
-	accessories: TPaginatedModel<Schema.Accessory[]>
-	components: TPaginatedModel<Schema.Component[]>
-	consumables: TPaginatedModel<Schema.Consumable[]>
-	licenses: TPaginatedModel<Schema.License[]>
-	contracts: TPaginatedModel<Schema.Contract[]>
+	vendor: Schema.VendorsShow
+	items: TPaginatedModel<Schema.ItemsIndex[]>
+	accessories: TPaginatedModel<Schema.AccessoriesIndex[]>
+	components: TPaginatedModel<Schema.ComponentsIndex[]>
+	consumables: TPaginatedModel<Schema.ConsumablesIndex[]>
+	licenses: TPaginatedModel<Schema.LicensesIndex[]>
+	contracts: TPaginatedModel<Schema.ContractsIndex[]>
 }
 
 const tabs = {
@@ -62,19 +53,19 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 			} }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
-					<Tabs.Tab value={ tabs.items }>Items ({ vendor.items_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.accessories }>Accessories ({ vendor.accessories_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.components }>Components ({ vendor.components_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.consumables }>Consumables ({ vendor.consumables_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.licenses }>Licenses ({ vendor.licenses_count })</Tabs.Tab>
-					<Tabs.Tab value={ tabs.contracts }>Contracts ({ vendor.contracts_count })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.items }>Items ({ vendor.counts.items })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.accessories }>Accessories ({ vendor.counts.accessories })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.components }>Components ({ vendor.counts.components })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.consumables }>Consumables ({ vendor.counts.consumables })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.licenses }>Licenses ({ vendor.counts.licenses })</Tabs.Tab>
+					<Tabs.Tab value={ tabs.contracts }>Contracts ({ vendor.counts.contracts })</Tabs.Tab>
 				</Tabs.List>
 
 				{ /*********** Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
-						<Flex position="apart">
-							<Heading sx={ { flex: 1 } }>{
+						<Group position="apart">
+							<Heading>{
 								vendor.url ?
 									<Link href={ vendor.url } target="_blank" rel="noreferrer">{ title }</Link>
 									:
@@ -93,7 +84,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 									</Menu.Link>
 								</Menu.Dropdown>
 							</Menu>
-						</Flex>
+						</Group>
 					</Section>
 				</Tabs.Panel>
 

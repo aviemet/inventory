@@ -3,14 +3,18 @@ import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TVendorFormData = {
+	vendor: Schema.VendorsFormData
+}
+
 export interface IVendorFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	vendor?: Partial<Schema.Vendor>
+	onSubmit?: (object: UseFormProps<TVendorFormData>) => boolean|void
+	vendor?: Schema.VendorsFormData
 }
 
-const emptyVendor: Partial<Schema.Vendor> = {
+const emptyVendor: Schema.VendorsFormData = {
 	name: '',
 	url: '',
 }
@@ -28,7 +32,7 @@ const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: IVe
 
 			<TextInput name="url" label="Website" />
 
-			<ContactForm />
+			<ContactForm contact={ vendor?.contact } />
 
 			<Submit>
 				{ vendor.id ? 'Update' : 'Create' } Vendor

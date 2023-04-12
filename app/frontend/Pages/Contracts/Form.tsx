@@ -3,24 +3,39 @@ import {
 	Form,
 	TextInput,
 	Textarea,
-	SearchableDropdown,
 	DateTime,
 	Submit,
 } from '@/Components/Form'
-import { router } from '@inertiajs/react'
-import { CategoriesDropdown } from '@/Components/Form/Dropdowns'
+import { CategoriesDropdown, VendorsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
+
+type TContractFormData = {
+	contract: Schema.ContractsFormData
+}
 
 export interface IContractFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	contract: Schema.Contract
-	vendors: Schema.Vendor[]
-	categories: Schema.Category[]
+	onSubmit?: (object: UseFormProps<TContractFormData>) => boolean|void
+	contract?: Schema.ContractsFormData
+	vendors: Schema.VendorsOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
-const ContractForm = ({ to, method = 'post', onSubmit, contract, vendors, categories }: IContractFormProps) => {
+const emptyContract: Schema.ContractsFormData = {
+	name: '',
+	category_id: '',
+	vendor_id: '',
+}
+
+const ContractForm = ({
+	to,
+	method = 'post',
+	onSubmit,
+	contract = emptyContract,
+	vendors,
+	categories,
+}: IContractFormProps) => {
 	return (
 		<Form
 			model="contract"
@@ -37,25 +52,9 @@ const ContractForm = ({ to, method = 'post', onSubmit, contract, vendors, catego
 
 			<DateTime name="ends_at" label="Contract End" />
 
-			<SearchableDropdown
-				label="Vendor"
-				name="vendor_id"
-				options={ vendors }
-				filterMatchKeys={ ['name'] }
-				onOpen={ () => router.reload({ only: ['vendors'] }) }
-			/>
+			<VendorsDropdown vendors={ vendors } />
 
-			<CategoriesDropdown
-				categories={ categories }
-			/>
-
-			{ /* <SearchableDropdown
-				label="Category"
-				name="category_id"
-				options={ categories }
-				filterMatchKeys={ ['name'] }
-				onOpen={ () => Inertia.reload({ only: ['categories'] }) }
-			/> */ }
+			<CategoriesDropdown categories={ categories } />
 
 			<Textarea name="notes" label="Notes" />
 

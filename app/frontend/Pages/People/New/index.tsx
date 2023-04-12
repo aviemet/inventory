@@ -1,13 +1,13 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
-import PersonForm from '../Form'
+import NewPersonForm from './Form'
 import { Routes } from '@/lib'
 
 interface INewPersonProps {
-	person: Schema.Person
-	departments: Schema.Department[]
-	people: Schema.Person[]
-	locations: Schema.Location[]
+	person: Schema.PeopleFormData
+	departments: Schema.DepartmentsOptions[]
+	people: Schema.PeopleOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const New = ({ ...data }: INewPersonProps) => {
@@ -21,7 +21,7 @@ const New = ({ ...data }: INewPersonProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<PersonForm to={ Routes.people() } { ...data } />
+				<NewPersonForm to={ Routes.people() } { ...data } />
 			</Section>
 		</Page>
 	)

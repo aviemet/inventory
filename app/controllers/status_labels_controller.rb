@@ -2,10 +2,9 @@ class StatusLabelsController < ApplicationController
   include Searchable
 
   expose :status_labels, -> { search(StatusLabel.all, sortable_fields) }
-  expose :status_label, -> { StatusLabel.find_by_slug(params[:slug]) }
+  expose :status_label, id: ->{ params[:slug] }, find_by: :slug
 
   # GET /status_labels
-  # GET /status_labels.json
   def index
     paginated_status_labels = status_labels.page(params[:page] || 1)
 
@@ -32,7 +31,7 @@ class StatusLabelsController < ApplicationController
   # GET /status_labels/new
   def new
     render inertia: "StatusLabels/New", props: {
-      status_label: Company.new.render(view: :new)
+      status_label: StatusLabel.new.render(view: :form_data)
     }
   end
 
@@ -45,12 +44,9 @@ class StatusLabelsController < ApplicationController
 
   # POST /status_labels
   def create
-    if Company.new(status_label_params).save
-      # Assign admin permissions to user creating the record
-      current_user.add_role :admin, status_label
-      current_user.update(active_status_label: status_label)
-
-      redirect_to status_label, notice: 'Company was successfully created.'
+    status_label = StatusLabel.new(status_label_params)
+    if status_label.save
+      redirect_to status_label, notice: 'StatusLabel was successfully created.'
     else
       redirect_to new_status_label_path, inertia: { errors: status_label.errors }
     end
@@ -59,7 +55,7 @@ class StatusLabelsController < ApplicationController
   # PATCH/PUT /status_labels/:slug
   def update
     if status_label.update(status_label_params)
-      redirect_to status_label, notice: 'Company was successfully updated.'
+      redirect_to status_label, notice: 'StatusLabel was successfully updated.'
     else
       redirect_to edit_status_label_path, inertia: { errors: status_label.errors }
     end
@@ -69,7 +65,7 @@ class StatusLabelsController < ApplicationController
   def destroy
     status_label.destroy
     respond_to do |format|
-      format.html { redirect_to status_labels_url, notice: 'Company was successfully destroyed.' }
+      format.html { redirect_to status_labels_url, notice: 'StatusLabel was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

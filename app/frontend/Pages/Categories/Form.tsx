@@ -9,14 +9,18 @@ import {
 import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
 
+interface CategoryFormData {
+	category: Schema.CategoriesFormData
+}
+
 export interface ICategoryFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	category?: Partial<Schema.Category>
+	onSubmit?: (object: UseFormProps<CategoryFormData>) => boolean|void
+	category?: Schema.CategoriesFormData
 }
 
-const emptyCategory: Partial<Schema.Category> = {
+const emptyCategory: Schema.CategoriesFormData = {
 	name: '',
 	categorizable_type: '',
 	description: '',

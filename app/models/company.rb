@@ -18,13 +18,13 @@ class Company < ApplicationRecord
 
   slug :name
 
-  resourcify
   tracked
+  resourcify
 
   attribute :default_currency, default: MoneyRails.default_currency
 
   has_many :users, through: :roles, class_name: :User, source: :users
-  has_many :ldaps, dependent: :destroy
+  has_one :ldap, dependent: :destroy
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
   # 	Company.items, Company.contracts, etc.
@@ -44,6 +44,7 @@ class Company < ApplicationRecord
     orders: "Order",
     categories: "Category",
     smtps: "Smtp",
+    person_groups: "PersonGroup",
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end
@@ -79,7 +80,6 @@ class Company < ApplicationRecord
       self.orders.destroy_all
       self.categories.destroy_all
       self.smtps.destroy_all
-      self.users.each(&:destroy)
     end
   end
 

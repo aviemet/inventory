@@ -48,7 +48,7 @@ const NetworksTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editNetwork(network) } />
+							<EditButton href={ Routes.editNetwork(network) } label={ network.name } />
 						</Table.Cell>
 
 					</Table.Row>

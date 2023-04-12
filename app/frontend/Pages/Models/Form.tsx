@@ -9,16 +9,20 @@ import {
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TModelFormData = {
+	model: Schema.ModelsFormData
+}
+
 export interface IModelFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	model?: Partial<Schema.Model>
-	categories: Schema.Category[]
-	manufacturers: Schema.Manufacturer[]
+	onSubmit?: (object: UseFormProps<TModelFormData>) => boolean|void
+	model?: Schema.ModelsFormData
+	categories: Schema.CategoriesOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
 }
 
-const emptyModel: Partial<Schema.Model> = {
+const emptyModel: Schema.ModelsFormData = {
 	name: '',
 	model_number: '',
 	manufacturer_id: undefined,

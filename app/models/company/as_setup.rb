@@ -4,7 +4,7 @@ class Company::AsSetup < Company
   def seed_categories
     {
       Item: ["Desktop", "Laptop", "Server"],
-      Accessory: ["Keyboard", "Mouse"],
+      Accessory: ["Keyboard", "Mouse", "Monitor"],
       Consumable: ["Toner", "Paper"],
       Component: ["Memory", "SSD", "HDD"],
       License: ["Operating System", "Office Software"],

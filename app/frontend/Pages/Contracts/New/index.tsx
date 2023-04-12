@@ -4,9 +4,9 @@ import ContractForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewContractProps {
-	contract: Schema.Contract
-	vendors: Schema.Vendor[]
-	categories: Schema.Category[]
+	contract: Schema.ContractsFormData
+	vendors: Schema.VendorsOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const NewContract = ({ ...data }: INewContractProps) => {

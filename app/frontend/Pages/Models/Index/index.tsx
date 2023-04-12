@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import ModelsTable from '../Table'
 
 interface IModelsIndexProps {
-	models: Schema.Model[]
+	models: Schema.ModelsIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -16,6 +16,7 @@ const ModelsIndex = ({ models, pagination }: IModelsIndexProps) => {
 			model="models"
 			rows={ models }
 			pagination={ pagination }
+			deleteRoute={ Routes.models() }
 			menuOptions={ [
 				{ label: 'New Model', href: Routes.newModel(), icon: NewIcon },
 			] }

@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import ManufacturersTable from '../Table'
 
 interface IManufacturersIndexProps {
-	manufacturers: Schema.ManufacturerWithCounts[]
+	manufacturers: Schema.ManufacturersIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -16,6 +16,7 @@ const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexPr
 			model="manufacturers"
 			rows={ manufacturers }
 			pagination={ pagination }
+			deleteRoute={ Routes.manufacturers() }
 			menuOptions={ [
 				{ label: 'New Manufacturer', href: Routes.newManufacturer(), icon: NewIcon },
 			] }

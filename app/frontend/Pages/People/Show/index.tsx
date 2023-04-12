@@ -1,10 +1,10 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
 interface IShowPersonProps {
-	person: Schema.Person & { name: string }
+	person: Schema.PeopleShow
 }
 
 const tabs = {
@@ -22,8 +22,8 @@ const Show = ({ person }: IShowPersonProps) => {
 			{ title: person.name! },
 		] }>
 			<Section>
-				<Flex position="apart">
-					<Heading sx={ { flex: 1 } }>{ title }</Heading>
+				<Group position="apart">
+					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -33,7 +33,7 @@ const Show = ({ person }: IShowPersonProps) => {
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 					<Tabs.List>
@@ -78,7 +78,7 @@ const Show = ({ person }: IShowPersonProps) => {
 							{ person.possessions && person.possessions.reverse().map(assignment => (
 								<React.Fragment key={ assignment.id }>
 									<div>
-								Link to assigntoable object
+										Link to assigntoable object
 									</div>
 									<div>
 										{ assignment.assignable_type }

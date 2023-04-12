@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :license do
     name { Faker::Device.model_name }
-    seats { Faker::Number.digit }
+    qty { 1 }
     key { Faker::Device.serial }
     licenser_name { Faker::Name.name }
     licenser_email { Faker::Internet.email }
@@ -10,11 +10,11 @@ FactoryBot.define do
     purchased_at { Time.zone.yesterday.end_of_day }
     expires_at { Time.current.next_year }
     terminates_at { Time.current.next_year }
-    notes { Faker::Lorem.sentence }
-    manufacturer
     status_label
-    category
-    vendor
+
     company
+    vendor { association :vendor, company: company }
+    manufacturer { association :manufacturer, company: company }
+    category { association :category, company: company }
   end
 end

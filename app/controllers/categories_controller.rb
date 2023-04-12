@@ -1,15 +1,15 @@
 class CategoriesController < ApplicationController
   include Searchable
 
-  expose :categories, -> {  search(@active_company.categories.all, sortable_fields) }
-  expose :category, -> { @active_company.categories.includes_associated.find_by_slug(params[:slug]) }
+  expose :categories, -> { search(@active_company.categories.all, sortable_fields) }
+  expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories.includes_associated }, find_by: :slug
 
   # GET /categories
   def index
     paginated_categories = categories.page(params[:page] || 1)
 
     render inertia: "Categories/Index", props: {
-      categories: paginated_categories.render(view: :counts),
+      categories: paginated_categories.render(view: :index),
       pagination: -> { {
         count: categories.size,
         **pagination_data(paginated_categories)
@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     render inertia: "Categories/New", props: {
-      category: Category.new.render(view: :new),
+      category: Category.new.render(view: :form_data),
     }
   end
 
@@ -77,7 +77,7 @@ class CategoriesController < ApplicationController
   private
 
   def sortable_fields
-    %w(name locations.count departments.count assets.count people.count).freeze
+    %w(name categorizable_type qty).freeze
   end
 
   def category_params

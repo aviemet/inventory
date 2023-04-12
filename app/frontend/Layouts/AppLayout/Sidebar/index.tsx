@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { useLayout } from '@/Layouts/Providers'
+import { useLayoutStore } from '@/Layouts/Providers'
 import { Group, Navbar, Text, ThemeIcon, useMantineTheme } from '@mantine/core'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
@@ -9,7 +9,6 @@ import {
 	AssetsIcon,
 	ItemsIcon,
 	LicensesIcon,
-	PeopleIcon,
 	TicketsIcon,
 	NetworksIcon,
 	VendorsIcon,
@@ -28,35 +27,36 @@ import {
 	ManufacturersIcon,
 	ModelsIcon,
 	CategoriesIcon,
+	UserGroupIcon,
 } from '@/Components/Icons'
 
 import IconProvider from '@/Layouts/Providers/IconProvider'
 import useNavigationStyles from './useNavigationStyles'
 
 const Sidebar = () => {
-	const { layoutState, setLayoutState } = useLayout()
+	const { sidebarOpen, toggleSidebarOpen } = useLayoutStore()
 	const theme = useMantineTheme()
 	const { classes } = useNavigationStyles()
 	const [siteTitleHidden, setSiteTitleHidden] = useState(false)
 
-	const handleNavClick = () => setLayoutState({ sidebarOpen: false })
+	const handleNavClick = () => toggleSidebarOpen(false)
 
 	// Delay text to avoid layout shift when opening/closing sidebar
 	useLayoutEffect(() => {
-		const ms = layoutState.sidebarOpen ? 100 : 0
+		const ms = sidebarOpen ? 100 : 0
 		setTimeout(() => {
-			setSiteTitleHidden(!layoutState.sidebarOpen)
+			setSiteTitleHidden(!sidebarOpen)
 		}, ms)
-	}, [layoutState.sidebarOpen])
+	}, [sidebarOpen])
 
 	return (
 		<IconProvider value={ { size: '24px' } }>
 			<Navbar
 				p={ 0 }
 				hiddenBreakpoint="sm"
-				hidden={ !layoutState.sidebarOpen }
-				width={ { sm: layoutState.sidebarOpen ? theme.other.navbar.width.open : theme.other.navbar.width.closed } }
-				className={ cx(classes.root, { closed: !layoutState.sidebarOpen }) }
+				hidden={ !sidebarOpen }
+				width={ { sm: sidebarOpen ? theme.other.navbar.width.open : theme.other.navbar.width.closed } }
+				className={ cx(classes.root, { closed: !sidebarOpen }) }
 			>
 				<Navbar.Section m="xs">
 					<Group position='apart'>
@@ -83,7 +83,8 @@ const Sidebar = () => {
 						<li>
 							<MenuLink href={ Routes.people() } icon={ <UsersIcon /> }>People</MenuLink>
 							<ul>
-								<li><MenuLink href={ Routes.users() } icon={ <PeopleIcon /> }>Users</MenuLink></li>
+								{ /* <li><MenuLink href={ Routes.users() } icon={ <PeopleIcon /> }>Users</MenuLink></li> */ }
+								<li><MenuLink href={ Routes.personGroups() } icon={ <UserGroupIcon /> }>Groups</MenuLink></li>
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.tickets() } icon={ <TicketsIcon /> }>Tickets</MenuLink></li>
@@ -101,7 +102,7 @@ const Sidebar = () => {
 				<Navbar.Section onClick={ handleNavClick } className="links">
 					<ul>
 						<li>
-							<MenuLink href={ Routes.settings() } icon={ <SettingsIcon /> }>Settings</MenuLink>
+							<MenuLink href={ Routes.settingsGeneralIndex() } icon={ <SettingsIcon /> }>Settings</MenuLink>
 							<ul className="up">
 								<li><MenuLink href={ Routes.companies() } icon={ <CompaniesIcon /> }>Companies</MenuLink></li>
 								<li><MenuLink href={ Routes.locations() } icon={ <LocationsIcon /> }>Locations</MenuLink></li>

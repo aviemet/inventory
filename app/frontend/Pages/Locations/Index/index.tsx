@@ -4,19 +4,8 @@ import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import LocationsTable from '../Table'
 
-export interface LocationWithCounts extends Schema.Location {
-	counts: {
-		items: number
-		accessories: number
-		consumables: number
-		components: number
-		licenses: number
-		people: number
-	}
-}
-
 interface ICompaniesIndexProps {
-	locations: LocationWithCounts[]
+	locations: Schema.LocationsIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -27,6 +16,7 @@ const LocationsIndex = ({ locations, pagination }: ICompaniesIndexProps) => {
 			model="locations"
 			rows={ locations }
 			pagination={ pagination }
+			deleteRoute={ Routes.locations() }
 			menuOptions={ [
 				{ label: 'New Location', href: Routes.newLocation(), icon: NewIcon },
 			] }

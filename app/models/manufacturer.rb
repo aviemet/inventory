@@ -5,7 +5,13 @@ class Manufacturer < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:name, :asset_tag, :serial, :cost_cents],
+    against: [:name, :slug], associated_against: {
+      models: [:name, :model_number],
+      items: [:name, :asset_tag, :serial],
+      accessories: [:name, :asset_tag, :serial],
+      consumables: [:name, :asset_tag, :serial],
+      components: [:name, :asset_tag, :serial],
+    },
     using: {
       tsearch: { prefix: true },
       trigram: {}
@@ -14,11 +20,10 @@ class Manufacturer < ApplicationRecord
 
   slug :name
 
-  resourcify
   tracked
+  resourcify
 
-  validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 
   has_many :models
   has_many :items, through: :models

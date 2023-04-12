@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import AccessoriesTable from '../Table'
 
 interface IAccessoriesIndexProps {
-	accessories: Schema.Accessory[]
+	accessories: Schema.AccessoriesIndex[]
 	pagination: Schema.Pagination
 }
 
@@ -16,6 +16,7 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 			model="accessories"
 			rows={ accessories }
 			pagination={ pagination }
+			deleteRoute={ Routes.accessories() }
 			menuOptions={ [
 				{ label: 'Create New Accessory', href: Routes.newAccessory(), icon: NewIcon },
 			] }

@@ -15,7 +15,7 @@ const StatusLabelsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (status_label: Schema.StatusLabel) => (
+				<Table.RowIterator render={ (status_label: Schema.StatusLabelsIndex) => (
 					<Table.Row key={ status_label.id }>
 
 						<Table.Cell nowrap>
@@ -23,7 +23,7 @@ const StatusLabelsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editStatusLabel(status_label.slug) } />
+							<EditButton href={ Routes.editStatusLabel(status_label.slug) } label={ status_label.name } />
 						</Table.Cell>
 
 					</Table.Row>

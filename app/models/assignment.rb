@@ -1,9 +1,15 @@
 class Assignment < ApplicationRecord
+  class_attribute :assignable_types, default: %w(Asset Item Accessory Component Consumable License).freeze
+  class_attribute :assign_toable_types, default: %w(Asset Person Item Location).freeze
+
   tracked recipient: proc { |_controller, a| a.assignable },
           params: {
             assign_toable_type: proc { |_controller, a| a.assign_toable_type },
             assign_toable_id: proc { |_controller, a| a.assign_toable_id }
           }
+  resourcify
+
+  attr_reader :assignable_types, :assign_toable_types
 
   enum status: %i(approved requested denied)
 
@@ -15,10 +21,8 @@ class Assignment < ApplicationRecord
   belongs_to :created_by, class_name: "User", required: false
   belongs_to :location
 
-  ASSIGNABLE_TYPES = %w(Asset Item Accessory Component Consumable License).freeze
-  ASSIGN_TOABLE_TYPES = %w(Asset Person Item Location).freeze
-  validates :assignable_type, inclusion: { in: ASSIGNABLE_TYPES }
-  validates :assign_toable_type, inclusion: { in: ASSIGN_TOABLE_TYPES }
+  validates :assignable_type, inclusion: { in: self.assignable_types }
+  validates :assign_toable_type, inclusion: { in: self.assign_toable_types }
   validates_presence_of :assignable_type
   validates_presence_of :assignable_id
   validates_presence_of :assign_toable_type
@@ -28,6 +32,4 @@ class Assignment < ApplicationRecord
 
   scope :includes_associated, -> { includes([:location, :created_by, :activities]) }
   scope :active, -> { where(active: true) }
-
-  # delegate :available_to_checkout?, to: self.assignable
 end

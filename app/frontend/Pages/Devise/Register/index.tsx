@@ -5,6 +5,14 @@ import { Heading, Tile } from '@/Components'
 import { usePage } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TRegisterFormData = {
+	user: {
+		email: string
+		password: string
+		password_confirmation: string
+	}
+}
+
 const firstRun = {
 	heading: 'Create Admin User',
 	description: 'Time to create your first user which  will be the admin for your inventory system',
@@ -18,32 +26,32 @@ const register = {
 const Register = () => {
 	const { props } = usePage<SharedInertiaProps>()
 
-	const handleFormChange = ({ data }: UseFormProps) => {
+	const handleFormChange = ({ data }: UseFormProps<TRegisterFormData>) => {
 		// console.log({ data })
 	}
 
-	const handlePasswordChange = (value: string|number, { data, errors, clearErrors }: UseFormProps) => {
-		if(errors['user.password'] || errors['user.password_confirmation']) {
+	const handlePasswordChange = (value: string|number, { data, getError, clearErrors }: UseFormProps<TRegisterFormData>) => {
+		if(getError('user.password') || getError('user.password_confirmation')) {
 			if(data.user.password === data.user.password_confirmation) {
-				clearErrors('user.password', 'user.password_confirmation')
+				clearErrors('user.password')
+				clearErrors('user.password_confirmation')
 			}
 		}
 	}
 
-	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps) => {
+	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps<TRegisterFormData>) => {
 		if(data.user.password !== data.user.password_confirmation) {
 			setError('user.password_confirmation', 'Passwords must match')
 			return false
 		}
 	}
 
-	const handleEmailBlur = (value: string|number, form: UseFormProps) => {
+	const handleEmailBlur = (value: string|number, form: UseFormProps<TRegisterFormData>) => {
 		// console.log({ value, form })
 	}
 
 	const content = props?.first_run ? firstRun : register
 
-	// TODO: Disable submit until all inputs are valid. Async check for existing email address on input blur
 	return (
 		<Tile>
 			<Form
@@ -98,7 +106,7 @@ const Register = () => {
 						/>
 					</Field>
 
-					<Field>
+					<Field mb={ 16 }>
 						<Submit className="large">Sign Up</Submit>
 					</Field>
 

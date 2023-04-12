@@ -7,14 +7,13 @@ import Website from './Website'
 import { Box } from '@mantine/core'
 
 interface IContactableFormProps {
-	contact?: Schema.Contact
+	contact: Schema.ContactsFormData
 }
 
 const ContactableForm = ({ contact }: IContactableFormProps) => {
 	return (
 		<>
-			<FieldsFor model="contacts">
-				<Box>Contact Information</Box>
+			<FieldsFor model="contact" legend="Contact Information">
 				<Phone />
 				{ /* <Email />
 			<Website />

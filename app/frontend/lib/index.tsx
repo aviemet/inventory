@@ -1,5 +1,6 @@
-import { isBoolean, isPlainObject, cloneDeep, unset, get, set } from 'lodash'
+import { cloneDeep, unset, get, set } from 'lodash'
 import { Routes } from '@/lib'
+import { NestedObject } from 'use-inertia-form'
 export { default as IPAddress } from './IPAddress'
 
 export * as Routes from '@/types/routes'
@@ -15,24 +16,6 @@ export const decodeId = (id: string) => {
 		model: parts[0],
 		id: parts[1],
 	}
-}
-
-export const fillEmptyValues = <T extends Record<keyof T, any>>(data: T): T => {
-	const sanitizedDefaultData = cloneDeep(data)
-
-	for(const key in sanitizedDefaultData) {
-		if(isPlainObject(sanitizedDefaultData[key])) {
-			sanitizedDefaultData[key] = fillEmptyValues(sanitizedDefaultData[key])
-		} else if(sanitizedDefaultData[key] === undefined || sanitizedDefaultData[key] === null) {
-			// @ts-ignore
-			sanitizedDefaultData[key] = ''
-		} else if(!isBoolean(sanitizedDefaultData[key])) {
-			// @ts-ignore
-			sanitizedDefaultData[key] = String(sanitizedDefaultData[key])
-		}
-	}
-
-	return sanitizedDefaultData
 }
 
 export const capitalize = (str?: string|null): string => {
@@ -69,4 +52,14 @@ export const unsetCompact = (data: Record<string, any>, path: string) => {
 export const coerceArray = (arg: string | string[]) => {
 	if(Array.isArray(arg)) return arg
 	return [arg]
+}
+
+export const exclude = <T extends any, K extends string>(obj: T, keys: K | K[]): Omit<T, K> | undefined => {
+	const clone = cloneDeep(obj)
+	if(clone) {
+		coerceArray(keys).forEach(key => {
+			unset(clone, key)
+		})
+	}
+	return clone
 }

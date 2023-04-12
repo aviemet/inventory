@@ -38,12 +38,10 @@
       "./node_modules/@types",
       "./node_modules/**/types",
       "./app/frontend/types",
-      "./node_modules/flatpickr/dist/types",
       "./node_modules/@inertiajs/react/types",
       "./node_modules/@inertiajs/core/types"
     ],
     "types": [                                           /* Specify type package names to be included without being referenced in a source file. */
-      "vitest/globals",
     ],
     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
     "resolveJsonModule": true,                           /* Enable importing .json files */

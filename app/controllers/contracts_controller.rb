@@ -2,10 +2,11 @@ class ContractsController < ApplicationController
   include Searchable
 
   expose :contracts, -> { search(@active_company.contracts.includes_associated, sortable_fields) }
-  expose :contract
+  expose :contract, scope: ->{ @active_company.contracts }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /contracts
   def index
+    authorize contracts
     paginated_contracts = contracts.page(params[:page] || 1)
 
     render inertia: "Contracts/Index", props: {
@@ -17,8 +18,9 @@ class ContractsController < ApplicationController
     }
   end
 
-  # GET /contracts/1
+  # GET /contracts/:id
   def show
+    authorize contract
     render inertia: "Contracts/Show", props: {
       contract: contract.render(view: :show),
     }
@@ -26,24 +28,27 @@ class ContractsController < ApplicationController
 
   # GET /contracts/new
   def new
+    authorize Contract
     render inertia: "Contracts/New", props: {
-      contract: Contract.new.render(view: :new),
+      contract: Contract.new.render(view: :form_data),
       vendors: -> { @active_company.vendors.render },
       categories: -> { @active_company.categories.find_by_type(:Contract).render },
     }
   end
 
-  # GET /contracts/1/edit
+  # GET /contracts/:id/edit
   def edit
+    authorize contract
     render inertia: "Contracts/Edit", props: {
       contract: contract.render(view: :edit),
-      vendors: -> { @active_company.vendors.render(view: :as_options) },
-      categories: -> { @active_company.categories.find_by_type(:Contract).render(view: :as_options) },
+      vendors: -> { @active_company.vendors.render(view: :options) },
+      categories: -> { @active_company.categories.find_by_type(:Contract).render(view: :options) },
     }
   end
 
   # POST /contracts
   def create
+    authorize Contract
     contract.company = @active_company
 
     if contract.save
@@ -53,8 +58,9 @@ class ContractsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contracts/1
+  # PATCH/PUT /contracts/:id
   def update
+    authorize contract
     if contract.update(contract_params)
       redirect_to contract, notice: 'Contract was successfully updated'
     else
@@ -62,8 +68,9 @@ class ContractsController < ApplicationController
     end
   end
 
-  # DELETE /contracts/1
+  # DELETE /contracts/:id
   def destroy
+    authorize contract
     contract.destroy
     redirect_to contracts_url, notice: 'Contract was successfully destroyed.'
   end

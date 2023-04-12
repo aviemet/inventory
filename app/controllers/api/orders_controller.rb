@@ -1,12 +1,12 @@
 class Api::OrdersController < ApplicationController
-  expose :order, -> { @active_company.orders.find_by_slug(params[:slug]) || Order.new(order_params) }
+  expose :order, id: ->{ params[:slug] }, scope: ->{ @active_company.orders.includes_associated }, find_by: :slug
 
   # POST /api/orders
   def create
     order.company = @active_company
 
     if order.save
-      render json: OrderBlueprint.render_as_json(order), status: 201
+      render json: order.render, status: 201
     else
       render json: { errors: order.errors }, status: 303
     end
@@ -15,7 +15,7 @@ class Api::OrdersController < ApplicationController
   # PATCH/PUT /api/orders/:id
   def update
     if order.update(order_params)
-      render json: OrderBlueprint.render_as_json(order), status: 201
+      render json: order.render, status: 201
     else
       render json: { errors: order.errors }, status: 303
     end

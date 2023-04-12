@@ -1,11 +1,26 @@
 import React, { forwardRef } from 'react'
-import { TextInput } from '@/Components/Inputs'
-import Field from '../Field'
+import TextInput, { type ITextInputProps } from '@/Components/Inputs/TextInput'
 import cx from 'clsx'
+import Field from '../Field'
 import { useInertiaInput } from 'use-inertia-form'
+import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
-const FormInput = forwardRef<HTMLInputElement, IInputProps<string>>((
-	{ label, name, model, onChange, onBlur, id, required, compact = false, ...props },
+interface ITextFormInputProps extends Omit<ITextInputProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
+	field?: boolean
+}
+
+const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
+	{
+		name,
+		model,
+		onChange,
+		onBlur,
+		id,
+		required,
+		compact = false,
+		errorKey,
+		field = true, ...props
+	},
 	ref,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
@@ -25,25 +40,31 @@ const FormInput = forwardRef<HTMLInputElement, IInputProps<string>>((
 	}
 
 	return (
-		<Field
-			type="text"
-			required={ required }
-			className={ cx({ compact }) }
-			errors={ !!error }
+		<ConditionalWrapper
+			wrapper={ children => (
+				<Field
+					type="text"
+					required={ required }
+					className={ cx({ compact }) }
+					errors={ !!error }
+				>
+					{ children }
+				</Field>
+			) }
+			condition={ props.hidden !== true && field }
 		>
 			<TextInput
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
-				label={ label }
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
-				error={ error }
+				error={ errorKey ? form.getError(errorKey) : error }
 				ref={ ref }
 				{ ...props }
 			/>
-		</Field>
+		</ConditionalWrapper>
 	)
 })
 

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
+  include Pundit::Authorization
 
   protect_from_forgery with: :exception
 
@@ -20,6 +21,11 @@ class ApplicationController < ActionController::Base
 
   include Inertia::Flash
   include Inertia::Auth
+
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    flash[:warning] = exception.message
+    redirect_to root_path
+  end
 
   # rescue_from CanCan::AccessDenied do |exception|
   #   flash[:warning] = exception.message
@@ -43,12 +49,7 @@ class ApplicationController < ActionController::Base
   def set_active_company
     return if !current_user
 
-    if !current_user.companies.empty?
-      # TODO: This may be a stop-gap measure. May want to redirect to a view with choices to be more explicit
-      if !current_user.active_company
-        current_user.update(active_company: current_user.companies.first)
-      end
-
+    if current_user.active_company
       @active_company = current_user.active_company
     elsif !['/logout', '/users/complete_registration'].include? request.path
       redirect_to complete_registration_path
@@ -66,23 +67,6 @@ class ApplicationController < ActionController::Base
       prev_page: model.prev_page,
       is_first_page: model.first_page?,
       is_last_page: model.last_page?
-    }
-  end
-
-  def host_pagination_data(_address)
-    size = network&.address&.size
-    pages = (size / 256).to_i
-    limit = params[:limit] || 256
-    current_page = params[:page].to_i || 1
-
-    {
-      pages:,
-      limit:,
-      current_page:,
-      next_page: current_page + 1 > pages ? nil : current_page + 1,
-      prev_page: current_page - 1 < 0 ? nil : current_page - 1,
-      is_first_page: current_page == 1,
-      is_last_page: current_page == pages
     }
   end
 
@@ -113,17 +97,6 @@ class ApplicationController < ActionController::Base
   # def set_action_cable_identifier
   #   cookies.encrypted[:user_id] = current_user&.id
   # end
-
-  # param `model` is a base model to check field types on
-  # if `column` is in the form 'model.field', or further chained such as 'model1.model2.field',
-  # ignore the passed `model` param and use the last chained model sent in `column`
-  def field_type(model, column)
-    split_fields = column.split(".")
-    if split_fields.length > 1
-      model = split_fields[-2].titleize.singularize.constantize
-    end
-    model.column_for_attribute(column).type
-  end
 
   def redirect_empty_params
     dirty = false

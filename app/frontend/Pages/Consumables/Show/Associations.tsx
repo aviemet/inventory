@@ -1,10 +1,8 @@
 import React from 'react'
 import { ShowPageAssociations } from '@/Layouts/AppLayout/Components'
+import { IShowConsumableProps } from '.'
 
-interface IConsumableAssociationsProps {
-	consumable: Schema.Consumable
-}
-const Associations = ({ consumable }: IConsumableAssociationsProps) => {
+const Associations = ({ consumable }: IShowConsumableProps) => {
 	return <ShowPageAssociations assignToable={ consumable } />
 }
 

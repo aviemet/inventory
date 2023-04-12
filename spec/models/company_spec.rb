@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'models/concerns/contactable'
+require "models/concerns/serializable"
 
 RSpec.describe Company, type: :model do
   subject { build(:company) }
@@ -20,7 +21,7 @@ RSpec.describe Company, type: :model do
 
     it { should have_many(:ownerships) }
     {
-      items: 'Item', 
+      items: 'Item',
       departments: 'Department',
       locations: 'Location',
       contracts: 'Contract',
@@ -32,4 +33,7 @@ RSpec.describe Company, type: :model do
     end
   end
 
+  describe "Serializer" do
+    it_behaves_like "serializable"
+  end
 end

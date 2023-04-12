@@ -4,12 +4,12 @@ import ItemForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewItemProps {
-	item: Schema.Item
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
-	manufacturers: Schema.Manufacturer[]
-	categories: Schema.Category[]
+	item: Schema.ItemsFormData
+	models: Schema.ModelsOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const NewItem = ({ ...data }: INewItemProps) => {

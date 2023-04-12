@@ -11,6 +11,10 @@ module Assignable
         self.qty > 0
       end
 
+      def qty_available
+        self.qty
+      end
+
       def _after_assignment(assignment, _params)
         return if assignment.qty.nil?
 

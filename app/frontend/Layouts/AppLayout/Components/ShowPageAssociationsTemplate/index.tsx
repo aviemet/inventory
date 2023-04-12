@@ -1,14 +1,15 @@
 import React from 'react'
-import { Heading, Link, List, Icon, Box, Flex } from '@/Components'
-import { polymorphicRoute, formatter, Routes } from '@/lib'
+import { Heading, Link, List, Icon, Box, Group } from '@/Components'
+import { polymorphicRoute, formatter } from '@/lib'
 import { ArrowRightSquareIcon, CheckoutIcon } from '@/Components/Icons'
 import { CheckinButton } from '@/Components/Button'
 
 interface IShowPageAssociationsProps {
-	assignToable: Schema.Item|Schema.Accessory|Schema.Consumable|Schema.Component
+	assignToable: Schema.Item|Schema.Accessory|Schema.Consumable|Schema.Component|Schema.License
+	checkinRoute?: (assignToableId: string|number, assignmentId: string|number) => string
 }
 
-const ShowPageAssociations = ({ assignToable }: IShowPageAssociationsProps) => {
+const ShowPageAssociations = ({ assignToable, checkinRoute }: IShowPageAssociationsProps) => {
 	return (
 		<Box mt={ 16 }>
 			<Heading order={ 3 }>Active Assignments</Heading>
@@ -21,15 +22,19 @@ const ShowPageAssociations = ({ assignToable }: IShowPageAssociationsProps) => {
 				{ assignToable.assignments.map(assignment => (
 					assignment.active && (
 						<List.Item key={ assignment.id }>
-							<Flex>
+							<Group>
 								{ formatter.date.relative(assignment.created_at) }
 
 								<Box sx={ { padding: '0 8px' } }><ArrowRightSquareIcon /></Box>
 
-								<Link href={ polymorphicRoute(assignment.assign_toable_type, assignment.assign_toable_id) }>{ assignment.assign_toable.name }</Link>
+								{ assignment.qty && <span>x{ assignment.qty } to </span> }
 
-								<CheckinButton href={ Routes.checkinAccessory(assignToable.id, assignment.id) } />
-							</Flex>
+								<Link href={ polymorphicRoute(assignment.assign_toable_type, assignment.assign_toable_id) }>
+									{ assignment.assign_toable.name }
+								</Link>
+
+								{ checkinRoute && <CheckinButton href={ checkinRoute(assignToable.id, assignment.id) } /> }
+							</Group>
 						</List.Item>
 					)
 				)) }

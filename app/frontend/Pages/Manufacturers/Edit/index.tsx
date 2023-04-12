@@ -4,7 +4,7 @@ import ManufacturerForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IUpdateManufacturerProps{
-	manufacturer: Schema.Manufacturer
+	manufacturer: Schema.ManufacturersEdit
 }
 
 const New = ({ manufacturer, ...models }: IUpdateManufacturerProps) => {
@@ -13,7 +13,7 @@ const New = ({ manufacturer, ...models }: IUpdateManufacturerProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Manufacturers', href: Routes.manufacturers() },
-			{ title: manufacturer.name!, href: Routes.manufacturer(manufacturer) },
+			{ title: manufacturer.name!, href: Routes.manufacturer(manufacturer.slug) },
 			{ title: 'Edit Manufacturer' },
 		] }>
 			<Section>

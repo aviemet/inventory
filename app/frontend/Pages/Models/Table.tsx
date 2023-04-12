@@ -19,7 +19,7 @@ const ModelsTable = (props: ITableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (model: Schema.ModelWithCount) => (
+				<Table.RowIterator render={ (model: Schema.ModelsIndex) => (
 					<Table.Row key={ model.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.model(model.slug) }>{ model.name }</Link>
@@ -46,7 +46,7 @@ const ModelsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<EditButton href={ Routes.editModel(model.slug) } />
+							<EditButton href={ Routes.editModel(model.slug) } label={ model.name } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

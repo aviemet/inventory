@@ -4,7 +4,21 @@ import { Routes } from '@/lib'
 import CountsCard from './CountsCard'
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from '@/Components/Icons'
 
-const Counts = ({ counts }: { counts: Schema.CompanyCounts }) => {
+type TCompanyCounts = {
+	locations: number
+	items: number
+	accessories: number
+	consumables: number
+	components: number
+	departments: number
+	licenses: number
+	contracts: number
+	people: number
+	vendors: number
+	manufacturers: number
+}
+
+const Counts = ({ counts }: { counts: TCompanyCounts }) => {
 	return (
 		<SimpleGrid
 			cols={ 6 }

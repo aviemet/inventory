@@ -2,7 +2,7 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 
 interface IShowStatusLabelProps {
-	status_label: Schema.StatusLabel
+	status_label: Schema.StatusLabelsShow
 }
 
 const ShowStatusLabel = ({ status_label }: IShowStatusLabelProps) => {

@@ -19,7 +19,7 @@ module.exports = {
 		'sourceType': 'module',
 		'requireConfigFile': false,
 	},
-	'ignorePatterns': ['app/frontend/types/**/*', 'app/javascript/**/*'],
+	'ignorePatterns': ['app/javascript/**/*'],
 	'rules': {
 		'indent': 'off',
 		'@typescript-eslint/indent': ['error', 'tab', {
@@ -61,6 +61,13 @@ module.exports = {
 			'when': 'always',
 			'children': true,
 		}],
+		// 'react/jsx-space-before-closing': 2,
+		'react/jsx-tag-spacing': ['error', {
+			'closingSlash': 'never',
+			'beforeSelfClosing': 'always',
+			'afterOpening': 'never',
+			'beforeClosing': 'allow',
+		}],
 		'react/display-name': ['off'],
 		'react/prop-types': 0,
 		'eqeqeq': 'error',
@@ -77,6 +84,6 @@ module.exports = {
 				'catch': { 'after': false },
 			},
 		}],
-		'comma-dangle': [2, 'always-multiline'],
+		'comma-dangle': ['error', 'always-multiline'],
 	},
 }

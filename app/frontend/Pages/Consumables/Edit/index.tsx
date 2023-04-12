@@ -4,10 +4,12 @@ import ConsumableForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IUpdateConsumableProps{
-	consumable: Schema.Consumable
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
+	consumable: Schema.ConsumablesEdit
+	models: Schema.ModelsOptions[]
+	vendors: Schema.VendorsOptions[]
+	locations: Schema.LocationsOptions[]
+	manufacturers: Schema.ManufacturersOptions[]
+	categories: Schema.CategoriesOptions[]
 }
 
 const EditConsumable = ({ consumable, ...models }: IUpdateConsumableProps) => {
@@ -22,7 +24,12 @@ const EditConsumable = ({ consumable, ...models }: IUpdateConsumableProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<ConsumableForm to={ Routes.consumable(consumable) } method="patch" consumable={ consumable } { ...models } />
+				<ConsumableForm
+					to={ Routes.consumable(consumable) }
+					method="patch"
+					consumable={ consumable }
+					{ ...models }
+				/>
 			</Section>
 		</Page>
 	)

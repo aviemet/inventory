@@ -1,13 +1,13 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon, CheckinIcon, CheckoutIcon, TicketsIcon } from '@/Components/Icons'
 import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'
 
-interface IShowItemProps {
-	item: Schema.Item
+export interface IShowItemProps {
+	item: Schema.ItemsShow
 }
 
 const tabs = {
@@ -25,7 +25,7 @@ const ShowItem = ({ item }: IShowItemProps) => {
 			{ title: item.name! },
 		] }>
 			<Section>
-				<Flex position="apart">
+				<Group position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu position="bottom-end">
@@ -49,7 +49,7 @@ const ShowItem = ({ item }: IShowItemProps) => {
 							<Menu.Link href={ Routes.newTicket({ 'ticket.asset_id': item.id }) } icon={ <TicketsIcon /> }>Open New Ticket</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
-				</Flex>
+				</Group>
 
 				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 					<Tabs.List>
@@ -58,15 +58,15 @@ const ShowItem = ({ item }: IShowItemProps) => {
 						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
 					</Tabs.List>
 
-					<Tabs.Panel value="details">
+					<Tabs.Panel value={ tabs.details }>
 						<Details item={ item } />
 					</Tabs.Panel>
 
-					<Tabs.Panel value="history">
+					<Tabs.Panel value={ tabs.history }>
 						<ItemHistory item={ item } />
 					</Tabs.Panel>
 
-					<Tabs.Panel value="associations">
+					<Tabs.Panel value={ tabs.associations }>
 						<Associations item={ item } />
 					</Tabs.Panel>
 				</Tabs>

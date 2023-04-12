@@ -4,7 +4,7 @@ import VendorForm from '../Form'
 import { Routes } from '@/lib'
 
 interface INewVendorProps {
-	vendor: Schema.Vendor
+	vendor: Schema.VendorsFormData
 }
 
 const New = ({ ...data }: INewVendorProps) => {
