@@ -5,6 +5,7 @@ class Vendors::IndexSerializer < ApplicationSerializer
 
   attributes(
     :id,
+    :slug,
     :name,
     :url,
     :created_at,

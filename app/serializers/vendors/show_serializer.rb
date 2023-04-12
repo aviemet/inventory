@@ -5,34 +5,30 @@ class Vendors::ShowSerializer < ApplicationSerializer
 
   attributes(
     :id,
+    :slug,
     :name,
     :url,
     :created_at,
     :updated_at,
   )
 
-  attribute :items_count do
-    vendor.items.size
-  end
-
-  attribute :accessories_count do
-    vendor.accessories.size
-  end
-
-  attribute :consumables_count do
-    vendor.consumables.size
-  end
-
-  attribute :components_count do
-    vendor.components.size
-  end
-
-  attribute :licenses_count do
-    vendor.licenses.size
-  end
-
-  attribute :contracts_count do
-    vendor.contracts.size
+  type "{
+    items: number
+    accessories: number
+    consumables: number
+    components: number
+    licenses: number
+    contracts: number
+  }"
+  def counts
+    {
+      items: vendor.items.size,
+      accessories: vendor.accessories.size,
+      consumables: vendor.consumables.size,
+      components: vendor.components.size,
+      licenses: vendor.licenses.size,
+      contracts: vendor.contracts.size,
+    }
   end
 
   has_one :contact, serializer: ContactSerializer

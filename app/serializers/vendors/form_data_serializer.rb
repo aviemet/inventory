@@ -4,7 +4,6 @@ class Vendors::FormDataSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-    :id,
     :name,
     :url,
   )

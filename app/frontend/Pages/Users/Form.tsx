@@ -9,14 +9,18 @@ import { router } from '@inertiajs/react'
 import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
+type TUserFormData = {
+	user: Schema.UsersFormData
+}
+
 export interface IUserFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps) => boolean|void
-	user: Schema.User
-	departments: Schema.Department[]
-	people: Schema.User[]
-	locations: Schema.Location[]
+	onSubmit?: (object: UseFormProps<TUserFormData>) => boolean|void
+	user: Schema.UsersFormData
+	departments: Schema.DepartmentsOptions[]
+	people: Schema.PeopleOptions[]
+	locations: Schema.LocationsOptions[]
 }
 
 const UserForm = ({ to, method = 'post', onSubmit, user, departments, people, locations }: IUserFormProps) => {

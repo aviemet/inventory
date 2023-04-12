@@ -5,7 +5,7 @@ import { NewIcon } from '@/Components/Icons'
 import VendorsTable from '../Table'
 
 interface IVendorsIndexProps {
-	vendors: Schema.Vendor[]
+	vendors: Schema.VendorsIndex[]
 	pagination: Schema.Pagination
 }
 
