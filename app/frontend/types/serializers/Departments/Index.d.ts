@@ -8,14 +8,14 @@ import type { Item } from '../Item'
 import type { License } from '../License'
 import type { Person } from '../Person'
 
-declare export global {
-	declare namespace Schema {
-		export interface DepartmentsIndex {
-			id: number
-			accessories: Accessory[]
-			components: Component[]
-			consumables: Consumable[]
-			counts: {
+declare global {
+  namespace Schema {
+    interface DepartmentsIndex {
+      id: number
+      accessories: Accessory[]
+      components: Component[]
+      consumables: Consumable[]
+      counts: {
     items: number
     accessories: number
     consumables: number
@@ -24,16 +24,15 @@ declare export global {
     contracts: number
     people: number
   }
-			created_at: string | Date
-			items: Item[]
-			licenses: License[]
-			location_id?: number
-			name?: string
-			notes?: string
-			people: Person[]
-			slug: string
-			updated_at: string | Date
-		}
-
-	}
+      created_at: string | Date
+      items: Item[]
+      licenses: License[]
+      location_id?: number
+      name?: string
+      notes?: string
+      people: Person[]
+      slug: string
+      updated_at: string | Date
+    }
+  }
 }

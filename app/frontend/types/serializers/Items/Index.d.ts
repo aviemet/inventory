@@ -9,32 +9,31 @@ import type { Model } from '../Model'
 import type { StatusLabel } from '../StatusLabel'
 import type { Vendor } from '../Vendor'
 
-declare export global {
-	declare namespace Schema {
-		export interface ItemsIndex {
-			id: number
-			asset_tag?: string
-			assigned: boolean
-			category: Category
-			cost: number
-			cost_currency: string
-			created_at: string | Date
-			default_location_id?: number
-			department: Department
-			location: Location
-			manufacturer: Manufacturer
-			model: Model
-			model_id: number
-			name: string
-			notes?: string
-			purchased_at?: string | Date
-			requestable: boolean
-			serial?: string
-			status_label: StatusLabel
-			updated_at: string | Date
-			vendor: Vendor
-			vendor_id?: number
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface ItemsIndex {
+      id: number
+      asset_tag?: string
+      assigned: boolean
+      category: Category
+      cost: number
+      cost_currency: string
+      created_at: string | Date
+      default_location_id?: number
+      department: Department
+      location: Location
+      manufacturer: Manufacturer
+      model: Model
+      model_id: number
+      name: string
+      notes?: string
+      purchased_at?: string | Date
+      requestable: boolean
+      serial?: string
+      status_label: StatusLabel
+      updated_at: string | Date
+      vendor: Vendor
+      vendor_id?: number
+    }
+  }
 }

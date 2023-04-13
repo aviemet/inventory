@@ -4,17 +4,16 @@
 import type { Company } from '../Company'
 import type { Person } from '../Person'
 
-declare export global {
-	declare namespace Schema {
-		export interface UsersEdit {
-			id: number
-			active: boolean
-			active_company_id?: number
-			companies: Company[]
-			email: string
-			people: Person[]
-			person: Person
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface UsersEdit {
+      id: number
+      active: boolean
+      active_company_id?: number
+      companies: Company[]
+      email: string
+      people: Person[]
+      person: Person
+    }
+  }
 }

@@ -4,22 +4,21 @@
 import type { Category } from '../Category'
 import type { Manufacturer } from '../Manufacturer'
 
-declare export global {
-	declare namespace Schema {
-		export interface ModelsIndex {
-			id: number
-			category: Category
-			category_id: number
-			count: number
-			created_at: string | Date
-			manufacturer: Manufacturer
-			manufacturer_id: number
-			model_number?: string
-			name?: string
-			notes?: string
-			slug: string
-			updated_at: string | Date
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface ModelsIndex {
+      id: number
+      category: Category
+      category_id: number
+      count: number
+      created_at: string | Date
+      manufacturer: Manufacturer
+      manufacturer_id: number
+      model_number?: string
+      name?: string
+      notes?: string
+      slug: string
+      updated_at: string | Date
+    }
+  }
 }

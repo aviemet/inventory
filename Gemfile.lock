@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/aviemet/types_from_serializers
-  revision: 08e10cb21b11e704ffc0d17f3f4b6c62567a19dc
+  revision: 866ac4dad5e43bc89c1a8707f64aa4bcb95532e4
   specs:
     types_from_serializers (2.0.2)
       listen (~> 3.2)

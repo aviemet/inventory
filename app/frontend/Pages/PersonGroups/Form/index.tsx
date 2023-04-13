@@ -57,7 +57,6 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 
 	return (
 		<PermissionsFormContext value={ { isCompanyAdmin, columns: longestPermissionsArray() } }>
-			<Prism language="json">{ JSON.stringify(person_group, null, 2) }</Prism>
 			<Form
 				model="person_group"
 				data={ formData }

@@ -4,20 +4,19 @@
 import type { ContactsFormData } from '../Contacts/FormData'
 import type { UsersFormData } from '../Users/FormData'
 
-declare export global {
-	declare namespace Schema {
-		export interface PeopleFormData {
-			id?: number
-			active: boolean
-			contact: ContactsFormData
-			employee_number?: string
-			first_name?: string
-			job_title?: string
-			last_name?: string
-			manager_id?: number
-			middle_name?: string
-			user: UsersFormData
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface PeopleFormData {
+      id?: number
+      active: boolean
+      contact: ContactsFormData
+      employee_number?: string
+      first_name?: string
+      job_title?: string
+      last_name?: string
+      manager_id?: number
+      middle_name?: string
+      user: UsersFormData
+    }
+  }
 }

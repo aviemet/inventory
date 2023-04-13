@@ -9,37 +9,36 @@ import type { Manufacturer } from '../Manufacturer'
 import type { Purchase } from '../Purchase'
 import type { Vendor } from '../Vendor'
 
-declare export global {
-	declare namespace Schema {
-		export interface LicensesShow {
-			id: number
-			activities: Activity[]
-			assignments: Assignment[]
-			category: Category
-			category_id: number
-			cost: number
-			cost_currency: string
-			created_at: string | Date
-			department: Department
-			expires_at?: string | Date
-			key?: string
-			licenser_email?: string
-			licenser_name?: string
-			maintained: boolean
-			manufacturer: Manufacturer
-			manufacturer_id: number
-			name: string
-			notes?: string
-			purchase: Purchase
-			purchased_at?: string | Date
-			qty?: number
-			qty_available: number
-			reassignable: boolean
-			terminates_at?: string | Date
-			updated_at: string | Date
-			vendor: Vendor
-			vendor_id?: number
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface LicensesShow {
+      id: number
+      activities: Activity[]
+      assignments: Assignment[]
+      category: Category
+      category_id: number
+      cost: number
+      cost_currency: string
+      created_at: string | Date
+      department: Department
+      expires_at?: string | Date
+      key?: string
+      licenser_email?: string
+      licenser_name?: string
+      maintained: boolean
+      manufacturer: Manufacturer
+      manufacturer_id: number
+      name: string
+      notes?: string
+      purchase: Purchase
+      purchased_at?: string | Date
+      qty?: number
+      qty_available: number
+      reassignable: boolean
+      terminates_at?: string | Date
+      updated_at: string | Date
+      vendor: Vendor
+      vendor_id?: number
+    }
+  }
 }

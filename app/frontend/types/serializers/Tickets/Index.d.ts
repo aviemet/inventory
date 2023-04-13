@@ -6,24 +6,23 @@ import type { Person } from '../Person'
 import type { TicketMessage } from '../TicketMessage'
 import type { TicketStatus } from '../TicketStatus'
 
-declare export global {
-	declare namespace Schema {
-		export interface TicketsIndex {
-			id: number
-			asset: Asset
-			asset_id?: number
-			assignees: Person[]
-			created_at: string | Date
-			created_by: Person
-			description?: string
-			messages: TicketMessage[]
-			number: number
-			primary_contact: Person
-			primary_contact_id?: number
-			status: TicketStatus
-			subject: string
-			updated_at: string | Date
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface TicketsIndex {
+      id: number
+      asset: Asset
+      asset_id?: number
+      assignees: Person[]
+      created_at: string | Date
+      created_by: Person
+      description?: string
+      messages: TicketMessage[]
+      number: number
+      primary_contact: Person
+      primary_contact_id?: number
+      status: TicketStatus
+      subject: string
+      updated_at: string | Date
+    }
+  }
 }

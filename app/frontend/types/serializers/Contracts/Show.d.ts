@@ -6,24 +6,23 @@ import type { Category } from '../Category'
 import type { Department } from '../Department'
 import type { Vendor } from '../Vendor'
 
-declare export global {
-	declare namespace Schema {
-		export interface ContractsShow {
-			id?: number
-			activities: Activity
-			begins_at?: string | Date
-			category: Category
-			category_id: number
-			created_at: string | Date
-			department: Department
-			ends_at?: string | Date
-			name: string
-			notes?: string
-			number?: string
-			updated_at: string | Date
-			vendor: Vendor
-			vendor_id: number
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface ContractsShow {
+      id?: number
+      activities: Activity
+      begins_at?: string | Date
+      category: Category
+      category_id: number
+      created_at: string | Date
+      department: Department
+      ends_at?: string | Date
+      name: string
+      notes?: string
+      number?: string
+      updated_at: string | Date
+      vendor: Vendor
+      vendor_id: number
+    }
+  }
 }
