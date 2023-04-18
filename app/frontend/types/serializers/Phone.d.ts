@@ -5,21 +5,20 @@ import type { Activity } from './Activity'
 import type { Category } from './Category'
 import type { Contact } from './Contact'
 
-declare export global {
-	declare namespace Schema {
-		export interface Phone {
-			id?: number
-			activities: Activity[]
-			category: Category
-			category_id: number
-			contact: Contact
-			contact_id: number
-			created_at: string | Date
-			extension?: string
-			notes?: string
-			number: string
-			updated_at: string | Date
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface Phone {
+      id?: number
+      activities: Activity[]
+      category: Category
+      category_id: number
+      contact: Contact
+      contact_id: number
+      created_at: string | Date
+      extension?: string
+      notes?: string
+      number: string
+      updated_at: string | Date
+    }
+  }
 }

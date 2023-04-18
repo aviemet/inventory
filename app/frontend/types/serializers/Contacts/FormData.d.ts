@@ -6,23 +6,22 @@ import type { EmailsFormData } from '../Emails/FormData'
 import type { PhonesFormData } from '../Phones/FormData'
 import type { WebsitesFormData } from '../Websites/FormData'
 
-declare export global {
-	declare namespace Schema {
-		export interface ContactsFormData {
-			id?: number
-			addresses: AddressesFormData[]
-			contactable_id?: number
-			contactable_type?: string
-			created_at: string | Date
-			emails: EmailsFormData[]
-			notes?: string
-			phones: PhonesFormData[]
-			primary_address_id?: number
-			primary_email_id?: number
-			primary_phone_id?: number
-			updated_at: string | Date
-			websites: WebsitesFormData[]
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface ContactsFormData {
+      id?: number
+      addresses: AddressesFormData[]
+      contactable_id?: number
+      contactable_type?: string
+      created_at: string | Date
+      emails: EmailsFormData[]
+      notes?: string
+      phones: PhonesFormData[]
+      primary_address_id?: number
+      primary_email_id?: number
+      primary_phone_id?: number
+      updated_at: string | Date
+      websites: WebsitesFormData[]
+    }
+  }
 }

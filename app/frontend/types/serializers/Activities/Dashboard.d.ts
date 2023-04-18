@@ -4,24 +4,23 @@
 import type { User } from '../User'
 import type { Person } from '../Person'
 
-declare export global {
-	declare namespace Schema {
-		export interface ActivitiesDashboard {
-			id: unknown
-			created_at: unknown
-			key: unknown
-			owner: User
-			owner_id: unknown
-			owner_type: unknown
-			parameters: unknown
-			person: Person
-			recipient_id: unknown
-			recipient_type: unknown
-			route: string
-			trackable_id: unknown
-			trackable_type: unknown
-			updated_at: unknown
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface ActivitiesDashboard {
+      id: unknown
+      created_at: unknown
+      key: unknown
+      owner: User
+      owner_id: unknown
+      owner_type: unknown
+      parameters: unknown
+      person: Person
+      recipient_id: unknown
+      recipient_type: unknown
+      route: string
+      trackable_id: unknown
+      trackable_type: unknown
+      updated_at: unknown
+    }
+  }
 }

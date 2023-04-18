@@ -6,28 +6,27 @@ import type { Manufacturer } from '../Manufacturer'
 import type { Model } from '../Model'
 import type { Vendor } from '../Vendor'
 
-declare export global {
-	declare namespace Schema {
-		export interface ConsumablesIndex {
-			id: number
-			category: Category
-			cost: number
-			cost_currency: string
-			created_at: string | Date
-			default_location_id?: number
-			manufacturer: Manufacturer
-			min_qty?: number
-			model: Model
-			model_id: number
-			name: string
-			notes?: string
-			qty?: number
-			qty_available: number
-			requestable: boolean
-			updated_at: string | Date
-			vendor: Vendor
-			vendor_id?: number
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface ConsumablesIndex {
+      id: number
+      category: Category
+      cost: number
+      cost_currency: string
+      created_at: string | Date
+      default_location_id?: number
+      manufacturer: Manufacturer
+      min_qty?: number
+      model: Model
+      model_id: number
+      name: string
+      notes?: string
+      qty?: number
+      qty_available: number
+      requestable: boolean
+      updated_at: string | Date
+      vendor: Vendor
+      vendor_id?: number
+    }
+  }
 }

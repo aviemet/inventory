@@ -6,22 +6,21 @@ import type { Contact } from '../Contact'
 import type { Department } from '../Department'
 import type { Location } from '../Location'
 
-declare export global {
-	declare namespace Schema {
-		export interface LocationsShow {
-			id: number
-			activities: Activity[]
-			contact: Contact
-			created_at: string | Date
-			currency?: string
-			department: Department
-			location: Location
-			name: string
-			parent: Location
-			parent_id?: number
-			slug: string
-			updated_at: string | Date
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface LocationsShow {
+      id: number
+      activities: Activity[]
+      contact: Contact
+      created_at: string | Date
+      currency?: string
+      department: Department
+      location: Location
+      name: string
+      parent: Location
+      parent_id?: number
+      slug: string
+      updated_at: string | Date
+    }
+  }
 }

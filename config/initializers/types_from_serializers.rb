@@ -7,7 +7,6 @@ if Rails.env.development?
       cidr: :string,
     )
     config.namespace = "Schema"
-    config.indentation = :tabs
     config.transform_keys = ->(key) { key }
   end
 end

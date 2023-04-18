@@ -5,19 +5,18 @@ import type { Person } from '../Person'
 import type { TicketAssignmentsEdit } from '../TicketAssignments/Edit'
 import type { TicketStatusesFormData } from '../TicketStatuses/FormData'
 
-declare export global {
-	declare namespace Schema {
-		export interface TicketsEdit {
-			id: number
-			asset_id?: number
-			assignees: Person[]
-			assignments: TicketAssignmentsEdit[]
-			description?: string
-			number: number
-			primary_contact_id?: number
-			status: TicketStatusesFormData
-			subject: string
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface TicketsEdit {
+      id: number
+      asset_id?: number
+      assignees: Person[]
+      assignments: TicketAssignmentsEdit[]
+      description?: string
+      number: number
+      primary_contact_id?: number
+      status: TicketStatusesFormData
+      subject: string
+    }
+  }
 }
