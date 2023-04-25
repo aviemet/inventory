@@ -13,7 +13,7 @@ class Company < ApplicationRecord
     using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   slug :name
@@ -45,6 +45,7 @@ class Company < ApplicationRecord
     categories: "Category",
     smtps: "Smtp",
     person_groups: "PersonGroup",
+    documentations: "Documentation",
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end

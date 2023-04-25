@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_24_190742) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -625,7 +625,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_24_190742) do
   add_foreign_key "contracts", "vendors"
   add_foreign_key "departments", "locations"
   add_foreign_key "departments", "people", column: "manager_id"
-  add_foreign_key "documentations", "users", column: "created_by_id"
+  add_foreign_key "documentations", "people", column: "created_by_id"
   add_foreign_key "emails", "categories"
   add_foreign_key "emails", "contacts"
   add_foreign_key "fieldset_associations", "fieldsets"

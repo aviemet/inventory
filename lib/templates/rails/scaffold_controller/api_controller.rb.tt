@@ -1,5 +1,5 @@
 <% module_namespacing do -%>
-class Api::<%= class_name %>Controller < ApiController
+class Api::<%= controller_class_name %>Controller < ApiController
   expose :<%= plural_table_name %>
   expose :<%= singular_table_name %>
 

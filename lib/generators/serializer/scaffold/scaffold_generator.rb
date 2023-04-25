@@ -3,7 +3,7 @@
 require_relative "../../tsx"
 require "rails/generators/resource_helpers"
 
-module Tsx
+module Serializer
   module Generators
     class ScaffoldGenerator < Rails::Generators::NamedBase
       include Rails::Generators::ResourceHelpers

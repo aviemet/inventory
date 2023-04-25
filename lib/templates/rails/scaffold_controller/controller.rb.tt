@@ -1,5 +1,5 @@
 <% module_namespacing do -%>
-class <%= class_name %>Controller < ApplicationController
+class <%= controller_class_name %>Controller < ApplicationController
   include Searchable
 
   expose :<%= plural_table_name %>, -> { search(@active_company.<%= plural_table_name %>.includes_associated, sortable_fields) }
