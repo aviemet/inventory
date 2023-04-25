@@ -28,6 +28,7 @@ import {
 	ModelsIcon,
 	CategoriesIcon,
 	UserGroupIcon,
+	DocumentationIcon,
 } from '@/Components/Icons'
 
 import IconProvider from '@/Layouts/Providers/IconProvider'
@@ -88,6 +89,7 @@ const Sidebar = () => {
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.tickets() } icon={ <TicketsIcon /> }>Tickets</MenuLink></li>
+						<li><MenuLink href={ Routes.documentationIndex() } icon={ <DocumentationIcon /> }>Documentation</MenuLink></li>
 						<li>
 							<MenuLink href={ Routes.vendors() } icon={ <VendorsIcon /> }>Vendors</MenuLink>
 							<ul>

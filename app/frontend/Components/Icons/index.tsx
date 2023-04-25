@@ -99,3 +99,7 @@ export {
 	// HiOutlineClock as ClockIcon,
 	HiOutlineUserGroup as UserGroupIcon,
 } from 'react-icons/hi'
+
+export {
+	CgFileDocument as DocumentationIcon,
+} from 'react-icons/cg'
