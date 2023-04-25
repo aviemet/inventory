@@ -4,6 +4,7 @@ class SerializerGenerator < Rails::Generators::NamedBase
   class_option :actions, type: :array, default: []
 
   def create_serializer
-    template 'serializer.rb', "app/serializers/#{file_path}_serializer.rb"
+    pry
+    # template 'serializer.rb', "app/serializers/#{file_path}_serializer.rb"
   end
 end

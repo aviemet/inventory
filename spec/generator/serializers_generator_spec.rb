@@ -2,7 +2,7 @@ require "rails_helper"
 require "generators/serailizer/serailizer_generator"
 
 RSpec.describe "Serializer", type: :generator do
-  destination Rails.root.join("tmp")
+  destination Rails.root.join('tmp', 'generators')
   arguments %(SerializerTest index)
 
   before do

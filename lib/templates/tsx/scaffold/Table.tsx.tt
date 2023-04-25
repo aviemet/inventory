@@ -1,12 +1,9 @@
 import React from 'react'
 import { Table, Link } from '@/Components'
 import { Routes } from '@/lib'
+import { type ITableProps } from '@/Components/Table/Table'
 
-interface <%= singular_table_name.camelize %>TableProps {
-	<%= plural_table_name %>: Schema.<%= singular_table_name.camelize %>
-}
-
-const <%= singular_table_name.camelize %>Table = ({ <%= plural_table_name %> }: <%= singular_table_name.camelize %>TableProps) => {
+const <%= singular_table_name.camelize %>Table = (props: ITableProps) => {
 	return (
 		<Table>
 			<Table.Head>
@@ -16,10 +13,10 @@ const <%= singular_table_name.camelize %>Table = ({ <%= plural_table_name %> }: 
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				<Table.RowIterator render={ (<%= singular_table_name %>: Schema.<%= singular_table_name.camelize %>) => (
+				<Table.RowIterator render={ (<%= singular_table_name %>: Schema.<%= singular_table_name.camelize %>Index) => (
 					<Table.Row key={ <%= plural_table_name %>.id }><% attributes.each do |column| %>
 						<% unless column.type == :references %><Table.Cell>
-							<Link href={ Routes.<%= singular_table_name.camelize(:lower) %>(<%= singular_table_name %>) }>{ <%= singular_table_name %>.<%= column.name %> }</Link>
+							<Link href={ Routes.<%= singular_table_name.camelize %>(<%= singular_table_name %><%= attributes.slug ? ".slug" : ".id" %>) }>{ <%= singular_table_name %>.<%= column.name %> }</Link>
 						</Table.Cell><% end; end %>
 						<Table.Cell>
 							<Link href={ Routes.edit<%= singular_table_name.camelize %>(<%= singular_table_name %>) }>Edit</Link>
