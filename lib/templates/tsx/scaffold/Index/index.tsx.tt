@@ -9,7 +9,7 @@ interface I<%= singular_table_name.camelize %>IndexProps {
 	pagination: Schema.Pagination
 }
 
-const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %> }: I<%= singular_table_name.camelize %>IndexProps) => {
+const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagination }: I<%= singular_table_name.camelize %>IndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="<%= plural_table_name.camelize %>"

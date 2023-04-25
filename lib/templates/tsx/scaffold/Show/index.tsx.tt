@@ -3,11 +3,11 @@ import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface IShow<%= singular_table_name.camelize %>Props {
-	<%= singular_table_name %>: Schema.<%= singular_table_name.camelize %>Show
+	<%= singular_table_name %>: Schema.<%= plural_table_name.camelize %>Show
 }
 
-const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }: Show<%= singular_table_name.camelize %>Props) => {
-	const title = <%= attributes.name ? "#{singular_table_name}.name || " : "" %> '<%= singular_table_name.camelize %>'
+const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }: IShow<%= singular_table_name.camelize %>Props) => {
+	const title = <%= attributes.include?(:name) ? "#{singular_table_name}.name || " : "" %> '<%= singular_table_name.camelize %>'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
@@ -21,7 +21,7 @@ const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }:
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.edit<%= singular_table_name.camelize %>(<%= singular_table_name %><%= attributes.slug ? ".slug" : ".id" %>) }>
+							<Menu.Link href={ Routes.edit<%= singular_table_name.camelize %>(<%= singular_table_name %><%= attributes.include?(:slug) ? ".slug" : ".id" %>) }>
 								Edit <%= singular_table_name.camelize %>
 							</Menu.Link>
 						</Menu.Dropdown>
