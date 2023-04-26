@@ -5,6 +5,7 @@ import DocumentationForm from '../Form'
 
 interface INewDocumentationProps {
 	documentation: Schema.DocumentationsFormData
+	categories: Schema.CategoriesOptions[]
 }
 
 const NewDocumentation = ({ ...data }: INewDocumentationProps) => {

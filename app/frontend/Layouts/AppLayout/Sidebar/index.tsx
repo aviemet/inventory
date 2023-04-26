@@ -89,7 +89,7 @@ const Sidebar = () => {
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.tickets() } icon={ <TicketsIcon /> }>Tickets</MenuLink></li>
-						<li><MenuLink href={ Routes.documentationIndex() } icon={ <DocumentationIcon /> }>Documentation</MenuLink></li>
+						<li><MenuLink href={ Routes.documentations() } icon={ <DocumentationIcon /> }>Documentation</MenuLink></li>
 						<li>
 							<MenuLink href={ Routes.vendors() } icon={ <VendorsIcon /> }>Vendors</MenuLink>
 							<ul>

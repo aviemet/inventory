@@ -169,9 +169,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
     t.string "slug"
     t.string "title"
     t.text "body"
+    t.bigint "category_id", null: false
     t.bigint "created_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_documentations_on_category_id"
     t.index ["created_by_id"], name: "index_documentations_on_created_by_id"
   end
 
@@ -625,6 +627,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
   add_foreign_key "contracts", "vendors"
   add_foreign_key "departments", "locations"
   add_foreign_key "departments", "people", column: "manager_id"
+  add_foreign_key "documentations", "categories"
   add_foreign_key "documentations", "people", column: "created_by_id"
   add_foreign_key "emails", "categories"
   add_foreign_key "emails", "contacts"

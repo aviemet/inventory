@@ -1300,20 +1300,20 @@ export const destroyUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"logou
 
 /**
  * Generates rails route to
- * /documentation/:id(.:format)
+ * /documentations/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const documentation = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const documentation = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /documentation(.:format)
+ * /documentations(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const documentationIndex = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[1,[2,[8,"."],[3,"format"]]]]]);
+export const documentations = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1398,12 +1398,12 @@ export const editDepartment = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"
 
 /**
  * Generates rails route to
- * /documentation/:id/edit(.:format)
+ * /documentations/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editDocumentation = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editDocumentation = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1938,11 +1938,11 @@ export const newDepartment = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"department
 
 /**
  * Generates rails route to
- * /documentation/new(.:format)
+ * /documentations/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newDocumentation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const newDocumentation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

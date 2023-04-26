@@ -11,8 +11,7 @@ const DocumentationTable = (props: ITableProps) => {
 				<Table.Row>
 					<Table.Cell sort="slug">Slug</Table.Cell>
 					<Table.Cell sort="title">Title</Table.Cell>
-					<Table.Cell sort="body">Body</Table.Cell>
-					
+
 					<Table.Cell className="actions">Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
@@ -25,12 +24,9 @@ const DocumentationTable = (props: ITableProps) => {
 						<Table.Cell>
 							<Link href={ Routes.documentation(documentation.id) }>{ documentation.title }</Link>
 						</Table.Cell>
+
 						<Table.Cell>
-							<Link href={ Routes.documentation(documentation.id) }>{ documentation.body }</Link>
-						</Table.Cell>
-						
-						<Table.Cell>
-							<EditButton href={ Routes.editDocumentation(documentation.id) } label={ documentation.id } />
+							<EditButton href={ Routes.editDocumentation(documentation.id) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

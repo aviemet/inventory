@@ -15,20 +15,17 @@ module Serializer
       end
 
       def copy_view_files
-        available_views.each do |view|
-          filename = "#{view}.tsx"
-          template filename, File.join(views_path, controller_file_path.camelize, filename)
-        end
+        ap "SERIALIZERS"
       end
 
       private
 
       def views_path
-        "app/frontend/Pages"
+        "app/serializers"
       end
 
       def available_views
-        %w(Index/index Edit/index Show/index New/index Form Table)
+        ""
       end
     end
   end

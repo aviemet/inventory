@@ -21,7 +21,7 @@ const <%= singular_table_name.camelize %>Form = ({ method = 'post', <%= singular
 			method={ method }
 			{ ...props }
 		><% attributes.each do |column| %><% unless column.type == :references %>
-			<TextInput sort="<%= column.name %>" label="<%= column.name.capitalize %>" /><% end %><% end %>
+			<TextInput name="<%= column.name %>" label="<%= column.name.capitalize %>" /><% end %><% end %>
 			<Submit>{ <%= singular_table_name %>.id ? 'Update' : 'Create' } <%= singular_table_name.camelize %></Submit>
 		</Form>
 	)

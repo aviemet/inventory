@@ -1,4 +1,4 @@
-class DocumentationController < ApplicationController
+class DocumentationsController < ApplicationController
   include Searchable
 
   expose :documentations, -> { search(@active_company.documentations.includes_associated, sortable_fields) }
@@ -24,7 +24,8 @@ class DocumentationController < ApplicationController
   def new
     authorize Documentation.new
     render inertia: "Documentation/New", props: {
-      documentation: Documentation.new.render(view: :form_data)
+      documentation: Documentation.new.render(view: :form_data),
+      categories: -> { @active_company.categories.includes_associated.render },
     }
   end
 
