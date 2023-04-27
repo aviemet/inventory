@@ -3,7 +3,11 @@ class <%= controller_class_name %>Controller < ApplicationController
   include Searchable
 
   expose :<%= plural_table_name %>, -> { search(@active_company.<%= plural_table_name %>.includes_associated, sortable_fields) }
+  <% if attributes.include?(:slug) -%>
+  expose :<%= singular_table_name %>, id: ->{ params[:slug] }, scope: ->{ @active_company.<%= plural_table_name %>.includes_associated }, find_by: :slug
+  <% else -%>
   expose :<%= singular_table_name %>, scope: ->{ @active_company.<%= plural_table_name %> }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  <% end -%>
 
   # GET <%= route_url %>
   def index
@@ -41,9 +45,9 @@ class <%= controller_class_name %>Controller < ApplicationController
   def create
     authorize <%= orm_class.build(class_name) %>
     if <%= orm_instance.save %>
-      redirect_to <%= redirect_resource_name %>, notice: <%= %("#{human_name} was successfully created.") %>
+      redirect_to <%= singular_table_name %>, notice: <%= %("#{human_name} was successfully created.") %>
     else
-      redirect_to new_<%= singular_table_name %>_path, inertia: { errors: <%= class_name %>.errors }
+      redirect_to new_<%= singular_table_name %>_path, inertia: { errors: <%= singular_table_name %>.errors }
     end
   end
 
@@ -51,9 +55,9 @@ class <%= controller_class_name %>Controller < ApplicationController
   def update
     authorize <%= singular_table_name %>
     if <%= orm_instance.update("#{singular_table_name}_params") %>
-      redirect_to <%= redirect_resource_name %>, notice: <%= %("#{human_name} was successfully updated.") %>
+      redirect_to <%= singular_table_name %>, notice: <%= %("#{human_name} was successfully updated.") %>
     else
-      redirect_to edit_<%= singular_table_name %>_path, inertia: { errors: <%= class_name %>.errors }
+      redirect_to edit_<%= singular_table_name %>_path, inertia: { errors: <%= singular_table_name %>.errors }
     end
   end
 

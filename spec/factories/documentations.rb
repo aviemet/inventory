@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :documentation do
-    slug { "MyString" }
-    title { "MyString" }
-    body { "MyText" }
-    created_by { nil }
+    title { Faker::Book.title }
+    body { Faker::Lorem.paragraph }
+
+    company
+    category { association :category, company: company }
   end
 end

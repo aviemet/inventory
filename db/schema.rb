@@ -166,8 +166,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
   end
 
   create_table "documentations", force: :cascade do |t|
-    t.string "slug"
     t.string "title"
+    t.string "slug", null: false
     t.text "body"
     t.bigint "category_id", null: false
     t.bigint "created_by_id"
@@ -175,6 +175,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_documentations_on_category_id"
     t.index ["created_by_id"], name: "index_documentations_on_created_by_id"
+    t.index ["slug"], name: "index_documentations_on_slug", unique: true
   end
 
   create_table "emails", force: :cascade do |t|

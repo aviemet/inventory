@@ -2,6 +2,7 @@ class Model < ApplicationRecord
   include Ownable
   include Fieldable
   include PgSearch::Model
+  include Categorizable
 
   pg_search_scope(
     :search,
@@ -11,7 +12,7 @@ class Model < ApplicationRecord
     }, using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   slug :name
@@ -20,7 +21,6 @@ class Model < ApplicationRecord
   resourcify
 
   belongs_to :manufacturer
-  belongs_to :category
   has_many :items, -> { includes_associated }
   has_many :accessories, -> { includes_associated }
   has_many :consumables, -> { includes_associated }
@@ -30,8 +30,6 @@ class Model < ApplicationRecord
   validates :name, uniqueness: { scope: :model_number, message: "Model already exists" }
 
   scope :includes_associated, -> { includes([:manufacturer, :category, :items, :accessories, :consumables, :components]) }
-
-  scope :find_by_category, ->(type){ joins(:category).where("category.categorizable_type" => type.to_s.singularize.camelize) }
 
   def types
     self.category.type.where(model: self)

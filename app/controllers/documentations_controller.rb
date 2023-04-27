@@ -2,7 +2,7 @@ class DocumentationsController < ApplicationController
   include Searchable
 
   expose :documentations, -> { search(@active_company.documentations.includes_associated, sortable_fields) }
-  expose :documentation, scope: ->{ @active_company.documentations }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :documentation, id: ->{ params[:slug] }, scope: ->{ @active_company.documentations.includes_associated }, find_by: :slug
 
   # GET /documentations
   def index
@@ -12,7 +12,7 @@ class DocumentationsController < ApplicationController
     }
   end
 
-  # GET /documentations/:id
+  # GET /documentations/:slug
   def show
     authorize documentation
     render inertia: "Documentation/Show", props: {
@@ -22,14 +22,14 @@ class DocumentationsController < ApplicationController
 
   # GET /documentations/new
   def new
-    authorize Documentation.new
+    authorize Documentation
     render inertia: "Documentation/New", props: {
       documentation: Documentation.new.render(view: :form_data),
       categories: -> { @active_company.categories.includes_associated.render },
     }
   end
 
-  # GET /documentations/:id/edit
+  # GET /documentations/:slug/edit
   def edit
     authorize documentation
     render inertia: "Documentation/Edit", props: {
@@ -39,25 +39,29 @@ class DocumentationsController < ApplicationController
 
   # POST /documentations
   def create
-    authorize Documentation.new
+    authorize Documentation
+
+    documentation.created_by = current_user.person
+    documentation.company = @active_company
+
     if documentation.save
-      redirect_to @documentation, notice: "Documentation was successfully created."
+      redirect_to documentation, notice: "Documentation was successfully created."
     else
-      redirect_to new_documentation_path, inertia: { errors: Documentation.errors }
+      redirect_to new_documentation_path, inertia: { errors: documentation.errors }
     end
   end
 
-  # PATCH/PUT /documentations/:id
+  # PATCH/PUT /documentations/:slug
   def update
     authorize documentation
     if documentation.update(documentation_params)
-      redirect_to @documentation, notice: "Documentation was successfully updated."
+      redirect_to documentation, notice: "Documentation was successfully updated."
     else
-      redirect_to edit_documentation_path, inertia: { errors: Documentation.errors }
+      redirect_to edit_documentation_path, inertia: { errors: documentation.errors }
     end
   end
 
-  # DELETE /documentations/:id
+  # DELETE /documentations/:slug
   def destroy
     authorize documentation
     documentation.destroy
@@ -67,10 +71,10 @@ class DocumentationsController < ApplicationController
   private
 
   def sortable_fields
-    %w(slug title body created_by_id).freeze
+    %w(title body created_by_id).freeze
   end
 
   def documentation_params
-    params.require(:documentation).permit(:slug, :title, :body, :created_by_id)
+    params.require(:documentation).permit(:slug, :title, :body, :created_by_id, :category_id)
   end
 end

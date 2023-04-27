@@ -140,7 +140,7 @@ Rails.application.routes.draw do
     resources :ticket_messages, path: :messages, as: :messages, only: [:create, :update, :destroy]
   end
 
-  resources :documentations
+  resources :documentations, param: :slug
 
   draw(:api)
 end

@@ -18,7 +18,7 @@ class Assignment < ApplicationRecord
 
   belongs_to :assignable, polymorphic: true
   belongs_to :assign_toable, polymorphic: true
-  belongs_to :created_by, class_name: "User", required: false
+  belongs_to :created_by, class_name: "Person", required: false
   belongs_to :location
 
   validates :assignable_type, inclusion: { in: self.assignable_types }
