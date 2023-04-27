@@ -1114,6 +1114,28 @@ export const destroyUserSession: ((
 
 /**
  * Generates rails route to
+ * /documentations/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const documentation: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /documentations(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const documentations: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /accessories/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1217,6 +1239,18 @@ export const editContract: ((
  */
 export const editDepartment: ((
   slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /documentations/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editDocumentation: ((
+  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -1913,6 +1947,16 @@ export const newContract: ((
  * @returns {string} route path
  */
 export const newDepartment: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /documentations/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newDocumentation: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

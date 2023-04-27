@@ -4,10 +4,11 @@ require_relative '../support/devise'
 RSpec.describe "/licenses", type: :request do
   def valid_attributes
     {
-      license: attributes_for(:license,
-                              vendor_id: create(:vendor).id,
-                              manufacturer_id: create(:manufacturer).id,
-                              category_id: create(:category).id,),
+      license: attributes_for(:license, {
+        vendor_id: create(:vendor).id,
+        manufacturer_id: create(:manufacturer).id,
+        category_id: create(:category).id,
+      },),
     }
   end
 

@@ -1300,6 +1300,23 @@ export const destroyUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"logou
 
 /**
  * Generates rails route to
+ * /documentations/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const documentation = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /documentations(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const documentations = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
  * /accessories/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -1378,6 +1395,15 @@ export const editContract = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2
  * @returns {string} route path
  */
 export const editDepartment = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /documentations/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editDocumentation = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1909,6 +1935,14 @@ export const newContract = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"contracts"],
  * @returns {string} route path
  */
 export const newDepartment = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /documentations/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newDocumentation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

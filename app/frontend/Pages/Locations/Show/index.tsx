@@ -6,13 +6,13 @@ interface IShowLocationProps {
 	location: Schema.LocationsShow
 }
 
-const Show = ({ location }: IShowLocationProps) => {
-	const title = location.name
+const ShowLocation = ({ location }: IShowLocationProps) => {
+	const title = location.name || 'Location'
 
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Locations', href: Routes.locations() },
-			{ title: location.name! },
+			{ title },
 		] }>
 			<Section>
 				<Group position="apart">
@@ -33,4 +33,4 @@ const Show = ({ location }: IShowLocationProps) => {
 	)
 }
 
-export default Show
+export default ShowLocation

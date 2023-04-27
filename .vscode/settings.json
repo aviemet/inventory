@@ -10,5 +10,6 @@
 	"gitHistory.showEditorTitleMenuBarIcons": false,
 	"gitHistory.showFileHistorySplit": false,
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"easynpm.packageManager": "yarn"
+	"easynpm.packageManager": "yarn",
+	"diffEditor.codeLens": true
 }

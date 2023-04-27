@@ -5,12 +5,14 @@ class Department < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:name, :notes], associated_against: {
+    against: [:name, :notes],
+    associated_against: {
       location: [:name]
-    }, using: {
+    },
+    using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   slug :name

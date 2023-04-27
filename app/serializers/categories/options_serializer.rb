@@ -4,5 +4,6 @@ class Categories::OptionsSerializer < ApplicationSerializer
   attributes(
     :id,
     :name,
+    :category_with_type,
   )
 end

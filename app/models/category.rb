@@ -9,7 +9,7 @@ class Category < ApplicationRecord
     using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   slug :slug_from_category_type
@@ -17,7 +17,7 @@ class Category < ApplicationRecord
   tracked
   resourcify
 
-  @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Email License Location Model Order Person Phone Ticket User Vendor Website)
+  @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Documentation Email License Location Model Order Person Phone Ticket User Vendor Website)
 
   validates_inclusion_of :categorizable_type, in: @categorizable_types, allow_nil: false
   validates_presence_of :categorizable_type

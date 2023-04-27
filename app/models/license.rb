@@ -4,6 +4,7 @@ class License < ApplicationRecord
   include Purchasable
   include Fieldable
   include PgSearch::Model
+  include Categorizable
 
   pg_search_scope(
     :search,
@@ -14,7 +15,7 @@ class License < ApplicationRecord
     }, using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   tracked
@@ -22,7 +23,6 @@ class License < ApplicationRecord
 
   monetize :cost_cents
 
-  belongs_to :category
   belongs_to :vendor
   belongs_to :manufacturer
 
@@ -31,9 +31,4 @@ class License < ApplicationRecord
   alias_attribute :seats, :qty
 
   scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer]) }
-
-  def self.find_by_category(category)
-    self.where(category:)
-  end
-
 end
