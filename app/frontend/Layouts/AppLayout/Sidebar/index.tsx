@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { useLayoutStore } from '@/Layouts/Providers'
-import { Group, Navbar, Text, ThemeIcon, useMantineTheme } from '@mantine/core'
+import { Divider, Group, Navbar, Text, ThemeIcon, useMantineTheme } from '@mantine/core'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
@@ -70,6 +70,7 @@ const Sidebar = () => {
 				<Navbar.Section grow onClick={ handleNavClick } className="links">
 					<ul>
 						<li><MenuLink href={ Routes.dashboard() } icon={ <DashboardIcon /> }>Dashboard</MenuLink></li>
+						<Divider />
 						<li>
 							<MenuLink href={ Routes.assets() } icon={ <AssetsIcon /> }>Inventory</MenuLink>
 							<ul>
@@ -81,22 +82,23 @@ const Sidebar = () => {
 						</li>
 						<li><MenuLink href={ Routes.licenses() } icon={ <LicensesIcon /> }>Licenses</MenuLink></li>
 						<li><MenuLink href={ Routes.networks() } icon={ <NetworksIcon /> }>Networks</MenuLink></li>
+						<li><MenuLink href={ Routes.orders() } icon={ <PurchasesIcon /> }>Purchasing</MenuLink></li>
+						<Divider />
 						<li>
 							<MenuLink href={ Routes.people() } icon={ <UsersIcon /> }>People</MenuLink>
 							<ul>
-								{ /* <li><MenuLink href={ Routes.users() } icon={ <PeopleIcon /> }>Users</MenuLink></li> */ }
 								<li><MenuLink href={ Routes.personGroups() } icon={ <UserGroupIcon /> }>Groups</MenuLink></li>
 							</ul>
 						</li>
-						<li><MenuLink href={ Routes.tickets() } icon={ <TicketsIcon /> }>Tickets</MenuLink></li>
-						<li><MenuLink href={ Routes.documentations() } icon={ <DocumentationIcon /> }>Documentation</MenuLink></li>
 						<li>
 							<MenuLink href={ Routes.vendors() } icon={ <VendorsIcon /> }>Vendors</MenuLink>
 							<ul>
 								<li><MenuLink href={ Routes.contracts() } icon={ <ContractsIcon /> }>Contracts</MenuLink></li>
 							</ul>
 						</li>
-						<li><MenuLink href={ Routes.orders() } icon={ <PurchasesIcon /> }>Purchasing</MenuLink></li>
+						<Divider />
+						<li><MenuLink href={ Routes.tickets() } icon={ <TicketsIcon /> }>Tickets</MenuLink></li>
+						<li><MenuLink href={ Routes.documentations() } icon={ <DocumentationIcon /> }>Documentation</MenuLink></li>
 						<li><MenuLink href={ Routes.reports() } icon={ <ReportsIcon /> }>Reports</MenuLink></li>
 					</ul>
 				</Navbar.Section>
