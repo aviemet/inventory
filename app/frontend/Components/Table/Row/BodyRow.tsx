@@ -20,14 +20,21 @@ const RowInContext = forwardRef<HTMLTableRowElement, IRowInContextProps>((
 	const { tableState: { model, columns } } = useTableContext()
 
 	return (
-		<Box component="tr" { ...props } ref={ ref }>
+		<Box component="tr" role="row" { ...props } ref={ ref }>
 			{ selectable && <RowCheckbox name={ name || '' } selected={ selected } /> }
-			{ children && children.filter((_, i) => {
-				return !(
-					columns[i]?.hideable && true &&
+			{ React.Children.map(children, (cell, i) => {
+				if((
+					columns[i]?.hideable &&
 					model &&
 					table_preferences?.[model]?.hide?.[columns[i].hideable]
-				)
+				)) {
+					return <React.Fragment key={ columns[i]?.label } />
+				}
+				return React.cloneElement(cell, {
+					key: columns[i]?.label,
+					'data-cell': columns[i]?.label,
+					role: 'cell',
+				})
 			}) }
 		</Box>
 	)

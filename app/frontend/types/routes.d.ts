@@ -1114,13 +1114,13 @@ export const destroyUserSession: ((
 
 /**
  * Generates rails route to
- * /documentations/:id(.:format)
- * @param {any} id
+ * /documentations/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const documentation: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -1244,13 +1244,13 @@ export const editDepartment: ((
 
 /**
  * Generates rails route to
- * /documentations/:id/edit(.:format)
- * @param {any} id
+ * /documentations/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editDocumentation: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
