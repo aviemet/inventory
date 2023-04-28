@@ -78,6 +78,25 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 					borderColor: theme.colors.gray[7],
 				},
 			},
+
+		},
+
+		[`@media (max-width: ${theme.breakpoints.sm})`]: {
+			thead: {
+				display: 'none',
+			},
+			tr:{
+				display: 'flex',
+				flexDirection: 'column',
+			},
+			td: {
+				display: 'grid',
+				gridTemplateColumns: '8rem 1fr',
+
+				'&::before': {
+					content: 'attr(data-cell)',
+				},
+			},
 		},
 	},
 
