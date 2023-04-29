@@ -43,16 +43,10 @@ module Searchable
     return unless sortable_fields&.include?(params[:sort])
 
     field_type = get_field_type(model, params[:sort])
-
     # Don't error if field doesn't exist on model
     return if field_type.nil?
 
-    # Force case insensitive sorting if field type is a string
     sort_str = params[:sort].to_s
-    if %i(string text).freeze.include?(field_type)
-      sort_str = "lower(#{sort_str})"
-    end
-
     "#{sort_str} #{direction}"
   end
 
@@ -65,8 +59,8 @@ module Searchable
     split_fields = column.split(".")
     if split_fields.length > 1
       model = split_fields[-2].titleize.singularize.constantize
+      column = split_fields[-1]
     end
-
     model.column_for_attribute(column).type
   end
 

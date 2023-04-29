@@ -1,8 +1,11 @@
 class Contracts::EditSerializer < ApplicationSerializer
   object_as :contract
 
+  identifier :slug
+
   attributes(
     :id,
+    :slug,
     :name,
     :number,
     :notes,

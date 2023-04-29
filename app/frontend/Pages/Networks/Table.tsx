@@ -14,13 +14,13 @@ const NetworksTable = (props: ITableProps) => {
 					<Table.Cell sort="gateway">Gateway</Table.Cell>
 					<Table.Cell sort="dhcp_start">DHCP Start</Table.Cell>
 					<Table.Cell sort="dhcp_end">DHCP End</Table.Cell>
-					<Table.Cell sort="vland_id">VLAN Id</Table.Cell>
+					<Table.Cell sort="vlan_id">VLAN Id</Table.Cell>
 					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (network: Schema.Network) => (
+				<Table.RowIterator render={ (network: Schema.NetworksIndex) => (
 					<Table.Row key={ network.id }>
 
 						<Table.Cell nowrap>

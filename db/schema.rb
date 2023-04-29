@@ -140,6 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
 
   create_table "contracts", force: :cascade do |t|
     t.string "name", null: false
+    t.string "slug", null: false
     t.string "number"
     t.text "notes"
     t.datetime "begins_at", precision: nil
@@ -149,6 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_contracts_on_category_id"
+    t.index ["slug"], name: "index_contracts_on_slug", unique: true
     t.index ["vendor_id"], name: "index_contracts_on_vendor_id"
   end
 

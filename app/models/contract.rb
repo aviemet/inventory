@@ -14,6 +14,8 @@ class Contract < ApplicationRecord
     },
   )
 
+  slug :name
+
   tracked
   resourcify
 

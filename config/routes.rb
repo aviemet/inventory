@@ -132,7 +132,7 @@ Rails.application.routes.draw do
   resources :orders, concerns: :bulk_delete
   resources :purchases, concerns: :bulk_delete
 
-  resources :contracts, concerns: :bulk_delete
+  resources :contracts, concerns: :bulk_delete, param: :slug
 
   resources :reports, only: [:index]
 
