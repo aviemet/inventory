@@ -11,7 +11,7 @@ module Searchable
   #   To sort by a method on the model class which is not a database field, use `self`: "self.calculated_number"
   ##
   def search(model, sortable_fields = [])
-    sort(search_by_params(model), model, sortable_fields)
+    sort(model, model, sortable_fields)
   end
 
   protected
@@ -33,7 +33,11 @@ module Searchable
     return obj unless params[:sort]
 
     # Sort using db query
-    obj.order(sort_string(model, sortable_fields))
+    if params[:sort].include? "."
+      obj.joins(params[:sort].split(".")[-2]).group(params[:sort]).order(sort_string(model, sortable_fields))
+    else
+      obj.order(sort_string(model, sortable_fields))
+    end
   end
 
   ##
@@ -65,8 +69,8 @@ module Searchable
     split_fields = column.split(".")
     if split_fields.length > 1
       model = split_fields[-2].titleize.singularize.constantize
+      column = split_fields[-1]
     end
-
     model.column_for_attribute(column).type
   end
 
