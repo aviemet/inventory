@@ -1050,13 +1050,13 @@ export const consumables: ((
 
 /**
  * Generates rails route to
- * /contracts/:id(.:format)
- * @param {any} id
+ * /contracts/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const contract: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -1220,13 +1220,13 @@ export const editConsumable: ((
 
 /**
  * Generates rails route to
- * /contracts/:id/edit(.:format)
- * @param {any} id
+ * /contracts/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editContract: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

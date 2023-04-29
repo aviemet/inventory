@@ -2,7 +2,7 @@ class ContractsController < ApplicationController
   include Searchable
 
   expose :contracts, -> { search(@active_company.contracts.includes_associated, sortable_fields) }
-  expose :contract, scope: ->{ @active_company.contracts }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :contract, id: ->{ params[:slug] }, scope: ->{ @active_company.contracts.includes_associated }, find_by: :slug
 
   # GET /contracts
   def index
@@ -18,7 +18,7 @@ class ContractsController < ApplicationController
     }
   end
 
-  # GET /contracts/:id
+  # GET /contracts/:slug
   def show
     authorize contract
     render inertia: "Contracts/Show", props: {
@@ -36,7 +36,7 @@ class ContractsController < ApplicationController
     }
   end
 
-  # GET /contracts/:id/edit
+  # GET /contracts/:slug/edit
   def edit
     authorize contract
     render inertia: "Contracts/Edit", props: {
@@ -58,7 +58,7 @@ class ContractsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contracts/:id
+  # PATCH/PUT /contracts/:slug
   def update
     authorize contract
     if contract.update(contract_params)
@@ -68,7 +68,7 @@ class ContractsController < ApplicationController
     end
   end
 
-  # DELETE /contracts/:id
+  # DELETE /contracts/:slug
   def destroy
     authorize contract
     contract.destroy
