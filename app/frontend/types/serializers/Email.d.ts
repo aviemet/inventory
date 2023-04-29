@@ -4,19 +4,18 @@
 import type { Category } from './Category'
 import type { Contact } from './Contact'
 
-declare export global {
-	declare namespace Schema {
-		export interface Email {
-			id?: number
-			category: Category
-			category_id?: number
-			contact: Contact
-			contact_id: number
-			created_at: string | Date
-			email?: string
-			notes?: string
-			updated_at: string | Date
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface Email {
+      id?: number
+      category: Category
+      category_id?: number
+      contact: Contact
+      contact_id: number
+      created_at: string | Date
+      email?: string
+      notes?: string
+      updated_at: string | Date
+    }
+  }
 }

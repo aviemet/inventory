@@ -1,6 +1,7 @@
 class Contract < ApplicationRecord
   include Ownable
   include PgSearch::Model
+  include Categorizable
 
   pg_search_scope(
     :search,
@@ -10,20 +11,17 @@ class Contract < ApplicationRecord
     }, using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
+
+  slug :name
 
   tracked
   resourcify
 
   validates_presence_of :name
 
-  belongs_to :category
   belongs_to :vendor
 
   scope :includes_associated, -> { includes([:vendor, :category]) }
-
-  def self.find_by_category(category)
-    self.where(category:)
-  end
 end

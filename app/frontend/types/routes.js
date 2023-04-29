@@ -1250,12 +1250,12 @@ export const consumables = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"consumables"
 
 /**
  * Generates rails route to
- * /contracts/:id(.:format)
- * @param {any} id
+ * /contracts/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const contract = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"contracts"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const contract = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"contracts"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1297,6 +1297,23 @@ export const departments = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"departments"
  * @returns {string} route path
  */
 export const destroyUserSession = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"logout"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /documentations/:slug(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const documentation = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /documentations(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const documentations = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1363,12 +1380,12 @@ export const editConsumable = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],
 
 /**
  * Generates rails route to
- * /contracts/:id/edit(.:format)
- * @param {any} id
+ * /contracts/:slug/edit(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editContract = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"contracts"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editContract = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"contracts"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1378,6 +1395,15 @@ export const editContract = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2
  * @returns {string} route path
  */
 export const editDepartment = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /documentations/:slug/edit(.:format)
+ * @param {any} slug
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editDocumentation = __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1909,6 +1935,14 @@ export const newContract = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"contracts"],
  * @returns {string} route path
  */
 export const newDepartment = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /documentations/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newDocumentation = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

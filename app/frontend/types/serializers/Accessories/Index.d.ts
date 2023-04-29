@@ -13,39 +13,38 @@ import type { Purchase } from '../Purchase'
 import type { StatusLabel } from '../StatusLabel'
 import type { Vendor } from '../Vendor'
 
-declare export global {
-	declare namespace Schema {
-		export interface AccessoriesIndex {
-			id: number
-			activities: Activity[]
-			asset_tag?: string
-			assignments: Assignment[]
-			category: Category
-			company: Company
-			cost: number
-			cost_currency: string
-			created_at: string | Date
-			default_location: Location
-			default_location_id?: number
-			department: Department
-			manufacturer: Manufacturer
-			min_qty?: number
-			model: Model
-			model_id: number
-			name: string
-			notes?: string
-			purchase: Purchase
-			purchased_at?: string | Date
-			qty?: number
-			qty_available: number
-			requestable: boolean
-			serial?: string
-			status_label: StatusLabel
-			type: string
-			updated_at: string | Date
-			vendor: Vendor
-			vendor_id?: number
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface AccessoriesIndex {
+      id: number
+      activities: Activity[]
+      asset_tag?: string
+      assignments: Assignment[]
+      category: Category
+      company: Company
+      cost: number
+      cost_currency: string
+      created_at: string | Date
+      default_location: Location
+      default_location_id?: number
+      department: Department
+      manufacturer: Manufacturer
+      min_qty?: number
+      model: Model
+      model_id: number
+      name: string
+      notes?: string
+      purchase: Purchase
+      purchased_at?: string | Date
+      qty?: number
+      qty_available: number
+      requestable: boolean
+      serial?: string
+      status_label: StatusLabel
+      type: string
+      updated_at: string | Date
+      vendor: Vendor
+      vendor_id?: number
+    }
+  }
 }

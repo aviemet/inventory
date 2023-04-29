@@ -9,26 +9,25 @@ import type { Consumable } from '../Consumable'
 import type { Item } from '../Item'
 import type { Manufacturer } from '../Manufacturer'
 
-declare export global {
-	declare namespace Schema {
-		export interface ModelsShow {
-			id: number
-			accessories: Accessory[]
-			activities: Activity[]
-			category: Category
-			category_id: number
-			components: Component[]
-			consumables: Consumable[]
-			created_at: string | Date
-			items: Item[]
-			manufacturer: Manufacturer
-			manufacturer_id: number
-			model_number?: string
-			name?: string
-			notes?: string
-			slug: string
-			updated_at: string | Date
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface ModelsShow {
+      id: number
+      accessories: Accessory[]
+      activities: Activity[]
+      category: Category
+      category_id: number
+      components: Component[]
+      consumables: Consumable[]
+      created_at: string | Date
+      items: Item[]
+      manufacturer: Manufacturer
+      manufacturer_id: number
+      model_number?: string
+      name?: string
+      notes?: string
+      slug: string
+      updated_at: string | Date
+    }
+  }
 }

@@ -22,6 +22,12 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 			top: 0,
 			zIndex: 1,
 			backgroundColor: theme.other.colorSchemeOption(theme.white, theme.colors.dark[7]),
+
+			th:{
+				'&:hover': {
+					backgroundColor: theme.other.colorSchemeOption(theme.colors.gray[1], theme.black),
+				},
+			},
 		},
 
 		'thead, thead a, tbody, tbody a': {
@@ -52,14 +58,16 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 				'&:before, &:after': {
 					position: 'absolute',
 					display: 'block',
-					right: 0,
+					right: '0.75rem',
 					width: 0,
 					height: 0,
 					content: '""',
+					cursor: 'pointer',
 					borderColor: theme.colors.gray[4],
 					borderStyle: 'solid',
 					borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
 					borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
+
 				},
 
 				'&:before': {
@@ -76,6 +84,25 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 
 				'&.asc:before, &.desc:after': {
 					borderColor: theme.colors.gray[7],
+				},
+			},
+
+		},
+
+		[`@media (max-width: ${theme.breakpoints.sm})`]: {
+			thead: {
+				display: 'none',
+			},
+			tr:{
+				display: 'flex',
+				flexDirection: 'column',
+			},
+			td: {
+				display: 'grid',
+				gridTemplateColumns: '8rem 1fr',
+
+				'&::before': {
+					content: 'attr(data-cell)',
 				},
 			},
 		},

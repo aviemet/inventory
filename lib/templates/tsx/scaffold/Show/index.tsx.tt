@@ -1,21 +1,35 @@
 import React from 'react'
-import { Container, Link } from '@/Components'
+import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface Show<%= singular_table_name.camelize %>Props {
-	<%= singular_table_name %>: Schema.<%= singular_table_name.camelize %>
+interface IShow<%= singular_table_name.camelize %>Props {
+	<%= singular_table_name %>: Schema.<%= plural_table_name.camelize %>Show
 }
 
-const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }: Show<%= singular_table_name.camelize %>Props) => {
-	return (
-		<Container>
-			<h1><%= singular_table_name.camelize %></h1>
+const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }: IShow<%= singular_table_name.camelize %>Props) => {
+	const title = <%= attributes.include?(:name) ? "#{singular_table_name}.name || " : "" %> '<%= singular_table_name.camelize %>'
 
-			<div>
-				<Link href={ Routes.edit<%= singular_table_name.camelize %>(<%= singular_table_name %>) }>Edit</Link>
-				<Link href={ Routes.<%= singular_table_name.camelize(:lower).pluralize %>() }>Index</Link>
-			</div>
-		</Container>
+	return (
+		<Page title={ title } breadcrumbs={ [
+			{ title: '<%= human_name.titleize %>', href: Routes.<%= plural_table_name.camelize(:lower) %>() },
+			{ title },
+		] }>
+			<Section>
+				<Group position="apart">
+					<Heading>{ title }</Heading>
+
+					<Menu position="bottom-end">
+						<Menu.Target />
+						<Menu.Dropdown>
+							<Menu.Link href={ Routes.edit<%= singular_table_name.camelize %>(<%= singular_table_name %><%= attributes.include?(:slug) ? ".slug" : ".id" %>) }>
+								Edit <%= singular_table_name.camelize %>
+							</Menu.Link>
+						</Menu.Dropdown>
+					</Menu>
+				</Group>
+
+			</Section>
+		</Page>
 	)
 }
 

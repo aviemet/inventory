@@ -11,8 +11,7 @@ class ItemsController < ApplicationController
     paginated_items = items.page(params[:page] || 1)
 
     render inertia: "Items/Index", props: {
-      # items: -> { paginated_items.render(view: :index) },
-      items: -> { Items::IndexSerializer.many(paginated_items) },
+      items: -> { paginated_items.render(view: :index) },
       pagination: -> { {
         count: items.count,
         **pagination_data(paginated_items)
@@ -141,7 +140,7 @@ class ItemsController < ApplicationController
   private
 
   def sortable_fields
-    %w(name item_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
+    %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
   def item_params

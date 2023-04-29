@@ -23,11 +23,11 @@ const ContractsTable = (props: ITableProps) => {
 				<Table.RowIterator render={ (contract: Schema.ContractsIndex) => (
 					<Table.Row key={ contract.id }>
 						<Table.Cell nowrap>
-							<Link href={ Routes.contract(contract) }>{ contract.name }</Link>
+							<Link href={ Routes.contract(contract.slug) }>{ contract.name }</Link>
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							<Link href={ Routes.contract(contract) }>{ contract.number }</Link>
+							<Link href={ Routes.contract(contract.slug) }>{ contract.number }</Link>
 						</Table.Cell>
 
 						<Table.Cell nowrap>

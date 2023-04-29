@@ -15,7 +15,7 @@ const CategoriesDropdown = ({ label = 'Category', name = 'category_id',  categor
 			name={ name }
 			options={ categories }
 			filterMatchKeys={ ['name'] }
-			fetchOnOpen="category"
+			fetchOnOpen="categories"
 			newForm={ <CategoriesForm
 				to={ Routes.apiCategories() }
 			/> }

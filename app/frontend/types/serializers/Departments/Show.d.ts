@@ -10,15 +10,15 @@ import type { License } from '../License'
 import type { Location } from '../Location'
 import type { Person } from '../Person'
 
-declare export global {
-	declare namespace Schema {
-		export interface DepartmentsShow {
-			id: number
-			accessories: Accessory[]
-			activities: Activity[]
-			components: Component[]
-			consumables: Consumable[]
-			counts: {
+declare global {
+  namespace Schema {
+    interface DepartmentsShow {
+      id: number
+      accessories: Accessory[]
+      activities: Activity[]
+      components: Component[]
+      consumables: Consumable[]
+      counts: {
     items: number
     accessories: number
     consumables: number
@@ -27,17 +27,16 @@ declare export global {
     contracts: number
     people: number
   }
-			created_at: string | Date
-			items: Item[]
-			licenses: License[]
-			location: Location
-			location_id?: number
-			name?: string
-			notes?: string
-			people: Person[]
-			slug: string
-			updated_at: string | Date
-		}
-
-	}
+      created_at: string | Date
+      items: Item[]
+      licenses: License[]
+      location: Location
+      location_id?: number
+      name?: string
+      notes?: string
+      people: Person[]
+      slug: string
+      updated_at: string | Date
+    }
+  }
 }

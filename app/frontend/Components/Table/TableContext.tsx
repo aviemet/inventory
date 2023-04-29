@@ -48,7 +48,7 @@ const TableProvider: React.FC<ITableContextProviderProps> = ({
 	selectable = false,
 	pagination,
 	rows = [],
-	hideable = false,
+	hideable = true,
 	model,
 }) => {
 	const tableReducer = (tableState: ITableSettings, newTableState: Partial<ITableSettings>) => ({

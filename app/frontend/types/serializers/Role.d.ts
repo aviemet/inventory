@@ -5,19 +5,18 @@ import type { Activity } from './Activity'
 import type { Person } from './Person'
 import type { PersonGroup } from './PersonGroup'
 
-declare export global {
-	declare namespace Schema {
-		export interface Role {
-			id?: number
-			activities: Activity[]
-			created_at: string | Date
-			name?: string
-			people: Person[]
-			person_groups: PersonGroup[]
-			resource_id?: number
-			resource_type?: string
-			updated_at: string | Date
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface Role {
+      id?: number
+      activities: Activity[]
+      created_at: string | Date
+      name?: string
+      people: Person[]
+      person_groups: PersonGroup[]
+      resource_id?: number
+      resource_type?: string
+      updated_at: string | Date
+    }
+  }
 }

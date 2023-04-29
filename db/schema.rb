@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -140,6 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
 
   create_table "contracts", force: :cascade do |t|
     t.string "name", null: false
+    t.string "slug", null: false
     t.string "number"
     t.text "notes"
     t.datetime "begins_at", precision: nil
@@ -149,6 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_contracts_on_category_id"
+    t.index ["slug"], name: "index_contracts_on_slug", unique: true
     t.index ["vendor_id"], name: "index_contracts_on_vendor_id"
   end
 
@@ -163,6 +165,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
     t.index ["location_id"], name: "index_departments_on_location_id"
     t.index ["manager_id"], name: "index_departments_on_manager_id"
     t.index ["slug"], name: "index_departments_on_slug", unique: true
+  end
+
+  create_table "documentations", force: :cascade do |t|
+    t.string "title"
+    t.string "slug", null: false
+    t.text "body"
+    t.bigint "category_id", null: false
+    t.bigint "created_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_documentations_on_category_id"
+    t.index ["created_by_id"], name: "index_documentations_on_created_by_id"
+    t.index ["slug"], name: "index_documentations_on_slug", unique: true
   end
 
   create_table "emails", force: :cascade do |t|
@@ -615,6 +630,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_034956) do
   add_foreign_key "contracts", "vendors"
   add_foreign_key "departments", "locations"
   add_foreign_key "departments", "people", column: "manager_id"
+  add_foreign_key "documentations", "categories"
+  add_foreign_key "documentations", "people", column: "created_by_id"
   add_foreign_key "emails", "categories"
   add_foreign_key "emails", "contacts"
   add_foreign_key "fieldset_associations", "fieldsets"

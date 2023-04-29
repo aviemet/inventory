@@ -2,23 +2,26 @@ import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 
-export interface <%= singular_table_name.camelize %>FormProps {
-	to: string
-	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<Schema.<%= singular_table_name.camelize %>>) => boolean|void
-	<%= singular_table_name %>: Partial<Schema.<%= singular_table_name.camelize %>>
+type T<%= singular_table_name.camelize %>FormData = {
+	<%= singular_table_name %>: Schema.<%= plural_table_name.camelize %>FormData
 }
 
-const <%= singular_table_name.camelize %>Form = ({ to, method = 'post', onSubmit, <%= singular_table_name %> }: <%= singular_table_name.camelize %>FormProps) => {
+export interface I<%= singular_table_name.camelize %>FormProps {
+	to: string
+	method?: HTTPVerb
+	onSubmit?: (object: UseFormProps<T<%= singular_table_name.camelize %>FormData>) => boolean|void
+	<%= singular_table_name %>: Schema.<%= plural_table_name.camelize %>FormData
+}
+
+const <%= singular_table_name.camelize %>Form = ({ method = 'post', <%= singular_table_name %>, ...props }: I<%= singular_table_name.camelize %>FormProps) => {
 	return (
 		<Form
 			model="<%= singular_table_name %>"
 			data={ { <%= singular_table_name %> } }
-			to={ to }
 			method={ method }
-			onSubmit={ onSubmit }
+			{ ...props }
 		><% attributes.each do |column| %><% unless column.type == :references %>
-			<TextInput name="<%= singular_table_name %>.<%= column.name %>" label="<%= column.name.capitalize %>" /><% end %><% end %>
+			<TextInput name="<%= column.name %>" label="<%= column.name.capitalize %>" /><% end %><% end %>
 			<Submit>{ <%= singular_table_name %>.id ? 'Update' : 'Create' } <%= singular_table_name.camelize %></Submit>
 		</Form>
 	)

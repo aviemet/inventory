@@ -9,17 +9,17 @@ import type { Contact } from '../Contact'
 import type { Contract } from '../Contract'
 import type { Item } from '../Item'
 
-declare export global {
-	declare namespace Schema {
-		export interface VendorsShow {
-			id: number
-			accessories: Accessory[]
-			activities: Activity[]
-			components: Component[]
-			consumables: Consumable[]
-			contact: Contact
-			contracts: Contract[]
-			counts: {
+declare global {
+  namespace Schema {
+    interface VendorsShow {
+      id: number
+      accessories: Accessory[]
+      activities: Activity[]
+      components: Component[]
+      consumables: Consumable[]
+      contact: Contact
+      contracts: Contract[]
+      counts: {
     items: number
     accessories: number
     consumables: number
@@ -27,13 +27,12 @@ declare export global {
     licenses: number
     contracts: number
   }
-			created_at: string | Date
-			items: Item[]
-			name: string
-			slug: string
-			updated_at: string | Date
-			url?: string
-		}
-
-	}
+      created_at: string | Date
+      items: Item[]
+      name: string
+      slug: string
+      updated_at: string | Date
+      url?: string
+    }
+  }
 }

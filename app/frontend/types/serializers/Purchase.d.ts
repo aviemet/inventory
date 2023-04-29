@@ -10,28 +10,27 @@ import type { Department } from './Department'
 import type { Item } from './Item'
 import type { Order } from './Order'
 
-declare export global {
-	declare namespace Schema {
-		export interface Purchase {
-			id?: number
-			accessory: Accessory
-			activities: Activity[]
-			company: Company
-			component: Component
-			consumable: Consumable
-			cost: unknown
-			cost_currency: string
-			created_at: string | Date
-			department: Department
-			item: Item
-			notes?: string
-			order: Order
-			order_id?: number
-			purchasable_id: number
-			purchasable_type: string
-			qty?: number
-			updated_at: string | Date
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface Purchase {
+      id?: number
+      accessory: Accessory
+      activities: Activity[]
+      company: Company
+      component: Component
+      consumable: Consumable
+      cost: unknown
+      cost_currency: string
+      created_at: string | Date
+      department: Department
+      item: Item
+      notes?: string
+      order: Order
+      order_id?: number
+      purchasable_id: number
+      purchasable_type: string
+      qty?: number
+      updated_at: string | Date
+    }
+  }
 }

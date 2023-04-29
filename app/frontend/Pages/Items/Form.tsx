@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	Form,
 	TextInput,
@@ -8,8 +8,11 @@ import {
 	DateTime,
 	Submit,
 	FormGroup,
+	DynamicInputs,
 } from '@/Components/Form'
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
+import CheckboxComponent from '@/Components/Inputs/Checkbox'
+import { Group } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TItemFormData = {
@@ -29,6 +32,8 @@ export interface IItemFormProps {
 }
 
 const ItemForm = ({ method = 'post', item, models, vendors, locations, manufacturers, categories, ...props }: IItemFormProps) => {
+	const [staticIp, setStaticIp] = useState(false)
+
 	return (
 		<Form
 			model="item"
@@ -50,6 +55,23 @@ const ItemForm = ({ method = 'post', item, models, vendors, locations, manufactu
 				<TextInput name="serial" label="Serial" />
 
 				<TextInput name="asset_tag" label="Asset Tag" />
+
+				<CheckboxComponent
+					label="Static IP Assignment"
+					checked={ staticIp }
+					onChange={ e => setStaticIp(e.target.checked) }
+				/>
+
+				{ staticIp && <DynamicInputs model="nics" emptyData={ {
+					mac: '',
+					nic_type: '',
+				} }>
+					<Group grow>
+						<TextInput name="ip" label="IP Address" />
+
+						<TextInput name="mac" label="Mac Address" />
+					</Group>
+				</DynamicInputs> }
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">

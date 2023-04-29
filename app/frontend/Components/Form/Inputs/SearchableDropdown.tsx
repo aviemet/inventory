@@ -9,8 +9,8 @@ import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 type OmittedDropdownTypes = 'name'|'defaultValue'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
 interface IInputProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IInertiaInputProps {
 	defaultValue?: string
-	onDropdownOpen?: (form: UseFormProps) => void
-	onDropdownClose?: (form: UseFormProps) => void
+	onDropdownOpen?: (form: UseFormProps<any>) => void
+	onDropdownClose?: (form: UseFormProps<any>) => void
 	fetchOnOpen?: string
 	newForm?: React.ReactElement
 	field?: boolean

@@ -11,35 +11,34 @@ import type { Model } from '../Model'
 import type { Purchase } from '../Purchase'
 import type { Vendor } from '../Vendor'
 
-declare export global {
-	declare namespace Schema {
-		export interface ComponentsShow {
-			id: number
-			activities: Activity[]
-			asset_tag?: string
-			assignments: Assignment[]
-			category: Category
-			cost: number
-			cost_currency: string
-			created_at: string | Date
-			default_location: Location
-			default_location_id?: number
-			department: Department
-			manufacturer: Manufacturer
-			min_qty?: number
-			model: Model
-			model_id: number
-			name: string
-			notes?: string
-			purchase: Purchase
-			purchased_at?: string | Date
-			qty?: number
-			qty_available: number
-			serial?: string
-			updated_at: string | Date
-			vendor: Vendor
-			vendor_id?: number
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface ComponentsShow {
+      id: number
+      activities: Activity[]
+      asset_tag?: string
+      assignments: Assignment[]
+      category: Category
+      cost: number
+      cost_currency: string
+      created_at: string | Date
+      default_location: Location
+      default_location_id?: number
+      department: Department
+      manufacturer: Manufacturer
+      min_qty?: number
+      model: Model
+      model_id: number
+      name: string
+      notes?: string
+      purchase: Purchase
+      purchased_at?: string | Date
+      qty?: number
+      qty_available: number
+      serial?: string
+      updated_at: string | Date
+      vendor: Vendor
+      vendor_id?: number
+    }
+  }
 }

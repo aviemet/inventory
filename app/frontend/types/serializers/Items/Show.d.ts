@@ -17,41 +17,40 @@ import type { Nic } from '../Nic'
 import type { StatusLabel } from '../StatusLabel'
 import type { Vendor } from '../Vendor'
 
-declare export global {
-	declare namespace Schema {
-		export interface ItemsShow {
-			id: number
-			accessories: Accessory[]
-			activities: Activity[]
-			asset_tag?: string
-			assigned: boolean
-			assignments: Assignment[]
-			category: Category
-			components: Component[]
-			consumables: Consumable[]
-			cost: number
-			cost_currency: string
-			created_at: string | Date
-			default_location: Location
-			default_location_id?: number
-			department: Department
-			items: Item[]
-			licenses: License[]
-			location: Location
-			manufacturer: Manufacturer
-			model: Model
-			model_id: number
-			name: string
-			nics: Nic[]
-			notes?: string
-			purchased_at?: string | Date
-			requestable: boolean
-			serial?: string
-			status_label: StatusLabel
-			updated_at: string | Date
-			vendor: Vendor
-			vendor_id?: number
-		}
-
-	}
+declare global {
+  namespace Schema {
+    interface ItemsShow {
+      id: number
+      accessories: Accessory[]
+      activities: Activity[]
+      asset_tag?: string
+      assigned: boolean
+      assignments: Assignment[]
+      category: Category
+      components: Component[]
+      consumables: Consumable[]
+      cost: number
+      cost_currency: string
+      created_at: string | Date
+      default_location: Location
+      default_location_id?: number
+      department: Department
+      items: Item[]
+      licenses: License[]
+      location: Location
+      manufacturer: Manufacturer
+      model: Model
+      model_id: number
+      name: string
+      nics: Nic[]
+      notes?: string
+      purchased_at?: string | Date
+      requestable: boolean
+      serial?: string
+      status_label: StatusLabel
+      updated_at: string | Date
+      vendor: Vendor
+      vendor_id?: number
+    }
+  }
 }

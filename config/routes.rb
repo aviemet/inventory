@@ -132,13 +132,15 @@ Rails.application.routes.draw do
   resources :orders, concerns: :bulk_delete
   resources :purchases, concerns: :bulk_delete
 
-  resources :contracts, concerns: :bulk_delete
+  resources :contracts, concerns: :bulk_delete, param: :slug
 
   resources :reports, only: [:index]
 
   resources :tickets do
     resources :ticket_messages, path: :messages, as: :messages, only: [:create, :update, :destroy]
   end
+
+  resources :documentations, param: :slug
 
   draw(:api)
 end
