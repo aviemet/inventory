@@ -1,18 +1,14 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { EditButton } from '@/Components/Button'
 
-export default {
-	title: 'Components/Buttons',
+type ButtonStory = StoryObj<typeof EditButton>
+
+const meta: Meta<typeof EditButton> = {
+	title: 'Components/Buttons/Edit Button',
 	component: EditButton,
 	argTypes: {
-		loaderPosition: {
-			options: ['left', 'right'],
-		},
-		radius: {
-			options: ['xs', 'sm', 'md', 'lg', 'xl'],
-		},
 		size: {
 			options: ['xs', 'sm', 'md', 'lg', 'xl'],
 		},
@@ -20,10 +16,12 @@ export default {
 			options: [undefined, 'outline', 'white', 'light', 'default', 'filled', 'subtle', 'gradient'],
 		},
 	},
-} as ComponentMeta<typeof EditButton>
+}
+export default meta
 
-const EditButtonTemplate: ComponentStory<typeof EditButton> = args => <EditButton { ...args } />
-export const Edit = EditButtonTemplate.bind({})
-Edit.args = {
-	href: '/home',
+export const EditButtonStory: ButtonStory = {
+	args: {
+		href: '/home',
+	},
+	render: args => <EditButton { ...args } />,
 }

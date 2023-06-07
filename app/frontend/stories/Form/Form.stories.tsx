@@ -1,47 +1,50 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { Checkbox, DateTime, Form, FormGroup, TextInput, RadioButtons, NumberInput } from '@/Components/Form'
 
-export default {
+type FormStory = StoryObj<typeof Form>
+
+const meta: Meta<typeof Form> = {
 	title: 'Example/Form',
 	component: Form,
 	argTypes: {
 	},
-} as ComponentMeta<typeof Form>
+}
+export default meta
 
-const defaultArgs = {
-	data: {
-		string: 'string',
-		date: new Date(),
-		number: 10,
-		checkbox: true,
-		choices: [
-			{ label: 'One', value: '1' },
-			{ label: 'Two', value: '2' },
-			{ label: 'Three', value: '3' },
-		],
-		grouped: 'One Value',
+export const Standard: FormStory = {
+	name: 'Form',
+	args: {
+		data: {
+			string: 'string',
+			date: new Date(),
+			number: 10,
+			checkbox: true,
+			choices: '1',
+			grouped: 'One Value',
+		},
 	},
+	render: args => (
+		<Form { ...args }>
+			<TextInput label="String" name="string" />
+
+			<DateTime label="Date/Time" name="date" />
+
+			<NumberInput label="Number" name="number" />
+
+			<Checkbox label="Checkbox" name="checkbox" />
+
+			<RadioButtons label="Radio Buttons" name="choices" options={ [
+				{ label: 'One', value: '1' },
+				{ label: 'Two', value: '2' },
+				{ label: 'Three', value: '3' },
+			] } />
+
+			<FormGroup legend="Form Group">
+				<TextInput label="Group Member" name="grouped" />
+			</FormGroup>
+		</Form>
+	),
 }
 
-const FormTemplate: ComponentStory<typeof Form> = (args) => (
-	<Form { ...args }>
-		<TextInput label="String" name="string" />
-
-		<DateTime label="Date/Time" name="date" />
-
-		<NumberInput label="Number" name="number" />
-
-		<Checkbox label="Checkbox" name="checkbox" />
-
-		<RadioButtons label="Radio Buttons" name="choices" options={ defaultArgs.data.choices } />
-
-		<FormGroup legend="Form Group">
-			<TextInput label="Group Member" name="grouped" />
-		</FormGroup>
-	</Form>
-)
-
-export const WithLabels = FormTemplate.bind({})
-WithLabels.args = defaultArgs

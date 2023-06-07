@@ -1,19 +1,20 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { Card as CardComponent } from '@/Components'
 
-export default {
+type CardStory = StoryObj<typeof CardComponent>
+
+const meta: Meta<typeof CardComponent> = {
 	title: 'Example/Card',
 	component: CardComponent,
 	argTypes: {
 	},
-} as ComponentMeta<typeof CardComponent>
-
-const cardArgs = {
 }
+export default meta
 
-const CardTemplate: ComponentStory<typeof CardComponent> = (args) => <Card { ...args } />
-
-export const Card = CardTemplate.bind({})
-Card.args = cardArgs
+export const Standard: CardStory = {
+	render: args => <CardComponent>
+		Example content
+	</CardComponent>,
+}
