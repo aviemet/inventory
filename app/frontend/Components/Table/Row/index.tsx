@@ -5,7 +5,7 @@ import RowInContext from './RowInContext'
 import { Box, type BoxProps } from '@mantine/core'
 
 export interface ITableRow extends BoxProps, TRProps {
-	children?: JSX.Element[]
+	children?:  JSX.Element | JSX.Element[]
 }
 
 interface IRowProps extends Omit<ITableRow, 'ref'> {

@@ -1,8 +1,13 @@
 class PagesController < ApplicationController
   def dashboard
+    activities = PublicActivity::Activity
+      .includes(:owner, :trackable, :recipient)
+      .order(created_at: :asc)
+      .last(10)
+
     render inertia: "Pages/Dashboard", props: {
       company: @active_company.render(view: :show),
-      activities: Activities::DashboardSerializer.render(PublicActivity::Activity.includes(:owner, :trackable, :recipient).order(created_at: :asc).last(10))
+      activities: Activities::DashboardSerializer.render(activities)
     }
   end
 

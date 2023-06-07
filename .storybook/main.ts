@@ -1,27 +1,27 @@
-const path = require('path');
-const tsconfigPaths = require("vite-tsconfig-paths").default
+import type { StorybookConfig } from "@storybook/react-vite";
 
-module.exports = {
-  "stories": [
-    "../app/frontend/stories/**/*.stories.mdx",
-    "../app/frontend/stories/**/*.stories.@(js|jsx|ts|tsx)"
-  ],
-  "addons": [
+const config: StorybookConfig = {
+  stories: [
+    "../app/frontend/stories/**/*.mdx", 
+    "../app/frontend/stories/**/*.stories.@(js|jsx|ts|tsx)"],
+  addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions"
+    "@storybook/addon-interactions",
   ],
-  "framework": "@storybook/react",
-  "core": {
-    "builder": "@storybook/builder-vite"
+  framework: {
+    name: "@storybook/react-vite",
+    options: {},
   },
-  "features": {
-    "storyStoreV7": true
+  core: {
+    builder: "@storybook/builder-vite"
   },
-   viteFinal: async (config) => {
-    config.plugins.push(
-      tsconfigPaths()
-    )
-    return config
+  features: {
+    storyStoreV7: true
   },
-}
+  docs: {
+    autodocs: "tag",
+  },
+};
+
+export default config;

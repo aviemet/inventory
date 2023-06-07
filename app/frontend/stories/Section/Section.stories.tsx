@@ -1,19 +1,18 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { Section as SectionComponent } from '@/Components'
+import { Section as Section } from '@/Components'
 
-export default {
+type SectionStory = StoryObj<typeof Section>
+
+const meta: Meta<typeof Section> = {
 	title: 'Example/Section',
-	component: SectionComponent,
+	component: Section,
 	argTypes: {
 	},
-} as ComponentMeta<typeof SectionComponent>
-
-const sectionArgs = {
 }
+export default meta
 
-const SectionTemplate: ComponentStory<typeof SectionComponent> = (args) => <Section { ...args } />
-
-export const Section = SectionTemplate.bind({})
-Section.args = sectionArgs
+export const Standard: SectionStory = {
+	render: args => <Section { ...args } />,
+}
