@@ -1,19 +1,21 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Link as LinkComponent } from '@/Components'
+import { Link } from '@/Components'
 
-export default {
+type LinkStory = StoryObj<typeof Link>
+
+const meta: Meta<typeof Link> = {
 	title: 'Example/Link',
-	component: LinkComponent,
+	component: Link,
 	argTypes: {
 	},
-} as ComponentMeta<typeof LinkComponent>
-
-const linkArgs = {
 }
+export default meta
 
-const LinkTemplate: ComponentStory<typeof LinkComponent> = (args) => <Link { ...args } />
-
-export const Link = LinkTemplate.bind({})
-Link.args = linkArgs
+export const Standard: LinkStory = {
+	args: {
+		href: '',
+	},
+	render: args => <Link { ...args } />,
+}

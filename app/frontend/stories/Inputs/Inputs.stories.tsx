@@ -1,26 +1,16 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import {
-	// Checkbox,
-	// CurrencyInput,
-	// DateTime,
-	// NumberInput,
-	// PasswordInput,
-	// RadioButtons,
-	// RichText,
-	// SearchableDropdown,
-	// Textarea,
-	TextInput,
-} from '@/Components/Inputs'
+import { TextInput } from '@/Components/Inputs'
 
-export default {
-	title: 'Components/Inputs',
+type InputStory = StoryObj<typeof TextInput>
+
+const meta: Meta<typeof TextInput> = {
+	title: 'Inputs/TextInput',
 	component: TextInput,
 	argTypes: {
 		label: {
 			name: 'label',
-			type: { name: 'string', required: false },
 			defaultValue: 'Label',
 			description: 'React node to render in a label tag',
 		},
@@ -28,11 +18,13 @@ export default {
 			options: [true, false],
 		},
 	},
-} as ComponentMeta<typeof TextInput>
+}
+export default meta
 
-const InputTemplate: ComponentStory<typeof TextInput> = (args) => <TextInput { ...args } />
-
-export const Text = InputTemplate.bind({})
-Text.args = {
-	required: false,
+export const Standard: InputStory = {
+	args: {
+		value: '',
+		name: 'text',
+	},
+	render: args => <TextInput { ...args } />,
 }

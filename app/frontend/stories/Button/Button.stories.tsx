@@ -6,7 +6,7 @@ import Button from '@/Components/Button'
 type ButtonStory = StoryObj<typeof Button>
 
 const meta: Meta<typeof Button> = {
-	title: 'Components/Buttons/Button',
+	title: 'Buttons/Button',
 	component: Button,
 	argTypes: {
 		loaderPosition: {
@@ -27,6 +27,7 @@ export default meta
 
 export const Standard: ButtonStory = {
 	args: {
+		children: 'Button Text',
 		size: undefined,
 		compact: false,
 		disabled: false,

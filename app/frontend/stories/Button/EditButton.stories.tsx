@@ -6,7 +6,7 @@ import { EditButton } from '@/Components/Button'
 type ButtonStory = StoryObj<typeof EditButton>
 
 const meta: Meta<typeof EditButton> = {
-	title: 'Components/Buttons/Edit Button',
+	title: 'Buttons/Edit Button',
 	component: EditButton,
 	argTypes: {
 		size: {
