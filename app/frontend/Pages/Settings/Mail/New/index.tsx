@@ -22,9 +22,11 @@ const NewMail = ({ smtp }: ISmtpFormProps) => {
 
 				<PasswordInput name="password" label="Password" required />
 
-				<TextInput name="address" label="SMTP Server" required />
+				<TextInput name="domain" label="SMTP Server" required />
 
 				<TextInput name="port" label="Port Number" required />
+
+				<TextInput name="address" label="Reply-To Address" />
 
 				<RadioButtons name="tls" label="Security" options={ [
 					{ label: 'None', value: '' },
