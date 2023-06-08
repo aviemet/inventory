@@ -1615,6 +1615,15 @@ export const editSettingsLog = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"]
 
 /**
  * Generates rails route to
+ * /settings/mail/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editSettingsMail = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"mail"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /settings/notifications/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -2123,6 +2132,14 @@ export const newSettingsLog = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"
 
 /**
  * Generates rails route to
+ * /settings/mail/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newSettingsMail = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"mail"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /settings/notifications/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2487,6 +2504,23 @@ export const settingsLog = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,
  * @returns {string} route path
  */
 export const settingsLogs = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"logs"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /settings/mail/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const settingsMail = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"mail"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /settings/mail(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const settingsMailIndex = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"mail"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

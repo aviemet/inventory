@@ -11,7 +11,7 @@ class Smtp < ApplicationRecord
     using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
 end
