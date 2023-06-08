@@ -7,7 +7,7 @@ class SmtpSerializer < ApplicationSerializer
     :port,
     :domain,
     :auth,
-    :tls,
+    :security,
     :username,
     :password,
     :notes,

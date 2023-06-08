@@ -33,7 +33,7 @@ interface ITableContext {
 
 interface ITableContextProviderProps {
 	children: React.ReactNode
-	selectable: boolean
+	selectable?: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
 	hideable?: boolean

@@ -88,6 +88,7 @@ const ItemForm = ({ method = 'post', item, models, vendors, locations, manufactu
 					name="default_location_id"
 					locations={ locations }
 					currencies={ [] }
+					required
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />

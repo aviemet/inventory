@@ -19,6 +19,7 @@ const tabs: TTab[] = [
 	{ name: 'asset_tags', label: 'Asset Tags' },
 	// { name: 'barcodes', label: 'Barcodes' },
 	{ name: 'ldap', label: 'LDAP' },
+	{ name: 'tickets', label: 'Tickets' },
 	{ name: 'backups', label: 'Backups' },
 	{ name: 'logs', label: 'Logs' },
 ]

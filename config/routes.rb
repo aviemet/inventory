@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     resources :general
     resources :appearance, only: [:index]
     match :appearance, to: "appearance#update", via: [:put, :patch]
-    resources :mail
+    resources :smtps, path: :mail, except: [:show]
     resources :localizations
     resources :notifications
     resources :integrations

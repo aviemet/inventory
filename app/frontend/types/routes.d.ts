@@ -1534,24 +1534,24 @@ export const editSettingsLog: ((
 
 /**
  * Generates rails route to
- * /settings/mail/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editSettingsMail: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /settings/notifications/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editSettingsNotification: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /settings/mail/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editSettingsSmtp: ((
   id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
@@ -2196,21 +2196,21 @@ export const newSettingsLog: ((
 
 /**
  * Generates rails route to
- * /settings/mail/new(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const newSettingsMail: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /settings/notifications/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newSettingsNotification: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /settings/mail/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newSettingsSmtp: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2676,28 +2676,6 @@ export const settingsLogs: ((
 
 /**
  * Generates rails route to
- * /settings/mail/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const settingsMail: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /settings/mail(.:format)
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const settingsMailIndex: ((
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /settings/notifications/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -2715,6 +2693,28 @@ export const settingsNotification: ((
  * @returns {string} route path
  */
 export const settingsNotifications: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /settings/mail/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const settingsSmtp: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /settings/mail(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const settingsSmtps: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

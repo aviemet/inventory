@@ -1,7 +1,8 @@
 import React from 'react'
 import SettingsLayout from '../../SettingsLayout'
-import { Box, Button, Group, Heading } from '@/Components'
+import { Button, Group, Heading } from '@/Components'
 import { Form, PasswordInput, RadioButtons, RichText, Submit, TextInput } from '@/Components/Form'
+import { Routes } from '@/lib'
 
 interface ISmtpFormProps {
 	smtp: Schema.Smtp
@@ -15,6 +16,7 @@ const NewMail = ({ smtp }: ISmtpFormProps) => {
 			<Form
 				model="smtp"
 				data={ { smtp } }
+				to={ Routes.settingsSmtps() }
 			>
 				<TextInput name="name" label="Name" required />
 
@@ -28,9 +30,10 @@ const NewMail = ({ smtp }: ISmtpFormProps) => {
 
 				<TextInput name="address" label="Reply-To Address" />
 
-				<RadioButtons name="tls" label="Security" options={ [
-					{ label: 'None', value: '' },
+				<RadioButtons name="security" label="Security" options={ [
+					{ label: 'None', value: 'basic' },
 					{ label: 'TLS', value: 'tls' },
+					{ label: 'SSL', value: 'ssl' },
 				] } />
 
 				<Group pt="md" pb="xs" position="right">
