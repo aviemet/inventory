@@ -1,2 +1,2 @@
-class Api::ContractsController < ApplicationController
+class Api::ContractsController < Api::ApiController
 end

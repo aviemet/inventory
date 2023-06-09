@@ -1,4 +1,4 @@
-class Api::CategoriesController < ApplicationController
+class Api::CategoriesController < Api::ApiController
   expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories }, find_by: :slug
 
   # POST /api/categories

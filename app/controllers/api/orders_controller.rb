@@ -1,4 +1,4 @@
-class Api::OrdersController < ApplicationController
+class Api::OrdersController < Api::ApiController
   expose :order, id: ->{ params[:slug] }, scope: ->{ @active_company.orders.includes_associated }, find_by: :slug
 
   # POST /api/orders

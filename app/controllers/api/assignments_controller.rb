@@ -1,2 +1,2 @@
-class Api::AssignmentsController < ApplicationController
+class Api::AssignmentsController < Api::ApiController
 end

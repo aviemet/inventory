@@ -1,6 +1,8 @@
 import React from 'react'
-import { Button, Group } from '@/Components'
+import { Group } from '@/Components'
 import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput } from '@/Components/Form'
+import { TestResponseButton } from '@/Components/Button'
+import { Routes } from '@/lib'
 
 type TSmtpFormData = {
 	smtp: Schema.SmtpsFormData
@@ -36,7 +38,9 @@ const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 			] } />
 
 			<Group pt="md" pb="xs" position="right">
-				<Button>Test</Button>
+				<TestResponseButton
+					endpoint={ Routes.apiSmtpTest() }
+				/>
 			</Group>
 
 			<RichText name="notes" label="Notes" />

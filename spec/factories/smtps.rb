@@ -1,13 +1,17 @@
 FactoryBot.define do
-  domain = Faker::Internet.domain_name
-
   factory :smtp do
-    address { "smtp.#{domain}" }
+    transient do
+      email_domain { Faker::Internet.domain_name }
+    end
+
+    name { "Service Name" }
+    host { "smtp.#{email_domain}" }
     port { 587 }
-    domain { domain }
-    auth { "plain" }
-    tls { false }
+    security { :tls }
+    domain { email_domain }
     username { Faker::Internet.username }
     password { Faker::Internet.password }
+
+    company
   end
 end

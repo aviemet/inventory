@@ -3,6 +3,12 @@ import { Page, Box, Section, Tabs } from '@/Components'
 import { router } from '@inertiajs/react'
 import { Paper, TabsValue, px, useMantineTheme } from '@mantine/core'
 import { useViewportSize, useLocation } from '@/lib/hooks'
+import { type TBreadcrumb } from '@/Components/Breadcrumbs'
+
+interface ISettingsLayoutProps {
+	children: React.ReactNode
+	breadcrumbs?: TBreadcrumb[]
+}
 
 type TTab = {
 	name: string
@@ -23,7 +29,8 @@ const tabs: TTab[] = [
 	{ name: 'backups', label: 'Backups' },
 	{ name: 'logs', label: 'Logs' },
 ]
-const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
+
+const SettingsLayout = ({ children, breadcrumbs }: ISettingsLayoutProps) => {
 	const title = 'Settings'
 	const { width } = useViewportSize()
 	const theme = useMantineTheme()
@@ -41,7 +48,7 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 	}
 
 	return (
-		<Page title={ title }>
+		<Page title={ title } breadcrumbs={ breadcrumbs }>
 			<Section sx={ { height: '100%' } }>
 				<Tabs
 					orientation={ mobileFormat ? 'horizontal' : 'vertical' }

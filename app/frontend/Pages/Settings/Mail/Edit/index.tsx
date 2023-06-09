@@ -8,21 +8,23 @@ interface ISmtpFormProps {
 	smtp: Schema.Smtp
 }
 
-const NewMail = ({ smtp }: ISmtpFormProps) => {
+const EditMail = ({ smtp }: ISmtpFormProps) => {
 	return (
 		<SettingsLayout breadcrumbs={ [
 			{ title: 'Settings', href: Routes.settingsGeneralIndex() },
 			{ title: 'Mail', href: Routes.settingsSmtps() },
-			{ title: 'New', href: Routes.newSettingsSmtp() },
+			{ title: smtp.name!, href: Routes.settingsSmtp(smtp.id!) },
+			{ title: 'Edit', href: Routes.editSettingsSmtp(smtp.id!) },
 		] }>
 			<Heading mb={ 24 }>Mail Settings</Heading>
 
 			<SmtpForm
+				method="put"
 				data={ { smtp } }
-				to={ Routes.settingsSmtps() }
+				to={ Routes.settingsSmtp(smtp.id!) }
 			/>
 		</SettingsLayout>
 	)
 }
 
-export default NewMail
+export default EditMail

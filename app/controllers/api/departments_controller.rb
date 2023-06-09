@@ -1,4 +1,4 @@
-class Api::DepartmentsController < ApplicationController
+class Api::DepartmentsController < Api::ApiController
   expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
 
   # POST /api/departments

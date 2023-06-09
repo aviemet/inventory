@@ -4,9 +4,9 @@ class Smtps::FormDataSerializer < ApplicationSerializer
   attributes(
     :name,
     :address,
+    :host,
     :port,
     :domain,
-    :auth,
     :security,
     :username,
     :password,

@@ -1,2 +1,2 @@
-class Api::OwnershipsController < ApplicationController
+class Api::OwnershipsController < Api::ApiController
 end
