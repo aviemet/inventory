@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     resources :localizations
     resources :notifications
     resources :integrations
+    resources :tickets
     resources :asset_tags
     resources :barcodes
     resources :ldaps, path: :ldap, except: [:show, :new, :edit]

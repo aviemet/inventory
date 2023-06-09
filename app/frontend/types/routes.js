@@ -1641,6 +1641,15 @@ export const editSettingsSmtp = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"
 
 /**
  * Generates rails route to
+ * /settings/tickets/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editSettingsTicket = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /status_labels/:slug/edit(.:format)
  * @param {any} slug
  * @param {object | undefined} options
@@ -2156,6 +2165,14 @@ export const newSettingsSmtp = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings
 
 /**
  * Generates rails route to
+ * /settings/tickets/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newSettingsTicket = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /status_labels/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2546,6 +2563,23 @@ export const settingsSmtp = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2
  * @returns {string} route path
  */
 export const settingsSmtps = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"mail"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /settings/tickets/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const settingsTicket = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /settings/tickets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const settingsTickets = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"tickets"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
