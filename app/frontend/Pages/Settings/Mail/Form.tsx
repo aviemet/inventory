@@ -1,15 +1,21 @@
 import React from 'react'
-import SettingsLayout from '../SettingsLayout'
-import { Button, Group, Heading } from '@/Components'
-import { Form, PasswordInput, RadioButtons, RichText, Submit, TextInput } from '@/Components/Form'
-import { Routes } from '@/lib'
+import { Button, Group } from '@/Components'
+import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput } from '@/Components/Form'
 
-const SmtpForm = ({ smtp }) => {
+type TSmtpFormData = {
+	smtp: Schema.SmtpsFormData
+}
+
+export interface ISmtpFormProps extends IFormProps<TSmtpFormData> {
+	data: TSmtpFormData
+}
+
+const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 	return (
 		<Form
 			model="smtp"
-			data={ { smtp } }
-			to={ Routes.settingsSmtps() }
+			method={ method }
+			{ ...props }
 		>
 			<TextInput name="name" label="Name" required />
 
