@@ -1,15 +1,10 @@
 require 'net/smtp'
 
 class Api::SmtpsController < Api::ApiController
-  expose :smtp
-
   # GET /api/smtp/test
-  # GET /api/smtp/:id/test
   def test
-    if !params[:id]
-      smtp = Smtp.new(smtp_params)
-    end
-    render json: test_smtp_auth(smtp), status: 200
+    ap({ params: })
+    render json: test_smtp_auth(Smtp.new(smtp_params)), status: 200
   end
 
   def test_smtp_auth(smtp)

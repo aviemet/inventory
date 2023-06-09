@@ -891,20 +891,11 @@ export const apiPurchases = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7
 
 /**
  * Generates rails route to
- * /api/smtp/:id/test(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiSmtpTest = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"smtp"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"test"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
-
-/**
- * Generates rails route to
  * /api/smtp/test(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiSmtpTestWithBody = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"smtp"],[2,[7,"/"],[2,[6,"test"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const apiSmtpTest = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"smtp"],[2,[7,"/"],[2,[6,"test"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to

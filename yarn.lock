@@ -2307,6 +2307,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cassiozen/usestatemachine@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@cassiozen/usestatemachine@npm:1.0.1"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: b924a02274afae85e182a524bd94e608240b31e4ad38a894b4535675bbf4c39d588297bdf98985411a229af979e64d887fb84df68521922b02ddd5e0cee843c4
+  languageName: node
+  linkType: hard
+
 "@colors/colors@npm:1.5.0":
   version: 1.5.0
   resolution: "@colors/colors@npm:1.5.0"
@@ -10416,6 +10425,7 @@ __metadata:
   resolution: "icr@workspace:."
   dependencies:
     "@babel/core": ^7.22.5
+    "@cassiozen/usestatemachine": ^1.0.1
     "@commitlint/cli": ^17.6.5
     "@commitlint/config-conventional": ^17.6.5
     "@emotion/react": ^11.11.1

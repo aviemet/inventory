@@ -1,8 +1,9 @@
 import React from 'react'
 import { Group } from '@/Components'
-import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput } from '@/Components/Form'
+import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
 import { TestResponseButton } from '@/Components/Button'
 import { Routes } from '@/lib'
+import { omit } from 'lodash'
 
 type TSmtpFormData = {
 	smtp: Schema.SmtpsFormData
@@ -21,15 +22,21 @@ const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 		>
 			<TextInput name="name" label="Name" required />
 
+			<TextInput name="host" label="SMTP Server Address" required />
+
+			<TextInput name="port" label="Port Number" required />
+
 			<TextInput name="username" label="Username" required />
 
 			<PasswordInput name="password" label="Password" required />
 
-			<TextInput name="domain" label="SMTP Server" required />
+			<TextInput name="domain" label="Email Domain" required
+				placeholder='e.g. mycompany.com'
+			/>
 
-			<TextInput name="port" label="Port Number" required />
-
-			<TextInput name="address" label="Reply-To Address" />
+			<TextInput name="address" label="Reply-To Address"
+				placeholder='If not provided, will default to your username'
+			/>
 
 			<RadioButtons name="security" label="Security" options={ [
 				{ label: 'None', value: 'basic' },
@@ -38,9 +45,13 @@ const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 			] } />
 
 			<Group pt="md" pb="xs" position="right">
-				<TestResponseButton
-					endpoint={ Routes.apiSmtpTest() }
-				/>
+				<FormConsumer<TSmtpFormData>>{ ({ data }) => (
+					<TestResponseButton
+						method="post"
+						endpoint={ Routes.apiSmtpTest() }
+						data={ { smtp: omit(data.smtp, 'id') } }
+					/>
+				) }</FormConsumer>
 			</Group>
 
 			<RichText name="notes" label="Notes" />

@@ -578,23 +578,11 @@ export const apiPurchases: ((
 
 /**
  * Generates rails route to
- * /api/smtp/:id/test(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const apiSmtpTest: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /api/smtp/test(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiSmtpTestWithBody: ((
+export const apiSmtpTest: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
