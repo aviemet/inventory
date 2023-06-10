@@ -4,17 +4,17 @@ import axios from 'axios'
 import useStateMachine from '@cassiozen/usestatemachine'
 import { CheckIcon, CrossIcon } from '@/Components/Icons'
 import { InfoCircle } from 'tabler-icons-react'
-import { Avatar, HoverCard, Text } from '@mantine/core'
+import { Avatar, ButtonProps, HoverCard, Text } from '@mantine/core'
 
 
-interface ITestResponseButtonProps {
+interface ITestResponseButtonProps extends ButtonProps {
 	children?: string
 	endpoint: string
 	method?: HTTPVerb
 	data: any
 }
 
-const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data }: ITestResponseButtonProps) => {
+const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data, ...props }: ITestResponseButtonProps) => {
 	const [errorMessage, setErrorMessage] = useState('')
 
 	const [requestState, setRequestState] = useStateMachine({
@@ -108,6 +108,7 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data 
 				leftIcon={ requestState.context.icon }
 				color={ requestState.context.color }
 				loading={ requestState.value === 'requesting' }
+				{ ...props }
 			>
 				{ children }
 			</Button>

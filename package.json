@@ -60,12 +60,11 @@
     "normalize-url": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-error-boundary": "^4.0.9",
+    "react-error-boundary": "^4.0.10",
     "react-html-props": "^2.0.2",
     "react-icons": "^4.9.0",
-    "styled-components": "^5.3.11",
     "tabler-icons-react": "^1.56.0",
-    "use-inertia-form": "^3.1.5",
+    "use-inertia-form": "^3.2.0",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
@@ -87,7 +86,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/loadable__component": "^5.13.4",
     "@types/lodash": "^4.14.195",
-    "@types/react": "^18.2.9",
+    "@types/react": "^18.2.11",
     "@types/react-dom": "^18.2.4",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.59.9",

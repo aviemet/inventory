@@ -6,7 +6,7 @@ const TableSection = ({ children }: { children: React.ReactNode }) => {
 	const { classes } = useTableStyles()
 
 	return (
-		<Section fullHeight={ true } className={ classes.section }>
+		<Section fullHeight className={ classes.section }>
 			{ children }
 		</Section>
 	)

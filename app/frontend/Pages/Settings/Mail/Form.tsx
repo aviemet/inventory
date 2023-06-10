@@ -3,7 +3,7 @@ import { Group } from '@/Components'
 import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
 import { TestResponseButton } from '@/Components/Button'
 import { Routes } from '@/lib'
-import { omit } from 'lodash'
+import { isEmpty, omit } from 'lodash'
 
 type TSmtpFormData = {
 	smtp: Schema.SmtpsFormData
@@ -12,6 +12,8 @@ type TSmtpFormData = {
 export interface ISmtpFormProps extends IFormProps<TSmtpFormData> {
 	data: TSmtpFormData
 }
+
+const requiredFields = ['smtp.host', 'smtp.port', 'smtp.domain', 'smtp.username', 'smtp.password']
 
 const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 	return (
@@ -45,18 +47,21 @@ const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 			] } />
 
 			<Group pt="md" pb="xs" position="right">
-				<FormConsumer<TSmtpFormData>>{ ({ data }) => (
+				<FormConsumer<TSmtpFormData>>{ ({ data, getData }) => (
 					<TestResponseButton
 						method="post"
 						endpoint={ Routes.apiSmtpTest() }
 						data={ { smtp: omit(data.smtp, 'id') } }
+						disabled={ requiredFields.some(field => isEmpty(getData(field))) }
 					/>
 				) }</FormConsumer>
 			</Group>
 
 			<RichText name="notes" label="Notes" />
 
-			<Submit>Save SMT Settings</Submit>
+			<Submit requiredFields={ requiredFields }>
+				Save SMT Settings
+			</Submit>
 		</Form>
 	)
 }

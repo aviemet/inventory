@@ -49,13 +49,15 @@ const SettingsLayout = ({ children, breadcrumbs }: ISettingsLayoutProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ breadcrumbs }>
-			<Section sx={ { height: '100%' } }>
+			<Section fullHeight>
 				<Tabs
 					orientation={ mobileFormat ? 'horizontal' : 'vertical' }
 					variant="pills"
 					defaultValue={ paths[1] }
 					onTabChange={ handleTabChange }
-					sx={ { height: '100%' } }
+					sx={ (theme) => ({
+						minHeight: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 60px)`,
+					}) }
 				>
 					<Paper withBorder p='xs' shadow="sm">
 						<Tabs.List
