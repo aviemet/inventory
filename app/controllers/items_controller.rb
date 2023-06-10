@@ -76,7 +76,7 @@ class ItemsController < ApplicationController
     if item.assigned?
       redirect_to item, warning: 'Item is already checked out'
     else
-      assignment = Assignment.new({ assignable: item })
+      assignment = Assignment.new({ assignable: item, assign_toable_type: "Person" })
 
       render inertia: "Items/Checkout", props: {
         item: item.render,

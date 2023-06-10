@@ -3,7 +3,7 @@ import { type ITableRow } from './index'
 import { Box } from '@mantine/core'
 import HeadCheckbox from './HeadCheckbox'
 import { useTableContext } from '../TableContext'
-import { useCheckboxState } from '@/Components/Hooks'
+import { useCheckboxState } from '@/lib/hooks'
 
 interface IHeadRowProps extends ITableRow {
 	name?: string

@@ -3,7 +3,7 @@ import { Checkbox } from '@/Components/Inputs'
 import { useForm } from 'use-inertia-form'
 import { usePermissionsForm, type FormData } from '.'
 import tableRows from './tableRows'
-import { useCheckboxState } from '@/Components/Hooks'
+import { useCheckboxState } from '@/lib/hooks'
 
 interface IColumnToggleProps {
 	permission: keyof TPermissions

@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Page, Box, Section, Tabs } from '@/Components'
-import { router, usePage } from '@inertiajs/react'
+import { router } from '@inertiajs/react'
 import { Paper, TabsValue, px, useMantineTheme } from '@mantine/core'
-import { useViewportSize } from '@mantine/hooks'
+import { useViewportSize, useLocation } from '@/lib/hooks'
+import { type TBreadcrumb } from '@/Components/Breadcrumbs'
+
+interface ISettingsLayoutProps {
+	children: React.ReactNode
+	breadcrumbs?: TBreadcrumb[]
+}
 
 type TTab = {
 	name: string
@@ -13,21 +19,24 @@ type TTab = {
 const tabs: TTab[] = [
 	{ name: 'general', label: 'General' },
 	{ name: 'appearance', label: 'Appearance' },
+	{ name: 'mail', label: 'Mail' },
 	{ name: 'notifications', label: 'Notifications' },
 	// { name: 'integrations', label: 'Integrations' },
 	{ name: 'asset_tags', label: 'Asset Tags' },
 	// { name: 'barcodes', label: 'Barcodes' },
 	{ name: 'ldap', label: 'LDAP' },
+	{ name: 'tickets', label: 'Tickets' },
 	{ name: 'backups', label: 'Backups' },
 	{ name: 'logs', label: 'Logs' },
 ]
-const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
-	const title = 'Settings'
-	const page = usePage()
 
+const SettingsLayout = ({ children, breadcrumbs }: ISettingsLayoutProps) => {
+	const title = 'Settings'
 	const { width } = useViewportSize()
 	const theme = useMantineTheme()
 	const [mobileFormat, setMobileFormat] = useState(window.innerWidth < px(theme.breakpoints.sm))
+
+	const { paths } = useLocation()
 
 	useEffect(() => {
 		if(width === 0) return
@@ -39,40 +48,40 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 	}
 
 	return (
-		<Page title={ title }>
-			<Section sx={ { height: '100%' } }>
+		<Page title={ title } breadcrumbs={ breadcrumbs }>
+			<Section fullHeight>
 				<Tabs
 					orientation={ mobileFormat ? 'horizontal' : 'vertical' }
 					variant="pills"
-					defaultValue={ page.url.replace('/settings/', '') }
+					defaultValue={ paths[1] }
 					onTabChange={ handleTabChange }
-					sx={ { height: '100%' } }
+					sx={ (theme) => ({
+						minHeight: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 60px)`,
+					}) }
 				>
-					<Paper
-						p='xs'
-						withBorder
-						shadow="sm"
-					>
-						<Tabs.List sx={ mobileFormat ? {
-							flexWrap: 'nowrap',
-							overflow: 'auto',
-						} : {} }>{ tabs.map(tab => (
-								<Tabs.Tab key={ tab.name } value={ tab.name } role="link">{ tab.label }</Tabs.Tab>
-							)) }</Tabs.List>
+					<Paper withBorder p='xs' shadow="sm">
+						<Tabs.List
+							sx={ mobileFormat ? {
+								flexWrap: 'nowrap',
+								overflow: 'auto',
+							} : {} }
+						>
+							{ tabs.map(tab => (
+								<Tabs.Tab key={ tab.name } value={ tab.name } role="link" >
+									{ tab.label }
+								</Tabs.Tab>
+							)) }
+						</Tabs.List>
 					</Paper>
+
 					{ tabs.map(tab => (
 						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs" sx={ { position: 'relative' } }>
-
-							<Box
-								p='lg'
-								sx={ {
-									height: '100%',
-								} }
-							>
+							<Box p='lg' sx={ { height: '100%' } }>
 								{ children }
 							</Box>
 						</Tabs.Panel>
 					)) }
+
 				</Tabs>
 			</Section>
 		</Page>

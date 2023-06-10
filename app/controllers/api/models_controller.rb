@@ -1,4 +1,4 @@
-class Api::ModelsController < ApplicationController
+class Api::ModelsController < Api::ApiController
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, find_by: :slug
 
   # POST api/models

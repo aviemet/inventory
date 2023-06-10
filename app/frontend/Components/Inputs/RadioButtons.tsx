@@ -4,7 +4,7 @@ import Label from './Label'
 
 export type TOption = {
 	label: string
-	value: string
+	value: string | boolean
 	defaultModel?: TAssignToable
 }
 
@@ -29,6 +29,7 @@ const RadioButtons = ({ label, labelPosition = 'start', options, name, id, value
 					if(onChange) onChange(choice)
 				} }
 				data={ options }
+				color="primary"
 			/>
 			{ label && labelPosition === 'end' && <LabelComponent /> }
 		</>

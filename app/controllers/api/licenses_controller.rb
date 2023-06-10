@@ -1,2 +1,2 @@
-class Api::LicensesController < ApplicationController
+class Api::LicensesController < Api::ApiController
 end

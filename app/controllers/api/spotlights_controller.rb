@@ -1,4 +1,4 @@
-class Api::SpotlightsController < ApplicationController
+class Api::SpotlightsController < Api::ApiController
   expose :items, -> { @active_company.items }
   expose :accessories, -> { @active_company.accessories }
   expose :components, -> { @active_company.components }

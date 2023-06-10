@@ -1,2 +1,2 @@
-class Api::WarrantiesController < ApplicationController
+class Api::WarrantiesController < Api::ApiController
 end

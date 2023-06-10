@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react'
-import { createContext } from '../Hooks'
+import { createContext } from '../../lib/hooks'
 
 /**
  * Table Section Context
@@ -33,7 +33,7 @@ interface ITableContext {
 
 interface ITableContextProviderProps {
 	children: React.ReactNode
-	selectable: boolean
+	selectable?: boolean
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
 	hideable?: boolean

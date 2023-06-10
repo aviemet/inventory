@@ -3,7 +3,7 @@ import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/Componen
 import { type UseFormProps } from 'use-inertia-form'
 import { Table } from '@/Components'
 import { usePage } from '@inertiajs/react'
-import { createContext } from '@/Components/Hooks'
+import { createContext } from '@/lib/hooks'
 import SwitchRow from './SwitchRow'
 import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'

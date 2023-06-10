@@ -463,13 +463,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
 
   create_table "smtps", force: :cascade do |t|
     t.string "name"
-    t.string "address"
+    t.string "host"
     t.integer "port"
-    t.string "domain"
-    t.string "auth"
-    t.boolean "tls"
+    t.integer "security", default: 0
     t.string "username"
     t.string "password"
+    t.string "domain"
+    t.string "address"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

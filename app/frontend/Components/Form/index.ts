@@ -1,4 +1,4 @@
-export { default as Form } from './Form'
+export { default as Form, type IFormProps } from './Form'
 export { default as TextInput } from './Inputs/TextInput'
 export { default as NumberInput } from './Inputs/NumberInput'
 export { default as PasswordInput } from './Inputs/PasswordInput'
