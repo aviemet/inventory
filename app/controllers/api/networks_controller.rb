@@ -1,2 +1,2 @@
-class Api::NetworksController < ApplicationController
+class Api::NetworksController < Api::ApiController
 end

@@ -5,12 +5,13 @@ import Label from './Label'
 
 export interface IRichTextProps extends IRichTextEditorProps {
 	label?: React.ReactNode
+	value: string
 	required?: boolean
 	id?: string
 	name?: string
 }
 
-const RichText = ( { label, name, required = false, id, ...props }: IRichTextProps) => {
+const RichText = ( { label, name, required = false, id, value, ...props }: IRichTextProps) => {
 	const inputId = id || name
 
 	return (
@@ -18,7 +19,7 @@ const RichText = ( { label, name, required = false, id, ...props }: IRichTextPro
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
-			<RichTextEditor id={ inputId } { ...props } />
+			<RichTextEditor id={ inputId } { ...props }>{ value }</RichTextEditor>
 		</>
 	)
 }

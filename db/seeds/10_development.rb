@@ -356,4 +356,17 @@ if Rails.env == "development"
     ].each{ |network|  Network.create!(network) }
   end
 
+  if Smtp.count == 0
+    Smtp.create({
+      name: "GMail",
+      host: "smtp.gmail.com",
+      port: 587,
+      security: :tls,
+      username: "temporary@gmail.com",
+      password: "Complex1!",
+      domain: "thebatterysf.com",
+      company: Company.first,
+    })
+  end
+
 end

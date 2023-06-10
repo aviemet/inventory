@@ -1,2 +1,2 @@
-class Api::IpLeasesController < ApplicationController
+class Api::IpLeasesController < Api::ApiController
 end

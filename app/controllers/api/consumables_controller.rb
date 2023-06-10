@@ -1,4 +1,4 @@
-class Api::ConsumablesController < ApplicationController
+class Api::ConsumablesController < Api::ApiController
   expose :consumable, id: ->{ params[:slug] }, scope: ->{ @active_company.consumables }, find_by: :slug
 
   # PATCH/PUT /api/consumables/:id

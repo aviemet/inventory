@@ -41,4 +41,7 @@ namespace :api do
   resources :contracts, only: [:create, :update]
 
   resources :spotlights, only: [:index]
+
+  ## SETTINGS ##
+  post "smtp/test" => "smtps#test", as: :smtp_test
 end

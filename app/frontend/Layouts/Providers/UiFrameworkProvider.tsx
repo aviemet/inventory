@@ -92,9 +92,9 @@ export const GlobalStyles = () => <Global styles={ theme => ({
 	},
 
 	'.fullHeight': {
-		display: 'flex',
-		flexDirection: 'column',
-		height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
+		// display: 'flex',
+		// flexDirection: 'column',
+		minHeight: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
 	},
 
 	'label': {

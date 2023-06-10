@@ -41,9 +41,11 @@ Rails.application.routes.draw do
     resources :general
     resources :appearance, only: [:index]
     match :appearance, to: "appearance#update", via: [:put, :patch]
+    resources :smtps, path: :mail
     resources :localizations
     resources :notifications
     resources :integrations
+    resources :tickets
     resources :asset_tags
     resources :barcodes
     resources :ldaps, path: :ldap, except: [:show, :new, :edit]

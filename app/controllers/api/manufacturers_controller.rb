@@ -1,4 +1,4 @@
-class Api::ManufacturersController < ApplicationController
+class Api::ManufacturersController < Api::ApiController
   expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
 
   # POST /api/manufacturers

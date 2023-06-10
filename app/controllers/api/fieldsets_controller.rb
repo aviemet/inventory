@@ -1,2 +1,2 @@
-class Api::FieldsetsController < ApplicationController
+class Api::FieldsetsController < Api::ApiController
 end

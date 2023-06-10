@@ -3,7 +3,7 @@ import { NestedFields, useForm } from 'use-inertia-form'
 import { Table } from '@/Components'
 import { Checkbox } from '@/Components/Inputs'
 import { Switch } from '@/Components/Form'
-import { useCheckboxState } from '@/Components/Hooks'
+import { useCheckboxState } from '@/lib/hooks'
 import { usePermissionsForm, type FormData } from '.'
 
 interface ISwitchRowProps {

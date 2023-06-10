@@ -1,10 +1,12 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import Button from '@/Components/Button'
 
-export default {
-	title: 'Components/Buttons/Button',
+type ButtonStory = StoryObj<typeof Button>
+
+const meta: Meta<typeof Button> = {
+	title: 'Buttons/Button',
 	component: Button,
 	argTypes: {
 		loaderPosition: {
@@ -20,21 +22,22 @@ export default {
 			options: [undefined, 'outline', 'white', 'light', 'default', 'filled', 'subtle', 'gradient'],
 		},
 	},
-} as ComponentMeta<typeof Button>
+}
+export default meta
 
-const ButtonTemplate: ComponentStory<typeof Button> = args => <Button { ...args } />
-
-export const Standard = ButtonTemplate.bind({})
-Standard.args = {
-	children: 'Button',
-	size: undefined,
-	compact: false,
-	disabled: false,
-	fullWidth: false,
-	loading: false,
-	loaderPosition: undefined,
-	radius: undefined,
-	uppercase: false,
-	variant: undefined,
+export const Standard: ButtonStory = {
+	args: {
+		children: 'Button Text',
+		size: undefined,
+		compact: false,
+		disabled: false,
+		fullWidth: false,
+		loading: false,
+		loaderPosition: undefined,
+		radius: undefined,
+		uppercase: false,
+		variant: undefined,
+	},
+	render: args => <Button { ...args } />,
 }
 

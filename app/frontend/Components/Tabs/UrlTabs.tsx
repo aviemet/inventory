@@ -22,9 +22,9 @@ const UrlTabs = ({ children, onTabChange, defaultValue, dependencies, ...props }
 
 	const activeTab = useCallback(() => {
 		const url = new URL(window.location.href)
+
 		return url.searchParams.get('tab')
 	}, [window.location.href])
-
 
 	// Handle direct navigation to tabbed page
 	useEffect(() => {

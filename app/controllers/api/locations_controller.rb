@@ -1,4 +1,4 @@
-class Api::LocationsController < ApplicationController
+class Api::LocationsController < Api::ApiController
   expose :loc, id: ->{ params[:slug] }, scope: ->{ @active_company.items.includes_associated }, find_by: :slug
 
   # POST /api/locations

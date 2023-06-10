@@ -1,4 +1,4 @@
-class Api::NicsController < ApplicationController
+class Api::NicsController < Api::ApiController
   expose :nic, id: ->{ params[:slug] }, scope: ->{ @active_company.nics.includes_associated }, find_by: :slug
 
   # POST /api/nics

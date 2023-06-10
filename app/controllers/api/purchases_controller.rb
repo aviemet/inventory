@@ -1,4 +1,4 @@
-class Api::PurchasesController < ApplicationController
+class Api::PurchasesController < Api::ApiController
   expose :purchase, id: ->{ params[:slug] }, scope: ->{ @active_company.purchases.includes_associated }, find_by: :slug
 
   # POST /api/purchases

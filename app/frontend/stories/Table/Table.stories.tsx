@@ -1,19 +1,42 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { Table as TableComponent } from '@/Components'
+import { Table as Table } from '@/Components'
 
-export default {
-	title: 'Example/Table',
-	component: TableComponent,
+type TableStory = StoryObj<typeof Table>
+
+const meta: Meta<typeof Table> = {
+	title: 'Table/Basic',
+	component: Table,
 	argTypes: {
 	},
-} as ComponentMeta<typeof TableComponent>
-
-const tableArgs = {
 }
+export default meta
 
-const TableTemplate: ComponentStory<typeof TableComponent> = (args) => <Table { ...args } />
+export const Standard: TableStory = {
+	render: args => (
+		<Table { ...args }>
+			<Table.Head>
+				<Table.Row>
+					<Table.Cell>Heading One</Table.Cell>
+					<Table.Cell>Heading Two</Table.Cell>
+					<Table.Cell>Heading Three</Table.Cell>
+				</Table.Row>
+			</Table.Head>
 
-export const Table = TableTemplate.bind({})
-Table.args = tableArgs
+			<Table.Body>
+				<Table.Row>
+					<Table.Cell>Body One</Table.Cell>
+					<Table.Cell>Body Two</Table.Cell>
+					<Table.Cell>Body Three</Table.Cell>
+				</Table.Row>
+
+				<Table.Row>
+					<Table.Cell>Body One</Table.Cell>
+					<Table.Cell>Body Two</Table.Cell>
+					<Table.Cell>Body Three</Table.Cell>
+				</Table.Row>
+			</Table.Body>
+		</Table>
+	),
+}

@@ -1,2 +1,2 @@
-class Api::PeopleController < ApplicationController
+class Api::PeopleController < Api::ApiController
 end

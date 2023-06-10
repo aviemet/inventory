@@ -13,7 +13,13 @@ interface IAssignToableDropdownProps {
 
 const AssignToableDropdown = ({ items, people, locations, options = ['Person', 'Item', 'Location'] }: IAssignToableDropdownProps) => {
 	const { data, setData } = useForm<{ assignment: Schema.AssignmentsFormData }>()
-	const type: TAssignToable = data.assignment.assign_toable_type
+	const type: TAssignToable = data.assignment.assign_toable_type || options[0]
+
+	useEffect(() => {
+		if(!type) {
+			setData('assignment.assign_toable_type', options[0])
+		}
+	}, [])
 
 	const modelMapping = new Map<TAssignToable, TAssignToableOptions>()
 	if(items) modelMapping.set('Item', items)
@@ -22,15 +28,13 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 
 	const model = modelMapping.get(type)
 
-	if(model === undefined) return <></>
-
-	const [optionsValues, setOptionsValues] = useState<TAssignToableOptions>(model)
+	const [optionsValues, setOptionsValues] = useState<TAssignToableOptions>(model!)
 	const strModelNameRef = useRef<TAssignToable>('Person')
 
 	useEffect(() => {
 		if(type === strModelNameRef.current) return
 
-		setOptionsValues(model)
+		setOptionsValues(model!)
 		strModelNameRef.current = type
 		setData('assignment.assign_toable_id', '')
 	}, [type])
@@ -57,6 +61,8 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 			setData('assignment.location_id', String(default_location))
 		}
 	}
+
+	if(!type) return <></>
 
 	return (
 		<>

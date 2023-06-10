@@ -1,19 +1,19 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { Money as MoneyComponent } from '@/Components'
+import { Money } from '@/Components'
 
-export default {
+type MoneyStory = StoryObj<typeof Money>
+
+const meta: Meta<typeof Money> = {
 	title: 'Example/Money',
-	component: MoneyComponent,
+	component: Money,
 	argTypes: {
 	},
-} as ComponentMeta<typeof MoneyComponent>
-
-const moneyArgs = {
 }
 
-const MoneyTemplate: ComponentStory<typeof MoneyComponent> = (args) => <Money { ...args } />
+export default meta
 
-export const Money = MoneyTemplate.bind({})
-Money.args = moneyArgs
+export const Standard: MoneyStory = {
+	render: args => <Money { ...args } />,
+}

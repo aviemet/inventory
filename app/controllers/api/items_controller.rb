@@ -1,4 +1,4 @@
-class Api::ItemsController < ApplicationController
+class Api::ItemsController < Api::ApiController
   def index
     render json: @active_company.items.render(view: :options)
   end

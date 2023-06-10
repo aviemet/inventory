@@ -1,4 +1,4 @@
-class Api::StatusLabelsController < ApplicationController
+class Api::StatusLabelsController < Api::ApiController
   expose :status_label, id: ->{ params[:slug] }, scope: ->{ @active_company.status_labels.includes_associated }, find_by: :slug
 
   # POST /api/status_labels

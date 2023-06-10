@@ -4,7 +4,7 @@ import cx from 'clsx'
 import { Form as InertiaForm, type FormProps, type NestedObject } from 'use-inertia-form'
 import useFormStyles from './useFormStyles'
 
-interface IFormProps<TForm> extends FormProps<TForm> {
+export interface IFormProps<TForm> extends FormProps<TForm> {
 	grid?: boolean
 }
 
