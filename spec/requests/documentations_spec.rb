@@ -77,7 +77,7 @@ RSpec.describe "/documentations", type: :request do
     login_admin
 
     context "with valid parameters" do
-      focus it "creates a new Documentation and redirects to show page" do
+      it "creates a new Documentation and redirects to show page" do
         ap({ valid_attributes: })
         expect{
           post documentations_url, params: valid_attributes
