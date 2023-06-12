@@ -2,6 +2,9 @@ class Manufacturer < ApplicationRecord
   include Ownable
   include Contactable
   include PgSearch::Model
+  include Documentable
+
+  multisearchable against: [:name]
 
   pg_search_scope(
     :search,
@@ -15,7 +18,7 @@ class Manufacturer < ApplicationRecord
     using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   slug :name
@@ -31,5 +34,5 @@ class Manufacturer < ApplicationRecord
   has_many :consumables, through: :models
   has_many :components, through: :models
 
-  scope :includes_associated, -> { includes([:models, :items, :accessories, :consumables, :components]) }
+  scope :includes_associated, -> { includes([:models, :items, :accessories, :consumables, :components, :documentations]) }
 end

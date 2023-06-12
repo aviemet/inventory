@@ -1,11 +1,12 @@
 require 'net/smtp'
 
 class Api::SmtpsController < Api::ApiController
-  # GET /api/smtp/test
+  # POST /api/smtp/test
   def test
-    ap({ params: })
     render json: test_smtp_auth(Smtp.new(smtp_params)), status: 200
   end
+
+  private
 
   def test_smtp_auth(smtp)
     Net::SMTP.start(smtp.host, smtp.port, smtp.domain, smtp.username, smtp.password) do |_smtp|
@@ -19,8 +20,6 @@ class Api::SmtpsController < Api::ApiController
     # Other errors
     { success: false, message: "An error occurred: #{e.message}" }
   end
-
-  private
 
   def smtp_params
     params.require(:smtp).permit(:name, :host, :domain, :port, :security, :username, :password, :address, :notes)

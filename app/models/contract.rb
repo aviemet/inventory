@@ -2,6 +2,9 @@ class Contract < ApplicationRecord
   include Ownable
   include PgSearch::Model
   include Categorizable
+  include Documentable
+
+  multisearchable against: [:name, :number]
 
   pg_search_scope(
     :search,
@@ -23,5 +26,5 @@ class Contract < ApplicationRecord
 
   belongs_to :vendor
 
-  scope :includes_associated, -> { includes([:vendor, :category]) }
+  scope :includes_associated, -> { includes([:vendor, :category, :documentations]) }
 end

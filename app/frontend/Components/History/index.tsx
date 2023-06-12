@@ -4,7 +4,7 @@ import { buildTimelineData } from './Content'
 
 interface IHistoryProps {
 	assignments?: Schema.Assignment[]
-	activities?: Schema.PublicActivityActivity[]
+	activities?: Schema.Activity[]
 }
 
 const History = ({ assignments, activities }: IHistoryProps) => {

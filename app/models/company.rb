@@ -1,11 +1,14 @@
 class Company < ApplicationRecord
   include Contactable
   include PgSearch::Model
+  include Documentable
 
   before_destroy :safely_orphan_or_destroy_dependencies
 
   SETTINGS_KEYS = %i[primary_color secondary_color company_field_name department_field_name default_eula enable_2fa].freeze
   store_accessor :settings, *SETTINGS_KEYS
+
+  multisearchable against: [:name]
 
   pg_search_scope(
     :search,
@@ -59,7 +62,7 @@ class Company < ApplicationRecord
     has_many assoc, ->{ where(type: model) }, through: :ownerships, source: :ownable, source_type: :Asset, class_name: model
   end
 
-  scope :includes_associated, -> { includes([:departments, :locations, :ownerships]) }
+  scope :includes_associated, -> { includes([:departments, :locations, :ownerships, :documentations]) }
 
   validates_presence_of :name
 

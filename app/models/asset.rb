@@ -4,6 +4,9 @@ class Asset < ApplicationRecord
   include Fieldable
   include PgSearch::Model
   include Assignable
+  include Documentable
+
+  multisearchable against: [:name, :asset_tag, :serial]
 
   pg_search_scope(
     :search,
@@ -16,7 +19,7 @@ class Asset < ApplicationRecord
     }, using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   tracked
@@ -33,7 +36,7 @@ class Asset < ApplicationRecord
   has_one :manufacturer, through: :model
   has_one :warranty, required: false
 
-  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_label, :activities]) }
+  scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_label, :activities, :documentations]) }
 
   scope :find_by_category, ->(category) { includes([:category]).where('model.category' => category) }
 

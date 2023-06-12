@@ -40,6 +40,9 @@ namespace :api do
 
   resources :contracts, only: [:create, :update]
 
+  resources :documentations, only: [:index]
+
+  resources :searches, only: [:index]
   resources :spotlights, only: [:index]
 
   ## SETTINGS ##

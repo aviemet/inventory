@@ -16,4 +16,10 @@ class ActivitySerializer < ApplicationSerializer
     :created_at,
     :updated_at,
   )
+
+  belongs_to :owner, serializer: Users::BasicSerializer
+
+  belongs_to :person, serializer: People::BasicSerializer do
+    activity.owner&.person
+  end
 end

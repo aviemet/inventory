@@ -650,6 +650,14 @@ export const apiDepartments = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,
 
 /**
  * Generates rails route to
+ * /api/documentations(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiDocumentations = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"documentations"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /api/fields/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -888,6 +896,14 @@ export const apiPurchase = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,
  * @returns {string} route path
  */
 export const apiPurchases = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"purchases"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/searches(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiSearches = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"searches"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

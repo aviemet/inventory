@@ -1,8 +1,9 @@
 class DocumentationSerializer < ApplicationSerializer
   object_as :documentation
 
+  identifier :slug
+
   attributes(
-    :id,
     :slug,
     :title,
     :body,

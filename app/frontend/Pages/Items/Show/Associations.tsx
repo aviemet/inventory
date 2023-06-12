@@ -6,7 +6,7 @@ import { IShowItemProps } from '.'
 
 const Associations = ({ item }: IShowItemProps) => {
 	return (
-		<Box mt={ 16 }>
+		<Box>
 			{ item.assigned && <Box mt={ 16 }>Assigned To: <AssignmentLink item={ item } /> </Box> }
 
 			{ (Array.isArray(item.items) && item.items.length > 0) && <Box mt={ 16 }>

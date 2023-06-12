@@ -12,5 +12,19 @@ class Documentations::ShowSerializer < ApplicationSerializer
     :updated_at,
   )
 
-  belongs_to :created_by, serializer: PersonSerializer
+  type :string
+  def documentable_name
+    documentation.documentable&.name
+  rescue StandardError
+    nil
+  end
+
+  type :string
+  def documentable_route
+    polymorphic_path(documentation.documentable_type.constantize.find(documentation.documentable_id), only_path: true)
+  rescue StandardError
+    nil
+  end
+
+  belongs_to :created_by, serializer: People::BasicSerializer
 end

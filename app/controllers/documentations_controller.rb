@@ -43,7 +43,7 @@ class DocumentationsController < ApplicationController
 
     documentation.created_by = current_user.person
     documentation.company = @active_company
-
+    ap({ documentation:, valid: documentation.valid?, errors: documentation.errors })
     if documentation.save
       redirect_to documentation, notice: "Documentation was successfully created."
     else
@@ -75,6 +75,6 @@ class DocumentationsController < ApplicationController
   end
 
   def documentation_params
-    params.require(:documentation).permit(:slug, :title, :body, :created_by_id, :category_id)
+    params.require(:documentation).permit(:slug, :title, :body, :documentable_id, :documentable_type, :created_by_id, :category_id)
   end
 end

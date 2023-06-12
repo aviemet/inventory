@@ -4,6 +4,9 @@ FactoryBot.define do
     body { Faker::Lorem.paragraph }
 
     company
-    category { association :category, company: company }
+    documentable factory: :item
+
+    documentable_id { documentable&.id }
+    documentable_type { documentable&.class&.name&.camelize }
   end
 end

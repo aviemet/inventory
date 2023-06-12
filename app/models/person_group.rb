@@ -10,7 +10,7 @@ class PersonGroup < ApplicationRecord
     using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   tracked

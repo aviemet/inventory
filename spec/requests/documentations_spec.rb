@@ -5,7 +5,8 @@ RSpec.describe "/documentations", type: :request do
   def valid_attributes
     {
       documentation: attributes_for(:documentation, {
-        category_id: create(:category).id,
+        documentable_type: "Item",
+        documentable_id: 1
       },),
     }
   end
@@ -76,7 +77,8 @@ RSpec.describe "/documentations", type: :request do
     login_admin
 
     context "with valid parameters" do
-      it "creates a new Documentation and redirects to show page" do
+      focus it "creates a new Documentation and redirects to show page" do
+        ap({ valid_attributes: })
         expect{
           post documentations_url, params: valid_attributes
         }.to change(Documentation, :count).by(1)
@@ -85,14 +87,10 @@ RSpec.describe "/documentations", type: :request do
     end
 
     context "with invalid parameters" do
-      it "does not create a new Documentation" do
+      it "does not create a new Documentation redirects back to the new documentation page" do
         expect {
           post documentations_url, params: invalid_attributes
         }.to change(Documentation, :count).by(0)
-      end
-
-      it "redirects back to the new documentation page" do
-        post documentations_url, params: invalid_attributes
         expect(response).to redirect_to new_documentation_url
       end
     end

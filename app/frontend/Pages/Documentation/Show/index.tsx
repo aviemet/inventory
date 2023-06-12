@@ -1,6 +1,7 @@
 import React from 'react'
-import { Group, Heading, Menu, Page, Section } from '@/Components'
+import { DangerousHtml, Date, Group, Heading, Link, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
+import { Text } from '@mantine/core'
 
 interface IShowDocumentationProps {
 	documentation: Schema.DocumentationsShow
@@ -16,17 +17,26 @@ const ShowDocumentation = ({ documentation }: IShowDocumentationProps) => {
 		] }>
 			<Section>
 				<Group position="apart">
-					<Heading>{ title }</Heading>
+					<Heading>{ documentation.title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editDocumentation(documentation.id) }>
+							<Menu.Link href={ Routes.editDocumentation(documentation.slug) }>
 								Edit Documentation
 							</Menu.Link>
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
+
+				<Text>In reference to: <Link href={ documentation.documentable_route }>{ documentation.documentable_name }</Link></Text>
+				{ documentation.created_by && <Text size="sm">
+					Created by: <Link href={ Routes.person(documentation.created_by.id!) }>{ documentation.created_by.name } </Link>
+					on <Date>{ documentation.created_at }</Date>
+				</Text> }
+				<Text size="sm">Last updated on <Date>{ documentation.updated_at }</Date></Text>
+
+				<DangerousHtml mt="md">{ documentation.body }</DangerousHtml>
 
 			</Section>
 		</Page>

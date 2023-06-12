@@ -3,7 +3,7 @@ import { formatter, polymorphicRoute } from '@/lib'
 import { Text } from '@mantine/core'
 import { Link } from '@/Components'
 
-const AssignmentHistoryContent = ({ activity }: { activity: Schema.PublicActivityActivity }) => {
+const AssignmentHistoryContent = ({ activity }: { activity: Schema.Activity }) => {
 
 	return (
 		<>

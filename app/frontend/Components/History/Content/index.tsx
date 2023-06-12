@@ -14,7 +14,7 @@ type TTimelineData = {
 	lineStyle: 'dashed'|'dotted'|'solid'
 }
 
-export const buildTimelineData = (activity: Schema.PublicActivityActivity, assignment?: Schema.Assignment) => {
+export const buildTimelineData = (activity: Schema.Activity, assignment?: Schema.Assignment) => {
 	const timelineData: TTimelineData = {
 		title: activity.key ? `${capitalize(activity.key.split('.')[1])}d` : '',
 		content: <></>,
@@ -47,7 +47,7 @@ export const buildTimelineData = (activity: Schema.PublicActivityActivity, assig
 
 	// Audit
 	} else {
-		timelineData.content = <AuditHistoryContent activity={ activity as Schema.PublicActivityActivity } />
+		timelineData.content = <AuditHistoryContent activity={ activity as Schema.Activity } />
 		timelineData.lineStyle = 'dotted'
 	}
 

@@ -264,6 +264,16 @@ export const apiDepartments: ((
 
 /**
  * Generates rails route to
+ * /api/documentations(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiDocumentations: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/fields/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -573,6 +583,16 @@ export const apiPurchase: ((
  * @returns {string} route path
  */
 export const apiPurchases: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/searches(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiSearches: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

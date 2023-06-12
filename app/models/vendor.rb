@@ -2,6 +2,9 @@ class Vendor < ApplicationRecord
   include Contactable
   include Ownable
   include PgSearch::Model
+  include Documentable
+
+  multisearchable against: [:name]
 
   pg_search_scope(
     :search,
@@ -16,7 +19,7 @@ class Vendor < ApplicationRecord
     using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
   )
 
   tracked
@@ -33,5 +36,5 @@ class Vendor < ApplicationRecord
 
   validates_presence_of :name
 
-  scope :includes_associated, -> { includes([:contracts, :items, :accessories, :consumables, :components, :licenses]) }
+  scope :includes_associated, -> { includes([:contracts, :items, :accessories, :consumables, :components, :licenses, :documentations]) }
 end
