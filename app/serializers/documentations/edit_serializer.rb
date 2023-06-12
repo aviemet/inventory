@@ -8,6 +8,8 @@ class Documentations::EditSerializer < ApplicationSerializer
     :slug,
     :title,
     :body,
+    :documentable_id,
+    :documentable_type,
     :created_at,
     :updated_at,
   )

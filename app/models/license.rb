@@ -19,6 +19,7 @@ class License < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   tracked

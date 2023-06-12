@@ -20,6 +20,7 @@ class Asset < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   tracked

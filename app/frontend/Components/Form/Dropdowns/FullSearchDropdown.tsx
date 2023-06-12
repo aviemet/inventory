@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react'
 import { SearchableDropdown } from '@/Components/Form'
 import { Routes } from '@/lib'
+import { ISearchableDropdownFormProps } from '../Inputs/SearchableDropdown'
 
-interface IFullSearchDropdown {
+interface IFullSearchDropdown extends Omit<ISearchableDropdownFormProps, 'options'> {
 	name: string
 	label: string
 }

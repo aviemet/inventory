@@ -12,6 +12,7 @@ class Network < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   tracked

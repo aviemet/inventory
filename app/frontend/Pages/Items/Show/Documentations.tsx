@@ -1,6 +1,8 @@
 import React from 'react'
+import { IShowItemProps } from '.'
 
-const Documentations = () => {
+const Documentations = ({ item }: IShowItemProps) => {
+	console.log({ item })
 	return (
 		<div>Documentations</div>
 	)

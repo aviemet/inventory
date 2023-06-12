@@ -9,6 +9,7 @@ class Documentation < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   slug :title

@@ -8,8 +8,17 @@ import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 import axios from 'axios'
 
+export interface IDropdownWithModalButton {
+	name?: string
+	model?: string
+	label?: string
+	fetchOnOpen?: string
+	required?: boolean
+	errorKey?: string
+}
+
 type OmittedDropdownTypes = 'name'|'defaultValue'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
-interface IInputProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IInertiaInputProps {
+export interface ISearchableDropdownFormProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IInertiaInputProps {
 	defaultValue?: string
 	onDropdownOpen?: (form: UseFormProps<any>) => void
 	onDropdownClose?: (form: UseFormProps<any>) => void
@@ -19,7 +28,7 @@ interface IInputProps extends Omit<ISearchableDropdownProps, OmittedDropdownType
 	field?: boolean
 }
 
-const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
+const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormProps>((
 	{
 		name,
 		label,
@@ -42,7 +51,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 	},
 	ref,
 ) => {
-	const [fetchedOptions, setFetchedOptions] = useState([])
+	const [fetchedOptions, setFetchedOptions] = useState<Schema.Search[]>([])
 
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model, errorKey })
 
@@ -54,7 +63,6 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 				},
 			})
 				.then(response => {
-					console.log({ response })
 					setFetchedOptions(response.data)
 				})
 				.catch(error => {
@@ -72,7 +80,11 @@ const SearchableDropdown = forwardRef<HTMLInputElement, IInputProps>((
 
 	const handleChange = (option: string|null) => {
 		setValue(option ? option : '')
-		if(onChange) onChange(option, form)
+		let optionArg: Schema.Search|string|null = option
+		if(endpoint) {
+			optionArg = fetchedOptions.find(el => String(el.id) === String(option))!
+		}
+		if(onChange) onChange(optionArg, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {

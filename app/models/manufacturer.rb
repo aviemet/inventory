@@ -19,6 +19,7 @@ class Manufacturer < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   slug :name

@@ -1,5 +1,6 @@
 import React from 'react'
 import { SearchableDropdown } from '@/Components/Form'
+import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
 
 interface IPeopleDropdown extends IDropdownWithModalButton {
 	people: Schema.PeopleOptions[]

@@ -1,7 +1,9 @@
 import React from 'react'
-import { Form, TextInput, Submit, RichText, FormConsumer, SearchableDropdown } from '@/Components/Form'
+import { Form, TextInput, Submit, RichText, FormConsumer, HiddenInput } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 import FullSearchDropdown from '@/Components/Form/Dropdowns/FullSearchDropdown'
+import { Routes, polymorphicRoute } from '@/lib'
+import DocumentationSearch from '@/Components/Form/Autocompletes/DocumentationSearch'
 
 type TDocumentationFormData = {
 	documentation: Schema.DocumentationsFormData
@@ -15,10 +17,7 @@ export interface IDocumentationFormProps {
 }
 
 const DocumentationForm = ({ method = 'post', documentation, ...props }: IDocumentationFormProps) => {
-	const handleChange = ({ data }) => {
-		console.log({ data })
-	}
-
+	console.log({ documentation })
 	return (
 		<Form
 			model="documentation"
@@ -26,11 +25,22 @@ const DocumentationForm = ({ method = 'post', documentation, ...props }: IDocume
 			method={ method }
 			{ ...props }
 		>
-			<FormConsumer onChange={ handleChange } />
+			<FormConsumer onChange={ ({ data }) => console.log({ data }) } />
 
-			<FullSearchDropdown name="documentable.id" label="Referencing" />
+			<DocumentationSearch
+				name="documentable_id"
+				label="Referencing"
+				required
+			/>
 
-			<TextInput name="title" label="Title" />
+			{ /* <FullSearchDropdown
+				name="documentable_id"
+				label="Referencing"
+				onChange={ (value, { setData }) => setData('documentation.documentable_type', value.searchable_type)  }
+			/> */ }
+			<HiddenInput name="documentable_type" />
+
+			<TextInput name="title" label="Title" required />
 
 			<RichText name="body" label="Body" />
 
