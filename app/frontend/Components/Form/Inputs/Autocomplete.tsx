@@ -3,7 +3,6 @@ import Field from '../Field'
 import AutocompleteInput, { type IAutocompleteProps } from '@/Components/Inputs/AutocompleteInput'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
-import ConditionalWrapper from '@/Components/ConditionalWrapper'
 
 interface IFormAutocompleteProps extends Omit<IAutocompleteProps, 'name'|'onBlur'|'onChange'>, IInertiaInputProps {
 	field?: boolean
@@ -47,9 +46,9 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 			ref={ ref }
 			wrapperProps={ {
 				component: Field,
-				className:  cx({ compact, required }),
-				required,
-				errors: !!error,
+				className: cx({ compact, required }),
+				errors: Boolean(error),
+				sx: { padding: 0 },
 			} }
 			{ ...props }
 		/>
