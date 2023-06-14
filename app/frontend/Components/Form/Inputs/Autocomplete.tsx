@@ -6,6 +6,7 @@ import { useInertiaInput } from 'use-inertia-form'
 
 interface IFormAutocompleteProps extends Omit<IAutocompleteProps, 'name'|'onBlur'|'onChange'>, IInertiaInputProps {
 	field?: boolean
+	endpoint?: string
 }
 
 const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocompleteProps>((
@@ -19,6 +20,7 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 		compact = false,
 		errorKey,
 		field = true,
+		endpoint,
 		 ...props
 	},
 	ref,

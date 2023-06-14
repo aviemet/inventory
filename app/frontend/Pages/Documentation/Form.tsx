@@ -27,17 +27,13 @@ const DocumentationForm = ({ method = 'post', documentation, ...props }: IDocume
 		>
 			<FormConsumer onChange={ ({ data }) => console.log({ data }) } />
 
-			<DocumentationSearch
+			<FullSearchDropdown
 				name="documentable_id"
 				label="Referencing"
+				onChange={ (value, { setData }) => setData('documentation.documentable_type', value.searchable_type) }
 				required
 			/>
 
-			{ /* <FullSearchDropdown
-				name="documentable_id"
-				label="Referencing"
-				onChange={ (value, { setData }) => setData('documentation.documentable_type', value.searchable_type)  }
-			/> */ }
 			<HiddenInput name="documentable_type" />
 
 			<TextInput name="title" label="Title" required />
