@@ -10,6 +10,7 @@ class Category < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   slug :slug_from_category_type

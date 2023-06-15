@@ -38,20 +38,20 @@ Rails.application.routes.draw do
   # SETTINGS PAGES #
 
   namespace :settings do
-    resources :general
     resources :appearance, only: [:index]
     match :appearance, to: "appearance#update", via: [:put, :patch]
-    resources :smtps, path: :mail
-    resources :localizations
-    resources :notifications
-    resources :integrations
-    resources :tickets
     resources :asset_tags
+    resources :backups
     resources :barcodes
+    resources :general
+    resources :integrations
     resources :ldaps, path: :ldap, except: [:show, :new, :edit]
     patch "ldaps/:id/sync" => "ldaps#sync", as: :ldap_sync
-    resources :backups
+    resources :localizations
     resources :logs
+    resources :notifications
+    resources :smtps, path: :mail
+    resources :tickets
   end
 
   # DEVISE PATHS #

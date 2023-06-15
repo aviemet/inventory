@@ -2,6 +2,7 @@ import React from 'react'
 import { SearchableDropdown } from '@/Components/Form'
 import { Routes } from '@/lib'
 import StatusLabelsForm from '@/Pages/StatusLabels/Form'
+import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
 
 interface IStatusLabelsDropdown extends IDropdownWithModalButton {
 	status_labels: Schema.StatusLabelsOptions[]

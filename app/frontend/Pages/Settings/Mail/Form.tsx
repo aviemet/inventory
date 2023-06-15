@@ -2,8 +2,8 @@ import React from 'react'
 import { Group } from '@/Components'
 import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
 import { TestResponseButton } from '@/Components/Button'
-import { Routes } from '@/lib'
-import { isEmpty, omit } from 'lodash'
+import { Routes, isUnset } from '@/lib'
+import { omit } from 'lodash'
 
 type TSmtpFormData = {
 	smtp: Schema.SmtpsFormData
@@ -52,7 +52,7 @@ const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 						method="post"
 						endpoint={ Routes.apiSmtpTest() }
 						data={ { smtp: omit(data.smtp, 'id') } }
-						disabled={ requiredFields.some(field => isEmpty(getData(field))) }
+						disabled={ requiredFields.some(field => isUnset(getData(field))) }
 					/>
 				) }</FormConsumer>
 			</Group>

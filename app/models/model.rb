@@ -3,6 +3,9 @@ class Model < ApplicationRecord
   include Fieldable
   include PgSearch::Model
   include Categorizable
+  include Documentable
+
+  multisearchable against: [:name, :model_number]
 
   pg_search_scope(
     :search,
@@ -13,6 +16,7 @@ class Model < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   slug :name
@@ -29,7 +33,7 @@ class Model < ApplicationRecord
   validates_presence_of :name
   validates :name, uniqueness: { scope: :model_number, message: "Model already exists" }
 
-  scope :includes_associated, -> { includes([:manufacturer, :category, :items, :accessories, :consumables, :components]) }
+  scope :includes_associated, -> { includes([:manufacturer, :category, :items, :accessories, :consumables, :components, :documentations]) }
 
   def types
     self.category.type.where(model: self)

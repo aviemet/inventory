@@ -1,7 +1,14 @@
 require 'rails_helper'
+require_relative '../../support/devise'
 
 RSpec.describe "Settings::Ldaps", type: :request do
   describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+    login_admin
+
+    it "renders" do
+      get settings_ldaps_url
+
+      expect(response).to have_http_status(:ok)
+    end
   end
 end

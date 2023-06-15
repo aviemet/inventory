@@ -7,7 +7,7 @@ class Documentations::FormDataSerializer < ApplicationSerializer
     :slug,
     :title,
     :body,
+    :documentable_id,
+    :documentable_type,
   )
-
-  belongs_to :created_by, serializer: PersonSerializer
 end

@@ -2,6 +2,9 @@ class Department < ApplicationRecord
   include Contactable
   include Ownable
   include PgSearch::Model
+  include Documentable
+
+  multisearchable against: [:name]
 
   pg_search_scope(
     :search,
@@ -13,6 +16,7 @@ class Department < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   slug :name
@@ -42,5 +46,5 @@ class Department < ApplicationRecord
     has_many assoc, through: :ownerships, source: :ownable, source_type: model.to_s
   end
 
-  scope :includes_associated, -> { includes([:location, :manager, :items, :contracts, :people, :vendors]) }
+  scope :includes_associated, -> { includes([:location, :manager, :items, :contracts, :people, :vendors, :documentations]) }
 end

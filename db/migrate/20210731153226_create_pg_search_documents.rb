@@ -1,6 +1,7 @@
 class CreatePgSearchDocuments < ActiveRecord::Migration[6.1]
   def up
     execute "create extension pg_trgm;"
+    enable_extension "unaccent"
 
     say_with_time("Creating table for pg_search multisearch") do
       create_table :pg_search_documents do |t|

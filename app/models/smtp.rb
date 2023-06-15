@@ -20,6 +20,7 @@ class Smtp < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
 end

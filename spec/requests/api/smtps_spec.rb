@@ -2,13 +2,13 @@ require 'rails_helper'
 require_relative '../../support/devise'
 
 RSpec.describe "Api::Smtps", type: :request do
-  describe "GET /test" do
+  describe "POST /test" do
     login_admin
 
     it "doesn't authenticate with invalid credentials" do
-      smtp = create(:smtp)
+      smtp = build(:smtp)
 
-      get api_smtp_test_path(smtp.id)
+      post api_smtp_test_path, params: { smtp: smtp.as_json }
 
       response_body = JSON.parse(response.body)
 

@@ -1,19 +1,28 @@
 import React from 'react'
 import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
-import { EditIcon, CheckinIcon, CheckoutIcon, TicketsIcon } from '@/Components/Icons'
+import { EditIcon, CheckinIcon, CheckoutIcon, TicketsIcon, DocumentationIcon } from '@/Components/Icons'
 import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'
+import Documentations from './Documentations'
 
 export interface IShowItemProps {
 	item: Schema.ItemsShow
 }
 
+const tabsList = [
+	{ id: 'details', label: 'Details', component: Details },
+	{ id: 'history', label: 'History', component: ItemHistory },
+	{ id: 'documentations', label: 'Documentation', component: Documentations },
+	{ id: 'associations', label: 'Associations', component: Associations },
+]
+
 const tabs = {
 	details: 'details',
 	history: 'history',
 	associations: 'associations',
+	documentations: 'documentations',
 }
 
 const ShowItem = ({ item }: IShowItemProps) => {
@@ -24,7 +33,7 @@ const ShowItem = ({ item }: IShowItemProps) => {
 			{ title: 'Hardware', href: Routes.items() },
 			{ title: item.name! },
 		] }>
-			<Section>
+			<Section fullHeight>
 				<Group position="apart">
 					<Heading sx={ { flex: 1 } }>{ title }</Heading>
 
@@ -46,31 +55,34 @@ const ShowItem = ({ item }: IShowItemProps) => {
 
 							<Menu.Divider />
 
-							<Menu.Link href={ Routes.newTicket({ 'ticket.asset_id': item.id }) } icon={ <TicketsIcon /> }>Open New Ticket</Menu.Link>
+							<Menu.Link href={ Routes.newTicket({ 'ticket.asset_id': item.id }) } icon={ <TicketsIcon /> }>
+								Open New Ticket
+							</Menu.Link>
+							<Menu.Link href={ Routes.newDocumentation({ 'documentation.documentable_type': 'Item', 'documentation.documentable_id': item.id }) } icon={ <DocumentationIcon /> }>
+								New Documentation
+							</Menu.Link>
+
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
 
 				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
 					<Tabs.List>
-						<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
-						<Tabs.Tab value={ tabs.history }>History</Tabs.Tab>
-						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
+						{ tabsList.map(tab => (
+							<Tabs.Tab key={ tab.id } value={ tab.id }>{ tab.label }</Tabs.Tab>
+						)) }
 					</Tabs.List>
 
-					<Tabs.Panel value={ tabs.details }>
-						<Details item={ item } />
-					</Tabs.Panel>
+					{ tabsList.map(tab => {
+						const Component = tab.component
 
-					<Tabs.Panel value={ tabs.history }>
-						<ItemHistory item={ item } />
-					</Tabs.Panel>
-
-					<Tabs.Panel value={ tabs.associations }>
-						<Associations item={ item } />
-					</Tabs.Panel>
+						return (
+							<Tabs.Panel key={ tab.id } value={ tab.id } p="md">
+								<Component item={ item } />
+							</Tabs.Panel>
+						)
+					}) }
 				</Tabs>
-
 			</Section>
 		</Page>
 	)

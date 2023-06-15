@@ -13,15 +13,15 @@ const EditDocumentation = ({ documentation }: IEditDocumentationProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Documentations', href: Routes.documentations() },
-			{ title: Documentation, href: Routes.documentation(documentation.id) },
+			{ title: documentation.title!, href: Routes.documentation(documentation.slug) },
 			{ title },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>
-				
+
 				<DocumentationsForm
 					method='put'
-					to={ Routes.documentation() }
+					to={ Routes.documentation(documentation.slug) }
 					documentation={ documentation }
 				/>
 			</Section>
