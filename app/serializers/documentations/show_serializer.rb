@@ -1,3 +1,5 @@
+include Rails.application.routes.url_helpers
+
 class Documentations::ShowSerializer < ApplicationSerializer
   object_as :documentation
 
@@ -21,6 +23,7 @@ class Documentations::ShowSerializer < ApplicationSerializer
 
   type :string
   def documentable_route
+    ap({ record: documentation.documentable_type.constantize.find(documentation.documentable_id) })
     polymorphic_path(documentation.documentable_type.constantize.find(documentation.documentable_id), only_path: true)
   rescue StandardError
     nil

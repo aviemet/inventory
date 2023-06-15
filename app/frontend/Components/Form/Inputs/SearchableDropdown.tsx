@@ -55,6 +55,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model, errorKey })
 
+	// TODO: Reminder that endpoint fetching was moved to Inputs component, this needs to be reworked
 	const fetchNewRecords = (query?: string) => {
 		if(endpoint && query){
 			axios.get(endpoint, {
@@ -63,6 +64,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 				},
 			})
 				.then(response => {
+					console.log({ response })
 					setFetchedOptions(response.data)
 				})
 				.catch(error => {
@@ -74,13 +76,11 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 	}
 
 	const handleSearchChange = (query: string) => {
-		console.log('SEARCH')
 		fetchNewRecords(query)
 		if(onSearchChange) onSearchChange(query)
 	}
 
 	const handleChange = (option: string|null) => {
-		console.log('CHANGE')
 		setValue(option ? option : '')
 		let optionArg: Schema.Search|string|null = option
 		if(endpoint) {
@@ -90,18 +90,15 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-		console.log('BLUR')
 		if(onBlur) onBlur(value, form)
 	}
 
 	const handleDropdownOpen = () => {
-		console.log('OPEN')
 		fetchNewRecords()
 		if(onDropdownOpen) onDropdownOpen(form)
 	}
 
 	const handleDropdownClose = () => {
-		console.log('CLOSE')
 		if(onDropdownClose) onDropdownClose(form)
 	}
 
