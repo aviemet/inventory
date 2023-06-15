@@ -57,6 +57,7 @@ class DocumentationsController < ApplicationController
     if documentation.update(documentation_params)
       redirect_to documentation, notice: "Documentation was successfully updated."
     else
+      ap({ errors: documentation.errors })
       redirect_to edit_documentation_path, inertia: { errors: documentation.errors }
     end
   end

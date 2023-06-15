@@ -10,6 +10,4 @@ class Documentations::FormDataSerializer < ApplicationSerializer
     :documentable_id,
     :documentable_type,
   )
-
-  belongs_to :created_by, serializer: PersonSerializer
 end

@@ -74,11 +74,13 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 	}
 
 	const handleSearchChange = (query: string) => {
+		console.log('SEARCH')
 		fetchNewRecords(query)
 		if(onSearchChange) onSearchChange(query)
 	}
 
 	const handleChange = (option: string|null) => {
+		console.log('CHANGE')
 		setValue(option ? option : '')
 		let optionArg: Schema.Search|string|null = option
 		if(endpoint) {
@@ -88,15 +90,18 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-		if(onChange) onChange(value, form)
+		console.log('BLUR')
+		if(onBlur) onBlur(value, form)
 	}
 
 	const handleDropdownOpen = () => {
+		console.log('OPEN')
 		fetchNewRecords()
 		if(onDropdownOpen) onDropdownOpen(form)
 	}
 
 	const handleDropdownClose = () => {
+		console.log('CLOSE')
 		if(onDropdownClose) onDropdownClose(form)
 	}
 

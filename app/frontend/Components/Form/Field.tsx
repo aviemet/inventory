@@ -11,7 +11,6 @@ export interface IFieldProps extends BoxProps {
 }
 
 const Field = ({ children, type, required = false, errors = false, className, grid, ...props }: IFieldProps) => {
-	console.log({ className })
 	return (
 		<Box
 			className={ cx(
