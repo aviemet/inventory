@@ -1,7 +1,8 @@
 import React from 'react'
 import { Form, TextInput, Submit, RichText } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import { CategoriesDropdown } from '@/Components/Form/Dropdowns'
+import DocumentableSearchDropdown from '@/Components/Form/Dropdowns/DocumentableSearchDropdown'
+import { omit } from 'lodash'
 
 type TDocumentationFormData = {
 	documentation: Schema.DocumentationsFormData
@@ -12,21 +13,23 @@ export interface IDocumentationFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TDocumentationFormData>) => boolean|void
 	documentation: Schema.DocumentationsFormData
-	categories: Schema.CategoriesOptions[]
 }
 
-const DocumentationForm = ({ method = 'post', documentation, categories, ...props }: IDocumentationFormProps) => {
-	console.log({ categories })
+const DocumentationForm = ({ method = 'post', documentation, ...props }: IDocumentationFormProps) => {
+
 	return (
 		<Form
 			model="documentation"
-			data={ { documentation } }
+			data={ { documentation: omit(documentation, ['id', 'created_by']) as Schema.DocumentationsFormData } }
 			method={ method }
 			{ ...props }
 		>
-			<TextInput name="title" label="Title" />
+			<DocumentableSearchDropdown
+				label="Referencing"
+				required
+			/>
 
-			<CategoriesDropdown categories={ categories } />
+			<TextInput name="title" label="Title" required />
 
 			<RichText name="body" label="Body" />
 

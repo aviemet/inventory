@@ -1,7 +1,6 @@
 class Documentation < ApplicationRecord
   include Ownable
   include PgSearch::Model
-  include Categorizable
 
   pg_search_scope(
     :search,
@@ -10,6 +9,7 @@ class Documentation < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   slug :title
@@ -17,6 +17,7 @@ class Documentation < ApplicationRecord
   tracked
   resourcify
 
+  belongs_to :documentable, polymorphic: true
   belongs_to :created_by, class_name: "Person", required: false
 
   validates_presence_of :title

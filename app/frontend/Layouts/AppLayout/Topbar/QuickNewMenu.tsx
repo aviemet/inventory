@@ -10,6 +10,7 @@ import {
 	ComponentsIcon,
 	ConsumablesIcon,
 	VendorsIcon,
+	DocumentationIcon,
 } from '@/Components/Icons'
 import { Routes } from '@/lib'
 import { useViewportSize } from '@mantine/hooks'
@@ -59,6 +60,9 @@ const QuickNewMenu = () => {
 
 				<Menu.Link href={ Routes.newTicket() } icon={ <TicketsIcon /> }>
 					New Ticket
+				</Menu.Link>
+				<Menu.Link href={ Routes.newDocumentation() } icon={ <DocumentationIcon /> }>
+					New Documentation
 				</Menu.Link>
 			</Menu.Dropdown>
 		</Menu>

@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react'
 import { SearchableDropdown } from '@/Components/Form'
+import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
 
 interface IItemsDropdown extends IDropdownWithModalButton {
 	items?: Schema.Item[]

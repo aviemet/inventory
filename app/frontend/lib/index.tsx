@@ -1,6 +1,5 @@
-import { cloneDeep, unset, get, set } from 'lodash'
+import { cloneDeep, unset, get, set, isEmpty } from 'lodash'
 import { Routes } from '@/lib'
-import { NestedObject } from 'use-inertia-form'
 export { default as IPAddress } from './IPAddress'
 
 export * as Routes from '@/types/routes'
@@ -62,4 +61,16 @@ export const exclude = <T extends any, K extends string>(obj: T, keys: K | K[]):
 		})
 	}
 	return clone
+}
+
+export const isUnset = (v: any) => {
+	if(typeof v === 'string') {
+		return v === ''
+	}
+
+	if(typeof v === 'number') {
+		return v === 0 ? false : !Boolean(v)
+	}
+
+	return isEmpty(v)
 }

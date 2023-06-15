@@ -1,32 +1,33 @@
 import React from 'react'
-import { Routes } from '@/lib'
 import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
+import { Routes, capitalize, polymorphicRoute } from '@/lib'
 
 const DocumentationTable = (props: ITableProps) => {
 	return (
-		<Table>
+		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="slug">Slug</Table.Cell>
 					<Table.Cell sort="title">Title</Table.Cell>
+					<Table.Cell sort="slug">Thing</Table.Cell>
 
 					<Table.Cell className="actions">Actions</Table.Cell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				<Table.RowIterator render={ (documentation: Schema.DocumentationsIndex) => (
-					<Table.Row key={ documentation.id }>
+				<Table.RowIterator render={ (doc: Schema.DocumentationsIndex) => (
+					<Table.Row key={ doc.id }>
 						<Table.Cell>
-							<Link href={ Routes.documentation(documentation.id) }>{ documentation.slug }</Link>
-						</Table.Cell>
-						<Table.Cell>
-							<Link href={ Routes.documentation(documentation.id) }>{ documentation.title }</Link>
+							<Link href={ Routes.documentation(doc.slug) }>{ doc.title }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
-							<EditButton href={ Routes.editDocumentation(documentation.id) } />
+							<Link href={ doc.route }>{ doc.slug }</Link>
+						</Table.Cell>
+
+						<Table.Cell>
+							<EditButton href={ Routes.editDocumentation(doc.id) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

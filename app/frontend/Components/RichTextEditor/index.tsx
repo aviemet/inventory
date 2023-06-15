@@ -1,6 +1,6 @@
 import React from 'react'
 import { RichTextEditor, Link, type RichTextEditorProps } from '@mantine/tiptap'
-import { useEditor } from '@tiptap/react'
+import { useEditor, BubbleMenu, FloatingMenu } from '@tiptap/react'
 import Highlight from '@tiptap/extension-highlight'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
@@ -76,6 +76,25 @@ const RichTextEditorComponent = ({ children, onChange }: IRichTextEditorProps) =
 				</RichTextEditor.ControlsGroup>
 			</RichTextEditor.Toolbar>
 
+			{ editor && (
+				<BubbleMenu editor={ editor }>
+					<RichTextEditor.ControlsGroup>
+						<RichTextEditor.Bold />
+						<RichTextEditor.Italic />
+						<RichTextEditor.Link />
+					</RichTextEditor.ControlsGroup>
+				</BubbleMenu>
+			) }
+
+			{ editor && (
+				<FloatingMenu editor={ editor }>
+					<RichTextEditor.ControlsGroup>
+						<RichTextEditor.H1 />
+						<RichTextEditor.H2 />
+						<RichTextEditor.BulletList />
+					</RichTextEditor.ControlsGroup>
+				</FloatingMenu>
+			) }
 			<RichTextEditor.Content />
 		</RichTextEditor>
 	)

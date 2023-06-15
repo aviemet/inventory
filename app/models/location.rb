@@ -4,6 +4,9 @@ class Location < ApplicationRecord
   include Contactable
   include Fieldable
   include PgSearch::Model
+  include Documentable
+
+  multisearchable against: [:name]
 
   pg_search_scope(
     :search,
@@ -13,6 +16,7 @@ class Location < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   slug :name
@@ -25,7 +29,7 @@ class Location < ApplicationRecord
 
   validates_presence_of :name
 
-  scope :includes_associated, -> { includes([:parent, :department, :activities]) }
+  scope :includes_associated, -> { includes([:parent, :department, :activities, :documentations]) }
 
   def default_location
     self

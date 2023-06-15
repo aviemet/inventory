@@ -3,7 +3,7 @@ import { Link, Table } from '@/Components'
 import { formatter, Routes } from '@/lib'
 
 interface IDashboardProps {
-	activities: Schema.PublicActivityActivity[]
+	activities: Schema.ActivitiesDashboard[]
 }
 
 const RecentActivityTable = ({ activities }: IDashboardProps) => {
@@ -29,7 +29,7 @@ const RecentActivityTable = ({ activities }: IDashboardProps) => {
 						</Table.Cell>
 						<Table.Cell>{ activity.key }</Table.Cell>
 						<Table.Cell>
-							{ activity.person && <Link href={ Routes.person(activity.person.id) }>{ activity.person?.name }</Link> }
+							{ activity.person && <Link href={ Routes.person(activity.person.id!) }>{ activity.person?.name }</Link> }
 						</Table.Cell>
 						<Table.Cell>{ formatter.date.long(activity.created_at!) }</Table.Cell>
 					</Table.Row>

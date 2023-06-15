@@ -8,7 +8,8 @@ class Ticket < ApplicationRecord
     }, using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
+    ignoring: :accents,
   )
 
   tracked

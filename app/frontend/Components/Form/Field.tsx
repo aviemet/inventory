@@ -19,6 +19,7 @@ const Field = ({ children, type, required = false, errors = false, className, gr
 				{ 'required': required },
 				{ 'field_with_errors': errors },
 				{ 'no-grid': grid === false },
+				className,
 			) }
 			{ ...props }
 		>

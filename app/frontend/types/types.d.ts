@@ -202,14 +202,6 @@ declare global {
 		onBlur?: (value: T, form: UseFormProps) => void
 	}
 
-	interface IDropdownWithModalButton {
-		name?: string
-		model?: string
-		label?: string
-		fetchOnOpen?: string
-		required?: boolean
-		errorKey?: string
-	}
 }
 
 declare module '@mantine/core' {

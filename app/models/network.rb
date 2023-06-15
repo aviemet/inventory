@@ -1,6 +1,9 @@
 class Network < ApplicationRecord
   include Ownable
   include PgSearch::Model
+  include Documentable
+
+  multisearchable against: [:name, :address, :gateway, :vlan_id]
 
   pg_search_scope(
     :search,
@@ -8,7 +11,8 @@ class Network < ApplicationRecord
     using: {
       tsearch: { prefix: true },
       trigram: {}
-    }
+    },
+    ignoring: :accents,
   )
 
   tracked

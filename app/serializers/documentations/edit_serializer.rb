@@ -8,8 +8,8 @@ class Documentations::EditSerializer < ApplicationSerializer
     :slug,
     :title,
     :body,
-    :created_at,
-    :updated_at,
+    :documentable_id,
+    :documentable_type,
   )
 
   belongs_to :created_by, serializer: PersonSerializer

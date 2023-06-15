@@ -4,6 +4,9 @@ class Person < ApplicationRecord
   include AssignToable
   include Fieldable
   include PgSearch::Model
+  include Documentable
+
+  multisearchable against: [:first_name, :middle_name, :last_name, :employee_number]
 
   pg_search_scope(
     :search,
@@ -14,6 +17,7 @@ class Person < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   tracked
@@ -39,7 +43,7 @@ class Person < ApplicationRecord
 
   delegate :to_s, to: :full_name
 
-  scope :includes_associated, -> { includes([:user, :manager, :department]) }
+  scope :includes_associated, -> { includes([:user, :manager, :department, :documentations]) }
 
   def full_name
     "#{first_name} #{last_name}"

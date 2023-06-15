@@ -2,6 +2,7 @@ import React from 'react'
 import { SearchableDropdown } from '@/Components/Form'
 import { Routes } from '@/lib'
 import DepartmentsForm from '@/Pages/Departments/Form'
+import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
 
 interface IDepartmentsDropdown extends IDropdownWithModalButton {
 	departments: Schema.DepartmentsOptions[]

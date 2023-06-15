@@ -1,7 +1,7 @@
 include Rails.application.routes.url_helpers
 
 class Activities::DashboardSerializer < ApplicationSerializer
-  object_as :activity
+  object_as :activity, model: "PublicActivity::Activity"
 
   attributes(
     :id,
@@ -29,4 +29,5 @@ class Activities::DashboardSerializer < ApplicationSerializer
   belongs_to :person, serializer: PersonSerializer do
     activity.owner&.person
   end
+
 end

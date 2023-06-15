@@ -5,6 +5,9 @@ class License < ApplicationRecord
   include Fieldable
   include PgSearch::Model
   include Categorizable
+  include Documentable
+
+  multisearchable against: [:name]
 
   pg_search_scope(
     :search,
@@ -16,6 +19,7 @@ class License < ApplicationRecord
       tsearch: { prefix: true },
       trigram: {}
     },
+    ignoring: :accents,
   )
 
   tracked
@@ -30,5 +34,5 @@ class License < ApplicationRecord
 
   alias_attribute :seats, :qty
 
-  scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer]) }
+  scope :includes_associated, -> { includes([:category, :assignments, :department, :vendor, :manufacturer, :documentations]) }
 end
