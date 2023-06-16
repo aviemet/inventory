@@ -87,10 +87,6 @@ class LicensesController < ApplicationController
     authorize License
     license.company = @active_company
 
-    # if !license.valid?
-    #   ap({ license:, errors: license.errors.to_hash })
-    # end
-
     if license.save
       redirect_to license, notice: 'License was successfully created'
     else

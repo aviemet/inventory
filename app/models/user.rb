@@ -7,7 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable, :invitable
 
   belongs_to :active_company, class_name: :Company, optional: true
-  has_many :people
+  has_many :people, dependent: :nullify
   has_many :companies, through: :people
   has_many :person_group_assignments
   has_many :groups, through: :person_group_assignments, source: :person_group

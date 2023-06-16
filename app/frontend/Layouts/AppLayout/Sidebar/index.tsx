@@ -29,6 +29,7 @@ import {
 	CategoriesIcon,
 	UserGroupIcon,
 	DocumentationIcon,
+	PeopleIcon,
 } from '@/Components/Icons'
 
 import IconProvider from '@/Layouts/Providers/IconProvider'
@@ -85,7 +86,7 @@ const Sidebar = () => {
 						<li><MenuLink href={ Routes.orders() } icon={ <PurchasesIcon /> }>Purchasing</MenuLink></li>
 						<Divider />
 						<li>
-							<MenuLink href={ Routes.people() } icon={ <UsersIcon /> }>People</MenuLink>
+							<MenuLink href={ Routes.people() } icon={ <PeopleIcon /> }>People</MenuLink>
 							<ul>
 								<li><MenuLink href={ Routes.personGroups() } icon={ <UserGroupIcon /> }>Groups</MenuLink></li>
 							</ul>
@@ -114,6 +115,7 @@ const Sidebar = () => {
 								<li><MenuLink href={ Routes.manufacturers() } icon={ <ManufacturersIcon /> }>Manufacturers</MenuLink></li>
 								<li><MenuLink href={ Routes.models() } icon={ <ModelsIcon /> }>Models</MenuLink></li>
 								<li><MenuLink href={ Routes.categories() } icon={ <CategoriesIcon /> }>Categories</MenuLink></li>
+								<li><MenuLink href={ Routes.users() } icon={ <UsersIcon /> }>Users</MenuLink></li>
 							</ul>
 						</li>
 						<li><MenuLink href={ Routes.destroyUserSession() } icon={ <LogoutIcon /> }>Logout</MenuLink></li>
