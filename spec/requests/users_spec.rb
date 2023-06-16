@@ -161,7 +161,7 @@ RSpec.describe "Users", type: :request, inertia: true do
   describe "DELETE /destroy" do
     login_admin
 
-    focus it "destroys the requested user and redirects to index" do
+    it "destroys the requested user and redirects to index" do
       user = create(:user)
       expect {
         delete user_url(user)
