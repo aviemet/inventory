@@ -43,10 +43,11 @@ class DocumentationsController < ApplicationController
 
     documentation.created_by = current_user.person
     documentation.company = @active_company
-    ap({ documentation:, valid: documentation.valid?, errors: documentation.errors })
+
     if documentation.save
       redirect_to documentation, notice: "Documentation was successfully created."
     else
+      ap({ documentation:, documentable: documentation.documentable, errors: documentation.errors, company: documentation.company == @active_company})
       redirect_to new_documentation_path, inertia: { errors: documentation.errors }
     end
   end
@@ -57,7 +58,6 @@ class DocumentationsController < ApplicationController
     if documentation.update(documentation_params)
       redirect_to documentation, notice: "Documentation was successfully updated."
     else
-      ap({ errors: documentation.errors })
       redirect_to edit_documentation_path, inertia: { errors: documentation.errors }
     end
   end

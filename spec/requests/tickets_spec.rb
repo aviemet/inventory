@@ -80,19 +80,13 @@ RSpec.describe "/tickets", type: :request do
     login_admin
 
     context "with valid parameters" do
-      it "updates the requested ticket" do
+      it "updates the requested ticket and redirects to ticket page" do
         ticket = create(:ticket)
         new_attributes = attributes_for(:ticket)
         patch ticket_url(ticket), params: { ticket: new_attributes }
         ticket.reload
         expect(ticket.subject).to eq(new_attributes[:subject])
         expect(ticket.description).to eq(new_attributes[:description])
-      end
-
-      it "redirects to the ticket" do
-        ticket = create(:ticket)
-        patch ticket_url(ticket), params: { ticket: attributes_for(:ticket) }
-        ticket.reload
         expect(response).to redirect_to(ticket_url(ticket))
       end
     end
