@@ -1,34 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe CompanyPolicy, type: :policy do
-  subject { CompanyPolicy.new(user, company) }
+  subject { described_class }
 
-  let(:company) { create(:company) }
+  let(:accessory) { Accessory.new }
 
-  permissions ".scope" do
-    let(:user) { create(:user, company: company) }
+  context "as super_admin" do
+    login_admin
 
-    it "should allow an admin to see the company" do
-      company_two = create(:company)
-      scope = CompanyPolicy::Scope.new(user, Company)
-
-      expect(scope.resolve.size).to eq(1)
+    permissions ".scope" do
+      it "allows everything" do
+        expect(described_class.new(@admin, accessory)).to permit_all_actions
+      end
     end
+
+    # permissions :show? do
+    #   pending "add some examples to (or delete) #{__FILE__}"
+    # end
+
+    # permissions :create? do
+    #   pending "add some examples to (or delete) #{__FILE__}"
+    # end
+
+    # permissions :update? do
+    #   pending "add some examples to (or delete) #{__FILE__}"
+    # end
+
+    # permissions :destroy? do
+    #   pending "add some examples to (or delete) #{__FILE__}"
+    # end
   end
-
-  # permissions :show? do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
-
-  # permissions :create? do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
-
-  # permissions :update? do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
-
-  # permissions :destroy? do
-  #   pending "add some examples to (or delete) #{__FILE__}"
-  # end
 end
