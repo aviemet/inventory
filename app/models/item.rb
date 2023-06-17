@@ -5,8 +5,6 @@ class Item < Asset
   tracked
   resourcify
 
-  after_create :ensure_nic
-
   validates_presence_of :model
 
   has_many :nics, dependent: :destroy
@@ -27,11 +25,4 @@ class Item < Asset
       self.default_location
     end
   end
-
-  private
-
-  def ensure_nic
-    self.nics << Nic.new if self.nics.empty?
-  end
-
 end

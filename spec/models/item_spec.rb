@@ -35,6 +35,24 @@ RSpec.describe Item, type: :model do
     it_behaves_like "assign_toable"
     it_behaves_like "purchasable"
     it_behaves_like "fieldable"
+
+    it { should have_many(:nics) }
+    it { should have_many(:ips) }
+    it { should have_many(:ip_leases) }
+    it { should belong_to(:default_location) }
+
+    context "when unassigned" do
+      it "uses default_location as location" do
+        expect(subject.location).to eq(subject.default_location)
+      end
+    end
+
+    context "when assigned" do
+      it "uses the assignment's location as location" do
+        subject.assign_to(create(:person))
+        expect(subject.location).to eq(subject.assignment.location)
+      end
+    end
   end
 
   describe "Serializer" do

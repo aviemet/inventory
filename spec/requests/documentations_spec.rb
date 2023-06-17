@@ -4,7 +4,7 @@ require_relative '../support/devise'
 RSpec.describe "/documentations", type: :request do
   def valid_attributes(documentable)
     attrs = {
-      documentation: attributes_for(:documentation, :for_item, documentable:),
+      documentation: attributes_for(:documentation, documentable:),
     }
     attrs[:documentation][:documentable_id] = documentable.id
     attrs

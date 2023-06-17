@@ -2,7 +2,7 @@ require 'rails_helper'
 require "models/concerns/serializable"
 
 RSpec.describe User, type: :model do
-  subject { build(:user) }
+  subject { build_stubbed(:user) }
 
   describe "Validations" do
     it "has a valid factory" do
@@ -23,9 +23,17 @@ RSpec.describe User, type: :model do
   end
 
   describe "Associations" do
-    it { should have_many(:people) }
-    it { should have_one(:person) }
     it { should belong_to(:active_company).optional }
+    it { should have_many(:people) }
+    it { should have_many(:companies) }
+    it { should have_many(:groups) }
+    it { should have_one(:person) }
+
+    it "should return the person record associated with the active company" do
+      user = build(:user)
+      user.people << build(:person)
+      expect(user.person).to eq(user.company.people.first)
+    end
   end
 
   describe "Serializer" do

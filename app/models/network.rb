@@ -19,11 +19,11 @@ class Network < ApplicationRecord
   resourcify
 
   validates :address, presence: true
-  validate :is_network
+  validate :network?
 
   private
 
-  def is_network
+  def network?
     return unless self.address
 
     if self.address&.prefix != 32 && !self.address&.network?

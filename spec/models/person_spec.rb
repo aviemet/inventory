@@ -35,6 +35,20 @@ RSpec.describe Person, type: :model do
     it { should belong_to(:location).optional }
     it { should have_many(:tickets) }
     it { should have_many(:groups) }
+
+    it "should return a value for default_location" do
+      person = build(:person)
+      person.location = nil
+
+      expect(person.default_location).to be_nil
+
+      person.department = build(:department)
+      expect(person.default_location).to be(person.department.location)
+
+      person.location = build(:location)
+      expect(person.default_location).to be(person.location)
+      expect(person.default_location).to_not be(person.department.location)
+    end
   end
 
   describe "Serializer" do

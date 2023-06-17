@@ -100,7 +100,7 @@ class ItemsController < ApplicationController
         item: item.render,
         assignment: assignment.render,
         locations: -> { @active_company.locations.render(view: :options) },
-        statuses: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
+        status_labels: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
       }
     else
       redirect_to item, warning: 'Item is not yet checked out'

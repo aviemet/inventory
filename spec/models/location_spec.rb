@@ -29,4 +29,11 @@ RSpec.describe Location, type: :model do
   describe "Serializer" do
     it_behaves_like "serializable"
   end
+
+  describe "Helper methods" do
+    it "should return itself when calling locaiton or default_location" do
+      expect(subject.location).to be(subject)
+      expect(subject.default_location).to be(subject)
+    end
+  end
 end

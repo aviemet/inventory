@@ -47,7 +47,6 @@ class DocumentationsController < ApplicationController
     if documentation.save
       redirect_to documentation, notice: "Documentation was successfully created."
     else
-      ap({ documentation:, documentable: documentation.documentable, errors: documentation.errors, company: documentation.company == @active_company})
       redirect_to new_documentation_path, inertia: { errors: documentation.errors }
     end
   end
