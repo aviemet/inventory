@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, DangerousHtml, Group, Link, Section } from '@/Components'
+import { Box, DangerousHtml, Group, Link, Paper } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import { Form, RichText, Submit } from '@/Components/Form'
 import { EditIcon, CrossIcon } from '@/Components/Icons'
@@ -16,7 +16,7 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 	const [isEditing, toggleIsEditing] = useToggle()
 
 	return (
-		<Section>
+		<Paper p="sm">
 			<Group position="apart" align="start">
 				<Box>
 					{ message.created_by?.id && <Box>
@@ -51,7 +51,7 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 				<DangerousHtml>{ message.body }</DangerousHtml>
 			}
 
-		</Section>
+		</Paper>
 	)
 }
 

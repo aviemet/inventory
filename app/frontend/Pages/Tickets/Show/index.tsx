@@ -1,5 +1,5 @@
 import React from 'react'
-import { Badge, Box, Heading, Link, Page, Section } from '@/Components'
+import { Badge, Box, Heading, Link, Page, Paper, Section, Text } from '@/Components'
 import TicketMessage from './TicketMessage'
 import DangerousHtml from '@/Components/DangerousHtml'
 import { Form, RichText, Submit } from '@/Components/Form'
@@ -20,39 +20,42 @@ const ShowTicket = ({ ticket }: IShowTicketProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 				<Box>
+					<Text size="sm">
 					Primary Contact:&nbsp;
-					{ ticket.primary_contact?.id && <Link href={ Routes.person(ticket.primary_contact.id ) }>{ ticket.primary_contact.name }</Link> }
-				</Box>
-				<Box>
+						{ ticket.primary_contact?.id && <Link href={ Routes.person(ticket.primary_contact.id ) }>{ ticket.primary_contact.name }</Link> }
+					</Text>
+					<Text size="sm">
 					Assigned To:&nbsp;
-					{ ticket.assignees && ticket.assignees.map(assignee => <Badge key={ assignee.id }>{ assignee.name }</Badge>) }
+						{ ticket.assignees && ticket.assignees.map(assignee => <Badge key={ assignee.id }>{ assignee.name }</Badge>) }
+					</Text>
+
+					{ ticket.asset && <Text size="sm">
+					Asset:&nbsp;
+						<Link href={ Routes.asset(ticket.asset.id) }>{ ticket.asset.name }</Link>
+					</Text> }
 				</Box>
 
-				{ ticket.asset && <Box>
-					Asset:&nbsp;
-					<Link href={ Routes.asset(ticket.asset.id) }>{ ticket.asset.name }</Link>
-				</Box> }
-			</Section>
+				<Paper p="sm" my="sm">
+					<Heading order={ 4 } mb="xs">Original Message:</Heading>
+					<DangerousHtml>{ ticket.description }</DangerousHtml>
+				</Paper>
 
-			<Section>
-				<DangerousHtml>{ ticket.description }</DangerousHtml>
-			</Section>
+				{ ticket.messages?.map(message => (
+					<TicketMessage key={ message.id } message={ message } />
+				)) }
 
-			{ ticket.messages?.map(message => (
-				<TicketMessage key={ message.id } message={ message } />
-			)) }
+				<Box mt="md">
+					<Form
+						model="ticket_message"
+						data={ { ticket_message: { body: '' } } }
+						to={ Routes.ticketMessages(ticket.id) }
+						remember={ false }
+					>
+						<RichText name="body" label="Add Message" />
 
-			<Section>
-				<Form
-					model="ticket_message"
-					data={ { ticket_message: { body: '' } } }
-					to={ Routes.ticketMessages(ticket.id) }
-					remember={ false }
-				>
-					<RichText name="body" label="Add Message" />
-
-					<Submit>Add Message</Submit>
-				</Form>
+						<Submit>Add Message</Submit>
+					</Form>
+				</Box>
 			</Section>
 		</Page>
 	)
