@@ -81,6 +81,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 	}
 
 	const handleChange = (option: string|null) => {
+		console.log('CHANGE')
 		setValue(option ? option : '')
 		let optionArg: Schema.Search|string|null = option
 		if(endpoint) {

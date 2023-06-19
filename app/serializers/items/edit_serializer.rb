@@ -24,4 +24,6 @@ class Items::EditSerializer < Assignable::SingleSerializer
   def assigned
     item.assigned?
   end
+
+  belongs_to :model, serializer: ModelSerializer
 end
