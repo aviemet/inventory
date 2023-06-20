@@ -15,7 +15,7 @@ const ColumnPicker = () => {
 	if(!hideable || !model) return <></>
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		axios.patch( Routes.updateTablePreferences(user.id), {
+		axios.patch( Routes.updateTablePreferences(user.id!), {
 			user: {
 				table_preferences: {
 					[model]: {

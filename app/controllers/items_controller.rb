@@ -8,8 +8,7 @@ class ItemsController < ApplicationController
   # GET /item
   def index
     authorize items
-    paginated_items = items.page(params[:page] || 1)
-
+    paginated_items = items.page(params[:page] || 1).per(current_user.limit(:items))
     render inertia: "Items/Index", props: {
       items: -> { paginated_items.render(view: :index) },
       pagination: -> { {

@@ -38,6 +38,11 @@ class User < ApplicationRecord
 
   scope :includes_associated, -> { includes([:people, :companies]) }
 
+  # Rows page for pagination
+  def limit(model)
+    self.table_preferences&.[](model.to_s)&.[]('limit')
+  end
+
   private
 
   def set_active_company
