@@ -3,6 +3,7 @@ import { router, usePage } from '@inertiajs/react'
 import { Select } from '@mantine/core'
 import axios from 'axios'
 import { Routes } from '@/lib'
+import { useLocation } from '@/lib/hooks'
 
 interface ILimitSelectProps {
 	pagination: Schema.Pagination
@@ -11,6 +12,7 @@ interface ILimitSelectProps {
 
 const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 	const { auth: { user } } = usePage<SharedInertiaProps>().props
+	const location = useLocation()
 
 	const handleLimitChange = (limit: string) => {
 		if(!model) return
@@ -22,7 +24,17 @@ const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 				},
 			},
 		}).then(() => {
-			router.reload()
+			// Redirect to first page if new limit puts page out of bounds of records
+			if(parseInt(limit) * (pagination.current_page - 1) > pagination.count) {
+				location.params.delete('page')
+				router.get(
+					location.path,
+					{ ...location.paramsToJson() },
+					{ preserveScroll: true },
+				)
+			} else {
+				router.reload()
+			}
 		})
 	}
 

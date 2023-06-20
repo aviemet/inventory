@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { omit } from 'lodash'
 
 const useLocation = () => {
@@ -16,6 +16,8 @@ const useLocation = () => {
 		}
 	}, [])
 
+	const params = new URLSearchParams(location.search)
+
 	return {
 		...omit(location, [
 			'toString',
@@ -24,7 +26,17 @@ const useLocation = () => {
 			'assign',
 			'ancestorOrigins',
 		]),
+		path: `${location.origin}${location.pathname}`,
 		paths: location.pathname.replace(/^\//, '').split('/'),
+		params,
+		paramsToJson: useCallback(() => {
+			const hash: Record<string, string> = {}
+			for(const [key, val] of params.entries()) {
+				hash[key] = val
+			}
+			return hash
+		}, [params]),
+		toString: () => location.toString(),
 	}
 }
 
