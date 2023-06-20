@@ -29,7 +29,12 @@ const CompleteRegistration = () => {
 
 	return (
 		<Tile>
-			<Form model="person" data={ defaultData } to={ Routes.completeRegistration() } grid={ false }>
+			<Form
+				disableFormatting
+				model="person"
+				data={ defaultData }
+				to={ Routes.completeRegistration() }
+			>
 				<Tile.Content>
 					<div>
 						<Heading order={ 2 }>Complete Registration</Heading>

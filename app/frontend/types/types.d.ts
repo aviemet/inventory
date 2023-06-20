@@ -190,18 +190,6 @@ declare global {
 	}
 
 	type FlashMessage = Record<'success' | 'alert' | 'info' | 'warning', string>
-
-	// Inputs
-
-	interface IInertiaInputProps {
-		name: string
-		model?: string
-		errorKey?: string
-		compact?: boolean
-		onChange?: (value: T, form: UseFormProps) => void
-		onBlur?: (value: T, form: UseFormProps) => void
-	}
-
 }
 
 declare module '@mantine/core' {

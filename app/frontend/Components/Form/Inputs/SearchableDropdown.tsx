@@ -1,12 +1,14 @@
 import React, { forwardRef, useState } from 'react'
-import Field from '../Field'
+import Field, { FieldGridCol } from '../Field'
 import SearchableDropdownInput, { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
-import { ConditionalWrapper, Group } from '@/Components'
+import { Box, ConditionalWrapper, Group } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
 import { router } from '@inertiajs/react'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 import axios from 'axios'
+import { type IFormInputProps } from '.'
+import { Grid } from '@mantine/core'
 
 export interface IDropdownWithModalButton {
 	name?: string
@@ -18,7 +20,7 @@ export interface IDropdownWithModalButton {
 }
 
 type OmittedDropdownTypes = 'name'|'defaultValue'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
-export interface ISearchableDropdownFormProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IInertiaInputProps {
+export interface ISearchableDropdownFormProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IFormInputProps<Schema.Search[]> {
 	defaultValue?: string
 	onDropdownOpen?: (form: UseFormProps<any>) => void
 	onDropdownClose?: (form: UseFormProps<any>) => void
@@ -47,6 +49,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 		id,
 		errorKey,
 		options,
+		span,
 		...props
 	},
 	ref,
@@ -110,45 +113,63 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 
 	return (
 		<ConditionalWrapper
-			wrapper={ children => <Group noWrap align="baseline" position="apart">{ children }</Group> }
-			condition={ newForm !== undefined }
+			wrapper={ children => (
+				<FieldGridCol span={ span }>{ children }</FieldGridCol>
+			) }
+			condition={ true }
 		>
-			<>
-				<ConditionalWrapper
-					wrapper={ children => (
-						<Field
-							type="select"
-							required={ required }
-							errors={ !!error }
-						>
-							{ children }
-						</Field>
-					) }
-					condition={ field }
-				>
-					<SearchableDropdownInput
-						ref={ ref }
-						id={ id || inputId }
-						name={ inputName }
-						label={ label }
-						options={ endpoint ? fetchedOptions : options }
-						value={ String(value) }
-						onSearchChange={ handleSearchChange }
-						onChange={ handleChange }
-						onBlur={ handleBlur }
-						onDropdownOpen={ handleDropdownOpen }
-						onDropdownClose={ handleDropdownClose }
-						defaultValue={ defaultValue ?? String(value) }
-						error={ error }
-						{ ...props }
-					/>
-				</ConditionalWrapper>
-				{ newForm && <ModalFormButton
-					title={ `Create New ${label}` }
-					form={ newForm }
-					onSuccess={ handleNewFormSuccess }
-				/> }
-			</>
+			<ConditionalWrapper
+				wrapper={ children => (
+					<Group
+						noWrap
+						grow
+						align="baseline"
+						position="apart"
+					>
+						{ children }
+					</Group>
+				)
+				}
+				condition={ newForm !== undefined }
+			>
+				<>
+					<ConditionalWrapper
+						wrapper={ children => (
+							<Field
+								type="select"
+								required={ required }
+								errors={ !!error }
+								grid={ false }
+							>
+								{ children }
+							</Field>
+						) }
+						condition={ field }
+					>
+						<SearchableDropdownInput
+							ref={ ref }
+							id={ id || inputId }
+							name={ inputName }
+							label={ label }
+							options={ endpoint ? fetchedOptions : options }
+							value={ String(value) }
+							onSearchChange={ handleSearchChange }
+							onChange={ handleChange }
+							onBlur={ handleBlur }
+							onDropdownOpen={ handleDropdownOpen }
+							onDropdownClose={ handleDropdownClose }
+							defaultValue={ defaultValue ?? String(value) }
+							error={ error }
+							{ ...props }
+						/>
+					</ConditionalWrapper>
+					{ newForm && <ModalFormButton
+						title={ `Create New ${label}` }
+						form={ newForm }
+						onSuccess={ handleNewFormSuccess }
+					/> }
+				</>
+			</ConditionalWrapper>
 		</ConditionalWrapper>
 	)
 })

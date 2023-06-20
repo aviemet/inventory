@@ -3,8 +3,9 @@ import Field from '../Field'
 import AutocompleteInput, { type IAutocompleteProps } from '@/Components/Inputs/AutocompleteInput'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
+import { type IFormInputProps } from '.'
 
-interface IFormAutocompleteProps extends Omit<IAutocompleteProps, 'name'|'onBlur'|'onChange'>, IInertiaInputProps {
+interface IFormAutocompleteProps extends Omit<IAutocompleteProps, 'name'|'onBlur'|'onChange'>, IFormInputProps<string> {
 	field?: boolean
 	endpoint?: string
 }

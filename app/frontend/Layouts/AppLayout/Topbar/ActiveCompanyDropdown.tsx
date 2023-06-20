@@ -32,9 +32,9 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 	return (
 		<Form
 			async
-			grid={ false }
+			disableFormatting
 			data={ { user: { active_company_id: user.active_company?.id || '' }  } }
-			to={ Routes.apiUser(user.id) }
+			to={ Routes.apiUser(user.id!) }
 			method="patch"
 			model="user"
 			onChange={ handleFormChange }

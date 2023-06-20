@@ -4,10 +4,9 @@ import cx from 'clsx'
 import Field from '../Field'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
+import { type IFormInputProps } from '.'
 
-interface ITextFormInputProps extends Omit<ITextInputProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
-	field?: boolean
-}
+interface ITextFormInputProps extends Omit<ITextInputProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<string> {}
 
 const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 	{
@@ -20,6 +19,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 		compact = false,
 		errorKey,
 		field = true,
+		span,
 		...props
 	},
 	ref,
@@ -48,6 +48,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 					required={ required }
 					className={ cx({ compact }) }
 					errors={ !!error }
+					span={ span }
 				>
 					{ children }
 				</Field>

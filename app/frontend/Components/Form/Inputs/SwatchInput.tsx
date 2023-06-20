@@ -4,10 +4,9 @@ import SwatchInput, { type ISwatchInputProps } from '@/Components/Inputs/SwatchI
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import cx from 'clsx'
 import Field from '../Field'
+import { type IFormInputProps } from '.'
 
-interface ISwatchFormInputProps extends Omit<ISwatchInputProps, 'onBlur'|'onChange'|'name'|'ref'>, IInertiaInputProps {
-	field?: boolean
-}
+interface ISwatchFormInputProps extends Omit<ISwatchInputProps, 'onBlur'|'onChange'|'name'|'ref'>, IFormInputProps<string> {}
 
 const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 	{
@@ -20,6 +19,7 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 		compact = false,
 		errorKey,
 		field = true,
+		span,
 		...props
 	},
 	ref,
@@ -40,6 +40,7 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 					required={ required }
 					className={ cx({ compact }) }
 					errors={ !!error }
+					span={ span }
 				>
 					{ children }
 				</Field>

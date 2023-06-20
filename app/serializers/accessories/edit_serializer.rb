@@ -20,4 +20,6 @@ class Accessories::EditSerializer < Assignable::QuantitySerializer
   def cost
     currency_for(accessory)
   end
+
+  belongs_to :model, serializer: ModelSerializer
 end

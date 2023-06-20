@@ -55,6 +55,7 @@ const Register = () => {
 	return (
 		<Tile>
 			<Form
+				disableFormatting
 				data={ {
 					user: {
 						email: '',
@@ -66,7 +67,6 @@ const Register = () => {
 				to={ Routes.userRegistration() }
 				onChange={ handleFormChange }
 				onSubmit={ handleSubmit }
-				grid={ false }
 			>
 				<Tile.Content>
 

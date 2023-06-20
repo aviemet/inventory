@@ -72,9 +72,11 @@ const EditableLink = ({ item, ip }: IEditableLinkProps) => {
 					{
 						editing ?
 							<Form
+								disableFormatting
 								model="items"
 								data={ { item: { id: '' }, ip: '' } }
-								grid={ false }
+								async
+								to={ '#' /* TODO: API route for setting IP address on item */ }
 							>
 								<ItemsDropdown
 									ref={ dropdownRef }

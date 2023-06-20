@@ -11,10 +11,10 @@ const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
 	return (
 		<Tile>
 			<Form
+				disableFormatting
 				model="user"
 				data={ { user } }
 				to={ Routes.userConfirmation() }
-				grid={ false }
 			>
 				<Tile.Content>
 					<div>

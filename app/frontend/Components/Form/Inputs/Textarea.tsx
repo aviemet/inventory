@@ -4,10 +4,9 @@ import TextareaInput, { type ITextareaProps } from '@/Components/Inputs/Textarea
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
+import { type IFormInputProps } from '.'
 
-interface IFormTextareaProps extends Omit<ITextareaProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
-	field?: boolean
-}
+interface IFormTextareaProps extends Omit<ITextareaProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<string> {}
 
 const Textarea = ({
 	label,
@@ -19,6 +18,7 @@ const Textarea = ({
 	model,
 	errorKey,
 	field = true,
+	span,
 	...props
 }: IFormTextareaProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
@@ -38,6 +38,7 @@ const Textarea = ({
 					type="textarea"
 					required={ required }
 					errors={ !!error }
+					span={ span }
 				>
 					{ children }
 				</Field>

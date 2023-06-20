@@ -6,21 +6,23 @@ export default createStyles((theme) => ({
 	form: {
 		maxWidth: `${theme.breakpoints.md}`,
 
-		'form.format-grid .field': {
-			[`@media (min-width: ${theme.breakpoints.sm})`]: {
-				'&:not(.textarea, .compact)': {
-					'&:not(.no-grid)': {
-						display: 'grid',
+		'form.format-grid': {
+			'.field': {
+				[`@media (min-width: ${theme.breakpoints.sm})`]: {
+					'&:not(.textarea, .compact)': {
+						'&:not(.no-grid)': {
+							display: 'grid',
+						},
+						gridTemplateColumns: `${theme.other.form.label.width} 1fr`,
+						gridTemplateRows: '1fr',
+						borderLeftWidth: 2,
 					},
-					gridTemplateColumns: `${theme.other.form.label.width} 1fr`,
-					gridTemplateRows: '1fr',
-					borderLeftWidth: 2,
 				},
-			},
 
-			'&:not(.checkbox)':{
-				label: {
-					padding: '0.5rem 0.75rem',
+				'&:not(.checkbox)':{
+					label: {
+						padding: '0.5rem 0.75rem',
+					},
 				},
 			},
 		},
