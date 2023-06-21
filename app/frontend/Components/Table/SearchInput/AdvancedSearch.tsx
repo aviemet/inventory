@@ -42,7 +42,6 @@ const AdvancedSearch = ({ children }: { children: React.ReactNode}) => {
 				</ActionIcon>
 			</Tooltip>
 			<Transition
-				keepMounted
 				mounted={ open }
 				transition={ scaleY }
 				duration={ 200 }
