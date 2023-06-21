@@ -1,9 +1,9 @@
 import React from 'react'
-import { router, usePage } from '@inertiajs/react'
+import { router } from '@inertiajs/react'
 import { Select } from '@mantine/core'
 import axios from 'axios'
 import { Routes } from '@/lib'
-import { useLocation } from '@/lib/hooks'
+import { useLocation, usePageProps } from '@/lib/hooks'
 
 interface ILimitSelectProps {
 	pagination: Schema.Pagination
@@ -11,9 +11,9 @@ interface ILimitSelectProps {
 }
 
 const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
-	const { auth: { user } } = usePage<SharedInertiaProps>().props
+	const { auth: { user } } = usePageProps()
 	const location = useLocation()
-	console.log({ pagination })
+
 	const handleLimitChange = (limit: string) => {
 		if(!model) return
 

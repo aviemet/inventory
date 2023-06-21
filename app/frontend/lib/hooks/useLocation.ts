@@ -31,8 +31,8 @@ const useLocation = () => {
 		params,
 		paramsToJson: useCallback(() => {
 			const hash: Record<string, string> = {}
-			for(const [key, val] of params.entries()) {
-				hash[key] = val
+			for(const [key, value] of params.entries()) {
+				hash[key] = value
 			}
 			return hash
 		}, [params]),

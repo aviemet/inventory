@@ -1,15 +1,15 @@
 import React from 'react'
 import ActiveCompanyDropdown from './ActiveCompanyDropdown'
 import { useLayoutStore } from '@/Layouts/Providers'
-import { usePage } from '@inertiajs/react'
 import QuickNewMenu from './QuickNewMenu'
 import { Box, Header, Burger, Group } from '@mantine/core'
 import cx from 'clsx'
 import AvatarMenu from './AvatarMenu'
 import useTopbarStyles from './useTopbarStyles'
+import { usePageProps } from '@/lib/hooks'
 
 const Topbar = () => {
-	const { auth: { user } } = usePage<SharedInertiaProps>().props
+	const { auth: { user } } = usePageProps()
 	const { sidebarOpen, toggleSidebarOpen } = useLayoutStore()
 	const { classes } = useTopbarStyles()
 

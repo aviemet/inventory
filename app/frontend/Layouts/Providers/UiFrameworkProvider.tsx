@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
 import { Notifications } from '@mantine/notifications'
-import { usePage } from '@inertiajs/react'
 import axios from 'axios'
 import { Routes } from '@/lib'
 import useLayoutStore from '../AppLayout/store/LayoutStore'
+import { usePageProps } from '@/lib/hooks'
 
 export const useTheme = (colorScheme: 'light'|'dark' = 'light', primaryColor = 'violet') => ({
 	breakpoints: {
@@ -112,7 +112,7 @@ export const GlobalStyles = () => <Global styles={ theme => ({
 }) } />
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
-	const { auth } = usePage<SharedInertiaProps>().props
+	const { auth } = usePageProps()
 
 	const { primaryColor, setPrimaryColor } = useLayoutStore()
 

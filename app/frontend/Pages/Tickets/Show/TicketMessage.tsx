@@ -5,14 +5,14 @@ import { Form, RichText, Submit } from '@/Components/Form'
 import { EditIcon, CrossIcon } from '@/Components/Icons'
 import { IconButton } from '@/Components/Button'
 import { useToggle } from '@mantine/hooks'
-import { usePage } from '@inertiajs/react'
+import { usePageProps } from '@/lib/hooks'
 
 interface ITicketMessageProps {
 	message: Schema.TicketMessage
 }
 
 const TicketMessage = ({ message }: ITicketMessageProps) => {
-	const { auth: { user } } = usePage<SharedInertiaProps>().props
+	const { auth: { user } } = usePageProps()
 	const [isEditing, toggleIsEditing] = useToggle()
 
 	return (

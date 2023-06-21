@@ -1,6 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 import { DoubleDownArrowIcon } from '@/Components/Icons'
-import { ActionIcon, Paper, Transition, useMantineTheme, rem, px } from '@mantine/core'
+import { ActionIcon, Paper, Transition, useMantineTheme, rem, px, Tooltip, Box } from '@mantine/core'
 import { useLayoutStore } from '@/Layouts/Providers'
 import { useBooleanToggle } from '@/lib/hooks'
 import { useClickOutside } from '@mantine/hooks'
@@ -12,22 +12,45 @@ const scaleY = {
 	transitionProperty: 'transform, opacity',
 }
 
-const AdvancedSearch = () => {
+const AdvancedSearch = ({ children }: { children: React.ReactNode}) => {
 	const { sidebarOpen } = useLayoutStore()
-	const { other: { navbar: { width } } } = useMantineTheme()
-	const [open, toggleOpen] = useBooleanToggle(false)
-	const iconRef = useRef<HTMLButtonElement>(null)
+	const { primaryColor, other: { navbar: { width } } } = useMantineTheme()
 	const navBarWidth = width[sidebarOpen ? 'open' : 'closed']
-	// const clickOutsideRef = useClickOutside(() => toggleOpen(false))
+
+	const [open, toggleOpen] = useBooleanToggle(false)
+	const [searchButton, setSearchButton] = useState<HTMLButtonElement | null>(null)
+	const [searchPaper, setSearchPaper] = useState<HTMLDivElement | null>(null)
+	useClickOutside(() => toggleOpen(false), null, [searchButton, searchPaper])
 
 	return (
 		<>
-			<ActionIcon size={ 42 } variant="filled" color="primary" onClick={ () => toggleOpen() } ref={ iconRef }>
-				<DoubleDownArrowIcon size={ 24 } />
-			</ActionIcon>
-			<Transition mounted={ open } transition={ scaleY } duration={ 200 } timingFunction="ease">
+			<Tooltip
+				withArrow
+				label="Advanced Search"
+				color={ primaryColor }
+				position="left"
+			>
+				<ActionIcon
+					size={ 42 }
+					variant="filled"
+					color="primary"
+					onClick={ () => toggleOpen() }
+					ref={ setSearchButton }
+					data-ignore-outside-clicks
+				 >
+					<DoubleDownArrowIcon size={ 24 } />
+				</ActionIcon>
+			</Tooltip>
+			<Transition
+				keepMounted
+				mounted={ open }
+				transition={ scaleY }
+				duration={ 200 }
+				timingFunction="ease"
+			>
 				{ (styles) => (
 					<Paper
+						ref={ setSearchPaper }
 						shadow="md"
 						p="md"
 						style={ {
@@ -35,12 +58,13 @@ const AdvancedSearch = () => {
 							position: 'absolute',
 							left: rem(navBarWidth + px('1rem')),
 							right: '1rem',
-							height: rem(120),
-							top: iconRef.current ? rem(iconRef.current.getBoundingClientRect().bottom + 10) : undefined,
+							top: searchButton ? rem(searchButton.getBoundingClientRect().bottom + 10) : undefined,
 							zIndex: 9999,
 						} }
 					>
-            Dropdown
+						<Box>
+							{ children }
+						</Box>
 					</Paper>
 				) }
 			</Transition>

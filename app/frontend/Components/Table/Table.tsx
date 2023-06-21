@@ -53,7 +53,7 @@ const TableComponent: TableComponent & TableObjects = ({
 
 	const stylesArray = useMemo(() => {
 		const arr: (Sx | undefined)[] = []
-		if(wrapper) {
+		if(!wrapper) {
 			arr.push({ thead: { top: -10 } })
 		}
 		if(sx) {

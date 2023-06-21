@@ -13,14 +13,14 @@ import AdvancedSearch from './AdvancedSearch'
 
 interface ISearchInputProps {
 	columnPicker?: boolean
-	advancedSearch?: boolean
+	advancedSearch?: React.ReactNode
 }
 
 /**
  * Performs an Inertia request to the current url (window.location), using the search params
  * as query string with the key of 'search'
  */
-const SearchInput = ({ columnPicker = true, advancedSearch = true }: ISearchInputProps) => {
+const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps) => {
 	const { tableState: { model }, setTableState } = useTableContext()
 	const { search } = window.location
 	const { classes } = useTableStyles()
@@ -82,7 +82,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch = true }: ISearchInpu
 
 	return (
 		<Box className={ classes.searchWrapper }>
-			{ advancedSearch && <AdvancedSearch /> }
+			{ advancedSearch && <AdvancedSearch>{ advancedSearch }</AdvancedSearch> }
 			<TextInput
 				name="search"
 				id="search"

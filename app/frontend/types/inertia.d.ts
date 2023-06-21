@@ -3,15 +3,6 @@ import { Page, PageProps, Errors, ErrorBag } from '@inertiajs/core'
 
 declare global {
 
-	interface SharedInertiaProps extends PageProps {
-		auth: {
-			form_authenticity_token: string
-			user: Schema.User
-		}
-		flash: FlashMessage
-		errors: Errors & ErrorBag
-	}
-
 	interface IndexedInertiaFormProps extends DefaultInertiaFormProps{
 		[key: string]: any
 	}

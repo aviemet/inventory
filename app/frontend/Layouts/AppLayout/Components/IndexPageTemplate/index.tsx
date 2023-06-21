@@ -9,6 +9,7 @@ interface IIndexPageTemplateProps extends IIndexTableTitleSectionProps {
 	pagination: Schema.Pagination
 	search?: boolean
 	breadcrumbs?: TBreadcrumb[]
+	advancedSearch?: React.ReactNode
 }
 
 const IndexPageTemplate = ({
@@ -20,6 +21,7 @@ const IndexPageTemplate = ({
 	search = true,
 	breadcrumbs,
 	menuOptions,
+	advancedSearch,
 	deleteRoute,
 }: IIndexPageTemplateProps) => {
 	return (
@@ -34,7 +36,7 @@ const IndexPageTemplate = ({
 					pagination={ pagination }
 				>
 					<TableTitleSection title={ title } menuOptions={ menuOptions } deleteRoute={ deleteRoute }>
-						{ search && <Table.SearchInput /> }
+						{ search && <Table.SearchInput advancedSearch={ advancedSearch } /> }
 					</TableTitleSection>
 
 					{ children }

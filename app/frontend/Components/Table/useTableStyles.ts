@@ -1,4 +1,4 @@
-import { createStyles } from '@mantine/core'
+import { createStyles, rem } from '@mantine/core'
 
 const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 	wrapper: {
@@ -25,7 +25,7 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 
 			th:{
 				'&:hover': {
-					backgroundColor: theme.other.colorSchemeOption(theme.colors.gray[1], theme.black),
+					backgroundColor: theme.fn.rgba(theme.other.colorSchemeOption(theme.colors.gray[1], theme.black), 0.4),
 				},
 			},
 		},
@@ -48,11 +48,15 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 		'th': {
 			'&.sortable': {
 				position: 'relative',
-				paddingRight: '1rem',
 				whiteSpace: 'nowrap',
+				padding: 0,
 
 				a: {
+					display: 'block',
+					width: '100%',
+					height: '100%',
 					color: theme.other.colorSchemeOption(theme.black, theme.white),
+					padding: `${rem(7)} ${rem(10)}`,
 				},
 
 				'&:before, &:after': {
@@ -63,10 +67,11 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 					height: 0,
 					content: '""',
 					cursor: 'pointer',
-					borderColor: theme.colors.gray[4],
+					borderColor: theme.colors.gray[7],
 					borderStyle: 'solid',
 					borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
 					borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
+					zIndex: '-1',
 
 				},
 
@@ -83,7 +88,7 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 				},
 
 				'&.asc:before, &.desc:after': {
-					borderColor: theme.colors.gray[7],
+					borderColor: theme.colors.gray[4],
 				},
 			},
 
