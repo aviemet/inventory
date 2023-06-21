@@ -4,21 +4,23 @@ import { type VisitOptions } from '@inertiajs/core'
 import { debounce } from 'lodash'
 import { useTableContext } from '../TableContext'
 import { TextInput } from '@/Components/Inputs'
-import { SearchIcon, CrossIcon, DoubleDownArrowIcon } from '@/Components/Icons'
+import { SearchIcon, CrossIcon } from '@/Components/Icons'
 import { ActionIcon, Box } from '@mantine/core'
-import { Table } from '@/Components'
 import { useSessionStorage } from '@mantine/hooks'
 import useTableStyles from '../useTableStyles'
+import ColumnPicker from './ColumnPicker'
+import AdvancedSearch from './AdvancedSearch'
 
 interface ISearchInputProps {
 	columnPicker?: boolean
+	advancedSearch?: boolean
 }
 
 /**
  * Performs an Inertia request to the current url (window.location), using the search params
  * as query string with the key of 'search'
  */
-const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
+const SearchInput = ({ columnPicker = true, advancedSearch = true }: ISearchInputProps) => {
 	const { tableState: { model }, setTableState } = useTableContext()
 	const { search } = window.location
 	const { classes } = useTableStyles()
@@ -80,9 +82,7 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 
 	return (
 		<Box className={ classes.searchWrapper }>
-			<ActionIcon size={ 42 } variant="filled" color="primary">
-				<DoubleDownArrowIcon size={ 24 } />
-			</ActionIcon>
+			{ advancedSearch && <AdvancedSearch /> }
 			<TextInput
 				name="search"
 				id="search"
@@ -95,7 +95,7 @@ const SearchInput = ({ columnPicker = true }: ISearchInputProps) => {
 				className={ classes.searchInput }
 				aria-label="Search"
 			/>
-			{ columnPicker && <Table.ColumnPicker /> }
+			{ columnPicker && <ColumnPicker /> }
 		</Box>
 	)
 }

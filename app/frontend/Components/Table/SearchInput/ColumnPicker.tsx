@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Menu } from '@/Components'
 import { ColumnsIcon } from '@/Components/Icons'
 import { Checkbox } from '@/Components/Inputs'
-import { useTableContext } from './TableContext'
+import { useTableContext } from '../TableContext'
 import { Button } from '@mantine/core'
 
 const ColumnPicker = () => {
