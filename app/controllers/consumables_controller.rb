@@ -8,7 +8,7 @@ class ConsumablesController < ApplicationController
   # GET /consumables
   def index
     authorize consumables
-    paginated_consumables = consumables.page(params[:page] || 1)
+    paginated_consumables = consumables.page(params[:page] || 1).per(current_user.limit(:consumables))
 
     render inertia: "Consumables/Index", props: {
       consumables: -> { paginated_consumables.render(view: :index) },

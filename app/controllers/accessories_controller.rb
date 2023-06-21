@@ -8,7 +8,7 @@ class AccessoriesController < ApplicationController
   # GET /accessories
   def index
     authorize accessories
-    paginated_accessories = accessories.page(params[:page] || 1)
+    paginated_accessories = accessories.page(params[:page] || 1).per(current_user.limit(:accessories))
 
     render inertia: "Accessories/Index", props: {
       accessories: -> { paginated_accessories.render(view: :index) },

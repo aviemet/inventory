@@ -7,7 +7,7 @@ class TicketsController < ApplicationController
   # GET /tickets
   def index
     authorize tickets
-    paginated_tickets = tickets.page(params[:page] || 1)
+    paginated_tickets = tickets.page(params[:page] || 1).per(current_user.limit(:tickets))
 
     render inertia: "Tickets/Index", props: {
       tickets: -> { paginated_tickets.render(view: :index) },

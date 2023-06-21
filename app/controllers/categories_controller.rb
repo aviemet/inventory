@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    paginated_categories = categories.page(params[:page] || 1)
+    paginated_categories = categories.page(params[:page] || 1).per(current_user.limit(:categories))
 
     render inertia: "Categories/Index", props: {
       categories: paginated_categories.render(view: :index),

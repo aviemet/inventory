@@ -9,7 +9,7 @@ class PeopleController < ApplicationController
   # GET /people
   def index
     authorize people
-    paginated_people = people.page(params[:page] || 1)
+    paginated_people = people.page(params[:page] || 1).per(current_user.limit(:people))
 
     render inertia: "People/Index", props: {
       people: paginated_people.render(view: :index),

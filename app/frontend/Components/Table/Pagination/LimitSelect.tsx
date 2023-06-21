@@ -13,7 +13,7 @@ interface ILimitSelectProps {
 const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 	const { auth: { user } } = usePage<SharedInertiaProps>().props
 	const location = useLocation()
-
+	console.log({ pagination })
 	const handleLimitChange = (limit: string) => {
 		if(!model) return
 

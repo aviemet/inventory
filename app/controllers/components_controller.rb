@@ -8,7 +8,7 @@ class ComponentsController < ApplicationController
   # GET /components
   def index
     authorize components
-    paginated_components = components.page(params[:page] || 1)
+    paginated_components = components.page(params[:page] || 1).per(current_user.limit(:components))
 
     render inertia: "Components/Index", props: {
       components: -> { paginated_components.render(view: :index) },

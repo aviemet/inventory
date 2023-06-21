@@ -6,7 +6,7 @@ class StatusLabelsController < ApplicationController
 
   # GET /status_labels
   def index
-    paginated_status_labels = status_labels.page(params[:page] || 1)
+    paginated_status_labels = status_labels.page(params[:page] || 1).per(current_user.limit(:status_labels))
 
     render inertia: "StatusLabels/Index", props: {
       status_labels: paginated_status_labels.render,

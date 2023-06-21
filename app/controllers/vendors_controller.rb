@@ -8,7 +8,7 @@ class VendorsController < ApplicationController
   # GET /vendors
   def index
     authorize vendors
-    paginated_vendors = vendors.page(params[:page] || 1)
+    paginated_vendors = vendors.page(params[:page] || 1).per(current_user.limit(:vendors))
 
     render inertia: "Vendors/Index", props: {
       vendors: paginated_vendors.render(view: :index),

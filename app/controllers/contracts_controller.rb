@@ -7,7 +7,7 @@ class ContractsController < ApplicationController
   # GET /contracts
   def index
     authorize contracts
-    paginated_contracts = contracts.page(params[:page] || 1)
+    paginated_contracts = contracts.page(params[:page] || 1).per(current_user.limit(:contracts))
 
     render inertia: "Contracts/Index", props: {
       contracts: paginated_contracts.render(view: :index),

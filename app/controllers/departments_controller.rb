@@ -8,7 +8,7 @@ class DepartmentsController < ApplicationController
   # GET /departments
   def index
     authorize departments
-    paginated_departments = departments.page(params[:page] || 1)
+    paginated_departments = departments.page(params[:page] || 1).per(current_user.limit(:departments))
 
     render inertia: "Departments/Index", props: {
       departments: paginated_departments.render(view: :index),

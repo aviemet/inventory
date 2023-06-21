@@ -8,7 +8,7 @@ class ManufacturersController < ApplicationController
   # GET /manufacturers
   def index
     authorize manufacturers
-    paginated_manufacturers = manufacturers.page(params[:page] || 1)
+    paginated_manufacturers = manufacturers.page(params[:page] || 1).per(current_user.limit(:manufacturers))
 
     render inertia: "Manufacturers/Index", props: {
       manufacturers: paginated_manufacturers.render(view: :index),

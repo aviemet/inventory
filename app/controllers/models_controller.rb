@@ -7,7 +7,7 @@ class ModelsController < ApplicationController
   # GET /models
   def index
     authorize models
-    paginated_models = models.page(params[:page] || 1)
+    paginated_models = models.page(params[:page] || 1).per(current_user.limit(:models))
 
     render inertia: "Models/Index", props: {
       models: paginated_models.render(view: :index),

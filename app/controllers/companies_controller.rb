@@ -7,7 +7,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   def index
     authorize companies
-    paginated_companies = companies.page(params[:page] || 1)
+    paginated_companies = companies.page(params[:page] || 1).per(current_user.limit(:companies))
 
     render inertia: "Companies/Index", props: {
       companies: paginated_companies.render(view: :index),

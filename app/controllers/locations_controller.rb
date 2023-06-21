@@ -10,7 +10,7 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     authorize locations
-    paginated_locations = locations.page(params[:page] || 1)
+    paginated_locations = locations.page(params[:page] || 1).per(current_user.limit(:locations))
 
     render inertia: "Locations/Index", props: {
       locations: paginated_locations.render(view: :index),

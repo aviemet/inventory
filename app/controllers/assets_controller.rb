@@ -7,7 +7,7 @@ class AssetsController < ApplicationController
 
   # GET /assets
   def index
-    paginated_assets = assets.page(params[:page] || 1)
+    paginated_assets = assets.page(params[:page] || 1).per(current_user.limit(:assets))
 
     render inertia: "Assets/Index", props: {
       assets: -> { paginated_assets.render(view: :index) },

@@ -8,7 +8,7 @@ class LicensesController < ApplicationController
   # GET /licenses
   def index
     authorize licenses
-    paginated_licenses = licenses.page(params[:page] || 1)
+    paginated_licenses = licenses.page(params[:page] || 1).per(current_user.limit(:licenses))
 
     render inertia: "Licenses/Index", props: {
       licenses: paginated_licenses.render(view: :index),

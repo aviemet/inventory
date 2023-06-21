@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    paginated_orders = orders.page(params[:page] || 1)
+    paginated_orders = orders.page(params[:page] || 1).per(current_user.limit(:orders))
 
     render inertia: "Orders/Index", props: {
       orders: paginated_orders.render(view: :index),
