@@ -18,7 +18,6 @@ const Textarea = ({
 	model,
 	errorKey,
 	field = true,
-	span,
 	...props
 }: IFormTextareaProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
@@ -38,7 +37,6 @@ const Textarea = ({
 					type="textarea"
 					required={ required }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>

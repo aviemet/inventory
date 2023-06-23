@@ -43,6 +43,7 @@ export {
 	MdAdd as NewIcon,
 	MdOutlineScreenSearchDesktop as ModelsIcon,
 	MdOutlineDelete as TrashIcon,
+	MdCalendarMonth as CalendarIcon,
 } from 'react-icons/md'
 
 

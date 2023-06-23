@@ -19,7 +19,6 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 		compact = false,
 		errorKey,
 		field = true,
-		span,
 		...props
 	},
 	ref,
@@ -40,7 +39,6 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 					required={ required }
 					className={ cx({ compact }) }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>

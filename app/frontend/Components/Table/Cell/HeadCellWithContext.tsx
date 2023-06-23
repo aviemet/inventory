@@ -3,8 +3,9 @@ import { Link } from '@/Components'
 import cx from 'clsx'
 import { type ICellProps } from './index'
 import { useTableContext } from '../TableContext'
-import { Box } from '@mantine/core'
+import { Box, Flex } from '@mantine/core'
 import { useLocation, usePageProps } from '@/lib/hooks'
+import { FilterIcon } from '@/Components/Icons'
 
 interface IHeadCellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
@@ -62,16 +63,19 @@ const HeadCellWithContext = ({
 			} }
 			{ ...props }
 		>
-			{ showSortLink ?
-				<Link
-					href={ `${pathname}?${params.toString()}` }
-					preserveScroll={ true }
-				>
-					{ children }
-				</Link>
-				:
-				children
-			}
+			<Flex align="center">
+				<FilterIcon />
+				{ showSortLink ?
+					<Link
+						href={ `${pathname}?${params.toString()}` }
+						preserveScroll={ true }
+					>
+						{ children }
+					</Link>
+					:
+					children
+				}
+			</Flex>
 		</Box>
 	)
 }

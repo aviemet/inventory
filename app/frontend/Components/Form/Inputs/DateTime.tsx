@@ -17,7 +17,6 @@ const DateTime = ({
 	id,
 	model,
 	field = true,
-	span,
 	...props
 }: IDateTimeFormProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date>({ name, model })
@@ -39,7 +38,6 @@ const DateTime = ({
 					type="date"
 					required={ required }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>

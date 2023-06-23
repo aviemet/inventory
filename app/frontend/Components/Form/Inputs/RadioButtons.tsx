@@ -16,7 +16,6 @@ const FormRadioButtons = ({
 	onBlur,
 	required,
 	field = true,
-	span,
 	...props
 }: IFormRadioButtonsProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
@@ -38,7 +37,6 @@ const FormRadioButtons = ({
 					type="radio"
 					required={ required }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>

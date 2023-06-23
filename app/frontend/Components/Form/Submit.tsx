@@ -4,6 +4,7 @@ import { Submit as SubmitButton } from 'use-inertia-form'
 import { Flex, type Sx, type ButtonProps } from '@mantine/core'
 
 interface ISubmitButtonProps extends ButtonProps {
+	sx?: Sx
 	wrapperSx?: Sx
 	cancelRoute?: string
 	requiredFields?: string[]
@@ -16,9 +17,9 @@ const Submit = forwardRef<HTMLButtonElement, ISubmitButtonProps>((
 	return (
 		<Flex gap="md" className="submit" sx={ wrapperSx }>
 			<SubmitButton
+				sx={ [{ flex: 1 }, sx] }
 				component={ Button }
 				ref={ ref }
-				sx={ [{ flex: 1 }, sx] }
 				{ ...props }
 			>
 				{ children }

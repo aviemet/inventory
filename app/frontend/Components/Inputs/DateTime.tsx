@@ -2,6 +2,7 @@ import React from 'react'
 import Label from './Label'
 import { DateTimePicker, DateTimePickerProps } from '@mantine/dates'
 import { isEmpty } from 'lodash'
+import { CalendarIcon } from '../Icons'
 
 export interface IDateTimeProps extends DateTimePickerProps {
 	name?: string
@@ -36,6 +37,7 @@ const DateTime = ({
 				radius={ radius }
 				size={ size }
 				valueFormat={ valueFormat }
+				icon={ <CalendarIcon /> }
 				{ ...props }
 			/>
 		</>

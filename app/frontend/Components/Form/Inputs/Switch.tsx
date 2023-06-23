@@ -8,7 +8,7 @@ import { type IFormInputProps } from '.'
 interface IFormSwitchProps extends Omit<ISwitchProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<boolean> {}
 
 const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
-	{ name, onChange, onBlur, id, required, model, field = true, span, ...props },
+	{ name, onChange, onBlur, id, required, model, field = true, ...props },
 	ref,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean>({ name, model })
@@ -29,8 +29,6 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 				type="checkbox"
 				required={ required }
 				errors={ !!error }
-				disableFormatting
-				span={ span }
 			>
 				{ children }
 			</Field>

@@ -67,7 +67,7 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 					height: 0,
 					content: '""',
 					cursor: 'pointer',
-					borderColor: theme.colors.gray[7],
+					borderColor: 'transparent', // theme.colors.gray[7],
 					borderStyle: 'solid',
 					borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
 					borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`,

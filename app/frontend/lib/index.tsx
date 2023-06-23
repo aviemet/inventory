@@ -48,7 +48,7 @@ export const unsetCompact = (data: Record<string, any>, path: string) => {
 	}
 }
 
-export const coerceArray = (arg: string | string[]) => {
+export const coerceArray = <T extends unknown>(arg: T | T[]) => {
 	if(Array.isArray(arg)) return arg
 	return [arg]
 }

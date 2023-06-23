@@ -1,14 +1,12 @@
 import React from 'react'
-import { Box, Grid } from '@mantine/core'
+import { Box } from '@mantine/core'
 import cx from 'clsx'
 import { Form as InertiaForm, type FormProps, type NestedObject } from 'use-inertia-form'
 import useFormStyles from './useFormStyles'
-import ConditionalWrapper from '../ConditionalWrapper'
 import { createContext } from '@/lib/hooks'
 
 type TFormLayoutValues = {
 	disableFormatting: boolean
-	grid: boolean
 }
 
 const [useFormFormat, FormFormatProvider] = createContext<TFormLayoutValues>()
@@ -23,7 +21,6 @@ const Form = <TForm extends NestedObject>({
 	children,
 	data,
 	disableFormatting = false,
-	grid = true,
 	className,
 	railsAttributes = true,
 	...props
@@ -31,7 +28,7 @@ const Form = <TForm extends NestedObject>({
 	const { classes } = useFormStyles()
 
 	return (
-		<FormFormatProvider value={ { disableFormatting, grid } }>
+		<FormFormatProvider value={ { disableFormatting } }>
 			<Box className={ classes.form } px="xs" pt="xs">
 				<InertiaForm
 					data={ data }
@@ -39,16 +36,7 @@ const Form = <TForm extends NestedObject>({
 					railsAttributes={ railsAttributes }
 					{ ...props }
 				>
-					<ConditionalWrapper
-						wrapper={ children => (
-							<Grid>
-								{ children }
-							</Grid>
-						) }
-						condition={ grid }
-					>
-						{ children }
-					</ConditionalWrapper>
+					{ children }
 				</InertiaForm>
 			</Box>
 		</FormFormatProvider>

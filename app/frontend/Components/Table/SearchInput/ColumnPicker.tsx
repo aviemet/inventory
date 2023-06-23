@@ -45,7 +45,7 @@ const ColumnPicker = () => {
 							label={ label }
 							onChange={ handleChange }
 							checked={ !user.table_preferences?.[model]?.hide?.[hideable] }
-							sx={ { padding: 0 } }
+							p="xs"
 						/>
 					</Menu.Item>
 				)) }

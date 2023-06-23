@@ -19,7 +19,6 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 		compact = false,
 		errorKey,
 		field = true,
-		span,
 		...props
 	},
 	ref,
@@ -48,7 +47,6 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 					required={ required }
 					className={ cx({ compact }) }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>

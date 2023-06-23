@@ -18,7 +18,6 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 		required,
 		compact = false,
 		field = true,
-		span,
 		...props
 	},
 	ref,
@@ -44,7 +43,6 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 					required={ required }
 					className={ cx({ compact }) }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>

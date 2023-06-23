@@ -61,7 +61,10 @@ const useAdvancedSearch = (valueNames: string[], options?: IOptions) => {
 		link: searchLink,
 		inputProps: (name: keyof typeof values) => ({
 			value: values[name],
-			onChange: getInputOnChange<string>((value) => updateValues({ type: 'set', payload: { name, value: value as string } })),
+			onChange: getInputOnChange<string>((value) => updateValues({
+				type: 'set',
+				payload: { name, value: value as string },
+			})),
 		}),
 		reset: () => updateValues({ type: 'clear' }),
 	}
