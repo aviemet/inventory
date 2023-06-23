@@ -54,15 +54,14 @@ const useAdvancedSearch = (valueNames: string[], options?: IOptions) => {
 				location.params.set(key, value)
 			}
 		}
-		console.log({ values })
 		setSearchLink(`${location.pathname}?${location.params.toString()}`)
 	}, [values])
-	console.log({ searchLink })
+
 	return {
 		link: searchLink,
 		inputProps: (name: keyof typeof values) => ({
 			value: values[name],
-			onChange: getInputOnChange(value => updateValues({ type: 'set', payload: { name, value } })),
+			onChange: getInputOnChange<string>((value) => updateValues({ type: 'set', payload: { name, value: value as string } })),
 		}),
 		reset: () => updateValues({ type: 'clear' }),
 	}

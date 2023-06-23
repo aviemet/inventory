@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, BoxProps, Grid, type ColSpan, type ColProps } from '@mantine/core'
 import cx from 'clsx'
 import ConditionalWrapper from '../ConditionalWrapper'
+import { useFormFormat } from './Form'
 
 export interface IFieldProps extends BoxProps {
 	children: React.ReactNode
@@ -9,7 +10,6 @@ export interface IFieldProps extends BoxProps {
 	required?: boolean
 	errors?: boolean
 	disableFormatting?: boolean
-	grid?: boolean
 	span?: ColSpan
 	gridProps?: ColProps
 }
@@ -37,11 +37,12 @@ const Field = ({
 	errors = false,
 	className,
 	disableFormatting = false,
-	grid = true,
 	span = 12,
 	gridProps,
 	...props
 }: IFieldProps) => {
+	const { grid } = useFormFormat()
+
 	return (
 		<ConditionalWrapper
 			wrapper={ children => <FieldGridCol span={ span } { ...gridProps }>{ children }</FieldGridCol> }

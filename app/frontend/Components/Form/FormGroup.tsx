@@ -1,30 +1,37 @@
 import React from 'react'
-import { Box } from '@mantine/core'
+import { Box, Grid } from '@mantine/core'
 import cx from 'clsx'
 import { DivProps } from 'react-html-props'
 import ConditionalWrapper from '../ConditionalWrapper'
 import { NestedFields } from 'use-inertia-form'
+import { useFormFormat } from './Form'
 
 interface IFormGroupProps extends DivProps {
 	legend?: string
 	outline?: boolean
-	compact?: boolean
 	model?: string
 }
 
-const FormGroup = ({ children, legend, outline = true, compact = false, model }: IFormGroupProps) => {
+const FormGroup = ({ children, legend, outline = true, model }: IFormGroupProps) => {
+	const { grid } = useFormFormat()
+
 	return (
 		<Box component='fieldset' className={ cx({ outline }) } sx={ {
 			marginTop: legend ? '0.5rem' : undefined,
 		} }>
 			<ConditionalWrapper
-				wrapper={ children => <NestedFields model={ model! }>{ children }</NestedFields> }
-				condition={ model !== undefined }
+				wrapper={ children => <Grid m={ 0 }>{ children }</Grid> }
+				condition={ grid }
 			>
-				<>
-					{ legend && <legend>{ legend }</legend> }
-					{ children }
-				</>
+				<ConditionalWrapper
+					wrapper={ children => <NestedFields model={ model! }>{ children }</NestedFields> }
+					condition={ model !== undefined }
+				>
+					<>
+						{ legend && <legend>{ legend }</legend> }
+						{ children }
+					</>
+				</ConditionalWrapper>
 			</ConditionalWrapper>
 		</Box>
 	)
