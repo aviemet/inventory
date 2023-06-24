@@ -24,7 +24,9 @@ namespace :api do
 
   resources :vendors, only: [:create, :update]
 
-  resources :models, only: [:create, :update]
+  resources :models, only: [:index, :show, :create, :update]
+  get "models/slug/:slug" => "models#slug"
+
   resources :manufacturers, only: [:create, :update]
   resources :warranties, only: [:create, :update]
 
@@ -44,6 +46,12 @@ namespace :api do
 
   resources :searches, only: [:index]
   resources :spotlights, only: [:index]
+
+  scope :options do
+    [:companies, :departments, :locations, :categories, :status_labels, :items, :components, :accessories, :consumables, :licenses, :people, :vendors, :models, :manufacturers, :networks, :orders, :contracts, :documentations].each do |model|
+      get "#{model}" => "#{model}#options", as: "#{model}_options"
+    end
+  end
 
   ## SETTINGS ##
   post "smtp/test" => "smtps#test", as: :smtp_test

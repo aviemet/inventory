@@ -5,7 +5,6 @@ import { type ICellProps } from './index'
 import { useTableContext } from '../TableContext'
 import { Box, Flex } from '@mantine/core'
 import { useLocation, usePageProps } from '@/lib/hooks'
-import { FilterIcon } from '@/Components/Icons'
 
 interface IHeadCellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
@@ -64,7 +63,6 @@ const HeadCellWithContext = ({
 			{ ...props }
 		>
 			<Flex align="center">
-				<FilterIcon />
 				{ showSortLink ?
 					<Link
 						href={ `${pathname}?${params.toString()}` }

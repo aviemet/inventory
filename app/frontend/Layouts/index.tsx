@@ -2,6 +2,7 @@ import React from 'react'
 import { type PageProps } from '@inertiajs/core'
 import Providers from '@/Layouts/Providers'
 import { Flash } from '@/Components/Flash'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import AppLayout from './AppLayout'
 import AuthLayout from './AuthLayout'
@@ -24,6 +25,7 @@ const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
 		<Providers>
 			<Flash />
 			{ children }
+			{ process.env.NODE_ENV && process.env.NODE_ENV === 'development' && <ReactQueryDevtools /> }
 		</Providers>
 	)
 })

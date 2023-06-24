@@ -1,12 +1,9 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef } from 'react'
 import Field from '../Field'
 import SearchableDropdownInput, { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
 import { ConditionalWrapper, Group } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
-import { router } from '@inertiajs/react'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
-import { coerceArray } from '@/lib'
-import axios from 'axios'
 import { type IFormInputProps } from '.'
 
 export interface IDropdownWithModalButton {
@@ -19,11 +16,11 @@ export interface IDropdownWithModalButton {
 }
 
 type OmittedDropdownTypes = 'name'|'defaultValue'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
-export interface ISearchableDropdownFormProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IFormInputProps<Schema.Search[]> {
+export interface ISearchableDropdownFormProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IFormInputProps<string> {
 	defaultValue?: string
+	onChange: ((value: string|null, form: UseFormProps<unknown>) => void) | undefined
 	onDropdownOpen?: (form: UseFormProps<any>) => void
 	onDropdownClose?: (form: UseFormProps<any>) => void
-	fetchOnOpen?: string|string[]
 	endpoint?: string
 	newForm?: React.ReactElement
 	field?: boolean
@@ -52,51 +49,19 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 	},
 	ref,
 ) => {
-	const [fetchedOptions, setFetchedOptions] = useState<Schema.Search[]>([])
-
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model, errorKey })
 
-	// TODO: Reminder that endpoint fetching was moved to Inputs component, this needs to be reworked
-	const fetchNewRecords = (query?: string) => {
-		if(endpoint && query){
-			axios.get(endpoint, {
-				params: {
-					search: query,
-				},
-			})
-				.then(response => {
-					console.log({ response })
-					setFetchedOptions(response.data)
-				})
-				.catch(error => {
-					console.error({ error })
-				})
-		} else if(fetchOnOpen) {
-			router.reload({ only: coerceArray(fetchOnOpen) })
-		}
-	}
-
-	const handleSearchChange = (query: string) => {
-		fetchNewRecords(query)
-		if(onSearchChange) onSearchChange(query)
-	}
-
 	const handleChange = (option: string|null) => {
-		console.log('CHANGE')
 		setValue(option ? option : '')
-		let optionArg: Schema.Search|string|null = option
-		if(endpoint) {
-			optionArg = fetchedOptions.find(el => String(el.id) === String(option))!
-		}
-		if(onChange) onChange(optionArg, form)
+
+		if(onChange) onChange(option, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-		if(onBlur) onBlur(value, form)
+		if(onBlur) onBlur(String(value), form)
 	}
 
 	const handleDropdownOpen = () => {
-		fetchNewRecords()
 		if(onDropdownOpen) onDropdownOpen(form)
 	}
 
@@ -105,7 +70,6 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 	}
 
 	const handleNewFormSuccess = (data: { id: string|number }) => {
-		fetchNewRecords()
 		setValue(String(data.id))
 	}
 
@@ -142,9 +106,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 						id={ id || inputId }
 						name={ inputName }
 						label={ label }
-						options={ endpoint ? fetchedOptions : options }
 						value={ String(value) }
-						onSearchChange={ handleSearchChange }
 						onChange={ handleChange }
 						onBlur={ handleBlur }
 						onDropdownOpen={ handleDropdownOpen }
