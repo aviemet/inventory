@@ -1,5 +1,8 @@
 namespace :api do
   resources :users, only: [:create, :update]
+  patch "users/:id/update_table_preferences" => "users#update_table_preferences", as: :update_table_preferences
+  patch "users/:id/update_user_preferences" => "users#update_user_preferences", as: :update_user_preferences
+
   resources :companies, only: [:create, :update], param: :slug
   resources :ownerships, only: [:create, :update]
 
@@ -48,7 +51,7 @@ namespace :api do
   resources :spotlights, only: [:index]
 
   scope :options do
-    [:companies, :departments, :locations, :categories, :status_labels, :items, :components, :accessories, :consumables, :licenses, :people, :vendors, :models, :manufacturers, :networks, :orders, :contracts, :documentations].each do |model|
+    [:companies, :departments, :locations, :categories, :status_labels, :assets, :items, :components, :accessories, :consumables, :licenses, :people, :vendors, :models, :manufacturers, :networks, :orders, :contracts, :documentations].each do |model|
       get "#{model}" => "#{model}#options", as: "#{model}_options"
     end
   end

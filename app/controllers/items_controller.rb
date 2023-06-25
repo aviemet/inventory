@@ -18,13 +18,6 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /item/category/:category_id
-  # def category
-  #   # TODO: Consider another way of filtering without using routes
-  #   self.items = items.where('model.category': Category.find(request.params[:category_id]))
-  #   render :index
-  # end
-
   # GET /item/:id
   def show
     authorize item

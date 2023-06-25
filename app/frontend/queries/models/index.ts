@@ -1,35 +1,27 @@
 import { Routes } from '@/lib'
-import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import { query, type ReactQueryOptions } from '..'
 
-export const getModels = <T = Schema.Model[]>(options: UseQueryOptions<T>) => {
-	return useQuery<T>({
-		queryKey: ['models'],
-		queryFn: (): Promise<T> => axios.get(Routes.apiModels()),
-		...options,
-	})
-}
+export const getModels = (options?: ReactQueryOptions<Schema.Model[]>) => query(
+	['models'],
+	() => axios.get(Routes.apiModels()).then(res => res.data),
+	options,
+)
 
-export const getModelsAsOptions = <T = Schema.ModelsOptions[]>(options: UseQueryOptions<T>) => {
-	return useQuery<T>({
-		queryKey: ['models', 'options'],
-		queryFn: (): Promise<T> => axios.get(Routes.apiModelsOptions()),
-		...options,
-	})
-}
+export const getModelsAsOptions = (options?: ReactQueryOptions<Schema.ModelsOptions[]>) => query(
+	['models', 'options'],
+	() => axios.get(Routes.apiModelsOptions()).then(res => res.data),
+	options,
+)
 
-export const getModel = <T = Schema.Model>(id: number, options: UseQueryOptions<T>) => {
-	return useQuery<T>({
-		queryKey: ['models', id],
-		queryFn: (): Promise<T> => axios.get(Routes.apiModel(id)),
-		...options,
-	})
-}
+export const getModel = (id: number, options?: ReactQueryOptions<Schema.Model>) => query(
+	['models', id],
+	() => axios.get(Routes.apiModel(id)).then(res => res.data),
+	options,
+)
 
-export const getModelBySlug = <T = Schema.Model[]>(slug: string, options: UseQueryOptions<T>) => {
-	return useQuery<T>({
-		queryKey: ['models', slug],
-		queryFn: (): Promise<T> => axios.get(Routes.apiModel(slug)),
-		...options,
-	})
-}
+export const getModelBySlug = (slug: string, options?: ReactQueryOptions<Schema.Model>) => query(
+	['models', slug],
+	() => axios.get(Routes.apiModel(slug)).then(res => res.data),
+	options,
+)

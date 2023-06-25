@@ -18,7 +18,7 @@ export interface IDropdownWithModalButton {
 type OmittedDropdownTypes = 'name'|'defaultValue'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
 export interface ISearchableDropdownFormProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IFormInputProps<string> {
 	defaultValue?: string
-	onChange: ((value: string|null, form: UseFormProps<unknown>) => void) | undefined
+	onChange?: ((value: string|null, form: UseFormProps<unknown>) => void) | undefined
 	onDropdownOpen?: (form: UseFormProps<any>) => void
 	onDropdownClose?: (form: UseFormProps<any>) => void
 	endpoint?: string
@@ -109,10 +109,11 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 						value={ String(value) }
 						onChange={ handleChange }
 						onBlur={ handleBlur }
-						onDropdownOpen={ handleDropdownOpen }
 						onDropdownClose={ handleDropdownClose }
+						onDropdownOpen={ handleDropdownOpen }
 						defaultValue={ defaultValue ?? String(value) }
 						error={ error }
+						options={ options }
 						{ ...props }
 					/>
 				</ConditionalWrapper>

@@ -3,20 +3,22 @@ import { SearchableDropdown } from '@/Components/Form'
 import { Routes } from '@/lib'
 import CategoriesForm from '@/Pages/Categories/Form'
 import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
+import { getCategoriesAsOptions } from '@/queries/categories'
 
 interface ICategoriesDropdown extends IDropdownWithModalButton {
-	categories: Schema.CategoriesOptions[]
-	categorizable_type?: 'Accessory' | 'Address' | 'Component' | 'Consumable' | 'Contact' | 'Contract' | 'Department' | 'Email' | 'Item' | 'License' | 'Location' | 'Manufacturer' | 'Model' | 'Order' | 'Person' | 'Phone' | 'Ticket' | 'User' | 'Vendor' | 'Vendor' | 'Website'
+	categorizable_type?: Schema.CategoryTypes
 }
 
-const CategoriesDropdown = ({ label = 'Category', name = 'category_id',  categories, ...props }: ICategoriesDropdown) => {
+const CategoriesDropdown = ({ label = 'Category', name = 'category_id', ...props }: ICategoriesDropdown) => {
+	const { data, refetch } = getCategoriesAsOptions({ enabled: false })
+
 	return (
 		<SearchableDropdown
 			label={ label }
 			name={ name }
-			options={ categories }
+			options={ data }
 			filterMatchKeys={ ['name'] }
-			fetchOnOpen="categories"
+			onDropdownOpen={ () => refetch() }
 			newForm={ <CategoriesForm
 				to={ Routes.apiCategories() }
 			/> }

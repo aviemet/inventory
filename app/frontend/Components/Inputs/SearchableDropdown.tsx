@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useState } from 'react'
+import React, { forwardRef, useCallback } from 'react'
 import { Select, type SelectProps } from '@mantine/core'
 import Label from './Label'
 import { router } from '@inertiajs/react'
@@ -10,10 +10,8 @@ export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 	getValue?: (option: Record<string, any>) => string
 	disabledOptions?: (label: string, value: string | number) => boolean
 	onOpen?: () => void
-	onChange?: (option: string|null) => void
 	filterMatchKeys?: string[]
-	fetchOnOpen?: string | ((setFetchedOptions: React.Dispatch<React.SetStateAction<any[]>>) => void)
-	fetchOnSearch?: boolean
+	fetchOnOpen?: string
 }
 
 const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDropdownProps>((
@@ -23,7 +21,6 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		getValue = option => String(option.id),
 		disabledOptions,
 		onSearchChange,
-		onChange,
 		filterMatchKeys,
 		label,
 		required,
@@ -32,22 +29,16 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		searchable = true,
 		clearable = true,
 		fetchOnOpen,
-		fetchOnSearch = false,
 		...props
 	},
 	ref,
 ) => {
-	const [fetchedOptions, setFetchedOptions] = useState<any[]>(options)
-
 	const inputId = id || name
 
 	const data = useCallback(() => {
-		let iterableOptions = options
-		if(fetchOnOpen && typeof fetchOnOpen === 'function') {
-			iterableOptions = fetchedOptions
-		}
+		if(!options) return []
 
-		return iterableOptions.map(option => {
+		return options.map(option => {
 			const optionPart = {
 				label: getLabel(option),
 				value: getValue(option),
@@ -60,26 +51,12 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 
 			return optionPart
 		})
-	}, [options, fetchedOptions])
+	}, [options])
 
 	const fetchNewRecords = (query?: string) => {
 		if(!fetchOnOpen) return
 
-		if(typeof fetchOnOpen === 'string') {
-			router.reload({ only: coerceArray(fetchOnOpen) })
-		} else if(typeof fetchOnOpen === 'function') {
-			fetchOnOpen(setFetchedOptions)
-		}
-	}
-
-	const handleChange = (value: string) => {
-		if(!onChange) return
-
-		if(fetchOnOpen && typeof fetchOnOpen === 'function' && value !== undefined) {
-			onChange(fetchedOptions.find(el => String(el.id) === String(value)) || [])
-		} else {
-			onChange(value)
-		}
+		router.reload({ only: coerceArray(fetchOnOpen) })
 	}
 
 	return (
@@ -99,7 +76,6 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 				maxDropdownHeight={ 400 }
 				nothingFound="No Results"
 				onDropdownOpen={ fetchNewRecords }
-				onChange={ handleChange }
 				{ ...props }
 			/>
 		</>

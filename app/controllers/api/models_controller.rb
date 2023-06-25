@@ -9,7 +9,7 @@ class Api::ModelsController < Api::ApiController
 
   # GET api/models/:id
   def show
-    render json:  @active_company.models.find(params[:id]).render
+    render json: @active_company.models.find(params[:id]).render
   end
 
   # GET api/models/:slug

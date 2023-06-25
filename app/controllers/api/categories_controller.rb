@@ -1,5 +1,26 @@
 class Api::CategoriesController < Api::ApiController
+  expose :categories, -> { @active_company.categories }
   expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories }, find_by: :slug
+
+  # GET api/categories/options
+  def index
+    render json: categories.includes_associated.render
+  end
+
+  # GET api/categories/:id
+  def show
+    render json: @active_company.categories.find(params[:id]).render
+  end
+
+  # GET api/categories/:slug
+  def slug
+    render json: categories.render
+  end
+
+  # GET api/options/categories
+  def options
+    render json: @active_company.categories.render(view: :options)
+  end
 
   # POST /api/categories
   def create

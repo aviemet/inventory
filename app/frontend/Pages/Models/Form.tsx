@@ -25,8 +25,8 @@ export interface IModelFormProps {
 const emptyModel: Schema.ModelsFormData = {
 	name: '',
 	model_number: '',
-	manufacturer_id: undefined,
-	category_id: undefined,
+	manufacturer_id: '',
+	category_id: '',
 }
 
 const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categories, manufacturers }: IModelFormProps) => {
@@ -52,7 +52,6 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categori
 				name="category_id"
 				options={ categories }
 				filterMatchKeys={ ['name'] }
-				fetchOnOpen="categories"
 			/>
 
 			<Textarea name="notes" label="Notes" />

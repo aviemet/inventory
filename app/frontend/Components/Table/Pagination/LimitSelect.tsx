@@ -17,7 +17,7 @@ const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 	const handleLimitChange = (limit: string) => {
 		if(!model) return
 
-		axios.patch( Routes.updateTablePreferences(user.id!), {
+		axios.patch( Routes.apiUpdateTablePreferences(user.id!), {
 			user: {
 				table_preferences: {
 					[model]: { limit },

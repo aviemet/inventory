@@ -13,13 +13,6 @@ interface IDashboardProps {
 const Dashboard = ({ company, activities }: IDashboardProps) => {
 	const { data, refetch } = getModelsAsOptions({ enabled: false })
 
-	const fetchModels = (setOptions: React.Dispatch<React.SetStateAction<Schema.ModelsOptions[]>>) => {
-		refetch().then(({ data }) => {
-			console.log({ data })
-			setOptions(data.data)
-		})
-	}
-
 	return (
 		<Page title="Dashboard" breadcrumbs={ [
 			{ href: '/dashboard', title: 'Dashboard' },
@@ -35,7 +28,8 @@ const Dashboard = ({ company, activities }: IDashboardProps) => {
 
 			<Section>
 				<SearchableDropdown
-					fetchOnOpen={ fetchModels }
+					options={ data }
+					onDropdownOpen={ refetch }
 				/>
 			</Section>
 		</Page>

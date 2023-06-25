@@ -134,7 +134,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		const scheme = value || (colorScheme === 'dark' ? 'light' : 'dark')
 
 		if(auth?.user) {
-			axios.patch(Routes.updateUserPreferences(auth?.user), {
+			axios.patch(Routes.apiUpdateUserPreferences(auth?.user), {
 				user: {
 					user_preferences: {
 						colorScheme: scheme,

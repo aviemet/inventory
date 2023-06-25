@@ -1,5 +1,3 @@
-/* eslint no-unused-vars: 0 */
-
 import React from 'react'
 import { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
 import { type SelectProps, type InputProps } from '@mantine/core'
@@ -12,18 +10,23 @@ declare global {
 	type TAssignToable = 'Person' | 'Item' | 'Location'
 	type TAssignable = 'Item' | 'Accessory' | 'Component' | 'Consumable' | 'License'
 
-	declare namespace Schema {
-		interface Pagination {
-			count: number
-			pages: number
-			limit: number
-			current_page: number
-			next_page: number
-			prev_page: number
-			is_first_page: boolean
-			is_last_page: boolean
-		}
+	type TPermissions = {
+		index?: boolean
+		show?: boolean
+		create?: boolean
+		update?: boolean
+		delete?: boolean
+		checkout?: boolean
+		checkin?: boolean
 	}
+
+	type PaginatedModel<T> = {
+		data: T
+		pagination: Schema.Pagination
+	}
+
+	type FlashMessage = Record<'success' | 'alert' | 'info' | 'warning', string>
+
 	// interface Assignable {
 	// 	available_to_checkout: boolean
 	// 	assignments?: Assignment[]
@@ -174,68 +177,4 @@ declare global {
 	// }
 	// }
 
-	type TPermissions = {
-		index?: boolean
-		show?: boolean
-		create?: boolean
-		update?: boolean
-		delete?: boolean
-		checkout?: boolean
-		checkin?: boolean
-	}
-
-	type PaginatedModel<T> = {
-		data: T
-		pagination: Schema.Pagination
-	}
-
-	type FlashMessage = Record<'success' | 'alert' | 'info' | 'warning', string>
-}
-
-declare module '@mantine/core' {
-	export interface MantineThemeOther {
-		colorSchemeOption: (light: any, dark: any) => any
-		header: {
-			height: number
-		}
-		navbar: {
-			width: {
-				closed: number
-				open: number
-			}
-		}
-		footer: {
-			height: number
-		}
-		form: {
-			label: {
-				width: number | string
-			}
-		}
-		table: {
-			sortButtonHeight: number | string
-			sortButtonWidth: number | string
-		}
-		colors: {
-			checkoutButtonColor: string
-			checkinButtonColor: string
-			replenishButtonColor: string
-		}
-	}
-
-	// https://phelipetls.github.io/posts/polymorphic-components-react-typescript/
-
-	type PropsOf<T extends React.ElementType> = React.ComponentPropsWithoutRef<T>
-
-	type PolymorphicProps<
-		T extends React.ElementType = React.ElementType,
-		TProps = {}
-	> = {
-		as?: T
-	} & TProps &
-	Omit<PropsOf<T>, keyof TProps & 'as'>
-
-	interface PolymorphicComponent<T extends React.Element> {
-		as: T
-	}
 }
