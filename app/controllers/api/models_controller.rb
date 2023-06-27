@@ -1,5 +1,5 @@
 class Api::ModelsController < Api::ApiController
-  expose :models, -> { @active_company.models }
+  expose :models, -> { params[:category] ? @active_company.models.find_by_category(params[:category]) : @active_company.models }
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, model: Model, find_by: :slug
 
   # GET api/models/options
@@ -9,7 +9,7 @@ class Api::ModelsController < Api::ApiController
 
   # GET api/models/:id
   def show
-    render json: @active_company.models.find(params[:id]).render
+    render json: models.find(params[:id]).render
   end
 
   # GET api/models/:slug
@@ -19,7 +19,7 @@ class Api::ModelsController < Api::ApiController
 
   # GET api/options/models
   def options
-    render json: @active_company.models.render(view: :options)
+    render json: models.render(view: :options)
   end
 
   # POST api/models

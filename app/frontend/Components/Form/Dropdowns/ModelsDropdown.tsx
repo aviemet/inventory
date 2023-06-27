@@ -6,13 +6,11 @@ import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
 import { getModelsAsOptions } from '@/queries/models'
 
 interface IModelsDropdown extends IDropdownWithModalButton {
-	models: Schema.ModelsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
+	modelCategory?: Schema.CategoryTypes|undefined
 }
 
-const ModelsDropdown = ({ label = 'Model', name = 'model_id', manufacturers, categories, ...props }: IModelsDropdown) => {
-	const { data, refetch } = getModelsAsOptions({ enabled: false })
+const ModelsDropdown = ({ label = 'Model', name = 'model_id', modelCategory, ...props }: IModelsDropdown) => {
+	const { data, refetch } = getModelsAsOptions(modelCategory, { enabled: false })
 
 	return (
 		<SearchableDropdown
@@ -23,8 +21,6 @@ const ModelsDropdown = ({ label = 'Model', name = 'model_id', manufacturers, cat
 			onDropdownOpen={ () => refetch() }
 			newForm={ <ModelsForm
 				to={ Routes.apiModels() }
-				manufacturers={ manufacturers }
-				categories={ categories }
 			/> }
 			{ ...props }
 		/>

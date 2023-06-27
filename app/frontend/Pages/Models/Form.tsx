@@ -8,6 +8,7 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
+import { CategoriesDropdown } from '@/Components/Form/Dropdowns'
 
 type TModelFormData = {
 	model: Schema.ModelsFormData
@@ -17,9 +18,10 @@ export interface IModelFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TModelFormData>) => boolean|void
-	model?: Schema.ModelsFormData
-	categories: Schema.CategoriesOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
+	category: Schema.CategoryTypes
+	// model?: Schema.ModelsFormData
+	// categories: Schema.CategoriesOptions[]
+	// manufacturers: Schema.ManufacturersOptions[]
 }
 
 const emptyModel: Schema.ModelsFormData = {
@@ -29,7 +31,7 @@ const emptyModel: Schema.ModelsFormData = {
 	category_id: '',
 }
 
-const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categories, manufacturers }: IModelFormProps) => {
+const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: IModelFormProps) => {
 	return (
 		<Form
 			model="model"
@@ -42,17 +44,17 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categori
 
 			<TextInput name="model_number" label="Model Number" required />
 
-			<ManufacturersDropdown
-				manufacturers={ manufacturers }
-			/>
+			<ManufacturersDropdown />
 
-			<SearchableDropdown
+			<CategoriesDropdown categorizable_type='Item' />
+
+			{ /* <SearchableDropdown
 				required
 				label="Category"
 				name="category_id"
 				options={ categories }
 				filterMatchKeys={ ['name'] }
-			/>
+			/> */ }
 
 			<Textarea name="notes" label="Notes" />
 

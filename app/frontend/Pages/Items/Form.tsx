@@ -24,14 +24,14 @@ export interface IItemFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TItemFormData>) => boolean|void
 	item: Schema.ItemsFormData
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
+	// models: Schema.ModelsOptions[]
+	// vendors: Schema.VendorsOptions[]
+	// locations: Schema.LocationsOptions[]
+	// manufacturers: Schema.ManufacturersOptions[]
+	// categories: Schema.CategoriesOptions[]
 }
 
-const ItemForm = ({ method = 'post', item, models, vendors, locations, manufacturers, categories, ...props }: IItemFormProps) => {
+const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 	const [staticIp, setStaticIp] = useState(false)
 
 	return (
@@ -46,9 +46,7 @@ const ItemForm = ({ method = 'post', item, models, vendors, locations, manufactu
 
 			<FormGroup legend="Item Details">
 				<ModelsDropdown
-					models={ models }
-					manufacturers={ manufacturers }
-					categories={ categories }
+					modelCategory='Item'
 					errorKey="item.model"
 				/>
 
@@ -75,7 +73,7 @@ const ItemForm = ({ method = 'post', item, models, vendors, locations, manufactu
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown vendors={ vendors } />
+				<VendorsDropdown />
 
 				<CurrencyInput name="cost" label="Cost" />
 
@@ -86,7 +84,6 @@ const ItemForm = ({ method = 'post', item, models, vendors, locations, manufactu
 				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
-					locations={ locations }
 					currencies={ [] }
 					required
 				/>

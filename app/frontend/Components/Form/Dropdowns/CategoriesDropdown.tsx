@@ -9,8 +9,8 @@ interface ICategoriesDropdown extends IDropdownWithModalButton {
 	categorizable_type?: Schema.CategoryTypes
 }
 
-const CategoriesDropdown = ({ label = 'Category', name = 'category_id', ...props }: ICategoriesDropdown) => {
-	const { data, refetch } = getCategoriesAsOptions({ enabled: false })
+const CategoriesDropdown = ({ label = 'Category', name = 'category_id', categorizable_type, ...props }: ICategoriesDropdown) => {
+	const { data, refetch } = getCategoriesAsOptions(categorizable_type, { enabled: false })
 
 	return (
 		<SearchableDropdown

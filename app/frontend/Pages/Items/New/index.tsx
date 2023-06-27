@@ -5,11 +5,11 @@ import { Routes } from '@/lib'
 
 interface INewItemProps {
 	item: Schema.ItemsFormData
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
+	// models: Schema.ModelsOptions[]
+	// vendors: Schema.VendorsOptions[]
+	// locations: Schema.LocationsOptions[]
+	// manufacturers: Schema.ManufacturersOptions[]
+	// categories: Schema.CategoriesOptions[]
 }
 
 const NewItem = ({ ...data }: INewItemProps) => {

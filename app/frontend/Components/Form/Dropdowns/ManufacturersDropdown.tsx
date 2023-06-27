@@ -3,20 +3,21 @@ import { SearchableDropdown } from '@/Components/Form'
 import { Routes } from '@/lib'
 import ManufacturersForm from '@/Pages/Manufacturers/Form'
 import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
+import { getManufacturersAsOptions } from '@/queries/manufacturers'
 
-interface IManufacturersDropdown extends IDropdownWithModalButton {
-	manufacturers: Schema.ManufacturersOptions[]
-}
+interface IManufacturersDropdown extends IDropdownWithModalButton {}
 
-const ManufacturersDropdown = ({ label = 'Manufacturer', name = 'manufacturer_id',  manufacturers, ...props }: IManufacturersDropdown) => {
+const ManufacturersDropdown = ({ label = 'Manufacturer', name = 'manufacturer_id',  ...props }: IManufacturersDropdown) => {
+	const { data, refetch } = getManufacturersAsOptions({ enabled: false })
+
 	return (
 		<SearchableDropdown
 			label={ label }
 			name={ name }
 			required
-			options={ manufacturers }
-			fetchOnOpen="manufacturers"
+			options={ data }
 			filterMatchKeys={ ['name'] }
+			onDropdownOpen={ () => refetch() }
 			newForm={ <ManufacturersForm
 				to={ Routes.apiManufacturers() }
 			/> }

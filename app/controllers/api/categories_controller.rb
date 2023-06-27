@@ -1,5 +1,5 @@
 class Api::CategoriesController < Api::ApiController
-  expose :categories, -> { @active_company.categories }
+  expose :categories, -> { params[:category] ? @active_company.categories.find_by_type(params[:category]) : @active_company.categories }
   expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories }, find_by: :slug
 
   # GET api/categories/options
@@ -19,6 +19,7 @@ class Api::CategoriesController < Api::ApiController
 
   # GET api/options/categories
   def options
+    ap({ params: })
     render json: @active_company.categories.render(view: :options)
   end
 
