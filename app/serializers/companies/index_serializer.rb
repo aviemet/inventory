@@ -2,8 +2,10 @@ class Companies::IndexSerializer < ApplicationSerializer
   object_as :company
 
   attributes(
-    :name,
+    :id,
     :slug,
+    :name,
+    :default_currency,
     :settings,
     :created_at,
     :updated_at,

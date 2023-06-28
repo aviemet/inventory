@@ -24,11 +24,6 @@ export interface IItemFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TItemFormData>) => boolean|void
 	item: Schema.ItemsFormData
-	// models: Schema.ModelsOptions[]
-	// vendors: Schema.VendorsOptions[]
-	// locations: Schema.LocationsOptions[]
-	// manufacturers: Schema.ManufacturersOptions[]
-	// categories: Schema.CategoriesOptions[]
 }
 
 const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
@@ -41,7 +36,6 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 			method={ method }
 			{ ...props }
 		>
-
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Item Details">

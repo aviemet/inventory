@@ -3,7 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CompanyForm from '../Form'
 
-const EditCompany = ({ company }: { company: Schema.CompaniesEdit }) => {
+interface IEditCompanyProps {
+	company: Schema.CompaniesEdit
+}
+
+const EditCompany = ({ company }: IEditCompanyProps) => {
 	const title = 'Edit Company'
 
 	return (

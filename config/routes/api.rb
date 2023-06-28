@@ -9,7 +9,7 @@ namespace :api do
   resources :departments, only: [:create, :update], param: :slug
   resources :locations, only: [:create, :update], param: :slug
 
-  resources :categories, param: :slug
+  resources :categories, except: [:edit, :new], param: :slug
   resources :status_labels, only: [:create, :update]
 
   resources :items, path: :hardware, only: [:index, :update] do
@@ -25,9 +25,9 @@ namespace :api do
 
   resources :people, only: [:update]
 
-  resources :vendors, only: [:create, :update]
+  resources :vendors, except: [:edit, :new], param: :slug
 
-  resources :models, param: :slug
+  resources :models, except: [:edit, :new], param: :slug
 
   resources :manufacturers, only: [:create, :update]
   resources :warranties, only: [:create, :update]
@@ -48,6 +48,8 @@ namespace :api do
 
   resources :searches, only: [:index]
   resources :spotlights, only: [:index]
+
+  resources :currencies, only: [:index]
 
   scope :options do
     [:companies, :departments, :locations, :categories, :status_labels, :assets, :items, :components, :accessories, :consumables, :licenses, :people, :vendors, :models, :manufacturers, :networks, :orders, :contracts, :documentations].each do |model|

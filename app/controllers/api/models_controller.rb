@@ -9,7 +9,7 @@ class Api::ModelsController < Api::ApiController
 
   # GET api/models/:slug
   def show
-    render json: models.render
+    render json: model.render
   end
 
   # GET api/options/models

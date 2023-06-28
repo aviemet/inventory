@@ -118,18 +118,6 @@ export const accessory: ((
 
 /**
  * Generates rails route to
- * /api/models/slug/:slug(.:format)
- * @param {any} slug
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const api: ((
-  slug: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /api/options/accessories(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -319,6 +307,16 @@ export const apiContracts: ((
  * @returns {string} route path
  */
 export const apiContractsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/currencies(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCurrencies: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -608,13 +606,13 @@ export const apiManufacturersOptions: ((
 
 /**
  * Generates rails route to
- * /api/models/:id(.:format)
- * @param {any} id
+ * /api/models/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiModel: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -878,13 +876,13 @@ export const apiUsers: ((
 
 /**
  * Generates rails route to
- * /api/vendors/:id(.:format)
- * @param {any} id
+ * /api/vendors/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiVendor: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

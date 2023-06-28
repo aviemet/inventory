@@ -21,7 +21,12 @@ const EditLocation = ({ location, ...models }: IEditLocationProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<LocationForm to={ Routes.location(location.slug) } method="patch" location={ location } { ...models } />
+				<LocationForm
+					to={ Routes.location(location.slug) }
+					method="patch"
+					location={ location }
+					{ ...models }
+				/>
 			</Section>
 		</Page>
 	)

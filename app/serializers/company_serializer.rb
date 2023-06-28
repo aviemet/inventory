@@ -1,8 +1,9 @@
 class CompanySerializer < ApplicationSerializer
   attributes(
-    :name,
     :slug,
+    :name,
     :settings,
+    :default_currency,
     :created_at,
     :updated_at,
   )

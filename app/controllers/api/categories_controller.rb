@@ -9,7 +9,7 @@ class Api::CategoriesController < Api::ApiController
 
   # GET api/categories/:slug
   def show
-    render json: categories.render
+    render json: category.render
   end
 
   # GET api/options/categories
