@@ -78,7 +78,6 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
-					currencies={ [] }
 					required
 				/>
 

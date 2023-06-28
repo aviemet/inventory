@@ -2,6 +2,7 @@ import React from 'react'
 import { SearchableDropdown } from '@/Components/Form'
 import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
 import { getCurrencies } from '@/queries/currencies'
+import { isEmpty } from 'lodash'
 
 interface ICurrenciesDropdown extends IDropdownWithModalButton {}
 
@@ -16,7 +17,7 @@ const CurrenciesDropdown = ({ label = 'Currency', name = 'currency', ...props }:
 			label={ label }
 			name={ name }
 			options={ data }
-			onDropdownOpen={ () => refetch() }
+			onDropdownOpen={ () => { if(isEmpty(data)) refetch() } }
 			getLabel={ value => `${value.code} (${value.symbol})` }
 			getValue={ value => value.code }
 			{ ...props }

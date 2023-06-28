@@ -4,11 +4,12 @@ import { Routes } from '@/lib'
 import ManufacturersForm from '@/Pages/Manufacturers/Form'
 import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
 import { getManufacturersAsOptions } from '@/queries/manufacturers'
+import { isEmpty } from 'lodash'
 
 interface IManufacturersDropdown extends IDropdownWithModalButton {}
 
 const ManufacturersDropdown = ({ label = 'Manufacturer', name = 'manufacturer_id',  ...props }: IManufacturersDropdown) => {
-	const { data, refetch } = getManufacturersAsOptions({ enabled: false })
+	const { data, isStale, refetch } = getManufacturersAsOptions({ enabled: false })
 
 	return (
 		<SearchableDropdown
@@ -17,7 +18,7 @@ const ManufacturersDropdown = ({ label = 'Manufacturer', name = 'manufacturer_id
 			required
 			options={ data }
 			filterMatchKeys={ ['name'] }
-			onDropdownOpen={ () => refetch() }
+			onDropdownOpen={ () => { if(isEmpty(data) || isStale) refetch() } }
 			newForm={ <ManufacturersForm
 				to={ Routes.apiManufacturers() }
 			/> }

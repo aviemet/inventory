@@ -13,7 +13,14 @@ interface IProviderProps {
 	children?: React.ReactNode
 }
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			staleTime: 30000,
+			cacheTime: 30000,
+		},
+	},
+})
 
 const Providers = React.memo(({ children }: IProviderProps) => {
 	return (

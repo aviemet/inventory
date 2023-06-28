@@ -4,13 +4,14 @@ import { Routes } from '@/lib'
 import LocationsForm from '@/Pages/Locations/Form'
 import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
 import { getLocationsAsOptions } from '@/queries/locations'
+import { isEmpty } from 'lodash'
 
 interface ILocationsDropdown extends IDropdownWithModalButton {
-	filter: (location: Schema.LocationsOptions) => boolean
+	filter?: (location: Schema.LocationsOptions) => boolean
 }
 
 const LocationsDropdown = ({ label = 'Location', name = 'location_id', filter, ...props }: ILocationsDropdown) => {
-	const { data, refetch } = getLocationsAsOptions({
+	const { data, isStale, refetch } = getLocationsAsOptions({
 		enabled: false,
 		select: filter ? data => data.filter(filter) : undefined,
 	})
@@ -20,7 +21,7 @@ const LocationsDropdown = ({ label = 'Location', name = 'location_id', filter, .
 			label={ label }
 			name={ name }
 			options={ data }
-			onDropdownOpen={ () => refetch() }
+			onDropdownOpen={ () => { if(isEmpty(data) || isStale) refetch() } }
 			newForm={ <LocationsForm
 				to={ Routes.locations() }
 			/> }
