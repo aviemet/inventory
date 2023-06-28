@@ -7,20 +7,14 @@ class Api::CategoriesController < Api::ApiController
     render json: categories.includes_associated.render
   end
 
-  # GET api/categories/:id
-  def show
-    render json: @active_company.categories.find(params[:id]).render
-  end
-
   # GET api/categories/:slug
-  def slug
+  def show
     render json: categories.render
   end
 
   # GET api/options/categories
   def options
-    ap({ params: })
-    render json: @active_company.categories.render(view: :options)
+    render json: categories.render(view: :options)
   end
 
   # POST /api/categories
@@ -28,7 +22,7 @@ class Api::CategoriesController < Api::ApiController
     category.company = @active_company
 
     if category.save
-      render json: category.render(view: :options), status: 201
+      render json: category.render, status: 201
     else
       render json: { errors: category.errors }, status: 303
     end

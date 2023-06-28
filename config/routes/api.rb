@@ -9,7 +9,7 @@ namespace :api do
   resources :departments, only: [:create, :update], param: :slug
   resources :locations, only: [:create, :update], param: :slug
 
-  resources :categories, only: [:create, :update], param: :slug
+  resources :categories, param: :slug
   resources :status_labels, only: [:create, :update]
 
   resources :items, path: :hardware, only: [:index, :update] do
@@ -27,8 +27,7 @@ namespace :api do
 
   resources :vendors, only: [:create, :update]
 
-  resources :models, only: [:index, :show, :create, :update]
-  get "models/slug/:slug" => "models#slug"
+  resources :models, param: :slug
 
   resources :manufacturers, only: [:create, :update]
   resources :warranties, only: [:create, :update]
@@ -52,7 +51,7 @@ namespace :api do
 
   scope :options do
     [:companies, :departments, :locations, :categories, :status_labels, :assets, :items, :components, :accessories, :consumables, :licenses, :people, :vendors, :models, :manufacturers, :networks, :orders, :contracts, :documentations].each do |model|
-      get "#{model}" => "#{model}#options", as: "#{model}_options"
+      get model.to_s => "#{model}#options", as: "#{model}_options"
     end
   end
 

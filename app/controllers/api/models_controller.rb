@@ -7,13 +7,8 @@ class Api::ModelsController < Api::ApiController
     render json: models.includes_associated.render
   end
 
-  # GET api/models/:id
-  def show
-    render json: models.find(params[:id]).render
-  end
-
   # GET api/models/:slug
-  def slug
+  def show
     render json: models.render
   end
 
