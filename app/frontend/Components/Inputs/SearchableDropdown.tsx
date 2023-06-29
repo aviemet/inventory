@@ -10,7 +10,6 @@ export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
 	getValue?: (option: Record<string, any>) => string
 	disabledOptions?: (label: string, value: string | number) => boolean
 	onOpen?: () => void
-	filterMatchKeys?: string[]
 	fetchOnOpen?: string
 }
 
@@ -20,8 +19,6 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		getLabel = option => option.name,
 		getValue = option => String(option.id),
 		disabledOptions,
-		onSearchChange,
-		filterMatchKeys,
 		label,
 		required,
 		id,
@@ -29,6 +26,7 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		searchable = true,
 		clearable = true,
 		fetchOnOpen,
+		onDropdownOpen,
 		...props
 	},
 	ref,
@@ -57,6 +55,8 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		if(!fetchOnOpen) return
 
 		router.reload({ only: coerceArray(fetchOnOpen) })
+
+		if(onDropdownOpen) onDropdownOpen()
 	}
 
 	return (

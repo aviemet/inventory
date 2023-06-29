@@ -1,6 +1,11 @@
 class Ticket < ApplicationRecord
   include PgSearch::Model
 
+  multisearchable(
+    against: [:number, :subject],
+    additional_attributes: ->(record) { { label: record.subject } },
+  )
+
   pg_search_scope(
     :search,
     against: [:number, :subject], associated_against: {

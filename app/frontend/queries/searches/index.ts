@@ -2,10 +2,13 @@ import { Routes } from '@/lib'
 import axios from 'axios'
 import { query, type ReactQueryOptions } from '..'
 
-export const getSearchResults = (
-	options: ReactQueryOptions<Schema.Search[]>,
-) => query(
+export const getSearchResults = <T = Schema.Search[]>(
+	params?: Record<string, string>,
+	options?: ReactQueryOptions<T>,
+) => query<T>(
 	['search'],
-	() => axios.get(Routes.apiSearches()).then(res => res.data),
+	() => axios.get(Routes.apiSearches(params)).then(res => res.data),
 	options,
 )
+
+const { data } = getSearchResults()

@@ -1,5 +1,5 @@
 class Api::SearchesController < Api::ApiController
-  # GET api/documentations
+  # GET api/searches
   def index
     render json: SearchSerializer.many(
       PgSearch.multisearch(params[:search])
@@ -7,8 +7,4 @@ class Api::SearchesController < Api::ApiController
     )
   end
 
-  # GET api/documentations/:id
-  def show
-    render json: item.render
-  end
 end

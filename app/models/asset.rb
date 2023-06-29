@@ -6,8 +6,6 @@ class Asset < ApplicationRecord
   include Assignable
   include Documentable
 
-  multisearchable against: [:name, :asset_tag, :serial]
-
   pg_search_scope(
     :search,
     against: [:name, :asset_tag, :serial, :cost_cents], associated_against: {

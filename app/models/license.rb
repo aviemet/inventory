@@ -7,7 +7,10 @@ class License < ApplicationRecord
   include Categorizable
   include Documentable
 
-  multisearchable against: [:name]
+  multisearchable(
+    against: [:name, :licenser_email],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
 
   pg_search_scope(
     :search,

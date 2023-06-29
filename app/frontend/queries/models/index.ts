@@ -25,9 +25,3 @@ export const getModel = (id: number, options?: ReactQueryOptions<Schema.Model>) 
 	() => axios.get(Routes.apiModel(id)).then(res => res.data),
 	options,
 )
-
-export const getModelBySlug = (slug: string, options?: ReactQueryOptions<Schema.Model>) => query(
-	['models', slug],
-	() => axios.get(Routes.apiModel(slug)).then(res => res.data),
-	options,
-)

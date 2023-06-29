@@ -5,7 +5,10 @@ class Model < ApplicationRecord
   include Categorizable
   include Documentable
 
-  multisearchable against: [:name, :model_number]
+  multisearchable(
+    against: [:name, :model_number],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
 
   pg_search_scope(
     :search,

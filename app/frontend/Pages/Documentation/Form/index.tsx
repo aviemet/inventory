@@ -1,8 +1,7 @@
 import React from 'react'
 import { Form, TextInput, Submit, RichText } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import DocumentableSearchDropdown from '@/Components/Form/Dropdowns/DocumentableSearchDropdown'
-import { omit } from 'lodash'
+import DocumentableSearch from './DocumentableSearch'
 
 type TDocumentationFormData = {
 	documentation: Schema.DocumentationsFormData
@@ -20,11 +19,12 @@ const DocumentationForm = ({ method = 'post', documentation, ...props }: IDocume
 	return (
 		<Form
 			model="documentation"
-			data={ { documentation: omit(documentation, ['id', 'created_by']) as Schema.DocumentationsFormData } }
+			data={ { documentation } }
 			method={ method }
 			{ ...props }
 		>
-			<DocumentableSearchDropdown
+			<DocumentableSearch
+				name="documentable_id"
 				label="Referencing"
 				required
 			/>

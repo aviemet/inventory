@@ -2,6 +2,11 @@ class Documentation < ApplicationRecord
   include Ownable
   include PgSearch::Model
 
+  multisearchable(
+    against: [:title],
+    additional_attributes: ->(record) { { label: record.title } },
+  )
+
   pg_search_scope(
     :search,
     against: [:slug, :title, :body],

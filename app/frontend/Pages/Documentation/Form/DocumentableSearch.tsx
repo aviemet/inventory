@@ -1,23 +1,41 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import { SearchableDropdown, HiddenInput } from '@/Components/Inputs'
 import { ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
 import { Field } from '@/Components/Form'
-import { Routes } from '@/lib'
-import { useInertiaInput } from 'use-inertia-form'
+import { useForm, useInertiaInput } from 'use-inertia-form'
 import { getSearchResults } from '@/queries/searches'
 
-interface IFullSearchDropdown extends Omit<ISearchableDropdownProps, 'options'> {
+interface IDocumentableSearch extends Omit<ISearchableDropdownProps, 'options'> {
 	label: string
 }
 
-const FullSearchDropdown = forwardRef<HTMLInputElement, IFullSearchDropdown>((
-	{ ...props },
+const DocumentableSearch = forwardRef<HTMLInputElement, IDocumentableSearch>((
+	props,
 	ref,
 ) => {
-	const { data, isStale, refetch } = getSearchResults({ enabled: false })
+	const [params, setParams] = useState({})
+	const { data, refetch } = getSearchResults(params)
 
+	const { getData } = useForm()
 	const documentableIdInput = useInertiaInput({ name: 'documentable_id' })
 	const documentableTypeInput = useInertiaInput({ name: 'documentable_type' })
+
+	useEffect(() => {
+		refetch()
+	}, [params])
+
+	useEffect(() => {
+		// if(!data) {
+		// 	setParams({
+
+		// 	})
+		// }
+	}, [])
+
+	const handleChange = (value: string|null) => {
+		documentableIdInput.setValue(value?.searchable_id)
+		documentableTypeInput.setValue(value?.searchable_type)
+	}
 
 	return (
 		<>
@@ -29,12 +47,9 @@ const FullSearchDropdown = forwardRef<HTMLInputElement, IFullSearchDropdown>((
 				<SearchableDropdown
 					ref={ ref }
 					options={ data }
-					onSearchChange={ () => refetch() }
+					onSearchChange={ value => setParams({ search: value }) }
 					placeholder="Start typing to search"
-					onChange={ (option) => {
-						documentableIdInput.setValue(String((option as Schema.Search).searchable_id))
-						documentableTypeInput.setValue(String((option as Schema.Search).searchable_type))
-					} }
+					onChange={ handleChange }
 					{ ...props }
 				/>
 			</Field>
@@ -45,4 +60,4 @@ const FullSearchDropdown = forwardRef<HTMLInputElement, IFullSearchDropdown>((
 	)
 })
 
-export default FullSearchDropdown
+export default DocumentableSearch

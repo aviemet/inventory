@@ -420,6 +420,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_25_194058) do
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text "content"
+    t.text "label"
     t.string "searchable_type"
     t.bigint "searchable_id"
     t.datetime "created_at", null: false

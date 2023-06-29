@@ -2,6 +2,11 @@ class PersonGroup < ApplicationRecord
   include Ownable
   include PgSearch::Model
 
+  multisearchable(
+    against: [:name],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
+
   pg_search_scope(
     :search,
     against: [:name], associated_against: {

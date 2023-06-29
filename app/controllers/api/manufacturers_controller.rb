@@ -7,13 +7,8 @@ class Api::ManufacturersController < Api::ApiController
     render json: manufacturers.includes_associated.render
   end
 
-  # GET api/manufacturers/:id
-  def show
-    render json: manufacturers.find(params[:id]).render
-  end
-
   # GET api/manufacturers/:slug
-  def slug
+  def show
     render json: manufacturers.render
   end
 

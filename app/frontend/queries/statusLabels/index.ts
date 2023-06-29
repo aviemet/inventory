@@ -3,7 +3,7 @@ import axios from 'axios'
 import { query, type ReactQueryOptions } from '..'
 
 export const getStatusLabels = (
-	options: ReactQueryOptions<Schema.StatusLabel[]>,
+	options?: ReactQueryOptions<Schema.StatusLabel[]>,
 ) => query(
 	['statusLabels'],
 	() => axios.get(Routes.apiStatusLabels()).then(res => res.data),
@@ -11,14 +11,17 @@ export const getStatusLabels = (
 )
 
 export const getStatusLabelsAsOptions = (
-	options: ReactQueryOptions<Schema.StatusLabelsOptions[]>,
+	options?: ReactQueryOptions<Schema.StatusLabelsOptions[]>,
 ) => query(
 	['statusLabels', 'options'],
 	() => axios.get(Routes.apiStatusLabelsOptions()).then(res => res.data),
 	options,
 )
 
-export const getStatusLabel = (id: string|number, options: ReactQueryOptions<Schema.StatusLabel[]>) => query(
+export const getStatusLabel = (
+	id: string|number,
+	options?: ReactQueryOptions<Schema.StatusLabel[]>,
+) => query(
 	['statusLabels', id],
 	() => axios.get(Routes.apiStatusLabel(id)).then(res => res.data),
 	options,
