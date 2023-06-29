@@ -31,8 +31,6 @@ class ModelsController < ApplicationController
     authorize Model
     render inertia: "Models/New", props: {
       model: Model.new.render(view: :form_data),
-      categories: -> { @active_company.categories.find_by_type(:Model).render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 
@@ -41,8 +39,6 @@ class ModelsController < ApplicationController
     authorize model
     render inertia: "Models/Edit", props: {
       model: model.render(view: :edit),
-      categories: -> { @active_company.categories.find_by_type(:Model).render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 

@@ -12,7 +12,6 @@ export interface IDepartmentFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TDepartmentForData>) => boolean|void
 	department?: Schema.DepartmentsFormData
-	locations: Schema.LocationsOptions[]
 }
 
 const emptyDepartment: Schema.DepartmentsFormData = {
@@ -21,7 +20,7 @@ const emptyDepartment: Schema.DepartmentsFormData = {
 	notes: '',
 }
 
-const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment, locations }: IDepartmentFormProps) => {
+const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment }: IDepartmentFormProps) => {
 
 	return (
 		<Form
@@ -33,7 +32,7 @@ const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepar
 		>
 			<TextInput name="name" label="Name" required autoFocus />
 
-			<LocationsDropdown locations={ locations } />
+			<LocationsDropdown />
 
 			<Textarea name="notes" label="Notes" />
 

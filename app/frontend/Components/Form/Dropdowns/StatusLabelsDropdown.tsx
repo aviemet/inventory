@@ -3,19 +3,20 @@ import { SearchableDropdown } from '@/Components/Form'
 import { Routes } from '@/lib'
 import StatusLabelsForm from '@/Pages/StatusLabels/Form'
 import { type IDropdownWithModalButton } from '../Inputs/SearchableDropdown'
+import { getStatusLabelsAsOptions } from '@/queries/statusLabels'
+import { isEmpty } from 'lodash'
 
-interface IStatusLabelsDropdown extends IDropdownWithModalButton {
-	status_labels: Schema.StatusLabelsOptions[]
-	currencies?: any
-}
+interface IStatusLabelsDropdown extends IDropdownWithModalButton {}
 
-const StatusLabelsDropdown = ({ label = 'Status Label', name = 'status_label_id', status_labels, ...props }: IStatusLabelsDropdown) => {
+const StatusLabelsDropdown = ({ label = 'Status Label', name = 'status_label_id', ...props }: IStatusLabelsDropdown) => {
+	const { data, isStale, refetch } = getStatusLabelsAsOptions({ enabled: false })
+
 	return (
 		<SearchableDropdown
 			label={ label }
 			name={ name }
-			options={ status_labels }
-			fetchOnOpen="status_labels"
+			options={ data }
+			onDropdownOpen={ () => { if(isEmpty(data) || isStale) refetch() } }
 			newForm={ <StatusLabelsForm
 				to={ Routes.statusLabels() }
 			/> }

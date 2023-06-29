@@ -33,9 +33,6 @@ class PeopleController < ApplicationController
     authorize Person
     render inertia: "People/New", props: {
       person: People::FormDataSerializer.render(Person::AsCreate.new),
-      departments: InertiaRails.lazy(-> { @active_company.departments.render(view: :options) }),
-      locations: InertiaRails.lazy(-> { @active_company.locations.render(view: :options) }),
-      people: InertiaRails.lazy(-> { @active_company.people.render(view: :options) }),
     }
   end
 
@@ -44,9 +41,6 @@ class PeopleController < ApplicationController
     authorize person
     render inertia: "People/Edit", props: {
       person: person.render(view: :edit),
-      departments: -> { @active_company.departments.render(view: :options) },
-      locations: -> { @active_company.locations.render(view: :options) },
-      people: -> { @active_company.people.render(view: :options) },
     }
   end
 

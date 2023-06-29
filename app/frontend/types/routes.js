@@ -722,6 +722,15 @@ export const apiDepartmentsOptions = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"ap
 
 /**
  * Generates rails route to
+ * /api/documentations/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiDocumentation = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /api/documentations(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1006,6 +1015,14 @@ export const apiOwnership = __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2
  * @returns {string} route path
  */
 export const apiOwnerships = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"ownerships"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/people(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPeople = __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"people"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

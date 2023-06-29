@@ -31,8 +31,6 @@ class ContractsController < ApplicationController
     authorize Contract
     render inertia: "Contracts/New", props: {
       contract: Contract.new.render(view: :form_data),
-      vendors: -> { @active_company.vendors.render },
-      categories: -> { @active_company.categories.find_by_type(:Contract).render },
     }
   end
 
@@ -41,8 +39,6 @@ class ContractsController < ApplicationController
     authorize contract
     render inertia: "Contracts/Edit", props: {
       contract: contract.render(view: :edit),
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      categories: -> { @active_company.categories.find_by_type(:Contract).render(view: :options) },
     }
   end
 

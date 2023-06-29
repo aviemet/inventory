@@ -31,11 +31,6 @@ class ItemsController < ApplicationController
     authorize Item
     render inertia: "Items/New", props: {
       item: Item.new.render(view: :form_data),
-      # models: -> { @active_company.models.find_by_category(:Item).render(view: :options) },
-      # vendors: -> { @active_company.vendors.render(view: :options) },
-      # locations: -> { @active_company.locations.render(view: :options) },
-      # manufacturers: -> { @active_company.manufacturers.render(view: :options) },
-      # categories: -> { @active_company.categories.find_by_type(:item).render(view: :options) }
     }
   end
 
@@ -44,11 +39,6 @@ class ItemsController < ApplicationController
     authorize item
     render inertia: "Items/Edit", props: {
       item: item.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Item).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      locations: -> { @active_company.locations.render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
-      categories: -> { @active_company.categories.find_by_type(:item).render(view: :options) }
     }
   end
 

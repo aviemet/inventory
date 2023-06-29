@@ -19,15 +19,6 @@ class ComponentsController < ApplicationController
     }
   end
 
-  # TODO: Decide if this is how I want to do category searches
-  # GET /components/category/:category_id
-  # GET /components/category/:category_id.json
-  # def category
-  #   self.components = components.where('model.category': Category.find(request.params[:category_id]))
-  #   render :index
-  #   render inertia: "Components/Category"
-  # end
-
   # GET /components/:id
   def show
     authorize component
@@ -41,9 +32,6 @@ class ComponentsController < ApplicationController
     authorize Component
     render inertia: "Components/New", props: {
       component: Component.new.render(view: :form_data),
-      models: -> { @active_company.models.find_by_category(:Component).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      locations: -> { @active_company.locations.render(view: :options) },
     }
   end
 
@@ -52,9 +40,6 @@ class ComponentsController < ApplicationController
     authorize component
     render inertia: "Components/Edit", props: {
       component: component.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Component).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      locations: -> { @active_company.locations.render(view: :options) },
     }
   end
 

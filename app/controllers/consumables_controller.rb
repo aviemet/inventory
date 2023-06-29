@@ -32,11 +32,6 @@ class ConsumablesController < ApplicationController
     authorize Consumable
     render inertia: "Consumables/New", props: {
       consumable: Consumable.new.render(view: :form_data),
-      models: -> { @active_company.models.find_by_category(:Consumable).render },
-      vendors: -> { @active_company.vendors.render },
-      locations: -> { @active_company.locations.render },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
-      categories: -> { @active_company.categories.find_by_type(:consumable).render(view: :options) }
     }
   end
 
@@ -45,9 +40,6 @@ class ConsumablesController < ApplicationController
     authorize consumable
     render inertia: "Consumables/Edit", props: {
       consumable: consumable.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Consumable).render },
-      vendors: -> { @active_company.vendors.render },
-      locations: -> { @active_company.locations.render },
     }
   end
 

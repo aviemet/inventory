@@ -4,11 +4,11 @@ class Models::FormDataSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-    :slug,
     :name,
     :model_number,
     :notes,
-    :category_id,
-    :manufacturer_id,
+    id: { optional: true },
+    category_id: { optional: true },
+    manufacturer_id: { optional: true },
   )
 end

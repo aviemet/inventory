@@ -12,7 +12,7 @@ namespace :api do
   resources :categories, except: [:edit, :new], param: :slug
   resources :status_labels, only: [:create, :update]
 
-  resources :items, path: :hardware, only: [:index, :update] do
+  resources :items, path: :hardware, except: [:edit, :new, :create] do
     resources :nics, only: [:create, :update]
   end
 
@@ -23,7 +23,7 @@ namespace :api do
 
   resources :assignments, only: [:create, :update]
 
-  resources :people, only: [:update]
+  resources :people, except: [:edit, :new, :create]
 
   resources :vendors, except: [:edit, :new], param: :slug
 
@@ -44,7 +44,7 @@ namespace :api do
 
   resources :contracts, only: [:create, :update]
 
-  resources :documentations, only: [:index]
+  resources :documentations, only: [:index, :show]
 
   resources :searches, only: [:index]
   resources :spotlights, only: [:index]

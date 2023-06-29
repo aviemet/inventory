@@ -4,6 +4,7 @@ import { ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown
 import { Field } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { useInertiaInput } from 'use-inertia-form'
+import { getSearchResults } from '@/queries/searches'
 
 interface IFullSearchDropdown extends Omit<ISearchableDropdownProps, 'options'> {
 	label: string
@@ -13,6 +14,8 @@ const FullSearchDropdown = forwardRef<HTMLInputElement, IFullSearchDropdown>((
 	{ ...props },
 	ref,
 ) => {
+	const { data, isStale, refetch } = getSearchResults({ enabled: false })
+
 	const documentableIdInput = useInertiaInput({ name: 'documentable_id' })
 	const documentableTypeInput = useInertiaInput({ name: 'documentable_type' })
 
@@ -25,8 +28,8 @@ const FullSearchDropdown = forwardRef<HTMLInputElement, IFullSearchDropdown>((
 			>
 				<SearchableDropdown
 					ref={ ref }
-					options={ [] }
-					endpoint={ Routes.apiSearches() }
+					options={ data }
+					onSearchChange={ () => refetch() }
 					placeholder="Start typing to search"
 					onChange={ (option) => {
 						documentableIdInput.setValue(String((option as Schema.Search).searchable_id))
@@ -35,6 +38,7 @@ const FullSearchDropdown = forwardRef<HTMLInputElement, IFullSearchDropdown>((
 					{ ...props }
 				/>
 			</Field>
+
 			<HiddenInput name={ documentableIdInput.inputName } id={ documentableIdInput.inputId } value={ documentableIdInput.value } />
 			<HiddenInput name={ documentableTypeInput.inputName } id={ documentableTypeInput.inputId } value={ documentableTypeInput.value } />
 		</>

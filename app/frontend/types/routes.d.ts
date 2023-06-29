@@ -354,6 +354,18 @@ export const apiDepartmentsOptions: ((
 
 /**
  * Generates rails route to
+ * /api/documentations/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiDocumentation: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/documentations(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -719,6 +731,16 @@ export const apiOwnership: ((
  * @returns {string} route path
  */
 export const apiOwnerships: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/people(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPeople: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
