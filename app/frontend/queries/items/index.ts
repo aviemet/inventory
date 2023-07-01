@@ -2,26 +2,26 @@ import { Routes } from '@/lib'
 import axios from 'axios'
 import { query, type ReactQueryOptions } from '..'
 
-export const getItems = (
-	options?: ReactQueryOptions<Schema.Item[]>,
-) => query(
+export const getItems = <T = Schema.Item[]>(
+	options?: ReactQueryOptions<T>,
+) => query<T>(
 	['items'],
 	() => axios.get(Routes.apiItems()).then(res => res.data),
 	options,
 )
 
-export const getItemsAsOptions = (
-	options?: ReactQueryOptions<Schema.ItemsOptions[]>,
-) => query(
+export const getItemsAsOptions = <T = Schema.ItemsOptions[]>(
+	options?: ReactQueryOptions<T>,
+) => query<T>(
 	['items', 'options'],
 	() => axios.get(Routes.apiItemsOptions()).then(res => res.data),
 	options,
 )
 
-export const getItem = (
+export const getItem = <T = Schema.Item[]>(
 	id: string|number,
-	options?: ReactQueryOptions<Schema.Item[]>,
-) => query(
+	options?: ReactQueryOptions<T>,
+) => query<T>(
 	['items', id],
 	() => axios.get(Routes.apiItem(id)).then(res => res.data),
 	options,

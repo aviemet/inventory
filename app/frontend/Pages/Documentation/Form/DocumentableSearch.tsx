@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useState } from 'react'
 import { SearchableDropdown, HiddenInput } from '@/Components/Inputs'
 import { ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
 import { Field } from '@/Components/Form'
-import { useForm, useInertiaInput } from 'use-inertia-form'
+import { useForm, useInertiaForm, useInertiaInput } from 'use-inertia-form'
 import { getSearchResults } from '@/queries/searches'
 
 interface IDocumentableSearch extends Omit<ISearchableDropdownProps, 'options'> {
@@ -16,7 +16,8 @@ const DocumentableSearch = forwardRef<HTMLInputElement, IDocumentableSearch>((
 	const [params, setParams] = useState({})
 	const { data, refetch } = getSearchResults(params)
 
-	const { getData } = useForm()
+	const { data: formData, getData } = useForm()
+
 	const documentableIdInput = useInertiaInput({ name: 'documentable_id' })
 	const documentableTypeInput = useInertiaInput({ name: 'documentable_type' })
 
@@ -25,16 +26,25 @@ const DocumentableSearch = forwardRef<HTMLInputElement, IDocumentableSearch>((
 	}, [params])
 
 	useEffect(() => {
-		// if(!data) {
-		// 	setParams({
-
-		// 	})
-		// }
+		if(!data) {
+			setParams({
+				searchable_type: getData('documentation.documentable_type'),
+				searchable_id: getData('documentation.documentable_id'),
+			})
+		}
 	}, [])
 
+	console.log({ data })
+
 	const handleChange = (value: string|null) => {
-		documentableIdInput.setValue(value?.searchable_id)
-		documentableTypeInput.setValue(value?.searchable_type)
+		if(!value) return
+
+		const choice = data!.find(datum => String(datum.id) === value)
+
+		if(!choice) return
+
+		documentableIdInput.setValue(String(choice.searchable_id))
+		documentableTypeInput.setValue(String(choice.searchable_type))
 	}
 
 	return (
@@ -47,6 +57,7 @@ const DocumentableSearch = forwardRef<HTMLInputElement, IDocumentableSearch>((
 				<SearchableDropdown
 					ref={ ref }
 					options={ data }
+					getLabel={ option => option.label }
 					onSearchChange={ value => setParams({ search: value }) }
 					placeholder="Start typing to search"
 					onChange={ handleChange }
