@@ -57,7 +57,6 @@
     "ip-address": "^8.1.0",
     "lodash": "^4.17.21",
     "lowlight": "^2.9.0",
-    "mantine-dates-6": "^1.2.0",
     "normalize-url": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
