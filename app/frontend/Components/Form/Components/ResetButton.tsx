@@ -10,8 +10,14 @@ interface IResetButton extends ButtonProps {
 const ResetButton = ({ fields, children, ...props }: IResetButton) => {
 	const { reset } = useForm()
 
+	const handleReset = () => {
+		if(!fields) return
+
+		reset(fields)
+	}
+
 	return (
-		<Button onClick={ () => reset(fields) } { ...props }>{ children || 'Reset' }</Button>
+		<Button onClick={ handleReset } { ...props }>{ children || 'Reset' }</Button>
 	)
 }
 
