@@ -34,8 +34,6 @@ const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: IChe
 				compact
 				href={ href }
 				color={ checkinButtonColor }
-				size="md"
-				p={ 0 }
 				aria-label={ `Check in ${label}` }
 				{ ...finalProps }
 			>

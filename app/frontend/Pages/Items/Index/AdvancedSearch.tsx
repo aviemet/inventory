@@ -1,43 +1,57 @@
 import React from 'react'
 import { TextInput } from '@/Components/Inputs'
-import { Button, Container, Group, Link } from '@/Components'
+import { Box, Group, Link } from '@/Components'
 import { CrossIcon, SearchIcon } from '@/Components/Icons'
-import { useAdvancedSearch } from '@/lib/hooks'
+import { useAdvancedSearch } from '@/Components/Table'
+import { Button } from '@mantine/core'
 
 
 const AdvancedItemsSearch = () => {
-	const search = useAdvancedSearch([
-		'name',
-		'model',
-		'asset_tag',
-		'serial',
-		'category.name',
-		'manufacturer.name',
-		'vendor.name',
-		'cost',
-		'department.name',
+	const { inputProps, link, reset } = useAdvancedSearch([
+		{ label: 'Name', name: 'name' },
+		{ label: 'Model', name: 'model' },
+		{ label: 'Asset Tag', name: 'asset_tag' },
+		{ label: 'Serial', name: 'serial' },
+		{ label: 'Category', name: 'category.name' },
+		{ label: 'Manufacturer', name: 'manufacturer.name' },
+		{ label: 'Vendor', name: 'vendor.name' },
+		{ label: 'Cost', name: 'cost' },
+		{ label: 'Department', name: 'department.name' },
 	])
 
 	return (
-		<Container>
-			<TextInput mb={ 10 } placeholder='Name' { ...search.inputProps('name') } />
-			<TextInput mb={ 10 } placeholder='Model' { ...search.inputProps('model') } />
-			<TextInput mb={ 10 } placeholder='Asset Tag' { ...search.inputProps('asset_tag') } />
-			<TextInput mb={ 10 } placeholder='Serial' { ...search.inputProps('serial') } />
-			<TextInput mb={ 10 } placeholder='Category' { ...search.inputProps('category.name') } />
-			<TextInput mb={ 10 } placeholder='Manufacturer' { ...search.inputProps('manufacturer.name') } />
-			<TextInput mb={ 10 } placeholder='Vendor' { ...search.inputProps('vendor.name') } />
-			<TextInput mb={ 10 } placeholder='Cost' { ...search.inputProps('cost') } />
-			<TextInput mb={ 10 } placeholder='Department' { ...search.inputProps('department.name') } />
+		<>
+			<Group grow>
+				<Box><TextInput { ...inputProps('name') } /></Box>
+				<Box><TextInput { ...inputProps('category.name') } /></Box>
+			</Group>
+			<Group grow>
+				<Box><TextInput { ...inputProps('model') } /></Box>
+				<Box><TextInput { ...inputProps('manufacturer.name') } /></Box>
+			</Group>
+			<Group grow>
+				<Box><TextInput { ...inputProps('vendor.name') } /></Box>
+				<Box><TextInput { ...inputProps('department.name') } /></Box>
+			</Group>
+			<Group grow>
+				<Box><TextInput { ...inputProps('asset_tag') } /></Box>
+				<Box><TextInput { ...inputProps('serial') } /></Box>
+				<Box><TextInput { ...inputProps('cost') } /></Box>
+			</Group>
 
-			<Group>
-				<Button onClick={ search.reset } leftIcon={ <CrossIcon /> }>Clear</Button>
+			<Group grow>
+				<Button onClick={ reset } leftIcon={ <CrossIcon /> }>Clear</Button>
 
-				<Link as='button' href={ search.link } buttonProps={ { leftIcon: <SearchIcon /> } }>
+				<Link
+					as='button'
+					href={ link }
+					buttonProps={ { leftIcon: <SearchIcon /> } }
+					sx={ { width: '100%' } }
+				>
         	Search
 				</Link>
 			</Group>
-		</Container>
+		</>
 	)
 }
 

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { DoubleDownArrowIcon } from '@/Components/Icons'
+import { Group, Button, Link } from '@/Components'
+import { CrossIcon, DoubleDownArrowIcon, SearchIcon } from '@/Components/Icons'
+import { Form } from '@/Components/Form'
 import { ActionIcon, Paper, Transition, useMantineTheme, rem, px, Tooltip, Box } from '@mantine/core'
 import { useLayoutStore } from '@/Layouts/Providers'
-import { useBooleanToggle } from '@/lib/hooks'
+import { useBooleanToggle, useLocation } from '@/lib/hooks'
 import { useClickOutside } from '@mantine/hooks'
 
 const scaleY = {
@@ -12,7 +14,11 @@ const scaleY = {
 	transitionProperty: 'transform, opacity',
 }
 
-const AdvancedSearch = ({ children }: { children: React.ReactNode}) => {
+interface IAdvancedSearchProps {
+	children: React.ReactNode
+}
+
+const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 	const { sidebarOpen } = useLayoutStore()
 	const { primaryColor, other: { navbar: { width } } } = useMantineTheme()
 	const navBarWidth = width[sidebarOpen ? 'open' : 'closed']

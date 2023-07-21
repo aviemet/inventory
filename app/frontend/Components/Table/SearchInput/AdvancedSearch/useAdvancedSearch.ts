@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useReducer, useState } from 'react'
-import useLocation from './useLocation'
-import { getInputOnChange } from '../'
+import useLocation from '../../../../lib/hooks/useLocation'
+import { getInputOnChange } from '../../../../lib'
 
 type TReducerActionTypes = 'set'|'clear'
 type TSetReducerPayload = {
@@ -34,15 +34,22 @@ interface IOptions {
 	path: string
 }
 
-const useAdvancedSearch = (valueNames: string[], options?: IOptions) => {
+type TInputParam = { label: string, name: string }
+
+const useAdvancedSearch = (
+	inputParams: TInputParam[],
+	options?: IOptions,
+) => {
 	const location = useLocation()
 	const [searchLink, setSearchLink] = useState(`${location.pathname}${location.search}`)
 
-
-	const startingValues = useMemo(() => valueNames.reduce((obj: Record<typeof valueNames[number], string>, value: typeof valueNames[number]) => {
-		obj[value] = location.params.get(value) || ''
-		return obj
-	}, {}), [])
+	const startingValues = useMemo(() => inputParams.reduce(
+		(data: Record<string, string>, param: TInputParam) => {
+			data[param.name] = location.params.get(param.name) || ''
+			return data
+		},
+		{},
+	), [])
 
 	const [values, updateValues] = useReducer(searchReducer, startingValues)
 
@@ -59,13 +66,19 @@ const useAdvancedSearch = (valueNames: string[], options?: IOptions) => {
 
 	return {
 		link: searchLink,
-		inputProps: (name: keyof typeof values) => ({
-			value: values[name],
-			onChange: getInputOnChange<string>((value) => updateValues({
-				type: 'set',
-				payload: { name, value: value as string },
-			})),
-		}),
+		inputProps: (name: keyof typeof values) => {
+			const param = inputParams.find(inputParam => inputParam.name === name)
+
+			return {
+				value: values[name],
+				onChange: getInputOnChange<string>((value) => updateValues({
+					type: 'set',
+					payload: { name, value: value as string },
+				})),
+				mb: 10,
+				label: param?.label,
+			}
+		},
 		reset: () => updateValues({ type: 'clear' }),
 	}
 }

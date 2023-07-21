@@ -27,8 +27,6 @@ const CheckoutButton = ({ href, label, disabled, tooltipMessage, ...props }: ICh
 				compact
 				href={ href }
 				color={ checkoutButtonColor }
-				size="md"
-				p={ 0 }
 				buttonProps={ { disabled } }
 				aria-label={ `Check in ${label}` }
 				{ ...props }
