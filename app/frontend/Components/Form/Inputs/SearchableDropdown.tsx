@@ -57,7 +57,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 		if(onChange) onChange(option, form)
 	}
 
-	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+	const handleBlur = () => {
 		if(onBlur) onBlur(String(value), form)
 	}
 

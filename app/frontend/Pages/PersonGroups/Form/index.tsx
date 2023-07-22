@@ -8,7 +8,6 @@ import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'
 import { emptyGroup } from './formData'
 import { Routes, exclude } from '@/lib'
-import { Prism } from '@mantine/prism'
 
 export type FormData = {
 	person_group: Schema.PersonGroupsFormData

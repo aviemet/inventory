@@ -1,44 +1,97 @@
 import React from 'react'
-import { TextInput } from '@/Components/Inputs'
-import { Button, Container, Group, Link } from '@/Components'
+import { DateTime, Dropdown, TextInput } from '@/Components/Inputs'
+import { Box, Group, Flex, Link, Label } from '@/Components'
 import { CrossIcon, SearchIcon } from '@/Components/Icons'
-import { useAdvancedSearch } from '@/lib/hooks'
-
+import { useAdvancedSearch } from '@/Components/Table'
+import { Button } from '@mantine/core'
 
 const AdvancedItemsSearch = () => {
-	const search = useAdvancedSearch([
-		'name',
-		'model',
-		'asset_tag',
-		'serial',
-		'category.name',
-		'manufacturer.name',
-		'vendor.name',
-		'cost',
-		'department.name',
+	const { inputProps, link, reset } = useAdvancedSearch([
+		{ label: 'Name', name: 'name' },
+		{ label: 'Model', name: 'model' },
+		{ label: 'Asset Tag', name: 'asset_tag' },
+		{ label: 'Serial', name: 'serial' },
+		{ label: 'Category', name: 'category.name' },
+		{ label: 'Manufacturer', name: 'manufacturer.name' },
+		{ label: 'Vendor', name: 'vendor.name' },
+		{ label: 'Cost', name: 'cost' },
+		{ label: 'Department', name: 'department.name' },
+		{
+			label: 'Created At',
+			name: 'created_at',
+			default: new Date(),
+		},
 	])
 
 	return (
-		<Container>
-			<TextInput mb={ 10 } placeholder='Name' { ...search.inputProps('name') } />
-			<TextInput mb={ 10 } placeholder='Model' { ...search.inputProps('model') } />
-			<TextInput mb={ 10 } placeholder='Asset Tag' { ...search.inputProps('asset_tag') } />
-			<TextInput mb={ 10 } placeholder='Serial' { ...search.inputProps('serial') } />
-			<TextInput mb={ 10 } placeholder='Category' { ...search.inputProps('category.name') } />
-			<TextInput mb={ 10 } placeholder='Manufacturer' { ...search.inputProps('manufacturer.name') } />
-			<TextInput mb={ 10 } placeholder='Vendor' { ...search.inputProps('vendor.name') } />
-			<TextInput mb={ 10 } placeholder='Cost' { ...search.inputProps('cost') } />
-			<TextInput mb={ 10 } placeholder='Department' { ...search.inputProps('department.name') } />
+		<>
+			<Flex gap="md">
+				<Box sx={ { flex: 1 } }>
+					<Group grow>
+						<Box><TextInput { ...inputProps('name') } /></Box>
+						<Box><TextInput { ...inputProps('category.name') } /></Box>
+					</Group>
+					<Group grow>
+						<Box><TextInput { ...inputProps('model') } /></Box>
+						<Box><TextInput { ...inputProps('manufacturer.name') } /></Box>
+					</Group>
+					<Group grow>
+						<Box><TextInput { ...inputProps('vendor.name') } /></Box>
+						<Box><TextInput { ...inputProps('department.name') } /></Box>
+					</Group>
+					<Group grow>
+						<Box><TextInput { ...inputProps('asset_tag') } /></Box>
+						<Box><TextInput { ...inputProps('serial') } /></Box>
+						<Box><TextInput { ...inputProps('cost') } /></Box>
+					</Group>
+				</Box>
+				<Box>
+					<Label>Created Date</Label>
+					<Dropdown
+						data={ ['Exact Date', 'Before', 'After', 'Between'] }
+						defaultValue="Exact Date"
+					/>
+					<Box><DateTime { ...inputProps('created_at') } /></Box>
+				</Box>
+			</Flex>
 
-			<Group>
-				<Button onClick={ search.reset } leftIcon={ <CrossIcon /> }>Clear</Button>
+			<Group grow>
+				<Button onClick={ reset } leftIcon={ <CrossIcon /> }>Clear</Button>
 
-				<Link as='button' href={ search.link } buttonProps={ { leftIcon: <SearchIcon /> } }>
+				<Link
+					as='button'
+					href={ link }
+					buttonProps={ { leftIcon: <SearchIcon /> } }
+					sx={ { width: '100%' } }
+				>
         	Search
 				</Link>
 			</Group>
-		</Container>
+		</>
 	)
 }
 
 export default AdvancedItemsSearch
+const data = [
+	{ label: 'Name', name: 'name' },
+	{ label: 'Model', name: 'model' },
+	{ label: 'Asset Tag', name: 'asset_tag' },
+	{ label: 'Serial', name: 'serial' },
+	{ label: 'Category', name: 'category.name' },
+	{ label: 'Manufacturer', name: 'manufacturer.name' },
+	{ label: 'Vendor', name: 'vendor.name' },
+	{ label: 'Cost', name: 'cost' },
+	{ label: 'Department', name: 'department.name' },
+	{ label: 'Created At', name: 'created_at', default: new Date() },
+]
+
+type LabelValue = typeof data[number]['label'];
+
+const isValidLabel = (label: string): label is LabelValue => {
+	return data.some((item) => item.label === label)
+}
+
+// Example usage:
+const label1: LabelValue = 'Name' // Valid
+const label2: LabelValue = 'Model' // Valid
+const label3: LabelValue = 'Location' // Error: Type '"Location"' is not assignable to type '"Name" | "Model" | "Asset Tag" | ... | "Created At"'.

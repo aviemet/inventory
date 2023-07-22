@@ -36,6 +36,10 @@ const useTableStyles = (fixed: boolean = true) => createStyles(theme => ({
 
 		'tbody tr td': {
 			borderColor: theme.other.colorSchemeOption(theme.colors.gray[2], theme.colors.gray[9]),
+
+			'& + td': {
+				borderLeft: `1px solid ${theme.other.colorSchemeOption(theme.colors.gray[2], theme.colors.gray[8])}`,
+			},
 		},
 
 		'th, td': {

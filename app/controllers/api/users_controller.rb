@@ -14,7 +14,10 @@ class Api::UsersController < Api::ApiController
   # PATCH/PUT /users/update_table_preferences/:id
   def update_table_preferences
     authorize user
-    if user.update_column(:table_preferences, current_user.table_preferences.deep_merge(request.params[:user][:table_preferences]))
+    if user.update_column(
+      :table_preferences,
+      current_user.table_preferences.deep_merge(request.params[:user][:table_preferences]),
+    )
       head :ok, content_type: "text/html"
     end
   end
@@ -22,7 +25,10 @@ class Api::UsersController < Api::ApiController
   # PATCH/PUT /users/update_user_preferences/:id
   def update_user_preferences
     authorize user
-    if user.update_column(:user_preferences, current_user.user_preferences.deep_merge(request.params[:user][:user_preferences]))
+    if user.update_column(
+      :user_preferences,
+      current_user.user_preferences.deep_merge(request.params[:user][:user_preferences]),
+    )
       head :ok, content_type: "text/html"
     end
   end

@@ -10,7 +10,7 @@ const DocumentationTable = (props: ITableProps) => {
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="title">Title</Table.Cell>
-					<Table.Cell sort="slug">Thing</Table.Cell>
+					<Table.Cell sort="slug">In Reference To</Table.Cell>
 
 					<Table.Cell className="actions">Actions</Table.Cell>
 				</Table.Row>

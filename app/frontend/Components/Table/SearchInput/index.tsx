@@ -10,6 +10,7 @@ import { useSessionStorage } from '@mantine/hooks'
 import useTableStyles from '../useTableStyles'
 import ColumnPicker from './ColumnPicker'
 import AdvancedSearch from './AdvancedSearch'
+import { useLocation } from '@/lib/hooks'
 
 interface ISearchInputProps {
 	columnPicker?: boolean
@@ -22,18 +23,18 @@ interface ISearchInputProps {
  */
 const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps) => {
 	const { tableState: { model }, setTableState } = useTableContext()
-	const { search } = window.location
 	const { classes } = useTableStyles()
 
-	const params = new URLSearchParams(search)
+	const location = useLocation()
 	const [searchValue, setSearchValue] = useSessionStorage({
 		key: `${model ?? 'standard'}-query`,
-		defaultValue: params.get('search') || '',
+		defaultValue: location.params.get('search') || '',
 		getInitialValueInEffect: false,
 	})
 
+	// TODO: Justify using useLayoutEffect over useEffect
 	useLayoutEffect(() => {
-		const urlSearchString = params.get('search')
+		const urlSearchString = location.params.get('search')
 
 		// Don't override a direct visit with a url search param
 		if(urlSearchString) {

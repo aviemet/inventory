@@ -7118,7 +7118,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.11.6, dayjs@npm:^1.11.8":
+"dayjs@npm:^1.11.8":
   version: 1.11.8
   resolution: "dayjs@npm:1.11.8"
   checksum: 4fe04b6df98ba6e5f89b49d80bba603cbf01e21a1b4a24ecb163c94c0ba5324a32ac234a139cee654f89d5277a2bcebca5347e6676c28a0a6d1a90f1d34a42b8
@@ -9736,7 +9736,6 @@ __metadata:
     lint-staged: ^13.2.2
     lodash: ^4.17.21
     lowlight: ^2.9.0
-    mantine-dates-6: ^1.2.0
     normalize-url: ^8.0.0
     postcss: ^8.4.24
     postcss-import: ^15.1.0
@@ -11074,19 +11073,6 @@ __metadata:
   dependencies:
     tmpl: 1.0.5
   checksum: b38a025a12c8146d6eeea5a7f2bf27d51d8ad6064da8ca9405fcf7bf9b54acd43e3b30ddd7abb9b1bfa4ddb266019133313482570ddb207de568f71ecfcf6060
-  languageName: node
-  linkType: hard
-
-"mantine-dates-6@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "mantine-dates-6@npm:1.2.0"
-  dependencies:
-    dayjs: ^1.11.6
-  peerDependencies:
-    "@emotion/react": ">=11.9.0"
-    "@mantine/core": ">=5.0.0"
-    "@mantine/hooks": ">=5.0.0"
-  checksum: fb2197272881ae25f2e529157de26acd8c125780d16130bf8ae9b9882a1a80510c7640afdf62881177d42859806232743b73c191d98ab35bd53c705b65529113
   languageName: node
   linkType: hard
 
