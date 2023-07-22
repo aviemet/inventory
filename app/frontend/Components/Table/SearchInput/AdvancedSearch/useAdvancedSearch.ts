@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useReducer, useState } from 'react'
-import useLocation from '../../../../lib/hooks/useLocation'
-import { getInputOnChange } from '../../../../lib'
+import { getInputOnChange } from '@/lib'
+import { useLocation } from '@/lib/hooks'
 
 type TReducerActionTypes = 'set'|'clear'
 type TSetReducerPayload = {
@@ -10,7 +10,7 @@ type TSetReducerPayload = {
 type TReducerAction = { type: TReducerActionTypes, payload?: TPayloadProps }
 type TPayloadProps = TSetReducerPayload
 
-const searchReducer = (state: Record<string, string>, action: TReducerAction) => {
+const searchReducer = <T = string>(state: Record<TInputParam['name'], T>, action: TReducerAction) => {
 	const newState = structuredClone(state)
 
 	switch(action.type) {
@@ -34,18 +34,30 @@ interface IOptions {
 	path: string
 }
 
-type TInputParam = { label: string, name: string }
+type TInputParam<T = unknown> = {
+	label: string
+	name: string
+	default?: T extends unknown ? string : T
+}
 
+/**
+ * Hook for building advanced search interfaces
+ * @param inputParams Array of objects with the following structure: { label: string, name: string, default?: unknown }
+ * @param options Options
+ * @returns link: A URL with the search parameters represented as GET params,
+ *  reset(): A method to clear all search values,
+ * 	inputProps(name): Method to return object of props to be passed into an input
+ */
 const useAdvancedSearch = (
-	inputParams: TInputParam[],
+	inputParams: Readonly<TInputParam[]>,
 	options?: IOptions,
 ) => {
 	const location = useLocation()
 	const [searchLink, setSearchLink] = useState(`${location.pathname}${location.search}`)
 
 	const startingValues = useMemo(() => inputParams.reduce(
-		(data: Record<string, string>, param: TInputParam) => {
-			data[param.name] = location.params.get(param.name) || ''
+		(data: Record<typeof inputParams[number]['name'], typeof inputParams[number]['default']>, param) => {
+			data[param.name] = location.params.get(param.name) || (param.default ?? '')
 			return data
 		},
 		{},
@@ -53,32 +65,38 @@ const useAdvancedSearch = (
 
 	const [values, updateValues] = useReducer(searchReducer, startingValues)
 
+	// Build URL params with values changes
 	useEffect(() => {
 		for(const [key, value] of Object.entries(values)) {
 			if(value === '') {
 				location.params.delete(key)
 			} else {
-				location.params.set(key, value)
+				location.params.set(key, String(value))
 			}
 		}
 		setSearchLink(`${location.pathname}?${location.params.toString()}`)
 	}, [values])
 
+	/**
+	 * Returns props required for an input in an advanced search interface
+	 */
+	const inputProps = (name: typeof inputParams[number]['name']) => {
+		const param = inputParams.find(inputParam => inputParam.name === name)
+
+		return {
+			value: values[name],
+			onChange: getInputOnChange<string>((value) => updateValues({
+				type: 'set',
+				payload: { name, value: value as string },
+			})),
+			mb: 10,
+			label: param?.label,
+		}
+	}
+
 	return {
 		link: searchLink,
-		inputProps: (name: keyof typeof values) => {
-			const param = inputParams.find(inputParam => inputParam.name === name)
-
-			return {
-				value: values[name],
-				onChange: getInputOnChange<string>((value) => updateValues({
-					type: 'set',
-					payload: { name, value: value as string },
-				})),
-				mb: 10,
-				label: param?.label,
-			}
-		},
+		inputProps,
 		reset: () => updateValues({ type: 'clear' }),
 	}
 }

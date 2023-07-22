@@ -11,6 +11,7 @@ export {
 	Checkbox,
 	CurrencyInput,
 	DateTime,
+	Dropdown,
 	HiddenInput,
 	NumberInput,
 	PasswordInput,
