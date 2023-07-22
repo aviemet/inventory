@@ -58,7 +58,7 @@ node_modules
 yarn-error.log
 
 # VSCode files
-/.vscode
+.vscode
 
 # Test results output
 spec/examples.txt
