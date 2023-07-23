@@ -12,7 +12,7 @@ import {
 import { Routes } from '@/lib'
 import VendorsForm from '@/Pages/Vendors/Form'
 import ModelsForm from '@/Pages/Models/Form'
-import { VendorsDropdown } from '@/Components/Form/Dropdowns'
+import { VendorsDropdown } from '@/Components/Dropdowns'
 import { Menu } from '@/Components'
 import { PlusCircleIcon } from '@/Components/Icons'
 

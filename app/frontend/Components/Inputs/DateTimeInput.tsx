@@ -1,10 +1,12 @@
 import React from 'react'
 import Label from './Label'
 import { DateTimePicker, DateTimePickerProps } from '@mantine/dates'
-import { isEmpty } from 'lodash'
 import { CalendarIcon } from '../Icons'
+import { IInputProps } from '.'
+import InputWrapper from './InputWrapper'
+import { isUnset } from '@/lib'
 
-export interface IDateTimeProps extends DateTimePickerProps {
+export interface IDateTimeProps extends DateTimePickerProps, IInputProps {
 	name?: string
 	id?: string
 	value?: Date
@@ -21,26 +23,28 @@ const DateTime = ({
 	size = 'md',
 	radius = 'xs',
 	valueFormat = 'L LT',
+	wrapper,
+	wrapperProps,
 	...props
 }: IDateTimeProps) => {
 	const inputId = id || name
 
 	return (
-		<>
+		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
 			<DateTimePicker
 				id={ inputId }
 				name={ name }
-				value={ isEmpty(value) ? null : new Date(value) }
+				value={ isUnset(value) ? null : new Date(value) }
 				radius={ radius }
 				size={ size }
 				valueFormat={ valueFormat }
 				icon={ <CalendarIcon /> }
 				{ ...props }
 			/>
-		</>
+		</InputWrapper>
 	)
 }
 

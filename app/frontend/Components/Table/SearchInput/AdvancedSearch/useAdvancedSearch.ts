@@ -10,7 +10,10 @@ type TSetReducerPayload = {
 type TReducerAction = { type: TReducerActionTypes, payload?: TPayloadProps }
 type TPayloadProps = TSetReducerPayload
 
-const searchReducer = <T = string>(state: Record<TInputParam['name'], T>, action: TReducerAction) => {
+/**
+ * Reducer used by advanced search hook to set search params
+ */
+const searchReducer = <T = string>(state: Record<string, T>, action: TReducerAction) => {
 	const newState = structuredClone(state)
 
 	switch(action.type) {
@@ -34,10 +37,10 @@ interface IOptions {
 	path: string
 }
 
-type TInputParam<T = unknown> = {
+type TInputParam = {
 	label: string
 	name: string
-	default?: T extends unknown ? string : T
+	default?: any
 }
 
 /**
@@ -56,8 +59,8 @@ const useAdvancedSearch = (
 	const [searchLink, setSearchLink] = useState(`${location.pathname}${location.search}`)
 
 	const startingValues = useMemo(() => inputParams.reduce(
-		(data: Record<typeof inputParams[number]['name'], typeof inputParams[number]['default']>, param) => {
-			data[param.name] = location.params.get(param.name) || (param.default ?? '')
+		(data: Record<typeof inputParams[number]['name'], unknown>, param) => {
+			data[param.name] = location.params.get(param.name) || param.default || ''
 			return data
 		},
 		{},
@@ -80,14 +83,14 @@ const useAdvancedSearch = (
 	/**
 	 * Returns props required for an input in an advanced search interface
 	 */
-	const inputProps = (name: typeof inputParams[number]['name']) => {
+	const inputProps = <T = string>(name: typeof inputParams[number]['name']) => {
 		const param = inputParams.find(inputParam => inputParam.name === name)
 
 		return {
-			value: values[name],
-			onChange: getInputOnChange<string>((value) => updateValues({
+			value: values[name] as T,
+			onChange: getInputOnChange<T>((value) => updateValues<T>({
 				type: 'set',
-				payload: { name, value: value as string },
+				payload: { name, value: value },
 			})),
 			mb: 10,
 			label: param?.label,

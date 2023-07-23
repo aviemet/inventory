@@ -52,6 +52,7 @@ const RichText = ({
 					onChange={ handleChange }
 					onBlur={ handleBlur }
 					value={ value }
+					wrapper={ false }
 					{ ...props }
 				/>
 			</>

@@ -6,15 +6,6 @@ import { ModalFormButton } from '@/Components/Button'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 import { type IFormInputProps } from '.'
 
-export interface IDropdownWithModalButton {
-	name?: string
-	model?: string
-	label?: string
-	fetchOnOpen?: string
-	required?: boolean
-	errorKey?: string
-}
-
 type OmittedDropdownTypes = 'name'|'defaultValue'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
 export interface ISearchableDropdownFormProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IFormInputProps<string> {
 	defaultValue?: string
@@ -114,6 +105,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 						defaultValue={ defaultValue ?? String(value) }
 						error={ error }
 						options={ options }
+						wrapper={ false }
 						{ ...props }
 					/>
 				</ConditionalWrapper>

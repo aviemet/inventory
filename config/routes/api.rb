@@ -3,23 +3,23 @@ namespace :api do
   patch "users/:id/update_table_preferences" => "users#update_table_preferences", as: :update_table_preferences
   patch "users/:id/update_user_preferences" => "users#update_user_preferences", as: :update_user_preferences
 
-  resources :companies, only: [:create, :update], param: :slug
+  resources :companies, except: [:edit, :new], param: :slug
   resources :ownerships, only: [:create, :update]
 
-  resources :departments, only: [:create, :update], param: :slug
-  resources :locations, only: [:create, :update], param: :slug
+  resources :departments, except: [:edit, :new], param: :slug
+  resources :locations, except: [:edit, :new], param: :slug
 
   resources :categories, except: [:edit, :new], param: :slug
-  resources :status_labels, only: [:create, :update]
+  resources :status_labels, except: [:edit, :new]
 
   resources :items, path: :hardware, except: [:edit, :new, :create] do
     resources :nics, only: [:create, :update]
   end
 
-  resources :components, only: [:update]
-  resources :accessories, only: [:update]
-  resources :consumables, only: [:update]
-  resources :licenses, only: [:update]
+  resources :components, except: [:edit, :new, :create]
+  resources :accessories, except: [:edit, :new, :create]
+  resources :consumables, except: [:edit, :new, :create]
+  resources :licenses, except: [:edit, :new, :create]
 
   resources :assignments, only: [:create, :update]
 
@@ -29,7 +29,7 @@ namespace :api do
 
   resources :models, except: [:edit, :new], param: :slug
 
-  resources :manufacturers, only: [:create, :update]
+  resources :manufacturers, except: [:edit, :new]
   resources :warranties, only: [:create, :update]
 
   resources :fields, only: [:create, :update]

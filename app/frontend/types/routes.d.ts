@@ -118,6 +118,16 @@ export const accessory: ((
 
 /**
  * Generates rails route to
+ * /api/accessories(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAccessories: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/options/accessories(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -248,6 +258,16 @@ export const apiComponent: ((
 
 /**
  * Generates rails route to
+ * /api/components(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiComponents: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/options/components(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -265,6 +285,16 @@ export const apiComponentsOptions: ((
  */
 export const apiConsumable: ((
   id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/consumables(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiConsumables: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -539,6 +569,16 @@ export const apiItemsOptions: ((
  */
 export const apiLicense: ((
   id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/licenses(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiLicenses: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

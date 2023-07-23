@@ -54,6 +54,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 			condition={ props.hidden !== true && field }
 		>
 			<TextInput
+				ref={ ref }
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
@@ -61,7 +62,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ errorKey ? form.getError(errorKey) : error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

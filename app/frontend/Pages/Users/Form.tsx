@@ -6,7 +6,7 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
-import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
+import { DepartmentsDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TUserFormData = {
@@ -54,7 +54,6 @@ const UserForm = ({ to, method = 'post', onSubmit, user, departments, people, lo
 				label="Manager"
 				name="manager_id"
 				options={ people }
-				filterMatchKeys={ ['first_name', 'last_name'] }
 				onOpen={ () => router.reload({ only: ['people'] }) }
 			/>
 

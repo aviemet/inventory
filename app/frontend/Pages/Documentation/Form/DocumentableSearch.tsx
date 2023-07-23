@@ -61,6 +61,7 @@ const DocumentableSearch = forwardRef<HTMLInputElement, IDocumentableSearch>((
 					onSearchChange={ value => setParams({ search: value }) }
 					placeholder="Start typing to search"
 					onChange={ handleChange }
+					wrapper={ false }
 					{ ...props }
 				/>
 			</Field>

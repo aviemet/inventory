@@ -1,8 +1,8 @@
 import React from 'react'
-import ManufacturersDropdown from '../../Components/Form/Dropdowns/ManufacturersDropdown'
+import ManufacturersDropdown from '../../Components/Dropdowns/ManufacturersDropdown'
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import { CategoriesDropdown } from '@/Components/Form/Dropdowns'
+import { CategoriesDropdown } from '@/Components/Dropdowns'
 
 type TModelFormData = {
 	model: Schema.ModelsFormData
@@ -12,7 +12,7 @@ export interface IModelFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TModelFormData>) => boolean|void
-	category: Schema.CategoryTypes
+	category?: Schema.CategoryTypes
 	model?: Schema.ModelsFormData
 }
 

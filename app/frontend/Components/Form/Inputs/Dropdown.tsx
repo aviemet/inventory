@@ -74,6 +74,7 @@ const DropdownComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 				onChange={ handleChange }
 				onDropdownClose={ handleDropdownClose }
 				onDropdownOpen={ handleDropdownOpen }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

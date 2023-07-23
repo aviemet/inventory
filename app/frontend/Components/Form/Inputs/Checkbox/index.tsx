@@ -67,6 +67,7 @@ const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElemen
 				error={ error }
 				ref={ ref }
 				sx={ [{ padding: '14px 10px' }, sx] }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

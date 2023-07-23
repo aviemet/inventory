@@ -46,12 +46,13 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 			condition={ field }
 		>
 			<SwatchInput
+				ref={ ref }
 				initialValue={ value }
 				value={ value }
 				onChange={ handleChange }
 				name={ inputName }
 				id={ inputId }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

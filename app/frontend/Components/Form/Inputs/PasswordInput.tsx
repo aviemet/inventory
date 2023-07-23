@@ -53,6 +53,7 @@ const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
 			condition={ field }
 		>
 			<PasswordInput
+				ref={ ref }
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
@@ -60,7 +61,7 @@ const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/></ConditionalWrapper>
 	)

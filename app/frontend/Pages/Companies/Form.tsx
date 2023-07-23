@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 import { type UseFormProps } from 'use-inertia-form'
-import CurrenciesDropdown from '@/Components/Form/Dropdowns/CurrenciesDropdown'
+import CurrenciesDropdown from '@/Components/Dropdowns/CurrenciesDropdown'
 
 type TCompanyFormData = {
 	company: Schema.CompaniesFormData

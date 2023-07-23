@@ -1,8 +1,10 @@
 import React, { forwardRef } from 'react'
 import { Select, type SelectProps } from '@mantine/core'
 import Label from './Label'
+import { IInputProps } from '.'
+import InputWrapper from './InputWrapper'
 
-export interface IDropdownProps extends SelectProps {}
+export interface IDropdownProps extends SelectProps, IInputProps {}
 
 const DropdownComponent = forwardRef<HTMLInputElement, IDropdownProps>((
 	{
@@ -11,6 +13,9 @@ const DropdownComponent = forwardRef<HTMLInputElement, IDropdownProps>((
 		required,
 		id,
 		name,
+		size = 'md',
+		wrapper,
+		wrapperProps,
 		...props
 	},
 	ref,
@@ -18,7 +23,7 @@ const DropdownComponent = forwardRef<HTMLInputElement, IDropdownProps>((
 	const inputId = id || name
 
 	return (
-		<>
+		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
@@ -26,12 +31,12 @@ const DropdownComponent = forwardRef<HTMLInputElement, IDropdownProps>((
 				ref={ ref }
 				id={ inputId }
 				name={ name }
-				size="md"
+				size={ size }
 				data={ data }
 				required={ required }
 				{ ...props }
 			/>
-		</>
+		</InputWrapper>
 	)
 })
 

@@ -17,7 +17,6 @@ const ManufacturersDropdown = ({ label = 'Manufacturer', name = 'manufacturer_id
 			name={ name }
 			required
 			options={ data }
-			filterMatchKeys={ ['name'] }
 			onDropdownOpen={ () => { if(isEmpty(data) || isStale) refetch() } }
 			newForm={ <ManufacturersForm
 				to={ Routes.apiManufacturers() }

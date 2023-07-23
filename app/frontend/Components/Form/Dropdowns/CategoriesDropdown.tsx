@@ -13,12 +13,12 @@ interface ICategoriesDropdown extends IDropdownWithModalButton {
 const CategoriesDropdown = ({ label = 'Category', name = 'category_id', categorizable_type, ...props }: ICategoriesDropdown) => {
 	const { data, isStale, refetch } = getCategoriesAsOptions(categorizable_type, { enabled: false })
 
+
 	return (
 		<SearchableDropdown
 			label={ label }
 			name={ name }
 			options={ data }
-			filterMatchKeys={ ['name'] }
 			onDropdownOpen={ () => { if(isEmpty(data) || isStale) refetch() } }
 			fetchOnOpen="category"
 			newForm={ <CategoriesForm

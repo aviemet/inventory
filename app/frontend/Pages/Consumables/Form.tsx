@@ -8,7 +8,7 @@ import {
 	FormGroup,
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Components/Form/Dropdowns'
+import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Components/Dropdowns'
 
 type TConsumableFormData = {
 	consumable: Schema.ConsumablesFormData

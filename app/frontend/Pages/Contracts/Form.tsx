@@ -6,7 +6,7 @@ import {
 	DateTime,
 	Submit,
 } from '@/Components/Form'
-import { CategoriesDropdown, VendorsDropdown } from '@/Components/Form/Dropdowns'
+import { CategoriesDropdown, VendorsDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TContractFormData = {

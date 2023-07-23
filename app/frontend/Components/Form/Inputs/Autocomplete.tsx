@@ -53,6 +53,7 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 				errors: Boolean(error),
 				sx: { padding: 0 },
 			} }
+			wrapper={ false }
 			{ ...props }
 		/>
 

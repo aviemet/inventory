@@ -50,6 +50,7 @@ const FormRadioButtons = ({
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

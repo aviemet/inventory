@@ -1,9 +1,21 @@
 import React from 'react'
-import { DateTime, Dropdown, TextInput } from '@/Components/Inputs'
-import { Box, Group, Flex, Link, Label } from '@/Components'
+import { CurrencyInput, DateInput, Dropdown, TextInput } from '@/Components/Inputs'
+import { Box, Group, Flex, Link } from '@/Components'
 import { CrossIcon, SearchIcon } from '@/Components/Icons'
 import { useAdvancedSearch } from '@/Components/Table'
 import { Button } from '@mantine/core'
+import { CategoriesDropdown } from '@/Components/Dropdowns'
+import ManufacturersDropdown from '@/Components/Dropdowns/ManufacturersDropdown'
+import VendorsDropdown from '@/Components/Dropdowns/VendorsDropdown'
+import DepartmentsDropdown from '@/Components/Dropdowns/DepartmentsDropdown'
+import ModelsDropdown from '@/Components/Dropdowns/ModelsDropdown'
+
+const dateRangeOptions = [
+	{ label: 'Exact Date', value: 'exact' },
+	{ label: 'Before', value: 'before' },
+	{ label: 'After', value: 'after' },
+	{ label: 'Between', value: 'range' },
+]
 
 const AdvancedItemsSearch = () => {
 	const { inputProps, link, reset } = useAdvancedSearch([
@@ -11,47 +23,52 @@ const AdvancedItemsSearch = () => {
 		{ label: 'Model', name: 'model' },
 		{ label: 'Asset Tag', name: 'asset_tag' },
 		{ label: 'Serial', name: 'serial' },
-		{ label: 'Category', name: 'category.name' },
-		{ label: 'Manufacturer', name: 'manufacturer.name' },
-		{ label: 'Vendor', name: 'vendor.name' },
+		{ label: 'Category', name: 'category.id' },
+		{ label: 'Manufacturer', name: 'manufacturer.id' },
+		{ label: 'Vendor', name: 'vendor.id' },
 		{ label: 'Cost', name: 'cost' },
-		{ label: 'Department', name: 'department.name' },
-		{
-			label: 'Created At',
-			name: 'created_at',
-			default: new Date(),
-		},
+		{ label: 'Department', name: 'department.id' },
+		{ label: 'Created Date', name: 'created_range_type', default: 'exact' },
+		{ label: 'Created At', name: 'created_at' },
 	])
+
+	const { value: createdRangeType } = inputProps('created_range_type')
 
 	return (
 		<>
 			<Flex gap="md">
 				<Box sx={ { flex: 1 } }>
 					<Group grow>
-						<Box><TextInput { ...inputProps('name') } /></Box>
-						<Box><TextInput { ...inputProps('category.name') } /></Box>
+						<TextInput { ...inputProps('name') } />
+						<CategoriesDropdown
+							{ ...inputProps('category.id') }
+							categorizable_type="Item"
+						/>
 					</Group>
 					<Group grow>
-						<Box><TextInput { ...inputProps('model') } /></Box>
-						<Box><TextInput { ...inputProps('manufacturer.name') } /></Box>
+						<ModelsDropdown modelCategory="Item" { ...inputProps('model') } />
+						<ManufacturersDropdown { ...inputProps('manufacturer.id') } />
 					</Group>
 					<Group grow>
-						<Box><TextInput { ...inputProps('vendor.name') } /></Box>
-						<Box><TextInput { ...inputProps('department.name') } /></Box>
+						<VendorsDropdown { ...inputProps('vendor.id') } />
+						<DepartmentsDropdown { ...inputProps('department.id') } />
 					</Group>
 					<Group grow>
-						<Box><TextInput { ...inputProps('asset_tag') } /></Box>
-						<Box><TextInput { ...inputProps('serial') } /></Box>
-						<Box><TextInput { ...inputProps('cost') } /></Box>
+						<TextInput { ...inputProps('asset_tag') } />
+						<TextInput { ...inputProps('serial') } />
+						<CurrencyInput { ...inputProps('cost') } />
 					</Group>
 				</Box>
 				<Box>
-					<Label>Created Date</Label>
 					<Dropdown
-						data={ ['Exact Date', 'Before', 'After', 'Between'] }
-						defaultValue="Exact Date"
+						{ ...inputProps('created_range_type') }
+						data={ dateRangeOptions }
 					/>
-					<Box><DateTime { ...inputProps('created_at') } /></Box>
+					<DateInput
+						{ ...inputProps<Date[]>('created_at_start') }
+						type={ createdRangeType === 'range' ? 'range' : 'default' }
+					/>
+
 				</Box>
 			</Flex>
 
@@ -72,26 +89,4 @@ const AdvancedItemsSearch = () => {
 }
 
 export default AdvancedItemsSearch
-const data = [
-	{ label: 'Name', name: 'name' },
-	{ label: 'Model', name: 'model' },
-	{ label: 'Asset Tag', name: 'asset_tag' },
-	{ label: 'Serial', name: 'serial' },
-	{ label: 'Category', name: 'category.name' },
-	{ label: 'Manufacturer', name: 'manufacturer.name' },
-	{ label: 'Vendor', name: 'vendor.name' },
-	{ label: 'Cost', name: 'cost' },
-	{ label: 'Department', name: 'department.name' },
-	{ label: 'Created At', name: 'created_at', default: new Date() },
-]
 
-type LabelValue = typeof data[number]['label'];
-
-const isValidLabel = (label: string): label is LabelValue => {
-	return data.some((item) => item.label === label)
-}
-
-// Example usage:
-const label1: LabelValue = 'Name' // Valid
-const label2: LabelValue = 'Model' // Valid
-const label3: LabelValue = 'Location' // Error: Type '"Location"' is not assignable to type '"Name" | "Model" | "Asset Tag" | ... | "Created At"'.

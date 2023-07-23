@@ -15,7 +15,6 @@ const PeopleDropdown = ({ label = 'Person', name = 'person_id', ...props }: IPeo
 			name={ name }
 			options={ data }
 			onDropdownOpen={ () => { if(isEmpty(data) || isStale) refetch() } }
-			filterMatchKeys={ ['first_name', 'last_name'] }
 			{ ...props }
 		/>
 	)

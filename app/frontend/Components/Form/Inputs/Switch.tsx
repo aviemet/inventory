@@ -36,6 +36,7 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 		condition={ field }
 		>
 			<SwitchInput
+				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				defaultChecked={ Boolean(value) }
@@ -44,7 +45,7 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

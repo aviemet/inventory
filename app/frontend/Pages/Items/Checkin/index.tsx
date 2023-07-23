@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
-import { LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { LocationsDropdown } from '@/Components/Dropdowns'
 import { createStyles } from '@mantine/core'
-import StatusLabelsDropdown from '@/Components/Form/Dropdowns/StatusLabelsDropdown'
+import StatusLabelsDropdown from '@/Components/Dropdowns/StatusLabelsDropdown'
 
 const useTableStyles = createStyles(theme => ({
 	table: {

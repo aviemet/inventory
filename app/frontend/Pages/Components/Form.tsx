@@ -7,7 +7,7 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TComponentFormData = {

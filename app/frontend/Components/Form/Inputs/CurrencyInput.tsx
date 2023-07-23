@@ -53,6 +53,7 @@ const FormInput = forwardRef<HTMLInputElement, INumberInputProps>((
 			condition={ field }
 		>
 			<CurrencyInput
+				ref={ ref }
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
@@ -60,7 +61,7 @@ const FormInput = forwardRef<HTMLInputElement, INumberInputProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/></ConditionalWrapper>
 	)

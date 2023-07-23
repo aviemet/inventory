@@ -3,8 +3,10 @@ import { Select, type SelectProps } from '@mantine/core'
 import Label from './Label'
 import { router } from '@inertiajs/react'
 import { coerceArray } from '@/lib'
+import { IInputProps } from '.'
+import InputWrapper from './InputWrapper'
 
-export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'> {
+export interface ISearchableDropdownProps extends Omit<SelectProps, 'data'>, IInputProps {
 	options?: Array<Record<string, any>>
 	getLabel?: (option: Record<string, any>) => any
 	getValue?: (option: Record<string, any>) => string
@@ -27,6 +29,8 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		clearable = true,
 		fetchOnOpen,
 		onDropdownOpen,
+		wrapper,
+		wrapperProps,
 		...props
 	},
 	ref,
@@ -51,16 +55,16 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 		})
 	}, [options])
 
-	const fetchNewRecords = (query?: string) => {
-		if(!fetchOnOpen) return
-
-		router.reload({ only: coerceArray(fetchOnOpen) })
+	const fetchNewRecords = () => {
+		if(fetchOnOpen) {
+			router.reload({ only: coerceArray(fetchOnOpen) })
+		}
 
 		if(onDropdownOpen) onDropdownOpen()
 	}
 
 	return (
-		<>
+		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
@@ -78,7 +82,7 @@ const SearchableDropdownComponent = forwardRef<HTMLInputElement, ISearchableDrop
 				onDropdownOpen={ fetchNewRecords }
 				{ ...props }
 			/>
-		</>
+		</InputWrapper>
 	)
 })
 

@@ -60,7 +60,6 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				label="Manufacturer"
 				name="manufacturer_id"
 				options={ manufacturers }
-				filterMatchKeys={ ['name'] }
 				onOpen={ () => router.reload({ only: ['manufacturers'] }) }
 			/>
 
@@ -68,7 +67,6 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				label="Vendor"
 				name="vendor_id"
 				options={ vendors }
-				filterMatchKeys={ ['name'] }
 				onOpen={ () => router.reload({ only: ['vendors'] }) }
 			/>
 
@@ -76,7 +74,6 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 				label="Category"
 				name="category_id"
 				options={ categories }
-				filterMatchKeys={ ['name'] }
 				onOpen={ () => router.reload({ only: ['categories'] }) }
 			/>
 
