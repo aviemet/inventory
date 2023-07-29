@@ -157,7 +157,7 @@ GEM
     ipaddress_2 (0.14.0)
     irb (1.7.4)
       reline (>= 0.3.6)
-    js-routes (2.2.6)
+    js-routes (2.2.7)
       railties (>= 4)
     json (2.6.3)
     jsonb_accessor (1.3.10)
@@ -192,7 +192,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    minitest (5.18.1)
+    minitest (5.19.0)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -203,7 +203,7 @@ GEM
       money (~> 6.13)
       railties (>= 3.0)
     msgpack (1.7.2)
-    net-imap (0.3.6)
+    net-imap (0.3.7)
       date
       net-protocol
     net-ldap (0.17.1)
@@ -290,12 +290,12 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.8.1)
-    reline (0.3.6)
+    reline (0.3.7)
       io-console (~> 0.5)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rolify (6.0.1)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
@@ -314,7 +314,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
-    rubocop (1.54.2)
+    rubocop (1.55.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -322,7 +322,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.28.0, < 2.0)
+      rubocop-ast (>= 1.28.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
@@ -405,12 +405,12 @@ GEM
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
     websocket (1.2.9)
-    websocket-driver (0.7.5)
+    websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.8)
+    zeitwerk (2.6.9)
 
 PLATFORMS
   arm64-darwin-22
@@ -472,7 +472,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 3.1.2p20
+   ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.12
+   2.4.10
