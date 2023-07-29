@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
-import { SearchableDropdown as FormDropdown } from '@/Components/Form'
-import { SearchableDropdown as InputDropdown } from '@/Components/Inputs'
+import { Select as FormSelect } from '@/Components/Form'
+import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, inFormContext } from '@/lib'
 import StatusLabelsForm from '@/Pages/StatusLabels/Form'
 import { getStatusLabelsAsOptions } from '@/queries/statusLabels'
@@ -22,23 +22,28 @@ const StatusLabelsDropdown = forwardRef<HTMLInputElement, IStatusLabelsDropdown>
 		ref,
 		label,
 		name,
-		options: data,
+		options: !data ? [] : data.map(statusLabel => ({
+			label: statusLabel.name,
+			value: String(statusLabel.id),
+		})),
 		onDropdownOpen: () => {
 			if(isEmpty(data) || isStale) refetch()
 		},
+		searchable: true,
+		clearable: true,
 		...props,
 	}
 
 	if(inFormContext()) {
 		return (
-			<FormDropdown
+			<FormSelect
 				newForm={ <StatusLabelsForm to={ Routes.statusLabels() } /> }
 				{ ...commonProps }
 			/>
 		)
 	}
 
-	return <InputDropdown { ...commonProps } />
+	return <InputSelect { ...commonProps } />
 })
 
 export default StatusLabelsDropdown

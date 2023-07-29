@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Flex, Heading, Page, Section, Table, Box } from '@/Components'
 import { Routes, formatter } from '@/lib'
-import { DateTime, Form, TextInput, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
+import { DateTime, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import { LocationsDropdown } from '@/Components/Dropdowns'
 
 interface ICheckinLicensesProps {
@@ -104,7 +104,7 @@ const Checkin = ({ assignment, license, locations, status_labels }: ICheckinLice
 
 					<LocationsDropdown locations={ locations } />
 
-					<SearchableDropdown
+					<Select
 						options={ status_labels }
 						label="Status"
 						name="status_id"

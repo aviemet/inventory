@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react'
-import { Select as FormSelect } from '@/Components/Form'
-import { Select as InputSelect } from '@/Components/Inputs'
+import { MultiSelect as FormMultiSelect } from '@/Components/Form'
+import { MultiSelect as InputMultiSelect } from '@/Components/Inputs'
 import { inFormContext } from '@/lib'
 import { getPeopleAsOptions } from '@/queries/people'
 import { isEmpty } from 'lodash'
-import { type IAsyncDropdown } from '.'
+import { type IAsyncMultiSelect } from '.'
 
-interface IPeopleDropdown extends IAsyncDropdown<Schema.PeopleOptions> {}
+interface IPeopleDropdown extends IAsyncMultiSelect<Schema.PeopleOptions> {}
 
 const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
 	{ label = 'Person', name = 'person_id', initialData, ...props },
@@ -34,10 +34,10 @@ const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
 	}
 
 	if(inFormContext()) {
-		return <FormSelect { ...commonProps } />
+		return <FormMultiSelect { ...commonProps } />
 	}
 
-	return <InputSelect { ...commonProps } />
+	return <InputMultiSelect { ...commonProps } />
 })
 
 export default PeopleDropdown

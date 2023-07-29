@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
-import { SearchableDropdown as FormDropdown } from '@/Components/Form'
-import { SearchableDropdown as InputDropdown } from '@/Components/Inputs'
+import { Select as FormSelect } from '@/Components/Form'
+import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, inFormContext } from '@/lib'
 import DepartmentsForm from '@/Pages/Departments/Form'
 import { isEmpty } from 'lodash'
@@ -22,23 +22,28 @@ const DepartmentsDropdown = forwardRef<HTMLInputElement, IDepartmentsDropdown>((
 		ref,
 		label,
 		name,
-		options: data,
+		options: !data ? [] : data.map(department => ({
+			label: department.name,
+			value: String(department.id),
+		})),
 		onDropdownOpen: () => {
 			if(isEmpty(data) || isStale) refetch()
 		},
+		searchable: true,
+		clearable: true,
 		...props,
 	}
 
 	if(inFormContext()) {
 		return (
-			<FormDropdown
+			<FormSelect
 				newForm={ <DepartmentsForm to={ Routes.apiDepartments() } /> }
 				{ ...commonProps }
 			/>
 		)
 	}
 
-	return <InputDropdown { ...commonProps } />
+	return <InputSelect { ...commonProps } />
 })
 
 export default DepartmentsDropdown

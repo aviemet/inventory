@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
-import { SearchableDropdown as FormDropdown } from '@/Components/Form'
-import { SearchableDropdown as InputDropdown } from '@/Components/Inputs'
+import { Select as FormSelect } from '@/Components/Form'
+import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, inFormContext } from '@/lib'
 import LocationsForm from '@/Pages/Locations/Form'
 import { getLocationsAsOptions } from '@/queries/locations'
@@ -25,23 +25,28 @@ const LocationsDropdown = forwardRef<HTMLInputElement, ILocationsDropdown>((
 		ref,
 		label,
 		name,
-		options: data,
+		options: !data ? [] : data.map(location => ({
+			label: location.name,
+			value: String(location.id),
+		})),
 		onDropdownOpen: () => {
 			if(isEmpty(data) || isStale) refetch()
 		},
+		searchable: true,
+		clearable: true,
 		...props,
 	}
 
 	if(inFormContext()) {
 		return (
-			<FormDropdown
+			<FormSelect
 				newForm={ <LocationsForm to={ Routes.locations() } /> }
 				{ ...commonProps }
 			/>
 		)
 	}
 
-	return <InputDropdown { ...commonProps } />
+	return <InputSelect { ...commonProps } />
 })
 
 export default LocationsDropdown

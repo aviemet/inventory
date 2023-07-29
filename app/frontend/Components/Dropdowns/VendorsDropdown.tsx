@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
-import { SearchableDropdown as FormDropdown } from '@/Components/Form'
-import { SearchableDropdown as InputDropdown } from '@/Components/Inputs'
+import { Select as FormSelect } from '@/Components/Form'
+import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, inFormContext } from '@/lib'
 import VendorsForm from '@/Pages/Vendors/Form'
 import { getVendorsAsOptions } from '@/queries/vendors'
@@ -22,23 +22,28 @@ const VendorsDropdown = forwardRef<HTMLInputElement, IVendorsDropdown>((
 		ref,
 		label,
 		name,
-		options: data,
+		options: !data ? [] : data.map(vendor => ({
+			label: vendor.name,
+			value: String(vendor.id),
+		})),
 		onDropdownOpen: () => {
 			if(isEmpty(data) || isStale) refetch()
 		},
+		searchable: true,
+		clearable: true,
 		...props,
 	}
 
 	if(inFormContext()) {
 		return (
-			<FormDropdown
+			<FormSelect
 				newForm={ <VendorsForm to={ Routes.vendors() } /> }
 				{ ...commonProps }
 			/>
 		)
 	}
 
-	return <InputDropdown { ...commonProps } />
+	return <InputSelect { ...commonProps } />
 })
 
 export default VendorsDropdown

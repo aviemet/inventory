@@ -3,17 +3,17 @@ import { UseFormProps, useInertiaInput } from 'use-inertia-form'
 import { IFormInputProps } from '.'
 import { ConditionalWrapper } from '@/Components'
 import Field from '../Field'
-import Dropdown, { type IDropdownProps } from '@/Components/Inputs/Dropdown'
+import MultiSelect, { type IMultiSelectProps } from '@/Components/Inputs/MultiSelect'
 
 type OmittedDropdownTypes = 'name'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
-export interface IFormDropdownProps extends Omit<IDropdownProps, OmittedDropdownTypes>, IFormInputProps<string> {
+export interface IFormDropdownProps extends Omit<IMultiSelectProps, OmittedDropdownTypes>, IFormInputProps<string[]> {
 	onDropdownOpen?: (form: UseFormProps<any>) => void
 	onDropdownClose?: (form: UseFormProps<any>) => void
 }
 
-const DropdownComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
+const MultiSelectComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 	{
-		data = [],
+		options = [],
 		label,
 		required,
 		id,
@@ -29,16 +29,16 @@ const DropdownComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 	},
 	ref,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model, errorKey })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[]>({ name, model, errorKey })
 
 	const handleBlur = () => {
-		if(onBlur) onBlur(String(value), form)
+		if(onBlur) onBlur(value, form)
 	}
 
-	const handleChange = (option: string) => {
-		setValue(option ? option : '')
+	const handleChange = (values: string[]) => {
+		setValue(values)
 
-		if(onChange) onChange(option, form)
+		if(onChange) onChange(values, form)
 	}
 
 	const handleDropdownOpen = () => {
@@ -62,14 +62,14 @@ const DropdownComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 			) }
 			condition={ field }
 		>
-			<Dropdown
+			<MultiSelect
 				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				label={ label }
-				value={ String(value) }
+				value={ value }
 				error={ error }
-				data={ data }
+				options={ options }
 				onBlur={ handleBlur }
 				onChange={ handleChange }
 				onDropdownClose={ handleDropdownClose }
@@ -81,4 +81,4 @@ const DropdownComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 	)
 })
 
-export default React.memo(DropdownComponent)
+export default React.memo(MultiSelectComponent)

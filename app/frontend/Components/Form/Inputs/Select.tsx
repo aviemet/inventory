@@ -1,13 +1,13 @@
 import React, { forwardRef } from 'react'
 import Field from '../Field'
-import SearchableDropdownInput, { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
+import SelectInput, { type ISelectProps } from '@/Components/Inputs/Select'
 import { ConditionalWrapper, Group } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
 import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
 import { type IFormInputProps } from '.'
 
 type OmittedDropdownTypes = 'name'|'defaultValue'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
-export interface ISearchableDropdownFormProps extends Omit<ISearchableDropdownProps, OmittedDropdownTypes>, IFormInputProps<string> {
+export interface ISelectFormProps extends Omit<ISelectProps, OmittedDropdownTypes>, IFormInputProps<string> {
 	defaultValue?: string
 	onChange?: ((value: string|null, form: UseFormProps<unknown>) => void) | undefined
 	onDropdownOpen?: (form: UseFormProps<any>) => void
@@ -17,7 +17,7 @@ export interface ISearchableDropdownFormProps extends Omit<ISearchableDropdownPr
 	field?: boolean
 }
 
-const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormProps>((
+const Select = forwardRef<HTMLInputElement, ISelectFormProps>((
 	{
 		name,
 		label,
@@ -92,7 +92,7 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 					) }
 					condition={ field }
 				>
-					<SearchableDropdownInput
+					<SelectInput
 						ref={ ref }
 						id={ id || inputId }
 						name={ inputName }
@@ -119,4 +119,4 @@ const SearchableDropdown = forwardRef<HTMLInputElement, ISearchableDropdownFormP
 	)
 })
 
-export default SearchableDropdown
+export default Select

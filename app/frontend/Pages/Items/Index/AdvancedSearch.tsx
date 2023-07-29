@@ -1,5 +1,5 @@
 import React from 'react'
-import { CurrencyInput, DateInput, Dropdown, TextInput } from '@/Components/Inputs'
+import { CurrencyInput, DateInput, Select, TextInput } from '@/Components/Inputs'
 import { Box, Group, Flex, Link } from '@/Components'
 import { CrossIcon, SearchIcon } from '@/Components/Icons'
 import { useAdvancedSearch } from '@/Components/Table'
@@ -60,9 +60,9 @@ const AdvancedItemsSearch = () => {
 					</Group>
 				</Box>
 				<Box>
-					<Dropdown
+					<Select
 						{ ...inputProps('created_range_type') }
-						data={ dateRangeOptions }
+						options={ dateRangeOptions }
 					/>
 					<DateInput
 						{ ...inputProps<Date[]>('created_at_start') }

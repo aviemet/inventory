@@ -1,6 +1,0 @@
-export { default as ModelsDropdown } from './ModelsDropdown'
-export { default as VendorsDropdown } from './VendorsDropdown'
-export { default as LocationsDropdown } from './LocationsDropdown'
-export { default as DepartmentsDropdown } from './DepartmentsDropdown'
-export { default as CategoriesDropdown } from './CategoriesDropdown'
-export { default as ItemsDropdown } from './ItemsDropdown'

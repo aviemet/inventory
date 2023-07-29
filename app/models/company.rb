@@ -53,6 +53,7 @@ class Company < ApplicationRecord
     smtps: "Smtp",
     person_groups: "PersonGroup",
     documentations: "Documentation",
+    tickets: "Ticket",
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model
   end

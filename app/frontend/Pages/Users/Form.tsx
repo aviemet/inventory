@@ -2,11 +2,9 @@ import React from 'react'
 import {
 	Form,
 	TextInput,
-	SearchableDropdown,
 	Submit,
 } from '@/Components/Form'
-import { router } from '@inertiajs/react'
-import { DepartmentsDropdown } from '@/Components/Dropdowns'
+import { DepartmentsDropdown, PeopleDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TUserFormData = {
@@ -18,12 +16,9 @@ export interface IUserFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TUserFormData>) => boolean|void
 	user: Schema.UsersFormData
-	departments: Schema.DepartmentsOptions[]
-	people: Schema.PeopleOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
-const UserForm = ({ to, method = 'post', onSubmit, user, departments, people, locations }: IUserFormProps) => {
+const UserForm = ({ to, method = 'post', onSubmit, user }: IUserFormProps) => {
 
 	return (
 		<Form
@@ -42,19 +37,15 @@ const UserForm = ({ to, method = 'post', onSubmit, user, departments, people, lo
 			<TextInput name="employee_number" label="Employee #" required  />
 
 			<DepartmentsDropdown
-				departments={ departments }
-				locations={ locations }
 				name="department_id"
 				required
 			/>
 
 			<TextInput name="job_title" label="Job Title" required  />
 
-			<SearchableDropdown
+			<PeopleDropdown
 				label="Manager"
 				name="manager_id"
-				options={ people }
-				onOpen={ () => router.reload({ only: ['people'] }) }
 			/>
 
 			<Submit>

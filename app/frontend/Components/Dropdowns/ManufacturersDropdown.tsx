@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
-import { SearchableDropdown as FormDropdown } from '@/Components/Form'
-import { SearchableDropdown as InputDropdown } from '@/Components/Inputs'
+import { Select as FormSelect } from '@/Components/Form'
+import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, inFormContext } from '@/lib'
 import ManufacturersForm from '@/Pages/Manufacturers/Form'
 import { getManufacturersAsOptions } from '@/queries/manufacturers'
@@ -22,23 +22,28 @@ const ManufacturersDropdown = forwardRef<HTMLInputElement, IManufacturersDropdow
 		ref,
 		label,
 		name,
-		options: data,
+		options: !data ? [] : data.map(manufacturer => ({
+			label: manufacturer.name,
+			value: String(manufacturer.id),
+		})),
 		onDropdownOpen: () => {
 			if(isEmpty(data) || isStale) refetch()
 		},
+		searchable: true,
+		clearable: true,
 		...props,
 	}
 
 	if(inFormContext()) {
 		return (
-			<FormDropdown
+			<FormSelect
 				newForm={ <ManufacturersForm to={ Routes.apiManufacturers() } /> }
 				{ ...commonProps }
 			/>
 		)
 	}
 
-	return <InputDropdown { ...commonProps } />
+	return <InputSelect { ...commonProps } />
 })
 
 export default ManufacturersDropdown

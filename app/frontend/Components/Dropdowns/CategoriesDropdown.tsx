@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
-import { SearchableDropdown as FormDropdown } from '@/Components/Form'
-import { SearchableDropdown as InputDropdown } from '@/Components/Inputs'
+import { Select as FormSelect } from '@/Components/Form'
+import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, inFormContext } from '@/lib'
 import CategoriesForm from '@/Pages/Categories/Form'
 import { getCategoriesAsOptions } from '@/queries/categories'
@@ -24,16 +24,21 @@ const CategoriesDropdown = forwardRef<HTMLInputElement, ICategoriesDropdown>((
 		ref,
 		label,
 		name,
-		options: data,
+		options: !data ? [] : data.map(category => ({
+			label: category.name,
+			value: String(category.id),
+		})),
 		onDropdownOpen: () => {
 			if(isEmpty(data) || isStale) refetch()
 		},
+		searchable: true,
+		clearable: true,
 		...props,
 	}
 
 	if(inFormContext()) {
 		return (
-			<FormDropdown
+			<FormSelect
 				newForm={ <CategoriesForm
 					to={ Routes.apiCategories() }
 				/> }
@@ -42,7 +47,7 @@ const CategoriesDropdown = forwardRef<HTMLInputElement, ICategoriesDropdown>((
 		)
 	}
 
-	return <InputDropdown { ...commonProps } />
+	return <InputSelect { ...commonProps } />
 })
 
 export default CategoriesDropdown
