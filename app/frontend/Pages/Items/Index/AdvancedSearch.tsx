@@ -1,9 +1,8 @@
 import React from 'react'
 import { CurrencyInput, DateInput, Select, TextInput } from '@/Components/Inputs'
-import { Box, Group, Flex, Link } from '@/Components'
+import { Button, Box, Group, Flex, Link } from '@/Components'
 import { CrossIcon, SearchIcon } from '@/Components/Icons'
 import { useAdvancedSearch } from '@/Components/Table'
-import { Button } from '@mantine/core'
 import { CategoriesDropdown } from '@/Components/Dropdowns'
 import ManufacturersDropdown from '@/Components/Dropdowns/ManufacturersDropdown'
 import VendorsDropdown from '@/Components/Dropdowns/VendorsDropdown'
@@ -18,55 +17,88 @@ const dateRangeOptions = [
 ]
 
 const AdvancedItemsSearch = () => {
-	const { inputProps, link, reset } = useAdvancedSearch([
-		{ label: 'Name', name: 'name' },
-		{ label: 'Model', name: 'model' },
-		{ label: 'Asset Tag', name: 'asset_tag' },
-		{ label: 'Serial', name: 'serial' },
-		{ label: 'Category', name: 'category.id' },
-		{ label: 'Manufacturer', name: 'manufacturer.id' },
-		{ label: 'Vendor', name: 'vendor.id' },
-		{ label: 'Cost', name: 'cost' },
-		{ label: 'Department', name: 'department.id' },
-		{ label: 'Created Date', name: 'created_range_type', default: 'exact' },
-		{ label: 'Created At', name: 'created_at' },
+	const { values, inputProps, setInputValue, link, reset } = useAdvancedSearch([
+		{ name: 'name' },
+		{ name: 'model' },
+		{ name: 'asset_tag' },
+		{ name: 'serial' },
+		{ name: 'category.id' },
+		{ name: 'manufacturer.id' },
+		{ name: 'vendor.id' },
+		{ name: 'cost' },
+		{ name: 'department.id' },
+		{ name: 'created_range_type', default: 'exact', dependent: 'created_at' },
+		{ name: 'created_at' },
 	])
 
-	const { value: createdRangeType } = inputProps('created_range_type')
 
 	return (
 		<>
-			<Flex gap="md">
+			<Flex gap="md" mb="md">
 				<Box sx={ { flex: 1 } }>
 					<Group grow>
-						<TextInput { ...inputProps('name') } />
+						<TextInput
+							label="Name"
+							{ ...inputProps('name') }
+							onChange={ e => setInputValue('name', e.target.value) }
+						/>
 						<CategoriesDropdown
 							{ ...inputProps('category.id') }
+							onChange={ value => setInputValue('category.id', value) }
 							categorizable_type="Item"
 						/>
 					</Group>
 					<Group grow>
-						<ModelsDropdown modelCategory="Item" { ...inputProps('model') } />
-						<ManufacturersDropdown { ...inputProps('manufacturer.id') } />
+						<ModelsDropdown
+							modelCategory="Item"
+							{ ...inputProps('model') }
+							onChange={ value => setInputValue('model', value) }
+						/>
+						<ManufacturersDropdown
+							{ ...inputProps('manufacturer.id') }
+							onChange={ value => setInputValue('manufacturer.id', value) }
+						/>
 					</Group>
 					<Group grow>
-						<VendorsDropdown { ...inputProps('vendor.id') } />
-						<DepartmentsDropdown { ...inputProps('department.id') } />
+						<VendorsDropdown
+							{ ...inputProps('vendor.id') }
+							onChange={ value => setInputValue('vendor.id', value) }
+						/>
+						<DepartmentsDropdown
+							{ ...inputProps('department.id') }
+							onChange={ value => setInputValue('department.id', value) }
+						/>
 					</Group>
 					<Group grow>
-						<TextInput { ...inputProps('asset_tag') } />
-						<TextInput { ...inputProps('serial') } />
-						<CurrencyInput { ...inputProps('cost') } />
+						<TextInput
+							label="Asset Tag"
+							{ ...inputProps('asset_tag') }
+							onChange={ e => setInputValue('asset_tag', e.target.value) }
+						/>
+						<TextInput
+							label="Serial"
+							{ ...inputProps('serial') }
+							onChange={ e => setInputValue('serial', e.target.value) }
+						/>
+						<CurrencyInput
+							label="Cost"
+							{ ...inputProps('cost') }
+							onChange={ e => setInputValue('cost', e.target.value) }
+						/>
 					</Group>
 				</Box>
 				<Box>
 					<Select
+						label="Creation Date"
 						{ ...inputProps('created_range_type') }
+						onChange={ value => setInputValue('created_range_type', value) }
 						options={ dateRangeOptions }
 					/>
 					<DateInput
-						{ ...inputProps<Date[]>('created_at_start') }
-						type={ createdRangeType === 'range' ? 'range' : 'default' }
+						label="Date"
+						{ ...inputProps<Date[]>('created_at') }
+						onChange={ value => setInputValue('created_at', value) }
+						type={ values.get('created_range_type') === 'range' ? 'range' : 'default' }
 					/>
 
 				</Box>
