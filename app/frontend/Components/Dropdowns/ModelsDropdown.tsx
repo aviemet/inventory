@@ -12,7 +12,7 @@ interface IModelsDropdown extends IAsyncDropdown<Schema.ModelsOptions> {
 }
 
 const ModelsDropdown = forwardRef<HTMLInputElement, IModelsDropdown>((
-	{ label = 'Model', name = 'model_id', modelCategory, initialData = [], ...props },
+	{ label = 'Model', name = 'model_id', modelCategory, initialData, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getModelsAsOptions(modelCategory, {

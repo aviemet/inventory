@@ -5,14 +5,9 @@ import { Routes } from '@/lib'
 
 interface IUpdateItemProps{
 	item: Schema.ItemsEdit
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const EditItem = ({ item, ...models }: IUpdateItemProps) => {
+const EditItem = ({ item }: IUpdateItemProps) => {
 	const title = `Edit ${item.name}`
 
 	return (
@@ -24,7 +19,7 @@ const EditItem = ({ item, ...models }: IUpdateItemProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<ItemForm to={ Routes.item(item) } method="patch" item={ item } { ...models } />
+				<ItemForm to={ Routes.item(item) } method="patch" item={ item } />
 			</Section>
 		</Page>
 	)

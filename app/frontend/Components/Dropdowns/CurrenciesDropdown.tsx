@@ -9,13 +9,12 @@ import { type IAsyncDropdown } from '.'
 interface ICurrenciesDropdown extends IAsyncDropdown<Schema.CurrencyOption> {}
 
 const CurrenciesDropdown = forwardRef<HTMLInputElement, ICurrenciesDropdown>((
-	{ label = 'Currency', name = 'currency', initialData = [], ...props },
+	{ label = 'Currency', name = 'currency', ...props },
 	ref,
 ) => {
 	const { data, refetch } = getCurrencies({
 		staleTime: Infinity,
 		cacheTime: Infinity,
-		initialData,
 	})
 
 	const commonProps = {

@@ -14,6 +14,7 @@ import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components
 import CheckboxComponent from '@/Components/Inputs/Checkbox'
 import { Group } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
+import { coerceArray } from '@/lib'
 
 type TItemFormData = {
 	item: Schema.ItemsFormData
@@ -42,6 +43,7 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 				<ModelsDropdown
 					modelCategory='Item'
 					errorKey="item.model"
+					initialData={ coerceArray(item?.model) }
 				/>
 
 				<TextInput name="serial" label="Serial" />
@@ -67,7 +69,7 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown />
+				<VendorsDropdown initialData={ coerceArray(item?.vendor) } />
 
 				<CurrencyInput name="cost" label="Cost" />
 
@@ -78,6 +80,7 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
+					initialData={ coerceArray(item?.default_location) }
 					required
 				/>
 

@@ -10,7 +10,7 @@ import { type IAsyncDropdown } from '.'
 interface IVendorsDropdown extends IAsyncDropdown<Schema.VendorsOptions> {}
 
 const VendorsDropdown = forwardRef<HTMLInputElement, IVendorsDropdown>((
-	{ label = 'Vendor', name = 'vendor_id', initialData = [], ...props },
+	{ label = 'Vendor', name = 'vendor_id', initialData, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getVendorsAsOptions({

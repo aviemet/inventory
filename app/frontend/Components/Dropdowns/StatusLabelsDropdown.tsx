@@ -10,7 +10,7 @@ import { type IAsyncDropdown } from '.'
 interface IStatusLabelsDropdown extends IAsyncDropdown<Schema.StatusLabelsOptions> {}
 
 const StatusLabelsDropdown = forwardRef<HTMLInputElement, IStatusLabelsDropdown>((
-	{ label = 'Status Label', name = 'status_label_id', initialData = [], ...props },
+	{ label = 'Status Label', name = 'status_label_id', initialData, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getStatusLabelsAsOptions({

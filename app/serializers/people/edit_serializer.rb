@@ -14,7 +14,7 @@ class People::EditSerializer < ApplicationSerializer
 
   type :number
   def department_id
-    person.department&.id
+    person&.department&.id
   end
 
   type :string
@@ -22,6 +22,8 @@ class People::EditSerializer < ApplicationSerializer
     "#{person.first_name} #{person.last_name}".strip
   end
 
-  has_one :contact, serializer: Contacts::FormDataSerializer
-  belongs_to :user, serializer: Users::FormDataSerializer
+  has_one :contact, serializer: Contacts::FormDataSerializer, optional: true
+  belongs_to :user, serializer: Users::FormDataSerializer, optional: true
+  belongs_to :department, serializer: Departments::OptionsSerializer, optional: true
+  belongs_to :manager, serializer: People::OptionsSerializer, optional: true
 end

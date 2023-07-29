@@ -6,12 +6,10 @@ import { getDepartmentsAsOptions } from '@/queries/departments'
 import { inFormContext } from '@/lib'
 import { type IAsyncDropdown } from '.'
 
-interface IItemsDropdown extends IAsyncDropdown<Schema.ItemsOptions> {
-	items?: Schema.Item[]
-}
+interface IItemsDropdown extends IAsyncDropdown<Schema.ItemsOptions> {}
 
 const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdown>((
-	{ label = 'Item', name = 'item_id', items, initialData = [], ...props },
+	{ label = 'Item', name = 'item_id', initialData, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getDepartmentsAsOptions({

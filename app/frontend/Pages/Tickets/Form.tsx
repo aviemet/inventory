@@ -9,6 +9,8 @@ import {
 	FieldsFor,
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
+import { AssetsDropdown } from '@/Components/Dropdowns'
+import { coerceArray } from '@/lib'
 
 type TTicketFormData = {
 	ticket: Schema.TicketsFormData
@@ -53,11 +55,7 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket, people, assets }: I
 				name="primary_contact_id"
 			/>
 
-			<SearchableDropdown
-				options={ assets }
-				label="Asset"
-				name="asset_id"
-			/>
+			<AssetsDropdown initialData={ coerceArray(ticket?.asset) } />
 
 			<RichText name="description" label="Description" />
 

@@ -1,18 +1,18 @@
 import React, { forwardRef } from 'react'
 import { SearchableDropdown as FormDropdown } from '@/Components/Form'
 import { SearchableDropdown as InputDropdown } from '@/Components/Inputs'
-import { inFormContext } from '@/lib'
-import { getDepartmentsAsOptions } from '@/queries/departments'
 import { isEmpty } from 'lodash'
+import { getAssetsAsOptions } from '@/queries/assets'
+import { inFormContext } from '@/lib'
 import { type IAsyncDropdown } from '.'
 
-interface IPeopleDropdown extends IAsyncDropdown<Schema.PeopleOptions> {}
+interface IAssetsDropdown extends IAsyncDropdown<Schema.AssetsOptions> {}
 
-const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
-	{ label = 'Person', name = 'person_id', initialData, ...props },
+const AssetsDropdown = forwardRef<HTMLInputElement, IAssetsDropdown>((
+	{ label = 'Asset', name = 'asset_id', initialData, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = getDepartmentsAsOptions({
+	const { data, isStale, refetch } = getAssetsAsOptions({
 		enabled: false,
 		initialData,
 	})
@@ -35,4 +35,5 @@ const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
 	return <InputDropdown { ...commonProps } />
 })
 
-export default PeopleDropdown
+export default AssetsDropdown
+

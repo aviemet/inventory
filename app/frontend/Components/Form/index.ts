@@ -10,6 +10,7 @@ export {
 	Autocomplete,
 	Checkbox,
 	CurrencyInput,
+	Date,
 	DateTime,
 	Dropdown,
 	HiddenInput,

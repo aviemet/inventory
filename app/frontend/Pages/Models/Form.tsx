@@ -3,6 +3,7 @@ import ManufacturersDropdown from '../../Components/Dropdowns/ManufacturersDropd
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 import { CategoriesDropdown } from '@/Components/Dropdowns'
+import { coerceArray } from '@/lib'
 
 type TModelFormData = {
 	model: Schema.ModelsFormData
@@ -12,15 +13,14 @@ export interface IModelFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TModelFormData>) => boolean|void
-	category?: Schema.CategoryTypes
 	model?: Schema.ModelsFormData
 }
 
 const emptyModel: Schema.ModelsFormData = {
 	name: '',
 	model_number: '',
-	manufacturer_id: undefined,
-	category_id: undefined,
+	manufacturer_id: NaN,
+	category_id: NaN,
 }
 
 const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: IModelFormProps) => {
@@ -36,9 +36,12 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: IModel
 
 			<TextInput name="model_number" label="Model Number" required />
 
-			<ManufacturersDropdown />
+			<ManufacturersDropdown initialData={ coerceArray(model?.manufacturer) } />
 
-			<CategoriesDropdown categorizable_type='Item' />
+			<CategoriesDropdown
+				categorizable_type='Item'
+				initialData={ coerceArray(model?.category) }
+			/>
 
 			<Textarea name="notes" label="Notes" />
 

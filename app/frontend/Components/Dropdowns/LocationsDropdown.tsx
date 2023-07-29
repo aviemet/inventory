@@ -12,7 +12,7 @@ interface ILocationsDropdown extends IAsyncDropdown<Schema.LocationsOptions> {
 }
 
 const LocationsDropdown = forwardRef<HTMLInputElement, ILocationsDropdown>((
-	{ label = 'Location', name = 'location_id', filter, initialData = [], ...props },
+	{ label = 'Location', name = 'location_id', filter, initialData, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getLocationsAsOptions({

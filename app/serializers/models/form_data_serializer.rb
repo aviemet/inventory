@@ -7,8 +7,10 @@ class Models::FormDataSerializer < ApplicationSerializer
     :name,
     :model_number,
     :notes,
-    id: { optional: true },
-    category_id: { optional: true },
-    manufacturer_id: { optional: true },
+    :category_id,
+    :manufacturer_id,
   )
+
+  belongs_to :manufacturer, serializer: Manufacturers::OptionsSerializer, optional: true
+  belongs_to :category, serializer: Categories::OptionsSerializer, optional: true
 end

@@ -10,7 +10,7 @@ import { type IAsyncDropdown } from '.'
 interface IDepartmentsDropdown extends IAsyncDropdown<Schema.DepartmentsOptions> {}
 
 const DepartmentsDropdown = forwardRef<HTMLInputElement, IDepartmentsDropdown>((
-	{ label = 'Department', name = 'department_id', initialData = [], ...props },
+	{ label = 'Department', name = 'department_id', initialData, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getDepartmentsAsOptions({

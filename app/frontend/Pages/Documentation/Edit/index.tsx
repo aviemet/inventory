@@ -2,7 +2,6 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import DocumentationsForm from '../Form'
-import { omit } from 'lodash'
 
 interface IEditDocumentationProps {
 	documentation: Schema.DocumentationsEdit
@@ -23,9 +22,7 @@ const EditDocumentation = ({ documentation }: IEditDocumentationProps) => {
 				<DocumentationsForm
 					method='put'
 					to={ Routes.documentation(documentation.slug) }
-					documentation={
-						omit(documentation, ['id', 'created_by'])
-					}
+					documentation={ documentation }
 				/>
 			</Section>
 		</Page>

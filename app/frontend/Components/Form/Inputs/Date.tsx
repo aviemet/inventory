@@ -4,6 +4,7 @@ import DateInput, { type IDateProps } from '@/Components/Inputs/DateInput'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
+import { coerceArray } from '../../../lib/collections'
 
 interface IDateFormProps extends Omit<IDateProps, 'name'|'onChange'|'onBlur'>, IFormInputProps<Date> {
 	field?: boolean
@@ -21,10 +22,12 @@ const Date = ({
 }: IDateFormProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date>({ name, model })
 
-	const handleChange = (date: Date) => {
-		setValue(date)
+	const handleChange = (date: Date|Date[]) => {
+		const dateValue = Array.isArray(date) ? date[0] : date
 
-		if(onChange) onChange(date, form)
+		setValue(dateValue)
+
+		if(onChange) onChange(dateValue, form)
 	}
 
 	const handleBlur = () => {
@@ -47,14 +50,15 @@ const Date = ({
 			<DateInput
 				id={ id || inputId }
 				name={ inputName }
-				value={ value }
+				value={ coerceArray(value) }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				required={ required }
 				error={ error }
 				wrapper={ false }
 				{ ...props }
-			/></ConditionalWrapper>
+			/>
+		</ConditionalWrapper>
 	)
 }
 

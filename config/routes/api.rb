@@ -12,6 +12,8 @@ namespace :api do
   resources :categories, except: [:edit, :new], param: :slug
   resources :status_labels, except: [:edit, :new]
 
+  resources :assets, except: [:edit, :new, :create]
+
   resources :items, path: :hardware, except: [:edit, :new, :create] do
     resources :nics, only: [:create, :update]
   end

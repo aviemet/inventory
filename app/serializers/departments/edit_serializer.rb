@@ -9,4 +9,5 @@ class Departments::EditSerializer < ApplicationSerializer
     :notes,
   )
 
+  belongs_to :location, serializer: Locations::OptionsSerializer, optional: true
 end

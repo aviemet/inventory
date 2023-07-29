@@ -5,11 +5,9 @@ import ContractForm from '../Form'
 
 interface IUpdateContractProps{
 	contract: Schema.ContractsEdit
-	vendors: Schema.VendorsOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const EditContract = ({ contract, ...models }: IUpdateContractProps) => {
+const EditContract = ({ contract }: IUpdateContractProps) => {
 	const title = `Edit ${contract.name}`
 
 	return (
@@ -25,7 +23,6 @@ const EditContract = ({ contract, ...models }: IUpdateContractProps) => {
 					to={ Routes.contract(contract) }
 					method="patch"
 					contract={ contract }
-					{ ...models }
 				/>
 			</Section>
 		</Page>

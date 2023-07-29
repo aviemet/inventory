@@ -5,10 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewDepartmentProps {
 	department: Schema.DepartmentsFormData
-	locations: Schema.LocationsOptions[]
 }
 
-const NewDepartment = ({ ...data }: INewDepartmentProps) => {
+const NewDepartment = ({ department }: INewDepartmentProps) => {
 	const title = 'New Department'
 
 	return (
@@ -19,7 +18,7 @@ const NewDepartment = ({ ...data }: INewDepartmentProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<AccessoryForm to={ Routes.departments() } { ...data } />
+				<AccessoryForm to={ Routes.departments() } department={ department } />
 			</Section>
 		</Page>
 	)

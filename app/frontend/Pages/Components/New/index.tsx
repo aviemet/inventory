@@ -5,14 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewComponentProps {
 	component: Schema.ComponentsFormData
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const NewComponent = ({ ...data }: INewComponentProps) => {
+const NewComponent = ({ component }: INewComponentProps) => {
 	const title = 'New Component'
 
 	return (
@@ -23,7 +18,7 @@ const NewComponent = ({ ...data }: INewComponentProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<ComponentForm to={ Routes.components() } { ...data } />
+				<ComponentForm to={ Routes.components() } component={ component } />
 			</Section>
 		</Page>
 	)

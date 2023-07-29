@@ -13,4 +13,5 @@ class Tickets::EditSerializer < ApplicationSerializer
   has_many :assignments, serializer: TicketAssignments::EditSerializer
   has_many :assignees, serializer: PersonSerializer
   belongs_to :status, serializer: TicketStatuses::FormDataSerializer
+  belongs_to :asset, serializer: Assets::OptionsSerializer
 end

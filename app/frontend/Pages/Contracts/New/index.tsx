@@ -5,11 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewContractProps {
 	contract: Schema.ContractsFormData
-	vendors: Schema.VendorsOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const NewContract = ({ ...data }: INewContractProps) => {
+const NewContract = ({ contract }: INewContractProps) => {
 	const title = 'New Contract'
 
 	return (
@@ -20,7 +18,7 @@ const NewContract = ({ ...data }: INewContractProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<ContractForm to={ Routes.contracts() } { ...data } />
+				<ContractForm to={ Routes.contracts() } contract={ contract } />
 			</Section>
 		</Page>
 	)

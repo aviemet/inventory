@@ -1,3 +1,4 @@
+export { default as AssetsDropdown } from './AssetsDropdown'
 export { default as CategoriesDropdown } from './CategoriesDropdown'
 export { default as CurrenciesDropdown } from './CurrenciesDropdown'
 export { default as DepartmentsDropdown } from './DepartmentsDropdown'

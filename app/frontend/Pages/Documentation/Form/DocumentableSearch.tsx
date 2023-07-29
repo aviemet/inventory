@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useState } from 'react'
 import { SearchableDropdown, HiddenInput } from '@/Components/Inputs'
 import { ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
 import { Field } from '@/Components/Form'
-import { useForm, useInertiaForm, useInertiaInput } from 'use-inertia-form'
+import { useForm, useInertiaInput } from 'use-inertia-form'
 import { getSearchResults } from '@/queries/searches'
 
 interface IDocumentableSearch extends Omit<ISearchableDropdownProps, 'options'> {
@@ -33,8 +33,6 @@ const DocumentableSearch = forwardRef<HTMLInputElement, IDocumentableSearch>((
 			})
 		}
 	}, [])
-
-	console.log({ data })
 
 	const handleChange = (value: string|null) => {
 		if(!value) return
