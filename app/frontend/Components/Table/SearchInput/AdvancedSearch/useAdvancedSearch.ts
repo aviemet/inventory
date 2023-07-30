@@ -1,8 +1,7 @@
-import { ChangeEvent, useEffect, useMemo, useReducer, useState } from 'react'
-import { coerceArray, getInputOnChange } from '@/lib'
+import { useEffect, useMemo, useState } from 'react'
+import { coerceArray } from '@/lib'
 import { useLocation } from '@/lib/hooks'
-import { useDebouncedState, useDebouncedValue } from '@mantine/hooks'
-import { isUnset } from '../../../../lib/forms'
+import { isUnset } from '@/lib/forms'
 
 interface IOptions {
 	path: string
@@ -63,8 +62,20 @@ const useAdvancedSearch = (
 				location.params.set(key, String(value))
 			}
 		}
-		setSearchLink(`${location.pathname}?${location.params.toString()}`)
+
+		const searchString = location.params.toString()
+		setSearchLink(`${location.pathname}?${searchString}${searchString === '' ? '' : '&adv=true'}`)
 	}, [values])
+
+	const resetValues = () => {
+		setValues(inputParams.reduce(
+			(data: Map<TInputParamName, unknown>, param) => {
+				data.set(param.name, param.default || '')
+				return data
+			},
+			new Map(),
+		))
+	}
 
 	return {
 		values,
@@ -79,7 +90,7 @@ const useAdvancedSearch = (
 			newValues.set(name, value)
 			return newValues
 		}),
-		reset: () => setValues(new Map(startingValues)),
+		reset: resetValues,
 	}
 }
 

@@ -8,6 +8,7 @@ import ManufacturersDropdown from '@/Components/Dropdowns/ManufacturersDropdown'
 import VendorsDropdown from '@/Components/Dropdowns/VendorsDropdown'
 import DepartmentsDropdown from '@/Components/Dropdowns/DepartmentsDropdown'
 import ModelsDropdown from '@/Components/Dropdowns/ModelsDropdown'
+import { DateInputValue } from '@/Components/Inputs/DateInput'
 
 const dateRangeOptions = [
 	{ label: 'Exact Date', value: 'exact' },
@@ -30,7 +31,6 @@ const AdvancedItemsSearch = () => {
 		{ name: 'created_range_type', default: 'exact', dependent: 'created_at' },
 		{ name: 'created_at' },
 	])
-
 
 	return (
 		<>
@@ -96,7 +96,7 @@ const AdvancedItemsSearch = () => {
 					/>
 					<DateInput
 						label="Date"
-						{ ...inputProps<Date[]>('created_at') }
+						{ ...inputProps<DateInputValue>('created_at') }
 						onChange={ value => setInputValue('created_at', value) }
 						type={ values.get('created_range_type') === 'range' ? 'range' : 'default' }
 					/>

@@ -11,7 +11,11 @@ module Searchable
   #   To sort by a method on the model class which is not a database field, use `self`: "self.calculated_number"
   ##
   def search(model, sortable_fields = [])
-    sort(search_by_params(model), model, sortable_fields)
+    sort(
+      advanced_search(search_by_params(model)),
+      model,
+      sortable_fields,
+    )
   end
 
   protected
@@ -23,6 +27,22 @@ module Searchable
     return model unless params[:search]
 
     model.where(id: model.search(params[:search]).pluck(:id))
+  end
+
+  ##
+  # Filters ActiveRecord relation by advanced search params
+  ##
+  def advanced_search(model)
+    return model unless advanced_search_fields && params[:adv]
+
+    advanced_search_fields.each do |field|
+      if params[field]
+        # TODO: This is where the magic happens
+        # model = model.where("#{field} ILIKE ?", "%#{params[field]}%")
+      end
+    end
+
+    model
   end
 
   ##
