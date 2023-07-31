@@ -33,7 +33,7 @@ module Searchable
   # Filters ActiveRecord relation by advanced search params
   ##
   def advanced_search(model)
-    return model unless advanced_search_fields && params[:adv]
+    return model unless self.respond_to?('advanced_search_fields') && params[:adv]
 
     advanced_search_fields.each do |field|
       if params[field]
