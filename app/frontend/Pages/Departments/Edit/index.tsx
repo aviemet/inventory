@@ -5,10 +5,9 @@ import { Routes } from '@/lib'
 
 interface IEditDepartmentProps{
 	department: Schema.DepartmentsEdit
-	locations: Schema.LocationsOptions[]
 }
 
-const EditDepartment = ({ department, ...models }: IEditDepartmentProps) => {
+const EditDepartment = ({ department }: IEditDepartmentProps) => {
 	const title = `Edit ${department.name}`
 
 	return (
@@ -20,7 +19,7 @@ const EditDepartment = ({ department, ...models }: IEditDepartmentProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<DepartmentForm to={ Routes.department(department) } method="patch" department={ department } { ...models } />
+				<DepartmentForm to={ Routes.department(department) } method="patch" department={ department } />
 			</Section>
 		</Page>
 	)

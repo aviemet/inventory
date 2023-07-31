@@ -1,17 +1,21 @@
 import React, { useCallback } from 'react'
 import Label from './Label'
-import { DatePickerInput, type DatePickerInputProps } from '@mantine/dates'
+import {
+	DatePickerInput,
+	type DatesRangeValue,
+	type DatePickerInputProps,
+} from '@mantine/dates'
 import { CalendarIcon } from '../Icons'
 import { IInputProps } from '.'
 import InputWrapper from './InputWrapper'
 import { coerceArray, isUnset } from '@/lib'
 import dayjs from 'dayjs'
 
-export interface IDateProps extends Omit<DatePickerInputProps, 'value'|'onChange'>, IInputProps {
+export type DateInputValue = Date | DatesRangeValue | Date[]
+
+export interface IDateProps extends DatePickerInputProps, IInputProps {
 	name?: string
 	id?: string
-	value?: Date[]
-	onChange?: (value: Date[]) => void
 	error?: string | string[]
 }
 
@@ -27,7 +31,6 @@ const DateInputComponent = ({
 	valueFormat = 'L',
 	wrapper,
 	wrapperProps,
-	onChange,
 	...props
 }: IDateProps) => {
 	const inputId = id || name
@@ -39,7 +42,7 @@ const DateInputComponent = ({
 			return [valueArray[0], valueArray[1] || dayjs(valueArray[0]).add(1, 'day').toDate()]
 		}
 
-		if(type === 'default') return isUnset(valueArray[0]) ? null : valueArray[0]
+		if(type === 'default') return isUnset(valueArray[0]) ? undefined : valueArray[0]
 
 		return valueArray
 	}, [type, value])
@@ -58,6 +61,7 @@ const DateInputComponent = ({
 				size={ size }
 				valueFormat={ valueFormat }
 				icon={ <CalendarIcon /> }
+				clearable
 				{ ...props }
 			/>
 		</InputWrapper>

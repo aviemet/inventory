@@ -298,7 +298,7 @@ if Rails.env == "development"
       vendor: Vendor.find_by_slug("amazon"),
       default_location: Location.first,
       status_label: StatusLabel.first,
-      company:,
+      company: Company.first,
     })
   end
 
@@ -312,10 +312,13 @@ if Rails.env == "development"
   end
 
   if Ticket.count == 0
+    company = Company.first
+
     ticket = Ticket.create({
       subject: "Support request",
       created_by: Person.second,
       primary_contact: Person.second,
+      company:,
     })
     ticket.assignees << Person.first
     ticket.messages << TicketMessage.new({
@@ -353,7 +356,7 @@ if Rails.env == "development"
         vlan_id: 40,
         company:,
       }
-    ].each{ |network|  Network.create!(network) }
+    ].each{ |network| Network.create!(network) }
   end
 
   if Smtp.count == 0

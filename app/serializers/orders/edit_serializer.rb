@@ -2,6 +2,7 @@ class Orders::EditSerializer < ApplicationSerializer
   object_as :order
 
   attributes(
+    :id,
     :number,
     :user_id,
     :notes,
@@ -24,4 +25,6 @@ class Orders::EditSerializer < ApplicationSerializer
     :created_at,
     :updated_at,
   )
+
+  belongs_to :vendor, serializer: Vendors::OptionsSerializer
 end

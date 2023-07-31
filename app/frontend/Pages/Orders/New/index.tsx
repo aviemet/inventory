@@ -5,10 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewOrderProps {
 	order: Schema.Order
-	vendors: Schema.Vendor[]
 }
 
-const NewOrder = ({ ...data }: INewOrderProps) => {
+const NewOrder = ({ order }: INewOrderProps) => {
 	const title = 'New Purchase Order'
 
 	return (
@@ -19,7 +18,7 @@ const NewOrder = ({ ...data }: INewOrderProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<OrderForm to={ Routes.orders() } { ...data } />
+				<OrderForm to={ Routes.orders() } order={ order } />
 			</Section>
 		</Page>
 	)

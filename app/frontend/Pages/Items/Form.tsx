@@ -11,9 +11,10 @@ import {
 	DynamicInputs,
 } from '@/Components/Form'
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Dropdowns'
-import CheckboxComponent from '@/Components/Inputs/Checkbox'
-import { Group } from '@/Components'
+import { Checkbox as CheckboxInput } from '@/Components/Inputs'
+import { Box, Group } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
+import { coerceArray } from '@/lib'
 
 type TItemFormData = {
 	item: Schema.ItemsFormData
@@ -42,16 +43,18 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 				<ModelsDropdown
 					modelCategory='Item'
 					errorKey="item.model"
+					initialData={ coerceArray(item?.model) }
 				/>
 
 				<TextInput name="serial" label="Serial" />
 
 				<TextInput name="asset_tag" label="Asset Tag" />
 
-				<CheckboxComponent
+				<CheckboxInput
 					label="Static IP Assignment"
 					checked={ staticIp }
 					onChange={ e => setStaticIp(e.target.checked) }
+					mt="md"
 				/>
 
 				{ staticIp && <DynamicInputs model="nics" emptyData={ {
@@ -67,7 +70,7 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown />
+				<VendorsDropdown initialData={ coerceArray(item?.vendor) } />
 
 				<CurrencyInput name="cost" label="Cost" />
 
@@ -78,6 +81,7 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
+					initialData={ coerceArray(item?.default_location) }
 					required
 				/>
 

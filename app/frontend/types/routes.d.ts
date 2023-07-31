@@ -150,6 +150,28 @@ export const apiAccessory: ((
 
 /**
  * Generates rails route to
+ * /api/assets/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAsset: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/assets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAssets: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/options/assets(.:format)
  * @param {object | undefined} options
  * @returns {string} route path

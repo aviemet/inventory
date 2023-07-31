@@ -11,9 +11,9 @@ export const isUnset = <T extends any>(v: T) => {
 		return v === 0 ? false : !Boolean(v)
 	}
 
-	if(v instanceof Date) {
-		return false
-	}
+	if(v instanceof Date) return false
+
+	if(Array.isArray(v)) return v.some(el => el !== '' || el !== undefined)
 
 	return isEmpty(v)
 }

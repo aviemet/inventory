@@ -5,11 +5,9 @@ import { Routes } from '@/lib'
 
 interface IEditLocationProps {
 	location: Schema.LocationsEdit
-	locations: Schema.LocationsOptions[]
-	currencies: any
 }
 
-const EditLocation = ({ location, ...models }: IEditLocationProps) => {
+const EditLocation = ({ location }: IEditLocationProps) => {
 	const title = 'Edit Location'
 
 	return (
@@ -25,7 +23,6 @@ const EditLocation = ({ location, ...models }: IEditLocationProps) => {
 					to={ Routes.location(location.slug) }
 					method="patch"
 					location={ location }
-					{ ...models }
 				/>
 			</Section>
 		</Page>

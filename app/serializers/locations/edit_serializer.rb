@@ -10,4 +10,6 @@ class Locations::EditSerializer < ApplicationSerializer
     :parent_id,
     :currency,
   )
+
+  belongs_to :parent, serializer: Locations::OptionsSerializer
 end

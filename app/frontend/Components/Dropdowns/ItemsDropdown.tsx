@@ -1,17 +1,15 @@
 import React, { forwardRef } from 'react'
-import { SearchableDropdown as FormDropdown } from '@/Components/Form'
-import { SearchableDropdown as InputDropdown } from '@/Components/Inputs'
+import { Select as FormSelect } from '@/Components/Form'
+import { Select as InputSelect } from '@/Components/Inputs'
 import { isEmpty } from 'lodash'
 import { getDepartmentsAsOptions } from '@/queries/departments'
 import { inFormContext } from '@/lib'
 import { type IAsyncDropdown } from '.'
 
-interface IItemsDropdown extends IAsyncDropdown<Schema.ItemsOptions> {
-	items?: Schema.Item[]
-}
+interface IItemsDropdown extends IAsyncDropdown<Schema.ItemsOptions> {}
 
 const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdown>((
-	{ label = 'Item', name = 'item_id', items, initialData = [], ...props },
+	{ label = 'Item', name = 'item_id', initialData, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getDepartmentsAsOptions({
@@ -23,18 +21,23 @@ const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdown>((
 		ref,
 		label,
 		name,
-		options: data,
+		options: !data ? [] : data.map(item => ({
+			label: item.name,
+			value: String(item.id),
+		})),
 		onDropdownOpen: () => {
 			if(isEmpty(data) || isStale) refetch()
 		},
+		searchable: true,
+		clearable: true,
 		...props,
 	}
 
 	if(inFormContext()) {
-		return <FormDropdown { ...commonProps } />
+		return <FormSelect { ...commonProps } />
 	}
 
-	return <InputDropdown { ...commonProps } />
+	return <InputSelect { ...commonProps } />
 })
 
 export default ItemsDropdown

@@ -5,14 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewItemProps {
 	item: Schema.ItemsFormData
-	// models: Schema.ModelsOptions[]
-	// vendors: Schema.VendorsOptions[]
-	// locations: Schema.LocationsOptions[]
-	// manufacturers: Schema.ManufacturersOptions[]
-	// categories: Schema.CategoriesOptions[]
 }
 
-const NewItem = ({ ...data }: INewItemProps) => {
+const NewItem = ({ item }: INewItemProps) => {
 	const title = 'New Hardware Asset'
 
 	return (
@@ -23,7 +18,7 @@ const NewItem = ({ ...data }: INewItemProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<ItemForm to={ Routes.items() } { ...data } />
+				<ItemForm to={ Routes.items() } item={ item } />
 			</Section>
 		</Page>
 	)

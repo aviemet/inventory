@@ -7,9 +7,14 @@ export const query = <T>(
 	fn: () => Promise<T>,
 	options?: ReactQueryOptions<T>,
 ) => {
+	const queryOptions = {
+		staleTime: 0,
+		...options,
+	}
+
 	return useQuery<T>({
 		queryKey: key,
 		queryFn: fn,
-		...options,
+		...queryOptions,
 	})
 }

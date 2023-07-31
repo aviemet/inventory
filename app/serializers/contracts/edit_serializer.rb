@@ -15,4 +15,6 @@ class Contracts::EditSerializer < ApplicationSerializer
     :category_id,
   )
 
+  belongs_to :vendor, serializer: Vendors::OptionsSerializer
+  belongs_to :category, serializer: Categories::OptionsSerializer
 end

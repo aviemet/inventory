@@ -1,8 +1,8 @@
 class TicketsController < ApplicationController
   include Searchable
 
-  expose :tickets, -> { search(Ticket.all, sortable_fields) }
-  expose :ticket
+  expose :tickets, -> { search(@active_company.tickets.includes_associated.all, sortable_fields) }
+  expose :ticket, scope: -> { @active_company.tickets }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /tickets
   def index
@@ -51,6 +51,7 @@ class TicketsController < ApplicationController
   # POST /tickets
   def create
     authorize Ticket
+    ticket.company = @active_company
     if ticket.save
       redirect_to ticket, notice: 'Ticket was successfully created'
     else

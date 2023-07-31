@@ -5,11 +5,9 @@ import CategoryForm from '../Form'
 
 interface INewCategoryProps {
 	category: Schema.CategoriesFormData
-	vendors: Schema.VendorsOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const NewCategory = ({ ...data }: INewCategoryProps) => {
+const NewCategory = ({ category }: INewCategoryProps) => {
 	const title = 'New Category'
 
 	return (
@@ -20,7 +18,7 @@ const NewCategory = ({ ...data }: INewCategoryProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<CategoryForm to={ Routes.categories() } { ...data } />
+				<CategoryForm to={ Routes.categories() } category={ category } />
 			</Section>
 		</Page>
 	)

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
-import { SearchableDropdown as FormDropdown } from '@/Components/Form'
-import { SearchableDropdown as InputDropdown } from '@/Components/Inputs'
+import { Select as FormSelect } from '@/Components/Form'
+import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, inFormContext } from '@/lib'
 import ModelsForm from '@/Pages/Models/Form'
 import { getModelsAsOptions } from '@/queries/models'
@@ -12,7 +12,7 @@ interface IModelsDropdown extends IAsyncDropdown<Schema.ModelsOptions> {
 }
 
 const ModelsDropdown = forwardRef<HTMLInputElement, IModelsDropdown>((
-	{ label = 'Model', name = 'model_id', modelCategory, initialData = [], ...props },
+	{ label = 'Model', name = 'model_id', modelCategory, initialData, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getModelsAsOptions(modelCategory, {
@@ -24,16 +24,21 @@ const ModelsDropdown = forwardRef<HTMLInputElement, IModelsDropdown>((
 		ref,
 		label,
 		name,
-		options: data,
+		options: !data ? [] : data.map(model => ({
+			label: model.name,
+			value: String(model.id),
+		})),
 		onDropdownOpen: () => {
 			if(isEmpty(data) || isStale) refetch()
 		},
+		searchable: true,
+		clearable: true,
 		...props,
 	}
 
 	if(inFormContext()) {
 		return (
-			<FormDropdown
+			<FormSelect
 				newForm={ <ModelsForm
 					category={ modelCategory }
 					to={ Routes.apiModels() }
@@ -43,7 +48,7 @@ const ModelsDropdown = forwardRef<HTMLInputElement, IModelsDropdown>((
 		)
 	}
 
-	return <InputDropdown { ...commonProps } />
+	return <InputSelect { ...commonProps } />
 })
 
 export default ModelsDropdown

@@ -563,6 +563,23 @@ export const apiAccessory = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}},
 
 /**
  * Generates rails route to
+ * /api/assets/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAsset = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /api/assets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAssets = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"assets"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /api/options/assets(.:format)
  * @param {object | undefined} options
  * @returns {string} route path

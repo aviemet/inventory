@@ -5,12 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewPersonProps {
 	person: Schema.PeopleFormData
-	departments: Schema.DepartmentsOptions[]
-	people: Schema.PeopleOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
-const New = ({ ...data }: INewPersonProps) => {
+const New = ({ person }: INewPersonProps) => {
 	const title = 'New Person'
 
 	return (
@@ -21,7 +18,7 @@ const New = ({ ...data }: INewPersonProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<NewPersonForm to={ Routes.people() } { ...data } />
+				<NewPersonForm to={ Routes.people() } person={ person } />
 			</Section>
 		</Page>
 	)

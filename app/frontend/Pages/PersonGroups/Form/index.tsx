@@ -2,12 +2,12 @@ import React, { useCallback, useState } from 'react'
 import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 import { Table } from '@/Components'
+import { Routes, exclude } from '@/lib'
 import { createContext, usePageProps } from '@/lib/hooks'
 import SwitchRow from './SwitchRow'
 import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'
 import { emptyGroup } from './formData'
-import { Routes, exclude } from '@/lib'
 
 export type FormData = {
 	person_group: Schema.PersonGroupsFormData

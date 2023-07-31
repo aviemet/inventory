@@ -125,6 +125,10 @@ class ItemsController < ApplicationController
     %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
+  def advanced_search_fields
+    %w(name asset_tag serial cost purchased_at requestable models.id vendor.id category.id manufacturer.id department.id created_at).freeze
+  end
+
   def item_params
     params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :status_label_id, :purchased_at, :requestable, nics: [:mac, :ip])
   end

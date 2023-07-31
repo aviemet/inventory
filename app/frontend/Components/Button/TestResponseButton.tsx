@@ -14,6 +14,10 @@ interface ITestResponseButtonProps extends ButtonProps {
 	data: any
 }
 
+/**
+ * Generic component for testing the response from a remote endpoint
+ * Displays success if the endpoint returns a successful response, error upon any errors *
+ */
 const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data, ...props }: ITestResponseButtonProps) => {
 	const [errorMessage, setErrorMessage] = useState('')
 

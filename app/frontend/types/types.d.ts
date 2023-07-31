@@ -1,5 +1,5 @@
 import React from 'react'
-import { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
+import { type ISelectProps } from '@/Components/Inputs/Select'
 import { type SelectProps, type InputProps } from '@mantine/core'
 
 declare global {
