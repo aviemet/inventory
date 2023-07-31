@@ -11,8 +11,8 @@ import {
 	DynamicInputs,
 } from '@/Components/Form'
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Dropdowns'
-import CheckboxComponent from '@/Components/Inputs/Checkbox'
-import { Group } from '@/Components'
+import { Checkbox as CheckboxInput } from '@/Components/Inputs'
+import { Box, Group } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 
@@ -50,10 +50,11 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 
 				<TextInput name="asset_tag" label="Asset Tag" />
 
-				<CheckboxComponent
+				<CheckboxInput
 					label="Static IP Assignment"
 					checked={ staticIp }
 					onChange={ e => setStaticIp(e.target.checked) }
+					mt="md"
 				/>
 
 				{ staticIp && <DynamicInputs model="nics" emptyData={ {
