@@ -1,7 +1,6 @@
 class Model < ApplicationRecord
   include Ownable
   include Fieldable
-  include PgSearch::Model
   include Categorizable
   include Documentable
 

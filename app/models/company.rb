@@ -1,6 +1,5 @@
 class Company < ApplicationRecord
   include Contactable
-  include PgSearch::Model
   include Documentable
 
   before_destroy :safely_orphan_or_destroy_dependencies

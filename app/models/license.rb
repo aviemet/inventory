@@ -3,7 +3,6 @@ class License < ApplicationRecord
   include Assignable::Quantity
   include Purchasable
   include Fieldable
-  include PgSearch::Model
   include Categorizable
   include Documentable
 

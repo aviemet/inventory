@@ -1,7 +1,6 @@
 class Department < ApplicationRecord
   include Contactable
   include Ownable
-  include PgSearch::Model
   include Documentable
 
   multisearchable(

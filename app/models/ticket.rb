@@ -1,6 +1,5 @@
 class Ticket < ApplicationRecord
   include Ownable
-  include PgSearch::Model
 
   multisearchable(
     against: [:number, :subject],

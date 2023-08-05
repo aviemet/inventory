@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  include PgSearch::Model
 
   multisearchable(
     against: [:email],

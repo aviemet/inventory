@@ -3,7 +3,6 @@ class Person < ApplicationRecord
   include Contactable
   include AssignToable
   include Fieldable
-  include PgSearch::Model
   include Documentable
 
   multisearchable(

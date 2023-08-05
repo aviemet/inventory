@@ -23,11 +23,11 @@ const AdvancedItemsSearch = () => {
 		{ name: 'model' },
 		{ name: 'asset_tag' },
 		{ name: 'serial' },
-		{ name: 'category.id' },
-		{ name: 'manufacturer.id' },
-		{ name: 'vendor.id' },
+		{ name: 'category[id]' },
+		{ name: 'manufacturer[id]' },
+		{ name: 'vendor[id]' },
 		{ name: 'cost' },
-		{ name: 'department.id' },
+		{ name: 'department[id]' },
 		{ name: 'created_range_type', default: 'exact', dependent: 'created_at' },
 		{ name: 'created_at' },
 	])
@@ -43,8 +43,8 @@ const AdvancedItemsSearch = () => {
 							onChange={ e => setInputValue('name', e.target.value) }
 						/>
 						<CategoriesDropdown
-							{ ...inputProps('category.id') }
-							onChange={ value => setInputValue('category.id', value) }
+							{ ...inputProps('category[id]') }
+							onChange={ value => setInputValue('category[id]', value) }
 							categorizable_type="Item"
 						/>
 					</Group>
@@ -55,18 +55,18 @@ const AdvancedItemsSearch = () => {
 							onChange={ value => setInputValue('model', value) }
 						/>
 						<ManufacturersDropdown
-							{ ...inputProps('manufacturer.id') }
-							onChange={ value => setInputValue('manufacturer.id', value) }
+							{ ...inputProps('manufacturer[id]') }
+							onChange={ value => setInputValue('manufacturer[id]', value) }
 						/>
 					</Group>
 					<Group grow>
 						<VendorsDropdown
-							{ ...inputProps('vendor.id') }
-							onChange={ value => setInputValue('vendor.id', value) }
+							{ ...inputProps('vendor[id]') }
+							onChange={ value => setInputValue('vendor[id]', value) }
 						/>
 						<DepartmentsDropdown
-							{ ...inputProps('department.id') }
-							onChange={ value => setInputValue('department.id', value) }
+							{ ...inputProps('department[id]') }
+							onChange={ value => setInputValue('department[id]', value) }
 						/>
 					</Group>
 					<Group grow>

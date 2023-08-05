@@ -1,6 +1,5 @@
 class Smtp < ApplicationRecord
   include Ownable
-  include PgSearch::Model
 
   pg_search_scope(
     :search,

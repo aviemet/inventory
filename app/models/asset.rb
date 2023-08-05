@@ -2,13 +2,13 @@ class Asset < ApplicationRecord
   include Ownable
   include Purchasable
   include Fieldable
-  include PgSearch::Model
   include Assignable
   include Documentable
 
   pg_search_scope(
     :search,
-    against: [:name, :asset_tag, :serial, :cost_cents], associated_against: {
+    against: [:name, :asset_tag, :serial, :cost_cents],
+    associated_against: {
       model: [:name, :model_number],
       vendor: [:name],
       default_location: [:name],

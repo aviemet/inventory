@@ -1,6 +1,5 @@
 class PersonGroup < ApplicationRecord
   include Ownable
-  include PgSearch::Model
 
   multisearchable(
     against: [:name],

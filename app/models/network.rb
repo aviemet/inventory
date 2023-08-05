@@ -1,6 +1,5 @@
 class Network < ApplicationRecord
   include Ownable
-  include PgSearch::Model
   include Documentable
 
   multisearchable(

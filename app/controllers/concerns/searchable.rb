@@ -3,19 +3,29 @@
 module Searchable
   extend ActiveSupport::Concern
 
-  ##
-  # Searches and sorts model using search params
-  # model: ActiveRecord object
-  # sortable_fields: string array of field names which the model can be sorted by.
-  #   Sortable fields in nested models use dot-notation: "related_model.field"
-  #   To sort by a method on the model class which is not a database field, use `self`: "self.calculated_number"
-  ##
-  def search(model, sortable_fields = [])
-    sort(
-      advanced_search(search_by_params(model)),
-      model,
-      sortable_fields,
-    )
+  included do
+    ##
+    # Searches and sorts model using search params
+    # model: ActiveRecord object
+    # sortable_fields: string array of field names which the model can be sorted by.
+    #   Sortable fields in nested models use dot-notation: "related_model.field"
+    #   To sort by a method on the model class which is not a database field, use `self`: "self.calculated_number"
+    ##
+    def search(model, sortable_fields = [])
+      sort(
+        advanced_search(basic_search(model)),
+        model,
+        sortable_fields,
+      )
+    end
+
+    # rubocop:disable Lint/ConstantDefinitionInBlock
+    ADVANCED_SEARCH_METHODS = {
+      default: ->(model, key, value) { model.dynamic_search(value, key) },
+      id: ->(model, key, value) { model.joins(key.to_sym).where("#{key}.id = ?", value[:id]) },
+      created_at: ->(model, key, value) { model.where("#{key} = ?", value.to_date.beginning_of_day..value.to_date.end_of_day) }
+    }
+    # rubocop:enable Lint/ConstantDefinitionInBlock
   end
 
   protected
@@ -23,26 +33,32 @@ module Searchable
   ##
   # Filters ActiveRecord relation by search params
   ##
-  def search_by_params(model)
+  def basic_search(model)
     return model unless params[:search]
 
-    model.where(id: model.search(params[:search]).pluck(:id))
+    model.search(params[:search])
   end
 
   ##
   # Filters ActiveRecord relation by advanced search params
   ##
   def advanced_search(model)
-    return model unless self.respond_to?('advanced_search_fields') && params[:adv]
+    return model unless defined?('advanced_search_params') && params[:adv] = "true"
 
-    advanced_search_fields.each do |field|
-      if params[field]
-        # TODO: This is where the magic happens
-        # model = model.where("#{field} ILIKE ?", "%#{params[field]}%")
-      end
+    advanced_search_params.each do |key, value|
+      apply_search = ADVANCED_SEARCH_METHODS[key.to_sym] ||
+                     (nested_key_with_id?(advanced_search_params[key]) && ADVANCED_SEARCH_METHODS[:id]) ||
+                     ADVANCED_SEARCH_METHODS[:default]
+      next unless apply_search
+
+      model = apply_search.call(model, key, value)
     end
 
     model
+  end
+
+  def nested_key_with_id?(nested_param)
+    nested_param.is_a?(ActionController::Parameters) && nested_param.key?(:id)
   end
 
   ##

@@ -1,6 +1,5 @@
 class Contract < ApplicationRecord
   include Ownable
-  include PgSearch::Model
   include Categorizable
   include Documentable
 

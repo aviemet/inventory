@@ -3,7 +3,6 @@ class Location < ApplicationRecord
   include AssignToable
   include Contactable
   include Fieldable
-  include PgSearch::Model
   include Documentable
 
   multisearchable(

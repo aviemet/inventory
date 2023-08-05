@@ -1,7 +1,6 @@
 class Manufacturer < ApplicationRecord
   include Ownable
   include Contactable
-  include PgSearch::Model
   include Documentable
 
   multisearchable(

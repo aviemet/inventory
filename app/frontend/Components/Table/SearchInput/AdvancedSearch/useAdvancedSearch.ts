@@ -43,6 +43,8 @@ const useAdvancedSearch = (
 
 	// Build URL params with values changes
 	useEffect(() => {
+		location.params.delete('adv')
+
 		for(const [key, value] of values) {
 			const inputParam = inputParams.find(param => param.name === key)
 
@@ -63,8 +65,13 @@ const useAdvancedSearch = (
 			}
 		}
 
-		const searchString = location.params.toString()
-		setSearchLink(`${location.pathname}?${searchString}${searchString === '' ? '' : '&adv=true'}`)
+		if(location.params.size > 0) {
+			location.params.set('adv', 'true')
+			setSearchLink(`${location.pathname}?${location.params.toString()}`)
+		} else {
+			setSearchLink(`${location.pathname}`)
+		}
+		// setSearchLink(`${location.pathname}?${searchString}${searchString === '' ? '' : '&adv=true'}`)
 	}, [values])
 
 	const resetValues = () => {

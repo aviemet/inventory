@@ -1,6 +1,5 @@
 class Documentation < ApplicationRecord
   include Ownable
-  include PgSearch::Model
 
   multisearchable(
     against: [:title],
