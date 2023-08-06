@@ -38,6 +38,7 @@ const AdvancedItemsSearch = () => {
 				<Box sx={ { flex: 1 } }>
 					<Group grow>
 						<TextInput
+							clearable
 							label="Name"
 							{ ...inputProps('name') }
 							onChange={ e => setInputValue('name', e.target.value) }
@@ -71,11 +72,13 @@ const AdvancedItemsSearch = () => {
 					</Group>
 					<Group grow>
 						<TextInput
+							clearable
 							label="Asset Tag"
 							{ ...inputProps('asset_tag') }
 							onChange={ e => setInputValue('asset_tag', e.target.value) }
 						/>
 						<TextInput
+							clearable
 							label="Serial"
 							{ ...inputProps('serial') }
 							onChange={ e => setInputValue('serial', e.target.value) }

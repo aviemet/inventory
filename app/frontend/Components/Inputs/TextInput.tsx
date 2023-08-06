@@ -1,10 +1,14 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { TextInput, type TextInputProps } from '@mantine/core'
 import Label from './Label'
 import { IInputProps } from '.'
 import InputWrapper from './InputWrapper'
+import { CrossIcon } from '../Icons'
+import { isUnset } from '@/lib'
 
-export interface ITextInputProps extends TextInputProps, IInputProps {}
+export interface ITextInputProps extends TextInputProps, IInputProps {
+	clearable?: boolean
+}
 
 const TextInputComponent = forwardRef<HTMLInputElement, ITextInputProps>((
 	{
@@ -16,10 +20,33 @@ const TextInputComponent = forwardRef<HTMLInputElement, ITextInputProps>((
 		radius = 'xs',
 		wrapper,
 		wrapperProps,
+		clearable = false,
+		value,
+		onChange,
+		readOnly,
 		...props
 	},
 	ref,
 ) => {
+	const [localValue, setLocalValue] = useState(value || '')
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if(onChange) {
+			onChange(e)
+		} else {
+			setLocalValue(e.target.value)
+		}
+	}
+
+	const handleClear = () => {
+		const fakeEvent = {
+			target: {
+				value: '',
+			},
+		} as React.ChangeEvent<HTMLInputElement>
+		handleChange(fakeEvent)
+	}
+
 	const inputId = id || name
 
 	return (
@@ -31,9 +58,12 @@ const TextInputComponent = forwardRef<HTMLInputElement, ITextInputProps>((
 				ref={ ref }
 				name={ name }
 				id={ inputId }
+				value={ value || localValue }
+				onChange={ handleChange }
 				required={ required }
 				size={ size }
 				radius={ radius }
+				rightSection={ !readOnly && clearable && !isUnset(value) && <CrossIcon onClick={ handleClear } /> }
 				{ ...props }
 			/>
 		</InputWrapper>

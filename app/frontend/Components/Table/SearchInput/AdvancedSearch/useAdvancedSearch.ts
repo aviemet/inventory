@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { coerceArray } from '@/lib'
 import { useLocation } from '@/lib/hooks'
 import { isUnset } from '@/lib/forms'
+import { router } from '@inertiajs/react'
 
 interface IOptions {
 	path: string
@@ -43,6 +44,7 @@ const useAdvancedSearch = (
 
 	// Build URL params with values changes
 	useEffect(() => {
+		console.log({ values })
 		location.params.delete('adv')
 
 		for(const [key, value] of values) {
@@ -71,7 +73,6 @@ const useAdvancedSearch = (
 		} else {
 			setSearchLink(`${location.pathname}`)
 		}
-		// setSearchLink(`${location.pathname}?${searchString}${searchString === '' ? '' : '&adv=true'}`)
 	}, [values])
 
 	const resetValues = () => {
@@ -91,6 +92,11 @@ const useAdvancedSearch = (
 			name,
 			value: values.get(name) as T,
 			mb: 10,
+			onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => {
+				if(e.key === 'Enter') {
+					router.get(searchLink, undefined, { preserveScroll: true })
+				}
+			},
 		}),
 		setInputValue: (name: TInputParamName, value: unknown) => setValues((prevValues) => {
 			const newValues = new Map(prevValues)

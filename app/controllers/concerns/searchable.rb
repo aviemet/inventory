@@ -21,8 +21,8 @@ module Searchable
 
     # rubocop:disable Lint/ConstantDefinitionInBlock
     ADVANCED_SEARCH_METHODS = {
-      default: ->(model, key, value) { model.dynamic_search(value, key) },
-      id: ->(model, key, value) { model.joins(key.to_sym).where("#{key}.id = ?", value[:id]) },
+      default: ->(model, key, value) { model.where("#{model.table_name}.#{key} ILIKE ?", "%#{value}%") },
+      id: ->(model, key, value) { model.joins(key.to_sym).where("#{key.pluralize}.id = ?", value[:id]) },
       created_at: ->(model, key, value) { model.where("#{key} = ?", value.to_date.beginning_of_day..value.to_date.end_of_day) }
     }
     # rubocop:enable Lint/ConstantDefinitionInBlock
