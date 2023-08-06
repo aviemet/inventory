@@ -103,7 +103,6 @@ const AdvancedItemsSearch = () => {
 						onChange={ value => setInputValue('created_at', value) }
 						type={ values.get('created_range_type') === 'range' ? 'range' : 'default' }
 					/>
-
 				</Box>
 			</Flex>
 

@@ -16,7 +16,7 @@ type TInputParam<T = string> = {
 
 /**
  * Hook for building advanced search interfaces
- * @param inputParams Array of objects with the following structure: { label: string, name: string, default?: unknown }
+ * @param inputParams Array of objects with the following structure: { label: string, name: string, default?: unknown, dependent?: string|string[] }
  * @param options Options
  * @returns link: A URL with the search parameters represented as GET params,
  *  reset(): A method to clear all search values,
@@ -42,37 +42,9 @@ const useAdvancedSearch = (
 
 	const [values, setValues] = useState(startingValues)
 
-	// Build URL params with values changes
+	// Build URL params when input values change
 	useEffect(() => {
-		console.log({ values })
-		location.params.delete('adv')
-
-		for(const [key, value] of values) {
-			const inputParam = inputParams.find(param => param.name === key)
-
-			if(isUnset(value)) {
-				location.params.delete(key)
-			} else if(inputParam?.dependent) {
-				let shouldBeIncluded = true
-				coerceArray(inputParam.dependent).forEach(dependentParam => {
-					if(isUnset(values.get(dependentParam))) {
-						shouldBeIncluded = false
-					}
-				})
-				if(!shouldBeIncluded) {
-					location.params.delete(key)
-				}
-			} else {
-				location.params.set(key, String(value))
-			}
-		}
-
-		if(location.params.size > 0) {
-			location.params.set('adv', 'true')
-			setSearchLink(`${location.pathname}?${location.params.toString()}`)
-		} else {
-			setSearchLink(`${location.pathname}`)
-		}
+		setSearchLink(buildSearchLink(location.params, inputParams, values))
 	}, [values])
 
 	const resetValues = () => {
@@ -108,3 +80,43 @@ const useAdvancedSearch = (
 }
 
 export default useAdvancedSearch
+
+function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInputParam[], values: Map<string, unknown>) {
+	urlParams.delete('adv')
+
+	for(const [key, value] of values) {
+		const inputParam = inputParams.find(param => param.name === key)
+
+		// Delete key if input has been emptied
+		if(isUnset(value)) {
+			urlParams.delete(key)
+			continue
+		}
+
+		// Exclude key if dependents are empty
+		if(inputParam?.dependent) {
+			let shouldBeIncluded = true
+			coerceArray(inputParam.dependent).forEach(dependentParam => {
+				console.log({ param: dependentParam, value: values.get(dependentParam), isUnset: isUnset(values.get(dependentParam)) })
+				if(isUnset(values.get(dependentParam))) {
+					shouldBeIncluded = false
+				}
+			})
+
+			console.log({ key, value, shouldBeIncluded, created_at: values.get('created_at') })
+			if(!shouldBeIncluded) {
+				urlParams.delete(key)
+				continue
+			}
+		}
+
+		urlParams.set(key, String(value))
+	}
+
+	if(urlParams.size > 0) {
+		urlParams.set('adv', 'true')
+		return `${location.pathname}?${urlParams.toString()}`
+	} else {
+		return `${location.pathname}`
+	}
+}

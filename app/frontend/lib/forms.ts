@@ -13,7 +13,7 @@ export const isUnset = <T extends any>(v: T) => {
 
 	if(v instanceof Date) return false
 
-	if(Array.isArray(v)) return v.some(el => el !== '' || el !== undefined)
+	if(Array.isArray(v)) return !v.some(el => el !== '' && el !== undefined)
 
 	return isEmpty(v)
 }
