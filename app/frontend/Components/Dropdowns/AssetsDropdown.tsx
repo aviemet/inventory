@@ -9,11 +9,11 @@ import { type IAsyncDropdown } from '.'
 interface IAssetsDropdown extends IAsyncDropdown<Schema.AssetsOptions> {}
 
 const AssetsDropdown = forwardRef<HTMLInputElement, IAssetsDropdown>((
-	{ label = 'Asset', name = 'asset_id', initialData = [], ...props },
+	{ label = 'Asset', name = 'asset_id', initialData = [], value, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getAssetsAsOptions({
-		enabled: false,
+		enabled: value !== undefined,
 		initialData,
 	})
 
@@ -30,6 +30,7 @@ const AssetsDropdown = forwardRef<HTMLInputElement, IAssetsDropdown>((
 		},
 		searchable: true,
 		clearable: true,
+		value,
 		...props,
 	}
 

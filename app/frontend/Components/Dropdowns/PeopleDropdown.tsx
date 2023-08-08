@@ -9,11 +9,11 @@ import { type IAsyncDropdown } from '.'
 interface IPeopleDropdown extends IAsyncDropdown<Schema.PeopleOptions> {}
 
 const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
-	{ label = 'Person', name = 'person_id', initialData, ...props },
+	{ label = 'Person', name = 'person_id', initialData, value, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getPeopleAsOptions({
-		enabled: false,
+		enabled: value !== undefined,
 		initialData,
 	})
 
@@ -30,6 +30,7 @@ const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
 		},
 		searchable: true,
 		clearable: true,
+		value,
 		...props,
 	}
 

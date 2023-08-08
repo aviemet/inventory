@@ -86,7 +86,6 @@ function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInpu
 
 	for(const [key, value] of values) {
 		const inputParam = inputParams.find(param => param.name === key)
-
 		// Delete key if input has been emptied
 		if(isUnset(value)) {
 			urlParams.delete(key)
@@ -97,13 +96,13 @@ function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInpu
 		if(inputParam?.dependent) {
 			let shouldBeIncluded = true
 			coerceArray(inputParam.dependent).forEach(dependentParam => {
-				console.log({ param: dependentParam, value: values.get(dependentParam), isUnset: isUnset(values.get(dependentParam)) })
+				// console.log({ param: dependentParam, value: values.get(dependentParam), isUnset: isUnset(values.get(dependentParam)) })
 				if(isUnset(values.get(dependentParam))) {
 					shouldBeIncluded = false
 				}
 			})
 
-			console.log({ key, value, shouldBeIncluded, created_at: values.get('created_at') })
+			// console.log({ key, value, shouldBeIncluded, created_at: values.get('created_at') })
 			if(!shouldBeIncluded) {
 				urlParams.delete(key)
 				continue

@@ -12,11 +12,11 @@ interface ICategoriesDropdown extends IAsyncDropdown<Schema.CategoriesOptions> {
 }
 
 const CategoriesDropdown = forwardRef<HTMLInputElement, ICategoriesDropdown>((
-	{ label = 'Category', name = 'category_id', categorizable_type, initialData, ...props },
+	{ label = 'Category', name = 'category_id', categorizable_type, initialData, value, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getCategoriesAsOptions(categorizable_type, {
-		enabled: false,
+		enabled: value !== undefined,
 		initialData,
 	})
 
@@ -33,6 +33,7 @@ const CategoriesDropdown = forwardRef<HTMLInputElement, ICategoriesDropdown>((
 		},
 		searchable: true,
 		clearable: true,
+		value,
 		...props,
 	}
 

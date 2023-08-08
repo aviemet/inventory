@@ -12,11 +12,11 @@ interface ILocationsDropdown extends IAsyncDropdown<Schema.LocationsOptions> {
 }
 
 const LocationsDropdown = forwardRef<HTMLInputElement, ILocationsDropdown>((
-	{ label = 'Location', name = 'location_id', filter, initialData, ...props },
+	{ label = 'Location', name = 'location_id', filter, initialData, value, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getLocationsAsOptions({
-		enabled: false,
+		enabled: value !== undefined,
 		select: filter ? data => data.filter(filter) : undefined,
 		initialData,
 	})
@@ -34,6 +34,7 @@ const LocationsDropdown = forwardRef<HTMLInputElement, ILocationsDropdown>((
 		},
 		searchable: true,
 		clearable: true,
+		value,
 		...props,
 	}
 
