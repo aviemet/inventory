@@ -3,6 +3,8 @@ import { coerceArray } from '@/lib'
 import { useLocation } from '@/lib/hooks'
 import { isUnset } from '@/lib/forms'
 import { router } from '@inertiajs/react'
+import cx from 'clsx'
+import { type MantineTheme } from '@mantine/core'
 
 interface IOptions {
 	path: string
@@ -13,6 +15,8 @@ type TInputParam<T = string> = {
 	default?: T
 	dependent?: string|string[]
 }
+
+type TParamValue = string|number|string[]|Date|Date[]|undefined
 
 /**
  * Hook for building advanced search interfaces
@@ -33,7 +37,7 @@ const useAdvancedSearch = (
 
 	// Reads starting values from URL params
 	const startingValues = useMemo(() => inputParams.reduce(
-		(data: Map<TInputParamName, unknown>, param) => {
+		(data: Map<TInputParamName, TParamValue>, param) => {
 			data.set(param.name, location.params.get(param.name) || param.default || '')
 			return data
 		},
@@ -49,7 +53,7 @@ const useAdvancedSearch = (
 
 	const resetValues = () => {
 		setValues(inputParams.reduce(
-			(data: Map<TInputParamName, unknown>, param) => {
+			(data: Map<TInputParamName, TParamValue>, param) => {
 				data.set(param.name, param.default || '')
 				return data
 			},
@@ -69,8 +73,25 @@ const useAdvancedSearch = (
 					router.get(searchLink, undefined, { preserveScroll: true })
 				}
 			},
+			wrapperProps: {
+				className: cx({ highlighted: !isUnset(values.get(name)) && !isDependent(name, inputParams) }),
+				sx: (theme: MantineTheme) => ({
+					'&.highlighted, &.highlighted input': {
+						color: theme.other.colorSchemeOption(
+							theme.colors[theme.primaryColor][6],
+							theme.colors[theme.primaryColor][4],
+						),
+						'&.highlighted input': {
+							outlineColor: theme.other.colorSchemeOption(
+								theme.colors[theme.primaryColor][6],
+								theme.colors[theme.primaryColor][4],
+							),
+						},
+					},
+				}),
+			},
 		}),
-		setInputValue: (name: TInputParamName, value: unknown) => setValues((prevValues) => {
+		setInputValue: (name: TInputParamName, value: TParamValue) => setValues((prevValues) => {
 			const newValues = new Map(prevValues)
 			newValues.set(name, value)
 			return newValues
@@ -81,7 +102,12 @@ const useAdvancedSearch = (
 
 export default useAdvancedSearch
 
-function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInputParam[], values: Map<string, unknown>) {
+function isDependent(name: string, inputParams: Readonly<TInputParam[]>) {
+	const param = inputParams.find(param => param.name === name)
+	return param?.dependent !== undefined
+}
+
+function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInputParam[], values: Map<string, TParamValue>) {
 	urlParams.delete('adv')
 
 	for(const [key, value] of values) {
@@ -108,6 +134,10 @@ function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInpu
 				continue
 			}
 		}
+		console.log({ type: typeof value })
+		// if(typeof value === 'Date') {
+		// 	urlParams.set(key, value.toISOString())
+		// }
 
 		urlParams.set(key, String(value))
 	}
