@@ -13,10 +13,22 @@ import dayjs from 'dayjs'
 
 export type DateInputValue = Date | DatesRangeValue | Date[]
 
-export interface IDateProps extends DatePickerInputProps, IInputProps {
+type TDateOmitProps = 'onChange'|'onDateChange'|'onMonthSelect'|'onConNextDecade'|'onNextMonth'|'onNextYear'|'onPreviousDecade'|'onPreviousMonth'|'onPreviousYear'|'onYearSelect'
+
+export interface IDateProps extends Omit<DatePickerInputProps, TDateOmitProps>, IInputProps {
 	name?: string
 	id?: string
 	error?: string | string[]
+	onChange: (value: Date[]) => void
+	onDateChange: (value: Date[]) => void
+	onMonthSelect: (value: Date[]) => void
+	onConNextDecade: (value: Date[]) => void
+	onNextMonth: (value: Date[]) => void
+	onNextYear: (value: Date[]) => void
+	onPreviousDecade: (value: Date[]) => void
+	onPreviousMonth: (value: Date[]) => void
+	onPreviousYear: (value: Date[]) => void
+	onYearSelect: (value: Date[]) => void
 }
 
 const DateInputComponent = ({
@@ -42,10 +54,14 @@ const DateInputComponent = ({
 			return [valueArray[0], valueArray[1] || dayjs(valueArray[0]).add(1, 'day').toDate()]
 		}
 
-		if(type === 'default') return isUnset(valueArray[0]) ? undefined : valueArray[0]
+		if(type === 'default' && isUnset(valueArray[0])) {
+			return undefined
+		}
 
 		return valueArray
 	}, [type, value])
+
+
 
 	return (
 		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
@@ -62,6 +78,17 @@ const DateInputComponent = ({
 				valueFormat={ valueFormat }
 				icon={ <CalendarIcon /> }
 				clearable
+
+				onChange={ inputValue }
+				onDateChange={ inputValue }
+				onMonthSelect={ inputValue }
+				onConNextDecade={ inputValue }
+				onNextMonth={ inputValue }
+				onNextYear={ inputValue }
+				onPreviousDecade={ inputValue }
+				onPreviousMonth={ inputValue }
+				onPreviousYear={ inputValue }
+				onYearSelect={ inputValue }
 				{ ...props }
 			/>
 		</InputWrapper>

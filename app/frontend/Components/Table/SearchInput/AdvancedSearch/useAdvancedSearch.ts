@@ -16,7 +16,7 @@ type TInputParam<T = string> = {
 	dependent?: string|string[]
 }
 
-type TParamValue = string|number|string[]|Date|Date[]|undefined
+type TParamValue = string|number|Date|Date[]|undefined|null
 
 /**
  * Hook for building advanced search interfaces
@@ -81,12 +81,12 @@ const useAdvancedSearch = (
 							theme.colors[theme.primaryColor][6],
 							theme.colors[theme.primaryColor][4],
 						),
-						'&.highlighted input': {
-							outlineColor: theme.other.colorSchemeOption(
-								theme.colors[theme.primaryColor][6],
-								theme.colors[theme.primaryColor][4],
-							),
-						},
+					},
+					'&.highlighted input': {
+						outlineColor: theme.other.colorSchemeOption(
+							theme.colors[theme.primaryColor][6],
+							theme.colors[theme.primaryColor][4],
+						),
 					},
 				}),
 			},
@@ -134,7 +134,7 @@ function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInpu
 				continue
 			}
 		}
-		console.log({ type: typeof value })
+
 		// if(typeof value === 'Date') {
 		// 	urlParams.set(key, value.toISOString())
 		// }

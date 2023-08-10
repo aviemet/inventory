@@ -90,7 +90,7 @@ const AdvancedItemsSearch = () => {
 						/>
 					</Group>
 				</Box>
-				<Box>
+				<Box sx={ { minWidth: '17rem' } }>
 					<Select
 						label="Creation Date"
 						{ ...inputProps('created_range_type') }
