@@ -25,9 +25,10 @@ class Api::UsersController < Api::ApiController
   # PATCH/PUT /users/update_user_preferences/:id
   def update_user_preferences
     authorize user
+    ap({ user_params: })
     if user.update_column(
       :user_preferences,
-      current_user.user_preferences.deep_merge(request.params[:user][:user_preferences]),
+      current_user.user_preferences.deep_merge(user_params[:user_preferences]),
     )
       head :ok, content_type: "text/html"
     end
@@ -36,7 +37,7 @@ class Api::UsersController < Api::ApiController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :active_company_id, :active, :user_preferences, person: [:first_name, :last_name], company: [:name])
+    params.require(:user).permit(:email, :password, :active_company_id, :active, person: [:first_name, :last_name], company: [:name], user_preferences: [:colorScheme])
   end
 
 end

@@ -30,6 +30,7 @@ const useAdvancedSearch = (
 	inputParams: Readonly<TInputParam[]>,
 	options?: IOptions,
 ) => {
+	inputParams = Object.freeze(inputParams)
 	type TInputParamName = typeof inputParams[number]['name']
 
 	const location = useLocation()

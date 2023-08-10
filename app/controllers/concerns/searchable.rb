@@ -43,7 +43,7 @@ module Searchable
   # Filters ActiveRecord relation by advanced search params
   ##
   def advanced_search(model)
-    return model unless defined?('advanced_search_params') && params[:adv] = "true"
+    return model unless defined?(advanced_search_params) == "method" && params[:adv] = "true"
 
     advanced_search_params.each do |key, value|
       apply_search = ADVANCED_SEARCH_METHODS[key.to_sym] ||
