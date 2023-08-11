@@ -11,7 +11,7 @@ import InputWrapper from './InputWrapper'
 import { coerceArray, isUnset } from '@/lib'
 import dayjs from 'dayjs'
 
-export type DateInputValue = Date | DatesRangeValue | Date[]
+export type DateInputValue = Date | DatesRangeValue | Date[] | undefined
 
 type TDateOmitProps = 'onChange'|'onDateChange'|'onMonthSelect'|'onConNextDecade'|'onNextMonth'|'onNextYear'|'onPreviousDecade'|'onPreviousMonth'|'onPreviousYear'|'onYearSelect'
 
@@ -19,16 +19,7 @@ export interface IDateProps extends Omit<DatePickerInputProps, TDateOmitProps>, 
 	name?: string
 	id?: string
 	error?: string | string[]
-	onChange: (value: Date[]) => void
-	onDateChange: (value: Date[]) => void
-	onMonthSelect: (value: Date[]) => void
-	onConNextDecade: (value: Date[]) => void
-	onNextMonth: (value: Date[]) => void
-	onNextYear: (value: Date[]) => void
-	onPreviousDecade: (value: Date[]) => void
-	onPreviousMonth: (value: Date[]) => void
-	onPreviousYear: (value: Date[]) => void
-	onYearSelect: (value: Date[]) => void
+	onChange: (value: Date[]|undefined) => void
 }
 
 const DateInputComponent = ({
@@ -43,12 +34,13 @@ const DateInputComponent = ({
 	valueFormat = 'L',
 	wrapper,
 	wrapperProps,
+	onChange,
 	...props
 }: IDateProps) => {
 	const inputId = id || name
 
-	const inputValue = useCallback(() => {
-		const valueArray = coerceArray(value)
+	const inputValue = useCallback((dateValue: DateInputValue|null) => {
+		const valueArray = coerceArray(dateValue) as Date[]
 
 		if(type === 'range' && valueArray.length !== 2) {
 			return [valueArray[0], valueArray[1] || dayjs(valueArray[0]).add(1, 'day').toDate()]
@@ -61,7 +53,9 @@ const DateInputComponent = ({
 		return valueArray
 	}, [type, value])
 
-
+	const handleChange = (dateValue: DateInputValue|null) => {
+		if(onChange) onChange(inputValue(dateValue))
+	}
 
 	return (
 		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
@@ -71,24 +65,14 @@ const DateInputComponent = ({
 			<DatePickerInput
 				id={ inputId }
 				name={ name }
-				value={ inputValue() }
+				value={ inputValue(value) }
 				type={ type }
 				radius={ radius }
 				size={ size }
 				valueFormat={ valueFormat }
 				icon={ <CalendarIcon /> }
 				clearable
-
-				onChange={ inputValue }
-				onDateChange={ inputValue }
-				onMonthSelect={ inputValue }
-				onConNextDecade={ inputValue }
-				onNextMonth={ inputValue }
-				onNextYear={ inputValue }
-				onPreviousDecade={ inputValue }
-				onPreviousMonth={ inputValue }
-				onPreviousYear={ inputValue }
-				onYearSelect={ inputValue }
+				onChange={ handleChange }
 				{ ...props }
 			/>
 		</InputWrapper>

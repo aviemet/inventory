@@ -123,19 +123,18 @@ function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInpu
 		if(inputParam?.dependent) {
 			let shouldBeIncluded = true
 			coerceArray(inputParam.dependent).forEach(dependentParam => {
-				// console.log({ param: dependentParam, value: values.get(dependentParam), isUnset: isUnset(values.get(dependentParam)) })
 				if(isUnset(values.get(dependentParam))) {
 					shouldBeIncluded = false
 				}
 			})
 
-			// console.log({ key, value, shouldBeIncluded, created_at: values.get('created_at') })
 			if(!shouldBeIncluded) {
 				urlParams.delete(key)
 				continue
 			}
 		}
 
+		console.log({ value })
 		// if(typeof value === 'Date') {
 		// 	urlParams.set(key, value.toISOString())
 		// }
