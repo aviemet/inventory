@@ -134,10 +134,10 @@ function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInpu
 			}
 		}
 
-		console.log({ value })
-		// if(typeof value === 'Date') {
-		// 	urlParams.set(key, value.toISOString())
-		// }
+		// TODO: This is where you are!
+		if(value instanceof Date) {
+			urlParams.set(key, value.toISOString())
+		}
 
 		urlParams.set(key, String(value))
 	}
