@@ -1,24 +1,16 @@
 import React from 'react'
-import { CurrencyInput, DateInput, Select, TextInput } from '@/Components/Inputs'
+import { CurrencyInput, TextInput } from '@/Components/Inputs'
 import { Button, Box, Group, Flex, Link } from '@/Components'
 import { CrossIcon, SearchIcon } from '@/Components/Icons'
-import { useAdvancedSearch } from '@/Components/Table'
+import { useAdvancedSearch, useAdvancedDateSearch } from '@/Components/Table'
 import { CategoriesDropdown } from '@/Components/Dropdowns'
 import ManufacturersDropdown from '@/Components/Dropdowns/ManufacturersDropdown'
 import VendorsDropdown from '@/Components/Dropdowns/VendorsDropdown'
 import DepartmentsDropdown from '@/Components/Dropdowns/DepartmentsDropdown'
 import ModelsDropdown from '@/Components/Dropdowns/ModelsDropdown'
-import { DateInputValue } from '@/Components/Inputs/DateInput'
-
-const dateRangeOptions = [
-	{ label: 'Exact Date', value: 'exact' },
-	{ label: 'Before', value: 'before' },
-	{ label: 'After', value: 'after' },
-	{ label: 'Between', value: 'range' },
-]
 
 const AdvancedItemsSearch = () => {
-	const { values, inputProps, setInputValue, link, reset } = useAdvancedSearch([
+	const advancedSearch = useAdvancedSearch([
 		{ name: 'name' },
 		{ name: 'model' },
 		{ name: 'asset_tag' },
@@ -28,9 +20,22 @@ const AdvancedItemsSearch = () => {
 		{ name: 'vendor[id]' },
 		{ name: 'cost' },
 		{ name: 'department[id]' },
-		{ name: 'created_range_type', default: 'exact', dependent: 'created_at' },
-		{ name: 'created_at' },
+		{ name: 'created_at', type: 'date' },
+		// {
+		// 	name: 'created_at[type]',
+		// 	default: 'exact',
+		// 	dependent: 'created_at[start]',
+		// 	keyUpListener: false,
+		// },
+		// { name: 'created_at[start]' },
+		// { name: 'created_at[end]' },
 	])
+
+	const { DateRangeInput, DatesInput } = useAdvancedDateSearch(advancedSearch, 'created_at')
+
+	const { values, inputProps, setInputValue, link, reset } = advancedSearch
+
+	console.log({ values: Object.fromEntries(values) })
 
 	return (
 		<>
@@ -91,18 +96,8 @@ const AdvancedItemsSearch = () => {
 					</Group>
 				</Box>
 				<Box sx={ { minWidth: '17rem' } }>
-					<Select
-						label="Creation Date"
-						{ ...inputProps('created_range_type') }
-						onChange={ value => setInputValue('created_range_type', value) }
-						options={ dateRangeOptions }
-					/>
-					<DateInput
-						label="Date"
-						{ ...inputProps<DateInputValue>('created_at') }
-						onChange={ value => setInputValue('created_at', value) }
-						type={ values.get('created_range_type') === 'range' ? 'range' : 'default' }
-					/>
+					{ DateRangeInput }
+					{ DatesInput }
 				</Box>
 			</Flex>
 
