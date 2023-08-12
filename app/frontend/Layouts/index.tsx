@@ -7,11 +7,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import AppLayout from './AppLayout'
 import AuthLayout from './AuthLayout'
 
-import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
-
-dayjs.extend(localizedFormat)
-
 interface LayoutWrapperProps {
 	children: React.ReactNode
 }

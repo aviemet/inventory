@@ -9,6 +9,11 @@ import useLayoutStore from '../AppLayout/store/LayoutStore'
 
 export { useLayoutStore }
 
+import dayjs from 'dayjs'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(localizedFormat)
+
 interface IProviderProps {
 	children?: React.ReactNode
 }

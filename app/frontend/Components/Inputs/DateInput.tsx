@@ -23,11 +23,9 @@ export interface IDateProps extends Omit<DatePickerInputProps, TDateOmitProps>, 
 }
 
 const DateInputComponent = ({
-	label,
 	id,
 	name,
 	value,
-	required,
 	type = 'default',
 	size = 'md',
 	radius = 'xs',
@@ -43,7 +41,9 @@ const DateInputComponent = ({
 		const valueArray = coerceArray(dateValue) as Date[]
 
 		if(type === 'range' && valueArray.length !== 2) {
-			return [valueArray[0], valueArray[1] || dayjs(valueArray[0]).add(1, 'day').toDate()]
+			const start = valueArray[0] instanceof Date ? valueArray[0] : ''
+			const end = valueArray[0] instanceof Date ? dayjs(valueArray[0]).add(1, 'day').toDate() : ''
+			return [start, end]
 		}
 
 		if(type === 'default' && isUnset(valueArray[0])) {
@@ -56,12 +56,9 @@ const DateInputComponent = ({
 	const handleChange = (dateValue: DateInputValue|null) => {
 		if(onChange) onChange(inputValue(dateValue))
 	}
-
+	console.log({ inputValue: inputValue(value) })
 	return (
 		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
-			{ label && <Label required={ required } htmlFor={ inputId }>
-				{ label }
-			</Label> }
 			<DatePickerInput
 				id={ inputId }
 				name={ name }

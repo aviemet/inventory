@@ -113,6 +113,7 @@ function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInpu
 
 	for(const [key, value] of values) {
 		const inputParam = inputParams.find(param => param.name === key)
+
 		// Delete key if input has been emptied
 		if(isUnset(value)) {
 			urlParams.delete(key)
@@ -134,9 +135,13 @@ function buildSearchLink(urlParams: URLSearchParams, inputParams: readonly TInpu
 			}
 		}
 
-		// TODO: This is where you are!
-		if(value instanceof Date) {
-			urlParams.set(key, value.toISOString())
+		// Handle Date values
+		if(value instanceof Date || (Array.isArray(value) && value[0] instanceof Date)) {
+			const dateStr = coerceArray(value).reduce((str, date, i) => {
+				return `${str}${i === 0 ? '' : ','}${date.toISOString()}`
+			}, '')
+			urlParams.set(key, dateStr)
+			continue
 		}
 
 		urlParams.set(key, String(value))
