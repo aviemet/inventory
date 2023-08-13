@@ -126,7 +126,7 @@ class ItemsController < ApplicationController
   end
 
   def advanced_search_params
-    params.permit(:name, :asset_tag, :serial, :cost, :purchased_at, :requestable, :created_at, models: [:id], vendor: [:id], manufacturer: [:id], department: [:id], category: [:id])
+    params.permit(:name, :asset_tag, :serial, :cost, :purchased_at, :requestable, models: [:id], vendor: [:id], manufacturer: [:id], department: [:id], category: [:id], created_at: [:start, :end, :type])
     # %w(name asset_tag serial cost purchased_at requestable models.id vendor.id category.id manufacturer.id department.id created_at).freeze
   end
 

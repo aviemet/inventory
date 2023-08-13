@@ -21,21 +21,11 @@ const AdvancedItemsSearch = () => {
 		{ name: 'cost' },
 		{ name: 'department[id]' },
 		{ name: 'created_at', type: 'date' },
-		// {
-		// 	name: 'created_at[type]',
-		// 	default: 'exact',
-		// 	dependent: 'created_at[start]',
-		// 	keyUpListener: false,
-		// },
-		// { name: 'created_at[start]' },
-		// { name: 'created_at[end]' },
 	])
 
 	const { DateRangeInput, DatesInput } = useAdvancedDateSearch(advancedSearch, 'created_at')
 
 	const { values, inputProps, setInputValue, link, reset } = advancedSearch
-
-	console.log({ values: Object.fromEntries(values) })
 
 	return (
 		<>

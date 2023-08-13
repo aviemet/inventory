@@ -1,9 +1,8 @@
+import React from 'react'
 import { DateInput } from '@/Components/Inputs'
-import React, { useEffect, useState } from 'react'
 import { type DateInputValue } from '@/Components/Inputs/DateInput'
 import { type IAdvancedInputProps } from '.'
 import { type DateValue } from '@mantine/dates'
-
 
 const Date = ({
 	advancedSearch,
@@ -13,33 +12,29 @@ const Date = ({
 
 	const { mb, wrapperProps } = inputProps<DateInputValue>(name)
 
-	const [internalStartDate, setInternalStartDate] = useState(values.get(`${name}[start]`))
-	const [internalEndDate, setInternalEndDate] = useState(values.get(`${name}[end]`))
-
-	useEffect(() => {
-		setInputValue(`${name}[start]`, internalStartDate)
-		setInputValue(`${name}[end]`, internalEndDate)
-	}, [internalStartDate, internalEndDate])
-
 	const handleDateChange = (value: DateValue) => {
 		if(Array.isArray(value)) {
-			setInternalStartDate(value[0])
-			setInternalEndDate(value[1])
+			setInputValue(`${name}[start]`, value[0])
+			setInputValue(`${name}[end]`, value[1])
 		} else {
-			setInternalStartDate(value)
-			setInternalEndDate(null)
+
+			setInputValue(`${name}[start]`, value)
+			setInputValue(`${name}[end]`, null)
 		}
 	}
 
+	const type = values.get(`${name}[type]`) === 'range' ? 'range' : 'default'
+
+	/**
+	 * Conditionally render each DateInput type to avoid a React rendering error
+	 */
 	return (
-		<>
-			<DateInput
-				label="Date"
-				{ ...{ mb, wrapperProps } }
-				onChange={ handleDateChange }
-				type={ values.get(`${name}[type]`) === 'range' ? 'range' : 'default' }
-			/>
-		</>
+		<DateInput
+			label="Date"
+			{ ...{ mb, wrapperProps } }
+			onChange={ handleDateChange }
+			type={ type }
+		/>
 	)
 }
 

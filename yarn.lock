@@ -2873,17 +2873,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/dates@npm:^6.0.17":
-  version: 6.0.17
-  resolution: "@mantine/dates@npm:6.0.17"
+"@mantine/dates@npm:^6.0.19":
+  version: 6.0.19
+  resolution: "@mantine/dates@npm:6.0.19"
   dependencies:
-    "@mantine/utils": 6.0.17
+    "@mantine/utils": 6.0.19
   peerDependencies:
-    "@mantine/core": 6.0.17
-    "@mantine/hooks": 6.0.17
+    "@mantine/core": 6.0.19
+    "@mantine/hooks": 6.0.19
     dayjs: ">=1.0.0"
     react: ">=16.8.0"
-  checksum: 65b46c5cb75406183d9c7fc0fb9f8092fa7ba3c18088f74349e78b19bbf0064174347421affa55e121ac464cd0b095ba6ab58c96f2615fdd309baecab3540f04
+  checksum: 0faedab40d6fbc5720ce872bf70d2a890cc4576f52aaccd93db68385dd27536bf2f08959ba09c99d49ec8d3d7db0d160dbc7442f6e137eaaf04e55944919d0c8
   languageName: node
   linkType: hard
 
@@ -3078,6 +3078,15 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: 393869f22cfea70ff5b7483b7e23bc79fb39f1be7079baa388235a9ccf648845e10ef7c70a47081728ef09df682484bedfcf00c375bcd21a524fd114f892c9b5
+  languageName: node
+  linkType: hard
+
+"@mantine/utils@npm:6.0.19":
+  version: 6.0.19
+  resolution: "@mantine/utils@npm:6.0.19"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: c33e2eba6d78e2b07c222c79a086da9d43a39a1fb8e409b10ab5775f6855325fd30c56b17fd67f9a827497eff2fdc22fff4b9190c2d7069b2c58565d63b3a450
   languageName: node
   linkType: hard
 
@@ -7151,9 +7160,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001464, caniuse-lite@npm:^1.0.30001503":
-  version: 1.0.30001507
-  resolution: "caniuse-lite@npm:1.0.30001507"
-  checksum: 7044172bdf65140c927cdaaff50368a97676f06a9fd8b515c046613bdf52cb769e9efb832ee491b8f8cc21f82c15f154a896efbab690f431bb064c95f3a2b7a8
+  version: 1.0.30001520
+  resolution: "caniuse-lite@npm:1.0.30001520"
+  checksum: 59991ad8f36cf282f81abbcc6074c3097c21914cdd54bd2b3f73ac9462f57fc74e90371cd22bcdff4d085d09da42a07dcea384cb81e4ac260496e1bd79e1fe7c
   languageName: node
   linkType: hard
 
@@ -10466,7 +10475,7 @@ __metadata:
     "@inertiajs/react": ^1.0.9
     "@loadable/component": ^5.15.3
     "@mantine/core": ^6.0.17
-    "@mantine/dates": ^6.0.17
+    "@mantine/dates": ^6.0.19
     "@mantine/dropzone": ^6.0.17
     "@mantine/ds": ^6.0.17
     "@mantine/form": ^6.0.17

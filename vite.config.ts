@@ -30,6 +30,11 @@ const config = defineConfig({
 		},
 	},
 	base: './',
+	server: {
+		fs: {
+			strict: false,
+		},
+	},
 })
 
 export default config

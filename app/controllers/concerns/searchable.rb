@@ -23,7 +23,30 @@ module Searchable
     ADVANCED_SEARCH_METHODS = {
       default: ->(model, key, value) { model.where("#{model.table_name}.#{key} ILIKE ?", "%#{value}%") },
       id: ->(model, key, value) { model.joins(key.to_sym).where("#{key.pluralize}.id = ?", value[:id]) },
-      created_at: ->(model, _key, value) { model.where(created_at: value.to_date.beginning_of_day) },
+      created_at: ->(model, _key, value) do
+        return model unless value.is_a?(ActionController::Parameters)
+
+        start_date = value[:start]&.to_date&.beginning_of_day
+        return model if start_date.nil?
+
+        case value[:type]
+        when 'before'
+          return model.where("#{model.table_name}.created_at <= :date", { date: start_date })
+        when 'after'
+          return model.where("#{model.table_name}.created_at >= :date", { date: start_date })
+        when 'exact'
+          return model.where("#{model.table_name}.created_at = :date", { date: start_date })
+        when 'range'
+          end_date = value[:end]&.to_date&.end_of_day
+          return model if end_date.nil?
+
+          return model.where("#{model.table_name}.created_at >= :start_date AND #{model.table_name}.created_at <= :end_date", {
+            start_date: start_date,
+            end_date: end_date,
+          },)
+        end
+
+      end,
     }
     # rubocop:enable Lint/ConstantDefinitionInBlock
   end

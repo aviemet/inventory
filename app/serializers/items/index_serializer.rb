@@ -13,7 +13,7 @@ class Items::IndexSerializer < Assignable::SingleSerializer
     :model_id,
     :vendor_id,
     :default_location_id,
-    :created_at,
+    # :created_at,
     :updated_at,
   )
 
