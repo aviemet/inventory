@@ -52,6 +52,7 @@ const useAdvancedSearch = (
 
 						return data
 					default:
+						// eslint-disable-next-line no-console
 						console.error('Invalid `type` value')
 				}
 			}

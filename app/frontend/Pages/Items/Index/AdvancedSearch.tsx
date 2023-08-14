@@ -8,6 +8,7 @@ import ManufacturersDropdown from '@/Components/Dropdowns/ManufacturersDropdown'
 import VendorsDropdown from '@/Components/Dropdowns/VendorsDropdown'
 import DepartmentsDropdown from '@/Components/Dropdowns/DepartmentsDropdown'
 import ModelsDropdown from '@/Components/Dropdowns/ModelsDropdown'
+import { SearchDateInput, SearchDateTypeInput } from '@/Components/Table/SearchInput/AdvancedSearch/DateRangeInputs'
 
 const AdvancedItemsSearch = () => {
 	const advancedSearch = useAdvancedSearch([
@@ -86,6 +87,8 @@ const AdvancedItemsSearch = () => {
 					</Group>
 				</Box>
 				<Box sx={ { minWidth: '17rem' } }>
+					<SearchDateTypeInput advancedSearch={ advancedSearch } name="created_at" />
+					<SearchDateInput advancedSearch={ advancedSearch } name="created_at" />
 					{ DateRangeInput }
 					{ DatesInput }
 				</Box>

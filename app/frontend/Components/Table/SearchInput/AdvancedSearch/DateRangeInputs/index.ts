@@ -5,6 +5,6 @@ export interface IAdvancedInputProps {
 	name: string
 }
 
-export { default as Type } from './Type'
-export { default as Date } from './Date'
+export { default as SearchDateTypeInput } from './Type'
+export { default as SearchDateInput } from './Date'
 export { default as useAdvancedDateSearch } from './useAdvancedDateSearch'
