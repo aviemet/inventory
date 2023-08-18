@@ -7,7 +7,7 @@ ruby "3.1.2"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem "sprockets-rails"
 gem "pg", "~> 1.1"
-gem "puma", "~> 6.0"
+gem "puma", "~> 6.3"
 
 # Assets
 gem "inertia_rails", "~> 3.0.0"
