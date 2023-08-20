@@ -45,7 +45,7 @@ const Select = forwardRef<HTMLInputElement, ISelectFormProps>((
 	const handleChange = (option: string|null) => {
 		setValue(option ? option : '')
 
-		if(onChange) onChange(option, form)
+		onChange?.(option, form)
 	}
 
 	const handleBlur = () => {

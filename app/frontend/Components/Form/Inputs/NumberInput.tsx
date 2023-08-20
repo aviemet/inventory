@@ -28,7 +28,7 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 		const v = e
 		setValue(v)
 
-		if(onChange) onChange(v, form)
+		onChange?.(v, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {

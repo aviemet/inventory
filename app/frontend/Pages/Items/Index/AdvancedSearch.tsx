@@ -2,7 +2,7 @@ import React from 'react'
 import { CurrencyInput, TextInput } from '@/Components/Inputs'
 import { Button, Box, Group, Flex, Link } from '@/Components'
 import { CrossIcon, SearchIcon } from '@/Components/Icons'
-import { useAdvancedSearch, useAdvancedDateSearch } from '@/Components/Table'
+import { useAdvancedSearch } from '@/Components/Table'
 import { CategoriesDropdown } from '@/Components/Dropdowns'
 import ManufacturersDropdown from '@/Components/Dropdowns/ManufacturersDropdown'
 import VendorsDropdown from '@/Components/Dropdowns/VendorsDropdown'
@@ -24,9 +24,7 @@ const AdvancedItemsSearch = () => {
 		{ name: 'created_at', type: 'date' },
 	])
 
-	const { DateRangeInput, DatesInput } = useAdvancedDateSearch(advancedSearch, 'created_at')
-
-	const { values, inputProps, setInputValue, link, reset } = advancedSearch
+	const { inputProps, setInputValue, link, reset } = advancedSearch
 
 	return (
 		<>
@@ -89,8 +87,6 @@ const AdvancedItemsSearch = () => {
 				<Box sx={ { minWidth: '17rem' } }>
 					<SearchDateTypeInput advancedSearch={ advancedSearch } name="created_at" />
 					<SearchDateInput advancedSearch={ advancedSearch } name="created_at" />
-					{ DateRangeInput }
-					{ DatesInput }
 				</Box>
 			</Flex>
 

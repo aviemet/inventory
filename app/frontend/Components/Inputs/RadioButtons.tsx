@@ -40,7 +40,7 @@ const RadioButtons = ({
 			<SegmentedControl
 				value={ value }
 				onChange={ (choice: string) => {
-					if(onChange) onChange(choice)
+					onChange?.(choice)
 				} }
 				data={ options }
 				color="primary"

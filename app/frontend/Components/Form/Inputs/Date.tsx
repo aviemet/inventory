@@ -27,7 +27,7 @@ const Date = ({
 
 		setValue(dateValue)
 
-		if(onChange) onChange(dateValue, form)
+		onChange?.(dateValue, form)
 	}
 
 	const handleBlur = () => {

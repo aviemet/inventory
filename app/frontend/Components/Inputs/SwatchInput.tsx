@@ -22,7 +22,7 @@ const SwatchInput = forwardRef<HTMLInputElement, ISwatchInputProps>((
 	const handleChange = (color: string) => {
 		setColor(color)
 
-		if(onChange) onChange(color)
+		onChange?.(color)
 	}
 
 	const inputId = id || name

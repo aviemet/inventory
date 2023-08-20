@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { omit } from 'lodash'
+import { NestedObject, NestedURLSearchParams } from '@/lib/collections'
 
 const useLocation = () => {
 	const [location, setLocation] = useState(window.location)
@@ -16,7 +17,7 @@ const useLocation = () => {
 		}
 	}, [])
 
-	const params = new URLSearchParams(location.search)
+	const params = useMemo(() => new URLSearchParams(location.search), [location.search])
 
 	return {
 		...omit(location, [
@@ -29,13 +30,14 @@ const useLocation = () => {
 		path: `${location.origin}${location.pathname}`,
 		paths: location.pathname.replace(/^\//, '').split('/'),
 		params,
-		paramsToJson: useCallback(() => {
+		paramsAsJson: useMemo(() => {
 			const hash: Record<string, string> = {}
 			for(const [key, value] of params.entries()) {
 				hash[key] = value
 			}
 			return hash
 		}, [params]),
+		nestedParams: useMemo(() => new NestedURLSearchParams(params), [params]),
 		toString: () => location.toString(),
 	}
 }

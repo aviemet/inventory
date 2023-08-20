@@ -36,7 +36,7 @@ const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElemen
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
-		if(onChange) onChange(e.target.checked, form)
+		onChange?.(e.target.checked, form)
 	}
 
 	const handleBlur = () => {

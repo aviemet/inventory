@@ -27,7 +27,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, IFormTextareaProps>((
 
 	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setValue(e.target.value)
-		if(onChange) onChange(e.target.value, form)
+		onChange?.(e.target.value, form)
 	}
 	const handleBlur = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		if(onBlur) onBlur(e.target.value, form)

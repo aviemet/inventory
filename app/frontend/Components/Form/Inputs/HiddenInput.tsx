@@ -18,7 +18,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextInputProps>((
 		const value = e.target.value
 		setValue(value)
 
-		if(onChange) onChange(value, form)
+		onChange?.(value, form)
 	}
 
 	return (

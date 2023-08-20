@@ -7,4 +7,3 @@ export interface IAdvancedInputProps {
 
 export { default as SearchDateTypeInput } from './Type'
 export { default as SearchDateInput } from './Date'
-export { default as useAdvancedDateSearch } from './useAdvancedDateSearch'

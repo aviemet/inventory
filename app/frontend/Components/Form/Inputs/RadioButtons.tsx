@@ -23,7 +23,7 @@ const FormRadioButtons = ({
 	const handleChange = (v: string) => {
 		setValue(v)
 
-		if(onChange) onChange(v, form)
+		onChange?.(v, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLDivElement, Element>) => {

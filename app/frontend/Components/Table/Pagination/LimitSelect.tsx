@@ -29,7 +29,7 @@ const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 				location.params.delete('page')
 				router.get(
 					location.path,
-					{ ...location.paramsToJson() },
+					{ ...location.paramsAsJson },
 					{ preserveScroll: true },
 				)
 			} else {

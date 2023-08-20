@@ -38,7 +38,7 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 	const handleChange = (values: string[]) => {
 		setValue(values)
 
-		if(onChange) onChange(values, form)
+		onChange?.(values, form)
 	}
 
 	const handleDropdownOpen = () => {

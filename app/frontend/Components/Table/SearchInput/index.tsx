@@ -45,7 +45,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps)
 			setTableState({ searching: true })
 			setSearchValue(searchValue)
 		}
-	}, [])
+	}, [location.params, model, searchValue, setSearchValue, setTableState])
 
 	const debouncedSearch = useMemo(() => debounce((path) => {
 		const options: VisitOptions = {
@@ -61,7 +61,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps)
 		}
 		if(model) options.only = [model, 'pagination']
 		router.get(path, {}, options)
-	}, 500), [])
+	}, 500), [model, setTableState])
 
 	useEffect(() => {
 		const url = new URL(window.location.href)
@@ -79,7 +79,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps)
 		}
 
 		debouncedSearch(url.toString())
-	}, [searchValue])
+	}, [debouncedSearch, searchValue])
 
 	return (
 		<Box className={ classes.searchWrapper }>

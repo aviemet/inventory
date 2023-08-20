@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Select } from '@/Components/Inputs'
 import { type IAdvancedInputProps } from '.'
 
@@ -9,35 +9,19 @@ export const dateRangeOptions = [
 	{ label: 'Between', value: 'range' },
 ] as const
 
+type DateRangeType = typeof dateRangeOptions[number]['value']
+
 const Type = ({
 	advancedSearch,
 	name,
 }: IAdvancedInputProps) => {
 	const { inputProps, setInputValue } = advancedSearch
-	const props = inputProps(`${name}[type]`)
-
-	const handleChange = (type: string | null) => {
-		switch(type) {
-			case 'default':
-				setInputValue(`${name}[start]`, null)
-				break
-			case 'range':
-				setInputValue(`${name}[start]`, null)
-				setInputValue(`${name}[end]`, null)
-				break
-			default:
-				// eslint-disable-next-line no-console
-				console.error('Invalid `type` value')
-		}
-
-		setInputValue(`${name}[type]`, type)
-	}
 
 	return (
 		<Select
 			label="Creation Date"
-			{ ...props }
-			onChange={ handleChange }
+			{ ...inputProps(`${name}[type]`) }
+			onChange={ (value: DateRangeType) => setInputValue(`${name}[type]`, value) }
 			options={ dateRangeOptions }
 		/>
 	)

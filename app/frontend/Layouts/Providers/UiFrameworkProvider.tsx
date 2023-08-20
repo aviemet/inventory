@@ -122,7 +122,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		if(companyColor === primaryColor) return
 
 		setPrimaryColor(companyColor)
-	}, [auth?.user?.active_company?.settings?.primary_color])
+	}, [auth?.user?.active_company?.settings?.primary_color, primaryColor, setPrimaryColor])
 
 	const systemColorScheme = useColorScheme()
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -145,8 +145,6 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 
 		setColorScheme(scheme)
 	}
-
-	if(primaryColor === undefined) return <></>
 
 	const mantineTheme = useTheme(colorScheme, primaryColor)
 

@@ -15,7 +15,7 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
-		if(onChange) onChange(e.target.checked, form)
+		onChange?.(e.target.checked, form)
 	}
 
 	const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {

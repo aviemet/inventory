@@ -28,7 +28,7 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 	const handleChange = (color: string) => {
 		setValue(color)
 
-		if(onChange) onChange(color, form)
+		onChange?.(color, form)
 	}
 
 	return (

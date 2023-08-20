@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Label from './Label'
 import {
 	DatePickerInput,
 	type DatesRangeValue,
 	type DatePickerInputProps,
+	DateValue,
 } from '@mantine/dates'
 import { CalendarIcon } from '../Icons'
 import { IInputProps } from '.'
@@ -29,9 +30,31 @@ const DateInputComponent = ({
 	wrapper,
 	wrapperProps,
 	value,
+	onChange,
 	...props
 }: IDateProps) => {
 	const inputId = id || name
+
+	const [localValue, setLocalValue] = useState<DateValue | Date[] | DatesRangeValue | undefined>(value)
+	const [localType, setLocalType] = useState(type)
+
+	const handleChange = (changeValue: DateValue | Date[] | DatesRangeValue) => {
+		setLocalValue(changeValue)
+
+		onChange?.(changeValue)
+	}
+
+	useEffect(() => {
+		if(localType === type) return
+
+		if(type === 'range') {
+			setLocalValue([localValue ?? null, null])
+		} else {
+			setLocalValue(Array.isArray(localValue) ? localValue[0] : null)
+		}
+
+		setLocalType(type)
+	}, [type, localType, localValue])
 
 	return (
 		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
@@ -39,10 +62,11 @@ const DateInputComponent = ({
 				{ label }
 			</Label> }
 			<DatePickerInput
-				value={ value || undefined }
 				id={ inputId }
 				name={ name }
-				type={ type }
+				value={ localValue }
+				type={ localType }
+				onChange={ handleChange }
 				radius={ radius }
 				size={ size }
 				valueFormat={ valueFormat }

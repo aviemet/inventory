@@ -23,7 +23,7 @@ const RichText = ({
 
 	const handleChange = (v, delta, sources, editor) => {
 		setValue(v)
-		if(onChange) onChange(v, form)
+		onChange?.(v, form)
 	}
 	const handleBlur = () => {
 		if(onBlur) onBlur(value, form )
