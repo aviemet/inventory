@@ -113,17 +113,3 @@ export class NestedURLSearchParams {
 		return new URLSearchParams(this.data.toString())
 	}
 }
-
-/*
-
-?thing=val&nest[ok]=val2
-
-{
-	thing: 'val',
-	nest: {
-		ok: 'val2',
-	}
-}
-
-
-*/
