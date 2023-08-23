@@ -56,7 +56,7 @@ export class NestedObject {
 }
 
 export class NestedURLSearchParams {
-	data = new NestedObject()
+	_data = new NestedObject()
 
 	constructor(initialData?: string|Record<string, any>|URLSearchParams) {
 		if(!initialData) return
@@ -71,27 +71,42 @@ export class NestedURLSearchParams {
 			}
 
 			for(const [key, value] of searchParams.entries()) {
-				this.data.set(key, value)
+				this._data.set(key, value)
 			}
 
 			return
 		}
 
-		this.data = new NestedObject(initialData)
+		this._data = new NestedObject(initialData)
 	}
 
 	get(key: string) {
-		return this.data.get(key)
+		return this._data.get(key)
 	}
 
 	set(key: string, value: any) {
-		return this.data.set(key, value)
+		return this._data.set(key, value)
 	}
 
-	toString() {
-		for(const [key, value] of this.data.entries()) {
+	get data() {
+		return this._data.data
+	}
 
+	// Only supports 2 levels of nesting, because any more would be silly in a URL string
+	toString() {
+		let str = '?'
+
+		for(const [key, value] of this._data.entries()) {
+			if(typeof value === 'string') {
+				str += `${key}=${value}&`
+			} else {
+				for(const [key2, value2] of Object.entries(value as Object)) {
+					str += `${key}[${key2}]=${value2}&`
+				}
+			}
 		}
+
+		return str.replace(/\&$/, '')
 	}
 
 	params() {

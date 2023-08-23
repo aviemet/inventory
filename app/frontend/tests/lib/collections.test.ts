@@ -44,12 +44,46 @@ describe('NestedObject', () => {
 		const obj = new NestedObject()
 		obj.set('two[three]', 23)
 		obj.set('four.five', 45)
-		expect(obj.get('four')).toEqual({ five: 45 })
+		expect(obj.get('four')).toMatchObject({ five: 45 })
 	})
 })
 
 describe('NestedURLSearchParams', () => {
+	const nestedParams = new NestedURLSearchParams('?created_at[type]=range&created_at[start]=now&name=hi')
+
 	test('initializes with url parameters', () => {
-		const params = new NestedURLSearchParams('?')
+		expect(nestedParams.data).toMatchObject({
+			created_at: {
+				type: 'range',
+				start: 'now',
+			},
+			name: 'hi',
+		})
+	})
+
+	test('toString', () => {
+		expect(nestedParams.toString()).toEqual('?created_at[type]=range&created_at[start]=now&name=hi')
+	})
+
+	test('getter', () => {
+		expect(nestedParams.get('name')).toEqual('hi')
+		expect(nestedParams.get('created_at')).toMatchObject({
+			type: 'range',
+			start: 'now',
+		})
+	})
+
+	test('setter', () => {
+		const setterParams = new NestedURLSearchParams()
+
+		setterParams.set('one', 'one')
+		setterParams.set('two[three]', 23)
+
+		expect(setterParams.data).toMatchObject({
+			one: 'one',
+			two: {
+				three: 23,
+			},
+		})
 	})
 })
