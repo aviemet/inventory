@@ -1,29 +1,23 @@
-import { coerceArray, isUnset } from '@/lib'
-import { TParamValue, type TInputParam } from './useAdvancedSearch'
+import { NestedURLSearchParams, coerceArray, isUnset } from '@/lib'
+import { type TInputParam } from './useAdvancedSearch'
 
 /**
  * Generate a URL for advanced searching
  *
- * @param urlParams Map of params from address
  * @param inputParams List of all input params passed to hook
  * @param values Map of all current search values
  * @returns Link to same page with URL params to use for advanced search
  */
 function buildSearchLink(
-	urlParams: URLSearchParams,
 	inputParams: readonly TInputParam[],
-	values: Map<string, TParamValue>,
+	values: NestedURLSearchParams,
 ) {
-	urlParams.delete('adv')
+	const localValues = values.clone()
+	console.log({ inputParams })
+	for(const [key, value] of localValues) {
+		if(value === undefined) continue
 
-	for(const [key, value] of values) {
 		const inputParam = inputParams.find(param => param.name === key)
-
-		// Delete key if input has been emptied
-		if(isUnset(value)) {
-			urlParams.delete(key)
-			continue
-		}
 
 		// Exclude key if dependents are empty
 		if(inputParam?.dependent) {
@@ -35,7 +29,7 @@ function buildSearchLink(
 			})
 
 			if(!shouldBeIncluded) {
-				urlParams.delete(key)
+				localValues.unset(key)
 				continue
 			}
 		}
@@ -45,18 +39,18 @@ function buildSearchLink(
 			const dateStr = coerceArray(value).reduce((str, date, i) => {
 				return `${str}${i === 0 ? '' : ','}${date.toISOString()}`
 			}, '')
-			urlParams.set(key, dateStr)
+			localValues.set(key, dateStr)
 			continue
 		}
 
-		urlParams.set(key, String(value))
+		localValues.set(key, value)
 	}
 
-	if(urlParams.size > 0) {
-		urlParams.set('adv', 'true')
-		return `${location.pathname}?${urlParams.toString()}`
-	} else {
+	if(localValues.isEmpty()) {
 		return `${location.pathname}`
+	} else {
+		localValues.set('adv', 'true')
+		return localValues.toString()
 	}
 }
 

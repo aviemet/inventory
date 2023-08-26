@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { omit } from 'lodash'
-import { NestedObject, NestedURLSearchParams } from '@/lib/collections'
+import { NestedURLSearchParams } from '@/lib/collections'
 
 const useLocation = () => {
 	const [location, setLocation] = useState(window.location)

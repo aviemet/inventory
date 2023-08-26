@@ -1,8 +1,8 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useMemo } from 'react'
 import { type Method, type Visit } from '@inertiajs/core'
 import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
-import { type AnchorProps, type ButtonProps } from '@mantine/core'
+import { type Sx, type AnchorProps, type ButtonProps } from '@mantine/core'
 
 export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	children?: React.ReactNode
@@ -19,47 +19,55 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	disabled?: boolean
 	buttonProps?: ButtonProps
 	preserveScroll?: boolean
+	sx?: Sx
 }
 
 const externalPrefix = ['http', 'www']
 
 const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', method, visit, external, onProgress, preserveScroll, ...props },
+	{ children, href, as = 'a', method, visit, external, onProgress, preserveScroll, buttonProps, ...props },
 	ref,
 ) => {
-	let renderExternal = external
+	const renderExternal = useMemo(() => {
+		if(external !== undefined) return external
 
-	if(external === undefined) {
+		let localExternal = false
 		externalPrefix.some(prefix => {
 			if(href.startsWith(prefix)) {
-				renderExternal = true
+				const url = new URL(href)
+				localExternal = url.hostname !== window.location.hostname
 			}
 		})
-	}
+		return localExternal
+	}, [href, external])
 
 	if(renderExternal) {
-		return <ExternalLink
+		return (
+			<ExternalLink
+				href={ href }
+				ref={ ref }
+				{ ...onProgress }
+				{ ...props }
+			>
+				{ children }
+			</ExternalLink>
+		)
+	}
+
+	return (
+		<InertiaLink
 			href={ href }
+			as={ as }
+			method={ method }
+			visit={ visit }
 			ref={ ref }
+			preserveScroll={ preserveScroll }
 			{ ...onProgress }
 			{ ...props }
 		>
 			{ children }
-		</ExternalLink>
-	}
-
-	return <InertiaLink
-		href={ href }
-		as={ as }
-		method={ method }
-		visit={ visit }
-		ref={ ref }
-		preserveScroll={ preserveScroll }
-		{ ...onProgress }
-		{ ...props }
-	>
-		{ children }
-	</InertiaLink>
+		</InertiaLink>
+	)
 })
 
 export default Link

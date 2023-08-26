@@ -3,13 +3,11 @@ import { DateInput } from '@/Components/Inputs'
 import { type DateInputValue } from '@/Components/Inputs/DateInput'
 import { type IAdvancedInputProps } from '.'
 import { type DateValue } from '@mantine/dates'
-import dayjs from 'dayjs'
 
 const Date = ({
 	advancedSearch,
 	name,
 }: IAdvancedInputProps) => {
-	console.log({ advancedSearch })
 	const { values, inputProps, setInputValue } = advancedSearch
 
 	const { mb, wrapperProps, value } = inputProps<DateInputValue>(`${name}[start]`)

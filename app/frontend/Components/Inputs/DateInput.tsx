@@ -9,6 +9,7 @@ import {
 import { CalendarIcon } from '../Icons'
 import { IInputProps } from '.'
 import InputWrapper from './InputWrapper'
+import { isUnset } from '@/lib'
 
 export type DateInputValue = Date | DatesRangeValue | Date[] | undefined
 
@@ -64,7 +65,7 @@ const DateInputComponent = ({
 			<DatePickerInput
 				id={ inputId }
 				name={ name }
-				value={ localValue }
+				value={ isUnset(localValue) ? undefined : localValue }
 				type={ localType }
 				onChange={ handleChange }
 				radius={ radius }

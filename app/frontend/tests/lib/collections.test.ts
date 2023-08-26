@@ -61,8 +61,31 @@ describe('NestedURLSearchParams', () => {
 		})
 	})
 
+	test('initializes with object', () => {
+		const init = {
+			test: 'one',
+			nest: {
+				two: 'three',
+			},
+		}
+
+		const params = new NestedURLSearchParams(init)
+
+		expect(params.data).toMatchObject(init)
+	})
+
 	test('toString', () => {
 		expect(nestedParams.toString()).toEqual('?created_at[type]=range&created_at[start]=now&name=hi')
+
+		const init = {
+			test: 'one',
+			nest: {
+				two: 'three',
+			},
+		}
+
+		const params = new NestedURLSearchParams(init)
+		expect(params.toString()).toEqual('?test=one&nest[two]=three')
 	})
 
 	test('getter', () => {
@@ -85,5 +108,28 @@ describe('NestedURLSearchParams', () => {
 				three: 23,
 			},
 		})
+	})
+
+	test('clone', () => {
+		const clone = nestedParams.clone()
+
+		expect(clone).toBeInstanceOf(NestedURLSearchParams)
+		expect(clone).not.toBe(nestedParams)
+		expect(clone.get('name')).toEqual('hi')
+	})
+
+	test('iterator', () => {
+		const init = {
+			two: {
+				three: 'four',
+				five: 'six',
+			},
+		}
+		const params = new NestedURLSearchParams(init)
+
+		for(const [key, value] of params) {
+			expect(key).toEqual('two')
+			expect(value).toMatchObject(init.two)
+		}
 	})
 })

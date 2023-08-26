@@ -4,6 +4,7 @@ import { isUnset } from '@/lib/forms'
 import { router } from '@inertiajs/react'
 import cx from 'clsx'
 import { type MantineTheme } from '@mantine/core'
+import { NestedURLSearchParams } from '@/lib'
 import buildSearchLink from './buildSearchLink'
 
 type TSpecialSearchTypes = 'date'
@@ -31,7 +32,7 @@ export type TParamValue = string|number|Date|Date[]|undefined|null
  * 	inputProps(name): Method to return object of props to be passed into an input
  */
 const useAdvancedSearch = (
-	inputParams: Readonly<TInputParam[]>,
+	inputParams: TInputParam[],
 	options?: IOptions,
 ) => {
 	// TODO: Trying to infer keys from prop
@@ -39,47 +40,72 @@ const useAdvancedSearch = (
 
 	const location = useLocation()
 
-	const [searchLink, setSearchLink] = useState(`${location.pathname}${location.search}`)
+	const [searchLink, setSearchLink] = useState(location.href)
 
-	const startingValues = useMemo(() => inputParams.reduce(
-		(data: Map<TInputParamName, TParamValue>, param) => {
+	const localInputParams = useMemo(() => {
+		const extraParams: TInputParam[] = []
+
+		inputParams.forEach(param => {
+			switch(param?.type) {
+				case 'date':
+					extraParams.push({
+						name: `${param}[start]`,
+					})
+					extraParams.push({
+						name: `${param}[type]`,
+						dependent: `${param}[start]`,
+					})
+					break
+				default:
+					return
+			}
+		})
+
+		return inputParams.concat(extraParams)
+	}, [inputParams])
+
+	// Builds a Map from keys in `inputParams` with values from URL string
+	// These are the starting values for local state used for form inputs
+	const startingValues = useMemo(() => localInputParams.reduce(
+		(data: NestedURLSearchParams, param) => {
 			// Handle special input types
 			switch(param?.type) {
 				case 'date':
 					data.set(`${param.name}[type]`, 'exact')
-					data.set(`${param.name}[start]`, location.params.get(`${param.name}[start]`) || '')
-					data.set(`${param.name}[end]`, location.params.get(`${param.name}[end]`) || '')
+					data.set(`${param.name}[start]`, data.get(`${param.name}[start]`) || '')
+					data.set(`${param.name}[end]`, data.get(`${param.name}[end]`) || '')
 
 					return data
 				default:
-					data.set(param.name, location.params.get(param.name) || param.default || '')
+					data.set(param.name, data.get(param.name) || param.default || '')
 			}
 
 			return data
 		},
-		new Map(),
-	), [inputParams, location.params])
+		location.nestedParams.clone(),
+	), [localInputParams, location.nestedParams])
 
 	const [values, setValues] = useState(startingValues)
 
 	// Build URL params when input values change
 	useEffect(() => {
-		setSearchLink(buildSearchLink(location.params, inputParams, values))
-	}, [inputParams, location.params, values])
+		setSearchLink(buildSearchLink(localInputParams, values))
+	}, [localInputParams, values])
 
 	const resetValues = useCallback(() => {
-		setValues(inputParams.reduce(
-			(data: Map<TInputParamName, TParamValue>, param) => {
-				data.set(param.name, param.default || '')
+		setValues(prevValues => localInputParams.reduce(
+			(data, param) => {
+				data.set(param.name, param.default ?? '')
 				return data
 			},
-			new Map(),
+			prevValues.clone(),
 		))
-	}, [inputParams])
+	}, [localInputParams])
 
+	// Method returned from hook to be passed to an input
 	const buildInputProps = <T = string>(name: TInputParamName) => {
-		const param = inputParams.find(param => param.name === name)
-		console.log({ name, param })
+		const param = localInputParams.find(param => param.name === name)
+
 		let value: T
 		switch(param?.type) {
 			case 'date':
@@ -88,7 +114,6 @@ const useAdvancedSearch = (
 			default:
 				value = values.get(name) as T
 		}
-
 
 		return {
 			name,
@@ -119,8 +144,8 @@ const useAdvancedSearch = (
 		}
 	}
 
-	const setInputValue = useCallback((name: TInputParamName, value: TParamValue) => setValues((prevValues) => {
-		const newValues = new Map(prevValues)
+	const setInputValue = useCallback((name: TInputParamName, value: TParamValue) => setValues(prevValues => {
+		const newValues = prevValues.clone()
 		newValues.set(name, value)
 		return newValues
 	}), [])
