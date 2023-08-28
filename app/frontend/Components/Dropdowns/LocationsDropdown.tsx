@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
-import { Routes, inFormContext } from '@/lib'
+import { Routes, useInFormContext } from '@/lib'
 import LocationsForm from '@/Pages/Locations/Form'
 import { getLocationsAsOptions } from '@/queries/locations'
 import { isEmpty } from 'lodash'
@@ -38,7 +38,7 @@ const LocationsDropdown = forwardRef<HTMLInputElement, ILocationsDropdown>((
 		...props,
 	}
 
-	if(inFormContext()) {
+	if(useInFormContext()) {
 		return (
 			<FormSelect
 				newForm={ <LocationsForm to={ Routes.locations() } /> }

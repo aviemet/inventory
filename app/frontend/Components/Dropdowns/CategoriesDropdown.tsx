@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
-import { Routes, inFormContext } from '@/lib'
+import { Routes, useInFormContext } from '@/lib'
 import CategoriesForm from '@/Pages/Categories/Form'
 import { getCategoriesAsOptions } from '@/queries/categories'
 import { isEmpty } from 'lodash'
@@ -37,7 +37,7 @@ const CategoriesDropdown = forwardRef<HTMLInputElement, ICategoriesDropdown>((
 		...props,
 	}
 
-	if(inFormContext()) {
+	if(useInFormContext()) {
 		return (
 			<FormSelect
 				newForm={ <CategoriesForm

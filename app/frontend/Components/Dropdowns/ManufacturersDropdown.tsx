@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
-import { Routes, inFormContext } from '@/lib'
+import { Routes, useInFormContext } from '@/lib'
 import ManufacturersForm from '@/Pages/Manufacturers/Form'
 import { getManufacturersAsOptions } from '@/queries/manufacturers'
 import { isEmpty } from 'lodash'
@@ -35,7 +35,7 @@ const ManufacturersDropdown = forwardRef<HTMLInputElement, IManufacturersDropdow
 		...props,
 	}
 
-	if(inFormContext()) {
+	if(useInFormContext()) {
 		return (
 			<FormSelect
 				newForm={ <ManufacturersForm to={ Routes.apiManufacturers() } /> }

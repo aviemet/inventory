@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { MultiSelect as FormMultiSelect } from '@/Components/Form'
 import { MultiSelect as InputMultiSelect } from '@/Components/Inputs'
-import { inFormContext } from '@/lib'
+import { useInFormContext } from '@/lib'
 import { getPeopleAsOptions } from '@/queries/people'
 import { isEmpty } from 'lodash'
 import { type IAsyncMultiSelect } from '.'
@@ -34,7 +34,7 @@ const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
 		...props,
 	}
 
-	if(inFormContext()) {
+	if(useInFormContext()) {
 		return <FormMultiSelect { ...commonProps } />
 	}
 

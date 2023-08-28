@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
-import { inFormContext } from '@/lib'
+import { useInFormContext } from '@/lib'
 import { getPeopleAsOptions } from '@/queries/people'
 import { isEmpty } from 'lodash'
 import { type IAsyncDropdown } from '.'
@@ -34,7 +34,7 @@ const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
 		...props,
 	}
 
-	if(inFormContext()) {
+	if(useInFormContext()) {
 		return <FormSelect { ...commonProps } />
 	}
 

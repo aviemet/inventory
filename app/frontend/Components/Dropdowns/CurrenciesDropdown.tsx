@@ -3,7 +3,7 @@ import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { getCurrencies } from '@/queries/currencies'
 import { isEmpty } from 'lodash'
-import { inFormContext } from '@/lib'
+import { useInFormContext } from '@/lib'
 import { type IAsyncDropdown } from '.'
 
 interface ICurrenciesDropdown extends IAsyncDropdown<Schema.CurrencyOption> {}
@@ -33,7 +33,7 @@ const CurrenciesDropdown = forwardRef<HTMLInputElement, ICurrenciesDropdown>((
 		...props,
 	}
 
-	if(inFormContext()) {
+	if(useInFormContext()) {
 		return <FormSelect { ...commonProps } />
 	}
 

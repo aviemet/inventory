@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
-import { Routes, inFormContext } from '@/lib'
+import { Routes, useInFormContext } from '@/lib'
 import VendorsForm from '@/Pages/Vendors/Form'
 import { getVendorsAsOptions } from '@/queries/vendors'
 import { isEmpty } from 'lodash'
@@ -35,7 +35,7 @@ const VendorsDropdown = forwardRef<HTMLInputElement, IVendorsDropdown>((
 		...props,
 	}
 
-	if(inFormContext()) {
+	if(useInFormContext()) {
 		return (
 			<FormSelect
 				newForm={ <VendorsForm to={ Routes.vendors() } /> }

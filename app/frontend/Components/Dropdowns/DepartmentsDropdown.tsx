@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
-import { Routes, inFormContext } from '@/lib'
+import { Routes, useInFormContext } from '@/lib'
 import DepartmentsForm from '@/Pages/Departments/Form'
 import { isEmpty } from 'lodash'
 import { getDepartmentsAsOptions } from '@/queries/departments'
@@ -35,7 +35,7 @@ const DepartmentsDropdown = forwardRef<HTMLInputElement, IDepartmentsDropdown>((
 		...props,
 	}
 
-	if(inFormContext()) {
+	if(useInFormContext()) {
 		return (
 			<FormSelect
 				newForm={ <DepartmentsForm to={ Routes.apiDepartments() } /> }

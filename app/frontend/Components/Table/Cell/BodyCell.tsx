@@ -5,17 +5,18 @@ import { Box } from '@mantine/core'
 import { type ICellProps } from './index'
 
 const BodyCell = ({ children, ...props }: ICellProps) => {
-	try {
-		const { tableState: { model } } = useTableContext()
+	const tableState = useTableContext(false)
 
-		return (
-			<BodyCellWithContext model={ model } { ...props }>
-				{ children }
-			</BodyCellWithContext>
-		)
-	} catch(e) {
+	if(tableState === null) {
 		return <Box component="td" { ...props }>{ children }</Box>
 	}
+
+	const { tableState: { model } } = tableState
+
+	return <BodyCellWithContext model={ model } { ...props }>
+		{ children }
+	</BodyCellWithContext>
+
 }
 
 export default BodyCell

@@ -3,7 +3,7 @@ import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { isEmpty } from 'lodash'
 import { getAssetsAsOptions } from '@/queries/assets'
-import { inFormContext } from '@/lib'
+import { useInFormContext } from '@/lib'
 import { type IAsyncDropdown } from '.'
 
 interface IAssetsDropdown extends IAsyncDropdown<Schema.AssetsOptions> {}
@@ -34,7 +34,7 @@ const AssetsDropdown = forwardRef<HTMLInputElement, IAssetsDropdown>((
 		...props,
 	}
 
-	if(inFormContext()) {
+	if(useInFormContext()) {
 		return <FormSelect { ...commonProps } />
 	}
 

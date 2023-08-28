@@ -51,7 +51,7 @@ export function getInputOnChange<Value>(
  * Check if within a UseForm context
  * @returns boolean
  */
-export function inFormContext() {
+export function useInFormContext() {
 	try {
 		useForm()
 		return true
