@@ -64,7 +64,7 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 							left: rem(navBarWidth + px('1rem')),
 							right: '1rem',
 							top: searchButton ? rem(searchButton.getBoundingClientRect().bottom + 10) : undefined,
-							zIndex: 9999,
+							zIndex: 10,
 						} }
 					>
 						<Box>

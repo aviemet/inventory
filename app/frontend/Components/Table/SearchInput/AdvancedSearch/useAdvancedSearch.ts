@@ -43,25 +43,29 @@ const useAdvancedSearch = (
 	const [searchLink, setSearchLink] = useState(location.href)
 
 	const localInputParams = useMemo(() => {
-		const extraParams: TInputParam[] = []
+		const finalParams: TInputParam[] = []
 
 		inputParams.forEach(param => {
 			switch(param?.type) {
 				case 'date':
-					extraParams.push({
-						name: `${param}[start]`,
+					finalParams.push({
+						name: `${param.name}[start]`,
 					})
-					extraParams.push({
-						name: `${param}[type]`,
-						dependent: `${param}[start]`,
+					finalParams.push({
+						name: `${param.name}[end]`,
+					})
+					finalParams.push({
+						name: `${param.name}[type]`,
+						dependent: `${param.name}[start]`,
 					})
 					break
 				default:
+					finalParams.push(param)
 					return
 			}
 		})
 
-		return inputParams.concat(extraParams)
+		return inputParams.concat(finalParams)
 	}, [inputParams])
 
 	// Builds a Map from keys in `inputParams` with values from URL string

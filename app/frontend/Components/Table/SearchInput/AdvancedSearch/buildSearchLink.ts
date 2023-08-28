@@ -13,24 +13,23 @@ function buildSearchLink(
 	values: NestedURLSearchParams,
 ) {
 	const localValues = values.clone()
-	console.log({ inputParams })
-	for(const [key, value] of localValues) {
-		if(value === undefined) continue
 
-		const inputParam = inputParams.find(param => param.name === key)
+	inputParams.forEach(param => {
+		const value = localValues.get(param.name)
 
 		// Exclude key if dependents are empty
-		if(inputParam?.dependent) {
+		if(param?.dependent) {
 			let shouldBeIncluded = true
-			coerceArray(inputParam.dependent).forEach(dependentParam => {
+
+			coerceArray(param.dependent).forEach(dependentParam => {
 				if(isUnset(values.get(dependentParam))) {
 					shouldBeIncluded = false
 				}
 			})
 
 			if(!shouldBeIncluded) {
-				localValues.unset(key)
-				continue
+				localValues.unset(param.name)
+				return
 			}
 		}
 
@@ -39,12 +38,13 @@ function buildSearchLink(
 			const dateStr = coerceArray(value).reduce((str, date, i) => {
 				return `${str}${i === 0 ? '' : ','}${date.toISOString()}`
 			}, '')
-			localValues.set(key, dateStr)
-			continue
+			localValues.set(param.name, dateStr)
+			return
 		}
 
-		localValues.set(key, value)
-	}
+		localValues.set(param.name, value)
+
+	})
 
 	if(localValues.isEmpty()) {
 		return `${location.pathname}`
