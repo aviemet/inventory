@@ -5,14 +5,9 @@ import { Routes } from '@/lib'
 
 interface IEditAccessoryProps{
 	accessory: Schema.AccessoriesEdit
-	models: Schema.ModelsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
-const EditAccessory = ({ accessory, ...models }: IEditAccessoryProps) => {
+const EditAccessory = ({ accessory }: IEditAccessoryProps) => {
 	const title = `Edit ${accessory.name}`
 
 	return (
@@ -29,7 +24,6 @@ const EditAccessory = ({ accessory, ...models }: IEditAccessoryProps) => {
 					to={ Routes.accessory(accessory) }
 					method="patch"
 					accessory={ accessory }
-					{ ...models }
 				/>
 			</Section>
 		</Page>

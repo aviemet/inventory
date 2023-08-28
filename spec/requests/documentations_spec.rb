@@ -2,13 +2,12 @@ require 'rails_helper'
 require_relative '../support/devise'
 
 RSpec.describe "/documentations", type: :request do
-  def valid_attributes
-    {
-      documentation: attributes_for(:documentation, {
-        documentable_type: "Item",
-        documentable_id: 1
-      },),
+  def valid_attributes(documentable)
+    attrs = {
+      documentation: attributes_for(:documentation, documentable:),
     }
+    attrs[:documentation][:documentable_id] = documentable.id
+    attrs
   end
 
   def invalid_attributes
@@ -78,9 +77,9 @@ RSpec.describe "/documentations", type: :request do
 
     context "with valid parameters" do
       it "creates a new Documentation and redirects to show page" do
-        ap({ valid_attributes: })
+        item = create(:item)
         expect{
-          post documentations_url, params: valid_attributes
+          post documentations_url, params: valid_attributes(item)
         }.to change(Documentation, :count).by(1)
         expect(response).to redirect_to(documentation_url(Documentation.last))
       end

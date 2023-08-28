@@ -5,10 +5,9 @@ import DocumentationForm from '../Form'
 
 interface INewDocumentationProps {
 	documentation: Schema.DocumentationsFormData
-	categories: Schema.CategoriesOptions[]
 }
 
-const NewDocumentation = ({ ...data }: INewDocumentationProps) => {
+const NewDocumentation = ({ documentation }: INewDocumentationProps) => {
 	const title = 'New Documentation'
 
 	return (
@@ -22,7 +21,7 @@ const NewDocumentation = ({ ...data }: INewDocumentationProps) => {
 
 				<DocumentationForm
 					to={ Routes.documentations() }
-					{ ...data }
+					documentation={ documentation }
 				/>
 			</Section>
 

@@ -1,9 +1,9 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import SearchableDropdownInput, { type ISearchableDropdownProps } from '@/Components/Inputs/SearchableDropdown'
+import SelectInput, { type ISelectProps } from '@/Components/Inputs/Select'
 import axios from 'axios'
 import { Routes } from '@/lib'
 
-interface IItemsDropdownProps extends Omit<ISearchableDropdownProps, 'options'> {
+interface IItemsDropdownProps extends Omit<ISelectProps, 'options'> {
 
 }
 
@@ -20,7 +20,7 @@ const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdownProps>((
 			})
 	}, [])
 	return (
-		<SearchableDropdownInput
+		<SelectInput
 			ref={ ref }
 			options={ items }
 			{ ...props }

@@ -24,4 +24,14 @@ class Items::EditSerializer < Assignable::SingleSerializer
   def assigned
     item.assigned?
   end
+
+  type :number
+  def department_id
+    item.department&.id
+  end
+
+  belongs_to :model, serializer: Models::OptionsSerializer
+  belongs_to :vendor, serializer: Vendors::OptionsSerializer
+  belongs_to :default_location, serializer: Locations::OptionsSerializer
+  has_one :department, serializer: Departments::OptionsSerializer
 end

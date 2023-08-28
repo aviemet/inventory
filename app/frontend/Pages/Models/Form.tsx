@@ -1,13 +1,9 @@
 import React from 'react'
-import ManufacturersDropdown from '../../Components/Form/Dropdowns/ManufacturersDropdown'
-import {
-	Form,
-	TextInput,
-	Textarea,
-	SearchableDropdown,
-	Submit,
-} from '@/Components/Form'
+import ManufacturersDropdown from '../../Components/Dropdowns/ManufacturersDropdown'
+import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
+import { CategoriesDropdown } from '@/Components/Dropdowns'
+import { coerceArray } from '@/lib'
 
 type TModelFormData = {
 	model: Schema.ModelsFormData
@@ -18,18 +14,16 @@ export interface IModelFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TModelFormData>) => boolean|void
 	model?: Schema.ModelsFormData
-	categories: Schema.CategoriesOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
 }
 
 const emptyModel: Schema.ModelsFormData = {
 	name: '',
 	model_number: '',
-	manufacturer_id: undefined,
-	category_id: undefined,
+	manufacturer_id: NaN,
+	category_id: NaN,
 }
 
-const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categories, manufacturers }: IModelFormProps) => {
+const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: IModelFormProps) => {
 	return (
 		<Form
 			model="model"
@@ -42,17 +36,11 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categori
 
 			<TextInput name="model_number" label="Model Number" required />
 
-			<ManufacturersDropdown
-				manufacturers={ manufacturers }
-			/>
+			<ManufacturersDropdown initialData={ coerceArray(model?.manufacturer) } />
 
-			<SearchableDropdown
-				required
-				label="Category"
-				name="category_id"
-				options={ categories }
-				filterMatchKeys={ ['name'] }
-				fetchOnOpen="categories"
+			<CategoriesDropdown
+				categorizable_type='Item'
+				initialData={ coerceArray(model?.category) }
 			/>
 
 			<Textarea name="notes" label="Notes" />

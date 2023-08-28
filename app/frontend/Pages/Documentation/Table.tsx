@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type ITableProps } from '@/Components/Table/Table'
-import { Routes, capitalize, polymorphicRoute } from '@/lib'
+import { Routes } from '@/lib'
 
 const DocumentationTable = (props: ITableProps) => {
 	return (
@@ -10,7 +10,7 @@ const DocumentationTable = (props: ITableProps) => {
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell sort="title">Title</Table.Cell>
-					<Table.Cell sort="slug">Thing</Table.Cell>
+					<Table.Cell sort="slug">In Reference To</Table.Cell>
 
 					<Table.Cell className="actions">Actions</Table.Cell>
 				</Table.Row>
@@ -27,7 +27,7 @@ const DocumentationTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<EditButton href={ Routes.editDocumentation(doc.id) } />
+							<EditButton href={ Routes.editDocumentation(doc.slug) } />
 						</Table.Cell>
 					</Table.Row>
 				) } />

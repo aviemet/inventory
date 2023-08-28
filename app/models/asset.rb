@@ -2,15 +2,13 @@ class Asset < ApplicationRecord
   include Ownable
   include Purchasable
   include Fieldable
-  include PgSearch::Model
   include Assignable
   include Documentable
 
-  multisearchable against: [:name, :asset_tag, :serial]
-
   pg_search_scope(
     :search,
-    against: [:name, :asset_tag, :serial, :cost_cents], associated_against: {
+    against: [:name, :asset_tag, :serial, :cost_cents],
+    associated_against: {
       model: [:name, :model_number],
       vendor: [:name],
       default_location: [:name],
@@ -26,7 +24,7 @@ class Asset < ApplicationRecord
   tracked
   resourcify
 
-  monetize :cost_cents, numericality: { greater_than_or_equal_to: 0 }
+  monetize :cost_cents, allow_blank: true, allow_nil: true, numericality: { greater_than_or_equal_to: 0 }
 
   validates_presence_of :name
 

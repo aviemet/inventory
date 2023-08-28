@@ -1,12 +1,9 @@
 import React from 'react'
-import {
-	Form,
-	TextInput,
-	SearchableDropdown,
-	Submit,
-} from '@/Components/Form'
-import { router } from '@inertiajs/react'
+import { Form, TextInput, Submit } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
+import { LocationsDropdown } from '@/Components/Dropdowns'
+import CurrenciesDropdown from '@/Components/Dropdowns/CurrenciesDropdown'
+import { coerceArray } from '@/lib'
 
 export type TLocationFormData = {
 	location: Schema.LocationsFormData
@@ -17,8 +14,6 @@ export interface ILocationFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TLocationFormData>) => boolean|void
 	location?: Schema.LocationsFormData
-	locations: Schema.LocationsOptions[]
-	currencies: any
 }
 
 const emptyLocation: Schema.LocationsFormData = {
@@ -32,8 +27,6 @@ const LocationForm = ({
 	method = 'post',
 	onSubmit,
 	location = emptyLocation,
-	locations,
-	currencies,
 }: ILocationFormProps) => {
 	return (
 		<Form
@@ -45,19 +38,13 @@ const LocationForm = ({
 		>
 			<TextInput name="name" label="Location Name" required autoFocus />
 
-			<SearchableDropdown
-				label="Currency"
-				name="currency"
-				getLabel={ value => `${value.code} (${value.symbol})` }
-				getValue={ value => value.code }
-				options={ currencies }
-			/>
+			<CurrenciesDropdown />
 
-			<SearchableDropdown
+			<LocationsDropdown
 				label="Parent Location"
 				name="parent_id"
-				options={ locations }
-				onOpen={ () => router.reload({ only: ['locations'] }) }
+				filter={ locations => locations.id !== location?.id }
+				initialData={ coerceArray(location?.parent) }
 			/>
 
 			<Submit>

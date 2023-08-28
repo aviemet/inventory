@@ -1,27 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe ManufacturerPolicy, type: :policy do
-  let(:user) { User.new }
-
   subject { described_class }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  let(:accessory) { Accessory.new }
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  context "as super_admin" do
+    login_admin
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    permissions ".scope" do
+      it "allows everything" do
+        expect(described_class.new(@admin, accessory)).to permit_all_actions
+      end
+    end
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    # permissions :show? do
+    #   pending "add some examples to (or delete) #{__FILE__}"
+    # end
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    # permissions :create? do
+    #   pending "add some examples to (or delete) #{__FILE__}"
+    # end
+
+    # permissions :update? do
+    #   pending "add some examples to (or delete) #{__FILE__}"
+    # end
+
+    # permissions :destroy? do
+    #   pending "add some examples to (or delete) #{__FILE__}"
+    # end
   end
 end

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, SearchableDropdown } from '@/Components/Form'
+import { Form, Select } from '@/Components/Form'
 import { Title } from '@mantine/core'
 import { isEmpty } from 'lodash'
 import { Routes } from '@/lib'
@@ -32,14 +32,14 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 	return (
 		<Form
 			async
-			grid={ false }
+			disableFormatting
 			data={ { user: { active_company_id: user.active_company?.id || '' }  } }
-			to={ Routes.apiUser(user.id) }
+			to={ Routes.apiUser(user.id!) }
 			method="patch"
 			model="user"
 			onChange={ handleFormChange }
 		>
-			<SearchableDropdown
+			<Select
 				name="active_company_id"
 				options={ user.companies || [] }
 				getLabel={ option => option.name }

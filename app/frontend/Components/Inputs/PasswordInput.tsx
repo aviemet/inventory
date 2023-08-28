@@ -1,17 +1,19 @@
 import React, { forwardRef } from 'react'
 import { PasswordInput, type PasswordInputProps } from '@mantine/core'
 import Label from './Label'
+import { IInputProps } from '.'
+import InputWrapper from './InputWrapper'
 
-export interface IPasswordInputProps extends PasswordInputProps {}
+export interface IPasswordInputProps extends PasswordInputProps, IInputProps {}
 
 const PasswordInputComponent = forwardRef<HTMLInputElement, IPasswordInputProps>((
-	{ label, name, required = false, id, size = 'md', ...props },
+	{ label, name, required = false, id, size = 'md', wrapper, wrapperProps, ...props },
 	ref,
 ) => {
 	const inputId = id || name
 
 	return (
-		<>
+		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
@@ -22,7 +24,7 @@ const PasswordInputComponent = forwardRef<HTMLInputElement, IPasswordInputProps>
 				size={ size }
 				{ ...props }
 			/>
-		</>
+		</InputWrapper>
 	)
 })
 

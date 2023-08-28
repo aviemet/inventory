@@ -8,7 +8,7 @@ class AccessoriesController < ApplicationController
   # GET /accessories
   def index
     authorize accessories
-    paginated_accessories = accessories.page(params[:page] || 1)
+    paginated_accessories = accessories.page(params[:page] || 1).per(current_user.limit(:accessories))
 
     render inertia: "Accessories/Index", props: {
       accessories: -> { paginated_accessories.render(view: :index) },
@@ -32,11 +32,6 @@ class AccessoriesController < ApplicationController
     authorize Accessory
     render inertia: "Accessories/New", props: {
       accessory: Accessory.new.render(view: :form_data),
-      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      locations: -> { @active_company.locations.render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
-      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :options) }
     }
   end
 
@@ -45,11 +40,6 @@ class AccessoriesController < ApplicationController
     authorize accessory
     render inertia: "Accessories/Edit", props: {
       accessory: accessory.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Accessory).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      locations: -> { @active_company.locations.render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
-      categories: -> { @active_company.categories.find_by_type(:accessory).render(view: :options) }
     }
   end
 

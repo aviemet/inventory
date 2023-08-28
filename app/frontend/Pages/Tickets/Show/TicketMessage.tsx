@@ -1,22 +1,22 @@
 import React from 'react'
-import { Box, DangerousHtml, Group, Link, Section } from '@/Components'
+import { Box, DangerousHtml, Group, Link, Paper } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import { Form, RichText, Submit } from '@/Components/Form'
 import { EditIcon, CrossIcon } from '@/Components/Icons'
 import { IconButton } from '@/Components/Button'
 import { useToggle } from '@mantine/hooks'
-import { usePage } from '@inertiajs/react'
+import { usePageProps } from '@/lib/hooks'
 
 interface ITicketMessageProps {
 	message: Schema.TicketMessage
 }
 
 const TicketMessage = ({ message }: ITicketMessageProps) => {
-	const { auth: { user } } = usePage<SharedInertiaProps>().props
+	const { auth: { user } } = usePageProps()
 	const [isEditing, toggleIsEditing] = useToggle()
 
 	return (
-		<Section>
+		<Paper p="sm">
 			<Group position="apart" align="start">
 				<Box>
 					{ message.created_by?.id && <Box>
@@ -51,7 +51,7 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 				<DangerousHtml>{ message.body }</DangerousHtml>
 			}
 
-		</Section>
+		</Paper>
 	)
 }
 

@@ -8,7 +8,7 @@ class LicensesController < ApplicationController
   # GET /licenses
   def index
     authorize licenses
-    paginated_licenses = licenses.page(params[:page] || 1)
+    paginated_licenses = licenses.page(params[:page] || 1).per(current_user.limit(:licenses))
 
     render inertia: "Licenses/Index", props: {
       licenses: paginated_licenses.render(view: :index),
@@ -32,9 +32,6 @@ class LicensesController < ApplicationController
     authorize License
     render inertia: "Licenses/New", props: {
       license: License.new.render(view: :form_data),
-      categories: -> { @active_company.categories.find_by_type(:License).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 
@@ -43,9 +40,6 @@ class LicensesController < ApplicationController
     authorize license
     render inertia: "Licenses/Edit", props: {
       license: license.render(view: :edit),
-      categories: -> { @active_company.categories.find_by_type(:License).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 
@@ -86,10 +80,6 @@ class LicensesController < ApplicationController
   def create
     authorize License
     license.company = @active_company
-
-    # if !license.valid?
-    #   ap({ license:, errors: license.errors.to_hash })
-    # end
 
     if license.save
       redirect_to license, notice: 'License was successfully created'

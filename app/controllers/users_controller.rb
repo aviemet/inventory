@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   # GET /users
   def index
     authorize users
-    paginated_users = users.page(params[:page] || 1)
+    paginated_users = users.page(params[:page] || 1).per(current_user.limit(:users))
 
     render inertia: "Users/Index", props: {
       users: users.render(view: :index),
@@ -94,29 +94,11 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/update_table_preferences/:id
-  def update_table_preferences
-    authorize user
-    if user.update_column(:table_preferences, current_user.table_preferences.deep_merge(request.params[:user][:table_preferences]))
-      head :ok, content_type: "text/html"
-    end
-  end
-
-  # PATCH/PUT /users/update_user_preferences/:id
-  def update_user_preferences
-    authorize user
-    if user.update_column(:user_preferences, current_user.user_preferences.deep_merge(request.params[:user][:user_preferences]))
-      head :ok, content_type: "text/html"
-    end
-  end
-
   # DELETE /users/:id
   def destroy
     authorize user
     user.destroy
-    respond_to do
-      redirect_to users_url, notice: 'User was successfully destroyed.'
-    end
+    redirect_to users_url, notice: 'User was successfully destroyed.'
   end
 
   private

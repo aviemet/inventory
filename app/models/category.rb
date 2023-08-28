@@ -1,7 +1,6 @@
 class Category < ApplicationRecord
   include Ownable
   include Fieldable
-  include PgSearch::Model
 
   pg_search_scope(
     :search,

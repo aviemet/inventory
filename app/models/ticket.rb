@@ -1,5 +1,10 @@
 class Ticket < ApplicationRecord
-  include PgSearch::Model
+  include Ownable
+
+  multisearchable(
+    against: [:number, :subject],
+    additional_attributes: ->(record) { { label: record.subject } },
+  )
 
   pg_search_scope(
     :search,
@@ -28,6 +33,8 @@ class Ticket < ApplicationRecord
   validates_presence_of :subject, message: "Subject can't be blank"
 
   attribute :status_id, default: 1
+
+  scope :includes_associated, -> { includes([:status, :created_by, :asset, assignments: :person]) }
 
   accepts_nested_attributes_for :assignments
 end

@@ -1,9 +1,11 @@
 class Network < ApplicationRecord
   include Ownable
-  include PgSearch::Model
   include Documentable
 
-  multisearchable against: [:name, :address, :gateway, :vlan_id]
+  multisearchable(
+    against: [:name, :address, :gateway, :vlan_id],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
 
   pg_search_scope(
     :search,
@@ -19,11 +21,11 @@ class Network < ApplicationRecord
   resourcify
 
   validates :address, presence: true
-  validate :is_network
+  validate :network?
 
   private
 
-  def is_network
+  def network?
     return unless self.address
 
     if self.address&.prefix != 32 && !self.address&.network?

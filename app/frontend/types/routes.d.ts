@@ -32,8 +32,8 @@ declare type RequiredParameters<T extends number> = T extends 1 ? [RequiredRoute
     RequiredRouteParameter,
     RequiredRouteParameter
 ] : RequiredRouteParameter[];
-declare type RouteHelperOptions<T extends string> = RouteOptions & Optional<Record<T, OptionalRouteParameter>>;
-declare type RouteHelper<T extends number = number, U extends string = string> = ((...args: [...RequiredParameters<T>, RouteHelperOptions<U>]) => string) & RouteHelperExtras;
+declare type RouteHelperOptions = RouteOptions & Record<string, OptionalRouteParameter>;
+declare type RouteHelper<T extends number = number> = ((...args: [...RequiredParameters<T>, RouteHelperOptions]) => string) & RouteHelperExtras;
 declare type RouteHelpers = Record<string, RouteHelper>;
 declare type Configuration = {
     prefix: string;
@@ -118,6 +118,26 @@ export const accessory: ((
 
 /**
  * Generates rails route to
+ * /api/accessories(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAccessories: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/accessories(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAccessoriesOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/accessories/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -125,6 +145,38 @@ export const accessory: ((
  */
 export const apiAccessory: ((
   id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/assets/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAsset: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/assets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAssets: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/assets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiAssetsOptions: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -162,6 +214,16 @@ export const apiCategories: ((
 
 /**
  * Generates rails route to
+ * /api/options/categories(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCategoriesOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/categories/:slug(.:format)
  * @param {any} slug
  * @param {object | undefined} options
@@ -179,6 +241,16 @@ export const apiCategory: ((
  * @returns {string} route path
  */
 export const apiCompanies: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/companies(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCompaniesOptions: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -208,6 +280,26 @@ export const apiComponent: ((
 
 /**
  * Generates rails route to
+ * /api/components(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiComponents: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/components(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiComponentsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/consumables/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -215,6 +307,26 @@ export const apiComponent: ((
  */
 export const apiConsumable: ((
   id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/consumables(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiConsumables: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/consumables(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiConsumablesOptions: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -242,6 +354,26 @@ export const apiContracts: ((
 
 /**
  * Generates rails route to
+ * /api/options/contracts(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiContractsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/currencies(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCurrencies: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/departments/:slug(.:format)
  * @param {any} slug
  * @param {object | undefined} options
@@ -264,11 +396,43 @@ export const apiDepartments: ((
 
 /**
  * Generates rails route to
+ * /api/options/departments(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiDepartmentsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/documentations/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiDocumentation: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/documentations(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiDocumentations: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/documentations(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiDocumentationsOptions: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -410,6 +574,16 @@ export const apiItems: ((
 
 /**
  * Generates rails route to
+ * /api/options/items(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiItemsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/licenses/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -417,6 +591,26 @@ export const apiItems: ((
  */
 export const apiLicense: ((
   id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/licenses(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiLicenses: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/licenses(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiLicensesOptions: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -444,6 +638,16 @@ export const apiLocations: ((
 
 /**
  * Generates rails route to
+ * /api/options/locations(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiLocationsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/manufacturers/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -466,13 +670,23 @@ export const apiManufacturers: ((
 
 /**
  * Generates rails route to
- * /api/models/:id(.:format)
- * @param {any} id
+ * /api/options/manufacturers(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiManufacturersOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/models/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiModel: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -483,6 +697,16 @@ export const apiModel: ((
  * @returns {string} route path
  */
 export const apiModels: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/models(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiModelsOptions: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -510,6 +734,16 @@ export const apiNetworks: ((
 
 /**
  * Generates rails route to
+ * /api/options/networks(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiNetworksOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/orders/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -532,6 +766,16 @@ export const apiOrders: ((
 
 /**
  * Generates rails route to
+ * /api/options/orders(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiOrdersOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/ownerships/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -549,6 +793,26 @@ export const apiOwnership: ((
  * @returns {string} route path
  */
 export const apiOwnerships: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/people(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPeople: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/people(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPeopleOptions: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -640,6 +904,40 @@ export const apiStatusLabels: ((
 
 /**
  * Generates rails route to
+ * /api/options/status_labels(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiStatusLabelsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/users/:id/update_table_preferences(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiUpdateTablePreferences: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/users/:id/update_user_preferences(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiUpdateUserPreferences: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/users/:id(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -662,13 +960,13 @@ export const apiUsers: ((
 
 /**
  * Generates rails route to
- * /api/vendors/:id(.:format)
- * @param {any} id
+ * /api/vendors/:slug(.:format)
+ * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const apiVendor: ((
-  id: RequiredRouteParameter,
+  slug: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -679,6 +977,16 @@ export const apiVendor: ((
  * @returns {string} route path
  */
 export const apiVendors: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/vendors(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiVendorsOptions: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 
@@ -2883,30 +3191,6 @@ export const unassignAssignment: ((
  */
 export const updateRailsDiskService: ((
   encodedToken: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /users/update_table_preferences/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const updateTablePreferences: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
- * /users/update_user_preferences/:id(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const updateUserPreferences: ((
-  id: RequiredRouteParameter,
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

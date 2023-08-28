@@ -23,4 +23,8 @@ class Licenses::FormDataSerializer < Assignable::QuantitySerializer
   def cost
     currency_for(license)
   end
+
+  belongs_to :vendor, serializer: Vendors::OptionsSerializer, optional: true
+  belongs_to :manufacturer, serializer: Manufacturers::OptionsSerializer, optional: true
+  belongs_to :category, serializer: Categories::OptionsSerializer, optional: true
 end

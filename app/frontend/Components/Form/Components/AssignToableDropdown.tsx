@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { SearchableDropdown, RadioButtons } from '@/Components/Form'
+import { Select, RadioButtons } from '@/Components/Form'
 import { useForm } from 'use-inertia-form'
+import LocationsForm from '@/Pages/Locations/Form'
+import { Routes } from '@/lib'
 
 type TAssignToableOptions = Schema.ItemsOptions[]|Schema.PeopleOptions[]|Schema.LocationsOptions[]
 
@@ -72,11 +74,14 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 				options={ options.map(option => ({ label: option, value: option })) }
 				required
 			/> }
-			<SearchableDropdown
+			<Select
 				options={ optionsValues }
 				label={ options.length > 1 ? data.assignment.assign_toable_type : 'Checkout To' }
 				name="assign_toable_id"
 				onChange={ handleAssignToableChange }
+				newForm={ (type === 'Location' && locations) ? <LocationsForm
+					to={ Routes.locations() }
+				/> : undefined }
 				required
 			/>
 		</>

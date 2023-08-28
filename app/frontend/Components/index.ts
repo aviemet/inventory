@@ -30,6 +30,7 @@ export {
 	Paper,
 	SimpleGrid,
 	Stack,
+	Text,
 	Tooltip,
 	ThemeIcon as Icon,
 } from '@mantine/core'

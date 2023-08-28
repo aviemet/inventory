@@ -3,10 +3,9 @@ import Field from '../Field'
 import SwitchInput, { type ISwitchProps } from '@/Components/Inputs/Switch'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
+import { type IFormInputProps } from '.'
 
-interface IFormSwitchProps extends Omit<ISwitchProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
-	field?: boolean
-}
+interface IFormSwitchProps extends Omit<ISwitchProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<boolean> {}
 
 const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 	{ name, onChange, onBlur, id, required, model, field = true, ...props },
@@ -16,12 +15,12 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
-		if(onChange) onChange(e, form)
+		onChange?.(e.target.checked, form)
 	}
 
 	const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
-		if(onBlur) onBlur(e, form)
+		if(onBlur) onBlur(e.target.checked, form)
 	}
 
 	return (
@@ -30,7 +29,6 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 				type="checkbox"
 				required={ required }
 				errors={ !!error }
-				grid={ false }
 			>
 				{ children }
 			</Field>
@@ -38,6 +36,7 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 		condition={ field }
 		>
 			<SwitchInput
+				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				defaultChecked={ Boolean(value) }
@@ -46,7 +45,7 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

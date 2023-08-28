@@ -1,20 +1,3 @@
-require 'simplecov'
-require "pundit/rspec"
-
-SimpleCov.start 'rails' do
-  enable_coverage :branch
-
-  add_filter "/spec/"
-  add_filter "/db/seeds.rb"
-  add_filter "/db/seeds/"
-
-  add_group "Models", "app/models"
-  add_group "Controllers", "app/controllers"
-  add_group "Serializers", "app/serializers"
-  add_group "Jobs", "app/jobs"
-  add_group "Services", "app/services"
-end
-
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -32,6 +15,7 @@ require 'rspec/rails'
 require 'inertia_rails/rspec'
 require 'bullet'
 require 'database_cleaner/active_record'
+require "pundit/rspec"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

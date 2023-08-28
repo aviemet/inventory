@@ -2,10 +2,13 @@ class Item < Asset
   include Assignable::Single
   include AssignToable
 
+  multisearchable(
+    against: [:name, :asset_tag, :serial],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
+
   tracked
   resourcify
-
-  after_create :ensure_nic
 
   validates_presence_of :model
 
@@ -27,11 +30,4 @@ class Item < Asset
       self.default_location
     end
   end
-
-  private
-
-  def ensure_nic
-    self.nics << Nic.new if self.nics.empty?
-  end
-
 end

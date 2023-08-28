@@ -19,8 +19,8 @@ class UserSerializer < ApplicationSerializer
     :updated_at,
     :active_company_id,
     :active,
-    :table_preferences,
-    :user_preferences,
+    table_preferences: { type: "IUserTablePreferences" },
+    user_preferences: { type: "IUserPreferences" },
   )
 
   has_many :roles, serializer: RoleSerializer

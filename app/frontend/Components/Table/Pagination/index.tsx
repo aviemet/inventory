@@ -1,7 +1,8 @@
 import React from 'react'
+import Link from '@/Components/Link'
 import { useTableContext } from '../TableContext'
 import { Group, Pagination, type PaginationProps } from '@mantine/core'
-import Link from '@/Components/Link'
+import LimitSelect from './LimitSelect'
 
 const pageLink = (page: number) => {
 	const url = new URL(window.location.href)
@@ -18,7 +19,7 @@ const pageLink = (page: number) => {
 interface IPaginationComponent extends Omit<PaginationProps, 'total'> {}
 
 const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPaginationComponent) => {
-	const { tableState: { pagination } } = useTableContext()
+	const { tableState: { pagination, model } } = useTableContext()
 
 	if(!pagination) return <></>
 
@@ -26,16 +27,12 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 	const recordStart = ((current_page - 1) * limit) + 1
 	const recordEnd = Math.min(current_page * limit, count)
 
+
 	return (
 		<Group position="apart" mt="auto" pt={ 8 }>
-			{ /* <Select data={ [
-				{ value: '10', label: '10' },
-				{ value: '25', label: '25' },
-				{ value: '50', label: '50' },
-				{ value: '100', label: '100' },
-			] } /> */ }
 			<div>
-        Showing <b>{ recordStart } - { recordEnd } / { count }</b>
+				{ model && <>Records per page: <LimitSelect pagination={ pagination } model={ model } /></> }
+        Showing <b> { recordStart } - { recordEnd } / { count } </b>
 			</div>
 
 			<Pagination.Root

@@ -2,8 +2,8 @@ export {
 	Key as LicensesIcon,
 	Dashboard as DashboardIcon,
 	Devices as ItemsIcon,
-	Users as PeopleIcon,
-	UserCircle as UsersIcon,
+	UserCircle as PeopleIcon,
+	Users as UsersIcon,
 	Ticket as TicketsIcon,
 	BuildingStore as VendorsIcon,
 	// Receipt as PurchasesIcon,
@@ -43,6 +43,7 @@ export {
 	MdAdd as NewIcon,
 	MdOutlineScreenSearchDesktop as ModelsIcon,
 	MdOutlineDelete as TrashIcon,
+	MdCalendarMonth as CalendarIcon,
 } from 'react-icons/md'
 
 

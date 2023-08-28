@@ -3,10 +3,12 @@ class Person < ApplicationRecord
   include Contactable
   include AssignToable
   include Fieldable
-  include PgSearch::Model
   include Documentable
 
-  multisearchable against: [:first_name, :middle_name, :last_name, :employee_number]
+  multisearchable(
+    against: [:first_name, :middle_name, :last_name, :employee_number],
+    additional_attributes: ->(record) { { label: record.full_name } },
+  )
 
   pg_search_scope(
     :search,
@@ -28,7 +30,7 @@ class Person < ApplicationRecord
   belongs_to :manager, class_name: 'Person', optional: true
   belongs_to :location, optional: true
 
-  has_many :ticket_assignments
+  has_many :ticket_assignments, dependent: :nullify
   has_many :tickets, through: :ticket_assignments, inverse_of: :assignees
 
   has_many :person_group_assignments
@@ -49,10 +51,6 @@ class Person < ApplicationRecord
     "#{first_name} #{last_name}"
   end
   alias :name :full_name
-
-  def self.to_s_field
-    :first_name
-  end
 
   def default_location
     self&.location || self&.department&.location

@@ -5,17 +5,19 @@ import { Box } from '@mantine/core'
 import { type ICellProps } from './index'
 
 const HeadCell = ({ children, ...props }: ICellProps) => {
-	try {
-		const { tableState: { rows } } = useTableContext()
+	const tableState = useTableContext(false)
 
-		return (
-			<HeadCellWithContext { ...props } rows={ rows }>
-				{ children }
-			</HeadCellWithContext>
-		)
-	} catch(e) {
+	if(tableState === null) {
 		return <Box component="th" { ...props }>{ children }</Box>
 	}
+
+	const { tableState: { rows } } = tableState
+
+	return (
+		<HeadCellWithContext { ...props } rows={ rows }>
+			{ children }
+		</HeadCellWithContext>
+	)
 }
 
 export default HeadCell

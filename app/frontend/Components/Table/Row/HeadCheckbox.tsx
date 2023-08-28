@@ -29,7 +29,12 @@ const HeadCheckbox = ({ selected, rows, allChecked, indeterminate }: IRowCheckBo
 
 	return (
 		<Cell fitContent>
-			<Checkbox onChange={ handleClick } checked={ allChecked } indeterminate={ indeterminate } disabled={ rows?.length === 0 } />
+			<Checkbox
+				onChange={ handleClick }
+				checked={ allChecked }
+				indeterminate={ indeterminate }
+				disabled={ rows?.length === 0 }
+			/>
 		</Cell>
 	)
 }

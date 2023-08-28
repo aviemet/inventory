@@ -4,12 +4,7 @@ import OrderForm from '../Form'
 import { Routes } from '@/lib'
 
 interface IUpdateOrderProps{
-	order: Schema.Order
-	models: Schema.Model[]
-	vendors: Schema.Vendor[]
-	locations: Schema.Location[]
-	manufacturers: Schema.Manufacturer[]
-	categories: Schema.Category[]
+	order: Schema.OrdersEdit
 }
 
 const EditOrder = ({ order, ...models }: IUpdateOrderProps) => {
@@ -24,7 +19,7 @@ const EditOrder = ({ order, ...models }: IUpdateOrderProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<OrderForm to={ Routes.order(order) } method="patch" order={ order } { ...models } />
+				<OrderForm to={ Routes.order(order) } method="patch" order={ order } />
 			</Section>
 		</Page>
 	)

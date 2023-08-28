@@ -18,13 +18,6 @@ const tabsList = [
 	{ id: 'associations', label: 'Associations', component: Associations },
 ]
 
-const tabs = {
-	details: 'details',
-	history: 'history',
-	associations: 'associations',
-	documentations: 'documentations',
-}
-
 const ShowItem = ({ item }: IShowItemProps) => {
 	const title = item.name ?? 'Item Details'
 
@@ -66,7 +59,7 @@ const ShowItem = ({ item }: IShowItemProps) => {
 					</Menu>
 				</Group>
 
-				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
+				<Tabs urlControlled={ true } defaultValue={ tabsList[0].id }>
 					<Tabs.List>
 						{ tabsList.map(tab => (
 							<Tabs.Tab key={ tab.id } value={ tab.id }>{ tab.label }</Tabs.Tab>

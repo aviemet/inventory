@@ -4,16 +4,18 @@ import { Routes } from '@/lib'
 import Details from './Details'
 import History from './History'
 import Associations from './Associations'
+import Documentations from './Documentations'
 
 export interface IShowAccessoryProps {
 	accessory: Schema.AccessoriesShow
 }
 
-const tabs = {
-	details: 'details',
-	history: 'history',
-	associations: 'associations',
-}
+const tabsList = [
+	{ id: 'details', label: 'Details', component: Details },
+	{ id: 'history', label: 'History', component: History },
+	{ id: 'documentations', label: 'Documentation', component: Documentations },
+	{ id: 'associations', label: 'Associations', component: Associations },
+]
 
 const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 	const title = accessory.name ?? 'Accessory Details'
@@ -48,24 +50,22 @@ const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
 					</Menu>
 				</Group>
 
-				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
+				<Tabs urlControlled={ true } defaultValue={ tabsList[0].id }>
 					<Tabs.List>
-						<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
-						<Tabs.Tab value={ tabs.history }>History</Tabs.Tab>
-						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
+						{ tabsList.map(tab => (
+							<Tabs.Tab key={ tab.id } value={ tab.id }>{ tab.label }</Tabs.Tab>
+						)) }
 					</Tabs.List>
 
-					<Tabs.Panel value="details">
-						<Details accessory={ accessory } />
-					</Tabs.Panel>
+					{ tabsList.map(tab => {
+						const Component = tab.component
 
-					<Tabs.Panel value="history">
-						<History accessory={ accessory } />
-					</Tabs.Panel>
-
-					<Tabs.Panel value="associations">
-						<Associations accessory={ accessory } />
-					</Tabs.Panel>
+						return (
+							<Tabs.Panel key={ tab.id } value={ tab.id } p="md">
+								<Component accessory={ accessory } />
+							</Tabs.Panel>
+						)
+					}) }
 				</Tabs>
 			</Section>
 		</Page>

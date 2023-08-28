@@ -14,7 +14,12 @@ const PasswordsNew = () => {
 
 	return (
 		<Tile>
-			<Form model="user" data={ defaultData } to={ Routes.newUserPassword() } grid={ false }>
+			<Form
+				disableFormatting
+				model="user"
+				data={ defaultData }
+				to={ Routes.newUserPassword() }
+			>
 				<Tile.Content>
 					<div>
 						<Heading>Reset Password</Heading>

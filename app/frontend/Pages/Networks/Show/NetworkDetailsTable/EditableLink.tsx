@@ -3,7 +3,7 @@ import { Routes } from '@/lib'
 import { Link, Group } from '@/Components'
 import { Form } from '@/Components/Form'
 import { EditIcon, CrossIcon } from '@/Components/Icons'
-// import ItemsDropdown from '@/Components/Form/Dropdowns/ItemsDropdown'
+// import ItemsDropdown from '@/Components/Dropdowns/ItemsDropdown'
 import ItemsDropdown from './ItemsDropdown'
 import { ActionIcon, Box } from '@mantine/core'
 import cx from 'classnames'
@@ -72,9 +72,11 @@ const EditableLink = ({ item, ip }: IEditableLinkProps) => {
 					{
 						editing ?
 							<Form
+								disableFormatting
 								model="items"
 								data={ { item: { id: '' }, ip: '' } }
-								grid={ false }
+								async
+								to={ '#' /* TODO: API route for setting IP address on item */ }
 							>
 								<ItemsDropdown
 									ref={ dropdownRef }

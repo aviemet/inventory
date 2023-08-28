@@ -4,10 +4,9 @@ import cx from 'clsx'
 import Field from '../Field'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
+import { type IFormInputProps } from '.'
 
-interface ITextFormInputProps extends Omit<ITextInputProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
-	field?: boolean
-}
+interface ITextFormInputProps extends Omit<ITextInputProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<string> {}
 
 const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 	{
@@ -30,7 +29,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 		const value = e.target.value
 		setValue(value)
 
-		if(onChange) onChange(value, form)
+		onChange?.(value, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
@@ -55,6 +54,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 			condition={ props.hidden !== true && field }
 		>
 			<TextInput
+				ref={ ref }
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
@@ -62,7 +62,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ errorKey ? form.getError(errorKey) : error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

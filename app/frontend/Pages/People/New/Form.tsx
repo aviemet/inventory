@@ -7,9 +7,9 @@ import {
 	Checkbox,
 	FormConsumer,
 } from '@/Components/Form'
-import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
+import { DepartmentsDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
-import PeopleDropdown from '@/Components/Form/Dropdowns/PeopleDropdown'
+import PeopleDropdown from '@/Components/Dropdowns/PeopleDropdown'
 
 type TPersonFormData = {
 	person: Schema.PeopleFormData
@@ -20,9 +20,6 @@ export interface IPersonFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TPersonFormData>) => boolean|void
 	person: Schema.PeopleFormData
-	departments: Schema.DepartmentsOptions[]
-	people: Schema.PeopleOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
 const PersonForm = ({
@@ -30,10 +27,8 @@ const PersonForm = ({
 	method = 'post',
 	onSubmit,
 	person,
-	departments,
-	people,
-	locations,
 }: IPersonFormProps) => {
+
 	return (
 		<Form
 			model="person"
@@ -60,18 +55,13 @@ const PersonForm = ({
 
 			<TextInput name="employee_number" label="Employee #" />
 
-			<DepartmentsDropdown
-				departments={ departments }
-				locations={ locations }
-				name="department_id"
-			/>
+			<DepartmentsDropdown />
 
 			<TextInput name="job_title" label="Job Title" />
 
 			<PeopleDropdown
 				label="Manager"
 				name="manager_id"
-				people={ people }
 			/>
 
 			<FormConsumer>{ ({ data }: UseFormProps<TPersonFormData>) => (

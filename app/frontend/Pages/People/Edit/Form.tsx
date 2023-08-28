@@ -11,9 +11,10 @@ import {
 } from '@/Components/Form'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { useBooleanToggle } from '@/lib/hooks'
-import { DepartmentsDropdown } from '@/Components/Form/Dropdowns'
+import { DepartmentsDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
-import PeopleDropdown from '@/Components/Form/Dropdowns/PeopleDropdown'
+import PeopleDropdown from '@/Components/Dropdowns/PeopleDropdown'
+import { coerceArray } from '@/lib'
 // import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 
 
@@ -33,9 +34,6 @@ export interface IPersonFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TPersonFormData>) => boolean|void
 	person: Schema.PeopleEdit
-	departments: Schema.DepartmentsOptions[]
-	people: Schema.PeopleOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
 const PersonForm = ({
@@ -43,9 +41,6 @@ const PersonForm = ({
 	method = 'post',
 	onSubmit,
 	person,
-	departments,
-	people,
-	locations,
 }: IPersonFormProps) => {
 	const [loginEnabled, toggleLoginEnabled] = useBooleanToggle(!!person.user)
 
@@ -143,9 +138,8 @@ const PersonForm = ({
 			<TextInput name="employee_number" label="Employee #" />
 
 			<DepartmentsDropdown
-				departments={ departments }
-				locations={ locations }
 				name="department_id"
+				initialData={ coerceArray(person?.department) }
 			/>
 
 			<TextInput name="job_title" label="Job Title" required />
@@ -153,7 +147,7 @@ const PersonForm = ({
 			<PeopleDropdown
 				label="Manager"
 				name="manager_id"
-				people={ people }
+				initialData={ coerceArray(person?.manager) }
 			/>
 
 			<FormConsumer>{ (form: UseFormProps<TPersonFormData>) => (
@@ -169,8 +163,16 @@ const PersonForm = ({
 
 					<TextInput name="email" label="Email" />
 
-					<PasswordInput name="password" label={ `${person.id ? 'New' : ''} Password` } onBlur={ handlePasswordBlur } />
-					<PasswordInput name="password_confirmation" label="Check Password" onBlur={ handleCheckPasswordBlur } />
+					<PasswordInput
+						name="password"
+						label={ `${person.id ? 'New' : ''} Password` }
+						onBlur={ handlePasswordBlur }
+					/>
+					<PasswordInput
+						name="password_confirmation"
+						label="Check Password"
+						onBlur={ handleCheckPasswordBlur }
+					/>
 
 					<Checkbox name="active" label="Active" />
 

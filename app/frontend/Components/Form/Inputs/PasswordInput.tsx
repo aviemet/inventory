@@ -4,10 +4,9 @@ import Field from '../Field'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
+import { type IFormInputProps } from '.'
 
-interface IPasswordFormInputProps extends Omit<IPasswordInputProps, 'onBlur'|'onChange'|'name'>, IInertiaInputProps {
-	field?: boolean
-}
+interface IPasswordFormInputProps extends Omit<IPasswordInputProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<string> {}
 
 const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
 	{
@@ -29,7 +28,7 @@ const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
 		const value = e.target.value
 		setValue(value)
 
-		if(onChange) onChange(value, form)
+		onChange?.(value, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
@@ -54,6 +53,7 @@ const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
 			condition={ field }
 		>
 			<PasswordInput
+				ref={ ref }
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
@@ -61,7 +61,7 @@ const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/></ConditionalWrapper>
 	)

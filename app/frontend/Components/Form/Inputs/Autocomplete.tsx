@@ -3,8 +3,9 @@ import Field from '../Field'
 import AutocompleteInput, { type IAutocompleteProps } from '@/Components/Inputs/AutocompleteInput'
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
+import { type IFormInputProps } from '.'
 
-interface IFormAutocompleteProps extends Omit<IAutocompleteProps, 'name'|'onBlur'|'onChange'>, IInertiaInputProps {
+interface IFormAutocompleteProps extends Omit<IAutocompleteProps, 'name'|'onBlur'|'onChange'>, IFormInputProps<string> {
 	field?: boolean
 	endpoint?: string
 }
@@ -29,7 +30,7 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 
 	const handleChange = (parameter: string) => {
 		setValue(parameter)
-		if(onChange) onChange(parameter, form)
+		onChange?.(parameter, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
@@ -52,6 +53,7 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 				errors: Boolean(error),
 				sx: { padding: 0 },
 			} }
+			wrapper={ false }
 			{ ...props }
 		/>
 

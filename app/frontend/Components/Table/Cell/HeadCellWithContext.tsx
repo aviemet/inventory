@@ -1,10 +1,8 @@
-import React, { useRef } from 'react'
-import { usePage } from '@inertiajs/react'
-import { Link } from '@/Components'
+import React, { useMemo, useRef } from 'react'
+import { Link, Box, Flex } from '@/Components'
 import cx from 'clsx'
 import { type ICellProps } from './index'
-import { useTableContext } from '../TableContext'
-import { Box } from '@mantine/core'
+import { useLocation } from '@/lib/hooks'
 
 interface IHeadCellWithContextProps extends ICellProps {
 	rows?: Record<string, any>[]
@@ -20,33 +18,38 @@ const HeadCellWithContext = ({
 	sx,
 	...props
 }: IHeadCellWithContextProps) => {
-	const { auth: { user: { table_preferences } } } = usePage<SharedInertiaProps>().props
-	const { tableState: { model } } = useTableContext()
-
 	const thRef = useRef<HTMLTableCellElement>(null)
+	const { pathname, params } = useLocation()
 
-	const hideableString = hideable || sort
+	const localParams = new URLSearchParams(params)
 
-	if(hideableString !== undefined && model && table_preferences?.[model]?.hide?.[hideableString]) {
-		return <></>
-	}
-
-	// Build search params for column sorting
-	const { pathname, search } = window.location
-	const params = new URLSearchParams(search)
-	const paramsSort = params.get('sort')
-	const paramsDirection = params.get('direction')
-
-	if(sort) {
-		params.set('sort', sort)
-	} else {
-		params.delete('sort')
-	}
+	const paramsSort = localParams.get('sort')
+	const paramsDirection = localParams.get('direction')
 
 	const direction = paramsSort === sort && paramsDirection === 'asc' ? 'desc' : 'asc'
-	params.set('direction', direction)
 
-	const showSortLink = sort && rows!.length > 1
+	const showSortLink: boolean = sort !== undefined && rows!.length > 1
+
+	// Use URLSearchParams object to build sort link per head cell
+	const sortLink = useMemo(() => {
+		if(!showSortLink) return undefined
+
+		if(sort === undefined) {
+			localParams.delete('sort')
+			return undefined
+		}
+
+		localParams.set('sort', sort)
+
+		localParams.set('direction', direction)
+
+		return `${pathname}?${localParams.toString()}`
+
+		// Including `localParams` in the dependency array would cause the link to update with every render.
+		// Excluding is the best way to achieve performant desired results
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [showSortLink, sort, direction, pathname])
 
 	return (
 		<Box
@@ -63,16 +66,18 @@ const HeadCellWithContext = ({
 			} }
 			{ ...props }
 		>
-			{ showSortLink ?
-				<Link
-					href={ `${pathname}?${params.toString()}` }
-					preserveScroll={ true }
-				>
-					{ children }
-				</Link>
-				:
-				children
-			}
+			<Flex align="center">
+				{ showSortLink && sortLink ?
+					<Link
+						href={ sortLink }
+						preserveScroll={ true }
+					>
+						{ children }
+					</Link>
+					:
+					children
+				}
+			</Flex>
 		</Box>
 	)
 }

@@ -3,7 +3,7 @@ import {
 	Form,
 	TextInput,
 	Textarea,
-	SearchableDropdown,
+	Select,
 	Submit,
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
@@ -41,7 +41,7 @@ const CategoryForm = ({ to, method = 'post', onSubmit, category = emptyCategory 
 		>
 			<TextInput name="name" label="Name" required autoFocus />
 
-			<SearchableDropdown
+			<Select
 				label="Category Type"
 				name="categorizable_type"
 				options={ types }

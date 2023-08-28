@@ -42,7 +42,6 @@ class Settings::SmtpsController < ApplicationController
 
   # PUT /settings/mail/:id
   def update
-    ap({ smtp:, smtp_params: })
     if smtp.update(smtp_params)
       redirect_to settings_smtp_url(smtp), notice: 'Mail acccount successfully updated'
     else

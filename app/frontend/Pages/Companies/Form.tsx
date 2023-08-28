@@ -1,11 +1,8 @@
 import React from 'react'
-import {
-	Form,
-	TextInput,
-	Submit,
-} from '@/Components/Form'
+import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 import { type UseFormProps } from 'use-inertia-form'
+import { CurrenciesDropdown } from '@/Components/Dropdowns'
 
 type TCompanyFormData = {
 	company: Schema.CompaniesFormData
@@ -28,6 +25,11 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: ICompanyFormPro
 			onSubmit={ onSubmit }
 		>
 			<TextInput name="name" label="Company Name" required autoFocus />
+
+			<CurrenciesDropdown
+				label="Default Currency"
+				name="default_currency"
+			/>
 
 			<ContactForm contact={ company.contact } />
 

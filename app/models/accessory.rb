@@ -1,6 +1,11 @@
 class Accessory < Asset
   include Assignable::Quantity
 
+  multisearchable(
+    against: [:name, :asset_tag, :serial],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
+
   tracked
   resourcify
 

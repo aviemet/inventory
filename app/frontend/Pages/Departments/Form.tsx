@@ -1,7 +1,8 @@
 import React from 'react'
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
-import { LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { LocationsDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
+import { coerceArray } from '@/lib'
 
 type TDepartmentForData = {
 	department: Schema.DepartmentsFormData
@@ -12,7 +13,6 @@ export interface IDepartmentFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TDepartmentForData>) => boolean|void
 	department?: Schema.DepartmentsFormData
-	locations: Schema.LocationsOptions[]
 }
 
 const emptyDepartment: Schema.DepartmentsFormData = {
@@ -21,7 +21,7 @@ const emptyDepartment: Schema.DepartmentsFormData = {
 	notes: '',
 }
 
-const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment, locations }: IDepartmentFormProps) => {
+const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment }: IDepartmentFormProps) => {
 
 	return (
 		<Form
@@ -33,7 +33,7 @@ const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepar
 		>
 			<TextInput name="name" label="Name" required autoFocus />
 
-			<LocationsDropdown locations={ locations } />
+			<LocationsDropdown initialData={ coerceArray(department?.location) } />
 
 			<Textarea name="notes" label="Notes" />
 

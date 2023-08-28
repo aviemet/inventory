@@ -5,14 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewConsumableProps {
 	consumable: Schema.ConsumablesFormData
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const NewConsumable = ({ ...data }: INewConsumableProps) => {
+const NewConsumable = ({ consumable }: INewConsumableProps) => {
 	const title = 'New Consumable'
 
 	return (
@@ -23,7 +18,7 @@ const NewConsumable = ({ ...data }: INewConsumableProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<ConsumableForm to={ Routes.consumables() } { ...data } />
+				<ConsumableForm to={ Routes.consumables() } consumable={ consumable } />
 			</Section>
 		</Page>
 	)

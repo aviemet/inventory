@@ -5,12 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewLicenseProps {
 	license: Schema.LicensesFormData
-	categories: Schema.CategoriesOptions[]
-	vendors: Schema.VendorsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
 }
 
-const New = ({ ...data }: INewLicenseProps) => {
+const New = ({ license }: INewLicenseProps) => {
 	const title = 'New License'
 
 	return (
@@ -22,7 +19,7 @@ const New = ({ ...data }: INewLicenseProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<LicenseForm to={ Routes.licenses() } { ...data } />
+				<LicenseForm to={ Routes.licenses() } license={ license } />
 			</Section>
 
 		</Page>

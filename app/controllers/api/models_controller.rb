@@ -1,5 +1,21 @@
 class Api::ModelsController < Api::ApiController
-  expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, find_by: :slug
+  expose :models, -> { params[:category] ? @active_company.models.find_by_category(params[:category]) : @active_company.models }
+  expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, model: Model, find_by: :slug
+
+  # GET api/models/options
+  def index
+    render json: models.includes_associated.render
+  end
+
+  # GET api/models/:slug
+  def show
+    render json: model.render
+  end
+
+  # GET api/options/models
+  def options
+    render json: models.render(view: :options)
+  end
 
   # POST api/models
   def create
@@ -24,6 +40,6 @@ class Api::ModelsController < Api::ApiController
   private
 
   def model_params
-    params.require(:model).permit(:name, :model_number, :manufacturer_id, :category_id, :notes)
+    params.require(:model).permit(:id, :slug, :name, :model_number, :manufacturer_id, :category_id, :notes)
   end
 end

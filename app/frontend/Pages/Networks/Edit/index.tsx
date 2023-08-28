@@ -7,7 +7,7 @@ interface IUpdateNetworkProps{
 	network: Schema.NetworksEdit
 }
 
-const New = ({ network, ...models }: IUpdateNetworkProps) => {
+const New = ({ network }: IUpdateNetworkProps) => {
 	const title = `Edit ${network.name}`
 
 	return (
@@ -19,7 +19,7 @@ const New = ({ network, ...models }: IUpdateNetworkProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<NetworkForm to={ Routes.network(network) } method="patch" network={ network } { ...models } />
+				<NetworkForm to={ Routes.network(network) } method="patch" network={ network } />
 			</Section>
 		</Page>
 	)

@@ -4,10 +4,9 @@ import RichTextInput, { type IRichTextProps } from '@/Components/Inputs/RichText
 import cx from 'clsx'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
+import { type IFormInputProps } from '.'
 
-interface IRichTextFormProps extends Omit<IRichTextProps, 'name'|'onBlur'|'onChange'|'value'>, IInertiaInputProps {
-	field?: boolean
-}
+interface IRichTextFormProps extends Omit<IRichTextProps, 'name'|'onBlur'|'onChange'|'value'>, IFormInputProps<string> {}
 
 const RichText = ({
 	label,
@@ -24,7 +23,7 @@ const RichText = ({
 
 	const handleChange = (v, delta, sources, editor) => {
 		setValue(v)
-		if(onChange) onChange(v, form)
+		onChange?.(v, form)
 	}
 	const handleBlur = () => {
 		if(onBlur) onBlur(value, form )
@@ -53,6 +52,7 @@ const RichText = ({
 					onChange={ handleChange }
 					onBlur={ handleBlur }
 					value={ value }
+					wrapper={ false }
 					{ ...props }
 				/>
 			</>

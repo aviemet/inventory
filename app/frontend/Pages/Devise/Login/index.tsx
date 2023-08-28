@@ -32,7 +32,13 @@ const Login = () => {
 
 	return (
 		<Tile>
-			<Form model="user" data={ defaultData } to={ Routes.newUserSession() } onSubmit={ handleSubmit } grid={ false }>
+			<Form
+				disableFormatting
+				model="user"
+				data={ defaultData }
+				to={ Routes.newUserSession() }
+				onSubmit={ handleSubmit }
+			>
 				<Tile.Content>
 
 					<div>

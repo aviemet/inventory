@@ -2,8 +2,8 @@ import React from 'react'
 import { Form, TextInput, PasswordInput, Submit, Field } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
-import { usePage } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
+import { usePageProps } from '@/lib/hooks'
 
 type TRegisterFormData = {
 	user: {
@@ -24,7 +24,7 @@ const register = {
 }
 
 const Register = () => {
-	const { props } = usePage<SharedInertiaProps>()
+	const props = usePageProps()
 
 	const handleFormChange = ({ data }: UseFormProps<TRegisterFormData>) => {
 		// console.log({ data })
@@ -55,6 +55,7 @@ const Register = () => {
 	return (
 		<Tile>
 			<Form
+				disableFormatting
 				data={ {
 					user: {
 						email: '',
@@ -66,7 +67,6 @@ const Register = () => {
 				to={ Routes.userRegistration() }
 				onChange={ handleFormChange }
 				onSubmit={ handleSubmit }
-				grid={ false }
 			>
 				<Tile.Content>
 

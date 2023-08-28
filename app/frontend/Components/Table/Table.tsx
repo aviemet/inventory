@@ -14,7 +14,6 @@ import Pagination from './Pagination'
 import TableProvider from './TableContext'
 import TableSection from './Section'
 import SearchInput from './SearchInput'
-import ColumnPicker from './ColumnPicker'
 import ConditionalWrapper from '../ConditionalWrapper'
 
 export interface ITableProps extends TableProps {
@@ -36,7 +35,6 @@ type TableObjects = {
 	TableProvider: typeof TableProvider
 	Section: typeof TableSection
 	SearchInput: typeof SearchInput
-	ColumnPicker: typeof ColumnPicker
 }
 
 export type TableObject = TableComponent & TableObjects
@@ -55,7 +53,7 @@ const TableComponent: TableComponent & TableObjects = ({
 
 	const stylesArray = useMemo(() => {
 		const arr: (Sx | undefined)[] = []
-		if(wrapper) {
+		if(!wrapper) {
 			arr.push({ thead: { top: -10 } })
 		}
 		if(sx) {
@@ -93,6 +91,5 @@ TableComponent.Pagination = Pagination
 TableComponent.TableProvider = TableProvider
 TableComponent.Section = TableSection
 TableComponent.SearchInput = SearchInput
-TableComponent.ColumnPicker = ColumnPicker
 
 export default TableComponent

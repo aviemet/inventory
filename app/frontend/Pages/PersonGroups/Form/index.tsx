@@ -2,14 +2,12 @@ import React, { useCallback, useState } from 'react'
 import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 import { Table } from '@/Components'
-import { usePage } from '@inertiajs/react'
-import { createContext } from '@/lib/hooks'
+import { Routes, exclude } from '@/lib'
+import { createContext, usePageProps } from '@/lib/hooks'
 import SwitchRow from './SwitchRow'
 import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'
 import { emptyGroup } from './formData'
-import { Routes, exclude } from '@/lib'
-import { Prism } from '@mantine/prism'
 
 export type FormData = {
 	person_group: Schema.PersonGroupsFormData
@@ -29,7 +27,7 @@ export interface IGroupFormProps {
 }
 
 const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }: IGroupFormProps) => {
-	const page = usePage<SharedInertiaProps>()
+	const { auth: { user } } = usePageProps()
 
 	const formData = { person_group: (person_group ? exclude(person_group, 'id') : emptyGroup) } as FormData
 	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData.person_group.permissions?.company?.admin || false)
@@ -73,7 +71,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 				<FormGroup legend="Permissions" model="permissions">
 					<Switch
 						name="company.admin"
-						label={ `Set as administrator group for ${page.props.auth?.user?.active_company?.name}` }
+						label={ `Set as administrator group for ${user.active_company?.name}` }
 						onChange={ e => setIsCompanyAdmin(e.target.checked) }
 					/>
 

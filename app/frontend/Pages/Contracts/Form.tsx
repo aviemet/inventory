@@ -1,13 +1,15 @@
 import React from 'react'
+import { Group } from '@/Components'
 import {
 	Form,
 	TextInput,
 	Textarea,
-	DateTime,
+	Date,
 	Submit,
 } from '@/Components/Form'
-import { CategoriesDropdown, VendorsDropdown } from '@/Components/Form/Dropdowns'
+import { CategoriesDropdown, VendorsDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
+import { coerceArray } from '@/lib'
 
 type TContractFormData = {
 	contract: Schema.ContractsFormData
@@ -18,14 +20,12 @@ export interface IContractFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TContractFormData>) => boolean|void
 	contract?: Schema.ContractsFormData
-	vendors: Schema.VendorsOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
 const emptyContract: Schema.ContractsFormData = {
 	name: '',
-	category_id: '',
-	vendor_id: '',
+	category_id: NaN,
+	vendor_id: NaN,
 }
 
 const ContractForm = ({
@@ -33,8 +33,6 @@ const ContractForm = ({
 	method = 'post',
 	onSubmit,
 	contract = emptyContract,
-	vendors,
-	categories,
 }: IContractFormProps) => {
 	return (
 		<Form
@@ -48,13 +46,18 @@ const ContractForm = ({
 
 			<TextInput name="number" label="Number" required />
 
-			<DateTime name="begins_at" label="Contract Start" />
+			<Group grow>
+				<Date name="begins_at" label="Contract Start" />
 
-			<DateTime name="ends_at" label="Contract End" />
+				<Date name="ends_at" label="Contract End" />
+			</Group>
 
-			<VendorsDropdown vendors={ vendors } />
+			<VendorsDropdown initialData={ coerceArray(contract?.vendor) } />
 
-			<CategoriesDropdown categories={ categories } />
+			<CategoriesDropdown
+				categorizable_type="Contract"
+				initialData={ coerceArray(contract?.category) }
+			/>
 
 			<Textarea name="notes" label="Notes" />
 

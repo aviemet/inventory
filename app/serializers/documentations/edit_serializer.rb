@@ -12,5 +12,5 @@ class Documentations::EditSerializer < ApplicationSerializer
     :documentable_type,
   )
 
-  belongs_to :created_by, serializer: PersonSerializer
+  # belongs_to :created_by, serializer: People::OptionsSerializer
 end

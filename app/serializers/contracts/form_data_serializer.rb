@@ -13,4 +13,6 @@ class Contracts::FormDataSerializer < ApplicationSerializer
     :category_id,
   )
 
+  belongs_to :vendor, serializer: Vendors::OptionsSerializer, optional: true
+  belongs_to :category, serializer: Categories::OptionsSerializer, optional: true
 end

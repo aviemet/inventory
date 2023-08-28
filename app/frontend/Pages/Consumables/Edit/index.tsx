@@ -5,14 +5,9 @@ import { Routes } from '@/lib'
 
 interface IUpdateConsumableProps{
 	consumable: Schema.ConsumablesEdit
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const EditConsumable = ({ consumable, ...models }: IUpdateConsumableProps) => {
+const EditConsumable = ({ consumable }: IUpdateConsumableProps) => {
 	const title = `Edit ${consumable.name}`
 
 	return (
@@ -28,7 +23,6 @@ const EditConsumable = ({ consumable, ...models }: IUpdateConsumableProps) => {
 					to={ Routes.consumable(consumable) }
 					method="patch"
 					consumable={ consumable }
-					{ ...models }
 				/>
 			</Section>
 		</Page>

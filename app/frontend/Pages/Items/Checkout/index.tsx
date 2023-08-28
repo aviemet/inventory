@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Box, Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
@@ -26,26 +26,24 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 			<Section>
 				<Heading order={ 3 }>{ title }</Heading>
 
-				<div>
-					<div className="item-details">
-
-						<div className="item-row">
-							<label>Model</label>
-							<div className="value">{ item.name }</div>
-						</div>
-
-						<div className="item-row">
-							<label>Asset Tag</label>
-							<div className="value">{ item.asset_tag }</div>
-						</div>
-
-						<div className="item-row">
-							<label>Serial</label>
-							<div className="value">{ item.serial }</div>
-						</div>
-
-					</div>
-				</div>
+				<Box sx={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
+					<Table>
+						<Table.Body>
+							<Table.Row>
+								<Table.Cell>Model</Table.Cell>
+								<Table.Cell>{ item.model?.name }</Table.Cell>
+							</Table.Row>
+							<Table.Row>
+								<Table.Cell>Serial Number</Table.Cell>
+								<Table.Cell>{ item.serial }</Table.Cell>
+							</Table.Row>
+							<Table.Row>
+								<Table.Cell>Asset Tag</Table.Cell>
+								<Table.Cell>{ item.asset_tag }</Table.Cell>
+							</Table.Row>
+						</Table.Body>
+					</Table>
+				</Box>
 
 				<Form
 					data={ {

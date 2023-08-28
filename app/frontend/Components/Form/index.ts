@@ -6,17 +6,21 @@ export { default as DynamicInputs } from './DynamicInputs'
 export { default as FormConsumer } from './Components/FormConsumer'
 export { default as Submit } from './Submit'
 
-export { default as Autocomplete }       from './Inputs/Autocomplete'
-export { default as Checkbox }           from './Inputs/Checkbox'
-export { default as CurrencyInput }      from './Inputs/CurrencyInput'
-export { default as DateTime }           from './Inputs/DateTime'
-export { default as HiddenInput }        from './Inputs/HiddenInput'
-export { default as NumberInput }        from './Inputs/NumberInput'
-export { default as PasswordInput }      from './Inputs/PasswordInput'
-export { default as RadioButtons }       from './Inputs/RadioButtons'
-export { default as RichText }           from './Inputs/RichText'
-export { default as SearchableDropdown } from './Inputs/SearchableDropdown'
-export { default as SwatchInput }        from './Inputs/SwatchInput'
-export { default as Switch }             from './Inputs/Switch'
-export { default as TextInput }          from './Inputs/TextInput'
-export { default as Textarea }           from './Inputs/Textarea'
+export {
+	Autocomplete,
+	Checkbox,
+	CurrencyInput,
+	Date,
+	DateTime,
+	HiddenInput,
+	MultiSelect,
+	NumberInput,
+	PasswordInput,
+	RadioButtons,
+	RichText,
+	Select,
+	SwatchInput,
+	Switch,
+	TextInput,
+	Textarea,
+} from './Inputs'

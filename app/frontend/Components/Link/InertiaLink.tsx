@@ -1,11 +1,14 @@
 import React, { forwardRef } from 'react'
 import { Link, router, type InertiaLinkProps } from '@inertiajs/react'
 import { Method, Visit } from '@inertiajs/core'
-import { Anchor, type AnchorProps, type ButtonProps } from '@mantine/core'
+import { Anchor, Sx, type AnchorProps, type ButtonProps } from '@mantine/core'
 import { Button } from '@/Components'
-import { omit } from 'lodash'
 
-interface ILinkProps extends Omit<InertiaLinkProps, 'color'|'size'|'span'>, Omit<AnchorProps, 'href'> {
+interface IAnchorLinkProps extends Omit<InertiaLinkProps, 'color'|'size'|'span'>, Omit<AnchorProps, 'href'> {}
+
+const AnchorLink = forwardRef<HTMLAnchorElement, IAnchorLinkProps>((props, ref) => <Anchor ref={ ref } component={ Link } { ...props } />)
+
+interface ILinkProps extends IAnchorLinkProps {
 	children?: React.ReactNode
 	href: string
 	as: 'a'|'button'
@@ -14,45 +17,49 @@ interface ILinkProps extends Omit<InertiaLinkProps, 'color'|'size'|'span'>, Omit
 	compact?: boolean
 	buttonProps?: ButtonProps
 	disabled?: boolean
+	sx?: Sx
 }
 
 const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', method, visit, compact, color, disabled, buttonProps, ...props },
+	{ children, href, as = 'a', method, visit, buttonProps, sx, ...props },
 	ref,
 ) => {
-	const handleHTTP = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const handleHTTP = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+		e.preventDefault()
+
 		router.visit(href, {
 			method,
 			...visit,
 		})
 	}
 
-	const finalButtonProps: Partial<ButtonProps> = buttonProps || {}
-	if(color) finalButtonProps.color = color
-	if(disabled) finalButtonProps.disabled = disabled
-
-	// Only present standard GET requests as anchor tags, all others as buttons
-	if(method !== undefined && method !== 'get') {
-		const button = <Button { ...finalButtonProps } onClick={ handleHTTP }>{ children }</Button>
-
-		if(disabled) {
-			return button
-		}
-
-		return (
-			<Anchor component={ Link } href={ href } onClick={ e => e.preventDefault() } { ...props }>
-				{ button }
-			</Anchor>
-		)
+	if((method !== undefined && method !== 'get')) {
+		return <Button
+			ref={ ref }
+			component={ AnchorLink }
+			href={ href }
+			onClick={ handleHTTP }
+			sx={ [{ '&:hover': { textDecoration: 'none' } }, sx] }
+			{ ...props }
+		>
+			{ children }
+		</Button>
 	}
 
-	const content = as === 'button' ? <Button { ...finalButtonProps } compact={ compact }>{ children }</Button> : children
-	if(disabled) {
-		return <Anchor { ...omit(props, 'onProgress') }>{ content }</Anchor>
+	if(as === 'button') {
+		return <Button
+			ref={ ref }
+			component={ AnchorLink }
+			href={ href }
+			sx={ [{ '&:hover': { textDecoration: 'none' } }, sx] }
+			{ ...props }
+		>
+			{ children }
+		</Button>
 	}
 
 	return (
-		<Anchor component={ Link } href={ href } ref={ ref } { ...props }>{ content }</Anchor>
+		<AnchorLink href={ href } ref={ ref } { ...props }>{ children }</AnchorLink>
 	)
 })
 
