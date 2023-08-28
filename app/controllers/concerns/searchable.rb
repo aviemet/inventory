@@ -106,8 +106,6 @@ module Searchable
     # Don't error if field doesn't exist on model
     return if field_type.nil?
 
-    # sort_str = params[:sort].to_s
-    # ap({ sort_str: })
     "#{add_explicit_table_prefix(model, params[:sort].to_s)} #{direction}"
   end
 
@@ -126,10 +124,10 @@ module Searchable
   # Returns the data type of a database field
   ##
   def get_field_type(model, column)
-    # if `column` is in the form 'model.field', or further chained such as 'model1.model2.field',
-    # ignore the passed `model` param and use the last chained model sent in `column`
     split_fields = column.split(".")
 
+    # if `column` is in the form 'model.field', or further chained such as 'model1.model2.field',
+    # ignore the passed `model` param and use the last chained model sent in `column`
     if split_fields.length > 1
       model = split_fields[-2].titleize.singularize.constantize
       column = split_fields[-1]

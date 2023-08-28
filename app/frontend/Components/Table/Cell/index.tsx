@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useTableContext, useTableSectionContext } from '../TableContext'
 import { TDProps } from 'react-html-props'
 import BodyCell from './BodyCell'
