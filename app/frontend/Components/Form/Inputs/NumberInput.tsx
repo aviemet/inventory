@@ -18,7 +18,6 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 		required,
 		compact = false,
 		field = true,
-		span,
 		...props
 	},
 	ref,
@@ -29,7 +28,7 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 		const v = e
 		setValue(v)
 
-		if(onChange) onChange(v, form)
+		onChange?.(v, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
@@ -44,7 +43,6 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 					required={ required }
 					className={ cx({ compact }) }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>
@@ -52,6 +50,7 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 			condition={ field }
 		>
 			<NumberInput
+				ref={ ref }
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
@@ -59,7 +58,7 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

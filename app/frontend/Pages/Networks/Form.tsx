@@ -20,7 +20,7 @@ export interface INetworkFormProps {
 
 const emptyNetwork: Schema.NetworksFormData = {
 	name: '',
-	vlan_id: '',
+	vlan_id: NaN,
 	address: '',
 	gateway: '',
 	dhcp_start: '',

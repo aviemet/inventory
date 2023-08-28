@@ -16,7 +16,6 @@ const FormRadioButtons = ({
 	onBlur,
 	required,
 	field = true,
-	span,
 	...props
 }: IFormRadioButtonsProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
@@ -24,7 +23,7 @@ const FormRadioButtons = ({
 	const handleChange = (v: string) => {
 		setValue(v)
 
-		if(onChange) onChange(v, form)
+		onChange?.(v, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLDivElement, Element>) => {
@@ -38,7 +37,6 @@ const FormRadioButtons = ({
 					type="radio"
 					required={ required }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>
@@ -52,6 +50,7 @@ const FormRadioButtons = ({
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, formatter } from '@/lib'
 import { Group, Link, Table } from '@/Components'
-import { CheckoutButton } from '@/Components/Button'
+import { CheckoutButton, EditButton } from '@/Components/Button'
 import { ITableProps } from '@/Components/Table/Table'
 
 const LicensesTable = (props: ITableProps) => {
@@ -60,6 +60,7 @@ const LicensesTable = (props: ITableProps) => {
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.manufacturer?.name }</Link>
 						</Table.Cell>
+
 						<Table.Cell fitContent>
 							<Group noWrap spacing="sm">
 								{ license.qty_available && <CheckoutButton
@@ -68,6 +69,7 @@ const LicensesTable = (props: ITableProps) => {
 									tooltipMessage={ license.qty_available < 1 && 'There are none to checkout' }
 									label={ license.name }
 								/> }
+								<EditButton href={ Routes.editLicense(license) } />
 							</Group>
 						</Table.Cell>
 					</Table.Row>

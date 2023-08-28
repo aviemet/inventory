@@ -33,4 +33,5 @@ class Components::ShowSerializer < Assignable::QuantitySerializer
   belongs_to :vendor, serializer: VendorSerializer
   belongs_to :category, serializer: CategorySerializer
   belongs_to :manufacturer, serializer: ManufacturerSerializer
+  has_many :documentations, serializer: Documentations::IndexSerializer
 end

@@ -1,10 +1,12 @@
 class Vendor < ApplicationRecord
   include Contactable
   include Ownable
-  include PgSearch::Model
   include Documentable
 
-  multisearchable against: [:name]
+  multisearchable(
+    against: [:name],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
 
   pg_search_scope(
     :search,

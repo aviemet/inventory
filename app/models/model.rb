@@ -1,11 +1,13 @@
 class Model < ApplicationRecord
   include Ownable
   include Fieldable
-  include PgSearch::Model
   include Categorizable
   include Documentable
 
-  multisearchable against: [:name, :model_number]
+  multisearchable(
+    against: [:name, :model_number],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
 
   pg_search_scope(
     :search,

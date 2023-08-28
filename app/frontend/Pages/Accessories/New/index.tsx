@@ -5,14 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewAccessoryProps {
 	accessory: Schema.AccessoriesFormData
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const NewAccessory = ({ ...data }: INewAccessoryProps) => {
+const NewAccessory = ({ accessory }: INewAccessoryProps) => {
 	const title = 'New Accessory'
 
 	return (
@@ -23,7 +18,7 @@ const NewAccessory = ({ ...data }: INewAccessoryProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<AccessoryForm to={ Routes.accessories() } { ...data } />
+				<AccessoryForm to={ Routes.accessories() } accessory={ accessory } />
 			</Section>
 		</Page>
 	)

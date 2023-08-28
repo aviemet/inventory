@@ -25,7 +25,6 @@ class DocumentationsController < ApplicationController
     authorize Documentation
     render inertia: "Documentation/New", props: {
       documentation: Documentation.new.render(view: :form_data),
-      categories: -> { @active_company.categories.includes_associated.render },
     }
   end
 

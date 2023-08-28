@@ -92,7 +92,6 @@ class DepartmentsController < ApplicationController
     authorize Department
     render inertia: "Departments/New", props: {
       department: Department.new.render(view: :form_data),
-      locations: -> { @active_company.locations.render(view: :options) }
     }
   end
 
@@ -101,7 +100,6 @@ class DepartmentsController < ApplicationController
     authorize department
     render inertia: "Departments/Edit", props: {
       department: department.render(view: :edit),
-      locations: -> { @active_company.locations.render(view: :options) }
     }
   end
 

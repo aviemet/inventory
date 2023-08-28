@@ -25,6 +25,7 @@ class Licenses::EditSerializer < Assignable::QuantitySerializer
     currency_for(license)
   end
 
-  belongs_to :vendor, serializer: VendorSerializer
-  belongs_to :manufacturer, serializer: ManufacturerSerializer
+  belongs_to :vendor, serializer: Vendors::OptionsSerializer
+  belongs_to :manufacturer, serializer: Manufacturers::OptionsSerializer
+  belongs_to :category, serializer: Categories::OptionsSerializer
 end

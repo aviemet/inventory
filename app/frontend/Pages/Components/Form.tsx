@@ -7,8 +7,9 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
+import { coerceArray } from '../../lib/collections'
 
 type TComponentFormData = {
 	component: Schema.ComponentsFormData
@@ -19,11 +20,6 @@ export interface IComponentFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TComponentFormData>) => boolean|void
 	component: Schema.ComponentsFormData
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
 const ComponentForm = ({
@@ -31,11 +27,6 @@ const ComponentForm = ({
 	method = 'post',
 	onSubmit,
 	component,
-	models,
-	vendors,
-	locations,
-	manufacturers,
-	categories,
 }: IComponentFormProps) => {
 	return (
 		<Form
@@ -48,11 +39,7 @@ const ComponentForm = ({
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Component Details">
-				<ModelsDropdown
-					models={ models }
-					manufacturers={ manufacturers }
-					categories={ categories }
-				/>
+				<ModelsDropdown initialData={ coerceArray(component?.model) } />
 
 				<TextInput name="serial" label="Serial" />
 
@@ -64,7 +51,7 @@ const ComponentForm = ({
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown vendors={ vendors } />
+				<VendorsDropdown initialData={ coerceArray(component?.vendor) } />
 
 				<TextInput name="cost" label="Cost" />
 			</FormGroup>
@@ -73,8 +60,7 @@ const ComponentForm = ({
 				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
-					locations={ locations }
-					currencies={ [] }
+					initialData={ coerceArray(component?.default_location) }
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />

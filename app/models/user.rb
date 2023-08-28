@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+
+  multisearchable(
+    against: [:email],
+    additional_attributes: ->(record) { { label: record.email } },
+  )
+
   tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token, :active_company]
   resourcify
   rolify

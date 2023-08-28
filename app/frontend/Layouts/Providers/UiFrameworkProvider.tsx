@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
 import { Notifications } from '@mantine/notifications'
-import { usePage } from '@inertiajs/react'
-import axios from 'axios'
-import { Routes } from '@/lib'
 import useLayoutStore from '../AppLayout/store/LayoutStore'
+import { usePageProps } from '@/lib/hooks'
+import { DatesProvider } from '@mantine/dates'
+import { useUpdateUserPreferences } from '@/queries/users'
 
 export const useTheme = (colorScheme: 'light'|'dark' = 'light', primaryColor = 'violet') => ({
 	breakpoints: {
@@ -112,7 +112,8 @@ export const GlobalStyles = () => <Global styles={ theme => ({
 }) } />
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
-	const { auth } = usePage<SharedInertiaProps>().props
+	const { auth } = usePageProps()
+	const userPreferencesMutation = useUpdateUserPreferences()
 
 	const { primaryColor, setPrimaryColor } = useLayoutStore()
 
@@ -121,7 +122,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		if(companyColor === primaryColor) return
 
 		setPrimaryColor(companyColor)
-	}, [auth?.user?.active_company?.settings?.primary_color])
+	}, [auth?.user?.active_company?.settings?.primary_color, primaryColor, setPrimaryColor])
 
 	const systemColorScheme = useColorScheme()
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -133,20 +134,17 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const toggleColorScheme = (value?: ColorScheme) => {
 		const scheme = value || (colorScheme === 'dark' ? 'light' : 'dark')
 
-		if(auth?.user) {
-			axios.patch(Routes.updateUserPreferences(auth?.user), {
-				user: {
-					user_preferences: {
-						colorScheme: scheme,
-					},
+		if(auth?.user?.id) {
+			userPreferencesMutation.mutate({
+				id: auth.user.id,
+				data: {
+					colorScheme: scheme,
 				},
 			})
 		}
 
 		setColorScheme(scheme)
 	}
-
-	if(primaryColor === undefined) return <></>
 
 	const mantineTheme = useTheme(colorScheme, primaryColor)
 
@@ -156,9 +154,11 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 			toggleColorScheme={ toggleColorScheme }
 		>
 			<MantineProvider theme={ mantineTheme } withGlobalStyles withNormalizeCSS>
-				<Notifications />
-				<GlobalStyles />
-				{ children }
+				<DatesProvider settings={ { locale: 'en' } }>
+					<Notifications />
+					<GlobalStyles />
+					{ children }
+				</DatesProvider>
 			</MantineProvider>
 		</ColorSchemeProvider>
 	)

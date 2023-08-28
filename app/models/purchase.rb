@@ -1,6 +1,5 @@
 class Purchase < ApplicationRecord
   include Ownable
-  include PgSearch::Model
 
   pg_search_scope(
     :search,

@@ -1,10 +1,7 @@
 import React from 'react'
-import { router, usePage } from '@inertiajs/react'
 import Link from '@/Components/Link'
 import { useTableContext } from '../TableContext'
-import { Group, Pagination, Select, type PaginationProps } from '@mantine/core'
-import axios from 'axios'
-import { Routes } from '@/lib'
+import { Group, Pagination, type PaginationProps } from '@mantine/core'
 import LimitSelect from './LimitSelect'
 
 const pageLink = (page: number) => {
@@ -22,7 +19,6 @@ const pageLink = (page: number) => {
 interface IPaginationComponent extends Omit<PaginationProps, 'total'> {}
 
 const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPaginationComponent) => {
-	const { auth: { user } } = usePage<SharedInertiaProps>().props
 	const { tableState: { pagination, model } } = useTableContext()
 
 	if(!pagination) return <></>

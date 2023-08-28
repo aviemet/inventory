@@ -1,8 +1,8 @@
 import React from 'react'
-import { usePage } from '@inertiajs/react'
 import { Field, Form, TextInput, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
+import { usePageProps } from '@/lib/hooks'
 
 type TRegisterFormData = {
 	person: {
@@ -15,7 +15,7 @@ type TRegisterFormData = {
 }
 
 const CompleteRegistration = () => {
-	const { auth: { user } } = usePage<SharedInertiaProps>().props
+	const { auth: { user } } = usePageProps()
 
 	const defaultData: TRegisterFormData = {
 		person: {

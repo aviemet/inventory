@@ -71,8 +71,10 @@ class ApplicationController < ActionController::Base
   end
 
   def currencies
-    Monetize::Parser::CURRENCY_SYMBOLS.map{ |sym, abbr| { symbol: sym, code: abbr } }
     # Money::Currency.table.values.map{ |c| { symbol: c[:symbol], code: c[:iso_code] } }
+    Monetize::Parser::CURRENCY_SYMBOLS
+      .uniq(&:last)
+      .map{ |sym, abbr| { symbol: sym, code: abbr } }
   end
 
   private

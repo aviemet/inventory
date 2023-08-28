@@ -2,6 +2,7 @@ class SearchSerializer < ApplicationSerializer
   object_as :search, model: "PgSearch::Document"
 
   attributes(
+    :label,
     :content,
     :searchable_type,
     :searchable_id,
@@ -9,8 +10,8 @@ class SearchSerializer < ApplicationSerializer
     :updated_at,
   )
 
-  type :string
-  def name
-    search.searchable&.name || search.content
-  end
+  # type :string
+  # def name
+  #   search.searchable&.name || search.content
+  # end
 end

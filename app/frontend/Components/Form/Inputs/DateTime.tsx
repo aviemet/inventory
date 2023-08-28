@@ -1,6 +1,6 @@
 import React from 'react'
 import Field from '../Field'
-import DateTimeInput, { type IDateTimeProps } from '@/Components/Inputs/DateTime'
+import DateTimeInput, { type IDateTimeProps } from '@/Components/Inputs/DateTimeInput'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
@@ -17,7 +17,6 @@ const DateTime = ({
 	id,
 	model,
 	field = true,
-	span,
 	...props
 }: IDateTimeFormProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date>({ name, model })
@@ -25,7 +24,7 @@ const DateTime = ({
 	const handleChange = (date: Date) => {
 		setValue(date)
 
-		if(onChange) onChange(date, form)
+		onChange?.(date, form)
 	}
 
 	const handleBlur = () => {
@@ -39,7 +38,6 @@ const DateTime = ({
 					type="date"
 					required={ required }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>
@@ -54,6 +52,7 @@ const DateTime = ({
 				onBlur={ handleBlur }
 				required={ required }
 				error={ error }
+				wrapper={ false }
 				{ ...props }
 			/></ConditionalWrapper>
 	)

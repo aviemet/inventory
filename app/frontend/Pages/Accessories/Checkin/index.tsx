@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Page, Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, TextInput, SearchableDropdown, Submit, Textarea } from '@/Components/Form'
+import { DateTime, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import { createStyles } from '@mantine/core'
 
 const useTableStyles = createStyles(theme => ({
@@ -75,7 +75,7 @@ const Checkin = ({ assignment, accessory, statuses }: ICheckinAccessoriesProps) 
 					/>
 
 					{ /* TODO: Deal with quantity return status assignments  */ }
-					<SearchableDropdown
+					<Select
 						options={ statuses }
 						label="Status"
 						name="status_id"

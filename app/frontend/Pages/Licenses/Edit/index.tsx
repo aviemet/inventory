@@ -5,12 +5,9 @@ import { Routes } from '@/lib'
 
 interface IUpdateLicenseProps{
 	license: Schema.LicensesEdit
-	categories: Schema.CategoriesOptions[]
-	vendors: Schema.VendorsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
 }
 
-const New = ({ license, ...models }: IUpdateLicenseProps) => {
+const New = ({ license }: IUpdateLicenseProps) => {
 	const title = `Edit ${license.name}`
 
 	return (
@@ -22,7 +19,7 @@ const New = ({ license, ...models }: IUpdateLicenseProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<LicenseForm to={ Routes.license(license) } method="patch" license={ license } { ...models } />
+				<LicenseForm to={ Routes.license(license) } method="patch" license={ license } />
 			</Section>
 		</Page>
 	)

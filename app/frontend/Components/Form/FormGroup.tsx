@@ -8,11 +8,10 @@ import { NestedFields } from 'use-inertia-form'
 interface IFormGroupProps extends DivProps {
 	legend?: string
 	outline?: boolean
-	compact?: boolean
 	model?: string
 }
 
-const FormGroup = ({ children, legend, outline = true, compact = false, model }: IFormGroupProps) => {
+const FormGroup = ({ children, legend, outline = true, model }: IFormGroupProps) => {
 	return (
 		<Box component='fieldset' className={ cx({ outline }) } sx={ {
 			marginTop: legend ? '0.5rem' : undefined,

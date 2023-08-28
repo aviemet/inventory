@@ -30,7 +30,7 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 
 	const handleChange = (parameter: string) => {
 		setValue(parameter)
-		if(onChange) onChange(parameter, form)
+		onChange?.(parameter, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
@@ -53,6 +53,7 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 				errors: Boolean(error),
 				sx: { padding: 0 },
 			} }
+			wrapper={ false }
 			{ ...props }
 		/>
 

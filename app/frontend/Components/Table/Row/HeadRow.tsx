@@ -4,6 +4,7 @@ import { Box } from '@mantine/core'
 import HeadCheckbox from './HeadCheckbox'
 import { useTableContext } from '../TableContext'
 import { useCheckboxState } from '@/lib/hooks'
+import { coerceArray } from '../../../lib/index'
 
 interface IHeadRowProps extends ITableRow {
 	name?: string
@@ -29,7 +30,7 @@ const HeadRow = forwardRef<HTMLTableRowElement, IHeadRowProps>((
 	useEffect(() => {
 		if(!children) return
 
-		children.forEach(({ props }, i) => {
+		coerceArray(children).forEach(({ props }, i) => {
 			const hideable = (props.hideable ?? props.sort) ?? false
 			columns[i] = { label: props.children, hideable }
 		})

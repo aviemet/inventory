@@ -27,7 +27,7 @@ const RichTextEditorComponent = ({ children, onChange }: IRichTextEditorProps) =
 		],
 		content: children,
 		onUpdate: ({ editor }) => {
-			if(onChange) onChange(editor.getHTML())
+			onChange?.(editor.getHTML())
 		},
 	})
 

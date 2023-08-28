@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { router } from '@inertiajs/react'
 import { type VisitOptions } from '@inertiajs/core'
 import { debounce } from 'lodash'
@@ -10,41 +10,45 @@ import { useSessionStorage } from '@mantine/hooks'
 import useTableStyles from '../useTableStyles'
 import ColumnPicker from './ColumnPicker'
 import AdvancedSearch from './AdvancedSearch'
+import { useInit, useLocation } from '@/lib/hooks'
 
 interface ISearchInputProps {
 	columnPicker?: boolean
-	advancedSearch?: boolean
+	advancedSearch?: React.ReactNode
 }
 
 /**
  * Performs an Inertia request to the current url (window.location), using the search params
  * as query string with the key of 'search'
  */
-const SearchInput = ({ columnPicker = true, advancedSearch = true }: ISearchInputProps) => {
+const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps) => {
 	const { tableState: { model }, setTableState } = useTableContext()
-	const { search } = window.location
 	const { classes } = useTableStyles()
 
-	const params = new URLSearchParams(search)
+	const location = useLocation()
 	const [searchValue, setSearchValue] = useSessionStorage({
 		key: `${model ?? 'standard'}-query`,
-		defaultValue: params.get('search') || '',
+		defaultValue: location.params.get('search') || '',
 		getInitialValueInEffect: false,
 	})
 
-	useLayoutEffect(() => {
-		const urlSearchString = params.get('search')
+	useInit(() => {
+		const urlSearchString = location.params.get('search')
 
-		// Don't override a direct visit with a url search param
+		// On first render, use URL search param as search value.
+		// This should only trigger on page load when directly visited via a shared link e.g.
 		if(urlSearchString) {
-			// This doesn't trigger a server visit due to checks in the other useEffect
+			// Doesn't trigger a server visit due to checks in the other useEffect
 			setSearchValue(urlSearchString)
-		// Don't persist searches for tables not scoped to a model
-		} else if(model && searchValue) {
+			return
+		}
+
+		// Only persist search parameter for tables scoped to a model
+		if(model && searchValue) {
 			setTableState({ searching: true })
 			setSearchValue(searchValue)
 		}
-	}, [])
+	})
 
 	const debouncedSearch = useMemo(() => debounce((path) => {
 		const options: VisitOptions = {
@@ -59,8 +63,9 @@ const SearchInput = ({ columnPicker = true, advancedSearch = true }: ISearchInpu
 			},
 		}
 		if(model) options.only = [model, 'pagination']
+
 		router.get(path, {}, options)
-	}, 500), [])
+	}, 500), [model, setTableState])
 
 	useEffect(() => {
 		const url = new URL(window.location.href)
@@ -78,11 +83,11 @@ const SearchInput = ({ columnPicker = true, advancedSearch = true }: ISearchInpu
 		}
 
 		debouncedSearch(url.toString())
-	}, [searchValue])
+	}, [debouncedSearch, searchValue])
 
 	return (
 		<Box className={ classes.searchWrapper }>
-			{ advancedSearch && <AdvancedSearch /> }
+			{ advancedSearch && <AdvancedSearch>{ advancedSearch }</AdvancedSearch> }
 			<TextInput
 				name="search"
 				id="search"
@@ -93,6 +98,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch = true }: ISearchInpu
 				</ActionIcon> }
 				icon={ <SearchIcon size={ 24 } /> }
 				className={ classes.searchInput }
+				wrapper={ false }
 				aria-label="Search"
 			/>
 			{ columnPicker && <ColumnPicker /> }

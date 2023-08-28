@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
   expose :items, -> { search(@active_company.items.includes_associated, sortable_fields) }
   expose :item, scope: ->{ @active_company.items }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
+  before_action :handle_department_change, only: [:create, :update]
+
   # GET /item
   def index
     authorize items
@@ -17,13 +19,6 @@ class ItemsController < ApplicationController
       } }
     }
   end
-
-  # GET /item/category/:category_id
-  # def category
-  #   # TODO: Consider another way of filtering without using routes
-  #   self.items = items.where('model.category': Category.find(request.params[:category_id]))
-  #   render :index
-  # end
 
   # GET /item/:id
   def show
@@ -38,11 +33,6 @@ class ItemsController < ApplicationController
     authorize Item
     render inertia: "Items/New", props: {
       item: Item.new.render(view: :form_data),
-      models: -> { @active_company.models.find_by_category(:Item).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      locations: -> { @active_company.locations.render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
-      categories: -> { @active_company.categories.find_by_type(:item).render(view: :options) }
     }
   end
 
@@ -51,11 +41,6 @@ class ItemsController < ApplicationController
     authorize item
     render inertia: "Items/Edit", props: {
       item: item.render(view: :edit),
-      models: -> { @active_company.models.find_by_category(:Item).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      locations: -> { @active_company.locations.render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
-      categories: -> { @active_company.categories.find_by_type(:item).render(view: :options) }
     }
   end
 
@@ -122,6 +107,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /item/:id
   def update
     authorize item
+
     if item.update(item_params)
       redirect_to item, notice: 'Item was successfully updated'
     else
@@ -138,11 +124,22 @@ class ItemsController < ApplicationController
 
   private
 
+  def handle_department_change
+    if item_params[:department_id]
+      item_params[:department] = Department.find(item_params[:department_id])
+      item_params.delete(:department_id)
+    end
+  end
+
   def sortable_fields
     %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
+  def advanced_search_params
+    params.permit(:name, :asset_tag, :serial, :cost, :purchased_at, :requestable, model: [:id], vendor: [:id], manufacturer: [:id], department: [:id], category: [:id], created_at: [:start, :end, :type])
+  end
+
   def item_params
-    params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :status_label_id, :purchased_at, :requestable, nics: [:mac, :ip])
+    @item_params ||= params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :department_id, :model_id, :vendor_id, :default_location_id, :parent_id, :status_label_id, :purchased_at, :requestable, nics: [:mac, :ip])
   end
 end

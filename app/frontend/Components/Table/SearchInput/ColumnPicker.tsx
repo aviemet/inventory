@@ -1,5 +1,5 @@
 import React from 'react'
-import { router, usePage } from '@inertiajs/react'
+import { router } from '@inertiajs/react'
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { Menu } from '@/Components'
@@ -7,15 +7,16 @@ import { ColumnsIcon } from '@/Components/Icons'
 import { Checkbox } from '@/Components/Inputs'
 import { useTableContext } from '../TableContext'
 import { Button } from '@mantine/core'
+import { usePageProps } from '@/lib/hooks'
 
 const ColumnPicker = () => {
-	const { auth: { user } } = usePage<SharedInertiaProps>().props
+	const { auth: { user } } = usePageProps()
 	const { tableState: { hideable, columns, model } } = useTableContext()
 
 	if(!hideable || !model) return <></>
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		axios.patch( Routes.updateTablePreferences(user.id!), {
+		axios.patch( Routes.apiUpdateTablePreferences(user.id!), {
 			user: {
 				table_preferences: {
 					[model]: {
@@ -44,7 +45,7 @@ const ColumnPicker = () => {
 							label={ label }
 							onChange={ handleChange }
 							checked={ !user.table_preferences?.[model]?.hide?.[hideable] }
-							sx={ { padding: 0 } }
+							p="xs"
 						/>
 					</Menu.Item>
 				)) }

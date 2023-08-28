@@ -34,9 +34,6 @@ class LocationsController < ApplicationController
     authorize Location
     render inertia: "Locations/New", props: {
       location: Location.new(currency: @active_company.default_currency).render(view: :form_data),
-      locations: -> { @active_company.locations.render(view: :options) },
-      departments: -> { @active_company.departments.render(view: :options) },
-      currencies:,
     }
   end
 
@@ -45,9 +42,6 @@ class LocationsController < ApplicationController
     authorize loc, policy_class: LocationPolicy
     render inertia: "Locations/Edit", props: {
       location: loc.render(view: :edit),
-      locations: -> { @active_company.locations.where.not(id: loc.id).render },
-      departments: -> { @active_company.departments.render(view: :options) },
-      currencies:,
     }
   end
 

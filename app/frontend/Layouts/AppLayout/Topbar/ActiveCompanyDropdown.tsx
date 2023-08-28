@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, SearchableDropdown } from '@/Components/Form'
+import { Form, Select } from '@/Components/Form'
 import { Title } from '@mantine/core'
 import { isEmpty } from 'lodash'
 import { Routes } from '@/lib'
@@ -39,7 +39,7 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 			model="user"
 			onChange={ handleFormChange }
 		>
-			<SearchableDropdown
+			<Select
 				name="active_company_id"
 				options={ user.companies || [] }
 				getLabel={ option => option.name }

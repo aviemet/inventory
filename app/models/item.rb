@@ -2,6 +2,11 @@ class Item < Asset
   include Assignable::Single
   include AssignToable
 
+  multisearchable(
+    against: [:name, :asset_tag, :serial],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
+
   tracked
   resourcify
 

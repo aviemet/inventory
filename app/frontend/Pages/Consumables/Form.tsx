@@ -8,7 +8,8 @@ import {
 	FormGroup,
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Components/Form/Dropdowns'
+import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Components/Dropdowns'
+import { coerceArray } from '@/lib'
 
 type TConsumableFormData = {
 	consumable: Schema.ConsumablesFormData
@@ -19,14 +20,9 @@ export interface IConsumableFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TConsumableFormData>) => boolean|void
 	consumable: Schema.ConsumablesFormData
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, vendors, locations, manufacturers, categories }: IConsumableFormProps) => {
+const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: IConsumableFormProps) => {
 	return (
 		<Form
 			model="consumable"
@@ -40,9 +36,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 
 			<FormGroup legend="Consumable Details">
 				<ModelsDropdown
-					models={ models }
-					manufacturers={ manufacturers }
-					categories={ categories }
+					initialData={ coerceArray(consumable?.model) }
 					errorKey="consumable.model"
 				/>
 
@@ -56,7 +50,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown vendors={ vendors } />
+				<VendorsDropdown initialData={ coerceArray(consumable?.vendor) } />
 
 				<TextInput name="cost" label="Cost" />
 			</FormGroup>
@@ -65,8 +59,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable, models, ven
 				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
-					locations={ locations }
-					currencies={ [] }
+					initialData={ coerceArray(consumable?.default_location) }
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />

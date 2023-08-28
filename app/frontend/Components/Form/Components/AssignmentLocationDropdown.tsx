@@ -1,12 +1,8 @@
 import React from 'react'
 import { useForm } from 'use-inertia-form'
-import { LocationsDropdown } from '../Dropdowns'
+import { LocationsDropdown } from '@/Components/Dropdowns'
 
-interface ILocationDropdown {
-	locations: Schema.LocationsOptions[]
-}
-
-const LocationDropdown = ({ locations }: ILocationDropdown) => {
+const LocationDropdown = () => {
 	const { data } = useForm<{ assignment: Schema.AssignmentsFormData}>()
 	const { assignment: { assign_toable_type: type } } = data
 
@@ -14,7 +10,6 @@ const LocationDropdown = ({ locations }: ILocationDropdown) => {
 
 	return (
 		<LocationsDropdown
-			locations={ locations }
 			label="Location"
 			name="location_id"
 			required

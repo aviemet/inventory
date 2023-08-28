@@ -45,5 +45,6 @@ class Items::ShowSerializer < Assignable::SingleSerializer
   has_many :components, serializer: ComponentSerializer
   has_many :consumables, serializer: ConsumableSerializer
   has_many :licenses, serializer: LicenseSerializer
+  has_many :documentations, serializer: Documentations::IndexSerializer
 
 end

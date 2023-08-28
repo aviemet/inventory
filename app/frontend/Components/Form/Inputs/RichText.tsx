@@ -17,14 +17,13 @@ const RichText = ({
 	onBlur,
 	model,
 	field = true,
-	span,
 	...props
 }: IRichTextFormProps) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
 
 	const handleChange = (v, delta, sources, editor) => {
 		setValue(v)
-		if(onChange) onChange(v, form)
+		onChange?.(v, form)
 	}
 	const handleBlur = () => {
 		if(onBlur) onBlur(value, form )
@@ -37,7 +36,6 @@ const RichText = ({
 					type="textarea"
 					required={ required }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>
@@ -54,6 +52,7 @@ const RichText = ({
 					onChange={ handleChange }
 					onBlur={ handleBlur }
 					value={ value }
+					wrapper={ false }
 					{ ...props }
 				/>
 			</>

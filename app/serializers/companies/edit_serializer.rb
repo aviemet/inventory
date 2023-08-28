@@ -2,8 +2,10 @@ class Companies::EditSerializer < ApplicationSerializer
   object_as :company
 
   attributes(
-    :name,
+    :id,
     :slug,
+    :name,
+    :default_currency,
     :settings,
   )
 

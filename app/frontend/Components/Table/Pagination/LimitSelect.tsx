@@ -1,9 +1,9 @@
 import React from 'react'
-import { router, usePage } from '@inertiajs/react'
+import { router } from '@inertiajs/react'
 import { Select } from '@mantine/core'
 import axios from 'axios'
 import { Routes } from '@/lib'
-import { useLocation } from '@/lib/hooks'
+import { useLocation, usePageProps } from '@/lib/hooks'
 
 interface ILimitSelectProps {
 	pagination: Schema.Pagination
@@ -11,13 +11,13 @@ interface ILimitSelectProps {
 }
 
 const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
-	const { auth: { user } } = usePage<SharedInertiaProps>().props
+	const { auth: { user } } = usePageProps()
 	const location = useLocation()
-	console.log({ pagination })
+
 	const handleLimitChange = (limit: string) => {
 		if(!model) return
 
-		axios.patch( Routes.updateTablePreferences(user.id!), {
+		axios.patch( Routes.apiUpdateTablePreferences(user.id!), {
 			user: {
 				table_preferences: {
 					[model]: { limit },
@@ -29,7 +29,7 @@ const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 				location.params.delete('page')
 				router.get(
 					location.path,
-					{ ...location.paramsToJson() },
+					{ ...location.paramsAsJson },
 					{ preserveScroll: true },
 				)
 			} else {

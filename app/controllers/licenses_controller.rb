@@ -32,9 +32,6 @@ class LicensesController < ApplicationController
     authorize License
     render inertia: "Licenses/New", props: {
       license: License.new.render(view: :form_data),
-      categories: -> { @active_company.categories.find_by_type(:License).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 
@@ -43,9 +40,6 @@ class LicensesController < ApplicationController
     authorize license
     render inertia: "Licenses/Edit", props: {
       license: license.render(view: :edit),
-      categories: -> { @active_company.categories.find_by_type(:License).render(view: :options) },
-      vendors: -> { @active_company.vendors.render(view: :options) },
-      manufacturers: -> { @active_company.manufacturers.render(view: :options) },
     }
   end
 

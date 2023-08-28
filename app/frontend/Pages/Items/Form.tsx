@@ -10,10 +10,11 @@ import {
 	FormGroup,
 	DynamicInputs,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
-import CheckboxComponent from '@/Components/Inputs/Checkbox'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown, DepartmentsDropdown } from '@/Components/Dropdowns'
+import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { Group } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
+import { coerceArray } from '@/lib'
 
 type TItemFormData = {
 	item: Schema.ItemsFormData
@@ -24,14 +25,9 @@ export interface IItemFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TItemFormData>) => boolean|void
 	item: Schema.ItemsFormData
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const ItemForm = ({ method = 'post', item, models, vendors, locations, manufacturers, categories, ...props }: IItemFormProps) => {
+const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 	const [staticIp, setStaticIp] = useState(false)
 
 	return (
@@ -41,25 +37,24 @@ const ItemForm = ({ method = 'post', item, models, vendors, locations, manufactu
 			method={ method }
 			{ ...props }
 		>
-
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Item Details">
 				<ModelsDropdown
-					models={ models }
-					manufacturers={ manufacturers }
-					categories={ categories }
+					modelCategory='Item'
 					errorKey="item.model"
+					initialData={ coerceArray(item?.model) }
 				/>
 
 				<TextInput name="serial" label="Serial" />
 
 				<TextInput name="asset_tag" label="Asset Tag" />
 
-				<CheckboxComponent
+				<CheckboxInput
 					label="Static IP Assignment"
 					checked={ staticIp }
 					onChange={ e => setStaticIp(e.target.checked) }
+					mt="md"
 				/>
 
 				{ staticIp && <DynamicInputs model="nics" emptyData={ {
@@ -75,7 +70,7 @@ const ItemForm = ({ method = 'post', item, models, vendors, locations, manufactu
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown vendors={ vendors } />
+				<VendorsDropdown initialData={ coerceArray(item?.vendor) } />
 
 				<CurrencyInput name="cost" label="Cost" />
 
@@ -86,10 +81,11 @@ const ItemForm = ({ method = 'post', item, models, vendors, locations, manufactu
 				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
-					locations={ locations }
-					currencies={ [] }
+					initialData={ coerceArray(item?.default_location) }
 					required
 				/>
+
+				<DepartmentsDropdown initialData={ coerceArray(item?.department) } />
 
 				<Checkbox name="requestable" label="Requestable" />
 

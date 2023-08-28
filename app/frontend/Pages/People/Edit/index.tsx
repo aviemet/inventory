@@ -5,12 +5,9 @@ import { Routes } from '@/lib'
 
 interface IUpdatePersonProps{
 	person: Schema.PeopleEdit
-	departments: Schema.DepartmentsOptions[]
-	people: Schema.PeopleOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
-const New = ({ person, ...models }: IUpdatePersonProps) => {
+const New = ({ person }: IUpdatePersonProps) => {
 	const title = `Edit ${person.first_name} ${person.last_name}`
 
 	return (
@@ -26,7 +23,6 @@ const New = ({ person, ...models }: IUpdatePersonProps) => {
 					to={ Routes.person(person) }
 					method="patch"
 					person={ person }
-					{ ...models }
 				/>
 			</Section>
 		</Page>

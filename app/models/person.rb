@@ -3,10 +3,12 @@ class Person < ApplicationRecord
   include Contactable
   include AssignToable
   include Fieldable
-  include PgSearch::Model
   include Documentable
 
-  multisearchable against: [:first_name, :middle_name, :last_name, :employee_number]
+  multisearchable(
+    against: [:first_name, :middle_name, :last_name, :employee_number],
+    additional_attributes: ->(record) { { label: record.full_name } },
+  )
 
   pg_search_scope(
     :search,

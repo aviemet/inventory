@@ -3,6 +3,7 @@ import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
 import { NewIcon } from '@/Components/Icons'
 import ItemsTable from '../Table'
+import AdvancedItemsSearch from './AdvancedSearch'
 
 interface IItemsIndexProps {
 	items: Schema.ItemsIndex[]
@@ -20,6 +21,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 			menuOptions={ [
 				{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
 			] }
+			advancedSearch={ <AdvancedItemsSearch /> }
 		>
 			<ItemsTable />
 		</IndexPageTemplate>

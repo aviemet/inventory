@@ -4,8 +4,10 @@ class Locations::FormDataSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-     :name,
-     :parent_id,
-     :currency,
-   )
+    :name,
+    :parent_id,
+    :currency,
+  )
+
+  belongs_to :parent, serializer: Locations::OptionsSerializer, optional: true
 end

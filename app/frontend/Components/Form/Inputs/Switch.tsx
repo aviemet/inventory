@@ -8,14 +8,14 @@ import { type IFormInputProps } from '.'
 interface IFormSwitchProps extends Omit<ISwitchProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<boolean> {}
 
 const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
-	{ name, onChange, onBlur, id, required, model, field = true, span, ...props },
+	{ name, onChange, onBlur, id, required, model, field = true, ...props },
 	ref,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean>({ name, model })
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
-		if(onChange) onChange(e.target.checked, form)
+		onChange?.(e.target.checked, form)
 	}
 
 	const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,8 +29,6 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 				type="checkbox"
 				required={ required }
 				errors={ !!error }
-				disableFormatting
-				span={ span }
 			>
 				{ children }
 			</Field>
@@ -38,6 +36,7 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 		condition={ field }
 		>
 			<SwitchInput
+				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				defaultChecked={ Boolean(value) }
@@ -46,7 +45,7 @@ const FormSwitchComponent = forwardRef<HTMLInputElement, IFormSwitchProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

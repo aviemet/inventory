@@ -12,4 +12,7 @@ class Models::EditSerializer < ApplicationSerializer
     :category_id,
     :manufacturer_id,
   )
+
+  belongs_to :manufacturer, serializer: Manufacturers::OptionsSerializer
+  belongs_to :category, serializer: Categories::OptionsSerializer
 end

@@ -19,7 +19,6 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 		compact = false,
 		errorKey,
 		field = true,
-		span,
 		...props
 	},
 	ref,
@@ -29,7 +28,7 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 	const handleChange = (color: string) => {
 		setValue(color)
 
-		if(onChange) onChange(color, form)
+		onChange?.(color, form)
 	}
 
 	return (
@@ -40,7 +39,6 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 					required={ required }
 					className={ cx({ compact }) }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>
@@ -48,12 +46,13 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 			condition={ field }
 		>
 			<SwatchInput
+				ref={ ref }
 				initialValue={ value }
 				value={ value }
 				onChange={ handleChange }
 				name={ inputName }
 				id={ inputId }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

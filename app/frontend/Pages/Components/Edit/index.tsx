@@ -5,14 +5,9 @@ import { Routes } from '@/lib'
 
 interface IUpdateComponentProps{
 	component: Schema.ComponentsEdit
-	models: Schema.ModelsOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
 }
 
-const EditComponent = ({ component, ...models }: IUpdateComponentProps) => {
+const EditComponent = ({ component }: IUpdateComponentProps) => {
 	const title = `Edit ${component.name}`
 
 	return (
@@ -24,7 +19,7 @@ const EditComponent = ({ component, ...models }: IUpdateComponentProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<ComponentForm to={ Routes.component(component) } method="patch" component={ component } { ...models } />
+				<ComponentForm to={ Routes.component(component) } method="patch" component={ component } />
 			</Section>
 		</Page>
 	)

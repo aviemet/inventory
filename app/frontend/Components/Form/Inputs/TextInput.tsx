@@ -19,7 +19,6 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 		compact = false,
 		errorKey,
 		field = true,
-		span,
 		...props
 	},
 	ref,
@@ -30,7 +29,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 		const value = e.target.value
 		setValue(value)
 
-		if(onChange) onChange(value, form)
+		onChange?.(value, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
@@ -48,7 +47,6 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 					required={ required }
 					className={ cx({ compact }) }
 					errors={ !!error }
-					span={ span }
 				>
 					{ children }
 				</Field>
@@ -56,6 +54,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 			condition={ props.hidden !== true && field }
 		>
 			<TextInput
+				ref={ ref }
 				id={ id || inputId }
 				className={ cx({ compact }) }
 				name={ inputName }
@@ -63,7 +62,7 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ errorKey ? form.getError(errorKey) : error }
-				ref={ ref }
+				wrapper={ false }
 				{ ...props }
 			/>
 		</ConditionalWrapper>

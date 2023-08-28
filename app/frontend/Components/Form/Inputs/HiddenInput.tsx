@@ -18,16 +18,16 @@ const FormInput = forwardRef<HTMLInputElement, ITextInputProps>((
 		const value = e.target.value
 		setValue(value)
 
-		if(onChange) onChange(value, form)
+		onChange?.(value, form)
 	}
 
 	return (
 		<HiddenInput
+			ref={ ref }
 			id={ id || inputId }
 			name={ inputName }
 			value={ value }
 			onChange={ handleChange }
-			ref={ ref }
 			{ ...props }
 		/>
 	)

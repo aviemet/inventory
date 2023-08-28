@@ -3,13 +3,16 @@ import {
 	Form,
 	TextInput,
 	Textarea,
-	SearchableDropdown,
 	DateTime,
 	Checkbox,
 	Submit,
+	CurrencyInput,
+	Date,
+	NumberInput, // TODO: Replace DateTime uses with Date after fixing it
 } from '@/Components/Form'
-import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
+import { CategoriesDropdown, ManufacturersDropdown, VendorsDropdown } from '@/Components/Dropdowns'
+import { coerceArray } from '@/lib'
 
 type TLicenseFormData = {
 	license: Schema.LicensesFormData
@@ -20,12 +23,9 @@ export interface ILicenseFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<TLicenseFormData>) => boolean|void
 	license: Schema.LicensesFormData
-	categories: Schema.CategoriesOptions[]
-	vendors: Schema.VendorsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
 }
 
-const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendors, manufacturers }: ILicenseFormProps) => {
+const LicenseForm = ({ to, method = 'post', onSubmit, license }: ILicenseFormProps) => {
 	return (
 		<Form
 			model="license"
@@ -38,7 +38,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 
 			<TextInput name="key" label="Key" required />
 
-			<TextInput name="qty" label="Seats" required />
+			<NumberInput name="qty" label="Seats" required />
 
 			<TextInput name="licenser_name" label="Licenser Name" required />
 
@@ -46,7 +46,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 
 			<Checkbox name="reassignable" label="Re-Assignable" />
 
-			<TextInput name="cost" label="Cost" />
+			<CurrencyInput name="cost" label="Cost" />
 
 			<DateTime name="purchased_at" label="Purchase Date" />
 
@@ -56,28 +56,13 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license, categories, vendo
 
 			<Checkbox name="maintained" label="Maintained" />
 
-			<SearchableDropdown
-				label="Manufacturer"
-				name="manufacturer_id"
-				options={ manufacturers }
-				filterMatchKeys={ ['name'] }
-				onOpen={ () => router.reload({ only: ['manufacturers'] }) }
-			/>
+			<ManufacturersDropdown initialData={ coerceArray(license?.manufacturer) } />
 
-			<SearchableDropdown
-				label="Vendor"
-				name="vendor_id"
-				options={ vendors }
-				filterMatchKeys={ ['name'] }
-				onOpen={ () => router.reload({ only: ['vendors'] }) }
-			/>
+			<VendorsDropdown initialData={ coerceArray(license?.vendor) } />
 
-			<SearchableDropdown
-				label="Category"
-				name="category_id"
-				options={ categories }
-				filterMatchKeys={ ['name'] }
-				onOpen={ () => router.reload({ only: ['categories'] }) }
+			<CategoriesDropdown
+				categorizable_type="License"
+				initialData={ coerceArray(license?.category) }
 			/>
 
 			<Textarea name="notes" label="Notes" />

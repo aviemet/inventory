@@ -5,11 +5,9 @@ import { Routes } from '@/lib'
 
 interface INewLocationProps {
 	location: Schema.LocationsFormData
-	locations: Schema.LocationsOptions[]
-	currencies: any
 }
 
-const NewLocation = ({ ...data }: INewLocationProps) => {
+const NewLocation = ({ location }: INewLocationProps) => {
 	const title = 'New Location'
 
 	return (
@@ -21,7 +19,7 @@ const NewLocation = ({ ...data }: INewLocationProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<LocationForm to={ Routes.locations() } { ...data } />
+				<LocationForm to={ Routes.locations() } location={ location } />
 			</Section>
 
 		</Page>

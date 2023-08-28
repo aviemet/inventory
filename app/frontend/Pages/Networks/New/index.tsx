@@ -7,7 +7,7 @@ interface INewNetworkProps {
 	network: Schema.NetworksFormData
 }
 
-const New = ({ ...data }: INewNetworkProps) => {
+const New = ({ network }: INewNetworkProps) => {
 	const title = 'New Network'
 
 	return (
@@ -18,7 +18,7 @@ const New = ({ ...data }: INewNetworkProps) => {
 			<Section>
 				<Heading>{ title }</Heading>
 
-				<NetworkForm to={ Routes.networks() } { ...data } />
+				<NetworkForm to={ Routes.networks() } network={ network } />
 			</Section>
 		</Page>
 	)

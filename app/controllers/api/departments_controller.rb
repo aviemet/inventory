@@ -1,5 +1,21 @@
 class Api::DepartmentsController < Api::ApiController
+  expose :departments, -> {  @active_company.departments }
   expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
+
+  # GET api/departments/options
+  def index
+    render json: departments.includes_associated.render
+  end
+
+  # GET api/departments/:slug
+  def show
+    render json: department.render
+  end
+
+  # GET api/options/departments
+  def options
+    render json: departments.render(view: :options)
+  end
 
   # POST /api/departments
   def create

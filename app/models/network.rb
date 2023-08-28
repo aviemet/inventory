@@ -1,9 +1,11 @@
 class Network < ApplicationRecord
   include Ownable
-  include PgSearch::Model
   include Documentable
 
-  multisearchable against: [:name, :address, :gateway, :vlan_id]
+  multisearchable(
+    against: [:name, :address, :gateway, :vlan_id],
+    additional_attributes: ->(record) { { label: record.name } },
+  )
 
   pg_search_scope(
     :search,

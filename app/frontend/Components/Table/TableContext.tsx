@@ -94,7 +94,7 @@ const StatePreservingRowUpdater: React.FC<IStatePreservingRowUpdaterProps> = Rea
 		if(pagination) {
 			setTableState({ rows, pagination })
 		}
-	}, [rows, pagination])
+	}, [rows, pagination, setTableState])
 
 	return <>{ children }</>
 })

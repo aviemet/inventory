@@ -7,8 +7,9 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Form/Dropdowns'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
+import { coerceArray } from '../../lib/collections'
 
 interface AccessoryFormProps {
 	accessory: Schema.AccessoriesFormData
@@ -19,14 +20,10 @@ export interface IAccessoryFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<AccessoryFormProps>) => boolean|void
 	accessory: Schema.AccessoriesFormData
-	models: Schema.ModelsOptions[]
-	manufacturers: Schema.ManufacturersOptions[]
-	categories: Schema.CategoriesOptions[]
-	vendors: Schema.VendorsOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
-const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendors, locations, manufacturers, categories }: IAccessoryFormProps) => {
+const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: IAccessoryFormProps) => {
+
 	return (
 		<Form
 			model="accessory"
@@ -38,11 +35,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Accessory Details">
-				<ModelsDropdown
-					models={ models }
-					manufacturers={ manufacturers }
-					categories={ categories }
-				/>
+				<ModelsDropdown modelCategory="Accessory" initialData={ coerceArray(accessory?.model) } />
 
 				<TextInput name="serial" label="Serial" />
 
@@ -55,7 +48,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown vendors={ vendors } />
+				<VendorsDropdown initialData={ coerceArray(accessory?.vendor) } />
 
 				<TextInput name="cost" label="Cost" />
 			</FormGroup>
@@ -64,8 +57,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory, models, vendo
 				<LocationsDropdown
 					label="Default Location"
 					name="default_location_id"
-					locations={ locations }
-					currencies={ [] }
+					initialData={ coerceArray(accessory?.default_location) }
 				/>
 
 				<Checkbox name="requestable" label="Requestable" />
