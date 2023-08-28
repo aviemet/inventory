@@ -14,7 +14,7 @@ interface IRowProps extends Omit<ITableRow, 'ref'> {
 }
 
 const Row = ({ children, render, name, ...props }: IRowProps) => {
-	const tableState = useTableContext()
+	const tableState = useTableContext(false)
 
 	if(tableState === null) {
 		return (

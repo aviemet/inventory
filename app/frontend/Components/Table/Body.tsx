@@ -6,7 +6,7 @@ import { Box, LoadingOverlay, type BoxProps } from '@mantine/core'
 interface ITableBody extends BoxProps, TBodyProps {}
 
 const Body = forwardRef<HTMLTableSectionElement, ITableBody>(({ children, ...props }, ref) => {
-	const tableState = useTableContext()
+	const tableState = useTableContext(false)
 
 	if(tableState === null) {
 		return (

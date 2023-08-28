@@ -17,18 +17,25 @@ export interface ICellProps extends TDProps, BoxProps {
 }
 
 const RenderedCell = ({ children = true, hideable, sort, ...props }: ICellProps) => {
-	const { section } = useTableSectionContext()
-	const { tableState: { model } } = useTableContext()
 	const { auth: { user: { table_preferences } } } = usePageProps()
 
-	const hiddenByUser = useMemo(() => {
+	const tableSectionState = useTableSectionContext(false)
+	const tableState = useTableContext(false)
+
+	let hiddenByUser: boolean = false
+
+	if(tableState !== null) {
+		const { tableState: { model } } = tableState
+
 		const hideableString = hideable || sort
-		return hideableString !== undefined && model && table_preferences?.[model]?.hide?.[hideableString]
-	}, [hideable, model, sort, table_preferences])
+		if(hideableString !== undefined && model !== undefined) {
+			hiddenByUser = table_preferences?.[model]?.hide?.[hideableString]
+		}
+	}
 
 	if(hiddenByUser) return <></>
 
-	if(section === 'head') {
+	if(tableSectionState !== null && tableSectionState.section === 'head') {
 		return <HeadCell hideable={ hideable } sort={ sort } { ...props }>{ children }</HeadCell>
 	}
 

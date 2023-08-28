@@ -10,9 +10,9 @@ import {
 	FormGroup,
 	DynamicInputs,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Dropdowns'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown, DepartmentsDropdown } from '@/Components/Dropdowns'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
-import { Box, Group } from '@/Components'
+import { Group } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 
@@ -84,6 +84,8 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 					initialData={ coerceArray(item?.default_location) }
 					required
 				/>
+
+				<DepartmentsDropdown initialData={ coerceArray(item?.department) } />
 
 				<Checkbox name="requestable" label="Requestable" />
 

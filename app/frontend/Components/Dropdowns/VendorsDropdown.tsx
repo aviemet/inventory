@@ -38,7 +38,7 @@ const VendorsDropdown = forwardRef<HTMLInputElement, IVendorsDropdown>((
 	if(useInFormContext()) {
 		return (
 			<FormSelect
-				newForm={ <VendorsForm to={ Routes.vendors() } /> }
+				newForm={ <VendorsForm to={ Routes.apiVendors() } /> }
 				{ ...commonProps }
 			/>
 		)

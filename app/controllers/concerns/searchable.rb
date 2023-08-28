@@ -22,7 +22,7 @@ module Searchable
     # rubocop:disable Lint/ConstantDefinitionInBlock
     ADVANCED_SEARCH_METHODS = {
       default: ->(model, key, value) { model.where("#{model.table_name}.#{key} ILIKE ?", "%#{value}%") },
-      id: ->(model, key, value) { model.joins(key.to_sym).where("#{key.pluralize}.id = ?", value[:id]) },
+      id: ->(model, key, value) { return model.joins(key.to_sym).where("#{key.pluralize}.id = ?", value[:id]) },
       created_at: ->(model, _key, value) do
         return model unless value.is_a?(ActionController::Parameters)
 
@@ -102,11 +102,24 @@ module Searchable
     return unless sortable_fields&.include?(params[:sort])
 
     field_type = get_field_type(model, params[:sort])
+
     # Don't error if field doesn't exist on model
     return if field_type.nil?
 
-    sort_str = params[:sort].to_s
-    "#{sort_str} #{direction}"
+    # sort_str = params[:sort].to_s
+    # ap({ sort_str: })
+    "#{add_explicit_table_prefix(model, params[:sort].to_s)} #{direction}"
+  end
+
+  ##
+  # Ensures a sort parameter is scoped to a table name to avoid ambiguous parameter error
+  ##
+  def add_explicit_table_prefix(model, sort_param)
+    if sort_param.include? "."
+      return sort_param
+    end
+
+    "#{model.table_name}.#{sort_param}"
   end
 
   ##
@@ -116,10 +129,12 @@ module Searchable
     # if `column` is in the form 'model.field', or further chained such as 'model1.model2.field',
     # ignore the passed `model` param and use the last chained model sent in `column`
     split_fields = column.split(".")
+
     if split_fields.length > 1
       model = split_fields[-2].titleize.singularize.constantize
       column = split_fields[-1]
     end
+
     model.column_for_attribute(column).type
   end
 

@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
   expose :items, -> { search(@active_company.items.includes_associated, sortable_fields) }
   expose :item, scope: ->{ @active_company.items }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
+  before_action :handle_department_change, only: [:create, :update]
+
   # GET /item
   def index
     authorize items
@@ -105,6 +107,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /item/:id
   def update
     authorize item
+
     if item.update(item_params)
       redirect_to item, notice: 'Item was successfully updated'
     else
@@ -121,16 +124,22 @@ class ItemsController < ApplicationController
 
   private
 
+  def handle_department_change
+    if item_params[:department_id]
+      item_params[:department] = Department.find(item_params[:department_id])
+      item_params.delete(:department_id)
+    end
+  end
+
   def sortable_fields
     %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
   def advanced_search_params
-    params.permit(:name, :asset_tag, :serial, :cost, :purchased_at, :requestable, models: [:id], vendor: [:id], manufacturer: [:id], department: [:id], category: [:id], created_at: [:start, :end, :type])
-    # %w(name asset_tag serial cost purchased_at requestable models.id vendor.id category.id manufacturer.id department.id created_at).freeze
+    params.permit(:name, :asset_tag, :serial, :cost, :purchased_at, :requestable, model: [:id], vendor: [:id], manufacturer: [:id], department: [:id], category: [:id], created_at: [:start, :end, :type])
   end
 
   def item_params
-    params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :status_label_id, :purchased_at, :requestable, nics: [:mac, :ip])
+    @item_params ||= params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :department_id, :model_id, :vendor_id, :default_location_id, :parent_id, :status_label_id, :purchased_at, :requestable, nics: [:mac, :ip])
   end
 end

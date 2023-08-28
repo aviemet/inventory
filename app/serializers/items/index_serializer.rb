@@ -34,4 +34,5 @@ class Items::IndexSerializer < Assignable::SingleSerializer
   belongs_to :manufacturer, serializer: ManufacturerSerializer
   has_one :location, serializer: LocationSerializer
   belongs_to :status_label, serializer: StatusLabelSerializer
+  has_one :department, serializer: Departments::OptionsSerializer
 end
