@@ -1,13 +1,14 @@
 version: '3.8'
 services:
   db:
-    image: postgres
+    image: postgres:${PG_VERSION}-alpine 
     environment:
       POSTGRES_USER: "${PG_USERNAME}"
       POSTGRES_PASSWORD: "${PG_PASSWORD}"
     volumes:
       - postgres:/var/lib/postgresql/data
     restart: always
+
   web:
     build: .
     command: bash -c "bin/prod"
@@ -20,7 +21,9 @@ services:
     environment:
       - POSTGRES_USER=$${PG_USERNAME}
       - INVENTORY_DATABASE_PASSWORD=$${PG_PASSWORD}
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
     env_file: .env
     restart: always
+
 volumes:
   postgres:
