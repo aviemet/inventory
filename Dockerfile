@@ -1,6 +1,6 @@
 ARG RUBY_VERSION=3.2.2
 
-FROM ruby:$RUBY_VERSION
+FROM ruby:$RUBY_VERSION AS BUILD_IMAGE
 
 ARG BUNDLER_VERSION=2.4.17
 ARG NODE_MAJOR_VERSION=20
@@ -9,14 +9,14 @@ ADD . /inventory
 WORKDIR /inventory
 
 # Install basic packages
-RUN apt update && apt install -y build-essential libvips postgresql ca-certificates curl gnupg
+RUN apt update && apt install -y build-essential libvips postgresql-client ca-certificates curl gnupg
 
 # Install Node
 RUN mkdir -p /etc/apt/keyrings
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR_VERSION.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 RUN apt-get update && apt-get install -y nodejs
-RUN npm i -g yarn
+RUN npm i -g yarn && yarn set version stable
 
 # Clean up apt
 RUN apt clean && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
@@ -35,7 +35,6 @@ ENV NODE_ENV production
 COPY Gemfile Gemfile.lock ./
 RUN gem uninstall bundler && gem install bundler -v $BUNDLER_VERSION
 RUN bundle install
-RUN yarn install
 
 # Install npm packages
 COPY package.json yarn.lock ./
@@ -54,4 +53,4 @@ RUN SECRET_KEY_BASE=DUMMY bundle exec rails assets:precompile
 ENTRYPOINT ["/inventory/bin/docker-entrypoint"]
 
 EXPOSE 3000
-CMD ["./bin/rails", "prod"]
+CMD ["./bin/rails", "server"]
