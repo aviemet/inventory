@@ -54,7 +54,6 @@ jobs:
       - run:
           name: Database setup
           command: |
-            bundle exec rails db:terminate
             bundle exec rails db:create
             bundle exec rails db:test:prepare
 
