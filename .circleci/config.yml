@@ -62,9 +62,13 @@ jobs:
             yarn install
 
       - run:
-          name: Database setup
+          name: Create Database
           command: |
             bundle exec rails db:create
+
+      - run:
+          name: Prepare Database
+          command: |
             bundle exec rails db:test:prepare
 
   test:
