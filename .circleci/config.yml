@@ -1,9 +1,8 @@
 version: 2.1
 
 jobs:
-  build:
-    # The resource_class feature allows configuring CPU and RAM resources for each job. 
-    # Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+  setup:
+    # Configuration for the setup job.
     resource_class: large
 
     docker:
@@ -51,13 +50,6 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - run:
-          name: Database setup
-          command: |
-            bundle exec rails db:create
-            bundle exec rails db:test:prepare
-
-      # Frontend
       - restore_cache:
           keys:
             - inventory-yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -68,6 +60,24 @@ jobs:
           name: Yarn Install
           command: |
             yarn install
+
+      - run:
+          name: Database setup
+          command: |
+            bundle exec rails db:create
+            bundle exec rails db:test:prepare
+
+  test:
+    # Configuration for the test job.
+    resource_class: large
+
+    docker:
+      - image: cimg/ruby:3.2.2-node
+
+    working_directory: ~/inventory
+
+    steps:
+      - checkout
 
       - run:
           name: Run tests
@@ -87,4 +97,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - build
+      - setup
+      - test:
+          requires:
+            - setup
