@@ -1,7 +1,5 @@
 version: 2.1
 
-parallelism: 2
-
 jobs:
   build:
     # The resource_class feature allows configuring CPU and RAM resources for each job. 
@@ -20,6 +18,8 @@ jobs:
           POSTGRES_USER: inventory
           POSTGRES_DB: inventory_test
           POSTGRES_PASSWORD: inventory
+          
+    parallelism: 4
 
     working_directory: ~/inventory
 
