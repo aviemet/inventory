@@ -18,7 +18,8 @@ jobs:
           POSTGRES_USER: inventory
           POSTGRES_DB: inventory_test
           POSTGRES_PASSWORD: inventory
-
+          RAILS_ENV: test
+          
     parallelism: 4
 
     working_directory: ~/inventory
@@ -53,7 +54,7 @@ jobs:
       - run:
           name: Database setup
           command: |
-            bundle exec rails db:test:create
+            bundle exec rails db:create
             bundle exec rails db:test:prepare
 
       # Frontend
