@@ -66,6 +66,10 @@ jobs:
             yarn install
 
       - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
           name: Database setup
           command: |
             bundle exec rails db:create
@@ -75,15 +79,15 @@ jobs:
           name: Rails tests
           command: |
             bundle exec rspec \
-              --out test_results/rspec.xml \
+              --out rspec_test_results/rspec.xml \
               --format progress \
               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       - run:
-          name: Rails tests
+          name: Vite tests
           command: |
-            bundle exec rspec \
-              --out test_results/rspec.xml \
+            yarn test \
+              --out vite_test_results/rspec.xml \
               --format progress \
               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
