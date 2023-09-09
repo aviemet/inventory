@@ -3,7 +3,7 @@
 version: 2.1
 
 jobs:
-  setup:
+  setup_and_test:
     # Configuration for the setup job.
     resource_class: large
 
@@ -64,24 +64,21 @@ jobs:
             yarn install
 
       - run:
-          name: Prepare Database
+          name: Database setup
           command: |
-            bundle exec rails db:test:prepare            
-
-  test:
-    # Configuration for the test job.
-    resource_class: large
-
-    docker:
-      - image: cimg/ruby:3.2.2-node
-
-    working_directory: ~/inventory
-
-    steps:
-      - checkout
+            bundle exec rails db:create
+            bundle exec rails db:test:prepare
 
       - run:
-          name: Run tests
+          name: Rails tests
+          command: |
+            bundle exec rspec \
+              --out test_results/rspec.xml \
+              --format progress \
+              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      - run:
+          name: Rails tests
           command: |
             bundle exec rspec \
               --out test_results/rspec.xml \
@@ -98,7 +95,5 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - setup
-      - test:
-          requires:
-            - setup
+      - setup_and_test
+
