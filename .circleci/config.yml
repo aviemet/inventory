@@ -72,7 +72,7 @@ jobs:
       - run:
           name: Database setup
           command: |
-            bundle exec rails db:test:prepare
+            bundle exec rails db:prepare
 
       - run:
           name: Rails tests
