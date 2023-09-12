@@ -1,10 +1,11 @@
-# Circle CI used only for tests. Build is done through Github actions
-
 version: 2.1
 
+parallelism: 2
+
 jobs:
-  setup_and_test:
-    # Configuration for the setup job.
+  build:
+    # The resource_class feature allows configuring CPU and RAM resources for each job. 
+    # Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
     resource_class: large
 
     docker:
@@ -19,9 +20,6 @@ jobs:
           POSTGRES_USER: inventory
           POSTGRES_DB: inventory_test
           POSTGRES_PASSWORD: inventory
-          RAILS_ENV: test
-          
-    parallelism: 4
 
     working_directory: ~/inventory
 
@@ -33,8 +31,6 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-
-      - run: sudo apt install -y postgresql-client || true
 
       - run:
           name: Configure Bundler
@@ -54,6 +50,13 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
+      - run:
+          name: Database setup
+          command: |
+            bundle exec rails db:create
+            bundle exec rails db:test:prepare
+
+      # Frontend
       - restore_cache:
           keys:
             - inventory-yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -66,28 +69,10 @@ jobs:
             yarn install
 
       - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run:
-          name: Database setup
-          command: |
-            bundle exec rails db:create
-            bundle exec rails db:test:prepare
-
-      - run:
-          name: Rails tests
+          name: Run tests
           command: |
             bundle exec rspec \
-              --out rspec_test_results/rspec.xml \
-              --format progress \
-              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-
-      - run:
-          name: Vite tests
-          command: |
-            yarn test \
-              --out vite_test_results/rspec.xml \
+              --out test_results/rspec.xml \
               --format progress \
               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
@@ -99,7 +84,6 @@ jobs:
           destination: test-results
 
 workflows:
-  build-and-test:
+  build-and-deploy:
     jobs:
-      - setup_and_test
-
+      - build
