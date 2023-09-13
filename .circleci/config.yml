@@ -74,7 +74,7 @@ jobs:
           name: Rails tests
           command: |
             bundle exec rspec \
-              --out rspec_test_results/rspec.xml \
+              --out test_results/rspec.xml \
               --format progress \
               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
@@ -82,7 +82,8 @@ jobs:
           name: Vite tests
           command: |
             yarn test \
-              --reporter xml > vite_test_results/vite.xml \
+              --reporter junit \
+              --outputFile ~/inventory/test_results/vite.xml
 
       # collect reports
       - store_test_results:
