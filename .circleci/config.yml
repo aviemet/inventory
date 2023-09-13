@@ -2,11 +2,8 @@
 
 version: 2.1
 
-jobs:
-  setup_and_test:
-    # Configuration for the setup job.
-    resource_class: large
-
+executors:
+  app:
     docker:
       - image: cimg/ruby:3.2.2-node
         environment:
@@ -20,11 +17,15 @@ jobs:
           POSTGRES_DB: inventory_test
           POSTGRES_PASSWORD: inventory
           RAILS_ENV: test
-          
-    parallelism: 4
 
     working_directory: ~/inventory
 
+jobs:
+  setup:
+    executor: app
+    
+    parallelism: 2
+    
     steps:
       - checkout
 
@@ -43,11 +44,6 @@ jobs:
             source $BASH_ENV
             gem install bundler
 
-      - run:
-          name: Install dependencies
-          command: |
-            bundle config set --local path 'vendor/bundle'
-            bundle install --jobs=4 --retry=3
 
       - save_cache:
           paths:
@@ -60,6 +56,18 @@ jobs:
             - inventory-yarn-cache-{{ .Branch }}-
             - inventory-yarn-cache-
 
+  install_dependencies:
+    executor: app
+
+    parallelism: 2
+
+    steps:
+      - run:
+          name: Install dependencies
+          command: |
+            bundle config set --local path 'vendor/bundle'
+            bundle install --jobs=4 --retry=3
+
       - run:
           name: Yarn Install
           command: |
@@ -70,6 +78,12 @@ jobs:
           command: |
             bundle exec rails db:prepare
 
+  test:
+    parallelism: 4
+
+    executor: app
+
+    steps:
       - run:
           name: Rails tests
           command: |
@@ -93,5 +107,10 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - setup_and_test
-
+      - setup
+      - install_dependencies:
+          requires:
+            - setup
+      - test:
+          requires:
+            - install_dependencies
