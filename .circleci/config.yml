@@ -82,12 +82,13 @@ jobs:
           name: Vite tests
           command: |
             yarn test \
+              --config vitest.config.ts \
               --reporter junit \
               --outputFile /tmp/test_results/vite.xml
 
       # collect reports
       - store_test_results:
-          path: /tmp/test-results
+          path: /tmp/test_results
 
 workflows:
   build-and-test:

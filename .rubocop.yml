@@ -1,4 +1,10 @@
+require:
+  - rubocop-factory_bot
+  - rubocop-rails
+  - rubocop-rspec
+
 AllCops:
+
   Exclude:
     - "bin/**/*"
     - "node_modules/**/*"
