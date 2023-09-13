@@ -9,8 +9,9 @@
   "scripts": {
     "dev": "RAILS_ENV=development PORT=3000 NODE_ENV=development foreman start -f Procfile.dev",
     "start": "RACK_ENV=production RAILS_ENV=production PORT=3000 NODE_ENV=production foreman start -f Procfile",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

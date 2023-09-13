@@ -65,10 +65,6 @@ jobs:
           command: |
             yarn install
 
-      # - run:
-      #     name: Wait for DB
-      #     command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
       - run:
           name: Database setup
           command: |
@@ -86,16 +82,11 @@ jobs:
           name: Vite tests
           command: |
             yarn test \
-              --out vite_test_results/rspec.xml \
-              --format progress \
-              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+              --reporter xml > vite_test_results/vite.xml \
 
       # collect reports
       - store_test_results:
           path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
 
 workflows:
   build-and-test:
