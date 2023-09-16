@@ -13,12 +13,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+          POSTGRES_USER: inventory
+          POSTGRES_PASSWORD: inventory
+
     services:
       postgres:
         image: postgres:15-alpine
         env:
-          POSTGRES_USER: inventory
-          POSTGRES_PASSWORD: inventory
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
           POSTGRES_DB: inventory_test
         ports: ['5432:5432']
         options:
@@ -51,10 +55,8 @@ jobs:
 
       - name: Prepare database
         env:
-          DATABASE_URL: postgres://postgres:@localhost:5432/inventory_test
+          DATABASE_URL: postgres://${{ env.POSTGRES_USER }}:${{ env.POSTGRES_PASSWORD }}@localhost:5432/inventory_test
           RAILS_ENV: test
-          POSTGRES_USER: inventory
-          POSTGRES_PASSWORD: inventory
         run: |
           bundle exec rails db:prepare
 
