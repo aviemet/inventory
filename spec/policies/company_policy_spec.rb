@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../support/devise'
 
 RSpec.describe CompanyPolicy, type: :policy do
   subject { described_class }

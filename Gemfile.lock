@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 552b91d15a26b1fb401a1b4d273ed424d7697725
+  revision: 13140408843a1713385829007c1cbfc7396628a5
   branch: main
   specs:
     faker (3.2.1)
@@ -156,7 +156,8 @@ GEM
       rails (>= 5)
     io-console (0.6.0)
     ipaddress_2 (0.14.0)
-    irb (1.7.4)
+    irb (1.8.0)
+      rdoc (~> 6.5)
       reline (>= 0.3.6)
     js-routes (2.2.7)
       railties (>= 4)
@@ -236,6 +237,8 @@ GEM
       method_source (~> 1.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
+    psych (5.1.0)
+      stringio
     public_activity (2.0.2)
       actionpack (>= 5.0.0)
       activerecord (>= 5.0)
@@ -290,6 +293,8 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    rdoc (6.5.0)
+      psych (>= 4.0.0)
     regexp_parser (2.8.1)
     reline (0.3.8)
       io-console (~> 0.5)
@@ -315,7 +320,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
-    rubocop (1.56.1)
+    rubocop (1.56.2)
       base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -372,6 +377,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stringio (3.0.8)
     thor (1.2.2)
     time_for_a_boolean (0.2.1)
       activerecord

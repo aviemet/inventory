@@ -4,7 +4,7 @@ import { CircleDotIcon, CheckinIcon, CheckoutIcon } from '@/Components/Icons'
 import AssignmentHistoryContent from './AssignmentHistoryContent'
 import AuditHistoryContent from './AuditHistoryContent'
 import ReturnedHistoryContent from './ReturnedHistoryContent'
-import Link from '@/Components/Link'
+import { Link } from '@/Components'
 
 type TTimelineData = {
 	title: React.ReactNode
