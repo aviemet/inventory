@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from '@/Components/Link'
+import { Link } from '@/Components'
 import { useTableContext } from '../TableContext'
 import { Group, Pagination, type PaginationProps } from '@mantine/core'
 import LimitSelect from './LimitSelect'

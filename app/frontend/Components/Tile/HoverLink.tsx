@@ -1,5 +1,6 @@
 import React from 'react'
-import Link, { type ILinkProps } from '@/Components/Link'
+import { type ILinkProps } from '@/Components/Link'
+import { Link } from '@/Components'
 import cx from 'clsx'
 import useTileStyles from './useTileStyles'
 

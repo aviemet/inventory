@@ -19,8 +19,7 @@ module Searchable
       )
     end
 
-    # rubocop:disable Lint/ConstantDefinitionInBlock
-    ADVANCED_SEARCH_METHODS = {
+    @advanced_search_methods = {
       default: ->(model, key, value) { model.where("#{model.table_name}.#{key} ILIKE ?", "%#{value}%") },
       id: ->(model, key, value) { return model.joins(key.to_sym).where("#{key.pluralize}.id = ?", value[:id]) },
       created_at: ->(model, _key, value) do
@@ -48,7 +47,6 @@ module Searchable
 
       end,
     }
-    # rubocop:enable Lint/ConstantDefinitionInBlock
   end
 
   protected
@@ -69,9 +67,9 @@ module Searchable
     return model unless defined?(advanced_search_params) == "method" && params[:adv] = "true"
 
     advanced_search_params.each do |key, value|
-      apply_search = ADVANCED_SEARCH_METHODS[key.to_sym] ||
-                     (nested_key_with_id?(advanced_search_params[key]) && ADVANCED_SEARCH_METHODS[:id]) ||
-                     ADVANCED_SEARCH_METHODS[:default]
+      apply_search = @advanced_search_methods[key.to_sym] ||
+                     (nested_key_with_id?(advanced_search_params[key]) && @advanced_search_methods[:id]) ||
+                     @advanced_search_methods[:default]
       next unless apply_search
 
       model = apply_search.call(model, key, value)

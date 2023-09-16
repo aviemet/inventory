@@ -7,7 +7,7 @@ export default mergeConfig(viteConfig, defineConfig({
 		environment: 'jsdom',
 		coverage: {
 			all: true,
-			include: ['app/frontend/**/*'],
+			include: ['app/frontend/**/*.test.{ts,tsx}'],
 		},
 	},
 }))

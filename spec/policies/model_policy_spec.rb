@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../support/devise'
 
 RSpec.describe ModelPolicy, type: :policy do
   subject { described_class }
