@@ -41,6 +41,11 @@ jobs:
           node-version: 19
 
       - name: Prepare database
+        env:
+          DATABASE_URL: postgres://postgres:@localhost:5432/test
+          RAILS_ENV: test
+          POSTGRES_USER: inventory
+          POSTGRES_PASSWORD: inventory
         run: |
           bundle exec rails db:create
           bundle exec rails db:schema:load
@@ -53,14 +58,6 @@ jobs:
 
       - name: Install Node.js dependencies
         run: yarn install
-
-      # - name: Install dependencies
-      #   run: |
-      #     sudo apt-get -yqq install libpq-dev
-      #     bundle install --jobs 4 --retry 3
-      #     bundle exec rails db:create
-      #     bundle exec rails db:migrate
-      #     RAILS_ENV=test bundle exec rake
 
       - name: Prepare database
         run: |
