@@ -80,7 +80,7 @@ People:
 Vendors:
 
 - [x] Referenced and sortable by all assets
-- [ ] Stores useful details about the vendor
+- [x] Stores useful details about the vendor
 - [x] Links to contracts
 
 Contracts:
@@ -135,7 +135,7 @@ Table view for all models:
 - [x] Sortable column headings & Pagination
 - [ ] Custom fieldsets
 - [x] Search bar filters by all fields, including custom fields
-- [ ] Advanced search options
+- [x] Advanced search options
 
 Form view for all models:
 
@@ -172,7 +172,6 @@ Companies are top level organizational units. All other objects can be considere
 
 Given that an asset shouldn't belong to more than one company, a Company record is used to scope all items. Everything under the scope of a company is considered to be "owned" by that company, defined by a polymorphic Ownership record. An Ownership also contains an optional Department reference so that departmental ownership can live as a top level definition. This way an asset can be assigned outside of its department, but still maintain the relationship of its original owner.
 
-
 ### Roles
 
 User record can have one role, `:super_admin`.
@@ -180,6 +179,12 @@ User record can have one role, `:super_admin`.
 Person record can have `:admin` role set for specific Companies.
 
 PersonGroup record is where all other roles will be applied.
+
+### Git workflow
+
+When working on something, always create a feature branch. Submit a PR to `dev`, it will be squashed and merged when accepted.
+
+When bringing changes in `dev` over to `main`, create a `release` branch off of `main`. Merge `dev` into it using `git pull origin dev --rebase`. Merge into `main` using a standard merge.
 
 ## Features for another time
 
