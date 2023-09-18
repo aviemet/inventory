@@ -1,6 +1,13 @@
 module.exports = {
 	release: {
-		branches: ['release'],
+		branches: [
+			'+([0-9])?(.{+([0-9]),x}).x',
+			'release',
+			'next',
+			'next-major',
+			{ name: 'beta', prerelease: true },
+			{ name: 'alpha', prerelease: true },
+		],
 	},
 	plugins: [
 		'@semantic-release/commit-analyzer',
@@ -11,4 +18,6 @@ module.exports = {
 			'message': 'chore(release): ${nextRelease.version} \n\n${nextRelease.notes}',
 		}],
 	],
+	mangle: false,
+	headerIds: false,
 }
