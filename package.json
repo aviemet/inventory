@@ -1,6 +1,6 @@
 {
   "name": "inventory",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "main": "index.js",
   "repository": "https://github.com/aviemet/icr.git",
   "author": "Avram Walden <aviemet@gmail.com>",
@@ -13,7 +13,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "release": "semantic-release"
   },
   "dependencies": {
     "@cassiozen/usestatemachine": "^1.0.1",
@@ -115,6 +116,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prop-types": "^15.8.1",
+    "semantic-release": "^22.0.0",
     "storybook": "^7.3.2",
     "typescript": "^5.2.2",
     "vite-plugin-dynamic-import": "^1.5.0",
@@ -148,8 +150,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "release": {
-    "branches": [{ "name": "release" }]
   }
 }
