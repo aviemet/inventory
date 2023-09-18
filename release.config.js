@@ -1,7 +1,5 @@
 module.exports = {
 	release: {
-		branches: [
-			'release',
-		],
+		branches: ['main'],
 	},
 }
