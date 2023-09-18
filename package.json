@@ -150,6 +150,6 @@
     }
   },
   "release": {
-    "branches": ["release"]
+    "branches": [{ "name": "release" }]
   }
 }
