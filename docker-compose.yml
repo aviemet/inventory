@@ -11,6 +11,7 @@ services:
     restart: always
 
   web:
+    image: inventory
     build: .
     command: >
       bash -c "bin/docker-entrypoint"
