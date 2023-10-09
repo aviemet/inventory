@@ -6,20 +6,30 @@ on:
       - main
 
 jobs:
-  bump_version:
-    if: ${{ !startsWith(github.event.head_commit.message, 'bump:') }}
+  release:
     runs-on: ubuntu-latest
-    name: "Bump version and create changelog with commitizen"
+
+    name: "Bump version and publish docker image"
+
     steps:
       - name: Check out
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          token: "${{ secrets.GITHUB_TOKEN }}"
-      - id: cz
-        name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Print Version
-        run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
+
+      - name: Version Bump
+        run: |
+          npm install -g semantic-release
+          semantic-release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker Image
+        run: |
+          docker-compose -f docker-compose.yml build
+        
+      - name: Authenticate to GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+      
+      - name: Push Docker Image to GitHub Packages
+        run: |
+          docker tag your-image-name:tag ghcr.io/${{ github.repository_owner }}/your-image-name:tag
+          docker push ghcr.io/${{ github.repository_owner }}/your-image-name:tag
