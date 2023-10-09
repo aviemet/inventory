@@ -4,6 +4,7 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["POSTGRES_HOST"] || "localhost" %>
 
 development:
   <<: *default
@@ -24,4 +25,3 @@ production:
   database: inventory_production
   username: <%= ENV["PG_USERNAME"] || ENV["USER"] %>
   password: <%= ENV["PG_PASSWORD"] %>
-  host: <%= ENV["POSTGRES_HOST"] || "localhost" %>
