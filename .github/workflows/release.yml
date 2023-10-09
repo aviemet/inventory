@@ -35,7 +35,7 @@ jobs:
       - name: Push Docker Image to GitHub Packages
         run: |
           NEW_VERSION=$(node -p "require('./package.json').version")
-          docker tag inventory:${NEW_VERSION} ghcr.io/${{ github.repository_owner }}/inventory:${NEW_VERSION}
+          docker tag inventory ghcr.io/${{ github.repository_owner }}/inventory:${NEW_VERSION}
           docker push ghcr.io/${{ github.repository_owner }}/inventory:${NEW_VERSION}
         env:
           GHCR_PAT: ${{ secrets.GITHUB_TOKEN }}
