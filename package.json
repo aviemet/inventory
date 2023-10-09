@@ -1,6 +1,6 @@
 {
   "name": "inventory",
-  "version": "0.0.0-development",
+  "version": "0.1.0",
   "main": "index.js",
   "repository": "https://github.com/aviemet/icr.git",
   "author": "Avram Walden <aviemet@gmail.com>",
