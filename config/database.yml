@@ -22,6 +22,6 @@ test:
 production:
   <<: *default
   database: inventory_production
-  username: <%= ENV["PG_USERNAME"] %>
+  username: <%= ENV["PG_USERNAME"] || ENV["USER"] %>
   password: <%= ENV["PG_PASSWORD"] %>
   host: <%= ENV["POSTGRES_HOST"] || "localhost" %>
