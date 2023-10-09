@@ -1,6 +1,6 @@
 {
   "name": "inventory",
-  "version": "0.0.0-development",
+  "version": "0.1.0",
   "main": "index.js",
   "repository": "https://github.com/aviemet/icr.git",
   "author": "Avram Walden <aviemet@gmail.com>",
@@ -13,8 +13,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "release": "semantic-release"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@cassiozen/usestatemachine": "^1.0.1",
@@ -75,7 +74,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",
-    "@commitlint/cli": "^17.7.1",
+    "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
@@ -118,7 +117,6 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prop-types": "^15.8.1",
-    "semantic-release": "^22.0.0",
     "storybook": "^7.4.2",
     "typescript": "^5.2.2",
     "vite-plugin-dynamic-import": "^1.5.0",
@@ -134,12 +132,6 @@
   "browserslist": [
     "defaults"
   ],
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run lint:types && lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{js,ts}": [
       "npm run lint:fix"
