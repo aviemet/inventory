@@ -2,7 +2,7 @@
   "name": "inventory",
   "version": "0.1.0",
   "main": "index.js",
-  "repository": "https://github.com/aviemet/icr.git",
+  "repository": "https://github.com/aviemet/inventory.git",
   "author": "Avram Walden <aviemet@gmail.com>",
   "license": "MIT",
   "private": true,

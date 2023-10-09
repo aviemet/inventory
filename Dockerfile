@@ -9,7 +9,7 @@ ADD . /inventory
 WORKDIR /inventory
 
 # Install basic packages
-RUN apt update && apt install -y build-essential libvips postgresql-client ca-certificates curl gnupg
+RUN apt-get update && apt-get install -y build-essential libvips postgresql-client ca-certificates curl gnupg
 
 # Install Node
 RUN mkdir -p /etc/apt/keyrings
@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y nodejs
 RUN npm i -g yarn && yarn set version stable
 
 # Clean up apt
-RUN apt clean && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
 
 # Rails app lives here
 WORKDIR /inventory
