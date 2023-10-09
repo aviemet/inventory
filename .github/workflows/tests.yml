@@ -17,6 +17,7 @@ jobs:
       POSTGRES_USER: inventory
       POSTGRES_PASSWORD: inventory
       POSTGRES_HOST: localhost
+      POSTGRES_DB: inventory_test
 
     services:
       postgres:
@@ -24,7 +25,7 @@ jobs:
         env:
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
-          POSTGRES_DB: inventory_test
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
           POSTGRES_HOST_AUTH_METHOD: trust
         ports: ['5432:5432']
         options:
@@ -45,6 +46,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 19.x
+          cache: 'yarn'
 
       - name: Set up Yarn
         run: npm install -g yarn
