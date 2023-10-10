@@ -1,14 +1,14 @@
 import React from 'react'
-import { Paper, type PaperProps } from '@mantine/core'
+import { Paper, type PaperProps, type ElementProps } from '@mantine/core'
 import Content from './Content'
 import Footer from './Footer'
 import HoverLink from './HoverLink'
 import cx from 'clsx'
-import useTileStyles from './useTileStyles'
+import * as classes from './Tile.css'
 
-const Tile = ({ children, className, ...props }: PaperProps) => {
-	const { classes } = useTileStyles()
+interface ITileProps extends PaperProps, ElementProps<'div', keyof PaperProps> {}
 
+const Tile = ({ children, className, ...props }: ITileProps) => {
 	return (
 		<Paper radius="lg" className={ cx(classes.tile, className) } { ...props }>
 			{ children }

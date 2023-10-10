@@ -55,7 +55,7 @@ const ConsumablesTable = (props: ITableProps) => {
 						<Table.Cell>{ consumable.min_qty }</Table.Cell>
 
 						<Table.Cell fitContent>
-							<Group noWrap spacing="sm">
+							<Group wrap="nowrap" gap="sm">
 								<CheckoutButton
 									href={ Routes.checkoutConsumable(consumable) }
 									disabled={ consumable.qty_available < 1 }

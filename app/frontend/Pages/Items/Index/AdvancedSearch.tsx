@@ -29,7 +29,7 @@ const AdvancedItemsSearch = () => {
 	return (
 		<>
 			<Flex gap="md" mb="md">
-				<Box sx={ { flex: 1 } }>
+				<Box style={ { flex: 1 } }>
 					<Group grow>
 						<TextInput
 							clearable
@@ -84,7 +84,7 @@ const AdvancedItemsSearch = () => {
 						/>
 					</Group>
 				</Box>
-				<Box sx={ { minWidth: '17rem' } }>
+				<Box style={ { minWidth: '17rem' } }>
 					<SearchDateTypeInput advancedSearch={ advancedSearch } name="created_at" />
 					<SearchDateInput advancedSearch={ advancedSearch } name="created_at" />
 				</Box>
@@ -97,7 +97,7 @@ const AdvancedItemsSearch = () => {
 					as='button'
 					href={ link }
 					buttonProps={ { leftIcon: <SearchIcon /> } }
-					sx={ { width: '100%' } }
+					style={ { width: '100%' } }
 				>
         	Search
 				</Link>

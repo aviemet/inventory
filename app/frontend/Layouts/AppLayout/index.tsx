@@ -3,10 +3,9 @@ import { AppShell, Box, px, useMantineTheme } from '@mantine/core'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
-import useAppLayoutStyles from './useAppLayoutStyles'
+import * as classes from './AppLayout.css'
 
 const AppLayout = ({ children }: { children: any }) => {
-	const { classes } = useAppLayoutStyles()
 	const theme = useMantineTheme()
 
 	useEffect(() => {
@@ -25,10 +24,10 @@ const AppLayout = ({ children }: { children: any }) => {
 			asideOffsetBreakpoint="sm"
 			padding="xs"
 
-			sx={ theme => ({
+			style={ theme => ({
 				main: {
-					background: theme.other.colorSchemeOption(theme.colors.gray[1], theme.black),
-					height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
+					// background: theme.other.colorSchemeOption(theme.colors.gray[1], theme.black),
+					// height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
 					paddingTop: 'var(--mantine-header-height, 0px)',
 					paddingBottom: 'var(--mantine-footer-height, 0px)',
 					paddingLeft: 'var(--mantine-navbar-width, 0px)',

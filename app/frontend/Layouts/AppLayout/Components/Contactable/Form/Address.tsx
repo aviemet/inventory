@@ -18,7 +18,7 @@ const Address = () => {
 
 	return (
 		<>
-			<Group position='apart'>
+			<Group justify="space-between">
 				<div>Address</div>
 				<Button
 					onClick={ addInputGroup }
@@ -49,7 +49,7 @@ const Address = () => {
 						<TextInput name="postal" label="Zip/Post" compact />
 					</Group>
 
-					<Button onClick={ removeInputGroup } sx={ {
+					<Button onClick={ removeInputGroup } style={ {
 						marginLeft: 'auto',
 						display: 'block',
 					} }>

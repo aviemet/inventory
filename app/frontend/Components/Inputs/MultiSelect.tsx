@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { MultiSelect, type SelectItem, type MultiSelectProps } from '@mantine/core'
+import { MultiSelect, type ComboboxData, type MultiSelectProps } from '@mantine/core'
 import Label from './Label'
 import { IInputProps } from '.'
 import InputWrapper from './InputWrapper'
@@ -7,7 +7,7 @@ import { router } from '@inertiajs/react'
 import { coerceArray } from '@/lib'
 
 export interface IMultiSelectProps extends Omit<MultiSelectProps, 'data'>, IInputProps {
-	options?: readonly (string | SelectItem)[]
+	options?: ComboboxData
 	fetchOnOpen?: string
 }
 
@@ -50,7 +50,7 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, IMultiSelectProps>((
 				data={ options }
 				required={ required }
 				onDropdownOpen={ handleDropdownOpen }
-				nothingFound="No Results"
+				nothingFoundMessage="No Results"
 				{ ...props }
 			/>
 		</InputWrapper>

@@ -2,7 +2,7 @@ import React, { forwardRef, useMemo } from 'react'
 import { type Method, type Visit } from '@inertiajs/core'
 import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
-import { type Sx, type AnchorProps, type ButtonProps } from '@mantine/core'
+import { type AnchorProps, type ButtonProps } from '@mantine/core'
 
 export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	children?: React.ReactNode
@@ -19,7 +19,6 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	disabled?: boolean
 	buttonProps?: ButtonProps
 	preserveScroll?: boolean
-	sx?: Sx
 }
 
 const externalPrefix = ['http', 'www']

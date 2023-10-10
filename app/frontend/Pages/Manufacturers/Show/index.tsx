@@ -50,7 +50,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: ISh
 				{ /*********** Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
-						<Group position="apart">
+						<Group justify="space-between">
 							<Heading>{ title }</Heading>
 
 							<Menu position="bottom-end">

@@ -22,7 +22,7 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 		errorKey,
 		field = true,
 		endpoint,
-		 ...props
+		...props
 	},
 	ref,
 ) => {
@@ -51,7 +51,7 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 				component: Field,
 				className: cx({ compact, required }),
 				errors: Boolean(error),
-				sx: { padding: 0 },
+				style: { padding: 0 },
 			} }
 			wrapper={ false }
 			{ ...props }

@@ -41,7 +41,8 @@ const DateTime = ({
 				radius={ radius }
 				size={ size }
 				valueFormat={ valueFormat }
-				icon={ <CalendarIcon /> }
+				leftSection={ <CalendarIcon /> }
+				leftSectionPointerEvents="none"
 				{ ...props }
 			/>
 		</InputWrapper>

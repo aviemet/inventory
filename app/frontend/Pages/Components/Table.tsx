@@ -67,7 +67,7 @@ const ComponentsTable = (props: ITableProps) => {
 						<Table.Cell>{ component.min_qty }</Table.Cell>
 
 						<Table.Cell fitContent>
-							<Group noWrap spacing="sm">
+							<Group wrap="nowrap" gap="sm">
 								<CheckoutButton
 									href={ Routes.checkoutComponent(component) }
 									disabled={ component.qty_available < 1 }

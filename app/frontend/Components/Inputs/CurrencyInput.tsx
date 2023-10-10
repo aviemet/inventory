@@ -24,7 +24,8 @@ const TextInputComponent = forwardRef<HTMLInputElement, ICurrencyInputProps>((
 				size={ size }
 				name={ name }
 				value={ value }
-				icon='$'
+				leftSectionPointerEvents="none"
+				leftSection="$"
 				{ ...props }
 			/>
 		</InputWrapper>

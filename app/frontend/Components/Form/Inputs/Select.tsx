@@ -68,10 +68,10 @@ const Select = forwardRef<HTMLInputElement, ISelectFormProps>((
 		<ConditionalWrapper
 			wrapper={ children => (
 				<Group
-					noWrap
 					grow
+					wrap="nowrap"
 					align="baseline"
-					position="apart"
+					justify="space-between"
 				>
 					{ children }
 				</Group>

@@ -13,7 +13,7 @@ interface IFormGroupProps extends DivProps {
 
 const FormGroup = ({ children, legend, outline = true, model }: IFormGroupProps) => {
 	return (
-		<Box component='fieldset' className={ cx({ outline }) } sx={ {
+		<Box component='fieldset' className={ cx({ outline }) } style={ {
 			marginTop: legend ? '0.5rem' : undefined,
 		} }>
 			<ConditionalWrapper

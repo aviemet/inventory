@@ -24,8 +24,8 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 			{ title: network.name! },
 		] }>
 			<Section>
-				<Group position="apart">
-					<Heading sx={ { flex: 1 } }>{ title }</Heading>
+				<Group justify="space-between">
+					<Heading style={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -39,7 +39,7 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 
 				<Container>
 					<Flex>
-						<Table wrapper={ false } sx={ { flex: 1 } }>
+						<Table wrapper={ false } style={ { flex: 1 } }>
 							<Table.Body>
 
 								<Table.Row>
@@ -65,7 +65,7 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 							</Table.Body>
 						</Table>
 
-						<Table wrapper={ false } sx={ { flex: 1 } }>
+						<Table wrapper={ false } style={ { flex: 1 } }>
 							<Table.Body>
 								<Table.Row>
 									<Table.Cell>Gateway</Table.Cell>

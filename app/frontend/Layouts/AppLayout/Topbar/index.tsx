@@ -1,21 +1,20 @@
 import React from 'react'
 import ActiveCompanyDropdown from './ActiveCompanyDropdown'
-import { useLayoutStore } from '@/Layouts/Providers'
+import { useLayoutStore } from '@/lib/store'
 import QuickNewMenu from './QuickNewMenu'
-import { Box, Header, Burger, Group } from '@mantine/core'
+import { Box, AppShell, Burger, Group } from '@mantine/core'
 import cx from 'clsx'
 import AvatarMenu from './AvatarMenu'
-import useTopbarStyles from './useTopbarStyles'
 import { usePageProps } from '@/lib/hooks'
+import * as classes from './TopBar.css'
 
 const Topbar = () => {
 	const { auth: { user } } = usePageProps()
 	const { sidebarOpen, toggleSidebarOpen } = useLayoutStore()
-	const { classes } = useTopbarStyles()
 
 
 	return (
-		<Header height={ 50 } p="sm" className={ cx(classes.topbar, { closed: !sidebarOpen }) }>
+		<AppShell.Header height={ 50 } p="sm" className={ cx(classes.topbar, { closed: !sidebarOpen }) }>
 			<Box className={ classes.wrapper }>
 
 				<Burger
@@ -25,7 +24,7 @@ const Topbar = () => {
 					mr="xl"
 				/>
 
-				<Box sx={ { flex: 1 } }>
+				<Box style={ { flex: 1 } }>
 					<div>
 						<ActiveCompanyDropdown user={ user } />
 					</div>
@@ -37,7 +36,7 @@ const Topbar = () => {
 				</Group>
 
 			</Box>
-		</Header>
+		</AppShell.Header>
 	)
 }
 

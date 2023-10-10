@@ -10,7 +10,7 @@ const ToggleColorSchemeButton = () => {
 			color={ colorScheme === 'dark' ? 'yellow' : 'blue' }
 			onClick={ () => toggleColorScheme() }
 			title="Toggle color scheme"
-			sx={ { display: 'inline-flex' } }
+			style={ { display: 'inline-flex' } }
 			aria-label={ `Enable ${colorScheme === 'dark' ? 'light' : 'dark'} mode` }
 		>
 			{ colorScheme === 'dark' ? <Sun size={ 18 } /> : <MoonStars size={ 18 } /> }

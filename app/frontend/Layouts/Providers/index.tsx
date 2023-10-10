@@ -1,13 +1,14 @@
 import React from 'react'
 import IconProvider from './IconProvider'
 import UiFrameworkProvider from './UiFrameworkProvider'
-import SpotlightProvider from './SpotlightProvider'
+import Spotlight from './Spotlight'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import './reset.css'
-import useLayoutStore from '../AppLayout/store/LayoutStore'
-
-export { useLayoutStore }
+import '@mantine/core/styles.css'
+import '@mantine/dates/styles.css'
+import '@mantine/spotlight/styles.css'
+import './global.css'
 
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
@@ -31,11 +32,10 @@ const Providers = React.memo(({ children }: IProviderProps) => {
 	return (
 		<QueryClientProvider client={ queryClient }>
 			<UiFrameworkProvider>
-				<SpotlightProvider>
-					<IconProvider>
-						{ children }
-					</IconProvider>
-				</SpotlightProvider>
+				<Spotlight />
+				<IconProvider>
+					{ children }
+				</IconProvider>
 			</UiFrameworkProvider>
 		</QueryClientProvider>
 	)

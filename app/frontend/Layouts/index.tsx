@@ -1,7 +1,7 @@
 import React from 'react'
 import { type PageProps } from '@inertiajs/core'
 import Providers from '@/Layouts/Providers'
-import { Flash } from '@/Components/Flash'
+import { Flash } from '@/Components'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import AppLayout from './AppLayout'

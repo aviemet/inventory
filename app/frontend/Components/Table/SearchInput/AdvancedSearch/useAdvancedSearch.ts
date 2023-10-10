@@ -130,7 +130,7 @@ const useAdvancedSearch = (
 			} }),
 			wrapperProps: {
 				className: cx({ highlighted: !isUnset(value) && !param?.dependent }),
-				sx: (theme: MantineTheme) => ({
+				style: (theme: MantineTheme) => ({
 					'&.highlighted, &.highlighted input': {
 						color: theme.other.colorSchemeOption(
 							theme.colors[theme.primaryColor][6],

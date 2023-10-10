@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import { DoubleDownArrowIcon } from '@/Components/Icons'
-import { ActionIcon, Paper, Transition, useMantineTheme, rem, px, Tooltip, Box } from '@mantine/core'
-import { useLayoutStore } from '@/Layouts/Providers'
+import { useLayoutStore } from '@/lib/store'
 import { useBooleanToggle } from '@/lib/hooks'
 import { useClickOutside } from '@mantine/hooks'
+import {
+	ActionIcon,
+	Paper,
+	Transition,
+	useMantineTheme,
+	rem,
+	px,
+	Tooltip,
+	Box,
+} from '@mantine/core'
 
 export { default as useAdvancedSearch } from './useAdvancedSearch'
 
@@ -43,7 +52,7 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 					onClick={ () => toggleOpen() }
 					ref={ setSearchButton }
 					data-ignore-outside-clicks
-				 >
+				>
 					<DoubleDownArrowIcon size={ 24 } />
 				</ActionIcon>
 			</Tooltip>

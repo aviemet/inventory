@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import normalizeUrl from 'normalize-url'
 import { ExternalLinkIcon } from '@/Components/Icons'
 import { Anchor, type AnchorProps } from '@mantine/core'
-import useLinkStyles from './useLinkStyles'
+import * as classes from './Link.css'
 import cx from 'clsx'
 
 interface IExternalLinkProps extends Omit<AnchorProps, 'component'> {
@@ -15,7 +15,6 @@ const ExternalLink = forwardRef<HTMLAnchorElement, IExternalLinkProps>((
 	ref,
 ) => {
 	const url = normalizeUrl(href, { stripWWW: false })
-	const { classes } = useLinkStyles()
 
 	return (
 		<Anchor

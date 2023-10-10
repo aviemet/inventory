@@ -55,13 +55,13 @@ const SettingsLayout = ({ children, breadcrumbs }: ISettingsLayoutProps) => {
 					variant="pills"
 					defaultValue={ paths[1] }
 					onTabChange={ handleTabChange }
-					sx={ (theme) => ({
+					style={ (theme) => ({
 						minHeight: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 60px)`,
 					}) }
 				>
 					<Paper withBorder p='xs' shadow="sm">
 						<Tabs.List
-							sx={ mobileFormat ? {
+							style={ mobileFormat ? {
 								flexWrap: 'nowrap',
 								overflow: 'auto',
 							} : {} }
@@ -75,8 +75,8 @@ const SettingsLayout = ({ children, breadcrumbs }: ISettingsLayoutProps) => {
 					</Paper>
 
 					{ tabs.map(tab => (
-						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs" sx={ { position: 'relative' } }>
-							<Box p='lg' sx={ { height: '100%' } }>
+						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs" style={ { position: 'relative' } }>
+							<Box p='lg' style={ { height: '100%' } }>
 								{ children }
 							</Box>
 						</Tabs.Panel>

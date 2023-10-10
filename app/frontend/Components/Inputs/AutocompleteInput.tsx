@@ -1,14 +1,12 @@
 import React, { forwardRef } from 'react'
-import { Autocomplete, Sx, type AutocompleteProps } from '@mantine/core'
+import { Autocomplete, type AutocompleteProps } from '@mantine/core'
 import { IInputProps } from '.'
 import InputWrapper from './InputWrapper'
 
-export interface IAutocompleteProps extends AutocompleteProps, IInputProps {
-	sx?: Sx
-}
+export interface IAutocompleteProps extends AutocompleteProps, IInputProps {}
 
 const AutocompleteComponent = forwardRef<HTMLInputElement, IAutocompleteProps>((
-	{ id, name, sx, wrapper, wrapperProps, ...props },
+	{ id, name, style, wrapper, wrapperProps, ...props },
 	ref,
 ) => {
 	const inputId = id ?? name
@@ -19,7 +17,7 @@ const AutocompleteComponent = forwardRef<HTMLInputElement, IAutocompleteProps>((
 				ref={ ref }
 				id={ inputId }
 				name={ name }
-				sx={ [{ padding: '14px 10px' }, sx] }
+				style={ [{ padding: '14px 10px' }, style] }
 				wrapperProps={ wrapper ? {} : wrapperProps }
 				{ ...props }
 			/>

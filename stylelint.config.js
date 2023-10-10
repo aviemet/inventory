@@ -14,11 +14,11 @@ module.exports = {
 					'responsive',
 					'screen',
 					'use',
-				]
-			}
+				],
+			},
 		],
 		'indentation': ['tab', {
-			baseIndentLevel: 1
-		}]
-	}
+			baseIndentLevel: 1,
+		}],
+	},
 }

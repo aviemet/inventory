@@ -44,7 +44,7 @@ const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 			radius="md"
 			mx={ 4 }
 			my={ 0 }
-			sx={ {
+			style={ {
 				display: 'inline-block',
 				maxWidth: 60,
 				'.mantine-Select-rightSection': {

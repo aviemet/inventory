@@ -1,13 +1,11 @@
 import React from 'react'
-import { Switch, Sx, type SwitchProps } from '@mantine/core'
+import { Switch, type SwitchProps } from '@mantine/core'
 import { IInputProps } from '.'
 import InputWrapper from './InputWrapper'
 
-export interface ISwitchProps extends SwitchProps, IInputProps {
-	sx?: Sx
-}
+export interface ISwitchProps extends SwitchProps, IInputProps {}
 
-const SwitchComponent = ({ id, name, sx, wrapper, wrapperProps, ...props }: ISwitchProps) => {
+const SwitchComponent = ({ id, name, style, wrapper, wrapperProps, ...props }: ISwitchProps) => {
 	const inputId = id ?? name
 
 	return (
@@ -16,7 +14,7 @@ const SwitchComponent = ({ id, name, sx, wrapper, wrapperProps, ...props }: ISwi
 				id={ inputId }
 				name={ name }
 				required={ props.required }
-				sx={ [{ padding: '14px 10px' }, sx] }
+				style={ [{ padding: '14px 10px' }, style] }
 				{ ...props }
 			/>
 		</InputWrapper>
