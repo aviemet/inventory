@@ -14,7 +14,6 @@ interface ILinkProps extends IAnchorLinkProps {
 	as: 'a'|'button'
 	method?: Method
 	visit?: Omit<Visit, 'method'>
-	compact?: boolean
 	buttonProps?: ButtonProps
 	disabled?: boolean
 }

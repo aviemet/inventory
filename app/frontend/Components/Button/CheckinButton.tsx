@@ -31,9 +31,8 @@ const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: IChe
 		>
 			<Link
 				as="button"
-				compact
 				href={ href }
-				color={ checkinButtonColor }
+				c={ checkinButtonColor }
 				aria-label={ `Check in ${label}` }
 				{ ...finalProps }
 			>

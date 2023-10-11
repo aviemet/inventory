@@ -32,21 +32,21 @@ const Address = () => {
 			{ Array(addressCount).fill('').map((_, i) => (
 				<FormGroup key={ i }>
 					<Group>
-						<TextInput name="type" label="Type" compact />
+						<TextInput name="type" label="Type" />
 
-						<TextInput name="country" label="Country" compact />
+						<TextInput name="country" label="Country" />
 					</Group>
 
-					<TextInput name={ `address_${i}` } label="Address" compact />
+					<TextInput name={ `address_${i}` } label="Address" />
 
-					<TextInput name="address_2" label="Address 2" compact />
+					<TextInput name="address_2" label="Address 2" />
 
 					<Group>
-						<TextInput name="city" label="City" compact />
+						<TextInput name="city" label="City" />
 
-						<TextInput name="region" label="State" compact />
+						<TextInput name="region" label="State" />
 
-						<TextInput name="postal" label="Zip/Post" compact />
+						<TextInput name="postal" label="Zip/Post" />
 					</Group>
 
 					<Button onClick={ removeInputGroup } style={ {

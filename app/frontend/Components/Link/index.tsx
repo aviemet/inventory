@@ -10,7 +10,6 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	method?: Method
 	visit?: Omit<Visit, 'method'>
 	external?: boolean
-	compact?: boolean
 	as?: 'a'|'button'
 	onProgress?: React.ReactEventHandler<HTMLAnchorElement>
 	target?: string

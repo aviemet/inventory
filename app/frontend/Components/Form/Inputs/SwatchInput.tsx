@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react'
 import { useInertiaInput } from 'use-inertia-form'
 import SwatchInput, { type ISwatchInputProps } from '@/Components/Inputs/SwatchInput'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import cx from 'clsx'
 import Field from '../Field'
 import { type IFormInputProps } from '.'
 
@@ -16,7 +15,6 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 		onBlur,
 		id,
 		required,
-		compact = false,
 		errorKey,
 		field = true,
 		...props
@@ -37,7 +35,6 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 				<Field
 					type="text"
 					required={ required }
-					className={ cx({ compact }) }
 					errors={ !!error }
 				>
 					{ children }
