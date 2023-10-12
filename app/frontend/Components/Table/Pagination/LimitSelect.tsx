@@ -47,10 +47,10 @@ const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 			style={ {
 				display: 'inline-block',
 				maxWidth: 60,
-				'.mantine-Select-rightSection': {
+				'.mantineSelectRightSection': {
 					width: '1.25rem',
 				},
-				'.mantine-Select-input': {
+				'.mantineSelectInput': {
 					paddingRight: '1.25rem',
 				} } }
 			rightSectionWidth='1rem'

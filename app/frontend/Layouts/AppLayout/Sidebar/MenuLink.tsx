@@ -12,7 +12,7 @@ const MenuLink = ({ children, href, icon, ...props }: IMenuLinkProps) => {
 	return (
 		<Link href={ href } { ...props }>
 			<ActionIcon
-				color="dark"
+				c="bright"
 				size="xl"
 				variant="transparent"
 				aria-label={ children }

@@ -91,15 +91,15 @@ const AdvancedItemsSearch = () => {
 			</Flex>
 
 			<Group grow>
-				<Button onClick={ reset } leftIcon={ <CrossIcon /> }>Clear</Button>
+				<Button onClick={ reset } leftSection={ <CrossIcon /> }>Clear</Button>
 
 				<Link
 					as='button'
 					href={ link }
-					buttonProps={ { leftIcon: <SearchIcon /> } }
+					buttonProps={ { leftSection: <SearchIcon /> } }
 					style={ { width: '100%' } }
 				>
-        	Search
+					Search
 				</Link>
 			</Group>
 		</>

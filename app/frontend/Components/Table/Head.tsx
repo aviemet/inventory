@@ -6,7 +6,7 @@ import { Box, type BoxProps } from '@mantine/core'
 interface ITableHead extends BoxProps, THeadProps {}
 
 const Head = forwardRef<HTMLTableSectionElement, ITableHead>((
-	{ children, style, ...props },
+	{ children, ...props },
 	ref,
 ) => {
 	return (
@@ -14,7 +14,6 @@ const Head = forwardRef<HTMLTableSectionElement, ITableHead>((
 			<Box
 				{ ...props }
 				component="thead"
-				style={ [{ zIndex: 401 }, style] }
 				ref={ ref }
 			>
 				{ children }

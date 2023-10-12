@@ -23,7 +23,7 @@ const Body = forwardRef<HTMLTableSectionElement, ITableBody>(({ children, ...pro
 	return (
 		<TableSectionContextProvider value={ { section: 'body' } }>
 			<Box component="tbody" { ...props } ref={ ref }>
-				{ searching && <tr><td><LoadingOverlay visible={ searching } overlayBlur={ 1 } /></td></tr> }
+				{ searching && <tr><td><LoadingOverlay visible={ searching } overlayProps={ { blur: 1 } } /></td></tr> }
 				{ children }
 			</Box>
 		</TableSectionContextProvider>

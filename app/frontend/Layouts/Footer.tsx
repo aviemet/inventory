@@ -1,12 +1,10 @@
 import React from 'react'
-import { Box, AppShell, Group, useMantineTheme } from '@mantine/core'
+import { Box, AppShell, Group } from '@mantine/core'
 import { ToggleColorSchemeButton } from '@/Components/Button'
 
 const FooterComponent = () => {
-	const theme = useMantineTheme()
-
 	return (
-		<AppShell.Footer height={ theme.other.footer.height } py={ 4 } px={ 8 }>
+		<AppShell.Footer py={ 4 } px={ 8 }>
 			<Group>
 				<Box style={ { width: 32 } }>
 					<ToggleColorSchemeButton />

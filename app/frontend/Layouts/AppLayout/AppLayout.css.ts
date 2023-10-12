@@ -1,6 +1,6 @@
-import { vars, style } from '@/lib/theme'
+import { vars, style, theme } from '@/lib/theme'
 
 export const wrapper = style({
 	overflow: 'auto',
-	// height: `calc(100vh - ${vars.other.header.height}px - ${vars.other.footer.height}px)`,
+	height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
 })

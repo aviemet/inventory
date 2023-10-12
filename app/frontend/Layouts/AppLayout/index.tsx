@@ -4,9 +4,11 @@ import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
 import * as classes from './AppLayout.css'
+import { useLayoutStore } from '@/lib/store'
 
 const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
+	const { sidebarOpen } = useLayoutStore()
 
 	useEffect(() => {
 		if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
@@ -19,31 +21,23 @@ const AppLayout = ({ children }: { children: any }) => {
 
 	return (
 		<AppShell
-			fixed
-			navbarOffsetBreakpoint="sm"
-			asideOffsetBreakpoint="sm"
-			padding="xs"
+			header={ { height: theme.other.header.height } }
 
-			style={ theme => ({
-				main: {
-					// background: theme.other.colorSchemeOption(theme.colors.gray[1], theme.black),
-					// height: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px)`,
-					paddingTop: 'var(--mantine-header-height, 0px)',
-					paddingBottom: 'var(--mantine-footer-height, 0px)',
-					paddingLeft: 'var(--mantine-navbar-width, 0px)',
-					paddingRight: 'var(--mantine-aside-width, 0px)',
-				},
-			}) }
+			navbar={ {
+				width: { sm: sidebarOpen ? theme.other.navbar.width.open : theme.other.navbar.width.closed },
+				breakpoint: 'md',
+			} }
 
-			header={ <Topbar /> }
-
-			navbar={ <Sidebar /> }
-
-			footer={ <Footer /> }
+			footer={ { height: theme.other.footer.height } }
 		>
-			<Box p={ 10 } id="CONTENT_WRAPPER" className={ classes.wrapper }>
-				{ children }
-			</Box>
+			<Topbar />
+			<Sidebar />
+			<Footer />
+			<AppShell.Main>
+				<Box id="CONTENT_WRAPPER" className={ classes.wrapper } p="xs">
+					{ children }
+				</Box>
+			</AppShell.Main>
 		</AppShell>
 	)
 }

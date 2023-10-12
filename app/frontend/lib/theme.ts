@@ -1,8 +1,8 @@
-import { createTheme } from '@mantine/core'
+import { type MantineTheme, createTheme } from '@mantine/core'
 import { themeToVars } from '@mantine/vanilla-extract'
 import breakpoints from './breakpoints.mjs'
 
-export const theme = (primaryColor = 'violet') => createTheme({
+const buildTheme = (primaryColor = 'violet') => createTheme({
 	...breakpoints,
 	black: '#111111',
 	white: '#FCFCFC',
@@ -26,6 +26,10 @@ export const theme = (primaryColor = 'violet') => createTheme({
 		md: '0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12)',
 		lg: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)',
 		xl: '0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12)',
+	},
+	spacing: {
+		xxl: 'calc(2.5rem * var(--mantine-scale))',
+		xxs: 'calc(0.5rem * var(--mantine-scale))',
 	},
 	components: {
 		Autocomplete: {
@@ -66,10 +70,12 @@ export const theme = (primaryColor = 'violet') => createTheme({
 	},
 })
 
-const vars = themeToVars(theme())
+export const theme: MantineTheme = buildTheme() as MantineTheme
+
+const vars = themeToVars(theme)
 
 // Add primary colors array to theme object
-vars.colors.primaryColors = vars.colors[vars.colors.primary]
+// vars.colors.primaryColors = vars.colors[vars.colors.primary]
 
 export { vars }
 export { style } from '@vanilla-extract/css'

@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React from 'react'
 import { useLayoutStore } from '@/lib/store'
-import { Divider, Group, AppShell, Text, ThemeIcon, useMantineTheme, Box } from '@mantine/core'
+import { Divider, Group, AppShell, Text, ThemeIcon, Box } from '@mantine/core'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
@@ -37,26 +37,14 @@ import * as classes from './Navigation.css'
 
 const Sidebar = () => {
 	const { sidebarOpen, toggleSidebarOpen } = useLayoutStore()
-	const theme = useMantineTheme()
-	const [siteTitleHidden, setSiteTitleHidden] = useState(false)
 
 	const handleNavClick = () => toggleSidebarOpen(false)
-
-	// Delay text to avoid layout shift when opening/closing sidebar
-	useLayoutEffect(() => {
-		const ms = sidebarOpen ? 100 : 0
-		setTimeout(() => {
-			setSiteTitleHidden(!sidebarOpen)
-		}, ms)
-	}, [sidebarOpen])
 
 	return (
 		<IconProvider value={ { size: '24px' } }>
 			<AppShell.Navbar
 				p={ 0 }
-				hiddenBreakpoint="sm"
 				hidden={ !sidebarOpen }
-				width={ { sm: sidebarOpen ? theme.other.navbar.width.open : theme.other.navbar.width.closed } }
 				className={ cx(classes.root, { closed: !sidebarOpen }) }
 			>
 				<Box m="xs">
@@ -64,7 +52,7 @@ const Sidebar = () => {
 						<ThemeIcon radius="md" size="lg">
 							<ComponentsIcon />
 						</ThemeIcon>
-						<Text className={ cx({ hidden: siteTitleHidden }) }>Inventory</Text>
+						<Text className={ cx({ hidden: !sidebarOpen }) }>Inventory</Text>
 					</Group>
 				</Box>
 				<Box onClick={ handleNavClick } className="links">

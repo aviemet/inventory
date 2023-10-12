@@ -1,4 +1,5 @@
-import { vars, style } from '@/lib/theme'
+import { vars, style, theme } from '@/lib/theme'
+import { darken, lighten } from '@mantine/core'
 
 const fieldsetAlphaAdjustment = 0.125
 
@@ -12,9 +13,9 @@ export const form = style({
 					'&:not(.no-grid)': {
 						display: 'grid',
 					},
-					// gridTemplateColumns: `${vars.other.form.label.width} 1fr`,
+					gridTemplateColumns: `${theme.other.form.label.width} 1fr`,
 					gridTemplateRows: '1fr',
-					borderLeftWidth: 2,
+					borderLeftWidth: '2px',
 				},
 			},
 
@@ -27,14 +28,19 @@ export const form = style({
 	},
 
 	'.field': {
-		// backgroundColor: vars.other.colorSchemeOption(vars.colors.gray[1], vars.colors.dark[7]),
+		[vars.lightSelector]: {
+			backgroundColor: vars.colors.gray[1],
+		},
+		[vars.darkSelector]: {
+			backgroundColor: vars.colors.dark[7],
+		},
 		width: '100%',
-		// borderColor: vars.colors[vars.primaryColor][2],
-		borderTopWidth: 2,
+		borderColor: vars.colors.primaryColor,
+		borderTopWidth: '2px',
 		marginTop: vars.spacing.xs,
 
 		'&.required': {
-			// borderColor: vars.colors[vars.primaryColor][8],
+			borderColor: vars.colors.primary, // vars.colors[vars.primaryColor][8],
 		},
 
 		'&.field_with_errors': {
@@ -66,7 +72,7 @@ export const form = style({
 				'& > label, & > legend': {
 					flex: '1 1 0%',
 					textAlign: 'right',
-					// maxWidth: vars.other.form.label.width,
+					maxWidth: theme.other.form.label.width,
 					gridRowStart: 'span 2',
 				},
 			},
@@ -83,11 +89,14 @@ export const fieldset = style({
 	marginTop: vars.spacing.xs,
 	padding: 10,
 	position: 'relative',
-	// backgroundColor: vars.other.colorSchemeOption(
-	// 	vars.fn.darken(vars.white, fieldsetAlphaAdjustment),
-	// 	vars.fn.lighten(vars.black, fieldsetAlphaAdjustment),
-	// ),
-	// borderTop: `2px solid ${vars.other.colorSchemeOption(vars.white, vars.black)}`,
+	[vars.lightSelector]: {
+		borderTop: `2px solid ${vars.colors.white}`,
+		backgroundColor: darken(vars.colors.white, fieldsetAlphaAdjustment),
+	},
+	[vars.darkSelector]: {
+		borderTop: `2px solid ${vars.colors.black}`,
+		backgroundColor: lighten(vars.colors.black, fieldsetAlphaAdjustment),
+	},
 
 	'&:has(legend)': {
 		marginTop: '2rem',
@@ -97,7 +106,12 @@ export const fieldset = style({
 		position: 'absolute',
 		top: '-1.75rem',
 		display: 'inline-block',
-		// color: vars.other.colorSchemeOption(vars.black, vars.white),
+		[vars.lightSelector]: {
+			color: vars.colors.black,
+		},
+		[vars.darkSelector]: {
+			color: vars.colors.white,
+		},
 	},
 
 	'.field': {

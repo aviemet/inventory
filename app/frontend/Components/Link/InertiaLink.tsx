@@ -38,6 +38,7 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 			href={ href }
 			onClick={ handleHTTP }
 			style={ [{ '&:hover': { textDecoration: 'none' } }, style] }
+			c="bright"
 			{ ...props }
 		>
 			{ children }
@@ -50,6 +51,7 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 			component={ AnchorLink }
 			href={ href }
 			style={ [{ '&:hover': { textDecoration: 'none' } }, style] }
+			c="bright"
 			{ ...props }
 		>
 			{ children }

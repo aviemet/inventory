@@ -1,4 +1,5 @@
-import { vars, style } from '@/lib/theme'
+import { vars, style, theme } from '@/lib/theme'
+import { rem } from '@mantine/core'
 
 export const wrapper = style({
 	overflow: 'auto',
@@ -19,21 +20,36 @@ export const table = style({
 	},
 
 	thead: {
-		/* boxShadow: theme.shadows.xs, */
+		boxShadow: vars.shadows.xs,
 		position: 'sticky',
 		top: 0,
 		zIndex: 1,
 
-		th: {
-			'&:hover': {
-				/* backgroundColor: theme.other.colorSchemeOption(theme.colors.gray[1], theme.black), */
+		[vars.lightSelector]: {
+			backgroundColor: vars.colors.gray[1],
+
+			'th:hover': {
+				backgroundColor: vars.colors.gray[1],
+			},
+		},
+		[vars.darkSelector]: {
+			backgroundColor: vars.colors.dark[7],
+
+			'th:hover': {
+				backgroundColor: vars.colors.black,
 			},
 		},
 	},
 
 	'th, td': {
+		padding: rem(6),
+
+		'.mantine-Button-root': {
+			padding: vars.spacing.xxs,
+		},
+
 		'&.table-column-fit': {
-			width: 1,
+			width: '1px',
 			whiteSpace: 'nowrap',
 		},
 	},
@@ -45,37 +61,42 @@ export const table = style({
 			whiteSpace: 'nowrap',
 
 			a: {
-				/* color: theme.other.colorSchemeOption(theme.black, theme.white), */
+				[vars.lightSelector]: {
+					color: vars.colors.black,
+				},
+				[vars.darkSelector]: {
+					color: vars.colors.white,
+				},
 			},
 
-			'&:before, &:after': {
-				position: 'absolute',
-				display: 'block',
-				right: '0.75rem',
-				width: 0,
-				height: 0,
-				content: '',
-				cursor: 'pointer',
-				/* borderColor: theme.colors.gray[4], */
-				borderStyle: 'solid',
-				/* borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
-				borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`, */
-			},
+			// '&:before, &:after': {
+			// 	position: 'absolute',
+			// 	display: 'block',
+			// 	right: '0.75rem',
+			// 	width: 0,
+			// 	height: 0,
+			// 	content: '',
+			// 	cursor: 'pointer',
+			// 	borderColor: vars.colors.gray[4],
+			// 	borderStyle: 'solid',
+			// 	borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
+			// 	borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
+			// },
 
 			'&:before': {
 				borderTop: 0,
-				/* top: `calc(50% - (${theme.other.table.sortButtonHeight}px + 2px))`,
-				borderBottomWidth: `${theme.other.table.sortButtonWidth}px`, */
+				top: `calc(50% - (${theme.other.table.sortButtonHeight}px + 2px))`,
+				borderBottomWidth: `${theme.other.table.sortButtonWidth}px`,
 			},
 
 			'&:after': {
 				borderBottom: 0,
-				/* bottom: `calc(50% - (${theme.other.table.sortButtonHeight}px + 2px))`,
-				borderTopWidth: `${theme.other.table.sortButtonWidth}px`, */
+				bottom: `calc(50% - (${theme.other.table.sortButtonHeight}px + 2px))`,
+				borderTopWidth: `${theme.other.table.sortButtonWidth}px`,
 			},
 
 			'&.asc:before, &.desc:after': {
-				/* borderColor: theme.colors.gray[7], */
+				borderColor: vars.colors.gray[7],
 			},
 		},
 

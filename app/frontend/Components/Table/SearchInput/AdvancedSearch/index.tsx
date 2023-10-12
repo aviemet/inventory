@@ -35,7 +35,12 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 	const [open, toggleOpen] = useBooleanToggle(false)
 	const [searchButton, setSearchButton] = useState<HTMLButtonElement | null>(null)
 	const [searchPaper, setSearchPaper] = useState<HTMLDivElement | null>(null)
-	useClickOutside(() => toggleOpen(false), null, [searchButton, searchPaper])
+
+	useClickOutside(
+		() => toggleOpen(false),
+		null,
+		[searchButton, searchPaper],
+	)
 
 	return (
 		<>
@@ -70,7 +75,7 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 						style={ {
 							...styles,
 							position: 'absolute',
-							left: rem(navBarWidth + px('1rem')),
+							left: rem(navBarWidth + Number(px('1rem'))),
 							right: '1rem',
 							top: searchButton ? rem(searchButton.getBoundingClientRect().bottom + 10) : undefined,
 							zIndex: 10,

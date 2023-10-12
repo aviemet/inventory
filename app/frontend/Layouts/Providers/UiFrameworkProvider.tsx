@@ -84,34 +84,6 @@ import { theme } from '@/lib/theme'
 // 	},
 // })
 
-// export const GlobalStyles = () => <Global styles={ theme => ({
-// 	'html, body': {
-// 		overflow: 'hidden',
-// 	},
-
-// 	'*::selection': {
-// 		backgroundColor: theme.colors[theme.primaryColor][2],
-// 	},
-
-// 	':root': {
-// 		colorScheme: theme.colorScheme,
-// 	},
-
-// 	'.hidden': {
-// 		display: 'none',
-// 	},
-
-// 	'.fullHeight': {
-// 		// display: 'flex',
-// 		// flexDirection: 'column',
-// 		minHeight: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px)`,
-// 	},
-
-// 	'label': {
-// 		fontSize: '1rem',
-// 	},
-// }) } />
-
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const { auth } = usePageProps()
 
@@ -158,7 +130,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	// const mantineTheme = useTheme(primaryColor)
 
 	return (
-		<MantineProvider theme={ theme() } defaultColorScheme="auto">
+		<MantineProvider theme={ theme } defaultColorScheme="auto">
 			<DatesProvider settings={ { locale: 'en' } }>
 				<Notifications />
 				{ /* <GlobalStyles /> */ }

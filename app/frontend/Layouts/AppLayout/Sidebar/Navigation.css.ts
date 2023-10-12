@@ -1,17 +1,17 @@
-import { vars, style } from '@/lib/theme'
+import { vars, style, theme } from '@/lib/theme'
 
-// const navbarWidth = vars.other.navbar.width
+const navbarWidth = theme.other.navbar.width
 const iconWidth = 48
 const borderWidth = 2
-// const navItemWidth = navbarWidth.open + iconWidth
-// const openSpanWidth = navbarWidth.open - iconWidth - borderWidth
-// const bgColor = vars.other.colorSchemeOption(vars.fn.lighten(vars.colors.gray[1], 0.25), vars.colors.dark[6])
+const navItemWidth = navbarWidth.open! + iconWidth
+const openSpanWidth = navbarWidth.open! - iconWidth - borderWidth
 const navItemHeight = 44
 
 export const root = style({
+	// vars.largerThan('sm')
 	[`@media (min-width: ${vars.breakpoints.sm})`]: {
 		top: 0,
-		// height: `calc(100% - ${vars.other.footer.height}px)`,
+		height: `calc(100% - ${theme.other?.footer?.height || 0}px)`,
 	},
 
 	transition: 'width 100ms ease-in-out, min-width 100ms ease-in-out',
@@ -19,7 +19,7 @@ export const root = style({
 	'&.closed': {
 		'.links > ul > li': {
 			'&:hover': {
-				// width: navItemWidth,
+				width: `${navItemWidth}px`,
 			},
 
 			'& > a > span': {
@@ -33,7 +33,7 @@ export const root = style({
 
 		'ul > li > ul': {
 			top: '100%',
-			left: iconWidth,
+			left: `${iconWidth}px`,
 
 			'&.up': {
 				top: 'unset',
@@ -67,15 +67,20 @@ export const root = style({
 		borderLeftColor: 'transparent',
 
 		'&.active': {
-			// borderLeftColor: vars.colors[vars.primaryColor],
+			borderLeftColor: vars.colors.primary,
 		},
 
 		'&:hover': {
-			// borderLeftColor: vars.colors[vars.primaryColor],
+			borderLeftColor: vars.colors.primary,
 			boxShadow: vars.shadows.lg,
 
 			'&, ul': {
-				// backgroundColor: bgColor,
+				[vars.lightSelector]: {
+					backgroundColor: vars.colors.gray[1],
+				},
+				[vars.darkSelector]: {
+					backgroundColor: vars.colors.dark[6],
+				},
 			},
 
 			'span, ul': {
@@ -88,7 +93,7 @@ export const root = style({
 		position: 'absolute',
 		display: 'none',
 		flexDirection: 'column',
-		// width: `${navbarWidth.open - borderWidth}px`,
+		width: `${navbarWidth.open! - borderWidth}px`,
 		left: '100%',
 		top: 0,
 
@@ -121,8 +126,8 @@ export const root = style({
 	span: {
 		position: 'absolute',
 		top: 0,
-		left: iconWidth,
-		// width: `${openSpanWidth}px`,
+		left: `${iconWidth}px`,
+		width: `${openSpanWidth}px`,
 		display: 'flex',
 		height: '100%',
 		alignItems: 'center',
