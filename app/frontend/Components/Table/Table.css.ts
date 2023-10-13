@@ -1,146 +1,147 @@
-import { vars, style, theme } from '@/lib/theme'
+import { vars, theme } from '@/lib/theme'
 import { rem } from '@mantine/core'
+import { css } from '@linaria/core'
 
-export const wrapper = style({
-	overflow: 'auto',
-	position: 'relative',
-	height: '100%',
-	maxHeight: '100%',
-})
+export const wrapper = css`
+	overflow: auto;
+	position: relative;
+	height: 100%;
+	max-height: 100%;
+`
 
-export const table = style({
-	width: '100%',
+export const table = css`
+	width: 100%;
 
-	'&.layout-fixed': {
-		tableLayout: 'fixed',
-	},
+	&.layout-fixed {
+		table-layout: fixed;
+	}
 
-	'&.layout-auto': {
-		tableLayout: 'auto',
-	},
+	&.layout-auto {
+		table-layout: auto;
+	}
 
-	thead: {
-		boxShadow: vars.shadows.xs,
-		position: 'sticky',
-		top: 0,
-		zIndex: 1,
+	thead {
+		box-shadow: ${vars.shadows.xs};
+		position: sticky;
+		top: 0;
+		z-index: 1;
 
-		[vars.lightSelector]: {
-			backgroundColor: vars.colors.gray[1],
+		${vars.lightSelector} {
+			background-color: ${vars.colors.gray[1]};
 
-			'th:hover': {
-				backgroundColor: vars.colors.gray[1],
-			},
-		},
-		[vars.darkSelector]: {
-			backgroundColor: vars.colors.dark[7],
+			th:hover {
+				background-color: ${vars.colors.gray[1]};
+			}
+		}
+		${vars.darkSelector} {
+			background-color: ${vars.colors.dark[7]};
 
-			'th:hover': {
-				backgroundColor: vars.colors.black,
-			},
-		},
-	},
+			th:hover {
+				background-color: ${vars.colors.black};
+			}
+		}
+	}
 
-	'th, td': {
-		padding: rem(6),
+	th, td {
+		padding: ${rem(6)};
 
-		'.mantine-Button-root': {
-			padding: vars.spacing.xxs,
-		},
+		.mantine-Button-root {
+			padding: ${vars.spacing.xxs};
+		}
 
-		'&.table-column-fit': {
-			width: '1px',
-			whiteSpace: 'nowrap',
-		},
-	},
+		&.table-column-fit {
+			width: 1px;
+			white-space: nowrap;
+		}
+	}
 
-	th: {
-		'&.sortable': {
-			position: 'relative',
-			paddingRight: '1rem',
-			whiteSpace: 'nowrap',
+	th {
+		&.sortable {
+			position: relative;
+			padding-right: 1rem;
+			white-space: nowrap;
 
-			a: {
-				[vars.lightSelector]: {
-					color: vars.colors.black,
-				},
-				[vars.darkSelector]: {
-					color: vars.colors.white,
-				},
-			},
+			a {
+				${vars.lightSelector} {
+					color: ${vars.colors.black};
+				}
+				${vars.darkSelector} {
+					color: ${vars.colors.white};
+				}
+			}
 
-			// '&:before, &:after': {
-			// 	position: 'absolute',
-			// 	display: 'block',
-			// 	right: '0.75rem',
-			// 	width: 0,
-			// 	height: 0,
-			// 	content: '',
-			// 	cursor: 'pointer',
-			// 	borderColor: vars.colors.gray[4],
-			// 	borderStyle: 'solid',
-			// 	borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
-			// 	borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
-			// },
 
-			'&:before': {
-				borderTop: 0,
-				top: `calc(50% - (${theme.other.table.sortButtonHeight}px + 2px))`,
-				borderBottomWidth: `${theme.other.table.sortButtonWidth}px`,
-			},
+			&:before {
+				border-top: 0;
+				top: calc(50% - (${theme.other.table.sortButtonHeight}px + 2px));
+				border-bottom-width: ${theme.other.table.sortButtonWidth}px;
+			}
 
-			'&:after': {
-				borderBottom: 0,
-				bottom: `calc(50% - (${theme.other.table.sortButtonHeight}px + 2px))`,
-				borderTopWidth: `${theme.other.table.sortButtonWidth}px`,
-			},
+			&:after {
+				border-bottom: 0;
+				bottom: calc(50% - (${theme.other.table.sortButtonHeight}px + 2px));
+				border-top-width: ${theme.other.table.sortButtonWidth}px;
+			}
 
-			'&.asc:before, &.desc:after': {
-				borderColor: vars.colors.gray[7],
-			},
-		},
+			&.asc:before, &.desc:after {
+				border-color: ${vars.colors.gray[7]};
+			}
+		}
 
-	},
+	}
 
-	'@media': {
-		[`(max-width: ${vars.breakpoints.sm})`]: {
-			thead: {
-				display: 'none',
-			},
+	@media(max-width: ${vars.breakpoints.sm}) {
+		thead {
+			display: none;
+		}
 
-			tr: {
-				display: 'flex',
-				flexDirection: 'column',
-			},
+		tr {
+			display: flex;
+			flex-direction: column;
+		}
 
-			td: {
-				display: 'grid',
-				gridTemplateColumns: '8rem 1fr',
+		td {
+			display: grid;
+			grid-template-columns: 8rem 1fr;
 
-				'&::before': {
-					content: 'attr(data-cell)',
-				},
-			},
-		},
-	},
-})
+			&::before {
+				content: attr(data-cell);
+			}
+		}
+	}
+`
 
-export const section = style({
-	display: 'flex',
-	flexDirection: 'column',
-	height: '100%',
-})
+export const section = css`
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+`
 
-export const searchWrapper = style({
-	display: 'flex',
-	flex: 1,
-})
+export const searchWrapper = css`
+	display: flex;
+	flex: 1;
+`
 
-export const searchInput = style({
-	flex: 1,
+export const searchInput = css`
+	flex: 1;
 
-	input: {
-		borderTopRightRadius: 0,
-		borderBottomRightRadius: 0,
-	},
-})
+	input {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+`
+
+
+// &:before, &:after {
+// 	position: absolute,
+// 	display: block,
+// 	right: 0.75rem,
+// 	width: 0,
+// 	height: 0,
+// 	content: ,
+// 	cursor: pointer,
+// 	border-color: vars.colors.gray[4],
+// 	border-style: solid,
+// 	borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
+// 	borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
+// }

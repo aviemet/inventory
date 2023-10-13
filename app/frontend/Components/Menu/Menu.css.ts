@@ -1,12 +1,13 @@
-import { vars, style } from '@/lib/theme'
+import { vars } from '@/lib/theme'
+import { css } from '@linaria/core'
 
-export const menuItem = style({
-	'&.disabled *': {
+export const menuItem = css`
+	&.disabled * {
 		// color: vars.colors.gray[vars.fn.primaryShade()],
-		textDecoration: 'line-through',
+		text-decoration: line-through;
 
-		'& input[type=checkbox], & input[type=checkbox]:checked': {
-			// backgroundColor: vars.colors.gray[vars.fn.primaryShade()],
-		},
-	},
-})
+		& input[type=checkbox], & input[type=checkbox]:checked {
+			// background-color: vars.colors.gray[vars.fn.primaryShade()],
+		}
+	}
+`

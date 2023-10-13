@@ -1,5 +1,5 @@
-import { vars, style, theme } from '@/lib/theme'
-// import { globalStyle } from '@vanilla-extract/css'
+import { vars, theme } from '@/lib/theme'
+import { css } from '@linaria/core'
 
 const navbarWidth = theme.other.navbar.width
 const iconWidth = 48
@@ -8,163 +8,163 @@ const navItemWidth = navbarWidth.open! + iconWidth
 const openSpanWidth = navbarWidth.open! - iconWidth - borderWidth
 const navItemHeight = 44
 
-export const links = style({
-	selectors: {
-		['&:last-child']: {
-			marginTop: 'auto',
-		},
-	},
-})
+export const links = css`
+	selectors {
+		&:last-child {
+			margin-top: auto;
+		}
+	}
+`
 
-export const closed = style({})
+export const closed = css``
 
-export const active = style({
-	borderLeftColor: vars.colors.primary,
-})
+export const active = css`
+	border-left-color: ${vars.colors.primary};
+`
 
-export const navbar = style({
-	transition: 'width 100ms ease-in-out, min-width 100ms ease-in-out',
+export const navbar = css`
+	transition: width 100ms ease-in-out, min-width 100ms ease-in-out;
 
 	// vars.largerThan('sm')
-	[`@media (min-width: ${vars.breakpoints.sm})`]: {
-		top: 0,
-		height: `calc(100% - ${theme.other?.footer?.height || 0}px)`,
-	},
+	@media (min-width: ${vars.breakpoints.sm}) {
+		top: 0;
+		height: calc(100% - ${theme.other?.footer?.height || 0}px);
+	}
 
-	[`&.${closed}`]: {
-		[`.${links} > ul > li`]: {
-			'&:hover': {
-				width: `${navItemWidth}px`,
-			},
+	&.${closed} {
+		.${links} > ul > li {
+			&:hover {
+				width: ${navItemWidth}px;
+			}
 
-			'& > a > span': {
-				width: `calc(100% - ${iconWidth}px)`,
-			},
-		},
+			& > a > span {
+				width: calc(100% - ${iconWidth}px);
+			}
+		}
 
-		'span, ul ul': {
-			display: 'none',
-		},
+		span, ul ul {
+			display: none;
+		}
 
-		'ul > li > ul': {
-			top: '100%',
-			left: `${iconWidth}px`,
+		ul > li > ul {
+			top: 100%;
+			left: ${iconWidth}px;
 
-			'&.up': {
-				top: 'unset',
-				bottom: '100%',
-			},
-		},
-	},
+			&.up {
+				top: unset;
+				bottom: 100%;
+			}
+		}
+	}
 
-	[`.${links} > ul > li:hover`]: {
-		width: '100%',
+	.${links} > ul > li:hover {
+		width: 100%;
 
-		'& > ul': {
-			display: 'block',
-		},
-	},
+		& > ul {
+			display: block;
+		}
+	}
 
-	'ul li': {
-		position: 'relative',
-		borderLeftWidth: `${borderWidth}px`,
-		borderStyle: 'solid',
-		borderLeftColor: 'transparent',
+	ul li {
+		position: relative;
+		border-left-width: ${borderWidth}px;
+		border-style: solid;
+		border-left-color: transparent;
 
-		[`&.${active}`]: {
-			borderLeftColor: vars.colors.primary,
-		},
+		&.${active} {
+			border-left-color: ${vars.colors.primary};
+		}
 
-		'&:hover': {
-			borderLeftColor: vars.colors.primary,
-			boxShadow: vars.shadows.lg,
+		&:hover {
+			border-left-color: ${vars.colors.primary};
+			box-shadow: ${vars.shadows.lg};
 
-			'&, ul': {
-				[vars.lightSelector]: {
-					backgroundColor: vars.colors.gray[1],
-				},
-				[vars.darkSelector]: {
-					backgroundColor: vars.colors.dark[6],
-				},
-			},
+			&, ul {
+				${vars.lightSelector} {
+					background-color: ${vars.colors.gray[1]};
+				}
+				${vars.darkSelector} {
+					background-color: ${vars.colors.dark[6]};
+				}
+			}
 
-			'span, ul': {
-				display: 'flex',
-			},
-		},
-	},
+			span, ul {
+				display: flex;
+			}
+		}
+	}
 
-	'ul > li > ul': {
-		position: 'absolute',
-		display: 'none',
-		flexDirection: 'column',
-		width: `${navbarWidth.open! - borderWidth}px`,
-		left: '100%',
-		top: 0,
+	ul > li > ul {
+		position: absolute;
+		display: none;
+		flex-direction: column;
+		width: ${navbarWidth.open! - borderWidth}px;
+		left: 100%;
+		top: 0;
 
-		'&:after': {
-			content: '""',
-			width: '100%',
-			height: `calc(100% + ${navItemHeight}px)`,
-			display: 'block',
-			position: 'absolute',
-			top: `-${navItemHeight}px`,
-			boxShadow: vars.shadows.xs,
-			zIndex: -1,
-		},
+		&:after {
+			content: "";
+			width: 100%;
+			height: calc(100% + ${navItemHeight}px);
+			display: block;
+			position: absolute;
+			top: -${navItemHeight}px;
+			box-shadow: ${vars.shadows.xs};
+			z-index: -1;
+		}
 
-		'&.up': {
-			top: 'unset',
-			bottom: `-${navItemHeight}px`,
+		&.up {
+			top: unset;
+			bottom: -${navItemHeight}px;
 
-			'&:after': {
-				top: 'unset',
-				bottom: `-${navItemHeight}px`,
-			},
-		},
+			&:after {
+				top: unset;
+				bottom: -${navItemHeight}px;
+			}
+		}
 
-		span: {
-			width: `calc(100% - ${iconWidth + borderWidth}px)`,
-		},
-	},
+		span {
+			width: calc(100% - ${iconWidth + borderWidth}px);
+		}
+	}
 
-	span: {
-		position: 'absolute',
-		top: 0,
-		left: `${iconWidth}px`,
-		width: `${openSpanWidth}px`,
-		display: 'flex',
-		height: '100%',
-		alignItems: 'center',
-	},
-})
+	span {
+		position: absolute;
+		top: 0;
+		left: ${iconWidth}px;
+		width: ${openSpanWidth}px;
+		display: flex;
+		height: 100%;
+		align-items: center;
+	}
+`
 
 
 // globalStyle(`${navbar} ul li`, {
 // 	position: 'relative',
-// 	borderLeftWidth: `${borderWidth}px`,
-// 	borderStyle: 'solid',
-// 	borderLeftColor: 'transparent',
+// 	border-left-width: `${borderWidth}px`,
+// 	border-style: 'solid',
+// 	border-left-color: 'transparent',
 
-// 	[`&.${active}`]: {
-// 		borderLeftColor: vars.colors.primary,
-// 	},
+// 	&.${active} {
+// 		border-left-color: vars.colors.primary,
+// 	}
 
-// 	'&:hover': {
-// 		borderLeftColor: vars.colors.primary,
-// 		boxShadow: vars.shadows.lg,
+// 	'&:hover' {
+// 		border-left-color: vars.colors.primary,
+// 		box-shadow: vars.shadows.lg,
 
-// 		'&, ul': {
-// 			[vars.lightSelector]: {
-// 				backgroundColor: vars.colors.gray[1],
-// 			},
-// 			[vars.darkSelector]: {
-// 				backgroundColor: vars.colors.dark[6],
-// 			},
-// 		},
+// 		'&, ul' {
+// 			${vars.lightSelector} {
+// 				background-color: vars.colors.gray[1],
+// 			}
+// 			${vars.darkSelector} {
+// 				background-color: vars.colors.dark[6],
+// 			}
+// 		}
 
-// 		'span, ul': {
+// 		'span, ul' {
 // 			display: 'flex',
-// 		},
-// 	},
+// 		}
+// 	}
 // })

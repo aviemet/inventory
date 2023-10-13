@@ -78,4 +78,3 @@ const vars = themeToVars(theme)
 // vars.colors.primaryColors = vars.colors[vars.colors.primary]
 
 export { vars }
-export { style } from '@vanilla-extract/css'
