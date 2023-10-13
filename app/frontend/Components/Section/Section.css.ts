@@ -1,4 +1,5 @@
 import { vars, style } from '@/lib/theme'
+import { rem } from '@mantine/core'
 
 export const section = style({
 	[vars.lightSelector]: {
@@ -12,6 +13,6 @@ export const section = style({
 	borderTop: `2px solid ${vars.colors.primary}`,
 
 	'& + &': {
-		marginTop: 10,
+		marginTop: rem(10),
 	},
 })

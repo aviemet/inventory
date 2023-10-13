@@ -2,7 +2,8 @@ import { type MantineTheme, createTheme } from '@mantine/core'
 import { themeToVars } from '@mantine/vanilla-extract'
 import breakpoints from './breakpoints.mjs'
 
-const buildTheme = (primaryColor = 'violet') => createTheme({
+
+const themeObject = (primaryColor = 'violet') => ({
 	...breakpoints,
 	black: '#111111',
 	white: '#FCFCFC',
@@ -70,7 +71,7 @@ const buildTheme = (primaryColor = 'violet') => createTheme({
 	},
 })
 
-export const theme: MantineTheme = buildTheme() as MantineTheme
+export const theme: MantineTheme = createTheme(themeObject()) as MantineTheme
 
 const vars = themeToVars(theme)
 

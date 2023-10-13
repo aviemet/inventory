@@ -1,4 +1,5 @@
 import { vars, style, theme } from '@/lib/theme'
+// import { globalStyle } from '@vanilla-extract/css'
 
 const navbarWidth = theme.other.navbar.width
 const iconWidth = 48
@@ -7,17 +8,31 @@ const navItemWidth = navbarWidth.open! + iconWidth
 const openSpanWidth = navbarWidth.open! - iconWidth - borderWidth
 const navItemHeight = 44
 
-export const root = style({
+export const links = style({
+	selectors: {
+		['&:last-child']: {
+			marginTop: 'auto',
+		},
+	},
+})
+
+export const closed = style({})
+
+export const active = style({
+	borderLeftColor: vars.colors.primary,
+})
+
+export const navbar = style({
+	transition: 'width 100ms ease-in-out, min-width 100ms ease-in-out',
+
 	// vars.largerThan('sm')
 	[`@media (min-width: ${vars.breakpoints.sm})`]: {
 		top: 0,
 		height: `calc(100% - ${theme.other?.footer?.height || 0}px)`,
 	},
 
-	transition: 'width 100ms ease-in-out, min-width 100ms ease-in-out',
-
-	'&.closed': {
-		'.links > ul > li': {
+	[`&.${closed}`]: {
+		[`.${links} > ul > li`]: {
 			'&:hover': {
 				width: `${navItemWidth}px`,
 			},
@@ -42,22 +57,12 @@ export const root = style({
 		},
 	},
 
-	'.links > ul > li:hover': {
+	[`.${links} > ul > li:hover`]: {
 		width: '100%',
 
 		'& > ul': {
 			display: 'block',
 		},
-
-		// 'a:hover:after': {
-		// 	content: '""',
-		// 	position: 'absolute',
-		// 	top: 0,
-		// 	bottom: 0,
-		// 	left: 0,
-		// 	right: 0,
-		// 	boxShadow: vars.shadows.md,
-		// },
 	},
 
 	'ul li': {
@@ -66,7 +71,7 @@ export const root = style({
 		borderStyle: 'solid',
 		borderLeftColor: 'transparent',
 
-		'&.active': {
+		[`&.${active}`]: {
 			borderLeftColor: vars.colors.primary,
 		},
 
@@ -134,3 +139,32 @@ export const root = style({
 	},
 })
 
+
+// globalStyle(`${navbar} ul li`, {
+// 	position: 'relative',
+// 	borderLeftWidth: `${borderWidth}px`,
+// 	borderStyle: 'solid',
+// 	borderLeftColor: 'transparent',
+
+// 	[`&.${active}`]: {
+// 		borderLeftColor: vars.colors.primary,
+// 	},
+
+// 	'&:hover': {
+// 		borderLeftColor: vars.colors.primary,
+// 		boxShadow: vars.shadows.lg,
+
+// 		'&, ul': {
+// 			[vars.lightSelector]: {
+// 				backgroundColor: vars.colors.gray[1],
+// 			},
+// 			[vars.darkSelector]: {
+// 				backgroundColor: vars.colors.dark[6],
+// 			},
+// 		},
+
+// 		'span, ul': {
+// 			display: 'flex',
+// 		},
+// 	},
+// })

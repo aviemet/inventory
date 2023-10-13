@@ -64,7 +64,9 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 		>
 			<MultiSelect
 				ref={ ref }
-				id={ id || inputId }
+				// Add "search" suffix to prevent password managers trying to autofill dropdowns
+				id={ `${id || inputId}-search` }
+				autoComplete="off"
 				name={ inputName }
 				label={ label }
 				value={ value }

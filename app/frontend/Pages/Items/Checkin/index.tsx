@@ -63,9 +63,9 @@ const Checkin = ({ assignment, item, locations, status_labels }: ICheckinItemsPr
 						required
 					/>
 
-					<LocationsDropdown locations={ locations } />
+					<LocationsDropdown />
 
-					<StatusLabelsDropdown status_labels={ status_labels } />
+					<StatusLabelsDropdown />
 
 					<DateTime
 						label="Returned At"

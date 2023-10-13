@@ -44,7 +44,9 @@ const SelectComponent = forwardRef<HTMLInputElement, ISelectProps>((
 			</Label> }
 			<Select
 				ref={ ref }
-				id={ inputId }
+				// Add "search" suffix to prevent password managers trying to autofill dropdowns
+				id={ `${inputId}-search` }
+				autoComplete="off"
 				name={ name }
 				size="md"
 				data={ options }

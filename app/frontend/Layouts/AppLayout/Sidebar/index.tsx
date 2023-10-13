@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLayoutStore } from '@/lib/store'
-import { Divider, Group, AppShell, Text, ThemeIcon, Box } from '@mantine/core'
+import { Divider, Group, AppShell, ThemeIcon, Box } from '@mantine/core'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
@@ -45,17 +45,17 @@ const Sidebar = () => {
 			<AppShell.Navbar
 				p={ 0 }
 				hidden={ !sidebarOpen }
-				className={ cx(classes.root, { closed: !sidebarOpen }) }
+				className={ cx(classes.navbar, { [classes.closed]: !sidebarOpen }) }
 			>
 				<Box m="xs">
 					<Group justify="space-between">
 						<ThemeIcon radius="md" size="lg">
 							<ComponentsIcon />
 						</ThemeIcon>
-						<Text className={ cx({ hidden: !sidebarOpen }) }>Inventory</Text>
 					</Group>
 				</Box>
-				<Box onClick={ handleNavClick } className="links">
+
+				<Box onClick={ handleNavClick } className={ cx([classes.links]) }>
 					<ul>
 						<li><MenuLink href={ Routes.dashboard() } icon={ <DashboardIcon /> }>Dashboard</MenuLink></li>
 						<Divider />
@@ -91,7 +91,7 @@ const Sidebar = () => {
 					</ul>
 				</Box>
 
-				<Box onClick={ handleNavClick } className="links">
+				<Box onClick={ handleNavClick } className={ cx([classes.links]) }>
 					<ul>
 						<li>
 							<MenuLink href={ Routes.settingsGeneralIndex() } icon={ <SettingsIcon /> }>Settings</MenuLink>

@@ -44,7 +44,9 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, IMultiSelectProps>((
 			</Label> }
 			<MultiSelect
 				ref={ ref }
-				id={ inputId }
+				// Add "search" suffix to prevent password managers trying to autofill dropdowns
+				id={ `${inputId}-search` }
+				autoComplete="off"
 				name={ name }
 				size={ size }
 				data={ options }
