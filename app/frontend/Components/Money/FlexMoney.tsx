@@ -23,7 +23,7 @@ const FlexMoney = ({ children, formatter, accounting }: IFlexMoneyProps) => {
 	const { symbol, value } = getParts(formatter, children)
 
 	return (
-		<Group noWrap position="apart">
+		<Group wrap="nowrap" justify="space-between">
 			<div>{ symbol }</div>
 			<div>{ children < 0 && accounting ? `(${value})` : value }</div>
 			{ value === '-' && <div></div> }

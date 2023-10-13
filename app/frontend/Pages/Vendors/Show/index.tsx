@@ -64,7 +64,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 				{ /*********** Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
-						<Group position="apart">
+						<Group justify="space-between">
 							<Heading>{
 								vendor.url ?
 									<Link href={ vendor.url } target="_blank" rel="noreferrer">{ title }</Link>

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react'
-import { type Sx } from '@mantine/core'
 import { ForwardRefWithStaticComponents } from '@mantine/utils'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
@@ -8,9 +7,7 @@ import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox
 import FormCheckboxGroup from './Group'
 import { type IFormInputProps } from '..'
 
-interface IFormCheckboxProps extends Omit<ICheckboxProps, 'name'|'onBlur'|'onChange'|'defaultChecked'>, IFormInputProps<boolean> {
-	sx?: Sx
-}
+interface IFormCheckboxProps extends Omit<ICheckboxProps, 'name'|'onBlur'|'onChange'|'defaultChecked'>, IFormInputProps<boolean> {}
 
 export type TFormCheckboxComponent = ForwardRefWithStaticComponents<
 IFormCheckboxProps,
@@ -27,8 +24,8 @@ const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElemen
 		className,
 		model,
 		field = true,
-		sx,
-		 ...props
+		style,
+		...props
 	},
 	ref,
 ) => {
@@ -57,6 +54,7 @@ const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElemen
 			condition={ field }
 		>
 			<CheckboxInput
+				ref={ ref }
 				id={ id || inputId }
 				className={ className }
 				name={ inputName }
@@ -65,8 +63,7 @@ const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElemen
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				error={ error }
-				ref={ ref }
-				sx={ [{ padding: '14px 10px' }, sx] }
+				style={ [{ padding: '14px 10px' }, style] }
 				wrapper={ false }
 				{ ...props }
 			/>

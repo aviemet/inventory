@@ -78,7 +78,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IRe
 				color={ replenishButtonColor }
 				aria-label={ `Replenish ${consumable.name}` }
 			>
-				<Button compact color={ replenishButtonColor } { ...props } size="sm" p={ 0 } onClick={ () => setOpened(true) }>
+				<Button color={ replenishButtonColor } { ...props } size="sm" p={ 0 } onClick={ () => setOpened(true) }>
 					<ReplenishIcon />
 				</Button>
 			</Tooltip>

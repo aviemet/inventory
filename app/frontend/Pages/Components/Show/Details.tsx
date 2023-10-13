@@ -8,7 +8,7 @@ const ComponentDetails = ({ component }: IShowComponentProps) => {
 		<>
 			<Heading order={ 3 }>Details</Heading>
 
-			<Box sx={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
+			<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 				<Table>
 					<Table.Body>
 

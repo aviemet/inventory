@@ -7,7 +7,7 @@ export const dateRangeOptions = [
 	{ label: 'Before', value: 'before' },
 	{ label: 'After', value: 'after' },
 	{ label: 'Between', value: 'range' },
-] as const
+]
 
 type DateRangeType = typeof dateRangeOptions[number]['value']
 

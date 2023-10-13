@@ -18,7 +18,7 @@ const AvatarMenu = () => {
 
 			<Menu.Dropdown>
 				<Menu.Item>
-					<Box sx={ { whiteSpace: 'nowrap' } }>Toggle Color Scheme <ToggleColorSchemeButton /></Box>
+					<Box style={ { whiteSpace: 'nowrap' } }>Toggle Color Scheme <ToggleColorSchemeButton /></Box>
 				</Menu.Item>
 			</Menu.Dropdown>
 		</Menu>

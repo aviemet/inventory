@@ -15,7 +15,7 @@ const ShowLocation = ({ location }: IShowLocationProps) => {
 			{ title },
 		] }>
 			<Section>
-				<Group position="apart">
+				<Group justify="space-between">
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">

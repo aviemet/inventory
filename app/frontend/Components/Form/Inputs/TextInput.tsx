@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react'
 import TextInput, { type ITextInputProps } from '@/Components/Inputs/TextInput'
-import cx from 'clsx'
 import Field from '../Field'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
@@ -16,7 +15,6 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 		onBlur,
 		id,
 		required,
-		compact = false,
 		errorKey,
 		field = true,
 		...props
@@ -45,7 +43,6 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 				<Field
 					type="text"
 					required={ required }
-					className={ cx({ compact }) }
 					errors={ !!error }
 				>
 					{ children }
@@ -56,7 +53,6 @@ const FormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
 			<TextInput
 				ref={ ref }
 				id={ id || inputId }
-				className={ cx({ compact }) }
 				name={ inputName }
 				value={ value }
 				onChange={ handleChange }

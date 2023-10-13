@@ -64,7 +64,7 @@ const EditableLink = ({ item, ip }: IEditableLinkProps) => {
 	return (
 		<>
 			<Group>
-				<Box sx={ {
+				<Box style={ {
 					flex: 1,
 					flexGrow: 1,
 					flexShrink: 0,
@@ -88,7 +88,7 @@ const EditableLink = ({ item, ip }: IEditableLinkProps) => {
 							item && <Link href={ Routes.item(item) }>{ item.name }</Link>
 					}
 				</Box>
-				<Box sx={ {
+				<Box style={ {
 					flex: 0,
 					flexGrow: 0,
 					flexShrink: 1,

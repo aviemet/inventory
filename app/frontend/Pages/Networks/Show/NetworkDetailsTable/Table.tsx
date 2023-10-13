@@ -9,7 +9,7 @@ interface INetworkDetailsTableProps {
 
 const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 	return (
-		<Table wrapper={ false } sx={ { width: '100%', flex: 1 } }>
+		<Table wrapper={ false } style={ { width: '100%', flex: 1 } }>
 			<Table.Head>
 				<Table.Row>
 					<Table.Cell>Address</Table.Cell>
@@ -22,7 +22,7 @@ const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 					const item = ips.find(ip => ip.address === host)?.item
 
 					return (
-						<Table.Row key={ host } sx={ theme => ({
+						<Table.Row key={ host } style={ theme => ({
 							height: 40,
 
 							'&:hover .item-ip-assign-button, & .item-ip-assign-button.editing': {

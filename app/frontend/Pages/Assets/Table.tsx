@@ -65,7 +65,7 @@ const AssetTable = (props: ITableProps) => {
 							</Table.Cell>
 
 							<Table.Cell fitContent>
-								<Group noWrap spacing="sm">
+								<Group wrap="nowrap" gap="sm">
 									{ asset.available_to_checkout ?
 										<CheckoutButton href={ Routes.checkoutAsset(asset) } label={ asset.name } />
 										:

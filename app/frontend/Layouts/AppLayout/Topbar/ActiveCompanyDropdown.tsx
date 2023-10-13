@@ -47,7 +47,7 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 				clearable={ false }
 				searchable={ false }
 				field={ false }
-				sx={ {
+				style={ {
 					width: 'fit-content',
 					input:{
 						backgroundColor: 'transparent',

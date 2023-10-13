@@ -35,6 +35,7 @@ const LocationsDropdown = forwardRef<HTMLInputElement, ILocationsDropdown>((
 		searchable: true,
 		clearable: true,
 		value,
+		autoComplete: 'off',
 		...props,
 	}
 

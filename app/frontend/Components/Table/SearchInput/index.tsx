@@ -7,10 +7,10 @@ import { TextInput } from '@/Components/Inputs'
 import { SearchIcon, CrossIcon } from '@/Components/Icons'
 import { ActionIcon, Box } from '@mantine/core'
 import { useSessionStorage } from '@mantine/hooks'
-import useTableStyles from '../useTableStyles'
 import ColumnPicker from './ColumnPicker'
 import AdvancedSearch from './AdvancedSearch'
 import { useInit, useLocation } from '@/lib/hooks'
+import * as classes from '../Table.css'
 
 interface ISearchInputProps {
 	columnPicker?: boolean
@@ -23,7 +23,6 @@ interface ISearchInputProps {
  */
 const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps) => {
 	const { tableState: { model }, setTableState } = useTableContext()
-	const { classes } = useTableStyles()
 
 	const location = useLocation()
 	const [searchValue, setSearchValue] = useSessionStorage({
@@ -96,7 +95,8 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps)
 				rightSection={ searchValue !== '' && <ActionIcon onClick={ () => setSearchValue('') }>
 					<CrossIcon color="grey" />
 				</ActionIcon> }
-				icon={ <SearchIcon size={ 24 } /> }
+				leftSection={ <SearchIcon size={ 24 } /> }
+				leftSectionPointerEvents="none"
 				className={ classes.searchInput }
 				wrapper={ false }
 				aria-label="Search"

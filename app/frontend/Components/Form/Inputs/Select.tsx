@@ -68,10 +68,10 @@ const Select = forwardRef<HTMLInputElement, ISelectFormProps>((
 		<ConditionalWrapper
 			wrapper={ children => (
 				<Group
-					noWrap
 					grow
+					wrap="nowrap"
 					align="baseline"
-					position="apart"
+					justify="space-between"
 				>
 					{ children }
 				</Group>
@@ -94,7 +94,9 @@ const Select = forwardRef<HTMLInputElement, ISelectFormProps>((
 				>
 					<SelectInput
 						ref={ ref }
-						id={ id || inputId }
+						// Add "search" suffix to prevent password managers trying to autofill dropdowns
+						id={ `${id || inputId}-search` }
+						autoComplete="off"
 						name={ inputName }
 						label={ label }
 						value={ String(value) }

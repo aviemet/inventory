@@ -2,7 +2,7 @@ import React from 'react'
 import { Box } from '@mantine/core'
 import cx from 'clsx'
 import { Form as InertiaForm, type FormProps, type NestedObject } from 'use-inertia-form'
-import useFormStyles from './useFormStyles'
+import * as classes from './Form.css'
 import { createContext } from '@/lib/hooks'
 
 type TFormLayoutValues = {
@@ -25,8 +25,6 @@ const Form = <TForm extends NestedObject>({
 	railsAttributes = true,
 	...props
 }: IFormProps<TForm>) => {
-	const { classes } = useFormStyles()
-
 	return (
 		<FormFormatProvider value={ { disableFormatting } }>
 			<Box className={ classes.form } px="xs" pt="xs">

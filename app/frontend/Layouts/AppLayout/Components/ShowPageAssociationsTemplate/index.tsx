@@ -25,7 +25,7 @@ const ShowPageAssociations = ({ assignToable, checkinRoute }: IShowPageAssociati
 							<Group>
 								{ formatter.date.relative(assignment.created_at) }
 
-								<Box sx={ { padding: '0 8px' } }><ArrowRightSquareIcon /></Box>
+								<Box style={ { padding: '0 8px' } }><ArrowRightSquareIcon /></Box>
 
 								{ assignment.qty && <span>x{ assignment.qty } to </span> }
 

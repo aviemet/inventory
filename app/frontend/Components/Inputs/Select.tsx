@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { Select, type SelectItem, type SelectProps } from '@mantine/core'
+import { Select, type ComboboxData, type SelectProps } from '@mantine/core'
 import { router } from '@inertiajs/react'
 import { coerceArray } from '@/lib'
 import { type IInputProps } from '.'
@@ -7,7 +7,7 @@ import Label from './Label'
 import InputWrapper from './InputWrapper'
 
 export interface ISelectProps extends Omit<SelectProps, 'data'>, IInputProps {
-	options?: readonly (string | SelectItem)[]
+	options?: ComboboxData
 	onOpen?: () => void
 	fetchOnOpen?: string
 }
@@ -44,13 +44,15 @@ const SelectComponent = forwardRef<HTMLInputElement, ISelectProps>((
 			</Label> }
 			<Select
 				ref={ ref }
-				id={ inputId }
+				// Add "search" suffix to prevent password managers trying to autofill dropdowns
+				id={ `${inputId}-search` }
+				autoComplete="off"
 				name={ name }
 				size="md"
 				data={ options }
 				required={ required }
 				maxDropdownHeight={ 400 }
-				nothingFound="No Results"
+				nothingFoundMessage="No Results"
 				onDropdownOpen={ handleDropdownOpen }
 				{ ...props }
 			/>

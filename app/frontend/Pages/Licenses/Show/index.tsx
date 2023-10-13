@@ -24,7 +24,7 @@ const ShowLicense = ({ license }: IShowLicenseProps) => {
 			{ title: license.name! },
 		] }>
 			<Section>
-				<Group position="apart">
+				<Group justify="space-between">
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">

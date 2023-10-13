@@ -29,7 +29,7 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 
 
 	return (
-		<Group position="apart" mt="auto" pt={ 8 }>
+		<Group justify="space-between" mt="auto" pt={ 8 }>
 			<div>
 				{ model && <>Records per page: <LimitSelect pagination={ pagination } model={ model } /></> }
         Showing <b> { recordStart } - { recordEnd } / { count } </b>
@@ -44,8 +44,8 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 				defaultValue={ current_page }
 				{ ...props }
 			>
-				<Group spacing={ 7 } position="center"
-					sx={ { 'a:hover': {
+				<Group gap={ 7 } justify="center"
+					style={ { 'a:hover': {
 						textDecoration: 'none',
 					} } }>
 					<Pagination.First component={ Link } href={ pageLink(1) } />

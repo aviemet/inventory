@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { useLayoutStore } from '@/Layouts/Providers'
-import { Divider, Group, Navbar, Text, ThemeIcon, useMantineTheme } from '@mantine/core'
+import React from 'react'
+import { useLayoutStore } from '@/lib/store'
+import { Divider, Group, AppShell, ThemeIcon, Box } from '@mantine/core'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
@@ -33,42 +33,30 @@ import {
 } from '@/Components/Icons'
 
 import IconProvider from '@/Layouts/Providers/IconProvider'
-import useNavigationStyles from './useNavigationStyles'
+import * as classes from './Navigation.css'
+// import * as classes from './Test'
 
 const Sidebar = () => {
 	const { sidebarOpen, toggleSidebarOpen } = useLayoutStore()
-	const theme = useMantineTheme()
-	const { classes } = useNavigationStyles()
-	const [siteTitleHidden, setSiteTitleHidden] = useState(false)
 
 	const handleNavClick = () => toggleSidebarOpen(false)
 
-	// Delay text to avoid layout shift when opening/closing sidebar
-	useLayoutEffect(() => {
-		const ms = sidebarOpen ? 100 : 0
-		setTimeout(() => {
-			setSiteTitleHidden(!sidebarOpen)
-		}, ms)
-	}, [sidebarOpen])
-
 	return (
 		<IconProvider value={ { size: '24px' } }>
-			<Navbar
+			<AppShell.Navbar
 				p={ 0 }
-				hiddenBreakpoint="sm"
 				hidden={ !sidebarOpen }
-				width={ { sm: sidebarOpen ? theme.other.navbar.width.open : theme.other.navbar.width.closed } }
-				className={ cx(classes.root, { closed: !sidebarOpen }) }
+				className={ cx(classes.navbar, { [classes.closed]: !sidebarOpen }) }
 			>
-				<Navbar.Section m="xs">
-					<Group position='apart'>
+				<Box m="xs">
+					<Group justify="space-between">
 						<ThemeIcon radius="md" size="lg">
 							<ComponentsIcon />
 						</ThemeIcon>
-						<Text className={ cx({ hidden: siteTitleHidden }) }>Inventory</Text>
 					</Group>
-				</Navbar.Section>
-				<Navbar.Section grow onClick={ handleNavClick } className="links">
+				</Box>
+
+				<Box onClick={ handleNavClick } className={ cx([classes.links]) }>
 					<ul>
 						<li><MenuLink href={ Routes.dashboard() } icon={ <DashboardIcon /> }>Dashboard</MenuLink></li>
 						<Divider />
@@ -102,9 +90,9 @@ const Sidebar = () => {
 						<li><MenuLink href={ Routes.documentations() } icon={ <DocumentationIcon /> }>Documentation</MenuLink></li>
 						<li><MenuLink href={ Routes.reports() } icon={ <ReportsIcon /> }>Reports</MenuLink></li>
 					</ul>
-				</Navbar.Section>
+				</Box>
 
-				<Navbar.Section onClick={ handleNavClick } className="links">
+				<Box onClick={ handleNavClick } className={ cx([classes.links]) }>
 					<ul>
 						<li>
 							<MenuLink href={ Routes.settingsGeneralIndex() } icon={ <SettingsIcon /> }>Settings</MenuLink>
@@ -120,8 +108,8 @@ const Sidebar = () => {
 						</li>
 						<li><MenuLink href={ Routes.destroyUserSession() } icon={ <LogoutIcon /> }>Logout</MenuLink></li>
 					</ul>
-				</Navbar.Section>
-			</Navbar>
+				</Box>
+			</AppShell.Navbar>
 		</IconProvider>
 	)
 }

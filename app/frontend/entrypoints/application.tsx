@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		resolve: async name => {
 			let checkedName = name
 			let layout = AppLayout
+
 			if(name.startsWith('Public/')) {
 				layout = AuthLayout
 				checkedName = name.replace('Public/', '')

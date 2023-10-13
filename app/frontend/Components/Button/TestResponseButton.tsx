@@ -102,14 +102,14 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 						<Avatar><InfoCircle /></Avatar>
 					</HoverCard.Target>
 					<HoverCard.Dropdown>
-						<Text size="md" weight={ 700 }>Authentication Failed</Text>
+						<Text size="md" fw={ 700 }>Authentication Failed</Text>
 						<Text>{ errorMessage }</Text>
 					</HoverCard.Dropdown>
 				</HoverCard>
 			}
 			<Button
 				onClick={ handleClick }
-				leftIcon={ requestState.context.icon }
+				leftSection={ requestState.context.icon }
 				color={ requestState.context.color }
 				loading={ requestState.value === 'requesting' }
 				{ ...props }

@@ -25,9 +25,9 @@ const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => 
 			<Section>
 				<Heading order={ 3 }>{ title }</Heading>
 
-				<Box sx={ (theme) => ({ maxWidth: `${theme.breakpoints.md}` }) }>
+				<Box style={ (theme) => ({ maxWidth: `${theme.breakpoints.md}` }) }>
 					<Flex>
-						<Table wrapper={ false } sx={ { flex: 1 } }>
+						<Table wrapper={ false } style={ { flex: 1 } }>
 							<Table.Body>
 
 								<Table.Row>
@@ -53,7 +53,7 @@ const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => 
 							</Table.Body>
 						</Table>
 
-						<Table wrapper={ false } sx={ { flex: 1 } }>
+						<Table wrapper={ false } style={ { flex: 1 } }>
 							<Table.Body>
 								<Table.Row>
 									<Table.HeadCell>Seats</Table.HeadCell>

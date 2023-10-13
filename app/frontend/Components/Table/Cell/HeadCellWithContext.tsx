@@ -15,7 +15,7 @@ const HeadCellWithContext = ({
 	nowrap = true,
 	rows,
 	hideable,
-	sx,
+	style,
 	...props
 }: IHeadCellWithContextProps) => {
 	const thRef = useRef<HTMLTableCellElement>(null)
@@ -60,9 +60,9 @@ const HeadCellWithContext = ({
 				{ 'sortable': showSortLink },
 				{ [direction]: showSortLink && paramsSort === sort },
 			) }
-			sx={ {
+			style={ {
 				whiteSpace: nowrap ? 'nowrap' : 'normal',
-				...sx,
+				...style,
 			} }
 			{ ...props }
 		>

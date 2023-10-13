@@ -17,7 +17,7 @@ const TicketMessage = ({ message }: ITicketMessageProps) => {
 
 	return (
 		<Paper p="sm">
-			<Group position="apart" align="start">
+			<Group justify="space-between" align="start">
 				<Box>
 					{ message.created_by?.id && <Box>
 						From:&nbsp;
