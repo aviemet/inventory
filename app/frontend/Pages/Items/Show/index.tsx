@@ -27,8 +27,8 @@ const ShowItem = ({ item }: IShowItemProps) => {
 			{ title: item.name! },
 		] }>
 			<Section fullHeight>
-				<Group position="apart">
-					<Heading sx={ { flex: 1 } }>{ title }</Heading>
+				<Group justify="space-between">
+					<Heading style={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

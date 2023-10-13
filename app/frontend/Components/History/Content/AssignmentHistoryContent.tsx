@@ -7,7 +7,7 @@ const AssignmentHistoryContent = ({ activity }: { activity: Schema.Activity }) =
 
 	return (
 		<>
-			{ activity.created_at && <Text size="sm" color="dimmed">
+			{ activity.created_at && <Text size="sm" c="dimmed">
 				{ formatter.date.long(activity.created_at) }
 			</Text> }
 		</>

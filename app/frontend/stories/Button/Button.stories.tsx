@@ -29,7 +29,6 @@ export const Standard: ButtonStory = {
 	args: {
 		children: 'Button Text',
 		size: undefined,
-		compact: false,
 		disabled: false,
 		fullWidth: false,
 		loading: false,

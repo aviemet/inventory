@@ -5,7 +5,6 @@ import BodyCell from './BodyCell'
 import HeadCell from './HeadCell'
 import { type BoxProps } from '@mantine/core'
 import { usePageProps } from '@/lib/hooks'
-import { type Sx } from '@mantine/core'
 
 export interface ICellProps extends TDProps, BoxProps {
 	fitContent?: boolean
@@ -13,7 +12,6 @@ export interface ICellProps extends TDProps, BoxProps {
 	nowrap?: boolean
 	hideable?: false|string
 	ref?: React.RefObject<HTMLTableCellElement>
-	sx?: Sx
 }
 
 const RenderedCell = ({ children = true, hideable, sort, ...props }: ICellProps) => {

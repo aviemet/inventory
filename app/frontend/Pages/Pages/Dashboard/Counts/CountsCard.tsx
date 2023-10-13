@@ -12,19 +12,19 @@ const CountCard = ({ children, href }: ICountCardProps) => {
 			component={ Link }
 			href={ href }
 			shadow="sm"
-			sx={ theme => ({
+			style={ theme => ({
 				flexGrow: 1,
 				flexShrink: 1,
 				flexBasis: '170px',
 				transition: 'background-color ease-in-out 250ms',
 
 				'&&:hover': {
-					backgroundColor: theme.other.colorSchemeOption(theme.colors[theme.primaryColor][2], theme.colors[theme.primaryColor][8]),
+					// backgroundColor: theme.other.colorSchemeOption(theme.colors[theme.primaryColor][2], theme.colors[theme.primaryColor][8]),
 					textDecoration: 'none',
 				},
 
 			}) }>
-			<Group position="apart" noWrap>{ children }</Group>
+			<Group justify="space-between" wrap="nowrap">{ children }</Group>
 		</Card>
 
 	)

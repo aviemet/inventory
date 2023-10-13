@@ -27,7 +27,7 @@ const ShowComponent = ({ component }: IShowComponentProps) => {
 			{ title: component.name! },
 		] }>
 			<Section>
-				<Group position="apart">
+				<Group justify="space-between">
 					<Heading>{ title }</Heading>
 
 					<Menu position="bottom-end">

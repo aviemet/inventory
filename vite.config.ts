@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import RubyPlugin from 'vite-plugin-ruby'
+import linaria from '@linaria/vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import FullReload from 'vite-plugin-full-reload'
 import react from '@vitejs/plugin-react'
@@ -20,6 +21,12 @@ const config = defineConfig({
 		react({
 			babel: {
 				plugins: ['babel-plugin-macros', 'babel-plugin-styled-components'],
+			},
+		}),
+		linaria({
+			include: ['**/*.{ts,tsx}'],
+			babelOptions: {
+				presets: ['@babel/preset-typescript', '@babel/preset-react'],
 			},
 		}),
 	],

@@ -1,34 +1,39 @@
 import React from 'react'
 import ActiveCompanyDropdown from './ActiveCompanyDropdown'
-import { useLayoutStore } from '@/Layouts/Providers'
+import { useLayoutStore } from '@/lib/store'
 import QuickNewMenu from './QuickNewMenu'
-import { Box, Header, Burger, Group } from '@mantine/core'
+import { Box, AppShell, Burger, Group } from '@mantine/core'
 import cx from 'clsx'
 import AvatarMenu from './AvatarMenu'
-import useTopbarStyles from './useTopbarStyles'
 import { usePageProps } from '@/lib/hooks'
+import * as classes from './TopBar.css'
+import { theme } from '@/lib/theme'
 
 const Topbar = () => {
 	const { auth: { user } } = usePageProps()
 	const { sidebarOpen, toggleSidebarOpen } = useLayoutStore()
-	const { classes } = useTopbarStyles()
 
 
 	return (
-		<Header height={ 50 } p="sm" className={ cx(classes.topbar, { closed: !sidebarOpen }) }>
+		<AppShell.Header p="sm" className={ cx(classes.topbar, { closed: !sidebarOpen }) }>
 			<Box className={ classes.wrapper }>
 
 				<Burger
+					id="BURGER"
+					aria-label={ sidebarOpen ?
+						'Collapse Navigation'
+						:
+						'Expand Navigation'
+					}
 					opened={ sidebarOpen }
 					onClick={ () => toggleSidebarOpen() }
 					size="sm"
-					mr="xl"
+					ml={ `${theme.other.navbar.width[sidebarOpen ? 'open' : 'closed']}px` }
+					color="white"
 				/>
 
-				<Box sx={ { flex: 1 } }>
-					<div>
-						<ActiveCompanyDropdown user={ user } />
-					</div>
+				<Box style={ { flex: 1 } }>
+					<ActiveCompanyDropdown user={ user } />
 				</Box>
 
 				<Group>
@@ -37,7 +42,7 @@ const Topbar = () => {
 				</Group>
 
 			</Box>
-		</Header>
+		</AppShell.Header>
 	)
 }
 

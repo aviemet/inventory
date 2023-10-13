@@ -1,9 +1,11 @@
 import React from 'react'
-import { Box } from '@mantine/core'
+import { Box, type BoxProps, type ElementProps } from '@mantine/core'
 
-const Content = ({ children }: { children: React.ReactNode }) => {
+interface ITileContentProps extends BoxProps, ElementProps<'div', keyof BoxProps> {}
+
+const Content = ({ children, ...props }: ITileContentProps) => {
 	return (
-		<Box px={ 24 } pt={ 24 } pb={ 4 }>
+		<Box px={ 24 } pt={ 24 } pb={ 4 } { ...props }>
 			{ children }
 		</Box>
 	)

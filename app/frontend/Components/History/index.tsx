@@ -12,7 +12,7 @@ const History = ({ assignments, activities }: IHistoryProps) => {
 	// https://mantine.dev/core/timeline/#wrap-timelineitem
 	return (
 		<>
-			{ activities && <Timeline active={ activities.length }>
+			{ activities && <Timeline active={ activities.length } bulletSize={ 24 }>
 				{ activities.map(activity => {
 					const timelineData = buildTimelineData(activity, assignments?.find(assignment => assignment.id === activity.trackable_id))
 
@@ -21,7 +21,6 @@ const History = ({ assignments, activities }: IHistoryProps) => {
 							key={ activity.id }
 							title={ timelineData.title }
 							bullet={ timelineData.icon }
-							bulletSize={ 24 }
 							color={ timelineData.color }
 							lineVariant={ timelineData.lineStyle }
 						>

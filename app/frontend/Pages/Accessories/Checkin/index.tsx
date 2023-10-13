@@ -2,18 +2,7 @@ import React, { useState } from 'react'
 import { Page, Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTime, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
-import { createStyles } from '@mantine/core'
-
-const useTableStyles = createStyles(theme => ({
-	table: {
-		maxWidth: `${theme.breakpoints.md}`,
-	},
-	firstCell: {
-		fontWeight: 'bold',
-		textAlign: 'right',
-		width: '1px',
-	},
-}))
+import * as classes from './Checkin.css'
 
 interface ICheckinAccessoriesProps {
 	accessory: Schema.AccessoriesEdit
@@ -23,7 +12,6 @@ interface ICheckinAccessoriesProps {
 
 const Checkin = ({ assignment, accessory, statuses }: ICheckinAccessoriesProps) => {
 	const [accessoryName, setAccessoryName] = useState(accessory.name)
-	const { classes } = useTableStyles()
 	const title = 'Check In Accessory'
 
 	return (

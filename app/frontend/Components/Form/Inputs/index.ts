@@ -4,7 +4,6 @@ export interface IFormInputProps<T> {
 	name: string
 	model?: string
 	errorKey?: string
-	compact?: boolean
 	onChange?: (value: T, form: UseFormProps<unknown>) => void
 	onBlur?: (value: T, form: UseFormProps<unknown>) => void
 	field?: boolean

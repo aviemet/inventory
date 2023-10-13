@@ -24,7 +24,6 @@ const CheckoutButton = ({ href, label, disabled, tooltipMessage, ...props }: ICh
 		>
 			<Link
 				as="button"
-				compact
 				href={ href }
 				color={ checkoutButtonColor }
 				buttonProps={ { disabled } }

@@ -18,11 +18,10 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 		onBlur,
 		id,
 		required,
-		compact = false,
 		errorKey,
 		field = true,
 		endpoint,
-		 ...props
+		...props
 	},
 	ref,
 ) => {
@@ -40,7 +39,6 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 	return (
 		<AutocompleteInput
 			id={ id || inputId }
-			className={ cx({ compact }) }
 			name={ inputName }
 			value={ value }
 			onChange={ handleChange }
@@ -49,9 +47,9 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 			ref={ ref }
 			wrapperProps={ {
 				component: Field,
-				className: cx({ compact, required }),
+				className: cx({ required }),
 				errors: Boolean(error),
-				sx: { padding: 0 },
+				style: { padding: 0 },
 			} }
 			wrapper={ false }
 			{ ...props }
@@ -61,21 +59,3 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 })
 
 export default FormAutocompleteComponent
-
-/**
- * <ConditionalWrapper
-			wrapper={ children => (
-				<Field
-					type="search"
-					className={ cx({ compact }) }
-					required={ required }
-					errors={ !!error }
-				>
-					{ children }
-				</Field>
-			) }
-			condition={ field }
-		>
-
-		</ConditionalWrapper>
- */

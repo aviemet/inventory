@@ -130,20 +130,20 @@ const useAdvancedSearch = (
 			} }),
 			wrapperProps: {
 				className: cx({ highlighted: !isUnset(value) && !param?.dependent }),
-				sx: (theme: MantineTheme) => ({
-					'&.highlighted, &.highlighted input': {
-						color: theme.other.colorSchemeOption(
-							theme.colors[theme.primaryColor][6],
-							theme.colors[theme.primaryColor][4],
-						),
-					},
-					'&.highlighted input': {
-						outlineColor: theme.other.colorSchemeOption(
-							theme.colors[theme.primaryColor][6],
-							theme.colors[theme.primaryColor][4],
-						),
-					},
-				}),
+			// 	style: (theme: MantineTheme) => ({
+			// 		'&.highlighted, &.highlighted input': {
+			// 			color: theme.other.colorSchemeOption(
+			// 				theme.colors[theme.primaryColor][6],
+			// 				theme.colors[theme.primaryColor][4],
+			// 			),
+			// 		},
+			// 		'&.highlighted input': {
+			// 			outlineColor: theme.other.colorSchemeOption(
+			// 				theme.colors[theme.primaryColor][6],
+			// 				theme.colors[theme.primaryColor][4],
+			// 			),
+			// 		},
+			// 	}),
 			},
 		}
 	}

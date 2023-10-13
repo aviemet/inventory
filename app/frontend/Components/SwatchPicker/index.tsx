@@ -20,7 +20,7 @@ const SwatchPicker = ({ value, onChange }: ISwatchPickerProps) => {
 				key={ color }
 				onClick={ () => onChange(color) }
 				radius="sm"
-				sx={ {
+				style={ {
 					cursor: 'pointer',
 					display: 'flex',
 					alignItems: 'center',
@@ -35,7 +35,7 @@ const SwatchPicker = ({ value, onChange }: ISwatchPickerProps) => {
 	}, [value, theme.colorScheme])
 
 	return (
-		<Group spacing={ 2 } mt={ 5 }>{
+		<Group gap={ 2 } mt={ 5 }>{
 			colors()
 		}</Group>
 	)

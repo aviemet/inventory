@@ -1,12 +1,12 @@
 import React, { useEffect, useCallback } from 'react'
-import { Tabs, type TabsValue } from '@mantine/core'
+import { Tabs } from '@mantine/core'
 import { type VisitOptions } from '@inertiajs/core'
 import { router } from '@inertiajs/react'
 import { ITabsComponentProps } from '.'
 import { coerceArray } from '@/lib'
 
-const UrlTabs = ({ children, onTabChange, defaultValue, dependencies, ...props }: ITabsComponentProps) => {
-	const navigateTab = (value: TabsValue, options?: VisitOptions) => {
+const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: ITabsComponentProps) => {
+	const navigateTab = (value: string | null, options?: VisitOptions) => {
 		let only: string[] = []
 		if(value && dependencies?.[value]) {
 			only = coerceArray(dependencies[value])
@@ -38,17 +38,17 @@ const UrlTabs = ({ children, onTabChange, defaultValue, dependencies, ...props }
 		}
 	}, [])
 
-	const handleTabChange = (value?: TabsValue) => {
+	const handleTabChange = (value: string | null) => {
 		navigateTab(value || activeTab())
 
-		if(onTabChange) onTabChange(value || activeTab())
+		if(onChange) onChange(value || activeTab())
 	}
 
 	return (
 		<Tabs
 			defaultValue={ activeTab() || defaultValue }
 			keepMounted={ false }
-			onTabChange={ handleTabChange }
+			onChange={ handleTabChange }
 			{ ...props }
 		>
 			{ children }

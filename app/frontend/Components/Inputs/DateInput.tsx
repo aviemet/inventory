@@ -71,7 +71,8 @@ const DateInputComponent = ({
 				radius={ radius }
 				size={ size }
 				valueFormat={ valueFormat }
-				icon={ <CalendarIcon /> }
+				leftSection={ <CalendarIcon /> }
+				leftSectionPointerEvents="none"
 				clearable
 				{ ...props }
 			/>

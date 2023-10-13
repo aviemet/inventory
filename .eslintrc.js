@@ -90,5 +90,6 @@ module.exports = {
 			},
 		}],
 		'comma-dangle': ['error', 'always-multiline'],
+		'react-hooks/exhaustive-deps': 0,
 	},
 }

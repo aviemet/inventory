@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Link, router, type InertiaLinkProps } from '@inertiajs/react'
 import { Method, Visit } from '@inertiajs/core'
-import { Anchor, Sx, type AnchorProps, type ButtonProps } from '@mantine/core'
+import { Anchor, type AnchorProps, type ButtonProps } from '@mantine/core'
 import { Button } from '@/Components'
 
 interface IAnchorLinkProps extends Omit<InertiaLinkProps, 'color'|'size'|'span'>, Omit<AnchorProps, 'href'> {}
@@ -14,14 +14,12 @@ interface ILinkProps extends IAnchorLinkProps {
 	as: 'a'|'button'
 	method?: Method
 	visit?: Omit<Visit, 'method'>
-	compact?: boolean
 	buttonProps?: ButtonProps
 	disabled?: boolean
-	sx?: Sx
 }
 
 const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', method, visit, buttonProps, sx, ...props },
+	{ children, href, as = 'a', method, visit, buttonProps, style, ...props },
 	ref,
 ) => {
 	const handleHTTP = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -39,7 +37,8 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 			component={ AnchorLink }
 			href={ href }
 			onClick={ handleHTTP }
-			sx={ [{ '&:hover': { textDecoration: 'none' } }, sx] }
+			style={ [{ '&:hover': { textDecoration: 'none' } }, style] }
+			c="bright"
 			{ ...props }
 		>
 			{ children }
@@ -51,7 +50,8 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 			ref={ ref }
 			component={ AnchorLink }
 			href={ href }
-			sx={ [{ '&:hover': { textDecoration: 'none' } }, sx] }
+			style={ [{ '&:hover': { textDecoration: 'none' } }, style] }
+			c="bright"
 			{ ...props }
 		>
 			{ children }

@@ -15,7 +15,7 @@ const Mail = ({ smtps }: IMailSettingsProps) => {
 			{ title: 'Settings', href: Routes.settingsGeneralIndex() },
 			{ title: 'Mail', href: Routes.settingsSmtps() },
 		] }>
-			<Group position="apart">
+			<Group justify="space-between">
 				<Heading mb={ 24 }>Mail Settings</Heading>
 				<Menu position="bottom-end">
 					<Menu.Target />

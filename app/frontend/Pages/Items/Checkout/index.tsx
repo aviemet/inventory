@@ -26,7 +26,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 			<Section>
 				<Heading order={ 3 }>{ title }</Heading>
 
-				<Box sx={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
+				<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 					<Table>
 						<Table.Body>
 							<Table.Row>

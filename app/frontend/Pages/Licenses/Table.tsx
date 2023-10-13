@@ -62,7 +62,7 @@ const LicensesTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<Group noWrap spacing="sm">
+							<Group wrap="nowrap" gap="sm">
 								{ license.qty_available && <CheckoutButton
 									href={ Routes.checkoutLicense(license) }
 									disabled={ license.qty_available < 1 }

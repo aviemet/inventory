@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import { DoubleDownArrowIcon } from '@/Components/Icons'
-import { ActionIcon, Paper, Transition, useMantineTheme, rem, px, Tooltip, Box } from '@mantine/core'
-import { useLayoutStore } from '@/Layouts/Providers'
+import { useLayoutStore } from '@/lib/store'
 import { useBooleanToggle } from '@/lib/hooks'
 import { useClickOutside } from '@mantine/hooks'
+import {
+	ActionIcon,
+	Paper,
+	Transition,
+	useMantineTheme,
+	rem,
+	px,
+	Tooltip,
+	Box,
+} from '@mantine/core'
 
 export { default as useAdvancedSearch } from './useAdvancedSearch'
 
@@ -26,7 +35,12 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 	const [open, toggleOpen] = useBooleanToggle(false)
 	const [searchButton, setSearchButton] = useState<HTMLButtonElement | null>(null)
 	const [searchPaper, setSearchPaper] = useState<HTMLDivElement | null>(null)
-	useClickOutside(() => toggleOpen(false), null, [searchButton, searchPaper])
+
+	useClickOutside(
+		() => toggleOpen(false),
+		null,
+		[searchButton, searchPaper],
+	)
 
 	return (
 		<>
@@ -43,7 +57,7 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 					onClick={ () => toggleOpen() }
 					ref={ setSearchButton }
 					data-ignore-outside-clicks
-				 >
+				>
 					<DoubleDownArrowIcon size={ 24 } />
 				</ActionIcon>
 			</Tooltip>
@@ -61,7 +75,7 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 						style={ {
 							...styles,
 							position: 'absolute',
-							left: rem(navBarWidth + px('1rem')),
+							left: rem(navBarWidth + Number(px('1rem'))),
 							right: '1rem',
 							top: searchButton ? rem(searchButton.getBoundingClientRect().bottom + 10) : undefined,
 							zIndex: 10,

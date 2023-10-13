@@ -74,7 +74,7 @@ const AccessoriesTable = (props: ITableProps) => {
 							<Table.Cell>{ accessory.min_qty }</Table.Cell>
 
 							<Table.Cell fitContent>
-								<Group noWrap spacing="sm">
+								<Group wrap="nowrap" gap="sm">
 									<CheckoutButton
 										href={ Routes.checkoutAccessory(accessory) }
 										disabled={ accessory.qty_available < 1 }

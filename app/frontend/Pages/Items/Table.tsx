@@ -71,7 +71,7 @@ const ItemsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell fitContent>
-							<Group noWrap spacing="sm">
+							<Group wrap="nowrap" gap="sm">
 								{ item.assigned ?
 									<CheckinButton href={ Routes.checkinItem(item) } label={ item.name } />
 									:

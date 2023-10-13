@@ -1,7 +1,7 @@
 import React from 'react'
-import { ColorScheme, ColorSchemeProvider, Global, MantineProvider } from '@mantine/core'
+import { MantineProvider } from '@mantine/core'
 import { useColorScheme, useLocalStorage } from '@mantine/hooks'
-import { useTheme, GlobalStyles } from '../app/frontend/Layouts/Providers/UiFrameworkProvider'
+import { GlobalStyles } from '../app/frontend/Layouts/Providers/UiFrameworkProvider'
 import IconProvider from '../app/frontend/Layouts/Providers/IconProvider'
 
 export const parameters = {
@@ -29,15 +29,13 @@ export const decorators = [
       setColorScheme(scheme)
     }
     return (
-      <ColorSchemeProvider colorScheme={ colorScheme } toggleColorScheme={ toggleColorScheme }>
-        <MantineProvider theme={ useTheme(colorScheme) } withGlobalStyles withNormalizeCSS>
+        <MantineProvider>
           <IconProvider>
             <GlobalStyles />
             
             <Story />
           </IconProvider>
         </MantineProvider>
-      </ColorSchemeProvider>
     )
   }
 ]

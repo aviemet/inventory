@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { Box, type BoxProps } from '@mantine/core'
 import cx from 'clsx'
-import useSectionStyles from './useSectionStyles'
+import * as classes from './Section.css'
 
-interface ISectionProps extends BoxProps {
+interface ISectionProps extends BoxProps, Omit<React.ComponentPropsWithoutRef<'section'>, keyof BoxProps> {
 	fullHeight?: boolean
 }
 
-const Section = ({ children, fullHeight = false, className, ...props }: ISectionProps) => {
-	const { classes } = useSectionStyles()
-
+const Section = forwardRef<HTMLDivElement, ISectionProps>((
+	{ children, fullHeight = false, className, ...props },
+	ref,
+) => {
 	return (
 		<Box
+			ref={ ref }
 			component="section"
 			className={ cx(classes.section, className, { fullHeight }) }
 			{ ...props }
@@ -19,6 +21,6 @@ const Section = ({ children, fullHeight = false, className, ...props }: ISection
 			{ children }
 		</Box>
 	)
-}
+})
 
 export default Section

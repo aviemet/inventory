@@ -1,3 +1,3 @@
 export default interface IUserPreferences {
-	colorScheme?: 'light'|'dark'
+	colorScheme?: 'light'|'dark'|'auto'
 }

@@ -1,14 +1,12 @@
 import React, { forwardRef } from 'react'
 import { TableSectionContextProvider } from './TableContext'
 import { THeadProps } from 'react-html-props'
-import { Box, type BoxProps, Sx } from '@mantine/core'
+import { Box, type BoxProps } from '@mantine/core'
 
-interface ITableHead extends BoxProps, THeadProps {
-	sx?: Sx
-}
+interface ITableHead extends BoxProps, THeadProps {}
 
 const Head = forwardRef<HTMLTableSectionElement, ITableHead>((
-	{ children, sx, ...props },
+	{ children, ...props },
 	ref,
 ) => {
 	return (
@@ -16,7 +14,6 @@ const Head = forwardRef<HTMLTableSectionElement, ITableHead>((
 			<Box
 				{ ...props }
 				component="thead"
-				sx={ [{ zIndex: 401 }, sx] }
 				ref={ ref }
 			>
 				{ children }
