@@ -2,7 +2,6 @@ import { type MantineTheme, createTheme } from '@mantine/core'
 import { themeToVars } from '@mantine/vanilla-extract'
 import breakpoints from './breakpoints.mjs'
 
-
 const themeObject = (primaryColor = 'violet') => ({
 	...breakpoints,
 	black: '#111111',
