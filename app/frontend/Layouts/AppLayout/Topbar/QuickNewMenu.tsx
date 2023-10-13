@@ -14,20 +14,21 @@ import {
 } from '@/Components/Icons'
 import { Routes } from '@/lib'
 import { useViewportSize } from '@mantine/hooks'
-import { px, useMantineTheme } from '@mantine/core'
+import { px, useMantineTheme, useComputedColorScheme } from '@mantine/core'
 
 const QuickNewMenu = () => {
 	const { width } = useViewportSize()
 	const theme = useMantineTheme()
+	const computedColorScheme = useComputedColorScheme('dark')
 
-	if(width < px(theme.breakpoints.sm)) {
+	if(width < Number(px(theme.breakpoints.sm))) {
 		return <></>
 	}
 
 	return (
 		<Menu position="bottom-end">
 			<Menu.Target>
-				<Button leftSection={ <PlusCircleIcon /> }> New</Button>
+				<Button variant="default" leftSection={ <PlusCircleIcon /> }> New</Button>
 			</Menu.Target>
 
 			<Menu.Dropdown>

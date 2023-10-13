@@ -6,11 +6,12 @@ const FooterComponent = () => {
 	return (
 		<AppShell.Footer py={ 4 } px={ 8 }>
 			<Group>
-				<Box style={ { width: 32 } }>
+				<div id="footer-portal" />
+				<Box style={ { marginLeft: 'auto' } }>
+					©{ (new Date).getFullYear() }
+
 					<ToggleColorSchemeButton />
 				</Box>
-				<div id="footer-portal" />
-				<Box style={ { marginLeft: 'auto' } }>©{ (new Date).getFullYear() }</Box>
 			</Group>
 		</AppShell.Footer>
 	)

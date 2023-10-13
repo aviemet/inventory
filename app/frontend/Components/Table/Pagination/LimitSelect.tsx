@@ -41,9 +41,9 @@ const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 	return (
 		<Select
 			variant="filled"
-			radius="md"
 			mx={ 4 }
 			my={ 0 }
+			withCheckIcon={ false }
 			style={ {
 				display: 'inline-block',
 				maxWidth: 60,
@@ -52,7 +52,8 @@ const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 				},
 				'.mantineSelectInput': {
 					paddingRight: '1.25rem',
-				} } }
+				},
+			} }
 			rightSectionWidth='1rem'
 			defaultValue={ String(pagination.limit) || '25' }
 			data={ [

@@ -2,14 +2,14 @@ import { type MantineTheme, createTheme } from '@mantine/core'
 import { themeToVars } from '@mantine/vanilla-extract'
 import breakpoints from './breakpoints.mjs'
 
-const themeObject = (primaryColor = 'violet') => ({
+export const themeObject = {
 	...breakpoints,
 	black: '#111111',
 	white: '#FCFCFC',
 	fontFamily: 'Roboto, sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
-	primaryColor: primaryColor,
-	defaultRadius: 'xs',
+	// primaryColor: primaryColor,
+	defaultRadius: 'sm',
 	headings: {
 		fontFamily: 'Greycliff CF, Roboto, sans-serif',
 	},
@@ -68,9 +68,11 @@ const themeObject = (primaryColor = 'violet') => ({
 			checkinButtonColor: 'cyan',
 		},
 	},
-})
+}
 
-export const theme: MantineTheme = createTheme(themeObject()) as MantineTheme
+export const theme = createTheme(themeObject) as MantineTheme
+
+// export const theme = themeObject() as MantineTheme
 
 const vars = themeToVars(theme)
 

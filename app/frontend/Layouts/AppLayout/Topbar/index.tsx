@@ -29,12 +29,11 @@ const Topbar = () => {
 					onClick={ () => toggleSidebarOpen() }
 					size="sm"
 					ml={ `${theme.other.navbar.width[sidebarOpen ? 'open' : 'closed']}px` }
+					color="white"
 				/>
 
 				<Box style={ { flex: 1 } }>
-					<div>
-						<ActiveCompanyDropdown user={ user } />
-					</div>
+					<ActiveCompanyDropdown user={ user } />
 				</Box>
 
 				<Group>

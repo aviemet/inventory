@@ -5,15 +5,18 @@ import { Sun, MoonStars } from 'tabler-icons-react'
 const ToggleColorSchemeButton = () => {
 	const { colorScheme, toggleColorScheme } = useMantineColorScheme()
 
+	const iconProps = { size: 18 }
+
 	return (
 		<ActionIcon
-			color={ colorScheme === 'dark' ? 'yellow' : 'blue' }
+			color={ colorScheme === 'dark' ? 'light' : 'dark' }
 			onClick={ () => toggleColorScheme() }
 			title="Toggle color scheme"
 			style={ { display: 'inline-flex' } }
 			aria-label={ `Enable ${colorScheme === 'dark' ? 'light' : 'dark'} mode` }
+			size="sm"
 		>
-			{ colorScheme === 'dark' ? <Sun size={ 18 } /> : <MoonStars size={ 18 } /> }
+			{ colorScheme === 'dark' ? <Sun { ...iconProps } /> : <MoonStars { ...iconProps } /> }
 		</ActionIcon>
 	)
 }

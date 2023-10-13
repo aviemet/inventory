@@ -157,6 +157,13 @@
       "postcss.config.ts": "cjs"
     }
   },
+  "babe": {
+    "env": {
+      "development" : {
+        "compact": false
+      }
+    }  
+  },
   "release": {
     "branches": [
       "main"

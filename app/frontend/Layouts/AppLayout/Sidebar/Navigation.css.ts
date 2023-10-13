@@ -9,10 +9,8 @@ const openSpanWidth = navbarWidth.open! - iconWidth - borderWidth
 const navItemHeight = 44
 
 export const links = css`
-	selectors {
-		&:last-child {
-			margin-top: auto;
-		}
+	&:last-child {
+		margin-top: auto;
 	}
 `
 
@@ -24,7 +22,8 @@ export const active = css`
 
 export const navbar = css`
 	transition: width 100ms ease-in-out, min-width 100ms ease-in-out;
-
+	overflow-y: clip;
+	
 	// vars.largerThan('sm')
 	@media (min-width: ${vars.breakpoints.sm}) {
 		top: 0;
