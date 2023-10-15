@@ -3,9 +3,16 @@ import { css } from '@linaria/core'
 import backgroundImageUrl from '@/images/robots-bw.svg'
 
 export const page = css`
-	// backgroundBlendMode: vars.other.colorSchemeOption('lighten', 'soft-light'), // 'soft-light' 'multiply'
+	 // 'soft-light' 'multiply'
+	${vars.lightSelector} {
+		background-blend-mode: lighten;
+	}
+	${vars.darkSelector} {
+		background-blend-mode: lighten;
+		/* background-blend-mode: soft-light; */
+	}
 	background-image: ${backgroundImageUrl ? `url("${backgroundImageUrl}")` : ''};
-	// background-color: vars.colors[vars.primaryColor][6];
+	background-color: ${vars.colors.primary};
 	min-height: 100vh;
 `
 

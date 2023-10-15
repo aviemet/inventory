@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { MantineProvider, createTheme } from '@mantine/core'
 import { Notifications } from '@mantine/notifications'
-import useLayoutStore from '../AppLayout/store/LayoutStore'
+import { useLayoutStore } from '@/lib/store'
 import { usePageProps } from '@/lib/hooks'
 import { DatesProvider } from '@mantine/dates'
 import { themeObject } from '@/lib/theme'
@@ -25,7 +25,6 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 		<MantineProvider theme={ createTheme({ ...themeObject, primaryColor }) } defaultColorScheme="auto">
 			<DatesProvider settings={ { locale: 'en' } }>
 				<Notifications />
-				{ /* <GlobalStyles /> */ }
 				{ children }
 			</DatesProvider>
 		</MantineProvider>
