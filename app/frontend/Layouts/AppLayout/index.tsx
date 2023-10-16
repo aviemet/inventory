@@ -13,7 +13,7 @@ const AppLayout = ({ children }: { children: any }) => {
 	const { sidebarOpen } = useLayoutStore()
 	const [mobileOpen, mobileHandlers] = useDisclosure(sidebarOpen)
 	const [desktopOpen] = useDisclosure(sidebarOpen)
-	console.log({ desktopOpen, mobileOpen })
+
 	useEffect(() => {
 		if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
 			console.log({ theme })

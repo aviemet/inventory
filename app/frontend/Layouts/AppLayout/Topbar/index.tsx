@@ -7,7 +7,6 @@ import cx from 'clsx'
 import AvatarMenu from './AvatarMenu'
 import { usePageProps } from '@/lib/hooks'
 import * as classes from './TopBar.css'
-import { theme } from '@/lib/theme'
 
 const Topbar = () => {
 	const { auth: { user } } = usePageProps()
@@ -26,7 +25,6 @@ const Topbar = () => {
 					opened={ sidebarOpen }
 					onClick={ () => toggleSidebarOpen() }
 					size="sm"
-					// ml={ `${theme.other.navbar.width[sidebarOpen ? 'open' : 'closed']}px` }
 					color="white"
 				/>
 

@@ -16,7 +16,6 @@ export const page = css`
 	min-height: 100vh;
 `
 
-
 export const wrapper = css`
 	min-height: 100vh;
 	width: 100%;
