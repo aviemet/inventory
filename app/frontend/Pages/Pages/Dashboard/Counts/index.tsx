@@ -3,6 +3,7 @@ import { Badge, SimpleGrid } from '@/Components'
 import { Routes } from '@/lib'
 import CountsCard from './CountsCard'
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from '@/Components/Icons'
+import IconProvider from '@/Layouts/Providers/IconProvider'
 
 type TCompanyCounts = {
 	locations: number
@@ -18,51 +19,59 @@ type TCompanyCounts = {
 	manufacturers: number
 }
 
+const iconSize = '24px'
+
 const Counts = ({ counts }: { counts: TCompanyCounts }) => {
 	return (
-		<SimpleGrid
-			cols={ 6 }
-			breakpoints={ [
-				{ maxWidth: 'lg', cols: 3 },
-				{ maxWidth: 'sm', cols: 2 },
-				{ maxWidth: 'xs', cols: 1 },
-			] }>
-			<CountsCard href={ Routes.items() }>
-				<ItemsIcon />
-				<div>Hardware</div>
-				<div><Badge>{ counts.items }</Badge></div>
-			</CountsCard>
+		<IconProvider
+			size={ iconSize }
+			style={ { minWidth: iconSize, maxWidth: iconSize } }
+		>
+			<SimpleGrid
+				cols={ {
+					base: 6,
+					xs: 1,
+					sm: 2,
+					md: 3,
+					lg: 6,
+				} }>
+				<CountsCard href={ Routes.items() }>
+					<ItemsIcon />
+					<div>Hardware</div>
+					<div><Badge>{ counts.items }</Badge></div>
+				</CountsCard>
 
-			<CountsCard href={ Routes.accessories() }>
-				<AccessoriesIcon />
-				<div>Accessories</div>
-				<div><Badge>{ counts.accessories }</Badge></div>
-			</CountsCard>
+				<CountsCard href={ Routes.accessories() }>
+					<AccessoriesIcon />
+					<div>Accessories</div>
+					<div><Badge>{ counts.accessories }</Badge></div>
+				</CountsCard>
 
-			<CountsCard href={ Routes.components() }>
-				<ComponentsIcon />
-				<div>Components</div>
-				<div><Badge>{ counts.components }</Badge></div>
-			</CountsCard>
+				<CountsCard href={ Routes.components() }>
+					<ComponentsIcon />
+					<div>Components</div>
+					<div><Badge>{ counts.components }</Badge></div>
+				</CountsCard>
 
-			<CountsCard href={ Routes.consumables() }>
-				<ConsumablesIcon />
-				<div>Consumables</div>
-				<div><Badge>{ counts.consumables }</Badge></div>
-			</CountsCard>
+				<CountsCard href={ Routes.consumables() }>
+					<ConsumablesIcon />
+					<div>Consumables</div>
+					<div><Badge>{ counts.consumables }</Badge></div>
+				</CountsCard>
 
-			<CountsCard href={ Routes.licenses() }>
-				<LicensesIcon />
-				<div>Licenses</div>
-				<div><Badge>{ counts.licenses }</Badge></div>
-			</CountsCard>
+				<CountsCard href={ Routes.licenses() }>
+					<LicensesIcon />
+					<div>Licenses</div>
+					<div><Badge>{ counts.licenses }</Badge></div>
+				</CountsCard>
 
-			<CountsCard href={ Routes.people() }>
-				<PeopleIcon />
-				<div>People</div>
-				<div><Badge>{ counts.people }</Badge></div>
-			</CountsCard>
-		</SimpleGrid>
+				<CountsCard href={ Routes.people() }>
+					<PeopleIcon />
+					<div>People</div>
+					<div><Badge>{ counts.people }</Badge></div>
+				</CountsCard>
+			</SimpleGrid>
+		</IconProvider>
 	)
 }
 

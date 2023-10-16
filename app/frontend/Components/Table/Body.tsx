@@ -1,9 +1,10 @@
 import React, { forwardRef } from 'react'
 import { TableSectionContextProvider, useTableContext } from './TableContext'
-import { TBodyProps } from 'react-html-props'
 import { Box, LoadingOverlay, type BoxProps } from '@mantine/core'
 
-interface ITableBody extends BoxProps, TBodyProps {}
+interface ITableBody
+	extends BoxProps,
+	Omit<React.ComponentPropsWithoutRef<'tbody'>, keyof BoxProps> {}
 
 const Body = forwardRef<HTMLTableSectionElement, ITableBody>(({ children, ...props }, ref) => {
 	const tableState = useTableContext(false)

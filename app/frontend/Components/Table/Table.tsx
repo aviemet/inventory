@@ -11,7 +11,7 @@ import Cell from './Cell'
 import HeadCell from './Cell/HeadCell'
 import Footer from './Footer'
 import Pagination from './Pagination'
-import TableProvider from './TableContext'
+import TableProvider, { useTableContext } from './TableContext'
 import TableSection from './Section'
 import SearchInput from './SearchInput'
 import ConditionalWrapper from '../ConditionalWrapper'
@@ -49,20 +49,28 @@ const TableComponent: TableComponent & TableObjects = ({
 	style,
 	...props
 }) => {
+	const tableState = useTableContext(false)
+
 	return (
 		<ConditionalWrapper
 			condition={ wrapper }
 			wrapper={ children => <div className={ classes.wrapper }>{ children }</div> }
 		>
-			<Table
-				striped={ striped }
-				highlightOnHover={ highlightOnHover }
-				className={ cx(className, classes.table) }
-				style={ [wrapper ? { thead: { top: -10 } } : undefined, style] }
-				{ ...props }
+			{ /* TODO: Maybe a better way than forcing an entire context tree just for data-cell attributes? */ }
+			<ConditionalWrapper
+				condition={ tableState === null }
+				wrapper={ children => <TableProvider>{ children }</TableProvider> }
 			>
-				{ children }
-			</Table>
+				<Table
+					striped={ striped }
+					highlightOnHover={ highlightOnHover }
+					className={ cx(className, classes.table) }
+					style={ [wrapper ? { thead: { top: -10 } } : undefined, style] }
+					{ ...props }
+				>
+					{ children }
+				</Table>
+			</ConditionalWrapper>
 		</ConditionalWrapper>
 	)
 }

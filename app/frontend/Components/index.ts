@@ -21,6 +21,7 @@ export { default as Label } from './Inputs/Label'
 
 // Export UI library components as a proxy to allow easy refactoring
 export {
+	AppShell,
 	Box,
 	Badge,
 	Container,

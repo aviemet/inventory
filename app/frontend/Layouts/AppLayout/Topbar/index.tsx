@@ -13,13 +13,11 @@ const Topbar = () => {
 	const { auth: { user } } = usePageProps()
 	const { sidebarOpen, toggleSidebarOpen } = useLayoutStore()
 
-
 	return (
 		<AppShell.Header p="sm" className={ cx(classes.topbar, { closed: !sidebarOpen }) }>
 			<Box className={ classes.wrapper }>
 
 				<Burger
-					id="BURGER"
 					aria-label={ sidebarOpen ?
 						'Collapse Navigation'
 						:
@@ -28,7 +26,7 @@ const Topbar = () => {
 					opened={ sidebarOpen }
 					onClick={ () => toggleSidebarOpen() }
 					size="sm"
-					ml={ `${theme.other.navbar.width[sidebarOpen ? 'open' : 'closed']}px` }
+					// ml={ `${theme.other.navbar.width[sidebarOpen ? 'open' : 'closed']}px` }
 					color="white"
 				/>
 

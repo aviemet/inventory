@@ -1,15 +1,19 @@
+import { withDefaults } from '@/lib'
 import React from 'react'
-import { IconContext } from 'react-icons'
+import { IconContext, type IconContext as IconContextProps } from 'react-icons'
 
-interface IIconProviderProps {
+const defaultClassName = 'react-icon'
+const defaultSize = '1rem'
+
+interface IIconProviderProps extends IconContextProps {
 	children: React.ReactNode
-	value?: { className?: string, size?: string }
 }
 
-const IconProvider = ({ children, value = {
-	className: 'react-icon',
-	size: '1rem',
-} }: IIconProviderProps) => {
+const IconProvider = ({ children, ...props }: IIconProviderProps) => {
+	const value: IconContextProps = withDefaults(props, {
+		className: defaultClassName,
+		size: defaultSize,
+	})
 	return (
 		<IconContext.Provider value={ value }>
 			{ children }

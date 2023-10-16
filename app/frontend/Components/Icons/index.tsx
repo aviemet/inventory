@@ -1,33 +1,34 @@
 export {
-	Key as LicensesIcon,
-	Dashboard as DashboardIcon,
-	Devices as ItemsIcon,
-	UserCircle as PeopleIcon,
-	Users as UsersIcon,
-	Ticket as TicketsIcon,
-	BuildingStore as VendorsIcon,
+	TbChevronsDown as DoubleDownArrowIcon,
+	TbKey as LicensesIcon,
+	TbDashboard as DashboardIcon,
+	TbDevices as ItemsIcon,
+	TbUserCircle as PeopleIcon,
+	TbUsers as UsersIcon,
+	TbTicket as TicketsIcon,
+	TbBuildingStore as VendorsIcon,
 	// Receipt as PurchasesIcon,
-	ShoppingCart as PurchasesIcon,
-	Settings as SettingsIcon,
-	Keyboard as AccessoriesIcon,
-	Components as ComponentsIcon,
-	DropletFilled as ConsumablesIcon,
-	FileCertificate as ContractsIcon,
-	Building as CompaniesIcon,
-	BuildingFactory as ManufacturersIcon,
-	X as CrossIcon,
+	TbShoppingCart as PurchasesIcon,
+	TbSettings as SettingsIcon,
+	TbKeyboard as AccessoriesIcon,
+	TbComponents as ComponentsIcon,
+	TbDropletFilled as ConsumablesIcon,
+	TbFileCertificate as ContractsIcon,
+	TbBuilding as CompaniesIcon,
+	TbBuildingFactory as ManufacturersIcon,
+	TbX as CrossIcon,
 	// ChevronRight as NextIcon,
-	ChevronsRight as LastIcon,
+	TbChevronsRight as LastIcon,
 	// ChevronLeft as PreviousIcon,
-	ChevronsLeft as FirstIcon,
-	Dots as DotsIcon,
-	Filter as FilterIcon,
-	Report as ReportsIcon,
-	ArrowRightSquare as ArrowRightSquareIcon,
-	ArrowLeftSquare as ArrowRLeftSquareIcon,
-	CircleDot as CircleDotIcon,
-	SquarePlus as ReplenishIcon,
-} from 'tabler-icons-react'
+	TbChevronsLeft as FirstIcon,
+	TbDots as DotsIcon,
+	TbFilter as FilterIcon,
+	TbReport as ReportsIcon,
+	TbArrowRightSquare as ArrowRightSquareIcon,
+	TbArrowLeftSquare as ArrowRLeftSquareIcon,
+	TbCircleDot as CircleDotIcon,
+	TbSquarePlus as ReplenishIcon,
+} from 'react-icons/tb'
 
 export {
 	MdSettingsEthernet as NetworksIcon,
@@ -93,12 +94,9 @@ export {
 } from 'react-icons/gr'
 
 export {
-	TbChevronsDown as DoubleDownArrowIcon,
-} from 'react-icons/tb'
-
-export {
 	// HiOutlineClock as ClockIcon,
 	HiOutlineUserGroup as UserGroupIcon,
+	// HiOutlineKey as LicensesIcon,
 } from 'react-icons/hi'
 
 export {

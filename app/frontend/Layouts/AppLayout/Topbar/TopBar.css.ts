@@ -8,10 +8,10 @@ export const topbar = css`
 	color: ${vars.colors.white};
 
 	@media (min-width: ${vars.breakpoints.sm}) {
-		left: ${theme.other.navbar.width.open};
+		left: ${theme.other.navbar.width.open}px;
 
 		&.closed {
-			left: ${theme.other.navbar.width.closed};
+			left: ${theme.other.navbar.width.closed}px;
 		}
 	}
 `
