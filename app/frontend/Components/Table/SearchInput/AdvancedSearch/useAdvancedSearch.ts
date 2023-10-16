@@ -3,7 +3,6 @@ import { useLocation } from '@/lib/hooks'
 import { isUnset } from '@/lib/forms'
 import { router } from '@inertiajs/react'
 import cx from 'clsx'
-import { type MantineTheme } from '@mantine/core'
 import { NestedURLSearchParams } from '@/lib'
 import buildSearchLink from './buildSearchLink'
 

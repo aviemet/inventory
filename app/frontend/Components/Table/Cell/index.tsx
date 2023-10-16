@@ -1,12 +1,14 @@
 import React from 'react'
 import { useTableContext, useTableSectionContext } from '../TableContext'
-import { TDProps } from 'react-html-props'
 import BodyCell from './BodyCell'
 import HeadCell from './HeadCell'
 import { type BoxProps } from '@mantine/core'
 import { usePageProps } from '@/lib/hooks'
 
-export interface ICellProps extends TDProps, BoxProps {
+export interface ICellProps
+	extends BoxProps,
+	Omit<React.ComponentPropsWithoutRef<'td'>, keyof BoxProps>
+{
 	fitContent?: boolean
 	sort?: string
 	nowrap?: boolean

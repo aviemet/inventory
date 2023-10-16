@@ -42,7 +42,7 @@ const Sidebar = () => {
 	const handleNavClick = () => toggleSidebarOpen(false)
 
 	return (
-		<IconProvider value={ { size: '24px' } }>
+		<IconProvider size='24px'>
 			<AppShell.Navbar
 				p={ 0 }
 				hidden={ !sidebarOpen }

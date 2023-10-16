@@ -44,11 +44,6 @@ const HeadCellWithContext = ({
 		localParams.set('direction', direction)
 
 		return `${pathname}?${localParams.toString()}`
-
-		// Including `localParams` in the dependency array would cause the link to update with every render.
-		// Excluding is the best way to achieve performant desired results
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [showSortLink, sort, direction, pathname])
 
 	return (
