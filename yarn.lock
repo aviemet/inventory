@@ -4851,7 +4851,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/error@npm:^3.0.0":
+"@semantic-release/error@npm:3.0.0, @semantic-release/error@npm:^3.0.0":
   version: 3.0.0
   resolution: "@semantic-release/error@npm:3.0.0"
   checksum: 29c4391ecbefd9ea991f8fdf5ab3ceb9c4830281da56d9dbacd945c476cb86f10c3b55cd4a6597098c0ea3a59f1ec4752132abeea633e15972f49f4704e61d35
@@ -11753,6 +11753,7 @@ __metadata:
     react-error-boundary: ^4.0.11
     react-html-props: ^2.0.3
     react-icons: ^4.11.0
+    semantic-release-github-actions-tags: ^1.0.3
     storybook: ^7.4.6
     tabler-icons-react: ^1.56.0
     typescript: ^5.2.2
@@ -15814,6 +15815,15 @@ __metadata:
     ajv-formats: ^2.1.1
     ajv-keywords: ^5.1.0
   checksum: 26a0463d47683258106e6652e9aeb0823bf0b85843039e068b57da1892f7ae6b6b1094d48e9ed5ba5cbe9f7166469d880858b9d91abe8bd249421eb813850cde
+  languageName: node
+  linkType: hard
+
+"semantic-release-github-actions-tags@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "semantic-release-github-actions-tags@npm:1.0.3"
+  dependencies:
+    "@semantic-release/error": 3.0.0
+  checksum: 79dd274576ddad426947fc6881b6c007cb174b8d87ec80b11c59657e95a122a37246ee53bf4cace986947051fa0952aa76d0d8f9dee5df3899ec9f637509e70c
   languageName: node
   linkType: hard
 

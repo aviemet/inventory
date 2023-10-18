@@ -127,6 +127,7 @@
     "postcss-preset-mantine": "^1.8.0",
     "postcss-simple-vars": "^7.0.1",
     "prop-types": "^15.8.1",
+    "semantic-release-github-actions-tags": "^1.0.3",
     "storybook": "^7.4.6",
     "typescript": "^5.2.2",
     "vite-plugin-dynamic-import": "^1.5.0",
@@ -212,7 +213,8 @@
           "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
         }
       ],
-      "@semantic-release/github"
+      "@semantic-release/github",
+      "semantic-release-github-actions-tags"
     ]
   }
 }
