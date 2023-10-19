@@ -26,8 +26,13 @@ class Users::ShowSerializer < ApplicationSerializer
 
   has_many :roles, serializer: RoleSerializer
   has_many :activities, serializer: ActivitySerializer
-  has_many :people, serializer: PersonSerializer
-  has_one :person, serializer: PersonSerializer
-  belongs_to :active_company, serializer: CompanySerializer
-  has_many :companies, serializer: CompanySerializer
+  belongs_to :active_company, serializer: Companies::OptionsSerializer
+  has_many :companies, serializer: Companies::OptionsSerializer
+
+  class ShowUserPersonSerializer < PersonSerializer
+    belongs_to :company, serializer: Companies::OptionsSerializer
+  end
+
+  has_many :people, serializer: ShowUserPersonSerializer
+  has_one :person, serializer: ShowUserPersonSerializer
 end
