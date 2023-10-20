@@ -37,20 +37,22 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 			return Math.max(row.permissions.length, length)
 		}, 0)
 	}, [tableRows])
-
+	console.log({ formData })
 	const handleSubmit = (form: UseFormProps<FormData>) => {
 		if(form.getData('person_group.permissions.company.admin')) {
 			form.transform(data => {
-				const keys = Object.keys(data.person_group.permissions) as Array<keyof typeof data.person_group.permissions>
-				keys.forEach(key => {
+				const clonedData = structuredClone(data)
+				const keys = Object.keys(clonedData.person_group.permissions) as Array<keyof typeof clonedData.person_group.permissions>
+				keys.forEach((key) => {
 					if(key !== 'company') {
-						data.person_group.permissions[key] = []
+						clonedData.person_group.permissions[key] = []
 					}
 				})
-				return data
+				return clonedData
 			})
 		}
-		if(onSubmit) onSubmit(form)
+
+		onSubmit?.(form)
 	}
 
 	return (
@@ -72,7 +74,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 					<Switch
 						name="company.admin"
 						label={ `Set as administrator group for ${user.active_company?.name}` }
-						onChange={ e => setIsCompanyAdmin(e.target.checked) }
+						onChange={ (checked) => setIsCompanyAdmin(checked) }
 					/>
 
 					<Table mt={ 32 }>
