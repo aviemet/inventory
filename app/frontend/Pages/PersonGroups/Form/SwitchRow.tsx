@@ -8,7 +8,7 @@ import { usePermissionsForm, type FormData } from '.'
 
 interface ISwitchRowProps {
 	label: string
-	model: keyof FormData['person_group']['permissions']
+	model: string
 	permissions: string[]
 }
 

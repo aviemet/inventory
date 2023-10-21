@@ -8,6 +8,7 @@ import SwitchRow from './SwitchRow'
 import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'
 import { emptyGroup } from './formData'
+import { rem } from '@mantine/core'
 
 export type FormData = {
 	person_group: Schema.PersonGroupsFormData
@@ -37,17 +38,19 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 			return Math.max(row.permissions.length, length)
 		}, 0)
 	}, [tableRows])
-	console.log({ formData })
+
 	const handleSubmit = (form: UseFormProps<FormData>) => {
 		if(form.getData('person_group.permissions.company.admin')) {
 			form.transform(data => {
 				const clonedData = structuredClone(data)
 				const keys = Object.keys(clonedData.person_group.permissions) as Array<keyof typeof clonedData.person_group.permissions>
+
 				keys.forEach((key) => {
 					if(key !== 'company') {
 						clonedData.person_group.permissions[key] = []
 					}
 				})
+
 				return clonedData
 			})
 		}
@@ -77,31 +80,35 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 						onChange={ (checked) => setIsCompanyAdmin(checked) }
 					/>
 
-					<Table mt={ 32 }>
+					<Table mt={ 32 } style={ {
+						th: {
+							marginRight: `${rem(4)}`,
+						},
+					} }>
 						<Table.Head>
 							<Table.Row>
 								<Table.Cell>All</Table.Cell>
 								<Table.Cell>Record Type</Table.Cell>
 								<Table.Cell>
-									List <ColumnToggle permission="index" />
+									<ColumnToggle permission="index" /> List
 								</Table.Cell>
 								<Table.Cell>
-									View <ColumnToggle permission="show" />
+									<ColumnToggle permission="show" /> View
 								</Table.Cell>
 								<Table.Cell>
-									Create <ColumnToggle permission="create" />
+									<ColumnToggle permission="create" /> Create
 								</Table.Cell>
 								<Table.Cell>
-									Edit <ColumnToggle permission="update" />
+									<ColumnToggle permission="update" /> Edit
 								</Table.Cell>
 								<Table.Cell>
-									Delete <ColumnToggle permission="delete" />
+									<ColumnToggle permission="delete" /> Delete
 								</Table.Cell>
 								<Table.Cell>
-									Checkout <ColumnToggle permission="checkout" />
+									<ColumnToggle permission="checkout" /> Checkout
 								</Table.Cell>
 								<Table.Cell>
-									Checkin <ColumnToggle permission="checkin" />
+									<ColumnToggle permission="checkin" /> Checkin
 								</Table.Cell>
 							</Table.Row>
 						</Table.Head>
