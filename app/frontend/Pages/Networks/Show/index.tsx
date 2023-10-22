@@ -30,7 +30,7 @@ const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editNetwork(network) } icon={ <EditIcon /> }>
+							<Menu.Link href={ Routes.editNetwork(network) } leftSection={ <EditIcon /> }>
 								Edit
 							</Menu.Link>
 						</Menu.Dropdown>

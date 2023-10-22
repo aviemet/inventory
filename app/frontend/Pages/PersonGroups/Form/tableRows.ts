@@ -1,12 +1,12 @@
-import { FormData } from '.'
+import { type TPermissions } from '.'
 
 type TTableRow = {
-	model: keyof FormData['person_group']['permissions']
+	model: string
 	label: string
 	permissions: (keyof TPermissions)[]
 }
 
-export default [
+const tableRows: TTableRow[] = [
 	{
 		model: 'item',
 		label: 'Items',
@@ -82,4 +82,6 @@ export default [
 		label: 'Users',
 		permissions: ['index', 'show', 'create', 'update', 'delete'],
 	},
-] as TTableRow[]
+] as const
+
+export default tableRows

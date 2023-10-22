@@ -4,7 +4,8 @@ import { Table } from '@/Components'
 import { Checkbox } from '@/Components/Inputs'
 import { Switch } from '@/Components/Form'
 import { useCheckboxState } from '@/lib/hooks'
-import { usePermissionsForm, type FormData } from '.'
+import { usePermissionsForm } from './PermissionsForm'
+import { type FormData } from '.'
 
 interface ISwitchRowProps {
 	label: string

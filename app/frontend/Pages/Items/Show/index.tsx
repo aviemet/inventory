@@ -34,24 +34,24 @@ const ShowItem = ({ item }: IShowItemProps) => {
 						<Menu.Target />
 						<Menu.Dropdown>
 							{ item.assigned ?
-								<Menu.Link href={ Routes.checkinItem(item) } icon={ <CheckinIcon /> }>
+								<Menu.Link href={ Routes.checkinItem(item) } leftSection={ <CheckinIcon /> }>
 								Checkin Item
 								</Menu.Link>
 								:
-								<Menu.Link href={ Routes.checkoutItem(item) } icon={ <CheckoutIcon /> }>
+								<Menu.Link href={ Routes.checkoutItem(item) } leftSection={ <CheckoutIcon /> }>
 								Checkout Item
 								</Menu.Link>
 							}
-							<Menu.Link href={ Routes.editItem(item) } icon={ <EditIcon /> }>
+							<Menu.Link href={ Routes.editItem(item) } leftSection={ <EditIcon /> }>
 								Edit Item
 							</Menu.Link>
 
 							<Menu.Divider />
 
-							<Menu.Link href={ Routes.newTicket({ 'ticket.asset_id': item.id }) } icon={ <TicketsIcon /> }>
+							<Menu.Link href={ Routes.newTicket({ 'ticket.asset_id': item.id }) } leftSection={ <TicketsIcon /> }>
 								Open New Ticket
 							</Menu.Link>
-							<Menu.Link href={ Routes.newDocumentation({ 'documentation.documentable_type': 'Item', 'documentation.documentable_id': item.id }) } icon={ <DocumentationIcon /> }>
+							<Menu.Link href={ Routes.newDocumentation({ 'documentation.documentable_type': 'Item', 'documentation.documentable_id': item.id }) } leftSection={ <DocumentationIcon /> }>
 								New Documentation
 							</Menu.Link>
 

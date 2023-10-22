@@ -77,7 +77,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps)
 		if(searchValue === '') {
 			url.searchParams.delete('search')
 		} else {
-			url.searchParams.set('search', searchValue)
+			url.searchParams.set('search', searchValue ?? '')
 			url.searchParams.delete('page')
 		}
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Table, Section, Heading, Page, Group, Menu } from '@/Components'
+import { Table, Heading, Page, Group, Menu } from '@/Components'
 import { Routes } from '@/lib'
-import PeopleTable from '@/Pages/People/Table'
 import { EditIcon } from '@/Components/Icons'
+import GroupMembersTable from './GroupMembersTable'
 
 interface IShowUserProps {
 	person_group: Schema.PersonGroupsShow
@@ -17,15 +17,15 @@ const ShowUser = ({ person_group }: IShowUserProps) => {
 			{ title: 'Groups', href: Routes.personGroups() },
 			{ title },
 		] }>
-			<Section>
+			<Table.Section>
 
 				<Group justify="space-between">
-					<Heading>{ title }</Heading>
+					<Heading mb={ 8 }>Group: { title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editPersonGroup(person_group.slug) } icon={ <EditIcon /> }>
+							<Menu.Link href={ Routes.editPersonGroup(person_group.slug) } leftSection={ <EditIcon /> }>
 								Edit
 							</Menu.Link>
 						</Menu.Dropdown>
@@ -34,13 +34,12 @@ const ShowUser = ({ person_group }: IShowUserProps) => {
 
 				<Table.TableProvider
 					selectable
-					hideable
-					model='user'
+					model='people'
 					rows={ person_group.people }
 				>
-					<PeopleTable />
+					<GroupMembersTable />
 				</Table.TableProvider>
-			</Section>
+			</Table.Section>
 		</Page>
 	)
 }

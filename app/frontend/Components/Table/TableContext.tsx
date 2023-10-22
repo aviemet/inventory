@@ -37,6 +37,11 @@ interface ITableContextProviderProps {
 	pagination?: Schema.Pagination
 	rows?: Record<string,any>[]
 	hideable?: boolean
+
+	/** Name of the ActiveRecord model being tabularized.
+	 * Used to limit Inertia props reload using `only`, needs to match the incoming prop on the Component to be effective.
+	 * Also used as a key for User `table_preferences` to save hidden columns and pagination limit.
+	 **/
 	model?: string
 }
 
