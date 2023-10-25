@@ -1,14 +1,13 @@
-import { type MantineTheme, createTheme } from '@mantine/core'
+import { type MantineTheme, createTheme, MantineColorsTuple } from '@mantine/core'
 import { themeToVars } from '@mantine/vanilla-extract'
 import breakpoints from './breakpoints.mjs'
 
 export const themeObject = {
-	...breakpoints,
+	breakpoints,
 	black: '#111111',
 	white: '#FCFCFC',
 	fontFamily: 'Roboto, sans-serif',
 	fontFamilyMonospace: 'Monaco, Courier, monospace',
-	// primaryColor: primaryColor,
 	defaultRadius: 'sm',
 	headings: {
 		fontFamily: 'Greycliff CF, Roboto, sans-serif',
@@ -19,6 +18,21 @@ export const themeObject = {
 		md: '1rem',
 		lg: '1.2rem',
 		xl: '1.4rem',
+	},
+	colors: {
+		// Adding this creates the css variables --mantine-colors-primaryColor-x
+		primaryColor: [
+			'#f2f0ff',
+			'#e0dff2',
+			'#bfbdde',
+			'#9b98ca',
+			'#7d79ba',
+			'#6a65b0',
+			'#605bac',
+			'#504c97',
+			'#464388',
+			'#3b3979',
+		] as MantineColorsTuple,
 	},
 	shadows: {
 		xs: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
@@ -72,11 +86,6 @@ export const themeObject = {
 
 export const theme = createTheme(themeObject) as MantineTheme
 
-// export const theme = themeObject() as MantineTheme
-
 const vars = themeToVars(theme)
-
-// Add primary colors array to theme object
-// vars.colors.primaryColors = vars.colors[vars.colors.primary]
 
 export { vars }

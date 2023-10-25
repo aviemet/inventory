@@ -1,4 +1,6 @@
-export {}
+import { MantineColorsTuple } from '@mantine/core'
+
+// export {}
 
 declare module '@mantine/core' {
 	export interface MantineThemeOther {

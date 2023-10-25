@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Box, px, useMantineTheme } from '@mantine/core'
+import { Box, useMantineTheme } from '@mantine/core'
 import { AppShell } from '@/Components'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
@@ -12,16 +12,7 @@ const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
 	const { sidebarOpen } = useLayoutStore()
 	const [mobileOpen, mobileHandlers] = useDisclosure(sidebarOpen)
-	const [desktopOpen] = useDisclosure(sidebarOpen)
-
-	useEffect(() => {
-		if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
-			console.log({ theme })
-			console.log({ breakpointsPx: Object.fromEntries(
-				Object.entries(theme.breakpoints).map(([key, val]) => [key, px(val)]),
-			) })
-		}
-	}, [])
+	// const [desktopOpen] = useDisclosure(sidebarOpen)
 
 	useEffect(() => {
 		if(sidebarOpen) {

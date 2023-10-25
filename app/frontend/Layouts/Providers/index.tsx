@@ -30,6 +30,7 @@ const queryClient = new QueryClient({
 })
 
 const Providers = React.memo(({ children }: IProviderProps) => {
+
 	return (
 		<QueryClientProvider client={ queryClient }>
 			{ process.env.NODE_ENV && process.env.NODE_ENV === 'development' && <ReactQueryDevtools position="bottom-right" /> }

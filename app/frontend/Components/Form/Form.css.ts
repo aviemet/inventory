@@ -10,7 +10,7 @@ export const form = css`
 	form.format-grid {
 		.field {
 			@media (min-width: ${vars.breakpoints.sm}) {
-				&:not(.textarea, .compact) {
+				&:not(.textarea, .checkbox, .compact) {
 					&:not(.no-grid) {
 						display: grid;
 					}
@@ -40,9 +40,9 @@ export const form = css`
 		border-top-width: 2px;
 		margin-top: ${vars.spacing.xs};
 
-		&.required {
-			border-color: ${vars.colors.primary}; // vars.colors[vars.primaryColor][8];
-		}
+		/* &.required {
+			border-color: ${vars.colors.primaryColor[7]}; // vars.colors[vars.primaryColor][8];
+		} */
 
 		&.field_with_errors {
 			border-color: ${vars.colors.red[6]};
