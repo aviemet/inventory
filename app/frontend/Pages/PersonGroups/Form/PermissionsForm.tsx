@@ -34,7 +34,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 			return Math.max(row.permissions.length, length)
 		}, 0)
 	}, [tableRows])
-	console.log({ person_group })
+
 	const handleSubmit = (form: UseFormProps<FormData>) => {
 		if(form.getData('person_group.permissions.company.admin')) {
 			form.transform(data => {

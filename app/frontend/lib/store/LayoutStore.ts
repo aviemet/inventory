@@ -1,6 +1,6 @@
 import { create } from 'zustand'
+import { defaultColor } from '../theme'
 
-const defaultPrimaryColor = 'violet'
 
 interface ILayoutState {
 	sidebarOpen: boolean
@@ -11,7 +11,7 @@ interface ILayoutState {
 
 const useLayoutStore = create<ILayoutState>()((set) => ({
 	sidebarOpen: false,
-	primaryColor: defaultPrimaryColor,
+	primaryColor: defaultColor,
 
 	toggleSidebarOpen: sidebarOpen => set(state => {
 		let setValue = sidebarOpen

@@ -1,6 +1,8 @@
-import { createTheme, MantineColorsTuple } from '@mantine/core'
+import { createTheme, DEFAULT_THEME, mergeMantineTheme } from '@mantine/core'
 import { themeToVars } from '@mantine/vanilla-extract'
 import breakpoints from './breakpoints.mjs'
+
+export const defaultColor = 'violet'
 
 export const themeObject = {
 	breakpoints,
@@ -21,19 +23,7 @@ export const themeObject = {
 	},
 	colors: {
 		// Adding this creates the css variables --mantine-colors-primaryColor-[x] to be overridden by the ThemeProvider
-		// Initial values are the 'violet' color scheme
-		primaryColor: [
-			'#f6ecff',
-			'#e7d6fb',
-			'#caabf1',
-			'#ac7ce8',
-			'#9354e0',
-			'#833cdb',
-			'#7b2eda',
-			'#6921c2',
-			'#5d1cae',
-			'#501599',
-		] as MantineColorsTuple,
+		primaryColor: DEFAULT_THEME.colors[defaultColor],
 	},
 	// shadows: {
 	// 	xs: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
@@ -85,6 +75,8 @@ export const themeObject = {
 	},
 }
 
-const vars = themeToVars(createTheme(themeObject))
+export const theme = mergeMantineTheme(DEFAULT_THEME, createTheme(themeObject))
+
+const vars = themeToVars(theme)
 
 export { vars }
