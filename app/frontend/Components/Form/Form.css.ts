@@ -40,9 +40,9 @@ export const form = css`
 		border-top-width: 2px;
 		margin-top: ${vars.spacing.xs};
 
-		/* &.required {
-			border-color: ${vars.colors.primaryColor[7]}; // vars.colors[vars.primaryColor][8];
-		} */
+		&.required {
+			border-color: ${vars.colors.primaryColor[8]}; // vars.colors[vars.primaryColor][8];
+		}
 
 		&.field_with_errors {
 			border-color: ${vars.colors.red[6]};
