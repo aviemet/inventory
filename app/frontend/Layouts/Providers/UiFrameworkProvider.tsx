@@ -6,6 +6,7 @@ import { usePageProps } from '@/lib/hooks'
 import { DatesProvider } from '@mantine/dates'
 import { theme as themeObject, vars } from '@/lib/theme'
 import { type CSSVariables } from '@mantine/core/lib/core/MantineProvider/convert-css-variables/css-variables-object-to-string'
+import { toKebabCase } from '@/lib'
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const { auth } = usePageProps()
@@ -27,17 +28,22 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const cssVariablesResolver = useMemo((): CSSVariablesResolver => {
 		return (resolverTheme) => {
 			const variables: CSSVariables = {}
-			for(let i = 0; i <= 9; i++) {
-				variables[`--mantine-color-primaryColor-${i}`] = resolverTheme.colors[primaryColor][i]
-			}
-			// ['filled', 'filled-hover', 'light', 'light-hover', 'light-color', 'outline', 'outline-hover'].forEach(key => {
-			// 	variables[`--mantine-color-primaryColor-${key}`] = resolverTheme.colors[primaryColor][ ??? ]
-			// })
+			const dark: CSSVariables = {}
+			const light: CSSVariables = {}
+
+			Object.entries(vars.colors[primaryColor]).forEach(([key, val]) => {
+				if(key.match(/[0-9]/)) {
+					variables[`--mantine-color-primary-${toKebabCase(key)}`] = val
+				} else {
+					dark[`--mantine-color-primary-${toKebabCase(key)}`] = val
+					light[`--mantine-color-primary-${toKebabCase(key)}`] = val
+				}
+			})
 
 			return {
 				variables,
-				dark: {},
-				light: {},
+				dark,
+				light,
 			}
 		}
 	}, [primaryColor])

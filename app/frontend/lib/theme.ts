@@ -21,10 +21,6 @@ export const themeObject = {
 		lg: '1.2rem',
 		xl: '1.4rem',
 	},
-	colors: {
-		// Adding this creates the css variables --mantine-colors-primaryColor-[x] to be overridden by the ThemeProvider
-		primaryColor: DEFAULT_THEME.colors[defaultColor],
-	},
 	// shadows: {
 	// 	xs: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
 	// 	sm: '0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)',
@@ -77,6 +73,11 @@ export const themeObject = {
 
 export const theme = mergeMantineTheme(DEFAULT_THEME, createTheme(themeObject))
 
-const vars = themeToVars(theme)
+const vars = themeToVars(mergeMantineTheme(theme, createTheme({
+	// Overrides the primary color key for css vars. Values are set in UiFrameworkProvider
+	colors: {
+		primary: DEFAULT_THEME.colors[defaultColor],
+	},
+})))
 
 export { vars }

@@ -102,7 +102,7 @@ export const table = css`
 			background-color: ${vars.colors.dark[7]};
 			border-radius: ${rem(4)};
 			padding: ${rem(6)};
-			border-bottom: 1px solid ${vars.colors.primary};
+			border-bottom: 1px solid ${vars.colors.primary.filled};
 		}
 
 		td {

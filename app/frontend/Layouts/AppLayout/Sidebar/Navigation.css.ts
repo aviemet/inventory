@@ -19,7 +19,7 @@ export const links = css`
 export const closed = css``
 
 export const active = css`
-	border-left-color: ${vars.colors.primary};
+	border-left-color: ${vars.colors.primary.filled};
 `
 
 export const navbar = css`
@@ -33,11 +33,11 @@ export const navbar = css`
 		border-left-color: transparent;
 
 		&.${active} {
-			border-left-color: ${vars.colors.primary};
+			border-left-color: ${vars.colors.primary.filled};
 		}
 
 		&:hover {
-			border-left-color: ${vars.colors.primary};
+			border-left-color: ${vars.colors.primary.filled};
 			box-shadow: ${vars.shadows.lg};
 
 			&, ul {
@@ -147,11 +147,11 @@ export const navbar = css`
 			border-left-color: transparent;
 
 			&.${active} {
-				border-left-color: ${vars.colors.primary};
+				border-left-color: ${vars.colors.primary.filled};
 			}
 
 			&:hover {
-				border-left-color: ${vars.colors.primary};
+				border-left-color: ${vars.colors.primary.filled};
 				box-shadow: ${vars.shadows.lg};
 
 				&, ul {

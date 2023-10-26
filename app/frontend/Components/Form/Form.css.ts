@@ -36,12 +36,12 @@ export const form = css`
 			background-color: ${vars.colors.dark[7]};
 		}
 		width: 100%;
-		border-color: ${vars.colors.primaryColor[1]};
+		border-color: ${vars.colors.primary[3]};
 		border-top-width: 2px;
 		margin-top: ${vars.spacing.xs};
 
 		&.required {
-			border-color: ${vars.colors.primaryColor[8]};
+			border-color: ${vars.colors.primary[8]};
 		}
 
 		&.field_with_errors {
