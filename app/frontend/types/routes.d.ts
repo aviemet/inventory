@@ -1776,18 +1776,6 @@ export const editPurchase: ((
 
 /**
  * Generates rails route to
- * /rails/conductor/action_mailbox/inbound_emails/:id/edit(.:format)
- * @param {any} id
- * @param {object | undefined} options
- * @returns {string} route path
- */
-export const editRailsConductorInboundEmail: ((
-  id: RequiredRouteParameter,
-  options?: {format?: OptionalRouteParameter} & RouteOptions
-) => string) & RouteHelperExtras;
-
-/**
- * Generates rails route to
  * /settings/asset_tags/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options

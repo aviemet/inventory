@@ -5,7 +5,7 @@ ruby "3.2.2"
 
 # Server
 gem "rails", "~> 7.1"
-gem "sprockets-rails"
+# gem "sprockets-rails"
 gem "pg", "~> 1.1"
 gem "puma", "~> 6.0"
 
@@ -57,7 +57,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   gem "rspec-rails", "~> 6.0.1"
-  gem "factory_bot_rails", "~> 6.2"
+  gem "factory_bot_rails", "6.2"
   gem "pry-rails", "~> 0.3.9"
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 
