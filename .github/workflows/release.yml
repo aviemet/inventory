@@ -9,10 +9,7 @@ jobs:
 
     name: "Bump version and publish docker image"
 
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
+    permissions: write-all
 
     steps:
       - name: Check out
