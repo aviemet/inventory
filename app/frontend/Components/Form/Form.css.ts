@@ -36,7 +36,7 @@ export const form = css`
 			background-color: ${vars.colors.dark[7]};
 		}
 		width: 100%;
-		border-color: ${vars.colors.primary[3]};
+		border-color: ${vars.colors.primary[2]};
 		border-top-width: 2px;
 		margin-top: ${vars.spacing.xs};
 
@@ -89,10 +89,12 @@ export const fieldset = css`
 	margin-top: ${vars.spacing.xs};
 	padding: 10;
 	position: relative;
+
 	${vars.lightSelector} {
 		border-top: 2px solid ${vars.colors.white};
 		background-color: ${darken(vars.colors.white, fieldsetAlphaAdjustment)};
 	}
+
 	${vars.darkSelector} {
 		border-top: 2px solid ${vars.colors.black};
 		background-color: ${lighten(vars.colors.black, fieldsetAlphaAdjustment)};
@@ -106,9 +108,11 @@ export const fieldset = css`
 		position: absolute;
 		top: -1.75rem;
 		display: inline-block;
+
 	${vars.lightSelector} {
-			color: ${vars.colors.black};
-		}
+		color: ${vars.colors.black};
+	}
+	
 	${vars.darkSelector} {
 			color: ${vars.colors.white};
 		}
