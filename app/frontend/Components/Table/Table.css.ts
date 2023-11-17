@@ -98,6 +98,11 @@ export const table = css`
 		tr {
 			display: flex;
 			flex-direction: column;
+			margin-bottom: 10px;
+			background-color: ${vars.colors.dark[7]};
+			border-radius: ${rem(4)};
+			padding: ${rem(6)};
+			border-bottom: 1px solid ${vars.colors.primary.filled};
 		}
 
 		td {
@@ -106,6 +111,10 @@ export const table = css`
 
 			&::before {
 				content: attr(data-cell);
+			}
+
+			&.table-row-select-checkbox {
+				visibility: collapse;
 			}
 		}
 	}

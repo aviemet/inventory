@@ -29,7 +29,7 @@ const Show = ({ model }: IShowModelProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editModel(model) } icon={ <EditIcon /> }>
+							<Menu.Link href={ Routes.editModel(model) } leftSection={ <EditIcon /> }>
 								Edit Model
 							</Menu.Link>
 						</Menu.Dropdown>

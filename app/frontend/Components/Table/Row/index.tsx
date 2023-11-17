@@ -1,10 +1,12 @@
 import React from 'react'
 import { useTableContext } from '../TableContext'
-import { TRProps } from 'react-html-props'
 import RowInContext from './RowInContext'
 import { Box, type BoxProps } from '@mantine/core'
 
-export interface ITableRow extends BoxProps, TRProps {
+export interface ITableRow
+	extends BoxProps,
+	Omit<React.ComponentPropsWithoutRef<'tr'>, keyof BoxProps>
+{
 	children?:  JSX.Element | JSX.Element[]
 }
 
@@ -23,6 +25,7 @@ const Row = ({ children, render, name, ...props }: IRowProps) => {
 			</Box>
 		)
 	}
+
 	const { tableState: { rows, selectable, selected } } = tableState
 
 	return (

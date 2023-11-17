@@ -22,7 +22,8 @@ const RowInContext = forwardRef<HTMLTableRowElement, IRowInContextProps>((
 	return (
 		<Box component="tr" role="row" { ...props } ref={ ref }>
 			{ selectable && <RowCheckbox name={ name || '' } selected={ selected } /> }
-			{ React.Children.map(children, (cell, i) => {
+
+			{ children && React.Children.map(children, (cell, i) => {
 				if((
 					columns[i]?.hideable &&
 					model &&
@@ -36,6 +37,7 @@ const RowInContext = forwardRef<HTMLTableRowElement, IRowInContextProps>((
 					role: 'cell',
 				})
 			}) }
+
 		</Box>
 	)
 })

@@ -1,5 +1,5 @@
 
-import { Routes } from '@/lib'
+import { Routes, toCamelCase } from '@/lib'
 export { default as IPAddress } from './IPAddress'
 
 export * as Routes from '@/types/routes'
@@ -11,6 +11,5 @@ export * from './collections'
 export * from './forms'
 
 export const polymorphicRoute = (model: string, param: string|number) => {
-	// @ts-ignore
-	return Routes[camelize(model)](param)
+	return Routes[toCamelCase(model)](param)
 }

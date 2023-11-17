@@ -23,7 +23,7 @@ const RowCheckbox = ({ name, selected }: IRowCheckBox) => {
 	}
 
 	return (
-		<Cell fitContent>
+		<Cell fitContent className="table-row-select-checkbox">
 			<Checkbox checked={ selected?.has(name) } onChange={ handleClick } />
 		</Cell>
 	)

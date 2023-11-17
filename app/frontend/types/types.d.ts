@@ -10,15 +10,15 @@ declare global {
 	type TAssignToable = 'Person' | 'Item' | 'Location'
 	type TAssignable = 'Item' | 'Accessory' | 'Component' | 'Consumable' | 'License'
 
-	type TPermissions = {
-		index?: boolean
-		show?: boolean
-		create?: boolean
-		update?: boolean
-		delete?: boolean
-		checkout?: boolean
-		checkin?: boolean
-	}
+	// type TPermissions = {
+	// 	index?: boolean
+	// 	show?: boolean
+	// 	create?: boolean
+	// 	update?: boolean
+	// 	delete?: boolean
+	// 	checkout?: boolean
+	// 	checkin?: boolean
+	// }
 
 	type PaginatedModel<T> = {
 		data: T

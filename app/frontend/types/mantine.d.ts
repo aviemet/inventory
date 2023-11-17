@@ -1,4 +1,48 @@
-export {}
+import { MantineColor, MantineColorsTuple } from '@mantine/core'
+import { MantineVars } from '@mantine/vanilla-extract'
+import { Colors } from '@mantine/vanilla-extract/lib/types'
+
+type OverriddenColors = {
+	[key in keyof Colors]: key extends 'primary'
+		? {
+			0: string
+			1: string
+			2: string
+			3: string
+			4: string
+			5: string
+			6: string
+			7: string
+			8: string
+			9: string
+			filled: string
+			filledHover: string
+			light: string
+			lightHover: string
+			lightColor: string
+			outline: string
+			outlineHover: string
+		}
+		: Colors[key]
+}
+
+const thing: OverriddenColors
+
+declare module '@mantine/vanilla-extract/lib/types' {
+	type Colors = OverriddenColors
+
+	interface MantineVars {
+		colors: OverriddenColors
+	}
+}
+
+declare module '@mantine/vanilla-extract' {
+	type Colors = OverriddenColors
+
+	interface MantineVars {
+		colors: OverriddenColors
+	}
+}
 
 declare module '@mantine/core' {
 	export interface MantineThemeOther {

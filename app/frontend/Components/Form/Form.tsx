@@ -27,7 +27,7 @@ const Form = <TForm extends NestedObject>({
 }: IFormProps<TForm>) => {
 	return (
 		<FormFormatProvider value={ { disableFormatting } }>
-			<Box className={ classes.form } px="xs" pt="xs">
+			<Box className={ cx(classes.form) } px="xs" pt="xs">
 				<InertiaForm
 					data={ data }
 					className={ cx({ 'format-grid': !disableFormatting }, className) }

@@ -1,6 +1,7 @@
-name: Bump version
+name: Release
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -11,6 +12,11 @@ jobs:
 
     name: "Bump version and publish docker image"
 
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
     steps:
       - name: Check out
         uses: actions/checkout@v3
@@ -18,7 +24,7 @@ jobs:
       - name: Version Bump
         run: |
           npm install -g semantic-release @semantic-release/changelog @semantic-release/git
-          semantic-release
+          npx semantic-release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -4,14 +4,14 @@
 export {}
 
 declare global {
-  namespace Schema {
-    interface PersonGroupsFormData {
-      id?: number
-      description?: string
-      name?: string
-      permissions: {
-    [key: string]: Record<string, boolean>
-    }
-    }
-  }
+	namespace Schema {
+		interface PersonGroupsFormData {
+			id?: number
+			description?: string
+			name?: string
+			permissions: {
+				[key: string]: Record<string, boolean>
+			}
+		}
+	}
 }

@@ -28,7 +28,7 @@ const Show = ({ order }: IShowOrderProps) => {
 					<Menu position="bottom-end">
 						<Menu.Target />
 						<Menu.Dropdown>
-							<Menu.Link href={ Routes.editOrder(order) } icon={ <EditIcon /> }>
+							<Menu.Link href={ Routes.editOrder(order) } leftSection={ <EditIcon /> }>
 								Edit Order
 							</Menu.Link>
 						</Menu.Dropdown>
