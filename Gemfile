@@ -4,13 +4,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.2"
 
 # Server
-gem "rails", "~> 7.0.4", ">= 7.0.4.3"
-gem "sprockets-rails"
+gem "rails", "~> 7.1"
+# gem "sprockets-rails"
 gem "pg", "~> 1.1"
 gem "puma", "~> 6.0"
 
 # Assets
-gem "inertia_rails", "~> 3.0.0"
+gem "inertia_rails", "~> 3.1.0"
 gem "vite_rails", "~> 3.0"
 
 # Models
@@ -36,7 +36,7 @@ gem "factory_bot", "~> 6.2"
 gem "ipaddress_2", "~> 0.14.0"
 gem "countries", ">= 4.2"
 gem "js-routes", "~> 2.2"
-gem "net-ldap", "~> 0.17.1"
+gem "net-ldap", ">= 0.18.0"
 gem "foreman", "~> 0.87.2"
 gem "amazing_print", "~> 1.4"
 gem "delayed_job_active_record", "~> 4.1"
@@ -57,7 +57,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   gem "rspec-rails", "~> 6.0.1"
-  gem "factory_bot_rails", "~> 6.2"
+  gem "factory_bot_rails", "6.2"
   gem "pry-rails", "~> 0.3.9"
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 
@@ -85,9 +85,9 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
+  gem "capybara", "~> 3.39"
+  gem "selenium-webdriver", "~> 4.10"
+  gem "webdrivers", "~> 5.3"
   gem "generator_spec", "~> 0.9.4"
   gem "database_cleaner-active_record", "~> 2.0"
   gem "shoulda-matchers", "~> 5.1"
