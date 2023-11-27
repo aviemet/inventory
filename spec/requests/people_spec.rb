@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/people", type: :request do
+RSpec.describe "/people" do
   def valid_attributes
     {
       person: attributes_for(:person)
@@ -86,7 +86,7 @@ RSpec.describe "/people", type: :request do
       it "does not create a new Person" do
         expect {
           post people_url, params: invalid_attributes
-        }.to change(Person, :count).by(0)
+        }.not_to change(Person, :count)
       end
 
       it "redirects back to the new person page" do

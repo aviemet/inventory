@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/items", type: :request do
+RSpec.describe "/items" do
   def valid_attributes
     {
       item: attributes_for(:item,
@@ -95,7 +95,7 @@ RSpec.describe "/items", type: :request do
       it "does not create a new Item" do
         expect {
           post items_url, params: invalid_attributes
-        }.to change(Item, :count).by(0)
+        }.not_to change(Item, :count)
       end
 
       it "redirects back to the new item page" do

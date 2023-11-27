@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/components", type: :request do
+RSpec.describe "/components" do
 
   def valid_attributes
     {
@@ -80,7 +80,7 @@ RSpec.describe "/components", type: :request do
       it "does not create a new Component" do
         expect {
           post components_url, params: invalid_attributes
-        }.to change(Component, :count).by(0)
+        }.not_to change(Component, :count)
       end
 
       it "redirects back to the new component page" do

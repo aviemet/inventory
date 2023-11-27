@@ -16,11 +16,11 @@ RSpec.describe Accessory, type: :model do
     it "is invalid with invalid attributes" do
       expect(build(:accessory, {
         name: nil
-      },)).to_not be_valid
+      },)).not_to be_valid
 
       expect(build(:accessory, {
         model: nil
-      },)).to_not be_valid
+      },)).not_to be_valid
     end
 
     it "uses money-rails to handle cost" do

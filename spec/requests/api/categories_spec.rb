@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../support/devise'
 
-RSpec.describe "Api::Categories", type: :request do
+RSpec.describe "Api::Categories" do
   describe "POST /create" do
     login_admin
 
@@ -22,7 +22,7 @@ RSpec.describe "Api::Categories", type: :request do
       it "does not create a new Category" do
         expect {
           post api_categories_url, params: { category: { name: "" } }
-        }.to change(Category, :count).by(0)
+        }.not_to change(Category, :count)
       end
 
       it "responds with errors" do
@@ -39,7 +39,7 @@ RSpec.describe "Api::Categories", type: :request do
       it "updates the Category" do
         category = create(:category, {
           company: @admin.active_company
-        })
+        },)
         patch api_category_url(category.slug), params: { category: { name: "Changed" } }
         expect(Category.last.name).to eq("Changed")
       end
@@ -54,7 +54,7 @@ RSpec.describe "Api::Categories", type: :request do
       it "does not create a new Category" do
         expect {
           post api_categories_url, params: { category: { name: "" } }
-        }.to change(Category, :count).by(0)
+        }.not_to change(Category, :count)
       end
 
       it "responds with errors" do

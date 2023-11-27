@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/models", type: :request do
+RSpec.describe "/models" do
   def valid_attributes
     {
       model: attributes_for(:model, {
@@ -89,7 +89,7 @@ RSpec.describe "/models", type: :request do
       it "does not create a new Model" do
         expect {
           post models_url, params: invalid_attributes
-        }.to change(Model, :count).by(0)
+        }.not_to change(Model, :count)
       end
 
       it "redirects back to the new model page" do

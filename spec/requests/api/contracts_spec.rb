@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Contracts", type: :request do
+RSpec.describe "Api::Contracts" do
 end

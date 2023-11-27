@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../support/devise'
 
-RSpec.describe "Settings::Logs", type: :request do
+RSpec.describe "Settings::Logs" do
   describe "GET /index" do
     login_admin
 

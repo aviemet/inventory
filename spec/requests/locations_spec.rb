@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/locations", type: :request do
+RSpec.describe "/locations" do
   def valid_attributes
     {
       location: attributes_for(:location)
@@ -86,7 +86,7 @@ RSpec.describe "/locations", type: :request do
       it "does not create a new Location" do
         expect {
           post locations_url, params: invalid_attributes
-        }.to change(Location, :count).by(0)
+        }.not_to change(Location, :count)
       end
 
       it "redirects back to the new location page" do

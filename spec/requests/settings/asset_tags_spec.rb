@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../support/devise'
 
-RSpec.describe "Settings::AssetTags", type: :request do
+RSpec.describe "Settings::AssetTags" do
   describe "GET /index" do
     login_admin
 

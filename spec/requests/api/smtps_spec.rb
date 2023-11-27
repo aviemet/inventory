@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../support/devise'
 
-RSpec.describe "Api::Smtps", type: :request do
+RSpec.describe "Api::Smtps" do
   describe "POST /test" do
     login_admin
 
@@ -10,9 +10,9 @@ RSpec.describe "Api::Smtps", type: :request do
 
       post api_smtp_test_path, params: { smtp: smtp.as_json }
 
-      response_body = JSON.parse(response.body)
+      response_body = response.parsed_body
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
       expect(response_body["success"]).to be(false)
     end
 

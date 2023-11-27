@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Users", type: :request do
+RSpec.describe "Api::Users" do
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/networks", type: :request do
+RSpec.describe "/networks" do
   def valid_attributes
     {
       network: attributes_for(:network)
@@ -86,7 +86,7 @@ RSpec.describe "/networks", type: :request do
       it "does not create a new Network" do
         expect {
           post networks_url, params: invalid_attributes
-        }.to change(Network, :count).by(0)
+        }.not_to change(Network, :count)
       end
 
       it "redirects back to the new network page" do

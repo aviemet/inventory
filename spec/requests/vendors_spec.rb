@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/vendors", type: :request do
+RSpec.describe "/vendors" do
   def valid_attributes
     {
       vendor: attributes_for(:vendor)
@@ -86,7 +86,7 @@ RSpec.describe "/vendors", type: :request do
       it "does not create a new Vendor" do
         expect {
           post vendors_url, params: invalid_attributes
-        }.to change(Vendor, :count).by(0)
+        }.not_to change(Vendor, :count)
       end
 
       it "redirects back to the new vendor page" do

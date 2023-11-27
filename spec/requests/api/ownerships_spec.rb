@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Ownerships", type: :request do
+RSpec.describe "Api::Ownerships" do
 end

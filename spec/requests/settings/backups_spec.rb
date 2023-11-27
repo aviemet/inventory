@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../support/devise'
 
-RSpec.describe "Settings::Backups", type: :request do
+RSpec.describe "Settings::Backups" do
   describe "GET /index" do
     login_admin
 

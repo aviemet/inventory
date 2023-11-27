@@ -1,14 +1,14 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/assets", type: :request do
+RSpec.describe "/assets" do
   def valid_attributes
     {
       asset: attributes_for(:asset,
                             status_label_id: create(:status_label).id,
                             model_id: create(:model).id,
                             vendor_id: create(:vendor).id,
-                            default_location_id: create(:location).id)
+                            default_location_id: create(:location).id,)
     }
   end
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/documentations", type: :request do
+RSpec.describe "/documentations" do
   def valid_attributes(documentable)
     attrs = {
       documentation: attributes_for(:documentation, documentable:),
@@ -89,7 +89,7 @@ RSpec.describe "/documentations", type: :request do
       it "does not create a new Documentation redirects back to the new documentation page" do
         expect {
           post documentations_url, params: invalid_attributes
-        }.to change(Documentation, :count).by(0)
+        }.not_to change(Documentation, :count)
         expect(response).to redirect_to new_documentation_url
       end
     end

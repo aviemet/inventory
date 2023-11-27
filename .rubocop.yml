@@ -105,8 +105,6 @@ Bundler/OrderedGems:
 
 RSpec/MultipleExpectations:
   Enabled: false
-RSpec/MultipleExpectations:
-  Enabled: false
 RSpec/ExampleLength:
   Enabled: false
 RSpec/InstanceVariable:

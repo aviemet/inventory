@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Currencies", type: :request do
+RSpec.describe "Api::Currencies" do
 end

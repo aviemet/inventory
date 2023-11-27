@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Api::IpLeases", type: :request do
+RSpec.describe "Api::IpLeases" do
 end

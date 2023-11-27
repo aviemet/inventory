@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Contracts", type: :request do
+RSpec.describe "Contracts" do
   def valid_attributes
     {
       contract: attributes_for(:contract,
@@ -88,7 +88,7 @@ RSpec.describe "Contracts", type: :request do
       it "does not create a new contract" do
         expect {
           post contracts_url, params: invalid_attributes
-        }.to change(Contract, :count).by(0)
+        }.not_to change(Contract, :count)
       end
 
       it "redirects back to the new contract page" do

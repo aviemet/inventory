@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Fields", type: :request do
+RSpec.describe "Api::Fields" do
 end
