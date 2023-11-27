@@ -103,6 +103,15 @@ Lint/MixedRegexpCaptureTypes:
 Bundler/OrderedGems:
   Enabled: false
 
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/InstanceVariable:
+  Enabled: false
+
 # Relaxed.Ruby.Style
 ## Version 2.5
 

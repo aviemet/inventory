@@ -1,18 +1,18 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Assignments", type: :request do
+RSpec.describe "Assignments" do
   def assign_toables
     {
       item: create(:item, {
         company: @admin.active_company
-      }),
+      },),
       person: create(:person, {
         company: @admin.active_company
-      }),
+      },),
       location: create(:location, {
         company: @admin.active_company
-      }),
+      },),
     }
   end
 
@@ -87,7 +87,7 @@ RSpec.describe "Assignments", type: :request do
         item = create(:item, company: @admin.active_company)
         expect {
           post assignments_url, params: { assignment: assignment_params(item) }
-        }.to change(Assignment, :count).by(0)
+        }.not_to change(Assignment, :count)
         expect(response).to redirect_to(checkout_item_url(item))
       end
 
@@ -95,7 +95,7 @@ RSpec.describe "Assignments", type: :request do
         accessory = create(:accessory, company: @admin.active_company)
         expect{
           post assignments_url, params: { assignment: assignment_params(accessory) }
-        }.to change(Assignment, :count).by(0)
+        }.not_to change(Assignment, :count)
         expect(response).to redirect_to(checkout_accessory_url(accessory))
       end
 
@@ -103,7 +103,7 @@ RSpec.describe "Assignments", type: :request do
         consumable = create(:consumable, company: @admin.active_company, qty: 2)
         expect {
           post assignments_url, params: { assignment: assignment_params(consumable) }
-        }.to change(Assignment, :count).by(0)
+        }.not_to change(Assignment, :count)
         expect(response).to redirect_to(checkout_consumable_url(consumable))
       end
 
@@ -111,7 +111,7 @@ RSpec.describe "Assignments", type: :request do
         component = create(:component, company: @admin.active_company)
         expect {
           post assignments_url, params: { assignment: assignment_params(component) }
-        }.to change(Assignment, :count).by(0)
+        }.not_to change(Assignment, :count)
         expect(response).to redirect_to(checkout_component_url(component))
       end
 
@@ -119,7 +119,7 @@ RSpec.describe "Assignments", type: :request do
         license = create(:license, company: @admin.active_company)
         expect {
           post assignments_url, params: { assignment: assignment_params(license) }
-        }.to change(Assignment, :count).by(0)
+        }.not_to change(Assignment, :count)
         expect(response).to redirect_to(checkout_license_url(license))
       end
 
