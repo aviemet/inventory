@@ -24,12 +24,12 @@
 /tmp/storage/*
 !/tmp/storage/
 !/tmp/storage/.keep
-
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Ignore compiled assets
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
@@ -44,6 +44,7 @@ node_modules
 # Vite uses dotenv and suggests to ignore local-only env files. See
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
+.env
 *.env
 .env.*
 .envrc
@@ -61,9 +62,9 @@ yarn-error.log
 # VSCode files
 .vscode
 
-# Test results output
-spec/examples.txt
-coverage
+# OS specific files
+.DS_Store
+
 # Test results output
 spec/examples.txt
 coverage
