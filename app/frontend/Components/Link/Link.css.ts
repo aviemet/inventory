@@ -8,4 +8,8 @@ export const external = css`
 		display: inline-block;
 		vertical-align: text-top;
 	}
+	
+	&[disabled], &[data-disabled] {
+		pointer-events: none;
+	}
 `
