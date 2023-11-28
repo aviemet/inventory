@@ -1,12 +1,10 @@
 import React, { forwardRef } from 'react'
-import { Link, router, type InertiaLinkProps } from '@inertiajs/react'
+import { router } from '@inertiajs/react'
 import { Method, Visit } from '@inertiajs/core'
-import { Anchor, type AnchorProps, type ButtonProps } from '@mantine/core'
+import { type ButtonProps } from '@mantine/core'
 import { Button } from '@/Components'
-
-interface IAnchorLinkProps extends Omit<InertiaLinkProps, 'color'|'size'|'span'>, Omit<AnchorProps, 'href'> {}
-
-const AnchorLink = forwardRef<HTMLAnchorElement, IAnchorLinkProps>((props, ref) => <Anchor ref={ ref } component={ Link } { ...props } />)
+import { exclude } from '@/lib/collections'
+import AnchorLink, { type IAnchorLinkProps } from '@/Components/Link/AnchorLink'
 
 interface ILinkProps extends IAnchorLinkProps {
 	children?: React.ReactNode
@@ -19,7 +17,7 @@ interface ILinkProps extends IAnchorLinkProps {
 }
 
 const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', method, visit, buttonProps, style, ...props },
+	{ children, href, as = 'a', method, visit, buttonProps, style, disabled, ...props },
 	ref,
 ) => {
 	const handleHTTP = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -31,15 +29,19 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 		})
 	}
 
+	const mergedButtonProps = Object.assign({ disabled }, buttonProps, exclude(props, ['classNames', 'styles', 'vars']))
+
+	const processedHref = disabled ? '#' : href
+
 	if((method !== undefined && method !== 'get')) {
 		return <Button
 			ref={ ref }
 			component={ AnchorLink }
-			href={ href }
+			href={ processedHref }
 			onClick={ handleHTTP }
 			style={ [{ '&:hover': { textDecoration: 'none' } }, style] }
 			c="bright"
-			{ ...props }
+			{ ...mergedButtonProps }
 		>
 			{ children }
 		</Button>
@@ -49,17 +51,17 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 		return <Button
 			ref={ ref }
 			component={ AnchorLink }
-			href={ href }
+			href={ processedHref }
 			style={ [{ '&:hover': { textDecoration: 'none' } }, style] }
 			c="bright"
-			{ ...props }
+			{ ...mergedButtonProps }
 		>
 			{ children }
 		</Button>
 	}
 
 	return (
-		<AnchorLink href={ href } ref={ ref } { ...props }>{ children }</AnchorLink>
+		<AnchorLink href={ processedHref } ref={ ref } { ...props }>{ children }</AnchorLink>
 	)
 })
 

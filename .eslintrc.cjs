@@ -11,6 +11,9 @@ module.exports = {
 	],
 	'plugins': ['react', '@typescript-eslint', 'import'],
 	'settings': {
+		'react': {
+			'version': 'detect',
+		},
 		'import/resolver': {
 			'typescript': {},
 		},

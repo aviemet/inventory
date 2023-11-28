@@ -1,6 +1,8 @@
 import React from 'react'
 import { Table } from '@/Components'
 import EditableLink from './EditableLink'
+import cx from 'clsx'
+import * as classes from './NetworkDetailsTable.css'
 
 interface INetworkDetailsTableProps {
 	hosts: string[]
@@ -22,13 +24,7 @@ const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 					const item = ips.find(ip => ip.address === host)?.item
 
 					return (
-						<Table.Row key={ host } style={ theme => ({
-							height: 40,
-
-							'&:hover .item-ip-assign-button, & .item-ip-assign-button.editing': {
-								color: theme.colors.gray[4],
-							},
-						}) }>
+						<Table.Row key={ host } className={ cx(classes.row) }>
 							<Table.Cell fitContent>{ host }</Table.Cell>
 							<Table.Cell>
 								<EditableLink item={ item } ip={ host } />
