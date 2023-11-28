@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe TicketStatus, type: :model do
+RSpec.describe TicketStatus do
 end

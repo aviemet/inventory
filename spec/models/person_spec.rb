@@ -5,8 +5,8 @@ require 'models/concerns/assign_toable'
 require 'models/concerns/fieldable'
 require "models/concerns/serializable"
 
-RSpec.describe Person, type: :model do
-  subject { create(:person) }
+RSpec.describe Person do
+  subject(:person) { create(:person) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
@@ -16,11 +16,11 @@ RSpec.describe Person, type: :model do
     it "is invalid with invalid attributes" do
       expect(build(:person, {
         first_name: nil
-      },)).to_not be_valid
+      },)).not_to be_valid
 
       expect(build(:person, {
         last_name: nil
-      },)).to_not be_valid
+      },)).not_to be_valid
     end
   end
 
@@ -30,13 +30,13 @@ RSpec.describe Person, type: :model do
     it_behaves_like "assign_toable"
     it_behaves_like "fieldable"
 
-    it { should belong_to(:user).optional }
-    it { should belong_to(:manager).class_name('Person').optional }
-    it { should belong_to(:location).optional }
-    it { should have_many(:tickets) }
-    it { should have_many(:groups) }
+    it { is_expected.to belong_to(:user).optional }
+    it { is_expected.to belong_to(:manager).class_name('Person').optional }
+    it { is_expected.to belong_to(:location).optional }
+    it { is_expected.to have_many(:tickets) }
+    it { is_expected.to have_many(:groups) }
 
-    it "should return a value for default_location" do
+    it "returns a value for default_location" do
       person = build(:person)
       person.location = nil
 
@@ -47,7 +47,7 @@ RSpec.describe Person, type: :model do
 
       person.location = build(:location)
       expect(person.default_location).to be(person.location)
-      expect(person.default_location).to_not be(person.department.location)
+      expect(person.default_location).not_to be(person.department.location)
     end
   end
 

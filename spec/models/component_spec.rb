@@ -3,26 +3,26 @@ require "models/concerns/ownable"
 require "models/concerns/assignable"
 require "models/concerns/serializable"
 
-RSpec.describe Component, type: :model do
-  subject { build(:component) }
+RSpec.describe Component do
+  subject(:component) { build(:component) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(component).to be_valid
     end
 
     it "is invalid with invalid attributes" do
       expect(build(:component, {
         name: nil
-      },)).to_not be_valid
+      },)).not_to be_valid
 
       component = build(:component)
       component.model = nil
-      expect(component).to_not be_valid
+      expect(component).not_to be_valid
     end
 
     it "uses money-rails to handle cost" do
-      expect(subject.cost).to be_a Money
+      expect(component.cost).to be_a Money
     end
   end
 

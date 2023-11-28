@@ -2,38 +2,44 @@ require 'rails_helper'
 require 'models/concerns/ownable'
 require "models/concerns/serializable"
 
-RSpec.describe Network, type: :model do
-  subject { build(:network) }
-
-  describe "Validations" do
-    it "is valid with valid attributes" do
-      expect(subject).to be_valid
-    end
-
-    it "is invalid with invalid attributes" do
-      expect(build(:network, {
-        address: nil
-      },)).to_not be_valid
-
-      expect(build(:network, {
-        address: "10.10.10.1"
-      },)).to_not be_valid
-    end
-  end
+RSpec.describe Network do
+  subject(:network) {
+    build(:network, {
+      network_address: "10.10.10.10",
+      subnet: 24,
+    },)
+  }
 
   describe "Defaults" do
     it "fixes network address inputs to find the closest network address" do
-      network = build(:network, {
-        address: "10.10.10.1/24"
-      },)
       expect(network).to be_valid
       expect(network.address.to_s).to eq("10.10.10.0")
     end
   end
 
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(network).to be_valid
+    end
+
+    it "is invalid with invalid attributes" do
+      expect(build(:network, {
+        address: nil
+      },)).not_to be_valid
+
+      expect(build(:network, {
+        subnet: 32,
+      },)).not_to be_valid
+    end
+  end
+
   describe "Pagination" do
     it "paginates hosts" do
-      network = build(:network, subnet: 22)
+      network = build(:network, {
+        network_address: "10.0.0.1",
+        subnet: 22,
+      },)
+
       hosts = network.address.paginate_hosts(page: 1)
       expect(hosts[0].address).to eq '10.0.0.1'
       expect(hosts[-1].address).to eq '10.0.0.255'

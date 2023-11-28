@@ -2,7 +2,7 @@
 
 # Reminder: Category data is created in an after_save hook on Company::AsSetup
 
-if Rails.env == "development"
+if Rails.env.development?
 
   if User.count == 0 || Company.count == 0
     company = Company::AsSetup.create!({
@@ -55,7 +55,7 @@ if Rails.env == "development"
       last_name: "Walden",
       employee_number: "1000",
       job_title: "IT Manager",
-      location: Location.find_by_name("IT Office"),
+      location: Location.find_by(name: "IT Office"),
       department: Department.first,
       user:,
       company:,
@@ -85,7 +85,7 @@ if Rails.env == "development"
       last_name: "Scully",
       employee_number: "1001",
       job_title: "AV Manager",
-      location: Location.find_by_name("IT Office"),
+      location: Location.find_by(name: "IT Office"),
       department: Department.first,
       user:,
       company:,
@@ -110,36 +110,36 @@ if Rails.env == "development"
       {
         name: "MacBook Pro",
         model_number: "MacBookPro16,1",
-        manufacturer: Manufacturer.find_by_slug("apple"),
-        category: Category.find_by_slug("item-laptop"),
+        manufacturer: Manufacturer.find_by(slug: "apple"),
+        category: Category.find_by(slug: "item-laptop"),
         company:,
       },
       {
         name: "HP EliteDesk 800 G3",
         model_number: "1FY84UT#ABA",
-        manufacturer: Manufacturer.find_by_slug("hp"),
-        category: Category.find_by_slug("item-desktop"),
+        manufacturer: Manufacturer.find_by(slug: "hp"),
+        category: Category.find_by(slug: "item-desktop"),
         company:,
       },
       {
         name: "Apple Keyboard",
         model_number: "AD897",
-        manufacturer: Manufacturer.find_by_slug("apple"),
-        category: Category.find_by_slug("accessory-keyboard"),
+        manufacturer: Manufacturer.find_by(slug: "apple"),
+        category: Category.find_by(slug: "accessory-keyboard"),
         company:,
       },
       {
         name: "Black Toner",
         model_number: "MX768",
-        manufacturer: Manufacturer.find_by_slug("sharp"),
-        category: Category.find_by_slug("consumable-toner"),
+        manufacturer: Manufacturer.find_by(slug: "sharp"),
+        category: Category.find_by(slug: "consumable-toner"),
         company:,
       },
       {
         name: "Samsung Evo 850",
         model_number: "MZ-75E250",
-        manufacturer: Manufacturer.find_by_slug("samsung"),
-        category: Category.find_by_slug("component-ssd"),
+        manufacturer: Manufacturer.find_by(slug: "samsung"),
+        category: Category.find_by(slug: "component-ssd"),
         company:,
       }
     ].each{ |model| Model.create!(model) }
@@ -244,7 +244,7 @@ if Rails.env == "development"
       purchased_at: Time.zone.yesterday.end_of_day,
       expires_at: Time.current.next_year,
       terminates_at: Time.current.next_year,
-      category: Category.find_by_slug("license-operating-system"),
+      category: Category.find_by(slug: "license-operating-system"),
       vendor: Vendor.first,
       manufacturer: Manufacturer.first,
       status_label: StatusLabel.first,
@@ -263,7 +263,7 @@ if Rails.env == "development"
       min_qty: 1,
       requestable: true,
       model: Model.find(3),
-      vendor: Vendor.find_by_slug("apple"),
+      vendor: Vendor.find_by(slug: "apple"),
       default_location: Location.first,
       status_label: StatusLabel.first,
       company:,
@@ -280,7 +280,7 @@ if Rails.env == "development"
       cost: nil,
       requestable: true,
       model: Model.find(4),
-      vendor: Vendor.find_by_slug("sharp"),
+      vendor: Vendor.find_by(slug: "sharp"),
       default_location: Location.first,
       company:,
     })
@@ -295,7 +295,7 @@ if Rails.env == "development"
       min_qty: 2,
       cost: nil,
       model: Model.find(5),
-      vendor: Vendor.find_by_slug("amazon"),
+      vendor: Vendor.find_by(slug: "amazon"),
       default_location: Location.first,
       status_label: StatusLabel.first,
       company: Company.first,

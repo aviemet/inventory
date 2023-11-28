@@ -32,7 +32,7 @@ class License < ApplicationRecord
   belongs_to :vendor
   belongs_to :manufacturer
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   alias_attribute :seats, :qty
 

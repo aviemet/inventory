@@ -3,14 +3,12 @@ require "models/concerns/ownable"
 require "models/concerns/assignable"
 require "models/concerns/serializable"
 
-RSpec.describe Accessory, type: :model do
-  subject {
-    build(:accessory)
-  }
+RSpec.describe Accessory do
+  subject(:accessory) { build(:accessory) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(accessory).to be_valid
     end
 
     it "is invalid with invalid attributes" do
@@ -24,7 +22,7 @@ RSpec.describe Accessory, type: :model do
     end
 
     it "uses money-rails to handle cost" do
-      expect(subject.cost).to be_a Money
+      expect(accessory.cost).to be_a Money
     end
   end
 

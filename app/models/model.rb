@@ -27,12 +27,12 @@ class Model < ApplicationRecord
   resourcify
 
   belongs_to :manufacturer
-  has_many :items, -> { includes_associated }
-  has_many :accessories, -> { includes_associated }
-  has_many :consumables, -> { includes_associated }
-  has_many :components, -> { includes_associated }
+  has_many :items, -> { includes_associated }, dependent: :nullify
+  has_many :accessories, -> { includes_associated }, dependent: :nullify
+  has_many :consumables, -> { includes_associated }, dependent: :nullify
+  has_many :components, -> { includes_associated }, dependent: :nullify
 
-  validates_presence_of :name
+  validates :name, presence: true
   validates :name, uniqueness: { scope: :model_number, message: "Model already exists" }
 
   scope :includes_associated, -> { includes([:manufacturer, :category, :items, :accessories, :consumables, :components, :documentations]) }

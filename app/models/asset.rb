@@ -26,14 +26,14 @@ class Asset < ApplicationRecord
 
   monetize :cost_cents, allow_blank: true, allow_nil: true, numericality: { greater_than_or_equal_to: 0 }
 
-  validates_presence_of :name
+  validates :name, presence: true
 
-  belongs_to :vendor, required: false
-  belongs_to :default_location, class_name: "Location", required: false
+  belongs_to :vendor, optional: true
+  belongs_to :default_location, class_name: "Location", optional: true
   belongs_to :model
   has_one :category, through: :model
   has_one :manufacturer, through: :model
-  has_one :warranty, required: false
+  has_one :warranty, required: false, dependent: :destroy
 
   scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_label, :activities, :documentations]) }
 

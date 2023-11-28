@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe TicketMessage, type: :model do
+RSpec.describe TicketMessage do
 end

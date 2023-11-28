@@ -4,7 +4,6 @@ import { createContext } from '@/lib/hooks'
 import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
 import { EditIcon } from '@/Components/Icons'
-import { Schema } from 'tabler-icons-react'
 
 interface IShowNetworkProps {
 	network: Schema.NetworksShow

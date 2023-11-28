@@ -16,10 +16,10 @@ class Smtp < ApplicationRecord
   tracked
   resourcify
 
-  validates_presence_of :name
-  validates_presence_of :username
-  validates_presence_of :password
-  validates_presence_of :host
-  validates_presence_of :port
+  validates :name, presence: true
+  validates :username, presence: true
+  validates :password, presence: true
+  validates :host, presence: true
+  validates :port, presence: true
 
 end

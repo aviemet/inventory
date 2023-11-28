@@ -2,24 +2,25 @@ require 'rails_helper'
 require 'models/concerns/contactable'
 require "models/concerns/serializable"
 
-RSpec.describe Company, type: :model do
-  subject { build(:company) }
+RSpec.describe Company do
+  subject(:company) { build(:company) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(company).to be_valid
     end
 
     it "is not valid without a name" do
-      subject.name = nil
-      expect(subject).to_not be_valid
+      company.name = nil
+      expect(company).not_to be_valid
     end
   end
 
   describe "Associations" do
     it_behaves_like "contactable"
 
-    it { should have_many(:ownerships) }
+    it { is_expected.to have_many(:ownerships) }
+
     {
       items: 'Item',
       departments: 'Department',
@@ -29,7 +30,7 @@ RSpec.describe Company, type: :model do
       people: 'Person',
       vendors: 'Vendor'
     }.each_pair do |assoc, _|
-      it { should have_many(assoc) }
+      it { is_expected.to have_many(assoc) }
     end
   end
 

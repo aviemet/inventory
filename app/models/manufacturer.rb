@@ -31,7 +31,7 @@ class Manufacturer < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  has_many :models
+  has_many :models, dependent: :nullify
   has_many :items, through: :models
   has_many :accessories, through: :models
   has_many :consumables, through: :models

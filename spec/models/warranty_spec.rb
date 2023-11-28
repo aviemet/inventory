@@ -2,8 +2,8 @@ require 'rails_helper'
 require 'models/concerns/contactable'
 require "models/concerns/serializable"
 
-RSpec.describe Warranty, type: :model do
-  subject { build(:warranty) }
+RSpec.describe Warranty do
+  subject(:warranty) { build(:warranty) }
 
   describe "Associations" do
     it_behaves_like "contactable"

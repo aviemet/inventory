@@ -2,10 +2,8 @@ require 'rails_helper'
 require 'models/concerns/fieldable'
 require "models/concerns/serializable"
 
-RSpec.describe Model, type: :model do
-  subject {
-    build(:model)
-  }
+RSpec.describe Model do
+  subject(:model) { build(:model) }
 
   describe "Associations" do
     it_behaves_like "fieldable"

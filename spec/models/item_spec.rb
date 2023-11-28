@@ -6,8 +6,8 @@ require "models/concerns/purchasable"
 require "models/concerns/fieldable"
 require "models/concerns/serializable"
 
-RSpec.describe Item, type: :model do
-  subject { create(:item) }
+RSpec.describe Item do
+  subject(:item) { create(:item) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
@@ -17,15 +17,15 @@ RSpec.describe Item, type: :model do
     it "is invalid with invalid attributes" do
       expect(build(:item, {
         name: nil
-      },)).to_not be_valid
+      },)).not_to be_valid
 
       item = build(:item, {model: nil })
       item.model = nil
-      expect(item).to_not be_valid
+      expect(item).not_to be_valid
     end
 
     it "uses money-rails to handle cost" do
-      expect(subject.cost).to be_a Money
+      expect(item.cost).to be_a Money
     end
   end
 
@@ -36,21 +36,21 @@ RSpec.describe Item, type: :model do
     it_behaves_like "purchasable"
     it_behaves_like "fieldable"
 
-    it { should have_many(:nics) }
-    it { should have_many(:ips) }
-    it { should have_many(:ip_leases) }
-    it { should belong_to(:default_location) }
+    it { is_expected.to have_many(:nics) }
+    it { is_expected.to have_many(:ips) }
+    it { is_expected.to have_many(:ip_leases) }
+    it { is_expected.to belong_to(:default_location) }
 
     context "when unassigned" do
       it "uses default_location as location" do
-        expect(subject.location).to eq(subject.default_location)
+        expect(item.location).to eq(item.default_location)
       end
     end
 
     context "when assigned" do
       it "uses the assignment's location as location" do
-        subject.assign_to(create(:person))
-        expect(subject.location).to eq(subject.assignment.location)
+        item.assign_to(create(:person))
+        expect(item.location).to eq(item.assignment.location)
       end
     end
   end

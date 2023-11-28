@@ -26,14 +26,14 @@ class Department < ApplicationRecord
   tracked
   resourcify
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   belongs_to :location, optional: true # primary location, such as main office of department
   belongs_to :manager, class_name: :Person, optional: true
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
   # 	Department.items, Department.contracts, etc.
-  has_many :ownerships
+  has_many :ownerships, dependent: :restrict_with_error
   {
     assets: 'Asset',
     items: 'Item',

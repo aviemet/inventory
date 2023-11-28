@@ -24,10 +24,10 @@ class PersonGroup < ApplicationRecord
 
   slug :name
 
-  has_many :person_group_assignments
+  has_many :person_group_assignments, dependent: :destroy
   has_many :people, through: :person_group_assignments
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   scope :includes_associated, -> { includes([:people]) }
 

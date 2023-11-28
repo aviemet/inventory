@@ -4,10 +4,8 @@ require 'models/concerns/ownable'
 require 'models/concerns/assign_toable'
 require "models/concerns/serializable"
 
-RSpec.describe Location, type: :model do
-  subject {
-    create(:location)
-  }
+RSpec.describe Location do
+  subject(:location) { create(:location) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
@@ -15,8 +13,8 @@ RSpec.describe Location, type: :model do
     end
 
     it "is not valid without a name" do
-      subject.name = nil
-      expect(subject).to_not be_valid
+      location.name = nil
+      expect(location).not_to be_valid
     end
   end
 
@@ -31,9 +29,9 @@ RSpec.describe Location, type: :model do
   end
 
   describe "Helper methods" do
-    it "should return itself when calling locaiton or default_location" do
-      expect(subject.location).to be(subject)
-      expect(subject.default_location).to be(subject)
+    it "returns itself when calling locaiton or default_location" do
+      expect(location.location).to be(location)
+      expect(location.default_location).to be(location)
     end
   end
 end

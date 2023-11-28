@@ -22,18 +22,32 @@ class Network < ApplicationRecord
 
   validates :address, presence: true
   validate :network?
+  validate :gateway_within_network?
+
+  before_validation :normalize_network_address
 
   private
 
-  def network?
+  def normalize_network_address
     return unless self.address
 
     if self.address&.prefix != 32 && !self.address&.network?
       self.address = self.address.find_adjacent_subnet
     end
+  end
 
+  def network?
     unless self.address&.network?
-      errors.add(:address, "Must be a valid network with nothing to the right of the network bits")
+      errors.add(:address, "Must be a valid network")
+    end
+  end
+
+  def gateway_within_network?
+    return false unless self.address&.network?
+    return true if self.gateway.nil?
+
+    unless self.address.include? self.gateway
+      errors.add(:gateway, "Gateway address must be within the network")
     end
   end
 end

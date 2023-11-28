@@ -6,11 +6,11 @@ class StatusLabel < ApplicationRecord
 
   enum :status_type, %i(deployable pending undeployable archived)
 
-  has_many :assets
-  has_many :items
-  has_many :accessories
-  has_many :components
-  has_many :licenses
+  has_many :assets, dependent: :nullify
+  has_many :items, dependent: :nullify
+  has_many :accessories, dependent: :nullify
+  has_many :components, dependent: :nullify
+  has_many :licenses, dependent: :nullify
 
-  validates_presence_of :name
+  validates :name, presence: true
 end

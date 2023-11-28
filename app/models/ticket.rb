@@ -22,15 +22,15 @@ class Ticket < ApplicationRecord
 
   enum :priority, %i(urgent high standard low)
 
-  belongs_to :created_by, class_name: "Person", required: false
-  belongs_to :status, class_name: "TicketStatus", required: true
-  belongs_to :primary_contact, class_name: "Person", required: false
-  belongs_to :asset, required: false
-  has_many :assignments, class_name: "TicketAssignment"
+  belongs_to :created_by, class_name: "Person", optional: true
+  belongs_to :status, class_name: "TicketStatus", optional: false
+  belongs_to :primary_contact, class_name: "Person", optional: true
+  belongs_to :asset, optional: true
+  has_many :assignments, class_name: "TicketAssignment", dependent: :destroy
   has_many :assignees, through: :assignments, source: :person
-  has_many :messages, class_name: "TicketMessage"
+  has_many :messages, class_name: "TicketMessage", dependent: :destroy
 
-  validates_presence_of :subject, message: "Subject can't be blank"
+  validates :subject, presence: { message: "Subject can't be blank" }
 
   attribute :status_id, default: 1
 

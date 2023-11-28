@@ -5,10 +5,8 @@ require 'models/concerns/fieldable'
 require 'models/concerns/assignable'
 require "models/concerns/serializable"
 
-RSpec.describe License, type: :model do
-  subject {
-    build(:license)
-  }
+RSpec.describe License do
+  subject(:license) { build(:license) }
 
   describe "Associations" do
     it_behaves_like "ownable"

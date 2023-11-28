@@ -3,26 +3,26 @@ require "models/concerns/ownable"
 require "models/concerns/assignable"
 require "models/concerns/serializable"
 
-RSpec.describe Consumable, type: :model do
-  subject { build(:consumable) }
+RSpec.describe Consumable do
+  subject(:consumable) { build(:consumable) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(consumable).to be_valid
     end
 
     it "is invalid with invalid attributes" do
       expect(build(:consumable, {
         name: nil
-      },)).to_not be_valid
+      },)).not_to be_valid
 
       consumable = build(:consumable)
       consumable.model = nil
-      expect(consumable).to_not be_valid
+      expect(consumable).not_to be_valid
     end
 
     it "uses money-rails to handle cost" do
-      expect(subject.cost).to be_a Money
+      expect(consumable.cost).to be_a Money
     end
   end
 

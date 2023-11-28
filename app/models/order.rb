@@ -24,7 +24,7 @@ class Order < ApplicationRecord
   belongs_to :person
   belongs_to :vendor
   has_one :user, through: :person
-  has_many :purchases
+  has_many :purchases, dependent: :nullify
 
   scope :includes_associated, -> { includes([:purchase, :item, :accessory, :consumable, :component, :user, :vendor]) }
 

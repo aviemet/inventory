@@ -25,7 +25,7 @@ class Contract < ApplicationRecord
   tracked
   resourcify
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   belongs_to :vendor
 
