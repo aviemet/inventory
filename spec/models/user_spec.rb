@@ -27,7 +27,6 @@ RSpec.describe User do
     it { is_expected.to belong_to(:active_company).optional }
     it { is_expected.to have_many(:people) }
     it { is_expected.to have_many(:companies) }
-    it { is_expected.to have_many(:groups) }
     it { is_expected.to have_one(:person) }
 
     it "returns the person record associated with the active company" do

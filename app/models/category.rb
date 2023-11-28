@@ -38,7 +38,7 @@ class Category < ApplicationRecord
   end
 
   def records
-    self.type.find_by(:category, self)
+    self.type.find_by_category(self) # rubocop:disable Rails/DynamicFindBy
   end
 
   def qty
