@@ -22,7 +22,7 @@ class NetworksController < ApplicationController
   # GET /networks/:id
   def show
     authorize network
-    ips = IpLease.includes(:item).in_network(self.network)
+    ips = IpLease.includes(:item).find_in_network(self.network)
 
     render inertia: "Networks/Show", props: {
       network: -> { network.render(view: :show, options: {

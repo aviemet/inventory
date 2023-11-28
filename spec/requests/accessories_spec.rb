@@ -1,14 +1,14 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Accessories", type: :request do
+RSpec.describe "Accessories" do
   def valid_attributes
     {
       accessory: attributes_for(:accessory,
                                 status_label_id: create(:status_label).id,
                                 model_id: create(:model).id,
                                 vendor_id: create(:vendor).id,
-                                default_location_id: create(:location).id)
+                                default_location_id: create(:location).id,)
     }
   end
 
@@ -99,7 +99,7 @@ RSpec.describe "Accessories", type: :request do
       it "does not create a new accessory" do
         expect {
           post accessories_url, params: invalid_attributes
-        }.to change(Accessory, :count).by(0)
+        }.not_to change(Accessory, :count)
       end
 
       it "redirects back to the new accessory page" do

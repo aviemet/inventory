@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/status_labels", type: :request do
+RSpec.describe "/status_labels" do
   def valid_attributes
     {
       status_label: attributes_for(:status_label)
@@ -73,7 +73,7 @@ RSpec.describe "/status_labels", type: :request do
       it "does not create a new StatusLabel" do
         expect {
           post status_labels_url, params: invalid_attributes
-        }.to change(StatusLabel, :count).by(0)
+        }.not_to change(StatusLabel, :count)
       end
 
       it "redirects back to the new status_label page" do

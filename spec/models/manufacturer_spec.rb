@@ -3,19 +3,17 @@ require 'models/concerns/contactable'
 require 'models/concerns/ownable'
 require "models/concerns/serializable"
 
-RSpec.describe Manufacturer, type: :model do
-  subject {
-    build(:manufacturer)
-  }
+RSpec.describe Manufacturer do
+  subject(:manufacturer) { build(:manufacturer) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(manufacturer).to be_valid
     end
 
     it "is not valid without a name" do
-      subject.name = nil
-      expect(subject).to_not be_valid
+      manufacturer.name = nil
+      expect(manufacturer).not_to be_valid
     end
   end
 

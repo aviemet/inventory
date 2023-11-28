@@ -3,20 +3,18 @@ require 'models/concerns/contactable'
 require 'models/concerns/ownable'
 require "models/concerns/serializable"
 
-RSpec.describe Department, type: :model do
-  subject {
-    build(:department)
-  }
+RSpec.describe Department do
+  subject(:department) { build(:department) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(department).to be_valid
     end
 
     it "is invalid with invalid attributes" do
       expect(build(:department, {
         name: nil
-      },)).to_not be_valid
+      },)).not_to be_valid
     end
   end
 

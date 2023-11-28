@@ -1,18 +1,18 @@
 require 'rails_helper'
 require "models/concerns/serializable"
 
-RSpec.describe Nic, type: :model do
-  subject{ build(:nic) }
+RSpec.describe Nic do
+  subject(:nic) { build(:nic) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(nic).to be_valid
     end
 
     it "is invalid with invalid attributes" do
       expect(build(:nic, {
         nic_type: nil
-      },)).to_not be_valid
+      },)).not_to be_valid
     end
   end
 

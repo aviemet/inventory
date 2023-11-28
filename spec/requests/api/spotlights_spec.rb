@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../support/devise'
 
-RSpec.describe "Api::Spotlights", type: :request do
+RSpec.describe "Api::Spotlights" do
   describe "GET /index" do
     login_admin
 

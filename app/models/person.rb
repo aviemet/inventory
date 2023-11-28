@@ -33,11 +33,11 @@ class Person < ApplicationRecord
   has_many :ticket_assignments, dependent: :nullify
   has_many :tickets, through: :ticket_assignments, inverse_of: :assignees
 
-  has_many :person_group_assignments
+  has_many :person_group_assignments, dependent: :destroy
   has_many :groups, through: :person_group_assignments, source: :person_group
 
-  validates_presence_of :first_name
-  validates_presence_of :last_name
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :contact

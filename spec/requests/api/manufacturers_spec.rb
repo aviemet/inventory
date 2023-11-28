@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Manufacturers", type: :request do
+RSpec.describe "Api::Manufacturers" do
 end

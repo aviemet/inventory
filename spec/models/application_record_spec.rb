@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe ApplicationRecord, type: :model do
+RSpec.describe ApplicationRecord do
   describe "Unique ID encoding" do
-    context "on a new record which hasn't been saved" do
+    context "with a new record which hasn't been saved" do
       it "returns nil" do
         network = build(:network)
 
@@ -10,7 +10,7 @@ RSpec.describe ApplicationRecord, type: :model do
       end
     end
 
-    context "on a persisted record" do
+    context "with a persisted record" do
       it "encodes the model name and id as a base64 string" do
         network = build_stubbed(:network)
         id = network.encode_id

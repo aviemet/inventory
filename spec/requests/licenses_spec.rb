@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/licenses", type: :request do
+RSpec.describe "/licenses" do
   def valid_attributes
     {
       license: attributes_for(:license, {
@@ -91,7 +91,7 @@ RSpec.describe "/licenses", type: :request do
       it "does not create a new License" do
         expect {
           post licenses_url, params: invalid_attributes
-        }.to change(License, :count).by(0)
+        }.not_to change(License, :count)
       end
 
       it "redirects back to the new license page" do

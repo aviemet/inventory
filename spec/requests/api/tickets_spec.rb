@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Tickets", type: :request do
+RSpec.describe "Api::Tickets" do
 end

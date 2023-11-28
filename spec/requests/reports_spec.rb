@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Reports", type: :request do
+RSpec.describe "Reports" do
   describe "GET /" do
     login_admin
 

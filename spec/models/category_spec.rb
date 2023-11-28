@@ -1,24 +1,22 @@
 require 'rails_helper'
 require "models/concerns/serializable"
 
-RSpec.describe Category, type: :model do
-  subject {
-    build(:category)
-  }
+RSpec.describe Category do
+  subject(:category) { build(:category) }
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(subject).to be_valid
+      expect(category).to be_valid
     end
 
     it "is not valid without a name" do
-      subject.name = nil
-      expect(subject).to_not be_valid
+      category.name = nil
+      expect(category).not_to be_valid
     end
 
     it "is not valid without a categorizable_type" do
-      subject.categorizable_type = nil
-      expect(subject).to_not be_valid
+      category.categorizable_type = nil
+      expect(category).not_to be_valid
     end
   end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe LdapJob, type: :job do
+RSpec.describe LdapJob do
   describe "syncronizes users",  if: Rails.application.credentials.ldap do
     it "connects to AD server" do
       described_class.perform_now(Ldap.create({

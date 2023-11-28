@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe TicketAssignment, type: :model do
+RSpec.describe TicketAssignment do
 end

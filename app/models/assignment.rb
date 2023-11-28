@@ -11,24 +11,21 @@ class Assignment < ApplicationRecord
 
   attr_reader :assignable_types, :assign_toable_types
 
-  enum status: %i(approved requested denied)
+  enum status: { :approved => 0, :requested => 1, :denied => 2 }
 
-  attribute :assigned_at, default: Time.current
+  attribute :assigned_at, default: -> { Time.current }
   attribute :active, default: true
 
   belongs_to :assignable, polymorphic: true
   belongs_to :assign_toable, polymorphic: true
-  belongs_to :created_by, class_name: "Person", required: false
+  belongs_to :created_by, class_name: "Person", optional: true
   belongs_to :location
 
   validates :assignable_type, inclusion: { in: self.assignable_types }
   validates :assign_toable_type, inclusion: { in: self.assign_toable_types }
-  validates_presence_of :assignable_type
-  validates_presence_of :assignable_id
-  validates_presence_of :assign_toable_type
-  validates_presence_of :assign_toable_id
-  validates_presence_of :assigned_at
-  validates_presence_of :location_id
+  validates :assignable_type, presence: true
+  validates :assign_toable_type, presence: true
+  validates :assigned_at, presence: true
 
   scope :includes_associated, -> { includes([:location, :created_by, :activities]) }
   scope :active, -> { where(active: true) }

@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/person_groups", type: :request do
+RSpec.describe "/person_groups" do
   def valid_attributes
     {
       person_group: attributes_for(:person_group)
@@ -73,7 +73,7 @@ RSpec.describe "/person_groups", type: :request do
       it "does not create a new Group" do
         expect {
           post person_groups_url, params: invalid_attributes
-        }.to change(PersonGroup, :count).by(0)
+        }.not_to change(PersonGroup, :count)
       end
 
       it "redirects back to the new person_group page" do

@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Consumables", type: :request do
+RSpec.describe "Api::Consumables" do
 end

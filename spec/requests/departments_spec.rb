@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/departments", type: :request do
+RSpec.describe "/departments" do
   def valid_attributes
     {
       department: attributes_for(:department)
@@ -86,7 +86,7 @@ RSpec.describe "/departments", type: :request do
       it "does not create a new Department" do
         expect {
           post departments_url, params: invalid_attributes
-        }.to change(Department, :count).by(0)
+        }.not_to change(Department, :count)
       end
 
       it "redirects back to the new department page" do

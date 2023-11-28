@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe Fieldset, type: :model do
+RSpec.describe Fieldset do
 end

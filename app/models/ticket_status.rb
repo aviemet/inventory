@@ -6,5 +6,5 @@ class TicketStatus < ApplicationRecord
 
   enum :status_type, %i(open pending closed)
 
-  has_many :tickets
+  has_many :tickets, dependent: :nullify
 end

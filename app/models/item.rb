@@ -10,7 +10,7 @@ class Item < Asset
   tracked
   resourcify
 
-  validates_presence_of :model
+  validates :model, presence: true
 
   has_many :nics, dependent: :destroy
   has_many :ips, -> { where(active: true) }, through: :nics, source: :ip_leases

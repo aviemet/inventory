@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/tickets", type: :request do
+RSpec.describe "/tickets" do
   describe "GET /index" do
     login_admin
 
@@ -65,7 +65,7 @@ RSpec.describe "/tickets", type: :request do
       it "does not create a new Ticket" do
         expect {
           post tickets_url, params: invalid_attributes
-        }.to change(Ticket, :count).by(0)
+        }.not_to change(Ticket, :count)
       end
 
       it "redirects back to the new ticket page" do

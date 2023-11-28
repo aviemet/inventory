@@ -30,14 +30,14 @@ class Vendor < ApplicationRecord
 
   slug :name
 
-  has_many :contracts
-  has_many :items
-  has_many :accessories
-  has_many :consumables
-  has_many :components
-  has_many :licenses
+  has_many :contracts, dependent: :restrict_with_exception
+  has_many :items, dependent: :nullify
+  has_many :accessories, dependent: :nullify
+  has_many :consumables, dependent: :nullify
+  has_many :components, dependent: :nullify
+  has_many :licenses, dependent: :nullify
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   scope :includes_associated, -> { includes([:contracts, :items, :accessories, :consumables, :components, :licenses, :documentations]) }
 end

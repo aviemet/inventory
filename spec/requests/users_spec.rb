@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Users", type: :request, inertia: true do
+RSpec.describe "Users", :inertia do
   let(:password) { '$trongPassw0rd!' }
   let(:confirmed_user) { create(:user, password: password) }
   let(:unconfirmed_user) { create(:user, password: password, company: false, person: false, confirmed: false) }

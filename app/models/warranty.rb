@@ -4,5 +4,5 @@ class Warranty < ApplicationRecord
   tracked
   resourcify
 
-  belongs_to :asset, required: true
+  belongs_to :asset, optional: false
 end

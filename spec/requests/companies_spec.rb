@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Companies", type: :request do
+RSpec.describe "Companies" do
   describe "GET /" do
     login_admin
 

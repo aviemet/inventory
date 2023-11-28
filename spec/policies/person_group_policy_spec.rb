@@ -6,7 +6,7 @@ RSpec.describe PersonGroupPolicy, type: :policy do
 
   let(:accessory) { Accessory.new }
 
-  context "as super_admin" do
+  context "when the user is a super_admin" do
     login_admin
 
     permissions ".scope" do

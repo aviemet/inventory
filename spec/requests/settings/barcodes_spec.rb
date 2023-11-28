@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../support/devise'
 
-RSpec.describe "Settings::Barcodes", type: :request do
+RSpec.describe "Settings::Barcodes" do
   describe "GET /index" do
     login_admin
 

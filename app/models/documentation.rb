@@ -22,9 +22,9 @@ class Documentation < ApplicationRecord
   resourcify
 
   belongs_to :documentable, polymorphic: true
-  belongs_to :created_by, class_name: "Person", required: false
+  belongs_to :created_by, class_name: "Person", optional: true
 
-  validates_presence_of :title
+  validates :title, presence: true
 
   scope :includes_associated, -> { includes([:created_by]) }
 end

@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe PersonGroupAssignment, type: :model do
+RSpec.describe PersonGroupAssignment do
 end

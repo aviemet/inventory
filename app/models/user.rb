@@ -15,11 +15,9 @@ class User < ApplicationRecord
   belongs_to :active_company, class_name: :Company, optional: true
   has_many :people, dependent: :nullify
   has_many :companies, through: :people
-  has_many :person_group_assignments
-  has_many :groups, through: :person_group_assignments, source: :person_group
 
-  has_one :person do
-    self.people.joins(:owner).where({owner: {company: self.active_company}}).take
+  has_one :person, dependent: :nullify do
+    self.people.joins(:owner).find_by({ owner: { company: self.active_company } })
   end
 
   alias company active_company

@@ -4,10 +4,10 @@ class Ldap < ApplicationRecord
 
   attribute :port, default: 389
 
-  validates_presence_of :name
-  validates_presence_of :host
-  validates_presence_of :port
-  validates_presence_of :username
+  validates :name, presence: true
+  validates :host, presence: true
+  validates :port, presence: true
+  validates :username, presence: true
 
   belongs_to :company
 end

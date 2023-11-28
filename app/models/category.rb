@@ -19,9 +19,9 @@ class Category < ApplicationRecord
 
   @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Documentation Email License Location Model Order Person Phone Ticket User Vendor Website)
 
-  validates_inclusion_of :categorizable_type, in: @categorizable_types, allow_nil: false
-  validates_presence_of :categorizable_type
-  validates_presence_of :name
+  validates :categorizable_type, inclusion: { in: @categorizable_types, allow_nil: false }
+  validates :categorizable_type, presence: true
+  validates :name, presence: true
 
   scope :find_by_type, ->(type){ where(categorizable_type: type.to_s.singularize.camelize) }
 
@@ -38,7 +38,7 @@ class Category < ApplicationRecord
   end
 
   def records
-    self.type.find_by_category(self)
+    self.type.find_by_category(self) # rubocop:disable Rails/DynamicFindBy
   end
 
   def qty

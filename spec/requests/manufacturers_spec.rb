@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/manufacturers", type: :request do
+RSpec.describe "/manufacturers" do
   def valid_attributes
     {
       manufacturer: attributes_for(:manufacturer)
@@ -86,7 +86,7 @@ RSpec.describe "/manufacturers", type: :request do
       it "does not create a new Manufacturer" do
         expect {
           post manufacturers_url, params: invalid_attributes
-        }.to change(Manufacturer, :count).by(0)
+        }.not_to change(Manufacturer, :count)
       end
 
       it "redirects back to the new manufacturer page" do

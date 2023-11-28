@@ -26,10 +26,10 @@ class Location < ApplicationRecord
   tracked
   resourcify
 
-  belongs_to :parent, class_name: "Location", required: false
-  has_many :people
+  belongs_to :parent, class_name: "Location", optional: true
+  has_many :people, dependent: :nullify
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   scope :includes_associated, -> { includes([:parent, :department, :activities, :documentations]) }
 

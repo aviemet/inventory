@@ -54,7 +54,7 @@ shared_examples "assignable:single" do
       subject.assign_to(person)
       expect(subject.assigned_to).to eq(person)
       subject.unassign
-      expect(subject.assignment).to be(nil)
+      expect(subject.assignment).to be_nil
     end
   end
 
@@ -73,24 +73,24 @@ shared_examples "assignable:quantity" do
       expect(subject.assigned_to).to eq(location)
     end
 
-    it "Should reduce qty when assigned" do
+    it "reduces qty when assigned" do
       person = build(:person)
-      expect{ subject.assign_to(person) }.to change{ subject.qty }.by(-1)
+      expect{ subject.assign_to(person) }.to change(subject, :qty).by(-1)
       qty = 2
-      expect{ subject.assign_to(person, qty:) }.to change{ subject.qty }.by(-qty)
+      expect{ subject.assign_to(person, qty:) }.to change(subject, :qty).by(-qty)
     end
 
-    it "Should not respond to assignment" do
+    it "does not respond to assignment" do
       expect(subject.respond_to?(:assignment)).to be(false)
     end
 
-    it "Can be unassigned" do
+    it "can be unassigned" do
       person = build(:person)
       subject.assign_to(person)
-      expect{ subject.unassign(subject.assignments.first) }.to change{ subject.qty }.by(1)
+      expect{ subject.unassign(subject.assignments.first) }.to change(subject, :qty).by(1)
     end
 
-    it "Cannot assign more than are available" do
+    it "cannot assign more than are available" do
       subject.update qty: 1
       expect{
         subject.assign_to(person, qty: 2)
@@ -112,18 +112,18 @@ shared_examples "assignable:consume" do
       expect(subject.assignments.count).to eq(2)
     end
 
-    it "Should reduce qty when assigned" do
+    it "reduces qty when assigned" do
       person = build(:person)
-      expect{ subject.assign_to(person) }.to change{ subject.qty }.by(-1)
+      expect{ subject.assign_to(person) }.to change(subject, :qty).by(-1)
       qty = 2
-      expect{ subject.assign_to(person, qty:) }.to change{ subject.qty }.by(-qty)
+      expect{ subject.assign_to(person, qty:) }.to change(subject, :qty).by(-qty)
     end
 
-    it "Should not respond to assignment" do
+    it "does not respond to assignment" do
       expect(subject.respond_to?(:assignment)).to be(false)
     end
 
-    it "Should not respond to unassign" do
+    it "does not respond to unassign" do
       expect(subject.respond_to?(:unassign)).to be(false)
     end
 

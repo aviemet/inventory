@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Pages", type: :request do
+RSpec.describe "Pages" do
   describe "GET /dashboard" do
     login_admin
 

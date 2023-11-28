@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Consumables", type: :request do
+RSpec.describe "Consumables" do
   def valid_attributes
     {
       consumable: attributes_for(:consumable,
@@ -85,7 +85,7 @@ RSpec.describe "Consumables", type: :request do
       it "does not create a new consumable" do
         expect {
           post consumables_url, params: invalid_attributes
-        }.to change(Consumable, :count).by(0)
+        }.not_to change(Consumable, :count)
       end
 
       it "redirects back to the new consumable page" do

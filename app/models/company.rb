@@ -27,14 +27,14 @@ class Company < ApplicationRecord
   tracked
   resourcify
 
-  attribute :default_currency, default: MoneyRails.default_currency
+  attribute :default_currency, default: -> { MoneyRails.default_currency }
 
   has_many :users, through: :roles, class_name: :User, source: :users
   has_one :ldap, dependent: :destroy
 
   # Reverse polymorphic relationships. Allows searching related models through Ownable interface
   # 	Company.items, Company.contracts, etc.
-  has_many :ownerships
+  has_many :ownerships, dependent: :restrict_with_error
   {
     assets: "Asset",
     models: "Model",
@@ -63,12 +63,12 @@ class Company < ApplicationRecord
     consumables: "Consumable",
     components: "Component",
   }.each_pair do |assoc, model|
-    has_many assoc, ->{ where(type: model) }, through: :ownerships, source: :ownable, source_type: :Asset, class_name: model
+    has_many assoc, ->{ where(type: model) }, through: :ownerships, source: :ownable, source_type: :Asset, class_name: model.to_s
   end
 
   scope :includes_associated, -> { includes([:departments, :locations, :ownerships, :documentations]) }
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   private
 

@@ -6,6 +6,9 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
+import { IPAddress } from '@/lib'
+
+window.IPAddress = IPAddress
 
 type TNetworkFormData = {
 	network: Schema.NetworksFormData
@@ -29,8 +32,30 @@ const emptyNetwork: Schema.NetworksFormData = {
 }
 
 const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: INetworkFormProps) => {
+	const handleAddressBlur = (value: string, form: UseFormProps<TNetworkFormData>) => {
+		let ip: IPAddress | undefined = undefined
+
+		form.clearErrors('network.address')
+
+		try {
+			ip = new IPAddress(value)
+
+			if(ip.address.subnetMask === 32) {
+				form.setError('network.address', `${form.getData('network.address')} is not a valid network address. Must not be a /32 address.`)
+
+				ip = undefined
+			}
+		} catch(e) {
+			form.setError('network.address', `${form.getData('network.address')} is not a valid network address. Value must contain subnet prefix, e.g. "192.168.1.0/24"`)
+		}
+
+		if(ip !== undefined && form.getData('network.gateway') === "") {
+			form.setData('network.gateway', ip.address.startAddressExclusive().address)
+		}
+	}
+
 	return (
-		<Form
+		<Form<TNetworkFormData>
 			model="network"
 			data={ { network } }
 			to={ to }
@@ -39,15 +64,15 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: 
 		>
 			<TextInput name="name" label="Name" required autoFocus />
 
-			<TextInput name="vlan_id" label="VLAN ID" />
-
-			<TextInput name="address" label="Network Address" placeholder="e.g. 192.168.1.0/24" required />
+			<TextInput name="address" label="Network" placeholder="e.g. 192.168.1.0/24" required onBlur={ handleAddressBlur } />
 
 			<TextInput name="gateway" label="Gateway Address" placeholder="e.g. 192.168.1.1" />
 
 			<TextInput name="dhcp_start" label="DHCP Start" placeholder="e.g. 192.168.1.100" />
 
 			<TextInput name="dhcp_end" label="DHCP End" placeholder="e.g. 192.168.1.254" />
+
+			<TextInput name="vlan_id" label="VLAN ID" />
 
 			<Textarea name="notes" label="Notes" />
 
