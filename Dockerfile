@@ -28,7 +28,7 @@ WORKDIR /inventory
 ENV RAILS_LOG_TO_STDOUT="1"
 ENV RAILS_SERVE_STATIC_FILES true
 ENV RAILS_ENV production
-ENV BUNDLE_WITHOUT development
+# ENV BUNDLE_WITHOUT development
 ENV NODE_ENV production
 
 # Install application gems
@@ -41,7 +41,9 @@ COPY package.json yarn.lock ./
 RUN yarn install
 
 # Copy application code
-COPY . .
+COPY ./docker_copy_files.sh .
+RUN chmod +x ./docker_copy_files.sh
+RUN ./docker_copy_files.sh
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile --gemfile app/ lib/
@@ -53,4 +55,5 @@ RUN SECRET_KEY_BASE=DUMMY bundle exec rails assets:precompile
 ENTRYPOINT ["/inventory/bin/docker-entrypoint"]
 
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+# CMD ["/bin/bash", "-c", "/inventory/bin/rails server"]
+# CMD ["/inventory/bin/rails", "server"]

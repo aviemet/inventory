@@ -74,3 +74,5 @@ db/seeds/99_local.rb
 
 # List of allow locations for local dev environment
 vite-local-allow.json
+
+/config/secrets/master.key

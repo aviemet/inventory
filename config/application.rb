@@ -37,6 +37,9 @@ module Inventory
 
     config.active_record.yaml_column_permitted_classes = [Symbol, Hash, Array, Time, Date, ActiveRecord::Base, ActiveSupport::HashWithIndifferentAccess]
 
+    config.credentials.key_path = Rails.root.join("config/secrets/master.key")
+    config.credentials.content_path = Rails.root.join("config/secrets/credentials.yml.enc")
+
     # Establish db connection upon entering rails console
     console do
       ActiveRecord::Base.connection
