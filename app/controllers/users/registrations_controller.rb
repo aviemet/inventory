@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     first_run = false
     if User.count == 0
       flash.clear
-      flash[:notice] = 'Create your admin user'
+      flash[:notice] = t('devise.first_run_create_admin')
       first_run = true
     end
 
@@ -23,7 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     if User.count == 0
-      resource.confirmed_at = Time.now
+      resource.confirmed_at = Time.zone.now
     end
 
     resource.save

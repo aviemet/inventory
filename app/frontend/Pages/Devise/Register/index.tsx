@@ -30,7 +30,7 @@ const Register = () => {
 		// console.log({ data })
 	}
 
-	const handlePasswordChange = (value: string|number, { data, getError, clearErrors }: UseFormProps<TRegisterFormData>) => {
+	const handlePasswordChange = (value: string, { data, getError, clearErrors }: UseFormProps<TRegisterFormData>) => {
 		if(getError('user.password') || getError('user.password_confirmation')) {
 			if(data.user.password === data.user.password_confirmation) {
 				clearErrors('user.password')
@@ -46,7 +46,7 @@ const Register = () => {
 		}
 	}
 
-	const handleEmailBlur = (value: string|number, form: UseFormProps<TRegisterFormData>) => {
+	const handleEmailBlur = (value: string, form: UseFormProps<TRegisterFormData>) => {
 		// console.log({ value, form })
 	}
 
