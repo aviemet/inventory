@@ -1,20 +1,11 @@
 #!/bin/bash
 
-# set -e
-
 # Check if master.key exists
 if [ ! -f /inventory/config/secrets/master.key ]; then
   echo "Generating master.key..."
   # Run the rails credentials:edit command in non-interactive mode
   EDITOR="echo" rails credentials:edit
 fi
-
-# If running the rails server then create or migrate existing database
-# if [ "${*}" == "/inventory/bin/rails server" ]; then
-#   rm -f tmp/pids/server.pid
-
-#   /inventory/bin/rails db:prepare
-# fi
 
 rm -f tmp/pids/server.pid
 

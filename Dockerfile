@@ -55,5 +55,3 @@ RUN SECRET_KEY_BASE=DUMMY bundle exec rails assets:precompile
 ENTRYPOINT ["/inventory/bin/docker-entrypoint"]
 
 EXPOSE 3000
-# CMD ["/bin/bash", "-c", "/inventory/bin/rails server"]
-# CMD ["/inventory/bin/rails", "server"]
