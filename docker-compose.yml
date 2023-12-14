@@ -1,10 +1,10 @@
 version: '3.9'
 
 services:
-  db:
+  postgres:
     image: postgres:15.4-alpine 
     environment:
-      POSTGRES_USER: "${POSTGRES_USERNAME}"
+      POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     volumes:
       - postgres:/var/lib/postgresql/data
@@ -18,15 +18,16 @@ services:
     volumes:
       - .:/inventory
       - files:/inventory/storage
+      - secrets:/inventory/config/secrets
     ports:
       - "80:3000"
     depends_on:
-      - db
+      - postgres
     environment:
       RACK_ENV: "production"
       RAILS_ENV: "production"
       NODE_ENV: "production"
-      POSTGRES_USER: "${POSTGRES_USERNAME}"
+      POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       POSTGRES_HOST: postgres
     restart: always
@@ -34,3 +35,4 @@ services:
 volumes:
   postgres:
   files:
+  secrets:
