@@ -1,11 +1,11 @@
-import { UseFormProps } from 'use-inertia-form'
+import { NestedObject, UseFormProps } from 'use-inertia-form'
 
-export interface IFormInputProps<T> {
+export interface IFormInputProps<T, TForm extends NestedObject = any> {
 	name: string
 	model?: string
 	errorKey?: string
-	onChange?: (value: T, form: UseFormProps<unknown>) => void
-	onBlur?: (value: T, form: UseFormProps<unknown>) => void
+	onChange?: (value: T, form: UseFormProps<TForm>) => void
+	onBlur?: (value: T, form: UseFormProps<TForm>) => void
 	field?: boolean
 	span?: number|'auto'|'content'
 }

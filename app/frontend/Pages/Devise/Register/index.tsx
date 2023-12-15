@@ -54,7 +54,7 @@ const Register = () => {
 
 	return (
 		<Tile>
-			<Form
+			<Form<TRegisterFormData>
 				disableFormatting
 				data={ {
 					user: {
