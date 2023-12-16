@@ -1,13 +1,16 @@
-import React, { forwardRef } from 'react'
-import { useInertiaInput } from 'use-inertia-form'
+import React from 'react'
+import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import SwatchInput, { type ISwatchInputProps } from '@/Components/Inputs/SwatchInput'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import Field from '../Field'
 import { type IFormInputProps } from '.'
 
-interface ISwatchFormInputProps extends Omit<ISwatchInputProps, 'onBlur'|'onChange'|'name'|'ref'>, IFormInputProps<string> {}
+interface ISwatchFormInputProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<ISwatchInputProps, 'onBlur'|'onChange'|'name'|'ref'>,
+	IFormInputProps<string, TForm> {}
 
-const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
+const SwatchFormInput = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -18,10 +21,9 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 		errorKey,
 		field = true,
 		...props
-	},
-	ref,
+	}: ISwatchFormInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (color: string) => {
 		setValue(color)
@@ -43,7 +45,6 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 			condition={ field }
 		>
 			<SwatchInput
-				ref={ ref }
 				initialValue={ value }
 				value={ value }
 				onChange={ handleChange }
@@ -54,6 +55,6 @@ const SwatchFormInput = forwardRef<HTMLInputElement, ISwatchFormInputProps>((
 			/>
 		</ConditionalWrapper>
 	)
-})
+}
 
 export default SwatchFormInput

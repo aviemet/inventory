@@ -1,17 +1,16 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import TextInput, { type ITextInputProps } from '@/Components/Inputs/TextInput'
 import Field from '../Field'
 import { useInertiaInput, type NestedObject } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
 
-interface ITextFormInputProps<TForm extends NestedObject>
+interface ITextFormInputProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<ITextInputProps, 'onBlur'|'onChange'|'name'>,
 	IFormInputProps<string, TForm> {}
 
-// const TextFormInput = forwardRef<HTMLInputElement, ITextFormInputProps>((
-const TextFormInput = <TForm extends NestedObject>(
+const TextFormInput = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -23,9 +22,8 @@ const TextFormInput = <TForm extends NestedObject>(
 		field = true,
 		...props
 	}: ITextFormInputProps<TForm>,
-	// ref,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
@@ -55,7 +53,6 @@ const TextFormInput = <TForm extends NestedObject>(
 			condition={ props.hidden !== true && field }
 		>
 			<TextInput
-				// ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value }
@@ -68,6 +65,5 @@ const TextFormInput = <TForm extends NestedObject>(
 		</ConditionalWrapper>
 	)
 }
-// )
 
 export default TextFormInput

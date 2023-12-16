@@ -1,15 +1,18 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import Field from '../Field'
 import SelectInput, { type ISelectProps } from '@/Components/Inputs/Select'
 import { ConditionalWrapper, Group } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
-import { useInertiaInput, type UseFormProps } from 'use-inertia-form'
+import { useInertiaInput, type UseFormProps, NestedObject } from 'use-inertia-form'
 import { type IFormInputProps } from '.'
 
 type OmittedDropdownTypes = 'name'|'defaultValue'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
-export interface ISelectFormProps extends Omit<ISelectProps, OmittedDropdownTypes>, IFormInputProps<string> {
+export interface ISelectFormProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<ISelectProps, OmittedDropdownTypes>,
+	Omit<IFormInputProps<string, TForm>, 'onChange'> {
 	defaultValue?: string
-	onChange?: ((value: string|null, form: UseFormProps<unknown>) => void) | undefined
+	onChange?: ((value: string|null, form: UseFormProps<TForm>) => void) | undefined
 	onDropdownOpen?: (form: UseFormProps<any>) => void
 	onDropdownClose?: (form: UseFormProps<any>) => void
 	endpoint?: string
@@ -17,7 +20,7 @@ export interface ISelectFormProps extends Omit<ISelectProps, OmittedDropdownType
 	field?: boolean
 }
 
-const Select = forwardRef<HTMLInputElement, ISelectFormProps>((
+const Select = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		label,
@@ -37,10 +40,9 @@ const Select = forwardRef<HTMLInputElement, ISelectFormProps>((
 		errorKey,
 		options,
 		...props
-	},
-	ref,
+	}: ISelectFormProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput({ name, model, errorKey })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model, errorKey })
 
 	const handleChange = (option: string|null) => {
 		setValue(option ? option : '')
@@ -93,7 +95,6 @@ const Select = forwardRef<HTMLInputElement, ISelectFormProps>((
 					condition={ field }
 				>
 					<SelectInput
-						ref={ ref }
 						// Add "search" suffix to prevent password managers trying to autofill dropdowns
 						id={ `${id || inputId}-search` }
 						autoComplete="off"
@@ -119,6 +120,6 @@ const Select = forwardRef<HTMLInputElement, ISelectFormProps>((
 			</>
 		</ConditionalWrapper>
 	)
-})
+}
 
 export default Select

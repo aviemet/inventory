@@ -1,16 +1,19 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import Field from '../Field'
 import AutocompleteInput, { type IAutocompleteProps } from '@/Components/Inputs/AutocompleteInput'
 import cx from 'clsx'
-import { useInertiaInput } from 'use-inertia-form'
+import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import { type IFormInputProps } from '.'
 
-interface IFormAutocompleteProps extends Omit<IAutocompleteProps, 'name'|'onBlur'|'onChange'>, IFormInputProps<string> {
+interface IFormAutocompleteProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<IAutocompleteProps, 'name'|'onBlur'|'onChange'>,
+	IFormInputProps<string, TForm> {
 	field?: boolean
 	endpoint?: string
 }
 
-const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocompleteProps>((
+const FormAutocompleteComponent = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -22,10 +25,9 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 		field = true,
 		endpoint,
 		...props
-	},
-	ref,
+	} : IFormAutocompleteProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (parameter: string) => {
 		setValue(parameter)
@@ -44,7 +46,6 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 			onChange={ handleChange }
 			onBlur={ handleBlur }
 			error={ errorKey ? form.getError(errorKey) : error }
-			ref={ ref }
 			wrapperProps={ {
 				component: Field,
 				className: cx({ required }),
@@ -56,6 +57,6 @@ const FormAutocompleteComponent = forwardRef<HTMLInputElement, IFormAutocomplete
 		/>
 
 	)
-})
+}
 
 export default FormAutocompleteComponent

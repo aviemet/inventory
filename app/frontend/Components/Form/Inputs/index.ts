@@ -1,6 +1,6 @@
 import { NestedObject, UseFormProps } from 'use-inertia-form'
 
-export interface IFormInputProps<T, TForm extends NestedObject = any> {
+export interface IFormInputProps<T, TForm extends NestedObject = NestedObject> {
 	name: string
 	model?: string
 	errorKey?: string

@@ -1,17 +1,19 @@
-import React, { forwardRef } from 'react'
-import { UseFormProps, useInertiaInput } from 'use-inertia-form'
+import React from 'react'
+import { NestedObject, UseFormProps, useInertiaInput } from 'use-inertia-form'
 import { IFormInputProps } from '.'
 import { ConditionalWrapper } from '@/Components'
 import Field from '../Field'
 import MultiSelect, { type IMultiSelectProps } from '@/Components/Inputs/MultiSelect'
 
 type OmittedDropdownTypes = 'name'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
-export interface IFormDropdownProps extends Omit<IMultiSelectProps, OmittedDropdownTypes>, IFormInputProps<string[]> {
+export interface IFormDropdownProps<TForm extends NestedObject = NestedObject>
+	extends Omit<IMultiSelectProps, OmittedDropdownTypes>,
+	IFormInputProps<string[], TForm> {
 	onDropdownOpen?: (form: UseFormProps<any>) => void
 	onDropdownClose?: (form: UseFormProps<any>) => void
 }
 
-const MultiSelectComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
+const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 	{
 		options = [],
 		label,
@@ -26,10 +28,9 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 		onDropdownOpen,
 		onDropdownClose,
 		...props
-	},
-	ref,
+	}: IFormDropdownProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[]>({ name, model, errorKey })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[], TForm>({ name, model, errorKey })
 
 	const handleBlur = () => {
 		if(onBlur) onBlur(value, form)
@@ -63,7 +64,6 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 			condition={ field }
 		>
 			<MultiSelect
-				ref={ ref }
 				// Add "search" suffix to prevent password managers trying to autofill dropdowns
 				id={ `${id || inputId}-search` }
 				autoComplete="off"
@@ -81,6 +81,6 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, IFormDropdownProps>((
 			/>
 		</ConditionalWrapper>
 	)
-})
+}
 
 export default React.memo(MultiSelectComponent)

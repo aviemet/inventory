@@ -1,15 +1,18 @@
 import React from 'react'
 import Field from '../Field'
 import DateTimeInput, { type IDateTimeProps } from '@/Components/Inputs/DateTimeInput'
-import { useInertiaInput } from 'use-inertia-form'
+import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
 
-interface IDateTimeFormProps extends Omit<IDateTimeProps, 'name'|'onChange'|'onBlur'>, IFormInputProps<Date> {
+interface IDateTimeFormProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<IDateTimeProps, 'name'|'onChange'|'onBlur'>,
+	IFormInputProps<Date, TForm> {
 	field?: boolean
 }
 
-const DateTime = ({
+const DateTime = <TForm extends NestedObject = NestedObject>({
 	name,
 	required,
 	onChange,
@@ -18,8 +21,8 @@ const DateTime = ({
 	model,
 	field = true,
 	...props
-}: IDateTimeFormProps) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date>({ name, model })
+}: IDateTimeFormProps<TForm>) => {
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date, TForm>({ name, model })
 
 	const handleChange = (date: Date) => {
 		setValue(date)

@@ -79,8 +79,8 @@ const Register = () => {
 						<TextInput
 							name="email"
 							placeholder="Email"
-							autoFocus
 							autoComplete="Email"
+							autoFocus
 							required
 							onBlur={ handleEmailBlur }
 						/>
@@ -113,7 +113,7 @@ const Register = () => {
 				</Tile.Content>
 
 				<Tile.Footer>
-					<Tile.HoverLink href={ Routes.newUserSession() }>Log In Instead</Tile.HoverLink>
+					{ !firstRun && <Tile.HoverLink href={ Routes.newUserSession() }>Log In Instead</Tile.HoverLink> }
 				</Tile.Footer>
 			</Form>
 		</Tile>
