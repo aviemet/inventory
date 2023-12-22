@@ -6,18 +6,18 @@ class Api::PurchasesController < Api::ApiController
     purchase.company = @active_company
 
     if purchase.save
-      render json: purchase.render, status: 201
+      render json: purchase.render, status: :created
     else
-      render json: { errors: purchase.errors }, status: 303
+      render json: { errors: purchase.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT /api/purchases/:id
   def update
     if purchase.update(purchase_params)
-      render json: purchase.render, status: 201
+      render json: purchase.render, status: :created
     else
-      render json: { errors: purchase.errors }, status: 303
+      render json: { errors: purchase.errors }, status: :see_other
     end
   end
 

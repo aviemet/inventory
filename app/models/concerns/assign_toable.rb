@@ -3,7 +3,7 @@ module AssignToable
   extend ActiveSupport::Concern
 
   included do
-    has_many :possessions, -> { where(active: true) }, class_name: "Assignment", as: :assign_toable
+    has_many :possessions, -> { where(active: true) }, class_name: "Assignment", as: :assign_toable, inverse_of: :assign_toable, dependent: :destroy
     has_many :assets, through: :possessions, source: :assignable, source_type: "Asset"
     has_many :items, -> { where(type: :Item) }, through: :possessions, source: :assignable, source_type: "Asset"
     has_many :accessories, -> { where(type: :Accessory) }, through: :possessions, source: :assignable, source_type: "Asset"

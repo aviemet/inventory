@@ -6,18 +6,18 @@ class Api::OrdersController < Api::ApiController
     order.company = @active_company
 
     if order.save
-      render json: order.render, status: 201
+      render json: order.render, status: :created
     else
-      render json: { errors: order.errors }, status: 303
+      render json: { errors: order.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT /api/orders/:id
   def update
     if order.update(order_params)
-      render json: order.render, status: 201
+      render json: order.render, status: :created
     else
-      render json: { errors: order.errors }, status: 303
+      render json: { errors: order.errors }, status: :see_other
     end
   end
 

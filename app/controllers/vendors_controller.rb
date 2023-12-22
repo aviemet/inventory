@@ -111,9 +111,9 @@ class VendorsController < ApplicationController
 
     if request.params&.[](:redirect) == false
       if vendor.save
-        render json: vendor.render, status: 201
+        render json: vendor.render, status: :created
       else
-        render json: { errors: vendor.errors }, status: 303
+        render json: { errors: vendor.errors }, status: :see_other
       end
     elsif vendor.save
       redirect_to vendor, notice: 'Vendor was successfully created'

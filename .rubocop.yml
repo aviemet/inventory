@@ -244,6 +244,12 @@ Layout/SpaceInsideParens:
 Layout/FirstArrayElementIndentation:
   Enabled: false
 
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+Layout/ArgumentAlignment:
+  Enabled: false
+
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#lintambiguousregexpliteral

@@ -5,9 +5,9 @@ class Api::ConsumablesController < Api::ApiController
   def update
     if consumable.update(consumable_params)
       flash[:success] = "Successfully replenished #{consumable.name}"
-      render json: consumable.render, status: 201
+      render json: consumable.render, status: :created
     else
-      render json: { errors: consumable.errors }, status: 303
+      render json: { errors: consumable.errors }, status: :see_other
     end
   end
 

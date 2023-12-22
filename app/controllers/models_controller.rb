@@ -50,12 +50,12 @@ class ModelsController < ApplicationController
 
     if model.save
       if request.params&.[](:redirect) == false
-        render json: model.render, status: 201
+        render json: model.render, status: :created
       else
         redirect_to model, notice: 'Model was successfully created'
       end
     elsif request.params&.[](:redirect) == false
-      render json: { errors: model.errors }, status: 303
+      render json: { errors: model.errors }, status: :see_other
     else
       redirect_to new_model_path, inertia: { errors: model.errors }
     end

@@ -22,18 +22,18 @@ class Api::DepartmentsController < Api::ApiController
     department.company = @active_company
 
     if department.save
-      render json: department.render, status: 201
+      render json: department.render, status: :created
     else
-      render json: { errors: department.errors }, status: 303
+      render json: { errors: department.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT /api/departments/:id
   def update
     if department.update(department_params)
-      render json: department.render, status: 201
+      render json: department.render, status: :created
     else
-      render json: { errors: department.errors }, status: 303
+      render json: { errors: department.errors }, status: :see_other
     end
   end
 

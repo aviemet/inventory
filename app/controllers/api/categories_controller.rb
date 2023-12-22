@@ -22,18 +22,18 @@ class Api::CategoriesController < Api::ApiController
     category.company = @active_company
 
     if category.save
-      render json: category.render, status: 201
+      render json: category.render, status: :created
     else
-      render json: { errors: category.errors }, status: 303
+      render json: { errors: category.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT /api/categories/:slug
   def update
     if category.update(category_params)
-      render json: category.render, status: 201
+      render json: category.render, status: :created
     else
-      render json: { errors: category.errors }, status: 303
+      render json: { errors: category.errors }, status: :see_other
     end
   end
 

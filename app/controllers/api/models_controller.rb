@@ -22,18 +22,18 @@ class Api::ModelsController < Api::ApiController
     model.company = @active_company
 
     if model.save
-      render json: model.render, status: 201
+      render json: model.render, status: :created
     else
-      render json: { errors: model.errors }, status: 303
+      render json: { errors: model.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT api/models/:id
   def update
     if model.update(model_params)
-      render json: model.render, status: 201
+      render json: model.render, status: :created
     else
-      render json: { errors: model.errors }, status: 303
+      render json: { errors: model.errors }, status: :see_other
     end
   end
 

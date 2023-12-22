@@ -21,7 +21,7 @@ module Searchable
 
     @advanced_search_methods = {
       default: ->(model, key, value) { model.where("#{model.table_name}.#{key} ILIKE ?", "%#{value}%") },
-      id: ->(model, key, value) { return model.joins(key.to_sym).where("#{key.pluralize}.id = ?", value[:id]) },
+      id: ->(model, key, value) { model.joins(key.to_sym).where("#{key.pluralize}.id = ?", value[:id]) },
       created_at: ->(model, _key, value) do
         return model unless value.is_a?(ActionController::Parameters)
 
@@ -30,16 +30,16 @@ module Searchable
 
         case value[:type]
         when 'before'
-          return model.where("#{model.table_name}.created_at <= :date", { date: start_date })
+          model.where("#{model.table_name}.created_at <= :date", { date: start_date })
         when 'after'
-          return model.where("#{model.table_name}.created_at >= :date", { date: start_date })
+          model.where("#{model.table_name}.created_at >= :date", { date: start_date })
         when 'exact'
-          return model.where("#{model.table_name}.created_at = :date", { date: start_date })
+          model.where("#{model.table_name}.created_at = :date", { date: start_date })
         when 'range'
           end_date = value[:end]&.to_date&.end_of_day
           return model if end_date.nil?
 
-          return model.where("#{model.table_name}.created_at >= :start_date AND #{model.table_name}.created_at <= :end_date", {
+          model.where("#{model.table_name}.created_at >= :start_date AND #{model.table_name}.created_at <= :end_date", {
             start_date: start_date,
             end_date: end_date,
           },)
@@ -68,8 +68,8 @@ module Searchable
 
     advanced_search_params.each do |key, value|
       apply_search = @advanced_search_methods[key.to_sym] ||
-                     (nested_key_with_id?(advanced_search_params[key]) && @advanced_search_methods[:id]) ||
-                     @advanced_search_methods[:default]
+        (nested_key_with_id?(advanced_search_params[key]) && @advanced_search_methods[:id]) ||
+        @advanced_search_methods[:default]
       next unless apply_search
 
       model = apply_search.call(model, key, value)

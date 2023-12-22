@@ -10,5 +10,7 @@ class CreateModels < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_index :models, [:name, :model_number], unique: true
   end
 end

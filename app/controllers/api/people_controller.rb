@@ -22,18 +22,18 @@ class Api::PeopleController < Api::ApiController
     person.company = @active_company
 
     if person.save
-      render json: person.render, status: 201
+      render json: person.render, status: :created
     else
-      render json: { errors: person.errors }, status: 303
+      render json: { errors: person.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT api/people/:id
   def update
     if person.update(person_params)
-      render json: person.render, status: 201
+      render json: person.render, status: :created
     else
-      render json: { errors: person.errors }, status: 303
+      render json: { errors: person.errors }, status: :see_other
     end
   end
 

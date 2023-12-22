@@ -54,9 +54,9 @@ class LocationsController < ApplicationController
     if request.params&.[](:redirect) == false
 
       if loc.save
-        render json: loc.render, status: 201
+        render json: loc.render, status: :created
       else
-        render json: { errors: loc.errors }, status: 303
+        render json: { errors: loc.errors }, status: :see_other
       end
 
     elsif loc.save

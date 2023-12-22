@@ -1,6 +1,6 @@
 class WebsiteSerializer < ApplicationSerializer
   object_as :website
-  
+
   attributes(
     :url,
     :name,

@@ -24,7 +24,7 @@ class ApplicationRecord < ActiveRecord::Base
   # Dynamic search scope for terms searching against specific fields
   ##
   def self.dynamic_search(query, field)
-    search_scope_name = "#{self.name.underscore}_#{field}_dynamic_search".to_sym
+    search_scope_name = "#{self.name.underscore}_#{field}_dynamic_search"
 
     pg_search_scope(
       search_scope_name,

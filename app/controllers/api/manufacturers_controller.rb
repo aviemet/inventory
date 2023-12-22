@@ -22,18 +22,18 @@ class Api::ManufacturersController < Api::ApiController
     manufacturer.company = @active_company
 
     if manufacturer.save
-      render json: manufacturer.render, status: 201
+      render json: manufacturer.render, status: :created
     else
-      render json: { errors: manufacturer.errors }, status: 303
+      render json: { errors: manufacturer.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT /api/manufacturers/:id
   def update
     if manufacturer?.update(manufacturer_params)
-      render json: manufacturer.render, status: 201
+      render json: manufacturer.render, status: :created
     else
-      render json: { errors: manufacturer.errors }, status: 303
+      render json: { errors: manufacturer.errors }, status: :see_other
     end
   end
 

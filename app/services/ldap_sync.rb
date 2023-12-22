@@ -78,7 +78,7 @@ class LdapSync
   end
 
   def find_or_create_person(guid)
-    Person.find_by_guid(guid) || Person.new({ guid:, company: @ldap.company })
+    Person.find_by(guid: guid) || Person.new({ guid:, company: @ldap.company })
   end
 
   def save_people

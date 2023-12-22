@@ -6,18 +6,18 @@ class Api::StatusLabelsController < Api::ApiController
     status_label.company = @active_company
 
     if status_label.save
-      render json: status_label.render, status: 201
+      render json: status_label.render, status: :created
     else
-      render json: { errors: status_label.errors }, status: 303
+      render json: { errors: status_label.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT /api/status_labels/:id
   def update
     if status_label.update(status_label_params)
-      render json: status_label.render, status: 201
+      render json: status_label.render, status: :created
     else
-      render json: { errors: status_label.errors }, status: 303
+      render json: { errors: status_label.errors }, status: :see_other
     end
   end
 

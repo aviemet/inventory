@@ -19,9 +19,9 @@ class Api::ItemsController < Api::ApiController
 
   def update
     if location.update(location_params)
-      render json: location.render, status: 201
+      render json: location.render, status: :created
     else
-      render json: { errors: location.errors }, status: 303
+      render json: { errors: location.errors }, status: :see_other
     end
   end
 end

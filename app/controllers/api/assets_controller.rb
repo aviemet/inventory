@@ -22,18 +22,18 @@ class Api::AssetsController < Api::ApiController
     asset.company = @active_company
 
     if asset.save
-      render json: asset.render, status: 201
+      render json: asset.render, status: :created
     else
-      render json: { errors: asset.errors }, status: 303
+      render json: { errors: asset.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT /api/assets/:id
   def update
     if asset.update(asset_params)
-      render json: asset.render, status: 201
+      render json: asset.render, status: :created
     else
-      render json: { errors: asset.errors }, status: 303
+      render json: { errors: asset.errors }, status: :see_other
     end
   end
 

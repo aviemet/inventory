@@ -22,18 +22,18 @@ class Api::VendorsController < Api::ApiController
     vendor.company = @active_company
 
     if vendor.save
-      render json: vendor.render, status: 201
+      render json: vendor.render, status: :created
     else
-      render json: { errors: vendor.errors }, status: 303
+      render json: { errors: vendor.errors }, status: :see_other
     end
   end
 
   # PATCH/PUT api/vendors/:id
   def update
     if vendor.update(vendor_params)
-      render json: vendor.render, status: 201
+      render json: vendor.render, status: :created
     else
-      render json: { errors: vendor.errors }, status: 303
+      render json: { errors: vendor.errors }, status: :see_other
     end
   end
 

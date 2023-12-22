@@ -3,7 +3,7 @@ require 'net/smtp'
 class Api::SmtpsController < Api::ApiController
   # POST /api/smtp/test
   def test
-    render json: test_smtp_auth(Smtp.new(smtp_params)), status: 200
+    render json: test_smtp_auth(Smtp.new(smtp_params)), status: :ok
   end
 
   private
