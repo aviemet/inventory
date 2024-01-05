@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   # before_action :set_action_cable_identifier
   before_action :set_active_company
-  before_action :redirect_empty_params
+  before_action :remove_empty_query_parameters
 
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -100,23 +100,20 @@ class ApplicationController < ActionController::Base
   #   cookies.encrypted[:user_id] = current_user&.id
   # end
 
-  def redirect_empty_params
-    dirty = false
+  def remove_empty_query_parameters
+    # Filter out empty query parameters
+    non_empty_params = request.query_parameters.compact_blank
 
-    query_string_params = [:search, :sort, :direction]
-    query_string_params.each do |key|
-      next unless params.key?(key) && params[key].blank?
-
-      dirty = true
-      params.delete key
+    # Remove direction param if table is not sorted
+    if non_empty_params['direction'].present? && non_empty_params['sort'].blank?
+      non_empty_params.delete('direction')
     end
 
-    if params.key?(:direction) && !params.key?(:sort)
-      dirty = true
-      params.delete :direction
-    end
+    return unless request.query_parameters.keys.length > non_empty_params.keys.length
 
-    redirect_to request.path, params: params if dirty
+    # Rebuild the URL without empty query parameters
+    new_url = "#{request.path}?#{non_empty_params.to_param}"
+    redirect_to new_url
   end
 
   def first_run
