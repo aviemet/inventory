@@ -1,25 +1,25 @@
 class FieldsetsController < ApplicationController
   before_action :set_fieldset, only: [:show, :edit, :update, :destroy]
 
-  # GET /fieldsets
+  # @route GET /fieldsets (fieldsets)
   def index
     @fieldsets = Fieldset.all
   end
 
-  # GET /fieldsets/:id
+  # @route GET /fieldsets/:id (fieldset)
   def show
   end
 
-  # GET /fieldsets/new
+  # @route GET /fieldsets/new (new_fieldset)
   def new
     @fieldset = Fieldset.new
   end
 
-  # GET /fieldsets/:id/edit
+  # @route GET /fieldsets/:id/edit (edit_fieldset)
   def edit
   end
 
-  # POST /fieldsets
+  # @route POST /fieldsets (fieldsets)
   def create
     @fieldset = Fieldset.new(fieldset_params)
 
@@ -34,7 +34,8 @@ class FieldsetsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /fieldsets/:id
+  # @route PATCH /fieldsets/:id (fieldset)
+  # @route PUT /fieldsets/:id (fieldset)
   def update
     respond_to do |format|
       if @fieldset.update(fieldset_params)
@@ -47,7 +48,7 @@ class FieldsetsController < ApplicationController
     end
   end
 
-  # DELETE /fieldsets/:id
+  # @route DELETE /fieldsets/:id (fieldset)
   def destroy
     @fieldset.destroy
     respond_to do |format|

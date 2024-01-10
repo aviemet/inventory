@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
   expose :assignment
 
-  # POST /assignments/
+  # @route POST /assignments (assignments)
   def create
     # Assignable should always be valid
     assignment.assignable_type = assignment_params[:assignable_type]
@@ -23,7 +23,8 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assignments/:id
+  # @route PATCH /assignments/:id (assignment)
+  # @route PUT /assignments/:id (assignment)
   def update
     assignable = assignment.assignable
 
@@ -34,7 +35,7 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assignments/:id/unassign
+  # @route PATCH /assignments/:id/unassign (unassign_assignment)
   def unassign
     PublicActivity.enabled = false
 
@@ -55,7 +56,7 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # DELETE /assignments/:id
+  # @route DELETE /assignments/:id (assignment)
   def destroy
     assignable = assignment.assignable
     assignment.destroy

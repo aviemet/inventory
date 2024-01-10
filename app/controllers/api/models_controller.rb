@@ -3,21 +3,25 @@ class Api::ModelsController < Api::ApiController
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, model: Model, find_by: :slug
 
   # GET api/models/options
+  # @route GET /api/models (api_models)
   def index
     render json: models.includes_associated.render
   end
 
   # GET api/models/:slug
+  # @route GET /api/models/:slug (api_model)
   def show
     render json: model.render
   end
 
   # GET api/options/models
+  # @route GET /api/options/models (api_models_options)
   def options
     render json: models.render(view: :options)
   end
 
   # POST api/models
+  # @route POST /api/models (api_models)
   def create
     model.company = @active_company
 
@@ -29,6 +33,8 @@ class Api::ModelsController < Api::ApiController
   end
 
   # PATCH/PUT api/models/:id
+  # @route PATCH /api/models/:slug (api_model)
+  # @route PUT /api/models/:slug (api_model)
   def update
     if model.update(model_params)
       render json: model.render, status: :created

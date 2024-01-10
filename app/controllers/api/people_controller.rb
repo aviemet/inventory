@@ -3,16 +3,19 @@ class Api::PeopleController < Api::ApiController
   expose :person, id: ->{ params[:slug] }, scope: ->{ @active_company.people.includes_associated }, find_by: :slug
 
   # GET api/people/options
+  # @route GET /api/people (api_people)
   def index
     render json: people.includes_associated.render
   end
 
   # GET api/people/:slug
+  # @route GET /api/people/:id (api_person)
   def show
     render json: person.render
   end
 
   # GET api/options/people
+  # @route GET /api/options/people (api_people_options)
   def options
     render json: people.render(view: :options)
   end
@@ -29,6 +32,8 @@ class Api::PeopleController < Api::ApiController
   end
 
   # PATCH/PUT api/people/:id
+  # @route PATCH /api/people/:id (api_person)
+  # @route PUT /api/people/:id (api_person)
   def update
     if person.update(person_params)
       render json: person.render, status: :created

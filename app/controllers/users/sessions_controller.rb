@@ -3,7 +3,7 @@
 class Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
 
-  # GET /login
+  # @route GET /login (new_user_session)
   def new
     if User.count == 0
       redirect_to new_user_registration_path
@@ -12,7 +12,7 @@ class Users::SessionsController < Devise::SessionsController
     end
   end
 
-  # POST /login
+  # @route POST /login (user_session)
   def create
     # super
     self.resource = warden.authenticate!(auth_options)
@@ -21,7 +21,7 @@ class Users::SessionsController < Devise::SessionsController
     respond_with resource, location: after_sign_in_path_for(resource)
   end
 
-  # GET /logout
+  # @route GET /logout (destroy_user_session)
   def destroy
     # super
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)

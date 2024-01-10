@@ -4,7 +4,7 @@ class PersonGroupsController < ApplicationController
   expose :person_groups, -> { @active_company.person_groups.includes_associated }
   expose :person_group, id: ->{ params[:slug] }, scope: ->{ @active_company.person_groups.includes_associated }, find_by: :slug
 
-  # GET /person_group
+  # @route GET /people/groups (person_groups)
   def index
     authorize person_groups
 
@@ -13,7 +13,7 @@ class PersonGroupsController < ApplicationController
     }
   end
 
-  # GET /person_group/:slug
+  # @route GET /people/groups/:slug (person_group)
   def show
     authorize person_group
     render inertia: "PersonGroups/Show", props: {
@@ -31,20 +31,20 @@ class PersonGroupsController < ApplicationController
     }
   end
 
-  # GET /person_group/new
+  # @route GET /people/groups/new (new_person_group)
   def new
     authorize PersonGroup
     render inertia: "PersonGroups/New"
   end
 
-  # GET /person_group/:slug/edit
+  # @route GET /people/groups/:slug/edit (edit_person_group)
   def edit
     render inertia: "PersonGroups/Edit", props: {
       person_group: person_group.render(view: :edit),
     }
   end
 
-  # POST /person_group
+  # @route POST /people/groups (person_groups)
   def create
     authorize PersonGroup
     person_group = PersonGroup.new(person_group_params.except(:permissions))
@@ -60,7 +60,8 @@ class PersonGroupsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /person_group/:slug
+  # @route PATCH /people/groups/:slug (person_group)
+  # @route PUT /people/groups/:slug (person_group)
   def update
     authorize person_group
     if person_group.update(person_group_params.except(:permissions))
@@ -72,7 +73,7 @@ class PersonGroupsController < ApplicationController
     end
   end
 
-  # DELETE /person_group/:slug
+  # @route DELETE /people/groups/:slug (person_group)
   def destroy
     authorize person_group
     person_group.destroy

@@ -1,7 +1,8 @@
 class Api::ConsumablesController < Api::ApiController
   expose :consumable, id: ->{ params[:slug] }, scope: ->{ @active_company.consumables }, find_by: :slug
 
-  # PATCH/PUT /api/consumables/:id
+  # @route PATCH /api/consumables/:id (api_consumable)
+  # @route PUT /api/consumables/:id (api_consumable)
   def update
     if consumable.update(consumable_params)
       flash[:success] = "Successfully replenished #{consumable.name}"

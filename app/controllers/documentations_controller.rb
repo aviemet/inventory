@@ -4,7 +4,7 @@ class DocumentationsController < ApplicationController
   expose :documentations, -> { search(@active_company.documentations.includes_associated, sortable_fields) }
   expose :documentation, id: ->{ params[:slug] }, scope: ->{ @active_company.documentations.includes_associated }, find_by: :slug
 
-  # GET /documentations
+  # @route GET /documentations (documentations)
   def index
     authorize documentations
     render inertia: "Documentation/Index", props: {
@@ -12,7 +12,7 @@ class DocumentationsController < ApplicationController
     }
   end
 
-  # GET /documentations/:slug
+  # @route GET /documentations/:slug (documentation)
   def show
     authorize documentation
     render inertia: "Documentation/Show", props: {
@@ -20,7 +20,7 @@ class DocumentationsController < ApplicationController
     }
   end
 
-  # GET /documentations/new
+  # @route GET /documentations/new (new_documentation)
   def new
     authorize Documentation
     render inertia: "Documentation/New", props: {
@@ -28,7 +28,7 @@ class DocumentationsController < ApplicationController
     }
   end
 
-  # GET /documentations/:slug/edit
+  # @route GET /documentations/:slug/edit (edit_documentation)
   def edit
     authorize documentation
     render inertia: "Documentation/Edit", props: {
@@ -36,7 +36,7 @@ class DocumentationsController < ApplicationController
     }
   end
 
-  # POST /documentations
+  # @route POST /documentations (documentations)
   def create
     authorize Documentation
 
@@ -50,7 +50,8 @@ class DocumentationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /documentations/:slug
+  # @route PATCH /documentations/:slug (documentation)
+  # @route PUT /documentations/:slug (documentation)
   def update
     authorize documentation
     if documentation.update(documentation_params)
@@ -60,7 +61,7 @@ class DocumentationsController < ApplicationController
     end
   end
 
-  # DELETE /documentations/:slug
+  # @route DELETE /documentations/:slug (documentation)
   def destroy
     authorize documentation
     documentation.destroy

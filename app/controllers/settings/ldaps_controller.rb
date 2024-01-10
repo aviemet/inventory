@@ -1,7 +1,7 @@
 class Settings::LdapsController < ApplicationController
   expose :ldap
 
-  # GET /settings/ldaps
+  # @route GET /settings/ldap (settings_ldaps)
   def index
     ldap = @active_company&.ldap
 
@@ -10,7 +10,7 @@ class Settings::LdapsController < ApplicationController
     }
   end
 
-  # POST /settings/ldap
+  # @route POST /settings/ldap (settings_ldaps)
   def create
     ldap.company = @active_company
 
@@ -23,7 +23,8 @@ class Settings::LdapsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /settings/ldap/:id
+  # @route PATCH /settings/ldap/:id (settings_ldap)
+  # @route PUT /settings/ldap/:id (settings_ldap)
   def update
     if ldap.update(ldap_params)
       redirect_to settings_ldaps_path, notice: 'LDAP settings successfully saved'
@@ -35,11 +36,12 @@ class Settings::LdapsController < ApplicationController
   end
 
   # PATCH /settings/ldap/:id/sync
+  # @route PATCH /settings/ldaps/:id/sync (settings_ldap_sync)
   def sync
     LdapJob.perform_now(ldap)
   end
 
-  # DELETE /settings/ldap/:id
+  # @route DELETE /settings/ldap/:id (settings_ldap)
   def destroy
     ldap.destroy
     redirect_to settings_ldaps_path

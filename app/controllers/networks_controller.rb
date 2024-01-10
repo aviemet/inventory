@@ -5,7 +5,7 @@ class NetworksController < ApplicationController
   expose :networks, -> { search(@active_company.networks, sortable_fields) }
   expose :network, scope: ->{ @active_company.networks }, find: ->(id, scope){ scope.find(id) }
 
-  # GET /networks
+  # @route GET /networks (networks)
   def index
     authorize networks
     paginated_networks = networks.page(params[:page] || 1)
@@ -19,7 +19,7 @@ class NetworksController < ApplicationController
     }
   end
 
-  # GET /networks/:id
+  # @route GET /networks/:id (network)
   def show
     authorize network
     ips = IpLease.includes(:item).find_in_network(self.network)
@@ -36,7 +36,7 @@ class NetworksController < ApplicationController
     }
   end
 
-  # GET /networks/new
+  # @route GET /networks/new (new_network)
   def new
     authorize Network
     render inertia: "Networks/New", props: {
@@ -44,7 +44,7 @@ class NetworksController < ApplicationController
     }
   end
 
-  # GET /networks/:id/edit
+  # @route GET /networks/:id/edit (edit_network)
   def edit
     authorize network
     render inertia: "Networks/Edit", props: {
@@ -52,7 +52,7 @@ class NetworksController < ApplicationController
     }
   end
 
-  # POST /networks
+  # @route POST /networks (networks)
   def create
     authorize Network
     network.company = @active_company
@@ -63,7 +63,8 @@ class NetworksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /networks/:id
+  # @route PATCH /networks/:id (network)
+  # @route PUT /networks/:id (network)
   def update
     authorize network
     if network.update(network_params)
@@ -73,7 +74,8 @@ class NetworksController < ApplicationController
     end
   end
 
-  # DELETE /networks/:id
+  # @route DELETE /networks (networks)
+  # @route DELETE /networks/:id (network)
   def destroy
     authorize network
     network.destroy

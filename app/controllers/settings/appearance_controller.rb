@@ -1,4 +1,5 @@
 class Settings::AppearanceController < ApplicationController
+  # @route GET /settings/appearance (settings_appearance_index)
   def index
     render inertia: "Settings/Appearance/Index", props: {
       settings: {
@@ -7,6 +8,8 @@ class Settings::AppearanceController < ApplicationController
     }
   end
 
+  # @route PUT /settings/appearance (settings_appearance)
+  # @route PATCH /settings/appearance (settings_appearance)
   def update
     if @active_company.update(settings_params)
       redirect_to settings_appearance_index_path, notice: 'Appearance setttings successfully updated'

@@ -5,7 +5,7 @@ class DepartmentsController < ApplicationController
   expose :departments, -> { search(@active_company.departments.includes_associated, sortable_fields) }
   expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
 
-  # GET /departments
+  # @route GET /departments (departments)
   def index
     authorize departments
     paginated_departments = departments.page(params[:page] || 1).per(current_user.limit(:departments))
@@ -19,7 +19,7 @@ class DepartmentsController < ApplicationController
     }
   end
 
-  # GET /departments/:slug
+  # @route GET /departments/:slug (department)
   def show
     authorize department
     render inertia: "Departments/Show", props: {
@@ -87,7 +87,7 @@ class DepartmentsController < ApplicationController
     }
   end
 
-  # GET /departments/new
+  # @route GET /departments/new (new_department)
   def new
     authorize Department
     render inertia: "Departments/New", props: {
@@ -95,7 +95,7 @@ class DepartmentsController < ApplicationController
     }
   end
 
-  # GET /departments/:slug/edit
+  # @route GET /departments/:slug/edit (edit_department)
   def edit
     authorize department
     render inertia: "Departments/Edit", props: {
@@ -103,7 +103,7 @@ class DepartmentsController < ApplicationController
     }
   end
 
-  # POST /departments
+  # @route POST /departments (departments)
   def create
     authorize Department
     department = Department.new(department_params)
@@ -116,7 +116,8 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /departments/:slug
+  # @route PATCH /departments/:slug (department)
+  # @route PUT /departments/:slug (department)
   def update
     authorize department
     if department.update(department_params)
@@ -126,7 +127,8 @@ class DepartmentsController < ApplicationController
     end
   end
 
-  # DELETE /departments/:slug
+  # @route DELETE /departments (departments)
+  # @route DELETE /departments/:slug (department)
   def destroy
     authorize department
     department.destroy

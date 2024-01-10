@@ -70,6 +70,9 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
 
   gem "dotenv-rails", ">= 2.8"
+
+  # File annotation
+  gem "chusaku", "~> 1.2", require: false
 end
 
 group :development do

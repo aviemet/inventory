@@ -4,7 +4,7 @@ class TicketsController < ApplicationController
   expose :tickets, -> { search(@active_company.tickets.includes_associated.all, sortable_fields) }
   expose :ticket, scope: -> { @active_company.tickets }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  # GET /tickets
+  # @route GET /tickets (tickets)
   def index
     authorize tickets
     paginated_tickets = tickets.page(params[:page] || 1).per(current_user.limit(:tickets))
@@ -18,7 +18,7 @@ class TicketsController < ApplicationController
     }
   end
 
-  # GET /tickets/:id
+  # @route GET /tickets/:id (ticket)
   def show
     authorize ticket
     render inertia: "Tickets/Show", props: {
@@ -26,7 +26,7 @@ class TicketsController < ApplicationController
     }
   end
 
-  # GET /tickets/new
+  # @route GET /tickets/new (new_ticket)
   def new
     authorize Ticket
     render inertia: "Tickets/New", props: {
@@ -37,7 +37,7 @@ class TicketsController < ApplicationController
     }
   end
 
-  # GET /tickets/:id/edit
+  # @route GET /tickets/:id/edit (edit_ticket)
   def edit
     authorize ticket
     render inertia: "Tickets/Edit", props: {
@@ -48,7 +48,7 @@ class TicketsController < ApplicationController
     }
   end
 
-  # POST /tickets
+  # @route POST /tickets (tickets)
   def create
     authorize Ticket
     ticket.company = @active_company
@@ -59,7 +59,8 @@ class TicketsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tickets/:id
+  # @route PATCH /tickets/:id (ticket)
+  # @route PUT /tickets/:id (ticket)
   def update
     authorize ticket
     if ticket.update(ticket_params)
@@ -69,7 +70,7 @@ class TicketsController < ApplicationController
     end
   end
 
-  # DELETE /tickets/:id
+  # @route DELETE /tickets/:id (ticket)
   def destroy
     authorize ticket
     ticket.destroy

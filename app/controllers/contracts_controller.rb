@@ -4,7 +4,7 @@ class ContractsController < ApplicationController
   expose :contracts, -> { search(@active_company.contracts.includes_associated, sortable_fields) }
   expose :contract, id: ->{ params[:slug] }, scope: ->{ @active_company.contracts.includes_associated }, find_by: :slug
 
-  # GET /contracts
+  # @route GET /contracts (contracts)
   def index
     authorize contracts
     paginated_contracts = contracts.page(params[:page] || 1).per(current_user.limit(:contracts))
@@ -18,7 +18,7 @@ class ContractsController < ApplicationController
     }
   end
 
-  # GET /contracts/:slug
+  # @route GET /contracts/:slug (contract)
   def show
     authorize contract
     render inertia: "Contracts/Show", props: {
@@ -26,7 +26,7 @@ class ContractsController < ApplicationController
     }
   end
 
-  # GET /contracts/new
+  # @route GET /contracts/new (new_contract)
   def new
     authorize Contract
     render inertia: "Contracts/New", props: {
@@ -34,7 +34,7 @@ class ContractsController < ApplicationController
     }
   end
 
-  # GET /contracts/:slug/edit
+  # @route GET /contracts/:slug/edit (edit_contract)
   def edit
     authorize contract
     render inertia: "Contracts/Edit", props: {
@@ -42,7 +42,7 @@ class ContractsController < ApplicationController
     }
   end
 
-  # POST /contracts
+  # @route POST /contracts (contracts)
   def create
     authorize Contract
     contract.company = @active_company
@@ -54,7 +54,8 @@ class ContractsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contracts/:slug
+  # @route PATCH /contracts/:slug (contract)
+  # @route PUT /contracts/:slug (contract)
   def update
     authorize contract
     if contract.update(contract_params)
@@ -64,7 +65,8 @@ class ContractsController < ApplicationController
     end
   end
 
-  # DELETE /contracts/:slug
+  # @route DELETE /contracts (contracts)
+  # @route DELETE /contracts/:slug (contract)
   def destroy
     authorize contract
     contract.destroy

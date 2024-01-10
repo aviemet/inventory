@@ -1,7 +1,7 @@
 class Api::PurchasesController < Api::ApiController
   expose :purchase, id: ->{ params[:slug] }, scope: ->{ @active_company.purchases.includes_associated }, find_by: :slug
 
-  # POST /api/purchases
+  # @route POST /api/purchases (api_purchases)
   def create
     purchase.company = @active_company
 
@@ -12,7 +12,8 @@ class Api::PurchasesController < Api::ApiController
     end
   end
 
-  # PATCH/PUT /api/purchases/:id
+  # @route PATCH /api/purchases/:id (api_purchase)
+  # @route PUT /api/purchases/:id (api_purchase)
   def update
     if purchase.update(purchase_params)
       render json: purchase.render, status: :created
