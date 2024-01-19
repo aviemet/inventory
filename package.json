@@ -74,7 +74,7 @@
     "react-icons": "^4.12.0",
     "tabler-icons-react": "^1.56.0",
     "use-inertia-form": "^3.3.0",
-    "vite": "^5.0.5",
+    "vite": "^5.0.12",
     "vite-plugin-ruby": "^5.0.0",
     "zustand": "^4.4.6"
   },
