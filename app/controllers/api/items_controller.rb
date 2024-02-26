@@ -23,10 +23,10 @@ class Api::ItemsController < Api::ApiController
   # @route PATCH /api/hardware/:id (api_item)
   # @route PUT /api/hardware/:id (api_item)
   def update
-    if location.update(location_params)
-      render json: location.render, status: :created
+    if item.update(item_params)
+      render json: item.render, status: :created
     else
-      render json: { errors: location.errors }, status: :see_other
+      render json: { errors: item.errors }, status: :see_other
     end
   end
 end
