@@ -1,13 +1,16 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import PasswordInput, { type IPasswordInputProps } from '@/Components/Inputs/PasswordInput'
 import Field from '../Field'
-import { useInertiaInput } from 'use-inertia-form'
+import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
 
-interface IPasswordFormInputProps extends Omit<IPasswordInputProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<string> {}
+interface IPasswordFormInputProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<IPasswordInputProps, 'onBlur'|'onChange'|'name'>,
+	IFormInputProps<string, TForm> {}
 
-const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
+const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -17,10 +20,9 @@ const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
 		required,
 		field = true,
 		...props
-	},
-	ref,
+	}: IPasswordFormInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
@@ -50,7 +52,6 @@ const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
 			condition={ field }
 		>
 			<PasswordInput
-				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value }
@@ -61,6 +62,6 @@ const FormInput = forwardRef<HTMLInputElement, IPasswordFormInputProps>((
 				{ ...props }
 			/></ConditionalWrapper>
 	)
-})
+}
 
 export default FormInput

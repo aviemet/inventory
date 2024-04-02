@@ -27,10 +27,10 @@ class Model < ApplicationRecord
   resourcify
 
   belongs_to :manufacturer
-  has_many :items, -> { includes_associated }, dependent: :nullify
-  has_many :accessories, -> { includes_associated }, dependent: :nullify
-  has_many :consumables, -> { includes_associated }, dependent: :nullify
-  has_many :components, -> { includes_associated }, dependent: :nullify
+  has_many :items, -> { includes_associated }, dependent: :nullify, inverse_of: :model
+  has_many :accessories, -> { includes_associated }, dependent: :nullify, inverse_of: :model
+  has_many :consumables, -> { includes_associated }, dependent: :nullify, inverse_of: :model
+  has_many :components, -> { includes_associated }, dependent: :nullify, inverse_of: :model
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :model_number, message: "Model already exists" }

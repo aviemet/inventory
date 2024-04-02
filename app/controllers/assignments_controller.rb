@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
   expose :assignment
 
-  # POST /assignments/
+  # @route POST /assignments (assignments)
   def create
     # Assignable should always be valid
     assignment.assignable_type = assignment_params[:assignable_type]
@@ -18,12 +18,13 @@ class AssignmentsController < ApplicationController
     else
       redirect_to send(
         "checkout_#{assignment_params[:assignable_type].downcase.singularize}_path",
-        id: assignment.assignable
+        id: assignment.assignable,
       ), inertia: { errors: assignment.errors }
     end
   end
 
-  # PATCH/PUT /assignments/:id
+  # @route PATCH /assignments/:id (assignment)
+  # @route PUT /assignments/:id (assignment)
   def update
     assignable = assignment.assignable
 
@@ -34,7 +35,7 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assignments/:id/unassign
+  # @route PATCH /assignments/:id/unassign (unassign_assignment)
   def unassign
     PublicActivity.enabled = false
 
@@ -48,14 +49,14 @@ class AssignmentsController < ApplicationController
       redirect_to(
         send(
           "checkin_#{assignment.assignable_type.downcase.singularize}_path",
-          { id: assignable, assignment_id: assignment }
+          { id: assignable, assignment_id: assignment },
         ),
-        inertia: { errors: assignment.errors }
+        inertia: { errors: assignment.errors },
       )
     end
   end
 
-  # DELETE /assignments/:id
+  # @route DELETE /assignments/:id (assignment)
   def destroy
     assignable = assignment.assignable
     assignment.destroy

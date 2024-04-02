@@ -144,7 +144,7 @@ RSpec.describe "Users", :inertia do
         user = create(:user)
         patch user_url(user), params: { user: { active: false } }
         user.reload
-        expect(user.active).to eq(false)
+        expect(user.active).to be(false)
         expect(response).to redirect_to(user_url(user))
       end
     end

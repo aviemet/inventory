@@ -4,7 +4,7 @@ class CompaniesController < ApplicationController
   expose :companies, -> { search(current_user.companies, sortable_fields) }
   expose :company, id: ->{ params[:slug] }, scope: ->{ current_user.companies }, find_by: :slug
 
-  # GET /companies
+  # @route GET /companies (companies)
   def index
     authorize companies
     paginated_companies = companies.page(params[:page] || 1).per(current_user.limit(:companies))
@@ -18,7 +18,7 @@ class CompaniesController < ApplicationController
     }
   end
 
-  # GET /companies/:slug
+  # @route GET /companies/:slug (company)
   def show
     authorize company
     if company.nil?
@@ -30,7 +30,7 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # GET /companies/new
+  # @route GET /companies/new (new_company)
   def new
     authorize Company
     render inertia: "Companies/New", props: {
@@ -38,7 +38,7 @@ class CompaniesController < ApplicationController
     }
   end
 
-  # GET /companies/:slug/edit
+  # @route GET /companies/:slug/edit (edit_company)
   def edit
     authorize company
     render inertia: "Companies/Edit", props: {
@@ -46,7 +46,7 @@ class CompaniesController < ApplicationController
     }
   end
 
-  # POST /companies
+  # @route POST /companies (companies)
   def create
     authorize Company
     if Company.new(company_params).save
@@ -60,7 +60,8 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /companies/:slug
+  # @route PATCH /companies/:slug (company)
+  # @route PUT /companies/:slug (company)
   def update
     authorize company
     if company.update(company_params)
@@ -70,7 +71,8 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # DELETE /companies/:slug
+  # @route DELETE /companies (companies)
+  # @route DELETE /companies/:slug (company)
   def destroy
     authorize company
     company.destroy
@@ -81,7 +83,6 @@ class CompaniesController < ApplicationController
   end
 
   # TODO: This probably is unused and needs to go
-  # GET /companies/:slug/snippet/:snippet
   # def snippet
   #   respond_to do |format|
   #     format.html { render template: "companies/#{params[:snippet]}", layout: false }

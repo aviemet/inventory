@@ -5,7 +5,7 @@ class VendorsController < ApplicationController
   expose :vendors, -> { search(@active_company.vendors.includes_associated, sortable_fields) }
   expose :vendor, id: ->{ params[:slug] }, scope: ->{ @active_company.vendors.includes_associated }, find_by: :slug
 
-  # GET /vendors
+  # @route GET /vendors (vendors)
   def index
     authorize vendors
     paginated_vendors = vendors.page(params[:page] || 1).per(current_user.limit(:vendors))
@@ -19,7 +19,7 @@ class VendorsController < ApplicationController
     }
   end
 
-  # GET /vendors/:slug
+  # @route GET /vendors/:slug (vendor)
   def show
     authorize vendor
     render inertia: "Vendors/Show", props: {
@@ -87,7 +87,7 @@ class VendorsController < ApplicationController
     }
   end
 
-  # GET /vendors/new
+  # @route GET /vendors/new (new_vendor)
   def new
     authorize Vendor
     render inertia: "Vendors/New", props: {
@@ -95,7 +95,7 @@ class VendorsController < ApplicationController
     }
   end
 
-  # GET /vendors/:slug/edit
+  # @route GET /vendors/:slug/edit (edit_vendor)
   def edit
     authorize vendor
     render inertia: "Vendors/Edit", props: {
@@ -103,7 +103,7 @@ class VendorsController < ApplicationController
     }
   end
 
-  # POST /vendors
+  # @route POST /vendors (vendors)
   def create
     authorize Vendor
     vendor = Vendor.new(vendor_params)
@@ -111,9 +111,9 @@ class VendorsController < ApplicationController
 
     if request.params&.[](:redirect) == false
       if vendor.save
-        render json: vendor.render, status: 201
+        render json: vendor.render, status: :created
       else
-        render json: { errors: vendor.errors }, status: 303
+        render json: { errors: vendor.errors }, status: :see_other
       end
     elsif vendor.save
       redirect_to vendor, notice: 'Vendor was successfully created'
@@ -122,7 +122,8 @@ class VendorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /vendors/:slug
+  # @route PATCH /vendors/:slug (vendor)
+  # @route PUT /vendors/:slug (vendor)
   def update
     authorize vendor
     if vendor.update(vendor_params)
@@ -132,8 +133,8 @@ class VendorsController < ApplicationController
     end
   end
 
-  # DELETE /vendors
-  # DELETE /vendors/:slug
+  # @route DELETE /vendors (vendors)
+  # @route DELETE /vendors/:slug (vendor)
   def destroy
     authorize vendor
     if request.params[:slug]

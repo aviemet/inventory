@@ -15,7 +15,7 @@ class CreateTickets < ActiveRecord::Migration[7.0]
   end
 
   def up
-    execute <<-SQL
+    execute <<-SQL.squish
       ALTER SEQUENCE tickets_number_seq  RESTART WITH 1000000
     SQL
   end

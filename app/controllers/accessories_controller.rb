@@ -5,7 +5,7 @@ class AccessoriesController < ApplicationController
   expose :accessories, -> { search(@active_company.accessories.includes_associated, sortable_fields) }
   expose :accessory, scope: ->{ @active_company.accessories }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  # GET /accessories
+  # @route GET /accessories (accessories)
   def index
     authorize accessories
     paginated_accessories = accessories.page(params[:page] || 1).per(current_user.limit(:accessories))
@@ -19,7 +19,7 @@ class AccessoriesController < ApplicationController
     }
   end
 
-  # GET /accessories/:id
+  # @route GET /accessories/:id (accessory)
   def show
     authorize accessory
     render inertia: "Accessories/Show", props: {
@@ -27,7 +27,7 @@ class AccessoriesController < ApplicationController
     }
   end
 
-  # GET /accessories/new
+  # @route GET /accessories/new (new_accessory)
   def new
     authorize Accessory
     render inertia: "Accessories/New", props: {
@@ -35,7 +35,7 @@ class AccessoriesController < ApplicationController
     }
   end
 
-  # GET /accessories/:id/edit
+  # @route GET /accessories/:id/edit (edit_accessory)
   def edit
     authorize accessory
     render inertia: "Accessories/Edit", props: {
@@ -43,7 +43,7 @@ class AccessoriesController < ApplicationController
     }
   end
 
-  # GET /accessories/:id/checkout
+  # @route GET /accessories/:id/checkout (checkout_accessory)
   def checkout
     authorize accessory
     if accessory.qty == 0
@@ -63,7 +63,7 @@ class AccessoriesController < ApplicationController
     end
   end
 
-  # GET /accessories/:id/checkin/:assignment_id
+  # @route GET /accessories/:id/checkin/:assignment_id (checkin_accessory)
   def checkin
     authorize accessory
     assignment = Assignment.find(params[:assignment_id])
@@ -82,7 +82,7 @@ class AccessoriesController < ApplicationController
     end
   end
 
-  # POST /accessories
+  # @route POST /accessories (accessories)
   def create
     authorize Accessory
     accessory.company = @active_company
@@ -93,7 +93,8 @@ class AccessoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /accessories/:id
+  # @route PATCH /accessories/:id (accessory)
+  # @route PUT /accessories/:id (accessory)
   def update
     authorize accessory
     if accessory.update(accessory_params)
@@ -103,7 +104,8 @@ class AccessoriesController < ApplicationController
     end
   end
 
-  # DELETE /accessories/:id
+  # @route DELETE /accessories (accessories)
+  # @route DELETE /accessories/:id (accessory)
   def destroy
     authorize accessory
     accessory.destroy

@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  # @route GET / (root)
+  # @route GET /dashboard (dashboard)
   def dashboard
     activities = PublicActivity::Activity
       .includes(:owner, :trackable, :recipient)

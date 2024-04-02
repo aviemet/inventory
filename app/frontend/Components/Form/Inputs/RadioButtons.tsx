@@ -1,13 +1,16 @@
 import React from 'react'
 import RadioButtons, { type IRadioButtonsProps } from '@/Components/Inputs/RadioButtons'
 import Field from '../Field'
-import { useInertiaInput } from 'use-inertia-form'
+import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
 
-interface IFormRadioButtonsProps extends Omit<IRadioButtonsProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<string> {}
+interface IFormRadioButtonsProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<IRadioButtonsProps, 'onBlur'|'onChange'|'name'>,
+	IFormInputProps<string, TForm> {}
 
-const FormRadioButtons = ({
+const FormRadioButtons = <TForm extends NestedObject = NestedObject>({
 	options,
 	name,
 	id,
@@ -17,8 +20,8 @@ const FormRadioButtons = ({
 	required,
 	field = true,
 	...props
-}: IFormRadioButtonsProps) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
+}: IFormRadioButtonsProps<TForm>) => {
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (v: string) => {
 		setValue(v)

@@ -1,16 +1,19 @@
 import React from 'react'
 import Field from '../Field'
 import DateInput, { type IDateProps } from '@/Components/Inputs/DateInput'
-import { useInertiaInput } from 'use-inertia-form'
+import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
 import { coerceArray } from '../../../lib/collections'
 
-interface IDateFormProps extends Omit<IDateProps, 'name'|'onChange'|'onBlur'>, IFormInputProps<Date> {
+interface IDateFormProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<IDateProps, 'name'|'onChange'|'onBlur'>,
+	IFormInputProps<Date, TForm> {
 	field?: boolean
 }
 
-const Date = ({
+const Date = <TForm extends NestedObject = NestedObject>({
 	name,
 	required,
 	onChange,
@@ -19,8 +22,8 @@ const Date = ({
 	model,
 	field = true,
 	...props
-}: IDateFormProps) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date>({ name, model })
+}: IDateFormProps<TForm>) => {
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date, TForm>({ name, model })
 
 	const handleChange = (date: Date|Date[]) => {
 		const dateValue = Array.isArray(date) ? date[0] : date

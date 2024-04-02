@@ -5,7 +5,7 @@ class ConsumablesController < ApplicationController
   expose :consumables, -> { search(@active_company.consumables.includes_associated, sortable_fields) }
   expose :consumable, scope: ->{ @active_company.consumables }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  # GET /consumables
+  # @route GET /consumables (consumables)
   def index
     authorize consumables
     paginated_consumables = consumables.page(params[:page] || 1).per(current_user.limit(:consumables))
@@ -19,7 +19,7 @@ class ConsumablesController < ApplicationController
     }
   end
 
-  # GET /consumables/:id
+  # @route GET /consumables/:id (consumable)
   def show
     authorize consumable
     render inertia: "Consumables/Show", props: {
@@ -27,7 +27,7 @@ class ConsumablesController < ApplicationController
     }
   end
 
-  # GET /consumables/new
+  # @route GET /consumables/new (new_consumable)
   def new
     authorize Consumable
     render inertia: "Consumables/New", props: {
@@ -35,7 +35,7 @@ class ConsumablesController < ApplicationController
     }
   end
 
-  # GET /consumables/:id/edit
+  # @route GET /consumables/:id/edit (edit_consumable)
   def edit
     authorize consumable
     render inertia: "Consumables/Edit", props: {
@@ -43,7 +43,7 @@ class ConsumablesController < ApplicationController
     }
   end
 
-  # GET /consumables/:id/checkout
+  # @route GET /consumables/:id/checkout (checkout_consumable)
   def checkout
     authorize consumable
     redirect_to consumable if consumable.qty == 0
@@ -61,7 +61,6 @@ class ConsumablesController < ApplicationController
     }
   end
 
-  # GET /consumables/:id/checkin
   def checkin
     authorize consumable
     redirect_to consumable if consumable.assignments.empty?
@@ -77,7 +76,7 @@ class ConsumablesController < ApplicationController
     }
   end
 
-  # POST /consumables
+  # @route POST /consumables (consumables)
   def create
     authorize Consumable
     consumable.company = @active_company
@@ -88,7 +87,8 @@ class ConsumablesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /consumables/:id
+  # @route PATCH /consumables/:id (consumable)
+  # @route PUT /consumables/:id (consumable)
   def update
     authorize consumable
     if consumable.update(consumable_params)
@@ -98,7 +98,8 @@ class ConsumablesController < ApplicationController
     end
   end
 
-  # DELETE /consumables/:id
+  # @route DELETE /consumables (consumables)
+  # @route DELETE /consumables/:id (consumable)
   def destroy
     authorize consumable
     consumable.destroy

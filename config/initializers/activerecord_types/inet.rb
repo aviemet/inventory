@@ -8,13 +8,11 @@ module ActiveRecord
           end
 
           def serialize(value)
-            if IPAddress === value
-              value.to_string
-            elsif value.nil?
-              nil
-            else
-              value.to_s
-            end
+            return nil if value.nil?
+
+            return value.to_string if value.is_a?(IPAddress)
+
+            value.to_s
           end
         end
       end

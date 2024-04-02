@@ -5,7 +5,7 @@ class ManufacturersController < ApplicationController
   expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated, sortable_fields) }
   expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
 
-  # GET /manufacturers
+  # @route GET /manufacturers (manufacturers)
   def index
     authorize manufacturers
     paginated_manufacturers = manufacturers.page(params[:page] || 1).per(current_user.limit(:manufacturers))
@@ -19,7 +19,7 @@ class ManufacturersController < ApplicationController
     }
   end
 
-  # GET /manufacturers/:slug
+  # @route GET /manufacturers/:slug (manufacturer)
   def show
     authorize manufacturer
     render inertia: "Manufacturers/Show", props: {
@@ -67,7 +67,7 @@ class ManufacturersController < ApplicationController
     }
   end
 
-  # GET /manufacturers/new
+  # @route GET /manufacturers/new (new_manufacturer)
   def new
     authorize Manufacturer
     render inertia: "Manufacturers/New", props: {
@@ -75,7 +75,7 @@ class ManufacturersController < ApplicationController
     }
   end
 
-  # GET /manufacturers/:slug/edit
+  # @route GET /manufacturers/:slug/edit (edit_manufacturer)
   def edit
     authorize manufacturer
     render inertia: "Manufacturers/Edit", props: {
@@ -83,7 +83,7 @@ class ManufacturersController < ApplicationController
     }
   end
 
-  # POST /manufacturers
+  # @route POST /manufacturers (manufacturers)
   def create
     authorize Manufacturer
     manufacturer = Manufacturer.new(manufacturer_params)
@@ -95,7 +95,8 @@ class ManufacturersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /manufacturers/:slug
+  # @route PATCH /manufacturers/:slug (manufacturer)
+  # @route PUT /manufacturers/:slug (manufacturer)
   def update
     authorize manufacturer
     if manufacturer.update(manufacturer_params)
@@ -105,7 +106,8 @@ class ManufacturersController < ApplicationController
     end
   end
 
-  # DELETE /manufacturers/:slug
+  # @route DELETE /manufacturers (manufacturers)
+  # @route DELETE /manufacturers/:slug (manufacturer)
   def destroy
     authorize manufacturer
     manufacturer.destroy

@@ -7,7 +7,7 @@ class LocationsController < ApplicationController
   # location is used as a local variable by redirect_to
   expose :loc, model: Location, id: ->{ params[:slug] }, scope: ->{ @active_company.locations.includes_associated }, find_by: :slug
 
-  # GET /locations
+  # @route GET /locations (locations)
   def index
     authorize locations
     paginated_locations = locations.page(params[:page] || 1).per(current_user.limit(:locations))
@@ -21,7 +21,7 @@ class LocationsController < ApplicationController
     }
   end
 
-  # GET /locations/:slug
+  # @route GET /locations/:slug (location)
   def show
     authorize loc, policy_class: LocationPolicy
     render inertia: "Locations/Show", props: {
@@ -29,7 +29,7 @@ class LocationsController < ApplicationController
     }
   end
 
-  # GET /locations/new
+  # @route GET /locations/new (new_location)
   def new
     authorize Location
     render inertia: "Locations/New", props: {
@@ -37,7 +37,7 @@ class LocationsController < ApplicationController
     }
   end
 
-  # GET /locations/:slug/edit
+  # @route GET /locations/:slug/edit (edit_location)
   def edit
     authorize loc, policy_class: LocationPolicy
     render inertia: "Locations/Edit", props: {
@@ -45,7 +45,7 @@ class LocationsController < ApplicationController
     }
   end
 
-  # POST /locations
+  # @route POST /locations (locations)
   def create
     authorize Location
     loc = Location.new(location_params)
@@ -54,9 +54,9 @@ class LocationsController < ApplicationController
     if request.params&.[](:redirect) == false
 
       if loc.save
-        render json: loc.render, status: 201
+        render json: loc.render, status: :created
       else
-        render json: { errors: loc.errors }, status: 303
+        render json: { errors: loc.errors }, status: :see_other
       end
 
     elsif loc.save
@@ -68,7 +68,8 @@ class LocationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /locations/:slug
+  # @route PATCH /locations/:slug (location)
+  # @route PUT /locations/:slug (location)
   def update
     authorize loc, policy_class: LocationPolicy
     if loc.update(location_params)
@@ -78,7 +79,8 @@ class LocationsController < ApplicationController
     end
   end
 
-  # DELETE /locations/:slug
+  # @route DELETE /locations (locations)
+  # @route DELETE /locations/:slug (location)
   def destroy
     authorize loc, policy_class: LocationPolicy
     loc.destroy

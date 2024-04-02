@@ -3,37 +3,40 @@ class Api::AssetsController < Api::ApiController
   expose :asset, scope: ->{ @active_company.assets }
 
   # GET api/assets/options
+  # @route GET /api/assets (api_assets)
   def index
     render json: assets.includes_associated.render
   end
 
   # GET api/assets/:slug
+  # @route GET /api/assets/:id (api_asset)
   def show
     render json: asset.render
   end
 
   # GET api/options/assets
+  # @route GET /api/options/assets (api_assets_options)
   def options
     render json: assets.render(view: :options)
   end
 
-  # POST /api/assets
   def create
     asset.company = @active_company
 
     if asset.save
-      render json: asset.render, status: 201
+      render json: asset.render, status: :created
     else
-      render json: { errors: asset.errors }, status: 303
+      render json: { errors: asset.errors }, status: :see_other
     end
   end
 
-  # PATCH/PUT /api/assets/:id
+  # @route PATCH /api/assets/:id (api_asset)
+  # @route PUT /api/assets/:id (api_asset)
   def update
     if asset.update(asset_params)
-      render json: asset.render, status: 201
+      render json: asset.render, status: :created
     else
-      render json: { errors: asset.errors }, status: 303
+      render json: { errors: asset.errors }, status: :see_other
     end
   end
 

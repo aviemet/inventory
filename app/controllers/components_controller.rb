@@ -5,7 +5,7 @@ class ComponentsController < ApplicationController
   expose :components, -> { search(@active_company.components.includes_associated, sortable_fields) }
   expose :component, scope: ->{ @active_company.components }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  # GET /components
+  # @route GET /components (components)
   def index
     authorize components
     paginated_components = components.page(params[:page] || 1).per(current_user.limit(:components))
@@ -19,7 +19,7 @@ class ComponentsController < ApplicationController
     }
   end
 
-  # GET /components/:id
+  # @route GET /components/:id (component)
   def show
     authorize component
     render inertia: "Components/Show", props: {
@@ -27,7 +27,7 @@ class ComponentsController < ApplicationController
     }
   end
 
-  # GET /components/new
+  # @route GET /components/new (new_component)
   def new
     authorize Component
     render inertia: "Components/New", props: {
@@ -35,7 +35,7 @@ class ComponentsController < ApplicationController
     }
   end
 
-  # GET /components/:id/edit
+  # @route GET /components/:id/edit (edit_component)
   def edit
     authorize component
     render inertia: "Components/Edit", props: {
@@ -43,7 +43,7 @@ class ComponentsController < ApplicationController
     }
   end
 
-  # GET /components/:id/checkout
+  # @route GET /components/:id/checkout (checkout_component)
   def checkout
     authorize component
     redirect_to component if component.qty == 0
@@ -60,7 +60,7 @@ class ComponentsController < ApplicationController
     }
   end
 
-  # GET /components/:id/checkin
+  # @route GET /components/:id/checkin/:assignment_id (checkin_component)
   def checkin
     authorize component
     redirect_to component if component.assignments.empty?
@@ -77,7 +77,7 @@ class ComponentsController < ApplicationController
     }
   end
 
-  # POST /components
+  # @route POST /components (components)
   def create
     authorize Component
     component.company = @active_company
@@ -88,7 +88,8 @@ class ComponentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /components/:id
+  # @route PATCH /components/:id (component)
+  # @route PUT /components/:id (component)
   def update
     authorize component
     if component.update(component_params)
@@ -98,7 +99,8 @@ class ComponentsController < ApplicationController
     end
   end
 
-  # DELETE /components/:id
+  # @route DELETE /components (components)
+  # @route DELETE /components/:id (component)
   def destroy
     authorize component
     component.destroy

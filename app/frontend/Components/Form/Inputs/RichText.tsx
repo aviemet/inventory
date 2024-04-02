@@ -2,13 +2,16 @@ import React from 'react'
 import Field from '../Field'
 import RichTextInput, { type IRichTextProps } from '@/Components/Inputs/RichText'
 import cx from 'clsx'
-import { useInertiaInput } from 'use-inertia-form'
+import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
 
-interface IRichTextFormProps extends Omit<IRichTextProps, 'name'|'onBlur'|'onChange'|'value'>, IFormInputProps<string> {}
+interface IRichTextFormProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<IRichTextProps, 'name'|'onBlur'|'onChange'|'value'>,
+	IFormInputProps<string, TForm> {}
 
-const RichText = ({
+const RichText = <TForm extends NestedObject = NestedObject>({
 	label,
 	name,
 	required = false,
@@ -18,8 +21,8 @@ const RichText = ({
 	model,
 	field = true,
 	...props
-}: IRichTextFormProps) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
+}: IRichTextFormProps<TForm>) => {
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (v, delta, sources, editor) => {
 		setValue(v)

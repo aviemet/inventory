@@ -5,7 +5,7 @@ class LicensesController < ApplicationController
   expose :licenses, -> { search(@active_company.licenses.includes_associated, sortable_fields) }
   expose :license, scope: ->{ @active_company.licenses }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  # GET /licenses
+  # @route GET /licenses (licenses)
   def index
     authorize licenses
     paginated_licenses = licenses.page(params[:page] || 1).per(current_user.limit(:licenses))
@@ -19,7 +19,7 @@ class LicensesController < ApplicationController
     }
   end
 
-  # GET /licenses/1
+  # @route GET /licenses/:id (license)
   def show
     authorize license
     render inertia: "Licenses/Show", props: {
@@ -27,7 +27,7 @@ class LicensesController < ApplicationController
     }
   end
 
-  # GET /licenses/new
+  # @route GET /licenses/new (new_license)
   def new
     authorize License
     render inertia: "Licenses/New", props: {
@@ -35,7 +35,7 @@ class LicensesController < ApplicationController
     }
   end
 
-  # GET /licenses/1/edit
+  # @route GET /licenses/:id/edit (edit_license)
   def edit
     authorize license
     render inertia: "Licenses/Edit", props: {
@@ -43,7 +43,7 @@ class LicensesController < ApplicationController
     }
   end
 
-  # GET /licenses/:id/checkout
+  # @route GET /licenses/:id/checkout (checkout_license)
   def checkout
     authorize license
     redirect_to license if license.qty == 0
@@ -58,7 +58,7 @@ class LicensesController < ApplicationController
     }
   end
 
-  # GET /licenses/:id/checkin/:assignment_id
+  # @route GET /licenses/:id/checkin/:assignment_id (checkin_license)
   def checkin
     authorize license
     assignment = Assignment.find(params[:assignment_id])
@@ -76,7 +76,7 @@ class LicensesController < ApplicationController
     end
   end
 
-  # POST /licenses
+  # @route POST /licenses (licenses)
   def create
     authorize License
     license.company = @active_company
@@ -88,7 +88,8 @@ class LicensesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /licenses/1
+  # @route PATCH /licenses/:id (license)
+  # @route PUT /licenses/:id (license)
   def update
     authorize license
     if license.update(license_params)
@@ -98,7 +99,8 @@ class LicensesController < ApplicationController
     end
   end
 
-  # DELETE /licenses/1
+  # @route DELETE /licenses (licenses)
+  # @route DELETE /licenses/:id (license)
   def destroy
     authorize license
     license.destroy

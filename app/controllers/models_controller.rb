@@ -4,7 +4,7 @@ class ModelsController < ApplicationController
 
   expose :models, -> { search(@active_company.models.includes_associated, sortable_fields) }
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, find_by: :slug
-  # GET /models
+  # @route GET /models (models)
   def index
     authorize models
     paginated_models = models.page(params[:page] || 1).per(current_user.limit(:models))
@@ -18,7 +18,7 @@ class ModelsController < ApplicationController
     }
   end
 
-  # GET /models/:slug
+  # @route GET /models/:slug (model)
   def show
     authorize model
     render inertia: "Models/Show", props: {
@@ -26,7 +26,7 @@ class ModelsController < ApplicationController
     }
   end
 
-  # GET /models/new
+  # @route GET /models/new (new_model)
   def new
     authorize Model
     render inertia: "Models/New", props: {
@@ -34,7 +34,7 @@ class ModelsController < ApplicationController
     }
   end
 
-  # GET /models/:slug/edit
+  # @route GET /models/:slug/edit (edit_model)
   def edit
     authorize model
     render inertia: "Models/Edit", props: {
@@ -42,7 +42,7 @@ class ModelsController < ApplicationController
     }
   end
 
-  # POST /models
+  # @route POST /models (models)
   def create
     authorize Model
     model = Model.new(model_params)
@@ -50,18 +50,19 @@ class ModelsController < ApplicationController
 
     if model.save
       if request.params&.[](:redirect) == false
-        render json: model.render, status: 201
+        render json: model.render, status: :created
       else
         redirect_to model, notice: 'Model was successfully created'
       end
     elsif request.params&.[](:redirect) == false
-      render json: { errors: model.errors }, status: 303
+      render json: { errors: model.errors }, status: :see_other
     else
       redirect_to new_model_path, inertia: { errors: model.errors }
     end
   end
 
-  # PATCH/PUT /models/:slug
+  # @route PATCH /models/:slug (model)
+  # @route PUT /models/:slug (model)
   def update
     authorize model
     if model.update(model_params)
@@ -71,7 +72,8 @@ class ModelsController < ApplicationController
     end
   end
 
-  # DELETE /models/:slug
+  # @route DELETE /models (models)
+  # @route DELETE /models/:slug (model)
   def destroy
     authorize model
     model.destroy

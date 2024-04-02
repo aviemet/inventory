@@ -1,13 +1,16 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import NumberInput, { type INumberInputProps } from '@/Components/Inputs/NumberInput'
 import Field from '../Field'
-import { useInertiaInput } from 'use-inertia-form'
+import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
 
-interface INumberFormInputProps extends Omit<INumberInputProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<number> {}
+interface INumberFormInputProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<INumberInputProps, 'onBlur'|'onChange'|'name'>,
+	IFormInputProps<number, TForm> {}
 
-const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
+const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -17,10 +20,9 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 		required,
 		field = true,
 		...props
-	},
-	ref,
+	}: INumberFormInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({ name, model })
 
 	const handleChange = (e: number) => {
 		const v = e
@@ -47,7 +49,6 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 			condition={ field }
 		>
 			<NumberInput
-				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value as number }
@@ -59,6 +60,6 @@ const FormInput = forwardRef<HTMLInputElement, INumberFormInputProps>((
 			/>
 		</ConditionalWrapper>
 	)
-})
+}
 
 export default FormInput

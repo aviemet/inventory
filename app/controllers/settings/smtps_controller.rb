@@ -2,35 +2,35 @@ class Settings::SmtpsController < ApplicationController
   expose :smtps, -> { @active_company.smtps }
   expose :smtp
 
-  # GET /settings/mail
+  # @route GET /settings/mail (settings_smtps)
   def index
     render inertia: "Settings/Mail/Index", props: {
       smtps: smtps.render
     }
   end
 
-  # GET /settings/mail/:id
+  # @route GET /settings/mail/:id (settings_smtp)
   def show
     render inertia: "Settings/Mail/Show", props: {
       smtp: smtp.render
     }
   end
 
-  # GET /settings/mail/new
+  # @route GET /settings/mail/new (new_settings_smtp)
   def new
     render inertia: "Settings/Mail/New", props: {
       smtp: Smtp.new({ security: 'tls' }).render(view: :form_data)
     }
   end
 
-  # GET /settings/mail/:id/edit
+  # @route GET /settings/mail/:id/edit (edit_settings_smtp)
   def edit
     render inertia: "Settings/Mail/Edit", props: {
       smtp: smtp.render(view: :form_data)
     }
   end
 
-  # POST /settings/mail
+  # @route POST /settings/mail (settings_smtps)
   def create
     smtp.company = @active_company
     if smtp.save
@@ -41,6 +41,8 @@ class Settings::SmtpsController < ApplicationController
   end
 
   # PUT /settings/mail/:id
+  # @route PATCH /settings/mail/:id (settings_smtp)
+  # @route PUT /settings/mail/:id (settings_smtp)
   def update
     if smtp.update(smtp_params)
       redirect_to settings_smtp_url(smtp), notice: 'Mail acccount successfully updated'
@@ -49,7 +51,7 @@ class Settings::SmtpsController < ApplicationController
     end
   end
 
-  # DELETE /settings/mail/:id
+  # @route DELETE /settings/mail/:id (settings_smtp)
   def destroy
   end
 

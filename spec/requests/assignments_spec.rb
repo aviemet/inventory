@@ -30,7 +30,7 @@ RSpec.describe "Assignments" do
     # CREATE - Valid
     context "with valid parameters" do
       it "assigns an item to an assignable and redirects to the assignable" do
-        assign_toables.each do |_key, model|
+        assign_toables.each_value do |model|
           item = create(:item, company: @admin.active_company)
           expect {
             post assignments_url, params: { assignment: assignment_params(item, model) }
@@ -40,7 +40,7 @@ RSpec.describe "Assignments" do
       end
 
       it "assigns an accessory to an assignable and redirects to the assignable" do
-        assign_toables.each do |_key, model|
+        assign_toables.each_value do |model|
           accessory = create(:accessory, company: @admin.active_company)
           expect{
             post assignments_url, params: { assignment: assignment_params(accessory, model) }
@@ -50,7 +50,7 @@ RSpec.describe "Assignments" do
       end
 
       it "assigns a consumable to an assignable and redirects to the assignable" do
-        assign_toables.each do |_key, model|
+        assign_toables.each_value do |model|
           consumable = create(:consumable, company: @admin.active_company, qty: 2)
           expect {
             post assignments_url, params: { assignment: assignment_params(consumable, model) }
@@ -60,7 +60,7 @@ RSpec.describe "Assignments" do
       end
 
       it "assigns a component to an assignable and redirects to the assignable" do
-        assign_toables.each do |_key, model|
+        assign_toables.each_value do |model|
           component = create(:component, company: @admin.active_company)
           expect {
             post assignments_url, params: { assignment: assignment_params(component, model) }
@@ -70,7 +70,7 @@ RSpec.describe "Assignments" do
       end
 
       it "assigns a license to an assignable and redirects to the assignable" do
-        assign_toables.each do |_key, model|
+        assign_toables.each_value do |model|
           license = create(:license, company: @admin.active_company)
           expect {
             post assignments_url, params: { assignment: assignment_params(license, model) }
@@ -133,7 +133,7 @@ RSpec.describe "Assignments" do
     # UNASSIGN - valid
     context "with valid parameters" do
       it "unassigns an item and redirects to the assignable" do
-        assign_toables.each do |_key, model|
+        assign_toables.each_value do |model|
           item = create(:item, company: @admin.active_company)
           assignment = item.assign_to model
 
@@ -145,7 +145,7 @@ RSpec.describe "Assignments" do
       end
 
       it "unassigns an accessory and redirects to the assignable" do
-        assign_toables.each do |_key, model|
+        assign_toables.each_value do |model|
           accessory = create(:accessory, company: @admin.active_company)
           assignment = accessory.assign_to model
 
@@ -157,7 +157,7 @@ RSpec.describe "Assignments" do
       end
 
       it "unassigns a component and redirects to the assignable" do
-        assign_toables.each do |_key, model|
+        assign_toables.each_value do |model|
           component = create(:component, company: @admin.active_company)
           assignment = component.assign_to model
 
@@ -169,7 +169,7 @@ RSpec.describe "Assignments" do
       end
 
       it "unassigns a license and redirects to the assignable" do
-        assign_toables.each do |_key, model|
+        assign_toables.each_value do |model|
           license = create(:license, company: @admin.active_company)
           assignment = license.assign_to model
 

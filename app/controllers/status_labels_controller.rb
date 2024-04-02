@@ -4,7 +4,7 @@ class StatusLabelsController < ApplicationController
   expose :status_labels, -> { search(StatusLabel.all, sortable_fields) }
   expose :status_label, id: ->{ params[:slug] }, find_by: :slug
 
-  # GET /status_labels
+  # @route GET /status_labels (status_labels)
   def index
     paginated_status_labels = status_labels.page(params[:page] || 1).per(current_user.limit(:status_labels))
 
@@ -17,7 +17,7 @@ class StatusLabelsController < ApplicationController
     }
   end
 
-  # GET /status_labels/:slug
+  # @route GET /status_labels/:slug (status_label)
   def show
     if status_label.nil?
       render inertia: "Error", props: { status: 404 }
@@ -28,21 +28,21 @@ class StatusLabelsController < ApplicationController
     end
   end
 
-  # GET /status_labels/new
+  # @route GET /status_labels/new (new_status_label)
   def new
     render inertia: "StatusLabels/New", props: {
       status_label: StatusLabel.new.render(view: :form_data)
     }
   end
 
-  # GET /status_labels/:slug/edit
+  # @route GET /status_labels/:slug/edit (edit_status_label)
   def edit
     render inertia: "StatusLabels/Edit", props: {
       status_label: -> { status_label.render(view: :edit) }
     }
   end
 
-  # POST /status_labels
+  # @route POST /status_labels (status_labels)
   def create
     status_label = StatusLabel.new(status_label_params)
     if status_label.save
@@ -52,7 +52,8 @@ class StatusLabelsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /status_labels/:slug
+  # @route PATCH /status_labels/:slug (status_label)
+  # @route PUT /status_labels/:slug (status_label)
   def update
     if status_label.update(status_label_params)
       redirect_to status_label, notice: 'StatusLabel was successfully updated.'
@@ -61,7 +62,7 @@ class StatusLabelsController < ApplicationController
     end
   end
 
-  # DELETE /status_labels/:slug
+  # @route DELETE /status_labels/:slug (status_label)
   def destroy
     status_label.destroy
     respond_to do |format|

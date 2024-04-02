@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   expose :orders, -> { search(@active_company.orders.includes_associated, sortable_fields) }
   expose :order, scope: ->{ @active_company.orders }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  # GET /orders
+  # @route GET /orders (orders)
   def index
     paginated_orders = orders.page(params[:page] || 1).per(current_user.limit(:orders))
 
@@ -17,14 +17,14 @@ class OrdersController < ApplicationController
     }
   end
 
-  # GET /orders/:id
+  # @route GET /orders/:id (order)
   def show
     render inertia: "Orders/Show", props: {
       order: -> { order.render(view: :show) }
     }
   end
 
-  # GET /orders/new
+  # @route GET /orders/new (new_order)
   def new
     render inertia: "Orders/New", props: {
       order: Order.new({ ordered_at: Time.zone.now }).render(view: :form_data),
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
     }
   end
 
-  # GET /orders/:id/edit
+  # @route GET /orders/:id/edit (edit_order)
   def edit
     render inertia: "Orders/Edit", props: {
       order: order.render(view: :edit),
@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
     }
   end
 
-  # POST /orders
+  # @route POST /orders (orders)
   def create
     respond_to do |format|
       if order.save
@@ -53,7 +53,8 @@ class OrdersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /orders/:id
+  # @route PATCH /orders/:id (order)
+  # @route PUT /orders/:id (order)
   def update
     respond_to do |format|
       if order.update(order_params)
@@ -66,7 +67,8 @@ class OrdersController < ApplicationController
     end
   end
 
-  # DELETE /orders/:id
+  # @route DELETE /orders (orders)
+  # @route DELETE /orders/:id (order)
   def destroy
     order.destroy
     respond_to do |format|

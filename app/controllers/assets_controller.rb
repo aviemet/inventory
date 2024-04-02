@@ -5,7 +5,7 @@ class AssetsController < ApplicationController
   expose :assets, -> { search(@active_company.assets.includes_associated, sortable_fields) }
   expose :asset, scope: ->{ @active_company.assets }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  # GET /assets
+  # @route GET /inventory (assets)
   def index
     paginated_assets = assets.page(params[:page] || 1).per(current_user.limit(:assets))
 
@@ -18,22 +18,22 @@ class AssetsController < ApplicationController
     }
   end
 
-  # GET /assets/:id
+  # @route GET /inventory/:id (asset)
   def show
     redirect_to_asset_type_controller(:show)
   end
 
-  # GET /assets/:id/edit
+  # @route GET /inventory/:id/edit (edit_asset)
   def edit
     redirect_to_asset_type_controller(:edit)
   end
 
-  # GET /assets/:id/checkout
+  # @route GET /inventory/:id/checkout (checkout_asset)
   def checkout
     redirect_to_asset_type_controller(:checkout)
   end
 
-  # GET /assets/:id/checkin
+  # @route GET /inventory/:id/checkin (checkin_asset)
   def checkin
     redirect_to_asset_type_controller(:checkin)
   end

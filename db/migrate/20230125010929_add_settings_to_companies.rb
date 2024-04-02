@@ -1,12 +1,12 @@
 class AddSettingsToCompanies < ActiveRecord::Migration[7.0]
   def change
-    add_column :companies, :default_currency, :string, null: false
+    change_table :companies, bulk: true do |t|
+      t.string :default_currency, null: false
+      t.jsonb :settings, default: {}
+      t.references :tickets_smtp, null: true, foreign_key: { to_table: :smtps }
+      t.references :app_smtp, null: true, foreign_key: { to_table: :smtps }
 
-    add_column :companies, :settings, :jsonb, default: {}
-
-    add_reference :companies, :tickets_smtp, null: true, foreign_key: { to_table: :smtps }
-    add_reference :companies, :app_smtp, null: true, foreign_key: { to_table: :smtps }
-
-    add_index :companies, :settings, using: :gin
+      t.indecx :settings, using: :gin
+    end
   end
 end

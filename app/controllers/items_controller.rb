@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 
   before_action :handle_department_change, only: [:create, :update]
 
-  # GET /item
+  # @route GET /hardware (items)
   def index
     authorize items
     paginated_items = items.page(params[:page] || 1).per(current_user.limit(:items))
@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /item/:id
+  # @route GET /hardware/:id (item)
   def show
     authorize item
     render inertia: "Items/Show", props: {
@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /item/new
+  # @route GET /hardware/new (new_item)
   def new
     authorize Item
     render inertia: "Items/New", props: {
@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /item/:id/edit
+  # @route GET /hardware/:id/edit (edit_item)
   def edit
     authorize item
     render inertia: "Items/Edit", props: {
@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
     }
   end
 
-  # GET /item/:id/clone
+  # @route GET /hardware/:id/clone (clone_items)
   def clone
     authorize item
     cloned_item = item.dup
@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
     render inertia: "Items/Clone"
   end
 
-  # GET /item/:id/checkout
+  # @route GET /hardware/:id/checkout (checkout_item)
   def checkout
     authorize item
     if item.assigned?
@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  # GET /item/:id/checkin
+  # @route GET /hardware/:id/checkin (checkin_item)
   def checkin
     authorize item
     if item.assigned?
@@ -91,7 +91,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  # POST /item
+  # @route POST /hardware (items)
   def create
     authorize Item
     item = Item.new(item_params)
@@ -104,7 +104,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /item/:id
+  # @route PATCH /hardware/:id (item)
+  # @route PUT /hardware/:id (item)
   def update
     authorize item
 
@@ -115,7 +116,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  # DELETE /item/:id
+  # @route DELETE /hardware (items)
+  # @route DELETE /hardware/:id (item)
   def destroy
     authorize item
     item.destroy

@@ -1,34 +1,32 @@
 class Api::UsersController < Api::ApiController
   expose :user
 
-  # PATCH/PUT /api/users/:id
+  # @route PATCH /api/users/:id (api_user)
+  # @route PUT /api/users/:id (api_user)
   def update
     authorize user
     if user.update(user_params)
-      render json: user.render, status: 201
+      render json: user.render, status: :created
     else
-      render json: { errors: user.errors }, status: 303
+      render json: { errors: user.errors }, status: :see_other
     end
   end
 
-  # PATCH/PUT /users/update_table_preferences/:id
+  # @route PATCH /api/users/:id/update_table_preferences (api_update_table_preferences)
   def update_table_preferences
     authorize user
-    if user.update_column(
-      :table_preferences,
-      current_user.table_preferences.deep_merge(request.params[:user][:table_preferences]),
+    if user.update(
+      table_preferences: current_user.table_preferences.deep_merge(request.params[:user][:table_preferences]),
     )
       head :ok, content_type: "text/html"
     end
   end
 
-  # PATCH/PUT /users/update_user_preferences/:id
+  # @route PATCH /api/users/:id/update_user_preferences (api_update_user_preferences)
   def update_user_preferences
     authorize user
-    ap({ user_params: })
-    if user.update_column(
-      :user_preferences,
-      current_user.user_preferences.deep_merge(user_params[:user_preferences]),
+    if user.update(
+      user_preferences: current_user.user_preferences.deep_merge(user_params[:user_preferences]),
     )
       head :ok, content_type: "text/html"
     end

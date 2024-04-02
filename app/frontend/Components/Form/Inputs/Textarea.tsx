@@ -1,14 +1,17 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import Field from '../Field'
 import TextareaInput, { type ITextareaProps } from '@/Components/Inputs/Textarea'
 import cx from 'clsx'
-import { useInertiaInput } from 'use-inertia-form'
+import { useInertiaInput, type NestedObject } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type IFormInputProps } from '.'
 
-interface IFormTextareaProps extends Omit<ITextareaProps, 'onBlur'|'onChange'|'name'>, IFormInputProps<string> {}
+interface IFormTextareaProps<TForm extends NestedObject = NestedObject>
+	extends
+	Omit<ITextareaProps, 'onBlur'|'onChange'|'name'>,
+	IFormInputProps<string, TForm> {}
 
-const Textarea = forwardRef<HTMLTextAreaElement, IFormTextareaProps>((
+const Textarea = <TForm extends NestedObject = NestedObject>(
 	{
 		label,
 		name,
@@ -20,10 +23,9 @@ const Textarea = forwardRef<HTMLTextAreaElement, IFormTextareaProps>((
 		errorKey,
 		field = true,
 		...props
-	},
-	ref,
+	}: IFormTextareaProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setValue(e.target.value)
@@ -51,7 +53,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, IFormTextareaProps>((
 					{ label }
 				</label> }
 				<TextareaInput
-					ref={ ref }
 					id={ id || inputId }
 					name={ inputName }
 					onChange={ handleChange }
@@ -66,6 +67,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, IFormTextareaProps>((
 			</>
 		</ConditionalWrapper>
 	)
-})
+}
 
 export default Textarea

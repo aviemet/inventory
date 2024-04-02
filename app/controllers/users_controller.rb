@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   expose :users, -> { search(User.all.includes_associated, sortable_fields) }
   expose :user
 
-  # GET /users
+  # @route GET /users (user_registration)
   def index
     authorize users
     paginated_users = users.page(params[:page] || 1).per(current_user.limit(:users))
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     }
   end
 
-  # GET /users/:id
+  # @route GET /users/:id (user)
   def show
     authorize user
     render inertia: "Users/Show", props: {
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     }
   end
 
-  # GET /users/new
+  # @route GET /users/new (new_user)
   def new
     authorize User
     render inertia: "Users/New", props: {
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     }
   end
 
-  # GET /users/:id/edit
+  # @route GET /users/:id/edit (edit_user)
   def edit
     authorize user
     render inertia: "Users/Edit", props: {
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     }
   end
 
-  # GET /users/complete_registration
+  # @route GET /users/complete_registration (complete_registration)
   def complete_registration
     unless current_user.companies.empty?
       redirect_to root_path
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     render inertia: "Public/Devise/Register/Complete"
   end
 
-  # POST /users/complete_registration
+  # @route POST /users/complete_registration (save_complete_registration)
   def save_complete_registration
     unless current_user.companies.empty?
       redirect_to root_path
@@ -84,7 +84,8 @@ class UsersController < ApplicationController
     redirect_to complete_registration_path
   end
 
-  # PATCH/PUT /users/:id
+  # @route PATCH /users/:id (user)
+  # @route PUT /users/:id (user)
   def update
     authorize user
     if user.update(user_params)
@@ -94,7 +95,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/:id
+  # @route DELETE /users (users)
+  # @route DELETE /users/:id (user)
   def destroy
     authorize user
     user.destroy

@@ -303,6 +303,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_models_on_category_id"
     t.index ["manufacturer_id"], name: "index_models_on_manufacturer_id"
+    t.index ["name", "model_number"], name: "index_models_on_name_and_model_number", unique: true
     t.index ["slug"], name: "index_models_on_slug", unique: true
   end
 

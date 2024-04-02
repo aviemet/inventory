@@ -1,23 +1,24 @@
 class Api::OrdersController < Api::ApiController
   expose :order, id: ->{ params[:slug] }, scope: ->{ @active_company.orders.includes_associated }, find_by: :slug
 
-  # POST /api/orders
+  # @route POST /api/orders (api_orders)
   def create
     order.company = @active_company
 
     if order.save
-      render json: order.render, status: 201
+      render json: order.render, status: :created
     else
-      render json: { errors: order.errors }, status: 303
+      render json: { errors: order.errors }, status: :see_other
     end
   end
 
-  # PATCH/PUT /api/orders/:id
+  # @route PATCH /api/orders/:id (api_order)
+  # @route PUT /api/orders/:id (api_order)
   def update
     if order.update(order_params)
-      render json: order.render, status: 201
+      render json: order.render, status: :created
     else
-      render json: { errors: order.errors }, status: 303
+      render json: { errors: order.errors }, status: :see_other
     end
   end
 
