@@ -19,7 +19,7 @@ jobs:
           
       - name: Version Bump
         run: |
-          sudo apt update && sudo apt upgrade && sudo apt install -y curl && sudo apt uninstall nodejs
+          sudo apt update && sudo apt install -y curl && sudo apt remove nodejs
           curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
           sudo apt install -y nodejs
           npm i -g npm
