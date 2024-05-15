@@ -19,9 +19,10 @@ jobs:
           
       - name: Version Bump
         run: |
-          sudo apt update && sudo apt upgrade && sudo apt install -y curl
+          sudo apt update && sudo apt upgrade && sudo apt install -y curl && sudo apt uninstall nodejs
           curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
           sudo apt install -y nodejs
+          npm i -g npm
           npm install -g commitlint semantic-release semantic-release-github-actions-tags @semantic-release/changelog @semantic-release/git
           npx semantic-release --ci
         env:
