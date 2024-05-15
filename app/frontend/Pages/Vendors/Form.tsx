@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
-import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
+import { ContactForm } from '@/Features/Contactable'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TVendorFormData = {

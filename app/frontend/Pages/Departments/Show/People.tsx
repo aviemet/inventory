@@ -1,7 +1,7 @@
 import React from 'react'
 import { Section } from '@/Components'
 import { NewIcon } from '@/Components/Icons'
-import ShowPageTableTemplate from '@/Layouts/AppLayout/Components/ShowPageTableTemplate'
+import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
 import PeopleTable from '@/Pages/People/Table'
 

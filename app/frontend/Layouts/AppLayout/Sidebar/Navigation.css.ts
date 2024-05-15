@@ -62,12 +62,12 @@ export const navbar = css`
 					width: ${navItemWidth}px;
 				}
 
-				& > a > span {
+				& > a > span.link-text {
 					width: calc(100% - ${iconWidth}px);
 				}
 			}
 
-			span, ul ul {
+			span.link-text, ul ul {
 				display: none;
 			}
 
@@ -91,7 +91,7 @@ export const navbar = css`
 		}
 
 		ul > li {
-			&:hover span, ul {
+			&:hover span.link-text, ul {
 				display: flex;
 			}
 
@@ -125,12 +125,12 @@ export const navbar = css`
 				}
 			}
 
-			span {
+			span.link-text {
 				width: calc(100% - ${iconWidth + borderWidth}px);
 			}
 		}
 
-		span {
+		span.link-text {
 			position: absolute;
 			top: 0;
 			left: ${iconWidth}px;
@@ -171,7 +171,7 @@ export const navbar = css`
 		overflow-y: auto;
 
 		.${links} > ul > li {
-			span {
+			span.link-text {
 				display: inline-block;
 				position: relative;
 				height: unset;

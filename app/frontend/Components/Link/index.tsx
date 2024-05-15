@@ -32,10 +32,11 @@ const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
 		let localExternal = false
 		externalPrefix.some(prefix => {
 			if(href.startsWith(prefix)) {
-				const url = new URL(href)
+				const url = new URL(href.startsWith('http') ? href : `http://${href}`)
 				localExternal = url.hostname !== window.location.hostname
 			}
 		})
+
 		return localExternal
 	}, [href, external])
 
