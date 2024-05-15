@@ -1,5 +1,5 @@
 import React from 'react'
-import { ShowPageAssociations } from '@/Layouts/AppLayout/Components'
+import { ShowPageAssociations } from '@/Features'
 import { Routes } from '@/lib'
 import { IShowComponentProps } from '.'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { Page, Table } from '@/Components'
-import { TableTitleSection } from '@/Layouts/AppLayout/Components'
+import { TableTitleSection } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import CategoriesTable from '../Table'
 

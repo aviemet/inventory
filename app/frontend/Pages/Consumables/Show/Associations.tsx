@@ -1,5 +1,5 @@
 import React from 'react'
-import { ShowPageAssociations } from '@/Layouts/AppLayout/Components'
+import { ShowPageAssociations } from '@/Features'
 import { IShowConsumableProps } from '.'
 
 const Associations = ({ consumable }: IShowConsumableProps) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Layouts/AppLayout/Components'
+import { IndexPageTemplate } from '@/Features'
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from '@/Components/Icons'
 import AssetTable from '../Table'
 

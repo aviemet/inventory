@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from '@/Components'
 import { ActionIcon } from '@mantine/core'
+import cx from 'clsx'
 
 interface IMenuLinkProps {
 	children: string
@@ -19,7 +20,7 @@ const MenuLink = ({ children, href, icon, ...props }: IMenuLinkProps) => {
 			>
 				{ icon  }
 			</ActionIcon>
-			<span>{ children }</span>
+			<span className={ cx('link-text') }>{ children }</span>
 		</Link>
 	)
 }
