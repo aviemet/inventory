@@ -17,7 +17,6 @@ const NewItem = ({ item }: INewItemProps) => {
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>
-
 				<ItemForm to={ Routes.items() } item={ item } />
 			</Section>
 		</Page>

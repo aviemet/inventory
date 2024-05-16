@@ -1,14 +1,15 @@
 import React from 'react'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
-import SwatchInput, { type ISwatchInputProps } from '@/Components/Inputs/SwatchInput'
+import SwatchInput, { type SwatchInputProps } from '@/Components/Inputs/SwatchInput'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import Field from '../Field'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface ISwatchFormInputProps<TForm extends NestedObject = NestedObject>
+interface FormSwatchInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<ISwatchInputProps, 'onBlur'|'onChange'|'name'|'ref'>,
-	IFormInputProps<string, TForm> {}
+	Omit<SwatchInputProps, InputConflicts>,
+	BaseFormInputProps<string, TForm> {
+}
 
 const SwatchFormInput = <TForm extends NestedObject = NestedObject>(
 	{
@@ -16,12 +17,14 @@ const SwatchFormInput = <TForm extends NestedObject = NestedObject>(
 		model,
 		onChange,
 		onBlur,
+		onFocus,
 		id,
 		required,
 		errorKey,
 		field = true,
+		wrapperProps,
 		...props
-	}: ISwatchFormInputProps<TForm>,
+	}: FormSwatchInputProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
@@ -33,21 +36,23 @@ const SwatchFormInput = <TForm extends NestedObject = NestedObject>(
 
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="text"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
 			<SwatchInput
 				initialValue={ value }
 				value={ value }
 				onChange={ handleChange }
+				onFocus={ e => onFocus?.(e.target.value, form) }
 				name={ inputName }
 				id={ inputId }
 				wrapper={ false }

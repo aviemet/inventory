@@ -1,14 +1,14 @@
 import React from 'react'
-import NumberInput, { type INumberInputProps } from '@/Components/Inputs/NumberInput'
+import NumberInput, { type NumberInputProps } from '@/Components/Inputs/NumberInput'
 import Field from '../Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface INumberFormInputProps<TForm extends NestedObject = NestedObject>
+interface FormNumberInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<INumberInputProps, 'onBlur'|'onChange'|'name'>,
-	IFormInputProps<number, TForm> {}
+	Omit<NumberInputProps, InputConflicts>,
+	BaseFormInputProps<number, TForm> {}
 
 const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
@@ -16,44 +16,44 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		model,
 		onChange,
 		onBlur,
+		onFocus,
 		id,
 		required,
 		field = true,
+		wrapperProps,
 		...props
-	}: INumberFormInputProps<TForm>,
+	}: FormNumberInputProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({ name, model })
 
-	const handleChange = (e: number) => {
-		const v = e
+	const handleChange = (val: string|number) => {
+		const v = Number(val)
 		setValue(v)
 
 		onChange?.(v, form)
 	}
 
-	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-		if(onBlur) onBlur(value as number, form)
-	}
-
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="number"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
 			<NumberInput
 				id={ id || inputId }
 				name={ inputName }
 				value={ value as number }
 				onChange={ handleChange }
-				onBlur={ handleBlur }
+				onBlur={ () => onBlur?.(value, form) }
+				onFocus={ () => onFocus?.(value, form) }
 				error={ error }
 				wrapper={ false }
 				{ ...props }

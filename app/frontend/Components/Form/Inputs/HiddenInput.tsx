@@ -2,15 +2,16 @@ import React from 'react'
 import { HiddenInput } from '@/Components/Inputs'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import { InputProps } from 'react-html-props'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface IHiddenInputProps<TForm extends NestedObject = NestedObject>
+type OmittedHiddenInputProps = 'onBlur'|'onFocus'|'wrapperProps'
+interface HiddenInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<InputProps, 'name'|'ref'|'onBlur'|'onChange'>,
-	Omit<IFormInputProps<string, TForm>, 'span'> {}
+	Omit<InputProps, InputConflicts|OmittedHiddenInputProps>,
+	Omit<BaseFormInputProps<string, TForm>, 'span'|OmittedHiddenInputProps> {}
 
 const FormInput = <TForm extends NestedObject = NestedObject>(
-	{ name, model, onChange, onBlur, id, ...props }: IHiddenInputProps<TForm>,
+	{ name, model, onChange, id, ...props }: HiddenInputProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue } = useInertiaInput<string, TForm>({ name, model })
 

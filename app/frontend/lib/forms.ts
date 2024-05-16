@@ -1,4 +1,3 @@
-import { isEmpty } from 'lodash'
 import { useForm } from 'use-inertia-form'
 
 /**
@@ -7,15 +6,17 @@ import { useForm } from 'use-inertia-form'
  * @returns boolean
  */
 export const isUnset = <T extends any>(v: T) => {
-	if(typeof v === 'number') {
-		return v === 0 ? false : !Boolean(v)
+	if(
+		v === null ||
+		v === undefined ||
+		(typeof v === 'string' && v === '')
+	) {
+		return true
 	}
-
-	if(v instanceof Date) return false
 
 	if(Array.isArray(v)) return !v.some(el => el !== '' && el !== undefined)
 
-	return isEmpty(v)
+	return false
 }
 
 export function getInputOnChange<Value>(

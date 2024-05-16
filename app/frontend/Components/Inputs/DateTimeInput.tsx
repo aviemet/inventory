@@ -2,15 +2,15 @@ import React from 'react'
 import Label from './Label'
 import { DateTimePicker, DateTimePickerProps } from '@mantine/dates'
 import { CalendarIcon } from '../Icons'
-import { IInputProps } from '.'
+import { type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 import { isUnset } from '@/lib'
 
-export interface IDateTimeProps extends DateTimePickerProps, IInputProps {
+export interface DateTimeProps extends DateTimePickerProps, BaseInputProps {
 	name?: string
 	id?: string
 	value?: Date
-	onChange?: (value: Date) => void
+	onChange?: (value: Date | null) => void
 	error?: string | string[]
 }
 
@@ -19,14 +19,14 @@ const DateTime = ({
 	id,
 	name,
 	required,
-	value = new Date(),
+	value,
 	size = 'md',
 	radius = 'xs',
 	valueFormat = 'L LT',
 	wrapper,
 	wrapperProps,
 	...props
-}: IDateTimeProps) => {
+}: DateTimeProps) => {
 	const inputId = id || name
 
 	return (
@@ -37,7 +37,7 @@ const DateTime = ({
 			<DateTimePicker
 				id={ inputId }
 				name={ name }
-				value={ isUnset(value) ? null : new Date(value) }
+				value={ isUnset(value) ? null : new Date(value!) }
 				radius={ radius }
 				size={ size }
 				valueFormat={ valueFormat }
@@ -50,4 +50,3 @@ const DateTime = ({
 }
 
 export default DateTime
-

@@ -1,14 +1,14 @@
 import React from 'react'
-import PasswordInput, { type IPasswordInputProps } from '@/Components/Inputs/PasswordInput'
+import PasswordInput, { type PasswordInputProps } from '@/Components/Inputs/PasswordInput'
 import Field from '../Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface IPasswordFormInputProps<TForm extends NestedObject = NestedObject>
+interface FormPasswordInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<IPasswordInputProps, 'onBlur'|'onChange'|'name'>,
-	IFormInputProps<string, TForm> {}
+	Omit<PasswordInputProps, InputConflicts>,
+	BaseFormInputProps<string, TForm> {}
 
 const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
@@ -16,11 +16,13 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		model,
 		onChange,
 		onBlur,
+		onFocus,
 		id,
 		required,
 		field = true,
+		wrapperProps,
 		...props
-	}: IPasswordFormInputProps<TForm>,
+	}: FormPasswordInputProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
@@ -40,16 +42,17 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="password"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
 			<PasswordInput
 				id={ id || inputId }
@@ -57,6 +60,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				onFocus={ e => onFocus?.(e.target.value, form) }
 				error={ error }
 				wrapper={ false }
 				{ ...props }

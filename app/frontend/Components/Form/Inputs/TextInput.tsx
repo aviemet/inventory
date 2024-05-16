@@ -1,14 +1,14 @@
 import React from 'react'
-import TextInput, { type ITextInputProps } from '@/Components/Inputs/TextInput'
+import TextInput, { type TextInputProps } from '@/Components/Inputs/TextInput'
 import Field from '../Field'
 import { useInertiaInput, type NestedObject } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface ITextFormInputProps<TForm extends NestedObject = NestedObject>
+interface FormTextInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<ITextInputProps, 'onBlur'|'onChange'|'name'>,
-	IFormInputProps<string, TForm> {}
+	Omit<TextInputProps, InputConflicts>,
+	BaseFormInputProps<string, TForm> {}
 
 const TextFormInput = <TForm extends NestedObject = NestedObject>(
 	{
@@ -16,12 +16,14 @@ const TextFormInput = <TForm extends NestedObject = NestedObject>(
 		model,
 		onChange,
 		onBlur,
+		onFocus,
 		id,
 		required,
 		errorKey,
 		field = true,
+		wrapperProps,
 		...props
-	}: ITextFormInputProps<TForm>,
+	}: FormTextInputProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
@@ -41,16 +43,17 @@ const TextFormInput = <TForm extends NestedObject = NestedObject>(
 
 	return (
 		<ConditionalWrapper
+			condition={ props.hidden !== true && field }
 			wrapper={ children => (
 				<Field
 					type="text"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ props.hidden !== true && field }
 		>
 			<TextInput
 				id={ id || inputId }
@@ -58,6 +61,7 @@ const TextFormInput = <TForm extends NestedObject = NestedObject>(
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				onFocus={ e => onFocus?.(e.target.value, form) }
 				error={ errorKey ? form.getError(errorKey) : error }
 				wrapper={ false }
 				{ ...props }

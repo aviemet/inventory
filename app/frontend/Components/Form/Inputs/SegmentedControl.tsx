@@ -1,26 +1,28 @@
 import React from 'react'
-import RadioButtons, { type IRadioButtonsProps } from '@/Components/Inputs/RadioButtons'
+import SegmentedControl, { type SegmentedControlProps } from '@/Components/Inputs/SegmentedControl'
 import Field from '../Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface IFormRadioButtonsProps<TForm extends NestedObject = NestedObject>
+interface FormSegmentedControlProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<IRadioButtonsProps, 'onBlur'|'onChange'|'name'>,
-	IFormInputProps<string, TForm> {}
+	Omit<SegmentedControlProps, InputConflicts>,
+	BaseFormInputProps<string, TForm> {}
 
-const FormRadioButtons = <TForm extends NestedObject = NestedObject>({
+const FormSegmentedControl = <TForm extends NestedObject = NestedObject>({
 	options,
 	name,
 	id,
 	model,
 	onChange,
 	onBlur,
+	onFocus,
 	required,
 	field = true,
+	wrapperProps,
 	...props
-}: IFormRadioButtonsProps<TForm>) => {
+}: FormSegmentedControlProps<TForm>) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (v: string) => {
@@ -30,29 +32,35 @@ const FormRadioButtons = <TForm extends NestedObject = NestedObject>({
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLDivElement, Element>) => {
-		if(onBlur) onBlur(value, form)
+		onBlur?.(value, form)
+	}
+
+	const handleFocus = (e: React.FocusEvent<HTMLDivElement, Element>) => {
+		onFocus?.(value, form)
 	}
 
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="radio"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
-			<RadioButtons
+			<SegmentedControl
 				options={ options }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				onFocus={ handleFocus }
 				wrapper={ false }
 				{ ...props }
 			/>
@@ -60,4 +68,4 @@ const FormRadioButtons = <TForm extends NestedObject = NestedObject>({
 	)
 }
 
-export default FormRadioButtons
+export default FormSegmentedControl

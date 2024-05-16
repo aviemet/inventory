@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react'
-import { NumberInput, type NumberInputProps } from '@mantine/core'
+import { NumberInput, type NumberInputProps as MantineNumberInputProps } from '@mantine/core'
 import Label from './Label'
-import { IInputProps } from '.'
+import { type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 
-export interface INumberInputProps extends NumberInputProps, IInputProps {}
+export interface NumberInputProps extends MantineNumberInputProps, BaseInputProps {}
 
-const NumberInputComponent = forwardRef<HTMLInputElement, INumberInputProps>((
+const NumberInputComponent = forwardRef<HTMLInputElement, NumberInputProps>((
 	{ label, name, required = false, value, id, size = 'md', wrapper, wrapperProps, ...props },
 	ref,
 ) => {

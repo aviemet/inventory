@@ -1,23 +1,27 @@
 import React from 'react'
-import { SegmentedControl, SegmentedControlProps, type SegmentedControlItem } from '@mantine/core'
+import {
+	SegmentedControl,
+	type SegmentedControlProps as MantineSegmentedControlProps,
+	type SegmentedControlItem,
+} from '@mantine/core'
 import Label from './Label'
-import { IInputProps } from '.'
+import { type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 
-interface IOption extends SegmentedControlItem {
+interface ControlOption extends SegmentedControlItem {
 	defaultModel?: TAssignToable
 }
 
-export interface IRadioButtonsProps extends Omit<SegmentedControlProps, 'data'>, IInputProps {
+export interface SegmentedControlProps extends Omit<MantineSegmentedControlProps, 'data'>, BaseInputProps {
 	label?: string
 	labelPosition?: 'start'|'end'
 	name: string
-	options: IOption[]
+	options: ControlOption[]
 	id?: string
 	required?: boolean
 }
 
-const RadioButtons = ({
+const SegmentedControlComponent = ({
 	label,
 	labelPosition = 'start',
 	options,
@@ -28,7 +32,7 @@ const RadioButtons = ({
 	onChange,
 	wrapper,
 	...props
-}: IRadioButtonsProps) => {
+}: SegmentedControlProps) => {
 	const LabelComponent = () => <Label required={ required } htmlFor={ id }>{ label }</Label>
 
 	return (
@@ -48,4 +52,4 @@ const RadioButtons = ({
 	)
 }
 
-export default RadioButtons
+export default SegmentedControlComponent

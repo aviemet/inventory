@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react'
 import Label from './Label'
 import {
 	DatePickerInput,
-	type DatesRangeValue,
 	type DatePickerInputProps,
-	DateValue,
 } from '@mantine/dates'
 import { CalendarIcon } from '../Icons'
-import { IInputProps } from '.'
+import { type DateInputValue, type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 import { isUnset } from '@/lib'
 
-export type DateInputValue = Date | DatesRangeValue | Date[] | undefined
-
-export interface IDateProps extends DatePickerInputProps, IInputProps {
+export interface DateInputProps extends Omit<DatePickerInputProps, 'onChange'>, BaseInputProps {
 	name?: string
 	id?: string
 	error?: string | string[]
+	onChange?: (date: DateInputValue) => void
 }
 
 const DateInputComponent = ({
@@ -33,29 +30,37 @@ const DateInputComponent = ({
 	value,
 	onChange,
 	...props
-}: IDateProps) => {
+}: DateInputProps) => {
 	const inputId = id || name
 
-	const [localValue, setLocalValue] = useState<DateValue | Date[] | DatesRangeValue | undefined>(value)
-	const [localType, setLocalType] = useState(type)
+	const [localValue, setLocalValue] = useState<DateInputValue>(value)
+	const [datePickerType, setDatePickerType] = useState(type)
 
-	const handleChange = (changeValue: DateValue | Date[] | DatesRangeValue) => {
+	const handleChange = (changeValue: DateInputValue | undefined) => {
 		setLocalValue(changeValue)
 
 		onChange?.(changeValue)
 	}
 
 	useEffect(() => {
-		if(localType === type) return
+		if(datePickerType === type) return
 
+		// DatesRangeValue and Date[] are the Array type options
 		if(type === 'range') {
-			setLocalValue([localValue ?? null, null])
+			if(Array.isArray(localValue)) {
+				// An array of length 2 indicates it's already a range of dates
+				if(localValue.length !== 2) {
+					setLocalValue([localValue[0], null])
+				}
+			} else {
+				setLocalValue(localValue ? [localValue] : null)
+			}
 		} else {
 			setLocalValue(Array.isArray(localValue) ? localValue[0] : null)
 		}
 
-		setLocalType(type)
-	}, [type, localType, localValue])
+		setDatePickerType(type)
+	}, [type, datePickerType, localValue])
 
 	return (
 		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
@@ -66,7 +71,7 @@ const DateInputComponent = ({
 				id={ inputId }
 				name={ name }
 				value={ isUnset(localValue) ? undefined : localValue }
-				type={ localType }
+				type={ datePickerType }
 				onChange={ handleChange }
 				radius={ radius }
 				size={ size }

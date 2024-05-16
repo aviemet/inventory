@@ -1,14 +1,14 @@
 import React from 'react'
-import CurrencyInput, { type ICurrencyInputProps } from '@/Components/Inputs/CurrencyInput'
+import CurrencyInput, { type CurrencyInputProps } from '@/Components/Inputs/CurrencyInput'
 import Field from '../Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { InputConflicts, type BaseFormInputProps } from '.'
 
 interface INumberInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<ICurrencyInputProps, 'name'|'onChange'|'onBlur'>,
-	IFormInputProps<string|number, TForm> {}
+	Omit<CurrencyInputProps, InputConflicts>,
+	BaseFormInputProps<string|number, TForm> {}
 
 const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
@@ -16,6 +16,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		model,
 		onChange,
 		onBlur,
+		onFocus,
 		id,
 		required,
 		field = true,
@@ -24,8 +25,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string|number, TForm>({ name, model })
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value
+	const handleChange = (value: string|number) => {
 		setValue(value)
 
 		onChange?.(value, form)
@@ -35,7 +35,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		const value = e.target.value
 		setValue(value)
 
-		if(onBlur) onBlur(value, form)
+		onBlur?.(value, form)
 	}
 
 	return (
@@ -57,6 +57,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				onFocus={ e => onFocus?.(e.target.value, form) }
 				error={ error }
 				wrapper={ false }
 				{ ...props }

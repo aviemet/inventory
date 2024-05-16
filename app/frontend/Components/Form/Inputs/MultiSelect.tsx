@@ -1,16 +1,23 @@
 import React from 'react'
 import { NestedObject, UseFormProps, useInertiaInput } from 'use-inertia-form'
-import { IFormInputProps } from '.'
 import { ConditionalWrapper } from '@/Components'
 import Field from '../Field'
-import MultiSelect, { type IMultiSelectProps } from '@/Components/Inputs/MultiSelect'
+import MultiSelect, { type MultiSelectProps } from '@/Components/Inputs/MultiSelect'
+import { type ComboboxData } from '@mantine/core'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-type OmittedDropdownTypes = 'name'|'onBlur'|'onChange'|'onDropdownOpen'|'onDropdownClose'
-export interface IFormDropdownProps<TForm extends NestedObject = NestedObject>
-	extends Omit<IMultiSelectProps, OmittedDropdownTypes>,
-	IFormInputProps<string[], TForm> {
-	onDropdownOpen?: (form: UseFormProps<any>) => void
-	onDropdownClose?: (form: UseFormProps<any>) => void
+type OmittedDropdownTypes = InputConflicts|'onDropdownOpen'|'onDropdownClose'|'onOptionSubmit'|'onClear'
+export interface FormDropdownProps<TForm extends NestedObject = NestedObject>
+	extends Omit<MultiSelectProps, OmittedDropdownTypes>,
+	Omit<BaseFormInputProps<string[], TForm>, 'onChange'|'onBlur'|'onFocus'> {
+
+	onChange?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
+	onBlur?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
+	onFocus?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
+	onClear?: (options: ComboboxData, form: UseFormProps<TForm>) => void
+	onDropdownOpen?: (options: ComboboxData, form: UseFormProps<TForm>) => void
+	onDropdownClose?: (options: ComboboxData, form: UseFormProps<TForm>) => void
+	onOptionSubmit?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
 }
 
 const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
@@ -25,43 +32,60 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 		field = true,
 		onBlur,
 		onChange,
+		onFocus,
+		onClear,
 		onDropdownOpen,
 		onDropdownClose,
+		onOptionSubmit,
+		wrapperProps,
 		...props
-	}: IFormDropdownProps<TForm>,
+	}: FormDropdownProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[], TForm>({ name, model, errorKey })
-
-	const handleBlur = () => {
-		if(onBlur) onBlur(value, form)
-	}
 
 	const handleChange = (values: string[]) => {
 		setValue(values)
 
-		onChange?.(values, form)
+		onChange?.(values, options || [], form)
+	}
+
+	const handleBlur = () => {
+		onBlur?.(value, options || [], form)
+	}
+
+	const handleFocus = () => {
+		onFocus?.(value, options || [], form)
+	}
+
+	const handleClear = () => {
+		onClear?.(value, form)
 	}
 
 	const handleDropdownOpen = () => {
-		if(onDropdownOpen) onDropdownOpen(form)
+		onDropdownOpen?.(options || [], form)
 	}
 
 	const handleDropdownClose = () => {
-		if(onDropdownClose) onDropdownClose(form)
+		onDropdownClose?.(options || [], form)
+	}
+
+	const handleOptionSubmit = () => {
+		onOptionSubmit?.(value, options || [], form)
 	}
 
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="select"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
 			<MultiSelect
 				// Add "search" suffix to prevent password managers trying to autofill dropdowns
@@ -72,10 +96,13 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 				value={ value }
 				error={ error }
 				options={ options }
-				onBlur={ handleBlur }
 				onChange={ handleChange }
-				onDropdownClose={ handleDropdownClose }
+				onBlur={ handleBlur }
+				onFocus={ handleFocus }
+				onClear={ handleClear }
 				onDropdownOpen={ handleDropdownOpen }
+				onDropdownClose={ handleDropdownClose }
+				onOptionSubmit={ handleOptionSubmit }
 				wrapper={ false }
 				{ ...props }
 			/>

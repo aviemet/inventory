@@ -1,6 +1,6 @@
 import React from 'react'
 import { Group } from '@/Components'
-import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
+import { Form, type IFormProps, PasswordInput, SegmentedControl, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
 import { TestResponseButton } from '@/Components/Button'
 import { Routes, isUnset } from '@/lib'
 import { omit } from 'lodash'
@@ -40,7 +40,7 @@ const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 				placeholder='If not provided, will default to your username'
 			/>
 
-			<RadioButtons name="security" label="Security" options={ [
+			<SegmentedControl name="security" label="Security" options={ [
 				{ label: 'None', value: 'basic' },
 				{ label: 'TLS', value: 'tls' },
 				{ label: 'SSL', value: 'ssl' },

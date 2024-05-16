@@ -1,11 +1,11 @@
 import { Checkbox, type CheckboxGroupProps } from '@mantine/core'
 import React from 'react'
 
-export interface InputCheckboxGroupProps extends CheckboxGroupProps {
+export interface CheckboxInputGroupProps extends CheckboxGroupProps {
 	name?: string
 }
 
-const CheckboxGroup = ({ children, ...props }: InputCheckboxGroupProps) => {
+const CheckboxGroup = ({ children, ...props }: CheckboxInputGroupProps) => {
 	return (
 		<Checkbox.Group { ...props }>
 			{ children }

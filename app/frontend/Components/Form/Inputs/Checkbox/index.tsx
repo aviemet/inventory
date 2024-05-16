@@ -5,9 +5,9 @@ import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { Field } from '@/Components/Form'
 import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
 import FormCheckboxGroup from './Group'
-import { type IFormInputProps } from '..'
+import { type BaseFormInputProps } from '..'
 
-interface IFormCheckboxProps extends Omit<ICheckboxProps, 'name'|'onBlur'|'onChange'|'defaultChecked'>, IFormInputProps<boolean> {}
+interface IFormCheckboxProps extends Omit<ICheckboxProps, 'name'|'onBlur'|'onChange'|'defaultChecked'>, BaseFormInputProps<boolean> {}
 
 export type TFormCheckboxComponent = ForwardRefWithStaticComponents<
 IFormCheckboxProps,

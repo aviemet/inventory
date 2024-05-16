@@ -1,18 +1,19 @@
 import React from 'react'
 import Field from '../Field'
-import DateTimeInput, { type IDateTimeProps } from '@/Components/Inputs/DateTimeInput'
+import DateInput, { type DateInputProps } from '@/Components/Inputs/DateInput'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
+import { coerceArray } from '../../../lib/collections'
 
-interface IDateTimeFormProps<TForm extends NestedObject = NestedObject>
+interface FormDateInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<IDateTimeProps, 'name'|'onChange'|'onBlur'>,
-	IFormInputProps<Date, TForm> {
+	Omit<DateInputProps, InputConflicts>,
+	BaseFormInputProps<Date, TForm> {
 	field?: boolean
 }
 
-const DateTime = <TForm extends NestedObject = NestedObject>({
+const Date = <TForm extends NestedObject = NestedObject>({
 	name,
 	required,
 	onChange,
@@ -21,13 +22,15 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 	model,
 	field = true,
 	...props
-}: IDateTimeFormProps<TForm>) => {
+}: FormDateInputProps<TForm>) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date, TForm>({ name, model })
 
-	const handleChange = (date: Date) => {
-		setValue(date)
+	const handleChange = (date: Date|Date[]) => {
+		const dateValue = Array.isArray(date) ? date[0] : date
 
-		onChange?.(date, form)
+		setValue(dateValue)
+
+		onChange?.(dateValue, form)
 	}
 
 	const handleBlur = () => {
@@ -47,18 +50,19 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 			) }
 			condition={ field }
 		>
-			<DateTimeInput
+			<DateInput
 				id={ id || inputId }
 				name={ inputName }
-				value={ value }
+				value={ coerceArray(value) }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				required={ required }
 				error={ error }
 				wrapper={ false }
 				{ ...props }
-			/></ConditionalWrapper>
+			/>
+		</ConditionalWrapper>
 	)
 }
 
-export default DateTime
+export default Date

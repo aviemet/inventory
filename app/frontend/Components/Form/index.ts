@@ -16,7 +16,7 @@ export {
 	MultiSelect,
 	NumberInput,
 	PasswordInput,
-	RadioButtons,
+	SegmentedControl,
 	RichText,
 	Select,
 	SwatchInput,

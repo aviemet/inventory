@@ -3,12 +3,12 @@ import Field from '../Field'
 import AutocompleteInput, { type IAutocompleteProps } from '@/Components/Inputs/AutocompleteInput'
 import cx from 'clsx'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
-import { type IFormInputProps } from '.'
+import { type BaseFormInputProps } from '.'
 
 interface IFormAutocompleteProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<IAutocompleteProps, 'name'|'onBlur'|'onChange'>,
-	IFormInputProps<string, TForm> {
+	BaseFormInputProps<string, TForm> {
 	field?: boolean
 	endpoint?: string
 }

@@ -1,10 +1,10 @@
 import React from 'react'
-import RichTextEditor, { type IRichTextEditorProps } from '../RichTextEditor'
+import RichTextEditor, { type RichTextEditorProps } from '../RichTextEditor'
 import Label from './Label'
-import { IInputProps } from '.'
+import { type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 
-export interface IRichTextProps extends IRichTextEditorProps, IInputProps {
+export interface RichTextInputProps extends RichTextEditorProps, BaseInputProps {
 	label?: React.ReactNode
 	value: string
 	required?: boolean
@@ -12,7 +12,7 @@ export interface IRichTextProps extends IRichTextEditorProps, IInputProps {
 	name?: string
 }
 
-const RichText = ( { label, name, required = false, id, value, wrapper, ...props }: IRichTextProps) => {
+const RichText = ( { label, name, required = false, id, value, wrapper, ...props }: RichTextInputProps) => {
 	const inputId = id || name
 
 	return (

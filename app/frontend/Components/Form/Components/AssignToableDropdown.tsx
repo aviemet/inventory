@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Select, RadioButtons } from '@/Components/Form'
+import { Select, SegmentedControl } from '@/Components/Form'
 import { useForm } from 'use-inertia-form'
 import LocationsForm from '@/Pages/Locations/Form'
 import { Routes } from '@/lib'
@@ -68,7 +68,7 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 
 	return (
 		<>
-			{ options.length > 1 && <RadioButtons
+			{ options.length > 1 && <SegmentedControl
 				label="Checkout To"
 				name="assign_toable_type"
 				options={ options.map(option => ({ label: option, value: option })) }
