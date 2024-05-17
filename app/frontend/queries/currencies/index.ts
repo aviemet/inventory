@@ -1,13 +1,9 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import {
-	type QueryFunctionSingle,
-	type QueryFunction,
-} from '..'
+import { type ReactQueryFunction } from '..'
 
-
-export const useGetCurrencies: QueryFunction<Schema.CurrencyOption[]> = (options) => {
+export const useGetCurrencies: ReactQueryFunction<Schema.CurrencyOption[]> = (options) => {
 	return useQuery({
 		queryKey: ['currencies'],
 		queryFn: async () => {

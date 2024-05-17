@@ -1,4 +1,4 @@
-export default interface IUserTablePreferences {
+export default interface UserTablePreferences {
 	[model: string]: {
 		hide: Record<string, boolean>,
 		limit: string

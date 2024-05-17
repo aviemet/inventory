@@ -1,12 +1,9 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import {
-	type QueryFunctionSingle,
-	type QueryFunction,
-} from '..'
+import { type ReactQueryFunction } from '..'
 
-export const useGetPeople: QueryFunction<Schema.Person[]> = (options) => {
+export const useGetPeople: ReactQueryFunction<Schema.Person[]> = (options) => {
 	return useQuery({
 		queryKey: ['people'],
 		queryFn: async () => {
@@ -17,7 +14,7 @@ export const useGetPeople: QueryFunction<Schema.Person[]> = (options) => {
 	})
 }
 
-export const useGetPeopleAsOptions: QueryFunction<Schema.PeopleOptions[]> = (options) => {
+export const useGetPeopleAsOptions: ReactQueryFunction<Schema.PeopleOptions[]> = (options) => {
 	return useQuery({
 		queryKey: ['people', 'options'],
 		queryFn: async () => {
@@ -28,7 +25,7 @@ export const useGetPeopleAsOptions: QueryFunction<Schema.PeopleOptions[]> = (opt
 	})
 }
 
-export const useGetPerson: QueryFunctionSingle<Schema.Person[]> = (id, options) => {
+export const useGetPerson: ReactQueryFunction<Schema.Person[], { id: string|number }> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['people', id],
 		queryFn: async () => {

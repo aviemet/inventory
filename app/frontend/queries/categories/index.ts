@@ -1,12 +1,9 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import {
-	type QueryFunctionSingle,
-	type QueryFunction,
-} from '..'
+import { type ReactQueryFunction } from '..'
 
-export const useGetCategories: QueryFunctionSingle<Schema.Category[], Schema.CategoryTypes|undefined> = (categoryType, options) => {
+export const useGetCategories: ReactQueryFunction<Schema.Category[], { categoryType: Schema.CategoryTypes }> = ({ categoryType }, options) => {
 	return useQuery({
 		queryKey: ['categories', categoryType],
 		queryFn: async () => {
@@ -17,7 +14,7 @@ export const useGetCategories: QueryFunctionSingle<Schema.Category[], Schema.Cat
 	})
 }
 
-export const useGetCategoriesAsOptions: QueryFunctionSingle<Schema.CategoriesOptions[], Schema.CategoryTypes|undefined> = (categoryType, options) => {
+export const useGetCategoriesAsOptions: ReactQueryFunction<Schema.CategoriesOptions[], { categoryType: Schema.CategoryTypes}> = ({ categoryType }, options) => {
 	return useQuery({
 		queryKey: ['categories', 'options', categoryType],
 		queryFn: async () => {
@@ -28,7 +25,7 @@ export const useGetCategoriesAsOptions: QueryFunctionSingle<Schema.CategoriesOpt
 	})
 }
 
-export const useGetCategory: QueryFunctionSingle<Schema.CategoriesOptions[]> = (slug, options) => {
+export const useGetCategory: ReactQueryFunction<Schema.CategoriesOptions[], { slug: string }> = ({ slug }, options) => {
 	return useQuery({
 		queryKey: ['categories', slug],
 		queryFn: async () => {

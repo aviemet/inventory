@@ -1,12 +1,9 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import {
-	type QueryFunctionSingle,
-	type QueryFunction,
-} from '..'
+import { type ReactQueryFunction } from '..'
 
-export const useGetLocations: QueryFunction<Schema.Location[]> = (options) => {
+export const useGetLocations: ReactQueryFunction<Schema.Location[]> = (options) => {
 	return useQuery({
 		queryKey: ['locations'],
 		queryFn: async () => {
@@ -17,7 +14,7 @@ export const useGetLocations: QueryFunction<Schema.Location[]> = (options) => {
 	})
 }
 
-export const useGetLocationsAsOptions: QueryFunction<Schema.LocationsOptions[]> = (options) => {
+export const useGetLocationsAsOptions: ReactQueryFunction<Schema.LocationsOptions[]> = (options) => {
 	return useQuery({
 		queryKey: ['locations', 'options'],
 		queryFn: async () => {
@@ -28,7 +25,7 @@ export const useGetLocationsAsOptions: QueryFunction<Schema.LocationsOptions[]> 
 	})
 }
 
-export const useGetLocation: QueryFunctionSingle<Schema.Location[]> = (slug, options) => {
+export const useGetLocation: ReactQueryFunction<Schema.Location[], { slug: string }> = ({ slug }, options) => {
 	return useQuery({
 		queryKey: ['locations', slug],
 		queryFn: async () => {

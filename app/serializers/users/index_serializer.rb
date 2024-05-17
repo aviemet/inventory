@@ -20,8 +20,8 @@ class Users::IndexSerializer < ApplicationSerializer
     :updated_at,
     :active_company_id,
     :active,
-    table_preferences: { type: "IUserTablePreferences" },
-    user_preferences: { type: "IUserPreferences" },
+    table_preferences: { type: "UserTablePreferences" },
+    user_preferences: { type: "UserPreferences" },
   )
 
   has_many :roles, serializer: RoleSerializer

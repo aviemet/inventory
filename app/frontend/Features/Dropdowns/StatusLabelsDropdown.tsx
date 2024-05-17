@@ -3,7 +3,7 @@ import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, useInFormContext } from '@/lib'
 import StatusLabelsForm from '@/Pages/StatusLabels/Form'
-import { getStatusLabelsAsOptions } from '@/queries/statusLabels'
+import { useGetStatusLabelsAsOptions } from '@/queries/statusLabels'
 import { isEmpty } from 'lodash'
 import { type AsyncDropdown } from '.'
 
@@ -13,7 +13,7 @@ const StatusLabelsDropdown = forwardRef<HTMLInputElement, IStatusLabelsDropdown>
 	{ label = 'Status Label', name = 'status_label_id', initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = getStatusLabelsAsOptions({
+	const { data, isStale, refetch } = useGetStatusLabelsAsOptions({
 		enabled: value !== undefined,
 		initialData,
 	})

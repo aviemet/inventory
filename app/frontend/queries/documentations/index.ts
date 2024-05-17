@@ -1,13 +1,9 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import {
-	type QueryFunctionSingle,
-	type QueryFunction,
-} from '..'
+import { type ReactQueryFunction } from '..'
 
-
-export const useGetDocumentations: QueryFunction<Schema.Documentation[]> = (options) => {
+export const useGetDocumentations: ReactQueryFunction<Schema.Documentation[]> = (options) => {
 	return useQuery({
 		queryKey: ['documentations'],
 		queryFn: async () => {
@@ -18,7 +14,7 @@ export const useGetDocumentations: QueryFunction<Schema.Documentation[]> = (opti
 	})
 }
 
-export const useGetDocumentation: QueryFunctionSingle<Schema.Documentation[]> = (id, options) => {
+export const useGetDocumentation: ReactQueryFunction<Schema.Documentation[], { id: string|number}> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['documentations', id],
 		queryFn: async () => {

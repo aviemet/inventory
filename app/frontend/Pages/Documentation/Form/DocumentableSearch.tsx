@@ -3,7 +3,7 @@ import { Select, HiddenInput } from '@/Components/Inputs'
 import { SelectInputProps } from '@/Components/Inputs/Select'
 import { Field } from '@/Components/Form'
 import { useForm, useInertiaInput } from 'use-inertia-form'
-import { useGetSearchResults } from '@/queries/searches'
+import { useGetSearchResults } from '@/queries'
 
 interface IDocumentableSearch extends Omit<SelectInputProps, 'options'> {
 	label: string

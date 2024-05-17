@@ -1,12 +1,9 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import {
-	type QueryFunctionSingle,
-	type QueryFunction,
-} from '..'
+import { type ReactQueryFunction } from '..'
 
-export const useGetDepartments: QueryFunction<Schema.Department[]> = (options) => {
+export const useGetDepartments: ReactQueryFunction<Schema.Department[]> = (options) => {
 	return useQuery({
 		queryKey: ['departments'],
 		queryFn: async () => {
@@ -17,7 +14,7 @@ export const useGetDepartments: QueryFunction<Schema.Department[]> = (options) =
 	})
 }
 
-export const useGetDepartmentsAsOptions: QueryFunction<Schema.DepartmentsOptions[]> = (options) => {
+export const useGetDepartmentsAsOptions: ReactQueryFunction<Schema.DepartmentsOptions[]> = (options) => {
 	return useQuery({
 		queryKey: ['departments', 'options'],
 		queryFn: async () => {
@@ -28,7 +25,7 @@ export const useGetDepartmentsAsOptions: QueryFunction<Schema.DepartmentsOptions
 	})
 }
 
-export const useGetDepartment: QueryFunctionSingle<Schema.Department[]> = (slug, options) => {
+export const useGetDepartment: ReactQueryFunction<Schema.Department[], { slug: string }> = ({ slug }, options) => {
 	return useQuery({
 		queryKey: ['departments', slug],
 		queryFn: async () => {

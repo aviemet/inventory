@@ -1,12 +1,9 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import {
-	type QueryFunctionSingle,
-	type QueryFunction,
-} from '..'
+import { type ReactQueryFunction } from '..'
 
-export const useGetAssets: QueryFunction<Schema.Asset[]> = (options) => {
+export const useGetAssets: ReactQueryFunction<Schema.Asset[]> = (options) => {
 	return useQuery({
 		queryKey: ['items'],
 		queryFn: async () => {
@@ -17,7 +14,7 @@ export const useGetAssets: QueryFunction<Schema.Asset[]> = (options) => {
 	})
 }
 
-export const useGetAssetsAsOptions: QueryFunction<Schema.AssetsOptions[]> = (options) => {
+export const useGetAssetsAsOptions: ReactQueryFunction<Schema.AssetsOptions[]> = (options) => {
 	return useQuery({
 		queryKey: ['items', 'options'],
 		queryFn: async () => {
@@ -28,7 +25,7 @@ export const useGetAssetsAsOptions: QueryFunction<Schema.AssetsOptions[]> = (opt
 	})
 }
 
-export const useGetAsset: QueryFunctionSingle<Schema.Asset[]> = (id, options) => {
+export const useGetAsset: ReactQueryFunction<Schema.Asset[], { id: string|number }> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['items', id],
 		queryFn: async() => {

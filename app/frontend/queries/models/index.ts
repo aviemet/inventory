@@ -1,14 +1,11 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import {
-	type QueryFunctionSingle,
-	type QueryFunction,
-} from '..'
+import { type ReactQueryFunction } from '..'
 
-export const useGetModels: QueryFunctionSingle<Schema.Model[]> = (category, options) => {
+export const useGetModels: ReactQueryFunction<Schema.Model[], { category: string }> = ({ category }, options) => {
 	return useQuery({
-		queryKey: ['models'],
+		queryKey: ['models', category],
 		queryFn: async () => {
 			const res = await axios.get(Routes.apiModels({ category }))
 			return res.data
@@ -17,9 +14,9 @@ export const useGetModels: QueryFunctionSingle<Schema.Model[]> = (category, opti
 	})
 }
 
-export const useGetModelsAsOptions: QueryFunctionSingle<Schema.ModelsOptions[]> = (category, options) => {
+export const useGetModelsAsOptions: ReactQueryFunction<Schema.ModelsOptions[], { category: string }> = ({ category }, options) => {
 	return useQuery({
-		queryKey: ['models', 'options'],
+		queryKey: ['models', category, 'options'],
 		queryFn: async () => {
 			const res = await axios.get(Routes.apiModelsOptions({ category }))
 			return res.data
@@ -28,7 +25,7 @@ export const useGetModelsAsOptions: QueryFunctionSingle<Schema.ModelsOptions[]> 
 	})
 }
 
-export const useGetModel: QueryFunctionSingle<Schema.Model> = (id, options) => {
+export const useGetModel: ReactQueryFunction<Schema.Model, { id: string|number}> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['models', id],
 		queryFn: async () => {

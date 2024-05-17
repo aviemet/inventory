@@ -1,3 +1,5 @@
+import UserPreferences from './UserPreferences'
+import UserTablePreferences from './UserTablePreferences'
 export {}
 
 declare global {

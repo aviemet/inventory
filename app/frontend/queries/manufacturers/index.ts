@@ -1,12 +1,9 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import {
-	type QueryFunctionSingle,
-	type QueryFunction,
-} from '..'
+import { type ReactQueryFunction } from '..'
 
-export const useGetManufacturers: QueryFunction<Schema.Manufacturer[]> = (options) => {
+export const useGetManufacturers: ReactQueryFunction<Schema.Manufacturer[]> = (options) => {
 	return useQuery({
 		queryKey: ['manufacturers'],
 		queryFn: async () => {
@@ -17,7 +14,7 @@ export const useGetManufacturers: QueryFunction<Schema.Manufacturer[]> = (option
 	})
 }
 
-export const useGetManufacturersAsOptions: QueryFunction<Schema.ManufacturersOptions[]> = (options) => {
+export const useGetManufacturersAsOptions: ReactQueryFunction<Schema.ManufacturersOptions[]> = (options) => {
 	return useQuery({
 		queryKey: ['manufacturers', 'options'],
 		queryFn: async () => {
@@ -28,7 +25,7 @@ export const useGetManufacturersAsOptions: QueryFunction<Schema.ManufacturersOpt
 	})
 }
 
-export const useGetManufacturer: QueryFunctionSingle<Schema.Manufacturer> = (id, options) => {
+export const useGetManufacturer: ReactQueryFunction<Schema.Manufacturer, { id: string|number}> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['manufacturers', id],
 		queryFn: async () => {
