@@ -95,26 +95,28 @@ export const table = css`
 			display: none;
 		}
 
-		tr {
-			display: flex;
-			flex-direction: column;
-			margin-bottom: 10px;
-			background-color: ${vars.colors.dark[7]};
-			border-radius: ${rem(4)};
-			padding: ${rem(6)};
-			border-bottom: 1px solid ${vars.colors.primary.filled};
-		}
-
-		td {
-			display: grid;
-			grid-template-columns: 8rem 1fr;
-
-			&::before {
-				content: attr(data-cell);
+		thead + tbody {
+			tr {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 10px;
+				background-color: ${vars.colors.dark[7]};
+				border-radius: ${rem(4)};
+				padding: ${rem(6)};
+				border-bottom: 1px solid ${vars.colors.primary.filled};
 			}
 
-			&.table-row-select-checkbox {
-				visibility: collapse;
+			td {
+				display: grid;
+				grid-template-columns: 8rem 1fr;
+
+				&::before {
+					content: attr(data-cell);
+				}
+
+				&.table-row-select-checkbox {
+					visibility: collapse;
+				}
 			}
 		}
 	}
