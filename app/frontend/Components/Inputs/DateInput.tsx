@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Label from './Label'
-import {
-	DatePickerInput,
-	type DatePickerInputProps,
-} from '@mantine/dates'
-import { CalendarIcon } from '../Icons'
+import { DatePickerInput, type DatePickerInputProps } from '@mantine/dates'
+import { CalendarIcon } from '@/Components/Icons'
 import { type DateInputValue, type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 import { isUnset } from '@/lib'
@@ -42,6 +39,7 @@ const DateInputComponent = ({
 		onChange?.(changeValue)
 	}
 
+	// Allow a Date input's type to change
 	useEffect(() => {
 		if(datePickerType === type) return
 

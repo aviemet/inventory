@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
+import { DateTimeInput, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 
 export type TAccessoryCheckoutFormData = {
@@ -70,14 +70,14 @@ const Checkout = ({ assignment, accessory, ...models }: ICheckoutItemProps) => {
 
 					<NumberInput label="Quantity" name="qty" />
 
-					<DateTime
+					<DateTimeInput
 						label="Assigned At"
 						name="assigned_at"
 						required
 						span={ 6 }
 					/>
 
-					<DateTime
+					<DateTimeInput
 						label="Expected At"
 						name="expected_at"
 						span={ 6 }

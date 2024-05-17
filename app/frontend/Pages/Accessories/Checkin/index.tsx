@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Page, Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
+import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import * as classes from './Checkin.css'
 
 interface ICheckinAccessoriesProps {
@@ -70,7 +70,7 @@ const Checkin = ({ assignment, accessory, statuses }: ICheckinAccessoriesProps) 
 						required
 					/>
 
-					<DateTime
+					<DateTimeInput
 						label="Returned At"
 						name="returned_at"
 						required

@@ -5,7 +5,7 @@ import { useForm } from 'use-inertia-form'
  * @param v Variable to test whether is an "unset" value
  * @returns boolean
  */
-export const isUnset = <T extends any>(v: T) => {
+export const isUnset = <T extends any>(v: T): v is T extends (null | undefined | '') ? T : never => {
 	if(
 		v === null ||
 		v === undefined ||
@@ -14,7 +14,9 @@ export const isUnset = <T extends any>(v: T) => {
 		return true
 	}
 
-	if(Array.isArray(v)) return !v.some(el => el !== '' && el !== undefined)
+	if(Array.isArray(v)) {
+		return !v.some(el => el !== '' && el !== undefined)
+	}
 
 	return false
 }

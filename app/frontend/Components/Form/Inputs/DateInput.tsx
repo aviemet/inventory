@@ -4,33 +4,35 @@ import DateInput, { type DateInputProps } from '@/Components/Inputs/DateInput'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type InputConflicts, type BaseFormInputProps } from '.'
-import { coerceArray } from '../../../lib/collections'
+import { isUnset } from '@/lib'
+import { type DateValue, type DatesRangeValue } from '@mantine/dates'
 
+type DateInputValue = DatesRangeValue | Date[] | DateValue | undefined
 interface FormDateInputProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<DateInputProps, InputConflicts>,
-	BaseFormInputProps<Date, TForm> {
-	field?: boolean
-}
+	BaseFormInputProps<DateInputValue|'', TForm> {}
 
-const Date = <TForm extends NestedObject = NestedObject>({
+const FormDateInput = <TForm extends NestedObject = NestedObject>({
 	name,
 	required,
 	onChange,
 	onBlur,
+	onFocus,
 	id,
 	model,
 	field = true,
+	wrapperProps,
 	...props
 }: FormDateInputProps<TForm>) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<DateInputValue|'', TForm>({ name, model })
 
-	const handleChange = (date: Date|Date[]) => {
-		const dateValue = Array.isArray(date) ? date[0] : date
+	const handleChange = (date: DateInputValue|undefined) => {
+		const dateWithValidEmptyType = (isUnset(date) ? '' : date)
 
-		setValue(dateValue)
+		setValue(dateWithValidEmptyType)
 
-		onChange?.(dateValue, form)
+		onChange?.(dateWithValidEmptyType, form)
 	}
 
 	const handleBlur = () => {
@@ -39,21 +41,22 @@ const Date = <TForm extends NestedObject = NestedObject>({
 
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="date"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
 			<DateInput
 				id={ id || inputId }
 				name={ inputName }
-				value={ coerceArray(value) }
+				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				required={ required }
@@ -65,4 +68,4 @@ const Date = <TForm extends NestedObject = NestedObject>({
 	)
 }
 
-export default Date
+export default FormDateInput

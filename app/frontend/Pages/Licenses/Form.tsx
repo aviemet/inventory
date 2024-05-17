@@ -3,15 +3,15 @@ import {
 	Form,
 	TextInput,
 	Textarea,
-	DateTime,
+	DateInput,
 	Checkbox,
 	Submit,
 	CurrencyInput,
-	Date,
-	NumberInput, // TODO: Replace DateTime uses with Date after fixing it
+	NumberInput,
 } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
 import { CategoriesDropdown, ManufacturersDropdown, VendorsDropdown } from '@/Components/Dropdowns'
+import { Box, Grid } from '@/Components'
+import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 
 type TLicenseFormData = {
@@ -34,42 +34,81 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license }: ILicenseFormPro
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required autoFocus />
+				</Grid.Col>
 
-			<TextInput name="key" label="Key" required />
+				<Grid.Col >
+					<TextInput name="key" label="License Key" required />
+				</Grid.Col>
 
-			<NumberInput name="qty" label="Seats" required />
+				<Grid.Col span={ { base: 12, md: 6 } }>
+					<NumberInput name="qty" label="Seats" required />
+				</Grid.Col>
 
-			<TextInput name="licenser_name" label="Licenser Name" required />
+				<Grid.Col span={ { base: 12, sm: 6, lg: 6 } }>
+					<Checkbox name="reassignable" label="Re-Assignable" />
+				</Grid.Col>
 
-			<TextInput name="licenser_email" label="Licenser Email" required />
+				<Grid.Col>
+					<TextInput name="licenser_name" label="Licenser Name" required />
+				</Grid.Col>
 
-			<Checkbox name="reassignable" label="Re-Assignable" />
+				<Grid.Col>
+					<TextInput name="licenser_email" label="Licenser Email" required />
+				</Grid.Col>
 
-			<CurrencyInput name="cost" label="Cost" />
 
-			<DateTime name="purchased_at" label="Purchase Date" />
+				<Grid.Col span={ { base: 12, md: 6 } }>
+					<CurrencyInput name="cost" label="Cost" />
+				</Grid.Col>
+				<Box style={ { width: '100%' } }></Box>
 
-			<DateTime name="expires_at" label="Expiration Date" />
+				<Grid.Col span={ { base: 12, md: 6 } }>
+					<DateInput name="purchased_at" label="Purchase Date" />
+				</Grid.Col>
+				<Box style={ { width: '100%' } }></Box>
 
-			<DateTime name="terminates_at" label="Termination Date" />
+				<Grid.Col span={ { base: 12, md: 6 } }>
+					<DateInput name="expires_at" label="Expiration Date" />
+				</Grid.Col>
 
-			<Checkbox name="maintained" label="Maintained" />
+				<Box style={ { width: '100%' } }></Box>
+				<Grid.Col span={ { base: 12, md: 6 } }>
+					<DateInput name="terminates_at" label="Termination Date" />
+				</Grid.Col>
+				<Box style={ { width: '100%' } }></Box>
 
-			<ManufacturersDropdown initialData={ coerceArray(license?.manufacturer) } />
+				<Grid.Col span={ { base: 12, md: 6 } }>
+					<Checkbox name="maintained" label="Maintained" />
+				</Grid.Col>
 
-			<VendorsDropdown initialData={ coerceArray(license?.vendor) } />
+				<Grid.Col>
+					<ManufacturersDropdown initialData={ coerceArray(license?.manufacturer) } />
+				</Grid.Col>
 
-			<CategoriesDropdown
-				categorizable_type="License"
-				initialData={ coerceArray(license?.category) }
-			/>
+				<Grid.Col>
+					<VendorsDropdown initialData={ coerceArray(license?.vendor) } />
+				</Grid.Col>
 
-			<Textarea name="notes" label="Notes" />
+				<Grid.Col>
+					<CategoriesDropdown
+						categorizable_type="License"
+						initialData={ coerceArray(license?.category) }
+					/>
+				</Grid.Col>
 
-			<Submit>
-				{ license.id ? 'Update' : 'Create' } License
-			</Submit>
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<Submit>
+						{ license.id ? 'Update' : 'Create' } License
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Flex, Heading, Page, Section, Table, Box } from '@/Components'
 import { Routes, formatter } from '@/lib'
-import { DateTime, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
+import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import { LocationsDropdown } from '@/Components/Dropdowns'
 
 interface ICheckinLicensesProps {
@@ -111,7 +111,7 @@ const Checkin = ({ assignment, license, locations, status_labels }: ICheckinLice
 						required
 					/>
 
-					<DateTime
+					<DateTimeInput
 						label="Returned At"
 						name="returned_at"
 						required

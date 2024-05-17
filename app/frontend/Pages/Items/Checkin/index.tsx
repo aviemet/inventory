@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
 import { LocationsDropdown } from '@/Components/Dropdowns'
 import StatusLabelsDropdown from '@/Components/Dropdowns/StatusLabelsDropdown'
 import * as classes from './Checkin.css'
@@ -67,7 +67,7 @@ const Checkin = ({ assignment, item, locations, status_labels }: ICheckinItemsPr
 
 					<StatusLabelsDropdown />
 
-					<DateTime
+					<DateTimeInput
 						label="Returned At"
 						name="returned_at"
 						required

@@ -26,6 +26,7 @@ export {
 	Badge,
 	Container,
 	Flex,
+	Grid,
 	Group,
 	List,
 	Modal,

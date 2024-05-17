@@ -9,9 +9,7 @@ import { isUnset } from '@/lib'
 interface DateTimeFormProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<DateTimeProps, InputConflicts>,
-	BaseFormInputProps<Date, TForm> {
-	field?: boolean
-}
+	BaseFormInputProps<Date|'', TForm> {}
 
 const DateTime = <TForm extends NestedObject = NestedObject>({
 	name,
@@ -25,14 +23,14 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 	wrapperProps,
 	...props
 }: DateTimeFormProps<TForm>) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date|null, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date|'', TForm>({ name, model })
 
-	// TODO: Handle unsetting values in useInertiaForm
 	const handleChange = (date: Date|null) => {
-		// @ts-ignore
-		setValue(isUnset(date) ? '' : date!)
+		const dateWithValidEmptyType = (isUnset(date) ? '' : date)
 
-		onChange?.(date, form)
+		setValue(dateWithValidEmptyType)
+
+		onChange?.(dateWithValidEmptyType, form)
 	}
 
 	const handleBlur = () => {
@@ -60,7 +58,7 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 			<DateTimeInput
 				id={ id || inputId }
 				name={ inputName }
-				value={ value }
+				value={ value === '' ? undefined : value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				onFocus={ handleFocus }

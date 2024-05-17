@@ -5,7 +5,7 @@ import {
 	CurrencyInput,
 	Textarea,
 	Checkbox,
-	DateTime,
+	DateTimeInput,
 	Submit,
 	FormGroup,
 	DynamicInputs,
@@ -74,7 +74,7 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 
 				<CurrencyInput name="cost" label="Cost" />
 
-				<DateTime label="Purchased At" name="purchased_at" />
+				<DateTimeInput label="Purchased At" name="purchased_at" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">

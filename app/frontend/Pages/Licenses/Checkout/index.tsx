@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Flex, Heading, Page, Section, Table } from '@/Components'
-import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown } from '@/Components/Form/Components'
 import { Routes, formatter } from '@/lib'
 
@@ -103,13 +103,13 @@ const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => 
 
 					<AssignToableDropdown { ...models } options={ ['Person', 'Item'] } />
 
-					<DateTime
+					<DateTimeInput
 						label="Assigned At"
 						name="assigned_at"
 						required
 					/>
 
-					<DateTime
+					<DateTimeInput
 						label="Expected At"
 						name="expected_at"
 					/>

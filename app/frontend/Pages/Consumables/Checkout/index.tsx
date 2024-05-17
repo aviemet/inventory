@@ -1,7 +1,7 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
+import { DateTimeInput, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
 import { type UseFormProps } from 'use-inertia-form'
 
@@ -72,7 +72,7 @@ const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => 
 
 					<AssignmentLocationDropdown locations={ models.locations } />
 
-					<DateTime
+					<DateTimeInput
 						label="Assigned At"
 						name="assigned_at"
 						required
