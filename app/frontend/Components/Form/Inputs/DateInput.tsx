@@ -1,13 +1,12 @@
 import React from 'react'
 import Field from '../Field'
-import DateInput, { type DateInputProps } from '@/Components/Inputs/DateInput'
+import { DateInput, type DateInputValue } from '@/Components/Inputs'
+import { type DateInputProps } from '@/Components/Inputs/DateInput'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type InputConflicts, type BaseFormInputProps } from '.'
 import { isUnset } from '@/lib'
-import { type DateValue, type DatesRangeValue } from '@mantine/dates'
 
-type DateInputValue = DatesRangeValue | Date[] | DateValue | undefined
 interface FormDateInputProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<DateInputProps, InputConflicts>,
@@ -25,9 +24,10 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 	wrapperProps,
 	...props
 }: FormDateInputProps<TForm>) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<DateInputValue|'', TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<
+	Exclude<DateInputValue, undefined|null> | '', TForm>({ name, model })
 
-	const handleChange = (date: DateInputValue|undefined) => {
+	const handleChange = (date: DateInputValue) => {
 		const dateWithValidEmptyType = (isUnset(date) ? '' : date)
 
 		setValue(dateWithValidEmptyType)
@@ -36,7 +36,7 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 	}
 
 	const handleBlur = () => {
-		if(onBlur) onBlur(value, form)
+		onBlur?.(value, form)
 	}
 
 	return (
@@ -56,7 +56,9 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 			<DateInput
 				id={ id || inputId }
 				name={ inputName }
-				value={ value }
+				// @ts-ignore - TS is treating value as Date
+				// when it's clearly defined as a Union of many types
+				value={ isUnset(value) ? undefined : value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				required={ required }

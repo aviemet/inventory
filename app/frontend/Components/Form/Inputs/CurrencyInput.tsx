@@ -8,7 +8,7 @@ import { InputConflicts, type BaseFormInputProps } from '.'
 interface INumberInputProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<CurrencyInputProps, InputConflicts>,
-	BaseFormInputProps<string|number, TForm> {}
+	BaseFormInputProps<number, TForm> {}
 
 const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
@@ -23,16 +23,17 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		...props
 	} : INumberInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string|number, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({ name, model })
 
 	const handleChange = (value: string|number) => {
-		setValue(value)
+		const numberValue = Number(value)
+		setValue(numberValue)
 
-		onChange?.(value, form)
+		onChange?.(numberValue, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-		const value = e.target.value
+		const value = Number(e.target.value)
 		setValue(value)
 
 		onBlur?.(value, form)
@@ -57,7 +58,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
-				onFocus={ e => onFocus?.(e.target.value, form) }
+				onFocus={ e => onFocus?.(Number(e.target.value), form) }
 				error={ error }
 				wrapper={ false }
 				{ ...props }
