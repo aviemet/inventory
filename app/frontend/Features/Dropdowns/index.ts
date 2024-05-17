@@ -1,5 +1,5 @@
-import { type ISelectProps } from '../Inputs/Select'
-import { type IMultiSelectProps } from '../Inputs/MultiSelect'
+import { type SelectInputProps } from '@/Components/Inputs/Select'
+import { type MultSelectInputProps } from '@/Components/Inputs/MultiSelect'
 
 export { default as AssetsDropdown }        from './AssetsDropdown'
 export { default as CategoriesDropdown }    from './CategoriesDropdown'
@@ -14,7 +14,10 @@ export { default as PeopleMultiSelect }     from './PeopleMultiSelect'
 export { default as StatusLabelsDropdown }  from './StatusLabelsDropdown'
 export { default as VendorsDropdown }       from './VendorsDropdown'
 
-export interface IAsyncDropdown<T> extends Omit<ISelectProps, 'defaultValue'|'onBlur'> {
+export { default as AssignToableDropdown } from './AssignToableDropdown'
+export { default as AssignmentLocationDropdown } from './AssignmentLocationDropdown'
+
+export interface AsyncDropdown<T> extends Omit<SelectInputProps, 'defaultValue'|'onBlur'> {
 	name?: string
 	model?: string
 	label?: string
@@ -24,7 +27,7 @@ export interface IAsyncDropdown<T> extends Omit<ISelectProps, 'defaultValue'|'on
 	initialData?: T[]
 }
 
-export interface IAsyncMultiSelect<T> extends Omit<IMultiSelectProps, 'onBlur'> {
+export interface AsyncMultiSelect<T> extends Omit<MultSelectInputProps, 'onBlur'> {
 	errorKey?: string
 	initialData?: T[]
 }

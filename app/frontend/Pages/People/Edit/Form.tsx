@@ -11,9 +11,9 @@ import {
 } from '@/Components/Form'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { useBooleanToggle } from '@/lib/hooks'
-import { DepartmentsDropdown } from '@/Components/Dropdowns'
+import { DepartmentsDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
-import PeopleDropdown from '@/Components/Dropdowns/PeopleDropdown'
+import PeopleDropdown from '@/Features/Dropdowns/PeopleDropdown'
 import { coerceArray } from '@/lib'
 // import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 

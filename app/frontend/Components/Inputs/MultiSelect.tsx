@@ -1,17 +1,17 @@
 import React, { forwardRef } from 'react'
-import { MultiSelect, type ComboboxData, type MultiSelectProps as MantineMultiSelectProps } from '@mantine/core'
+import { MultiSelect, type ComboboxData, type MultSelectInputProps as MantineMultSelectInputProps } from '@mantine/core'
 import Label from './Label'
 import { type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 import { router } from '@inertiajs/react'
 import { coerceArray } from '@/lib'
 
-export interface MultiSelectProps extends Omit<MantineMultiSelectProps, 'data'>, BaseInputProps {
+export interface MultSelectInputProps extends Omit<MantineMultSelectInputProps, 'data'>, BaseInputProps {
 	options?: ComboboxData
 	fetchOnOpen?: string
 }
 
-const MultiSelectComponent = forwardRef<HTMLInputElement, MultiSelectProps>((
+const MultiSelectComponent = forwardRef<HTMLInputElement, MultSelectInputProps>((
 	{
 		options = [],
 		label,

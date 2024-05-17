@@ -1,30 +1,40 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
-import { query, type ReactQueryOptions } from '..'
+import { useQuery } from '@tanstack/react-query'
+import {
+	type QueryFunctionSingle,
+	type QueryFunction,
+} from '..'
 
-export const getCategories = <T = Schema.Category[]>(
-	category: Schema.CategoryTypes|undefined,
-	options?: ReactQueryOptions<T>,
-) => query<T>(
-	['categories'],
-	() => axios.get(Routes.apiCategories({ category })).then(res => res.data),
-	options,
-)
+export const useGetCategories: QueryFunctionSingle<Schema.Category[], Schema.CategoryTypes|undefined> = (categoryType, options) => {
+	return useQuery({
+		queryKey: ['categories', categoryType],
+		queryFn: async () => {
+			const res = await axios.get(Routes.apiCategories({ slug: categoryType }))
+			return res.data
+		},
+		...options,
+	})
+}
 
-export const getCategoriesAsOptions = <T = Schema.CategoriesOptions[]>(
-	category: Schema.CategoryTypes|undefined,
-	options?: ReactQueryOptions<T>,
-) => query<T>(
-	['categories', 'options'],
-	() => axios.get(Routes.apiCategoriesOptions({ category })).then(res => res.data),
-	options,
-)
+export const useGetCategoriesAsOptions: QueryFunctionSingle<Schema.CategoriesOptions[], Schema.CategoryTypes|undefined> = (categoryType, options) => {
+	return useQuery({
+		queryKey: ['categories', 'options', categoryType],
+		queryFn: async () => {
+			const res = await axios.get(Routes.apiCategoriesOptions({ slug: categoryType }))
+			return res.data
+		},
+		...options,
+	})
+}
 
-export const getCategory = <T = Schema.Category[]>(
-	slug: string,
-	options?: ReactQueryOptions<T>,
-) => query<T>(
-	['categories', slug],
-	() => axios.get(Routes.apiCategory(slug)).then(res => res.data),
-	options,
-)
+export const useGetCategory: QueryFunctionSingle<Schema.CategoriesOptions[]> = (slug, options) => {
+	return useQuery({
+		queryKey: ['categories', slug],
+		queryFn: async () => {
+			const res = await axios.get(Routes.apiCategory(slug))
+			return res.data
+		},
+		...options,
+	})
+}

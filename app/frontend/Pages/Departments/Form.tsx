@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
-import { LocationsDropdown } from '@/Components/Dropdowns'
+import { LocationsDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
 
 import { omit } from 'lodash'
 
@@ -66,7 +66,7 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 
 					<AssignToableDropdown { ...models } options={ ['Person', 'Item', 'Location'] } />
 
-					<AssignmentLocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown />
 
 					<DateTimeInput
 						label="Assigned At"

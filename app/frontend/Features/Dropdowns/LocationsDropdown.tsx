@@ -3,11 +3,11 @@ import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, useInFormContext } from '@/lib'
 import LocationsForm from '@/Pages/Locations/Form'
-import { getLocationsAsOptions } from '@/queries/locations'
+import { useGetLocationsAsOptions } from '@/queries/locations'
 import { isEmpty } from 'lodash'
-import { type IAsyncDropdown } from '.'
+import { type AsyncDropdown } from '.'
 
-interface ILocationsDropdown extends IAsyncDropdown<Schema.LocationsOptions> {
+interface ILocationsDropdown extends AsyncDropdown<Schema.LocationsOptions> {
 	filter?: (location: Schema.LocationsOptions) => boolean
 }
 
@@ -15,7 +15,7 @@ const LocationsDropdown = forwardRef<HTMLInputElement, ILocationsDropdown>((
 	{ label = 'Location', name = 'location_id', filter, initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = getLocationsAsOptions({
+	const { data, isStale, refetch } = useGetLocationsAsOptions({
 		enabled: value !== undefined,
 		select: filter ? data => data.filter(filter) : undefined,
 		initialData,

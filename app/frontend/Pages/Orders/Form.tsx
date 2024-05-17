@@ -5,7 +5,7 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { coerceArray } from '@/lib'
-import { VendorsDropdown } from '@/Components/Dropdowns'
+import { VendorsDropdown } from '@/Features/Dropdowns'
 import { Menu } from '@/Components'
 import { PlusCircleIcon } from '@/Components/Icons'
 import { UseFormProps } from 'use-inertia-form'

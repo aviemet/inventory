@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'use-inertia-form'
-import { LocationsDropdown } from '@/Components/Dropdowns'
+import { LocationsDropdown } from '.'
 
 const LocationDropdown = () => {
 	const { data } = useForm<{ assignment: Schema.AssignmentsFormData}>()

@@ -7,7 +7,7 @@ import {
 	FieldsFor,
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import { AssetsDropdown, PeopleDropdown, PeopleMultiSelect } from '@/Components/Dropdowns'
+import { AssetsDropdown, PeopleDropdown, PeopleMultiSelect } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 
 type TTicketFormData = {

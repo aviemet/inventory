@@ -37,7 +37,7 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 
 			<Pagination.Root
 				total={ pages }
-				getItemProps={ (page) => ({
+				useGetItemProps={ (page) => ({
 					component: Link,
 					href: pageLink(page),
 				}) }

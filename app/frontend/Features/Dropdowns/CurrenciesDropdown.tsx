@@ -1,20 +1,19 @@
 import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
-import { getCurrencies } from '@/queries/currencies'
+import { useGetCurrencies } from '@/queries/currencies'
 import { isEmpty } from 'lodash'
 import { useInFormContext } from '@/lib'
-import { type IAsyncDropdown } from '.'
+import { type AsyncDropdown } from '.'
 
-interface ICurrenciesDropdown extends IAsyncDropdown<Schema.CurrencyOption> {}
+interface ICurrenciesDropdown extends AsyncDropdown<Schema.CurrencyOption> {}
 
 const CurrenciesDropdown = forwardRef<HTMLInputElement, ICurrenciesDropdown>((
 	{ label = 'Currency', name = 'currency', ...props },
 	ref,
 ) => {
-	const { data, refetch } = getCurrencies({
+	const { data, refetch } = useGetCurrencies({
 		staleTime: Infinity,
-		cacheTime: Infinity,
 	})
 
 	const commonProps = {

@@ -7,7 +7,7 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Dropdowns'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '../../lib/collections'
 

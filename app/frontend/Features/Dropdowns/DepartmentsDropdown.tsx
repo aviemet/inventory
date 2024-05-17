@@ -4,16 +4,16 @@ import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, useInFormContext } from '@/lib'
 import DepartmentsForm from '@/Pages/Departments/Form'
 import { isEmpty } from 'lodash'
-import { getDepartmentsAsOptions } from '@/queries/departments'
-import { type IAsyncDropdown } from '.'
+import { useGetDepartmentsAsOptions } from '@/queries/departments'
+import { type AsyncDropdown } from '.'
 
-interface IDepartmentsDropdown extends IAsyncDropdown<Schema.DepartmentsOptions> {}
+interface IDepartmentsDropdown extends AsyncDropdown<Schema.DepartmentsOptions> {}
 
 const DepartmentsDropdown = forwardRef<HTMLInputElement, IDepartmentsDropdown>((
 	{ label = 'Department', name = 'department_id', initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = getDepartmentsAsOptions({
+	const { data, isStale, refetch } = useGetDepartmentsAsOptions({
 		enabled: value !== undefined,
 		initialData,
 	})

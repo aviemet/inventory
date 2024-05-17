@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
-import { LocationsDropdown } from '@/Components/Dropdowns'
-import StatusLabelsDropdown from '@/Components/Dropdowns/StatusLabelsDropdown'
+import { LocationsDropdown } from '@/Features/Dropdowns'
+import StatusLabelsDropdown from '@/Features/Dropdowns/StatusLabelsDropdown'
 import * as classes from './Checkin.css'
 
 interface ICheckinItemsProps {

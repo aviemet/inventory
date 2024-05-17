@@ -2,19 +2,16 @@ class Api::ModelsController < Api::ApiController
   expose :models, -> { params[:category] ? @active_company.models.find_by_category(params[:category]) : @active_company.models }
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, model: Model, find_by: :slug
 
-  # GET api/models/options
   # @route GET /api/models (api_models)
   def index
     render json: models.includes_associated.render
   end
 
-  # GET api/models/:slug
   # @route GET /api/models/:slug (api_model)
   def show
     render json: model.render
   end
 
-  # GET api/options/models
   # @route GET /api/options/models (api_models_options)
   def options
     render json: models.render(view: :options)

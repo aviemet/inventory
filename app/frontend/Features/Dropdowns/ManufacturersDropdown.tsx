@@ -3,17 +3,17 @@ import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, useInFormContext } from '@/lib'
 import ManufacturersForm from '@/Pages/Manufacturers/Form'
-import { getManufacturersAsOptions } from '@/queries/manufacturers'
+import { useGetManufacturersAsOptions } from '@/queries/manufacturers'
 import { isEmpty } from 'lodash'
-import { type IAsyncDropdown } from '.'
+import { type AsyncDropdown } from '.'
 
-interface IManufacturersDropdown extends IAsyncDropdown<Schema.ManufacturersOptions> {}
+interface IManufacturersDropdown extends AsyncDropdown<Schema.ManufacturersOptions> {}
 
 const ManufacturersDropdown = forwardRef<HTMLInputElement, IManufacturersDropdown>((
 	{ label = 'Manufacturer', name = 'manufacturer_id', initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = getManufacturersAsOptions({
+	const { data, isStale, refetch } = useGetManufacturersAsOptions({
 		enabled: value !== undefined,
 		initialData,
 	})

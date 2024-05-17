@@ -10,7 +10,7 @@ import {
 	FormGroup,
 	DynamicInputs,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown, DepartmentsDropdown } from '@/Components/Dropdowns'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown, DepartmentsDropdown } from '@/Features/Dropdowns'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { Group } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'

@@ -2,19 +2,16 @@ class Api::LocationsController < Api::ApiController
   expose :locations, -> { @active_company.locations }
   expose :loc, id: ->{ params[:slug] }, scope: ->{ @active_company.items.includes_associated }, find_by: :slug
 
-  # GET api/locations/options
   # @route GET /api/locations (api_locations)
   def index
     render json: locations.includes_associated.render
   end
 
-  # GET api/locations/:slug
   # @route GET /api/locations/:slug (api_location)
   def show
     render json: loc.render
   end
 
-  # GET api/options/locations
   # @route GET /api/options/locations (api_locations_options)
   def options
     render json: locations.render(view: :options)

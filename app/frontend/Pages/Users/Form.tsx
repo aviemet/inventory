@@ -4,7 +4,7 @@ import {
 	TextInput,
 	Submit,
 } from '@/Components/Form'
-import { DepartmentsDropdown, PeopleDropdown } from '@/Components/Dropdowns'
+import { DepartmentsDropdown, PeopleDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
 type TUserFormData = {

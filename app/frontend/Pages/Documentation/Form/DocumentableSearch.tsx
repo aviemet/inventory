@@ -1,11 +1,11 @@
 import React, { forwardRef, useEffect, useState } from 'react'
 import { Select, HiddenInput } from '@/Components/Inputs'
-import { ISelectProps } from '@/Components/Inputs/Select'
+import { SelectInputProps } from '@/Components/Inputs/Select'
 import { Field } from '@/Components/Form'
 import { useForm, useInertiaInput } from 'use-inertia-form'
-import { getSearchResults } from '@/queries/searches'
+import { useGetSearchResults } from '@/queries/searches'
 
-interface IDocumentableSearch extends Omit<ISelectProps, 'options'> {
+interface IDocumentableSearch extends Omit<SelectInputProps, 'options'> {
 	label: string
 }
 
@@ -14,7 +14,7 @@ const DocumentableSearch = forwardRef<HTMLInputElement, IDocumentableSearch>((
 	ref,
 ) => {
 	const [params, setParams] = useState({})
-	const { data, refetch } = getSearchResults(params)
+	const { data, refetch } = useGetSearchResults(params)
 
 	const { data: formData, getData } = useForm()
 

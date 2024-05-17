@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import { LocationsDropdown } from '@/Components/Dropdowns'
-import CurrenciesDropdown from '@/Components/Dropdowns/CurrenciesDropdown'
+import { LocationsDropdown } from '@/Features/Dropdowns'
+import CurrenciesDropdown from '@/Features/Dropdowns/CurrenciesDropdown'
 import { coerceArray } from '@/lib'
 
 export type TLocationFormData = {

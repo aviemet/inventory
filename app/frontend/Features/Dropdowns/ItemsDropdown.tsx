@@ -2,17 +2,17 @@ import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { isEmpty } from 'lodash'
-import { getAssetsAsOptions } from '@/queries/assets'
+import { useGetDepartmentsAsOptions } from '@/queries/departments'
 import { useInFormContext } from '@/lib'
-import { type IAsyncDropdown } from '.'
+import { type AsyncDropdown } from '.'
 
-interface IAssetsDropdown extends IAsyncDropdown<Schema.AssetsOptions> {}
+interface IItemsDropdown extends AsyncDropdown<Schema.ItemsOptions> {}
 
-const AssetsDropdown = forwardRef<HTMLInputElement, IAssetsDropdown>((
-	{ label = 'Asset', name = 'asset_id', initialData = [], value, ...props },
+const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdown>((
+	{ label = 'Item', name = 'item_id', initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = getAssetsAsOptions({
+	const { data, isStale, refetch } = useGetDepartmentsAsOptions({
 		enabled: value !== undefined,
 		initialData,
 	})
@@ -21,9 +21,9 @@ const AssetsDropdown = forwardRef<HTMLInputElement, IAssetsDropdown>((
 		ref,
 		label,
 		name,
-		options: !data ? [] : data.map(asset => ({
-			label: asset.name,
-			value: String(asset.id),
+		options: !data ? [] : data.map(item => ({
+			label: item.name,
+			value: String(item.id),
 		})),
 		onDropdownOpen: () => {
 			if(isEmpty(data) || isStale) refetch()
@@ -41,5 +41,5 @@ const AssetsDropdown = forwardRef<HTMLInputElement, IAssetsDropdown>((
 	return <InputSelect { ...commonProps } />
 })
 
-export default AssetsDropdown
+export default ItemsDropdown
 

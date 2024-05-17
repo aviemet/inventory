@@ -1,7 +1,6 @@
 import React from 'react'
 import IconProvider from './IconProvider'
 import UiFrameworkProvider from './UiFrameworkProvider'
-import Spotlight from './Spotlight'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
@@ -24,7 +23,6 @@ const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			staleTime: 30000,
-			cacheTime: 30000,
 		},
 	},
 })
@@ -32,9 +30,8 @@ const queryClient = new QueryClient({
 const Providers = React.memo(({ children }: IProviderProps) => {
 	return (
 		<QueryClientProvider client={ queryClient }>
-			{ process.env.NODE_ENV && process.env.NODE_ENV === 'development' && <ReactQueryDevtools position="bottom-right" /> }
+			{ process.env.NODE_ENV && process.env.NODE_ENV === 'development' && <ReactQueryDevtools buttonPosition="bottom-right" /> }
 			<UiFrameworkProvider>
-				<Spotlight />
 				<IconProvider>
 					{ children }
 				</IconProvider>

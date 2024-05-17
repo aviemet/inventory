@@ -2,19 +2,16 @@ class Api::ManufacturersController < Api::ApiController
   expose :manufacturers, -> { @active_company.manufacturers }
   expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
 
-  # GET api/manufacturers/options
   # @route GET /api/manufacturers (api_manufacturers)
   def index
     render json: manufacturers.includes_associated.render
   end
 
-  # GET api/manufacturers/:slug
   # @route GET /api/manufacturers/:id (api_manufacturer)
   def show
     render json: manufacturers.render
   end
 
-  # GET api/options/manufacturers
   # @route GET /api/options/manufacturers (api_manufacturers_options)
   def options
     render json: manufacturers.render(view: :options)

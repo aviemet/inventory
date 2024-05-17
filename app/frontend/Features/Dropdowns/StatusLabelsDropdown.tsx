@@ -5,9 +5,9 @@ import { Routes, useInFormContext } from '@/lib'
 import StatusLabelsForm from '@/Pages/StatusLabels/Form'
 import { getStatusLabelsAsOptions } from '@/queries/statusLabels'
 import { isEmpty } from 'lodash'
-import { type IAsyncDropdown } from '.'
+import { type AsyncDropdown } from '.'
 
-interface IStatusLabelsDropdown extends IAsyncDropdown<Schema.StatusLabelsOptions> {}
+interface IStatusLabelsDropdown extends AsyncDropdown<Schema.StatusLabelsOptions> {}
 
 const StatusLabelsDropdown = forwardRef<HTMLInputElement, IStatusLabelsDropdown>((
 	{ label = 'Status Label', name = 'status_label_id', initialData, value, ...props },

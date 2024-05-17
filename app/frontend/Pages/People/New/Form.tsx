@@ -7,9 +7,9 @@ import {
 	Checkbox,
 	FormConsumer,
 } from '@/Components/Form'
-import { DepartmentsDropdown } from '@/Components/Dropdowns'
+import { DepartmentsDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
-import PeopleDropdown from '@/Components/Dropdowns/PeopleDropdown'
+import PeopleDropdown from '@/Features/Dropdowns/PeopleDropdown'
 
 type TPersonFormData = {
 	person: Schema.PeopleFormData

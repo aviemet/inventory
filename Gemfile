@@ -5,7 +5,6 @@ ruby "3.2.2"
 
 # Server
 gem "rails", ">= 7.1"
-# gem "sprockets-rails"
 gem "pg", ">= 1.1"
 gem "puma", ">= 6.0"
 
@@ -73,6 +72,7 @@ group :development, :test do
 
   # File annotation
   gem "chusaku", "~> 1.2", require: false
+  gem "annotate", "~> 3.2", require: false
 end
 
 group :development do

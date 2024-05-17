@@ -3,11 +3,11 @@ import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, useInFormContext } from '@/lib'
 import ModelsForm from '@/Pages/Models/Form'
-import { getModelsAsOptions } from '@/queries/models'
+import { useGetModelsAsOptions } from '@/queries/models'
 import { isEmpty } from 'lodash'
-import { type IAsyncDropdown } from '.'
+import { type AsyncDropdown } from '.'
 
-interface IModelsDropdown extends IAsyncDropdown<Schema.ModelsOptions> {
+interface IModelsDropdown extends AsyncDropdown<Schema.ModelsOptions> {
 	modelCategory?: Schema.CategoryTypes|undefined
 }
 
@@ -15,7 +15,7 @@ const ModelsDropdown = forwardRef<HTMLInputElement, IModelsDropdown>((
 	{ label = 'Model', name = 'model_id', modelCategory, initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = getModelsAsOptions(modelCategory, {
+	const { data, isStale, refetch } = useGetModelsAsOptions(modelCategory, {
 		enabled: value !== undefined,
 		initialData,
 	})

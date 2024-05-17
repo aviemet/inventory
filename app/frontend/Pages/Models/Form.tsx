@@ -1,8 +1,8 @@
 import React from 'react'
-import ManufacturersDropdown from '../../Components/Dropdowns/ManufacturersDropdown'
+import ManufacturersDropdown from '../../Features/Dropdowns/ManufacturersDropdown'
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import { CategoriesDropdown } from '@/Components/Dropdowns'
+import { CategoriesDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 
 type TModelFormData = {

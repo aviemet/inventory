@@ -1,20 +1,30 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
-import { query, type ReactQueryOptions } from '..'
+import { useQuery } from '@tanstack/react-query'
+import {
+	type QueryFunctionSingle,
+	type QueryFunction,
+} from '..'
 
-export const getDocumentations = <T = Schema.Documentation[]>(
-	options?: ReactQueryOptions<T>,
-) => query<T>(
-	['documentations'],
-	() => axios.get(Routes.apiDocumentations()).then(res => res.data),
-	options,
-)
 
-export const getDocumentation = <T = Schema.Documentation[]>(
-	id: string|number,
-	options?: ReactQueryOptions<T>,
-) => query<T>(
-	['documentations', id],
-	() => axios.get(Routes.apiDocumentation(id)).then(res => res.data),
-	options,
-)
+export const useGetDocumentations: QueryFunction<Schema.Documentation[]> = (options) => {
+	return useQuery({
+		queryKey: ['documentations'],
+		queryFn: async () => {
+			const res = await axios.get(Routes.apiDocumentations())
+			return res.data
+		},
+		...options,
+	})
+}
+
+export const useGetDocumentation: QueryFunctionSingle<Schema.Documentation[]> = (id, options) => {
+	return useQuery({
+		queryKey: ['documentations', id],
+		queryFn: async () => {
+			const res = await axios.get(Routes.apiDocumentation(id))
+			return res.data
+		},
+		...options,
+	})
+}

@@ -1,28 +1,40 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
-import { query, type ReactQueryOptions } from '..'
+import { useQuery } from '@tanstack/react-query'
+import {
+	type QueryFunctionSingle,
+	type QueryFunction,
+} from '..'
 
-export const getPeople = <T = Schema.Person[]>(
-	options?: ReactQueryOptions<T>,
-) => query<T>(
-	['people'],
-	() => axios.get(Routes.apiPeople()).then(res => res.data),
-	options,
-)
+export const useGetPeople: QueryFunction<Schema.Person[]> = (options) => {
+	return useQuery({
+		queryKey: ['people'],
+		queryFn: async () => {
+			const res = await axios.get(Routes.apiPeople())
+			return res.data
+		},
+		...options,
+	})
+}
 
-export const getPeopleAsOptions = <T = Schema.PeopleOptions[]>(
-	options?: ReactQueryOptions<T>,
-) => query<T>(
-	['people', 'options'],
-	() => axios.get(Routes.apiPeopleOptions()).then(res => res.data),
-	options,
-)
+export const useGetPeopleAsOptions: QueryFunction<Schema.PeopleOptions[]> = (options) => {
+	return useQuery({
+		queryKey: ['people', 'options'],
+		queryFn: async () => {
+			const res = await axios.get(Routes.apiPeopleOptions())
+			return res.data
+		},
+		...options,
+	})
+}
 
-export const getPerson = <T = Schema.Person[]>(
-	id: string|number,
-	options?: ReactQueryOptions<T>,
-) => query<T>(
-	['people', id],
-	() => axios.get(Routes.apiPerson(id)).then(res => res.data),
-	options,
-)
+export const useGetPerson: QueryFunctionSingle<Schema.Person[]> = (id, options) => {
+	return useQuery({
+		queryKey: ['people', id],
+		queryFn: async () => {
+			const res = await axios.get(Routes.apiPerson(id))
+			return res.data
+		},
+		...options,
+	})
+}

@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import { MultiSelect as FormMultiSelect } from '@/Components/Form'
 import { MultiSelect as InputMultiSelect } from '@/Components/Inputs'
 import { useInFormContext } from '@/lib'
-import { getPeopleAsOptions } from '@/queries/people'
+import { useGetPeopleAsOptions } from '@/queries/people'
 import { isEmpty } from 'lodash'
 import { type IAsyncMultiSelect } from '.'
 
@@ -12,7 +12,7 @@ const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
 	{ label = 'Person', name = 'person_id', initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = getPeopleAsOptions({
+	const { data, isStale, refetch } = useGetPeopleAsOptions({
 		enabled: value !== undefined,
 		initialData,
 	})

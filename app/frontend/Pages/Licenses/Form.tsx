@@ -9,7 +9,7 @@ import {
 	CurrencyInput,
 	NumberInput,
 } from '@/Components/Form'
-import { CategoriesDropdown, ManufacturersDropdown, VendorsDropdown } from '@/Components/Dropdowns'
+import { CategoriesDropdown, ManufacturersDropdown, VendorsDropdown } from '@/Features/Dropdowns'
 import { Box, Grid } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'

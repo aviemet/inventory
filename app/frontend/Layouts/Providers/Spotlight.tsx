@@ -171,7 +171,7 @@ const generateActions = (values?: TValues) => {
 		...values.networks.map(network => ({
 			id: 'networks',
 			label: `${network.name || network.address}`,
-			description: `${network.vlan_id + '+' ?? ''}${network.name ? network.address : ''}`,
+			description: `${network.vlan_id + '+'}${network.name ? network.address : ''}`,
 			group: 'Networks',
 			onClick: () => router.get(Routes.network(network.id)),
 			leftSection: <SettingsIcon size={ 18 } />,

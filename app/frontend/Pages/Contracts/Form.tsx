@@ -4,10 +4,10 @@ import {
 	Form,
 	TextInput,
 	Textarea,
-	Date,
+	DateInput,
 	Submit,
 } from '@/Components/Form'
-import { CategoriesDropdown, VendorsDropdown } from '@/Components/Dropdowns'
+import { CategoriesDropdown, VendorsDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 
@@ -47,9 +47,9 @@ const ContractForm = ({
 			<TextInput name="number" label="Number" required />
 
 			<Group grow>
-				<Date name="begins_at" label="Contract Start" />
+				<DateInput name="begins_at" label="Contract Start" />
 
-				<Date name="ends_at" label="Contract End" />
+				<DateInput name="ends_at" label="Contract End" />
 			</Group>
 
 			<VendorsDropdown initialData={ coerceArray(contract?.vendor) } />

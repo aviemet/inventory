@@ -1,20 +1,23 @@
 class Api::CategoriesController < Api::ApiController
-  expose :categories, -> { params[:category] ? @active_company.categories.find_by_type(params[:category]) : @active_company.categories }
+  expose :categories, -> {
+    if params[:category]
+      @active_company.categories.find_by(type: params[:category])
+    else
+      @active_company.categories
+    end
+  }
   expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories }, find_by: :slug
 
-  # GET api/categories/options
   # @route GET /api/categories (api_categories)
   def index
     render json: categories.includes_associated.render
   end
 
-  # GET api/categories/:slug
   # @route GET /api/categories/:slug (api_category)
   def show
     render json: category.render
   end
 
-  # GET api/options/categories
   # @route GET /api/options/categories (api_categories_options)
   def options
     render json: categories.render(view: :options)

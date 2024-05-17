@@ -5,9 +5,9 @@ import { Routes, useInFormContext } from '@/lib'
 import VendorsForm from '@/Pages/Vendors/Form'
 import { getVendorsAsOptions } from '@/queries/vendors'
 import { isEmpty } from 'lodash'
-import { type IAsyncDropdown } from '.'
+import { type AsyncDropdown } from '.'
 
-interface IVendorsDropdown extends IAsyncDropdown<Schema.VendorsOptions> {}
+interface IVendorsDropdown extends AsyncDropdown<Schema.VendorsOptions> {}
 
 const VendorsDropdown = forwardRef<HTMLInputElement, IVendorsDropdown>((
 	{ label = 'Vendor', name = 'vendor_id', initialData, value, ...props },

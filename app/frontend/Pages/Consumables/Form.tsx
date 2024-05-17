@@ -8,7 +8,7 @@ import {
 	FormGroup,
 } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
-import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Components/Dropdowns'
+import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 
 type TConsumableFormData = {

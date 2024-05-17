@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import {
 	SegmentedControl,
 	type SegmentedControlProps as MantineSegmentedControlProps,
@@ -21,18 +21,21 @@ export interface SegmentedControlProps extends Omit<MantineSegmentedControlProps
 	required?: boolean
 }
 
-const SegmentedControlComponent = ({
-	label,
-	labelPosition = 'start',
-	options,
-	name,
-	id,
-	value,
-	required,
-	onChange,
-	wrapper,
-	...props
-}: SegmentedControlProps) => {
+const SegmentedControlComponent = forwardRef((
+	{
+		label,
+		labelPosition = 'start',
+		options,
+		name,
+		id,
+		value,
+		required,
+		onChange,
+		wrapper,
+		...props
+	}: SegmentedControlProps,
+	ref,
+) => {
 	const LabelComponent = () => <Label required={ required } htmlFor={ id }>{ label }</Label>
 
 	return (
@@ -50,6 +53,6 @@ const SegmentedControlComponent = ({
 			{ label && labelPosition === 'end' && <LabelComponent /> }
 		</InputWrapper>
 	)
-}
+})
 
 export default SegmentedControlComponent
