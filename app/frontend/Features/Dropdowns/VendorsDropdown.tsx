@@ -3,7 +3,7 @@ import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { Routes, useInFormContext } from '@/lib'
 import VendorsForm from '@/Pages/Vendors/Form'
-import { getVendorsAsOptions } from '@/queries/vendors'
+import { useGetVendorsAsOptions } from '@/queries/vendors'
 import { isEmpty } from 'lodash'
 import { type AsyncDropdown } from '.'
 
@@ -13,7 +13,7 @@ const VendorsDropdown = forwardRef<HTMLInputElement, IVendorsDropdown>((
 	{ label = 'Vendor', name = 'vendor_id', initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = getVendorsAsOptions({
+	const { data, isStale, refetch } = useGetVendorsAsOptions({
 		enabled: value !== undefined,
 		initialData,
 	})

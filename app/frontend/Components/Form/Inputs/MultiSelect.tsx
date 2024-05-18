@@ -2,13 +2,13 @@ import React from 'react'
 import { NestedObject, UseFormProps, useInertiaInput } from 'use-inertia-form'
 import { ConditionalWrapper } from '@/Components'
 import Field from '../Field'
-import MultiSelect, { type MultSelectInputProps } from '@/Components/Inputs/MultiSelect'
+import MultiSelect, { type MultiSelectInputProps } from '@/Components/Inputs/MultiSelect'
 import { type ComboboxData } from '@mantine/core'
 import { type InputConflicts, type BaseFormInputProps } from '.'
 
 type OmittedDropdownTypes = InputConflicts|'onDropdownOpen'|'onDropdownClose'|'onOptionSubmit'|'onClear'
 export interface FormDropdownProps<TForm extends NestedObject = NestedObject>
-	extends Omit<MultSelectInputProps, OmittedDropdownTypes>,
+	extends Omit<MultiSelectInputProps, OmittedDropdownTypes>,
 	Omit<BaseFormInputProps<string[], TForm>, 'onChange'|'onBlur'|'onFocus'> {
 
 	onChange?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void

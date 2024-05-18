@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Flex, Heading, Page, Section, Table } from '@/Components'
 import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown } from '@/Components/Form/Components'
+import { AssignToableDropdown } from '@/Features'
 import { Routes, formatter } from '@/lib'
 
 import { omit } from 'lodash'

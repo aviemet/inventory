@@ -1,5 +1,5 @@
 import { type SelectInputProps } from '@/Components/Inputs/Select'
-import { type MultSelectInputProps } from '@/Components/Inputs/MultiSelect'
+import { type MultiSelectInputProps } from '@/Components/Inputs/MultiSelect'
 
 export { default as AssetsDropdown }        from './AssetsDropdown'
 export { default as CategoriesDropdown }    from './CategoriesDropdown'
@@ -27,7 +27,7 @@ export interface AsyncDropdown<T> extends Omit<SelectInputProps, 'defaultValue'|
 	initialData?: T[]
 }
 
-export interface AsyncMultiSelect<T> extends Omit<MultSelectInputProps, 'onBlur'> {
+export interface AsyncMultiSelect<T> extends Omit<MultiSelectInputProps, 'onBlur'> {
 	errorKey?: string
 	initialData?: T[]
 }

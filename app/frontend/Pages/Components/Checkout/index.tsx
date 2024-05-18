@@ -2,7 +2,7 @@ import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
 
 interface ICheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
