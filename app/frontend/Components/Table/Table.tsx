@@ -21,7 +21,7 @@ export interface ITableProps extends TableProps {
 	wrapper?: boolean
 }
 
-type TableComponent = (({ children, className, fixed, wrapper, ...props }: ITableProps) => JSX.Element)
+type TableComponent = ((props: ITableProps) => JSX.Element)
 
 type TableObjects = {
 	Head: typeof Head
@@ -39,7 +39,7 @@ type TableObjects = {
 
 export type TableObject = TableComponent & TableObjects
 
-const TableComponent: TableComponent & TableObjects = ({
+const TableComponent: TableObject = ({
 	children,
 	className,
 	wrapper = true,
