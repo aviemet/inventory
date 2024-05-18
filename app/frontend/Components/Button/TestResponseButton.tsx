@@ -7,7 +7,7 @@ import { InfoCircle } from 'tabler-icons-react'
 import { Avatar, ButtonProps, HoverCard, Text } from '@mantine/core'
 
 
-interface ITestResponseButtonProps extends ButtonProps {
+interface TestResponseButtonProps extends ButtonProps {
 	children?: string
 	endpoint: string
 	method?: HTTPVerb
@@ -18,7 +18,7 @@ interface ITestResponseButtonProps extends ButtonProps {
  * Generic component for testing the response from a remote endpoint
  * Displays success if the endpoint returns a successful response, error upon any errors *
  */
-const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data, ...props }: ITestResponseButtonProps) => {
+const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data, ...props }: TestResponseButtonProps) => {
 	const [errorMessage, setErrorMessage] = useState('')
 
 	const [requestState, setRequestState] = useStateMachine({

@@ -3,22 +3,23 @@ import { ForwardRefWithStaticComponents } from '@mantine/utils'
 import { useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { Field } from '@/Components/Form'
-import CheckboxInput, { type ICheckboxProps } from '@/Components/Inputs/Checkbox'
+import CheckboxInput, { type CheckboxProps } from '@/Components/Inputs/Checkbox'
 import FormCheckboxGroup from './Group'
-import { type BaseFormInputProps } from '..'
+import { type InputConflicts, type BaseFormInputProps } from '..'
 
-interface IFormCheckboxProps extends Omit<ICheckboxProps, 'name'|'onBlur'|'onChange'|'defaultChecked'>, BaseFormInputProps<boolean> {}
+interface FormCheckboxProps extends Omit<CheckboxProps, InputConflicts>, BaseFormInputProps<boolean> {}
 
 export type TFormCheckboxComponent = ForwardRefWithStaticComponents<
-IFormCheckboxProps,
+FormCheckboxProps,
 { Group: typeof FormCheckboxGroup }
 >
 
-const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElement, IFormCheckboxProps>((
+const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElement, FormCheckboxProps>((
 	{
 		name,
 		onChange,
 		onBlur,
+		onFocus,
 		id,
 		required,
 		className,
@@ -37,11 +38,12 @@ const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElemen
 	}
 
 	const handleBlur = () => {
-		if(onBlur) onBlur(value, form)
+		onBlur?.(value, form)
 	}
 
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="checkbox"
@@ -51,7 +53,6 @@ const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElemen
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
 			<CheckboxInput
 				ref={ ref }
@@ -62,6 +63,7 @@ const FormCheckboxComponent: TFormCheckboxComponent = forwardRef<HTMLInputElemen
 				checked={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				onFocus={ e => onFocus?.(e.target.checked, form) }
 				error={ error }
 				style={ [{ padding: '14px 10px' }, style] }
 				wrapper={ false }

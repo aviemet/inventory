@@ -3,23 +3,24 @@ import Button from './index'
 import { Modal } from '@/Components'
 import { useMantineTheme, type ModalProps, type ButtonProps } from '@mantine/core'
 import axios from 'axios'
+import { type UseFormProps } from 'use-inertia-form'
 
-interface IModalFormButtonProps {
+interface ModalFormButtonProps {
 	children?: string | React.ReactElement
 	form: React.ReactElement
 	title: string
 	buttonProps?: ButtonProps
 	modalProps?: Partial<ModalProps>
-	onSubmit?: (form: Inertia.FormProps) => boolean|void
+	onSubmit?: (form: UseFormProps) => boolean|void
 	onSuccess?: (data: { id: string|number }) => void
 }
 
-const ModalFormButton = ({ children = 'New', form, title, buttonProps = {}, modalProps = {}, onSubmit, onSuccess }: IModalFormButtonProps) => {
+const ModalFormButton = ({ children = 'New', form, title, buttonProps = {}, modalProps = {}, onSubmit, onSuccess }: ModalFormButtonProps) => {
 	const [modalOpen, setModalOpen] = useState(false)
 
 	const theme = useMantineTheme()
 
-	const handleSubmit = ({ data, method, to, setError }: Inertia.FormProps) => {
+	const handleSubmit = ({ data, method, to, setError }: UseFormProps) => {
 		if(!to) return
 
 		axios[method](to, { ...data, redirect: false })

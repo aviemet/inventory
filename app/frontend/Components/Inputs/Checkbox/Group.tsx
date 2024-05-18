@@ -1,5 +1,5 @@
-import { Checkbox, type CheckboxGroupProps } from '@mantine/core'
 import React from 'react'
+import { Checkbox, type CheckboxGroupProps } from '@mantine/core'
 
 export interface CheckboxInputGroupProps extends CheckboxGroupProps {
 	name?: string

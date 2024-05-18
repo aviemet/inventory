@@ -9,7 +9,7 @@ export interface CheckboxProps extends MantineCheckboxProps, BaseInputProps {}
 
 export type CheckboxInputComponent = ForwardRefWithStaticComponents<
 CheckboxProps,
-{Group: typeof CheckboxGroup}
+{ Group: typeof CheckboxGroup }
 >
 
 const CheckboxComponent: CheckboxInputComponent = forwardRef<HTMLInputElement, CheckboxProps>((
@@ -28,7 +28,7 @@ const CheckboxComponent: CheckboxInputComponent = forwardRef<HTMLInputElement, C
 			/>
 		</InputWrapper>
 	)
-}) as any
+})
 
 CheckboxComponent.Group = CheckboxGroup
 

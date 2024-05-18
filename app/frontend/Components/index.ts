@@ -24,6 +24,7 @@ export {
 	AppShell,
 	Box,
 	Badge,
+	Card,
 	Container,
 	Flex,
 	Grid,
