@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Group, Heading, Page, Section } from '@/Components'
 import Counts from './Counts'
 import RecentActivityTable from './RecentActivityTable'
-import { Textarea, TextInput, Checkbox } from '@/Components/Inputs'
-import { Form  } from '@/Components/Form'
+import { Textarea, TextInput } from '@/Components/Inputs'
+import { Form, FormConsumer, Checkbox } from '@/Components/Form'
 
 interface IDashboardProps {
 	company: Schema.CompaniesDashboard
@@ -31,19 +31,28 @@ const Dashboard = ({ company, activities }: IDashboardProps) => {
 			</Section>
 
 			<Section>
+
+			</Section>
+
+			<Section>
 				<Form to="/" data={ { languages: [] } }>
-					<Checkbox.Group
+					<FormConsumer>{ ({ data }) => {
+						console.log({ data })
+						return <></>
+					} }</FormConsumer>
+					{ /* <Checkbox.Group
+						name="languages"
 						value={ languages }
 						onChange={ handleLanguageChange }
 						label="Languages"
-					>
-						<Group mt="xs">
-							<Checkbox value="react" label="React" />
-							<Checkbox value="svelte" label="Svelte" />
-							<Checkbox value="ng" label="Angular" />
-							<Checkbox value="vue" label="Vue" />
-						</Group>
-					</Checkbox.Group>
+					> */ }
+					<Group mt="xs">
+						<Checkbox name="react" label="React" />
+						<Checkbox name="svelte" label="Svelte" />
+						<Checkbox name="ng" label="Angular" />
+						<Checkbox name="vue" label="Vue" />
+					</Group>
+					{ /* </Checkbox.Group> */ }
 				</Form>
 			</Section>
 		</Page>

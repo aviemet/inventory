@@ -2,23 +2,23 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Table, Money, Group } from '@/Components'
 import { EditButton, CheckoutButton, CheckinButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 
-const ItemsTable = (props: ITableProps) => {
+const ItemsTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="models.name">Model</Table.Cell>
-					<Table.Cell sort="asset_tag">Asset Tag</Table.Cell>
-					<Table.Cell sort="serial">Serial</Table.Cell>
-					<Table.Cell sort="categories.name">Category</Table.Cell>
-					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
-					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
-					<Table.Cell sort="cost_cents">Cost</Table.Cell>
-					<Table.Cell sort="departments.name">Department</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="models.name">Model</Table.HeadCell>
+					<Table.HeadCell sort="asset_tag">Asset Tag</Table.HeadCell>
+					<Table.HeadCell sort="serial">Serial</Table.HeadCell>
+					<Table.HeadCell sort="categories.name">Category</Table.HeadCell>
+					<Table.HeadCell sort="manufacturers.name">Manufacturer</Table.HeadCell>
+					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
+					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
+					<Table.HeadCell sort="departments.name">Department</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

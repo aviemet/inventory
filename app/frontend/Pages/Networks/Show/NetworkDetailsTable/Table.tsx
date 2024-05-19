@@ -14,8 +14,8 @@ const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 		<Table wrapper={ false } style={ { width: '100%', flex: 1 } }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell>Address</Table.Cell>
-					<Table.Cell>Host</Table.Cell>
+					<Table.HeadCell>Address</Table.HeadCell>
+					<Table.HeadCell>Host</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

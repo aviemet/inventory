@@ -3,7 +3,7 @@ import { css } from '@linaria/core'
 
 export const topbar = css`
 	transition: left 100ms ease-in-out;
-	background-color: ${vars.colors.primary.filled};
+	background-color: ${vars.colors.primaryColors.filled};
 	
 	color: ${vars.colors.white};
 

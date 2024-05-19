@@ -23,7 +23,7 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 
 	if(!pagination) return <></>
 
-	const { count, pages, limit, current_page, next_page, prev_page, is_first_page, is_last_page } = pagination
+	const { count, pages, limit, current_page, next_page, prev_page /* is_first_page, is_last_page */ } = pagination
 	const recordStart = ((current_page - 1) * limit) + 1
 	const recordEnd = Math.min(current_page * limit, count)
 
@@ -37,7 +37,7 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 
 			<Pagination.Root
 				total={ pages }
-				useGetItemProps={ (page) => ({
+				getItemProps={ (page) => ({
 					component: Link,
 					href: pageLink(page),
 				}) }
@@ -49,9 +49,9 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 						textDecoration: 'none',
 					} } }>
 					<Pagination.First component={ Link } href={ pageLink(1) } />
-					<Pagination.Previous component={ Link } href={ pageLink(next_page) } />
+					<Pagination.Previous component={ Link } href={ pageLink(prev_page) } />
 					<Pagination.Items />
-					<Pagination.Next component={ Link } href={ pageLink(prev_page) } />
+					<Pagination.Next component={ Link } href={ pageLink(next_page) } />
 					<Pagination.Last component={ Link } href={ pageLink(pages) } />
 				</Group>
 			</Pagination.Root>

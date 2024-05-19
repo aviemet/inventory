@@ -49,7 +49,7 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: 
 			form.setError('network.address', `${form.getData('network.address')} is not a valid network address. Value must contain subnet prefix, e.g. "192.168.1.0/24"`)
 		}
 
-		if(ip !== undefined && form.getData('network.gateway') === "") {
+		if(ip !== undefined && form.getData('network.gateway') === '') {
 			form.setData('network.gateway', ip.address.startAddressExclusive().address)
 		}
 	}

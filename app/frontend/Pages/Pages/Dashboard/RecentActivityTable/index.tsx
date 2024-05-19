@@ -19,10 +19,10 @@ const RecentActivityTable = ({ activities }: IDashboardProps) => {
 		<Table>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell>{ headingLabels.record }</Table.Cell>
-					<Table.Cell>{ headingLabels.action }</Table.Cell>
-					<Table.Cell>{ headingLabels.user }</Table.Cell>
-					<Table.Cell>{ headingLabels.date }</Table.Cell>
+					<Table.HeadCell>{ headingLabels.record }</Table.HeadCell>
+					<Table.HeadCell>{ headingLabels.action }</Table.HeadCell>
+					<Table.HeadCell>{ headingLabels.user }</Table.HeadCell>
+					<Table.HeadCell>{ headingLabels.date }</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>

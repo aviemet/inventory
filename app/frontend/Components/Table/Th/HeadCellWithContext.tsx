@@ -1,10 +1,11 @@
 import React, { useMemo, useRef } from 'react'
-import { Link, Box, Flex } from '@/Components'
+import { Link, Flex } from '@/Components'
 import cx from 'clsx'
-import { type ICellProps } from './index'
+import { type TableHeadCellProps } from '.'
 import { useLocation } from '@/lib/hooks'
+import { Table } from '@mantine/core'
 
-interface IHeadCellWithContextProps extends ICellProps {
+interface IHeadCellWithContextProps extends TableHeadCellProps {
 	rows?: Record<string, any>[]
 }
 
@@ -47,8 +48,7 @@ const HeadCellWithContext = ({
 	}, [showSortLink, sort, direction, pathname])
 
 	return (
-		<Box
-			component="th"
+		<Table.Th
 			ref={ thRef }
 			className={ cx(
 				{ 'table-column-fit': fitContent },
@@ -73,7 +73,7 @@ const HeadCellWithContext = ({
 					children
 				}
 			</Flex>
-		</Box>
+		</Table.Th>
 	)
 }
 

@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react'
 import { useTableSectionContext } from '../TableContext'
-import { type ITableRow } from './index'
+import { type TableRow } from './index'
 
 import HeadRow from './HeadRow'
 import BodyRow from './BodyRow'
 
-interface IRowInContextProps extends Omit<ITableRow, 'ref'> {
+interface IRowInContextProps extends Omit<TableRow, 'ref'> {
 	name?: string
 	rows?: Record<string, any>[]
 	selectable: boolean

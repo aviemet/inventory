@@ -1,14 +1,10 @@
 import React from 'react'
-import { useTableContext, useTableSectionContext } from '../TableContext'
+import { useTableContext } from '../TableContext'
 import BodyCell from './BodyCell'
-import HeadCell from './HeadCell'
-import { type BoxProps } from '@mantine/core'
+import { type TableTdProps } from '@mantine/core'
 import { usePageProps } from '@/lib/hooks'
 
-export interface ICellProps
-	extends BoxProps,
-	Omit<React.ComponentPropsWithoutRef<'td'>, keyof BoxProps>
-{
+export interface TableCellProps extends TableTdProps {
 	fitContent?: boolean
 	sort?: string
 	nowrap?: boolean
@@ -16,10 +12,9 @@ export interface ICellProps
 	ref?: React.RefObject<HTMLTableCellElement>
 }
 
-const RenderedCell = ({ children = true, hideable, sort, ...props }: ICellProps) => {
+const RenderedCell = ({ children = true, hideable, sort, ...props }: TableCellProps) => {
 	const { auth: { user: { table_preferences } } } = usePageProps()
 
-	const tableSectionState = useTableSectionContext(false)
 	const tableState = useTableContext(false)
 
 	let hiddenByUser: boolean = false
@@ -34,10 +29,6 @@ const RenderedCell = ({ children = true, hideable, sort, ...props }: ICellProps)
 	}
 
 	if(hiddenByUser) return <></>
-
-	if(tableSectionState !== null && tableSectionState.section === 'head') {
-		return <HeadCell hideable={ hideable } sort={ sort } { ...props }>{ children }</HeadCell>
-	}
 
 	return <BodyCell { ...props }>{ children }</BodyCell>
 }

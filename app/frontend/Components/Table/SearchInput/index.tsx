@@ -92,7 +92,7 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: ISearchInputProps)
 				id="search"
 				value={ searchValue }
 				onChange={ e => setSearchValue(e.target.value) }
-				rightSection={ searchValue !== '' && <ActionIcon onClick={ () => setSearchValue('') }>
+				rightSection={ searchValue !== '' && <ActionIcon variant="transparent" onClick={ () => setSearchValue('') }>
 					<CrossIcon color="grey" />
 				</ActionIcon> }
 				leftSection={ <SearchIcon size={ 24 } /> }

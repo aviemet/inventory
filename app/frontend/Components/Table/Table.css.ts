@@ -35,10 +35,6 @@ export const table = css`
 		}
 		${vars.darkSelector} {
 			background-color: ${vars.colors.dark[7]};
-
-			th:hover {
-				background-color: ${vars.colors.black};
-			}
 		}
 	}
 
@@ -90,11 +86,13 @@ export const table = css`
 
 	}
 
+	/* On small screens, collapse tables into "cards" */
 	@media(max-width: ${vars.breakpoints.sm}) {
 		thead {
 			display: none;
 		}
 
+		/* Only for tables with a thead */
 		thead + tbody {
 			tr {
 				display: flex;
@@ -103,7 +101,7 @@ export const table = css`
 				background-color: ${vars.colors.dark[7]};
 				border-radius: ${rem(4)};
 				padding: ${rem(6)};
-				border-bottom: 1px solid ${vars.colors.primary.filled};
+				border-bottom: 1px solid ${vars.colors.primaryColors.filled};
 			}
 
 			td {

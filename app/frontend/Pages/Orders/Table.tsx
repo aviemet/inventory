@@ -2,20 +2,20 @@ import React from 'react'
 import { Routes, formatter } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 import { type OrderWithCost } from './Index'
 
-const OrdersTable = (props: ITableProps) => {
+const OrdersTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Order #</Table.Cell>
-					<Table.Cell sort="vendor.name">Vendor</Table.Cell>
-					<Table.Cell sort="cost">Total</Table.Cell>
-					<Table.Cell sort="ordered_at">Purchase Date</Table.Cell>
-					<Table.Cell sort="delivered_at">Received Date</Table.Cell>
-					<Table.Cell className="text-right">Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Order #</Table.HeadCell>
+					<Table.HeadCell sort="vendor.name">Vendor</Table.HeadCell>
+					<Table.HeadCell sort="cost">Total</Table.HeadCell>
+					<Table.HeadCell sort="ordered_at">Purchase Date</Table.HeadCell>
+					<Table.HeadCell sort="delivered_at">Received Date</Table.HeadCell>
+					<Table.HeadCell className="text-right">Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

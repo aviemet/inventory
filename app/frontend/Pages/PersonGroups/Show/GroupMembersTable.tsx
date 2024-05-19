@@ -2,21 +2,21 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { ITableProps } from '@/Components/Table/Table'
+import { TableProps } from '@/Components/Table/Table'
 import { CheckIcon, CrossIcon } from '@/Components/Icons'
 
-const GroupMembersTable = (props: ITableProps) => {
+const GroupMembersTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="first_name" hideable={ false }>First Name</Table.Cell>
-					<Table.Cell sort="last_name">Last Name</Table.Cell>
-					<Table.Cell sort="employee_number">Emp. #</Table.Cell>
-					<Table.Cell sort="job_title">Title</Table.Cell>
-					<Table.Cell sort="department.name">Department</Table.Cell>
-					<Table.Cell>Login Enabled</Table.Cell>
-					{ /* <Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell> */ }
+					<Table.HeadCell sort="first_name" hideable={ false }>First Name</Table.HeadCell>
+					<Table.HeadCell sort="last_name">Last Name</Table.HeadCell>
+					<Table.HeadCell sort="employee_number">Emp. #</Table.HeadCell>
+					<Table.HeadCell sort="job_title">Title</Table.HeadCell>
+					<Table.HeadCell sort="department.name">Department</Table.HeadCell>
+					<Table.HeadCell>Login Enabled</Table.HeadCell>
+					{ /* <Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell> */ }
 				</Table.Row>
 			</Table.Head>
 

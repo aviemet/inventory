@@ -2,32 +2,32 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Group, Link, Money, Table } from '@/Components'
 import { EditButton, CheckoutButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 
-const ComponentsTable = (props: ITableProps) => {
+const ComponentsTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="models.name">Model</Table.Cell>
-					<Table.Cell sort="serial">Serial</Table.Cell>
-					<Table.Cell sort="categories.name">Category</Table.Cell>
-					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
-					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
-					<Table.Cell sort="cost_cents">Cost</Table.Cell>
-					<Table.Cell sort="departments.name">Avail. / Qty</Table.Cell>
-					<Table.Cell sort="departments.name">Min Qty</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="models.name">Model</Table.HeadCell>
+					<Table.HeadCell sort="serial">Serial</Table.HeadCell>
+					<Table.HeadCell sort="categories.name">Category</Table.HeadCell>
+					<Table.HeadCell sort="manufacturers.name">Manufacturer</Table.HeadCell>
+					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
+					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
+					<Table.HeadCell sort="departments.name">Avail. / Qty</Table.HeadCell>
+					<Table.HeadCell sort="departments.name">Min Qty</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (component: Schema.Component) => (
+				<Table.RowIterator render={ (component: Schema.ComponentsIndex) => (
 					<Table.Row key={ component.id }>
 
 						<Table.Cell nowrap>
-							<Link href={ Routes.component(component) }>{ component.name }</Link>
+							<Link href={ Routes.component({ id: component.id }) }>{ component.name }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
@@ -37,7 +37,7 @@ const ComponentsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ Routes.component(component) }>{ component.serial }</Link>
+							<Link href={ Routes.component({ id: component.id }) }>{ component.serial }</Link>
 						</Table.Cell>
 
 						<Table.Cell>
@@ -69,13 +69,13 @@ const ComponentsTable = (props: ITableProps) => {
 						<Table.Cell fitContent>
 							<Group wrap="nowrap" gap="sm">
 								<CheckoutButton
-									href={ Routes.checkoutComponent(component) }
+									href={ Routes.checkoutComponent({ id: component.id }) }
 									disabled={ component.qty_available < 1 }
 									tooltipMessage={ component.qty_available < 1 && 'There are none to checkout' }
 									label={ component.name }
 								/>
 
-								<EditButton href={ Routes.editComponent(component) } label={ component.name } />
+								<EditButton href={ Routes.editComponent({ id: component.id }) } label={ component.name } />
 							</Group>
 						</Table.Cell>
 

@@ -2,22 +2,22 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { ITableProps } from '@/Components/Table/Table'
+import { TableProps } from '@/Components/Table/Table'
 
-const LocationsTable = (props: ITableProps) => {
+const LocationsTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="name">Parent</Table.Cell>
-					<Table.Cell sort="items">Assets</Table.Cell>
-					<Table.Cell sort="accessories">Accessories</Table.Cell>
-					<Table.Cell sort="consumables">Consumables</Table.Cell>
-					<Table.Cell sort="components">Components</Table.Cell>
-					<Table.Cell sort="licenses">Licenses</Table.Cell>
-					<Table.Cell sort="people">People</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="name">Parent</Table.HeadCell>
+					<Table.HeadCell sort="items">Assets</Table.HeadCell>
+					<Table.HeadCell sort="accessories">Accessories</Table.HeadCell>
+					<Table.HeadCell sort="consumables">Consumables</Table.HeadCell>
+					<Table.HeadCell sort="components">Components</Table.HeadCell>
+					<Table.HeadCell sort="licenses">Licenses</Table.HeadCell>
+					<Table.HeadCell sort="people">People</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

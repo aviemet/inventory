@@ -2,21 +2,21 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 
-const VendorsTable = (props: ITableProps) => {
+const VendorsTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="url">Website</Table.Cell>
-					<Table.Cell>Contracts</Table.Cell>
-					<Table.Cell>Items</Table.Cell>
-					<Table.Cell>Accessories</Table.Cell>
-					<Table.Cell>Consumables</Table.Cell>
-					<Table.Cell>Components</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="url">Website</Table.HeadCell>
+					<Table.HeadCell>Contracts</Table.HeadCell>
+					<Table.HeadCell>Items</Table.HeadCell>
+					<Table.HeadCell>Accessories</Table.HeadCell>
+					<Table.HeadCell>Consumables</Table.HeadCell>
+					<Table.HeadCell>Components</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
