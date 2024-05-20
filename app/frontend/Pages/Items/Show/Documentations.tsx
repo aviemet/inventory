@@ -1,10 +1,10 @@
 import React from 'react'
-import { IShowItemProps } from '.'
+import { ShowItemProps } from '.'
 import { Table } from '@/Components'
 import DocumentationTable from '@/Pages/Documentation/Table'
 
 
-const Documentations = ({ item, pagination }: IShowItemProps) => {
+const Documentations = ({ item, pagination }: ShowItemProps) => {
 	return (
 		<Table.TableProvider
 			selectable

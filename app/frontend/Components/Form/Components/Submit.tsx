@@ -3,12 +3,12 @@ import { Button, Link } from '@/Components'
 import { Submit as SubmitButton } from 'use-inertia-form'
 import { Flex, type ButtonProps } from '@mantine/core'
 
-interface ISubmitButtonProps extends ButtonProps {
+interface SubmitButtonProps extends ButtonProps {
 	cancelRoute?: string
 	requiredFields?: string[]
 }
 
-const Submit = forwardRef<HTMLButtonElement, ISubmitButtonProps>((
+const Submit = forwardRef<HTMLButtonElement, SubmitButtonProps>((
 	{ children, cancelRoute, style, ...props },
 	ref,
 ) => {

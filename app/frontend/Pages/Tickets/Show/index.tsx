@@ -5,11 +5,11 @@ import DangerousHtml from '@/Components/DangerousHtml'
 import { Form, RichText, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 
-interface IShowTicketProps {
+interface ShowTicketProps {
 	ticket: Schema.TicketsShow
 }
 
-const ShowTicket = ({ ticket }: IShowTicketProps) => {
+const ShowTicket = ({ ticket }: ShowTicketProps) => {
 	const title = ticket.subject || 'Show Ticket'
 
 	return (

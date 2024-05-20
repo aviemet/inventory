@@ -5,7 +5,7 @@ import { useDebouncedState, useViewportSize } from '@mantine/hooks'
 import { Table } from '@/Components'
 import NetworkTable from './Table'
 
-interface INetworkDetailsTableProps {
+interface NetworkDetailsTableProps {
 	hosts: string[]
 	ips: Schema.IpLease[]
 	pagination: Schema.Pagination
@@ -28,7 +28,7 @@ const calculateNumTableRows = (width: number, breakpoints: MantineSizes) => {
 	return 6
 }
 
-const NetworkDetailsTable = ({ hosts, ips, pagination }: INetworkDetailsTableProps) => {
+const NetworkDetailsTable = ({ hosts, ips, pagination }: NetworkDetailsTableProps) => {
 	const { breakpoints } = useMantineTheme()
 
 	const { width } = useViewportSize()

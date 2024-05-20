@@ -1,7 +1,6 @@
 import { NestedObject, UseFormProps } from 'use-inertia-form'
 
 export { default as Autocomplete }     from './Autocomplete'
-export { default as Checkbox }         from './Checkbox'
 export { default as CurrencyInput }    from './CurrencyInput'
 export { default as DateInput }        from './DateInput'
 export { default as DateTimeInput }    from './DateTimeInput'
@@ -16,6 +15,11 @@ export { default as SwatchInput }      from './SwatchInput'
 export { default as Switch }           from './Switch'
 export { default as TextInput }        from './TextInput'
 export { default as Textarea }         from './Textarea'
+
+export {
+	default as Checkbox,
+	GroupedCheckbox,
+} from './Checkbox'
 
 export type InputConflicts = 'name'|'onChange'|'onBlur'|'onFocus'|'value'
 export interface BaseFormInputProps<T, TForm extends NestedObject = NestedObject> {

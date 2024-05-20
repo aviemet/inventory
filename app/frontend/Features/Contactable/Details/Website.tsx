@@ -1,10 +1,10 @@
 import React from 'react'
 
-interface IWebsiteProps {
+interface WebsiteProps {
 	website: Schema.Website
 }
 
-const Website = ({ website }: IWebsiteProps) => {
+const Website = ({ website }: WebsiteProps) => {
 	return (
 		<div>Website</div>
 	)

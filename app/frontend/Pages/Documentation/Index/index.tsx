@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import DocumentationsTable from '../Table'
 
-interface IDocumentationIndexProps {
+interface DocumentationIndexProps {
 	documentations: Schema.DocumentationsIndex[]
 	pagination: Schema.Pagination
 }
 
-const DocumentationsIndex = ({ documentations, pagination }: IDocumentationIndexProps) => {
+const DocumentationsIndex = ({ documentations, pagination }: DocumentationIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Documentations"

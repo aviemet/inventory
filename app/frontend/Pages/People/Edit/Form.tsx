@@ -18,7 +18,7 @@ import { coerceArray } from '@/lib'
 // import { ContactForm } from '@/Layouts/AppLayout/Components/Contactable'
 
 
-type TPersonFormData = {
+type PersonFormData = {
 	person: Schema.PeopleEdit
 }
 
@@ -29,10 +29,10 @@ const emptyUser: Schema.UsersFormData = {
 	active: true,
 }
 
-export interface IPersonFormProps {
+export interface PersonFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TPersonFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<PersonFormData>) => boolean|void
 	person: Schema.PeopleEdit
 }
 
@@ -41,10 +41,10 @@ const PersonForm = ({
 	method = 'post',
 	onSubmit,
 	person,
-}: IPersonFormProps) => {
+}: PersonFormProps) => {
 	const [loginEnabled, toggleLoginEnabled] = useBooleanToggle(!!person.user)
 
-	const handleToggleLogin = (form: UseFormProps<TPersonFormData>) => {
+	const handleToggleLogin = (form: UseFormProps<PersonFormData>) => {
 		if(!loginEnabled) {
 			handleEnableLogin(form)
 		} else {
@@ -53,16 +53,16 @@ const PersonForm = ({
 		toggleLoginEnabled()
 	}
 
-	const handleEnableLogin = (form: UseFormProps<TPersonFormData>) => {
+	const handleEnableLogin = (form: UseFormProps<PersonFormData>) => {
 		const userData = person.user ?? emptyUser
 		form.setData('person.user', userData)
 	}
 
-	const handleDisableLogin = (form: UseFormProps<TPersonFormData>) => {
+	const handleDisableLogin = (form: UseFormProps<PersonFormData>) => {
 		form.unsetData('person.user')
 	}
 
-	const personData = useCallback((): TPersonFormData => {
+	const personData = useCallback(():PrsonFormData => {
 		const data = { person: { ...person } }
 		if(data.person.user) {
 			data.person.user.password = ''
@@ -72,7 +72,7 @@ const PersonForm = ({
 		return data
 	}, [person])
 
-	const handleSubmit = (form: UseFormProps<TPersonFormData>) => {
+	const handleSubmit = (form: UseFormProps<PersonFormData>) => {
 		const password = form.getData('person.user.password')
 		const checkPassword = form.getData('person.user.check_password')
 
@@ -94,7 +94,7 @@ const PersonForm = ({
 		if(onSubmit) onSubmit(form)
 	}
 
-	const handleChange = ({ data, getData, clearErrors }: UseFormProps<TPersonFormData>) => {
+	const handleChange = ({ data, getData, clearErrors }: UseFormProps<PersonFormData>) => {
 		const password = getData('person.user.')
 		const checkPassword = getData('person.user.check_password')
 
@@ -104,7 +104,7 @@ const PersonForm = ({
 		}
 	}
 
-	const handlePasswordBlur = (password: string, { getData, setError }: UseFormProps<TPersonFormData>) => {
+	const handlePasswordBlur = (password: string, { getData, setError }: UseFormProps<PersonFormData>) => {
 		const checkPassword = getData('person.user.check_password')
 
 		if(checkPassword !== '' && password !== checkPassword) {
@@ -112,7 +112,7 @@ const PersonForm = ({
 		}
 	}
 
-	const handleCheckPasswordBlur = (checkPassword: string, { getData, setError }: UseFormProps<TPersonFormData>) => {
+	const handleCheckPasswordBlur = (checkPassword: string, { getData, setError }: UseFormProps<PersonFormData>) => {
 		const password = getData('person.user.password')
 
 		if(password !== checkPassword) {
@@ -150,7 +150,7 @@ const PersonForm = ({
 				initialData={ coerceArray(person?.manager) }
 			/>
 
-			<FormConsumer>{ (form: UseFormProps<TPersonFormData>) => (
+			<FormConsumer>{ (form: UseFormProps<PersonFormData>) => (
 				<CheckboxInput
 					label="Login Enabled"
 					checked={ loginEnabled }

@@ -11,13 +11,13 @@ import { type UseFormProps } from 'use-inertia-form'
 
 const defaultData = { consumable: { qty: 1 } }
 
-interface IReplenishButtonProps extends ButtonProps {
+interface ReplenishButtonProps extends ButtonProps {
 	consumable: Schema.Consumable
 	disabled?: boolean
 	tooltipMessage?: string | false | null
 }
 
-const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: IReplenishButtonProps) => {
+const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: ReplenishButtonProps) => {
 	const [opened, setOpened] = useState(false)
 	const { other: { colors: { replenishButtonColor } } } = useMantineTheme()
 

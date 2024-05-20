@@ -3,11 +3,11 @@ import SettingsLayout from '../../SettingsLayout'
 import { Box, DangerousHtml, Heading, Table } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShowMailSettingProps {
+interface ShowMailSettingProps {
 	smtp: Schema.Smtp
 }
 
-const ShowMailSetting = ({ smtp }: IShowMailSettingProps) => {
+const ShowMailSetting = ({ smtp }: ShowMailSettingProps) => {
 	return (
 		<SettingsLayout breadcrumbs={ [
 			{ title: 'Settings', href: Routes.settingsGeneralIndex() },

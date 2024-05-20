@@ -11,18 +11,18 @@ import { type UseFormProps } from 'use-inertia-form'
 import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 
-type TConsumableFormData = {
+type ConsumableFormData = {
 	consumable: Schema.ConsumablesFormData
 }
 
-export interface IConsumableFormProps {
+export interface ConsumableFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TConsumableFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ConsumableFormData>) => boolean|void
 	consumable: Schema.ConsumablesFormData
 }
 
-const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: IConsumableFormProps) => {
+const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: ConsumableFormProps) => {
 	return (
 		<Form
 			model="consumable"

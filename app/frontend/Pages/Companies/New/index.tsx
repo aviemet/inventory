@@ -3,11 +3,11 @@ import { Breadcrumbs, Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CompanyForm from '../Form'
 
-interface INewCompanyProps {
+interface NewCompanyProps {
 	company: Schema.CompaniesFormData
 }
 
-const NewCompany = ({ company }: INewCompanyProps) => {
+const NewCompany = ({ company }: NewCompanyProps) => {
 	const title = 'New Company'
 
 	return (

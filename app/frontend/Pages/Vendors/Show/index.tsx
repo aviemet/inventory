@@ -10,19 +10,19 @@ import LicensesTable from '@/Pages/Licenses/Table'
 import ContractsTable from '@/Pages/Contracts/Table'
 import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
 
-type TPaginatedModel<T> = {
+type PaginatedModel<T> = {
 	data: T
 	pagination: Schema.Pagination
 }
 
-interface IVendorShowProps {
+interface VendorShowProps {
 	vendor: Schema.VendorsShow
-	items: TPaginatedModel<Schema.ItemsIndex[]>
-	accessories: TPaginatedModel<Schema.AccessoriesIndex[]>
-	components: TPaginatedModel<Schema.ComponentsIndex[]>
-	consumables: TPaginatedModel<Schema.ConsumablesIndex[]>
-	licenses: TPaginatedModel<Schema.LicensesIndex[]>
-	contracts: TPaginatedModel<Schema.ContractsIndex[]>
+	items: PaginatedModel<Schema.ItemsIndex[]>
+	accessories: PaginatedModel<Schema.AccessoriesIndex[]>
+	components: PaginatedModel<Schema.ComponentsIndex[]>
+	consumables: PaginatedModel<Schema.ConsumablesIndex[]>
+	licenses: PaginatedModel<Schema.LicensesIndex[]>
+	contracts: PaginatedModel<Schema.ContractsIndex[]>
 }
 
 const tabs = {
@@ -35,7 +35,7 @@ const tabs = {
 	contracts: 'contracts',
 }
 
-const Show = ({ vendor, items, accessories, components, consumables, licenses, contracts }: IVendorShowProps) => {
+const Show = ({ vendor, items, accessories, components, consumables, licenses, contracts }: VendorShowProps) => {
 	const title = vendor.name ?? 'Vendor Details'
 
 	return (

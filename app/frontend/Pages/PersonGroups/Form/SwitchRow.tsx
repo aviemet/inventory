@@ -7,13 +7,13 @@ import { useCheckboxState } from '@/lib/hooks'
 import { usePermissionsForm } from './PermissionsForm'
 import { type FormData } from '.'
 
-interface ISwitchRowProps {
+interface SwitchRowProps {
 	label: string
 	model: string
 	permissions: string[]
 }
 
-const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
+const SwitchRow = ({ label, model, permissions }: SwitchRowProps) => {
 	const { isCompanyAdmin, columns } = usePermissionsForm()
 	const { data, setData, getData } = useForm<FormData>()
 

@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CategoryForm from '../Form'
 
-interface INewCategoryProps {
+interface NewCategoryProps {
 	category: Schema.CategoriesFormData
 }
 
-const NewCategory = ({ category }: INewCategoryProps) => {
+const NewCategory = ({ category }: NewCategoryProps) => {
 	const title = 'New Category'
 
 	return (

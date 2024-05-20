@@ -4,12 +4,12 @@ import EditableLink from './EditableLink'
 import cx from 'clsx'
 import * as classes from './NetworkDetailsTable.css'
 
-interface INetworkDetailsTableProps {
+interface NetworkDetailsTableProps {
 	hosts: string[]
 	ips: Schema.IpLease[]
 }
 
-const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
+const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
 	return (
 		<Table wrapper={ false } style={ { width: '100%', flex: 1 } }>
 			<Table.Head>

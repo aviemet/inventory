@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react'
 import { Group, useMantineTheme, ColorSwatch, CheckIcon, rem } from '@mantine/core'
 
-export interface ISwatchPickerProps {
+export interface SwatchPickerProps {
 	value: string
 	onChange(value: string): void
 }
 
-const SwatchPicker = ({ value, onChange }: ISwatchPickerProps) => {
+const SwatchPicker = ({ value, onChange }: SwatchPickerProps) => {
 	const theme = useMantineTheme()
 
 	const colors = useCallback(() => {

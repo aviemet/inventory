@@ -1,5 +1,5 @@
 import { NestedURLSearchParams, coerceArray, isUnset } from '@/lib'
-import { type TInputParam } from './useAdvancedSearch'
+import { type InputParam } from './useAdvancedSearch'
 
 /**
  * Generate a URL for advanced searching
@@ -9,7 +9,7 @@ import { type TInputParam } from './useAdvancedSearch'
  * @returns Link to same page with URL params to use for advanced search
  */
 function buildSearchLink(
-	inputParams: readonly TInputParam[],
+	inputParams: readonly InputParam[],
 	values: NestedURLSearchParams,
 ) {
 	const localValues = values.clone()

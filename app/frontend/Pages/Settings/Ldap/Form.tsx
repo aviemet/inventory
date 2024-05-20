@@ -2,13 +2,13 @@ import React from 'react'
 import { Form, TextInput, Submit, PasswordInput } from '@/Components/Form'
 import { FormProps } from 'use-inertia-form'
 
-interface ILdapFormProps extends Omit<FormProps<{ ldap: Schema.LdapsFormData}>, 'data'> {
+interface LdapFormProps extends Omit<FormProps<{ ldap: Schema.LdapsFormData}>, 'data'> {
 	ldap: Schema.LdapsFormData
 	to: string
 	method?: HTTPVerb
 }
 
-const LdapForm = ({ ldap, method = 'post', ...props }: ILdapFormProps) => {
+const LdapForm = ({ ldap, method = 'post', ...props }: LdapFormProps) => {
 	return (
 		<Form
 			model="ldap"

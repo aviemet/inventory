@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import ManufacturerForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IUpdateManufacturerProps{
+interface UpdateManufacturerProps{
 	manufacturer: Schema.ManufacturersEdit
 }
 
-const New = ({ manufacturer, ...models }: IUpdateManufacturerProps) => {
+const New = ({ manufacturer, ...models }: UpdateManufacturerProps) => {
 	const title = `Edit ${manufacturer.name}`
 
 	return (

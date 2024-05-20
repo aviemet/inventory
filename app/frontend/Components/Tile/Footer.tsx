@@ -3,9 +3,9 @@ import { Box, type BoxProps, type ElementProps } from '@mantine/core'
 import cx from 'clsx'
 import * as classes from './Tile.css'
 
-interface ITileFooterProps extends BoxProps, ElementProps<'footer', keyof BoxProps> {}
+interface TileFooterProps extends BoxProps, ElementProps<'footer', keyof BoxProps> {}
 
-const Footer = ({ children, className, ...props }: ITileFooterProps) => {
+const Footer = ({ children, className, ...props }: TileFooterProps) => {
 	return (
 		<Box
 			component="footer"

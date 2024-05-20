@@ -8,16 +8,14 @@ import {
 import { type UseFormProps } from 'use-inertia-form'
 import { IPAddress } from '@/lib'
 
-window.IPAddress = IPAddress
-
-type TNetworkFormData = {
+type NetworkFormData = {
 	network: Schema.NetworksFormData
 }
 
-export interface INetworkFormProps {
+export interface NetworkFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TNetworkFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<NetworkFormData>) => boolean|void
 	network: Schema.NetworksFormData
 }
 
@@ -31,8 +29,8 @@ const emptyNetwork: Schema.NetworksFormData = {
 	notes: '',
 }
 
-const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: INetworkFormProps) => {
-	const handleAddressBlur = (value: string, form: UseFormProps<TNetworkFormData>) => {
+const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: NetworkFormProps) => {
+	const handleAddressBlur = (value: string, form: UseFormProps<NetworkFormData>) => {
 		let ip: IPAddress | undefined = undefined
 
 		form.clearErrors('network.address')
@@ -55,7 +53,7 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: 
 	}
 
 	return (
-		<Form<TNetworkFormData>
+		<Form<NetworkFormData>
 			model="network"
 			data={ { network } }
 			to={ to }

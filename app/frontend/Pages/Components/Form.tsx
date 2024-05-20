@@ -11,14 +11,14 @@ import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Features/D
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '../../lib/collections'
 
-type TComponentFormData = {
+type ComponentFormData = {
 	component: Schema.ComponentsFormData
 }
 
-export interface IComponentFormProps {
+export interface ComponentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TComponentFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ComponentFormData>) => boolean|void
 	component: Schema.ComponentsFormData
 }
 
@@ -27,7 +27,7 @@ const ComponentForm = ({
 	method = 'post',
 	onSubmit,
 	component,
-}: IComponentFormProps) => {
+}: ComponentFormProps) => {
 	return (
 		<Form
 			model="component"

@@ -5,7 +5,7 @@ import { type TableHeadCellProps } from '.'
 import { useLocation } from '@/lib/hooks'
 import { Table } from '@mantine/core'
 
-interface IHeadCellWithContextProps extends TableHeadCellProps {
+interface HeadCellWithContextProps extends TableHeadCellProps {
 	rows?: Record<string, any>[]
 }
 
@@ -18,7 +18,7 @@ const HeadCellWithContext = ({
 	hideable,
 	style,
 	...props
-}: IHeadCellWithContextProps) => {
+}: HeadCellWithContextProps) => {
 	const thRef = useRef<HTMLTableCellElement>(null)
 	const { pathname, params } = useLocation()
 

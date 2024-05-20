@@ -4,8 +4,8 @@ class PagesController < ApplicationController
   def dashboard
     activities = PublicActivity::Activity
       .includes(:owner, :trackable, :recipient)
-      .order(created_at: :asc)
-      .last(10)
+      .order(created_at: :desc)
+      .first(10)
 
     render inertia: "Pages/Dashboard", props: {
       company: @active_company.render(view: :show),

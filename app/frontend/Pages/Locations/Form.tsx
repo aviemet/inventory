@@ -5,14 +5,14 @@ import { LocationsDropdown } from '@/Features/Dropdowns'
 import CurrenciesDropdown from '@/Features/Dropdowns/CurrenciesDropdown'
 import { coerceArray } from '@/lib'
 
-export type TLocationFormData = {
+export type LocationFormData = {
 	location: Schema.LocationsFormData
 }
 
-export interface ILocationFormProps {
+export interface LocationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TLocationFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<LocationFormData>) => boolean|void
 	location?: Schema.LocationsFormData
 }
 
@@ -27,7 +27,7 @@ const LocationForm = ({
 	method = 'post',
 	onSubmit,
 	location = emptyLocation,
-}: ILocationFormProps) => {
+}: LocationFormProps) => {
 	return (
 		<Form
 			model="location"

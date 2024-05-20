@@ -4,12 +4,12 @@ import { polymorphicRoute, formatter } from '@/lib'
 import { ArrowRightSquareIcon, CheckoutIcon } from '@/Components/Icons'
 import { CheckinButton } from '@/Components/Button'
 
-interface IShowPageAssociationsProps {
+interface ShowPageAssociationsProps {
 	assignToable: Schema.Item|Schema.Accessory|Schema.Consumable|Schema.Component|Schema.License
 	checkinRoute?: (assignToableId: string|number, assignmentId: string|number) => string
 }
 
-const ShowPageAssociations = ({ assignToable, checkinRoute }: IShowPageAssociationsProps) => {
+const ShowPageAssociations = ({ assignToable, checkinRoute }: ShowPageAssociationsProps) => {
 	return (
 		<Box mt={ 16 }>
 			<Heading order={ 3 }>Active Assignments</Heading>

@@ -3,11 +3,11 @@ import { DangerousHtml, Date, Group, Heading, Link, Menu, Page, Section } from '
 import { Routes } from '@/lib'
 import { Text } from '@mantine/core'
 
-interface IShowDocumentationProps {
+interface ShowDocumentationProps {
 	documentation: Schema.DocumentationsShow
 }
 
-const ShowDocumentation = ({ documentation }: IShowDocumentationProps) => {
+const ShowDocumentation = ({ documentation }: ShowDocumentationProps) => {
 	const title =  'Documentation'
 
 	return (

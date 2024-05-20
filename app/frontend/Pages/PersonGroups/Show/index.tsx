@@ -4,11 +4,11 @@ import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 import GroupMembersTable from './GroupMembersTable'
 
-interface IShowUserProps {
+interface ShowUserProps {
 	person_group: Schema.PersonGroupsShow
 }
 
-const ShowUser = ({ person_group }: IShowUserProps) => {
+const ShowUser = ({ person_group }: ShowUserProps) => {
 	const title = `${person_group.name}`
 
 	return (

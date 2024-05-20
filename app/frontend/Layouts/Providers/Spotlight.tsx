@@ -88,7 +88,7 @@ const defaultActions: SpotlightActionData[] = [
 ]
 
 
-type TValues = {
+type Values = {
 	items: Schema.Item[]
 	accessories: Schema.Accessory[]
 	components: Schema.Component[]
@@ -101,7 +101,7 @@ type TValues = {
 	contracts: Schema.Contract[]
 }
 
-const generateActions = (values?: TValues) => {
+const generateActions = (values?: Values) => {
 	if(!values) return []
 
 	return [
@@ -200,7 +200,7 @@ const generateActions = (values?: TValues) => {
 
 const SpotlightComponent = () => {
 	const [query, setQuery] = useState('')
-	const [values, setValues] = useState<TValues>()
+	const [values, setValues] = useState<Values>()
 	const [actions, setActions] = useState(defaultActions)
 	const [loading, setLoading] = useState(false)
 

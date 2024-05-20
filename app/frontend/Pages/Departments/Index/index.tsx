@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import DepartmentsTable from '../Table'
 
-interface IDepartmentsIndexProps {
+interface DepartmentsIndexProps {
 	departments: Schema.DepartmentsIndex[]
 	pagination: Schema.Pagination
 }
 
-const DepartmentsIndex = ({ departments, pagination }: IDepartmentsIndexProps) => {
+const DepartmentsIndex = ({ departments, pagination }: DepartmentsIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Departments"

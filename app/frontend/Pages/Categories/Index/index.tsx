@@ -5,12 +5,12 @@ import { TableTitleSection } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import CategoriesTable from '../Table'
 
-interface ICategoriesIndexProps {
+interface CategoriesIndexProps {
 	categories: Schema.CategoriesIndex[]
 	pagination: Schema.Pagination
 }
 
-const CategoriesIndex = ({ categories, pagination }: ICategoriesIndexProps) => {
+const CategoriesIndex = ({ categories, pagination }: CategoriesIndexProps) => {
 	const title = 'Categories'
 
 	return (

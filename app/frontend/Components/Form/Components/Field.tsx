@@ -1,11 +1,11 @@
 import React from 'react'
 import { Box, BoxProps } from '@mantine/core'
 import cx from 'clsx'
-import { useFormFormat } from './Form'
+import { useFormFormat } from '../Form'
 
-export interface IFieldProps extends BoxProps {
+export interface FieldProps extends BoxProps {
 	children: React.ReactNode
-	type?: TInputType
+	type?:IputType
 	required?: boolean
 	errors?: boolean
 }
@@ -17,7 +17,7 @@ const Field = ({
 	errors = false,
 	className,
 	...props
-}: IFieldProps) => {
+}: FieldProps) => {
 	const { disableFormatting } = useFormFormat()
 
 	return (

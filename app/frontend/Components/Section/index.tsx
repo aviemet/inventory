@@ -3,11 +3,11 @@ import { Box, type BoxProps } from '@mantine/core'
 import cx from 'clsx'
 import * as classes from './Section.css'
 
-interface ISectionProps extends BoxProps, Omit<React.ComponentPropsWithoutRef<'section'>, keyof BoxProps> {
+interface SectionProps extends BoxProps, Omit<React.ComponentPropsWithoutRef<'section'>, keyof BoxProps> {
 	fullHeight?: boolean
 }
 
-const Section = forwardRef<HTMLDivElement, ISectionProps>((
+const Section = forwardRef<HTMLDivElement, SectionProps>((
 	{ children, fullHeight = false, className, ...props },
 	ref,
 ) => {

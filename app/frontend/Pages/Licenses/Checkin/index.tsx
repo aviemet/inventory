@@ -4,14 +4,14 @@ import { Routes, formatter } from '@/lib'
 import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import { LocationsDropdown } from '@/Features/Dropdowns'
 
-interface ICheckinLicensesProps {
+interface CheckinLicensesProps {
 	assignment: Schema.AssignmentsEdit
 	license: Schema.LicensesEdit
 	locations: Schema.LocationsOptions[]
 	status_labels: Schema.StatusLabelsOptions[]
 }
 
-const Checkin = ({ assignment, license, locations, status_labels }: ICheckinLicensesProps) => {
+const Checkin = ({ assignment, license, locations, status_labels }: CheckinLicensesProps) => {
 	const [licenseName, setLicenseName] = useState(license.name)
 	const title = 'Check In License'
 

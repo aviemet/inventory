@@ -5,14 +5,14 @@ import { type UseFormProps } from 'use-inertia-form'
 import { CategoriesDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 
-type TModelFormData = {
+type ModelFormData = {
 	model: Schema.ModelsFormData
 }
 
-export interface IModelFormProps {
+export interface ModelFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TModelFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ModelFormData>) => boolean|void
 	model?: Schema.ModelsFormData
 }
 
@@ -23,7 +23,7 @@ const emptyModel: Schema.ModelsFormData = {
 	category_id: NaN,
 }
 
-const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: IModelFormProps) => {
+const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: ModelFormProps) => {
 	return (
 		<Form
 			model="model"

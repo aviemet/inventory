@@ -11,14 +11,14 @@ import { DepartmentsDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 import PeopleDropdown from '@/Features/Dropdowns/PeopleDropdown'
 
-type TPersonFormData = {
+type PersonFormData = {
 	person: Schema.PeopleFormData
 }
 
-export interface IPersonFormProps {
+export interface PersonFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TPersonFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<PersonFormData>) => boolean|void
 	person: Schema.PeopleFormData
 }
 
@@ -27,7 +27,7 @@ const PersonForm = ({
 	method = 'post',
 	onSubmit,
 	person,
-}: IPersonFormProps) => {
+}: PersonFormProps) => {
 
 	return (
 		<Form
@@ -64,7 +64,7 @@ const PersonForm = ({
 				name="manager_id"
 			/>
 
-			<FormConsumer>{ ({ data }: UseFormProps<TPersonFormData>) => (
+			<FormConsumer>{ ({ data }: UseFormProps<PersonFormData>) => (
 				<TextInput
 					name="contact.emails[0].email"
 					label="Email"

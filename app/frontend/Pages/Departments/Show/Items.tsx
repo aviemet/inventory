@@ -5,12 +5,12 @@ import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
 import ItemsTable from '@/Pages/Items/Table'
 
-interface IDetailsProps {
+interface DetailsProps {
 	department: Schema.Department
 	items: PaginatedModel<Schema.Item[]>
 }
 
-const Details = ({ department, items }: IDetailsProps) => {
+const Details = ({ department, items }: DetailsProps) => {
 	return (
 		<Section>
 			<ShowPageTableTemplate

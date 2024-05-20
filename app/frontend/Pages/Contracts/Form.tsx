@@ -11,14 +11,14 @@ import { CategoriesDropdown, VendorsDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 
-type TContractFormData = {
+type ContractFormData = {
 	contract: Schema.ContractsFormData
 }
 
-export interface IContractFormProps {
+export interface ContractFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TContractFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ContractFormData>) => boolean|void
 	contract?: Schema.ContractsFormData
 }
 
@@ -33,7 +33,7 @@ const ContractForm = ({
 	method = 'post',
 	onSubmit,
 	contract = emptyContract,
-}: IContractFormProps) => {
+}: ContractFormProps) => {
 	return (
 		<Form
 			model="contract"

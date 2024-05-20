@@ -3,18 +3,18 @@ import { Form, TextInput, Submit, RichText } from '@/Components/Form'
 import { type UseFormProps } from 'use-inertia-form'
 import DocumentableSearch from './DocumentableSearch'
 
-type TDocumentationFormData = {
+type DocumentationFormData = {
 	documentation: Schema.DocumentationsFormData
 }
 
-export interface IDocumentationFormProps {
+export interface DocumentationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TDocumentationFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<DocumentationFormData>) => boolean|void
 	documentation: Schema.DocumentationsFormData
 }
 
-const DocumentationForm = ({ method = 'post', documentation, ...props }: IDocumentationFormProps) => {
+const DocumentationForm = ({ method = 'post', documentation, ...props }: DocumentationFormProps) => {
 
 	return (
 		<Form

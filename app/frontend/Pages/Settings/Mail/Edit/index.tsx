@@ -4,11 +4,11 @@ import { Heading } from '@/Components'
 import { Routes } from '@/lib'
 import SmtpForm from '../Form'
 
-interface ISmtpFormProps {
+interface SmtpFormProps {
 	smtp: Schema.Smtp
 }
 
-const EditMail = ({ smtp }: ISmtpFormProps) => {
+const EditMail = ({ smtp }: SmtpFormProps) => {
 	return (
 		<SettingsLayout breadcrumbs={ [
 			{ title: 'Settings', href: Routes.settingsGeneralIndex() },

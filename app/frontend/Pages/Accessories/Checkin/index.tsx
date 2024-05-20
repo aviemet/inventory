@@ -4,13 +4,13 @@ import { Routes } from '@/lib'
 import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import * as classes from './Checkin.css'
 
-interface ICheckinAccessoriesProps {
+interface CheckinAccessoriesProps {
 	accessory: Schema.AccessoriesEdit
 	assignment: Schema.AssignmentsEdit
 	statuses: Schema.StatusLabel[]
 }
 
-const Checkin = ({ assignment, accessory, statuses }: ICheckinAccessoriesProps) => {
+const Checkin = ({ assignment, accessory, statuses }: CheckinAccessoriesProps) => {
 	const [accessoryName, setAccessoryName] = useState(accessory.name)
 	const title = 'Check In Accessory'
 

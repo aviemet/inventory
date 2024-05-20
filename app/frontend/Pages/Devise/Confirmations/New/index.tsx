@@ -3,11 +3,11 @@ import { Form, TextInput, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 
-interface IConfirmationsNew {
+interface ConfirmationsNewProps {
 	user: Schema.User
 }
 
-const ConfirmationsNew = ({ user }: IConfirmationsNew) => {
+const ConfirmationsNew = ({ user }: ConfirmationsNewProps) => {
 	return (
 		<Tile>
 			<Form

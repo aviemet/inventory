@@ -7,7 +7,7 @@ import History from './History'
 import Associations from './Associations'
 import Documentations from './Documentations'
 
-export interface IShowComponentProps {
+export interface ShowComponentProps {
 	component: Schema.ComponentsShow
 }
 
@@ -18,7 +18,7 @@ const tabsList = [
 	{ id: 'associations', label: 'Associations', component: Associations },
 ]
 
-const ShowComponent = ({ component }: IShowComponentProps) => {
+const ShowComponent = ({ component }: ShowComponentProps) => {
 	const title = component.name ?? 'Component Details'
 
 	return (

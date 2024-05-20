@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import ComponentForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewComponentProps {
+interface NewComponentProps {
 	component: Schema.ComponentsFormData
 }
 
-const NewComponent = ({ component }: INewComponentProps) => {
+const NewComponent = ({ component }: NewComponentProps) => {
 	const title = 'New Component'
 
 	return (

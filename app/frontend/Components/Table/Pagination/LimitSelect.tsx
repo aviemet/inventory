@@ -5,12 +5,12 @@ import axios from 'axios'
 import { Routes } from '@/lib'
 import { useLocation, usePageProps } from '@/lib/hooks'
 
-interface ILimitSelectProps {
+interface LimitSelectProps {
 	pagination: Schema.Pagination
 	model: string
 }
 
-const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
+const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 	const { auth: { user } } = usePageProps()
 	const location = useLocation()
 

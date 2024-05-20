@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import CompaniesTable from '../Table'
 
-interface ICompaniesIndexProps {
+interface CompaniesIndexProps {
 	companies: Schema.CompaniesIndex[]
 	pagination: Schema.Pagination
 }
 
-const CompaniesIndex = ({ companies, pagination }: ICompaniesIndexProps) => {
+const CompaniesIndex = ({ companies, pagination }: CompaniesIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Companies"

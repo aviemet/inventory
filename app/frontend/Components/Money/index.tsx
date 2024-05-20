@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { useTableSectionContext } from '@/Components/Table/TableContext'
 import FlexMoney from './FlexMoney'
 
-interface IMoneyProps {
+interface MoneyProps {
 	children?: number | null
 	currency?: string
 	locale?: string
 	accounting?: boolean
 }
 
-const Money = ({ children, currency = 'USD', locale = 'en-US', accounting }: IMoneyProps) => {
+const Money = ({ children, currency = 'USD', locale = 'en-US', accounting }: MoneyProps) => {
 	const [inTable, setInTable] = useState(false)
 	const inputValue = children || 0
 

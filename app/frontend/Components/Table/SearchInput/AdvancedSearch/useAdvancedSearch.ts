@@ -6,21 +6,21 @@ import cx from 'clsx'
 import { NestedURLSearchParams } from '@/lib'
 import buildSearchLink from './buildSearchLink'
 
-type TSpecialSearchTypes = 'date'
+type SpecialSearchTypes = 'date'
 
-interface IOptions {
+interface Options {
 	path: string
 }
 
-export type TInputParam<T = string> = {
+export type InputParam<T = string> = {
 	name: string
 	default?: T
 	dependent?: string|string[]
 	keyUpListener?: boolean
-	type?: TSpecialSearchTypes
+	type?:SpecialSearchTypes
 }
 
-export type TParamValue = string|number|Date|Date[]|undefined|null
+export type ParamValue = string|number|Date|Date[]|undefined|null
 
 /**
  * Hook for building advanced search interfaces
@@ -31,18 +31,18 @@ export type TParamValue = string|number|Date|Date[]|undefined|null
  * 	inputProps(name): Method to return object of props to be passed into an input
  */
 const useAdvancedSearch = (
-	inputParams: TInputParam[],
-	options?: IOptions,
+	inputParams: InputParam[],
+	options?: Options,
 ) => {
 	// TODO: Trying to infer keys from prop
-	type TInputParamName = typeof inputParams[number]['name']
+	type InputParamName = typeof inputParams[number]['name']
 
 	const location = useLocation()
 
 	const [searchLink, setSearchLink] = useState(location.href)
 
 	const localInputParams = useMemo(() => {
-		const finalParams: TInputParam[] = []
+		const finalParams: InputParam[] = []
 
 		inputParams.forEach(param => {
 			switch(param?.type) {
@@ -106,7 +106,7 @@ const useAdvancedSearch = (
 	}, [localInputParams])
 
 	// Method returned from hook to be passed to an input
-	const buildInputProps = <T = string>(name: TInputParamName) => {
+	const buildInputProps = <T = string>(name: InputParamName) => {
 		const param = localInputParams.find(param => param.name === name)
 
 		let value: T
@@ -147,7 +147,7 @@ const useAdvancedSearch = (
 		}
 	}
 
-	const setInputValue = useCallback((name: TInputParamName, value: TParamValue) => setValues(prevValues => {
+	const setInputValue = useCallback((name: InputParamName, value: ParamValue) => setValues(prevValues => {
 		const newValues = prevValues.clone()
 		newValues.set(name, value)
 		return newValues

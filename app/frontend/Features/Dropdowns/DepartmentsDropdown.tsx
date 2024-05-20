@@ -7,9 +7,9 @@ import { isEmpty } from 'lodash'
 import { useGetDepartmentsAsOptions } from '@/queries/departments'
 import { type AsyncDropdown } from '.'
 
-interface IDepartmentsDropdown extends AsyncDropdown<Schema.DepartmentsOptions> {}
+interface DepartmentsDropdownProps extends AsyncDropdown<Schema.DepartmentsOptions> {}
 
-const DepartmentsDropdown = forwardRef<HTMLInputElement, IDepartmentsDropdown>((
+const DepartmentsDropdown = forwardRef<HTMLInputElement, DepartmentsDropdownProps>((
 	{ label = 'Department', name = 'department_id', initialData, value, ...props },
 	ref,
 ) => {

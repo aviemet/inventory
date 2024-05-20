@@ -6,9 +6,9 @@ import { useGetAssetsAsOptions } from '@/queries/assets'
 import { useInFormContext } from '@/lib'
 import { type AsyncDropdown } from '.'
 
-interface IAssetsDropdown extends AsyncDropdown<Schema.AssetsOptions> {}
+interface AssetsDropdownProps extends AsyncDropdown<Schema.AssetsOptions> {}
 
-const AssetsDropdown = forwardRef<HTMLInputElement, IAssetsDropdown>((
+const AssetsDropdown = forwardRef<HTMLInputElement, AssetsDropdownProps>((
 	{ label = 'Asset', name = 'asset_id', initialData = [], value, ...props },
 	ref,
 ) => {

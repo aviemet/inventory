@@ -16,14 +16,14 @@ const [usePermissionsForm, PermissionsFormContext] = createContext<{
 }>()
 export { usePermissionsForm }
 
-export interface IGroupFormProps {
+export interface GroupFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<FormData>) => boolean|void
 	person_group?: Schema.PersonGroupsFormData
 }
 
-const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }: IGroupFormProps) => {
+const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }: GroupFormProps) => {
 	const { auth: { user } } = usePageProps()
 
 	const formData = { person_group: (person_group ? exclude(person_group, ['id', 'slug']) : emptyGroup) } as FormData
@@ -78,29 +78,29 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 					<Table mt={ 32 }>
 						<Table.Head>
 							<Table.Row>
-								<Table.Cell>All</Table.Cell>
-								<Table.Cell>Record Type</Table.Cell>
-								<Table.Cell>
+								<Table.HeadCell>All</Table.HeadCell>
+								<Table.HeadCell>Record Type</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="index" /> List
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="show" /> View
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="create" /> Create
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="update" /> Edit
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="delete" /> Delete
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="checkout" /> Checkout
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="checkin" /> Checkin
-								</Table.Cell>
+								</Table.HeadCell>
 							</Table.Row>
 						</Table.Head>
 						<Table.Body>{ tableRows.map(row => (

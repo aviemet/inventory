@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import VendorForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewVendorProps {
+interface NewVendorProps {
 	vendor: Schema.VendorsFormData
 }
 
-const New = ({ ...data }: INewVendorProps) => {
+const New = ({ ...data }: NewVendorProps) => {
 	const title = 'New Vendor'
 
 	return (

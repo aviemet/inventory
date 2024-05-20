@@ -9,17 +9,17 @@ import ConsumablesTable from '@/Pages/Consumables/Table'
 import ComponentsTable from '@/Pages/Components/Table'
 import { omit } from 'lodash'
 
-type TPaginatedModel<T> = {
+type PaginatedModel<T> = {
 	data: T
 	pagination: Schema.Pagination
 }
 
-interface IShowManufacturerProps {
+interface ShowManufacturerProps {
 	manufacturer: Schema.ManufacturersShow
-	items: TPaginatedModel<Schema.ItemsIndex[]>
-	accessories: TPaginatedModel<Schema.AccessoriesIndex[]>
-	components: TPaginatedModel<Schema.ComponentsIndex[]>
-	consumables: TPaginatedModel<Schema.ConsumablesIndex[]>
+	items: PaginatedModel<Schema.ItemsIndex[]>
+	accessories: PaginatedModel<Schema.AccessoriesIndex[]>
+	components: PaginatedModel<Schema.ComponentsIndex[]>
+	consumables: PaginatedModel<Schema.ConsumablesIndex[]>
 }
 
 const tabs = {
@@ -30,7 +30,7 @@ const tabs = {
 	consumables: 'consumables',
 }
 
-const Show = ({ manufacturer, items, accessories, components, consumables }: IShowManufacturerProps) => {
+const Show = ({ manufacturer, items, accessories, components, consumables }: ShowManufacturerProps) => {
 	const title = manufacturer.name ?? 'Manufacturer Details'
 
 	return (

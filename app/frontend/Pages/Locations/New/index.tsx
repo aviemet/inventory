@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import LocationForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewLocationProps {
+interface NewLocationProps {
 	location: Schema.LocationsFormData
 }
 
-const NewLocation = ({ location }: INewLocationProps) => {
+const NewLocation = ({ location }: NewLocationProps) => {
 	const title = 'New Location'
 
 	return (

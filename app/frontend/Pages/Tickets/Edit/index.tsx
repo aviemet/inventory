@@ -3,13 +3,13 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import TicketForm from '../Form'
 
-interface IUpdateTicketProps{
+interface UpdateTicketProps{
 	ticket: Schema.TicketsEdit
 	people: Schema.PeopleOptions[]
 	assets: Schema.AssetsOptions[]
 }
 
-const EditTicket = ({ ticket, ...data }: IUpdateTicketProps) => {
+const EditTicket = ({ ticket, ...data }: UpdateTicketProps) => {
 	const title = 'Edit Ticket'
 
 	return (

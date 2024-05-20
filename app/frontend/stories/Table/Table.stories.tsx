@@ -18,9 +18,9 @@ export const Standard: TableStory = {
 		<Table { ...args }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell>Heading One</Table.Cell>
-					<Table.Cell>Heading Two</Table.Cell>
-					<Table.Cell>Heading Three</Table.Cell>
+					<Table.HeadCell>Heading One</Table.HeadCell>
+					<Table.HeadCell>Heading Two</Table.HeadCell>
+					<Table.HeadCell>Heading Three</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

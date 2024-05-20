@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import DepartmentForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IEditDepartmentProps{
+interface EditDepartmentProps{
 	department: Schema.DepartmentsEdit
 }
 
-const EditDepartment = ({ department }: IEditDepartmentProps) => {
+const EditDepartment = ({ department }: EditDepartmentProps) => {
 	const title = `Edit ${department.name}`
 
 	return (

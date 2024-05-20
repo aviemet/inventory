@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import ConsumableForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IUpdateConsumableProps{
+interface UpdateConsumableProps{
 	consumable: Schema.ConsumablesEdit
 }
 
-const EditConsumable = ({ consumable }: IUpdateConsumableProps) => {
+const EditConsumable = ({ consumable }: UpdateConsumableProps) => {
 	const title = `Edit ${consumable.name}`
 
 	return (

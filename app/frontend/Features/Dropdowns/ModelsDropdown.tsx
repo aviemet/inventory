@@ -7,11 +7,11 @@ import { useGetModelsAsOptions } from '@/queries/models'
 import { isEmpty } from 'lodash'
 import { type AsyncDropdown } from '.'
 
-interface IModelsDropdown extends AsyncDropdown<Schema.ModelsOptions> {
+interface ModelsDropdownProps extends AsyncDropdown<Schema.ModelsOptions> {
 	modelCategory?: Schema.CategoryTypes|undefined
 }
 
-const ModelsDropdown = forwardRef<HTMLInputElement, IModelsDropdown>((
+const ModelsDropdown = forwardRef<HTMLInputElement, ModelsDropdownProps>((
 	{ label = 'Model', name = 'model_id', modelCategory, initialData, value, ...props },
 	ref,
 ) => {

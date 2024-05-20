@@ -7,11 +7,11 @@ import { useGetCategoriesAsOptions } from '@/queries/categories'
 import { isEmpty } from 'lodash'
 import { type AsyncDropdown } from '.'
 
-interface ICategoriesDropdown extends AsyncDropdown<Schema.CategoriesOptions> {
+interface CategoriesDropdownProps extends AsyncDropdown<Schema.CategoriesOptions> {
 	categorizable_type?: Schema.CategoryTypes
 }
 
-const CategoriesDropdown = forwardRef<HTMLInputElement, ICategoriesDropdown>((
+const CategoriesDropdown = forwardRef<HTMLInputElement, CategoriesDropdownProps>((
 	{ label = 'Category', name = 'category_id', categorizable_type, initialData, value, ...props },
 	ref,
 ) => {

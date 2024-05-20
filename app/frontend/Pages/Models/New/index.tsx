@@ -3,13 +3,13 @@ import { Heading, Page, Section } from '@/Components'
 import ModelForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewModelProps {
+interface NewModelProps {
 	model: Schema.ModelsFormData
 	categories: Schema.CategoriesOptions[]
 	manufacturers: Schema.ManufacturersOptions[]
 }
 
-const New = ({ ...data }: INewModelProps) => {
+const New = ({ ...data }: NewModelProps) => {
 	const title = 'New Model'
 
 	return (

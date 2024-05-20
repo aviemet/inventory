@@ -3,15 +3,15 @@ import { Lazy, Page, Table } from '@/Components'
 import { TableTitleSection } from '@/Features'
 import { Routes } from '@/lib'
 
-type TRecord = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
+type Record = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
 
-interface IShowCategoryProps {
+interface ShowCategoryProps {
 	category: Schema.Category
-	records: TRecord[]
+	records: Record[]
 	pagination: Schema.Pagination
 }
 
-const Show = ({ category, records, pagination }: IShowCategoryProps) => {
+const Show = ({ category, records, pagination }: ShowCategoryProps) => {
 	const title = `Category: ${category.categorizable_type} - ${category.name}`
 
 	const LazyTableComponent = Lazy.loadable(() => import(`../../${category.plural}/Table.tsx`))

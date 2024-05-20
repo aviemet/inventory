@@ -14,18 +14,18 @@ import { Box, Grid } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 
-type TLicenseFormData = {
+type LicenseFormData = {
 	license: Schema.LicensesFormData
 }
 
-export interface ILicenseFormProps {
+export interface LicenseFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TLicenseFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<LicenseFormData>) => boolean|void
 	license: Schema.LicensesFormData
 }
 
-const LicenseForm = ({ to, method = 'post', onSubmit, license }: ILicenseFormProps) => {
+const LicenseForm = ({ to, method = 'post', onSubmit, license }: LicenseFormProps) => {
 	return (
 		<Form
 			model="license"

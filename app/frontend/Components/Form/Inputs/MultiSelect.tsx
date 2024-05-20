@@ -1,7 +1,7 @@
 import React from 'react'
 import { NestedObject, UseFormProps, useInertiaInput } from 'use-inertia-form'
 import { ConditionalWrapper } from '@/Components'
-import Field from '../Field'
+import Field from '../Components/Field'
 import MultiSelect, { type MultiSelectInputProps } from '@/Components/Inputs/MultiSelect'
 import { type ComboboxData } from '@mantine/core'
 import { type InputConflicts, type BaseFormInputProps } from '.'

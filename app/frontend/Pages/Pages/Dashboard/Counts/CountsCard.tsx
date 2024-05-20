@@ -1,12 +1,12 @@
 import React from 'react'
 import { Card, Group, Link } from '@/Components'
 
-interface ICountCardProps {
+interface CountCardProps {
 	children: React.ReactNode
 	href: string
 }
 
-const CountCard = ({ children, href }: ICountCardProps) => {
+const CountCard = ({ children, href }: CountCardProps) => {
 	return (
 		<Card
 			component={ Link }

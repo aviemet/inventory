@@ -2,21 +2,10 @@ import React from 'react'
 import { useInertiaInput } from 'use-inertia-form'
 import { Checkbox } from '@/Components/Inputs'
 import { type CheckboxGroupProps } from '@mantine/core'
-import { createContext } from '@/lib/hooks'
 
-type CheckboxInputOption = {
-	value: string
-	label: string
-}
-
-const [useFormCheckboxGroupContext, FormCheckboxGroupProvider] = createContext<boolean>()
-export { useFormCheckboxGroupContext }
-
-export interface FormCheckboxGroupProps extends Omit<CheckboxGroupProps, 'children'> {
-	children: React.ReactElement
+export interface FormCheckboxGroupProps extends CheckboxGroupProps {
 	name: string
 	model?: string
-	options: CheckboxInputOption[]
 }
 
 const FormCheckboxGroup = ({
@@ -27,15 +16,17 @@ const FormCheckboxGroup = ({
 }: FormCheckboxGroupProps) => {
 	const { value, setValue } = useInertiaInput<string[]>({ name, model })
 
+	const handleValueChange = (vals: string[]) => {
+		setValue(vals)
+	}
+
 	return (
 		<Checkbox.Group
 			value={ value }
-			onChange={ setValue }
+			onChange={ handleValueChange }
 			{ ...props }
 		>
-			<FormCheckboxGroupProvider value={ true }>
-				{ children }
-			</FormCheckboxGroupProvider>
+			{ children }
 		</Checkbox.Group>
 	)
 }

@@ -6,14 +6,14 @@ import { LocationsDropdown } from '@/Features/Dropdowns'
 import StatusLabelsDropdown from '@/Features/Dropdowns/StatusLabelsDropdown'
 import * as classes from './Checkin.css'
 
-interface ICheckinItemsProps {
+interface CheckinItemsProps {
 	assignment: Schema.AssignmentsEdit
 	item: Schema.ItemsEdit
 	locations: Schema.LocationsOptions[]
 	status_labels: Schema.StatusLabelsOptions[]
 }
 
-const Checkin = ({ assignment, item, locations, status_labels }: ICheckinItemsProps) => {
+const Checkin = ({ assignment, item, locations, status_labels }: CheckinItemsProps) => {
 	const [itemName, setItemName] = useState(item.name)
 	const title = 'Check In Item'
 

@@ -7,18 +7,18 @@ import {
 import { DepartmentsDropdown, PeopleDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 
-type TUserFormData = {
+type UserFormData = {
 	user: Schema.UsersFormData
 }
 
-export interface IUserFormProps {
+export interface UserFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TUserFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<UserFormData>) => boolean|void
 	user: Schema.UsersFormData
 }
 
-const UserForm = ({ to, method = 'post', onSubmit, user }: IUserFormProps) => {
+const UserForm = ({ to, method = 'post', onSubmit, user }: UserFormProps) => {
 
 	return (
 		<Form

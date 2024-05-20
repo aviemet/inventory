@@ -1,6 +1,6 @@
 import React from 'react'
 import { Select } from '@/Components/Inputs'
-import { type IAdvancedInputProps } from '.'
+import { type AdvancedInputProps } from '.'
 
 export const dateRangeOptions = [
 	{ label: 'Exact Date', value: 'exact' },
@@ -14,7 +14,7 @@ type DateRangeType = typeof dateRangeOptions[number]['value']
 const Type = ({
 	advancedSearch,
 	name,
-}: IAdvancedInputProps) => {
+}: AdvancedInputProps) => {
 	const { inputProps, setInputValue } = advancedSearch
 
 	return (

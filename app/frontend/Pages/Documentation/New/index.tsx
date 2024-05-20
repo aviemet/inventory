@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import DocumentationForm from '../Form'
 
-interface INewDocumentationProps {
+interface NewDocumentationProps {
 	documentation: Schema.DocumentationsFormData
 }
 
-const NewDocumentation = ({ documentation }: INewDocumentationProps) => {
+const NewDocumentation = ({ documentation }: NewDocumentationProps) => {
 	const title = 'New Documentation'
 
 	return (

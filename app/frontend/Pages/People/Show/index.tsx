@@ -3,7 +3,7 @@ import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
-interface IShowPersonProps {
+interface ShowPersonProps {
 	person: Schema.PeopleShow
 }
 
@@ -13,7 +13,7 @@ const tabs = {
 	associations: 'associations',
 }
 
-const Show = ({ person }: IShowPersonProps) => {
+const Show = ({ person }: ShowPersonProps) => {
 	const title = person.name ?? 'Person Details'
 
 	return (

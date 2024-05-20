@@ -4,11 +4,11 @@ import Phone from './Phone'
 import Email from './Email'
 import Website from './Website'
 
-interface IContactDetailsProps {
+interface ContactDetailsProps {
 	contact: Schema.Contact
 }
 
-const ContactDetails = ({ contact }: IContactDetailsProps) => {
+const ContactDetails = ({ contact }: ContactDetailsProps) => {
 	return (
 		<>
 			<div>

@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import EditPersonForm from './Form'
 import { Routes } from '@/lib'
 
-interface IUpdatePersonProps{
+interface UpdatePersonProps{
 	person: Schema.PeopleEdit
 }
 
-const New = ({ person }: IUpdatePersonProps) => {
+const New = ({ person }: UpdatePersonProps) => {
 	const title = `Edit ${person.first_name} ${person.last_name}`
 
 	return (

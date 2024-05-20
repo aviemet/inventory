@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import LocationsTable from '../Table'
 
-interface ICompaniesIndexProps {
+interface CompaniesIndexProps {
 	locations: Schema.LocationsIndex[]
 	pagination: Schema.Pagination
 }
 
-const LocationsIndex = ({ locations, pagination }: ICompaniesIndexProps) => {
+const LocationsIndex = ({ locations, pagination }: CompaniesIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Locations"

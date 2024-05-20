@@ -1,7 +1,7 @@
 import React from 'react'
-import { IShowConsumableProps } from '.'
+import { ShowConsumableProps } from '.'
 
-const Documentations = ({ consumable }: IShowConsumableProps) => {
+const Documentations = ({ consumable }: ShowConsumableProps) => {
 	return (
 		<div>Documentations</div>
 	)

@@ -5,11 +5,11 @@ import { Field } from '@/Components/Form'
 import { useForm, useInertiaInput } from 'use-inertia-form'
 import { useGetSearchResults } from '@/queries'
 
-interface IDocumentableSearch extends Omit<SelectInputProps, 'options'> {
+interface DocumentableSearchProps extends Omit<SelectInputProps, 'options'> {
 	label: string
 }
 
-const DocumentableSearch = forwardRef<HTMLInputElement, IDocumentableSearch>((
+const DocumentableSearch = forwardRef<HTMLInputElement, DocumentableSearchProps>((
 	props,
 	ref,
 ) => {

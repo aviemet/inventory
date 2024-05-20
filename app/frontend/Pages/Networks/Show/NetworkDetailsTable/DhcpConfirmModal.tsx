@@ -2,13 +2,13 @@ import React from 'react'
 import { Modal } from '@mantine/core'
 import { Button } from '@/Components'
 
-interface IDhcpConfirmModalProps {
+interface DhcpConfirmModalProps {
 	open: boolean
 	setOpen: (open: boolean) => void
 	setConfirm: (confirm: boolean) => void
 }
 
-const DhcpConfirmModal = ({ open, setOpen, setConfirm }: IDhcpConfirmModalProps) => {
+const DhcpConfirmModal = ({ open, setOpen, setConfirm }: DhcpConfirmModalProps) => {
 	const handleConfirm = () => {
 		setConfirm(true)
 		setOpen(false)

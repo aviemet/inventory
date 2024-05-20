@@ -3,7 +3,7 @@ import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
-interface IShowModelProps {
+interface ShowModelProps {
 	model: Schema.ModelsShow
 }
 
@@ -13,7 +13,7 @@ const tabs = {
 	associations: 'associations',
 }
 
-const Show = ({ model }: IShowModelProps) => {
+const Show = ({ model }: ShowModelProps) => {
 	const title = model.name ?? 'Item Details'
 
 	return (

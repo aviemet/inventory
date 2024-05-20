@@ -1,8 +1,8 @@
 import React from 'react'
 import { Heading, History } from '@/Components'
-import { IShowAccessoryProps } from '.'
+import { ShowAccessoryProps } from '.'
 
-const AccessoryHistory = ({ accessory }: IShowAccessoryProps) => {
+const AccessoryHistory = ({ accessory }: ShowAccessoryProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>History</Heading>

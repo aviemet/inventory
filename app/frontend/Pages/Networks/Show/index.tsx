@@ -5,7 +5,7 @@ import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
 import { EditIcon } from '@/Components/Icons'
 
-interface IShowNetworkProps {
+interface ShowNetworkProps {
 	network: Schema.NetworksShow
 	ips: Schema.IpLease[]
 	pagination: Schema.Pagination
@@ -14,7 +14,7 @@ interface IShowNetworkProps {
 const [useNetworkContext, NetworkContextProvider] = createContext<{ network: Schema.Network }>()
 export { useNetworkContext }
 
-const Show = ({ network, ips, pagination }: IShowNetworkProps) => {
+const Show = ({ network, ips, pagination }: ShowNetworkProps) => {
 	const title = network.name || 'Show Network'
 
 	return (

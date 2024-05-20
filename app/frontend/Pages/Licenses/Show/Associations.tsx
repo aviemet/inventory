@@ -1,9 +1,9 @@
 import React from 'react'
 import { ShowPageAssociations } from '@/Features'
 import { Routes } from '@/lib'
-import { IShowLicenseProps } from '.'
+import { ShowLicenseProps } from '.'
 
-const Associations = ({ license }: IShowLicenseProps) => {
+const Associations = ({ license }: ShowLicenseProps) => {
 	return <ShowPageAssociations assignToable={ license } checkinRoute={ Routes.checkinLicense } />
 }
 

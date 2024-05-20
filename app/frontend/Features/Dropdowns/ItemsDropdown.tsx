@@ -6,9 +6,9 @@ import { useGetDepartmentsAsOptions } from '@/queries/departments'
 import { useInFormContext } from '@/lib'
 import { type AsyncDropdown } from '.'
 
-interface IItemsDropdown extends AsyncDropdown<Schema.ItemsOptions> {}
+interface ItemsDropdownProps extends AsyncDropdown<Schema.ItemsOptions> {}
 
-const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdown>((
+const ItemsDropdown = forwardRef<HTMLInputElement, ItemsDropdownProps>((
 	{ label = 'Item', name = 'item_id', initialData, value, ...props },
 	ref,
 ) => {

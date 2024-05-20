@@ -5,7 +5,7 @@ import CountsCard from './CountsCard'
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from '@/Components/Icons'
 import IconProvider from '@/Layouts/Providers/IconProvider'
 
-type TCompanyCounts = {
+type CompanyCounts = {
 	locations: number
 	items: number
 	accessories: number
@@ -21,7 +21,7 @@ type TCompanyCounts = {
 
 const iconSize = '24px'
 
-const Counts = ({ counts }: { counts: TCompanyCounts }) => {
+const Counts = ({ counts }: { counts: CompanyCounts }) => {
 	return (
 		<IconProvider
 			size={ iconSize }

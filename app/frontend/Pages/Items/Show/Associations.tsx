@@ -2,9 +2,9 @@ import React from 'react'
 import { Box, Heading, Link } from '@/Components'
 import AssignmentLink from './AssignmentLink'
 import { Routes } from '@/lib'
-import { IShowItemProps } from '.'
+import { ShowItemProps } from '.'
 
-const Associations = ({ item }: IShowItemProps) => {
+const Associations = ({ item }: ShowItemProps) => {
 	return (
 		<Box>
 			{ item.assigned && <Box mt={ 16 }>Assigned To: <AssignmentLink item={ item } /> </Box> }

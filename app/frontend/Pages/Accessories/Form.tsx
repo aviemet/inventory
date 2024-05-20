@@ -11,18 +11,18 @@ import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Features/D
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '../../lib/collections'
 
-interface AccessoryFormProps {
+type AccessoryFormData = {
 	accessory: Schema.AccessoriesFormData
 }
 
-export interface IAccessoryFormProps {
+export interface AccessoryFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<AccessoryFormProps>) => boolean|void
+	onSubmit?: (object: UseFormProps<AccessoryFormData>) => boolean|void
 	accessory: Schema.AccessoriesFormData
 }
 
-const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: IAccessoryFormProps) => {
+const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: AccessoryFormProps) => {
 
 	return (
 		<Form

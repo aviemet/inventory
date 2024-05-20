@@ -7,7 +7,7 @@ import History from './History'
 import Associations from './Associations'
 import Documentations from './Documentations'
 
-export interface IShowConsumableProps {
+export interface ShowConsumableProps {
 	consumable: Schema.ConsumablesShow
 }
 
@@ -18,7 +18,7 @@ const tabsList = [
 	{ id: 'associations', label: 'Associations', component: Associations },
 ]
 
-const ShowConsumable = ({ consumable }: IShowConsumableProps) => {
+const ShowConsumable = ({ consumable }: ShowConsumableProps) => {
 	const title = consumable.name ?? 'Consumable Details'
 
 	return (

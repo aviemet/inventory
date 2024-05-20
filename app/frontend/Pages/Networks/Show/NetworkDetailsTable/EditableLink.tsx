@@ -11,12 +11,12 @@ import DhcpConfirmModal from './DhcpConfirmModal'
 import { useNetworkContext } from '..'
 import IPAddress from '@/lib/IPAddress'
 
-interface IEditableLinkProps {
+interface EditableLinkProps {
 	item?: Schema.Item
 	ip?: string
 }
 
-const EditableLink = ({ item, ip }: IEditableLinkProps) => {
+const EditableLink = ({ item, ip }: EditableLinkProps) => {
 	const { network } = useNetworkContext()
 
 	const [editing, setEditing] = useState(false)

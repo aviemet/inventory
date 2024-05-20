@@ -3,20 +3,20 @@ import { Paper, Page, Box, Section, Tabs } from '@/Components'
 import { router } from '@inertiajs/react'
 import { px, useMantineTheme } from '@mantine/core'
 import { useViewportSize, useLocation } from '@/lib/hooks'
-import { type TBreadcrumb } from '@/Components/Breadcrumbs'
+import { type Breadcrumb } from '@/Components/Breadcrumbs'
 
-interface ISettingsLayoutProps {
+interface SettingsLayoutProps {
 	children: React.ReactNode
-	breadcrumbs?: TBreadcrumb[]
+	breadcrumbs?:Breadcrumb[]
 }
 
-type TTab = {
+type Tab = {
 	name: string
 	label: string
 	icon?: React.ReactNode
 }
 
-const tabs: TTab[] = [
+const tabs: Tab[] = [
 	{ name: 'general', label: 'General' },
 	{ name: 'appearance', label: 'Appearance' },
 	{ name: 'mail', label: 'Mail' },
@@ -30,7 +30,7 @@ const tabs: TTab[] = [
 	{ name: 'logs', label: 'Logs' },
 ]
 
-const SettingsLayout = ({ children, breadcrumbs }: ISettingsLayoutProps) => {
+const SettingsLayout = ({ children, breadcrumbs }: SettingsLayoutProps) => {
 	const title = 'Settings'
 	const { width } = useViewportSize()
 	const theme = useMantineTheme()

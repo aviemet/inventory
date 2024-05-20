@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from '@/Components/Icons'
 import AssetTable from '../Table'
 
-interface IAssetsIndexProps {
+interface AssetsIndexProps {
 	assets: Schema.AssetsIndex[]
 	pagination: Schema.Pagination
 }
 
-const AssetsIndex = ({ assets, pagination }: IAssetsIndexProps) => {
+const AssetsIndex = ({ assets, pagination }: AssetsIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="All Assets"

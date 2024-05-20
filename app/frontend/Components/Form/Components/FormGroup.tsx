@@ -2,16 +2,16 @@ import React from 'react'
 import { Box } from '@mantine/core'
 import cx from 'clsx'
 import { DivProps } from 'react-html-props'
-import ConditionalWrapper from '../ConditionalWrapper'
+import ConditionalWrapper from '../../ConditionalWrapper'
 import { NestedFields } from 'use-inertia-form'
 
-interface IFormGroupProps extends DivProps {
+interface FormGroupProps extends DivProps {
 	legend?: string
 	outline?: boolean
 	model?: string
 }
 
-const FormGroup = ({ children, legend, outline = true, model }: IFormGroupProps) => {
+const FormGroup = ({ children, legend, outline = true, model }: FormGroupProps) => {
 	return (
 		<Box component='fieldset' className={ cx({ outline }) } style={ {
 			marginTop: legend ? '0.5rem' : undefined,

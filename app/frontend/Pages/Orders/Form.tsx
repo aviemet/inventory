@@ -10,18 +10,18 @@ import { Menu } from '@/Components'
 import { PlusCircleIcon } from '@/Components/Icons'
 import { UseFormProps } from 'use-inertia-form'
 
-type TOrderFormData = {
+type OrderFormData = {
 	order: Schema.OrdersFormData
 }
 
-export interface IOrderFormProps {
+export interface OrderFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TOrderFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<OrderFormData>) => boolean|void
 	order: Schema.OrdersFormData
 }
 
-const OrderForm = ({ to, method = 'post', onSubmit, order }: IOrderFormProps) => {
+const OrderForm = ({ to, method = 'post', onSubmit, order }: OrderFormProps) => {
 	return (
 		<Form
 			model="order"

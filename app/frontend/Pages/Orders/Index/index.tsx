@@ -6,12 +6,12 @@ import OrdersTable from '../Table'
 
 export type OrderWithCost = Schema.Order & { cost: number }
 
-interface IOrdersIndexProps {
+interface OrdersIndexProps {
 	orders: OrderWithCost[]
 	pagination: Schema.Pagination
 }
 
-const OrdersIndex = ({ orders, pagination }: IOrdersIndexProps) => {
+const OrdersIndex = ({ orders, pagination }: OrdersIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Orders"

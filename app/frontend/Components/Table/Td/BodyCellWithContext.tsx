@@ -3,12 +3,12 @@ import cx from 'clsx'
 import { type TableCellProps } from '.'
 import { Table } from '@mantine/core'
 
-export interface IBodyCellWithContextProps extends Omit<TableCellProps, 'hideable'> {
+export interface BodyCellWithContextProps extends Omit<TableCellProps, 'hideable'> {
 	hideable?: false|string
 	model?: string
 }
 
-const BodyCellWithContext = ({ children, nowrap, fitContent, hideable, model, style, className, ...props }: IBodyCellWithContextProps) => {
+const BodyCellWithContext = ({ children, nowrap, fitContent, hideable, model, style, className, ...props }: BodyCellWithContextProps) => {
 	const tdRef = useRef<HTMLTableCellElement>(null)
 
 	return (

@@ -6,7 +6,7 @@ import AuditHistoryContent from './AuditHistoryContent'
 import ReturnedHistoryContent from './ReturnedHistoryContent'
 import { Link } from '@/Components'
 
-type TTimelineData = {
+type TimelineData = {
 	title: React.ReactNode
 	content: React.ReactNode
 	icon: React.ReactNode
@@ -15,7 +15,7 @@ type TTimelineData = {
 }
 
 export const buildTimelineData = (activity: Schema.Activity, assignment?: Schema.Assignment) => {
-	const timelineData: TTimelineData = {
+	const timelineData: TimelineData = {
 		title: activity.key ? `${capitalize(activity.key.split('.')[1])}d` : '',
 		content: <></>,
 		icon: <CircleDotIcon />,

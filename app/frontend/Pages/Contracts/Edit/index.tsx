@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import ContractForm from '../Form'
 
-interface IUpdateContractProps{
+interface UpdateContractProps{
 	contract: Schema.ContractsEdit
 }
 
-const EditContract = ({ contract }: IUpdateContractProps) => {
+const EditContract = ({ contract }: UpdateContractProps) => {
 	const title = `Edit ${contract.name}`
 
 	return (

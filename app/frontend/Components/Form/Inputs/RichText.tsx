@@ -1,5 +1,5 @@
 import React from 'react'
-import Field from '../Field'
+import Field from '../Components/Field'
 import RichTextInput, { type RichTextInputProps } from '@/Components/Inputs/RichText'
 import cx from 'clsx'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'

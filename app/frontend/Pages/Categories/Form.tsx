@@ -13,7 +13,7 @@ interface CategoryFormData {
 	category: Schema.CategoriesFormData
 }
 
-export interface ICategoryFormProps {
+export interface CategoryFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<CategoryFormData>) => boolean|void
@@ -28,7 +28,7 @@ const emptyCategory: Schema.CategoriesFormData = {
 
 const categorizableTypes = ['Accessory', 'Address', 'Component', 'Consumable', 'Contact', 'Contract', 'Department', 'Email', 'Item', 'License', 'Location', 'Manufacturer', 'Model', 'Order', 'Person', 'Phone', 'Ticket', 'User', 'Vendor', 'Website']
 
-const CategoryForm = ({ to, method = 'post', onSubmit, category = emptyCategory }: ICategoryFormProps) => {
+const CategoryForm = ({ to, method = 'post', onSubmit, category = emptyCategory }: CategoryFormProps) => {
 	const types = useMemo(() => categorizableTypes.map(type => ({ name: type, id: type })), [])
 
 	return (

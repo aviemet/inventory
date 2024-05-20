@@ -1,11 +1,11 @@
 import React from 'react'
 import { Page } from '@/Components'
 
-interface IContractShowProps {
+interface ContractShowProps {
 	contract: Schema.ContractsShow
 }
 
-const Show = ({ contract }: IContractShowProps) => {
+const Show = ({ contract }: ContractShowProps) => {
 	return (
 		<Page>Show</Page>
 	)

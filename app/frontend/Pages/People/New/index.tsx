@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import NewPersonForm from './Form'
 import { Routes } from '@/lib'
 
-interface INewPersonProps {
+interface NewPersonProps {
 	person: Schema.PeopleFormData
 }
 
-const New = ({ person }: INewPersonProps) => {
+const New = ({ person }: NewPersonProps) => {
 	const title = 'New Person'
 
 	return (

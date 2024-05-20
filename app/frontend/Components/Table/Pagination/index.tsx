@@ -16,9 +16,9 @@ const pageLink = (page: number) => {
 	return `${url.pathname}${url.search}`
 }
 
-interface IPaginationComponent extends Omit<PaginationProps, 'total'> {}
+interface PaginationComponent extends Omit<PaginationProps, 'total'> {}
 
-const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPaginationComponent) => {
+const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: PaginationComponent) => {
 	const { tableState: { pagination, model } } = useTableContext()
 
 	if(!pagination) return <></>

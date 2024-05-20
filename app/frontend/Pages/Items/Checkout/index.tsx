@@ -6,7 +6,7 @@ import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
 
 import { omit } from 'lodash'
 
-interface ICheckoutItemProps {
+interface CheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
 	item: Schema.ItemsEdit
 	items: Schema.ItemsOptions[]
@@ -14,7 +14,7 @@ interface ICheckoutItemProps {
 	locations: Schema.LocationsOptions[]
 }
 
-const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
+const Checkout = ({ assignment, item, ...models }: CheckoutItemProps) => {
 	const title = 'Checkout Item'
 
 	return (

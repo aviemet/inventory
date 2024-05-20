@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import StatusLabelsTable from '../Table'
 
-interface IStatusLabelsIndexProps {
+interface StatusLabelsIndexProps {
 	status_labels: Schema.StatusLabelsIndex[]
 	pagination: Schema.Pagination
 }
 
-const StatusLabelsIndex = ({ status_labels, pagination }: IStatusLabelsIndexProps) => {
+const StatusLabelsIndex = ({ status_labels, pagination }: StatusLabelsIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Support StatusLabels"

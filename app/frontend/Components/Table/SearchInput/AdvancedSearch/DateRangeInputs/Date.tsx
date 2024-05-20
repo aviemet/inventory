@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { DateInput, type DateInputValue } from '@/Components/Inputs'
-import { type IAdvancedInputProps } from '.'
+import { type AdvancedInputProps } from '.'
 // import { type DateValue } from '@mantine/dates'
 
 const Date = ({
 	advancedSearch,
 	name,
-}: IAdvancedInputProps) => {
+}: AdvancedInputProps) => {
 	const { values, inputProps, setInputValue } = advancedSearch
 
 	const { mb, wrapperProps, value } = inputProps<DateInputValue>(`${name}[start]`)

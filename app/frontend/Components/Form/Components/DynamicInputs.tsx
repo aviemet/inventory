@@ -3,21 +3,21 @@ import { Box, Button, Flex, Paper } from '@/Components'
 import { PlusCircleIcon, MinusCircleIcon } from '@/Components/Icons'
 import { NestedFields, useDynamicInputs } from 'use-inertia-form'
 
-interface IDynamicInputsProps {
+interface DynamicInputsProps {
 	children: React.ReactNode | React.ReactElement[]
 	model?: string
 	label?: string | React.ReactNode
 	emptyData: Record<string, unknown>
 }
 
-const DynamicInputs = ({ children, model, label, emptyData }: IDynamicInputsProps) => {
+const DynamicInputs = ({ children, model, label, emptyData }: DynamicInputsProps) => {
 	const { addInput, removeInput, paths } = useDynamicInputs({ model, emptyData })
 
 	return (
 		<>
 			<Flex>
 				<Box style={ { flex: 1 } }>{ label }</Box>
-				<Button onClick={ addInput }size='xs' mb="xs" mr="xs">
+				<Button onClick={ () => addInput() } size='xs' mb="xs" mr="xs">
 					<PlusCircleIcon />
 				</Button>
 			</Flex>
@@ -29,7 +29,7 @@ const DynamicInputs = ({ children, model, label, emptyData }: IDynamicInputsProp
 							<Box style={ { flex: 1 } }>
 								{ children }
 							</Box>
-							<Button onClick={ () => removeInput(i) }size='xs' ml="xs">
+							<Button onClick={ () => removeInput(i) } size='xs' ml="xs">
 								<MinusCircleIcon />
 							</Button>
 						</Flex>

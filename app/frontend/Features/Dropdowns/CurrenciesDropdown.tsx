@@ -6,9 +6,9 @@ import { isEmpty } from 'lodash'
 import { useInFormContext } from '@/lib'
 import { type AsyncDropdown } from '.'
 
-interface ICurrenciesDropdown extends AsyncDropdown<Schema.CurrencyOption> {}
+interface CurrenciesDropdownProps extends AsyncDropdown<Schema.CurrencyOption> {}
 
-const CurrenciesDropdown = forwardRef<HTMLInputElement, ICurrenciesDropdown>((
+const CurrenciesDropdown = forwardRef<HTMLInputElement, CurrenciesDropdownProps>((
 	{ label = 'Currency', name = 'currency', ...props },
 	ref,
 ) => {

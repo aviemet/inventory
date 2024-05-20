@@ -6,14 +6,14 @@ import { Routes, formatter } from '@/lib'
 
 import { omit } from 'lodash'
 
-interface ICheckoutLicenseProps {
+interface CheckoutLicenseProps {
 	assignment: Schema.AssignmentsFormData
 	license: Schema.LicensesEdit
 	items: Schema.ItemsOptions[]
 	people: Schema.PeopleOptions[]
 }
 
-const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => {
+const Checkout = ({ assignment, license, ...models }: CheckoutLicenseProps) => {
 	const title = 'Checkout License'
 
 	return (

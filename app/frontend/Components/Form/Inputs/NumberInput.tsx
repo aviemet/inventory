@@ -1,6 +1,6 @@
 import React from 'react'
 import NumberInput, { type NumberInputProps } from '@/Components/Inputs/NumberInput'
-import Field from '../Field'
+import Field from '../Components/Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type InputConflicts, type BaseFormInputProps } from '.'

@@ -2,11 +2,11 @@ import React from 'react'
 import { Group, Heading, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
-interface IShowLocationProps {
+interface ShowLocationProps {
 	location: Schema.LocationsShow
 }
 
-const ShowLocation = ({ location }: IShowLocationProps) => {
+const ShowLocation = ({ location }: ShowLocationProps) => {
 	const title = location.name || 'Location'
 
 	return (

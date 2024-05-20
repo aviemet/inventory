@@ -4,7 +4,7 @@ import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
 import { type AnchorProps, type ButtonProps } from '@mantine/core'
 
-export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
+export interface LinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	children?: React.ReactNode
 	href: string
 	method?: Method
@@ -22,7 +22,7 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 
 const externalPrefix = ['http', 'www']
 
-const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
+const Link = forwardRef<HTMLAnchorElement, LinkProps>((
 	{ children, href, as = 'a', method, visit, external, onProgress, preserveScroll, buttonProps, ...props },
 	ref,
 ) => {

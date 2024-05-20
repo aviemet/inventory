@@ -3,12 +3,12 @@ import { Page, PageProps, Errors, ErrorBag } from '@inertiajs/core'
 
 declare global {
 
-	// interface IndexedInertiaFormProps extends DefaultInertiaFormProps{
+	// interface ndexedInertiaFormProps extends DefaultInertiaFormProps{
 	// 	[key: string]: any
 	// }
 
-	// interface InertiaFormProps<TForm = Record<string, any>> extends Omit<DefaultInertiaFormProps, 'errors'> {
-	// 	errors: Record<keyof TForm, string|string[]>
+	// interface nertiaFormProps<TForm = Record<string, any>> extends Omit<DefaultInertiaFormProps, 'errors'> {
+	// 	errors: Record<keyofFrm, string|string[]>
 	// 	getData: (key: string) => any
 	// 	unsetData: (key: string) => void
 	// 	getError: (data: string) => string

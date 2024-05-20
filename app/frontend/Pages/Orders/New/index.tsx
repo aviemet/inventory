@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import OrderForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewOrderProps {
+interface NewOrderProps {
 	order: Schema.Order
 }
 
-const NewOrder = ({ order }: INewOrderProps) => {
+const NewOrder = ({ order }: NewOrderProps) => {
 	const title = 'New Purchase Order'
 
 	return (

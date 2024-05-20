@@ -3,11 +3,11 @@ import SelectInput, { type SelectInputProps } from '@/Components/Inputs/Select'
 import axios from 'axios'
 import { Routes } from '@/lib'
 
-interface IItemsDropdownProps extends Omit<SelectInputProps, 'options'> {
+interface ItemsDropdownProps extends Omit<SelectInputProps, 'options'> {
 
 }
 
-const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdownProps>((
+const ItemsDropdown = forwardRef<HTMLInputElement, ItemsDropdownProps>((
 	{ ...props },
 	ref,
 ) => {

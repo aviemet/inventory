@@ -5,14 +5,14 @@ import { type TableRow } from './index'
 import HeadRow from './HeadRow'
 import BodyRow from './BodyRow'
 
-interface IRowInContextProps extends Omit<TableRow, 'ref'> {
+interface RowInContextProps extends Omit<TableRow, 'ref'> {
 	name?: string
 	rows?: Record<string, any>[]
 	selectable: boolean
 	selected: Set<string>
 }
 
-const RowInContext = forwardRef<HTMLTableRowElement, IRowInContextProps>((
+const RowInContext = forwardRef<HTMLTableRowElement, RowInContextProps>((
 	{ children, ...props },
 	ref,
 ) => {

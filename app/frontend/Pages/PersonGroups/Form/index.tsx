@@ -1,6 +1,6 @@
 import PermissionsForm from './PermissionsForm'
 
-export type TPermissions = {
+export type Permissions = {
 	index?: boolean
 	show?: boolean
 	create?: boolean

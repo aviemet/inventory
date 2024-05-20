@@ -1,6 +1,6 @@
 import React from 'react'
 import CurrencyInput, { type CurrencyInputProps } from '@/Components/Inputs/CurrencyInput'
-import Field from '../Field'
+import Field from '../Components/Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { InputConflicts, type BaseFormInputProps } from '.'

@@ -6,9 +6,9 @@ import HoverLink from './HoverLink'
 import cx from 'clsx'
 import * as classes from './Tile.css'
 
-interface ITileProps extends PaperProps, ElementProps<'div', keyof PaperProps> {}
+interface TileProps extends PaperProps, ElementProps<'div', keyof PaperProps> {}
 
-const Tile = ({ children, className, ...props }: ITileProps) => {
+const Tile = ({ children, className, ...props }: TileProps) => {
 	return (
 		<Paper radius="lg" className={ cx(classes.tile, className) } { ...props }>
 			{ children }

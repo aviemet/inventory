@@ -4,14 +4,14 @@ import { LocationsDropdown } from '@/Features/Dropdowns'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 
-type TDepartmentForData = {
+type DepartmentForData = {
 	department: Schema.DepartmentsFormData
 }
 
-export interface IDepartmentFormProps {
+export interface DepartmentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TDepartmentForData>) => boolean|void
+	onSubmit?: (object: UseFormProps<DepartmentForData>) => boolean|void
 	department?: Schema.DepartmentsFormData
 }
 
@@ -21,7 +21,7 @@ const emptyDepartment: Schema.DepartmentsFormData = {
 	notes: '',
 }
 
-const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment }: IDepartmentFormProps) => {
+const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment }: DepartmentFormProps) => {
 
 	return (
 		<Form

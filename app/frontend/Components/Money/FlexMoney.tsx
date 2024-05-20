@@ -1,7 +1,7 @@
 import React from 'react'
 import { Group } from '@mantine/core'
 
-interface IFlexMoneyProps {
+interface FlexMoneyProps {
 	children: number
 	formatter: Intl.NumberFormat
 	accounting?: boolean
@@ -19,7 +19,7 @@ const getParts = (formatter: Intl.NumberFormat, value: number) => {
 	}
 }
 
-const FlexMoney = ({ children, formatter, accounting }: IFlexMoneyProps) => {
+const FlexMoney = ({ children, formatter, accounting }: FlexMoneyProps) => {
 	const { symbol, value } = getParts(formatter, children)
 
 	return (

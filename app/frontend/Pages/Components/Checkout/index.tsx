@@ -4,14 +4,14 @@ import { Routes } from '@/lib'
 import { DateTimeInput, Form, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
 
-interface ICheckoutItemProps {
+interface CheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
 	component: Schema.Component
 	items: Schema.ItemsOptions[]
 	locations: Schema.LocationsOptions[]
 }
 
-const Checkout = ({ assignment, component, ...models }: ICheckoutItemProps) => {
+const Checkout = ({ assignment, component, ...models }: CheckoutItemProps) => {
 	const title = `Checkout ${component.name}`
 
 	return (

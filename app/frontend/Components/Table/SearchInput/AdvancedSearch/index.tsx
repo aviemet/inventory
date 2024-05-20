@@ -23,11 +23,11 @@ const scaleY = {
 	transitionProperty: 'transform, opacity',
 }
 
-interface IAdvancedSearchProps {
+interface AdvancedSearchProps {
 	children: React.ReactNode
 }
 
-const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
+const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 	const { sidebarOpen } = useLayoutStore()
 	const { primaryColor, other: { navbar: { width } } } = useMantineTheme()
 	const navBarWidth = width[sidebarOpen ? 'open' : 'closed']

@@ -1,26 +1,4 @@
-export { default as Form, type IFormProps } from './Form'
-export { default as FormGroup } from './FormGroup'
-export { default as Field } from './Field'
-export { default as FieldsFor } from './FieldsFor'
-export { default as DynamicInputs } from './DynamicInputs'
-export { default as FormConsumer } from './Components/FormConsumer'
-export { default as Submit } from './Submit'
+export { default as Form, type FormProps } from './Form'
 
-export {
-	Autocomplete,
-	Checkbox,
-	CurrencyInput,
-	DateInput,
-	DateTimeInput,
-	HiddenInput,
-	MultiSelect,
-	NumberInput,
-	PasswordInput,
-	SegmentedControl,
-	RichText,
-	Select,
-	SwatchInput,
-	Switch,
-	TextInput,
-	Textarea,
-} from './Inputs'
+export * from './Components'
+export * from './Inputs'

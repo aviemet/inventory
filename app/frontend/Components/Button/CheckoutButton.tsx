@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from '@/Components'
-import { type ILinkProps } from '../Link'
+import { type LinkProps } from '../Link'
 import { CheckoutIcon } from '@/Components/Icons'
 import { Tooltip, useMantineTheme } from '@mantine/core'
 
-interface ICheckoutButtonProps extends Omit<ILinkProps, 'children'> {
+interface CheckoutButtonProps extends Omit<LinkProps, 'children'> {
 	href: string
 	label?: string
 	disabled?: boolean
 	tooltipMessage?: string | false | null
 }
 
-const CheckoutButton = ({ href, label, disabled, tooltipMessage, ...props }: ICheckoutButtonProps) => {
+const CheckoutButton = ({ href, label, disabled, tooltipMessage, ...props }: CheckoutButtonProps) => {
 	const { other: { colors: { checkoutButtonColor } } } = useMantineTheme()
 
 	return (

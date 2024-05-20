@@ -4,11 +4,11 @@ import { MultiSelect as InputMultiSelect } from '@/Components/Inputs'
 import { useInFormContext } from '@/lib'
 import { useGetPeopleAsOptions } from '@/queries/people'
 import { isEmpty } from 'lodash'
-import { type IAsyncMultiSelect } from '.'
+import { type AsyncMultiSelect } from '.'
 
-interface IPeopleDropdown extends IAsyncMultiSelect<Schema.PeopleOptions> {}
+interface PeopleDropdownProps extends AsyncMultiSelect<Schema.PeopleOptions> {}
 
-const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
+const PeopleDropdown = forwardRef<HTMLInputElement, PeopleDropdownProps>((
 	{ label = 'Person', name = 'person_id', initialData, value, ...props },
 	ref,
 ) => {

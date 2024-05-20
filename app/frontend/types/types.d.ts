@@ -5,12 +5,12 @@ import { type SelectProps, type InputProps } from '@mantine/core'
 declare global {
 	type HTTPVerb = 'post' | 'put' | 'get' | 'patch' | 'delete'
 
-	type TInputType = 'button'|'checkbox'|'color'|'currency'|'date'|'datetime-local'|'email'|'file'|'hidden'|'image'|'month'|'number'|'password'|'radio'|'range'|'reset'|'search'|'select'|'submit'|'tel'|'text'|'textarea'|'time'|'url'
+	type InputType = 'button'|'checkbox'|'color'|'currency'|'date'|'datetime-local'|'email'|'file'|'hidden'|'image'|'month'|'number'|'password'|'radio'|'range'|'reset'|'search'|'select'|'submit'|'tel'|'text'|'textarea'|'time'|'url'
 
-	type TAssignToable = 'Person' | 'Item' | 'Location'
-	type TAssignable = 'Item' | 'Accessory' | 'Component' | 'Consumable' | 'License'
+	type AssignToable = 'Person' | 'Item' | 'Location'
+	type Assignable = 'Item' | 'Accessory' | 'Component' | 'Consumable' | 'License'
 
-	// type TPermissions = {
+	// type Permissions = {
 	// 	index?: boolean
 	// 	show?: boolean
 	// 	create?: boolean
@@ -73,8 +73,8 @@ declare global {
 	// interface Field extends UID { }
 	// interface Fieldset extends UID { }
 	// interface FieldsetAssociation extends UID { }
-	// interface IpLease extends UID { }
-	// interface Item extends AssignableSingle, AssignToable, UID { }
+	// interface pLease extends UID { }
+	// interface tem extends AssignableSingle, AssignToable, UID { }
 	// interface License extends AssignableQuantity, UID { }
 	// interface Location extends AssignToable, UID { }
 	// interface Manufacturer extends UID { }
@@ -158,21 +158,21 @@ declare global {
 	// 		company: {
 	// 			admin?: boolean
 	// 		}
-	// 		item: TPermissions | []
-	// 		accessory: TPermissions | []
-	// 		component: TPermissions | []
-	// 		consumable: TPermissions | []
-	// 		license: TPermissions | []
-	// 		network: TPermissions | []
-	// 		vendor: TPermissions | []
-	// 		contract: TPermissions | []
-	// 		category: TPermissions | []
-	// 		model: TPermissions | []
-	// 		manufacturer: TPermissions | []
-	// 		department: TPermissions | []
-	// 		location: TPermissions | []
-	// 		person: TPermissions | []
-	// 		user: TPermissions | []
+	// 		item:Prmissions | []
+	// 		accessory:Prmissions | []
+	// 		component:Prmissions | []
+	// 		consumable:Prmissions | []
+	// 		license:Prmissions | []
+	// 		network:Prmissions | []
+	// 		vendor:Prmissions | []
+	// 		contract:Prmissions | []
+	// 		category:Prmissions | []
+	// 		model:Prmissions | []
+	// 		manufacturer:Prmissions | []
+	// 		department:Prmissions | []
+	// 		location:Prmissions | []
+	// 		person:Prmissions | []
+	// 		user:Prmissions | []
 	// 	}
 	// }
 	// }

@@ -16,18 +16,18 @@ import { Group } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
 
-type TItemFormData = {
+type ItemFormData = {
 	item: Schema.ItemsFormData
 }
 
-export interface IItemFormProps {
+export interface ItemFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TItemFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ItemFormData>) => boolean|void
 	item: Schema.ItemsFormData
 }
 
-const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
+const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 	const [staticIp, setStaticIp] = useState(false)
 
 	return (

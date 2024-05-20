@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import ConsumablesTable from '../Table'
 
-interface IConsumablesIndexProps {
+interface ConsumablesIndexProps {
 	consumables: Schema.ConsumablesIndex[]
 	pagination: Schema.Pagination
 }
 
-const ConsumablesIndex = ({ consumables, pagination }: IConsumablesIndexProps) => {
+const ConsumablesIndex = ({ consumables, pagination }: ConsumablesIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Consumables"

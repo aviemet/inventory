@@ -1,6 +1,6 @@
 import React, { ForwardedRef, forwardRef } from 'react'
 import TextInput, { type TextInputProps } from '@/Components/Inputs/TextInput'
-import Field from '../Field'
+import Field from '../Components/Field'
 import { useInertiaInput, type NestedObject } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type InputConflicts, type BaseFormInputProps } from '.'

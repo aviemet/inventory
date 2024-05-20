@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import StatusLabelForm from '../Form'
 
-interface IUpdateStatusLabelProps{
+interface UpdateStatusLabelProps{
 	status_label: Schema.StatusLabelsEdit
 }
 
-const EditStatusLabel = ({ status_label }: IUpdateStatusLabelProps) => {
+const EditStatusLabel = ({ status_label }: UpdateStatusLabelProps) => {
 	const title = 'Edit StatusLabel'
 
 	return (

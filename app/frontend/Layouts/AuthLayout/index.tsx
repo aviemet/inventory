@@ -3,11 +3,11 @@ import Footer from '../Footer'
 import * as classes from './Auth.css'
 import { AppShell } from '@mantine/core'
 
-interface IAuthLayoutProps {
+interface AuthLayoutProps {
 	children: any
 }
 
-const AuthLayout: React.FC<IAuthLayoutProps> = ({ children }) => {
+const AuthLayout = ({ children }: AuthLayoutProps) => {
 	return (
 		<AppShell>
 			<div id="auth" className={ classes.page }>

@@ -2,9 +2,9 @@ import React from 'react'
 import { Link, Heading, Table, Box, Badge, Money } from '@/Components'
 import AssignmentLink from './AssignmentLink'
 import { formatter, Routes } from '@/lib'
-import { IShowItemProps } from '.'
+import { ShowItemProps } from '.'
 
-const ItemDetails = ({ item }: IShowItemProps) => {
+const ItemDetails = ({ item }: ShowItemProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>Details</Heading>

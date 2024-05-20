@@ -9,7 +9,7 @@ import Consumables from './Consumables'
 import Licenses from './Licenses'
 import People from './People'
 
-interface IDepartmentShowProps {
+interface DepartmentShowProps {
 	department: Schema.DepartmentsShow
 	items: PaginatedModel<Schema.Item[]>
 	accessories: PaginatedModel<Schema.Accessory[]>
@@ -29,7 +29,7 @@ const tabs = {
 	people: 'people',
 }
 
-const Show = ({ department, items, accessories, components, consumables, licenses, people }: IDepartmentShowProps) => {
+const Show = ({ department, items, accessories, components, consumables, licenses, people }: DepartmentShowProps) => {
 	const title = department.name ?? 'Department Details'
 
 	return (

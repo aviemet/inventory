@@ -1,9 +1,9 @@
 import React from 'react'
-import { IShowAccessoryProps } from '.'
+import { ShowAccessoryProps } from '.'
 import { Table } from '@/Components'
 import DocumentationTable from '@/Pages/Documentation/Table'
 
-const Documentations = ({ accessory, pagination }: IShowAccessoryProps) => {
+const Documentations = ({ accessory, pagination }: ShowAccessoryProps) => {
 	return (
 		<Table.TableProvider
 			selectable

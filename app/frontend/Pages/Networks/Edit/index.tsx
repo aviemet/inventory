@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import NetworkForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IUpdateNetworkProps{
+interface UpdateNetworkProps{
 	network: Schema.NetworksEdit
 }
 
-const New = ({ network }: IUpdateNetworkProps) => {
+const New = ({ network }: UpdateNetworkProps) => {
 	const title = `Edit ${network.name}`
 
 	return (

@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import LicensesTable from '../Table'
 
-interface ILicensesIndexProps {
+interface LicensesIndexProps {
 	licenses: Schema.LicensesIndex[]
 	pagination: Schema.Pagination
 }
 
-const LicensesIndex = ({ licenses, pagination }: ILicensesIndexProps ) => {
+const LicensesIndex = ({ licenses, pagination }: LicensesIndexProps ) => {
 	return (
 		<IndexPageTemplate
 			title="Licenses"

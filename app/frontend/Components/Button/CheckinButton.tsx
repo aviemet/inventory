@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from '@/Components'
-import { type ILinkProps } from '../Link'
+import { type LinkProps } from '../Link'
 import { CheckinIcon } from '@/Components/Icons'
 import { Tooltip, useMantineTheme } from '@mantine/core'
 
-interface ICheckinButtonProps extends Omit<ILinkProps, 'children'> {
+interface CheckinButtonProps extends Omit<LinkProps, 'children'> {
 	href: string
 	label?: string
 	disabled?: boolean
 	tooltipMessage?: string | false | null
 }
 
-const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: ICheckinButtonProps) => {
+const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: CheckinButtonProps) => {
 	const { other: { colors: { checkinButtonColor } } } = useMantineTheme()
 
 	const finalProps = props

@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon, SettingsIcon } from '@/Components/Icons'
 import PeopleTable from '../Table'
 
-interface IPeopleIndexProps {
+interface PeopleIndexProps {
 	people: Schema.PeopleIndex[]
 	pagination: Schema.Pagination
 }
 
-const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
+const PeopleIndex = ({ people, pagination }: PeopleIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="People"

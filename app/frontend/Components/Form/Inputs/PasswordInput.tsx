@@ -1,6 +1,6 @@
 import React from 'react'
 import PasswordInput, { type PasswordInputProps } from '@/Components/Inputs/PasswordInput'
-import Field from '../Field'
+import Field from '../Components/Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type InputConflicts, type BaseFormInputProps } from '.'

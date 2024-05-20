@@ -6,9 +6,9 @@ import { useGetPeopleAsOptions } from '@/queries/people'
 import { isEmpty } from 'lodash'
 import { type AsyncDropdown } from '.'
 
-interface IPeopleDropdown extends AsyncDropdown<Schema.PeopleOptions> {}
+interface PeopleDropdownProps extends AsyncDropdown<Schema.PeopleOptions> {}
 
-const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
+const PeopleDropdown = forwardRef<HTMLInputElement, PeopleDropdownProps>((
 	{ label = 'Person', name = 'person_id', initialData, value, ...props },
 	ref,
 ) => {

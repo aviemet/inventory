@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import TicketsTable from '../Table'
 
-interface ITicketsIndexProps {
+interface TicketsIndexProps {
 	tickets: Schema.TicketsIndex[]
 	pagination: Schema.Pagination
 }
 
-const TicketsIndex = ({ tickets, pagination }: ITicketsIndexProps) => {
+const TicketsIndex = ({ tickets, pagination }: TicketsIndexProps) => {
 	const title = 'Support Tickets'
 	return (
 		<IndexPageTemplate

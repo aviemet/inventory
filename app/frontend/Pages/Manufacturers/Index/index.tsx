@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import ManufacturersTable from '../Table'
 
-interface IManufacturersIndexProps {
+interface ManufacturersIndexProps {
 	manufacturers: Schema.ManufacturersIndex[]
 	pagination: Schema.Pagination
 }
 
-const ManufacturersIndex = ({ manufacturers, pagination }: IManufacturersIndexProps) => {
+const ManufacturersIndex = ({ manufacturers, pagination }: ManufacturersIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Manufacturers"

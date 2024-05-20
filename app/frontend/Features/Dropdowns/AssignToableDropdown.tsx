@@ -4,18 +4,18 @@ import { useForm } from 'use-inertia-form'
 import LocationsForm from '@/Pages/Locations/Form'
 import { Routes } from '@/lib'
 
-type TAssignToableOptions = Schema.ItemsOptions[]|Schema.PeopleOptions[]|Schema.LocationsOptions[]
+type AssignToableOptions = Schema.ItemsOptions[]|Schema.PeopleOptions[]|Schema.LocationsOptions[]
 
-interface IAssignToableDropdownProps {
+interface AssignToableDropdownProps {
 	items?: Schema.ItemsOptions[]
 	people?: Schema.PeopleOptions[]
 	locations?: Schema.LocationsOptions[]
-	options: TAssignToable[]
+	options:AssignToable[]
 }
 
-const AssignToableDropdown = ({ items, people, locations, options = ['Person', 'Item', 'Location'] }: IAssignToableDropdownProps) => {
+const AssignToableDropdown = ({ items, people, locations, options = ['Person', 'Item', 'Location'] }: AssignToableDropdownProps) => {
 	const { data, setData } = useForm<{ assignment: Schema.AssignmentsFormData }>()
-	const type: TAssignToable = data.assignment.assign_toable_type || options[0]
+	const type: AssignToable = data.assignment.assign_toable_type || options[0]
 
 	useEffect(() => {
 		if(!type) {
@@ -23,15 +23,15 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 		}
 	}, [])
 
-	const modelMapping = new Map<TAssignToable, TAssignToableOptions>()
+	const modelMapping = new Map<AssignToable, AssignToableOptions>()
 	if(items) modelMapping.set('Item', items)
 	if(people) modelMapping.set('Person' ,people)
 	if(locations) modelMapping.set('Location', locations)
 
 	const model = modelMapping.get(type)
 
-	const [optionsValues, setOptionsValues] = useState<TAssignToableOptions>(model!)
-	const strModelNameRef = useRef<TAssignToable>('Person')
+	const [optionsValues, setOptionsValues] = useState<AssignToableOptions > (model!)
+	const strModelNameRef = useRef<AssignToable > ('Person')
 
 	useEffect(() => {
 		if(type === strModelNameRef.current) return

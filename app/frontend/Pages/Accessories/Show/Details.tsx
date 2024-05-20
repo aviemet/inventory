@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, Heading, Table, Box, Money } from '@/Components'
 import { Routes } from '@/lib'
-import { IShowAccessoryProps } from '.'
+import { ShowAccessoryProps } from '.'
 
-const AccessoryDetails = ({ accessory }: IShowAccessoryProps) => {
+const AccessoryDetails = ({ accessory }: ShowAccessoryProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>Details</Heading>

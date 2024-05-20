@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react'
 import { TableSectionContextProvider, useTableContext } from './TableContext'
 import { Table, LoadingOverlay, type TableTbodyProps } from '@mantine/core'
 
-interface ITableBody extends TableTbodyProps {}
+interface TableBody extends TableTbodyProps {}
 
-const Body = forwardRef<HTMLTableSectionElement, ITableBody>(({ children, ...props }, ref) => {
+const Body = forwardRef<HTMLTableSectionElement, TableBody>(({ children, ...props }, ref) => {
 	const tableState = useTableContext(false)
 
 	if(tableState === null) {
