@@ -140,6 +140,10 @@ export const searchInput = css`
 	}
 `
 
+export const pagination = css`
+	display: inline-block;
+	max-width: 60px;
+`
 
 // &:before, &:after {
 // 	position: absolute,

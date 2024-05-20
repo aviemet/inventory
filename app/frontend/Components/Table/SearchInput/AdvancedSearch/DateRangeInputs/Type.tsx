@@ -17,11 +17,17 @@ const Type = ({
 }: AdvancedInputProps) => {
 	const { inputProps, setInputValue } = advancedSearch
 
+	const handleChange = (value: DateRangeType|null) => {
+		if(!value) return
+
+		setInputValue(`${name}[type]`, value)
+	}
+
 	return (
 		<Select
 			label="Creation Date"
 			{ ...inputProps(`${name}[type]`) }
-			onChange={ (value: DateRangeType) => setInputValue(`${name}[type]`, value) }
+			onChange={ handleChange }
 			options={ dateRangeOptions }
 		/>
 	)

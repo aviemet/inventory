@@ -5,7 +5,7 @@ import { useFormFormat } from '../Form'
 
 export interface FieldProps extends BoxProps {
 	children: React.ReactNode
-	type?:IputType
+	type?: InputType
 	required?: boolean
 	errors?: boolean
 }

@@ -20,4 +20,4 @@ export interface BaseInputProps {
 	wrapper?: boolean
 }
 
-export type DateInputValue = DateValue | DatesRangeValue | Date[] | undefined | null
+export type DateInputValue = DateValue | DatesRangeValue | Date[] | undefined

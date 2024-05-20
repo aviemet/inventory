@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import { Button, Group } from '@/Components'
 import axios from 'axios'
-import useStateMachine from '@cassiozen/usestatemachine'
+import useStateMachine, { t } from '@cassiozen/usestatemachine'
 import { CheckIcon, CrossIcon } from '@/Components/Icons'
 import { InfoCircle } from 'tabler-icons-react'
 import { Avatar, ButtonProps, HoverCard, Text } from '@mantine/core'
 
+type StateMachineContext = {
+	icon: React.ReactNode
+	color: string
+}
 
 interface TestResponseButtonProps extends ButtonProps {
 	children?: string
 	endpoint: string
 	method?: HTTPVerb
-	data: any
+	data?: unknown
 }
 
 /**
@@ -22,15 +26,18 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 	const [errorMessage, setErrorMessage] = useState('')
 
 	const [requestState, setRequestState] = useStateMachine({
+		schema: {
+			context: t<StateMachineContext>,
+		},
 		initial: 'inactive',
-		context:{
+		context: {
 			icon: <></>,
 			color: 'primary',
 		},
 		states: {
 			inactive: {
 				on: { requesting: 'requesting' },
-				effect({ setContext }) {
+				effect({ context, event, setContext }) {
 					setErrorMessage('')
 					setContext(() => ({
 						icon: <></>,

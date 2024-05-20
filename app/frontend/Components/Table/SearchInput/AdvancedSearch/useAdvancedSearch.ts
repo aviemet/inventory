@@ -12,12 +12,12 @@ interface Options {
 	path: string
 }
 
-export type InputParam<T = string> = {
+export type InputParam<T = string|Date> = {
 	name: string
 	default?: T
 	dependent?: string|string[]
 	keyUpListener?: boolean
-	type?:SpecialSearchTypes
+	type?: SpecialSearchTypes
 }
 
 export type ParamValue = string|number|Date|Date[]|undefined|null
@@ -106,12 +106,13 @@ const useAdvancedSearch = (
 	}, [localInputParams])
 
 	// Method returned from hook to be passed to an input
-	const buildInputProps = <T = string>(name: InputParamName) => {
+	const buildInputProps = <T = string|Date>(name: InputParamName) => {
 		const param = localInputParams.find(param => param.name === name)
 
 		let value: T
 		switch(param?.type) {
 			case 'date':
+				// @ts-ignore
 				value = new Date(values.get(name))
 				break
 			default:

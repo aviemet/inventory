@@ -42,4 +42,3 @@ const AssetsDropdown = forwardRef<HTMLInputElement, AssetsDropdownProps>((
 })
 
 export default AssetsDropdown
-

@@ -9,7 +9,7 @@ import { type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 
 interface ControlOption extends SegmentedControlItem {
-	defaultModel?: AsignToable
+	defaultModel?: AssignToable
 }
 
 export interface SegmentedControlProps extends Omit<MantineSegmentedControlProps, 'data'>, BaseInputProps {

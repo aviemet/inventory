@@ -6,9 +6,14 @@ import { type DateInputValue, type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 import { isUnset } from '@/lib'
 
-export interface DateInputProps extends Omit<DatePickerInputProps, 'onChange'>, BaseInputProps {
+export interface DateInputProps
+	extends
+	Omit<DatePickerInputProps, 'onChange'|'value'>,
+	BaseInputProps
+{
 	name?: string
 	id?: string
+	value: DateInputValue
 	error?: string | string[]
 	onChange?: (date: DateInputValue) => void
 }

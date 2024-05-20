@@ -5,7 +5,8 @@ import { Link } from '@/Components'
 import { LinkProps } from '../Link'
 import * as classes from './Menu.css'
 
-interface MenuItemProps extends MantineItemProps, Omit<LinkProps, 'color'|'children'|'classNames'|'styles'> {
+type DuplicateProps = 'color'|'children'|'classNames'|'styles'|'variant'|'vars'
+interface MenuItemProps extends MantineItemProps, Omit<LinkProps, DuplicateProps> {
 	disabled?: boolean
 	type?: string
 }

@@ -14,7 +14,8 @@ import {
 	Box,
 } from '@mantine/core'
 
-export { default as useAdvancedSearch } from './useAdvancedSearch'
+import cx from 'clsx'
+import * as classes from './AdvancedSearch.css'
 
 const scaleY = {
 	in: { opacity: 1, transform: 'scaleY(1)' },
@@ -72,13 +73,11 @@ const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 						ref={ setSearchPaper }
 						shadow="md"
 						p="md"
+						className={ cx(classes.paper) }
 						style={ {
 							...styles,
-							position: 'absolute',
 							left: rem(navBarWidth + Number(px('1rem'))),
-							right: '1rem',
 							top: searchButton ? rem(searchButton.getBoundingClientRect().bottom + 10) : undefined,
-							zIndex: 10,
 						} }
 					>
 						<Box>
@@ -92,3 +91,5 @@ const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 }
 
 export default AdvancedSearch
+
+export { default as useAdvancedSearch } from './useAdvancedSearch'

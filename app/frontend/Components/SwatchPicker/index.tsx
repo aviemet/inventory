@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react'
-import { Group, useMantineTheme, ColorSwatch, CheckIcon, rem } from '@mantine/core'
+import { Group, useMantineTheme, ColorSwatch, CheckIcon, rem, useComputedColorScheme } from '@mantine/core'
+import cx from 'clsx'
+import * as classes from './SwatchPicker.css'
 
 export interface SwatchPickerProps {
 	value: string
@@ -7,6 +9,7 @@ export interface SwatchPickerProps {
 }
 
 const SwatchPicker = ({ value, onChange }: SwatchPickerProps) => {
+	const colorScheme = useComputedColorScheme()
 	const theme = useMantineTheme()
 
 	const colors = useCallback(() => {
@@ -14,30 +17,27 @@ const SwatchPicker = ({ value, onChange }: SwatchPickerProps) => {
 			return !['dark','gray'].includes(color)
 		}).map((color) => (
 			<ColorSwatch
-				color={ theme.colorScheme === 'dark' ? theme.colors[color][7] : theme.colors[color][5] }
+				key={ color }
+				color={ colorScheme === 'dark' ? theme.colors[color][7] : theme.colors[color][5] }
 				component="button"
 				type="button"
-				key={ color }
 				onClick={ () => onChange(color) }
 				radius="sm"
+				className={ cx(classes.colorSwatch) }
 				style={ {
-					cursor: 'pointer',
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'center',
-					color: theme.colorScheme === 'dark' ? theme.colors[color][2] : theme.white,
+					color: colorScheme === 'dark' ? theme.colors[color][2] : theme.white,
 
 				} }
 			>
 				{ value === color && <CheckIcon width={ rem(12) } height={ rem(12) } /> }
 			</ColorSwatch>
 		))
-	}, [value, theme.colorScheme])
+	}, [value, colorScheme])
 
 	return (
-		<Group gap={ 2 } mt={ 5 }>{
-			colors()
-		}</Group>
+		<Group gap={ 2 } mt={ 5 }>
+			{ colors() }
+		</Group>
 	)
 }
 

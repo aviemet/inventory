@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { DateInput, type DateInputValue } from '@/Components/Inputs'
 import { type AdvancedInputProps } from '.'
-// import { type DateValue } from '@mantine/dates'
 
 const Date = ({
 	advancedSearch,
@@ -11,7 +10,9 @@ const Date = ({
 
 	const { mb, wrapperProps, value } = inputProps<DateInputValue>(`${name}[start]`)
 
-	const handleChange = (value: DateInputValue) => {
+	const handleChange = (value?: DateInputValue) => {
+		if(value === undefined) return
+
 		if(Array.isArray(value)) {
 			setInputValue(`${name}[start]`, value[0])
 			setInputValue(`${name}[end]`, value[1])

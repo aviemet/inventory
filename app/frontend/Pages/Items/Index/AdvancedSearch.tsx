@@ -80,7 +80,7 @@ const AdvancedItemsSearch = () => {
 						<CurrencyInput
 							label="Cost"
 							{ ...inputProps('cost') }
-							onChange={ e => setInputValue('cost', e.target.value) }
+							onChange={ value => setInputValue('cost', value) }
 						/>
 					</Group>
 				</Box>
