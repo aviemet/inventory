@@ -4,6 +4,7 @@ import { NewIcon } from '@/Components/Icons'
 import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
 import ConsumablesTable from '@/Pages/Consumables/Table'
+import { type PaginatedModel } from '@/types/PaginatedModel'
 
 interface DetailsProps {
 	department: Schema.Department

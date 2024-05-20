@@ -1,8 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useMemo } from 'react'
 import { Select, SegmentedControl } from '@/Components/Form'
-import { useForm } from 'use-inertia-form'
+import { useForm, type UseFormProps, type NestedObject } from 'use-inertia-form'
 import LocationsForm from '@/Pages/Locations/Form'
 import { Routes } from '@/lib'
+import { ComboboxData, SelectOption } from '@/Components/Form/Inputs/Select'
+
+type AssignToableTypes = 'Person'|'Item'|'Location'
 
 type AssignToableOptions = Schema.ItemsOptions[]|Schema.PeopleOptions[]|Schema.LocationsOptions[]
 
@@ -10,12 +13,12 @@ interface AssignToableDropdownProps {
 	items?: Schema.ItemsOptions[]
 	people?: Schema.PeopleOptions[]
 	locations?: Schema.LocationsOptions[]
-	options:AssignToable[]
+	options: AssignToableTypes[]
 }
 
 const AssignToableDropdown = ({ items, people, locations, options = ['Person', 'Item', 'Location'] }: AssignToableDropdownProps) => {
 	const { data, setData } = useForm<{ assignment: Schema.AssignmentsFormData }>()
-	const type: AssignToable = data.assignment.assign_toable_type || options[0]
+	const type: AssignToableTypes = data.assignment.assign_toable_type || options[0]
 
 	useEffect(() => {
 		if(!type) {
@@ -23,43 +26,50 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 		}
 	}, [])
 
-	const modelMapping = new Map<AssignToable, AssignToableOptions>()
+	const modelMapping = new Map<AssignToableTypes, AssignToableOptions>()
 	if(items) modelMapping.set('Item', items)
 	if(people) modelMapping.set('Person' ,people)
 	if(locations) modelMapping.set('Location', locations)
 
 	const model = modelMapping.get(type)
 
-	const [optionsValues, setOptionsValues] = useState<AssignToableOptions > (model!)
-	const strModelNameRef = useRef<AssignToable > ('Person')
+	const [optionsData, setOptionsData] = useState<AssignToableOptions>(model!)
+
+	const optionsValues = useMemo(() => optionsData.map(option => ({
+		label: option.name,
+		value: option.id ? String(option.id) : '',
+	})), [optionsData])
+
+	const strModelNameRef = useRef<AssignToableTypes> ('Person')
 
 	useEffect(() => {
 		if(type === strModelNameRef.current) return
 
-		setOptionsValues(model!)
+		setOptionsData(model!)
 		strModelNameRef.current = type
 		setData('assignment.assign_toable_id', '')
 	}, [type])
 
-	const handleAssignToableChange = (id: string|null) => {
+	const handleAssignToableChange = (option: SelectOption | null, options: ComboboxData, form: UseFormProps<NestedObject>) => {
 		let default_location: number|null|undefined
 
 		switch(type) {
 			case 'Person':
-				const person = people?.find(person => String(person.id) === id)
+				const person = people?.find(person => String(person.id) === option)
 				default_location = person?.default_location_id
 				break
 			case 'Item':
-				const item = items?.find(item => String(item.id) === id)
+				const item = items?.find(item => String(item.id) === option)
 				default_location = item?.default_location_id
 				break
 			case 'Location':
-				const location = locations?.find(location => String(location.id) === id)
+				const location = locations?.find(location => String(location.id) === option)
 				default_location = location?.id
 				break
 		}
 
 		if(default_location) {
+			// @ts-expect-error 'Type instantiation is excessively deep and possibly infinite'
 			setData('assignment.location_id', String(default_location))
 		}
 	}
@@ -89,3 +99,4 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 }
 
 export default AssignToableDropdown
+

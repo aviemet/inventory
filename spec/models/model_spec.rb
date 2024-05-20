@@ -14,9 +14,10 @@
 #
 # Indexes
 #
-#  index_models_on_category_id      (category_id)
-#  index_models_on_manufacturer_id  (manufacturer_id)
-#  index_models_on_slug             (slug) UNIQUE
+#  index_models_on_category_id            (category_id)
+#  index_models_on_manufacturer_id        (manufacturer_id)
+#  index_models_on_name_and_model_number  (name,model_number) UNIQUE
+#  index_models_on_slug                   (slug) UNIQUE
 #
 # Foreign Keys
 #

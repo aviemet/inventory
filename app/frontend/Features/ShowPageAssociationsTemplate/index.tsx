@@ -5,7 +5,7 @@ import { ArrowRightSquareIcon, CheckoutIcon } from '@/Components/Icons'
 import { CheckinButton } from '@/Components/Button'
 
 interface ShowPageAssociationsProps {
-	assignToable: Schema.Item|Schema.Accessory|Schema.Consumable|Schema.Component|Schema.License
+	assignToable: Schema.ItemsShow|Schema.AccessoriesShow|Schema.ConsumablesShow|Schema.ComponentsShow|Schema.LicensesShow
 	checkinRoute?: (assignToableId: string|number, assignmentId: string|number) => string
 }
 

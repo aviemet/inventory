@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Features/Contactable'
-import { type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type VendorFormData = {
 	vendor: Schema.VendorsFormData

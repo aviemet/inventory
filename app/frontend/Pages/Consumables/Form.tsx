@@ -7,9 +7,9 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
 import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type ConsumableFormData = {
 	consumable: Schema.ConsumablesFormData

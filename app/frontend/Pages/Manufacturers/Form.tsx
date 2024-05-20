@@ -4,7 +4,7 @@ import {
 	TextInput,
 	Submit,
 } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type ManufacturerFormData = {
 	manufacturer: Schema.ManufacturersFormData

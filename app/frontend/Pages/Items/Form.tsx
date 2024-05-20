@@ -13,8 +13,8 @@ import {
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown, DepartmentsDropdown } from '@/Features/Dropdowns'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { Group } from '@/Components'
-import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type ItemFormData = {
 	item: Schema.ItemsFormData

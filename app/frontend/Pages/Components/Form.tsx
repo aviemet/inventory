@@ -8,8 +8,8 @@ import {
 	FormGroup,
 } from '@/Components/Form'
 import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Features/Dropdowns'
-import { type UseFormProps } from 'use-inertia-form'
-import { coerceArray } from '../../lib/collections'
+import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type ComponentFormData = {
 	component: Schema.ComponentsFormData

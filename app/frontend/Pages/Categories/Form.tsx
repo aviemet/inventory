@@ -7,7 +7,7 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
-import { type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 interface CategoryFormData {
 	category: Schema.CategoriesFormData

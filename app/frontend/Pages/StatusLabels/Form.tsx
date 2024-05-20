@@ -5,7 +5,7 @@ import {
 	Textarea,
 	Submit,
 } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type StatusLabelFormData = {
 	status_label: Schema.StatusLabelsFormData

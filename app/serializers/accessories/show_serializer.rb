@@ -1,36 +1,18 @@
-class Accessories::ShowSerializer < Assignable::QuantitySerializer
-  object_as :accessory
-
+class Accessories::ShowSerializer < AccessorySerializer
   attributes(
     :id,
-    :name,
-    :serial,
-    :asset_tag,
-    :min_qty,
-    :qty,
-    :cost_currency,
-    :requestable,
-    :notes,
-    :model_id,
-    :vendor_id,
-    :default_location_id,
-    :created_at,
-    :updated_at,
   )
 
-  type :number
-  def cost
-    currency_for(accessory)
-  end
-
-  has_many :assignments, serializer: AssignmentSerializer
+  has_one :company, serializer: CompanySerializer
   has_one :purchase, serializer: PurchaseSerializer
   has_many :activities, serializer: ActivitySerializer
+  has_many :assignments, serializer: AssignmentSerializer
+  has_many :documentations, serializer: Documentations::IndexSerializer
+  belongs_to :category, serializer: CategorySerializer
   belongs_to :default_location, serializer: LocationSerializer
   belongs_to :department, serializer: DepartmentSerializer
-  belongs_to :model, serializer: ModelSerializer
-  belongs_to :vendor, serializer: VendorSerializer
-  belongs_to :category, serializer: CategorySerializer
   belongs_to :manufacturer, serializer: ManufacturerSerializer
-  has_many :documentations, serializer: Documentations::IndexSerializer
+  belongs_to :model, serializer: ModelSerializer
+  belongs_to :status_label, serializer: StatusLabelSerializer
+  belongs_to :vendor, serializer: VendorSerializer
 end

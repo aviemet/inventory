@@ -66,7 +66,7 @@ const Checkout = ({ assignment, item, ...models }: CheckoutItemProps) => {
 
 					<AssignToableDropdown { ...models } options={ ['Person', 'Item', 'Location'] } />
 
-					<AssignmentLocationDropdown />
+					<AssignmentLocationDropdown required />
 
 					<DateTimeInput
 						label="Assigned At"
@@ -75,6 +75,7 @@ const Checkout = ({ assignment, item, ...models }: CheckoutItemProps) => {
 					/>
 
 					<DateTimeInput
+						clearable
 						label="Expected At"
 						name="expected_at"
 					/>

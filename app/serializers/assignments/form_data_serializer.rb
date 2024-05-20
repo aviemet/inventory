@@ -15,8 +15,8 @@ class Assignments::FormDataSerializer < ApplicationSerializer
     :created_by_id,
     :created_at,
     :updated_at,
-    assign_toable_type: { type: :AssignToable },
-    assignable_type: { type: :Assignable },
+    assign_toable_type: { type: :AssignToableTypes },
+    assignable_type: { type: :AssignableTypes },
   )
 
 end

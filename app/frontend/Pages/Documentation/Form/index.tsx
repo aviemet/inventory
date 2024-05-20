@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, TextInput, Submit, RichText } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
 import DocumentableSearch from './DocumentableSearch'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type DocumentationFormData = {
 	documentation: Schema.DocumentationsFormData

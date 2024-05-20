@@ -1,9 +1,10 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
 import { LocationsDropdown } from '@/Features/Dropdowns'
 import CurrenciesDropdown from '@/Features/Dropdowns/CurrenciesDropdown'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { ComboboxItem } from '@mantine/core'
 
 export type LocationFormData = {
 	location: Schema.LocationsFormData
@@ -43,7 +44,9 @@ const LocationForm = ({
 			<LocationsDropdown
 				label="Parent Location"
 				name="parent_id"
-				filter={ locations => locations.id !== location?.id }
+				filter={ location?.id === undefined ? undefined : ({ options }) => (options as ComboboxItem[]).filter((option) => {
+					return option.value !== String(location.id)
+				}) }
 				initialData={ coerceArray(location?.parent) }
 			/>
 

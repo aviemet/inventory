@@ -5,6 +5,7 @@ import useStateMachine, { t } from '@cassiozen/usestatemachine'
 import { CheckIcon, CrossIcon } from '@/Components/Icons'
 import { InfoCircle } from 'tabler-icons-react'
 import { Avatar, ButtonProps, HoverCard, Text } from '@mantine/core'
+import { type HTTPVerb } from 'use-inertia-form'
 
 type StateMachineContext = {
 	icon: React.ReactNode

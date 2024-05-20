@@ -8,11 +8,7 @@ import AccessoriesTable from '@/Pages/Accessories/Table'
 import ConsumablesTable from '@/Pages/Consumables/Table'
 import ComponentsTable from '@/Pages/Components/Table'
 import { omit } from 'lodash'
-
-type PaginatedModel<T> = {
-	data: T
-	pagination: Schema.Pagination
-}
+import { type PaginatedModel } from '@/types/PaginatedModel'
 
 interface ShowManufacturerProps {
 	manufacturer: Schema.ManufacturersShow

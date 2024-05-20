@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Features/Contactable'
-import { type UseFormProps } from 'use-inertia-form'
 import { CurrenciesDropdown } from '@/Features/Dropdowns'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type CompanyFormData = {
 	company: Schema.CompaniesFormData

@@ -9,11 +9,7 @@ import ComponentsTable from '@/Pages/Components/Table'
 import LicensesTable from '@/Pages/Licenses/Table'
 import ContractsTable from '@/Pages/Contracts/Table'
 import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
-
-type PaginatedModel<T> = {
-	data: T
-	pagination: Schema.Pagination
-}
+import { type PaginatedModel } from '@/types/PaginatedModel'
 
 interface VendorShowProps {
 	vendor: Schema.VendorsShow

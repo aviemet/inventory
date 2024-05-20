@@ -8,8 +8,8 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { CategoriesDropdown, VendorsDropdown } from '@/Features/Dropdowns'
-import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type ContractFormData = {
 	contract: Schema.ContractsFormData

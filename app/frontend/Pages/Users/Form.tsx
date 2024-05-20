@@ -5,7 +5,7 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { DepartmentsDropdown, PeopleDropdown } from '@/Features/Dropdowns'
-import { type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type UserFormData = {
 	user: Schema.UsersFormData

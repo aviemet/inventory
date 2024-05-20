@@ -4,11 +4,11 @@ import {
 	Textarea,
 	Submit,
 } from '@/Components/Form'
-import { coerceArray } from '@/lib'
 import { VendorsDropdown } from '@/Features/Dropdowns'
 import { Menu } from '@/Components'
 import { PlusCircleIcon } from '@/Components/Icons'
-import { UseFormProps } from 'use-inertia-form'
+import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type OrderFormData = {
 	order: Schema.OrdersFormData

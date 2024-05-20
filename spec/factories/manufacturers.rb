@@ -10,6 +10,7 @@
 #
 # Indexes
 #
+#  index_manufacturers_on_name  (name) UNIQUE
 #  index_manufacturers_on_slug  (slug) UNIQUE
 #
 FactoryBot.define do

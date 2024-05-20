@@ -7,7 +7,8 @@ import { ModalFormButton } from '@/Components/Button'
 import { useInertiaInput, type UseFormProps, NestedObject } from 'use-inertia-form'
 import { type BaseFormInputProps } from '.'
 
-type SelectOption = string | ComboboxItem | ComboboxItemGroup<string | ComboboxItem>
+export type SelectOption = string | ComboboxItem | ComboboxItemGroup<string | ComboboxItem>
+export { type ComboboxData, ComboboxItem, ComboboxItemGroup }
 
 type OmittedOverwrittenTypes = 'onFocus'|'onBlur'|'onChange'|'onClear'|'onDropdownOpen'|'onDropdownClose'|'onOptionSubmit'
 export interface FormSelectProps<TForm extends NestedObject = NestedObject>

@@ -7,9 +7,7 @@ import { useGetLocationsAsOptions } from '@/queries/locations'
 import { isEmpty } from 'lodash'
 import { type AsyncDropdown } from '.'
 
-interface LocationsDropdownProps extends AsyncDropdown<Schema.LocationsOptions> {
-	filter?: (location: Schema.LocationsOptions) => boolean
-}
+export interface LocationsDropdownProps extends AsyncDropdown<Schema.LocationsOptions> {}
 
 const LocationsDropdown = forwardRef<HTMLInputElement, LocationsDropdownProps>((
 	{ label = 'Location', name = 'location_id', filter, initialData, value, ...props },
@@ -17,7 +15,6 @@ const LocationsDropdown = forwardRef<HTMLInputElement, LocationsDropdownProps>((
 ) => {
 	const { data, isStale, refetch } = useGetLocationsAsOptions({
 		enabled: value !== undefined,
-		select: filter ? data => data.filter(filter) : undefined,
 		initialData,
 	})
 

@@ -1,20 +1,22 @@
 import React from 'react'
 import { useForm } from 'use-inertia-form'
 import { LocationsDropdown } from '.'
+import { type LocationsDropdownProps } from './LocationsDropdown'
 
-const LocationDropdown = () => {
-	const { data } = useForm<{ assignment: Schema.AssignmentsFormData}>()
-	const { assignment: { assign_toable_type: type } } = data
+const AssignmentLocationDropdown = ({ label = 'Location', name = 'location_id', ...props }: LocationsDropdownProps) => {
+	const { getData } = useForm<{ assignment: Schema.AssignmentsFormData}>()
+	// @ts-expect-error 'Type instantiation is excessively deep and possibly infinite.'
+	const assignmentType = getData('assignment.assign_toable_type')
 
-	if(type === 'Location') return <></>
+	if(assignmentType === 'Location') return <></>
 
 	return (
 		<LocationsDropdown
-			label="Location"
-			name="location_id"
-			required
+			label={ label }
+			name={ name }
+			{ ...props }
 		/>
 	)
 }
 
-export default LocationDropdown
+export default AssignmentLocationDropdown

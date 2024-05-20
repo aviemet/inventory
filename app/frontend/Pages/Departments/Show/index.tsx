@@ -8,6 +8,7 @@ import Components from './Components'
 import Consumables from './Consumables'
 import Licenses from './Licenses'
 import People from './People'
+import { type PaginatedModel } from '@/types/PaginatedModel'
 
 interface DepartmentShowProps {
 	department: Schema.DepartmentsShow

@@ -11,8 +11,8 @@ import {
 } from '@/Components/Form'
 import { CategoriesDropdown, ManufacturersDropdown, VendorsDropdown } from '@/Features/Dropdowns'
 import { Box, Grid } from '@/Components'
-import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type LicenseFormData = {
 	license: Schema.LicensesFormData

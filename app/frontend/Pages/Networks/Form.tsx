@@ -5,8 +5,8 @@ import {
 	Textarea,
 	Submit,
 } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
 import { IPAddress } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type NetworkFormData = {
 	network: Schema.NetworksFormData
