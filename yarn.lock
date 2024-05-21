@@ -11833,7 +11833,7 @@ __metadata:
     storybook: ^8.1.1
     tabler-icons-react: ^1.56.0
     typescript: ^5.4.5
-    use-inertia-form: ^3.7.0
+    use-inertia-form: ^4.0.0
     vite: ^5.2.11
     vite-plugin-dynamic-import: ^1.5.0
     vite-plugin-full-reload: ^1.1.0
@@ -17391,9 +17391,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-inertia-form@npm:^3.7.0":
-  version: 3.7.0
-  resolution: "use-inertia-form@npm:3.7.0"
+"use-inertia-form@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "use-inertia-form@npm:4.0.0"
   dependencies:
     "@inertiajs/react": ^1.0.16
     axios: ^1.6.8
@@ -17402,7 +17402,7 @@ __metadata:
   peerDependencies:
     "@inertiajs/react": ^1.0.0
     react: ^16.9.0 || ^17.0.0 || ^18.0.0
-  checksum: 3a421b32bdb104b19bae2559b5ade4a1a77a7efb626c16987fd865db515b73bdc4207836c21d8e67d2b57723c92923f860322cc82e9009a036dfe206e621aaec
+  checksum: 099278c4c9f26dbd83a150f78810a5663f7f06c1682207f09b28e05d2ac3c736046985fa8e6b1c4638d3e0fc3af0e82097b31c1fb6db6ec0b0a35310a49a515e
   languageName: node
   linkType: hard
 

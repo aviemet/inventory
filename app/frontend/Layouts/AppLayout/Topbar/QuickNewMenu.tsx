@@ -33,37 +33,37 @@ const QuickNewMenu = () => {
 
 			<Menu.Dropdown>
 				<Menu.Link href={ Routes.newItem() } leftSection={ <ItemsIcon /> }>
-					New Item
+					Item
 				</Menu.Link>
 				<Menu.Link href={ Routes.newAccessory() } leftSection={ <AccessoriesIcon /> }>
-					New Accessory
+					Accessory
 				</Menu.Link>
 				<Menu.Link href={ Routes.newComponent() } leftSection={ <ComponentsIcon /> }>
-					New Component
+					Component
 				</Menu.Link>
 				<Menu.Link href={ Routes.newConsumable() } leftSection={ <ConsumablesIcon /> }>
-					New Consumable
+					Consumable
 				</Menu.Link>
 				<Menu.Link href={ Routes.newLicense() } leftSection={ <LicensesIcon /> }>
-					New License
+					License
 				</Menu.Link>
 
 				<Menu.Divider />
 
 				<Menu.Link href={ Routes.newPerson() } leftSection={ <PeopleIcon /> }>
-					New Person
+					Person
 				</Menu.Link>
 				<Menu.Link href={ Routes.newVendor() } leftSection={ <VendorsIcon /> }>
-					New Vendor
+					Vendor
 				</Menu.Link>
 
 				<Menu.Divider />
 
 				<Menu.Link href={ Routes.newTicket() } leftSection={ <TicketsIcon /> }>
-					New Ticket
+					Ticket
 				</Menu.Link>
 				<Menu.Link href={ Routes.newDocumentation() } leftSection={ <DocumentationIcon /> }>
-					New Documentation
+					Documentation
 				</Menu.Link>
 			</Menu.Dropdown>
 		</Menu>
