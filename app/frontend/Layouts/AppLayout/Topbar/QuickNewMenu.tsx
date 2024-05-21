@@ -13,22 +13,15 @@ import {
 	DocumentationIcon,
 } from '@/Components/Icons'
 import { Routes } from '@/lib'
-import { useViewportSize } from '@mantine/hooks'
-import { px, useMantineTheme, useComputedColorScheme } from '@mantine/core'
+
+import cx from 'clsx'
+import * as classes from './TopBar.css'
 
 const QuickNewMenu = () => {
-	const { width } = useViewportSize()
-	const theme = useMantineTheme()
-	const computedColorScheme = useComputedColorScheme('dark')
-
-	if(width < Number(px(theme.breakpoints.sm))) {
-		return <></>
-	}
-
 	return (
 		<Menu position="bottom-end">
 			<Menu.Target>
-				<Button variant="default" leftSection={ <PlusCircleIcon /> }> New</Button>
+				<Button variant="default" leftSection={ <PlusCircleIcon /> } className={ cx(classes.newMenu) }> New</Button>
 			</Menu.Target>
 
 			<Menu.Dropdown>

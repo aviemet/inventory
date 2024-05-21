@@ -23,7 +23,17 @@ export interface LinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 const externalPrefix = ['http', 'www']
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((
-	{ children, href, as = 'a', method, visit, external, onProgress, preserveScroll, buttonProps, ...props },
+	{
+		children,
+		href,
+		as = 'a',
+		method,
+		visit,
+		external,
+		onProgress,
+		preserveScroll,
+		...props
+	},
 	ref,
 ) => {
 	const renderExternal = useMemo(() => {

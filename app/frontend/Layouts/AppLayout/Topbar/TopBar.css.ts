@@ -21,3 +21,9 @@ export const wrapper = css`
 	align-items: center;
 	height: 100%;
 `
+
+export const newMenu = css`
+	@media(max-width: ${vars.breakpoints.sm}) {
+		display: none;
+	}
+`
