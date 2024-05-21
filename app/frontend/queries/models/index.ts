@@ -14,7 +14,10 @@ export const useGetModels: ReactQueryFunction<Schema.Model[], { category: string
 	})
 }
 
-export const useGetModelsAsOptions: ReactQueryFunction<Schema.ModelsOptions[], { category: string }> = ({ category }, options) => {
+export const useGetModelsAsOptions: ReactQueryFunction<
+	Schema.ModelsOptions[],
+	{ category?: string }
+> = ({ category }, options) => {
 	return useQuery({
 		queryKey: ['models', category, 'options'],
 		queryFn: async () => {

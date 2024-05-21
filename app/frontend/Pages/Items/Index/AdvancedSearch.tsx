@@ -6,7 +6,7 @@ import { useAdvancedSearch } from '@/Components/Table'
 import { CategoriesDropdown } from '@/Features/Dropdowns'
 import ManufacturersDropdown from '@/Features/Dropdowns/ManufacturersDropdown'
 import VendorsDropdown from '@/Features/Dropdowns/VendorsDropdown'
-import DepartmentsDropdown from '@/Features/Dropdowns/DepartmentsDropdown'
+import { DepartmentsDropdown } from '@/Features/Dropdowns'
 import ModelsDropdown from '@/Features/Dropdowns/ModelsDropdown'
 import { SearchDateInput, SearchDateTypeInput } from '@/Components/Table/SearchInput/AdvancedSearch/DateRangeInputs'
 

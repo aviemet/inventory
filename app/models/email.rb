@@ -27,7 +27,7 @@ class Email < ApplicationRecord
   tracked
   resourcify
 
-  validates :email, presense: true
+  validates :email, presence: true
 
   belongs_to :contact
 end

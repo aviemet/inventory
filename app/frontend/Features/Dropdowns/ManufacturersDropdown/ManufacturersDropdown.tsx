@@ -5,7 +5,7 @@ import { Routes, useInFormContext } from '@/lib'
 import ManufacturersForm from '@/Pages/Manufacturers/Form'
 import { useGetManufacturersAsOptions } from '@/queries/manufacturers'
 import { isEmpty } from 'lodash'
-import { type AsyncDropdown } from '.'
+import { type AsyncDropdown } from '..'
 
 interface ManufacturersDropdownProps extends AsyncDropdown<Schema.ManufacturersOptions> {}
 
