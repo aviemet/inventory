@@ -53,6 +53,8 @@ class Contract < ApplicationRecord
   resourcify
 
   validates :name, presence: true
+  validates :vendor_id, presence: true
+  validates :category_id, presence: true
 
   belongs_to :vendor
 

@@ -8,7 +8,7 @@ export const globals = css`
 		}
 
 		*::selection {
-			background-color: ${vars.colors.primary[2]}; // [2]
+			background-color: ${vars.colors.primaryColors[1]}; // [2]
 		}
 
 		.hidden {

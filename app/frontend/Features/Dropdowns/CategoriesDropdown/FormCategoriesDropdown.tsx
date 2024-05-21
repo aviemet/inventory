@@ -1,50 +1,49 @@
 import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
-import { Select as InputSelect } from '@/Components/Inputs'
-import { Routes, useInFormContext } from '@/lib'
+import { Routes } from '@/lib'
 import CategoriesForm from '@/Pages/Categories/Form'
 import { useGetCategoriesAsOptions } from '@/queries/categories'
 import { isEmpty } from 'lodash'
-import { type AsyncDropdown } from '..'
+import { type FormAsyncDropdown } from '..'
 
-interface CategoriesDropdownProps extends AsyncDropdown<Schema.CategoriesOptions> {
+interface FormCategoriesDropdownProps extends Omit<FormAsyncDropdown<Schema.CategoriesOptions>, 'name'> {
+	name?: string
 	categorizable_type?: Schema.CategoryTypes
 }
 
-const CategoriesDropdown = forwardRef<HTMLInputElement, CategoriesDropdownProps>((
+const FormCategoriesDropdown = forwardRef<HTMLInputElement, FormCategoriesDropdownProps>((
 	{ label = 'Category', name = 'category_id', categorizable_type, initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = useGetCategoriesAsOptions(categorizable_type, {
+	const { data, isStale, refetch } = useGetCategoriesAsOptions({ categoryType: categorizable_type }, {
 		enabled: value !== undefined,
 		initialData,
 	})
 
-	const commonProps = {
-		ref,
-		label,
-		name,
-		options: !data ? [] : data.map(category => ({
-			label: category.name,
-			value: String(category.id),
-		})),
-		onDropdownOpen: () => {
-			if(isEmpty(data) || isStale) refetch()
-		},
-		searchable: true,
-		clearable: true,
-		value,
-		...props,
-	}
-
 	return (
 		<FormSelect
-			newForm={ <CategoriesForm
-				to={ Routes.apiCategories() }
-			/> }
-			{ ...commonProps }
+			ref={ ref }
+			label={ label }
+			name={ name }
+			options={ !data ? [] : data.map(category => ({
+				label: category.name!,
+				value: String(category.id),
+			})) }
+			onDropdownOpen={ () => {
+				if(isEmpty(data) || isStale) refetch()
+			} }
+			searchable
+			clearable
+			value={ value }
+			newForm={
+				<CategoriesForm
+					to={ Routes.apiCategories() }
+					categoryType='Contract'
+				/>
+			}
+			{ ...props }
 		/>
 	)
 })
 
-export default CategoriesDropdown
+export default FormCategoriesDropdown

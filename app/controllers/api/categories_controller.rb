@@ -1,7 +1,7 @@
 class Api::CategoriesController < Api::ApiController
   expose :categories, -> {
-    if params[:category]
-      @active_company.categories.find_by(type: params[:category])
+    if params[:category_type]
+      @active_company.categories.where(categorizable_type: params[:category_type])
     else
       @active_company.categories
     end
@@ -19,6 +19,7 @@ class Api::CategoriesController < Api::ApiController
   end
 
   # @route GET /api/options/categories (api_categories_options)
+  # @route GET /api/options/categories/:category_type (api_category_options)
   def options
     render json: categories.render(view: :options)
   end

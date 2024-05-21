@@ -106,6 +106,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "categorizable_type"], name: "index_categories_on_name_and_categorizable_type", unique: true
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
@@ -567,7 +568,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.bigint "active_company_id"
-    t.boolean "active", default: true
+    t.boolean "active", default: true, null: false
     t.jsonb "table_preferences", default: {}
     t.jsonb "user_preferences", default: {}
     t.index ["active_company_id"], name: "index_users_on_active_company_id"

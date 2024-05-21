@@ -12,7 +12,8 @@
 #
 # Indexes
 #
-#  index_categories_on_slug  (slug) UNIQUE
+#  index_categories_on_name_and_categorizable_type  (name,categorizable_type) UNIQUE
+#  index_categories_on_slug                         (slug) UNIQUE
 #
 class CategorySerializer < ApplicationSerializer
   object_as :category

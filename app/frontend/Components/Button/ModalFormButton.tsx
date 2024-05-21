@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Button from './index'
 import { Modal } from '@/Components'
 import { useMantineTheme, type ModalProps, type ButtonProps } from '@mantine/core'
 import axios from 'axios'
 import { type UseFormProps } from 'use-inertia-form'
+import { useDisclosure } from '@mantine/hooks'
 
 interface ModalFormButtonProps {
 	children?: string | React.ReactElement
@@ -15,18 +16,26 @@ interface ModalFormButtonProps {
 	onSuccess?: (data: { id: string|number }) => void
 }
 
-const ModalFormButton = ({ children = 'New', form, title, buttonProps = {}, modalProps = {}, onSubmit, onSuccess }: ModalFormButtonProps) => {
-	const [modalOpen, setModalOpen] = useState(false)
+const ModalFormButton = ({
+	children = 'New',
+	form,
+	title,
+	buttonProps = {},
+	modalProps = {},
+	onSubmit,
+	onSuccess,
+}: ModalFormButtonProps) => {
+	const [opened, { open, close }] = useDisclosure(false)
 
 	const theme = useMantineTheme()
 
 	const handleSubmit = ({ data, method, to, setError }: UseFormProps) => {
-		if(!to) return
+		if(!to) return false
 
 		axios[method](to, { ...data, redirect: false })
 			.then(response => {
 				if(response.statusText === 'OK' || response.statusText === 'Created') {
-					setModalOpen(false)
+					close()
 					if(onSuccess) onSuccess(response.data)
 				}
 			})
@@ -41,12 +50,13 @@ const ModalFormButton = ({ children = 'New', form, title, buttonProps = {}, moda
 
 	return (
 		<>
-			<Button onClick={ () => setModalOpen(true) } { ...buttonProps } >{ children }</Button>
+			<Button onClick={ open } { ...buttonProps } >{ children }</Button>
 			<Modal
-				opened={ modalOpen }
-				onClose={ () => setModalOpen(false) }
+				opened={ opened }
+				onClose={ close }
 				title={ title }
-				{ ...Object.assign({ size: theme.breakpoints.md }, modalProps) }
+				size={ theme.breakpoints.md }
+				{ ...modalProps }
 			>
 				{ React.cloneElement(form, {
 					onSubmit: onSubmit ? onSubmit : handleSubmit,

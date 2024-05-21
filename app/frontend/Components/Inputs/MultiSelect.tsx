@@ -34,7 +34,7 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, MultiSelectInputProps>
 			router.reload({ only: coerceArray(fetchOnOpen) })
 		}
 
-		if(onDropdownOpen) onDropdownOpen()
+		onDropdownOpen?.()
 	}
 
 	return (

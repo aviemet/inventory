@@ -25,8 +25,7 @@ const CheckoutButton = ({ href, label, disabled, tooltipMessage, ...props }: Che
 			<Link
 				as="button"
 				href={ href }
-				color={ checkoutButtonColor }
-				buttonProps={ { disabled } }
+				buttonProps={ { disabled, color: checkoutButtonColor } }
 				aria-label={ `Check in ${label}` }
 				{ ...props }
 			>

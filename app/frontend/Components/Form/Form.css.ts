@@ -36,7 +36,7 @@ export const form = css`
 			background-color: ${vars.colors.dark[7]};
 		}
 		width: 100%;
-		border-color: ${vars.colors.primary[2]};
+		border-color: ${vars.colors.primaryColors[2]};
 		border-top-width: 2px;
 
 		&:not(.mantine-Grid-root .field) {
@@ -44,7 +44,7 @@ export const form = css`
 		}
 
 		&.required {
-			border-color: ${vars.colors.primary[8]};
+			border-color: ${vars.colors.primaryColors[8]};
 		}
 
 		&.field_with_errors {

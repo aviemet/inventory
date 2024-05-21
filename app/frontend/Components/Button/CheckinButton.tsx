@@ -32,7 +32,7 @@ const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: Chec
 			<Link
 				as="button"
 				href={ href }
-				color={ checkinButtonColor }
+				buttonProps={ { color: checkinButtonColor } }
 				aria-label={ `Check in ${label}` }
 				{ ...finalProps }
 			>

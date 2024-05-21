@@ -8,7 +8,6 @@ import InputWrapper from './InputWrapper'
 
 export interface SelectInputProps extends Omit<SelectProps, 'data'>, BaseInputProps {
 	options?: ComboboxData
-	onOpen?: () => void
 	fetchOnOpen?: string
 }
 
