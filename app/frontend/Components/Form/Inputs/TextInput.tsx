@@ -39,7 +39,7 @@ const TextFormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
 		const value = e.target.value
 		setValue(value)
 
-		if(onBlur) onBlur(value, form)
+		onBlur?.(value, form)
 	}
 
 	return (

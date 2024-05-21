@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import { NestedObject, UseFormProps, useInertiaInput } from 'use-inertia-form'
 import { ConditionalWrapper } from '@/Components'
 import Field from '../Components/Field'
@@ -7,7 +7,7 @@ import { type ComboboxData } from '@mantine/core'
 import { type InputConflicts, type BaseFormInputProps } from '.'
 
 type OmittedDropdownTypes = InputConflicts|'onDropdownOpen'|'onDropdownClose'|'onOptionSubmit'|'onClear'
-export interface FormDropdownProps<TForm extends NestedObject = NestedObject>
+export interface FormMultiSelectProps<TForm extends NestedObject = NestedObject>
 	extends Omit<MultiSelectInputProps, OmittedDropdownTypes>,
 	Omit<BaseFormInputProps<string[], TForm>, 'onChange'|'onBlur'|'onFocus'> {
 
@@ -20,7 +20,7 @@ export interface FormDropdownProps<TForm extends NestedObject = NestedObject>
 	onOptionSubmit?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
 }
 
-const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
+const MultiSelectComponent = forwardRef(<TForm extends NestedObject = NestedObject>(
 	{
 		options = [],
 		label,
@@ -39,7 +39,8 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 		onOptionSubmit,
 		wrapperProps,
 		...props
-	}: FormDropdownProps<TForm>,
+	}: FormMultiSelectProps<TForm>,
+	ref: ForwardedRef<HTMLInputElement>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[], TForm>({ name, model, errorKey })
 
@@ -88,6 +89,7 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 			) }
 		>
 			<MultiSelect
+				ref={ ref }
 				// Add "search" suffix to prevent password managers trying to autofill dropdowns
 				id={ `${id || inputId}-search` }
 				autoComplete="off"
@@ -108,6 +110,6 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 			/>
 		</ConditionalWrapper>
 	)
-}
+})
 
 export default React.memo(MultiSelectComponent)

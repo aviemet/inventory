@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import Field from '../Components/Field'
 import TextareaInput, { type TextareaProps } from '@/Components/Inputs/Textarea'
 import cx from 'clsx'
@@ -11,7 +11,7 @@ interface FormTextareaProps<TForm extends NestedObject = NestedObject>
 	Omit<TextareaProps, InputConflicts>,
 	BaseFormInputProps<string, TForm> {}
 
-const Textarea = <TForm extends NestedObject = NestedObject>(
+const Textarea = forwardRef(<TForm extends NestedObject = NestedObject>(
 	{
 		label,
 		name,
@@ -26,6 +26,7 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 		wrapperProps,
 		...props
 	}: FormTextareaProps<TForm>,
+	ref: ForwardedRef<HTMLTextAreaElement>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
@@ -56,6 +57,7 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 					{ label }
 				</label> }
 				<TextareaInput
+					ref={ ref }
 					id={ id || inputId }
 					name={ inputName }
 					onChange={ handleChange }
@@ -71,6 +73,6 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 			</>
 		</ConditionalWrapper>
 	)
-}
+})
 
 export default Textarea

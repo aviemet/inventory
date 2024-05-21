@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import Field from '../Components/Field'
 import { DateInput, type DateInputValue } from '@/Components/Inputs'
 import { type DateInputProps } from '@/Components/Inputs/DateInput'
@@ -12,7 +12,7 @@ interface FormDateInputProps<TForm extends NestedObject = NestedObject>
 	Omit<DateInputProps, InputConflicts>,
 	BaseFormInputProps<DateInputValue|'', TForm> {}
 
-const FormDateInput = <TForm extends NestedObject = NestedObject>({
+const FormDateInput = forwardRef(<TForm extends NestedObject = NestedObject>({
 	name,
 	required,
 	onChange,
@@ -23,7 +23,9 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 	field = true,
 	wrapperProps,
 	...props
-}: FormDateInputProps<TForm>) => {
+}: FormDateInputProps<TForm>,
+	ref: ForwardedRef<HTMLButtonElement>,
+) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<
 	Exclude<DateInputValue, undefined|null> | '', TForm>({ name, model })
 
@@ -54,6 +56,7 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 			) }
 		>
 			<DateInput
+				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				// @ts-ignore - TS is treating value as Date
@@ -68,6 +71,6 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 			/>
 		</ConditionalWrapper>
 	)
-}
+})
 
 export default FormDateInput

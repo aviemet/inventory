@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, forwardRef } from 'react'
 import Label from './Label'
 import { DatePickerInput, type DatePickerInputProps } from '@mantine/dates'
 import { CalendarIcon } from '@/Components/Icons'
@@ -18,21 +18,24 @@ export interface DateInputProps
 	onChange?: (date: DateInputValue) => void
 }
 
-const DateInputComponent = ({
-	label,
-	id,
-	name,
-	type = 'default',
-	size = 'md',
-	radius = 'xs',
-	valueFormat = 'L',
-	required,
-	wrapper,
-	wrapperProps,
-	value,
-	onChange,
-	...props
-}: DateInputProps) => {
+const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
+	{
+		label,
+		id,
+		name,
+		type = 'default',
+		size = 'md',
+		radius = 'xs',
+		valueFormat = 'L',
+		required,
+		wrapper,
+		wrapperProps,
+		value,
+		onChange,
+		...props
+	},
+	ref,
+) => {
 	const inputId = id || name
 
 	const [localValue, setLocalValue] = useState<DateInputValue>(value)
@@ -71,6 +74,7 @@ const DateInputComponent = ({
 				{ label }
 			</Label> }
 			<DatePickerInput
+				ref={ ref }
 				id={ inputId }
 				name={ name }
 				value={ isUnset(localValue) ? undefined : localValue }
@@ -86,7 +90,7 @@ const DateInputComponent = ({
 			/>
 		</InputWrapper>
 	)
-}
+})
 
 export default DateInputComponent
 

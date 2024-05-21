@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import SegmentedControl, { type SegmentedControlProps } from '@/Components/Inputs/SegmentedControl'
 import Field from '../Components/Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
@@ -10,7 +10,7 @@ interface FormSegmentedControlProps<TForm extends NestedObject = NestedObject>
 	Omit<SegmentedControlProps, InputConflicts>,
 	BaseFormInputProps<string, TForm> {}
 
-const FormSegmentedControl = <TForm extends NestedObject = NestedObject>({
+const FormSegmentedControl = forwardRef(<TForm extends NestedObject = NestedObject>({
 	options,
 	name,
 	id,
@@ -22,7 +22,9 @@ const FormSegmentedControl = <TForm extends NestedObject = NestedObject>({
 	field = true,
 	wrapperProps,
 	...props
-}: FormSegmentedControlProps<TForm>) => {
+}: FormSegmentedControlProps<TForm>,
+	ref: ForwardedRef<HTMLDivElement>,
+) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (v: string) => {
@@ -54,6 +56,7 @@ const FormSegmentedControl = <TForm extends NestedObject = NestedObject>({
 			) }
 		>
 			<SegmentedControl
+				ref={ ref }
 				options={ options }
 				id={ id || inputId }
 				name={ inputName }
@@ -66,6 +69,6 @@ const FormSegmentedControl = <TForm extends NestedObject = NestedObject>({
 			/>
 		</ConditionalWrapper>
 	)
-}
+})
 
 export default FormSegmentedControl

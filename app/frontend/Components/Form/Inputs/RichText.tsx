@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import Field from '../Components/Field'
 import RichTextInput, { type RichTextInputProps } from '@/Components/Inputs/RichText'
 import cx from 'clsx'
@@ -11,7 +11,7 @@ interface FormRichTextInputProps<TForm extends NestedObject = NestedObject>
 	Omit<RichTextInputProps, InputConflicts>,
 	BaseFormInputProps<string, TForm> {}
 
-const RichText = <TForm extends NestedObject = NestedObject>({
+const RichText = forwardRef(<TForm extends NestedObject = NestedObject>({
 	label,
 	name,
 	required = false,
@@ -23,7 +23,8 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 	field = true,
 	wrapperProps,
 	...props
-}: FormRichTextInputProps<TForm>) => {
+}: FormRichTextInputProps<TForm>,
+	ref: ForwardedRef<HTMLDivElement>) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
 	const handleChange = (v: string) => {
@@ -54,6 +55,7 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 					{ label }
 				</label> }
 				<RichTextInput
+					ref={ ref }
 					id={ id }
 					name={ inputName }
 					onChange={ handleChange }
@@ -66,6 +68,6 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 			</>
 		</ConditionalWrapper>
 	)
-}
+})
 
 export default RichText

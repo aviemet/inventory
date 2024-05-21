@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { RichTextEditor, Link, type RichTextEditorProps as MantineRichTextEditorProps } from '@mantine/tiptap'
 import { useEditor, BubbleMenu, FloatingMenu } from '@tiptap/react'
 import Highlight from '@tiptap/extension-highlight'
@@ -14,7 +14,10 @@ export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, 'c
 	onChange?: (value: string) => void
 }
 
-const RichTextEditorComponent = ({ children, onChange }: RichTextEditorProps) => {
+const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>((
+	{ children, onChange },
+	ref,
+) => {
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
@@ -33,6 +36,7 @@ const RichTextEditorComponent = ({ children, onChange }: RichTextEditorProps) =>
 
 	return (
 		<RichTextEditor
+			ref={ ref }
 			editor={ editor }
 			labels={ DEFAULT_LABELS }
 		>
@@ -98,6 +102,6 @@ const RichTextEditorComponent = ({ children, onChange }: RichTextEditorProps) =>
 			<RichTextEditor.Content />
 		</RichTextEditor>
 	)
-}
+})
 
 export default RichTextEditorComponent

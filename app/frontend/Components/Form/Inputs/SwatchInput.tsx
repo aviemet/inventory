@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef, type ForwardedRef } from 'react'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import SwatchInput, { type SwatchInputProps } from '@/Components/Inputs/SwatchInput'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
@@ -11,7 +11,7 @@ interface FormSwatchInputProps<TForm extends NestedObject = NestedObject>
 	BaseFormInputProps<string, TForm> {
 }
 
-const SwatchFormInput = <TForm extends NestedObject = NestedObject>(
+const SwatchFormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -25,6 +25,7 @@ const SwatchFormInput = <TForm extends NestedObject = NestedObject>(
 		wrapperProps,
 		...props
 	}: FormSwatchInputProps<TForm>,
+	ref: ForwardedRef<HTMLInputElement>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
@@ -60,6 +61,6 @@ const SwatchFormInput = <TForm extends NestedObject = NestedObject>(
 			/>
 		</ConditionalWrapper>
 	)
-}
+})
 
 export default SwatchFormInput
