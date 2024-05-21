@@ -1,9 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
-import { Select as InputSelect } from '@/Components/Inputs'
 import { isEmpty } from 'lodash'
 import { useGetAssetsAsOptions } from '@/queries/assets'
-import { useInFormContext } from '@/lib'
 import { type AsyncDropdown } from '.'
 
 interface AssetsDropdownProps extends AsyncDropdown<Schema.AssetsOptions> {}
@@ -17,28 +15,22 @@ const AssetsDropdown = forwardRef<HTMLInputElement, AssetsDropdownProps>((
 		initialData,
 	})
 
-	const commonProps = {
-		ref,
-		label,
-		name,
-		options: !data ? [] : data.map(asset => ({
+	return <FormSelect
+		ref={ ref }
+		name={ name }
+		label={ label }
+		options={ !data ? [] : data.map(asset => ({
 			label: asset.name,
 			value: String(asset.id),
-		})),
-		onDropdownOpen: () => {
+		})) }
+		onDropdownOpen={ () => {
 			if(isEmpty(data) || isStale) refetch()
-		},
-		searchable: true,
-		clearable: true,
-		value,
-		...props,
-	}
-
-	if(useInFormContext()) {
-		return <FormSelect { ...commonProps } />
-	}
-
-	return <InputSelect { ...commonProps } />
+		} }
+		searchable
+		clearable
+		value={ value }
+		{ ...props }
+	/>
 })
 
 export default AssetsDropdown

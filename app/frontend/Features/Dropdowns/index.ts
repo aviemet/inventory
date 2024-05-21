@@ -1,8 +1,28 @@
 import { type SelectInputProps } from '@/Components/Inputs/Select'
 import { type MultiSelectInputProps } from '@/Components/Inputs/MultiSelect'
 
+import { type FormSelectProps } from '@/Components/Form/Inputs/Select'
+import { type FormMultiSelectProps } from '@/Components/Form/Inputs/MultiSelect'
+
+
+export interface FormAsyncDropdown<T> extends FormSelectProps {
+	initialData?: T[]
+}
+
+export interface FormAsyncMultiSelect<T> extends FormMultiSelectProps {
+	initialData?: T[]
+}
+
+export interface AsyncDropdown<T> extends SelectInputProps {
+	initialData?: T[]
+}
+
+export interface AsyncMultiSelect<T> extends MultiSelectInputProps {
+	initialData?: T[]
+}
+
 export { default as AssetsDropdown }        from './AssetsDropdown'
-export { default as CategoriesDropdown }    from './CategoriesDropdown'
+export { default as CategoriesDropdown }    from './CategoriesDropdown/CategoriesDropdownInput'
 export { default as CurrenciesDropdown }    from './CurrenciesDropdown'
 export { default as DepartmentsDropdown }   from './DepartmentsDropdown'
 export { default as ItemsDropdown }         from './ItemsDropdown'
@@ -16,18 +36,3 @@ export { default as VendorsDropdown }       from './VendorsDropdown'
 
 export { default as AssignToableDropdown } from './AssignToableDropdown'
 export { default as AssignmentLocationDropdown } from './AssignmentLocationDropdown'
-
-export interface AsyncDropdown<T> extends Omit<SelectInputProps, 'defaultValue'|'onBlur'> {
-	name?: string
-	model?: string
-	label?: string
-	fetchOnOpen?: string
-	required?: boolean
-	errorKey?: string
-	initialData?: T[]
-}
-
-export interface AsyncMultiSelect<T> extends Omit<MultiSelectInputProps, 'onBlur'> {
-	errorKey?: string
-	initialData?: T[]
-}

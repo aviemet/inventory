@@ -5,7 +5,7 @@ import { Routes, useInFormContext } from '@/lib'
 import CategoriesForm from '@/Pages/Categories/Form'
 import { useGetCategoriesAsOptions } from '@/queries/categories'
 import { isEmpty } from 'lodash'
-import { type AsyncDropdown } from '.'
+import { type AsyncDropdown } from '..'
 
 interface CategoriesDropdownProps extends AsyncDropdown<Schema.CategoriesOptions> {
 	categorizable_type?: Schema.CategoryTypes
@@ -37,18 +37,14 @@ const CategoriesDropdown = forwardRef<HTMLInputElement, CategoriesDropdownProps>
 		...props,
 	}
 
-	if(useInFormContext()) {
-		return (
-			<FormSelect
-				newForm={ <CategoriesForm
-					to={ Routes.apiCategories() }
-				/> }
-				{ ...commonProps }
-			/>
-		)
-	}
-
-	return <InputSelect { ...commonProps } />
+	return (
+		<FormSelect
+			newForm={ <CategoriesForm
+				to={ Routes.apiCategories() }
+			/> }
+			{ ...commonProps }
+		/>
+	)
 })
 
 export default CategoriesDropdown
