@@ -4,7 +4,7 @@
 #
 #  id              :bigint           not null, primary key
 #  model_number    :string
-#  name            :string
+#  name            :string           not null
 #  notes           :text
 #  slug            :string           not null
 #  created_at      :datetime         not null

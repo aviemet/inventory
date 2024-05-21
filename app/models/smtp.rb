@@ -5,8 +5,8 @@
 #  id         :bigint           not null, primary key
 #  address    :string
 #  domain     :string
-#  host       :string
-#  name       :string
+#  host       :string           not null
+#  name       :string           not null
 #  notes      :text
 #  password   :string
 #  port       :integer
@@ -34,9 +34,6 @@ class Smtp < ApplicationRecord
   resourcify
 
   validates :name, presence: true
-  validates :username, presence: true
-  validates :password, presence: true
   validates :host, presence: true
-  validates :port, presence: true
 
 end

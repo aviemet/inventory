@@ -3,11 +3,11 @@
 # Table name: networks
 #
 #  id         :bigint           not null, primary key
-#  address    :cidr
+#  address    :cidr             not null
 #  dhcp_end   :inet
 #  dhcp_start :inet
 #  gateway    :inet
-#  name       :string
+#  name       :string           not null
 #  notes      :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -35,6 +35,7 @@ class Network < ApplicationRecord
   tracked
   resourcify
 
+  validates :name, presence: true
   validates :address, presence: true
   validate :network?
   validate :gateway_within_network?

@@ -3,7 +3,7 @@
 # Table name: ticket_messages
 #
 #  id            :bigint           not null, primary key
-#  body          :text
+#  body          :text             not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  created_by_id :bigint

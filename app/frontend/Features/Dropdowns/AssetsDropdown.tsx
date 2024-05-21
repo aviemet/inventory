@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { isEmpty } from 'lodash'
 import { useGetAssetsAsOptions } from '@/queries/assets'
-import { type AsyncDropdown } from '.'
+import { type FormAsyncDropdown } from '.'
 
-interface AssetsDropdownProps extends AsyncDropdown<Schema.AssetsOptions> {}
+interface AssetsDropdownProps extends FormAsyncDropdown<Schema.AssetsOptions> {}
 
 const AssetsDropdown = forwardRef<HTMLInputElement, AssetsDropdownProps>((
 	{ label = 'Asset', name = 'asset_id', initialData = [], value, ...props },

@@ -4,7 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  description :text
-#  name        :string
+#  name        :string           not null
 #  slug        :string           not null
 #  status_type :integer          default("deployable")
 #  created_at  :datetime         not null

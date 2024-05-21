@@ -5,8 +5,8 @@
 #  id         :bigint           not null, primary key
 #  address    :string
 #  domain     :string
-#  host       :string
-#  name       :string
+#  host       :string           not null
+#  name       :string           not null
 #  notes      :text
 #  password   :string
 #  port       :integer

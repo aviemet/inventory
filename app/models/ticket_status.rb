@@ -3,7 +3,7 @@
 # Table name: ticket_statuses
 #
 #  id          :bigint           not null, primary key
-#  name        :string
+#  name        :string           not null
 #  slug        :string           not null
 #  status_type :integer          default("open")
 #  created_at  :datetime         not null
@@ -20,6 +20,8 @@ class TicketStatus < ApplicationRecord
   resourcify
 
   enum :status_type, %i(open pending closed)
+
+  validates :name, presence: true
 
   has_many :tickets, dependent: :nullify
 end

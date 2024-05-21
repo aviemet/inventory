@@ -101,7 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
 
   create_table "categories", force: :cascade do |t|
     t.string "categorizable_type", null: false
-    t.string "name"
+    t.string "name", null: false
     t.string "slug", null: false
     t.text "description"
     t.datetime "created_at", null: false
@@ -157,7 +157,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "slug", null: false
     t.text "notes"
     t.bigint "location_id"
@@ -172,19 +172,21 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   create_table "documentations", force: :cascade do |t|
     t.string "documentable_type", null: false
     t.bigint "documentable_id", null: false
-    t.string "title"
+    t.string "title", null: false
     t.string "slug", null: false
     t.text "body"
     t.bigint "created_by_id"
+    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_documentations_on_category_id"
     t.index ["created_by_id"], name: "index_documentations_on_created_by_id"
     t.index ["documentable_type", "documentable_id"], name: "index_documentations_on_documentable"
     t.index ["slug"], name: "index_documentations_on_slug", unique: true
   end
 
   create_table "emails", force: :cascade do |t|
-    t.string "email"
+    t.string "email", null: false
     t.text "notes"
     t.bigint "contact_id", null: false
     t.bigint "category_id"
@@ -285,7 +287,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "manufacturers", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -294,7 +296,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "models", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "slug", null: false
     t.string "model_number"
     t.text "notes"
@@ -309,8 +311,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "networks", force: :cascade do |t|
-    t.string "name"
-    t.cidr "address"
+    t.string "name", null: false
+    t.cidr "address", null: false
     t.inet "gateway"
     t.inet "dhcp_start"
     t.inet "dhcp_end"
@@ -369,9 +371,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.string "first_name"
+    t.string "first_name", null: false
     t.string "middle_name"
-    t.string "last_name"
+    t.string "last_name", null: false
     t.boolean "active", default: true, null: false
     t.string "employee_number"
     t.string "job_title"
@@ -405,7 +407,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "person_groups", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "slug", null: false
     t.text "description"
     t.datetime "created_at", null: false
@@ -468,8 +470,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "smtps", force: :cascade do |t|
-    t.string "name"
-    t.string "host"
+    t.string "name", null: false
+    t.string "host", null: false
     t.integer "port"
     t.integer "security", default: 0
     t.string "username"
@@ -482,7 +484,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "status_labels", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "status_type", default: 0
     t.string "slug", null: false
     t.text "description"
@@ -501,7 +503,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "ticket_messages", force: :cascade do |t|
-    t.text "body"
+    t.text "body", null: false
     t.bigint "ticket_id", null: false
     t.bigint "parent_id"
     t.bigint "created_by_id"
@@ -513,7 +515,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "ticket_statuses", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "status_type", default: 0
     t.string "slug", null: false
     t.datetime "created_at", null: false
@@ -610,7 +612,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   end
 
   create_table "websites", force: :cascade do |t|
-    t.string "url"
+    t.string "url", null: false
     t.string "name"
     t.string "notes"
     t.bigint "contact_id", null: false
@@ -636,6 +638,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
   add_foreign_key "contracts", "vendors"
   add_foreign_key "departments", "locations"
   add_foreign_key "departments", "people", column: "manager_id"
+  add_foreign_key "documentations", "categories"
   add_foreign_key "documentations", "people", column: "created_by_id"
   add_foreign_key "emails", "categories"
   add_foreign_key "emails", "contacts"

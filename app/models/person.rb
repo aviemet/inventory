@@ -5,10 +5,10 @@
 #  id              :bigint           not null, primary key
 #  active          :boolean          default(TRUE), not null
 #  employee_number :string
-#  first_name      :string
+#  first_name      :string           not null
 #  guid            :string
 #  job_title       :string
-#  last_name       :string
+#  last_name       :string           not null
 #  middle_name     :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

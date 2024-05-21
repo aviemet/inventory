@@ -5,7 +5,7 @@
 #  id                 :bigint           not null, primary key
 #  categorizable_type :string           not null
 #  description        :text
-#  name               :string
+#  name               :string           not null
 #  slug               :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -34,7 +34,7 @@ class Category < ApplicationRecord
   tracked
   resourcify
 
-  @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Documentation Email License Location Model Order Person Phone Ticket User Vendor Website)
+  @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Documentation Email License Location Model Order Person Phone Ticket User Vendor Website Document)
 
   validates :name, presence: true, uniqueness: {
     scope: :categorizable_type,

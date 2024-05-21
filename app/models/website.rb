@@ -5,7 +5,7 @@
 #  id         :bigint           not null, primary key
 #  name       :string
 #  notes      :string
-#  url        :string
+#  url        :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  contact_id :bigint           not null
@@ -23,6 +23,8 @@ class Website < ApplicationRecord
 
   tracked
   resourcify
+
+  validates :url, presence: true
 
   belongs_to :contact
 end

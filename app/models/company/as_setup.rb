@@ -37,7 +37,8 @@ class Company::AsSetup < Company
       Email: ["Work", "Personal"],
       Address: ["Work", "Personal"],
       Phone: ["Home", "Mobile", "Office"],
-      Contract: ["Utility", "Leasing", "SLA"]
+      Contract: ["Utility", "Leasing", "SLA"],
+      Document: ["Invoice", "Manual"]
     }.each do |type, categories|
       categories.each do |category|
         Category.create!({

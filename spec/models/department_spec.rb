@@ -3,7 +3,7 @@
 # Table name: departments
 #
 #  id          :bigint           not null, primary key
-#  name        :string
+#  name        :string           not null
 #  notes       :text
 #  slug        :string           not null
 #  created_at  :datetime         not null

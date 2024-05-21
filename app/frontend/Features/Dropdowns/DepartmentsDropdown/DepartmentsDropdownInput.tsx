@@ -5,7 +5,7 @@ import { Routes, useInFormContext } from '@/lib'
 import DepartmentsForm from '@/Pages/Departments/Form'
 import { isEmpty } from 'lodash'
 import { useGetDepartmentsAsOptions } from '@/queries/departments'
-import { type AsyncDropdown } from '.'
+import { type AsyncDropdown } from '..'
 
 interface DepartmentsDropdownProps extends AsyncDropdown<Schema.DepartmentsOptions> {}
 

@@ -3,7 +3,7 @@
 # Table name: emails
 #
 #  id          :bigint           not null, primary key
-#  email       :string
+#  email       :string           not null
 #  notes       :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -26,6 +26,8 @@ class Email < ApplicationRecord
 
   tracked
   resourcify
+
+  validates :email, presense: true
 
   belongs_to :contact
 end

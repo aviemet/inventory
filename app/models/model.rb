@@ -4,7 +4,7 @@
 #
 #  id              :bigint           not null, primary key
 #  model_number    :string
-#  name            :string
+#  name            :string           not null
 #  notes           :text
 #  slug            :string           not null
 #  created_at      :datetime         not null
@@ -52,14 +52,16 @@ class Model < ApplicationRecord
   tracked
   resourcify
 
+  validates :name, presence: true, uniqueness: {
+    scope: :model_number,
+    message: "Model already exists"
+  }
+
   belongs_to :manufacturer
   has_many :items, -> { includes_associated }, dependent: :nullify, inverse_of: :model
   has_many :accessories, -> { includes_associated }, dependent: :nullify, inverse_of: :model
   has_many :consumables, -> { includes_associated }, dependent: :nullify, inverse_of: :model
   has_many :components, -> { includes_associated }, dependent: :nullify, inverse_of: :model
-
-  validates :name, presence: true
-  validates :name, uniqueness: { scope: :model_number, message: "Model already exists" }
 
   scope :includes_associated, -> { includes([:manufacturer, :category, :items, :accessories, :consumables, :components, :documentations]) }
 

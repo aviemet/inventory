@@ -3,7 +3,7 @@
 # Table name: ticket_messages
 #
 #  id            :bigint           not null, primary key
-#  body          :text
+#  body          :text             not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  created_by_id :bigint
@@ -25,6 +25,8 @@
 class TicketMessage < ApplicationRecord
   tracked
   resourcify
+
+  validates :body, presence: true
 
   belongs_to :ticket
   belongs_to :created_by, class_name: "Person"
