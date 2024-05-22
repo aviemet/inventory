@@ -35,7 +35,7 @@ class Items::ShowSerializer < Assignable::SingleSerializer
   has_one :location, serializer: LocationSerializer
   belongs_to :status_label, serializer: StatusLabelSerializer
 
-  has_many :assignments, serializer: AssignmentSerializer
+  has_many :assignments, serializer: Assignments::ShowSerializer
   belongs_to :default_location, serializer: LocationSerializer
   has_many :nics, serializer: NicSerializer
   has_many :activities, serializer: ActivitySerializer

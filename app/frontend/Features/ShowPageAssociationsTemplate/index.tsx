@@ -5,21 +5,21 @@ import { ArrowRightSquareIcon, CheckoutIcon } from '@/Components/Icons'
 import { CheckinButton } from '@/Components/Button'
 
 interface ShowPageAssociationsProps {
-	assignToable: Schema.ItemsShow|Schema.AccessoriesShow|Schema.ConsumablesShow|Schema.ComponentsShow|Schema.LicensesShow
-	checkinRoute?: (assignToableId: string|number, assignmentId: string|number) => string
+	assignable: Schema.ItemsShow|Schema.AccessoriesShow|Schema.ConsumablesShow|Schema.ComponentsShow|Schema.LicensesShow
+	checkinRoute?: (assignableId: string|number, assignmentId: string|number) => string
 }
 
-const ShowPageAssociations = ({ assignToable, checkinRoute }: ShowPageAssociationsProps) => {
+const ShowPageAssociations = ({ assignable, checkinRoute }: ShowPageAssociationsProps) => {
 	return (
 		<Box mt={ 16 }>
 			<Heading order={ 3 }>Active Assignments</Heading>
 
-			{ assignToable.assignments && <List mt={ 16 } icon={
+			{ assignable.assignments && <List mt={ 16 } icon={
 				<Icon color="teal" size={ 24 } radius="xl">
 					<CheckoutIcon size={ 16 } />
 				</Icon>
 			}>
-				{ assignToable.assignments.map(assignment => (
+				{ assignable.assignments.map(assignment => (
 					assignment.active && (
 						<List.Item key={ assignment.id }>
 							<Group>
@@ -33,7 +33,7 @@ const ShowPageAssociations = ({ assignToable, checkinRoute }: ShowPageAssociatio
 									{ assignment.assign_toable.name }
 								</Link>
 
-								{ checkinRoute && <CheckinButton href={ checkinRoute(assignToable.id, assignment.id) } /> }
+								{ checkinRoute && <CheckinButton href={ checkinRoute(assignable.id, assignment.id) } /> }
 							</Group>
 						</List.Item>
 					)

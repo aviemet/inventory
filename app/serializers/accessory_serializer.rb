@@ -64,6 +64,8 @@ class AccessorySerializer < Assignable::QuantitySerializer
     currency_for(accessory)
   end
 
+end
+
   # has_many :assignments, serializer: AssignmentSerializer
   # has_one :purchase, serializer: PurchaseSerializer
   # has_many :activities, serializer: ActivitySerializer
@@ -73,4 +75,3 @@ class AccessorySerializer < Assignable::QuantitySerializer
   # belongs_to :vendor, serializer: VendorSerializer
   # belongs_to :category, serializer: CategorySerializer
   # belongs_to :manufacturer, serializer: ManufacturerSerializer
-end

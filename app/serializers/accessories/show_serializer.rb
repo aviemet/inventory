@@ -6,7 +6,7 @@ class Accessories::ShowSerializer < AccessorySerializer
   has_one :company, serializer: CompanySerializer
   has_one :purchase, serializer: PurchaseSerializer
   has_many :activities, serializer: ActivitySerializer
-  has_many :assignments, serializer: AssignmentSerializer
+  has_many :assignments, serializer: Assignments::ShowSerializer
   has_many :documentations, serializer: Documentations::IndexSerializer
   belongs_to :category, serializer: CategorySerializer
   belongs_to :default_location, serializer: LocationSerializer

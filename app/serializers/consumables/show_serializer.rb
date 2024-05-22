@@ -24,7 +24,7 @@ class Consumables::ShowSerializer < Assignable::QuantitySerializer
 
   has_many :activities, serializer: ActivitySerializer
   has_one :purchase, serializer: PurchaseSerializer
-  has_many :assignments, serializer: AssignmentSerializer
+  has_many :assignments, serializer: Assignments::ShowSerializer
   belongs_to :default_location, serializer: LocationSerializer
 
   belongs_to :model, serializer: ModelSerializer

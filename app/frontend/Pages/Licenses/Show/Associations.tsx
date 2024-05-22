@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import { ShowLicenseProps } from '.'
 
 const Associations = ({ license }: ShowLicenseProps) => {
-	return <ShowPageAssociations assignToable={ license } checkinRoute={ Routes.checkinLicense } />
+	return <ShowPageAssociations assignable={ license } checkinRoute={ Routes.checkinLicense } />
 }
 
 export default Associations

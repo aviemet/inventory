@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import { ShowComponentProps } from '.'
 
 const Associations = ({ component }: ShowComponentProps) => {
-	return <ShowPageAssociations assignToable={ component } checkinRoute={ Routes.checkinComponent } />
+	return <ShowPageAssociations assignable={ component } checkinRoute={ Routes.checkinComponent } />
 }
 
 export default Associations

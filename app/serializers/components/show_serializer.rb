@@ -23,7 +23,7 @@ class Components::ShowSerializer < Assignable::QuantitySerializer
     currency_for(component)
   end
 
-  has_many :assignments, serializer: AssignmentSerializer
+  has_many :assignments, serializer: Assignments::ShowSerializer
   has_one :purchase, serializer: PurchaseSerializer
   has_many :activities, serializer: ActivitySerializer
   belongs_to :default_location, serializer: LocationSerializer

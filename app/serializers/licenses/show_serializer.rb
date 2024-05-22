@@ -28,7 +28,7 @@ class Licenses::ShowSerializer < Assignable::QuantitySerializer
   end
 
   belongs_to :department, serializer: DepartmentSerializer
-  has_many :assignments, serializer: AssignmentSerializer
+  has_many :assignments, serializer: Assignments::ShowSerializer
   has_one :purchase, serializer: PurchaseSerializer
   has_many :activities, serializer: ActivitySerializer
   belongs_to :category, serializer: CategorySerializer
