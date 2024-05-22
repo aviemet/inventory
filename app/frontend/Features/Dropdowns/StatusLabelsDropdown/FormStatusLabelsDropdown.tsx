@@ -6,7 +6,9 @@ import { useGetStatusLabelsAsOptions } from '@/queries/statusLabels'
 import { isEmpty } from 'lodash'
 import { type FormAsyncDropdown } from '..'
 
-interface StatusLabelsDropdownProps extends FormAsyncDropdown<Schema.StatusLabelsOptions> {}
+interface StatusLabelsDropdownProps extends Omit<FormAsyncDropdown<Schema.StatusLabelsOptions>, 'name'> {
+	name?: string
+}
 
 const StatusLabelsDropdown = forwardRef<HTMLInputElement, StatusLabelsDropdownProps>((
 	{ label = 'Status Label', name = 'status_label_id', initialData, value, ...props },

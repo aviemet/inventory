@@ -41,7 +41,6 @@ class LicenseSerializer < Assignable::QuantitySerializer
   object_as :license
 
   attributes(
-    :id,
     :name,
     :qty,
     :key,
@@ -57,8 +56,7 @@ class LicenseSerializer < Assignable::QuantitySerializer
     :category_id,
     :vendor_id,
     :manufacturer_id,
-    :created_at,
-    :updated_at,
+    :status_label_id,
   )
 
   type :number

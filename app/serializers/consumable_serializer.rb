@@ -41,7 +41,6 @@ class ConsumableSerializer < Assignable::ConsumeSerializer
   object_as :consumable
 
   attributes(
-    :id,
     :name,
     :min_qty,
     :qty,
@@ -52,8 +51,6 @@ class ConsumableSerializer < Assignable::ConsumeSerializer
     :model_id,
     :vendor_id,
     :default_location_id,
-    :created_at,
-    :updated_at,
   )
 
   type :number

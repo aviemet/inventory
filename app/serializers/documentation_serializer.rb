@@ -25,16 +25,35 @@
 #  fk_rails_...  (category_id => categories.id)
 #  fk_rails_...  (created_by_id => people.id)
 #
+include Rails.application.routes.url_helpers
+
 class DocumentationSerializer < ApplicationSerializer
   object_as :documentation
 
   identifier :slug
 
   attributes(
-    :slug,
     :title,
     :body,
-    :created_at,
-    :updated_at,
+    :documentable_type,
+    :documentable_id,
+    :category_id,
+    :created_by_id,
   )
+
+  type :string
+  def documentable_name
+    documentation.documentable&.name
+  rescue StandardError
+    nil
+  end
+
+  type :string
+  def documentable_route
+    polymorphic_path(documentation.&documentable_type&.constantize&.find(documentation&.documentable_id), only_path: true)
+  rescue StandardError
+    nil
+  end
+
+  belongs_to :category, serializer: Categories::OptionsSerializer
 end

@@ -41,12 +41,16 @@ class PersonSerializer < ApplicationSerializer
     :job_title,
     :manager_id,
     :user_id,
-    :created_at,
-    :updated_at,
+    :location_id,
   )
 
   type :string
   def name
     "#{person.first_name} #{person.last_name}".strip
+  end
+
+  type :number
+  attribute :department_id do
+    person&.department&.id
   end
 end

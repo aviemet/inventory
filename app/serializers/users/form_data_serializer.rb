@@ -1,11 +1,14 @@
-class Users::FormDataSerializer < ApplicationSerializer
+class Users::FormDataSerializer < UserSerializer
   object_as :user
 
   attributes(
-    :email,
     :active_company_id,
-    :active,
     :password,
     :password_confirmation,
   )
+
+  has_one :person, serializer: PersonSerializer
+
+  has_many :people, serializer: PersonSerializer
+  has_many :companies, serializer: CompanySerializer
 end

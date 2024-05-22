@@ -1,16 +1,7 @@
-class Models::IndexSerializer < ApplicationSerializer
-  object_as :model
-
-  identifier :slug
-
+class Models::IndexSerializer < ModelSerializer
   attributes(
     :id,
     :slug,
-    :name,
-    :model_number,
-    :notes,
-    :category_id,
-    :manufacturer_id,
     :created_at,
     :updated_at,
   )

@@ -1,10 +1,11 @@
 import { usePage } from '@inertiajs/react'
 import { PageProps, Errors, ErrorBag } from '@inertiajs/core'
+import { type FlashMessage } from '@/types/FlashMessage'
 
 export interface SharedInertiaProps extends PageProps {
 	auth: {
 		form_authenticity_token: string
-		user: Schema.User
+		user: Schema.UsersFlash
 	}
 	flash: FlashMessage
 	errors: Errors & ErrorBag

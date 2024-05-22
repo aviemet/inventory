@@ -1,12 +1,11 @@
-class Websites::FormDataSerializer < ApplicationSerializer
-  object_as :website
-
+class Websites::FormDataSerializer < WebsiteSerializer
   attributes(
     :url,
     :name,
     :notes,
     :contact_id,
-    :created_at,
-    :updated_at,
   )
+
+  belongs_to :contact, serializer: ContactSerializer
+  belongs_to :category, serializer: CategorySerializer
 end

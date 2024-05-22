@@ -1,13 +1,6 @@
-class StatusLabels::EditSerializer < ApplicationSerializer
-  object_as :status_label
-
-  identifier :slug
-
+class StatusLabels::EditSerializer < StatusLabels::FormDataSerializer
   attributes(
     :id,
     :slug,
-    :name,
-    :status_type,
-    :description,
   )
 end

@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
-import { LocationsDropdown } from '@/Features/Dropdowns'
-import StatusLabelsDropdown from '@/Features/Dropdowns/StatusLabelsDropdown'
+import { FormLocationsDropdown, FormStatusLabelsDropdown } from '@/Features/Dropdowns'
 import * as classes from './Checkin.css'
 
 interface CheckinItemsProps {
@@ -63,9 +62,9 @@ const Checkin = ({ assignment, item, locations, status_labels }: CheckinItemsPro
 						required
 					/>
 
-					<LocationsDropdown />
+					<FormLocationsDropdown />
 
-					<StatusLabelsDropdown />
+					<FormStatusLabelsDropdown />
 
 					<DateTimeInput
 						label="Returned At"

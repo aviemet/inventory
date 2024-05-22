@@ -1,22 +1,7 @@
-class People::FormDataSerializer < ApplicationSerializer
-  object_as :person
-
-  attributes(
-    :first_name,
-    :middle_name,
-    :last_name,
-    :active,
-    :employee_number,
-    :job_title,
-    :manager_id,
-  )
-
-  type :number
-  attribute :department_id do
-    person&.department&.id
-  end
-
+class People::FormDataSerializer < PersonSerializer
   has_one :contact, serializer: Contacts::FormDataSerializer, optional: true
+
   belongs_to :user, serializer: Users::FormDataSerializer, optional: true
   belongs_to :department, serializer: Departments::FormDataSerializer, optional: true
+  belongs_to :manager, serializer: People::OptionsSerializer, optional: true
 end

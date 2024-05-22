@@ -1,5 +1,7 @@
 class Departments::OptionsSerializer < ApplicationSerializer
   object_as :department
 
-  attributes :id, :name
+  identifier :slug
+
+  attributes :id, :slug, :name
 end

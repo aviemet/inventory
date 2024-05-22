@@ -35,9 +35,11 @@ class TicketSerializer < ApplicationSerializer
   attributes(
     :subject,
     :description,
+    :priority,
+    :number,
     :primary_contact_id,
+    :created_by_id,
     :asset_id,
-    :created_at,
-    :updated_at,
+    :status_id,
   )
 end

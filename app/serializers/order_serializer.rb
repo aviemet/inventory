@@ -59,7 +59,5 @@ class OrderSerializer < ApplicationSerializer
     :discount_cents,
     :discount_currency,
     :vendor_id,
-    :created_at,
-    :updated_at,
   )
 end

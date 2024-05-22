@@ -31,8 +31,6 @@ class ContractSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-    :id,
-    :slug,
     :name,
     :number,
     :notes,
@@ -40,7 +38,7 @@ class ContractSerializer < ApplicationSerializer
     :ends_at,
     :vendor_id,
     :category_id,
-    :created_at,
-    :updated_at,
   )
+
+  belongs_to :category, serializer: Categories::OptionsSerializer, optional: true
 end

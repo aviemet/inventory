@@ -49,7 +49,6 @@ class AccessorySerializer < Assignable::QuantitySerializer
     :cost_currency,
     :requestable,
     :notes,
-    :type,
     :model_id,
     :vendor_id,
     :default_location_id,

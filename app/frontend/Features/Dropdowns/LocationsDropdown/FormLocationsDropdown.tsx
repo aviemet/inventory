@@ -6,7 +6,9 @@ import { useGetLocationsAsOptions } from '@/queries/locations'
 import { isEmpty } from 'lodash'
 import { type FormAsyncDropdown } from '..'
 
-export interface LocationsDropdownProps extends FormAsyncDropdown<Schema.LocationsOptions> {}
+export interface LocationsDropdownProps extends Omit<FormAsyncDropdown<Schema.LocationsOptions>, 'name'> {
+	name?: string
+}
 
 const LocationsDropdown = forwardRef<HTMLInputElement, LocationsDropdownProps>((
 	{ label = 'Location', name = 'location_id', filter, initialData, value, ...props },

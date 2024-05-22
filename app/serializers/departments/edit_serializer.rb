@@ -1,13 +1,6 @@
-class Departments::EditSerializer < ApplicationSerializer
-  object_as :department
-
+class Departments::EditSerializer < Departments::FormDataSerializer
   attributes(
     :id,
-    :name,
     :slug,
-    :location_id,
-    :notes,
   )
-
-  belongs_to :location, serializer: Locations::OptionsSerializer, optional: true
 end

@@ -6,7 +6,8 @@ import { useGetModelsAsOptions } from '@/queries/models'
 import { isEmpty } from 'lodash'
 import { type FormAsyncDropdown } from '..'
 
-interface ModelsDropdownProps extends FormAsyncDropdown<Schema.ModelsOptions> {
+interface ModelsDropdownProps extends Omit<FormAsyncDropdown<Schema.ModelsOptions>, 'name'> {
+	name?: string
 	modelCategory?: Schema.CategoryTypes|undefined
 }
 

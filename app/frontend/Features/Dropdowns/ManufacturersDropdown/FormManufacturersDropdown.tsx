@@ -6,7 +6,9 @@ import { useGetManufacturersAsOptions } from '@/queries/manufacturers'
 import { isEmpty } from 'lodash'
 import { type FormAsyncDropdown } from '..'
 
-interface ManufacturersDropdownProps extends FormAsyncDropdown<Schema.ManufacturersOptions> {}
+interface ManufacturersDropdownProps extends Omit<FormAsyncDropdown<Schema.ManufacturersOptions>, 'name'> {
+	name?: string
+}
 
 const ManufacturersDropdown = forwardRef<HTMLInputElement, ManufacturersDropdownProps>((
 	{ label = 'Manufacturer', name = 'manufacturer_id', initialData, value, ...props },

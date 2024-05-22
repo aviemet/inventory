@@ -50,11 +50,11 @@ class AssetSerializer < ApplicationSerializer
     :qty,
     :min_qty,
     :notes,
+    :type,
     :model_id,
     :vendor_id,
     :default_location_id,
     :status_label_id,
-    :type,
   )
 
   type :number

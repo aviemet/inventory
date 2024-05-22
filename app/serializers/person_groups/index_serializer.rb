@@ -1,13 +1,9 @@
-class PersonGroups::IndexSerializer < ApplicationSerializer
-  object_as :person_group
-
-  identifier :slug
-
+class PersonGroups::IndexSerializer < PersonGroupSerializer
   attributes(
     :id,
     :slug,
-    :name,
-    :description,
+    :created_at,
+    :updated_at,
   )
 
   type "{

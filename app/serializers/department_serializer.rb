@@ -25,13 +25,12 @@
 class DepartmentSerializer < ApplicationSerializer
   object_as :department
 
+  identifier :slug
+
   attributes(
-    :id,
     :name,
-    :slug,
-    :location_id,
     :notes,
-    :created_at,
-    :updated_at,
+    :location_id,
+    :manager_id,
   )
 end

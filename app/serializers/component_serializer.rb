@@ -41,7 +41,6 @@ class ComponentSerializer < Assignable::QuantitySerializer
   object_as :component
 
   attributes(
-    :id,
     :name,
     :serial,
     :asset_tag,
@@ -50,15 +49,17 @@ class ComponentSerializer < Assignable::QuantitySerializer
     :cost_currency,
     :purchased_at,
     :notes,
+    :requestable,
     :model_id,
     :vendor_id,
     :default_location_id,
-    :created_at,
-    :updated_at,
+    :status_label_id,
   )
 
   type :number
   def cost
     currency_for(component)
   end
+
+  belongs_to :status_label, serializer: StatusLabels::OptionsSerializer
 end

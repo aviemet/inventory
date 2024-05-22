@@ -19,10 +19,6 @@ class ManufacturerSerializer < ApplicationSerializer
   identifier :slug
 
   attributes(
-    :id,
-    :slug,
     :name,
-    :created_at,
-    :updated_at,
   )
 end

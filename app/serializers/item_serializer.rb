@@ -52,8 +52,7 @@ class ItemSerializer < Assignable::SingleSerializer
     :model_id,
     :vendor_id,
     :default_location_id,
-    :created_at,
-    :updated_at,
+    :status_label_id,
   )
 
   type :number

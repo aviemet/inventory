@@ -1,13 +1,4 @@
-class Phones::FormDataSerializer < ApplicationSerializer
-  object_as :phone
-
-  attributes(
-    :number,
-    :extension,
-    :notes,
-    :contact_id,
-    :category_id,
-    :created_at,
-    :updated_at,
-  )
+class Phones::FormDataSerializer < PhoneSerializer
+  belongs_to :contact, serializer: ContactSerializer
+  belongs_to :category, serializer: CategorySerializer
 end

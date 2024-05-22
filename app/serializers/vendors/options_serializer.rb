@@ -1,5 +1,5 @@
 class Vendors::OptionsSerializer < ApplicationSerializer
   object_as :vendor
 
-  attributes :id, :name
+  attributes :id, :slug, :name
 end

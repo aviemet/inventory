@@ -1,10 +1,2 @@
-class Vendors::FormDataSerializer < ApplicationSerializer
-  object_as :vendor
-
-  identifier :slug
-
-  attributes(
-    :name,
-    :url,
-  )
+class Vendors::FormDataSerializer < VendorSerializer
 end

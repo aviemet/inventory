@@ -21,8 +21,6 @@ class NetworkSerializer < ApplicationSerializer
     :address,
     :vlan_id,
     :notes,
-    :created_at,
-    :updated_at,
   )
 
   attribute :gateway do

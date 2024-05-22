@@ -26,9 +26,7 @@ class LocationSerializer < ApplicationSerializer
 
   attributes(
     :name,
-    :parent_id,
     :currency,
-    :created_at,
-    :updated_at,
+    :parent_id,
   )
 end

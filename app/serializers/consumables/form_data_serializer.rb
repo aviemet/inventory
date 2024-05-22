@@ -1,25 +1,5 @@
-class Consumables::FormDataSerializer < Assignable::QuantitySerializer
-  object_as :consumable
-
-  attributes(
-    :name,
-    :min_qty,
-    :qty,
-    :cost,
-    :cost_currency,
-    :requestable,
-    :notes,
-    :model_id,
-    :vendor_id,
-    :default_location_id,
-  )
-
-  type :number
-  def cost
-    currency_for(consumable)
-  end
-
-  belongs_to :model, serializer: Models::OptionsSerializer
-  belongs_to :vendor, serializer: Vendors::OptionsSerializer
-  belongs_to :default_location, serializer: Locations::OptionsSerializer
+class Consumables::FormDataSerializer < ConsumableSerializer
+  belongs_to :model, serializer: Models::OptionsSerializer, optional: true
+  belongs_to :vendor, serializer: Vendors::OptionsSerializer, optional: true
+  belongs_to :default_location, serializer: Locations::OptionsSerializer, optional: true
 end
