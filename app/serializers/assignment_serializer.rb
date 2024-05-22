@@ -32,6 +32,7 @@
 #  fk_rails_...  (location_id => locations.id)
 #
 class AssignmentSerializer < ApplicationSerializer
+  object_as :assignment
 
   attributes(
     :assignable_id,
@@ -45,8 +46,6 @@ class AssignmentSerializer < ApplicationSerializer
     :notes,
     :active,
     :created_by_id,
-    :created_at,
-    :updated_at,
     assign_toable_type: { type: :AssignToableTypes },
     assignable_type: { type: :AssignableTypes },
   )

@@ -1,5 +1,3 @@
-# include Rails.application.routes.url_helpers
-
 class ActivitySerializer < ApplicationSerializer
   object_as :activity, model: "PublicActivity::Activity"
 

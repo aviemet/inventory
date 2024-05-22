@@ -25,12 +25,13 @@
 #  fk_rails_...  (tickets_smtp_id => smtps.id)
 #
 class CompanySerializer < ApplicationSerializer
+  object_as :company
+
+  identifier :slug
+
   attributes(
-    :slug,
     :name,
     :settings,
     :default_currency,
-    :created_at,
-    :updated_at,
   )
 end

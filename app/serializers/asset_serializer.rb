@@ -41,7 +41,6 @@ class AssetSerializer < ApplicationSerializer
   object_as :asset
 
   attributes(
-    :id,
     :name,
     :asset_tag,
     :serial,
@@ -54,9 +53,8 @@ class AssetSerializer < ApplicationSerializer
     :model_id,
     :vendor_id,
     :default_location_id,
+    :status_label_id,
     :type,
-    :created_at,
-    :updated_at,
   )
 
   type :number
@@ -67,16 +65,4 @@ class AssetSerializer < ApplicationSerializer
   attribute :available_to_checkout do
     asset.available_to_checkout?
   end
-
-  belongs_to :vendor, serializer: VendorSerializer
-  belongs_to :default_location, serializer: LocationSerializer
-  belongs_to :model, serializer: ModelSerializer
-  belongs_to :status_label, serializer: StatusLabelSerializer
-  has_many   :assignments, serializer: AssignmentSerializer
-  has_many   :activities, serializer: ActivitySerializer
-  has_one    :category, serializer: CategorySerializer
-  has_one    :manufacturer, serializer: ManufacturerSerializer
-  has_one    :company, serializer: CompanySerializer
-  has_one    :department, serializer: DepartmentSerializer
-  has_one    :purchase, serializer: PurchaseSerializer
 end

@@ -1,12 +1,9 @@
-class Accessories::IndexSerializer < Assignable::QuantitySerializer
+class Accessories::IndexSerializer < AccessorySerializer
   attributes(
     :id,
+    :created_at,
+    :updated_at,
   )
-
-  type :number
-  def cost
-    currency_for(accessory)
-  end
 
   has_one :company, serializer: CompanySerializer
   has_one :purchase, serializer: PurchaseSerializer

@@ -1,9 +1,2 @@
-class Categories::FormDataSerializer < ApplicationSerializer
-  object_as :category
-
-  attributes(
-    :categorizable_type,
-    :name,
-    :description,
-  )
+class Categories::FormDataSerializer < CategorySerializer
 end

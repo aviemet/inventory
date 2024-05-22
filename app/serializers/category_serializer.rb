@@ -18,15 +18,12 @@
 class CategorySerializer < ApplicationSerializer
   object_as :category
 
+  identifier :slug
+
   attributes(
-    :id,
     :categorizable_type,
     :name,
-    :slug,
     :description,
-    :created_at,
-    :updated_at,
-    # qty: { type: :number },
   )
 
   type :string

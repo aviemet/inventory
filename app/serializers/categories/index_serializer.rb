@@ -1,11 +1,9 @@
-class Categories::IndexSerializer < ApplicationSerializer
+class Categories::IndexSerializer < CategorySerializer
   object_as :category
 
   attributes(
-    :categorizable_type,
-    :name,
+    :id,
     :slug,
-    :description,
     :created_at,
     :updated_at,
     qty: { type: :number },

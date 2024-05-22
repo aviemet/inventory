@@ -1,6 +1,8 @@
 class Accessories::ShowSerializer < AccessorySerializer
   attributes(
     :id,
+    :created_at,
+    :updated_at,
   )
 
   has_one :company, serializer: CompanySerializer

@@ -1,4 +1,4 @@
-class Assignable::QuantitySerializer < ApplicationSerializer
+class Assignable::QuantitySerializer < AssignableSerializer
   type :number
   def qty_available
     @object.qty_available

@@ -1,25 +1,11 @@
-class Assignments::ShowSerializer < ApplicationSerializer
+class Assignments::ShowSerializer < AssignmentSerializer
   object_as :assignment
 
   attributes(
     :id,
-    :assignable_id,
-    :assign_toable_id,
-    :qty,
-    :status,
-    :location_id,
-    :assigned_at,
-    :returned_at,
-    :expected_at,
-    :notes,
-    :active,
-    :created_by_id,
     :created_at,
     :updated_at,
-    assign_toable_type: { type: :AssignToableTypes },
-    assignable_type: { type: :AssignableTypes },
   )
 
-  belongs_to :assign_toable, serializer: AssignToableSerializer
-  belongs_to :assignable, serializer: AssignableSerializer
+  belongs_to :created_by, serializer: People::ShowSerializer
 end

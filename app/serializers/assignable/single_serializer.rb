@@ -1,2 +1,2 @@
-class Assignable::SingleSerializer < ApplicationSerializer
+class Assignable::SingleSerializer < AssignableSerializer
 end

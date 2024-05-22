@@ -1,11 +1,7 @@
-class Companies::ShowSerializer < ApplicationSerializer
-  object_as :company
-
+class Companies::ShowSerializer < CompanySerializer
   attributes(
+    :id,
     :slug,
-    :name,
-    :settings,
-    :default_currency,
     :created_at,
     :updated_at,
   )
