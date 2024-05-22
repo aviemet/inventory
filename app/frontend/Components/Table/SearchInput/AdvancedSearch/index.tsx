@@ -54,7 +54,6 @@ const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 				<ActionIcon
 					size={ 42 }
 					variant="filled"
-					color="primary"
 					onClick={ () => toggleOpen() }
 					ref={ setSearchButton }
 					data-ignore-outside-clicks

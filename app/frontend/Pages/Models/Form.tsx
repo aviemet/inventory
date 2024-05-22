@@ -1,5 +1,5 @@
 import React from 'react'
-import ManufacturersDropdown from '../../Features/Dropdowns/ManufacturersDropdown/ManufacturersDropdown'
+import ManufacturersDropdown from '../../Features/Dropdowns/ManufacturersDropdown/FormManufacturersDropdown'
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
 import { CategoriesDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'

@@ -23,16 +23,17 @@ export interface AsyncMultiSelect<T> extends MultiSelectInputProps {
 
 export * from './CategoriesDropdown'
 export * from './DepartmentsDropdown'
+export * from './StatusLabelsDropdown'
+export * from './VendorsDropdown'
+export * from './LocationsDropdown'
+export * from './ManufacturersDropdown'
+export * from './ModelsDropdown'
+
 export { default as AssetsDropdown }        from './AssetsDropdown'
 export { default as CurrenciesDropdown }    from './CurrenciesDropdown'
 export { default as ItemsDropdown }         from './ItemsDropdown'
-export { default as LocationsDropdown }     from './LocationsDropdown/LocationsDropdownInput'
-export { default as ManufacturersDropdown } from './ManufacturersDropdown/ManufacturersDropdown'
-export { default as ModelsDropdown }        from './ModelsDropdown/FormModelsDropdown'
 export { default as PeopleDropdown }        from './PeopleDropdown'
 export { default as PeopleMultiSelect }     from './PeopleMultiSelect'
-export { default as StatusLabelsDropdown }  from './StatusLabelsDropdown'
-export { default as VendorsDropdown }       from './VendorsDropdown'
 
 export { default as AssignToableDropdown } from './AssignToableDropdown'
 export { default as AssignmentLocationDropdown } from './AssignmentLocationDropdown'

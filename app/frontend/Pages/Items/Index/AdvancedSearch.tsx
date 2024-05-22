@@ -1,13 +1,16 @@
 import React from 'react'
-import { CurrencyInput, TextInput } from '@/Components/Inputs'
 import { Button, Box, Group, Flex, Link } from '@/Components'
-import { CrossIcon, SearchIcon } from '@/Components/Icons'
+import { CurrencyInput, TextInput } from '@/Components/Inputs'
 import { useAdvancedSearch } from '@/Components/Table'
-import { CategoriesDropdown } from '@/Features/Dropdowns'
-import ManufacturersDropdown from '@/Features/Dropdowns/ManufacturersDropdown'
-import VendorsDropdown from '@/Features/Dropdowns/VendorsDropdown'
-import { DepartmentsDropdown } from '@/Features/Dropdowns'
-import ModelsDropdown from '@/Features/Dropdowns/ModelsDropdown'
+import { CrossIcon, SearchIcon } from '@/Components/Icons'
+import {
+	DepartmentsDropdown,
+	ManufacturersDropdown,
+	VendorsDropdown,
+	ModelsDropdown,
+	CategoriesDropdown,
+	StatusLabelsDropdown,
+} from '@/Features/Dropdowns'
 import { SearchDateInput, SearchDateTypeInput } from '@/Components/Table/SearchInput/AdvancedSearch/DateRangeInputs'
 
 const AdvancedItemsSearch = () => {
