@@ -12,7 +12,7 @@ import { useNetworkContext } from '..'
 import IPAddress from '@/lib/IPAddress'
 
 interface EditableLinkProps {
-	item?: Schema.Item
+	item?: Schema.ItemsOptions
 	ip?: string
 }
 

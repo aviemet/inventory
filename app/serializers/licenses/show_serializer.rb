@@ -5,13 +5,13 @@ class Licenses::ShowSerializer < LicenseSerializer
     :updated_at,
   )
 
-  has_one :purchase, serializer: PurchaseSerializer
+  has_one :purchase, serializer: Purchases::BasicSerializer
 
   has_many :assignments, serializer: Assignments::ShowSerializer
-  has_many :activities, serializer: ActivitySerializer
+  has_many :activities, serializer: Activities::BasicSerializer
 
-  belongs_to :department, serializer: DepartmentSerializer
-  belongs_to :category, serializer: CategorySerializer
-  belongs_to :vendor, serializer: VendorSerializer
-  belongs_to :manufacturer, serializer: ManufacturerSerializer
+  belongs_to :department, serializer: Departments::BasicSerializer
+  belongs_to :category, serializer: Categories::BasicSerializer
+  belongs_to :vendor, serializer: Vendors::BasicSerializer
+  belongs_to :manufacturer, serializer: Manufacturers::BasicSerializer
 end

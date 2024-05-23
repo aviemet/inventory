@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Flex, Heading, Page, Section, Table, Box } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
@@ -102,10 +102,13 @@ const Checkin = ({ assignment, license, locations, status_labels }: CheckinLicen
 						required
 					/>
 
-					<LocationsDropdown locations={ locations } />
+					<LocationsDropdown />
 
 					<Select
-						options={ status_labels }
+						options={ useMemo(() => status_labels.map(label => ({
+							label: label.name,
+							value: String(label.id),
+						})), [status_labels]) }
 						label="Status"
 						name="status_id"
 						required

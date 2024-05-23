@@ -7,11 +7,11 @@ import { EditIcon } from '@/Components/Icons'
 
 interface ShowNetworkProps {
 	network: Schema.NetworksShow
-	ips: Schema.IpLease[]
+	ips: Schema.IpLeasesShow[]
 	pagination: Schema.Pagination
 }
 
-const [useNetworkContext, NetworkContextProvider] = createContext<{ network: Schema.Network }>()
+const [useNetworkContext, NetworkContextProvider] = createContext<{ network: Schema.NetworksShow }>()
 export { useNetworkContext }
 
 const Show = ({ network, ips, pagination }: ShowNetworkProps) => {

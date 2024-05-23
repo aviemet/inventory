@@ -3,6 +3,7 @@ class Categories::OptionsSerializer < ApplicationSerializer
 
   attributes(
     :id,
+    :slug,
     :name,
     :category_with_type,
   )

@@ -7,7 +7,7 @@ interface UpdateOrderProps{
 	order: Schema.OrdersEdit
 }
 
-const EditOrder = ({ order, ...models }: UpdateOrderProps) => {
+const EditOrder = ({ order  }: UpdateOrderProps) => {
 	const title = 'Edit Order'
 
 	return (

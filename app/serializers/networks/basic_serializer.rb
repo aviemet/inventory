@@ -1,4 +1,4 @@
-class Networks::ShowSerializer < NetworkSerializer
+class Networks::BasicSerializer < NetworkSerializer
   attributes(
     :id,
     :created_at,

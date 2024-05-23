@@ -6,7 +6,7 @@ import * as classes from './NetworkDetailsTable.css'
 
 interface NetworkDetailsTableProps {
 	hosts: string[]
-	ips: Schema.IpLease[]
+	ips: Schema.IpLeasesBasic[]
 }
 
 const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {

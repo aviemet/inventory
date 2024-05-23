@@ -1,12 +1,13 @@
 class Locations::IndexSerializer < Locations::CountsSerializer
   attributes(
     :id,
+    :slug,
     :created_at,
     :updated_at,
   )
 
-  belongs_to :parent, serializer: LocationSerializer
-  belongs_to :contact, serializer: ContactSerializer
-  belongs_to :department, serializer: DepartmentSerializer
-  belongs_to :location, serializer: LocationSerializer
+  belongs_to :parent, serializer: Locations::BasicSerializer
+  belongs_to :contact, serializer: Contacts::BasicSerializer
+  belongs_to :department, serializer: Departments::BasicSerializer
+  belongs_to :location, serializer: Locations::BasicSerializer
 end

@@ -11,6 +11,6 @@ class Models::IndexSerializer < ModelSerializer
     model.types.size
   end
 
-  belongs_to :manufacturer, serializer: ManufacturerSerializer
-  belongs_to :category, serializer: CategorySerializer
+  belongs_to :manufacturer, serializer: Manufacturers::BasicSerializer
+  belongs_to :category, serializer: Categories::OptionsSerializer
 end

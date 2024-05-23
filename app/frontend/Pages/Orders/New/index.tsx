@@ -4,7 +4,7 @@ import OrderForm from '../Form'
 import { Routes } from '@/lib'
 
 interface NewOrderProps {
-	order: Schema.Order
+	order: Schema.OrdersFormData
 }
 
 const NewOrder = ({ order }: NewOrderProps) => {

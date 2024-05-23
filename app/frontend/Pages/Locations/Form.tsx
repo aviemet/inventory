@@ -20,7 +20,7 @@ export interface LocationFormProps {
 const emptyLocation: Schema.LocationsFormData = {
 	name: '',
 	currency: '',
-	parent_id: undefined,
+	parent_id: NaN,
 }
 
 const LocationForm = ({

@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
 interface ShowOrderProps {
-	order: Schema.Order
+	order: Schema.OrdersShow
 }
 
 const tabs = {
