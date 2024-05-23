@@ -1,16 +1,16 @@
-import React, { ForwardedRef, forwardRef } from 'react'
+import React from 'react'
 import PasswordInput, { type PasswordInputProps } from '@/Components/Inputs/PasswordInput'
 import Field from '../Components/Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface FormPasswordInputProps<TForm extends NestedObject = NestedObject>
+interface FormPasswordInputProps<TForm extends NestedObject>
 	extends
 	Omit<PasswordInputProps, InputConflicts>,
 	BaseFormInputProps<string, TForm> {}
 
-const FormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
+const FormInput = <TForm extends NestedObject>(
 	{
 		name,
 		model,
@@ -23,7 +23,6 @@ const FormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
 		wrapperProps,
 		...props
 	}: FormPasswordInputProps<TForm>,
-	ref: ForwardedRef<HTMLInputElement>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
@@ -56,7 +55,6 @@ const FormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
 			) }
 		>
 			<PasswordInput
-				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value }
@@ -68,6 +66,6 @@ const FormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
 				{ ...props }
 			/></ConditionalWrapper>
 	)
-})
+}
 
 export default FormInput

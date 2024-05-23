@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef } from 'react'
+import React from 'react'
 import Field from '../Components/Field'
 import AutocompleteInput, { type AutocompleteProps } from '@/Components/Inputs/AutocompleteInput'
 import cx from 'clsx'
@@ -14,7 +14,7 @@ interface FormAutocompleteProps<TForm extends NestedObject = NestedObject>
 	endpoint?: string
 }
 
-const FormAutocompleteComponent = forwardRef(<TForm extends NestedObject = NestedObject>(
+const FormAutocompleteComponent = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -29,7 +29,6 @@ const FormAutocompleteComponent = forwardRef(<TForm extends NestedObject = Neste
 		wrapperProps,
 		...props
 	} : FormAutocompleteProps<TForm>,
-	ref: ForwardedRef<HTMLInputElement>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
 
@@ -57,7 +56,6 @@ const FormAutocompleteComponent = forwardRef(<TForm extends NestedObject = Neste
 			) }
 		>
 			<AutocompleteInput
-				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value }
@@ -75,6 +73,6 @@ const FormAutocompleteComponent = forwardRef(<TForm extends NestedObject = Neste
 			/>
 		</ConditionalWrapper>
 	)
-})
+}
 
 export default FormAutocompleteComponent

@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef } from 'react'
+import React from 'react'
 import { NestedObject, UseFormProps, useInertiaInput } from 'use-inertia-form'
 import { ConditionalWrapper } from '@/Components'
 import Field from '../Components/Field'
@@ -20,7 +20,7 @@ export interface FormMultiSelectProps<TForm extends NestedObject = NestedObject>
 	onOptionSubmit?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
 }
 
-const MultiSelectComponent = forwardRef(<TForm extends NestedObject = NestedObject>(
+const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 	{
 		options = [],
 		label,
@@ -40,7 +40,6 @@ const MultiSelectComponent = forwardRef(<TForm extends NestedObject = NestedObje
 		wrapperProps,
 		...props
 	}: FormMultiSelectProps<TForm>,
-	ref: ForwardedRef<HTMLInputElement>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[], TForm>({ name, model, errorKey })
 
@@ -89,7 +88,6 @@ const MultiSelectComponent = forwardRef(<TForm extends NestedObject = NestedObje
 			) }
 		>
 			<MultiSelect
-				ref={ ref }
 				// Add "search" suffix to prevent password managers trying to autofill dropdowns
 				id={ `${id || inputId}-search` }
 				autoComplete="off"
@@ -110,6 +108,6 @@ const MultiSelectComponent = forwardRef(<TForm extends NestedObject = NestedObje
 			/>
 		</ConditionalWrapper>
 	)
-})
+}
 
 export default React.memo(MultiSelectComponent)

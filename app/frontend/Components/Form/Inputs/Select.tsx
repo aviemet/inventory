@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef } from 'react'
+import React from 'react'
 import Field from '../Components/Field'
 import { type ComboboxData, type ComboboxItem, type ComboboxItemGroup } from '@mantine/core'
 import SelectInput, { type SelectInputProps } from '@/Components/Inputs/Select'
@@ -29,7 +29,7 @@ export interface FormSelectProps<TForm extends NestedObject = NestedObject>
 	field?: boolean
 }
 
-const Select = forwardRef(<TForm extends NestedObject = NestedObject>(
+const Select = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		label,
@@ -54,7 +54,6 @@ const Select = forwardRef(<TForm extends NestedObject = NestedObject>(
 		wrapperProps,
 		...props
 	}: FormSelectProps<TForm>,
-	ref: ForwardedRef<HTMLInputElement>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model, errorKey })
 
@@ -144,6 +143,6 @@ const Select = forwardRef(<TForm extends NestedObject = NestedObject>(
 			</>
 		</ConditionalWrapper>
 	)
-})
+}
 
 export default Select

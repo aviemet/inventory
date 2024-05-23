@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef } from 'react'
+import React from 'react'
 import Field from '../Components/Field'
 import DateTimeInput, { type DateTimeProps } from '@/Components/Inputs/DateTimeInput'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
@@ -11,7 +11,7 @@ interface DateTimeFormProps<TForm extends NestedObject = NestedObject>
 	Omit<DateTimeProps, InputConflicts>,
 	BaseFormInputProps<Date|'', TForm> {}
 
-const DateTime = forwardRef(<TForm extends NestedObject = NestedObject>({
+const DateTime = <TForm extends NestedObject = NestedObject>({
 	name,
 	required,
 	onChange,
@@ -23,7 +23,6 @@ const DateTime = forwardRef(<TForm extends NestedObject = NestedObject>({
 	wrapperProps,
 	...props
 }: DateTimeFormProps<TForm>,
-	ref: ForwardedRef<HTMLButtonElement>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date|'', TForm>({ name, model })
 
@@ -58,7 +57,6 @@ const DateTime = forwardRef(<TForm extends NestedObject = NestedObject>({
 			) }
 		>
 			<DateTimeInput
-				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value === '' ? undefined : value }
@@ -72,6 +70,6 @@ const DateTime = forwardRef(<TForm extends NestedObject = NestedObject>({
 			/>
 		</ConditionalWrapper>
 	)
-})
+}
 
 export default DateTime

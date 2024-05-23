@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef } from 'react'
+import React from 'react'
 import CurrencyInput, { type CurrencyInputProps } from '@/Components/Inputs/CurrencyInput'
 import Field from '../Components/Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
@@ -10,7 +10,7 @@ interface INumberInputProps<TForm extends NestedObject = NestedObject>
 	Omit<CurrencyInputProps, InputConflicts>,
 	BaseFormInputProps<number, TForm> {}
 
-const FormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
+const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -22,7 +22,6 @@ const FormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
 		field = true,
 		...props
 	} : INumberInputProps<TForm>,
-	ref: ForwardedRef<HTMLInputElement>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({ name, model })
 
@@ -54,7 +53,6 @@ const FormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
 			condition={ field }
 		>
 			<CurrencyInput
-				ref={ ref }
 				id={ id || inputId }
 				name={ inputName }
 				value={ value }
@@ -66,6 +64,6 @@ const FormInput = forwardRef(<TForm extends NestedObject = NestedObject>(
 				{ ...props }
 			/></ConditionalWrapper>
 	)
-})
+}
 
 export default FormInput

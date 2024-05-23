@@ -175,6 +175,7 @@ const PersonForm = ({
 						onBlur={ handlePasswordBlur }
 						clearErrorsOnChange={ false }
 					/>
+
 					<PasswordInput
 						name="password_confirmation"
 						label="Check Password"

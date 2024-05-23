@@ -1,20 +1,17 @@
-import React, { forwardRef } from 'react'
-import { useInertiaInput } from 'use-inertia-form'
+import React from 'react'
+import { useInertiaInput, type NestedObject } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { Field } from '@/Components/Form'
 import CheckboxInput, { type CheckboxProps } from '@/Components/Inputs/Checkbox'
 import FormCheckboxGroup from './Group'
 import { type InputConflicts, type BaseFormInputProps } from '..'
 
-export interface FormCheckboxProps extends Omit<CheckboxProps, InputConflicts>, BaseFormInputProps<boolean> {}
+export interface FormCheckboxProps<TForm extends NestedObject>
+	extends
+	Omit<CheckboxProps, InputConflicts>,
+	BaseFormInputProps<boolean, TForm> {}
 
-type FormCheckboxComponentType = React.ForwardRefExoticComponent<
-  CheckboxProps & React.RefAttributes<HTMLInputElement>
-> & {
-	Group: typeof FormCheckboxGroup
-};
-
-const FormCheckboxComponent: FormCheckboxComponentType = forwardRef<HTMLInputElement, FormCheckboxProps>((
+const FormCheckboxComponent = <TForm extends NestedObject>(
 	{
 		name,
 		onChange,
@@ -27,10 +24,9 @@ const FormCheckboxComponent: FormCheckboxComponentType = forwardRef<HTMLInputEle
 		field = true,
 		style,
 		...props
-	},
-	ref,
+	}: FormCheckboxProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean, TForm>({ name, model })
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
@@ -55,7 +51,6 @@ const FormCheckboxComponent: FormCheckboxComponentType = forwardRef<HTMLInputEle
 			) }
 		>
 			<CheckboxInput
-				ref={ ref }
 				id={ id || inputId }
 				className={ className }
 				name={ inputName }
@@ -71,7 +66,7 @@ const FormCheckboxComponent: FormCheckboxComponentType = forwardRef<HTMLInputEle
 			/>
 		</ConditionalWrapper>
 	)
-}) as FormCheckboxComponentType
+}
 
 FormCheckboxComponent.Group = FormCheckboxGroup
 
