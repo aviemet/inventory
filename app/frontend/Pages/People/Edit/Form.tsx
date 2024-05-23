@@ -11,7 +11,7 @@ import {
 } from '@/Components/Form'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { useBooleanToggle } from '@/lib/hooks'
-import { DepartmentsDropdown } from '@/Features/Dropdowns'
+import { FormDepartmentsDropdown } from '@/Features/Dropdowns'
 import PeopleDropdown from '@/Features/Dropdowns/PeopleDropdown'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
@@ -141,7 +141,7 @@ const PersonForm = ({
 
 			<TextInput name="employee_number" label="Employee #" />
 
-			<DepartmentsDropdown
+			<FormDepartmentsDropdown
 				name="department_id"
 				initialData={ coerceArray(person?.department) }
 			/>

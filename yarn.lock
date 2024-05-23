@@ -5668,24 +5668,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tabler/icons-react@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "@tabler/icons-react@npm:3.5.0"
-  dependencies:
-    "@tabler/icons": 3.5.0
-  peerDependencies:
-    react: ">= 16"
-  checksum: b29b60aeb0fe69f90eae6d21bdd9c2f83c5415414b2165b11e790a2c68843a6708225cbf34cac594bcb1a1c99c4885e2eed7c8244629d9b75152d40a03cf5306
-  languageName: node
-  linkType: hard
-
-"@tabler/icons@npm:3.5.0":
-  version: 3.5.0
-  resolution: "@tabler/icons@npm:3.5.0"
-  checksum: 15301b713736d1d60012719614ac418c7a94fd06450821ace125d0c6d1257aa491cbf53502b877596bb32814b53a80e0366026760cb62fae948940d1dea717d8
-  languageName: node
-  linkType: hard
-
 "@tabler/icons@npm:^1.119.0":
   version: 1.119.0
   resolution: "@tabler/icons@npm:1.119.0"
@@ -11784,7 +11766,6 @@ __metadata:
     "@storybook/react": ^8.1.2
     "@storybook/react-vite": ^8.1.2
     "@storybook/testing-library": ^0.2.2
-    "@tabler/icons-react": ^3.5.0
     "@tanstack/react-query": ^5.37.1
     "@tanstack/react-query-devtools": ^5.37.1
     "@testing-library/react": ^15.0.7
