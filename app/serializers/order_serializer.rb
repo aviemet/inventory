@@ -41,7 +41,6 @@ class OrderSerializer < ApplicationSerializer
 
   attributes(
     :number,
-    :user_id,
     :notes,
     :submitted_at,
     :ordered_at,
@@ -52,12 +51,23 @@ class OrderSerializer < ApplicationSerializer
     :discount_decription,
     :returned_reason,
     :canceled_reason,
-    :shipping_cents,
-    :shipping_currency,
-    :tax_cents,
-    :tax_currency,
-    :discount_cents,
-    :discount_currency,
+    :user_id,
     :vendor_id,
+    cost: { type: :number },
   )
+
+  type :number
+  def shipping_cost
+    currency_for(order)
+  end
+
+  type :number
+  def discount_cost
+    currency_for(order)
+  end
+
+  type :number
+  def tax_cost
+    currency_for(order)
+  end
 end

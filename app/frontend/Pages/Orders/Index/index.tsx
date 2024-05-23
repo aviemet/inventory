@@ -4,10 +4,8 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import OrdersTable from '../Table'
 
-export type OrderWithCost = Schema.Order & { cost: number }
-
 interface OrdersIndexProps {
-	orders: OrderWithCost[]
+	orders: Schema.OrdersIndex[]
 	pagination: Schema.Pagination
 }
 

@@ -42,14 +42,12 @@ class OrdersController < ApplicationController
 
   # @route POST /orders (orders)
   def create
-    respond_to do |format|
-      if order.save
-        format.html { redirect_to order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: order.errors, status: :unprocessable_entity }
-      end
+    authorize Order
+
+    if order.save
+      redirect_to order, notice: 'Purchase order was successfully created'
+    else
+      redirect_to new_order_path, inertia: { errors: order.errors }
     end
   end
 

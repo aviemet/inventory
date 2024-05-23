@@ -5,7 +5,7 @@ import RecentActivityTable from './RecentActivityTable'
 import { TestResponseButton } from '@/Components/Button'
 
 interface DashboardProps {
-	company: Schema.CompaniesDashboard
+	company: Schema.CompaniesCounts
 	activities: Schema.ActivitiesDashboard[]
 }
 

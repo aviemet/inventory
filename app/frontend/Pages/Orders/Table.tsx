@@ -3,7 +3,6 @@ import { Routes, formatter } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
 import { type TableProps } from '@/Components/Table/Table'
-import { type OrderWithCost } from './Index'
 
 const OrdersTable = (props: TableProps) => {
 	return (
@@ -20,7 +19,7 @@ const OrdersTable = (props: TableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (order: OrderWithCost) => (
+				<Table.RowIterator render={ (order: Schema.OrdersIndex) => (
 					<Table.Row key={ order.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.order(order) }>{ order.number }</Link>
