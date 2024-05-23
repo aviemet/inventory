@@ -7,7 +7,7 @@ interface UpdatePersonProps{
 	person: Schema.PeopleEdit
 }
 
-const New = ({ person }: UpdatePersonProps) => {
+const EditPerson = ({ person }: UpdatePersonProps) => {
 	const title = `Edit ${person.first_name} ${person.last_name}`
 
 	return (
@@ -29,4 +29,4 @@ const New = ({ person }: UpdatePersonProps) => {
 	)
 }
 
-export default New
+export default EditPerson

@@ -46,7 +46,7 @@ const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
 				{ label: 'SSL', value: 'ssl' },
 			] } />
 
-			<Group pt="md" pb="xs" position="right">
+			<Group pt="md" pb="xs" justify="right">
 				<FormConsumer<SmtpFormData>>{ ({ data, getData }) => (
 					<TestResponseButton
 						method="post"

@@ -5,16 +5,15 @@ class People::IndexSerializer < PersonSerializer
     :updated_at,
   )
 
-  has_one :contact, serializer: ContactSerializer
+  has_one :contact, serializer: Contacts::BasicSerializer
 
-  has_many :groups, serializer: PersonGroupSerializer
-  has_many :possessions, serializer: AssignmentSerializer
-  has_many :items, serializer: ItemSerializer
-  has_many :accessories, serializer: AccessorySerializer
-  has_many :licenses, serializer: LicenseSerializer
-  has_many :activities, serializer: ActivitySerializer
+  has_many :groups, serializer: PersonGroups::BasicSerializer
+  has_many :possessions, serializer: Assignments::BasicSerializer
+  has_many :items, serializer: Items::BasicSerializer
+  has_many :accessories, serializer: Accessories::BasicSerializer
+  has_many :licenses, serializer: Licenses::BasicSerializer
 
-  belongs_to :manager, serializer: PersonSerializer
-  belongs_to :user, serializer: UserSerializer
-  belongs_to :department, serializer: DepartmentSerializer
+  belongs_to :manager, serializer: People::BasicSerializer
+  belongs_to :user, serializer: Users::BasicSerializer
+  belongs_to :department, serializer: Departments::BasicSerializer
 end

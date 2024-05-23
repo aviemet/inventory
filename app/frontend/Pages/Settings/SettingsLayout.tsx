@@ -43,8 +43,8 @@ const SettingsLayout = ({ children, breadcrumbs }: SettingsLayoutProps) => {
 		setMobileFormat(width < Number(px(theme.breakpoints.sm)))
 	}, [width])
 
-	const handleTabChange = (value: string) => {
-		router.get(`/settings/${value}`, {}, { preserveState: true })
+	const handleTabChange = (value: string|null) => {
+		router.get(`/settings/${value ?? 'general'}`, {}, { preserveState: true })
 	}
 
 	return (

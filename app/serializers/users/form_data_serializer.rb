@@ -7,8 +7,7 @@ class Users::FormDataSerializer < UserSerializer
     :password_confirmation,
   )
 
-  has_one :person, serializer: PersonSerializer
+  has_one :person, serializer: PersonSerializer, optional: true
 
-  has_many :people, serializer: PersonSerializer
-  has_many :companies, serializer: CompanySerializer
+  has_many :people, serializer: PersonSerializer, optional: true
 end

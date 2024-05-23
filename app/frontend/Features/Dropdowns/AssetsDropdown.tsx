@@ -4,7 +4,9 @@ import { isEmpty } from 'lodash'
 import { useGetAssetsAsOptions } from '@/queries/assets'
 import { type FormAsyncDropdown } from '.'
 
-interface AssetsDropdownProps extends FormAsyncDropdown<Schema.AssetsOptions> {}
+interface AssetsDropdownProps extends Omit<FormAsyncDropdown<Schema.AssetsOptions>, 'name'> {
+	name?: string
+}
 
 const AssetsDropdown = forwardRef<HTMLInputElement, AssetsDropdownProps>((
 	{ label = 'Asset', name = 'asset_id', initialData = [], value, ...props },

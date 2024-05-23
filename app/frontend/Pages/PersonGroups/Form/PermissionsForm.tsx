@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/Components/Form'
 import { Table } from '@/Components'
-import { Routes, exclude } from '@/lib'
+import { Routes } from '@/lib'
 import { createContext, usePageProps } from '@/lib/hooks'
 import SwitchRow from './SwitchRow'
 import tableRows from './tableRows'
@@ -26,7 +26,7 @@ export interface GroupFormProps {
 const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }: GroupFormProps) => {
 	const { auth: { user } } = usePageProps()
 
-	const formData = { person_group: (person_group ? exclude(person_group, ['id', 'slug']) : emptyGroup) } as FormData
+	const formData = { person_group: person_group ? person_group : emptyGroup } as FormData
 	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData.person_group.permissions?.company?.admin || false)
 
 	const longestPermissionsArray = useCallback(() => {
@@ -63,6 +63,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 				onSubmit={ handleSubmit }
 				railsAttributes={ false }
 				remember={ false }
+				filter={ ['id', 'slug'] }
 			>
 				<TextInput name="name" label="Name" required autoFocus />
 
@@ -78,8 +79,12 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 					<Table mt={ 32 }>
 						<Table.Head>
 							<Table.Row>
-								<Table.HeadCell>All</Table.HeadCell>
-								<Table.HeadCell>Record Type</Table.HeadCell>
+								<Table.HeadCell>
+									All
+								</Table.HeadCell>
+								<Table.HeadCell>
+									Record Type
+								</Table.HeadCell>
 								<Table.HeadCell>
 									<ColumnToggle permission="index" /> List
 								</Table.HeadCell>

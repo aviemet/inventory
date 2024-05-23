@@ -5,5 +5,6 @@ class People::BasicSerializer < PersonSerializer
     :updated_at,
   )
 
-  belongs_to :user, serializer: UserSerializer
+  belongs_to :user, serializer: Users::BasicSerializer
+  belongs_to :department, serializer: Departments::BasicSerializer
 end

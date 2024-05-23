@@ -1,4 +1,4 @@
-import { NestedObject, UseFormProps } from 'use-inertia-form'
+import { NestedObject, UseFormProps, UseInertiaInputProps } from 'use-inertia-form'
 
 export { default as Autocomplete }     from './Autocomplete'
 export { default as CurrencyInput }    from './CurrencyInput'
@@ -22,8 +22,9 @@ export {
 } from './Checkbox'
 
 export type InputConflicts = 'name'|'onChange'|'onBlur'|'onFocus'|'value'
-export interface BaseFormInputProps<T, TForm extends NestedObject = NestedObject> {
-	name: string
+export interface BaseFormInputProps<T, TForm extends NestedObject = NestedObject>
+	extends UseInertiaInputProps
+{
 	model?: string
 	errorKey?: string
 	field?: boolean

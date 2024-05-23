@@ -10,6 +10,6 @@ class Tickets::ShowSerializer < TicketSerializer
 
   belongs_to :created_by, serializer: PersonSerializer
   belongs_to :primary_contact, serializer: PersonSerializer
-  belongs_to :asset, serializer: AssetSerializer
+  belongs_to :asset, serializer: Assets::BasicSerializer
   belongs_to :status, serializer: TicketStatusSerializer
 end

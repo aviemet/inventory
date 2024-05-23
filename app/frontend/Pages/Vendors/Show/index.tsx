@@ -74,7 +74,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 								<Menu.Dropdown>
 									<Menu.Link
 										href={ Routes.editVendor(vendor.slug) }
-										icon={ <EditIcon /> }
+										leftSection={ <EditIcon /> }
 									>
 										Edit
 									</Menu.Link>

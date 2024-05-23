@@ -27,9 +27,9 @@ export const useUpdateUserPreferences: ReactMutationFunction<Schema.User, UserPr
 		},
 		mutationKey: ['user', params.id, 'preferences'],
 		...options,
-		onSuccess: (...args) => {
+		onSuccess: (data, variables) => {
 			queryClient.invalidateQueries({ queryKey: ['user', params.id, 'preferences'] })
-			options?.onSuccess?.(args)
+			options?.onSuccess?.(data, variables)
 		},
 	})
 }

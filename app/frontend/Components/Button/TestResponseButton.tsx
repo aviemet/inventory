@@ -4,7 +4,7 @@ import axios from 'axios'
 import useStateMachine, { t } from '@cassiozen/usestatemachine'
 import { CheckIcon, CrossIcon } from '@/Components/Icons'
 import { InfoCircle } from 'tabler-icons-react'
-import { Avatar, ButtonProps, HoverCard, Text } from '@mantine/core'
+import { Avatar, ButtonProps, HoverCard, Text, useMantineTheme } from '@mantine/core'
 import { type HTTPVerb } from 'use-inertia-form'
 
 type StateMachineContext = {
@@ -24,6 +24,8 @@ interface TestResponseButtonProps extends ButtonProps {
  * Displays success if the endpoint returns a successful response, error upon any errors *
  */
 const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data, ...props }: TestResponseButtonProps) => {
+	const theme = useMantineTheme()
+
 	const [errorMessage, setErrorMessage] = useState('')
 
 	const [requestState, setRequestState] = useStateMachine({
@@ -33,7 +35,7 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 		initial: 'inactive',
 		context: {
 			icon: <></>,
-			color: 'primary',
+			color: theme.primaryColor,
 		},
 		states: {
 			inactive: {
@@ -42,7 +44,7 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 					setErrorMessage('')
 					setContext(() => ({
 						icon: <></>,
-						color: 'primary',
+						color: theme.primaryColor,
 					}))
 				},
 			},
@@ -55,7 +57,7 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 					setErrorMessage('')
 					setContext(() => ({
 						icon: <></>,
-						color: 'primary',
+						color: theme.primaryColor,
 					}))
 				},
 			},

@@ -17,6 +17,15 @@ export interface VendorFormProps {
 const emptyVendor: Schema.VendorsFormData = {
 	name: '',
 	url: '',
+	contact: {
+		primary_address_id: NaN,
+		primary_email_id: NaN,
+		primary_phone_id: NaN,
+		phones: [],
+		emails: [],
+		addresses: [],
+		websites: [],
+	},
 }
 
 const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: VendorFormProps) => {
