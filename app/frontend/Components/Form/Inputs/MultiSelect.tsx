@@ -27,7 +27,6 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 		required,
 		id,
 		name,
-		errorKey,
 		model,
 		field = true,
 		onBlur,
@@ -38,10 +37,19 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 		onDropdownClose,
 		onOptionSubmit,
 		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
 	}: FormMultiSelectProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[], TForm>({ name, model, errorKey })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[], TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (values: string[]) => {
 		setValue(values)
@@ -110,4 +118,4 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 	)
 }
 
-export default React.memo(MultiSelectComponent)
+export default MultiSelectComponent

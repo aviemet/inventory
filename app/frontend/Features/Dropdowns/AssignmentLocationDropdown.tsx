@@ -5,7 +5,7 @@ import { type LocationsDropdownProps } from './LocationsDropdown/LocationsDropdo
 
 const AssignmentLocationDropdown = ({ label = 'Location', name = 'location_id', ...props }: LocationsDropdownProps) => {
 	const { getData } = useForm<{ assignment: Schema.AssignmentsFormData}>()
-	// @ts-expect-error 'Type instantiation is excessively deep and possibly infinite.'
+	// @ts-ignore
 	const assignmentType = getData('assignment.assign_toable_type')
 
 	if(assignmentType === 'Location') return <></>

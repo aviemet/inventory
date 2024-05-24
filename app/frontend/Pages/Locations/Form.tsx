@@ -57,4 +57,4 @@ const LocationForm = ({
 	)
 }
 
-export default React.memo(LocationForm)
+export default LocationForm

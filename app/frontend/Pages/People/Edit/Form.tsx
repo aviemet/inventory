@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import {
 	Form,
 	TextInput,
@@ -11,8 +11,7 @@ import {
 } from '@/Components/Form'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { useBooleanToggle } from '@/lib/hooks'
-import { FormDepartmentsDropdown } from '@/Features/Dropdowns'
-import PeopleDropdown from '@/Features/Dropdowns/PeopleDropdown'
+import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -118,16 +117,17 @@ const PersonForm = ({
 	}
 
 	return (
-		<Form
+		<Form<PersonFormData>
 			model="person"
-			data={ useMemo((): PersonFormData => {
-				const data = { person: { ...person } }
-				if(data.person.user) {
-					data.person.user.password = ''
-					data.person.user.password_confirmation = ''
-				}
-				return data
-			}, [person]) }
+			// data={ useMemo((): PersonFormData => {
+			// 	const data = { person: { ...person } }
+			// 	if(data.person.user) {
+			// 		data.person.user.password = ''
+			// 		data.person.user.password_confirmation = ''
+			// 	}
+			// 	return data
+			// }, [person]) }
+			data={ { person } }
 			to={ to }
 			method={ method }
 			onSubmit={ handleSubmit }
@@ -148,7 +148,7 @@ const PersonForm = ({
 
 			<TextInput name="job_title" label="Job Title" required />
 
-			<PeopleDropdown
+			<FormPeopleDropdown
 				label="Manager"
 				name="manager_id"
 				initialData={ coerceArray(person?.manager) }
@@ -195,4 +195,4 @@ const PersonForm = ({
 	)
 }
 
-export default React.memo(PersonForm)
+export default PersonForm

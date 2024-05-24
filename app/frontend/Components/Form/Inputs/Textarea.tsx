@@ -21,13 +21,21 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 		onFocus,
 		id,
 		model,
-		errorKey,
 		field = true,
 		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
 	}: FormTextareaProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setValue(e.target.value)

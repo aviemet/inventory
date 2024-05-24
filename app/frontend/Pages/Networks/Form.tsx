@@ -81,4 +81,4 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: 
 	)
 }
 
-export default React.memo(NetworkForm)
+export default NetworkForm

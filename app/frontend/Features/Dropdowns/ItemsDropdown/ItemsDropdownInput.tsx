@@ -1,10 +1,8 @@
 import React, { forwardRef } from 'react'
-import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { isEmpty } from 'lodash'
 import { useGetDepartmentsAsOptions } from '@/queries/departments'
-import { useInFormContext } from '@/lib'
-import { type AsyncDropdown } from '.'
+import { type AsyncDropdown } from '..'
 
 interface ItemsDropdownProps extends AsyncDropdown<Schema.ItemsOptions> {}
 
@@ -17,28 +15,22 @@ const ItemsDropdown = forwardRef<HTMLInputElement, ItemsDropdownProps>((
 		initialData,
 	})
 
-	const commonProps = {
-		ref,
-		label,
-		name,
-		options: !data ? [] : data.map(item => ({
+	return <InputSelect
+		ref={ ref }
+		label={ label }
+		name={ name }
+		options={ !data ? [] : data.map(item => ({
 			label: item.name,
 			value: String(item.id),
-		})),
-		onDropdownOpen: () => {
+		})) }
+		onDropdownOpen={ () => {
 			if(isEmpty(data) || isStale) refetch()
-		},
-		searchable: true,
-		clearable: true,
-		value,
-		...props,
-	}
-
-	if(useInFormContext()) {
-		return <FormSelect { ...commonProps } />
-	}
-
-	return <InputSelect { ...commonProps } />
+		} }
+		searchable
+		clearable
+		value={ value }
+		{ ...props }
+	/>
 })
 
 export default ItemsDropdown

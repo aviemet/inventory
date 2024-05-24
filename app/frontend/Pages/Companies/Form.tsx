@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Features/Contactable'
-import { CurrenciesDropdown } from '@/Features/Dropdowns'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { FormCurrenciesDropdown } from '@/Features/Dropdowns'
 
 type CompanyFormData = {
 	company: Schema.CompaniesFormData
@@ -26,7 +26,7 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: CompanyFormProp
 		>
 			<TextInput name="name" label="Company Name" required autoFocus />
 
-			<CurrenciesDropdown
+			<FormCurrenciesDropdown
 				label="Default Currency"
 				name="default_currency"
 			/>
@@ -40,4 +40,4 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: CompanyFormProp
 	)
 }
 
-export default React.memo(CompanyForm)
+export default CompanyForm

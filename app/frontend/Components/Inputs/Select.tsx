@@ -59,4 +59,4 @@ const SelectComponent = forwardRef<HTMLInputElement, SelectInputProps>((
 	)
 })
 
-export default React.memo(SelectComponent)
+export default SelectComponent

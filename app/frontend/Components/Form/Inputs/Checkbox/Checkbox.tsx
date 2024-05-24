@@ -23,10 +23,20 @@ const FormCheckboxComponent = <TForm extends NestedObject>(
 		model,
 		field = true,
 		style,
+		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
 	}: FormCheckboxProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
@@ -45,6 +55,7 @@ const FormCheckboxComponent = <TForm extends NestedObject>(
 					type="checkbox"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>

@@ -22,9 +22,18 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 	model,
 	field = true,
 	wrapperProps,
+	errorKey,
+	defaultValue,
+	clearErrorsOnChange,
 	...props
 }: FormRichTextInputProps<TForm>) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (v: string) => {
 		setValue(v)

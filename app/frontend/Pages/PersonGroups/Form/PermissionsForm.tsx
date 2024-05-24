@@ -122,4 +122,4 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 	)
 }
 
-export default React.memo(GroupForm)
+export default GroupForm

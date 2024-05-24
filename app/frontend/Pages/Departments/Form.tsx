@@ -45,4 +45,4 @@ const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepar
 	)
 }
 
-export default React.memo(DepartmentForm)
+export default DepartmentForm

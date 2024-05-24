@@ -21,11 +21,11 @@ export interface CategoryFormProps {
 	categoryType?: Schema.CategoryTypes
 }
 
-const emptyCategory: (categoryType?: Schema.CategoryTypes) => Schema.CategoriesFormData = (categoryType) => ({
-	name: '',
-	categorizable_type: categoryType || '',
-	description: '',
-})
+// const emptyCategory: (categoryType?: Schema.CategoryTypes) => Schema.CategoriesFormData = (categoryType) => ({
+// 	name: '',
+// 	categorizable_type: categoryType || '',
+// 	description: '',
+// })
 
 const categorizableTypes: Schema.CategoryTypes[] = ['Accessory', 'Address', 'Component', 'Consumable', 'Contact', 'Contract', 'Department', 'Email', 'Item', 'License', 'Location', 'Manufacturer', 'Model', 'Order', 'Person', 'Phone', 'Ticket', 'User', 'Vendor', 'Website']
 
@@ -38,12 +38,12 @@ const CategoryForm = ({
 }: CategoryFormProps) => {
 	const types = useMemo(() => categorizableTypes.map(type => ({ label: type, value: type })), [])
 
-	const categoryData = useMemo(() => category || emptyCategory(categoryType), [category, categoryType])
+	// const categoryData = useMemo(() => category || emptyCategory(categoryType), [category, categoryType])
 
 	return (
 		<Form
 			model="category"
-			data={ { category: categoryData } }
+			data={ { category } }
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
@@ -62,10 +62,10 @@ const CategoryForm = ({
 			<Textarea name="description" label="Description" />
 
 			<Submit>
-				{ categoryData.id ? 'Update' : 'Create' } Category
+				{ category?.id ? 'Update' : 'Create' } Category
 			</Submit>
 		</Form>
 	)
 }
 
-export default React.memo(CategoryForm)
+export default CategoryForm

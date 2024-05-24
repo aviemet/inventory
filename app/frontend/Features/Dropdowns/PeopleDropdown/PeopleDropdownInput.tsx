@@ -1,10 +1,8 @@
 import React, { forwardRef } from 'react'
-import { Select as FormSelect } from '@/Components/Form'
 import { Select as InputSelect } from '@/Components/Inputs'
-import { useInFormContext } from '@/lib'
 import { useGetPeopleAsOptions } from '@/queries/people'
 import { isEmpty } from 'lodash'
-import { type AsyncDropdown } from '.'
+import { type AsyncDropdown } from '..'
 
 interface PeopleDropdownProps extends AsyncDropdown<Schema.PeopleOptions> {}
 
@@ -17,28 +15,22 @@ const PeopleDropdown = forwardRef<HTMLInputElement, PeopleDropdownProps>((
 		initialData,
 	})
 
-	const commonProps = {
-		ref,
-		label,
-		name,
-		options: !data ? [] : data.map(person => ({
+	return <InputSelect
+		ref={ ref }
+		label={ label }
+		name={ name }
+		options={ !data ? [] : data.map(person => ({
 			label: person.name,
 			value: String(person.id),
-		})),
-		onDropdownOpen: () => {
+		})) }
+		onDropdownOpen={ () => {
 			if(isEmpty(data) || isStale) refetch()
-		},
-		searchable: true,
-		clearable: true,
-		value,
-		...props,
-	}
-
-	if(useInFormContext()) {
-		return <FormSelect { ...commonProps } />
-	}
-
-	return <InputSelect { ...commonProps } />
+		} }
+		searchable
+		clearable
+		value={ value }
+		{ ...props }
+	/>
 })
 
 export default PeopleDropdown

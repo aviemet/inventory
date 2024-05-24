@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Routes } from '@/lib'
 import CategoriesForm from '@/Pages/Categories/Form'
@@ -11,10 +11,14 @@ interface FormCategoriesDropdownProps extends Omit<FormAsyncDropdown<Schema.Cate
 	categorizable_type?: Schema.CategoryTypes
 }
 
-const FormCategoriesDropdown = forwardRef<HTMLInputElement, FormCategoriesDropdownProps>((
-	{ label = 'Category', name = 'category_id', categorizable_type, initialData, value, ...props },
-	ref,
-) => {
+const FormCategoriesDropdown = ({
+	label = 'Category',
+	name = 'category_id',
+	categorizable_type,
+	initialData,
+	value,
+	...props
+}: FormCategoriesDropdownProps) => {
 	const { data, isStale, refetch } = useGetCategoriesAsOptions({ categoryType: categorizable_type }, {
 		enabled: value !== undefined,
 		initialData,
@@ -22,7 +26,6 @@ const FormCategoriesDropdown = forwardRef<HTMLInputElement, FormCategoriesDropdo
 
 	return (
 		<FormSelect
-			ref={ ref }
 			label={ label }
 			name={ name }
 			options={ !data ? [] : data.map(category => ({
@@ -44,6 +47,6 @@ const FormCategoriesDropdown = forwardRef<HTMLInputElement, FormCategoriesDropdo
 			{ ...props }
 		/>
 	)
-})
+}
 
 export default FormCategoriesDropdown

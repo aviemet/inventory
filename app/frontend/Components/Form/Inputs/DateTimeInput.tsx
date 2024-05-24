@@ -21,10 +21,19 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 	model,
 	field = true,
 	wrapperProps,
+	errorKey,
+	defaultValue,
+	clearErrorsOnChange,
 	...props
 }: DateTimeFormProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date|'', TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date|'', TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (date: Date|null) => {
 		const dateWithValidEmptyType = (isUnset(date) ? '' : date)

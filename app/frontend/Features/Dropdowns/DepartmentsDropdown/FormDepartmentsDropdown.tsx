@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Routes } from '@/lib'
 import DepartmentsForm from '@/Pages/Departments/Form'
@@ -10,10 +10,13 @@ interface DepartmentsDropdownProps extends Omit<FormAsyncDropdown<Schema.Departm
 	name?: string
 }
 
-const DepartmentsDropdown = forwardRef<HTMLInputElement, DepartmentsDropdownProps>((
-	{ label = 'Department', name = 'department_id', initialData, value, ...props },
-	ref,
-) => {
+const DepartmentsDropdown = ({
+	label = 'Department',
+	name = 'department_id',
+	initialData,
+	value,
+	...props
+}: DepartmentsDropdownProps) => {
 	const { data, isStale, refetch } = useGetDepartmentsAsOptions({
 		enabled: value !== undefined,
 		initialData,
@@ -21,7 +24,6 @@ const DepartmentsDropdown = forwardRef<HTMLInputElement, DepartmentsDropdownProp
 
 	return (
 		<FormSelect
-			ref={ ref }
 			label={ label }
 			name={ name }
 			options={ !data ? [] : data.map(department => ({
@@ -42,6 +44,6 @@ const DepartmentsDropdown = forwardRef<HTMLInputElement, DepartmentsDropdownProp
 			{ ...props }
 		/>
 	)
-})
+}
 
 export default DepartmentsDropdown

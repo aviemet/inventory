@@ -76,4 +76,4 @@ const ComponentForm = ({
 	)
 }
 
-export default React.memo(ComponentForm)
+export default ComponentForm

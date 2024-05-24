@@ -21,9 +21,9 @@ export {
 	GroupedCheckbox,
 } from './Checkbox'
 
-export type InputConflicts = 'name'|'onChange'|'onBlur'|'onFocus'|'value'
+export type InputConflicts = 'name'|'onChange'|'onBlur'|'onFocus'|'value'|'defaultValue'
 export interface BaseFormInputProps<T, TForm extends NestedObject = NestedObject>
-	extends UseInertiaInputProps
+	extends UseInertiaInputProps<T>
 {
 	model?: string
 	errorKey?: string

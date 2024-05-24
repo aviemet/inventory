@@ -10,7 +10,7 @@ import { isUnset } from '@/lib'
 interface FormDateInputProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<DateInputProps, InputConflicts>,
-	BaseFormInputProps<DateInputValue|'', TForm> {}
+	BaseFormInputProps<Exclude<DateInputValue, undefined|null> | '', TForm> {}
 
 const FormDateInput = <TForm extends NestedObject = NestedObject>({
 	name,
@@ -22,11 +22,22 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 	model,
 	field = true,
 	wrapperProps,
+	errorKey,
+	defaultValue,
+	clearErrorsOnChange,
 	...props
 }: FormDateInputProps<TForm>,
 ) => {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<
-	Exclude<DateInputValue, undefined|null> | '', TForm>({ name, model })
+		Exclude<DateInputValue, undefined|null> | '',
+		TForm
+	>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (date: DateInputValue) => {
 		const dateWithValidEmptyType = (isUnset(date) ? '' : date)

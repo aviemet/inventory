@@ -31,7 +31,8 @@ const ModelsDropdown = forwardRef<HTMLInputElement, ModelsDropdownProps>((
 		searchable
 		clearable
 		value={ value }
-		{ ...props } />
+		{ ...props }
+	/>
 })
 
 export default ModelsDropdown

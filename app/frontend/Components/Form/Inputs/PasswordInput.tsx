@@ -21,10 +21,19 @@ const FormInput = <TForm extends NestedObject>(
 		required,
 		field = true,
 		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
 	}: FormPasswordInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value

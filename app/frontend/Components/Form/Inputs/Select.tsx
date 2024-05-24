@@ -16,7 +16,6 @@ export interface FormSelectProps<TForm extends NestedObject = NestedObject>
 	Omit<SelectInputProps, OmittedOverwrittenTypes|'name'|'defaultValue'>,
 	Omit<BaseFormInputProps<string, TForm>, OmittedOverwrittenTypes> {
 
-	defaultValue?: string
 	onChange?: (option: SelectOption|null, options: ComboboxData, form: UseFormProps<TForm>) => void
 	onBlur?: (option: SelectOption|null, options: ComboboxData, form: UseFormProps<TForm>) => void
 	onFocus?: (option: SelectOption|null, options: ComboboxData, form: UseFormProps<TForm>) => void
@@ -35,7 +34,6 @@ const Select = <TForm extends NestedObject = NestedObject>(
 		label,
 		model,
 		required,
-		defaultValue,
 		onSearchChange,
 		onChange,
 		onBlur,
@@ -49,13 +47,21 @@ const Select = <TForm extends NestedObject = NestedObject>(
 		newForm,
 		field = true,
 		id,
-		errorKey,
 		options,
 		wrapperProps,
+		defaultValue,
+		errorKey,
+		clearErrorsOnChange,
 		...props
 	}: FormSelectProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model, errorKey })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		defaultValue,
+		errorKey,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (option: string|null) => {
 		setValue(option ? option : '')

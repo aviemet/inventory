@@ -75,4 +75,4 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: Consumabl
 	)
 }
 
-export default React.memo(ConsumableForm)
+export default ConsumableForm

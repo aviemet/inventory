@@ -21,10 +21,19 @@ const FormSegmentedControl = <TForm extends NestedObject = NestedObject>({
 	required,
 	field = true,
 	wrapperProps,
+	errorKey,
+	defaultValue,
+	clearErrorsOnChange,
 	...props
 }: FormSegmentedControlProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (v: string) => {
 		setValue(v)

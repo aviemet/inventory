@@ -39,4 +39,4 @@ const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer = emptyM
 	)
 }
 
-export default React.memo(ManufacturerForm)
+export default ManufacturerForm

@@ -21,10 +21,19 @@ const FormSwitchComponent = <TForm extends NestedObject = NestedObject>(
 		model,
 		field = true,
 		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
 	}: FormSwitchProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)

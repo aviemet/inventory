@@ -21,10 +21,19 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		required,
 		field = true,
 		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
 	}: FormNumberInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (val: string|number) => {
 		const v = Number(val)

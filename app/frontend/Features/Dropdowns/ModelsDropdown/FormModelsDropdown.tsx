@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Routes } from '@/lib'
 import ModelsForm from '@/Pages/Models/Form'
@@ -11,10 +11,14 @@ interface ModelsDropdownProps extends Omit<FormAsyncDropdown<Schema.ModelsOption
 	modelCategory?: Schema.CategoryTypes|undefined
 }
 
-const ModelsDropdown = forwardRef<HTMLInputElement, ModelsDropdownProps>((
-	{ label = 'Model', name = 'model_id', modelCategory, initialData, value, ...props },
-	ref,
-) => {
+const ModelsDropdown = ({
+	label = 'Model',
+	name = 'model_id',
+	modelCategory,
+	initialData,
+	value,
+	...props
+}: ModelsDropdownProps) => {
 	const { data, isStale, refetch } = useGetModelsAsOptions({ category: modelCategory }, {
 		enabled: value !== undefined,
 		initialData,
@@ -22,7 +26,6 @@ const ModelsDropdown = forwardRef<HTMLInputElement, ModelsDropdownProps>((
 
 	return (
 		<FormSelect
-			ref={ ref }
 			label={ label }
 			name={ name }
 			options={ !data ? [] : data.map(model => ({
@@ -44,6 +47,6 @@ const ModelsDropdown = forwardRef<HTMLInputElement, ModelsDropdownProps>((
 		/>
 	)
 
-})
+}
 
 export default ModelsDropdown

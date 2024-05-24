@@ -50,4 +50,4 @@ const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: Ven
 	)
 }
 
-export default React.memo(VendorForm)
+export default VendorForm

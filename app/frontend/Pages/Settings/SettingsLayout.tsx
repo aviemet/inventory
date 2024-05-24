@@ -88,4 +88,4 @@ const SettingsLayout = ({ children, breadcrumbs }: SettingsLayoutProps) => {
 	)
 }
 
-export default React.memo(SettingsLayout)
+export default SettingsLayout

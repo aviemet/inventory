@@ -11,9 +11,13 @@ interface HiddenInputProps<TForm extends NestedObject = NestedObject>
 	Omit<BaseFormInputProps<string, TForm>, 'span'|OmittedHiddenInputProps> {}
 
 const FormInput = <TForm extends NestedObject = NestedObject>(
-	{ name, model, onChange, id, ...props }: HiddenInputProps<TForm>,
+	{ name, model, onChange, id, defaultValue, ...props }: HiddenInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue } = useInertiaInput<string, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		defaultValue,
+	})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value

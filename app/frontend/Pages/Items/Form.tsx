@@ -101,4 +101,4 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 	)
 }
 
-export default React.memo(ItemForm)
+export default ItemForm

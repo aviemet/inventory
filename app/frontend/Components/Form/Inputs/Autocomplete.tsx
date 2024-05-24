@@ -23,14 +23,22 @@ const FormAutocompleteComponent = <TForm extends NestedObject = NestedObject>(
 		onFocus,
 		id,
 		required,
-		errorKey,
 		field = true,
 		endpoint,
 		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
 	} : FormAutocompleteProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (parameter: string) => {
 		setValue(parameter)

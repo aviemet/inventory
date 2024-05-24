@@ -11843,7 +11843,7 @@ __metadata:
     storybook: ^8.1.2
     tabler-icons-react: ^1.56.0
     typescript: ^5.4.5
-    use-inertia-form: ^4.1.0
+    use-inertia-form: "portal:/Users/avram/Development/javascript/useInertiaForm"
     vite: ^5.2.11
     vite-plugin-dynamic-import: ^1.5.0
     vite-plugin-full-reload: ^1.1.0
@@ -17418,9 +17418,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-inertia-form@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "use-inertia-form@npm:4.1.0"
+"use-inertia-form@portal:/Users/avram/Development/javascript/useInertiaForm::locator=inventory%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "use-inertia-form@portal:/Users/avram/Development/javascript/useInertiaForm::locator=inventory%40workspace%3A."
   dependencies:
     "@inertiajs/react": ^1.0.16
     axios: ^1.6.8
@@ -17429,9 +17429,8 @@ __metadata:
   peerDependencies:
     "@inertiajs/react": ^1.0.0
     react: ^16.9.0 || ^17.0.0 || ^18.0.0
-  checksum: 6e1bb1bc5310fed06d6fece3bfeda4031c78d1e853edfd23573c43bb6b6b790ced867b57f3515d0b48773dbcb13282443f6032f7007bc954f27011e01e2f6a97
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "use-isomorphic-layout-effect@npm:^1.1.1":
   version: 1.1.2

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Routes } from '@/lib'
 import LocationsForm from '@/Pages/Locations/Form'
@@ -10,10 +10,14 @@ export interface LocationsDropdownProps extends Omit<FormAsyncDropdown<Schema.Lo
 	name?: string
 }
 
-const LocationsDropdown = forwardRef<HTMLInputElement, LocationsDropdownProps>((
-	{ label = 'Location', name = 'location_id', filter, initialData, value, ...props },
-	ref,
-) => {
+const LocationsDropdown = ({
+	label = 'Location',
+	name = 'location_id',
+	filter,
+	initialData,
+	value,
+	...props
+}: LocationsDropdownProps) => {
 	const { data, isStale, refetch } = useGetLocationsAsOptions({
 		enabled: value !== undefined,
 		initialData,
@@ -21,7 +25,6 @@ const LocationsDropdown = forwardRef<HTMLInputElement, LocationsDropdownProps>((
 
 	return (
 		<FormSelect
-			ref={ ref }
 			label={ label }
 			name={ name }
 			options={ !data ? [] : data.map(location => ({
@@ -41,6 +44,6 @@ const LocationsDropdown = forwardRef<HTMLInputElement, LocationsDropdownProps>((
 			{ ...props }
 		/>
 	)
-})
+}
 
 export default LocationsDropdown

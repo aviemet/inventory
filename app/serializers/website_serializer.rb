@@ -27,4 +27,6 @@ class WebsiteSerializer < ApplicationSerializer
     :notes,
     :contact_id,
   )
+
+  belongs_to :category, serializer: Categories::OptionsSerializer
 end

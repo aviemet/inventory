@@ -46,4 +46,4 @@ const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label = emptySt
 	)
 }
 
-export default React.memo(StatusLabelForm)
+export default StatusLabelForm

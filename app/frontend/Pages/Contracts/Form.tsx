@@ -69,4 +69,4 @@ const ContractForm = ({
 	)
 }
 
-export default React.memo(ContractForm)
+export default ContractForm

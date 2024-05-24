@@ -50,4 +50,4 @@ const OrderForm = ({ to, method = 'post', onSubmit, order }: OrderFormProps) => 
 	)
 }
 
-export default React.memo(OrderForm)
+export default OrderForm

@@ -31,6 +31,5 @@ class EmailSerializer < ApplicationSerializer
     :category_id,
   )
 
-  belongs_to :contact, serializer: ContactSerializer
   belongs_to :category, serializer: Categories::OptionsSerializer
 end

@@ -73,4 +73,4 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: AccessoryFo
 	)
 }
 
-export default React.memo(AccessoryForm)
+export default AccessoryForm

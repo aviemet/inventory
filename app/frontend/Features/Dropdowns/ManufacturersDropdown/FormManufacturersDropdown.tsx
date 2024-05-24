@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Routes } from '@/lib'
 import ManufacturersForm from '@/Pages/Manufacturers/Form'
@@ -10,10 +10,13 @@ interface ManufacturersDropdownProps extends Omit<FormAsyncDropdown<Schema.Manuf
 	name?: string
 }
 
-const ManufacturersDropdown = forwardRef<HTMLInputElement, ManufacturersDropdownProps>((
-	{ label = 'Manufacturer', name = 'manufacturer_id', initialData, value, ...props },
-	ref,
-) => {
+const ManufacturersDropdown = ({
+	label = 'Manufacturer',
+	name = 'manufacturer_id',
+	initialData,
+	value,
+	...props
+}: ManufacturersDropdownProps) => {
 	const { data, isStale, refetch } = useGetManufacturersAsOptions({
 		enabled: value !== undefined,
 		initialData,
@@ -21,7 +24,6 @@ const ManufacturersDropdown = forwardRef<HTMLInputElement, ManufacturersDropdown
 
 	return (
 		<FormSelect
-			ref={ ref }
 			label={ label }
 			name={ name }
 			options={ !data ? [] : data.map(manufacturer => ({
@@ -42,6 +44,6 @@ const ManufacturersDropdown = forwardRef<HTMLInputElement, ManufacturersDropdown
 			{ ...props }
 		/>
 	)
-})
+}
 
 export default ManufacturersDropdown

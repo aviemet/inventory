@@ -52,4 +52,4 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: ModelF
 	)
 }
 
-export default React.memo(ModelForm)
+export default ModelForm

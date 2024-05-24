@@ -7,7 +7,7 @@ import {
 	Checkbox,
 	FormConsumer,
 } from '@/Components/Form'
-import { PeopleDropdown, DepartmentsDropdown } from '@/Features/Dropdowns'
+import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/Features/Dropdowns'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type PersonFormData = {
@@ -54,11 +54,11 @@ const PersonForm = ({
 
 			<TextInput name="employee_number" label="Employee #" />
 
-			<DepartmentsDropdown />
+			<FormDepartmentsDropdown />
 
 			<TextInput name="job_title" label="Job Title" />
 
-			<PeopleDropdown
+			<FormPeopleDropdown
 				label="Manager"
 				name="manager_id"
 			/>
@@ -83,4 +83,4 @@ const PersonForm = ({
 	)
 }
 
-export default React.memo(PersonForm)
+export default PersonForm

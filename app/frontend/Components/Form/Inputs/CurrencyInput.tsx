@@ -20,10 +20,20 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		id,
 		required,
 		field = true,
+		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
 	} : INumberInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (value: string|number) => {
 		const numberValue = Number(value)
@@ -41,16 +51,17 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="text"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
 			<CurrencyInput
 				id={ id || inputId }

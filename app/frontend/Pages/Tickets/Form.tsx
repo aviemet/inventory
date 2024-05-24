@@ -56,4 +56,4 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket }: TicketFormProps) 
 	)
 }
 
-export default React.memo(TicketForm)
+export default TicketForm

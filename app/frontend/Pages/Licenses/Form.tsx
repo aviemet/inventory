@@ -113,4 +113,4 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license }: LicenseFormProp
 	)
 }
 
-export default React.memo(LicenseForm)
+export default LicenseForm
