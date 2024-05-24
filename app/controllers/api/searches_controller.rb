@@ -2,10 +2,10 @@ class Api::SearchesController < Api::ApiController
 
   # @route GET /api/searches (api_searches)
   def index
-    render json: SearchSerializer.many(
-      PgSearch.multisearch(params[:search])
-        .order(:searchable_type, :content),
-    )
+    results = PgSearch.multisearch(params[:search])
+      .order(:searchable_type, :content)
+
+    render json: SearchSerializer.many(results)
   end
 
 end

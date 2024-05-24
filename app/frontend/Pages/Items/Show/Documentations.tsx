@@ -1,21 +1,21 @@
 import React from 'react'
-import { ShowItemProps } from '.'
 import { Table } from '@/Components'
 import DocumentationTable from '@/Pages/Documentation/Table'
 
+interface ItemDocumentationProps {
+	item: Schema.ItemsShow
+}
 
-const Documentations = ({ item, pagination }: ShowItemProps) => {
+const Documentations = ({ item }: ItemDocumentationProps) => {
 	return (
 		<Table.TableProvider
 			selectable
 			rows={ item?.documentations ?? [] }
-			pagination={ pagination }
 		>
 			<Table.SearchInput  />
 
 			<DocumentationTable  />
 
-			<Table.Pagination />
 		</Table.TableProvider>
 	)
 }

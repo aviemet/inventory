@@ -16,7 +16,12 @@ interface AssignToableDropdownProps {
 	options: AssignToableTypes[]
 }
 
-const AssignToableDropdown = ({ items, people, locations, options = ['Person', 'Item', 'Location'] }: AssignToableDropdownProps) => {
+const AssignToableDropdown = ({
+	items,
+	people,
+	locations,
+	options = ['Person', 'Item', 'Location'],
+}: AssignToableDropdownProps) => {
 	const { data, setData } = useForm<{ assignment: Schema.AssignmentsFormData }>()
 	const type: AssignToableTypes = data.assignment.assign_toable_type || options[0]
 
@@ -69,7 +74,6 @@ const AssignToableDropdown = ({ items, people, locations, options = ['Person', '
 		}
 
 		if(default_location) {
-			// @ts-expect-error 'Type instantiation is excessively deep and possibly infinite'
 			setData('assignment.location_id', String(default_location))
 		}
 	}

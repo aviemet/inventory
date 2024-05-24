@@ -2,9 +2,12 @@ import React from 'react'
 import { Link, Heading, Table, Box, Badge, Money } from '@/Components'
 import AssignmentLink from './AssignmentLink'
 import { formatter, Routes } from '@/lib'
-import { ShowItemProps } from '.'
 
-const ItemDetails = ({ item }: ShowItemProps) => {
+interface ItemDetailsProps {
+	item: Schema.ItemsShow
+}
+
+const ItemDetails = ({ item }: ItemDetailsProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>Details</Heading>

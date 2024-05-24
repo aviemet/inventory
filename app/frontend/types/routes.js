@@ -1599,20 +1599,20 @@ export const destroyUserSession = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"
 
 /**
  * Generates rails route to
- * /documentations/:slug(.:format)
+ * /documentation/:slug(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const documentation = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const documentation = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
- * /documentations(.:format)
+ * /documentation(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const documentations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[1,[2,[8,"."],[3,"format"]]]]]);
+export const documentations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1697,12 +1697,12 @@ export const editDepartment = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":
 
 /**
  * Generates rails route to
- * /documentations/:slug/edit(.:format)
+ * /documentation/:slug/edit(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editDocumentation = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+export const editDocumentation = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2246,11 +2246,11 @@ export const newDepartment = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,
 
 /**
  * Generates rails route to
- * /documentations/new(.:format)
+ * /documentation/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newDocumentation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+export const newDocumentation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2879,6 +2879,14 @@ export const statusLabel = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}
  * @returns {string} route path
  */
 export const statusLabels = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_labels"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /test/login(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const testLogin = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"test"],[2,[7,"/"],[2,[6,"login"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to

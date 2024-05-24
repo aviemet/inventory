@@ -6,13 +6,13 @@ class Items::IndexSerializer < ItemSerializer
   )
 
   has_one :department, serializer: Departments::OptionsSerializer
-  has_one :location, serializer: LocationSerializer
+  has_one :location, serializer: Locations::OptionsSerializer
 
   has_many :ips, serializer: IpLeases::OptionsSerializer, if: ->{ options[:with_ips] }
 
-  belongs_to :model, serializer: ModelSerializer
-  belongs_to :vendor, serializer: VendorSerializer
-  belongs_to :category, serializer: CategorySerializer
-  belongs_to :manufacturer, serializer: ManufacturerSerializer
-  belongs_to :status_label, serializer: StatusLabelSerializer
+  belongs_to :model, serializer: Models::OptionsSerializer
+  belongs_to :vendor, serializer: Vendors::OptionsSerializer
+  belongs_to :category, serializer: Categories::OptionsSerializer
+  belongs_to :manufacturer, serializer: Manufacturers::OptionsSerializer
+  belongs_to :status_label, serializer: StatusLabels::OptionsSerializer
 end

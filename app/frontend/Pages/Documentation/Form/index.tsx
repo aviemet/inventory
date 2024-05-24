@@ -1,7 +1,8 @@
 import React from 'react'
-import { Form, TextInput, Submit, RichText } from '@/Components/Form'
+import { Form, TextInput, Submit, RichText, FormConsumer } from '@/Components/Form'
 import DocumentableSearch from './DocumentableSearch'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { FormCategoriesDropdown } from '@/Features'
 
 type DocumentationFormData = {
 	documentation: Schema.DocumentationsFormData
@@ -14,13 +15,17 @@ export interface DocumentationFormProps {
 	documentation: Schema.DocumentationsFormData
 }
 
-const DocumentationForm = ({ method = 'post', documentation, ...props }: DocumentationFormProps) => {
-
+const DocumentationForm = ({
+	method = 'post',
+	documentation,
+	...props
+}: DocumentationFormProps) => {
 	return (
 		<Form
 			model="documentation"
 			data={ { documentation } }
 			method={ method }
+			filter={ ['route', 'category', 'documentable_name'] }
 			{ ...props }
 		>
 			<DocumentableSearch
@@ -29,9 +34,11 @@ const DocumentationForm = ({ method = 'post', documentation, ...props }: Documen
 				required
 			/>
 
+			<FormCategoriesDropdown categorizable_type="Document" />
+
 			<TextInput name="title" label="Title" required />
 
-			<RichText name="body" label="Body" />
+			<RichText name="body" label="Documentation Content" />
 
 			<Submit>{ documentation.id ? 'Update' : 'Create' } Documentation</Submit>
 		</Form>

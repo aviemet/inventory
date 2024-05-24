@@ -25,9 +25,4 @@ class CategorySerializer < ApplicationSerializer
     :name,
     :description,
   )
-
-  type :string
-  def plural
-    category.categorizable_type.pluralize
-  end
 end

@@ -9,7 +9,9 @@ export const isUnset = <T extends any>(v: T): v is T extends (null | undefined |
 	if(
 		v === null ||
 		v === undefined ||
-		(typeof v === 'string' && v === '')
+		(typeof v === 'string' && v === '') ||
+		Number.isNaN(v) ||
+		JSON.stringify(v) === '{}'
 	) {
 		return true
 	}

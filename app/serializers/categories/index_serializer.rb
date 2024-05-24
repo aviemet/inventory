@@ -8,4 +8,9 @@ class Categories::IndexSerializer < CategorySerializer
     :updated_at,
     qty: { type: :number },
   )
+
+  type :string
+  def plural
+    category.categorizable_type.pluralize
+  end
 end

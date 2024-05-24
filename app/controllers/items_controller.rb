@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
   def show
     authorize item
     render inertia: "Items/Show", props: {
-      item: -> { item.render(view: :show) }
+      item: -> { item.render(view: :show) },
     }
   end
 

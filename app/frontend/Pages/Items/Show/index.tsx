@@ -71,7 +71,9 @@ const ShowItem = ({ item }: ShowItemProps) => {
 
 						return (
 							<Tabs.Panel key={ tab.id } value={ tab.id } p="md">
-								<Component item={ item } />
+								<Component
+									item={ item }
+								/>
 							</Tabs.Panel>
 						)
 					}) }

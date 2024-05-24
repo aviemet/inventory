@@ -5801,6 +5801,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@testing-library/react-hooks@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "@testing-library/react-hooks@npm:8.0.1"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    react-error-boundary: ^3.1.0
+  peerDependencies:
+    "@types/react": ^16.9.0 || ^17.0.0
+    react: ^16.9.0 || ^17.0.0
+    react-dom: ^16.9.0 || ^17.0.0
+    react-test-renderer: ^16.9.0 || ^17.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react-dom:
+      optional: true
+    react-test-renderer:
+      optional: true
+  checksum: 7fe44352e920deb5cb1876f80d64e48615232072c9d5382f1e0284b3aab46bb1c659a040b774c45cdf084a5257b8fe463f7e08695ad8480d8a15635d4d3d1f6d
+  languageName: node
+  linkType: hard
+
 "@testing-library/react@npm:^15.0.7":
   version: 15.0.7
   resolution: "@testing-library/react@npm:15.0.7"
@@ -6323,6 +6345,13 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 88013c53adccaf359a429412c5d835990a88be33218f01f85eb04cf839a7d5bef51dd52b83a3032b00153e9f3ce4a7e84ff10b0a1f833c022c5e999b00eef24c
+  languageName: node
+  linkType: hard
+
+"@types/cookie@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "@types/cookie@npm:0.6.0"
+  checksum: 5edce7995775b0b196b142883e4d4f71fd93c294eaec973670f1fa2540b70ea7390408ed513ddefef5fcb12a578100c76596e8f2a714b0c2ae9f70ee773f4510
   languageName: node
   linkType: hard
 
@@ -8632,6 +8661,13 @@ __metadata:
   version: 0.5.0
   resolution: "cookie@npm:0.5.0"
   checksum: 1f4bd2ca5765f8c9689a7e8954183f5332139eb72b6ff783d8947032ec1fdf43109852c178e21a953a30c0dd42257828185be01b49d1eb1a67fd054ca588a180
+  languageName: node
+  linkType: hard
+
+"cookie@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "cookie@npm:0.6.0"
+  checksum: f56a7d32a07db5458e79c726b77e3c2eff655c36792f2b6c58d351fb5f61531e5b1ab7f46987150136e366c65213cbe31729e02a3eaed630c3bf7334635fb410
   languageName: node
   linkType: hard
 
@@ -11780,6 +11816,7 @@ __metadata:
     "@tanstack/react-query": ^5.37.1
     "@tanstack/react-query-devtools": ^5.37.1
     "@testing-library/react": ^15.0.7
+    "@testing-library/react-hooks": ^8.0.1
     "@testing-library/user-event": ^14.5.2
     "@tiptap/extension-bubble-menu": ^2.4.0
     "@tiptap/extension-code-block-lowlight": ^2.4.0
@@ -11795,6 +11832,7 @@ __metadata:
     "@tiptap/pm": ^2.4.0
     "@tiptap/react": ^2.4.0
     "@tiptap/starter-kit": ^2.4.0
+    "@types/cookie": ^0.6.0
     "@types/loadable__component": ^5.13.9
     "@types/lodash": ^4.17.4
     "@types/react": ^18.3.2
@@ -11811,6 +11849,7 @@ __metadata:
     babel-plugin-styled-components: ^2.1.4
     classnames: ^2.5.1
     commitizen: ^4.3.0
+    cookie: ^0.6.0
     dayjs: ^1.11.11
     dinero.js: ^1.9.1
     eslint: ^8.57.0
@@ -11839,6 +11878,7 @@ __metadata:
     react-error-boundary: ^4.0.13
     react-html-props: ^2.0.9
     react-icons: ^5.2.1
+    react-test-renderer: ^18.3.1
     semantic-release-github-actions-tags: ^1.0.3
     storybook: ^8.1.2
     tabler-icons-react: ^1.56.0
@@ -14977,6 +15017,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-error-boundary@npm:^3.1.0":
+  version: 3.1.4
+  resolution: "react-error-boundary@npm:3.1.4"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: f36270a5d775a25c8920f854c0d91649ceea417b15b5bc51e270a959b0476647bb79abb4da3be7dd9a4597b029214e8fe43ea914a7f16fa7543c91f784977f1b
+  languageName: node
+  linkType: hard
+
 "react-error-boundary@npm:^4.0.13":
   version: 4.0.13
   resolution: "react-error-boundary@npm:4.0.13"
@@ -15020,6 +15071,13 @@ __metadata:
   version: 18.1.0
   resolution: "react-is@npm:18.1.0"
   checksum: d206a0fe6790851bff168727bfb896de02c5591695afb0c441163e8630136a3e13ee1a7ddd59fdccddcc93968b4721ae112c10f790b194b03b35a3dc13a355ef
+  languageName: node
+  linkType: hard
+
+"react-is@npm:^16.12.0 || ^17.0.0 || ^18.0.0, react-is@npm:^18.3.1":
+  version: 18.3.1
+  resolution: "react-is@npm:18.3.1"
+  checksum: e20fe84c86ff172fc8d898251b7cc2c43645d108bf96d0b8edf39b98f9a2cae97b40520ee7ed8ee0085ccc94736c4886294456033304151c3f94978cec03df21
   languageName: node
   linkType: hard
 
@@ -15138,6 +15196,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-shallow-renderer@npm:^16.15.0":
+  version: 16.15.0
+  resolution: "react-shallow-renderer@npm:16.15.0"
+  dependencies:
+    object-assign: ^4.1.1
+    react-is: ^16.12.0 || ^17.0.0 || ^18.0.0
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 6052c7e3e9627485120ebd8257f128aad8f56386fe8d42374b7743eac1be457c33506d153c7886b4e32923c0c352d402ab805ef9ca02dbcd8393b2bdeb6e5af8
+  languageName: node
+  linkType: hard
+
 "react-style-singleton@npm:^2.2.1":
   version: 2.2.1
   resolution: "react-style-singleton@npm:2.2.1"
@@ -15152,6 +15222,19 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 7ee8ef3aab74c7ae1d70ff34a27643d11ba1a8d62d072c767827d9ff9a520905223e567002e0bf6c772929d8ea1c781a3ba0cc4a563e92b1e3dc2eaa817ecbe8
+  languageName: node
+  linkType: hard
+
+"react-test-renderer@npm:^18.3.1":
+  version: 18.3.1
+  resolution: "react-test-renderer@npm:18.3.1"
+  dependencies:
+    react-is: ^18.3.1
+    react-shallow-renderer: ^16.15.0
+    scheduler: ^0.23.2
+  peerDependencies:
+    react: ^18.3.1
+  checksum: e8e58e738835fab3801afb63f6bfe0fcf6e68ea39619fae5bdf47feefc36b1e4acb48c9dd139c7533611466eff1dfce6ffdda4b317e06aee663dda7d91438f26
   languageName: node
   linkType: hard
 

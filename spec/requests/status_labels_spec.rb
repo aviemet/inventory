@@ -19,7 +19,7 @@ RSpec.describe "/status_labels" do
   describe "GET /" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all status_labels" do
         status_label = create(:status_label)
 
@@ -30,7 +30,7 @@ RSpec.describe "/status_labels" do
       end
     end
 
-    context "new page" do
+    describe "new page" do
       it "renders" do
         get new_status_label_url
 
@@ -38,7 +38,7 @@ RSpec.describe "/status_labels" do
       end
     end
 
-    context "edit page" do
+    describe "edit page" do
       it "renders" do
         status_label = create(:status_label)
 
@@ -48,7 +48,7 @@ RSpec.describe "/status_labels" do
       end
     end
 
-    context "show page" do
+    describe "show page" do
       it "renders" do
         status_label = create(:status_label)
         get status_label_url({ slug: status_label.slug })
@@ -60,7 +60,7 @@ RSpec.describe "/status_labels" do
   describe "POST /create" do
     login_admin
 
-    context "with valid parameters" do
+    describe "with valid parameters" do
       it "creates a new StatusLabel and redirects to show page" do
         expect{
           post status_labels_url, params: valid_attributes
@@ -69,7 +69,7 @@ RSpec.describe "/status_labels" do
       end
     end
 
-    context "with invalid parameters" do
+    describe "with invalid parameters" do
       it "does not create a new StatusLabel" do
         expect {
           post status_labels_url, params: invalid_attributes
@@ -86,7 +86,7 @@ RSpec.describe "/status_labels" do
   describe "PATCH /update" do
     login_admin
 
-    context "with valid parameters" do
+    describe "with valid parameters" do
       it "updates the requested status_label and redirects to the show page" do
         name_change = "Changed"
         status_label = create(:status_label )
@@ -99,7 +99,7 @@ RSpec.describe "/status_labels" do
       end
     end
 
-    context "with invalid parameters" do
+    describe "with invalid parameters" do
       it "redirects back to the edit status_label page" do
         status_label = create(:status_label)
         patch status_label_url(status_label), params: invalid_attributes

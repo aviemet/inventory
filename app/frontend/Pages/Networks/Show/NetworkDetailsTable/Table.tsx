@@ -11,7 +11,7 @@ interface NetworkDetailsTableProps {
 
 const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
 	return (
-		<Table wrapper={ false } style={ { width: '100%', flex: 1 } }>
+		<Table wrapper={ false } className={ cx(classes.table) }>
 			<Table.Head>
 				<Table.Row>
 					<Table.HeadCell>Address</Table.HeadCell>

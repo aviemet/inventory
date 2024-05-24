@@ -34,7 +34,6 @@ const Select = <TForm extends NestedObject = NestedObject>(
 		label,
 		model,
 		required,
-		onSearchChange,
 		onChange,
 		onBlur,
 		onFocus,

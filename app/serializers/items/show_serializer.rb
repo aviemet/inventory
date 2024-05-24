@@ -5,25 +5,25 @@ class Items::ShowSerializer < ItemSerializer
     :updated_at,
   )
 
-  has_one :department, serializer: DepartmentSerializer
-  has_one :location, serializer: LocationSerializer
-  has_one :category, serializer: CategorySerializer
+  has_one :department, serializer: Departments::BasicSerializer
+  has_one :location, serializer: Locations::BasicSerializer
+  has_one :category, serializer: Categories::BasicSerializer
 
-  has_many :nics, serializer: NicSerializer
+  has_many :nics, serializer: Nics::BasicSerializer
   has_many :ips, serializer: IpLeases::OptionsSerializer, if: ->{ options[:with_ips] }
-  has_many :activities, serializer: ActivitySerializer
+  has_many :activities, serializer: Activities::BasicSerializer
   has_many :assignments, serializer: Assignments::ShowSerializer
 
-  has_many :items, serializer: ItemSerializer
-  has_many :accessories, serializer: AccessorySerializer
-  has_many :components, serializer: ComponentSerializer
-  has_many :consumables, serializer: ConsumableSerializer
-  has_many :licenses, serializer: LicenseSerializer
+  has_many :items, serializer: Items::BasicSerializer
+  has_many :accessories, serializer: Accessories::BasicSerializer
+  has_many :components, serializer: Components::BasicSerializer
+  has_many :consumables, serializer: Consumables::BasicSerializer
+  has_many :licenses, serializer: Licenses::BasicSerializer
   has_many :documentations, serializer: Documentations::IndexSerializer
 
-  belongs_to :model, serializer: ModelSerializer
-  belongs_to :vendor, serializer: VendorSerializer
-  belongs_to :manufacturer, serializer: ManufacturerSerializer
-  belongs_to :default_location, serializer: LocationSerializer
-  belongs_to :status_label, serializer: StatusLabelSerializer
+  belongs_to :model, serializer: Models::BasicSerializer
+  belongs_to :vendor, serializer: Vendors::BasicSerializer
+  belongs_to :manufacturer, serializer: Manufacturers::BasicSerializer
+  belongs_to :default_location, serializer: Locations::BasicSerializer
+  belongs_to :status_label, serializer: StatusLabels::BasicSerializer
 end

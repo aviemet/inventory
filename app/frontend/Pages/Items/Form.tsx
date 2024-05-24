@@ -10,7 +10,12 @@ import {
 	FormGroup,
 	DynamicInputs,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown, DepartmentsDropdown } from '@/Features/Dropdowns'
+import {
+	FormModelsDropdown,
+	FormVendorsDropdown,
+	FormLocationsDropdown,
+	FormDepartmentsDropdown,
+} from '@/Features/Dropdowns'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { Group } from '@/Components'
 import { coerceArray } from '@/lib'
@@ -40,7 +45,7 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Item Details">
-				<ModelsDropdown
+				<FormModelsDropdown
 					modelCategory='Item'
 					errorKey="item.model"
 					initialData={ coerceArray(item?.model) }
@@ -70,7 +75,7 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown initialData={ coerceArray(item?.vendor) } />
+				<FormVendorsDropdown initialData={ coerceArray(item?.vendor) } />
 
 				<CurrencyInput name="cost" label="Cost" />
 
@@ -78,14 +83,14 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-				<LocationsDropdown
+				<FormLocationsDropdown
 					label="Default Location"
 					name="default_location_id"
 					initialData={ coerceArray(item?.default_location) }
 					required
 				/>
 
-				<DepartmentsDropdown initialData={ coerceArray(item?.department) } />
+				<FormDepartmentsDropdown initialData={ coerceArray(item?.department) } />
 
 				<Checkbox name="requestable" label="Requestable" />
 

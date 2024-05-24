@@ -2,9 +2,12 @@ import React from 'react'
 import { Box, Heading, Link } from '@/Components'
 import AssignmentLink from './AssignmentLink'
 import { Routes } from '@/lib'
-import { ShowItemProps } from '.'
 
-const Associations = ({ item }: ShowItemProps) => {
+interface ItemAssociationsProps {
+	item: Schema.ItemsShow
+}
+
+const Associations = ({ item }: ItemAssociationsProps) => {
 	return (
 		<Box>
 			{ item.assigned && <Box mt={ 16 }>Assigned To: <AssignmentLink item={ item } /> </Box> }

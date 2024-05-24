@@ -1464,7 +1464,7 @@ export const destroyUserSession: ((
 
 /**
  * Generates rails route to
- * /documentations/:slug(.:format)
+ * /documentation/:slug(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -1476,7 +1476,7 @@ export const documentation: ((
 
 /**
  * Generates rails route to
- * /documentations(.:format)
+ * /documentation(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -1594,7 +1594,7 @@ export const editDepartment: ((
 
 /**
  * Generates rails route to
- * /documentations/:slug/edit(.:format)
+ * /documentation/:slug/edit(.:format)
  * @param {any} slug
  * @param {object | undefined} options
  * @returns {string} route path
@@ -2314,7 +2314,7 @@ export const newDepartment: ((
 
 /**
  * Generates rails route to
- * /documentations/new(.:format)
+ * /documentation/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
@@ -3119,6 +3119,16 @@ export const statusLabel: ((
  * @returns {string} route path
  */
 export const statusLabels: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /test/login(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const testLogin: ((
   options?: {format?: OptionalRouteParameter} & RouteOptions
 ) => string) & RouteHelperExtras;
 

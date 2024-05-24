@@ -3,7 +3,10 @@ import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { type ReactQueryFunction } from '..'
 
-export const useGetSearchResults: ReactQueryFunction<Schema.Search[], {searchParams: string[]}> = ({ searchParams }, options) => {
+export const useGetSearchResults: ReactQueryFunction<
+	Schema.Search[],
+	{searchParams: string}
+> = ({ searchParams }, options) => {
 	return useQuery({
 		queryKey: ['search'],
 		queryFn: async () => {

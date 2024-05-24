@@ -10,9 +10,9 @@ describe('isUnset', () => {
 	})
 
 	test('returns false for non-empty values', () => {
-		const falseys = ['hi', 0, 10, -345, ['filled'], [0], [10], { with: 'values' }]
-		falseys.forEach(falsey => {
-			expect(isUnset(falsey)).toBe(false)
+		const falsies = ['hi', 0, 10, -345, ['filled'], [0], [10], { with: 'values' }]
+		falsies.forEach(falsy => {
+			expect(isUnset(falsy)).toBe(false)
 		})
 	})
 })

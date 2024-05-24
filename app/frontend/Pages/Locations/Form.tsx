@@ -1,7 +1,6 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
-import { LocationsDropdown } from '@/Features/Dropdowns'
-import CurrenciesDropdown from '@/Features/Dropdowns/CurrenciesDropdown'
+import { FormLocationsDropdown, FormCurrenciesDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 import { ComboboxItem } from '@mantine/core'
@@ -39,9 +38,9 @@ const LocationForm = ({
 		>
 			<TextInput name="name" label="Location Name" required autoFocus />
 
-			<CurrenciesDropdown />
+			<FormCurrenciesDropdown />
 
-			<LocationsDropdown
+			<FormLocationsDropdown
 				label="Parent Location"
 				name="parent_id"
 				filter={ location?.id === undefined ? undefined : ({ options }) => (options as ComboboxItem[]).filter((option) => {

@@ -49,7 +49,7 @@ class DocumentationSerializer < ApplicationSerializer
   end
 
   type :string
-  def documentable_route
+  def route
     polymorphic_path(documentation.&documentable_type&.constantize&.find(documentation&.documentable_id), only_path: true)
   rescue StandardError
     nil
