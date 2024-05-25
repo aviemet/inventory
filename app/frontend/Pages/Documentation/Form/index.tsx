@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, TextInput, Submit, RichText, FormConsumer } from '@/Components/Form'
+import { Form, TextInput, Submit, RichText } from '@/Components/Form'
 import DocumentableSearch from './DocumentableSearch'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 import { FormCategoriesDropdown } from '@/Features'
