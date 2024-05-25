@@ -20,7 +20,7 @@ const Details = ({ department, accessories }: DetailsProps) => {
 				rows={ accessories?.data }
 				pagination={ accessories?.pagination }
 				menuOptions={ [
-					{ label: 'New Accessory', href: Routes.newAccessory(), icon: NewIcon },
+					{ label: 'New Accessory', href: Routes.newAccessory(), icon: <NewIcon /> },
 				] }
 			>
 				<AccessoriesTable wrapper={ false } />

@@ -1,4 +1,4 @@
-class Items::OptionsSerializer < Assignable::SingleSerializer
+class Items::OptionsSerializer < ApplicationSerializer
   object_as :item
 
   attributes(

@@ -19,6 +19,7 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, MultiSelectInputProps>
 		id,
 		name,
 		size = 'md',
+		maxDropdownHeight = 400,
 		wrapper,
 		wrapperProps,
 		fetchOnOpen,
@@ -51,6 +52,7 @@ const MultiSelectComponent = forwardRef<HTMLInputElement, MultiSelectInputProps>
 				size={ size }
 				data={ options }
 				required={ required }
+				maxDropdownHeight={ maxDropdownHeight }
 				onDropdownOpen={ handleDropdownOpen }
 				nothingFoundMessage="No Results"
 				{ ...props }

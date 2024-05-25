@@ -1,10 +1,11 @@
 import React from 'react'
+import { useInertiaInput, type UseFormProps, NestedObject } from 'use-inertia-form'
 import Field from '../Components/Field'
 import { type ComboboxData, type ComboboxItem, type ComboboxItemGroup } from '@mantine/core'
-import SelectInput, { type SelectInputProps } from '@/Components/Inputs/Select'
+import { exclude } from '@/lib'
 import { ConditionalWrapper, Group } from '@/Components'
 import { ModalFormButton } from '@/Components/Button'
-import { useInertiaInput, type UseFormProps, NestedObject } from 'use-inertia-form'
+import SelectInput, { type SelectInputProps } from '@/Components/Inputs/Select'
 import { type BaseFormInputProps } from '.'
 
 export type SelectOption = string | ComboboxItem | ComboboxItemGroup<string | ComboboxItem>
@@ -137,7 +138,7 @@ const Select = <TForm extends NestedObject = NestedObject>(
 						error={ error }
 						options={ options }
 						wrapper={ false }
-						{ ...props }
+						{ ...exclude(props, 'value') }
 					/>
 				</ConditionalWrapper>
 				{ newForm && <ModalFormButton

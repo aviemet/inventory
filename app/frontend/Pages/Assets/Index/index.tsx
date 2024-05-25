@@ -18,10 +18,10 @@ const AssetsIndex = ({ assets, pagination }: AssetsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.assets() }
 			menuOptions={ [
-				{ label: 'New Hardware', href: Routes.newItem(), icon: ItemsIcon },
-				{ label: 'New Accessory', href: Routes.newAccessory(), icon: AccessoriesIcon },
-				{ label: 'New Component', href: Routes.newComponent(), icon: ComponentsIcon },
-				{ label: 'New Consumable', href: Routes.newConsumable(), icon: ConsumablesIcon },
+				{ label: 'New Hardware', href: Routes.newItem(), icon: <ItemsIcon /> },
+				{ label: 'New Accessory', href: Routes.newAccessory(), icon: <AccessoriesIcon /> },
+				{ label: 'New Component', href: Routes.newComponent(), icon: <ComponentsIcon /> },
+				{ label: 'New Consumable', href: Routes.newConsumable(), icon: <ConsumablesIcon /> },
 			] }
 		>
 			<AssetTable />

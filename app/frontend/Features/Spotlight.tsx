@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { rem, Button } from '@mantine/core'
 import { Spotlight, type SpotlightActionData } from '@mantine/spotlight'
 import {
-	SearchIcon,
 	DashboardIcon,
 	ItemsIcon,
 	SettingsIcon,
@@ -10,12 +8,12 @@ import {
 	AccessoriesIcon,
 	ComponentsIcon,
 	ConsumablesIcon,
+	SearchIcon,
 } from '@/Components/Icons'
 import { router } from '@inertiajs/react'
 import { Routes } from '@/lib'
-import axios from 'axios'
 import { Loader } from '@mantine/core'
-
+import { useGetSpotlightResults } from '@/queries'
 
 const defaultActions: SpotlightActionData[] = [
 	{
@@ -88,25 +86,25 @@ const defaultActions: SpotlightActionData[] = [
 ]
 
 
-type Values = {
-	items: Schema.Item[]
-	accessories: Schema.Accessory[]
-	components: Schema.Component[]
-	consumables: Schema.Consumable[]
-	licenses: Schema.License[]
-	people: Schema.Person[]
-	tickets: Schema.Ticket[]
-	networks: Schema.Network[]
-	vendors: Schema.Vendor[]
-	contracts: Schema.Contract[]
+export type SpotlightSearchValues = {
+	items: Schema.ItemsSpotlight[]
+	accessories: Schema.AccessoriesSpotlight[]
+	components: Schema.ComponentsSpotlight[]
+	consumables: Schema.ConsumablesSpotlight[]
+	licenses: Schema.LicensesSpotlight[]
+	people: Schema.PeopleSpotlight[]
+	tickets: Schema.TicketsSpotlight[]
+	networks: Schema.NetworksSpotlight[]
+	vendors: Schema.VendorsSpotlight[]
+	contracts: Schema.ContractsSpotlight[]
 }
 
-const generateActions = (values?: Values) => {
+const generateActions = (values?: SpotlightSearchValues) => {
 	if(!values) return []
 
 	return [
 		...values.items.map(item => ({
-			id: 'items',
+			id: item.id,
 			label: item.name,
 			description: `${item.type}: ${item?.model?.name || ''}`,
 			group: 'Items',
@@ -115,34 +113,34 @@ const generateActions = (values?: Values) => {
 			keywords: ['items'],
 		})),
 		...values.accessories.map(accessory => ({
-			id: 'accessories',
+			id: accessory.id,
 			label: accessory.name,
-			description: `${accessory.type}: ${accessory?.model?.name || ''}`,
+			description: `${accessory.type}: ${accessory?.model?.name || ''} (${accessory?.qty})`,
 			group: 'Accessories',
 			onClick: () => router.get(Routes.accessory(accessory.id)),
 			leftSection: <SettingsIcon size={ 18 } />,
 			keywords: ['accessory', 'accessories'],
 		})),
 		...values.components.map(component => ({
-			id: 'components',
+			id: component.id,
 			label: component.name,
-			description: `${component.type}: ${component?.model?.name || ''}`,
+			description: `${component.type}: ${component?.model?.name || ''} (${component?.qty})`,
 			group: 'Components',
 			onClick: () => router.get(Routes.component(component.id)),
 			leftSection: <SettingsIcon size={ 18 } />,
 			keywords: ['components'],
 		})),
 		...values.consumables.map(consumable => ({
-			id: 'consumables',
+			id: consumable.id,
 			label: consumable.name,
-			description: `${consumable.type}: ${consumable?.model?.name || ''}`,
+			description: `${consumable.type}: ${consumable?.model?.name || ''} (${consumable?.qty})`,
 			group: 'Consumables',
 			onClick: () => router.get(Routes.consumable(consumable.id)),
 			leftSection: <SettingsIcon size={ 18 } />,
 			keywords: ['consumables'],
 		})),
 		...values.licenses.map(license => ({
-			id: 'licenses',
+			id: license.id,
 			label: license.name,
 			description: license?.manufacturer?.name || '',
 			group: 'Licenses',
@@ -151,8 +149,8 @@ const generateActions = (values?: Values) => {
 			keywords: ['licenses'],
 		})),
 		...values.people.map(person => ({
-			id: 'people',
-			label: person.name!,
+			id: person.id,
+			label: person.name,
 			description: person?.job_title || '',
 			group: 'People',
 			onClick: () => router.get(Routes.person(person.id)),
@@ -160,7 +158,7 @@ const generateActions = (values?: Values) => {
 			keywords: ['people', 'person'],
 		})),
 		...values.tickets.map(ticket => ({
-			id: 'tickets',
+			id: ticket.id,
 			label: ticket.subject,
 			description: ticket?.primary_contact?.name || '',
 			group: 'Tickets',
@@ -169,7 +167,7 @@ const generateActions = (values?: Values) => {
 			keywords: ['tickets'],
 		})),
 		...values.networks.map(network => ({
-			id: 'networks',
+			id: network.id,
 			label: `${network.name || network.address}`,
 			description: `${network.vlan_id + '+'}${network.name ? network.address : ''}`,
 			group: 'Networks',
@@ -178,7 +176,7 @@ const generateActions = (values?: Values) => {
 			keywords: ['networks'],
 		})),
 		...values.vendors.map(vendor => ({
-			id: 'vendors',
+			id: vendor.id,
 			label: vendor.name,
 			description: vendor.url || '',
 			group: 'Vendors',
@@ -187,7 +185,7 @@ const generateActions = (values?: Values) => {
 			keywords: ['vendors'],
 		})),
 		...values.contracts.map(contract => ({
-			id: 'contracts',
+			id: contract.id,
 			label: contract.name,
 			description: contract?.vendor?.name || '',
 			group: 'Contracts',
@@ -200,34 +198,53 @@ const generateActions = (values?: Values) => {
 
 const SpotlightComponent = () => {
 	const [query, setQuery] = useState('')
-	const [values, setValues] = useState<Values>()
 	const [actions, setActions] = useState(defaultActions)
-	const [loading, setLoading] = useState(false)
 
-	useEffect(() => {
+	const {
+		data,
+		refetch,
+		isLoading,
+		isFetching,
+		isPending,
+		isFetched,
+		isSuccess,
+		isStale,
+	} = useGetSpotlightResults({ searchParams: query }, {
+		enabled: false,
+	})
+
+	const handleQueryChange = (query: string) => {
+		setQuery(query)
+
 		if(query === '') {
 			setActions(defaultActions)
-			return
+		} else {
+			setActions(generateActions(data))
 		}
 
-		if(values === undefined) {
-			setLoading(true)
-			axios.get(Routes.apiSpotlights())
-				.then(response => {
-					setValues(response.data)
-					setLoading(false)
-				})
+		if(!isFetched || isStale) {
+			refetch()
 		}
+	}
 
-		setActions(generateActions(values))
-	}, [query])
+	useEffect(() => {
+		if(query !== '' && isSuccess) {
+			setActions(generateActions(data))
+		}
+	}, [isSuccess])
+
+	const loading = isLoading || isFetching || isPending
 
 	return (
 		<Spotlight
 			actions={ actions }
+			limit={ 5 }
 			nothingFound={ loading ? <Loader /> : 'Nothing found...' }
-			onQueryChange={ setQuery }
+			onQueryChange={ handleQueryChange }
 			query={ query }
+			searchProps={ {
+				leftSection: <SearchIcon size={ 28 } />,
+			} }
 		/>
 	)
 }

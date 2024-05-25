@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Select as InputSelect } from '@/Components/Inputs'
 import { isEmpty } from 'lodash'
-import { useGetDepartmentsAsOptions } from '@/queries/departments'
+import { useGetItemsAsOptions } from '@/queries/items'
 import { type AsyncDropdown } from '..'
 
 interface ItemsDropdownProps extends AsyncDropdown<Schema.ItemsOptions> {}
@@ -10,7 +10,7 @@ const ItemsDropdown = forwardRef<HTMLInputElement, ItemsDropdownProps>((
 	{ label = 'Item', name = 'item_id', initialData, value, ...props },
 	ref,
 ) => {
-	const { data, isStale, refetch } = useGetDepartmentsAsOptions({
+	const { data, isStale, refetch } = useGetItemsAsOptions({
 		enabled: value !== undefined,
 		initialData,
 	})

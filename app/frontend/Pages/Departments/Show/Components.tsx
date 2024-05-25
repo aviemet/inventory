@@ -20,7 +20,7 @@ const Details = ({ department, components }: DetailsProps) => {
 				rows={ components?.data }
 				pagination={ components?.pagination }
 				menuOptions={ [
-					{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
+					{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
 				] }
 			>
 				<ComponentsTable wrapper={ false } />

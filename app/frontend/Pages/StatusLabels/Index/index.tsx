@@ -19,7 +19,7 @@ const StatusLabelsIndex = ({ status_labels, pagination }: StatusLabelsIndexProps
 			pagination={ pagination }
 			deleteRoute={ Routes.statusLabels() }
 			menuOptions={ [
-				{ label: 'New Status Label', href: Routes.newStatusLabel(), icon: NewIcon },
+				{ label: 'New Status Label', href: Routes.newStatusLabel(), icon: <NewIcon /> },
 			] }
 		>
 			<StatusLabelsTable />

@@ -25,7 +25,7 @@ const ConsumableDetails = ({ consumable }: ShowConsumableProps) => {
 						<Table.Row>
 							<Table.Cell>Model</Table.Cell>
 							<Table.Cell>
-								{ consumable.model && <Link href={ Routes.model(consumable.model.slug) }>
+								{ consumable?.model?.slug && <Link href={ Routes.model(consumable.model.slug) }>
 									{ consumable.model.name }
 								</Link> }
 							</Table.Cell>
@@ -34,7 +34,7 @@ const ConsumableDetails = ({ consumable }: ShowConsumableProps) => {
 						<Table.Row>
 							<Table.Cell>Manufacturer</Table.Cell>
 							<Table.Cell>
-								{ consumable.manufacturer && <Link href={ Routes.manufacturer(consumable.manufacturer.slug) }>
+								{ consumable?.manufacturer?.slug && <Link href={ Routes.manufacturer(consumable.manufacturer.slug) }>
 									{ consumable.manufacturer!.name }
 								</Link> }
 							</Table.Cell>
@@ -43,7 +43,7 @@ const ConsumableDetails = ({ consumable }: ShowConsumableProps) => {
 						<Table.Row>
 							<Table.Cell>Category</Table.Cell>
 							<Table.Cell>
-								{ consumable.category && <Link href={ Routes.category(consumable.category.slug) }>
+								{ consumable?.category?.slug && <Link href={ Routes.category(consumable.category.slug) }>
 									{ consumable.category.name }
 								</Link> }
 							</Table.Cell>
@@ -57,7 +57,7 @@ const ConsumableDetails = ({ consumable }: ShowConsumableProps) => {
 						<Table.Row>
 							<Table.Cell>Vendor</Table.Cell>
 							<Table.Cell>
-								{ consumable.vendor && <Link href={ Routes.vendor(consumable.vendor.slug) }>
+								{ consumable?.vendor?.slug && <Link href={ Routes.vendor(consumable.vendor.slug) }>
 									{ consumable.vendor.name }
 								</Link> }
 							</Table.Cell>

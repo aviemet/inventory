@@ -38,7 +38,7 @@ class Company::AsSetup < Company
       Address: ["Work", "Personal"],
       Phone: ["Home", "Mobile", "Office"],
       Contract: ["Utility", "Leasing", "SLA"],
-      Document: ["Invoice", "Manual"]
+      Documentation: ["Instructions", "Repair"]
     }.each do |type, categories|
       categories.each do |category|
         Category.create!({
@@ -47,6 +47,12 @@ class Company::AsSetup < Company
           company: self,
         })
       end
+
+      Category.create!({
+        name: "Other",
+        categorizable_type: type,
+        company: self,
+      })
     end
   end
 

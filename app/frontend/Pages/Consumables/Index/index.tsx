@@ -17,7 +17,7 @@ const ConsumablesIndex = ({ consumables, pagination }: ConsumablesIndexProps) =>
 			rows={ consumables }
 			pagination={ pagination }
 			menuOptions={ [
-				{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
+				{ label: 'New Consumable', href: Routes.newConsumable(), icon: <NewIcon /> },
 			] }
 			deleteRoute={ Routes.consumables() }
 		>

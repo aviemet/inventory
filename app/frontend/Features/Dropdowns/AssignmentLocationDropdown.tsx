@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'use-inertia-form'
-import { LocationsDropdown } from '.'
-import { type LocationsDropdownProps } from './LocationsDropdown/LocationsDropdownInput'
+import { FormLocationsDropdown } from '.'
+import { type LocationsDropdownProps } from './LocationsDropdown/FormLocationsDropdown'
 
 const AssignmentLocationDropdown = ({ label = 'Location', name = 'location_id', ...props }: LocationsDropdownProps) => {
 	const { getData } = useForm<{ assignment: Schema.AssignmentsFormData}>()
@@ -11,7 +11,7 @@ const AssignmentLocationDropdown = ({ label = 'Location', name = 'location_id', 
 	if(assignmentType === 'Location') return <></>
 
 	return (
-		<LocationsDropdown
+		<FormLocationsDropdown
 			label={ label }
 			name={ name }
 			{ ...props }

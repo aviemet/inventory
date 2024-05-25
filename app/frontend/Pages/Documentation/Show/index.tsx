@@ -29,7 +29,7 @@ const ShowDocumentation = ({ documentation }: ShowDocumentationProps) => {
 					</Menu>
 				</Group>
 
-				<Text>In reference to: { documentation.documentable_route && <Link href={ documentation.documentable_route }>{ documentation.documentable_name }</Link> }</Text>
+				<Text>In reference to: { documentation.route && <Link href={ documentation.route }>{ documentation.documentable_name }</Link> }</Text>
 				{ documentation.created_by && <Text size="sm">
 					Created by: <Link href={ Routes.person(documentation.created_by.id!) }>{ documentation.created_by.name } </Link>
 					on <Date>{ documentation.created_at }</Date>

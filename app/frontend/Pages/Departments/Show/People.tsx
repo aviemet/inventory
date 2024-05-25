@@ -20,7 +20,7 @@ const Details = ({ department, people }: DetailsProps) => {
 				rows={ people?.data }
 				pagination={ people?.pagination }
 				menuOptions={ [
-					{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
+					{ label: 'New Person', href: Routes.newPerson(), icon: <NewIcon /> },
 				] }
 			>
 				<PeopleTable wrapper={ false } />

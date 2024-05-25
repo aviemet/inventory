@@ -1,6 +1,6 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
-import UserPreferences from '@/types/UserPreferences'
+import { UserPreferences } from '@/types'
 import { useMutation, useQueryClient  } from '@tanstack/react-query'
 import { type ReactMutationFunction } from '..'
 

@@ -18,7 +18,7 @@ const ComponentsIndex = ({ components, pagination }: ComponentsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.components() }
 			menuOptions={ [
-				{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
+				{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
 			] }
 		>
 			<ComponentsTable />

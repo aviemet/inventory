@@ -18,7 +18,7 @@ const ManufacturersIndex = ({ manufacturers, pagination }: ManufacturersIndexPro
 			pagination={ pagination }
 			deleteRoute={ Routes.manufacturers() }
 			menuOptions={ [
-				{ label: 'New Manufacturer', href: Routes.newManufacturer(), icon: NewIcon },
+				{ label: 'New Manufacturer', href: Routes.newManufacturer(), icon: <NewIcon /> },
 			] }
 		>
 			<ManufacturersTable />

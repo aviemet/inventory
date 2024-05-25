@@ -20,7 +20,7 @@ const Details = ({ department, licenses }: DetailsProps) => {
 				rows={ licenses?.data }
 				pagination={ licenses?.pagination }
 				menuOptions={ [
-					{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
+					{ label: 'New License', href: Routes.newLicense(), icon: <NewIcon /> },
 				] }
 			>
 				<LicensesTable wrapper={ false } />

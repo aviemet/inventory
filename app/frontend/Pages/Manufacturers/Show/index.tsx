@@ -70,7 +70,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 							rows={ items?.data }
 							pagination={ items?.pagination }
 							menuOptions={ [
-								{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+								{ label: 'New Asset', href: Routes.newItem(), icon: <NewIcon /> },
 							] }
 						>
 							<ItemsTable wrapper={ false } />
@@ -87,7 +87,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 							rows={ accessories?.data }
 							pagination={ accessories?.pagination }
 							menuOptions={ [
-								{ label: 'New Accessory', href: Routes.newAccessory(), icon: NewIcon },
+								{ label: 'New Accessory', href: Routes.newAccessory(), icon: <NewIcon /> },
 							] }
 						>
 							<AccessoriesTable wrapper={ false } />
@@ -104,7 +104,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 							rows={ consumables?.data }
 							pagination={ consumables?.pagination }
 							menuOptions={ [
-								{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
+								{ label: 'New Consumable', href: Routes.newConsumable(), icon: <NewIcon /> },
 							] }
 						>
 							<ConsumablesTable wrapper={ false } />
@@ -121,7 +121,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 							rows={ components?.data }
 							pagination={ components?.pagination }
 							menuOptions={ [
-								{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
+								{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
 							] }
 						>
 							<ComponentsTable wrapper={ false } />

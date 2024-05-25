@@ -18,7 +18,7 @@ const CompaniesIndex = ({ companies, pagination }: CompaniesIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.companies() }
 			menuOptions={ [
-				{ label: 'New Company', href: Routes.newCompany(), icon: NewIcon },
+				{ label: 'New Company', href: Routes.newCompany(), icon: <NewIcon /> },
 			] }
 		>
 			<CompaniesTable />

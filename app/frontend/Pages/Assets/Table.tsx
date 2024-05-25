@@ -24,7 +24,7 @@ const AssetTable = (props: TableProps) => {
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (asset: Schema.Asset) => {
+				<Table.RowIterator render={ (asset: Schema.AssetsIndex) => {
 					return (
 						<Table.Row key={ asset.id }>
 

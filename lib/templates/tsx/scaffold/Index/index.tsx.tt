@@ -18,7 +18,7 @@ const <%= plural_table_name.camelize %>Index = ({ <%= plural_table_name %>, pagi
 			pagination={ pagination }
 			deleteRoute={ Routes.<%= plural_table_name.camelize(:lower) %>() }
 			menuOptions={ [
-				{ label: 'New <%= human_name.titleize %>', href: Routes.new<%= singular_table_name.camelize %>(), icon: NewIcon },
+				{ label: 'New <%= human_name.titleize %>', href: Routes.new<%= singular_table_name.camelize %>(), icon: <NewIcon /> },
 			] }
 		>
 			<<%= plural_table_name.camelize %>Table />

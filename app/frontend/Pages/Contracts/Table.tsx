@@ -39,7 +39,7 @@ const ContractsTable = (props: TableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							{ contract.vendor && <Link href={ Routes.vendor(contract.vendor.slug) }>
+							{ contract?.vendor?.slug && <Link href={ Routes.vendor(contract.vendor.slug) }>
 								{ contract.vendor?.name }
 							</Link> }
 						</Table.Cell>

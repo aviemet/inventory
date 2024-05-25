@@ -18,7 +18,7 @@ const VendorsIndex = ({ vendors, pagination }: VendorsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.vendors() }
 			menuOptions={ [
-				{ label: 'New Vendor', href: Routes.newVendor(), icon: NewIcon },
+				{ label: 'New Vendor', href: Routes.newVendor(), icon: <NewIcon /> },
 			] }
 		>
 			<VendorsTable />

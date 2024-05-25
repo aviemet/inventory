@@ -3,6 +3,4 @@ class Companies::EditSerializer < Companies::FormDataSerializer
     :id,
     :slug,
   )
-
-  has_one :contact, serializer: ContactSerializer
 end

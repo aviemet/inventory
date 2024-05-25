@@ -7,11 +7,9 @@ import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
 interface CheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
 	component: Schema.Component
-	items: Schema.ItemsOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
-const Checkout = ({ assignment, component, ...models }: CheckoutItemProps) => {
+const Checkout = ({ assignment, component }: CheckoutItemProps) => {
 	const title = `Checkout ${component.name}`
 
 	return (
@@ -47,11 +45,10 @@ const Checkout = ({ assignment, component, ...models }: CheckoutItemProps) => {
 				>
 
 					<AssignToableDropdown
-						{ ...models }
 						options={ ['Item'] }
 					/>
 
-					<AssignmentLocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown />
 
 					<DateTimeInput
 						label="Assigned At"

@@ -18,7 +18,7 @@ const OrdersIndex = ({ orders, pagination }: OrdersIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.orders() }
 			menuOptions={ [
-				{ label: 'New Order', href: Routes.newOrder(), icon: NewIcon },
+				{ label: 'New Order', href: Routes.newOrder(), icon: <NewIcon /> },
 			] }
 		>
 			<OrdersTable />

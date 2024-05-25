@@ -57,7 +57,6 @@ const TableComponent: TableObject = ({
 			condition={ wrapper }
 			wrapper={ children => <div className={ classes.wrapper }>{ children }</div> }
 		>
-			{ /* TODO: Maybe a better way than forcing an entire context tree just for data-cell attributes? */ }
 			<ConditionalWrapper
 				condition={ tableState === null }
 				wrapper={ children => <TableProvider>{ children }</TableProvider> }

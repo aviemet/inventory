@@ -18,7 +18,7 @@ const LocationsIndex = ({ locations, pagination }: CompaniesIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.locations() }
 			menuOptions={ [
-				{ label: 'New Location', href: Routes.newLocation(), icon: NewIcon },
+				{ label: 'New Location', href: Routes.newLocation(), icon: <NewIcon /> },
 			] }
 		>
 			<LocationsTable />

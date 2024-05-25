@@ -18,6 +18,8 @@ const SelectComponent = forwardRef<HTMLInputElement, SelectInputProps>((
 		required,
 		id,
 		name,
+		size = 'md',
+		maxDropdownHeight = 400,
 		fetchOnOpen,
 		onDropdownOpen,
 		wrapper,
@@ -47,12 +49,12 @@ const SelectComponent = forwardRef<HTMLInputElement, SelectInputProps>((
 				id={ `${inputId}-search` }
 				autoComplete="off"
 				name={ name }
-				size="md"
+				size={ size }
 				data={ options }
 				required={ required }
-				maxDropdownHeight={ 400 }
-				nothingFoundMessage="No Results"
+				maxDropdownHeight={ maxDropdownHeight }
 				onDropdownOpen={ handleDropdownOpen }
+				nothingFoundMessage="No Results"
 				{ ...props }
 			/>
 		</InputWrapper>

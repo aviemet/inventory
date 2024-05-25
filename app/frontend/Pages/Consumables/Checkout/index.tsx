@@ -13,11 +13,9 @@ type CheckoutConsumableFormData = {
 interface CheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
 	consumable: Schema.Consumable
-	items: Schema.ItemsOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
-const Checkout = ({ assignment, consumable, ...models }: CheckoutItemProps) => {
+const Checkout = ({ assignment, consumable }: CheckoutItemProps) => {
 	const title = `Checkout ${consumable.name}`
 
 	const handleSubmit = ({ transform }: UseFormProps<CheckoutConsumableFormData>) => {
@@ -48,7 +46,7 @@ const Checkout = ({ assignment, consumable, ...models }: CheckoutItemProps) => {
 					</div>
 				</div>
 
-				<Form
+				<Form<CheckoutConsumableFormData>
 					data={ {
 						assignment: {
 							...assignment,
@@ -66,11 +64,10 @@ const Checkout = ({ assignment, consumable, ...models }: CheckoutItemProps) => {
 				>
 
 					<AssignToableDropdown
-						{ ...models }
 						options={ ['Item', 'Person', 'Location'] }
 					/>
 
-					<AssignmentLocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown />
 
 					<DateTimeInput
 						label="Assigned At"

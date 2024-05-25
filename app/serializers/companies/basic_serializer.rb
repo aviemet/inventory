@@ -1,4 +1,4 @@
-class Companies::BasicSerializer < Companies::CountsSerializer
+class Companies::BasicSerializer < CompanySerializer
   attributes(
     :id,
     :slug,

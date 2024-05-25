@@ -18,7 +18,7 @@ const DocumentationsIndex = ({ documentations, pagination }: DocumentationIndexP
 			pagination={ pagination }
 			deleteRoute={ Routes.documentations() }
 			menuOptions={ [
-				{ label: 'New Documentation', href: Routes.newDocumentation(), icon: NewIcon },
+				{ label: 'New Documentation', href: Routes.newDocumentation(), icon: <NewIcon /> },
 			] }
 		>
 			<DocumentationsTable />

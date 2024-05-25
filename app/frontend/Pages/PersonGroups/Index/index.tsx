@@ -25,7 +25,7 @@ const GroupIndex = ({ person_groups, pagination }: GroupIndexProps) => {
 				{ title, href: window.location.href },
 			] }
 			menuOptions={ [
-				{ label: 'Create New Group', href: Routes.newPersonGroup(), icon: NewIcon },
+				{ label: 'Create New Group', href: Routes.newPersonGroup(), icon: <NewIcon /> },
 			] }
 		>
 			<GroupsTable />

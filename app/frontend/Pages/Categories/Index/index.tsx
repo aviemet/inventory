@@ -28,7 +28,7 @@ const CategoriesIndex = ({ categories, pagination }: CategoriesIndexProps) => {
 					<TableTitleSection title={ title }
 						deleteRoute={ Routes.categories() }
 						menuOptions={ [
-							{ label: 'New Category', href: Routes.newCategory(), icon: NewIcon },
+							{ label: 'New Category', href: Routes.newCategory(), icon: <NewIcon /> },
 						] }>
 						<Table.SearchInput />
 					</TableTitleSection>

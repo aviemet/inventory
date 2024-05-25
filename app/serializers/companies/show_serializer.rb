@@ -6,5 +6,5 @@ class Companies::ShowSerializer < Companies::CountsSerializer
     :updated_at,
   )
 
-  has_one :contact, serializer: ContactSerializer
+  has_one :contact, serializer: Contacts::BasicSerializer
 end

@@ -53,7 +53,7 @@ class ConsumablesController < ApplicationController
     assignment.assign_toable_type = :Item
 
     render inertia: "Consumables/Checkout", props: {
-      consumable: consumable.render,
+      consumable: consumable.render(view: :form_data),
       assignment: assignment.render(view: :form_data),
       items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
       people: -> { @active_company.people.select([:id, :first_name, :last_name, :location_id]).render(view: :options) },

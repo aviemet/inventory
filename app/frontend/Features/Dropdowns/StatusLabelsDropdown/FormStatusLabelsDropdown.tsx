@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Routes } from '@/lib'
 import StatusLabelsForm from '@/Pages/StatusLabels/Form'
@@ -10,10 +10,12 @@ interface StatusLabelsDropdownProps extends Omit<FormAsyncDropdown<Schema.Status
 	name?: string
 }
 
-const StatusLabelsDropdown = forwardRef<HTMLInputElement, StatusLabelsDropdownProps>((
-	{ label = 'Status Label', name = 'status_label_id', initialData, value, ...props },
-	ref,
-) => {
+const StatusLabelsDropdown = ({ label = 'Status Label',
+	name = 'status_label_id',
+	initialData,
+	value,
+	...props
+}: StatusLabelsDropdownProps) => {
 	const { data, isStale, refetch } = useGetStatusLabelsAsOptions({
 		enabled: value !== undefined,
 		initialData,
@@ -22,7 +24,6 @@ const StatusLabelsDropdown = forwardRef<HTMLInputElement, StatusLabelsDropdownPr
 
 	return (
 		<FormSelect
-			ref={ ref }
 			label={ label }
 			name={ name }
 			options={ !data ? [] : data.map(statusLabel => ({
@@ -44,6 +45,6 @@ const StatusLabelsDropdown = forwardRef<HTMLInputElement, StatusLabelsDropdownPr
 		/>
 	)
 
-})
+}
 
 export default StatusLabelsDropdown

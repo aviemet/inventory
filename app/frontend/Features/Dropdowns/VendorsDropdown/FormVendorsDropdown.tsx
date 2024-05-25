@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { Routes } from '@/lib'
 import VendorsForm from '@/Pages/Vendors/Form'
@@ -10,10 +10,13 @@ interface VendorsDropdownProps extends Omit<FormAsyncDropdown<Schema.VendorsOpti
 	name?: string
 }
 
-const VendorsDropdown = forwardRef<HTMLInputElement, VendorsDropdownProps>((
-	{ label = 'Vendor', name = 'vendor_id', initialData, value, ...props },
-	ref,
-) => {
+const VendorsDropdown = ({
+	label = 'Vendor',
+	name = 'vendor_id',
+	initialData,
+	value,
+	...props
+}: VendorsDropdownProps) => {
 	const { data, isStale, refetch } = useGetVendorsAsOptions({
 		enabled: value !== undefined,
 		initialData,
@@ -21,7 +24,6 @@ const VendorsDropdown = forwardRef<HTMLInputElement, VendorsDropdownProps>((
 
 	return (
 		<FormSelect
-			ref={ ref }
 			label={ label }
 			name={ name }
 			options={ !data ? [] : data.map(vendor => ({
@@ -42,6 +44,6 @@ const VendorsDropdown = forwardRef<HTMLInputElement, VendorsDropdownProps>((
 			{ ...props }
 		/>
 	)
-})
+}
 
 export default VendorsDropdown

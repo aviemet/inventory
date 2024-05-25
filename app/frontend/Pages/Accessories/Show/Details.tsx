@@ -25,7 +25,7 @@ const AccessoryDetails = ({ accessory }: ShowAccessoryProps) => {
 						<Table.Row>
 							<Table.Cell>Model</Table.Cell>
 							<Table.Cell>
-								{ accessory.model && <Link href={ Routes.model(accessory.model.slug) }>
+								{ accessory?.model?.slug && <Link href={ Routes.model(accessory.model.slug) }>
 									{ accessory.model.name }
 								</Link> }
 							</Table.Cell>
@@ -34,7 +34,7 @@ const AccessoryDetails = ({ accessory }: ShowAccessoryProps) => {
 						<Table.Row>
 							<Table.Cell>Manufacturer</Table.Cell>
 							<Table.Cell>
-								{ accessory.manufacturer && <Link href={ Routes.manufacturer(accessory.manufacturer.slug) }>
+								{ accessory?.manufacturer?.slug && <Link href={ Routes.manufacturer(accessory.manufacturer.slug) }>
 									{ accessory.manufacturer!.name }
 								</Link> }
 							</Table.Cell>
@@ -43,7 +43,7 @@ const AccessoryDetails = ({ accessory }: ShowAccessoryProps) => {
 						<Table.Row>
 							<Table.Cell>Category</Table.Cell>
 							<Table.Cell>
-								{ accessory.category && <Link href={ Routes.category(accessory.category.slug) }>
+								{ accessory?.category?.slug && <Link href={ Routes.category(accessory.category.slug) }>
 									{ accessory.category.name }
 								</Link> }
 							</Table.Cell>
@@ -69,7 +69,7 @@ const AccessoryDetails = ({ accessory }: ShowAccessoryProps) => {
 						<Table.Row>
 							<Table.Cell>Vendor</Table.Cell>
 							<Table.Cell>
-								{ accessory.vendor && <Link href={ Routes.vendor(accessory.vendor.slug) }>
+								{ accessory?.vendor?.slug && <Link href={ Routes.vendor(accessory.vendor.slug) }>
 									{ accessory.vendor.name }
 								</Link> }
 							</Table.Cell>

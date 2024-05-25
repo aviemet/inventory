@@ -18,7 +18,7 @@ const ModelsIndex = ({ models, pagination }: ModelsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.models() }
 			menuOptions={ [
-				{ label: 'New Model', href: Routes.newModel(), icon: NewIcon },
+				{ label: 'New Model', href: Routes.newModel(), icon: <NewIcon /> },
 			] }
 		>
 			<ModelsTable />

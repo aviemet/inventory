@@ -8,13 +8,13 @@ class Components::ShowSerializer < ComponentSerializer
   has_one :purchase, serializer: PurchaseSerializer
 
   has_many :assignments, serializer: Assignments::ShowSerializer
-  has_many :activities, serializer: ActivitySerializer
+  has_many :activities, serializer: Activities::BasicSerializer
   has_many :documentations, serializer: Documentations::IndexSerializer
 
-  belongs_to :default_location, serializer: LocationSerializer
-  belongs_to :department, serializer: DepartmentSerializer
-  belongs_to :model, serializer: ModelSerializer
-  belongs_to :vendor, serializer: VendorSerializer
-  belongs_to :category, serializer: CategorySerializer
-  belongs_to :manufacturer, serializer: ManufacturerSerializer
+  belongs_to :default_location, serializer: Locations::BasicSerializer
+  belongs_to :department, serializer: Departments::BasicSerializer
+  belongs_to :model, serializer: Models::BasicSerializer
+  belongs_to :vendor, serializer: Vendors::BasicSerializer
+  belongs_to :category, serializer: Categories::BasicSerializer
+  belongs_to :manufacturer, serializer: Manufacturers::BasicSerializer
 end

@@ -19,9 +19,11 @@ const RowInContext = forwardRef<HTMLTableRowElement, RowInContextProps>((
 	const { auth: { user: { table_preferences } } } = usePageProps()
 	const { tableState: { model, columns } } = useTableContext()
 
+	const length = rows?.length || 0
+
 	return (
 		<Table.Tr { ...props } ref={ ref }>
-			{ selectable && <RowCheckbox name={ name || '' } selected={ selected } /> }
+			{ selectable && length > 0 && <RowCheckbox name={ name || '' } selected={ selected } /> }
 
 			{ children && React.Children.map(children, (cell, i) => {
 				if((

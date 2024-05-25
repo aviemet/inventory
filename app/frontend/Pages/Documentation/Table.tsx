@@ -10,7 +10,9 @@ const DocumentationTable = (props: TableProps) => {
 			<Table.Head>
 				<Table.Row>
 					<Table.HeadCell sort="title">Title</Table.HeadCell>
-					<Table.HeadCell sort="slug">In Reference To</Table.HeadCell>
+					<Table.HeadCell sort="documentable_name">In Reference To</Table.HeadCell>
+					<Table.HeadCell sort="documentable_type">Referenced Type</Table.HeadCell>
+					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
 					<Table.HeadCell className="actions">Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
@@ -22,7 +24,15 @@ const DocumentationTable = (props: TableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ doc.route }>{ doc.slug }</Link>
+							<Link href={ doc.route }>{ doc.documentable_name }</Link>
+						</Table.Cell>
+
+						<Table.Cell>
+							{ doc.documentable_type }
+						</Table.Cell>
+
+						<Table.Cell>
+							{ doc.category.name }
 						</Table.Cell>
 
 						<Table.Cell>

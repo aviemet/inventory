@@ -6,7 +6,7 @@ import React from 'react'
 
 interface DetailsProps {
 	title: string
-	department: Schema.Department
+	department: Schema.DepartmentsShow
 }
 
 const Details = ({ title, department }: DetailsProps) => {

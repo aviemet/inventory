@@ -12,7 +12,7 @@ type ActiveCompanyFormData = {
 	}
 }
 
-const ActiveCompany = ({ user }: { user: Schema.User }) => {
+const ActiveCompanyDropdown = ({ user }: { user: Schema.UsersFlash }) => {
 	if(!user?.companies || isEmpty(user.companies)) {
 		return <Title order={ 3 }>Inventory Application</Title>
 	}
@@ -41,9 +41,10 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 		>
 			<Select
 				name="active_company_id"
-				options={ user.companies || [] }
-				getLabel={ option => option.name }
-				getValue={ option => String(option.id) }
+				options={ user?.companies?.map(company => ({
+					label: company.name,
+					value: String(company.id),
+				})) || [] }
 				clearable={ false }
 				searchable={ false }
 				field={ false }
@@ -58,4 +59,4 @@ const ActiveCompany = ({ user }: { user: Schema.User }) => {
 	)
 }
 
-export default ActiveCompany
+export default ActiveCompanyDropdown

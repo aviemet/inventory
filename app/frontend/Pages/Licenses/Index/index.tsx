@@ -18,7 +18,7 @@ const LicensesIndex = ({ licenses, pagination }: LicensesIndexProps ) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.licenses() }
 			menuOptions={ [
-				{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
+				{ label: 'New License', href: Routes.newLicense(), icon: <NewIcon /> },
 			] }
 		>
 			<LicensesTable />

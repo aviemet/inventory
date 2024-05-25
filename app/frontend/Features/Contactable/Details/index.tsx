@@ -5,7 +5,7 @@ import Email from './Email'
 import Website from './Website'
 
 interface ContactDetailsProps {
-	contact: Schema.Contact
+	contact: Schema.ContactsFormData
 }
 
 const ContactDetails = ({ contact }: ContactDetailsProps) => {

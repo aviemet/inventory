@@ -52,7 +52,6 @@ const Login = () => {
 							autoFocus
 							autoComplete="Email"
 							required
-							ref={ emailInputRef }
 							pattern=".+@.+\..+"
 						/>
 					</Field>

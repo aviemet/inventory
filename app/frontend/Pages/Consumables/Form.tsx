@@ -7,7 +7,7 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Features/Dropdowns'
+import { FormLocationsDropdown, FormModelsDropdown, FormVendorsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -35,7 +35,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: Consumabl
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Consumable Details">
-				<ModelsDropdown
+				<FormModelsDropdown
 					initialData={ coerceArray(consumable?.model) }
 					errorKey="consumable.model"
 				/>
@@ -50,13 +50,13 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: Consumabl
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown initialData={ coerceArray(consumable?.vendor) } />
+				<FormVendorsDropdown initialData={ coerceArray(consumable?.vendor) } />
 
 				<TextInput name="cost" label="Cost" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-				<LocationsDropdown
+				<FormLocationsDropdown
 					label="Default Location"
 					name="default_location_id"
 					initialData={ coerceArray(consumable?.default_location) }

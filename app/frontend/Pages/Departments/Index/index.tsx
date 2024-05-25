@@ -18,7 +18,7 @@ const DepartmentsIndex = ({ departments, pagination }: DepartmentsIndexProps) =>
 			pagination={ pagination }
 			deleteRoute={ Routes.departments() }
 			menuOptions={ [
-				{ label: 'New Department', href: Routes.newDepartment(), icon: NewIcon },
+				{ label: 'New Department', href: Routes.newDepartment(), icon: <NewIcon /> },
 			] }
 		>
 			<DepartmentsTable />

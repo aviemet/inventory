@@ -18,7 +18,7 @@ const ContractsIndex = ({ contracts, pagination }: ContractsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.contracts() }
 			menuOptions={ [
-				{ label: 'New Contract', href: Routes.newContract(), icon: NewIcon },
+				{ label: 'New Contract', href: Routes.newContract(), icon: <NewIcon /> },
 			] }
 		>
 			<ContractsTable />

@@ -31,7 +31,7 @@ const ComponentsTable = (props: TableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							{ component.model && <Link href={ Routes.model(component.model.slug) }>
+							{ component?.model?.slug && <Link href={ Routes.model(component.model.slug) }>
 								{ component.model.name }
 							</Link> }
 						</Table.Cell>
@@ -41,19 +41,19 @@ const ComponentsTable = (props: TableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							{ component.category && <Link href={ Routes.category(component.category.slug) }>
+							{ component?.category?.slug && <Link href={ Routes.category(component.category.slug) }>
 								{ component.category.name }
 							</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
-							{ component.manufacturer && <Link href={ Routes.manufacturer(component.manufacturer.slug) }>
+							{ component?.manufacturer?.slug && <Link href={ Routes.manufacturer(component.manufacturer.slug) }>
 								{ component.manufacturer!.name }
 							</Link> }
 						</Table.Cell>
 
 						<Table.Cell>
-							{ component.vendor && <Link href={ Routes.vendor(component.vendor.slug) }>
+							{ component?.vendor?.slug && <Link href={ Routes.vendor(component.vendor.slug) }>
 								{ component.vendor.name }
 							</Link> }
 						</Table.Cell>

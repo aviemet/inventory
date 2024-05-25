@@ -1,3 +1,3 @@
-export default interface UserPreferences {
+export interface UserPreferences {
 	colorScheme?: 'light'|'dark'|'auto'
 }

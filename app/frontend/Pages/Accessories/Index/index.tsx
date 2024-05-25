@@ -18,7 +18,7 @@ const AccessoriesIndex = ({ accessories, pagination }: AccessoriesIndexProps) =>
 			pagination={ pagination }
 			deleteRoute={ Routes.accessories() }
 			menuOptions={ [
-				{ label: 'Create New Accessory', href: Routes.newAccessory(), icon: NewIcon },
+				{ label: 'Create New Accessory', href: Routes.newAccessory(), icon: <NewIcon /> },
 			] }
 		>
 			<AccessoriesTable />

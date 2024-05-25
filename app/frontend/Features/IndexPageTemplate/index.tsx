@@ -35,7 +35,11 @@ const IndexPageTemplate = ({
 					rows={ rows }
 					pagination={ pagination }
 				>
-					<TableTitleSection title={ title } menuOptions={ menuOptions } deleteRoute={ deleteRoute }>
+					<TableTitleSection
+						title={ title }
+						menuOptions={ menuOptions }
+						deleteRoute={ deleteRoute }
+					>
 						{ search && <Table.SearchInput advancedSearch={ advancedSearch } /> }
 					</TableTitleSection>
 

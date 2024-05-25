@@ -66,7 +66,7 @@ const Checkout = ({ assignment, accessory, ...models }: CheckoutItemProps) => {
 						options={ ['Person', 'Item', 'Location'] }
 					/>
 
-					<AssignmentLocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown />
 
 					<NumberInput label="Quantity" name="qty" />
 
@@ -74,13 +74,11 @@ const Checkout = ({ assignment, accessory, ...models }: CheckoutItemProps) => {
 						label="Assigned At"
 						name="assigned_at"
 						required
-						span={ 6 }
 					/>
 
 					<DateTimeInput
 						label="Expected At"
 						name="expected_at"
-						span={ 6 }
 					/>
 
 					<Textarea

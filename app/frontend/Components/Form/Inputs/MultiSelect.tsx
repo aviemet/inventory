@@ -5,12 +5,14 @@ import Field from '../Components/Field'
 import MultiSelect, { type MultiSelectInputProps } from '@/Components/Inputs/MultiSelect'
 import { type ComboboxData } from '@mantine/core'
 import { type InputConflicts, type BaseFormInputProps } from '.'
+import { exclude } from '@/lib'
 
 type OmittedDropdownTypes = InputConflicts|'onDropdownOpen'|'onDropdownClose'|'onOptionSubmit'|'onClear'
 export interface FormMultiSelectProps<TForm extends NestedObject = NestedObject>
 	extends Omit<MultiSelectInputProps, OmittedDropdownTypes>,
 	Omit<BaseFormInputProps<string[], TForm>, 'onChange'|'onBlur'|'onFocus'> {
 
+	value?: string[]
 	onChange?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
 	onBlur?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
 	onFocus?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
@@ -112,7 +114,7 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 				onDropdownClose={ handleDropdownClose }
 				onOptionSubmit={ handleOptionSubmit }
 				wrapper={ false }
-				{ ...props }
+				{ ...exclude(props, 'value') }
 			/>
 		</ConditionalWrapper>
 	)

@@ -1,10 +1,12 @@
 import React from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { isEmpty } from 'lodash'
-import { useGetDepartmentsAsOptions } from '@/queries/departments'
-import { type AsyncDropdown } from '..'
+import { useGetItemsAsOptions } from '@/queries/items'
+import { type FormAsyncDropdown } from '..'
 
-interface ItemsDropdownProps extends AsyncDropdown<Schema.ItemsOptions> {}
+interface ItemsDropdownProps extends Omit<FormAsyncDropdown<Schema.ItemsOptions>, 'name'> {
+	name?: string
+}
 
 const ItemsDropdown = ({
 	label = 'Item',
@@ -13,26 +15,28 @@ const ItemsDropdown = ({
 	value,
 	...props
 }: ItemsDropdownProps) => {
-	const { data, isStale, refetch } = useGetDepartmentsAsOptions({
+	const { data, isStale, refetch } = useGetItemsAsOptions({
 		enabled: value !== undefined,
 		initialData,
 	})
 
-	return <FormSelect
-		label={ label }
-		name={ name }
-		options={ !data ? [] : data.map(item => ({
-			label: item.name,
-			value: String(item.id),
-		})) }
-		onDropdownOpen={ () => {
-			if(isEmpty(data) || isStale) refetch()
-		} }
-		searchable
-		clearable
-		value={ value }
-		{ ...props }
-	/>
+	return (
+		<FormSelect
+			label={ label }
+			name={ name }
+			options={ !data ? [] : data.map(item => ({
+				label: item.name,
+				value: String(item.id),
+			})) }
+			onDropdownOpen={ () => {
+				if(isEmpty(data) || isStale) refetch()
+			} }
+			searchable
+			clearable
+			value={ value }
+			{ ...props }
+		/>
+	)
 }
 
 export default ItemsDropdown

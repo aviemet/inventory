@@ -93,7 +93,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ items?.data }
 							pagination={ items?.pagination }
 							menuOptions={ [
-								{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+								{ label: 'New Asset', href: Routes.newItem(), icon: <NewIcon /> },
 							] }
 						>
 							<ItemsTable wrapper={ false } />
@@ -110,7 +110,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ accessories?.data }
 							pagination={ accessories?.pagination }
 							menuOptions={ [
-								{ label: 'New Accessory', href: Routes.newAccessory(), icon: NewIcon },
+								{ label: 'New Accessory', href: Routes.newAccessory(), icon: <NewIcon /> },
 							] }
 						>
 							<AccessoriesTable wrapper={ false } />
@@ -127,7 +127,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ consumables?.data }
 							pagination={ consumables?.pagination }
 							menuOptions={ [
-								{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
+								{ label: 'New Consumable', href: Routes.newConsumable(), icon: <NewIcon /> },
 							] }
 						>
 							<ConsumablesTable wrapper={ false } />
@@ -144,7 +144,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ components?.data }
 							pagination={ components?.pagination }
 							menuOptions={ [
-								{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
+								{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
 							] }
 						>
 							<ComponentsTable wrapper={ false } />
@@ -161,7 +161,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ licenses?.data }
 							pagination={ licenses?.pagination }
 							menuOptions={ [
-								{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
+								{ label: 'New License', href: Routes.newLicense(), icon: <NewIcon /> },
 							] }
 						>
 							<LicensesTable wrapper={ false } />
@@ -178,7 +178,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ contracts?.data }
 							pagination={ contracts?.pagination }
 							menuOptions={ [
-								{ label: 'New Contract', href: Routes.newContract({ 'contract.vendor_id': vendor.id }), icon: NewIcon },
+								{ label: 'New Contract', href: Routes.newContract({ 'contract.vendor_id': vendor.id }), icon: <NewIcon /> },
 							] }
 						>
 							<ContractsTable wrapper={ false } />

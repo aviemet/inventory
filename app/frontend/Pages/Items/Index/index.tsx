@@ -19,7 +19,7 @@ const ItemsIndex = ({ items, pagination }: ItemsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.items() }
 			menuOptions={ [
-				{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+				{ label: 'New Asset', href: Routes.newItem(), icon: <NewIcon /> },
 			] }
 			advancedSearch={ <AdvancedItemsSearch /> }
 		>

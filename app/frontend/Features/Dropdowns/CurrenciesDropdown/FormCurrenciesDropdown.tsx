@@ -2,9 +2,11 @@ import React from 'react'
 import { Select as FormSelect } from '@/Components/Form'
 import { useGetCurrencies } from '@/queries/currencies'
 import { isEmpty } from 'lodash'
-import { type AsyncDropdown } from '..'
+import { type FormAsyncDropdown } from '..'
 
-interface FormCurrenciesDropdownProps extends AsyncDropdown<Schema.CurrencyOption> {}
+interface FormCurrenciesDropdownProps extends Omit<FormAsyncDropdown<Schema.CurrencyOption>, 'name'> {
+	name?: string
+}
 
 const FormCurrenciesDropdown = ({
 	label = 'Currency',
@@ -15,20 +17,22 @@ const FormCurrenciesDropdown = ({
 		staleTime: Infinity,
 	})
 
-	return <FormSelect
-		label={ label }
-		name={ name }
-		options={ !data ? [] : data.map(currency => ({
-			label: `${currency.code} (${currency.symbol})`,
-			value: String(currency.code),
-		})) }
-		onDropdownOpen={ () => {
-			if(isEmpty(data)) refetch()
-		} }
-		searchable
-		clearable
-		{ ...props }
-	/>
+	return (
+		<FormSelect
+			label={ label }
+			name={ name }
+			options={ !data ? [] : data.map(currency => ({
+				label: `${currency.code} (${currency.symbol})`,
+				value: String(currency.code),
+			})) }
+			onDropdownOpen={ () => {
+				if(isEmpty(data)) refetch()
+			} }
+			searchable
+			clearable
+			{ ...props }
+		/>
+	)
 
 }
 

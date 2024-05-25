@@ -6,7 +6,7 @@ import { Routes } from '@/lib'
 type Record = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
 
 interface ShowCategoryProps {
-	category: Schema.Category
+	category: Schema.CategoriesShow
 	records: Record[]
 	pagination: Schema.Pagination
 }

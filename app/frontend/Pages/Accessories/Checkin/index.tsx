@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Page, Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
@@ -7,7 +7,7 @@ import * as classes from './Checkin.css'
 interface CheckinAccessoriesProps {
 	accessory: Schema.AccessoriesEdit
 	assignment: Schema.AssignmentsEdit
-	statuses: Schema.StatusLabel[]
+	statuses: Schema.StatusLabelsOptions[]
 }
 
 const Checkin = ({ assignment, accessory, statuses }: CheckinAccessoriesProps) => {
@@ -64,7 +64,12 @@ const Checkin = ({ assignment, accessory, statuses }: CheckinAccessoriesProps) =
 
 					{ /* TODO: Deal with quantity return status assignments  */ }
 					<Select
-						options={ statuses }
+						options={ useMemo(() => {
+							return statuses.map(status => ({
+								label: status.name,
+								value: String(status.id),
+							}))
+						}, [statuses]) }
 						label="Status"
 						name="status_id"
 						required

@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, BoxProps } from '@mantine/core'
 import cx from 'clsx'
 import { useFormFormat } from '../Form'
+import { type InputType } from '@/types'
 
 export interface FieldProps extends BoxProps {
 	children: React.ReactNode
