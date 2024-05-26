@@ -18,5 +18,7 @@ FactoryBot.define do
     name { Faker::Company.name }
 
     company
+
+    after(:stub, &:set_slug)
   end
 end

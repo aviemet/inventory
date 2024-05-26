@@ -24,5 +24,7 @@ FactoryBot.define do
     name { Faker::Address.community }
 
     company
+
+    after(:stub, &:set_slug)
   end
 end

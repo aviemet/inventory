@@ -28,5 +28,7 @@ FactoryBot.define do
     manager factory: :person
     company
     location { association :location, company: company }
+
+    after(:stub, &:set_slug)
   end
 end

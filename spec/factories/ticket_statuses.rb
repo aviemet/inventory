@@ -15,6 +15,8 @@
 #
 FactoryBot.define do
   factory :ticket_status do
-    name { "MyString" }
+    name { "Open" }
+
+    after(:stub, &:set_slug)
   end
 end

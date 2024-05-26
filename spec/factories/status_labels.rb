@@ -17,5 +17,7 @@
 FactoryBot.define do
   factory :status_label do
     name { "Deployable" }
+
+    after(:stub, &:set_slug)
   end
 end

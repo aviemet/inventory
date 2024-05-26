@@ -18,5 +18,7 @@ FactoryBot.define do
     name { Faker::Lorem.unique.word }
 
     company
+
+    after(:stub, &:set_slug)
   end
 end

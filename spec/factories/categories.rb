@@ -17,9 +17,11 @@
 #
 FactoryBot.define do
   factory :category do
-    name { Faker::Computer.type }
+    sequence(:name) { |n| "#{Faker::Computer.type}#{n}" }
     categorizable_type { "Item" }
 
     company
+
+    after(:stub, &:set_slug)
   end
 end

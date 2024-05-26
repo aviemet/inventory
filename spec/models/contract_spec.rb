@@ -30,7 +30,7 @@ require 'models/concerns/ownable'
 require "models/concerns/serializable"
 
 RSpec.describe Contract do
-  subject(:contract) { build(:contract) }
+  subject(:contract) { build_stubbed(:contract) }
 
   describe "Validations" do
     it "is valid with valid attributes" do

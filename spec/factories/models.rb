@@ -32,5 +32,7 @@ FactoryBot.define do
 
     category { association :category, company: company }
     manufacturer { association :manufacturer, company: company }
+
+    after(:stub, &:set_slug)
   end
 end

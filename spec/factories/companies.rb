@@ -29,5 +29,7 @@ FactoryBot.define do
     name { Faker::Company.unique.name }
 
     factory :company_as_setup, class: "Company::AsSetup"
+
+    after(:stub, &:set_slug)
   end
 end
