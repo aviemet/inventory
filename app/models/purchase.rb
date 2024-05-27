@@ -45,9 +45,6 @@ class Purchase < ApplicationRecord
 
   monetize :cost_cents
 
-  belongs_to :item
-  belongs_to :accessory
-  belongs_to :component
-  belongs_to :consumable
+  belongs_to :purchasable, polymorphic: true
   belongs_to :order
 end

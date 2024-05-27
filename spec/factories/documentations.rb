@@ -31,6 +31,7 @@ FactoryBot.define do
     body { Faker::Lorem.paragraph }
 
     company
+    category { association :category, company: company }
     documentable factory: :item, strategy: :create
 
     trait :for_accessory do

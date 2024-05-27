@@ -55,18 +55,18 @@ class Order < ApplicationRecord
   tracked
   resourcify
 
-  monetize :shipping_cents
-  monetize :tax_cents
-  monetize :discount_cents
+  monetize :shipping_cents, allow_nil: true
+  monetize :tax_cents, allow_nil: true
+  monetize :discount_cents, allow_nil: true
 
-  belongs_to :person
   belongs_to :vendor
-  has_one :user, through: :person
+  belongs_to :user
+  has_one :person, through: :user
   has_many :purchases, dependent: :nullify
 
   scope :includes_associated, -> { includes([:purchase, :item, :accessory, :consumable, :component, :user, :vendor]) }
 
   def cost
-    self.joins(:purchases).select("SUM(purchases.cost) AS cost")
+    purchases.sum(&:cost)
   end
 end
