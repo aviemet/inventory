@@ -9,7 +9,7 @@ class ApplicationSerializer < Oj::Serializer
     return nil if money.nil?
 
     {
-      amount: money.amount.to_f,
+      amount: money.to_f,
       cents: money.cents,
       currency_iso: money.currency.iso_code,
     }

@@ -60,6 +60,14 @@ class Order < ApplicationRecord
   monetize :discount_cents, allow_nil: true
   monetize :cost_cents, disable_validation: true
 
+  def cost_cents
+    purchases.sum(&:cost)
+  end
+
+  def cost
+    Money.new(cost_cents, purchases.first&.cost_currency || Money.default_currency)
+  end
+
   belongs_to :vendor
   belongs_to :user
   has_one :person, through: :user
@@ -67,7 +75,4 @@ class Order < ApplicationRecord
 
   scope :includes_associated, -> { includes([:purchases, :user, :vendor]) }
 
-  def cost
-    purchases.sum(&:cost)
-  end
 end
