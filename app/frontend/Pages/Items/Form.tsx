@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -17,7 +18,6 @@ import {
 	FormDepartmentsDropdown,
 } from '@/Features/Dropdowns'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
-import { Group } from '@/Components'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -42,66 +42,95 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 			method={ method }
 			{ ...props }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required autoFocus />
+				</Grid.Col>
 
-			<FormGroup legend="Item Details">
-				<FormModelsDropdown
-					modelCategory='Item'
-					errorKey="item.model"
-					initialData={ coerceArray(item?.model) }
-				/>
+				<FormGroup legend="Item Details">
+					<Grid.Col>
+						<FormModelsDropdown
+							modelCategory='Item'
+							errorKey="item.model"
+							initialData={ coerceArray(item?.model) }
+						/>
+					</Grid.Col>
 
-				<TextInput name="serial" label="Serial" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="serial" label="Serial" />
+					</Grid.Col>
 
-				<TextInput name="asset_tag" label="Asset Tag" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="asset_tag" label="Asset Tag" />
+					</Grid.Col>
 
-				<CheckboxInput
-					label="Static IP Assignment"
-					checked={ staticIp }
-					onChange={ e => setStaticIp(e.target.checked) }
-					mt="md"
-				/>
+					<Grid.Col>
+						<CheckboxInput
+							label="Static IP Assignment"
+							checked={ staticIp }
+							onChange={ e => setStaticIp(e.target.checked) }
+							mt="md"
+						/>
+					</Grid.Col>
 
-				{ staticIp && <DynamicInputs model="nics" emptyData={ {
-					mac: '',
-					nic_type: '',
-				} }>
-					<Group grow>
-						<TextInput name="ip" label="IP Address" />
+					{ staticIp && <DynamicInputs model="nics" emptyData={ {
+						mac: '',
+						nic_type: '',
+					} }>
+						<Grid.Col>
+							<TextInput name="ip" label="IP Address" />
+						</Grid.Col>
 
-						<TextInput name="mac" label="Mac Address" />
-					</Group>
-				</DynamicInputs> }
-			</FormGroup>
+						<Grid.Col>
+							<TextInput name="mac" label="Mac Address" />
+						</Grid.Col>
+					</DynamicInputs> }
+				</FormGroup>
 
-			<FormGroup legend="Purchase Details">
-				<FormVendorsDropdown initialData={ coerceArray(item?.vendor) } />
+				<FormGroup legend="Purchase Details">
+					<Grid.Col>
+						<FormVendorsDropdown initialData={ coerceArray(item?.vendor) } />
+					</Grid.Col>
 
-				<CurrencyInput name="cost" label="Cost" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<CurrencyInput name="cost" label="Cost" />
+					</Grid.Col>
 
-				<DateTimeInput label="Purchased At" name="purchased_at" />
-			</FormGroup>
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<DateTimeInput label="Purchased At" name="purchased_at" />
+					</Grid.Col>
+				</FormGroup>
 
-			<FormGroup legend="Usage Details">
-				<FormLocationsDropdown
-					label="Default Location"
-					name="default_location_id"
-					initialData={ coerceArray(item?.default_location) }
-					required
-				/>
+				<FormGroup legend="Usage Details">
+					<Grid.Col>
+						<FormLocationsDropdown
+							label="Default Location"
+							name="default_location_id"
+							initialData={ coerceArray(item?.default_location) }
+							required
+						/>
+					</Grid.Col>
 
-				<FormDepartmentsDropdown initialData={ coerceArray(item?.department) } />
+					<Grid.Col>
+						<FormDepartmentsDropdown initialData={ coerceArray(item?.department) } />
+					</Grid.Col>
 
-				<Checkbox name="requestable" label="Requestable" />
+					<Grid.Col>
+						<Checkbox name="requestable" label="Requestable" />
+					</Grid.Col>
 
-			</FormGroup>
+				</FormGroup>
 
-			<Textarea name="notes" label="Notes" />
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
 
-			<Submit>
-				{ item.id ? 'Update' : 'Create' } Item
-			</Submit>
-
+				<Grid.Col>
+					<Submit>
+						{ item.id ? 'Update' : 'Create' } Item
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

@@ -1,31 +1,47 @@
 import React from 'react'
-import { Box } from '@mantine/core'
-import cx from 'clsx'
 import { DivProps } from 'react-html-props'
-import ConditionalWrapper from '../../ConditionalWrapper'
+import { ConditionalWrapper, Grid, Box } from '@/Components'
 import { NestedFields } from 'use-inertia-form'
+import cx from 'clsx'
 
 interface FormGroupProps extends DivProps {
 	legend?: string
 	outline?: boolean
 	model?: string
+	grid?: boolean
 }
 
-const FormGroup = ({ children, legend, outline = true, model }: FormGroupProps) => {
+const FormGroup = ({ children, legend, outline = true, model, grid = true }: FormGroupProps) => {
 	return (
-		<Box component='fieldset' className={ cx({ outline }) } style={ {
-			marginTop: legend ? '0.5rem' : undefined,
-		} }>
+		<ConditionalWrapper
+			condition={ grid }
+			wrapper={ children => (
+				<Grid.Col>
+					<Grid component='fieldset' className={ cx({ outline }) } style={ {
+						marginTop: legend ? '0.5rem' : undefined,
+					} }>
+						{ children }
+					</Grid>
+				</Grid.Col>
+			) }
+			elseWrapper={ children => (
+				<Box component='fieldset' className={ cx({ outline }) } style={ {
+					marginTop: legend ? '0.5rem' : undefined,
+				} }>
+					{ children }
+				</Box>
+			) }
+		>
 			<ConditionalWrapper
-				wrapper={ children => <NestedFields model={ model! }>{ children }</NestedFields> }
 				condition={ model !== undefined }
+				wrapper={ children => <NestedFields model={ model! }>{ children }</NestedFields> }
 			>
 				<>
 					{ legend && <legend>{ legend }</legend> }
 					{ children }
 				</>
 			</ConditionalWrapper>
-		</Box>
+		</ConditionalWrapper>
 	)
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, formatter } from '@/lib'
-import { Group, Link, Table } from '@/Components'
+import { Group, Link, Money, Table } from '@/Components'
 import { CheckoutButton, EditButton } from '@/Components/Button'
 import { TableProps } from '@/Components/Table/Table'
 
@@ -29,37 +29,51 @@ const LicensesTable = (props: TableProps) => {
 			<Table.Body>
 				<Table.RowIterator render={ (license: Schema.LicensesIndex) => (
 					<Table.Row key={ license.id }>
+
 						<Table.Cell nowrap>
 							<Link href={ Routes.license(license) }>{ license.name }</Link>
 						</Table.Cell>
+
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.qty }</Link>
 						</Table.Cell>
+
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.licenser_name }</Link>
 						</Table.Cell>
+
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.licenser_email }</Link>
 						</Table.Cell>
+
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.reassignable }</Link>
 						</Table.Cell>
+
 						<Table.Cell>
-							{ license.cost ? formatter.currency(license.cost, license.cost_currency) : '-' }
+							<Money>{ license.cost }</Money>
 						</Table.Cell>
+
 						<Table.Cell>{ license.purchased_at && formatter.date.short(license.purchased_at) }</Table.Cell>
+
 						<Table.Cell>{ license.expires_at && formatter.date.short(license.expires_at) }</Table.Cell>
+
 						<Table.Cell>{ license.terminates_at && formatter.date.short(license.terminates_at) }</Table.Cell>
+
 						<Table.Cell>{ license.maintained }</Table.Cell>
+
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.category?.name }</Link>
 						</Table.Cell>
+
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.vendor?.name }</Link>
 						</Table.Cell>
+
 						<Table.Cell>
 							<Link href={ Routes.license(license) }>{ license.manufacturer?.name }</Link>
 						</Table.Cell>
+
 
 						<Table.Cell fitContent>
 							<Group wrap="nowrap" gap="sm">
@@ -72,6 +86,7 @@ const LicensesTable = (props: TableProps) => {
 								<EditButton href={ Routes.editLicense(license) } />
 							</Group>
 						</Table.Cell>
+
 					</Table.Row>
 				) } />
 			</Table.Body>

@@ -13,6 +13,7 @@ import { CategoriesDropdown, ManufacturersDropdown, VendorsDropdown } from '@/Fe
 import { Box, Grid } from '@/Components'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import ConsoleLogger from '@/Components/Form/Components/ConsoleLogger'
 
 type LicenseFormData = {
 	license: Schema.LicensesFormData
@@ -34,6 +35,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license }: LicenseFormProp
 			method={ method }
 			onSubmit={ onSubmit }
 		>
+			<ConsoleLogger prop="data" />
 			<Grid>
 				<Grid.Col>
 					<TextInput name="name" label="Name" required autoFocus />

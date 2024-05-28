@@ -4,7 +4,13 @@ import Label from './Label'
 import InputWrapper from './InputWrapper'
 import { type BaseInputProps } from '.'
 
-export interface CurrencyInputProps extends NumberInputProps, BaseInputProps {}
+export interface CurrencyInputProps
+	extends
+	NumberInputProps,
+	BaseInputProps
+{
+	symbol?: string|React.ReactNode
+}
 
 const NumberInputComponent = forwardRef<HTMLInputElement, CurrencyInputProps>((
 	{
@@ -14,6 +20,7 @@ const NumberInputComponent = forwardRef<HTMLInputElement, CurrencyInputProps>((
 		id,
 		pattern,
 		size = 'md',
+		symbol = '$',
 		wrapper,
 		wrapperProps,
 		...props
@@ -33,7 +40,7 @@ const NumberInputComponent = forwardRef<HTMLInputElement, CurrencyInputProps>((
 				ref={ ref }
 				size={ size }
 				name={ name }
-				leftSection="$"
+				leftSection={ symbol }
 				hideControls
 				{ ...props }
 			/>

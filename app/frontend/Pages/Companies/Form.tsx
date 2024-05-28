@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Features/Contactable'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
@@ -24,18 +25,27 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: CompanyFormProp
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Company Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Company Name" required autoFocus />
+				</Grid.Col>
+				<Grid.Col>
+					<FormCurrenciesDropdown
+						label="Default Currency"
+						name="default_currency"
+					/>
+				</Grid.Col>
 
-			<FormCurrenciesDropdown
-				label="Default Currency"
-				name="default_currency"
-			/>
+				<Grid.Col>
+					<ContactForm contact={ company.contact } />
+				</Grid.Col>
 
-			<ContactForm contact={ company.contact } />
-
-			<Submit>
-				{ company.id ? 'Update' : 'Create' } Company
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ company.id ? 'Update' : 'Create' } Company
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

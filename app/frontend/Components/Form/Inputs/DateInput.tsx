@@ -68,8 +68,6 @@ const FormDateInput = <TForm extends NestedObject = NestedObject>({
 			<DateInput
 				id={ id || inputId }
 				name={ inputName }
-				// @ts-ignore - TS is treating value as Date
-				// when it's clearly defined as a Union of many types
 				value={ isUnset(value) ? undefined : value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }

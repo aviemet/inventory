@@ -3,6 +3,7 @@ import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import axios from 'axios'
 import { AuthLayout, AppLayout } from '../Layouts'
+import convertDates from './propsMiddleware'
 
 type PagesObject = { default: React.ComponentType<any> & {
 	layout?: React.ComponentType<any>
@@ -35,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		setup({ el, App, props }) {
 			const root = createRoot(el)
+
+			// Convert ISO strings from server to javascript Date objects
+			props.initialPage.props = convertDates(props.initialPage.props)
+
 			root.render(<App { ...props } />)
 		},
 	})

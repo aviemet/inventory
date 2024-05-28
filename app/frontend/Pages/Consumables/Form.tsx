@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -6,6 +7,8 @@ import {
 	Checkbox,
 	Submit,
 	FormGroup,
+	CurrencyInput,
+	NumberInput,
 } from '@/Components/Form'
 import { FormLocationsDropdown, FormModelsDropdown, FormVendorsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
@@ -32,45 +35,78 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: Consumabl
 			onSubmit={ onSubmit }
 			className="max-w-5xl"
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
 
-			<FormGroup legend="Consumable Details">
-				<FormModelsDropdown
-					initialData={ coerceArray(consumable?.model) }
-					errorKey="consumable.model"
-				/>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required autoFocus />
+				</Grid.Col>
 
-				<TextInput name="serial" label="Serial" />
+				<FormGroup legend="Consumable Details">
 
-				<TextInput name="asset_tag" label="Asset Tag" />
+					<Grid.Col>
+						<FormModelsDropdown
+							initialData={ coerceArray(consumable?.model) }
+							errorKey="consumable.model"
+						/>
+					</Grid.Col>
 
-				<TextInput name="qty" label="Quantity" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="serial" label="Serial" />
+					</Grid.Col>
 
-				<TextInput name="min_qty" label="Minimum Quantity" />
-			</FormGroup>
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="asset_tag" label="Asset Tag" />
+					</Grid.Col>
 
-			<FormGroup legend="Purchase Details">
-				<FormVendorsDropdown initialData={ coerceArray(consumable?.vendor) } />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<NumberInput name="qty" label="Quantity" />
+					</Grid.Col>
 
-				<TextInput name="cost" label="Cost" />
-			</FormGroup>
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<NumberInput name="min_qty" label="Minimum Quantity" />
+					</Grid.Col>
 
-			<FormGroup legend="Usage Details">
-				<FormLocationsDropdown
-					label="Default Location"
-					name="default_location_id"
-					initialData={ coerceArray(consumable?.default_location) }
-				/>
+				</FormGroup>
 
-				<Checkbox name="requestable" label="Requestable" />
+				<FormGroup legend="Purchase Details">
 
-			</FormGroup>
+					<Grid.Col>
+						<FormVendorsDropdown initialData={ coerceArray(consumable?.vendor) } />
+					</Grid.Col>
 
-			<Textarea name="notes" label="Notes" />
+					<Grid.Col>
+						<CurrencyInput name="cost" label="Cost" />
+					</Grid.Col>
 
-			<Submit className="w-full">
-				{ consumable.id ? 'Update' : 'Create' } Consumable
-			</Submit>
+				</FormGroup>
+
+				<FormGroup legend="Usage Details">
+
+					<Grid.Col>
+						<FormLocationsDropdown
+							label="Default Location"
+							name="default_location_id"
+							initialData={ coerceArray(consumable?.default_location) }
+						/>
+					</Grid.Col>
+
+					<Grid.Col>
+						<Checkbox name="requestable" label="Requestable" />
+					</Grid.Col>
+
+				</FormGroup>
+
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<Submit className="w-full">
+						{ consumable.id ? 'Update' : 'Create' } Consumable
+					</Submit>
+				</Grid.Col>
+
+			</Grid>
 		</Form>
 	)
 }

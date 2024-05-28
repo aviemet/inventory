@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -36,42 +37,68 @@ const ComponentForm = ({
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required autoFocus />
+				</Grid.Col>
 
-			<FormGroup legend="Component Details">
-				<FormModelsDropdown initialData={ coerceArray(component?.model) } />
+				<FormGroup legend="Component Details">
+					<Grid.Col>
+						<FormModelsDropdown initialData={ coerceArray(component?.model) } />
+					</Grid.Col>
 
-				<TextInput name="serial" label="Serial" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="serial" label="Serial" />
+					</Grid.Col>
 
-				<TextInput name="asset_tag" label="Asset Tag" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="asset_tag" label="Asset Tag" />
+					</Grid.Col>
 
-				<TextInput name="qty" label="Quantity" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="qty" label="Quantity" />
+					</Grid.Col>
 
-				<TextInput name="min_qty" label="Minimum Quantity" />
-			</FormGroup>
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="min_qty" label="Minimum Quantity" />
+					</Grid.Col>
+				</FormGroup>
 
-			<FormGroup legend="Purchase Details">
-				<FormVendorsDropdown initialData={ coerceArray(component?.vendor) } />
+				<FormGroup legend="Purchase Details">
+					<Grid.Col>
+						<FormVendorsDropdown initialData={ coerceArray(component?.vendor) } />
+					</Grid.Col>
 
-				<TextInput name="cost" label="Cost" />
-			</FormGroup>
+					<Grid.Col>
+						<TextInput name="cost" label="Cost" />
+					</Grid.Col>
+				</FormGroup>
 
-			<FormGroup legend="Usage Details">
-				<FormLocationsDropdown
-					label="Default Location"
-					name="default_location_id"
-					initialData={ coerceArray(component?.default_location) }
-				/>
+				<FormGroup legend="Usage Details">
+					<Grid.Col>
+						<FormLocationsDropdown
+							label="Default Location"
+							name="default_location_id"
+							initialData={ coerceArray(component?.default_location) }
+						/>
+					</Grid.Col>
 
-				<Checkbox name="requestable" label="Requestable" />
+					<Grid.Col>
+						<Checkbox name="requestable" label="Requestable" />
+					</Grid.Col>
 
-			</FormGroup>
+				</FormGroup>
 
-			<Textarea name="notes" label="Notes" />
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
 
-			<Submit>
-				{ component.id ? 'Update' : 'Create' } Component
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ component.id ? 'Update' : 'Create' } Component
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

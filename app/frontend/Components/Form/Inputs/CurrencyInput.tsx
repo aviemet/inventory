@@ -4,11 +4,16 @@ import Field from '../Components/Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
 import { InputConflicts, type BaseFormInputProps } from '.'
+import { type  Money } from '@/types'
+import { useCurrency } from '@/lib/hooks'
 
 interface INumberInputProps<TForm extends NestedObject = NestedObject>
 	extends
 	Omit<CurrencyInputProps, InputConflicts>,
-	BaseFormInputProps<number, TForm> {}
+	BaseFormInputProps<number, TForm>
+{
+
+}
 
 const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
@@ -27,12 +32,16 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		...props
 	} : INumberInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number|Money, TForm>({
 		name,
 		model,
 		errorKey,
 		defaultValue,
 		clearErrorsOnChange,
+	})
+
+	const [amount, formatter] = useCurrency({
+		amount: value,
 	})
 
 	const handleChange = (value: string|number) => {
@@ -66,7 +75,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 			<CurrencyInput
 				id={ id || inputId }
 				name={ inputName }
-				value={ value }
+				value={ formatter.format(amount) }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				onFocus={ e => onFocus?.(Number(e.target.value), form) }

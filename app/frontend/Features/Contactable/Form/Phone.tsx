@@ -1,5 +1,7 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { DynamicInputs, TextInput } from '@/Components/Form'
+import { FormCategoriesDropdown } from '@/Features/Dropdowns'
 
 const Phone = () => {
 	return (
@@ -9,8 +11,17 @@ const Phone = () => {
 			notes: '',
 			category_id: '',
 		} } >
-			<TextInput label="Number" name="number" />
-			<TextInput label="Extension" name="extension" />
+			<Grid.Col>
+				<TextInput label="Number" name="number" />
+			</Grid.Col>
+
+			<Grid.Col>
+				<TextInput label="Extension" name="extension" />
+			</Grid.Col>
+
+			<Grid.Col>
+				<FormCategoriesDropdown />
+			</Grid.Col>
 		</DynamicInputs>
 	)
 }

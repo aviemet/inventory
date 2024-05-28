@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -48,22 +49,32 @@ const CategoryForm = ({
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required autoFocus />
+				</Grid.Col>
 
-			<Select
-				label="Category Type"
-				name="categorizable_type"
-				options={ types }
-				onDropdownOpen={ () => router.reload({ only: ['vendors'] }) }
-				required
-				disabled={ categoryType !== undefined }
-			/>
+				<Grid.Col>
+					<Select
+						label="Category Type"
+						name="categorizable_type"
+						options={ types }
+						onDropdownOpen={ () => router.reload({ only: ['vendors'] }) }
+						required
+						disabled={ categoryType !== undefined }
+					/>
+				</Grid.Col>
 
-			<Textarea name="description" label="Description" />
+				<Grid.Col>
+					<Textarea name="description" label="Description" />
+				</Grid.Col>
 
-			<Submit>
-				{ category?.id ? 'Update' : 'Create' } Category
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ category?.id ? 'Update' : 'Create' } Category
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }
