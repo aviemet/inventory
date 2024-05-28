@@ -56,9 +56,9 @@ class ComponentSerializer < Assignable::QuantitySerializer
     :status_label_id,
   )
 
-  type :number
+  type "Money"
   def cost
-    currency_for(component)
+    currency_for(:cost)
   end
 
   belongs_to :status_label, serializer: StatusLabels::OptionsSerializer

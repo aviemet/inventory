@@ -32,7 +32,7 @@ const Form = <TForm extends NestedObject>({
 }: FormProps<TForm>) => {
 	return (
 		<FormFormatProvider value={ { disableFormatting } }>
-			<Box className={ cx(classes.form) } px="xs" pt="xs">
+			<Box className={ cx(classes.form) }>
 				<InertiaForm
 					data={ data }
 					className={ cx({ 'format-grid': !disableFormatting }, className) }

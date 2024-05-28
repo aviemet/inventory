@@ -28,7 +28,7 @@ class NetworksController < ApplicationController
       network: -> { network.render(view: :show, options: {
         page: (params[:page] || 1).to_i
       },) },
-      ips: -> { ips.render(view: :options) },
+      ips: -> { ips.render(view: :show) },
       pagination: -> { {
         count: (network.address&.size || 2) - 2,
         **host_pagination_data(network.address)

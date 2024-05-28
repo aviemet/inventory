@@ -61,7 +61,7 @@ const ItemsTable = (props: TableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Money currency={ item.cost_currency }>{ item.cost }</Money>
+							<Money accounting>{ item.cost }</Money>
 						</Table.Cell>
 
 						<Table.Cell >

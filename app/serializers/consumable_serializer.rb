@@ -53,8 +53,8 @@ class ConsumableSerializer < Assignable::ConsumeSerializer
     :default_location_id,
   )
 
-  type :number
+  type "Money"
   def cost
-    currency_for(consumable)
+    currency_for(:cost)
   end
 end

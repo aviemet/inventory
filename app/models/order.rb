@@ -58,6 +58,7 @@ class Order < ApplicationRecord
   monetize :shipping_cents, allow_nil: true
   monetize :tax_cents, allow_nil: true
   monetize :discount_cents, allow_nil: true
+  monetize :cost_cents, disable_validation: true
 
   belongs_to :vendor
   belongs_to :user
@@ -66,7 +67,7 @@ class Order < ApplicationRecord
 
   scope :includes_associated, -> { includes([:purchase, :item, :accessory, :consumable, :component, :user, :vendor]) }
 
-  def cost
+  def cost_cents
     purchases.sum(&:cost)
   end
 end

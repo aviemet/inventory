@@ -56,9 +56,9 @@ class AccessorySerializer < Assignable::QuantitySerializer
     :purchased_at,
   )
 
-  type :number
+  type "Money"
   def cost
-    currency_for(accessory)
+    currency_for(:cost)
   end
 
 end

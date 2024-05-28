@@ -55,9 +55,9 @@ class ItemSerializer < Assignable::SingleSerializer
     :status_label_id,
   )
 
-  type :number
+  type "Money"
   def cost
-    currency_for(item)
+    currency_for(:cost)
   end
 
   type :boolean

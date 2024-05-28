@@ -57,9 +57,9 @@ class AssetSerializer < ApplicationSerializer
     :status_label_id,
   )
 
-  type :number
+  type "Money"
   def cost
-    currency_for(asset)
+    currency_for(:cost)
   end
 
   attribute :available_to_checkout do

@@ -59,8 +59,8 @@ class LicenseSerializer < Assignable::QuantitySerializer
     :status_label_id,
   )
 
-  type :number
+  type "Money"
   def cost
-    currency_for(license)
+    currency_for(:cost)
   end
 end

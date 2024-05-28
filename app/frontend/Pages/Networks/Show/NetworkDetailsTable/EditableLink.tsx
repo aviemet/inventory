@@ -3,13 +3,13 @@ import { Routes } from '@/lib'
 import { Link, Group } from '@/Components'
 import { Form } from '@/Components/Form'
 import { EditIcon, CrossIcon } from '@/Components/Icons'
-import ItemsDropdown from './ItemsDropdown'
 import { ActionIcon, Box } from '@mantine/core'
 import cx from 'classnames'
 import DhcpConfirmModal from './DhcpConfirmModal'
 
 import { useNetworkContext } from '..'
 import IPAddress from '@/lib/IPAddress'
+import { FormItemsDropdown } from '@/Features'
 
 interface EditableLinkProps {
 	item?: Schema.ItemsOptions
@@ -72,15 +72,16 @@ const EditableLink = ({ item, ip }: EditableLinkProps) => {
 						editing ?
 							<Form
 								disableFormatting
-								model="items"
-								data={ { item: { id: '' }, ip: '' } }
+								model="item"
+								data={ { item } }
 								async
 								to={ '#' /* TODO: API route for setting IP address on item */ }
 							>
-								<ItemsDropdown
-									ref={ dropdownRef }
+								<FormItemsDropdown
 									label={ false }
+									name="id"
 									size="xs"
+									wrapper={ false }
 								/>
 							</Form>
 							:

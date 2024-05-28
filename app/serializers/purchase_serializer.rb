@@ -29,14 +29,13 @@ class PurchaseSerializer < ApplicationSerializer
     :purchasable_type,
     :purchasable_id,
     :order_id,
-    :cost,
     :cost_currency,
     :qty,
     :notes,
   )
 
-  type :number
+  type "Money"
   def cost
-    currency_for(purchase)
+    currency_for(:cost)
   end
 end

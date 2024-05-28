@@ -53,21 +53,25 @@ class OrderSerializer < ApplicationSerializer
     :canceled_reason,
     :user_id,
     :vendor_id,
-    cost: { type: :number },
   )
 
-  type :number
+  type "Money"
+  def cost
+    currency_for(:cost)
+  end
+
+  type "Money"
   def shipping_cost
-    currency_for(order)
+    currency_for(:shipping)
   end
 
-  type :number
+  type "Money"
   def discount_cost
-    currency_for(order)
+    currency_for(:discount)
   end
 
-  type :number
+  type "Money"
   def tax_cost
-    currency_for(order)
+    currency_for(:tax)
   end
 end

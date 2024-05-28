@@ -11,9 +11,13 @@ export const table = css`
 `
 
 export const row = css`
-	height: 40;
+	height: 46px;
 
 	&:hover .item-ip-assign-button, & .item-ip-assign-button.editing {
 		color: ${vars.colors.gray[4]};
+	}
+
+	td {
+		vertical-align: middle;
 	}
 `
