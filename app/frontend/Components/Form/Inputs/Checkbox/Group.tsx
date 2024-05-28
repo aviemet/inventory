@@ -1,34 +1,33 @@
 import React from 'react'
-import CheckboxGroup, { type InputCheckboxGroupProps } from '@/Components/Inputs/Checkbox/Group'
 import { useInertiaInput } from 'use-inertia-form'
 import { Checkbox } from '@/Components/Inputs'
+import { type CheckboxGroupProps } from '@mantine/core'
 
-type CheckboxInputOption = {
-	value: string
-	label: string
-}
-
-export interface FormCheckboxGroupProps extends Omit<InputCheckboxGroupProps, 'children'> {
+export interface FormCheckboxGroupProps extends CheckboxGroupProps {
 	name: string
 	model?: string
-	options: CheckboxInputOption[]
 }
 
 const FormCheckboxGroup = ({
+	children,
 	name,
 	model,
-	options,
+	...props
 }: FormCheckboxGroupProps) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[]>({ name, model })
+	const { value, setValue } = useInertiaInput<string[]>({ name, model })
+
+	const handleValueChange = (vals: string[]) => {
+		setValue(vals)
+	}
 
 	return (
-		<CheckboxGroup
-			name={ inputName }
+		<Checkbox.Group
 			value={ value }
-			onChange={ setValue }
+			onChange={ handleValueChange }
+			{ ...props }
 		>
-			{ options.map(option => <Checkbox key={ option.value } value={ option.value } label={ option.label } />) }
-		</CheckboxGroup>
+			{ children }
+		</Checkbox.Group>
 	)
 }
 

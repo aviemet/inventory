@@ -1,15 +1,15 @@
 import React from 'react'
-import Breadcrumbs, { type TBreadcrumb } from '@/Components/Breadcrumbs'
+import Breadcrumbs, { type Breadcrumb } from '@/Components/Breadcrumbs'
 import { Head } from '@inertiajs/react'
 
-interface IPageProps {
+interface PageProps {
 	children?: React.ReactNode
 	title?: string
 	meta?: React.ReactNode
-	breadcrumbs?: TBreadcrumb[]
+	breadcrumbs?: Breadcrumb[]
 }
 
-const Page = ({ children, title, meta, breadcrumbs }: IPageProps) => {
+const Page = ({ children, title, meta, breadcrumbs }: PageProps) => {
 	return (
 		<>
 			{ title && <Head title={ title }>

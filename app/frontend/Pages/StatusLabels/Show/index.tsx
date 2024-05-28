@@ -1,11 +1,11 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 
-interface IShowStatusLabelProps {
+interface ShowStatusLabelProps {
 	status_label: Schema.StatusLabelsShow
 }
 
-const ShowStatusLabel = ({ status_label }: IShowStatusLabelProps) => {
+const ShowStatusLabel = ({ status_label }: ShowStatusLabelProps) => {
 	const title = status_label.name || 'Show Status Label'
 
 	return (

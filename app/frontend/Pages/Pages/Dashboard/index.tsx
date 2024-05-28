@@ -3,12 +3,12 @@ import { Heading, Page, Section } from '@/Components'
 import Counts from './Counts'
 import RecentActivityTable from './RecentActivityTable'
 
-interface IDashboardProps {
-	company: Schema.CompaniesDashboard
+interface DashboardProps {
+	company: Schema.CompaniesCounts
 	activities: Schema.ActivitiesDashboard[]
 }
 
-const Dashboard = ({ company, activities }: IDashboardProps) => {
+const Dashboard = ({ company, activities }: DashboardProps) => {
 	return (
 		<Page title="Dashboard" breadcrumbs={ [
 			{ href: '/dashboard', title: 'Dashboard' },

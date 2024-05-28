@@ -1,40 +1,50 @@
 import React, { useState } from 'react'
 import { Button, Group } from '@/Components'
 import axios from 'axios'
-import useStateMachine from '@cassiozen/usestatemachine'
+import useStateMachine, { t } from '@cassiozen/usestatemachine'
 import { CheckIcon, CrossIcon } from '@/Components/Icons'
 import { InfoCircle } from 'tabler-icons-react'
-import { Avatar, ButtonProps, HoverCard, Text } from '@mantine/core'
+import { Avatar, ButtonProps, HoverCard, Text, useMantineTheme } from '@mantine/core'
+import { type HTTPVerb } from 'use-inertia-form'
 
+type StateMachineContext = {
+	icon: React.ReactNode
+	color: string
+}
 
-interface ITestResponseButtonProps extends ButtonProps {
+interface TestResponseButtonProps extends ButtonProps {
 	children?: string
 	endpoint: string
 	method?: HTTPVerb
-	data: any
+	data?: unknown
 }
 
 /**
  * Generic component for testing the response from a remote endpoint
  * Displays success if the endpoint returns a successful response, error upon any errors *
  */
-const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data, ...props }: ITestResponseButtonProps) => {
+const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data, ...props }: TestResponseButtonProps) => {
+	const theme = useMantineTheme()
+
 	const [errorMessage, setErrorMessage] = useState('')
 
 	const [requestState, setRequestState] = useStateMachine({
+		schema: {
+			context: t<StateMachineContext>,
+		},
 		initial: 'inactive',
-		context:{
+		context: {
 			icon: <></>,
-			color: 'primary',
+			color: theme.primaryColor,
 		},
 		states: {
 			inactive: {
 				on: { requesting: 'requesting' },
-				effect({ setContext }) {
+				effect({ context, event, setContext }) {
 					setErrorMessage('')
 					setContext(() => ({
 						icon: <></>,
-						color: 'primary',
+						color: theme.primaryColor,
 					}))
 				},
 			},
@@ -47,7 +57,7 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 					setErrorMessage('')
 					setContext(() => ({
 						icon: <></>,
-						color: 'primary',
+						color: theme.primaryColor,
 					}))
 				},
 			},

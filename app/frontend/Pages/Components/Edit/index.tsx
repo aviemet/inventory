@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import ComponentForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IUpdateComponentProps{
+interface UpdateComponentProps{
 	component: Schema.ComponentsEdit
 }
 
-const EditComponent = ({ component }: IUpdateComponentProps) => {
+const EditComponent = ({ component }: UpdateComponentProps) => {
 	const title = `Edit ${component.name}`
 
 	return (

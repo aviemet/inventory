@@ -5,9 +5,9 @@ import {
 	Textarea,
 	Submit,
 } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TStatusLabelFormData = {
+type StatusLabelFormData = {
 	status_label: Schema.StatusLabelsFormData
 }
 
@@ -17,14 +17,14 @@ const emptyStatusLabel: Schema.StatusLabelsFormData = {
 	status_type: 1,
 }
 
-export interface IStatusLabelFormProps {
+export interface StatusLabelFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TStatusLabelFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<StatusLabelFormData>) => boolean|void
 	status_label?: Schema.StatusLabelsFormData
 }
 
-const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label = emptyStatusLabel }: IStatusLabelFormProps) => {
+const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label = emptyStatusLabel }: StatusLabelFormProps) => {
 	return (
 		<Form
 			model="status_label"
@@ -46,4 +46,4 @@ const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label = emptySt
 	)
 }
 
-export default React.memo(StatusLabelForm)
+export default StatusLabelForm

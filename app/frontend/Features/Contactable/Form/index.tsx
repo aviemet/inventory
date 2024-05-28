@@ -6,11 +6,11 @@ import Email from './Email'
 import Website from './Website'
 import { Box } from '@mantine/core'
 
-interface IContactableFormProps {
+interface ContactableFormProps {
 	contact: Schema.ContactsFormData
 }
 
-const ContactableForm = ({ contact }: IContactableFormProps) => {
+const ContactableForm = ({ contact }: ContactableFormProps) => {
 	return (
 		<>
 			<FieldsFor model="contact" legend="Contact Information">

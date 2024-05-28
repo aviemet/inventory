@@ -3,12 +3,12 @@ import { Heading, Page, Section } from '@/Components'
 import GroupForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IUpdateGroupProps{
+interface UpdateGroupProps{
 	person_group: Schema.PersonGroupsEdit
 	people: Schema.Person[]
 }
 
-const EditGroup = ({ person_group, ...models }: IUpdateGroupProps) => {
+const EditGroup = ({ person_group, ...models }: UpdateGroupProps) => {
 	const title = `Edit ${person_group.name}`
 
 	return (

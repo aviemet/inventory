@@ -1,13 +1,13 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import SelectInput, { type ISelectProps } from '@/Components/Inputs/Select'
+import SelectInput, { type SelectInputProps } from '@/Components/Inputs/Select'
 import axios from 'axios'
 import { Routes } from '@/lib'
 
-interface IItemsDropdownProps extends Omit<ISelectProps, 'options'> {
+interface ItemsDropdownProps extends Omit<SelectInputProps, 'options'> {
 
 }
 
-const ItemsDropdown = forwardRef<HTMLInputElement, IItemsDropdownProps>((
+const ItemsDropdown = forwardRef<HTMLInputElement, ItemsDropdownProps>((
 	{ ...props },
 	ref,
 ) => {

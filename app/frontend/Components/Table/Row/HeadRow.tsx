@@ -1,19 +1,19 @@
 import React, { useEffect, forwardRef } from 'react'
-import { type ITableRow } from './index'
-import { Box } from '@mantine/core'
+import { type TableRow } from './index'
+import { Table } from '@mantine/core'
 import HeadCheckbox from './HeadCheckbox'
 import { useTableContext } from '../TableContext'
 import { useCheckboxState } from '@/lib/hooks'
 import { coerceArray } from '../../../lib/index'
 
-interface IHeadRowProps extends ITableRow {
+interface HeadRowProps extends TableRow {
 	name?: string
 	rows?: Record<string, any>[]
 	selectable: boolean
 	selected: Set<string>
 }
 
-const HeadRow = forwardRef<HTMLTableRowElement, IHeadRowProps>((
+const HeadRow = forwardRef<HTMLTableRowElement, HeadRowProps>((
 	{ children, name, rows, selectable, selected, ...props },
 	ref,
 ) => {
@@ -38,7 +38,7 @@ const HeadRow = forwardRef<HTMLTableRowElement, IHeadRowProps>((
 	}, [])
 
 	return (
-		<Box component="tr" { ...props } ref={ ref }>
+		<Table.Tr { ...props } ref={ ref }>
 			{ selectable && <HeadCheckbox
 				rows={ rows }
 				selected={ selected }
@@ -46,7 +46,7 @@ const HeadRow = forwardRef<HTMLTableRowElement, IHeadRowProps>((
 				indeterminate={ indeterminate }
 			/> }
 			{ children }
-		</Box>
+		</Table.Tr>
 	)
 })
 

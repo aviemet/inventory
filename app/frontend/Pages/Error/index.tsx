@@ -1,11 +1,11 @@
 import React from 'react'
 import { Section } from '@/Components'
 
-interface IErrorProps {
+interface ErrorProps {
 	status: 403|404|500|503
 }
 
-export default function ErrorPage({ status }: IErrorProps) {
+export default function ErrorPage({ status }: ErrorProps) {
 	const title = {
 		503: '503: Service Unavailable',
 		500: '500: Server Error',

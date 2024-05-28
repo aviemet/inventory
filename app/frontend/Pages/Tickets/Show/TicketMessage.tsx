@@ -7,11 +7,11 @@ import { IconButton } from '@/Components/Button'
 import { useToggle } from '@mantine/hooks'
 import { usePageProps } from '@/lib/hooks'
 
-interface ITicketMessageProps {
+interface TicketMessageProps {
 	message: Schema.TicketMessage
 }
 
-const TicketMessage = ({ message }: ITicketMessageProps) => {
+const TicketMessage = ({ message }: TicketMessageProps) => {
 	const { auth: { user } } = usePageProps()
 	const [isEditing, toggleIsEditing] = useToggle()
 

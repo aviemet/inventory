@@ -1,10 +1,10 @@
 import React from 'react'
 
-interface IEmailProps {
+interface EmailProps {
 	email: Schema.Email
 }
 
-const Email = ({ email }: IEmailProps) => {
+const Email = ({ email }: EmailProps) => {
 	return (
 		<div>Email</div>
 	)

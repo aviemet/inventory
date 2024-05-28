@@ -2,27 +2,27 @@ import React from 'react'
 import { Routes, formatter } from '@/lib'
 import { Group, Link, Table } from '@/Components'
 import { CheckoutButton, EditButton } from '@/Components/Button'
-import { ITableProps } from '@/Components/Table/Table'
+import { TableProps } from '@/Components/Table/Table'
 
-const LicensesTable = (props: ITableProps) => {
+const LicensesTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="qty">Seats</Table.Cell>
-					<Table.Cell sort="licenser_name">Licensed To Name</Table.Cell>
-					<Table.Cell sort="licenser_email">Licensed To Email</Table.Cell>
-					<Table.Cell sort="reassignable">Reassignable</Table.Cell>
-					<Table.Cell sort="cost_cents">Cost</Table.Cell>
-					<Table.Cell sort="purchased_at">Purchase Date</Table.Cell>
-					<Table.Cell sort="expires_at">Expire Date</Table.Cell>
-					<Table.Cell sort="terminates_at">Termination Date</Table.Cell>
-					<Table.Cell sort="maintained">Maintained</Table.Cell>
-					<Table.Cell sort="category.name">Category</Table.Cell>
-					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
-					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="qty">Seats</Table.HeadCell>
+					<Table.HeadCell sort="licenser_name">Licensed To Name</Table.HeadCell>
+					<Table.HeadCell sort="licenser_email">Licensed To Email</Table.HeadCell>
+					<Table.HeadCell sort="reassignable">Reassignable</Table.HeadCell>
+					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
+					<Table.HeadCell sort="purchased_at">Purchase Date</Table.HeadCell>
+					<Table.HeadCell sort="expires_at">Expire Date</Table.HeadCell>
+					<Table.HeadCell sort="terminates_at">Termination Date</Table.HeadCell>
+					<Table.HeadCell sort="maintained">Maintained</Table.HeadCell>
+					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
+					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
+					<Table.HeadCell sort="manufacturers.name">Manufacturer</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

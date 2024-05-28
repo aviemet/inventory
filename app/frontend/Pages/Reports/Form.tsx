@@ -6,4 +6,4 @@ const ReportsForm = () => {
 	)
 }
 
-export default React.memo(ReportsForm)
+export default ReportsForm

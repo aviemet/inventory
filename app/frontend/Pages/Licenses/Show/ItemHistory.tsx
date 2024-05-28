@@ -1,8 +1,8 @@
 import React from 'react'
 import { Heading, History } from '@/Components'
-import { IShowLicenseProps } from '.'
+import { ShowLicenseProps } from '.'
 
-const LicenseHistory = ({ license }: IShowLicenseProps) => {
+const LicenseHistory = ({ license }: ShowLicenseProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>History</Heading>

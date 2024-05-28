@@ -2,29 +2,29 @@ import React from 'react'
 import { Group, Link, Money, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { EditButton, CheckoutButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 
-const AccessoriesTable = (props: ITableProps) => {
+const AccessoriesTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="models.name">Model</Table.Cell>
-					<Table.Cell sort="serial">Serial</Table.Cell>
-					<Table.Cell sort="asset_tag">Asset Tag</Table.Cell>
-					<Table.Cell sort="categories.name">Category</Table.Cell>
-					<Table.Cell sort="manufacturers.name">Manufacturer</Table.Cell>
-					<Table.Cell sort="vendors.name">Vendor</Table.Cell>
-					<Table.Cell sort="cost_cents">Cost</Table.Cell>
-					<Table.Cell sort="departments.name">Avail. / Qty</Table.Cell>
-					<Table.Cell sort="departments.name">Min Qty</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="models.name">Model</Table.HeadCell>
+					<Table.HeadCell sort="serial">Serial</Table.HeadCell>
+					<Table.HeadCell sort="asset_tag">Asset Tag</Table.HeadCell>
+					<Table.HeadCell sort="categories.name">Category</Table.HeadCell>
+					<Table.HeadCell sort="manufacturers.name">Manufacturer</Table.HeadCell>
+					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
+					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
+					<Table.HeadCell sort="departments.name">Avail. / Qty</Table.HeadCell>
+					<Table.HeadCell sort="departments.name">Min Qty</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (accessory: Schema.Accessory) => {
+				<Table.RowIterator render={ (accessory: Schema.AccessoriesIndex) => {
 
 					return (
 						<Table.Row key={ accessory.id }>
@@ -34,7 +34,7 @@ const AccessoriesTable = (props: ITableProps) => {
 							</Table.Cell>
 
 							<Table.Cell>
-								{ accessory.model && <Link href={ Routes.model(accessory.model.slug) }>
+								{ accessory?.model?.slug && <Link href={ Routes.model(accessory.model.slug) }>
 									{ accessory.model.name }
 								</Link> }
 							</Table.Cell>
@@ -48,19 +48,19 @@ const AccessoriesTable = (props: ITableProps) => {
 							</Table.Cell>
 
 							<Table.Cell>
-								{ accessory.category && <Link href={ Routes.category(accessory.category.slug) }>
+								{ accessory?.category?.slug && <Link href={ Routes.category(accessory.category.slug) }>
 									{ accessory.category.name }
 								</Link> }
 							</Table.Cell>
 
 							<Table.Cell>
-								{ accessory.manufacturer && <Link href={ Routes.manufacturer(accessory.manufacturer.slug) }>
+								{ accessory?.manufacturer?.slug && <Link href={ Routes.manufacturer(accessory.manufacturer.slug) }>
 									{ accessory.manufacturer!.name }
 								</Link> }
 							</Table.Cell>
 
 							<Table.Cell>
-								{ accessory.vendor && <Link href={ Routes.vendor(accessory.vendor.slug) }>
+								{ accessory?.vendor?.slug && <Link href={ Routes.vendor(accessory.vendor.slug) }>
 									{ accessory.vendor.name }
 								</Link> }
 							</Table.Cell>

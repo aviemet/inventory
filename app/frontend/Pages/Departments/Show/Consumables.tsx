@@ -4,13 +4,14 @@ import { NewIcon } from '@/Components/Icons'
 import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
 import ConsumablesTable from '@/Pages/Consumables/Table'
+import { type PaginatedModel } from '@/types/PaginatedModel'
 
-interface IDetailsProps {
+interface DetailsProps {
 	department: Schema.Department
 	consumables: PaginatedModel<Schema.Consumable[]>
 }
 
-const Details = ({ department, consumables }: IDetailsProps) => {
+const Details = ({ department, consumables }: DetailsProps) => {
 	return (
 		<Section>
 			<ShowPageTableTemplate
@@ -19,7 +20,7 @@ const Details = ({ department, consumables }: IDetailsProps) => {
 				rows={ consumables?.data }
 				pagination={ consumables?.pagination }
 				menuOptions={ [
-					{ label: 'New Consumable', href: Routes.newConsumable(), icon: NewIcon },
+					{ label: 'New Consumable', href: Routes.newConsumable(), icon: <NewIcon /> },
 				] }
 			>
 				<ConsumablesTable wrapper={ false } />

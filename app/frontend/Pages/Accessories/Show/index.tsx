@@ -6,7 +6,7 @@ import History from './History'
 import Associations from './Associations'
 import Documentations from './Documentations'
 
-export interface IShowAccessoryProps {
+export interface ShowAccessoryProps {
 	accessory: Schema.AccessoriesShow
 }
 
@@ -17,7 +17,7 @@ const tabsList = [
 	{ id: 'associations', label: 'Associations', component: Associations },
 ]
 
-const ShowAccessory = ({ accessory }: IShowAccessoryProps) => {
+const ShowAccessory = ({ accessory }: ShowAccessoryProps) => {
 	const title = accessory.name ?? 'Accessory Details'
 
 	return (

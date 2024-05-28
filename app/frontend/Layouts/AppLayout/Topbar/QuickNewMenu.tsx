@@ -13,57 +13,50 @@ import {
 	DocumentationIcon,
 } from '@/Components/Icons'
 import { Routes } from '@/lib'
-import { useViewportSize } from '@mantine/hooks'
-import { px, useMantineTheme, useComputedColorScheme } from '@mantine/core'
+
+import cx from 'clsx'
+import * as classes from './TopBar.css'
 
 const QuickNewMenu = () => {
-	const { width } = useViewportSize()
-	const theme = useMantineTheme()
-	const computedColorScheme = useComputedColorScheme('dark')
-
-	if(width < Number(px(theme.breakpoints.sm))) {
-		return <></>
-	}
-
 	return (
 		<Menu position="bottom-end">
 			<Menu.Target>
-				<Button variant="default" leftSection={ <PlusCircleIcon /> }> New</Button>
+				<Button variant="default" leftSection={ <PlusCircleIcon /> } className={ cx(classes.newMenu) }> New</Button>
 			</Menu.Target>
 
 			<Menu.Dropdown>
 				<Menu.Link href={ Routes.newItem() } leftSection={ <ItemsIcon /> }>
-					New Item
+					Item
 				</Menu.Link>
 				<Menu.Link href={ Routes.newAccessory() } leftSection={ <AccessoriesIcon /> }>
-					New Accessory
+					Accessory
 				</Menu.Link>
 				<Menu.Link href={ Routes.newComponent() } leftSection={ <ComponentsIcon /> }>
-					New Component
+					Component
 				</Menu.Link>
 				<Menu.Link href={ Routes.newConsumable() } leftSection={ <ConsumablesIcon /> }>
-					New Consumable
+					Consumable
 				</Menu.Link>
 				<Menu.Link href={ Routes.newLicense() } leftSection={ <LicensesIcon /> }>
-					New License
+					License
 				</Menu.Link>
 
 				<Menu.Divider />
 
 				<Menu.Link href={ Routes.newPerson() } leftSection={ <PeopleIcon /> }>
-					New Person
+					Person
 				</Menu.Link>
 				<Menu.Link href={ Routes.newVendor() } leftSection={ <VendorsIcon /> }>
-					New Vendor
+					Vendor
 				</Menu.Link>
 
 				<Menu.Divider />
 
 				<Menu.Link href={ Routes.newTicket() } leftSection={ <TicketsIcon /> }>
-					New Ticket
+					Ticket
 				</Menu.Link>
 				<Menu.Link href={ Routes.newDocumentation() } leftSection={ <DocumentationIcon /> }>
-					New Documentation
+					Documentation
 				</Menu.Link>
 			</Menu.Dropdown>
 		</Menu>

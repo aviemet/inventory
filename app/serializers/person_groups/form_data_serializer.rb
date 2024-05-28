@@ -1,11 +1,4 @@
-class PersonGroups::FormDataSerializer < ApplicationSerializer
-  object_as :person_group
-
-  attributes(
-    :name,
-    :description,
-  )
-
+class PersonGroups::FormDataSerializer < PersonGroupSerializer
   type "{
     [key: string]: Record<string, boolean>
     }"

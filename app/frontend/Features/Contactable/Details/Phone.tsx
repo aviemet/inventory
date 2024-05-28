@@ -1,10 +1,10 @@
 import React from 'react'
 
-interface IPhoneProps {
+interface PhoneProps {
 	phone: Schema.Phone
 }
 
-const Phone = ({ phone }: IPhoneProps) => {
+const Phone = ({ phone }: PhoneProps) => {
 	return (
 		<div>Phone</div>
 	)

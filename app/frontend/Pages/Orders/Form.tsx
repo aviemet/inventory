@@ -3,25 +3,27 @@ import {
 	Form,
 	Textarea,
 	Submit,
+	TextInput,
+	FormConsumer,
 } from '@/Components/Form'
-import { coerceArray } from '@/lib'
-import { VendorsDropdown } from '@/Components/Dropdowns'
+import { FormVendorsDropdown } from '@/Features/Dropdowns'
 import { Menu } from '@/Components'
 import { PlusCircleIcon } from '@/Components/Icons'
-import { UseFormProps } from 'use-inertia-form'
+import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TOrderFormData = {
+type OrderFormData = {
 	order: Schema.OrdersFormData
 }
 
-export interface IOrderFormProps {
+export interface OrderFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TOrderFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<OrderFormData>) => boolean|void
 	order: Schema.OrdersFormData
 }
 
-const OrderForm = ({ to, method = 'post', onSubmit, order }: IOrderFormProps) => {
+const OrderForm = ({ to, method = 'post', onSubmit, order }: OrderFormProps) => {
 	return (
 		<Form
 			model="order"
@@ -29,16 +31,15 @@ const OrderForm = ({ to, method = 'post', onSubmit, order }: IOrderFormProps) =>
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
+			filter={ ['cost', 'vendor'] }
 		>
-			<VendorsDropdown initialData={ coerceArray(order?.vendor) } />
+			<FormConsumer>{ ({ data }) => {
+				console.log({ data })
+				return <></>
+			} }</FormConsumer>
+			<TextInput name="number" label="Order Number" />
 
-			<Menu position="bottom-end">
-				<Menu.Target color="primary" variant="filled" icon={ <PlusCircleIcon /> } />
-				<Menu.Dropdown>
-					<Menu.Item>Thing</Menu.Item>
-				</Menu.Dropdown>
-			</Menu>
-
+			<FormVendorsDropdown initialData={ coerceArray(order?.vendor) } />
 
 			<Textarea name="notes" label="Notes" />
 
@@ -50,4 +51,4 @@ const OrderForm = ({ to, method = 'post', onSubmit, order }: IOrderFormProps) =>
 	)
 }
 
-export default React.memo(OrderForm)
+export default OrderForm

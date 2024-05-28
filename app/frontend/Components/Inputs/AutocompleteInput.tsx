@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react'
-import { Autocomplete, type AutocompleteProps } from '@mantine/core'
-import { IInputProps } from '.'
+import { Autocomplete, type AutocompleteProps as MantineAutocompleteProps } from '@mantine/core'
+import { type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 
-export interface IAutocompleteProps extends AutocompleteProps, IInputProps {}
+export interface AutocompleteProps extends MantineAutocompleteProps, BaseInputProps {}
 
-const AutocompleteComponent = forwardRef<HTMLInputElement, IAutocompleteProps>((
+const AutocompleteComponent = forwardRef<HTMLInputElement, AutocompleteProps>((
 	{ id, name, style, wrapper, wrapperProps, ...props },
 	ref,
 ) => {

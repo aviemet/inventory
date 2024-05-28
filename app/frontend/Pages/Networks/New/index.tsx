@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import NetworkForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewNetworkProps {
+interface NewNetworkProps {
 	network: Schema.NetworksFormData
 }
 
-const New = ({ network }: INewNetworkProps) => {
+const New = ({ network }: NewNetworkProps) => {
 	const title = 'New Network'
 
 	return (

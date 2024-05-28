@@ -12,7 +12,7 @@ export const page = css`
 		/* background-blend-mode: soft-light; */
 	}
 	background-image: ${backgroundImageUrl ? `url("${backgroundImageUrl}")` : ''};
-	background-color: ${vars.colors.primary.filled};
+	background-color: ${vars.colors.primaryColors.filled};
 	min-height: 100vh;
 `
 

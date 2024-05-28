@@ -1,73 +1,66 @@
-import React, { forwardRef, useEffect, useState } from 'react'
-import { Select, HiddenInput } from '@/Components/Inputs'
-import { ISelectProps } from '@/Components/Inputs/Select'
-import { Field } from '@/Components/Form'
-import { useForm, useInertiaInput } from 'use-inertia-form'
-import { getSearchResults } from '@/queries/searches'
+import React, { useEffect, useState } from 'react'
+import { Select, HiddenInput } from '@/Components/Form'
+import { useForm } from 'use-inertia-form'
+import { useGetSearchResults } from '@/queries'
+import { type FormSelectProps, type SelectOption } from '@/Components/Form/Inputs/Select'
+import { useDebouncedCallback } from '@mantine/hooks'
 
-interface IDocumentableSearch extends Omit<ISelectProps, 'options'> {
+interface DocumentableSearchProps extends Omit<FormSelectProps, 'options'|'searchable'> {
 	label: string
 }
 
-const DocumentableSearch = forwardRef<HTMLInputElement, IDocumentableSearch>((
-	props,
-	ref,
-) => {
-	const [params, setParams] = useState({})
-	const { data, refetch } = getSearchResults(params)
+const DocumentableSearch = ({
+	name = 'documentable_id',
+	placeholder = 'Start typing to search',
+	onSearchChange,
+	onChange,
+	...props
+}: DocumentableSearchProps) => {
+	const [searchParams, setSearchParams] = useState<string>('')
+	const { data, refetch } = useGetSearchResults({ searchParams: searchParams })
 
-	const { data: formData, getData } = useForm()
-
-	const documentableIdInput = useInertiaInput({ name: 'documentable_id' })
-	const documentableTypeInput = useInertiaInput({ name: 'documentable_type' })
+	const { setData } = useForm()
 
 	useEffect(() => {
 		refetch()
-	}, [params])
+	}, [searchParams])
 
-	useEffect(() => {
-		if(!data) {
-			setParams({
-				searchable_type: getData('documentation.documentable_type'),
-				searchable_id: getData('documentation.documentable_id'),
-			})
-		}
-	}, [])
+	const debouncedSearch = useDebouncedCallback((query: string) => {
+		setSearchParams(query)
+	}, 300)
 
-	const handleChange = (value: string|null) => {
+	const handleSearchChange = (value: string) => {
+		debouncedSearch(value)
+	}
+
+	const handleChange = (value: SelectOption|null) => {
 		if(!value) return
 
 		const choice = data!.find(datum => String(datum.id) === value)
 
 		if(!choice) return
 
-		documentableIdInput.setValue(String(choice.searchable_id))
-		documentableTypeInput.setValue(String(choice.searchable_type))
+		setData('documentation.documentable_type', String(choice.searchable_type))
 	}
 
 	return (
 		<>
-			<Field
-				type="select"
-				required={ true }
-				errors={ false }
-			>
-				<Select
-					ref={ ref }
-					options={ data }
-					getLabel={ option => option.label }
-					onSearchChange={ value => setParams({ search: value }) }
-					placeholder="Start typing to search"
-					onChange={ handleChange }
-					wrapper={ false }
-					{ ...props }
-				/>
-			</Field>
+			<Select
+				searchable
+				name={ name }
+				options={ !data ? [] : data.map(option => ({
+					label: option.label!,
+					value: String(option.id!),
+				})) }
+				placeholder={ placeholder }
+				onSearchChange={ handleSearchChange }
+				onChange={ handleChange }
+				{ ...props }
+			/>
 
-			<HiddenInput name={ documentableIdInput.inputName } id={ documentableIdInput.inputId } value={ documentableIdInput.value } />
-			<HiddenInput name={ documentableTypeInput.inputName } id={ documentableTypeInput.inputId } value={ documentableTypeInput.value } />
+			<HiddenInput name='documentable_type' />
 		</>
 	)
-})
+}
 
 export default DocumentableSearch

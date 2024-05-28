@@ -1,12 +1,7 @@
-class Categories::ShowSerializer < ApplicationSerializer
-  object_as :category
-
+class Categories::ShowSerializer < CategorySerializer
   attributes(
     :id,
-    :categorizable_type,
-    :name,
     :slug,
-    :description,
     :created_at,
     :updated_at,
     qty: { type: :number },

@@ -3,5 +3,5 @@ class Models::OptionsSerializer < ApplicationSerializer
 
   identifier :slug
 
-  attributes :id, :name
+  attributes :id, :slug, :name
 end

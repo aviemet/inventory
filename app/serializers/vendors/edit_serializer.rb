@@ -1,12 +1,6 @@
-class Vendors::EditSerializer < ApplicationSerializer
-  object_as :vendor
-
-  identifier :slug
-
+class Vendors::EditSerializer < Vendors::FormDataSerializer
   attributes(
     :id,
     :slug,
-    :name,
-    :url,
   )
 end

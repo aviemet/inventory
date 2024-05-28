@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id                 :bigint           not null, primary key
+#  categorizable_type :string           not null
+#  description        :text
+#  name               :string           not null
+#  slug               :string           not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_categories_on_name_and_categorizable_type  (name,categorizable_type) UNIQUE
+#  index_categories_on_slug                         (slug) UNIQUE
+#
 class Category < ApplicationRecord
   include Ownable
   include Fieldable
@@ -17,11 +34,13 @@ class Category < ApplicationRecord
   tracked
   resourcify
 
-  @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Documentation Email License Location Model Order Person Phone Ticket User Vendor Website)
+  @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Documentation Email License Location Model Order Person Phone Ticket User Vendor Website Document)
 
-  validates :categorizable_type, inclusion: { in: @categorizable_types, allow_nil: false }
-  validates :categorizable_type, presence: true
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: {
+    scope: :categorizable_type,
+    message: "Category already exists for that category type"
+  }
+  validates :categorizable_type, presence: true, inclusion: { in: @categorizable_types, allow_nil: false }
 
   scope :find_by_type, ->(type){ where(categorizable_type: type.to_s.singularize.camelize) }
 

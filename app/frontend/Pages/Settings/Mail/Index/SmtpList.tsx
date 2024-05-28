@@ -3,11 +3,11 @@ import { EditButton } from '@/Components/Button'
 import { Routes } from '@/lib'
 import React from 'react'
 
-interface ISmtpListProps {
+interface SmtpListProps {
 	smtps: Schema.Smtp[]
 }
 
-const SmtpList = ({ smtps }: ISmtpListProps) => {
+const SmtpList = ({ smtps }: SmtpListProps) => {
 	return (
 		<Table.TableProvider
 			model="smtp"
@@ -17,10 +17,10 @@ const SmtpList = ({ smtps }: ISmtpListProps) => {
 			<Table>
 				<Table.Head>
 					<Table.Row>
-						<Table.Cell sort="name">Name</Table.Cell>
-						<Table.Cell sort="domain">Host</Table.Cell>
-						<Table.Cell sort="username">Username</Table.Cell>
-						<Table.Cell>Actions</Table.Cell>
+						<Table.HeadCell sort="name">Name</Table.HeadCell>
+						<Table.HeadCell sort="domain">Host</Table.HeadCell>
+						<Table.HeadCell sort="username">Username</Table.HeadCell>
+						<Table.HeadCell>Actions</Table.HeadCell>
 					</Table.Row>
 				</Table.Head>
 

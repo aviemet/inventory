@@ -1,26 +1,24 @@
 import React from 'react'
 import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
+import { DateTimeInput, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
 import { type UseFormProps } from 'use-inertia-form'
 
-type TCheckoutConsumableFormData = {
+type CheckoutConsumableFormData = {
 	assignment: Schema.AssignmentsFormData
 	consumable: Schema.Consumable
 }
 
-interface ICheckoutItemProps {
+interface CheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
 	consumable: Schema.Consumable
-	items: Schema.ItemsOptions[]
-	locations: Schema.LocationsOptions[]
 }
 
-const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => {
+const Checkout = ({ assignment, consumable }: CheckoutItemProps) => {
 	const title = `Checkout ${consumable.name}`
 
-	const handleSubmit = ({ transform }: UseFormProps<TCheckoutConsumableFormData>) => {
+	const handleSubmit = ({ transform }: UseFormProps<CheckoutConsumableFormData>) => {
 		transform(data => {
 			data.assignment.qty = data.consumable.qty!
 			data.consumable.qty = consumable.qty! - data.consumable.qty!
@@ -48,7 +46,7 @@ const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => 
 					</div>
 				</div>
 
-				<Form
+				<Form<CheckoutConsumableFormData>
 					data={ {
 						assignment: {
 							...assignment,
@@ -66,13 +64,12 @@ const Checkout = ({ assignment, consumable, ...models }: ICheckoutItemProps) => 
 				>
 
 					<AssignToableDropdown
-						{ ...models }
 						options={ ['Item', 'Person', 'Location'] }
 					/>
 
-					<AssignmentLocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown />
 
-					<DateTime
+					<DateTimeInput
 						label="Assigned At"
 						name="assigned_at"
 						required

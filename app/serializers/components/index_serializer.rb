@@ -1,26 +1,9 @@
-class Components::IndexSerializer < Assignable::QuantitySerializer
-  object_as :component
-
+class Components::IndexSerializer < ComponentSerializer
   attributes(
-    :name,
-    :serial,
-    :asset_tag,
-    :min_qty,
-    :qty,
-    :cost_currency,
-    :purchased_at,
-    :notes,
-    :model_id,
-    :vendor_id,
-    :default_location_id,
+    :id,
     :created_at,
     :updated_at,
   )
-
-  type :number
-  def cost
-    currency_for(component)
-  end
 
   belongs_to :department, serializer: DepartmentSerializer
   belongs_to :model, serializer: ModelSerializer

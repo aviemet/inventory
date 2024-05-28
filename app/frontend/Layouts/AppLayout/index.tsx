@@ -4,9 +4,12 @@ import { AppShell } from '@/Components'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
-import * as classes from './AppLayout.css'
 import { useLayoutStore } from '@/lib/store'
 import { useDisclosure } from '@mantine/hooks'
+
+import cx from 'clsx'
+import * as classes from './AppLayout.css'
+import '@mantine/tiptap/styles.css'
 
 const AppLayout = ({ children }: { children: any }) => {
 	const theme = useMantineTheme()
@@ -40,7 +43,7 @@ const AppLayout = ({ children }: { children: any }) => {
 			<Sidebar />
 			<Footer />
 			<AppShell.Main>
-				<Box id="CONTENT_WRAPPER" className={ classes.wrapper } p="xs">
+				<Box id="CONTENT_WRAPPER" className={ cx(classes.wrapper) } p="xs">
 					{ children }
 				</Box>
 			</AppShell.Main>

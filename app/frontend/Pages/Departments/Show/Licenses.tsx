@@ -4,13 +4,14 @@ import { NewIcon } from '@/Components/Icons'
 import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
 import LicensesTable from '@/Pages/Licenses/Table'
+import { type PaginatedModel } from '@/types/PaginatedModel'
 
-interface IDetailsProps {
+interface DetailsProps {
 	department: Schema.Department
 	licenses: PaginatedModel<Schema.License[]>
 }
 
-const Details = ({ department, licenses }: IDetailsProps) => {
+const Details = ({ department, licenses }: DetailsProps) => {
 	return (
 		<Section>
 			<ShowPageTableTemplate
@@ -19,7 +20,7 @@ const Details = ({ department, licenses }: IDetailsProps) => {
 				rows={ licenses?.data }
 				pagination={ licenses?.pagination }
 				menuOptions={ [
-					{ label: 'New License', href: Routes.newLicense(), icon: NewIcon },
+					{ label: 'New License', href: Routes.newLicense(), icon: <NewIcon /> },
 				] }
 			>
 				<LicensesTable wrapper={ false } />

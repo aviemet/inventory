@@ -4,13 +4,14 @@ import { NewIcon } from '@/Components/Icons'
 import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
 import ItemsTable from '@/Pages/Items/Table'
+import { type PaginatedModel } from '@/types/PaginatedModel'
 
-interface IDetailsProps {
+interface DetailsProps {
 	department: Schema.Department
 	items: PaginatedModel<Schema.Item[]>
 }
 
-const Details = ({ department, items }: IDetailsProps) => {
+const Details = ({ department, items }: DetailsProps) => {
 	return (
 		<Section>
 			<ShowPageTableTemplate
@@ -19,7 +20,7 @@ const Details = ({ department, items }: IDetailsProps) => {
 				rows={ items?.data }
 				pagination={ items?.pagination }
 				menuOptions={ [
-					{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+					{ label: 'New Asset', href: Routes.newItem(), icon: <NewIcon /> },
 				] }
 			>
 				<ItemsTable wrapper={ false } />

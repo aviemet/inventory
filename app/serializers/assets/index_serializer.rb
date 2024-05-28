@@ -1,32 +1,9 @@
-class Assets::IndexSerializer < ApplicationSerializer
-  object_as :asset
-
+class Assets::IndexSerializer < AssetSerializer
   attributes(
-    :name,
-    :asset_tag,
-    :serial,
-    :cost_currency,
-    :purchased_at,
-    :requestable,
-    :qty,
-    :min_qty,
-    :notes,
-    :model_id,
-    :vendor_id,
-    :default_location_id,
-    :type,
+    :id,
     :created_at,
     :updated_at,
   )
-
-  type :number
-  def cost
-    currency_for(asset)
-  end
-
-  attribute :available_to_checkout do
-    asset.available_to_checkout?
-  end
 
   belongs_to :department, serializer: DepartmentSerializer
   has_many :assignments, serializer: AssignmentSerializer

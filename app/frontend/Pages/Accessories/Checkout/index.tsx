@@ -1,14 +1,14 @@
 import React from 'react'
 import { Box, Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
+import { DateTimeInput, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
 
-export type TAccessoryCheckoutFormData = {
+export type AccessoryCheckoutFormData = {
 	assignment: Schema.AssignmentsFormData
 }
 
-interface ICheckoutItemProps {
+interface CheckoutItemProps {
 	accessory: Schema.AccessoriesEdit
 	assignment: Schema.AssignmentsFormData
 	items: Schema.ItemsOptions[]
@@ -16,7 +16,7 @@ interface ICheckoutItemProps {
 	locations: Schema.LocationsOptions[]
 }
 
-const Checkout = ({ assignment, accessory, ...models }: ICheckoutItemProps) => {
+const Checkout = ({ assignment, accessory, ...models }: CheckoutItemProps) => {
 	const title = 'Checkout Accessory'
 
 	return (
@@ -66,21 +66,19 @@ const Checkout = ({ assignment, accessory, ...models }: ICheckoutItemProps) => {
 						options={ ['Person', 'Item', 'Location'] }
 					/>
 
-					<AssignmentLocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown />
 
 					<NumberInput label="Quantity" name="qty" />
 
-					<DateTime
+					<DateTimeInput
 						label="Assigned At"
 						name="assigned_at"
 						required
-						span={ 6 }
 					/>
 
-					<DateTime
+					<DateTimeInput
 						label="Expected At"
 						name="expected_at"
-						span={ 6 }
 					/>
 
 					<Textarea

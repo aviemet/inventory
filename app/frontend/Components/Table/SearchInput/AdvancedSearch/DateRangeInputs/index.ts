@@ -1,6 +1,6 @@
 import useAdvancedSearch from '../useAdvancedSearch'
 
-export interface IAdvancedInputProps {
+export interface AdvancedInputProps {
 	advancedSearch: ReturnType<typeof useAdvancedSearch>
 	name: string
 }

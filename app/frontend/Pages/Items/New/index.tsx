@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import ItemForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewItemProps {
+interface NewItemProps {
 	item: Schema.ItemsFormData
 }
 
-const NewItem = ({ item }: INewItemProps) => {
+const NewItem = ({ item }: NewItemProps) => {
 	const title = 'New Hardware Asset'
 
 	return (
@@ -17,7 +17,6 @@ const NewItem = ({ item }: INewItemProps) => {
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>
-
 				<ItemForm to={ Routes.items() } item={ item } />
 			</Section>
 		</Page>

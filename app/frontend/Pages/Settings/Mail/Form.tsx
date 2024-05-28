@@ -1,21 +1,21 @@
 import React from 'react'
 import { Group } from '@/Components'
-import { Form, type IFormProps, PasswordInput, RadioButtons, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
+import { Form, type FormProps, PasswordInput, SegmentedControl, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
 import { TestResponseButton } from '@/Components/Button'
 import { Routes, isUnset } from '@/lib'
 import { omit } from 'lodash'
 
-type TSmtpFormData = {
+type SmtpFormData = {
 	smtp: Schema.SmtpsFormData
 }
 
-export interface ISmtpFormProps extends IFormProps<TSmtpFormData> {
-	data: TSmtpFormData
+export interface SmtpFormProps extends FormProps<SmtpFormData> {
+	data: SmtpFormData
 }
 
 const requiredFields = ['smtp.host', 'smtp.port', 'smtp.domain', 'smtp.username', 'smtp.password']
 
-const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
+const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
 	return (
 		<Form
 			model="smtp"
@@ -40,14 +40,14 @@ const SmtpForm = ({ method = 'post', ...props }: ISmtpFormProps) => {
 				placeholder='If not provided, will default to your username'
 			/>
 
-			<RadioButtons name="security" label="Security" options={ [
+			<SegmentedControl name="security" label="Security" options={ [
 				{ label: 'None', value: 'basic' },
 				{ label: 'TLS', value: 'tls' },
 				{ label: 'SSL', value: 'ssl' },
 			] } />
 
-			<Group pt="md" pb="xs" position="right">
-				<FormConsumer<TSmtpFormData>>{ ({ data, getData }) => (
+			<Group pt="md" pb="xs" justify="right">
+				<FormConsumer<SmtpFormData>>{ ({ data, getData }) => (
 					<TestResponseButton
 						method="post"
 						endpoint={ Routes.apiSmtpTest() }

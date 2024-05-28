@@ -1,7 +1,6 @@
 import React from 'react'
 import IconProvider from './IconProvider'
 import UiFrameworkProvider from './UiFrameworkProvider'
-import Spotlight from './Spotlight'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
@@ -16,7 +15,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 dayjs.extend(localizedFormat)
 
-interface IProviderProps {
+interface ProviderProps {
 	children?: React.ReactNode
 }
 
@@ -24,17 +23,15 @@ const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			staleTime: 30000,
-			cacheTime: 30000,
 		},
 	},
 })
 
-const Providers = React.memo(({ children }: IProviderProps) => {
+const Providers = React.memo(({ children }: ProviderProps) => {
 	return (
 		<QueryClientProvider client={ queryClient }>
-			{ process.env.NODE_ENV && process.env.NODE_ENV === 'development' && <ReactQueryDevtools position="bottom-right" /> }
+			{ process.env.NODE_ENV && process.env.NODE_ENV === 'development' && <ReactQueryDevtools buttonPosition="bottom-right" /> }
 			<UiFrameworkProvider>
-				<Spotlight />
 				<IconProvider>
 					{ children }
 				</IconProvider>

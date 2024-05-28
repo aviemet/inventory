@@ -5,12 +5,12 @@ import { TableTitleSection } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import CategoriesTable from '../Table'
 
-interface ICategoriesIndexProps {
+interface CategoriesIndexProps {
 	categories: Schema.CategoriesIndex[]
 	pagination: Schema.Pagination
 }
 
-const CategoriesIndex = ({ categories, pagination }: ICategoriesIndexProps) => {
+const CategoriesIndex = ({ categories, pagination }: CategoriesIndexProps) => {
 	const title = 'Categories'
 
 	return (
@@ -28,7 +28,7 @@ const CategoriesIndex = ({ categories, pagination }: ICategoriesIndexProps) => {
 					<TableTitleSection title={ title }
 						deleteRoute={ Routes.categories() }
 						menuOptions={ [
-							{ label: 'New Category', href: Routes.newCategory(), icon: NewIcon },
+							{ label: 'New Category', href: Routes.newCategory(), icon: <NewIcon /> },
 						] }>
 						<Table.SearchInput />
 					</TableTitleSection>

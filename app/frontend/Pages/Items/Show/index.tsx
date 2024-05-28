@@ -7,7 +7,7 @@ import ItemHistory from './ItemHistory'
 import Associations from './Associations'
 import Documentations from './Documentations'
 
-export interface IShowItemProps {
+export interface ShowItemProps {
 	item: Schema.ItemsShow
 }
 
@@ -18,7 +18,7 @@ const tabsList = [
 	{ id: 'associations', label: 'Associations', component: Associations },
 ]
 
-const ShowItem = ({ item }: IShowItemProps) => {
+const ShowItem = ({ item }: ShowItemProps) => {
 	const title = item.name ?? 'Item Details'
 
 	return (
@@ -71,7 +71,9 @@ const ShowItem = ({ item }: IShowItemProps) => {
 
 						return (
 							<Tabs.Panel key={ tab.id } value={ tab.id } p="md">
-								<Component item={ item } />
+								<Component
+									item={ item }
+								/>
 							</Tabs.Panel>
 						)
 					}) }

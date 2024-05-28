@@ -1,7 +1,7 @@
-class Categories::EditSerializer < ApplicationSerializer
-  object_as :category
-
+class Categories::EditSerializer < Categories::FormDataSerializer
   attributes(
+    :id,
+    :slug,
     :categorizable_type,
     :name,
     :slug,

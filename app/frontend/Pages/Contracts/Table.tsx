@@ -2,20 +2,20 @@ import React from 'react'
 import { Routes, formatter } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 
-const ContractsTable = (props: ITableProps) => {
+const ContractsTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="number">#</Table.Cell>
-					<Table.Cell sort="begins_at">Start Date</Table.Cell>
-					<Table.Cell sort="ends_at">End Date</Table.Cell>
-					<Table.Cell sort="vendor.name">Vendor</Table.Cell>
-					<Table.Cell sort="category.name">Category</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="number">#</Table.HeadCell>
+					<Table.HeadCell sort="begins_at">Start Date</Table.HeadCell>
+					<Table.HeadCell sort="ends_at">End Date</Table.HeadCell>
+					<Table.HeadCell sort="vendor.name">Vendor</Table.HeadCell>
+					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
@@ -39,7 +39,7 @@ const ContractsTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							{ contract.vendor && <Link href={ Routes.vendor(contract.vendor.slug) }>
+							{ contract?.vendor?.slug && <Link href={ Routes.vendor(contract.vendor.slug) }>
 								{ contract.vendor?.name }
 							</Link> }
 						</Table.Cell>

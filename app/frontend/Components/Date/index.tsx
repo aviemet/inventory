@@ -1,12 +1,14 @@
 import React from 'react'
 import { formatter } from '@/lib'
 
-interface IDateProps {
-	children: string|Date
+interface DateProps {
+	children: string|Date|undefined
 	format?: keyof typeof formatter.date
 }
 
-const Date = ({ children, format = 'short' }: IDateProps) => {
+const Date = ({ children, format = 'short' }: DateProps) => {
+	if(!children) return <></>
+
 	return (
 		<>{ formatter.date[format](children) }</>
 	)

@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: smtps
+#
+#  id         :bigint           not null, primary key
+#  address    :string
+#  domain     :string
+#  host       :string           not null
+#  name       :string           not null
+#  notes      :text
+#  password   :string
+#  port       :integer
+#  security   :integer          default("plain")
+#  username   :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Smtp < ApplicationRecord
   include Ownable
 
@@ -17,9 +34,6 @@ class Smtp < ApplicationRecord
   resourcify
 
   validates :name, presence: true
-  validates :username, presence: true
-  validates :password, presence: true
   validates :host, presence: true
-  validates :port, presence: true
 
 end

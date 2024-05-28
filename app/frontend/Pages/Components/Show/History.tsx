@@ -1,8 +1,8 @@
 import React from 'react'
 import { Heading, History } from '@/Components'
-import { IShowComponentProps } from '.'
+import { ShowComponentProps } from '.'
 
-const ComponentHistory = ({ component }: IShowComponentProps) => {
+const ComponentHistory = ({ component }: ShowComponentProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>History</Heading>

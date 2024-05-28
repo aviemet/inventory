@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import VendorForm from '../Form'
 
-interface IUpdateVendorProps{
+interface UpdateVendorProps{
 	vendor: Schema.VendorsEdit
 }
 
-const EditVendor = ({ vendor, ...models }: IUpdateVendorProps) => {
+const EditVendor = ({ vendor, ...models }: UpdateVendorProps) => {
 	const title = `Edit ${vendor.name}`
 
 	return (

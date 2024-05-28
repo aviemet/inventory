@@ -1,17 +1,17 @@
 import React from 'react'
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
-import { LocationsDropdown } from '@/Components/Dropdowns'
-import { type UseFormProps } from 'use-inertia-form'
+import { LocationsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TDepartmentForData = {
+type DepartmentForData = {
 	department: Schema.DepartmentsFormData
 }
 
-export interface IDepartmentFormProps {
+export interface DepartmentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TDepartmentForData>) => boolean|void
+	onSubmit?: (object: UseFormProps<DepartmentForData>) => boolean|void
 	department?: Schema.DepartmentsFormData
 }
 
@@ -21,7 +21,7 @@ const emptyDepartment: Schema.DepartmentsFormData = {
 	notes: '',
 }
 
-const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment }: IDepartmentFormProps) => {
+const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment }: DepartmentFormProps) => {
 
 	return (
 		<Form
@@ -45,4 +45,4 @@ const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepar
 	)
 }
 
-export default React.memo(DepartmentForm)
+export default DepartmentForm

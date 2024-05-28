@@ -2,19 +2,19 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { ITableProps } from '@/Components/Table/Table'
+import { TableProps } from '@/Components/Table/Table'
 
-const ModelsTable = (props: ITableProps) => {
+const ModelsTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="model_number">Model #</Table.Cell>
-					<Table.Cell sort="category.name">Category</Table.Cell>
-					<Table.Cell sort="manufacturer.name">Manufacturer</Table.Cell>
-					<Table.Cell sort="count">#</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="model_number">Model #</Table.HeadCell>
+					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
+					<Table.HeadCell sort="manufacturer.name">Manufacturer</Table.HeadCell>
+					<Table.HeadCell sort="count">#</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

@@ -3,7 +3,7 @@ import { css } from '@linaria/core'
 
 export const topbar = css`
 	transition: left 100ms ease-in-out;
-	background-color: ${vars.colors.primary.filled};
+	background-color: ${vars.colors.primaryColors.filled};
 	
 	color: ${vars.colors.white};
 
@@ -20,4 +20,10 @@ export const wrapper = css`
 	display: flex;
 	align-items: center;
 	height: 100%;
+`
+
+export const newMenu = css`
+	@media(max-width: ${vars.breakpoints.sm}) {
+		display: none;
+	}
 `

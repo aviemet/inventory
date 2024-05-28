@@ -5,7 +5,7 @@ import { Heading, Tile } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 import { usePageProps } from '@/lib/hooks'
 
-type TRegisterFormData = {
+type RegisterFormData = {
 	user: {
 		email: string
 		password: string
@@ -26,11 +26,11 @@ const register = {
 const Register = () => {
 	const props = usePageProps()
 
-	const handleFormChange = ({ data }: UseFormProps<TRegisterFormData>) => {
+	const handleFormChange = ({ data }: UseFormProps<RegisterFormData>) => {
 		// console.log({ data })
 	}
 
-	const handlePasswordChange = (value: string, { data, getError, clearErrors }: UseFormProps<TRegisterFormData>) => {
+	const handlePasswordChange = (value: string, { data, getError, clearErrors }: UseFormProps<RegisterFormData>) => {
 		if(getError('user.password') || getError('user.password_confirmation')) {
 			if(data.user.password === data.user.password_confirmation) {
 				clearErrors('user.password')
@@ -39,14 +39,14 @@ const Register = () => {
 		}
 	}
 
-	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps<TRegisterFormData>) => {
+	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps<RegisterFormData>) => {
 		if(data.user.password !== data.user.password_confirmation) {
 			setError('user.password_confirmation', 'Passwords must match')
 			return false
 		}
 	}
 
-	const handleEmailBlur = (value: string, form: UseFormProps<TRegisterFormData>) => {
+	const handleEmailBlur = (value: string, form: UseFormProps<RegisterFormData>) => {
 		// console.log({ value, form })
 	}
 
@@ -54,7 +54,7 @@ const Register = () => {
 
 	return (
 		<Tile>
-			<Form<TRegisterFormData>
+			<Form<RegisterFormData>
 				disableFormatting
 				data={ {
 					user: {

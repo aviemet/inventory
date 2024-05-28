@@ -1,14 +1,14 @@
 import React from 'react'
 import { Page, Table } from '@/Components'
-import TableTitleSection, { IIndexTableTitleSectionProps } from './TableTitleSection'
-import { type TBreadcrumb } from '@/Components/Breadcrumbs'
+import TableTitleSection, { IndexTableTitleSectionProps } from './TableTitleSection'
+import { type Breadcrumb } from '@/Components/Breadcrumbs'
 
-interface IIndexPageTemplateProps extends IIndexTableTitleSectionProps {
+interface IndexPageTemplateProps extends IndexTableTitleSectionProps {
 	model: string
 	rows: Record<string, any>[]
 	pagination: Schema.Pagination
 	search?: boolean
-	breadcrumbs?: TBreadcrumb[]
+	breadcrumbs?: Breadcrumb[]
 	advancedSearch?: React.ReactNode
 }
 
@@ -23,7 +23,7 @@ const IndexPageTemplate = ({
 	menuOptions,
 	advancedSearch,
 	deleteRoute,
-}: IIndexPageTemplateProps) => {
+}: IndexPageTemplateProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ breadcrumbs ?? [
 			{ title, href: window.location.href },
@@ -35,7 +35,11 @@ const IndexPageTemplate = ({
 					rows={ rows }
 					pagination={ pagination }
 				>
-					<TableTitleSection title={ title } menuOptions={ menuOptions } deleteRoute={ deleteRoute }>
+					<TableTitleSection
+						title={ title }
+						menuOptions={ menuOptions }
+						deleteRoute={ deleteRoute }
+					>
 						{ search && <Table.SearchInput advancedSearch={ advancedSearch } /> }
 					</TableTitleSection>
 

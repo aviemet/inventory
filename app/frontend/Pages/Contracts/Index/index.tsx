@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import ContractsTable from '../Table'
 
-interface IContractsIndexProps {
+interface ContractsIndexProps {
 	contracts: Schema.ContractsIndex[]
 	pagination: Schema.Pagination
 }
 
-const ContractsIndex = ({ contracts, pagination }: IContractsIndexProps) => {
+const ContractsIndex = ({ contracts, pagination }: ContractsIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Contracts"
@@ -18,7 +18,7 @@ const ContractsIndex = ({ contracts, pagination }: IContractsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.contracts() }
 			menuOptions={ [
-				{ label: 'New Contract', href: Routes.newContract(), icon: NewIcon },
+				{ label: 'New Contract', href: Routes.newContract(), icon: <NewIcon /> },
 			] }
 		>
 			<ContractsTable />

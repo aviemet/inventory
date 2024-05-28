@@ -5,11 +5,11 @@ import Empty from './Empty'
 import SmtpList from './SmtpList'
 import { Routes } from '@/lib'
 
-interface IMailSettingsProps {
+interface MailSettingsProps {
 	smtps: Schema.Smtp[]
 }
 
-const Mail = ({ smtps }: IMailSettingsProps) => {
+const Mail = ({ smtps }: MailSettingsProps) => {
 	return (
 		<SettingsLayout breadcrumbs={ [
 			{ title: 'Settings', href: Routes.settingsGeneralIndex() },

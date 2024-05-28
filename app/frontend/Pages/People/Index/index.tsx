@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon, SettingsIcon } from '@/Components/Icons'
 import PeopleTable from '../Table'
 
-interface IPeopleIndexProps {
+interface PeopleIndexProps {
 	people: Schema.PeopleIndex[]
 	pagination: Schema.Pagination
 }
 
-const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
+const PeopleIndex = ({ people, pagination }: PeopleIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="People"
@@ -18,7 +18,7 @@ const PeopleIndex = ({ people, pagination }: IPeopleIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.people() }
 			menuOptions={ [
-				{ label: 'New Person', href: Routes.newPerson(), icon: NewIcon },
+				{ label: 'New Person', href: Routes.newPerson(), icon: <NewIcon /> },
 				// { label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon },
 			] }
 		>

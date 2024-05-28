@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: smtps
+#
+#  id         :bigint           not null, primary key
+#  address    :string
+#  domain     :string
+#  host       :string           not null
+#  name       :string           not null
+#  notes      :text
+#  password   :string
+#  port       :integer
+#  security   :integer          default("plain")
+#  username   :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 FactoryBot.define do
   factory :smtp do
     transient do

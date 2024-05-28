@@ -3,11 +3,11 @@ import { Section, Page, Heading } from '@/Components'
 import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewAccessoryProps {
+interface NewAccessoryProps {
 	accessory: Schema.AccessoriesFormData
 }
 
-const NewAccessory = ({ accessory }: INewAccessoryProps) => {
+const NewAccessory = ({ accessory }: NewAccessoryProps) => {
 	const title = 'New Accessory'
 
 	return (

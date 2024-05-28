@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import NetworksTable from '../Table'
 
-interface INetworksIndexProps {
+interface NetworksIndexProps {
 	networks: Schema.NetworksIndex[]
 	pagination: Schema.Pagination
 }
 
-const NetworksIndex = ({ networks, pagination }: INetworksIndexProps) => {
+const NetworksIndex = ({ networks, pagination }: NetworksIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Networks"
@@ -18,7 +18,7 @@ const NetworksIndex = ({ networks, pagination }: INetworksIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.networks() }
 			menuOptions={ [
-				{ label: 'New Network', href: Routes.newNetwork(), icon: NewIcon },
+				{ label: 'New Network', href: Routes.newNetwork(), icon: <NewIcon /> },
 			] }
 		>
 			<NetworksTable />

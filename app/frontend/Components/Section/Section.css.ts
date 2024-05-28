@@ -11,7 +11,7 @@ export const section = css`
 	}
 	box-shadow: ${vars.shadows.xs};
 	padding: 1rem 0.75rem;
-	border-top: 2px solid ${vars.colors.primary.filled};
+	border-top: 2px solid ${vars.colors.primaryColors.filled};
 
 	& + & {
 		margin-top: ${rem(10)};

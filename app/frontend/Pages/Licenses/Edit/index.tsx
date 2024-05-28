@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import LicenseForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IUpdateLicenseProps{
+interface UpdateLicenseProps {
 	license: Schema.LicensesEdit
 }
 
-const New = ({ license }: IUpdateLicenseProps) => {
+const New = ({ license }: UpdateLicenseProps) => {
 	const title = `Edit ${license.name}`
 
 	return (

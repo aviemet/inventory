@@ -2,23 +2,24 @@ import React, { forwardRef } from 'react'
 import { Select, type ComboboxData, type SelectProps } from '@mantine/core'
 import { router } from '@inertiajs/react'
 import { coerceArray } from '@/lib'
-import { type IInputProps } from '.'
+import { type BaseInputProps } from '.'
 import Label from './Label'
 import InputWrapper from './InputWrapper'
 
-export interface ISelectProps extends Omit<SelectProps, 'data'>, IInputProps {
+export interface SelectInputProps extends Omit<SelectProps, 'data'>, BaseInputProps {
 	options?: ComboboxData
-	onOpen?: () => void
 	fetchOnOpen?: string
 }
 
-const SelectComponent = forwardRef<HTMLInputElement, ISelectProps>((
+const SelectComponent = forwardRef<HTMLInputElement, SelectInputProps>((
 	{
 		options = [],
 		label,
 		required,
 		id,
 		name,
+		size = 'md',
+		maxDropdownHeight = 400,
 		fetchOnOpen,
 		onDropdownOpen,
 		wrapper,
@@ -34,7 +35,7 @@ const SelectComponent = forwardRef<HTMLInputElement, ISelectProps>((
 			router.reload({ only: coerceArray(fetchOnOpen) })
 		}
 
-		if(onDropdownOpen) onDropdownOpen()
+		onDropdownOpen?.()
 	}
 
 	return (
@@ -48,16 +49,16 @@ const SelectComponent = forwardRef<HTMLInputElement, ISelectProps>((
 				id={ `${inputId}-search` }
 				autoComplete="off"
 				name={ name }
-				size="md"
+				size={ size }
 				data={ options }
 				required={ required }
-				maxDropdownHeight={ 400 }
-				nothingFoundMessage="No Results"
+				maxDropdownHeight={ maxDropdownHeight }
 				onDropdownOpen={ handleDropdownOpen }
+				nothingFoundMessage="No Results"
 				{ ...props }
 			/>
 		</InputWrapper>
 	)
 })
 
-export default React.memo(SelectComponent)
+export default SelectComponent

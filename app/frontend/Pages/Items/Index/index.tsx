@@ -5,12 +5,12 @@ import { NewIcon } from '@/Components/Icons'
 import ItemsTable from '../Table'
 import AdvancedItemsSearch from './AdvancedSearch'
 
-interface IItemsIndexProps {
+interface ItemsIndexProps {
 	items: Schema.ItemsIndex[]
 	pagination: Schema.Pagination
 }
 
-const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
+const ItemsIndex = ({ items, pagination }: ItemsIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Hardware Assets"
@@ -19,7 +19,7 @@ const ItemsIndex = ({ items, pagination }: IItemsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.items() }
 			menuOptions={ [
-				{ label: 'New Asset', href: Routes.newItem(), icon: NewIcon },
+				{ label: 'New Asset', href: Routes.newItem(), icon: <NewIcon /> },
 			] }
 			advancedSearch={ <AdvancedItemsSearch /> }
 		>

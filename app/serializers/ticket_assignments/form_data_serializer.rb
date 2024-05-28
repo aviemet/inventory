@@ -1,5 +1,4 @@
-class TicketAssignments::FormDataSerializer < ApplicationSerializer
-  object_as :ticket_assignment
-
-  attributes :person_id, :ticket_id
+class TicketAssignments::FormDataSerializer < TicketAssignmentSerializer
+  belongs_to :person, serializer: PersonSerializer, optional: true
+  belongs_to :ticket, serializer: TicketSerializer, optional: true
 end

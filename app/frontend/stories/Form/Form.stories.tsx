@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Checkbox, DateTime, Form, FormGroup, TextInput, RadioButtons, NumberInput } from '@/Components/Form'
+import { Checkbox, DateTimeInput, Form, FormGroup, TextInput, SegmentedControl, NumberInput } from '@/Components/Form'
 
 type FormStory = StoryObj<typeof Form>
 
@@ -29,13 +29,13 @@ export const Standard: FormStory = {
 		<Form { ...args }>
 			<TextInput label="String" name="string" />
 
-			<DateTime label="Date/Time" name="date" />
+			<DateTimeInput label="Date/Time" name="date" />
 
 			<NumberInput label="Number" name="number" />
 
 			<Checkbox label="Checkbox" name="checkbox" />
 
-			<RadioButtons label="Radio Buttons" name="choices" options={ [
+			<SegmentedControl label="Radio Buttons" name="choices" options={ [
 				{ label: 'One', value: '1' },
 				{ label: 'Two', value: '2' },
 				{ label: 'Three', value: '3' },

@@ -1,14 +1,14 @@
 import React from 'react'
-import CurrencyInput, { type ICurrencyInputProps } from '@/Components/Inputs/CurrencyInput'
-import Field from '../Field'
+import CurrencyInput, { type CurrencyInputProps } from '@/Components/Inputs/CurrencyInput'
+import Field from '../Components/Field'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { InputConflicts, type BaseFormInputProps } from '.'
 
 interface INumberInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<ICurrencyInputProps, 'name'|'onChange'|'onBlur'>,
-	IFormInputProps<string|number, TForm> {}
+	Omit<CurrencyInputProps, InputConflicts>,
+	BaseFormInputProps<number, TForm> {}
 
 const FormInput = <TForm extends NestedObject = NestedObject>(
 	{
@@ -16,40 +16,52 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		model,
 		onChange,
 		onBlur,
+		onFocus,
 		id,
 		required,
 		field = true,
+		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
 	} : INumberInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string|number, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value
-		setValue(value)
+	const handleChange = (value: string|number) => {
+		const numberValue = Number(value)
+		setValue(numberValue)
 
-		onChange?.(value, form)
+		onChange?.(numberValue, form)
 	}
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-		const value = e.target.value
+		const value = Number(e.target.value)
 		setValue(value)
 
-		if(onBlur) onBlur(value, form)
+		onBlur?.(value, form)
 	}
 
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="text"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
 			<CurrencyInput
 				id={ id || inputId }
@@ -57,6 +69,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				onFocus={ e => onFocus?.(Number(e.target.value), form) }
 				error={ error }
 				wrapper={ false }
 				{ ...props }

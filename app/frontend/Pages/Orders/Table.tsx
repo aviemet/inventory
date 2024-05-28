@@ -1,26 +1,25 @@
 import React from 'react'
-import { Routes, formatter } from '@/lib'
-import { Link, Table } from '@/Components'
+import { Routes } from '@/lib'
+import { Date, Link, Money, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
-import { type OrderWithCost } from './Index'
+import { type TableProps } from '@/Components/Table/Table'
 
-const OrdersTable = (props: ITableProps) => {
+const OrdersTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Order #</Table.Cell>
-					<Table.Cell sort="vendor.name">Vendor</Table.Cell>
-					<Table.Cell sort="cost">Total</Table.Cell>
-					<Table.Cell sort="ordered_at">Purchase Date</Table.Cell>
-					<Table.Cell sort="delivered_at">Received Date</Table.Cell>
-					<Table.Cell className="text-right">Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Order #</Table.HeadCell>
+					<Table.HeadCell sort="vendor.name">Vendor</Table.HeadCell>
+					<Table.HeadCell sort="cost">Total</Table.HeadCell>
+					<Table.HeadCell sort="ordered_at">Purchase Date</Table.HeadCell>
+					<Table.HeadCell sort="delivered_at">Received Date</Table.HeadCell>
+					<Table.HeadCell className="text-right">Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
 			<Table.Body>
-				<Table.RowIterator render={ (order: OrderWithCost) => (
+				<Table.RowIterator render={ (order: Schema.OrdersIndex) => (
 					<Table.Row key={ order.id }>
 						<Table.Cell nowrap>
 							<Link href={ Routes.order(order) }>{ order.number }</Link>
@@ -33,15 +32,15 @@ const OrdersTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							{ formatter.currency(order.cost) }
+							<Money>{ order.cost }</Money>
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							{ order.ordered_at && formatter.date.short(order.ordered_at) }
+							<Date>{ order.ordered_at }</Date>
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							{ order.delivered_at && formatter.date.short(order.delivered_at) }
+							<Date>{ order.delivered_at }</Date>
 						</Table.Cell>
 
 						<Table.Cell fitContent>
@@ -53,5 +52,4 @@ const OrdersTable = (props: ITableProps) => {
 		</Table>
 	)
 }
-
 export default OrdersTable

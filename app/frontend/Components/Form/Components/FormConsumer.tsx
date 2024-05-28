@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { type UseFormProps, useForm } from 'use-inertia-form'
 
-interface TFormComponentProps<TForm = any> {
+interface FormComponentProps<TForm = any> {
 	children?: (form: UseFormProps<TForm>) => React.ReactNode
 	onChange?: (form: UseFormProps<TForm>) => void
 }
 
-function FormConsumer <TForm>({ children, onChange }: TFormComponentProps<TForm>) {
+function FormConsumer <TForm>({ children, onChange }: FormComponentProps<TForm>) {
 	const form = useForm<TForm>()
 
 	useEffect(() => {

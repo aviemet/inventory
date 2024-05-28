@@ -3,13 +3,13 @@ import { Link } from '@/Components'
 import { ActionIcon } from '@mantine/core'
 import cx from 'clsx'
 
-interface IMenuLinkProps {
+interface MenuLinkProps {
 	children: string
 	href: string
 	icon?: JSX.Element
 }
 
-const MenuLink = ({ children, href, icon, ...props }: IMenuLinkProps) => {
+const MenuLink = ({ children, href, icon, ...props }: MenuLinkProps) => {
 	return (
 		<Link href={ href } { ...props }>
 			<ActionIcon

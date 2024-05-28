@@ -36,12 +36,15 @@ export const form = css`
 			background-color: ${vars.colors.dark[7]};
 		}
 		width: 100%;
-		border-color: ${vars.colors.primary[2]};
+		border-color: ${vars.colors.primaryColors[2]};
 		border-top-width: 2px;
-		margin-top: ${vars.spacing.xs};
+
+		&:not(.mantine-Grid-root .field) {
+			margin-top: ${vars.spacing.xs};
+		}
 
 		&.required {
-			border-color: ${vars.colors.primary[8]};
+			border-color: ${vars.colors.primaryColors[8]};
 		}
 
 		&.field_with_errors {
@@ -63,7 +66,6 @@ export const form = css`
 				}
 			}
 		}
-
 		// On Desktop use a 2 column grid to show labels and inputs; with feedback elements below input
 		@media (min-width: ${vars.breakpoints.sm}) {
 			&:not(.textarea, .compact) {

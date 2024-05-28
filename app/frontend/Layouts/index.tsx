@@ -2,6 +2,7 @@ import React from 'react'
 import { type PageProps } from '@inertiajs/core'
 import Providers from '@/Layouts/Providers'
 import { Flash } from '@/Components'
+import Spotlight from '../Features/Spotlight'
 
 import AppLayout from './AppLayout'
 import AuthLayout from './AuthLayout'
@@ -26,6 +27,7 @@ const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
 const AppLayoutLayout = (page: InertiaPageProps) => {
 	return (
 		<LayoutWrapper>
+			<Spotlight />
 			<AppLayout>{ page }</AppLayout>
 		</LayoutWrapper>
 	)

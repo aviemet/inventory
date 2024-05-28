@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Page, Heading, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
+import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import * as classes from './Checkin.css'
 
-interface ICheckinAccessoriesProps {
+interface CheckinAccessoriesProps {
 	accessory: Schema.AccessoriesEdit
 	assignment: Schema.AssignmentsEdit
-	statuses: Schema.StatusLabel[]
+	statuses: Schema.StatusLabelsOptions[]
 }
 
-const Checkin = ({ assignment, accessory, statuses }: ICheckinAccessoriesProps) => {
+const Checkin = ({ assignment, accessory, statuses }: CheckinAccessoriesProps) => {
 	const [accessoryName, setAccessoryName] = useState(accessory.name)
 	const title = 'Check In Accessory'
 
@@ -64,13 +64,18 @@ const Checkin = ({ assignment, accessory, statuses }: ICheckinAccessoriesProps) 
 
 					{ /* TODO: Deal with quantity return status assignments  */ }
 					<Select
-						options={ statuses }
+						options={ useMemo(() => {
+							return statuses.map(status => ({
+								label: status.name,
+								value: String(status.id),
+							}))
+						}, [statuses]) }
 						label="Status"
 						name="status_id"
 						required
 					/>
 
-					<DateTime
+					<DateTimeInput
 						label="Returned At"
 						name="returned_at"
 						required

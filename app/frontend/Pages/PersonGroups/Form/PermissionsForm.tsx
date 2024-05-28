@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from 'react'
 import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
 import { Table } from '@/Components'
-import { Routes, exclude } from '@/lib'
+import { Routes } from '@/lib'
 import { createContext, usePageProps } from '@/lib/hooks'
 import SwitchRow from './SwitchRow'
 import tableRows from './tableRows'
 import ColumnToggle from './ColumnToggle'
 import { emptyGroup } from './formData'
 import { FormData } from '.'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 const [usePermissionsForm, PermissionsFormContext] = createContext<{
 	isCompanyAdmin: boolean
@@ -16,17 +16,17 @@ const [usePermissionsForm, PermissionsFormContext] = createContext<{
 }>()
 export { usePermissionsForm }
 
-export interface IGroupFormProps {
+export interface GroupFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<FormData>) => boolean|void
 	person_group?: Schema.PersonGroupsFormData
 }
 
-const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }: IGroupFormProps) => {
+const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }: GroupFormProps) => {
 	const { auth: { user } } = usePageProps()
 
-	const formData = { person_group: (person_group ? exclude(person_group, ['id', 'slug']) : emptyGroup) } as FormData
+	const formData = { person_group: person_group ? person_group : emptyGroup } as FormData
 	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData.person_group.permissions?.company?.admin || false)
 
 	const longestPermissionsArray = useCallback(() => {
@@ -63,6 +63,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 				onSubmit={ handleSubmit }
 				railsAttributes={ false }
 				remember={ false }
+				filter={ ['id', 'slug'] }
 			>
 				<TextInput name="name" label="Name" required autoFocus />
 
@@ -78,29 +79,33 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 					<Table mt={ 32 }>
 						<Table.Head>
 							<Table.Row>
-								<Table.Cell>All</Table.Cell>
-								<Table.Cell>Record Type</Table.Cell>
-								<Table.Cell>
+								<Table.HeadCell>
+									All
+								</Table.HeadCell>
+								<Table.HeadCell>
+									Record Type
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="index" /> List
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="show" /> View
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="create" /> Create
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="update" /> Edit
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="delete" /> Delete
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="checkout" /> Checkout
-								</Table.Cell>
-								<Table.Cell>
+								</Table.HeadCell>
+								<Table.HeadCell>
 									<ColumnToggle permission="checkin" /> Checkin
-								</Table.Cell>
+								</Table.HeadCell>
 							</Table.Row>
 						</Table.Head>
 						<Table.Body>{ tableRows.map(row => (
@@ -117,4 +122,4 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 	)
 }
 
-export default React.memo(GroupForm)
+export default GroupForm

@@ -1,25 +1,34 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Features/Contactable'
-import { type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TVendorFormData = {
+type VendorFormData = {
 	vendor: Schema.VendorsFormData
 }
 
-export interface IVendorFormProps {
+export interface VendorFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TVendorFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<VendorFormData>) => boolean|void
 	vendor?: Schema.VendorsFormData
 }
 
 const emptyVendor: Schema.VendorsFormData = {
 	name: '',
 	url: '',
+	contact: {
+		primary_address_id: NaN,
+		primary_email_id: NaN,
+		primary_phone_id: NaN,
+		phones: [],
+		emails: [],
+		addresses: [],
+		websites: [],
+	},
 }
 
-const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: IVendorFormProps) => {
+const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: VendorFormProps) => {
 	return (
 		<Form
 			model="vendor"
@@ -41,4 +50,4 @@ const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: IVe
 	)
 }
 
-export default React.memo(VendorForm)
+export default VendorForm

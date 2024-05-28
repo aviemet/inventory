@@ -7,22 +7,22 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
-import { LocationsDropdown, ModelsDropdown, VendorsDropdown } from '@/Components/Dropdowns'
+import { FormLocationsDropdown, FormModelsDropdown, FormVendorsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TConsumableFormData = {
+type ConsumableFormData = {
 	consumable: Schema.ConsumablesFormData
 }
 
-export interface IConsumableFormProps {
+export interface ConsumableFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TConsumableFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ConsumableFormData>) => boolean|void
 	consumable: Schema.ConsumablesFormData
 }
 
-const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: IConsumableFormProps) => {
+const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: ConsumableFormProps) => {
 	return (
 		<Form
 			model="consumable"
@@ -35,7 +35,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: IConsumab
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Consumable Details">
-				<ModelsDropdown
+				<FormModelsDropdown
 					initialData={ coerceArray(consumable?.model) }
 					errorKey="consumable.model"
 				/>
@@ -50,13 +50,13 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: IConsumab
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown initialData={ coerceArray(consumable?.vendor) } />
+				<FormVendorsDropdown initialData={ coerceArray(consumable?.vendor) } />
 
 				<TextInput name="cost" label="Cost" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-				<LocationsDropdown
+				<FormLocationsDropdown
 					label="Default Location"
 					name="default_location_id"
 					initialData={ coerceArray(consumable?.default_location) }
@@ -75,4 +75,4 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: IConsumab
 	)
 }
 
-export default React.memo(ConsumableForm)
+export default ConsumableForm

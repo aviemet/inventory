@@ -11,5 +11,6 @@ export * from './collections'
 export * from './forms'
 
 export const polymorphicRoute = (model: string, param: string|number) => {
+	// @ts-ignore
 	return Routes[toCamelCase(model)](param)
 }

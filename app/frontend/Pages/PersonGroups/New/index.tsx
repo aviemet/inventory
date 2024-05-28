@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import GroupForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewGroupProps {
+interface NewGroupProps {
 	person_group: Schema.PersonGroupsFormData
 }
 
-const New = ({ ...data }: INewGroupProps) => {
+const New = ({ ...data }: NewGroupProps) => {
 	const title = 'New People Group'
 
 	return (

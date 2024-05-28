@@ -1,28 +1,25 @@
 import React from 'react'
 import { useTableContext } from '../TableContext'
 import RowInContext from './RowInContext'
-import { Box, type BoxProps } from '@mantine/core'
+import { Table, type TableTrProps } from '@mantine/core'
 
-export interface ITableRow
-	extends BoxProps,
-	Omit<React.ComponentPropsWithoutRef<'tr'>, keyof BoxProps>
-{
+export interface TableRow extends TableTrProps {
 	children?:  JSX.Element | JSX.Element[]
 }
 
-interface IRowProps extends Omit<ITableRow, 'ref'> {
+interface TableRowProps extends Omit<TableRow, 'ref'> {
 	render?: any
 	name?: string
 }
 
-const Row = ({ children, render, name, ...props }: IRowProps) => {
+const Row = ({ children, render, name, ...props }: TableRowProps) => {
 	const tableState = useTableContext(false)
 
 	if(tableState === null) {
 		return (
-			<Box component="tr" { ...props }>
+			<Table.Tr { ...props }>
 				{ children }
-			</Box>
+			</Table.Tr>
 		)
 	}
 

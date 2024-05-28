@@ -139,7 +139,9 @@ Rails.application.routes.draw do
     resources :ticket_messages, path: :messages, as: :messages, only: [:create, :update, :destroy]
   end
 
-  resources :documentations, param: :slug
+  resources :documentations, path: :documentation, param: :slug
 
   draw(:api)
+
+  draw(:tests) if Rails.env.development?
 end

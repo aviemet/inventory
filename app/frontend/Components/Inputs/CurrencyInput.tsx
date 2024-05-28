@@ -1,13 +1,23 @@
 import React, { forwardRef } from 'react'
-import { TextInput, type TextInputProps } from '@mantine/core'
+import { NumberInput, type NumberInputProps } from '@mantine/core'
 import Label from './Label'
 import InputWrapper from './InputWrapper'
-import { IInputProps } from '.'
+import { type BaseInputProps } from '.'
 
-export interface ICurrencyInputProps extends TextInputProps, IInputProps {}
+export interface CurrencyInputProps extends NumberInputProps, BaseInputProps {}
 
-const TextInputComponent = forwardRef<HTMLInputElement, ICurrencyInputProps>((
-	{ label, name, value, required = false, id, pattern, size = 'md', wrapper, wrapperProps, ...props },
+const NumberInputComponent = forwardRef<HTMLInputElement, CurrencyInputProps>((
+	{
+		label,
+		name,
+		required = false,
+		id,
+		pattern,
+		size = 'md',
+		wrapper,
+		wrapperProps,
+		...props
+	},
 	ref,
 ) => {
 	const inputId = id || name
@@ -17,19 +27,18 @@ const TextInputComponent = forwardRef<HTMLInputElement, ICurrencyInputProps>((
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
-			<TextInput
+			<NumberInput
 				id={ inputId }
 				required={ required }
 				ref={ ref }
 				size={ size }
 				name={ name }
-				value={ value }
-				leftSectionPointerEvents="none"
 				leftSection="$"
+				hideControls
 				{ ...props }
 			/>
 		</InputWrapper>
 	)
 })
 
-export default TextInputComponent
+export default NumberInputComponent

@@ -2,12 +2,12 @@ import React from 'react'
 import { Timeline } from '@mantine/core'
 import { buildTimelineData } from './Content'
 
-interface IHistoryProps {
+interface HistoryProps {
 	assignments?: Schema.Assignment[]
 	activities?: Schema.Activity[]
 }
 
-const History = ({ assignments, activities }: IHistoryProps) => {
+const History = ({ assignments, activities }: HistoryProps) => {
 	// Timeline.Item components cannot be wrapped, so the content has been componentized instead
 	// https://mantine.dev/core/timeline/#wrap-timelineitem
 	return (

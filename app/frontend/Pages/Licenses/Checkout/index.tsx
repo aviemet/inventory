@@ -1,19 +1,19 @@
 import React from 'react'
 import { Box, Flex, Heading, Page, Section, Table } from '@/Components'
-import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown } from '@/Components/Form/Components'
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
+import { AssignToableDropdown } from '@/Features'
 import { Routes, formatter } from '@/lib'
 
 import { omit } from 'lodash'
 
-interface ICheckoutLicenseProps {
+interface CheckoutLicenseProps {
 	assignment: Schema.AssignmentsFormData
 	license: Schema.LicensesEdit
 	items: Schema.ItemsOptions[]
 	people: Schema.PeopleOptions[]
 }
 
-const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => {
+const Checkout = ({ assignment, license, ...models }: CheckoutLicenseProps) => {
 	const title = 'Checkout License'
 
 	return (
@@ -103,13 +103,13 @@ const Checkout = ({ assignment, license, ...models }: ICheckoutLicenseProps) => 
 
 					<AssignToableDropdown { ...models } options={ ['Person', 'Item'] } />
 
-					<DateTime
+					<DateTimeInput
 						label="Assigned At"
 						name="assigned_at"
 						required
 					/>
 
-					<DateTime
+					<DateTimeInput
 						label="Expected At"
 						name="expected_at"
 					/>

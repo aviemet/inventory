@@ -1,22 +1,34 @@
 import React, { useState } from 'react'
 import { useTableSectionContext } from '@/Components/Table/TableContext'
 import FlexMoney from './FlexMoney'
+import { type Money } from '@/types'
+import useCurrency, { type UseCurrencyOptions } from './useCurency'
 
-interface IMoneyProps {
-	children?: number | null
+interface MoneyProps {
+	children?: number | Money | null
 	currency?: string
 	locale?: string
 	accounting?: boolean
+	options?: UseCurrencyOptions
 }
 
-const Money = ({ children, currency = 'USD', locale = 'en-US', accounting }: IMoneyProps) => {
+const MoneyComponent = ({
+	children,
+	currency = 'USD',
+	locale = 'en-US',
+	accounting = false,
+	options = {},
+}: MoneyProps) => {
 	const [inTable, setInTable] = useState(false)
-	const inputValue = children || 0
 
-	const currencyFormatter = new Intl.NumberFormat(locale, {
-		style: 'currency',
+	const useCurrencyOptions: UseCurrencyOptions = options
+	useCurrencyOptions.signDisplay = accounting ? 'never' : 'auto'
+
+	const [amount, formatter] = useCurrency({
+		amount: children ?? 0,
 		currency,
-		signDisplay: accounting ? 'never' : 'auto',
+		locale,
+		options: useCurrencyOptions,
 	})
 
 	try {
@@ -29,15 +41,15 @@ const Money = ({ children, currency = 'USD', locale = 'en-US', accounting }: IMo
 	if(accounting || (inTable && accounting === undefined)) {
 		return (
 			<FlexMoney
-				formatter={ currencyFormatter }
+				formatter={ formatter }
 				accounting={ accounting }
 			>
-				{ inputValue }
+				{ amount }
 			</FlexMoney>
 		)
 	}
 
-	return <>{ currencyFormatter.format(inputValue) }</>
+	return <>{ formatter.format(amount) }</>
 }
 
-export default Money
+export default MoneyComponent

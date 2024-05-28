@@ -11,11 +11,11 @@ const tabs = {
 	associations: 'associations',
 }
 
-export interface IShowLicenseProps {
+export interface ShowLicenseProps {
 	license: Schema.LicensesShow
 }
 
-const ShowLicense = ({ license }: IShowLicenseProps) => {
+const ShowLicense = ({ license }: ShowLicenseProps) => {
 	const title = license.name ?? 'License Details'
 
 	return (

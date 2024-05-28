@@ -1,8 +1,8 @@
 import React from 'react'
 import { History } from '@/Components'
-import { IShowItemProps } from '.'
+import { ShowItemProps } from '.'
 
-const ItemHistory = ({ item }: IShowItemProps) => {
+const ItemHistory = ({ item }: ShowItemProps) => {
 	return (
 		<>
 			<History assignments={ item.assignments } activities={ item.activities } />

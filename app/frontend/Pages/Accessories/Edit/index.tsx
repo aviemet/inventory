@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IEditAccessoryProps{
+interface EditAccessoryProps{
 	accessory: Schema.AccessoriesEdit
 }
 
-const EditAccessory = ({ accessory }: IEditAccessoryProps) => {
+const EditAccessory = ({ accessory }: EditAccessoryProps) => {
 	const title = `Edit ${accessory.name}`
 
 	return (

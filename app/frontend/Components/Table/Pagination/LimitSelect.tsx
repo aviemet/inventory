@@ -4,19 +4,27 @@ import { Select } from '@mantine/core'
 import axios from 'axios'
 import { Routes } from '@/lib'
 import { useLocation, usePageProps } from '@/lib/hooks'
+import useLayoutStore from '@/lib/store/LayoutStore'
 
-interface ILimitSelectProps {
+import cx from 'clsx'
+import * as classes from '../Table.css'
+
+interface LimitSelectProps {
 	pagination: Schema.Pagination
 	model: string
 }
 
-const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
+const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 	const { auth: { user } } = usePageProps()
 	const location = useLocation()
+	const defaultLimit = useLayoutStore(state => state.defaults.tableRecordsLimit)
 
-	const handleLimitChange = (limit: string) => {
+	const handleLimitChange = (limit: string|null) => {
 		if(!model) return
 
+		limit ||= String(defaultLimit)
+
+		// TODO: Use react-query
 		axios.patch( Routes.apiUpdateTablePreferences(user.id!), {
 			user: {
 				table_preferences: {
@@ -44,18 +52,9 @@ const LimitSelect = ({ pagination, model }: ILimitSelectProps) => {
 			mx={ 4 }
 			my={ 0 }
 			withCheckIcon={ false }
-			style={ {
-				display: 'inline-block',
-				maxWidth: 60,
-				'.mantineSelectRightSection': {
-					width: '1.25rem',
-				},
-				'.mantineSelectInput': {
-					paddingRight: '1.25rem',
-				},
-			} }
+			className={ cx(classes.pagination) }
 			rightSectionWidth='1rem'
-			defaultValue={ String(pagination.limit) || '25' }
+			defaultValue={ String(pagination.limit) || String(defaultLimit) }
 			data={ [
 				{ value: '10', label: '10' },
 				{ value: '25', label: '25' },

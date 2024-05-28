@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import ComponentsTable from '../Table'
 
-interface IComponentsIndexProps {
+interface ComponentsIndexProps {
 	components: Schema.Item[]
 	pagination: Schema.Pagination
 }
 
-const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
+const ComponentsIndex = ({ components, pagination }: ComponentsIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Components"
@@ -18,7 +18,7 @@ const ComponentsIndex = ({ components, pagination }: IComponentsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.components() }
 			menuOptions={ [
-				{ label: 'New Component', href: Routes.newComponent(), icon: NewIcon },
+				{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
 			] }
 		>
 			<ComponentsTable />

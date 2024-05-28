@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, Heading, Table, Box, Money } from '@/Components'
 import { Routes } from '@/lib'
-import { IShowComponentProps } from '.'
+import { ShowComponentProps } from '.'
 
-const ComponentDetails = ({ component }: IShowComponentProps) => {
+const ComponentDetails = ({ component }: ShowComponentProps) => {
 	return (
 		<>
 			<Heading order={ 3 }>Details</Heading>
@@ -25,7 +25,7 @@ const ComponentDetails = ({ component }: IShowComponentProps) => {
 						<Table.Row>
 							<Table.Cell>Model</Table.Cell>
 							<Table.Cell>
-								{ component.model && <Link href={ Routes.model(component.model.slug) }>
+								{ component?.model?.slug && <Link href={ Routes.model(component.model.slug) }>
 									{ component.model.name }
 								</Link> }
 							</Table.Cell>
@@ -34,7 +34,7 @@ const ComponentDetails = ({ component }: IShowComponentProps) => {
 						<Table.Row>
 							<Table.Cell>Manufacturer</Table.Cell>
 							<Table.Cell>
-								{ component.manufacturer && <Link href={ Routes.manufacturer(component.manufacturer.slug) }>
+								{ component?.manufacturer?.slug && <Link href={ Routes.manufacturer(component.manufacturer.slug) }>
 									{ component.manufacturer!.name }
 								</Link> }
 							</Table.Cell>
@@ -43,7 +43,7 @@ const ComponentDetails = ({ component }: IShowComponentProps) => {
 						<Table.Row>
 							<Table.Cell>Category</Table.Cell>
 							<Table.Cell>
-								{ component.category && <Link href={ Routes.category(component.category.slug) }>
+								{ component?.category?.slug && <Link href={ Routes.category(component.category.slug) }>
 									{ component.category.name }
 								</Link> }
 							</Table.Cell>
@@ -64,7 +64,7 @@ const ComponentDetails = ({ component }: IShowComponentProps) => {
 						<Table.Row>
 							<Table.Cell>Vendor</Table.Cell>
 							<Table.Cell>
-								{ component.vendor && <Link href={ Routes.vendor(component.vendor.slug) }>
+								{ component?.vendor?.slug && <Link href={ Routes.vendor(component.vendor.slug) }>
 									{ component.vendor.name }
 								</Link> }
 							</Table.Cell>

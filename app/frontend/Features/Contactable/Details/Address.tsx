@@ -1,10 +1,10 @@
 import React from 'react'
 
-interface IAddressProps {
+interface AddressProps {
 	address: Schema.Address
 }
 
-const Address = ({ address }: IAddressProps) => {
+const Address = ({ address }: AddressProps) => {
 	return (
 		<address>
 			{ address.address }<br />

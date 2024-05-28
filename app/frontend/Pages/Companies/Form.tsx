@@ -1,21 +1,21 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Features/Contactable'
-import { type UseFormProps } from 'use-inertia-form'
-import { CurrenciesDropdown } from '@/Components/Dropdowns'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { FormCurrenciesDropdown } from '@/Features/Dropdowns'
 
-type TCompanyFormData = {
+type CompanyFormData = {
 	company: Schema.CompaniesFormData
 }
 
-export interface ICompanyFormProps {
+export interface CompanyFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TCompanyFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<CompanyFormData>) => boolean|void
 	company: Schema.CompaniesFormData
 }
 
-const CompanyForm = ({ to, method = 'post', onSubmit, company }: ICompanyFormProps) => {
+const CompanyForm = ({ to, method = 'post', onSubmit, company }: CompanyFormProps) => {
 	return (
 		<Form
 			model="company"
@@ -26,7 +26,7 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: ICompanyFormPro
 		>
 			<TextInput name="name" label="Company Name" required autoFocus />
 
-			<CurrenciesDropdown
+			<FormCurrenciesDropdown
 				label="Default Currency"
 				name="default_currency"
 			/>
@@ -40,4 +40,4 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: ICompanyFormPro
 	)
 }
 
-export default React.memo(CompanyForm)
+export default CompanyForm

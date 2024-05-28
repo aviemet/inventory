@@ -7,22 +7,22 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Dropdowns'
-import { type UseFormProps } from 'use-inertia-form'
-import { coerceArray } from '../../lib/collections'
+import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Features/Dropdowns'
+import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-interface AccessoryFormProps {
+type AccessoryFormData = {
 	accessory: Schema.AccessoriesFormData
 }
 
-export interface IAccessoryFormProps {
+export interface AccessoryFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<AccessoryFormProps>) => boolean|void
+	onSubmit?: (object: UseFormProps<AccessoryFormData>) => boolean|void
 	accessory: Schema.AccessoriesFormData
 }
 
-const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: IAccessoryFormProps) => {
+const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: AccessoryFormProps) => {
 
 	return (
 		<Form
@@ -73,4 +73,4 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: IAccessoryF
 	)
 }
 
-export default React.memo(AccessoryForm)
+export default AccessoryForm

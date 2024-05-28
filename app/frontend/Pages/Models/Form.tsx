@@ -1,18 +1,18 @@
 import React from 'react'
-import ManufacturersDropdown from '../../Components/Dropdowns/ManufacturersDropdown'
+import ManufacturersDropdown from '../../Features/Dropdowns/ManufacturersDropdown/FormManufacturersDropdown'
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
-import { CategoriesDropdown } from '@/Components/Dropdowns'
+import { CategoriesDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TModelFormData = {
+type ModelFormData = {
 	model: Schema.ModelsFormData
 }
 
-export interface IModelFormProps {
+export interface ModelFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TModelFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ModelFormData>) => boolean|void
 	model?: Schema.ModelsFormData
 }
 
@@ -23,7 +23,7 @@ const emptyModel: Schema.ModelsFormData = {
 	category_id: NaN,
 }
 
-const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: IModelFormProps) => {
+const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: ModelFormProps) => {
 	return (
 		<Form
 			model="model"
@@ -52,4 +52,4 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: IModel
 	)
 }
 
-export default React.memo(ModelForm)
+export default ModelForm

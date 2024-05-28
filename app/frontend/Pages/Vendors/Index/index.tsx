@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import VendorsTable from '../Table'
 
-interface IVendorsIndexProps {
+interface VendorsIndexProps {
 	vendors: Schema.VendorsIndex[]
 	pagination: Schema.Pagination
 }
 
-const VendorsIndex = ({ vendors, pagination }: IVendorsIndexProps) => {
+const VendorsIndex = ({ vendors, pagination }: VendorsIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Vendors"
@@ -18,7 +18,7 @@ const VendorsIndex = ({ vendors, pagination }: IVendorsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.vendors() }
 			menuOptions={ [
-				{ label: 'New Vendor', href: Routes.newVendor(), icon: NewIcon },
+				{ label: 'New Vendor', href: Routes.newVendor(), icon: <NewIcon /> },
 			] }
 		>
 			<VendorsTable />

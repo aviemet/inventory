@@ -1,7 +1,7 @@
 import React from 'react'
-import { IShowComponentProps } from '.'
+import { ShowComponentProps } from '.'
 
-const Documentations = ({ component }: IShowComponentProps) => {
+const Documentations = ({ component }: ShowComponentProps) => {
 	return (
 		<div>Documentations</div>
 	)

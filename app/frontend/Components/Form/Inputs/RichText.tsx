@@ -1,15 +1,15 @@
 import React from 'react'
-import Field from '../Field'
-import RichTextInput, { type IRichTextProps } from '@/Components/Inputs/RichText'
+import Field from '../Components/Field'
+import RichTextInput, { type RichTextInputProps } from '@/Components/Inputs/RichText'
 import cx from 'clsx'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface IRichTextFormProps<TForm extends NestedObject = NestedObject>
+interface FormRichTextInputProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<IRichTextProps, 'name'|'onBlur'|'onChange'|'value'>,
-	IFormInputProps<string, TForm> {}
+	Omit<RichTextInputProps, InputConflicts>,
+	BaseFormInputProps<string, TForm> {}
 
 const RichText = <TForm extends NestedObject = NestedObject>({
 	label,
@@ -18,32 +18,45 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 	id,
 	onChange,
 	onBlur,
+	onFocus,
 	model,
 	field = true,
+	wrapperProps,
+	errorKey,
+	defaultValue,
+	clearErrorsOnChange,
 	...props
-}: IRichTextFormProps<TForm>) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
+}: FormRichTextInputProps<TForm>) => {
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
-	const handleChange = (v, delta, sources, editor) => {
+	const handleChange = (v: string) => {
 		setValue(v)
 		onChange?.(v, form)
 	}
+
 	const handleBlur = () => {
-		if(onBlur) onBlur(value, form )
+		onBlur?.(value, form )
 	}
 
 	return (
 		<ConditionalWrapper
+			condition={ field }
 			wrapper={ children => (
 				<Field
 					type="textarea"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ field }
 		>
 			<>
 				{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
@@ -54,6 +67,7 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 					name={ inputName }
 					onChange={ handleChange }
 					onBlur={ handleBlur }
+					onFocus={ () => onFocus?.(value, form ) }
 					value={ value }
 					wrapper={ false }
 					{ ...props }

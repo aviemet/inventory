@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import LicenseForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewLicenseProps {
+interface NewLicenseProps {
 	license: Schema.LicensesFormData
 }
 
-const New = ({ license }: INewLicenseProps) => {
+const New = ({ license }: NewLicenseProps) => {
 	const title = 'New License'
 
 	return (

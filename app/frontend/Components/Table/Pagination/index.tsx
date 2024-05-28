@@ -16,14 +16,14 @@ const pageLink = (page: number) => {
 	return `${url.pathname}${url.search}`
 }
 
-interface IPaginationComponent extends Omit<PaginationProps, 'total'> {}
+interface PaginationComponent extends Omit<PaginationProps, 'total'> {}
 
-const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPaginationComponent) => {
+const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: PaginationComponent) => {
 	const { tableState: { pagination, model } } = useTableContext()
 
 	if(!pagination) return <></>
 
-	const { count, pages, limit, current_page, next_page, prev_page, is_first_page, is_last_page } = pagination
+	const { count, pages, limit, current_page, next_page, prev_page /* is_first_page, is_last_page */ } = pagination
 	const recordStart = ((current_page - 1) * limit) + 1
 	const recordEnd = Math.min(current_page * limit, count)
 
@@ -49,9 +49,9 @@ const PaginationComponent = ({ boundaries = 2, siblings = 2, ...props }: IPagina
 						textDecoration: 'none',
 					} } }>
 					<Pagination.First component={ Link } href={ pageLink(1) } />
-					<Pagination.Previous component={ Link } href={ pageLink(next_page) } />
+					<Pagination.Previous component={ Link } href={ pageLink(prev_page) } />
 					<Pagination.Items />
-					<Pagination.Next component={ Link } href={ pageLink(prev_page) } />
+					<Pagination.Next component={ Link } href={ pageLink(next_page) } />
 					<Pagination.Last component={ Link } href={ pageLink(pages) } />
 				</Group>
 			</Pagination.Root>

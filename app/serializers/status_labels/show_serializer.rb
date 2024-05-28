@@ -1,14 +1,7 @@
-class StatusLabels::ShowSerializer < ApplicationSerializer
-  object_as :status_label
-
-  identifier :slug
-
+class StatusLabels::ShowSerializer < StatusLabelSerializer
   attributes(
     :id,
     :slug,
-    :name,
-    :status_type,
-    :description,
     :created_at,
     :updated_at,
   )

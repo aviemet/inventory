@@ -1,50 +1,29 @@
-class Items::ShowSerializer < Assignable::SingleSerializer
-  object_as :item
-
+class Items::ShowSerializer < ItemSerializer
   attributes(
     :id,
-    :name,
-    :asset_tag,
-    :serial,
-    :cost_currency,
-    :purchased_at,
-    :requestable,
-    :notes,
-    :model_id,
-    :vendor_id,
-    :default_location_id,
     :created_at,
     :updated_at,
   )
 
-  type :number
-  def cost
-    currency_for(item)
-  end
+  has_one :department, serializer: Departments::BasicSerializer
+  has_one :location, serializer: Locations::BasicSerializer
+  has_one :category, serializer: Categories::BasicSerializer
 
-  type :boolean
-  def assigned
-    item.assigned?
-  end
+  has_many :nics, serializer: Nics::BasicSerializer
+  has_many :ips, serializer: IpLeases::OptionsSerializer, if: ->{ options[:with_ips] }
+  has_many :activities, serializer: Activities::BasicSerializer
+  has_many :assignments, serializer: Assignments::ShowSerializer
 
-  has_one :department, serializer: DepartmentSerializer
-  belongs_to :model, serializer: ModelSerializer
-  belongs_to :vendor, serializer: VendorSerializer
-  has_one :category, serializer: CategorySerializer
-  belongs_to :manufacturer, serializer: ManufacturerSerializer
-  has_one :location, serializer: LocationSerializer
-  belongs_to :status_label, serializer: StatusLabelSerializer
-
-  has_many :assignments, serializer: AssignmentSerializer
-  belongs_to :default_location, serializer: LocationSerializer
-  has_many :nics, serializer: NicSerializer
-  has_many :activities, serializer: ActivitySerializer
-
-  has_many :items, serializer: ItemSerializer
-  has_many :accessories, serializer: AccessorySerializer
-  has_many :components, serializer: ComponentSerializer
-  has_many :consumables, serializer: ConsumableSerializer
-  has_many :licenses, serializer: LicenseSerializer
+  has_many :items, serializer: Items::BasicSerializer
+  has_many :accessories, serializer: Accessories::BasicSerializer
+  has_many :components, serializer: Components::BasicSerializer
+  has_many :consumables, serializer: Consumables::BasicSerializer
+  has_many :licenses, serializer: Licenses::BasicSerializer
   has_many :documentations, serializer: Documentations::IndexSerializer
 
+  belongs_to :model, serializer: Models::BasicSerializer
+  belongs_to :vendor, serializer: Vendors::BasicSerializer
+  belongs_to :manufacturer, serializer: Manufacturers::BasicSerializer
+  belongs_to :default_location, serializer: Locations::BasicSerializer
+  belongs_to :status_label, serializer: StatusLabels::BasicSerializer
 end

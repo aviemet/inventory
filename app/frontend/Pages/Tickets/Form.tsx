@@ -6,22 +6,22 @@ import {
 	Submit,
 	FieldsFor,
 } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
-import { AssetsDropdown, PeopleDropdown, PeopleMultiSelect } from '@/Components/Dropdowns'
+import { AssetsDropdown, PeopleDropdown, PeopleMultiSelect } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TTicketFormData = {
+type TicketFormData = {
 	ticket: Schema.TicketsFormData
 }
 
-export interface ITicketFormProps {
+export interface TicketFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TTicketFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<TicketFormData>) => boolean|void
 	ticket: Schema.TicketsFormData
 }
 
-const TicketForm = ({ to, method = 'post', onSubmit, ticket }: ITicketFormProps) => {
+const TicketForm = ({ to, method = 'post', onSubmit, ticket }: TicketFormProps) => {
 	return (
 		<Form
 			model="ticket"
@@ -56,4 +56,4 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket }: ITicketFormProps)
 	)
 }
 
-export default React.memo(TicketForm)
+export default TicketForm

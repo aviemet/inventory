@@ -5,11 +5,11 @@ import SettingsLayout from '../../SettingsLayout'
 import axios from 'axios'
 import { Heading } from '@/Components'
 
-interface ILdapSettingsProps {
+interface LdapSettingsProps {
 	ldap: Schema.LdapsFormData
 }
 
-const Ldap = ({ ldap }: ILdapSettingsProps) => {
+const Ldap = ({ ldap }: LdapSettingsProps) => {
 	const handleLdapSync = () => {
 		if(!ldap.id) return
 

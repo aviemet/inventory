@@ -13,16 +13,16 @@ class Api::SpotlightsController < Api::ApiController
   # @route GET /api/spotlights (api_spotlights)
   def index
     render json: {
-      items: ItemSerializer.render(items),
-      accessories: AccessorySerializer.render(accessories),
-      components: ComponentSerializer.render(components),
-      consumables: ConsumableSerializer.render(consumables),
-      licenses: LicenseSerializer.render(licenses),
-      people: PersonSerializer.render(people),
-      tickets: TicketSerializer.render(tickets),
-      networks: NetworkSerializer.render(networks),
-      vendors: VendorSerializer.render(vendors),
-      contracts: ContractSerializer.render(contracts),
+      items: items.render(view: :spotlight),
+      accessories: accessories.render(view: :spotlight),
+      components: components.render(view: :spotlight),
+      consumables: consumables.render(view: :spotlight),
+      licenses: licenses.render(view: :spotlight),
+      people: people.render(view: :spotlight),
+      tickets: tickets.render(view: :spotlight),
+      networks: networks.render(view: :spotlight),
+      vendors: vendors.render(view: :spotlight),
+      contracts: contracts.render(view: :spotlight),
     }
   end
 end

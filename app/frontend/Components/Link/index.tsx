@@ -4,7 +4,7 @@ import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
 import { type AnchorProps, type ButtonProps } from '@mantine/core'
 
-export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
+export interface LinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	children?: React.ReactNode
 	href: string
 	method?: Method
@@ -22,8 +22,18 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 
 const externalPrefix = ['http', 'www']
 
-const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', method, visit, external, onProgress, preserveScroll, buttonProps, ...props },
+const Link = forwardRef<HTMLAnchorElement, LinkProps>((
+	{
+		children,
+		href,
+		as = 'a',
+		method,
+		visit,
+		external,
+		onProgress,
+		preserveScroll,
+		...props
+	},
 	ref,
 ) => {
 	const renderExternal = useMemo(() => {
@@ -31,7 +41,7 @@ const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
 
 		let localExternal = false
 		externalPrefix.some(prefix => {
-			if(href.startsWith(prefix)) {
+			if(href?.startsWith(prefix)) {
 				const url = new URL(href.startsWith('http') ? href : `http://${href}`)
 				localExternal = url.hostname !== window.location.hostname
 			}

@@ -1,29 +1,39 @@
 import React from 'react'
-import TextInput, { type ITextInputProps } from '@/Components/Inputs/TextInput'
-import Field from '../Field'
+import TextInput, { type TextInputProps } from '@/Components/Inputs/TextInput'
+import Field from '../Components/Field'
 import { useInertiaInput, type NestedObject } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface ITextFormInputProps<TForm extends NestedObject = NestedObject>
+interface FormTextInputProps<TForm extends NestedObject>
 	extends
-	Omit<ITextInputProps, 'onBlur'|'onChange'|'name'>,
-	IFormInputProps<string, TForm> {}
+	Omit<TextInputProps, InputConflicts>,
+	BaseFormInputProps<string, TForm> {}
 
-const TextFormInput = <TForm extends NestedObject = NestedObject>(
+const TextFormInput = <TForm extends NestedObject>(
 	{
 		name,
 		model,
 		onChange,
 		onBlur,
+		onFocus,
 		id,
 		required,
-		errorKey,
 		field = true,
+		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
-	}: ITextFormInputProps<TForm>,
+	}: FormTextInputProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value
@@ -36,21 +46,22 @@ const TextFormInput = <TForm extends NestedObject = NestedObject>(
 		const value = e.target.value
 		setValue(value)
 
-		if(onBlur) onBlur(value, form)
+		onBlur?.(value, form)
 	}
 
 	return (
 		<ConditionalWrapper
+			condition={ props.hidden !== true && field }
 			wrapper={ children => (
 				<Field
 					type="text"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ props.hidden !== true && field }
 		>
 			<TextInput
 				id={ id || inputId }
@@ -58,6 +69,7 @@ const TextFormInput = <TForm extends NestedObject = NestedObject>(
 				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				onFocus={ e => onFocus?.(e.target.value, form) }
 				error={ errorKey ? form.getError(errorKey) : error }
 				wrapper={ false }
 				{ ...props }

@@ -1,15 +1,15 @@
 import React from 'react'
-import Field from '../Field'
-import TextareaInput, { type ITextareaProps } from '@/Components/Inputs/Textarea'
+import Field from '../Components/Field'
+import TextareaInput, { type TextareaProps } from '@/Components/Inputs/Textarea'
 import cx from 'clsx'
 import { useInertiaInput, type NestedObject } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { InputConflicts, type BaseFormInputProps } from '.'
 
-interface IFormTextareaProps<TForm extends NestedObject = NestedObject>
+interface FormTextareaProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<ITextareaProps, 'onBlur'|'onChange'|'name'>,
-	IFormInputProps<string, TForm> {}
+	Omit<TextareaProps, InputConflicts>,
+	BaseFormInputProps<string, TForm> {}
 
 const Textarea = <TForm extends NestedObject = NestedObject>(
 	{
@@ -18,14 +18,24 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 		required,
 		onChange,
 		onBlur,
+		onFocus,
 		id,
 		model,
-		errorKey,
 		field = true,
+		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
 		...props
-	}: IFormTextareaProps<TForm>,
+	}: FormTextareaProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setValue(e.target.value)
@@ -37,16 +47,17 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 
 	return (
 		<ConditionalWrapper
+			condition={ props.hidden !== true && field }
 			wrapper={ children => (
 				<Field
 					type="textarea"
 					required={ required }
 					errors={ !!error }
+					{ ...wrapperProps }
 				>
 					{ children }
 				</Field>
 			) }
-			condition={ props.hidden !== true && field }
 		>
 			<>
 				{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
@@ -57,6 +68,7 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 					name={ inputName }
 					onChange={ handleChange }
 					onBlur={ handleBlur }
+					onFocus={ e => onFocus?.(e.target.value, form) }
 					value={ value }
 					required={ required }
 					error={ errorKey ? form.getError(errorKey) : error }

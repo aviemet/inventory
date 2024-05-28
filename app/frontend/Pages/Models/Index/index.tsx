@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import ModelsTable from '../Table'
 
-interface IModelsIndexProps {
+interface ModelsIndexProps {
 	models: Schema.ModelsIndex[]
 	pagination: Schema.Pagination
 }
 
-const ModelsIndex = ({ models, pagination }: IModelsIndexProps) => {
+const ModelsIndex = ({ models, pagination }: ModelsIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Models"
@@ -18,7 +18,7 @@ const ModelsIndex = ({ models, pagination }: IModelsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.models() }
 			menuOptions={ [
-				{ label: 'New Model', href: Routes.newModel(), icon: NewIcon },
+				{ label: 'New Model', href: Routes.newModel(), icon: <NewIcon /> },
 			] }
 		>
 			<ModelsTable />

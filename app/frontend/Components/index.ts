@@ -1,6 +1,5 @@
 export { default as Breadcrumbs } from './Breadcrumbs'
 export { default as Button } from './Button'
-export { default as Card } from './Card'
 export { default as ConditionalWrapper } from './ConditionalWrapper'
 export { default as DangerousHtml } from './DangerousHtml'
 export { default as Date } from './Date'
@@ -24,8 +23,10 @@ export {
 	AppShell,
 	Box,
 	Badge,
+	Card,
 	Container,
 	Flex,
+	Grid,
 	Group,
 	List,
 	Modal,

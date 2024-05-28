@@ -1,12 +1,12 @@
-import { type TPermissions } from '.'
+import { type Permissions } from '.'
 
-type TTableRow = {
+type TableRow = {
 	model: string
 	label: string
-	permissions: (keyof TPermissions)[]
+	permissions: (keyof Permissions)[]
 }
 
-const tableRows: TTableRow[] = [
+const tableRows: TableRow[] = [
 	{
 		model: 'item',
 		label: 'Items',

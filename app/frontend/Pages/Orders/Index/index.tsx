@@ -4,14 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import OrdersTable from '../Table'
 
-export type OrderWithCost = Schema.Order & { cost: number }
-
-interface IOrdersIndexProps {
-	orders: OrderWithCost[]
+interface OrdersIndexProps {
+	orders: Schema.OrdersIndex[]
 	pagination: Schema.Pagination
 }
 
-const OrdersIndex = ({ orders, pagination }: IOrdersIndexProps) => {
+const OrdersIndex = ({ orders, pagination }: OrdersIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Orders"
@@ -20,7 +18,7 @@ const OrdersIndex = ({ orders, pagination }: IOrdersIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.orders() }
 			menuOptions={ [
-				{ label: 'New Order', href: Routes.newOrder(), icon: NewIcon },
+				{ label: 'New Order', href: Routes.newOrder(), icon: <NewIcon /> },
 			] }
 		>
 			<OrdersTable />

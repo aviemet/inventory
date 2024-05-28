@@ -14,7 +14,8 @@ import {
 	Box,
 } from '@mantine/core'
 
-export { default as useAdvancedSearch } from './useAdvancedSearch'
+import cx from 'clsx'
+import * as classes from './AdvancedSearch.css'
 
 const scaleY = {
 	in: { opacity: 1, transform: 'scaleY(1)' },
@@ -23,11 +24,11 @@ const scaleY = {
 	transitionProperty: 'transform, opacity',
 }
 
-interface IAdvancedSearchProps {
+interface AdvancedSearchProps {
 	children: React.ReactNode
 }
 
-const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
+const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 	const { sidebarOpen } = useLayoutStore()
 	const { primaryColor, other: { navbar: { width } } } = useMantineTheme()
 	const navBarWidth = width[sidebarOpen ? 'open' : 'closed']
@@ -53,7 +54,6 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 				<ActionIcon
 					size={ 42 }
 					variant="filled"
-					color="primary"
 					onClick={ () => toggleOpen() }
 					ref={ setSearchButton }
 					data-ignore-outside-clicks
@@ -72,13 +72,11 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 						ref={ setSearchPaper }
 						shadow="md"
 						p="md"
+						className={ cx(classes.paper) }
 						style={ {
 							...styles,
-							position: 'absolute',
 							left: rem(navBarWidth + Number(px('1rem'))),
-							right: '1rem',
 							top: searchButton ? rem(searchButton.getBoundingClientRect().bottom + 10) : undefined,
-							zIndex: 10,
 						} }
 					>
 						<Box>
@@ -92,3 +90,5 @@ const AdvancedSearch = ({ children }: IAdvancedSearchProps) => {
 }
 
 export default AdvancedSearch
+
+export { default as useAdvancedSearch } from './useAdvancedSearch'

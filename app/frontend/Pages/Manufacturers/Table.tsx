@@ -2,20 +2,20 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { ITableProps } from '@/Components/Table/Table'
+import { TableProps } from '@/Components/Table/Table'
 
-const ManufacturersTable = (props: ITableProps) => {
+const ManufacturersTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="models.count">Models</Table.Cell>
-					<Table.Cell sort="items.count">Items</Table.Cell>
-					<Table.Cell sort="accessories.count">Accessories</Table.Cell>
-					<Table.Cell sort="consumables.count">Consumables</Table.Cell>
-					<Table.Cell sort="components.count">Components</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="models.count">Models</Table.HeadCell>
+					<Table.HeadCell sort="items.count">Items</Table.HeadCell>
+					<Table.HeadCell sort="accessories.count">Accessories</Table.HeadCell>
+					<Table.HeadCell sort="consumables.count">Consumables</Table.HeadCell>
+					<Table.HeadCell sort="components.count">Components</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

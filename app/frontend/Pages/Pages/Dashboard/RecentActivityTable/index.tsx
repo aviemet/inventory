@@ -1,9 +1,8 @@
 import React from 'react'
 import { Link, Table } from '@/Components'
 import { formatter, Routes } from '@/lib'
-import TableProvider from '@/Components/Table/TableContext'
 
-interface IDashboardProps {
+interface DashboardProps {
 	activities: Schema.ActivitiesDashboard[]
 }
 
@@ -14,19 +13,19 @@ const headingLabels = {
 	date: 'Date',
 }
 
-const RecentActivityTable = ({ activities }: IDashboardProps) => {
+const RecentActivityTable = ({ activities }: DashboardProps) => {
 	return (
 		<Table>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell>{ headingLabels.record }</Table.Cell>
-					<Table.Cell>{ headingLabels.action }</Table.Cell>
-					<Table.Cell>{ headingLabels.user }</Table.Cell>
-					<Table.Cell>{ headingLabels.date }</Table.Cell>
+					<Table.HeadCell>{ headingLabels.record }</Table.HeadCell>
+					<Table.HeadCell>{ headingLabels.action }</Table.HeadCell>
+					<Table.HeadCell>{ headingLabels.user }</Table.HeadCell>
+					<Table.HeadCell>{ headingLabels.date }</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
-				{ activities.reverse().map(activity => (
+				{ activities.map(activity => (
 					<Table.Row key={ activity.id }>
 						<Table.Cell>
 							{ activity.route ?

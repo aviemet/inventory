@@ -7,34 +7,43 @@ import {
 	Submit,
 } from '@/Components/Form'
 import { router } from '@inertiajs/react'
-import { type UseFormProps } from 'use-inertia-form'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 interface CategoryFormData {
 	category: Schema.CategoriesFormData
 }
 
-export interface ICategoryFormProps {
+export interface CategoryFormProps {
 	to: string
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<CategoryFormData>) => boolean|void
 	category?: Schema.CategoriesFormData
+	categoryType?: Schema.CategoryTypes
 }
 
-const emptyCategory: Schema.CategoriesFormData = {
+const emptyCategory: (categoryType?: Schema.CategoryTypes) => Schema.CategoriesFormData = (categoryType) => ({
 	name: '',
-	categorizable_type: '',
+	categorizable_type: categoryType || '',
 	description: '',
-}
+})
 
-const categorizableTypes = ['Accessory', 'Address', 'Component', 'Consumable', 'Contact', 'Contract', 'Department', 'Email', 'Item', 'License', 'Location', 'Manufacturer', 'Model', 'Order', 'Person', 'Phone', 'Ticket', 'User', 'Vendor', 'Website']
+const categorizableTypes: Schema.CategoryTypes[] = ['Accessory', 'Address', 'Component', 'Consumable', 'Contact', 'Contract', 'Department', 'Email', 'Item', 'License', 'Location', 'Manufacturer', 'Model', 'Order', 'Person', 'Phone', 'Ticket', 'User', 'Vendor', 'Website']
 
-const CategoryForm = ({ to, method = 'post', onSubmit, category = emptyCategory }: ICategoryFormProps) => {
-	const types = useMemo(() => categorizableTypes.map(type => ({ name: type, id: type })), [])
+const CategoryForm = ({
+	to,
+	method = 'post',
+	onSubmit,
+	category,
+	categoryType,
+}: CategoryFormProps) => {
+	const types = useMemo(() => categorizableTypes.map(type => ({ label: type, value: type })), [])
+
+	const categoryData = useMemo(() => category || emptyCategory(categoryType), [category, categoryType])
 
 	return (
 		<Form
 			model="category"
-			data={ { category } }
+			data={ { category: categoryData } }
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
@@ -45,17 +54,18 @@ const CategoryForm = ({ to, method = 'post', onSubmit, category = emptyCategory 
 				label="Category Type"
 				name="categorizable_type"
 				options={ types }
-				onOpen={ () => router.reload({ only: ['vendors'] }) }
+				onDropdownOpen={ () => router.reload({ only: ['vendors'] }) }
 				required
+				disabled={ categoryType !== undefined }
 			/>
 
 			<Textarea name="description" label="Description" />
 
 			<Submit>
-				{ category.id ? 'Update' : 'Create' } Category
+				{ category?.id ? 'Update' : 'Create' } Category
 			</Submit>
 		</Form>
 	)
 }
 
-export default React.memo(CategoryForm)
+export default CategoryForm

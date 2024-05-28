@@ -1,9 +1,9 @@
 import React from 'react'
 import { ShowPageAssociations } from '@/Features'
-import { IShowConsumableProps } from '.'
+import { ShowConsumableProps } from '.'
 
-const Associations = ({ consumable }: IShowConsumableProps) => {
-	return <ShowPageAssociations assignToable={ consumable } />
+const Associations = ({ consumable }: ShowConsumableProps) => {
+	return <ShowPageAssociations assignable={ consumable } />
 }
 
 export default Associations

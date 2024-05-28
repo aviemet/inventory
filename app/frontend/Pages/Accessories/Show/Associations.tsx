@@ -1,10 +1,10 @@
 import React from 'react'
 import { ShowPageAssociations } from '@/Features'
 import { Routes } from '@/lib'
-import { IShowAccessoryProps } from '.'
+import { ShowAccessoryProps } from '.'
 
-const Associations = ({ accessory }: IShowAccessoryProps) => {
-	return <ShowPageAssociations assignToable={ accessory } checkinRoute={ Routes.checkinAccessory } />
+const Associations = ({ accessory }: ShowAccessoryProps) => {
+	return <ShowPageAssociations assignable={ accessory } checkinRoute={ Routes.checkinAccessory } />
 }
 
 export default Associations

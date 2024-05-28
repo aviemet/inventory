@@ -2,7 +2,7 @@ import Table from '@/Components/Table'
 import React from 'react'
 import { TableTitleSection } from '..'
 
-interface IShowPageTableTemplate {
+interface ShowPageTableTemplate {
 	children: React.ReactNode
 	title: string
 	model: string
@@ -15,7 +15,7 @@ interface IShowPageTableTemplate {
 	}[]
 }
 
-const ShowPageTableTemplate = ({ children, model, rows, pagination, title, menuOptions }: IShowPageTableTemplate) => {
+const ShowPageTableTemplate = ({ children, model, rows, pagination, title, menuOptions }: ShowPageTableTemplate) => {
 	return (
 		<Table.TableProvider
 			selectable

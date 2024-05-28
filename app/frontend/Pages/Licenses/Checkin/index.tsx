@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Flex, Heading, Page, Section, Table, Box } from '@/Components'
 import { Routes, formatter } from '@/lib'
-import { DateTime, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
-import { LocationsDropdown } from '@/Components/Dropdowns'
+import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
+import { LocationsDropdown } from '@/Features/Dropdowns'
 
-interface ICheckinLicensesProps {
+interface CheckinLicensesProps {
 	assignment: Schema.AssignmentsEdit
 	license: Schema.LicensesEdit
 	locations: Schema.LocationsOptions[]
 	status_labels: Schema.StatusLabelsOptions[]
 }
 
-const Checkin = ({ assignment, license, locations, status_labels }: ICheckinLicensesProps) => {
+const Checkin = ({ assignment, license, locations, status_labels }: CheckinLicensesProps) => {
 	const [licenseName, setLicenseName] = useState(license.name)
 	const title = 'Check In License'
 
@@ -102,16 +102,19 @@ const Checkin = ({ assignment, license, locations, status_labels }: ICheckinLice
 						required
 					/>
 
-					<LocationsDropdown locations={ locations } />
+					<LocationsDropdown />
 
 					<Select
-						options={ status_labels }
+						options={ useMemo(() => status_labels.map(label => ({
+							label: label.name,
+							value: String(label.id),
+						})), [status_labels]) }
 						label="Status"
 						name="status_id"
 						required
 					/>
 
-					<DateTime
+					<DateTimeInput
 						label="Returned At"
 						name="returned_at"
 						required

@@ -2,19 +2,16 @@ class Api::AssetsController < Api::ApiController
   expose :assets, -> {  @active_company.assets }
   expose :asset, scope: ->{ @active_company.assets }
 
-  # GET api/assets/options
   # @route GET /api/assets (api_assets)
   def index
     render json: assets.includes_associated.render
   end
 
-  # GET api/assets/:slug
   # @route GET /api/assets/:id (api_asset)
   def show
     render json: asset.render
   end
 
-  # GET api/options/assets
   # @route GET /api/options/assets (api_assets_options)
   def options
     render json: assets.render(view: :options)

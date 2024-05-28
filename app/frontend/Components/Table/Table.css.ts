@@ -35,10 +35,6 @@ export const table = css`
 		}
 		${vars.darkSelector} {
 			background-color: ${vars.colors.dark[7]};
-
-			th:hover {
-				background-color: ${vars.colors.black};
-			}
 		}
 	}
 
@@ -90,31 +86,35 @@ export const table = css`
 
 	}
 
+	/* On small screens, collapse tables into "cards" */
 	@media(max-width: ${vars.breakpoints.sm}) {
 		thead {
 			display: none;
 		}
 
-		tr {
-			display: flex;
-			flex-direction: column;
-			margin-bottom: 10px;
-			background-color: ${vars.colors.dark[7]};
-			border-radius: ${rem(4)};
-			padding: ${rem(6)};
-			border-bottom: 1px solid ${vars.colors.primary.filled};
-		}
-
-		td {
-			display: grid;
-			grid-template-columns: 8rem 1fr;
-
-			&::before {
-				content: attr(data-cell);
+		/* Only for tables with a thead */
+		thead + tbody {
+			tr {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 10px;
+				background-color: ${vars.colors.dark[7]};
+				border-radius: ${rem(4)};
+				padding: ${rem(6)};
+				border-bottom: 1px solid ${vars.colors.primaryColors.filled};
 			}
 
-			&.table-row-select-checkbox {
-				visibility: collapse;
+			td {
+				display: grid;
+				grid-template-columns: 8rem 1fr;
+
+				&::before {
+					content: attr(data-cell);
+				}
+
+				&.table-row-select-checkbox {
+					visibility: collapse;
+				}
 			}
 		}
 	}
@@ -140,6 +140,10 @@ export const searchInput = css`
 	}
 `
 
+export const pagination = css`
+	display: inline-block;
+	max-width: 60px;
+`
 
 // &:before, &:after {
 // 	position: absolute,

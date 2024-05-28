@@ -3,13 +3,13 @@ import { Heading, Page, Section } from '@/Components'
 import ModelForm from '../Form'
 import { Routes } from '@/lib'
 
-interface IUpdateModelProps{
+interface UpdateModelProps{
 	model: Schema.ModelsEdit
 	categories: Schema.CategoriesOptions[]
 	manufacturers: Schema.ManufacturersOptions[]
 }
 
-const New = ({ model, ...models }: IUpdateModelProps) => {
+const New = ({ model, ...models }: UpdateModelProps) => {
 	const title = `Edit ${model.name}`
 
 	return (

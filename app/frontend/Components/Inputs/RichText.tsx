@@ -1,10 +1,10 @@
-import React from 'react'
-import RichTextEditor, { type IRichTextEditorProps } from '../RichTextEditor'
+import React, { forwardRef } from 'react'
+import RichTextEditor, { type RichTextEditorProps } from '../RichTextEditor'
 import Label from './Label'
-import { IInputProps } from '.'
+import { type BaseInputProps } from '.'
 import InputWrapper from './InputWrapper'
 
-export interface IRichTextProps extends IRichTextEditorProps, IInputProps {
+export interface RichTextInputProps extends RichTextEditorProps, BaseInputProps {
 	label?: React.ReactNode
 	value: string
 	required?: boolean
@@ -12,7 +12,18 @@ export interface IRichTextProps extends IRichTextEditorProps, IInputProps {
 	name?: string
 }
 
-const RichText = ( { label, name, required = false, id, value, wrapper, ...props }: IRichTextProps) => {
+const RichText = forwardRef<HTMLDivElement, RichTextInputProps>((
+	{
+		label,
+		name,
+		required = false,
+		id,
+		value,
+		wrapper,
+		...props
+	},
+	ref,
+) => {
 	const inputId = id || name
 
 	return (
@@ -20,9 +31,11 @@ const RichText = ( { label, name, required = false, id, value, wrapper, ...props
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
-			<RichTextEditor id={ inputId } { ...props }>{ value }</RichTextEditor>
+			<RichTextEditor ref={ ref } id={ inputId } { ...props }>
+				{ value }
+			</RichTextEditor>
 		</InputWrapper>
 	)
-}
+})
 
 export default RichText

@@ -1,21 +1,28 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Table } from '@/Components'
 import EditableLink from './EditableLink'
+import IPAddress from '@/lib/IPAddress'
+import { useNetworkContext } from '..'
 import cx from 'clsx'
 import * as classes from './NetworkDetailsTable.css'
 
-interface INetworkDetailsTableProps {
+interface NetworkDetailsTableProps {
 	hosts: string[]
-	ips: Schema.IpLease[]
+	ips: Schema.IpLeasesBasic[]
 }
 
-const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
+const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
+	const { network } =  useNetworkContext()
+
+	const dhcpStart = useMemo(() => new IPAddress(network.dhcp_start), [network.dhcp_start])
+	const dhcpEnd = useMemo(() => new IPAddress(network.dhcp_end), [network.dhcp_end])
+
 	return (
-		<Table wrapper={ false } style={ { width: '100%', flex: 1 } }>
+		<Table wrapper={ false } className={ cx(classes.table) }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell>Address</Table.Cell>
-					<Table.Cell>Host</Table.Cell>
+					<Table.HeadCell>Address</Table.HeadCell>
+					<Table.HeadCell>Host</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
@@ -23,8 +30,11 @@ const NetworkDetailsTable = ({ hosts, ips }: INetworkDetailsTableProps) => {
 				{ hosts.map(host => {
 					const item = ips.find(ip => ip.address === host)?.item
 
+					const addr = new IPAddress(host)
+					const dhcp = addr.between(dhcpStart, dhcpEnd)
+
 					return (
-						<Table.Row key={ host } className={ cx(classes.row) }>
+						<Table.Row key={ host } className={ cx(classes.row, { dhcp }) }>
 							<Table.Cell fitContent>{ host }</Table.Cell>
 							<Table.Cell>
 								<EditableLink item={ item } ip={ host } />

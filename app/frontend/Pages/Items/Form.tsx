@@ -5,29 +5,34 @@ import {
 	CurrencyInput,
 	Textarea,
 	Checkbox,
-	DateTime,
+	DateTimeInput,
 	Submit,
 	FormGroup,
 	DynamicInputs,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown, DepartmentsDropdown } from '@/Components/Dropdowns'
+import {
+	FormModelsDropdown,
+	FormVendorsDropdown,
+	FormLocationsDropdown,
+	FormDepartmentsDropdown,
+} from '@/Features/Dropdowns'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
 import { Group } from '@/Components'
-import { type UseFormProps } from 'use-inertia-form'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TItemFormData = {
+type ItemFormData = {
 	item: Schema.ItemsFormData
 }
 
-export interface IItemFormProps {
+export interface ItemFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TItemFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ItemFormData>) => boolean|void
 	item: Schema.ItemsFormData
 }
 
-const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
+const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 	const [staticIp, setStaticIp] = useState(false)
 
 	return (
@@ -40,7 +45,7 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Item Details">
-				<ModelsDropdown
+				<FormModelsDropdown
 					modelCategory='Item'
 					errorKey="item.model"
 					initialData={ coerceArray(item?.model) }
@@ -70,22 +75,22 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown initialData={ coerceArray(item?.vendor) } />
+				<FormVendorsDropdown initialData={ coerceArray(item?.vendor) } />
 
 				<CurrencyInput name="cost" label="Cost" />
 
-				<DateTime label="Purchased At" name="purchased_at" />
+				<DateTimeInput label="Purchased At" name="purchased_at" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-				<LocationsDropdown
+				<FormLocationsDropdown
 					label="Default Location"
 					name="default_location_id"
 					initialData={ coerceArray(item?.default_location) }
 					required
 				/>
 
-				<DepartmentsDropdown initialData={ coerceArray(item?.department) } />
+				<FormDepartmentsDropdown initialData={ coerceArray(item?.department) } />
 
 				<Checkbox name="requestable" label="Requestable" />
 
@@ -101,4 +106,4 @@ const ItemForm = ({ method = 'post', item, ...props }: IItemFormProps) => {
 	)
 }
 
-export default React.memo(ItemForm)
+export default ItemForm

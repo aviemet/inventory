@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import AccessoriesTable from '../Table'
 
-interface IAccessoriesIndexProps {
+interface AccessoriesIndexProps {
 	accessories: Schema.AccessoriesIndex[]
 	pagination: Schema.Pagination
 }
 
-const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) => {
+const AccessoriesIndex = ({ accessories, pagination }: AccessoriesIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Accessories"
@@ -18,7 +18,7 @@ const AccessoriesIndex = ({ accessories, pagination }: IAccessoriesIndexProps) =
 			pagination={ pagination }
 			deleteRoute={ Routes.accessories() }
 			menuOptions={ [
-				{ label: 'Create New Accessory', href: Routes.newAccessory(), icon: NewIcon },
+				{ label: 'Create New Accessory', href: Routes.newAccessory(), icon: <NewIcon /> },
 			] }
 		>
 			<AccessoriesTable />

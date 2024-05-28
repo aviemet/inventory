@@ -2,20 +2,20 @@ import React from 'react'
 import { Routes } from '@/lib'
 import { Link, Table } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 
-const NetworksTable = (props: ITableProps) => {
+const NetworksTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="name" hideable={ false }>Name</Table.Cell>
-					<Table.Cell sort="address">Network</Table.Cell>
-					<Table.Cell sort="gateway">Gateway</Table.Cell>
-					<Table.Cell sort="dhcp_start">DHCP Start</Table.Cell>
-					<Table.Cell sort="dhcp_end">DHCP End</Table.Cell>
-					<Table.Cell sort="vlan_id">VLAN Id</Table.Cell>
-					<Table.Cell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.Cell>
+					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
+					<Table.HeadCell sort="address">Network</Table.HeadCell>
+					<Table.HeadCell sort="gateway">Gateway</Table.HeadCell>
+					<Table.HeadCell sort="dhcp_start">DHCP Start</Table.HeadCell>
+					<Table.HeadCell sort="dhcp_end">DHCP End</Table.HeadCell>
+					<Table.HeadCell sort="vlan_id">VLAN Id</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

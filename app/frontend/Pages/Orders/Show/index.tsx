@@ -3,8 +3,8 @@ import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
-interface IShowOrderProps {
-	order: Schema.Order
+interface ShowOrderProps {
+	order: Schema.OrdersShow
 }
 
 const tabs = {
@@ -13,7 +13,7 @@ const tabs = {
 	associations: 'associations',
 }
 
-const Show = ({ order }: IShowOrderProps) => {
+const Show = ({ order }: ShowOrderProps) => {
 	const title = 'Order Details'
 
 	return (

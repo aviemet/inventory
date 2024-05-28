@@ -4,7 +4,7 @@ import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 import { usePageProps } from '@/lib/hooks'
 
-type TRegisterFormData = {
+type RegisterFormData = {
 	person: {
 		first_name: string
 		last_name: string
@@ -17,7 +17,7 @@ type TRegisterFormData = {
 const CompleteRegistration = () => {
 	const { auth: { user } } = usePageProps()
 
-	const defaultData: TRegisterFormData = {
+	const defaultData: RegisterFormData = {
 		person: {
 			first_name: user.person?.first_name ?? '',
 			last_name: user.person?.last_name ?? '',

@@ -5,7 +5,6 @@ ruby "3.2.2"
 
 # Server
 gem "rails", ">= 7.1"
-# gem "sprockets-rails"
 gem "pg", ">= 1.1"
 gem "puma", ">= 6.0"
 
@@ -35,7 +34,7 @@ gem "types_from_serializers"
 gem "factory_bot", ">= 6.4"
 gem "factory_bot_rails", ">= 6.4"
 gem "ipaddress_2", ">= 0.14.0"
-gem "countries", ">= 4.2"
+gem "countries", ">= 6.0"
 gem "js-routes", ">= 2.2"
 gem "net-ldap", ">= 0.18.0"
 gem "foreman", ">= 0.87.2"
@@ -73,6 +72,7 @@ group :development, :test do
 
   # File annotation
   gem "chusaku", "~> 1.2", require: false
+  gem "annotate", "~> 3.2", require: false
 end
 
 group :development do

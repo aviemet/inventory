@@ -1,19 +1,39 @@
 import React from 'react'
-import Field from '../Field'
-import SwitchInput, { type ISwitchProps } from '@/Components/Inputs/Switch'
+import Field from '../Components/Field'
+import SwitchInput, { type SwitchProps } from '@/Components/Inputs/Switch'
 import { NestedObject, useInertiaInput } from 'use-inertia-form'
 import ConditionalWrapper from '@/Components/ConditionalWrapper'
-import { type IFormInputProps } from '.'
+import { type InputConflicts, type BaseFormInputProps } from '.'
 
-interface IFormSwitchProps<TForm extends NestedObject = NestedObject>
+interface FormSwitchProps<TForm extends NestedObject = NestedObject>
 	extends
-	Omit<ISwitchProps, 'onBlur'|'onChange'|'name'>,
-	IFormInputProps<boolean, TForm> {}
+	Omit<SwitchProps, InputConflicts>,
+	BaseFormInputProps<boolean, TForm> {}
 
 const FormSwitchComponent = <TForm extends NestedObject = NestedObject>(
-	{ name, onChange, onBlur, id, required, model, field = true, ...props }: IFormSwitchProps<TForm>,
+	{
+		name,
+		onChange,
+		onBlur,
+		onFocus,
+		id,
+		required,
+		model,
+		field = true,
+		wrapperProps,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+		...props
+	}: FormSwitchProps<TForm>,
 ) => {
-	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean, TForm>({ name, model })
+	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean, TForm>({
+		name,
+		model,
+		errorKey,
+		defaultValue,
+		clearErrorsOnChange,
+	})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.checked)
@@ -26,16 +46,19 @@ const FormSwitchComponent = <TForm extends NestedObject = NestedObject>(
 	}
 
 	return (
-		<ConditionalWrapper wrapper={ children => (
-			<Field
-				type="checkbox"
-				required={ required }
-				errors={ !!error }
-			>
-				{ children }
-			</Field>
-		) }
-		condition={ field }
+		<ConditionalWrapper
+
+			condition={ field }
+			wrapper={ children => (
+				<Field
+					type="checkbox"
+					required={ required }
+					errors={ !!error }
+					{ ...wrapperProps }
+				>
+					{ children }
+				</Field>
+			) }
 		>
 			<SwitchInput
 				id={ id || inputId }
@@ -45,6 +68,7 @@ const FormSwitchComponent = <TForm extends NestedObject = NestedObject>(
 				value={ name }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
+				onFocus={ e => onFocus?.(e.target.checked, form) }
 				error={ error }
 				wrapper={ false }
 				{ ...props }

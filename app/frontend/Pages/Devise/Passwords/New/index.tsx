@@ -3,12 +3,12 @@ import { Field, Form, TextInput, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
 import { Heading, Tile } from '@/Components'
 
-type TPasswordsNewFormData = {
+type PasswordsNewFormData = {
 	email: string
 }
 
 const PasswordsNew = () => {
-	const defaultData: TPasswordsNewFormData = {
+	const defaultData: PasswordsNewFormData = {
 		email: '',
 	}
 

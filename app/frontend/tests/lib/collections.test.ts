@@ -1,5 +1,5 @@
-import { NestedObject, NestedURLSearchParams, coerceArray, exclude } from '@/lib'
 import { describe, expect, test } from 'vitest'
+import { NestedObject, NestedURLSearchParams, coerceArray, exclude } from '@/lib'
 
 describe('coerceArray', () => {
 	test('returns a given value wrapped in an array', () => {

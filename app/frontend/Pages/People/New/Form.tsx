@@ -7,18 +7,17 @@ import {
 	Checkbox,
 	FormConsumer,
 } from '@/Components/Form'
-import { DepartmentsDropdown } from '@/Components/Dropdowns'
-import { type UseFormProps } from 'use-inertia-form'
-import PeopleDropdown from '@/Components/Dropdowns/PeopleDropdown'
+import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/Features/Dropdowns'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TPersonFormData = {
+type PersonFormData = {
 	person: Schema.PeopleFormData
 }
 
-export interface IPersonFormProps {
+export interface PersonFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TPersonFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<PersonFormData>) => boolean|void
 	person: Schema.PeopleFormData
 }
 
@@ -27,7 +26,7 @@ const PersonForm = ({
 	method = 'post',
 	onSubmit,
 	person,
-}: IPersonFormProps) => {
+}: PersonFormProps) => {
 
 	return (
 		<Form
@@ -55,16 +54,16 @@ const PersonForm = ({
 
 			<TextInput name="employee_number" label="Employee #" />
 
-			<DepartmentsDropdown />
+			<FormDepartmentsDropdown />
 
 			<TextInput name="job_title" label="Job Title" />
 
-			<PeopleDropdown
+			<FormPeopleDropdown
 				label="Manager"
 				name="manager_id"
 			/>
 
-			<FormConsumer>{ ({ data }: UseFormProps<TPersonFormData>) => (
+			<FormConsumer>{ ({ data }: UseFormProps<PersonFormData>) => (
 				<TextInput
 					name="contact.emails[0].email"
 					label="Email"
@@ -84,4 +83,4 @@ const PersonForm = ({
 	)
 }
 
-export default React.memo(PersonForm)
+export default PersonForm

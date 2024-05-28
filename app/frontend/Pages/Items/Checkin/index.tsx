@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import { Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
-import { LocationsDropdown } from '@/Components/Dropdowns'
-import StatusLabelsDropdown from '@/Components/Dropdowns/StatusLabelsDropdown'
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
+import { FormLocationsDropdown, FormStatusLabelsDropdown } from '@/Features/Dropdowns'
 import * as classes from './Checkin.css'
 
-interface ICheckinItemsProps {
+interface CheckinItemsProps {
 	assignment: Schema.AssignmentsEdit
 	item: Schema.ItemsEdit
 	locations: Schema.LocationsOptions[]
 	status_labels: Schema.StatusLabelsOptions[]
 }
 
-const Checkin = ({ assignment, item, locations, status_labels }: ICheckinItemsProps) => {
+const Checkin = ({ assignment, item, locations, status_labels }: CheckinItemsProps) => {
 	const [itemName, setItemName] = useState(item.name)
 	const title = 'Check In Item'
 
@@ -63,11 +62,11 @@ const Checkin = ({ assignment, item, locations, status_labels }: ICheckinItemsPr
 						required
 					/>
 
-					<LocationsDropdown />
+					<FormLocationsDropdown />
 
-					<StatusLabelsDropdown />
+					<FormStatusLabelsDropdown />
 
-					<DateTime
+					<DateTimeInput
 						label="Returned At"
 						name="returned_at"
 						required

@@ -7,18 +7,18 @@ import {
 	Submit,
 	FormGroup,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Components/Dropdowns'
-import { type UseFormProps } from 'use-inertia-form'
-import { coerceArray } from '../../lib/collections'
+import { FormModelsDropdown, FormVendorsDropdown, FormLocationsDropdown } from '@/Features/Dropdowns'
+import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
-type TComponentFormData = {
+type ComponentFormData = {
 	component: Schema.ComponentsFormData
 }
 
-export interface IComponentFormProps {
+export interface ComponentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TComponentFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ComponentFormData>) => boolean|void
 	component: Schema.ComponentsFormData
 }
 
@@ -27,7 +27,7 @@ const ComponentForm = ({
 	method = 'post',
 	onSubmit,
 	component,
-}: IComponentFormProps) => {
+}: ComponentFormProps) => {
 	return (
 		<Form
 			model="component"
@@ -39,7 +39,7 @@ const ComponentForm = ({
 			<TextInput name="name" label="Name" required autoFocus />
 
 			<FormGroup legend="Component Details">
-				<ModelsDropdown initialData={ coerceArray(component?.model) } />
+				<FormModelsDropdown initialData={ coerceArray(component?.model) } />
 
 				<TextInput name="serial" label="Serial" />
 
@@ -51,13 +51,13 @@ const ComponentForm = ({
 			</FormGroup>
 
 			<FormGroup legend="Purchase Details">
-				<VendorsDropdown initialData={ coerceArray(component?.vendor) } />
+				<FormVendorsDropdown initialData={ coerceArray(component?.vendor) } />
 
 				<TextInput name="cost" label="Cost" />
 			</FormGroup>
 
 			<FormGroup legend="Usage Details">
-				<LocationsDropdown
+				<FormLocationsDropdown
 					label="Default Location"
 					name="default_location_id"
 					initialData={ coerceArray(component?.default_location) }
@@ -76,4 +76,4 @@ const ComponentForm = ({
 	)
 }
 
-export default React.memo(ComponentForm)
+export default ComponentForm

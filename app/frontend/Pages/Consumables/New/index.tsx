@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import ConsumableForm from '../Form'
 import { Routes } from '@/lib'
 
-interface INewConsumableProps {
+interface NewConsumableProps {
 	consumable: Schema.ConsumablesFormData
 }
 
-const NewConsumable = ({ consumable }: INewConsumableProps) => {
+const NewConsumable = ({ consumable }: NewConsumableProps) => {
 	const title = 'New Consumable'
 
 	return (

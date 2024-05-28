@@ -1,12 +1,12 @@
 import React from 'react'
 import { Box, Heading, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
-import { DateTime, Form, TextInput, Submit, Textarea } from '@/Components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Components/Form/Components'
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
 
 import { omit } from 'lodash'
 
-interface ICheckoutItemProps {
+interface CheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
 	item: Schema.ItemsEdit
 	items: Schema.ItemsOptions[]
@@ -14,7 +14,7 @@ interface ICheckoutItemProps {
 	locations: Schema.LocationsOptions[]
 }
 
-const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
+const Checkout = ({ assignment, item, ...models }: CheckoutItemProps) => {
 	const title = 'Checkout Item'
 
 	return (
@@ -66,15 +66,16 @@ const Checkout = ({ assignment, item, ...models }: ICheckoutItemProps) => {
 
 					<AssignToableDropdown { ...models } options={ ['Person', 'Item', 'Location'] } />
 
-					<AssignmentLocationDropdown locations={ models.locations } />
+					<AssignmentLocationDropdown required />
 
-					<DateTime
+					<DateTimeInput
 						label="Assigned At"
 						name="assigned_at"
 						required
 					/>
 
-					<DateTime
+					<DateTimeInput
+						clearable
 						label="Expected At"
 						name="expected_at"
 					/>

@@ -1,18 +1,35 @@
 import { Routes } from '@/lib'
 import axios from 'axios'
-import { mutation } from '..'
-import IUserPreferences from '@/types/IUserPreferences'
+import { UserPreferences } from '@/types'
+import { useMutation, useQueryClient  } from '@tanstack/react-query'
+import { type ReactMutationFunction } from '..'
 
-type TUpdateUserPreferencesProps = {
-	id: string|number
-	data: Partial<IUserPreferences>
+type UserPreferencesParams = {
+	id: string | number
+	preferences: UserPreferences
 }
 
-export const useUpdateUserPreferences = () => {
-	return mutation(
-		['users', 'preferences'],
-		(data: TUpdateUserPreferencesProps) => axios.patch(Routes.apiUpdateUserPreferences(data.id), {
-			user: { user_preferences: data.data },
-		}),
-	)
+export const useUpdateUserPreferences: ReactMutationFunction<Schema.User, UserPreferencesParams> = (
+	params,
+	options,
+) => {
+	const queryClient = useQueryClient()
+
+	return useMutation({
+		mutationFn: async ({ id, preferences }) => {
+			const res = await axios.patch(Routes.apiUpdateUserPreferences(id), {
+				user: { user_preferences: preferences },
+			})
+			if(res.statusText !== 'OK') {
+				throw new Error('Failed to update user preferences')
+			}
+			return res.data
+		},
+		mutationKey: ['user', params.id, 'preferences'],
+		...options,
+		onSuccess: (data, variables) => {
+			queryClient.invalidateQueries({ queryKey: ['user', params.id, 'preferences'] })
+			options?.onSuccess?.(data, variables)
+		},
+	})
 }

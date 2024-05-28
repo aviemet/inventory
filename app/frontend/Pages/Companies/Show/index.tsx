@@ -3,11 +3,11 @@ import { Heading, Page, Section } from '@/Components'
 import { ContactDetails } from '@/Features/Contactable'
 import { Routes } from '@/lib'
 
-interface IShowCompanyProps {
+interface ShowCompanyProps {
 	company: Schema.CompaniesShow
 }
 
-const Show = ({ company }: IShowCompanyProps) => {
+const Show = ({ company }: ShowCompanyProps) => {
 	const title = company.name
 
 	return (

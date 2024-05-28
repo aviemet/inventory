@@ -1,13 +1,16 @@
 import React from 'react'
-import { CurrencyInput, TextInput } from '@/Components/Inputs'
 import { Button, Box, Group, Flex, Link } from '@/Components'
-import { CrossIcon, SearchIcon } from '@/Components/Icons'
+import { CurrencyInput, TextInput } from '@/Components/Inputs'
 import { useAdvancedSearch } from '@/Components/Table'
-import { CategoriesDropdown } from '@/Components/Dropdowns'
-import ManufacturersDropdown from '@/Components/Dropdowns/ManufacturersDropdown'
-import VendorsDropdown from '@/Components/Dropdowns/VendorsDropdown'
-import DepartmentsDropdown from '@/Components/Dropdowns/DepartmentsDropdown'
-import ModelsDropdown from '@/Components/Dropdowns/ModelsDropdown'
+import { CrossIcon, SearchIcon } from '@/Components/Icons'
+import {
+	DepartmentsDropdown,
+	ManufacturersDropdown,
+	VendorsDropdown,
+	ModelsDropdown,
+	CategoriesDropdown,
+	StatusLabelsDropdown,
+} from '@/Features/Dropdowns'
 import { SearchDateInput, SearchDateTypeInput } from '@/Components/Table/SearchInput/AdvancedSearch/DateRangeInputs'
 
 const AdvancedItemsSearch = () => {
@@ -80,7 +83,7 @@ const AdvancedItemsSearch = () => {
 						<CurrencyInput
 							label="Cost"
 							{ ...inputProps('cost') }
-							onChange={ e => setInputValue('cost', e.target.value) }
+							onChange={ value => setInputValue('cost', value) }
 						/>
 					</Group>
 				</Box>

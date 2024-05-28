@@ -1,16 +1,7 @@
-class Models::IndexSerializer < ApplicationSerializer
-  object_as :model
-
-  identifier :slug
-
+class Models::IndexSerializer < ModelSerializer
   attributes(
     :id,
     :slug,
-    :name,
-    :model_number,
-    :notes,
-    :category_id,
-    :manufacturer_id,
     :created_at,
     :updated_at,
   )
@@ -20,6 +11,6 @@ class Models::IndexSerializer < ApplicationSerializer
     model.types.size
   end
 
-  belongs_to :manufacturer, serializer: ManufacturerSerializer
-  belongs_to :category, serializer: CategorySerializer
+  belongs_to :manufacturer, serializer: Manufacturers::BasicSerializer
+  belongs_to :category, serializer: Categories::OptionsSerializer
 end

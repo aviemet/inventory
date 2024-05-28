@@ -2,11 +2,11 @@ import { Heading, Link, Section, Table, Text } from '@/Components'
 import { Routes } from '@/lib'
 import React from 'react'
 
-interface IShowUserProps {
+interface ShowUserProps {
 	user: Schema.UsersShow
 }
 
-const ShowUser = ({ user }: IShowUserProps) => {
+const ShowUser = ({ user }: ShowUserProps) => {
 	return (
 		<>
 			<Section>
@@ -15,9 +15,9 @@ const ShowUser = ({ user }: IShowUserProps) => {
 				<Table>
 					<Table.Head>
 						<Table.Row>
-							<Table.Cell>Person</Table.Cell>
-							<Table.Cell>Company</Table.Cell>
-							<Table.Cell>Roles</Table.Cell>
+							<Table.HeadCell>Person</Table.HeadCell>
+							<Table.HeadCell>Company</Table.HeadCell>
+							<Table.HeadCell>Roles</Table.HeadCell>
 						</Table.Row>
 					</Table.Head>
 					<Table.Body>

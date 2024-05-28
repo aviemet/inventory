@@ -1,25 +1,25 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
-import { type UseFormProps } from 'use-inertia-form'
-import { LocationsDropdown } from '@/Components/Dropdowns'
-import CurrenciesDropdown from '@/Components/Dropdowns/CurrenciesDropdown'
+import { FormLocationsDropdown, FormCurrenciesDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
+import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { ComboboxItem } from '@mantine/core'
 
-export type TLocationFormData = {
+export type LocationFormData = {
 	location: Schema.LocationsFormData
 }
 
-export interface ILocationFormProps {
+export interface LocationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TLocationFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<LocationFormData>) => boolean|void
 	location?: Schema.LocationsFormData
 }
 
 const emptyLocation: Schema.LocationsFormData = {
 	name: '',
 	currency: '',
-	parent_id: undefined,
+	parent_id: NaN,
 }
 
 const LocationForm = ({
@@ -27,7 +27,7 @@ const LocationForm = ({
 	method = 'post',
 	onSubmit,
 	location = emptyLocation,
-}: ILocationFormProps) => {
+}: LocationFormProps) => {
 	return (
 		<Form
 			model="location"
@@ -38,12 +38,14 @@ const LocationForm = ({
 		>
 			<TextInput name="name" label="Location Name" required autoFocus />
 
-			<CurrenciesDropdown />
+			<FormCurrenciesDropdown />
 
-			<LocationsDropdown
+			<FormLocationsDropdown
 				label="Parent Location"
 				name="parent_id"
-				filter={ locations => locations.id !== location?.id }
+				filter={ location?.id === undefined ? undefined : ({ options }) => (options as ComboboxItem[]).filter((option) => {
+					return option.value !== String(location.id)
+				}) }
 				initialData={ coerceArray(location?.parent) }
 			/>
 
@@ -54,4 +56,4 @@ const LocationForm = ({
 	)
 }
 
-export default React.memo(LocationForm)
+export default LocationForm

@@ -57,6 +57,7 @@ namespace :api do
     [:companies, :departments, :locations, :categories, :status_labels, :assets, :items, :components, :accessories, :consumables, :licenses, :people, :vendors, :models, :manufacturers, :networks, :orders, :contracts, :documentations].each do |model|
       get model.to_s => "#{model}#options", as: "#{model}_options"
     end
+    get "categories/:category_type" => "categories#options", as: "category_options"
   end
 
   ## SETTINGS ##

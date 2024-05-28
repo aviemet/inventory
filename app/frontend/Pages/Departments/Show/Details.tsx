@@ -4,12 +4,12 @@ import { EditIcon } from '@/Components/Icons'
 import { Routes } from '@/lib'
 import React from 'react'
 
-interface IDetailsProps {
+interface DetailsProps {
 	title: string
-	department: Schema.Department
+	department: Schema.DepartmentsShow
 }
 
-const Details = ({ title, department }: IDetailsProps) => {
+const Details = ({ title, department }: DetailsProps) => {
 
 	return (
 		<Section>

@@ -1,4 +1,4 @@
-class Vendors::IndexSerializer < ApplicationSerializer
+class Vendors::IndexSerializer < Vendors::CountsSerializer
   object_as :vendor
 
   identifier :slug
@@ -13,10 +13,10 @@ class Vendors::IndexSerializer < ApplicationSerializer
   )
 
   has_one :contact, serializer: ContactSerializer
-  has_many :activities, serializer: ActivitySerializer
-  has_many :contracts, serializer: ContractSerializer
-  has_many :items, serializer: ItemSerializer
+
   has_many :accessories, serializer: AccessorySerializer
-  has_many :consumables, serializer: ConsumableSerializer
   has_many :components, serializer: ComponentSerializer
+  has_many :contracts, serializer: ContractSerializer
+  has_many :consumables, serializer: ConsumableSerializer
+  has_many :items, serializer: ItemSerializer
 end

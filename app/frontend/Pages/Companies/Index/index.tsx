@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import CompaniesTable from '../Table'
 
-interface ICompaniesIndexProps {
+interface CompaniesIndexProps {
 	companies: Schema.CompaniesIndex[]
 	pagination: Schema.Pagination
 }
 
-const CompaniesIndex = ({ companies, pagination }: ICompaniesIndexProps) => {
+const CompaniesIndex = ({ companies, pagination }: CompaniesIndexProps) => {
 	return (
 		<IndexPageTemplate
 			title="Companies"
@@ -18,7 +18,7 @@ const CompaniesIndex = ({ companies, pagination }: ICompaniesIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.companies() }
 			menuOptions={ [
-				{ label: 'New Company', href: Routes.newCompany(), icon: NewIcon },
+				{ label: 'New Company', href: Routes.newCompany(), icon: <NewIcon /> },
 			] }
 		>
 			<CompaniesTable />

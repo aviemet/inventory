@@ -73,9 +73,4 @@ export const themeObject = {
 
 export const theme = mergeMantineTheme(DEFAULT_THEME, createTheme(themeObject))
 
-export const vars = themeToVars(mergeMantineTheme(theme, {
-	// Overrides the primary color key for css vars. Values are set in UiFrameworkProvider
-	colors: {
-		primary: DEFAULT_THEME.colors[defaultColor],
-	},
-}))
+export const vars = themeToVars(mergeMantineTheme(theme))

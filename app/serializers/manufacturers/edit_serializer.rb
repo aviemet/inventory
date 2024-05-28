@@ -1,7 +1,6 @@
-class Manufacturers::EditSerializer < ApplicationSerializer
-  object_as :manufacturer
-
-  identifier :slug
-
-  attributes :id, :slug, :name
+class Manufacturers::EditSerializer < Manufacturers::FormDataSerializer
+  attributes(
+    :id,
+    :slug,
+  )
 end

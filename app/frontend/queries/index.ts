@@ -1,44 +1,55 @@
 import {
-	useMutation,
-	useQuery,
 	type UseQueryOptions,
 	type UseMutationOptions,
+	type UseQueryResult,
+	type UseMutationResult,
 } from '@tanstack/react-query'
 
-// Re-export types for convenience in other files
-export type ReactQueryOptions<T> = UseQueryOptions<T>
-export type ReactMutationOptions<T> = UseMutationOptions<T>
+/**
+ * Query types
+ */
 
-export const query = <T>(
-	key: (string|number)[],
-	fn: () => Promise<T>,
-	options?: ReactQueryOptions<T>,
-) => {
-	const queryOptions: UseQueryOptions<T> = {
-		staleTime: 0,
-		...options,
-	}
+// Exclude the functions which will be called in the query definitions
+interface LimitedQueryOptions<T> extends Omit<UseQueryOptions<T>, 'queryKey'|'queryFn'> {}
 
-	return useQuery<T>({
-		queryKey: key,
-		queryFn: fn,
-		...queryOptions,
-	})
+type ReactQueryFunctionBasic<T> = (options?: LimitedQueryOptions<T>) => UseQueryResult<T, Error>;
+type ReactQueryFunctionWithParams<T, P extends Record<string, string|number|string[]>> = (params: P, options?: LimitedQueryOptions<T>) => UseQueryResult<T, Error>;
+
+export type ReactQueryFunction<T, P = undefined> =
+	P extends undefined
+		? ReactQueryFunctionBasic<T>
+		: P extends Record<string, string|number|string[]>
+			? ReactQueryFunctionWithParams<T, P>
+			: never;
+
+/**
+ * Mutation types
+ */
+
+interface LimitedMutationOptions<T, P> extends Omit<UseMutationOptions<T, unknown, P, unknown>, 'mutationKey'|'onSuccess'> {
+	onSuccess?: (data: T, variables: P) => void
 }
 
-export const mutation = <T, R = unknown>(
-	key: (string|number)[],
-	fn: (data: T) => Promise<R>,
-	options?: UseMutationOptions<R, unknown, T, unknown>,
-) => {
-	const queryOptions: UseMutationOptions<R, unknown, T, unknown> = {
-		cacheTime: 5000,
-		...options,
-	}
+export type ReactMutationFunction<T, P extends Record<string, unknown>> = (
+	params: P,
+	options?: LimitedMutationOptions<T, P>
+) => UseMutationResult<T, unknown, P, unknown>;
 
-	return useMutation({
-		mutationKey: key,
-		mutationFn: fn,
-		...queryOptions,
-	})
-}
+/**
+ * Folder exports
+ */
+
+export * from './assets'
+export * from './categories'
+export * from './currencies'
+export * from './departments'
+export * from './documentations'
+export * from './items'
+export * from './locations'
+export * from './manufacturers'
+export * from './models'
+export * from './people'
+export * from './searches'
+export * from './statusLabels'
+export * from './users'
+export * from './vendors'

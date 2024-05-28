@@ -1,13 +1,6 @@
-class Companies::EditSerializer < ApplicationSerializer
-  object_as :company
-
+class Companies::EditSerializer < Companies::FormDataSerializer
   attributes(
     :id,
     :slug,
-    :name,
-    :default_currency,
-    :settings,
   )
-
-  has_one :contact, serializer: ContactSerializer
 end

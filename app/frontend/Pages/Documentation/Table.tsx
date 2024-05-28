@@ -1,18 +1,19 @@
 import React from 'react'
 import { Table, Link } from '@/Components'
 import { EditButton } from '@/Components/Button'
-import { type ITableProps } from '@/Components/Table/Table'
+import { type TableProps } from '@/Components/Table/Table'
 import { Routes } from '@/lib'
 
-const DocumentationTable = (props: ITableProps) => {
+const DocumentationTable = (props: TableProps) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.Cell sort="title">Title</Table.Cell>
-					<Table.Cell sort="slug">In Reference To</Table.Cell>
-
-					<Table.Cell className="actions">Actions</Table.Cell>
+					<Table.HeadCell sort="title">Title</Table.HeadCell>
+					<Table.HeadCell sort="documentable_name">In Reference To</Table.HeadCell>
+					<Table.HeadCell sort="documentable_type">Referenced Type</Table.HeadCell>
+					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
+					<Table.HeadCell className="actions">Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 			<Table.Body>
@@ -23,7 +24,15 @@ const DocumentationTable = (props: ITableProps) => {
 						</Table.Cell>
 
 						<Table.Cell>
-							<Link href={ doc.route }>{ doc.slug }</Link>
+							<Link href={ doc.route }>{ doc.documentable_name }</Link>
+						</Table.Cell>
+
+						<Table.Cell>
+							{ doc.documentable_type }
+						</Table.Cell>
+
+						<Table.Cell>
+							{ doc.category.name }
 						</Table.Cell>
 
 						<Table.Cell>

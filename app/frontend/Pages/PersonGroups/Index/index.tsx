@@ -4,12 +4,12 @@ import { IndexPageTemplate } from '@/Features'
 import { NewIcon } from '@/Components/Icons'
 import GroupsTable from '../Table'
 
-interface IGroupIndexProps {
+interface GroupIndexProps {
 	person_groups: Schema.PersonGroupsIndex[]
 	pagination: Schema.Pagination
 }
 
-const GroupIndex = ({ person_groups, pagination }: IGroupIndexProps) => {
+const GroupIndex = ({ person_groups, pagination }: GroupIndexProps) => {
 	const title = 'Groups'
 
 	return (
@@ -25,7 +25,7 @@ const GroupIndex = ({ person_groups, pagination }: IGroupIndexProps) => {
 				{ title, href: window.location.href },
 			] }
 			menuOptions={ [
-				{ label: 'Create New Group', href: Routes.newPersonGroup(), icon: NewIcon },
+				{ label: 'Create New Group', href: Routes.newPersonGroup(), icon: <NewIcon /> },
 			] }
 		>
 			<GroupsTable />
