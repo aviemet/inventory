@@ -54,25 +54,21 @@ class OrdersController < ApplicationController
   # @route PATCH /orders/:id (order)
   # @route PUT /orders/:id (order)
   def update
-    respond_to do |format|
-      if order.update(order_params)
-        format.html { redirect_to order, notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :ok, location: order }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: order.errors, status: :unprocessable_entity }
-      end
+    authorize order
+
+    if order.update(order_params)
+      redirect_to order, notice: 'Purchase order was successfully updated'
+    else
+      redirect_to edit_order_path, inertia: { errors: order.errors }
     end
   end
 
   # @route DELETE /orders (orders)
   # @route DELETE /orders/:id (order)
   def destroy
+    authorize order
     order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to orders_url, notice: 'Purchase order was successfully destroyed.'
   end
 
   private

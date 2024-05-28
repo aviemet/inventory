@@ -3,8 +3,10 @@ import {
 	Form,
 	Textarea,
 	Submit,
+	TextInput,
+	FormConsumer,
 } from '@/Components/Form'
-import { VendorsDropdown } from '@/Features/Dropdowns'
+import { FormVendorsDropdown } from '@/Features/Dropdowns'
 import { Menu } from '@/Components'
 import { PlusCircleIcon } from '@/Components/Icons'
 import { coerceArray } from '@/lib'
@@ -29,16 +31,15 @@ const OrderForm = ({ to, method = 'post', onSubmit, order }: OrderFormProps) => 
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
+			filter={ ['cost', 'vendor'] }
 		>
-			<VendorsDropdown initialData={ coerceArray(order?.vendor) } />
+			<FormConsumer>{ ({ data }) => {
+				console.log({ data })
+				return <></>
+			} }</FormConsumer>
+			<TextInput name="number" label="Order Number" />
 
-			<Menu position="bottom-end">
-				<Menu.Target color="primary" variant="filled" icon={ <PlusCircleIcon /> } />
-				<Menu.Dropdown>
-					<Menu.Item>Thing</Menu.Item>
-				</Menu.Dropdown>
-			</Menu>
-
+			<FormVendorsDropdown initialData={ coerceArray(order?.vendor) } />
 
 			<Textarea name="notes" label="Notes" />
 

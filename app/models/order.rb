@@ -65,9 +65,9 @@ class Order < ApplicationRecord
   has_one :person, through: :user
   has_many :purchases, dependent: :nullify
 
-  scope :includes_associated, -> { includes([:purchase, :item, :accessory, :consumable, :component, :user, :vendor]) }
+  scope :includes_associated, -> { includes([:purchases, :user, :vendor]) }
 
-  def cost_cents
+  def cost
     purchases.sum(&:cost)
   end
 end
