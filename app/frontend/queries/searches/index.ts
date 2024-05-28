@@ -11,6 +11,7 @@ export const useGetSearchResults: ReactQueryFunction<
 	return useQuery({
 		queryKey: ['search'],
 		queryFn: async () => {
+			console.log({ route: Routes.apiSearches({ search: searchParams }) })
 			const res = await axios.get(Routes.apiSearches({ search: searchParams }))
 			return res.data
 		},
