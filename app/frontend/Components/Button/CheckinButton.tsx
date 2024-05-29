@@ -3,6 +3,7 @@ import { Link } from '@/Components'
 import { type LinkProps } from '../Link'
 import { CheckinIcon } from '@/Components/Icons'
 import { Tooltip, useMantineTheme } from '@mantine/core'
+import { useContrastingTextColor } from '@/lib/hooks'
 
 interface CheckinButtonProps extends Omit<LinkProps, 'children'> {
 	href: string
@@ -38,7 +39,7 @@ const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: Chec
 				aria-label={ usedLabel }
 				{ ...finalProps }
 			>
-				<CheckinIcon />
+				<CheckinIcon color={ useContrastingTextColor(checkinButtonColor) } />
 			</Link>
 		</Tooltip>
 	)

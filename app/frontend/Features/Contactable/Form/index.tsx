@@ -6,11 +6,7 @@ import Phone from './Phone'
 import Email from './Email'
 import Website from './Website'
 
-interface ContactableFormProps {
-	contact: Schema.ContactsFormData
-}
-
-const ContactableForm = ({ contact }: ContactableFormProps) => {
+const ContactableForm = () => {
 	return (
 		<FieldsFor model="contact" legend="Contact Details">
 

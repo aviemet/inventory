@@ -3,6 +3,7 @@ import { Link } from '@/Components'
 import { type LinkProps } from '../Link'
 import { CheckoutIcon } from '@/Components/Icons'
 import { Tooltip, useMantineTheme } from '@mantine/core'
+import { useContrastingTextColor } from '@/lib/hooks'
 
 interface CheckoutButtonProps extends Omit<LinkProps, 'children'> {
 	href: string
@@ -31,7 +32,7 @@ const CheckoutButton = ({ href, label, disabled, tooltipMessage, ...props }: Che
 				aria-label={ usedLabel }
 				{ ...props }
 			>
-				<CheckoutIcon />
+				<CheckoutIcon color={ useContrastingTextColor(checkoutButtonColor) } />
 			</Link>
 		</Tooltip>
 	)

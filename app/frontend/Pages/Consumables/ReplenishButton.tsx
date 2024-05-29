@@ -8,6 +8,7 @@ import { Routes } from '@/lib'
 import axios from 'axios'
 import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
+import { useContrastingTextColor } from '@/lib/hooks'
 
 const defaultData = { consumable: { qty: 1 } }
 
@@ -49,6 +50,8 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 		return false
 	}
 
+	const textColor = useContrastingTextColor(replenishButtonColor)
+
 	return (
 		<>
 			<Modal
@@ -76,10 +79,11 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 				position="left"
 				transitionProps={ { transition: 'fade' } }
 				color={ replenishButtonColor }
+				c={ textColor }
 				aria-label={ `Replenish ${consumable.name}` }
 			>
 				<Button color={ replenishButtonColor } { ...props } size="sm" onClick={ () => setOpened(true) }>
-					<ReplenishIcon />
+					<ReplenishIcon color={ textColor } />
 				</Button>
 			</Tooltip>
 		</>

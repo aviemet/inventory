@@ -3,6 +3,7 @@ import { Link, Tooltip } from '@/Components'
 import { type LinkProps } from '../Link'
 import { TrashIcon } from '@/Components/Icons'
 import { useMantineTheme } from '@mantine/core'
+import { useContrastingTextColor } from '@/lib/hooks'
 
 interface DeleteButtonProps extends Omit<LinkProps, 'children'> {
 	label?: string
@@ -23,7 +24,7 @@ const DeleteButton = ({ href, label, tooltipMessage }: DeleteButtonProps) => {
 			color={ deleteButtonColor }
 		>
 			<Link as="button" href={ href } aria-label={ `Delete ${label}` }>
-				<TrashIcon />
+				<TrashIcon color={ useContrastingTextColor(deleteButtonColor) } />
 			</Link>
 		</Tooltip>
 	)

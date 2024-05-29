@@ -137,7 +137,14 @@ export const searchInput = css`
 	input {
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
+		border-top-left-radius: ${vars.radius.sm};
+		border-bottom-left-radius: ${vars.radius.sm};
 	}
+`
+
+export const columnPickerButton = css`
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 `
 
 export const pagination = css`

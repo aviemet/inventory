@@ -127,6 +127,12 @@ export const fieldset = css`
 
 export const dynamicInputItem = css`
 	.mantine-Paper-root {
-		background-color: ${vars.colors.gray[8] }
+		${vars.lightSelector} {
+			background-color: ${vars.colors.gray[0] }
+		}
+
+		${vars.darkSelector} {
+			background-color: ${vars.colors.gray[8] }
+		}
 	}
 `

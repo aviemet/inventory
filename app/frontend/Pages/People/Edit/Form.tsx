@@ -15,6 +15,7 @@ import { useBooleanToggle } from '@/lib/hooks'
 import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { ContactForm } from '@/Features'
 
 type PersonFormData = {
 	person: Schema.PeopleEdit
@@ -212,6 +213,8 @@ const PersonForm = ({
 
 					</FieldsFor>
 				</FormGroup> }
+
+				<ContactForm />
 
 				<Grid.Col>
 					<Submit>
