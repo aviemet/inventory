@@ -72,13 +72,13 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 			</Modal>
 			<Tooltip
 				withArrow
-				label={ tooltipMessage || 'Replenish' }
+				label={ tooltipMessage || `Replenish ${consumable.name}` }
 				position="left"
 				transitionProps={ { transition: 'fade' } }
 				color={ replenishButtonColor }
 				aria-label={ `Replenish ${consumable.name}` }
 			>
-				<Button color={ replenishButtonColor } { ...props } size="sm" p={ 0 } onClick={ () => setOpened(true) }>
+				<Button color={ replenishButtonColor } { ...props } size="sm" onClick={ () => setOpened(true) }>
 					<ReplenishIcon />
 				</Button>
 			</Tooltip>

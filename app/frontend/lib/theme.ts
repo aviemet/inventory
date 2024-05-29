@@ -74,6 +74,7 @@ export const themeObject = {
 			replenishButtonColor: 'yellow',
 			checkoutButtonColor: 'pink',
 			checkinButtonColor: 'cyan',
+			deleteButtonColor: 'red',
 		},
 	},
 }

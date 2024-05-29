@@ -69,9 +69,10 @@ declare module '@mantine/core' {
 			sortButtonWidth: number | string
 		}
 		colors: {
-			replenishButtonColor: string
-			checkoutButtonColor: string
-			checkinButtonColor: string
+			replenishButtonColor: MantineColor
+			checkoutButtonColor: MantineColor
+			checkinButtonColor: MantineColor
+			deleteButtonColor: MantineColor
 		}
 	}
 

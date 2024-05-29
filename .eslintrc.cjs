@@ -96,4 +96,14 @@ module.exports = {
 		'comma-dangle': ['error', 'always-multiline'],
 		'react-hooks/exhaustive-deps': 0,
 	},
+	overrides: [
+		{
+			files: ['*.d.ts'],
+			rules: {
+				'no-unused-vars': 'off',
+				'@typescript-eslint/member-delimiter-style': 'off',
+				'@typescript-eslint/indent': 'off',
+			},
+		},
+	],
 }

@@ -63,7 +63,10 @@ const ConsumablesTable = (props: TableProps) => {
 									label={ consumable.name }
 								/>
 								<ReplenishButton consumable={ consumable } />
-								<EditButton href={ Routes.editConsumable(consumable) } label={ consumable.name } />
+								<EditButton
+									href={ Routes.editConsumable(consumable) }
+									label={ consumable.name }
+								/>
 							</Group>
 						</Table.Cell>
 
