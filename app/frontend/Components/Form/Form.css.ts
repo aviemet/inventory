@@ -124,3 +124,9 @@ export const fieldset = css`
 		flex: 1;
 	}
 `
+
+export const dynamicInputItem = css`
+	.mantine-Paper-root {
+		background-color: ${vars.colors.gray[8] }
+	}
+`

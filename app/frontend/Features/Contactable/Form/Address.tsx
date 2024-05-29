@@ -1,63 +1,48 @@
-import React, { useState } from 'react'
-import { Button, Group } from '@/Components'
-import { FormGroup, TextInput } from '@/Components/Form'
-import { PlusCircleIcon, MinusCircleIcon } from '@/Components/Icons'
+import React from 'react'
+import { Grid } from '@/Components'
+import { DynamicInputs, Textarea, TextInput } from '@/Components/Form'
+import { FormCategoriesDropdown } from '@/Features/Dropdowns'
 
 const Address = () => {
-	const [addressCount, setAddressCount] = useState(1)
-
-	const addInputGroup = () => {
-		setAddressCount(count => count + 1)
-	}
-
-	const removeInputGroup = () => {
-		if(addressCount === 0) return
-
-		setAddressCount(count => count - 1)
-	}
-
 	return (
-		<>
-			<Group justify="space-between">
-				<div>Address</div>
-				<Button
-					onClick={ addInputGroup }
-					size='xs'
-					mb={ 4 }
-				>
-					<PlusCircleIcon />
-				</Button>
-			</Group>
+		<DynamicInputs model="address" label="Addresses" emptyData={ {
+			address: '',
+			address_2: '',
+			city: '',
+			region: '',
+			postal: '',
+			notes: '',
+			category_id: '',
+		} }>
+			<Grid.Col>
+				<TextInput name="address" label="Address" />
+			</Grid.Col>
 
-			{ Array(addressCount).fill('').map((_, i) => (
-				<FormGroup key={ i }>
-					<Group>
-						<TextInput name="type" label="Type" />
+			<Grid.Col>
+				<TextInput name="address_2" label="Address 2" />
+			</Grid.Col>
 
-						<TextInput name="country" label="Country" />
-					</Group>
+			<Grid.Col>
+				<TextInput name="city" label="City" />
+			</Grid.Col>
 
-					<TextInput name={ `address_${i}` } label="Address" />
+			<Grid.Col span={ { sm: 12, md: 6 } }>
+				<TextInput name="region" label="State" />
+			</Grid.Col>
 
-					<TextInput name="address_2" label="Address 2" />
+			<Grid.Col span={ { sm: 12, md: 6 } }>
+				<TextInput name="postal" label="Zip/Post" />
+			</Grid.Col>
 
-					<Group>
-						<TextInput name="city" label="City" />
+			<Grid.Col>
+				<FormCategoriesDropdown label="Address Type" categorizable_type="Address" />
+			</Grid.Col>
 
-						<TextInput name="region" label="State" />
+			<Grid.Col>
+				<Textarea name="notes" label="Notes" />
+			</Grid.Col>
 
-						<TextInput name="postal" label="Zip/Post" />
-					</Group>
-
-					<Button onClick={ removeInputGroup } style={ {
-						marginLeft: 'auto',
-						display: 'block',
-					} }>
-						<MinusCircleIcon />
-					</Button>
-				</FormGroup>
-			)) }
-		</>
+		</DynamicInputs>
 	)
 }
 
