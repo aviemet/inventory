@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
+import { Grid, Table } from '@/Components'
 import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/Components/Form'
-import { Table } from '@/Components'
 import { Routes } from '@/lib'
 import { createContext, usePageProps } from '@/lib/hooks'
 import SwitchRow from './SwitchRow'
@@ -65,58 +65,71 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 				remember={ false }
 				filter={ ['id', 'slug'] }
 			>
-				<TextInput name="name" label="Name" required autoFocus />
+				<Grid>
+					<Grid.Col>
+						<TextInput name="name" label="Name" required autoFocus />
+					</Grid.Col>
 
-				<Textarea name="description" label="Description" />
+					<Grid.Col>
+						<Textarea name="description" label="Description" />
+					</Grid.Col>
 
-				<FormGroup legend="Permissions" model="permissions">
-					<Switch
-						name="company.admin"
-						label={ `Set as administrator group for ${user.active_company?.name}` }
-						onChange={ (checked) => setIsCompanyAdmin(checked) }
-					/>
+					<FormGroup legend="Permissions" model="permissions">
+						<Grid.Col>
+							<Switch
+								name="company.admin"
+								label={ `Set as administrator group for ${user.active_company?.name}` }
+								onChange={ (checked) => setIsCompanyAdmin(checked) }
+							/>
+						</Grid.Col>
 
-					<Table mt={ 32 }>
-						<Table.Head>
-							<Table.Row>
-								<Table.HeadCell>
+						<Grid.Col>
+							<Table mt={ 32 }>
+								<Table.Head>
+									<Table.Row>
+										<Table.HeadCell>
 									All
-								</Table.HeadCell>
-								<Table.HeadCell>
+										</Table.HeadCell>
+										<Table.HeadCell>
 									Record Type
-								</Table.HeadCell>
-								<Table.HeadCell>
-									<ColumnToggle permission="index" /> List
-								</Table.HeadCell>
-								<Table.HeadCell>
-									<ColumnToggle permission="show" /> View
-								</Table.HeadCell>
-								<Table.HeadCell>
-									<ColumnToggle permission="create" /> Create
-								</Table.HeadCell>
-								<Table.HeadCell>
-									<ColumnToggle permission="update" /> Edit
-								</Table.HeadCell>
-								<Table.HeadCell>
-									<ColumnToggle permission="delete" /> Delete
-								</Table.HeadCell>
-								<Table.HeadCell>
-									<ColumnToggle permission="checkout" /> Checkout
-								</Table.HeadCell>
-								<Table.HeadCell>
-									<ColumnToggle permission="checkin" /> Checkin
-								</Table.HeadCell>
-							</Table.Row>
-						</Table.Head>
-						<Table.Body>{ tableRows.map(row => (
-							<SwitchRow key={ row.model } { ...row } />
-						)) }</Table.Body>
-					</Table>
-				</FormGroup>
+										</Table.HeadCell>
+										<Table.HeadCell>
+											<ColumnToggle permission="index" /> List
+										</Table.HeadCell>
+										<Table.HeadCell>
+											<ColumnToggle permission="show" /> View
+										</Table.HeadCell>
+										<Table.HeadCell>
+											<ColumnToggle permission="create" /> Create
+										</Table.HeadCell>
+										<Table.HeadCell>
+											<ColumnToggle permission="update" /> Edit
+										</Table.HeadCell>
+										<Table.HeadCell>
+											<ColumnToggle permission="delete" /> Delete
+										</Table.HeadCell>
+										<Table.HeadCell>
+											<ColumnToggle permission="checkout" /> Checkout
+										</Table.HeadCell>
+										<Table.HeadCell>
+											<ColumnToggle permission="checkin" /> Checkin
+										</Table.HeadCell>
+									</Table.Row>
+								</Table.Head>
+								<Table.Body>{ tableRows.map(row => (
+									<SwitchRow key={ row.model } { ...row } />
+								)) }</Table.Body>
+							</Table>
+						</Grid.Col>
+					</FormGroup>
 
-				<Submit cancelRoute={ Routes.personGroups() }>
-					{ person_group?.id ? 'Update' : 'Create' } Group
-				</Submit>
+					<Grid.Col>
+						<Submit cancelRoute={ Routes.personGroups() }>
+							{ person_group?.id ? 'Update' : 'Create' } Group
+						</Submit>
+					</Grid.Col>
+
+				</Grid>
 			</Form>
 		</PermissionsFormContext>
 	)

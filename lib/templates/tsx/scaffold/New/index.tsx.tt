@@ -7,7 +7,7 @@ interface New<%= singular_table_name.camelize %>Props {
 	<%= singular_table_name %>: Schema.<%= plural_table_name.camelize %>FormData
 }
 
-const New<%= singular_table_name.camelize %> = ({ ...data }: INew<%= singular_table_name.camelize %>Props) => {
+const New<%= singular_table_name.camelize %> = ({ ...data }: New<%= singular_table_name.camelize %>Props) => {
 	const title = 'New <%= human_name.titleize %>'
 
 	return (

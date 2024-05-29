@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -30,11 +31,17 @@ const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer = emptyM
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required autoFocus />
+				</Grid.Col>
 
-			<Submit>
-				{ manufacturer.id ? 'Update' : 'Create' } Manufacturer
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ manufacturer.id ? 'Update' : 'Create' } Manufacturer
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

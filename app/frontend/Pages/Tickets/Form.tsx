@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -6,7 +7,7 @@ import {
 	Submit,
 	FieldsFor,
 } from '@/Components/Form'
-import { AssetsDropdown, PeopleDropdown, PeopleMultiSelect } from '@/Features/Dropdowns'
+import { AssetsDropdown, FormPeopleDropdown, FormPeopleMultiSelect } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -30,28 +31,41 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket }: TicketFormProps) 
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="subject" label="Subject" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="subject" label="Subject" required autoFocus />
+				</Grid.Col>
 
-			<FieldsFor model="assignments" >
-				<PeopleMultiSelect
-					label="Assign To"
-					name="person_id"
-				/>
-			</FieldsFor>
+				<Grid.Col>
+					<FieldsFor model="assignments" >
+						<FormPeopleMultiSelect
+							label="Assign To"
+							name="person_id"
+						/>
+					</FieldsFor>
+				</Grid.Col>
 
-			<PeopleDropdown
-				label="Primary Contact"
-				name="primary_contact_id"
-			/>
+				<Grid.Col>
+					<FormPeopleDropdown
+						label="Primary Contact"
+						name="primary_contact_id"
+					/>
+				</Grid.Col>
 
-			<AssetsDropdown initialData={ coerceArray(ticket?.asset) } />
+				<Grid.Col>
+					<AssetsDropdown initialData={ coerceArray(ticket?.asset) } />
+				</Grid.Col>
 
-			<RichText name="description" label="Description" />
+				<Grid.Col>
+					<RichText name="description" label="Description" />
+				</Grid.Col>
 
-			<Submit>
-				{ ticket.id ? 'Update' : 'Create' } Ticket
-			</Submit>
-
+				<Grid.Col>
+					<Submit>
+						{ ticket.id ? 'Update' : 'Create' } Ticket
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

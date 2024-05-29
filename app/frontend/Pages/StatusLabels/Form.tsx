@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -33,15 +34,20 @@ const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label = emptySt
 			method={ method }
 			onSubmit={ onSubmit }
 		>
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Status Name" required autoFocus />
+				</Grid.Col>
 
-			<TextInput name="name" label="Status Name" required autoFocus />
-
-			<Textarea name="description" label="Description" />
-
-			<Submit>
-				{ status_label.id ? 'Update' : 'Create' } StatusLabel
-			</Submit>
-
+				<Grid.Col>
+					<Textarea name="description" label="Description" />
+				</Grid.Col>
+				<Grid.Col>
+					<Submit>
+						{ status_label.id ? 'Update' : 'Create' } StatusLabel
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -46,39 +47,59 @@ const PersonForm = ({
 				if(onSubmit) onSubmit(form)
 			} }
 		>
-			<TextInput name="first_name" label="First Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="first_name" label="First Name" required autoFocus />
+				</Grid.Col>
 
-			<TextInput name="middle_name" label="Middle Name" />
+				<Grid.Col>
+					<TextInput name="middle_name" label="Middle Name" />
+				</Grid.Col>
 
-			<TextInput name="last_name" label="Last Name" required />
+				<Grid.Col>
+					<TextInput name="last_name" label="Last Name" required />
+				</Grid.Col>
 
-			<TextInput name="employee_number" label="Employee #" />
+				<Grid.Col>
+					<TextInput name="employee_number" label="Employee #" />
+				</Grid.Col>
 
-			<FormDepartmentsDropdown />
+				<Grid.Col>
+					<FormDepartmentsDropdown />
+				</Grid.Col>
 
-			<TextInput name="job_title" label="Job Title" />
+				<Grid.Col>
+					<TextInput name="job_title" label="Job Title" />
+				</Grid.Col>
 
-			<FormPeopleDropdown
-				label="Manager"
-				name="manager_id"
-			/>
+				<Grid.Col>
+					<FormPeopleDropdown
+						label="Manager"
+						name="manager_id"
+					/>
+				</Grid.Col>
 
-			<FormConsumer>{ ({ data }: UseFormProps<PersonFormData>) => (
-				<TextInput
-					name="contact.emails[0].email"
-					label="Email"
-					required={ data.person.user?.active }
-					errorKey={ data.person.user?.active ? 'user.password' : undefined }
-				/>
-			) }</FormConsumer>
+				<Grid.Col>
+					<FormConsumer>{ ({ data }: UseFormProps<PersonFormData>) => (
+						<TextInput
+							name="contact.emails[0].email"
+							label="Email"
+							required={ data.person.user?.active }
+							errorKey={ data.person.user?.active ? 'user.password' : undefined }
+						/>
+					) }</FormConsumer>
+				</Grid.Col>
 
-			<FieldsFor model="user">
-				<Checkbox name="active" label="Login Enabled" />
-			</FieldsFor>
+				<Grid.Col>
+					<FieldsFor model="user">
+						<Checkbox name="active" label="Login Enabled" />
+					</FieldsFor>
+				</Grid.Col>
 
-
-
-			<Submit>Create Person</Submit>
+				<Grid.Col>
+					<Submit>Create Person</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

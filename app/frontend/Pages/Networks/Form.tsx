@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box, Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -60,23 +61,42 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: 
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required autoFocus />
+				</Grid.Col>
 
-			<TextInput name="address" label="Network" placeholder="e.g. 192.168.1.0/24" required onBlur={ handleAddressBlur } />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput name="address" label="Network Address" placeholder="e.g. 192.168.1.0/24" required onBlur={ handleAddressBlur } />
+				</Grid.Col>
 
-			<TextInput name="gateway" label="Gateway Address" placeholder="e.g. 192.168.1.1" />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput name="gateway" label="Gateway Address" placeholder="e.g. 192.168.1.1" />
+				</Grid.Col>
 
-			<TextInput name="dhcp_start" label="DHCP Start" placeholder="e.g. 192.168.1.100" />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput name="dhcp_start" label="DHCP Start" placeholder="e.g. 192.168.1.100" />
+				</Grid.Col>
 
-			<TextInput name="dhcp_end" label="DHCP End" placeholder="e.g. 192.168.1.254" />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput name="dhcp_end" label="DHCP End" placeholder="e.g. 192.168.1.254" />
+				</Grid.Col>
 
-			<TextInput name="vlan_id" label="VLAN ID" />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput name="vlan_id" label="VLAN ID" />
+				</Grid.Col>
+				<Box style={ { width: '100%' } }></Box>
 
-			<Textarea name="notes" label="Notes" />
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
 
-			<Submit>
-				{ network.id ? 'Update' : 'Create' } Network
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ network.id ? 'Update' : 'Create' } Network
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

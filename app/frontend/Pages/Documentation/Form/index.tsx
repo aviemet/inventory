@@ -31,6 +31,11 @@ const DocumentationForm = ({
 		>
 			<Grid>
 
+
+				<Grid.Col>
+					<TextInput name="title" label="Title" required />
+				</Grid.Col>
+
 				<Grid.Col>
 					<DocumentableSearch
 						name="documentable_id"
@@ -43,9 +48,6 @@ const DocumentationForm = ({
 					<FormCategoriesDropdown categorizable_type="Documentation" />
 				</Grid.Col>
 
-				<Grid.Col>
-					<TextInput name="title" label="Title" required />
-				</Grid.Col>
 
 				<Grid.Col>
 					<RichText name="body" label="Documentation Content" />

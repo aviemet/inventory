@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { ContactForm } from '@/Features/Contactable'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
@@ -37,15 +38,25 @@ const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: Ven
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required autoFocus />
+				</Grid.Col>
 
-			<TextInput name="url" label="Website" />
+				<Grid.Col>
+					<TextInput name="url" label="Website" />
+				</Grid.Col>
 
-			<ContactForm contact={ vendor?.contact } />
+				<Grid.Col>
+					<ContactForm contact={ vendor?.contact } />
+				</Grid.Col>
 
-			<Submit>
-				{ vendor.id ? 'Update' : 'Create' } Vendor
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ vendor.id ? 'Update' : 'Create' } Vendor
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

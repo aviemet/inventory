@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box, Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -9,8 +10,7 @@ import {
 	CurrencyInput,
 	NumberInput,
 } from '@/Components/Form'
-import { CategoriesDropdown, ManufacturersDropdown, VendorsDropdown } from '@/Features/Dropdowns'
-import { Box, Grid } from '@/Components'
+import { FormCategoriesDropdown, FormManufacturersDropdown, FormVendorsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 import ConsoleLogger from '@/Components/Form/Components/ConsoleLogger'
@@ -87,15 +87,15 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license }: LicenseFormProp
 				</Grid.Col>
 
 				<Grid.Col>
-					<ManufacturersDropdown initialData={ coerceArray(license?.manufacturer) } />
+					<FormManufacturersDropdown initialData={ coerceArray(license?.manufacturer) } />
 				</Grid.Col>
 
 				<Grid.Col>
-					<VendorsDropdown initialData={ coerceArray(license?.vendor) } />
+					<FormVendorsDropdown initialData={ coerceArray(license?.vendor) } />
 				</Grid.Col>
 
 				<Grid.Col>
-					<CategoriesDropdown
+					<FormCategoriesDropdown
 						categorizable_type="License"
 						initialData={ coerceArray(license?.category) }
 					/>

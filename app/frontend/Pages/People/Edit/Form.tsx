@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -133,64 +134,92 @@ const PersonForm = ({
 			onSubmit={ handleSubmit }
 			onChange={ handleFormChange }
 		>
-			<TextInput name="first_name" label="First Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="first_name" label="First Name" required autoFocus />
+				</Grid.Col>
 
-			<TextInput name="middle_name" label="Middle Name" />
+				<Grid.Col>
+					<TextInput name="middle_name" label="Middle Name" />
+				</Grid.Col>
 
-			<TextInput name="last_name" label="Last Name" required />
+				<Grid.Col>
+					<TextInput name="last_name" label="Last Name" required />
+				</Grid.Col>
 
-			<TextInput name="employee_number" label="Employee #" />
+				<Grid.Col>
+					<TextInput name="employee_number" label="Employee #" />
+				</Grid.Col>
 
-			<FormDepartmentsDropdown
-				name="department_id"
-				initialData={ coerceArray(person?.department) }
-			/>
-
-			<TextInput name="job_title" label="Job Title" required />
-
-			<FormPeopleDropdown
-				label="Manager"
-				name="manager_id"
-				initialData={ coerceArray(person?.manager) }
-			/>
-
-			<FormConsumer>
-				{ (form: UseFormProps<PersonFormData>) => (
-					<CheckboxInput
-						label="Login Enabled"
-						checked={ loginEnabled }
-						onChange={ () => handleToggleLogin(form) }
+				<Grid.Col>
+					<FormDepartmentsDropdown
+						name="department_id"
+						initialData={ coerceArray(person?.department) }
 					/>
-				) }
-			</FormConsumer>
+				</Grid.Col>
 
-			{ loginEnabled && <FormGroup legend="Login Details">
-				<FieldsFor model="user">
+				<Grid.Col>
+					<TextInput name="job_title" label="Job Title" required />
+				</Grid.Col>
 
-					<TextInput name="email" label="Email" />
-
-					<PasswordInput
-						name="password"
-						label={ `${person.id ? 'New' : ''} Password` }
-						onBlur={ handlePasswordBlur }
-						clearErrorsOnChange={ false }
+				<Grid.Col>
+					<FormPeopleDropdown
+						label="Manager"
+						name="manager_id"
+						initialData={ coerceArray(person?.manager) }
 					/>
+				</Grid.Col>
 
-					<PasswordInput
-						name="password_confirmation"
-						label="Check Password"
-						onBlur={ handleCheckPasswordBlur }
-						clearErrorsOnChange={ false }
-					/>
+				<Grid.Col>
+					<FormConsumer>
+						{ (form: UseFormProps<PersonFormData>) => (
+							<CheckboxInput
+								label="Login Enabled"
+								checked={ loginEnabled }
+								onChange={ () => handleToggleLogin(form) }
+							/>
+						) }
+					</FormConsumer>
+				</Grid.Col>
 
-					<Checkbox name="active" label="Active" />
+				{ loginEnabled && <FormGroup legend="Login Details">
+					<FieldsFor model="user">
+						<Grid.Col>
+							<TextInput name="email" label="Email" />
+						</Grid.Col>
 
-				</FieldsFor>
-			</FormGroup> }
+						<Grid.Col>
+							<PasswordInput
+								name="password"
+								label={ `${person.id ? 'New' : ''} Password` }
+								onBlur={ handlePasswordBlur }
+								clearErrorsOnChange={ false }
+							/>
+						</Grid.Col>
 
-			<Submit>
-				{ person.id ? 'Update' : 'Create' } Person
-			</Submit>
+						<Grid.Col>
+							<PasswordInput
+								name="password_confirmation"
+								label="Check Password"
+								onBlur={ handleCheckPasswordBlur }
+								clearErrorsOnChange={ false }
+							/>
+						</Grid.Col>
+
+						<Grid.Col>
+							<Checkbox name="active" label="Active" />
+						</Grid.Col>
+
+					</FieldsFor>
+				</FormGroup> }
+
+				<Grid.Col>
+					<Submit>
+						{ person.id ? 'Update' : 'Create' } Person
+					</Submit>
+				</Grid.Col>
+
+			</Grid>
 		</Form>
 	)
 }

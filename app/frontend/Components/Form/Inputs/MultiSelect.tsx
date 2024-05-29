@@ -5,7 +5,8 @@ import Field from '../Components/Field'
 import MultiSelect, { type MultiSelectInputProps } from '@/Components/Inputs/MultiSelect'
 import { type ComboboxData } from '@mantine/core'
 import { type InputConflicts, type BaseFormInputProps } from '.'
-import { exclude } from '@/lib'
+import { exclude, isUnset } from '@/lib'
+import { coerceArray } from '../../../lib/collections'
 
 type OmittedDropdownTypes = InputConflicts|'onDropdownOpen'|'onDropdownClose'|'onOptionSubmit'|'onClear'
 export interface FormMultiSelectProps<TForm extends NestedObject = NestedObject>
@@ -103,7 +104,7 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 				autoComplete="off"
 				name={ inputName }
 				label={ label }
-				value={ value }
+				value={ isUnset(value) ? [] : coerceArray(value) }
 				error={ error }
 				options={ options }
 				onChange={ handleChange }
