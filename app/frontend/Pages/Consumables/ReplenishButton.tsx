@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Modal } from '@/Components'
-import { Form, NumberInput, Submit } from '@/Components/Form'
+import { Button, Modal, Grid } from '@/Components'
+import { Form, FormConsumer, NumberInput, Submit } from '@/Components/Form'
 import { Checkbox } from '@/Components/Inputs'
 import { ReplenishIcon } from '@/Components/Icons'
 import { Tooltip, type ButtonProps, useMantineTheme } from '@mantine/core'
@@ -22,7 +22,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 	const [opened, setOpened] = useState(false)
 	const { other: { colors: { replenishButtonColor } } } = useMantineTheme()
 
-	const handleTogglePurchaseOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleTogglePurchaseOrder = (form: UseFormProps<typeof defaultData>) => {
 
 	}
 
@@ -66,13 +66,26 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 					to={ Routes.apiConsumable(consumable) }
 					onSubmit={ handleSubmit }
 				>
-					<NumberInput name="qty" label="Quantity" min={ 0 } />
+					<Grid>
 
-					<Checkbox label="Create Purchase Order" onChange={ handleTogglePurchaseOrder } />
+						<Grid.Col>
+							<NumberInput name="qty" label="Quantity" min={ 0 } />
+						</Grid.Col>
 
-					<Submit>Replenish</Submit>
+						<Grid.Col>
+							<FormConsumer>{ (form) => (
+								<Checkbox label="Create Purchase Order" onChange={ () => handleTogglePurchaseOrder(form) } />
+							) }</FormConsumer>
+						</Grid.Col>
+
+						<Grid.Col>
+							<Submit>Replenish</Submit>
+						</Grid.Col>
+
+					</Grid>
 				</Form>
 			</Modal>
+
 			<Tooltip
 				withArrow
 				label={ tooltipMessage || `Replenish ${consumable.name}` }

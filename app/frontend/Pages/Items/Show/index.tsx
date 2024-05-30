@@ -1,7 +1,13 @@
 import React from 'react'
 import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
-import { EditIcon, CheckinIcon, CheckoutIcon, TicketsIcon, DocumentationIcon } from '@/Components/Icons'
+import {
+	EditIcon,
+	CheckinIcon,
+	CheckoutIcon,
+	TicketsIcon,
+	DocumentationIcon,
+} from '@/Components/Icons'
 import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'
@@ -71,9 +77,7 @@ const ShowItem = ({ item }: ShowItemProps) => {
 
 						return (
 							<Tabs.Panel key={ tab.id } value={ tab.id } p="md">
-								<Component
-									item={ item }
-								/>
+								<Component item={ item } />
 							</Tabs.Panel>
 						)
 					}) }

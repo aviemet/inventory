@@ -2,18 +2,23 @@ import React from 'react'
 import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
+import Details from './Details'
+import PersonHistory from './PersonHistory'
+import Associations from './Associations'
+import Documentations from './Documentations'
 
-interface ShowPersonProps {
+export interface ShowPersonProps {
 	person: Schema.PeopleShow
 }
 
-const tabs = {
-	details: 'details',
-	history: 'history',
-	associations: 'associations',
-}
+const tabsList = [
+	{ id: 'details', label: 'Details', component: Details },
+	{ id: 'history', label: 'History', component: PersonHistory },
+	{ id: 'documentations', label: 'Documentation', component: Documentations },
+	{ id: 'associations', label: 'Associations', component: Associations },
+]
 
-const Show = ({ person }: ShowPersonProps) => {
+const ShowPerson = ({ person }: ShowPersonProps) => {
 	const title = person.name ?? 'Person Details'
 
 	return (
@@ -21,9 +26,9 @@ const Show = ({ person }: ShowPersonProps) => {
 			{ title: 'People', href: Routes.people() },
 			{ title: person.name! },
 		] }>
-			<Section>
+			<Section fullHeight>
 				<Group justify="space-between">
-					<Heading>{ title }</Heading>
+					<Heading style={ { flex: 1 } }>{ title }</Heading>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -35,87 +40,28 @@ const Show = ({ person }: ShowPersonProps) => {
 					</Menu>
 				</Group>
 
-				<Tabs urlControlled={ true } defaultValue={ tabs.details }>
+				<Tabs urlControlled={ true } defaultValue={ tabsList[0].id }>
 					<Tabs.List>
-						<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
-						<Tabs.Tab value={ tabs.history }>History</Tabs.Tab>
-						<Tabs.Tab value={ tabs.associations }>Associations</Tabs.Tab>
+						{ tabsList.map(tab => (
+							<Tabs.Tab key={ tab.id } value={ tab.id }>{ tab.label }</Tabs.Tab>
+						)) }
 					</Tabs.List>
 
-					<Tabs.Panel value="details">
-						<Heading order={ 3 }>Details</Heading>
 
-						<div className="item-details">
+					{ tabsList.map(tab => {
+						const Component = tab.component
 
-							<div className="item-row">
-								<label>Name:</label>
-								<div className="value">
-									{ person.name }
-								</div>
-							</div>
+						return (
+							<Tabs.Panel key={ tab.id } value={ tab.id } p="md">
+								<Component person={ person } />
+							</Tabs.Panel>
+						)
+					}) }
 
-							<div className="item-row">
-								<label>Employee #:</label>
-								<div className="value">
-									{ person.employee_number ?? person.employee_number }
-								</div>
-							</div>
-
-						</div>
-						<h3>Assets</h3>
-
-						<ul>
-							{ person.possessions && person.possessions.filter(assignment => assignment.active).map(assignment => (
-								<li key={ assignment.id }>{ assignment.assignable_type }</li>
-							)) }
-						</ul>
-					</Tabs.Panel>
-
-					<Tabs.Panel value="history">
-						<Heading order={ 3 }>Assignment History</Heading>
-
-						<div>
-							{ person.possessions && person.possessions.reverse().map(assignment => (
-								<React.Fragment key={ assignment.id }>
-									<div>
-										Link to assigntoable object
-									</div>
-									<div>
-										{ assignment.assignable_type }
-									</div>
-								</React.Fragment>
-							)) }
-						</div>
-
-						<Heading order={ 3 }>Audit History</Heading>
-
-
-						<ul>
-							{ person.activities?.reverse().map(activity => {
-								let message = ''
-								if(activity.key) {
-									message = activity.key.split('.')[1].toUpperCase()
-								}
-
-								return (
-									<li key={ activity.id }>
-										{ activity.created_at && `${message} at ${formatter.date.long(activity.created_at)}` }
-									</li>
-								)
-							}) }
-						</ul>
-
-					</Tabs.Panel>
-
-					<Tabs.Panel value="associations">
-						<Heading order={ 3 }>Licenses</Heading>
-
-
-					</Tabs.Panel>
 				</Tabs>
 			</Section>
 		</Page>
 	)
 }
 
-export default Show
+export default ShowPerson
