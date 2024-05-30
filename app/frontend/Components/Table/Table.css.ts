@@ -148,20 +148,12 @@ export const columnPickerButton = css`
 `
 
 export const pagination = css`
+	a:hover {
+		text-decoration: none;
+	}
+`
+
+export const limitSelect = css`
 	display: inline-block;
 	max-width: 60px;
 `
-
-// &:before, &:after {
-// 	position: absolute,
-// 	display: block,
-// 	right: 0.75rem,
-// 	width: 0,
-// 	height: 0,
-// 	content: ,
-// 	cursor: pointer,
-// 	border-color: vars.colors.gray[4],
-// 	border-style: solid,
-// 	borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
-// 	borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
-// }
