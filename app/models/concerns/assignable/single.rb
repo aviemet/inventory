@@ -5,7 +5,7 @@ module Assignable
     include Assignable
 
     included do
-      has_many :assignments, as: :assignable
+      has_many :assignments, as: :assignable, dependent: :nullify
 
       def assignment
         self.assignments.select(&:active).first

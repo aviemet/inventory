@@ -61,5 +61,6 @@ class Assignment < ApplicationRecord
   validates :assigned_at, presence: true
 
   scope :includes_associated, -> { includes([:location, :created_by, :activities]) }
+
   scope :active, -> { where(active: true) }
 end

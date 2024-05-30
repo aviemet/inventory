@@ -5,7 +5,10 @@ import { type ShowPersonProps } from '.'
 const PersonHistory = ({ person }: ShowPersonProps) => {
 	return (
 		<>
-			<History assignments={ person.assignments } activities={ person.activities } />
+			<History
+				assignments={ person.possessions }
+				activities={ person.activities }
+			/>
 		</>
 	)
 }

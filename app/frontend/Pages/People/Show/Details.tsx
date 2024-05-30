@@ -8,7 +8,6 @@ interface PersonDetailsProps {
 }
 
 const PersonDetails = ({ person }: PersonDetailsProps) => {
-	console.log({ person })
 	return (
 		<>
 			<Heading order={ 3 }>Details</Heading>

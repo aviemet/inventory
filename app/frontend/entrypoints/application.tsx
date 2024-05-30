@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			root.render(<App { ...props } />)
 
-			router.on('navigate', event => {
+			router.on('success', event => {
 				event.detail.page.props = propsMiddleware(event.detail.page.props)
 			})
 		},

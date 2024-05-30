@@ -1,9 +1,12 @@
 import React from 'react'
 import { Menu } from '@/Components'
-import { Avatar, Box, UnstyledButton } from '@mantine/core'
-import { ToggleColorSchemeButton } from '@/Components/Button'
+import { Avatar, UnstyledButton } from '@mantine/core'
+import { usePageProps } from '@/lib/hooks'
+import { Routes } from '@/lib'
 
 const AvatarMenu = () => {
+	const props = usePageProps()
+
 	return (
 		<Menu>
 			<Menu.Target>
@@ -17,9 +20,7 @@ const AvatarMenu = () => {
 			</Menu.Target>
 
 			<Menu.Dropdown>
-				<Menu.Item>
-					<Box style={ { whiteSpace: 'nowrap' } }>Toggle Color Scheme <ToggleColorSchemeButton /></Box>
-				</Menu.Item>
+				<Menu.Link href={ Routes.user(props.auth.user.id) }>Profile & Account</Menu.Link>
 			</Menu.Dropdown>
 		</Menu>
 	)

@@ -333,7 +333,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
 
   create_table "orders", force: :cascade do |t|
     t.string "number"
-    t.bigint "user_id", null: false
     t.text "notes"
     t.datetime "submitted_at", precision: nil
     t.datetime "ordered_at", precision: nil
@@ -350,6 +349,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
     t.string "tax_currency", default: "USD", null: false
     t.integer "discount_cents"
     t.string "discount_currency", default: "USD", null: false
+    t.bigint "user_id", null: false
     t.bigint "vendor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
