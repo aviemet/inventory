@@ -19,7 +19,7 @@ class TicketStatus < ApplicationRecord
   tracked
   resourcify
 
-  enum :status_type, %i(open pending closed)
+  enum status_type: { open: 0, pending: 1, closed: 2 }
 
   validates :name, presence: true
 
