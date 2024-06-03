@@ -6,8 +6,8 @@ interface ToggleColorSchemeButtonProps
 	extends
 	ActionIconProps
 {
-	leftSection: React.ReactNode
-	rightSection: React.ReactNode
+	leftSection?: React.ReactNode
+	rightSection?: React.ReactNode
 }
 
 const ToggleColorSchemeButton = ({ leftSection, rightSection, ...props }: ToggleColorSchemeButtonProps) => {
