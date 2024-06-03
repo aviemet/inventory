@@ -5,7 +5,7 @@ import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
 import { useLayoutStore } from '@/lib/store'
-import { useDisclosure } from '@mantine/hooks'
+import { useDisclosure } from '@/lib/hooks'
 
 import cx from 'clsx'
 import * as classes from './AppLayout.css'

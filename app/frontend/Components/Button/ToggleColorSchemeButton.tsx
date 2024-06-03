@@ -1,6 +1,6 @@
 import React from 'react'
 import { ActionIcon, ActionIconProps, useMantineColorScheme } from '@mantine/core'
-import { Sun, MoonStars } from 'tabler-icons-react'
+import { SunIcon, MoonStarsIcon } from '@/Components/Icons'
 
 interface ToggleColorSchemeButtonProps
 	extends
@@ -26,7 +26,7 @@ const ToggleColorSchemeButton = ({ leftSection, rightSection, ...props }: Toggle
 			{ ...props }
 		>
 			{ leftSection && leftSection }
-			{ colorScheme === 'dark' ? <Sun { ...iconProps } /> : <MoonStars { ...iconProps } /> }
+			{ colorScheme === 'dark' ? <SunIcon { ...iconProps } /> : <MoonStarsIcon { ...iconProps } /> }
 			{ rightSection && rightSection }
 		</ActionIcon>
 	)

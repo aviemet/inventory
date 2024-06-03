@@ -22,8 +22,9 @@ export { default as Label } from './Inputs/Label'
 export {
 	Accordion,
 	AppShell,
-	Box,
 	Badge,
+	Box,
+	Burger,
 	Card,
 	Container,
 	Flex,
