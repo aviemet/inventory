@@ -13,6 +13,8 @@ const Dashboard = ({ company, activities }: DashboardProps) => {
 		<Page title="Dashboard" breadcrumbs={ [
 			{ href: '/dashboard', title: 'Dashboard' },
 		] }>
+			<Heading mb="sm">Company Overview</Heading>
+
 			<Section>
 				<Counts counts={ company.counts } />
 			</Section>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLayoutStore } from '@/lib/store'
-import { Divider, Group, AppShell, ThemeIcon, Box } from '@mantine/core'
+import { Divider, Group, AppShell, Icon, Box } from '@/Components'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
@@ -47,19 +47,27 @@ const Sidebar = () => {
 				p={ 0 }
 				hidden={ !sidebarOpen }
 				className={ cx(classes.navbar, { [classes.closed]: !sidebarOpen }) }
+				role="navigation"
 			>
 				<Box m="xs">
 					<Group justify="space-between">
-						<ThemeIcon radius="md" size="lg">
+						<Icon radius="md" size="lg">
 							<ComponentsIcon />
-						</ThemeIcon>
+						</Icon>
 					</Group>
 				</Box>
 
-				<Box onClick={ handleNavClick } className={ cx([classes.links]) }>
-					<ul>
+				<Box
+					onClick={ handleNavClick }
+					className={ cx([classes.links]) }
+				>
+					<ul aria-label="dashboard link">
 						<li><MenuLink href={ Routes.dashboard() } icon={ <DashboardIcon /> }>Dashboard</MenuLink></li>
-						<Divider />
+					</ul>
+
+					<Divider />
+
+					<ul aria-label="assets links">
 						<li>
 							<MenuLink href={ Routes.assets() } icon={ <AssetsIcon /> }>Inventory</MenuLink>
 							<ul>
@@ -72,7 +80,11 @@ const Sidebar = () => {
 						<li><MenuLink href={ Routes.licenses() } icon={ <LicensesIcon /> }>Licenses</MenuLink></li>
 						<li><MenuLink href={ Routes.networks() } icon={ <NetworksIcon /> }>Networks</MenuLink></li>
 						<li><MenuLink href={ Routes.orders() } icon={ <PurchasesIcon /> }>Purchasing</MenuLink></li>
-						<Divider />
+					</ul>
+
+					<Divider />
+
+					<ul aria-label="people links">
 						<li>
 							<MenuLink href={ Routes.people() } icon={ <PeopleIcon /> }>People</MenuLink>
 							<ul>
@@ -85,7 +97,11 @@ const Sidebar = () => {
 								<li><MenuLink href={ Routes.contracts() } icon={ <ContractsIcon /> }>Contracts</MenuLink></li>
 							</ul>
 						</li>
-						<Divider />
+					</ul>
+
+					<Divider />
+
+					<ul aria-label="information links">
 						<li><MenuLink href={ Routes.tickets() } icon={ <TicketsIcon /> }>Tickets</MenuLink></li>
 						<li><MenuLink href={ Routes.documentations() } icon={ <DocumentationIcon /> }>Documentation</MenuLink></li>
 						<li><MenuLink href={ Routes.reports() } icon={ <ReportsIcon /> }>Reports</MenuLink></li>
@@ -93,7 +109,7 @@ const Sidebar = () => {
 				</Box>
 
 				<Box onClick={ handleNavClick } className={ cx([classes.links]) }>
-					<ul>
+					<ul aria-label="settings links">
 						<li>
 							<MenuLink href={ Routes.settingsGeneralIndex() } icon={ <SettingsIcon /> }>Settings</MenuLink>
 							<ul className="up">

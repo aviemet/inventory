@@ -14,7 +14,11 @@ const Topbar = () => {
 	const { sidebarOpen } = useLayoutStore()
 
 	return (
-		<AppShell.Header p="sm" className={ cx(classes.topbar, { closed: !sidebarOpen }) }>
+		<AppShell.Header
+			p="sm"
+			className={ cx(classes.topbar, { closed: !sidebarOpen }) }
+			role="banner"
+		>
 			<Box className={ classes.wrapper }>
 
 				<ToggleSidebarButton />

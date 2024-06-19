@@ -1,9 +1,9 @@
 import React from 'react'
-import { Breadcrumbs as MantineBreadcrumbs,
-	type BreadcrumbsProps as MantineBreadcrumbsProps,
-	Portal,
-} from '@mantine/core'
-import { Link } from '@/Components'
+import { BoxProps } from '@mantine/core'
+import { Box, Link, Portal } from '@/Components'
+
+import cx from 'clsx'
+import * as classes from './Breadcrumbs.css'
 
 export type Breadcrumb = {
 	title: string
@@ -16,18 +16,47 @@ export const breadcrumbLinks = (links:Breadcrumb[]) => links.map((link, i) => li
 	<React.Fragment key={ i }>{ link.title }</React.Fragment>,
 )
 
-interface BreadcrumbsProps extends Omit<MantineBreadcrumbsProps, 'children'> {
-	crumbs?:Breadcrumb[]
-	children?: React.ReactNode
+interface BreadcrumbsProps extends Omit<BoxProps, 'children'> {
+	crumbs?: Breadcrumb[]
+	separator?: string
 }
 
-const Breadcrumbs = ({ crumbs, children, separator = '>', ...props }: BreadcrumbsProps) => {
+const Breadcrumbs = ({ crumbs, separator = '>', className, ...props }: BreadcrumbsProps) => {
+	if(!crumbs) return <></>
+	console.log({ crumbs })
 	return (
 		<Portal target="#footer-portal">
-			<MantineBreadcrumbs separator={ separator } { ...props }>
-				{ crumbs && breadcrumbLinks(crumbs) }
-				{ children && children }
-			</MantineBreadcrumbs>
+			<Box
+				component="nav"
+				aria-label="breadcrumbs"
+				className={ cx(classes.breadcrumbs, className) }
+				{ ...props }
+			>
+				<ol>
+					{ crumbs.reduce<React.ReactNode[]>((acc, crumb, index, array) => {
+						const isLastCrumb = index === array.length - 1
+
+						acc.push(<li>{ crumb.href ?
+							<Link
+								key={ crumb.title }
+								external={ false }
+								href={ crumb.href }
+								aria-current={ isLastCrumb ? 'location' : null }
+							>
+								{ crumb.title }
+							</Link>
+							:
+							<Box key={ crumb.title }>{ crumb.title }</Box>
+						}{
+							!isLastCrumb && <Box className={ cx(classes.separator) } aria-hidden="true">
+								{ separator }
+							</Box>
+						}</li>)
+
+						return acc
+					}, []) }
+				</ol>
+			</Box>
 		</Portal>
 	)
 }

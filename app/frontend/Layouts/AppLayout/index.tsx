@@ -42,7 +42,7 @@ const AppLayout = ({ children }: { children: any }) => {
 			<Topbar />
 			<Sidebar />
 			<Footer />
-			<AppShell.Main>
+			<AppShell.Main role="main">
 				<Box id="CONTENT_WRAPPER" className={ cx(classes.wrapper) } p="xs">
 					{ children }
 				</Box>

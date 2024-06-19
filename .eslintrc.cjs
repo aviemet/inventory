@@ -8,8 +8,13 @@ module.exports = {
 		'plugin:import/typescript',
 		'plugin:storybook/recommended',
 		'plugin:react-hooks/recommended',
+		'plugin:jsx-a11y/recommended',
 	],
-	plugins: ['react', '@typescript-eslint', 'import'],
+	plugins: [
+		'react',
+		'@typescript-eslint',
+		'import',
+	],
 	settings: {
 		react: {
 			version: 'detect',
