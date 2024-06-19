@@ -22,6 +22,9 @@ module.exports = {
 		'import/resolver': {
 			'typescript': {},
 		},
+		'jsx-a11y': {
+			'polymorphicPropName': 'component',
+		},
 	},
 	parser: '@typescript-eslint/parser',
 	parserOptions: {

@@ -37,7 +37,7 @@ gem "ipaddress_2", ">= 0.14.0"
 gem "countries", ">= 6.0"
 gem "js-routes", ">= 2.2"
 gem "net-ldap", ">= 0.18.0"
-gem "foreman", ">= 0.87.2"
+gem "overmind", "~> 2.5"
 gem "amazing_print", ">= 1.4"
 gem "delayed_job_active_record", ">= 4.1"
 
