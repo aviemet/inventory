@@ -23,7 +23,7 @@ interface BreadcrumbsProps extends Omit<BoxProps, 'children'> {
 
 const Breadcrumbs = ({ crumbs, separator = '>', className, ...props }: BreadcrumbsProps) => {
 	if(!crumbs) return <></>
-	console.log({ crumbs })
+
 	return (
 		<Portal target="#footer-portal">
 			<Box

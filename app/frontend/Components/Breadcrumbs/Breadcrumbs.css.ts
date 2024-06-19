@@ -1,4 +1,4 @@
-import { vars, theme } from '@/lib/theme'
+import { vars } from '@/lib/theme'
 import { css } from '@linaria/core'
 
 export const breadcrumbs = css`
