@@ -62,6 +62,7 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 				{ value: '100', label: '100' },
 			] }
 			onChange={ handleLimitChange }
+			aria-label="rows per page"
 		/>
 	)
 }

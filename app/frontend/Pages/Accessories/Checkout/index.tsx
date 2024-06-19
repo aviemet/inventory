@@ -23,7 +23,7 @@ const Checkout = ({ assignment, accessory, ...models }: CheckoutItemProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Accessories', href: Routes.accessories() },
 			{ title: accessory.name!, href: Routes.accessory(accessory) },
-			{ title: 'Check Out' },
+			{ title: 'Check Out', href: window.location.href },
 		] }>
 
 			<Section>

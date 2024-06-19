@@ -13,7 +13,7 @@ const NewCategory = ({ category }: NewCategoryProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Categories', href: Routes.categories() },
-			{ title: 'New Category' },
+			{ title: 'New Category', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

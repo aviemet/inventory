@@ -18,7 +18,7 @@ const Checkin = ({ assignment, accessory, statuses }: CheckinAccessoriesProps) =
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Accessories', href: Routes.accessories() },
 			{ title: accessory.name!, href: Routes.accessory(accessory) },
-			{ title: 'Check In' },
+			{ title: 'Check In', href: window.location.href },
 		] }>
 
 			<Section>

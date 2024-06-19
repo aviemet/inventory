@@ -14,7 +14,7 @@ const EditCompany = ({ company }: EditCompanyProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Companies', href: Routes.companies() },
 			{ title: company.name!, href: Routes.company(company.slug) },
-			{ title: 'Edit Company' },
+			{ title: 'Edit Company', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

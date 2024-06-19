@@ -10,7 +10,7 @@ interface PersonDetailsProps {
 const PersonDetails = ({ person }: PersonDetailsProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>Details</Heading>
+			<Heading order={ 2 }>Details</Heading>
 
 			<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 				<Table>

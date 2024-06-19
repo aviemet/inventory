@@ -35,6 +35,7 @@ const HeadCheckbox = ({ selected, rows, allChecked, indeterminate, ...props }: R
 				checked={ allChecked }
 				indeterminate={ indeterminate }
 				disabled={ rows?.length === 0 }
+				aria-label={ `${allChecked ? 'deselect' : 'select'} all rows` }
 				{ ...props }
 			/>
 		</Td>

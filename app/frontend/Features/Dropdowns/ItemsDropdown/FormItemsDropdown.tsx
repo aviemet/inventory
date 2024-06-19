@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash'
 import { useGetItemsAsOptions } from '@/queries/items'
 import { type FormAsyncDropdown } from '..'
 
-interface ItemsDropdownProps extends Omit<FormAsyncDropdown<Schema.ItemsOptions>, 'name'> {
+interface ItemsDropdownProps extends Omit<FormAsyncDropdown<Schema.ItemsOptions>, 'name'|'options'> {
 	name?: string
 }
 
@@ -20,20 +20,22 @@ const ItemsDropdown = ({
 		initialData,
 	})
 
+	const options = data === undefined ? [] : data.map(item => ({
+		label: item.name,
+		value: String(item.id),
+	}))
+
 	return (
 		<FormSelect
 			label={ label }
 			name={ name }
-			options={ !data ? [] : data.map(item => ({
-				label: item.name,
-				value: String(item.id),
-			})) }
 			onDropdownOpen={ () => {
 				if(isEmpty(data) || isStale) refetch()
 			} }
 			searchable
 			clearable
 			value={ value }
+			options={ options }
 			{ ...props }
 		/>
 	)

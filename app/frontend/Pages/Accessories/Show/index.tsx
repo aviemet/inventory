@@ -23,7 +23,7 @@ const ShowAccessory = ({ accessory }: ShowAccessoryProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Accessories', href: Routes.accessories() },
-			{ title: accessory.name! },
+			{ title: accessory.name, href: window.location.href },
 		] }>
 
 			<Section>

@@ -4,14 +4,24 @@ import BodyCell from './BodyCell'
 import { type TableTdProps } from '@mantine/core'
 import { usePageProps } from '@/lib/hooks'
 
+import cx from 'clsx'
+
 export interface TableCellProps extends TableTdProps {
 	fitContent?: boolean
 	sort?: string
 	hideable?: false|string
 	ref?: React.RefObject<HTMLTableCellElement>
+	nowrap?: boolean
 }
 
-const RenderedCell = ({ children = true, hideable, sort, ...props }: TableCellProps) => {
+const RenderedCell = ({
+	children = true,
+	hideable,
+	sort,
+	nowrap = false,
+	className,
+	...props
+}: TableCellProps) => {
 	const { auth: { user: { table_preferences } } } = usePageProps()
 
 	const tableState = useTableContext(false)
@@ -29,7 +39,7 @@ const RenderedCell = ({ children = true, hideable, sort, ...props }: TableCellPr
 
 	if(hiddenByUser) return <></>
 
-	return <BodyCell { ...props }>{ children }</BodyCell>
+	return <BodyCell className={ cx(className, { nowrap }) } { ...props }>{ children }</BodyCell>
 }
 
 export default RenderedCell

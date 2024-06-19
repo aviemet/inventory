@@ -53,7 +53,7 @@ class ComponentsController < ApplicationController
     assignment.assign_toable_type = :Item
 
     render inertia: "Components/Checkout", props: {
-      component: component.render,
+      component: component.render(view: :show),
       assignment: assignment.render(view: :form_data),
       items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
       locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },

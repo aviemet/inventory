@@ -6,7 +6,7 @@ import { ShowComponentProps } from '.'
 const ComponentDetails = ({ component }: ShowComponentProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>Details</Heading>
+			<Heading order={ 2 }>Details</Heading>
 
 			<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 				<Table>

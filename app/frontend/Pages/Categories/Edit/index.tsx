@@ -14,7 +14,7 @@ const EditCategory = ({ category, ...models }: UpdateCategoryProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Categories', href: Routes.categories() },
 			{ title: category.name!, href: Routes.category(category.slug) },
-			{ title: 'Edit Category' },
+			{ title: 'Edit Category', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

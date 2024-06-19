@@ -1,36 +1,26 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
-import { Routes } from '@/lib'
+import { Grid, Heading, Page, Section } from '@/Components'
 import { DateTimeInput, Form, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
+import { Routes } from '@/lib'
 
 interface CheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
-	component: Schema.Component
+	component: Schema.ComponentsShow
+	items: Schema.ItemsOptions[]
 }
 
-const Checkout = ({ assignment, component }: CheckoutItemProps) => {
+const Checkout = ({ assignment, component, items }: CheckoutItemProps) => {
 	const title = `Checkout ${component.name}`
 
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Components', href: Routes.components() },
 			{ title: component.name, href: Routes.component(component) },
-			{ title: 'Check Out' },
+			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
-
-				<div>
-					<div className="item-details">
-
-						<div className="item-row">
-							<label>Serial</label>
-							<div className="value">{ component.serial }</div>
-						</div>
-
-					</div>
-				</div>
+				<Heading order={ 1 } size="h3" mb="sm">{ title }</Heading>
 
 				<Form
 					data={ {
@@ -43,31 +33,45 @@ const Checkout = ({ assignment, component }: CheckoutItemProps) => {
 					to={ Routes.assignments() }
 					model="assignment"
 				>
+					<Grid>
+						<Grid.Col>
+							<AssignToableDropdown
+								options={ ['Item'] }
+								items={ items }
+							/>
+						</Grid.Col>
 
-					<AssignToableDropdown
-						options={ ['Item'] }
-					/>
+						<Grid.Col>
+							<AssignmentLocationDropdown />
+						</Grid.Col>
 
-					<AssignmentLocationDropdown />
+						<Grid.Col span={ { sm: 12, md: 6 } }>
+							<DateTimeInput
+								label="Assigned At"
+								name="assigned_at"
+								required
+							/>
+						</Grid.Col>
 
-					<DateTimeInput
-						label="Assigned At"
-						name="assigned_at"
-						required
-					/>
+						<Grid.Col span={ { sm: 12, md: 6 } }>
+							<DateTimeInput
+								label="Expected At"
+								name="expected_at"
+							/>
+						</Grid.Col>
 
-					<DateTimeInput
-						label="Expected At"
-						name="expected_at"
-					/>
+						<Grid.Col>
+							<Textarea
+								label="Notes"
+								name="notes"
+							/>
+						</Grid.Col>
 
-					<Textarea
-						label="Notes"
-						name="notes"
-					/>
+						<Grid.Col>
+							<Submit>Checkout { component.name }</Submit>
+						</Grid.Col>
 
-					<Submit>Checkout { component.name }</Submit>
-
+					</Grid>
 				</Form>
 			</Section>
 		</Page>

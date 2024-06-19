@@ -49,6 +49,10 @@ export const table = css`
 			width: 1px;
 			white-space: nowrap;
 		}
+
+		&.nowrap {
+			white-space: nowrap;
+		}
 	}
 
 	th {

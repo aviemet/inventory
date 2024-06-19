@@ -13,7 +13,7 @@ const NewAccessory = ({ accessory }: NewAccessoryProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Accessories', href: Routes.accessories() },
-			{ title: 'New Accessory' },
+			{ title: 'New Accessory', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

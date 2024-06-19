@@ -26,7 +26,12 @@ const RowCheckbox = ({ name, selected, ...props }: RowCheckBox) => {
 
 	return (
 		<Td fitContent className={ cx('table-row-select-checkbox') }>
-			<Checkbox checked={ selected?.has(name) } onChange={ handleClick } { ...props } />
+			<Checkbox
+				checked={ selected?.has(name) }
+				onChange={ handleClick }
+				aria-label={ `select ${name}` }
+				{ ...props }
+			/>
 		</Td>
 	)
 }

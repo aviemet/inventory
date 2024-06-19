@@ -13,7 +13,7 @@ const Show = ({ company }: ShowCompanyProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Companies', href: Routes.companies() },
-			{ title: company.name! },
+			{ title: company.name, href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

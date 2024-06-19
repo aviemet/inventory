@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react'
-import { Select, SegmentedControl } from '@/Components/Form'
+import React, { useEffect, useState, useRef } from 'react'
+import { SegmentedControl } from '@/Components/Form'
+import { type ComboboxData, type SelectOption } from '@/Components/Form/Inputs/Select'
 import { useForm, type UseFormProps, type NestedObject } from 'use-inertia-form'
-import LocationsForm from '@/Pages/Locations/Form'
-import { Routes } from '@/lib'
-import { ComboboxData, SelectOption } from '@/Components/Form/Inputs/Select'
+import getDropdownComponent from './getDropdownComponent'
 
 type AssignToableTypes = 'Person'|'Item'|'Location'
 
@@ -13,7 +12,7 @@ interface AssignToableDropdownProps {
 	items?: Schema.ItemsOptions[]
 	people?: Schema.PeopleOptions[]
 	locations?: Schema.LocationsOptions[]
-	options: AssignToableTypes[]
+	options?: AssignToableTypes[]
 }
 
 const AssignToableDropdown = ({
@@ -22,30 +21,34 @@ const AssignToableDropdown = ({
 	locations,
 	options = ['Person', 'Item', 'Location'],
 }: AssignToableDropdownProps) => {
-	const { data, setData } = useForm<{ assignment: Schema.AssignmentsFormData }>()
-	const type: AssignToableTypes = data.assignment.assign_toable_type || options[0]
+	const { data, getData, setData } = useForm<{ assignment: Schema.AssignmentsFormData }>()
 
+	// Ensure form value is set for assign_toable_type
 	useEffect(() => {
-		if(!type) {
+		if(!getData('assignment.assign_toable_type')) {
 			setData('assignment.assign_toable_type', options[0])
 		}
 	}, [])
 
+	const type: AssignToableTypes = getData('assignment.assign_toable_type') || options[0]
+
+	// Cache any existing model data in an iterable
 	const modelMapping = new Map<AssignToableTypes, AssignToableOptions>()
 	if(items) modelMapping.set('Item', items)
-	if(people) modelMapping.set('Person' ,people)
+	if(people) modelMapping.set('Person', people)
 	if(locations) modelMapping.set('Location', locations)
 
-	const model = modelMapping.get(type)
+	const model = modelMapping.get(type) || []
 
-	const [optionsData, setOptionsData] = useState<AssignToableOptions>(model!)
+	const [optionsData, setOptionsData] = useState<AssignToableOptions>(model)
 
-	const optionsValues = useMemo(() => optionsData.map(option => ({
-		label: option.name,
-		value: option.id ? String(option.id) : '',
-	})), [optionsData])
+	const optionsValues = optionsData.map(option => ({
+		name: option.name,
+		id: option.id,
+	}))
 
-	const strModelNameRef = useRef<AssignToableTypes> ('Person')
+	const strModelNameRef = useRef<AssignToableTypes>('Person')
+
 
 	useEffect(() => {
 		if(type === strModelNameRef.current) return
@@ -80,6 +83,8 @@ const AssignToableDropdown = ({
 
 	if(!type) return <></>
 
+	let DropdownComponent = getDropdownComponent(type)
+
 	return (
 		<>
 			{ options.length > 1 && <SegmentedControl
@@ -88,14 +93,11 @@ const AssignToableDropdown = ({
 				options={ options.map(option => ({ label: option, value: option })) }
 				required
 			/> }
-			<Select
-				options={ optionsValues }
+			<DropdownComponent
+				initialData={ optionsValues }
 				label={ options.length > 1 ? data.assignment.assign_toable_type : 'Checkout To' }
 				name="assign_toable_id"
 				onChange={ handleAssignToableChange }
-				newForm={ (type === 'Location' && locations) ? <LocationsForm
-					to={ Routes.locations() }
-				/> : undefined }
 				required
 			/>
 		</>
@@ -103,4 +105,3 @@ const AssignToableDropdown = ({
 }
 
 export default AssignToableDropdown
-

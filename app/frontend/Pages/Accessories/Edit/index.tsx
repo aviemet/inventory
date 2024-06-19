@@ -14,7 +14,7 @@ const EditAccessory = ({ accessory }: EditAccessoryProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Accessories', href: Routes.accessories() },
 			{ title: accessory.name!, href: Routes.accessory(accessory) },
-			{ title: 'Edit Accessory' },
+			{ title: 'Edit Accessory', href: window.location.href },
 		] }>
 
 			<Section>

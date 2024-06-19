@@ -5,7 +5,6 @@ class Locations::OptionsSerializer < ApplicationSerializer
 
   attributes(
     :id,
-    :slug,
     :name,
   )
 end

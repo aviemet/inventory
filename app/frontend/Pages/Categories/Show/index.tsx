@@ -19,7 +19,7 @@ const Show = ({ category, records, pagination }: ShowCategoryProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Categories', href: Routes.categories() },
-			{ title: category.name! },
+			{ title: category.name, href: window.location.href },
 		] }>
 			<Table.Section>
 				<Table.TableProvider

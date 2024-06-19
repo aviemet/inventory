@@ -6,7 +6,7 @@ import { ShowAccessoryProps } from '.'
 const AccessoryDetails = ({ accessory }: ShowAccessoryProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>Details</Heading>
+			<Heading order={ 2 }>Details</Heading>
 
 			<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 				<Table>
