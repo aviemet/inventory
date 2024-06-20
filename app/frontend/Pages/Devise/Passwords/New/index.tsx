@@ -26,7 +26,7 @@ const PasswordsNew = () => {
 					</div>
 
 					<Field>
-						<TextInput name="email" placeholder="Email" autoFocus autoComplete="Email" />
+						<TextInput name="email" placeholder="Email" autoComplete="Email" />
 					</Field>
 
 					<Field>

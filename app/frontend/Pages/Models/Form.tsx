@@ -35,7 +35,7 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: ModelF
 			<Grid>
 
 				<Grid.Col>
-					<TextInput name="name" label="Name" required autoFocus />
+					<TextInput name="name" label="Name" required />
 				</Grid.Col>
 
 				<Grid.Col>

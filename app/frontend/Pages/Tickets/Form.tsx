@@ -33,7 +33,7 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket }: TicketFormProps) 
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="subject" label="Subject" required autoFocus />
+					<TextInput name="subject" label="Subject" required />
 				</Grid.Col>
 
 				<Grid.Col>

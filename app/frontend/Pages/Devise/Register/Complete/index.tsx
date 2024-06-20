@@ -42,7 +42,7 @@ const CompleteRegistration = () => {
 					</div>
 
 					<Field>
-						<TextInput name="first_name" placeholder="First Name" autoFocus autoComplete="first-name" />
+						<TextInput name="first_name" placeholder="First Name" autoComplete="first-name" />
 					</Field>
 
 					<Field>

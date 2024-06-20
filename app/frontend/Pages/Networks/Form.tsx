@@ -63,7 +63,7 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: 
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Name" required autoFocus />
+					<TextInput name="name" label="Name" required />
 				</Grid.Col>
 
 				<Grid.Col span={ { sm: 12, md: 6 } }>

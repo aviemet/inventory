@@ -38,7 +38,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: Consumabl
 			<Grid>
 
 				<Grid.Col>
-					<TextInput name="name" label="Name" required autoFocus />
+					<TextInput name="name" label="Name" required />
 				</Grid.Col>
 
 				<FormGroup legend="Consumable Details">

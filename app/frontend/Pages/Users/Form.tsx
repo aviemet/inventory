@@ -60,7 +60,7 @@ const UserForm = ({ to, method = 'post', onSubmit, user }: UserFormProps) => {
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="email" label="Username/Email" required autoFocus />
+					<TextInput name="email" label="Username/Email" required />
 				</Grid.Col>
 
 				<Grid.Col>

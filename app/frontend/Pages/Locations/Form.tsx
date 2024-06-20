@@ -39,7 +39,7 @@ const LocationForm = ({
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Location Name" required autoFocus />
+					<TextInput name="name" label="Location Name" required />
 				</Grid.Col>
 
 				<Grid.Col>

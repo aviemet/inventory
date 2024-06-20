@@ -44,7 +44,7 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Name" required autoFocus />
+					<TextInput name="name" label="Name" required />
 				</Grid.Col>
 
 				<FormGroup legend="Item Details">

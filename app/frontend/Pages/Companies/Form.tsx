@@ -27,7 +27,7 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: CompanyFormProp
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Company Name" required autoFocus />
+					<TextInput name="name" label="Company Name" required />
 				</Grid.Col>
 				<Grid.Col>
 					<FormCurrenciesDropdown

@@ -36,7 +36,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: AccessoryFo
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Name" required autoFocus />
+					<TextInput name="name" label="Name" required />
 				</Grid.Col>
 
 				<FormGroup legend="Accessory Details">

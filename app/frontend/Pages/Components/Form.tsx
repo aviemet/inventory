@@ -39,7 +39,7 @@ const ComponentForm = ({
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Name" required autoFocus />
+					<TextInput name="name" label="Name" required />
 				</Grid.Col>
 
 				<FormGroup legend="Component Details">

@@ -33,7 +33,7 @@ const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer = emptyM
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Name" required autoFocus />
+					<TextInput name="name" label="Name" required />
 				</Grid.Col>
 
 				<Grid.Col>

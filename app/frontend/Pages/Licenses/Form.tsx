@@ -38,7 +38,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license }: LicenseFormProp
 			<ConsoleLogger prop="data" />
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Name" required autoFocus />
+					<TextInput name="name" label="Name" required />
 				</Grid.Col>
 
 				<Grid.Col >

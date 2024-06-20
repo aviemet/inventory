@@ -36,7 +36,7 @@ const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label = emptySt
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="name" label="Status Name" required autoFocus />
+					<TextInput name="name" label="Status Name" required />
 				</Grid.Col>
 
 				<Grid.Col>

@@ -137,7 +137,7 @@ const PersonForm = ({
 		>
 			<Grid>
 				<Grid.Col>
-					<TextInput name="first_name" label="First Name" required autoFocus />
+					<TextInput name="first_name" label="First Name" required />
 				</Grid.Col>
 
 				<Grid.Col>
