@@ -14,7 +14,7 @@ const EditVendor = ({ vendor, ...models }: UpdateVendorProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Vendors', href: Routes.vendors() },
 			{ title: vendor.name!, href: Routes.vendor(vendor) },
-			{ title: 'Edit Vendor' },
+			{ title: 'Edit Vendor', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

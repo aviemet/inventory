@@ -12,7 +12,7 @@ const ShowLocation = ({ location }: ShowLocationProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Locations', href: Routes.locations() },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">

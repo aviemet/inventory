@@ -14,7 +14,7 @@ const EditItem = ({ item }: UpdateItemProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Hardware', href: Routes.items() },
 			{ title: item.name!, href: Routes.item(item) },
-			{ title: 'Edit Hardware' },
+			{ title: 'Edit Hardware', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

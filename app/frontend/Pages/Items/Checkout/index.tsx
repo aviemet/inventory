@@ -21,7 +21,7 @@ const Checkout = ({ assignment, item, ...models }: CheckoutItemProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Hardware', href: Routes.items() },
 			{ title: item.name!, href: Routes.item(item) },
-			{ title: 'Check Out' },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
 				<Heading order={ 3 }>{ title }</Heading>

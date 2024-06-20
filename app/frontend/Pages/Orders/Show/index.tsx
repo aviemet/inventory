@@ -19,7 +19,7 @@ const Show = ({ order }: ShowOrderProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Order', href: Routes.orders() },
-			{ title: String(order.id) },
+			{ title: String(order.id), href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">

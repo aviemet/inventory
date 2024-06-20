@@ -15,7 +15,7 @@ const ShowTicket = ({ ticket }: ShowTicketProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Support Tickets', href: Routes.tickets() },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

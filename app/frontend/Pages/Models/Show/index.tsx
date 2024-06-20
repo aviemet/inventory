@@ -19,7 +19,7 @@ const Show = ({ model }: ShowModelProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Model', href: Routes.models() },
-			{ title: model.name! },
+			{ title: model.name, href: window.location.href },
 		] }>
 
 			<Section>

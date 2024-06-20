@@ -14,7 +14,7 @@ const EditUser = ({ user }: UpdateUserProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Users', href: Routes.tickets() },
 			{ title: user.email, href: Routes.user(user) },
-			{ title: 'Edit User' },
+			{ title: 'Edit User', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

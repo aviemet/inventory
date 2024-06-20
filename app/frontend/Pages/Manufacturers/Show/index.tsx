@@ -32,7 +32,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Manufacturers', href: Routes.manufacturers() },
-			{ title: manufacturer.name! },
+			{ title: manufacturer.name, href: window.location.href },
 		] }>
 			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ omit(tabs, 'details') }>
 				<Tabs.List>

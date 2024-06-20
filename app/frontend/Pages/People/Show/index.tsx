@@ -1,6 +1,6 @@
 import React from 'react'
 import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
-import { formatter, Routes } from '@/lib'
+import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 import Details from './Details'
 import PersonHistory from './PersonHistory'
@@ -24,7 +24,7 @@ const ShowPerson = ({ person }: ShowPersonProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'People', href: Routes.people() },
-			{ title: person.name! },
+			{ title: person.name, href: window.location.href },
 		] }>
 			<Section fullHeight>
 				<Group justify="space-between">

@@ -13,7 +13,7 @@ const New = ({ ...data }: NewVendorProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Vendors', href: Routes.vendors() },
-			{ title: 'New Vendor' },
+			{ title: 'New Vendor', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

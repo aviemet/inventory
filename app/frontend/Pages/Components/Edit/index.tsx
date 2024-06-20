@@ -14,7 +14,7 @@ const EditComponent = ({ component }: UpdateComponentProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Components', href: Routes.components() },
 			{ title: component.name!, href: Routes.component(component) },
-			{ title: 'Edit Component' },
+			{ title: 'Edit Component', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

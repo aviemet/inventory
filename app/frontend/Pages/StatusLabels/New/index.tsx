@@ -13,7 +13,7 @@ const NewStatusLabel = ({ ...data }: NewStatusLabelProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Status Labels', href: Routes.statusLabels() },
-			{ title: 'New Status Label' },
+			{ title: 'New Status Label', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

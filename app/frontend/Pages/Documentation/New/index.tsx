@@ -13,7 +13,7 @@ const NewDocumentation = ({ documentation }: NewDocumentationProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Documentations', href: Routes.documentations() },
-			{ title: 'New Documentation' },
+			{ title, href: window.location.href },
 		] }>
 
 			<Section>

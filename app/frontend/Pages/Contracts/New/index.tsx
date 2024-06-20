@@ -13,7 +13,7 @@ const NewContract = ({ contract }: NewContractProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Contracts', href: Routes.contracts() },
-			{ title: 'New Contract' },
+			{ title: 'New Contract', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

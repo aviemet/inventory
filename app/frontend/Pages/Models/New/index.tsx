@@ -15,7 +15,7 @@ const New = ({ ...data }: NewModelProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Models', href: Routes.models() },
-			{ title: 'New Model' },
+			{ title: 'New Model', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

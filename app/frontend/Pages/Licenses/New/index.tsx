@@ -13,7 +13,7 @@ const New = ({ license }: NewLicenseProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Licenses', href: Routes.licenses() },
-			{ title: 'New License' },
+			{ title: 'New License', href: window.location.href },
 		] }>
 
 			<Section>

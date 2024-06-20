@@ -14,7 +14,7 @@ const New = ({ manufacturer, ...models }: UpdateManufacturerProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Manufacturers', href: Routes.manufacturers() },
 			{ title: manufacturer.name!, href: Routes.manufacturer(manufacturer.slug) },
-			{ title: 'Edit Manufacturer' },
+			{ title: 'Edit Manufacturer', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

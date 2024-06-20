@@ -13,7 +13,7 @@ const NewConsumable = ({ consumable }: NewConsumableProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Consumables', href: Routes.consumables() },
-			{ title: 'New Consumable' },
+			{ title: 'New Consumable', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

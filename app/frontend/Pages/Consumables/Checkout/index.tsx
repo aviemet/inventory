@@ -30,7 +30,7 @@ const Checkout = ({ assignment, consumable }: CheckoutItemProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Consumables', href: Routes.consumables() },
 			{ title: consumable.name!, href: Routes.consumable(consumable) },
-			{ title: 'Check Out' },
+			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
 				<Heading order={ 3 }>{ title }</Heading>

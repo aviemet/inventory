@@ -37,7 +37,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Vendors', href: Routes.vendors() },
-			{ title: vendor.name! },
+			{ title: vendor.name, href: window.location.href },
 		] }>
 			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {
 				[tabs.items]: 'items',

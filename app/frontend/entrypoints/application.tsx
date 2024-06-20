@@ -1,15 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { createInertiaApp, router } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import axios from 'axios'
 import { AuthLayout, AppLayout } from '../Layouts'
 import { propsMiddleware } from './middleware'
-import axe from '@axe-core/react'
-
-if(process.env.NODE_ENV !== 'production') {
-	axe(React, ReactDOM, 1000)
-}
+import { runAxe } from './middleware/axe'
 
 type PagesObject = { default: React.ComponentType<any> & {
 	layout?: React.ComponentType<any>
@@ -50,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			router.on('success', event => {
 				event.detail.page.props = propsMiddleware(event.detail.page.props)
+				runAxe(root)
 			})
 		},
 	})

@@ -13,7 +13,7 @@ const New = ({ person }: NewPersonProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'People', href: Routes.people() },
-			{ title: 'New Person' },
+			{ title: 'New Person', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

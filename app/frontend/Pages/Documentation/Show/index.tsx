@@ -13,7 +13,7 @@ const ShowDocumentation = ({ documentation }: ShowDocumentationProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Documentation', href: Routes.documentations() },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">

@@ -13,7 +13,7 @@ const NewComponent = ({ component }: NewComponentProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Components', href: Routes.components() },
-			{ title: 'New Component' },
+			{ title: 'New Component', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

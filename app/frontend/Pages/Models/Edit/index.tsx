@@ -16,7 +16,7 @@ const New = ({ model, ...models }: UpdateModelProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Models', href: Routes.models() },
 			{ title: model.name!, href: Routes.model(model) },
-			{ title: 'Edit Model' },
+			{ title: 'Edit Model', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

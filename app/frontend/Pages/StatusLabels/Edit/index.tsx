@@ -14,7 +14,7 @@ const EditStatusLabel = ({ status_label }: UpdateStatusLabelProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Status Labels', href: Routes.statusLabels() },
 			{ title: status_label.name!, href: Routes.statusLabel(status_label.slug) },
-			{ title: 'Edit Status Label' },
+			{ title: 'Edit Status Label', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

@@ -13,7 +13,7 @@ const New<%= singular_table_name.camelize %> = ({ ...data }: New<%= singular_tab
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: '<%= human_name.pluralize.titleize %>', href: Routes.<%= plural_table_name.camelize(:lower) %>() },
-			{ title: 'New <%= human_name.titleize %>' },
+			{ title: 'New <%= human_name.titleize %>', href: window.location.href },
 		] }>
 
 			<Section>

@@ -24,7 +24,7 @@ const ShowConsumable = ({ consumable }: ShowConsumableProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Consumables', href: Routes.consumables() },
-			{ title: consumable.name! },
+			{ title: consumable.name, href: window.location.href },
 		] }>
 			<Section>
 				<Flex>

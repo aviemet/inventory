@@ -14,7 +14,7 @@ const EditPerson = ({ person }: UpdatePersonProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'People', href: Routes.person(person) },
 			{ title: `${person.first_name} ${person.last_name}`, href: Routes.person(person) },
-			{ title: 'Edit Person' },
+			{ title: 'Edit Person', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

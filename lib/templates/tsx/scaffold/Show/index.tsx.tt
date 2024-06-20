@@ -12,7 +12,7 @@ const Show<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }:
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: '<%= human_name.titleize %>', href: Routes.<%= plural_table_name.camelize(:lower) %>() },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">

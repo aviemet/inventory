@@ -16,7 +16,7 @@ const EditTicket = ({ ticket, ...data }: UpdateTicketProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Tickets', href: Routes.tickets() },
 			{ title: ticket.subject!, href: Routes.ticket(ticket) },
-			{ title: 'Edit Ticket' },
+			{ title: 'Edit Ticket', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

@@ -30,7 +30,7 @@ const ShowItem = ({ item }: ShowItemProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Hardware', href: Routes.items() },
-			{ title: item.name! },
+			{ title: item.name, href: window.location.href },
 		] }>
 			<Section fullHeight>
 				<Group justify="space-between">

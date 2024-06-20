@@ -13,7 +13,7 @@ const NewLocation = ({ location }: NewLocationProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Locations', href: Routes.locations() },
-			{ title: 'New Location' },
+			{ title: 'New Location', href: window.location.href },
 		] }>
 
 			<Section>

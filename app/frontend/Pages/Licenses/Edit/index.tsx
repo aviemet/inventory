@@ -14,7 +14,7 @@ const New = ({ license }: UpdateLicenseProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Licenses', href: Routes.licenses() },
 			{ title: license.name!, href: Routes.license(license) },
-			{ title: 'Edit Licenses' },
+			{ title: 'Edit License', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

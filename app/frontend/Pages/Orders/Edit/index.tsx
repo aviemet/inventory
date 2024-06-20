@@ -14,7 +14,7 @@ const EditOrder = ({ order  }: UpdateOrderProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Order', href: Routes.orders() },
 			{ title: String(order.id), href: Routes.order(order) },
-			{ title: 'Edit Order' },
+			{ title: 'Edit Order', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

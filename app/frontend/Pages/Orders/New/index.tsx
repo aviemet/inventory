@@ -13,7 +13,7 @@ const NewOrder = ({ order }: NewOrderProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Orders', href: Routes.orders() },
-			{ title: 'New Order' },
+			{ title: 'New Order', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

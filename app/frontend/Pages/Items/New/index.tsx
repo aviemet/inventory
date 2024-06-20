@@ -13,7 +13,7 @@ const NewItem = ({ item }: NewItemProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Hardware', href: Routes.items() },
-			{ title: 'New Hardware' },
+			{ title: 'New Hardware', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

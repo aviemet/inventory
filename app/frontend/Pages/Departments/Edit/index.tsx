@@ -13,8 +13,8 @@ const EditDepartment = ({ department }: EditDepartmentProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Departments', href: Routes.departments() },
-			{ title: department.name!, href: Routes.department(department) },
-			{ title: 'Edit Department' },
+			{ title: department.name, href: Routes.department(department) },
+			{ title: 'Edit Department', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

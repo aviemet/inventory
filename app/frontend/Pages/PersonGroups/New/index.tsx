@@ -13,7 +13,7 @@ const New = ({ ...data }: NewGroupProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Groups', href: Routes.personGroups() },
-			{ title: 'New People Group' },
+			{ title: 'New People Group', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

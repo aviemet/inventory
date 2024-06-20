@@ -16,7 +16,7 @@ const EditGroup = ({ person_group, ...models }: UpdateGroupProps) => {
 			{ title: 'People', href: Routes.people() },
 			{ title: 'Groups', href: Routes.personGroups() },
 			{ title: person_group.name!, href: Routes.personGroup(person_group.slug) },
-			{ title: 'Edit' },
+			{ title: 'Edit', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

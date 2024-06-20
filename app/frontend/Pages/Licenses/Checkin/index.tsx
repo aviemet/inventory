@@ -19,7 +19,7 @@ const Checkin = ({ assignment, license, locations, status_labels }: CheckinLicen
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'License', href: Routes.licenses() },
 			{ title: license.name!, href: Routes.license(license) },
-			{ title: 'Check Out' },
+			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
 				<Heading order={ 3 }>{ title }</Heading>

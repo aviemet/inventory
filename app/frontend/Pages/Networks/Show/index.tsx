@@ -20,7 +20,7 @@ const Show = ({ network, ips, pagination }: ShowNetworkProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Networks', href: Routes.networks() },
-			{ title: network.name! },
+			{ title: network.name, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">

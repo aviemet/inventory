@@ -21,7 +21,7 @@ const ShowLicense = ({ license }: ShowLicenseProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Licenses', href: Routes.licenses() },
-			{ title: license.name! },
+			{ title: license.name, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">

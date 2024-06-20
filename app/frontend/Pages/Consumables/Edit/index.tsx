@@ -13,8 +13,8 @@ const EditConsumable = ({ consumable }: UpdateConsumableProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Consumables', href: Routes.consumables() },
-			{ title: consumable.name!, href: Routes.consumable(consumable) },
-			{ title: 'Edit Consumable' },
+			{ title: consumable.name, href: Routes.consumable(consumable) },
+			{ title: 'Edit Consumable', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

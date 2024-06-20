@@ -15,7 +15,7 @@ const ShowUser = ({ person_group }: ShowUserProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'People', href: Routes.people() },
 			{ title: 'Groups', href: Routes.personGroups() },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Table.Section>
 

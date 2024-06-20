@@ -13,7 +13,7 @@ const New = ({ network }: NewNetworkProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Networks', href: Routes.networks() },
-			{ title: 'New Network' },
+			{ title: 'New Network', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

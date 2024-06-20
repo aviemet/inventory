@@ -14,7 +14,7 @@ const EditContract = ({ contract }: UpdateContractProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Contracts', href: Routes.contracts() },
 			{ title: contract.name!, href: Routes.contract(contract) },
-			{ title: 'Edit Contract' },
+			{ title: 'Edit Contract', href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

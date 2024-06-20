@@ -14,7 +14,7 @@ const EditDocumentation = ({ documentation }: EditDocumentationProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Documentations', href: Routes.documentations() },
 			{ title: documentation.title!, href: Routes.documentation(documentation.slug) },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
 				<Heading>{ title }</Heading>

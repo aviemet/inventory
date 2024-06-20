@@ -24,7 +24,7 @@ const ShowComponent = ({ component }: ShowComponentProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Components', href: Routes.components() },
-			{ title: component.name! },
+			{ title: component.name, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">
