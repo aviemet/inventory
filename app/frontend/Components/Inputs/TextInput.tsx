@@ -5,6 +5,7 @@ import Label from './Label'
 import InputWrapper from './InputWrapper'
 import { CrossIcon } from '../Icons'
 import { isUnset } from '@/lib'
+import { withInjectedProps } from './index'
 
 export interface TextInputProps extends MantineTextInputProps, BaseInputProps {
 	clearable?: boolean
@@ -23,6 +24,7 @@ const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
 		value,
 		onChange,
 		readOnly,
+		disableAutofill = false,
 		...props
 	},
 	ref,
@@ -63,7 +65,9 @@ const TextInputComponent = forwardRef<HTMLInputElement, TextInputProps>((
 				required={ required }
 				size={ size }
 				rightSection={ !readOnly && clearable && !isUnset(value) && <CrossIcon onClick={ handleClear } /> }
-				{ ...props }
+				{ ...withInjectedProps(props, {
+					disableAutofill,
+				}) }
 			/>
 		</InputWrapper>
 	)

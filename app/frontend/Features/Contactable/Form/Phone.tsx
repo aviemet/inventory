@@ -16,7 +16,7 @@ const Phone = () => {
 			</Grid.Col>
 
 			<Grid.Col span={ { sm: 12, md: 4 } }>
-				<TextInput label="Extension" name="extension" />
+				<TextInput label="Extension" name="extension" disableAutofill />
 			</Grid.Col>
 
 			<Grid.Col>

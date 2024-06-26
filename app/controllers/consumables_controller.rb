@@ -7,6 +7,7 @@ class ConsumablesController < ApplicationController
 
   # @route GET /consumables (consumables)
   def index
+    ap({ a_c_s: @active_company.consumables })
     authorize consumables
     paginated_consumables = consumables.page(params[:page] || 1).per(current_user.limit(:consumables))
 
