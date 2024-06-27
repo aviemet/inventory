@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from '@/Components'
+import { Grid, Section } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -15,6 +15,7 @@ import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/Features/Dropdown
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 import { ContactForm } from '@/Features'
+import { Fieldset } from '@mantine/core'
 
 type PersonFormData = {
 	person: Schema.PeopleEdit
@@ -142,7 +143,6 @@ const PersonForm = ({
 						required
 					/>
 				</Grid.Col>
-
 				<Grid.Col span={ { sm: 12, md: 6 } }>
 					<TextInput
 						name="middle_name"

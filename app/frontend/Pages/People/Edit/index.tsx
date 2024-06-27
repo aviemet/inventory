@@ -17,7 +17,7 @@ const EditPerson = ({ person }: UpdatePersonProps) => {
 			{ title: 'Edit Person', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Heading mb="sm">{ title }</Heading>
 
 				<EditPersonForm
 					to={ Routes.person(person) }

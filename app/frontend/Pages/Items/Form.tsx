@@ -43,11 +43,11 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 			{ ...props }
 		>
 			<Grid>
-				<Grid.Col>
-					<TextInput name="name" label="Name" required />
-				</Grid.Col>
-
 				<FormGroup legend="Item Details">
+					<Grid.Col>
+						<TextInput name="name" label="Name" required />
+					</Grid.Col>
+
 					<Grid.Col>
 						<FormModelsDropdown
 							modelCategory='Item'
@@ -73,18 +73,25 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 						/>
 					</Grid.Col>
 
-					{ staticIp && <DynamicInputs model="nics" emptyData={ {
-						mac: '',
-						nic_type: '',
-					} }>
+					{ staticIp &&
 						<Grid.Col>
-							<TextInput name="ip" label="IP Address" />
-						</Grid.Col>
+							<DynamicInputs model="nics" label="IP Addresses" emptyData={ {
+								mac: '',
+								nic_type: '',
+							} }>
 
-						<Grid.Col>
-							<TextInput name="mac" label="Mac Address" />
+								<Grid.Col>
+									<TextInput name="ip" label="IP Address" disableAutofill />
+								</Grid.Col>
+
+								<Grid.Col>
+									<TextInput name="mac" label="Mac Address" disableAutofill />
+								</Grid.Col>
+
+							</DynamicInputs>
 						</Grid.Col>
-					</DynamicInputs> }
+					}
+
 				</FormGroup>
 
 				<FormGroup legend="Purchase Details">
@@ -93,7 +100,7 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 					</Grid.Col>
 
 					<Grid.Col span={ { sm: 12, md: 6 } }>
-						<CurrencyInput name="cost" label="Cost" />
+						<CurrencyInput name="cost" label="Cost" disableAutofill />
 					</Grid.Col>
 
 					<Grid.Col span={ { sm: 12, md: 6 } }>
@@ -108,6 +115,7 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 							name="default_location_id"
 							initialData={ coerceArray(item?.default_location) }
 							required
+							disableAutofill
 						/>
 					</Grid.Col>
 
