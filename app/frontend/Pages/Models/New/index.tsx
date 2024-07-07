@@ -18,7 +18,7 @@ const New = ({ ...data }: NewModelProps) => {
 			{ title: 'New Model', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ModelForm to={ Routes.models() } { ...data } />
 			</Section>

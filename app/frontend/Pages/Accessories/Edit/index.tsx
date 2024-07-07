@@ -18,7 +18,7 @@ const EditAccessory = ({ accessory }: EditAccessoryProps) => {
 		] }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<AccessoryForm
 					to={ Routes.accessory(accessory) }

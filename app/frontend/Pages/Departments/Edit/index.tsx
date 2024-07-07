@@ -17,7 +17,7 @@ const EditDepartment = ({ department }: EditDepartmentProps) => {
 			{ title: 'Edit Department', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<DepartmentForm to={ Routes.department(department) } method="patch" department={ department } />
 			</Section>

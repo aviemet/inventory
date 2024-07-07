@@ -17,7 +17,7 @@ const EditConsumable = ({ consumable }: UpdateConsumableProps) => {
 			{ title: 'Edit Consumable', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ConsumableForm
 					to={ Routes.consumable(consumable) }

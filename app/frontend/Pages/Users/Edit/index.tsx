@@ -17,7 +17,7 @@ const EditUser = ({ user }: UpdateUserProps) => {
 			{ title: 'Edit User', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<UserForm
 					to={ Routes.user(user) }

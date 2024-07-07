@@ -16,7 +16,7 @@ const NewConsumable = ({ consumable }: NewConsumableProps) => {
 			{ title: 'New Consumable', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ConsumableForm to={ Routes.consumables() } consumable={ consumable } />
 			</Section>

@@ -20,7 +20,7 @@ const Checkout = ({ assignment, component, items }: CheckoutItemProps) => {
 			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
-				<Heading order={ 1 } size="h3" mb="sm">{ title }</Heading>
+				<Title order={ 1 } size="h3" mb="sm">{ title }</Title>
 
 				<Form
 					data={ {

@@ -18,7 +18,7 @@ const ShowTicket = ({ ticket }: ShowTicketProps) => {
 			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 				<Box>
 					<Text size="sm">
 					Primary Contact:&nbsp;
@@ -36,7 +36,7 @@ const ShowTicket = ({ ticket }: ShowTicketProps) => {
 				</Box>
 
 				<Paper p="sm" my="sm">
-					<Heading order={ 4 } mb="xs">Original Message:</Heading>
+					<Title order={ 4 } mb="xs">Original Message:</Title>
 					<DangerousHtml>{ ticket.description }</DangerousHtml>
 				</Paper>
 

@@ -17,7 +17,7 @@ const EditCompany = ({ company }: EditCompanyProps) => {
 			{ title: 'Edit Company', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<CompanyForm to={ Routes.companies() } company={ company } />
 			</Section>

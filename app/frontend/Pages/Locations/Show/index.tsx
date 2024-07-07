@@ -16,7 +16,7 @@ const ShowLocation = ({ location }: ShowLocationProps) => {
 		] }>
 			<Section>
 				<Group justify="space-between">
-					<Heading>{ title }</Heading>
+					<Title>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

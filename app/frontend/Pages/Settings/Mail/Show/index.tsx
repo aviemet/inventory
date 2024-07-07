@@ -14,7 +14,7 @@ const ShowMailSetting = ({ smtp }: ShowMailSettingProps) => {
 			{ title: 'Mail', href: Routes.settingsSmtps() },
 			{ title: smtp.name, href: Routes.settingsSmtp(smtp.id!) },
 		] }>
-			<Heading mb={ 24 }>Mail Settings: { smtp.name }</Heading>
+			<Title mb={ 24 }>Mail Settings: { smtp.name }</Title>
 
 			<Table>
 				<Table.Body>

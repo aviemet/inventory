@@ -17,7 +17,7 @@ const NewLocation = ({ location }: NewLocationProps) => {
 		] }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<LocationForm to={ Routes.locations() } location={ location } />
 			</Section>

@@ -37,7 +37,7 @@ const CompleteRegistration = () => {
 			>
 				<Tile.Content>
 					<div>
-						<Heading order={ 2 }>Complete Registration</Heading>
+						<Title order={ 2 }>Complete Registration</Title>
 						<p>Let&apos;s get a little more information about you.</p>
 					</div>
 

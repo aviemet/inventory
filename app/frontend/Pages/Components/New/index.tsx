@@ -16,7 +16,7 @@ const NewComponent = ({ component }: NewComponentProps) => {
 			{ title: 'New Component', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ComponentForm to={ Routes.components() } component={ component } />
 			</Section>

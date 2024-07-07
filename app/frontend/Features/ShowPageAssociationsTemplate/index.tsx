@@ -12,7 +12,7 @@ interface ShowPageAssociationsProps {
 const ShowPageAssociations = ({ assignable, checkinRoute }: ShowPageAssociationsProps) => {
 	return (
 		<Box mt={ 16 }>
-			<Heading order={ 3 }>Active Assignments</Heading>
+			<Title order={ 3 }>Active Assignments</Title>
 
 			{ assignable.assignments && <List mt={ 16 } icon={
 				<Icon color="teal" size={ 24 } radius="xl">

@@ -17,7 +17,7 @@ const EditCategory = ({ category, ...models }: UpdateCategoryProps) => {
 			{ title: 'Edit Category', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<CategoryForm to={ Routes.category(category.slug) } method="patch" category={ category } />
 			</Section>

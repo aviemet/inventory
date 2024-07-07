@@ -17,7 +17,7 @@ const EditDocumentation = ({ documentation }: EditDocumentationProps) => {
 			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<DocumentationsForm
 					method='put'

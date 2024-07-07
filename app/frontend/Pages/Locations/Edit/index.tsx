@@ -17,7 +17,7 @@ const EditLocation = ({ location }: EditLocationProps) => {
 			{ title: 'Edit Location', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<LocationForm
 					to={ Routes.location(location.slug) }

@@ -17,7 +17,7 @@ const New<%= singular_table_name.camelize %> = ({ ...data }: New<%= singular_tab
 		] }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<<%= singular_table_name.camelize %>Form
 					to={ Routes.<%= plural_table_name.camelize(:lower) %>() }

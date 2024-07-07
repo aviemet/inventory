@@ -5,7 +5,7 @@ import { Heading } from '@/Components'
 const TicketsSettings = () => {
 	return (
 		<SettingsLayout>
-			<Heading mb={ 24 }>Tickets Settings</Heading>
+			<Title mb={ 24 }>Tickets Settings</Title>
 		</SettingsLayout>
 	)
 }

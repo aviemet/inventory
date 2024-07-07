@@ -28,7 +28,7 @@ const ShowAccessory = ({ accessory }: ShowAccessoryProps) => {
 
 			<Section>
 				<Group justify="space-between">
-					<Heading>{ title }</Heading>
+					<Title>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

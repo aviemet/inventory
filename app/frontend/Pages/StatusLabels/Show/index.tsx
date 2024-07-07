@@ -11,7 +11,7 @@ const ShowStatusLabel = ({ status_label }: ShowStatusLabelProps) => {
 	return (
 		<Page title={ title }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 			</Section>
 		</Page>
 	)

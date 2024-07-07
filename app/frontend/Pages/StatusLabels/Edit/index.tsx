@@ -17,7 +17,7 @@ const EditStatusLabel = ({ status_label }: UpdateStatusLabelProps) => {
 			{ title: 'Edit Status Label', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<StatusLabelForm to={ Routes.statusLabel(status_label) } method="patch" status_label={ status_label } />
 			</Section>

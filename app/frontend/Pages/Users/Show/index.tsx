@@ -10,7 +10,7 @@ const ShowUser = ({ user }: ShowUserProps) => {
 	return (
 		<>
 			<Section>
-				<Heading>User: { user.email }</Heading>
+				<Title>User: { user.email }</Title>
 				<Text my={ 10 }>User is active in the following companies</Text>
 				<Table>
 					<Table.Head>

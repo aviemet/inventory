@@ -16,7 +16,7 @@ const New = ({ ...data }: NewManufacturerProps) => {
 			{ title: 'New Manufacturer', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ManufacturerForm to={ Routes.manufacturers() } { ...data } />
 			</Section>

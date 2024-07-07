@@ -27,7 +27,7 @@ const Checkout = ({ assignment, accessory, ...models }: CheckoutItemProps) => {
 		] }>
 
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 					<Table>

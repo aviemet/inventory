@@ -16,7 +16,7 @@ const Mail = ({ smtps }: MailSettingsProps) => {
 			{ title: 'Mail', href: Routes.settingsSmtps() },
 		] }>
 			<Group justify="space-between">
-				<Heading mb={ 24 }>Mail Settings</Heading>
+				<Title mb={ 24 }>Mail Settings</Title>
 				<Menu position="bottom-end">
 					<Menu.Target />
 					<Menu.Dropdown>

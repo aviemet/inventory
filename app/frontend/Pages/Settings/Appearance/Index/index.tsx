@@ -48,9 +48,9 @@ const AppearanceSettings = ({ settings }: AppearanceSettingsProps) => {
 
 	return (
 		<SettingsLayout>
-			<Heading mb={ 24 }>Appearance Settings</Heading>
+			<Title mb={ 24 }>Appearance Settings</Title>
 			<Box>
-				<Heading order={ 2 }>Company Theme</Heading>
+				<Title order={ 2 }>Company Theme</Title>
 				<Form
 					model="settings"
 					data={ defaultFormData() }

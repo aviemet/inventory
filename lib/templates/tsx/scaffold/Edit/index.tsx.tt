@@ -17,7 +17,7 @@ const Edit<%= singular_table_name.camelize %> = ({ <%= singular_table_name %> }:
 			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 				
 				<<%= plural_table_name.camelize %>Form
 					method='put'

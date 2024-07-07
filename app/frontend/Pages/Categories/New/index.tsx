@@ -16,7 +16,7 @@ const NewCategory = ({ category }: NewCategoryProps) => {
 			{ title: 'New Category', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<CategoryForm to={ Routes.categories() } category={ category } />
 			</Section>

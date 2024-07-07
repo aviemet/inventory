@@ -5,7 +5,7 @@ import { ShowAccessoryProps } from '.'
 const AccessoryHistory = ({ accessory }: ShowAccessoryProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>History</Heading>
+			<Title order={ 3 }>History</Title>
 
 			<History assignments={ accessory.assignments } activities={ accessory.activities } />
 		</>

@@ -19,7 +19,7 @@ const EditTicket = ({ ticket, ...data }: UpdateTicketProps) => {
 			{ title: 'Edit Ticket', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<TicketForm
 					to={ Routes.ticket(ticket) }

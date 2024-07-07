@@ -16,7 +16,7 @@ const NewItem = ({ item }: NewItemProps) => {
 			{ title: 'New Hardware', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 				<ItemForm to={ Routes.items() } item={ item } />
 			</Section>
 		</Page>

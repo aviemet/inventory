@@ -16,7 +16,7 @@ const New = ({ ...data }: NewGroupProps) => {
 			{ title: 'New People Group', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<GroupForm to={ Routes.personGroups() } { ...data } />
 			</Section>

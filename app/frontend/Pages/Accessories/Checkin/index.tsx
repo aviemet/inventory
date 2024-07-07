@@ -43,7 +43,7 @@ const Checkin = ({ assignment, accessory, statuses }: CheckinAccessoriesProps) =
 			</Section>
 
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Form
 					data={ {

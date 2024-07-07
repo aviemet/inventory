@@ -17,7 +17,7 @@ const NewDocumentation = ({ documentation }: NewDocumentationProps) => {
 		] }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<DocumentationForm
 					to={ Routes.documentations() }

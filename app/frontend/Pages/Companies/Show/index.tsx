@@ -16,7 +16,7 @@ const Show = ({ company }: ShowCompanyProps) => {
 			{ title: company.name, href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 			</Section>
 
 			{ company.contact && <Section>

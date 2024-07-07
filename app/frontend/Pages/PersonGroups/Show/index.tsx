@@ -20,7 +20,7 @@ const ShowUser = ({ person_group }: ShowUserProps) => {
 			<Table.Section>
 
 				<Group justify="space-between">
-					<Heading mb={ 8 }>Group: { title }</Heading>
+					<Title mb={ 8 }>Group: { title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

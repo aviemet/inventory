@@ -22,7 +22,7 @@ const PasswordsNew = () => {
 			>
 				<Tile.Content>
 					<div>
-						<Heading>Reset Password</Heading>
+						<Title>Reset Password</Title>
 					</div>
 
 					<Field>

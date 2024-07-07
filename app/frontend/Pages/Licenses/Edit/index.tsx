@@ -17,7 +17,7 @@ const New = ({ license }: UpdateLicenseProps) => {
 			{ title: 'Edit License', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<LicenseForm to={ Routes.license(license) } method="patch" license={ license } />
 			</Section>

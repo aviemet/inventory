@@ -17,7 +17,7 @@ const ShowDocumentation = ({ documentation }: ShowDocumentationProps) => {
 		] }>
 			<Section>
 				<Group justify="space-between">
-					<Heading>{ documentation.title }</Heading>
+					<Title>{ documentation.title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

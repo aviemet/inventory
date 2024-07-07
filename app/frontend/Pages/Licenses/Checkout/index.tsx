@@ -23,7 +23,7 @@ const Checkout = ({ assignment, license, ...models }: CheckoutLicenseProps) => {
 			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Box style={ (theme) => ({ maxWidth: `${theme.breakpoints.md}` }) }>
 					<Flex>

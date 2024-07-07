@@ -5,7 +5,7 @@ import { Heading } from '@/Components'
 const Appearance = () => {
 	return (
 		<SettingsLayout>
-			<Heading mb={ 24 }>Asset Tags Settings</Heading>
+			<Title mb={ 24 }>Asset Tags Settings</Title>
 		</SettingsLayout>
 	)
 }

@@ -6,7 +6,7 @@ import { ShowConsumableProps } from '.'
 const ConsumableDetails = ({ consumable }: ShowConsumableProps) => {
 	return (
 		<>
-			<Heading order={ 2 }>Details</Heading>
+			<Title order={ 2 }>Details</Title>
 
 			<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 				<Table>

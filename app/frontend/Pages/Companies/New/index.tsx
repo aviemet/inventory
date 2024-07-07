@@ -18,7 +18,7 @@ const NewCompany = ({ company }: NewCompanyProps) => {
 			] } />
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<CompanyForm to={ Routes.companies() } company={ company } />
 			</Section>

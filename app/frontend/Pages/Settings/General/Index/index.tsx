@@ -5,7 +5,7 @@ import { Heading } from '@/Components'
 const General = () => {
 	return (
 		<SettingsLayout>
-			<Heading mb={ 24 }>General Settings</Heading>
+			<Title mb={ 24 }>General Settings</Title>
 		</SettingsLayout>
 	)
 }

@@ -18,7 +18,7 @@ const NewTicket = ({ ...data }: NewTicketProps) => {
 			{ title: 'New Ticket', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<TicketForm to={ Routes.tickets() } { ...data } />
 			</Section>

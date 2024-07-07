@@ -18,7 +18,7 @@ const ConfirmationsNew = ({ user }: ConfirmationsNewProps) => {
 			>
 				<Tile.Content>
 					<div>
-						<Heading order={ 3 }>Please check your email</Heading>
+						<Title order={ 3 }>Please check your email</Title>
 						<p>You will receive an email within the next couple minutes. Please follow the link to confirm your account.</p>
 						<p>If you don&apos;t receive an email, use the form below to resend it.</p>
 					</div>

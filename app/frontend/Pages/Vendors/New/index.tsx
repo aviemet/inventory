@@ -16,7 +16,7 @@ const New = ({ ...data }: NewVendorProps) => {
 			{ title: 'New Vendor', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<VendorForm to={ Routes.vendors() } { ...data } />
 			</Section>

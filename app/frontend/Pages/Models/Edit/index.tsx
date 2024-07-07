@@ -19,7 +19,7 @@ const New = ({ model, ...models }: UpdateModelProps) => {
 			{ title: 'Edit Model', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ModelForm to={ Routes.model(model) } method="patch" model={ model } { ...models } />
 			</Section>

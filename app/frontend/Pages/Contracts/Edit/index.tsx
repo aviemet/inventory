@@ -17,7 +17,7 @@ const EditContract = ({ contract }: UpdateContractProps) => {
 			{ title: 'Edit Contract', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ContractForm
 					to={ Routes.contract(contract) }

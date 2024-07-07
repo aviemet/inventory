@@ -17,7 +17,7 @@ const EditComponent = ({ component }: UpdateComponentProps) => {
 			{ title: 'Edit Component', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ComponentForm to={ Routes.component(component) } method="patch" component={ component } />
 			</Section>

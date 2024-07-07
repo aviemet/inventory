@@ -5,7 +5,7 @@ import { Heading } from '@/Components'
 const LocalizationSettings = () => {
 	return (
 		<SettingsLayout>
-			<Heading mb={ 24 }>Logs</Heading>
+			<Title mb={ 24 }>Logs</Title>
 		</SettingsLayout>
 	)
 }

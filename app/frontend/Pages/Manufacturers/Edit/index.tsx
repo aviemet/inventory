@@ -17,7 +17,7 @@ const New = ({ manufacturer, ...models }: UpdateManufacturerProps) => {
 			{ title: 'Edit Manufacturer', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ManufacturerForm to={ Routes.manufacturer(manufacturer) } method="patch" manufacturer={ manufacturer } { ...models } />
 			</Section>

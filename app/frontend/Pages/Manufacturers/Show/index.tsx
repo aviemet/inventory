@@ -47,7 +47,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
 						<Group justify="space-between">
-							<Heading>{ title }</Heading>
+							<Title>{ title }</Title>
 
 							<Menu position="bottom-end">
 								<Menu.Target />

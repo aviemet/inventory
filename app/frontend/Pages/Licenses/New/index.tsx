@@ -17,7 +17,7 @@ const New = ({ license }: NewLicenseProps) => {
 		] }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<LicenseForm to={ Routes.licenses() } license={ license } />
 			</Section>

@@ -19,7 +19,7 @@ const EditGroup = ({ person_group, ...models }: UpdateGroupProps) => {
 			{ title: 'Edit', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<GroupForm to={ Routes.personGroup(person_group.slug) } method="patch" person_group={ person_group } { ...models } />
 			</Section>

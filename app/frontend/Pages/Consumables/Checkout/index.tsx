@@ -33,7 +33,7 @@ const Checkout = ({ assignment, consumable }: CheckoutItemProps) => {
 			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<div>
 					<div className="item-details">

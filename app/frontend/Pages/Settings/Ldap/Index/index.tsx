@@ -18,7 +18,7 @@ const Ldap = ({ ldap }: LdapSettingsProps) => {
 
 	return (
 		<SettingsLayout>
-			<Heading mb={ 24 }>LDAP/Active Directory Settings</Heading>
+			<Title mb={ 24 }>LDAP/Active Directory Settings</Title>
 			<LdapForm
 				to={ ldap.id ? Routes.settingsLdap({ id: ldap.id }) : Routes.settingsLdaps() }
 				method={ ldap.id ? 'put' : 'post' }

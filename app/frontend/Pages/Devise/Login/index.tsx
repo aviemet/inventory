@@ -42,7 +42,7 @@ const Login = () => {
 				<Tile.Content>
 
 					<div>
-						<Heading>Inventory</Heading>
+						<Title>Inventory</Title>
 					</div>
 
 					<Field>

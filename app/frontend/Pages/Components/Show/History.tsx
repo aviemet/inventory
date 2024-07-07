@@ -5,7 +5,7 @@ import { ShowComponentProps } from '.'
 const ComponentHistory = ({ component }: ShowComponentProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>History</Heading>
+			<Title order={ 3 }>History</Title>
 
 			<History assignments={ component.assignments } activities={ component.activities } />
 		</>

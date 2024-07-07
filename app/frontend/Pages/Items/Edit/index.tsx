@@ -17,7 +17,7 @@ const EditItem = ({ item }: UpdateItemProps) => {
 			{ title: 'Edit Hardware', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ItemForm to={ Routes.item(item) } method="patch" item={ item } />
 			</Section>

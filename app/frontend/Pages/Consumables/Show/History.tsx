@@ -5,7 +5,7 @@ import { ShowConsumableProps } from '.'
 const ConsumableHistory = ({ consumable }: ShowConsumableProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>History</Heading>
+			<Title order={ 3 }>History</Title>
 
 			<History assignments={ consumable.assignments } activities={ consumable.activities } />
 		</>

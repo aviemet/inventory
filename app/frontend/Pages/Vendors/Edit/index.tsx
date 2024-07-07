@@ -17,7 +17,7 @@ const EditVendor = ({ vendor, ...models }: UpdateVendorProps) => {
 			{ title: 'Edit Vendor', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 				<VendorForm
 					to={ Routes.vendor(vendor.slug) }
 					method="patch"

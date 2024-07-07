@@ -17,7 +17,7 @@ const EditOrder = ({ order  }: UpdateOrderProps) => {
 			{ title: 'Edit Order', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<OrderForm to={ Routes.order(order) } method="patch" order={ order } />
 			</Section>

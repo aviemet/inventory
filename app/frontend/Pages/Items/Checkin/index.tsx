@@ -40,7 +40,7 @@ const Checkin = ({ assignment, item, locations, status_labels }: CheckinItemsPro
 			</Section>
 
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Form
 					data={ {

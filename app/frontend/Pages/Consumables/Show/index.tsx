@@ -28,7 +28,7 @@ const ShowConsumable = ({ consumable }: ShowConsumableProps) => {
 		] }>
 			<Section>
 				<Flex>
-					<Heading style={ { flex: 1 } }>{ title }</Heading>
+					<Title style={ { flex: 1 } }>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

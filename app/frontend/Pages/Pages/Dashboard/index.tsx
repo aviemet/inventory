@@ -13,14 +13,14 @@ const Dashboard = ({ company, activities }: DashboardProps) => {
 		<Page title="Dashboard" breadcrumbs={ [
 			{ href: '/dashboard', title: 'Dashboard' },
 		] }>
-			<Heading mb="sm">Company Overview</Heading>
+			<Title mb="sm">Company Overview</Title>
 
 			<Section>
 				<Counts counts={ company.counts } />
 			</Section>
 
 			<Section>
-				<Heading order={ 2 }>Recent Activity</Heading>
+				<Title order={ 2 }>Recent Activity</Title>
 				<RecentActivityTable activities={ activities } />
 			</Section>
 		</Page>

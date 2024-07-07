@@ -16,7 +16,7 @@ const New = ({ network }: NewNetworkProps) => {
 			{ title: 'New Network', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<NetworkForm to={ Routes.networks() } network={ network } />
 			</Section>

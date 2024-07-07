@@ -16,7 +16,7 @@ const NewStatusLabel = ({ ...data }: NewStatusLabelProps) => {
 			{ title: 'New Status Label', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<StatusLabelForm to={ Routes.statusLabels() } { ...data } />
 			</Section>

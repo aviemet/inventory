@@ -16,7 +16,7 @@ const EditMail = ({ smtp }: SmtpFormProps) => {
 			{ title: smtp.name!, href: Routes.settingsSmtp(smtp.id!) },
 			{ title: 'Edit', href: Routes.editSettingsSmtp(smtp.id!) },
 		] }>
-			<Heading mb={ 24 }>Mail Settings</Heading>
+			<Title mb={ 24 }>Mail Settings</Title>
 
 			<SmtpForm
 				method="put"

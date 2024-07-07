@@ -71,7 +71,7 @@ const Register = () => {
 				<Tile.Content>
 
 					<div>
-						<Heading>{ content.heading }</Heading>
+						<Title>{ content.heading }</Title>
 						<p>{ content.description }</p>
 					</div>
 

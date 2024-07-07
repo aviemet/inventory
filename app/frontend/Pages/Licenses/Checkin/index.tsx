@@ -22,7 +22,7 @@ const Checkin = ({ assignment, license, locations, status_labels }: CheckinLicen
 			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Box style={ (theme) => ({ maxWidth: `${theme.breakpoints.md}` }) }>
 					<Flex>
@@ -81,7 +81,7 @@ const Checkin = ({ assignment, license, locations, status_labels }: CheckinLicen
 			</Section>
 
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Form
 					data={ {

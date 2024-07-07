@@ -16,7 +16,7 @@ const New = ({ person }: NewPersonProps) => {
 			{ title: 'New Person', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<NewPersonForm to={ Routes.people() } person={ person } />
 			</Section>

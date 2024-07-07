@@ -16,7 +16,7 @@ const NewContract = ({ contract }: NewContractProps) => {
 			{ title: 'New Contract', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ContractForm to={ Routes.contracts() } contract={ contract } />
 			</Section>

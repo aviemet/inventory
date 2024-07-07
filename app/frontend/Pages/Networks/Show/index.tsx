@@ -24,7 +24,7 @@ const Show = ({ network, ips, pagination }: ShowNetworkProps) => {
 		] }>
 			<Section>
 				<Group justify="space-between">
-					<Heading style={ { flex: 1 } }>{ title }</Heading>
+					<Title style={ { flex: 1 } }>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -98,7 +98,7 @@ const Show = ({ network, ips, pagination }: ShowNetworkProps) => {
 			<br />
 
 			<Section>
-				<Heading order={ 2 }>Addresses</Heading>
+				<Title order={ 2 }>Addresses</Title>
 
 				<NetworkContextProvider value={ { network } }>
 					<NetworkDetailsTable

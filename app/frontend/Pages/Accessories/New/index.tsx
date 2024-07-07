@@ -16,7 +16,7 @@ const NewAccessory = ({ accessory }: NewAccessoryProps) => {
 			{ title: 'New Accessory', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<AccessoryForm to={ Routes.accessories() } accessory={ accessory } />
 			</Section>

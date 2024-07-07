@@ -16,7 +16,7 @@ const NewDepartment = ({ department }: NewDepartmentProps) => {
 			{ title: 'New Department', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<AccessoryForm to={ Routes.departments() } department={ department } />
 			</Section>

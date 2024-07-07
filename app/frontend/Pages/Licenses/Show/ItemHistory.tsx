@@ -5,7 +5,7 @@ import { ShowLicenseProps } from '.'
 const LicenseHistory = ({ license }: ShowLicenseProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>History</Heading>
+			<Title order={ 3 }>History</Title>
 
 			<History assignments={ license.assignments } activities={ license.activities } />
 		</>
