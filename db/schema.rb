@@ -569,10 +569,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_04_25_194058) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
-    t.bigint "active_company_id"
     t.boolean "active", default: true, null: false
     t.jsonb "table_preferences", default: {}
     t.jsonb "user_preferences", default: {}
+    t.bigint "active_company_id"
     t.index ["active_company_id"], name: "index_users_on_active_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

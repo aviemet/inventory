@@ -89,7 +89,7 @@ class Company < ApplicationRecord
     consumables: "Consumable",
     components: "Component",
   }.each_pair do |assoc, model|
-    has_many assoc, ->{ where(type: model) }, through: :ownerships, source: :ownable, source_type: :Asset, class_name: model.to_s
+    has_many assoc, ->{ where(type: model) }, through: :ownerships, source: :ownable, source_type: model, class_name: model.to_s
   end
 
   scope :includes_associated, -> { includes([:departments, :locations, :ownerships, :documentations]) }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from '@/Components'
+import { Grid, Section } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -7,7 +7,6 @@ import {
 	FieldsFor,
 	FormGroup,
 	PasswordInput,
-	Checkbox,
 	FormConsumer,
 } from '@/Components/Form'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
@@ -16,6 +15,7 @@ import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/Features/Dropdown
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 import { ContactForm } from '@/Features'
+import { Fieldset } from '@mantine/core'
 
 type PersonFormData = {
 	person: Schema.PeopleEdit
@@ -136,26 +136,41 @@ const PersonForm = ({
 			onChange={ handleFormChange }
 		>
 			<Grid>
-				<Grid.Col>
-					<TextInput name="first_name" label="First Name" required />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput
+						name="first_name"
+						label="First Name"
+						required
+					/>
+				</Grid.Col>
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput
+						name="middle_name"
+						label="Middle Name"
+					/>
 				</Grid.Col>
 
-				<Grid.Col>
-					<TextInput name="middle_name" label="Middle Name" />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput
+						name="last_name"
+						label="Last Name"
+						required
+					/>
 				</Grid.Col>
 
-				<Grid.Col>
-					<TextInput name="last_name" label="Last Name" required />
-				</Grid.Col>
-
-				<Grid.Col>
-					<TextInput name="employee_number" label="Employee #" />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput
+						name="employee_number"
+						label="Employee #"
+						disableAutofill
+					/>
 				</Grid.Col>
 
 				<Grid.Col>
 					<FormDepartmentsDropdown
 						name="department_id"
 						initialData={ coerceArray(person?.department) }
+						disableAutofill
 					/>
 				</Grid.Col>
 
@@ -195,6 +210,7 @@ const PersonForm = ({
 								label={ `${person.id ? 'New' : ''} Password` }
 								onBlur={ handlePasswordBlur }
 								clearErrorsOnChange={ false }
+								autoComplete="new-password"
 							/>
 						</Grid.Col>
 
@@ -205,10 +221,6 @@ const PersonForm = ({
 								onBlur={ handleCheckPasswordBlur }
 								clearErrorsOnChange={ false }
 							/>
-						</Grid.Col>
-
-						<Grid.Col>
-							<Checkbox name="active" label="Active" />
 						</Grid.Col>
 
 					</FieldsFor>

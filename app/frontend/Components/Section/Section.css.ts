@@ -7,7 +7,7 @@ export const section = css`
 		background-color: ${vars.colors.white};
 	}
 	${vars.darkSelector} {
-		background-color: ${vars.colors.gray[9]};
+		background-color: ${vars.colors.dark[6]};
 	}
 	box-shadow: ${vars.shadows.xs};
 	padding: 1rem 0.75rem;
