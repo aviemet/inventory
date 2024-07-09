@@ -58,7 +58,7 @@ const TableComponent: TableObject = ({
 			wrapper={ children => <div className={ classes.wrapper }>{ children }</div> }
 		>
 			<ConditionalWrapper
-				condition={ tableState === null }
+				condition={ tableState !== null }
 				wrapper={ children => <TableProvider>{ children }</TableProvider> }
 			>
 				<Table
