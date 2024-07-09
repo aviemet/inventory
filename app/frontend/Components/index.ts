@@ -38,6 +38,7 @@ export {
 	SimpleGrid,
 	Stack,
 	Text,
+	Title,
 	Tooltip,
 	ThemeIcon as Icon,
 } from '@mantine/core'
