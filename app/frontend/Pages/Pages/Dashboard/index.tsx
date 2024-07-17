@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import Counts from './Counts'
 import RecentActivityTable from './RecentActivityTable'
 

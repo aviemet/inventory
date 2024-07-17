@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Heading, Page, Section } from '@/Components'
+import { Grid, Title, Page, Section } from '@/Components'
 import { DateTimeInput, Form, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
 import { Routes } from '@/lib'

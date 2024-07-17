@@ -1,5 +1,4 @@
 class TicketsController < ApplicationController
-  include Searchable
 
   expose :tickets, -> { search(@active_company.tickets.includes_associated.all, sortable_fields) }
   expose :ticket, scope: -> { @active_company.tickets }, find: ->(id, scope){ scope.includes_associated.find(id) }

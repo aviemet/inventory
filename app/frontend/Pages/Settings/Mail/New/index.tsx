@@ -1,6 +1,6 @@
 import React from 'react'
 import SettingsLayout from '../../SettingsLayout'
-import { Heading } from '@/Components'
+import { Title } from '@/Components'
 import { Routes } from '@/lib'
 import SmtpForm from '../Form'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { Tooltip } from '@mantine/core'
 import Details from './Details'

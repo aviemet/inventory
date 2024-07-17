@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Link, List, Icon, Box, Group } from '@/Components'
+import { Title, Link, List, Icon, Box, Group } from '@/Components'
 import { polymorphicRoute, formatter } from '@/lib'
 import { ArrowRightSquareIcon, CheckoutIcon } from '@/Components/Icons'
 import { CheckinButton } from '@/Components/Button'

@@ -1,5 +1,5 @@
 class DepartmentsController < ApplicationController
-  include Searchable
+
   include ContactableConcern
 
   expose :departments, -> { search(@active_company.departments.includes_associated, sortable_fields) }

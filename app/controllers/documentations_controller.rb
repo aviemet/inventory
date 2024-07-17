@@ -1,5 +1,4 @@
 class DocumentationsController < ApplicationController
-  include Searchable
 
   expose :documentations, -> { search(@active_company.documentations.includes_associated, sortable_fields) }
   expose :documentation, id: ->{ params[:slug] }, scope: ->{ @active_company.documentations.includes_associated }, find_by: :slug

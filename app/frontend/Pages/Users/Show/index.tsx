@@ -1,4 +1,4 @@
-import { Heading, Link, Section, Table, Text } from '@/Components'
+import { Title, Link, Section, Table, Text } from '@/Components'
 import { Routes } from '@/lib'
 import React from 'react'
 

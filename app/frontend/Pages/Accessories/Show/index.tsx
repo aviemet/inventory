@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Group, Heading, Tabs, Tooltip, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Tooltip, Page } from '@/Components'
 import { Routes } from '@/lib'
 import Details from './Details'
 import History from './History'

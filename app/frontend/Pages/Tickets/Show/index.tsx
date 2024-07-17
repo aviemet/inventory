@@ -1,5 +1,5 @@
 import React from 'react'
-import { Badge, Box, Heading, Link, Page, Paper, Section, Text } from '@/Components'
+import { Badge, Box, Title, Link, Page, Paper, Section, Text } from '@/Components'
 import TicketMessage from './TicketMessage'
 import DangerousHtml from '@/Components/DangerousHtml'
 import { Form, RichText, Submit } from '@/Components/Form'

@@ -1,6 +1,5 @@
 class AccessoriesController < ApplicationController
   include OwnableConcern
-  include Searchable
 
   expose :accessories, -> { search(@active_company.accessories.includes_associated, sortable_fields) }
   expose :accessory, scope: ->{ @active_company.accessories }, find: ->(id, scope){ scope.includes_associated.find(id) }

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Flex, Heading, Page, Section, Table, Box } from '@/Components'
+import { Flex, Title, Page, Section, Table, Box } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import { LocationsDropdown } from '@/Features/Dropdowns'

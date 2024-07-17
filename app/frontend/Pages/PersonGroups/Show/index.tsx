@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Heading, Page, Group, Menu } from '@/Components'
+import { Table, Title, Page, Group, Menu } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 import GroupMembersTable from './GroupMembersTable'

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Page, Heading, Section, Table } from '@/Components'
+import { Page, Title, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import * as classes from './Checkin.css'

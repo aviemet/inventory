@@ -1,6 +1,5 @@
 class NetworksController < ApplicationController
   include OwnableConcern
-  include Searchable
 
   expose :networks, -> { search(@active_company.networks, sortable_fields) }
   expose :network, scope: ->{ @active_company.networks }, find: ->(id, scope){ scope.find(id) }

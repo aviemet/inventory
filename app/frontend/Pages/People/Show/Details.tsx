@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Heading, Table, Box, Badge, Money } from '@/Components'
+import { Link, Title, Table, Box, Badge, Money } from '@/Components'
 import AssignmentLink from './AssignmentLink'
 import { formatter, Routes } from '@/lib'
 

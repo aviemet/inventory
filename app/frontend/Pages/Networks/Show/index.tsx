@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Flex, Group, Heading, Table, Container, Page, Paper } from '@/Components'
+import { Section, Menu, Flex, Group, Title, Table, Container, Page, Paper } from '@/Components'
 import { createContext } from '@/lib/hooks'
 import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'

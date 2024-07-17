@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
-import { Heading, Tile } from '@/Components'
+import { Title, Tile } from '@/Components'
 
 interface ConfirmationsNewProps {
 	user: Schema.User

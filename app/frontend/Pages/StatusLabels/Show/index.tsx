@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 
 interface ShowStatusLabelProps {
 	status_label: Schema.StatusLabelsShow

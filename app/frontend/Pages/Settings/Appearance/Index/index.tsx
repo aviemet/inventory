@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react'
-import { Box, Heading, Grid } from '@/Components'
+import { Box, Title, Grid } from '@/Components'
 import { Form, Submit, SwatchInput } from '@/Components/Form'
 import SettingsLayout from '@/Pages/Settings/SettingsLayout'
 import { Routes } from '@/lib'

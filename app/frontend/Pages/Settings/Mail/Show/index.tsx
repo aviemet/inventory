@@ -1,6 +1,6 @@
 import React from 'react'
 import SettingsLayout from '../../SettingsLayout'
-import { Box, DangerousHtml, Heading, Table } from '@/Components'
+import { Box, DangerousHtml, Title, Table } from '@/Components'
 import { Routes } from '@/lib'
 
 interface ShowMailSettingProps {

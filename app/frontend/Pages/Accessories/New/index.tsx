@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Page, Heading } from '@/Components'
+import { Section, Page, Title } from '@/Components'
 import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
 

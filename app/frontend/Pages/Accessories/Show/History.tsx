@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, History } from '@/Components'
+import { Title, History } from '@/Components'
 import { ShowAccessoryProps } from '.'
 
 const AccessoryHistory = ({ accessory }: ShowAccessoryProps) => {

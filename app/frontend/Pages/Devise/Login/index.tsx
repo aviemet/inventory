@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Form, Field, TextInput, PasswordInput, Checkbox, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
-import { Heading, Tile } from '@/Components'
+import { Title, Tile } from '@/Components'
 import { type UseFormProps } from 'use-inertia-form'
 
 type LoginFormData = {

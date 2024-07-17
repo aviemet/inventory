@@ -1,5 +1,4 @@
 class StatusLabelsController < ApplicationController
-  include Searchable
 
   expose :status_labels, -> { search(StatusLabel.all, sortable_fields) }
   expose :status_label, id: ->{ params[:slug] }, find_by: :slug

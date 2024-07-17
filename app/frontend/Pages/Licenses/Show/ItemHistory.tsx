@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, History } from '@/Components'
+import { Title, History } from '@/Components'
 import { ShowLicenseProps } from '.'
 
 const LicenseHistory = ({ license }: ShowLicenseProps) => {

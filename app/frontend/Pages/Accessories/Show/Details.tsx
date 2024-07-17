@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Heading, Table, Box, Money } from '@/Components'
+import { Link, Title, Table, Box, Money } from '@/Components'
 import { Routes } from '@/lib'
 import { ShowAccessoryProps } from '.'
 
