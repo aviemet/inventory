@@ -18,6 +18,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     }
   end
 
+  # @route GET /users/edit (edit_user_registration)
+  def edit
+    super
+  end
+
   # @route POST /users (user_registration)
   def create
     build_resource(sign_up_params)
@@ -49,26 +54,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  # def edit
-  #   super
-  # end
+  # @route PATCH /users (user_registration)
+  # @route PUT /users (user_registration)
+  def update
+    super
+  end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
-
-  # def destroy
-  #   super
-  # end
+  # @route DELETE /users (users)
+  def destroy
+    super
+  end
 
   # Forces the session data which is usually expired after sign
   # in to be expired now. This is useful if the user wants to
   # cancel oauth signing in/up in the middle of the process,
   # removing all OAuth session data.
-  # def cancel
-  #   super
-  # end
+  # @route GET /users/cancel (cancel_user_registration)
+  def cancel
+    super
+  end
 
   protected
 

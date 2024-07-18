@@ -2,13 +2,6 @@ import { vars, theme } from '@/lib/theme'
 import { rem } from '@mantine/core'
 import { css } from '@linaria/core'
 
-export const wrapper = css`
-	overflow: auto;
-	position: relative;
-	height: 100%;
-	max-height: 100%;
-`
-
 export const table = css`
 	width: 100%;
 
@@ -121,6 +114,17 @@ export const table = css`
 				}
 			}
 		}
+	}
+`
+
+export const wrapper = css`
+	overflow: auto;
+	position: relative;
+	height: 100%;
+	max-height: 100%;
+
+	& .${table} thead {
+		top: -10px;
 	}
 `
 

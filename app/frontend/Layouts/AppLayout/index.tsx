@@ -43,7 +43,7 @@ const AppLayout = ({ children }: { children: any }) => {
 			<Sidebar />
 			<Footer />
 			<AppShell.Main role="main">
-				<Box id="CONTENT_WRAPPER" className={ cx(classes.wrapper) } p="xs">
+				<Box className={ cx(classes.wrapper) } p="xs">
 					{ children }
 				</Box>
 			</AppShell.Main>

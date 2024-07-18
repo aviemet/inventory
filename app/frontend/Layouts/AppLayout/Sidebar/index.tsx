@@ -51,7 +51,7 @@ const Sidebar = () => {
 			>
 				<Box m="xs">
 					<Group justify="space-between">
-						<Icon radius="md" size="lg">
+						<Icon radius="md" size="md">
 							<ComponentsIcon />
 						</Icon>
 					</Group>
