@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit, PasswordInput } from '@/Components/Form'
 import { type FormProps, type HTTPVerb } from 'use-inertia-form'
 
@@ -16,25 +17,48 @@ const LdapForm = ({ ldap, method = 'post', ...props }: LdapFormProps) => {
 			method={ method }
 			{ ...props }
 		>
-			<TextInput label="Name" name="name" required />
+			<Grid>
+				<Grid.Col>
+					<TextInput label="Name" name="name" required />
+				</Grid.Col>
 
-			<TextInput label="Host" name="host" required />
+				<Grid.Col>
+					<TextInput label="Host" name="host" required />
+				</Grid.Col>
 
-			<TextInput label="Port" name="port" required />
+				<Grid.Col>
+					<TextInput label="Port" name="port" required />
+				</Grid.Col>
 
-			<TextInput label="Domain" name="domain" required />
+				<Grid.Col>
+					<TextInput label="Domain" name="domain" required />
+				</Grid.Col>
 
-			<TextInput label="Username" name="username" required />
+				<Grid.Col>
+					<TextInput label="Username" name="username" required />
+				</Grid.Col>
 
-			<PasswordInput label="Password" name="password" required />
+				<Grid.Col>
+					<PasswordInput label="Password" name="password" required />
+				</Grid.Col>
 
-			<TextInput label="Tree Base" name="tree_base" />
+				<Grid.Col>
+					<TextInput label="Tree Base" name="tree_base" />
+				</Grid.Col>
 
-			<TextInput label="Search Path" name="user_search" />
+				<Grid.Col>
+					<TextInput label="Search Path" name="user_search" />
+				</Grid.Col>
 
-			<TextInput label="Sync Interval" name="sync_interval" />
+				<Grid.Col>
+					<TextInput label="Sync Interval" name="sync_interval" />
+				</Grid.Col>
 
-			<Submit>{ ldap.id ? 'Update' : 'Save' } LDAP Settings</Submit>
+				<Grid.Col>
+					<Submit>{ ldap.id ? 'Update' : 'Save' } LDAP Settings</Submit>
+				</Grid.Col>
+
+			</Grid>
 		</Form>
 	)
 }

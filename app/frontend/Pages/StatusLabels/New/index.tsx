@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import StatusLabelForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,10 +13,10 @@ const NewStatusLabel = ({ ...data }: NewStatusLabelProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Status Labels', href: Routes.statusLabels() },
-			{ title: 'New Status Label' },
+			{ title: 'New Status Label', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<StatusLabelForm to={ Routes.statusLabels() } { ...data } />
 			</Section>

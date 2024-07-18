@@ -34,7 +34,7 @@ class Category < ApplicationRecord
   tracked
   resourcify
 
-  @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Documentation Email License Location Model Order Person Phone Ticket User Vendor Website Document)
+  @categorizable_types = %w(Asset Item Accessory Address Component Consumable Contact Contract Department Documentation Email License Location Model Order Person Phone Ticket User Vendor Website)
 
   validates :name, presence: true, uniqueness: {
     scope: :categorizable_type,

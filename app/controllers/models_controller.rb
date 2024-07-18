@@ -1,6 +1,5 @@
 class ModelsController < ApplicationController
   include OwnableConcern
-  include Searchable
 
   expose :models, -> { search(@active_company.models.includes_associated, sortable_fields) }
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, find_by: :slug

@@ -1,10 +1,10 @@
 import React, { useEffect, forwardRef } from 'react'
-import { type TableRow } from './index'
 import { Table } from '@mantine/core'
+import { coerceArray } from '@/lib'
+import { useCheckboxState } from '@/lib/hooks'
 import HeadCheckbox from './HeadCheckbox'
 import { useTableContext } from '../TableContext'
-import { useCheckboxState } from '@/lib/hooks'
-import { coerceArray } from '../../../lib/index'
+import { type TableRow } from './index'
 
 interface HeadRowProps extends TableRow {
 	name?: string
@@ -34,6 +34,7 @@ const HeadRow = forwardRef<HTMLTableRowElement, HeadRowProps>((
 			const hideable = (props.hideable ?? props.sort) ?? false
 			columns[i] = { label: props.children, hideable }
 		})
+
 		setTableState({ columns })
 	}, [])
 

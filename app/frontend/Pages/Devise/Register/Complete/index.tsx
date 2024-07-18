@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, Form, TextInput, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
-import { Heading, Tile } from '@/Components'
+import { Title, Tile } from '@/Components'
 import { usePageProps } from '@/lib/hooks'
 
 type RegisterFormData = {
@@ -37,12 +37,12 @@ const CompleteRegistration = () => {
 			>
 				<Tile.Content>
 					<div>
-						<Heading order={ 2 }>Complete Registration</Heading>
+						<Title order={ 2 }>Complete Registration</Title>
 						<p>Let&apos;s get a little more information about you.</p>
 					</div>
 
 					<Field>
-						<TextInput name="first_name" placeholder="First Name" autoFocus autoComplete="first-name" />
+						<TextInput name="first_name" placeholder="First Name" autoComplete="first-name" />
 					</Field>
 
 					<Field>

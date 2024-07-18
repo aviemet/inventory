@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Group, Heading, Tabs, Tooltip, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Tooltip, Page } from '@/Components'
 import { Routes } from '@/lib'
 import Details from './Details'
 import History from './History'
@@ -23,12 +23,12 @@ const ShowAccessory = ({ accessory }: ShowAccessoryProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Accessories', href: Routes.accessories() },
-			{ title: accessory.name! },
+			{ title: accessory.name, href: window.location.href },
 		] }>
 
 			<Section>
 				<Group justify="space-between">
-					<Heading>{ title }</Heading>
+					<Title>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

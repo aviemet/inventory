@@ -28,11 +28,11 @@ const AssetTable = (props: TableProps) => {
 					return (
 						<Table.Row key={ asset.id }>
 
-							<Table.Cell nowrap>
+							<Table.Cell>
 								<Link href={ Routes.asset(asset) }>{ asset.name }</Link>
 							</Table.Cell>
 
-							<Table.Cell nowrap >
+							<Table.Cell >
 								<Link href={ Routes.asset(asset) }>{ asset.model?.name }</Link>
 							</Table.Cell>
 

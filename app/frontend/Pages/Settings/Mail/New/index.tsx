@@ -1,6 +1,6 @@
 import React from 'react'
 import SettingsLayout from '../../SettingsLayout'
-import { Heading } from '@/Components'
+import { Title } from '@/Components'
 import { Routes } from '@/lib'
 import SmtpForm from '../Form'
 
@@ -15,7 +15,7 @@ const NewMail = ({ smtp }: SmtpFormProps) => {
 			{ title: 'Mail', href: Routes.settingsSmtps() },
 			{ title: 'New', href: Routes.newSettingsSmtp() },
 		] }>
-			<Heading mb={ 24 }>Mail Settings</Heading>
+			<Title mb={ 24 }>Mail Settings</Title>
 
 			<SmtpForm
 				data={ { smtp } }

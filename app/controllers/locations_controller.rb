@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   include OwnableConcern
-  include Searchable
+
   include ContactableConcern
 
   expose :locations, -> { search(@active_company.locations.includes_associated, sortable_fields) }

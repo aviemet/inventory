@@ -1,10 +1,9 @@
 class DocumentationsController < ApplicationController
-  include Searchable
 
   expose :documentations, -> { search(@active_company.documentations.includes_associated, sortable_fields) }
   expose :documentation, id: ->{ params[:slug] }, scope: ->{ @active_company.documentations.includes_associated }, find_by: :slug
 
-  # @route GET /documentations (documentations)
+  # @route GET /documentation (documentations)
   def index
     authorize documentations
     render inertia: "Documentation/Index", props: {
@@ -12,7 +11,7 @@ class DocumentationsController < ApplicationController
     }
   end
 
-  # @route GET /documentations/:slug (documentation)
+  # @route GET /documentation/:slug (documentation)
   def show
     authorize documentation
     render inertia: "Documentation/Show", props: {
@@ -20,7 +19,7 @@ class DocumentationsController < ApplicationController
     }
   end
 
-  # @route GET /documentations/new (new_documentation)
+  # @route GET /documentation/new (new_documentation)
   def new
     authorize Documentation
     render inertia: "Documentation/New", props: {
@@ -28,7 +27,7 @@ class DocumentationsController < ApplicationController
     }
   end
 
-  # @route GET /documentations/:slug/edit (edit_documentation)
+  # @route GET /documentation/:slug/edit (edit_documentation)
   def edit
     authorize documentation
     render inertia: "Documentation/Edit", props: {
@@ -36,7 +35,7 @@ class DocumentationsController < ApplicationController
     }
   end
 
-  # @route POST /documentations (documentations)
+  # @route POST /documentation (documentations)
   def create
     authorize Documentation
 
@@ -50,8 +49,8 @@ class DocumentationsController < ApplicationController
     end
   end
 
-  # @route PATCH /documentations/:slug (documentation)
-  # @route PUT /documentations/:slug (documentation)
+  # @route PATCH /documentation/:slug (documentation)
+  # @route PUT /documentation/:slug (documentation)
   def update
     authorize documentation
     if documentation.update(documentation_params)
@@ -61,7 +60,7 @@ class DocumentationsController < ApplicationController
     end
   end
 
-  # @route DELETE /documentations/:slug (documentation)
+  # @route DELETE /documentation/:slug (documentation)
   def destroy
     authorize documentation
     documentation.destroy

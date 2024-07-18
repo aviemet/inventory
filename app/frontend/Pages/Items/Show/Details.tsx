@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Heading, Table, Box, Badge, Money } from '@/Components'
+import { Link, Title, Table, Box, Badge, Money } from '@/Components'
 import AssignmentLink from './AssignmentLink'
 import { formatter, Routes } from '@/lib'
 
@@ -10,7 +10,7 @@ interface ItemDetailsProps {
 const ItemDetails = ({ item }: ItemDetailsProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>Details</Heading>
+			<Title order={ 2 }>Details</Title>
 
 			<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 				<Table>

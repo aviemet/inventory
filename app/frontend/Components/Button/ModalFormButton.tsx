@@ -50,7 +50,7 @@ const ModalFormButton = ({
 
 	return (
 		<>
-			<Button onClick={ open } { ...buttonProps } >{ children }</Button>
+			<Button onClick={ open } { ...buttonProps }>{ children }</Button>
 			<Modal
 				opened={ opened }
 				onClose={ close }

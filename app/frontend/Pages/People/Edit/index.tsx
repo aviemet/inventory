@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import EditPersonForm from './Form'
 import { Routes } from '@/lib'
 
@@ -14,10 +14,10 @@ const EditPerson = ({ person }: UpdatePersonProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'People', href: Routes.person(person) },
 			{ title: `${person.first_name} ${person.last_name}`, href: Routes.person(person) },
-			{ title: 'Edit Person' },
+			{ title: 'Edit Person', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<EditPersonForm
 					to={ Routes.person(person) }

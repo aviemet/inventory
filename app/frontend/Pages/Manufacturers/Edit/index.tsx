@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import ManufacturerForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,10 +14,10 @@ const New = ({ manufacturer, ...models }: UpdateManufacturerProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Manufacturers', href: Routes.manufacturers() },
 			{ title: manufacturer.name!, href: Routes.manufacturer(manufacturer.slug) },
-			{ title: 'Edit Manufacturer' },
+			{ title: 'Edit Manufacturer', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ManufacturerForm to={ Routes.manufacturer(manufacturer) } method="patch" manufacturer={ manufacturer } { ...models } />
 			</Section>

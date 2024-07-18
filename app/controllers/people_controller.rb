@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   include OwnableConcern
-  include Searchable
+
   include ContactableConcern
 
   expose :people, -> { search(@active_company.people.includes_associated, sortable_fields) }

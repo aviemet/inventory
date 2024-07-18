@@ -1,7 +1,7 @@
 import React from 'react'
-import ManufacturersDropdown from '../../Features/Dropdowns/ManufacturersDropdown/FormManufacturersDropdown'
+import { Grid } from '@/Components'
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
-import { CategoriesDropdown } from '@/Features/Dropdowns'
+import { FormCategoriesDropdown, FormManufacturersDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -32,22 +32,38 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: ModelF
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
 
-			<TextInput name="model_number" label="Model Number" required />
+				<Grid.Col>
+					<TextInput name="name" label="Name" required />
+				</Grid.Col>
 
-			<ManufacturersDropdown initialData={ coerceArray(model?.manufacturer) } />
+				<Grid.Col>
+					<TextInput name="model_number" label="Model Number" required />
+				</Grid.Col>
 
-			<CategoriesDropdown
-				categorizable_type='Item'
-				initialData={ coerceArray(model?.category) }
-			/>
+				<Grid.Col>
+					<FormManufacturersDropdown initialData={ coerceArray(model?.manufacturer) } />
+				</Grid.Col>
 
-			<Textarea name="notes" label="Notes" />
+				<Grid.Col>
+					<FormCategoriesDropdown
+						categorizable_type='Item'
+						initialData={ coerceArray(model?.category) }
+					/>
+				</Grid.Col>
 
-			<Submit>
-				{ model?.id ? 'Update' : 'Create' } Model
-			</Submit>
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<Submit>
+						{ model?.id ? 'Update' : 'Create' } Model
+					</Submit>
+				</Grid.Col>
+
+			</Grid>
 		</Form>
 	)
 }

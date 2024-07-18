@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Flex, Group, Heading, Table, Container, Page, Paper } from '@/Components'
+import { Section, Menu, Flex, Group, Title, Table, Container, Page, Paper } from '@/Components'
 import { createContext } from '@/lib/hooks'
 import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
@@ -20,11 +20,11 @@ const Show = ({ network, ips, pagination }: ShowNetworkProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Networks', href: Routes.networks() },
-			{ title: network.name! },
+			{ title: network.name, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">
-					<Heading style={ { flex: 1 } }>{ title }</Heading>
+					<Title style={ { flex: 1 } }>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -98,7 +98,7 @@ const Show = ({ network, ips, pagination }: ShowNetworkProps) => {
 			<br />
 
 			<Section>
-				<Heading order={ 2 }>Addresses</Heading>
+				<Title order={ 2 }>Addresses</Title>
 
 				<NetworkContextProvider value={ { network } }>
 					<NetworkDetailsTable

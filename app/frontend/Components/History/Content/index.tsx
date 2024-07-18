@@ -14,7 +14,10 @@ type TimelineData = {
 	lineStyle: 'dashed'|'dotted'|'solid'
 }
 
-export const buildTimelineData = (activity: Schema.Activity, assignment?: Schema.Assignment) => {
+export const buildTimelineData = (
+	activity: Schema.Activity,
+	assignment?: Schema.Assignment,
+) => {
 	const timelineData: TimelineData = {
 		title: activity.key ? `${capitalize(activity.key.split('.')[1])}d` : '',
 		content: <></>,

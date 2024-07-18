@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -6,8 +7,9 @@ import {
 	Checkbox,
 	Submit,
 	FormGroup,
+	CurrencyInput,
 } from '@/Components/Form'
-import { ModelsDropdown, VendorsDropdown, LocationsDropdown } from '@/Features/Dropdowns'
+import { FormModelsDropdown, FormVendorsDropdown, FormLocationsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -32,43 +34,69 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: AccessoryFo
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required />
+				</Grid.Col>
 
-			<FormGroup legend="Accessory Details">
-				<ModelsDropdown modelCategory="Accessory" initialData={ coerceArray(accessory?.model) } />
+				<FormGroup legend="Accessory Details">
+					<Grid.Col>
+						<FormModelsDropdown modelCategory="Accessory" initialData={ coerceArray(accessory?.model) } />
+					</Grid.Col>
 
-				<TextInput name="serial" label="Serial" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="serial" label="Serial" />
+					</Grid.Col>
 
-				<TextInput name="asset_tag" label="Asset Tag" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="asset_tag" label="Asset Tag" />
+					</Grid.Col>
 
-				<TextInput name="qty" label="Quantity" />
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="qty" label="Quantity" />
+					</Grid.Col>
 
-				{ /* TODO: Alert options dialog */ }
-				<TextInput name="min_qty" label="Minimum Quantity" />
-			</FormGroup>
+					{ /* TODO: Alert options dialog */ }
+					<Grid.Col span={ { sm: 12, md: 6 } }>
+						<TextInput name="min_qty" label="Minimum Quantity" />
+					</Grid.Col>
+				</FormGroup>
 
-			<FormGroup legend="Purchase Details">
-				<VendorsDropdown initialData={ coerceArray(accessory?.vendor) } />
+				<FormGroup legend="Purchase Details">
+					<Grid.Col>
+						<FormVendorsDropdown initialData={ coerceArray(accessory?.vendor) } />
+					</Grid.Col>
 
-				<TextInput name="cost" label="Cost" />
-			</FormGroup>
+					<Grid.Col>
+						<CurrencyInput name="cost" label="Cost" />
+					</Grid.Col>
+				</FormGroup>
 
-			<FormGroup legend="Usage Details">
-				<LocationsDropdown
-					label="Default Location"
-					name="default_location_id"
-					initialData={ coerceArray(accessory?.default_location) }
-				/>
+				<FormGroup legend="Usage Details">
+					<Grid.Col>
+						<FormLocationsDropdown
+							label="Default Location"
+							name="default_location_id"
+							initialData={ coerceArray(accessory?.default_location) }
+						/>
+					</Grid.Col>
 
-				<Checkbox name="requestable" label="Requestable" />
+					<Grid.Col>
+						<Checkbox name="requestable" label="Requestable" />
+					</Grid.Col>
 
-			</FormGroup>
+				</FormGroup>
 
-			<Textarea name="notes" label="Notes" />
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
 
-			<Submit>
-				{ accessory.id ? 'Update' : 'Create' } Accessory
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ accessory.id ? 'Update' : 'Create' } Accessory
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid, Section } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -6,7 +7,6 @@ import {
 	FieldsFor,
 	FormGroup,
 	PasswordInput,
-	Checkbox,
 	FormConsumer,
 } from '@/Components/Form'
 import { Checkbox as CheckboxInput } from '@/Components/Inputs'
@@ -14,6 +14,8 @@ import { useBooleanToggle } from '@/lib/hooks'
 import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import { ContactForm } from '@/Features'
+import { Fieldset } from '@mantine/core'
 
 type PersonFormData = {
 	person: Schema.PeopleEdit
@@ -133,64 +135,106 @@ const PersonForm = ({
 			onSubmit={ handleSubmit }
 			onChange={ handleFormChange }
 		>
-			<TextInput name="first_name" label="First Name" required autoFocus />
-
-			<TextInput name="middle_name" label="Middle Name" />
-
-			<TextInput name="last_name" label="Last Name" required />
-
-			<TextInput name="employee_number" label="Employee #" />
-
-			<FormDepartmentsDropdown
-				name="department_id"
-				initialData={ coerceArray(person?.department) }
-			/>
-
-			<TextInput name="job_title" label="Job Title" required />
-
-			<FormPeopleDropdown
-				label="Manager"
-				name="manager_id"
-				initialData={ coerceArray(person?.manager) }
-			/>
-
-			<FormConsumer>
-				{ (form: UseFormProps<PersonFormData>) => (
-					<CheckboxInput
-						label="Login Enabled"
-						checked={ loginEnabled }
-						onChange={ () => handleToggleLogin(form) }
+			<Grid>
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput
+						name="first_name"
+						label="First Name"
+						required
 					/>
-				) }
-			</FormConsumer>
-
-			{ loginEnabled && <FormGroup legend="Login Details">
-				<FieldsFor model="user">
-
-					<TextInput name="email" label="Email" />
-
-					<PasswordInput
-						name="password"
-						label={ `${person.id ? 'New' : ''} Password` }
-						onBlur={ handlePasswordBlur }
-						clearErrorsOnChange={ false }
+				</Grid.Col>
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput
+						name="middle_name"
+						label="Middle Name"
 					/>
+				</Grid.Col>
 
-					<PasswordInput
-						name="password_confirmation"
-						label="Check Password"
-						onBlur={ handleCheckPasswordBlur }
-						clearErrorsOnChange={ false }
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput
+						name="last_name"
+						label="Last Name"
+						required
 					/>
+				</Grid.Col>
 
-					<Checkbox name="active" label="Active" />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<TextInput
+						name="employee_number"
+						label="Employee #"
+						disableAutofill
+					/>
+				</Grid.Col>
 
-				</FieldsFor>
-			</FormGroup> }
+				<Grid.Col>
+					<FormDepartmentsDropdown
+						name="department_id"
+						initialData={ coerceArray(person?.department) }
+						disableAutofill
+					/>
+				</Grid.Col>
 
-			<Submit>
-				{ person.id ? 'Update' : 'Create' } Person
-			</Submit>
+				<Grid.Col>
+					<TextInput name="job_title" label="Job Title" required />
+				</Grid.Col>
+
+				<Grid.Col>
+					<FormPeopleDropdown
+						label="Manager"
+						name="manager_id"
+						initialData={ coerceArray(person?.manager) }
+					/>
+				</Grid.Col>
+
+				<Grid.Col>
+					<FormConsumer>
+						{ (form: UseFormProps<PersonFormData>) => (
+							<CheckboxInput
+								label="Login Enabled"
+								checked={ loginEnabled }
+								onChange={ () => handleToggleLogin(form) }
+							/>
+						) }
+					</FormConsumer>
+				</Grid.Col>
+
+				{ loginEnabled && <FormGroup legend="Login Details">
+					<FieldsFor model="user">
+						<Grid.Col>
+							<TextInput name="email" label="Email" />
+						</Grid.Col>
+
+						<Grid.Col>
+							<PasswordInput
+								name="password"
+								label={ `${person.id ? 'New' : ''} Password` }
+								onBlur={ handlePasswordBlur }
+								clearErrorsOnChange={ false }
+								autoComplete="new-password"
+							/>
+						</Grid.Col>
+
+						<Grid.Col>
+							<PasswordInput
+								name="password_confirmation"
+								label="Check Password"
+								onBlur={ handleCheckPasswordBlur }
+								clearErrorsOnChange={ false }
+							/>
+						</Grid.Col>
+
+					</FieldsFor>
+				</FormGroup> }
+
+				<ContactForm />
+
+				<Grid.Col>
+					<Submit>
+						{ person.id ? 'Update' : 'Create' } Person
+					</Submit>
+				</Grid.Col>
+
+			</Grid>
 		</Form>
 	)
 }

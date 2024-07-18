@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { ContactDetails } from '@/Features/Contactable'
 import { Routes } from '@/lib'
 
@@ -13,10 +13,10 @@ const Show = ({ company }: ShowCompanyProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Companies', href: Routes.companies() },
-			{ title: company.name! },
+			{ title: company.name, href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 			</Section>
 
 			{ company.contact && <Section>

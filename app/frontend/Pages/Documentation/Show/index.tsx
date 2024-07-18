@@ -1,5 +1,5 @@
 import React from 'react'
-import { DangerousHtml, Date, Group, Heading, Link, Menu, Page, Section } from '@/Components'
+import { DangerousHtml, Date, Group, Title, Link, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { Text } from '@mantine/core'
 
@@ -13,11 +13,11 @@ const ShowDocumentation = ({ documentation }: ShowDocumentationProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Documentation', href: Routes.documentations() },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">
-					<Heading>{ documentation.title }</Heading>
+					<Title>{ documentation.title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

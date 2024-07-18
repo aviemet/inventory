@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from '@/Components'
-import { ActionIcon } from '@mantine/core'
+import { Link, ActionIcon } from '@/Components'
 import cx from 'clsx'
 
 interface MenuLinkProps {

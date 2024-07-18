@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Modal } from '@/Components'
-import { Form, NumberInput, Submit } from '@/Components/Form'
+import { Button, Modal, Grid } from '@/Components'
+import { Form, FormConsumer, NumberInput, Submit } from '@/Components/Form'
 import { Checkbox } from '@/Components/Inputs'
 import { ReplenishIcon } from '@/Components/Icons'
 import { Tooltip, type ButtonProps, useMantineTheme } from '@mantine/core'
@@ -8,6 +8,7 @@ import { Routes } from '@/lib'
 import axios from 'axios'
 import { router } from '@inertiajs/react'
 import { type UseFormProps } from 'use-inertia-form'
+import { useContrastingTextColor } from '@/lib/hooks'
 
 const defaultData = { consumable: { qty: 1 } }
 
@@ -21,7 +22,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 	const [opened, setOpened] = useState(false)
 	const { other: { colors: { replenishButtonColor } } } = useMantineTheme()
 
-	const handleTogglePurchaseOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleTogglePurchaseOrder = (form: UseFormProps<typeof defaultData>) => {
 
 	}
 
@@ -49,6 +50,8 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 		return false
 	}
 
+	const textColor = useContrastingTextColor(replenishButtonColor)
+
 	return (
 		<>
 			<Modal
@@ -63,23 +66,37 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 					to={ Routes.apiConsumable(consumable) }
 					onSubmit={ handleSubmit }
 				>
-					<NumberInput name="qty" label="Quantity" min={ 0 } />
+					<Grid>
 
-					<Checkbox label="Create Purchase Order" onChange={ handleTogglePurchaseOrder } />
+						<Grid.Col>
+							<NumberInput name="qty" label="Quantity" min={ 0 } />
+						</Grid.Col>
 
-					<Submit>Replenish</Submit>
+						<Grid.Col>
+							<FormConsumer>{ (form) => (
+								<Checkbox label="Create Purchase Order" onChange={ () => handleTogglePurchaseOrder(form) } />
+							) }</FormConsumer>
+						</Grid.Col>
+
+						<Grid.Col>
+							<Submit>Replenish</Submit>
+						</Grid.Col>
+
+					</Grid>
 				</Form>
 			</Modal>
+
 			<Tooltip
 				withArrow
-				label={ tooltipMessage || 'Replenish' }
+				label={ tooltipMessage || `Replenish ${consumable.name}` }
 				position="left"
 				transitionProps={ { transition: 'fade' } }
 				color={ replenishButtonColor }
+				c={ textColor }
 				aria-label={ `Replenish ${consumable.name}` }
 			>
-				<Button color={ replenishButtonColor } { ...props } size="sm" p={ 0 } onClick={ () => setOpened(true) }>
-					<ReplenishIcon />
+				<Button color={ replenishButtonColor } { ...props } size="sm" onClick={ () => setOpened(true) }>
+					<ReplenishIcon color={ textColor } />
 				</Button>
 			</Tooltip>
 		</>

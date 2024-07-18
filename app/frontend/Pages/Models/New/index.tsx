@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import ModelForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -15,10 +15,10 @@ const New = ({ ...data }: NewModelProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Models', href: Routes.models() },
-			{ title: 'New Model' },
+			{ title: 'New Model', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ModelForm to={ Routes.models() } { ...data } />
 			</Section>

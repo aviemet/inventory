@@ -1,12 +1,12 @@
 import React from 'react'
-import { Link, Heading, Table, Box } from '@/Components'
+import { Link, Title, Table, Box } from '@/Components'
 import { formatter, Routes } from '@/lib'
 import { ShowConsumableProps } from '.'
 
 const ConsumableDetails = ({ consumable }: ShowConsumableProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>Details</Heading>
+			<Title order={ 2 }>Details</Title>
 
 			<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 				<Table>

@@ -1,6 +1,7 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Textarea, Submit } from '@/Components/Form'
-import { LocationsDropdown } from '@/Features/Dropdowns'
+import { FormLocationsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -31,16 +32,26 @@ const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepar
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required />
+				</Grid.Col>
 
-			<LocationsDropdown initialData={ coerceArray(department?.location) } />
+				<Grid.Col>
+					<FormLocationsDropdown initialData={ coerceArray(department?.location) } />
+				</Grid.Col>
 
-			<Textarea name="notes" label="Notes" />
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
 
-			<Submit>
-				{ department.id ? 'Update' : 'Create' } Department
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ department.id ? 'Update' : 'Create' } Department
+					</Submit>
+				</Grid.Col>
 
+			</Grid>
 		</Form>
 	)
 }

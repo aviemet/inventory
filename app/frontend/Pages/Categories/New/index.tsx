@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CategoryForm from '../Form'
 
@@ -13,10 +13,10 @@ const NewCategory = ({ category }: NewCategoryProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Categories', href: Routes.categories() },
-			{ title: 'New Category' },
+			{ title: 'New Category', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<CategoryForm to={ Routes.categories() } category={ category } />
 			</Section>

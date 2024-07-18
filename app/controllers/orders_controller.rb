@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  include Searchable
 
   expose :orders, -> { search(@active_company.orders.includes_associated, sortable_fields) }
   expose :order, scope: ->{ @active_company.orders }, find: ->(id, scope){ scope.includes_associated.find(id) }

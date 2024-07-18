@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit } from '@/Components/Form'
 import { FormLocationsDropdown, FormCurrenciesDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
@@ -36,22 +37,32 @@ const LocationForm = ({
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Location Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Location Name" required />
+				</Grid.Col>
 
-			<FormCurrenciesDropdown />
+				<Grid.Col>
+					<FormCurrenciesDropdown />
+				</Grid.Col>
 
-			<FormLocationsDropdown
-				label="Parent Location"
-				name="parent_id"
-				filter={ location?.id === undefined ? undefined : ({ options }) => (options as ComboboxItem[]).filter((option) => {
-					return option.value !== String(location.id)
-				}) }
-				initialData={ coerceArray(location?.parent) }
-			/>
+				<Grid.Col>
+					<FormLocationsDropdown
+						label="Parent Location"
+						name="parent_id"
+						filter={ location?.id === undefined ? undefined : ({ options }) => (options as ComboboxItem[]).filter((option) => {
+							return option.value !== String(location.id)
+						}) }
+						initialData={ coerceArray(location?.parent) }
+					/>
+				</Grid.Col>
 
-			<Submit>
-				{ location.id ? 'Update' : 'Create' } Location
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ location.id ? 'Update' : 'Create' } Location
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

@@ -68,6 +68,8 @@ export {
 
 export {
 	BsCheck2Circle as CheckIcon,
+	BsFillMoonStarsFill as MoonStarsIcon,
+	BsFillSunFill as SunIcon,
 	// BsKeyboardFill as AccessoriesIcon
 } from 'react-icons/bs'
 

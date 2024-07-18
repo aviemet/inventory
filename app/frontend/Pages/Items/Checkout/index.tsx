@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Heading, Page, Section, Table } from '@/Components'
+import { Box, Title, Page, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
@@ -21,10 +21,10 @@ const Checkout = ({ assignment, item, ...models }: CheckoutItemProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Hardware', href: Routes.items() },
 			{ title: item.name!, href: Routes.item(item) },
-			{ title: 'Check Out' },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 					<Table>

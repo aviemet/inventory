@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import LicenseForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,10 +14,10 @@ const New = ({ license }: UpdateLicenseProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Licenses', href: Routes.licenses() },
 			{ title: license.name!, href: Routes.license(license) },
-			{ title: 'Edit Licenses' },
+			{ title: 'Edit License', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<LicenseForm to={ Routes.license(license) } method="patch" license={ license } />
 			</Section>

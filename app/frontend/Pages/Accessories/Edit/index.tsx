@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import AccessoryForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,11 +14,11 @@ const EditAccessory = ({ accessory }: EditAccessoryProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Accessories', href: Routes.accessories() },
 			{ title: accessory.name!, href: Routes.accessory(accessory) },
-			{ title: 'Edit Accessory' },
+			{ title: 'Edit Accessory', href: window.location.href },
 		] }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<AccessoryForm
 					to={ Routes.accessory(accessory) }

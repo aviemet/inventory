@@ -1,6 +1,5 @@
 class ManufacturersController < ApplicationController
   include OwnableConcern
-  include Searchable
 
   expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated, sortable_fields) }
   expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug

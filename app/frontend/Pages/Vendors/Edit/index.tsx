@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import VendorForm from '../Form'
 
@@ -14,10 +14,10 @@ const EditVendor = ({ vendor, ...models }: UpdateVendorProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Vendors', href: Routes.vendors() },
 			{ title: vendor.name!, href: Routes.vendor(vendor) },
-			{ title: 'Edit Vendor' },
+			{ title: 'Edit Vendor', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 				<VendorForm
 					to={ Routes.vendor(vendor.slug) }
 					method="patch"

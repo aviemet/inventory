@@ -20,7 +20,7 @@ class StatusLabel < ApplicationRecord
   tracked
   resourcify
 
-  enum :status_type, %i(deployable pending undeployable archived)
+  enum status_type: { deployable: 0, pending: 1, undeployable: 2, archived: 3 }
 
   validates :name, presence: true
 

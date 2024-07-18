@@ -24,6 +24,17 @@ export const form = css`
 				label {
 					padding: 0.5rem 0.75rem;
 				}
+
+				&:not(.textarea) {
+					.mantine-Input-input, input {
+						border-top-left-radius: 0;
+						border-bottom-left-radius: 0;
+					}
+				}
+			}
+
+			input {
+				background-color: ${vars.colors.dark[5]}
 			}
 		}
 	}
@@ -122,5 +133,17 @@ export const fieldset = css`
 
 	.field {
 		flex: 1;
+	}
+`
+
+export const dynamicInputItem = css`
+	.mantine-Paper-root {
+		${vars.lightSelector} {
+			background-color: ${vars.colors.gray[0] }
+		}
+
+		${vars.darkSelector} {
+			background-color: ${vars.colors.dark[8] }
+		}
 	}
 `

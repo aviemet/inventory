@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import LocationForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,10 +14,10 @@ const EditLocation = ({ location }: EditLocationProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Locations', href: Routes.locations() },
 			{ title: location.name!, href: Routes.location(location) },
-			{ title: 'Edit Location' },
+			{ title: 'Edit Location', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<LocationForm
 					to={ Routes.location(location.slug) }

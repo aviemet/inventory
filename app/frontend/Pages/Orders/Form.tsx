@@ -1,14 +1,12 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import {
 	Form,
 	Textarea,
 	Submit,
 	TextInput,
-	FormConsumer,
 } from '@/Components/Form'
 import { FormVendorsDropdown } from '@/Features/Dropdowns'
-import { Menu } from '@/Components'
-import { PlusCircleIcon } from '@/Components/Icons'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -33,20 +31,26 @@ const OrderForm = ({ to, method = 'post', onSubmit, order }: OrderFormProps) => 
 			onSubmit={ onSubmit }
 			filter={ ['cost', 'vendor'] }
 		>
-			<FormConsumer>{ ({ data }) => {
-				console.log({ data })
-				return <></>
-			} }</FormConsumer>
-			<TextInput name="number" label="Order Number" />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="number" label="Order Number" />
+				</Grid.Col>
 
-			<FormVendorsDropdown initialData={ coerceArray(order?.vendor) } />
+				<Grid.Col>
+					<FormVendorsDropdown initialData={ coerceArray(order?.vendor) } />
+				</Grid.Col>
 
-			<Textarea name="notes" label="Notes" />
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
 
-			<Submit>
-				{ order.id ? 'Update' : 'Create' } Order
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ order.id ? 'Update' : 'Create' } Order
+					</Submit>
+				</Grid.Col>
 
+			</Grid>
 		</Form>
 	)
 }

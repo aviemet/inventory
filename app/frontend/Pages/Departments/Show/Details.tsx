@@ -1,5 +1,5 @@
 
-import { Group, Heading, Menu, Section } from '@/Components'
+import { Group, Title, Menu, Section } from '@/Components'
 import { EditIcon } from '@/Components/Icons'
 import { Routes } from '@/lib'
 import React from 'react'
@@ -14,7 +14,7 @@ const Details = ({ title, department }: DetailsProps) => {
 	return (
 		<Section>
 			<Group justify="space-between">
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<Menu position="bottom-end">
 					<Menu.Target />

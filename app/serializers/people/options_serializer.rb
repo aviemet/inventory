@@ -8,7 +8,7 @@ class People::OptionsSerializer < ApplicationSerializer
     "#{person.first_name} #{person.last_name}".strip
   end
 
-  type :number
+  type :number, optional: true
   def default_location_id
     person&.location&.id
   end

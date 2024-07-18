@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Link, List, Icon, Box, Group } from '@/Components'
+import { Title, Link, List, Icon, Box, Group } from '@/Components'
 import { polymorphicRoute, formatter } from '@/lib'
 import { ArrowRightSquareIcon, CheckoutIcon } from '@/Components/Icons'
 import { CheckinButton } from '@/Components/Button'
@@ -12,7 +12,7 @@ interface ShowPageAssociationsProps {
 const ShowPageAssociations = ({ assignable, checkinRoute }: ShowPageAssociationsProps) => {
 	return (
 		<Box mt={ 16 }>
-			<Heading order={ 3 }>Active Assignments</Heading>
+			<Title order={ 3 }>Active Assignments</Title>
 
 			{ assignable.assignments && <List mt={ 16 } icon={
 				<Icon color="teal" size={ 24 } radius="xl">

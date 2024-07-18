@@ -1,4 +1,4 @@
-import { createTheme, DEFAULT_THEME, mergeMantineTheme } from '@mantine/core'
+import { Button, createTheme, DEFAULT_THEME, mergeMantineTheme } from '@mantine/core'
 import { themeToVars } from '@mantine/vanilla-extract'
 import breakpoints from './breakpoints.mjs'
 
@@ -40,6 +40,13 @@ export const themeObject = {
 				},
 			},
 		},
+		Button: Button.extend({
+			styles: {
+				label: {
+					overflow: 'unset',
+				},
+			},
+		}),
 	},
 	other: {
 		header: {
@@ -67,6 +74,7 @@ export const themeObject = {
 			replenishButtonColor: 'yellow',
 			checkoutButtonColor: 'pink',
 			checkinButtonColor: 'cyan',
+			deleteButtonColor: 'red',
 		},
 	},
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Heading, Page, Group, Menu } from '@/Components'
+import { Table, Title, Page, Group, Menu } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 import GroupMembersTable from './GroupMembersTable'
@@ -15,12 +15,12 @@ const ShowUser = ({ person_group }: ShowUserProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'People', href: Routes.people() },
 			{ title: 'Groups', href: Routes.personGroups() },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Table.Section>
 
 				<Group justify="space-between">
-					<Heading mb={ 8 }>Group: { title }</Heading>
+					<Title mb={ 8 }>Group: { title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

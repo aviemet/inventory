@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import OrderForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,10 +13,10 @@ const NewOrder = ({ order }: NewOrderProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Orders', href: Routes.orders() },
-			{ title: 'New Order' },
+			{ title: 'New Order', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<OrderForm to={ Routes.orders() } order={ order } />
 			</Section>

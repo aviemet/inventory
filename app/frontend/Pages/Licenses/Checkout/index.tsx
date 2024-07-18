@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Heading, Page, Section, Table } from '@/Components'
+import { Box, Flex, Title, Page, Section, Table } from '@/Components'
 import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown } from '@/Features'
 import { Routes, formatter } from '@/lib'
@@ -20,10 +20,10 @@ const Checkout = ({ assignment, license, ...models }: CheckoutLicenseProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'License', href: Routes.licenses() },
 			{ title: license.name!, href: Routes.license(license) },
-			{ title: 'Check Out' },
+			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Box style={ (theme) => ({ maxWidth: `${theme.breakpoints.md}` }) }>
 					<Flex>

@@ -1,5 +1,4 @@
 class ContractsController < ApplicationController
-  include Searchable
 
   expose :contracts, -> { search(@active_company.contracts.includes_associated, sortable_fields) }
   expose :contract, id: ->{ params[:slug] }, scope: ->{ @active_company.contracts.includes_associated }, find_by: :slug

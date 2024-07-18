@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   include OwnableConcern
-  include Searchable
 
   expose :items, -> { search(@active_company.items.includes_associated, sortable_fields) }
   expose :item, scope: ->{ @active_company.items }, find: ->(id, scope){ scope.includes_associated.find(id) }
@@ -10,7 +9,9 @@ class ItemsController < ApplicationController
   # @route GET /hardware (items)
   def index
     authorize items
+
     paginated_items = items.page(params[:page] || 1).per(current_user.limit(:items))
+
     render inertia: "Items/Index", props: {
       items: -> { paginated_items.render(view: :index) },
       pagination: -> { {

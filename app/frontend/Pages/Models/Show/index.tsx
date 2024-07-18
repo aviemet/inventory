@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon } from '@/Components/Icons'
 
@@ -19,12 +19,12 @@ const Show = ({ model }: ShowModelProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Model', href: Routes.models() },
-			{ title: model.name! },
+			{ title: model.name, href: window.location.href },
 		] }>
 
 			<Section>
 				<Group justify="space-between">
-					<Heading>{ title }</Heading>
+					<Title>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

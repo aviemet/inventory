@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import StatusLabelForm from '../Form'
 
@@ -14,10 +14,10 @@ const EditStatusLabel = ({ status_label }: UpdateStatusLabelProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Status Labels', href: Routes.statusLabels() },
 			{ title: status_label.name!, href: Routes.statusLabel(status_label.slug) },
-			{ title: 'Edit Status Label' },
+			{ title: 'Edit Status Label', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<StatusLabelForm to={ Routes.statusLabel(status_label) } method="patch" status_label={ status_label } />
 			</Section>

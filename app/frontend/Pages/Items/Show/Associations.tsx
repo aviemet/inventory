@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Heading, Link } from '@/Components'
+import { Box, Title, Link } from '@/Components'
 import AssignmentLink from './AssignmentLink'
 import { Routes } from '@/lib'
 
@@ -13,7 +13,7 @@ const Associations = ({ item }: ItemAssociationsProps) => {
 			{ item.assigned && <Box mt={ 16 }>Assigned To: <AssignmentLink item={ item } /> </Box> }
 
 			{ (Array.isArray(item.items) && item.items.length > 0) && <Box mt={ 16 }>
-				<Heading order={ 3 }>Items</Heading>
+				<Title order={ 3 }>Items</Title>
 
 				<ul>
 					{ item.items.map(item => (
@@ -23,7 +23,7 @@ const Associations = ({ item }: ItemAssociationsProps) => {
 			</Box> }
 
 			{ (Array.isArray(item.accessories) && item.accessories.length > 0) && <Box mt={ 16 }>
-				<Heading order={ 3 }>Accessories</Heading>
+				<Title order={ 3 }>Accessories</Title>
 
 				<ul>
 					{ item.accessories.map(accessory => (
@@ -33,7 +33,7 @@ const Associations = ({ item }: ItemAssociationsProps) => {
 			</Box> }
 
 			{ (Array.isArray(item.consumables) && item.consumables.length > 0) && <Box mt={ 16 }>
-				<Heading order={ 3 }>Consumables</Heading>
+				<Title order={ 3 }>Consumables</Title>
 
 				<ul>
 					{ item.consumables.map(consumable => (
@@ -43,7 +43,7 @@ const Associations = ({ item }: ItemAssociationsProps) => {
 			</Box> }
 
 			{ (Array.isArray(item.licenses) && item.licenses.length > 0) && <Box mt={ 16 }>
-				<Heading order={ 3 }>Licenses</Heading>
+				<Title order={ 3 }>Licenses</Title>
 
 				<ul>
 					{ item.licenses.map(license => (

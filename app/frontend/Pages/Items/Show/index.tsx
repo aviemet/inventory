@@ -1,7 +1,13 @@
 import React from 'react'
-import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
-import { EditIcon, CheckinIcon, CheckoutIcon, TicketsIcon, DocumentationIcon } from '@/Components/Icons'
+import {
+	EditIcon,
+	CheckinIcon,
+	CheckoutIcon,
+	TicketsIcon,
+	DocumentationIcon,
+} from '@/Components/Icons'
 import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'
@@ -24,11 +30,11 @@ const ShowItem = ({ item }: ShowItemProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Hardware', href: Routes.items() },
-			{ title: item.name! },
+			{ title: item.name, href: window.location.href },
 		] }>
 			<Section fullHeight>
 				<Group justify="space-between">
-					<Heading style={ { flex: 1 } }>{ title }</Heading>
+					<Title style={ { flex: 1 } }>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />
@@ -71,9 +77,7 @@ const ShowItem = ({ item }: ShowItemProps) => {
 
 						return (
 							<Tabs.Panel key={ tab.id } value={ tab.id } p="md">
-								<Component
-									item={ item }
-								/>
+								<Component item={ item } />
 							</Tabs.Panel>
 						)
 					}) }

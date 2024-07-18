@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import ComponentForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,10 +14,10 @@ const EditComponent = ({ component }: UpdateComponentProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Components', href: Routes.components() },
 			{ title: component.name!, href: Routes.component(component) },
-			{ title: 'Edit Component' },
+			{ title: 'Edit Component', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ComponentForm to={ Routes.component(component) } method="patch" component={ component } />
 			</Section>

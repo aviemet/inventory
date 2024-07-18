@@ -1,5 +1,5 @@
 import React from 'react'
-import { Badge, Box, Heading, Link, Page, Paper, Section, Text } from '@/Components'
+import { Badge, Box, Title, Link, Page, Paper, Section, Text } from '@/Components'
 import TicketMessage from './TicketMessage'
 import DangerousHtml from '@/Components/DangerousHtml'
 import { Form, RichText, Submit } from '@/Components/Form'
@@ -15,10 +15,10 @@ const ShowTicket = ({ ticket }: ShowTicketProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Support Tickets', href: Routes.tickets() },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 				<Box>
 					<Text size="sm">
 					Primary Contact:&nbsp;
@@ -36,7 +36,7 @@ const ShowTicket = ({ ticket }: ShowTicketProps) => {
 				</Box>
 
 				<Paper p="sm" my="sm">
-					<Heading order={ 4 } mb="xs">Original Message:</Heading>
+					<Title order={ 4 } mb="xs">Original Message:</Title>
 					<DangerousHtml>{ ticket.description }</DangerousHtml>
 				</Paper>
 

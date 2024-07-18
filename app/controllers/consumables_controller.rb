@@ -1,6 +1,5 @@
 class ConsumablesController < ApplicationController
   include OwnableConcern
-  include Searchable
 
   expose :consumables, -> { search(@active_company.consumables.includes_associated, sortable_fields) }
   expose :consumable, scope: ->{ @active_company.consumables }, find: ->(id, scope){ scope.includes_associated.find(id) }
@@ -8,6 +7,7 @@ class ConsumablesController < ApplicationController
   # @route GET /consumables (consumables)
   def index
     authorize consumables
+
     paginated_consumables = consumables.page(params[:page] || 1).per(current_user.limit(:consumables))
 
     render inertia: "Consumables/Index", props: {

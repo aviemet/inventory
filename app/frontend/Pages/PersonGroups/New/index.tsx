@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import GroupForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,10 +13,10 @@ const New = ({ ...data }: NewGroupProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Groups', href: Routes.personGroups() },
-			{ title: 'New People Group' },
+			{ title: 'New People Group', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<GroupForm to={ Routes.personGroups() } { ...data } />
 			</Section>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Page } from '@/Components'
 import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'
@@ -21,11 +21,11 @@ const ShowLicense = ({ license }: ShowLicenseProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Licenses', href: Routes.licenses() },
-			{ title: license.name! },
+			{ title: license.name, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">
-					<Heading>{ title }</Heading>
+					<Title>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

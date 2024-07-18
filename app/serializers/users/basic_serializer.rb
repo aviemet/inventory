@@ -8,14 +8,6 @@ class Users::BasicSerializer < UserSerializer
     user_preferences: { type: "UserPreferences" },
   )
 
-  class ShowUserPersonSerializer < PersonSerializer
-    belongs_to :company, serializer: Companies::OptionsSerializer
-  end
-
-  has_one :person, serializer: ShowUserPersonSerializer
-
   has_many :roles, serializer: RoleSerializer
   has_many :companies, serializer: Companies::OptionsSerializer
-
-  belongs_to :active_company, serializer: Companies::OptionsSerializer
 end

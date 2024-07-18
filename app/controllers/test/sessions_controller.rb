@@ -3,6 +3,7 @@ module Test
     skip_before_action :verify_authenticity_token
     skip_before_action :authenticate_user!, only: [:create]
 
+    # @route POST /test/login (test_login)
     def create
       user = User.find_by(email: params[:email])
 

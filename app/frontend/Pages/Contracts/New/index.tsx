@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import ContractForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,10 +13,10 @@ const NewContract = ({ contract }: NewContractProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Contracts', href: Routes.contracts() },
-			{ title: 'New Contract' },
+			{ title: 'New Contract', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ContractForm to={ Routes.contracts() } contract={ contract } />
 			</Section>

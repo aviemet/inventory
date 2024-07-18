@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import Counts from './Counts'
 import RecentActivityTable from './RecentActivityTable'
 
@@ -13,12 +13,14 @@ const Dashboard = ({ company, activities }: DashboardProps) => {
 		<Page title="Dashboard" breadcrumbs={ [
 			{ href: '/dashboard', title: 'Dashboard' },
 		] }>
+			<Title mb="sm">Company Overview</Title>
+
 			<Section>
 				<Counts counts={ company.counts } />
 			</Section>
 
 			<Section>
-				<Heading order={ 2 }>Recent Activity</Heading>
+				<Title order={ 2 }>Recent Activity</Title>
 				<RecentActivityTable activities={ activities } />
 			</Section>
 		</Page>

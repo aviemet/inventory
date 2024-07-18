@@ -2,13 +2,6 @@ import { vars, theme } from '@/lib/theme'
 import { rem } from '@mantine/core'
 import { css } from '@linaria/core'
 
-export const wrapper = css`
-	overflow: auto;
-	position: relative;
-	height: 100%;
-	max-height: 100%;
-`
-
 export const table = css`
 	width: 100%;
 
@@ -47,6 +40,10 @@ export const table = css`
 
 		&.table-column-fit {
 			width: 1px;
+			white-space: nowrap;
+		}
+
+		&.nowrap {
 			white-space: nowrap;
 		}
 	}
@@ -120,6 +117,17 @@ export const table = css`
 	}
 `
 
+export const wrapper = css`
+	overflow: auto;
+	position: relative;
+	height: 100%;
+	max-height: 100%;
+
+	& .${table} thead {
+		top: -10px;
+	}
+`
+
 export const section = css`
 	display: flex;
 	flex-direction: column;
@@ -137,24 +145,23 @@ export const searchInput = css`
 	input {
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
+		border-top-left-radius: ${vars.radius.sm};
+		border-bottom-left-radius: ${vars.radius.sm};
 	}
 `
 
+export const columnPickerButton = css`
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+`
+
 export const pagination = css`
+	a:hover {
+		text-decoration: none;
+	}
+`
+
+export const limitSelect = css`
 	display: inline-block;
 	max-width: 60px;
 `
-
-// &:before, &:after {
-// 	position: absolute,
-// 	display: block,
-// 	right: 0.75rem,
-// 	width: 0,
-// 	height: 0,
-// 	content: ,
-// 	cursor: pointer,
-// 	border-color: vars.colors.gray[4],
-// 	border-style: solid,
-// 	borderLeft: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
-// 	borderRight: `${theme.other.table.sortButtonHeight}px solid transparent !important`,
-// }

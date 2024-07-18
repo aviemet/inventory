@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, NumberInput, Submit, Textarea } from '@/Components/Form'
 import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
@@ -30,10 +30,10 @@ const Checkout = ({ assignment, consumable }: CheckoutItemProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Consumables', href: Routes.consumables() },
 			{ title: consumable.name!, href: Routes.consumable(consumable) },
-			{ title: 'Check Out' },
+			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<div>
 					<div className="item-details">

@@ -4,7 +4,7 @@ import { Box, Title, Group, Divider } from '@mantine/core'
 import { Menu } from '@/Components'
 import { TrashIcon } from '@/Components/Icons'
 import { router } from '@inertiajs/react'
-import * as classes from './IndexPage.css'
+import * as classes from '../IndexPageTemplate/IndexPage.css'
 
 export interface IndexTableTitleSectionProps {
 	children: React.ReactNode

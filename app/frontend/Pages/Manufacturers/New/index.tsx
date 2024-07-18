@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import ManufacturerForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,10 +13,10 @@ const New = ({ ...data }: NewManufacturerProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Manufacturers', href: Routes.manufacturers() },
-			{ title: 'New Manufacturer' },
+			{ title: 'New Manufacturer', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ManufacturerForm to={ Routes.manufacturers() } { ...data } />
 			</Section>

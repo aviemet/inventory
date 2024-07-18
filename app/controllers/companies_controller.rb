@@ -1,5 +1,4 @@
 class CompaniesController < ApplicationController
-  include Searchable
 
   expose :companies, -> { search(current_user.companies, sortable_fields) }
   expose :company, id: ->{ params[:slug] }, scope: ->{ current_user.companies }, find_by: :slug

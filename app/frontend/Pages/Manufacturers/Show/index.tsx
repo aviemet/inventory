@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Group, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { EditIcon, NewIcon } from '@/Components/Icons'
 import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
@@ -32,7 +32,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Manufacturers', href: Routes.manufacturers() },
-			{ title: manufacturer.name! },
+			{ title: manufacturer.name, href: window.location.href },
 		] }>
 			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ omit(tabs, 'details') }>
 				<Tabs.List>
@@ -47,7 +47,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
 						<Group justify="space-between">
-							<Heading>{ title }</Heading>
+							<Title>{ title }</Title>
 
 							<Menu position="bottom-end">
 								<Menu.Target />

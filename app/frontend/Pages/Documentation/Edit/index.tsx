@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import DocumentationsForm from '../Form'
 
@@ -14,10 +14,10 @@ const EditDocumentation = ({ documentation }: EditDocumentationProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Documentations', href: Routes.documentations() },
 			{ title: documentation.title!, href: Routes.documentation(documentation.slug) },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<DocumentationsForm
 					method='put'

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { Textarea, type TextareaProps as MantineTextareaProps } from '@mantine/core'
-import { type BaseInputProps } from '.'
+import { withInjectedProps, type BaseInputProps } from '.'
 import Label from './Label'
 import InputWrapper from './InputWrapper'
 
@@ -12,9 +12,9 @@ const TextareaComponent = forwardRef<HTMLTextAreaElement, TextareaProps>((
 		name,
 		required = false,
 		id,
-		radius = 'xs',
 		wrapper,
 		wrapperProps,
+		disableAutofill = false,
 		...props
 	},
 	ref,
@@ -31,8 +31,9 @@ const TextareaComponent = forwardRef<HTMLTextAreaElement, TextareaProps>((
 				id={ inputId }
 				name={ name }
 				required={ required }
-				radius={ radius }
-				{ ...props }
+				{ ...withInjectedProps(props, {
+					disableAutofill,
+				}) }
 			>
 			</Textarea>
 		</InputWrapper>

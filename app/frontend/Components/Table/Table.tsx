@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, type TableProps as MantineTableProps } from '@mantine/core'
+import { Box, Table, type TableProps as MantineTableProps } from '@mantine/core'
 
 import Head from './Head'
 import Body from './Body'
@@ -9,7 +9,7 @@ import Cell from './Td'
 import HeadCell from './Th'
 import Footer from './Footer'
 import Pagination from './Pagination'
-import TableProvider, { useTableContext } from './TableContext'
+import TableProvider from './TableContext'
 import TableSection from './Section'
 import SearchInput from './SearchInput'
 import ConditionalWrapper from '../ConditionalWrapper'
@@ -47,44 +47,35 @@ const TableComponent: TableObject = ({
 	fixed = false,
 	striped = true,
 	highlightOnHover = true,
-	style,
 	...props
 }) => {
-	const tableState = useTableContext(false)
-
 	return (
 		<ConditionalWrapper
 			condition={ wrapper }
-			wrapper={ children => <div className={ classes.wrapper }>{ children }</div> }
+			wrapper={ children => <Box className={ classes.wrapper }>{ children }</Box> }
 		>
-			<ConditionalWrapper
-				condition={ tableState === null }
-				wrapper={ children => <TableProvider>{ children }</TableProvider> }
+			<Table
+				striped={ striped }
+				highlightOnHover={ highlightOnHover }
+				className={ cx(className, classes.table) }
+				{ ...props }
 			>
-				<Table
-					striped={ striped }
-					highlightOnHover={ highlightOnHover }
-					className={ cx(className, classes.table) }
-					style={ [wrapper ? { thead: { top: -10 } } : undefined, style] }
-					{ ...props }
-				>
-					{ children }
-				</Table>
-			</ConditionalWrapper>
+				{ children }
+			</Table>
 		</ConditionalWrapper>
 	)
 }
 
 TableComponent.TableProvider = TableProvider
-TableComponent.Section = TableSection
-TableComponent.SearchInput = SearchInput
-TableComponent.Head = Head
-TableComponent.HeadCell = HeadCell
-TableComponent.Body = Body
-TableComponent.Cell = Cell
-TableComponent.Row = Row
-TableComponent.RowIterator = RowIterator
-TableComponent.Footer = Footer
-TableComponent.Pagination = Pagination
+TableComponent.Section       = TableSection
+TableComponent.SearchInput   = SearchInput
+TableComponent.Head          = Head
+TableComponent.HeadCell      = HeadCell
+TableComponent.Body          = Body
+TableComponent.Cell          = Cell
+TableComponent.Row           = Row
+TableComponent.RowIterator   = RowIterator
+TableComponent.Footer        = Footer
+TableComponent.Pagination    = Pagination
 
 export default TableComponent

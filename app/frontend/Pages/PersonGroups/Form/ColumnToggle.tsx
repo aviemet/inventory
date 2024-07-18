@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback } from 'react'
 import { Checkbox } from '@/Components/Inputs'
 import { useForm } from 'use-inertia-form'
 import { type FormData, type Permissions } from '.'

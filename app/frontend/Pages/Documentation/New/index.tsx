@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import DocumentationForm from '../Form'
 
@@ -13,11 +13,11 @@ const NewDocumentation = ({ documentation }: NewDocumentationProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Documentations', href: Routes.documentations() },
-			{ title: 'New Documentation' },
+			{ title, href: window.location.href },
 		] }>
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<DocumentationForm
 					to={ Routes.documentations() }

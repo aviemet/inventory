@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import GroupForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -16,10 +16,10 @@ const EditGroup = ({ person_group, ...models }: UpdateGroupProps) => {
 			{ title: 'People', href: Routes.people() },
 			{ title: 'Groups', href: Routes.personGroups() },
 			{ title: person_group.name!, href: Routes.personGroup(person_group.slug) },
-			{ title: 'Edit' },
+			{ title: 'Edit', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<GroupForm to={ Routes.personGroup(person_group.slug) } method="patch" person_group={ person_group } { ...models } />
 			</Section>

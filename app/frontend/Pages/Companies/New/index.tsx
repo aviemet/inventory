@@ -1,5 +1,5 @@
 import React from 'react'
-import { Breadcrumbs, Heading, Page, Section } from '@/Components'
+import { Breadcrumbs, Title, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 import CompanyForm from '../Form'
 
@@ -18,7 +18,7 @@ const NewCompany = ({ company }: NewCompanyProps) => {
 			] } />
 
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<CompanyForm to={ Routes.companies() } company={ company } />
 			</Section>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import ItemForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,10 +13,10 @@ const NewItem = ({ item }: NewItemProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Hardware', href: Routes.items() },
-			{ title: 'New Hardware' },
+			{ title: 'New Hardware', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 				<ItemForm to={ Routes.items() } item={ item } />
 			</Section>
 		</Page>

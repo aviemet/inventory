@@ -1,5 +1,5 @@
 
-import { Routes, toCamelCase } from '@/lib'
+import { toCamelCase } from '@/lib'
 export { default as IPAddress } from './IPAddress'
 
 export * as Routes from '@/types/routes'

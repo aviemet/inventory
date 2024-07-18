@@ -3,6 +3,7 @@ module Assignable
   extend ActiveSupport::Concern
 
   included do
+    # has_many :assignments, as: :assignable, inverse_of: :assignable, dependent: :destroy
     has_many :assignments, as: :assignable, inverse_of: :assignable, dependent: :destroy
     belongs_to :status_label, default: -> { StatusLabel.find_by(name: "Deployable") }
 

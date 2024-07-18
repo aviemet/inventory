@@ -1,6 +1,5 @@
 class VendorsController < ApplicationController
   include OwnableConcern
-  include Searchable
 
   expose :vendors, -> { search(@active_company.vendors.includes_associated, sortable_fields) }
   expose :vendor, id: ->{ params[:slug] }, scope: ->{ @active_company.vendors.includes_associated }, find_by: :slug

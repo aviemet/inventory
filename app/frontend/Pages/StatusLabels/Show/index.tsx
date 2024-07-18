@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 
 interface ShowStatusLabelProps {
 	status_label: Schema.StatusLabelsShow
@@ -11,7 +11,7 @@ const ShowStatusLabel = ({ status_label }: ShowStatusLabelProps) => {
 	return (
 		<Page title={ title }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 			</Section>
 		</Page>
 	)

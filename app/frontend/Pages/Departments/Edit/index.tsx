@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import DepartmentForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,11 +13,11 @@ const EditDepartment = ({ department }: EditDepartmentProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Departments', href: Routes.departments() },
-			{ title: department.name!, href: Routes.department(department) },
-			{ title: 'Edit Department' },
+			{ title: department.name, href: Routes.department(department) },
+			{ title: 'Edit Department', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<DepartmentForm to={ Routes.department(department) } method="patch" department={ department } />
 			</Section>

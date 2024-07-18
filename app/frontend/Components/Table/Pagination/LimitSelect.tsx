@@ -1,6 +1,6 @@
 import React from 'react'
 import { router } from '@inertiajs/react'
-import { Select } from '@mantine/core'
+import { Select, type SelectProps } from '@mantine/core'
 import axios from 'axios'
 import { Routes } from '@/lib'
 import { useLocation, usePageProps } from '@/lib/hooks'
@@ -9,7 +9,7 @@ import useLayoutStore from '@/lib/store/LayoutStore'
 import cx from 'clsx'
 import * as classes from '../Table.css'
 
-interface LimitSelectProps {
+interface LimitSelectProps extends SelectProps {
 	pagination: Schema.Pagination
 	model: string
 }
@@ -52,7 +52,7 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 			mx={ 4 }
 			my={ 0 }
 			withCheckIcon={ false }
-			className={ cx(classes.pagination) }
+			className={ cx(classes.limitSelect) }
 			rightSectionWidth='1rem'
 			defaultValue={ String(pagination.limit) || String(defaultLimit) }
 			data={ [
@@ -62,6 +62,7 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 				{ value: '100', label: '100' },
 			] }
 			onChange={ handleLimitChange }
+			aria-label="rows per page"
 		/>
 	)
 }

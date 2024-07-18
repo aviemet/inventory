@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group } from '@/Components'
+import { Grid } from '@/Components'
 import {
 	Form,
 	TextInput,
@@ -7,7 +7,7 @@ import {
 	DateInput,
 	Submit,
 } from '@/Components/Form'
-import { FormCategoriesDropdown, VendorsDropdown } from '@/Features/Dropdowns'
+import { FormCategoriesDropdown, FormVendorsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
@@ -42,29 +42,45 @@ const ContractForm = ({
 			method={ method }
 			onSubmit={ onSubmit }
 		>
-			<TextInput name="name" label="Name" required autoFocus />
+			<Grid>
+				<Grid.Col>
+					<TextInput name="name" label="Name" required />
+				</Grid.Col>
 
-			<TextInput name="number" label="Contract Number" />
+				<Grid.Col>
+					<TextInput name="number" label="Contract Number" />
+				</Grid.Col>
 
-			<Group grow>
-				<DateInput name="begins_at" label="Contract Start" />
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<DateInput name="begins_at" label="Contract Start" />
+				</Grid.Col>
 
-				<DateInput name="ends_at" label="Contract End" />
-			</Group>
+				<Grid.Col span={ { sm: 12, md: 6 } }>
+					<DateInput name="ends_at" label="Contract End" />
+				</Grid.Col>
 
-			<VendorsDropdown initialData={ coerceArray(contract?.vendor) } required />
+				<Grid.Col>
+					<FormVendorsDropdown initialData={ coerceArray(contract?.vendor) } required />
+				</Grid.Col>
 
-			<FormCategoriesDropdown
-				categorizable_type="Contract"
-				initialData={ coerceArray(contract?.category) }
-				required
-			/>
+				<Grid.Col>
+					<FormCategoriesDropdown
+						categorizable_type="Contract"
+						initialData={ coerceArray(contract?.category) }
+						required
+					/>
+				</Grid.Col>
 
-			<Textarea name="notes" label="Notes" />
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
 
-			<Submit>
-				{ contract.id ? 'Update' : 'Create' } Contract
-			</Submit>
+				<Grid.Col>
+					<Submit>
+						{ contract.id ? 'Update' : 'Create' } Contract
+					</Submit>
+				</Grid.Col>
+			</Grid>
 		</Form>
 	)
 }

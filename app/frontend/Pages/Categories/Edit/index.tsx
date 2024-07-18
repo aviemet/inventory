@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import CategoryForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,10 +14,10 @@ const EditCategory = ({ category, ...models }: UpdateCategoryProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Categories', href: Routes.categories() },
 			{ title: category.name!, href: Routes.category(category.slug) },
-			{ title: 'Edit Category' },
+			{ title: 'Edit Category', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<CategoryForm to={ Routes.category(category.slug) } method="patch" category={ category } />
 			</Section>

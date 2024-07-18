@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useLocation } from '@/lib/hooks'
-import { isUnset } from '@/lib/forms'
 import { router } from '@inertiajs/react'
-import cx from 'clsx'
-import { NestedURLSearchParams } from '@/lib'
+import { NestedURLSearchParams, isUnset } from '@/lib'
+import { useLocation } from '@/lib/hooks'
 import buildSearchLink from './buildSearchLink'
+
+import cx from 'clsx'
 
 type SpecialSearchTypes = 'date'
 

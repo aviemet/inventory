@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Page, Heading, Section, Table } from '@/Components'
+import { Page, Title, Section, Table } from '@/Components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import * as classes from './Checkin.css'
@@ -18,7 +18,7 @@ const Checkin = ({ assignment, accessory, statuses }: CheckinAccessoriesProps) =
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Accessories', href: Routes.accessories() },
 			{ title: accessory.name!, href: Routes.accessory(accessory) },
-			{ title: 'Check In' },
+			{ title: 'Check In', href: window.location.href },
 		] }>
 
 			<Section>
@@ -43,7 +43,7 @@ const Checkin = ({ assignment, accessory, statuses }: CheckinAccessoriesProps) =
 			</Section>
 
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Form
 					data={ {

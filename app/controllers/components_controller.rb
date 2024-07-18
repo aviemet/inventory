@@ -1,6 +1,5 @@
 class ComponentsController < ApplicationController
   include OwnableConcern
-  include Searchable
 
   expose :components, -> { search(@active_company.components.includes_associated, sortable_fields) }
   expose :component, scope: ->{ @active_company.components }, find: ->(id, scope){ scope.includes_associated.find(id) }
@@ -53,7 +52,7 @@ class ComponentsController < ApplicationController
     assignment.assign_toable_type = :Item
 
     render inertia: "Components/Checkout", props: {
-      component: component.render,
+      component: component.render(view: :show),
       assignment: assignment.render(view: :form_data),
       items: -> { @active_company.items.select([:id, :name, :default_location_id]).render(view: :options) },
       locations: -> { @active_company.locations.select([:id, :slug, :name]).render(view: :options) },

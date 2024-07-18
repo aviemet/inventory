@@ -1,6 +1,5 @@
 class AssetsController < ApplicationController
   include OwnableConcern
-  include Searchable
 
   expose :assets, -> { search(@active_company.assets.includes_associated, sortable_fields) }
   expose :asset, scope: ->{ @active_company.assets }, find: ->(id, scope){ scope.includes_associated.find(id) }

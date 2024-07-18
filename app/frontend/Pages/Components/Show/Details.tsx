@@ -1,12 +1,12 @@
 import React from 'react'
-import { Link, Heading, Table, Box, Money } from '@/Components'
+import { Link, Title, Table, Box, Money } from '@/Components'
 import { Routes } from '@/lib'
 import { ShowComponentProps } from '.'
 
 const ComponentDetails = ({ component }: ShowComponentProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>Details</Heading>
+			<Title order={ 2 }>Details</Title>
 
 			<Box style={ theme => ({ maxWidth: `${theme.breakpoints.sm}` }) }>
 				<Table>

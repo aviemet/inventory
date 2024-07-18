@@ -8,14 +8,22 @@ module.exports = {
 		'plugin:import/typescript',
 		'plugin:storybook/recommended',
 		'plugin:react-hooks/recommended',
+		'plugin:jsx-a11y/recommended',
 	],
-	plugins: ['react', '@typescript-eslint', 'import'],
+	plugins: [
+		'react',
+		'@typescript-eslint',
+		'import',
+	],
 	settings: {
 		react: {
 			version: 'detect',
 		},
 		'import/resolver': {
 			'typescript': {},
+		},
+		'jsx-a11y': {
+			'polymorphicPropName': 'component',
 		},
 	},
 	parser: '@typescript-eslint/parser',
@@ -96,4 +104,14 @@ module.exports = {
 		'comma-dangle': ['error', 'always-multiline'],
 		'react-hooks/exhaustive-deps': 0,
 	},
+	overrides: [
+		{
+			files: ['*.d.ts'],
+			rules: {
+				'no-unused-vars': 'off',
+				'@typescript-eslint/member-delimiter-style': 'off',
+				'@typescript-eslint/indent': 'off',
+			},
+		},
+	],
 }

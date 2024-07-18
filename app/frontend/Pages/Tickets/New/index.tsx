@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import TicketForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -15,10 +15,10 @@ const NewTicket = ({ ...data }: NewTicketProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Tickets', href: Routes.tickets() },
-			{ title: 'New Ticket' },
+			{ title: 'New Ticket', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<TicketForm to={ Routes.tickets() } { ...data } />
 			</Section>

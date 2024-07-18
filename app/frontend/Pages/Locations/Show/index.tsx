@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Heading, Menu, Page, Section } from '@/Components'
+import { Group, Title, Menu, Page, Section } from '@/Components'
 import { Routes } from '@/lib'
 
 interface ShowLocationProps {
@@ -12,11 +12,11 @@ const ShowLocation = ({ location }: ShowLocationProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Locations', href: Routes.locations() },
-			{ title },
+			{ title, href: window.location.href },
 		] }>
 			<Section>
 				<Group justify="space-between">
-					<Heading>{ title }</Heading>
+					<Title>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

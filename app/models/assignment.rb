@@ -44,7 +44,7 @@ class Assignment < ApplicationRecord
 
   attr_reader :assignable_types, :assign_toable_types
 
-  enum status: { :approved => 0, :requested => 1, :denied => 2 }
+  enum status: { approved: 0, requested: 1, denied: 2 }
 
   attribute :assigned_at, default: -> { Time.current }
   attribute :active, default: true
@@ -61,5 +61,6 @@ class Assignment < ApplicationRecord
   validates :assigned_at, presence: true
 
   scope :includes_associated, -> { includes([:location, :created_by, :activities]) }
+
   scope :active, -> { where(active: true) }
 end

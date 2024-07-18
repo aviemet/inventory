@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import ConsumableForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,11 +13,11 @@ const EditConsumable = ({ consumable }: UpdateConsumableProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Consumables', href: Routes.consumables() },
-			{ title: consumable.name!, href: Routes.consumable(consumable) },
-			{ title: 'Edit Consumable' },
+			{ title: consumable.name, href: Routes.consumable(consumable) },
+			{ title: 'Edit Consumable', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<ConsumableForm
 					to={ Routes.consumable(consumable) }

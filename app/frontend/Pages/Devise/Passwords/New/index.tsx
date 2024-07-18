@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, Form, TextInput, Submit } from '@/Components/Form'
 import { Routes } from '@/lib'
-import { Heading, Tile } from '@/Components'
+import { Title, Tile } from '@/Components'
 
 type PasswordsNewFormData = {
 	email: string
@@ -22,11 +22,11 @@ const PasswordsNew = () => {
 			>
 				<Tile.Content>
 					<div>
-						<Heading>Reset Password</Heading>
+						<Title>Reset Password</Title>
 					</div>
 
 					<Field>
-						<TextInput name="email" placeholder="Email" autoFocus autoComplete="Email" />
+						<TextInput name="email" placeholder="Email" autoComplete="Email" />
 					</Field>
 
 					<Field>

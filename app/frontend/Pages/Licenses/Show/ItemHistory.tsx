@@ -1,11 +1,11 @@
 import React from 'react'
-import { Heading, History } from '@/Components'
+import { Title, History } from '@/Components'
 import { ShowLicenseProps } from '.'
 
 const LicenseHistory = ({ license }: ShowLicenseProps) => {
 	return (
 		<>
-			<Heading order={ 3 }>History</Heading>
+			<Title order={ 3 }>History</Title>
 
 			<History assignments={ license.assignments } activities={ license.activities } />
 		</>

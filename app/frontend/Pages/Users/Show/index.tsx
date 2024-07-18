@@ -1,4 +1,4 @@
-import { Heading, Link, Section, Table, Text } from '@/Components'
+import { Title, Link, Section, Table, Text } from '@/Components'
 import { Routes } from '@/lib'
 import React from 'react'
 
@@ -10,7 +10,7 @@ const ShowUser = ({ user }: ShowUserProps) => {
 	return (
 		<>
 			<Section>
-				<Heading>User: { user.email }</Heading>
+				<Title>User: { user.email }</Title>
 				<Text my={ 10 }>User is active in the following companies</Text>
 				<Table>
 					<Table.Head>

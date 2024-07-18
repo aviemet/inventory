@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import OrderForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -14,10 +14,10 @@ const EditOrder = ({ order  }: UpdateOrderProps) => {
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Order', href: Routes.orders() },
 			{ title: String(order.id), href: Routes.order(order) },
-			{ title: 'Edit Order' },
+			{ title: 'Edit Order', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<OrderForm to={ Routes.order(order) } method="patch" order={ order } />
 			</Section>

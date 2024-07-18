@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid } from '@/Components'
 import { Form, TextInput, Submit, RichText } from '@/Components/Form'
 import DocumentableSearch from './DocumentableSearch'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
@@ -28,19 +29,35 @@ const DocumentationForm = ({
 			filter={ ['route', 'category', 'documentable_name'] }
 			{ ...props }
 		>
-			<DocumentableSearch
-				name="documentable_id"
-				label="Referencing"
-				required
-			/>
+			<Grid>
 
-			<FormCategoriesDropdown categorizable_type="Document" />
 
-			<TextInput name="title" label="Title" required />
+				<Grid.Col>
+					<TextInput name="title" label="Title" required />
+				</Grid.Col>
 
-			<RichText name="body" label="Documentation Content" />
+				<Grid.Col>
+					<DocumentableSearch
+						name="documentable_id"
+						label="Referencing"
+						required
+					/>
+				</Grid.Col>
 
-			<Submit>{ documentation.id ? 'Update' : 'Create' } Documentation</Submit>
+				<Grid.Col>
+					<FormCategoriesDropdown categorizable_type="Documentation" />
+				</Grid.Col>
+
+
+				<Grid.Col>
+					<RichText name="body" label="Documentation Content" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<Submit>{ documentation.id ? 'Update' : 'Create' } Documentation</Submit>
+				</Grid.Col>
+
+			</Grid>
 		</Form>
 	)
 }

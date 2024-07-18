@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useTableSectionContext } from '@/Components/Table/TableContext'
 import FlexMoney from './FlexMoney'
 import { type Money } from '@/types'
-import useCurrency, { type UseCurrencyOptions } from './useCurency'
+import { useCurrency, type UseCurrencyOptions } from '@/lib/hooks'
 
 interface MoneyProps {
 	children?: number | Money | null

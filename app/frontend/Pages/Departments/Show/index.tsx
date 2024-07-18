@@ -36,7 +36,7 @@ const Show = ({ department, items, accessories, components, consumables, license
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Departments', href: Routes.departments() },
-			{ title: department.name! },
+			{ title: department.name, href: window.location.href },
 		] }>
 			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {
 				[tabs.items]: 'items',

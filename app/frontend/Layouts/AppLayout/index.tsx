@@ -5,7 +5,7 @@ import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'
 import { useLayoutStore } from '@/lib/store'
-import { useDisclosure } from '@mantine/hooks'
+import { useDisclosure } from '@/lib/hooks'
 
 import cx from 'clsx'
 import * as classes from './AppLayout.css'
@@ -42,8 +42,8 @@ const AppLayout = ({ children }: { children: any }) => {
 			<Topbar />
 			<Sidebar />
 			<Footer />
-			<AppShell.Main>
-				<Box id="CONTENT_WRAPPER" className={ cx(classes.wrapper) } p="xs">
+			<AppShell.Main role="main">
+				<Box className={ cx(classes.wrapper) } p="xs">
 					{ children }
 				</Box>
 			</AppShell.Main>

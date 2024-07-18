@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Flex, Heading, Tabs, Page } from '@/Components'
+import { Section, Menu, Flex, Title, Tabs, Page } from '@/Components'
 import { Routes } from '@/lib'
 import { Tooltip } from '@mantine/core'
 import Details from './Details'
@@ -24,11 +24,11 @@ const ShowConsumable = ({ consumable }: ShowConsumableProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Consumables', href: Routes.consumables() },
-			{ title: consumable.name! },
+			{ title: consumable.name, href: window.location.href },
 		] }>
 			<Section>
 				<Flex>
-					<Heading style={ { flex: 1 } }>{ title }</Heading>
+					<Title style={ { flex: 1 } }>{ title }</Title>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

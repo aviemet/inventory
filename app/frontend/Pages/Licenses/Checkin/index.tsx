@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Flex, Heading, Page, Section, Table, Box } from '@/Components'
+import { Flex, Title, Page, Section, Table, Box } from '@/Components'
 import { Routes, formatter } from '@/lib'
 import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
 import { LocationsDropdown } from '@/Features/Dropdowns'
@@ -19,10 +19,10 @@ const Checkin = ({ assignment, license, locations, status_labels }: CheckinLicen
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'License', href: Routes.licenses() },
 			{ title: license.name!, href: Routes.license(license) },
-			{ title: 'Check Out' },
+			{ title: 'Check Out', href: window.location.href },
 		] }>
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Box style={ (theme) => ({ maxWidth: `${theme.breakpoints.md}` }) }>
 					<Flex>
@@ -81,7 +81,7 @@ const Checkin = ({ assignment, license, locations, status_labels }: CheckinLicen
 			</Section>
 
 			<Section>
-				<Heading order={ 3 }>{ title }</Heading>
+				<Title order={ 3 }>{ title }</Title>
 
 				<Form
 					data={ {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/Components'
 import NetworkForm from '../Form'
 import { Routes } from '@/lib'
 
@@ -13,10 +13,10 @@ const New = ({ network }: NewNetworkProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ [
 			{ title: 'Networks', href: Routes.networks() },
-			{ title: 'New Network' },
+			{ title: 'New Network', href: window.location.href },
 		] }>
 			<Section>
-				<Heading>{ title }</Heading>
+				<Title>{ title }</Title>
 
 				<NetworkForm to={ Routes.networks() } network={ network } />
 			</Section>
