@@ -2,7 +2,7 @@
 import { toCamelCase } from '@/lib'
 export { default as IPAddress } from './IPAddress'
 
-export * as Routes from '@/types/routes'
+export * as Routes from './/routes'
 export * as formatter from './formatters'
 
 export * from './uuid'
