@@ -53,6 +53,8 @@
 #  fk_rails_...  (active_company_id => companies.id)
 #
 class User < ApplicationRecord
+  before_save :coerce_json
+  before_save :set_active_company
 
   multisearchable(
     against: [:email],
@@ -86,9 +88,6 @@ class User < ApplicationRecord
   password_complexity_regex = /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,70}\z/
   validates :password, format: { with: password_complexity_regex }, on: [:create, :update], confirmation: true, if: :password
   # validates :password, presence: true, if: "id.nil?"
-
-  before_save :coerce_json
-  before_save :set_active_company
 
   # accepts_nested_attributes_for :person
 

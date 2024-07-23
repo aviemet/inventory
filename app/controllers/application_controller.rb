@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include InertiaShare::Auth
   include Searchable
   include ActiveCompanyTracker
+  include StrongParams
 
   # before_action :decode_id
 

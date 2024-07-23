@@ -4,6 +4,8 @@ class AccessoriesController < ApplicationController
   expose :accessories, -> { search(@active_company.accessories.includes_associated, sortable_fields) }
   expose :accessory, scope: ->{ @active_company.accessories }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
+  strong_params :accessory, [:name, :serial, :asset_tag, :notes, :qty, :model_id, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :cost_currency, :min_qty, :status_id]
+
   # @route GET /accessories (accessories)
   def index
     authorize accessories
@@ -117,7 +119,7 @@ class AccessoriesController < ApplicationController
     %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
-  def accessory_params
-    params.require(:accessory).permit(:name, :serial, :asset_tag, :notes, :qty, :model_id, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :cost_currency, :min_qty, :status_id)
-  end
+  # def accessory_params
+  #   params.require(:accessory).permit(:name, :serial, :asset_tag, :notes, :qty, :model_id, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :cost_currency, :min_qty, :status_id)
+  # end
 end
