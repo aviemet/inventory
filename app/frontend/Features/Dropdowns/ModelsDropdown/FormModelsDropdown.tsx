@@ -8,7 +8,7 @@ import { type FormAsyncDropdown } from '..'
 
 interface ModelsDropdownProps extends Omit<FormAsyncDropdown<Schema.ModelsOptions>, 'name'> {
 	name?: string
-	modelCategory?: Schema.CategoryTypes|undefined
+	modelCategory: Schema.CategoryTypes
 }
 
 const ModelsDropdown = ({
@@ -41,6 +41,7 @@ const ModelsDropdown = ({
 			newForm={
 				<ModelsForm
 					to={ Routes.apiModels() }
+					categoryName={ modelCategory }
 				/>
 			}
 			{ ...props }

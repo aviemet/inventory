@@ -14,6 +14,7 @@ export interface ModelFormProps {
 	method?: HTTPVerb
 	onSubmit?: (object: UseFormProps<ModelFormData>) => boolean|void
 	model?: Schema.ModelsFormData
+	categoryName: Schema.CategoryTypes
 }
 
 const emptyModel: Schema.ModelsFormData = {
@@ -23,7 +24,7 @@ const emptyModel: Schema.ModelsFormData = {
 	category_id: NaN,
 }
 
-const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: ModelFormProps) => {
+const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categoryName }: ModelFormProps) => {
 	return (
 		<Form
 			model="model"
@@ -48,7 +49,7 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel }: ModelF
 
 				<Grid.Col>
 					<FormCategoriesDropdown
-						categorizable_type='Item'
+						categorizable_type={ categoryName }
 						initialData={ coerceArray(model?.category) }
 					/>
 				</Grid.Col>

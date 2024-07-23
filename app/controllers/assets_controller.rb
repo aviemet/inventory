@@ -4,6 +4,8 @@ class AssetsController < ApplicationController
   expose :assets, -> { search(@active_company.assets.includes_associated, sortable_fields) }
   expose :asset, scope: ->{ @active_company.assets }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
+  strong_params :asset, permit: [:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable, nics: [:mac, :ip]]
+
   # @route GET /inventory (assets)
   def index
     paginated_assets = assets.page(params[:page] || 1).per(current_user.limit(:assets))
@@ -47,7 +49,4 @@ class AssetsController < ApplicationController
     %w(name asset_tag serial cost cost_cents purchased_at requestable type models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
-  def asset_params
-    params.require(:asset).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable, nics: [:mac, :ip])
-  end
 end

@@ -1,6 +1,8 @@
 class AssignmentsController < ApplicationController
   expose :assignment
 
+  strong_params :assignment, permit: [:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name], accessory: [:name], license: [:name], component: [:name], consumable: [:qty]]
+
   # @route POST /assignments (assignments)
   def create
     # Assignable should always be valid
@@ -63,9 +65,4 @@ class AssignmentsController < ApplicationController
     redirect_to assignable
   end
 
-  private
-
-  def assignment_params
-    params.require(:assignment).permit(:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name], accessory: [:name], license: [:name], component: [:name], consumable: [:qty])
-  end
 end
