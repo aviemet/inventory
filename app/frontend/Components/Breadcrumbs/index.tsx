@@ -36,21 +36,24 @@ const Breadcrumbs = ({ crumbs, separator = '>', className, ...props }: Breadcrum
 					{ crumbs.reduce<React.ReactNode[]>((acc, crumb, index, array) => {
 						const isLastCrumb = index === array.length - 1
 
-						acc.push(<li key={ crumb.title }>{ crumb.href ?
-							<Link
-								external={ false }
-								href={ crumb.href }
-								aria-current={ isLastCrumb ? 'location' : null }
-							>
-								{ crumb.title }
-							</Link>
-							:
-							<Box>{ crumb.title }</Box>
-						}{
-							!isLastCrumb && <Box className={ cx(classes.separator) } aria-hidden="true">
-								{ separator }
-							</Box>
-						}</li>)
+						acc.push(<li key={ crumb.title }>
+							{ crumb.href ?
+								<Link
+									external={ false }
+									href={ crumb.href }
+									aria-current={ isLastCrumb ? 'location' : null }
+								>
+									{ crumb.title }
+								</Link>
+								:
+								<Box>{ crumb.title }</Box>
+							}
+							{ !isLastCrumb && (
+								<Box className={ cx(classes.separator) } aria-hidden="true">
+									{ separator }
+								</Box>
+							) }
+						</li>)
 
 						return acc
 					}, []) }
