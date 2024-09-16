@@ -31,6 +31,7 @@ export {
 	Flex,
 	Grid,
 	Group,
+	Kbd,
 	List,
 	Modal,
 	Paper,

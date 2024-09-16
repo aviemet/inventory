@@ -8,6 +8,7 @@ import AvatarMenu from './AvatarMenu'
 import { usePageProps } from '@/lib/hooks'
 import * as classes from './TopBar.css'
 import ToggleSidebarButton from '../ToggleSidebarButton'
+import GlobalSearchButton from './GlobalSearchButton'
 
 const Topbar = () => {
 	const { auth: { user } } = usePageProps()
@@ -28,6 +29,7 @@ const Topbar = () => {
 				</Box>
 
 				<Group>
+					<GlobalSearchButton />
 					<QuickNewMenu />
 					<AvatarMenu />
 				</Group>
