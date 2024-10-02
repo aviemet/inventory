@@ -6,6 +6,10 @@ module Rails
       def add_serializer
         invoke "serializer", [name.singularize]
       end
+
+      def add_policy
+        invoke "pundit:policy", [name.singularize]
+      end
     end
   end
 end

@@ -3,7 +3,9 @@ class Api::<%= controller_class_name %>Controller < ApiController
   expose :<%= plural_table_name %>
   expose :<%= singular_table_name %>
 
-    def index
+  strong_params :<%= singular_table_name %>, <%= permitted_params %>
+
+  def index
     render json: <%= plural_table_name %>.render(view: :index)
   end
 
@@ -32,17 +34,6 @@ class Api::<%= controller_class_name %>Controller < ApiController
   # DELETE <%= route_url %>/:id
   def destroy
     render json: <%= orm_instance.destroy %>
-  end
-
-  private
-
-  # Only allow a list of trusted parameters through.
-  def <%= "#{singular_table_name}_params" %>
-    <%- if attributes_names.empty? -%>
-    params.fetch(:<%= singular_table_name %>, {})
-    <%- else -%>
-    params.require(:<%= singular_table_name %>).permit(<%= permitted_params %>)
-    <%- end -%>
   end
 end
 <% end -%>

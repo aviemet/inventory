@@ -1,7 +1,6 @@
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
   
-
   expose :<%= plural_table_name %>, -> { search(@active_company.<%= plural_table_name %>.includes_associated, sortable_fields) }
   <% if attributes.include?(:slug) -%>
   expose :<%= singular_table_name %>, id: ->{ params[:slug] }, scope: ->{ @active_company.<%= plural_table_name %>.includes_associated }, find_by: :slug
@@ -9,10 +8,14 @@ class <%= controller_class_name %>Controller < ApplicationController
   expose :<%= singular_table_name %>, scope: ->{ @active_company.<%= plural_table_name %> }, find: ->(id, scope){ scope.includes_associated.find(id) }
   <% end -%>
 
+  strong_params :<%= singular_table_name %>, <%= permitted_params %>
+
+  sortable_fields %w(<%= permitted_params.gsub(/[:,]/, '') %>)
+
   def index
     authorize <%= plural_table_name %>
 
-    paginated_<%= plural_table_name %> = %= plural_table_name %>.page(params[:page] || 1).per(current_user.limit(:items))
+    paginated_<%= plural_table_name %> = paginate(<%= plural_table_name %>, :<%= plural_table_name %>)
     
     render inertia: "<%= class_name.pluralize %>/Index", props: {
       <%= plural_table_name %>: -> { paginated_<%= plural_table_name %>.render(view: :index) },

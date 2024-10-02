@@ -3,6 +3,8 @@
 module Searchable
   extend ActiveSupport::Concern
 
+  attr_reader :sortable_fields
+
   included do
     before_action :remove_empty_query_parameters
 
@@ -50,6 +52,12 @@ module Searchable
       end,
     }
 
+    # Apply defaults to the paginate method
+    def paginate(resource, key)
+      resource.page(params[:page] || 1).per(key ? current_user.limit(key) : nil)
+    end
+
+    # Serialize pagination details for views
     def pagination_data(model)
       return if !model.respond_to? :total_pages
 
@@ -62,6 +70,12 @@ module Searchable
         is_first_page: model.first_page?,
         is_last_page: model.last_page?
       }
+    end
+  end
+
+  class_methods do
+    def sortable_fields(fields)
+      @sortable_fields = fields
     end
   end
 
