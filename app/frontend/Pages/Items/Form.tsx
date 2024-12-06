@@ -28,7 +28,7 @@ type ItemFormData = {
 export interface ItemFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<ItemFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ItemFormData>) => boolean | void
 	item: Schema.ItemsFormData
 }
 

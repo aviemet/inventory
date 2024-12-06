@@ -122,6 +122,7 @@ export default [
 			'eqeqeq': 'error',
 			'no-console': 'warn',
 			'eol-last': ['error', 'always'],
+			'semi': ['error', 'never'],
 			...reactHooksPlugin.configs.recommended.rules,
 		},
 	},

@@ -28,10 +28,12 @@ const ModelsDropdown = ({
 		<FormSelect
 			label={ label }
 			name={ name }
-			options={ !data ? [] : data.map(model => ({
-				label: model.name!,
-				value: String(model.id),
-			})) }
+			options={ !data
+				? []
+				: data.map(model => ({
+					label: model.name!,
+					value: String(model.id),
+				})) }
 			onDropdownOpen={ () => {
 				if(isEmpty(data) || isStale) refetch()
 			} }

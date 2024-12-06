@@ -21,7 +21,7 @@ type ConsumableFormData = {
 export interface ConsumableFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<ConsumableFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ConsumableFormData>) => boolean | void
 	consumable: Schema.ConsumablesFormData
 }
 
@@ -47,6 +47,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: Consumabl
 						<FormModelsDropdown
 							initialData={ coerceArray(consumable?.model) }
 							errorKey="consumable.model"
+							modelCategory="Consumable"
 						/>
 					</Grid.Col>
 
