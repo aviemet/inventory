@@ -3,7 +3,7 @@ import { Grid } from '@/Components'
 import { Form, TextInput, Submit, PasswordInput } from '@/Components/Form'
 import { type FormProps, type HTTPVerb } from 'use-inertia-form'
 
-interface LdapFormProps extends Omit<FormProps<{ ldap: Schema.LdapsFormData}>, 'data'> {
+interface LdapFormProps extends Omit<FormProps<{ ldap: Schema.LdapsFormData }>, 'data'> {
 	ldap: Schema.LdapsFormData
 	to: string
 	method?: HTTPVerb

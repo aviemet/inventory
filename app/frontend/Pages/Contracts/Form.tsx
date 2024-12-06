@@ -18,7 +18,7 @@ type ContractFormData = {
 export interface ContractFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<ContractFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ContractFormData>) => boolean | void
 	contract?: Schema.ContractsFormData
 }
 

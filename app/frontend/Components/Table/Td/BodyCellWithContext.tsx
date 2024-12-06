@@ -4,7 +4,7 @@ import { type TableCellProps } from '.'
 import { Table } from '@mantine/core'
 
 export interface BodyCellWithContextProps extends Omit<TableCellProps, 'hideable'> {
-	hideable?: false|string
+	hideable?: false | string
 	model?: string
 }
 

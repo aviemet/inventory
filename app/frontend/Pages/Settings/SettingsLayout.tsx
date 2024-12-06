@@ -43,7 +43,7 @@ const SettingsLayout = ({ children, breadcrumbs }: SettingsLayoutProps) => {
 		setMobileFormat(width < Number(px(theme.breakpoints.sm)))
 	}, [width])
 
-	const handleTabChange = (value: string|null) => {
+	const handleTabChange = (value: string | null) => {
 		router.get(`/settings/${value ?? 'general'}`, {}, { preserveState: true })
 	}
 
@@ -61,10 +61,12 @@ const SettingsLayout = ({ children, breadcrumbs }: SettingsLayoutProps) => {
 				>
 					<Paper withBorder p='xs' shadow="sm">
 						<Tabs.List
-							style={ mobileFormat ? {
-								flexWrap: 'nowrap',
-								overflow: 'auto',
-							} : {} }
+							style={ mobileFormat
+								? {
+									flexWrap: 'nowrap',
+									overflow: 'auto',
+								}
+								: {} }
 						>
 							{ tabs.map(tab => (
 								<Tabs.Tab key={ tab.name } value={ tab.name } role="link" >

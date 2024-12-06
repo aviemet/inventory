@@ -17,7 +17,7 @@ type OrderFormData = {
 export interface OrderFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<OrderFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<OrderFormData>) => boolean | void
 	order: Schema.OrdersFormData
 }
 

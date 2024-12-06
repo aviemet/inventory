@@ -26,10 +26,12 @@ const AssetsDropdown = ({
 	return <FormSelect
 		name={ name }
 		label={ label }
-		options={ !data ? [] : data.map(asset => ({
-			label: asset.name,
-			value: String(asset.id),
-		})) }
+		options={ !data
+			? []
+			: data.map(asset => ({
+				label: asset.name,
+				value: String(asset.id),
+			})) }
 		onDropdownOpen={ () => {
 			if(isEmpty(data) || isStale) refetch()
 		} }

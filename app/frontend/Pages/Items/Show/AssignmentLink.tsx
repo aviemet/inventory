@@ -3,7 +3,7 @@ import { Link } from '@/Components'
 import { Routes } from '@/lib'
 import { has } from 'lodash'
 
-type PathOption = 'item'|'person'|'location'
+type PathOption = 'item' | 'person' | 'location'
 
 const itemAssignment = (item: Schema.ItemsShow) => {
 	if(!item.assigned || !item.assignments) return

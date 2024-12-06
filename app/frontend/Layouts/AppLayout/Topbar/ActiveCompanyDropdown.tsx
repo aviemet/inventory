@@ -8,7 +8,7 @@ import { type UseFormProps } from 'use-inertia-form'
 
 type ActiveCompanyFormData = {
 	user: {
-		active_company_id: number|string
+		active_company_id: number | string
 	}
 }
 

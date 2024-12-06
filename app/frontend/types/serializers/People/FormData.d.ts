@@ -4,7 +4,7 @@
 import type ContactsFormData from '../Contacts/FormData'
 import type DepartmentsOptions from '../Departments/Options'
 import type PeopleOptions from './Options'
-import type PeopleFormDataSerializerPersonUserFormData from './FormDataSerializer/PersonUserFormData'
+import type PeopleFormDataPersonUserFormData from './FormData/PersonUserFormData'
 
 declare global {
   namespace Schema {
@@ -23,7 +23,7 @@ declare global {
       manager_id?: number
       middle_name?: string
       name: string
-      user?: PeopleFormDataSerializerPersonUserFormData
+      user?: PeopleFormDataPersonUserFormData
       user_id?: number
     }
   }

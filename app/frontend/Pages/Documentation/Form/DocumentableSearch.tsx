@@ -5,7 +5,7 @@ import { useGetSearchResults } from '@/queries'
 import { type FormSelectProps, type SelectOption } from '@/Components/Form/Inputs/Select'
 import { useDebouncedCallback } from '@mantine/hooks'
 
-interface DocumentableSearchProps extends Omit<FormSelectProps, 'options'|'searchable'> {
+interface DocumentableSearchProps extends Omit<FormSelectProps, 'options' | 'searchable'> {
 	label: string
 }
 
@@ -33,7 +33,7 @@ const DocumentableSearch = ({
 		debouncedSearch(value)
 	}
 
-	const handleChange = (value: SelectOption|null) => {
+	const handleChange = (value: SelectOption | null) => {
 		if(!value) return
 
 		const choice = data!.find(datum => String(datum.id) === value)
@@ -48,10 +48,12 @@ const DocumentableSearch = ({
 			<Select
 				searchable
 				name={ name }
-				options={ !data ? [] : data.map(option => ({
-					label: option.label!,
-					value: String(option.id!),
-				})) }
+				options={ !data
+					? []
+					: data.map(option => ({
+						label: option.label!,
+						value: String(option.id!),
+					})) }
 				placeholder={ placeholder }
 				onSearchChange={ handleSearchChange }
 				onChange={ handleChange }

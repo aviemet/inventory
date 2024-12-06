@@ -41,11 +41,11 @@ const ShowItem = ({ item }: ShowItemProps) => {
 						<Menu.Dropdown>
 							{ item.assigned ?
 								<Menu.Link href={ Routes.checkinItem(item) } leftSection={ <CheckinIcon /> }>
-								Checkin Item
+									Checkin Item
 								</Menu.Link>
 								:
 								<Menu.Link href={ Routes.checkoutItem(item) } leftSection={ <CheckoutIcon /> }>
-								Checkout Item
+									Checkout Item
 								</Menu.Link>
 							}
 							<Menu.Link href={ Routes.editItem(item) } leftSection={ <EditIcon /> }>

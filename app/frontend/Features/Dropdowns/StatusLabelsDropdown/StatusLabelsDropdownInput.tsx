@@ -19,10 +19,12 @@ const StatusLabelsDropdown = forwardRef<HTMLInputElement, StatusLabelsDropdownPr
 		ref={ ref }
 		label={ label }
 		name={ name }
-		options={ !data ? [] : data.map(statusLabel => ({
-			label: statusLabel.name!,
-			value: String(statusLabel.id),
-		})) }
+		options={ !data
+			? []
+			: data.map(statusLabel => ({
+				label: statusLabel.name!,
+				value: String(statusLabel.id),
+			})) }
 		onDropdownOpen={ () => {
 			if(isEmpty(data) || isStale) refetch()
 		} }

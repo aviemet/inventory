@@ -21,7 +21,7 @@ const emptyStatusLabel: Schema.StatusLabelsFormData = {
 export interface StatusLabelFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<StatusLabelFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<StatusLabelFormData>) => boolean | void
 	status_label?: Schema.StatusLabelsFormData
 }
 

@@ -2845,6 +2845,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@eslint/json@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@eslint/json@npm:0.8.0"
+  dependencies:
+    "@eslint/plugin-kit": "npm:^0.2.3"
+    "@humanwhocodes/momoa": "npm:^3.3.3"
+  checksum: 10/3629fe43d0bcb5714893ba9239f3b2495dd7b990e44504e2852393eaf542dad91f8ccdf847b56dff4a948918f78eb345c7b1eb43219f3e87f9cca2a59cacc20e
+  languageName: node
+  linkType: hard
+
 "@eslint/object-schema@npm:^2.1.5":
   version: 2.1.5
   resolution: "@eslint/object-schema@npm:2.1.5"
@@ -2934,6 +2944,13 @@ __metadata:
   version: 1.0.1
   resolution: "@humanwhocodes/module-importer@npm:1.0.1"
   checksum: 10/e993950e346331e5a32eefb27948ecdee2a2c4ab3f072b8f566cd213ef485dd50a3ca497050608db91006f5479e43f91a439aef68d2a313bd3ded06909c7c5b3
+  languageName: node
+  linkType: hard
+
+"@humanwhocodes/momoa@npm:^3.3.3":
+  version: 3.3.5
+  resolution: "@humanwhocodes/momoa@npm:3.3.5"
+  checksum: 10/c907bb9f60464485c2f0cb7248acde19ac2cf48781bddd02f19e7a7571d2d977e59891ca456392d975ae051245d0466447e4104e412ed9186adbe2bb1fb7e544
   languageName: node
   linkType: hard
 
@@ -9239,6 +9256,7 @@ __metadata:
     "@emotion/react": "npm:^11.13.5"
     "@emotion/styled": "npm:^11.13.5"
     "@eslint/compat": "npm:^1.2.4"
+    "@eslint/json": "npm:^0.8.0"
     "@inertiajs/react": "npm:^1.2.0"
     "@linaria/babel-preset": "npm:^5.0.4"
     "@linaria/core": "npm:^6.2.0"

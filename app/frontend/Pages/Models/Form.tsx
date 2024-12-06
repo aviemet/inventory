@@ -12,7 +12,7 @@ type ModelFormData = {
 export interface ModelFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<ModelFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ModelFormData>) => boolean | void
 	model?: Schema.ModelsFormData
 	categoryName: Schema.CategoryTypes
 }

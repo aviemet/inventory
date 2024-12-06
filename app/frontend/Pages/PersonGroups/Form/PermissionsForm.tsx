@@ -19,7 +19,7 @@ export { usePermissionsForm }
 export interface GroupFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<FormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<FormData>) => boolean | void
 	person_group?: Schema.PersonGroupsFormData
 }
 
@@ -88,10 +88,10 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 								<Table.Head>
 									<Table.Row>
 										<Table.HeadCell>
-									All
+											All
 										</Table.HeadCell>
 										<Table.HeadCell>
-									Record Type
+											Record Type
 										</Table.HeadCell>
 										<Table.HeadCell>
 											<ColumnToggle permission="index" /> List

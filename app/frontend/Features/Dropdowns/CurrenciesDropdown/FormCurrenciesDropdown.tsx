@@ -21,10 +21,12 @@ const FormCurrenciesDropdown = ({
 		<FormSelect
 			label={ label }
 			name={ name }
-			options={ !data ? [] : data.map(currency => ({
-				label: `${currency.code} (${currency.symbol})`,
-				value: String(currency.code),
-			})) }
+			options={ !data
+				? []
+				: data.map(currency => ({
+					label: `${currency.code} (${currency.symbol})`,
+					value: String(currency.code),
+				})) }
 			onDropdownOpen={ () => {
 				if(isEmpty(data)) refetch()
 			} }

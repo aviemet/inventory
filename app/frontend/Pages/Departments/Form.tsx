@@ -12,7 +12,7 @@ type DepartmentForData = {
 export interface DepartmentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<DepartmentForData>) => boolean|void
+	onSubmit?: (object: UseFormProps<DepartmentForData>) => boolean | void
 	department?: Schema.DepartmentsFormData
 }
 

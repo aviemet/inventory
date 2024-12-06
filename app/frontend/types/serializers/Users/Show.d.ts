@@ -5,7 +5,7 @@ import type UserTablePreferences from '../../UserTablePreferences'
 import type UserPreferences from '../../UserPreferences'
 import type CompaniesOptions from '../Companies/Options'
 import type Activity from '../Activity'
-import type UsersShowSerializerShowUserPerson from './ShowSerializer/ShowUserPerson'
+import type UsersShowShowUserPerson from './Show/ShowUserPerson'
 import type Role from '../Role'
 
 declare global {
@@ -19,8 +19,8 @@ declare global {
       companies: CompaniesOptions[]
       created_at: string | Date
       email: string
-      people: UsersShowSerializerShowUserPerson[]
-      person: UsersShowSerializerShowUserPerson
+      people: UsersShowShowUserPerson[]
+      person: UsersShowShowUserPerson
       roles: Role[]
       table_preferences: UserTablePreferences
       updated_at: string | Date

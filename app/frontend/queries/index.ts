@@ -10,15 +10,15 @@ import {
  */
 
 // Exclude the functions which will be called in the query definitions
-interface LimitedQueryOptions<T> extends Omit<UseQueryOptions<T>, 'queryKey'|'queryFn'> {}
+interface LimitedQueryOptions<T> extends Omit<UseQueryOptions<T>, 'queryKey' | 'queryFn'> {}
 
 type ReactQueryFunctionBasic<T> = (options?: LimitedQueryOptions<T>) => UseQueryResult<T, Error>;
-type ReactQueryFunctionWithParams<T, P extends Record<string, string|number|string[]>> = (params: P, options?: LimitedQueryOptions<T>) => UseQueryResult<T, Error>;
+type ReactQueryFunctionWithParams<T, P extends Record<string, string | number | string[]>> = (params: P, options?: LimitedQueryOptions<T>) => UseQueryResult<T, Error>;
 
 export type ReactQueryFunction<T, P = undefined> =
 	P extends undefined
 		? ReactQueryFunctionBasic<T>
-		: P extends Record<string, string|number|string[]>
+		: P extends Record<string, string | number | string[]>
 			? ReactQueryFunctionWithParams<T, P>
 			: never;
 

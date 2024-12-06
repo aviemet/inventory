@@ -19,7 +19,7 @@ type ComponentFormData = {
 export interface ComponentFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<ComponentFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ComponentFormData>) => boolean | void
 	component: Schema.ComponentsFormData
 }
 

@@ -23,8 +23,7 @@ interface TableState {
 }
 
 interface TableContextProviderProps extends
-	Partial<Pick<TableState, 'selectable'|'pagination'|'rows'|'hideable'|'model'>>
-{
+	Partial<Pick<TableState, 'selectable' | 'pagination' | 'rows' | 'hideable' | 'model'>> {
 	children: React.ReactNode
 }
 

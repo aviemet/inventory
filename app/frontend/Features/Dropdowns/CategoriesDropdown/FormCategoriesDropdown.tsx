@@ -28,10 +28,12 @@ const FormCategoriesDropdown = ({
 		<FormSelect
 			label={ label }
 			name={ name }
-			options={ !data ? [] : data.map(category => ({
-				label: category.name!,
-				value: String(category.id),
-			})) }
+			options={ !data
+				? []
+				: data.map(category => ({
+					label: category.name!,
+					value: String(category.id),
+				})) }
 			onDropdownOpen={ () => {
 				if(isEmpty(data) || isStale) refetch()
 			} }

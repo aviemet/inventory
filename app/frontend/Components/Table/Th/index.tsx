@@ -7,7 +7,7 @@ import { usePageProps } from '@/lib/hooks'
 export interface TableHeadCellProps extends TableThProps {
 	fitContent?: boolean
 	sort?: string
-	hideable?: false|string
+	hideable?: false | string
 	ref?: React.RefObject<HTMLTableCellElement>
 }
 

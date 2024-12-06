@@ -8,7 +8,7 @@ const useContrastingTextColor = (color: string) => {
 
 	let validatedColor = color
 	if(Object.keys(colors).includes(color)) {
-		const shade = (primaryShade as MantinePrimaryShade)[(colorScheme as 'light'|'dark')]
+		const shade = (primaryShade as MantinePrimaryShade)[(colorScheme as 'light' | 'dark')]
 		validatedColor = colors[color][shade]
 	}
 

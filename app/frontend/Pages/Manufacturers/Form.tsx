@@ -14,7 +14,7 @@ type ManufacturerFormData = {
 export interface ManufacturerFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<ManufacturerFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<ManufacturerFormData>) => boolean | void
 	manufacturer?: Schema.ManufacturersFormData
 }
 

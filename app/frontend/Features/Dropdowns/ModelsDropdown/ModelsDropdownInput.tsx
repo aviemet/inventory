@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash'
 import { type AsyncDropdown } from '..'
 
 interface ModelsDropdownProps extends AsyncDropdown<Schema.ModelsOptions> {
-	modelCategory?: Schema.CategoryTypes|undefined
+	modelCategory?: Schema.CategoryTypes | undefined
 }
 
 const ModelsDropdown = forwardRef<HTMLInputElement, ModelsDropdownProps>((
@@ -21,10 +21,12 @@ const ModelsDropdown = forwardRef<HTMLInputElement, ModelsDropdownProps>((
 		ref={ ref }
 		label={ label }
 		name={ name }
-		options={ !data ? [] : data.map(model => ({
-			label: model.name!,
-			value: String(model.id),
-		})) }
+		options={ !data
+			? []
+			: data.map(model => ({
+				label: model.name!,
+				value: String(model.id),
+			})) }
 		onDropdownOpen={ () => {
 			if(isEmpty(data) || isStale) refetch()
 		} }

@@ -11,7 +11,7 @@ type TimelineData = {
 	content: React.ReactNode
 	icon: React.ReactNode
 	color: string
-	lineStyle: 'dashed'|'dotted'|'solid'
+	lineStyle: 'dashed' | 'dotted' | 'solid'
 }
 
 export const buildTimelineData = (

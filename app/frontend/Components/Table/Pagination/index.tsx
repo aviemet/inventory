@@ -46,7 +46,7 @@ const PaginationComponent = ({
 						model={ model }
 					/>
 				</> }
-        Showing <b> { recordStart } - { recordEnd } / { count } </b>
+				Showing <b> { recordStart } - { recordEnd } / { count } </b>
 			</div>
 
 			<Pagination.Root

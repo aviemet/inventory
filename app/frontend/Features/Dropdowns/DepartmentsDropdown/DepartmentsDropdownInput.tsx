@@ -19,10 +19,12 @@ const DepartmentsDropdown = forwardRef<HTMLInputElement, DepartmentsDropdownProp
 		ref={ ref }
 		label={ label }
 		name={ name }
-		options={ !data ? [] : data.map(department => ({
-			label: department.name!,
-			value: String(department.id),
-		})) }
+		options={ !data
+			? []
+			: data.map(department => ({
+				label: department.name!,
+				value: String(department.id),
+			})) }
 		onDropdownOpen={ () => {
 			if(isEmpty(data) || isStale) refetch()
 		} }

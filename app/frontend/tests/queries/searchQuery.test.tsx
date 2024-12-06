@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useGetSearchResults } from '@/queries'
 
 const queryClient = new QueryClient()
-const wrapper = ({ children }: { children: React.ReactNode}) => (
+const wrapper = ({ children }: { children: React.ReactNode }) => (
 	<QueryClientProvider client={ queryClient }>
 		{ children }
 	</QueryClientProvider>

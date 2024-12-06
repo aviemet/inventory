@@ -18,7 +18,7 @@ type TicketFormData = {
 export interface TicketFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<TicketFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<TicketFormData>) => boolean | void
 	ticket: Schema.TicketsFormData
 }
 

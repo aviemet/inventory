@@ -31,7 +31,7 @@ const emptyUser: Schema.UsersFormData = {
 export interface PersonFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<PersonFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<PersonFormData>) => boolean | void
 	person: Schema.PeopleEdit
 }
 

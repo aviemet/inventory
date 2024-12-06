@@ -4,9 +4,9 @@ import { type ComboboxData, type SelectOption } from '@/Components/Form/Inputs/S
 import { useForm, type UseFormProps, type NestedObject } from 'use-inertia-form'
 import getDropdownComponent from './getDropdownComponent'
 
-type AssignToableTypes = 'Person'|'Item'|'Location'
+type AssignToableTypes = 'Person' | 'Item' | 'Location'
 
-type AssignToableOptions = Schema.ItemsOptions[]|Schema.PeopleOptions[]|Schema.LocationsOptions[]
+type AssignToableOptions = Schema.ItemsOptions[] | Schema.PeopleOptions[] | Schema.LocationsOptions[]
 
 interface AssignToableDropdownProps {
 	items?: Schema.ItemsOptions[]
@@ -59,7 +59,7 @@ const AssignToableDropdown = ({
 	}, [type])
 
 	const handleAssignToableChange = (option: SelectOption | null, options: ComboboxData, form: UseFormProps<NestedObject>) => {
-		let default_location: number|null|undefined
+		let default_location: number | null | undefined
 
 		switch(type) {
 			case 'Person':

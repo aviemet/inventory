@@ -24,10 +24,12 @@ const PeopleDropdown = ({
 		<FormMultiSelect
 			label={ label }
 			name={ name }
-			options={ !data ? [] : data.map(person => ({
-				label: person.name,
-				value: String(person.id),
-			})) }
+			options={ !data
+				? []
+				: data.map(person => ({
+					label: person.name,
+					value: String(person.id),
+				})) }
 			onDropdownOpen={ () => {
 				if(isEmpty(data) || isStale) refetch()
 			} }

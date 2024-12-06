@@ -2,7 +2,7 @@ import React from 'react'
 import { Section } from '@/Components'
 
 interface ErrorProps {
-	status: 403|404|500|503
+	status: 403 | 404 | 500 | 503
 }
 
 export default function ErrorPage({ status }: ErrorProps) {

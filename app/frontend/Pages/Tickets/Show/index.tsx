@@ -21,16 +21,16 @@ const ShowTicket = ({ ticket }: ShowTicketProps) => {
 				<Title>{ title }</Title>
 				<Box>
 					<Text size="sm">
-					Primary Contact:&nbsp;
+						Primary Contact:&nbsp;
 						{ ticket.primary_contact?.id && <Link href={ Routes.person(ticket.primary_contact.id ) }>{ ticket.primary_contact.name }</Link> }
 					</Text>
 					<Text size="sm">
-					Assigned To:&nbsp;
+						Assigned To:&nbsp;
 						{ ticket.assignees && ticket.assignees.map(assignee => <Badge key={ assignee.id }>{ assignee.name }</Badge>) }
 					</Text>
 
 					{ ticket.asset && <Text size="sm">
-					Asset:&nbsp;
+						Asset:&nbsp;
 						<Link href={ Routes.asset(ticket.asset.id) }>{ ticket.asset.name }</Link>
 					</Text> }
 				</Box>

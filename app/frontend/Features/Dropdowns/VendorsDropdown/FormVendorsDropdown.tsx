@@ -26,10 +26,12 @@ const VendorsDropdown = ({
 		<FormSelect
 			label={ label }
 			name={ name }
-			options={ !data ? [] : data.map(vendor => ({
-				label: vendor.name,
-				value: String(vendor.id),
-			})) }
+			options={ !data
+				? []
+				: data.map(vendor => ({
+					label: vendor.name,
+					value: String(vendor.id),
+				})) }
 			onDropdownOpen={ () => {
 				if(isEmpty(data) || isStale) refetch()
 			} }

@@ -24,7 +24,7 @@ const Details = ({ title, department }: DetailsProps) => {
 							href={ Routes.editDepartment(department.slug) }
 							icon={ <EditIcon /> }
 						>
-              Edit
+							Edit
 						</Menu.Link>
 					</Menu.Dropdown>
 				</Menu>

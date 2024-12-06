@@ -9,7 +9,7 @@ import Superscript from '@tiptap/extension-superscript'
 import SubScript from '@tiptap/extension-subscript'
 import { DEFAULT_LABELS } from './tiptapLabels'
 
-export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, 'children'|'editor'|'onChange'> {
+export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, 'children' | 'editor' | 'onChange'> {
 	children?: string
 	onChange?: (value: string) => void
 }

@@ -13,7 +13,7 @@ export type LocationFormData = {
 export interface LocationFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<LocationFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<LocationFormData>) => boolean | void
 	location?: Schema.LocationsFormData
 }
 
@@ -50,9 +50,11 @@ const LocationForm = ({
 					<FormLocationsDropdown
 						label="Parent Location"
 						name="parent_id"
-						filter={ location?.id === undefined ? undefined : ({ options }) => (options as ComboboxItem[]).filter((option) => {
-							return option.value !== String(location.id)
-						}) }
+						filter={ location?.id === undefined
+							? undefined
+							: ({ options }) => (options as ComboboxItem[]).filter((option) => {
+								return option.value !== String(location.id)
+							}) }
 						initialData={ coerceArray(location?.parent) }
 					/>
 				</Grid.Col>

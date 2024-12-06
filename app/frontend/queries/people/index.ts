@@ -25,7 +25,7 @@ export const useGetPeopleAsOptions: ReactQueryFunction<Schema.PeopleOptions[]> =
 	})
 }
 
-export const useGetPerson: ReactQueryFunction<Schema.Person[], { id: string|number }> = ({ id }, options) => {
+export const useGetPerson: ReactQueryFunction<Schema.Person[], { id: string | number }> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['people', id],
 		queryFn: async () => {

@@ -19,7 +19,7 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 	const defaultLimit = useLayoutStore(state => state.defaults.tableRecordsLimit)
 	const mutate = useUpdateTablePreferences({ params: { userId: String(user.id) } })
 
-	const handleLimitChange = (limit: string|null) => {
+	const handleLimitChange = (limit: string | null) => {
 		if(!model || !user) return
 
 		limit ||= String(defaultLimit)

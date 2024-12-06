@@ -1,1 +1,1 @@
-export type AssignToableTypes = 'Person'|'Item'|'Location'
+export type AssignToableTypes = 'Person' | 'Item' | 'Location'

@@ -22,7 +22,7 @@ type LicenseFormData = {
 export interface LicenseFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<LicenseFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<LicenseFormData>) => boolean | void
 	license: Schema.LicensesFormData
 }
 

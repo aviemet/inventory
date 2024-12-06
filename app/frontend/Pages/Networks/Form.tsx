@@ -16,7 +16,7 @@ type NetworkFormData = {
 export interface NetworkFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<NetworkFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<NetworkFormData>) => boolean | void
 	network: Schema.NetworksFormData
 }
 

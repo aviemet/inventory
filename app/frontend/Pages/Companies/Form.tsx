@@ -12,7 +12,7 @@ type CompanyFormData = {
 export interface CompanyFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<CompanyFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<CompanyFormData>) => boolean | void
 	company: Schema.CompaniesFormData
 }
 

@@ -20,7 +20,7 @@ type AccessoryFormData = {
 export interface AccessoryFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<AccessoryFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<AccessoryFormData>) => boolean | void
 	accessory: Schema.AccessoriesFormData
 }
 

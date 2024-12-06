@@ -13,12 +13,14 @@
     "start": "RACK_ENV=production RAILS_ENV=production PORT=3000 NODE_ENV=production overmind start -f Procfile",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@cassiozen/usestatemachine": "^1.0.1",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
+    "@eslint/json": "^0.8.0",
     "@inertiajs/react": "^1.2.0",
     "@linaria/babel-preset": "^5.0.4",
     "@linaria/core": "^6.2.0",

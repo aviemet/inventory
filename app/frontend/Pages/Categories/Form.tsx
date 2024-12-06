@@ -17,7 +17,7 @@ interface CategoryFormData {
 export interface CategoryFormProps {
 	to: string
 	method?: HTTPVerb
-	onSubmit?: (object: UseFormProps<CategoryFormData>) => boolean|void
+	onSubmit?: (object: UseFormProps<CategoryFormData>) => boolean | void
 	category?: Schema.CategoriesFormData
 	categoryType?: Schema.CategoryTypes
 }

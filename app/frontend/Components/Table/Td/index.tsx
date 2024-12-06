@@ -9,7 +9,7 @@ import cx from 'clsx'
 export interface TableCellProps extends TableTdProps {
 	fitContent?: boolean
 	sort?: string
-	hideable?: false|string
+	hideable?: false | string
 	ref?: React.RefObject<HTMLTableCellElement>
 	nowrap?: boolean
 }
