@@ -51,7 +51,7 @@ class Ticket < ApplicationRecord
   tracked
   resourcify
 
-  enum priority: { urgent: 0, high: 1, standard: 2, low: 3 }
+  enum :priority, { urgent: 0, high: 1, standard: 2, low: 3 }
 
   belongs_to :created_by, class_name: "Person", optional: true
   belongs_to :status, class_name: "TicketStatus", optional: false
