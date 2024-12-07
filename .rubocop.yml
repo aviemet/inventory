@@ -270,3 +270,6 @@ Style/HashSyntax:
 
 Metrics:
   Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false

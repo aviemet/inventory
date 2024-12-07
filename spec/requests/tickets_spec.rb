@@ -1,42 +1,52 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/tickets" do
+RSpec.describe "Tickets", :inertia do
   describe "GET /index" do
     login_admin
 
-    it "renders a successful response" do
+    it "renders" do
       get tickets_url
-      expect(response).to be_successful
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Tickets/Index'
     end
   end
 
   describe "GET /show" do
     login_admin
 
-    it "renders a successful response" do
+    it "renders" do
       ticket = create(:ticket, company: @admin.active_company)
+
       get ticket_url(ticket)
-      expect(response).to be_successful
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Tickets/Show'
     end
   end
 
   describe "GET /new" do
     login_admin
 
-    it "renders a successful response" do
+    it "renders" do
       get new_ticket_url
-      expect(response).to be_successful
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Tickets/New'
     end
   end
 
   describe "GET /edit" do
     login_admin
 
-    it "renders a successful response" do
+    it "renders" do
       ticket = create(:ticket, company: @admin.active_company)
+
       get edit_ticket_url(ticket)
-      expect(response).to be_successful
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Tickets/Edit'
     end
   end
 
@@ -57,10 +67,10 @@ RSpec.describe "/tickets" do
     end
 
     context "with invalid parameters" do
-      invalid_attributes = { ticket: {
+      let(:invalid_attributes) { { ticket: {
         subject: "",
         description: nil,
-      } }
+      } } }
 
       it "does not create a new Ticket" do
         expect {
@@ -72,7 +82,6 @@ RSpec.describe "/tickets" do
         post tickets_url, params: invalid_attributes
         expect(response).to redirect_to new_ticket_url
       end
-
     end
   end
 

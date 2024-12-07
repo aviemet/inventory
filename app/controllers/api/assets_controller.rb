@@ -2,6 +2,8 @@ class Api::AssetsController < Api::ApiController
   expose :assets, -> {  @active_company.assets }
   expose :asset, scope: ->{ @active_company.assets }
 
+  strong_params :asset, permit: [:name, :location_id, :manager_id, :notes]
+
   # @route GET /api/assets (api_assets)
   def index
     render json: assets.includes_associated.render
@@ -35,11 +37,5 @@ class Api::AssetsController < Api::ApiController
     else
       render json: { errors: asset.errors }, status: :see_other
     end
-  end
-
-  private
-
-  def asset_params
-    params.require(:asset).permit(:name, :location_id, :manager_id, :notes)
   end
 end

@@ -1,14 +1,17 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/licenses" do
+RSpec.describe "Licenses", :inertia do
   def valid_attributes
     {
-      license: attributes_for(:license, {
-        vendor_id: create(:vendor).id,
-        manufacturer_id: create(:manufacturer).id,
-        category_id: create(:category).id,
-      },),
+      license: attributes_for(
+        :license,
+        {
+          vendor_id: create(:vendor).id,
+          manufacturer_id: create(:manufacturer).id,
+          category_id: create(:category).id,
+        },
+      ),
     }
   end
 
@@ -21,57 +24,70 @@ RSpec.describe "/licenses" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all licenses" do
-        license = create(:license, company: @admin.active_company)
+        license = create(:license, { company: @admin.active_company })
 
         get licenses_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component 'Licenses/Index'
         expect(response.body).to include(CGI.escapeHTML(license.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of licenses" do
-        license1 = create(:license, { name: "Include", company: @admin.active_company })
-        license2 = create(:license, { name: "Exclue", company: @admin.active_company })
+      context "with search params" do
+        it "returns a filtered list of licenses" do
+          license1 = create(:license, { name: "Include", company: @admin.active_company })
+          license2 = create(:license, { name: "Exclude", company: @admin.active_company })
 
-        get licenses_url, params: { search: license1.name }
+          get licenses_url, params: { search: license1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(license1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(license2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component 'Licenses/Index'
+          expect(response.body).to include(CGI.escapeHTML(license1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(license2.name))
+        end
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new license" do
-        get new_license_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      license = create(:license, company: @admin.active_company)
+
+      get license_url({ id: license.id })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Licenses/Show'
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a license" do
-        license = create(:license, { company: @admin.active_company })
+  describe "GET /new" do
+    login_admin
 
-        get edit_license_url(license)
+    it "renders" do
+      get new_license_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Licenses/New'
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        license = create(:license, company: @admin.active_company)
-        get license_url({ id: license.id })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      license = create(:license, company: @admin.active_company)
+
+      get edit_license_url(license)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Licenses/Edit'
     end
   end
 

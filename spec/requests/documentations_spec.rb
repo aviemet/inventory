@@ -1,13 +1,16 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/documentations" do
+RSpec.describe "Documentations", :inertia do
   def valid_attributes(documentable)
     attrs = {
-      documentation: attributes_for(:documentation, {
-      documentable:,
-      category_id: create(:category).id,
-      },),
+      documentation: attributes_for(
+        :documentation,
+        {
+          documentable:,
+          category_id: create(:category).id,
+        },
+      ),
     }
     attrs[:documentation][:documentable_id] = documentable.id
     attrs
@@ -21,57 +24,70 @@ RSpec.describe "/documentations" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all documentations" do
-        documentation = create(:documentation, company: @admin.active_company)
+        documentation = create(:documentation, { company: @admin.active_company })
 
         get documentations_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component 'Documentations/Index'
         expect(response.body).to include(CGI.escapeHTML(documentation.title))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of documentations" do
-        documentation1 = create(:documentation, { title: "Include", company: @admin.active_company })
-        documentation2 = create(:documentation, { title: "Exclue", company: @admin.active_company })
+      context "with search params" do
+        it "returns a filtered list of documentations" do
+          documentation1 = create(:documentation, { title: "Include", company: @admin.active_company })
+          documentation2 = create(:documentation, { title: "Exclude", company: @admin.active_company })
 
-        get documentations_url, params: { search: documentation1.title }
+          get documentations_url, params: { search: documentation1.title }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(documentation1.title))
-        expect(response.body).not_to include(CGI.escapeHTML(documentation2.title))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component 'Documentations/Index'
+          expect(response.body).to include(CGI.escapeHTML(documentation1.title))
+          expect(response.body).not_to include(CGI.escapeHTML(documentation2.title))
+        end
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new documentation" do
-        get new_documentation_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      documentation = create(:documentation, company: @admin.active_company)
+
+      get documentation_url({ slug: documentation.slug })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Documentations/Show'
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a documentation" do
-        documentation = create(:documentation, { company: @admin.active_company })
+  describe "GET /new" do
+    login_admin
 
-        get edit_documentation_url(documentation)
+    it "renders" do
+      get new_documentation_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Documentations/New'
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        documentation = create(:documentation, company: @admin.active_company)
-        get documentation_url({ slug: documentation.slug })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      documentation = create(:documentation, company: @admin.active_company)
+
+      get edit_documentation_url(documentation)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Documentations/Edit'
     end
   end
 

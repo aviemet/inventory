@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/departments" do
+RSpec.describe "Departments", :inertia do
   def valid_attributes
     {
       department: attributes_for(:department)
@@ -16,57 +16,70 @@ RSpec.describe "/departments" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all departments" do
         department = create(:department, { company: @admin.active_company })
 
         get departments_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component 'Departments/Index'
         expect(response.body).to include(CGI.escapeHTML(department.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of departments" do
-        department1 = create(:department, { name: "Include", company: @admin.active_company })
-        department2 = create(:department, { name: "Exclue", company: @admin.active_company })
+      context "with search params" do
+        it "returns a filtered list of departments" do
+          department1 = create(:department, { name: "Include", company: @admin.active_company })
+          department2 = create(:department, { name: "Exclude", company: @admin.active_company })
 
-        get departments_url, params: { search: department1.name }
+          get departments_url, params: { search: department1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(department1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(department2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component 'Departments/Index'
+          expect(response.body).to include(CGI.escapeHTML(department1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(department2.name))
+        end
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new department" do
-        get new_department_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      department = create(:department, company: @admin.active_company)
+
+      get department_url({ slug: department.slug })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Departments/Show'
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a department" do
-        department = create(:department, company: @admin.active_company)
+  describe "GET /new" do
+    login_admin
 
-        get edit_department_url(department)
+    it "renders" do
+      get new_department_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Departments/New'
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        department = create(:department, company: @admin.active_company)
-        get department_url({ slug: department.slug })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      department = create(:department, company: @admin.active_company)
+
+      get edit_department_url(department)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Departments/Edit'
     end
   end
 

@@ -1,14 +1,18 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Accessories" do
+RSpec.describe "Accessories", :inertia do
   def valid_attributes
     {
-      accessory: attributes_for(:accessory,
-                                status_label_id: create(:status_label).id,
-                                model_id: create(:model).id,
-                                vendor_id: create(:vendor).id,
-                                default_location_id: create(:location).id,)
+      accessory: attributes_for(
+        :accessory,
+        {
+          status_label_id: create(:status_label).id,
+          model_id: create(:model).id,
+          vendor_id: create(:vendor).id,
+          default_location_id: create(:location).id,
+        },
+      )
     }
   end
 
@@ -20,33 +24,35 @@ RSpec.describe "Accessories" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all accessories" do
         accessory = create(:accessory, { company: User.first.active_company })
 
         get accessories_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component 'Accessories/Index'
         expect(response.body).to include(CGI.escapeHTML(accessory.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of accessories" do
-        accessory1 = create(:accessory, { name: "Include", company: User.first.active_company })
-        accessory2 = create(:accessory, { name: "Exclue", company: User.first.active_company })
+      context "with search params" do
+        it "returns a filtered list of accessories" do
+          accessory1 = create(:accessory, { name: "Include", company: User.first.active_company })
+          accessory2 = create(:accessory, { name: "Exclude", company: User.first.active_company })
 
-        get accessories_url, params: { search: accessory1.name }
+          get accessories_url, params: { search: accessory1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(accessory1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(accessory2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component 'Accessories/Index'
+          expect(response.body).to include(CGI.escapeHTML(accessory1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(accessory2.name))
+        end
       end
-    end
 
+    end
   end
 
   describe "GET /show" do
@@ -54,8 +60,11 @@ RSpec.describe "Accessories" do
 
     it "renders" do
       accessory = create(:accessory, company: Company.first)
+
       get accessory_url({ id: accessory.id })
+
       expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Accessories/Show'
     end
   end
 
@@ -64,8 +73,11 @@ RSpec.describe "Accessories" do
 
     it "renders" do
       accessory = create(:accessory, company: Company.first)
+
       get checkout_accessory_url({id: accessory.id })
+
       expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Accessories/Checkout'
     end
   end
 
@@ -79,7 +91,9 @@ RSpec.describe "Accessories" do
       assignment = accessory.assign_to item
 
       get checkin_accessory_url({id: accessory.id, assignment_id: assignment.id })
+
       expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Accessories/Checkin'
     end
   end
 
@@ -115,8 +129,8 @@ RSpec.describe "Accessories" do
     context "with valid parameters" do
       it "updates the requested accessory and redirects to the show page" do
         accessory = create(:accessory, { company: User.first.active_company })
-        patch accessory_url(accessory), params: { accessory: { name: "Changed" } }
 
+        patch accessory_url(accessory), params: { accessory: { name: "Changed" } }
         accessory.reload
 
         expect(accessory.name).to eq("Changed")
@@ -127,7 +141,9 @@ RSpec.describe "Accessories" do
     context "with invalid parameters" do
       it "redirects back to the edit accessory page" do
         accessory = create(:accessory, { company: User.first.active_company })
+
         patch accessory_url(accessory), params: invalid_attributes
+
         expect(response).to redirect_to(edit_accessory_url(accessory))
       end
     end

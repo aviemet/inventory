@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/vendors" do
+RSpec.describe "Vendors", :inertia do
   def valid_attributes
     {
       vendor: attributes_for(:vendor)
@@ -16,57 +16,70 @@ RSpec.describe "/vendors" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all vendors" do
         vendor = create(:vendor, { company: @admin.active_company })
 
         get vendors_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component 'Vendors/Index'
         expect(response.body).to include(CGI.escapeHTML(vendor.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of vendors" do
-        vendor1 = create(:vendor, { name: "Include", company: @admin.active_company })
-        vendor2 = create(:vendor, { name: "Exclue", company: @admin.active_company })
+      context "with search params" do
+        it "returns a filtered list of vendors" do
+          vendor1 = create(:vendor, { name: "Include", company: @admin.active_company })
+          vendor2 = create(:vendor, { name: "Exclude", company: @admin.active_company })
 
-        get vendors_url, params: { search: vendor1.name }
+          get vendors_url, params: { search: vendor1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(vendor1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(vendor2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component 'Vendors/Index'
+          expect(response.body).to include(CGI.escapeHTML(vendor1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(vendor2.name))
+        end
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new vendor" do
-        get new_vendor_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      vendor = create(:vendor, company: @admin.active_company)
+
+      get vendor_url({ slug: vendor.slug })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Vendors/Show'
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a vendor" do
-        vendor = create(:vendor, company: @admin.active_company)
+  describe "GET /new" do
+    login_admin
 
-        get edit_vendor_url(vendor)
+    it "renders" do
+      get new_vendor_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Vendors/New'
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        vendor = create(:vendor, company: @admin.active_company)
-        get vendor_url({ slug: vendor.slug })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      vendor = create(:vendor, company: @admin.active_company)
+
+      get edit_vendor_url(vendor)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Vendors/Edit'
     end
   end
 

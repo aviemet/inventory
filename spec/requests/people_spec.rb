@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/people" do
+RSpec.describe "People", :inertia do
   def valid_attributes
     {
       person: attributes_for(:person)
@@ -16,57 +16,70 @@ RSpec.describe "/people" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all people" do
-        person = create(:person, company: @admin.active_company)
+        person = create(:person, { company: @admin.active_company })
 
         get people_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component 'People/Index'
         expect(response.body).to include(CGI.escapeHTML(person.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of people" do
-        person1 = create(:person, { first_name: "Include", company: @admin.active_company })
-        person2 = create(:person, { first_name: "Exclue", company: @admin.active_company })
+      context "with search params" do
+        it "returns a filtered list of people" do
+          person1 = create(:person, { first_name: "Include", company: @admin.active_company })
+          person2 = create(:person, { first_name: "Exclude", company: @admin.active_company })
 
-        get people_url, params: { search: person1.first_name }
+          get people_url, params: { search: person1.first_name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(person1.first_name))
-        expect(response.body).not_to include(CGI.escapeHTML(person2.first_name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component 'People/Index'
+          expect(response.body).to include(CGI.escapeHTML(person1.first_name))
+          expect(response.body).not_to include(CGI.escapeHTML(person2.first_name))
+        end
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new person" do
-        get new_person_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      person = create(:person, company: @admin.active_company)
+
+      get person_url({ id: person.id })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'People/Show'
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a person" do
-        person = create(:person, company: @admin.active_company)
+  describe "GET /new" do
+    login_admin
 
-        get edit_person_url(person)
+    it "renders" do
+      get new_person_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'People/New'
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        person = create(:person, company: @admin.active_company)
-        get person_url({ id: person.id })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      person = create(:person, company: @admin.active_company)
+
+      get edit_person_url(person)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'People/Edit'
     end
   end
 

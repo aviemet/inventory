@@ -33,6 +33,7 @@ RSpec.describe "Users", :inertia do
     context "with no users in database" do
       it "redirects to the registration page" do
         get new_user_session_url
+
         expect(response).to redirect_to new_user_registration_url
       end
     end
@@ -47,14 +48,14 @@ RSpec.describe "Users", :inertia do
   end
 
   describe "POST /login" do
-    context "confirmed with valid credentials" do
+    context "with valid credentials and confirmed account" do
       it "logs in the user" do
         post user_session_url, params: confirmed_user_params
         expect(response).to redirect_to root_url
       end
     end
 
-    context "unconfirmed with valid credentials" do
+    context "with valid credentials and unconfirmed account" do
       it "redirects to the confirm email page" do
         post user_session_url, params: unconfirmed_user_params
         expect(response).to redirect_to new_user_session_url
@@ -65,7 +66,7 @@ RSpec.describe "Users", :inertia do
       end
     end
 
-    context "invalid credentials" do
+    context "with invalid credentials" do
       it "redirects back to the login page" do
         user = create(:user, password: password, confirmed: true, company: false, person: false)
         post user_session_url, params: { user: { email: user.email, password: 'Wrong1!' } }
@@ -75,7 +76,7 @@ RSpec.describe "Users", :inertia do
   end
 
   describe "POST /users/complete_registration" do
-    context "confirmed user without company or Person" do
+    context "with a confirmed user without company or Person" do
 
       it "creates a Person and Company record for the new user" do
         user = create(:user, password: password, confirmed: true, company: false, person: false)
@@ -103,36 +104,60 @@ RSpec.describe "Users", :inertia do
   describe "GET /index" do
     login_admin
 
-    it "renders a successful response" do
+    it "renders" do
       get users_url
-      expect(response).to be_successful
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Users/Index'
+      expect(response.body).to include(CGI.escapeHTML(user.first_name))
     end
+
+    context "with search params" do
+      it "returns a filtered list of users" do
+        user1 = create(:user, { first_name: "Include", company: @admin.active_company })
+        user2 = create(:user, { first_name: "Exclude", company: @admin.active_company })
+
+        get users_url, params: { search: user1.first_name }
+
+        expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component 'Users/Index'
+        expect(response.body).to include(CGI.escapeHTML(user1.first_name))
+        expect(response.body).not_to include(CGI.escapeHTML(user2.first_name))
+      end
+    end
+
   end
 
   describe "GET /show" do
     login_admin
 
-    it "renders a successful response" do
+    it "renders" do
       get user_url(@admin)
-      expect(response).to be_successful
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Users/Show'
     end
   end
 
   describe "GET /new" do
     login_admin
 
-    it "renders a successful response" do
+    it "renders" do
       get new_user_url
-      expect(response).to be_successful
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Users/New'
     end
   end
 
   describe "GET /edit" do
     login_admin
 
-    it "renders a successful response" do
+    it "renders" do
       get edit_user_url(@admin)
-      expect(response).to be_successful
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Users/Edit'
     end
   end
 
@@ -142,8 +167,10 @@ RSpec.describe "Users", :inertia do
     context "with valid parameters" do
       it "updates the requested user and redirects to user page" do
         user = create(:user)
+
         patch user_url(user), params: { user: { active: false } }
         user.reload
+
         expect(user.active).to be(false)
         expect(response).to redirect_to(user_url(user))
       end
@@ -152,7 +179,9 @@ RSpec.describe "Users", :inertia do
     context "with invalid parameters" do
       it "redirects back to the edit user page" do
         user = create(:user)
+
         patch user_url(user), params: invalid_user_params
+
         expect(response).to redirect_to edit_user_url(user)
       end
     end

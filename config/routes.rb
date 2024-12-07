@@ -101,7 +101,6 @@ Rails.application.routes.draw do
   resources :assets, path: :inventory, except: [:create, :update, :destroy], concerns: [:bulk_delete, :categoryable, :assignable, :single_unassignable]
 
   resources :items, path: :hardware do
-    resources :nics
     concerns :bulk_delete, :categoryable, :clonable, :assignable, :single_unassignable
   end
 
@@ -119,13 +118,13 @@ Rails.application.routes.draw do
 
   resources :models, concerns: :bulk_delete, param: :slug
   resources :manufacturers, concerns: :bulk_delete, param: :slug
-  resources :warranties, concerns: :bulk_delete
+  # resources :warranties, concerns: :bulk_delete
 
-  resources :fields
-  resources :fieldsets
-  resources :fieldset_associations
+  # resources :fields
+  # resources :fieldsets
+  # resources :fieldset_associations
 
-  resources :ip_leases
+  # resources :ip_leases
   resources :networks, concerns: :bulk_delete
 
   resources :orders, concerns: :bulk_delete

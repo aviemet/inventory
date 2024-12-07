@@ -34,6 +34,7 @@ en:
     errors:
       messages:
         taken: "There is already an account for this address, please log in instead"
+        not_found: "The record you're trying to view does not exist"
         
   errors:
     # The values :model, :attribute and :value are always available for interpolation

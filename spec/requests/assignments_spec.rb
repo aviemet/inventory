@@ -32,6 +32,7 @@ RSpec.describe "Assignments" do
       it "assigns an item to an assignable and redirects to the assignable" do
         assign_toables.each_value do |model|
           item = create(:item, company: @admin.active_company)
+
           expect {
             post assignments_url, params: { assignment: assignment_params(item, model) }
           }.to change(Assignment, :count).by(1)

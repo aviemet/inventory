@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/locations" do
+RSpec.describe "Locations", :inertia do
   def valid_attributes
     {
       location: attributes_for(:location)
@@ -16,57 +16,70 @@ RSpec.describe "/locations" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all locations" do
-        location = create(:location, company: @admin.active_company)
+        location = create(:location, { company: @admin.active_company })
 
         get locations_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component 'Locations/Index'
         expect(response.body).to include(CGI.escapeHTML(location.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of locations" do
-        location1 = create(:location, { name: "Include", company: @admin.active_company })
-        location2 = create(:location, { name: "Exclue", company: @admin.active_company })
+      context "with search params" do
+        it "returns a filtered list of locations" do
+          location1 = create(:location, { name: "Include", company: @admin.active_company })
+          location2 = create(:location, { name: "Exclude", company: @admin.active_company })
 
-        get locations_url, params: { search: location1.name }
+          get locations_url, params: { search: location1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(location1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(location2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component 'Locations/Index'
+          expect(response.body).to include(CGI.escapeHTML(location1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(location2.name))
+        end
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new location" do
-        get new_location_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      location = create(:location, company: @admin.active_company)
+
+      get location_url({ slug: location.slug })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Locations/Show'
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a location" do
-        location = create(:location, company: @admin.active_company)
+  describe "GET /new" do
+    login_admin
 
-        get edit_location_url(location)
+    it "renders" do
+      get new_location_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Locations/New'
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        location = create(:location, company: @admin.active_company)
-        get location_url({ slug: location.slug })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      location = create(:location, company: @admin.active_company)
+
+      get edit_location_url(location)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Locations/Edit'
     end
   end
 

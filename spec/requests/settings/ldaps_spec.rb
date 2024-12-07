@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../support/devise'
 
-RSpec.describe "Settings::Ldaps" do
+RSpec.describe "Settings::Ldaps", :inertia do
   describe "GET /index" do
     login_admin
 
@@ -9,6 +9,7 @@ RSpec.describe "Settings::Ldaps" do
       get settings_ldaps_url
 
       expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Settings/Ldaps/Index'
     end
   end
 end

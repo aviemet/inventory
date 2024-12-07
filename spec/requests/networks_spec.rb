@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "/networks" do
+RSpec.describe "Networks", :inertia do
   def valid_attributes
     {
       network: attributes_for(:network)
@@ -16,57 +16,70 @@ RSpec.describe "/networks" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all networks" do
-        network = create(:network, { company: User.first.active_company })
+        network = create(:network, { company: @admin.active_company })
 
         get networks_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component 'Networks/Index'
         expect(response.body).to include(CGI.escapeHTML(network.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of networks" do
-        network1 = create(:network, { name: "Include", company: User.first.active_company })
-        network2 = create(:network, { name: "Exclue", company: User.first.active_company })
+      context "with search params" do
+        it "returns a filtered list of networks" do
+          network1 = create(:network, { name: "Include", company: @admin.active_company })
+          network2 = create(:network, { name: "Exclude", company: @admin.active_company })
 
-        get networks_url, params: { search: network1.name }
+          get networks_url, params: { search: network1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(network1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(network2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component 'Networks/Index'
+          expect(response.body).to include(CGI.escapeHTML(network1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(network2.name))
+        end
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new network" do
-        get new_network_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      network = create(:network, company: @admin.active_company)
+
+      get network_url({ id: network.id })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Networks/Show'
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a network" do
-        network = create(:network, company: User.first.active_company)
+  describe "GET /new" do
+    login_admin
 
-        get edit_network_url(network)
+    it "renders" do
+      get new_network_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Networks/New'
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        network = create(:network, company: @admin.active_company)
-        get network_url({ id: network.id })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      network = create(:network, company: @admin.active_company)
+
+      get edit_network_url(network)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component 'Networks/Edit'
     end
   end
 
@@ -102,7 +115,7 @@ RSpec.describe "/networks" do
     context "with valid parameters" do
       it "updates the requested network and redirects to the show page" do
         name_change = "Changed"
-        network = create(:network, company: User.first.active_company )
+        network = create(:network, company: @admin.active_company )
         patch network_url(network.id), params: { network: { name: name_change } }
 
         network.reload
@@ -114,7 +127,7 @@ RSpec.describe "/networks" do
 
     context "with invalid parameters" do
       it "redirects back to the edit network page" do
-        network = create(:network, company: User.first.active_company)
+        network = create(:network, company: @admin.active_company)
         patch network_url(network), params: invalid_attributes
         expect(response).to redirect_to edit_network_url(network)
       end
@@ -125,14 +138,14 @@ RSpec.describe "/networks" do
     login_admin
 
     it "destroys the requested network" do
-      network = create(:network, company: User.first.active_company)
+      network = create(:network, company: @admin.active_company)
       expect {
         delete network_url({id: network.id})
       }.to change(Network, :count).by(-1)
     end
 
     it "redirects to the networks list" do
-      network = create(:network, company: User.first.active_company)
+      network = create(:network, company: @admin.active_company)
       delete network_url({id: network.id})
       expect(response).to redirect_to(networks_url)
     end

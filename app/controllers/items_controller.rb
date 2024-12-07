@@ -4,6 +4,8 @@ class ItemsController < ApplicationController
   expose :items, -> { search(@active_company.items.includes_associated, sortable_fields) }
   expose :item, scope: ->{ @active_company.items }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
+  strong_params :item, permit: [:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :department_id, :model_id, :vendor_id, :default_location_id, :parent_id, :status_label_id, :purchased_at, :requestable, nics: [:mac, :ip]]
+
   before_action :handle_department_change, only: [:create, :update]
 
   # @route GET /hardware (items)
@@ -140,9 +142,5 @@ class ItemsController < ApplicationController
 
   def advanced_search_params
     params.permit(:name, :asset_tag, :serial, :cost, :purchased_at, :requestable, model: [:id], vendor: [:id], manufacturer: [:id], department: [:id], category: [:id], created_at: [:start, :end, :type])
-  end
-
-  def item_params
-    @item_params ||= params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :department_id, :model_id, :vendor_id, :default_location_id, :parent_id, :status_label_id, :purchased_at, :requestable, nics: [:mac, :ip])
   end
 end

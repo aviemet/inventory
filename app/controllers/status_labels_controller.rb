@@ -18,13 +18,9 @@ class StatusLabelsController < ApplicationController
 
   # @route GET /status_labels/:slug (status_label)
   def show
-    if status_label.nil?
-      render inertia: "Error", props: { status: 404 }
-    else
-      render inertia: "StatusLabels/Show", props: {
-        status_label: -> { status_label.render }
-      }
-    end
+    render inertia: "StatusLabels/Show", props: {
+      status_label: -> { status_label.render }
+    }
   end
 
   # @route GET /status_labels/new (new_status_label)
