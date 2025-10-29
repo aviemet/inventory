@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select as FormSelect } from '@/components/Form'
 import { Routes } from '@/lib'
-import StatusLabelsForm from '@/Pages/StatusLabels/Form'
+import StatusLabelsForm from '@/pages/StatusLabels/Form'
 import { useGetStatusLabelsAsOptions } from '@/queries/statusLabels'
 import { isEmpty } from 'lodash'
 import { type FormAsyncDropdown } from '..'

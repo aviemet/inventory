@@ -3,27 +3,27 @@ import { Section } from '@/components'
 import { NewIcon } from '@/components/Icons'
 import ShowPageTableTemplate from '@/features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
-import ComponentsTable from '@/Pages/components/Table'
+import ItemsTable from '@/pages/Items/Table'
 import { type PaginatedModel } from '@/types/PaginatedModel'
 
 interface DetailsProps {
 	department: Schema.Department
-	components: PaginatedModel<Schema.Component[]>
+	items: PaginatedModel<Schema.Item[]>
 }
 
-const Details = ({ department, components }: DetailsProps) => {
+const Details = ({ department, items }: DetailsProps) => {
 	return (
 		<Section>
 			<ShowPageTableTemplate
-				title={ `${department.name} Components` }
-				model="components"
-				rows={ components?.data }
-				pagination={ components?.pagination }
+				title={ `${department.name} Assets` }
+				model="items"
+				rows={ items?.data }
+				pagination={ items?.pagination }
 				menuOptions={ [
-					{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
+					{ label: 'New Asset', href: Routes.newItem(), icon: <NewIcon /> },
 				] }
 			>
-				<ComponentsTable wrapper={ false } />
+				<ItemsTable wrapper={ false } />
 			</ShowPageTableTemplate>
 		</Section>
 	)

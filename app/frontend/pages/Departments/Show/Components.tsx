@@ -3,27 +3,27 @@ import { Section } from '@/components'
 import { NewIcon } from '@/components/Icons'
 import ShowPageTableTemplate from '@/features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
-import PeopleTable from '@/Pages/People/Table'
+import ComponentsTable from '@/pages/components/Table'
 import { type PaginatedModel } from '@/types/PaginatedModel'
 
 interface DetailsProps {
 	department: Schema.Department
-	people: PaginatedModel<Schema.Person[]>
+	components: PaginatedModel<Schema.Component[]>
 }
 
-const Details = ({ department, people }: DetailsProps) => {
+const Details = ({ department, components }: DetailsProps) => {
 	return (
 		<Section>
 			<ShowPageTableTemplate
-				title={ `${department.name} People` }
-				model="people"
-				rows={ people?.data }
-				pagination={ people?.pagination }
+				title={ `${department.name} Components` }
+				model="components"
+				rows={ components?.data }
+				pagination={ components?.pagination }
 				menuOptions={ [
-					{ label: 'New Person', href: Routes.newPerson(), icon: <NewIcon /> },
+					{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
 				] }
 			>
-				<PeopleTable wrapper={ false } />
+				<ComponentsTable wrapper={ false } />
 			</ShowPageTableTemplate>
 		</Section>
 	)

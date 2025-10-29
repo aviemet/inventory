@@ -1,21 +1,17 @@
 import React from 'react'
+import { ShowAccessoryProps } from '.'
 import { Table } from '@/components'
-import DocumentationTable from '@/Pages/Documentation/Table'
+import DocumentationTable from '@/pages/Documentation/Table'
 
-interface ItemDocumentationProps {
-	item: Schema.ItemsShow
-}
-
-const Documentations = ({ item }: ItemDocumentationProps) => {
+const Documentations = ({ accessory }: ShowAccessoryProps) => {
 	return (
 		<Table.TableProvider
 			selectable
-			rows={ item?.documentations ?? [] }
+			rows={ accessory?.documentations ?? [] }
 		>
 			<Table.SearchInput  />
 
 			<DocumentationTable  />
-
 		</Table.TableProvider>
 	)
 }

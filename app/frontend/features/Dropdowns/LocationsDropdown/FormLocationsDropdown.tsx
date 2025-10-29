@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select as FormSelect } from '@/components/Form'
 import { Routes } from '@/lib'
-import LocationsForm from '@/Pages/Locations/Form'
+import LocationsForm from '@/pages/Locations/Form'
 import { useGetLocationsAsOptions } from '@/queries/locations'
 import { isEmpty } from 'lodash'
 import { type FormAsyncDropdown } from '..'

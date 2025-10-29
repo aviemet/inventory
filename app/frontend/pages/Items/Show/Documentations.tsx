@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table } from '@/components'
-import DocumentationTable from '@/Pages/Documentation/Table'
+import DocumentationTable from '@/pages/Documentation/Table'
 
 interface ItemDocumentationProps {
 	item: Schema.ItemsShow

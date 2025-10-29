@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select as FormSelect } from '@/components/Form'
 import { Routes } from '@/lib'
-import ManufacturersForm from '@/Pages/Manufacturers/Form'
+import ManufacturersForm from '@/pages/Manufacturers/Form'
 import { useGetManufacturersAsOptions } from '@/queries/manufacturers'
 import { isEmpty } from 'lodash'
 import { type FormAsyncDropdown } from '..'
