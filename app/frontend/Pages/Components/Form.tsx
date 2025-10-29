@@ -8,7 +8,7 @@ import {
 	Submit,
 	FormGroup,
 } from '@/components/Form'
-import { FormModelsDropdown, FormVendorsDropdown, FormLocationsDropdown } from '@/Features/Dropdowns'
+import { FormModelsDropdown, FormVendorsDropdown, FormLocationsDropdown } from '@/features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 

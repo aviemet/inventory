@@ -9,7 +9,7 @@ import DhcpConfirmModal from './DhcpConfirmModal'
 
 import { useNetworkContext } from '..'
 import IPAddress from '@/lib/IPAddress'
-import { FormItemsDropdown } from '@/Features'
+import { FormItemsDropdown } from '@/features'
 
 interface EditableLinkProps {
 	item?: Schema.ItemsOptions

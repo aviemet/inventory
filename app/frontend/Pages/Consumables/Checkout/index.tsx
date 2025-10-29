@@ -2,7 +2,7 @@ import React from 'react'
 import { Title, Page, Section } from '@/components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, NumberInput, Submit, Textarea } from '@/components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/features'
 import { type UseFormProps } from 'use-inertia-form'
 
 type CheckoutConsumableFormData = {

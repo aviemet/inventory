@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid } from '@/components'
 import { Form, TextInput, Textarea, Submit } from '@/components/Form'
-import { FormCategoriesDropdown, FormManufacturersDropdown } from '@/Features/Dropdowns'
+import { FormCategoriesDropdown, FormManufacturersDropdown } from '@/features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 

@@ -7,7 +7,7 @@ import {
 	Submit,
 	FieldsFor,
 } from '@/components/Form'
-import { AssetsDropdown, FormPeopleDropdown, FormPeopleMultiSelect } from '@/Features/Dropdowns'
+import { AssetsDropdown, FormPeopleDropdown, FormPeopleMultiSelect } from '@/features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 

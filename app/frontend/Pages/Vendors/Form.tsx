@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid } from '@/components'
 import { Form, TextInput, Submit } from '@/components/Form'
-import { ContactForm } from '@/Features/Contactable'
+import { ContactForm } from '@/features/Contactable'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type VendorFormData = {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Title, Page, Section, Table } from '@/components'
 import { Routes } from '@/lib'
 import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/Features'
+import { AssignToableDropdown, AssignmentLocationDropdown } from '@/features'
 
 import { omit } from 'lodash'
 

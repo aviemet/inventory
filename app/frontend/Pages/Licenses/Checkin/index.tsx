@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { Flex, Title, Page, Section, Table, Box } from '@/components'
 import { Routes, formatter } from '@/lib'
 import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/components/Form'
-import { LocationsDropdown } from '@/Features/Dropdowns'
+import { LocationsDropdown } from '@/features/Dropdowns'
 
 interface CheckinLicensesProps {
 	assignment: Schema.AssignmentsEdit

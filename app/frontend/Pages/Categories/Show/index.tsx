@@ -1,6 +1,6 @@
 import React from 'react'
 import { Lazy, Page, Table } from '@/components'
-import { TableTitleSection } from '@/Features'
+import { TableTitleSection } from '@/features'
 import { Routes } from '@/lib'
 
 type Record = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website

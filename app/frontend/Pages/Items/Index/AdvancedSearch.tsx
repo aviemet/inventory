@@ -9,7 +9,7 @@ import {
 	VendorsDropdown,
 	ModelsDropdown,
 	CategoriesDropdown,
-} from '@/Features/Dropdowns'
+} from '@/features/Dropdowns'
 import { SearchDateInput, SearchDateTypeInput } from '@/components/Table/SearchInput/AdvancedSearch/DateRangeInputs'
 
 const AdvancedItemsSearch = () => {

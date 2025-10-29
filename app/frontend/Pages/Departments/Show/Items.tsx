@@ -1,7 +1,7 @@
 import React from 'react'
 import { Section } from '@/components'
 import { NewIcon } from '@/components/Icons'
-import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
+import ShowPageTableTemplate from '@/features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
 import ItemsTable from '@/Pages/Items/Table'
 import { type PaginatedModel } from '@/types/PaginatedModel'

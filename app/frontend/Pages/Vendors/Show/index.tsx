@@ -8,7 +8,7 @@ import ConsumablesTable from '@/Pages/Consumables/Table'
 import ComponentsTable from '@/Pages/components/Table'
 import LicensesTable from '@/Pages/Licenses/Table'
 import ContractsTable from '@/Pages/Contracts/Table'
-import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
+import ShowPageTableTemplate from '@/features/ShowPageTableTemplate'
 import { type PaginatedModel } from '@/types/PaginatedModel'
 
 interface VendorShowProps {

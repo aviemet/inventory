@@ -11,10 +11,10 @@ import {
 } from '@/components/Form'
 import { Checkbox as CheckboxInput } from '@/components/Inputs'
 import { useBooleanToggle } from '@/lib/hooks'
-import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/Features/Dropdowns'
+import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import { ContactForm } from '@/Features'
+import { ContactForm } from '@/features'
 import { Fieldset } from '@mantine/core'
 
 type PersonFormData = {

@@ -16,7 +16,7 @@ import {
 	FormVendorsDropdown,
 	FormLocationsDropdown,
 	FormDepartmentsDropdown,
-} from '@/Features/Dropdowns'
+} from '@/features/Dropdowns'
 import { Checkbox as CheckboxInput } from '@/components/Inputs'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'

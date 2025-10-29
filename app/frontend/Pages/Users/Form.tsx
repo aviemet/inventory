@@ -6,7 +6,7 @@ import {
 	Submit,
 	PasswordInput,
 } from '@/components/Form'
-import { FormDepartmentsDropdown, FormPeopleDropdown } from '@/Features/Dropdowns'
+import { FormDepartmentsDropdown, FormPeopleDropdown } from '@/features/Dropdowns'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type UserFormData = {

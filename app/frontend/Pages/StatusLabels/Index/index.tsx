@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/Features'
+import { IndexPageTemplate } from '@/features'
 import { NewIcon } from '@/components/Icons'
 import StatusLabelsTable from '../Table'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid } from '@/components'
 import { DynamicInputs, Textarea, TextInput } from '@/components/Form'
-import { FormCategoriesDropdown } from '@/Features/Dropdowns'
+import { FormCategoriesDropdown } from '@/features/Dropdowns'
 
 const Website = () => {
 	return (

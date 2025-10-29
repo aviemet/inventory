@@ -1,6 +1,6 @@
 import React from 'react'
 import { Title, Page, Section } from '@/components'
-import { ContactDetails } from '@/Features/Contactable'
+import { ContactDetails } from '@/features/Contactable'
 import { Routes } from '@/lib'
 
 interface ShowCompanyProps {

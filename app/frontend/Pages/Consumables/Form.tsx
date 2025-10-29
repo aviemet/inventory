@@ -10,7 +10,7 @@ import {
 	CurrencyInput,
 	NumberInput,
 } from '@/components/Form'
-import { FormLocationsDropdown, FormModelsDropdown, FormVendorsDropdown } from '@/Features/Dropdowns'
+import { FormLocationsDropdown, FormModelsDropdown, FormVendorsDropdown } from '@/features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 

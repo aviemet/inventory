@@ -6,7 +6,7 @@ import {
 	Submit,
 	TextInput,
 } from '@/components/Form'
-import { FormVendorsDropdown } from '@/Features/Dropdowns'
+import { FormVendorsDropdown } from '@/features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 

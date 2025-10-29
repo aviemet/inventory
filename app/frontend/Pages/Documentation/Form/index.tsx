@@ -3,7 +3,7 @@ import { Grid } from '@/components'
 import { Form, TextInput, Submit, RichText } from '@/components/Form'
 import DocumentableSearch from './DocumentableSearch'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import { FormCategoriesDropdown } from '@/Features'
+import { FormCategoriesDropdown } from '@/features'
 
 type DocumentationFormData = {
 	documentation: Schema.DocumentationsFormData
