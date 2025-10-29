@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react'
 import { RichTextEditor, Link, type RichTextEditorProps as MantineRichTextEditorProps } from '@mantine/tiptap'
-import { useEditor, BubbleMenu, FloatingMenu } from '@tiptap/react'
+import { useEditor } from '@tiptap/react'
+import { BubbleMenu, FloatingMenu } from '@tiptap/react/menus'
 import Highlight from '@tiptap/extension-highlight'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
