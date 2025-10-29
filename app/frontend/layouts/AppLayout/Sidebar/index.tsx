@@ -32,7 +32,7 @@ import {
 	PeopleIcon,
 } from '@/components/Icons'
 
-import IconProvider from '@/Layouts/Providers/IconProvider'
+import IconProvider from '@/layouts/Providers/IconProvider'
 import * as classes from './Navigation.css'
 // import * as classes from './Test'
 

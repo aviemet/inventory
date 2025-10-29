@@ -3,7 +3,7 @@ import { Badge, SimpleGrid } from '@/components'
 import { Routes } from '@/lib'
 import CountsCard from './CountsCard'
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from '@/components/Icons'
-import IconProvider from '@/Layouts/Providers/IconProvider'
+import IconProvider from '@/layouts/Providers/IconProvider'
 
 type CompanyCounts = {
 	locations: number

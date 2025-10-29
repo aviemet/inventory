@@ -1,7 +1,7 @@
 import React from 'react'
 import { createInertiaApp, router } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
-import { AuthLayout, AppLayout } from '../Layouts'
+import { AuthLayout, AppLayout } from '../layouts'
 import { propsMiddleware } from './middleware'
 import { runAxe } from './middleware/axe'
 
