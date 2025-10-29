@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { Select as InputSelect } from '@/Components/Inputs'
+import { Select as InputSelect } from '@/components/Inputs'
 import { useGetCurrencies } from '@/queries/currencies'
 import { isEmpty } from 'lodash'
 import { type AsyncDropdown } from '..'

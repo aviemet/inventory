@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Link, Table } from '@/Components'
-import { EditButton } from '@/Components/Button'
-import { TableProps } from '@/Components/Table/Table'
+import { Link, Table } from '@/components'
+import { EditButton } from '@/components/Button'
+import { TableProps } from '@/components/Table/Table'
 
 const ManufacturersTable = (props: TableProps) => {
 	return (

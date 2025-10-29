@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLayoutStore } from '@/lib/store'
-import { Divider, Group, AppShell, Icon, Box } from '@/Components'
+import { Divider, Group, AppShell, Icon, Box } from '@/components'
 import cx from 'clsx'
 import MenuLink from './MenuLink'
 import { Routes } from '@/lib'
@@ -30,7 +30,7 @@ import {
 	UserGroupIcon,
 	DocumentationIcon,
 	PeopleIcon,
-} from '@/Components/Icons'
+} from '@/components/Icons'
 
 import IconProvider from '@/Layouts/Providers/IconProvider'
 import * as classes from './Navigation.css'

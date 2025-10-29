@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Section } from '@/Components'
+import { Grid, Section } from '@/components'
 import {
 	Form,
 	TextInput,
@@ -8,8 +8,8 @@ import {
 	FormGroup,
 	PasswordInput,
 	FormConsumer,
-} from '@/Components/Form'
-import { Checkbox as CheckboxInput } from '@/Components/Inputs'
+} from '@/components/Form'
+import { Checkbox as CheckboxInput } from '@/components/Inputs'
 import { useBooleanToggle } from '@/lib/hooks'
 import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'

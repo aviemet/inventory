@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Link } from '@/Components'
+import { Table, Link } from '@/components'
 
 interface <%= human_name %>TableProps {
 	<%= singular_table_name %>: Schema.<%= human_name %>

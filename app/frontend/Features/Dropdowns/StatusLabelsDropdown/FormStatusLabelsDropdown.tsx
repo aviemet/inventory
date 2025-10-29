@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select as FormSelect } from '@/Components/Form'
+import { Select as FormSelect } from '@/components/Form'
 import { Routes } from '@/lib'
 import StatusLabelsForm from '@/Pages/StatusLabels/Form'
 import { useGetStatusLabelsAsOptions } from '@/queries/statusLabels'

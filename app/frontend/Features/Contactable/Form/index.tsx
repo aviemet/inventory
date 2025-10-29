@@ -1,6 +1,6 @@
 import React from 'react'
-import { Accordion, Grid } from '@/Components'
-import { FieldsFor } from '@/Components/Form'
+import { Accordion, Grid } from '@/components'
+import { FieldsFor } from '@/components/Form'
 import Address from './Address'
 import Phone from './Phone'
 import Email from './Email'

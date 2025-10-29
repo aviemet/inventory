@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
 import { Routes } from '@/lib'
 import {
 	EditIcon,
@@ -7,7 +7,7 @@ import {
 	CheckoutIcon,
 	TicketsIcon,
 	DocumentationIcon,
-} from '@/Components/Icons'
+} from '@/components/Icons'
 import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'

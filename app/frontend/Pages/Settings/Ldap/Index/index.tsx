@@ -3,7 +3,7 @@ import { Routes } from '@/lib'
 import LdapForm from '../Form'
 import SettingsLayout from '../../SettingsLayout'
 import axios from 'axios'
-import { Title } from '@/Components'
+import { Title } from '@/components'
 
 interface LdapSettingsProps {
 	ldap: Schema.LdapsFormData

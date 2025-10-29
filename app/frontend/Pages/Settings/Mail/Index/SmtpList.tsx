@@ -1,5 +1,5 @@
-import { Group, Link, Table } from '@/Components'
-import { EditButton } from '@/Components/Button'
+import { Group, Link, Table } from '@/components'
+import { EditButton } from '@/components/Button'
 import { Routes } from '@/lib'
 import React from 'react'
 

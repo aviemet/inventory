@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import SelectInput, { type SelectInputProps } from '@/Components/Inputs/Select'
+import SelectInput, { type SelectInputProps } from '@/components/Inputs/Select'
 import axios from 'axios'
 import { Routes } from '@/lib'
 

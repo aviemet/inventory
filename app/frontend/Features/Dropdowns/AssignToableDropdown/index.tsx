@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { SegmentedControl } from '@/Components/Form'
-import { type ComboboxData, type SelectOption } from '@/Components/Form/Inputs/Select'
+import { SegmentedControl } from '@/components/Form'
+import { type ComboboxData, type SelectOption } from '@/components/Form/Inputs/Select'
 import { useForm, type UseFormProps, type NestedObject } from 'use-inertia-form'
 import getDropdownComponent from './getDropdownComponent'
 

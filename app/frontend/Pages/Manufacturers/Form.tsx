@@ -1,10 +1,10 @@
 import React from 'react'
-import { Grid } from '@/Components'
+import { Grid } from '@/components'
 import {
 	Form,
 	TextInput,
 	Submit,
-} from '@/Components/Form'
+} from '@/components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 type ManufacturerFormData = {

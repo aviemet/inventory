@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { Flex } from '@/Components'
+import { Flex } from '@/components'
 import { useMantineTheme, px, type MantineBreakpointsValues } from '@mantine/core'
 import { useDebouncedState, useViewportSize } from '@mantine/hooks'
-import { Table } from '@/Components'
+import { Table } from '@/components'
 import NetworkTable from './Table'
 
 interface NetworkDetailsTableProps {

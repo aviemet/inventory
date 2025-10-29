@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { Select as InputSelect } from '@/Components/Inputs'
+import { Select as InputSelect } from '@/components/Inputs'
 import { isEmpty } from 'lodash'
 import { useGetDepartmentsAsOptions } from '@/queries/departments'
 import { type AsyncDropdown } from '..'

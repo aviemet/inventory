@@ -1,5 +1,5 @@
 import React from 'react'
-import { Burger } from '@/Components'
+import { Burger } from '@/components'
 import { useLayoutStore } from '@/lib/store'
 
 const ToggleSidebarButton = () => {

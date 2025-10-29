@@ -1,9 +1,9 @@
 import React from 'react'
-import { Box, DangerousHtml, Group, Link, Paper } from '@/Components'
+import { Box, DangerousHtml, Group, Link, Paper } from '@/components'
 import { Routes, formatter } from '@/lib'
-import { Form, RichText, Submit } from '@/Components/Form'
-import { EditIcon, CrossIcon } from '@/Components/Icons'
-import { IconButton } from '@/Components/Button'
+import { Form, RichText, Submit } from '@/components/Form'
+import { EditIcon, CrossIcon } from '@/components/Icons'
+import { IconButton } from '@/components/Button'
 import { useToggle } from '@mantine/hooks'
 import { usePageProps } from '@/lib/hooks'
 

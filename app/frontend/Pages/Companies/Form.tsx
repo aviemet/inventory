@@ -1,6 +1,6 @@
 import React from 'react'
-import { Grid } from '@/Components'
-import { Form, TextInput, Submit } from '@/Components/Form'
+import { Grid } from '@/components'
+import { Form, TextInput, Submit } from '@/components/Form'
 import { ContactForm } from '@/Features/Contactable'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 import { FormCurrenciesDropdown } from '@/Features/Dropdowns'

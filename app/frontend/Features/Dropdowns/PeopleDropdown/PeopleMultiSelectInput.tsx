@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { MultiSelect as InputMultiSelect } from '@/Components/Inputs'
+import { MultiSelect as InputMultiSelect } from '@/components/Inputs'
 import { useGetPeopleAsOptions } from '@/queries/people'
 import { isEmpty } from 'lodash'
 import { type AsyncMultiSelect } from '..'

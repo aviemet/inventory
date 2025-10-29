@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from '@/Components'
+import { Grid } from '@/components'
 import {
 	Form,
 	TextInput,
@@ -7,7 +7,7 @@ import {
 	Checkbox,
 	Submit,
 	FormGroup,
-} from '@/Components/Form'
+} from '@/components/Form'
 import { FormModelsDropdown, FormVendorsDropdown, FormLocationsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'

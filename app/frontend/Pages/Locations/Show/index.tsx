@@ -1,5 +1,5 @@
 import React from 'react'
-import { Group, Title, Menu, Page, Section } from '@/Components'
+import { Group, Title, Menu, Page, Section } from '@/components'
 import { Routes } from '@/lib'
 
 interface ShowLocationProps {

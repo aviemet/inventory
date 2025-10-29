@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
-import { Grid, Table } from '@/Components'
-import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/Components/Form'
+import { Grid, Table } from '@/components'
+import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/components/Form'
 import { Routes } from '@/lib'
 import { createContext, usePageProps } from '@/lib/hooks'
 import SwitchRow from './SwitchRow'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section } from '@/Components'
+import { Section } from '@/components'
 
 interface ErrorProps {
 	status: 403 | 404 | 500 | 503

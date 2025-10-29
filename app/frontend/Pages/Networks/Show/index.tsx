@@ -1,9 +1,9 @@
 import React from 'react'
-import { Section, Menu, Flex, Group, Title, Table, Container, Page, Paper } from '@/Components'
+import { Section, Menu, Flex, Group, Title, Table, Container, Page, Paper } from '@/components'
 import { createContext } from '@/lib/hooks'
 import { Routes } from '@/lib'
 import NetworkDetailsTable from './NetworkDetailsTable'
-import { EditIcon } from '@/Components/Icons'
+import { EditIcon } from '@/components/Icons'
 
 interface ShowNetworkProps {
 	network: Schema.NetworksShow

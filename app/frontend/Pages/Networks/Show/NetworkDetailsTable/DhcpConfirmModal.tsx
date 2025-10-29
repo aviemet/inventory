@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from '@mantine/core'
-import { Button } from '@/Components'
+import { Button } from '@/components'
 
 interface DhcpConfirmModalProps {
 	open: boolean

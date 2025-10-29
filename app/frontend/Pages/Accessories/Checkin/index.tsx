@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Page, Title, Section, Table } from '@/Components'
+import { Page, Title, Section, Table } from '@/components'
 import { Routes } from '@/lib'
-import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/Components/Form'
+import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/components/Form'
 import * as classes from './Checkin.css'
 
 interface CheckinAccessoriesProps {

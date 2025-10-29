@@ -1,7 +1,7 @@
 import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
 import { Routes } from '@/lib'
-import { EditIcon } from '@/Components/Icons'
+import { EditIcon } from '@/components/Icons'
 
 interface ShowOrderProps {
 	order: Schema.OrdersShow

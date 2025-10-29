@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from '@/Components'
+import { Link } from '@/components'
 import { Routes } from '@/lib'
 import { has } from 'lodash'
 

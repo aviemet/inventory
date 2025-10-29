@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Checkbox } from '@/Components/Inputs'
+import { Checkbox } from '@/components/Inputs'
 import { useForm } from 'use-inertia-form'
 import { type FormData, type Permissions } from '.'
 import tableRows from './tableRows'

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react'
-import { Box, Title, Grid } from '@/Components'
-import { Form, Submit, SwatchInput } from '@/Components/Form'
+import { Box, Title, Grid } from '@/components'
+import { Form, Submit, SwatchInput } from '@/components/Form'
 import SettingsLayout from '@/Pages/Settings/SettingsLayout'
 import { Routes } from '@/lib'
 import { defaults } from 'lodash'

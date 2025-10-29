@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Grid } from '@/Components'
+import { Box, Grid } from '@/components'
 import {
 	Form,
 	TextInput,
@@ -9,11 +9,11 @@ import {
 	Submit,
 	CurrencyInput,
 	NumberInput,
-} from '@/Components/Form'
+} from '@/components/Form'
 import { FormCategoriesDropdown, FormManufacturersDropdown, FormVendorsDropdown } from '@/Features/Dropdowns'
 import { coerceArray } from '@/lib'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import ConsoleLogger from '@/Components/Form/Components/ConsoleLogger'
+import ConsoleLogger from '@/components/Form/components/ConsoleLogger'
 
 type LicenseFormData = {
 	license: Schema.LicensesFormData

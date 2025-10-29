@@ -1,7 +1,7 @@
 import React from 'react'
-import { Group, Grid } from '@/Components'
-import { Form, type FormProps, PasswordInput, SegmentedControl, RichText, Submit, TextInput, FormConsumer } from '@/Components/Form'
-import { TestResponseButton } from '@/Components/Button'
+import { Group, Grid } from '@/components'
+import { Form, type FormProps, PasswordInput, SegmentedControl, RichText, Submit, TextInput, FormConsumer } from '@/components/Form'
+import { TestResponseButton } from '@/components/Button'
 import { Routes, isUnset } from '@/lib'
 import { omit } from 'lodash'
 

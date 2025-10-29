@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, ActionIcon } from '@/Components'
+import { Link, ActionIcon } from '@/components'
 import cx from 'clsx'
 
 interface MenuLinkProps {

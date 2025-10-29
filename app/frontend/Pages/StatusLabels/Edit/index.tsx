@@ -1,5 +1,5 @@
 import React from 'react'
-import { Title, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/components'
 import { Routes } from '@/lib'
 import StatusLabelForm from '../Form'
 

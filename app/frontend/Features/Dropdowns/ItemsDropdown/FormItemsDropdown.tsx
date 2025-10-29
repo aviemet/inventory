@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select as FormSelect } from '@/Components/Form'
+import { Select as FormSelect } from '@/components/Form'
 import { isEmpty } from 'lodash'
 import { useGetItemsAsOptions } from '@/queries/items'
 import { type FormAsyncDropdown } from '..'

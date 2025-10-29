@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react'
-import { Grid } from '@/Components'
+import { Grid } from '@/components'
 import {
 	Form,
 	TextInput,
 	Textarea,
 	Select,
 	Submit,
-} from '@/Components/Form'
+} from '@/components/Form'
 import { router } from '@inertiajs/react'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 

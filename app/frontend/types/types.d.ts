@@ -1,5 +1,5 @@
 /*import React from 'react'
-import { type SelectInputProps } from '@/Components/Inputs/Select'
+import { type SelectInputProps } from '@/components/Inputs/Select'
 import { type SelectProps, type InputProps } from '@mantine/core'
 
 declare global {

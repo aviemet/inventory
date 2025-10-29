@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from '@/Components'
+import { Table } from '@/components'
 import DocumentationTable from '@/Pages/Documentation/Table'
 
 interface ItemDocumentationProps {

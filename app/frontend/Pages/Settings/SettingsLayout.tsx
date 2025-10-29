@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Paper, Page, Box, Section, Tabs } from '@/Components'
+import { Paper, Page, Box, Section, Tabs } from '@/components'
 import { router } from '@inertiajs/react'
 import { px, useMantineTheme } from '@mantine/core'
 import { useViewportSize, useLocation } from '@/lib/hooks'
-import { type Breadcrumb } from '@/Components/Breadcrumbs'
+import { type Breadcrumb } from '@/components/Breadcrumbs'
 
 interface SettingsLayoutProps {
 	children: React.ReactNode

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Select } from '@/Components/Form'
+import { Form, Select } from '@/components/Form'
 import { Title } from '@mantine/core'
 import { isEmpty } from 'lodash'
 import { Routes } from '@/lib'

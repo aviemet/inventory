@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Button } from '@/Components'
+import { Menu, Button } from '@/components'
 import {
 	PlusCircleIcon,
 	ItemsIcon,
@@ -11,7 +11,7 @@ import {
 	ConsumablesIcon,
 	VendorsIcon,
 	DocumentationIcon,
-} from '@/Components/Icons'
+} from '@/components/Icons'
 import { Routes } from '@/lib'
 
 import cx from 'clsx'

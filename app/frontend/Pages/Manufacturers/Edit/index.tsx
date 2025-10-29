@@ -1,5 +1,5 @@
 import React from 'react'
-import { Title, Page, Section } from '@/Components'
+import { Title, Page, Section } from '@/components'
 import ManufacturerForm from '../Form'
 import { Routes } from '@/lib'
 

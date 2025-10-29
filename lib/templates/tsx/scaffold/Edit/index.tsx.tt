@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Page, Section } from '@/Components'
+import { Heading, Page, Section } from '@/components'
 import { Routes } from '@/lib'
 import <%= plural_table_name.camelize %>Form from '../Form'
 

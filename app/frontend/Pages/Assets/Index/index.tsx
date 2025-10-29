@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Features'
-import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from '@/Components/Icons'
+import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from '@/components/Icons'
 import AssetTable from '../Table'
 
 interface AssetsIndexProps {

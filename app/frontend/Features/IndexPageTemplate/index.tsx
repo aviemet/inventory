@@ -1,7 +1,7 @@
 import React from 'react'
-import { Page, Table } from '@/Components'
+import { Page, Table } from '@/components'
 import TableTitleSection, { IndexTableTitleSectionProps } from '../TableTitleSection'
-import { type Breadcrumb } from '@/Components/Breadcrumbs'
+import { type Breadcrumb } from '@/components/Breadcrumbs'
 
 interface IndexPageTemplateProps extends IndexTableTitleSectionProps {
 	model: string

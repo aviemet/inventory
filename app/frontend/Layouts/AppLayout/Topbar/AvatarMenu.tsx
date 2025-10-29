@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu } from '@/Components'
+import { Menu } from '@/components'
 import { Avatar, UnstyledButton } from '@mantine/core'
 import { usePageProps } from '@/lib/hooks'
 import { Routes } from '@/lib'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ShowAccessoryProps } from '.'
-import { Table } from '@/Components'
+import { Table } from '@/components'
 import DocumentationTable from '@/Pages/Documentation/Table'
 
 const Documentations = ({ accessory }: ShowAccessoryProps) => {

@@ -1,6 +1,6 @@
 
-import { Group, Title, Menu, Section } from '@/Components'
-import { EditIcon } from '@/Components/Icons'
+import { Group, Title, Menu, Section } from '@/components'
+import { EditIcon } from '@/components/Icons'
 import { Routes } from '@/lib'
 import React from 'react'
 

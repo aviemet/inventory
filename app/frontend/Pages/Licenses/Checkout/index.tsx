@@ -1,6 +1,6 @@
 import React from 'react'
-import { Box, Flex, Title, Page, Section, Table } from '@/Components'
-import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
+import { Box, Flex, Title, Page, Section, Table } from '@/components'
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/components/Form'
 import { AssignToableDropdown } from '@/Features'
 import { Routes, formatter } from '@/lib'
 

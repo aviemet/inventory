@@ -1,6 +1,6 @@
 import React from 'react'
-import { Box, AppShell, Group } from '@/Components'
-import { ToggleColorSchemeButton } from '@/Components/Button'
+import { Box, AppShell, Group } from '@/components'
+import { ToggleColorSchemeButton } from '@/components/Button'
 
 const FooterComponent = () => {
 	return (

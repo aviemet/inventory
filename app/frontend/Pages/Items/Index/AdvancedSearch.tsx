@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button, Box, Group, Flex, Link } from '@/Components'
-import { CurrencyInput, TextInput } from '@/Components/Inputs'
-import { useAdvancedSearch } from '@/Components/Table'
-import { CrossIcon, SearchIcon } from '@/Components/Icons'
+import { Button, Box, Group, Flex, Link } from '@/components'
+import { CurrencyInput, TextInput } from '@/components/Inputs'
+import { useAdvancedSearch } from '@/components/Table'
+import { CrossIcon, SearchIcon } from '@/components/Icons'
 import {
 	DepartmentsDropdown,
 	ManufacturersDropdown,
@@ -10,7 +10,7 @@ import {
 	ModelsDropdown,
 	CategoriesDropdown,
 } from '@/Features/Dropdowns'
-import { SearchDateInput, SearchDateTypeInput } from '@/Components/Table/SearchInput/AdvancedSearch/DateRangeInputs'
+import { SearchDateInput, SearchDateTypeInput } from '@/components/Table/SearchInput/AdvancedSearch/DateRangeInputs'
 
 const AdvancedItemsSearch = () => {
 	const advancedSearch = useAdvancedSearch([

@@ -9,7 +9,7 @@ import {
 	ComponentsIcon,
 	ConsumablesIcon,
 	SearchIcon,
-} from '@/Components/Icons'
+} from '@/components/Icons'
 import { router } from '@inertiajs/react'
 import { Routes } from '@/lib'
 import { Loader } from '@mantine/core'

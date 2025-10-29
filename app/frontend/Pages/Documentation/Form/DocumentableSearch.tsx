@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Select, HiddenInput } from '@/Components/Form'
+import { Select, HiddenInput } from '@/components/Form'
 import { useForm } from 'use-inertia-form'
 import { useGetSearchResults } from '@/queries'
-import { type FormSelectProps, type SelectOption } from '@/Components/Form/Inputs/Select'
+import { type FormSelectProps, type SelectOption } from '@/components/Form/Inputs/Select'
 import { useDebouncedCallback } from '@mantine/hooks'
 
 interface DocumentableSearchProps extends Omit<FormSelectProps, 'options' | 'searchable'> {

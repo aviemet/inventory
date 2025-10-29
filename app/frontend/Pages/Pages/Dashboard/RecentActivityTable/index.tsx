@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Table } from '@/Components'
+import { Link, Table } from '@/components'
 import { formatter, Routes } from '@/lib'
 
 interface DashboardProps {

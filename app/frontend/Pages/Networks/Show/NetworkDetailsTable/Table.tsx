@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Table } from '@/Components'
+import { Table } from '@/components'
 import EditableLink from './EditableLink'
 import IPAddress from '@/lib/IPAddress'
 import { useNetworkContext } from '..'

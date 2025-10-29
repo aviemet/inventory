@@ -1,7 +1,7 @@
 import React from 'react'
 import { type PageProps } from '@inertiajs/core'
 import Providers from '@/Layouts/Providers'
-import { Flash } from '@/Components'
+import { Flash } from '@/components'
 import Spotlight from '../Features/Spotlight'
 
 import AppLayout from './AppLayout'

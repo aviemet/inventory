@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Features'
-import { NewIcon } from '@/Components/Icons'
+import { NewIcon } from '@/components/Icons'
 import StatusLabelsTable from '../Table'
 
 interface StatusLabelsIndexProps {

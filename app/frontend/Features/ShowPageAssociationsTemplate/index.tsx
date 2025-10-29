@@ -1,8 +1,8 @@
 import React from 'react'
-import { Title, Link, List, Icon, Box, Group } from '@/Components'
+import { Title, Link, List, Icon, Box, Group } from '@/components'
 import { polymorphicRoute, formatter } from '@/lib'
-import { ArrowRightSquareIcon, CheckoutIcon } from '@/Components/Icons'
-import { CheckinButton } from '@/Components/Button'
+import { ArrowRightSquareIcon, CheckoutIcon } from '@/components/Icons'
+import { CheckinButton } from '@/components/Button'
 
 interface ShowPageAssociationsProps {
 	assignable: Schema.ItemsShow | Schema.AccessoriesShow | Schema.ConsumablesShow | Schema.ComponentsShow | Schema.LicensesShow

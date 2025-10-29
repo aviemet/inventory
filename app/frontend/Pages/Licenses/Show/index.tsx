@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/Components'
+import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
 import Details from './Details'
 import ItemHistory from './ItemHistory'
 import Associations from './Associations'

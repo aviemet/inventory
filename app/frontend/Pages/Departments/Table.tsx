@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Link, Table } from '@/Components'
-import { EditButton } from '@/Components/Button'
-import { type TableProps } from '@/Components/Table/Table'
+import { Link, Table } from '@/components'
+import { EditButton } from '@/components/Button'
+import { type TableProps } from '@/components/Table/Table'
 
 const DepartmentsTable = (props: TableProps) => {
 	return (

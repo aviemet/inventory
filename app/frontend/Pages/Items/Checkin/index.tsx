@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Title, Page, Section, Table } from '@/Components'
+import { Title, Page, Section, Table } from '@/components'
 import { Routes } from '@/lib'
-import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/Components/Form'
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/components/Form'
 import { FormLocationsDropdown, FormStatusLabelsDropdown } from '@/Features/Dropdowns'
 import * as classes from './Checkin.css'
 

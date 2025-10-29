@@ -1,5 +1,5 @@
 import React from 'react'
-import { DangerousHtml, Date, Group, Title, Link, Menu, Page, Section } from '@/Components'
+import { DangerousHtml, Date, Group, Title, Link, Menu, Page, Section } from '@/components'
 import { Routes } from '@/lib'
 import { Text } from '@mantine/core'
 

@@ -1,4 +1,4 @@
-import Table from '@/Components/Table'
+import Table from '@/components/Table'
 import React from 'react'
 import { TableTitleSection } from '..'
 

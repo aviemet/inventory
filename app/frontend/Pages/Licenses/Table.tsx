@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes, formatter } from '@/lib'
-import { Group, Link, Money, Table } from '@/Components'
-import { CheckoutButton, EditButton } from '@/Components/Button'
-import { TableProps } from '@/Components/Table/Table'
+import { Group, Link, Money, Table } from '@/components'
+import { CheckoutButton, EditButton } from '@/components/Button'
+import { TableProps } from '@/components/Table/Table'
 
 const LicensesTable = (props: TableProps) => {
 	return (

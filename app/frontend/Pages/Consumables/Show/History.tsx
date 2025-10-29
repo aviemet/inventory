@@ -1,5 +1,5 @@
 import React from 'react'
-import { Title, History } from '@/Components'
+import { Title, History } from '@/components'
 import { ShowConsumableProps } from '.'
 
 const ConsumableHistory = ({ consumable }: ShowConsumableProps) => {

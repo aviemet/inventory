@@ -1,5 +1,5 @@
 import React from 'react'
-import { History } from '@/Components'
+import { History } from '@/components'
 import { ShowItemProps } from '.'
 
 const ItemHistory = ({ item }: ShowItemProps) => {

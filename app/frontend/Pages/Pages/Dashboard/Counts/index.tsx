@@ -1,8 +1,8 @@
 import React from 'react'
-import { Badge, SimpleGrid } from '@/Components'
+import { Badge, SimpleGrid } from '@/components'
 import { Routes } from '@/lib'
 import CountsCard from './CountsCard'
-import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from '@/Components/Icons'
+import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from '@/components/Icons'
 import IconProvider from '@/Layouts/Providers/IconProvider'
 
 type CompanyCounts = {

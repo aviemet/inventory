@@ -1,5 +1,5 @@
 import React from 'react'
-import { Lazy, Page, Table } from '@/Components'
+import { Lazy, Page, Table } from '@/components'
 import { TableTitleSection } from '@/Features'
 import { Routes } from '@/lib'
 

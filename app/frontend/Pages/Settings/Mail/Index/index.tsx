@@ -1,6 +1,6 @@
 import React from 'react'
 import SettingsLayout from '../../SettingsLayout'
-import { Group, Title, Menu } from '@/Components'
+import { Group, Title, Menu } from '@/components'
 import Empty from './Empty'
 import SmtpList from './SmtpList'
 import { Routes } from '@/lib'

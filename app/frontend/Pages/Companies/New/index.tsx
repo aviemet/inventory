@@ -1,5 +1,5 @@
 import React from 'react'
-import { Breadcrumbs, Title, Page, Section } from '@/Components'
+import { Breadcrumbs, Title, Page, Section } from '@/components'
 import { Routes } from '@/lib'
 import CompanyForm from '../Form'
 

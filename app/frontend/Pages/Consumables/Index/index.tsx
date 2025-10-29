@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes } from '@/lib'
 import { IndexPageTemplate } from '@/Features'
-import { NewIcon } from '@/Components/Icons'
+import { NewIcon } from '@/components/Icons'
 import ConsumablesTable from '../Table'
 
 interface ConsumablesIndexProps {

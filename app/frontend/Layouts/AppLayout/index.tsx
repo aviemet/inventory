@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Box, useMantineTheme } from '@mantine/core'
-import { AppShell } from '@/Components'
+import { AppShell } from '@/components'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 import Footer from '../Footer'

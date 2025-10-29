@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Box, Title, Link } from '@/Components'
+import { Box, Title, Link } from '@/components'
 import pluralize from 'pluralize'
 import { polymorphicRoute } from '@/lib/index'
 

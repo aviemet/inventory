@@ -1,9 +1,9 @@
 import React from 'react'
 import { Routes } from '@/lib'
-import { Badge, Link, Table } from '@/Components'
-import { EditButton } from '@/Components/Button'
-import { TableProps } from '@/Components/Table/Table'
-import { CheckIcon, CrossIcon } from '@/Components/Icons'
+import { Badge, Link, Table } from '@/components'
+import { EditButton } from '@/components/Button'
+import { TableProps } from '@/components/Table/Table'
+import { CheckIcon, CrossIcon } from '@/components/Icons'
 
 const PeopleTable = (props: TableProps) => {
 	return (

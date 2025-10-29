@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Group, Link } from '@/Components'
+import { Card, Group, Link } from '@/components'
 
 interface CountCardProps {
 	children: React.ReactNode

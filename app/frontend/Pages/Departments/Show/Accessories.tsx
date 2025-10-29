@@ -1,6 +1,6 @@
 import React from 'react'
-import { Section } from '@/Components'
-import { NewIcon } from '@/Components/Icons'
+import { Section } from '@/components'
+import { NewIcon } from '@/components/Icons'
 import ShowPageTableTemplate from '@/Features/ShowPageTableTemplate'
 import { Routes } from '@/lib'
 import AccessoriesTable from '@/Pages/Accessories/Table'

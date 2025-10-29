@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select as FormSelect } from '@/Components/Form'
+import { Select as FormSelect } from '@/components/Form'
 import { Routes } from '@/lib'
 import ModelsForm from '@/Pages/Models/Form'
 import { useGetModelsAsOptions } from '@/queries/models'

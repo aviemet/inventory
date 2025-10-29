@@ -1,7 +1,7 @@
 import React from 'react'
-import { Table, Title, Page, Group, Menu } from '@/Components'
+import { Table, Title, Page, Group, Menu } from '@/components'
 import { Routes } from '@/lib'
-import { EditIcon } from '@/Components/Icons'
+import { EditIcon } from '@/components/Icons'
 import GroupMembersTable from './GroupMembersTable'
 
 interface ShowUserProps {

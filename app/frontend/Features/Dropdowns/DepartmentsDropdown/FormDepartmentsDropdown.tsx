@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select as FormSelect } from '@/Components/Form'
+import { Select as FormSelect } from '@/components/Form'
 import { Routes } from '@/lib'
 import DepartmentsForm from '@/Pages/Departments/Form'
 import { isEmpty } from 'lodash'
