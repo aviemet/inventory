@@ -18,25 +18,17 @@ class Manufacturer < ApplicationRecord
   include Contactable
   include Documentable
 
-  multisearchable(
-    against: [:name],
-    additional_attributes: ->(record) { { label: record.name } },
-  )
-
-  pg_search_scope(
-    :search,
-    against: [:name, :slug], associated_against: {
+  include PgSearchable
+  pg_search_config(
+    against: [:name, :slug],
+    associated_against: {
       models: [:name, :model_number],
       items: [:name, :asset_tag, :serial],
       accessories: [:name, :asset_tag, :serial],
       consumables: [:name, :asset_tag, :serial],
       components: [:name, :asset_tag, :serial],
     },
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   slug :name

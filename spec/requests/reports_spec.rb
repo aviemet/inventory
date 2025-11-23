@@ -1,6 +1,7 @@
 require 'rails_helper'
+require_relative '../support/devise'
 
-RSpec.describe "Reports" do
+RSpec.describe "Reports", :inertia do
   describe "GET /index" do
     login_admin
 

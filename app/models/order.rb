@@ -39,17 +39,14 @@
 class Order < ApplicationRecord
   include Ownable
 
-  pg_search_scope(
-    :search,
-    against: [:number], associated_against: {
+  include PgSearchable
+  pg_search_config(
+    against: [:number],
+    associated_against: {
       user: [:email],
       person: [:first_name, :middle_name, :last_name, :employee_number, :job_title],
       vendor: [:name]
-    }, using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
+    }
   )
 
   tracked

@@ -27,22 +27,13 @@ class Department < ApplicationRecord
   include Ownable
   include Documentable
 
-  multisearchable(
-    against: [:name],
-    additional_attributes: ->(record) { { label: record.name } },
-  )
-
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:name, :notes],
     associated_against: {
       location: [:name]
     },
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   slug :name

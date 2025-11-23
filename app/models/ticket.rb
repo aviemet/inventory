@@ -32,20 +32,13 @@
 class Ticket < ApplicationRecord
   include Ownable
 
-  multisearchable(
+  include PgSearchable
+  pg_search_config(
     against: [:number, :subject],
-    additional_attributes: ->(record) { { label: record.subject } },
-  )
-
-  pg_search_scope(
-    :search,
-    against: [:number, :subject], associated_against: {
+    associated_against: {
       created_by: [:email]
-    }, using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   tracked

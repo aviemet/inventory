@@ -36,21 +36,13 @@ class Person < ApplicationRecord
   include Fieldable
   include Documentable
 
-  multisearchable(
-    against: [:first_name, :middle_name, :last_name, :employee_number],
-    additional_attributes: ->(record) { { label: record.full_name } },
-  )
-
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:first_name, :middle_name, :last_name, :employee_number, :job_title], associated_against: {
       manager: [:first_name, :middle_name, :last_name, :employee_number, :job_title],
       user: [:email]
-    }, using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   tracked
@@ -84,7 +76,7 @@ class Person < ApplicationRecord
   alias :name :full_name
 
   def default_location
-    self&.location || self&.department&.location
+    self.location || self.department&.location
   end
 
 end

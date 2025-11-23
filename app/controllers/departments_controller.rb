@@ -24,7 +24,7 @@ class DepartmentsController < ApplicationController
     authorize department
     render inertia: "Departments/Show", props: {
       department: department.render(view: :show),
-      items: InertiaRails.optional(-> {
+      items: InertiaRails.optional {
         paginated_items = department.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render,
@@ -33,8 +33,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      }),
-      accessories: InertiaRails.optional(-> {
+      },
+      accessories: InertiaRails.optional {
         paginated_accessories = department.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render,
@@ -43,8 +43,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_accessories)
           }
         }
-      }),
-      consumables: InertiaRails.optional(-> {
+      },
+      consumables: InertiaRails.optional {
         paginated_consumables = department.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render,
@@ -53,8 +53,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_consumables)
           }
         }
-      }),
-      components: InertiaRails.optional(-> {
+      },
+      components: InertiaRails.optional {
         paginated_components = department.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render,
@@ -63,8 +63,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_components)
           }
         }
-      }),
-      licenses: InertiaRails.optional(-> {
+      },
+      licenses: InertiaRails.optional {
         paginated_licenses = department.licenses.includes_associated.page(params[:page] || 1)
         {
           data: paginated_licenses.render,
@@ -73,8 +73,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_licenses)
           }
         }
-      }),
-      people: InertiaRails.optional(-> {
+      },
+      people: InertiaRails.optional {
         paginated_people = department.people.includes_associated.page(params[:page] || 1)
         {
           data: paginated_people.render,
@@ -83,7 +83,7 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_people)
           }
         }
-      }),
+      },
     }
   end
 

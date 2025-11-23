@@ -32,13 +32,13 @@ RSpec.describe "StatusLabels", :inertia do
 
       context "with search params" do
         it "returns a filtered list of status_labels" do
-          status_label_1 = create(:status_label, { name: "Include", company: User.first.active_company })
-          status_label_2 = create(:status_label, { name: "Exclude", company: User.first.active_company })
+          status_label_1 = create(:status_label, name: "Include")
+          status_label_2 = create(:status_label, name: "Exclude")
 
           get status_labels_url, params: { search: status_label_1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'StatusLabel/Index'
+          expect_inertia.to render_component 'StatusLabels/Index'
           expect(response.body).to include(CGI.escapeHTML(status_label_1.name))
           expect(response.body).not_to include(CGI.escapeHTML(status_label_2.name))
         end

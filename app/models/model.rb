@@ -30,21 +30,14 @@ class Model < ApplicationRecord
   include Categorizable
   include Documentable
 
-  multisearchable(
+  include PgSearchable
+  pg_search_config(
     against: [:name, :model_number],
-    additional_attributes: ->(record) { { label: record.name } },
-  )
-
-  pg_search_scope(
-    :search,
-    against: [:name, :model_number], associated_against: {
+    associated_against: {
       category: [:name],
       manufacturer: [:name]
-    }, using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   slug :name

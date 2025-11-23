@@ -21,7 +21,7 @@ RSpec.describe "Categories", :inertia do
 
     describe "index page" do
       it "renders" do
-        category = create(:category)
+        category = create(:category, company: @admin.active_company)
 
         get categories_url
 

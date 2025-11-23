@@ -23,7 +23,7 @@ class VendorsController < ApplicationController
     authorize vendor
     render inertia: "Vendors/Show", props: {
       vendor: vendor.render(view: :show),
-      items: InertiaRails.optional(-> {
+      items: InertiaRails.optional {
         paginated_items = vendor.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render,
@@ -32,8 +32,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      }),
-      accessories: InertiaRails.optional(-> {
+      },
+      accessories: InertiaRails.optional {
         paginated_accessories = vendor.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render,
@@ -42,8 +42,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_accessories)
           }
         }
-      }),
-      consumables: InertiaRails.optional(-> {
+      },
+      consumables: InertiaRails.optional {
         paginated_consumables = vendor.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render,
@@ -52,8 +52,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_consumables)
           }
         }
-      }),
-      components: InertiaRails.optional(-> {
+      },
+      components: InertiaRails.optional {
         paginated_components = vendor.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render,
@@ -62,8 +62,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_components)
           }
         }
-      }),
-      licenses: InertiaRails.optional(-> {
+      },
+      licenses: InertiaRails.optional {
         paginated_licenses = vendor.licenses.includes_associated.page(params[:page] || 1)
         {
           data: paginated_licenses.render,
@@ -72,8 +72,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_licenses)
           }
         }
-      }),
-      contracts: InertiaRails.optional(-> {
+      },
+      contracts: InertiaRails.optional {
         paginated_contracts = vendor.contracts.includes_associated.page(params[:page] || 1)
         {
           data: paginated_contracts.render,
@@ -82,7 +82,7 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_contracts)
           }
         }
-      }),
+      },
     }
   end
 

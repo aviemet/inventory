@@ -18,14 +18,10 @@ class Vendor < ApplicationRecord
   include Ownable
   include Documentable
 
-  multisearchable(
-    against: [:name],
-    additional_attributes: ->(record) { { label: record.name } },
-  )
-
-  pg_search_scope(
-    :search,
-    against: [:name, :url], associated_against: {
+  include PgSearchable
+  pg_search_config(
+    against: [:name, :url],
+    associated_against: {
       items: [:name],
       contracts: [:name],
       accessories: [:name],
@@ -33,11 +29,7 @@ class Vendor < ApplicationRecord
       components: [:name],
       licenses: [:name],
     },
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   tracked

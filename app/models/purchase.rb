@@ -25,19 +25,15 @@
 class Purchase < ApplicationRecord
   include Ownable
 
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     associated_against: {
       order: [:order_number],
       item: [:name, :asset_tag, :serial],
       accessory: [:name, :serial, :model_number],
       component: [:name, :serial, :model_number],
       consumable: [:name, :serial, :model_number],
-    }, using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
-    ignoring: :accents,
   )
 
   tracked

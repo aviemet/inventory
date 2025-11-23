@@ -56,10 +56,8 @@ class User < ApplicationRecord
   before_save :coerce_json
   before_save :set_active_company
 
-  multisearchable(
-    against: [:email],
-    additional_attributes: ->(record) { { label: record.email } },
-  )
+  include PgSearchable
+  pg_search_config(against: [:email, :active], enable_multisearch: true)
 
   tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token, :active_company]
   resourcify

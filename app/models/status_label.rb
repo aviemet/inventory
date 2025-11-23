@@ -15,6 +15,9 @@
 #  index_status_labels_on_slug  (slug) UNIQUE
 #
 class StatusLabel < ApplicationRecord
+  include PgSearchable
+  pg_search_config(against: [:name])
+
   slug :name
 
   tracked

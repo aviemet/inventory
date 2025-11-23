@@ -45,22 +45,15 @@ class License < ApplicationRecord
   include Categorizable
   include Documentable
 
-  multisearchable(
-    against: [:name, :licenser_email],
-    additional_attributes: ->(record) { { label: record.name } },
-  )
-
-  pg_search_scope(
-    :search,
-    against: [:name, :qty, :key, :licenser_name, :licenser_email], associated_against: {
+  include PgSearchable
+  pg_search_config(
+    against: [:name, :qty, :key, :licenser_name, :licenser_email],
+    associated_against: {
       vendor: [:name],
       category: [:name],
       manufacturer: [:name]
-    }, using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   tracked

@@ -18,14 +18,9 @@
 class Smtp < ApplicationRecord
   include Ownable
 
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:name, :address, :port, :host],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
   )
 
   enum :security, { plain: 0, tls: 1, ssl: 2 }

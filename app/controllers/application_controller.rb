@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   private
 
   def first_run
-    redirect_to first_run_path if User.count == 0
+    redirect_to first_run_path if User.none?
   end
 
   # def decode_id
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
     render inertia: "Error", props: {
       status: 404,
-      message: t('activerecord.errors.message.not_found')
+      message: t("activerecord.errors.message.not_found")
     }
   end
 end

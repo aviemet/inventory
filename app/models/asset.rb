@@ -44,8 +44,8 @@ class Asset < ApplicationRecord
   include Assignable
   include Documentable
 
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:name, :asset_tag, :serial, :cost_cents],
     associated_against: {
       model: [:name, :model_number],
@@ -53,11 +53,7 @@ class Asset < ApplicationRecord
       default_location: [:name],
       category: [:name],
       manufacturer: [:name]
-    }, using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
-    ignoring: :accents,
   )
 
   tracked

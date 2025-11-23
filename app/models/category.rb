@@ -19,15 +19,8 @@ class Category < ApplicationRecord
   include Ownable
   include Fieldable
 
-  pg_search_scope(
-    :search,
-    against: [:name],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
-  )
+  include PgSearchable
+  pg_search_config(against: [:name])
 
   slug :slug_from_category_type
 

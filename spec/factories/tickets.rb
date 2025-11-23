@@ -36,5 +36,6 @@ FactoryBot.define do
 
     company
     created_by { association :person, company: company }
+    status { association :ticket_status }
   end
 end

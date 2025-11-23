@@ -105,24 +105,27 @@ RSpec.describe "Users", :inertia do
     login_admin
 
     it "renders" do
+      user = create(:user, company: @admin.active_company)
       get users_url
 
       expect(response).to have_http_status(:ok)
       expect_inertia.to render_component 'Users/Index'
-      expect(response.body).to include(CGI.escapeHTML(user.first_name))
+      expect(response.body).to include(CGI.escapeHTML(user.person.first_name))
     end
 
     context "with search params" do
       it "returns a filtered list of users" do
-        user1 = create(:user, { first_name: "Include", company: @admin.active_company })
-        user2 = create(:user, { first_name: "Exclude", company: @admin.active_company })
+        user1 = create(:user, company: @admin.active_company)
+        user1.person.update(first_name: "Include")
+        user2 = create(:user, company: @admin.active_company)
+        user2.person.update(first_name: "Exclude")
 
-        get users_url, params: { search: user1.first_name }
+        get users_url, params: { search: user1.person.first_name }
 
         expect(response).to have_http_status(:ok)
         expect_inertia.to render_component 'Users/Index'
-        expect(response.body).to include(CGI.escapeHTML(user1.first_name))
-        expect(response.body).not_to include(CGI.escapeHTML(user2.first_name))
+        expect(response.body).to include(CGI.escapeHTML(user1.person.first_name))
+        expect(response.body).not_to include(CGI.escapeHTML(user2.person.first_name))
       end
     end
 

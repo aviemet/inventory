@@ -23,7 +23,7 @@ class ManufacturersController < ApplicationController
     authorize manufacturer
     render inertia: "Manufacturers/Show", props: {
       manufacturer: manufacturer.render(view: :show),
-      items: InertiaRails.optional(-> {
+      items: InertiaRails.optional {
         paginated_items = manufacturer.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render,
@@ -32,8 +32,8 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      }),
-      accessories: InertiaRails.optional(-> {
+      },
+      accessories: InertiaRails.optional {
         paginated_accessories = manufacturer.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render,
@@ -42,8 +42,8 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_accessories)
           }
         }
-      }),
-      consumables: InertiaRails.optional(-> {
+      },
+      consumables: InertiaRails.optional {
         paginated_consumables = manufacturer.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render,
@@ -52,8 +52,8 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_consumables)
           }
         }
-      }),
-      components: InertiaRails.optional(-> {
+      },
+      components: InertiaRails.optional {
         paginated_components = manufacturer.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render,
@@ -62,7 +62,7 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_components)
           }
         }
-      }),
+      },
     }
   end
 

@@ -17,19 +17,10 @@ class Network < ApplicationRecord
   include Ownable
   include Documentable
 
-  multisearchable(
+  include PgSearchable
+  pg_search_config(
     against: [:name, :address, :gateway, :vlan_id],
-    additional_attributes: ->(record) { { label: record.name } },
-  )
-
-  pg_search_scope(
-    :search,
-    against: [:name, :address, :gateway, :vlan_id],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   tracked

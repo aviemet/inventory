@@ -28,6 +28,14 @@
 class Address < ApplicationRecord
   include Categorizable
 
+  include PgSearchable
+  pg_search_config(
+    against: [:address, :address_2, :city, :region, :country, :postal, :contact],
+    associated_against: {
+      contact: [],
+    },
+  )
+
   tracked
   resourcify
 

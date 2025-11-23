@@ -16,21 +16,13 @@
 class PersonGroup < ApplicationRecord
   include Ownable
 
-  multisearchable(
+  include PgSearchable
+  pg_search_config(
     against: [:name],
-    additional_attributes: ->(record) { { label: record.name } },
-  )
-
-  pg_search_scope(
-    :search,
-    against: [:name], associated_against: {
+    associated_against: {
       person: [:first_name, :last_name],
     },
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   tracked

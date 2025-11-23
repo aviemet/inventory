@@ -9,7 +9,7 @@ RSpec.describe "Settings::Ldaps", :inertia do
       get settings_ldaps_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Settings/Ldaps/Index'
+      expect_inertia.to render_component 'Settings/Ldap/Index'
     end
   end
 end

@@ -30,9 +30,10 @@ class Contract < ApplicationRecord
   include Categorizable
   include Documentable
 
-  multisearchable(
+  include PgSearchable
+  pg_search_config(
     against: [:name, :number],
-    additional_attributes: ->(record) { { label: record.name } },
+    enable_multisearch: true,
   )
 
   pg_search_scope(

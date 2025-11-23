@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.4.4"
 
 # Server
-gem "rails", ">= 7.1"
+gem "rails", ">= 8.1.1"
 gem "pg", ">= 1.1"
 gem "puma", ">= 6.0"
 
@@ -39,7 +39,7 @@ gem "js-routes", ">= 2.2" # replace with https://github.com/ElMassimo/js_from_ro
 gem "net-ldap", ">= 0.18.0"
 gem "overmind", "~> 2.5"
 gem "amazing_print", ">= 1.4"
-gem "delayed_job_active_record", ">= 4.1"
+gem "delayed_job_active_record", ">= 4.1" # replace with https://github.com/rails/solid_queue
 gem "store_base_sti_class", "~> 3.2"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -75,7 +75,7 @@ group :development, :test do
 
   # File annotation
   gem "chusaku", "~> 1.2", require: false
-  gem "annotate", "~> 3.2", require: false
+  gem "annotaterb", "~> 4.20", require: false
 end
 
 group :development do
@@ -98,7 +98,7 @@ group :development do
 
   # Tools for VSCode
   gem "solargraph", ">= 0.48.0", require: false
-  gem "ruby-lsp", "~> 0.22.1", require: false
+  gem "ruby-lsp", ">= 0.22.1", require: false
 end
 
 group :test do
