@@ -83,18 +83,18 @@ RSpec.configure do |config|
   # Database Cleaner
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.clean_with(:truncation, except: %w[ar_internal_metadata])
     Rails.application.load_seed
   end
 
   # Request specs cannot use a transaction because Capybara runs in a
   # separate thread with a different database connection.
   config.before type: :request do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :truncation, { except: %w[ar_internal_metadata] }
   end
 
   # Reset so other non-request specs don't have to deal with slow truncation.
-  config.after type: :request  do
+  config.after type: :request do
     DatabaseCleaner.strategy = :transaction
   end
 
@@ -105,7 +105,19 @@ RSpec.configure do |config|
   end
 
   config.after do
-    DatabaseCleaner.clean
+    retries = 0
+    begin
+      DatabaseCleaner.clean
+    rescue ActiveRecord::Deadlocked, PG::TRDeadlockDetected => e
+      retries += 1
+      if retries > 2
+        warn "WARNING: Database deadlock during cleanup (retry #{retries}). Multiple test processes may be running. Consider running tests sequentially."
+      end
+      ActiveRecord::Base.clear_active_connections!
+      sleep(rand(0.05..0.15))
+      retry if retries <= 3
+      raise
+    end
   end
 
   # Shoulda
