@@ -18,7 +18,7 @@ class PersonGroupsController < ApplicationController
     authorize person_group
     render inertia: "PersonGroups/Show", props: {
       person_group: -> { person_group.render(view: :show) },
-      people: InertiaRails.lazy(-> {
+      people: InertiaRails.optional(-> {
         paginated_people = person_group.people.includes_associated.page(params[:page] || 1)
         {
           data: paginated_people.render,

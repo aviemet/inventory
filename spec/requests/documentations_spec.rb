@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.describe "Documentations", :inertia do
+RSpec.describe "Documentation", :inertia do
   def valid_attributes(documentable)
     attrs = {
       documentation: attributes_for(
@@ -34,7 +34,7 @@ RSpec.describe "Documentations", :inertia do
         get documentations_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Documentations/Index'
+        expect_inertia.to render_component 'Documentation/Index'
         expect(response.body).to include(CGI.escapeHTML(documentation.title))
       end
 
@@ -46,7 +46,7 @@ RSpec.describe "Documentations", :inertia do
           get documentations_url, params: { search: documentation1.title }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Documentations/Index'
+          expect_inertia.to render_component 'Documentation/Index'
           expect(response.body).to include(CGI.escapeHTML(documentation1.title))
           expect(response.body).not_to include(CGI.escapeHTML(documentation2.title))
         end
@@ -63,7 +63,7 @@ RSpec.describe "Documentations", :inertia do
       get documentation_url({ slug: documentation.slug })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Documentations/Show'
+      expect_inertia.to render_component 'Documentation/Show'
     end
   end
 
@@ -74,7 +74,7 @@ RSpec.describe "Documentations", :inertia do
       get new_documentation_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Documentations/New'
+      expect_inertia.to render_component 'Documentation/New'
     end
   end
 
@@ -87,7 +87,7 @@ RSpec.describe "Documentations", :inertia do
       get edit_documentation_url(documentation)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Documentations/Edit'
+      expect_inertia.to render_component 'Documentation/Edit'
     end
   end
 

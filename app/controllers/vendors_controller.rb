@@ -23,7 +23,7 @@ class VendorsController < ApplicationController
     authorize vendor
     render inertia: "Vendors/Show", props: {
       vendor: vendor.render(view: :show),
-      items: InertiaRails.lazy(-> {
+      items: InertiaRails.optional(-> {
         paginated_items = vendor.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render,
@@ -33,7 +33,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      accessories: InertiaRails.lazy(-> {
+      accessories: InertiaRails.optional(-> {
         paginated_accessories = vendor.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render,
@@ -43,7 +43,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      consumables: InertiaRails.lazy(-> {
+      consumables: InertiaRails.optional(-> {
         paginated_consumables = vendor.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render,
@@ -53,7 +53,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      components: InertiaRails.lazy(-> {
+      components: InertiaRails.optional(-> {
         paginated_components = vendor.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render,
@@ -63,7 +63,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      licenses: InertiaRails.lazy(-> {
+      licenses: InertiaRails.optional(-> {
         paginated_licenses = vendor.licenses.includes_associated.page(params[:page] || 1)
         {
           data: paginated_licenses.render,
@@ -73,7 +73,7 @@ class VendorsController < ApplicationController
           }
         }
       }),
-      contracts: InertiaRails.lazy(-> {
+      contracts: InertiaRails.optional(-> {
         paginated_contracts = vendor.contracts.includes_associated.page(params[:page] || 1)
         {
           data: paginated_contracts.render,

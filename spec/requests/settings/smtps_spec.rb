@@ -9,7 +9,7 @@ RSpec.describe "Settings::Smtps", :inertia do
       get settings_smtps_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Settings/Smtps/Index'
+      expect_inertia.to render_component 'Settings/Mail/Index'
     end
   end
 
@@ -20,7 +20,7 @@ RSpec.describe "Settings::Smtps", :inertia do
       get new_settings_smtp_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Settings/Smtps/New'
+      expect_inertia.to render_component 'Settings/Mail/New'
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe "Settings::Smtps", :inertia do
       get edit_settings_smtp_url(smtp)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Settings/Smtps/Edit'
+      expect_inertia.to render_component 'Settings/Mail/Edit'
     end
   end
 end

@@ -24,7 +24,7 @@ class DepartmentsController < ApplicationController
     authorize department
     render inertia: "Departments/Show", props: {
       department: department.render(view: :show),
-      items: InertiaRails.lazy(-> {
+      items: InertiaRails.optional(-> {
         paginated_items = department.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render,
@@ -34,7 +34,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      accessories: InertiaRails.lazy(-> {
+      accessories: InertiaRails.optional(-> {
         paginated_accessories = department.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render,
@@ -44,7 +44,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      consumables: InertiaRails.lazy(-> {
+      consumables: InertiaRails.optional(-> {
         paginated_consumables = department.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render,
@@ -54,7 +54,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      components: InertiaRails.lazy(-> {
+      components: InertiaRails.optional(-> {
         paginated_components = department.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render,
@@ -64,7 +64,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      licenses: InertiaRails.lazy(-> {
+      licenses: InertiaRails.optional(-> {
         paginated_licenses = department.licenses.includes_associated.page(params[:page] || 1)
         {
           data: paginated_licenses.render,
@@ -74,7 +74,7 @@ class DepartmentsController < ApplicationController
           }
         }
       }),
-      people: InertiaRails.lazy(-> {
+      people: InertiaRails.optional(-> {
         paginated_people = department.people.includes_associated.page(params[:page] || 1)
         {
           data: paginated_people.render,

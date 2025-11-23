@@ -91,6 +91,7 @@ GEM
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.3)
+    backport (1.2.0)
     base64 (0.3.0)
     bcrypt (3.1.20)
     benchmark (0.5.0)
@@ -98,6 +99,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.19.0)
       msgpack (~> 1.2)
+    brakeman (7.1.1)
+      racc
     builder (3.3.0)
     bullet (8.1.0)
       activesupport (>= 3.0.0)
@@ -112,6 +115,8 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     cgi (0.5.0)
+    childprocess (5.1.0)
+      logger (~> 1.5)
     chusaku (1.4.1)
       railties (>= 3.0)
     coderay (1.1.3)
@@ -175,10 +180,28 @@ GEM
     generator_spec (0.10.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
+    glob (0.4.1)
     globalid (1.3.0)
       activesupport (>= 6.1)
+    highline (3.1.2)
+      reline
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    i18n-js (4.2.4)
+      glob (>= 0.4.0)
+      i18n
+    i18n-tasks (1.1.0)
+      activesupport (>= 4.0.2)
+      ast (>= 2.1.0)
+      erubi
+      highline (>= 3.0.0)
+      i18n
+      parser (>= 3.2.2.1)
+      prism
+      rails-i18n
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.8, >= 1.8.1)
+      terminal-table (>= 1.5.1)
     inertia_rails (3.13.0)
       railties (>= 6)
     io-console (0.8.1)
@@ -187,6 +210,7 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
+    jaro_winkler (1.6.1)
     js-routes (2.3.5)
       railties (>= 5)
       sorbet-runtime
@@ -207,7 +231,17 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    kramdown (2.5.1)
+      rexml (>= 3.3.9)
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
     language_server-protocol (3.17.0.5)
+    launchy (3.1.1)
+      addressable (~> 2.8)
+      childprocess (~> 5.0)
+      logger (~> 1.6)
+    letter_opener (1.10.0)
+      launchy (>= 2.2, < 4)
     lint_roller (1.1.0)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -271,6 +305,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-musl)
       racc (~> 1.4)
+    observer (0.1.2)
     oj (3.16.12)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
@@ -357,6 +392,9 @@ GEM
     rails-html-sanitizer (1.6.2)
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
+    rails-i18n (7.0.10)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (7.2.3)
       actionpack (= 7.2.3)
       activesupport (= 7.2.3)
@@ -384,6 +422,8 @@ GEM
     responders (3.2.0)
       actionpack (>= 7.0)
       railties (>= 7.0)
+    reverse_markdown (3.0.0)
+      nokogiri
     rexml (3.4.4)
     rolify (6.0.1)
     rspec-core (3.13.6)
@@ -403,6 +443,9 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.6)
+    rspec-watcher (0.3.3)
+      listen (~> 3.0)
+      rspec-core (~> 3.0)
     rubocop (1.81.7)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -456,12 +499,35 @@ GEM
       activerecord (> 3.0.0)
       activesupport (> 3.0.0)
       rake
+    solargraph (0.57.0)
+      backport (~> 1.2)
+      benchmark (~> 0.4)
+      bundler (~> 2.0)
+      diff-lcs (~> 1.4)
+      jaro_winkler (~> 1.6, >= 1.6.1)
+      kramdown (~> 2.3)
+      kramdown-parser-gfm (~> 1.1)
+      logger (~> 1.6)
+      observer (~> 0.1)
+      ostruct (~> 0.6)
+      parser (~> 3.0)
+      prism (~> 1.4)
+      rbs (>= 3.6.1, <= 4.0.0.dev.4)
+      reverse_markdown (~> 3.0)
+      rubocop (~> 1.76)
+      thor (~> 1.0)
+      tilt (~> 2.0)
+      yard (~> 0.9, >= 0.9.24)
+      yard-activesupport-concern (~> 0.0)
+      yard-solargraph (~> 0.1)
     sorbet-runtime (0.6.12784)
-    spring (4.4.0)
     store_base_sti_class (3.5.0)
       activerecord (>= 7.2, < 8.2)
     stringio (3.1.8)
+    terminal-table (4.0.0)
+      unicode-display_width (>= 1.1.1, < 4)
     thor (1.4.0)
+    tilt (2.6.1)
     time_for_a_boolean (0.2.2)
       activerecord
       railties
@@ -508,6 +574,11 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yard (0.9.37)
+    yard-activesupport-concern (0.0.1)
+      yard (>= 0.8)
+    yard-solargraph (0.1.0)
+      yard (~> 0.9)
     zeitwerk (2.7.3)
 
 PLATFORMS
@@ -531,6 +602,7 @@ DEPENDENCIES
   amazing_print (>= 1.4)
   annotate (~> 3.2)
   bootsnap
+  brakeman (~> 7.1)
   bullet (>= 7.0)
   capybara (>= 3.39)
   chusaku (~> 1.2)
@@ -542,16 +614,19 @@ DEPENDENCIES
   devise (>= 4.8)
   devise_invitable (>= 2.0)
   devise_ldap_authenticatable (>= 0.8.7)
-  dotenv-rails (>= 2.8)
+  dotenv-rails (>= 3.1)
   factory_bot (>= 6.4)
   factory_bot_rails (>= 6.4)
   faker!
   generator_spec (>= 0.9.4)
+  i18n-js (~> 4.2)
+  i18n-tasks (~> 1.1)
   inertia_rails (>= 3.1.0)
   ipaddress_2 (>= 0.14.0)
   js-routes (>= 2.2)
   jsonb_accessor (>= 1.3)
   kaminari (>= 1.2)
+  letter_opener (~> 1.10)
   money-rails (>= 1.15)
   net-ldap (>= 0.18.0)
   oj_serializers (>= 2.0)
@@ -566,6 +641,7 @@ DEPENDENCIES
   rails (>= 7.1)
   rolify (>= 6.0)
   rspec-rails (>= 6.0.1)
+  rspec-watcher (~> 0.3.3)
   rubocop-daemon (>= 0.3.2)
   rubocop-performance (>= 1.13)
   rubocop-rails (>= 2.14)
@@ -575,7 +651,7 @@ DEPENDENCIES
   shoulda-matchers (>= 5.1)
   simplecov (>= 0.22.0)
   slug (>= 4.1)
-  spring
+  solargraph (>= 0.48.0)
   store_base_sti_class (~> 3.2)
   time_for_a_boolean (>= 0.2.1)
   types_from_serializers
@@ -585,7 +661,7 @@ DEPENDENCIES
   webdrivers (>= 5.3)
 
 RUBY VERSION
-   ruby 3.3.4p94
+   ruby 3.4.4p34
 
 BUNDLED WITH
-   2.5.18
+   2.6.7
