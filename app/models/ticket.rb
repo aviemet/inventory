@@ -58,6 +58,14 @@ class Ticket < ApplicationRecord
 
   attribute :status_id, default: 1
 
+  before_validation :ensure_status
+
+  def ensure_status
+    return unless status_id.nil?
+
+    self.status_id = persisted? ? status_id_was : 1
+  end
+
   scope :includes_associated, -> { includes([:status, :created_by, :asset, assignments: :person]) }
 
   accepts_nested_attributes_for :assignments

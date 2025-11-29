@@ -11,7 +11,7 @@ module Assignable
       assignment = Assignment.new(params)
       assignment.assignable = self
       assignment.assign_toable = assign_toable
-      assignment.location_id ||= assign_toable_location_id(assign_toable) || self.default_location_id
+      assignment.location_id ||= assign_toable_location_id(assign_toable)
 
       self.transaction do
         asset_class = self.class.name.downcase
