@@ -64,4 +64,7 @@ Rails.application.configure do
 
   # Disable caching classes in when rspec-watcher is running
   config.enable_reloading = ENV["RSPEC_WATCHER"] == "true"
+
+  # Silence Devise deprecation warnings
+  config.active_support.report_deprecations = false
 end
