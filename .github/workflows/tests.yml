@@ -41,19 +41,28 @@ jobs:
           bundler-cache: true
 
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
-          cache: 'yarn'
 
-      - name: Set up Yarn
-        run: npm install -g yarn
-          
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            .yarn/cache
+            .yarn/install-state.gz
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Install Ruby dependencies
         run: bundle install --jobs 4 --retry 3
 
       - name: Install Node.js dependencies
-        run: yarn install
+        run: yarn install --immutable
 
       - name: Prepare database
         env:

@@ -18,7 +18,7 @@ module Inventory
     #
     config.time_zone = "Pacific Time (US & Canada)"
 
-    config.autoload_lib(ignore: %w[assets tasks])
+    config.autoload_lib(ignore: %w[assets tasks generators])
 
     config.generators do |g|
       g.test_framework      :rspec
