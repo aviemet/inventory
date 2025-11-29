@@ -58,22 +58,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Cache Cypress binary
-        id: cypress-cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/Cypress
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cypress-
-
       - name: Install Ruby dependencies
         run: bundle install --jobs 4 --retry 3
 
       - name: Install Node.js dependencies
-        env:
-          CYPRESS_INSTALL_BINARY: ${{ steps.cypress-cache.outputs.cache-hit == 'true' && '0' || '1' }}
-        run: yarn install --immutable
+        uses: cypress-io/github-action@v6
+        with:
+          runTests: false
+          install-command: yarn install --immutable
 
       - name: Prepare database
         env:
