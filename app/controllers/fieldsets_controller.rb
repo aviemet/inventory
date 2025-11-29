@@ -1,6 +1,8 @@
 class FieldsetsController < ApplicationController
   before_action :set_fieldset, only: [:show, :edit, :update, :destroy]
 
+  strong_params :fieldset, permit: [:name, :description]
+
   # @route GET /fieldsets (fieldsets)
   def index
     @fieldsets = Fieldset.all
@@ -62,10 +64,5 @@ class FieldsetsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_fieldset
     @fieldset = Fieldset.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def fieldset_params
-    params.expect(fieldset: [:name, :description])
   end
 end

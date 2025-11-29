@@ -2,6 +2,8 @@ class Api::LocationsController < Api::ApiController
   expose :locations, -> { @active_company.locations }
   expose :loc, id: ->{ params[:slug] }, scope: ->{ @active_company.items.includes_associated }, find_by: :slug
 
+  strong_params :location, permit: [:name, :currency, :parent_id]
+
   # @route GET /api/locations (api_locations)
   def index
     render json: locations.includes_associated.render
@@ -39,8 +41,4 @@ class Api::LocationsController < Api::ApiController
   end
 
   private
-
-  def location_params
-    params.expect(location: [:name, :currency, :parent_id])
-  end
 end

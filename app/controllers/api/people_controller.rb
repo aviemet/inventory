@@ -2,6 +2,8 @@ class Api::PeopleController < Api::ApiController
   expose :people, -> { @active_company.people }
   expose :person, id: ->{ params[:slug] }, scope: ->{ @active_company.people.includes_associated }, find_by: :slug
 
+  strong_params :person, permit: [:name, :url]
+
   # @route GET /api/people (api_people)
   def index
     render json: people.includes_associated.render
@@ -40,8 +42,4 @@ class Api::PeopleController < Api::ApiController
   end
 
   private
-
-  def person_params
-    params.expect(person: [:name, :url])
-  end
 end

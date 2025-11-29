@@ -1,7 +1,11 @@
 class ContractsController < ApplicationController
 
-  expose :contracts, -> { search(@active_company.contracts.includes_associated, sortable_fields) }
+  expose :contracts, -> { search(@active_company.contracts.includes_associated) }
   expose :contract, id: ->{ params[:slug] }, scope: ->{ @active_company.contracts.includes_associated }, find_by: :slug
+
+  strong_params :contract, permit: [:name, :number, :begins_at, :ends_at, :notes, :category_id, :vendor_id]
+
+  sortable_fields %w(name begins_at ends_at vendors.name categories.name)
 
   # @route GET /contracts (contracts)
   def index
@@ -70,15 +74,5 @@ class ContractsController < ApplicationController
     authorize contract
     contract.destroy
     redirect_to contracts_url, notice: "Contract was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name begins_at ends_at vendors.name categories.name).freeze
-  end
-
-  def contract_params
-    params.expect(contract: [:name, :number, :begins_at, :ends_at, :notes, :category_id, :vendor_id])
   end
 end

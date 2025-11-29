@@ -2,6 +2,8 @@ class Settings::SmtpsController < ApplicationController
   expose :smtps, -> { @active_company.smtps }
   expose :smtp
 
+  strong_params :smtp, permit: [:name, :host, :domain, :port, :security, :username, :password, :address, :notes]
+
   # @route GET /settings/mail (settings_smtps)
   def index
     render inertia: "Settings/Mail/Index", props: {
@@ -53,12 +55,6 @@ class Settings::SmtpsController < ApplicationController
 
   # @route DELETE /settings/mail/:id (settings_smtp)
   def destroy
-  end
-
-  private
-
-  def smtp_params
-    params.expect(smtp: [:name, :host, :domain, :port, :security, :username, :password, :address, :notes])
   end
 
 end

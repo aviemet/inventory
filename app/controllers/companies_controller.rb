@@ -1,7 +1,11 @@
 class CompaniesController < ApplicationController
 
-  expose :companies, -> { search(current_user.companies, sortable_fields) }
+  expose :companies, -> { search(current_user.companies) }
   expose :company, id: ->{ params[:slug] }, scope: ->{ current_user.companies }, find_by: :slug
+
+  strong_params :company, permit: [:name]
+
+  sortable_fields %w(name locations.count departments.count assets.count people.count)
 
   # @route GET /companies (companies)
   def index
@@ -87,14 +91,4 @@ class CompaniesController < ApplicationController
   #     format.html { render template: "companies/#{params[:snippet]}", layout: false }
   #   end
   # end
-
-  private
-
-  def sortable_fields
-    %w(name locations.count departments.count assets.count people.count).freeze
-  end
-
-  def company_params
-    params.expect(company: [:name])
-  end
 end

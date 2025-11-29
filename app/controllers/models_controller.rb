@@ -1,8 +1,13 @@
 class ModelsController < ApplicationController
   include OwnableConcern
 
-  expose :models, -> { search(@active_company.models.includes_associated, sortable_fields) }
+  expose :models, -> { search(@active_company.models.includes_associated) }
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, find_by: :slug
+
+  strong_params :model, permit: [:name, :model_number, :manufacturer_id, :category_id, :notes]
+
+  sortable_fields %w(name model_number manufacturers.name categories.name)
+
   # @route GET /models (models)
   def index
     authorize models
@@ -80,15 +85,5 @@ class ModelsController < ApplicationController
       format.html { redirect_to models_url, notice: "Model was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  private
-
-  def sortable_fields
-    %w(name model_number manufacturers.name categories.name).freeze
-  end
-
-  def model_params
-    params.expect(model: [:name, :model_number, :manufacturer_id, :category_id, :notes])
   end
 end

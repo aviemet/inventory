@@ -4,6 +4,25 @@ class PersonGroupsController < ApplicationController
   expose :person_groups, -> { @active_company.person_groups.includes_associated }
   expose :person_group, id: ->{ params[:slug] }, scope: ->{ @active_company.person_groups.includes_associated }, find_by: :slug
 
+  strong_params :person_group, permit: [:name, :description, permissions: [
+    company:      [:admin],
+    item:         [:index, :show, :create, :update, :delete, :checkout, :checkin],
+    accessory:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
+    component:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
+    consumable:   [:index, :show, :create, :update, :delete, :checkout],
+    license:      [:index, :show, :create, :update, :delete, :checkout, :checkin],
+    network:      [:index, :show, :create, :update, :delete],
+    vendor:       [:index, :show, :create, :update, :delete],
+    contract:     [:index, :show, :create, :update, :delete],
+    category:     [:index, :show, :create, :update, :delete],
+    model:        [:index, :show, :create, :update, :delete],
+    manufacturer: [:index, :show, :create, :update, :delete],
+    department:   [:index, :show, :create, :update, :delete],
+    location:     [:index, :show, :create, :update, :delete],
+    person:       [:index, :show, :create, :update, :delete],
+    user:         [:index, :show, :create, :update, :delete],
+  ]]
+
   # @route GET /people/groups (person_groups)
   def index
     authorize person_groups
@@ -78,30 +97,5 @@ class PersonGroupsController < ApplicationController
     authorize person_group
     person_group.destroy
     redirect_to person_groups_url, notice: "Group was successfully destroyed."
-  end
-
-  private
-
-  def person_group_params
-    params.expect(
-      person_group: [:name, :description, permissions: [
-        company:      [:admin],
-        item:         [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        accessory:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        component:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        consumable:   [:index, :show, :create, :update, :delete, :checkout],
-        license:      [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        network:      [:index, :show, :create, :update, :delete],
-        vendor:       [:index, :show, :create, :update, :delete],
-        contract:     [:index, :show, :create, :update, :delete],
-        category:     [:index, :show, :create, :update, :delete],
-        model:        [:index, :show, :create, :update, :delete],
-        manufacturer: [:index, :show, :create, :update, :delete],
-        department:   [:index, :show, :create, :update, :delete],
-        location:     [:index, :show, :create, :update, :delete],
-        person:       [:index, :show, :create, :update, :delete],
-        user:         [:index, :show, :create, :update, :delete],
-      ]],
-    )
   end
 end

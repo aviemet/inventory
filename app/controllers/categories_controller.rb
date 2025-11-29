@@ -1,7 +1,11 @@
 class CategoriesController < ApplicationController
 
-  expose :categories, -> { search(@active_company.categories.all, sortable_fields) }
+  expose :categories, -> { search(@active_company.categories.all) }
   expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories.includes_associated }, find_by: :slug
+
+  strong_params :category, permit: [:categorizable_id, :categorizable_type, :name, :description]
+
+  sortable_fields %w(name categorizable_type qty)
 
   # @route GET /categories (categories)
   def index
@@ -73,15 +77,5 @@ class CategoriesController < ApplicationController
       format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  private
-
-  def sortable_fields
-    %w(name categorizable_type qty).freeze
-  end
-
-  def category_params
-    params.expect(category: [:categorizable_id, :categorizable_type, :name, :description])
   end
 end

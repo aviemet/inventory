@@ -18,6 +18,8 @@ module Assignable
       end
 
       def unassign(assignment = self.assignments.where(active: true).last, returned_at: Time.current)
+        return false unless assignment
+
         success = false
 
         self.transaction do

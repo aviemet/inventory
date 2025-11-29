@@ -1,8 +1,12 @@
 class ConsumablesController < ApplicationController
   include OwnableConcern
 
-  expose :consumables, -> { search(@active_company.consumables.includes_associated, sortable_fields) }
+  expose :consumables, -> { search(@active_company.consumables.includes_associated) }
   expose :consumable, scope: ->{ @active_company.consumables }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
+  strong_params :consumable, permit: [:name, :min_qty, :qty, :cost, :serial, :asset_tag, :cost_currency, :requestable, :notes, :model_id, :manufacturer_id, :category_id, :vendor_id, :default_location_id]
+
+  sortable_fields %w(name min_qty qty cost requestable model.name model.model_number manufacturers.name categories.name vendors.name)
 
   # @route GET /consumables (consumables)
   def index
@@ -107,15 +111,5 @@ class ConsumablesController < ApplicationController
       format.html { redirect_to consumables_url, notice: "Consumable was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  private
-
-  def sortable_fields
-    %w(name min_qty qty cost requestable model.name model.model_number manufacturers.name categories.name vendors.name).freeze
-  end
-
-  def consumable_params
-    params.expect(consumable: [:name, :min_qty, :qty, :cost, :serial, :asset_tag, :cost_currency, :requestable, :notes, :model_id, :manufacturer_id, :category_id, :vendor_id, :default_location_id])
   end
 end

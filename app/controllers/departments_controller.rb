@@ -2,8 +2,12 @@ class DepartmentsController < ApplicationController
 
   include ContactableConcern
 
-  expose :departments, -> { search(@active_company.departments.includes_associated, sortable_fields) }
+  expose :departments, -> { search(@active_company.departments.includes_associated) }
   expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
+
+  strong_params :department, permit: [:name, :slug, :location_id, :notes]
+
+  sortable_fields %w(name items.count accessories.count components.count consumables.count people.count)
 
   # @route GET /departments (departments)
   def index
@@ -133,15 +137,5 @@ class DepartmentsController < ApplicationController
     authorize department
     department.destroy
     redirect_to departments_url, notice: "Department was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name items.count accessories.count components.count consumables.count people.count).freeze
-  end
-
-  def department_params
-    params.expect(department: [:name, :slug, :location_id, :notes])
   end
 end

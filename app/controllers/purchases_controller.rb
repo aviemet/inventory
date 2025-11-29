@@ -1,6 +1,8 @@
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
+  strong_params :purchase, permit: [:item_id, :price, :shipping, :tax, :qty, :notes]
+
   # @route GET /purchases (purchases)
   def index
     @purchases = Purchase.all
@@ -66,9 +68,5 @@ class PurchasesController < ApplicationController
 
   def set_purchase
     @purchase = Purchase.find(params[:id])
-  end
-
-  def purchase_params
-    params.expect(purchase: [:item_id, :price, :shipping, :tax, :qty, :notes])
   end
 end

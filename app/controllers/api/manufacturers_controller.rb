@@ -2,6 +2,8 @@ class Api::ManufacturersController < Api::ApiController
   expose :manufacturers, -> { @active_company.manufacturers }
   expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
 
+  strong_params :manufacturer, permit: [:name]
+
   # @route GET /api/manufacturers (api_manufacturers)
   def index
     render json: manufacturers.includes_associated.render
@@ -39,8 +41,4 @@ class Api::ManufacturersController < Api::ApiController
   end
 
   private
-
-  def manufacturer_params
-    params.expect(manufacturer: [:name])
-  end
 end

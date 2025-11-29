@@ -43,9 +43,11 @@ RSpec.describe "Assignments" do
       it "assigns an accessory to an assignable and redirects to the assignable" do
         assign_toables.each_value do |model|
           accessory = create(:accessory, company: @admin.active_company)
+
           expect{
             post assignments_url, params: { assignment: assignment_params(accessory, model) }
           }.to change(Assignment, :count).by(1)
+
           expect(response).to redirect_to(accessory)
         end
       end
@@ -141,6 +143,7 @@ RSpec.describe "Assignments" do
           patch unassign_assignment_url(assignment.id), params: {
             assignment: assignment_params(item, model)
           }
+
           expect(assignment.reload.active).to be(false)
         end
       end

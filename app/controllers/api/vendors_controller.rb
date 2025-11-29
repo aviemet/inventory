@@ -2,6 +2,8 @@ class Api::VendorsController < Api::ApiController
   expose :vendors, -> { params[:category] ? @active_company.vendors.find_by(category: params[:category]) : @active_company.vendors }
   expose :vendor, id: ->{ params[:slug] }, scope: ->{ @active_company.vendors.includes_associated }, vendor: Vendor, find_by: :slug
 
+  strong_params :vendor, permit: [:name, :url]
+
   # @route GET /api/vendors (api_vendors)
   def index
     render json: vendors.includes_associated.render
@@ -41,8 +43,4 @@ class Api::VendorsController < Api::ApiController
   end
 
   private
-
-  def vendor_params
-    params.expect(vendor: [:name, :url])
-  end
 end

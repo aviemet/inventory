@@ -1,14 +1,16 @@
 class AssetsController < ApplicationController
   include OwnableConcern
 
-  expose :assets, -> { search(@active_company.assets.includes_associated, sortable_fields) }
+  expose :assets, -> { search(@active_company.assets.includes_associated) }
   expose :asset, scope: ->{ @active_company.assets }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   strong_params :asset, permit: [:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable, nics: [:mac, :ip]]
 
+  sortable_fields %w(name asset_tag serial cost cost_cents purchased_at requestable type models.name vendors.name categories.name manufacturers.name departments.name)
+
   # @route GET /inventory (assets)
   def index
-    paginated_assets = assets.page(params[:page] || 1).per(current_user.limit(:assets))
+    paginated_assets = paginate(assets, :assets)
 
     render inertia: "Assets/Index", props: {
       assets: -> { paginated_assets.render(view: :index) },
@@ -43,10 +45,6 @@ class AssetsController < ApplicationController
 
   def redirect_to_asset_type_controller(action)
     redirect_to controller: asset.type.downcase.pluralize, action:, id: asset
-  end
-
-  def sortable_fields
-    %w(name asset_tag serial cost cost_cents purchased_at requestable type models.name vendors.name categories.name manufacturers.name departments.name).freeze
   end
 
 end

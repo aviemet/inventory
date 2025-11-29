@@ -3,8 +3,20 @@ class PeopleController < ApplicationController
 
   include ContactableConcern
 
-  expose :people, -> { search(@active_company.people.includes_associated, sortable_fields) }
+  expose :people, -> { search(@active_company.people.includes_associated) }
   expose :person, scope: ->{ @active_company.people }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
+  strong_params :person, permit: [:id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id,
+    user_attributes: [:id, :email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active],
+    contact_attributes: [
+      emails_attributes: [:id, :email, :_destroy],
+      phones_attributes: [:id, :number, :_destroy],
+      addresses_attributes: [:id, :address, :_destroy],
+      websites_attributes: [:id, :url, :_destroy]
+    ]
+  ]
+
+  sortable_fields %w(first_name last_name employee_number job_title guid manager.name location.name items.count accessories.count department.name)
 
   # @route GET /people (people)
   def index
@@ -88,22 +100,5 @@ class PeopleController < ApplicationController
     end
 
     adjusted_params
-  end
-
-  def sortable_fields
-    %w(first_name last_name employee_number job_title guid manager.name location.name items.count accessories.count department.name).freeze
-  end
-
-  def person_params
-    params.expect(
-      person: [:id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id,
-               user_attributes: [:id, :email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active],
-               contact_attributes: [
-                 emails_attributes: [:id, :email, :_destroy],
-                 phones_attributes: [:id, :number, :_destroy],
-                 addresses_attributes: [:id, :address, :_destroy],
-                 websites_attributes: [:id, :url, :_destroy],
-               ]],
-    )
   end
 end

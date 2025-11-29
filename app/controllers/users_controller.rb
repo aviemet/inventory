@@ -2,8 +2,12 @@ class UsersController < ApplicationController
 
   include ContactableConcern
 
-  expose :users, -> { search(User.all.includes_associated, sortable_fields) }
+  expose :users, -> { search(User.all.includes_associated) }
   expose :user
+
+  strong_params :user, permit: [:email, :password, :active_company, :active, :user_preferences, person: [:first_name, :last_name], company: [:name]]
+
+  sortable_fields %w(email active person.name active_company.name)
 
   # @route GET /users (user_registration)
   def index
@@ -101,15 +105,5 @@ class UsersController < ApplicationController
     authorize user
     user.destroy
     redirect_to users_url, notice: "User was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(email active person.name active_company.name).freeze
-  end
-
-  def user_params
-    params.expect(user: [:email, :password, :active_company, :active, :user_preferences, person: [:first_name, :last_name], company: [:name]])
   end
 end

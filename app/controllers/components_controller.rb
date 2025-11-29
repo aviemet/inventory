@@ -1,8 +1,12 @@
 class ComponentsController < ApplicationController
   include OwnableConcern
 
-  expose :components, -> { search(@active_company.components.includes_associated, sortable_fields) }
+  expose :components, -> { search(@active_company.components.includes_associated) }
   expose :component, scope: ->{ @active_company.components }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
+  strong_params :component, permit: [:name, :model_id, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id, :status_label_id]
+
+  sortable_fields %w(name min_qty qty cost model.name model.model_number manufacturers.name categories.name vendors.name)
 
   # @route GET /components (components)
   def index
@@ -107,15 +111,5 @@ class ComponentsController < ApplicationController
       format.html { redirect_to components_url, notice: "Component was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  private
-
-  def sortable_fields
-    %w(name min_qty qty cost model.name model.model_number manufacturers.name categories.name vendors.name).freeze
-  end
-
-  def component_params
-    params.expect(component: [:name, :model_id, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id, :status_label_id])
   end
 end

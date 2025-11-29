@@ -1,8 +1,12 @@
 class NetworksController < ApplicationController
   include OwnableConcern
 
-  expose :networks, -> { search(@active_company.networks, sortable_fields) }
+  expose :networks, -> { search(@active_company.networks) }
   expose :network, scope: ->{ @active_company.networks }, find: ->(id, scope){ scope.find(id) }
+
+  strong_params :network, permit: [:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes]
+
+  sortable_fields %w(name address gateway dhcp_start dhcp_end vlan_id)
 
   # @route GET /networks (networks)
   def index
@@ -101,13 +105,5 @@ class NetworksController < ApplicationController
       is_first_page: current_page == 1,
       is_last_page: current_page == pages
     }
-  end
-
-  def sortable_fields
-    %w(name address gateway dhcp_start dhcp_end vlan_id).freeze
-  end
-
-  def network_params
-    params.expect(network: [:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes])
   end
 end

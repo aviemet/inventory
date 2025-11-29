@@ -3,9 +3,13 @@ class LocationsController < ApplicationController
 
   include ContactableConcern
 
-  expose :locations, -> { search(@active_company.locations.includes_associated, sortable_fields) }
+  expose :locations, -> { search(@active_company.locations.includes_associated) }
   # location is used as a local variable by redirect_to
   expose :loc, model: Location, id: ->{ params[:slug] }, scope: ->{ @active_company.locations.includes_associated }, find_by: :slug
+
+  strong_params :location, permit: [:name, :parent_id, :currency, :department_id]
+
+  sortable_fields %w(name currency items accessories components consumables departments.name)
 
   # @route GET /locations (locations)
   def index
@@ -85,16 +89,5 @@ class LocationsController < ApplicationController
     authorize loc, policy_class: LocationPolicy
     loc.destroy
     redirect_to locations_url, notice: "Location was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name currency items accessories components consumables departments.name).freeze
-  end
-
-  # contact_attributes from Concern
-  def location_params
-    params.expect(location: [:name, :parent_id, :currency, :department_id])
   end
 end

@@ -1,6 +1,8 @@
 class Settings::LdapsController < ApplicationController
   expose :ldap
 
+  strong_params :ldap, permit: [:name, :host, :port, :domain, :username, :password, :tree_base, :user_search, :sync_interval]
+
   # @route GET /settings/ldap (settings_ldaps)
   def index
     ldap = @active_company&.ldap
@@ -45,11 +47,5 @@ class Settings::LdapsController < ApplicationController
   def destroy
     ldap.destroy
     redirect_to settings_ldaps_path
-  end
-
-  private
-
-  def ldap_params
-    params.expect(ldap: [:name, :host, :port, :domain, :username, :password, :tree_base, :user_search, :sync_interval])
   end
 end

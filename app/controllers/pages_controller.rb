@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  strong_params :settings, permit: [:dark_mode]
+
   # @route GET / (root)
   # @route GET /dashboard (dashboard)
   def dashboard
@@ -11,11 +13,5 @@ class PagesController < ApplicationController
       company: @active_company.render(view: :counts),
       activities: Activities::DashboardSerializer.render(activities)
     }
-  end
-
-  private
-
-  def settings_params
-    params.expect(settings: [:dark_mode])
   end
 end

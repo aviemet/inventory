@@ -2,6 +2,8 @@ class Api::ModelsController < Api::ApiController
   expose :models, -> { params[:category] ? @active_company.models.find_by(category: params[:category]) : @active_company.models }
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, model: Model, find_by: :slug
 
+  strong_params :model, permit: [:id, :slug, :name, :model_number, :manufacturer_id, :category_id, :notes]
+
   # @route GET /api/models (api_models)
   def index
     render json: models.includes_associated.render
@@ -41,8 +43,4 @@ class Api::ModelsController < Api::ApiController
   end
 
   private
-
-  def model_params
-    params.expect(model: [:id, :slug, :name, :model_number, :manufacturer_id, :category_id, :notes])
-  end
 end

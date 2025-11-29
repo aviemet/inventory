@@ -11,7 +11,7 @@ module StrongParams
         if block_given?
           params.expect(name => instance_exec(&))
         elsif options[:permit].present?
-          params.expect(name => [Array(options[:permit])])
+          params.expect(name => Array(options[:permit]))
         end
       end
     end

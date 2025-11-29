@@ -3,7 +3,7 @@ require "generators/serializer/serializer_generator"
 
 # TODO: This will potentially overwrite existing files. Make generator tests run in tmp folder
 
-RSpec.describe SerializersGenerator do
+RSpec.describe SerializerGenerator do
   let(:generator_args) { ["model_name"] }
 
   after do

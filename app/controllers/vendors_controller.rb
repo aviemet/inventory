@@ -1,8 +1,12 @@
 class VendorsController < ApplicationController
   include OwnableConcern
 
-  expose :vendors, -> { search(@active_company.vendors.includes_associated, sortable_fields) }
+  expose :vendors, -> { search(@active_company.vendors.includes_associated) }
   expose :vendor, id: ->{ params[:slug] }, scope: ->{ @active_company.vendors.includes_associated }, find_by: :slug
+
+  strong_params :vendor, permit: [:name, :url]
+
+  sortable_fields %w(name url)
 
   # @route GET /vendors (vendors)
   def index
@@ -142,15 +146,5 @@ class VendorsController < ApplicationController
       @active_company.vendors.where(id: request.params&.[](:ids)).destroy_all
     end
     redirect_to vendors_url, notice: "Vendor was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name url).freeze
-  end
-
-  def vendor_params
-    params.expect(vendor: [:name, :url])
   end
 end

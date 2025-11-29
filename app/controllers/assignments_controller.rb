@@ -42,8 +42,9 @@ class AssignmentsController < ApplicationController
     PublicActivity.enabled = false
 
     assignable = assignment.assignable
+    returned_at = params.dig(:assignment, :returned_at) || params[:returned_at]
 
-    if assignable.unassign(assignment, returned_at: assignment_params&.[](:returned_at))
+    if assignable.unassign(assignment, returned_at: returned_at)
       PublicActivity.enabled = true
       assignment.create_activity key: "assignment.end"
       redirect_to assignable

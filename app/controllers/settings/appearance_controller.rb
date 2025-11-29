@@ -1,4 +1,6 @@
 class Settings::AppearanceController < ApplicationController
+  strong_params :settings, permit: [:primary_color]
+
   # @route GET /settings/appearance (settings_appearance_index)
   def index
     render inertia: "Settings/Appearance/Index", props: {
@@ -16,11 +18,5 @@ class Settings::AppearanceController < ApplicationController
     else
       redirect_to settings_appearance_index_path, inertia: { errors: @active_company.errors }
     end
-  end
-
-  private
-
-  def settings_params
-    params.expect(settings: [:primary_color])
   end
 end

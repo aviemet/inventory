@@ -1,7 +1,11 @@
 class StatusLabelsController < ApplicationController
 
-  expose :status_labels, -> { search(StatusLabel.all, sortable_fields) }
+  expose :status_labels, -> { search(StatusLabel.all) }
   expose :status_label, id: ->{ params[:slug] }, find_by: :slug
+
+  strong_params :status_label, permit: [:name]
+
+  sortable_fields %w(name status_type assets.count)
 
   # @route GET /status_labels (status_labels)
   def index
@@ -64,15 +68,5 @@ class StatusLabelsController < ApplicationController
       format.html { redirect_to status_labels_url, notice: "StatusLabel was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  private
-
-  def sortable_fields
-    %w(name status_type assets.count).freeze
-  end
-
-  def status_label_params
-    params.expect(status_label: [:name])
   end
 end

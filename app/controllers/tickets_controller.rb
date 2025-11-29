@@ -1,7 +1,11 @@
 class TicketsController < ApplicationController
 
-  expose :tickets, -> { search(@active_company.tickets.includes_associated.all, sortable_fields) }
+  expose :tickets, -> { search(@active_company.tickets.includes_associated.all) }
   expose :ticket, scope: -> { @active_company.tickets }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
+  strong_params :ticket, permit: [:subject, :description, :status, :messages, :primary_contact_id, :asset_id, assignments_attributes: [:person_id]]
+
+  sortable_fields %w(subject created_by.name)
 
   # @route GET /tickets (tickets)
   def index
@@ -74,15 +78,5 @@ class TicketsController < ApplicationController
     authorize ticket
     ticket.destroy
     redirect_to tickets_url, notice: "Ticket was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(subject created_by.name).freeze
-  end
-
-  def ticket_params
-    params.expect(ticket: [:subject, :description, :status, :messages, :primary_contact_id, :asset_id, assignments_attributes: [:person_id]])
   end
 end

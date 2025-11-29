@@ -1,10 +1,12 @@
 class AccessoriesController < ApplicationController
   include OwnableConcern
 
-  expose :accessories, -> { search(@active_company.accessories.includes_associated, sortable_fields) }
+  expose :accessories, -> { search(@active_company.accessories.includes_associated) }
   expose :accessory, scope: ->{ @active_company.accessories }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   strong_params :accessory, permit: [:name, :serial, :asset_tag, :notes, :qty, :model_id, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :cost_currency, :min_qty, :status_id]
+
+  sortable_fields %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name)
 
   # @route GET /accessories (accessories)
   def index
@@ -112,11 +114,4 @@ class AccessoriesController < ApplicationController
     accessory.destroy
     redirect_to accessories_url, notice: "Accessory was successfully destroyed."
   end
-
-  private
-
-  def sortable_fields
-    %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
-  end
-
 end

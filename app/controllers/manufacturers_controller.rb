@@ -1,8 +1,12 @@
 class ManufacturersController < ApplicationController
   include OwnableConcern
 
-  expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated, sortable_fields) }
+  expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated) }
   expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
+
+  strong_params :manufacturer, permit: [:name]
+
+  sortable_fields %w(name)
 
   # @route GET /manufacturers (manufacturers)
   def index
@@ -111,15 +115,5 @@ class ManufacturersController < ApplicationController
     authorize manufacturer
     manufacturer.destroy
     redirect_to manufacturers_url, notice: "Manufacturer was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(name).freeze
-  end
-
-  def manufacturer_params
-    params.expect(manufacturer: [:name])
   end
 end

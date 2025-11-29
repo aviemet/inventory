@@ -1,6 +1,8 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
+  strong_params :contact, permit: [:notes]
+
   def index
     @contacts = Contact.all
   end
@@ -56,9 +58,5 @@ class ContactsController < ApplicationController
 
   def set_contact
     @contact = Contact.find(params[:id])
-  end
-
-  def contact_params
-    params.expect(contact: [:notes])
   end
 end

@@ -3,6 +3,8 @@ class TicketMessagesController < ApplicationController
   expose :ticket_messages, from: :ticket
   expose :ticket_message
 
+  strong_params :ticket_message, permit: [:body, :parent_id]
+
   # @route POST /tickets/:ticket_id/messages (ticket_messages)
   def create
     ticket_message.created_by = current_user.person
@@ -28,11 +30,5 @@ class TicketMessagesController < ApplicationController
   def destroy
     ticket_message.destroy
     redirect_to ticket, notice: "Message was successfully destroyed."
-  end
-
-  private
-
-  def ticket_message_params
-    params.expect(ticket_message: [:body, :parent_id])
   end
 end
