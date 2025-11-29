@@ -1,12 +1,16 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
-RSpec.describe "Contracts" do
+RSpec.describe "Contracts", :inertia do
   def valid_attributes
     {
-      contract: attributes_for(:contract,
-                               vendor_id: create(:vendor).id,
-                               category_id: create(:category).id,)
+      contract: attributes_for(
+        :contract,
+        {
+          vendor_id: create(:vendor).id,
+          category_id: create(:category).id,
+        },
+      )
     }
   end
 
@@ -18,57 +22,70 @@ RSpec.describe "Contracts" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all contracts" do
         contract = create(:contract, { company: @admin.active_company })
 
         get contracts_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "Contracts/Index"
         expect(response.body).to include(CGI.escapeHTML(contract.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of contracts" do
-        contract1 = create(:contract, { name: "Include", company: @admin.active_company })
-        contract2 = create(:contract, { name: "Exclue", company: @admin.active_company })
+      context "with search params" do
+        it "returns a filtered list of contracts" do
+          contract1 = create(:contract, { name: "Include", company: @admin.active_company })
+          contract2 = create(:contract, { name: "Exclude", company: @admin.active_company })
 
-        get contracts_url, params: { search: contract1.name }
+          get contracts_url, params: { search: contract1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(contract1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(contract2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component "Contracts/Index"
+          expect(response.body).to include(CGI.escapeHTML(contract1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(contract2.name))
+        end
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new contract" do
-        get new_contract_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      contract = create(:contract, company: @admin.active_company)
+
+      get contract_url({ slug: contract.slug })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "Contracts/Show"
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a contract" do
-        contract = create(:contract, company: @admin.active_company)
+  describe "GET /new" do
+    login_admin
 
-        get edit_contract_url(contract)
+    it "renders" do
+      get new_contract_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "Contracts/New"
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        contract = create(:contract, company: @admin.active_company)
-        get contract_url({ slug: contract.slug })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      contract = create(:contract, company: @admin.active_company)
+
+      get edit_contract_url(contract)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "Contracts/Edit"
     end
   end
 
@@ -129,13 +146,13 @@ RSpec.describe "Contracts" do
     it "destroys the requested contract" do
       contract = create(:contract, company: @admin.active_company)
       expect {
-        delete contract_url({slug: contract.slug})
+        delete contract_url({ slug: contract.slug })
       }.to change(Contract, :count).by(-1)
     end
 
     it "redirects to the contracts list" do
       contract = create(:contract, company: @admin.active_company)
-      delete contract_url({slug: contract.slug})
+      delete contract_url({ slug: contract.slug })
       expect(response).to redirect_to(contracts_url)
     end
   end

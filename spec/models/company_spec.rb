@@ -24,8 +24,8 @@
 #  fk_rails_...  (app_smtp_id => smtps.id)
 #  fk_rails_...  (tickets_smtp_id => smtps.id)
 #
-require 'rails_helper'
-require 'models/concerns/contactable'
+require "rails_helper"
+require "models/concerns/contactable"
 require "models/concerns/serializable"
 
 RSpec.describe Company do
@@ -48,13 +48,13 @@ RSpec.describe Company do
     it { is_expected.to have_many(:ownerships) }
 
     {
-      items: 'Item',
-      departments: 'Department',
-      locations: 'Location',
-      contracts: 'Contract',
-      networks: 'Network',
-      people: 'Person',
-      vendors: 'Vendor'
+      items: "Item",
+      departments: "Department",
+      locations: "Location",
+      contracts: "Contract",
+      networks: "Network",
+      people: "Person",
+      vendors: "Vendor"
     }.each_pair do |assoc, _|
       it { is_expected.to have_many(assoc) }
     end

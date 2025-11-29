@@ -1,7 +1,11 @@
 class OrdersController < ApplicationController
 
-  expose :orders, -> { search(@active_company.orders.includes_associated, sortable_fields) }
+  expose :orders, -> { search(@active_company.orders.includes_associated) }
   expose :order, scope: ->{ @active_company.orders }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
+  strong_params :order, permit: [:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping, :tax, :discount, :vendor_id]
+
+  sortable_fields %w(number users.person.full_name submitted_at ordered_at delivered_at canceled_at returned_at vendors.name)
 
   # @route GET /orders (orders)
   def index
@@ -44,7 +48,7 @@ class OrdersController < ApplicationController
     authorize Order
 
     if order.save
-      redirect_to order, notice: 'Purchase order was successfully created'
+      redirect_to order, notice: "Purchase order was successfully created"
     else
       redirect_to new_order_path, inertia: { errors: order.errors }
     end
@@ -56,7 +60,7 @@ class OrdersController < ApplicationController
     authorize order
 
     if order.update(order_params)
-      redirect_to order, notice: 'Purchase order was successfully updated'
+      redirect_to order, notice: "Purchase order was successfully updated"
     else
       redirect_to edit_order_path, inertia: { errors: order.errors }
     end
@@ -67,16 +71,6 @@ class OrdersController < ApplicationController
   def destroy
     authorize order
     order.destroy
-    redirect_to orders_url, notice: 'Purchase order was successfully destroyed.'
-  end
-
-  private
-
-  def sortable_fields
-    %w(number users.person.full_name submitted_at ordered_at delivered_at canceled_at returned_at vendors.name).freeze
-  end
-
-  def order_params
-    params.require(:order).permit(:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping, :tax, :discount, :vendor_id)
+    redirect_to orders_url, notice: "Purchase order was successfully destroyed."
   end
 end

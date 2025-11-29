@@ -19,7 +19,7 @@ module Test
 
     # Method to sign in the user without triggering Warden callbacks
     def sign_in_without_callbacks(user)
-      request.env['warden'].session_serializer.store(user, :user)
+      request.env["warden"].session_serializer.store(user, :user)
     end
 
   end

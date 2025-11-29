@@ -25,7 +25,7 @@ export const useGetItemsAsOptions: ReactQueryFunction<Schema.ItemsOptions[]> = (
 	})
 }
 
-export const useGetItem: ReactQueryFunction<Schema.Item[], { id: string|number}> = ({ id }, options) => {
+export const useGetItem: ReactQueryFunction<Schema.Item[], { id: string | number }> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['items', id],
 		queryFn: async () => {

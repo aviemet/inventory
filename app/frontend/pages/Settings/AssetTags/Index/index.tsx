@@ -1,0 +1,13 @@
+import React from 'react'
+import SettingsLayout from '../../SettingsLayout'
+import { Title } from '@/components'
+
+const Appearance = () => {
+	return (
+		<SettingsLayout>
+			<Title mb={ 24 }>Asset Tags Settings</Title>
+		</SettingsLayout>
+	)
+}
+
+export default Appearance

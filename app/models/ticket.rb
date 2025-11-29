@@ -32,26 +32,19 @@
 class Ticket < ApplicationRecord
   include Ownable
 
-  multisearchable(
+  include PgSearchable
+  pg_search_config(
     against: [:number, :subject],
-    additional_attributes: ->(record) { { label: record.subject } },
-  )
-
-  pg_search_scope(
-    :search,
-    against: [:number, :subject], associated_against: {
+    associated_against: {
       created_by: [:email]
-    }, using: {
-      tsearch: { prefix: true },
-      trigram: {}
     },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   tracked
   resourcify
 
-  enum priority: { urgent: 0, high: 1, standard: 2, low: 3 }
+  enum :priority, { urgent: 0, high: 1, standard: 2, low: 3 }
 
   belongs_to :created_by, class_name: "Person", optional: true
   belongs_to :status, class_name: "TicketStatus", optional: false
@@ -64,6 +57,14 @@ class Ticket < ApplicationRecord
   validates :subject, presence: { message: "Subject can't be blank" }
 
   attribute :status_id, default: 1
+
+  before_validation :ensure_status
+
+  def ensure_status
+    return unless status_id.nil?
+
+    self.status_id = persisted? ? status_id_was : 1
+  end
 
   scope :includes_associated, -> { includes([:status, :created_by, :asset, assignments: :person]) }
 

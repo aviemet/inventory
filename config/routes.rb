@@ -56,27 +56,29 @@ Rails.application.routes.draw do
 
   # DEVISE PATHS #
 
-  devise_for :users, controllers: {
-    sessions: "users/sessions"
-  },
-  path: "/",
-  path_names: {
-    sign_in: "login",
-    sign_out: "logout"
-  },
-  only: [:sessions]
+  devise_for :users,
+    controllers: {
+      sessions: "users/sessions"
+    },
+    path: "/",
+    path_names: {
+      sign_in: "login",
+      sign_out: "logout"
+    },
+    only: [:sessions]
 
-  devise_for :users, controllers: {
-    passwords: "users/passwords",
-    registrations: "users/registrations",
-    unlocks: "users/unlocks",
-    confirmations: "users/confirmations",
-    # omniauth_callbacks: "users/omniauth_callbacks",
-  },
-  path_names: {
-    sign_up: :register,
-  },
-  skip: [:sessions]
+  devise_for :users,
+    controllers: {
+      passwords: "users/passwords",
+      registrations: "users/registrations",
+      unlocks: "users/unlocks",
+      confirmations: "users/confirmations",
+      # omniauth_callbacks: "users/omniauth_callbacks",
+    },
+    path_names: {
+      sign_up: :register,
+    },
+    skip: [:sessions]
 
   get "users/complete_registration" => "users#complete_registration", as: :complete_registration
   post "users/complete_registration" => "users#save_complete_registration", as: :save_complete_registration
@@ -101,7 +103,6 @@ Rails.application.routes.draw do
   resources :assets, path: :inventory, except: [:create, :update, :destroy], concerns: [:bulk_delete, :categoryable, :assignable, :single_unassignable]
 
   resources :items, path: :hardware do
-    resources :nics
     concerns :bulk_delete, :categoryable, :clonable, :assignable, :single_unassignable
   end
 
@@ -119,13 +120,13 @@ Rails.application.routes.draw do
 
   resources :models, concerns: :bulk_delete, param: :slug
   resources :manufacturers, concerns: :bulk_delete, param: :slug
-  resources :warranties, concerns: :bulk_delete
+  # resources :warranties, concerns: :bulk_delete
 
-  resources :fields
-  resources :fieldsets
-  resources :fieldset_associations
+  # resources :fields
+  # resources :fieldsets
+  # resources :fieldset_associations
 
-  resources :ip_leases
+  # resources :ip_leases
   resources :networks, concerns: :bulk_delete
 
   resources :orders, concerns: :bulk_delete

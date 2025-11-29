@@ -1,23 +1,24 @@
-require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
+require "spec_helper"
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
 
 # Disable audits in test environment
-require 'public_activity'
-require 'public_activity/testing'
+require "public_activity"
+require "public_activity/testing"
 PublicActivity.enabled = false
 
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'rspec/rails'
+require "rspec/rails"
 
 # Add additional requires below this line. Rails is not loaded until this point!
-require 'inertia_rails/rspec'
-require 'bullet'
-require 'database_cleaner/active_record'
+require "inertia_rails/rspec"
+require "bullet"
+require "database_cleaner/active_record"
 require "pundit/rspec"
-require 'capybara/rails'
-require 'capybara/rspec'
+require "capybara/rails"
+require "capybara/rspec"
+require_relative "support/api_helper"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -43,9 +44,6 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{Rails.root.join('spec/fixtures')}"
-
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -79,24 +77,24 @@ RSpec.configure do |config|
 
   Capybara.configure do |c|
     c.default_driver = :selenium_chrome
-    c.app_host = 'https://localhost:3000'
+    c.app_host = "https://localhost:3000"
   end
 
   # Database Cleaner
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.clean_with(:truncation, except: %w[ar_internal_metadata])
     Rails.application.load_seed
   end
 
   # Request specs cannot use a transaction because Capybara runs in a
   # separate thread with a different database connection.
   config.before type: :request do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :truncation, { except: %w[ar_internal_metadata] }
   end
 
   # Reset so other non-request specs don't have to deal with slow truncation.
-  config.after type: :request  do
+  config.after type: :request do
     DatabaseCleaner.strategy = :transaction
   end
 
@@ -107,7 +105,19 @@ RSpec.configure do |config|
   end
 
   config.after do
-    DatabaseCleaner.clean
+    retries = 0
+    begin
+      DatabaseCleaner.clean
+    rescue ActiveRecord::Deadlocked, PG::TRDeadlockDetected => e
+      retries += 1
+      if retries > 2
+        warn "WARNING: Database deadlock during cleanup (retry #{retries}). Multiple test processes may be running. Consider running tests sequentially."
+      end
+      ActiveRecord::Base.clear_active_connections!
+      sleep(rand(0.05..0.15))
+      retry if retries <= 3
+      raise
+    end
   end
 
   # Shoulda

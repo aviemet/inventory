@@ -15,8 +15,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-require 'rails_helper'
-require 'models/concerns/ownable'
+require "rails_helper"
+require "models/concerns/ownable"
 require "models/concerns/serializable"
 
 RSpec.describe Smtp do

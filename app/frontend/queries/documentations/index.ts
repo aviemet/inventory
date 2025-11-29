@@ -14,7 +14,7 @@ export const useGetDocumentations: ReactQueryFunction<Schema.Documentation[]> = 
 	})
 }
 
-export const useGetDocumentation: ReactQueryFunction<Schema.Documentation[], { id: string|number}> = ({ id }, options) => {
+export const useGetDocumentation: ReactQueryFunction<Schema.Documentation[], { id: string | number }> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['documentations', id],
 		queryFn: async () => {

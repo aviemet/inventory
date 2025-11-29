@@ -1,6 +1,8 @@
 class Api::OrdersController < Api::ApiController
   expose :order, id: ->{ params[:slug] }, scope: ->{ @active_company.orders.includes_associated }, find_by: :slug
 
+  strong_params :order, permit: [:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping_cost, :tax_cost, :discount_cost, :vendor_id]
+
   # @route POST /api/orders (api_orders)
   def create
     order.company = @active_company
@@ -23,8 +25,4 @@ class Api::OrdersController < Api::ApiController
   end
 
   private
-
-  def order_params
-    params.require(:order).permit(:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping_cost, :tax_cost, :discount_cost, :vendor_id)
-  end
 end

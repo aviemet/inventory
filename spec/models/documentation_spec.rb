@@ -25,7 +25,4 @@
 #  fk_rails_...  (category_id => categories.id)
 #  fk_rails_...  (created_by_id => people.id)
 #
-require 'rails_helper'
-
-RSpec.describe Documentation do
-end
+require "rails_helper"

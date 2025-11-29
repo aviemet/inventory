@@ -9,7 +9,9 @@ Bundler.require(*Rails.groups)
 module Inventory
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 8.1
+
+    config.autoload_lib(ignore: %w[assets tasks generators])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -17,8 +19,6 @@ module Inventory
     # in config/environments, which are processed later.
     #
     config.time_zone = "Pacific Time (US & Canada)"
-
-    config.autoload_paths += %W(#{config.root}/lib)
 
     config.generators do |g|
       g.test_framework      :rspec

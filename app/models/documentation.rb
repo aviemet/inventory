@@ -29,19 +29,10 @@ class Documentation < ApplicationRecord
   include Ownable
   include Categorizable
 
-  multisearchable(
-    against: [:title],
-    additional_attributes: ->(record) { { label: record.title } },
-  )
-
-  pg_search_scope(
-    :search,
+  include PgSearchable
+  pg_search_config(
     against: [:slug, :title, :body],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
+    enable_multisearch: true,
   )
 
   slug :title

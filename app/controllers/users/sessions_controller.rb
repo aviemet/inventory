@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # @route GET /login (new_user_session)
   def new
-    if User.count == 0
+    if User.none?
       redirect_to new_user_registration_path
     else
       render inertia: "Public/Devise/Login"

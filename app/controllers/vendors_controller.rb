@@ -1,8 +1,12 @@
 class VendorsController < ApplicationController
   include OwnableConcern
 
-  expose :vendors, -> { search(@active_company.vendors.includes_associated, sortable_fields) }
+  expose :vendors, -> { search(@active_company.vendors.includes_associated) }
   expose :vendor, id: ->{ params[:slug] }, scope: ->{ @active_company.vendors.includes_associated }, find_by: :slug
+
+  strong_params :vendor, permit: [:name, :url]
+
+  sortable_fields %w(name url)
 
   # @route GET /vendors (vendors)
   def index
@@ -23,7 +27,7 @@ class VendorsController < ApplicationController
     authorize vendor
     render inertia: "Vendors/Show", props: {
       vendor: vendor.render(view: :show),
-      items: InertiaRails.lazy(-> {
+      items: InertiaRails.optional {
         paginated_items = vendor.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render,
@@ -32,8 +36,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      }),
-      accessories: InertiaRails.lazy(-> {
+      },
+      accessories: InertiaRails.optional {
         paginated_accessories = vendor.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render,
@@ -42,8 +46,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_accessories)
           }
         }
-      }),
-      consumables: InertiaRails.lazy(-> {
+      },
+      consumables: InertiaRails.optional {
         paginated_consumables = vendor.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render,
@@ -52,8 +56,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_consumables)
           }
         }
-      }),
-      components: InertiaRails.lazy(-> {
+      },
+      components: InertiaRails.optional {
         paginated_components = vendor.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render,
@@ -62,8 +66,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_components)
           }
         }
-      }),
-      licenses: InertiaRails.lazy(-> {
+      },
+      licenses: InertiaRails.optional {
         paginated_licenses = vendor.licenses.includes_associated.page(params[:page] || 1)
         {
           data: paginated_licenses.render,
@@ -72,8 +76,8 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_licenses)
           }
         }
-      }),
-      contracts: InertiaRails.lazy(-> {
+      },
+      contracts: InertiaRails.optional {
         paginated_contracts = vendor.contracts.includes_associated.page(params[:page] || 1)
         {
           data: paginated_contracts.render,
@@ -82,7 +86,7 @@ class VendorsController < ApplicationController
             **pagination_data(paginated_contracts)
           }
         }
-      }),
+      },
     }
   end
 
@@ -115,7 +119,7 @@ class VendorsController < ApplicationController
         render json: { errors: vendor.errors }, status: :see_other
       end
     elsif vendor.save
-      redirect_to vendor, notice: 'Vendor was successfully created'
+      redirect_to vendor, notice: "Vendor was successfully created"
     else
       redirect_to new_vendor_path, inertia: { errors: vendor.errors }
     end
@@ -126,7 +130,7 @@ class VendorsController < ApplicationController
   def update
     authorize vendor
     if vendor.update(vendor_params)
-      redirect_to vendor, notice: 'Vendor was successfully updated'
+      redirect_to vendor, notice: "Vendor was successfully updated"
     else
       redirect_to edit_vendor_path, inertia: { errors: vendor.errors }
     end
@@ -141,16 +145,6 @@ class VendorsController < ApplicationController
     else
       @active_company.vendors.where(id: request.params&.[](:ids)).destroy_all
     end
-    redirect_to vendors_url, notice: 'Vendor was successfully destroyed.'
-  end
-
-  private
-
-  def sortable_fields
-    %w(name url).freeze
-  end
-
-  def vendor_params
-    params.require(:vendor).permit(:name, :url)
+    redirect_to vendors_url, notice: "Vendor was successfully destroyed."
   end
 end

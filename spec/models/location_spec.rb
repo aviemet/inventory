@@ -19,10 +19,10 @@
 #
 #  fk_rails_...  (parent_id => locations.id)
 #
-require 'rails_helper'
-require 'models/concerns/contactable'
-require 'models/concerns/ownable'
-require 'models/concerns/assign_toable'
+require "rails_helper"
+require "models/concerns/contactable"
+require "models/concerns/ownable"
+require "models/concerns/assign_toable"
 require "models/concerns/serializable"
 
 RSpec.describe Location do

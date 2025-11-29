@@ -1,6 +1,6 @@
 import { type Money } from '@/types'
 
-export type UseCurrencyOptions = Omit<Intl.NumberFormatOptions, 'style'|'currency'>
+export type UseCurrencyOptions = Omit<Intl.NumberFormatOptions, 'style' | 'currency'>
 
 interface UseCurrencyProps {
 	amount: number | Money | null
@@ -9,7 +9,7 @@ interface UseCurrencyProps {
 	options?: UseCurrencyOptions
 }
 
-type OmittedOptions = Pick<Intl.NumberFormatOptions, 'style'|'currency'>
+type OmittedOptions = Pick<Intl.NumberFormatOptions, 'style' | 'currency'>
 
 const useCurrency = ({
 	amount,

@@ -58,7 +58,7 @@ RSpec.describe Item do
         name: nil
       },)).not_to be_valid
 
-      item = build(:item, {model: nil })
+      item = build(:item, { model: nil })
       item.model = nil
       expect(item).not_to be_valid
     end

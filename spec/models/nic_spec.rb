@@ -17,7 +17,7 @@
 #
 #  fk_rails_...  (item_id => assets.id)
 #
-require 'rails_helper'
+require "rails_helper"
 require "models/concerns/serializable"
 
 RSpec.describe Nic do

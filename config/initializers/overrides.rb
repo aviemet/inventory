@@ -1,4 +1,4 @@
-require 'ipaddress_2'
+require "ipaddress_2"
 
 module IPAddress
   IPv4.class_eval do

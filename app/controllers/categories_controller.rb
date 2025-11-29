@@ -1,7 +1,11 @@
 class CategoriesController < ApplicationController
 
-  expose :categories, -> { search(@active_company.categories.all, sortable_fields) }
+  expose :categories, -> { search(@active_company.categories.all) }
   expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories.includes_associated }, find_by: :slug
+
+  strong_params :category, permit: [:categorizable_id, :categorizable_type, :name, :description]
+
+  sortable_fields %w(name categorizable_type qty)
 
   # @route GET /categories (categories)
   def index
@@ -49,7 +53,7 @@ class CategoriesController < ApplicationController
     category = Category.new category_params
     category.company = @active_company
     if category.save
-      redirect_to category, notice: 'Category was successfully created'
+      redirect_to category, notice: "Category was successfully created"
     else
       redirect_to new_category_path, inertia: { errors: category.errors }
     end
@@ -59,7 +63,7 @@ class CategoriesController < ApplicationController
   # @route PUT /categories/:slug (category)
   def update
     if category.update(category_params)
-      redirect_to category, notice: 'Category was successfully updated'
+      redirect_to category, notice: "Category was successfully updated"
     else
       redirect_to edit_category_path, inertia: { errors: category.errors }
     end
@@ -70,18 +74,8 @@ class CategoriesController < ApplicationController
   def destroy
     category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  private
-
-  def sortable_fields
-    %w(name categorizable_type qty).freeze
-  end
-
-  def category_params
-    params.require(:category).permit(:categorizable_id, :categorizable_type, :name, :description)
   end
 end

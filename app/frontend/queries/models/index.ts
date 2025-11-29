@@ -28,7 +28,7 @@ export const useGetModelsAsOptions: ReactQueryFunction<
 	})
 }
 
-export const useGetModel: ReactQueryFunction<Schema.Model, { id: string|number}> = ({ id }, options) => {
+export const useGetModel: ReactQueryFunction<Schema.Model, { id: string | number }> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['models', id],
 		queryFn: async () => {

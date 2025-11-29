@@ -13,9 +13,9 @@
 #  index_manufacturers_on_name  (name) UNIQUE
 #  index_manufacturers_on_slug  (slug) UNIQUE
 #
-require 'rails_helper'
-require 'models/concerns/contactable'
-require 'models/concerns/ownable'
+require "rails_helper"
+require "models/concerns/contactable"
+require "models/concerns/ownable"
 require "models/concerns/serializable"
 
 RSpec.describe Manufacturer do

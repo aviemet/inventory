@@ -18,7 +18,7 @@
 #  fk_rails_...  (item_id => assets.id)
 #
 class Nic < ApplicationRecord
-  enum nic_type: {ethernet: 0, wifi: 1, fiber: 2, cellular: 3 }
+  enum :nic_type, { ethernet: 0, wifi: 1, fiber: 2, cellular: 3 }
 
   attribute :nic_type, default: :wifi
 

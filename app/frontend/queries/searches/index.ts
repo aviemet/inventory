@@ -2,7 +2,7 @@ import { Routes } from '@/lib'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { type ReactQueryFunction } from '..'
-import { SpotlightSearchValues } from '@/Features/Spotlight'
+import { SpotlightSearchValues } from '@/features/Spotlight'
 
 export const useGetSearchResults: ReactQueryFunction<
 	Schema.Search[],

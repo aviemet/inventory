@@ -25,7 +25,7 @@ export const useGetStatusLabelsAsOptions: ReactQueryFunction<Schema.StatusLabels
 	})
 }
 
-export const useGetStatusLabel: ReactQueryFunction<Schema.StatusLabel[], { id: string|number}> = ({ id }, options) => {
+export const useGetStatusLabel: ReactQueryFunction<Schema.StatusLabel[], { id: string | number }> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['statusLabels', id],
 		queryFn: async () => {

@@ -1,4 +1,4 @@
-require 'active_support/concern'
+require "active_support/concern"
 
 module ActiveCompanyTracker
   extend ActiveSupport::Concern
@@ -17,7 +17,7 @@ module ActiveCompanyTracker
 
     if current_user.active_company
       @active_company = current_user.active_company
-    elsif ['/logout', '/users/complete_registration'].exclude?(request.path)
+    elsif ["/logout", "/users/complete_registration"].exclude?(request.path)
       redirect_to complete_registration_path
     end
   end

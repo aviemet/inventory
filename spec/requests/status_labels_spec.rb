@@ -1,7 +1,7 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
-RSpec.describe "/status_labels" do
+RSpec.describe "StatusLabels", :inertia do
   def valid_attributes
     {
       status_label: attributes_for(:status_label)
@@ -16,7 +16,7 @@ RSpec.describe "/status_labels" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
     describe "index page" do
@@ -26,7 +26,22 @@ RSpec.describe "/status_labels" do
         get status_labels_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "StatusLabels/Index"
         expect(response.body).to include(CGI.escapeHTML(status_label.name))
+      end
+
+      context "with search params" do
+        it "returns a filtered list of status_labels" do
+          status_label_1 = create(:status_label, name: "Include")
+          status_label_2 = create(:status_label, name: "Exclude")
+
+          get status_labels_url, params: { search: status_label_1.name }
+
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component "StatusLabels/Index"
+          expect(response.body).to include(CGI.escapeHTML(status_label_1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(status_label_2.name))
+        end
       end
     end
 
@@ -35,6 +50,7 @@ RSpec.describe "/status_labels" do
         get new_status_label_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "StatusLabels/New"
       end
     end
 
@@ -45,15 +61,23 @@ RSpec.describe "/status_labels" do
         get edit_status_label_url(status_label)
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "StatusLabels/Edit"
       end
+
+      it_behaves_like "handles record not found", :get, :edit, :edit_status_label_url
     end
 
     describe "show page" do
       it "renders" do
         status_label = create(:status_label)
-        get status_label_url({ slug: status_label.slug })
+
+        get status_label_url(status_label)
+
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "StatusLabels/Show"
       end
+
+      it_behaves_like "handles record not found", :get, :show, :status_label_url
     end
   end
 
@@ -106,6 +130,8 @@ RSpec.describe "/status_labels" do
         expect(response).to redirect_to edit_status_label_url(status_label)
       end
     end
+
+    it_behaves_like "handles record not found", :patch, :update, :status_label_url
   end
 
   describe "DELETE /destroy" do
@@ -114,14 +140,16 @@ RSpec.describe "/status_labels" do
     it "destroys the requested status_label" do
       status_label = create(:status_label)
       expect {
-        delete status_label_url({slug: status_label.slug})
+        delete status_label_url({ slug: status_label.slug })
       }.to change(StatusLabel, :count).by(-1)
     end
 
     it "redirects to the status_labels list" do
       status_label = create(:status_label)
-      delete status_label_url({slug: status_label.slug})
+      delete status_label_url({ slug: status_label.slug })
       expect(response).to redirect_to(status_labels_url)
     end
+
+    it_behaves_like "handles record not found", :delete, :destroy, :status_label_url
   end
 end

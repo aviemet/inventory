@@ -6,9 +6,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= vite_react_refresh_tag %>
-    <%= vite_client_tag %>
-    <%= vite_typescript_tag 'application.tsx' %>
+    <% unless Rails.env.test? %>
+      <%= vite_react_refresh_tag %>
+      <%= vite_client_tag %>
+      <%= vite_typescript_tag 'application.tsx' %>
+    <% end %>
   </head>
 
 	<body>

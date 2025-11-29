@@ -1,6 +1,8 @@
 class Api::UsersController < Api::ApiController
   expose :user
 
+  strong_params :user, permit: [:email, :password, :active_company_id, :active, person: [:first_name, :last_name], company: [:name], user_preferences: [:colorScheme]]
+
   # @route PATCH /api/users/:id (api_user)
   # @route PUT /api/users/:id (api_user)
   def update
@@ -33,9 +35,5 @@ class Api::UsersController < Api::ApiController
   end
 
   private
-
-  def user_params
-    params.require(:user).permit(:email, :password, :active_company_id, :active, person: [:first_name, :last_name], company: [:name], user_preferences: [:colorScheme])
-  end
 
 end

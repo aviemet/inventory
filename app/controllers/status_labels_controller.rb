@@ -1,7 +1,11 @@
 class StatusLabelsController < ApplicationController
 
-  expose :status_labels, -> { search(StatusLabel.all, sortable_fields) }
+  expose :status_labels, -> { search(StatusLabel.all) }
   expose :status_label, id: ->{ params[:slug] }, find_by: :slug
+
+  strong_params :status_label, permit: [:name]
+
+  sortable_fields %w(name status_type assets.count)
 
   # @route GET /status_labels (status_labels)
   def index
@@ -18,13 +22,9 @@ class StatusLabelsController < ApplicationController
 
   # @route GET /status_labels/:slug (status_label)
   def show
-    if status_label.nil?
-      render inertia: "Error", props: { status: 404 }
-    else
-      render inertia: "StatusLabels/Show", props: {
-        status_label: -> { status_label.render }
-      }
-    end
+    render inertia: "StatusLabels/Show", props: {
+      status_label: -> { status_label.render }
+    }
   end
 
   # @route GET /status_labels/new (new_status_label)
@@ -45,7 +45,7 @@ class StatusLabelsController < ApplicationController
   def create
     status_label = StatusLabel.new(status_label_params)
     if status_label.save
-      redirect_to status_label, notice: 'StatusLabel was successfully created.'
+      redirect_to status_label, notice: "StatusLabel was successfully created."
     else
       redirect_to new_status_label_path, inertia: { errors: status_label.errors }
     end
@@ -55,7 +55,7 @@ class StatusLabelsController < ApplicationController
   # @route PUT /status_labels/:slug (status_label)
   def update
     if status_label.update(status_label_params)
-      redirect_to status_label, notice: 'StatusLabel was successfully updated.'
+      redirect_to status_label, notice: "StatusLabel was successfully updated."
     else
       redirect_to edit_status_label_path, inertia: { errors: status_label.errors }
     end
@@ -65,18 +65,8 @@ class StatusLabelsController < ApplicationController
   def destroy
     status_label.destroy
     respond_to do |format|
-      format.html { redirect_to status_labels_url, notice: 'StatusLabel was successfully destroyed.' }
+      format.html { redirect_to status_labels_url, notice: "StatusLabel was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  private
-
-  def sortable_fields
-    %w(name status_type assets.count).freeze
-  end
-
-  def status_label_params
-    params.require(:status_label).permit(:name)
   end
 end

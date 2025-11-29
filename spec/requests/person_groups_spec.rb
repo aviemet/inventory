@@ -1,7 +1,7 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
-RSpec.describe "/person_groups" do
+RSpec.describe "PersonGroups", :inertia do
   def valid_attributes
     {
       person_group: attributes_for(:person_group)
@@ -16,44 +16,56 @@ RSpec.describe "/person_groups" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all person_groups" do
-        person_group = create(:person_group, { company: User.first.active_company })
+        person_group = create(:person_group, { company: @admin.active_company })
 
         get person_groups_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "PersonGroups/Index"
         expect(response.body).to include(CGI.escapeHTML(person_group.name))
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new person_group" do
-        get new_person_group_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      person_group = create(:person_group, company: @admin.active_company)
+
+      get person_group_url({ slug: person_group.slug })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "PersonGroups/Show"
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a person_group" do
-        person_group = create(:person_group, company: User.first.active_company)
+  describe "GET /new" do
+    login_admin
 
-        get edit_person_group_url(person_group)
+    it "renders" do
+      get new_person_group_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "PersonGroups/New"
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        person_group = create(:person_group, company: @admin.active_company)
-        get person_group_url({ slug: person_group.slug })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      person_group = create(:person_group, company: @admin.active_company)
+
+      get edit_person_group_url(person_group)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "PersonGroups/Edit"
     end
   end
 
@@ -114,7 +126,7 @@ RSpec.describe "/person_groups" do
     it "destroys the requested person_group" do
       person_group = create(:person_group, company: User.first.active_company)
       expect {
-        delete person_group_url({slug: person_group.slug})
+        delete person_group_url({ slug: person_group.slug })
       }.to change(PersonGroup, :count).by(-1)
     end
 

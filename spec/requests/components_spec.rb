@@ -1,14 +1,17 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
-RSpec.describe "/components" do
-
+RSpec.describe "Components", :inertia do
   def valid_attributes
     {
-      component: attributes_for(:component,
-                                status_label_id: create(:status_label).id,
-                                vendor_id: create(:vendor).id,
-                                model_id: create(:model).id,)
+      component: attributes_for(
+        :component,
+        {
+          status_label_id: create(:status_label).id,
+          vendor_id: create(:vendor).id,
+          model_id: create(:model).id,
+        },
+      )
     }
   end
 
@@ -21,33 +24,34 @@ RSpec.describe "/components" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all components" do
-        component = create(:component, company: @admin.active_company)
+        component = create(:component, { company: @admin.active_company })
 
         get components_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "Components/Index"
         expect(response.body).to include(CGI.escapeHTML(component.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of components" do
-        component1 = create(:component, { name: "Include", company: @admin.active_company })
-        component2 = create(:component, { name: "Exclue", company: @admin.active_company })
+      context "with search params" do
+        it "returns a filtered list of components" do
+          component1 = create(:component, { name: "Include", company: @admin.active_company })
+          component2 = create(:component, { name: "Exclude", company: @admin.active_company })
 
-        get components_url, params: { search: component1.name }
+          get components_url, params: { search: component1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(component1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(component2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component "Components/Index"
+          expect(response.body).to include(CGI.escapeHTML(component1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(component2.name))
+        end
       end
     end
-
   end
 
   describe "GET /show" do
@@ -55,8 +59,35 @@ RSpec.describe "/components" do
 
     it "renders" do
       component = create(:component, company: @admin.active_company)
+
       get component_url({ id: component.id })
+
       expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "Components/Show"
+    end
+  end
+
+  describe "GET /new" do
+    login_admin
+
+    it "renders" do
+      get new_component_url
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "Components/New"
+    end
+  end
+
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      component = create(:component, company: @admin.active_company)
+
+      get edit_component_url(component)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "Components/Edit"
     end
   end
 
@@ -96,14 +127,12 @@ RSpec.describe "/components" do
     context "with valid parameters" do
       it "updates the requested component" do
         component = create(:component, company: @admin.active_company)
-        patch component_url(component), params: { component: valid_attributes }
-        component.reload
-      end
 
-      it "redirects to the component" do
-        component = create(:component, company: @admin.active_company)
-        patch component_url(component), params: { component: valid_attributes }
+        attrs = valid_attributes
+        patch component_url(component), params: attrs
         component.reload
+
+        expect(component.name).to eq(attrs[:component][:name])
         expect(response).to redirect_to(component_url(component))
       end
     end
@@ -111,7 +140,9 @@ RSpec.describe "/components" do
     context "with invalid parameters" do
       it "redirects back to the edit component page" do
         component = create(:component, company: @admin.active_company)
+
         patch component_url(component), params: invalid_attributes
+
         expect(response).to redirect_to edit_component_url(component)
       end
     end

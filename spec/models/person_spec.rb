@@ -29,11 +29,11 @@
 #  fk_rails_...  (manager_id => people.id)
 #  fk_rails_...  (user_id => users.id)
 #
-require 'rails_helper'
-require 'models/concerns/ownable'
-require 'models/concerns/contactable'
-require 'models/concerns/assign_toable'
-require 'models/concerns/fieldable'
+require "rails_helper"
+require "models/concerns/ownable"
+require "models/concerns/contactable"
+require "models/concerns/assign_toable"
+require "models/concerns/fieldable"
 require "models/concerns/serializable"
 
 RSpec.describe Person do
@@ -62,7 +62,7 @@ RSpec.describe Person do
     it_behaves_like "fieldable"
 
     it { is_expected.to belong_to(:user).optional }
-    it { is_expected.to belong_to(:manager).class_name('Person').optional }
+    it { is_expected.to belong_to(:manager).class_name("Person").optional }
     it { is_expected.to belong_to(:location).optional }
     it { is_expected.to have_many(:tickets) }
     it { is_expected.to have_many(:groups) }

@@ -1,8 +1,12 @@
 class ManufacturersController < ApplicationController
   include OwnableConcern
 
-  expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated, sortable_fields) }
+  expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated) }
   expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
+
+  strong_params :manufacturer, permit: [:name]
+
+  sortable_fields %w(name)
 
   # @route GET /manufacturers (manufacturers)
   def index
@@ -23,7 +27,7 @@ class ManufacturersController < ApplicationController
     authorize manufacturer
     render inertia: "Manufacturers/Show", props: {
       manufacturer: manufacturer.render(view: :show),
-      items: InertiaRails.lazy(-> {
+      items: InertiaRails.optional {
         paginated_items = manufacturer.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render,
@@ -32,8 +36,8 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      }),
-      accessories: InertiaRails.lazy(-> {
+      },
+      accessories: InertiaRails.optional {
         paginated_accessories = manufacturer.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render,
@@ -42,8 +46,8 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_accessories)
           }
         }
-      }),
-      consumables: InertiaRails.lazy(-> {
+      },
+      consumables: InertiaRails.optional {
         paginated_consumables = manufacturer.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render,
@@ -52,8 +56,8 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_consumables)
           }
         }
-      }),
-      components: InertiaRails.lazy(-> {
+      },
+      components: InertiaRails.optional {
         paginated_components = manufacturer.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render,
@@ -62,7 +66,7 @@ class ManufacturersController < ApplicationController
             **pagination_data(paginated_components)
           }
         }
-      }),
+      },
     }
   end
 
@@ -88,7 +92,7 @@ class ManufacturersController < ApplicationController
     manufacturer = Manufacturer.new(manufacturer_params)
     manufacturer.company = @active_company
     if manufacturer.save
-      redirect_to manufacturer, notice: 'Manufacturer was successfully created'
+      redirect_to manufacturer, notice: "Manufacturer was successfully created"
     else
       redirect_to new_manufacturer_path, inertia: { errors: manufacturer.errors }
     end
@@ -99,7 +103,7 @@ class ManufacturersController < ApplicationController
   def update
     authorize manufacturer
     if manufacturer.update(manufacturer_params)
-      redirect_to manufacturer, notice: 'Manufacturer was successfully updated'
+      redirect_to manufacturer, notice: "Manufacturer was successfully updated"
     else
       redirect_to edit_manufacturer_path, inertia: { errors: manufacturer.errors }
     end
@@ -110,16 +114,6 @@ class ManufacturersController < ApplicationController
   def destroy
     authorize manufacturer
     manufacturer.destroy
-    redirect_to manufacturers_url, notice: 'Manufacturer was successfully destroyed.'
-  end
-
-  private
-
-  def sortable_fields
-    %w(name).freeze
-  end
-
-  def manufacturer_params
-    params.require(:manufacturer).permit(:name)
+    redirect_to manufacturers_url, notice: "Manufacturer was successfully destroyed."
   end
 end

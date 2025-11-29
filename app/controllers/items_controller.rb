@@ -1,8 +1,14 @@
 class ItemsController < ApplicationController
   include OwnableConcern
 
-  expose :items, -> { search(@active_company.items.includes_associated, sortable_fields) }
+  expose :items, -> { search(@active_company.items.includes_associated) }
   expose :item, scope: ->{ @active_company.items }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
+  strong_params :item, permit: [:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :department_id, :model_id, :vendor_id, :default_location_id, :parent_id, :status_label_id, :purchased_at, :requestable, nics: [:mac, :ip]]
+
+  strong_params :advanced_search_params, permit: [:name, :asset_tag, :serial, :cost, :purchased_at, :requestable, model: [:id], vendor: [:id], manufacturer: [:id], department: [:id], category: [:id], created_at: [:start, :end, :type]]
+
+  sortable_fields %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name)
 
   before_action :handle_department_change, only: [:create, :update]
 
@@ -59,7 +65,7 @@ class ItemsController < ApplicationController
   def checkout
     authorize item
     if item.assigned?
-      redirect_to item, warning: 'Item is already checked out'
+      redirect_to item, warning: "Item is already checked out"
     else
       assignment = Assignment.new({ assignable: item, assign_toable_type: "Person" })
 
@@ -88,7 +94,7 @@ class ItemsController < ApplicationController
         status_labels: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
       }
     else
-      redirect_to item, warning: 'Item is not yet checked out'
+      redirect_to item, warning: "Item is not yet checked out"
     end
   end
 
@@ -99,7 +105,7 @@ class ItemsController < ApplicationController
     item.company = @active_company
 
     if item.save
-      redirect_to item, notice: 'Item was successfully created'
+      redirect_to item, notice: "Item was successfully created"
     else
       redirect_to new_item_path, inertia: { errors: item.errors }
     end
@@ -111,7 +117,7 @@ class ItemsController < ApplicationController
     authorize item
 
     if item.update(item_params)
-      redirect_to item, notice: 'Item was successfully updated'
+      redirect_to item, notice: "Item was successfully updated"
     else
       redirect_to edit_item_path, inertia: { errors: item.errors }
     end
@@ -122,7 +128,7 @@ class ItemsController < ApplicationController
   def destroy
     authorize item
     item.destroy
-    redirect_to items_url, notice: 'Item was successfully destroyed.'
+    redirect_to items_url, notice: "Item was successfully destroyed."
   end
 
   private
@@ -134,15 +140,4 @@ class ItemsController < ApplicationController
     end
   end
 
-  def sortable_fields
-    %w(name asset_tag serial cost cost_cents purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name).freeze
-  end
-
-  def advanced_search_params
-    params.permit(:name, :asset_tag, :serial, :cost, :purchased_at, :requestable, model: [:id], vendor: [:id], manufacturer: [:id], department: [:id], category: [:id], created_at: [:start, :end, :type])
-  end
-
-  def item_params
-    @item_params ||= params.require(:item).permit(:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :department_id, :model_id, :vendor_id, :default_location_id, :parent_id, :status_label_id, :purchased_at, :requestable, nics: [:mac, :ip])
-  end
 end

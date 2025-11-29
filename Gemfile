@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.4"
+ruby "3.4.4"
 
 # Server
-gem "rails", ">= 7.1"
+gem "rails", ">= 8.1.1"
 gem "pg", ">= 1.1"
 gem "puma", ">= 6.0"
 
@@ -35,11 +35,11 @@ gem "factory_bot", ">= 6.4"
 gem "factory_bot_rails", ">= 6.4"
 gem "ipaddress_2", ">= 0.14.0"
 gem "countries", ">= 6.0"
-gem "js-routes", ">= 2.2"
+gem "js-routes", ">= 2.2" # replace with https://github.com/ElMassimo/js_from_routes
 gem "net-ldap", ">= 0.18.0"
 gem "overmind", "~> 2.5"
 gem "amazing_print", ">= 1.4"
-gem "delayed_job_active_record", ">= 4.1"
+gem "delayed_job_active_record", ">= 4.1" # replace with https://github.com/rails/solid_queue
 gem "store_base_sti_class", "~> 3.2"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -59,21 +59,29 @@ gem "bootsnap", require: false
 group :development, :test do
   gem "rspec-rails", ">= 6.0.1"
   gem "pry-rails", ">= 0.3.9"
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
+  gem "faker", :git => "https://github.com/faker-ruby/faker.git", :branch => "main"
+
+  gem "bullet", ">= 7.0"
 
   gem "rubocop-rails", ">= 2.14", require: false
   gem "rubocop-rspec", ">= 2.9", require: false
+  gem "rubocop-factory_bot", ">= 2.25", require: false
   gem "rubocop-performance", ">= 1.13", require: false
   gem "rubocop-daemon", ">= 0.3.2", require: false
+  gem "rubocop-packaging", "~> 0.6.0", require: false
+  gem "rubocop-shopify", "~> 2.18", require: false
+  gem "rubocop-thread_safety", "~> 0.7.3", require: false
+  gem "rubocop-capybara", "~> 2.22", require: false
+  gem "rubocop-rspec_rails", "~> 2.32", require: false
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
 
-  gem "dotenv-rails", ">= 2.8"
+  gem "dotenv-rails", ">= 3.1"
 
   # File annotation
   gem "chusaku", "~> 1.2", require: false
-  gem "annotate", "~> 3.2", require: false
+  gem "annotaterb", "~> 4.20", require: false
 end
 
 group :development do
@@ -81,13 +89,27 @@ group :development do
   gem "web-console"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  gem "spring"
 
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
+  # Security analysis tool
+  gem "brakeman", "~> 7.1", require: false
+
+  # Email previews
+  gem "letter_opener", "~> 1.10"
+
+  # I18n
+  # Report unused and missing locale keys [https://github.com/glebm/i18n-tasks]
+  gem "i18n-tasks", "~> 1.1", require: false
+  # Generate json and ts locale files from locale.yml files [https://github.com/fnando/i18n-js]
+  gem "i18n-js", "~> 4.2", require: false
+
+  # Tools for VSCode
+  gem "solargraph", ">= 0.48.0", require: false
+  gem "ruby-lsp", ">= 0.22.1", require: false
 end
 
 group :test do
+  gem "rspec-watcher", "~> 0.3.3"
+
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara", ">= 3.39"
   gem "selenium-webdriver", ">= 4.10"
@@ -95,7 +117,6 @@ group :test do
   gem "generator_spec", ">= 0.9.4"
   gem "database_cleaner-active_record", ">= 2.0"
   gem "shoulda-matchers", ">= 5.1"
-  gem "bullet", ">= 7.0"
   gem "simplecov", ">= 0.22.0"
   gem "pundit-matchers", ">= 3.0"
 end

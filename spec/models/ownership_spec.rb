@@ -21,7 +21,7 @@
 #  fk_rails_...  (company_id => companies.id)
 #  fk_rails_...  (department_id => departments.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Ownership do
   subject(:ownership) { build(:ownership) }

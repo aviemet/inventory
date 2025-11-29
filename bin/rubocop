@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+daemon_wrapper = "/usr/local/bin/rubocop-daemon-wrapper/rubocop"
+if File.exist?(daemon_wrapper) && File.executable?(daemon_wrapper) && !ARGV.include?("--lsp")
+  ARGV.unshift("--config", File.expand_path("../.rubocop.yml", __dir__))
+  exec(daemon_wrapper, *ARGV)
+end
+
+require "rubygems"
+require "bundler/setup"
+
+# Explicit RuboCop config increases performance slightly while avoiding config confusion.
+ARGV.unshift("--config", File.expand_path("../.rubocop.yml", __dir__))
+
+load Gem.bin_path("rubocop", "rubocop")

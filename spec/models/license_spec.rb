@@ -37,11 +37,11 @@
 #  fk_rails_...  (status_label_id => status_labels.id)
 #  fk_rails_...  (vendor_id => vendors.id)
 #
-require 'rails_helper'
-require 'models/concerns/ownable'
-require 'models/concerns/purchasable'
-require 'models/concerns/fieldable'
-require 'models/concerns/assignable'
+require "rails_helper"
+require "models/concerns/ownable"
+require "models/concerns/purchasable"
+require "models/concerns/fieldable"
+require "models/concerns/assignable"
 require "models/concerns/serializable"
 
 RSpec.describe License do

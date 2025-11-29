@@ -38,11 +38,11 @@ class LdapSync
 
       person = person_from_entry(entry)
 
-      username = entry[:samaccountname]
-      email = entry[:mail]
-      phone = entry[:telephonenumber]
+      entry[:samaccountname]
+      entry[:mail]
+      entry[:telephonenumber]
 
-      groups = entry[:memberof].map{ |group|
+      entry[:memberof].map{ |group|
         match = group.match(/CN=(\w+),/)
         if !match.nil? && match.length > 1
           match[1]
@@ -91,7 +91,7 @@ class LdapSync
     ActiveRecord::Base.transaction do
       @managers.each do |mgr_name, user_guids|
         split = mgr_name.split
-        manager = Person.where({ first_name: split[0], last_name: split[-1]}).first
+        manager = Person.where({ first_name: split[0], last_name: split[-1] }).first
         next unless manager
 
         user_guids.each do |_guid|

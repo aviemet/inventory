@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Submit } from '@/Components/Form'
+import { Form, Submit } from '@/components/Form'
 import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
 
 export interface <%= human_name %>FormProps {

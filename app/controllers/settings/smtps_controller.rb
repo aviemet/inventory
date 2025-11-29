@@ -2,6 +2,8 @@ class Settings::SmtpsController < ApplicationController
   expose :smtps, -> { @active_company.smtps }
   expose :smtp
 
+  strong_params :smtp, permit: [:name, :host, :domain, :port, :security, :username, :password, :address, :notes]
+
   # @route GET /settings/mail (settings_smtps)
   def index
     render inertia: "Settings/Mail/Index", props: {
@@ -19,7 +21,7 @@ class Settings::SmtpsController < ApplicationController
   # @route GET /settings/mail/new (new_settings_smtp)
   def new
     render inertia: "Settings/Mail/New", props: {
-      smtp: Smtp.new({ security: 'tls' }).render(view: :form_data)
+      smtp: Smtp.new({ security: "tls" }).render(view: :form_data)
     }
   end
 
@@ -34,7 +36,7 @@ class Settings::SmtpsController < ApplicationController
   def create
     smtp.company = @active_company
     if smtp.save
-      redirect_to settings_smtp_url(smtp), notice: 'Mail acccount successfully created'
+      redirect_to settings_smtp_url(smtp), notice: "Mail acccount successfully created"
     else
       redirect_to new_settings_mail_path, inertia: { errors: smtp.errors }
     end
@@ -45,7 +47,7 @@ class Settings::SmtpsController < ApplicationController
   # @route PUT /settings/mail/:id (settings_smtp)
   def update
     if smtp.update(smtp_params)
-      redirect_to settings_smtp_url(smtp), notice: 'Mail acccount successfully updated'
+      redirect_to settings_smtp_url(smtp), notice: "Mail acccount successfully updated"
     else
       redirect_to edit_settings_mail_path, inertia: { errors: smtp.errors }
     end
@@ -53,12 +55,6 @@ class Settings::SmtpsController < ApplicationController
 
   # @route DELETE /settings/mail/:id (settings_smtp)
   def destroy
-  end
-
-  private
-
-  def smtp_params
-    params.require(:smtp).permit(:name, :host, :domain, :port, :security, :username, :password, :address, :notes)
   end
 
 end

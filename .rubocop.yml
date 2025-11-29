@@ -1,10 +1,11 @@
-require:
-  - rubocop-factory_bot
+plugins:
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-factory_bot
+  - rubocop-capybara
+  - rubocop-rspec_rails
 
 AllCops:
-
   Exclude:
     - "bin/**/*"
     - "node_modules/**/*"
@@ -13,11 +14,13 @@ AllCops:
     - ".git/**/*"
   NewCops: enable
 
+Rails/HasAndBelongsToMany:
+  Enabled: false
 Style/Documentation:
   Enabled: false
 Style/ExponentialNotation:
   Enabled: true
-Style/HashAsLastArrayItem: 
+Style/HashAsLastArrayItem:
   Enabled: false
 Style/HashEachMethods:
   Enabled: true
@@ -28,7 +31,8 @@ Style/HashTransformValues:
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/StringLiterals:
-  Enabled: false
+  Enabled: true
+  EnforcedStyle: double_quotes
 Style/NumericLiterals:
   Enabled: false
 Style/ClassAndModuleChildren:
@@ -51,6 +55,9 @@ Style/SafeNavigation:
   Enabled: true
   Exclude:
     - "/app/views/**/*.slim"
+Style/SafeNavigationChainLength:
+  Enabled: false
+
 Metrics/AbcSize:
   Enabled: false
 Metrics/MethodLength:
@@ -66,6 +73,8 @@ Lint/StructNewOverride:
 Lint/MissingSuper:
   Enabled: false
 Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+Layout/EmptyLinesAfterModuleInclusion:
   Enabled: false
 Layout/FirstHashElementIndentation:
   Enabled: false
@@ -91,7 +100,9 @@ Layout/TrailingWhitespace:
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 Layout/SpaceInsideHashLiteralBraces:
-  Enabled: false
+  Enabled: true
+Layout/SpaceInsideBlockBraces:
+  Enabled: true
 Layout/CommentIndentation:
   Enabled: false
 Layout/HashAlignment:
@@ -108,6 +119,8 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Enabled: false
 RSpec/InstanceVariable:
+  Enabled: false
+RSpec/MetadataStyle:
   Enabled: false
 
 # Relaxed.Ruby.Style
@@ -152,6 +165,10 @@ Style/IfUnlessModifier:
 Style/Lambda:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#stylelambda
+
+Layout/SpaceInLambdaLiteral:
+  Enabled: true
+  EnforcedStyle: require_no_space
 
 Style/ModuleFunction:
   Enabled: false
@@ -245,10 +262,12 @@ Layout/FirstArrayElementIndentation:
   Enabled: false
 
 Layout/MultilineOperationIndentation:
-  Enabled: false
+  Enabled: true
+  EnforcedStyle: indented
 
-Layout/ArgumentAlignment:
-  Enabled: false
+Layout/AssignmentIndentation:
+  Enabled: true
+  IndentationWidth: 2
 
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
@@ -257,6 +276,21 @@ Lint/AmbiguousRegexpLiteral:
 Lint/AssignmentInCondition:
   Enabled: false
   StyleGuide: https://relaxed.ruby.style/#lintassignmentincondition
+
+Layout/ArgumentAlignment:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Width: 2
+
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
+
+Layout/CaseIndentation:
+  Enabled: true
+  EnforcedStyle: end
+  IndentOneStep: false
+  IndentationWidth: 2
 
 Naming/AccessorMethodName:
   Enabled: false
@@ -268,4 +302,13 @@ Style/HashSyntax:
   Enabled: false
 
 Metrics:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+Lint/DuplicateBranch:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
   Enabled: false

@@ -1,8 +1,12 @@
 class NetworksController < ApplicationController
   include OwnableConcern
 
-  expose :networks, -> { search(@active_company.networks, sortable_fields) }
+  expose :networks, -> { search(@active_company.networks) }
   expose :network, scope: ->{ @active_company.networks }, find: ->(id, scope){ scope.find(id) }
+
+  strong_params :network, permit: [:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes]
+
+  sortable_fields %w(name address gateway dhcp_start dhcp_end vlan_id)
 
   # @route GET /networks (networks)
   def index
@@ -56,7 +60,7 @@ class NetworksController < ApplicationController
     authorize Network
     network.company = @active_company
     if network.save
-      redirect_to network, notice: 'Network was successfully created'
+      redirect_to network, notice: "Network was successfully created"
     else
       redirect_to new_network_path, inertia: { errors: network.errors }
     end
@@ -67,7 +71,7 @@ class NetworksController < ApplicationController
   def update
     authorize network
     if network.update(network_params)
-      redirect_to network, notice: 'Network was successfully updated'
+      redirect_to network, notice: "Network was successfully updated"
     else
       redirect_to edit_network_path, inertia: { errors: network.errors }
     end
@@ -79,7 +83,7 @@ class NetworksController < ApplicationController
     authorize network
     network.destroy
     respond_to do |format|
-      format.html { redirect_to networks_url, notice: 'Network was successfully destroyed.' }
+      format.html { redirect_to networks_url, notice: "Network was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -101,13 +105,5 @@ class NetworksController < ApplicationController
       is_first_page: current_page == 1,
       is_last_page: current_page == pages
     }
-  end
-
-  def sortable_fields
-    %w(name address gateway dhcp_start dhcp_end vlan_id).freeze
-  end
-
-  def network_params
-    params.require(:network).permit(:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes)
   end
 end

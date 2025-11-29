@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../../support/devise'
+require "rails_helper"
+require_relative "../../support/devise"
 
 RSpec.describe "Api::Categories" do
   describe "POST /create" do
@@ -27,7 +27,7 @@ RSpec.describe "Api::Categories" do
 
       it "responds with errors" do
         post api_categories_url, params: { category: { name: "" } }
-        expect(JSON.parse(response.body)).to have_key("errors")
+        expect(response.parsed_body).to have_key("errors")
       end
     end
   end
@@ -59,7 +59,7 @@ RSpec.describe "Api::Categories" do
 
       it "responds with errors" do
         post api_categories_url, params: { category: { name: "" } }
-        expect(JSON.parse(response.body)).to have_key("errors")
+        expect(response.parsed_body).to have_key("errors")
       end
     end
   end

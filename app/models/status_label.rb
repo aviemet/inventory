@@ -15,12 +15,15 @@
 #  index_status_labels_on_slug  (slug) UNIQUE
 #
 class StatusLabel < ApplicationRecord
+  include PgSearchable
+  pg_search_config(against: [:name])
+
   slug :name
 
   tracked
   resourcify
 
-  enum status_type: { deployable: 0, pending: 1, undeployable: 2, archived: 3 }
+  enum :status_type, { deployable: 0, pending: 1, undeployable: 2, archived: 3 }
 
   validates :name, presence: true
 

@@ -2,6 +2,8 @@ class Api::DepartmentsController < Api::ApiController
   expose :departments, -> {  @active_company.departments }
   expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
 
+  strong_params :department, permit: [:name, :location_id, :manager_id, :notes]
+
   # @route GET /api/departments (api_departments)
   def index
     render json: departments.includes_associated.render
@@ -39,8 +41,4 @@ class Api::DepartmentsController < Api::ApiController
   end
 
   private
-
-  def department_params
-    params.require(:department).permit(:name, :location_id, :manager_id, :notes)
-  end
 end

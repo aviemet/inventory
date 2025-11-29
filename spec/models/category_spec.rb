@@ -15,7 +15,7 @@
 #  index_categories_on_name_and_categorizable_type  (name,categorizable_type) UNIQUE
 #  index_categories_on_slug                         (slug) UNIQUE
 #
-require 'rails_helper'
+require "rails_helper"
 require "models/concerns/serializable"
 
 RSpec.describe Category do

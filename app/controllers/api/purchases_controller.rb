@@ -1,6 +1,8 @@
 class Api::PurchasesController < Api::ApiController
   expose :purchase, id: ->{ params[:slug] }, scope: ->{ @active_company.purchases.includes_associated }, find_by: :slug
 
+  strong_params :purchase, permit: [:purchasable_type, :purchasable_id, :order_id, :cost, :currency, :qty, :notes]
+
   # @route POST /api/purchases (api_purchases)
   def create
     purchase.company = @active_company
@@ -23,8 +25,4 @@ class Api::PurchasesController < Api::ApiController
   end
 
   private
-
-  def purchase_params
-    params.require(:purchase).permit(:purchasable_type, :purchasable_id, :order_id, :cost, :currency, :qty, :notes)
-  end
 end

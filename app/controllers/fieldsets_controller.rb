@@ -1,6 +1,8 @@
 class FieldsetsController < ApplicationController
   before_action :set_fieldset, only: [:show, :edit, :update, :destroy]
 
+  strong_params :fieldset, permit: [:name, :description]
+
   # @route GET /fieldsets (fieldsets)
   def index
     @fieldsets = Fieldset.all
@@ -25,11 +27,11 @@ class FieldsetsController < ApplicationController
 
     respond_to do |format|
       if @fieldset.save
-        format.html { redirect_to @fieldset, notice: 'Fieldset was successfully created.' }
+        format.html { redirect_to @fieldset, notice: "Fieldset was successfully created." }
         format.json { render :show, status: :created, location: @fieldset }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @fieldset.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @fieldset.errors, status: :unprocessable_content }
       end
     end
   end
@@ -39,11 +41,11 @@ class FieldsetsController < ApplicationController
   def update
     respond_to do |format|
       if @fieldset.update(fieldset_params)
-        format.html { redirect_to @fieldset, notice: 'Fieldset was successfully updated.' }
+        format.html { redirect_to @fieldset, notice: "Fieldset was successfully updated." }
         format.json { render :show, status: :ok, location: @fieldset }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @fieldset.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @fieldset.errors, status: :unprocessable_content }
       end
     end
   end
@@ -52,7 +54,7 @@ class FieldsetsController < ApplicationController
   def destroy
     @fieldset.destroy
     respond_to do |format|
-      format.html { redirect_to fieldsets_url, notice: 'Fieldset was successfully destroyed.' }
+      format.html { redirect_to fieldsets_url, notice: "Fieldset was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -62,10 +64,5 @@ class FieldsetsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_fieldset
     @fieldset = Fieldset.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def fieldset_params
-    params.require(:fieldset).permit(:name, :description)
   end
 end

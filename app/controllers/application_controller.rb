@@ -11,12 +11,12 @@ class ApplicationController < ActionController::Base
 
   # before_action :decode_id
 
-  # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   private
 
   def first_run
-    redirect_to first_run_path if User.count == 0
+    redirect_to first_run_path if User.none?
   end
 
   # def decode_id
@@ -27,7 +27,12 @@ class ApplicationController < ActionController::Base
   #   params[:asset_type] = id_parts[:model]
   # end
 
-  # def record_not_found
-  #   raise ActionController::RoutingError, 'Not Found'
-  # end
+  def record_not_found
+    Rails.logger.warn("RecordNotFound: #{params.inspect}")
+
+    render inertia: "Error", props: {
+      status: 404,
+      message: t("activerecord.errors.message.not_found")
+    }
+  end
 end

@@ -24,8 +24,8 @@
 #  fk_rails_...  (app_smtp_id => smtps.id)
 #  fk_rails_...  (tickets_smtp_id => smtps.id)
 #
-require 'rails_helper'
-require 'models/concerns/contactable'
+require "rails_helper"
+require "models/concerns/contactable"
 
 RSpec.describe Company::AsSetup do
   subject(:company) { create(:company_as_setup) }

@@ -34,9 +34,9 @@ namespace :api do
   resources :manufacturers, except: [:edit, :new]
   resources :warranties, only: [:create, :update]
 
-  resources :fields, only: [:create, :update]
-  resources :fieldsets, only: [:create, :update]
-  resources :fieldset_associations, only: [:create, :update]
+  # resources :fields, only: [:create, :update]
+  # resources :fieldsets, only: [:create, :update]
+  # resources :fieldset_associations, only: [:create, :update]
 
   resources :ip_leases, only: [:create, :update]
   resources :networks, only: [:create, :update]

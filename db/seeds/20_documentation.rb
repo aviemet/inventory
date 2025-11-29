@@ -1,5 +1,5 @@
-if Rails.env.development? && Documentation.count == 0
-  model = Model.includes(:category).where(category: {name: "Laptop"}).first
+if Rails.env.development? && Documentation.none?
+  model = Model.includes(:category).where(category: { name: "Laptop" }).first
 
   Documentation.create({
     title: "About a Laptop Brand",

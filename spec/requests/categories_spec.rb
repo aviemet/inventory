@@ -1,7 +1,7 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
-RSpec.describe "Categories" do
+RSpec.describe "Categories", :inertia do
   def valid_attributes
     {
       category: attributes_for(:category)
@@ -16,12 +16,19 @@ RSpec.describe "Categories" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    it "renders" do
-      get categories_url
-      expect(response).to have_http_status(:ok)
+    describe "index page" do
+      it "renders" do
+        category = create(:category, company: @admin.active_company)
+
+        get categories_url
+
+        expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "Categories/Index"
+        expect(response.body).to include(CGI.escapeHTML(category.name))
+      end
     end
   end
 

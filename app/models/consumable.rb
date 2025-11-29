@@ -40,9 +40,10 @@
 class Consumable < Asset
   include Assignable::Consume
 
-  multisearchable(
+  include PgSearchable
+  pg_search_config(
     against: [:name, :asset_tag, :serial],
-    additional_attributes: ->(record) { { label: record.name } },
+    enable_multisearch: true,
   )
 
   tracked

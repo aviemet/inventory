@@ -25,7 +25,7 @@ export const useGetAssetsAsOptions: ReactQueryFunction<Schema.AssetsOptions[]> =
 	})
 }
 
-export const useGetAsset: ReactQueryFunction<Schema.Asset[], { id: string|number }> = ({ id }, options) => {
+export const useGetAsset: ReactQueryFunction<Schema.Asset[], { id: string | number }> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['items', id],
 		queryFn: async() => {

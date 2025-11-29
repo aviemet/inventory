@@ -2,9 +2,10 @@ import { fixupPluginRules } from '@eslint/compat'
 import stylistic from '@stylistic/eslint-plugin'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y'
-import jsoncPlugin from 'eslint-plugin-jsonc'
 import tsParser from '@typescript-eslint/parser'
+import jsoncPlugin from 'eslint-plugin-jsonc'
 import jsoncParser from 'jsonc-eslint-parser'
+import json from "@eslint/json";
 
 const ignores = [
 	'app/javascript/**/*',
@@ -122,6 +123,7 @@ export default [
 			'eqeqeq': 'error',
 			'no-console': 'warn',
 			'eol-last': ['error', 'always'],
+			'semi': ['error', 'never'],
 			...reactHooksPlugin.configs.recommended.rules,
 		},
 	},
@@ -137,15 +139,18 @@ export default [
 	},
 	// Json files
 	{
-		files: ['**/*.json', '**/*.jsonc'],
+		files: ['**/*.json', '**/*.jsonc', '**/*.json5'],
+		language: "json/json",
 		ignores,
 		plugins: {
 			jsonc: jsoncPlugin,
+			json,
 		},
 		languageOptions: {
 			parser: jsoncParser,
 		},
 		rules: {
+			"json/no-duplicate-keys": "error",
 			'jsonc/indent': ['error', 2, { ignoredNodes: ['Property'] }],
 			'@stylistic/no-multi-spaces': 'off',
 		},

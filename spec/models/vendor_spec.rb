@@ -13,9 +13,9 @@
 #
 #  index_vendors_on_slug  (slug) UNIQUE
 #
-require 'rails_helper'
-require 'models/concerns/contactable'
-require 'models/concerns/ownable'
+require "rails_helper"
+require "models/concerns/contactable"
+require "models/concerns/ownable"
 require "models/concerns/serializable"
 
 RSpec.describe Vendor do

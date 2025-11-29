@@ -4,13 +4,13 @@
 
 if Rails.env.development?
 
-  if User.count == 0 || Company.count == 0
+  if User.none? || Company.none?
     company = Company::AsSetup.create!({
       name: "Example Company",
       default_currency: "USD",
     })
 
-    if Location.count == 0
+    if Location.none?
       company = Company.first
 
       [
@@ -26,7 +26,7 @@ if Rails.env.development?
       ].each{ |location| Location.create!(location) }
     end
 
-    if Department.count == 0
+    if Department.none?
       company = Company.first
 
       [
@@ -73,7 +73,7 @@ if Rails.env.development?
     person.add_role :admin, company
   end
 
-  if Person.count == 1
+  if Person.one?
     user = User.create!({
       email: "tommy@email.com",
       password: "Complex1!",
@@ -92,7 +92,7 @@ if Rails.env.development?
     })
   end
 
-  if Manufacturer.count == 0
+  if Manufacturer.none?
     company = Company.first
 
     ["Apple", "Lenovo", "Cisco", "HP", "Samsung", "SHARP"].each do |manufacturer|
@@ -103,7 +103,7 @@ if Rails.env.development?
     end
   end
 
-  if Model.count == 0
+  if Model.none?
     company = Company.first
 
     [
@@ -145,7 +145,7 @@ if Rails.env.development?
     ].each{ |model| Model.create!(model) }
   end
 
-  if Vendor.count == 0
+  if Vendor.none?
     company = Company.first
 
     [
@@ -168,7 +168,7 @@ if Rails.env.development?
     ].each{ |vendor| Vendor.create!(vendor.merge({ company: })) }
   end
 
-  if Item.count == 0
+  if Item.none?
     company = Company.first
 
     ActiveRecord::Base.transaction do
@@ -183,7 +183,7 @@ if Rails.env.development?
           serial:,
           cost: Faker::Number.decimal(l_digits: 4, r_digits: 2),
           purchased_at: Time.zone.yesterday.end_of_day,
-          model: Model.find(Model.where('id <= ?', 2).pluck(:id).sample),
+          model: Model.find(Model.where(id: ..2).pluck(:id).sample),
           vendor: Vendor.find(Vendor.pluck(:id).sample),
           default_location: Location.find(Location.pluck(:id).sample),
           status_label: StatusLabel.first,
@@ -210,7 +210,7 @@ if Rails.env.development?
     end
   end
 
-  if Contract.count == 0
+  if Contract.none?
     company = Company.first
 
     vendor = Vendor.create!({
@@ -225,12 +225,12 @@ if Rails.env.development?
       begins_at: 6.months.ago,
       ends_at: 6.months.from_now,
       vendor:,
-      category: Category.where({name: "Utility"}).first,
+      category: Category.where({ name: "Utility" }).first,
       company:,
     })
   end
 
-  if License.count == 0
+  if License.none?
     company = Company.first
 
     License.create!({
@@ -252,7 +252,7 @@ if Rails.env.development?
     })
   end
 
-  if Accessory.count == 0
+  if Accessory.none?
     company = Company.first
 
     Accessory.create!({
@@ -270,7 +270,7 @@ if Rails.env.development?
     })
   end
 
-  if Consumable.count == 0
+  if Consumable.none?
     company = Company.first
 
     Consumable.create!({
@@ -286,7 +286,7 @@ if Rails.env.development?
     })
   end
 
-  if Component.count == 0
+  if Component.none?
     company = Company.first
 
     Component.create!({
@@ -302,7 +302,7 @@ if Rails.env.development?
     })
   end
 
-  if Assignment.count == 0
+  if Assignment.none?
     Item.first.assign_to Person.first
     Item.second.assign_to Location.first
     Item.third.assign_to Item.fourth
@@ -311,7 +311,7 @@ if Rails.env.development?
     Consumable.first.assign_to Person.first
   end
 
-  if Ticket.count == 0
+  if Ticket.none?
     company = Company.first
 
     ticket = Ticket.create({
@@ -327,7 +327,7 @@ if Rails.env.development?
     })
   end
 
-  if Network.count == 0
+  if Network.none?
     company = Company.first
 
     [
@@ -359,7 +359,7 @@ if Rails.env.development?
     ].each{ |network| Network.create!(network) }
   end
 
-  if Smtp.count == 0
+  if Smtp.none?
     Smtp.create({
       name: "GMail",
       host: "smtp.gmail.com",

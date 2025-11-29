@@ -33,20 +33,14 @@ class Company < ApplicationRecord
   SETTINGS_KEYS = %i[primary_color secondary_color company_field_name department_field_name default_eula enable_2fa].freeze
   store_accessor :settings, *SETTINGS_KEYS
 
-  multisearchable(
+  include PgSearchable
+  pg_search_config(
     against: [:name],
-    additional_attributes: ->(record) { { label: record.name } },
+    enable_multisearch: true,
   )
 
-  pg_search_scope(
-    :search,
-    against: [:name],
-    using: {
-      tsearch: { prefix: true },
-      trigram: {}
-    },
-    ignoring: :accents,
-  )
+  include PgSearchable
+  pg_search_config(against: [:name])
 
   slug :name
 

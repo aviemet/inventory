@@ -1,14 +1,18 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
-RSpec.describe "/items" do
+RSpec.describe "Items", :inertia do
   def valid_attributes
     {
-      item: attributes_for(:item,
-                           status_label_id: create(:status_label).id,
-                           model_id: create(:model).id,
-                           vendor_id: create(:vendor).id,
-                           default_location_id: create(:location).id,)
+      item: attributes_for(
+        :item,
+        {
+          status_label_id: create(:status_label).id,
+          model_id: create(:model).id,
+          vendor_id: create(:vendor).id,
+          default_location_id: create(:location).id,
+        },
+      )
     }
   end
 
@@ -20,56 +24,63 @@ RSpec.describe "/items" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all items" do
         item = create(:item, { company: @admin.active_company })
 
         get items_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "Items/Index"
         expect(response.body).to include(CGI.escapeHTML(item.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of items" do
-        item1 = create(:item, { name: "Include", company: @admin.active_company })
-        item2 = create(:item, { name: "Exclue", company: @admin.active_company })
+      context "with search params" do
+        it "returns a filtered list of items" do
+          item1 = create(:item, { name: "Include", company: @admin.active_company })
+          item2 = create(:item, { name: "Exclude", company: @admin.active_company })
 
-        get items_url, params: { search: item1.name }
+          get items_url, params: { search: item1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(item1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(item2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component "Items/Index"
+          expect(response.body).to include(CGI.escapeHTML(item1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(item2.name))
+        end
       end
     end
 
-    context "new page" do
-      it "displays form to create a new item" do
+    describe "GET /new" do
+      it "renders" do
         get new_item_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "Items/New"
       end
     end
 
-    context "edit page" do
-      it "displays form to edit a item" do
+    describe "GET /edit" do
+      it "renders" do
         item = create(:item, company: @admin.active_company)
 
         get edit_item_url(item)
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "Items/Edit"
       end
     end
 
-    context "show page" do
+    describe "GET /show" do
       it "renders" do
         item = create(:item, company: @admin.active_company)
+
         get item_url({ id: item.id })
+
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "Items/Show"
       end
     end
 

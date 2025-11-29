@@ -2,8 +2,12 @@ class DepartmentsController < ApplicationController
 
   include ContactableConcern
 
-  expose :departments, -> { search(@active_company.departments.includes_associated, sortable_fields) }
+  expose :departments, -> { search(@active_company.departments.includes_associated) }
   expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
+
+  strong_params :department, permit: [:name, :slug, :location_id, :notes]
+
+  sortable_fields %w(name items.count accessories.count components.count consumables.count people.count)
 
   # @route GET /departments (departments)
   def index
@@ -24,7 +28,7 @@ class DepartmentsController < ApplicationController
     authorize department
     render inertia: "Departments/Show", props: {
       department: department.render(view: :show),
-      items: InertiaRails.lazy(-> {
+      items: InertiaRails.optional {
         paginated_items = department.items.includes_associated.page(params[:page] || 1)
         {
           data: paginated_items.render,
@@ -33,8 +37,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_items)
           }
         }
-      }),
-      accessories: InertiaRails.lazy(-> {
+      },
+      accessories: InertiaRails.optional {
         paginated_accessories = department.accessories.includes_associated.page(params[:page] || 1)
         {
           data: paginated_accessories.render,
@@ -43,8 +47,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_accessories)
           }
         }
-      }),
-      consumables: InertiaRails.lazy(-> {
+      },
+      consumables: InertiaRails.optional {
         paginated_consumables = department.consumables.includes_associated.page(params[:page] || 1)
         {
           data: paginated_consumables.render,
@@ -53,8 +57,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_consumables)
           }
         }
-      }),
-      components: InertiaRails.lazy(-> {
+      },
+      components: InertiaRails.optional {
         paginated_components = department.components.includes_associated.page(params[:page] || 1)
         {
           data: paginated_components.render,
@@ -63,8 +67,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_components)
           }
         }
-      }),
-      licenses: InertiaRails.lazy(-> {
+      },
+      licenses: InertiaRails.optional {
         paginated_licenses = department.licenses.includes_associated.page(params[:page] || 1)
         {
           data: paginated_licenses.render,
@@ -73,8 +77,8 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_licenses)
           }
         }
-      }),
-      people: InertiaRails.lazy(-> {
+      },
+      people: InertiaRails.optional {
         paginated_people = department.people.includes_associated.page(params[:page] || 1)
         {
           data: paginated_people.render,
@@ -83,7 +87,7 @@ class DepartmentsController < ApplicationController
             **pagination_data(paginated_people)
           }
         }
-      }),
+      },
     }
   end
 
@@ -110,7 +114,7 @@ class DepartmentsController < ApplicationController
     department.company = @active_company
 
     if department.save
-      redirect_to department, notice: 'Department was successfully created'
+      redirect_to department, notice: "Department was successfully created"
     else
       redirect_to new_department_path, inertia: { errors: department.errors }
     end
@@ -121,7 +125,7 @@ class DepartmentsController < ApplicationController
   def update
     authorize department
     if department.update(department_params)
-      redirect_to department, notice: 'Department was successfully updated'
+      redirect_to department, notice: "Department was successfully updated"
     else
       redirect_to edit_department_path, inertia: { errors: department.errors }
     end
@@ -132,16 +136,6 @@ class DepartmentsController < ApplicationController
   def destroy
     authorize department
     department.destroy
-    redirect_to departments_url, notice: 'Department was successfully destroyed.'
-  end
-
-  private
-
-  def sortable_fields
-    %w(name items.count accessories.count components.count consumables.count people.count).freeze
-  end
-
-  def department_params
-    params.require(:department).permit(:name, :slug, :location_id, :notes)
+    redirect_to departments_url, notice: "Department was successfully destroyed."
   end
 end

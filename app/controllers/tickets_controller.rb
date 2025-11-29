@@ -1,7 +1,11 @@
 class TicketsController < ApplicationController
 
-  expose :tickets, -> { search(@active_company.tickets.includes_associated.all, sortable_fields) }
+  expose :tickets, -> { search(@active_company.tickets.includes_associated.all) }
   expose :ticket, scope: -> { @active_company.tickets }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
+  strong_params :ticket, permit: [:subject, :description, :status, :messages, :primary_contact_id, :asset_id, assignments_attributes: [:person_id]]
+
+  sortable_fields %w(subject created_by.name)
 
   # @route GET /tickets (tickets)
   def index
@@ -52,7 +56,7 @@ class TicketsController < ApplicationController
     authorize Ticket
     ticket.company = @active_company
     if ticket.save
-      redirect_to ticket, notice: 'Ticket was successfully created'
+      redirect_to ticket, notice: "Ticket was successfully created"
     else
       redirect_to new_ticket_path, inertia: { errors: ticket.errors }
     end
@@ -63,7 +67,7 @@ class TicketsController < ApplicationController
   def update
     authorize ticket
     if ticket.update(ticket_params)
-      redirect_to ticket, notice: 'Ticket was successfully updated'
+      redirect_to ticket, notice: "Ticket was successfully updated"
     else
       redirect_to edit_ticket_path, inertia: { errors: ticket.errors }
     end
@@ -74,15 +78,5 @@ class TicketsController < ApplicationController
     authorize ticket
     ticket.destroy
     redirect_to tickets_url, notice: "Ticket was successfully destroyed."
-  end
-
-  private
-
-  def sortable_fields
-    %w(subject created_by.name).freeze
-  end
-
-  def ticket_params
-    params.require(:ticket).permit(:subject, :description, :status, :messages, :primary_contact_id, :asset_id, assignments_attributes: [:person_id])
   end
 end

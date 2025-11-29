@@ -1,3 +1,3 @@
 namespace :test do
-  post 'login', to: 'sessions#create'
+  post "login", to: "sessions#create"
 end

@@ -1,13 +1,16 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
-RSpec.describe "/models" do
+RSpec.describe "Models", :inertia do
   def valid_attributes
     {
-      model: attributes_for(:model, {
-        category_id: create(:category).id,
-        manufacturer_id: create(:manufacturer).id
-      },)
+      model: attributes_for(
+        :model,
+        {
+          category_id: create(:category).id,
+          manufacturer_id: create(:manufacturer).id,
+        },
+      )
     }
   end
 
@@ -19,57 +22,70 @@ RSpec.describe "/models" do
     }
   end
 
-  describe "GET /" do
+  describe "GET /index" do
     login_admin
 
-    context "index page" do
+    describe "index page" do
       it "lists all models" do
-        model = create(:model, { company: User.first.active_company })
+        model = create(:model, { company: @admin.active_company })
 
         get models_url
 
         expect(response).to have_http_status(:ok)
+        expect_inertia.to render_component "Models/Index"
         expect(response.body).to include(CGI.escapeHTML(model.name))
       end
-    end
 
-    context "index page with search params" do
-      it "returns a filtered list of models" do
-        model1 = create(:model, { name: "Include", company: User.first.active_company })
-        model2 = create(:model, { name: "Exclue", company: User.first.active_company })
+      context "with search params" do
+        it "returns a filtered list of models" do
+          model1 = create(:model, { name: "Include", company: @admin.active_company })
+          model2 = create(:model, { name: "Exclude", company: @admin.active_company })
 
-        get models_url, params: { search: model1.name }
+          get models_url, params: { search: model1.name }
 
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(CGI.escapeHTML(model1.name))
-        expect(response.body).not_to include(CGI.escapeHTML(model2.name))
+          expect(response).to have_http_status(:ok)
+          expect_inertia.to render_component "Models/Index"
+          expect(response.body).to include(CGI.escapeHTML(model1.name))
+          expect(response.body).not_to include(CGI.escapeHTML(model2.name))
+        end
       end
     end
+  end
 
-    context "new page" do
-      it "displays form to create a new model" do
-        get new_model_url
+  describe "GET /show" do
+    login_admin
 
-        expect(response).to have_http_status(:ok)
-      end
+    it "renders" do
+      model = create(:model, company: @admin.active_company)
+
+      get model_url({ slug: model.slug })
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "Models/Show"
     end
+  end
 
-    context "edit page" do
-      it "displays form to edit a model" do
-        model = create(:model, company: User.first.active_company)
+  describe "GET /new" do
+    login_admin
 
-        get edit_model_url(model)
+    it "renders" do
+      get new_model_url
 
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "Models/New"
     end
+  end
 
-    context "show page" do
-      it "renders" do
-        model = create(:model, company: @admin.active_company)
-        get model_url({ slug: model.slug })
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET /edit" do
+    login_admin
+
+    it "renders" do
+      model = create(:model, company: @admin.active_company)
+
+      get edit_model_url(model)
+
+      expect(response).to have_http_status(:ok)
+      expect_inertia.to render_component "Models/Edit"
     end
   end
 
@@ -105,7 +121,7 @@ RSpec.describe "/models" do
     context "with valid parameters" do
       it "updates the requested model and redirects to the show page" do
         name_change = "Changed"
-        model = create(:model, company: User.first.active_company )
+        model = create(:model, company: @admin.active_company )
         patch model_url(model.slug), params: { model: { name: name_change } }
 
         model.reload
@@ -117,7 +133,7 @@ RSpec.describe "/models" do
 
     context "with invalid parameters" do
       it "redirects back to the edit model page" do
-        model = create(:model, company: User.first.active_company)
+        model = create(:model, company: @admin.active_company)
         patch model_url(model), params: invalid_attributes
         expect(response).to redirect_to edit_model_url(model)
       end
@@ -128,15 +144,15 @@ RSpec.describe "/models" do
     login_admin
 
     it "destroys the requested model" do
-      model = create(:model, company: User.first.active_company)
+      model = create(:model, company: @admin.active_company)
       expect {
-        delete model_url({slug: model.slug})
+        delete model_url({ slug: model.slug })
       }.to change(Model, :count).by(-1)
     end
 
     it "redirects to the models list" do
-      model = create(:model, company: User.first.active_company)
-      delete model_url({slug: model.slug})
+      model = create(:model, company: @admin.active_company)
+      delete model_url({ slug: model.slug })
       expect(response).to redirect_to(models_url)
     end
   end

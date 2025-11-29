@@ -25,7 +25,7 @@ export const useGetManufacturersAsOptions: ReactQueryFunction<Schema.Manufacture
 	})
 }
 
-export const useGetManufacturer: ReactQueryFunction<Schema.Manufacturer, { id: string|number}> = ({ id }, options) => {
+export const useGetManufacturer: ReactQueryFunction<Schema.Manufacturer, { id: string | number }> = ({ id }, options) => {
 	return useQuery({
 		queryKey: ['manufacturers', id],
 		queryFn: async () => {

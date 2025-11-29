@@ -1,7 +1,11 @@
 class CompaniesController < ApplicationController
 
-  expose :companies, -> { search(current_user.companies, sortable_fields) }
+  expose :companies, -> { search(current_user.companies) }
   expose :company, id: ->{ params[:slug] }, scope: ->{ current_user.companies }, find_by: :slug
+
+  strong_params :company, permit: [:name]
+
+  sortable_fields %w(name locations.count departments.count assets.count people.count)
 
   # @route GET /companies (companies)
   def index
@@ -53,7 +57,7 @@ class CompaniesController < ApplicationController
       current_user.add_role :admin, company
       current_user.update(active_company: company)
 
-      redirect_to company, notice: 'Company was successfully created.'
+      redirect_to company, notice: "Company was successfully created."
     else
       redirect_to new_company_path, inertia: { errors: company.errors }
     end
@@ -64,7 +68,7 @@ class CompaniesController < ApplicationController
   def update
     authorize company
     if company.update(company_params)
-      redirect_to company, notice: 'Company was successfully updated.'
+      redirect_to company, notice: "Company was successfully updated."
     else
       redirect_to edit_company_path, inertia: { errors: company.errors }
     end
@@ -76,7 +80,7 @@ class CompaniesController < ApplicationController
     authorize company
     company.destroy
     respond_to do |format|
-      format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
+      format.html { redirect_to companies_url, notice: "Company was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -87,14 +91,4 @@ class CompaniesController < ApplicationController
   #     format.html { render template: "companies/#{params[:snippet]}", layout: false }
   #   end
   # end
-
-  private
-
-  def sortable_fields
-    %w(name locations.count departments.count assets.count people.count).freeze
-  end
-
-  def company_params
-    params.require(:company).permit(:name)
-  end
 end

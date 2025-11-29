@@ -1,6 +1,8 @@
 class Api::ConsumablesController < Api::ApiController
   expose :consumable, id: ->{ params[:slug] }, scope: ->{ @active_company.consumables }, find_by: :slug
 
+  strong_params :consumable, permit: [:name, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :category_id, :vendor_id, :default_location_id]
+
   # @route PATCH /api/consumables/:id (api_consumable)
   # @route PUT /api/consumables/:id (api_consumable)
   def update
@@ -13,8 +15,4 @@ class Api::ConsumablesController < Api::ApiController
   end
 
   private
-
-  def consumable_params
-    params.require(:consumable).permit(:name, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :category_id, :vendor_id, :default_location_id)
-  end
 end

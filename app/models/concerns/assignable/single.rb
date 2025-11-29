@@ -24,10 +24,12 @@ module Assignable
       end
 
       def unassign(assignment = self.assignment, returned_at: Time.current)
+        return false unless assignment
+
         self._before_unassignment(assignment, params) if self.respond_to?(:_before_unassignment)
         self.before_unassignment(assignment, params) if self.respond_to?(:before_unassignment)
 
-        assignment&.update({
+        success = assignment.update({
           active: false,
           returned_at:
         })
@@ -35,7 +37,7 @@ module Assignable
         self._after_unassignment(assignment, params) if self.respond_to?(:_after_unassignment)
         self.after_unassignment(assignment, params) if self.respond_to?(:after_unassignment)
 
-        self
+        success
       end
 
       def _before_assignment(_assignment, _params)

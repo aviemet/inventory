@@ -1,8 +1,12 @@
 class LicensesController < ApplicationController
   include OwnableConcern
 
-  expose :licenses, -> { search(@active_company.licenses.includes_associated, sortable_fields) }
+  expose :licenses, -> { search(@active_company.licenses.includes_associated) }
   expose :license, scope: ->{ @active_company.licenses }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
+  strong_params :license, permit: [:name, :description, :qty, :cost, :category_id, :vendor_id, :manufacturer_id, :key]
+
+  sortable_fields %w(name key licenser_name licenser_email notes models.name vendors.name categories.name manufacturers.name departments.name)
 
   # @route GET /licenses (licenses)
   def index
@@ -71,7 +75,7 @@ class LicensesController < ApplicationController
         assignment: assignment.render(view: :edit),
       }
     else
-      redirect_to license, warning: 'License assignment is unable to be checked in'
+      redirect_to license, warning: "License assignment is unable to be checked in"
     end
   end
 
@@ -81,7 +85,7 @@ class LicensesController < ApplicationController
     license.company = @active_company
 
     if license.save
-      redirect_to license, notice: 'License was successfully created'
+      redirect_to license, notice: "License was successfully created"
     else
       redirect_to new_license_path, inertia: { errors: license.errors }
     end
@@ -92,7 +96,7 @@ class LicensesController < ApplicationController
   def update
     authorize license
     if license.update(license_params)
-      redirect_to license, notice: 'License was successfully updated'
+      redirect_to license, notice: "License was successfully updated"
     else
       redirect_to edit_license_path, inertia: { errors: license.errors }
     end
@@ -103,16 +107,6 @@ class LicensesController < ApplicationController
   def destroy
     authorize license
     license.destroy
-    redirect_to licenses_url, notice: 'License was successfully destroyed.'
-  end
-
-  private
-
-  def sortable_fields
-    %w(name key licenser_name licenser_email notes models.name vendors.name categories.name manufacturers.name departments.name).freeze
-  end
-
-  def license_params
-    params.require(:license).permit(:name, :description, :qty, :cost, :category_id, :vendor_id, :manufacturer_id, :key)
+    redirect_to licenses_url, notice: "License was successfully destroyed."
   end
 end

@@ -52,7 +52,7 @@
 #
 #  fk_rails_...  (active_company_id => companies.id)
 #
-require 'rails_helper'
+require "rails_helper"
 require "models/concerns/serializable"
 
 RSpec.describe User do

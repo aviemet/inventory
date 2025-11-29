@@ -36,7 +36,7 @@
 #  fk_rails_...  (user_id => users.id)
 #  fk_rails_...  (vendor_id => vendors.id)
 #
-require 'rails_helper'
+require "rails_helper"
 require "models/concerns/serializable"
 
 RSpec.describe Order do
