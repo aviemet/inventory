@@ -1,1 +1,6 @@
-export type FlashMessage = Record<'success' | 'alert' | 'info' | 'warning', string>
+export type FlashMessage = {
+	success?: string
+	alert?: string
+	info?: string
+	warning?: string
+}

@@ -14,8 +14,15 @@ interface NetworkDetailsTableProps {
 const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
 	const { network } =  useNetworkContext()
 
-	const dhcpStart = useMemo(() => new IPAddress(network.dhcp_start), [network.dhcp_start])
-	const dhcpEnd = useMemo(() => new IPAddress(network.dhcp_end), [network.dhcp_end])
+	const dhcpStart = useMemo(() => {
+		if(!network.dhcp_start) return
+		return new IPAddress(network.dhcp_start)
+	}, [network.dhcp_start])
+
+	const dhcpEnd = useMemo(() => {
+		if(!network.dhcp_end) return
+		return new IPAddress(network.dhcp_end)
+	}, [network.dhcp_end])
 
 	return (
 		<Table wrapper={ false } className={ cx(classes.table) }>
@@ -31,7 +38,9 @@ const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
 					const item = ips.find(ip => ip.address === host)?.item
 
 					const addr = new IPAddress(host)
-					const dhcp = addr.between(dhcpStart, dhcpEnd)
+					const dhcp = dhcpStart !== undefined && dhcpEnd !== undefined
+						? addr.between(dhcpStart, dhcpEnd)
+						: undefined
 
 					return (
 						<Table.Row key={ host } className={ cx(classes.row, { dhcp }) }>
