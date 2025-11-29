@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "/assets", :inertia do
   def valid_attributes
@@ -37,7 +37,7 @@ RSpec.describe "/assets", :inertia do
         get assets_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Assets/Index'
+        expect_inertia.to render_component "Assets/Index"
         expect(response.body).to include(CGI.escapeHTML(item.name))
         expect(response.body).to include(CGI.escapeHTML(accessory.name))
         expect(response.body).to include(CGI.escapeHTML(component.name))
@@ -52,7 +52,7 @@ RSpec.describe "/assets", :inertia do
           get assets_url, params: { search: asset1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Assets/Index'
+          expect_inertia.to render_component "Assets/Index"
           expect(response.body).to include(CGI.escapeHTML(asset1.name))
           expect(response.body).not_to include(CGI.escapeHTML(asset2.name))
         end

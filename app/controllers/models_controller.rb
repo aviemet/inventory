@@ -51,7 +51,7 @@ class ModelsController < ApplicationController
       if request.params&.[](:redirect) == false
         render json: model.render, status: :created
       else
-        redirect_to model, notice: 'Model was successfully created'
+        redirect_to model, notice: "Model was successfully created"
       end
     elsif request.params&.[](:redirect) == false
       render json: { errors: model.errors }, status: :see_other
@@ -65,7 +65,7 @@ class ModelsController < ApplicationController
   def update
     authorize model
     if model.update(model_params)
-      redirect_to model, notice: 'Model was successfully updated'
+      redirect_to model, notice: "Model was successfully updated"
     else
       redirect_to edit_model_path, inertia: { errors: model.errors }
     end
@@ -77,7 +77,7 @@ class ModelsController < ApplicationController
     authorize model
     model.destroy
     respond_to do |format|
-      format.html { redirect_to models_url, notice: 'Model was successfully destroyed.' }
+      format.html { redirect_to models_url, notice: "Model was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -89,6 +89,6 @@ class ModelsController < ApplicationController
   end
 
   def model_params
-    params.require(:model).permit(:name, :model_number, :manufacturer_id, :category_id, :notes)
+    params.expect(model: [:name, :model_number, :manufacturer_id, :category_id, :notes])
   end
 end

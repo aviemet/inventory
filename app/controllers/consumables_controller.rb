@@ -81,7 +81,7 @@ class ConsumablesController < ApplicationController
     authorize Consumable
     consumable.company = @active_company
     if consumable.save
-      redirect_to consumable, notice: 'Consumable was successfully created'
+      redirect_to consumable, notice: "Consumable was successfully created"
     else
       redirect_to new_consumable_path, inertia: { errors: consumable.errors }
     end
@@ -92,7 +92,7 @@ class ConsumablesController < ApplicationController
   def update
     authorize consumable
     if consumable.update(consumable_params)
-      redirect_to consumable, notice: 'Consumable was successfully updated'
+      redirect_to consumable, notice: "Consumable was successfully updated"
     else
       redirect_to edit_consumable_path, inertia: { errors: consumable.errors }
     end
@@ -104,7 +104,7 @@ class ConsumablesController < ApplicationController
     authorize consumable
     consumable.destroy
     respond_to do |format|
-      format.html { redirect_to consumables_url, notice: 'Consumable was successfully destroyed.' }
+      format.html { redirect_to consumables_url, notice: "Consumable was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -116,6 +116,6 @@ class ConsumablesController < ApplicationController
   end
 
   def consumable_params
-    params.require(:consumable).permit(:name, :min_qty, :qty, :cost, :serial, :asset_tag, :cost_currency, :requestable, :notes, :model_id, :manufacturer_id, :category_id, :vendor_id, :default_location_id)
+    params.expect(consumable: [:name, :min_qty, :qty, :cost, :serial, :asset_tag, :cost_currency, :requestable, :notes, :model_id, :manufacturer_id, :category_id, :vendor_id, :default_location_id])
   end
 end

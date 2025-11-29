@@ -1,4 +1,4 @@
-require_relative '../../app/lib/renderable'
+require_relative "../../app/lib/renderable"
 
 # Add the `render` method to call serializers from AR models and collections
 module ActiveRecordExtensions

@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Licenses", :inertia do
   def valid_attributes
@@ -34,7 +34,7 @@ RSpec.describe "Licenses", :inertia do
         get licenses_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Licenses/Index'
+        expect_inertia.to render_component "Licenses/Index"
         expect(response.body).to include(CGI.escapeHTML(license.name))
       end
 
@@ -46,7 +46,7 @@ RSpec.describe "Licenses", :inertia do
           get licenses_url, params: { search: license1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Licenses/Index'
+          expect_inertia.to render_component "Licenses/Index"
           expect(response.body).to include(CGI.escapeHTML(license1.name))
           expect(response.body).not_to include(CGI.escapeHTML(license2.name))
         end
@@ -63,7 +63,7 @@ RSpec.describe "Licenses", :inertia do
       get license_url({ id: license.id })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Licenses/Show'
+      expect_inertia.to render_component "Licenses/Show"
     end
   end
 
@@ -74,7 +74,7 @@ RSpec.describe "Licenses", :inertia do
       get new_license_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Licenses/New'
+      expect_inertia.to render_component "Licenses/New"
     end
   end
 
@@ -87,7 +87,7 @@ RSpec.describe "Licenses", :inertia do
       get edit_license_url(license)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Licenses/Edit'
+      expect_inertia.to render_component "Licenses/Edit"
     end
   end
 

@@ -45,7 +45,7 @@ class AssignmentsController < ApplicationController
 
     if assignable.unassign(assignment, returned_at: assignment_params&.[](:returned_at))
       PublicActivity.enabled = true
-      assignment.create_activity key: 'assignment.end'
+      assignment.create_activity key: "assignment.end"
       redirect_to assignable
     else
       redirect_to(

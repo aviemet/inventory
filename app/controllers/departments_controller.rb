@@ -110,7 +110,7 @@ class DepartmentsController < ApplicationController
     department.company = @active_company
 
     if department.save
-      redirect_to department, notice: 'Department was successfully created'
+      redirect_to department, notice: "Department was successfully created"
     else
       redirect_to new_department_path, inertia: { errors: department.errors }
     end
@@ -121,7 +121,7 @@ class DepartmentsController < ApplicationController
   def update
     authorize department
     if department.update(department_params)
-      redirect_to department, notice: 'Department was successfully updated'
+      redirect_to department, notice: "Department was successfully updated"
     else
       redirect_to edit_department_path, inertia: { errors: department.errors }
     end
@@ -132,7 +132,7 @@ class DepartmentsController < ApplicationController
   def destroy
     authorize department
     department.destroy
-    redirect_to departments_url, notice: 'Department was successfully destroyed.'
+    redirect_to departments_url, notice: "Department was successfully destroyed."
   end
 
   private
@@ -142,6 +142,6 @@ class DepartmentsController < ApplicationController
   end
 
   def department_params
-    params.require(:department).permit(:name, :slug, :location_id, :notes)
+    params.expect(department: [:name, :slug, :location_id, :notes])
   end
 end

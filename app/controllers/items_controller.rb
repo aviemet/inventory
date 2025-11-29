@@ -61,7 +61,7 @@ class ItemsController < ApplicationController
   def checkout
     authorize item
     if item.assigned?
-      redirect_to item, warning: 'Item is already checked out'
+      redirect_to item, warning: "Item is already checked out"
     else
       assignment = Assignment.new({ assignable: item, assign_toable_type: "Person" })
 
@@ -90,7 +90,7 @@ class ItemsController < ApplicationController
         status_labels: -> { StatusLabel.all.render } # TODO: Is this scoped to a Company?
       }
     else
-      redirect_to item, warning: 'Item is not yet checked out'
+      redirect_to item, warning: "Item is not yet checked out"
     end
   end
 
@@ -101,7 +101,7 @@ class ItemsController < ApplicationController
     item.company = @active_company
 
     if item.save
-      redirect_to item, notice: 'Item was successfully created'
+      redirect_to item, notice: "Item was successfully created"
     else
       redirect_to new_item_path, inertia: { errors: item.errors }
     end
@@ -113,7 +113,7 @@ class ItemsController < ApplicationController
     authorize item
 
     if item.update(item_params)
-      redirect_to item, notice: 'Item was successfully updated'
+      redirect_to item, notice: "Item was successfully updated"
     else
       redirect_to edit_item_path, inertia: { errors: item.errors }
     end
@@ -124,7 +124,7 @@ class ItemsController < ApplicationController
   def destroy
     authorize item
     item.destroy
-    redirect_to items_url, notice: 'Item was successfully destroyed.'
+    redirect_to items_url, notice: "Item was successfully destroyed."
   end
 
   private

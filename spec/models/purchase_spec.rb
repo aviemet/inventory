@@ -22,8 +22,8 @@
 #
 #  fk_rails_...  (order_id => orders.id)
 #
-require 'rails_helper'
-require 'models/concerns/ownable'
+require "rails_helper"
+require "models/concerns/ownable"
 require "models/concerns/serializable"
 
 RSpec.describe Purchase do

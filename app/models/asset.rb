@@ -72,7 +72,7 @@ class Asset < ApplicationRecord
 
   scope :includes_associated, -> { includes([:category, :model, :assignments, :default_location, :department, :vendor, :manufacturer, :status_label, :activities, :documentations]) }
 
-  scope :find_by_category, ->(category) { includes([:category]).where('model.category' => category) }
+  scope :find_by_category, ->(category) { includes([:category]).where("model.category" => category) }
 
   def location
     self.default_location

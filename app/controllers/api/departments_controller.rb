@@ -41,6 +41,6 @@ class Api::DepartmentsController < Api::ApiController
   private
 
   def department_params
-    params.require(:department).permit(:name, :location_id, :manager_id, :notes)
+    params.expect(department: [:name, :location_id, :manager_id, :notes])
   end
 end

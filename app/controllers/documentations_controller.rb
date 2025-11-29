@@ -74,6 +74,6 @@ class DocumentationsController < ApplicationController
   end
 
   def documentation_params
-    params.require(:documentation).permit(:slug, :title, :body, :documentable_id, :documentable_type, :created_by_id, :category_id)
+    params.expect(documentation: [:slug, :title, :body, :documentable_id, :documentable_type, :created_by_id, :category_id])
   end
 end

@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../../support/devise'
+require "rails_helper"
+require_relative "../../support/devise"
 
 RSpec.describe "Settings::Notifications", :inertia do
   describe "GET /index" do
@@ -9,7 +9,7 @@ RSpec.describe "Settings::Notifications", :inertia do
       get settings_notifications_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Settings/Notifications/Index'
+      expect_inertia.to render_component "Settings/Notifications/Index"
     end
   end
 end

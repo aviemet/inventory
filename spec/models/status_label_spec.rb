@@ -14,7 +14,7 @@
 #
 #  index_status_labels_on_slug  (slug) UNIQUE
 #
-require 'rails_helper'
+require "rails_helper"
 require "models/concerns/serializable"
 
 RSpec.describe StatusLabel do

@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Categories", :inertia do
   def valid_attributes
@@ -26,7 +26,7 @@ RSpec.describe "Categories", :inertia do
         get categories_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Categories/Index'
+        expect_inertia.to render_component "Categories/Index"
         expect(response.body).to include(CGI.escapeHTML(category.name))
       end
     end

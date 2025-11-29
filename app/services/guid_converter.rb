@@ -5,7 +5,7 @@ module GuidConverter
     parts = split_into_chunks(string)
     result = oracle_format_indices.map { |index| parts[index] }.reduce("") { |str, part| "#{str}#{part}" }
     if dashify_result
-      result = [result[0..7], result[8..11], result[12..15], result[16..19], result[20..result.size]].join('-')
+      result = [result[0..7], result[8..11], result[12..15], result[16..19], result[20..result.size]].join("-")
     end
     result
   end
@@ -21,10 +21,10 @@ module GuidConverter
   end
 
   def self.pack_guid(string)
-    [to_oracle_raw16(string)].pack('H*')
+    [to_oracle_raw16(string)].pack("H*")
   end
 
   def self.unpack_guid(hex)
-    to_oracle_raw16(hex.unpack1('H*'), dashify_result: false)
+    to_oracle_raw16(hex.unpack1("H*"), dashify_result: false)
   end
 end

@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
     authorize Order
 
     if order.save
-      redirect_to order, notice: 'Purchase order was successfully created'
+      redirect_to order, notice: "Purchase order was successfully created"
     else
       redirect_to new_order_path, inertia: { errors: order.errors }
     end
@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
     authorize order
 
     if order.update(order_params)
-      redirect_to order, notice: 'Purchase order was successfully updated'
+      redirect_to order, notice: "Purchase order was successfully updated"
     else
       redirect_to edit_order_path, inertia: { errors: order.errors }
     end
@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
   def destroy
     authorize order
     order.destroy
-    redirect_to orders_url, notice: 'Purchase order was successfully destroyed.'
+    redirect_to orders_url, notice: "Purchase order was successfully destroyed."
   end
 
   private
@@ -77,6 +77,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping, :tax, :discount, :vendor_id)
+    params.expect(order: [:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping, :tax, :discount, :vendor_id])
   end
 end

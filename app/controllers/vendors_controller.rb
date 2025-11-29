@@ -115,7 +115,7 @@ class VendorsController < ApplicationController
         render json: { errors: vendor.errors }, status: :see_other
       end
     elsif vendor.save
-      redirect_to vendor, notice: 'Vendor was successfully created'
+      redirect_to vendor, notice: "Vendor was successfully created"
     else
       redirect_to new_vendor_path, inertia: { errors: vendor.errors }
     end
@@ -126,7 +126,7 @@ class VendorsController < ApplicationController
   def update
     authorize vendor
     if vendor.update(vendor_params)
-      redirect_to vendor, notice: 'Vendor was successfully updated'
+      redirect_to vendor, notice: "Vendor was successfully updated"
     else
       redirect_to edit_vendor_path, inertia: { errors: vendor.errors }
     end
@@ -141,7 +141,7 @@ class VendorsController < ApplicationController
     else
       @active_company.vendors.where(id: request.params&.[](:ids)).destroy_all
     end
-    redirect_to vendors_url, notice: 'Vendor was successfully destroyed.'
+    redirect_to vendors_url, notice: "Vendor was successfully destroyed."
   end
 
   private
@@ -151,6 +151,6 @@ class VendorsController < ApplicationController
   end
 
   def vendor_params
-    params.require(:vendor).permit(:name, :url)
+    params.expect(vendor: [:name, :url])
   end
 end

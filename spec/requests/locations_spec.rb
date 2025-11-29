@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Locations", :inertia do
   def valid_attributes
@@ -26,7 +26,7 @@ RSpec.describe "Locations", :inertia do
         get locations_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Locations/Index'
+        expect_inertia.to render_component "Locations/Index"
         expect(response.body).to include(CGI.escapeHTML(location.name))
       end
 
@@ -38,7 +38,7 @@ RSpec.describe "Locations", :inertia do
           get locations_url, params: { search: location1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Locations/Index'
+          expect_inertia.to render_component "Locations/Index"
           expect(response.body).to include(CGI.escapeHTML(location1.name))
           expect(response.body).not_to include(CGI.escapeHTML(location2.name))
         end
@@ -55,7 +55,7 @@ RSpec.describe "Locations", :inertia do
       get location_url({ slug: location.slug })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Locations/Show'
+      expect_inertia.to render_component "Locations/Show"
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe "Locations", :inertia do
       get new_location_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Locations/New'
+      expect_inertia.to render_component "Locations/New"
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe "Locations", :inertia do
       get edit_location_url(location)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Locations/Edit'
+      expect_inertia.to render_component "Locations/Edit"
     end
   end
 
@@ -140,13 +140,13 @@ RSpec.describe "Locations", :inertia do
     it "destroys the requested location" do
       location = create(:location, company: @admin.active_company)
       expect {
-        delete location_url({slug: location.slug})
+        delete location_url({ slug: location.slug })
       }.to change(Location, :count).by(-1)
     end
 
     it "redirects to the locations list" do
       location = create(:location, company: @admin.active_company)
-      delete location_url({slug: location.slug})
+      delete location_url({ slug: location.slug })
       expect(response).to redirect_to(locations_url)
     end
   end

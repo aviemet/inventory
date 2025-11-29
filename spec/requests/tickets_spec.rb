@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Tickets", :inertia do
   describe "GET /index" do
@@ -9,7 +9,7 @@ RSpec.describe "Tickets", :inertia do
       get tickets_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Tickets/Index'
+      expect_inertia.to render_component "Tickets/Index"
     end
   end
 
@@ -22,7 +22,7 @@ RSpec.describe "Tickets", :inertia do
       get ticket_url(ticket)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Tickets/Show'
+      expect_inertia.to render_component "Tickets/Show"
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe "Tickets", :inertia do
       get new_ticket_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Tickets/New'
+      expect_inertia.to render_component "Tickets/New"
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.describe "Tickets", :inertia do
       get edit_ticket_url(ticket)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Tickets/Edit'
+      expect_inertia.to render_component "Tickets/Edit"
     end
   end
 

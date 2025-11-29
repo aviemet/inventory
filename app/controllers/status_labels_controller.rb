@@ -41,7 +41,7 @@ class StatusLabelsController < ApplicationController
   def create
     status_label = StatusLabel.new(status_label_params)
     if status_label.save
-      redirect_to status_label, notice: 'StatusLabel was successfully created.'
+      redirect_to status_label, notice: "StatusLabel was successfully created."
     else
       redirect_to new_status_label_path, inertia: { errors: status_label.errors }
     end
@@ -51,7 +51,7 @@ class StatusLabelsController < ApplicationController
   # @route PUT /status_labels/:slug (status_label)
   def update
     if status_label.update(status_label_params)
-      redirect_to status_label, notice: 'StatusLabel was successfully updated.'
+      redirect_to status_label, notice: "StatusLabel was successfully updated."
     else
       redirect_to edit_status_label_path, inertia: { errors: status_label.errors }
     end
@@ -61,7 +61,7 @@ class StatusLabelsController < ApplicationController
   def destroy
     status_label.destroy
     respond_to do |format|
-      format.html { redirect_to status_labels_url, notice: 'StatusLabel was successfully destroyed.' }
+      format.html { redirect_to status_labels_url, notice: "StatusLabel was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -73,6 +73,6 @@ class StatusLabelsController < ApplicationController
   end
 
   def status_label_params
-    params.require(:status_label).permit(:name)
+    params.expect(status_label: [:name])
   end
 end

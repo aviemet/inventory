@@ -18,7 +18,4 @@
 #  fk_rails_...  (person_id => people.id)
 #  fk_rails_...  (ticket_id => tickets.id)
 #
-require 'rails_helper'
-
-RSpec.describe TicketAssignment do
-end
+require "rails_helper"

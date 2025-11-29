@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Departments", :inertia do
   def valid_attributes
@@ -26,7 +26,7 @@ RSpec.describe "Departments", :inertia do
         get departments_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Departments/Index'
+        expect_inertia.to render_component "Departments/Index"
         expect(response.body).to include(CGI.escapeHTML(department.name))
       end
 
@@ -38,7 +38,7 @@ RSpec.describe "Departments", :inertia do
           get departments_url, params: { search: department1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Departments/Index'
+          expect_inertia.to render_component "Departments/Index"
           expect(response.body).to include(CGI.escapeHTML(department1.name))
           expect(response.body).not_to include(CGI.escapeHTML(department2.name))
         end
@@ -55,7 +55,7 @@ RSpec.describe "Departments", :inertia do
       get department_url({ slug: department.slug })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Departments/Show'
+      expect_inertia.to render_component "Departments/Show"
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe "Departments", :inertia do
       get new_department_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Departments/New'
+      expect_inertia.to render_component "Departments/New"
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe "Departments", :inertia do
       get edit_department_url(department)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Departments/Edit'
+      expect_inertia.to render_component "Departments/Edit"
     end
   end
 
@@ -140,13 +140,13 @@ RSpec.describe "Departments", :inertia do
     it "destroys the requested department" do
       department = create(:department, company: @admin.active_company)
       expect {
-        delete department_url({slug: department.slug})
+        delete department_url({ slug: department.slug })
       }.to change(Department, :count).by(-1)
     end
 
     it "redirects to the departments list" do
       department = create(:department, company: @admin.active_company)
-      delete department_url({slug: department.slug})
+      delete department_url({ slug: department.slug })
       expect(response).to redirect_to(departments_url)
     end
   end

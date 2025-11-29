@@ -18,7 +18,7 @@
 #
 #  fk_rails_...  (contact_id => contacts.id)
 #
-require 'rails_helper'
+require "rails_helper"
 require "models/concerns/serializable"
 
 RSpec.describe Website do

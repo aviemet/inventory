@@ -52,7 +52,7 @@ class TicketsController < ApplicationController
     authorize Ticket
     ticket.company = @active_company
     if ticket.save
-      redirect_to ticket, notice: 'Ticket was successfully created'
+      redirect_to ticket, notice: "Ticket was successfully created"
     else
       redirect_to new_ticket_path, inertia: { errors: ticket.errors }
     end
@@ -63,7 +63,7 @@ class TicketsController < ApplicationController
   def update
     authorize ticket
     if ticket.update(ticket_params)
-      redirect_to ticket, notice: 'Ticket was successfully updated'
+      redirect_to ticket, notice: "Ticket was successfully updated"
     else
       redirect_to edit_ticket_path, inertia: { errors: ticket.errors }
     end
@@ -83,6 +83,6 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:subject, :description, :status, :messages, :primary_contact_id, :asset_id, assignments_attributes: [:person_id])
+    params.expect(ticket: [:subject, :description, :status, :messages, :primary_contact_id, :asset_id, assignments_attributes: [:person_id]])
   end
 end

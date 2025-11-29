@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Manufacturers", :inertia do
   def valid_attributes
@@ -26,7 +26,7 @@ RSpec.describe "Manufacturers", :inertia do
         get manufacturers_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Manufacturers/Index'
+        expect_inertia.to render_component "Manufacturers/Index"
         expect(response.body).to include(CGI.escapeHTML(manufacturer.name))
       end
 
@@ -38,7 +38,7 @@ RSpec.describe "Manufacturers", :inertia do
           get manufacturers_url, params: { search: manufacturer1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Manufacturers/Index'
+          expect_inertia.to render_component "Manufacturers/Index"
           expect(response.body).to include(CGI.escapeHTML(manufacturer1.name))
           expect(response.body).not_to include(CGI.escapeHTML(manufacturer2.name))
         end
@@ -55,7 +55,7 @@ RSpec.describe "Manufacturers", :inertia do
       get manufacturer_url({ slug: manufacturer.slug })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Manufacturers/Show'
+      expect_inertia.to render_component "Manufacturers/Show"
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe "Manufacturers", :inertia do
       get new_manufacturer_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Manufacturers/New'
+      expect_inertia.to render_component "Manufacturers/New"
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe "Manufacturers", :inertia do
       get edit_manufacturer_url(manufacturer)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Manufacturers/Edit'
+      expect_inertia.to render_component "Manufacturers/Edit"
     end
   end
 
@@ -140,13 +140,13 @@ RSpec.describe "Manufacturers", :inertia do
     it "destroys the requested manufacturer" do
       manufacturer = create(:manufacturer, company: @admin.active_company)
       expect {
-        delete manufacturer_url({slug: manufacturer.slug})
+        delete manufacturer_url({ slug: manufacturer.slug })
       }.to change(Manufacturer, :count).by(-1)
     end
 
     it "redirects to the manufacturers list" do
       manufacturer = create(:manufacturer, company: @admin.active_company)
-      delete manufacturer_url({slug: manufacturer.slug})
+      delete manufacturer_url({ slug: manufacturer.slug })
       expect(response).to redirect_to(manufacturers_url)
     end
   end

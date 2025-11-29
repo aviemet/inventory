@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Models", :inertia do
   def valid_attributes
@@ -32,7 +32,7 @@ RSpec.describe "Models", :inertia do
         get models_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Models/Index'
+        expect_inertia.to render_component "Models/Index"
         expect(response.body).to include(CGI.escapeHTML(model.name))
       end
 
@@ -44,7 +44,7 @@ RSpec.describe "Models", :inertia do
           get models_url, params: { search: model1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Models/Index'
+          expect_inertia.to render_component "Models/Index"
           expect(response.body).to include(CGI.escapeHTML(model1.name))
           expect(response.body).not_to include(CGI.escapeHTML(model2.name))
         end
@@ -61,7 +61,7 @@ RSpec.describe "Models", :inertia do
       get model_url({ slug: model.slug })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Models/Show'
+      expect_inertia.to render_component "Models/Show"
     end
   end
 
@@ -72,7 +72,7 @@ RSpec.describe "Models", :inertia do
       get new_model_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Models/New'
+      expect_inertia.to render_component "Models/New"
     end
   end
 
@@ -85,7 +85,7 @@ RSpec.describe "Models", :inertia do
       get edit_model_url(model)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Models/Edit'
+      expect_inertia.to render_component "Models/Edit"
     end
   end
 
@@ -146,13 +146,13 @@ RSpec.describe "Models", :inertia do
     it "destroys the requested model" do
       model = create(:model, company: @admin.active_company)
       expect {
-        delete model_url({slug: model.slug})
+        delete model_url({ slug: model.slug })
       }.to change(Model, :count).by(-1)
     end
 
     it "redirects to the models list" do
       model = create(:model, company: @admin.active_company)
-      delete model_url({slug: model.slug})
+      delete model_url({ slug: model.slug })
       expect(response).to redirect_to(models_url)
     end
   end

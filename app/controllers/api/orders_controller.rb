@@ -25,6 +25,6 @@ class Api::OrdersController < Api::ApiController
   private
 
   def order_params
-    params.require(:order).permit(:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping_cost, :tax_cost, :discount_cost, :vendor_id)
+    params.expect(order: [:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping_cost, :tax_cost, :discount_cost, :vendor_id])
   end
 end

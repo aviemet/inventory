@@ -13,8 +13,8 @@
 #  updated_at :datetime         not null
 #  vlan_id    :integer
 #
-require 'rails_helper'
-require 'models/concerns/ownable'
+require "rails_helper"
+require "models/concerns/ownable"
 require "models/concerns/serializable"
 
 RSpec.describe Network do
@@ -56,20 +56,20 @@ RSpec.describe Network do
       },)
 
       hosts = network.address.paginate_hosts(page: 1)
-      expect(hosts[0].address).to eq '10.0.0.1'
-      expect(hosts[-1].address).to eq '10.0.0.255'
+      expect(hosts[0].address).to eq "10.0.0.1"
+      expect(hosts[-1].address).to eq "10.0.0.255"
 
       hosts = network.address.paginate_hosts(page: 2)
-      expect(hosts[0].address).to eq '10.0.1.0'
-      expect(hosts[-1].address).to eq '10.0.1.255'
+      expect(hosts[0].address).to eq "10.0.1.0"
+      expect(hosts[-1].address).to eq "10.0.1.255"
 
       hosts = network.address.paginate_hosts(page: 3)
-      expect(hosts[0].address).to eq '10.0.2.0'
-      expect(hosts[-1].address).to eq '10.0.2.255'
+      expect(hosts[0].address).to eq "10.0.2.0"
+      expect(hosts[-1].address).to eq "10.0.2.255"
 
       hosts = network.address.paginate_hosts(page: 4)
-      expect(hosts[0].address).to eq '10.0.3.0'
-      expect(hosts[-1].address).to eq '10.0.3.254'
+      expect(hosts[0].address).to eq "10.0.3.0"
+      expect(hosts[-1].address).to eq "10.0.3.254"
     end
   end
 

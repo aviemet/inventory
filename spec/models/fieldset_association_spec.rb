@@ -18,7 +18,4 @@
 #
 #  fk_rails_...  (fieldset_id => fieldsets.id)
 #
-require 'rails_helper'
-
-RSpec.describe FieldsetAssociation do
-end
+require "rails_helper"

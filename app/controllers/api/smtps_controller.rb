@@ -1,4 +1,4 @@
-require 'net/smtp'
+require "net/smtp"
 
 class Api::SmtpsController < Api::ApiController
   # @route POST /api/smtp/test (api_smtp_test)
@@ -11,7 +11,7 @@ class Api::SmtpsController < Api::ApiController
   def test_smtp_auth(smtp)
     Net::SMTP.start(smtp.host, smtp.port, smtp.domain, smtp.username, smtp.password) do |_smtp|
       # Authentication successful
-      { success: true, message: 'Authentication successful' }
+      { success: true, message: "Authentication successful" }
     end
   rescue Net::SMTPAuthenticationError => e
     # Authentication failed
@@ -22,6 +22,6 @@ class Api::SmtpsController < Api::ApiController
   end
 
   def smtp_params
-    params.require(:smtp).permit(:name, :host, :domain, :port, :security, :username, :password, :address, :notes)
+    params.expect(smtp: [:name, :host, :domain, :port, :security, :username, :password, :address, :notes])
   end
 end

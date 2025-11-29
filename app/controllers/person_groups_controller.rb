@@ -54,7 +54,7 @@ class PersonGroupsController < ApplicationController
     if person_group.persisted?
       person_group.set_permissions(person_group_params[:permissions])
 
-      redirect_to person_group, notice: 'Group was successfully created'
+      redirect_to person_group, notice: "Group was successfully created"
     else
       redirect_to new_person_group_path, inertia: { errors: person_group.errors }
     end
@@ -67,7 +67,7 @@ class PersonGroupsController < ApplicationController
     if person_group.update(person_group_params.except(:permissions))
       person_group.set_permissions(person_group_params[:permissions])
 
-      redirect_to person_group, notice: 'Group was successfully updated'
+      redirect_to person_group, notice: "Group was successfully updated"
     else
       redirect_to edit_person_group_path, inertia: { errors: person_group.errors }
     end
@@ -77,14 +77,14 @@ class PersonGroupsController < ApplicationController
   def destroy
     authorize person_group
     person_group.destroy
-    redirect_to person_groups_url, notice: 'Group was successfully destroyed.'
+    redirect_to person_groups_url, notice: "Group was successfully destroyed."
   end
 
   private
 
   def person_group_params
-    params.require(:person_group).permit(
-      :name, :description, permissions: [
+    params.expect(
+      person_group: [:name, :description, permissions: [
         company:      [:admin],
         item:         [:index, :show, :create, :update, :delete, :checkout, :checkin],
         accessory:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
@@ -101,7 +101,7 @@ class PersonGroupsController < ApplicationController
         location:     [:index, :show, :create, :update, :delete],
         person:       [:index, :show, :create, :update, :delete],
         user:         [:index, :show, :create, :update, :delete],
-      ],
+      ]],
     )
   end
 end

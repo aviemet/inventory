@@ -25,6 +25,6 @@ class Api::StatusLabelsController < Api::ApiController
   private
 
   def status_label_params
-    params.require(:status_label).permit(:name)
+    params.expect(status_label: [:name])
   end
 end

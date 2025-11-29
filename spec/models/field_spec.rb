@@ -11,7 +11,4 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-require 'rails_helper'
-
-RSpec.describe Field do
-end
+require "rails_helper"

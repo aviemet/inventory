@@ -31,13 +31,13 @@ module Searchable
         return model if start_date.nil?
 
         case value[:type]
-        when 'before'
+        when "before"
           model.where("#{model.table_name}.created_at <= :date", { date: start_date })
-        when 'after'
+        when "after"
           model.where("#{model.table_name}.created_at >= :date", { date: start_date })
-        when 'exact'
+        when "exact"
           model.where("#{model.table_name}.created_at = :date", { date: start_date })
-        when 'range'
+        when "range"
           end_date = value[:end]&.to_date&.end_of_day
           return model if end_date.nil?
 
@@ -151,7 +151,7 @@ module Searchable
   end
 
   def direction
-    %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : 'asc'
+    %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def remove_empty_query_parameters
@@ -159,8 +159,8 @@ module Searchable
     non_empty_params = request.query_parameters.compact_blank
 
     # Remove direction param if table is not sorted
-    if non_empty_params['direction'].present? && non_empty_params['sort'].blank?
-      non_empty_params.delete('direction')
+    if non_empty_params["direction"].present? && non_empty_params["sort"].blank?
+      non_empty_params.delete("direction")
     end
 
     return unless request.query_parameters.keys.length > non_empty_params.keys.length

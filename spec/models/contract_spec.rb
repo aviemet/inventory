@@ -25,8 +25,8 @@
 #  fk_rails_...  (category_id => categories.id)
 #  fk_rails_...  (vendor_id => vendors.id)
 #
-require 'rails_helper'
-require 'models/concerns/ownable'
+require "rails_helper"
+require "models/concerns/ownable"
 require "models/concerns/serializable"
 
 RSpec.describe Contract do

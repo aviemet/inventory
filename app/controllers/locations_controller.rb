@@ -61,7 +61,7 @@ class LocationsController < ApplicationController
 
     elsif loc.save
 
-      redirect_to loc, notice: 'Location was successfully created'
+      redirect_to loc, notice: "Location was successfully created"
     else
       redirect_to new_location_path, inertia: { errors: loc.errors }
 
@@ -73,7 +73,7 @@ class LocationsController < ApplicationController
   def update
     authorize loc, policy_class: LocationPolicy
     if loc.update(location_params)
-      redirect_to loc, notice: 'Location was successfully updated'
+      redirect_to loc, notice: "Location was successfully updated"
     else
       redirect_to edit_location_path, inertia: { errors: loc.errors }
     end
@@ -84,7 +84,7 @@ class LocationsController < ApplicationController
   def destroy
     authorize loc, policy_class: LocationPolicy
     loc.destroy
-    redirect_to locations_url, notice: 'Location was successfully destroyed.'
+    redirect_to locations_url, notice: "Location was successfully destroyed."
   end
 
   private
@@ -95,6 +95,6 @@ class LocationsController < ApplicationController
 
   # contact_attributes from Concern
   def location_params
-    params.require(:location).permit(:name, :parent_id, :currency, :department_id)
+    params.expect(location: [:name, :parent_id, :currency, :department_id])
   end
 end

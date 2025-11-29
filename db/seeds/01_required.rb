@@ -1,5 +1,5 @@
 # Base status types
-if StatusLabel.count == 0
+if StatusLabel.none?
   [
     {
       name: "Deployable",
@@ -22,7 +22,7 @@ if StatusLabel.count == 0
   end
 end
 
-if TicketStatus.count == 0
+if TicketStatus.none?
   [
     {
       name: "Open",

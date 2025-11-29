@@ -89,7 +89,7 @@ class UsersController < ApplicationController
   def update
     authorize user
     if user.update(user_params)
-      redirect_to user, notice: 'User was successfully updated.'
+      redirect_to user, notice: "User was successfully updated."
     else
       redirect_to edit_user_path(user), inertia: { errors: user.errors }
     end
@@ -100,7 +100,7 @@ class UsersController < ApplicationController
   def destroy
     authorize user
     user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+    redirect_to users_url, notice: "User was successfully destroyed."
   end
 
   private
@@ -110,6 +110,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :active_company, :active, :user_preferences, person: [:first_name, :last_name], company: [:name])
+    params.expect(user: [:email, :password, :active_company, :active, :user_preferences, person: [:first_name, :last_name], company: [:name]])
   end
 end

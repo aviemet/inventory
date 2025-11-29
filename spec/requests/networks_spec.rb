@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Networks", :inertia do
   def valid_attributes
@@ -26,7 +26,7 @@ RSpec.describe "Networks", :inertia do
         get networks_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Networks/Index'
+        expect_inertia.to render_component "Networks/Index"
         expect(response.body).to include(CGI.escapeHTML(network.name))
       end
 
@@ -38,7 +38,7 @@ RSpec.describe "Networks", :inertia do
           get networks_url, params: { search: network1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Networks/Index'
+          expect_inertia.to render_component "Networks/Index"
           expect(response.body).to include(CGI.escapeHTML(network1.name))
           expect(response.body).not_to include(CGI.escapeHTML(network2.name))
         end
@@ -55,7 +55,7 @@ RSpec.describe "Networks", :inertia do
       get network_url({ id: network.id })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Networks/Show'
+      expect_inertia.to render_component "Networks/Show"
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe "Networks", :inertia do
       get new_network_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Networks/New'
+      expect_inertia.to render_component "Networks/New"
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe "Networks", :inertia do
       get edit_network_url(network)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Networks/Edit'
+      expect_inertia.to render_component "Networks/Edit"
     end
   end
 
@@ -140,13 +140,13 @@ RSpec.describe "Networks", :inertia do
     it "destroys the requested network" do
       network = create(:network, company: @admin.active_company)
       expect {
-        delete network_url({id: network.id})
+        delete network_url({ id: network.id })
       }.to change(Network, :count).by(-1)
     end
 
     it "redirects to the networks list" do
       network = create(:network, company: @admin.active_company)
-      delete network_url({id: network.id})
+      delete network_url({ id: network.id })
       expect(response).to redirect_to(networks_url)
     end
   end

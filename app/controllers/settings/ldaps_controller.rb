@@ -15,7 +15,7 @@ class Settings::LdapsController < ApplicationController
     ldap.company = @active_company
 
     if ldap.save
-      redirect_to settings_ldaps_path, notice: 'LDAP settings successfully saved'
+      redirect_to settings_ldaps_path, notice: "LDAP settings successfully saved"
     else
       redirect_to settings_ldaps_path, inertia: {
         errors: ldap.errors
@@ -27,7 +27,7 @@ class Settings::LdapsController < ApplicationController
   # @route PUT /settings/ldap/:id (settings_ldap)
   def update
     if ldap.update(ldap_params)
-      redirect_to settings_ldaps_path, notice: 'LDAP settings successfully saved'
+      redirect_to settings_ldaps_path, notice: "LDAP settings successfully saved"
     else
       redirect_to settings_ldaps_path, inertia: {
         errors: ldap.errors
@@ -50,6 +50,6 @@ class Settings::LdapsController < ApplicationController
   private
 
   def ldap_params
-    params.require(:ldap).permit(:name, :host, :port, :domain, :username, :password, :tree_base, :user_search, :sync_interval)
+    params.expect(ldap: [:name, :host, :port, :domain, :username, :password, :tree_base, :user_search, :sync_interval])
   end
 end

@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Items", :inertia do
   def valid_attributes
@@ -34,7 +34,7 @@ RSpec.describe "Items", :inertia do
         get items_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Items/Index'
+        expect_inertia.to render_component "Items/Index"
         expect(response.body).to include(CGI.escapeHTML(item.name))
       end
 
@@ -46,7 +46,7 @@ RSpec.describe "Items", :inertia do
           get items_url, params: { search: item1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Items/Index'
+          expect_inertia.to render_component "Items/Index"
           expect(response.body).to include(CGI.escapeHTML(item1.name))
           expect(response.body).not_to include(CGI.escapeHTML(item2.name))
         end
@@ -58,7 +58,7 @@ RSpec.describe "Items", :inertia do
         get new_item_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Items/New'
+        expect_inertia.to render_component "Items/New"
       end
     end
 
@@ -69,7 +69,7 @@ RSpec.describe "Items", :inertia do
         get edit_item_url(item)
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Items/Edit'
+        expect_inertia.to render_component "Items/Edit"
       end
     end
 
@@ -80,7 +80,7 @@ RSpec.describe "Items", :inertia do
         get item_url({ id: item.id })
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Items/Show'
+        expect_inertia.to render_component "Items/Show"
       end
     end
 

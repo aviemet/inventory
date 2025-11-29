@@ -46,7 +46,7 @@ class Order < ApplicationRecord
       user: [:email],
       person: [:first_name, :middle_name, :last_name, :employee_number, :job_title],
       vendor: [:name]
-    }
+    },
   )
 
   tracked

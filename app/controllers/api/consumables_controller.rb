@@ -15,6 +15,6 @@ class Api::ConsumablesController < Api::ApiController
   private
 
   def consumable_params
-    params.require(:consumable).permit(:name, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :category_id, :vendor_id, :default_location_id)
+    params.expect(consumable: [:name, :min_qty, :qty, :cost, :requestable, :notes, :manufacturer_id, :category_id, :vendor_id, :default_location_id])
   end
 end

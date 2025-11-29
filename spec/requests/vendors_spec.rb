@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Vendors", :inertia do
   def valid_attributes
@@ -26,7 +26,7 @@ RSpec.describe "Vendors", :inertia do
         get vendors_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Vendors/Index'
+        expect_inertia.to render_component "Vendors/Index"
         expect(response.body).to include(CGI.escapeHTML(vendor.name))
       end
 
@@ -38,7 +38,7 @@ RSpec.describe "Vendors", :inertia do
           get vendors_url, params: { search: vendor1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Vendors/Index'
+          expect_inertia.to render_component "Vendors/Index"
           expect(response.body).to include(CGI.escapeHTML(vendor1.name))
           expect(response.body).not_to include(CGI.escapeHTML(vendor2.name))
         end
@@ -55,7 +55,7 @@ RSpec.describe "Vendors", :inertia do
       get vendor_url({ slug: vendor.slug })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Vendors/Show'
+      expect_inertia.to render_component "Vendors/Show"
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe "Vendors", :inertia do
       get new_vendor_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Vendors/New'
+      expect_inertia.to render_component "Vendors/New"
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe "Vendors", :inertia do
       get edit_vendor_url(vendor)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Vendors/Edit'
+      expect_inertia.to render_component "Vendors/Edit"
     end
   end
 
@@ -140,13 +140,13 @@ RSpec.describe "Vendors", :inertia do
     it "destroys the requested vendor" do
       vendor = create(:vendor, company: @admin.active_company)
       expect {
-        delete vendor_url({slug: vendor.slug})
+        delete vendor_url({ slug: vendor.slug })
       }.to change(Vendor, :count).by(-1)
     end
 
     it "redirects to the vendors list" do
       vendor = create(:vendor, company: @admin.active_company)
-      delete vendor_url({slug: vendor.slug})
+      delete vendor_url({ slug: vendor.slug })
       expect(response).to redirect_to(vendors_url)
     end
   end

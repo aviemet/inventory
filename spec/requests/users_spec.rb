@@ -1,8 +1,8 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Users", :inertia do
-  let(:password) { '$trongPassw0rd!' }
+  let(:password) { "$trongPassw0rd!" }
   let(:confirmed_user) { create(:user, password: password) }
   let(:unconfirmed_user) { create(:user, password: password, company: false, person: false, confirmed: false) }
 
@@ -22,8 +22,8 @@ RSpec.describe "Users", :inertia do
 
   def invalid_user_params
     { user: {
-      email: 'not@ok.com',
-      password: 'abc123',
+      email: "not@ok.com",
+      password: "abc123",
     } }
   end
 
@@ -42,7 +42,7 @@ RSpec.describe "Users", :inertia do
       it "renders the login page" do
         confirmed_user
         get new_user_session_url
-        expect_inertia.to render_component 'Public/Devise/Login'
+        expect_inertia.to render_component "Public/Devise/Login"
       end
     end
   end
@@ -62,15 +62,15 @@ RSpec.describe "Users", :inertia do
         follow_redirect!
         # expect(response).to redirect_to new_user_confirmation_url
         # expect_inertia.to render_component 'Public/Devise/Confirmations/New'
-        expect_inertia.to render_component 'Public/Devise/Login'
+        expect_inertia.to render_component "Public/Devise/Login"
       end
     end
 
     context "with invalid credentials" do
       it "redirects back to the login page" do
         user = create(:user, password: password, confirmed: true, company: false, person: false)
-        post user_session_url, params: { user: { email: user.email, password: 'Wrong1!' } }
-        expect_inertia.to render_component 'Public/Devise/Login'
+        post user_session_url, params: { user: { email: user.email, password: "Wrong1!" } }
+        expect_inertia.to render_component "Public/Devise/Login"
       end
     end
   end
@@ -109,7 +109,7 @@ RSpec.describe "Users", :inertia do
       get users_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Users/Index'
+      expect_inertia.to render_component "Users/Index"
       expect(response.body).to include(CGI.escapeHTML(user.person.first_name))
     end
 
@@ -123,7 +123,7 @@ RSpec.describe "Users", :inertia do
         get users_url, params: { search: user1.person.first_name }
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Users/Index'
+        expect_inertia.to render_component "Users/Index"
         expect(response.body).to include(CGI.escapeHTML(user1.person.first_name))
         expect(response.body).not_to include(CGI.escapeHTML(user2.person.first_name))
       end
@@ -138,7 +138,7 @@ RSpec.describe "Users", :inertia do
       get user_url(@admin)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Users/Show'
+      expect_inertia.to render_component "Users/Show"
     end
   end
 
@@ -149,7 +149,7 @@ RSpec.describe "Users", :inertia do
       get new_user_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Users/New'
+      expect_inertia.to render_component "Users/New"
     end
   end
 
@@ -160,7 +160,7 @@ RSpec.describe "Users", :inertia do
       get edit_user_url(@admin)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Users/Edit'
+      expect_inertia.to render_component "Users/Edit"
     end
   end
 

@@ -53,7 +53,7 @@ class CompaniesController < ApplicationController
       current_user.add_role :admin, company
       current_user.update(active_company: company)
 
-      redirect_to company, notice: 'Company was successfully created.'
+      redirect_to company, notice: "Company was successfully created."
     else
       redirect_to new_company_path, inertia: { errors: company.errors }
     end
@@ -64,7 +64,7 @@ class CompaniesController < ApplicationController
   def update
     authorize company
     if company.update(company_params)
-      redirect_to company, notice: 'Company was successfully updated.'
+      redirect_to company, notice: "Company was successfully updated."
     else
       redirect_to edit_company_path, inertia: { errors: company.errors }
     end
@@ -76,7 +76,7 @@ class CompaniesController < ApplicationController
     authorize company
     company.destroy
     respond_to do |format|
-      format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
+      format.html { redirect_to companies_url, notice: "Company was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -95,6 +95,6 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:name)
+    params.expect(company: [:name])
   end
 end

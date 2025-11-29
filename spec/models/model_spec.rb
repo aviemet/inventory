@@ -24,8 +24,8 @@
 #  fk_rails_...  (category_id => categories.id)
 #  fk_rails_...  (manufacturer_id => manufacturers.id)
 #
-require 'rails_helper'
-require 'models/concerns/fieldable'
+require "rails_helper"
+require "models/concerns/fieldable"
 require "models/concerns/serializable"
 
 RSpec.describe Model do

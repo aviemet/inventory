@@ -59,14 +59,20 @@ gem "bootsnap", require: false
 group :development, :test do
   gem "rspec-rails", ">= 6.0.1"
   gem "pry-rails", ">= 0.3.9"
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
+  gem "faker", :git => "https://github.com/faker-ruby/faker.git", :branch => "main"
 
   gem "bullet", ">= 7.0"
 
   gem "rubocop-rails", ">= 2.14", require: false
   gem "rubocop-rspec", ">= 2.9", require: false
+  gem "rubocop-factory_bot", ">= 2.25", require: false
   gem "rubocop-performance", ">= 1.13", require: false
   gem "rubocop-daemon", ">= 0.3.2", require: false
+  gem "rubocop-packaging", "~> 0.6.0", require: false
+  gem "rubocop-shopify", "~> 2.18", require: false
+  gem "rubocop-thread_safety", "~> 0.7.3", require: false
+  gem "rubocop-capybara", "~> 2.22", require: false
+  gem "rubocop-rspec_rails", "~> 2.32", require: false
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]

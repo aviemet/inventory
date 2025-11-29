@@ -25,7 +25,7 @@
 #  fk_rails_...  (primary_email_id => emails.id)
 #  fk_rails_...  (primary_phone_id => phones.id)
 #
-require 'rails_helper'
+require "rails_helper"
 require "models/concerns/serializable"
 
 RSpec.describe Contact do

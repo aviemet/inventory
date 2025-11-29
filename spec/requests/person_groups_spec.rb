@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "PersonGroups", :inertia do
   def valid_attributes
@@ -26,7 +26,7 @@ RSpec.describe "PersonGroups", :inertia do
         get person_groups_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'PersonGroups/Index'
+        expect_inertia.to render_component "PersonGroups/Index"
         expect(response.body).to include(CGI.escapeHTML(person_group.name))
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe "PersonGroups", :inertia do
       get person_group_url({ slug: person_group.slug })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'PersonGroups/Show'
+      expect_inertia.to render_component "PersonGroups/Show"
     end
   end
 
@@ -52,7 +52,7 @@ RSpec.describe "PersonGroups", :inertia do
       get new_person_group_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'PersonGroups/New'
+      expect_inertia.to render_component "PersonGroups/New"
     end
   end
 
@@ -65,7 +65,7 @@ RSpec.describe "PersonGroups", :inertia do
       get edit_person_group_url(person_group)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'PersonGroups/Edit'
+      expect_inertia.to render_component "PersonGroups/Edit"
     end
   end
 
@@ -126,7 +126,7 @@ RSpec.describe "PersonGroups", :inertia do
     it "destroys the requested person_group" do
       person_group = create(:person_group, company: User.first.active_company)
       expect {
-        delete person_group_url({slug: person_group.slug})
+        delete person_group_url({ slug: person_group.slug })
       }.to change(PersonGroup, :count).by(-1)
     end
 

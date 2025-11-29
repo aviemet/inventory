@@ -1,8 +1,8 @@
 module ApiHelper
   def json_headers
     {
-      'Content-Type' => 'application/json',
-      'Accept' => 'application/json'
+      "Content-Type" => "application/json",
+      "Accept" => "application/json"
     }
   end
 end

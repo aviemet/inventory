@@ -42,6 +42,6 @@ class Api::PeopleController < Api::ApiController
   private
 
   def person_params
-    params.require(:person).permit(:name, :url)
+    params.expect(person: [:name, :url])
   end
 end

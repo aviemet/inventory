@@ -1,5 +1,5 @@
 class Api::VendorsController < Api::ApiController
-  expose :vendors, -> { params[:category] ? @active_company.vendors.find_by_category(params[:category]) : @active_company.vendors }
+  expose :vendors, -> { params[:category] ? @active_company.vendors.find_by(category: params[:category]) : @active_company.vendors }
   expose :vendor, id: ->{ params[:slug] }, scope: ->{ @active_company.vendors.includes_associated }, vendor: Vendor, find_by: :slug
 
   # @route GET /api/vendors (api_vendors)
@@ -43,6 +43,6 @@ class Api::VendorsController < Api::ApiController
   private
 
   def vendor_params
-    params.require(:vendor).permit(:name, :url)
+    params.expect(vendor: [:name, :url])
   end
 end

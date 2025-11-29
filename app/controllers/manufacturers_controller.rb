@@ -88,7 +88,7 @@ class ManufacturersController < ApplicationController
     manufacturer = Manufacturer.new(manufacturer_params)
     manufacturer.company = @active_company
     if manufacturer.save
-      redirect_to manufacturer, notice: 'Manufacturer was successfully created'
+      redirect_to manufacturer, notice: "Manufacturer was successfully created"
     else
       redirect_to new_manufacturer_path, inertia: { errors: manufacturer.errors }
     end
@@ -99,7 +99,7 @@ class ManufacturersController < ApplicationController
   def update
     authorize manufacturer
     if manufacturer.update(manufacturer_params)
-      redirect_to manufacturer, notice: 'Manufacturer was successfully updated'
+      redirect_to manufacturer, notice: "Manufacturer was successfully updated"
     else
       redirect_to edit_manufacturer_path, inertia: { errors: manufacturer.errors }
     end
@@ -110,7 +110,7 @@ class ManufacturersController < ApplicationController
   def destroy
     authorize manufacturer
     manufacturer.destroy
-    redirect_to manufacturers_url, notice: 'Manufacturer was successfully destroyed.'
+    redirect_to manufacturers_url, notice: "Manufacturer was successfully destroyed."
   end
 
   private
@@ -120,6 +120,6 @@ class ManufacturersController < ApplicationController
   end
 
   def manufacturer_params
-    params.require(:manufacturer).permit(:name)
+    params.expect(manufacturer: [:name])
   end
 end

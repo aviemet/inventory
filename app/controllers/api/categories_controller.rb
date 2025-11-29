@@ -48,6 +48,6 @@ class Api::CategoriesController < Api::ApiController
   private
 
   def category_params
-    params.require(:category).permit(:name, :categorizable_type, :description)
+    params.expect(category: [:name, :categorizable_type, :description])
   end
 end

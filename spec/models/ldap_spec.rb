@@ -24,7 +24,7 @@
 #
 #  fk_rails_...  (company_id => companies.id)
 #
-require 'rails_helper'
+require "rails_helper"
 require "models/concerns/serializable"
 
 RSpec.describe Ldap do

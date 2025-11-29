@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "People", :inertia do
   def valid_attributes
@@ -26,7 +26,7 @@ RSpec.describe "People", :inertia do
         get people_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'People/Index'
+        expect_inertia.to render_component "People/Index"
         expect(response.body).to include(CGI.escapeHTML(person.name))
       end
 
@@ -38,7 +38,7 @@ RSpec.describe "People", :inertia do
           get people_url, params: { search: person1.first_name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'People/Index'
+          expect_inertia.to render_component "People/Index"
           expect(response.body).to include(CGI.escapeHTML(person1.first_name))
           expect(response.body).not_to include(CGI.escapeHTML(person2.first_name))
         end
@@ -55,7 +55,7 @@ RSpec.describe "People", :inertia do
       get person_url({ id: person.id })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'People/Show'
+      expect_inertia.to render_component "People/Show"
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe "People", :inertia do
       get new_person_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'People/New'
+      expect_inertia.to render_component "People/New"
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe "People", :inertia do
       get edit_person_url(person)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'People/Edit'
+      expect_inertia.to render_component "People/Edit"
     end
   end
 

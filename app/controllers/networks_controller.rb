@@ -56,7 +56,7 @@ class NetworksController < ApplicationController
     authorize Network
     network.company = @active_company
     if network.save
-      redirect_to network, notice: 'Network was successfully created'
+      redirect_to network, notice: "Network was successfully created"
     else
       redirect_to new_network_path, inertia: { errors: network.errors }
     end
@@ -67,7 +67,7 @@ class NetworksController < ApplicationController
   def update
     authorize network
     if network.update(network_params)
-      redirect_to network, notice: 'Network was successfully updated'
+      redirect_to network, notice: "Network was successfully updated"
     else
       redirect_to edit_network_path, inertia: { errors: network.errors }
     end
@@ -79,7 +79,7 @@ class NetworksController < ApplicationController
     authorize network
     network.destroy
     respond_to do |format|
-      format.html { redirect_to networks_url, notice: 'Network was successfully destroyed.' }
+      format.html { redirect_to networks_url, notice: "Network was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -108,6 +108,6 @@ class NetworksController < ApplicationController
   end
 
   def network_params
-    params.require(:network).permit(:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes)
+    params.expect(network: [:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes])
   end
 end

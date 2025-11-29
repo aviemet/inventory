@@ -8,7 +8,7 @@ class TicketMessagesController < ApplicationController
     ticket_message.created_by = current_user.person
     ticket_message.ticket = ticket
     if ticket_message.save
-      redirect_to ticket, notice: 'Message was successfully created'
+      redirect_to ticket, notice: "Message was successfully created"
     else
       redirect_to ticket, inertia: { errors: ticket_message.errors }
     end
@@ -18,7 +18,7 @@ class TicketMessagesController < ApplicationController
   # @route PUT /tickets/:ticket_id/messages/:id (ticket_message)
   def update
     if ticket_message.update(ticket_message_params)
-      redirect_to ticket, notice: 'Message was successfully updated'
+      redirect_to ticket, notice: "Message was successfully updated"
     else
       redirect_to ticket, inertia: { errors: ticket.errors }
     end
@@ -33,6 +33,6 @@ class TicketMessagesController < ApplicationController
   private
 
   def ticket_message_params
-    params.require(:ticket_message).permit(:body, :parent_id)
+    params.expect(ticket_message: [:body, :parent_id])
   end
 end

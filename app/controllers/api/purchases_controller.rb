@@ -25,6 +25,6 @@ class Api::PurchasesController < Api::ApiController
   private
 
   def purchase_params
-    params.require(:purchase).permit(:purchasable_type, :purchasable_id, :order_id, :cost, :currency, :qty, :notes)
+    params.expect(purchase: [:purchasable_type, :purchasable_id, :order_id, :cost, :currency, :qty, :notes])
   end
 end

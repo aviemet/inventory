@@ -47,7 +47,7 @@ class ContractsController < ApplicationController
     contract.company = @active_company
 
     if contract.save
-      redirect_to contract, notice: 'Contract was successfully created'
+      redirect_to contract, notice: "Contract was successfully created"
     else
       redirect_to new_contract_path, inertia: { errors: contract.errors }
     end
@@ -58,7 +58,7 @@ class ContractsController < ApplicationController
   def update
     authorize contract
     if contract.update(contract_params)
-      redirect_to contract, notice: 'Contract was successfully updated'
+      redirect_to contract, notice: "Contract was successfully updated"
     else
       redirect_to edit_contract_path, inertia: { errors: contract.errors }
     end
@@ -69,7 +69,7 @@ class ContractsController < ApplicationController
   def destroy
     authorize contract
     contract.destroy
-    redirect_to contracts_url, notice: 'Contract was successfully destroyed.'
+    redirect_to contracts_url, notice: "Contract was successfully destroyed."
   end
 
   private
@@ -79,6 +79,6 @@ class ContractsController < ApplicationController
   end
 
   def contract_params
-    params.require(:contract).permit(:name, :number, :begins_at, :ends_at, :notes, :category_id, :vendor_id)
+    params.expect(contract: [:name, :number, :begins_at, :ends_at, :notes, :category_id, :vendor_id])
   end
 end

@@ -54,7 +54,7 @@
 #
 FactoryBot.define do
   factory :user do
-    password { '$trongPassw0rd!' }
+    password { "$trongPassw0rd!" }
     email { Faker::Internet.unique.email }
 
     transient do

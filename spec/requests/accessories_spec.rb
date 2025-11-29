@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Accessories", :inertia do
   def valid_attributes
@@ -34,7 +34,7 @@ RSpec.describe "Accessories", :inertia do
         get accessories_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Accessories/Index'
+        expect_inertia.to render_component "Accessories/Index"
         expect(response.body).to include(CGI.escapeHTML(accessory.name))
       end
 
@@ -46,7 +46,7 @@ RSpec.describe "Accessories", :inertia do
           get accessories_url, params: { search: accessory1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Accessories/Index'
+          expect_inertia.to render_component "Accessories/Index"
           expect(response.body).to include(CGI.escapeHTML(accessory1.name))
           expect(response.body).not_to include(CGI.escapeHTML(accessory2.name))
         end
@@ -64,7 +64,7 @@ RSpec.describe "Accessories", :inertia do
       get accessory_url({ id: accessory.id })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Accessories/Show'
+      expect_inertia.to render_component "Accessories/Show"
     end
   end
 
@@ -74,10 +74,10 @@ RSpec.describe "Accessories", :inertia do
     it "renders" do
       accessory = create(:accessory, company: Company.first)
 
-      get checkout_accessory_url({id: accessory.id })
+      get checkout_accessory_url({ id: accessory.id })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Accessories/Checkout'
+      expect_inertia.to render_component "Accessories/Checkout"
     end
   end
 
@@ -90,10 +90,10 @@ RSpec.describe "Accessories", :inertia do
       item = create(:item, company:)
       assignment = accessory.assign_to item
 
-      get checkin_accessory_url({id: accessory.id, assignment_id: assignment.id })
+      get checkin_accessory_url({ id: accessory.id, assignment_id: assignment.id })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Accessories/Checkin'
+      expect_inertia.to render_component "Accessories/Checkin"
     end
   end
 

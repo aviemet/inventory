@@ -52,7 +52,7 @@ class PeopleController < ApplicationController
     person.company = @active_company
 
     if person.save
-      redirect_to person, notice: 'Person was successfully created'
+      redirect_to person, notice: "Person was successfully created"
     else
       redirect_to new_person_path, inertia: { errors: person.errors }
     end
@@ -63,7 +63,7 @@ class PeopleController < ApplicationController
   def update
     authorize person
     if person.update(handle_department_params)
-      redirect_to person, notice: 'Person was successfully updated'
+      redirect_to person, notice: "Person was successfully updated"
     else
       redirect_to edit_person_path, inertia: { errors: person.errors }
     end
@@ -74,7 +74,7 @@ class PeopleController < ApplicationController
   def destroy
     authorize person
     person.destroy
-    redirect_to people_url, notice: 'Person was successfully destroyed.'
+    redirect_to people_url, notice: "Person was successfully destroyed."
   end
 
   private
@@ -95,15 +95,15 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(
-      :id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id,
-      user_attributes: [:id, :email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active],
-      contact_attributes: [
-        emails_attributes: [:id, :email, :_destroy],
-        phones_attributes: [:id, :number, :_destroy],
-        addresses_attributes: [:id, :address, :_destroy],
-        websites_attributes: [:id, :url, :_destroy],
-      ],
+    params.expect(
+      person: [:id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id,
+               user_attributes: [:id, :email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active],
+               contact_attributes: [
+                 emails_attributes: [:id, :email, :_destroy],
+                 phones_attributes: [:id, :number, :_destroy],
+                 addresses_attributes: [:id, :address, :_destroy],
+                 websites_attributes: [:id, :url, :_destroy],
+               ]],
     )
   end
 end

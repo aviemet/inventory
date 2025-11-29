@@ -7,13 +7,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # @route GET /users/register (new_user_registration)
   def new
     first_run = false
-    if User.count == 0
+    if User.none?
       flash.clear
-      flash[:notice] = t('devise.first_run_create_admin')
+      flash[:notice] = t("devise.first_run_create_admin")
       first_run = true
     end
 
-    render inertia: 'Public/Devise/Register', props: {
+    render inertia: "Public/Devise/Register", props: {
       first_run:
     }
   end
@@ -27,7 +27,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
-    if User.count == 0
+    if User.none?
       resource.confirmed_at = Time.zone.now
     end
 

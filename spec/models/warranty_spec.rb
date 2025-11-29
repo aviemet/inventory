@@ -17,8 +17,8 @@
 #
 #  fk_rails_...  (asset_id => assets.id)
 #
-require 'rails_helper'
-require 'models/concerns/contactable'
+require "rails_helper"
+require "models/concerns/contactable"
 require "models/concerns/serializable"
 
 RSpec.describe Warranty do

@@ -71,7 +71,7 @@ class LicensesController < ApplicationController
         assignment: assignment.render(view: :edit),
       }
     else
-      redirect_to license, warning: 'License assignment is unable to be checked in'
+      redirect_to license, warning: "License assignment is unable to be checked in"
     end
   end
 
@@ -81,7 +81,7 @@ class LicensesController < ApplicationController
     license.company = @active_company
 
     if license.save
-      redirect_to license, notice: 'License was successfully created'
+      redirect_to license, notice: "License was successfully created"
     else
       redirect_to new_license_path, inertia: { errors: license.errors }
     end
@@ -92,7 +92,7 @@ class LicensesController < ApplicationController
   def update
     authorize license
     if license.update(license_params)
-      redirect_to license, notice: 'License was successfully updated'
+      redirect_to license, notice: "License was successfully updated"
     else
       redirect_to edit_license_path, inertia: { errors: license.errors }
     end
@@ -103,7 +103,7 @@ class LicensesController < ApplicationController
   def destroy
     authorize license
     license.destroy
-    redirect_to licenses_url, notice: 'License was successfully destroyed.'
+    redirect_to licenses_url, notice: "License was successfully destroyed."
   end
 
   private
@@ -113,6 +113,6 @@ class LicensesController < ApplicationController
   end
 
   def license_params
-    params.require(:license).permit(:name, :description, :qty, :cost, :category_id, :vendor_id, :manufacturer_id, :key)
+    params.expect(license: [:name, :description, :qty, :cost, :category_id, :vendor_id, :manufacturer_id, :key])
   end
 end

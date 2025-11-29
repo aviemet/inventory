@@ -16,6 +16,6 @@ class PagesController < ApplicationController
   private
 
   def settings_params
-    params.require(:settings).permit(:dark_mode)
+    params.expect(settings: [:dark_mode])
   end
 end

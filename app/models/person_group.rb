@@ -40,7 +40,7 @@ class PersonGroup < ApplicationRecord
 
   def set_permissions(permissions)
     permissions&.each do |model, actions|
-      constant = if model == 'company'
+      constant = if model == "company"
                    model.singularize.camelize.constantize
                  else
                    self.company

@@ -29,7 +29,7 @@
 #  fk_rails_...  (primary_contact_id => people.id)
 #  fk_rails_...  (status_id => ticket_statuses.id)
 #
-require 'rails_helper'
+require "rails_helper"
 require "models/concerns/serializable"
 
 RSpec.describe Ticket do

@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Consumables", :inertia do
   def valid_attributes
@@ -34,7 +34,7 @@ RSpec.describe "Consumables", :inertia do
         get consumables_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Consumables/Index'
+        expect_inertia.to render_component "Consumables/Index"
         expect(response.body).to include(CGI.escapeHTML(consumable.name))
       end
 
@@ -46,7 +46,7 @@ RSpec.describe "Consumables", :inertia do
           get consumables_url, params: { search: consumable1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Consumables/Index'
+          expect_inertia.to render_component "Consumables/Index"
           expect(response.body).to include(CGI.escapeHTML(consumable1.name))
           expect(response.body).not_to include(CGI.escapeHTML(consumable2.name))
         end
@@ -63,7 +63,7 @@ RSpec.describe "Consumables", :inertia do
       get consumable_url({ id: consumable.id })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Consumables/Show'
+      expect_inertia.to render_component "Consumables/Show"
     end
   end
 
@@ -74,7 +74,7 @@ RSpec.describe "Consumables", :inertia do
       get new_consumable_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Consumables/New'
+      expect_inertia.to render_component "Consumables/New"
     end
   end
 
@@ -87,7 +87,7 @@ RSpec.describe "Consumables", :inertia do
       get edit_consumable_url(consumable)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Consumables/Edit'
+      expect_inertia.to render_component "Consumables/Edit"
     end
   end
 
@@ -100,7 +100,7 @@ RSpec.describe "Consumables", :inertia do
       get checkout_consumable_url({ id: consumable.id })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Consumables/Checkout'
+      expect_inertia.to render_component "Consumables/Checkout"
     end
   end
 

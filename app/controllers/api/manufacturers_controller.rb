@@ -41,6 +41,6 @@ class Api::ManufacturersController < Api::ApiController
   private
 
   def manufacturer_params
-    params.require(:manufacturer).permit(:name)
+    params.expect(manufacturer: [:name])
   end
 end

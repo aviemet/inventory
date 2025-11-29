@@ -50,15 +50,15 @@ class Department < ApplicationRecord
   # 	Department.items, Department.contracts, etc.
   has_many :ownerships, dependent: :restrict_with_error
   {
-    assets: 'Asset',
-    items: 'Item',
-    accessories: 'Accessory',
-    components: 'Component',
-    consumables: 'Consumable',
-    licenses: 'License',
-    contracts: 'Contract',
-    people: 'Person',
-    vendors: 'Vendor'
+    assets: "Asset",
+    items: "Item",
+    accessories: "Accessory",
+    components: "Component",
+    consumables: "Consumable",
+    licenses: "License",
+    contracts: "Contract",
+    people: "Person",
+    vendors: "Vendor"
   }.each_pair do |assoc, model|
     has_many assoc, through: :ownerships, source: :ownable, source_type: model.to_s
   end

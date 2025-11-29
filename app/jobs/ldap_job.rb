@@ -1,4 +1,4 @@
-require 'net/ldap'
+require "net/ldap"
 
 class LdapJob < ApplicationJob
   queue_as :default

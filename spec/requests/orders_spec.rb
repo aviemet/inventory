@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Orders", :inertia do
   describe "GET /index" do
@@ -9,7 +9,7 @@ RSpec.describe "Orders", :inertia do
       get orders_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Orders/Index'
+      expect_inertia.to render_component "Orders/Index"
     end
   end
 end

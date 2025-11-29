@@ -1,6 +1,4 @@
 class Assignable::QuantitySerializer < AssignableSerializer
   type :number
-  def qty_available
-    @object.qty_available
-  end
+  delegate :qty_available, to: :@object
 end

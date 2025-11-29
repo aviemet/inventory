@@ -18,7 +18,4 @@
 #  fk_rails_...  (person_group_id => person_groups.id)
 #  fk_rails_...  (person_id => people.id)
 #
-require 'rails_helper'
-
-RSpec.describe PersonGroupAssignment do
-end
+require "rails_helper"

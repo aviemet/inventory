@@ -41,6 +41,6 @@ class Api::LocationsController < Api::ApiController
   private
 
   def location_params
-    params.require(:location).permit(:name, :currency, :parent_id)
+    params.expect(location: [:name, :currency, :parent_id])
   end
 end

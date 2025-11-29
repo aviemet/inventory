@@ -1,5 +1,5 @@
-require 'rails_helper'
-require_relative '../support/devise'
+require "rails_helper"
+require_relative "../support/devise"
 
 RSpec.describe "Contracts", :inertia do
   def valid_attributes
@@ -32,7 +32,7 @@ RSpec.describe "Contracts", :inertia do
         get contracts_url
 
         expect(response).to have_http_status(:ok)
-        expect_inertia.to render_component 'Contracts/Index'
+        expect_inertia.to render_component "Contracts/Index"
         expect(response.body).to include(CGI.escapeHTML(contract.name))
       end
 
@@ -44,7 +44,7 @@ RSpec.describe "Contracts", :inertia do
           get contracts_url, params: { search: contract1.name }
 
           expect(response).to have_http_status(:ok)
-          expect_inertia.to render_component 'Contracts/Index'
+          expect_inertia.to render_component "Contracts/Index"
           expect(response.body).to include(CGI.escapeHTML(contract1.name))
           expect(response.body).not_to include(CGI.escapeHTML(contract2.name))
         end
@@ -61,7 +61,7 @@ RSpec.describe "Contracts", :inertia do
       get contract_url({ slug: contract.slug })
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Contracts/Show'
+      expect_inertia.to render_component "Contracts/Show"
     end
   end
 
@@ -72,7 +72,7 @@ RSpec.describe "Contracts", :inertia do
       get new_contract_url
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Contracts/New'
+      expect_inertia.to render_component "Contracts/New"
     end
   end
 
@@ -85,7 +85,7 @@ RSpec.describe "Contracts", :inertia do
       get edit_contract_url(contract)
 
       expect(response).to have_http_status(:ok)
-      expect_inertia.to render_component 'Contracts/Edit'
+      expect_inertia.to render_component "Contracts/Edit"
     end
   end
 
@@ -146,13 +146,13 @@ RSpec.describe "Contracts", :inertia do
     it "destroys the requested contract" do
       contract = create(:contract, company: @admin.active_company)
       expect {
-        delete contract_url({slug: contract.slug})
+        delete contract_url({ slug: contract.slug })
       }.to change(Contract, :count).by(-1)
     end
 
     it "redirects to the contracts list" do
       contract = create(:contract, company: @admin.active_company)
-      delete contract_url({slug: contract.slug})
+      delete contract_url({ slug: contract.slug })
       expect(response).to redirect_to(contracts_url)
     end
   end

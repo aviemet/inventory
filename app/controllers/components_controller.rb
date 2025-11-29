@@ -116,6 +116,6 @@ class ComponentsController < ApplicationController
   end
 
   def component_params
-    params.require(:component).permit(:name, :model_id, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id, :status_label_id)
+    params.expect(component: [:name, :model_id, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id, :status_label_id])
   end
 end

@@ -1,24 +1,24 @@
-require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
+require "spec_helper"
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
 
 # Disable audits in test environment
-require 'public_activity'
-require 'public_activity/testing'
+require "public_activity"
+require "public_activity/testing"
 PublicActivity.enabled = false
 
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'rspec/rails'
+require "rspec/rails"
 
 # Add additional requires below this line. Rails is not loaded until this point!
-require 'inertia_rails/rspec'
-require 'bullet'
-require 'database_cleaner/active_record'
+require "inertia_rails/rspec"
+require "bullet"
+require "database_cleaner/active_record"
 require "pundit/rspec"
-require 'capybara/rails'
-require 'capybara/rspec'
-require_relative 'support/api_helper'
+require "capybara/rails"
+require "capybara/rspec"
+require_relative "support/api_helper"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -77,7 +77,7 @@ RSpec.configure do |config|
 
   Capybara.configure do |c|
     c.default_driver = :selenium_chrome
-    c.app_host = 'https://localhost:3000'
+    c.app_host = "https://localhost:3000"
   end
 
   # Database Cleaner
