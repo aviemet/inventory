@@ -16,3 +16,10 @@ export const date = {
 	},
 	english: (date: string | Date) => dayjs(new Date(date)).format("MM/DD/YYYY"),
 }
+
+export const datetime = {
+	dateShort: (date: string | Date) => dayjs(new Date(date)).format("MM/DD/YYYY HH:mm"),
+	dateLong: (date: string | Date) => dayjs(new Date(date)).format("MM/DD/YYYY HH:mm:ss"),
+	relative: (date: string | Date) => dayjs(new Date(date)).fromNow(),
+	english: (date: string | Date) => dayjs(new Date(date)).format("MMMM D, YYYY h:mm A"),
+}

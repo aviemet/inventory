@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Date, Link, Money, Table } from "@/components"
+import { DateTimeFormatter, Link, Money, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
@@ -37,11 +37,11 @@ const OrdersTable = (props: TableProps) => {
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							<Date>{ order.ordered_at }</Date>
+							<DateTimeFormatter>{ order.ordered_at }</DateTimeFormatter>
 						</Table.Cell>
 
 						<Table.Cell nowrap>
-							<Date>{ order.delivered_at }</Date>
+							<DateTimeFormatter>{ order.delivered_at }</DateTimeFormatter>
 						</Table.Cell>
 
 						<Table.Cell fitContent>

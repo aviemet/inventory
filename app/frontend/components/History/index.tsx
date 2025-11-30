@@ -11,7 +11,6 @@ interface HistoryProps {
 const History = ({ assignments, activities }: HistoryProps) => {
 	// Timeline.Item components cannot be wrapped, so the content has been componentized instead
 	// https://mantine.dev/core/timeline/#wrap-timelineitem
-	console.log({ assignments })
 	return (
 		<>
 			{ activities &&

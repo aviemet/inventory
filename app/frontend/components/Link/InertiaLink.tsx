@@ -12,7 +12,7 @@ interface LinkProps extends AnchorLinkProps {
 	href: string
 	as: "a" | "button"
 	method?: Method
-	visit?: Omit<Visit, "method">
+	visit?: Partial<Omit<Visit, "method">>
 	buttonProps?: ButtonProps
 	disabled?: boolean
 }

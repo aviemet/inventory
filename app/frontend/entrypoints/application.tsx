@@ -1,5 +1,4 @@
 import { createInertiaApp, router } from "@inertiajs/react"
-import React from "react"
 import { createRoot } from "react-dom/client"
 
 import { AuthLayout, AppLayout } from "../layouts"

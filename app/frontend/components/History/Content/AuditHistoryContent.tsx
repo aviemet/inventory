@@ -1,5 +1,4 @@
 import { Text } from "@mantine/core"
-import React from "react"
 
 import { Link } from "@/components"
 import { formatter, Routes } from "@/lib"

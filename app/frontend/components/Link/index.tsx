@@ -11,7 +11,7 @@ export interface LinkProps
 	children?: React.ReactNode
 	href: string
 	method?: Method
-	visit?: Omit<Visit, "method">
+	visit?: Partial<Omit<Visit, "method">>
 	external?: boolean
 	as?: "a" | "button"
 	onProgress?: React.ReactEventHandler<HTMLAnchorElement>

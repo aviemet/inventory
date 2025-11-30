@@ -1,8 +1,6 @@
 import { Text } from "@mantine/core"
-import React from "react"
 
-import { Link } from "@/components"
-import { formatter, polymorphicRoute } from "@/lib"
+import { formatter } from "@/lib"
 
 const ReturnedHistoryContext = ({ activity }: { activity: Schema.Activity }) => {
 	return (
