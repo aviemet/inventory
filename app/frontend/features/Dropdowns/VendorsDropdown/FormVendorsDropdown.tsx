@@ -1,18 +1,20 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { Routes } from '@/lib'
-import VendorsForm from '@/pages/Vendors/Form'
-import { useGetVendorsAsOptions } from '@/queries/vendors'
-import { isEmpty } from 'lodash'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface VendorsDropdownProps extends Omit<FormAsyncDropdown<Schema.VendorsOptions>, 'name'> {
+import { Select as FormSelect } from "@/components/Form"
+import { Routes } from "@/lib"
+import VendorsForm from "@/pages/Vendors/Form"
+import { useGetVendorsAsOptions } from "@/queries/vendors"
+
+import { type FormAsyncDropdown } from ".."
+
+interface VendorsDropdownProps extends Omit<FormAsyncDropdown<Schema.VendorsOptions>, "name"> {
 	name?: string
 }
 
 const VendorsDropdown = ({
-	label = 'Vendor',
-	name = 'vendor_id',
+	label = "Vendor",
+	name = "vendor_id",
 	initialData,
 	value,
 	...props

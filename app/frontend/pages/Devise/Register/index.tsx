@@ -1,9 +1,10 @@
-import React from 'react'
-import { Form, TextInput, PasswordInput, Submit, Field } from '@/components/Form'
-import { Routes } from '@/lib'
-import { Title, Tile } from '@/components'
-import { type UseFormProps } from 'use-inertia-form'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+import { type UseFormProps } from "use-inertia-form"
+
+import { Title, Tile } from "@/components"
+import { Form, TextInput, PasswordInput, Submit, Field } from "@/components/Form"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 type RegisterFormData = {
 	user: {
@@ -14,13 +15,13 @@ type RegisterFormData = {
 }
 
 const firstRun = {
-	heading: 'Create Admin User',
-	description: 'Time to create your first user which  will be the admin for your inventory system',
+	heading: "Create Admin User",
+	description: "Time to create your first user which  will be the admin for your inventory system",
 }
 
 const register = {
-	heading: 'Sign Up',
-	description: '',
+	heading: "Sign Up",
+	description: "",
 }
 
 const Register = () => {
@@ -31,17 +32,17 @@ const Register = () => {
 	}
 
 	const handlePasswordChange = (value: string, { data, getError, clearErrors }: UseFormProps<RegisterFormData>) => {
-		if(getError('user.password') || getError('user.password_confirmation')) {
+		if(getError("user.password") || getError("user.password_confirmation")) {
 			if(data.user.password === data.user.password_confirmation) {
-				clearErrors('user.password')
-				clearErrors('user.password_confirmation')
+				clearErrors("user.password")
+				clearErrors("user.password_confirmation")
 			}
 		}
 	}
 
 	const handleSubmit = ({ data, setError, errors, transform }: UseFormProps<RegisterFormData>) => {
 		if(data.user.password !== data.user.password_confirmation) {
-			setError('user.password_confirmation', 'Passwords must match')
+			setError("user.password_confirmation", "Passwords must match")
 			return false
 		}
 	}
@@ -58,9 +59,9 @@ const Register = () => {
 				disableFormatting
 				data={ {
 					user: {
-						email: '',
-						password: '',
-						password_confirmation: '',
+						email: "",
+						password: "",
+						password_confirmation: "",
 					},
 				} }
 				model="user"

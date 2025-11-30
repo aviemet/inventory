@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
-import { useTableContext } from '.'
+import React, { useEffect } from "react"
+
+import { useTableContext, type TableRowData } from "."
 
 interface StatePreservingRowUpdaterProps {
 	children: React.ReactElement
-	rows?: Record<string,any>[]
+	rows?: readonly TableRowData[]
 	pagination?: Schema.Pagination
 }
 

@@ -1,7 +1,9 @@
-import React from 'react'
-import { Box, Title, Link } from '@/components'
-import AssignmentLink from './AssignmentLink'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Box, Title, Link } from "@/components"
+import { Routes } from "@/lib"
+
+import AssignmentLink from "./AssignmentLink"
 
 interface ItemAssociationsProps {
 	item: Schema.ItemsShow

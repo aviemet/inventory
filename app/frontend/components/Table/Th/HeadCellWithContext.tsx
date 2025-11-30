@@ -1,12 +1,16 @@
-import React, { useMemo, useRef } from 'react'
-import { Link, Flex } from '@/components'
-import cx from 'clsx'
-import { type TableHeadCellProps } from '.'
-import { useLocation } from '@/lib/hooks'
-import { Table } from '@mantine/core'
+import { Table } from "@mantine/core"
+import cx from "clsx"
+import React, { useRef } from "react"
+
+import { Link, Flex } from "@/components"
+import { useLocation } from "@/lib/hooks"
+
+import { type TableRowData } from "../TableContext"
+
+import { type TableHeadCellProps } from "."
 
 interface HeadCellWithContextProps extends TableHeadCellProps {
-	rows?: Record<string, any>[]
+	rows?: readonly TableRowData[]
 }
 
 const HeadCellWithContext = ({
@@ -22,35 +26,27 @@ const HeadCellWithContext = ({
 
 	const localParams = new URLSearchParams(params)
 
-	const paramsSort = localParams.get('sort')
-	const paramsDirection = localParams.get('direction')
+	const paramsSort = localParams.get("sort")
+	const paramsDirection = localParams.get("direction")
 
-	const direction = paramsSort === sort && paramsDirection === 'asc' ? 'desc' : 'asc'
+	const direction = paramsSort === sort && paramsDirection === "asc" ? "desc" : "asc"
 
 	const showSortLink: boolean = sort !== undefined && rows!.length > 1
 
-	// Use URLSearchParams object to build sort link per head cell
-	const sortLink = useMemo(() => {
-		if(!showSortLink) return undefined
-
-		if(sort === undefined) {
-			localParams.delete('sort')
-			return undefined
-		}
-
-		localParams.set('sort', sort)
-
-		localParams.set('direction', direction)
-
-		return `${pathname}?${localParams.toString()}`
-	}, [showSortLink, sort, direction, pathname])
+	let sortLink: string | undefined
+	if(showSortLink && sort !== undefined) {
+		const sortParams = new URLSearchParams(params)
+		sortParams.set("sort", sort)
+		sortParams.set("direction", direction)
+		sortLink = `${pathname}?${sortParams.toString()}`
+	}
 
 	return (
 		<Table.Th
 			ref={ thRef }
 			className={ cx(
-				{ 'table-column-fit': fitContent },
-				{ 'sortable': showSortLink },
+				{ "table-column-fit": fitContent },
+				{ "sortable": showSortLink },
 				{ [direction]: showSortLink && paramsSort === sort },
 			) }
 			{ ...props }

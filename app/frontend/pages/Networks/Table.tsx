@@ -1,8 +1,9 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Link, Table } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
+import React from "react"
+
+import { Link, Table } from "@/components"
+import { EditButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
 
 const NetworksTable = (props: TableProps) => {
 	return (
@@ -15,7 +16,7 @@ const NetworksTable = (props: TableProps) => {
 					<Table.HeadCell sort="dhcp_start">DHCP Start</Table.HeadCell>
 					<Table.HeadCell sort="dhcp_end">DHCP End</Table.HeadCell>
 					<Table.HeadCell sort="vlan_id">VLAN Id</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

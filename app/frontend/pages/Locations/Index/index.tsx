@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import LocationsTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import LocationsTable from "../Table"
 
 interface CompaniesIndexProps {
 	locations: Schema.LocationsIndex[]
@@ -18,7 +20,7 @@ const LocationsIndex = ({ locations, pagination }: CompaniesIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.locations() }
 			menuOptions={ [
-				{ label: 'New Location', href: Routes.newLocation(), icon: <NewIcon /> },
+				{ label: "New Location", href: Routes.newLocation(), icon: <NewIcon /> },
 			] }
 		>
 			<LocationsTable />

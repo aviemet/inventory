@@ -1,13 +1,15 @@
-import React, { forwardRef } from 'react'
-import { Select as InputSelect } from '@/components/Inputs'
-import { useGetStatusLabelsAsOptions } from '@/queries/statusLabels'
-import { isEmpty } from 'lodash'
-import { type AsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React, { forwardRef } from "react"
+
+import { Select as InputSelect } from "@/components/Inputs"
+import { useGetStatusLabelsAsOptions } from "@/queries/statusLabels"
+
+import { type AsyncDropdown } from ".."
 
 interface StatusLabelsDropdownProps extends AsyncDropdown<Schema.StatusLabelsOptions> {}
 
 const StatusLabelsDropdown = forwardRef<HTMLInputElement, StatusLabelsDropdownProps>((
-	{ label = 'Status Label', name = 'status_label_id', initialData, value, ...props },
+	{ label = "Status Label", name = "status_label_id", initialData, value, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = useGetStatusLabelsAsOptions({

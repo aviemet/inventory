@@ -1,20 +1,22 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import CompanyForm from '../Form'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import CompanyForm from "../Form"
 
 interface EditCompanyProps {
 	company: Schema.CompaniesEdit
 }
 
 const EditCompany = ({ company }: EditCompanyProps) => {
-	const title = 'Edit Company'
+	const title = "Edit Company"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Companies', href: Routes.companies() },
+			{ title: "Companies", href: Routes.companies() },
 			{ title: company.name!, href: Routes.company(company.slug) },
-			{ title: 'Edit Company', href: window.location.href },
+			{ title: "Edit Company", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

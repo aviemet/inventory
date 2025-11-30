@@ -1,9 +1,10 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Textarea, Submit } from '@/components/Form'
-import { FormLocationsDropdown } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Textarea, Submit } from "@/components/Form"
+import { FormLocationsDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 type DepartmentForData = {
 	department: Schema.DepartmentsFormData
@@ -17,12 +18,12 @@ export interface DepartmentFormProps {
 }
 
 const emptyDepartment: Schema.DepartmentsFormData = {
-	name: '',
+	name: "",
 	location_id: undefined,
-	notes: '',
+	notes: "",
 }
 
-const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepartment }: DepartmentFormProps) => {
+const DepartmentForm = ({ to, method = "post", onSubmit, department = emptyDepartment }: DepartmentFormProps) => {
 
 	return (
 		<Form
@@ -47,7 +48,7 @@ const DepartmentForm = ({ to, method = 'post', onSubmit, department = emptyDepar
 
 				<Grid.Col>
 					<Submit>
-						{ department.id ? 'Update' : 'Create' } Department
+						{ department.id ? "Update" : "Create" } Department
 					</Submit>
 				</Grid.Col>
 

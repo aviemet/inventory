@@ -1,13 +1,14 @@
-import React from 'react'
-import { Box, Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Box, Grid } from "@/components"
 import {
 	Form,
 	TextInput,
 	Textarea,
 	Submit,
-} from '@/components/Form'
-import { IPAddress } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
+import { IPAddress } from "@/lib"
 
 type NetworkFormData = {
 	network: Schema.NetworksFormData
@@ -21,35 +22,35 @@ export interface NetworkFormProps {
 }
 
 const emptyNetwork: Schema.NetworksFormData = {
-	name: '',
+	name: "",
 	vlan_id: NaN,
-	address: '',
-	gateway: '',
-	dhcp_start: '',
-	dhcp_end: '',
-	notes: '',
+	address: "",
+	gateway: "",
+	dhcp_start: "",
+	dhcp_end: "",
+	notes: "",
 }
 
-const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: NetworkFormProps) => {
+const NetworkForm = ({ to, method = "post", onSubmit, network = emptyNetwork }: NetworkFormProps) => {
 	const handleAddressBlur = (value: string, form: UseFormProps<NetworkFormData>) => {
 		let ip: IPAddress | undefined = undefined
 
-		form.clearErrors('network.address')
+		form.clearErrors("network.address")
 
 		try {
 			ip = new IPAddress(value)
 
 			if(ip.address.subnetMask === 32) {
-				form.setError('network.address', `${form.getData('network.address')} is not a valid network address. Must not be a /32 address.`)
+				form.setError("network.address", `${form.getData("network.address")} is not a valid network address. Must not be a /32 address.`)
 
 				ip = undefined
 			}
 		} catch(e) {
-			form.setError('network.address', `${form.getData('network.address')} is not a valid network address. Value must contain subnet prefix, e.g. "192.168.1.0/24"`)
+			form.setError("network.address", `${form.getData("network.address")} is not a valid network address. Value must contain subnet prefix, e.g. "192.168.1.0/24"`)
 		}
 
-		if(ip !== undefined && form.getData('network.gateway') === '') {
-			form.setData('network.gateway', ip.address.startAddressExclusive().address)
+		if(ip !== undefined && form.getData("network.gateway") === "") {
+			form.setData("network.gateway", ip.address.startAddressExclusive().address)
 		}
 	}
 
@@ -85,7 +86,7 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: 
 				<Grid.Col span={ { sm: 12, md: 6 } }>
 					<TextInput name="vlan_id" label="VLAN ID" />
 				</Grid.Col>
-				<Box style={ { width: '100%' } }></Box>
+				<Box style={ { width: "100%" } }></Box>
 
 				<Grid.Col>
 					<Textarea name="notes" label="Notes" />
@@ -93,7 +94,7 @@ const NetworkForm = ({ to, method = 'post', onSubmit, network = emptyNetwork }: 
 
 				<Grid.Col>
 					<Submit>
-						{ network.id ? 'Update' : 'Create' } Network
+						{ network.id ? "Update" : "Create" } Network
 					</Submit>
 				</Grid.Col>
 			</Grid>

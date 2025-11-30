@@ -1,6 +1,8 @@
-import React from 'react'
-import SettingsLayout from '../../SettingsLayout'
-import { Title } from '@/components'
+import React from "react"
+
+import { Title } from "@/components"
+
+import SettingsLayout from "../../SettingsLayout"
 
 const Appearance = () => {
 	return (

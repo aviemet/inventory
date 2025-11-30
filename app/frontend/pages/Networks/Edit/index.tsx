@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import NetworkForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface UpdateNetworkProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import NetworkForm from "../Form"
+
+interface UpdateNetworkProps {
 	network: Schema.NetworksEdit
 }
 
@@ -12,9 +14,9 @@ const New = ({ network }: UpdateNetworkProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Networks', href: Routes.networks() },
+			{ title: "Networks", href: Routes.networks() },
 			{ title: network.name, href: Routes.network(network) },
-			{ title: 'Edit Network', href: window.location.href },
+			{ title: "Edit Network", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

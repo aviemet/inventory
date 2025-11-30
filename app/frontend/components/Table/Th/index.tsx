@@ -1,8 +1,10 @@
-import React from 'react'
-import { useTableContext } from '../TableContext'
-import HeadCell from './HeadCell'
-import { type TableThProps } from '@mantine/core'
-import { usePageProps } from '@/lib/hooks'
+import { type TableThProps } from "@mantine/core"
+import React from "react"
+
+import { usePageProps } from "@/lib/hooks"
+
+import { useTableContext } from "../TableContext"
+import HeadCell from "./HeadCell"
 
 export interface TableHeadCellProps extends TableThProps {
 	fitContent?: boolean

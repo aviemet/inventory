@@ -1,19 +1,21 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { Routes } from '@/lib'
-import CategoriesForm from '@/pages/Categories/Form'
-import { useGetCategoriesAsOptions } from '@/queries/categories'
-import { isEmpty } from 'lodash'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface FormCategoriesDropdownProps extends Omit<FormAsyncDropdown<Schema.CategoriesOptions>, 'name'> {
+import { Select as FormSelect } from "@/components/Form"
+import { Routes } from "@/lib"
+import CategoriesForm from "@/pages/Categories/Form"
+import { useGetCategoriesAsOptions } from "@/queries/categories"
+
+import { type FormAsyncDropdown } from ".."
+
+interface FormCategoriesDropdownProps extends Omit<FormAsyncDropdown<Schema.CategoriesOptions>, "name"> {
 	name?: string
 	categorizable_type?: Schema.CategoryTypes
 }
 
 const FormCategoriesDropdown = ({
-	label = 'Category',
-	name = 'category_id',
+	label = "Category",
+	name = "category_id",
 	categorizable_type,
 	initialData,
 	value,
@@ -43,7 +45,7 @@ const FormCategoriesDropdown = ({
 			newForm={
 				<CategoriesForm
 					to={ Routes.apiCategories() }
-					categoryType='Contract'
+					categoryType="Contract"
 				/>
 			}
 			{ ...props }

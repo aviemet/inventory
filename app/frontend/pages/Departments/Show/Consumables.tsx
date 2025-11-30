@@ -1,10 +1,11 @@
-import React from 'react'
-import { Section } from '@/components'
-import { NewIcon } from '@/components/Icons'
-import ShowPageTableTemplate from '@/features/ShowPageTableTemplate'
-import { Routes } from '@/lib'
-import ConsumablesTable from '@/pages/Consumables/Table'
-import { type PaginatedModel } from '@/types/PaginatedModel'
+import React from "react"
+
+import { Section } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
+import { Routes } from "@/lib"
+import ConsumablesTable from "@/pages/Consumables/Table"
+import { type PaginatedModel } from "@/types/PaginatedModel"
 
 interface DetailsProps {
 	department: Schema.Department
@@ -20,7 +21,7 @@ const Details = ({ department, consumables }: DetailsProps) => {
 				rows={ consumables?.data }
 				pagination={ consumables?.pagination }
 				menuOptions={ [
-					{ label: 'New Consumable', href: Routes.newConsumable(), icon: <NewIcon /> },
+					{ label: "New Consumable", href: Routes.newConsumable(), icon: <NewIcon /> },
 				] }
 			>
 				<ConsumablesTable wrapper={ false } />

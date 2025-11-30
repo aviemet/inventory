@@ -1,7 +1,9 @@
-import React from 'react'
-import { Link, Title, Table, Box, Money } from '@/components'
-import { Routes } from '@/lib'
-import { ShowComponentProps } from '.'
+import React from "react"
+
+import { Link, Title, Table, Box, Money } from "@/components"
+import { Routes } from "@/lib"
+
+import { ShowComponentProps } from "."
 
 const ComponentDetails = ({ component }: ShowComponentProps) => {
 	return (

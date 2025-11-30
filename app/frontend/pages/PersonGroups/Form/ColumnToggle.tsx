@@ -1,10 +1,13 @@
-import React, { useCallback } from 'react'
-import { Checkbox } from '@/components/Inputs'
-import { useForm } from 'use-inertia-form'
-import { type FormData, type Permissions } from '.'
-import tableRows from './tableRows'
-import { useCheckboxState } from '@/lib/hooks'
-import { usePermissionsForm } from './PermissionsForm'
+import React, { useCallback } from "react"
+import { useForm } from "use-inertia-form"
+
+import { Checkbox } from "@/components/Inputs"
+import { useCheckboxState } from "@/lib/hooks"
+
+import { usePermissionsForm } from "./PermissionsForm"
+import tableRows from "./tableRows"
+
+import { type FormData, type Permissions } from "."
 
 interface ColumnToggleProps {
 	permission: keyof Permissions
@@ -41,7 +44,7 @@ const ColumnToggle = ({ permission }: ColumnToggleProps) => {
 	return (
 		<Checkbox
 			// ref={ checkboxRef }
-			onChange={ handleChange  }
+			onChange={ handleChange }
 			disabled={ isCompanyAdmin }
 			checked={ allChecked }
 			indeterminate={ indeterminate }

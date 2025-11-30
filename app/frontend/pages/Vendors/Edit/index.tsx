@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import VendorForm from '../Form'
+import React from "react"
 
-interface UpdateVendorProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import VendorForm from "../Form"
+
+interface UpdateVendorProps {
 	vendor: Schema.VendorsEdit
 }
 
@@ -12,9 +14,9 @@ const EditVendor = ({ vendor, ...models }: UpdateVendorProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Vendors', href: Routes.vendors() },
+			{ title: "Vendors", href: Routes.vendors() },
 			{ title: vendor.name!, href: Routes.vendor(vendor) },
-			{ title: 'Edit Vendor', href: window.location.href },
+			{ title: "Edit Vendor", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

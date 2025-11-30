@@ -1,13 +1,14 @@
-import React from 'react'
-import { Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	TextInput,
 	Submit,
 	PasswordInput,
-} from '@/components/Form'
-import { FormDepartmentsDropdown, FormPeopleDropdown } from '@/features/Dropdowns'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
+import { FormDepartmentsDropdown, FormPeopleDropdown } from "@/features/Dropdowns"
 
 type UserFormData = {
 	user: Schema.UsersFormData
@@ -20,33 +21,33 @@ export interface UserFormProps {
 	user: Schema.UsersFormData
 }
 
-const UserForm = ({ to, method = 'post', onSubmit, user }: UserFormProps) => {
+const UserForm = ({ to, method = "post", onSubmit, user }: UserFormProps) => {
 	/**
 	 * Manage password check validation
 	 */
 	const handleFormChange = ({ getData, clearErrors }: UseFormProps<UserFormData>) => {
-		const password = getData('user.')
-		const checkPassword = getData('user.check_password')
+		const password = getData("user.")
+		const checkPassword = getData("user.check_password")
 
 		if(password === checkPassword) {
-			clearErrors('user.check_password')
+			clearErrors("user.check_password")
 			return
 		}
 	}
 
 	const handlePasswordBlur = (password: string, { getData, setError }: UseFormProps<UserFormData>) => {
-		const checkPassword = getData('user.check_password')
+		const checkPassword = getData("user.check_password")
 
-		if(checkPassword !== '' && password !== checkPassword) {
-			setError('user.check_password', 'Passwords must match')
+		if(checkPassword !== "" && password !== checkPassword) {
+			setError("user.check_password", "Passwords must match")
 		}
 	}
 
 	const handleCheckPasswordBlur = (checkPassword: string, { getData, setError }: UseFormProps<UserFormData>) => {
-		const password = getData('user.password')
+		const password = getData("user.password")
 
 		if(password !== checkPassword) {
-			setError('user.check_password', 'Passwords must match')
+			setError("user.check_password", "Passwords must match")
 		}
 	}
 	return (
@@ -83,7 +84,7 @@ const UserForm = ({ to, method = 'post', onSubmit, user }: UserFormProps) => {
 
 				<Grid.Col>
 					<Submit>
-						{ user.id ? 'Update' : 'Create' } User
+						{ user.id ? "Update" : "Create" } User
 					</Submit>
 				</Grid.Col>
 			</Grid>

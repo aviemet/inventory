@@ -1,20 +1,22 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import OrderForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface UpdateOrderProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import OrderForm from "../Form"
+
+interface UpdateOrderProps {
 	order: Schema.OrdersEdit
 }
 
-const EditOrder = ({ order  }: UpdateOrderProps) => {
-	const title = 'Edit Order'
+const EditOrder = ({ order }: UpdateOrderProps) => {
+	const title = "Edit Order"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Order', href: Routes.orders() },
+			{ title: "Order", href: Routes.orders() },
 			{ title: String(order.id), href: Routes.order(order) },
-			{ title: 'Edit Order', href: window.location.href },
+			{ title: "Edit Order", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

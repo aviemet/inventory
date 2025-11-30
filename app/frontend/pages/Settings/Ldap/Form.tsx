@@ -1,16 +1,16 @@
+import React from "react"
+import { type FormProps, type HTTPVerb } from "use-inertia-form"
 
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Submit, PasswordInput } from '@/components/Form'
-import { type FormProps, type HTTPVerb } from 'use-inertia-form'
+import { Grid } from "@/components"
+import { Form, TextInput, Submit, PasswordInput } from "@/components/Form"
 
-interface LdapFormProps extends Omit<FormProps<{ ldap: Schema.LdapsFormData }>, 'data'> {
+interface LdapFormProps extends Omit<FormProps<{ ldap: Schema.LdapsFormData }>, "data"> {
 	ldap: Schema.LdapsFormData
 	to: string
 	method?: HTTPVerb
 }
 
-const LdapForm = ({ ldap, method = 'post', ...props }: LdapFormProps) => {
+const LdapForm = ({ ldap, method = "post", ...props }: LdapFormProps) => {
 	return (
 		<Form
 			model="ldap"
@@ -56,7 +56,7 @@ const LdapForm = ({ ldap, method = 'post', ...props }: LdapFormProps) => {
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ ldap.id ? 'Update' : 'Save' } LDAP Settings</Submit>
+					<Submit>{ ldap.id ? "Update" : "Save" } LDAP Settings</Submit>
 				</Grid.Col>
 
 			</Grid>

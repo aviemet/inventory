@@ -1,5 +1,7 @@
-import React from 'react'
-import { Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	TextInput,
@@ -9,10 +11,9 @@ import {
 	FormGroup,
 	CurrencyInput,
 	NumberInput,
-} from '@/components/Form'
-import { FormLocationsDropdown, FormModelsDropdown, FormVendorsDropdown } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
+import { FormLocationsDropdown, FormModelsDropdown, FormVendorsDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 type ConsumableFormData = {
 	consumable: Schema.ConsumablesFormData
@@ -25,7 +26,7 @@ export interface ConsumableFormProps {
 	consumable: Schema.ConsumablesFormData
 }
 
-const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: ConsumableFormProps) => {
+const ConsumableForm = ({ to, method = "post", onSubmit, consumable }: ConsumableFormProps) => {
 	return (
 		<Form
 			model="consumable"
@@ -103,7 +104,7 @@ const ConsumableForm = ({ to, method = 'post', onSubmit, consumable }: Consumabl
 
 				<Grid.Col>
 					<Submit className="w-full">
-						{ consumable.id ? 'Update' : 'Create' } Consumable
+						{ consumable.id ? "Update" : "Create" } Consumable
 					</Submit>
 				</Grid.Col>
 

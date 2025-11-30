@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import ContractsTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import ContractsTable from "../Table"
 
 interface ContractsIndexProps {
 	contracts: Schema.ContractsIndex[]
@@ -18,7 +20,7 @@ const ContractsIndex = ({ contracts, pagination }: ContractsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.contracts() }
 			menuOptions={ [
-				{ label: 'New Contract', href: Routes.newContract(), icon: <NewIcon /> },
+				{ label: "New Contract", href: Routes.newContract(), icon: <NewIcon /> },
 			] }
 		>
 			<ContractsTable />

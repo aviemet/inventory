@@ -1,19 +1,21 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import GroupForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import GroupForm from "../Form"
 
 interface NewGroupProps {
 	person_group: Schema.PersonGroupsFormData
 }
 
 const New = ({ ...data }: NewGroupProps) => {
-	const title = 'New People Group'
+	const title = "New People Group"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Groups', href: Routes.personGroups() },
-			{ title: 'New People Group', href: window.location.href },
+			{ title: "Groups", href: Routes.personGroups() },
+			{ title: "New People Group", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

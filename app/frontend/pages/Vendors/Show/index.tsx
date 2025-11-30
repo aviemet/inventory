@@ -1,15 +1,17 @@
-import React from 'react'
-import { Section, Link, Menu, Group, Title, Tabs, Page } from '@/components'
-import { Routes } from '@/lib'
-import { NewIcon, EditIcon } from '@/components/Icons'
-import ItemsTable from '@/pages/Items/Table'
-import AccessoriesTable from '@/pages/Accessories/Table'
-import ConsumablesTable from '@/pages/Consumables/Table'
-import ComponentsTable from '@/pages/components/Table'
-import LicensesTable from '@/pages/Licenses/Table'
-import ContractsTable from '@/pages/Contracts/Table'
-import ShowPageTableTemplate from '@/features/ShowPageTableTemplate'
-import { type PaginatedModel } from '@/types/PaginatedModel'
+import React from "react"
+
+import { Section, Link, Menu, Group, Title, Tabs, Page } from "@/components"
+import { NewIcon, EditIcon } from "@/components/Icons"
+import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
+import { Routes } from "@/lib"
+import AccessoriesTable from "@/pages/Accessories/Table"
+import ConsumablesTable from "@/pages/Consumables/Table"
+import ContractsTable from "@/pages/Contracts/Table"
+import ItemsTable from "@/pages/Items/Table"
+import LicensesTable from "@/pages/Licenses/Table"
+import { type PaginatedModel } from "@/types/PaginatedModel"
+
+import ComponentsTable from "@/pages/components/Table"
 
 interface VendorShowProps {
 	vendor: Schema.VendorsShow
@@ -22,30 +24,30 @@ interface VendorShowProps {
 }
 
 const tabs = {
-	details: 'details',
-	items: 'items',
-	accessories: 'accessories',
-	components: 'components',
-	consumables: 'consumables',
-	licenses: 'licenses',
-	contracts: 'contracts',
+	details: "details",
+	items: "items",
+	accessories: "accessories",
+	components: "components",
+	consumables: "consumables",
+	licenses: "licenses",
+	contracts: "contracts",
 }
 
 const Show = ({ vendor, items, accessories, components, consumables, licenses, contracts }: VendorShowProps) => {
-	const title = vendor.name ?? 'Vendor Details'
+	const title = vendor.name ?? "Vendor Details"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Vendors', href: Routes.vendors() },
+			{ title: "Vendors", href: Routes.vendors() },
 			{ title: vendor.name, href: window.location.href },
 		] }>
 			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {
-				[tabs.items]: 'items',
-				[tabs.accessories]: 'accessories',
-				[tabs.components]: 'components',
-				[tabs.consumables]: 'consumables',
-				[tabs.licenses]: 'licenses',
-				[tabs.contracts]: 'contracts',
+				[tabs.items]: "items",
+				[tabs.accessories]: "accessories",
+				[tabs.components]: "components",
+				[tabs.consumables]: "consumables",
+				[tabs.licenses]: "licenses",
+				[tabs.contracts]: "contracts",
 			} }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
@@ -57,7 +59,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					<Tabs.Tab value={ tabs.contracts }>Contracts ({ vendor.counts.contracts })</Tabs.Tab>
 				</Tabs.List>
 
-				{ /*********** Details ***********/ }
+				{ /** ********* Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
 						<Group justify="space-between">
@@ -84,7 +86,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** ITEMS ***********/ }
+				{ /** ********* ITEMS ***********/ }
 				<Tabs.Panel value={ tabs.items }>
 					<Section>
 						<ShowPageTableTemplate
@@ -93,7 +95,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ items?.data }
 							pagination={ items?.pagination }
 							menuOptions={ [
-								{ label: 'New Asset', href: Routes.newItem(), icon: <NewIcon /> },
+								{ label: "New Asset", href: Routes.newItem(), icon: <NewIcon /> },
 							] }
 						>
 							<ItemsTable wrapper={ false } />
@@ -101,7 +103,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** ACCESSORIES ***********/ }
+				{ /** ********* ACCESSORIES ***********/ }
 				<Tabs.Panel value={ tabs.accessories }>
 					<Section>
 						<ShowPageTableTemplate
@@ -110,7 +112,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ accessories?.data }
 							pagination={ accessories?.pagination }
 							menuOptions={ [
-								{ label: 'New Accessory', href: Routes.newAccessory(), icon: <NewIcon /> },
+								{ label: "New Accessory", href: Routes.newAccessory(), icon: <NewIcon /> },
 							] }
 						>
 							<AccessoriesTable wrapper={ false } />
@@ -118,7 +120,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** CONSUMABLES ***********/ }
+				{ /** ********* CONSUMABLES ***********/ }
 				<Tabs.Panel value={ tabs.consumables }>
 					<Section>
 						<ShowPageTableTemplate
@@ -127,7 +129,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ consumables?.data }
 							pagination={ consumables?.pagination }
 							menuOptions={ [
-								{ label: 'New Consumable', href: Routes.newConsumable(), icon: <NewIcon /> },
+								{ label: "New Consumable", href: Routes.newConsumable(), icon: <NewIcon /> },
 							] }
 						>
 							<ConsumablesTable wrapper={ false } />
@@ -135,7 +137,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** COMPONENTS ***********/ }
+				{ /** ********* COMPONENTS ***********/ }
 				<Tabs.Panel value={ tabs.components }>
 					<Section>
 						<ShowPageTableTemplate
@@ -144,7 +146,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ components?.data }
 							pagination={ components?.pagination }
 							menuOptions={ [
-								{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
+								{ label: "New Component", href: Routes.newComponent(), icon: <NewIcon /> },
 							] }
 						>
 							<ComponentsTable wrapper={ false } />
@@ -152,7 +154,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** LICENSES ***********/ }
+				{ /** ********* LICENSES ***********/ }
 				<Tabs.Panel value={ tabs.licenses }>
 					<Section>
 						<ShowPageTableTemplate
@@ -161,7 +163,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ licenses?.data }
 							pagination={ licenses?.pagination }
 							menuOptions={ [
-								{ label: 'New License', href: Routes.newLicense(), icon: <NewIcon /> },
+								{ label: "New License", href: Routes.newLicense(), icon: <NewIcon /> },
 							] }
 						>
 							<LicensesTable wrapper={ false } />
@@ -169,7 +171,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** CONTRACTS ***********/ }
+				{ /** ********* CONTRACTS ***********/ }
 				<Tabs.Panel value={ tabs.contracts }>
 					<Section>
 						<ShowPageTableTemplate
@@ -178,7 +180,7 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 							rows={ contracts?.data }
 							pagination={ contracts?.pagination }
 							menuOptions={ [
-								{ label: 'New Contract', href: Routes.newContract({ 'contract.vendor_id': vendor.id }), icon: <NewIcon /> },
+								{ label: "New Contract", href: Routes.newContract({ "contract.vendor_id": vendor.id }), icon: <NewIcon /> },
 							] }
 						>
 							<ContractsTable wrapper={ false } />

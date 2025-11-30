@@ -1,6 +1,6 @@
 export const emptyGroup: Schema.PersonGroupsFormData = {
-	name: '',
-	description: '',
+	name: "",
+	description: "",
 	permissions: {
 		company: {
 			admin: false,

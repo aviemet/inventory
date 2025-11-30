@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import ModelForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface UpdateModelProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import ModelForm from "../Form"
+
+interface UpdateModelProps {
 	model: Schema.ModelsEdit
 	categories: Schema.CategoriesOptions[]
 	manufacturers: Schema.ManufacturersOptions[]
@@ -14,9 +16,9 @@ const New = ({ model, ...models }: UpdateModelProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Models', href: Routes.models() },
+			{ title: "Models", href: Routes.models() },
 			{ title: model.name!, href: Routes.model(model) },
-			{ title: 'Edit Model', href: window.location.href },
+			{ title: "Edit Model", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

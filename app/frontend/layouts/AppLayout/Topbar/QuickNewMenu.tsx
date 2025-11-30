@@ -1,5 +1,7 @@
-import React from 'react'
-import { Menu, Button } from '@/components'
+import cx from "clsx"
+import React from "react"
+
+import { Menu, Button } from "@/components"
 import {
 	PlusCircleIcon,
 	ItemsIcon,
@@ -11,11 +13,10 @@ import {
 	ConsumablesIcon,
 	VendorsIcon,
 	DocumentationIcon,
-} from '@/components/Icons'
-import { Routes } from '@/lib'
+} from "@/components/Icons"
+import { Routes } from "@/lib"
 
-import cx from 'clsx'
-import * as classes from './TopBar.css'
+import * as classes from "./TopBar.css"
 
 const QuickNewMenu = () => {
 	return (

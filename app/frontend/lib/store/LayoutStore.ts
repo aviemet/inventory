@@ -1,5 +1,6 @@
-import { create } from 'zustand'
-import { defaultColor } from '../theme'
+import { create } from "zustand"
+
+import { defaultColor } from "../theme"
 
 
 interface LayoutState {

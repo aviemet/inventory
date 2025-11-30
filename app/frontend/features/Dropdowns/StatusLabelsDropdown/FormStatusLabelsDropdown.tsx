@@ -1,17 +1,19 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { Routes } from '@/lib'
-import StatusLabelsForm from '@/pages/StatusLabels/Form'
-import { useGetStatusLabelsAsOptions } from '@/queries/statusLabels'
-import { isEmpty } from 'lodash'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface StatusLabelsDropdownProps extends Omit<FormAsyncDropdown<Schema.StatusLabelsOptions>, 'name'> {
+import { Select as FormSelect } from "@/components/Form"
+import { Routes } from "@/lib"
+import StatusLabelsForm from "@/pages/StatusLabels/Form"
+import { useGetStatusLabelsAsOptions } from "@/queries/statusLabels"
+
+import { type FormAsyncDropdown } from ".."
+
+interface StatusLabelsDropdownProps extends Omit<FormAsyncDropdown<Schema.StatusLabelsOptions>, "name"> {
 	name?: string
 }
 
-const StatusLabelsDropdown = ({ label = 'Status Label',
-	name = 'status_label_id',
+const StatusLabelsDropdown = ({ label = "Status Label",
+	name = "status_label_id",
 	initialData,
 	value,
 	...props

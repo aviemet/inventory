@@ -1,10 +1,11 @@
-import { vars } from '@/lib/theme'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars } from "@/lib/theme"
 
 export const tile = css`
 	// border-color: vars.fn.primaryColor(),
 	border-top-width: 2;
-	box-shadow: ${vars.shadows.md};
+	box-shadow: ${ vars.shadows.md };
 	width: 100%;
 	max-width: 24rem;
 `

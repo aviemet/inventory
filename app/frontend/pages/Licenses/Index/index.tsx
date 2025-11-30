@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import LicensesTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import LicensesTable from "../Table"
 
 interface LicensesIndexProps {
 	licenses: Schema.LicensesIndex[]
@@ -18,7 +20,7 @@ const LicensesIndex = ({ licenses, pagination }: LicensesIndexProps ) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.licenses() }
 			menuOptions={ [
-				{ label: 'New License', href: Routes.newLicense(), icon: <NewIcon /> },
+				{ label: "New License", href: Routes.newLicense(), icon: <NewIcon /> },
 			] }
 		>
 			<LicensesTable />

@@ -1,23 +1,21 @@
-import React, { useEffect, forwardRef } from 'react'
-import { Table } from '@mantine/core'
-import { coerceArray } from '@/lib'
-import { useCheckboxState } from '@/lib/hooks'
-import HeadCheckbox from './HeadCheckbox'
-import { useTableContext } from '../TableContext'
-import { type TableRow } from './index'
+import { Table } from "@mantine/core"
+import React, { useEffect, forwardRef } from "react"
 
-interface HeadRowProps extends TableRow {
-	name?: string
-	rows?: Record<string, any>[]
-	selectable: boolean
-	selected: Set<string>
-}
+import { coerceArray } from "@/lib"
+import { useCheckboxState } from "@/lib/hooks"
+
+import HeadCheckbox from "./HeadCheckbox"
+import { useTableContext } from "../TableContext"
+
+import { RowBaseProps } from "./index"
+
+interface HeadRowProps extends RowBaseProps {}
 
 const HeadRow = forwardRef<HTMLTableRowElement, HeadRowProps>((
 	{ children, name, rows, selectable, selected, ...props },
 	ref,
 ) => {
-	const { tableState: { columns }, setTableState } = useTableContext()
+	const { setTableState } = useTableContext()
 
 	let { length, selectedCount } = { length: 0, selectedCount: 0 }
 	if(selectable) {
@@ -30,13 +28,13 @@ const HeadRow = forwardRef<HTMLTableRowElement, HeadRowProps>((
 	useEffect(() => {
 		if(!children) return
 
-		coerceArray(children).forEach(({ props }, i) => {
-			const hideable = (props.hideable ?? props.sort) ?? false
-			columns[i] = { label: props.children, hideable }
-		})
+		const newColumns = coerceArray(children).map(({ props }) => ({
+			label: props.children,
+			hideable: (props.hideable ?? props.sort) ?? false,
+		}))
 
-		setTableState({ columns })
-	}, [])
+		setTableState({ columns: newColumns })
+	}, [children, setTableState])
 
 	return (
 		<Table.Tr { ...props } ref={ ref }>

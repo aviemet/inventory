@@ -1,10 +1,11 @@
-import React from 'react'
-import { Box, Flex, Title, Page, Section, Table } from '@/components'
-import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/components/Form'
-import { AssignToableDropdown } from '@/features'
-import { Routes, formatter } from '@/lib'
+import { omit } from "lodash"
+import React from "react"
 
-import { omit } from 'lodash'
+import { Box, Flex, Title, Page, Section, Table } from "@/components"
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from "@/components/Form"
+import { AssignToableDropdown } from "@/features"
+import { Routes, formatter } from "@/lib"
+
 
 interface CheckoutLicenseProps {
 	assignment: Schema.AssignmentsFormData
@@ -14,13 +15,13 @@ interface CheckoutLicenseProps {
 }
 
 const Checkout = ({ assignment, license, ...models }: CheckoutLicenseProps) => {
-	const title = 'Checkout License'
+	const title = "Checkout License"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'License', href: Routes.licenses() },
+			{ title: "License", href: Routes.licenses() },
 			{ title: license.name!, href: Routes.license(license) },
-			{ title: 'Check Out', href: window.location.href },
+			{ title: "Check Out", href: window.location.href },
 		] }>
 			<Section>
 				<Title order={ 3 }>{ title }</Title>
@@ -85,7 +86,7 @@ const Checkout = ({ assignment, license, ...models }: CheckoutLicenseProps) => {
 				<Form
 					data={ {
 						assignment: {
-							...omit(assignment, 'status'),
+							...omit(assignment, "status"),
 						},
 						license: {
 							name: license.name,
@@ -101,7 +102,7 @@ const Checkout = ({ assignment, license, ...models }: CheckoutLicenseProps) => {
 						required
 					/>
 
-					<AssignToableDropdown { ...models } options={ ['Person', 'Item'] } />
+					<AssignToableDropdown { ...models } options={ ["Person", "Item"] } />
 
 					<DateTimeInput
 						label="Assigned At"

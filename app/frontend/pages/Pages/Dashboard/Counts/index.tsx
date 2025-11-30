@@ -1,9 +1,11 @@
-import React from 'react'
-import { Badge, SimpleGrid } from '@/components'
-import { Routes } from '@/lib'
-import CountsCard from './CountsCard'
-import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from '@/components/Icons'
-import IconProvider from '@/layouts/Providers/IconProvider'
+import React from "react"
+
+import { Badge, SimpleGrid } from "@/components"
+import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from "@/components/Icons"
+import IconProvider from "@/layouts/Providers/IconProvider"
+import { Routes } from "@/lib"
+
+import CountsCard from "./CountsCard"
 
 type CompanyCounts = {
 	locations: number
@@ -19,7 +21,7 @@ type CompanyCounts = {
 	manufacturers: number
 }
 
-const iconSize = '24px'
+const iconSize = "24px"
 
 const Counts = ({ counts }: { counts: CompanyCounts }) => {
 	return (

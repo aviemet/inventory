@@ -1,8 +1,10 @@
-import React from 'react'
-import SettingsLayout from '../../SettingsLayout'
-import { Title } from '@/components'
-import { Routes } from '@/lib'
-import SmtpForm from '../Form'
+import React from "react"
+
+import { Title } from "@/components"
+import { Routes } from "@/lib"
+
+import SettingsLayout from "../../SettingsLayout"
+import SmtpForm from "../Form"
 
 interface SmtpFormProps {
 	smtp: Schema.Smtp
@@ -11,9 +13,9 @@ interface SmtpFormProps {
 const NewMail = ({ smtp }: SmtpFormProps) => {
 	return (
 		<SettingsLayout breadcrumbs={ [
-			{ title: 'Settings', href: Routes.settingsGeneralIndex() },
-			{ title: 'Mail', href: Routes.settingsSmtps() },
-			{ title: 'New', href: Routes.newSettingsSmtp() },
+			{ title: "Settings", href: Routes.settingsGeneralIndex() },
+			{ title: "Mail", href: Routes.settingsSmtps() },
+			{ title: "New", href: Routes.newSettingsSmtp() },
 		] }>
 			<Title mb={ 24 }>Mail Settings</Title>
 

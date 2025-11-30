@@ -1,5 +1,6 @@
-import React from 'react'
-import { Page } from '@/components'
+import React from "react"
+
+import { Page } from "@/components"
 
 interface ContractShowProps {
 	contract: Schema.ContractsShow

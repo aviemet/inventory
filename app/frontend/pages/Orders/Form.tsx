@@ -1,14 +1,15 @@
-import React from 'react'
-import { Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	Textarea,
 	Submit,
 	TextInput,
-} from '@/components/Form'
-import { FormVendorsDropdown } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
+import { FormVendorsDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 type OrderFormData = {
 	order: Schema.OrdersFormData
@@ -21,7 +22,7 @@ export interface OrderFormProps {
 	order: Schema.OrdersFormData
 }
 
-const OrderForm = ({ to, method = 'post', onSubmit, order }: OrderFormProps) => {
+const OrderForm = ({ to, method = "post", onSubmit, order }: OrderFormProps) => {
 	return (
 		<Form
 			model="order"
@@ -29,7 +30,7 @@ const OrderForm = ({ to, method = 'post', onSubmit, order }: OrderFormProps) => 
 			to={ to }
 			method={ method }
 			onSubmit={ onSubmit }
-			filter={ ['cost', 'vendor'] }
+			filter={ ["cost", "vendor"] }
 		>
 			<Grid>
 				<Grid.Col>
@@ -46,7 +47,7 @@ const OrderForm = ({ to, method = 'post', onSubmit, order }: OrderFormProps) => 
 
 				<Grid.Col>
 					<Submit>
-						{ order.id ? 'Update' : 'Create' } Order
+						{ order.id ? "Update" : "Create" } Order
 					</Submit>
 				</Grid.Col>
 

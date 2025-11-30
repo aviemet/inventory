@@ -1,16 +1,15 @@
-import React, { forwardRef } from 'react'
-import { type TableRow } from './index'
-import { Table } from '@mantine/core'
-import RowCheckbox from './RowCheckbox'
-import { useTableContext } from '../TableContext'
-import { usePageProps } from '@/lib/hooks'
+import { Table } from "@mantine/core"
+import React, { forwardRef } from "react"
 
-interface RowInContextProps extends TableRow {
-	name?: string
-	rows?: Record<string, any>[]
-	selectable: boolean
-	selected: Set<string>
-}
+import { usePageProps } from "@/lib/hooks"
+
+import RowCheckbox from "./RowCheckbox"
+import { useTableContext } from "../TableContext"
+
+import { RowBaseProps } from "./index"
+
+
+interface RowInContextProps extends RowBaseProps {}
 
 const RowInContext = forwardRef<HTMLTableRowElement, RowInContextProps>((
 	{ children, name, rows, selectable, selected, ...props },
@@ -23,7 +22,7 @@ const RowInContext = forwardRef<HTMLTableRowElement, RowInContextProps>((
 
 	return (
 		<Table.Tr { ...props } ref={ ref }>
-			{ selectable && length > 0 && <RowCheckbox name={ name || '' } selected={ selected } /> }
+			{ selectable && length > 0 && <RowCheckbox name={ name || "" } selected={ selected } /> }
 
 			{ children && React.Children.map(children, (cell, i) => {
 				if((
@@ -35,8 +34,8 @@ const RowInContext = forwardRef<HTMLTableRowElement, RowInContextProps>((
 				}
 				return React.cloneElement(cell, {
 					key: columns[i]?.label,
-					'data-cell': columns[i]?.label,
-					role: 'cell',
+					"data-cell": columns[i]?.label,
+					role: "cell",
 				})
 			}) }
 		</Table.Tr>

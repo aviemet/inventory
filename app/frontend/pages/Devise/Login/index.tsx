@@ -1,8 +1,9 @@
-import React, { useRef } from 'react'
-import { Form, Field, TextInput, PasswordInput, Checkbox, Submit } from '@/components/Form'
-import { Routes } from '@/lib'
-import { Title, Tile } from '@/components'
-import { type UseFormProps } from 'use-inertia-form'
+import React, { useRef } from "react"
+import { type UseFormProps } from "use-inertia-form"
+
+import { Title, Tile } from "@/components"
+import { Form, Field, TextInput, PasswordInput, Checkbox, Submit } from "@/components/Form"
+import { Routes } from "@/lib"
 
 type LoginFormData = {
 	user: {
@@ -14,8 +15,8 @@ type LoginFormData = {
 
 const defaultData = {
 	user: {
-		email: '',
-		password: '',
+		email: "",
+		password: "",
 		remember_me: false,
 	},
 }
@@ -24,7 +25,7 @@ const Login = () => {
 	const emailInputRef = useRef<HTMLInputElement>(null)
 
 	const handleSubmit = ({ data }: UseFormProps<LoginFormData>) => {
-		if(data.user.email === '' || data.user.password === '') {
+		if(data.user.email === "" || data.user.password === "") {
 			emailInputRef.current!.focus()
 			return false
 		}

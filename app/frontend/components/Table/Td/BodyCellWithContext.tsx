@@ -1,9 +1,10 @@
-import React, { useRef } from 'react'
-import cx from 'clsx'
-import { type TableCellProps } from '.'
-import { Table } from '@mantine/core'
+import { Table } from "@mantine/core"
+import cx from "clsx"
+import React, { useRef } from "react"
 
-export interface BodyCellWithContextProps extends Omit<TableCellProps, 'hideable'> {
+import { type TableCellProps } from "."
+
+export interface BodyCellWithContextProps extends Omit<TableCellProps, "hideable"> {
 	hideable?: false | string
 	model?: string
 }
@@ -21,7 +22,7 @@ const BodyCellWithContext = ({
 	return (
 		<Table.Td
 			ref={ tdRef }
-			className={ cx({ 'table-column-fit': fitContent }, className) }
+			className={ cx({ "table-column-fit": fitContent }, className) }
 			{ ...props }
 		>
 			{ children }

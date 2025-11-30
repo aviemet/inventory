@@ -1,9 +1,11 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import ItemsTable from '../Table'
-import AdvancedItemsSearch from './AdvancedSearch'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import ItemsTable from "../Table"
+import AdvancedItemsSearch from "./AdvancedSearch"
 
 interface ItemsIndexProps {
 	items: Schema.ItemsIndex[]
@@ -19,7 +21,7 @@ const ItemsIndex = ({ items, pagination }: ItemsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.items() }
 			menuOptions={ [
-				{ label: 'New Asset', href: Routes.newItem(), icon: <NewIcon /> },
+				{ label: "New Asset", href: Routes.newItem(), icon: <NewIcon /> },
 			] }
 			advancedSearch={ <AdvancedItemsSearch /> }
 		>

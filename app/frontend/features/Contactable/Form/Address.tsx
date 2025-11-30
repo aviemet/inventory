@@ -1,18 +1,19 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { DynamicInputs, Textarea, TextInput } from '@/components/Form'
-import { FormCategoriesDropdown } from '@/features/Dropdowns'
+import React from "react"
+
+import { Grid } from "@/components"
+import { DynamicInputs, Textarea, TextInput } from "@/components/Form"
+import { FormCategoriesDropdown } from "@/features/Dropdowns"
 
 const Address = () => {
 	return (
 		<DynamicInputs model="address" label="Addresses" emptyData={ {
-			address: '',
-			address_2: '',
-			city: '',
-			region: '',
-			postal: '',
-			notes: '',
-			category_id: '',
+			address: "",
+			address_2: "",
+			city: "",
+			region: "",
+			postal: "",
+			notes: "",
+			category_id: "",
 		} }>
 			<Grid.Col>
 				<TextInput name="address" label="Address" />

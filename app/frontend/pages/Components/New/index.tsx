@@ -1,19 +1,21 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import ComponentForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import ComponentForm from "../Form"
 
 interface NewComponentProps {
 	component: Schema.ComponentsFormData
 }
 
 const NewComponent = ({ component }: NewComponentProps) => {
-	const title = 'New Component'
+	const title = "New Component"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Components', href: Routes.components() },
-			{ title: 'New Component', href: window.location.href },
+			{ title: "Components", href: Routes.components() },
+			{ title: "New Component", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

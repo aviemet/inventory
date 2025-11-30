@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import AccessoryForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface EditAccessoryProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import AccessoryForm from "../Form"
+
+interface EditAccessoryProps {
 	accessory: Schema.AccessoriesEdit
 }
 
@@ -12,9 +14,9 @@ const EditAccessory = ({ accessory }: EditAccessoryProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Accessories', href: Routes.accessories() },
+			{ title: "Accessories", href: Routes.accessories() },
 			{ title: accessory.name!, href: Routes.accessory(accessory) },
-			{ title: 'Edit Accessory', href: window.location.href },
+			{ title: "Edit Accessory", href: window.location.href },
 		] }>
 
 			<Section>

@@ -1,9 +1,11 @@
-import React from 'react'
-import SettingsLayout from '../../SettingsLayout'
-import { Group, Title, Menu } from '@/components'
-import Empty from './Empty'
-import SmtpList from './SmtpList'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Group, Title, Menu } from "@/components"
+import { Routes } from "@/lib"
+
+import Empty from "./Empty"
+import SmtpList from "./SmtpList"
+import SettingsLayout from "../../SettingsLayout"
 
 interface MailSettingsProps {
 	smtps: Schema.Smtp[]
@@ -12,8 +14,8 @@ interface MailSettingsProps {
 const Mail = ({ smtps }: MailSettingsProps) => {
 	return (
 		<SettingsLayout breadcrumbs={ [
-			{ title: 'Settings', href: Routes.settingsGeneralIndex() },
-			{ title: 'Mail', href: Routes.settingsSmtps() },
+			{ title: "Settings", href: Routes.settingsGeneralIndex() },
+			{ title: "Mail", href: Routes.settingsSmtps() },
 		] }>
 			<Group justify="space-between">
 				<Title mb={ 24 }>Mail Settings</Title>

@@ -1,15 +1,16 @@
-import React from 'react'
-import { Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	TextInput,
 	Textarea,
 	DateInput,
 	Submit,
-} from '@/components/Form'
-import { FormCategoriesDropdown, FormVendorsDropdown } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
+import { FormCategoriesDropdown, FormVendorsDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 type ContractFormData = {
 	contract: Schema.ContractsFormData
@@ -23,14 +24,14 @@ export interface ContractFormProps {
 }
 
 const emptyContract: Schema.ContractsFormData = {
-	name: '',
+	name: "",
 	category_id: NaN,
 	vendor_id: NaN,
 }
 
 const ContractForm = ({
 	to,
-	method = 'post',
+	method = "post",
 	onSubmit,
 	contract = emptyContract,
 }: ContractFormProps) => {
@@ -77,7 +78,7 @@ const ContractForm = ({
 
 				<Grid.Col>
 					<Submit>
-						{ contract.id ? 'Update' : 'Create' } Contract
+						{ contract.id ? "Update" : "Create" } Contract
 					</Submit>
 				</Grid.Col>
 			</Grid>

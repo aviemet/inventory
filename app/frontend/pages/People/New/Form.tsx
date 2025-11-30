@@ -1,5 +1,7 @@
-import React from 'react'
-import { Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	TextInput,
@@ -7,9 +9,8 @@ import {
 	FieldsFor,
 	Checkbox,
 	FormConsumer,
-} from '@/components/Form'
-import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/features/Dropdowns'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
+import { FormPeopleDropdown, FormDepartmentsDropdown } from "@/features/Dropdowns"
 
 type PersonFormData = {
 	person: Schema.PeopleFormData
@@ -24,7 +25,7 @@ export interface PersonFormProps {
 
 const PersonForm = ({
 	to,
-	method = 'post',
+	method = "post",
 	onSubmit,
 	person,
 }: PersonFormProps) => {
@@ -38,7 +39,7 @@ const PersonForm = ({
 			onSubmit={ form => {
 				form.transform(data => {
 					if(data.person.user?.active) {
-						data.person.user.email = data?.person?.contact?.emails?.[0].email || ''
+						data.person.user.email = data?.person?.contact?.emails?.[0].email || ""
 					} else {
 						delete data.person.user
 					}
@@ -85,7 +86,7 @@ const PersonForm = ({
 							name="contact.emails[0].email"
 							label="Email"
 							required={ data.person.user?.active }
-							errorKey={ data.person.user?.active ? 'user.password' : undefined }
+							errorKey={ data.person.user?.active ? "user.password" : undefined }
 						/>
 					) }</FormConsumer>
 				</Grid.Col>

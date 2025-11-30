@@ -1,9 +1,10 @@
-import React, { forwardRef } from 'react'
-import { Box, type BoxProps } from '@mantine/core'
-import cx from 'clsx'
-import * as classes from './Section.css'
+import { Box, type BoxProps } from "@mantine/core"
+import cx from "clsx"
+import React, { forwardRef } from "react"
 
-interface SectionProps extends BoxProps, Omit<React.ComponentPropsWithoutRef<'section'>, keyof BoxProps> {
+import * as classes from "./Section.css"
+
+interface SectionProps extends BoxProps, Omit<React.ComponentPropsWithoutRef<"section">, keyof BoxProps> {
 	fullHeight?: boolean
 }
 

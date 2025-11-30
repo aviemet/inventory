@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from 'react'
-import { Flex, Title, Page, Section, Table, Box } from '@/components'
-import { Routes, formatter } from '@/lib'
-import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/components/Form'
-import { LocationsDropdown } from '@/features/Dropdowns'
+import React, { useMemo, useState } from "react"
+
+import { Flex, Title, Page, Section, Table, Box } from "@/components"
+import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from "@/components/Form"
+import { LocationsDropdown } from "@/features/Dropdowns"
+import { Routes, formatter } from "@/lib"
 
 interface CheckinLicensesProps {
 	assignment: Schema.AssignmentsEdit
@@ -13,13 +14,13 @@ interface CheckinLicensesProps {
 
 const Checkin = ({ assignment, license, locations, status_labels }: CheckinLicensesProps) => {
 	const [licenseName, setLicenseName] = useState(license.name)
-	const title = 'Check In License'
+	const title = "Check In License"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'License', href: Routes.licenses() },
+			{ title: "License", href: Routes.licenses() },
 			{ title: license.name!, href: Routes.license(license) },
-			{ title: 'Check Out', href: window.location.href },
+			{ title: "Check Out", href: window.location.href },
 		] }>
 			<Section>
 				<Title order={ 3 }>{ title }</Title>

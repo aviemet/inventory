@@ -1,6 +1,8 @@
-import React from 'react'
-import { Title, History } from '@/components'
-import { ShowConsumableProps } from '.'
+import React from "react"
+
+import { Title, History } from "@/components"
+
+import { ShowConsumableProps } from "."
 
 const ConsumableHistory = ({ consumable }: ShowConsumableProps) => {
 	return (

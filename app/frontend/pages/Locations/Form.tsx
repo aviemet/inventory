@@ -1,10 +1,11 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Submit } from '@/components/Form'
-import { FormLocationsDropdown, FormCurrenciesDropdown } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import { ComboboxItem } from '@mantine/core'
+import { ComboboxItem } from "@mantine/core"
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Submit } from "@/components/Form"
+import { FormLocationsDropdown, FormCurrenciesDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 export type LocationFormData = {
 	location: Schema.LocationsFormData
@@ -18,14 +19,14 @@ export interface LocationFormProps {
 }
 
 const emptyLocation: Schema.LocationsFormData = {
-	name: '',
-	currency: '',
+	name: "",
+	currency: "",
 	parent_id: NaN,
 }
 
 const LocationForm = ({
 	to,
-	method = 'post',
+	method = "post",
 	onSubmit,
 	location = emptyLocation,
 }: LocationFormProps) => {
@@ -61,7 +62,7 @@ const LocationForm = ({
 
 				<Grid.Col>
 					<Submit>
-						{ location.id ? 'Update' : 'Create' } Location
+						{ location.id ? "Update" : "Create" } Location
 					</Submit>
 				</Grid.Col>
 			</Grid>

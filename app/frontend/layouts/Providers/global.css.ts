@@ -1,5 +1,6 @@
-import { css } from '@linaria/core'
-import { vars, theme } from '@/lib/theme'
+import { css } from "@linaria/core"
+
+import { vars, theme } from "@/lib/theme"
 
 export const globals = css`
 	:global() {
@@ -8,7 +9,7 @@ export const globals = css`
 		}
 
 		*::selection {
-			background-color: ${vars.colors.primaryColors[1]}; // [2]
+			background-color: ${ vars.colors.primaryColors[1] }; // [2]
 		}
 
 		.hidden {
@@ -18,7 +19,7 @@ export const globals = css`
 		.fullHeight {
 			display: flex;
 			flex-direction: column;
-			min-height: calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 20px);
+			min-height: calc(100vh - ${ theme.other.header.height }px - ${ theme.other.footer.height }px - 20px);
 		}
 
 		label {

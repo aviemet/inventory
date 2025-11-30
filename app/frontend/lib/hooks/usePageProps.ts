@@ -1,6 +1,7 @@
-import { usePage } from '@inertiajs/react'
-import { PageProps, Errors, ErrorBag } from '@inertiajs/core'
-import { type FlashMessage } from '@/types/FlashMessage'
+import { PageProps, Errors, ErrorBag } from "@inertiajs/core"
+import { usePage } from "@inertiajs/react"
+
+import { type FlashMessage } from "@/types/FlashMessage"
 
 export interface SharedInertiaProps extends PageProps {
 	auth: {

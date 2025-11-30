@@ -1,14 +1,15 @@
-import React from 'react'
-import { Box } from '@mantine/core'
-import { createContext } from '@/lib/hooks'
+import { Box } from "@mantine/core"
+import cx from "clsx"
+import React from "react"
 import {
 	Form as InertiaForm,
 	type FormProps as UifFormProps,
 	type NestedObject,
-} from 'use-inertia-form'
+} from "use-inertia-form"
 
-import cx from 'clsx'
-import * as classes from './Form.css'
+import { createContext } from "@/lib/hooks"
+
+import * as classes from "./Form.css"
 
 type FormLayoutValues = {
 	disableFormatting: boolean
@@ -35,7 +36,7 @@ const Form = <TForm extends NestedObject>({
 			<Box className={ cx(classes.form) }>
 				<InertiaForm
 					data={ data }
-					className={ cx({ 'format-grid': !disableFormatting }, className) }
+					className={ cx({ "format-grid": !disableFormatting }, className) }
 					railsAttributes={ railsAttributes }
 					{ ...props }
 				>

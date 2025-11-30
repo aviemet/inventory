@@ -1,8 +1,9 @@
-import React from 'react'
-import { Group, Link, Money, Table } from '@/components'
-import { Routes } from '@/lib'
-import { EditButton, CheckoutButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
+import React from "react"
+
+import { Group, Link, Money, Table } from "@/components"
+import { EditButton, CheckoutButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
 
 const AccessoriesTable = (props: TableProps) => {
 	return (
@@ -19,7 +20,7 @@ const AccessoriesTable = (props: TableProps) => {
 					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
 					<Table.HeadCell sort="departments.name">Avail. / Qty</Table.HeadCell>
 					<Table.HeadCell sort="departments.name">Min Qty</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
@@ -78,7 +79,7 @@ const AccessoriesTable = (props: TableProps) => {
 									<CheckoutButton
 										href={ Routes.checkoutAccessory(accessory) }
 										disabled={ accessory.qty_available < 1 }
-										tooltipMessage={ accessory.qty_available < 1 && 'None available to checkout' }
+										tooltipMessage={ accessory.qty_available < 1 && "None available to checkout" }
 										label={ accessory.name }
 									/>
 

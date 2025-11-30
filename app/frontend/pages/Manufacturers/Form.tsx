@@ -1,11 +1,12 @@
-import React from 'react'
-import { Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	TextInput,
 	Submit,
-} from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
 
 type ManufacturerFormData = {
 	manufacturer: Schema.ManufacturersFormData
@@ -19,10 +20,10 @@ export interface ManufacturerFormProps {
 }
 
 const emptyManufacturer: Schema.ManufacturersFormData = {
-	name: '',
+	name: "",
 }
 
-const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer = emptyManufacturer }: ManufacturerFormProps) => {
+const ManufacturerForm = ({ to, method = "post", onSubmit, manufacturer = emptyManufacturer }: ManufacturerFormProps) => {
 	return (
 		<Form
 			model="manufacturer"
@@ -38,7 +39,7 @@ const ManufacturerForm = ({ to, method = 'post', onSubmit, manufacturer = emptyM
 
 				<Grid.Col>
 					<Submit>
-						{ manufacturer.id ? 'Update' : 'Create' } Manufacturer
+						{ manufacturer.id ? "Update" : "Create" } Manufacturer
 					</Submit>
 				</Grid.Col>
 			</Grid>

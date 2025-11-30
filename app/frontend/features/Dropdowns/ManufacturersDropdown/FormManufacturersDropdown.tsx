@@ -1,18 +1,20 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { Routes } from '@/lib'
-import ManufacturersForm from '@/pages/Manufacturers/Form'
-import { useGetManufacturersAsOptions } from '@/queries/manufacturers'
-import { isEmpty } from 'lodash'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface ManufacturersDropdownProps extends Omit<FormAsyncDropdown<Schema.ManufacturersOptions>, 'name'> {
+import { Select as FormSelect } from "@/components/Form"
+import { Routes } from "@/lib"
+import ManufacturersForm from "@/pages/Manufacturers/Form"
+import { useGetManufacturersAsOptions } from "@/queries/manufacturers"
+
+import { type FormAsyncDropdown } from ".."
+
+interface ManufacturersDropdownProps extends Omit<FormAsyncDropdown<Schema.ManufacturersOptions>, "name"> {
 	name?: string
 }
 
 const ManufacturersDropdown = ({
-	label = 'Manufacturer',
-	name = 'manufacturer_id',
+	label = "Manufacturer",
+	name = "manufacturer_id",
 	initialData,
 	value,
 	...props

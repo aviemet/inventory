@@ -1,9 +1,10 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import { DateTimeInput, Form, NumberInput, Submit, Textarea } from '@/components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/features'
-import { type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type UseFormProps } from "use-inertia-form"
+
+import { Title, Page, Section } from "@/components"
+import { DateTimeInput, Form, NumberInput, Submit, Textarea } from "@/components/Form"
+import { AssignToableDropdown, AssignmentLocationDropdown } from "@/features"
+import { Routes } from "@/lib"
 
 type CheckoutConsumableFormData = {
 	assignment: Schema.AssignmentsFormData
@@ -28,9 +29,9 @@ const Checkout = ({ assignment, consumable }: CheckoutItemProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Consumables', href: Routes.consumables() },
+			{ title: "Consumables", href: Routes.consumables() },
 			{ title: consumable.name!, href: Routes.consumable(consumable) },
-			{ title: 'Check Out', href: window.location.href },
+			{ title: "Check Out", href: window.location.href },
 		] }>
 			<Section>
 				<Title order={ 3 }>{ title }</Title>
@@ -51,7 +52,7 @@ const Checkout = ({ assignment, consumable }: CheckoutItemProps) => {
 						assignment: {
 							...assignment,
 							assignable_id: consumable.id,
-							assignable_type: 'Consumable',
+							assignable_type: "Consumable",
 						},
 						consumable: {
 							...consumable,
@@ -64,7 +65,7 @@ const Checkout = ({ assignment, consumable }: CheckoutItemProps) => {
 				>
 
 					<AssignToableDropdown
-						options={ ['Item', 'Person', 'Location'] }
+						options={ ["Item", "Person", "Location"] }
 					/>
 
 					<AssignmentLocationDropdown />

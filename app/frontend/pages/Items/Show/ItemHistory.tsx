@@ -1,6 +1,8 @@
-import React from 'react'
-import { History } from '@/components'
-import { ShowItemProps } from '.'
+import React from "react"
+
+import { History } from "@/components"
+
+import { ShowItemProps } from "."
 
 const ItemHistory = ({ item }: ShowItemProps) => {
 	return (

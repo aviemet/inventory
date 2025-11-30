@@ -1,29 +1,31 @@
-import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
-import { Routes } from '@/lib'
-import { Tooltip } from '@mantine/core'
-import Details from './Details'
-import History from './History'
-import Associations from './Associations'
-import Documentations from './Documentations'
+import { Tooltip } from "@mantine/core"
+import React from "react"
+
+import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
+import { Routes } from "@/lib"
+
+import Associations from "./Associations"
+import Details from "./Details"
+import Documentations from "./Documentations"
+import History from "./History"
 
 export interface ShowComponentProps {
 	component: Schema.ComponentsShow
 }
 
 const tabsList = [
-	{ id: 'details', label: 'Details', component: Details },
-	{ id: 'history', label: 'History', component: History },
-	{ id: 'documentations', label: 'Documentation', component: Documentations },
-	{ id: 'associations', label: 'Associations', component: Associations },
+	{ id: "details", label: "Details", component: Details },
+	{ id: "history", label: "History", component: History },
+	{ id: "documentations", label: "Documentation", component: Documentations },
+	{ id: "associations", label: "Associations", component: Associations },
 ]
 
 const ShowComponent = ({ component }: ShowComponentProps) => {
-	const title = component.name ?? 'Component Details'
+	const title = component.name ?? "Component Details"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Components', href: Routes.components() },
+			{ title: "Components", href: Routes.components() },
 			{ title: component.name, href: window.location.href },
 		] }>
 			<Section>
@@ -40,7 +42,7 @@ const ShowComponent = ({ component }: ShowComponentProps) => {
 								{ component.qty_available < 1 ?
 									<Tooltip label="There are none in stock" position="left" withArrow><div>Checkout Component</div></Tooltip>
 									:
-									'Checkout Component'
+									"Checkout Component"
 								}
 							</Menu.Link>
 							<Menu.Link href={ Routes.editComponent(component) }>

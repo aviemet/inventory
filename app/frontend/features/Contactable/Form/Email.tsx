@@ -1,14 +1,15 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { DynamicInputs, Textarea, TextInput } from '@/components/Form'
-import { FormCategoriesDropdown } from '@/features/Dropdowns'
+import React from "react"
+
+import { Grid } from "@/components"
+import { DynamicInputs, Textarea, TextInput } from "@/components/Form"
+import { FormCategoriesDropdown } from "@/features/Dropdowns"
 
 const Email = () => {
 	return (
 		<DynamicInputs model="emails" label="Email Addresses" emptyData={ {
-			email: '',
-			notes: '',
-			category_id: '',
+			email: "",
+			notes: "",
+			category_id: "",
 		} } >
 			<Grid.Col>
 				<TextInput label="Email Address" name="email" />

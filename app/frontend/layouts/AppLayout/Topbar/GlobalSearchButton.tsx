@@ -1,15 +1,16 @@
-import React from 'react'
-import { spotlight } from '@mantine/spotlight'
-import { ActionIcon, Tooltip, Kbd } from '@/components'
-import { SearchIcon } from '@/components/Icons'
-import { useOs } from '@/lib/hooks'
-import { useMantineColorScheme } from '@mantine/core'
+import { useMantineColorScheme } from "@mantine/core"
+import { spotlight } from "@mantine/spotlight"
+import React from "react"
+
+import { ActionIcon, Tooltip, Kbd } from "@/components"
+import { SearchIcon } from "@/components/Icons"
+import { useOs } from "@/lib/hooks"
 
 const GlobalSearchButton = () => {
 	const os = useOs()
 	const { colorScheme } = useMantineColorScheme()
 
-	const modifier = os === 'macos' ? '⌘' : 'ctrl'
+	const modifier = os === "macos" ? "⌘" : "ctrl"
 
 	return (
 		<Tooltip
@@ -17,7 +18,7 @@ const GlobalSearchButton = () => {
 				<Kbd>{ modifier }</Kbd><Kbd>K</Kbd>
 			</> }
 			openDelay={ 1000 }
-			color={ colorScheme === 'dark' ? 'gray' : undefined }
+			color={ colorScheme === "dark" ? "gray" : undefined }
 		>
 			<ActionIcon onClick={ spotlight.open }>
 				<SearchIcon />

@@ -1,18 +1,19 @@
-import React from 'react'
-import { DangerousHtml, Date, Group, Title, Link, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import { Text } from '@mantine/core'
+import { Text } from "@mantine/core"
+import React from "react"
+
+import { DangerousHtml, Date, Group, Title, Link, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
 
 interface ShowDocumentationProps {
 	documentation: Schema.DocumentationsShow
 }
 
 const ShowDocumentation = ({ documentation }: ShowDocumentationProps) => {
-	const title =  'Documentation'
+	const title = "Documentation"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Documentation', href: Routes.documentations() },
+			{ title: "Documentation", href: Routes.documentations() },
 			{ title, href: window.location.href },
 		] }>
 			<Section>

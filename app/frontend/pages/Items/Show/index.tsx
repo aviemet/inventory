@@ -1,35 +1,37 @@
-import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
 import {
 	EditIcon,
 	CheckinIcon,
 	CheckoutIcon,
 	TicketsIcon,
 	DocumentationIcon,
-} from '@/components/Icons'
-import Details from './Details'
-import ItemHistory from './ItemHistory'
-import Associations from './Associations'
-import Documentations from './Documentations'
+} from "@/components/Icons"
+import { Routes } from "@/lib"
+
+import Associations from "./Associations"
+import Details from "./Details"
+import Documentations from "./Documentations"
+import ItemHistory from "./ItemHistory"
 
 export interface ShowItemProps {
 	item: Schema.ItemsShow
 }
 
 const tabsList = [
-	{ id: 'details', label: 'Details', component: Details },
-	{ id: 'history', label: 'History', component: ItemHistory },
-	{ id: 'documentations', label: 'Documentation', component: Documentations },
-	{ id: 'associations', label: 'Associations', component: Associations },
+	{ id: "details", label: "Details", component: Details },
+	{ id: "history", label: "History", component: ItemHistory },
+	{ id: "documentations", label: "Documentation", component: Documentations },
+	{ id: "associations", label: "Associations", component: Associations },
 ]
 
 const ShowItem = ({ item }: ShowItemProps) => {
-	const title = item.name ?? 'Item Details'
+	const title = item.name ?? "Item Details"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Hardware', href: Routes.items() },
+			{ title: "Hardware", href: Routes.items() },
 			{ title: item.name, href: window.location.href },
 		] }>
 			<Section fullHeight>
@@ -54,10 +56,10 @@ const ShowItem = ({ item }: ShowItemProps) => {
 
 							<Menu.Divider />
 
-							<Menu.Link href={ Routes.newTicket({ 'ticket.asset_id': item.id }) } leftSection={ <TicketsIcon /> }>
+							<Menu.Link href={ Routes.newTicket({ "ticket.asset_id": item.id }) } leftSection={ <TicketsIcon /> }>
 								Open New Ticket
 							</Menu.Link>
-							<Menu.Link href={ Routes.newDocumentation({ 'documentation.documentable_type': 'Item', 'documentation.documentable_id': item.id }) } leftSection={ <DocumentationIcon /> }>
+							<Menu.Link href={ Routes.newDocumentation({ "documentation.documentable_type": "Item", "documentation.documentable_id": item.id }) } leftSection={ <DocumentationIcon /> }>
 								New Documentation
 							</Menu.Link>
 

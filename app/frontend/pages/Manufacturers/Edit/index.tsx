@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import ManufacturerForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface UpdateManufacturerProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import ManufacturerForm from "../Form"
+
+interface UpdateManufacturerProps {
 	manufacturer: Schema.ManufacturersEdit
 }
 
@@ -12,9 +14,9 @@ const New = ({ manufacturer, ...models }: UpdateManufacturerProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Manufacturers', href: Routes.manufacturers() },
+			{ title: "Manufacturers", href: Routes.manufacturers() },
 			{ title: manufacturer.name!, href: Routes.manufacturer(manufacturer.slug) },
-			{ title: 'Edit Manufacturer', href: window.location.href },
+			{ title: "Edit Manufacturer", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

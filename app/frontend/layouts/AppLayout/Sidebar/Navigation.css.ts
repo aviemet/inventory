@@ -1,5 +1,6 @@
-import { vars, theme } from '@/lib/theme'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars, theme } from "@/lib/theme"
 
 const navbarWidth = theme.other.navbar.width
 const iconWidth = 48
@@ -9,7 +10,7 @@ const openSpanWidth = navbarWidth.open! - iconWidth - borderWidth
 const navItemHeight = 44
 
 export const links = css`
-	@media (min-width: ${vars.breakpoints.sm}) {
+	@media (min-width: ${ vars.breakpoints.sm }) {
 		&:last-child {
 			margin-top: auto;
 		}
@@ -19,7 +20,7 @@ export const links = css`
 export const closed = css``
 
 export const active = css`
-	border-left-color: ${vars.colors.primaryColors.filled};
+	border-left-color: ${ vars.colors.primaryColors.filled };
 `
 
 export const navbar = css`
@@ -28,42 +29,42 @@ export const navbar = css`
 	
 	ul li {
 		/* position: relative; */
-		border-left-width: ${borderWidth}px;
+		border-left-width: ${ borderWidth }px;
 		border-style: solid;
 		border-left-color: transparent;
 
-		&.${active} {
-			border-left-color: ${vars.colors.primaryColors.filled};
+		&.${ active } {
+			border-left-color: ${ vars.colors.primaryColors.filled };
 		}
 
 		&:hover {
-			border-left-color: ${vars.colors.primaryColors.filled};
-			box-shadow: ${vars.shadows.lg};
+			border-left-color: ${ vars.colors.primaryColors.filled };
+			box-shadow: ${ vars.shadows.lg };
 
 			&, ul {
-				${vars.lightSelector} {
-					background-color: ${vars.colors.gray[1]};
+				${ vars.lightSelector } {
+					background-color: ${ vars.colors.gray[1] };
 				}
-				${vars.darkSelector} {
-					background-color: ${vars.colors.dark[6]};
+				${ vars.darkSelector } {
+					background-color: ${ vars.colors.dark[6] };
 				}
 			}
 		}
 	}
 
 	// Desktop only
-	@media (min-width: ${vars.breakpoints.sm}) {
+	@media (min-width: ${ vars.breakpoints.sm }) {
 		top: 0;
-		height: calc(100% - ${theme.other?.footer?.height || 0}px);
+		height: calc(100% - ${ theme.other?.footer?.height || 0 }px);
 
-		&.${closed} {
-			.${links} > ul > li {
+		&.${ closed } {
+			.${ links } > ul > li {
 				&:hover {
-					width: ${navItemWidth}px;
+					width: ${ navItemWidth }px;
 				}
 
 				& > a > span.link-text {
-					width: calc(100% - ${iconWidth}px);
+					width: calc(100% - ${ iconWidth }px);
 				}
 			}
 
@@ -73,7 +74,7 @@ export const navbar = css`
 
 			ul > li > ul {
 				top: 100%;
-				left: ${iconWidth}px;
+				left: ${ iconWidth }px;
 
 				&.up {
 					top: unset;
@@ -82,7 +83,7 @@ export const navbar = css`
 			}
 		}
 
-		.${links} > ul > li:hover {
+		.${ links } > ul > li:hover {
 			width: 100%;
 
 			& > ul {
@@ -99,42 +100,42 @@ export const navbar = css`
 				position: absolute;
 				display: none;
 				flex-direction: column;
-				width: ${navbarWidth.open! - borderWidth}px;
+				width: ${ navbarWidth.open! - borderWidth }px;
 				left: 100%;
 				top: 0;
 
 				&:after {
 					content: "";
 					width: 100%;
-					height: calc(100% + ${navItemHeight}px);
+					height: calc(100% + ${ navItemHeight }px);
 					display: block;
 					position: absolute;
-					top: -${navItemHeight}px;
-					box-shadow: ${vars.shadows.xs};
+					top: -${ navItemHeight }px;
+					box-shadow: ${ vars.shadows.xs };
 					z-index: -1;
 				}
 
 				&.up {
 					top: unset;
-					bottom: -${navItemHeight}px;
+					bottom: -${ navItemHeight }px;
 
 					&:after {
 						top: unset;
-						bottom: -${navItemHeight}px;
+						bottom: -${ navItemHeight }px;
 					}
 				}
 			}
 
 			span.link-text {
-				width: calc(100% - ${iconWidth + borderWidth}px);
+				width: calc(100% - ${ iconWidth + borderWidth }px);
 			}
 		}
 
 		span.link-text {
 			position: absolute;
 			top: 0;
-			left: ${iconWidth}px;
-			width: ${openSpanWidth}px;
+			left: ${ iconWidth }px;
+			width: ${ openSpanWidth }px;
 			display: flex;
 			height: 100%;
 			align-items: center;
@@ -142,24 +143,24 @@ export const navbar = css`
 
 		ul li {
 			position: relative;
-			border-left-width: ${borderWidth}px;
+			border-left-width: ${ borderWidth }px;
 			border-style: solid;
 			border-left-color: transparent;
 
-			&.${active} {
-				border-left-color: ${vars.colors.primaryColors.filled};
+			&.${ active } {
+				border-left-color: ${ vars.colors.primaryColors.filled };
 			}
 
 			&:hover {
-				border-left-color: ${vars.colors.primaryColors.filled};
-				box-shadow: ${vars.shadows.lg};
+				border-left-color: ${ vars.colors.primaryColors.filled };
+				box-shadow: ${ vars.shadows.lg };
 
 				&, ul {
-					${vars.lightSelector} {
-						background-color: ${vars.colors.gray[1]};
+					${ vars.lightSelector } {
+						background-color: ${ vars.colors.gray[1] };
 					}
-					${vars.darkSelector} {
-						background-color: ${vars.colors.dark[6]};
+					${ vars.darkSelector } {
+						background-color: ${ vars.colors.dark[6] };
 					}
 				}
 			}
@@ -167,10 +168,10 @@ export const navbar = css`
 	}
 
 	// Mobile only
-	@media (max-width: ${vars.breakpoints.sm}) {
+	@media (max-width: ${ vars.breakpoints.sm }) {
 		overflow-y: auto;
 
-		.${links} > ul > li {
+		.${ links } > ul > li {
 			span.link-text {
 				display: inline-block;
 				position: relative;

@@ -1,7 +1,8 @@
-import React, { Suspense } from 'react'
-import loadable from '@loadable/component'
-import { ErrorBoundary } from 'react-error-boundary'
-import Error from '@/components/Error'
+import loadable from "@loadable/component"
+import React, { Suspense } from "react"
+import { ErrorBoundary } from "react-error-boundary"
+
+import Error from "@/components/Error"
 
 interface LazyProps {
 	children: React.ReactNode

@@ -1,9 +1,10 @@
-import React from 'react'
-import { Link } from '@/components'
-import { Routes } from '@/lib'
-import { has } from 'lodash'
+import { has } from "lodash"
+import React from "react"
 
-type PathOption = 'item' | 'person' | 'location'
+import { Link } from "@/components"
+import { Routes } from "@/lib"
+
+type PathOption = "item" | "person" | "location"
 
 const itemAssignment = (item: Schema.ItemsShow) => {
 	if(!item.assigned || !item.assignments) return
@@ -22,7 +23,7 @@ const AssignmentLink = ({ item }: ItemAssignmentLinkProps) => {
 
 	const path = Routes[assignment.assign_toable_type.toLowerCase() as PathOption]
 
-	const param = has(assignment.assign_toable, 'slug') ?
+	const param = has(assignment.assign_toable, "slug") ?
 		assignment.assign_toable.slug as string :
 		assignment.assign_toable_id
 

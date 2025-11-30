@@ -1,29 +1,31 @@
-import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
-import { Routes } from '@/lib'
-import { EditIcon } from '@/components/Icons'
-import Details from './Details'
-import PersonHistory from './PersonHistory'
-import Associations from './Associations'
-import Documentations from './Documentations'
+import React from "react"
+
+import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
+import { EditIcon } from "@/components/Icons"
+import { Routes } from "@/lib"
+
+import Associations from "./Associations"
+import Details from "./Details"
+import Documentations from "./Documentations"
+import PersonHistory from "./PersonHistory"
 
 export interface ShowPersonProps {
 	person: Schema.PeopleShow
 }
 
 const tabsList = [
-	{ id: 'details', label: 'Details', component: Details },
-	{ id: 'history', label: 'History', component: PersonHistory },
-	{ id: 'documentations', label: 'Documentation', component: Documentations },
-	{ id: 'associations', label: 'Associations', component: Associations },
+	{ id: "details", label: "Details", component: Details },
+	{ id: "history", label: "History", component: PersonHistory },
+	{ id: "documentations", label: "Documentation", component: Documentations },
+	{ id: "associations", label: "Associations", component: Associations },
 ]
 
 const ShowPerson = ({ person }: ShowPersonProps) => {
-	const title = person.name ?? 'Person Details'
+	const title = person.name ?? "Person Details"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'People', href: Routes.people() },
+			{ title: "People", href: Routes.people() },
 			{ title: person.name, href: window.location.href },
 		] }>
 			<Section fullHeight>

@@ -1,19 +1,21 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import ContractForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import ContractForm from "../Form"
 
 interface NewContractProps {
 	contract: Schema.ContractsFormData
 }
 
 const NewContract = ({ contract }: NewContractProps) => {
-	const title = 'New Contract'
+	const title = "New Contract"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Contracts', href: Routes.contracts() },
-			{ title: 'New Contract', href: window.location.href },
+			{ title: "Contracts", href: Routes.contracts() },
+			{ title: "New Contract", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

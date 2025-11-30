@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Select, HiddenInput } from '@/components/Form'
-import { useForm } from 'use-inertia-form'
-import { useGetSearchResults } from '@/queries'
-import { type FormSelectProps, type SelectOption } from '@/components/Form/Inputs/Select'
-import { useDebouncedCallback } from '@mantine/hooks'
+import { useDebouncedCallback } from "@mantine/hooks"
+import React, { useEffect, useState } from "react"
+import { useForm } from "use-inertia-form"
 
-interface DocumentableSearchProps extends Omit<FormSelectProps, 'options' | 'searchable'> {
+import { Select, HiddenInput } from "@/components/Form"
+import { type FormSelectProps, type SelectOption } from "@/components/Form/Inputs/Select"
+import { useGetSearchResults } from "@/queries"
+
+interface DocumentableSearchProps extends Omit<FormSelectProps, "options" | "searchable"> {
 	label: string
 }
 
 const DocumentableSearch = ({
-	name = 'documentable_id',
-	placeholder = 'Start typing to search',
+	name = "documentable_id",
+	placeholder = "Start typing to search",
 	onSearchChange,
 	onChange,
 	...props
 }: DocumentableSearchProps) => {
-	const [searchParams, setSearchParams] = useState<string>('')
+	const [searchParams, setSearchParams] = useState<string>("")
 	const { data, refetch } = useGetSearchResults({ searchParams: searchParams })
 
 	const { setData } = useForm()
@@ -40,7 +41,7 @@ const DocumentableSearch = ({
 
 		if(!choice) return
 
-		setData('documentation.documentable_type', String(choice.searchable_type))
+		setData("documentation.documentable_type", String(choice.searchable_type))
 	}
 
 	return (
@@ -60,7 +61,7 @@ const DocumentableSearch = ({
 				{ ...props }
 			/>
 
-			<HiddenInput name='documentable_type' />
+			<HiddenInput name="documentable_type" />
 		</>
 	)
 }

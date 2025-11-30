@@ -1,9 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Badge, Link, Table } from '@/components'
-import { EditButton } from '@/components/Button'
-import { TableProps } from '@/components/Table/Table'
-import { CheckIcon, CrossIcon } from '@/components/Icons'
+import React from "react"
+
+import { Badge, Link, Table } from "@/components"
+import { EditButton } from "@/components/Button"
+import { CheckIcon, CrossIcon } from "@/components/Icons"
+import { TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
 
 const PeopleTable = (props: TableProps) => {
 	return (
@@ -20,7 +21,7 @@ const PeopleTable = (props: TableProps) => {
 					<Table.HeadCell sort="accessories.count">Accessories</Table.HeadCell>
 					<Table.HeadCell>Groups</Table.HeadCell>
 					<Table.HeadCell>Login Enabled</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

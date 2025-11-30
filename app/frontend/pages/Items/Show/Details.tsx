@@ -1,7 +1,9 @@
-import React from 'react'
-import { Link, Title, Table, Box, Badge, Money } from '@/components'
-import AssignmentLink from './AssignmentLink'
-import { formatter, Routes } from '@/lib'
+import React from "react"
+
+import { Link, Title, Table, Box, Badge, Money } from "@/components"
+import { formatter, Routes } from "@/lib"
+
+import AssignmentLink from "./AssignmentLink"
 
 interface ItemDetailsProps {
 	item: Schema.ItemsShow
@@ -17,7 +19,7 @@ const ItemDetails = ({ item }: ItemDetailsProps) => {
 					<Table.Body>
 
 						<Table.Row>
-							<Table.Cell>{ item.assigned ? 'Assigned To' : 'Status' }</Table.Cell>
+							<Table.Cell>{ item.assigned ? "Assigned To" : "Status" }</Table.Cell>
 							<Table.Cell>
 								{ item.assigned ?
 									<AssignmentLink item={ item } />

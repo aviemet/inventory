@@ -1,9 +1,7 @@
-import React from 'react'
-import { useLayoutStore } from '@/lib/store'
-import { Divider, Group, AppShell, Icon, Box } from '@/components'
-import cx from 'clsx'
-import MenuLink from './MenuLink'
-import { Routes } from '@/lib'
+import cx from "clsx"
+import React from "react"
+
+import { Divider, Group, AppShell, Icon, Box } from "@/components"
 import {
 	DashboardIcon,
 	AssetsIcon,
@@ -30,10 +28,13 @@ import {
 	UserGroupIcon,
 	DocumentationIcon,
 	PeopleIcon,
-} from '@/components/Icons'
+} from "@/components/Icons"
+import IconProvider from "@/layouts/Providers/IconProvider"
+import { Routes } from "@/lib"
+import { useLayoutStore } from "@/lib/store"
 
-import IconProvider from '@/layouts/Providers/IconProvider'
-import * as classes from './Navigation.css'
+import MenuLink from "./MenuLink"
+import * as classes from "./Navigation.css"
 // import * as classes from './Test'
 
 const Sidebar = () => {
@@ -42,7 +43,7 @@ const Sidebar = () => {
 	const handleNavClick = () => toggleSidebarOpen(false)
 
 	return (
-		<IconProvider size='24px'>
+		<IconProvider size="24px">
 			<AppShell.Navbar
 				p={ 0 }
 				hidden={ !sidebarOpen }

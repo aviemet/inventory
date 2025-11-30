@@ -1,11 +1,14 @@
-import React, { useCallback } from 'react'
-import { NestedFields, useForm } from 'use-inertia-form'
-import { Table } from '@/components'
-import { Checkbox } from '@/components/Inputs'
-import { Switch } from '@/components/Form'
-import { useCheckboxState } from '@/lib/hooks'
-import { usePermissionsForm } from './PermissionsForm'
-import { type FormData } from '.'
+import React, { useCallback } from "react"
+import { NestedFields, useForm } from "use-inertia-form"
+
+import { Table } from "@/components"
+import { Switch } from "@/components/Form"
+import { Checkbox } from "@/components/Inputs"
+import { useCheckboxState } from "@/lib/hooks"
+
+import { usePermissionsForm } from "./PermissionsForm"
+
+import { type FormData } from "."
 
 interface SwitchRowProps {
 	label: string
@@ -63,7 +66,7 @@ const SwitchRow = ({ label, model, permissions }: SwitchRowProps) => {
 						/>
 					</Table.Cell>
 				) ) }</>
-				<>{ permissions.length < columns && Array(columns - permissions.length).fill(null).map((_,i) => (
+				<>{ permissions.length < columns && Array(columns - permissions.length).fill(null).map((_, i) => (
 					<Table.Cell key={ `${model}_${i}` }></Table.Cell>
 				)) }</>
 			</Table.Row>

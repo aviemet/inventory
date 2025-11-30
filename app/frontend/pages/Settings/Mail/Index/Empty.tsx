@@ -1,8 +1,9 @@
-import React from 'react'
-import { Link } from '@/components'
-import { Text } from '@mantine/core'
-import { Routes } from '@/lib'
-import { usePageProps } from '@/lib/hooks'
+import { Text } from "@mantine/core"
+import React from "react"
+
+import { Link } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 const Empty = () => {
 	const { auth: { user } } = usePageProps()

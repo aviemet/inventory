@@ -1,7 +1,9 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import ModelForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import ModelForm from "../Form"
 
 interface NewModelProps {
 	model: Schema.ModelsFormData
@@ -10,12 +12,12 @@ interface NewModelProps {
 }
 
 const New = ({ ...data }: NewModelProps) => {
-	const title = 'New Model'
+	const title = "New Model"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Models', href: Routes.models() },
-			{ title: 'New Model', href: window.location.href },
+			{ title: "Models", href: Routes.models() },
+			{ title: "New Model", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

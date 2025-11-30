@@ -1,8 +1,9 @@
-import React from 'react'
-import { Title, Link, List, Icon, Box, Group } from '@/components'
-import { polymorphicRoute, formatter } from '@/lib'
-import { ArrowRightSquareIcon, CheckoutIcon } from '@/components/Icons'
-import { CheckinButton } from '@/components/Button'
+import React from "react"
+
+import { Title, Link, List, Icon, Box, Group } from "@/components"
+import { CheckinButton } from "@/components/Button"
+import { ArrowRightSquareIcon, CheckoutIcon } from "@/components/Icons"
+import { polymorphicRoute, formatter } from "@/lib"
 
 interface ShowPageAssociationsProps {
 	assignable: Schema.ItemsShow | Schema.AccessoriesShow | Schema.ConsumablesShow | Schema.ComponentsShow | Schema.LicensesShow
@@ -25,7 +26,7 @@ const ShowPageAssociations = ({ assignable, checkinRoute }: ShowPageAssociations
 							<Group>
 								{ formatter.date.relative(assignment.created_at) }
 
-								<Box style={ { padding: '0 8px' } }><ArrowRightSquareIcon /></Box>
+								<Box style={ { padding: "0 8px" } }><ArrowRightSquareIcon /></Box>
 
 								{ assignment.qty && <span>x{ assignment.qty } to </span> }
 

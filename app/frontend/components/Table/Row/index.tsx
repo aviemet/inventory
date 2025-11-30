@@ -1,15 +1,24 @@
-import React from 'react'
-import { useTableContext } from '../TableContext'
-import RowInContext from './RowInContext'
-import { Table, type TableTrProps } from '@mantine/core'
+import { Table, type TableTrProps } from "@mantine/core"
+import React from "react"
+
+import { useTableContext, type TableRowData } from "../TableContext"
+import RowInContext from "./RowInContext"
 
 export interface TableRow extends TableTrProps {
-	children?:  JSX.Element | JSX.Element[]
+	children?: JSX.Element | JSX.Element[]
 }
 
-interface TableRowProps extends Omit<TableRow, 'ref'> {
+export interface RowBaseProps extends TableRow {
+	name?: string
+	rows?: readonly TableRowData[]
+	selectable: boolean
+	selected: Set<string>
+}
+
+interface TableRowProps extends Omit<TableTrProps, "ref"> {
 	render?: any
 	name?: string
+	children?: JSX.Element | JSX.Element[]
 }
 
 const Row = ({ children, render, name, ...props }: TableRowProps) => {

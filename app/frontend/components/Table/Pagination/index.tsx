@@ -1,29 +1,33 @@
-import React from 'react'
-import { Link } from '@/components'
-import { useTableContext } from '../TableContext'
-import { Group, Pagination, type PaginationProps } from '@mantine/core'
-import LimitSelect from './LimitSelect'
+import { Group, Pagination, type PaginationProps } from "@mantine/core"
+import cx from "clsx"
+import React from "react"
 
-import cx from 'clsx'
-import * as classes from '../Table.css'
+import { Link } from "@/components"
+
+import { useTableContext } from "../TableContext"
+import LimitSelect from "./LimitSelect"
+import * as classes from "../Table.css"
 
 const pageLink = (page: number) => {
 	const url = new URL(window.location.href)
 
 	if(page === 1) {
-		url.searchParams.delete('page')
+		url.searchParams.delete("page")
 	} else {
-		url.searchParams.set('page', String(page))
+		url.searchParams.set("page", String(page))
 	}
 
 	return `${url.pathname}${url.search}`
 }
 
-interface PaginationComponent extends Omit<PaginationProps, 'total'> {}
+interface PaginationComponent extends Omit<PaginationProps, "total"> {
+	showLimit?: boolean
+}
 
 const PaginationComponent = ({
 	boundaries = 2,
 	siblings = 2,
+	showLimit = true,
 	className,
 	...props
 }: PaginationComponent) => {
@@ -38,7 +42,7 @@ const PaginationComponent = ({
 	return (
 		<Group justify="space-between" mt="auto" pt={ 8 }>
 			<div>
-				{ model && <>
+				{ model && showLimit && <>
 					Records per page:
 					<LimitSelect
 						className={ cx(classes.limitSelect) }
@@ -60,8 +64,8 @@ const PaginationComponent = ({
 				{ ...props }
 			>
 				<Group gap={ 7 } justify="center"
-					style={ { 'a:hover': {
-						textDecoration: 'none',
+					style={ { "a:hover": {
+						textDecoration: "none",
 					} } }>
 					<Pagination.First
 						component={ Link }

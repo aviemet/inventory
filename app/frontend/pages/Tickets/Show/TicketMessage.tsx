@@ -1,11 +1,12 @@
-import React from 'react'
-import { Box, DangerousHtml, Group, Link, Paper } from '@/components'
-import { Routes, formatter } from '@/lib'
-import { Form, RichText, Submit } from '@/components/Form'
-import { EditIcon, CrossIcon } from '@/components/Icons'
-import { IconButton } from '@/components/Button'
-import { useToggle } from '@mantine/hooks'
-import { usePageProps } from '@/lib/hooks'
+import { useToggle } from "@mantine/hooks"
+import React from "react"
+
+import { Box, DangerousHtml, Group, Link, Paper } from "@/components"
+import { IconButton } from "@/components/Button"
+import { Form, RichText, Submit } from "@/components/Form"
+import { EditIcon, CrossIcon } from "@/components/Icons"
+import { Routes, formatter } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 interface TicketMessageProps {
 	message: Schema.TicketMessage
@@ -27,7 +28,7 @@ const TicketMessage = ({ message }: TicketMessageProps) => {
 				</Box>
 				{ user.id === message.created_by_id && <Box>
 					<IconButton onClick={ () => toggleIsEditing() }>
-						{ isEditing ? <CrossIcon /> : <EditIcon />  }
+						{ isEditing ? <CrossIcon /> : <EditIcon /> }
 					</IconButton>
 				</Box> }
 			</Group>

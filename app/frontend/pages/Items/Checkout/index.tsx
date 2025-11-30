@@ -1,10 +1,11 @@
-import React from 'react'
-import { Box, Title, Page, Section, Table } from '@/components'
-import { Routes } from '@/lib'
-import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/features'
+import { omit } from "lodash"
+import React from "react"
 
-import { omit } from 'lodash'
+import { Box, Title, Page, Section, Table } from "@/components"
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from "@/components/Form"
+import { AssignToableDropdown, AssignmentLocationDropdown } from "@/features"
+import { Routes } from "@/lib"
+
 
 interface CheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
@@ -15,11 +16,11 @@ interface CheckoutItemProps {
 }
 
 const Checkout = ({ assignment, item, ...models }: CheckoutItemProps) => {
-	const title = 'Checkout Item'
+	const title = "Checkout Item"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Hardware', href: Routes.items() },
+			{ title: "Hardware", href: Routes.items() },
 			{ title: item.name!, href: Routes.item(item) },
 			{ title, href: window.location.href },
 		] }>
@@ -48,7 +49,7 @@ const Checkout = ({ assignment, item, ...models }: CheckoutItemProps) => {
 				<Form
 					data={ {
 						assignment: {
-							...omit(assignment, 'status'),
+							...omit(assignment, "status"),
 						},
 						item: {
 							name: item.name,
@@ -64,7 +65,7 @@ const Checkout = ({ assignment, item, ...models }: CheckoutItemProps) => {
 						required
 					/>
 
-					<AssignToableDropdown { ...models } options={ ['Person', 'Item', 'Location'] } />
+					<AssignToableDropdown { ...models } options={ ["Person", "Item", "Location"] } />
 
 					<AssignmentLocationDropdown required />
 

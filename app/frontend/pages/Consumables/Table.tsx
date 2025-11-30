@@ -1,9 +1,11 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Group, Link, Money, Table } from '@/components'
-import { EditButton, CheckoutButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
-import ReplenishButton from './ReplenishButton'
+import React from "react"
+
+import { Group, Link, Money, Table } from "@/components"
+import { EditButton, CheckoutButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
+
+import ReplenishButton from "./ReplenishButton"
 
 const ConsumablesTable = (props: TableProps) => {
 	return (
@@ -18,7 +20,7 @@ const ConsumablesTable = (props: TableProps) => {
 					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
 					<Table.HeadCell sort="qty">Qty</Table.HeadCell>
 					<Table.HeadCell sort="min_qty">Min Qty</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
@@ -59,7 +61,7 @@ const ConsumablesTable = (props: TableProps) => {
 								<CheckoutButton
 									href={ Routes.checkoutConsumable(consumable) }
 									disabled={ consumable.qty_available < 1 }
-									tooltipMessage={ consumable.qty_available < 1 && 'There are none to checkout' }
+									tooltipMessage={ consumable.qty_available < 1 && "There are none to checkout" }
 									label={ consumable.name }
 								/>
 								<ReplenishButton consumable={ consumable } />

@@ -1,5 +1,6 @@
-import { vars } from '@/lib/theme'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars } from "@/lib/theme"
 
 export const table = css`
 	width: 100%;
@@ -14,7 +15,7 @@ export const row = css`
 	height: 46px;
 
 	&:hover .item-ip-assign-button, & .item-ip-assign-button.editing {
-		color: ${vars.colors.gray[4]};
+		color: ${ vars.colors.gray[4] };
 	}
 
 	td {

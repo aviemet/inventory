@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import ContractForm from '../Form'
+import React from "react"
 
-interface UpdateContractProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import ContractForm from "../Form"
+
+interface UpdateContractProps {
 	contract: Schema.ContractsEdit
 }
 
@@ -12,9 +14,9 @@ const EditContract = ({ contract }: UpdateContractProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Contracts', href: Routes.contracts() },
+			{ title: "Contracts", href: Routes.contracts() },
 			{ title: contract.name!, href: Routes.contract(contract) },
-			{ title: 'Edit Contract', href: window.location.href },
+			{ title: "Edit Contract", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

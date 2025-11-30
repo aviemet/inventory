@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import TicketsTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import TicketsTable from "../Table"
 
 interface TicketsIndexProps {
 	tickets: Schema.TicketsIndex[]
@@ -10,7 +12,7 @@ interface TicketsIndexProps {
 }
 
 const TicketsIndex = ({ tickets, pagination }: TicketsIndexProps) => {
-	const title = 'Support Tickets'
+	const title = "Support Tickets"
 	return (
 		<IndexPageTemplate
 			title={ title }
@@ -19,7 +21,7 @@ const TicketsIndex = ({ tickets, pagination }: TicketsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.tickets() }
 			menuOptions={ [
-				{ label: 'New Ticket', href: Routes.newTicket(), icon: <NewIcon /> },
+				{ label: "New Ticket", href: Routes.newTicket(), icon: <NewIcon /> },
 			] }
 		>
 			<TicketsTable />

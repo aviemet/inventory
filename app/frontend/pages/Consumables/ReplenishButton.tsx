@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
-import { Button, Modal, Grid } from '@/components'
-import { Form, FormConsumer, NumberInput, Submit } from '@/components/Form'
-import { Checkbox } from '@/components/Inputs'
-import { ReplenishIcon } from '@/components/Icons'
-import { Tooltip, type ButtonProps, useMantineTheme } from '@mantine/core'
-import { Routes } from '@/lib'
-import axios from 'axios'
-import { router } from '@inertiajs/react'
-import { type UseFormProps } from 'use-inertia-form'
-import { useContrastingTextColor } from '@/lib/hooks'
+import { router } from "@inertiajs/react"
+import { Tooltip, type ButtonProps, useMantineTheme } from "@mantine/core"
+import axios from "axios"
+import React, { useState } from "react"
+import { type UseFormProps } from "use-inertia-form"
+
+import { Button, Modal, Grid } from "@/components"
+import { Form, FormConsumer, NumberInput, Submit } from "@/components/Form"
+import { ReplenishIcon } from "@/components/Icons"
+import { Checkbox } from "@/components/Inputs"
+import { Routes } from "@/lib"
+import { useContrastingTextColor } from "@/lib/hooks"
 
 const defaultData = { consumable: { qty: 1 } }
 
@@ -30,14 +31,14 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 		if(!to) return
 		axios[method](to, {
 			consumable: {
-				qty: Math.floor(getData('consumable.qty')) + (consumable.qty ?? 0),
+				qty: Math.floor(getData("consumable.qty")) + (consumable.qty ?? 0),
 			},
 			redirect: false,
 		})
 			.then(response => {
-				if(response.statusText === 'OK' || response.statusText === 'Created') {
+				if(response.statusText === "OK" || response.statusText === "Created") {
 					setOpened(false)
-					router.reload({ only: ['flash', 'consumables'] })
+					router.reload({ only: ["flash", "consumables"] })
 				}
 			})
 			.catch(error => {
@@ -57,7 +58,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 			<Modal
 				opened={ opened }
 				onClose={ () => setOpened(false) }
-				title={ `Replenish ${consumable?.name ? consumable.name : 'Consumable'}` }
+				title={ `Replenish ${consumable?.name ? consumable.name : "Consumable"}` }
 			>
 				<Form
 					model="consumable"
@@ -90,7 +91,7 @@ const ReplenishButton = ({ consumable, disabled, tooltipMessage, ...props }: Rep
 				withArrow
 				label={ tooltipMessage || `Replenish ${consumable.name}` }
 				position="left"
-				transitionProps={ { transition: 'fade' } }
+				transitionProps={ { transition: "fade" } }
 				color={ replenishButtonColor }
 				c={ textColor }
 				aria-label={ `Replenish ${consumable.name}` }

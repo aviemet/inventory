@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import DepartmentForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface EditDepartmentProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import DepartmentForm from "../Form"
+
+interface EditDepartmentProps {
 	department: Schema.DepartmentsEdit
 }
 
@@ -12,9 +14,9 @@ const EditDepartment = ({ department }: EditDepartmentProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Departments', href: Routes.departments() },
+			{ title: "Departments", href: Routes.departments() },
 			{ title: department.name, href: Routes.department(department) },
-			{ title: 'Edit Department', href: window.location.href },
+			{ title: "Edit Department", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

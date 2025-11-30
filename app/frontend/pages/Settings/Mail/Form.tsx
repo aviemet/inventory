@@ -1,9 +1,10 @@
-import React from 'react'
-import { Group, Grid } from '@/components'
-import { Form, type FormProps, PasswordInput, SegmentedControl, RichText, Submit, TextInput, FormConsumer } from '@/components/Form'
-import { TestResponseButton } from '@/components/Button'
-import { Routes, isUnset } from '@/lib'
-import { omit } from 'lodash'
+import { omit } from "lodash"
+import React from "react"
+
+import { Group, Grid } from "@/components"
+import { TestResponseButton } from "@/components/Button"
+import { Form, type FormProps, PasswordInput, SegmentedControl, RichText, Submit, TextInput, FormConsumer } from "@/components/Form"
+import { Routes, isUnset } from "@/lib"
 
 type SmtpFormData = {
 	smtp: Schema.SmtpsFormData
@@ -13,9 +14,9 @@ export interface SmtpFormProps extends FormProps<SmtpFormData> {
 	data: SmtpFormData
 }
 
-const requiredFields = ['smtp.host', 'smtp.port', 'smtp.domain', 'smtp.username', 'smtp.password']
+const requiredFields = ["smtp.host", "smtp.port", "smtp.domain", "smtp.username", "smtp.password"]
 
-const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
+const SmtpForm = ({ method = "post", ...props }: SmtpFormProps) => {
 	return (
 		<Form
 			model="smtp"
@@ -37,7 +38,7 @@ const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
 
 				<Grid.Col>
 					<TextInput name="domain" label="Email Domain" required
-						placeholder='e.g. mycompany.com'
+						placeholder="e.g. mycompany.com"
 					/>
 				</Grid.Col>
 
@@ -51,15 +52,15 @@ const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
 
 				<Grid.Col>
 					<TextInput name="address" label="Reply-To Address"
-						placeholder='If not provided, will default to your username'
+						placeholder="If not provided, will default to your username"
 					/>
 				</Grid.Col>
 
 				<Grid.Col>
 					<SegmentedControl name="security" label="Security" options={ [
-						{ label: 'None', value: 'basic' },
-						{ label: 'TLS', value: 'tls' },
-						{ label: 'SSL', value: 'ssl' },
+						{ label: "None", value: "basic" },
+						{ label: "TLS", value: "tls" },
+						{ label: "SSL", value: "ssl" },
 					] } />
 				</Grid.Col>
 
@@ -69,7 +70,7 @@ const SmtpForm = ({ method = 'post', ...props }: SmtpFormProps) => {
 							<TestResponseButton
 								method="post"
 								endpoint={ Routes.apiSmtpTest() }
-								data={ { smtp: omit(data.smtp, 'id') } }
+								data={ { smtp: omit(data.smtp, "id") } }
 								disabled={ requiredFields.some(field => isUnset(getData(field))) }
 							/>
 						) }</FormConsumer>

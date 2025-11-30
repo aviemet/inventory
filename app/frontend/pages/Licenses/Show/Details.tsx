@@ -1,7 +1,9 @@
-import React from 'react'
-import { Link, Title, Table, Box, Money } from '@/components'
-import { formatter, Routes } from '@/lib'
-import { ShowLicenseProps } from '.'
+import React from "react"
+
+import { Link, Title, Table, Box, Money } from "@/components"
+import { formatter, Routes } from "@/lib"
+
+import { ShowLicenseProps } from "."
 
 const LicenseDetails = ({ license }: ShowLicenseProps) => {
 	return (

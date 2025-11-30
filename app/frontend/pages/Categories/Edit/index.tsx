@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import CategoryForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface UpdateCategoryProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import CategoryForm from "../Form"
+
+interface UpdateCategoryProps {
 	category: Schema.CategoriesEdit
 }
 
@@ -12,9 +14,9 @@ const EditCategory = ({ category, ...models }: UpdateCategoryProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Categories', href: Routes.categories() },
+			{ title: "Categories", href: Routes.categories() },
 			{ title: category.name!, href: Routes.category(category.slug) },
-			{ title: 'Edit Category', href: window.location.href },
+			{ title: "Edit Category", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

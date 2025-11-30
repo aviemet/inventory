@@ -1,6 +1,7 @@
-import React from 'react'
-import { Timeline } from '@mantine/core'
-import { buildTimelineData } from './Content'
+import { Timeline } from "@mantine/core"
+import React from "react"
+
+import { buildTimelineData } from "./Content"
 
 interface HistoryProps {
 	assignments?: Schema.Assignment[]

@@ -1,17 +1,18 @@
-import { vars, theme } from '@/lib/theme'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars, theme } from "@/lib/theme"
 
 export const topbar = css`
 	transition: left 100ms ease-in-out;
-	background-color: ${vars.colors.primaryColors.filled};
+	background-color: ${ vars.colors.primaryColors.filled };
 	
-	color: ${vars.colors.white};
+	color: ${ vars.colors.white };
 
-	@media (min-width: ${vars.breakpoints.sm}) {
-		left: ${theme.other.navbar.width.open}px;
+	@media (min-width: ${ vars.breakpoints.sm }) {
+		left: ${ theme.other.navbar.width.open }px;
 
 		&.closed {
-			left: ${theme.other.navbar.width.closed}px;
+			left: ${ theme.other.navbar.width.closed }px;
 		}
 	}
 `
@@ -23,7 +24,7 @@ export const wrapper = css`
 `
 
 export const newMenu = css`
-	@media(max-width: ${vars.breakpoints.sm}) {
+	@media(max-width: ${ vars.breakpoints.sm }) {
 		display: none;
 	}
 `

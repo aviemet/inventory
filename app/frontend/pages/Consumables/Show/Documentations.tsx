@@ -1,5 +1,6 @@
-import React from 'react'
-import { ShowConsumableProps } from '.'
+import React from "react"
+
+import { ShowConsumableProps } from "."
 
 const Documentations = ({ consumable }: ShowConsumableProps) => {
 	return (

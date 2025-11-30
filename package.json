@@ -11,9 +11,9 @@
   "scripts": {
     "dev": "RAILS_ENV=development PORT=3000 NODE_ENV=development overmind start -f Procfile.dev",
     "start": "RACK_ENV=production RAILS_ENV=production PORT=3000 NODE_ENV=production overmind start -f Procfile",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
+    "test": "NODE_OPTIONS='--no-warnings' vitest run",
+    "test:watch": "NODE_OPTIONS='--no-warnings' vitest",
+    "test:coverage": "NODE_OPTIONS='--no-warnings' vitest run --coverage",
     "rspec": "RAILS_ENV=test bundle exec rspec --color",
     "rspec:watch": "RAILS_ENV=test bundle exec rake rspec_watcher:watch",
     "lint:fix": "eslint --fix"
@@ -97,6 +97,7 @@
     "@stylistic/eslint-plugin": "^5.6.1",
     "@tanstack/react-query-devtools": "^5.91.1",
     "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.6.1",

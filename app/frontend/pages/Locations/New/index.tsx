@@ -1,19 +1,21 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import LocationForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import LocationForm from "../Form"
 
 interface NewLocationProps {
 	location: Schema.LocationsFormData
 }
 
 const NewLocation = ({ location }: NewLocationProps) => {
-	const title = 'New Location'
+	const title = "New Location"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Locations', href: Routes.locations() },
-			{ title: 'New Location', href: window.location.href },
+			{ title: "Locations", href: Routes.locations() },
+			{ title: "New Location", href: window.location.href },
 		] }>
 
 			<Section>

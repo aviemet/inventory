@@ -1,8 +1,10 @@
-import React from 'react'
-import { type LinkProps } from '@/components/Link'
-import { Link } from '@/components'
-import cx from 'clsx'
-import * as classes from './Tile.css'
+import cx from "clsx"
+import React from "react"
+
+import { Link } from "@/components"
+import { type LinkProps } from "@/components/Link"
+
+import * as classes from "./Tile.css"
 
 const HoverLink = ({ children, className, ...props }: LinkProps) => {
 	return (

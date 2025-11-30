@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import VendorsTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import VendorsTable from "../Table"
 
 interface VendorsIndexProps {
 	vendors: Schema.VendorsIndex[]
@@ -18,7 +20,7 @@ const VendorsIndex = ({ vendors, pagination }: VendorsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.vendors() }
 			menuOptions={ [
-				{ label: 'New Vendor', href: Routes.newVendor(), icon: <NewIcon /> },
+				{ label: "New Vendor", href: Routes.newVendor(), icon: <NewIcon /> },
 			] }
 		>
 			<VendorsTable />

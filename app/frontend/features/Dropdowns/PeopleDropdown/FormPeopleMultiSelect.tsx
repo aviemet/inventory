@@ -1,16 +1,18 @@
-import React from 'react'
-import { MultiSelect as FormMultiSelect } from '@/components/Form'
-import { useGetPeopleAsOptions } from '@/queries/people'
-import { isEmpty } from 'lodash'
-import { type FormAsyncMultiSelect } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface PeopleDropdownProps extends Omit<FormAsyncMultiSelect<Schema.PeopleOptions>, 'name'> {
+import { MultiSelect as FormMultiSelect } from "@/components/Form"
+import { useGetPeopleAsOptions } from "@/queries/people"
+
+import { type FormAsyncMultiSelect } from ".."
+
+interface PeopleDropdownProps extends Omit<FormAsyncMultiSelect<Schema.PeopleOptions>, "name"> {
 	name?: string
 }
 
 const PeopleDropdown = ({
-	label = 'Person',
-	name = 'person_id',
+	label = "Person",
+	name = "person_id",
 	initialData,
 	value,
 	...props

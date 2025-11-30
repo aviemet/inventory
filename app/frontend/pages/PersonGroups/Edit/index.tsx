@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import GroupForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface UpdateGroupProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import GroupForm from "../Form"
+
+interface UpdateGroupProps {
 	person_group: Schema.PersonGroupsEdit
 	people: Schema.Person[]
 }
@@ -13,10 +15,10 @@ const EditGroup = ({ person_group, ...models }: UpdateGroupProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'People', href: Routes.people() },
-			{ title: 'Groups', href: Routes.personGroups() },
+			{ title: "People", href: Routes.people() },
+			{ title: "Groups", href: Routes.personGroups() },
 			{ title: person_group.name!, href: Routes.personGroup(person_group.slug) },
-			{ title: 'Edit', href: window.location.href },
+			{ title: "Edit", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

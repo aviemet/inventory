@@ -1,7 +1,8 @@
-import React from 'react'
-import Footer from '../Footer'
-import * as classes from './Auth.css'
-import { AppShell } from '@mantine/core'
+import { AppShell } from "@mantine/core"
+import React from "react"
+
+import Footer from "../Footer"
+import * as classes from "./Auth.css"
 
 interface AuthLayoutProps {
 	children: any

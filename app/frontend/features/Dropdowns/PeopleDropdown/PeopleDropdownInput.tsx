@@ -1,13 +1,15 @@
-import React, { forwardRef } from 'react'
-import { Select as InputSelect } from '@/components/Inputs'
-import { useGetPeopleAsOptions } from '@/queries/people'
-import { isEmpty } from 'lodash'
-import { type AsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React, { forwardRef } from "react"
+
+import { Select as InputSelect } from "@/components/Inputs"
+import { useGetPeopleAsOptions } from "@/queries/people"
+
+import { type AsyncDropdown } from ".."
 
 interface PeopleDropdownProps extends AsyncDropdown<Schema.PeopleOptions> {}
 
 const PeopleDropdown = forwardRef<HTMLInputElement, PeopleDropdownProps>((
-	{ label = 'Person', name = 'person_id', initialData, value, ...props },
+	{ label = "Person", name = "person_id", initialData, value, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = useGetPeopleAsOptions({

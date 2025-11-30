@@ -1,13 +1,15 @@
-import React, { forwardRef } from 'react'
-import { Select as InputSelect } from '@/components/Inputs'
-import { useGetLocationsAsOptions } from '@/queries/locations'
-import { isEmpty } from 'lodash'
-import { type AsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React, { forwardRef } from "react"
+
+import { Select as InputSelect } from "@/components/Inputs"
+import { useGetLocationsAsOptions } from "@/queries/locations"
+
+import { type AsyncDropdown } from ".."
 
 export interface LocationsDropdownProps extends AsyncDropdown<Schema.LocationsOptions> {}
 
 const LocationsDropdown = forwardRef<HTMLInputElement, LocationsDropdownProps>((
-	{ label = 'Location', name = 'location_id', filter, initialData, value, ...props },
+	{ label = "Location", name = "location_id", filter, initialData, value, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = useGetLocationsAsOptions({

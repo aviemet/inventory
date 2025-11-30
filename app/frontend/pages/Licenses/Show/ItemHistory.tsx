@@ -1,6 +1,8 @@
-import React from 'react'
-import { Title, History } from '@/components'
-import { ShowLicenseProps } from '.'
+import React from "react"
+
+import { Title, History } from "@/components"
+
+import { ShowLicenseProps } from "."
 
 const LicenseHistory = ({ license }: ShowLicenseProps) => {
 	return (

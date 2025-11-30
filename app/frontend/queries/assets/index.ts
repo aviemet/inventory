@@ -1,12 +1,14 @@
-import { Routes } from '@/lib'
-import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
-import { type ReactQueryFunction } from '..'
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+
+import { Routes } from "@/lib"
+
+import { type ReactQueryFunction } from ".."
 
 export const useGetAssets: ReactQueryFunction<Schema.Asset[]> = (options) => {
 	return useQuery({
-		queryKey: ['items'],
-		queryFn: async () => {
+		queryKey: ["items"],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiAssets())
 			return res.data
 		},
@@ -16,8 +18,8 @@ export const useGetAssets: ReactQueryFunction<Schema.Asset[]> = (options) => {
 
 export const useGetAssetsAsOptions: ReactQueryFunction<Schema.AssetsOptions[]> = (options) => {
 	return useQuery({
-		queryKey: ['items', 'options'],
-		queryFn: async () => {
+		queryKey: ["items", "options"],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiAssetsOptions())
 			return res.data
 		},
@@ -27,7 +29,7 @@ export const useGetAssetsAsOptions: ReactQueryFunction<Schema.AssetsOptions[]> =
 
 export const useGetAsset: ReactQueryFunction<Schema.Asset[], { id: string | number }> = ({ id }, options) => {
 	return useQuery({
-		queryKey: ['items', id],
+		queryKey: ["items", id],
 		queryFn: async() => {
 			const res = await axios.get(Routes.apiAsset(id))
 			return res.data

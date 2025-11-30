@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import ModelsTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import ModelsTable from "../Table"
 
 interface ModelsIndexProps {
 	models: Schema.ModelsIndex[]
@@ -18,7 +20,7 @@ const ModelsIndex = ({ models, pagination }: ModelsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.models() }
 			menuOptions={ [
-				{ label: 'New Model', href: Routes.newModel(), icon: <NewIcon /> },
+				{ label: "New Model", href: Routes.newModel(), icon: <NewIcon /> },
 			] }
 		>
 			<ModelsTable />

@@ -1,9 +1,10 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Submit } from '@/components/Form'
-import { ContactForm } from '@/features/Contactable'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import { FormCurrenciesDropdown } from '@/features/Dropdowns'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Submit } from "@/components/Form"
+import { ContactForm } from "@/features/Contactable"
+import { FormCurrenciesDropdown } from "@/features/Dropdowns"
 
 type CompanyFormData = {
 	company: Schema.CompaniesFormData
@@ -16,7 +17,7 @@ export interface CompanyFormProps {
 	company: Schema.CompaniesFormData
 }
 
-const CompanyForm = ({ to, method = 'post', onSubmit, company }: CompanyFormProps) => {
+const CompanyForm = ({ to, method = "post", onSubmit, company }: CompanyFormProps) => {
 	return (
 		<Form
 			model="company"
@@ -42,7 +43,7 @@ const CompanyForm = ({ to, method = 'post', onSubmit, company }: CompanyFormProp
 
 				<Grid.Col>
 					<Submit>
-						{ company.id ? 'Update' : 'Create' } Company
+						{ company.id ? "Update" : "Create" } Company
 					</Submit>
 				</Grid.Col>
 			</Grid>

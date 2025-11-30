@@ -1,1 +1,1 @@
-export type AssignableTypes = 'Item' | 'Accessory' | 'Component' | 'Consumable' | 'License'
+export type AssignableTypes = "Item" | "Accessory" | "Component" | "Consumable" | "License"

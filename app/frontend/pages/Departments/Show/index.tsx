@@ -1,14 +1,16 @@
-import React from 'react'
-import { Tabs, Page } from '@/components'
-import { Routes } from '@/lib'
-import Details from './Details'
-import Items from './Items'
-import Accessories from './Accessories'
-import Components from './Components'
-import Consumables from './Consumables'
-import Licenses from './Licenses'
-import People from './People'
-import { type PaginatedModel } from '@/types/PaginatedModel'
+import React from "react"
+
+import { Tabs, Page } from "@/components"
+import { Routes } from "@/lib"
+import { type PaginatedModel } from "@/types/PaginatedModel"
+
+import Accessories from "./Accessories"
+import Components from "./Components"
+import Consumables from "./Consumables"
+import Details from "./Details"
+import Items from "./Items"
+import Licenses from "./Licenses"
+import People from "./People"
 
 interface DepartmentShowProps {
 	department: Schema.DepartmentsShow
@@ -21,30 +23,30 @@ interface DepartmentShowProps {
 }
 
 const tabs = {
-	details: 'details',
-	items: 'items',
-	accessories: 'accessories',
-	components: 'components',
-	consumables: 'consumables',
-	licenses: 'licenses',
-	people: 'people',
+	details: "details",
+	items: "items",
+	accessories: "accessories",
+	components: "components",
+	consumables: "consumables",
+	licenses: "licenses",
+	people: "people",
 }
 
 const Show = ({ department, items, accessories, components, consumables, licenses, people }: DepartmentShowProps) => {
-	const title = department.name ?? 'Department Details'
+	const title = department.name ?? "Department Details"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Departments', href: Routes.departments() },
+			{ title: "Departments", href: Routes.departments() },
 			{ title: department.name, href: window.location.href },
 		] }>
 			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ {
-				[tabs.items]: 'items',
-				[tabs.accessories]: 'accessories',
-				[tabs.components]: 'components',
-				[tabs.consumables]: 'consumables',
-				[tabs.licenses]: 'licenses',
-				[tabs.people]: 'people',
+				[tabs.items]: "items",
+				[tabs.accessories]: "accessories",
+				[tabs.components]: "components",
+				[tabs.consumables]: "consumables",
+				[tabs.licenses]: "licenses",
+				[tabs.people]: "people",
 			} }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
@@ -56,37 +58,37 @@ const Show = ({ department, items, accessories, components, consumables, license
 					<Tabs.Tab value={ tabs.people }>People ({ department.counts.people })</Tabs.Tab>
 				</Tabs.List>
 
-				{ /*********** Details ***********/ }
+				{ /** ********* Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Details title={ title } department={ department } />
 				</Tabs.Panel>
 
-				{ /*********** ITEMS ***********/ }
+				{ /** ********* ITEMS ***********/ }
 				<Tabs.Panel value={ tabs.items }>
 					<Items items={ items } department={ department } />
 				</Tabs.Panel>
 
-				{ /*********** ACCESSORIES ***********/ }
+				{ /** ********* ACCESSORIES ***********/ }
 				<Tabs.Panel value={ tabs.accessories }>
 					<Accessories accessories={ accessories } department={ department } />
 				</Tabs.Panel>
 
-				{ /*********** CONSUMABLES ***********/ }
+				{ /** ********* CONSUMABLES ***********/ }
 				<Tabs.Panel value={ tabs.consumables }>
 					<Consumables consumables={ consumables } department={ department } />
 				</Tabs.Panel>
 
-				{ /*********** COMPONENTS ***********/ }
+				{ /** ********* COMPONENTS ***********/ }
 				<Tabs.Panel value={ tabs.components }>
 					<Components components={ components } department={ department } />
 				</Tabs.Panel>
 
-				{ /*********** LICENSES ***********/ }
+				{ /** ********* LICENSES ***********/ }
 				<Tabs.Panel value={ tabs.licenses }>
 					<Licenses licenses={ licenses } department={ department } />
 				</Tabs.Panel>
 
-				{ /*********** PEOPLE ***********/ }
+				{ /** ********* PEOPLE ***********/ }
 				<Tabs.Panel value={ tabs.people }>
 					<People people={ people } department={ department } />
 				</Tabs.Panel>

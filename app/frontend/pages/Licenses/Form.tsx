@@ -1,5 +1,7 @@
-import React from 'react'
-import { Box, Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Box, Grid } from "@/components"
 import {
 	Form,
 	TextInput,
@@ -9,11 +11,10 @@ import {
 	Submit,
 	CurrencyInput,
 	NumberInput,
-} from '@/components/Form'
-import { FormCategoriesDropdown, FormManufacturersDropdown, FormVendorsDropdown } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import ConsoleLogger from '@/components/Form/components/ConsoleLogger'
+} from "@/components/Form"
+import ConsoleLogger from "@/components/Form/components/ConsoleLogger"
+import { FormCategoriesDropdown, FormManufacturersDropdown, FormVendorsDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 type LicenseFormData = {
 	license: Schema.LicensesFormData
@@ -26,7 +27,7 @@ export interface LicenseFormProps {
 	license: Schema.LicensesFormData
 }
 
-const LicenseForm = ({ to, method = 'post', onSubmit, license }: LicenseFormProps) => {
+const LicenseForm = ({ to, method = "post", onSubmit, license }: LicenseFormProps) => {
 	return (
 		<Form
 			model="license"
@@ -65,22 +66,22 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license }: LicenseFormProp
 				<Grid.Col span={ { base: 12, md: 6 } }>
 					<CurrencyInput name="cost" label="Cost" />
 				</Grid.Col>
-				<Box style={ { width: '100%' } }></Box>
+				<Box style={ { width: "100%" } }></Box>
 
 				<Grid.Col span={ { base: 12, md: 6 } }>
 					<DateInput name="purchased_at" label="Purchase Date" />
 				</Grid.Col>
-				<Box style={ { width: '100%' } }></Box>
+				<Box style={ { width: "100%" } }></Box>
 
 				<Grid.Col span={ { base: 12, md: 6 } }>
 					<DateInput name="expires_at" label="Expiration Date" />
 				</Grid.Col>
 
-				<Box style={ { width: '100%' } }></Box>
+				<Box style={ { width: "100%" } }></Box>
 				<Grid.Col span={ { base: 12, md: 6 } }>
 					<DateInput name="terminates_at" label="Termination Date" />
 				</Grid.Col>
-				<Box style={ { width: '100%' } }></Box>
+				<Box style={ { width: "100%" } }></Box>
 
 				<Grid.Col span={ { base: 12, md: 6 } }>
 					<Checkbox name="maintained" label="Maintained" />
@@ -107,7 +108,7 @@ const LicenseForm = ({ to, method = 'post', onSubmit, license }: LicenseFormProp
 
 				<Grid.Col>
 					<Submit>
-						{ license.id ? 'Update' : 'Create' } License
+						{ license.id ? "Update" : "Create" } License
 					</Submit>
 				</Grid.Col>
 			</Grid>

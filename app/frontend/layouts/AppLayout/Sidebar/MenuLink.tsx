@@ -1,6 +1,7 @@
-import React from 'react'
-import { Link, ActionIcon } from '@/components'
-import cx from 'clsx'
+import cx from "clsx"
+import React from "react"
+
+import { Link, ActionIcon } from "@/components"
 
 interface MenuLinkProps {
 	children: string
@@ -17,9 +18,9 @@ const MenuLink = ({ children, href, icon, ...props }: MenuLinkProps) => {
 				variant="transparent"
 				aria-label={ children }
 			>
-				{ icon  }
+				{ icon }
 			</ActionIcon>
-			<span className={ cx('link-text') }>{ children }</span>
+			<span className={ cx("link-text") }>{ children }</span>
 		</Link>
 	)
 }

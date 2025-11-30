@@ -1,15 +1,16 @@
-import React from 'react'
-import { Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	TextInput,
 	RichText,
 	Submit,
 	FieldsFor,
-} from '@/components/Form'
-import { AssetsDropdown, FormPeopleDropdown, FormPeopleMultiSelect } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
+import { AssetsDropdown, FormPeopleDropdown, FormPeopleMultiSelect } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 type TicketFormData = {
 	ticket: Schema.TicketsFormData
@@ -22,7 +23,7 @@ export interface TicketFormProps {
 	ticket: Schema.TicketsFormData
 }
 
-const TicketForm = ({ to, method = 'post', onSubmit, ticket }: TicketFormProps) => {
+const TicketForm = ({ to, method = "post", onSubmit, ticket }: TicketFormProps) => {
 	return (
 		<Form
 			model="ticket"
@@ -62,7 +63,7 @@ const TicketForm = ({ to, method = 'post', onSubmit, ticket }: TicketFormProps) 
 
 				<Grid.Col>
 					<Submit>
-						{ ticket.id ? 'Update' : 'Create' } Ticket
+						{ ticket.id ? "Update" : "Create" } Ticket
 					</Submit>
 				</Grid.Col>
 			</Grid>

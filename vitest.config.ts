@@ -1,14 +1,19 @@
-import { defineConfig, mergeConfig } from 'vitest/config'
-import viteConfig from './vite.config'
+import { mergeConfig } from "vite"
 
-export default mergeConfig(viteConfig, defineConfig({
+import viteConfig from "./vite.config"
+
+export default mergeConfig(viteConfig, {
+	define: {
+		"process.env.NODE_ENV": '"test"',
+		"__REACT_DEVTOOLS_GLOBAL_HOOK__": "({ isDisabled: true })",
+	},
 	test: {
 		globals: true,
-		environment: 'jsdom',
+		environment: "happy-dom",
 		coverage: {
-			all: true,
-			include: ['app/frontend/**/*.test.{ts,tsx}'],
+			provider: "v8",
+			include: ["app/frontend/**/*.test.{ts,tsx}"],
 		},
-		setupFiles: ['/tests/helpers/mockServer.ts'],
+		setupFiles: ["/tests/helpers/setup.ts", "/tests/helpers/mockServer.ts"],
 	},
-}))
+})

@@ -1,7 +1,12 @@
-import React, { useReducer } from 'react'
-import { createContext } from '@/lib/hooks'
-import StatePreservingRowUpdater from './StatePreservingRowUpdater'
-export * from './tableSectionContext'
+import React, { useReducer } from "react"
+
+import { createContext } from "@/lib/hooks"
+
+import StatePreservingRowUpdater from "./StatePreservingRowUpdater"
+
+export * from "./tableSectionContext"
+
+export type TableRowData = { id?: unknown } | { [key: string]: unknown }
 
 /**
  * Main Table Context
@@ -15,7 +20,7 @@ interface TableState {
 	model?: string
 	selectable: boolean
 	pagination?: Schema.Pagination
-	rows?: Record<string,unknown>[]
+	rows?: readonly TableRowData[]
 	columns: { hideable: string, label: string }[]
 	selected: Set<string>
 	hideable: boolean
@@ -23,7 +28,7 @@ interface TableState {
 }
 
 interface TableContextProviderProps extends
-	Partial<Pick<TableState, 'selectable' | 'pagination' | 'rows' | 'hideable' | 'model'>> {
+	Partial<Pick<TableState, "selectable" | "pagination" | "rows" | "hideable" | "model">> {
 	children: React.ReactNode
 }
 

@@ -1,7 +1,9 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import TicketForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import TicketForm from "../Form"
 
 interface NewTicketProps {
 	ticket: Schema.TicketsFormData
@@ -10,12 +12,12 @@ interface NewTicketProps {
 }
 
 const NewTicket = ({ ...data }: NewTicketProps) => {
-	const title = 'New Support Ticket'
+	const title = "New Support Ticket"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Tickets', href: Routes.tickets() },
-			{ title: 'New Ticket', href: window.location.href },
+			{ title: "Tickets", href: Routes.tickets() },
+			{ title: "New Ticket", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

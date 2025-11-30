@@ -1,13 +1,15 @@
-import React, { forwardRef } from 'react'
-import { MultiSelect as InputMultiSelect } from '@/components/Inputs'
-import { useGetPeopleAsOptions } from '@/queries/people'
-import { isEmpty } from 'lodash'
-import { type AsyncMultiSelect } from '..'
+import { isEmpty } from "lodash"
+import React, { forwardRef } from "react"
+
+import { MultiSelect as InputMultiSelect } from "@/components/Inputs"
+import { useGetPeopleAsOptions } from "@/queries/people"
+
+import { type AsyncMultiSelect } from ".."
 
 interface PeopleDropdownProps extends AsyncMultiSelect<Schema.PeopleOptions> {}
 
 const PeopleDropdown = forwardRef<HTMLInputElement, PeopleDropdownProps>((
-	{ label = 'Person', name = 'person_id', initialData, value, ...props },
+	{ label = "Person", name = "person_id", initialData, value, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = useGetPeopleAsOptions({

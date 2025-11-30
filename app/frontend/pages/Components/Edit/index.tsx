@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import ComponentForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface UpdateComponentProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import ComponentForm from "../Form"
+
+interface UpdateComponentProps {
 	component: Schema.ComponentsEdit
 }
 
@@ -12,9 +14,9 @@ const EditComponent = ({ component }: UpdateComponentProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Components', href: Routes.components() },
+			{ title: "Components", href: Routes.components() },
 			{ title: component.name!, href: Routes.component(component) },
-			{ title: 'Edit Component', href: window.location.href },
+			{ title: "Edit Component", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

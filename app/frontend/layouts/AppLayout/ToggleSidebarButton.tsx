@@ -1,6 +1,7 @@
-import React from 'react'
-import { Burger } from '@/components'
-import { useLayoutStore } from '@/lib/store'
+import React from "react"
+
+import { Burger } from "@/components"
+import { useLayoutStore } from "@/lib/store"
 
 const ToggleSidebarButton = () => {
 	const { sidebarOpen, toggleSidebarOpen } = useLayoutStore()
@@ -8,9 +9,9 @@ const ToggleSidebarButton = () => {
 	return (
 		<Burger
 			aria-label={ sidebarOpen ?
-				'Collapse Navigation'
+				"Collapse Navigation"
 				:
-				'Expand Navigation'
+				"Expand Navigation"
 			}
 			opened={ sidebarOpen }
 			onClick={ () => toggleSidebarOpen() }
