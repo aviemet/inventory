@@ -1,17 +1,17 @@
+import React, { useCallback, useEffect } from "react"
 import { type VisitOptions } from "@inertiajs/core"
 import { router } from "@inertiajs/react"
 import { ActionIcon, Box } from "@mantine/core"
 import { useSessionStorage } from "@mantine/hooks"
 import { debounce } from "lodash"
-import React, { useCallback, useEffect } from "react"
 
 import { SearchIcon, CrossIcon } from "@/components/Icons"
 import { TextInput } from "@/components/Inputs"
 import { useInit, useLocation } from "@/lib/hooks"
 
-import ColumnPicker from "./ColumnPicker"
+import { ColumnPicker } from "./ColumnPicker"
 import { useTableContext } from "../TableContext"
-import AdvancedSearch from "./AdvancedSearch"
+import { AdvancedSearch } from "./AdvancedSearch"
 import * as classes from "../Table.css"
 
 interface SearchInputProps {
@@ -23,7 +23,7 @@ interface SearchInputProps {
  * Performs an Inertia request to the current url (window.location), using the search params
  * as query string with the key of 'search'
  */
-const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) => {
+export function SearchInput({ columnPicker = true, advancedSearch }: SearchInputProps) {
 	const { tableState: { model }, setTableState } = useTableContext()
 
 	const location = useLocation()
@@ -107,5 +107,3 @@ const SearchInput = ({ columnPicker = true, advancedSearch }: SearchInputProps) 
 		</Box>
 	)
 }
-
-export default SearchInput

@@ -1,7 +1,7 @@
 import { router } from "@inertiajs/react"
 import { Loader } from "@mantine/core"
 import { Spotlight, type SpotlightActionData } from "@mantine/spotlight"
-import React, { useEffect, useState } from "react"
+import React, { useMemo, useState } from "react"
 
 import {
 	DashboardIcon,
@@ -199,7 +199,6 @@ const generateActions = (values?: SpotlightSearchValues) => {
 
 const SpotlightComponent = () => {
 	const [query, setQuery] = useState("")
-	const [actions, setActions] = useState(defaultActions)
 
 	const {
 		data,
@@ -214,25 +213,20 @@ const SpotlightComponent = () => {
 		enabled: false,
 	})
 
+	const actions = useMemo(() => {
+		if(query !== "" && isSuccess && data) {
+			return generateActions(data)
+		}
+		return defaultActions
+	}, [query, isSuccess, data])
+
 	const handleQueryChange = (query: string) => {
 		setQuery(query)
-
-		if(query === "") {
-			setActions(defaultActions)
-		} else {
-			setActions(generateActions(data))
-		}
 
 		if(!isFetched || isStale) {
 			refetch()
 		}
 	}
-
-	useEffect(() => {
-		if(query !== "" && isSuccess) {
-			setActions(generateActions(data))
-		}
-	}, [isSuccess])
 
 	const loading = isLoading || isFetching || isPending
 

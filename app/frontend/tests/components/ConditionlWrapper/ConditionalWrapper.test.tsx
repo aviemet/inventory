@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
+import { ConditionalWrapper } from "@/components"
 import { render } from "@/tests/helpers/utils"
 
 describe("ConditionalWrapper", () => {

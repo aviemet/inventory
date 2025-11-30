@@ -1,14 +1,17 @@
-import React from "react"
+import { type UseFormProps } from "use-inertia-form"
 
-import FormConsumer from "./FormConsumer"
+import { FormConsumer } from "./FormConsumer"
 
-const ConsoleLogger = ({ prop }) => {
+
+interface ConsoleLoggerProps<TForm> {
+	prop: keyof UseFormProps<TForm>
+}
+
+export function ConsoleLogger<TForm>({ prop }: ConsoleLoggerProps<TForm>) {
 	return (
-		<FormConsumer>{ (form) => {
+		<FormConsumer<TForm>>{ (form) => {
 			console.log({ [prop]: form[prop] })
 			return <></>
 		} }</FormConsumer>
 	)
 }
-
-export default ConsoleLogger

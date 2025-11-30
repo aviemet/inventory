@@ -1,5 +1,4 @@
 import { Timeline } from "@mantine/core"
-import React from "react"
 
 import { buildTimelineData } from "./Content"
 
@@ -8,9 +7,7 @@ interface HistoryProps {
 	activities?: Schema.Activity[]
 }
 
-const History = ({ assignments, activities }: HistoryProps) => {
-	// Timeline.Item components cannot be wrapped, so the content has been componentized instead
-	// https://mantine.dev/core/timeline/#wrap-timelineitem
+export function History({ assignments, activities }: HistoryProps) {
 	return (
 		<>
 			{ activities &&
@@ -39,5 +36,3 @@ const History = ({ assignments, activities }: HistoryProps) => {
 		</>
 	)
 }
-
-export default History

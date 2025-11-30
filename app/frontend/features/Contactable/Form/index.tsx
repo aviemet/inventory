@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Accordion, Grid } from "@/components"
 import { FieldsFor } from "@/components/Form"

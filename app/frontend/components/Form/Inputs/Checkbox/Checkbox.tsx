@@ -1,19 +1,19 @@
 import React from "react"
 import { useInertiaInput, type NestedObject } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
-import { Field } from "@/components/Form"
-import CheckboxInput, { type CheckboxProps } from "@/components/Inputs/Checkbox"
+import { ConditionalWrapper } from "@/components"
+import { CheckboxInput, type CheckboxProps } from "@/components/Inputs/Checkbox"
 
 import { type InputConflicts, type BaseFormInputProps } from ".."
-import FormCheckboxGroup from "./Group"
+import { FormCheckboxGroup } from "./Group"
+import { Field } from "../../components/Field"
 
 export interface FormCheckboxProps<TForm extends NestedObject>
 	extends
 	Omit<CheckboxProps, InputConflicts>,
 	BaseFormInputProps<boolean, TForm> {}
 
-const FormCheckboxComponent = <TForm extends NestedObject>(
+const FormCheckboxComponentBase = <TForm extends NestedObject>(
 	{
 		name,
 		onChange,
@@ -81,6 +81,6 @@ const FormCheckboxComponent = <TForm extends NestedObject>(
 	)
 }
 
-FormCheckboxComponent.Group = FormCheckboxGroup
-
-export default FormCheckboxComponent
+export const FormCheckboxComponent = Object.assign(FormCheckboxComponentBase, {
+	Group: FormCheckboxGroup,
+})

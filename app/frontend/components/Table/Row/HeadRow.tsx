@@ -4,14 +4,14 @@ import React, { useEffect, forwardRef } from "react"
 import { coerceArray } from "@/lib"
 import { useCheckboxState } from "@/lib/hooks"
 
-import HeadCheckbox from "./HeadCheckbox"
+import { HeadCheckbox } from "./HeadCheckbox"
 import { useTableContext } from "../TableContext"
 
 import { RowBaseProps } from "./index"
 
 interface HeadRowProps extends RowBaseProps {}
 
-const HeadRow = forwardRef<HTMLTableRowElement, HeadRowProps>((
+export const HeadRow = forwardRef<HTMLTableRowElement, HeadRowProps>((
 	{ children, name, rows, selectable, selected, ...props },
 	ref,
 ) => {
@@ -48,5 +48,3 @@ const HeadRow = forwardRef<HTMLTableRowElement, HeadRowProps>((
 		</Table.Tr>
 	)
 })
-
-export default HeadRow

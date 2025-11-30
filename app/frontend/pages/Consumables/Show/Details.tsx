@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Link, Title, Table, Box } from "@/components"
 import { formatter, Routes } from "@/lib"

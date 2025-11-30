@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import LocationForm from "../Form"
+import LocationForm from "@/domains/Locations/Form"
 
 interface EditLocationProps {
 	location: Schema.LocationsEdit

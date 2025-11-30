@@ -1,11 +1,10 @@
 import { Group, Pagination, type PaginationProps } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Link } from "@/components"
 
 import { useTableContext } from "../TableContext"
-import LimitSelect from "./LimitSelect"
+import { LimitSelect } from "./LimitSelect"
 import * as classes from "../Table.css"
 
 const pageLink = (page: number) => {
@@ -24,13 +23,13 @@ interface PaginationComponent extends Omit<PaginationProps, "total"> {
 	showLimit?: boolean
 }
 
-const PaginationComponent = ({
+export function PaginationComponent({
 	boundaries = 2,
 	siblings = 2,
 	showLimit = true,
 	className,
 	...props
-}: PaginationComponent) => {
+}: PaginationComponent) {
 	const { tableState: { pagination, model } } = useTableContext()
 
 	if(!pagination) return <></>
@@ -45,7 +44,7 @@ const PaginationComponent = ({
 				{ model && showLimit && <>
 					Records per page:
 					<LimitSelect
-						className={ cx(classes.limitSelect) }
+						className={ clsx(classes.limitSelect) }
 						pagination={ pagination }
 						model={ model }
 					/>
@@ -54,7 +53,7 @@ const PaginationComponent = ({
 			</div>
 
 			<Pagination.Root
-				className={ cx(className, classes.pagination) }
+				className={ clsx(className, classes.pagination) }
 				total={ pages }
 				getItemProps={ (page) => ({
 					component: Link,
@@ -98,5 +97,3 @@ const PaginationComponent = ({
 		</Group>
 	)
 }
-
-export default PaginationComponent

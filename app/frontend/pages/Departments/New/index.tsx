@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import AccessoryForm from "../Form"
+import AccessoryForm from "@/domains/Departments/Form"
 
 interface NewDepartmentProps {
 	department: Schema.DepartmentsFormData

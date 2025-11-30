@@ -1,5 +1,4 @@
 import { Tooltip, useMantineTheme } from "@mantine/core"
-import React from "react"
 
 import { Link } from "@/components"
 import { CheckoutIcon } from "@/components/Icons"
@@ -14,7 +13,7 @@ interface CheckoutButtonProps extends Omit<LinkProps, "children"> {
 	tooltipMessage?: string | false | null
 }
 
-const CheckoutButton = ({ href, label, disabled, tooltipMessage, ...props }: CheckoutButtonProps) => {
+export function CheckoutButton({ href, label, disabled, tooltipMessage, ...props }: CheckoutButtonProps) {
 	const { other: { colors: { checkoutButtonColor } } } = useMantineTheme()
 
 	const usedLabel = tooltipMessage || `Checkout${label ? ` ${label}` : ""}`
@@ -40,4 +39,3 @@ const CheckoutButton = ({ href, label, disabled, tooltipMessage, ...props }: Che
 	)
 }
 
-export default CheckoutButton

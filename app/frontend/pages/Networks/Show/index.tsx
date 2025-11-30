@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Section, Menu, Flex, Group, Title, Table, Container, Page, Paper } from "@/components"
 import { EditIcon } from "@/components/Icons"

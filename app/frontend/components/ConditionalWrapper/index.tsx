@@ -7,7 +7,7 @@ interface ConditionalWrapperProps {
 	elseWrapper?: (children: JSX.Element | React.ReactNode) => JSX.Element
 }
 
-const ConditionalWrapper = ({ children, condition, wrapper, elseWrapper }: ConditionalWrapperProps) => {
+export function ConditionalWrapper({ children, condition, wrapper, elseWrapper }: ConditionalWrapperProps) {
 	if(condition) {
 		return wrapper(children)
 	} else if(elseWrapper) {
@@ -16,5 +16,3 @@ const ConditionalWrapper = ({ children, condition, wrapper, elseWrapper }: Condi
 
 	return <>{ children }</>
 }
-
-export default ConditionalWrapper

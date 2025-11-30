@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Group, Title, Menu } from "@/components"
 import { Routes } from "@/lib"

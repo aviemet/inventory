@@ -1,3 +1,4 @@
+import React from "react"
 import { createInertiaApp, router } from "@inertiajs/react"
 import * as ActiveStorage from "@rails/activestorage"
 import dayjs from "dayjs"

@@ -1,5 +1,5 @@
-import { ActionIcon, ActionIconProps, useMantineColorScheme } from "@mantine/core"
 import React from "react"
+import { ActionIcon, ActionIconProps, useMantineColorScheme } from "@mantine/core"
 
 import { SunIcon, MoonStarsIcon } from "@/components/Icons"
 
@@ -11,7 +11,7 @@ interface ToggleColorSchemeButtonProps
 	rightSection?: React.ReactNode
 }
 
-const ToggleColorSchemeButton = ({ leftSection, rightSection, ...props }: ToggleColorSchemeButtonProps) => {
+export function ToggleColorSchemeButton({ leftSection, rightSection, ...props }: ToggleColorSchemeButtonProps) {
 	const { colorScheme, toggleColorScheme } = useMantineColorScheme()
 
 	const iconProps = { size: 18 }
@@ -32,5 +32,3 @@ const ToggleColorSchemeButton = ({ leftSection, rightSection, ...props }: Toggle
 		</ActionIcon>
 	)
 }
-
-export default ToggleColorSchemeButton

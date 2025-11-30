@@ -1,5 +1,6 @@
 import { MantineColor, MantineColorsTuple } from "@mantine/core"
 import { MantineVars } from "@mantine/vanilla-extract"
+import React from "react"
 
 type Colors = MantineVars["colors"]
 

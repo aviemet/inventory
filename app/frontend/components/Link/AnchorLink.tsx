@@ -1,6 +1,6 @@
 import { Link, type InertiaLinkProps } from "@inertiajs/react"
 import { Anchor, type AnchorProps } from "@mantine/core"
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
 
 export interface AnchorLinkProps
 	extends Omit<InertiaLinkProps, "color" | "size" | "span" | "style">,
@@ -8,13 +8,16 @@ export interface AnchorLinkProps
 
 }
 
-const AnchorLink = forwardRef<HTMLAnchorElement, AnchorLinkProps>((
-	props,
+export const AnchorLink = forwardRef<HTMLAnchorElement, AnchorLinkProps>((
+	{ preserveScroll, ...props },
 	ref,
 ) => {
 	return (
-		<Anchor ref={ ref } component={ Link } { ...props } />
+		<Anchor
+			ref={ ref }
+			component={ Link }
+			preserveScroll={ preserveScroll }
+			{ ...props }
+		/>
 	)
 })
-
-export default AnchorLink

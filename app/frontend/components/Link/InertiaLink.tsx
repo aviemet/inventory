@@ -4,7 +4,7 @@ import { type ButtonProps } from "@mantine/core"
 import React, { forwardRef } from "react"
 
 import { Button } from "@/components"
-import AnchorLink, { type AnchorLinkProps } from "@/components/Link/AnchorLink"
+import { AnchorLink, type AnchorLinkProps } from "@/components/Link/AnchorLink"
 import { exclude } from "@/lib/collections"
 
 interface LinkProps extends AnchorLinkProps {
@@ -15,10 +15,22 @@ interface LinkProps extends AnchorLinkProps {
 	visit?: Omit<Visit, "method">
 	buttonProps?: ButtonProps
 	disabled?: boolean
+	preserveScroll?: boolean
 }
 
-const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
-	{ children, href, as = "a", method, visit, buttonProps, style, disabled, ...props },
+export const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
+	{
+		children,
+		href,
+		as = "a",
+		method,
+		visit,
+		buttonProps,
+		style,
+		disabled,
+		preserveScroll,
+		...props
+	},
 	ref,
 ) => {
 	const handleHTTP = (e: React.MouseEvent<Element, MouseEvent>) => {
@@ -66,8 +78,13 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
 	}
 
 	return (
-		<AnchorLink href={ processedHref } ref={ ref } { ...props }>{ children }</AnchorLink>
+		<AnchorLink
+			href={ processedHref }
+			ref={ ref }
+			preserveScroll={ preserveScroll }
+			{ ...props }
+		>
+			{ children }
+		</AnchorLink>
 	)
 })
-
-export default InertiaLinkComponent

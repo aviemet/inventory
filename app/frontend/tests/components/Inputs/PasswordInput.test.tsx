@@ -1,8 +1,7 @@
 import { screen } from "@testing-library/react"
-import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 
-import PasswordInput from "@/components/Inputs/PasswordInput"
+import { PasswordInput } from "@/components/Inputs/PasswordInput"
 import { render } from "@/tests/helpers/utils"
 
 import {

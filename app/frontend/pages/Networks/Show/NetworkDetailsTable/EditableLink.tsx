@@ -1,5 +1,5 @@
 import { ActionIcon, Box } from "@mantine/core"
-import cx from "classnames"
+import clsx from "classnames"
 import React, { useState, useEffect, useRef } from "react"
 
 import { Link, Group } from "@/components"
@@ -99,7 +99,7 @@ const EditableLink = ({ item, ip }: EditableLinkProps) => {
 						onClick={ handleEditButton }
 						color="gray.8"
 						variant="subtle"
-						className={ cx({ editing }, "item-ip-assign-button") }
+						className={ clsx({ editing }, "item-ip-assign-button") }
 					>
 						{ editing ? <CrossIcon size={ 18 } /> : <EditIcon /> }
 					</ActionIcon>

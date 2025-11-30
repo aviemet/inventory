@@ -2,7 +2,7 @@ import { screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi, beforeEach } from "vitest"
 
-import MultiSelect from "@/components/Inputs/MultiSelect"
+import { MultiSelectInput } from "@/components/Inputs/MultiSelect"
 import { render } from "@/tests/helpers/utils"
 
 vi.mock("@inertiajs/react", async() => {
@@ -29,24 +29,24 @@ describe("MultiSelect", () => {
 	})
 
 	it("renders without error", () => {
-		render(<MultiSelect name="test" options={ [] } />)
+		render(<MultiSelectInput name="test" options={ [] } />)
 		const input = screen.getByRole("textbox")
 		expect(input).toBeInTheDocument()
 	})
 
 	it("renders with label when provided", () => {
-		render(<MultiSelect name="test" label="Test Label" options={ [] } />)
+		render(<MultiSelectInput name="test" label="Test Label" options={ [] } />)
 		expect(screen.getByText("Test Label")).toBeInTheDocument()
 	})
 
 	it("renders with id when provided", () => {
-		render(<MultiSelect name="test" id="multiselect-input" options={ [] } />)
+		render(<MultiSelectInput name="test" id="multiselect-input" options={ [] } />)
 		const input = screen.getByRole("textbox")
 		expect(input).toHaveAttribute("id", "multiselect-input-search")
 	})
 
 	it("uses name as id when id is not provided", () => {
-		render(<MultiSelect name="test-multiselect" options={ [] } />)
+		render(<MultiSelectInput name="test-multiselect" options={ [] } />)
 		const input = screen.getByRole("textbox")
 		expect(input).toHaveAttribute("id", "test-multiselect-search")
 	})
@@ -57,7 +57,7 @@ describe("MultiSelect", () => {
 			{ value: "1", label: "Option 1" },
 			{ value: "2", label: "Option 2" },
 		]
-		render(<MultiSelect name="test" options={ options } />)
+		render(<MultiSelectInput name="test" options={ options } />)
 		const input = screen.getByRole("textbox")
 		await user.click(input)
 		await waitFor(() => {
@@ -72,7 +72,7 @@ describe("MultiSelect", () => {
 		const options = [
 			{ value: "1", label: "Option 1" },
 		]
-		render(<MultiSelect name="test" options={ options } onChange={ onChange } />)
+		render(<MultiSelectInput name="test" options={ options } onChange={ onChange } />)
 		const input = screen.getByRole("textbox")
 		await user.click(input)
 		await waitFor(() => {
@@ -83,18 +83,18 @@ describe("MultiSelect", () => {
 	})
 
 	it("handles required prop", () => {
-		render(<MultiSelect name="test" required label="Required Field" options={ [] } />)
+		render(<MultiSelectInput name="test" required label="Required Field" options={ [] } />)
 		expect(screen.getByText("Required Field")).toBeInTheDocument()
 	})
 
 	it("handles disabled state", () => {
-		render(<MultiSelect name="test" disabled options={ [] } />)
+		render(<MultiSelectInput name="test" disabled options={ [] } />)
 		const input = screen.getByRole("textbox")
 		expect(input).toBeDisabled()
 	})
 
 	it("has autoComplete off", () => {
-		render(<MultiSelect name="test" options={ [] } />)
+		render(<MultiSelectInput name="test" options={ [] } />)
 		const input = screen.getByRole("textbox")
 		expect(input).toHaveAttribute("autocomplete", "off")
 	})
@@ -102,7 +102,7 @@ describe("MultiSelect", () => {
 	it("calls router.reload when fetchOnOpen is provided", async() => {
 		const { router } = await import("@inertiajs/react")
 		const user = userEvent.setup()
-		render(<MultiSelect name="test" options={ [] } fetchOnOpen="data" />)
+		render(<MultiSelectInput name="test" options={ [] } fetchOnOpen="data" />)
 		const input = screen.getByRole("textbox")
 		await user.click(input)
 		await waitFor(() => {
@@ -113,7 +113,7 @@ describe("MultiSelect", () => {
 	it("handles onDropdownOpen callback", async() => {
 		const user = userEvent.setup()
 		const onDropdownOpen = vi.fn()
-		render(<MultiSelect name="test" options={ [] } onDropdownOpen={ onDropdownOpen } />)
+		render(<MultiSelectInput name="test" options={ [] } onDropdownOpen={ onDropdownOpen } />)
 		const input = screen.getByRole("textbox")
 		await user.click(input)
 		await waitFor(() => {
@@ -122,7 +122,7 @@ describe("MultiSelect", () => {
 	})
 
 	it("handles wrapper prop", () => {
-		render(<MultiSelect name="test" options={ [] } wrapper={ true } wrapperProps={ { "data-testid": "wrapper" } } />)
+		render(<MultiSelectInput name="test" options={ [] } wrapper={ true } wrapperProps={ { "data-testid": "wrapper" } } />)
 		expect(screen.getByTestId("wrapper")).toBeInTheDocument()
 	})
 })

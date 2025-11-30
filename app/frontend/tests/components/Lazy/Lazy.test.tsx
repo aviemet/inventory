@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 
-import Lazy from "@/components/Lazy"
+import { Lazy } from "@/components"
 import { render } from "@/tests/helpers/utils"
 
 describe("Lazy", () => {

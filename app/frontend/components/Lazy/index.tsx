@@ -8,7 +8,7 @@ interface LazyProps {
 	fallback: React.ReactNode
 }
 
-const Lazy = ({ children, fallback }: LazyProps) => {
+const LazyBase = ({ children, fallback }: LazyProps) => {
 	return (
 		<ErrorBoundary>
 			<Suspense fallback={ fallback }>
@@ -18,6 +18,6 @@ const Lazy = ({ children, fallback }: LazyProps) => {
 	)
 }
 
-Lazy.loadable = loadable
-
-export default Lazy
+export const Lazy = Object.assign(LazyBase, {
+	loadable,
+})

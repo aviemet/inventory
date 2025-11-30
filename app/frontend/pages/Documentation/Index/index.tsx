@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import DocumentationsTable from "../Table"
+import DocumentationsTable from "@/domains/Documentation/Table"
 
 interface DocumentationIndexProps {
 	documentations: Schema.DocumentationsIndex[]

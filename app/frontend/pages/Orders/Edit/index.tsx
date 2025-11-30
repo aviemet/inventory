@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import OrderForm from "../Form"
+import OrderForm from "@/domains/Orders/Form"
 
 interface UpdateOrderProps {
 	order: Schema.OrdersEdit

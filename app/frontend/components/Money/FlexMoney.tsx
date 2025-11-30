@@ -1,5 +1,4 @@
 import { Group } from "@mantine/core"
-import React from "react"
 
 import { type Money } from "@/types"
 
@@ -29,7 +28,7 @@ const getParts = (formatter: Intl.NumberFormat, value: number | Money | null) =>
 	}
 }
 
-const FlexMoney = ({ children, formatter, accounting }: FlexMoneyProps) => {
+export function FlexMoney({ children, formatter, accounting }: FlexMoneyProps) {
 	const { symbol, value, formattedValue } = getParts(formatter, children)
 
 	return (
@@ -40,6 +39,3 @@ const FlexMoney = ({ children, formatter, accounting }: FlexMoneyProps) => {
 		</Group>
 	)
 }
-
-
-export default FlexMoney

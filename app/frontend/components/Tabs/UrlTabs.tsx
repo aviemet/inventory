@@ -7,7 +7,7 @@ import { coerceArray } from "@/lib"
 
 import { TabsComponentProps } from "."
 
-const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: TabsComponentProps) => {
+export function UrlTabs({ children, onChange, defaultValue, dependencies, ...props }: TabsComponentProps) {
 	const navigateTab = (value: string | null, options?: VisitOptions) => {
 		let only: string[] = []
 		if(value && dependencies?.[value]) {
@@ -28,7 +28,6 @@ const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: T
 		return url.searchParams.get("tab")
 	}, [window.location.href])
 
-	// Handle direct navigation to tabbed page
 	useEffect(() => {
 		if(!activeTab() && defaultValue) {
 			navigateTab(defaultValue, { replace: true })
@@ -57,5 +56,3 @@ const UrlTabs = ({ children, onChange, defaultValue, dependencies, ...props }: T
 		</Tabs>
 	)
 }
-
-export default UrlTabs

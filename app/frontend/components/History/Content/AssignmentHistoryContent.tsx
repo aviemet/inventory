@@ -2,8 +2,7 @@ import { Text } from "@mantine/core"
 
 import { formatter } from "@/lib"
 
-const AssignmentHistoryContent = ({ activity }: { activity: Schema.Activity }) => {
-
+export function AssignmentHistoryContent({ activity }: { activity: Schema.Activity }) {
 	return (
 		<>
 			{ activity.created_at && <Text size="sm" c="dimmed">
@@ -12,5 +11,3 @@ const AssignmentHistoryContent = ({ activity }: { activity: Schema.Activity }) =
 		</>
 	)
 }
-
-export default AssignmentHistoryContent

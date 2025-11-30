@@ -1,9 +1,10 @@
-import useStateMachine, { t } from "@cassiozen/usestatemachine"
 import { Avatar, ButtonProps, HoverCard, Text, useMantineTheme } from "@mantine/core"
+import { useMachine } from "@xstate/react"
 import axios from "axios"
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import { InfoCircle } from "tabler-icons-react"
 import { type HTTPVerb } from "use-inertia-form"
+import { setup, assign } from "xstate"
 
 import { Button, Group } from "@/components"
 import { CheckIcon, CrossIcon } from "@/components/Icons"
@@ -13,6 +14,11 @@ type StateMachineContext = {
 	icon: React.ReactNode
 	color: string
 }
+
+type StateMachineEvents =
+	| { type: "requesting" }
+	| { type: "success" }
+	| { type: "error" }
 
 interface TestResponseButtonProps extends ButtonProps {
 	children?: string
@@ -25,68 +31,73 @@ interface TestResponseButtonProps extends ButtonProps {
  * Generic component for testing the response from a remote endpoint
  * Displays success if the endpoint returns a successful response, error upon any errors *
  */
-const TestResponseButton = ({ children = "Test", endpoint, method = "get", data, ...props }: TestResponseButtonProps) => {
+export function TestResponseButton({ children = "Test", endpoint, method = "get", data, ...props }: TestResponseButtonProps) {
 	const theme = useMantineTheme()
 
 	const [errorMessage, setErrorMessage] = useState("")
 
-	const [requestState, setRequestState] = useStateMachine({
-		schema: {
-			context: t<StateMachineContext>,
-		},
-		initial: "inactive",
-		context: {
-			icon: <></>,
-			color: theme.primaryColor,
-		},
-		states: {
-			inactive: {
-				on: { requesting: "requesting" },
-				effect({ context, event, setContext }) {
-					setErrorMessage("")
-					setContext(() => ({
-						icon: <></>,
-						color: theme.primaryColor,
-					}))
+	const testMachine = useMemo(() => {
+		return setup({
+			types: {
+				context: {} as StateMachineContext,
+				events: {} as StateMachineEvents,
+			},
+		}).createMachine({
+			id: "testResponse",
+			initial: "inactive",
+			context: {
+				icon: <></>,
+				color: theme.primaryColor,
+			},
+			states: {
+				inactive: {
+					on: {
+						requesting: {
+							target: "requesting",
+							actions: assign({
+								icon: () => <></>,
+								color: () => theme.primaryColor,
+							}),
+						},
+					},
+				},
+				requesting: {
+					entry: assign({
+						icon: () => <></>,
+						color: () => theme.primaryColor,
+					}),
+					on: {
+						success: "success",
+						error: "error",
+					},
+				},
+				error: {
+					entry: assign({
+						icon: () => <CrossIcon />,
+						color: () => "red",
+					}),
+					on: {
+						requesting: "requesting",
+					},
+				},
+				success: {
+					entry: assign({
+						icon: () => <CheckIcon />,
+						color: () => "green",
+					}),
+					on: {
+						requesting: "requesting",
+					},
 				},
 			},
-			requesting: {
-				on: {
-					success: "success",
-					error: "error",
-				},
-				effect({ setContext }) {
-					setErrorMessage("")
-					setContext(() => ({
-						icon: <></>,
-						color: theme.primaryColor,
-					}))
-				},
-			},
-			error: {
-				on: { requesting: "requesting" },
-				effect({ setContext }) {
-					setContext(() => ({
-						icon: <CrossIcon />,
-						color: "red",
-					}))
-				},
-			},
-			success: {
-				on: { requesting: "requesting" },
-				effect({ setContext }) {
-					setErrorMessage("")
-					setContext(() => ({
-						icon:  <CheckIcon />,
-						color: "green",
-					}))
-				},
-			},
-		},
-	})
+		})
+	}, [theme.primaryColor])
+
+	const [state, send] = useMachine(testMachine)
 
 	const handleClick = () => {
-		setRequestState("requesting")
+		setErrorMessage("")
+		send({ type: "requesting" })
 		axios.request({
 			method,
 			url: endpoint,
@@ -94,21 +105,24 @@ const TestResponseButton = ({ children = "Test", endpoint, method = "get", data,
 		})
 			.then(response => {
 				if(response.data.success) {
-					setRequestState("success")
+					setErrorMessage("")
+					send({ type: "success" })
 				} else {
-					setRequestState("error")
 					setErrorMessage(response.data.message)
+					send({ type: "error" })
 				}
 			})
 			.catch(reason => {
-				setRequestState("error")
 				setErrorMessage(reason)
+				send({ type: "error" })
 			})
 	}
 
+	const context = state.context
+
 	return (
 		<Group>
-			{ requestState.value === "error" &&
+			{ state.value === "error" &&
 				<HoverCard>
 					<HoverCard.Target>
 						<Avatar><InfoCircle /></Avatar>
@@ -121,9 +135,9 @@ const TestResponseButton = ({ children = "Test", endpoint, method = "get", data,
 			}
 			<Button
 				onClick={ handleClick }
-				leftSection={ requestState.context.icon }
-				color={ requestState.context.color }
-				loading={ requestState.value === "requesting" }
+				leftSection={ context.icon }
+				color={ context.color }
+				loading={ state.value === "requesting" }
 				{ ...props }
 			>
 				{ children }
@@ -131,5 +145,3 @@ const TestResponseButton = ({ children = "Test", endpoint, method = "get", data,
 		</Group>
 	)
 }
-
-export default TestResponseButton

@@ -16,7 +16,7 @@ interface ExternalLinkProps
 	disabled?: boolean
 }
 
-const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>((
+export const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>((
 	{ children, href, as, className, disabled = false, ...props },
 	ref,
 ) => {
@@ -36,5 +36,3 @@ const ExternalLink = forwardRef<HTMLAnchorElement, ExternalLinkProps>((
 		</Anchor>
 	)
 })
-
-export default ExternalLink

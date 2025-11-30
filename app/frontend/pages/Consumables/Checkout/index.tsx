@@ -1,4 +1,3 @@
-import React from "react"
 import { type UseFormProps } from "use-inertia-form"
 
 import { Title, Page, Section } from "@/components"

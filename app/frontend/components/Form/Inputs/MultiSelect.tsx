@@ -1,13 +1,12 @@
 import { type ComboboxData } from "@mantine/core"
-import React from "react"
 import { NestedObject, UseFormProps, useInertiaInput } from "use-inertia-form"
 
 import { ConditionalWrapper } from "@/components"
-import MultiSelect, { type MultiSelectInputProps } from "@/components/Inputs/MultiSelect"
+import { MultiSelectInput as MultiSelect, type MultiSelectInputProps } from "@/components/Inputs/MultiSelect"
 import { exclude, isUnset } from "@/lib"
 
 import { coerceArray } from "../../../lib/collections"
-import Field from "../components/Field"
+import { Field } from "../components/Field"
 
 import { type InputConflicts, type BaseFormInputProps } from "."
 
@@ -26,7 +25,7 @@ export interface FormMultiSelectProps<TForm extends NestedObject = NestedObject>
 	onOptionSubmit?: (values: string[], options: ComboboxData, form: UseFormProps<TForm>) => void
 }
 
-const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
+export function FormMultiSelect<TForm extends NestedObject = NestedObject>(
 	{
 		options = [],
 		label,
@@ -48,7 +47,7 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 		clearErrorsOnChange,
 		...props
 	}: FormMultiSelectProps<TForm>,
-) => {
+) {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string[], TForm>({
 		name,
 		model,
@@ -102,7 +101,6 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 			) }
 		>
 			<MultiSelect
-				// Add "search" suffix to prevent password managers trying to autofill dropdowns
 				id={ `${id || inputId}-search` }
 				autoComplete="off"
 				name={ inputName }
@@ -123,5 +121,3 @@ const MultiSelectComponent = <TForm extends NestedObject = NestedObject>(
 		</ConditionalWrapper>
 	)
 }
-
-export default MultiSelectComponent

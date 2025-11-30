@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it } from "vitest"
 
-import CheckoutButton from "@/components/Button/CheckoutButton"
+import { CheckoutButton } from "@/components/Button"
 import { render } from "@/tests/helpers/utils"
 
 describe("CheckoutButton", () => {

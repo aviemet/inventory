@@ -2,7 +2,7 @@ import { showNotification } from "@mantine/notifications"
 import { waitFor } from "@testing-library/react"
 import { describe, expect, it, vi, beforeEach } from "vitest"
 
-import Flash from "@/components/Flash"
+import { Flash } from "@/components"
 import { mockUsePage } from "@/tests/helpers/mocks"
 import { render } from "@/tests/helpers/utils"
 

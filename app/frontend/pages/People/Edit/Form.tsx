@@ -1,5 +1,4 @@
 import { Fieldset } from "@mantine/core"
-import React from "react"
 import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
 
 import { Grid, Section } from "@/components"

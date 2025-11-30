@@ -5,7 +5,7 @@ import { TableSectionContextProvider } from "./TableContext"
 
 interface TableFooterProps extends TableTfootProps {}
 
-const Footer = forwardRef<HTMLTableSectionElement, TableFooterProps>(({ children, ...props }, ref) => {
+export const Footer = forwardRef<HTMLTableSectionElement, TableFooterProps>(({ children, ...props }, ref) => {
 	return (
 		<TableSectionContextProvider value={ { section: "footer" } }>
 			<Table.Tfoot { ...props } ref={ ref }>
@@ -14,5 +14,3 @@ const Footer = forwardRef<HTMLTableSectionElement, TableFooterProps>(({ children
 		</TableSectionContextProvider>
 	)
 })
-
-export default Footer

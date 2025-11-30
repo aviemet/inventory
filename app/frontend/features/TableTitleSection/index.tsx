@@ -1,6 +1,6 @@
+import React from "react"
 import { router } from "@inertiajs/react"
 import { Box, Title, Group, Divider } from "@mantine/core"
-import React from "react"
 
 import { Menu } from "@/components"
 import { TrashIcon, type Icon } from "@/components/Icons"

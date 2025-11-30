@@ -2,7 +2,7 @@ import { screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 
-import AutocompleteInput from "@/components/Inputs/AutocompleteInput"
+import { AutocompleteInput } from "@/components/Inputs/AutocompleteInput"
 import { render } from "@/tests/helpers/utils"
 
 describe("AutocompleteInput", () => {

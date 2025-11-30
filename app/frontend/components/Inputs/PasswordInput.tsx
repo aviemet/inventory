@@ -1,14 +1,17 @@
-import { PasswordInput, type PasswordInputProps as MantinePasswordInputProps } from "@mantine/core"
-import React, { forwardRef } from "react"
+import {
+	PasswordInput as MantinePasswordInput,
+	type PasswordInputProps as MantinePasswordInputProps,
+} from "@mantine/core"
+import { forwardRef } from "react"
 
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { type BaseInputProps } from "."
 
 export interface PasswordInputProps extends MantinePasswordInputProps, BaseInputProps {}
 
-const PasswordInputComponent = forwardRef<HTMLInputElement, PasswordInputProps>((
+export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((
 	{ label, name, required = false, id, size = "md", wrapper, wrapperProps, ...props },
 	ref,
 ) => {
@@ -19,7 +22,7 @@ const PasswordInputComponent = forwardRef<HTMLInputElement, PasswordInputProps>(
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
-			<PasswordInput
+			<MantinePasswordInput
 				id={ inputId }
 				name={ name }
 				required={ required }
@@ -30,5 +33,3 @@ const PasswordInputComponent = forwardRef<HTMLInputElement, PasswordInputProps>(
 		</InputWrapper>
 	)
 })
-
-export default PasswordInputComponent

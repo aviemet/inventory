@@ -1,8 +1,7 @@
 import { screen } from "@testing-library/react"
-import userEvent from "@testing-library/user-event"
 import { describe, expect, it } from "vitest"
 
-import NumberInput from "@/components/Inputs/NumberInput"
+import { NumberInput } from "@/components/Inputs/NumberInput"
 import { render } from "@/tests/helpers/utils"
 
 import {

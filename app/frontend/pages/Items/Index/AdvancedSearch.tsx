@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Button, Box, Group, Flex, Link } from "@/components"
 import { CrossIcon, SearchIcon } from "@/components/Icons"

@@ -1,8 +1,8 @@
+import React from "react"
 import { router } from "@inertiajs/react"
 import { Button } from "@mantine/core"
 import axios from "axios"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Menu } from "@/components"
 import { ColumnsIcon } from "@/components/Icons"
@@ -14,7 +14,7 @@ import { usePageProps } from "@/lib/hooks"
 import * as classes from "../Table.css"
 import { useTableContext } from "../TableContext"
 
-const ColumnPicker = () => {
+export function ColumnPicker() {
 	const { auth: { user } } = usePageProps()
 	const { tableState: { hideable, columns, model } } = useTableContext()
 
@@ -39,7 +39,7 @@ const ColumnPicker = () => {
 	return (
 		<Menu closeOnItemClick={ false } position="bottom-end">
 			<Menu.Target>
-				<Button size="md" p="xs" className={ cx(classes.columnPickerButton) }>
+				<Button size="md" p="xs" className={ clsx(classes.columnPickerButton) }>
 					<ColumnsIcon size={ 24 } />
 				</Button>
 			</Menu.Target>
@@ -60,5 +60,3 @@ const ColumnPicker = () => {
 		</Menu>
 	)
 }
-
-export default ColumnPicker

@@ -1,9 +1,8 @@
 import { isEmpty } from "lodash"
-import React from "react"
 
 import { Select as FormSelect } from "@/components/Form"
 import { Routes } from "@/lib"
-import ModelsForm from "@/pages/Models/Form"
+import ModelsForm from "@/domains/Models/Form"
 import { useGetModelsAsOptions } from "@/queries/models"
 
 import { type FormAsyncDropdown } from ".."

@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import NetworksTable from "../Table"
+import NetworksTable from "@/domains/Networks/Table"
 
 interface NetworksIndexProps {
 	networks: Schema.NetworksIndex[]

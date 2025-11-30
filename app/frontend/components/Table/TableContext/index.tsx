@@ -2,16 +2,16 @@ import React, { useReducer } from "react"
 
 import { createContext } from "@/lib/hooks"
 
-import StatePreservingRowUpdater from "./StatePreservingRowUpdater"
-
 export * from "./tableSectionContext"
 
 export type TableRowData = { id?: unknown } | { [key: string]: unknown }
 
+import { StatePreservingRowUpdater } from "./StatePreservingRowUpdater"
+
 /**
  * Main Table Context
  */
-interface TableState {
+interface TableState<T extends TableRowData = TableRowData> {
 	/**
 	 * Name of the ActiveRecord model being tabularized.
 	 * Used to limit Inertia props reload using `only`, needs to match the incoming prop on the Component to be effective.
@@ -20,36 +20,53 @@ interface TableState {
 	model?: string
 	selectable: boolean
 	pagination?: Schema.Pagination
-	rows?: readonly TableRowData[]
+	rows?: readonly T[]
 	columns: { hideable: string, label: string }[]
 	selected: Set<string>
 	hideable: boolean
 	searching: boolean
 }
 
-interface TableContextProviderProps extends
-	Partial<Pick<TableState, "selectable" | "pagination" | "rows" | "hideable" | "model">> {
+interface TableContextProviderProps<T extends TableRowData = TableRowData> extends
+	Partial<Pick<TableState<T>, "selectable" | "pagination" | "rows" | "hideable" | "model">> {
 	children: React.ReactNode
 }
 
-interface TableContextValues {
-	tableState: TableState
+interface TableContextValues<T extends TableRowData = TableRowData> {
+	tableState: TableState<T>
 	setTableState: Function
 }
 
-const [useTableContext, TableContextProvider] = createContext<TableContextValues>()
+const [useTableContextBase, TableContextProvider] = createContext<TableContextValues<TableRowData>>()
+
+function useTableContext<T extends TableRowData = TableRowData>(): TableContextValues<T>
+function useTableContext<T extends TableRowData = TableRowData>(error: false): TableContextValues<T> | null
+function useTableContext<T extends TableRowData = TableRowData>(error = true): TableContextValues<T> | null {
+	const context = useTableContextBase(error)
+	if(!context) {
+		return null
+	}
+	return {
+		tableState: {
+			...context.tableState,
+			rows: context.tableState.rows as readonly T[] | undefined,
+		},
+		setTableState: context.setTableState,
+	}
+}
+
 export { useTableContext }
 
-const TableProvider = ({
+export function TableProvider<T extends TableRowData = TableRowData>({
 	children,
 	selectable = false,
 	pagination,
 	rows = [],
 	hideable = true,
 	model,
-}: TableContextProviderProps) => {
+}: TableContextProviderProps<T>) {
 	const [tableState, setTableState] = useReducer(
-		(tableState: TableState, newTableState: Partial<TableState>) => {
+		(tableState: TableState<T>, newTableState: Partial<TableState<T>>) => {
 			return ({
 				...tableState,
 				...newTableState,
@@ -67,14 +84,19 @@ const TableProvider = ({
 		},
 	)
 
+	const contextValue: TableContextValues<TableRowData> = {
+		tableState: {
+			...tableState,
+			rows: tableState.rows,
+		},
+		setTableState,
+	}
+
 	return (
-		<TableContextProvider value={ { tableState, setTableState } }>
+		<TableContextProvider value={ contextValue }>
 			<StatePreservingRowUpdater rows={ rows } pagination={ pagination }>
 				<>{ children }</>
 			</StatePreservingRowUpdater>
 		</TableContextProvider>
 	)
 }
-
-
-export default TableProvider

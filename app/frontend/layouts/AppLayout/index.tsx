@@ -1,5 +1,5 @@
 import { Box, useMantineTheme } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useEffect } from "react"
 
 import { AppShell } from "@/components"
@@ -45,7 +45,7 @@ const AppLayout = ({ children }: LayoutProps) => {
 			<Sidebar />
 			<Footer />
 			<AppShell.Main role="main">
-				<Box className={ cx(classes.wrapper) } p="xs">
+				<Box className={ clsx(classes.wrapper) } p="xs">
 					{ children }
 				</Box>
 			</AppShell.Main>

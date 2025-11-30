@@ -3,15 +3,15 @@ import React, { forwardRef } from "react"
 
 import { usePageProps } from "@/lib/hooks"
 
-import RowCheckbox from "./RowCheckbox"
+import { RowCheckbox } from "./RowCheckbox"
 import { useTableContext } from "../TableContext"
 
 import { RowBaseProps } from "./index"
 
 
-interface RowInContextProps extends RowBaseProps {}
+interface BodyRowProps extends RowBaseProps {}
 
-const RowInContext = forwardRef<HTMLTableRowElement, RowInContextProps>((
+export const BodyRow = forwardRef<HTMLTableRowElement, BodyRowProps>((
 	{ children, name, rows, selectable, selected, ...props },
 	ref,
 ) => {
@@ -41,5 +41,3 @@ const RowInContext = forwardRef<HTMLTableRowElement, RowInContextProps>((
 		</Table.Tr>
 	)
 })
-
-export default RowInContext

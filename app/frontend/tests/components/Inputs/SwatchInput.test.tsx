@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 
-import SwatchInput from "@/components/Inputs/SwatchInput"
+import { SwatchInput } from "@/components/Inputs/SwatchInput"
 import { render } from "@/tests/helpers/utils"
 
 describe("SwatchInput", () => {
@@ -56,16 +56,5 @@ describe("SwatchInput", () => {
 		render(<SwatchInput name="test" />)
 		const swatches = screen.getAllByRole("button")
 		expect(swatches.length).toBeGreaterThan(0)
-	})
-
-	it("handles wrapper prop", () => {
-		render(<SwatchInput name="test" wrapper={ true } wrapperProps={ { "data-testid": "wrapper" } } />)
-		expect(screen.getByTestId("wrapper")).toBeInTheDocument()
-	})
-
-	it("handles wrapperProps", () => {
-		render(<SwatchInput name="test" wrapperProps={ { "data-testid": "wrapper", "data-custom": "value" } } />)
-		const wrapper = screen.getByTestId("wrapper")
-		expect(wrapper).toHaveAttribute("data-custom", "value")
 	})
 })

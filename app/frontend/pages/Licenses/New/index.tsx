@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import LicenseForm from "../Form"
+import LicenseForm from "@/domains/Licenses/Form"
 
 interface NewLicenseProps {
 	license: Schema.LicensesFormData

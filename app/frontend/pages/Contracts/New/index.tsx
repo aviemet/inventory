@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import ContractForm from "../Form"
+import ContractForm from "@/domains/Contracts/Form"
 
 interface NewContractProps {
 	contract: Schema.ContractsFormData

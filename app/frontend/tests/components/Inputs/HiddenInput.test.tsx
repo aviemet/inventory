@@ -1,7 +1,6 @@
-import { screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 
-import HiddenInput from "@/components/Inputs/HiddenInput"
+import { HiddenInput } from "@/components/Inputs/HiddenInput"
 import { render } from "@/tests/helpers/utils"
 
 describe("HiddenInput", () => {

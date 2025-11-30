@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 
-import SegmentedControl from "@/components/Inputs/SegmentedControl"
+import { SegmentedControl } from "@/components/Inputs/SegmentedControl"
 import { render } from "@/tests/helpers/utils"
 
 describe("SegmentedControl", () => {

@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react"
-import { describe, expect, it, vi } from "vitest"
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 import { ErrorBoundary } from "@/components/Error"
 import { render } from "@/tests/helpers/utils"
@@ -12,6 +12,16 @@ const ThrowError = ({ shouldThrow }: { shouldThrow: boolean }) => {
 }
 
 describe("ErrorBoundary", () => {
+	let consoleErrorSpy: ReturnType<typeof vi.spyOn>
+
+	beforeEach(() => {
+		consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {})
+	})
+
+	afterEach(() => {
+		consoleErrorSpy.mockRestore()
+	})
+
 	it("renders children when no error occurs", () => {
 		render(
 			<ErrorBoundary>
@@ -22,8 +32,6 @@ describe("ErrorBoundary", () => {
 	})
 
 	it("renders ErrorFallback when error occurs", () => {
-		const consoleError = vi.spyOn(console, "error").mockImplementation(() => {})
-
 		render(
 			<ErrorBoundary>
 				<ThrowError shouldThrow={ true } />
@@ -32,12 +40,9 @@ describe("ErrorBoundary", () => {
 
 		expect(screen.getByRole("alert")).toBeInTheDocument()
 		expect(screen.getByText("Something went wrong")).toBeInTheDocument()
-
-		consoleError.mockRestore()
 	})
 
 	it("calls onError callback when error occurs", () => {
-		const consoleError = vi.spyOn(console, "error").mockImplementation(() => {})
 		const onError = vi.fn()
 
 		render(
@@ -47,12 +52,9 @@ describe("ErrorBoundary", () => {
 		)
 
 		expect(onError).toHaveBeenCalled()
-
-		consoleError.mockRestore()
 	})
 
 	it("calls onReset callback when error is reset", () => {
-		const consoleError = vi.spyOn(console, "error").mockImplementation(() => {})
 		const onReset = vi.fn()
 
 		render(
@@ -65,12 +67,9 @@ describe("ErrorBoundary", () => {
 		resetButton.click()
 
 		expect(onReset).toHaveBeenCalled()
-
-		consoleError.mockRestore()
 	})
 
 	it("accepts custom fallback component", () => {
-		const consoleError = vi.spyOn(console, "error").mockImplementation(() => {})
 		const CustomFallback = () => <div>Custom error fallback</div>
 
 		render(
@@ -80,7 +79,5 @@ describe("ErrorBoundary", () => {
 		)
 
 		expect(screen.getByText("Custom error fallback")).toBeInTheDocument()
-
-		consoleError.mockRestore()
 	})
 })

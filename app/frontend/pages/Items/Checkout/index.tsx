@@ -1,5 +1,4 @@
 import { omit } from "lodash"
-import React from "react"
 
 import { Box, Title, Page, Section, Table } from "@/components"
 import { DateTimeInput, Form, TextInput, Submit, Textarea } from "@/components/Form"

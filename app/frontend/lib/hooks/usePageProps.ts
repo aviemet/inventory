@@ -12,8 +12,6 @@ export interface SharedInertiaProps extends PageProps {
 	errors: Errors & ErrorBag
 }
 
-const usePageProps = () => {
+export function usePageProps() {
 	return usePage<SharedInertiaProps>().props
 }
-
-export default usePageProps

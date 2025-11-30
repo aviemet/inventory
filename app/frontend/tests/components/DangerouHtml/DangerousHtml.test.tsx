@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 
-import DangerousHtml from "@/components/DangerousHtml"
+import { DangerousHtml } from "@/components"
 import { render } from "@/tests/helpers/utils"
 
 describe("DangerousHtml", () => {

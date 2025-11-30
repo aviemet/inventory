@@ -1,10 +1,9 @@
-import React from "react"
 
 import { Section } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
-import AccessoriesTable from "@/pages/Accessories/Table"
+import AccessoriesTable from "@/domains/Accessories/Table"
 import { type PaginatedModel } from "@/types/PaginatedModel"
 
 interface DetailsProps {

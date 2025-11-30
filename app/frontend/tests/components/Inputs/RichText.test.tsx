@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 
-import RichText from "@/components/Inputs/RichText"
+import { RichText } from "@/components/Inputs/RichText"
 import { render } from "@/tests/helpers/utils"
 
 describe("RichText", () => {

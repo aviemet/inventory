@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 
-import Textarea from "@/components/Inputs/Textarea"
+import { Textarea } from "@/components/Inputs/Textarea"
 import { render } from "@/tests/helpers/utils"
 
 describe("Textarea", () => {

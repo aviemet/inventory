@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Title, Link, List, Icon, Box, Group } from "@/components"
 import { CheckinButton } from "@/components/Button"

@@ -1,5 +1,4 @@
 import { Button, Code, Stack, Text, Title } from "@mantine/core"
-import React from "react"
 import { type FallbackProps } from "react-error-boundary"
 
 interface ErrorFallbackProps extends Omit<FallbackProps, "resetErrorBoundary"> {

@@ -4,8 +4,8 @@ import React, { useEffect, useState, forwardRef } from "react"
 import { CalendarIcon } from "@/components/Icons"
 import { isUnset } from "@/lib"
 
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { type DateInputValue, type BaseInputProps } from "."
 
@@ -21,7 +21,7 @@ export interface DateInputProps
 	onChange?: (date: DateInputValue) => void
 }
 
-const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
+export const DateInput = forwardRef<HTMLButtonElement, DateInputProps>((
 	{
 		label,
 		id,
@@ -94,6 +94,3 @@ const DateInputComponent = forwardRef<HTMLButtonElement, DateInputProps>((
 		</InputWrapper>
 	)
 })
-
-export default DateInputComponent
-

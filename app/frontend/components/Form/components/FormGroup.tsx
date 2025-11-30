@@ -1,9 +1,10 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import { DivProps } from "react-html-props"
 import { NestedFields } from "use-inertia-form"
 
 import { ConditionalWrapper, Grid, Box } from "@/components"
+
+import { useFormFormat } from "../Form"
 
 interface FormGroupProps extends DivProps {
 	legend?: string
@@ -12,13 +13,16 @@ interface FormGroupProps extends DivProps {
 	grid?: boolean
 }
 
-const FormGroup = ({ children, legend, outline = true, model, grid = true }: FormGroupProps) => {
+export function FormGroup({ children, legend, outline = true, model, grid = true }: FormGroupProps) {
+	const { disableFormatting } = useFormFormat()
+	const shouldUseGrid = grid && !disableFormatting
+
 	return (
 		<ConditionalWrapper
-			condition={ grid }
+			condition={ shouldUseGrid }
 			wrapper={ children => (
 				<Grid.Col>
-					<Grid component="fieldset" className={ cx({ outline }) } style={ {
+					<Grid component="fieldset" className={ clsx({ outline }) } style={ {
 						marginTop: legend ? "0.5rem" : undefined,
 					} }>
 						{ children }
@@ -26,7 +30,7 @@ const FormGroup = ({ children, legend, outline = true, model, grid = true }: For
 				</Grid.Col>
 			) }
 			elseWrapper={ children => (
-				<Box component="fieldset" className={ cx({ outline }) } style={ {
+				<Box component="fieldset" className={ clsx({ outline }) } style={ {
 					marginTop: legend ? "0.5rem" : undefined,
 				} }>
 					{ children }
@@ -45,5 +49,3 @@ const FormGroup = ({ children, legend, outline = true, model, grid = true }: For
 		</ConditionalWrapper>
 	)
 }
-
-export default FormGroup

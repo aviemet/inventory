@@ -1,21 +1,36 @@
-import React from "react"
-
-import { Lazy, Page, Table } from "@/components"
+import { Page, Table } from "@/components"
+import AccessoriesTable from "@/domains/Accessories/Table"
+import ComponentsTable from "@/domains/Components/Table"
+import ConsumablesTable from "@/domains/Consumables/Table"
+import ContractsTable from "@/domains/Contracts/Table"
+import ItemsTable from "@/domains/Items/Table"
+import LicensesTable from "@/domains/Licenses/Table"
 import { TableTitleSection } from "@/features"
 import { Routes } from "@/lib"
 
-type Record = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
+type CategoryRecord = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
 
 interface ShowCategoryProps {
 	category: Schema.CategoriesShow
-	records: Record[]
+	records: CategoryRecord[]
 	pagination: Schema.Pagination
 }
+
+type TableComponentProps = React.ComponentProps<typeof ItemsTable>
+
+const tableComponentMap: { [key: string]: React.ComponentType<TableComponentProps> } = {
+	Accessories: AccessoriesTable,
+	Components: ComponentsTable,
+	Consumables: ConsumablesTable,
+	Contracts: ContractsTable,
+	Items: ItemsTable,
+	Licenses: LicensesTable,
+} as const
 
 const Show = ({ category, records, pagination }: ShowCategoryProps) => {
 	const title = `Category: ${category.categorizable_type} - ${category.name}`
 
-	const LazyTableComponent = Lazy.loadable(() => import(`../../${category.plural}/Table.tsx`))
+	const TableComponent = tableComponentMap[category.plural]
 
 	return (
 		<Page title={ title } breadcrumbs={ [
@@ -40,9 +55,7 @@ const Show = ({ category, records, pagination }: ShowCategoryProps) => {
 						<Table.SearchInput />
 					</TableTitleSection>
 
-					<Lazy fallback={ <div>Loading</div> }>
-						<LazyTableComponent />
-					</Lazy>
+					{ TableComponent && <TableComponent /> }
 
 					<Table.Pagination />
 

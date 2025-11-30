@@ -1,7 +1,8 @@
 import { screen } from "@testing-library/react"
 import { describe, expect, it, beforeEach, afterEach } from "vitest"
 
-import Breadcrumbs, { type Breadcrumb } from "@/components/Breadcrumbs"
+import { Breadcrumbs } from "@/components"
+import { Breadcrumb } from "@/components/Breadcrumbs"
 import { render } from "@/tests/helpers/utils"
 
 describe("Breadcrumbs", () => {

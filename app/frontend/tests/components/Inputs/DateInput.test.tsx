@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
 
-import DateInput from "@/components/Inputs/DateInput"
+import { DateInput } from "@/components/Inputs/DateInput"
 import { render } from "@/tests/helpers/utils"
 
 describe("DateInput", () => {

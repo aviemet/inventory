@@ -5,7 +5,7 @@ import { TableSectionContextProvider, useTableContext } from "./TableContext"
 
 interface TableBody extends TableTbodyProps {}
 
-const Body = forwardRef<HTMLTableSectionElement, TableBody>(({ children, ...props }, ref) => {
+export const Body = forwardRef<HTMLTableSectionElement, TableBody>(({ children, ...props }, ref) => {
 	const tableState = useTableContext(false)
 
 	if(tableState === null) {
@@ -29,5 +29,3 @@ const Body = forwardRef<HTMLTableSectionElement, TableBody>(({ children, ...prop
 		</TableSectionContextProvider>
 	)
 })
-
-export default Body

@@ -1,5 +1,5 @@
-import { ActionIcon, Menu, type MenuTargetProps as MantineMenuTargetProps } from "@mantine/core"
 import React from "react"
+import { ActionIcon, Menu, type MenuTargetProps as MantineMenuTargetProps } from "@mantine/core"
 
 import { DotsIcon } from "@/components/Icons"
 
@@ -10,7 +10,7 @@ interface MenuTargetProps extends Omit<MantineMenuTargetProps, "children"> {
 	color?: string
 }
 
-const MenuTarget = ({ children, icon, variant, color, ...props }: MenuTargetProps) => {
+export function MenuTarget({ children, icon, variant, color, ...props }: MenuTargetProps) {
 	if(!children) {
 		return (
 			<Menu.Target { ...props }>
@@ -27,5 +27,3 @@ const MenuTarget = ({ children, icon, variant, color, ...props }: MenuTargetProp
 		</Menu.Target>
 	)
 }
-
-export default MenuTarget

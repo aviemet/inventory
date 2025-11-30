@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import ManufacturerForm from "../Form"
+import ManufacturerForm from "@/domains/Manufacturers/Form"
 
 interface NewManufacturerProps {
 	manufacturer: Schema.ManufacturersFormData

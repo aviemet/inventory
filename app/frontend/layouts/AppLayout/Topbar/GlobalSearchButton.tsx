@@ -1,6 +1,5 @@
 import { useMantineColorScheme } from "@mantine/core"
 import { spotlight } from "@mantine/spotlight"
-import React from "react"
 
 import { ActionIcon, Tooltip, Kbd } from "@/components"
 import { SearchIcon } from "@/components/Icons"

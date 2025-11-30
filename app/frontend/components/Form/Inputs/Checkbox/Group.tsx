@@ -1,5 +1,4 @@
 import { type CheckboxGroupProps } from "@mantine/core"
-import React from "react"
 import { useInertiaInput } from "use-inertia-form"
 
 import { Checkbox } from "@/components/Inputs"
@@ -9,12 +8,12 @@ export interface FormCheckboxGroupProps extends CheckboxGroupProps {
 	model?: string
 }
 
-const FormCheckboxGroup = ({
+export function FormCheckboxGroup({
 	children,
 	name,
 	model,
 	...props
-}: FormCheckboxGroupProps) => {
+}: FormCheckboxGroupProps) {
 	const { value, setValue } = useInertiaInput<string[]>({ name, model })
 
 	const handleValueChange = (vals: string[]) => {
@@ -31,5 +30,3 @@ const FormCheckboxGroup = ({
 		</Checkbox.Group>
 	)
 }
-
-export default FormCheckboxGroup

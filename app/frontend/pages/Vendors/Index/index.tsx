@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import VendorsTable from "../Table"
+import VendorsTable from "@/domains/Vendors/Table"
 
 interface VendorsIndexProps {
 	vendors: Schema.VendorsIndex[]

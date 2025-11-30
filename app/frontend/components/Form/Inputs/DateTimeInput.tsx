@@ -1,11 +1,10 @@
-import React from "react"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
-import DateTimeInput, { type DateTimeProps } from "@/components/Inputs/DateTimeInput"
+import { ConditionalWrapper } from "@/components"
+import { DateTimeInput, type DateTimeProps } from "@/components/Inputs/DateTimeInput"
 import { isUnset } from "@/lib"
 
-import Field from "../components/Field"
+import { Field } from "../components/Field"
 
 import { type InputConflicts, type BaseFormInputProps } from "."
 
@@ -14,7 +13,7 @@ interface DateTimeFormProps<TForm extends NestedObject = NestedObject>
 	Omit<DateTimeProps, InputConflicts>,
 	BaseFormInputProps<Date | "", TForm> {}
 
-const DateTime = <TForm extends NestedObject = NestedObject>({
+export function FormDateTimeInput<TForm extends NestedObject = NestedObject>({
 	name,
 	required,
 	onChange,
@@ -29,7 +28,7 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 	clearErrorsOnChange,
 	...props
 }: DateTimeFormProps<TForm>,
-) => {
+) {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<Date | "", TForm>({
 		name,
 		model,
@@ -83,5 +82,3 @@ const DateTime = <TForm extends NestedObject = NestedObject>({
 		</ConditionalWrapper>
 	)
 }
-
-export default DateTime

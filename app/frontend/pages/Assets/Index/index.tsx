@@ -1,10 +1,9 @@
-import React from "react"
 
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import AssetTable from "../Table"
+import AssetTable from "@/domains/Assets/Table"
 
 interface AssetsIndexProps {
 	assets: Schema.AssetsIndex[]

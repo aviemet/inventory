@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import StatusLabelsTable from "../Table"
+import StatusLabelsTable from "@/domains/StatusLabels/Table"
 
 interface StatusLabelsIndexProps {
 	status_labels: Schema.StatusLabelsIndex[]

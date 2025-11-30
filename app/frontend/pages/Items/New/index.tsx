@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import ItemForm from "../Form"
+import ItemForm from "@/domains/Items/Form"
 
 interface NewItemProps {
 	item: Schema.ItemsFormData

@@ -1,7 +1,5 @@
-import React from "react"
 
-import { Badge, Box, Title, Link, Page, Paper, Section, Text } from "@/components"
-import DangerousHtml from "@/components/DangerousHtml"
+import { Badge, Box, Title, Link, Page, Paper, Section, Text, DangerousHtml } from "@/components"
 import { Form, RichText, Submit } from "@/components/Form"
 import { Routes } from "@/lib"
 

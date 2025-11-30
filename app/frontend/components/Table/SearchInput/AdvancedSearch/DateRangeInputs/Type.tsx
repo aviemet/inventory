@@ -13,7 +13,7 @@ export const dateRangeOptions = [
 
 type DateRangeType = typeof dateRangeOptions[number]["value"]
 
-const Type = ({
+const DateRangeType = ({
 	advancedSearch,
 	name,
 }: AdvancedInputProps) => {
@@ -35,4 +35,4 @@ const Type = ({
 	)
 }
 
-export default React.memo(Type)
+export const Type = React.memo(DateRangeType)

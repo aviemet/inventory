@@ -1,5 +1,155 @@
 # Project Inventory
 
+## Technology Stack
+
+- **Backend**: Ruby on Rails 8.1+ with PostgreSQL
+- **Frontend**: React 19 with TypeScript, Vite for bundling
+- **Integration**: Inertia.js for server-driven SPA architecture
+- **UI Framework**: Mantine UI components
+- **Styling**: Linaria (CSS-in-JS via @wyw-in-js/vite), no Tailwind
+- **State Management**: TanStack Query (React Query) for server state, Zustand for client state, XState for complex state machines
+- **Forms**: use-inertia-form library integrated with Rails forms
+- **Authentication**: Devise with LDAP support
+- **Authorization**: Pundit policies
+- **Search**: pg_search (PostgreSQL full-text search)
+- **Pagination**: Kaminari
+- **Serialization**: oj_serializers with type generation via types_from_serializers
+
+## Application Architecture
+
+### Inertia.js Integration
+
+The application uses Inertia.js as the bridge between Rails and React, creating a server-driven SPA experience:
+
+- **Page Resolution**: Pages are dynamically imported via `import.meta.glob` from `app/frontend/pages/**/index.tsx`
+- **Route Naming**: Rails controllers render Inertia pages using path-based naming (e.g., `render inertia: "People/Index"` maps to `app/frontend/pages/People/Index/index.tsx`)
+- **Props Flow**: Controllers pass props to Inertia, which become React component props
+- **Middleware Pipeline**: Props pass through middleware (`applyPropsMiddleware`) for transformation (e.g., date conversion)
+- **CSRF Protection**: Custom `InertiaCsrf` concern handles CSRF tokens via cookies for Inertia requests (skips standard verification)
+
+### Multi-Tenancy
+
+- Uses company-based multi-tenancy via `@active_company` tracked in `ActiveCompanyTracker` concern
+- All resources are scoped to `@active_company` in controllers
+- User can switch active company, tracked in session
+
+### Backend Architecture
+
+#### Controllers
+
+- **Base Controller**: `ApplicationController` includes concerns: `Authentication`, `Authorization`, `InertiaCsrf`, `Localization`, `Searchable`, `ActiveCompanyTracker`, `StrongParams`
+- **Pattern**: Controllers use `expose` (from DecentExposure gem) to define resources and handle loading/finding
+- **Strong Params**: Custom `StrongParams` concern provides DSL: `strong_params :model_name, permit: [...]`
+- **Sorting**: Controllers define `sortable_fields` array for search/sort functionality
+- **Route Concerns**: Reusable route concerns defined in routes.rb: `categoryable`, `clonable`, `assignable`, `bulk_delete`, etc.
+- **API Controllers**: Separate `Api::` namespace controllers return JSON, share same serializers but different response format
+
+#### Serializers
+
+- **Pattern**: Uses `Renderable` concern on models for consistent serialization interface
+- **View-Specific Serializers**: Models have namespaced serializers per view:
+  - Base serializer: `ModelSerializer`
+  - View-specific: `Models::IndexSerializer`, `Models::ShowSerializer`, `Models::FormDataSerializer`, `Models::EditSerializer`
+- **Serializer Resolution**: Models call `model.render(view: :index)` which resolves to `Models::IndexSerializer.render(model)`
+- **Type Generation**: Serializers automatically generate TypeScript types via `types_from_serializers` gem
+- **Base Class**: All serializers inherit from `BaseSerializer` which extends `Oj::Serializer`
+
+#### Models
+
+- **Concerns Pattern**: Shared behaviors via concerns in `app/models/concerns/`:
+  - `Assignable` / `AssignToable` - Assignment functionality
+  - `Categorizable` - Category associations
+  - `Contactable` - Contact information (emails, phones, addresses, websites)
+  - `Documentable` - Documentation attachments
+  - `Fieldable` - Custom fields support
+  - `Ownable` - Ownership tracking
+  - `Purchasable` - Purchase order integration
+  - `PgSearchable` - Full-text search integration
+- **Slug Support**: Some models use slugs for URLs (via `slug` gem), identified by `param: :slug` in routes
+
+### Frontend Architecture
+
+#### Directory Structure
+
+- **`pages/`**: Inertia page components organized by domain, each in `DomainName/Action/index.tsx`
+- **`components/`**: General-purpose, reusable React components
+- **`features/`**: Feature-specific components (e.g., `Contactable`, `Dropdowns`, `Spotlight`)
+- **`domains/`**: Domain-specific shared components (Forms, Tables) that are reused across pages
+- **`layouts/`**: Layout wrapper components (`AppLayout`, `AuthLayout`)
+- **`lib/`**: General purpose utilities, hooks, helpers
+- **`queries/`**: TanStack Query hooks and query functions
+- **`types/`**: TypeScript type definitions (auto-generated from serializers + custom types)
+
+#### Page Organization
+
+- Pages follow Rails route structure: `DomainName/Action/index.tsx` (e.g., `People/Index/index.tsx`)
+- Show pages often have sub-components: `Show/Details.tsx`, `Show/Associations.tsx`, `Show/History.tsx`, etc.
+- Each page can specify a `defaultLayout` property that gets resolved via `handlePageLayout` middleware
+
+#### Form System
+
+- Uses `use-inertia-form` library for form management
+- Custom `Form` component wraps Inertia form with additional features:
+  - Formatting control via context (`disableFormatting` prop)
+  - Rails attribute naming conventions
+  - Grid layout option
+- Form inputs are in `components/Form/Inputs/` and `components/Inputs/` (seems like migration in progress)
+
+#### Component Patterns
+
+- **Dropdowns**: Feature-based dropdowns with consistent pattern:
+  - `FormDomainDropdown` - For use in forms
+  - `DomainDropdownInput` - Standalone input component
+  - Examples: `CategoriesDropdown`, `PeopleDropdown`, `LocationsDropdown`, etc.
+- **Features as Components**: Complex features like `Contactable` have both `Details/` and `Form/` sub-components
+- **Template Features**: Reusable page templates like `IndexPageTemplate`, `ShowPageAssociationsTemplate`
+
+#### Type Safety
+
+- Database schema based TypeScript types are auto-generated from Rails serializers
+- Page props are typed via serializer types
+- Strict TypeScript rules: no `any`, prefer interfaces over types, no type assertions unless necessary
+
+### API Architecture
+
+- Separate API namespace under `app/controllers/api/`
+- API controllers inherit from `ApiController` (likely has different base behavior)
+- Use same serializers as Inertia controllers but return JSON
+- Used for async operations, dropdowns, autocomplete, etc.
+
+### Routing Patterns
+
+- Resources use standard Rails RESTful routes
+- Some resources use slugs instead of IDs: `param: :slug` in routes
+- Concerns provide reusable route groups (e.g., `concerns: [:bulk_delete, :assignable]`)
+- Nested resources for associations (e.g., `tickets/:id/messages`)
+- Settings routes are namespaced under `/settings`
+
+### Search & Filtering
+
+- Controller-level search via `Searchable` concern
+- Uses `pg_search` for PostgreSQL full-text search
+- Controllers define `sortable_fields` array
+- Pagination via Kaminari, user-configurable per-page limits
+
+## Development Workflow
+
+### Linting and Formatting
+
+- **DO NOT fix auto-fixable linting errors** - Import order, spacing, and other formatting issues are automatically fixed on file save. Do not waste cycles fixing these manually.
+- Only address linting errors that indicate actual code problems (type errors, logic issues, etc.)
+
+### Testing Environment
+
+- **Test Environment**: Uses `happy-dom` instead of `jsdom` for faster, more complete DOM implementation
+  - Better navigation support (no "Not implemented" warnings)
+  - Faster test execution
+  - Handles link clicks and DOM interactions better
+- **Mock Server (MSW)**: Configured in `app/frontend/tests/helpers/mockServer.ts`
+  - Handlers for common API endpoints in `app/frontend/tests/helpers/handlers.ts`
+  - Catch-all handler returns empty 200 responses for unhandled requests to prevent socket errors
+  - Socket hang up errors from MSW interceptors are informational and don't cause test failures
+
 ## Testing Patterns
 
 ### Shared Input Test Behaviors
@@ -34,3 +184,15 @@ testCommonInputBehaviors({
 ```
 
 **Important:** When writing tests, if the implementation is incorrect, fix the implementation first, then write tests that verify correct behavior. Never write tests that accommodate bugs.
+
+### Page Tests
+
+Page tests follow a consistent pattern:
+- Each page domain has a `helpers.ts` file with mock data creators
+- Model structures (Category, Location, Department, Manufacturer, Model, StatusLabel, Vendor, Company, Purchase, Pagination, Money) come from shared fixtures in `app/frontend/tests/helpers/fixtures/`
+- Page-specific helpers only create domain-specific mock data (e.g., `createMockAccessoriesIndex`)
+- Tests verify pages render without errors given different props
+- Tests cover basic rendering, multiple items, empty arrays, and edge cases (missing names, zero quantities, etc.)
+- Index pages test: basic render, multiple items, empty array
+- New/Edit pages test: basic render, edge cases (missing names)
+- Show pages test: basic render, edge cases (missing names, zero quantities, assigned/unassigned states)

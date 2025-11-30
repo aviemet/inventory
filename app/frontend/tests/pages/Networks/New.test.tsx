@@ -1,4 +1,3 @@
-import React from "react"
 import { describe, test, expect, beforeEach } from "vitest"
 
 import NetworkNew from "@/pages/Networks/New"

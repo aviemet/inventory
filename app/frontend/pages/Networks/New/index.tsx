@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import NetworkForm from "../Form"
+import NetworkForm from "@/domains/Networks/Form"
 
 interface NewNetworkProps {
 	network: Schema.NetworksFormData

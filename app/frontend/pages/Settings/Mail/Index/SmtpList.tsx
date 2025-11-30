@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Group, Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"

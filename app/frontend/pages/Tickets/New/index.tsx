@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import TicketForm from "../Form"
+import TicketForm from "@/domains/Tickets/Form"
 
 interface NewTicketProps {
 	ticket: Schema.TicketsFormData

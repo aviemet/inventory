@@ -2007,15 +2007,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cassiozen/usestatemachine@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@cassiozen/usestatemachine@npm:1.0.1"
-  peerDependencies:
-    react: ">=16.8.0"
-  checksum: 10/fcb097a9a6958d0394fca68126edb85579144c3264b7add9cd233fee7f5a8f21cd50355259936b442ac50b17debead4a8cd4afb1b2440be5bd1ad9ab77cf4cab
-  languageName: node
-  linkType: hard
-
 "@commitlint/cli@npm:^20.1.0":
   version: 20.1.0
   resolution: "@commitlint/cli@npm:20.1.0"
@@ -5379,6 +5370,22 @@ __metadata:
   peerDependencies:
     vite: ">=3.2.7"
   checksum: 10/91ad0502d20f547277fa6e3e5459a97e6abce15bc41ae82232603a589a8f5e97ea71af26120ab8cd22178af0fa566af89fb10459333868194c2bebf657eaec69
+  languageName: node
+  linkType: hard
+
+"@xstate/react@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@xstate/react@npm:6.0.0"
+  dependencies:
+    use-isomorphic-layout-effect: "npm:^1.1.2"
+    use-sync-external-store: "npm:^1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    xstate: ^5.20.0
+  peerDependenciesMeta:
+    xstate:
+      optional: true
+  checksum: 10/bf6cbc5f8c3972c3e3c77935102297c2db524b7d4c2e07655c46d5a3800abede627ad86fc023e3666306bd60f520a18143fe408a06eb4e8483c42aadfb2a24e9
   languageName: node
   linkType: hard
 
@@ -9345,6 +9352,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"happy-dom@npm:^20.0.11":
+  version: 20.0.11
+  resolution: "happy-dom@npm:20.0.11"
+  dependencies:
+    "@types/node": "npm:^20.0.0"
+    "@types/whatwg-mimetype": "npm:^3.0.2"
+    whatwg-mimetype: "npm:^3.0.0"
+  checksum: 10/0f2cd2a2c394a79ce3ff15b5c00edd4071a5c5ece14f3ee810b954a1c3ee826a3920be37a349c7dc1b5bd3cd49b550f5e6291aa7e109ee4a27c3f6476f4b5d91
+  languageName: node
+  linkType: hard
+
 "has-bigints@npm:^1.0.1, has-bigints@npm:^1.0.2":
   version: 1.0.2
   resolution: "has-bigints@npm:1.0.2"
@@ -9906,13 +9924,13 @@ __metadata:
     "@babel/core": "npm:^7.28.5"
     "@babel/preset-react": "npm:^7.28.5"
     "@babel/preset-typescript": "npm:^7.28.5"
-    "@cassiozen/usestatemachine": "npm:^1.0.1"
     "@commitlint/cli": "npm:^20.1.0"
     "@commitlint/config-conventional": "npm:^20.0.0"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.1"
     "@eslint/compat": "npm:^2.0.0"
     "@eslint/json": "npm:^0.14.0"
+    "@floating-ui/dom": "npm:^1.7.4"
     "@fragaria/address-formatter": "npm:^6.7.1"
     "@inertiajs/react": "npm:^2.2.19"
     "@linaria/babel-preset": "npm:^5.0.4"
@@ -9975,6 +9993,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^5.1.1"
     "@vitest/coverage-v8": "npm:^4.0.14"
     "@wyw-in-js/vite": "npm:^0.8.0"
+    "@xstate/react": "npm:^6.0.0"
     autoprefixer: "npm:^10.4.22"
     babel-loader: "npm:^10.0.0"
     babel-plugin-macros: "npm:^3.1.0"
@@ -9995,6 +10014,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^7.0.1"
     git-cz: "npm:^4.9.0"
     google-libphonenumber: "npm:^3.2.43"
+    happy-dom: "npm:^20.0.11"
     husky: "npm:^9.1.7"
     i18next: "npm:^25.6.3"
     i18next-browser-languagedetector: "npm:^8.2.0"
@@ -10031,6 +10051,7 @@ __metadata:
     vite-plugin-ruby: "npm:^5.1.1"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^4.0.14"
+    xstate: "npm:^5.24.0"
     zustand: "npm:^5.0.8"
   languageName: unknown
   linkType: soft
@@ -15226,6 +15247,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-isomorphic-layout-effect@npm:^1.1.2":
+  version: 1.2.1
+  resolution: "use-isomorphic-layout-effect@npm:1.2.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10/a52155ffa7d67a5107ef2033ae2c63f5290c3e3b198de30d4d4f78cd7921e1ab1ea31eeec387defb67ef61adb672d3b8d25b54b7dcc089bacc4f885abde96e9d
+  languageName: node
+  linkType: hard
+
 "use-latest@npm:^1.2.1":
   version: 1.2.1
   resolution: "use-latest@npm:1.2.1"
@@ -15256,7 +15289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-sync-external-store@npm:^1.4.0, use-sync-external-store@npm:^1.6.0":
+"use-sync-external-store@npm:^1.2.0, use-sync-external-store@npm:^1.4.0, use-sync-external-store@npm:^1.6.0":
   version: 1.6.0
   resolution: "use-sync-external-store@npm:1.6.0"
   peerDependencies:
@@ -15859,6 +15892,13 @@ __metadata:
   version: 2.2.0
   resolution: "xmlchars@npm:2.2.0"
   checksum: 10/4ad5924974efd004a47cce6acf5c0269aee0e62f9a805a426db3337af7bcbd331099df174b024ace4fb18971b8a56de386d2e73a1c4b020e3abd63a4a9b917f1
+  languageName: node
+  linkType: hard
+
+"xstate@npm:^5.24.0":
+  version: 5.24.0
+  resolution: "xstate@npm:5.24.0"
+  checksum: 10/e1e60aa86b096f8dc9fa6e1488efcc732658323e9026cf059da70c2c4ba8a1947bbde4aca664ecc4a25fafb23253cae081b71be6135d5f371644ceac91699eb8
   languageName: node
   linkType: hard
 

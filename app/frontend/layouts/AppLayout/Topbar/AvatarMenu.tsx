@@ -1,5 +1,4 @@
 import { Avatar, UnstyledButton } from "@mantine/core"
-import React from "react"
 
 import { Menu } from "@/components"
 import { Routes } from "@/lib"

@@ -1,5 +1,4 @@
 import { isEmpty } from "lodash"
-import React from "react"
 
 import { Select as FormSelect } from "@/components/Form"
 import { useGetAssetsAsOptions } from "@/queries/assets"

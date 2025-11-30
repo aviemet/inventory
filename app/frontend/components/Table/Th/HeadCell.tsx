@@ -1,12 +1,11 @@
 import { Table } from "@mantine/core"
-import React from "react"
 
 import { useTableContext } from "../TableContext"
-import HeadCellWithContext from "./HeadCellWithContext"
+import { HeadCellWithContext } from "./HeadCellWithContext"
 
 import { type TableHeadCellProps } from "."
 
-const HeadCell = ({ children, ...props }: TableHeadCellProps) => {
+export function HeadCell({ children, ...props }: TableHeadCellProps) {
 	const tableState = useTableContext(false)
 
 	if(tableState === null) {
@@ -21,5 +20,3 @@ const HeadCell = ({ children, ...props }: TableHeadCellProps) => {
 		</HeadCellWithContext>
 	)
 }
-
-export default HeadCell

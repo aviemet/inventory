@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import UserForm from "../Form"
+import UserForm from "@/domains/Users/Form"
 
 interface UpdateUserProps {
 	user: Schema.UsersEdit

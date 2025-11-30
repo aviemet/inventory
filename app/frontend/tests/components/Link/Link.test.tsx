@@ -3,7 +3,7 @@ import { fireEvent, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi, beforeEach } from "vitest"
 
-import Link from "@/components/Link"
+import { Link } from "@/components/Link"
 import { render } from "@/tests/helpers/utils"
 
 describe("Link", () => {

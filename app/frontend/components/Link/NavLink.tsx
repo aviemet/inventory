@@ -8,12 +8,12 @@ interface NavLinkComponentProps
 	Omit<InertiaLinkProps, "color" | "size" | "span" | "label" | "onChange" | "onClick" | "onKeyDown" | "style" | "active"> {}
 export { type NavLinkComponentProps as NavLinkProps }
 
-const NavLinkComponent = ({
+export function NavLinkComponent({
 	children,
 	href,
 	active,
 	...props
-}: NavLinkComponentProps) => {
+}: NavLinkComponentProps) {
 	const { pathname } = useLocation()
 
 	return (
@@ -26,5 +26,3 @@ const NavLinkComponent = ({
 		/>
 	)
 }
-
-export default NavLinkComponent

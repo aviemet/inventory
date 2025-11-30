@@ -4,9 +4,9 @@ import { Link } from "@/components"
 import { CircleDotIcon, CheckinIcon, CheckoutIcon } from "@/components/Icons"
 import { capitalize, polymorphicRoute } from "@/lib"
 
-import AssignmentHistoryContent from "./AssignmentHistoryContent"
-import AuditHistoryContent from "./AuditHistoryContent"
-import ReturnedHistoryContent from "./ReturnedHistoryContent"
+import { AssignmentHistoryContent } from "./AssignmentHistoryContent"
+import { AuditHistoryContent } from "./AuditHistoryContent"
+import { ReturnedHistoryContent } from "./ReturnedHistoryContent"
 
 type TimelineData = {
 	title: React.ReactNode

@@ -1,16 +1,16 @@
+import React from "react"
 import { useMantineTheme, type ModalProps, type ButtonProps } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import axios from "axios"
-import React from "react"
 import { type UseFormProps } from "use-inertia-form"
 
 import { Modal } from "@/components"
 
-import Button from "./index"
+import { Button } from "./index"
 
 interface ModalFormButtonProps {
 	children?: string | React.ReactElement
-	form: React.ReactElement
+	form: React.ReactElement<{ onSubmit?: (form: UseFormProps) => boolean | void }>
 	title: string
 	buttonProps?: ButtonProps
 	modalProps?: Partial<ModalProps>
@@ -18,7 +18,7 @@ interface ModalFormButtonProps {
 	onSuccess?: (data: { id: string | number }) => void
 }
 
-const ModalFormButton = ({
+export function ModalFormButton({
 	children = "New",
 	form,
 	title,
@@ -26,7 +26,7 @@ const ModalFormButton = ({
 	modalProps = {},
 	onSubmit,
 	onSuccess,
-}: ModalFormButtonProps) => {
+}: ModalFormButtonProps) {
 	const [opened, { open, close }] = useDisclosure(false)
 
 	const theme = useMantineTheme()
@@ -67,5 +67,3 @@ const ModalFormButton = ({
 		</>
 	)
 }
-
-export default ModalFormButton

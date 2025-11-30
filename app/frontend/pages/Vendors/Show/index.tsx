@@ -1,17 +1,16 @@
-import React from "react"
 
 import { Section, Link, Menu, Group, Title, Tabs, Page } from "@/components"
 import { NewIcon, EditIcon } from "@/components/Icons"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
-import AccessoriesTable from "@/pages/Accessories/Table"
-import ConsumablesTable from "@/pages/Consumables/Table"
-import ContractsTable from "@/pages/Contracts/Table"
-import ItemsTable from "@/pages/Items/Table"
-import LicensesTable from "@/pages/Licenses/Table"
+import AccessoriesTable from "@/domains/Accessories/Table"
+import ConsumablesTable from "@/domains/Consumables/Table"
+import ContractsTable from "@/domains/Contracts/Table"
+import ItemsTable from "@/domains/Items/Table"
+import LicensesTable from "@/domains/Licenses/Table"
 import { type PaginatedModel } from "@/types/PaginatedModel"
 
-import ComponentsTable from "@/pages/components/Table"
+import ComponentsTable from "@/domains/Components/Table"
 
 interface VendorShowProps {
 	vendor: Schema.VendorsShow

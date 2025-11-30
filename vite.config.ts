@@ -30,6 +30,7 @@ const config = defineConfig({
 			NODE_ENV: "development",
 		}),
 		react({
+			jsxRuntime: "automatic",
 			babel: {
 				plugins: ["babel-plugin-macros", "babel-plugin-styled-components"],
 			},
@@ -37,7 +38,10 @@ const config = defineConfig({
 		wyw({
 			include: ["**/*.{ts,tsx}"],
 			babelOptions: {
-				presets: ["@babel/preset-typescript", "@babel/preset-react"],
+				presets: [
+					"@babel/preset-typescript",
+					["@babel/preset-react", { runtime: "automatic" }],
+				],
 			},
 		}),
 	],

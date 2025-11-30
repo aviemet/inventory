@@ -1,9 +1,10 @@
+import React from "react"
 import { isEmpty } from "lodash-es"
 
 import { Stack, Tooltip } from "@/components"
 import { formatter } from "@/lib"
 
-import ConditionalWrapper from "../../ConditionalWrapper"
+import { ConditionalWrapper } from "../../ConditionalWrapper"
 
 interface DateTimeFormatterProps {
 	children: string | Date | undefined

@@ -4,6 +4,13 @@ import "@testing-library/jest-dom/vitest"
 
 import { type SharedInertiaProps } from "@/lib/hooks/usePageProps"
 
+import { mockInertiaLink } from "./linkUtils"
+
+if(typeof globalThis.React === "undefined") {
+	globalThis.React = React
+}
+
+
 export const baseMockPageProps: SharedInertiaProps = {
 	component: undefined,
 	errors: {},
@@ -77,8 +84,11 @@ export const mockRouter = {
 	delete: vi.fn(),
 }
 
-export const mockInertiaLink = ({ children, ...props }: any) => React.createElement("a", props, children)
-export const mockInertiaHead = ({ children }: any) => React.createElement(React.Fragment, {}, children)
+export { mockInertiaLink } from "./linkUtils"
+
+export const mockInertiaHead = ({ children }: { children?: React.ReactNode }) => {
+	return React.createElement(React.Fragment, {}, children)
+}
 
 vi.mock("@inertiajs/react", async() => {
 	const actual = await vi.importActual("@inertiajs/react")

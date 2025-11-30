@@ -1,5 +1,4 @@
 import { Text } from "@mantine/core"
-import React from "react"
 
 import { DangerousHtml, DateTimeFormatter, Group, Title, Link, Menu, Page, Section } from "@/components"
 import { Routes } from "@/lib"
