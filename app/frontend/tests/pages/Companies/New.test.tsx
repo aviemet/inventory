@@ -16,8 +16,8 @@ describe("Companies/New", () => {
 	test("renders without error", () => {
 		const company = createMockCompaniesFormData()
 
-		expect(() => {
-			render(<NewCompany company={ company } />)
-		}).not.toThrow()
+		const { container } = render(<NewCompany company={ company } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

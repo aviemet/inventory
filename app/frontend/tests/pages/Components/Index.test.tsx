@@ -13,9 +13,9 @@ describe("Components/Index", () => {
 		const components = [createMockItem()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<ComponentsIndex components={ components } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<ComponentsIndex components={ components } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple components", () => {
@@ -25,17 +25,17 @@ describe("Components/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<ComponentsIndex components={ components } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<ComponentsIndex components={ components } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty components array", () => {
 		const components: Schema.Item[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<ComponentsIndex components={ components } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<ComponentsIndex components={ components } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

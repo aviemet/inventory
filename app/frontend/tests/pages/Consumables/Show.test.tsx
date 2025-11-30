@@ -2,6 +2,7 @@ import { describe, test, expect, beforeEach } from "vitest"
 
 import ShowConsumable from "@/pages/Consumables/Show"
 import { render } from "@/tests/helpers/utils"
+import { testShowPageTabs } from "@/tests/helpers/testTabs"
 
 import {
 	createMockConsumablesShow,
@@ -16,24 +17,32 @@ describe("Consumables/Show", () => {
 	test("renders without error", () => {
 		const consumable = createMockConsumablesShow()
 
-		expect(() => {
-			render(<ShowConsumable consumable={ consumable } />)
-		}).not.toThrow()
+		const { container } = render(<ShowConsumable consumable={ consumable } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with consumable without name", () => {
 		const consumable = createMockConsumablesShow({ name: undefined })
 
-		expect(() => {
-			render(<ShowConsumable consumable={ consumable } />)
-		}).not.toThrow()
+		const { container } = render(<ShowConsumable consumable={ consumable } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with zero available quantity", () => {
 		const consumable = createMockConsumablesShow({ qty_available: 0 })
 
-		expect(() => {
-			render(<ShowConsumable consumable={ consumable } />)
-		}).not.toThrow()
+		const { container } = render(<ShowConsumable consumable={ consumable } />)
+
+		expect(container.firstChild).toBeInTheDocument()
+	})
+
+	test("renders all tabs and their content", async () => {
+		const consumable = createMockConsumablesShow()
+
+		render(<ShowConsumable consumable={ consumable } />)
+
+		await testShowPageTabs(["Details", "History", "Documentation", "Associations"])
 	})
 })

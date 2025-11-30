@@ -152,6 +152,27 @@ The application uses Inertia.js as the bridge between Rails and React, creating 
 
 ## Testing Patterns
 
+### Page Component Testing
+
+**CRITICAL: Never use `not.toThrow()` on `render()` calls**
+
+React Testing Library's `render()` function does NOT throw errors that occur during component rendering - it catches them and logs them instead. Using `expect(() => render(...)).not.toThrow()` is a useless pattern that gives false confidence because:
+
+- `render()` only throws for setup/syntax errors, not rendering failures
+- Errors in `useEffect`, component initialization, or async code won't cause `render()` to throw
+- The component might fail to render completely, but `render()` will still return successfully
+
+**Correct pattern:**
+```typescript
+const { container } = render(<Component ... />)
+expect(container.firstChild).toBeInTheDocument()
+```
+
+This verifies that something actually rendered. While not perfect (an error boundary would also pass), it's much better than `not.toThrow()`.
+
+**Better pattern (when possible):**
+Verify specific content renders rather than just checking container exists, but avoid testing implementation details like specific text unless necessary.
+
 ### Shared Input Test Behaviors
 
 Input components share common behaviors that are tested via reusable helpers in `app/frontend/tests/components/Inputs/sharedBehaviors.tsx`, similar to RSpec's `shared_examples`.
@@ -191,8 +212,9 @@ Page tests follow a consistent pattern:
 - Each page domain has a `helpers.ts` file with mock data creators
 - Model structures (Category, Location, Department, Manufacturer, Model, StatusLabel, Vendor, Company, Purchase, Pagination, Money) come from shared fixtures in `app/frontend/tests/helpers/fixtures/`
 - Page-specific helpers only create domain-specific mock data (e.g., `createMockAccessoriesIndex`)
-- Tests verify pages render without errors given different props
+- Tests verify pages render by checking `container.firstChild` exists, not using `not.toThrow()`
 - Tests cover basic rendering, multiple items, empty arrays, and edge cases (missing names, zero quantities, etc.)
 - Index pages test: basic render, multiple items, empty array
 - New/Edit pages test: basic render, edge cases (missing names)
 - Show pages test: basic render, edge cases (missing names, zero quantities, assigned/unassigned states)
+- Show pages with tabs: Use `testShowPageTabs()` helper to verify all tabs can be clicked and render content

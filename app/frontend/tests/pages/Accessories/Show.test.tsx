@@ -2,6 +2,7 @@ import { describe, test, expect, beforeEach } from "vitest"
 
 import ShowAccessory from "@/pages/Accessories/Show"
 import { render } from "@/tests/helpers/utils"
+import { testShowPageTabs } from "@/tests/helpers/testTabs"
 
 import {
 	createMockAccessoriesShow,
@@ -16,24 +17,32 @@ describe("Accessories/Show", () => {
 	test("renders without error", () => {
 		const accessory = createMockAccessoriesShow()
 
-		expect(() => {
-			render(<ShowAccessory accessory={ accessory } />)
-		}).not.toThrow()
+		const { container } = render(<ShowAccessory accessory={ accessory } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with accessory without name", () => {
 		const accessory = createMockAccessoriesShow({ name: undefined })
 
-		expect(() => {
-			render(<ShowAccessory accessory={ accessory } />)
-		}).not.toThrow()
+		const { container } = render(<ShowAccessory accessory={ accessory } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with zero available quantity", () => {
 		const accessory = createMockAccessoriesShow({ qty_available: 0 })
 
-		expect(() => {
-			render(<ShowAccessory accessory={ accessory } />)
-		}).not.toThrow()
+		const { container } = render(<ShowAccessory accessory={ accessory } />)
+
+		expect(container.firstChild).toBeInTheDocument()
+	})
+
+	test("renders all tabs and their content", async () => {
+		const accessory = createMockAccessoriesShow()
+
+		render(<ShowAccessory accessory={ accessory } />)
+
+		await testShowPageTabs(["Details", "History", "Documentation", "Associations"])
 	})
 })

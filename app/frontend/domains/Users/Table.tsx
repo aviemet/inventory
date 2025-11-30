@@ -3,13 +3,13 @@ import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const UsersTable = (props: TableProps) => {
+const UsersTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell sort="email" hideable={ false }>Email</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="email" sort="email" hideable={ false }>Email</Table.HeadCell>
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
@@ -17,11 +17,11 @@ const UsersTable = (props: TableProps) => {
 				<Table.RowIterator render={ (user: Schema.UsersIndex) => (
 					<Table.Row key={ user.id }>
 
-						<Table.Cell nowrap>
+						<Table.Cell columnId="email" nowrap>
 							<Link href={ Routes.user(user) }>{ user.email }</Link>
 						</Table.Cell>
 
-						<Table.Cell fitContent>
+						<Table.Cell columnId="actions" fitContent>
 							<EditButton href={ Routes.editUser(user) } label={ user.person?.name || user.email } />
 						</Table.Cell>
 

@@ -16,16 +16,16 @@ describe("Accessories/Edit", () => {
 	test("renders without error", () => {
 		const accessory = createMockAccessoriesEdit()
 
-		expect(() => {
-			render(<EditAccessory accessory={ accessory } />)
-		}).not.toThrow()
+		const { container } = render(<EditAccessory accessory={ accessory } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with accessory without name", () => {
 		const accessory = createMockAccessoriesEdit({ name: "" })
 
-		expect(() => {
-			render(<EditAccessory accessory={ accessory } />)
-		}).not.toThrow()
+		const { container } = render(<EditAccessory accessory={ accessory } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

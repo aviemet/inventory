@@ -23,17 +23,17 @@ describe("Departments/Show", () => {
 		const licenses = createMockPaginatedModel<Schema.License[]>([])
 		const people = createMockPaginatedModel<Schema.Person[]>([])
 
-		expect(() => {
-			render(<ShowDepartment
-				department={ department }
-				items={ items }
-				accessories={ accessories }
-				components={ components }
-				consumables={ consumables }
-				licenses={ licenses }
-				people={ people }
-			/>)
-		}).not.toThrow()
+		const { container } = render(<ShowDepartment
+			department={ department }
+			items={ items }
+			accessories={ accessories }
+			components={ components }
+			consumables={ consumables }
+			licenses={ licenses }
+			people={ people }
+		/>)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with department without name", () => {
@@ -45,16 +45,16 @@ describe("Departments/Show", () => {
 		const licenses = createMockPaginatedModel<Schema.License[]>([])
 		const people = createMockPaginatedModel<Schema.Person[]>([])
 
-		expect(() => {
-			render(<ShowDepartment
-				department={ department }
-				items={ items }
-				accessories={ accessories }
-				components={ components }
-				consumables={ consumables }
-				licenses={ licenses }
-				people={ people }
-			/>)
-		}).not.toThrow()
+		const { container } = render(<ShowDepartment
+			department={ department }
+			items={ items }
+			accessories={ accessories }
+			components={ components }
+			consumables={ consumables }
+			licenses={ licenses }
+			people={ people }
+		/>)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

@@ -16,8 +16,8 @@ describe("Contracts/Show", () => {
 	test("renders without error", () => {
 		const contract = createMockContractsShow()
 
-		expect(() => {
-			render(<ShowContract contract={ contract } />)
-		}).not.toThrow()
+		const { container } = render(<ShowContract contract={ contract } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

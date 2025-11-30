@@ -30,8 +30,8 @@ const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
 		<Table wrapper={ false } className={ clsx(classes.table) }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell>Address</Table.HeadCell>
-					<Table.HeadCell>Host</Table.HeadCell>
+					<Table.HeadCell columnId="address">Address</Table.HeadCell>
+					<Table.HeadCell columnId="host">Host</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
@@ -46,8 +46,8 @@ const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
 
 					return (
 						<Table.Row key={ host } className={ clsx(classes.row, { dhcp }) }>
-							<Table.Cell fitContent>{ host }</Table.Cell>
-							<Table.Cell>
+							<Table.Cell columnId="address" fitContent>{ host }</Table.Cell>
+							<Table.Cell columnId="host">
 								<EditableLink item={ item } ip={ host } />
 							</Table.Cell>
 						</Table.Row>

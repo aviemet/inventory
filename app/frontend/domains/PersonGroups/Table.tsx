@@ -3,14 +3,14 @@ import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const GroupsTable = (props: TableProps) => {
+const GroupsTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell hideable={ false }>Group Name</Table.HeadCell>
-					<Table.HeadCell>People</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" hideable={ false }>Group Name</Table.HeadCell>
+					<Table.HeadCell columnId="people">People</Table.HeadCell>
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
@@ -18,15 +18,15 @@ const GroupsTable = (props: TableProps) => {
 				<Table.RowIterator render={ (person_group: Schema.PersonGroupsIndex) => (
 					<Table.Row key={ person_group.id }>
 
-						<Table.Cell nowrap>
+						<Table.Cell columnId="name" nowrap>
 							<Link href={ Routes.personGroup(person_group.slug) }>{ person_group.name }</Link>
 						</Table.Cell>
 
-						<Table.Cell>
+						<Table.Cell columnId="people">
 							{ person_group.people?.length }
 						</Table.Cell>
 
-						<Table.Cell fitContent>
+						<Table.Cell columnId="actions" fitContent>
 							<EditButton href={ Routes.editPersonGroup(person_group.slug) } label={ person_group.name } />
 						</Table.Cell>
 

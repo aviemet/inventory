@@ -8,7 +8,7 @@ const Documentations = ({ accessory }: ShowAccessoryProps) => {
 	return (
 		<Table.TableProvider
 			selectable
-			rows={ accessory?.documentations ?? [] }
+			data={ accessory?.documentations ?? [] }
 		>
 			<Table.SearchInput />
 

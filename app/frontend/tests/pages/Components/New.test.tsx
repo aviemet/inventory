@@ -16,8 +16,8 @@ describe("Components/New", () => {
 	test("renders without error", () => {
 		const component = createMockComponentsFormData()
 
-		expect(() => {
-			render(<NewComponent component={ component } />)
-		}).not.toThrow()
+		const { container } = render(<NewComponent component={ component } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

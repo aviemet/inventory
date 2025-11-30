@@ -16,16 +16,16 @@ describe("Companies/Edit", () => {
 	test("renders without error", () => {
 		const company = createMockCompaniesEdit()
 
-		expect(() => {
-			render(<EditCompany company={ company } />)
-		}).not.toThrow()
+		const { container } = render(<EditCompany company={ company } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with company without name", () => {
 		const company = createMockCompaniesEdit({ name: "" })
 
-		expect(() => {
-			render(<EditCompany company={ company } />)
-		}).not.toThrow()
+		const { container } = render(<EditCompany company={ company } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

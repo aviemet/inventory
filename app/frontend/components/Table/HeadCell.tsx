@@ -8,7 +8,7 @@ import { useLocation, usePageProps } from "@/lib/hooks"
 import { useTableContext } from "./TableContext"
 
 export interface HeadCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
-	columnId: string
+	columnId?: string
 	children: React.ReactNode
 	sort?: string
 	hideable?: string | false
@@ -24,9 +24,23 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(({
 	className,
 	...props
 }, ref) => {
-	const { registerColumn, columns, model, pagination } = useTableContext()
+	const context = useTableContext(undefined, false)
 	const { auth: { user: { table_preferences } } } = usePageProps()
 	const { pathname, params } = useLocation()
+
+	if(!context || !columnId) {
+		return (
+			<Table.Th
+				ref={ ref }
+				className={ clsx(className, { "table-column-fit": fitContent }) }
+				{ ...props }
+			>
+				{ children }
+			</Table.Th>
+		)
+	}
+
+	const { registerColumn, columns, model, pagination } = context
 
 	useEffect(() => {
 		const label = typeof children === "string" ? children : String(children)

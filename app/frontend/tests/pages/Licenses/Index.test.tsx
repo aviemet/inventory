@@ -13,9 +13,9 @@ describe("Licenses/Index", () => {
 		const licenses = [createMockLicensesIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<LicensesIndex licenses={ licenses } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<LicensesIndex licenses={ licenses } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple licenses", () => {
@@ -25,17 +25,17 @@ describe("Licenses/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<LicensesIndex licenses={ licenses } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<LicensesIndex licenses={ licenses } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty licenses array", () => {
 		const licenses: Schema.LicensesIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<LicensesIndex licenses={ licenses } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<LicensesIndex licenses={ licenses } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

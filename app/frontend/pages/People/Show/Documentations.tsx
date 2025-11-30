@@ -10,7 +10,7 @@ const Documentations = ({ item }: ItemDocumentationProps) => {
 	return (
 		<Table.TableProvider
 			selectable
-			rows={ item?.documentations ?? [] }
+			data={ item?.documentations ?? [] }
 		>
 			<Table.SearchInput />
 

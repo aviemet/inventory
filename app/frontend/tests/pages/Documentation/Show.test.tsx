@@ -16,8 +16,8 @@ describe("Documentation/Show", () => {
 	test("renders without error", () => {
 		const documentation = createMockDocumentationsShow()
 
-		expect(() => {
-			render(<ShowDocumentation documentation={ documentation } />)
-		}).not.toThrow()
+		const { container } = render(<ShowDocumentation documentation={ documentation } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

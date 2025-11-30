@@ -16,16 +16,16 @@ describe("Companies/Show", () => {
 	test("renders without error", () => {
 		const company = createMockCompaniesShow()
 
-		expect(() => {
-			render(<ShowCompany company={ company } />)
-		}).not.toThrow()
+		const { container } = render(<ShowCompany company={ company } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with company without contact", () => {
 		const company = createMockCompaniesShow({ contact: undefined })
 
-		expect(() => {
-			render(<ShowCompany company={ company } />)
-		}).not.toThrow()
+		const { container } = render(<ShowCompany company={ company } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

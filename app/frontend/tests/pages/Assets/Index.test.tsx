@@ -13,9 +13,9 @@ describe("Assets/Index", () => {
 		const assets = [createMockAssetsIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<AssetsIndex assets={ assets } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<AssetsIndex assets={ assets } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple assets", () => {
@@ -25,17 +25,17 @@ describe("Assets/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<AssetsIndex assets={ assets } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<AssetsIndex assets={ assets } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty assets array", () => {
 		const assets: Schema.AssetsIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<AssetsIndex assets={ assets } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<AssetsIndex assets={ assets } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

@@ -4,7 +4,8 @@ import { forwardRef } from "react"
 import { useTableContext, TableSectionContextProvider } from "./TableContext"
 
 export const Body = forwardRef<HTMLTableSectionElement, TableTbodyProps>(({ children, ...props }, ref) => {
-	const { searching } = useTableContext()
+	const context = useTableContext(undefined, false)
+	const searching = context?.searching ?? false
 
 	return (
 		<TableSectionContextProvider value={ { section: "body" } }>

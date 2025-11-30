@@ -13,9 +13,9 @@ describe("Departments/Index", () => {
 		const departments = [createMockDepartmentsIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<DepartmentsIndex departments={ departments } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<DepartmentsIndex departments={ departments } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple departments", () => {
@@ -25,17 +25,17 @@ describe("Departments/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<DepartmentsIndex departments={ departments } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<DepartmentsIndex departments={ departments } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty departments array", () => {
 		const departments: Schema.DepartmentsIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<DepartmentsIndex departments={ departments } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<DepartmentsIndex departments={ departments } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

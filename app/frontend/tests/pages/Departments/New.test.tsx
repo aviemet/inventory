@@ -16,8 +16,8 @@ describe("Departments/New", () => {
 	test("renders without error", () => {
 		const department = createMockDepartmentsFormData()
 
-		expect(() => {
-			render(<NewDepartment department={ department } />)
-		}).not.toThrow()
+		const { container } = render(<NewDepartment department={ department } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

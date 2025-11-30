@@ -16,8 +16,8 @@ describe("Networks/New", () => {
 	test("renders without error", () => {
 		const network = createMockNetworkFormData()
 
-		expect(() => {
-			render(<NetworkNew network={ network } />)
-		}).not.toThrow()
+		const { container } = render(<NetworkNew network={ network } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

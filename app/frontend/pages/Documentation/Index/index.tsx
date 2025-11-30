@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import DocumentationsTable from "@/domains/Documentation/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import DocumentationsTable from "@/domains/Documentation/Table"
 
 interface DocumentationIndexProps {
 	documentations: Schema.DocumentationsIndex[]

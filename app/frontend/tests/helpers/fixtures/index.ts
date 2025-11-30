@@ -132,3 +132,7 @@ export {
 	baseDocumentationsShowFixture,
 	createDocumentationsShowFixture,
 } from "./documentation"
+export {
+	basePeopleShowFixture,
+	createPeopleShowFixture,
+} from "./people"

@@ -16,16 +16,16 @@ describe("Licenses/Edit", () => {
 	test("renders without error", () => {
 		const license = createMockLicensesEdit()
 
-		expect(() => {
-			render(<EditLicense license={ license } />)
-		}).not.toThrow()
+		const { container } = render(<EditLicense license={ license } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with license without name", () => {
 		const license = createMockLicensesEdit({ name: "" })
 
-		expect(() => {
-			render(<EditLicense license={ license } />)
-		}).not.toThrow()
+		const { container } = render(<EditLicense license={ license } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

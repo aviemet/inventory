@@ -13,9 +13,9 @@ describe("Documentation/Index", () => {
 		const documentations = [createMockDocumentationsIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<DocumentationsIndex documentations={ documentations } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<DocumentationsIndex documentations={ documentations } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple documentations", () => {
@@ -25,17 +25,17 @@ describe("Documentation/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<DocumentationsIndex documentations={ documentations } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<DocumentationsIndex documentations={ documentations } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty documentations array", () => {
 		const documentations: Schema.DocumentationsIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<DocumentationsIndex documentations={ documentations } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<DocumentationsIndex documentations={ documentations } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

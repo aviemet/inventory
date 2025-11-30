@@ -13,9 +13,9 @@ describe("Categories/Index", () => {
 		const categories = [createMockCategoriesIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<CategoriesIndex categories={ categories } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<CategoriesIndex categories={ categories } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple categories", () => {
@@ -25,17 +25,17 @@ describe("Categories/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<CategoriesIndex categories={ categories } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<CategoriesIndex categories={ categories } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty categories array", () => {
 		const categories: Schema.CategoriesIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<CategoriesIndex categories={ categories } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<CategoriesIndex categories={ categories } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

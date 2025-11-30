@@ -16,8 +16,8 @@ describe("Categories/New", () => {
 	test("renders without error", () => {
 		const category = createMockCategoriesFormData()
 
-		expect(() => {
-			render(<NewCategory category={ category } />)
-		}).not.toThrow()
+		const { container } = render(<NewCategory category={ category } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

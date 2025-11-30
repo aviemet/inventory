@@ -42,7 +42,7 @@ const TableContext = createContext<TableContextValue | null>(null)
 
 const tableContexts = new Map<string, TableContextValue>()
 
-export function useTableContext(contextKey?: string): TableContextValue {
+export function useTableContext(contextKey?: string, required: boolean = true): TableContextValue | null {
 	const context = useContext(TableContext)
 
 	if(contextKey) {
@@ -53,7 +53,10 @@ export function useTableContext(contextKey?: string): TableContextValue {
 	}
 
 	if(!context) {
-		throw new Error("useTableContext must be used within TableProvider")
+		if(required) {
+			throw new Error("useTableContext must be used within TableProvider")
+		}
+		return null
 	}
 
 	return context
@@ -92,13 +95,22 @@ export function TableProvider<T extends TableRowData>({
 		manualPagination: !!pagination,
 		manualSorting: !!pagination,
 		pageCount: pagination?.pages,
+		initialState: {
+			pagination: {
+				pageIndex: 0,
+				pageSize: 25,
+			},
+		},
 		state: {
 			pagination: pagination
 				? {
 					pageIndex: pagination.current_page - 1,
 					pageSize: pagination.limit,
 				}
-				: undefined,
+				: {
+					pageIndex: 0,
+					pageSize: 25,
+				},
 		},
 	})
 

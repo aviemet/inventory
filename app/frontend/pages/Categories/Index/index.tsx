@@ -23,7 +23,7 @@ const CategoriesIndex = ({ categories, pagination }: CategoriesIndexProps) => {
 					selectable
 					hideable
 					model="categories"
-					rows={ categories }
+					data={ categories }
 					pagination={ pagination }
 				>
 					<TableTitleSection title={ title }

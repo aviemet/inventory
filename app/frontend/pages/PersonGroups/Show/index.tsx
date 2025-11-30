@@ -36,7 +36,7 @@ const ShowUser = ({ person_group }: ShowUserProps) => {
 				<Table.TableProvider
 					selectable
 					model="people"
-					rows={ person_group.people }
+					data={ person_group.people }
 				>
 					<GroupMembersTable />
 				</Table.TableProvider>
