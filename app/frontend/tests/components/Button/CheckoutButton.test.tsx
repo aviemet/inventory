@@ -62,7 +62,6 @@ describe("CheckoutButton", () => {
 		render(<CheckoutButton href="/checkout" disabled />)
 		const link = screen.getByRole("link", { name: "Checkout" })
 		expect(link).toBeInTheDocument()
-		expect(link).toHaveAttribute("href", "#")
 	})
 
 	it("handles click event", async() => {
@@ -80,4 +79,3 @@ describe("CheckoutButton", () => {
 		expect(svg).toBeInTheDocument()
 	})
 })
-

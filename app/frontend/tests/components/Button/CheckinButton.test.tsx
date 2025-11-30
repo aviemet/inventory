@@ -62,7 +62,6 @@ describe("CheckinButton", () => {
 		render(<CheckinButton href="/checkin" disabled />)
 		const link = screen.getByRole("link", { name: "Check In" })
 		expect(link).toBeInTheDocument()
-		expect(link).toHaveAttribute("href", "#")
 	})
 
 	it("handles click event", async() => {

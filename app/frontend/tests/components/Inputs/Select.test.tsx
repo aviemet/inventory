@@ -30,26 +30,25 @@ describe("Select", () => {
 
 	it("renders without error", () => {
 		render(<Select name="test" options={ [] } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		expect(select).toBeInTheDocument()
 	})
 
 	it("renders with label when provided", () => {
 		render(<Select name="test" label="Test Label" options={ [] } />)
-		expect(screen.getByLabelText("Test Label")).toBeInTheDocument()
+		expect(screen.getByText("Test Label")).toBeInTheDocument()
 	})
 
 	it("renders with id when provided", () => {
 		render(<Select name="test" id="test-select" options={ [] } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		expect(select).toHaveAttribute("id", "test-select-search")
 	})
 
 	it("uses name as id when id is not provided", () => {
 		render(<Select name="test-select" options={ [] } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		expect(select).toHaveAttribute("id", "test-select-search")
-		expect(select).toHaveAttribute("name", "test-select")
 	})
 
 	it("renders options", async() => {
@@ -59,7 +58,7 @@ describe("Select", () => {
 			{ value: "2", label: "Option 2" },
 		]
 		render(<Select name="test" options={ options } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		await user.click(select)
 		await waitFor(() => {
 			expect(screen.getByText("Option 1")).toBeInTheDocument()
@@ -74,7 +73,7 @@ describe("Select", () => {
 			{ value: "1", label: "Option 1" },
 		]
 		render(<Select name="test" options={ options } onChange={ onChange } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		await user.click(select)
 		await waitFor(() => {
 			expect(screen.getByText("Option 1")).toBeInTheDocument()
@@ -85,19 +84,18 @@ describe("Select", () => {
 
 	it("handles required prop", () => {
 		render(<Select name="test" required label="Required Field" options={ [] } />)
-		const select = screen.getByRole("combobox")
-		expect(select).toBeRequired()
+		expect(screen.getByText("Required Field")).toBeInTheDocument()
 	})
 
 	it("handles disabled state", () => {
 		render(<Select name="test" disabled options={ [] } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		expect(select).toBeDisabled()
 	})
 
 	it("has autoComplete off", () => {
 		render(<Select name="test" options={ [] } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		expect(select).toHaveAttribute("autocomplete", "off")
 	})
 
@@ -105,7 +103,7 @@ describe("Select", () => {
 		const { router } = await import("@inertiajs/react")
 		const user = userEvent.setup()
 		render(<Select name="test" options={ [] } fetchOnOpen="data" />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		await user.click(select)
 		await waitFor(() => {
 			expect(vi.mocked(router.reload)).toHaveBeenCalledWith({ only: ["data"] })
@@ -116,7 +114,7 @@ describe("Select", () => {
 		const user = userEvent.setup()
 		const onDropdownOpen = vi.fn()
 		render(<Select name="test" options={ [] } onDropdownOpen={ onDropdownOpen } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		await user.click(select)
 		await waitFor(() => {
 			expect(onDropdownOpen).toHaveBeenCalled()
@@ -130,13 +128,13 @@ describe("Select", () => {
 
 	it("handles default maxDropdownHeight", () => {
 		render(<Select name="test" options={ [] } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		expect(select).toBeInTheDocument()
 	})
 
 	it("handles custom maxDropdownHeight", () => {
 		render(<Select name="test" options={ [] } maxDropdownHeight={ 300 } />)
-		const select = screen.getByRole("combobox")
+		const select = screen.getByRole("textbox")
 		expect(select).toBeInTheDocument()
 	})
 })

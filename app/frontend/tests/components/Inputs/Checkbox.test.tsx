@@ -5,30 +5,26 @@ import { describe, expect, it, vi } from "vitest"
 import Checkbox from "@/components/Inputs/Checkbox"
 import { render } from "@/tests/helpers/utils"
 
+import {
+	testCommonInputBehaviors,
+	testLabelBehavior,
+	testRequiredBehavior,
+} from "./sharedBehaviors"
+
 describe("Checkbox", () => {
-	it("renders without error", () => {
-		render(<Checkbox />)
-		const checkbox = screen.getByRole("checkbox")
-		expect(checkbox).toBeInTheDocument()
+	testCommonInputBehaviors({
+		component: Checkbox,
+		defaultProps: {},
+		getInputElement: () => screen.getByRole("checkbox"),
+		interactionTest: {
+			action: async(checkbox, user) => {
+				await user.click(checkbox)
+			},
+		},
 	})
 
-	it("renders with label when provided", () => {
-		render(<Checkbox label="Test Label" />)
-		expect(screen.getByLabelText("Test Label")).toBeInTheDocument()
-	})
-
-	it("renders with id when provided", () => {
-		render(<Checkbox id="test-checkbox" />)
-		const checkbox = screen.getByRole("checkbox")
-		expect(checkbox).toHaveAttribute("id", "test-checkbox")
-	})
-
-	it("uses name as id when id is not provided", () => {
-		render(<Checkbox name="test-checkbox" />)
-		const checkbox = screen.getByRole("checkbox")
-		expect(checkbox).toHaveAttribute("id", "test-checkbox")
-		expect(checkbox).toHaveAttribute("name", "test-checkbox")
-	})
+	testLabelBehavior(Checkbox, {})
+	testRequiredBehavior(Checkbox, {}, () => screen.getByRole("checkbox"))
 
 	it("handles checked state", () => {
 		render(<Checkbox checked />)
@@ -42,41 +38,9 @@ describe("Checkbox", () => {
 		expect(checkbox).not.toBeChecked()
 	})
 
-	it("handles onChange callback", async() => {
-		const user = userEvent.setup()
-		const onChange = vi.fn()
-		render(<Checkbox onChange={ onChange } />)
-		const checkbox = screen.getByRole("checkbox")
-		await user.click(checkbox)
-		expect(onChange).toHaveBeenCalledTimes(1)
-	})
-
-	it("handles disabled state", () => {
-		render(<Checkbox disabled />)
-		const checkbox = screen.getByRole("checkbox")
-		expect(checkbox).toBeDisabled()
-	})
-
-	it("handles required prop", () => {
-		render(<Checkbox required label="Required Field" />)
-		const checkbox = screen.getByRole("checkbox")
-		expect(checkbox).toBeRequired()
-	})
-
 	it("passes through additional props", () => {
 		render(<Checkbox data-testid="custom-checkbox" />)
 		expect(screen.getByTestId("custom-checkbox")).toBeInTheDocument()
-	})
-
-	it("handles wrapper prop", () => {
-		render(<Checkbox name="test" wrapper={ true } wrapperProps={ { "data-testid": "wrapper" } } />)
-		expect(screen.getByTestId("wrapper")).toBeInTheDocument()
-	})
-
-	it("handles wrapperProps", () => {
-		render(<Checkbox name="test" wrapperProps={ { "data-testid": "wrapper", "data-custom": "value" } } />)
-		const wrapper = screen.getByTestId("wrapper")
-		expect(wrapper).toHaveAttribute("data-custom", "value")
 	})
 })
 

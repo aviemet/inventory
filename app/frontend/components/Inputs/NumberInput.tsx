@@ -32,6 +32,7 @@ const NumberInputComponent = forwardRef<HTMLInputElement, NumberInputProps>((
 			</Label> }
 			<NumberInput
 				id={ inputId }
+				name={ name }
 				value={ value }
 				required={ required }
 				ref={ ref }

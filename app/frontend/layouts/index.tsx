@@ -1,4 +1,3 @@
-import { type PageProps } from "@inertiajs/core"
 import React from "react"
 
 import { Flash } from "@/components"
@@ -8,15 +7,18 @@ import Providers from "@/layouts/Providers"
 import AppLayout from "./AppLayout"
 import AuthLayout from "./AuthLayout"
 
-interface LayoutWrapperProps {
+import "@/lib/i18n"
+
+export const LAYOUTS = {
+	"auth": "auth",
+	"app": "app",
+} as const
+
+export interface LayoutProps {
 	children: React.ReactNode
 }
 
-interface InertiaPageProps extends PageProps {
-	props: LayoutWrapperProps
-}
-
-const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
+const LayoutWrapper = React.memo(({ children }: LayoutProps) => {
 	return (
 		<Providers>
 			<Flash />
@@ -25,19 +27,19 @@ const LayoutWrapper = React.memo(({ children }: LayoutWrapperProps) => {
 	)
 })
 
-const AppLayoutLayout = (page: InertiaPageProps) => {
+const AppLayoutLayout = ({ children }: LayoutProps) => {
 	return (
 		<LayoutWrapper>
 			<Spotlight />
-			<AppLayout>{ page }</AppLayout>
+			<AppLayout>{ children }</AppLayout>
 		</LayoutWrapper>
 	)
 }
 
-const AuthLayoutLayout = (page: InertiaPageProps) => {
+const AuthLayoutLayout = ({ children }: LayoutProps) => {
 	return (
 		<LayoutWrapper>
-			<AuthLayout>{ page }</AuthLayout>
+			<AuthLayout>{ children }</AuthLayout>
 		</LayoutWrapper>
 	)
 }

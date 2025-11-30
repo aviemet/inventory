@@ -5,6 +5,7 @@ import React, { forwardRef } from "react"
 export interface AnchorLinkProps
 	extends Omit<InertiaLinkProps, "color" | "size" | "span" | "style">,
 	Omit<AnchorProps, "href"> {
+
 }
 
 const AnchorLink = forwardRef<HTMLAnchorElement, AnchorLinkProps>((

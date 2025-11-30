@@ -1,0 +1,36 @@
+# Project Inventory
+
+## Testing Patterns
+
+### Shared Input Test Behaviors
+
+Input components share common behaviors that are tested via reusable helpers in `app/frontend/tests/components/Inputs/sharedBehaviors.tsx`, similar to RSpec's `shared_examples`.
+
+**Common behaviors tested:**
+- Rendering without error
+- ID handling (explicit id vs using name as id)
+- Name attribute (when applicable)
+- Disabled state
+- Wrapper and wrapperProps
+- onChange callbacks (with configurable interaction)
+
+**Additional behavior helpers:**
+- `testLabelBehavior` - Tests label rendering
+- `testPlaceholderBehavior` - Tests placeholder handling
+- `testRequiredBehavior` - Tests required prop
+
+**Usage pattern:**
+```typescript
+testCommonInputBehaviors({
+  component: ComponentName,
+  defaultProps: { name: "test" },
+  getInputElement: () => screen.getByRole("textbox"), // or container query
+  interactionTest: {
+    action: async(input, user) => {
+      await user.type(input, "a")
+    },
+  },
+})
+```
+
+**Important:** When writing tests, if the implementation is incorrect, fix the implementation first, then write tests that verify correct behavior. Never write tests that accommodate bugs.

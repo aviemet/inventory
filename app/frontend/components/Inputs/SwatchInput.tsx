@@ -1,3 +1,4 @@
+import { BoxProps } from "@mantine/core"
 import React, { forwardRef, useState } from "react"
 import { InputProps } from "react-html-props"
 
@@ -12,7 +13,7 @@ export interface SwatchInputProps extends Omit<InputProps, "onChange">, BaseInpu
 	label?: React.ReactNode
 	initialValue?: string
 	onChange?: (color: string) => void
-	wrapperProps?: Record<string, any>
+	wrapperProps?: BoxProps
 }
 
 const SwatchInput = forwardRef<HTMLInputElement, SwatchInputProps>((

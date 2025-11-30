@@ -4,87 +4,87 @@
  * @see https://github.com/railsware/js-routes
  */
 declare type Optional<T> = {
-	[P in keyof T]?: T[P] | null;
+    [P in keyof T]?: T[P] | null;
 };
 declare type Collection<T> = Record<string, T>;
 declare type BaseRouteParameter = string | boolean | Date | number | bigint;
 declare type MethodRouteParameter = BaseRouteParameter | (() => BaseRouteParameter);
 declare type ModelRouteParameter = {
-	id: MethodRouteParameter
+    id: MethodRouteParameter;
 } | {
-	to_param: MethodRouteParameter
+    to_param: MethodRouteParameter;
 } | {
-	toParam: MethodRouteParameter
+    toParam: MethodRouteParameter;
 };
 declare type RequiredRouteParameter = BaseRouteParameter | ModelRouteParameter;
 declare type OptionalRouteParameter = undefined | null | RequiredRouteParameter;
 declare type QueryRouteParameter = OptionalRouteParameter | QueryRouteParameter[] | {
-	[k: string]: QueryRouteParameter
+    [k: string]: QueryRouteParameter;
 };
 declare type RouteParameters = Collection<QueryRouteParameter>;
 declare type Serializable = Collection<unknown>;
 declare type Serializer = (value: Serializable) => string;
 declare type RouteHelperExtras = {
-	requiredParams(): string[]
-	toString(): string
+    requiredParams(): string[];
+    toString(): string;
 };
 declare type RequiredParameters<T extends number> = T extends 1 ? [RequiredRouteParameter] : T extends 2 ? [RequiredRouteParameter, RequiredRouteParameter] : T extends 3 ? [RequiredRouteParameter, RequiredRouteParameter, RequiredRouteParameter] : T extends 4 ? [
-	RequiredRouteParameter,
-	RequiredRouteParameter,
-	RequiredRouteParameter,
-	RequiredRouteParameter
+    RequiredRouteParameter,
+    RequiredRouteParameter,
+    RequiredRouteParameter,
+    RequiredRouteParameter
 ] : RequiredRouteParameter[];
 declare type RouteHelperOptions = RouteOptions & Collection<OptionalRouteParameter>;
 declare type RouteHelper<T extends number = number> = ((...args: [...RequiredParameters<T>, RouteHelperOptions]) => string) & RouteHelperExtras;
 declare type RouteHelpers = Collection<RouteHelper>;
 declare type Configuration = {
-	prefix: string
-	default_url_options: RouteParameters
-	special_options_key: string
-	serializer: Serializer
+    prefix: string;
+    default_url_options: RouteParameters;
+    special_options_key: string;
+    serializer: Serializer;
 };
 interface RouterExposedMethods {
-	config(): Configuration
-	configure(arg: Partial<Configuration>): Configuration
-	serialize: Serializer
+    config(): Configuration;
+    configure(arg: Partial<Configuration>): Configuration;
+    serialize: Serializer;
 }
 declare type KeywordUrlOptions = Optional<{
-	host: string
-	protocol: string
-	subdomain: string
-	port: string | number
-	anchor: string
-	trailing_slash: boolean
-	script_name: string
-	params: RouteParameters
+    host: string;
+    protocol: string;
+    subdomain: string;
+    port: string | number;
+    anchor: string;
+    trailing_slash: boolean;
+    script_name: string;
+    params: RouteParameters;
 }>;
 declare type RouteOptions = KeywordUrlOptions & RouteParameters;
 declare type PartsTable = Collection<{
-	r?: boolean
-	d?: OptionalRouteParameter
+    r?: boolean;
+    d?: OptionalRouteParameter;
 }>;
 declare type ModuleType = "CJS" | "AMD" | "UMD" | "ESM" | "DTS" | "NIL";
 declare const RubyVariables: {
-	PREFIX: string
-	DEPRECATED_FALSE_PARAMETER_BEHAVIOR: boolean
-	SPECIAL_OPTIONS_KEY: string
-	DEFAULT_URL_OPTIONS: RouteParameters
-	SERIALIZER: Serializer
-	ROUTES_OBJECT: RouteHelpers
-	MODULE_TYPE: ModuleType
-	WRAPPER: <T>(callback: T) => T
-}
+    PREFIX: string;
+    DEPRECATED_FALSE_PARAMETER_BEHAVIOR: boolean;
+    SPECIAL_OPTIONS_KEY: string;
+    DEFAULT_URL_OPTIONS: RouteParameters;
+    SERIALIZER: Serializer;
+    ROUTES_OBJECT: RouteHelpers;
+    MODULE_TYPE: ModuleType;
+    WRAPPER: <T>(callback: T) => T;
+};
 declare const define: undefined | (((arg: unknown[], callback: () => unknown) => void) & {
-	amd?: unknown
-})
+    amd?: unknown;
+});
 declare const module: {
-	exports: unknown
-} | undefined
-export const configure: RouterExposedMethods["configure"]
+    exports: unknown;
+} | undefined;
+export const configure: RouterExposedMethods['configure'];
 
-export const config: RouterExposedMethods["config"]
+export const config: RouterExposedMethods['config'];
 
-export const serialize: RouterExposedMethods["serialize"]
+export const serialize: RouterExposedMethods['serialize'];
 
 /**
  * Generates rails route to
@@ -93,8 +93,8 @@ export const serialize: RouterExposedMethods["serialize"]
  * @returns {string} route path
  */
 export const acceptUserInvitation: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -103,8 +103,8 @@ export const acceptUserInvitation: ((
  * @returns {string} route path
  */
 export const accessories: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -114,9 +114,9 @@ export const accessories: ((
  * @returns {string} route path
  */
 export const accessory: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -125,8 +125,8 @@ export const accessory: ((
  * @returns {string} route path
  */
 export const apiAccessories: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -135,8 +135,8 @@ export const apiAccessories: ((
  * @returns {string} route path
  */
 export const apiAccessoriesOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -146,9 +146,9 @@ export const apiAccessoriesOptions: ((
  * @returns {string} route path
  */
 export const apiAccessory: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -158,9 +158,9 @@ export const apiAccessory: ((
  * @returns {string} route path
  */
 export const apiAsset: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -169,8 +169,8 @@ export const apiAsset: ((
  * @returns {string} route path
  */
 export const apiAssets: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -179,8 +179,8 @@ export const apiAssets: ((
  * @returns {string} route path
  */
 export const apiAssetsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -190,9 +190,9 @@ export const apiAssetsOptions: ((
  * @returns {string} route path
  */
 export const apiAssignment: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -201,8 +201,8 @@ export const apiAssignment: ((
  * @returns {string} route path
  */
 export const apiAssignments: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -211,8 +211,8 @@ export const apiAssignments: ((
  * @returns {string} route path
  */
 export const apiCategories: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -221,8 +221,8 @@ export const apiCategories: ((
  * @returns {string} route path
  */
 export const apiCategoriesOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -232,9 +232,9 @@ export const apiCategoriesOptions: ((
  * @returns {string} route path
  */
 export const apiCategory: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -244,9 +244,9 @@ export const apiCategory: ((
  * @returns {string} route path
  */
 export const apiCategoryOptions: ((
-	categoryType: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  categoryType: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -255,8 +255,8 @@ export const apiCategoryOptions: ((
  * @returns {string} route path
  */
 export const apiCompanies: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -265,8 +265,8 @@ export const apiCompanies: ((
  * @returns {string} route path
  */
 export const apiCompaniesOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -276,9 +276,9 @@ export const apiCompaniesOptions: ((
  * @returns {string} route path
  */
 export const apiCompany: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -288,9 +288,9 @@ export const apiCompany: ((
  * @returns {string} route path
  */
 export const apiComponent: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -299,8 +299,8 @@ export const apiComponent: ((
  * @returns {string} route path
  */
 export const apiComponents: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -309,8 +309,8 @@ export const apiComponents: ((
  * @returns {string} route path
  */
 export const apiComponentsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -320,9 +320,9 @@ export const apiComponentsOptions: ((
  * @returns {string} route path
  */
 export const apiConsumable: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -331,8 +331,8 @@ export const apiConsumable: ((
  * @returns {string} route path
  */
 export const apiConsumables: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -341,8 +341,8 @@ export const apiConsumables: ((
  * @returns {string} route path
  */
 export const apiConsumablesOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -352,9 +352,9 @@ export const apiConsumablesOptions: ((
  * @returns {string} route path
  */
 export const apiContract: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -363,8 +363,8 @@ export const apiContract: ((
  * @returns {string} route path
  */
 export const apiContracts: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -373,8 +373,8 @@ export const apiContracts: ((
  * @returns {string} route path
  */
 export const apiContractsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -383,8 +383,8 @@ export const apiContractsOptions: ((
  * @returns {string} route path
  */
 export const apiCurrencies: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -394,9 +394,9 @@ export const apiCurrencies: ((
  * @returns {string} route path
  */
 export const apiDepartment: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -405,8 +405,8 @@ export const apiDepartment: ((
  * @returns {string} route path
  */
 export const apiDepartments: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -415,8 +415,8 @@ export const apiDepartments: ((
  * @returns {string} route path
  */
 export const apiDepartmentsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -426,9 +426,9 @@ export const apiDepartmentsOptions: ((
  * @returns {string} route path
  */
 export const apiDocumentation: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -437,8 +437,8 @@ export const apiDocumentation: ((
  * @returns {string} route path
  */
 export const apiDocumentations: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -447,8 +447,8 @@ export const apiDocumentations: ((
  * @returns {string} route path
  */
 export const apiDocumentationsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -458,9 +458,9 @@ export const apiDocumentationsOptions: ((
  * @returns {string} route path
  */
 export const apiIpLease: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -469,8 +469,8 @@ export const apiIpLease: ((
  * @returns {string} route path
  */
 export const apiIpLeases: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -480,9 +480,9 @@ export const apiIpLeases: ((
  * @returns {string} route path
  */
 export const apiItem: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -493,10 +493,10 @@ export const apiItem: ((
  * @returns {string} route path
  */
 export const apiItemNic: ((
-	itemId: RequiredRouteParameter,
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  itemId: RequiredRouteParameter,
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -506,9 +506,9 @@ export const apiItemNic: ((
  * @returns {string} route path
  */
 export const apiItemNics: ((
-	itemId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  itemId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -517,8 +517,8 @@ export const apiItemNics: ((
  * @returns {string} route path
  */
 export const apiItems: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -527,8 +527,8 @@ export const apiItems: ((
  * @returns {string} route path
  */
 export const apiItemsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -538,9 +538,9 @@ export const apiItemsOptions: ((
  * @returns {string} route path
  */
 export const apiLicense: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -549,8 +549,8 @@ export const apiLicense: ((
  * @returns {string} route path
  */
 export const apiLicenses: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -559,8 +559,8 @@ export const apiLicenses: ((
  * @returns {string} route path
  */
 export const apiLicensesOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -570,9 +570,9 @@ export const apiLicensesOptions: ((
  * @returns {string} route path
  */
 export const apiLocation: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -581,8 +581,8 @@ export const apiLocation: ((
  * @returns {string} route path
  */
 export const apiLocations: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -591,8 +591,8 @@ export const apiLocations: ((
  * @returns {string} route path
  */
 export const apiLocationsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -602,9 +602,9 @@ export const apiLocationsOptions: ((
  * @returns {string} route path
  */
 export const apiManufacturer: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -613,8 +613,8 @@ export const apiManufacturer: ((
  * @returns {string} route path
  */
 export const apiManufacturers: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -623,8 +623,8 @@ export const apiManufacturers: ((
  * @returns {string} route path
  */
 export const apiManufacturersOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -634,9 +634,9 @@ export const apiManufacturersOptions: ((
  * @returns {string} route path
  */
 export const apiModel: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -645,8 +645,8 @@ export const apiModel: ((
  * @returns {string} route path
  */
 export const apiModels: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -655,8 +655,8 @@ export const apiModels: ((
  * @returns {string} route path
  */
 export const apiModelsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -666,9 +666,9 @@ export const apiModelsOptions: ((
  * @returns {string} route path
  */
 export const apiNetwork: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -677,8 +677,8 @@ export const apiNetwork: ((
  * @returns {string} route path
  */
 export const apiNetworks: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -687,8 +687,8 @@ export const apiNetworks: ((
  * @returns {string} route path
  */
 export const apiNetworksOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -698,9 +698,9 @@ export const apiNetworksOptions: ((
  * @returns {string} route path
  */
 export const apiOrder: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -709,8 +709,8 @@ export const apiOrder: ((
  * @returns {string} route path
  */
 export const apiOrders: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -719,8 +719,8 @@ export const apiOrders: ((
  * @returns {string} route path
  */
 export const apiOrdersOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -730,9 +730,9 @@ export const apiOrdersOptions: ((
  * @returns {string} route path
  */
 export const apiOwnership: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -741,8 +741,8 @@ export const apiOwnership: ((
  * @returns {string} route path
  */
 export const apiOwnerships: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -751,8 +751,8 @@ export const apiOwnerships: ((
  * @returns {string} route path
  */
 export const apiPeople: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -761,8 +761,8 @@ export const apiPeople: ((
  * @returns {string} route path
  */
 export const apiPeopleOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -772,9 +772,9 @@ export const apiPeopleOptions: ((
  * @returns {string} route path
  */
 export const apiPerson: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -784,9 +784,9 @@ export const apiPerson: ((
  * @returns {string} route path
  */
 export const apiPurchase: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -795,8 +795,8 @@ export const apiPurchase: ((
  * @returns {string} route path
  */
 export const apiPurchases: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -805,8 +805,8 @@ export const apiPurchases: ((
  * @returns {string} route path
  */
 export const apiSearches: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -815,8 +815,8 @@ export const apiSearches: ((
  * @returns {string} route path
  */
 export const apiSmtpTest: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -825,8 +825,8 @@ export const apiSmtpTest: ((
  * @returns {string} route path
  */
 export const apiSpotlights: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -836,9 +836,9 @@ export const apiSpotlights: ((
  * @returns {string} route path
  */
 export const apiStatusLabel: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -847,8 +847,8 @@ export const apiStatusLabel: ((
  * @returns {string} route path
  */
 export const apiStatusLabels: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -857,8 +857,8 @@ export const apiStatusLabels: ((
  * @returns {string} route path
  */
 export const apiStatusLabelsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -868,9 +868,9 @@ export const apiStatusLabelsOptions: ((
  * @returns {string} route path
  */
 export const apiUpdateTablePreferences: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -880,9 +880,9 @@ export const apiUpdateTablePreferences: ((
  * @returns {string} route path
  */
 export const apiUpdateUserPreferences: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -892,9 +892,9 @@ export const apiUpdateUserPreferences: ((
  * @returns {string} route path
  */
 export const apiUser: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -903,8 +903,8 @@ export const apiUser: ((
  * @returns {string} route path
  */
 export const apiUsers: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -914,9 +914,9 @@ export const apiUsers: ((
  * @returns {string} route path
  */
 export const apiVendor: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -925,8 +925,8 @@ export const apiVendor: ((
  * @returns {string} route path
  */
 export const apiVendors: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -935,8 +935,8 @@ export const apiVendors: ((
  * @returns {string} route path
  */
 export const apiVendorsOptions: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -945,8 +945,8 @@ export const apiVendorsOptions: ((
  * @returns {string} route path
  */
 export const apiWarranties: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -956,9 +956,9 @@ export const apiWarranties: ((
  * @returns {string} route path
  */
 export const apiWarranty: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -968,9 +968,9 @@ export const apiWarranty: ((
  * @returns {string} route path
  */
 export const asset: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -979,8 +979,8 @@ export const asset: ((
  * @returns {string} route path
  */
 export const assets: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -990,9 +990,9 @@ export const assets: ((
  * @returns {string} route path
  */
 export const assignment: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1001,8 +1001,8 @@ export const assignment: ((
  * @returns {string} route path
  */
 export const assignments: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1011,8 +1011,8 @@ export const assignments: ((
  * @returns {string} route path
  */
 export const cancelUserRegistration: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1021,8 +1021,8 @@ export const cancelUserRegistration: ((
  * @returns {string} route path
  */
 export const categories: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1032,9 +1032,9 @@ export const categories: ((
  * @returns {string} route path
  */
 export const category: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1044,9 +1044,9 @@ export const category: ((
  * @returns {string} route path
  */
 export const categoryAccessories: ((
-	categoryId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  categoryId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1056,9 +1056,9 @@ export const categoryAccessories: ((
  * @returns {string} route path
  */
 export const categoryAssets: ((
-	categoryId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  categoryId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1068,9 +1068,9 @@ export const categoryAssets: ((
  * @returns {string} route path
  */
 export const categoryComponents: ((
-	categoryId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  categoryId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1080,9 +1080,9 @@ export const categoryComponents: ((
  * @returns {string} route path
  */
 export const categoryConsumables: ((
-	categoryId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  categoryId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1092,9 +1092,9 @@ export const categoryConsumables: ((
  * @returns {string} route path
  */
 export const categoryItems: ((
-	categoryId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  categoryId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1104,9 +1104,9 @@ export const categoryItems: ((
  * @returns {string} route path
  */
 export const categoryLicenses: ((
-	categoryId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  categoryId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1117,10 +1117,10 @@ export const categoryLicenses: ((
  * @returns {string} route path
  */
 export const checkinAccessory: ((
-	id: RequiredRouteParameter,
-	assignmentId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1130,9 +1130,9 @@ export const checkinAccessory: ((
  * @returns {string} route path
  */
 export const checkinAsset: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1143,10 +1143,10 @@ export const checkinAsset: ((
  * @returns {string} route path
  */
 export const checkinComponent: ((
-	id: RequiredRouteParameter,
-	assignmentId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1156,9 +1156,9 @@ export const checkinComponent: ((
  * @returns {string} route path
  */
 export const checkinItem: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1169,10 +1169,10 @@ export const checkinItem: ((
  * @returns {string} route path
  */
 export const checkinLicense: ((
-	id: RequiredRouteParameter,
-	assignmentId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  assignmentId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1182,9 +1182,9 @@ export const checkinLicense: ((
  * @returns {string} route path
  */
 export const checkoutAccessory: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1194,9 +1194,9 @@ export const checkoutAccessory: ((
  * @returns {string} route path
  */
 export const checkoutAsset: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1206,9 +1206,9 @@ export const checkoutAsset: ((
  * @returns {string} route path
  */
 export const checkoutComponent: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1218,9 +1218,9 @@ export const checkoutComponent: ((
  * @returns {string} route path
  */
 export const checkoutConsumable: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1230,9 +1230,9 @@ export const checkoutConsumable: ((
  * @returns {string} route path
  */
 export const checkoutItem: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1242,9 +1242,9 @@ export const checkoutItem: ((
  * @returns {string} route path
  */
 export const checkoutLicense: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1254,9 +1254,9 @@ export const checkoutLicense: ((
  * @returns {string} route path
  */
 export const cloneItems: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1265,8 +1265,8 @@ export const cloneItems: ((
  * @returns {string} route path
  */
 export const companies: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1276,9 +1276,9 @@ export const companies: ((
  * @returns {string} route path
  */
 export const company: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1287,8 +1287,8 @@ export const company: ((
  * @returns {string} route path
  */
 export const completeRegistration: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1298,9 +1298,9 @@ export const completeRegistration: ((
  * @returns {string} route path
  */
 export const component: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1309,8 +1309,8 @@ export const component: ((
  * @returns {string} route path
  */
 export const components: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1320,9 +1320,9 @@ export const components: ((
  * @returns {string} route path
  */
 export const consumable: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1331,8 +1331,8 @@ export const consumable: ((
  * @returns {string} route path
  */
 export const consumables: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1342,9 +1342,9 @@ export const consumables: ((
  * @returns {string} route path
  */
 export const contract: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1353,8 +1353,8 @@ export const contract: ((
  * @returns {string} route path
  */
 export const contracts: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1363,8 +1363,8 @@ export const contracts: ((
  * @returns {string} route path
  */
 export const dashboard: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1374,9 +1374,9 @@ export const dashboard: ((
  * @returns {string} route path
  */
 export const department: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1385,8 +1385,8 @@ export const department: ((
  * @returns {string} route path
  */
 export const departments: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1395,8 +1395,8 @@ export const departments: ((
  * @returns {string} route path
  */
 export const destroyUserSession: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1406,9 +1406,9 @@ export const destroyUserSession: ((
  * @returns {string} route path
  */
 export const documentation: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1417,8 +1417,8 @@ export const documentation: ((
  * @returns {string} route path
  */
 export const documentations: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1428,9 +1428,9 @@ export const documentations: ((
  * @returns {string} route path
  */
 export const editAccessory: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1440,9 +1440,9 @@ export const editAccessory: ((
  * @returns {string} route path
  */
 export const editAsset: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1452,9 +1452,9 @@ export const editAsset: ((
  * @returns {string} route path
  */
 export const editAssignment: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1464,9 +1464,9 @@ export const editAssignment: ((
  * @returns {string} route path
  */
 export const editCategory: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1476,9 +1476,9 @@ export const editCategory: ((
  * @returns {string} route path
  */
 export const editCompany: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1488,9 +1488,9 @@ export const editCompany: ((
  * @returns {string} route path
  */
 export const editComponent: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1500,9 +1500,9 @@ export const editComponent: ((
  * @returns {string} route path
  */
 export const editConsumable: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1512,9 +1512,9 @@ export const editConsumable: ((
  * @returns {string} route path
  */
 export const editContract: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1524,9 +1524,9 @@ export const editContract: ((
  * @returns {string} route path
  */
 export const editDepartment: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1536,9 +1536,9 @@ export const editDepartment: ((
  * @returns {string} route path
  */
 export const editDocumentation: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1548,9 +1548,9 @@ export const editDocumentation: ((
  * @returns {string} route path
  */
 export const editItem: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1560,9 +1560,9 @@ export const editItem: ((
  * @returns {string} route path
  */
 export const editLicense: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1572,9 +1572,9 @@ export const editLicense: ((
  * @returns {string} route path
  */
 export const editLocation: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1584,9 +1584,9 @@ export const editLocation: ((
  * @returns {string} route path
  */
 export const editManufacturer: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1596,9 +1596,9 @@ export const editManufacturer: ((
  * @returns {string} route path
  */
 export const editModel: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1608,9 +1608,9 @@ export const editModel: ((
  * @returns {string} route path
  */
 export const editNetwork: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1620,9 +1620,9 @@ export const editNetwork: ((
  * @returns {string} route path
  */
 export const editOrder: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1632,9 +1632,9 @@ export const editOrder: ((
  * @returns {string} route path
  */
 export const editPerson: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1644,9 +1644,9 @@ export const editPerson: ((
  * @returns {string} route path
  */
 export const editPersonGroup: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1656,9 +1656,9 @@ export const editPersonGroup: ((
  * @returns {string} route path
  */
 export const editPurchase: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1668,9 +1668,9 @@ export const editPurchase: ((
  * @returns {string} route path
  */
 export const editSettingsAssetTag: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1680,9 +1680,9 @@ export const editSettingsAssetTag: ((
  * @returns {string} route path
  */
 export const editSettingsBackup: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1692,9 +1692,9 @@ export const editSettingsBackup: ((
  * @returns {string} route path
  */
 export const editSettingsBarcode: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1704,9 +1704,9 @@ export const editSettingsBarcode: ((
  * @returns {string} route path
  */
 export const editSettingsGeneral: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1716,9 +1716,9 @@ export const editSettingsGeneral: ((
  * @returns {string} route path
  */
 export const editSettingsIntegration: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1728,9 +1728,9 @@ export const editSettingsIntegration: ((
  * @returns {string} route path
  */
 export const editSettingsLocalization: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1740,9 +1740,9 @@ export const editSettingsLocalization: ((
  * @returns {string} route path
  */
 export const editSettingsLog: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1752,9 +1752,9 @@ export const editSettingsLog: ((
  * @returns {string} route path
  */
 export const editSettingsNotification: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1764,9 +1764,9 @@ export const editSettingsNotification: ((
  * @returns {string} route path
  */
 export const editSettingsSmtp: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1776,9 +1776,9 @@ export const editSettingsSmtp: ((
  * @returns {string} route path
  */
 export const editSettingsTicket: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1788,9 +1788,9 @@ export const editSettingsTicket: ((
  * @returns {string} route path
  */
 export const editStatusLabel: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1800,9 +1800,9 @@ export const editStatusLabel: ((
  * @returns {string} route path
  */
 export const editTicket: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1812,9 +1812,9 @@ export const editTicket: ((
  * @returns {string} route path
  */
 export const editUser: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1823,8 +1823,8 @@ export const editUser: ((
  * @returns {string} route path
  */
 export const editUserPassword: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1833,8 +1833,8 @@ export const editUserPassword: ((
  * @returns {string} route path
  */
 export const editUserRegistration: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1844,9 +1844,9 @@ export const editUserRegistration: ((
  * @returns {string} route path
  */
 export const editVendor: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1856,9 +1856,9 @@ export const editVendor: ((
  * @returns {string} route path
  */
 export const item: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1867,8 +1867,8 @@ export const item: ((
  * @returns {string} route path
  */
 export const items: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1878,9 +1878,9 @@ export const items: ((
  * @returns {string} route path
  */
 export const license: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1889,8 +1889,8 @@ export const license: ((
  * @returns {string} route path
  */
 export const licenses: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1900,9 +1900,9 @@ export const licenses: ((
  * @returns {string} route path
  */
 export const location: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1911,8 +1911,8 @@ export const location: ((
  * @returns {string} route path
  */
 export const locations: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1922,9 +1922,9 @@ export const locations: ((
  * @returns {string} route path
  */
 export const manufacturer: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1933,8 +1933,8 @@ export const manufacturer: ((
  * @returns {string} route path
  */
 export const manufacturers: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1944,9 +1944,9 @@ export const manufacturers: ((
  * @returns {string} route path
  */
 export const model: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1955,8 +1955,8 @@ export const model: ((
  * @returns {string} route path
  */
 export const models: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1966,9 +1966,9 @@ export const models: ((
  * @returns {string} route path
  */
 export const network: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1977,8 +1977,8 @@ export const network: ((
  * @returns {string} route path
  */
 export const networks: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1987,8 +1987,8 @@ export const networks: ((
  * @returns {string} route path
  */
 export const newAccessory: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -1997,8 +1997,8 @@ export const newAccessory: ((
  * @returns {string} route path
  */
 export const newAsset: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2007,8 +2007,8 @@ export const newAsset: ((
  * @returns {string} route path
  */
 export const newCategory: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2017,8 +2017,8 @@ export const newCategory: ((
  * @returns {string} route path
  */
 export const newCompany: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2027,8 +2027,8 @@ export const newCompany: ((
  * @returns {string} route path
  */
 export const newComponent: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2037,8 +2037,8 @@ export const newComponent: ((
  * @returns {string} route path
  */
 export const newConsumable: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2047,8 +2047,8 @@ export const newConsumable: ((
  * @returns {string} route path
  */
 export const newContract: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2057,8 +2057,8 @@ export const newContract: ((
  * @returns {string} route path
  */
 export const newDepartment: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2067,8 +2067,8 @@ export const newDepartment: ((
  * @returns {string} route path
  */
 export const newDocumentation: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2077,8 +2077,8 @@ export const newDocumentation: ((
  * @returns {string} route path
  */
 export const newItem: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2087,8 +2087,8 @@ export const newItem: ((
  * @returns {string} route path
  */
 export const newLicense: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2097,8 +2097,8 @@ export const newLicense: ((
  * @returns {string} route path
  */
 export const newLocation: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2107,8 +2107,8 @@ export const newLocation: ((
  * @returns {string} route path
  */
 export const newManufacturer: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2117,8 +2117,8 @@ export const newManufacturer: ((
  * @returns {string} route path
  */
 export const newModel: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2127,8 +2127,8 @@ export const newModel: ((
  * @returns {string} route path
  */
 export const newNetwork: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2137,8 +2137,8 @@ export const newNetwork: ((
  * @returns {string} route path
  */
 export const newOrder: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2147,8 +2147,8 @@ export const newOrder: ((
  * @returns {string} route path
  */
 export const newPerson: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2157,8 +2157,8 @@ export const newPerson: ((
  * @returns {string} route path
  */
 export const newPersonGroup: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2167,8 +2167,8 @@ export const newPersonGroup: ((
  * @returns {string} route path
  */
 export const newPurchase: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2177,8 +2177,8 @@ export const newPurchase: ((
  * @returns {string} route path
  */
 export const newSettingsAssetTag: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2187,8 +2187,8 @@ export const newSettingsAssetTag: ((
  * @returns {string} route path
  */
 export const newSettingsBackup: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2197,8 +2197,8 @@ export const newSettingsBackup: ((
  * @returns {string} route path
  */
 export const newSettingsBarcode: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2207,8 +2207,8 @@ export const newSettingsBarcode: ((
  * @returns {string} route path
  */
 export const newSettingsGeneral: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2217,8 +2217,8 @@ export const newSettingsGeneral: ((
  * @returns {string} route path
  */
 export const newSettingsIntegration: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2227,8 +2227,8 @@ export const newSettingsIntegration: ((
  * @returns {string} route path
  */
 export const newSettingsLocalization: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2237,8 +2237,8 @@ export const newSettingsLocalization: ((
  * @returns {string} route path
  */
 export const newSettingsLog: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2247,8 +2247,8 @@ export const newSettingsLog: ((
  * @returns {string} route path
  */
 export const newSettingsNotification: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2257,8 +2257,8 @@ export const newSettingsNotification: ((
  * @returns {string} route path
  */
 export const newSettingsSmtp: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2267,8 +2267,8 @@ export const newSettingsSmtp: ((
  * @returns {string} route path
  */
 export const newSettingsTicket: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2277,8 +2277,8 @@ export const newSettingsTicket: ((
  * @returns {string} route path
  */
 export const newStatusLabel: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2287,8 +2287,8 @@ export const newStatusLabel: ((
  * @returns {string} route path
  */
 export const newTicket: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2297,8 +2297,8 @@ export const newTicket: ((
  * @returns {string} route path
  */
 export const newUser: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2307,8 +2307,8 @@ export const newUser: ((
  * @returns {string} route path
  */
 export const newUserConfirmation: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2317,8 +2317,8 @@ export const newUserConfirmation: ((
  * @returns {string} route path
  */
 export const newUserInvitation: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2327,8 +2327,8 @@ export const newUserInvitation: ((
  * @returns {string} route path
  */
 export const newUserPassword: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2337,8 +2337,8 @@ export const newUserPassword: ((
  * @returns {string} route path
  */
 export const newUserRegistration: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2347,8 +2347,8 @@ export const newUserRegistration: ((
  * @returns {string} route path
  */
 export const newUserSession: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2357,8 +2357,8 @@ export const newUserSession: ((
  * @returns {string} route path
  */
 export const newUserUnlock: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2367,8 +2367,8 @@ export const newUserUnlock: ((
  * @returns {string} route path
  */
 export const newVendor: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2378,9 +2378,9 @@ export const newVendor: ((
  * @returns {string} route path
  */
 export const order: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2389,8 +2389,8 @@ export const order: ((
  * @returns {string} route path
  */
 export const orders: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2399,8 +2399,8 @@ export const orders: ((
  * @returns {string} route path
  */
 export const people: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2410,9 +2410,9 @@ export const people: ((
  * @returns {string} route path
  */
 export const person: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2422,9 +2422,9 @@ export const person: ((
  * @returns {string} route path
  */
 export const personGroup: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2433,8 +2433,8 @@ export const personGroup: ((
  * @returns {string} route path
  */
 export const personGroups: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2444,9 +2444,9 @@ export const personGroups: ((
  * @returns {string} route path
  */
 export const purchase: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2455,8 +2455,8 @@ export const purchase: ((
  * @returns {string} route path
  */
 export const purchases: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2465,8 +2465,8 @@ export const purchases: ((
  * @returns {string} route path
  */
 export const removeUserInvitation: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2475,8 +2475,8 @@ export const removeUserInvitation: ((
  * @returns {string} route path
  */
 export const reports: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2485,8 +2485,8 @@ export const reports: ((
  * @returns {string} route path
  */
 export const root: ((
-	options?: RouteOptions
-) => string) & RouteHelperExtras
+  options?: RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2495,8 +2495,8 @@ export const root: ((
  * @returns {string} route path
  */
 export const saveCompleteRegistration: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2507,10 +2507,10 @@ export const saveCompleteRegistration: ((
  * @returns {string} route path
  */
 export const setActiveCompany: ((
-	id: RequiredRouteParameter,
-	companyId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  companyId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2519,8 +2519,8 @@ export const setActiveCompany: ((
  * @returns {string} route path
  */
 export const settingsAppearance: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2529,8 +2529,8 @@ export const settingsAppearance: ((
  * @returns {string} route path
  */
 export const settingsAppearanceIndex: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2540,9 +2540,9 @@ export const settingsAppearanceIndex: ((
  * @returns {string} route path
  */
 export const settingsAssetTag: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2551,8 +2551,8 @@ export const settingsAssetTag: ((
  * @returns {string} route path
  */
 export const settingsAssetTags: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2562,9 +2562,9 @@ export const settingsAssetTags: ((
  * @returns {string} route path
  */
 export const settingsBackup: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2573,8 +2573,8 @@ export const settingsBackup: ((
  * @returns {string} route path
  */
 export const settingsBackups: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2584,9 +2584,9 @@ export const settingsBackups: ((
  * @returns {string} route path
  */
 export const settingsBarcode: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2595,8 +2595,8 @@ export const settingsBarcode: ((
  * @returns {string} route path
  */
 export const settingsBarcodes: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2606,9 +2606,9 @@ export const settingsBarcodes: ((
  * @returns {string} route path
  */
 export const settingsGeneral: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2617,8 +2617,8 @@ export const settingsGeneral: ((
  * @returns {string} route path
  */
 export const settingsGeneralIndex: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2628,9 +2628,9 @@ export const settingsGeneralIndex: ((
  * @returns {string} route path
  */
 export const settingsIntegration: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2639,8 +2639,8 @@ export const settingsIntegration: ((
  * @returns {string} route path
  */
 export const settingsIntegrations: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2650,9 +2650,9 @@ export const settingsIntegrations: ((
  * @returns {string} route path
  */
 export const settingsLdap: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2662,9 +2662,9 @@ export const settingsLdap: ((
  * @returns {string} route path
  */
 export const settingsLdapSync: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2673,8 +2673,8 @@ export const settingsLdapSync: ((
  * @returns {string} route path
  */
 export const settingsLdaps: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2684,9 +2684,9 @@ export const settingsLdaps: ((
  * @returns {string} route path
  */
 export const settingsLocalization: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2695,8 +2695,8 @@ export const settingsLocalization: ((
  * @returns {string} route path
  */
 export const settingsLocalizations: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2706,9 +2706,9 @@ export const settingsLocalizations: ((
  * @returns {string} route path
  */
 export const settingsLog: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2717,8 +2717,8 @@ export const settingsLog: ((
  * @returns {string} route path
  */
 export const settingsLogs: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2728,9 +2728,9 @@ export const settingsLogs: ((
  * @returns {string} route path
  */
 export const settingsNotification: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2739,8 +2739,8 @@ export const settingsNotification: ((
  * @returns {string} route path
  */
 export const settingsNotifications: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2750,9 +2750,9 @@ export const settingsNotifications: ((
  * @returns {string} route path
  */
 export const settingsSmtp: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2761,8 +2761,8 @@ export const settingsSmtp: ((
  * @returns {string} route path
  */
 export const settingsSmtps: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2772,9 +2772,9 @@ export const settingsSmtps: ((
  * @returns {string} route path
  */
 export const settingsTicket: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2783,8 +2783,8 @@ export const settingsTicket: ((
  * @returns {string} route path
  */
 export const settingsTickets: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2794,9 +2794,9 @@ export const settingsTickets: ((
  * @returns {string} route path
  */
 export const statusLabel: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2805,8 +2805,8 @@ export const statusLabel: ((
  * @returns {string} route path
  */
 export const statusLabels: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2815,8 +2815,8 @@ export const statusLabels: ((
  * @returns {string} route path
  */
 export const testLogin: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2826,9 +2826,9 @@ export const testLogin: ((
  * @returns {string} route path
  */
 export const ticket: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2839,10 +2839,10 @@ export const ticket: ((
  * @returns {string} route path
  */
 export const ticketMessage: ((
-	ticketId: RequiredRouteParameter,
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  ticketId: RequiredRouteParameter,
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2852,9 +2852,9 @@ export const ticketMessage: ((
  * @returns {string} route path
  */
 export const ticketMessages: ((
-	ticketId: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  ticketId: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2863,8 +2863,8 @@ export const ticketMessages: ((
  * @returns {string} route path
  */
 export const tickets: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2874,9 +2874,9 @@ export const tickets: ((
  * @returns {string} route path
  */
 export const unassignAssignment: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2886,9 +2886,9 @@ export const unassignAssignment: ((
  * @returns {string} route path
  */
 export const updateRailsDiskService: ((
-	encodedToken: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  encodedToken: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2898,9 +2898,9 @@ export const updateRailsDiskService: ((
  * @returns {string} route path
  */
 export const user: ((
-	id: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2909,8 +2909,8 @@ export const user: ((
  * @returns {string} route path
  */
 export const userConfirmation: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2919,8 +2919,8 @@ export const userConfirmation: ((
  * @returns {string} route path
  */
 export const userInvitation: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2929,8 +2929,8 @@ export const userInvitation: ((
  * @returns {string} route path
  */
 export const userPassword: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2939,8 +2939,8 @@ export const userPassword: ((
  * @returns {string} route path
  */
 export const userRegistration: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2949,8 +2949,8 @@ export const userRegistration: ((
  * @returns {string} route path
  */
 export const userSession: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2959,8 +2959,8 @@ export const userSession: ((
  * @returns {string} route path
  */
 export const userUnlock: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2969,8 +2969,8 @@ export const userUnlock: ((
  * @returns {string} route path
  */
 export const users: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2980,9 +2980,9 @@ export const users: ((
  * @returns {string} route path
  */
 export const vendor: ((
-	slug: RequiredRouteParameter,
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  slug: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 /**
  * Generates rails route to
@@ -2991,9 +2991,9 @@ export const vendor: ((
  * @returns {string} route path
  */
 export const vendors: ((
-	options?: { format?: OptionalRouteParameter } & RouteOptions
-) => string) & RouteHelperExtras
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
 
 // By some reason this line prevents all types in a file
 // from being automatically exported
-export {}
+export {};

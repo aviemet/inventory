@@ -31,7 +31,9 @@ export default [
 		},
 		settings: {
 			"import/resolver": {
-				typescript: {},
+				typescript: {
+					project: "./tsconfig.json",
+				},
 			},
 		},
 	},
@@ -60,7 +62,9 @@ export default [
 				version: "detect",
 			},
 			"import/resolver": {
-				typescript: {},
+				typescript: {
+					project: "./tsconfig.json",
+				},
 			},
 			"jsx-a11y": {
 				polymorphicPropName: "component",

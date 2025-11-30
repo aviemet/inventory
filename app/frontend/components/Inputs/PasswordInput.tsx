@@ -21,6 +21,7 @@ const PasswordInputComponent = forwardRef<HTMLInputElement, PasswordInputProps>(
 			</Label> }
 			<PasswordInput
 				id={ inputId }
+				name={ name }
 				required={ required }
 				ref={ ref }
 				size={ size }

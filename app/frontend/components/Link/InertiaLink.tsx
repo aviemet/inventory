@@ -12,7 +12,7 @@ interface LinkProps extends AnchorLinkProps {
 	href: string
 	as: "a" | "button"
 	method?: Method
-	visit?: Partial<Omit<Visit, "method">>
+	visit?: Omit<Visit, "method">
 	buttonProps?: ButtonProps
 	disabled?: boolean
 }
@@ -21,7 +21,7 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
 	{ children, href, as = "a", method, visit, buttonProps, style, disabled, ...props },
 	ref,
 ) => {
-	const handleHTTP = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+	const handleHTTP = (e: React.MouseEvent<Element, MouseEvent>) => {
 		e.preventDefault()
 
 		router.visit(href, {
@@ -30,31 +30,35 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
 		})
 	}
 
-	const mergedButtonProps = Object.assign({ disabled }, buttonProps, exclude(props, ["classNames", "styles", "vars"]))
+	const isNonStandardMethod = (method !== undefined && method !== "get")
 
 	const processedHref = disabled ? "#" : href
 
-	if((method !== undefined && method !== "get")) {
-		return <Button
-			ref={ ref }
-			component={ AnchorLink }
-			href={ processedHref }
-			onClick={ handleHTTP }
-			style={ [{ "&:hover": { textDecoration: "none" } }, style] }
-			c="bright"
-			{ ...mergedButtonProps }
-		>
-			{ children }
-		</Button>
+	const basicProps = {
+		disabled,
+		component: AnchorLink,
+		href: processedHref,
+		style: [{ "&:hover": { textDecoration: "none" } }, style],
+		c: "bright",
 	}
 
-	if(as === "button") {
+	const mergedButtonProps = Object.assign(
+		basicProps,
+		buttonProps,
+		exclude(props, ["classNames", "style", "vars"]),
+	)
+
+	if(isNonStandardMethod) {
+		const otherOnClick = mergedButtonProps.onClick
+		mergedButtonProps.onClick = (e: React.MouseEvent<Element, MouseEvent>) => {
+			handleHTTP(e)
+			otherOnClick?.(e)
+		}
+	}
+
+	if(as === "button" || isNonStandardMethod) {
 		return <Button
 			ref={ ref }
-			component={ AnchorLink }
-			href={ processedHref }
-			style={ [{ "&:hover": { textDecoration: "none" } }, style] }
-			c="bright"
 			{ ...mergedButtonProps }
 		>
 			{ children }

@@ -16,7 +16,7 @@ export interface RowBaseProps extends TableRow {
 }
 
 interface TableRowProps extends Omit<TableTrProps, "ref"> {
-	render?: any
+	render?: (obj: TableRowData) => JSX.Element
 	name?: string
 	children?: JSX.Element | JSX.Element[]
 }

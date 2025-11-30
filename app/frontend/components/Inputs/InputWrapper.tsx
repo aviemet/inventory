@@ -1,3 +1,4 @@
+import { BoxProps } from "@mantine/core"
 import React from "react"
 
 import { Box } from "@/components"
@@ -7,7 +8,7 @@ import ConditionalWrapper from "../ConditionalWrapper"
 interface InputWrapper {
 	children: React.ReactNode
 	wrapper?: boolean
-	wrapperProps?: Record<string, any>
+	wrapperProps?: BoxProps
 }
 
 const InputWrapper = ({ children, wrapper = true, wrapperProps }: InputWrapper) => {

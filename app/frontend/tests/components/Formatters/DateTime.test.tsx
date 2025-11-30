@@ -8,13 +8,15 @@ import { render } from "@/tests/helpers/utils"
 describe("DateTimeFormatter", () => {
 	it("renders without error with string date", () => {
 		render(<DateTimeFormatter>2024-01-15T10:30:00</DateTimeFormatter>)
-		expect(screen.getByText(/01\/15\/2024/)).toBeInTheDocument()
+		const timeElement = screen.getByText(/1\/15\/24/)
+		expect(timeElement).toBeInTheDocument()
 	})
 
 	it("renders without error with Date object", () => {
 		const date = new Date("2024-01-15T10:30:00")
 		render(<DateTimeFormatter>{ date }</DateTimeFormatter>)
-		expect(screen.getByText(/01\/15\/2024/)).toBeInTheDocument()
+		const timeElement = screen.getByText(/1\/15\/24/)
+		expect(timeElement).toBeInTheDocument()
 	})
 
 	it("renders nothing when children is undefined", () => {
@@ -24,12 +26,14 @@ describe("DateTimeFormatter", () => {
 
 	it("uses dateShort format by default", () => {
 		render(<DateTimeFormatter>2024-01-15T10:30:00</DateTimeFormatter>)
-		expect(screen.getByText(/01\/15\/2024 10:30/)).toBeInTheDocument()
+		const timeElement = screen.getByText(/1\/15\/24 10:30/)
+		expect(timeElement).toBeInTheDocument()
 	})
 
 	it("uses custom format when provided", () => {
 		render(<DateTimeFormatter format="dateLong">2024-01-15T10:30:00</DateTimeFormatter>)
-		expect(screen.getByText(/01\/15\/2024 10:30:00/)).toBeInTheDocument()
+		const timeElement = screen.getByText(/01\/15\/2024 10:30:00/)
+		expect(timeElement).toBeInTheDocument()
 	})
 
 	it("handles all format options", () => {
@@ -38,7 +42,7 @@ describe("DateTimeFormatter", () => {
 
 		formats.forEach(format => {
 			const { unmount } = render(<DateTimeFormatter format={ format }>{ date }</DateTimeFormatter>)
-			const timeElement = screen.getByText(/01\/15\/2024|January|ago/)
+			const timeElement = screen.getByText(/1\/15\/24|01\/15\/2024|January|ago/i)
 			expect(timeElement).toBeInTheDocument()
 			unmount()
 		})
@@ -53,7 +57,7 @@ describe("DateTimeFormatter", () => {
 				2024-01-15T10:30:00
 			</DateTimeFormatter>
 		)
-		const timeElement = screen.getByText(/01\/15\/2024/)
+		const timeElement = screen.getByText(/1\/15\/24/)
 		expect(timeElement).toBeInTheDocument()
 	})
 
@@ -66,6 +70,7 @@ describe("DateTimeFormatter", () => {
 
 	it("handles ISO date strings", () => {
 		render(<DateTimeFormatter>2024-12-31T23:59:59Z</DateTimeFormatter>)
-		expect(screen.getByText(/12\/31\/2024/)).toBeInTheDocument()
+		const timeElement = screen.getByText(/12\/31\/24/)
+		expect(timeElement).toBeInTheDocument()
 	})
 })

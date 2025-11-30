@@ -1,11 +1,15 @@
 import cx from "clsx"
 import React from "react"
 
-import { useTableContext } from "./TableContext"
+import { useTableContext, type TableRowData } from "./TableContext"
 
 import Table from "."
 
-const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
+interface RowIteratorProps {
+	render: (obj: TableRowData) => JSX.Element
+}
+
+const RowIterator = ({ render }: RowIteratorProps) => {
 	const { tableState: { selected, rows, columns, selectable } } = useTableContext()
 
 	if(!rows || rows.length === 0) {

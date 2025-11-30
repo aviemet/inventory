@@ -1,48 +1,57 @@
 import { createInertiaApp, router } from "@inertiajs/react"
+import * as ActiveStorage from "@rails/activestorage"
+import dayjs from "dayjs"
+import duration from "dayjs/plugin/duration"
+import localizedFormat from "dayjs/plugin/localizedFormat"
+import relativeTime from "dayjs/plugin/relativeTime"
 import { createRoot } from "react-dom/client"
 
-import { AuthLayout, AppLayout } from "../layouts"
-import { propsMiddleware } from "./middleware"
+import { LAYOUTS } from "../layouts"
+import {
+	applyPropsMiddleware,
+	setupCSRFToken,
+	setupInertiaListeners,
+	handlePageLayout,
+	setupAxeListener,
+} from "./middleware"
 import { runAxe } from "./middleware/axe"
 
-type PagesObject = { default: React.ComponentType<any> & {
-	layout?: React.ComponentType<any>
-} }
+ActiveStorage.start()
 
 const pages = import.meta.glob<PagesObject>("../pages/**/index.tsx")
 
+dayjs.extend(localizedFormat)
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
+
+const SITE_TITLE = "Inventory"
+
+export type PagesObject<T = any> = { default: React.ComponentType<T> & {
+	layout?: React.ComponentType<T>
+	defaultLayout?: keyof typeof LAYOUTS
+} }
+
 document.addEventListener("DOMContentLoaded", () => {
+	setupCSRFToken()
+	setupInertiaListeners(router)
+
 	createInertiaApp({
-		title: title => `Inventory - ${title}`,
+		title: title => `${SITE_TITLE} - ${title}`,
 
 		resolve: async name => {
-			let checkedName = name
-			let layout = AppLayout
+			const page: PagesObject = (await pages[`../pages/${name}/index.tsx`]())
 
-			if(name.startsWith("Public/")) {
-				layout = AuthLayout
-				checkedName = name.replace("Public/", "")
-			}
-
-			const page = (await pages[`../pages/${checkedName}/index.tsx`]()).default
-
-			if(page.layout === undefined) page.layout = layout
-
-			return page
+			return handlePageLayout(page)
 		},
 
 		setup({ el, App, props }) {
 			const root = createRoot(el)
 
-			// Convert ISO strings from server to javascript Date objects
-			props.initialPage.props = propsMiddleware(props.initialPage.props)
+			props.initialPage.props = applyPropsMiddleware(props.initialPage.props)
+
+			// setupAxeListener(router, root)
 
 			root.render(<App { ...props } />)
-
-			router.on("success", event => {
-				event.detail.page.props = propsMiddleware(event.detail.page.props)
-				runAxe(root)
-			})
 		},
 	})
 })

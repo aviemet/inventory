@@ -1,4 +1,5 @@
-import { screen, waitFor } from "@testing-library/react"
+import { type Visit } from "@inertiajs/core"
+import { fireEvent, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi, beforeEach } from "vitest"
 
@@ -33,15 +34,19 @@ describe("Link", () => {
 	it("renders external link when external prop is true", () => {
 		render(<Link href="https://example.com" external>External</Link>)
 		const link = screen.getByRole("link", { name: "External" })
-		expect(link).toHaveAttribute("href", "https://example.com")
 		expect(link).toHaveAttribute("target", "_blank")
 		expect(link).toHaveAttribute("rel", "noreferrer")
+		const icon = link.querySelector(".external")
+		expect(icon).toBeInTheDocument()
 	})
 
 	it("detects external link from http prefix", () => {
 		render(<Link href="http://external.com">External</Link>)
 		const link = screen.getByRole("link", { name: "External" })
 		expect(link).toHaveAttribute("target", "_blank")
+		expect(link).toHaveAttribute("rel", "noreferrer")
+		const icon = link.querySelector(".external")
+		expect(icon).toBeInTheDocument()
 	})
 
 	it("detects external link from www prefix", () => {
@@ -55,6 +60,9 @@ describe("Link", () => {
 		render(<Link href="www.external.com">External</Link>)
 		const link = screen.getByRole("link", { name: "External" })
 		expect(link).toHaveAttribute("target", "_blank")
+		expect(link).toHaveAttribute("rel", "noreferrer")
+		const icon = link.querySelector(".external")
+		expect(icon).toBeInTheDocument()
 	})
 
 	it("renders as button when as prop is button", () => {
@@ -77,44 +85,44 @@ describe("Link", () => {
 		const onClick = vi.fn()
 		render(<Link href="/test" disabled onClick={ onClick }>Disabled</Link>)
 		const link = screen.getByRole("link", { name: "Disabled" })
+		expect(link).toHaveAttribute("href", "#")
 		await user.click(link)
 		expect(onClick).toHaveBeenCalledTimes(1)
 	})
 
 	it("calls router.visit for non-GET methods", async() => {
 		const { router } = await import("@inertiajs/react")
-		const user = userEvent.setup()
 		render(<Link href="/delete" method="delete">Delete</Link>)
-		const button = screen.getByRole("button", { name: "Delete" })
-		await user.click(button)
+		const link = screen.getByRole("link", { name: "Delete" })
+		fireEvent.click(link)
 		await waitFor(() => {
-			expect(vi.mocked(router.visit)).toHaveBeenCalled()
-		})
-		expect(router.visit).toHaveBeenCalledWith("/delete", { method: "delete" })
+			expect(vi.mocked(router.visit)).toHaveBeenCalledWith("/delete", { method: "delete" })
+		}, { timeout: 2000 })
 	})
 
 	it("handles visit prop", async() => {
 		const { router } = await import("@inertiajs/react")
-		const user = userEvent.setup()
+		const visitData = { data: { key: "value" } } as unknown as Omit<Visit, "method">
 		render(
-			<Link href="/test" method="post" visit={ { data: { key: "value" } } }>
+			<Link href="/test" method="post" visit={ visitData }>
 				Submit
 			</Link>
 		)
-		const button = screen.getByRole("button", { name: "Submit" })
-		await user.click(button)
+		const link = screen.getByRole("link", { name: "Submit" })
+		fireEvent.click(link)
 		await waitFor(() => {
 			expect(vi.mocked(router.visit)).toHaveBeenCalledWith("/test", {
 				method: "post",
 				data: { key: "value" },
 			})
-		})
+		}, { timeout: 2000 })
 	})
 
 	it("handles preserveScroll prop", () => {
 		render(<Link href="/test" preserveScroll>Preserve Scroll</Link>)
 		const link = screen.getByRole("link", { name: "Preserve Scroll" })
 		expect(link).toBeInTheDocument()
+		expect(link).toHaveAttribute("href", "/test")
 	})
 
 	it("renders children correctly", () => {

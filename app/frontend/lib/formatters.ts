@@ -9,17 +9,15 @@ export const currency = (amount: number, currency = "USD") => {
 }
 
 export const date = {
-	short: (date: string | Date) => dayjs(new Date(date)).format("MM/DD/YYYY"),
+	short: (date: string | Date) => dayjs(new Date(date)).format("M/D/YY"),
 	long: (date: string | Date) => dayjs(new Date(date)).format("MM/DD/YYYY HH:mm:ss"),
-	relative: (date: string | Date) => {
-		return dayjs(new Date(date)).format("MM/DD/YYYY")
-	},
-	english: (date: string | Date) => dayjs(new Date(date)).format("MM/DD/YYYY"),
+	relative: (date: string | Date) => dayjs(new Date(date)).format("MM/DD/YYYY"),
+	english: (date: string | Date) => dayjs(new Date(date)).format("MMMM D, YYYY"),
 }
 
 export const datetime = {
-	dateShort: (date: string | Date) => dayjs(new Date(date)).format("MM/DD/YYYY HH:mm"),
+	dateShort: (date: string | Date) => dayjs(new Date(date)).format("M/D/YY HH:mm"),
 	dateLong: (date: string | Date) => dayjs(new Date(date)).format("MM/DD/YYYY HH:mm:ss"),
 	relative: (date: string | Date) => dayjs(new Date(date)).fromNow(),
-	english: (date: string | Date) => dayjs(new Date(date)).format("MMMM D, YYYY h:mm A"),
+	english: (date: string | Date) => dayjs(new Date(date)).format("dddd, MMMM D, YYYY h:mm A"),
 }
