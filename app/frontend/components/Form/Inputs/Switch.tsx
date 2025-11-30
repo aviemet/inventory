@@ -1,10 +1,10 @@
 import React from "react"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
-import SwitchInput, { type SwitchProps } from "@/components/Inputs/Switch"
+import { ConditionalWrapper } from "@/components"
+import { Switch as SwitchInput, type SwitchProps } from "@/components/Inputs/Switch"
 
-import Field from "../components/Field"
+import { Field } from "../components/Field"
 
 import { type InputConflicts, type BaseFormInputProps } from "."
 
@@ -13,7 +13,7 @@ interface FormSwitchProps<TForm extends NestedObject = NestedObject>
 	Omit<SwitchProps, InputConflicts>,
 	BaseFormInputProps<boolean, TForm> {}
 
-const FormSwitchComponent = <TForm extends NestedObject = NestedObject>(
+export function FormSwitchComponent<TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		onChange,
@@ -29,7 +29,7 @@ const FormSwitchComponent = <TForm extends NestedObject = NestedObject>(
 		clearErrorsOnChange,
 		...props
 	}: FormSwitchProps<TForm>,
-) => {
+) {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<boolean, TForm>({
 		name,
 		model,
@@ -79,5 +79,3 @@ const FormSwitchComponent = <TForm extends NestedObject = NestedObject>(
 		</ConditionalWrapper>
 	)
 }
-
-export default FormSwitchComponent

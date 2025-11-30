@@ -1,5 +1,4 @@
 import { useToggle } from "@mantine/hooks"
-import React from "react"
 
 import { Box, DangerousHtml, Group, Link, Paper } from "@/components"
 import { IconButton } from "@/components/Button"

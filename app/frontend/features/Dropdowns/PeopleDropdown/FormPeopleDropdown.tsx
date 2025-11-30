@@ -1,5 +1,4 @@
 import { isEmpty } from "lodash"
-import React from "react"
 
 import { Select as FormSelect } from "@/components/Form"
 import { useGetPeopleAsOptions } from "@/queries/people"

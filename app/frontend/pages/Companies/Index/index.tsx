@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import CompaniesTable from "../Table"
+import CompaniesTable from "@/domains/Companies/Table"
 
 interface CompaniesIndexProps {
 	companies: Schema.CompaniesIndex[]

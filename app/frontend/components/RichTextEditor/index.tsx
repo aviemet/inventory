@@ -7,7 +7,7 @@ import Underline from "@tiptap/extension-underline"
 import { useEditor } from "@tiptap/react"
 import { BubbleMenu, FloatingMenu } from "@tiptap/react/menus"
 import StarterKit from "@tiptap/starter-kit"
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
 
 import { DEFAULT_LABELS } from "./tiptapLabels"
 
@@ -16,13 +16,16 @@ export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, "c
 	onChange?: (value: string) => void
 }
 
-const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>((
+export const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>((
 	{ children, onChange },
 	ref,
 ) => {
 	const editor = useEditor({
 		extensions: [
-			StarterKit,
+			StarterKit.configure({
+				link: false,
+				underline: false,
+			}),
 			Underline,
 			Link,
 			Superscript,
@@ -105,5 +108,3 @@ const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>(
 		</RichTextEditor>
 	)
 })
-
-export default RichTextEditorComponent

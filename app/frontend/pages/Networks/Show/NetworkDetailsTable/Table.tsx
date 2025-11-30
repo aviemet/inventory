@@ -1,4 +1,4 @@
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useMemo } from "react"
 
 import { Table } from "@/components"
@@ -27,7 +27,7 @@ const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
 	}, [network.dhcp_end])
 
 	return (
-		<Table wrapper={ false } className={ cx(classes.table) }>
+		<Table wrapper={ false } className={ clsx(classes.table) }>
 			<Table.Head>
 				<Table.Row>
 					<Table.HeadCell>Address</Table.HeadCell>
@@ -45,7 +45,7 @@ const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
 						: undefined
 
 					return (
-						<Table.Row key={ host } className={ cx(classes.row, { dhcp }) }>
+						<Table.Row key={ host } className={ clsx(classes.row, { dhcp }) }>
 							<Table.Cell fitContent>{ host }</Table.Cell>
 							<Table.Cell>
 								<EditableLink item={ item } ip={ host } />

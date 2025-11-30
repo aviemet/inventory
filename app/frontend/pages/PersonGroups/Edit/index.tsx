@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import GroupForm from "../Form"
+import GroupForm from "@/domains/PersonGroups/Form"
 
 interface UpdateGroupProps {
 	person_group: Schema.PersonGroupsEdit

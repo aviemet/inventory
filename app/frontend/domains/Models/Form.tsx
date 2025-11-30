@@ -1,0 +1,72 @@
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Textarea, Submit } from "@/components/Form"
+import { FormCategoriesDropdown, FormManufacturersDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
+
+type ModelFormData = {
+	model: Schema.ModelsFormData
+}
+
+export interface ModelFormProps {
+	to: string
+	method?: HTTPVerb
+	onSubmit?: (object: UseFormProps<ModelFormData>) => boolean | void
+	model?: Schema.ModelsFormData
+	categoryName: Schema.CategoryTypes
+}
+
+const emptyModel: Schema.ModelsFormData = {
+	name: "",
+	model_number: "",
+	manufacturer_id: NaN,
+	category_id: NaN,
+}
+
+const ModelForm = ({ to, method = "post", onSubmit, model = emptyModel, categoryName }: ModelFormProps) => {
+	return (
+		<Form
+			model="model"
+			data={ { model } }
+			to={ to }
+			method={ method }
+			onSubmit={ onSubmit }
+		>
+			<Grid>
+
+				<Grid.Col>
+					<TextInput name="name" label="Name" required />
+				</Grid.Col>
+
+				<Grid.Col>
+					<TextInput name="model_number" label="Model Number" required />
+				</Grid.Col>
+
+				<Grid.Col>
+					<FormManufacturersDropdown initialData={ coerceArray(model?.manufacturer) } />
+				</Grid.Col>
+
+				<Grid.Col>
+					<FormCategoriesDropdown
+						categorizable_type={ categoryName }
+						initialData={ coerceArray(model?.category) }
+					/>
+				</Grid.Col>
+
+				<Grid.Col>
+					<Textarea name="notes" label="Notes" />
+				</Grid.Col>
+
+				<Grid.Col>
+					<Submit>
+						{ model?.id ? "Update" : "Create" } Model
+					</Submit>
+				</Grid.Col>
+
+			</Grid>
+		</Form>
+	)
+}
+
+export default ModelForm

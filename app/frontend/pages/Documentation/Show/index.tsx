@@ -1,7 +1,6 @@
 import { Text } from "@mantine/core"
-import React from "react"
 
-import { DangerousHtml, Date, Group, Title, Link, Menu, Page, Section } from "@/components"
+import { DangerousHtml, DateTimeFormatter, Group, Title, Link, Menu, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
 interface ShowDocumentationProps {
@@ -33,9 +32,9 @@ const ShowDocumentation = ({ documentation }: ShowDocumentationProps) => {
 				<Text>In reference to: { documentation.route && <Link href={ documentation.route }>{ documentation.documentable_name }</Link> }</Text>
 				{ documentation.created_by && <Text size="sm">
 					Created by: <Link href={ Routes.person(documentation.created_by.id!) }>{ documentation.created_by.name } </Link>
-					on <Date>{ documentation.created_at }</Date>
+					on <DateTimeFormatter>{ documentation.created_at }</DateTimeFormatter>
 				</Text> }
-				<Text size="sm">Last updated on <Date>{ documentation.updated_at }</Date></Text>
+				<Text size="sm">Last updated on <DateTimeFormatter>{ documentation.updated_at }</DateTimeFormatter></Text>
 
 				<DangerousHtml mt="md">{ documentation.body }</DangerousHtml>
 

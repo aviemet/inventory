@@ -1,11 +1,10 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
-import RichTextInput, { type RichTextInputProps } from "@/components/Inputs/RichText"
+import { ConditionalWrapper } from "@/components"
+import { RichText as RichTextInput, type RichTextInputProps } from "@/components/Inputs/RichText"
 
-import Field from "../components/Field"
+import { Field } from "../components/Field"
 
 import { type InputConflicts, type BaseFormInputProps } from "."
 
@@ -14,7 +13,7 @@ interface FormRichTextInputProps<TForm extends NestedObject = NestedObject>
 	Omit<RichTextInputProps, InputConflicts>,
 	BaseFormInputProps<string, TForm> {}
 
-const RichText = <TForm extends NestedObject = NestedObject>({
+export function FormRichText<TForm extends NestedObject = NestedObject>({
 	label,
 	name,
 	required = false,
@@ -29,7 +28,7 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 	defaultValue,
 	clearErrorsOnChange,
 	...props
-}: FormRichTextInputProps<TForm>) => {
+}: FormRichTextInputProps<TForm>) {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
 		name,
 		model,
@@ -62,7 +61,7 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 			) }
 		>
 			<>
-				{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
+				{ label && <label className={ clsx({ required }) } htmlFor={ id || inputId }>
 					{ label }
 				</label> }
 				<RichTextInput
@@ -79,5 +78,3 @@ const RichText = <TForm extends NestedObject = NestedObject>({
 		</ConditionalWrapper>
 	)
 }
-
-export default RichText

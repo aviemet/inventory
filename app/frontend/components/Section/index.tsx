@@ -1,5 +1,5 @@
 import { Box, type BoxProps } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React, { forwardRef } from "react"
 
 import * as classes from "./Section.css"
@@ -8,7 +8,7 @@ interface SectionProps extends BoxProps, Omit<React.ComponentPropsWithoutRef<"se
 	fullHeight?: boolean
 }
 
-const Section = forwardRef<HTMLDivElement, SectionProps>((
+export const Section = forwardRef<HTMLDivElement, SectionProps>((
 	{ children, fullHeight = false, className, ...props },
 	ref,
 ) => {
@@ -16,12 +16,10 @@ const Section = forwardRef<HTMLDivElement, SectionProps>((
 		<Box
 			ref={ ref }
 			component="section"
-			className={ cx(classes.section, className, { fullHeight }) }
+			className={ clsx(classes.section, className, { fullHeight }) }
 			{ ...props }
 		>
 			{ children }
 		</Box>
 	)
 })
-
-export default Section

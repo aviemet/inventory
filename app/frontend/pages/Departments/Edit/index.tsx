@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import DepartmentForm from "../Form"
+import DepartmentForm from "@/domains/Departments/Form"
 
 interface EditDepartmentProps {
 	department: Schema.DepartmentsEdit

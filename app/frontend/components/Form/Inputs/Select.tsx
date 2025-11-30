@@ -1,13 +1,13 @@
-import { type ComboboxData, type ComboboxItem, type ComboboxItemGroup } from "@mantine/core"
 import React from "react"
+import { type ComboboxData, type ComboboxItem, type ComboboxItemGroup } from "@mantine/core"
 import { useInertiaInput, type UseFormProps, NestedObject } from "use-inertia-form"
 
 import { ConditionalWrapper, Group } from "@/components"
 import { ModalFormButton } from "@/components/Button"
-import SelectInput, { type SelectInputProps } from "@/components/Inputs/Select"
+import { SelectInput, type SelectInputProps } from "@/components/Inputs/Select"
 import { exclude } from "@/lib"
 
-import Field from "../components/Field"
+import { Field } from "../components/Field"
 
 import { type BaseFormInputProps } from "."
 
@@ -32,7 +32,7 @@ export interface FormSelectProps<TForm extends NestedObject = NestedObject>
 	field?: boolean
 }
 
-const Select = <TForm extends NestedObject = NestedObject>(
+export function FormSelect<TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		label,
@@ -57,7 +57,7 @@ const Select = <TForm extends NestedObject = NestedObject>(
 		clearErrorsOnChange,
 		...props
 	}: FormSelectProps<TForm>,
-) => {
+) {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
 		name,
 		model,
@@ -125,7 +125,6 @@ const Select = <TForm extends NestedObject = NestedObject>(
 					condition={ field }
 				>
 					<SelectInput
-						// Add "search" suffix to prevent password managers trying to autofill dropdowns
 						id={ `${id || inputId}-search` }
 						autoComplete="off"
 						name={ inputName }
@@ -153,5 +152,3 @@ const Select = <TForm extends NestedObject = NestedObject>(
 		</ConditionalWrapper>
 	)
 }
-
-export default Select

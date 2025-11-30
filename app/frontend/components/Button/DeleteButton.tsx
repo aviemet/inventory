@@ -1,5 +1,4 @@
 import { useMantineTheme } from "@mantine/core"
-import React from "react"
 
 import { Link, Tooltip } from "@/components"
 import { TrashIcon } from "@/components/Icons"
@@ -12,7 +11,7 @@ interface DeleteButtonProps extends Omit<LinkProps, "children"> {
 	tooltipMessage?: string | false | null
 }
 
-const DeleteButton = ({ href, label, tooltipMessage }: DeleteButtonProps) => {
+export function DeleteButton({ href, label, tooltipMessage }: DeleteButtonProps) {
 	const { other: { colors: { deleteButtonColor } } } = useMantineTheme()
 
 	const usedLabel = tooltipMessage || `Check In${label ? ` ${label}` : ""}`
@@ -32,4 +31,3 @@ const DeleteButton = ({ href, label, tooltipMessage }: DeleteButtonProps) => {
 	)
 }
 
-export default DeleteButton

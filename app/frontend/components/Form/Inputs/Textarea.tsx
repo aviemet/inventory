@@ -1,11 +1,11 @@
-import cx from "clsx"
 import React from "react"
+import clsx from "clsx"
 import { useInertiaInput, type NestedObject } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
-import TextareaInput, { type TextareaProps } from "@/components/Inputs/Textarea"
+import { ConditionalWrapper } from "@/components"
+import { Textarea as TextareaInput, type TextareaProps } from "@/components/Inputs/Textarea"
 
-import Field from "../components/Field"
+import { Field } from "../components/Field"
 
 import { InputConflicts, type BaseFormInputProps } from "."
 
@@ -14,7 +14,7 @@ interface FormTextareaProps<TForm extends NestedObject = NestedObject>
 	Omit<TextareaProps, InputConflicts>,
 	BaseFormInputProps<string, TForm> {}
 
-const Textarea = <TForm extends NestedObject = NestedObject>(
+export function FormTextarea<TForm extends NestedObject = NestedObject>(
 	{
 		label,
 		name,
@@ -31,7 +31,7 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 		clearErrorsOnChange,
 		...props
 	}: FormTextareaProps<TForm>,
-) => {
+) {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
 		name,
 		model,
@@ -63,7 +63,7 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 			) }
 		>
 			<>
-				{ label && <label className={ cx({ required }) } htmlFor={ id || inputId }>
+				{ label && <label className={ clsx({ required }) } htmlFor={ id || inputId }>
 					{ label }
 				</label> }
 				<TextareaInput
@@ -83,5 +83,3 @@ const Textarea = <TForm extends NestedObject = NestedObject>(
 		</ConditionalWrapper>
 	)
 }
-
-export default Textarea

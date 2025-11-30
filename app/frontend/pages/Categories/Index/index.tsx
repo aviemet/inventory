@@ -1,11 +1,10 @@
-import React from "react"
 
 import { Page, Table } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import { TableTitleSection } from "@/features"
 import { Routes } from "@/lib"
 
-import CategoriesTable from "../Table"
+import CategoriesTable from "@/domains/Categories/Table"
 
 interface CategoriesIndexProps {
 	categories: Schema.CategoriesIndex[]

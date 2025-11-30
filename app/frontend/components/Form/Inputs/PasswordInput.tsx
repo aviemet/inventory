@@ -1,10 +1,10 @@
 import React from "react"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
-import PasswordInput, { type PasswordInputProps } from "@/components/Inputs/PasswordInput"
+import { ConditionalWrapper } from "@/components"
+import { PasswordInput, type PasswordInputProps } from "@/components/Inputs/PasswordInput"
 
-import Field from "../components/Field"
+import { Field } from "../components/Field"
 
 import { type InputConflicts, type BaseFormInputProps } from "."
 
@@ -13,7 +13,7 @@ interface FormPasswordInputProps<TForm extends NestedObject>
 	Omit<PasswordInputProps, InputConflicts>,
 	BaseFormInputProps<string, TForm> {}
 
-const FormInput = <TForm extends NestedObject>(
+export function FormPasswordInput<TForm extends NestedObject>(
 	{
 		name,
 		model,
@@ -29,7 +29,7 @@ const FormInput = <TForm extends NestedObject>(
 		clearErrorsOnChange,
 		...props
 	}: FormPasswordInputProps<TForm>,
-) => {
+) {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
 		name,
 		model,
@@ -79,5 +79,3 @@ const FormInput = <TForm extends NestedObject>(
 			/></ConditionalWrapper>
 	)
 }
-
-export default FormInput

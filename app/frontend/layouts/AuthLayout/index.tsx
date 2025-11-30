@@ -1,14 +1,10 @@
 import { AppShell } from "@mantine/core"
-import React from "react"
 
+import { LayoutProps } from ".."
 import Footer from "../Footer"
 import * as classes from "./Auth.css"
 
-interface AuthLayoutProps {
-	children: any
-}
-
-const AuthLayout = ({ children }: AuthLayoutProps) => {
+const AuthLayout = ({ children }: LayoutProps) => {
 	return (
 		<AppShell>
 			<div id="auth" className={ classes.page }>

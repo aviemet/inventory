@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react"
 
-import RichTextEditor, { type RichTextEditorProps } from "../RichTextEditor"
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { RichTextEditorComponent as RichTextEditor, type RichTextEditorProps } from "../RichTextEditor"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { type BaseInputProps } from "."
 
@@ -14,7 +14,7 @@ export interface RichTextInputProps extends RichTextEditorProps, BaseInputProps 
 	name?: string
 }
 
-const RichText = forwardRef<HTMLDivElement, RichTextInputProps>((
+export const RichText = forwardRef<HTMLDivElement, RichTextInputProps>((
 	{
 		label,
 		name,
@@ -39,5 +39,3 @@ const RichText = forwardRef<HTMLDivElement, RichTextInputProps>((
 		</InputWrapper>
 	)
 })
-
-export default RichText

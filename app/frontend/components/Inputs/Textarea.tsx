@@ -1,14 +1,14 @@
-import { Textarea, type TextareaProps as MantineTextareaProps } from "@mantine/core"
+import { Textarea as MantineTextarea, type TextareaProps as MantineTextareaProps } from "@mantine/core"
 import React, { forwardRef } from "react"
 
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { withInjectedProps, type BaseInputProps } from "."
 
 export interface TextareaProps extends MantineTextareaProps, BaseInputProps {}
 
-const TextareaComponent = forwardRef<HTMLTextAreaElement, TextareaProps>((
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((
 	{
 		label,
 		name,
@@ -28,7 +28,7 @@ const TextareaComponent = forwardRef<HTMLTextAreaElement, TextareaProps>((
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
-			<Textarea
+			<MantineTextarea
 				ref={ ref }
 				id={ inputId }
 				name={ name }
@@ -37,9 +37,8 @@ const TextareaComponent = forwardRef<HTMLTextAreaElement, TextareaProps>((
 					disableAutofill,
 				}) }
 			>
-			</Textarea>
+			</MantineTextarea>
 		</InputWrapper>
 	)
 })
 
-export default TextareaComponent

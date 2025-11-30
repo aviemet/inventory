@@ -1,5 +1,4 @@
 import { Tooltip, useMantineTheme } from "@mantine/core"
-import React from "react"
 
 import { Link } from "@/components"
 import { CheckinIcon } from "@/components/Icons"
@@ -14,7 +13,7 @@ interface CheckinButtonProps extends Omit<LinkProps, "children"> {
 	tooltipMessage?: string | false | null
 }
 
-const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: CheckinButtonProps) => {
+export function CheckinButton({ href, label, disabled, tooltipMessage, ...props }: CheckinButtonProps) {
 	const { other: { colors: { checkinButtonColor } } } = useMantineTheme()
 
 	const finalProps = props
@@ -47,4 +46,3 @@ const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: Chec
 	)
 }
 
-export default CheckinButton

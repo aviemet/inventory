@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ItemsTable from "../Table"
+import ItemsTable from "@/domains/Items/Table"
 import AdvancedItemsSearch from "./AdvancedSearch"
 
 interface ItemsIndexProps {

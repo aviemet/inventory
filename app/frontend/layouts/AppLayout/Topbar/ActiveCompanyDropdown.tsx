@@ -1,7 +1,6 @@
 import { router } from "@inertiajs/react"
 import { Title } from "@mantine/core"
 import { isEmpty } from "lodash"
-import React from "react"
 import { type UseFormProps } from "use-inertia-form"
 
 import { Form, Select } from "@/components/Form"

@@ -1,18 +1,19 @@
 import { Box, useMantineTheme } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useEffect } from "react"
 
 import { AppShell } from "@/components"
 import { useDisclosure } from "@/lib/hooks"
 import { useLayoutStore } from "@/lib/store"
 
+import { LayoutProps } from ".."
 import Sidebar from "./Sidebar"
 import Topbar from "./Topbar"
 import Footer from "../Footer"
 import * as classes from "./AppLayout.css"
 import "@mantine/tiptap/styles.css"
 
-const AppLayout = ({ children }: { children: any }) => {
+const AppLayout = ({ children }: LayoutProps) => {
 	const theme = useMantineTheme()
 	const { sidebarOpen } = useLayoutStore()
 	const [mobileOpen, mobileHandlers] = useDisclosure(sidebarOpen)
@@ -24,7 +25,7 @@ const AppLayout = ({ children }: { children: any }) => {
 		} else if(!sidebarOpen) {
 			mobileHandlers.close()
 		}
-	}, [sidebarOpen])
+	}, [mobileHandlers, sidebarOpen])
 
 	return (
 		<AppShell
@@ -44,7 +45,7 @@ const AppLayout = ({ children }: { children: any }) => {
 			<Sidebar />
 			<Footer />
 			<AppShell.Main role="main">
-				<Box className={ cx(classes.wrapper) } p="xs">
+				<Box className={ clsx(classes.wrapper) } p="xs">
 					{ children }
 				</Box>
 			</AppShell.Main>
@@ -52,4 +53,4 @@ const AppLayout = ({ children }: { children: any }) => {
 	)
 }
 
-export default React.memo(AppLayout)
+export default AppLayout

@@ -1,5 +1,5 @@
 import { BoxProps } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React from "react"
 
 import { Box, Link, Portal } from "@/components"
@@ -22,7 +22,7 @@ interface BreadcrumbsProps extends Omit<BoxProps, "children"> {
 	separator?: string
 }
 
-const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: BreadcrumbsProps) => {
+export function Breadcrumbs({ crumbs, separator = ">", className, ...props }: BreadcrumbsProps) {
 	if(!crumbs) return <></>
 
 	return (
@@ -30,14 +30,14 @@ const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: Breadcrum
 			<Box
 				component="nav"
 				aria-label="breadcrumbs"
-				className={ cx(classes.breadcrumbs, className) }
+				className={ clsx(classes.breadcrumbs, className) }
 				{ ...props }
 			>
 				<ol>
 					{ crumbs.reduce<React.ReactNode[]>((acc, crumb, index, array) => {
 						const isLastCrumb = index === array.length - 1
 
-						acc.push(<li key={ crumb.title }>
+						acc.push(<li key={ `${crumb.title}-${crumb.href || index}` }>
 							{ crumb.href ?
 								<Link
 									external={ false }
@@ -50,7 +50,7 @@ const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: Breadcrum
 								<Box>{ crumb.title }</Box>
 							}
 							{ !isLastCrumb && (
-								<Box className={ cx(classes.separator) } aria-hidden="true">
+								<Box className={ clsx(classes.separator) } aria-hidden="true">
 									{ separator }
 								</Box>
 							) }
@@ -64,4 +64,3 @@ const Breadcrumbs = ({ crumbs, separator = ">", className, ...props }: Breadcrum
 	)
 }
 
-export default Breadcrumbs

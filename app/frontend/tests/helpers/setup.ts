@@ -4,7 +4,14 @@ import "@testing-library/jest-dom/vitest"
 
 import { type SharedInertiaProps } from "@/lib/hooks/usePageProps"
 
-const mockPageProps: SharedInertiaProps = {
+import { mockInertiaLink } from "./linkUtils"
+
+if(typeof globalThis.React === "undefined") {
+	globalThis.React = React
+}
+
+
+export const baseMockPageProps: SharedInertiaProps = {
 	component: undefined,
 	errors: {},
 	flash: {},
@@ -46,6 +53,43 @@ const mockPageProps: SharedInertiaProps = {
 	version: null,
 }
 
+export const createMockPageProps = (overrides?: Partial<SharedInertiaProps>): SharedInertiaProps => {
+	return {
+		...baseMockPageProps,
+		...overrides,
+		flash: {
+			...baseMockPageProps.flash,
+			...overrides?.flash,
+		},
+		auth: {
+			...baseMockPageProps.auth,
+			...overrides?.auth,
+		},
+	}
+}
+
+const mockPageProps = baseMockPageProps
+
+export const mockRouter = {
+	visit: vi.fn(),
+	reload: vi.fn(),
+	remember: vi.fn(),
+	restore: vi.fn(),
+	on: vi.fn(),
+	off: vi.fn(),
+	get: vi.fn(),
+	post: vi.fn(),
+	put: vi.fn(),
+	patch: vi.fn(),
+	delete: vi.fn(),
+}
+
+export { mockInertiaLink } from "./linkUtils"
+
+export const mockInertiaHead = ({ children }: { children?: React.ReactNode }) => {
+	return React.createElement(React.Fragment, {}, children)
+}
+
 vi.mock("@inertiajs/react", async() => {
 	const actual = await vi.importActual("@inertiajs/react")
 	return {
@@ -56,21 +100,9 @@ vi.mock("@inertiajs/react", async() => {
 			url: "/",
 			version: null,
 		}),
-		router: {
-			visit: vi.fn(),
-			reload: vi.fn(),
-			remember: vi.fn(),
-			restore: vi.fn(),
-			on: vi.fn(),
-			off: vi.fn(),
-			get: vi.fn(),
-			post: vi.fn(),
-			put: vi.fn(),
-			patch: vi.fn(),
-			delete: vi.fn(),
-		},
-		Link: ({ children, ...props }: any) => React.createElement("a", props, children),
-		Head: ({ children }: any) => React.createElement(React.Fragment, {}, children),
+		router: mockRouter,
+		Link: mockInertiaLink,
+		Head: mockInertiaHead,
 	}
 })
 

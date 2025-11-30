@@ -1,11 +1,11 @@
-import { type TableTdProps } from "@mantine/core"
-import cx from "clsx"
 import React from "react"
+import { type TableTdProps } from "@mantine/core"
+import clsx from "clsx"
 
 import { usePageProps } from "@/lib/hooks"
 
 import { useTableContext } from "../TableContext"
-import BodyCell from "./BodyCell"
+import { BodyCell } from "./BodyCell"
 
 
 export interface TableCellProps extends TableTdProps {
@@ -16,14 +16,14 @@ export interface TableCellProps extends TableTdProps {
 	nowrap?: boolean
 }
 
-const RenderedCell = ({
+export function RenderedCell({
 	children = true,
 	hideable,
 	sort,
 	nowrap = false,
 	className,
 	...props
-}: TableCellProps) => {
+}: TableCellProps) {
 	const { auth: { user: { table_preferences } } } = usePageProps()
 
 	const tableState = useTableContext(false)
@@ -41,7 +41,5 @@ const RenderedCell = ({
 
 	if(hiddenByUser) return <></>
 
-	return <BodyCell className={ cx(className, { nowrap }) } { ...props }>{ children }</BodyCell>
+	return <BodyCell className={ clsx(className, { nowrap }) } { ...props }>{ children }</BodyCell>
 }
-
-export default RenderedCell

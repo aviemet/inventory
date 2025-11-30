@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import ConsumableForm from "../Form"
+import ConsumableForm from "@/domains/Consumables/Form"
 
 interface UpdateConsumableProps {
 	consumable: Schema.ConsumablesEdit

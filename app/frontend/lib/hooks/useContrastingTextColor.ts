@@ -1,6 +1,6 @@
 import { isLightColor, type MantinePrimaryShade, useMantineColorScheme, useMantineTheme } from "@mantine/core"
 
-const useContrastingTextColor = (color: string | undefined) => {
+export function useContrastingTextColor(color: string | undefined) {
 	const { colors, primaryShade } = useMantineTheme()
 	const { colorScheme } = useMantineColorScheme()
 
@@ -14,5 +14,3 @@ const useContrastingTextColor = (color: string | undefined) => {
 
 	return isLightColor(validatedColor, 0.379) ? "black" : "white"
 }
-
-export default useContrastingTextColor

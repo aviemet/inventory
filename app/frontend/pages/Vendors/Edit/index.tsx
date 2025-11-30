@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import VendorForm from "../Form"
+import VendorForm from "@/domains/Vendors/Form"
 
 interface UpdateVendorProps {
 	vendor: Schema.VendorsEdit

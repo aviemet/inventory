@@ -1,4 +1,3 @@
-import React from "react"
 
 interface AddressProps {
 	address: Schema.Address

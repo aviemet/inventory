@@ -1,12 +1,12 @@
 import React from "react"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
-import CurrencyInput, { type CurrencyInputProps } from "@/components/Inputs/CurrencyInput"
+import { ConditionalWrapper } from "@/components"
+import { CurrencyInput, type CurrencyInputProps } from "@/components/Inputs/CurrencyInput"
 import { useCurrency } from "@/lib/hooks"
 import { type Money } from "@/types"
 
-import Field from "../components/Field"
+import { Field } from "../components/Field"
 
 import { InputConflicts, type BaseFormInputProps } from "."
 
@@ -18,7 +18,7 @@ interface INumberInputProps<TForm extends NestedObject = NestedObject>
 
 }
 
-const FormInput = <TForm extends NestedObject = NestedObject>(
+export function FormCurrencyInput<TForm extends NestedObject = NestedObject>(
 	{
 		name,
 		model,
@@ -34,7 +34,7 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		clearErrorsOnChange,
 		...props
 	} : INumberInputProps<TForm>,
-) => {
+) {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<number | Money, TForm>({
 		name,
 		model,
@@ -88,5 +88,3 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 			/></ConditionalWrapper>
 	)
 }
-
-export default FormInput

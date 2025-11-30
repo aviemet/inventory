@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Link, Table } from "@/components"
 import { CheckIcon, CrossIcon } from "@/components/Icons"

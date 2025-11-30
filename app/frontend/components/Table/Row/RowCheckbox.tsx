@@ -1,18 +1,18 @@
-import cx from "clsx"
+import clsx from "clsx"
 import React from "react"
 
 import { Checkbox } from "@/components/Inputs"
 import { CheckboxProps } from "@/components/Inputs/Checkbox"
 
 import { useTableContext } from "../TableContext"
-import Td from "../Td"
+import { RenderedCell as Td } from "../Td"
 
 interface RowCheckBox extends CheckboxProps {
 	name: string
 	selected: Set<string>
 }
 
-const RowCheckbox = ({ name, selected, ...props }: RowCheckBox) => {
+export function RowCheckbox({ name, selected, ...props }: RowCheckBox) {
 	const { setTableState } = useTableContext()
 
 	const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +27,7 @@ const RowCheckbox = ({ name, selected, ...props }: RowCheckBox) => {
 	}
 
 	return (
-		<Td fitContent className={ cx("table-row-select-checkbox") }>
+		<Td fitContent className={ clsx("table-row-select-checkbox") }>
 			<Checkbox
 				checked={ selected?.has(name) }
 				onChange={ handleClick }
@@ -37,5 +37,3 @@ const RowCheckbox = ({ name, selected, ...props }: RowCheckBox) => {
 		</Td>
 	)
 }
-
-export default RowCheckbox

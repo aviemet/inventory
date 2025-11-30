@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Tabs, Page } from "@/components"
 import { Routes } from "@/lib"

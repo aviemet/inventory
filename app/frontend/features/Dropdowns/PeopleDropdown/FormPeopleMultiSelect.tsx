@@ -1,5 +1,4 @@
 import { isEmpty } from "lodash"
-import React from "react"
 
 import { MultiSelect as FormMultiSelect } from "@/components/Form"
 import { useGetPeopleAsOptions } from "@/queries/people"

@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Link, ActionIcon } from "@/components"
 
@@ -20,7 +19,7 @@ const MenuLink = ({ children, href, icon, ...props }: MenuLinkProps) => {
 			>
 				{ icon }
 			</ActionIcon>
-			<span className={ cx("link-text") }>{ children }</span>
+			<span className={ clsx("link-text") }>{ children }</span>
 		</Link>
 	)
 }

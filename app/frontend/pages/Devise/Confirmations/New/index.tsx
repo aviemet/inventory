@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Title, Tile } from "@/components"
 import { Form, TextInput, Submit } from "@/components/Form"

@@ -3,533 +3,547 @@
  * @version 2792758247e029ffdb20e4f283fb5c1052fc68fd2769712a358c528dd1d828f6
  * @see https://github.com/railsware/js-routes
  */
-
+// eslint-disable-next-line
 const __jsr = (
 // eslint-disable-next-line
 () => {
-		const hasProp = (value, key) => Object.prototype.hasOwnProperty.call(value, key)
-		let NodeTypes;
-		(function(NodeTypes) {
-			NodeTypes[NodeTypes["GROUP"] = 1] = "GROUP"
-			NodeTypes[NodeTypes["CAT"] = 2] = "CAT"
-			NodeTypes[NodeTypes["SYMBOL"] = 3] = "SYMBOL"
-			NodeTypes[NodeTypes["OR"] = 4] = "OR"
-			NodeTypes[NodeTypes["STAR"] = 5] = "STAR"
-			NodeTypes[NodeTypes["LITERAL"] = 6] = "LITERAL"
-			NodeTypes[NodeTypes["SLASH"] = 7] = "SLASH"
-			NodeTypes[NodeTypes["DOT"] = 8] = "DOT"
-		})(NodeTypes || (NodeTypes = {}))
-		const isBrowser = typeof window !== "undefined"
-		const UnescapedSpecials = "-._~!$&'()*+,;=:@"
-			.split("")
-			.map((s) => s.charCodeAt(0))
-		const UnescapedRanges = [
-			["a", "z"],
-			["A", "Z"],
-			["0", "9"],
-		].map((range) => range.map((s) => s.charCodeAt(0)))
-		const ModuleReferences = {
-			CJS: {
-				define(routes) {
-					if(module) {
-						module.exports = routes
-					}
-				},
-				isSupported() {
-					return typeof module === "object"
-				},
-			},
-			AMD: {
-				define(routes) {
-					if(define) {
-						define([], function() {
-							return routes
-						})
-					}
-				},
-				isSupported() {
-					return typeof define === "function" && !!define.amd
-				},
-			},
-			UMD: {
-				define(routes) {
-					if(ModuleReferences.AMD.isSupported()) {
-						ModuleReferences.AMD.define(routes)
-					} else {
-						if(ModuleReferences.CJS.isSupported()) {
-							try {
-								ModuleReferences.CJS.define(routes)
-							} catch(error) {
-								if(error.name !== "TypeError")
-									throw error
-							}
-						}
-					}
-				},
-				isSupported() {
-					return (ModuleReferences.AMD.isSupported() ||
-                    ModuleReferences.CJS.isSupported())
-				},
-			},
-			ESM: {
-				define() {
-					// Module can only be defined using ruby code generation
-				},
-				isSupported() {
-					// Its impossible to check if "export" keyword is supported
-					return true
-				},
-			},
-			NIL: {
-				define() {
-					// Defined using const __jsr =
-				},
-				isSupported() {
-					return true
-				},
-			},
-			DTS: {
-				// Acts the same as ESM
-				define(routes) {
-					ModuleReferences.ESM.define(routes)
-				},
-				isSupported() {
-					return ModuleReferences.ESM.isSupported()
-				},
-			},
-		}
-		class ParametersMissing extends Error {
-			constructor(...keys) {
-				super(`Route missing required keys: ${keys.join(", ")}`)
-				this.keys = keys
-				Object.setPrototypeOf(this, Object.getPrototypeOf(this))
-				this.name = ParametersMissing.name
-			}
-		}
-		const ReservedOptions = [
-			"anchor",
-			"trailing_slash",
-			"subdomain",
-			"host",
-			"port",
-			"protocol",
-			"script_name",
-		]
-		class UtilsClass {
-			constructor() {
-				this.configuration = {
-					prefix: "",
-					default_url_options: {},
-					special_options_key: "_options",
-					serializer: null || this.default_serializer.bind(this),
-				}
-			}
-			default_serializer(value, prefix) {
-				if(this.is_nullable(value)) {
-					return ""
-				}
-				if(!prefix && !this.is_object(value)) {
-					throw new Error("Url parameters should be a javascript hash")
-				}
-				prefix = prefix || ""
-				const result = []
-				if(this.is_array(value)) {
-					for(const element of value) {
-						result.push(this.default_serializer(element, prefix + "[]"))
-					}
-				} else if(this.is_object(value)) {
-					for(let key in value) {
-						if(!hasProp(value, key))
-							continue
-						let prop = value[key]
-						if(this.is_nullable(prop) && prefix) {
-							prop = ""
-						}
-						if(this.is_not_nullable(prop)) {
-							if(prefix) {
-								key = prefix + "[" + key + "]"
-							}
-							result.push(this.default_serializer(prop, key))
-						}
-					}
-				} else {
-					if(this.is_not_nullable(value)) {
-						result.push(encodeURIComponent(prefix) + "=" + encodeURIComponent("" + value))
-					}
-				}
-				return result.join("&")
-			}
-			serialize(object) {
-				return this.configuration.serializer(object)
-			}
-			extract_options(number_of_params, args) {
-				const last_el = args[args.length - 1]
-				if((args.length > number_of_params && last_el === 0) ||
+    const hasProp = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
+    let NodeTypes;
+    (function (NodeTypes) {
+        NodeTypes[NodeTypes["GROUP"] = 1] = "GROUP";
+        NodeTypes[NodeTypes["CAT"] = 2] = "CAT";
+        NodeTypes[NodeTypes["SYMBOL"] = 3] = "SYMBOL";
+        NodeTypes[NodeTypes["OR"] = 4] = "OR";
+        NodeTypes[NodeTypes["STAR"] = 5] = "STAR";
+        NodeTypes[NodeTypes["LITERAL"] = 6] = "LITERAL";
+        NodeTypes[NodeTypes["SLASH"] = 7] = "SLASH";
+        NodeTypes[NodeTypes["DOT"] = 8] = "DOT";
+    })(NodeTypes || (NodeTypes = {}));
+    const isBrowser = typeof window !== "undefined";
+    const UnescapedSpecials = "-._~!$&'()*+,;=:@"
+        .split("")
+        .map((s) => s.charCodeAt(0));
+    const UnescapedRanges = [
+        ["a", "z"],
+        ["A", "Z"],
+        ["0", "9"],
+    ].map((range) => range.map((s) => s.charCodeAt(0)));
+    const ModuleReferences = {
+        CJS: {
+            define(routes) {
+                if (module) {
+                    module.exports = routes;
+                }
+            },
+            isSupported() {
+                return typeof module === "object";
+            },
+        },
+        AMD: {
+            define(routes) {
+                if (define) {
+                    define([], function () {
+                        return routes;
+                    });
+                }
+            },
+            isSupported() {
+                return typeof define === "function" && !!define.amd;
+            },
+        },
+        UMD: {
+            define(routes) {
+                if (ModuleReferences.AMD.isSupported()) {
+                    ModuleReferences.AMD.define(routes);
+                }
+                else {
+                    if (ModuleReferences.CJS.isSupported()) {
+                        try {
+                            ModuleReferences.CJS.define(routes);
+                        }
+                        catch (error) {
+                            if (error.name !== "TypeError")
+                                throw error;
+                        }
+                    }
+                }
+            },
+            isSupported() {
+                return (ModuleReferences.AMD.isSupported() ||
+                    ModuleReferences.CJS.isSupported());
+            },
+        },
+        ESM: {
+            define() {
+                // Module can only be defined using ruby code generation
+            },
+            isSupported() {
+                // Its impossible to check if "export" keyword is supported
+                return true;
+            },
+        },
+        NIL: {
+            define() {
+                // Defined using const __jsr = 
+            },
+            isSupported() {
+                return true;
+            },
+        },
+        DTS: {
+            // Acts the same as ESM
+            define(routes) {
+                ModuleReferences.ESM.define(routes);
+            },
+            isSupported() {
+                return ModuleReferences.ESM.isSupported();
+            },
+        },
+    };
+    class ParametersMissing extends Error {
+        constructor(...keys) {
+            super(`Route missing required keys: ${keys.join(", ")}`);
+            this.keys = keys;
+            Object.setPrototypeOf(this, Object.getPrototypeOf(this));
+            this.name = ParametersMissing.name;
+        }
+    }
+    const ReservedOptions = [
+        "anchor",
+        "trailing_slash",
+        "subdomain",
+        "host",
+        "port",
+        "protocol",
+        "script_name",
+    ];
+    class UtilsClass {
+        constructor() {
+            this.configuration = {
+                prefix: "",
+                default_url_options: {},
+                special_options_key: "_options",
+                serializer: null || this.default_serializer.bind(this),
+            };
+        }
+        default_serializer(value, prefix) {
+            if (this.is_nullable(value)) {
+                return "";
+            }
+            if (!prefix && !this.is_object(value)) {
+                throw new Error("Url parameters should be a javascript hash");
+            }
+            prefix = prefix || "";
+            const result = [];
+            if (this.is_array(value)) {
+                for (const element of value) {
+                    result.push(this.default_serializer(element, prefix + "[]"));
+                }
+            }
+            else if (this.is_object(value)) {
+                for (let key in value) {
+                    if (!hasProp(value, key))
+                        continue;
+                    let prop = value[key];
+                    if (this.is_nullable(prop) && prefix) {
+                        prop = "";
+                    }
+                    if (this.is_not_nullable(prop)) {
+                        if (prefix) {
+                            key = prefix + "[" + key + "]";
+                        }
+                        result.push(this.default_serializer(prop, key));
+                    }
+                }
+            }
+            else {
+                if (this.is_not_nullable(value)) {
+                    result.push(encodeURIComponent(prefix) + "=" + encodeURIComponent("" + value));
+                }
+            }
+            return result.join("&");
+        }
+        serialize(object) {
+            return this.configuration.serializer(object);
+        }
+        extract_options(number_of_params, args) {
+            const last_el = args[args.length - 1];
+            if ((args.length > number_of_params && last_el === 0) ||
                 (this.is_object(last_el) &&
                     !this.looks_like_serialized_model(last_el))) {
-					if(this.is_object(last_el)) {
-						delete last_el[this.configuration.special_options_key]
-					}
-					return {
-						args: args.slice(0, args.length - 1),
-						options: last_el,
-					}
-				} else {
-					return { args, options: {} }
-				}
-			}
-			looks_like_serialized_model(object) {
-				return (this.is_object(object) &&
+                if (this.is_object(last_el)) {
+                    delete last_el[this.configuration.special_options_key];
+                }
+                return {
+                    args: args.slice(0, args.length - 1),
+                    options: last_el,
+                };
+            }
+            else {
+                return { args, options: {} };
+            }
+        }
+        looks_like_serialized_model(object) {
+            return (this.is_object(object) &&
                 !(this.configuration.special_options_key in object) &&
-                ("id" in object || "to_param" in object || "toParam" in object))
-			}
-			path_identifier(object) {
-				const result = this.unwrap_path_identifier(object)
-				return this.is_nullable(result) ||
+                ("id" in object || "to_param" in object || "toParam" in object));
+        }
+        path_identifier(object) {
+            const result = this.unwrap_path_identifier(object);
+            return this.is_nullable(result) ||
                 (false &&
                     result === false)
-					? ""
-					: "" + result
-			}
-			unwrap_path_identifier(object) {
-				let result = object
-				if(!this.is_object(object)) {
-					return object
-				}
-				if("to_param" in object) {
-					result = object.to_param
-				} else if("toParam" in object) {
-					result = object.toParam
-				} else if("id" in object) {
-					result = object.id
-				} else {
-					result = object
-				}
-				return this.is_callable(result) ? result.call(object) : result
-			}
-			partition_parameters(parts, required_params, default_options, call_arguments) {
-
-				let { args, options } = this.extract_options(parts.length, call_arguments)
-				if(args.length > parts.length) {
-					throw new Error("Too many parameters provided for path")
-				}
-				let use_all_parts = args.length > required_params.length
-				const parts_options = {
-					...this.configuration.default_url_options,
-				}
-				for(const key in options) {
-					const value = options[key]
-					if(!hasProp(options, key))
-						continue
-					use_all_parts = true
-					if(parts.includes(key)) {
-						parts_options[key] = value
-					}
-				}
-				options = {
-					...this.configuration.default_url_options,
-					...default_options,
-					...options,
-				}
-				const keyword_parameters = {}
-				let query_parameters = {}
-				for(const key in options) {
-					if(!hasProp(options, key))
-						continue
-					const value = options[key]
-					if(key === "params") {
-						if(this.is_object(value)) {
-							query_parameters = {
-								...query_parameters,
-								...value,
-							}
-						} else {
-							throw new Error("params value should always be an object")
-						}
-					} else if(this.is_reserved_option(key)) {
-						keyword_parameters[key] = value
-					} else {
-						if(!this.is_nullable(value) &&
+                ? ""
+                : "" + result;
+        }
+        unwrap_path_identifier(object) {
+            let result = object;
+            if (!this.is_object(object)) {
+                return object;
+            }
+            if ("to_param" in object) {
+                result = object.to_param;
+            }
+            else if ("toParam" in object) {
+                result = object.toParam;
+            }
+            else if ("id" in object) {
+                result = object.id;
+            }
+            else {
+                result = object;
+            }
+            return this.is_callable(result) ? result.call(object) : result;
+        }
+        partition_parameters(parts, required_params, default_options, call_arguments) {
+            // eslint-disable-next-line prefer-const
+            let { args, options } = this.extract_options(parts.length, call_arguments);
+            if (args.length > parts.length) {
+                throw new Error("Too many parameters provided for path");
+            }
+            let use_all_parts = args.length > required_params.length;
+            const parts_options = {
+                ...this.configuration.default_url_options,
+            };
+            for (const key in options) {
+                const value = options[key];
+                if (!hasProp(options, key))
+                    continue;
+                use_all_parts = true;
+                if (parts.includes(key)) {
+                    parts_options[key] = value;
+                }
+            }
+            options = {
+                ...this.configuration.default_url_options,
+                ...default_options,
+                ...options,
+            };
+            const keyword_parameters = {};
+            let query_parameters = {};
+            for (const key in options) {
+                if (!hasProp(options, key))
+                    continue;
+                const value = options[key];
+                if (key === "params") {
+                    if (this.is_object(value)) {
+                        query_parameters = {
+                            ...query_parameters,
+                            ...value,
+                        };
+                    }
+                    else {
+                        throw new Error("params value should always be an object");
+                    }
+                }
+                else if (this.is_reserved_option(key)) {
+                    keyword_parameters[key] = value;
+                }
+                else {
+                    if (!this.is_nullable(value) &&
                         (value !== default_options[key] || required_params.includes(key))) {
-							query_parameters[key] = value
-						}
-					}
-				}
-				const route_parts = use_all_parts ? parts : required_params
-				let i = 0
-				for(const part of route_parts) {
-					if(i < args.length) {
-						const value = args[i]
-						if(!hasProp(parts_options, part)) {
-							query_parameters[part] = value
-							++i
-						}
-					}
-				}
-				return { keyword_parameters, query_parameters }
-			}
-			build_route(parts, required_params, default_options, route, absolute, args) {
-				const { keyword_parameters, query_parameters } = this.partition_parameters(parts, required_params, default_options, args)
-				let { trailing_slash, anchor, script_name } = keyword_parameters
-				const missing_params = required_params.filter((param) => !hasProp(query_parameters, param) ||
-                this.is_nullable(query_parameters[param]))
-				if(missing_params.length) {
-					throw new ParametersMissing(...missing_params)
-				}
-				let result = this.get_prefix() + this.visit(route, query_parameters)
-				if(trailing_slash) {
-					result = result.replace(/(.*?)[/]?$/, "$1/")
-				}
-				const url_params = this.serialize(query_parameters)
-				if(url_params.length) {
-					result += "?" + url_params
-				}
-				if(anchor) {
-					result += "#" + anchor
-				}
-				if(script_name) {
-					const last_index = script_name.length - 1
-					if(script_name[last_index] == "/" && result[0] == "/") {
-						script_name = script_name.slice(0, last_index)
-					}
-					result = script_name + result
-				}
-				if(absolute) {
-					result = this.route_url(keyword_parameters) + result
-				}
-				return result
-			}
-			visit(route, parameters, optional = false) {
-				switch(route[0]) {
-					case NodeTypes.GROUP:
-						return this.visit(route[1], parameters, true)
-					case NodeTypes.CAT:
-						return this.visit_cat(route, parameters, optional)
-					case NodeTypes.SYMBOL:
-						return this.visit_symbol(route, parameters, optional)
-					case NodeTypes.STAR:
-						return this.visit_globbing(route[1], parameters, true)
-					case NodeTypes.LITERAL:
-					case NodeTypes.SLASH:
-					case NodeTypes.DOT:
-						return route[1]
-					default:
-						throw new Error("Unknown Rails node type")
-				}
-			}
-			is_not_nullable(object) {
-				return !this.is_nullable(object)
-			}
-			is_nullable(object) {
-				return object === undefined || object === null
-			}
-			visit_cat(
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				[_type, left, right], parameters, optional) {
-				const left_part = this.visit(left, parameters, optional)
-				let right_part = this.visit(right, parameters, optional)
-				if(optional &&
+                        query_parameters[key] = value;
+                    }
+                }
+            }
+            const route_parts = use_all_parts ? parts : required_params;
+            let i = 0;
+            for (const part of route_parts) {
+                if (i < args.length) {
+                    const value = args[i];
+                    if (!hasProp(parts_options, part)) {
+                        query_parameters[part] = value;
+                        ++i;
+                    }
+                }
+            }
+            return { keyword_parameters, query_parameters };
+        }
+        build_route(parts, required_params, default_options, route, absolute, args) {
+            const { keyword_parameters, query_parameters } = this.partition_parameters(parts, required_params, default_options, args);
+            let { trailing_slash, anchor, script_name } = keyword_parameters;
+            const missing_params = required_params.filter((param) => !hasProp(query_parameters, param) ||
+                this.is_nullable(query_parameters[param]));
+            if (missing_params.length) {
+                throw new ParametersMissing(...missing_params);
+            }
+            let result = this.get_prefix() + this.visit(route, query_parameters);
+            if (trailing_slash) {
+                result = result.replace(/(.*?)[/]?$/, "$1/");
+            }
+            const url_params = this.serialize(query_parameters);
+            if (url_params.length) {
+                result += "?" + url_params;
+            }
+            if (anchor) {
+                result += "#" + anchor;
+            }
+            if (script_name) {
+                const last_index = script_name.length - 1;
+                if (script_name[last_index] == "/" && result[0] == "/") {
+                    script_name = script_name.slice(0, last_index);
+                }
+                result = script_name + result;
+            }
+            if (absolute) {
+                result = this.route_url(keyword_parameters) + result;
+            }
+            return result;
+        }
+        visit(route, parameters, optional = false) {
+            switch (route[0]) {
+                case NodeTypes.GROUP:
+                    return this.visit(route[1], parameters, true);
+                case NodeTypes.CAT:
+                    return this.visit_cat(route, parameters, optional);
+                case NodeTypes.SYMBOL:
+                    return this.visit_symbol(route, parameters, optional);
+                case NodeTypes.STAR:
+                    return this.visit_globbing(route[1], parameters, true);
+                case NodeTypes.LITERAL:
+                case NodeTypes.SLASH:
+                case NodeTypes.DOT:
+                    return route[1];
+                default:
+                    throw new Error("Unknown Rails node type");
+            }
+        }
+        is_not_nullable(object) {
+            return !this.is_nullable(object);
+        }
+        is_nullable(object) {
+            return object === undefined || object === null;
+        }
+        visit_cat(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        [_type, left, right], parameters, optional) {
+            const left_part = this.visit(left, parameters, optional);
+            let right_part = this.visit(right, parameters, optional);
+            if (optional &&
                 ((this.is_optional_node(left[0]) && !left_part) ||
                     (this.is_optional_node(right[0]) && !right_part))) {
-					return ""
-				}
-				// if left_part ends on '/' and right_part starts on '/'
-				if(left_part[left_part.length - 1] === "/" && right_part[0] === "/") {
-					// strip slash from right_part
-					// to prevent double slash
-					right_part = right_part.substring(1)
-				}
-				return left_part + right_part
-			}
-			visit_symbol(
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				[_type, key], parameters, optional) {
-				const value = this.path_identifier(parameters[key])
-				delete parameters[key]
-				if(value.length) {
-					return this.encode_segment(value)
-				}
-				if(optional) {
-					return ""
-				} else {
-					throw new ParametersMissing(key)
-				}
-			}
-			encode_segment(segment) {
-				if(segment.match(/^[a-zA-Z0-9-]$/)) {
-					// Performance optimization for 99% of cases
-					return segment
-				}
-				return (segment.match(/./gu) || [])
-					.map((ch) => {
-						const code = ch.charCodeAt(0)
-						if(UnescapedRanges.find((range) => code >= range[0] && code <= range[1]) ||
+                return "";
+            }
+            // if left_part ends on '/' and right_part starts on '/'
+            if (left_part[left_part.length - 1] === "/" && right_part[0] === "/") {
+                // strip slash from right_part
+                // to prevent double slash
+                right_part = right_part.substring(1);
+            }
+            return left_part + right_part;
+        }
+        visit_symbol(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        [_type, key], parameters, optional) {
+            const value = this.path_identifier(parameters[key]);
+            delete parameters[key];
+            if (value.length) {
+                return this.encode_segment(value);
+            }
+            if (optional) {
+                return "";
+            }
+            else {
+                throw new ParametersMissing(key);
+            }
+        }
+        encode_segment(segment) {
+            if (segment.match(/^[a-zA-Z0-9-]$/)) {
+                // Performance optimization for 99% of cases
+                return segment;
+            }
+            return (segment.match(/./gu) || [])
+                .map((ch) => {
+                const code = ch.charCodeAt(0);
+                if (UnescapedRanges.find((range) => code >= range[0] && code <= range[1]) ||
                     UnescapedSpecials.includes(code)) {
-							return ch
-						} else {
-							return encodeURIComponent(ch)
-						}
-					})
-					.join("")
-			}
-			is_optional_node(node) {
-				return [NodeTypes.STAR, NodeTypes.SYMBOL, NodeTypes.CAT].includes(node)
-			}
-			build_path_spec(route, wildcard = false) {
-				let key
-				switch(route[0]) {
-					case NodeTypes.GROUP:
-						return `(${this.build_path_spec(route[1])})`
-					case NodeTypes.CAT:
-						return (this.build_path_spec(route[1]) + this.build_path_spec(route[2]))
-					case NodeTypes.STAR:
-						return this.build_path_spec(route[1], true)
-					case NodeTypes.SYMBOL:
-						key = route[1]
-						if(wildcard) {
-							return (key.startsWith("*") ? "" : "*") + key
-						} else {
-							return ":" + key
-						}
-						break
-					case NodeTypes.SLASH:
-					case NodeTypes.DOT:
-					case NodeTypes.LITERAL:
-						return route[1]
-					default:
-						throw new Error("Unknown Rails node type")
-				}
-			}
-			visit_globbing(route, parameters, optional) {
-				const key = route[1]
-				let value = parameters[key]
-				delete parameters[key]
-				if(this.is_nullable(value)) {
-					return this.visit(route, parameters, optional)
-				}
-				if(this.is_array(value)) {
-					value = value.join("/")
-				}
-				const result = this.path_identifier(value)
-				return encodeURI(result)
-			}
-			get_prefix() {
-				const prefix = this.configuration.prefix
-				return prefix.match("/$")
-					? prefix.substring(0, prefix.length - 1)
-					: prefix
-			}
-			route(parts_table, route_spec, absolute = false) {
-				const required_params = []
-				const parts = []
-				const default_options = {}
-				for(const [part, { r: required, d: value }] of Object.entries(parts_table)) {
-					parts.push(part)
-					if(required) {
-						required_params.push(part)
-					}
-					if(this.is_not_nullable(value)) {
-						default_options[part] = value
-					}
-				}
-				const result = (...args) => {
-					return this.build_route(parts, required_params, default_options, route_spec, absolute, args)
-				}
-				result.requiredParams = () => required_params
-				result.toString = () => {
-					return this.build_path_spec(route_spec)
-				}
-				return result
-			}
-			route_url(route_defaults) {
-				const hostname = route_defaults.host || this.current_host()
-				if(!hostname) {
-					return ""
-				}
-				const subdomain = route_defaults.subdomain
-					? route_defaults.subdomain + "."
-					: ""
-				const protocol = route_defaults.protocol || this.current_protocol()
-				let port = route_defaults.port ||
-                (!route_defaults.host ? this.current_port() : undefined)
-				port = port ? ":" + port : ""
-				return protocol + "://" + subdomain + hostname + port
-			}
-			current_host() {
-				var _a
-				return (isBrowser && ((_a = window === null || window === void 0 ? void 0 : window.location) === null || _a === void 0 ? void 0 : _a.hostname)) || ""
-			}
-			current_protocol() {
-				var _a, _b
-				return ((isBrowser && ((_b = (_a = window === null || window === void 0 ? void 0 : window.location) === null || _a === void 0 ? void 0 : _a.protocol) === null || _b === void 0 ? void 0 : _b.replace(/:$/, ""))) || "http")
-			}
-			current_port() {
-				var _a
-				return (isBrowser && ((_a = window === null || window === void 0 ? void 0 : window.location) === null || _a === void 0 ? void 0 : _a.port)) || ""
-			}
-			is_object(value) {
-				return (typeof value === "object" &&
-                Object.prototype.toString.call(value) === "[object Object]")
-			}
-			is_array(object) {
-				return object instanceof Array
-			}
-			is_callable(object) {
-				return typeof object === "function" && !!object.call
-			}
-			is_reserved_option(key) {
-				return ReservedOptions.includes(key)
-			}
-			configure(new_config) {
-				if(new_config.prefix) {
-					console.warn("JsRoutes configuration prefix option is deprecated in favor of default_url_options.script_name.")
-				}
-				this.configuration = { ...this.configuration, ...new_config }
-				return this.configuration
-			}
-			config() {
-				return { ...this.configuration }
-			}
-			is_module_supported(name) {
-				return ModuleReferences[name].isSupported()
-			}
-			ensure_module_supported(name) {
-				if(!this.is_module_supported(name)) {
-					throw new Error(`${name} is not supported by runtime`)
-				}
-			}
-			define_module(name, module) {
-				this.ensure_module_supported(name)
-				ModuleReferences[name].define(module)
-				return module
-			}
-		}
-		const utils = new UtilsClass()
-		// We want this helper name to be short
-		const __jsr = {
-			r(parts_table, route_spec, absolute) {
-				return utils.route(parts_table, route_spec, absolute)
-			},
-		}
-		return utils.define_module("ESM", {
-			...__jsr,
-			configure: (config) => {
-				return utils.configure(config)
-			},
-			config: () => {
-				return utils.config()
-			},
-			serialize: (object) => {
-				return utils.serialize(object)
-			},
-			...{},
-		})
-	})()
-export const configure = __jsr.configure
+                    return ch;
+                }
+                else {
+                    return encodeURIComponent(ch);
+                }
+            })
+                .join("");
+        }
+        is_optional_node(node) {
+            return [NodeTypes.STAR, NodeTypes.SYMBOL, NodeTypes.CAT].includes(node);
+        }
+        build_path_spec(route, wildcard = false) {
+            let key;
+            switch (route[0]) {
+                case NodeTypes.GROUP:
+                    return `(${this.build_path_spec(route[1])})`;
+                case NodeTypes.CAT:
+                    return (this.build_path_spec(route[1]) + this.build_path_spec(route[2]));
+                case NodeTypes.STAR:
+                    return this.build_path_spec(route[1], true);
+                case NodeTypes.SYMBOL:
+                    key = route[1];
+                    if (wildcard) {
+                        return (key.startsWith("*") ? "" : "*") + key;
+                    }
+                    else {
+                        return ":" + key;
+                    }
+                    break;
+                case NodeTypes.SLASH:
+                case NodeTypes.DOT:
+                case NodeTypes.LITERAL:
+                    return route[1];
+                default:
+                    throw new Error("Unknown Rails node type");
+            }
+        }
+        visit_globbing(route, parameters, optional) {
+            const key = route[1];
+            let value = parameters[key];
+            delete parameters[key];
+            if (this.is_nullable(value)) {
+                return this.visit(route, parameters, optional);
+            }
+            if (this.is_array(value)) {
+                value = value.join("/");
+            }
+            const result = this.path_identifier(value);
+            return encodeURI(result);
+        }
+        get_prefix() {
+            const prefix = this.configuration.prefix;
+            return prefix.match("/$")
+                ? prefix.substring(0, prefix.length - 1)
+                : prefix;
+        }
+        route(parts_table, route_spec, absolute = false) {
+            const required_params = [];
+            const parts = [];
+            const default_options = {};
+            for (const [part, { r: required, d: value }] of Object.entries(parts_table)) {
+                parts.push(part);
+                if (required) {
+                    required_params.push(part);
+                }
+                if (this.is_not_nullable(value)) {
+                    default_options[part] = value;
+                }
+            }
+            const result = (...args) => {
+                return this.build_route(parts, required_params, default_options, route_spec, absolute, args);
+            };
+            result.requiredParams = () => required_params;
+            result.toString = () => {
+                return this.build_path_spec(route_spec);
+            };
+            return result;
+        }
+        route_url(route_defaults) {
+            const hostname = route_defaults.host || this.current_host();
+            if (!hostname) {
+                return "";
+            }
+            const subdomain = route_defaults.subdomain
+                ? route_defaults.subdomain + "."
+                : "";
+            const protocol = route_defaults.protocol || this.current_protocol();
+            let port = route_defaults.port ||
+                (!route_defaults.host ? this.current_port() : undefined);
+            port = port ? ":" + port : "";
+            return protocol + "://" + subdomain + hostname + port;
+        }
+        current_host() {
+            var _a;
+            return (isBrowser && ((_a = window === null || window === void 0 ? void 0 : window.location) === null || _a === void 0 ? void 0 : _a.hostname)) || "";
+        }
+        current_protocol() {
+            var _a, _b;
+            return ((isBrowser && ((_b = (_a = window === null || window === void 0 ? void 0 : window.location) === null || _a === void 0 ? void 0 : _a.protocol) === null || _b === void 0 ? void 0 : _b.replace(/:$/, ""))) || "http");
+        }
+        current_port() {
+            var _a;
+            return (isBrowser && ((_a = window === null || window === void 0 ? void 0 : window.location) === null || _a === void 0 ? void 0 : _a.port)) || "";
+        }
+        is_object(value) {
+            return (typeof value === "object" &&
+                Object.prototype.toString.call(value) === "[object Object]");
+        }
+        is_array(object) {
+            return object instanceof Array;
+        }
+        is_callable(object) {
+            return typeof object === "function" && !!object.call;
+        }
+        is_reserved_option(key) {
+            return ReservedOptions.includes(key);
+        }
+        configure(new_config) {
+            if (new_config.prefix) {
+                console.warn("JsRoutes configuration prefix option is deprecated in favor of default_url_options.script_name.");
+            }
+            this.configuration = { ...this.configuration, ...new_config };
+            return this.configuration;
+        }
+        config() {
+            return { ...this.configuration };
+        }
+        is_module_supported(name) {
+            return ModuleReferences[name].isSupported();
+        }
+        ensure_module_supported(name) {
+            if (!this.is_module_supported(name)) {
+                throw new Error(`${name} is not supported by runtime`);
+            }
+        }
+        define_module(name, module) {
+            this.ensure_module_supported(name);
+            ModuleReferences[name].define(module);
+            return module;
+        }
+    }
+    const utils = new UtilsClass();
+    // We want this helper name to be short
+    const __jsr = {
+        r(parts_table, route_spec, absolute) {
+            return utils.route(parts_table, route_spec, absolute);
+        },
+    };
+    return utils.define_module("ESM", {
+        ...__jsr,
+        configure: (config) => {
+            return utils.configure(config);
+        },
+        config: () => {
+            return utils.config();
+        },
+        serialize: (object) => {
+            return utils.serialize(object);
+        },
+        ...{},
+    });
+})();
+export const configure = __jsr.configure;
 
-export const config = __jsr.config
+export const config = __jsr.config;
 
-export const serialize = __jsr.serialize
+export const serialize = __jsr.serialize;
 
 /**
  * Generates rails route to
@@ -537,7 +551,7 @@ export const serialize = __jsr.serialize
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const acceptUserInvitation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "invitation"], [2, [7, "/"], [2, [6, "accept"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const acceptUserInvitation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"invitation"],[2,[7,"/"],[2,[6,"accept"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -545,7 +559,7 @@ export const acceptUserInvitation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const accessories = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "accessories"], [1, [2, [8, "."], [3, "format"]]]]])
+export const accessories = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -554,7 +568,7 @@ export const accessories = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const accessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "accessories"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const accessory = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -562,7 +576,7 @@ export const accessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiAccessories = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "accessories"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiAccessories = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"accessories"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -570,7 +584,7 @@ export const apiAccessories = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiAccessoriesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "accessories"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiAccessoriesOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"accessories"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -579,7 +593,7 @@ export const apiAccessoriesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiAccessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "accessories"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiAccessory = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -588,7 +602,7 @@ export const apiAccessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiAsset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "assets"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiAsset = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"assets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -596,7 +610,7 @@ export const apiAsset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{}
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiAssets = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "assets"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiAssets = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"assets"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -604,7 +618,7 @@ export const apiAssets = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiAssetsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "assets"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiAssetsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"assets"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -613,7 +627,7 @@ export const apiAssetsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiAssignment = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "assignments"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiAssignment = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"assignments"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -621,7 +635,7 @@ export const apiAssignment = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiAssignments = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "assignments"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiAssignments = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"assignments"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -629,7 +643,7 @@ export const apiAssignments = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCategories = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "categories"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiCategories = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"categories"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -637,7 +651,7 @@ export const apiCategories = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCategoriesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "categories"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiCategoriesOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"categories"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -646,7 +660,7 @@ export const apiCategoriesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCategory = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "categories"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiCategory = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -655,7 +669,7 @@ export const apiCategory = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCategoryOptions = /* #__PURE__ */ __jsr.r({ "category_type":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "categories"], [2, [7, "/"], [2, [3, "category_type"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const apiCategoryOptions = /*#__PURE__*/ __jsr.r({"category_type":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"category_type"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -663,7 +677,7 @@ export const apiCategoryOptions = /* #__PURE__ */ __jsr.r({ "category_type":{ "r
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCompanies = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "companies"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiCompanies = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"companies"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -671,7 +685,7 @@ export const apiCompanies = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCompaniesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "companies"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiCompaniesOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"companies"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -680,7 +694,7 @@ export const apiCompaniesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCompany = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "companies"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiCompany = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"companies"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -689,7 +703,7 @@ export const apiCompany = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiComponent = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "components"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiComponent = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -697,7 +711,7 @@ export const apiComponent = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiComponents = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "components"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiComponents = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"components"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -705,7 +719,7 @@ export const apiComponents = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiComponentsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "components"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiComponentsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"components"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -714,7 +728,7 @@ export const apiComponentsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiConsumable = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "consumables"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiConsumable = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"consumables"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -722,7 +736,7 @@ export const apiConsumable = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiConsumables = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "consumables"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiConsumables = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"consumables"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -730,7 +744,7 @@ export const apiConsumables = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiConsumablesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "consumables"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiConsumablesOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"consumables"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -739,7 +753,7 @@ export const apiConsumablesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiContract = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "contracts"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiContract = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"contracts"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -747,7 +761,7 @@ export const apiContract = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiContracts = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "contracts"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiContracts = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"contracts"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -755,7 +769,7 @@ export const apiContracts = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiContractsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "contracts"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiContractsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"contracts"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -763,7 +777,7 @@ export const apiContractsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiCurrencies = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "currencies"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiCurrencies = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"currencies"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -772,7 +786,7 @@ export const apiCurrencies = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiDepartment = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "departments"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiDepartment = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -780,7 +794,7 @@ export const apiDepartment = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "for
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiDepartments = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "departments"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiDepartments = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"departments"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -788,7 +802,7 @@ export const apiDepartments = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiDepartmentsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "departments"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiDepartmentsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"departments"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -797,7 +811,7 @@ export const apiDepartmentsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiDocumentation = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "documentations"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiDocumentation = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"documentations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -805,7 +819,7 @@ export const apiDocumentation = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "fo
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiDocumentations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "documentations"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiDocumentations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"documentations"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -813,7 +827,7 @@ export const apiDocumentations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiDocumentationsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "documentations"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiDocumentationsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"documentations"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -822,7 +836,7 @@ export const apiDocumentationsOptions = /* #__PURE__ */ __jsr.r({ "format":{} },
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiIpLease = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "ip_leases"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiIpLease = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"ip_leases"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -830,7 +844,7 @@ export const apiIpLease = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiIpLeases = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "ip_leases"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiIpLeases = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"ip_leases"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -839,7 +853,7 @@ export const apiIpLeases = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiItem = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiItem = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -849,7 +863,7 @@ export const apiItem = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiItemNic = /* #__PURE__ */ __jsr.r({ "item_id":{ "r":true }, "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [3, "item_id"], [2, [7, "/"], [2, [6, "nics"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]]]])
+export const apiItemNic = /*#__PURE__*/ __jsr.r({"item_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"item_id"],[2,[7,"/"],[2,[6,"nics"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -858,7 +872,7 @@ export const apiItemNic = /* #__PURE__ */ __jsr.r({ "item_id":{ "r":true }, "id"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiItemNics = /* #__PURE__ */ __jsr.r({ "item_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [3, "item_id"], [2, [7, "/"], [2, [6, "nics"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const apiItemNics = /*#__PURE__*/ __jsr.r({"item_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"item_id"],[2,[7,"/"],[2,[6,"nics"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -866,7 +880,7 @@ export const apiItemNics = /* #__PURE__ */ __jsr.r({ "item_id":{ "r":true }, "fo
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiItems = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "hardware"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiItems = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"hardware"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -874,7 +888,7 @@ export const apiItems = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiItemsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "items"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiItemsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"items"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -883,7 +897,7 @@ export const apiItemsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiLicense = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "licenses"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiLicense = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -891,7 +905,7 @@ export const apiLicense = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiLicenses = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "licenses"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiLicenses = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"licenses"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -899,7 +913,7 @@ export const apiLicenses = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiLicensesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "licenses"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiLicensesOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"licenses"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -908,7 +922,7 @@ export const apiLicensesOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiLocation = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "locations"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiLocation = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -916,7 +930,7 @@ export const apiLocation = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiLocations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "locations"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiLocations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"locations"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -924,7 +938,7 @@ export const apiLocations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiLocationsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "locations"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiLocationsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"locations"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -933,7 +947,7 @@ export const apiLocationsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiManufacturer = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "manufacturers"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiManufacturer = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -941,7 +955,7 @@ export const apiManufacturer = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "for
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiManufacturers = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "manufacturers"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiManufacturers = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"manufacturers"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -949,7 +963,7 @@ export const apiManufacturers = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiManufacturersOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "manufacturers"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiManufacturersOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"manufacturers"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -958,7 +972,7 @@ export const apiManufacturersOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiModel = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "models"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiModel = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"models"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -966,7 +980,7 @@ export const apiModel = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiModels = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "models"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiModels = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"models"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -974,7 +988,7 @@ export const apiModels = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiModelsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "models"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiModelsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"models"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -983,7 +997,7 @@ export const apiModelsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiNetwork = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "networks"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiNetwork = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"networks"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -991,7 +1005,7 @@ export const apiNetwork = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiNetworks = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "networks"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiNetworks = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"networks"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -999,7 +1013,7 @@ export const apiNetworks = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiNetworksOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "networks"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiNetworksOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"networks"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1008,7 +1022,7 @@ export const apiNetworksOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiOrder = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "orders"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiOrder = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"orders"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1016,7 +1030,7 @@ export const apiOrder = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{}
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiOrders = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "orders"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiOrders = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"orders"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1024,7 +1038,7 @@ export const apiOrders = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiOrdersOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "orders"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiOrdersOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"orders"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1033,7 +1047,7 @@ export const apiOrdersOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiOwnership = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "ownerships"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiOwnership = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"ownerships"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1041,7 +1055,7 @@ export const apiOwnership = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiOwnerships = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "ownerships"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiOwnerships = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"ownerships"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1049,7 +1063,7 @@ export const apiOwnerships = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiPeople = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "people"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiPeople = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"people"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1057,7 +1071,7 @@ export const apiPeople = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiPeopleOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "people"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiPeopleOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"people"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1066,7 +1080,7 @@ export const apiPeopleOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiPerson = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "people"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiPerson = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1075,7 +1089,7 @@ export const apiPerson = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiPurchase = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "purchases"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiPurchase = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"purchases"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1083,7 +1097,7 @@ export const apiPurchase = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiPurchases = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "purchases"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiPurchases = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"purchases"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1091,7 +1105,7 @@ export const apiPurchases = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiSearches = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "searches"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiSearches = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"searches"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1099,7 +1113,7 @@ export const apiSearches = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiSmtpTest = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "smtp"], [2, [7, "/"], [2, [6, "test"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiSmtpTest = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"smtp"],[2,[7,"/"],[2,[6,"test"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1107,7 +1121,7 @@ export const apiSmtpTest = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiSpotlights = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "spotlights"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiSpotlights = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"spotlights"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1116,7 +1130,7 @@ export const apiSpotlights = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiStatusLabel = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "status_labels"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiStatusLabel = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"status_labels"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1124,7 +1138,7 @@ export const apiStatusLabel = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "form
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiStatusLabels = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "status_labels"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiStatusLabels = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"status_labels"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1132,7 +1146,7 @@ export const apiStatusLabels = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiStatusLabelsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "status_labels"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiStatusLabelsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"status_labels"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1141,7 +1155,7 @@ export const apiStatusLabelsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiUpdateTablePreferences = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "update_table_preferences"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const apiUpdateTablePreferences = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"update_table_preferences"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1150,7 +1164,7 @@ export const apiUpdateTablePreferences = /* #__PURE__ */ __jsr.r({ "id":{ "r":tr
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiUpdateUserPreferences = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "update_user_preferences"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const apiUpdateUserPreferences = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"update_user_preferences"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1159,7 +1173,7 @@ export const apiUpdateUserPreferences = /* #__PURE__ */ __jsr.r({ "id":{ "r":tru
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiUser = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiUser = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1167,7 +1181,7 @@ export const apiUser = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiUsers = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "users"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiUsers = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"users"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1176,7 +1190,7 @@ export const apiUsers = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiVendor = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "vendors"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiVendor = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"vendors"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1184,7 +1198,7 @@ export const apiVendor = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiVendors = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "vendors"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiVendors = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"vendors"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1192,7 +1206,7 @@ export const apiVendors = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"],
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiVendorsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "options"], [2, [7, "/"], [2, [6, "vendors"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiVendorsOptions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"options"],[2,[7,"/"],[2,[6,"vendors"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1200,7 +1214,7 @@ export const apiVendorsOptions = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiWarranties = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "warranties"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const apiWarranties = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"warranties"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1209,7 +1223,7 @@ export const apiWarranties = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const apiWarranty = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "api"], [2, [7, "/"], [2, [6, "warranties"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const apiWarranty = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"api"],[2,[7,"/"],[2,[6,"warranties"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1218,7 +1232,7 @@ export const apiWarranty = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const asset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "inventory"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const asset = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1226,7 +1240,7 @@ export const asset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} },
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const assets = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "inventory"], [1, [2, [8, "."], [3, "format"]]]]])
+export const assets = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1235,7 +1249,7 @@ export const assets = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const assignment = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "assignments"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const assignment = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1243,7 +1257,7 @@ export const assignment = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const assignments = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "assignments"], [1, [2, [8, "."], [3, "format"]]]]])
+export const assignments = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1251,7 +1265,7 @@ export const assignments = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const cancelUserRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "cancel"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const cancelUserRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"cancel"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1259,7 +1273,7 @@ export const cancelUserRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const categories = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "categories"], [1, [2, [8, "."], [3, "format"]]]]])
+export const categories = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"categories"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1268,7 +1282,7 @@ export const categories = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"],
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const category = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "categories"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const category = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1277,7 +1291,7 @@ export const category = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const categoryAccessories = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "accessories"], [2, [7, "/"], [2, [6, "category"], [2, [7, "/"], [2, [3, "category_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const categoryAccessories = /*#__PURE__*/ __jsr.r({"category_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[6,"category"],[2,[7,"/"],[2,[3,"category_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1286,7 +1300,7 @@ export const categoryAccessories = /* #__PURE__ */ __jsr.r({ "category_id":{ "r"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const categoryAssets = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "inventory"], [2, [7, "/"], [2, [6, "category"], [2, [7, "/"], [2, [3, "category_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const categoryAssets = /*#__PURE__*/ __jsr.r({"category_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[6,"category"],[2,[7,"/"],[2,[3,"category_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1295,7 +1309,7 @@ export const categoryAssets = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":true
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const categoryComponents = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "components"], [2, [7, "/"], [2, [6, "category"], [2, [7, "/"], [2, [3, "category_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const categoryComponents = /*#__PURE__*/ __jsr.r({"category_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[6,"category"],[2,[7,"/"],[2,[3,"category_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1304,7 +1318,7 @@ export const categoryComponents = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const categoryConsumables = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "consumables"], [2, [7, "/"], [2, [6, "category"], [2, [7, "/"], [2, [3, "category_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const categoryConsumables = /*#__PURE__*/ __jsr.r({"category_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"consumables"],[2,[7,"/"],[2,[6,"category"],[2,[7,"/"],[2,[3,"category_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1313,7 +1327,7 @@ export const categoryConsumables = /* #__PURE__ */ __jsr.r({ "category_id":{ "r"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const categoryItems = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [6, "category"], [2, [7, "/"], [2, [3, "category_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const categoryItems = /*#__PURE__*/ __jsr.r({"category_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[6,"category"],[2,[7,"/"],[2,[3,"category_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1322,7 +1336,7 @@ export const categoryItems = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":true 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const categoryLicenses = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "licenses"], [2, [7, "/"], [2, [6, "category"], [2, [7, "/"], [2, [3, "category_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const categoryLicenses = /*#__PURE__*/ __jsr.r({"category_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[6,"category"],[2,[7,"/"],[2,[3,"category_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1332,7 +1346,7 @@ export const categoryLicenses = /* #__PURE__ */ __jsr.r({ "category_id":{ "r":tr
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinAccessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "assignment_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "accessories"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkin"], [2, [7, "/"], [2, [3, "assignment_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const checkinAccessory = /*#__PURE__*/ __jsr.r({"id":{"r":true},"assignment_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[2,[7,"/"],[2,[3,"assignment_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1341,7 +1355,7 @@ export const checkinAccessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "as
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinAsset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "inventory"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkin"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const checkinAsset = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1351,7 +1365,7 @@ export const checkinAsset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinComponent = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "assignment_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "components"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkin"], [2, [7, "/"], [2, [3, "assignment_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const checkinComponent = /*#__PURE__*/ __jsr.r({"id":{"r":true},"assignment_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[2,[7,"/"],[2,[3,"assignment_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1360,7 +1374,7 @@ export const checkinComponent = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "as
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinItem = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkin"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const checkinItem = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1370,7 +1384,7 @@ export const checkinItem = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkinLicense = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "assignment_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "licenses"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkin"], [2, [7, "/"], [2, [3, "assignment_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const checkinLicense = /*#__PURE__*/ __jsr.r({"id":{"r":true},"assignment_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkin"],[2,[7,"/"],[2,[3,"assignment_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1379,7 +1393,7 @@ export const checkinLicense = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "assi
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkoutAccessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "accessories"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkout"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const checkoutAccessory = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1388,7 +1402,7 @@ export const checkoutAccessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "f
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkoutAsset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "inventory"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkout"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const checkoutAsset = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1397,7 +1411,7 @@ export const checkoutAsset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkoutComponent = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "components"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkout"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const checkoutComponent = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1406,7 +1420,7 @@ export const checkoutComponent = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "f
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkoutConsumable = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "consumables"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkout"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const checkoutConsumable = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"consumables"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1415,7 +1429,7 @@ export const checkoutConsumable = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkoutItem = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkout"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const checkoutItem = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1424,7 +1438,7 @@ export const checkoutItem = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const checkoutLicense = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "licenses"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "checkout"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const checkoutLicense = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"checkout"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1433,7 +1447,7 @@ export const checkoutLicense = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "for
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const cloneItems = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "clone"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const cloneItems = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"clone"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1441,7 +1455,7 @@ export const cloneItems = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const companies = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "companies"], [1, [2, [8, "."], [3, "format"]]]]])
+export const companies = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"companies"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1450,7 +1464,7 @@ export const companies = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const company = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "companies"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const company = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"companies"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1458,7 +1472,7 @@ export const company = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const completeRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "complete_registration"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const completeRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"complete_registration"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1467,7 +1481,7 @@ export const completeRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const component = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "components"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const component = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1475,7 +1489,7 @@ export const component = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const components = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "components"], [1, [2, [8, "."], [3, "format"]]]]])
+export const components = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"components"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1484,7 +1498,7 @@ export const components = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"],
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const consumable = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "consumables"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const consumable = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"consumables"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1492,7 +1506,7 @@ export const consumable = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const consumables = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "consumables"], [1, [2, [8, "."], [3, "format"]]]]])
+export const consumables = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"consumables"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1501,7 +1515,7 @@ export const consumables = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const contract = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "contracts"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const contract = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"contracts"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1509,7 +1523,7 @@ export const contract = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const contracts = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "contracts"], [1, [2, [8, "."], [3, "format"]]]]])
+export const contracts = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"contracts"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1517,7 +1531,7 @@ export const contracts = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const dashboard = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "dashboard"], [1, [2, [8, "."], [3, "format"]]]]])
+export const dashboard = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"dashboard"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1526,7 +1540,7 @@ export const dashboard = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const department = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "departments"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const department = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1534,7 +1548,7 @@ export const department = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const departments = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "departments"], [1, [2, [8, "."], [3, "format"]]]]])
+export const departments = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"departments"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1542,7 +1556,7 @@ export const departments = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const destroyUserSession = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "logout"], [1, [2, [8, "."], [3, "format"]]]]])
+export const destroyUserSession = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"logout"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1551,7 +1565,7 @@ export const destroyUserSession = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const documentation = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "documentation"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const documentation = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1559,7 +1573,7 @@ export const documentation = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "for
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const documentations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "documentation"], [1, [2, [8, "."], [3, "format"]]]]])
+export const documentations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1568,7 +1582,7 @@ export const documentations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editAccessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "accessories"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editAccessory = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1577,7 +1591,7 @@ export const editAccessory = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editAsset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "inventory"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editAsset = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1586,7 +1600,7 @@ export const editAsset = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editAssignment = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "assignments"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editAssignment = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1595,7 +1609,7 @@ export const editAssignment = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "form
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editCategory = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "categories"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editCategory = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1604,7 +1618,7 @@ export const editCategory = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "form
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editCompany = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "companies"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editCompany = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"companies"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1613,7 +1627,7 @@ export const editCompany = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editComponent = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "components"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editComponent = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1622,7 +1636,7 @@ export const editComponent = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editConsumable = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "consumables"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editConsumable = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"consumables"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1631,7 +1645,7 @@ export const editConsumable = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "form
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editContract = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "contracts"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editContract = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"contracts"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1640,7 +1654,7 @@ export const editContract = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "form
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editDepartment = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "departments"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editDepartment = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1649,7 +1663,7 @@ export const editDepartment = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "fo
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editDocumentation = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "documentation"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editDocumentation = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1658,7 +1672,7 @@ export const editDocumentation = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editItem = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editItem = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1667,7 +1681,7 @@ export const editItem = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{}
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editLicense = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "licenses"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editLicense = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1676,7 +1690,7 @@ export const editLicense = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editLocation = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "locations"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editLocation = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1685,7 +1699,7 @@ export const editLocation = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "form
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editManufacturer = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "manufacturers"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editManufacturer = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1694,7 +1708,7 @@ export const editManufacturer = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editModel = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "models"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editModel = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"models"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1703,7 +1717,7 @@ export const editModel = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editNetwork = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "networks"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editNetwork = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"networks"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1712,7 +1726,7 @@ export const editNetwork = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editOrder = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "orders"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editOrder = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"orders"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1721,7 +1735,7 @@ export const editOrder = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editPerson = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "people"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editPerson = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1730,7 +1744,7 @@ export const editPerson = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editPersonGroup = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "people"], [2, [7, "/"], [2, [6, "groups"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editPersonGroup = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1739,7 +1753,7 @@ export const editPersonGroup = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "f
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editPurchase = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "purchases"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editPurchase = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"purchases"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1748,7 +1762,7 @@ export const editPurchase = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsAssetTag = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "asset_tags"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsAssetTag = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"asset_tags"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1757,7 +1771,7 @@ export const editSettingsAssetTag = /* #__PURE__ */ __jsr.r({ "id":{ "r":true },
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsBackup = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "backups"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsBackup = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"backups"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1766,7 +1780,7 @@ export const editSettingsBackup = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsBarcode = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "barcodes"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsBarcode = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"barcodes"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1775,7 +1789,7 @@ export const editSettingsBarcode = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsGeneral = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "general"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsGeneral = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"general"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1784,7 +1798,7 @@ export const editSettingsGeneral = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsIntegration = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "integrations"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsIntegration = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"integrations"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1793,7 +1807,7 @@ export const editSettingsIntegration = /* #__PURE__ */ __jsr.r({ "id":{ "r":true
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsLocalization = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "localizations"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsLocalization = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"localizations"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1802,7 +1816,7 @@ export const editSettingsLocalization = /* #__PURE__ */ __jsr.r({ "id":{ "r":tru
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsLog = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "logs"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsLog = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"logs"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1811,7 +1825,7 @@ export const editSettingsLog = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "for
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsNotification = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "notifications"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsNotification = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"notifications"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1820,7 +1834,7 @@ export const editSettingsNotification = /* #__PURE__ */ __jsr.r({ "id":{ "r":tru
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsSmtp = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "mail"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsSmtp = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"mail"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1829,7 +1843,7 @@ export const editSettingsSmtp = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "fo
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editSettingsTicket = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "tickets"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const editSettingsTicket = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1838,7 +1852,7 @@ export const editSettingsTicket = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editStatusLabel = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "status_labels"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editStatusLabel = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"status_labels"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1847,7 +1861,7 @@ export const editStatusLabel = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "f
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editTicket = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "tickets"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editTicket = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1856,7 +1870,7 @@ export const editTicket = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editUser = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editUser = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1864,7 +1878,7 @@ export const editUser = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{}
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editUserPassword = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "password"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editUserPassword = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"password"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1872,7 +1886,7 @@ export const editUserPassword = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editUserRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const editUserRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1881,7 +1895,7 @@ export const editUserRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const editVendor = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "vendors"], [2, [7, "/"], [2, [3, "slug"], [2, [7, "/"], [2, [6, "edit"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const editVendor = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"vendors"],[2,[7,"/"],[2,[3,"slug"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1890,7 +1904,7 @@ export const editVendor = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const item = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const item = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1898,7 +1912,7 @@ export const item = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const items = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "hardware"], [1, [2, [8, "."], [3, "format"]]]]])
+export const items = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1907,7 +1921,7 @@ export const items = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const license = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "licenses"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const license = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1915,7 +1929,7 @@ export const license = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const licenses = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "licenses"], [1, [2, [8, "."], [3, "format"]]]]])
+export const licenses = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1924,7 +1938,7 @@ export const licenses = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const location = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "locations"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const location = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1932,7 +1946,7 @@ export const location = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const locations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "locations"], [1, [2, [8, "."], [3, "format"]]]]])
+export const locations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"locations"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1941,7 +1955,7 @@ export const locations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const manufacturer = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "manufacturers"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const manufacturer = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1949,7 +1963,7 @@ export const manufacturer = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "form
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const manufacturers = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "manufacturers"], [1, [2, [8, "."], [3, "format"]]]]])
+export const manufacturers = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1958,7 +1972,7 @@ export const manufacturers = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const model = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "models"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const model = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"models"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1966,7 +1980,7 @@ export const model = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const models = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "models"], [1, [2, [8, "."], [3, "format"]]]]])
+export const models = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"models"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1975,7 +1989,7 @@ export const models = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const network = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "networks"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const network = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"networks"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1983,7 +1997,7 @@ export const network = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const networks = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "networks"], [1, [2, [8, "."], [3, "format"]]]]])
+export const networks = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"networks"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1991,7 +2005,7 @@ export const networks = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newAccessory = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "accessories"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newAccessory = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"accessories"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -1999,7 +2013,7 @@ export const newAccessory = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newAsset = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "inventory"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newAsset = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"inventory"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2007,7 +2021,7 @@ export const newAsset = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newCategory = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "categories"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newCategory = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"categories"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2015,7 +2029,7 @@ export const newCategory = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newCompany = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "companies"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newCompany = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"companies"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2023,7 +2037,7 @@ export const newCompany = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"],
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newComponent = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "components"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newComponent = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"components"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2031,7 +2045,7 @@ export const newComponent = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newConsumable = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "consumables"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newConsumable = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"consumables"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2039,7 +2053,7 @@ export const newConsumable = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newContract = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "contracts"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newContract = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"contracts"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2047,7 +2061,7 @@ export const newContract = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newDepartment = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "departments"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newDepartment = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"departments"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2055,7 +2069,7 @@ export const newDepartment = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newDocumentation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "documentation"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newDocumentation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"documentation"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2063,7 +2077,7 @@ export const newDocumentation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newItem = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "hardware"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newItem = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"hardware"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2071,7 +2085,7 @@ export const newItem = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newLicense = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "licenses"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newLicense = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"licenses"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2079,7 +2093,7 @@ export const newLicense = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"],
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newLocation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "locations"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newLocation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"locations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2087,7 +2101,7 @@ export const newLocation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newManufacturer = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "manufacturers"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newManufacturer = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"manufacturers"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2095,7 +2109,7 @@ export const newManufacturer = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newModel = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "models"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newModel = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"models"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2103,7 +2117,7 @@ export const newModel = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newNetwork = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "networks"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newNetwork = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"networks"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2111,7 +2125,7 @@ export const newNetwork = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"],
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newOrder = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "orders"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newOrder = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"orders"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2119,7 +2133,7 @@ export const newOrder = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newPerson = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "people"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newPerson = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2127,7 +2141,7 @@ export const newPerson = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newPersonGroup = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "people"], [2, [7, "/"], [2, [6, "groups"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newPersonGroup = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2135,7 +2149,7 @@ export const newPersonGroup = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newPurchase = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "purchases"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newPurchase = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"purchases"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2143,7 +2157,7 @@ export const newPurchase = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsAssetTag = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "asset_tags"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsAssetTag = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"asset_tags"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2151,7 +2165,7 @@ export const newSettingsAssetTag = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsBackup = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "backups"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsBackup = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"backups"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2159,7 +2173,7 @@ export const newSettingsBackup = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsBarcode = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "barcodes"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsBarcode = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"barcodes"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2167,7 +2181,7 @@ export const newSettingsBarcode = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsGeneral = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "general"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsGeneral = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"general"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2175,7 +2189,7 @@ export const newSettingsGeneral = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsIntegration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "integrations"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsIntegration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"integrations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2183,7 +2197,7 @@ export const newSettingsIntegration = /* #__PURE__ */ __jsr.r({ "format":{} }, [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsLocalization = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "localizations"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsLocalization = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"localizations"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2191,7 +2205,7 @@ export const newSettingsLocalization = /* #__PURE__ */ __jsr.r({ "format":{} }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsLog = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "logs"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsLog = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"logs"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2199,7 +2213,7 @@ export const newSettingsLog = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsNotification = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "notifications"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsNotification = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"notifications"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2207,7 +2221,7 @@ export const newSettingsNotification = /* #__PURE__ */ __jsr.r({ "format":{} }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsSmtp = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "mail"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsSmtp = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"mail"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2215,7 +2229,7 @@ export const newSettingsSmtp = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newSettingsTicket = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "tickets"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newSettingsTicket = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2223,7 +2237,7 @@ export const newSettingsTicket = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newStatusLabel = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "status_labels"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newStatusLabel = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_labels"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2231,7 +2245,7 @@ export const newStatusLabel = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newTicket = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "tickets"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newTicket = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2239,7 +2253,7 @@ export const newTicket = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUser = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newUser = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2247,7 +2261,7 @@ export const newUser = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUserConfirmation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "confirmation"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newUserConfirmation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"confirmation"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2255,7 +2269,7 @@ export const newUserConfirmation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUserInvitation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "invitation"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newUserInvitation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"invitation"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2263,7 +2277,7 @@ export const newUserInvitation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUserPassword = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "password"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newUserPassword = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"password"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2271,7 +2285,7 @@ export const newUserPassword = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUserRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "register"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newUserRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"register"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2279,7 +2293,7 @@ export const newUserRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUserSession = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "login"], [1, [2, [8, "."], [3, "format"]]]]])
+export const newUserSession = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"login"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2287,7 +2301,7 @@ export const newUserSession = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newUserUnlock = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "unlock"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const newUserUnlock = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"unlock"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2295,7 +2309,7 @@ export const newUserUnlock = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const newVendor = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "vendors"], [2, [7, "/"], [2, [6, "new"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const newVendor = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"vendors"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2304,7 +2318,7 @@ export const newVendor = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const order = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "orders"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const order = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"orders"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2312,7 +2326,7 @@ export const order = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} },
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const orders = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "orders"], [1, [2, [8, "."], [3, "format"]]]]])
+export const orders = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"orders"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2320,7 +2334,7 @@ export const orders = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const people = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "people"], [1, [2, [8, "."], [3, "format"]]]]])
+export const people = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2329,7 +2343,7 @@ export const people = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const person = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "people"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const person = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2338,7 +2352,7 @@ export const person = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const personGroup = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "people"], [2, [7, "/"], [2, [6, "groups"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const personGroup = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"groups"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2346,7 +2360,7 @@ export const personGroup = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const personGroups = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "people"], [2, [7, "/"], [2, [6, "groups"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const personGroups = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"people"],[2,[7,"/"],[2,[6,"groups"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2355,7 +2369,7 @@ export const personGroups = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const purchase = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "purchases"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const purchase = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"purchases"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2363,7 +2377,7 @@ export const purchase = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{}
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const purchases = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "purchases"], [1, [2, [8, "."], [3, "format"]]]]])
+export const purchases = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"purchases"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2371,7 +2385,7 @@ export const purchases = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const removeUserInvitation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "invitation"], [2, [7, "/"], [2, [6, "remove"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const removeUserInvitation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"invitation"],[2,[7,"/"],[2,[6,"remove"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2379,7 +2393,7 @@ export const removeUserInvitation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const reports = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "reports"], [1, [2, [8, "."], [3, "format"]]]]])
+export const reports = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"reports"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2387,7 +2401,7 @@ export const reports = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const root = /* #__PURE__ */ __jsr.r({}, [7, "/"])
+export const root = /*#__PURE__*/ __jsr.r({}, [7,"/"]);
 
 /**
  * Generates rails route to
@@ -2395,7 +2409,7 @@ export const root = /* #__PURE__ */ __jsr.r({}, [7, "/"])
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const saveCompleteRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "complete_registration"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const saveCompleteRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"complete_registration"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2405,7 +2419,7 @@ export const saveCompleteRegistration = /* #__PURE__ */ __jsr.r({ "format":{} },
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const setActiveCompany = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "company_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "set_active_company"], [2, [7, "/"], [2, [3, "company_id"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const setActiveCompany = /*#__PURE__*/ __jsr.r({"id":{"r":true},"company_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"set_active_company"],[2,[7,"/"],[2,[3,"company_id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2413,7 +2427,7 @@ export const setActiveCompany = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "co
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsAppearance = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "appearance"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsAppearance = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"appearance"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2421,7 +2435,7 @@ export const settingsAppearance = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsAppearanceIndex = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "appearance"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsAppearanceIndex = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"appearance"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2430,7 +2444,7 @@ export const settingsAppearanceIndex = /* #__PURE__ */ __jsr.r({ "format":{} }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsAssetTag = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "asset_tags"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsAssetTag = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"asset_tags"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2438,7 +2452,7 @@ export const settingsAssetTag = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "fo
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsAssetTags = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "asset_tags"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsAssetTags = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"asset_tags"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2447,7 +2461,7 @@ export const settingsAssetTags = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsBackup = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "backups"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsBackup = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"backups"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2455,7 +2469,7 @@ export const settingsBackup = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "form
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsBackups = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "backups"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsBackups = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"backups"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2464,7 +2478,7 @@ export const settingsBackups = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsBarcode = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "barcodes"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsBarcode = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"barcodes"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2472,7 +2486,7 @@ export const settingsBarcode = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "for
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsBarcodes = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "barcodes"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsBarcodes = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"barcodes"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2481,7 +2495,7 @@ export const settingsBarcodes = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsGeneral = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "general"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsGeneral = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"general"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2489,7 +2503,7 @@ export const settingsGeneral = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "for
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsGeneralIndex = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "general"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsGeneralIndex = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"general"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2498,7 +2512,7 @@ export const settingsGeneralIndex = /* #__PURE__ */ __jsr.r({ "format":{} }, [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsIntegration = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "integrations"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsIntegration = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"integrations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2506,7 +2520,7 @@ export const settingsIntegration = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsIntegrations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "integrations"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsIntegrations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"integrations"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2515,7 +2529,7 @@ export const settingsIntegrations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsLdap = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "ldap"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsLdap = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldap"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2524,7 +2538,7 @@ export const settingsLdap = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsLdapSync = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "ldaps"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "sync"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const settingsLdapSync = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldaps"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"sync"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2532,7 +2546,7 @@ export const settingsLdapSync = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "fo
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsLdaps = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "ldap"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsLdaps = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"ldap"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2541,7 +2555,7 @@ export const settingsLdaps = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsLocalization = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "localizations"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsLocalization = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"localizations"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2549,7 +2563,7 @@ export const settingsLocalization = /* #__PURE__ */ __jsr.r({ "id":{ "r":true },
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsLocalizations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "localizations"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsLocalizations = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"localizations"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2558,7 +2572,7 @@ export const settingsLocalizations = /* #__PURE__ */ __jsr.r({ "format":{} }, [2
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsLog = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "logs"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsLog = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"logs"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2566,7 +2580,7 @@ export const settingsLog = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsLogs = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "logs"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsLogs = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"logs"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2575,7 +2589,7 @@ export const settingsLogs = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsNotification = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "notifications"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsNotification = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"notifications"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2583,7 +2597,7 @@ export const settingsNotification = /* #__PURE__ */ __jsr.r({ "id":{ "r":true },
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsNotifications = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "notifications"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsNotifications = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"notifications"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2592,7 +2606,7 @@ export const settingsNotifications = /* #__PURE__ */ __jsr.r({ "format":{} }, [2
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsSmtp = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "mail"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsSmtp = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"mail"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2600,7 +2614,7 @@ export const settingsSmtp = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsSmtps = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "mail"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsSmtps = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"mail"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2609,7 +2623,7 @@ export const settingsSmtps = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsTicket = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "tickets"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const settingsTicket = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2617,7 +2631,7 @@ export const settingsTicket = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "form
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const settingsTickets = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "settings"], [2, [7, "/"], [2, [6, "tickets"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const settingsTickets = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"tickets"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2626,7 +2640,7 @@ export const settingsTickets = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const statusLabel = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "status_labels"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const statusLabel = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"status_labels"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2634,7 +2648,7 @@ export const statusLabel = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "forma
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const statusLabels = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "status_labels"], [1, [2, [8, "."], [3, "format"]]]]])
+export const statusLabels = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"status_labels"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2642,7 +2656,7 @@ export const statusLabels = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const testLogin = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "test"], [2, [7, "/"], [2, [6, "login"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const testLogin = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"test"],[2,[7,"/"],[2,[6,"login"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2651,7 +2665,7 @@ export const testLogin = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const ticket = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "tickets"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const ticket = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2661,7 +2675,7 @@ export const ticket = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const ticketMessage = /* #__PURE__ */ __jsr.r({ "ticket_id":{ "r":true }, "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "tickets"], [2, [7, "/"], [2, [3, "ticket_id"], [2, [7, "/"], [2, [6, "messages"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const ticketMessage = /*#__PURE__*/ __jsr.r({"ticket_id":{"r":true},"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"ticket_id"],[2,[7,"/"],[2,[6,"messages"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2670,7 +2684,7 @@ export const ticketMessage = /* #__PURE__ */ __jsr.r({ "ticket_id":{ "r":true },
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const ticketMessages = /* #__PURE__ */ __jsr.r({ "ticket_id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "tickets"], [2, [7, "/"], [2, [3, "ticket_id"], [2, [7, "/"], [2, [6, "messages"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const ticketMessages = /*#__PURE__*/ __jsr.r({"ticket_id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[2,[7,"/"],[2,[3,"ticket_id"],[2,[7,"/"],[2,[6,"messages"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2678,7 +2692,7 @@ export const ticketMessages = /* #__PURE__ */ __jsr.r({ "ticket_id":{ "r":true }
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const tickets = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "tickets"], [1, [2, [8, "."], [3, "format"]]]]])
+export const tickets = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"tickets"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2687,7 +2701,7 @@ export const tickets = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const unassignAssignment = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "assignments"], [2, [7, "/"], [2, [3, "id"], [2, [7, "/"], [2, [6, "unassign"], [1, [2, [8, "."], [3, "format"]]]]]]]]])
+export const unassignAssignment = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"assignments"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"unassign"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2696,7 +2710,7 @@ export const unassignAssignment = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const updateRailsDiskService = /* #__PURE__ */ __jsr.r({ "encoded_token":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "rails"], [2, [7, "/"], [2, [6, "active_storage"], [2, [7, "/"], [2, [6, "disk"], [2, [7, "/"], [2, [3, "encoded_token"], [1, [2, [8, "."], [3, "format"]]]]]]]]]]])
+export const updateRailsDiskService = /*#__PURE__*/ __jsr.r({"encoded_token":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"rails"],[2,[7,"/"],[2,[6,"active_storage"],[2,[7,"/"],[2,[6,"disk"],[2,[7,"/"],[2,[3,"encoded_token"],[1,[2,[8,"."],[3,"format"]]]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2705,7 +2719,7 @@ export const updateRailsDiskService = /* #__PURE__ */ __jsr.r({ "encoded_token":
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const user = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [3, "id"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const user = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2713,7 +2727,7 @@ export const user = /* #__PURE__ */ __jsr.r({ "id":{ "r":true }, "format":{} }, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const userConfirmation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "confirmation"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const userConfirmation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"confirmation"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2721,7 +2735,7 @@ export const userConfirmation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const userInvitation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "invitation"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const userInvitation = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"invitation"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2729,7 +2743,7 @@ export const userInvitation = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const userPassword = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "password"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const userPassword = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"password"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2737,7 +2751,7 @@ export const userPassword = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const userRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [1, [2, [8, "."], [3, "format"]]]]])
+export const userRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2745,7 +2759,7 @@ export const userRegistration = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7,
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const userSession = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "login"], [1, [2, [8, "."], [3, "format"]]]]])
+export const userSession = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"login"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2753,7 +2767,7 @@ export const userSession = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"]
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const userUnlock = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [2, [7, "/"], [2, [6, "unlock"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const userUnlock = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[2,[7,"/"],[2,[6,"unlock"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2761,7 +2775,7 @@ export const userUnlock = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"],
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const users = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "users"], [1, [2, [8, "."], [3, "format"]]]]])
+export const users = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"users"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -2770,7 +2784,7 @@ export const users = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, 
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const vendor = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{} }, [2, [7, "/"], [2, [6, "vendors"], [2, [7, "/"], [2, [3, "slug"], [1, [2, [8, "."], [3, "format"]]]]]]])
+export const vendor = /*#__PURE__*/ __jsr.r({"slug":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"vendors"],[2,[7,"/"],[2,[3,"slug"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -2778,5 +2792,5 @@ export const vendor = /* #__PURE__ */ __jsr.r({ "slug":{ "r":true }, "format":{}
  * @param {object | undefined} options
  * @returns {string} route path
  */
-export const vendors = /* #__PURE__ */ __jsr.r({ "format":{} }, [2, [7, "/"], [2, [6, "vendors"], [1, [2, [8, "."], [3, "format"]]]]])
+export const vendors = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"vendors"],[1,[2,[8,"."],[3,"format"]]]]]);
 

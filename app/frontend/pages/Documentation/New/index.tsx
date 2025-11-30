@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import DocumentationForm from "../Form"
+import DocumentationForm from "@/domains/Documentation/Form"
 
 interface NewDocumentationProps {
 	documentation: Schema.DocumentationsFormData

@@ -1,13 +1,13 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 
 import { DateInput, type DateInputValue } from "@/components/Inputs"
 
 import { type AdvancedInputProps } from "."
 
-const Date = ({
+export function DateRangeDate({
 	advancedSearch,
 	name,
-}: AdvancedInputProps) => {
+}: AdvancedInputProps) {
 	const { values, inputProps, setInputValue } = advancedSearch
 
 	const { mb, wrapperProps, value } = inputProps<DateInputValue>(`${name}[start]`)
@@ -41,5 +41,3 @@ const Date = ({
 		/>
 	)
 }
-
-export default Date

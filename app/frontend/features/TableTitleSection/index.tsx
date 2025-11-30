@@ -1,9 +1,9 @@
+import React from "react"
 import { router } from "@inertiajs/react"
 import { Box, Title, Group, Divider } from "@mantine/core"
-import React from "react"
 
 import { Menu } from "@/components"
-import { TrashIcon } from "@/components/Icons"
+import { TrashIcon, type Icon } from "@/components/Icons"
 import { useTableContext } from "@/components/Table/TableContext"
 
 import * as classes from "../IndexPageTemplate/IndexPage.css"
@@ -15,7 +15,7 @@ export interface IndexTableTitleSectionProps {
 	menuOptions?: {
 		label: string
 		href: string
-		icon?: React.ReactNode
+		icon?: Icon
 	}[]
 }
 

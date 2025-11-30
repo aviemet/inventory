@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Divider, Group, AppShell, Icon, Box } from "@/components"
 import {
@@ -47,7 +46,7 @@ const Sidebar = () => {
 			<AppShell.Navbar
 				p={ 0 }
 				hidden={ !sidebarOpen }
-				className={ cx(classes.navbar, { [classes.closed]: !sidebarOpen }) }
+				className={ clsx(classes.navbar, { [classes.closed]: !sidebarOpen }) }
 				role="navigation"
 			>
 				<Box m="xs">
@@ -60,7 +59,7 @@ const Sidebar = () => {
 
 				<Box
 					onClick={ handleNavClick }
-					className={ cx([classes.links]) }
+					className={ clsx([classes.links]) }
 				>
 					<ul aria-label="dashboard link">
 						<li><MenuLink href={ Routes.dashboard() } icon={ <DashboardIcon /> }>Dashboard</MenuLink></li>
@@ -109,7 +108,7 @@ const Sidebar = () => {
 					</ul>
 				</Box>
 
-				<Box onClick={ handleNavClick } className={ cx([classes.links]) }>
+				<Box onClick={ handleNavClick } className={ clsx([classes.links]) }>
 					<ul aria-label="settings links">
 						<li>
 							<MenuLink href={ Routes.settingsGeneralIndex() } icon={ <SettingsIcon /> }>Settings</MenuLink>

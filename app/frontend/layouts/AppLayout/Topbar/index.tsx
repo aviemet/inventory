@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Box, AppShell, Group } from "@/components"
 import { usePageProps } from "@/lib/hooks"
@@ -19,7 +18,7 @@ const Topbar = () => {
 	return (
 		<AppShell.Header
 			p="sm"
-			className={ cx(classes.topbar, { closed: !sidebarOpen }) }
+			className={ clsx(classes.topbar, { closed: !sidebarOpen }) }
 			role="banner"
 		>
 			<Box className={ classes.wrapper }>

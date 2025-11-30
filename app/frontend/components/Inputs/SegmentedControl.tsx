@@ -1,13 +1,13 @@
 import {
-	SegmentedControl,
+	SegmentedControl as MantineSegmentedControl,
 	useMantineTheme,
 	type SegmentedControlProps as MantineSegmentedControlProps,
 	type SegmentedControlItem,
 } from "@mantine/core"
 import React, { forwardRef } from "react"
 
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { type BaseInputProps } from "."
 
@@ -20,7 +20,7 @@ export interface SegmentedControlProps extends Omit<MantineSegmentedControlProps
 	required?: boolean
 }
 
-const SegmentedControlComponent = forwardRef<HTMLDivElement, SegmentedControlProps>((
+export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps>((
 	{
 		label,
 		labelPosition = "start",
@@ -42,7 +42,7 @@ const SegmentedControlComponent = forwardRef<HTMLDivElement, SegmentedControlPro
 	return (
 		<InputWrapper wrapper={ wrapper }>
 			{ label && labelPosition === "start" && <LabelComponent /> }
-			<SegmentedControl
+			<MantineSegmentedControl
 				ref={ ref }
 				value={ value }
 				onChange={ (choice: string) => {
@@ -56,5 +56,3 @@ const SegmentedControlComponent = forwardRef<HTMLDivElement, SegmentedControlPro
 		</InputWrapper>
 	)
 })
-
-export default SegmentedControlComponent

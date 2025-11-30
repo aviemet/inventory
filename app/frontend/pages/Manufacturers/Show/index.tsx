@@ -1,16 +1,15 @@
 import { omit } from "lodash"
-import React from "react"
 
 import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
 import { EditIcon, NewIcon } from "@/components/Icons"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
-import AccessoriesTable from "@/pages/Accessories/Table"
-import ConsumablesTable from "@/pages/Consumables/Table"
-import ItemsTable from "@/pages/Items/Table"
+import AccessoriesTable from "@/domains/Accessories/Table"
+import ConsumablesTable from "@/domains/Consumables/Table"
+import ItemsTable from "@/domains/Items/Table"
 import { type PaginatedModel } from "@/types/PaginatedModel"
 
-import ComponentsTable from "@/pages/components/Table"
+import ComponentsTable from "@/domains/Components/Table"
 
 interface ShowManufacturerProps {
 	manufacturer: Schema.ManufacturersShow

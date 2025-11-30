@@ -9,7 +9,7 @@ interface SubmitButtonProps extends ButtonProps {
 	requiredFields?: string[]
 }
 
-const Submit = forwardRef<HTMLButtonElement, SubmitButtonProps>((
+export const Submit = forwardRef<HTMLButtonElement, SubmitButtonProps>((
 	{ children, cancelRoute, style, ...props },
 	ref,
 ) => {
@@ -29,5 +29,3 @@ const Submit = forwardRef<HTMLButtonElement, SubmitButtonProps>((
 		</Flex>
 	)
 })
-
-export default Submit

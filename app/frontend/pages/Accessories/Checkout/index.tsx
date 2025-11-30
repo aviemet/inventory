@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Box, Title, Page, Section, Table } from "@/components"
 import { DateTimeInput, Form, NumberInput, Submit, Textarea } from "@/components/Form"

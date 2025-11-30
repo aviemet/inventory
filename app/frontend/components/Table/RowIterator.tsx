@@ -1,29 +1,33 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
+import { cloneElement } from "react"
 
-import { useTableContext } from "./TableContext"
+import { Row } from "./Row"
+import { useTableContext, type TableRowData } from "./TableContext"
+import { RenderedCell as Cell } from "./Td"
 
-import Table from "."
+interface RowIteratorProps<T extends TableRowData = TableRowData> {
+	render: (obj: T) => JSX.Element
+}
 
-const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
-	const { tableState: { selected, rows, columns, selectable } } = useTableContext()
+export function RowIterator<T extends TableRowData = TableRowData>({ render }: RowIteratorProps<T>) {
+	const { tableState: { selected, rows, columns, selectable } } = useTableContext<T>()
 
 	if(!rows || rows.length === 0) {
 		const colSpan = columns.length + (selectable ? 1 : 0)
 
 		return (
-			<Table.Row>
-				<Table.Cell colSpan={ colSpan } align="center">
+			<Row>
+				<Cell colSpan={ colSpan } align="center">
 					Nothing to display
-				</Table.Cell>
-			</Table.Row>
+				</Cell>
+			</Row>
 		)
 	}
 
 	const injectRowProps = (row: JSX.Element) => {
-		return React.cloneElement(row, {
+		return cloneElement(row, {
 			name: row.key,
-			className: cx(
+			className: clsx(
 				{ checked: selected.has(String(row.key!)) },
 			),
 		})
@@ -31,5 +35,3 @@ const RowIterator = ({ render }: { render: (obj: any) => JSX.Element }) => {
 
 	return <>{ rows.map(row => injectRowProps(render(row))) }</>
 }
-
-export default RowIterator

@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import LicensesTable from "../Table"
+import LicensesTable from "@/domains/Licenses/Table"
 
 interface LicensesIndexProps {
 	licenses: Schema.LicensesIndex[]

@@ -1,5 +1,4 @@
 import { Tooltip } from "@mantine/core"
-import React from "react"
 
 import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
 import { Routes } from "@/lib"

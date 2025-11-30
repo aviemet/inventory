@@ -23,8 +23,24 @@ export const mockSearchResults = [
 	},
 ]
 
+export const mockCurrencies: Schema.CurrencyOption[] = [
+	{ code: "USD", symbol: "$" },
+	{ code: "EUR", symbol: "€" },
+	{ code: "GBP", symbol: "£" },
+]
+
 export const handlers = [
 	http.get(`${Routes.apiSearches()}*`, () => {
 		return HttpResponse.json(mockSearchResults)
+	}),
+	http.get(`${Routes.apiCurrencies()}*`, () => {
+		return HttpResponse.json(mockCurrencies)
+	}),
+	http.post("http://localhost:3000/test/login*", () => {
+		return HttpResponse.json({ success: true })
+	}),
+	http.all("http://localhost:3000/*", ({ request }) => {
+		console.warn(`Unhandled request: ${request.method} ${request.url}`)
+		return HttpResponse.json({}, { status: 200 })
 	}),
 ]

@@ -4,7 +4,7 @@ import React, { useEffect } from "react"
 import { usePageProps } from "@/lib/hooks"
 import { FlashMessage } from "@/types"
 
-const Flash = () => {
+export function Flash() {
 	const { flash } = usePageProps()
 
 	useEffect(() => {
@@ -40,5 +40,4 @@ const Flash = () => {
 	)
 }
 
-export default Flash
 

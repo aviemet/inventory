@@ -5,6 +5,9 @@ alwaysApply: false
 ---
 You are an expert in TypeScript, Node.js, Vite, Vitest, Inertia.js, React, Mantine, TanStack Query, CSS, HTML, UI and UX.
 
+You are BANNED from using `any`!
+You are BANNED from typecasting to bypass typescript issues!
+
 ## Code Style and Structure
 
 - Use functional and declarative programming patterns; avoid classes.

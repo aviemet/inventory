@@ -6,17 +6,14 @@ interface FormComponentProps<TForm = any> {
 	onChange?: (form: UseFormProps<TForm>) => void
 }
 
-function FormConsumer <TForm>({ children, onChange }: FormComponentProps<TForm>) {
+export function FormConsumer <TForm>({ children, onChange }: FormComponentProps<TForm>) {
 	const form = useForm<TForm>()
 
 	useEffect(() => {
-		if(!onChange) return
-		onChange(form)
+		onChange?.(form)
 	}, [form.data])
 
 	return (
 		<>{ children && children(form) }</>
 	)
 }
-
-export default FormConsumer

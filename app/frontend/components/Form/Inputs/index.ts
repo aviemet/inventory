@@ -1,27 +1,28 @@
+import { BoxProps } from "@mantine/core"
 import { NestedObject, UseFormProps, UseInertiaInputProps } from "use-inertia-form"
 
-export { default as Autocomplete } from "./Autocomplete"
-export { default as CurrencyInput } from "./CurrencyInput"
-export { default as DateInput } from "./DateInput"
-export { default as DateTimeInput } from "./DateTimeInput"
-export { default as HiddenInput } from "./HiddenInput"
-export { default as MultiSelect } from "./MultiSelect"
-export { default as NumberInput } from "./NumberInput"
-export { default as PasswordInput } from "./PasswordInput"
-export { default as SegmentedControl } from "./SegmentedControl"
-export { default as RichText } from "./RichText"
-export { default as Select } from "./Select"
-export { default as SwatchInput } from "./SwatchInput"
-export { default as Switch } from "./Switch"
-export { default as TextInput } from "./TextInput"
-export { default as Textarea } from "./Textarea"
+export { FormAutocompleteComponent as Autocomplete } from "./Autocomplete"
+export { FormCurrencyInput as CurrencyInput } from "./CurrencyInput"
+export { FormDateInput as DateInput } from "./DateInput"
+export { FormDateTimeInput as DateTimeInput } from "./DateTimeInput"
+export { FormHiddenInput as HiddenInput } from "./HiddenInput"
+export { FormMultiSelect as MultiSelect } from "./MultiSelect"
+export { FormNumberInput as NumberInput } from "./NumberInput"
+export { FormPasswordInput as PasswordInput } from "./PasswordInput"
+export { FormSegmentedControl as SegmentedControl } from "./SegmentedControl"
+export { FormRichText as RichText } from "./RichText"
+export { FormSelect as Select } from "./Select"
+export { FormSwatchInput as SwatchInput } from "./SwatchInput"
+export { FormSwitchComponent as Switch } from "./Switch"
+export { FormTextInput as TextInput } from "./TextInput"
+export { FormTextarea as Textarea } from "./Textarea"
 
 export {
-	default as Checkbox,
+	FormCheckboxComponent as Checkbox,
 	GroupedCheckbox,
 } from "./Checkbox"
 
-export type InputConflicts = "name" | "onChange" | "onBlur" | "onFocus" | "value" | "defaultValue"
+export type InputConflicts = "name" | "onChange" | "onBlur" | "onFocus" | "value" | "defaultValue" | "wrapperProps"
 export interface BaseFormInputProps<T, TForm extends NestedObject = NestedObject>
 	extends UseInertiaInputProps<T> {
 	model?: string
@@ -32,5 +33,5 @@ export interface BaseFormInputProps<T, TForm extends NestedObject = NestedObject
 	onChange?: (value: T, form: UseFormProps<TForm>) => void
 	onBlur?: (value: T, form: UseFormProps<TForm>) => void
 	onFocus?: (value: T, form: UseFormProps<TForm>) => void
-	wrapperProps?: Record<string, any>
+	wrapperProps?: BoxProps
 }

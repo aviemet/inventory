@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ModelsTable from "../Table"
+import ModelsTable from "@/domains/Models/Table"
 
 interface ModelsIndexProps {
 	models: Schema.ModelsIndex[]

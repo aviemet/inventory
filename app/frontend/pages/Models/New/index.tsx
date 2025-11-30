@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import ModelForm from "../Form"
+import ModelForm from "@/domains/Models/Form"
 
 interface NewModelProps {
 	model: Schema.ModelsFormData

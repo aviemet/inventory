@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import GroupsTable from "../Table"
+import GroupsTable from "@/domains/PersonGroups/Table"
 
 interface GroupIndexProps {
 	person_groups: Schema.PersonGroupsIndex[]

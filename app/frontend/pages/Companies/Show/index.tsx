@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { ContactDetails } from "@/features/Contactable"

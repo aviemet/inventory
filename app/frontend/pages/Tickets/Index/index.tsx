@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import TicketsTable from "../Table"
+import TicketsTable from "@/domains/Tickets/Table"
 
 interface TicketsIndexProps {
 	tickets: Schema.TicketsIndex[]

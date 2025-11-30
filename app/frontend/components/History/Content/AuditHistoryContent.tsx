@@ -1,10 +1,9 @@
 import { Text } from "@mantine/core"
-import React from "react"
 
 import { Link } from "@/components"
 import { formatter, Routes } from "@/lib"
 
-const AuditHistoryContent = ({ activity }: { activity: Schema.Activity }) => {
+export function AuditHistoryContent({ activity }: { activity: Schema.Activity }) {
 	return (
 		<>
 			{ activity.person && <Text>
@@ -17,5 +16,3 @@ const AuditHistoryContent = ({ activity }: { activity: Schema.Activity }) => {
 		</>
 	)
 }
-
-export default AuditHistoryContent

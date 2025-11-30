@@ -1,17 +1,16 @@
 import loadable from "@loadable/component"
 import React, { Suspense } from "react"
-import { ErrorBoundary } from "react-error-boundary"
 
-import Error from "@/components/Error"
+import { ErrorBoundary } from "@/components/Error"
 
 interface LazyProps {
 	children: React.ReactNode
 	fallback: React.ReactNode
 }
 
-const Lazy = ({ children, fallback }: LazyProps) => {
+const LazyBase = ({ children, fallback }: LazyProps) => {
 	return (
-		<ErrorBoundary FallbackComponent={ Error }>
+		<ErrorBoundary>
 			<Suspense fallback={ fallback }>
 				{ children }
 			</Suspense>
@@ -19,6 +18,6 @@ const Lazy = ({ children, fallback }: LazyProps) => {
 	)
 }
 
-Lazy.loadable = loadable
-
-export default Lazy
+export const Lazy = Object.assign(LazyBase, {
+	loadable,
+})

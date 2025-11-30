@@ -3,9 +3,9 @@ import React, { forwardRef } from "react"
 
 import { isUnset } from "@/lib"
 
-import Label from "./Label"
+import { Label } from "./Label"
 import { CalendarIcon } from "../Icons"
-import InputWrapper from "./InputWrapper"
+import { InputWrapper } from "./InputWrapper"
 
 import { type BaseInputProps } from "."
 
@@ -17,7 +17,7 @@ export interface DateTimeProps extends DateTimePickerProps, BaseInputProps {
 	error?: string | string[]
 }
 
-const DateTime = forwardRef<HTMLButtonElement, DateTimeProps>((
+export const DateTimeInput = forwardRef<HTMLButtonElement, DateTimeProps>((
 	{
 		label,
 		id,
@@ -55,5 +55,3 @@ const DateTime = forwardRef<HTMLButtonElement, DateTimeProps>((
 		</InputWrapper>
 	)
 })
-
-export default DateTime

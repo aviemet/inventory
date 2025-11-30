@@ -9,7 +9,7 @@ import {
 	Box,
 } from "@mantine/core"
 import { useClickOutside } from "@mantine/hooks"
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useState } from "react"
 
 import { DoubleDownArrowIcon } from "@/components/Icons"
@@ -29,7 +29,7 @@ interface AdvancedSearchProps {
 	children: React.ReactNode
 }
 
-const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
+export function AdvancedSearch({ children }: AdvancedSearchProps) {
 	const { sidebarOpen } = useLayoutStore()
 	const { primaryColor, other: { navbar: { width } } } = useMantineTheme()
 	const navBarWidth = width[sidebarOpen ? "open" : "closed"]
@@ -73,7 +73,7 @@ const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 						ref={ setSearchPaper }
 						shadow="md"
 						p="md"
-						className={ cx(classes.paper) }
+						className={ clsx(classes.paper) }
 						style={ {
 							...styles,
 							left: rem(navBarWidth + Number(px("1rem"))),
@@ -90,6 +90,4 @@ const AdvancedSearch = ({ children }: AdvancedSearchProps) => {
 	)
 }
 
-export default AdvancedSearch
-
-export { default as useAdvancedSearch } from "./useAdvancedSearch"
+export { useAdvancedSearch } from "./useAdvancedSearch"

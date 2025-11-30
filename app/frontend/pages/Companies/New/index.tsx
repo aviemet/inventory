@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Breadcrumbs, Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import CompanyForm from "../Form"
+import CompanyForm from "@/domains/Companies/Form"
 
 interface NewCompanyProps {
 	company: Schema.CompaniesFormData

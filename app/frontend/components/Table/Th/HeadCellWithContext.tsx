@@ -1,5 +1,5 @@
 import { Table } from "@mantine/core"
-import cx from "clsx"
+import clsx from "clsx"
 import React, { useRef } from "react"
 
 import { Link, Flex } from "@/components"
@@ -13,14 +13,14 @@ interface HeadCellWithContextProps extends TableHeadCellProps {
 	rows?: readonly TableRowData[]
 }
 
-const HeadCellWithContext = ({
+export function HeadCellWithContext({
 	children,
 	fitContent = false,
 	sort,
 	rows,
 	hideable,
 	...props
-}: HeadCellWithContextProps) => {
+}: HeadCellWithContextProps) {
 	const thRef = useRef<HTMLTableCellElement>(null)
 	const { pathname, params } = useLocation()
 
@@ -44,7 +44,7 @@ const HeadCellWithContext = ({
 	return (
 		<Table.Th
 			ref={ thRef }
-			className={ cx(
+			className={ clsx(
 				{ "table-column-fit": fitContent },
 				{ "sortable": showSortLink },
 				{ [direction]: showSortLink && paramsSort === sort },
@@ -66,5 +66,3 @@ const HeadCellWithContext = ({
 		</Table.Th>
 	)
 }
-
-export default HeadCellWithContext

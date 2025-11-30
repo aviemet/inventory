@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react"
 
 import { NestedURLSearchParams } from "@/lib/collections"
 
-const useLocation = () => {
+export function useLocation() {
 	const [location, setLocation] = useState(window.location)
 
 	const listenToPopstate = () => {
@@ -33,9 +33,9 @@ const useLocation = () => {
 		params,
 		paramsAsJson: useMemo(() => {
 			const hash: Record<string, string> = {}
-			for(const [key, value] of params.entries()) {
+			params.forEach((value, key) => {
 				hash[key] = value
-			}
+			})
 			return hash
 		}, [params]),
 		nestedParams: useMemo(() => new NestedURLSearchParams(params), [params]),
@@ -43,4 +43,3 @@ const useLocation = () => {
 	}
 }
 
-export default useLocation

@@ -1,9 +1,8 @@
-import React from "react"
 
 import { Title, Page, Section } from "@/components"
 import { Routes } from "@/lib"
 
-import CategoryForm from "../Form"
+import CategoryForm from "@/domains/Categories/Form"
 
 interface UpdateCategoryProps {
 	category: Schema.CategoriesEdit

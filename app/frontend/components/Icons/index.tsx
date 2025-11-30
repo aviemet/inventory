@@ -1,3 +1,7 @@
+import React from "react"
+
+export type Icon = React.ReactNode
+
 export {
 	TbChevronsDown as DoubleDownArrowIcon,
 	TbKey as LicensesIcon,

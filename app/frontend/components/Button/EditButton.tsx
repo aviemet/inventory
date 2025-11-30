@@ -1,5 +1,4 @@
 import { useMantineTheme } from "@mantine/core"
-import React from "react"
 
 import { Link, Tooltip } from "@/components"
 import { EditIcon } from "@/components/Icons"
@@ -11,7 +10,7 @@ interface EditButtonProps extends Omit<LinkProps, "children"> {
 	label?: string
 }
 
-const EditButton = ({ href, label }: EditButtonProps) => {
+export function EditButton({ href, label }: EditButtonProps) {
 	const { primaryColor } = useMantineTheme()
 
 	const usedLabel = `Edit${label ? ` ${label}` : ""}`
@@ -31,5 +30,3 @@ const EditButton = ({ href, label }: EditButtonProps) => {
 		</Tooltip>
 	)
 }
-
-export default EditButton

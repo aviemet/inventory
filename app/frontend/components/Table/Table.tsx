@@ -1,19 +1,18 @@
 import { Box, Table, type TableProps as MantineTableProps } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
-import Body from "./Body"
-import Footer from "./Footer"
-import Head from "./Head"
-import Pagination from "./Pagination"
-import Row from "./Row"
-import RowIterator from "./RowIterator"
-import SearchInput from "./SearchInput"
-import TableSection from "./Section"
-import TableProvider from "./TableContext"
-import Cell from "./Td"
-import HeadCell from "./Th"
-import ConditionalWrapper from "../ConditionalWrapper"
+import { Body } from "./Body"
+import { Footer } from "./Footer"
+import { Head } from "./Head"
+import { PaginationComponent as Pagination } from "./Pagination"
+import { Row } from "./Row"
+import { RowIterator } from "./RowIterator"
+import { SearchInput } from "./SearchInput"
+import { TableSection } from "./Section"
+import { TableProvider } from "./TableContext"
+import { RenderedCell as Cell } from "./Td"
+import { RenderedCell as HeadCell } from "./Th"
+import { ConditionalWrapper } from "../ConditionalWrapper"
 import * as classes from "./Table.css"
 
 export interface TableProps extends MantineTableProps {
@@ -39,7 +38,7 @@ type TableObjects = {
 
 export type TableObject = TableComponent & TableObjects
 
-const TableComponent: TableObject = ({
+const TableComponentBase: TableComponent = ({
 	children,
 	className,
 	wrapper = true,
@@ -56,7 +55,7 @@ const TableComponent: TableObject = ({
 			<Table
 				striped={ striped }
 				highlightOnHover={ highlightOnHover }
-				className={ cx(className, classes.table) }
+				className={ clsx(className, classes.table) }
 				{ ...props }
 			>
 				{ children }
@@ -65,16 +64,16 @@ const TableComponent: TableObject = ({
 	)
 }
 
-TableComponent.TableProvider = TableProvider
-TableComponent.Section = TableSection
-TableComponent.SearchInput = SearchInput
-TableComponent.Head = Head
-TableComponent.HeadCell = HeadCell
-TableComponent.Body = Body
-TableComponent.Cell = Cell
-TableComponent.Row = Row
-TableComponent.RowIterator = RowIterator
-TableComponent.Footer = Footer
-TableComponent.Pagination = Pagination
-
-export default TableComponent
+export const TableComponent = Object.assign(TableComponentBase, {
+	TableProvider,
+	Section: TableSection,
+	SearchInput,
+	Head,
+	HeadCell,
+	Body,
+	Cell,
+	Row,
+	RowIterator,
+	Footer,
+	Pagination,
+}) as TableObject

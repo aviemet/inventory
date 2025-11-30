@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import AccessoriesTable from "../Table"
+import AccessoriesTable from "@/domains/Accessories/Table"
 
 interface AccessoriesIndexProps {
 	accessories: Schema.AccessoriesIndex[]

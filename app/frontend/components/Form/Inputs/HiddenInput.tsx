@@ -12,9 +12,9 @@ interface HiddenInputProps<TForm extends NestedObject = NestedObject>
 	Omit<InputProps, InputConflicts | OmittedHiddenInputProps>,
 	Omit<BaseFormInputProps<string, TForm>, "span" | OmittedHiddenInputProps> {}
 
-const FormInput = <TForm extends NestedObject = NestedObject>(
+export function FormHiddenInput<TForm extends NestedObject = NestedObject>(
 	{ name, model, onChange, id, defaultValue, ...props }: HiddenInputProps<TForm>,
-) => {
+) {
 	const { form, inputName, inputId, value, setValue } = useInertiaInput<string, TForm>({
 		name,
 		model,
@@ -38,5 +38,3 @@ const FormInput = <TForm extends NestedObject = NestedObject>(
 		/>
 	)
 }
-
-export default FormInput

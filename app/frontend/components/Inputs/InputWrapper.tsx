@@ -1,16 +1,17 @@
 import React from "react"
+import { BoxProps } from "@mantine/core"
 
 import { Box } from "@/components"
 
-import ConditionalWrapper from "../ConditionalWrapper"
+import { ConditionalWrapper } from "../ConditionalWrapper"
 
 interface InputWrapper {
 	children: React.ReactNode
 	wrapper?: boolean
-	wrapperProps?: Record<string, any>
+	wrapperProps?: BoxProps
 }
 
-const InputWrapper = ({ children, wrapper = true, wrapperProps }: InputWrapper) => {
+export function InputWrapper({ children, wrapper = true, wrapperProps }: InputWrapper) {
 	return (
 		<ConditionalWrapper
 			wrapper={ children => <Box { ...wrapperProps }>{ children }</Box> }
@@ -20,5 +21,3 @@ const InputWrapper = ({ children, wrapper = true, wrapperProps }: InputWrapper) 
 		</ConditionalWrapper>
 	)
 }
-
-export default InputWrapper

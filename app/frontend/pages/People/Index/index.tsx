@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon, SettingsIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import PeopleTable from "../Table"
+import PeopleTable from "@/domains/People/Table"
 
 interface PeopleIndexProps {
 	people: Schema.PeopleIndex[]

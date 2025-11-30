@@ -4,7 +4,7 @@ import { useTableSectionContext } from "@/components/Table/TableContext"
 import { useCurrency, type UseCurrencyOptions } from "@/lib/hooks"
 import { type Money } from "@/types"
 
-import FlexMoney from "./FlexMoney"
+import { FlexMoney } from "./FlexMoney"
 
 interface MoneyProps {
 	children?: number | Money | null
@@ -14,13 +14,13 @@ interface MoneyProps {
 	options?: UseCurrencyOptions
 }
 
-const MoneyComponent = ({
+export function MoneyComponent({
 	children,
 	currency = "USD",
 	locale = "en-US",
 	accounting = false,
 	options = {},
-}: MoneyProps) => {
+}: MoneyProps) {
 	const [inTable, setInTable] = useState(false)
 
 	const useCurrencyOptions: UseCurrencyOptions = options
@@ -34,8 +34,6 @@ const MoneyComponent = ({
 	})
 
 	try {
-		// Throw if component is not being used inside of a table
-		// (when used in a table cell, always use FlexMoney. Throwing is easiest way to check context)
 		useTableSectionContext()
 		if(!inTable) setInTable(true)
 	} catch(e) {}
@@ -53,5 +51,3 @@ const MoneyComponent = ({
 
 	return <>{ formatter.format(amount) }</>
 }
-
-export default MoneyComponent

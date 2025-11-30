@@ -1,6 +1,6 @@
-import { Box, BoxProps } from "@mantine/core"
-import cx from "clsx"
 import React from "react"
+import { Box, BoxProps } from "@mantine/core"
+import clsx from "clsx"
 
 import { type InputType } from "@/types"
 
@@ -13,19 +13,19 @@ export interface FieldProps extends BoxProps {
 	errors?: boolean
 }
 
-const Field = ({
+export function Field({
 	children,
 	type,
 	required = false,
 	errors = false,
 	className,
 	...props
-}: FieldProps) => {
+}: FieldProps) {
 	const { disableFormatting } = useFormFormat()
 
 	return (
 		<Box
-			className={ cx(
+			className={ clsx(
 				"field",
 				{ [String(type)]: type },
 				{ "required": required },
@@ -39,5 +39,3 @@ const Field = ({
 		</Box>
 	)
 }
-
-export default Field

@@ -5,7 +5,7 @@ import { TableSectionContextProvider } from "./TableContext"
 
 interface TableHead extends TableTheadProps {}
 
-const Head = forwardRef<HTMLTableSectionElement, TableHead>((
+export const Head = forwardRef<HTMLTableSectionElement, TableHead>((
 	{ children, ...props },
 	ref,
 ) => {
@@ -20,5 +20,3 @@ const Head = forwardRef<HTMLTableSectionElement, TableHead>((
 		</TableSectionContextProvider>
 	)
 })
-
-export default Head

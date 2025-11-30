@@ -1,6 +1,5 @@
 import { Box } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 import {
 	Form as InertiaForm,
 	type FormProps as UifFormProps,
@@ -23,20 +22,21 @@ export interface FormProps<TForm> extends UifFormProps<TForm> {
 	grid?: boolean
 }
 
-const Form = <TForm extends NestedObject>({
+export function Form<TForm extends NestedObject>({
 	children,
 	data,
 	disableFormatting = false,
 	className,
 	railsAttributes = true,
+	grid: grid,
 	...props
-}: FormProps<TForm>) => {
+}: FormProps<TForm>) {
 	return (
 		<FormFormatProvider value={ { disableFormatting } }>
-			<Box className={ cx(classes.form) }>
+			<Box className={ clsx(classes.form, { grid }) }>
 				<InertiaForm
 					data={ data }
-					className={ cx({ "format-grid": !disableFormatting }, className) }
+					className={ clsx({ "format-grid": !disableFormatting }, className) }
 					railsAttributes={ railsAttributes }
 					{ ...props }
 				>
@@ -47,4 +47,3 @@ const Form = <TForm extends NestedObject>({
 	)
 }
 
-export default Form

@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Burger } from "@/components"
 import { useLayoutStore } from "@/lib/store"

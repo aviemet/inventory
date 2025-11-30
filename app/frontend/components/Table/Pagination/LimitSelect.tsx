@@ -1,7 +1,6 @@
 import { router } from "@inertiajs/react"
 import { Select, type SelectProps } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { useLocation, usePageProps } from "@/lib/hooks"
 import useLayoutStore from "@/lib/store/LayoutStore"
@@ -15,7 +14,7 @@ interface LimitSelectProps extends SelectProps {
 	model: string
 }
 
-const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
+export function LimitSelect({ pagination, model }: LimitSelectProps) {
 	const { auth: { user } } = usePageProps()
 	const location = useLocation()
 	const defaultLimit = useLayoutStore(state => state.defaults.tableRecordsLimit)
@@ -51,7 +50,7 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 			mx={ 4 }
 			my={ 0 }
 			withCheckIcon={ false }
-			className={ cx(classes.limitSelect) }
+			className={ clsx(classes.limitSelect) }
 			rightSectionWidth="1rem"
 			defaultValue={ String(pagination.limit) || String(defaultLimit) }
 			data={ [
@@ -65,5 +64,3 @@ const LimitSelect = ({ pagination, model }: LimitSelectProps) => {
 		/>
 	)
 }
-
-export default LimitSelect

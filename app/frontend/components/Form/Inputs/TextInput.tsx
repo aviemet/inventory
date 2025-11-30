@@ -1,10 +1,10 @@
 import React from "react"
 import { useInertiaInput, type NestedObject } from "use-inertia-form"
 
-import ConditionalWrapper from "@/components/ConditionalWrapper"
-import TextInput, { type TextInputProps } from "@/components/Inputs/TextInput"
+import { ConditionalWrapper } from "@/components"
+import { TextInput, type TextInputProps } from "@/components/Inputs/TextInput"
 
-import Field from "../components/Field"
+import { Field } from "../components/Field"
 
 import { type InputConflicts, type BaseFormInputProps } from "."
 
@@ -13,7 +13,7 @@ interface FormTextInputProps<TForm extends NestedObject>
 	Omit<TextInputProps, InputConflicts>,
 	BaseFormInputProps<string, TForm> {}
 
-const TextFormInput = <TForm extends NestedObject>(
+export function FormTextInput<TForm extends NestedObject>(
 	{
 		name,
 		model,
@@ -29,7 +29,7 @@ const TextFormInput = <TForm extends NestedObject>(
 		clearErrorsOnChange,
 		...props
 	}: FormTextInputProps<TForm>,
-) => {
+) {
 	const { form, inputName, inputId, value, setValue, error } = useInertiaInput<string, TForm>({
 		name,
 		model,
@@ -80,5 +80,3 @@ const TextFormInput = <TForm extends NestedObject>(
 		</ConditionalWrapper>
 	)
 }
-
-export default TextFormInput

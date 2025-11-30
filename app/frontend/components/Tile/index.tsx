@@ -1,24 +1,23 @@
 import { Paper, type PaperProps, type ElementProps } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
-import Content from "./Content"
-import Footer from "./Footer"
-import HoverLink from "./HoverLink"
+import { TileContent as Content } from "./Content"
+import { TileFooter as Footer } from "./Footer"
+import { TileHoverLink as HoverLink } from "./HoverLink"
 import * as classes from "./Tile.css"
 
 interface TileProps extends PaperProps, ElementProps<"div", keyof PaperProps> {}
 
-const Tile = ({ children, className, ...props }: TileProps) => {
+const TileBase = ({ children, className, ...props }: TileProps) => {
 	return (
-		<Paper radius="lg" className={ cx(classes.tile, className) } { ...props }>
+		<Paper radius="lg" className={ clsx(classes.tile, className) } { ...props }>
 			{ children }
 		</Paper>
 	)
 }
 
-Tile.Content = Content
-Tile.Footer = Footer
-Tile.HoverLink = HoverLink
-
-export default Tile
+export const Tile = Object.assign(TileBase, {
+	Content,
+	Footer,
+	HoverLink,
+})

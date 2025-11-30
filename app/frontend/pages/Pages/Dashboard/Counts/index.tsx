@@ -1,4 +1,3 @@
-import React from "react"
 
 import { Badge, SimpleGrid } from "@/components"
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from "@/components/Icons"

@@ -1,11 +1,12 @@
+import React from "react"
 import { router } from "@inertiajs/react"
-import cx from "clsx"
+import clsx from "clsx"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 import { NestedURLSearchParams, isUnset } from "@/lib"
 import { useLocation } from "@/lib/hooks"
 
-import buildSearchLink from "./buildSearchLink"
+import { buildSearchLink } from "./buildSearchLink"
 
 
 type SpecialSearchTypes = "date"
@@ -131,7 +132,7 @@ const useAdvancedSearch = (
 				}
 			} }),
 			wrapperProps: {
-				className: cx({ highlighted: !isUnset(value) && !param?.dependent }),
+				className: clsx({ highlighted: !isUnset(value) && !param?.dependent }),
 			// 	style: (theme: MantineTheme) => ({
 			// 		'&.highlighted, &.highlighted input': {
 			// 			color: theme.other.colorSchemeOption(
@@ -165,4 +166,4 @@ const useAdvancedSearch = (
 	}
 }
 
-export default useAdvancedSearch
+export { useAdvancedSearch }

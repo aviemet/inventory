@@ -1,5 +1,4 @@
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import { Menu, Button } from "@/components"
 import {
@@ -22,7 +21,7 @@ const QuickNewMenu = () => {
 	return (
 		<Menu position="bottom-end">
 			<Menu.Target>
-				<Button variant="default" leftSection={ <PlusCircleIcon /> } className={ cx(classes.newMenu) }> New</Button>
+				<Button variant="default" leftSection={ <PlusCircleIcon /> } className={ clsx(classes.newMenu) }> New</Button>
 			</Menu.Target>
 
 			<Menu.Dropdown>

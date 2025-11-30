@@ -13,7 +13,7 @@ interface StatePreservingRowUpdaterProps {
  * Without this explicitly updating rows with the fresh data response, the table wouldn't update with new rows
  * This allows both sorting and filtering to work properly without losing input focus
  */
-const StatePreservingRowUpdater = React.memo(({ children, rows, pagination }: StatePreservingRowUpdaterProps) => {
+export const StatePreservingRowUpdater = React.memo(({ children, rows, pagination }: StatePreservingRowUpdaterProps) => {
 	const { setTableState } = useTableContext()
 
 	useEffect(() => {
@@ -24,5 +24,3 @@ const StatePreservingRowUpdater = React.memo(({ children, rows, pagination }: St
 
 	return <>{ children }</>
 })
-
-export default StatePreservingRowUpdater

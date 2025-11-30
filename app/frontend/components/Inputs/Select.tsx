@@ -1,11 +1,11 @@
 import { router } from "@inertiajs/react"
-import { Select, type ComboboxData, type SelectProps } from "@mantine/core"
+import { Select as MantineSelect, type ComboboxData, type SelectProps } from "@mantine/core"
 import React, { forwardRef } from "react"
 
 import { coerceArray } from "@/lib"
 
-import InputWrapper from "./InputWrapper"
-import Label from "./Label"
+import { InputWrapper } from "./InputWrapper"
+import { Label } from "./Label"
 
 import { withInjectedProps, type BaseInputProps } from "."
 
@@ -14,7 +14,7 @@ export interface SelectInputProps extends Omit<SelectProps, "data">, BaseInputPr
 	fetchOnOpen?: string
 }
 
-const SelectComponent = forwardRef<HTMLInputElement, SelectInputProps>((
+export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>((
 	{
 		options = [],
 		label,
@@ -47,7 +47,7 @@ const SelectComponent = forwardRef<HTMLInputElement, SelectInputProps>((
 			{ label && <Label required={ required } htmlFor={ inputId }>
 				{ label }
 			</Label> }
-			<Select
+			<MantineSelect
 				ref={ ref }
 				// Add "search" suffix to prevent password managers trying to autofill dropdowns
 				id={ `${inputId}-search` }
@@ -66,5 +66,3 @@ const SelectComponent = forwardRef<HTMLInputElement, SelectInputProps>((
 		</InputWrapper>
 	)
 })
-
-export default SelectComponent

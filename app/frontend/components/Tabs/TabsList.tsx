@@ -1,6 +1,5 @@
 import { TabsListProps, Tabs } from "@mantine/core"
-import cx from "clsx"
-import React from "react"
+import clsx from "clsx"
 
 import * as classes from "./Tabs.css"
 
@@ -8,13 +7,11 @@ interface TabsListComponentProps extends TabsListProps {
 	scrollOverflow?: boolean
 }
 
-const TabsList = ({ scrollOverflow = true, className, ...props }: TabsListComponentProps) => {
+export function TabsList({ scrollOverflow = true, className, ...props }: TabsListComponentProps) {
 	return (
 		<Tabs.List
-			className={ cx(className, { [classes.scrollTabsList]: scrollOverflow }) }
+			className={ clsx(className, { [classes.scrollTabsList]: scrollOverflow }) }
 			{ ...props }
 		/>
 	)
 }
-
-export default TabsList

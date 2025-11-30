@@ -1,10 +1,9 @@
-import React from "react"
 
 import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ConsumablesTable from "../Table"
+import ConsumablesTable from "@/domains/Consumables/Table"
 
 interface ConsumablesIndexProps {
 	consumables: Schema.ConsumablesIndex[]
