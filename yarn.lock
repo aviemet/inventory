@@ -9342,17 +9342,6 @@ __metadata:
   linkType: hard
 
 "happy-dom@npm:^20.0.10":
-  version: 20.0.10
-  resolution: "happy-dom@npm:20.0.10"
-  dependencies:
-    "@types/node": "npm:^20.0.0"
-    "@types/whatwg-mimetype": "npm:^3.0.2"
-    whatwg-mimetype: "npm:^3.0.0"
-  checksum: 10/a39e11faa47b58ed722a32471277da90538101190c90569ed1c1525897193b9138f93945cb2b7cecf8ad3b8b87c44b9a36fb7c88a7ce49de4f7ad5b2ec3e4cca
-  languageName: node
-  linkType: hard
-
-"happy-dom@npm:^20.0.11":
   version: 20.0.11
   resolution: "happy-dom@npm:20.0.11"
   dependencies:
@@ -10014,7 +10003,6 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^7.0.1"
     git-cz: "npm:^4.9.0"
     google-libphonenumber: "npm:^3.2.43"
-    happy-dom: "npm:^20.0.11"
     husky: "npm:^9.1.7"
     i18next: "npm:^25.6.3"
     i18next-browser-languagedetector: "npm:^8.2.0"
