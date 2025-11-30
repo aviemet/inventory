@@ -20,7 +20,7 @@ export interface IndexTableTitleSectionProps {
 }
 
 const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: IndexTableTitleSectionProps) => {
-	const { tableState: { selected } } = useTableContext()
+	const { selected } = useTableContext()
 
 	const deleteRecords = () => {
 		if(!deleteRoute) return

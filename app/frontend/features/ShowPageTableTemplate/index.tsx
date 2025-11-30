@@ -25,7 +25,7 @@ const ShowPageTableTemplate = ({ children, model, rows, pagination, title, menuO
 			selectable
 			hideable
 			model={ model }
-			rows={ rows }
+			data={ rows }
 			pagination={ pagination }
 		>
 			<TableTitleSection title={ title } menuOptions={ menuOptions }>

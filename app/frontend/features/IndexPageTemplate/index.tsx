@@ -35,7 +35,7 @@ const IndexPageTemplate = ({
 				<Table.TableProvider
 					selectable
 					model={ model }
-					rows={ rows }
+					data={ rows }
 					pagination={ pagination }
 				>
 					<TableTitleSection

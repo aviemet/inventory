@@ -1,37 +1,39 @@
-import clsx from "clsx"
-import { cloneElement } from "react"
+import React from "react"
 
+import { Cell } from "./Cell"
 import { Row } from "./Row"
 import { useTableContext, type TableRowData } from "./TableContext"
-import { RenderedCell as Cell } from "./Td"
 
-interface RowIteratorProps<T extends TableRowData = TableRowData> {
-	render: (obj: T) => JSX.Element
+interface RowIteratorProps<T extends TableRowData> {
+	render: (row: T) => React.ReactElement
 }
 
-export function RowIterator<T extends TableRowData = TableRowData>({ render }: RowIteratorProps<T>) {
-	const { tableState: { selected, rows, columns, selectable } } = useTableContext<T>()
+export function RowIterator<T extends TableRowData>({ render }: RowIteratorProps<T>) {
+	const { data, pagination, columns, selectable, table } = useTableContext()
 
-	if(!rows || rows.length === 0) {
-		const colSpan = columns.length + (selectable ? 1 : 0)
+	const displayData = pagination ? data : table.getRowModel().rows.map(row => row.original)
 
+	if(displayData.length === 0) {
+		const colSpan = columns.size + (selectable ? 1 : 0)
 		return (
 			<Row>
-				<Cell colSpan={ colSpan } align="center">
+				<Cell columnId="empty" colSpan={ colSpan } align="center">
 					Nothing to display
 				</Cell>
 			</Row>
 		)
 	}
 
-	const injectRowProps = (row: JSX.Element) => {
-		return cloneElement(row, {
-			name: row.key,
-			className: clsx(
-				{ checked: selected.has(String(row.key!)) },
-			),
-		})
-	}
-
-	return <>{ rows.map(row => injectRowProps(render(row))) }</>
+	return (
+		<>
+			{ displayData.map((row, index) => {
+				const rowElement = render(row as T)
+				const rowId = (row as { id?: unknown }).id
+				const key: React.Key = rowId !== null ? String(rowId) : index
+				return React.cloneElement(rowElement, { key } as Partial<React.HTMLAttributes<HTMLElement>>)
+			}) }
+		</>
+	)
 }
+
+RowIterator.displayName = "Table.RowIterator"

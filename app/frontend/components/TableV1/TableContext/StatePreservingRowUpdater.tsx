@@ -14,13 +14,25 @@ interface StatePreservingRowUpdaterProps {
  * This allows both sorting and filtering to work properly without losing input focus
  */
 export const StatePreservingRowUpdater = React.memo(({ children, rows, pagination }: StatePreservingRowUpdaterProps) => {
-	const { setTableState } = useTableContext()
+	const { setTableState, tableState } = useTableContext()
 
 	useEffect(() => {
 		if(!pagination) return
 
 		setTableState({ rows, pagination })
-	}, [rows, pagination, setTableState])
+		tableState.table.setOptions((prev) => ({
+			...prev,
+			data: rows as typeof prev.data,
+			pageCount: pagination.pages,
+			state: {
+				...prev.state,
+				pagination: {
+					pageIndex: pagination.current_page - 1,
+					pageSize: pagination.limit,
+				},
+			},
+		}))
+	}, [rows, pagination, setTableState, tableState.table])
 
 	return <>{ children }</>
 })

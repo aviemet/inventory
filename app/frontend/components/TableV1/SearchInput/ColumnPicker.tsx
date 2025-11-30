@@ -1,8 +1,8 @@
+import React from "react"
 import { router } from "@inertiajs/react"
 import { Button } from "@mantine/core"
 import axios from "axios"
 import clsx from "clsx"
-import React from "react"
 
 import { Menu } from "@/components"
 import { ColumnsIcon } from "@/components/Icons"
@@ -10,17 +10,18 @@ import { Checkbox } from "@/components/Inputs"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
+
 import * as classes from "../Table.css"
 import { useTableContext } from "../TableContext"
 
 export function ColumnPicker() {
 	const { auth: { user } } = usePageProps()
-	const { hideable, columns, model } = useTableContext()
+	const { tableState: { hideable, columns, model } } = useTableContext()
 
-	if(!hideable || !model) return null
+	if(!hideable || !model) return <></>
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		axios.patch(Routes.apiUpdateTablePreferences(user.id!), {
+		axios.patch( Routes.apiUpdateTablePreferences(user.id!), {
 			user: {
 				table_preferences: {
 					[model]: {
@@ -35,8 +36,6 @@ export function ColumnPicker() {
 		})
 	}
 
-	const hideableColumns = Array.from(columns.values()).filter(col => col.hideable)
-
 	return (
 		<Menu closeOnItemClick={ false } position="bottom-end">
 			<Menu.Target>
@@ -46,13 +45,13 @@ export function ColumnPicker() {
 			</Menu.Target>
 
 			<Menu.Dropdown>
-				{ hideableColumns.map((column) => (
-					<Menu.Item key={ column.id } component="div" style={ { cursor: "default", padding: 0 } }>
+				{ columns.filter(option => option.hideable).map(({ label, hideable }) => (
+					<Menu.Item key={ label } component="div" style={ { cursor: "default", padding: 0 } }>
 						<Checkbox
-							name={ column.hideable! }
-							label={ column.label }
+							name={ hideable }
+							label={ label }
 							onChange={ handleChange }
-							checked={ !user.table_preferences?.[model]?.hide?.[column.hideable!] }
+							checked={ !user.table_preferences?.[model]?.hide?.[hideable] }
 							p="xs"
 						/>
 					</Menu.Item>

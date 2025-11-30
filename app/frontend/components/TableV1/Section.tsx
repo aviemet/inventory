@@ -11,5 +11,3 @@ export function TableSection({ children }: { children: React.ReactNode }) {
 		</Section>
 	)
 }
-
-TableSection.displayName = "Table.Section"

@@ -1,31 +1,25 @@
 import { Table, LoadingOverlay, type TableTbodyProps } from "@mantine/core"
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
 
-import { TableSectionContextProvider, useTableContext } from "./TableContext"
+import { useTableContext, TableSectionContextProvider } from "./TableContext"
 
-interface TableBody extends TableTbodyProps {}
-
-export const Body = forwardRef<HTMLTableSectionElement, TableBody>(({ children, ...props }, ref) => {
-	const tableState = useTableContext(false)
-
-	if(tableState === null) {
-		return (
-			<TableSectionContextProvider value={ { section: "body" } }>
-				<Table.Tbody { ...props } ref={ ref }>
-					{ children }
-				</Table.Tbody>
-			</TableSectionContextProvider>
-		)
-	}
-
-	const { tableState: { searching } } = tableState
+export const Body = forwardRef<HTMLTableSectionElement, TableTbodyProps>(({ children, ...props }, ref) => {
+	const { searching } = useTableContext()
 
 	return (
 		<TableSectionContextProvider value={ { section: "body" } }>
 			<Table.Tbody { ...props } ref={ ref }>
-				{ searching && <tr><td><LoadingOverlay visible={ searching } overlayProps={ { blur: 1 } } /></td></tr> }
+				{ searching && (
+					<tr>
+						<td colSpan={ 1000 }>
+							<LoadingOverlay visible={ searching } overlayProps={ { blur: 1 } } />
+						</td>
+					</tr>
+				) }
 				{ children }
 			</Table.Tbody>
 		</TableSectionContextProvider>
 	)
 })
+
+Body.displayName = "Table.Body"

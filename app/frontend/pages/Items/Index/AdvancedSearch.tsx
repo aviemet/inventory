@@ -1,9 +1,7 @@
-
 import { Button, Box, Group, Flex, Link } from "@/components"
 import { CrossIcon, SearchIcon } from "@/components/Icons"
 import { CurrencyInput, TextInput } from "@/components/Inputs"
-import { useAdvancedSearch } from "@/components/Table"
-import { SearchDateInput, SearchDateTypeInput } from "@/components/Table/SearchInput/AdvancedSearch/DateRangeInputs"
+import { useAdvancedSearch, SearchDateInput, SearchDateTypeInput } from "@/components/Table"
 import {
 	DepartmentsDropdown,
 	ManufacturersDropdown,
@@ -11,6 +9,7 @@ import {
 	ModelsDropdown,
 	CategoriesDropdown,
 } from "@/features/Dropdowns"
+
 
 const AdvancedItemsSearch = () => {
 	const advancedSearch = useAdvancedSearch([

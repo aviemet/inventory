@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import ItemsTable from "@/domains/Items/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ItemsTable from "@/domains/Items/Table"
 import AdvancedItemsSearch from "./AdvancedSearch"
 
 interface ItemsIndexProps {
