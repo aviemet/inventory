@@ -1,19 +1,21 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { Routes } from '@/lib'
-import ModelsForm from '@/pages/Models/Form'
-import { useGetModelsAsOptions } from '@/queries/models'
-import { isEmpty } from 'lodash'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface ModelsDropdownProps extends Omit<FormAsyncDropdown<Schema.ModelsOptions>, 'name'> {
+import { Select as FormSelect } from "@/components/Form"
+import { Routes } from "@/lib"
+import ModelsForm from "@/pages/Models/Form"
+import { useGetModelsAsOptions } from "@/queries/models"
+
+import { type FormAsyncDropdown } from ".."
+
+interface ModelsDropdownProps extends Omit<FormAsyncDropdown<Schema.ModelsOptions>, "name"> {
 	name?: string
 	modelCategory: Schema.CategoryTypes
 }
 
 const ModelsDropdown = ({
-	label = 'Model',
-	name = 'model_id',
+	label = "Model",
+	name = "model_id",
 	modelCategory,
 	initialData,
 	value,

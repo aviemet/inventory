@@ -1,24 +1,25 @@
-import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
-import { Routes } from '@/lib'
-import { EditIcon } from '@/components/Icons'
+import React from "react"
+
+import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
+import { EditIcon } from "@/components/Icons"
+import { Routes } from "@/lib"
 
 interface ShowModelProps {
 	model: Schema.ModelsShow
 }
 
 const tabs = {
-	details: 'details',
-	history: 'history',
-	associations: 'associations',
+	details: "details",
+	history: "history",
+	associations: "associations",
 }
 
 const Show = ({ model }: ShowModelProps) => {
-	const title = model.name ?? 'Item Details'
+	const title = model.name ?? "Item Details"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Model', href: Routes.models() },
+			{ title: "Model", href: Routes.models() },
 			{ title: model.name, href: window.location.href },
 		] }>
 

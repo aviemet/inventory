@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import OrdersTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import OrdersTable from "../Table"
 
 interface OrdersIndexProps {
 	orders: Schema.OrdersIndex[]
@@ -18,7 +20,7 @@ const OrdersIndex = ({ orders, pagination }: OrdersIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.orders() }
 			menuOptions={ [
-				{ label: 'New Order', href: Routes.newOrder(), icon: <NewIcon /> },
+				{ label: "New Order", href: Routes.newOrder(), icon: <NewIcon /> },
 			] }
 		>
 			<OrdersTable />

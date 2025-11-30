@@ -1,8 +1,9 @@
-import React from 'react'
-import { Routes, formatter } from '@/lib'
-import { Link, Table } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
+import React from "react"
+
+import { Link, Table } from "@/components"
+import { EditButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes, formatter } from "@/lib"
 
 const ContractsTable = (props: TableProps) => {
 	return (
@@ -15,7 +16,7 @@ const ContractsTable = (props: TableProps) => {
 					<Table.HeadCell sort="ends_at">End Date</Table.HeadCell>
 					<Table.HeadCell sort="vendor.name">Vendor</Table.HeadCell>
 					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

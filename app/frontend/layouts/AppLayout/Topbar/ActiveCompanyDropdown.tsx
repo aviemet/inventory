@@ -1,10 +1,12 @@
-import React from 'react'
-import { Form, Select } from '@/components/Form'
-import { Title } from '@mantine/core'
-import { isEmpty } from 'lodash'
-import { Routes } from '@/lib'
-import { router } from '@inertiajs/react'
-import { type UseFormProps } from 'use-inertia-form'
+import { router } from "@inertiajs/react"
+import { Title } from "@mantine/core"
+import { isEmpty } from "lodash"
+import React from "react"
+import { type UseFormProps } from "use-inertia-form"
+
+import { Form, Select } from "@/components/Form"
+import { Routes } from "@/lib"
+
 
 type ActiveCompanyFormData = {
 	user: {
@@ -33,7 +35,7 @@ const ActiveCompanyDropdown = ({ user }: { user: Schema.UsersFlash }) => {
 		<Form
 			async
 			disableFormatting
-			data={ { user: { active_company_id: user.active_company?.id || '' }  } }
+			data={ { user: { active_company_id: user.active_company?.id || "" } } }
 			to={ Routes.apiUser(user.id!) }
 			method="patch"
 			model="user"
@@ -49,9 +51,9 @@ const ActiveCompanyDropdown = ({ user }: { user: Schema.UsersFlash }) => {
 				searchable={ false }
 				field={ false }
 				style={ {
-					width: 'fit-content',
+					width: "fit-content",
 					input:{
-						backgroundColor: 'transparent',
+						backgroundColor: "transparent",
 					},
 				} }
 			/>

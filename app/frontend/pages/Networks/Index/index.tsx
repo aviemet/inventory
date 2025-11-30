@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import NetworksTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import NetworksTable from "../Table"
 
 interface NetworksIndexProps {
 	networks: Schema.NetworksIndex[]
@@ -18,7 +20,7 @@ const NetworksIndex = ({ networks, pagination }: NetworksIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.networks() }
 			menuOptions={ [
-				{ label: 'New Network', href: Routes.newNetwork(), icon: <NewIcon /> },
+				{ label: "New Network", href: Routes.newNetwork(), icon: <NewIcon /> },
 			] }
 		>
 			<NetworksTable />

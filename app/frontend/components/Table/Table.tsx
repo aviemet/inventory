@@ -1,21 +1,20 @@
-import React from 'react'
-import { Box, Table, type TableProps as MantineTableProps } from '@mantine/core'
+import { Box, Table, type TableProps as MantineTableProps } from "@mantine/core"
+import cx from "clsx"
+import React from "react"
 
-import Head from './Head'
-import Body from './Body'
-import RowIterator from './RowIterator'
-import Row from './Row'
-import Cell from './Td'
-import HeadCell from './Th'
-import Footer from './Footer'
-import Pagination from './Pagination'
-import TableProvider from './TableContext'
-import TableSection from './Section'
-import SearchInput from './SearchInput'
-import ConditionalWrapper from '../ConditionalWrapper'
-
-import cx from 'clsx'
-import * as classes from './Table.css'
+import Body from "./Body"
+import Footer from "./Footer"
+import Head from "./Head"
+import Pagination from "./Pagination"
+import Row from "./Row"
+import RowIterator from "./RowIterator"
+import SearchInput from "./SearchInput"
+import TableSection from "./Section"
+import TableProvider from "./TableContext"
+import Cell from "./Td"
+import HeadCell from "./Th"
+import ConditionalWrapper from "../ConditionalWrapper"
+import * as classes from "./Table.css"
 
 export interface TableProps extends MantineTableProps {
 	fixed?: boolean
@@ -67,15 +66,15 @@ const TableComponent: TableObject = ({
 }
 
 TableComponent.TableProvider = TableProvider
-TableComponent.Section       = TableSection
-TableComponent.SearchInput   = SearchInput
-TableComponent.Head          = Head
-TableComponent.HeadCell      = HeadCell
-TableComponent.Body          = Body
-TableComponent.Cell          = Cell
-TableComponent.Row           = Row
-TableComponent.RowIterator   = RowIterator
-TableComponent.Footer        = Footer
-TableComponent.Pagination    = Pagination
+TableComponent.Section = TableSection
+TableComponent.SearchInput = SearchInput
+TableComponent.Head = Head
+TableComponent.HeadCell = HeadCell
+TableComponent.Body = Body
+TableComponent.Cell = Cell
+TableComponent.Row = Row
+TableComponent.RowIterator = RowIterator
+TableComponent.Footer = Footer
+TableComponent.Pagination = Pagination
 
 export default TableComponent

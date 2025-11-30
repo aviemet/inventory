@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useRef } from 'react'
-import { Box, Title, Grid } from '@/components'
-import { Form, Submit, SwatchInput } from '@/components/Form'
-import SettingsLayout from '@/pages/Settings/SettingsLayout'
-import { Routes } from '@/lib'
-import { defaults } from 'lodash'
-import { useLayoutStore } from '@/lib/store'
-import { type UseFormProps } from 'use-inertia-form'
+import { defaults } from "lodash"
+import React, { useCallback, useEffect, useRef } from "react"
+import { type UseFormProps } from "use-inertia-form"
+
+import { Box, Title, Grid } from "@/components"
+import { Form, Submit, SwatchInput } from "@/components/Form"
+import { Routes } from "@/lib"
+import { useLayoutStore } from "@/lib/store"
+import SettingsLayout from "@/pages/Settings/SettingsLayout"
 
 interface AppearanceFormData {
 	settings: {
@@ -43,7 +44,7 @@ const AppearanceSettings = ({ settings }: AppearanceSettingsProps) => {
 	}, [])
 
 	const handleSubmit = ({ getData }: UseFormProps<AppearanceFormData>) => {
-		RevertColorRef.current = getData('settings.primary_color')
+		RevertColorRef.current = getData("settings.primary_color")
 	}
 
 	return (

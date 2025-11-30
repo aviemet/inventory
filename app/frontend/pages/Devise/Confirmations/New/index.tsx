@@ -1,7 +1,8 @@
-import React from 'react'
-import { Form, TextInput, Submit } from '@/components/Form'
-import { Routes } from '@/lib'
-import { Title, Tile } from '@/components'
+import React from "react"
+
+import { Title, Tile } from "@/components"
+import { Form, TextInput, Submit } from "@/components/Form"
+import { Routes } from "@/lib"
 
 interface ConfirmationsNewProps {
 	user: Schema.User

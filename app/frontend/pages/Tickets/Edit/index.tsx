@@ -1,22 +1,24 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import TicketForm from '../Form'
+import React from "react"
 
-interface UpdateTicketProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import TicketForm from "../Form"
+
+interface UpdateTicketProps {
 	ticket: Schema.TicketsEdit
 	people: Schema.PeopleOptions[]
 	assets: Schema.AssetsOptions[]
 }
 
 const EditTicket = ({ ticket, ...data }: UpdateTicketProps) => {
-	const title = 'Edit Ticket'
+	const title = "Edit Ticket"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Tickets', href: Routes.tickets() },
+			{ title: "Tickets", href: Routes.tickets() },
 			{ title: ticket.subject!, href: Routes.ticket(ticket) },
-			{ title: 'Edit Ticket', href: window.location.href },
+			{ title: "Edit Ticket", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

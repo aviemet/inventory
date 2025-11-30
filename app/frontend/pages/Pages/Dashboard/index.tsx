@@ -1,7 +1,9 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import Counts from './Counts'
-import RecentActivityTable from './RecentActivityTable'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+
+import Counts from "./Counts"
+import RecentActivityTable from "./RecentActivityTable"
 
 interface DashboardProps {
 	company: Schema.CompaniesCounts
@@ -11,7 +13,7 @@ interface DashboardProps {
 const Dashboard = ({ company, activities }: DashboardProps) => {
 	return (
 		<Page title="Dashboard" breadcrumbs={ [
-			{ href: '/dashboard', title: 'Dashboard' },
+			{ href: "/dashboard", title: "Dashboard" },
 		] }>
 			<Title mb="sm">Company Overview</Title>
 

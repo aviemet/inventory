@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { Title, Page, Section, Table } from '@/components'
-import { Routes } from '@/lib'
-import { DateTimeInput, Form, TextInput, Submit, Textarea } from '@/components/Form'
-import { FormLocationsDropdown, FormStatusLabelsDropdown } from '@/features/Dropdowns'
-import * as classes from './Checkin.css'
+import React, { useState } from "react"
+
+import { Title, Page, Section, Table } from "@/components"
+import { DateTimeInput, Form, TextInput, Submit, Textarea } from "@/components/Form"
+import { FormLocationsDropdown, FormStatusLabelsDropdown } from "@/features/Dropdowns"
+import { Routes } from "@/lib"
+
+import * as classes from "./Checkin.css"
 
 interface CheckinItemsProps {
 	assignment: Schema.AssignmentsEdit
@@ -14,7 +16,7 @@ interface CheckinItemsProps {
 
 const Checkin = ({ assignment, item, locations, status_labels }: CheckinItemsProps) => {
 	const [itemName, setItemName] = useState(item.name)
-	const title = 'Check In Item'
+	const title = "Check In Item"
 
 	return (
 		<Page title={ title }>

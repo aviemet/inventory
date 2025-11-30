@@ -1,16 +1,17 @@
-import React from 'react'
-import { Link, Table } from '@/components'
-import { formatter, Routes } from '@/lib'
+import React from "react"
+
+import { Link, Table } from "@/components"
+import { formatter, Routes } from "@/lib"
 
 interface DashboardProps {
 	activities: Schema.ActivitiesDashboard[]
 }
 
 const headingLabels = {
-	record: 'Record',
-	action: 'Action',
-	user: 'User',
-	date: 'Date',
+	record: "Record",
+	action: "Action",
+	user: "User",
+	date: "Date",
 }
 
 const RecentActivityTable = ({ activities }: DashboardProps) => {

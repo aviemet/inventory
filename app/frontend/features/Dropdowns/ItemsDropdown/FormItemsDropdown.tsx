@@ -1,16 +1,18 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { isEmpty } from 'lodash'
-import { useGetItemsAsOptions } from '@/queries/items'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface ItemsDropdownProps extends Omit<FormAsyncDropdown<Schema.ItemsOptions>, 'name' | 'options'> {
+import { Select as FormSelect } from "@/components/Form"
+import { useGetItemsAsOptions } from "@/queries/items"
+
+import { type FormAsyncDropdown } from ".."
+
+interface ItemsDropdownProps extends Omit<FormAsyncDropdown<Schema.ItemsOptions>, "name" | "options"> {
 	name?: string
 }
 
 const ItemsDropdown = ({
-	label = 'Item',
-	name = 'item_id',
+	label = "Item",
+	name = "item_id",
 	initialData,
 	value,
 	...props

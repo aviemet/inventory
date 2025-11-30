@@ -1,8 +1,10 @@
-import React from 'react'
-import { Table, Title, Page, Group, Menu } from '@/components'
-import { Routes } from '@/lib'
-import { EditIcon } from '@/components/Icons'
-import GroupMembersTable from './GroupMembersTable'
+import React from "react"
+
+import { Table, Title, Page, Group, Menu } from "@/components"
+import { EditIcon } from "@/components/Icons"
+import { Routes } from "@/lib"
+
+import GroupMembersTable from "./GroupMembersTable"
 
 interface ShowUserProps {
 	person_group: Schema.PersonGroupsShow
@@ -13,8 +15,8 @@ const ShowUser = ({ person_group }: ShowUserProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'People', href: Routes.people() },
-			{ title: 'Groups', href: Routes.personGroups() },
+			{ title: "People", href: Routes.people() },
+			{ title: "Groups", href: Routes.personGroups() },
 			{ title, href: window.location.href },
 		] }>
 			<Table.Section>
@@ -34,7 +36,7 @@ const ShowUser = ({ person_group }: ShowUserProps) => {
 
 				<Table.TableProvider
 					selectable
-					model='people'
+					model="people"
 					rows={ person_group.people }
 				>
 					<GroupMembersTable />

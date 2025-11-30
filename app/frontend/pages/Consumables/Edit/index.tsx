@@ -1,9 +1,11 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import ConsumableForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
 
-interface UpdateConsumableProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import ConsumableForm from "../Form"
+
+interface UpdateConsumableProps {
 	consumable: Schema.ConsumablesEdit
 }
 
@@ -12,9 +14,9 @@ const EditConsumable = ({ consumable }: UpdateConsumableProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Consumables', href: Routes.consumables() },
+			{ title: "Consumables", href: Routes.consumables() },
 			{ title: consumable.name, href: Routes.consumable(consumable) },
-			{ title: 'Edit Consumable', href: window.location.href },
+			{ title: "Edit Consumable", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

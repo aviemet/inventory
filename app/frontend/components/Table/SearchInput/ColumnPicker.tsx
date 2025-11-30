@@ -1,16 +1,18 @@
-import React from 'react'
-import { router } from '@inertiajs/react'
-import { Routes } from '@/lib'
-import axios from 'axios'
-import { Menu } from '@/components'
-import { ColumnsIcon } from '@/components/Icons'
-import { Checkbox } from '@/components/Inputs'
-import { useTableContext } from '../TableContext'
-import { Button } from '@mantine/core'
-import { usePageProps } from '@/lib/hooks'
+import { router } from "@inertiajs/react"
+import { Button } from "@mantine/core"
+import axios from "axios"
+import cx from "clsx"
+import React from "react"
 
-import cx from 'clsx'
-import * as classes from '../Table.css'
+import { Menu } from "@/components"
+import { ColumnsIcon } from "@/components/Icons"
+import { Checkbox } from "@/components/Inputs"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+
+
+import * as classes from "../Table.css"
+import { useTableContext } from "../TableContext"
 
 const ColumnPicker = () => {
 	const { auth: { user } } = usePageProps()
@@ -30,7 +32,7 @@ const ColumnPicker = () => {
 				},
 			},
 		}).then(() => {
-			router.reload({ only: ['auth'] })
+			router.reload({ only: ["auth"] })
 		})
 	}
 
@@ -44,7 +46,7 @@ const ColumnPicker = () => {
 
 			<Menu.Dropdown>
 				{ columns.filter(option => option.hideable).map(({ label, hideable }) => (
-					<Menu.Item key={ label } component="div" style={ { cursor: 'default', padding: 0 } }>
+					<Menu.Item key={ label } component="div" style={ { cursor: "default", padding: 0 } }>
 						<Checkbox
 							name={ hideable }
 							label={ label }

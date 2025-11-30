@@ -1,14 +1,16 @@
-import React from 'react'
-import { describe, test, expect } from 'vitest'
-import { render } from '@/tests/helpers/utils'
-import NetworksIndex from '@/pages/Networks/Index'
+import React from "react"
+import { describe, test, expect } from "vitest"
+
+import NetworksIndex from "@/pages/Networks/Index"
+import { render } from "@/tests/helpers/utils"
+
 import {
 	createMockNetworkIndex,
 	createMockPagination,
-} from './helpers'
+} from "./helpers"
 
-describe('Networks/Index', () => {
-	test('renders without error', () => {
+describe("Networks/Index", () => {
+	test("renders without error", () => {
 		const networks = [createMockNetworkIndex()]
 		const pagination = createMockPagination()
 
@@ -17,10 +19,10 @@ describe('Networks/Index', () => {
 		}).not.toThrow()
 	})
 
-	test('renders with multiple networks', () => {
+	test("renders with multiple networks", () => {
 		const networks = [
-			createMockNetworkIndex({ id: 1, name: 'Network 1' }),
-			createMockNetworkIndex({ id: 2, name: 'Network 2' }),
+			createMockNetworkIndex({ id: 1, name: "Network 1" }),
+			createMockNetworkIndex({ id: 2, name: "Network 2" }),
 		]
 		const pagination = createMockPagination({ count: 2 })
 
@@ -29,7 +31,7 @@ describe('Networks/Index', () => {
 		}).not.toThrow()
 	})
 
-	test('renders with empty networks array', () => {
+	test("renders with empty networks array", () => {
 		const networks: Schema.NetworksIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 

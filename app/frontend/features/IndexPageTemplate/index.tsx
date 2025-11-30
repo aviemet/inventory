@@ -1,11 +1,14 @@
-import React from 'react'
-import { Page, Table } from '@/components'
-import TableTitleSection, { IndexTableTitleSectionProps } from '../TableTitleSection'
-import { type Breadcrumb } from '@/components/Breadcrumbs'
+import React from "react"
+
+import { Page, Table } from "@/components"
+import { type Breadcrumb } from "@/components/Breadcrumbs"
+import { type TableRowData } from "@/components/Table/TableContext"
+
+import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSection"
 
 interface IndexPageTemplateProps extends IndexTableTitleSectionProps {
 	model: string
-	rows: Record<string, any>[]
+	rows: readonly TableRowData[]
 	pagination: Schema.Pagination
 	search?: boolean
 	breadcrumbs?: Breadcrumb[]

@@ -1,8 +1,9 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Link, Table } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
+import React from "react"
+
+import { Link, Table } from "@/components"
+import { EditButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
 
 const CategoriesTable = (props: TableProps) => {
 	return (
@@ -12,7 +13,7 @@ const CategoriesTable = (props: TableProps) => {
 					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
 					<Table.HeadCell sort="categorizable_type">Type</Table.HeadCell>
 					<Table.HeadCell>Qty</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

@@ -1,15 +1,16 @@
-import { type AssignToableTypes } from '@/types'
-import { FormItemsDropdown } from '../ItemsDropdown'
-import { FormLocationsDropdown } from '../LocationsDropdown'
-import { FormPeopleDropdown } from '../PeopleDropdown'
+import { type AssignToableTypes } from "@/types"
+
+import { FormItemsDropdown } from "../ItemsDropdown"
+import { FormLocationsDropdown } from "../LocationsDropdown"
+import { FormPeopleDropdown } from "../PeopleDropdown"
 
 const getDropdownComponent = (type: AssignToableTypes) => {
 	switch(type) {
-		case 'Item':
+		case "Item":
 			return FormItemsDropdown
-		case 'Location':
+		case "Location":
 			return FormLocationsDropdown
-		case 'Person':
+		case "Person":
 			return FormPeopleDropdown
 		default:
 			throw Error()

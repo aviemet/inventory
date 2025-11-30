@@ -1,18 +1,20 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { Routes } from '@/lib'
-import DepartmentsForm from '@/pages/Departments/Form'
-import { isEmpty } from 'lodash'
-import { useGetDepartmentsAsOptions } from '@/queries/departments'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface DepartmentsDropdownProps extends Omit<FormAsyncDropdown<Schema.DepartmentsOptions>, 'name'> {
+import { Select as FormSelect } from "@/components/Form"
+import { Routes } from "@/lib"
+import DepartmentsForm from "@/pages/Departments/Form"
+import { useGetDepartmentsAsOptions } from "@/queries/departments"
+
+import { type FormAsyncDropdown } from ".."
+
+interface DepartmentsDropdownProps extends Omit<FormAsyncDropdown<Schema.DepartmentsOptions>, "name"> {
 	name?: string
 }
 
 const DepartmentsDropdown = ({
-	label = 'Department',
-	name = 'department_id',
+	label = "Department",
+	name = "department_id",
 	initialData,
 	value,
 	...props

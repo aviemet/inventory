@@ -1,11 +1,12 @@
-import React from 'react'
-import { type PageProps } from '@inertiajs/core'
-import Providers from '@/layouts/Providers'
-import { Flash } from '@/components'
-import Spotlight from '@/features/Spotlight'
+import { type PageProps } from "@inertiajs/core"
+import React from "react"
 
-import AppLayout from './AppLayout'
-import AuthLayout from './AuthLayout'
+import { Flash } from "@/components"
+import Spotlight from "@/features/Spotlight"
+import Providers from "@/layouts/Providers"
+
+import AppLayout from "./AppLayout"
+import AuthLayout from "./AuthLayout"
 
 interface LayoutWrapperProps {
 	children: React.ReactNode

@@ -1,9 +1,10 @@
-import React, { forwardRef, useEffect, useState } from 'react'
-import SelectInput, { type SelectInputProps } from '@/components/Inputs/Select'
-import axios from 'axios'
-import { Routes } from '@/lib'
+import axios from "axios"
+import React, { forwardRef, useEffect, useState } from "react"
 
-interface ItemsDropdownProps extends Omit<SelectInputProps, 'options'> {
+import SelectInput, { type SelectInputProps } from "@/components/Inputs/Select"
+import { Routes } from "@/lib"
+
+interface ItemsDropdownProps extends Omit<SelectInputProps, "options"> {
 
 }
 

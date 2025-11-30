@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import ComponentsTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import ComponentsTable from "../Table"
 
 interface ComponentsIndexProps {
 	components: Schema.Item[]
@@ -18,7 +20,7 @@ const ComponentsIndex = ({ components, pagination }: ComponentsIndexProps) => {
 			pagination={ pagination }
 			deleteRoute={ Routes.components() }
 			menuOptions={ [
-				{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
+				{ label: "New Component", href: Routes.newComponent(), icon: <NewIcon /> },
 			] }
 		>
 			<ComponentsTable />

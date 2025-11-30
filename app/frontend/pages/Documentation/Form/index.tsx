@@ -1,9 +1,11 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Submit, RichText } from '@/components/Form'
-import DocumentableSearch from './DocumentableSearch'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import { FormCategoriesDropdown } from '@/features'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Submit, RichText } from "@/components/Form"
+import { FormCategoriesDropdown } from "@/features"
+
+import DocumentableSearch from "./DocumentableSearch"
 
 type DocumentationFormData = {
 	documentation: Schema.DocumentationsFormData
@@ -17,7 +19,7 @@ export interface DocumentationFormProps {
 }
 
 const DocumentationForm = ({
-	method = 'post',
+	method = "post",
 	documentation,
 	...props
 }: DocumentationFormProps) => {
@@ -26,7 +28,7 @@ const DocumentationForm = ({
 			model="documentation"
 			data={ { documentation } }
 			method={ method }
-			filter={ ['route', 'category', 'documentable_name'] }
+			filter={ ["route", "category", "documentable_name"] }
 			{ ...props }
 		>
 			<Grid>
@@ -54,7 +56,7 @@ const DocumentationForm = ({
 				</Grid.Col>
 
 				<Grid.Col>
-					<Submit>{ documentation.id ? 'Update' : 'Create' } Documentation</Submit>
+					<Submit>{ documentation.id ? "Update" : "Create" } Documentation</Submit>
 				</Grid.Col>
 
 			</Grid>

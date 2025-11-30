@@ -1,8 +1,9 @@
-import React from 'react'
-import { Grid, Title, Page, Section } from '@/components'
-import { DateTimeInput, Form, Submit, Textarea } from '@/components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/features'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Grid, Title, Page, Section } from "@/components"
+import { DateTimeInput, Form, Submit, Textarea } from "@/components/Form"
+import { AssignToableDropdown, AssignmentLocationDropdown } from "@/features"
+import { Routes } from "@/lib"
 
 interface CheckoutItemProps {
 	assignment: Schema.AssignmentsFormData
@@ -15,9 +16,9 @@ const Checkout = ({ assignment, component, items }: CheckoutItemProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Components', href: Routes.components() },
+			{ title: "Components", href: Routes.components() },
 			{ title: component.name, href: Routes.component(component) },
-			{ title: 'Check Out', href: window.location.href },
+			{ title: "Check Out", href: window.location.href },
 		] }>
 			<Section>
 				<Title order={ 1 } size="h3" mb="sm">{ title }</Title>
@@ -27,7 +28,7 @@ const Checkout = ({ assignment, component, items }: CheckoutItemProps) => {
 						assignment: {
 							...assignment,
 							assignable_id: component.id,
-							assignable_type: 'Component',
+							assignable_type: "Component",
 						},
 					} }
 					to={ Routes.assignments() }
@@ -36,7 +37,7 @@ const Checkout = ({ assignment, component, items }: CheckoutItemProps) => {
 					<Grid>
 						<Grid.Col>
 							<AssignToableDropdown
-								options={ ['Item'] }
+								options={ ["Item"] }
 								items={ items }
 							/>
 						</Grid.Col>

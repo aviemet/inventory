@@ -1,12 +1,14 @@
-import { defineConfig } from "vite"
-import RubyPlugin from "vite-plugin-ruby"
-import FullReload from "vite-plugin-full-reload"
-import EnvironmentPlugin from "vite-plugin-environment"
-import tsconfigPaths from "vite-tsconfig-paths"
-import react from "@vitejs/plugin-react"
 import path from "path"
 import { fileURLToPath } from "url"
+
+import react from "@vitejs/plugin-react"
 import wyw from "@wyw-in-js/vite"
+import { defineConfig } from "vite"
+import EnvironmentPlugin from "vite-plugin-environment"
+import FullReload from "vite-plugin-full-reload"
+import RubyPlugin from "vite-plugin-ruby"
+import tsconfigPaths from "vite-tsconfig-paths"
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 

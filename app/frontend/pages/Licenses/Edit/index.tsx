@@ -1,7 +1,9 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import LicenseForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import LicenseForm from "../Form"
 
 interface UpdateLicenseProps {
 	license: Schema.LicensesEdit
@@ -12,9 +14,9 @@ const New = ({ license }: UpdateLicenseProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Licenses', href: Routes.licenses() },
+			{ title: "Licenses", href: Routes.licenses() },
 			{ title: license.name!, href: Routes.license(license) },
-			{ title: 'Edit License', href: window.location.href },
+			{ title: "Edit License", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

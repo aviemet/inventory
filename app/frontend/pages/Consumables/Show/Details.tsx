@@ -1,7 +1,9 @@
-import React from 'react'
-import { Link, Title, Table, Box } from '@/components'
-import { formatter, Routes } from '@/lib'
-import { ShowConsumableProps } from '.'
+import React from "react"
+
+import { Link, Title, Table, Box } from "@/components"
+import { formatter, Routes } from "@/lib"
+
+import { ShowConsumableProps } from "."
 
 const ConsumableDetails = ({ consumable }: ShowConsumableProps) => {
 	return (

@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from 'react'
-import { Page, Title, Section, Table } from '@/components'
-import { Routes } from '@/lib'
-import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from '@/components/Form'
-import * as classes from './Checkin.css'
+import React, { useMemo, useState } from "react"
+
+import { Page, Title, Section, Table } from "@/components"
+import { DateTimeInput, Form, TextInput, Select, Submit, Textarea } from "@/components/Form"
+import { Routes } from "@/lib"
+
+import * as classes from "./Checkin.css"
 
 interface CheckinAccessoriesProps {
 	accessory: Schema.AccessoriesEdit
@@ -12,13 +14,13 @@ interface CheckinAccessoriesProps {
 
 const Checkin = ({ assignment, accessory, statuses }: CheckinAccessoriesProps) => {
 	const [accessoryName, setAccessoryName] = useState(accessory.name)
-	const title = 'Check In Accessory'
+	const title = "Check In Accessory"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Accessories', href: Routes.accessories() },
+			{ title: "Accessories", href: Routes.accessories() },
 			{ title: accessory.name!, href: Routes.accessory(accessory) },
-			{ title: 'Check In', href: window.location.href },
+			{ title: "Check In", href: window.location.href },
 		] }>
 
 			<Section>

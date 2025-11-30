@@ -1,17 +1,18 @@
-import React from 'react'
-import { createInertiaApp, router } from '@inertiajs/react'
-import { createRoot } from 'react-dom/client'
-import { AuthLayout, AppLayout } from '../layouts'
-import { propsMiddleware } from './middleware'
-import { runAxe } from './middleware/axe'
+import { createInertiaApp, router } from "@inertiajs/react"
+import React from "react"
+import { createRoot } from "react-dom/client"
+
+import { AuthLayout, AppLayout } from "../layouts"
+import { propsMiddleware } from "./middleware"
+import { runAxe } from "./middleware/axe"
 
 type PagesObject = { default: React.ComponentType<any> & {
 	layout?: React.ComponentType<any>
 } }
 
-const pages = import.meta.glob<PagesObject>('../pages/**/index.tsx')
+const pages = import.meta.glob<PagesObject>("../pages/**/index.tsx")
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
 	createInertiaApp({
 		title: title => `Inventory - ${title}`,
 
@@ -19,9 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			let checkedName = name
 			let layout = AppLayout
 
-			if(name.startsWith('Public/')) {
+			if(name.startsWith("Public/")) {
 				layout = AuthLayout
-				checkedName = name.replace('Public/', '')
+				checkedName = name.replace("Public/", "")
 			}
 
 			const page = (await pages[`../pages/${checkedName}/index.tsx`]()).default
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			root.render(<App { ...props } />)
 
-			router.on('success', event => {
+			router.on("success", event => {
 				event.detail.page.props = propsMiddleware(event.detail.page.props)
 				runAxe(root)
 			})

@@ -1,16 +1,19 @@
-import { Routes } from '@/lib'
-import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
-import { type ReactQueryFunction } from '..'
-import { SpotlightSearchValues } from '@/features/Spotlight'
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+
+import { SpotlightSearchValues } from "@/features/Spotlight"
+import { Routes } from "@/lib"
+
+import { type ReactQueryFunction } from ".."
+
 
 export const useGetSearchResults: ReactQueryFunction<
 	Schema.Search[],
 	{ searchParams: string }
 > = ({ searchParams }, options) => {
 	return useQuery({
-		queryKey: ['search'],
-		queryFn: async () => {
+		queryKey: ["search"],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiSearches({ search: searchParams }))
 			return res.data
 		},
@@ -23,8 +26,8 @@ export const useGetSpotlightResults: ReactQueryFunction<
 	{ searchParams: string }
 > = ({ searchParams }, options) => {
 	return useQuery({
-		queryKey: ['spotlight'],
-		queryFn: async () => {
+		queryKey: ["spotlight"],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiSpotlights({ search: searchParams }))
 			return res.data
 		},

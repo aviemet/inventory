@@ -1,14 +1,16 @@
-import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
-import Details from './Details'
-import ItemHistory from './ItemHistory'
-import Associations from './Associations'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
+import { Routes } from "@/lib"
+
+import Associations from "./Associations"
+import Details from "./Details"
+import ItemHistory from "./ItemHistory"
 
 const tabs = {
-	details: 'details',
-	history: 'history',
-	associations: 'associations',
+	details: "details",
+	history: "history",
+	associations: "associations",
 }
 
 export interface ShowLicenseProps {
@@ -16,11 +18,11 @@ export interface ShowLicenseProps {
 }
 
 const ShowLicense = ({ license }: ShowLicenseProps) => {
-	const title = license.name ?? 'License Details'
+	const title = license.name ?? "License Details"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Licenses', href: Routes.licenses() },
+			{ title: "Licenses", href: Routes.licenses() },
 			{ title: license.name, href: window.location.href },
 		] }>
 			<Section>

@@ -1,4 +1,4 @@
-import * as ipAddress from 'ip-address'
+import * as ipAddress from "ip-address"
 
 // const v4ToBinary = (addr: number[]) => {
 // 	const outOfBounds = addr.some(octet => octet < 0 || octet > 255)
@@ -26,7 +26,7 @@ class IPAddress {
 			return new ipAddress.Address6(address)
 		} catch(e) {}
 
-		throw new Error('Invalid address provided. Must be a valid IPv4 or IPv6 string value.')
+		throw new Error("Invalid address provided. Must be a valid IPv4 or IPv6 string value.")
 	}
 
 	between(start: IPAddress, end: IPAddress) {
@@ -38,13 +38,13 @@ class IPAddress {
 	toBinary() {
 		if(this.address.v4) {
 			return (this.address as ipAddress.Address4).toArray().reduce((str, octet) => {
-				return str + (octet >>> 0).toString(2).padStart(8, '0')
-			}, '')
+				return str + (octet >>> 0).toString(2).padStart(8, "0")
+			}, "")
 		} else {
 			// TODO: This hasn't been tested and likely doesn't work
 			return (this.address as ipAddress.Address6).toByteArray().reduce((str, octet) => {
-				return str + (octet >>> 0).toString(2).padStart(16, '0')
-			}, '')
+				return str + (octet >>> 0).toString(2).padStart(16, "0")
+			}, "")
 		}
 	}
 

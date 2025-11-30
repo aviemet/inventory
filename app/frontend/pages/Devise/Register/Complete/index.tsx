@@ -1,8 +1,9 @@
-import React from 'react'
-import { Field, Form, TextInput, Submit } from '@/components/Form'
-import { Routes } from '@/lib'
-import { Title, Tile } from '@/components'
-import { usePageProps } from '@/lib/hooks'
+import React from "react"
+
+import { Title, Tile } from "@/components"
+import { Field, Form, TextInput, Submit } from "@/components/Form"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 type RegisterFormData = {
 	person: {
@@ -19,11 +20,11 @@ const CompleteRegistration = () => {
 
 	const defaultData: RegisterFormData = {
 		person: {
-			first_name: user.person?.first_name ?? '',
-			last_name: user.person?.last_name ?? '',
+			first_name: user.person?.first_name ?? "",
+			last_name: user.person?.last_name ?? "",
 		},
 		company: {
-			name: user.active_company?.name ?? '',
+			name: user.active_company?.name ?? "",
 		},
 	}
 

@@ -1,12 +1,13 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
 
 interface ShowStatusLabelProps {
 	status_label: Schema.StatusLabelsShow
 }
 
 const ShowStatusLabel = ({ status_label }: ShowStatusLabelProps) => {
-	const title = status_label.name || 'Show Status Label'
+	const title = status_label.name || "Show Status Label"
 
 	return (
 		<Page title={ title }>

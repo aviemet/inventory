@@ -1,17 +1,18 @@
-import React from 'react'
-import { Group, Title, Menu, Page, Section } from '@/components'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Group, Title, Menu, Page, Section } from "@/components"
+import { Routes } from "@/lib"
 
 interface ShowLocationProps {
 	location: Schema.LocationsShow
 }
 
 const ShowLocation = ({ location }: ShowLocationProps) => {
-	const title = location.name || 'Location'
+	const title = location.name || "Location"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Locations', href: Routes.locations() },
+			{ title: "Locations", href: Routes.locations() },
 			{ title, href: window.location.href },
 		] }>
 			<Section>

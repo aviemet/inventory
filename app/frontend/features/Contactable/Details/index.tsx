@@ -1,8 +1,9 @@
-import React from 'react'
-import Address from './Address'
-import Phone from './Phone'
-import Email from './Email'
-import Website from './Website'
+import React from "react"
+
+import Address from "./Address"
+import Email from "./Email"
+import Phone from "./Phone"
+import Website from "./Website"
 
 interface ContactDetailsProps {
 	contact: Schema.ContactsFormData

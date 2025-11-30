@@ -28,7 +28,7 @@ export {
 	TbArrowLeftSquare as ArrowRLeftSquareIcon,
 	TbCircleDot as CircleDotIcon,
 	TbSquarePlus as ReplenishIcon,
-} from 'react-icons/tb'
+} from "react-icons/tb"
 
 export {
 	MdSettingsEthernet as NetworksIcon,
@@ -45,7 +45,7 @@ export {
 	MdOutlineScreenSearchDesktop as ModelsIcon,
 	MdOutlineDelete as TrashIcon,
 	MdCalendarMonth as CalendarIcon,
-} from 'react-icons/md'
+} from "react-icons/md"
 
 
 export {
@@ -53,54 +53,54 @@ export {
 	AiOutlineMinusCircle as MinusCircleIcon,
 	AiOutlineBarcode as AssetsIcon,
 	AiOutlineDeploymentUnit as DepartmentsIcon,
-} from 'react-icons/ai'
+} from "react-icons/ai"
 
 
 export {
 	BiMap as LocationsIcon,
 	BiLinkExternal as ExternalLinkIcon,
 	BiCategoryAlt as CategoriesIcon,
-} from 'react-icons/bi'
+} from "react-icons/bi"
 
 export {
 	// IoTrashBinOutline as TrashIcon,
-} from 'react-icons/io5'
+} from "react-icons/io5"
 
 export {
 	BsCheck2Circle as CheckIcon,
 	BsFillMoonStarsFill as MoonStarsIcon,
 	BsFillSunFill as SunIcon,
 	// BsKeyboardFill as AccessoriesIcon
-} from 'react-icons/bs'
+} from "react-icons/bs"
 
 export {
 	// FaMemory as ComponentsIcon
-} from 'react-icons/fa'
+} from "react-icons/fa"
 
 export {
 	// RiFilePaperFill as ContractsIcon,
-} from 'react-icons/ri'
+} from "react-icons/ri"
 
 export {
 	RxClock as ClockIcon,
-} from 'react-icons/rx'
+} from "react-icons/rx"
 
 export {
 	// TiDeleteOutline as CrossIcon,
-} from 'react-icons/ti'
+} from "react-icons/ti"
 
 export {
 	// GrMapLocation as LocationsIcon,
 	GrFormNext as NextIcon,
 	GrFormPrevious as PreviousIcon,
-} from 'react-icons/gr'
+} from "react-icons/gr"
 
 export {
 	// HiOutlineClock as ClockIcon,
 	HiOutlineUserGroup as UserGroupIcon,
 	// HiOutlineKey as LicensesIcon,
-} from 'react-icons/hi'
+} from "react-icons/hi"
 
 export {
 	CgFileDocument as DocumentationIcon,
-} from 'react-icons/cg'
+} from "react-icons/cg"

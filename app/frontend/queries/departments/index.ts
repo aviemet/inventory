@@ -1,12 +1,14 @@
-import { Routes } from '@/lib'
-import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
-import { type ReactQueryFunction } from '..'
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+
+import { Routes } from "@/lib"
+
+import { type ReactQueryFunction } from ".."
 
 export const useGetDepartments: ReactQueryFunction<Schema.Department[]> = (options) => {
 	return useQuery({
-		queryKey: ['departments'],
-		queryFn: async () => {
+		queryKey: ["departments"],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiDepartments())
 			return res.data
 		},
@@ -16,8 +18,8 @@ export const useGetDepartments: ReactQueryFunction<Schema.Department[]> = (optio
 
 export const useGetDepartmentsAsOptions: ReactQueryFunction<Schema.DepartmentsOptions[]> = (options) => {
 	return useQuery({
-		queryKey: ['departments', 'options'],
-		queryFn: async () => {
+		queryKey: ["departments", "options"],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiDepartmentsOptions())
 			return res.data
 		},
@@ -27,8 +29,8 @@ export const useGetDepartmentsAsOptions: ReactQueryFunction<Schema.DepartmentsOp
 
 export const useGetDepartment: ReactQueryFunction<Schema.Department[], { slug: string }> = ({ slug }, options) => {
 	return useQuery({
-		queryKey: ['departments', slug],
-		queryFn: async () => {
+		queryKey: ["departments", slug],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiDepartment(slug))
 			return res.data
 		},

@@ -1,16 +1,18 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { useGetPeopleAsOptions } from '@/queries/people'
-import { isEmpty } from 'lodash'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface PeopleDropdownProps extends Omit<FormAsyncDropdown<Schema.PeopleOptions>, 'name'> {
+import { Select as FormSelect } from "@/components/Form"
+import { useGetPeopleAsOptions } from "@/queries/people"
+
+import { type FormAsyncDropdown } from ".."
+
+interface PeopleDropdownProps extends Omit<FormAsyncDropdown<Schema.PeopleOptions>, "name"> {
 	name?: string
 }
 
 const PeopleDropdown = ({
-	label = 'Person',
-	name = 'person_id',
+	label = "Person",
+	name = "person_id",
 	initialData,
 	value,
 	...props

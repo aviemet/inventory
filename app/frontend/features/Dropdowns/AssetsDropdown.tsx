@@ -1,19 +1,21 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { isEmpty } from 'lodash'
-import { useGetAssetsAsOptions } from '@/queries/assets'
-import { type FormAsyncDropdown } from '.'
+import { isEmpty } from "lodash"
+import React from "react"
+
+import { Select as FormSelect } from "@/components/Form"
+import { useGetAssetsAsOptions } from "@/queries/assets"
+
+import { type FormAsyncDropdown } from "."
 
 interface AssetsDropdownProps
 	extends
-	Omit<FormAsyncDropdown<Schema.AssetsOptions>, 'name'> {
+	Omit<FormAsyncDropdown<Schema.AssetsOptions>, "name"> {
 
 	name?: string
 }
 
 const AssetsDropdown = ({
-	label = 'Asset',
-	name = 'asset_id',
+	label = "Asset",
+	name = "asset_id",
 	initialData = [],
 	value,
 	...props

@@ -1,9 +1,11 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import LdapForm from '../Form'
-import SettingsLayout from '../../SettingsLayout'
-import axios from 'axios'
-import { Title } from '@/components'
+import axios from "axios"
+import React from "react"
+
+import { Title } from "@/components"
+import { Routes } from "@/lib"
+
+import SettingsLayout from "../../SettingsLayout"
+import LdapForm from "../Form"
 
 interface LdapSettingsProps {
 	ldap: Schema.LdapsFormData
@@ -21,7 +23,7 @@ const Ldap = ({ ldap }: LdapSettingsProps) => {
 			<Title mb={ 24 }>LDAP/Active Directory Settings</Title>
 			<LdapForm
 				to={ ldap.id ? Routes.settingsLdap({ id: ldap.id }) : Routes.settingsLdaps() }
-				method={ ldap.id ? 'put' : 'post' }
+				method={ ldap.id ? "put" : "post" }
 				ldap={ ldap }
 			/>
 		</SettingsLayout>

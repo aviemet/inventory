@@ -1,7 +1,8 @@
-import React from 'react'
-import { formatter, Routes } from '@/lib'
-import { Text } from '@mantine/core'
-import { Link } from '@/components'
+import { Text } from "@mantine/core"
+import React from "react"
+
+import { Link } from "@/components"
+import { formatter, Routes } from "@/lib"
 
 const AuditHistoryContent = ({ activity }: { activity: Schema.Activity }) => {
 	return (

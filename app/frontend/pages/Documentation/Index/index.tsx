@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import DocumentationsTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import DocumentationsTable from "../Table"
 
 interface DocumentationIndexProps {
 	documentations: Schema.DocumentationsIndex[]
@@ -18,7 +20,7 @@ const DocumentationsIndex = ({ documentations, pagination }: DocumentationIndexP
 			pagination={ pagination }
 			deleteRoute={ Routes.documentations() }
 			menuOptions={ [
-				{ label: 'New Documentation', href: Routes.newDocumentation(), icon: <NewIcon /> },
+				{ label: "New Documentation", href: Routes.newDocumentation(), icon: <NewIcon /> },
 			] }
 		>
 			<DocumentationsTable />

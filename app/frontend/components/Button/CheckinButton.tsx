@@ -1,11 +1,13 @@
-import React from 'react'
-import { Link } from '@/components'
-import { type LinkProps } from '../Link'
-import { CheckinIcon } from '@/components/Icons'
-import { Tooltip, useMantineTheme } from '@mantine/core'
-import { useContrastingTextColor } from '@/lib/hooks'
+import { Tooltip, useMantineTheme } from "@mantine/core"
+import React from "react"
 
-interface CheckinButtonProps extends Omit<LinkProps, 'children'> {
+import { Link } from "@/components"
+import { CheckinIcon } from "@/components/Icons"
+import { useContrastingTextColor } from "@/lib/hooks"
+
+import { type LinkProps } from "../Link"
+
+interface CheckinButtonProps extends Omit<LinkProps, "children"> {
 	href: string
 	label?: string
 	disabled?: boolean
@@ -22,14 +24,14 @@ const CheckinButton = ({ href, label, disabled, tooltipMessage, ...props }: Chec
 		}
 	}
 
-	const usedLabel = tooltipMessage || `Check In${label ? ` ${label}` : ''}`
+	const usedLabel = tooltipMessage || `Check In${label ? ` ${label}` : ""}`
 
 	return (
 		<Tooltip
 			withArrow
 			label={ usedLabel }
 			position="left"
-			transitionProps={ { transition: 'fade' } }
+			transitionProps={ { transition: "fade" } }
 			color={ checkinButtonColor }
 		>
 			<Link

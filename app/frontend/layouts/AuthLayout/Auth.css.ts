@@ -1,18 +1,19 @@
-import { vars } from '@/lib/theme'
-import { css } from '@linaria/core'
-import backgroundImageUrl from '@/images/robots-bw.svg'
+import { css } from "@linaria/core"
+
+import { vars } from "@/lib/theme"
+import backgroundImageUrl from "@/images/robots-bw.svg"
 
 export const page = css`
 	 // 'soft-light' 'multiply'
-	${vars.lightSelector} {
+	${ vars.lightSelector } {
 		background-blend-mode: lighten;
 	}
-	${vars.darkSelector} {
+	${ vars.darkSelector } {
 		background-blend-mode: lighten;
 		/* background-blend-mode: soft-light; */
 	}
-	background-image: ${backgroundImageUrl ? `url("${backgroundImageUrl}")` : ''};
-	background-color: ${vars.colors.primaryColors.filled};
+	background-image: ${ backgroundImageUrl ? `url("${ backgroundImageUrl }")` : "" };
+	background-color: ${ vars.colors.primaryColors.filled };
 	min-height: 100vh;
 `
 

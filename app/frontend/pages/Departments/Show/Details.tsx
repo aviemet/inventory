@@ -1,8 +1,8 @@
+import React from "react"
 
-import { Group, Title, Menu, Section } from '@/components'
-import { EditIcon } from '@/components/Icons'
-import { Routes } from '@/lib'
-import React from 'react'
+import { Group, Title, Menu, Section } from "@/components"
+import { EditIcon } from "@/components/Icons"
+import { Routes } from "@/lib"
 
 interface DetailsProps {
 	title: string

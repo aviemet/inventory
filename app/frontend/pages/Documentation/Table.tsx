@@ -1,8 +1,9 @@
-import React from 'react'
-import { Table, Link } from '@/components'
-import { EditButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Table, Link } from "@/components"
+import { EditButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
 
 const DocumentationTable = (props: TableProps) => {
 	return (

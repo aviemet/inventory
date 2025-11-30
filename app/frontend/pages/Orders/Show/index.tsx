@@ -1,24 +1,25 @@
-import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
-import { Routes } from '@/lib'
-import { EditIcon } from '@/components/Icons'
+import React from "react"
+
+import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
+import { EditIcon } from "@/components/Icons"
+import { Routes } from "@/lib"
 
 interface ShowOrderProps {
 	order: Schema.OrdersShow
 }
 
 const tabs = {
-	details: 'details',
-	history: 'history',
-	associations: 'associations',
+	details: "details",
+	history: "history",
+	associations: "associations",
 }
 
 const Show = ({ order }: ShowOrderProps) => {
-	const title = 'Order Details'
+	const title = "Order Details"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Order', href: Routes.orders() },
+			{ title: "Order", href: Routes.orders() },
 			{ title: String(order.id), href: window.location.href },
 		] }>
 			<Section>

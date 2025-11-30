@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import StatusLabelsTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import StatusLabelsTable from "../Table"
 
 interface StatusLabelsIndexProps {
 	status_labels: Schema.StatusLabelsIndex[]
@@ -19,7 +21,7 @@ const StatusLabelsIndex = ({ status_labels, pagination }: StatusLabelsIndexProps
 			pagination={ pagination }
 			deleteRoute={ Routes.statusLabels() }
 			menuOptions={ [
-				{ label: 'New Status Label', href: Routes.newStatusLabel(), icon: <NewIcon /> },
+				{ label: "New Status Label", href: Routes.newStatusLabel(), icon: <NewIcon /> },
 			] }
 		>
 			<StatusLabelsTable />

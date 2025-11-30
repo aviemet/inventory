@@ -1,7 +1,8 @@
-import React from 'react'
-import { Lazy, Page, Table } from '@/components'
-import { TableTitleSection } from '@/features'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Lazy, Page, Table } from "@/components"
+import { TableTitleSection } from "@/features"
+import { Routes } from "@/lib"
 
 type Record = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
 
@@ -18,7 +19,7 @@ const Show = ({ category, records, pagination }: ShowCategoryProps) => {
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Categories', href: Routes.categories() },
+			{ title: "Categories", href: Routes.categories() },
 			{ title: category.name, href: window.location.href },
 		] }>
 			<Table.Section>
@@ -32,7 +33,7 @@ const Show = ({ category, records, pagination }: ShowCategoryProps) => {
 					<TableTitleSection
 						title={ title }
 						menuOptions={ [
-							{ label: 'Edit Category', href: Routes.editCategory(category.slug) },
+							{ label: "Edit Category", href: Routes.editCategory(category.slug) },
 						] }
 						deleteRoute={ Routes.categories() }
 					>

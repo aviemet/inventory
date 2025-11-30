@@ -1,9 +1,11 @@
-import React from 'react'
-import { Section, Menu, Flex, Group, Title, Table, Container, Page, Paper } from '@/components'
-import { createContext } from '@/lib/hooks'
-import { Routes } from '@/lib'
-import NetworkDetailsTable from './NetworkDetailsTable'
-import { EditIcon } from '@/components/Icons'
+import React from "react"
+
+import { Section, Menu, Flex, Group, Title, Table, Container, Page, Paper } from "@/components"
+import { EditIcon } from "@/components/Icons"
+import { Routes } from "@/lib"
+import { createContext } from "@/lib/hooks"
+
+import NetworkDetailsTable from "./NetworkDetailsTable"
 
 interface ShowNetworkProps {
 	network: Schema.NetworksShow
@@ -15,11 +17,11 @@ const [useNetworkContext, NetworkContextProvider] = createContext<{ network: Sch
 export { useNetworkContext }
 
 const Show = ({ network, ips, pagination }: ShowNetworkProps) => {
-	const title = network.name || 'Show Network'
+	const title = network.name || "Show Network"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Networks', href: Routes.networks() },
+			{ title: "Networks", href: Routes.networks() },
 			{ title: network.name, href: window.location.href },
 		] }>
 			<Section>
@@ -48,7 +50,7 @@ const Show = ({ network, ips, pagination }: ShowNetworkProps) => {
 
 								<Table.Row>
 									<Table.Cell>Network Address</Table.Cell>
-									<Table.Cell>{ network.address!.split('/')[0] }</Table.Cell>
+									<Table.Cell>{ network.address!.split("/")[0] }</Table.Cell>
 								</Table.Row>
 
 								<Table.Row>
@@ -58,7 +60,7 @@ const Show = ({ network, ips, pagination }: ShowNetworkProps) => {
 
 								<Table.Row>
 									<Table.Cell>Number of Hosts</Table.Cell>
-									<Table.Cell>{ pagination.count.toLocaleString('en-US') }</Table.Cell>
+									<Table.Cell>{ pagination.count.toLocaleString("en-US") }</Table.Cell>
 								</Table.Row>
 
 							</Table.Body>

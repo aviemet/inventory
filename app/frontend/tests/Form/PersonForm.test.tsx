@@ -1,11 +1,12 @@
-import React from 'react'
-import { test, describe, it, expect, vi } from 'vitest'
-import { fireEvent, render, screen } from '@testing-library/react'
-import PersonForm from '@/pages/People/New/Form'
+import { fireEvent, render, screen } from "@testing-library/react"
+import React from "react"
+import { test, describe, it, expect, vi } from "vitest"
+
+import PersonForm from "@/pages/People/New/Form"
 
 // Tests that the form renders with all input components. tags: [happy path]
-describe('test_form_renders_with_all_input_components', () => {
-	test('that tests run', () => {
+describe("test_form_renders_with_all_input_components", () => {
+	test("that tests run", () => {
 		expect(1).toBe(1)
 	})
 	// Arrange

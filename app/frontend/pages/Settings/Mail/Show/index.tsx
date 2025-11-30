@@ -1,7 +1,9 @@
-import React from 'react'
-import SettingsLayout from '../../SettingsLayout'
-import { Box, DangerousHtml, Title, Table } from '@/components'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Box, DangerousHtml, Title, Table } from "@/components"
+import { Routes } from "@/lib"
+
+import SettingsLayout from "../../SettingsLayout"
 
 interface ShowMailSettingProps {
 	smtp: Schema.Smtp
@@ -10,8 +12,8 @@ interface ShowMailSettingProps {
 const ShowMailSetting = ({ smtp }: ShowMailSettingProps) => {
 	return (
 		<SettingsLayout breadcrumbs={ [
-			{ title: 'Settings', href: Routes.settingsGeneralIndex() },
-			{ title: 'Mail', href: Routes.settingsSmtps() },
+			{ title: "Settings", href: Routes.settingsGeneralIndex() },
+			{ title: "Mail", href: Routes.settingsSmtps() },
 			{ title: smtp.name, href: Routes.settingsSmtp(smtp.id!) },
 		] }>
 			<Title mb={ 24 }>Mail Settings: { smtp.name }</Title>

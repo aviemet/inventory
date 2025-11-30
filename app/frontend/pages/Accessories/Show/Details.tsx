@@ -1,7 +1,9 @@
-import React from 'react'
-import { Link, Title, Table, Box, Money } from '@/components'
-import { Routes } from '@/lib'
-import { ShowAccessoryProps } from '.'
+import React from "react"
+
+import { Link, Title, Table, Box, Money } from "@/components"
+import { Routes } from "@/lib"
+
+import { ShowAccessoryProps } from "."
 
 const AccessoryDetails = ({ accessory }: ShowAccessoryProps) => {
 	return (

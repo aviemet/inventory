@@ -1,5 +1,8 @@
-import React from 'react'
-import { Grid, Section } from '@/components'
+import { Fieldset } from "@mantine/core"
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid, Section } from "@/components"
 import {
 	Form,
 	TextInput,
@@ -8,23 +11,21 @@ import {
 	FormGroup,
 	PasswordInput,
 	FormConsumer,
-} from '@/components/Form'
-import { Checkbox as CheckboxInput } from '@/components/Inputs'
-import { useBooleanToggle } from '@/lib/hooks'
-import { FormPeopleDropdown, FormDepartmentsDropdown } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
-import { ContactForm } from '@/features'
-import { Fieldset } from '@mantine/core'
+} from "@/components/Form"
+import { Checkbox as CheckboxInput } from "@/components/Inputs"
+import { ContactForm } from "@/features"
+import { FormPeopleDropdown, FormDepartmentsDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
+import { useBooleanToggle } from "@/lib/hooks"
 
 type PersonFormData = {
 	person: Schema.PeopleEdit
 }
 
 const emptyUser: Schema.UsersFormData = {
-	email: '',
-	password: '',
-	password_confirmation: '',
+	email: "",
+	password: "",
+	password_confirmation: "",
 	active: true,
 }
 
@@ -37,7 +38,7 @@ export interface PersonFormProps {
 
 const PersonForm = ({
 	to,
-	method = 'post',
+	method = "post",
 	onSubmit,
 	person,
 }: PersonFormProps) => {
@@ -57,39 +58,39 @@ const PersonForm = ({
 
 	const handleEnableLogin = (form: UseFormProps<PersonFormData>) => {
 		const userData = person.user ?? emptyUser
-		form.setData('person.user', userData)
+		form.setData("person.user", userData)
 	}
 
 	const handleDisableLogin = (form: UseFormProps<PersonFormData>) => {
-		form.unsetData('person.user')
+		form.unsetData("person.user")
 	}
 
 	/**
 	 * Manage password check validation
 	 */
 	const handleFormChange = ({ getData, clearErrors }: UseFormProps<PersonFormData>) => {
-		const password = getData('person.user.')
-		const checkPassword = getData('person.user.check_password')
+		const password = getData("person.user.")
+		const checkPassword = getData("person.user.check_password")
 
 		if(password === checkPassword) {
-			clearErrors('person.user.check_password')
+			clearErrors("person.user.check_password")
 			return
 		}
 	}
 
 	const handlePasswordBlur = (password: string, { getData, setError }: UseFormProps<PersonFormData>) => {
-		const checkPassword = getData('person.user.check_password')
+		const checkPassword = getData("person.user.check_password")
 
-		if(checkPassword !== '' && password !== checkPassword) {
-			setError('person.user.check_password', 'Passwords must match')
+		if(checkPassword !== "" && password !== checkPassword) {
+			setError("person.user.check_password", "Passwords must match")
 		}
 	}
 
 	const handleCheckPasswordBlur = (checkPassword: string, { getData, setError }: UseFormProps<PersonFormData>) => {
-		const password = getData('person.user.password')
+		const password = getData("person.user.password")
 
 		if(password !== checkPassword) {
-			setError('person.user.check_password', 'Passwords must match')
+			setError("person.user.check_password", "Passwords must match")
 		}
 	}
 
@@ -97,15 +98,15 @@ const PersonForm = ({
 	 * Shape data before submitting
 	 */
 	const handleSubmit = (form: UseFormProps<PersonFormData>) => {
-		const password = form.getData('person.user.password')
-		const checkPassword = form.getData('person.user.check_password')
+		const password = form.getData("person.user.password")
+		const checkPassword = form.getData("person.user.check_password")
 
-		if((password && password !== '') && (password !== checkPassword)) {
-			form.setError('person.user.check_password', 'Passwords must match')
+		if((password && password !== "") && (password !== checkPassword)) {
+			form.setError("person.user.check_password", "Passwords must match")
 			return false
 		}
 
-		if(password === '') {
+		if(password === "") {
 			form.transform(data => {
 				if(data.person.user) {
 					delete data.person.user.password
@@ -207,7 +208,7 @@ const PersonForm = ({
 						<Grid.Col>
 							<PasswordInput
 								name="password"
-								label={ `${person.id ? 'New' : ''} Password` }
+								label={ `${person.id ? "New" : ""} Password` }
 								onBlur={ handlePasswordBlur }
 								clearErrorsOnChange={ false }
 								autoComplete="new-password"
@@ -230,7 +231,7 @@ const PersonForm = ({
 
 				<Grid.Col>
 					<Submit>
-						{ person.id ? 'Update' : 'Create' } Person
+						{ person.id ? "Update" : "Create" } Person
 					</Submit>
 				</Grid.Col>
 

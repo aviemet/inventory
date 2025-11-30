@@ -1,5 +1,6 @@
-import React from 'react'
-import FormConsumer from './FormConsumer'
+import React from "react"
+
+import FormConsumer from "./FormConsumer"
 
 const ConsoleLogger = ({ prop }) => {
 	return (

@@ -1,11 +1,13 @@
-import React from 'react'
-import { Link, Tooltip } from '@/components'
-import { type LinkProps } from '../Link'
-import { TrashIcon } from '@/components/Icons'
-import { useMantineTheme } from '@mantine/core'
-import { useContrastingTextColor } from '@/lib/hooks'
+import { useMantineTheme } from "@mantine/core"
+import React from "react"
 
-interface DeleteButtonProps extends Omit<LinkProps, 'children'> {
+import { Link, Tooltip } from "@/components"
+import { TrashIcon } from "@/components/Icons"
+import { useContrastingTextColor } from "@/lib/hooks"
+
+import { type LinkProps } from "../Link"
+
+interface DeleteButtonProps extends Omit<LinkProps, "children"> {
 	label?: string
 	tooltipMessage?: string | false | null
 }
@@ -13,14 +15,14 @@ interface DeleteButtonProps extends Omit<LinkProps, 'children'> {
 const DeleteButton = ({ href, label, tooltipMessage }: DeleteButtonProps) => {
 	const { other: { colors: { deleteButtonColor } } } = useMantineTheme()
 
-	const usedLabel = tooltipMessage || `Check In${label ? ` ${label}` : ''}`
+	const usedLabel = tooltipMessage || `Check In${label ? ` ${label}` : ""}`
 
 	return (
 		<Tooltip
 			withArrow
 			label={ usedLabel }
 			position="left"
-			transitionProps={ { transition: 'fade' } }
+			transitionProps={ { transition: "fade" } }
 			color={ deleteButtonColor }
 		>
 			<Link as="button" href={ href } aria-label={ `Delete ${label}` }>

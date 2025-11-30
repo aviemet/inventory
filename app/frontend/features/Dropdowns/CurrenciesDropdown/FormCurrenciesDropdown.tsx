@@ -1,16 +1,18 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { useGetCurrencies } from '@/queries/currencies'
-import { isEmpty } from 'lodash'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-interface FormCurrenciesDropdownProps extends Omit<FormAsyncDropdown<Schema.CurrencyOption>, 'name'> {
+import { Select as FormSelect } from "@/components/Form"
+import { useGetCurrencies } from "@/queries/currencies"
+
+import { type FormAsyncDropdown } from ".."
+
+interface FormCurrenciesDropdownProps extends Omit<FormAsyncDropdown<Schema.CurrencyOption>, "name"> {
 	name?: string
 }
 
 const FormCurrenciesDropdown = ({
-	label = 'Currency',
-	name = 'currency',
+	label = "Currency",
+	name = "currency",
 	...props
 }: FormCurrenciesDropdownProps) => {
 	const { data, refetch } = useGetCurrencies({

@@ -1,8 +1,9 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Link, Table, Money, Group } from '@/components'
-import { EditButton, CheckoutButton, CheckinButton } from '@/components/Button'
-import { type TableProps } from '@/components/Table/Table'
+import React from "react"
+
+import { Link, Table, Money, Group } from "@/components"
+import { EditButton, CheckoutButton, CheckinButton } from "@/components/Button"
+import { type TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
 
 const ItemsTable = (props: TableProps) => {
 	return (
@@ -18,7 +19,7 @@ const ItemsTable = (props: TableProps) => {
 					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
 					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
 					<Table.HeadCell sort="departments.name">Department</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 

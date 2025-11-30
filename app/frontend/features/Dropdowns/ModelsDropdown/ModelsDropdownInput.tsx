@@ -1,15 +1,17 @@
-import React, { forwardRef } from 'react'
-import { Select as InputSelect } from '@/components/Inputs'
-import { useGetModelsAsOptions } from '@/queries/models'
-import { isEmpty } from 'lodash'
-import { type AsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React, { forwardRef } from "react"
+
+import { Select as InputSelect } from "@/components/Inputs"
+import { useGetModelsAsOptions } from "@/queries/models"
+
+import { type AsyncDropdown } from ".."
 
 interface ModelsDropdownProps extends AsyncDropdown<Schema.ModelsOptions> {
 	modelCategory?: Schema.CategoryTypes | undefined
 }
 
 const ModelsDropdown = forwardRef<HTMLInputElement, ModelsDropdownProps>((
-	{ label = 'Model', name = 'model_id', modelCategory, initialData, value, ...props },
+	{ label = "Model", name = "model_id", modelCategory, initialData, value, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = useGetModelsAsOptions({ category: modelCategory }, {

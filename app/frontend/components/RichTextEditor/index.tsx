@@ -1,16 +1,17 @@
-import React, { forwardRef } from 'react'
-import { RichTextEditor, Link, type RichTextEditorProps as MantineRichTextEditorProps } from '@mantine/tiptap'
-import { useEditor } from '@tiptap/react'
-import { BubbleMenu, FloatingMenu } from '@tiptap/react/menus'
-import Highlight from '@tiptap/extension-highlight'
-import StarterKit from '@tiptap/starter-kit'
-import Underline from '@tiptap/extension-underline'
-import TextAlign from '@tiptap/extension-text-align'
-import Superscript from '@tiptap/extension-superscript'
-import SubScript from '@tiptap/extension-subscript'
-import { DEFAULT_LABELS } from './tiptapLabels'
+import { RichTextEditor, Link, type RichTextEditorProps as MantineRichTextEditorProps } from "@mantine/tiptap"
+import Highlight from "@tiptap/extension-highlight"
+import SubScript from "@tiptap/extension-subscript"
+import Superscript from "@tiptap/extension-superscript"
+import TextAlign from "@tiptap/extension-text-align"
+import Underline from "@tiptap/extension-underline"
+import { useEditor } from "@tiptap/react"
+import { BubbleMenu, FloatingMenu } from "@tiptap/react/menus"
+import StarterKit from "@tiptap/starter-kit"
+import React, { forwardRef } from "react"
 
-export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, 'children' | 'editor' | 'onChange'> {
+import { DEFAULT_LABELS } from "./tiptapLabels"
+
+export interface RichTextEditorProps extends Omit<MantineRichTextEditorProps, "children" | "editor" | "onChange"> {
 	children?: string
 	onChange?: (value: string) => void
 }
@@ -27,7 +28,7 @@ const RichTextEditorComponent = forwardRef<HTMLDivElement, RichTextEditorProps>(
 			Superscript,
 			SubScript,
 			Highlight,
-			TextAlign.configure({ types: ['heading', 'paragraph'] }),
+			TextAlign.configure({ types: ["heading", "paragraph"] }),
 		],
 		content: children,
 		onUpdate: ({ editor }) => {

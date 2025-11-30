@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import ConsumablesTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import ConsumablesTable from "../Table"
 
 interface ConsumablesIndexProps {
 	consumables: Schema.ConsumablesIndex[]
@@ -17,7 +19,7 @@ const ConsumablesIndex = ({ consumables, pagination }: ConsumablesIndexProps) =>
 			rows={ consumables }
 			pagination={ pagination }
 			menuOptions={ [
-				{ label: 'New Consumable', href: Routes.newConsumable(), icon: <NewIcon /> },
+				{ label: "New Consumable", href: Routes.newConsumable(), icon: <NewIcon /> },
 			] }
 			deleteRoute={ Routes.consumables() }
 		>

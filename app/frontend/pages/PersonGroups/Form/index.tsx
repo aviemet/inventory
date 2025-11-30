@@ -1,4 +1,4 @@
-import PermissionsForm from './PermissionsForm'
+import PermissionsForm from "./PermissionsForm"
 
 export type Permissions = {
 	index?: boolean

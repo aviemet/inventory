@@ -1,14 +1,16 @@
-import React from 'react'
-import { Section, Menu, Group, Title, Tabs, Page } from '@/components'
-import { Routes } from '@/lib'
-import { EditIcon, NewIcon } from '@/components/Icons'
-import ShowPageTableTemplate from '@/features/ShowPageTableTemplate'
-import ItemsTable from '@/pages/Items/Table'
-import AccessoriesTable from '@/pages/Accessories/Table'
-import ConsumablesTable from '@/pages/Consumables/Table'
-import ComponentsTable from '@/pages/components/Table'
-import { omit } from 'lodash'
-import { type PaginatedModel } from '@/types/PaginatedModel'
+import { omit } from "lodash"
+import React from "react"
+
+import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
+import { EditIcon, NewIcon } from "@/components/Icons"
+import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
+import { Routes } from "@/lib"
+import AccessoriesTable from "@/pages/Accessories/Table"
+import ConsumablesTable from "@/pages/Consumables/Table"
+import ItemsTable from "@/pages/Items/Table"
+import { type PaginatedModel } from "@/types/PaginatedModel"
+
+import ComponentsTable from "@/pages/components/Table"
 
 interface ShowManufacturerProps {
 	manufacturer: Schema.ManufacturersShow
@@ -19,22 +21,22 @@ interface ShowManufacturerProps {
 }
 
 const tabs = {
-	details: 'details',
-	items: 'items',
-	accessories: 'accessories',
-	components: 'components',
-	consumables: 'consumables',
+	details: "details",
+	items: "items",
+	accessories: "accessories",
+	components: "components",
+	consumables: "consumables",
 }
 
 const Show = ({ manufacturer, items, accessories, components, consumables }: ShowManufacturerProps) => {
-	const title = manufacturer.name ?? 'Manufacturer Details'
+	const title = manufacturer.name ?? "Manufacturer Details"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Manufacturers', href: Routes.manufacturers() },
+			{ title: "Manufacturers", href: Routes.manufacturers() },
 			{ title: manufacturer.name, href: window.location.href },
 		] }>
-			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ omit(tabs, 'details') }>
+			<Tabs defaultValue={ tabs.details } urlControlled={ true } dependencies={ omit(tabs, "details") }>
 				<Tabs.List>
 					<Tabs.Tab value={ tabs.details }>Details</Tabs.Tab>
 					<Tabs.Tab value={ tabs.items }>Items ({ manufacturer.counts.items })</Tabs.Tab>
@@ -43,7 +45,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 					<Tabs.Tab value={ tabs.consumables }>Consumables ({ manufacturer.counts.consumables })</Tabs.Tab>
 				</Tabs.List>
 
-				{ /*********** Details ***********/ }
+				{ /** ********* Details ***********/ }
 				<Tabs.Panel value={ tabs.details }>
 					<Section>
 						<Group justify="space-between">
@@ -61,7 +63,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** ITEMS ***********/ }
+				{ /** ********* ITEMS ***********/ }
 				<Tabs.Panel value={ tabs.items }>
 					<Section>
 						<ShowPageTableTemplate
@@ -70,7 +72,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 							rows={ items?.data }
 							pagination={ items?.pagination }
 							menuOptions={ [
-								{ label: 'New Asset', href: Routes.newItem(), icon: <NewIcon /> },
+								{ label: "New Asset", href: Routes.newItem(), icon: <NewIcon /> },
 							] }
 						>
 							<ItemsTable wrapper={ false } />
@@ -78,7 +80,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** ACCESSORIES ***********/ }
+				{ /** ********* ACCESSORIES ***********/ }
 				<Tabs.Panel value={ tabs.accessories }>
 					<Section>
 						<ShowPageTableTemplate
@@ -87,7 +89,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 							rows={ accessories?.data }
 							pagination={ accessories?.pagination }
 							menuOptions={ [
-								{ label: 'New Accessory', href: Routes.newAccessory(), icon: <NewIcon /> },
+								{ label: "New Accessory", href: Routes.newAccessory(), icon: <NewIcon /> },
 							] }
 						>
 							<AccessoriesTable wrapper={ false } />
@@ -95,7 +97,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** CONSUMABLES ***********/ }
+				{ /** ********* CONSUMABLES ***********/ }
 				<Tabs.Panel value={ tabs.consumables }>
 					<Section>
 						<ShowPageTableTemplate
@@ -104,7 +106,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 							rows={ consumables?.data }
 							pagination={ consumables?.pagination }
 							menuOptions={ [
-								{ label: 'New Consumable', href: Routes.newConsumable(), icon: <NewIcon /> },
+								{ label: "New Consumable", href: Routes.newConsumable(), icon: <NewIcon /> },
 							] }
 						>
 							<ConsumablesTable wrapper={ false } />
@@ -112,7 +114,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 					</Section>
 				</Tabs.Panel>
 
-				{ /*********** COMPONENTS ***********/ }
+				{ /** ********* COMPONENTS ***********/ }
 				<Tabs.Panel value={ tabs.components }>
 					<Section>
 						<ShowPageTableTemplate
@@ -121,7 +123,7 @@ const Show = ({ manufacturer, items, accessories, components, consumables }: Sho
 							rows={ components?.data }
 							pagination={ components?.pagination }
 							menuOptions={ [
-								{ label: 'New Component', href: Routes.newComponent(), icon: <NewIcon /> },
+								{ label: "New Component", href: Routes.newComponent(), icon: <NewIcon /> },
 							] }
 						>
 							<ComponentsTable wrapper={ false } />

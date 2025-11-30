@@ -1,18 +1,20 @@
-import React from 'react'
-import { Select as FormSelect } from '@/components/Form'
-import { Routes } from '@/lib'
-import LocationsForm from '@/pages/Locations/Form'
-import { useGetLocationsAsOptions } from '@/queries/locations'
-import { isEmpty } from 'lodash'
-import { type FormAsyncDropdown } from '..'
+import { isEmpty } from "lodash"
+import React from "react"
 
-export interface LocationsDropdownProps extends Omit<FormAsyncDropdown<Schema.LocationsOptions>, 'name'> {
+import { Select as FormSelect } from "@/components/Form"
+import { Routes } from "@/lib"
+import LocationsForm from "@/pages/Locations/Form"
+import { useGetLocationsAsOptions } from "@/queries/locations"
+
+import { type FormAsyncDropdown } from ".."
+
+export interface LocationsDropdownProps extends Omit<FormAsyncDropdown<Schema.LocationsOptions>, "name"> {
 	name?: string
 }
 
 const LocationsDropdown = ({
-	label = 'Location',
-	name = 'location_id',
+	label = "Location",
+	name = "location_id",
 	filter,
 	initialData,
 	value,

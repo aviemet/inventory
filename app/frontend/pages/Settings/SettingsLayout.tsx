@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Paper, Page, Box, Section, Tabs } from '@/components'
-import { router } from '@inertiajs/react'
-import { px, useMantineTheme } from '@mantine/core'
-import { useViewportSize, useLocation } from '@/lib/hooks'
-import { type Breadcrumb } from '@/components/Breadcrumbs'
+import { router } from "@inertiajs/react"
+import { px, useMantineTheme } from "@mantine/core"
+import React, { useEffect, useState } from "react"
+
+import { Paper, Page, Box, Section, Tabs } from "@/components"
+import { type Breadcrumb } from "@/components/Breadcrumbs"
+import { useViewportSize, useLocation } from "@/lib/hooks"
 
 interface SettingsLayoutProps {
 	children: React.ReactNode
@@ -17,21 +18,21 @@ type Tab = {
 }
 
 const tabs: Tab[] = [
-	{ name: 'general', label: 'General' },
-	{ name: 'appearance', label: 'Appearance' },
-	{ name: 'mail', label: 'Mail' },
-	{ name: 'notifications', label: 'Notifications' },
+	{ name: "general", label: "General" },
+	{ name: "appearance", label: "Appearance" },
+	{ name: "mail", label: "Mail" },
+	{ name: "notifications", label: "Notifications" },
 	// { name: 'integrations', label: 'Integrations' },
-	{ name: 'asset_tags', label: 'Asset Tags' },
+	{ name: "asset_tags", label: "Asset Tags" },
 	// { name: 'barcodes', label: 'Barcodes' },
-	{ name: 'ldap', label: 'LDAP' },
-	{ name: 'tickets', label: 'Tickets' },
-	{ name: 'backups', label: 'Backups' },
-	{ name: 'logs', label: 'Logs' },
+	{ name: "ldap", label: "LDAP" },
+	{ name: "tickets", label: "Tickets" },
+	{ name: "backups", label: "Backups" },
+	{ name: "logs", label: "Logs" },
 ]
 
 const SettingsLayout = ({ children, breadcrumbs }: SettingsLayoutProps) => {
-	const title = 'Settings'
+	const title = "Settings"
 	const { width } = useViewportSize()
 	const theme = useMantineTheme()
 	const [mobileFormat, setMobileFormat] = useState(window.innerWidth < Number(px(theme.breakpoints.sm)))
@@ -44,14 +45,14 @@ const SettingsLayout = ({ children, breadcrumbs }: SettingsLayoutProps) => {
 	}, [width])
 
 	const handleTabChange = (value: string | null) => {
-		router.get(`/settings/${value ?? 'general'}`, {}, { preserveState: true })
+		router.get(`/settings/${value ?? "general"}`, {}, { preserveState: true })
 	}
 
 	return (
 		<Page title={ title } breadcrumbs={ breadcrumbs }>
 			<Section fullHeight>
 				<Tabs
-					orientation={ mobileFormat ? 'horizontal' : 'vertical' }
+					orientation={ mobileFormat ? "horizontal" : "vertical" }
 					variant="pills"
 					defaultValue={ paths[1] }
 					onChange={ handleTabChange }
@@ -59,12 +60,12 @@ const SettingsLayout = ({ children, breadcrumbs }: SettingsLayoutProps) => {
 						minHeight: `calc(100vh - ${theme.other.header.height}px - ${theme.other.footer.height}px - 60px)`,
 					}) }
 				>
-					<Paper withBorder p='xs' shadow="sm">
+					<Paper withBorder p="xs" shadow="sm">
 						<Tabs.List
 							style={ mobileFormat
 								? {
-									flexWrap: 'nowrap',
-									overflow: 'auto',
+									flexWrap: "nowrap",
+									overflow: "auto",
 								}
 								: {} }
 						>
@@ -77,8 +78,8 @@ const SettingsLayout = ({ children, breadcrumbs }: SettingsLayoutProps) => {
 					</Paper>
 
 					{ tabs.map(tab => (
-						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs" style={ { position: 'relative' } }>
-							<Box p='lg' style={ { height: '100%' } }>
+						<Tabs.Panel key={ tab.name } value={ tab.name } pl="xs" style={ { position: "relative" } }>
+							<Box p="lg" style={ { height: "100%" } }>
 								{ children }
 							</Box>
 						</Tabs.Panel>

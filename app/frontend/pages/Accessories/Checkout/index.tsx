@@ -1,8 +1,9 @@
-import React from 'react'
-import { Box, Title, Page, Section, Table } from '@/components'
-import { Routes } from '@/lib'
-import { DateTimeInput, Form, NumberInput, Submit, Textarea } from '@/components/Form'
-import { AssignToableDropdown, AssignmentLocationDropdown } from '@/features'
+import React from "react"
+
+import { Box, Title, Page, Section, Table } from "@/components"
+import { DateTimeInput, Form, NumberInput, Submit, Textarea } from "@/components/Form"
+import { AssignToableDropdown, AssignmentLocationDropdown } from "@/features"
+import { Routes } from "@/lib"
 
 export type AccessoryCheckoutFormData = {
 	assignment: Schema.AssignmentsFormData
@@ -17,13 +18,13 @@ interface CheckoutItemProps {
 }
 
 const Checkout = ({ assignment, accessory, ...models }: CheckoutItemProps) => {
-	const title = 'Checkout Accessory'
+	const title = "Checkout Accessory"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Accessories', href: Routes.accessories() },
+			{ title: "Accessories", href: Routes.accessories() },
 			{ title: accessory.name!, href: Routes.accessory(accessory) },
-			{ title: 'Check Out', href: window.location.href },
+			{ title: "Check Out", href: window.location.href },
 		] }>
 
 			<Section>
@@ -53,7 +54,7 @@ const Checkout = ({ assignment, accessory, ...models }: CheckoutItemProps) => {
 						assignment: {
 							...assignment,
 							assignable_id: accessory.id,
-							assignable_type: 'Accessory',
+							assignable_type: "Accessory",
 							qty: 1,
 						},
 					} }
@@ -63,7 +64,7 @@ const Checkout = ({ assignment, accessory, ...models }: CheckoutItemProps) => {
 
 					<AssignToableDropdown
 						{ ...models }
-						options={ ['Person', 'Item', 'Location'] }
+						options={ ["Person", "Item", "Location"] }
 					/>
 
 					<AssignmentLocationDropdown />

@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import ManufacturersTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import ManufacturersTable from "../Table"
 
 interface ManufacturersIndexProps {
 	manufacturers: Schema.ManufacturersIndex[]
@@ -18,7 +20,7 @@ const ManufacturersIndex = ({ manufacturers, pagination }: ManufacturersIndexPro
 			pagination={ pagination }
 			deleteRoute={ Routes.manufacturers() }
 			menuOptions={ [
-				{ label: 'New Manufacturer', href: Routes.newManufacturer(), icon: <NewIcon /> },
+				{ label: "New Manufacturer", href: Routes.newManufacturer(), icon: <NewIcon /> },
 			] }
 		>
 			<ManufacturersTable />

@@ -1,7 +1,7 @@
-import React from 'react'
-import { Box, type BoxProps, type ElementProps } from '@mantine/core'
+import { Box, type BoxProps, type ElementProps } from "@mantine/core"
+import React from "react"
 
-interface TileContentProps extends BoxProps, ElementProps<'div', keyof BoxProps> {}
+interface TileContentProps extends BoxProps, ElementProps<"div", keyof BoxProps> {}
 
 const Content = ({ children, ...props }: TileContentProps) => {
 	return (

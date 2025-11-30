@@ -1,15 +1,17 @@
-import { Routes } from '@/lib'
-import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
-import { type ReactQueryFunction } from '..'
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+
+import { Routes } from "@/lib"
+
+import { type ReactQueryFunction } from ".."
 
 export const useGetCategories: ReactQueryFunction<
 	Schema.Category[],
 	{ categoryType: Schema.CategoryTypes }
 > = ({ categoryType }, options) => {
 	return useQuery({
-		queryKey: ['categories', categoryType],
-		queryFn: async () => {
+		queryKey: ["categories", categoryType],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiCategories({ slug: categoryType }))
 			return res.data
 		},
@@ -22,8 +24,8 @@ export const useGetCategoriesAsOptions: ReactQueryFunction<
 	{ categoryType?: Schema.CategoryTypes }
 > = ({ categoryType }, options) => {
 	return useQuery({
-		queryKey: ['categories', 'options', categoryType],
-		queryFn: async () => {
+		queryKey: ["categories", "options", categoryType],
+		queryFn: async() => {
 			const res = categoryType ?
 				await axios.get(Routes.apiCategoryOptions(categoryType))
 				:
@@ -39,8 +41,8 @@ export const useGetCategory: ReactQueryFunction<
 	{ slug: string }
 > = ({ slug }, options) => {
 	return useQuery({
-		queryKey: ['categories', slug],
-		queryFn: async () => {
+		queryKey: ["categories", slug],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiCategory(slug))
 			return res.data
 		},

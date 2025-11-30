@@ -1,8 +1,9 @@
-import React from 'react'
-import { Routes, formatter } from '@/lib'
-import { Group, Link, Money, Table } from '@/components'
-import { CheckoutButton, EditButton } from '@/components/Button'
-import { TableProps } from '@/components/Table/Table'
+import React from "react"
+
+import { Group, Link, Money, Table } from "@/components"
+import { CheckoutButton, EditButton } from "@/components/Button"
+import { TableProps } from "@/components/Table/Table"
+import { Routes, formatter } from "@/lib"
 
 const LicensesTable = (props: TableProps) => {
 	return (
@@ -22,7 +23,7 @@ const LicensesTable = (props: TableProps) => {
 					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
 					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
 					<Table.HeadCell sort="manufacturers.name">Manufacturer</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: 'right', paddingRight: '1rem' } }>Actions</Table.HeadCell>
+					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
 				</Table.Row>
 			</Table.Head>
 
@@ -80,7 +81,7 @@ const LicensesTable = (props: TableProps) => {
 								{ license.qty_available && <CheckoutButton
 									href={ Routes.checkoutLicense(license) }
 									disabled={ license.qty_available < 1 }
-									tooltipMessage={ license.qty_available < 1 && 'There are none to checkout' }
+									tooltipMessage={ license.qty_available < 1 && "There are none to checkout" }
 									label={ license.name }
 								/> }
 								<EditButton href={ Routes.editLicense(license) } />

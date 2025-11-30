@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import AccessoriesTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import AccessoriesTable from "../Table"
 
 interface AccessoriesIndexProps {
 	accessories: Schema.AccessoriesIndex[]
@@ -18,7 +20,7 @@ const AccessoriesIndex = ({ accessories, pagination }: AccessoriesIndexProps) =>
 			pagination={ pagination }
 			deleteRoute={ Routes.accessories() }
 			menuOptions={ [
-				{ label: 'Create New Accessory', href: Routes.newAccessory(), icon: <NewIcon /> },
+				{ label: "Create New Accessory", href: Routes.newAccessory(), icon: <NewIcon /> },
 			] }
 		>
 			<AccessoriesTable />

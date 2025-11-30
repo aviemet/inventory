@@ -1,20 +1,22 @@
-import React from 'react'
-import { Badge, Box, Title, Link, Page, Paper, Section, Text } from '@/components'
-import TicketMessage from './TicketMessage'
-import DangerousHtml from '@/components/DangerousHtml'
-import { Form, RichText, Submit } from '@/components/Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Badge, Box, Title, Link, Page, Paper, Section, Text } from "@/components"
+import DangerousHtml from "@/components/DangerousHtml"
+import { Form, RichText, Submit } from "@/components/Form"
+import { Routes } from "@/lib"
+
+import TicketMessage from "./TicketMessage"
 
 interface ShowTicketProps {
 	ticket: Schema.TicketsShow
 }
 
 const ShowTicket = ({ ticket }: ShowTicketProps) => {
-	const title = ticket.subject || 'Show Ticket'
+	const title = ticket.subject || "Show Ticket"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Support Tickets', href: Routes.tickets() },
+			{ title: "Support Tickets", href: Routes.tickets() },
 			{ title, href: window.location.href },
 		] }>
 			<Section>
@@ -47,7 +49,7 @@ const ShowTicket = ({ ticket }: ShowTicketProps) => {
 				<Box mt="md">
 					<Form
 						model="ticket_message"
-						data={ { ticket_message: { body: '' } } }
+						data={ { ticket_message: { body: "" } } }
 						to={ Routes.ticketMessages(ticket.id) }
 						remember={ false }
 					>

@@ -1,9 +1,11 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Page, Table } from '@/components'
-import { TableTitleSection } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import CategoriesTable from '../Table'
+import React from "react"
+
+import { Page, Table } from "@/components"
+import { NewIcon } from "@/components/Icons"
+import { TableTitleSection } from "@/features"
+import { Routes } from "@/lib"
+
+import CategoriesTable from "../Table"
 
 interface CategoriesIndexProps {
 	categories: Schema.CategoriesIndex[]
@@ -11,11 +13,11 @@ interface CategoriesIndexProps {
 }
 
 const CategoriesIndex = ({ categories, pagination }: CategoriesIndexProps) => {
-	const title = 'Categories'
+	const title = "Categories"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Categories', href: Routes.categories() },
+			{ title: "Categories", href: Routes.categories() },
 		] }>
 			<Table.Section>
 				<Table.TableProvider
@@ -28,7 +30,7 @@ const CategoriesIndex = ({ categories, pagination }: CategoriesIndexProps) => {
 					<TableTitleSection title={ title }
 						deleteRoute={ Routes.categories() }
 						menuOptions={ [
-							{ label: 'New Category', href: Routes.newCategory(), icon: <NewIcon /> },
+							{ label: "New Category", href: Routes.newCategory(), icon: <NewIcon /> },
 						] }>
 						<Table.SearchInput />
 					</TableTitleSection>

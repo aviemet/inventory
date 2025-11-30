@@ -1,8 +1,9 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Submit } from '@/components/Form'
-import { ContactForm } from '@/features/Contactable'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Submit } from "@/components/Form"
+import { ContactForm } from "@/features/Contactable"
 
 type VendorFormData = {
 	vendor: Schema.VendorsFormData
@@ -16,8 +17,8 @@ export interface VendorFormProps {
 }
 
 const emptyVendor: Schema.VendorsFormData = {
-	name: '',
-	url: '',
+	name: "",
+	url: "",
 	contact: {
 		primary_address_id: NaN,
 		primary_email_id: NaN,
@@ -29,7 +30,7 @@ const emptyVendor: Schema.VendorsFormData = {
 	},
 }
 
-const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: VendorFormProps) => {
+const VendorForm = ({ to, method = "post", onSubmit, vendor = emptyVendor }: VendorFormProps) => {
 	return (
 		<Form
 			model="vendor"
@@ -53,7 +54,7 @@ const VendorForm = ({ to, method = 'post', onSubmit, vendor = emptyVendor }: Ven
 
 				<Grid.Col>
 					<Submit>
-						{ vendor.id ? 'Update' : 'Create' } Vendor
+						{ vendor.id ? "Update" : "Create" } Vendor
 					</Submit>
 				</Grid.Col>
 			</Grid>

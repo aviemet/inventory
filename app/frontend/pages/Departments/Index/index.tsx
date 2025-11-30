@@ -1,8 +1,10 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { IndexPageTemplate } from '@/features'
-import { NewIcon } from '@/components/Icons'
-import DepartmentsTable from '../Table'
+import React from "react"
+
+import { NewIcon } from "@/components/Icons"
+import { IndexPageTemplate } from "@/features"
+import { Routes } from "@/lib"
+
+import DepartmentsTable from "../Table"
 
 interface DepartmentsIndexProps {
 	departments: Schema.DepartmentsIndex[]
@@ -18,7 +20,7 @@ const DepartmentsIndex = ({ departments, pagination }: DepartmentsIndexProps) =>
 			pagination={ pagination }
 			deleteRoute={ Routes.departments() }
 			menuOptions={ [
-				{ label: 'New Department', href: Routes.newDepartment(), icon: <NewIcon /> },
+				{ label: "New Department", href: Routes.newDepartment(), icon: <NewIcon /> },
 			] }
 		>
 			<DepartmentsTable />

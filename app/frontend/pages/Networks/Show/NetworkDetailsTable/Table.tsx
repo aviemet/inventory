@@ -1,10 +1,12 @@
-import React, { useMemo } from 'react'
-import { Table } from '@/components'
-import EditableLink from './EditableLink'
-import IPAddress from '@/lib/IPAddress'
-import { useNetworkContext } from '..'
-import cx from 'clsx'
-import * as classes from './NetworkDetailsTable.css'
+import cx from "clsx"
+import React, { useMemo } from "react"
+
+import { Table } from "@/components"
+import IPAddress from "@/lib/IPAddress"
+
+import { useNetworkContext } from ".."
+import EditableLink from "./EditableLink"
+import * as classes from "./NetworkDetailsTable.css"
 
 interface NetworkDetailsTableProps {
 	hosts: string[]
@@ -12,7 +14,7 @@ interface NetworkDetailsTableProps {
 }
 
 const NetworkDetailsTable = ({ hosts, ips }: NetworkDetailsTableProps) => {
-	const { network } =  useNetworkContext()
+	const { network } = useNetworkContext()
 
 	const dhcpStart = useMemo(() => {
 		if(!network.dhcp_start) return

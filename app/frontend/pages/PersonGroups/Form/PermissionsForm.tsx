@@ -1,14 +1,17 @@
-import React, { useCallback, useState } from 'react'
-import { Grid, Table } from '@/components'
-import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from '@/components/Form'
-import { Routes } from '@/lib'
-import { createContext, usePageProps } from '@/lib/hooks'
-import SwitchRow from './SwitchRow'
-import tableRows from './tableRows'
-import ColumnToggle from './ColumnToggle'
-import { emptyGroup } from './formData'
-import { FormData } from '.'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import React, { useCallback, useState } from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid, Table } from "@/components"
+import { Form, TextInput, Submit, FormGroup, Switch, Textarea } from "@/components/Form"
+import { Routes } from "@/lib"
+import { createContext, usePageProps } from "@/lib/hooks"
+
+import ColumnToggle from "./ColumnToggle"
+import { emptyGroup } from "./formData"
+import SwitchRow from "./SwitchRow"
+import tableRows from "./tableRows"
+
+import { FormData } from "."
 
 const [usePermissionsForm, PermissionsFormContext] = createContext<{
 	isCompanyAdmin: boolean
@@ -23,7 +26,7 @@ export interface GroupFormProps {
 	person_group?: Schema.PersonGroupsFormData
 }
 
-const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }: GroupFormProps) => {
+const GroupForm = ({ to, method = "post", onSubmit, person_group = emptyGroup }: GroupFormProps) => {
 	const { auth: { user } } = usePageProps()
 
 	const formData = { person_group: person_group ? person_group : emptyGroup } as FormData
@@ -36,13 +39,13 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 	}, [tableRows])
 
 	const handleSubmit = (form: UseFormProps<FormData>) => {
-		if(form.getData('person_group.permissions.company.admin')) {
+		if(form.getData("person_group.permissions.company.admin")) {
 			form.transform(data => {
 				const clonedData = structuredClone(data)
 				const keys = Object.keys(clonedData.person_group.permissions)
 
 				keys.forEach((key) => {
-					if(key !== 'company') {
+					if(key !== "company") {
 						clonedData.person_group.permissions[key] = {}
 					}
 				})
@@ -63,7 +66,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 				onSubmit={ handleSubmit }
 				railsAttributes={ false }
 				remember={ false }
-				filter={ ['id', 'slug'] }
+				filter={ ["id", "slug"] }
 			>
 				<Grid>
 					<Grid.Col>
@@ -125,7 +128,7 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 
 					<Grid.Col>
 						<Submit cancelRoute={ Routes.personGroups() }>
-							{ person_group?.id ? 'Update' : 'Create' } Group
+							{ person_group?.id ? "Update" : "Create" } Group
 						</Submit>
 					</Grid.Col>
 

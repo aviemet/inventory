@@ -1,20 +1,22 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import UserForm from '../Form'
+import React from "react"
 
-interface UpdateUserProps{
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import UserForm from "../Form"
+
+interface UpdateUserProps {
 	user: Schema.UsersEdit
 }
 
 const EditUser = ({ user }: UpdateUserProps) => {
-	const title = 'Edit User'
+	const title = "Edit User"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Users', href: Routes.tickets() },
+			{ title: "Users", href: Routes.tickets() },
 			{ title: user.email, href: Routes.user(user) },
-			{ title: 'Edit User', href: window.location.href },
+			{ title: "Edit User", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

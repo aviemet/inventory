@@ -1,25 +1,26 @@
-import { Button, createTheme, DEFAULT_THEME, mergeMantineTheme } from '@mantine/core'
-import { themeToVars } from '@mantine/vanilla-extract'
-import breakpoints from './breakpoints.mjs'
+import { Button, createTheme, DEFAULT_THEME, mergeMantineTheme } from "@mantine/core"
+import { themeToVars } from "@mantine/vanilla-extract"
 
-export const defaultColor = 'violet'
+import breakpoints from "./breakpoints.mjs"
+
+export const defaultColor = "violet"
 
 export const themeObject = {
 	breakpoints,
 	// black: '#111111',
 	// white: '#FCFCFC',
-	fontFamily: 'Roboto, sans-serif',
-	fontFamilyMonospace: 'Monaco, Courier, monospace',
-	defaultRadius: 'sm',
+	fontFamily: "Roboto, sans-serif",
+	fontFamilyMonospace: "Monaco, Courier, monospace",
+	defaultRadius: "sm",
 	headings: {
-		fontFamily: 'Greycliff CF, Roboto, sans-serif',
+		fontFamily: "Greycliff CF, Roboto, sans-serif",
 	},
 	fontSizes: {
-		xs: '0.75rem',
-		sm: '0.9rem',
-		md: '1rem',
-		lg: '1.2rem',
-		xl: '1.4rem',
+		xs: "0.75rem",
+		sm: "0.9rem",
+		md: "1rem",
+		lg: "1.2rem",
+		xl: "1.4rem",
 	},
 	// shadows: {
 	// 	xs: '0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)',
@@ -29,21 +30,21 @@ export const themeObject = {
 	// 	xl: '0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12)',
 	// },
 	spacing: {
-		xxl: 'calc(2.5rem * var(--mantine-scale))',
-		xxs: 'calc(0.5rem * var(--mantine-scale))',
+		xxl: "calc(2.5rem * var(--mantine-scale))",
+		xxs: "calc(0.5rem * var(--mantine-scale))",
 	},
 	components: {
 		Autocomplete: {
 			styles: {
 				input: {
-					height: 'unset',
+					height: "unset",
 				},
 			},
 		},
 		Button: Button.extend({
 			styles: {
 				label: {
-					overflow: 'unset',
+					overflow: "unset",
 				},
 			},
 		}),
@@ -63,7 +64,7 @@ export const themeObject = {
 		},
 		form: {
 			label: {
-				width: '12rem',
+				width: "12rem",
 			},
 		},
 		table: {
@@ -71,10 +72,10 @@ export const themeObject = {
 			sortButtonWidth: 6,
 		},
 		colors: {
-			replenishButtonColor: 'yellow',
-			checkoutButtonColor: 'pink',
-			checkinButtonColor: 'cyan',
-			deleteButtonColor: 'red',
+			replenishButtonColor: "yellow",
+			checkoutButtonColor: "pink",
+			checkinButtonColor: "cyan",
+			deleteButtonColor: "red",
 		},
 	},
 }

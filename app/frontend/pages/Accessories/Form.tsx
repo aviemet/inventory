@@ -1,5 +1,7 @@
-import React from 'react'
-import { Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	TextInput,
@@ -8,10 +10,9 @@ import {
 	Submit,
 	FormGroup,
 	CurrencyInput,
-} from '@/components/Form'
-import { FormModelsDropdown, FormVendorsDropdown, FormLocationsDropdown } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
+import { FormModelsDropdown, FormVendorsDropdown, FormLocationsDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 type AccessoryFormData = {
 	accessory: Schema.AccessoriesFormData
@@ -24,7 +25,7 @@ export interface AccessoryFormProps {
 	accessory: Schema.AccessoriesFormData
 }
 
-const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: AccessoryFormProps) => {
+const AccessoryForm = ({ to, method = "post", onSubmit, accessory }: AccessoryFormProps) => {
 
 	return (
 		<Form
@@ -93,7 +94,7 @@ const AccessoryForm = ({ to, method = 'post', onSubmit, accessory }: AccessoryFo
 
 				<Grid.Col>
 					<Submit>
-						{ accessory.id ? 'Update' : 'Create' } Accessory
+						{ accessory.id ? "Update" : "Create" } Accessory
 					</Submit>
 				</Grid.Col>
 			</Grid>

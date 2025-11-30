@@ -1,16 +1,18 @@
-import React from 'react'
-import { Accordion, Grid } from '@/components'
-import { FieldsFor } from '@/components/Form'
-import Address from './Address'
-import Phone from './Phone'
-import Email from './Email'
-import Website from './Website'
+import React from "react"
+
+import { Accordion, Grid } from "@/components"
+import { FieldsFor } from "@/components/Form"
+
+import Address from "./Address"
+import Email from "./Email"
+import Phone from "./Phone"
+import Website from "./Website"
 
 const ContactableForm = () => {
 	return (
 		<FieldsFor model="contact" legend="Contact Details">
 
-			<Accordion chevronPosition="left" style={ { width: '100%' } }>
+			<Accordion chevronPosition="left" style={ { width: "100%" } }>
 
 				<Accordion.Item value="phones">
 					<Accordion.Control>Phone Numbers</Accordion.Control>

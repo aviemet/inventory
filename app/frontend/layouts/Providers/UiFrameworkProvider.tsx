@@ -1,12 +1,14 @@
-import React, { useEffect, useMemo } from 'react'
-import { MantineProvider, createTheme, px, type CSSVariablesResolver } from '@mantine/core'
-import { Notifications } from '@mantine/notifications'
-import { useLayoutStore } from '@/lib/store'
-import { usePageProps } from '@/lib/hooks'
-import { DatesProvider } from '@mantine/dates'
-import { theme as themeObject, vars } from '@/lib/theme'
-import { type CSSVariables } from '@mantine/core/lib/core/MantineProvider/convert-css-variables/css-variables-object-to-string'
-import { toKebabCase } from '@/lib'
+import { MantineProvider, createTheme, px, type CSSVariablesResolver } from "@mantine/core"
+import { type CSSVariables } from "@mantine/core/lib/core/MantineProvider/convert-css-variables/css-variables-object-to-string"
+import { DatesProvider } from "@mantine/dates"
+import { Notifications } from "@mantine/notifications"
+import React, { useEffect, useMemo } from "react"
+
+import { toKebabCase } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
+import { useLayoutStore } from "@/lib/store"
+import { theme as themeObject, vars } from "@/lib/theme"
+
 
 const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	const { auth } = usePageProps()
@@ -50,7 +52,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		/* eslint-disable no-console */
-		if(process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
+		if(process.env.NODE_ENV && process.env.NODE_ENV === "development") {
 			console.log({ theme })
 			console.log({ vars })
 
@@ -67,7 +69,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 			defaultColorScheme="auto"
 			cssVariablesResolver={ cssVariablesResolver }
 		>
-			<DatesProvider settings={ { locale: 'en' } }>
+			<DatesProvider settings={ { locale: "en" } }>
 				<Notifications />
 				{ children }
 			</DatesProvider>

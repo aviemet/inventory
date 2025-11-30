@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Routes } from '@/lib'
-import { Link, Group } from '@/components'
-import { Form } from '@/components/Form'
-import { EditIcon, CrossIcon } from '@/components/Icons'
-import { ActionIcon, Box } from '@mantine/core'
-import cx from 'classnames'
-import DhcpConfirmModal from './DhcpConfirmModal'
+import { ActionIcon, Box } from "@mantine/core"
+import cx from "classnames"
+import React, { useState, useEffect, useRef } from "react"
 
-import { useNetworkContext } from '..'
-import IPAddress from '@/lib/IPAddress'
-import { FormItemsDropdown } from '@/features'
+import { Link, Group } from "@/components"
+import { Form } from "@/components/Form"
+import { EditIcon, CrossIcon } from "@/components/Icons"
+import { FormItemsDropdown } from "@/features"
+import { Routes } from "@/lib"
+import IPAddress from "@/lib/IPAddress"
+
+import { useNetworkContext } from ".."
+import DhcpConfirmModal from "./DhcpConfirmModal"
+
 
 interface EditableLinkProps {
 	item?: Schema.ItemsOptions
@@ -75,7 +77,7 @@ const EditableLink = ({ item, ip }: EditableLinkProps) => {
 								model="item"
 								data={ { item } }
 								async
-								to={ '#' /* TODO: API route for setting IP address on item */ }
+								to={ "#" /* TODO: API route for setting IP address on item */ }
 							>
 								<FormItemsDropdown
 									label={ false }
@@ -97,7 +99,7 @@ const EditableLink = ({ item, ip }: EditableLinkProps) => {
 						onClick={ handleEditButton }
 						color="gray.8"
 						variant="subtle"
-						className={ cx({ editing }, 'item-ip-assign-button') }
+						className={ cx({ editing }, "item-ip-assign-button") }
 					>
 						{ editing ? <CrossIcon size={ 18 } /> : <EditIcon /> }
 					</ActionIcon>

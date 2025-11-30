@@ -1,12 +1,14 @@
-import { Routes } from '@/lib'
-import axios from 'axios'
-import { useQuery } from '@tanstack/react-query'
-import { type ReactQueryFunction } from '..'
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+
+import { Routes } from "@/lib"
+
+import { type ReactQueryFunction } from ".."
 
 export const useGetLocations: ReactQueryFunction<Schema.Location[]> = (options) => {
 	return useQuery({
-		queryKey: ['locations'],
-		queryFn: async () => {
+		queryKey: ["locations"],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiLocations())
 			return res.data
 		},
@@ -16,8 +18,8 @@ export const useGetLocations: ReactQueryFunction<Schema.Location[]> = (options) 
 
 export const useGetLocationsAsOptions: ReactQueryFunction<Schema.LocationsOptions[]> = (options) => {
 	return useQuery({
-		queryKey: ['locations', 'options'],
-		queryFn: async () => {
+		queryKey: ["locations", "options"],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiLocationsOptions())
 			return res.data
 		},
@@ -27,8 +29,8 @@ export const useGetLocationsAsOptions: ReactQueryFunction<Schema.LocationsOption
 
 export const useGetLocation: ReactQueryFunction<Schema.Location[], { slug: string }> = ({ slug }, options) => {
 	return useQuery({
-		queryKey: ['locations', slug],
-		queryFn: async () => {
+		queryKey: ["locations", slug],
+		queryFn: async() => {
 			const res = await axios.get(Routes.apiLocation(slug))
 			return res.data
 		},

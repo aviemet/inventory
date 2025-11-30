@@ -1,8 +1,9 @@
-import { vars } from '@/lib/theme'
-import { css } from '@linaria/core'
+import { css } from "@linaria/core"
+
+import { vars } from "@/lib/theme"
 
 export const table = css`
-	max-width: ${vars.breakpoints.md};
+	max-width: ${ vars.breakpoints.md };
 `
 
 export const firstCell = css`

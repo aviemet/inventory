@@ -1,19 +1,21 @@
-import React from 'react'
-import { Section, Page, Title } from '@/components'
-import AccessoryForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Section, Page, Title } from "@/components"
+import { Routes } from "@/lib"
+
+import AccessoryForm from "../Form"
 
 interface NewAccessoryProps {
 	accessory: Schema.AccessoriesFormData
 }
 
 const NewAccessory = ({ accessory }: NewAccessoryProps) => {
-	const title = 'New Accessory'
+	const title = "New Accessory"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Accessories', href: Routes.accessories() },
-			{ title: 'New Accessory', href: window.location.href },
+			{ title: "Accessories", href: Routes.accessories() },
+			{ title: "New Accessory", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

@@ -1,8 +1,9 @@
-import React from 'react'
-import { Routes } from '@/lib'
-import { Link, Table } from '@/components'
-import { TableProps } from '@/components/Table/Table'
-import { CheckIcon, CrossIcon } from '@/components/Icons'
+import React from "react"
+
+import { Link, Table } from "@/components"
+import { CheckIcon, CrossIcon } from "@/components/Icons"
+import { TableProps } from "@/components/Table/Table"
+import { Routes } from "@/lib"
 
 const GroupMembersTable = (props: TableProps) => {
 	return (

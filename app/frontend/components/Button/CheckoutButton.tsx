@@ -1,11 +1,13 @@
-import React from 'react'
-import { Link } from '@/components'
-import { type LinkProps } from '../Link'
-import { CheckoutIcon } from '@/components/Icons'
-import { Tooltip, useMantineTheme } from '@mantine/core'
-import { useContrastingTextColor } from '@/lib/hooks'
+import { Tooltip, useMantineTheme } from "@mantine/core"
+import React from "react"
 
-interface CheckoutButtonProps extends Omit<LinkProps, 'children'> {
+import { Link } from "@/components"
+import { CheckoutIcon } from "@/components/Icons"
+import { useContrastingTextColor } from "@/lib/hooks"
+
+import { type LinkProps } from "../Link"
+
+interface CheckoutButtonProps extends Omit<LinkProps, "children"> {
 	href: string
 	label?: string
 	disabled?: boolean
@@ -15,14 +17,14 @@ interface CheckoutButtonProps extends Omit<LinkProps, 'children'> {
 const CheckoutButton = ({ href, label, disabled, tooltipMessage, ...props }: CheckoutButtonProps) => {
 	const { other: { colors: { checkoutButtonColor } } } = useMantineTheme()
 
-	const usedLabel = tooltipMessage || `Checkout${label ? ` ${label}` : ''}`
+	const usedLabel = tooltipMessage || `Checkout${label ? ` ${label}` : ""}`
 
 	return (
 		<Tooltip
 			withArrow
 			label={ usedLabel }
 			position="left"
-			transitionProps={ { transition: 'fade' } }
+			transitionProps={ { transition: "fade" } }
 			color={ checkoutButtonColor }
 		>
 			<Link

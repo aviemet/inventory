@@ -1,8 +1,9 @@
-import React from 'react'
-import { Menu } from '@/components'
-import { Avatar, UnstyledButton } from '@mantine/core'
-import { usePageProps } from '@/lib/hooks'
-import { Routes } from '@/lib'
+import { Avatar, UnstyledButton } from "@mantine/core"
+import React from "react"
+
+import { Menu } from "@/components"
+import { Routes } from "@/lib"
+import { usePageProps } from "@/lib/hooks"
 
 const AvatarMenu = () => {
 	const props = usePageProps()

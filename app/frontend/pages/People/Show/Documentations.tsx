@@ -1,6 +1,7 @@
-import React from 'react'
-import { Table } from '@/components'
-import DocumentationTable from '@/pages/Documentation/Table'
+import React from "react"
+
+import { Table } from "@/components"
+import DocumentationTable from "@/pages/Documentation/Table"
 
 interface ItemDocumentationProps {
 	item: Schema.ItemsShow
@@ -12,9 +13,9 @@ const Documentations = ({ item }: ItemDocumentationProps) => {
 			selectable
 			rows={ item?.documentations ?? [] }
 		>
-			<Table.SearchInput  />
+			<Table.SearchInput />
 
-			<DocumentationTable  />
+			<DocumentationTable />
 
 		</Table.TableProvider>
 	)

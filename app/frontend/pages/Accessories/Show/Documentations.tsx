@@ -1,7 +1,9 @@
-import React from 'react'
-import { ShowAccessoryProps } from '.'
-import { Table } from '@/components'
-import DocumentationTable from '@/pages/Documentation/Table'
+import React from "react"
+
+import { Table } from "@/components"
+import DocumentationTable from "@/pages/Documentation/Table"
+
+import { ShowAccessoryProps } from "."
 
 const Documentations = ({ accessory }: ShowAccessoryProps) => {
 	return (
@@ -9,9 +11,9 @@ const Documentations = ({ accessory }: ShowAccessoryProps) => {
 			selectable
 			rows={ accessory?.documentations ?? [] }
 		>
-			<Table.SearchInput  />
+			<Table.SearchInput />
 
-			<DocumentationTable  />
+			<DocumentationTable />
 		</Table.TableProvider>
 	)
 }

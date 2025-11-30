@@ -1,12 +1,15 @@
-import Table from '@/components/Table'
-import React from 'react'
-import { TableTitleSection } from '..'
+import React from "react"
+
+import Table from "@/components/Table"
+import { type TableRowData } from "@/components/Table/TableContext"
+
+import { TableTitleSection } from ".."
 
 interface ShowPageTableTemplate {
 	children: React.ReactNode
 	title: string
 	model: string
-	rows: Record<string, any>[]
+	rows: readonly TableRowData[]
 	pagination: Schema.Pagination
 	menuOptions?: {
 		label: string

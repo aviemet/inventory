@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Grid } from '@/components'
+import React, { useState } from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	TextInput,
@@ -10,16 +12,15 @@ import {
 	Submit,
 	FormGroup,
 	DynamicInputs,
-} from '@/components/Form'
+} from "@/components/Form"
+import { Checkbox as CheckboxInput } from "@/components/Inputs"
 import {
 	FormModelsDropdown,
 	FormVendorsDropdown,
 	FormLocationsDropdown,
 	FormDepartmentsDropdown,
-} from '@/features/Dropdowns'
-import { Checkbox as CheckboxInput } from '@/components/Inputs'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 type ItemFormData = {
 	item: Schema.ItemsFormData
@@ -32,7 +33,7 @@ export interface ItemFormProps {
 	item: Schema.ItemsFormData
 }
 
-const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
+const ItemForm = ({ method = "post", item, ...props }: ItemFormProps) => {
 	const [staticIp, setStaticIp] = useState(false)
 
 	return (
@@ -50,7 +51,7 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 
 					<Grid.Col>
 						<FormModelsDropdown
-							modelCategory='Item'
+							modelCategory="Item"
 							errorKey="item.model"
 							initialData={ coerceArray(item?.model) }
 						/>
@@ -76,8 +77,8 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 					{ staticIp &&
 						<Grid.Col>
 							<DynamicInputs model="nics" label="IP Addresses" emptyData={ {
-								mac: '',
-								nic_type: '',
+								mac: "",
+								nic_type: "",
 							} }>
 
 								<Grid.Col>
@@ -135,7 +136,7 @@ const ItemForm = ({ method = 'post', item, ...props }: ItemFormProps) => {
 
 				<Grid.Col>
 					<Submit>
-						{ item.id ? 'Update' : 'Create' } Item
+						{ item.id ? "Update" : "Create" } Item
 					</Submit>
 				</Grid.Col>
 			</Grid>

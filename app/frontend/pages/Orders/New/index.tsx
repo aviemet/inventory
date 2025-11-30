@@ -1,19 +1,21 @@
-import React from 'react'
-import { Title, Page, Section } from '@/components'
-import OrderForm from '../Form'
-import { Routes } from '@/lib'
+import React from "react"
+
+import { Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import OrderForm from "../Form"
 
 interface NewOrderProps {
 	order: Schema.OrdersFormData
 }
 
 const NewOrder = ({ order }: NewOrderProps) => {
-	const title = 'New Purchase Order'
+	const title = "New Purchase Order"
 
 	return (
 		<Page title={ title } breadcrumbs={ [
-			{ title: 'Orders', href: Routes.orders() },
-			{ title: 'New Order', href: window.location.href },
+			{ title: "Orders", href: Routes.orders() },
+			{ title: "New Order", href: window.location.href },
 		] }>
 			<Section>
 				<Title>{ title }</Title>

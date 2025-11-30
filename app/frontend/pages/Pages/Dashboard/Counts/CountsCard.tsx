@@ -1,5 +1,6 @@
-import React from 'react'
-import { Card, Group, Link } from '@/components'
+import React from "react"
+
+import { Card, Group, Link } from "@/components"
 
 interface CountCardProps {
 	children: React.ReactNode
@@ -15,12 +16,12 @@ const CountCard = ({ children, href }: CountCardProps) => {
 			style={ theme => ({
 				flexGrow: 1,
 				flexShrink: 1,
-				flexBasis: '170px',
-				transition: 'background-color ease-in-out 250ms',
+				flexBasis: "170px",
+				transition: "background-color ease-in-out 250ms",
 
-				'&&:hover': {
+				"&&:hover": {
 					// backgroundColor: theme.other.colorSchemeOption(theme.colors[theme.primaryColor][2], theme.colors[theme.primaryColor][8]),
-					textDecoration: 'none',
+					textDecoration: "none",
 				},
 
 			}) }>

@@ -1,10 +1,12 @@
-import React from 'react'
-import { useTableContext } from '@/components/Table/TableContext'
-import { Box, Title, Group, Divider } from '@mantine/core'
-import { Menu } from '@/components'
-import { TrashIcon } from '@/components/Icons'
-import { router } from '@inertiajs/react'
-import * as classes from '../IndexPageTemplate/IndexPage.css'
+import { router } from "@inertiajs/react"
+import { Box, Title, Group, Divider } from "@mantine/core"
+import React from "react"
+
+import { Menu } from "@/components"
+import { TrashIcon } from "@/components/Icons"
+import { useTableContext } from "@/components/Table/TableContext"
+
+import * as classes from "../IndexPageTemplate/IndexPage.css"
 
 export interface IndexTableTitleSectionProps {
 	children: React.ReactNode
@@ -24,7 +26,7 @@ const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: I
 		if(!deleteRoute) return
 
 		router.visit(deleteRoute, {
-			method: 'delete',
+			method: "delete",
 			data: { ids: Array.from(selected) },
 		})
 	}
@@ -50,7 +52,7 @@ const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: I
 						{ deleteRoute && selected.size > 0 && <>
 							<Divider />
 
-							<Menu.Item leftSection={ <TrashIcon size={ 14 } color='red' /> } onClick={ deleteRecords }>
+							<Menu.Item leftSection={ <TrashIcon size={ 14 } color="red" /> } onClick={ deleteRecords }>
 								Delete
 							</Menu.Item>
 						</> }

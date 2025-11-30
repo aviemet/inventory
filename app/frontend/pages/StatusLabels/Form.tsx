@@ -1,20 +1,21 @@
-import React from 'react'
-import { Grid } from '@/components'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
 import {
 	Form,
 	TextInput,
 	Textarea,
 	Submit,
-} from '@/components/Form'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+} from "@/components/Form"
 
 type StatusLabelFormData = {
 	status_label: Schema.StatusLabelsFormData
 }
 
 const emptyStatusLabel: Schema.StatusLabelsFormData = {
-	name: '',
-	description: '',
+	name: "",
+	description: "",
 	status_type: 1,
 }
 
@@ -25,7 +26,7 @@ export interface StatusLabelFormProps {
 	status_label?: Schema.StatusLabelsFormData
 }
 
-const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label = emptyStatusLabel }: StatusLabelFormProps) => {
+const StatusLabelForm = ({ to, method = "post", onSubmit, status_label = emptyStatusLabel }: StatusLabelFormProps) => {
 	return (
 		<Form
 			model="status_label"
@@ -44,7 +45,7 @@ const StatusLabelForm = ({ to, method = 'post', onSubmit, status_label = emptySt
 				</Grid.Col>
 				<Grid.Col>
 					<Submit>
-						{ status_label.id ? 'Update' : 'Create' } StatusLabel
+						{ status_label.id ? "Update" : "Create" } StatusLabel
 					</Submit>
 				</Grid.Col>
 			</Grid>

@@ -1,7 +1,9 @@
-import React from 'react'
-import { Link, Title, Table, Box, Badge, Money } from '@/components'
-import AssignmentLink from './AssignmentLink'
-import { formatter, Routes } from '@/lib'
+import React from "react"
+
+import { Link, Title, Table, Box, Badge, Money } from "@/components"
+import { formatter, Routes } from "@/lib"
+
+import AssignmentLink from "./AssignmentLink"
 
 interface PersonDetailsProps {
 	person: Schema.PeopleShow

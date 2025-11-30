@@ -1,9 +1,10 @@
-import React from 'react'
-import { Grid } from '@/components'
-import { Form, TextInput, Textarea, Submit } from '@/components/Form'
-import { FormCategoriesDropdown, FormManufacturersDropdown } from '@/features/Dropdowns'
-import { coerceArray } from '@/lib'
-import { type HTTPVerb, type UseFormProps } from 'use-inertia-form'
+import React from "react"
+import { type HTTPVerb, type UseFormProps } from "use-inertia-form"
+
+import { Grid } from "@/components"
+import { Form, TextInput, Textarea, Submit } from "@/components/Form"
+import { FormCategoriesDropdown, FormManufacturersDropdown } from "@/features/Dropdowns"
+import { coerceArray } from "@/lib"
 
 type ModelFormData = {
 	model: Schema.ModelsFormData
@@ -18,13 +19,13 @@ export interface ModelFormProps {
 }
 
 const emptyModel: Schema.ModelsFormData = {
-	name: '',
-	model_number: '',
+	name: "",
+	model_number: "",
 	manufacturer_id: NaN,
 	category_id: NaN,
 }
 
-const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, categoryName }: ModelFormProps) => {
+const ModelForm = ({ to, method = "post", onSubmit, model = emptyModel, categoryName }: ModelFormProps) => {
 	return (
 		<Form
 			model="model"
@@ -60,7 +61,7 @@ const ModelForm = ({ to, method = 'post', onSubmit, model = emptyModel, category
 
 				<Grid.Col>
 					<Submit>
-						{ model?.id ? 'Update' : 'Create' } Model
+						{ model?.id ? "Update" : "Create" } Model
 					</Submit>
 				</Grid.Col>
 

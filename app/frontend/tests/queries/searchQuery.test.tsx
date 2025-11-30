@@ -1,12 +1,13 @@
-import React from 'react'
-import { describe, expect, test, vi, beforeEach } from 'vitest'
-import { renderHook, waitFor } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useGetSearchResults } from '@/queries'
-import axios from 'axios'
-import { mockSearchResults } from '@/tests/helpers/handlers'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { renderHook, waitFor } from "@testing-library/react"
+import axios from "axios"
+import React from "react"
+import { describe, expect, test, vi, beforeEach } from "vitest"
 
-vi.mock('axios')
+import { useGetSearchResults } from "@/queries"
+import { mockSearchResults } from "@/tests/helpers/handlers"
+
+vi.mock("axios")
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -21,15 +22,15 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 	</QueryClientProvider>
 )
 
-describe('useGetSearchResults', () => {
+describe("useGetSearchResults", () => {
 	beforeEach(() => {
 		vi.clearAllMocks()
 		vi.mocked(axios.get).mockResolvedValue({ data: mockSearchResults })
 	})
 
-	test('it returns a successful response', async () => {
+	test("it returns a successful response", async() => {
 		const { result } = renderHook(
-			() => useGetSearchResults({ searchParams: 'iPhone' }),
+			() => useGetSearchResults({ searchParams: "iPhone" }),
 			{ wrapper },
 		)
 

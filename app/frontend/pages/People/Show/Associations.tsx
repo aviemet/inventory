@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react'
-import { Box, Title, Link } from '@/components'
-import pluralize from 'pluralize'
-import { polymorphicRoute } from '@/lib/index'
+import pluralize from "pluralize"
+import React, { useMemo } from "react"
+
+import { Box, Title, Link } from "@/components"
+import { polymorphicRoute } from "@/lib/index"
 
 interface PersonAssociationsProps {
 	person: Schema.PeopleShow

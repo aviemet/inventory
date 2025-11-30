@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { Button, Group } from '@/components'
-import axios from 'axios'
-import useStateMachine, { t } from '@cassiozen/usestatemachine'
-import { CheckIcon, CrossIcon } from '@/components/Icons'
-import { InfoCircle } from 'tabler-icons-react'
-import { Avatar, ButtonProps, HoverCard, Text, useMantineTheme } from '@mantine/core'
-import { type HTTPVerb } from 'use-inertia-form'
+import useStateMachine, { t } from "@cassiozen/usestatemachine"
+import { Avatar, ButtonProps, HoverCard, Text, useMantineTheme } from "@mantine/core"
+import axios from "axios"
+import React, { useState } from "react"
+import { InfoCircle } from "tabler-icons-react"
+import { type HTTPVerb } from "use-inertia-form"
+
+import { Button, Group } from "@/components"
+import { CheckIcon, CrossIcon } from "@/components/Icons"
+
 
 type StateMachineContext = {
 	icon: React.ReactNode
@@ -23,25 +25,25 @@ interface TestResponseButtonProps extends ButtonProps {
  * Generic component for testing the response from a remote endpoint
  * Displays success if the endpoint returns a successful response, error upon any errors *
  */
-const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data, ...props }: TestResponseButtonProps) => {
+const TestResponseButton = ({ children = "Test", endpoint, method = "get", data, ...props }: TestResponseButtonProps) => {
 	const theme = useMantineTheme()
 
-	const [errorMessage, setErrorMessage] = useState('')
+	const [errorMessage, setErrorMessage] = useState("")
 
 	const [requestState, setRequestState] = useStateMachine({
 		schema: {
 			context: t<StateMachineContext>,
 		},
-		initial: 'inactive',
+		initial: "inactive",
 		context: {
 			icon: <></>,
 			color: theme.primaryColor,
 		},
 		states: {
 			inactive: {
-				on: { requesting: 'requesting' },
+				on: { requesting: "requesting" },
 				effect({ context, event, setContext }) {
-					setErrorMessage('')
+					setErrorMessage("")
 					setContext(() => ({
 						icon: <></>,
 						color: theme.primaryColor,
@@ -50,11 +52,11 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 			},
 			requesting: {
 				on: {
-					success: 'success',
-					error: 'error',
+					success: "success",
+					error: "error",
 				},
 				effect({ setContext }) {
-					setErrorMessage('')
+					setErrorMessage("")
 					setContext(() => ({
 						icon: <></>,
 						color: theme.primaryColor,
@@ -62,21 +64,21 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 				},
 			},
 			error: {
-				on: { requesting: 'requesting' },
+				on: { requesting: "requesting" },
 				effect({ setContext }) {
 					setContext(() => ({
 						icon: <CrossIcon />,
-						color: 'red',
+						color: "red",
 					}))
 				},
 			},
 			success: {
-				on: { requesting: 'requesting' },
+				on: { requesting: "requesting" },
 				effect({ setContext }) {
-					setErrorMessage('')
-					setContext(() =>({
+					setErrorMessage("")
+					setContext(() => ({
 						icon:  <CheckIcon />,
-						color: 'green',
+						color: "green",
 					}))
 				},
 			},
@@ -84,7 +86,7 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 	})
 
 	const handleClick = () => {
-		setRequestState('requesting')
+		setRequestState("requesting")
 		axios.request({
 			method,
 			url: endpoint,
@@ -92,21 +94,21 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 		})
 			.then(response => {
 				if(response.data.success) {
-					setRequestState('success')
+					setRequestState("success")
 				} else {
-					setRequestState('error')
+					setRequestState("error")
 					setErrorMessage(response.data.message)
 				}
 			})
 			.catch(reason => {
-				setRequestState('error')
+				setRequestState("error")
 				setErrorMessage(reason)
 			})
 	}
 
 	return (
 		<Group>
-			{ requestState.value === 'error' &&
+			{ requestState.value === "error" &&
 				<HoverCard>
 					<HoverCard.Target>
 						<Avatar><InfoCircle /></Avatar>
@@ -121,7 +123,7 @@ const TestResponseButton = ({ children = 'Test', endpoint, method = 'get', data,
 				onClick={ handleClick }
 				leftSection={ requestState.context.icon }
 				color={ requestState.context.color }
-				loading={ requestState.value === 'requesting' }
+				loading={ requestState.value === "requesting" }
 				{ ...props }
 			>
 				{ children }

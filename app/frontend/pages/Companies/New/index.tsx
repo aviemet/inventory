@@ -1,20 +1,22 @@
-import React from 'react'
-import { Breadcrumbs, Title, Page, Section } from '@/components'
-import { Routes } from '@/lib'
-import CompanyForm from '../Form'
+import React from "react"
+
+import { Breadcrumbs, Title, Page, Section } from "@/components"
+import { Routes } from "@/lib"
+
+import CompanyForm from "../Form"
 
 interface NewCompanyProps {
 	company: Schema.CompaniesFormData
 }
 
 const NewCompany = ({ company }: NewCompanyProps) => {
-	const title = 'New Company'
+	const title = "New Company"
 
 	return (
 		<Page title={ title }>
 			<Breadcrumbs crumbs={ [
-				{ title: 'Companies', href: Routes.companies() },
-				{ title: 'New Company' },
+				{ title: "Companies", href: Routes.companies() },
+				{ title: "New Company" },
 			] } />
 
 			<Section>
