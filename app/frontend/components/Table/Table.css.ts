@@ -14,23 +14,6 @@ export const table = css`
 		table-layout: auto;
 	}
 
-	thead {
-		box-shadow: ${ vars.shadows.xs };
-		position: sticky;
-		top: 0;
-		z-index: 1;
-
-		${ vars.lightSelector } {
-			background-color: ${ vars.colors.gray[1] };
-
-			th:hover {
-				background-color: ${ vars.colors.gray[1] };
-			}
-		}
-		${ vars.darkSelector } {
-			background-color: ${ vars.colors.dark[7] };
-		}
-	}
 
 	th, td {
 		padding: ${ rem(6) };
@@ -47,41 +30,6 @@ export const table = css`
 		&.nowrap {
 			white-space: nowrap;
 		}
-	}
-
-	th {
-		&.sortable {
-			position: relative;
-			padding-right: 1rem;
-			white-space: nowrap;
-
-			a {
-				${ vars.lightSelector } {
-					color: ${ vars.colors.black };
-				}
-				${ vars.darkSelector } {
-					color: ${ vars.colors.white };
-				}
-			}
-
-
-			&:before {
-				border-top: 0;
-				top: calc(50% - (${ theme.other.table.sortButtonHeight }px + 2px));
-				border-bottom-width: ${ theme.other.table.sortButtonWidth }px;
-			}
-
-			&:after {
-				border-bottom: 0;
-				bottom: calc(50% - (${ theme.other.table.sortButtonHeight }px + 2px));
-				border-top-width: ${ theme.other.table.sortButtonWidth }px;
-			}
-
-			&.asc:before, &.desc:after {
-				border-color: ${ vars.colors.gray[7] };
-			}
-		}
-
 	}
 
 	/* On small screens, collapse tables into "cards" */
@@ -127,42 +75,4 @@ export const wrapper = css`
 	& .${ table } thead {
 		top: -10px;
 	}
-`
-
-export const section = css`
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-`
-
-export const searchWrapper = css`
-	display: flex;
-	flex: 1;
-`
-
-export const searchInput = css`
-	flex: 1;
-
-	input {
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-		border-top-left-radius: ${ vars.radius.sm };
-		border-bottom-left-radius: ${ vars.radius.sm };
-	}
-`
-
-export const columnPickerButton = css`
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-`
-
-export const pagination = css`
-	a:hover {
-		text-decoration: none;
-	}
-`
-
-export const limitSelect = css`
-	display: inline-block;
-	max-width: 60px;
 `

@@ -11,7 +11,7 @@ import { useInit, useLocation } from "@/lib/hooks"
 
 import { AdvancedSearch } from "./AdvancedSearch/AdvancedSearch"
 import { ColumnPicker } from "./ColumnPicker"
-import * as classes from "../Table.css"
+import * as classes from "./SearchInput.css"
 import { useTableContext } from "../TableContext/TableContext"
 
 interface SearchInputProps {

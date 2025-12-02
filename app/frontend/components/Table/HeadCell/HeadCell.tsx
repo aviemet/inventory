@@ -5,6 +5,7 @@ import React, { useEffect, forwardRef } from "react"
 import { Link, Flex } from "@/components"
 import { useLocation, usePageProps } from "@/lib/hooks"
 
+import * as classes from "./HeadCell.css"
 import { useTableContext } from "../TableContext/TableContext"
 
 export interface HeadCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
@@ -65,14 +66,16 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(({
 	const localParams = new URLSearchParams(params)
 	const paramsSort = localParams.get("sort")
 	const paramsDirection = localParams.get("direction")
-	const direction = paramsSort === sort && paramsDirection === "asc" ? "desc" : "asc"
+	const isActive = paramsSort === sort
+	const currentDirection = isActive ? (paramsDirection || "asc") : undefined
+	const nextDirection = isActive && paramsDirection === "asc" ? "desc" : "asc"
 	const showSortLink = sort !== undefined && (!pagination || (pagination.count > 1))
 
 	let sortLink: string | undefined
 	if(showSortLink && sort !== undefined) {
 		const sortParams = new URLSearchParams(params)
 		sortParams.set("sort", sort)
-		sortParams.set("direction", direction)
+		sortParams.set("direction", nextDirection)
 		sortLink = `${pathname}?${sortParams.toString()}`
 	}
 
@@ -81,9 +84,10 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(({
 			ref={ ref }
 			className={ clsx(
 				className,
+				classes.th,
 				{ "table-column-fit": fitContent },
 				{ "sortable": showSortLink },
-				{ [direction]: showSortLink && paramsSort === sort },
+				isActive && currentDirection,
 			) }
 			{ ...props }
 		>

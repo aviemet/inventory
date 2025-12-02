@@ -10,7 +10,7 @@ import { Checkbox } from "@/components/Inputs"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
-import * as classes from "../Table.css"
+import * as classes from "./SearchInput.css"
 import { useTableContext } from "../TableContext/TableContext"
 
 export function ColumnPicker() {

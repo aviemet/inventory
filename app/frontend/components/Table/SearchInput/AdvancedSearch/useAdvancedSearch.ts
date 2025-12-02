@@ -105,8 +105,8 @@ const useAdvancedSearch = (
 				switch(param?.type) {
 					case "date":
 						newValues.set(`${param.name}[type]`, "exact")
-						newValues.unset(`${param.name}[start]`)
-						newValues.unset(`${param.name}[end]`)
+						newValues.set(`${param.name}[start]`, "")
+						newValues.set(`${param.name}[end]`, "")
 						break
 					default:
 						if(param.default !== undefined) {
@@ -130,12 +130,23 @@ const useAdvancedSearch = (
 		if(dateParam) {
 			const rawValue = values.get(name)
 			if(name.endsWith("[start]") || name.endsWith("[end]")) {
-				value = (rawValue && rawValue !== "" ? new Date(rawValue as string) : undefined) as T
+				if(rawValue !== null && rawValue !== undefined && rawValue !== "") {
+					const dateValue = new Date(rawValue as string)
+					if(!isNaN(dateValue.getTime())) {
+						value = dateValue as T
+					} else {
+						value = null as T
+					}
+				} else {
+					value = null as T
+				}
 			} else {
-				value = values.get(name) as T
+				const rawValue = values.get(name)
+				value = (rawValue !== null && rawValue !== undefined ? rawValue : "") as T
 			}
 		} else {
-			value = values.get(name) as T
+			const rawValue = values.get(name)
+			value = (rawValue !== null && rawValue !== undefined ? rawValue : "") as T
 		}
 
 		return {

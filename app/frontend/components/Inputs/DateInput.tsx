@@ -40,18 +40,20 @@ export const DateInput = forwardRef<HTMLButtonElement, DateInputProps>((
 ) => {
 	const inputId = id || name
 
-	const [localValue, setLocalValue] = useState<DateInputValue>(value)
+	const normalizedValue = value ?? null
+	const [localValue, setLocalValue] = useState<DateInputValue>(normalizedValue)
 	const [datePickerType, setDatePickerType] = useState(type)
 
 	const handleChange = (changeValue: DateInputValue | undefined) => {
-		setLocalValue(changeValue)
+		const normalizedChangeValue = changeValue ?? null
+		setLocalValue(normalizedChangeValue)
 
-		onChange?.(changeValue)
+		onChange?.(normalizedChangeValue)
 	}
 
 	useEffect(() => {
-		setLocalValue(value)
-	}, [value])
+		setLocalValue(normalizedValue)
+	}, [normalizedValue])
 
 	// Allow a Date input's type to change
 	useEffect(() => {

@@ -8,7 +8,7 @@ import clsx from "clsx"
 import { Link } from "@/components"
 
 import { LimitSelect } from "./LimitSelect"
-import * as classes from "../Table.css"
+import * as classes from "./Pagination.css"
 import { useTableContext } from "../TableContext/TableContext"
 
 const pageLink = (page: number) => {
