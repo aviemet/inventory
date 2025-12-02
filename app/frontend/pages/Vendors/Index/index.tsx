@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import VendorsTable from "@/domains/Vendors/Table"
+import VendorsTable, { vendorsColumns } from "@/domains/Vendors/Table"
 
 interface VendorsIndexProps {
 	vendors: Schema.VendorsIndex[]
@@ -16,6 +16,7 @@ const VendorsIndex = ({ vendors, pagination }: VendorsIndexProps) => {
 			title="Vendors"
 			model="vendors"
 			rows={ vendors }
+			columns={ vendorsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.vendors() }
 			menuOptions={ [

@@ -1,25 +1,124 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Badge, Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { CheckIcon, CrossIcon } from "@/components/Icons"
 import { TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
+const columnHelper = createColumnHelper<Schema.PeopleIndex>()
+
+export const peopleColumns = [
+	columnHelper.accessor("first_name", {
+		header: "First Name",
+		enableSorting: true,
+		meta: {
+			model: "first_name",
+			hideable: false,
+		},
+	}),
+	columnHelper.accessor("last_name", {
+		header: "Last Name",
+		enableSorting: true,
+		meta: {
+			model: "last_name",
+			hideable: "last_name",
+		},
+	}),
+	columnHelper.accessor("employee_number", {
+		header: "Emp. #",
+		enableSorting: true,
+		meta: {
+			model: "employee_number",
+			hideable: "employee_number",
+		},
+	}),
+	columnHelper.accessor("job_title", {
+		header: "Title",
+		enableSorting: true,
+		meta: {
+			model: "job_title",
+			hideable: "job_title",
+		},
+	}),
+	columnHelper.accessor(row => row.manager?.name, {
+		id: "manager",
+		header: "Manager",
+		enableSorting: true,
+		meta: {
+			model: "manager.name",
+			hideable: "manager",
+		},
+	}),
+	columnHelper.accessor(row => row.department?.name, {
+		id: "department",
+		header: "Department",
+		enableSorting: true,
+		meta: {
+			model: "department.name",
+			hideable: "department",
+		},
+	}),
+	columnHelper.accessor(row => row.items?.length, {
+		id: "items",
+		header: "Items",
+		enableSorting: true,
+		meta: {
+			model: "items.count",
+			hideable: "items",
+		},
+	}),
+	columnHelper.accessor(row => row.accessories?.length, {
+		id: "accessories",
+		header: "Accessories",
+		enableSorting: true,
+		meta: {
+			model: "accessories.count",
+			hideable: "accessories",
+		},
+	}),
+	columnHelper.display({
+		id: "groups",
+		header: "Groups",
+		enableSorting: false,
+		meta: {
+			hideable: "groups",
+		},
+	}),
+	columnHelper.display({
+		id: "login_enabled",
+		header: "Login Enabled",
+		enableSorting: false,
+		meta: {
+			hideable: "login_enabled",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
+
 const PeopleTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="first_name" sort="first_name" hideable={ false }>First Name</Table.HeadCell>
-					<Table.HeadCell columnId="last_name" sort="last_name">Last Name</Table.HeadCell>
-					<Table.HeadCell columnId="employee_number" sort="employee_number">Emp. #</Table.HeadCell>
-					<Table.HeadCell columnId="job_title" sort="job_title">Title</Table.HeadCell>
-					<Table.HeadCell columnId="manager" sort="manager.name">Manager</Table.HeadCell>
-					<Table.HeadCell columnId="department" sort="department.name">Department</Table.HeadCell>
-					<Table.HeadCell columnId="items" sort="items.count">Items</Table.HeadCell>
-					<Table.HeadCell columnId="accessories" sort="accessories.count">Accessories</Table.HeadCell>
-					<Table.HeadCell columnId="groups">Groups</Table.HeadCell>
-					<Table.HeadCell columnId="login_enabled">Login Enabled</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="first_name" />
+					<Table.HeadCell columnId="last_name" />
+					<Table.HeadCell columnId="employee_number" />
+					<Table.HeadCell columnId="job_title" />
+					<Table.HeadCell columnId="manager" />
+					<Table.HeadCell columnId="department" />
+					<Table.HeadCell columnId="items" />
+					<Table.HeadCell columnId="accessories" />
+					<Table.HeadCell columnId="groups" />
+					<Table.HeadCell columnId="login_enabled" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import OrdersTable from "@/domains/Orders/Table"
+import OrdersTable, { ordersColumns } from "@/domains/Orders/Table"
 
 interface OrdersIndexProps {
 	orders: Schema.OrdersIndex[]
@@ -16,6 +16,7 @@ const OrdersIndex = ({ orders, pagination }: OrdersIndexProps) => {
 			title="Orders"
 			model="orders"
 			rows={ orders }
+			columns={ ordersColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.orders() }
 			menuOptions={ [

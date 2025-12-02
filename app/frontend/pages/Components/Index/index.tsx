@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ComponentsTable from "@/domains/Components/Table"
+import ComponentsTable, { componentsColumns } from "@/domains/Components/Table"
 
 interface ComponentsIndexProps {
 	components: Schema.Item[]
@@ -16,6 +16,7 @@ const ComponentsIndex = ({ components, pagination }: ComponentsIndexProps) => {
 			title="Components"
 			model="components"
 			rows={ components }
+			columns={ componentsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.components() }
 			menuOptions={ [

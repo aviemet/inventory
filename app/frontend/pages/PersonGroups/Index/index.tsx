@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import GroupsTable from "@/domains/PersonGroups/Table"
+import GroupsTable, { personGroupsColumns } from "@/domains/PersonGroups/Table"
 
 interface GroupIndexProps {
 	person_groups: Schema.PersonGroupsIndex[]
@@ -18,6 +18,7 @@ const GroupIndex = ({ person_groups, pagination }: GroupIndexProps) => {
 			title={ title }
 			model="person_groups"
 			rows={ person_groups }
+			columns={ personGroupsColumns }
 			pagination={ pagination }
 			search={ false }
 			deleteRoute={ Routes.personGroups() }

@@ -1,15 +1,38 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+
+const columnHelper = createColumnHelper<Schema.StatusLabelsIndex>()
+
+export const statusLabelsColumns = [
+	columnHelper.accessor("name", {
+		header: "Name",
+		enableSorting: true,
+		meta: {
+			model: "name",
+			hideable: false,
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
 
 const StatusLabelsTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="name" sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

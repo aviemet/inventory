@@ -3,7 +3,7 @@ import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from "@/c
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import AssetTable from "@/domains/Assets/Table"
+import AssetTable, { assetsColumns } from "@/domains/Assets/Table"
 
 interface AssetsIndexProps {
 	assets: Schema.AssetsIndex[]
@@ -16,6 +16,7 @@ const AssetsIndex = ({ assets, pagination }: AssetsIndexProps) => {
 			title="All Assets"
 			model="assets"
 			rows={ assets }
+			columns={ assetsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.assets() }
 			menuOptions={ [

@@ -1,16 +1,46 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+
+const columnHelper = createColumnHelper<Schema.PersonGroupsIndex>()
+
+export const personGroupsColumns = [
+	columnHelper.accessor("name", {
+		header: "Group Name",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+	columnHelper.display({
+		id: "people",
+		header: "People",
+		enableSorting: false,
+		meta: {
+			hideable: "people",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
 
 const GroupsTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="name" hideable={ false }>Group Name</Table.HeadCell>
-					<Table.HeadCell columnId="people">People</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" />
+					<Table.HeadCell columnId="people" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

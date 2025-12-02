@@ -5,7 +5,7 @@ import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
 import { type PaginatedModel } from "@/types/PaginatedModel"
 
-import ComponentsTable from "@/domains/Components/Table"
+import ComponentsTable, { componentsColumns } from "@/domains/Components/Table"
 
 interface DetailsProps {
 	department: Schema.Department
@@ -19,6 +19,7 @@ const Details = ({ department, components }: DetailsProps) => {
 				title={ `${department.name} Components` }
 				model="components"
 				rows={ components?.data }
+				columns={ componentsColumns }
 				pagination={ components?.pagination }
 				menuOptions={ [
 					{ label: "New Component", href: Routes.newComponent(), icon: <NewIcon /> },

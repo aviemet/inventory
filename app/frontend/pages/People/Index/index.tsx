@@ -3,7 +3,7 @@ import { NewIcon, SettingsIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import PeopleTable from "@/domains/People/Table"
+import PeopleTable, { peopleColumns } from "@/domains/People/Table"
 
 interface PeopleIndexProps {
 	people: Schema.PeopleIndex[]
@@ -16,6 +16,7 @@ const PeopleIndex = ({ people, pagination }: PeopleIndexProps) => {
 			title="People"
 			model="people"
 			rows={ people }
+			columns={ peopleColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.people() }
 			menuOptions={ [

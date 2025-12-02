@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import LicensesTable from "@/domains/Licenses/Table"
+import LicensesTable, { licensesColumns } from "@/domains/Licenses/Table"
 
 interface LicensesIndexProps {
 	licenses: Schema.LicensesIndex[]
@@ -16,6 +16,7 @@ const LicensesIndex = ({ licenses, pagination }: LicensesIndexProps ) => {
 			title="Licenses"
 			model="licenses"
 			rows={ licenses }
+			columns={ licensesColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.licenses() }
 			menuOptions={ [

@@ -1,4 +1,5 @@
 import React from "react"
+import { type ColumnDef } from "@tanstack/react-table"
 
 import { Page, Table } from "@/components"
 import { type Breadcrumb } from "@/components/Breadcrumbs"
@@ -9,6 +10,7 @@ import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSec
 interface IndexPageTemplateProps extends IndexTableTitleSectionProps {
 	model: string
 	rows: readonly TableRowData[]
+	columns: ColumnDef<TableRowData>[]
 	pagination: Schema.Pagination
 	search?: boolean
 	breadcrumbs?: Breadcrumb[]
@@ -20,6 +22,7 @@ const IndexPageTemplate = ({
 	title,
 	model,
 	rows,
+	columns,
 	pagination,
 	search = true,
 	breadcrumbs,
@@ -36,6 +39,7 @@ const IndexPageTemplate = ({
 					selectable
 					model={ model }
 					data={ rows }
+					columns={ columns }
 					pagination={ pagination }
 				>
 					<TableTitleSection

@@ -1,20 +1,85 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes, formatter } from "@/lib"
+
+const columnHelper = createColumnHelper<Schema.ContractsIndex>()
+
+export const contractsColumns = [
+	columnHelper.accessor("name", {
+		header: "Name",
+		enableSorting: true,
+		meta: {
+			model: "name",
+			hideable: false,
+		},
+	}),
+	columnHelper.accessor("number", {
+		header: "#",
+		enableSorting: true,
+		meta: {
+			model: "number",
+			hideable: "number",
+		},
+	}),
+	columnHelper.accessor("begins_at", {
+		header: "Start Date",
+		enableSorting: true,
+		meta: {
+			model: "begins_at",
+			hideable: "begins_at",
+		},
+	}),
+	columnHelper.accessor("ends_at", {
+		header: "End Date",
+		enableSorting: true,
+		meta: {
+			model: "ends_at",
+			hideable: "ends_at",
+		},
+	}),
+	columnHelper.accessor(row => row.vendor?.name, {
+		id: "vendor",
+		header: "Vendor",
+		enableSorting: true,
+		meta: {
+			model: "vendor.name",
+			hideable: "vendor",
+		},
+	}),
+	columnHelper.accessor(row => row.category?.name, {
+		id: "category",
+		header: "Category",
+		enableSorting: true,
+		meta: {
+			model: "category.name",
+			hideable: "category",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
 
 const ContractsTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="name" sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell columnId="number" sort="number">#</Table.HeadCell>
-					<Table.HeadCell columnId="begins_at" sort="begins_at">Start Date</Table.HeadCell>
-					<Table.HeadCell columnId="ends_at" sort="ends_at">End Date</Table.HeadCell>
-					<Table.HeadCell columnId="vendor" sort="vendor.name">Vendor</Table.HeadCell>
-					<Table.HeadCell columnId="category" sort="category.name">Category</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" />
+					<Table.HeadCell columnId="number" />
+					<Table.HeadCell columnId="begins_at" />
+					<Table.HeadCell columnId="ends_at" />
+					<Table.HeadCell columnId="vendor" />
+					<Table.HeadCell columnId="category" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

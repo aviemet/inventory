@@ -4,7 +4,7 @@ import { NewIcon } from "@/components/Icons"
 import { TableTitleSection } from "@/features"
 import { Routes } from "@/lib"
 
-import CategoriesTable from "@/domains/Categories/Table"
+import CategoriesTable, { categoriesColumns } from "@/domains/Categories/Table"
 
 interface CategoriesIndexProps {
 	categories: Schema.CategoriesIndex[]
@@ -24,6 +24,7 @@ const CategoriesIndex = ({ categories, pagination }: CategoriesIndexProps) => {
 					hideable
 					model="categories"
 					data={ categories }
+					columns={ categoriesColumns }
 					pagination={ pagination }
 				>
 					<TableTitleSection title={ title }

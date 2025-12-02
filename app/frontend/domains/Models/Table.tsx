@@ -1,19 +1,76 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+
+const columnHelper = createColumnHelper<Schema.ModelsIndex>()
+
+export const modelsColumns = [
+	columnHelper.accessor("name", {
+		header: "Name",
+		enableSorting: true,
+		meta: {
+			model: "name",
+			hideable: false,
+		},
+	}),
+	columnHelper.accessor("model_number", {
+		header: "Model #",
+		enableSorting: true,
+		meta: {
+			model: "model_number",
+			hideable: "model_number",
+		},
+	}),
+	columnHelper.accessor(row => row.category?.name, {
+		id: "category",
+		header: "Category",
+		enableSorting: true,
+		meta: {
+			model: "category.name",
+			hideable: "category",
+		},
+	}),
+	columnHelper.accessor(row => row.manufacturer?.name, {
+		id: "manufacturer",
+		header: "Manufacturer",
+		enableSorting: true,
+		meta: {
+			model: "manufacturer.name",
+			hideable: "manufacturer",
+		},
+	}),
+	columnHelper.accessor("count", {
+		header: "#",
+		enableSorting: true,
+		meta: {
+			model: "count",
+			hideable: "count",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
 
 const ModelsTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="name" sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell columnId="model_number" sort="model_number">Model #</Table.HeadCell>
-					<Table.HeadCell columnId="category" sort="category.name">Category</Table.HeadCell>
-					<Table.HeadCell columnId="manufacturer" sort="manufacturer.name">Manufacturer</Table.HeadCell>
-					<Table.HeadCell columnId="count" sort="count">#</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" />
+					<Table.HeadCell columnId="model_number" />
+					<Table.HeadCell columnId="category" />
+					<Table.HeadCell columnId="manufacturer" />
+					<Table.HeadCell columnId="count" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

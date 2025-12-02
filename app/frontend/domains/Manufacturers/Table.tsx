@@ -1,20 +1,88 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+
+const columnHelper = createColumnHelper<Schema.ManufacturersIndex>()
+
+export const manufacturersColumns = [
+	columnHelper.accessor("name", {
+		header: "Name",
+		enableSorting: true,
+		meta: {
+			model: "name",
+			hideable: false,
+		},
+	}),
+	columnHelper.display({
+		id: "models",
+		header: "Models",
+		enableSorting: true,
+		meta: {
+			model: "models.count",
+			hideable: "models",
+		},
+	}),
+	columnHelper.display({
+		id: "items",
+		header: "Items",
+		enableSorting: true,
+		meta: {
+			model: "items.count",
+			hideable: "items",
+		},
+	}),
+	columnHelper.display({
+		id: "accessories",
+		header: "Accessories",
+		enableSorting: true,
+		meta: {
+			model: "accessories.count",
+			hideable: "accessories",
+		},
+	}),
+	columnHelper.display({
+		id: "consumables",
+		header: "Consumables",
+		enableSorting: true,
+		meta: {
+			model: "consumables.count",
+			hideable: "consumables",
+		},
+	}),
+	columnHelper.display({
+		id: "components",
+		header: "Components",
+		enableSorting: true,
+		meta: {
+			model: "components.count",
+			hideable: "components",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
 
 const ManufacturersTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="name" sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell columnId="models" sort="models.count">Models</Table.HeadCell>
-					<Table.HeadCell columnId="items" sort="items.count">Items</Table.HeadCell>
-					<Table.HeadCell columnId="accessories" sort="accessories.count">Accessories</Table.HeadCell>
-					<Table.HeadCell columnId="consumables" sort="consumables.count">Consumables</Table.HeadCell>
-					<Table.HeadCell columnId="components" sort="components.count">Components</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" />
+					<Table.HeadCell columnId="models" />
+					<Table.HeadCell columnId="items" />
+					<Table.HeadCell columnId="accessories" />
+					<Table.HeadCell columnId="consumables" />
+					<Table.HeadCell columnId="components" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

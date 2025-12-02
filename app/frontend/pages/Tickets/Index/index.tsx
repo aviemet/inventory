@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import TicketsTable from "@/domains/Tickets/Table"
+import TicketsTable, { ticketsColumns } from "@/domains/Tickets/Table"
 
 interface TicketsIndexProps {
 	tickets: Schema.TicketsIndex[]
@@ -17,6 +17,7 @@ const TicketsIndex = ({ tickets, pagination }: TicketsIndexProps) => {
 			title={ title }
 			model="tickets"
 			rows={ tickets }
+			columns={ ticketsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.tickets() }
 			menuOptions={ [

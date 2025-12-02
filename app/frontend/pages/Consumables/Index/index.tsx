@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ConsumablesTable from "@/domains/Consumables/Table"
+import ConsumablesTable, { consumablesColumns } from "@/domains/Consumables/Table"
 
 interface ConsumablesIndexProps {
 	consumables: Schema.ConsumablesIndex[]
@@ -16,6 +16,7 @@ const ConsumablesIndex = ({ consumables, pagination }: ConsumablesIndexProps) =>
 			title="Consumables"
 			model="consumables"
 			rows={ consumables }
+			columns={ consumablesColumns }
 			pagination={ pagination }
 			menuOptions={ [
 				{ label: "New Consumable", href: Routes.newConsumable(), icon: <NewIcon /> },

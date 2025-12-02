@@ -1,23 +1,115 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Link, Table, Money, Group } from "@/components"
 import { EditButton, CheckoutButton, CheckinButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+
+const columnHelper = createColumnHelper<Schema.ItemsIndex>()
+
+export const itemsColumns = [
+	columnHelper.accessor("name", {
+		header: "Name",
+		enableSorting: true,
+		meta: {
+			model: "name",
+			hideable: false,
+		},
+	}),
+	columnHelper.accessor(row => row.model?.name, {
+		id: "model",
+		header: "Model",
+		enableSorting: true,
+		meta: {
+			model: "models.name",
+			hideable: "model",
+		},
+	}),
+	columnHelper.accessor("asset_tag", {
+		header: "Asset Tag",
+		enableSorting: true,
+		meta: {
+			model: "asset_tag",
+			hideable: "asset_tag",
+		},
+	}),
+	columnHelper.accessor("serial", {
+		header: "Serial",
+		enableSorting: true,
+		meta: {
+			model: "serial",
+			hideable: "serial",
+		},
+	}),
+	columnHelper.accessor(row => row.category?.name, {
+		id: "category",
+		header: "Category",
+		enableSorting: true,
+		meta: {
+			model: "categories.name",
+			hideable: "category",
+		},
+	}),
+	columnHelper.accessor(row => row.manufacturer?.name, {
+		id: "manufacturer",
+		header: "Manufacturer",
+		enableSorting: true,
+		meta: {
+			model: "manufacturers.name",
+			hideable: "manufacturer",
+		},
+	}),
+	columnHelper.accessor(row => row.vendor?.name, {
+		id: "vendor",
+		header: "Vendor",
+		enableSorting: true,
+		meta: {
+			model: "vendors.name",
+			hideable: "vendor",
+		},
+	}),
+	columnHelper.accessor("cost", {
+		header: "Cost",
+		enableSorting: true,
+		meta: {
+			model: "cost_cents",
+			hideable: "cost",
+		},
+	}),
+	columnHelper.accessor(row => row.department?.name, {
+		id: "department",
+		header: "Department",
+		enableSorting: true,
+		meta: {
+			model: "departments.name",
+			hideable: "department",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
 
 const ItemsTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="name" sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell columnId="model" sort="models.name">Model</Table.HeadCell>
-					<Table.HeadCell columnId="asset_tag" sort="asset_tag">Asset Tag</Table.HeadCell>
-					<Table.HeadCell columnId="serial" sort="serial">Serial</Table.HeadCell>
-					<Table.HeadCell columnId="category" sort="categories.name">Category</Table.HeadCell>
-					<Table.HeadCell columnId="manufacturer" sort="manufacturers.name">Manufacturer</Table.HeadCell>
-					<Table.HeadCell columnId="vendor" sort="vendors.name">Vendor</Table.HeadCell>
-					<Table.HeadCell columnId="cost" sort="cost_cents">Cost</Table.HeadCell>
-					<Table.HeadCell columnId="department" sort="departments.name">Department</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" />
+					<Table.HeadCell columnId="model" />
+					<Table.HeadCell columnId="asset_tag" />
+					<Table.HeadCell columnId="serial" />
+					<Table.HeadCell columnId="category" />
+					<Table.HeadCell columnId="manufacturer" />
+					<Table.HeadCell columnId="vendor" />
+					<Table.HeadCell columnId="cost" />
+					<Table.HeadCell columnId="department" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

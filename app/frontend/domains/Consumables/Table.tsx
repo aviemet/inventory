@@ -1,3 +1,5 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Group, Link, Money, Table } from "@/components"
 import { EditButton, CheckoutButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
@@ -5,20 +7,101 @@ import { Routes } from "@/lib"
 
 import { ReplenishButton } from "./ReplenishButton"
 
+const columnHelper = createColumnHelper<Schema.ConsumablesIndex>()
+
+export const consumablesColumns = [
+	columnHelper.accessor("name", {
+		header: "Name",
+		enableSorting: true,
+		meta: {
+			model: "name",
+			hideable: false,
+		},
+	}),
+	columnHelper.accessor(row => row.model?.name, {
+		id: "model",
+		header: "Model",
+		enableSorting: true,
+		meta: {
+			model: "models.name",
+			hideable: "model",
+		},
+	}),
+	columnHelper.accessor(row => row.category?.name, {
+		id: "category",
+		header: "Category",
+		enableSorting: true,
+		meta: {
+			model: "categories.name",
+			hideable: "category",
+		},
+	}),
+	columnHelper.accessor(row => row.manufacturer?.name, {
+		id: "manufacturer",
+		header: "Manufacturer",
+		enableSorting: true,
+		meta: {
+			model: "manufacturers.name",
+			hideable: "manufacturer",
+		},
+	}),
+	columnHelper.accessor(row => row.vendor?.name, {
+		id: "vendor",
+		header: "Vendor",
+		enableSorting: true,
+		meta: {
+			model: "vendors.name",
+			hideable: "vendor",
+		},
+	}),
+	columnHelper.accessor("cost", {
+		header: "Cost",
+		enableSorting: true,
+		meta: {
+			model: "cost_cents",
+			hideable: "cost",
+		},
+	}),
+	columnHelper.accessor("qty", {
+		header: "Qty",
+		enableSorting: true,
+		meta: {
+			model: "qty",
+			hideable: "qty",
+		},
+	}),
+	columnHelper.accessor("min_qty", {
+		header: "Min Qty",
+		enableSorting: true,
+		meta: {
+			model: "min_qty",
+			hideable: "min_qty",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
+
 const ConsumablesTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="name" sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell columnId="model" sort="models.name">Model</Table.HeadCell>
-					<Table.HeadCell columnId="category" sort="categories.name">Category</Table.HeadCell>
-					<Table.HeadCell columnId="manufacturer" sort="manufacturers.name">Manufacturer</Table.HeadCell>
-					<Table.HeadCell columnId="vendor" sort="vendors.name">Vendor</Table.HeadCell>
-					<Table.HeadCell columnId="cost" sort="cost_cents">Cost</Table.HeadCell>
-					<Table.HeadCell columnId="qty" sort="qty">Qty</Table.HeadCell>
-					<Table.HeadCell columnId="min_qty" sort="min_qty">Min Qty</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" />
+					<Table.HeadCell columnId="model" />
+					<Table.HeadCell columnId="category" />
+					<Table.HeadCell columnId="manufacturer" />
+					<Table.HeadCell columnId="vendor" />
+					<Table.HeadCell columnId="cost" />
+					<Table.HeadCell columnId="qty" />
+					<Table.HeadCell columnId="min_qty" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

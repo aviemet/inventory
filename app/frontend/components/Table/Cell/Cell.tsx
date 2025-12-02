@@ -21,7 +21,6 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(({
 	...props
 }, ref) => {
 	const context = useTableContext(false)
-	const { auth: { user: { table_preferences } } } = usePageProps()
 
 	if(!context || !columnId) {
 		return (
@@ -37,12 +36,45 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(({
 		)
 	}
 
-	const { columns, model } = context
-	const column = columns.get(columnId)
-	const hideableString = column?.hideable
-	const hiddenByUser = hideableString && model && table_preferences?.[model]?.hide?.[hideableString]
+	if(columnId === "empty") {
+		return (
+			<Td
+				ref={ ref }
+				className={ className }
+				fitContent={ fitContent }
+				nowrap={ nowrap }
+				{ ...props }
+			>
+				{ children }
+			</Td>
+		)
+	}
 
-	if(hiddenByUser) return null
+	const { table } = context
+
+	let column
+	try {
+		column = table.getColumn(columnId)
+	} catch{
+		return (
+			<Td
+				ref={ ref }
+				className={ className }
+				fitContent={ fitContent }
+				nowrap={ nowrap }
+				{ ...props }
+			>
+				{ children }
+			</Td>
+		)
+	}
+
+	if(!column || !column.getIsVisible()) {
+		return null
+	}
+
+	const header = column.columnDef.header
+	const label = typeof header === "string" ? header : column.id
 
 	return (
 		<Td
@@ -50,7 +82,7 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(({
 			className={ className }
 			fitContent={ fitContent }
 			nowrap={ nowrap }
-			data-cell={ column?.label }
+			data-cell={ label }
 			{ ...props }
 		>
 			{ children }

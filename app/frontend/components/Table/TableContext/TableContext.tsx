@@ -1,32 +1,30 @@
+import { router } from "@inertiajs/react"
 import {
 	useReactTable,
 	getCoreRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
 	type Table as TanStackTable,
+	type ColumnDef,
+	type SortingState,
+	type VisibilityState,
 } from "@tanstack/react-table"
+import axios from "axios"
 import React, {
 	useMemo,
 	useEffect,
-	useRef,
+	useState,
 } from "react"
 
-import { createContext } from "@/lib/hooks"
+
+import { Routes } from "@/lib"
+import { createContext, useLocation, usePageProps } from "@/lib/hooks"
 
 export type TableRowData = { id?: unknown } | { [key: string]: unknown }
-
-export interface ColumnDefinition {
-	id: string
-	label: string
-	hideable?: string
-	sort?: string
-}
 
 interface TableContextValue {
 	table: TanStackTable<TableRowData>
 	data: readonly TableRowData[]
-	columns: Map<string, ColumnDefinition>
-	registerColumn: (column: ColumnDefinition) => void
 	model?: string
 	pagination?: Schema.Pagination
 	selectable: boolean
@@ -66,6 +64,7 @@ export function useTableContext(contextKeyOrRequired?: string | false, required?
 interface TableProviderProps<T extends TableRowData> {
 	children: React.ReactNode
 	data: readonly T[]
+	columns: ColumnDef<T>[]
 	pagination?: Schema.Pagination
 	model?: string
 	selectable?: boolean
@@ -76,33 +75,72 @@ interface TableProviderProps<T extends TableRowData> {
 export function TableProvider<T extends TableRowData>({
 	children,
 	data,
+	columns,
 	pagination,
 	model,
 	selectable = false,
 	hideable = true,
 	contextKey,
 }: TableProviderProps<T>) {
-	const columnsRef = useRef(new Map<string, ColumnDefinition>())
-	const [columns, setColumns] = React.useState<Map<string, ColumnDefinition>>(columnsRef.current)
-	const [selected, setSelected] = React.useState<Set<string>>(new Set())
-	const [searching, setSearching] = React.useState(false)
+	const { params, pathname } = useLocation()
+	const { auth: { user } } = usePageProps()
+	const [selected, setSelected] = useState<Set<string>>(new Set())
+	const [searching, setSearching] = useState(false)
+
+	const paramsSort = params.get("sort")
+	const paramsDirection = params.get("direction")
+	const initialSorting: SortingState = useMemo(() => {
+		if(paramsSort && paramsDirection) {
+			return [{
+				id: paramsSort,
+				desc: paramsDirection === "desc",
+			}]
+		}
+		return []
+	}, [paramsSort, paramsDirection])
+
+	const initialVisibility: VisibilityState = useMemo(() => {
+		if(!model || !user?.table_preferences?.[model]?.hide || !columns) return {}
+		const hidden = user.table_preferences[model].hide
+		const visibility: VisibilityState = {}
+		columns.forEach(col => {
+			const meta = (col.meta || {}) as { model?: string }
+			const hideableKey = meta.model || col.id
+			if(hideableKey && hidden[hideableKey]) {
+				visibility[col.id!] = false
+			}
+		})
+		return visibility
+	}, [model, user, columns])
+
+	const [sorting, setSorting] = useState<SortingState>(initialSorting)
+	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(initialVisibility)
+
+	useEffect(() => {
+		if(paramsSort && paramsDirection) {
+			setSorting([{
+				id: paramsSort,
+				desc: paramsDirection === "desc",
+			}])
+		} else {
+			setSorting([])
+		}
+	}, [paramsSort, paramsDirection])
 
 	const table = useReactTable<T>({
 		data: data as T[],
-		columns: [],
+		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: pagination ? undefined : getPaginationRowModel(),
 		getSortedRowModel: pagination ? undefined : getSortedRowModel(),
 		manualPagination: !!pagination,
 		manualSorting: !!pagination,
+		enableSorting: true,
+		enableColumnResizing: false,
 		pageCount: pagination?.pages,
-		initialState: {
-			pagination: {
-				pageIndex: 0,
-				pageSize: 25,
-			},
-		},
 		state: {
+			sorting,
+			columnVisibility,
 			pagination: pagination
 				? {
 					pageIndex: pagination.current_page - 1,
@@ -112,6 +150,36 @@ export function TableProvider<T extends TableRowData>({
 					pageIndex: 0,
 					pageSize: 25,
 				},
+		},
+		onSortingChange: setSorting,
+		onColumnVisibilityChange: (updater) => {
+			setColumnVisibility(updater)
+			if(!model || !user?.id || !columns) return
+
+			const newVisibility = typeof updater === "function" ? updater(columnVisibility) : updater
+			const hidden: Record<string, boolean> = {}
+			Object.entries(newVisibility).forEach(([colId, visible]) => {
+				if(!visible) {
+					const column = columns.find(col => col.id === colId)
+					const meta = (column?.meta || {}) as { model?: string }
+					const hideableKey = meta.model || colId
+					if(hideableKey) {
+						hidden[hideableKey] = true
+					}
+				}
+			})
+
+			axios.patch(Routes.apiUpdateTablePreferences(user.id), {
+				user: {
+					table_preferences: {
+						[model]: {
+							hide: hidden,
+						},
+					},
+				},
+			}).then(() => {
+				router.reload({ only: ["auth"] })
+			})
 		},
 	})
 
@@ -124,16 +192,49 @@ export function TableProvider<T extends TableRowData>({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, pagination])
 
-	const registerColumn = React.useCallback((column: ColumnDefinition) => {
-		columnsRef.current.set(column.id, column)
-		setColumns(new Map(columnsRef.current))
-	}, [])
+	const lastSyncedSort = React.useRef<string | null>(null)
+	const isInitialMount = React.useRef(true)
+
+	useEffect(() => {
+		if(isInitialMount.current) {
+			isInitialMount.current = false
+			const currentSort = sorting[0]
+			lastSyncedSort.current = currentSort ? `${currentSort.id}:${currentSort.desc ? "desc" : "asc"}` : null
+			return
+		}
+
+		if(!pagination) return
+
+		const currentSort = sorting[0]
+		const sortKey = currentSort ? `${currentSort.id}:${currentSort.desc ? "desc" : "asc"}` : null
+
+		if(sortKey === lastSyncedSort.current) {
+			return
+		}
+
+		lastSyncedSort.current = sortKey
+
+		const url = new URL(window.location.href)
+
+		if(currentSort) {
+			url.searchParams.set("sort", currentSort.id)
+			url.searchParams.set("direction", currentSort.desc ? "desc" : "asc")
+		} else {
+			url.searchParams.delete("sort")
+			url.searchParams.delete("direction")
+		}
+
+		const currentUrl = `${pathname}${url.search}`
+		router.get(currentUrl, {}, {
+			preserveState: true,
+			preserveScroll: true,
+			replace: true,
+		})
+	}, [sorting, pagination, pathname])
 
 	const contextValue: TableContextValue = useMemo(() => ({
 		table: (table as unknown) as TanStackTable<TableRowData>,
 		data: data as readonly TableRowData[],
-		columns,
-		registerColumn,
 		model,
 		pagination,
 		selectable,
@@ -142,7 +243,7 @@ export function TableProvider<T extends TableRowData>({
 		hideable,
 		searching,
 		setSearching,
-	}), [table, data, columns, registerColumn, model, pagination, selectable, selected, hideable, searching])
+	}), [table, data, model, pagination, selectable, selected, hideable, searching])
 
 	useEffect(() => {
 		if(contextKey) {

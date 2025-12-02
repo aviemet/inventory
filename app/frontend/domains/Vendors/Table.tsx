@@ -1,21 +1,92 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+
+const columnHelper = createColumnHelper<Schema.VendorsIndex>()
+
+export const vendorsColumns = [
+	columnHelper.accessor("name", {
+		header: "Name",
+		enableSorting: true,
+		meta: {
+			model: "name",
+			hideable: false,
+		},
+	}),
+	columnHelper.accessor("url", {
+		header: "Website",
+		enableSorting: true,
+		meta: {
+			model: "url",
+			hideable: "url",
+		},
+	}),
+	columnHelper.display({
+		id: "contracts",
+		header: "Contracts",
+		enableSorting: false,
+		meta: {
+			hideable: "contracts",
+		},
+	}),
+	columnHelper.display({
+		id: "items",
+		header: "Items",
+		enableSorting: false,
+		meta: {
+			hideable: "items",
+		},
+	}),
+	columnHelper.display({
+		id: "accessories",
+		header: "Accessories",
+		enableSorting: false,
+		meta: {
+			hideable: "accessories",
+		},
+	}),
+	columnHelper.display({
+		id: "consumables",
+		header: "Consumables",
+		enableSorting: false,
+		meta: {
+			hideable: "consumables",
+		},
+	}),
+	columnHelper.display({
+		id: "components",
+		header: "Components",
+		enableSorting: false,
+		meta: {
+			hideable: "components",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
 
 const VendorsTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="name" sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell columnId="url" sort="url">Website</Table.HeadCell>
-					<Table.HeadCell columnId="contracts">Contracts</Table.HeadCell>
-					<Table.HeadCell columnId="items">Items</Table.HeadCell>
-					<Table.HeadCell columnId="accessories">Accessories</Table.HeadCell>
-					<Table.HeadCell columnId="consumables">Consumables</Table.HeadCell>
-					<Table.HeadCell columnId="components">Components</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" />
+					<Table.HeadCell columnId="url" />
+					<Table.HeadCell columnId="contracts" />
+					<Table.HeadCell columnId="items" />
+					<Table.HeadCell columnId="accessories" />
+					<Table.HeadCell columnId="consumables" />
+					<Table.HeadCell columnId="components" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

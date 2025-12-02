@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ContractsTable from "@/domains/Contracts/Table"
+import ContractsTable, { contractsColumns } from "@/domains/Contracts/Table"
 
 interface ContractsIndexProps {
 	contracts: Schema.ContractsIndex[]
@@ -16,6 +16,7 @@ const ContractsIndex = ({ contracts, pagination }: ContractsIndexProps) => {
 			title="Contracts"
 			model="contracts"
 			rows={ contracts }
+			columns={ contractsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.contracts() }
 			menuOptions={ [

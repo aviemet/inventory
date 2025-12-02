@@ -1,49 +1,30 @@
 import { Table } from "@mantine/core"
 import clsx from "clsx"
-import React, { useEffect, forwardRef } from "react"
+import React, { forwardRef } from "react"
 
-import { Link, Flex } from "@/components"
-import { useLocation, usePageProps } from "@/lib/hooks"
+import { Flex } from "@/components"
+import { usePageProps } from "@/lib/hooks"
 
 import * as classes from "./HeadCell.css"
 import { useTableContext } from "../TableContext/TableContext"
 
 export interface HeadCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
-	columnId?: string
-	children: React.ReactNode
-	sort?: string
-	hideable?: string | false
+	columnId: string
+	children?: React.ReactNode
 	fitContent?: boolean
 }
 
 export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(({
-	children,
 	columnId,
-	sort,
-	hideable,
+	children,
 	fitContent = false,
 	className,
 	...props
 }, ref) => {
 	const context = useTableContext(false)
 	const { auth: { user: { table_preferences } } } = usePageProps()
-	const { pathname, params } = useLocation()
 
-	const registerColumn = context?.registerColumn
-
-	useEffect(() => {
-		if(!registerColumn || !columnId) return
-
-		const label = typeof children === "string" ? children : String(children)
-		registerColumn({
-			id: columnId,
-			label,
-			hideable: hideable === false ? undefined : (hideable || sort),
-			sort,
-		})
-	}, [registerColumn, columnId, children, hideable, sort])
-
-	if(!context || !columnId) {
+	if(!context) {
 		return (
 			<Table.Th
 				ref={ ref }
@@ -55,28 +36,42 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(({
 		)
 	}
 
-	const { columns, model, pagination } = context
+	const { table, model, pagination } = context
 
-	const column = columns.get(columnId)
-	const hideableString = hideable === false ? undefined : (hideable || sort || column?.hideable)
-	const hiddenByUser = hideableString && model && table_preferences?.[model]?.hide?.[hideableString]
+	let column
+	try {
+		column = table.getColumn(columnId)
+	} catch{
+		return (
+			<Table.Th
+				ref={ ref }
+				className={ clsx(className, { "table-column-fit": fitContent }) }
+				{ ...props }
+			>
+				{ children }
+			</Table.Th>
+		)
+	}
+
+	if(!column) {
+		return null
+	}
+
+	const canSort = column.getCanSort()
+	const isSorted = column.getIsSorted()
+	const meta = (column.columnDef.meta || {}) as { model?: string }
+	const hideableKey = meta.model || columnId
+	const hiddenByUser = model && table_preferences?.[model]?.hide?.[hideableKey]
 
 	if(hiddenByUser) return null
 
-	const localParams = new URLSearchParams(params)
-	const paramsSort = localParams.get("sort")
-	const paramsDirection = localParams.get("direction")
-	const isActive = paramsSort === sort
-	const currentDirection = isActive ? (paramsDirection || "asc") : undefined
-	const nextDirection = isActive && paramsDirection === "asc" ? "desc" : "asc"
-	const showSortLink = sort !== undefined && (!pagination || (pagination.count > 1))
+	const showSort = canSort && (!pagination || (pagination.count > 1))
+	const sortDirection = isSorted === false ? undefined : (isSorted === "desc" ? "desc" : "asc")
+	const headerDef = column.columnDef.header
+	const headerText = typeof headerDef === "string" ? headerDef : (children || columnId)
 
-	let sortLink: string | undefined
-	if(showSortLink && sort !== undefined) {
-		const sortParams = new URLSearchParams(params)
-		sortParams.set("sort", sort)
-		sortParams.set("direction", nextDirection)
-		sortLink = `${pathname}?${sortParams.toString()}`
+	const handleSort = () => {
+		column.toggleSorting(undefined, true)
 	}
 
 	return (
@@ -86,18 +81,31 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(({
 				className,
 				classes.th,
 				{ "table-column-fit": fitContent },
-				{ "sortable": showSortLink },
-				isActive && currentDirection,
+				{ "sortable": showSort },
+				sortDirection,
 			) }
 			{ ...props }
 		>
 			<Flex align="center">
-				{ showSortLink && sortLink ?
-					<Link href={ sortLink } preserveScroll={ true }>
-						{ children }
-					</Link>
+				{ showSort ?
+					<button
+						type="button"
+						onClick={ handleSort }
+						style={ {
+							background: "none",
+							border: "none",
+							padding: 0,
+							cursor: "pointer",
+							width: "100%",
+							textAlign: "left",
+							display: "flex",
+							alignItems: "center",
+						} }
+					>
+						{ headerText }
+					</button>
 					:
-					children
+					headerText
 				}
 			</Flex>
 		</Table.Th>

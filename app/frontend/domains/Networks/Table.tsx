@@ -1,20 +1,83 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+
+const columnHelper = createColumnHelper<Schema.NetworksIndex>()
+
+export const networksColumns = [
+	columnHelper.accessor("name", {
+		header: "Name",
+		enableSorting: true,
+		meta: {
+			model: "name",
+			hideable: false,
+		},
+	}),
+	columnHelper.accessor("address", {
+		header: "Network",
+		enableSorting: true,
+		meta: {
+			model: "address",
+			hideable: "address",
+		},
+	}),
+	columnHelper.accessor("gateway", {
+		header: "Gateway",
+		enableSorting: true,
+		meta: {
+			model: "gateway",
+			hideable: "gateway",
+		},
+	}),
+	columnHelper.accessor("dhcp_start", {
+		header: "DHCP Start",
+		enableSorting: true,
+		meta: {
+			model: "dhcp_start",
+			hideable: "dhcp_start",
+		},
+	}),
+	columnHelper.accessor("dhcp_end", {
+		header: "DHCP End",
+		enableSorting: true,
+		meta: {
+			model: "dhcp_end",
+			hideable: "dhcp_end",
+		},
+	}),
+	columnHelper.accessor("vlan_id", {
+		header: "VLAN Id",
+		enableSorting: true,
+		meta: {
+			model: "vlan_id",
+			hideable: "vlan_id",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
 
 const NetworksTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="name" sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell columnId="address" sort="address">Network</Table.HeadCell>
-					<Table.HeadCell columnId="gateway" sort="gateway">Gateway</Table.HeadCell>
-					<Table.HeadCell columnId="dhcp_start" sort="dhcp_start">DHCP Start</Table.HeadCell>
-					<Table.HeadCell columnId="dhcp_end" sort="dhcp_end">DHCP End</Table.HeadCell>
-					<Table.HeadCell columnId="vlan_id" sort="vlan_id">VLAN Id</Table.HeadCell>
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
+					<Table.HeadCell columnId="name" />
+					<Table.HeadCell columnId="address" />
+					<Table.HeadCell columnId="gateway" />
+					<Table.HeadCell columnId="dhcp_start" />
+					<Table.HeadCell columnId="dhcp_end" />
+					<Table.HeadCell columnId="vlan_id" />
+					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
 				</Table.Row>
 			</Table.Head>
 

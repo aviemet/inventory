@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import NetworksTable from "@/domains/Networks/Table"
+import NetworksTable, { networksColumns } from "@/domains/Networks/Table"
 
 interface NetworksIndexProps {
 	networks: Schema.NetworksIndex[]
@@ -16,6 +16,7 @@ const NetworksIndex = ({ networks, pagination }: NetworksIndexProps) => {
 			title="Networks"
 			model="networks"
 			rows={ networks }
+			columns={ networksColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.networks() }
 			menuOptions={ [

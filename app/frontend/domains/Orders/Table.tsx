@@ -1,19 +1,75 @@
+import { createColumnHelper } from "@tanstack/react-table"
+
 import { DateTimeFormatter, Link, Money, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
+
+const columnHelper = createColumnHelper<Schema.OrdersIndex>()
+
+export const ordersColumns = [
+	columnHelper.accessor("number", {
+		header: "Order #",
+		enableSorting: true,
+		meta: {
+			model: "name",
+			hideable: false,
+		},
+	}),
+	columnHelper.accessor(row => row.vendor?.name, {
+		id: "vendor",
+		header: "Vendor",
+		enableSorting: true,
+		meta: {
+			model: "vendor.name",
+			hideable: "vendor",
+		},
+	}),
+	columnHelper.accessor("cost", {
+		header: "Total",
+		enableSorting: true,
+		meta: {
+			model: "cost",
+			hideable: "cost",
+		},
+	}),
+	columnHelper.accessor("ordered_at", {
+		header: "Purchase Date",
+		enableSorting: true,
+		meta: {
+			model: "ordered_at",
+			hideable: "ordered_at",
+		},
+	}),
+	columnHelper.accessor("delivered_at", {
+		header: "Received Date",
+		enableSorting: true,
+		meta: {
+			model: "delivered_at",
+			hideable: "delivered_at",
+		},
+	}),
+	columnHelper.display({
+		id: "actions",
+		header: "Actions",
+		enableSorting: false,
+		meta: {
+			hideable: false,
+		},
+	}),
+]
 
 const OrdersTable = (props: Omit<TableProps, "children">) => {
 	return (
 		<Table { ...props }>
 			<Table.Head>
 				<Table.Row>
-					<Table.HeadCell columnId="number" sort="name" hideable={ false }>Order #</Table.HeadCell>
-					<Table.HeadCell columnId="vendor" sort="vendor.name">Vendor</Table.HeadCell>
-					<Table.HeadCell columnId="cost" sort="cost">Total</Table.HeadCell>
-					<Table.HeadCell columnId="ordered_at" sort="ordered_at">Purchase Date</Table.HeadCell>
-					<Table.HeadCell columnId="delivered_at" sort="delivered_at">Received Date</Table.HeadCell>
-					<Table.HeadCell columnId="actions" className="text-right">Actions</Table.HeadCell>
+					<Table.HeadCell columnId="number" />
+					<Table.HeadCell columnId="vendor" />
+					<Table.HeadCell columnId="cost" />
+					<Table.HeadCell columnId="ordered_at" />
+					<Table.HeadCell columnId="delivered_at" />
+					<Table.HeadCell columnId="actions" className="text-right" />
 				</Table.Row>
 			</Table.Head>
 

@@ -3,7 +3,7 @@ import { Section } from "@/components"
 import { NewIcon } from "@/components/Icons"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
-import PeopleTable from "@/domains/People/Table"
+import PeopleTable, { peopleColumns } from "@/domains/People/Table"
 import { type PaginatedModel } from "@/types/PaginatedModel"
 
 interface DetailsProps {
@@ -18,6 +18,7 @@ const Details = ({ department, people }: DetailsProps) => {
 				title={ `${department.name} People` }
 				model="people"
 				rows={ people?.data }
+				columns={ peopleColumns }
 				pagination={ people?.pagination }
 				menuOptions={ [
 					{ label: "New Person", href: Routes.newPerson(), icon: <NewIcon /> },

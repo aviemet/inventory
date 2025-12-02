@@ -1,43 +1,38 @@
-import { router } from "@inertiajs/react"
 import { Button } from "@mantine/core"
-import axios from "axios"
 import clsx from "clsx"
 import React from "react"
 
 import { Menu } from "@/components"
 import { ColumnsIcon } from "@/components/Icons"
 import { Checkbox } from "@/components/Inputs"
-import { Routes } from "@/lib"
-import { usePageProps } from "@/lib/hooks"
 
 import * as classes from "./SearchInput.css"
 import { useTableContext } from "../TableContext/TableContext"
 
 export function ColumnPicker() {
-	const { auth: { user } } = usePageProps()
 	const context = useTableContext(false)
 
 	if(!context || !context.hideable || !context.model) return null
 
-	const { hideable, columns, model } = context
+	const { table } = context
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		axios.patch(Routes.apiUpdateTablePreferences(user.id!), {
-			user: {
-				table_preferences: {
-					[model]: {
-						hide: {
-							[e.target.name]: !e.target.checked,
-						},
-					},
-				},
-			},
-		}).then(() => {
-			router.reload({ only: ["auth"] })
-		})
+	let allColumns
+	try {
+		allColumns = table.getAllColumns()
+	} catch{
+		return null
 	}
 
-	const hideableColumns = Array.from(columns.values()).filter(col => col.hideable)
+	if(!allColumns || allColumns.length === 0) return null
+
+	const columns = allColumns.filter(col => {
+		const meta = (col.columnDef.meta || {}) as { hideable?: string | false }
+		return meta.hideable !== false && col.id !== "select"
+	})
+
+	const handleChange = (columnId: string, checked: boolean) => {
+		table.getColumn(columnId)?.toggleVisibility(checked)
+	}
 
 	return (
 		<Menu closeOnItemClick={ false } position="bottom-end">
@@ -48,17 +43,20 @@ export function ColumnPicker() {
 			</Menu.Target>
 
 			<Menu.Dropdown>
-				{ hideableColumns.map((column) => (
-					<Menu.Item key={ column.id } component="div" style={ { cursor: "default", padding: 0 } }>
-						<Checkbox
-							name={ column.hideable! }
-							label={ column.label }
-							onChange={ handleChange }
-							checked={ !user.table_preferences?.[model]?.hide?.[column.hideable!] }
-							p="xs"
-						/>
-					</Menu.Item>
-				)) }
+				{ columns.map((column) => {
+					const header = column.columnDef.header
+					const label = typeof header === "string" ? header : column.id
+					return (
+						<Menu.Item key={ column.id } component="div" style={ { cursor: "default", padding: 0 } }>
+							<Checkbox
+								label={ label }
+								onChange={ (e) => handleChange(column.id!, e.target.checked) }
+								checked={ column.getIsVisible() }
+								p="xs"
+							/>
+						</Menu.Item>
+					)
+				}) }
 			</Menu.Dropdown>
 		</Menu>
 	)

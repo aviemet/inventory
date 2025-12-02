@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import CompaniesTable from "@/domains/Companies/Table"
+import CompaniesTable, { companiesColumns } from "@/domains/Companies/Table"
 
 interface CompaniesIndexProps {
 	companies: Schema.CompaniesIndex[]
@@ -16,6 +16,7 @@ const CompaniesIndex = ({ companies, pagination }: CompaniesIndexProps) => {
 			title="Companies"
 			model="companies"
 			rows={ companies }
+			columns={ companiesColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.companies() }
 			menuOptions={ [

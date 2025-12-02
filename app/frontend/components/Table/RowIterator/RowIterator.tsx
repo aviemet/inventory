@@ -6,19 +6,23 @@ import { useTableContext, type TableRowData } from "../TableContext/TableContext
 
 interface RowIteratorProps<T extends TableRowData> {
 	render: (row: T) => React.ReactElement
-	data?: readonly T[]
 	emptyMessage?: string
 	colSpan?: number
 }
 
-export function RowIterator<T extends TableRowData>({ render, data: dataProp, emptyMessage = "Nothing to display", colSpan: colSpanProp }: RowIteratorProps<T>) {
+export function RowIterator<T extends TableRowData>({ render, emptyMessage = "Nothing to display", colSpan: colSpanProp }: RowIteratorProps<T>) {
 	const context = useTableContext(false)
 
-	const data = dataProp ?? (context ? (context.pagination ? context.data : context.table.getRowModel().rows.map(row => row.original)) : [])
+	if(!context) {
+		return null
+	}
 
-	if(!data || data.length === 0) {
-		const contextColSpan = context ? (context.columns.size + (context.selectable ? 1 : 0)) : undefined
-		const colSpan = colSpanProp ?? contextColSpan ?? 1
+	const { table, pagination } = context
+	const rows = table.getRowModel().rows
+
+	if(rows.length === 0) {
+		const columnCount = table.getAllColumns().filter(col => col.getIsVisible()).length
+		const colSpan = colSpanProp ?? (columnCount + (context.selectable ? 1 : 0))
 		return (
 			<Row>
 				<Cell columnId="empty" colSpan={ colSpan } align="center">
@@ -30,10 +34,10 @@ export function RowIterator<T extends TableRowData>({ render, data: dataProp, em
 
 	return (
 		<>
-			{ data.map((row, index) => {
-				const rowElement = render(row as T)
-				const rowId = (row as { id?: unknown }).id
-				const key: React.Key = rowId !== null ? String(rowId) : index
+			{ rows.map((row) => {
+				const rowElement = render(row.original as T)
+				const rowId = (row.original as { id?: unknown }).id
+				const key: React.Key = rowId !== null ? String(rowId) : row.id
 				return React.cloneElement(rowElement, { key } as Partial<React.HTMLAttributes<HTMLElement>>)
 			}) }
 		</>

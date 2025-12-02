@@ -1,12 +1,13 @@
 import { Page, Table } from "@/components"
-import AccessoriesTable from "@/domains/Accessories/Table"
-import ComponentsTable from "@/domains/Components/Table"
-import ConsumablesTable from "@/domains/Consumables/Table"
-import ContractsTable from "@/domains/Contracts/Table"
-import ItemsTable from "@/domains/Items/Table"
-import LicensesTable from "@/domains/Licenses/Table"
+import AccessoriesTable, { accessoriesColumns } from "@/domains/Accessories/Table"
+import ComponentsTable, { componentsColumns } from "@/domains/Components/Table"
+import ConsumablesTable, { consumablesColumns } from "@/domains/Consumables/Table"
+import ContractsTable, { contractsColumns } from "@/domains/Contracts/Table"
+import ItemsTable, { itemsColumns } from "@/domains/Items/Table"
+import LicensesTable, { licensesColumns } from "@/domains/Licenses/Table"
 import { TableTitleSection } from "@/features"
 import { Routes } from "@/lib"
+import { type ColumnDef } from "@tanstack/react-table"
 
 type CategoryRecord = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
 
@@ -27,10 +28,20 @@ const tableComponentMap: { [key: string]: React.ComponentType<TableComponentProp
 	Licenses: LicensesTable,
 } as const
 
+const columnsMap: { [key: string]: ColumnDef<CategoryRecord>[] } = {
+	Accessories: accessoriesColumns,
+	Components: componentsColumns,
+	Consumables: consumablesColumns,
+	Contracts: contractsColumns,
+	Items: itemsColumns,
+	Licenses: licensesColumns,
+} as const
+
 const Show = ({ category, records, pagination }: ShowCategoryProps) => {
 	const title = `Category: ${category.categorizable_type} - ${category.name}`
 
 	const TableComponent = tableComponentMap[category.plural]
+	const columns = columnsMap[category.plural] || []
 
 	return (
 		<Page title={ title } breadcrumbs={ [
@@ -43,6 +54,7 @@ const Show = ({ category, records, pagination }: ShowCategoryProps) => {
 					hideable
 					model={ category.plural.toLocaleLowerCase() }
 					data={ records }
+					columns={ columns }
 					pagination={ pagination }
 				>
 					<TableTitleSection

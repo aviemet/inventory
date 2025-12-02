@@ -1,4 +1,5 @@
 import React from "react"
+import { type ColumnDef } from "@tanstack/react-table"
 
 import { type Icon } from "@/components/Icons"
 import Table from "@/components/Table"
@@ -11,6 +12,7 @@ interface ShowPageTableTemplate {
 	title: string
 	model: string
 	rows: readonly TableRowData[]
+	columns: ColumnDef<TableRowData>[]
 	pagination: Schema.Pagination
 	menuOptions?: {
 		label: string
@@ -19,13 +21,14 @@ interface ShowPageTableTemplate {
 	}[]
 }
 
-const ShowPageTableTemplate = ({ children, model, rows, pagination, title, menuOptions }: ShowPageTableTemplate) => {
+const ShowPageTableTemplate = ({ children, model, rows, columns, pagination, title, menuOptions }: ShowPageTableTemplate) => {
 	return (
 		<Table.TableProvider
 			selectable
 			hideable
 			model={ model }
 			data={ rows }
+			columns={ columns }
 			pagination={ pagination }
 		>
 			<TableTitleSection title={ title } menuOptions={ menuOptions }>

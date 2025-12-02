@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import ItemsTable from "@/domains/Items/Table"
+import ItemsTable, { itemsColumns } from "@/domains/Items/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -16,6 +16,7 @@ const ItemsIndex = ({ items, pagination }: ItemsIndexProps) => {
 			title="Hardware Assets"
 			model="items"
 			rows={ items }
+			columns={ itemsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.items() }
 			menuOptions={ [

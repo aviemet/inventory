@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import DepartmentsTable from "@/domains/Departments/Table"
+import DepartmentsTable, { departmentsColumns } from "@/domains/Departments/Table"
 
 interface DepartmentsIndexProps {
 	departments: Schema.DepartmentsIndex[]
@@ -16,6 +16,7 @@ const DepartmentsIndex = ({ departments, pagination }: DepartmentsIndexProps) =>
 			title="Departments"
 			model="departments"
 			rows={ departments }
+			columns={ departmentsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.departments() }
 			menuOptions={ [

@@ -3,7 +3,7 @@ import { NewIcon } from "@/components/Icons"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import AccessoriesTable from "@/domains/Accessories/Table"
+import AccessoriesTable, { accessoriesColumns } from "@/domains/Accessories/Table"
 
 interface AccessoriesIndexProps {
 	accessories: Schema.AccessoriesIndex[]
@@ -16,6 +16,7 @@ const AccessoriesIndex = ({ accessories, pagination }: AccessoriesIndexProps) =>
 			title="Accessories"
 			model="accessories"
 			rows={ accessories }
+			columns={ accessoriesColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.accessories() }
 			menuOptions={ [
