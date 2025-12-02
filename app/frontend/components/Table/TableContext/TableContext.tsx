@@ -5,16 +5,15 @@ import {
 	getSortedRowModel,
 	type Table as TanStackTable,
 } from "@tanstack/react-table"
-import React, { createContext,
-	useContext,
+import React, {
 	useMemo,
 	useEffect,
 	useRef,
 } from "react"
 
-export type TableRowData = { id?: unknown } | { [key: string]: unknown }
+import { createContext } from "@/lib/hooks"
 
-export { useTableSectionContext, TableSectionContextProvider } from "./TableContext/tableSectionContext"
+export type TableRowData = { id?: unknown } | { [key: string]: unknown }
 
 export interface ColumnDefinition {
 	id: string
@@ -38,25 +37,27 @@ interface TableContextValue {
 	setSearching: (searching: boolean) => void
 }
 
-const TableContext = createContext<TableContextValue | null>(null)
+const [useTableContextBase, TableContextProvider] = createContext<TableContextValue>()
 
 const tableContexts = new Map<string, TableContextValue>()
 
-export function useTableContext(contextKey?: string, required: boolean = true): TableContextValue | null {
-	const context = useContext(TableContext)
+export function useTableContext(): TableContextValue
+export function useTableContext(contextKey: string): TableContextValue
+export function useTableContext(required: false): TableContextValue | null
+export function useTableContext(contextKey: string, required: false): TableContextValue | null
+export function useTableContext(contextKeyOrRequired?: string | false, required?: boolean): TableContextValue | null {
+	const isOptional = contextKeyOrRequired === false || required === false
+	const context = useTableContextBase(!isOptional)
 
-	if(contextKey) {
-		const externalContext = tableContexts.get(contextKey)
+	if(typeof contextKeyOrRequired === "string") {
+		const externalContext = tableContexts.get(contextKeyOrRequired)
 		if(externalContext) {
 			return externalContext
 		}
-	}
-
-	if(!context) {
-		if(required) {
-			throw new Error("useTableContext must be used within TableProvider")
+		if(required === false) {
+			return null
 		}
-		return null
+		throw new Error(`Table context with key "${contextKeyOrRequired}" not found`)
 	}
 
 	return context
@@ -153,8 +154,8 @@ export function TableProvider<T extends TableRowData>({
 	}, [contextKey, contextValue])
 
 	return (
-		<TableContext.Provider value={ contextValue }>
+		<TableContextProvider value={ contextValue }>
 			{ children }
-		</TableContext.Provider>
+		</TableContextProvider>
 	)
 }

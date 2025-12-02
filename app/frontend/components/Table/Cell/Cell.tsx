@@ -1,10 +1,9 @@
-import { Table } from "@mantine/core"
-import clsx from "clsx"
 import React, { forwardRef } from "react"
 
 import { usePageProps } from "@/lib/hooks"
 
-import { useTableContext } from "./TableContext"
+import { Td } from "./Td"
+import { useTableContext } from "../TableContext/TableContext"
 
 export interface CellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
 	columnId?: string
@@ -21,19 +20,20 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(({
 	className,
 	...props
 }, ref) => {
-	const context = useTableContext(undefined, false)
+	const context = useTableContext(false)
 	const { auth: { user: { table_preferences } } } = usePageProps()
 
 	if(!context || !columnId) {
 		return (
-			<Table.Td
+			<Td
 				ref={ ref }
-				className={ clsx(className, { "table-column-fit": fitContent }, { "nowrap": nowrap }) }
-				role="cell"
+				className={ className }
+				fitContent={ fitContent }
+				nowrap={ nowrap }
 				{ ...props }
 			>
 				{ children }
-			</Table.Td>
+			</Td>
 		)
 	}
 
@@ -45,15 +45,16 @@ export const Cell = forwardRef<HTMLTableCellElement, CellProps>(({
 	if(hiddenByUser) return null
 
 	return (
-		<Table.Td
+		<Td
 			ref={ ref }
-			className={ clsx(className, { "table-column-fit": fitContent }, { "nowrap": nowrap }) }
+			className={ className }
+			fitContent={ fitContent }
+			nowrap={ nowrap }
 			data-cell={ column?.label }
-			role="cell"
 			{ ...props }
 		>
 			{ children }
-		</Table.Td>
+		</Td>
 	)
 })
 

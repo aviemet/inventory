@@ -1,7 +1,7 @@
 import { Table, type TableTheadProps } from "@mantine/core"
 import { forwardRef } from "react"
 
-import { TableSectionContextProvider } from "./TableContext"
+import { TableSectionContextProvider } from "../TableContext"
 
 export const Head = forwardRef<HTMLTableSectionElement, TableTheadProps>((
 	{ children, ...props },

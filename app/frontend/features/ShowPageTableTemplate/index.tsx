@@ -2,7 +2,7 @@ import React from "react"
 
 import { type Icon } from "@/components/Icons"
 import Table from "@/components/Table"
-import { type TableRowData } from "@/components/Table/TableContext"
+import { type TableRowData } from "@/components/Table/TableContext/TableContext"
 
 import { TableTitleSection } from ".."
 

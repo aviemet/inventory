@@ -11,13 +11,15 @@ import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
 
 import * as classes from "../Table.css"
-import { useTableContext } from "../TableContext"
+import { useTableContext } from "../TableContext/TableContext"
 
 export function ColumnPicker() {
 	const { auth: { user } } = usePageProps()
-	const { hideable, columns, model } = useTableContext()
+	const context = useTableContext(false)
 
-	if(!hideable || !model) return null
+	if(!context || !context.hideable || !context.model) return null
+
+	const { hideable, columns, model } = context
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		axios.patch(Routes.apiUpdateTablePreferences(user.id!), {

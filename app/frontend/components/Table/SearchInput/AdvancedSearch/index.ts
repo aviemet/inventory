@@ -5,5 +5,7 @@ export interface AdvancedInputProps {
 	name: string
 }
 
+export { AdvancedSearch } from "./AdvancedSearch"
 export { Type as SearchDateTypeInput } from "./Type"
 export { DateRangeDate as SearchDateInput } from "./Date"
+export { useAdvancedSearch }

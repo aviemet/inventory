@@ -1,10 +1,11 @@
 import { Table, LoadingOverlay, type TableTbodyProps } from "@mantine/core"
 import { forwardRef } from "react"
 
-import { useTableContext, TableSectionContextProvider } from "./TableContext"
+import { TableSectionContextProvider } from "../TableContext"
+import { useTableContext } from "../TableContext/TableContext"
 
 export const Body = forwardRef<HTMLTableSectionElement, TableTbodyProps>(({ children, ...props }, ref) => {
-	const context = useTableContext(undefined, false)
+	const context = useTableContext(false)
 	const searching = context?.searching ?? false
 
 	return (

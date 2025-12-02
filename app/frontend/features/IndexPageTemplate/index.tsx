@@ -2,7 +2,7 @@ import React from "react"
 
 import { Page, Table } from "@/components"
 import { type Breadcrumb } from "@/components/Breadcrumbs"
-import { type TableRowData } from "@/components/Table/TableContext"
+import { type TableRowData } from "@/components/Table/TableContext/TableContext"
 
 import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSection"
 

@@ -5,7 +5,7 @@ import React, { useEffect, forwardRef } from "react"
 import { Link, Flex } from "@/components"
 import { useLocation, usePageProps } from "@/lib/hooks"
 
-import { useTableContext } from "./TableContext"
+import { useTableContext } from "../TableContext/TableContext"
 
 export interface HeadCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
 	columnId?: string
@@ -24,9 +24,23 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(({
 	className,
 	...props
 }, ref) => {
-	const context = useTableContext(undefined, false)
+	const context = useTableContext(false)
 	const { auth: { user: { table_preferences } } } = usePageProps()
 	const { pathname, params } = useLocation()
+
+	const registerColumn = context?.registerColumn
+
+	useEffect(() => {
+		if(!registerColumn || !columnId) return
+
+		const label = typeof children === "string" ? children : String(children)
+		registerColumn({
+			id: columnId,
+			label,
+			hideable: hideable === false ? undefined : (hideable || sort),
+			sort,
+		})
+	}, [registerColumn, columnId, children, hideable, sort])
 
 	if(!context || !columnId) {
 		return (
@@ -40,17 +54,7 @@ export const HeadCell = forwardRef<HTMLTableCellElement, HeadCellProps>(({
 		)
 	}
 
-	const { registerColumn, columns, model, pagination } = context
-
-	useEffect(() => {
-		const label = typeof children === "string" ? children : String(children)
-		registerColumn({
-			id: columnId,
-			label,
-			hideable: hideable === false ? undefined : (hideable || sort),
-			sort,
-		})
-	}, [columnId, children, hideable, sort, registerColumn])
+	const { columns, model, pagination } = context
 
 	const column = columns.get(columnId)
 	const hideableString = hideable === false ? undefined : (hideable || sort || column?.hideable)

@@ -4,7 +4,7 @@ import { Box, Title, Group, Divider } from "@mantine/core"
 
 import { Menu } from "@/components"
 import { TrashIcon, type Icon } from "@/components/Icons"
-import { useTableContext } from "@/components/Table/TableContext"
+import { useTableContext } from "@/components/Table/TableContext/TableContext"
 
 import * as classes from "../IndexPageTemplate/IndexPage.css"
 
