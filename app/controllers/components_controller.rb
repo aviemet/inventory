@@ -4,7 +4,7 @@ class ComponentsController < ApplicationController
   expose :components, -> { search(@active_company.components.includes_associated) }
   expose :component, scope: ->{ @active_company.components }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  strong_params :component, permit: [:name, :model_id, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id, :status_label_id]
+  strong_params :component, [:name, :model_id, :qty, :min_qty, :cost, :notes, :category_id, :manufacturer_id, :vendor_id, :default_location_id, :status_label_id]
 
   sortable_fields %w(name min_qty qty cost model.name model.model_number manufacturers.name categories.name vendors.name)
 

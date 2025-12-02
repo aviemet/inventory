@@ -1,7 +1,7 @@
 require "net/smtp"
 
 class Api::SmtpsController < Api::ApiController
-  strong_params :smtp, permit: [:name, :host, :domain, :port, :security, :username, :password, :address, :notes]
+  strong_params :smtp, [:name, :host, :domain, :port, :security, :username, :password, :address, :notes]
 
   # @route POST /api/smtp/test (api_smtp_test)
   def test

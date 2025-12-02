@@ -1,7 +1,7 @@
 class Api::StatusLabelsController < Api::ApiController
   expose :status_label, id: ->{ params[:slug] }, scope: ->{ @active_company.status_labels.includes_associated }, find_by: :slug
 
-  strong_params :status_label, permit: [:name]
+  strong_params :status_label, [:name]
 
   # @route POST /api/status_labels (api_status_labels)
   def create

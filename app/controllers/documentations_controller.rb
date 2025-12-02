@@ -3,7 +3,7 @@ class DocumentationsController < ApplicationController
   expose :documentations, -> { search(@active_company.documentations.includes_associated) }
   expose :documentation, id: ->{ params[:slug] }, scope: ->{ @active_company.documentations.includes_associated }, find_by: :slug
 
-  strong_params :documentation, permit: [:slug, :title, :body, :documentable_id, :documentable_type, :created_by_id, :category_id]
+  strong_params :documentation, [:slug, :title, :body, :documentable_id, :documentable_type, :created_by_id, :category_id]
 
   sortable_fields %w(title body created_by_id)
 

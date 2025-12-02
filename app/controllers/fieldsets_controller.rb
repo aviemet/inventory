@@ -1,7 +1,7 @@
 class FieldsetsController < ApplicationController
   before_action :set_fieldset, only: [:show, :edit, :update, :destroy]
 
-  strong_params :fieldset, permit: [:name, :description]
+  strong_params :fieldset, [:name, :description]
 
   # @route GET /fieldsets (fieldsets)
   def index

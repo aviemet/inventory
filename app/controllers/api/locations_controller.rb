@@ -2,7 +2,7 @@ class Api::LocationsController < Api::ApiController
   expose :locations, -> { @active_company.locations }
   expose :loc, id: ->{ params[:slug] }, scope: ->{ @active_company.items.includes_associated }, find_by: :slug
 
-  strong_params :location, permit: [:name, :currency, :parent_id]
+  strong_params :location, [:name, :currency, :parent_id]
 
   # @route GET /api/locations (api_locations)
   def index

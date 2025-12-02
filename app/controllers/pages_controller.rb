@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  strong_params :settings, permit: [:dark_mode]
+  strong_params :settings, [:dark_mode]
 
   # @route GET / (root)
   # @route GET /dashboard (dashboard)

@@ -2,7 +2,7 @@ class Api::ManufacturersController < Api::ApiController
   expose :manufacturers, -> { @active_company.manufacturers }
   expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
 
-  strong_params :manufacturer, permit: [:name]
+  strong_params :manufacturer, [:name]
 
   # @route GET /api/manufacturers (api_manufacturers)
   def index

@@ -4,7 +4,7 @@ class ManufacturersController < ApplicationController
   expose :manufacturers, -> { search(@active_company.manufacturers.includes_associated) }
   expose :manufacturer, id: ->{ params[:slug] }, scope: ->{ @active_company.manufacturers.includes_associated }, find_by: :slug
 
-  strong_params :manufacturer, permit: [:name]
+  strong_params :manufacturer, [:name]
 
   sortable_fields %w(name)
 

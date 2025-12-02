@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
 
-  strong_params :purchase, permit: [:item_id, :price, :shipping, :tax, :qty, :notes]
+  strong_params :purchase, [:item_id, :price, :shipping, :tax, :qty, :notes]
 
   # @route GET /purchases (purchases)
   def index

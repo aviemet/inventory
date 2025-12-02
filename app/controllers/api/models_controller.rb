@@ -2,7 +2,7 @@ class Api::ModelsController < Api::ApiController
   expose :models, -> { params[:category] ? @active_company.models.joins(:category).where(categories: { categorizable_type: params[:category] }) : @active_company.models }
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, model: Model, find_by: :slug
 
-  strong_params :model, permit: [:id, :slug, :name, :model_number, :manufacturer_id, :category_id, :notes]
+  strong_params :model, [:id, :slug, :name, :model_number, :manufacturer_id, :category_id, :notes]
 
   # @route GET /api/models (api_models)
   def index

@@ -4,14 +4,14 @@ module StrongParams
   extend ActiveSupport::Concern
 
   class_methods do
-    def strong_params(name, options = {}, &)
+    def strong_params(name, permitted_params = nil, &)
       param_method_name = :"#{name}_params"
 
       define_method param_method_name do
         if block_given?
           params.expect(name => instance_exec(&))
-        elsif options[:permit].present?
-          params.expect(name => Array(options[:permit]))
+        elsif permitted_params.present?
+          params.expect(name => Array(permitted_params))
         end
       end
     end

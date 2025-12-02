@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   expose :users, -> { search(User.all.includes_associated) }
   expose :user
 
-  strong_params :user, permit: [:email, :password, :active_company, :active, :user_preferences, person: [:first_name, :last_name], company: [:name]]
+  strong_params :user, [:email, :password, :active_company, :active, :user_preferences, person: [:first_name, :last_name], company: [:name]]
 
   sortable_fields %w(email active person.name active_company.name)
 

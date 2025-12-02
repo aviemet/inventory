@@ -22,7 +22,7 @@ export interface BaseInputProps {
 	disableAutofill?: boolean
 }
 
-export type DateInputValue = DateValue | DatesRangeValue | Date[] | undefined
+export type DateInputValue = DateValue | DatesRangeValue<DateValue> | DateValue[] | undefined
 
 const disableAutofillProps = {
 	autoComplete: "off",

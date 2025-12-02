@@ -1,8 +1,7 @@
 import { DatePickerInput, type DatePickerInputProps } from "@mantine/dates"
-import React, { useEffect, useState, forwardRef } from "react"
+import { useEffect, useState, forwardRef } from "react"
 
 import { CalendarIcon } from "@/components/Icons"
-import { isUnset } from "@/lib"
 
 import { InputWrapper } from "./InputWrapper"
 import { Label } from "./Label"
@@ -50,6 +49,10 @@ export const DateInput = forwardRef<HTMLButtonElement, DateInputProps>((
 		onChange?.(changeValue)
 	}
 
+	useEffect(() => {
+		setLocalValue(value)
+	}, [value])
+
 	// Allow a Date input's type to change
 	useEffect(() => {
 		if(datePickerType === type) return
@@ -80,7 +83,8 @@ export const DateInput = forwardRef<HTMLButtonElement, DateInputProps>((
 				ref={ ref }
 				id={ inputId }
 				name={ name }
-				value={ isUnset(localValue) ? undefined : localValue }
+				// @ts-expect-error - TypeScript can't narrow conditional types when type prop is dynamic
+				value={ localValue }
 				type={ datePickerType }
 				onChange={ handleChange }
 				radius={ radius }

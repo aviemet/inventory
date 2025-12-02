@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   expose :people, -> { search(@active_company.people.includes_associated) }
   expose :person, scope: ->{ @active_company.people }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  strong_params :person, permit: [:id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id,
+  strong_params :person, [:id, :first_name, :middle_name, :last_name, :active, :employee_number, :department, :job_title, :manager_id, :department_id,
     user_attributes: [:id, :email, :password, :check_password, :active_company_id, :table_preferences, :user_preferences, :active],
     contact_attributes: [
       emails_attributes: [:id, :email, :_destroy],

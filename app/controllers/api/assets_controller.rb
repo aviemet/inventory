@@ -2,7 +2,7 @@ class Api::AssetsController < Api::ApiController
   expose :assets, -> {  @active_company.assets }
   expose :asset, scope: ->{ @active_company.assets }
 
-  strong_params :asset, permit: [:name, :location_id, :manager_id, :notes]
+  strong_params :asset, [:name, :location_id, :manager_id, :notes]
 
   # @route GET /api/assets (api_assets)
   def index

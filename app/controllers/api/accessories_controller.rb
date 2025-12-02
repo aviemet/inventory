@@ -2,7 +2,7 @@ class Api::AccessoriesController < Api::ApiController
   expose :accessories, -> { @active_company.accessories }
   expose :accessory, scope: ->{ @active_company.accessories }
 
-  strong_params :accessory, permit: [:name, :location_id, :manager_id, :notes]
+  strong_params :accessory, [:name, :location_id, :manager_id, :notes]
 
   # @route GET /api/accessories (api_accessories)
   def index

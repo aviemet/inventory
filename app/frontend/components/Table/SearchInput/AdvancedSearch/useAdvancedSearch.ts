@@ -1,7 +1,6 @@
-import React from "react"
 import { router } from "@inertiajs/react"
 import clsx from "clsx"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 
 import { NestedURLSearchParams, isUnset } from "@/lib"
 import { useLocation } from "@/lib/hooks"
@@ -77,7 +76,7 @@ const useAdvancedSearch = (
 			// Handle special input types
 			switch(param?.type) {
 				case "date":
-					data.set(`${param.name}[type]`, "exact")
+					data.set(`${param.name}[type]`, data.get(`${param.name}[type]`) || "exact")
 					data.set(`${param.name}[start]`, data.get(`${param.name}[start]`) || "")
 					data.set(`${param.name}[end]`, data.get(`${param.name}[end]`) || "")
 
@@ -99,27 +98,44 @@ const useAdvancedSearch = (
 	}, [localInputParams, values])
 
 	const resetValues = useCallback(() => {
-		setValues(prevValues => localInputParams.reduce(
-			(data, param) => {
-				data.set(param.name, param.default ?? "")
-				return data
-			},
-			prevValues.clone(),
-		))
-	}, [localInputParams])
+		setValues(prevValues => {
+			const newValues = prevValues.clone()
+
+			inputParams.forEach(param => {
+				switch(param?.type) {
+					case "date":
+						newValues.set(`${param.name}[type]`, "exact")
+						newValues.unset(`${param.name}[start]`)
+						newValues.unset(`${param.name}[end]`)
+						break
+					default:
+						if(param.default !== undefined) {
+							newValues.set(param.name, param.default)
+						} else {
+							newValues.unset(param.name)
+						}
+				}
+			})
+
+			return newValues
+		})
+	}, [inputParams])
 
 	// Method returned from hook to be passed to an input
 	const buildInputProps = <T = string | Date>(name: InputParamName) => {
 		const param = localInputParams.find(param => param.name === name)
+		const dateParam = inputParams.find(p => p.type === "date" && (name === `${p.name}[start]` || name === `${p.name}[end]` || name === `${p.name}[type]`))
 
 		let value: T
-		switch(param?.type) {
-			case "date":
-				// @ts-ignore
-				value = new Date(values.get(name))
-				break
-			default:
+		if(dateParam) {
+			const rawValue = values.get(name)
+			if(name.endsWith("[start]") || name.endsWith("[end]")) {
+				value = (rawValue && rawValue !== "" ? new Date(rawValue as string) : undefined) as T
+			} else {
 				value = values.get(name) as T
+			}
+		} else {
+			value = values.get(name) as T
 		}
 
 		return {

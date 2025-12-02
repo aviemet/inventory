@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   expose :categories, -> { search(@active_company.categories.all) }
   expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories.includes_associated }, find_by: :slug
 
-  strong_params :category, permit: [:categorizable_id, :categorizable_type, :name, :description]
+  strong_params :category, [:categorizable_id, :categorizable_type, :name, :description]
 
   sortable_fields %w(name categorizable_type qty)
 

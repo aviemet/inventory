@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
   expose :assignment
 
-  strong_params :assignment, permit: [:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name], accessory: [:name], license: [:name], component: [:name], consumable: [:qty]]
+  strong_params :assignment, [:assignable_id, :assignable_type, :assign_toable_id, :assign_toable_type, :location_id, :assigned_at, :expected_at, :returned_at, :qty, :status, :notes, :active, item: [:name], accessory: [:name], license: [:name], component: [:name], consumable: [:qty]]
 
   # @route POST /assignments (assignments)
   def create

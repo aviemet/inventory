@@ -2,7 +2,7 @@ class Settings::SmtpsController < ApplicationController
   expose :smtps, -> { @active_company.smtps }
   expose :smtp
 
-  strong_params :smtp, permit: [:name, :host, :domain, :port, :security, :username, :password, :address, :notes]
+  strong_params :smtp, [:name, :host, :domain, :port, :security, :username, :password, :address, :notes]
 
   # @route GET /settings/mail (settings_smtps)
   def index

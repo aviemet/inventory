@@ -1,3 +1,4 @@
+import { DateValue } from "@mantine/dates"
 import { NestedObject, useInertiaInput } from "use-inertia-form"
 
 import { ConditionalWrapper } from "@/components"
@@ -37,8 +38,15 @@ export function FormDateTimeInput<TForm extends NestedObject = NestedObject>({
 		clearErrorsOnChange,
 	})
 
-	const handleChange = (date: Date | null) => {
-		const dateWithValidEmptyType = (isUnset(date) ? "" : date)
+	const handleChange = (date: DateValue) => {
+		let dateWithValidEmptyType: Date | ""
+		if(isUnset(date)) {
+			dateWithValidEmptyType = ""
+		} else if(date instanceof Date) {
+			dateWithValidEmptyType = date
+		} else {
+			dateWithValidEmptyType = new Date(date)
+		}
 
 		setValue(dateWithValidEmptyType)
 

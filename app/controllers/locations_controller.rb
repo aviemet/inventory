@@ -7,7 +7,7 @@ class LocationsController < ApplicationController
   # location is used as a local variable by redirect_to
   expose :loc, model: Location, id: ->{ params[:slug] }, scope: ->{ @active_company.locations.includes_associated }, find_by: :slug
 
-  strong_params :location, permit: [:name, :parent_id, :currency, :department_id]
+  strong_params :location, [:name, :parent_id, :currency, :department_id]
 
   sortable_fields %w(name currency items accessories components consumables departments.name)
 

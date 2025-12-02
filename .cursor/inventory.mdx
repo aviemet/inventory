@@ -39,7 +39,7 @@ The application uses Inertia.js as the bridge between Rails and React, creating 
 
 - **Base Controller**: `ApplicationController` includes concerns: `Authentication`, `Authorization`, `InertiaCsrf`, `Localization`, `Searchable`, `ActiveCompanyTracker`, `StrongParams`
 - **Pattern**: Controllers use `expose` (from DecentExposure gem) to define resources and handle loading/finding
-- **Strong Params**: Custom `StrongParams` concern provides DSL: `strong_params :model_name, permit: [...]`
+- **Strong Params**: Custom `StrongParams` concern provides DSL: `strong_params :model_name, [...]`
 - **Sorting**: Controllers define `sortable_fields` array for search/sort functionality
 - **Route Concerns**: Reusable route concerns defined in routes.rb: `categoryable`, `clonable`, `assignable`, `bulk_delete`, etc.
 - **API Controllers**: Separate `Api::` namespace controllers return JSON, share same serializers but different response format

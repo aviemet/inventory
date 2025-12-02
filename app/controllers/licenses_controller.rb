@@ -4,7 +4,7 @@ class LicensesController < ApplicationController
   expose :licenses, -> { search(@active_company.licenses.includes_associated) }
   expose :license, scope: ->{ @active_company.licenses }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  strong_params :license, permit: [:name, :description, :qty, :cost, :category_id, :vendor_id, :manufacturer_id, :key]
+  strong_params :license, [:name, :description, :qty, :cost, :category_id, :vendor_id, :manufacturer_id, :key]
 
   sortable_fields %w(name key licenser_name licenser_email notes models.name vendors.name categories.name manufacturers.name departments.name)
 
