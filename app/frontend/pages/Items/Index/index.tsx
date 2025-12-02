@@ -23,9 +23,7 @@ const ItemsIndex = ({ items, pagination }: ItemsIndexProps) => {
 				{ label: "New Asset", href: Routes.newItem(), icon: <NewIcon /> },
 			] }
 			advancedSearch={ <AdvancedItemsSearch /> }
-		>
-			<ItemsTable />
-		</IndexPageTemplate>
+		/>
 	)
 }
 

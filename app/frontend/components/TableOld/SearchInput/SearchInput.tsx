@@ -10,13 +10,15 @@ import { TextInput } from "@/components/Inputs"
 import { useInit, useLocation } from "@/lib/hooks"
 
 import { AdvancedSearch } from "./AdvancedSearch/AdvancedSearch"
+import { ColumnPicker } from "./ColumnPicker"
 import * as classes from "./SearchInput.css"
+import { useTableContext } from "../TableContext/TableContext"
 
 interface SearchInputProps {
 	value?: string
 	onChange?: (value: string) => void
 	onSearch?: (value: string) => void
-	model?: string
+	columnPicker?: boolean
 	advancedSearch?: React.ReactNode
 	debounceMs?: number
 }
@@ -25,11 +27,13 @@ export function SearchInput({
 	value: valueProp,
 	onChange: onChangeProp,
 	onSearch: onSearchProp,
-	model,
+	columnPicker = true,
 	advancedSearch,
 	debounceMs = 500,
 }: SearchInputProps) {
-	const [searching, setSearching] = React.useState(false)
+	const context = useTableContext(false)
+	const model = context?.model
+	const setSearching = context?.setSearching
 
 	const location = useLocation()
 	const [internalValue, setInternalValue] = useSessionStorage({
@@ -80,9 +84,7 @@ export function SearchInput({
 						setSearching(false)
 					},
 				}
-				if(model) {
-					options.only = [model, "pagination"]
-				}
+				options.only = [model, "pagination"]
 
 				router.get(path, {}, options)
 			}, debounceMs)
@@ -132,6 +134,7 @@ export function SearchInput({
 				wrapper={ false }
 				aria-label="Search"
 			/>
+			{ columnPicker && model && <ColumnPicker /> }
 		</Box>
 	)
 }

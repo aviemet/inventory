@@ -1,23 +1,23 @@
-import React from "react"
-import { type ColumnDef } from "@tanstack/react-table"
+import React, { useState } from "react"
+import { type DataTableColumn } from "mantine-datatable"
 
 import { Page, Table } from "@/components"
 import { type Breadcrumb } from "@/components/Breadcrumbs"
-import { type TableRowData } from "@/components/Table/TableContext/TableContext"
 
 import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSection"
 
-interface IndexPageTemplateProps extends IndexTableTitleSectionProps {
+interface IndexPageTemplateProps<T = Record<string, unknown>> extends Omit<IndexTableTitleSectionProps, "selectedRecords"> {
 	model: string
-	rows: readonly TableRowData[]
-	columns: ColumnDef<TableRowData>[]
+	rows: readonly T[]
+	columns: DataTableColumn<T>[]
 	pagination: Schema.Pagination
 	search?: boolean
 	breadcrumbs?: Breadcrumb[]
 	advancedSearch?: React.ReactNode
+	selectable?: boolean
 }
 
-const IndexPageTemplate = ({
+const IndexPageTemplate = <T = Record<string, unknown>>({
 	children,
 	title,
 	model,
@@ -29,31 +29,34 @@ const IndexPageTemplate = ({
 	menuOptions,
 	advancedSearch,
 	deleteRoute,
-}: IndexPageTemplateProps) => {
+	selectable = true,
+}: IndexPageTemplateProps<T>) => {
+	const [selectedRecords, setSelectedRecords] = useState<T[]>([])
+
 	return (
 		<Page title={ title } breadcrumbs={ breadcrumbs ?? [
 			{ title, href: window.location.href },
 		] }>
 			<Table.Section>
-				<Table.TableProvider
-					selectable
-					model={ model }
-					data={ rows }
-					columns={ columns }
-					pagination={ pagination }
+				<TableTitleSection
+					title={ title }
+					menuOptions={ menuOptions }
+					deleteRoute={ deleteRoute }
+					selectedRecords={ selectedRecords }
 				>
-					<TableTitleSection
-						title={ title }
-						menuOptions={ menuOptions }
-						deleteRoute={ deleteRoute }
-					>
-						{ search && <Table.SearchInput advancedSearch={ advancedSearch } /> }
-					</TableTitleSection>
+					{ search && <Table.SearchInput model={ model } advancedSearch={ advancedSearch } /> }
+				</TableTitleSection>
 
-					{ children }
-
-					<Table.Pagination />
-				</Table.TableProvider>
+				{ children || (
+					<Table.DataTable
+						columns={ columns }
+						records={ rows }
+						pagination={ pagination }
+						model={ model }
+						selectable={ selectable }
+						onSelectedRecordsChange={ setSelectedRecords }
+					/>
+				) }
 			</Table.Section>
 		</Page>
 	)

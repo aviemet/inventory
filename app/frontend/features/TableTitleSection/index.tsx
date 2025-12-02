@@ -1,10 +1,9 @@
-import React from "react"
 import { router } from "@inertiajs/react"
 import { Box, Title, Group, Divider } from "@mantine/core"
+import React from "react"
 
 import { Menu } from "@/components"
 import { TrashIcon, type Icon } from "@/components/Icons"
-import { useTableContext } from "@/components/Table/TableContext/TableContext"
 
 import * as classes from "../IndexPageTemplate/IndexPage.css"
 
@@ -12,6 +11,7 @@ export interface IndexTableTitleSectionProps {
 	children: React.ReactNode
 	title: string
 	deleteRoute?: string
+	selectedRecords?: readonly { id?: unknown }[]
 	menuOptions?: {
 		label: string
 		href: string
@@ -19,15 +19,17 @@ export interface IndexTableTitleSectionProps {
 	}[]
 }
 
-const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: IndexTableTitleSectionProps) => {
-	const { selected } = useTableContext()
+const IndexTableTitleSection = ({ children, title, deleteRoute, selectedRecords = [], menuOptions }: IndexTableTitleSectionProps) => {
+	const selectedIds = React.useMemo(() => {
+		return new Set(selectedRecords.map(record => record.id).filter((id): id is string => id !== null && id !== undefined))
+	}, [selectedRecords])
 
 	const deleteRecords = () => {
 		if(!deleteRoute) return
 
 		router.visit(deleteRoute, {
 			method: "delete",
-			data: { ids: Array.from(selected) },
+			data: { ids: Array.from(selectedIds) },
 		})
 	}
 
@@ -49,7 +51,7 @@ const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: I
 							)
 						}) }
 
-						{ deleteRoute && selected.size > 0 && <>
+						{ deleteRoute && selectedIds.size > 0 && <>
 							<Divider />
 
 							<Menu.Item leftSection={ <TrashIcon size={ 14 } color="red" /> } onClick={ deleteRecords }>

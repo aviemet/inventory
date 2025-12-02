@@ -2,6 +2,7 @@
 
 ## Technology Stack
 
+- **Package Manager**: **Yarn** (NOT npm) - Always use `yarn` commands, never `npm`
 - **Backend**: Ruby on Rails 8.1+ with PostgreSQL
 - **Frontend**: React 19 with TypeScript, Vite for bundling
 - **Integration**: Inertia.js for server-driven SPA architecture
@@ -138,6 +139,17 @@ The application uses Inertia.js as the bridge between Rails and React, creating 
 
 - **DO NOT fix auto-fixable linting errors** - Import order, spacing, and other formatting issues are automatically fixed on file save. Do not waste cycles fixing these manually.
 - Only address linting errors that indicate actual code problems (type errors, logic issues, etc.)
+
+### Code Quality Rules
+
+- **NEVER use `!=` (loose inequality) in JavaScript/TypeScript** - Always use `!==` (strict inequality). Loose equality can lead to unexpected type coercion and bugs. When checking for null/undefined, use explicit checks: `id !== null && id !== undefined` or use a type guard.
+
+- **NEVER EVER use type casts (`as`, `as unknown as`, type assertions)** - Type casts are a code smell that hide real type problems. If TypeScript is complaining, fix the actual type issue:
+  - Use proper type definitions and interfaces
+  - Use generics, Records, and Mapped types
+  - Fix the source of the type mismatch, don't cast around it
+  - If you can't figure out the proper types, investigate the library's type definitions or ask for help - but NEVER cast
+  - Type casts defeat the entire purpose of TypeScript's type safety
 
 ### Testing Environment
 
