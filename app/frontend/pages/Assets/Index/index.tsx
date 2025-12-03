@@ -1,9 +1,8 @@
-
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from "@/components/Icons"
+import AssetTable, { assetsColumns } from "@/domains/Assets/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import AssetTable, { assetsColumns } from "@/domains/Assets/Table"
 
 interface AssetsIndexProps {
 	assets: Schema.AssetsIndex[]
@@ -26,7 +25,7 @@ const AssetsIndex = ({ assets, pagination }: AssetsIndexProps) => {
 				{ label: "New Consumable", href: Routes.newConsumable(), icon: <ConsumablesIcon /> },
 			] }
 		>
-			<AssetTable />
+			<AssetTable records={ assets } pagination={ pagination } model="assets" />
 		</IndexPageTemplate>
 	)
 }

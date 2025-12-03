@@ -42,7 +42,7 @@ RSpec.describe "Users", :inertia do
       it "renders the login page" do
         confirmed_user
         get new_user_session_url
-        expect_inertia.to render_component "Public/Devise/Login"
+        expect_inertia.to render_component "Devise/Login"
       end
     end
   end
@@ -62,7 +62,7 @@ RSpec.describe "Users", :inertia do
         follow_redirect!
         # expect(response).to redirect_to new_user_confirmation_url
         # expect_inertia.to render_component 'Public/Devise/Confirmations/New'
-        expect_inertia.to render_component "Public/Devise/Login"
+        expect_inertia.to render_component "Devise/Login"
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe "Users", :inertia do
       it "redirects back to the login page" do
         user = create(:user, password: password, confirmed: true, company: false, person: false)
         post user_session_url, params: { user: { email: user.email, password: "Wrong1!" } }
-        expect_inertia.to render_component "Public/Devise/Login"
+        expect_inertia.to render_component "Devise/Login"
       end
     end
   end

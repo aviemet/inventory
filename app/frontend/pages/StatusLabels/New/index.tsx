@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import StatusLabelForm from "@/domains/StatusLabels/Form"
 import { Routes } from "@/lib"
 
-import StatusLabelForm from "@/domains/StatusLabels/Form"
 
 interface NewStatusLabelProps {
 	status_label: Schema.StatusLabelsFormData

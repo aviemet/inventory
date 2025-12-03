@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import NetworksTable, { networksColumns } from "@/domains/Networks/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import NetworksTable, { networksColumns } from "@/domains/Networks/Table"
 
 interface NetworksIndexProps {
 	networks: Schema.NetworksIndex[]
@@ -23,7 +22,7 @@ const NetworksIndex = ({ networks, pagination }: NetworksIndexProps) => {
 				{ label: "New Network", href: Routes.newNetwork(), icon: <NewIcon /> },
 			] }
 		>
-			<NetworksTable />
+			<NetworksTable records={ networks } pagination={ pagination } model="networks" />
 		</IndexPageTemplate>
 	)
 }

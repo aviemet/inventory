@@ -151,6 +151,13 @@ The application uses Inertia.js as the bridge between Rails and React, creating 
   - If you can't figure out the proper types, investigate the library's type definitions or ask for help - but NEVER cast
   - Type casts defeat the entire purpose of TypeScript's type safety
 
+- **NEVER use `!important` in CSS** - You can always achieve your goal using CSS specificity and proper selector precedence. Using `!important` is a code smell that indicates poor selector design or CSS architecture. Instead:
+  - Use more specific selectors
+  - Increase selector specificity naturally
+  - Restructure CSS to avoid conflicts
+  - Use CSS custom properties (variables) for values that need to be overridden
+  - If you find yourself needing `!important`, it means the CSS architecture needs improvement, not that you need a workaround
+
 ### Testing Environment
 
 - **Test Environment**: Uses `happy-dom` instead of `jsdom` for faster, more complete DOM implementation

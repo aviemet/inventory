@@ -1,21 +1,38 @@
-
-import { Table } from "@/components"
-import DocumentationTable from "@/domains/Documentation/Table"
+import { Portal, Table } from "@/components"
+import DocumentationTable, { documentationColumns } from "@/domains/Documentation/Table"
+import { type PaginatedModel } from "@/types/PaginatedModel"
 
 interface ItemDocumentationProps {
 	item: Schema.ItemsShow
+	documentations?: PaginatedModel<Schema.DocumentationsIndex[]>
 }
 
-const Documentations = ({ item }: ItemDocumentationProps) => {
+const Documentations = ({ item, documentations }: ItemDocumentationProps) => {
+	const model = "documentations"
+	const records = documentations?.data ?? item?.documentations ?? []
+	const pagination = documentations?.pagination
+
 	return (
 		<Table.TableProvider
-			selectable
-			data={ item?.documentations ?? [] }
+			model={ model }
+			records={ records }
+			columns={ documentationColumns.map(col => ({
+				accessor: String(col.accessor),
+				title: col.title ? String(col.title) : "",
+			})) }
+			pagination={ pagination }
 		>
-			<Table.SearchInput />
+			<Portal target="#item-documentations-search-portal">
+				<Table.SearchInput model={ model } />
+			</Portal>
 
-			<DocumentationTable />
-
+			<Table.Section>
+				<DocumentationTable
+					records={ records }
+					pagination={ pagination }
+					model={ pagination ? model : undefined }
+				/>
+			</Table.Section>
 		</Table.TableProvider>
 	)
 }

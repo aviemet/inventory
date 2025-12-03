@@ -1,8 +1,8 @@
-import React from "react"
 import { router } from "@inertiajs/react"
 import { Button } from "@mantine/core"
 import axios from "axios"
 import clsx from "clsx"
+import React from "react"
 
 import { Menu } from "@/components"
 import { ColumnsIcon } from "@/components/Icons"

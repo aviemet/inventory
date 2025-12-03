@@ -1,4 +1,3 @@
-
 import { Table, Title, Page, Group, Menu } from "@/components"
 import { EditIcon } from "@/components/Icons"
 import { Routes } from "@/lib"

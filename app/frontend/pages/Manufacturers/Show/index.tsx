@@ -2,14 +2,13 @@ import { omit } from "lodash"
 
 import { Section, Menu, Group, Title, Tabs, Page } from "@/components"
 import { EditIcon, NewIcon } from "@/components/Icons"
-import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
-import { Routes } from "@/lib"
 import AccessoriesTable from "@/domains/Accessories/Table"
+import ComponentsTable from "@/domains/Components/Table"
 import ConsumablesTable from "@/domains/Consumables/Table"
 import ItemsTable from "@/domains/Items/Table"
+import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
+import { Routes } from "@/lib"
 import { type PaginatedModel } from "@/types/PaginatedModel"
-
-import ComponentsTable from "@/domains/Components/Table"
 
 interface ShowManufacturerProps {
 	manufacturer: Schema.ManufacturersShow

@@ -1,4 +1,3 @@
-
 interface WebsiteProps {
 	website: Schema.Website
 }

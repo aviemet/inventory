@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react"
 import { Menu, createPolymorphicComponent, type MenuItemProps as MantineItemProps } from "@mantine/core"
 import clsx from "clsx"
+import React, { forwardRef } from "react"
 
 import { Link } from "@/components"
 

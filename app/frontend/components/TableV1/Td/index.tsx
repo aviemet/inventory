@@ -1,6 +1,6 @@
-import React from "react"
 import { type TableTdProps } from "@mantine/core"
 import clsx from "clsx"
+import React from "react"
 
 import { usePageProps } from "@/lib/hooks"
 

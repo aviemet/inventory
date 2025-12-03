@@ -1,9 +1,8 @@
-
 import { Section } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import ItemsTable, { itemsColumns } from "@/domains/Items/Table"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
-import ItemsTable, { itemsColumns } from "@/domains/Items/Table"
 import { type PaginatedModel } from "@/types/PaginatedModel"
 
 interface DetailsProps {
@@ -24,7 +23,7 @@ const Details = ({ department, items }: DetailsProps) => {
 					{ label: "New Asset", href: Routes.newItem(), icon: <NewIcon /> },
 				] }
 			>
-				<ItemsTable wrapper={ false } />
+				<ItemsTable records={ items?.data ?? [] } pagination={ items?.pagination } model="items" />
 			</ShowPageTableTemplate>
 		</Section>
 	)

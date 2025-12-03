@@ -1,4 +1,3 @@
-
 import { Title, Link, List, Icon, Box, Group } from "@/components"
 import { CheckinButton } from "@/components/Button"
 import { ArrowRightSquareIcon, CheckoutIcon } from "@/components/Icons"

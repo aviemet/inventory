@@ -1,5 +1,5 @@
-import React, { useState } from "react"
 import { type DataTableColumn } from "mantine-datatable"
+import React, { useState } from "react"
 
 import { Page, Table } from "@/components"
 import { type Breadcrumb } from "@/components/Breadcrumbs"

@@ -6,7 +6,7 @@ import { useLocation, usePageProps } from "@/lib/hooks"
 import useLayoutStore from "@/lib/store/LayoutStore"
 import { useUpdateTablePreferences } from "@/queries"
 
-import * as classes from "../Pagination.css"
+import * as classes from "./Pagination.css"
 
 interface LimitSelectProps extends SelectProps {
 	pagination: Schema.Pagination

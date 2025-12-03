@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       first_run = true
     end
 
-    render inertia: "Public/Devise/Register", props: {
+    render inertia: "Devise/Register", props: {
       first_run:
     }
   end

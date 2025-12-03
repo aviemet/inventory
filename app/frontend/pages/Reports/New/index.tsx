@@ -1,4 +1,3 @@
-
 const NewReport = () => {
 	return (
 		<div>New Report</div>

@@ -1,8 +1,8 @@
 import { describe, test, expect, beforeEach } from "vitest"
 
 import ShowComponent from "@/pages/Components/Show"
-import { render } from "@/tests/helpers/utils"
 import { testShowPageTabs } from "@/tests/helpers/testTabs"
+import { render } from "@/tests/helpers/utils"
 
 import {
 	createMockComponentsShow,
@@ -38,7 +38,7 @@ describe("Components/Show", () => {
 		expect(container.firstChild).toBeInTheDocument()
 	})
 
-	test("renders all tabs and their content", async () => {
+	test("renders all tabs and their content", async() => {
 		const component = createMockComponentsShow()
 
 		render(<ShowComponent component={ component } />)

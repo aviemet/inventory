@@ -1,15 +1,34 @@
-import { DataTable } from "./DataTable"
+import { DataTable, type TableDataTableProps } from "./DataTable"
 import { Pagination } from "./Pagination"
+import { TableProvider, useTableContext, useTableSectionContext } from "./Provider"
 import { SearchInput, AdvancedSearch, useAdvancedSearch, SearchDateInput, SearchDateTypeInput } from "./SearchInput"
 import { Section } from "./Section"
-import { useTableSectionContext } from "./TableContext"
+import { Table as TableBase, Head, Body, Row, Cell, HeadCell } from "./Table"
 
-export { DataTable, Section, SearchInput, AdvancedSearch, useAdvancedSearch, SearchDateInput, SearchDateTypeInput, useTableSectionContext, Pagination }
-export type { TableDataTableProps } from "./DataTable"
+export {
+	DataTable, type TableDataTableProps,
+	Section,
+	SearchInput,
+	AdvancedSearch,
+	useAdvancedSearch,
+	SearchDateInput,
+	SearchDateTypeInput,
+	useTableSectionContext,
+	Pagination,
+	TableProvider,
+	useTableContext,
+}
 
-export const Table = {
+export const Table = Object.assign(TableBase, {
 	DataTable,
 	Section,
 	SearchInput,
 	Pagination,
-} as const
+	Head,
+	Body,
+	Row,
+	Cell,
+	HeadCell,
+	Provider: TableProvider,
+	TableProvider,
+})

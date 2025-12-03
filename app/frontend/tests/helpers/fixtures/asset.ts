@@ -3,9 +3,9 @@ import { createDepartmentFixture } from "./department"
 import { createLocationFixture } from "./location"
 import { createManufacturerFixture } from "./manufacturer"
 import { createModelFixture } from "./model"
+import { createSchemaMoneyFixture } from "./schemaMoney"
 import { createStatusLabelFixture } from "./statusLabel"
 import { createVendorFixture } from "./vendor"
-import { createSchemaMoneyFixture } from "./schemaMoney"
 
 export const baseAssetsIndexFixture: Schema.AssetsIndex = {
 	id: 1,

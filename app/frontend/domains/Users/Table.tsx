@@ -1,57 +1,39 @@
-import { createColumnHelper } from "@tanstack/react-table"
+import { type DataTableColumn } from "mantine-datatable"
 
 import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const columnHelper = createColumnHelper<Schema.UsersIndex>()
-
-export const usersColumns = [
-	columnHelper.accessor("email", {
-		header: "Email",
-		enableSorting: true,
-		meta: {
-			model: "email",
-			hideable: false,
-		},
-	}),
-	columnHelper.display({
-		id: "actions",
-		header: "Actions",
-		enableSorting: false,
-		meta: {
-			hideable: false,
-		},
-	}),
+export const usersColumns: DataTableColumn<Schema.UsersIndex>[] = [
+	{
+		accessor: "email",
+		title: "Email",
+		sortable: true,
+		render: (user) => <Link href={ Routes.user(user) }>{ user.email }</Link>,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (user) => <EditButton href={ Routes.editUser(user) } label={ user.person?.name || user.email } />,
+	},
 ]
 
-const UsersTable = (props: Omit<TableProps, "children">) => {
+interface UsersTableProps {
+	records: Schema.UsersIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const UsersTable = ({ records, pagination, model }: UsersTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell columnId="email" />
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (user: Schema.UsersIndex) => (
-					<Table.Row key={ user.id }>
-
-						<Table.Cell columnId="email" nowrap>
-							<Link href={ Routes.user(user) }>{ user.email }</Link>
-						</Table.Cell>
-
-						<Table.Cell columnId="actions" fitContent>
-							<EditButton href={ Routes.editUser(user) } label={ user.person?.name || user.email } />
-						</Table.Cell>
-
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ usersColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import ManufacturerForm from "@/domains/Manufacturers/Form"
 import { Routes } from "@/lib"
 
-import ManufacturerForm from "@/domains/Manufacturers/Form"
 
 interface UpdateManufacturerProps {
 	manufacturer: Schema.ManufacturersEdit

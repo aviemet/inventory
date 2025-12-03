@@ -1,4 +1,3 @@
-
 import { ShowPageAssociations } from "@/features"
 
 import { ShowConsumableProps } from "."

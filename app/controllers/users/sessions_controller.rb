@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
     if User.none?
       redirect_to new_user_registration_path
     else
-      render inertia: "Public/Devise/Login"
+      render inertia: "Devise/Login"
     end
   end
 

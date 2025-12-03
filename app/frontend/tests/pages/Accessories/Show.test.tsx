@@ -1,8 +1,8 @@
 import { describe, test, expect, beforeEach } from "vitest"
 
 import ShowAccessory from "@/pages/Accessories/Show"
-import { render } from "@/tests/helpers/utils"
 import { testShowPageTabs } from "@/tests/helpers/testTabs"
+import { render } from "@/tests/helpers/utils"
 
 import {
 	createMockAccessoriesShow,
@@ -38,7 +38,7 @@ describe("Accessories/Show", () => {
 		expect(container.firstChild).toBeInTheDocument()
 	})
 
-	test("renders all tabs and their content", async () => {
+	test("renders all tabs and their content", async() => {
 		const accessory = createMockAccessoriesShow()
 
 		render(<ShowAccessory accessory={ accessory } />)

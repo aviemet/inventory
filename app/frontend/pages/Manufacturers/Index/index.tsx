@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import ManufacturersTable, { manufacturersColumns } from "@/domains/Manufacturers/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ManufacturersTable, { manufacturersColumns } from "@/domains/Manufacturers/Table"
 
 interface ManufacturersIndexProps {
 	manufacturers: Schema.ManufacturersIndex[]
@@ -23,7 +22,7 @@ const ManufacturersIndex = ({ manufacturers, pagination }: ManufacturersIndexPro
 				{ label: "New Manufacturer", href: Routes.newManufacturer(), icon: <NewIcon /> },
 			] }
 		>
-			<ManufacturersTable />
+			<ManufacturersTable records={ manufacturers } pagination={ pagination } model="manufacturers" />
 		</IndexPageTemplate>
 	)
 }

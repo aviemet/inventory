@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import ConsumablesTable, { consumablesColumns } from "@/domains/Consumables/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ConsumablesTable, { consumablesColumns } from "@/domains/Consumables/Table"
 
 interface ConsumablesIndexProps {
 	consumables: Schema.ConsumablesIndex[]
@@ -23,7 +22,7 @@ const ConsumablesIndex = ({ consumables, pagination }: ConsumablesIndexProps) =>
 			] }
 			deleteRoute={ Routes.consumables() }
 		>
-			<ConsumablesTable />
+			<ConsumablesTable records={ consumables } pagination={ pagination } model="consumables" />
 		</IndexPageTemplate>
 	)
 }

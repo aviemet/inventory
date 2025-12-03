@@ -54,7 +54,7 @@ class UsersController < ApplicationController
       return
     end
 
-    render inertia: "Public/Devise/Register/Complete"
+    render inertia: "Devise/Register/Complete"
   end
 
   # @route POST /users/complete_registration (save_complete_registration)

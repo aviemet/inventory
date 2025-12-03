@@ -1,3 +1,5 @@
+import { type ColumnDef } from "@tanstack/react-table"
+
 import { Page, Table } from "@/components"
 import AccessoriesTable, { accessoriesColumns } from "@/domains/Accessories/Table"
 import ComponentsTable, { componentsColumns } from "@/domains/Components/Table"
@@ -7,7 +9,6 @@ import ItemsTable, { itemsColumns } from "@/domains/Items/Table"
 import LicensesTable, { licensesColumns } from "@/domains/Licenses/Table"
 import { TableTitleSection } from "@/features"
 import { Routes } from "@/lib"
-import { type ColumnDef } from "@tanstack/react-table"
 
 type CategoryRecord = Schema.Accessory | Schema.Address | Schema.Component | Schema.Consumable | Schema.Contract | Schema.Email | Schema.Item | Schema.License | Schema.Phone | Schema.Vendor | Schema.Website
 

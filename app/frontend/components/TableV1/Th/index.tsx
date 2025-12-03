@@ -1,5 +1,5 @@
-import React from "react"
 import { type TableThProps } from "@mantine/core"
+import React from "react"
 
 import { usePageProps } from "@/lib/hooks"
 

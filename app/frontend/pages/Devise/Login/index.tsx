@@ -4,6 +4,7 @@ import { type UseFormProps } from "use-inertia-form"
 import { Title, Tile } from "@/components"
 import { Form, Field, TextInput, PasswordInput, Checkbox, Submit } from "@/components/Form"
 import { Routes } from "@/lib"
+import { withLayout } from "@/lib/withLayout"
 
 type LoginFormData = {
 	user: {
@@ -85,4 +86,4 @@ const Login = () => {
 	)
 }
 
-export default Login
+export default withLayout(Login, "auth")

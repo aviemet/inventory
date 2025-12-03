@@ -1,4 +1,3 @@
-
 import { Badge, SimpleGrid } from "@/components"
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon, LicensesIcon, PeopleIcon } from "@/components/Icons"
 import IconProvider from "@/layouts/Providers/IconProvider"

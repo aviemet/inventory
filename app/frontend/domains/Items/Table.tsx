@@ -77,8 +77,23 @@ export const itemsColumns: DataTableColumn<Schema.ItemsIndex>[] = [
 	},
 ]
 
-const ItemsTable = () => {
-	return null
+import { Table } from "@/components"
+
+interface ItemsTableProps {
+	records: Schema.ItemsIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const ItemsTable = ({ records, pagination, model }: ItemsTableProps) => {
+	return (
+		<Table.DataTable
+			columns={ itemsColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
+	)
 }
 
 export default ItemsTable

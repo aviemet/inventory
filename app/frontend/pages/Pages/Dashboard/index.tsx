@@ -1,4 +1,3 @@
-
 import { Title, Page, Section } from "@/components"
 
 import Counts from "./Counts"

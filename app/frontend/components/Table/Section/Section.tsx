@@ -3,7 +3,7 @@ import React from "react"
 import { Section as BaseSection } from "@/components"
 
 import * as classes from "./Section.css"
-import { TableSectionContextProvider } from "./TableContext"
+import { TableSectionContextProvider } from "../Provider/TableContext"
 
 export function Section({ children }: { children: React.ReactNode }) {
 	return (

@@ -1,10 +1,9 @@
-import { router } from "@inertiajs/react"
 import { Group, Pagination as MantinePagination } from "@mantine/core"
 import clsx from "clsx"
 
 import { Link } from "@/components"
 
-import { LimitSelect } from "./Pagination/LimitSelect"
+import { LimitSelect } from "./LimitSelect"
 import * as classes from "./Pagination.css"
 
 interface PaginationProps {

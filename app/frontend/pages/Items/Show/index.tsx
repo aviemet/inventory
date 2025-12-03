@@ -34,7 +34,10 @@ const ShowItem = ({ item }: ShowItemProps) => {
 		] }>
 			<Section fullHeight>
 				<Group justify="space-between">
-					<Title style={ { flex: 1 } }>{ title }</Title>
+					<Group style={ { flex: 1 } }>
+						<Title style={ { flex: 1 } }>{ title }</Title>
+						<div id="item-documentations-search-portal" />
+					</Group>
 
 					<Menu position="bottom-end">
 						<Menu.Target />

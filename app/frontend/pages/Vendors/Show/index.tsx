@@ -1,16 +1,14 @@
-
 import { Section, Link, Menu, Group, Title, Tabs, Page } from "@/components"
 import { NewIcon, EditIcon } from "@/components/Icons"
-import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
-import { Routes } from "@/lib"
 import AccessoriesTable from "@/domains/Accessories/Table"
+import ComponentsTable from "@/domains/Components/Table"
 import ConsumablesTable from "@/domains/Consumables/Table"
 import ContractsTable from "@/domains/Contracts/Table"
 import ItemsTable from "@/domains/Items/Table"
 import LicensesTable from "@/domains/Licenses/Table"
+import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
+import { Routes } from "@/lib"
 import { type PaginatedModel } from "@/types/PaginatedModel"
-
-import ComponentsTable from "@/domains/Components/Table"
 
 interface VendorShowProps {
 	vendor: Schema.VendorsShow

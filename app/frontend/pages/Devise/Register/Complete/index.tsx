@@ -1,8 +1,8 @@
-
 import { Title, Tile } from "@/components"
 import { Field, Form, TextInput, Submit } from "@/components/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
+import { withLayout } from "@/lib/withLayout"
 
 type RegisterFormData = {
 	person: {
@@ -67,4 +67,4 @@ const CompleteRegistration = () => {
 	)
 }
 
-export default CompleteRegistration
+export default withLayout(CompleteRegistration, "auth")

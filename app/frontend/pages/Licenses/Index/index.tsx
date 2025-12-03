@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import LicensesTable, { licensesColumns } from "@/domains/Licenses/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import LicensesTable, { licensesColumns } from "@/domains/Licenses/Table"
 
 interface LicensesIndexProps {
 	licenses: Schema.LicensesIndex[]
@@ -23,7 +22,7 @@ const LicensesIndex = ({ licenses, pagination }: LicensesIndexProps ) => {
 				{ label: "New License", href: Routes.newLicense(), icon: <NewIcon /> },
 			] }
 		>
-			<LicensesTable />
+			<LicensesTable records={ licenses } pagination={ pagination } model="licenses" />
 		</IndexPageTemplate>
 	)
 }

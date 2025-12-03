@@ -1,8 +1,8 @@
 import { isEmpty } from "lodash"
 
 import { Select as FormSelect } from "@/components/Form"
-import { Routes } from "@/lib"
 import CategoriesForm from "@/domains/Categories/Form"
+import { Routes } from "@/lib"
 import { useGetCategoriesAsOptions } from "@/queries/categories"
 
 import { type FormAsyncDropdown } from ".."

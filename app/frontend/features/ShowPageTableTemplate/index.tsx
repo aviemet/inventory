@@ -1,18 +1,17 @@
+import { type DataTableColumn } from "mantine-datatable"
 import React from "react"
-import { type ColumnDef } from "@tanstack/react-table"
 
+import { Table } from "@/components"
 import { type Icon } from "@/components/Icons"
-import Table from "@/components/Table"
-import { type TableRowData } from "@/components/Table/TableContext/TableContext"
 
 import { TableTitleSection } from ".."
 
-interface ShowPageTableTemplate {
-	children: React.ReactNode
+interface ShowPageTableTemplate<T = Record<string, unknown>> {
+	children?: React.ReactNode
 	title: string
 	model: string
-	rows: readonly TableRowData[]
-	columns: ColumnDef<TableRowData>[]
+	rows: T[]
+	columns: DataTableColumn<T>[]
 	pagination: Schema.Pagination
 	menuOptions?: {
 		label: string
@@ -21,24 +20,31 @@ interface ShowPageTableTemplate {
 	}[]
 }
 
-const ShowPageTableTemplate = ({ children, model, rows, columns, pagination, title, menuOptions }: ShowPageTableTemplate) => {
+const ShowPageTableTemplate = <T = Record<string, unknown>>({
+	children,
+	model,
+	rows,
+	columns,
+	pagination,
+	title,
+	menuOptions }
+: ShowPageTableTemplate<T>) => {
 	return (
-		<Table.TableProvider
-			selectable
-			hideable
-			model={ model }
-			data={ rows }
-			columns={ columns }
-			pagination={ pagination }
-		>
+		<Table.Section>
 			<TableTitleSection title={ title } menuOptions={ menuOptions }>
-				<Table.SearchInput />
+				<Table.SearchInput model={ model } />
 			</TableTitleSection>
 
-			{ children }
-
-			<Table.Pagination />
-		</Table.TableProvider>
+			{ children || (
+				<Table.DataTable
+					columns={ columns }
+					records={ rows }
+					pagination={ pagination }
+					model={ model }
+					selectable
+				/>
+			) }
+		</Table.Section>
 	)
 }
 

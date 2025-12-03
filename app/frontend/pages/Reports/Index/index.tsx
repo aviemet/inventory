@@ -1,4 +1,3 @@
-
 const ReportsIndex = () => {
 	return (
 		<div>Reports Index</div>

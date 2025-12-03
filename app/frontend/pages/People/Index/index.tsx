@@ -1,9 +1,8 @@
-
 import { NewIcon, SettingsIcon } from "@/components/Icons"
+import PeopleTable, { peopleColumns } from "@/domains/People/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import PeopleTable, { peopleColumns } from "@/domains/People/Table"
 
 interface PeopleIndexProps {
 	people: Schema.PeopleIndex[]
@@ -24,7 +23,7 @@ const PeopleIndex = ({ people, pagination }: PeopleIndexProps) => {
 				// { label: 'LDAP Settings', href: Routes.settings(), icon: SettingsIcon },
 			] }
 		>
-			<PeopleTable />
+			<PeopleTable records={ people } pagination={ pagination } model="people" />
 		</IndexPageTemplate>
 	)
 }

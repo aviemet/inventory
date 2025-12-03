@@ -9,6 +9,7 @@ import { SearchIcon, CrossIcon } from "@/components/Icons"
 import { TextInput } from "@/components/Inputs"
 import { useInit, useLocation } from "@/lib/hooks"
 
+import { useTableContext } from "../Provider"
 import { AdvancedSearch } from "./AdvancedSearch/AdvancedSearch"
 import * as classes from "./SearchInput.css"
 
@@ -25,11 +26,16 @@ export function SearchInput({
 	value: valueProp,
 	onChange: onChangeProp,
 	onSearch: onSearchProp,
-	model,
+	model: modelProp,
 	advancedSearch,
 	debounceMs = 500,
 }: SearchInputProps) {
-	const [searching, setSearching] = React.useState(false)
+	const context = useTableContext(false)
+	const model = modelProp ?? context?.model
+	const setSearching = context?.setSearching
+	const [internalSearching, setInternalSearching] = React.useState(false)
+	const searching = context ? context.searching : internalSearching
+	const handleSetSearching = context ? setSearching : setInternalSearching
 
 	const location = useLocation()
 	const [internalValue, setInternalValue] = useSessionStorage({
@@ -53,7 +59,7 @@ export function SearchInput({
 		}
 
 		if(model && internalValue) {
-			setSearching?.(true)
+			handleSetSearching?.(true)
 			setInternalValue(internalValue)
 		}
 	})
@@ -66,7 +72,7 @@ export function SearchInput({
 				}, debounceMs)
 			}
 
-			if(!model || !setSearching) return null
+			if(!model || !handleSetSearching) return null
 
 			return debounce((path: string) => {
 				const options: VisitOptions = {
@@ -74,10 +80,10 @@ export function SearchInput({
 					preserveScroll: true,
 					preserveState: true,
 					onStart: () => {
-						setSearching(true)
+						handleSetSearching(true)
 					},
 					onSuccess: () => {
-						setSearching(false)
+						handleSetSearching(false)
 					},
 				}
 				if(model) {
@@ -87,7 +93,7 @@ export function SearchInput({
 				router.get(path, {}, options)
 			}, debounceMs)
 		},
-		[model, setSearching, onSearchProp, debounceMs]
+		[model, handleSetSearching, onSearchProp, debounceMs]
 	)
 
 	useEffect(() => {

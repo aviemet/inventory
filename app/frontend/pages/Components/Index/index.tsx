@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import ComponentsTable, { componentsColumns } from "@/domains/Components/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ComponentsTable, { componentsColumns } from "@/domains/Components/Table"
 
 interface ComponentsIndexProps {
 	components: Schema.Item[]
@@ -23,7 +22,7 @@ const ComponentsIndex = ({ components, pagination }: ComponentsIndexProps) => {
 				{ label: "New Component", href: Routes.newComponent(), icon: <NewIcon /> },
 			] }
 		>
-			<ComponentsTable />
+			<ComponentsTable records={ components } pagination={ pagination } model="components" />
 		</IndexPageTemplate>
 	)
 }

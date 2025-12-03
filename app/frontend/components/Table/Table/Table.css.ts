@@ -1,7 +1,9 @@
 import { css } from "@linaria/core"
 
+export const wrapper = css`
+	overflow-x: auto;
+`
+
 export const table = css`
-	th {
-		white-space: nowrap !important;
-	}
+	width: 100%;
 `

@@ -1,7 +1,6 @@
-import React from "react"
 import { router } from "@inertiajs/react"
 import clsx from "clsx"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 
 import { NestedURLSearchParams, isUnset } from "@/lib"
 import { useLocation } from "@/lib/hooks"

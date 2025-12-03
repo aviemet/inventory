@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import LocationForm from "@/domains/Locations/Form"
 import { Routes } from "@/lib"
 
-import LocationForm from "@/domains/Locations/Form"
 
 interface NewLocationProps {
 	location: Schema.LocationsFormData

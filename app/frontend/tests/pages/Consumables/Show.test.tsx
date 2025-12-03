@@ -1,8 +1,8 @@
 import { describe, test, expect, beforeEach } from "vitest"
 
 import ShowConsumable from "@/pages/Consumables/Show"
-import { render } from "@/tests/helpers/utils"
 import { testShowPageTabs } from "@/tests/helpers/testTabs"
+import { render } from "@/tests/helpers/utils"
 
 import {
 	createMockConsumablesShow,
@@ -38,7 +38,7 @@ describe("Consumables/Show", () => {
 		expect(container.firstChild).toBeInTheDocument()
 	})
 
-	test("renders all tabs and their content", async () => {
+	test("renders all tabs and their content", async() => {
 		const consumable = createMockConsumablesShow()
 
 		render(<ShowConsumable consumable={ consumable } />)

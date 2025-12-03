@@ -1,9 +1,8 @@
-
 import { Section } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import AccessoriesTable, { accessoriesColumns } from "@/domains/Accessories/Table"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
-import AccessoriesTable, { accessoriesColumns } from "@/domains/Accessories/Table"
 import { type PaginatedModel } from "@/types/PaginatedModel"
 
 interface DetailsProps {
@@ -24,7 +23,7 @@ const Details = ({ department, accessories }: DetailsProps) => {
 					{ label: "New Accessory", href: Routes.newAccessory(), icon: <NewIcon /> },
 				] }
 			>
-				<AccessoriesTable wrapper={ false } />
+				<AccessoriesTable records={ accessories?.data ?? [] } pagination={ accessories?.pagination } model="accessories" />
 			</ShowPageTableTemplate>
 		</Section>
 	)

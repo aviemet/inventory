@@ -1,69 +1,47 @@
-import { createColumnHelper } from "@tanstack/react-table"
+import { type DataTableColumn } from "mantine-datatable"
 
-import { Link, Table } from "@/components"
+import { Link } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const columnHelper = createColumnHelper<Schema.PersonGroupsIndex>()
-
-export const personGroupsColumns = [
-	columnHelper.accessor("name", {
-		header: "Group Name",
-		enableSorting: false,
-		meta: {
-			hideable: false,
-		},
-	}),
-	columnHelper.display({
-		id: "people",
-		header: "People",
-		enableSorting: false,
-		meta: {
-			hideable: "people",
-		},
-	}),
-	columnHelper.display({
-		id: "actions",
-		header: "Actions",
-		enableSorting: false,
-		meta: {
-			hideable: false,
-		},
-	}),
+export const personGroupsColumns: DataTableColumn<Schema.PersonGroupsIndex>[] = [
+	{
+		accessor: "name",
+		title: "Group Name",
+		sortable: false,
+		render: (personGroup) => <Link href={ Routes.personGroup(personGroup.slug) }>{ personGroup.name }</Link>,
+	},
+	{
+		accessor: "people",
+		title: "People",
+		sortable: false,
+		render: (personGroup) => personGroup.people?.length ?? null,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (personGroup) => <EditButton href={ Routes.editPersonGroup(personGroup.slug) } label={ personGroup.name } />,
+	},
 ]
 
-const GroupsTable = (props: Omit<TableProps, "children">) => {
+import { Table } from "@/components"
+
+interface PersonGroupsTableProps {
+	records: Schema.PersonGroupsIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const GroupsTable = ({ records, pagination, model }: PersonGroupsTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell columnId="name" />
-					<Table.HeadCell columnId="people" />
-					<Table.HeadCell columnId="actions" style={ { textAlign: "right", paddingRight: "1rem" } } />
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (person_group: Schema.PersonGroupsIndex) => (
-					<Table.Row key={ person_group.id }>
-
-						<Table.Cell columnId="name" nowrap>
-							<Link href={ Routes.personGroup(person_group.slug) }>{ person_group.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell columnId="people">
-							{ person_group.people?.length }
-						</Table.Cell>
-
-						<Table.Cell columnId="actions" fitContent>
-							<EditButton href={ Routes.editPersonGroup(person_group.slug) } label={ person_group.name } />
-						</Table.Cell>
-
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ personGroupsColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 
