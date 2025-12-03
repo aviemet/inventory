@@ -4,7 +4,7 @@ import { DateTimeFormatter, Link, Money } from "@/components"
 import { EditButton } from "@/components/Button"
 import { Routes } from "@/lib"
 
-export const ordersColumns: DataTableColumn<Schema.OrdersIndex>[] = [
+const ordersColumns: DataTableColumn<Schema.OrdersIndex>[] = [
 	{
 		accessor: "number",
 		title: "Order #",

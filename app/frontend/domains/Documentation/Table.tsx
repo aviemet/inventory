@@ -4,7 +4,7 @@ import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
 import { Routes } from "@/lib"
 
-export const documentationColumns: DataTableColumn<Schema.DocumentationsIndex>[] = [
+const documentationColumns: DataTableColumn<Schema.DocumentationsIndex>[] = [
 	{
 		accessor: "title",
 		title: "Title",

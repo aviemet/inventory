@@ -2,9 +2,7 @@ import { router } from "@inertiajs/react"
 import { LoadingOverlay, useMantineTheme } from "@mantine/core"
 import clsx from "clsx"
 import { DataTable as MantineDataTable, type DataTableProps, type DataTableSortStatus } from "mantine-datatable"
-import React, { useMemo, useState } from "react"
-
-import { useLocation } from "@/lib/hooks"
+import React, { useEffect, useMemo, useState } from "react"
 
 import * as classes from "./DataTable.css"
 import { Pagination } from "../Pagination"
@@ -34,40 +32,81 @@ export function DataTable<T = Record<string, unknown>>({
 	const searching = context?.searching ?? false
 
 	const [selectedRecords, setSelectedRecords] = useState<T[]>([])
-	const [localSortStatus, setLocalSortStatus] = useState<DataTableSortStatus<T> | undefined>(undefined)
 
-	const location = useLocation()
-	const paramsSort = location.params.get("sort")
-	const paramsDirection = location.params.get("direction") as "asc" | "desc" | null
-
-	const serverSortStatus = useMemo<DataTableSortStatus<T> | undefined>(() => {
-		if(!pagination || !model || !paramsSort || !paramsDirection) return undefined
+	const getSortStatusFromURL = (): DataTableSortStatus<T> | undefined => {
+		if(!pagination || !model) return undefined
+		const params = new URLSearchParams(window.location.search)
+		const sort = params.get("sort")
+		const direction = params.get("direction") as "asc" | "desc" | null
+		if(!sort || !direction) return undefined
 		return {
-			columnAccessor: paramsSort as keyof T,
-			direction: paramsDirection as "asc" | "desc",
+			columnAccessor: sort as keyof T,
+			direction: direction as "asc" | "desc",
 		}
-	}, [pagination, model, paramsSort, paramsDirection])
+	}
 
-	const sortStatus = serverSortStatus ?? localSortStatus
+	const getInitialSortStatus = (): DataTableSortStatus<T> | undefined => {
+		if(!pagination || !model) return undefined
+		const params = new URLSearchParams(window.location.search)
+		const sort = params.get("sort")
+		const direction = params.get("direction") as "asc" | "desc" | null
+		if(!sort || !direction) return undefined
+		return {
+			columnAccessor: sort as keyof T,
+			direction: direction as "asc" | "desc",
+		}
+	}
+
+	const [sortStatus, setSortStatus] = useState<DataTableSortStatus<T> | undefined>(getInitialSortStatus)
+
+	useEffect(() => {
+		if(!pagination || !model) return
+
+		const updateFromURL = () => {
+			const params = new URLSearchParams(window.location.search)
+			const sort = params.get("sort")
+			const direction = params.get("direction") as "asc" | "desc" | null
+			if(sort && direction) {
+				setSortStatus({
+					columnAccessor: sort as keyof T,
+					direction: direction as "asc" | "desc",
+				})
+			} else {
+				setSortStatus(undefined)
+			}
+		}
+
+		const handleSuccess = () => updateFromURL()
+		document.addEventListener("inertia:success", handleSuccess)
+		window.addEventListener("popstate", updateFromURL)
+
+		return () => {
+			document.removeEventListener("inertia:success", handleSuccess)
+			window.removeEventListener("popstate", updateFromURL)
+		}
+	}, [pagination, model])
 
 	const handleSortStatusChange = (status: DataTableSortStatus<T>) => {
 		if(onSortChange) {
-			onSortChange(String(status.columnAccessor), status.direction)
+			onSortChange(String(status.columnAccessor), status.direction ?? null)
 			return
 		}
 
 		if(pagination && model) {
 			const url = new URL(window.location.href)
-			url.searchParams.set("sort", String(status.columnAccessor))
-			url.searchParams.set("direction", status.direction)
+			if(status.direction) {
+				url.searchParams.set("sort", String(status.columnAccessor))
+				url.searchParams.set("direction", status.direction)
+			} else {
+				url.searchParams.delete("sort")
+				url.searchParams.delete("direction")
+			}
 
 			router.get(url.toString(), {}, {
 				preserveState: true,
 				preserveScroll: true,
 				replace: true,
 			})
-		} else {
-			setLocalSortStatus(status)
 		}
 	}
 
@@ -107,7 +146,7 @@ export function DataTable<T = Record<string, unknown>>({
 				classNames={ {
 					table: clsx(classes.table, classNames?.table),
 					root: clsx(classes.root, classNames?.root),
-					header: classNames?.header,
+					header: clsx(classes.header, classNames?.header),
 					footer: classNames?.footer,
 					pagination: classNames?.pagination,
 				} }

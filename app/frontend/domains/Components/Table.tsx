@@ -4,7 +4,7 @@ import { Group, Link, Money } from "@/components"
 import { EditButton, CheckoutButton } from "@/components/Button"
 import { Routes } from "@/lib"
 
-export const componentsColumns: DataTableColumn<Schema.ComponentsIndex>[] = [
+const componentsColumns: DataTableColumn<Schema.ComponentsIndex>[] = [
 	{
 		accessor: "name",
 		title: "Name",

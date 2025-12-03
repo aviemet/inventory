@@ -6,6 +6,13 @@ export const table = css`
 	}
 `
 
+export const header = css`
+	th {
+		cursor: pointer;
+		user-select: none;
+	}
+`
+
 export const root = css`
 	flex: 1;
 	min-height: 0;

@@ -1,5 +1,7 @@
+import { useState } from "react"
+
 import { NewIcon } from "@/components/Icons"
-import ItemsTable, { itemsColumns } from "@/domains/Items/Table"
+import ItemsTable from "@/domains/Items/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -11,19 +13,29 @@ interface ItemsIndexProps {
 }
 
 const ItemsIndex = ({ items, pagination }: ItemsIndexProps) => {
+	const [selectedRecords, setSelectedRecords] = useState<Schema.ItemsIndex[]>([])
+
 	return (
 		<IndexPageTemplate
 			title="Hardware Assets"
 			model="items"
 			rows={ items }
-			columns={ itemsColumns }
+			columns={ [] }
 			pagination={ pagination }
 			deleteRoute={ Routes.items() }
 			menuOptions={ [
 				{ label: "New Asset", href: Routes.newItem(), icon: <NewIcon /> },
 			] }
 			advancedSearch={ <AdvancedItemsSearch /> }
-		/>
+			selectedRecords={ selectedRecords }
+		>
+			<ItemsTable
+				records={ items }
+				pagination={ pagination }
+				model="items"
+				onSelectedRecordsChange={ setSelectedRecords }
+			/>
+		</IndexPageTemplate>
 	)
 }
 

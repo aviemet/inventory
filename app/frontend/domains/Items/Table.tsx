@@ -1,10 +1,11 @@
 import { type DataTableColumn } from "mantine-datatable"
+import { useState } from "react"
 
-import { Link, Money, Group } from "@/components"
+import { Link, Money, Group, Table } from "@/components"
 import { EditButton, CheckoutButton, CheckinButton } from "@/components/Button"
 import { Routes } from "@/lib"
 
-export const itemsColumns: DataTableColumn<Schema.ItemsIndex>[] = [
+const itemsColumns: DataTableColumn<Schema.ItemsIndex>[] = [
 	{
 		accessor: "name",
 		title: "Name",
@@ -77,21 +78,30 @@ export const itemsColumns: DataTableColumn<Schema.ItemsIndex>[] = [
 	},
 ]
 
-import { Table } from "@/components"
 
 interface ItemsTableProps {
 	records: Schema.ItemsIndex[]
 	pagination: Schema.Pagination
 	model: string
+	onSelectedRecordsChange?: (records: Schema.ItemsIndex[]) => void
 }
 
-const ItemsTable = ({ records, pagination, model }: ItemsTableProps) => {
+const ItemsTable = ({ records, pagination, model, onSelectedRecordsChange }: ItemsTableProps) => {
+	const [selectedRecords, setSelectedRecords] = useState<Schema.ItemsIndex[]>([])
+
+	const handleSelectedRecordsChange = (newSelected: Schema.ItemsIndex[]) => {
+		setSelectedRecords(newSelected)
+		onSelectedRecordsChange?.(newSelected)
+	}
+
 	return (
 		<Table.DataTable
 			columns={ itemsColumns }
 			records={ records }
 			pagination={ pagination }
 			model={ model }
+			selectable={ true }
+			onSelectedRecordsChange={ handleSelectedRecordsChange }
 		/>
 	)
 }

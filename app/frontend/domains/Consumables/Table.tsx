@@ -6,7 +6,7 @@ import { Routes } from "@/lib"
 
 import { ReplenishButton } from "./ReplenishButton"
 
-export const consumablesColumns: DataTableColumn<Schema.ConsumablesIndex>[] = [
+const consumablesColumns: DataTableColumn<Schema.ConsumablesIndex>[] = [
 	{
 		accessor: "name",
 		title: "Name",

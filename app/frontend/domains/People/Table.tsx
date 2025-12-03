@@ -5,7 +5,7 @@ import { EditButton } from "@/components/Button"
 import { CheckIcon, CrossIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
 
-export const peopleColumns: DataTableColumn<Schema.PeopleIndex>[] = [
+const peopleColumns: DataTableColumn<Schema.PeopleIndex>[] = [
 	{
 		accessor: "first_name",
 		title: "First Name",

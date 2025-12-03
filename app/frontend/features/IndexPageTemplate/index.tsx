@@ -1,14 +1,14 @@
 import { type DataTableColumn } from "mantine-datatable"
-import React, { useState } from "react"
+import React from "react"
 
 import { Page, Table } from "@/components"
 import { type Breadcrumb } from "@/components/Breadcrumbs"
 
 import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSection"
 
-interface IndexPageTemplateProps<T = Record<string, unknown>> extends Omit<IndexTableTitleSectionProps, "selectedRecords"> {
+interface IndexPageTemplateProps<T = Record<string, unknown>> extends IndexTableTitleSectionProps {
 	model: string
-	rows: readonly T[]
+	rows: T[]
 	columns: DataTableColumn<T>[]
 	pagination: Schema.Pagination
 	search?: boolean
@@ -30,9 +30,8 @@ const IndexPageTemplate = <T = Record<string, unknown>>({
 	advancedSearch,
 	deleteRoute,
 	selectable = true,
+	selectedRecords = [],
 }: IndexPageTemplateProps<T>) => {
-	const [selectedRecords, setSelectedRecords] = useState<T[]>([])
-
 	return (
 		<Page title={ title } breadcrumbs={ breadcrumbs ?? [
 			{ title, href: window.location.href },
@@ -47,16 +46,7 @@ const IndexPageTemplate = <T = Record<string, unknown>>({
 					{ search && <Table.SearchInput model={ model } advancedSearch={ advancedSearch } /> }
 				</TableTitleSection>
 
-				{ children || (
-					<Table.DataTable
-						columns={ columns }
-						records={ rows }
-						pagination={ pagination }
-						model={ model }
-						selectable={ selectable }
-						onSelectedRecordsChange={ setSelectedRecords }
-					/>
-				) }
+				{ children }
 			</Table.Section>
 		</Page>
 	)
