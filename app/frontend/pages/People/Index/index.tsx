@@ -1,5 +1,5 @@
 import { NewIcon, SettingsIcon } from "@/components/Icons"
-import PeopleTable, { peopleColumns } from "@/domains/People/Table"
+import PeopleTable from "@/domains/People/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const PeopleIndex = ({ people, pagination }: PeopleIndexProps) => {
 		<IndexPageTemplate
 			title="People"
 			model="people"
-			rows={ people }
-			columns={ peopleColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.people() }
 			menuOptions={ [

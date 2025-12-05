@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import AccessoriesTable, { accessoriesColumns } from "@/domains/Accessories/Table"
+import AccessoriesTable from "@/domains/Accessories/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const AccessoriesIndex = ({ accessories, pagination }: AccessoriesIndexProps) =>
 		<IndexPageTemplate
 			title="Accessories"
 			model="accessories"
-			rows={ accessories }
-			columns={ accessoriesColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.accessories() }
 			menuOptions={ [

@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import OrdersTable, { ordersColumns } from "@/domains/Orders/Table"
+import OrdersTable from "@/domains/Orders/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const OrdersIndex = ({ orders, pagination }: OrdersIndexProps) => {
 		<IndexPageTemplate
 			title="Orders"
 			model="orders"
-			rows={ orders }
-			columns={ ordersColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.orders() }
 			menuOptions={ [

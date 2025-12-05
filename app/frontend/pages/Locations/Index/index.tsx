@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import LocationsTable, { locationsColumns } from "@/domains/Locations/Table"
+import LocationsTable from "@/domains/Locations/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const LocationsIndex = ({ locations, pagination }: CompaniesIndexProps) => {
 		<IndexPageTemplate
 			title="Locations"
 			model="locations"
-			rows={ locations }
-			columns={ locationsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.locations() }
 			menuOptions={ [

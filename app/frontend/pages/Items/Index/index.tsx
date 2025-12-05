@@ -19,8 +19,6 @@ const ItemsIndex = ({ items, pagination }: ItemsIndexProps) => {
 		<IndexPageTemplate
 			title="Hardware Assets"
 			model="items"
-			rows={ items }
-			columns={ [] }
 			pagination={ pagination }
 			deleteRoute={ Routes.items() }
 			menuOptions={ [

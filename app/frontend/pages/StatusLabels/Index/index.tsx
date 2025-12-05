@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import StatusLabelsTable, { statusLabelsColumns } from "@/domains/StatusLabels/Table"
+import StatusLabelsTable from "@/domains/StatusLabels/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -15,8 +15,6 @@ const StatusLabelsIndex = ({ status_labels, pagination }: StatusLabelsIndexProps
 			title="Support StatusLabels"
 			model="status_labels"
 			search={ false }
-			rows={ status_labels }
-			columns={ statusLabelsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.statusLabels() }
 			menuOptions={ [

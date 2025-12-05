@@ -45,7 +45,7 @@ const NetworkDetailsTable = ({ hosts, ips, pagination }: NetworkDetailsTableProp
 			selectable={ false }
 			hideable={ false }
 			model="networks"
-			data={ ips }
+			records={ ips }
 			pagination={ pagination }
 		>
 			<Flex align="start">

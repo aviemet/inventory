@@ -1,4 +1,3 @@
-import { type DataTableColumn } from "mantine-datatable"
 import React from "react"
 
 import { Page, Table } from "@/components"
@@ -6,18 +5,15 @@ import { type Breadcrumb } from "@/components/Breadcrumbs"
 
 import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSection"
 
-interface IndexPageTemplateProps<T = Record<string, unknown>> extends IndexTableTitleSectionProps {
+interface IndexPageTemplateProps extends IndexTableTitleSectionProps {
 	model: string
-	rows: T[]
-	columns: DataTableColumn<T>[]
 	pagination: Schema.Pagination
 	search?: boolean
 	breadcrumbs?: Breadcrumb[]
 	advancedSearch?: React.ReactNode
-	selectable?: boolean
 }
 
-const IndexPageTemplate = <T = Record<string, unknown>>({
+const IndexPageTemplate = ({
 	children,
 	title,
 	model,
@@ -27,7 +23,7 @@ const IndexPageTemplate = <T = Record<string, unknown>>({
 	advancedSearch,
 	deleteRoute,
 	selectedRecords = [],
-}: IndexPageTemplateProps<T>) => {
+}: IndexPageTemplateProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ breadcrumbs ?? [
 			{ title, href: window.location.href },

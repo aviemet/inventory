@@ -54,7 +54,7 @@ const Show = ({ category, records, pagination }: ShowCategoryProps) => {
 					selectable
 					hideable
 					model={ category.plural.toLocaleLowerCase() }
-					data={ records }
+					records={ records }
 					columns={ columns }
 					pagination={ pagination }
 				>

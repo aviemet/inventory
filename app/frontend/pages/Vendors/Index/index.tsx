@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import VendorsTable, { vendorsColumns } from "@/domains/Vendors/Table"
+import VendorsTable from "@/domains/Vendors/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const VendorsIndex = ({ vendors, pagination }: VendorsIndexProps) => {
 		<IndexPageTemplate
 			title="Vendors"
 			model="vendors"
-			rows={ vendors }
-			columns={ vendorsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.vendors() }
 			menuOptions={ [

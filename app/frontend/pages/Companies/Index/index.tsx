@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import CompaniesTable, { companiesColumns } from "@/domains/Companies/Table"
+import CompaniesTable from "@/domains/Companies/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const CompaniesIndex = ({ companies, pagination }: CompaniesIndexProps) => {
 		<IndexPageTemplate
 			title="Companies"
 			model="companies"
-			rows={ companies }
-			columns={ companiesColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.companies() }
 			menuOptions={ [

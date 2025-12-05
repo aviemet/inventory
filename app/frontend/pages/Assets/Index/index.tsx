@@ -1,5 +1,5 @@
 import { AccessoriesIcon, ComponentsIcon, ConsumablesIcon, ItemsIcon } from "@/components/Icons"
-import AssetTable, { assetsColumns } from "@/domains/Assets/Table"
+import AssetTable from "@/domains/Assets/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const AssetsIndex = ({ assets, pagination }: AssetsIndexProps) => {
 		<IndexPageTemplate
 			title="All Assets"
 			model="assets"
-			rows={ assets }
-			columns={ assetsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.assets() }
 			menuOptions={ [

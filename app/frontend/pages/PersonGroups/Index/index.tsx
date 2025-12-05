@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import GroupsTable, { personGroupsColumns } from "@/domains/PersonGroups/Table"
+import GroupsTable from "@/domains/PersonGroups/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -16,8 +16,6 @@ const GroupIndex = ({ person_groups, pagination }: GroupIndexProps) => {
 		<IndexPageTemplate
 			title={ title }
 			model="person_groups"
-			rows={ person_groups }
-			columns={ personGroupsColumns }
 			pagination={ pagination }
 			search={ false }
 			deleteRoute={ Routes.personGroups() }

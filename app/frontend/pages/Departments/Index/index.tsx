@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import DepartmentsTable, { departmentsColumns } from "@/domains/Departments/Table"
+import DepartmentsTable from "@/domains/Departments/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const DepartmentsIndex = ({ departments, pagination }: DepartmentsIndexProps) =>
 		<IndexPageTemplate
 			title="Departments"
 			model="departments"
-			rows={ departments }
-			columns={ departmentsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.departments() }
 			menuOptions={ [

@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import LicensesTable, { licensesColumns } from "@/domains/Licenses/Table"
+import LicensesTable from "@/domains/Licenses/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const LicensesIndex = ({ licenses, pagination }: LicensesIndexProps ) => {
 		<IndexPageTemplate
 			title="Licenses"
 			model="licenses"
-			rows={ licenses }
-			columns={ licensesColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.licenses() }
 			menuOptions={ [

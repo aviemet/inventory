@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import CategoriesTable, { categoriesColumns } from "@/domains/Categories/Table"
+import CategoriesTable from "@/domains/Categories/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -13,8 +13,6 @@ const CategoriesIndex = ({ categories, pagination }: CategoriesIndexProps) => {
 		<IndexPageTemplate
 			title="Categories"
 			model="categories"
-			rows={ categories }
-			columns={ categoriesColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.categories() }
 			menuOptions={ [

@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import NetworksTable, { networksColumns } from "@/domains/Networks/Table"
+import NetworksTable from "@/domains/Networks/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const NetworksIndex = ({ networks, pagination }: NetworksIndexProps) => {
 		<IndexPageTemplate
 			title="Networks"
 			model="networks"
-			rows={ networks }
-			columns={ networksColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.networks() }
 			menuOptions={ [

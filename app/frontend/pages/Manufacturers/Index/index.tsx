@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import ManufacturersTable, { manufacturersColumns } from "@/domains/Manufacturers/Table"
+import ManufacturersTable from "@/domains/Manufacturers/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const ManufacturersIndex = ({ manufacturers, pagination }: ManufacturersIndexPro
 		<IndexPageTemplate
 			title="Manufacturers"
 			model="manufacturers"
-			rows={ manufacturers }
-			columns={ manufacturersColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.manufacturers() }
 			menuOptions={ [

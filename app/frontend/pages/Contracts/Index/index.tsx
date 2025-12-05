@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import ContractsTable, { contractsColumns } from "@/domains/Contracts/Table"
+import ContractsTable from "@/domains/Contracts/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const ContractsIndex = ({ contracts, pagination }: ContractsIndexProps) => {
 		<IndexPageTemplate
 			title="Contracts"
 			model="contracts"
-			rows={ contracts }
-			columns={ contractsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.contracts() }
 			menuOptions={ [

@@ -5,3 +5,11 @@ alwaysApply: true
 ---
 
 Only work on the task at hand. Limit the scope of your response to exactly what is being worked on in the moment.
+
+### TDD
+
+For every change, find the corresponding test and ensure it passes.
+Ensure that the tests accurately test the interfaces, adjusting tests as needed to accurately test the intention of the code. Do not change tests to fit the implementation just to make them pass. The tests need to accurately indicate the intention of the code, and the code needs to be made to pass the tests, not the other way around.
+
+* For ruby files, tests are in /rspec
+* For typescript files, tests are in /app/frontend/tests

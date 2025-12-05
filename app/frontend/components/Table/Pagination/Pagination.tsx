@@ -3,12 +3,14 @@ import clsx from "clsx"
 
 import { Link } from "@/components"
 
+import { useTableContext } from "../Provider"
 import { LimitSelect } from "./LimitSelect"
 import * as classes from "./Pagination.css"
 
 interface PaginationProps {
-	pagination: Schema.Pagination
-	model: string
+	pagination?: Schema.Pagination
+	model?: string
+	showLimit?: boolean
 }
 
 const pageLink = (page: number) => {
@@ -21,7 +23,13 @@ const pageLink = (page: number) => {
 	return `${url.pathname}${url.search}`
 }
 
-export function Pagination({ pagination, model }: PaginationProps) {
+export function Pagination({ pagination: paginationProp, model: modelProp, showLimit = true }: PaginationProps) {
+	const context = useTableContext(false)
+	const pagination = paginationProp ?? context?.pagination
+	const model = modelProp ?? context?.model
+
+	if(!pagination) return null
+
 	const { pages, current_page, limit, count } = pagination
 
 	if(!pages || !current_page || !limit) return null
@@ -34,7 +42,7 @@ export function Pagination({ pagination, model }: PaginationProps) {
 	return (
 		<Group justify="space-between" mt="auto" pt={ 8 }>
 			<div>
-				{ model && (
+				{ showLimit && model && (
 					<>
 						Records per page:
 						<LimitSelect

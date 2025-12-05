@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import DocumentationsTable, { documentationColumns } from "@/domains/Documentation/Table"
+import DocumentationsTable from "@/domains/Documentation/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,15 +14,13 @@ const DocumentationsIndex = ({ documentations, pagination }: DocumentationIndexP
 		<IndexPageTemplate
 			title="Documentations"
 			model="documentations"
-			rows={ documentations }
-			columns={ documentationColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.documentations() }
 			menuOptions={ [
 				{ label: "New Documentation", href: Routes.newDocumentation(), icon: <NewIcon /> },
 			] }
 		>
-			<DocumentationsTable />
+			<DocumentationsTable records={ documentations } pagination={ pagination } model="documentations" />
 		</IndexPageTemplate>
 	)
 }

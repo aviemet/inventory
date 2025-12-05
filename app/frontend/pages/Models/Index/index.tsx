@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import ModelsTable, { modelsColumns } from "@/domains/Models/Table"
+import ModelsTable from "@/domains/Models/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -14,8 +14,6 @@ const ModelsIndex = ({ models, pagination }: ModelsIndexProps) => {
 		<IndexPageTemplate
 			title="Models"
 			model="models"
-			rows={ models }
-			columns={ modelsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.models() }
 			menuOptions={ [

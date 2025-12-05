@@ -1,5 +1,5 @@
 import { NewIcon } from "@/components/Icons"
-import TicketsTable, { ticketsColumns } from "@/domains/Tickets/Table"
+import TicketsTable from "@/domains/Tickets/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
@@ -15,8 +15,6 @@ const TicketsIndex = ({ tickets, pagination }: TicketsIndexProps) => {
 		<IndexPageTemplate
 			title={ title }
 			model="tickets"
-			rows={ tickets }
-			columns={ ticketsColumns }
 			pagination={ pagination }
 			deleteRoute={ Routes.tickets() }
 			menuOptions={ [
