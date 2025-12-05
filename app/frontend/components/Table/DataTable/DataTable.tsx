@@ -1,14 +1,20 @@
 import { router } from "@inertiajs/react"
-import { LoadingOverlay, useMantineTheme } from "@mantine/core"
+import { LoadingOverlay } from "@mantine/core"
 import clsx from "clsx"
 import { DataTable as MantineDataTable, type DataTableProps, type DataTableSortStatus } from "mantine-datatable"
-import React, { useEffect, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
+
+import { useLocation } from "@/lib/hooks"
 
 import * as classes from "./DataTable.css"
 import { Pagination } from "../Pagination"
 import { useTableContext } from "../Provider"
 
-export type TableDataTableProps<T = Record<string, unknown>> = DataTableProps<T> & {
+const isValidDirection = (value: string | undefined): value is "asc" | "desc" => {
+	return value === "asc" || value === "desc"
+}
+
+export type TableDataTableProps<T = Record<string, unknown>> = Omit<DataTableProps<T>, "selectedRecords" | "onSelectedRecordsChange"> & {
 	pagination?: Schema.Pagination
 	model?: string
 	selectable?: boolean
@@ -25,68 +31,33 @@ export function DataTable<T = Record<string, unknown>>({
 	onSortChange,
 	onSelectedRecordsChange,
 	classNames,
+	withTableBorder = true,
+	withColumnBorders = true,
 	...props
 }: TableDataTableProps<T>) {
-	const theme = useMantineTheme()
 	const context = useTableContext(false)
 	const searching = context?.searching ?? false
 
 	const [selectedRecords, setSelectedRecords] = useState<T[]>([])
 
-	const getSortStatusFromURL = (): DataTableSortStatus<T> | undefined => {
+	const location = useLocation()
+
+
+	const sortStatus = useMemo<DataTableSortStatus<T> | undefined>(() => {
 		if(!pagination || !model) return undefined
-		const params = new URLSearchParams(window.location.search)
-		const sort = params.get("sort")
-		const direction = params.get("direction") as "asc" | "desc" | null
-		if(!sort || !direction) return undefined
+
+		const sort = location.paramsAsJson.sort
+		const direction = location.paramsAsJson.direction
+
+		if(!sort || !isValidDirection(direction)) return undefined
+
 		return {
-			columnAccessor: sort as keyof T,
-			direction: direction as "asc" | "desc",
+			columnAccessor: sort,
+			direction: direction,
 		}
-	}
+	}, [location.paramsAsJson.sort, location.paramsAsJson.direction, pagination, model])
 
-	const getInitialSortStatus = (): DataTableSortStatus<T> | undefined => {
-		if(!pagination || !model) return undefined
-		const params = new URLSearchParams(window.location.search)
-		const sort = params.get("sort")
-		const direction = params.get("direction") as "asc" | "desc" | null
-		if(!sort || !direction) return undefined
-		return {
-			columnAccessor: sort as keyof T,
-			direction: direction as "asc" | "desc",
-		}
-	}
-
-	const [sortStatus, setSortStatus] = useState<DataTableSortStatus<T> | undefined>(getInitialSortStatus)
-
-	useEffect(() => {
-		if(!pagination || !model) return
-
-		const updateFromURL = () => {
-			const params = new URLSearchParams(window.location.search)
-			const sort = params.get("sort")
-			const direction = params.get("direction") as "asc" | "desc" | null
-			if(sort && direction) {
-				setSortStatus({
-					columnAccessor: sort as keyof T,
-					direction: direction as "asc" | "desc",
-				})
-			} else {
-				setSortStatus(undefined)
-			}
-		}
-
-		const handleSuccess = () => updateFromURL()
-		document.addEventListener("inertia:success", handleSuccess)
-		window.addEventListener("popstate", updateFromURL)
-
-		return () => {
-			document.removeEventListener("inertia:success", handleSuccess)
-			window.removeEventListener("popstate", updateFromURL)
-		}
-	}, [pagination, model])
-
-	const handleSortStatusChange = (status: DataTableSortStatus<T>) => {
+	const handleSortStatusChange = useCallback((status: DataTableSortStatus<T>) => {
 		if(onSortChange) {
 			onSortChange(String(status.columnAccessor), status.direction ?? null)
 			return
@@ -108,33 +79,34 @@ export function DataTable<T = Record<string, unknown>>({
 				replace: true,
 			})
 		}
-	}
+	}, [onSortChange, pagination, model])
 
-	const handleSelectedRecordsChange = (newSelected: T[]) => {
+	const handleSelectedRecordsChange = useCallback((newSelected: T[]) => {
 		setSelectedRecords(newSelected)
 		onSelectedRecordsChange?.(newSelected)
-	}
-
-	const sortProps = sortStatus ? { sortStatus } : {}
-	const selectionProps = selectable
-		? {
-			selectedRecords,
-			onSelectedRecordsChange: handleSelectedRecordsChange,
-		}
-		: {}
+	}, [onSelectedRecordsChange])
 
 	return (
 		<div style={ { position: "relative", flex: 1, display: "flex", flexDirection: "column", minHeight: 0 } }>
 			{ searching && (
 				<LoadingOverlay visible={ searching } overlayProps={ { blur: 1 } } />
 			) }
-			{ /* @ts-ignore - TypeScript cannot narrow discriminated unions when spreading props. This works at runtime. */ }
+			{ /* @ts-ignore - MantineDataTable interface doesn't support safe prop proxying */ }
 			<MantineDataTable
+				// @ts-ignore - MantineDataTable interface doesn't support safe prop proxying
+				stickyHeader
+				classNames={ {
+					table: clsx(classes.table, classNames?.table),
+					root: clsx(classes.root, classNames?.root),
+					header: clsx(classes.header, classNames?.header),
+					footer: classNames?.footer,
+					pagination: classNames?.pagination,
+				} }
 				columns={ columns }
 				records={ records }
 				onSortStatusChange={ handleSortStatusChange }
+				sortStatus={ sortStatus }
 				emptyState={ <></> }
-				stickyHeader
 				height="100%"
 				scrollAreaProps={ {
 					offsetScrollbars: false,
@@ -143,15 +115,14 @@ export function DataTable<T = Record<string, unknown>>({
 					? () => <Pagination pagination={ pagination } model={ model } />
 					: undefined
 				}
-				classNames={ {
-					table: clsx(classes.table, classNames?.table),
-					root: clsx(classes.root, classNames?.root),
-					header: clsx(classes.header, classNames?.header),
-					footer: classNames?.footer,
-					pagination: classNames?.pagination,
-				} }
-				{ ...sortProps }
-				{ ...selectionProps }
+				{ ...(selectable
+					? {
+						selectedRecords,
+						onSelectedRecordsChange: handleSelectedRecordsChange,
+						idAccessor: "id",
+					}
+					: {}
+				) }
 				{ ...props }
 			/>
 		</div>

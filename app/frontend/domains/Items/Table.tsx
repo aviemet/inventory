@@ -1,5 +1,4 @@
 import { type DataTableColumn } from "mantine-datatable"
-import { useState } from "react"
 
 import { Link, Money, Group, Table } from "@/components"
 import { EditButton, CheckoutButton, CheckinButton } from "@/components/Button"
@@ -49,7 +48,7 @@ const itemsColumns: DataTableColumn<Schema.ItemsIndex>[] = [
 		render: (item) => item.vendor ? <Link href={ Routes.vendor(item.vendor.slug) }>{ item.vendor.name }</Link> : null,
 	},
 	{
-		accessor: "cost",
+		accessor: "cost_cents",
 		title: "Cost",
 		sortable: true,
 		render: (item) => <Money accounting>{ item.cost }</Money>,
@@ -64,7 +63,7 @@ const itemsColumns: DataTableColumn<Schema.ItemsIndex>[] = [
 		accessor: "actions",
 		title: "Actions",
 		sortable: false,
-		textAlign: "right",
+		textAlign: "center",
 		render: (item) => (
 			<Group wrap="nowrap" gap="sm" justify="flex-end">
 				{ item.assigned ?
@@ -87,13 +86,6 @@ interface ItemsTableProps {
 }
 
 const ItemsTable = ({ records, pagination, model, onSelectedRecordsChange }: ItemsTableProps) => {
-	const [selectedRecords, setSelectedRecords] = useState<Schema.ItemsIndex[]>([])
-
-	const handleSelectedRecordsChange = (newSelected: Schema.ItemsIndex[]) => {
-		setSelectedRecords(newSelected)
-		onSelectedRecordsChange?.(newSelected)
-	}
-
 	return (
 		<Table.DataTable
 			columns={ itemsColumns }
@@ -101,7 +93,7 @@ const ItemsTable = ({ records, pagination, model, onSelectedRecordsChange }: Ite
 			pagination={ pagination }
 			model={ model }
 			selectable={ true }
-			onSelectedRecordsChange={ handleSelectedRecordsChange }
+			onSelectedRecordsChange={ onSelectedRecordsChange }
 		/>
 	)
 }

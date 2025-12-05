@@ -4,6 +4,11 @@ export const table = css`
 	th {
 		white-space: nowrap;
 	}
+
+	th:last-child,
+	td:last-child {
+		padding-right: 14px;
+	}
 `
 
 export const header = css`
