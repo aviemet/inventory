@@ -1,6 +1,6 @@
 import { Section } from "@/components"
 import { NewIcon } from "@/components/Icons"
-import PeopleTable, { peopleColumns } from "@/domains/People/Table"
+import PeopleTable from "@/domains/People/Table"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
 import { type PaginatedModel } from "@/types/PaginatedModel"
@@ -16,9 +16,6 @@ const Details = ({ department, people }: DetailsProps) => {
 			<ShowPageTableTemplate
 				title={ `${department.name} People` }
 				model="people"
-				rows={ people?.data }
-				columns={ peopleColumns }
-				pagination={ people?.pagination }
 				menuOptions={ [
 					{ label: "New Person", href: Routes.newPerson(), icon: <NewIcon /> },
 				] }

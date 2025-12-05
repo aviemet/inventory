@@ -1,6 +1,6 @@
 import { Section } from "@/components"
 import { NewIcon } from "@/components/Icons"
-import AccessoriesTable, { accessoriesColumns } from "@/domains/Accessories/Table"
+import AccessoriesTable from "@/domains/Accessories/Table"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
 import { type PaginatedModel } from "@/types/PaginatedModel"
@@ -16,9 +16,6 @@ const Details = ({ department, accessories }: DetailsProps) => {
 			<ShowPageTableTemplate
 				title={ `${department.name} Accessories` }
 				model="accessories"
-				rows={ accessories?.data }
-				columns={ accessoriesColumns }
-				pagination={ accessories?.pagination }
 				menuOptions={ [
 					{ label: "New Accessory", href: Routes.newAccessory(), icon: <NewIcon /> },
 				] }

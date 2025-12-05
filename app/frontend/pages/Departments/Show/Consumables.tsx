@@ -1,6 +1,6 @@
 import { Section } from "@/components"
 import { NewIcon } from "@/components/Icons"
-import ConsumablesTable, { consumablesColumns } from "@/domains/Consumables/Table"
+import ConsumablesTable from "@/domains/Consumables/Table"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
 import { type PaginatedModel } from "@/types/PaginatedModel"
@@ -16,9 +16,6 @@ const Details = ({ department, consumables }: DetailsProps) => {
 			<ShowPageTableTemplate
 				title={ `${department.name} Consumables` }
 				model="consumables"
-				rows={ consumables?.data }
-				columns={ consumablesColumns }
-				pagination={ consumables?.pagination }
 				menuOptions={ [
 					{ label: "New Consumable", href: Routes.newConsumable(), icon: <NewIcon /> },
 				] }

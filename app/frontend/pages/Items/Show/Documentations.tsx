@@ -1,5 +1,5 @@
 import { Portal, Table } from "@/components"
-import DocumentationTable, { documentationColumns } from "@/domains/Documentation/Table"
+import DocumentationTable from "@/domains/Documentation/Table"
 import { type PaginatedModel } from "@/types/PaginatedModel"
 
 interface ItemDocumentationProps {
@@ -16,10 +16,6 @@ const Documentations = ({ item, documentations }: ItemDocumentationProps) => {
 		<Table.TableProvider
 			model={ model }
 			records={ records }
-			columns={ documentationColumns?.map(col => ({
-				accessor: String(col.accessor),
-				title: col.title ? String(col.title) : "",
-			})) ?? [] }
 			pagination={ pagination }
 		>
 			<Portal target="#item-documentations-search-portal">

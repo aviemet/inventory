@@ -16,8 +16,6 @@ const Details = ({ department, licenses }: DetailsProps) => {
 			<ShowPageTableTemplate
 				title={ `${department.name} Licenses` }
 				model="licenses"
-				rows={ licenses?.data }
-				pagination={ licenses?.pagination }
 				menuOptions={ [
 					{ label: "New License", href: Routes.newLicense(), icon: <NewIcon /> },
 				] }
