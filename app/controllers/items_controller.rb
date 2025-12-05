@@ -126,8 +126,13 @@ class ItemsController < ApplicationController
   # @route DELETE /hardware (items)
   # @route DELETE /hardware/:id (item)
   def destroy
-    authorize item
-    item.destroy
+    if params[:id]
+      authorize item
+      item.destroy
+    else
+      authorize Item
+      @active_company.items.where(id: params[:ids]).destroy_all
+    end
     redirect_to items_url, notice: "Item was successfully destroyed."
   end
 

@@ -21,15 +21,11 @@ const IndexPageTemplate = <T = Record<string, unknown>>({
 	children,
 	title,
 	model,
-	rows,
-	columns,
-	pagination,
 	search = true,
 	breadcrumbs,
 	menuOptions,
 	advancedSearch,
 	deleteRoute,
-	selectable = true,
 	selectedRecords = [],
 }: IndexPageTemplateProps<T>) => {
 	return (
