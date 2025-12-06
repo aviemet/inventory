@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import NetworkForm from "@/domains/Networks/Form"
 import { Routes } from "@/lib"
 
-import NetworkForm from "@/domains/Networks/Form"
 
 interface UpdateNetworkProps {
 	network: Schema.NetworksEdit

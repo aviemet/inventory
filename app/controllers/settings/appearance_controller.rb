@@ -1,5 +1,5 @@
 class Settings::AppearanceController < ApplicationController
-  strong_params :settings, permit: [:primary_color]
+  strong_params :settings, [:primary_color]
 
   # @route GET /settings/appearance (settings_appearance_index)
   def index

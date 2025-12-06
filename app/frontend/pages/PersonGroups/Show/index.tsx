@@ -1,4 +1,3 @@
-
 import { Table, Title, Page, Group, Menu } from "@/components"
 import { EditIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
@@ -36,7 +35,7 @@ const ShowUser = ({ person_group }: ShowUserProps) => {
 				<Table.TableProvider
 					selectable
 					model="people"
-					rows={ person_group.people }
+					data={ person_group.people }
 				>
 					<GroupMembersTable />
 				</Table.TableProvider>

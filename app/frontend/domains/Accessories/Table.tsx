@@ -1,95 +1,104 @@
-import { Group, Link, Money, Table } from "@/components"
+import { type DataTableColumn } from "mantine-datatable"
+
+import { Group, Link, Money } from "@/components"
 import { EditButton, CheckoutButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const AccessoriesTable = (props: TableProps) => {
+const accessoriesColumns: DataTableColumn<Schema.AccessoriesIndex>[] = [
+	{
+		accessor: "name",
+		title: "Name",
+		sortable: true,
+		render: (accessory) => <Link href={ Routes.accessory(accessory) }>{ accessory.name }</Link>,
+	},
+	{
+		accessor: "model.name",
+		title: "Model",
+		sortable: true,
+		render: (accessory) => accessory?.model?.slug ? <Link href={ Routes.model(accessory.model.slug) }>{ accessory.model.name }</Link> : null,
+	},
+	{
+		accessor: "serial",
+		title: "Serial",
+		sortable: true,
+		render: (accessory) => <Link href={ Routes.accessory(accessory) }>{ accessory.serial }</Link>,
+	},
+	{
+		accessor: "asset_tag",
+		title: "Asset Tag",
+		sortable: true,
+		render: (accessory) => <Link href={ Routes.accessory(accessory) }>{ accessory.asset_tag }</Link>,
+	},
+	{
+		accessor: "category.name",
+		title: "Category",
+		sortable: true,
+		render: (accessory) => accessory?.category?.slug ? <Link href={ Routes.category(accessory.category.slug) }>{ accessory.category.name }</Link> : null,
+	},
+	{
+		accessor: "manufacturer.name",
+		title: "Manufacturer",
+		sortable: true,
+		render: (accessory) => accessory?.manufacturer?.slug ? <Link href={ Routes.manufacturer(accessory.manufacturer.slug) }>{ accessory.manufacturer.name }</Link> : null,
+	},
+	{
+		accessor: "vendor.name",
+		title: "Vendor",
+		sortable: true,
+		render: (accessory) => accessory?.vendor?.slug ? <Link href={ Routes.vendor(accessory.vendor.slug) }>{ accessory.vendor.name }</Link> : null,
+	},
+	{
+		accessor: "cost",
+		title: "Cost",
+		sortable: true,
+		render: (accessory) => <Money currency={ accessory.cost_currency }>{ accessory.cost }</Money>,
+	},
+	{
+		accessor: "qty",
+		title: "Avail. / Qty",
+		sortable: true,
+		render: (accessory) => `${accessory.qty_available} / ${accessory.qty}`,
+	},
+	{
+		accessor: "min_qty",
+		title: "Min Qty",
+		sortable: true,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (accessory) => (
+			<Group wrap="nowrap" gap="sm" justify="flex-end">
+				<CheckoutButton
+					href={ Routes.checkoutAccessory(accessory) }
+					disabled={ accessory.qty_available < 1 }
+					tooltipMessage={ accessory.qty_available < 1 && "None available to checkout" }
+					label={ accessory.name }
+				/>
+				<EditButton href={ Routes.editAccessory(accessory) } label={ accessory.name } />
+			</Group>
+		),
+	},
+]
+
+import { Table } from "@/components"
+
+interface AccessoriesTableProps {
+	records: Schema.AccessoriesIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const AccessoriesTable = ({ records, pagination, model }: AccessoriesTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell sort="models.name">Model</Table.HeadCell>
-					<Table.HeadCell sort="serial">Serial</Table.HeadCell>
-					<Table.HeadCell sort="asset_tag">Asset Tag</Table.HeadCell>
-					<Table.HeadCell sort="categories.name">Category</Table.HeadCell>
-					<Table.HeadCell sort="manufacturers.name">Manufacturer</Table.HeadCell>
-					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
-					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
-					<Table.HeadCell sort="departments.name">Avail. / Qty</Table.HeadCell>
-					<Table.HeadCell sort="departments.name">Min Qty</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (accessory: Schema.AccessoriesIndex) => {
-
-					return (
-						<Table.Row key={ accessory.id }>
-
-							<Table.Cell nowrap>
-								<Link href={ Routes.accessory(accessory) }>{ accessory.name }</Link>
-							</Table.Cell>
-
-							<Table.Cell>
-								{ accessory?.model?.slug && <Link href={ Routes.model(accessory.model.slug) }>
-									{ accessory.model.name }
-								</Link> }
-							</Table.Cell>
-
-							<Table.Cell>
-								<Link href={ Routes.accessory(accessory) }>{ accessory.serial }</Link>
-							</Table.Cell>
-
-							<Table.Cell>
-								<Link href={ Routes.accessory(accessory) }>{ accessory.asset_tag }</Link>
-							</Table.Cell>
-
-							<Table.Cell>
-								{ accessory?.category?.slug && <Link href={ Routes.category(accessory.category.slug) }>
-									{ accessory.category.name }
-								</Link> }
-							</Table.Cell>
-
-							<Table.Cell>
-								{ accessory?.manufacturer?.slug && <Link href={ Routes.manufacturer(accessory.manufacturer.slug) }>
-									{ accessory.manufacturer!.name }
-								</Link> }
-							</Table.Cell>
-
-							<Table.Cell>
-								{ accessory?.vendor?.slug && <Link href={ Routes.vendor(accessory.vendor.slug) }>
-									{ accessory.vendor.name }
-								</Link> }
-							</Table.Cell>
-
-							<Table.Cell>
-								<Money currency={ accessory.cost_currency }>{ accessory.cost }</Money>
-							</Table.Cell>
-
-							<Table.Cell nowrap>{ `${accessory.qty_available} / ${accessory.qty}` }</Table.Cell>
-
-							<Table.Cell>{ accessory.min_qty }</Table.Cell>
-
-							<Table.Cell fitContent>
-								<Group wrap="nowrap" gap="sm">
-									<CheckoutButton
-										href={ Routes.checkoutAccessory(accessory) }
-										disabled={ accessory.qty_available < 1 }
-										tooltipMessage={ accessory.qty_available < 1 && "None available to checkout" }
-										label={ accessory.name }
-									/>
-
-									<EditButton href={ Routes.editAccessory(accessory) } label={ accessory.name } />
-								</Group>
-							</Table.Cell>
-
-						</Table.Row>
-					)
-				} } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ accessoriesColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

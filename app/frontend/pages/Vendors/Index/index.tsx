@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import VendorsTable from "@/domains/Vendors/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import VendorsTable from "@/domains/Vendors/Table"
 
 interface VendorsIndexProps {
 	vendors: Schema.VendorsIndex[]
@@ -15,14 +14,13 @@ const VendorsIndex = ({ vendors, pagination }: VendorsIndexProps) => {
 		<IndexPageTemplate
 			title="Vendors"
 			model="vendors"
-			rows={ vendors }
 			pagination={ pagination }
 			deleteRoute={ Routes.vendors() }
 			menuOptions={ [
 				{ label: "New Vendor", href: Routes.newVendor(), icon: <NewIcon /> },
 			] }
 		>
-			<VendorsTable />
+			<VendorsTable records={ vendors } pagination={ pagination } model="vendors" />
 		</IndexPageTemplate>
 	)
 }

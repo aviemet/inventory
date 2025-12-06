@@ -4,7 +4,7 @@ class ConsumablesController < ApplicationController
   expose :consumables, -> { search(@active_company.consumables.includes_associated) }
   expose :consumable, scope: ->{ @active_company.consumables }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  strong_params :consumable, permit: [:name, :min_qty, :qty, :cost, :serial, :asset_tag, :cost_currency, :requestable, :notes, :model_id, :manufacturer_id, :category_id, :vendor_id, :default_location_id]
+  strong_params :consumable, [:name, :min_qty, :qty, :cost, :serial, :asset_tag, :cost_currency, :requestable, :notes, :model_id, :manufacturer_id, :category_id, :vendor_id, :default_location_id]
 
   sortable_fields %w(name min_qty qty cost requestable model.name model.model_number manufacturers.name categories.name vendors.name)
 

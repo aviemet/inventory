@@ -1,7 +1,7 @@
 class Settings::LdapsController < ApplicationController
   expose :ldap
 
-  strong_params :ldap, permit: [:name, :host, :port, :domain, :username, :password, :tree_base, :user_search, :sync_interval]
+  strong_params :ldap, [:name, :host, :port, :domain, :username, :password, :tree_base, :user_search, :sync_interval]
 
   # @route GET /settings/ldap (settings_ldaps)
   def index

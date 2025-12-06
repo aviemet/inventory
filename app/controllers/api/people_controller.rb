@@ -2,7 +2,7 @@ class Api::PeopleController < Api::ApiController
   expose :people, -> { @active_company.people }
   expose :person, id: ->{ params[:slug] }, scope: ->{ @active_company.people.includes_associated }, find_by: :slug
 
-  strong_params :person, permit: [:name, :url]
+  strong_params :person, [:name, :url]
 
   # @route GET /api/people (api_people)
   def index

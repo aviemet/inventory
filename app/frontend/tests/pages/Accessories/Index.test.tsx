@@ -13,9 +13,9 @@ describe("Accessories/Index", () => {
 		const accessories = [createMockAccessoriesIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<AccessoriesIndex accessories={ accessories } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<AccessoriesIndex accessories={ accessories } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple accessories", () => {
@@ -25,17 +25,17 @@ describe("Accessories/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<AccessoriesIndex accessories={ accessories } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<AccessoriesIndex accessories={ accessories } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty accessories array", () => {
 		const accessories: Schema.AccessoriesIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<AccessoriesIndex accessories={ accessories } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<AccessoriesIndex accessories={ accessories } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

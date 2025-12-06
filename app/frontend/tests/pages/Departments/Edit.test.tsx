@@ -16,16 +16,16 @@ describe("Departments/Edit", () => {
 	test("renders without error", () => {
 		const department = createMockDepartmentsEdit()
 
-		expect(() => {
-			render(<EditDepartment department={ department } />)
-		}).not.toThrow()
+		const { container } = render(<EditDepartment department={ department } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with department without name", () => {
 		const department = createMockDepartmentsEdit({ name: "" })
 
-		expect(() => {
-			render(<EditDepartment department={ department } />)
-		}).not.toThrow()
+		const { container } = render(<EditDepartment department={ department } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

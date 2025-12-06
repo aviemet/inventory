@@ -1,17 +1,14 @@
 import React from "react"
 
+import { Table } from "@/components"
 import { type Icon } from "@/components/Icons"
-import Table from "@/components/Table"
-import { type TableRowData } from "@/components/Table/TableContext"
 
 import { TableTitleSection } from ".."
 
 interface ShowPageTableTemplate {
-	children: React.ReactNode
+	children?: React.ReactNode
 	title: string
 	model: string
-	rows: readonly TableRowData[]
-	pagination: Schema.Pagination
 	menuOptions?: {
 		label: string
 		href: string
@@ -19,23 +16,20 @@ interface ShowPageTableTemplate {
 	}[]
 }
 
-const ShowPageTableTemplate = ({ children, model, rows, pagination, title, menuOptions }: ShowPageTableTemplate) => {
+const ShowPageTableTemplate = ({
+	children,
+	model,
+	title,
+	menuOptions }
+: ShowPageTableTemplate) => {
 	return (
-		<Table.TableProvider
-			selectable
-			hideable
-			model={ model }
-			rows={ rows }
-			pagination={ pagination }
-		>
+		<Table.Section>
 			<TableTitleSection title={ title } menuOptions={ menuOptions }>
-				<Table.SearchInput />
+				<Table.SearchInput model={ model } />
 			</TableTitleSection>
 
 			{ children }
-
-			<Table.Pagination />
-		</Table.TableProvider>
+		</Table.Section>
 	)
 }
 

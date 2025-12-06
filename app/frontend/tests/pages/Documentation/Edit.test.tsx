@@ -16,16 +16,16 @@ describe("Documentation/Edit", () => {
 	test("renders without error", () => {
 		const documentation = createMockDocumentationsEdit()
 
-		expect(() => {
-			render(<EditDocumentation documentation={ documentation } />)
-		}).not.toThrow()
+		const { container } = render(<EditDocumentation documentation={ documentation } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with documentation without title", () => {
 		const documentation = createMockDocumentationsEdit({ title: undefined })
 
-		expect(() => {
-			render(<EditDocumentation documentation={ documentation } />)
-		}).not.toThrow()
+		const { container } = render(<EditDocumentation documentation={ documentation } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

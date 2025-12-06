@@ -4,7 +4,7 @@ class AssetsController < ApplicationController
   expose :assets, -> { search(@active_company.assets.includes_associated) }
   expose :asset, scope: ->{ @active_company.assets }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  strong_params :asset, permit: [:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable, nics: [:mac, :ip]]
+  strong_params :asset, [:name, :asset_tag, :serial, :cost, :cost_cents, :cost_currency, :notes, :model_id, :vendor_id, :default_location_id, :parent_id, :purchased_at, :requestable, nics: [:mac, :ip]]
 
   sortable_fields %w(name asset_tag serial cost cost_cents purchased_at requestable type models.name vendors.name categories.name manufacturers.name departments.name)
 

@@ -1,16 +1,14 @@
-
 import { Section, Link, Menu, Group, Title, Tabs, Page } from "@/components"
 import { NewIcon, EditIcon } from "@/components/Icons"
-import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
-import { Routes } from "@/lib"
 import AccessoriesTable from "@/domains/Accessories/Table"
+import ComponentsTable from "@/domains/Components/Table"
 import ConsumablesTable from "@/domains/Consumables/Table"
 import ContractsTable from "@/domains/Contracts/Table"
 import ItemsTable from "@/domains/Items/Table"
 import LicensesTable from "@/domains/Licenses/Table"
+import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
+import { Routes } from "@/lib"
 import { type PaginatedModel } from "@/types/PaginatedModel"
-
-import ComponentsTable from "@/domains/Components/Table"
 
 interface VendorShowProps {
 	vendor: Schema.VendorsShow
@@ -91,8 +89,6 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 						<ShowPageTableTemplate
 							title={ `${vendor.name} Assets` }
 							model="items"
-							rows={ items?.data }
-							pagination={ items?.pagination }
 							menuOptions={ [
 								{ label: "New Asset", href: Routes.newItem(), icon: <NewIcon /> },
 							] }
@@ -108,8 +104,6 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 						<ShowPageTableTemplate
 							title={ `${vendor.name} Accessories` }
 							model="accessories"
-							rows={ accessories?.data }
-							pagination={ accessories?.pagination }
 							menuOptions={ [
 								{ label: "New Accessory", href: Routes.newAccessory(), icon: <NewIcon /> },
 							] }
@@ -125,8 +119,6 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 						<ShowPageTableTemplate
 							title={ `${vendor.name} Consumables` }
 							model="consumables"
-							rows={ consumables?.data }
-							pagination={ consumables?.pagination }
 							menuOptions={ [
 								{ label: "New Consumable", href: Routes.newConsumable(), icon: <NewIcon /> },
 							] }
@@ -142,8 +134,6 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 						<ShowPageTableTemplate
 							title={ `${vendor.name} Components` }
 							model="components"
-							rows={ components?.data }
-							pagination={ components?.pagination }
 							menuOptions={ [
 								{ label: "New Component", href: Routes.newComponent(), icon: <NewIcon /> },
 							] }
@@ -159,8 +149,6 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 						<ShowPageTableTemplate
 							title={ `${vendor.name} Licenses` }
 							model="licenses"
-							rows={ licenses?.data }
-							pagination={ licenses?.pagination }
 							menuOptions={ [
 								{ label: "New License", href: Routes.newLicense(), icon: <NewIcon /> },
 							] }
@@ -176,8 +164,6 @@ const Show = ({ vendor, items, accessories, components, consumables, licenses, c
 						<ShowPageTableTemplate
 							title={ `${vendor.name} Contracts` }
 							model="contracts"
-							rows={ contracts?.data }
-							pagination={ contracts?.pagination }
 							menuOptions={ [
 								{ label: "New Contract", href: Routes.newContract({ "contract.vendor_id": vendor.id }), icon: <NewIcon /> },
 							] }

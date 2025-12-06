@@ -1,6 +1,7 @@
 import { describe, test, expect, beforeEach } from "vitest"
 
 import ShowItem from "@/pages/Items/Show"
+import { testShowPageTabs } from "@/tests/helpers/testTabs"
 import { render } from "@/tests/helpers/utils"
 
 import {
@@ -16,24 +17,32 @@ describe("Items/Show", () => {
 	test("renders without error", () => {
 		const item = createMockItemsShow()
 
-		expect(() => {
-			render(<ShowItem item={ item } />)
-		}).not.toThrow()
+		const { container } = render(<ShowItem item={ item } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with item without name", () => {
 		const item = createMockItemsShow({ name: undefined })
 
-		expect(() => {
-			render(<ShowItem item={ item } />)
-		}).not.toThrow()
+		const { container } = render(<ShowItem item={ item } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with assigned item", () => {
 		const item = createMockItemsShow({ assigned: true })
 
-		expect(() => {
-			render(<ShowItem item={ item } />)
-		}).not.toThrow()
+		const { container } = render(<ShowItem item={ item } />)
+
+		expect(container.firstChild).toBeInTheDocument()
+	})
+
+	test("renders all tabs and their content", async() => {
+		const item = createMockItemsShow()
+
+		render(<ShowItem item={ item } />)
+
+		await testShowPageTabs(["Details", "History", "Documentation", "Associations"])
 	})
 })

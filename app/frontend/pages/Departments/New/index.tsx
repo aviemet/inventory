@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import AccessoryForm from "@/domains/Departments/Form"
 import { Routes } from "@/lib"
 
-import AccessoryForm from "@/domains/Departments/Form"
 
 interface NewDepartmentProps {
 	department: Schema.DepartmentsFormData

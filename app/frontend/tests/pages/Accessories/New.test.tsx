@@ -16,8 +16,8 @@ describe("Accessories/New", () => {
 	test("renders without error", () => {
 		const accessory = createMockAccessoriesFormData()
 
-		expect(() => {
-			render(<NewAccessory accessory={ accessory } />)
-		}).not.toThrow()
+		const { container } = render(<NewAccessory accessory={ accessory } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

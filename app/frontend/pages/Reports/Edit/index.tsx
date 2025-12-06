@@ -1,4 +1,3 @@
-
 const EditReports = () => {
 	return (
 		<div>Edit Reports</div>

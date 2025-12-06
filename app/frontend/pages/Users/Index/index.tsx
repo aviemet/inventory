@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import UsersTable from "@/domains/Users/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import UsersTable from "@/domains/Users/Table"
 
 interface UserIndexProps {
 	users: Schema.UsersIndex[]
@@ -15,14 +14,13 @@ const UserIndex = ({ users, pagination }: UserIndexProps) => {
 		<IndexPageTemplate
 			title="Users"
 			model="users"
-			rows={ users }
 			pagination={ pagination }
 			deleteRoute={ Routes.users() }
 			menuOptions={ [
 				{ label: "Invite New User", href: Routes.newUser(), icon: <NewIcon /> },
 			] }
 		>
-			<UsersTable />
+			<UsersTable records={ users } pagination={ pagination } model="users" />
 		</IndexPageTemplate>
 	)
 }

@@ -3,7 +3,7 @@ class TicketMessagesController < ApplicationController
   expose :ticket_messages, from: :ticket
   expose :ticket_message
 
-  strong_params :ticket_message, permit: [:body, :parent_id]
+  strong_params :ticket_message, [:body, :parent_id]
 
   # @route POST /tickets/:ticket_id/messages (ticket_messages)
   def create

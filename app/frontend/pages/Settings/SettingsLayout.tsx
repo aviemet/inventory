@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
 import { router } from "@inertiajs/react"
 import { px, useMantineTheme } from "@mantine/core"
+import React, { useEffect, useState } from "react"
 
 import { Paper, Page, Box, Section, Tabs } from "@/components"
 import { type Breadcrumb } from "@/components/Breadcrumbs"

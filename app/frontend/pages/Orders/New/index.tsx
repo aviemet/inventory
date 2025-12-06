@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import OrderForm from "@/domains/Orders/Form"
 import { Routes } from "@/lib"
 
-import OrderForm from "@/domains/Orders/Form"
 
 interface NewOrderProps {
 	order: Schema.OrdersFormData

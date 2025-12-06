@@ -13,9 +13,9 @@ describe("Contracts/Index", () => {
 		const contracts = [createMockContractsIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<ContractsIndex contracts={ contracts } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<ContractsIndex contracts={ contracts } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple contracts", () => {
@@ -25,17 +25,17 @@ describe("Contracts/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<ContractsIndex contracts={ contracts } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<ContractsIndex contracts={ contracts } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty contracts array", () => {
 		const contracts: Schema.ContractsIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<ContractsIndex contracts={ contracts } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<ContractsIndex contracts={ contracts } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

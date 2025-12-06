@@ -1,7 +1,7 @@
-import React from "react"
 import { useMantineTheme, type ModalProps, type ButtonProps } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import axios from "axios"
+import React from "react"
 import { type UseFormProps } from "use-inertia-form"
 
 import { Modal } from "@/components"

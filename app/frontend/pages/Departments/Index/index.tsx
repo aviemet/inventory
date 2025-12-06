@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import DepartmentsTable from "@/domains/Departments/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import DepartmentsTable from "@/domains/Departments/Table"
 
 interface DepartmentsIndexProps {
 	departments: Schema.DepartmentsIndex[]
@@ -15,14 +14,13 @@ const DepartmentsIndex = ({ departments, pagination }: DepartmentsIndexProps) =>
 		<IndexPageTemplate
 			title="Departments"
 			model="departments"
-			rows={ departments }
 			pagination={ pagination }
 			deleteRoute={ Routes.departments() }
 			menuOptions={ [
 				{ label: "New Department", href: Routes.newDepartment(), icon: <NewIcon /> },
 			] }
 		>
-			<DepartmentsTable />
+			<DepartmentsTable records={ departments } pagination={ pagination } model="departments" />
 		</IndexPageTemplate>
 	)
 }

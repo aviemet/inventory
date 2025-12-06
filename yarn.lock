@@ -3991,6 +3991,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/react-table@npm:^8.21.3":
+  version: 8.21.3
+  resolution: "@tanstack/react-table@npm:8.21.3"
+  dependencies:
+    "@tanstack/table-core": "npm:8.21.3"
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 10/a32217ebe64d24e71dea6a6742bc288dcabf389657b16805a1ab3f347d3dca8262759c45c604a1f65bd97925d5cbdfb66d1be7637100a12eb5b279bdd420962d
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.21.3":
+  version: 8.21.3
+  resolution: "@tanstack/table-core@npm:8.21.3"
+  checksum: 10/aa05e5f80110f0f56d66161e950668ea6ef3e2ea4f3a2ccd5d5980b39b4feea987245b20531aee2c6743e6edd12c0361503413b63090c807f88a61b19bfd04f3
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^10.4.1":
   version: 10.4.1
   resolution: "@testing-library/dom@npm:10.4.1"
@@ -9958,6 +9977,7 @@ __metadata:
     "@stylistic/eslint-plugin": "npm:^5.6.1"
     "@tanstack/react-query": "npm:^5.90.11"
     "@tanstack/react-query-devtools": "npm:^5.91.1"
+    "@tanstack/react-table": "npm:^8.21.3"
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@testing-library/react": "npm:^16.3.0"
@@ -10027,6 +10047,7 @@ __metadata:
     lint-staged: "npm:^16.2.7"
     lodash: "npm:^4.17.21"
     lowlight: "npm:^3.3.0"
+    mantine-datatable: "npm:^8.3.8"
     msw: "npm:^2.12.3"
     normalize-url: "npm:^8.1.0"
     pluralize: "npm:^8.0.0"
@@ -11363,6 +11384,19 @@ __metadata:
     socks-proxy-agent: "npm:^7.0.0"
     ssri: "npm:^10.0.0"
   checksum: 10/b4b442cfaaec81db159f752a5f2e3ee3d7aa682782868fa399200824ec6298502e01bdc456e443dc219bcd5546c8e4471644d54109c8599841dc961d17a805fa
+  languageName: node
+  linkType: hard
+
+"mantine-datatable@npm:^8.3.8":
+  version: 8.3.8
+  resolution: "mantine-datatable@npm:8.3.8"
+  peerDependencies:
+    "@mantine/core": ">=8.3"
+    "@mantine/hooks": ">=8.3"
+    clsx: ">=2"
+    react: ">=19"
+    react-dom: ">=19"
+  checksum: 10/eb1c9311870c22528fe55b186d35030f5a6859af72eb09075cb3f35f31a89705079bc97e07580323fcb7cb42cdde6bfcf13097cee9ddcd5d4c1a5a4181b85b1f
   languageName: node
   linkType: hard
 

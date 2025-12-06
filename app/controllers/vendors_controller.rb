@@ -4,7 +4,7 @@ class VendorsController < ApplicationController
   expose :vendors, -> { search(@active_company.vendors.includes_associated) }
   expose :vendor, id: ->{ params[:slug] }, scope: ->{ @active_company.vendors.includes_associated }, find_by: :slug
 
-  strong_params :vendor, permit: [:name, :url]
+  strong_params :vendor, [:name, :url]
 
   sortable_fields %w(name url)
 

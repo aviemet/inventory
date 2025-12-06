@@ -16,8 +16,8 @@ describe("Networks/Edit", () => {
 	test("renders without error", () => {
 		const network = createMockNetworkEdit()
 
-		expect(() => {
-			render(<NetworkEdit network={ network } />)
-		}).not.toThrow()
+		const { container } = render(<NetworkEdit network={ network } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

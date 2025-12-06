@@ -1,34 +1,41 @@
-import { Link, Table } from "@/components"
+import { type DataTableColumn } from "mantine-datatable"
+
+import { Link } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const StatusLabelsTable = (props: TableProps) => {
+const statusLabelsColumns: DataTableColumn<Schema.StatusLabelsIndex>[] = [
+	{
+		accessor: "name",
+		title: "Name",
+		sortable: true,
+		render: (statusLabel) => <Link href={ Routes.statusLabel(statusLabel.slug) }>{ statusLabel.name }</Link>,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (statusLabel) => <EditButton href={ Routes.editStatusLabel(statusLabel.slug) } label={ statusLabel.name } />,
+	},
+]
+
+import { Table } from "@/components"
+
+interface StatusLabelsTableProps {
+	records: Schema.StatusLabelsIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const StatusLabelsTable = ({ records, pagination, model }: StatusLabelsTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (status_label: Schema.StatusLabelsIndex) => (
-					<Table.Row key={ status_label.id }>
-
-						<Table.Cell nowrap>
-							<Link href={ Routes.statusLabel(status_label.slug) }>{ status_label.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell fitContent>
-							<EditButton href={ Routes.editStatusLabel(status_label.slug) } label={ status_label.name } />
-						</Table.Cell>
-
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ statusLabelsColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

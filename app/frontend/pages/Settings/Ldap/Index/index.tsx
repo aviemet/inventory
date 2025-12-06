@@ -1,10 +1,10 @@
 import axios from "axios"
 
 import { Title } from "@/components"
+import LdapForm from "@/domains/Settings/Ldap/Form"
 import { Routes } from "@/lib"
 
 import SettingsLayout from "../../SettingsLayout"
-import LdapForm from "@/domains/Settings/Ldap/Form"
 
 interface LdapSettingsProps {
 	ldap: Schema.LdapsFormData

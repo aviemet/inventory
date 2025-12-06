@@ -1,10 +1,10 @@
-import React from "react"
 import { createInertiaApp, router } from "@inertiajs/react"
 import * as ActiveStorage from "@rails/activestorage"
 import dayjs from "dayjs"
 import duration from "dayjs/plugin/duration"
 import localizedFormat from "dayjs/plugin/localizedFormat"
 import relativeTime from "dayjs/plugin/relativeTime"
+import React from "react"
 import { createRoot } from "react-dom/client"
 
 import { LAYOUTS } from "../layouts"

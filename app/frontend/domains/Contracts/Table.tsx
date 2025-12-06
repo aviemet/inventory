@@ -1,61 +1,71 @@
-import { Link, Table } from "@/components"
+import { type DataTableColumn } from "mantine-datatable"
+
+import { Link } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes, formatter } from "@/lib"
 
-const ContractsTable = (props: TableProps) => {
+const contractsColumns: DataTableColumn<Schema.ContractsIndex>[] = [
+	{
+		accessor: "name",
+		title: "Name",
+		sortable: true,
+		render: (contract) => <Link href={ Routes.contract(contract.slug) }>{ contract.name }</Link>,
+	},
+	{
+		accessor: "number",
+		title: "#",
+		sortable: true,
+		render: (contract) => <Link href={ Routes.contract(contract.slug) }>{ contract.number }</Link>,
+	},
+	{
+		accessor: "begins_at",
+		title: "Start Date",
+		sortable: true,
+		render: (contract) => contract.begins_at ? formatter.date.short(contract.begins_at) : null,
+	},
+	{
+		accessor: "ends_at",
+		title: "End Date",
+		sortable: true,
+		render: (contract) => contract.ends_at ? formatter.date.short(contract.ends_at) : null,
+	},
+	{
+		accessor: "vendor.name",
+		title: "Vendor",
+		sortable: true,
+		render: (contract) => contract?.vendor?.slug ? <Link href={ Routes.vendor(contract.vendor.slug) }>{ contract.vendor.name }</Link> : null,
+	},
+	{
+		accessor: "category.name",
+		title: "Category",
+		sortable: true,
+		render: (contract) => contract.category ? <Link href={ Routes.category(contract.category) }>{ contract.category.name }</Link> : null,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (contract) => <EditButton href={ Routes.editContract(contract.slug) } label={ contract.name } />,
+	},
+]
+
+import { Table } from "@/components"
+
+interface ContractsTableProps {
+	records: Schema.ContractsIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const ContractsTable = ({ records, pagination, model }: ContractsTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell sort="number">#</Table.HeadCell>
-					<Table.HeadCell sort="begins_at">Start Date</Table.HeadCell>
-					<Table.HeadCell sort="ends_at">End Date</Table.HeadCell>
-					<Table.HeadCell sort="vendor.name">Vendor</Table.HeadCell>
-					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (contract: Schema.ContractsIndex) => (
-					<Table.Row key={ contract.id }>
-						<Table.Cell nowrap>
-							<Link href={ Routes.contract(contract.slug) }>{ contract.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell nowrap>
-							<Link href={ Routes.contract(contract.slug) }>{ contract.number }</Link>
-						</Table.Cell>
-
-						<Table.Cell nowrap>
-							{ contract.begins_at && formatter.date.short(contract.begins_at) }
-						</Table.Cell>
-
-						<Table.Cell nowrap>
-							{ contract.ends_at && formatter.date.short(contract.ends_at) }
-						</Table.Cell>
-
-						<Table.Cell>
-							{ contract?.vendor?.slug && <Link href={ Routes.vendor(contract.vendor.slug) }>
-								{ contract.vendor?.name }
-							</Link> }
-						</Table.Cell>
-
-						<Table.Cell>
-							{ contract.category && <Link href={ Routes.category(contract.category) }>
-								{ contract.category?.name }
-							</Link> }
-						</Table.Cell>
-
-						<Table.Cell fitContent>
-							<EditButton href={ Routes.editContract(contract.slug) } label={ contract.name } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ contractsColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

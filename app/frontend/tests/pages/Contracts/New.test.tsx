@@ -16,8 +16,8 @@ describe("Contracts/New", () => {
 	test("renders without error", () => {
 		const contract = createMockContractsFormData()
 
-		expect(() => {
-			render(<NewContract contract={ contract } />)
-		}).not.toThrow()
+		const { container } = render(<NewContract contract={ contract } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

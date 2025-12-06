@@ -1,7 +1,7 @@
-
 import { Title, Tile } from "@/components"
 import { Form, TextInput, Submit } from "@/components/Form"
 import { Routes } from "@/lib"
+import { withLayout } from "@/lib/withLayout"
 
 interface ConfirmationsNewProps {
 	user: Schema.User
@@ -42,4 +42,4 @@ const ConfirmationsNew = ({ user }: ConfirmationsNewProps) => {
 	)
 }
 
-export default ConfirmationsNew
+export default withLayout(ConfirmationsNew, "auth")

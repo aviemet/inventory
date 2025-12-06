@@ -3,7 +3,7 @@ class CompaniesController < ApplicationController
   expose :companies, -> { search(current_user.companies) }
   expose :company, id: ->{ params[:slug] }, scope: ->{ current_user.companies }, find_by: :slug
 
-  strong_params :company, permit: [:name]
+  strong_params :company, [:name]
 
   sortable_fields %w(name locations.count departments.count assets.count people.count)
 

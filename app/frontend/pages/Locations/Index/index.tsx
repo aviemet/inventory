@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import LocationsTable from "@/domains/Locations/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import LocationsTable from "@/domains/Locations/Table"
 
 interface CompaniesIndexProps {
 	locations: Schema.LocationsIndex[]
@@ -15,14 +14,13 @@ const LocationsIndex = ({ locations, pagination }: CompaniesIndexProps) => {
 		<IndexPageTemplate
 			title="Locations"
 			model="locations"
-			rows={ locations }
 			pagination={ pagination }
 			deleteRoute={ Routes.locations() }
 			menuOptions={ [
 				{ label: "New Location", href: Routes.newLocation(), icon: <NewIcon /> },
 			] }
 		>
-			<LocationsTable />
+			<LocationsTable records={ locations } pagination={ pagination } model="locations" />
 		</IndexPageTemplate>
 	)
 }

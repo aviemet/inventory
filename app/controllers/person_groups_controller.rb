@@ -4,7 +4,7 @@ class PersonGroupsController < ApplicationController
   expose :person_groups, -> { @active_company.person_groups.includes_associated }
   expose :person_group, id: ->{ params[:slug] }, scope: ->{ @active_company.person_groups.includes_associated }, find_by: :slug
 
-  strong_params :person_group, permit: [:name, :description, permissions: [
+  strong_params :person_group, [:name, :description, permissions: [
     company:      [:admin],
     item:         [:index, :show, :create, :update, :delete, :checkout, :checkin],
     accessory:    [:index, :show, :create, :update, :delete, :checkout, :checkin],

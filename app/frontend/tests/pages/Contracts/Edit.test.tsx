@@ -16,16 +16,16 @@ describe("Contracts/Edit", () => {
 	test("renders without error", () => {
 		const contract = createMockContractsEdit()
 
-		expect(() => {
-			render(<EditContract contract={ contract } />)
-		}).not.toThrow()
+		const { container } = render(<EditContract contract={ contract } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with contract without name", () => {
 		const contract = createMockContractsEdit({ name: "" })
 
-		expect(() => {
-			render(<EditContract contract={ contract } />)
-		}).not.toThrow()
+		const { container } = render(<EditContract contract={ contract } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

@@ -2,6 +2,7 @@
 
 ## Technology Stack
 
+- **Package Manager**: **Yarn** (NOT npm) - Always use `yarn` commands, never `npm`
 - **Backend**: Ruby on Rails 8.1+ with PostgreSQL
 - **Frontend**: React 19 with TypeScript, Vite for bundling
 - **Integration**: Inertia.js for server-driven SPA architecture
@@ -39,7 +40,7 @@ The application uses Inertia.js as the bridge between Rails and React, creating 
 
 - **Base Controller**: `ApplicationController` includes concerns: `Authentication`, `Authorization`, `InertiaCsrf`, `Localization`, `Searchable`, `ActiveCompanyTracker`, `StrongParams`
 - **Pattern**: Controllers use `expose` (from DecentExposure gem) to define resources and handle loading/finding
-- **Strong Params**: Custom `StrongParams` concern provides DSL: `strong_params :model_name, permit: [...]`
+- **Strong Params**: Custom `StrongParams` concern provides DSL: `strong_params :model_name, [...]`
 - **Sorting**: Controllers define `sortable_fields` array for search/sort functionality
 - **Route Concerns**: Reusable route concerns defined in routes.rb: `categoryable`, `clonable`, `assignable`, `bulk_delete`, etc.
 - **API Controllers**: Separate `Api::` namespace controllers return JSON, share same serializers but different response format
@@ -139,6 +140,24 @@ The application uses Inertia.js as the bridge between Rails and React, creating 
 - **DO NOT fix auto-fixable linting errors** - Import order, spacing, and other formatting issues are automatically fixed on file save. Do not waste cycles fixing these manually.
 - Only address linting errors that indicate actual code problems (type errors, logic issues, etc.)
 
+### Code Quality Rules
+
+- **NEVER use `!=` (loose inequality) in JavaScript/TypeScript** - Always use `!==` (strict inequality). Loose equality can lead to unexpected type coercion and bugs. When checking for null/undefined, use explicit checks: `id !== null && id !== undefined` or use a type guard.
+
+- **NEVER EVER use type casts (`as`, `as unknown as`, type assertions)** - Type casts are a code smell that hide real type problems. If TypeScript is complaining, fix the actual type issue:
+  - Use proper type definitions and interfaces
+  - Use generics, Records, and Mapped types
+  - Fix the source of the type mismatch, don't cast around it
+  - If you can't figure out the proper types, investigate the library's type definitions or ask for help - but NEVER cast
+  - Type casts defeat the entire purpose of TypeScript's type safety
+
+- **NEVER use `!important` in CSS** - You can always achieve your goal using CSS specificity and proper selector precedence. Using `!important` is a code smell that indicates poor selector design or CSS architecture. Instead:
+  - Use more specific selectors
+  - Increase selector specificity naturally
+  - Restructure CSS to avoid conflicts
+  - Use CSS custom properties (variables) for values that need to be overridden
+  - If you find yourself needing `!important`, it means the CSS architecture needs improvement, not that you need a workaround
+
 ### Testing Environment
 
 - **Test Environment**: Uses `happy-dom` instead of `jsdom` for faster, more complete DOM implementation
@@ -151,6 +170,27 @@ The application uses Inertia.js as the bridge between Rails and React, creating 
   - Socket hang up errors from MSW interceptors are informational and don't cause test failures
 
 ## Testing Patterns
+
+### Page Component Testing
+
+**CRITICAL: Never use `not.toThrow()` on `render()` calls**
+
+React Testing Library's `render()` function does NOT throw errors that occur during component rendering - it catches them and logs them instead. Using `expect(() => render(...)).not.toThrow()` is a useless pattern that gives false confidence because:
+
+- `render()` only throws for setup/syntax errors, not rendering failures
+- Errors in `useEffect`, component initialization, or async code won't cause `render()` to throw
+- The component might fail to render completely, but `render()` will still return successfully
+
+**Correct pattern:**
+```typescript
+const { container } = render(<Component ... />)
+expect(container.firstChild).toBeInTheDocument()
+```
+
+This verifies that something actually rendered. While not perfect (an error boundary would also pass), it's much better than `not.toThrow()`.
+
+**Better pattern (when possible):**
+Verify specific content renders rather than just checking container exists, but avoid testing implementation details like specific text unless necessary.
 
 ### Shared Input Test Behaviors
 
@@ -191,8 +231,9 @@ Page tests follow a consistent pattern:
 - Each page domain has a `helpers.ts` file with mock data creators
 - Model structures (Category, Location, Department, Manufacturer, Model, StatusLabel, Vendor, Company, Purchase, Pagination, Money) come from shared fixtures in `app/frontend/tests/helpers/fixtures/`
 - Page-specific helpers only create domain-specific mock data (e.g., `createMockAccessoriesIndex`)
-- Tests verify pages render without errors given different props
+- Tests verify pages render by checking `container.firstChild` exists, not using `not.toThrow()`
 - Tests cover basic rendering, multiple items, empty arrays, and edge cases (missing names, zero quantities, etc.)
 - Index pages test: basic render, multiple items, empty array
 - New/Edit pages test: basic render, edge cases (missing names)
 - Show pages test: basic render, edge cases (missing names, zero quantities, assigned/unassigned states)
+- Show pages with tabs: Use `testShowPageTabs()` helper to verify all tabs can be clicked and render content

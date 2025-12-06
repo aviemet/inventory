@@ -4,7 +4,7 @@ class AccessoriesController < ApplicationController
   expose :accessories, -> { search(@active_company.accessories.includes_associated) }
   expose :accessory, scope: ->{ @active_company.accessories }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  strong_params :accessory, permit: [:name, :serial, :asset_tag, :notes, :qty, :model_id, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :cost_currency, :min_qty, :status_id]
+  strong_params :accessory, [:name, :serial, :asset_tag, :notes, :qty, :model_id, :vendor_id, :default_location_id, :category_id, :model_number, :cost, :cost_currency, :min_qty, :status_id]
 
   sortable_fields %w(name serial model_number cost purchased_at requestable models.name vendors.name categories.name manufacturers.name departments.name)
 

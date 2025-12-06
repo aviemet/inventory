@@ -1,4 +1,3 @@
-
 import { History } from "@/components"
 
 import { type ShowPersonProps } from "."

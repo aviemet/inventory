@@ -1,9 +1,8 @@
-
 import { Title } from "@/components"
+import SmtpForm from "@/domains/Settings/Mail/Form"
 import { Routes } from "@/lib"
 
 import SettingsLayout from "../../SettingsLayout"
-import SmtpForm from "@/domains/Settings/Mail/Form"
 
 interface SmtpFormProps {
 	smtp: Schema.Smtp

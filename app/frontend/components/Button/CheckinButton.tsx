@@ -13,14 +13,13 @@ interface CheckinButtonProps extends Omit<LinkProps, "children"> {
 	tooltipMessage?: string | false | null
 }
 
-export function CheckinButton({ href, label, disabled, tooltipMessage, ...props }: CheckinButtonProps) {
+export function CheckinButton({ href, label, disabled, tooltipMessage, buttonProps, ...props }: CheckinButtonProps) {
 	const { other: { colors: { checkinButtonColor } } } = useMantineTheme()
 
-	const finalProps = props
-	if(disabled) {
-		finalProps.buttonProps = {
-			disabled: true,
-		}
+	const mergedButtonProps = {
+		color: checkinButtonColor,
+		...(disabled && { disabled: true }),
+		...buttonProps,
 	}
 
 	const usedLabel = tooltipMessage || `Check In${label ? ` ${label}` : ""}`
@@ -36,9 +35,9 @@ export function CheckinButton({ href, label, disabled, tooltipMessage, ...props 
 			<Link
 				as="button"
 				href={ href }
-				buttonProps={ { color: checkinButtonColor } }
+				buttonProps={ mergedButtonProps }
 				aria-label={ usedLabel }
-				{ ...finalProps }
+				{ ...props }
 			>
 				<CheckinIcon color={ useContrastingTextColor(checkinButtonColor) } />
 			</Link>

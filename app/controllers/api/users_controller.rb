@@ -1,7 +1,7 @@
 class Api::UsersController < Api::ApiController
   expose :user
 
-  strong_params :user, permit: [:email, :password, :active_company_id, :active, person: [:first_name, :last_name], company: [:name], user_preferences: [:colorScheme]]
+  strong_params :user, [:email, :password, :active_company_id, :active, person: [:first_name, :last_name], company: [:name], user_preferences: [:colorScheme]]
 
   # @route PATCH /api/users/:id (api_user)
   # @route PUT /api/users/:id (api_user)

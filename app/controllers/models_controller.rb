@@ -4,7 +4,7 @@ class ModelsController < ApplicationController
   expose :models, -> { search(@active_company.models.includes_associated) }
   expose :model, id: ->{ params[:slug] }, scope: ->{ @active_company.models.includes_associated }, find_by: :slug
 
-  strong_params :model, permit: [:name, :model_number, :manufacturer_id, :category_id, :notes]
+  strong_params :model, [:name, :model_number, :manufacturer_id, :category_id, :notes]
 
   sortable_fields %w(name model_number manufacturers.name categories.name)
 

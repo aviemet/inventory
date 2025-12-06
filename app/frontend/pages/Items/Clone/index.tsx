@@ -1,4 +1,3 @@
-
 import { Page } from "@/components"
 
 const Clone = () => {

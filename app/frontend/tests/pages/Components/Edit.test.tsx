@@ -16,16 +16,16 @@ describe("Components/Edit", () => {
 	test("renders without error", () => {
 		const component = createMockComponentsEdit()
 
-		expect(() => {
-			render(<EditComponent component={ component } />)
-		}).not.toThrow()
+		const { container } = render(<EditComponent component={ component } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with component without name", () => {
 		const component = createMockComponentsEdit({ name: "" })
 
-		expect(() => {
-			render(<EditComponent component={ component } />)
-		}).not.toThrow()
+		const { container } = render(<EditComponent component={ component } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

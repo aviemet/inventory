@@ -21,9 +21,9 @@ describe("Networks/Show", () => {
 		const ips = [createMockIpLeaseShow()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<NetworkShow network={ network } ips={ ips } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<NetworkShow network={ network } ips={ ips } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders network with DHCP range", () => {

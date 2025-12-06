@@ -1,7 +1,7 @@
-
 import { Title, Tile } from "@/components"
 import { Field, Form, TextInput, Submit } from "@/components/Form"
 import { Routes } from "@/lib"
+import { withLayout } from "@/lib/withLayout"
 
 type PasswordsNewFormData = {
 	email: string
@@ -43,4 +43,4 @@ const PasswordsNew = () => {
 	)
 }
 
-export default PasswordsNew
+export default withLayout(PasswordsNew, "auth")

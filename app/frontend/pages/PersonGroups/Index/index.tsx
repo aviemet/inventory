@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import GroupsTable from "@/domains/PersonGroups/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import GroupsTable from "@/domains/PersonGroups/Table"
 
 interface GroupIndexProps {
 	person_groups: Schema.PersonGroupsIndex[]
@@ -17,7 +16,6 @@ const GroupIndex = ({ person_groups, pagination }: GroupIndexProps) => {
 		<IndexPageTemplate
 			title={ title }
 			model="person_groups"
-			rows={ person_groups }
 			pagination={ pagination }
 			search={ false }
 			deleteRoute={ Routes.personGroups() }
@@ -29,7 +27,7 @@ const GroupIndex = ({ person_groups, pagination }: GroupIndexProps) => {
 				{ label: "Create New Group", href: Routes.newPersonGroup(), icon: <NewIcon /> },
 			] }
 		>
-			<GroupsTable />
+			<GroupsTable records={ person_groups } pagination={ pagination } model="person_groups" />
 		</IndexPageTemplate>
 	)
 }

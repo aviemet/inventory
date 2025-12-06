@@ -38,34 +38,28 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
+          ruby-version: 3.4.4
           bundler-cache: true
 
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
+          cache: 'yarn'
 
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Cache Yarn dependencies
+      - name: Cache Cypress binary
         uses: actions/cache@v4
         with:
-          path: |
-            .yarn/cache
-            .yarn/install-state.gz
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install Ruby dependencies
-        run: bundle install --jobs 4 --retry 3
+            ${{ runner.os }}-cypress-
 
       - name: Install Node.js dependencies
-        uses: cypress-io/github-action@v6
-        with:
-          runTests: false
-          install-command: yarn install --immutable
+        run: yarn install --frozen-lockfile
 
       - name: Prepare database
         env:

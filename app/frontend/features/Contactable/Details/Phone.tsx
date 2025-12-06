@@ -1,4 +1,3 @@
-
 interface PhoneProps {
 	phone: Schema.Phone
 }

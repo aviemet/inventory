@@ -1,46 +1,57 @@
-import { Table, Link } from "@/components"
+import { type DataTableColumn } from "mantine-datatable"
+
+import { Link, Table } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const DocumentationTable = (props: TableProps) => {
+const documentationColumns: DataTableColumn<Schema.DocumentationsIndex>[] = [
+	{
+		accessor: "title",
+		title: "Title",
+		sortable: true,
+		render: (doc) => <Link href={ Routes.documentation(doc.slug) }>{ doc.title }</Link>,
+	},
+	{
+		accessor: "documentable_name",
+		title: "In Reference To",
+		sortable: true,
+		render: (doc) => <Link href={ doc.route }>{ doc.documentable_name }</Link>,
+	},
+	{
+		accessor: "documentable_type",
+		title: "Referenced Type",
+		sortable: true,
+	},
+	{
+		accessor: "category.name",
+		title: "Category",
+		sortable: true,
+		render: (doc) => doc.category.name,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (doc) => <EditButton href={ Routes.editDocumentation(doc.slug) } />,
+	},
+]
+
+
+interface DocumentationTableProps {
+	records: Schema.DocumentationsIndex[]
+	pagination?: Schema.Pagination
+	model?: string
+}
+
+const DocumentationTable = ({ records, pagination, model }: DocumentationTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="title">Title</Table.HeadCell>
-					<Table.HeadCell sort="documentable_name">In Reference To</Table.HeadCell>
-					<Table.HeadCell sort="documentable_type">Referenced Type</Table.HeadCell>
-					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
-					<Table.HeadCell className="actions">Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-			<Table.Body>
-				<Table.RowIterator render={ (doc: Schema.DocumentationsIndex) => (
-					<Table.Row key={ doc.id }>
-						<Table.Cell>
-							<Link href={ Routes.documentation(doc.slug) }>{ doc.title }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ doc.route }>{ doc.documentable_name }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							{ doc.documentable_type }
-						</Table.Cell>
-
-						<Table.Cell>
-							{ doc.category.name }
-						</Table.Cell>
-
-						<Table.Cell>
-							<EditButton href={ Routes.editDocumentation(doc.slug) } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ documentationColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

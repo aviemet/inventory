@@ -69,7 +69,7 @@ export function FormDateInput<TForm extends NestedObject = NestedObject>({
 			<DateInput
 				id={ id || inputId }
 				name={ inputName }
-				value={ isUnset(value) ? undefined : value }
+				value={ value }
 				onChange={ handleChange }
 				onBlur={ handleBlur }
 				required={ required }

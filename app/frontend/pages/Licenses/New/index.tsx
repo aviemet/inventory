@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import LicenseForm from "@/domains/Licenses/Form"
 import { Routes } from "@/lib"
 
-import LicenseForm from "@/domains/Licenses/Form"
 
 interface NewLicenseProps {
 	license: Schema.LicensesFormData

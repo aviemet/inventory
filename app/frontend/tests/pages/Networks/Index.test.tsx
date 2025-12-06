@@ -13,9 +13,9 @@ describe("Networks/Index", () => {
 		const networks = [createMockNetworkIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<NetworksIndex networks={ networks } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<NetworksIndex networks={ networks } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple networks", () => {
@@ -25,17 +25,17 @@ describe("Networks/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<NetworksIndex networks={ networks } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<NetworksIndex networks={ networks } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty networks array", () => {
 		const networks: Schema.NetworksIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<NetworksIndex networks={ networks } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<NetworksIndex networks={ networks } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

@@ -16,8 +16,8 @@ describe("Consumables/New", () => {
 	test("renders without error", () => {
 		const consumable = createMockConsumablesFormData()
 
-		expect(() => {
-			render(<NewConsumable consumable={ consumable } />)
-		}).not.toThrow()
+		const { container } = render(<NewConsumable consumable={ consumable } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

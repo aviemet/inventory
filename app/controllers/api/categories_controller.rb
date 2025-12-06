@@ -8,7 +8,7 @@ class Api::CategoriesController < Api::ApiController
   }
   expose :category, id: ->{ params[:slug] }, scope: ->{ @active_company.categories }, find_by: :slug
 
-  strong_params :category, permit: [:name, :categorizable_type, :description]
+  strong_params :category, [:name, :categorizable_type, :description]
 
   # @route GET /api/categories (api_categories)
   def index

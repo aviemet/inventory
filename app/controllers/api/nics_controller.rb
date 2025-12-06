@@ -1,7 +1,7 @@
 class Api::NicsController < Api::ApiController
   expose :nic, id: ->{ params[:slug] }, scope: ->{ @active_company.nics.includes_associated }, find_by: :slug
 
-  strong_params :nic, permit: [:mac, :nic_type, :item_id]
+  strong_params :nic, [:mac, :nic_type, :item_id]
 
   # @route POST /api/hardware/:item_id/nics (api_item_nics)
   def create

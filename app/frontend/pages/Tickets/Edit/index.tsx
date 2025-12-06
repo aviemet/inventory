@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import TicketForm from "@/domains/Tickets/Form"
 import { Routes } from "@/lib"
 
-import TicketForm from "@/domains/Tickets/Form"
 
 interface UpdateTicketProps {
 	ticket: Schema.TicketsEdit

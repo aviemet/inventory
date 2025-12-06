@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import CompanyForm from "@/domains/Companies/Form"
 import { Routes } from "@/lib"
 
-import CompanyForm from "@/domains/Companies/Form"
 
 interface EditCompanyProps {
 	company: Schema.CompaniesEdit

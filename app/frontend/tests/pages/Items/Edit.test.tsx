@@ -16,16 +16,16 @@ describe("Items/Edit", () => {
 	test("renders without error", () => {
 		const item = createMockItemsEdit()
 
-		expect(() => {
-			render(<EditItem item={ item } />)
-		}).not.toThrow()
+		const { container } = render(<EditItem item={ item } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with item without name", () => {
 		const item = createMockItemsEdit({ name: "" })
 
-		expect(() => {
-			render(<EditItem item={ item } />)
-		}).not.toThrow()
+		const { container } = render(<EditItem item={ item } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

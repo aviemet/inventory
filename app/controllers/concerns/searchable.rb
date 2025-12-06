@@ -3,22 +3,7 @@
 module Searchable
   extend ActiveSupport::Concern
 
-  included do
-    class_attribute :internal_sortable_fields
-    before_action :remove_empty_query_parameters
-
-    ##
-    # Searches and sorts model using search params
-    # model: ActiveRecord object
-    ##
-    def search(model)
-      sort(
-        advanced_search(basic_search(model)),
-        model,
-      )
-    end
-
-    @advanced_search_methods = {
+  ADVANCED_SEARCH_METHODS = {
       default: ->(model, key, value) { model.where("#{model.table_name}.#{key} ILIKE ?", "%#{value}%") },
       id: ->(model, key, value) { model.joins(key.to_sym).where("#{key.pluralize}.id = ?", value[:id]) },
       created_at: ->(model, _key, value) do
@@ -45,7 +30,22 @@ module Searchable
         end
 
       end,
-    }
+    }.freeze
+
+  included do
+    class_attribute :internal_sortable_fields
+    before_action :remove_empty_query_parameters
+
+    ##
+    # Searches and sorts model using search params
+    # model: ActiveRecord object
+    ##
+    def search(model)
+      sort(
+        advanced_search(basic_search(model)),
+        model,
+      )
+    end
 
     def paginate(resource, key)
       resource.page(params[:page] || 1).per(key ? current_user.limit(key) : nil)
@@ -64,116 +64,146 @@ module Searchable
         is_last_page: model.last_page?
       }
     end
+
+    private
+
+    ##
+    # Filters ActiveRecord relation by search params
+    ##
+    def basic_search(model)
+      return model unless params[:search]
+
+      model.search(params[:search])
+    end
+
+    ##
+    # Filters ActiveRecord relation by advanced search params
+    ##
+    def advanced_search(model)
+      return model unless respond_to?(:advanced_search_params) && params[:adv] == "true"
+
+      advanced_search_params.each do |key, value|
+        next if value.blank?
+        next unless value.is_a?(ActionController::Parameters)
+
+        apply_search = ADVANCED_SEARCH_METHODS[key.to_sym] ||
+          (nested_key_with_id?(value) && value[:id].present? && ADVANCED_SEARCH_METHODS[:id]) ||
+          ADVANCED_SEARCH_METHODS[:default]
+        next unless apply_search
+
+        model = apply_search.call(model, key, value)
+      end
+
+      model
+    end
+
+    def nested_key_with_id?(nested_param)
+      nested_param.is_a?(ActionController::Parameters) && nested_param.key?(:id)
+    end
+
+    ##
+    # Sorts ActiveRecord relation by sort params
+    ##
+    def sort(obj, model)
+      # With empty sort params, don't sort
+      return obj unless params[:sort]
+
+      # Sort using db query
+      obj.order(sort_string(model))
+    end
+
+    ##
+    # Returns a string to be used in an `order` statement
+    ##
+    def sort_string(model)
+      return unless self.class.internal_sortable_fields&.include?(params[:sort])
+
+      field_type = get_field_type(model, params[:sort])
+
+      # Don't error if field doesn't exist on model
+      return if field_type.nil?
+
+      "#{add_explicit_table_prefix(model, params[:sort].to_s)} #{direction}"
+    end
+
+    ##
+    # Ensures a sort parameter is scoped to a table name to avoid ambiguous parameter error
+    ##
+    def add_explicit_table_prefix(model, sort_param)
+      if sort_param.include? "."
+        return sort_param
+      end
+
+      "#{model.table_name}.#{sort_param}"
+    end
+
+    ##
+    # Returns the data type of a database field
+    ##
+    def get_field_type(model, column)
+      split_fields = column.split(".")
+
+      # if `column` is in the form 'model.field', or further chained such as 'model1.model2.field',
+      # ignore the passed `model` param and use the last chained model sent in `column`
+      if split_fields.length > 1
+        model = split_fields[-2].titleize.singularize.constantize
+        column = split_fields[-1]
+      end
+
+      model.column_for_attribute(column).type
+    end
+
+    def direction
+      %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def remove_empty_query_parameters
+      # Filter out empty query parameters
+      non_empty_params = request.query_parameters.compact_blank
+
+      # Remove direction param if table is not sorted
+      if non_empty_params["direction"].present? && non_empty_params["sort"].blank?
+        non_empty_params.delete("direction")
+      end
+
+      # Remove adv param if there are no search params
+      if non_empty_params["adv"].present?
+        has_basic_search = non_empty_params["search"].present?
+        has_advanced_search = false
+        if respond_to?(:advanced_search_params)
+          advanced_search_params.each_value do |value|
+            if value.present?
+              has_advanced_search = true
+              break
+            end
+          end
+        end
+
+        if !has_basic_search && !has_advanced_search
+          non_empty_params.delete("adv")
+        end
+      end
+
+      return unless request.query_parameters.keys.length > non_empty_params.keys.length
+
+      # Rebuild the URL without empty query parameters
+      new_url = "#{request.path}?#{non_empty_params.to_param}"
+      redirect_to new_url
+    end
   end
 
   class_methods do
     def sortable_fields(fields)
       self.internal_sortable_fields = fields
     end
-  end
 
-  private
+    def advanced_search_params(permit:)
+      param_method_name = :advanced_search_params
 
-  ##
-  # Filters ActiveRecord relation by search params
-  ##
-  def basic_search(model)
-    return model unless params[:search]
-
-    model.search(params[:search])
-  end
-
-  ##
-  # Filters ActiveRecord relation by advanced search params
-  ##
-  def advanced_search(model)
-    return model unless defined?(advanced_search_params) == "method" && params[:adv] = "true"
-
-    advanced_search_params.each do |key, value|
-      apply_search = @advanced_search_methods[key.to_sym] ||
-        (nested_key_with_id?(advanced_search_params[key]) && @advanced_search_methods[:id]) ||
-        @advanced_search_methods[:default]
-      next unless apply_search
-
-      model = apply_search.call(model, key, value)
+      define_method param_method_name do
+        result = params.permit(*permit)
+        result.presence || ActionController::Parameters.new
+      end
     end
-
-    model
-  end
-
-  def nested_key_with_id?(nested_param)
-    nested_param.is_a?(ActionController::Parameters) && nested_param.key?(:id)
-  end
-
-  ##
-  # Sorts ActiveRecord relation by sort params
-  ##
-  def sort(obj, model)
-    # With empty sort params, don't sort
-    return obj unless params[:sort]
-
-    # Sort using db query
-    obj.order(sort_string(model))
-  end
-
-  ##
-  # Returns a string to be used in an `order` statement
-  ##
-  def sort_string(model)
-    return unless self.class.internal_sortable_fields&.include?(params[:sort])
-
-    field_type = get_field_type(model, params[:sort])
-
-    # Don't error if field doesn't exist on model
-    return if field_type.nil?
-
-    "#{add_explicit_table_prefix(model, params[:sort].to_s)} #{direction}"
-  end
-
-  ##
-  # Ensures a sort parameter is scoped to a table name to avoid ambiguous parameter error
-  ##
-  def add_explicit_table_prefix(model, sort_param)
-    if sort_param.include? "."
-      return sort_param
-    end
-
-    "#{model.table_name}.#{sort_param}"
-  end
-
-  ##
-  # Returns the data type of a database field
-  ##
-  def get_field_type(model, column)
-    split_fields = column.split(".")
-
-    # if `column` is in the form 'model.field', or further chained such as 'model1.model2.field',
-    # ignore the passed `model` param and use the last chained model sent in `column`
-    if split_fields.length > 1
-      model = split_fields[-2].titleize.singularize.constantize
-      column = split_fields[-1]
-    end
-
-    model.column_for_attribute(column).type
-  end
-
-  def direction
-    %w(asc desc).freeze.include?(params[:direction]) ? params[:direction] : "asc"
-  end
-
-  def remove_empty_query_parameters
-    # Filter out empty query parameters
-    non_empty_params = request.query_parameters.compact_blank
-
-    # Remove direction param if table is not sorted
-    if non_empty_params["direction"].present? && non_empty_params["sort"].blank?
-      non_empty_params.delete("direction")
-    end
-
-    return unless request.query_parameters.keys.length > non_empty_params.keys.length
-
-    # Rebuild the URL without empty query parameters
-    new_url = "#{request.path}?#{non_empty_params.to_param}"
-    redirect_to new_url
   end
 end

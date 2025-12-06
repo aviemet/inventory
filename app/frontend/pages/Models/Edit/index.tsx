@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import ModelForm from "@/domains/Models/Form"
 import { Routes } from "@/lib"
 
-import ModelForm from "@/domains/Models/Form"
 
 interface UpdateModelProps {
 	model: Schema.ModelsEdit

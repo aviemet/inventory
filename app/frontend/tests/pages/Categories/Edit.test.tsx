@@ -16,16 +16,16 @@ describe("Categories/Edit", () => {
 	test("renders without error", () => {
 		const category = createMockCategoriesEdit()
 
-		expect(() => {
-			render(<EditCategory category={ category } />)
-		}).not.toThrow()
+		const { container } = render(<EditCategory category={ category } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with category without name", () => {
 		const category = createMockCategoriesEdit({ name: "" })
 
-		expect(() => {
-			render(<EditCategory category={ category } />)
-		}).not.toThrow()
+		const { container } = render(<EditCategory category={ category } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

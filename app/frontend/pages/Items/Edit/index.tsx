@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import ItemForm from "@/domains/Items/Form"
 import { Routes } from "@/lib"
 
-import ItemForm from "@/domains/Items/Form"
 
 interface UpdateItemProps {
 	item: Schema.ItemsEdit

@@ -16,16 +16,16 @@ describe("Consumables/Edit", () => {
 	test("renders without error", () => {
 		const consumable = createMockConsumablesEdit()
 
-		expect(() => {
-			render(<EditConsumable consumable={ consumable } />)
-		}).not.toThrow()
+		const { container } = render(<EditConsumable consumable={ consumable } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with consumable without name", () => {
 		const consumable = createMockConsumablesEdit({ name: "" })
 
-		expect(() => {
-			render(<EditConsumable consumable={ consumable } />)
-		}).not.toThrow()
+		const { container } = render(<EditConsumable consumable={ consumable } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

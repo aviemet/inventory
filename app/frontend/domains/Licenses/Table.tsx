@@ -1,95 +1,120 @@
+import { type DataTableColumn } from "mantine-datatable"
+
 import { Group, Link, Money, Table } from "@/components"
 import { CheckoutButton, EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes, formatter } from "@/lib"
 
-const LicensesTable = (props: TableProps) => {
+const licensesColumns: DataTableColumn<Schema.LicensesIndex>[] = [
+	{
+		accessor: "name",
+		title: "Name",
+		sortable: true,
+		render: (license) => <Link href={ Routes.license(license) }>{ license.name }</Link>,
+	},
+	{
+		accessor: "qty",
+		title: "Seats",
+		sortable: true,
+		render: (license) => <Link href={ Routes.license(license) }>{ license.qty }</Link>,
+	},
+	{
+		accessor: "licenser_name",
+		title: "Licensed To Name",
+		sortable: true,
+		render: (license) => <Link href={ Routes.license(license) }>{ license.licenser_name }</Link>,
+	},
+	{
+		accessor: "licenser_email",
+		title: "Licensed To Email",
+		sortable: true,
+		render: (license) => <Link href={ Routes.license(license) }>{ license.licenser_email }</Link>,
+	},
+	{
+		accessor: "reassignable",
+		title: "Reassignable",
+		sortable: true,
+		render: (license) => <Link href={ Routes.license(license) }>{ license.reassignable }</Link>,
+	},
+	{
+		accessor: "cost",
+		title: "Cost",
+		sortable: true,
+		render: (license) => <Money>{ license.cost }</Money>,
+	},
+	{
+		accessor: "purchased_at",
+		title: "Purchase Date",
+		sortable: true,
+		render: (license) => license.purchased_at ? formatter.date.short(license.purchased_at) : null,
+	},
+	{
+		accessor: "expires_at",
+		title: "Expire Date",
+		sortable: true,
+		render: (license) => license.expires_at ? formatter.date.short(license.expires_at) : null,
+	},
+	{
+		accessor: "terminates_at",
+		title: "Termination Date",
+		sortable: true,
+		render: (license) => license.terminates_at ? formatter.date.short(license.terminates_at) : null,
+	},
+	{
+		accessor: "maintained",
+		title: "Maintained",
+		sortable: true,
+	},
+	{
+		accessor: "category.name",
+		title: "Category",
+		sortable: true,
+		render: (license) => <Link href={ Routes.license(license) }>{ license.category?.name }</Link>,
+	},
+	{
+		accessor: "vendor.name",
+		title: "Vendor",
+		sortable: true,
+		render: (license) => <Link href={ Routes.license(license) }>{ license.vendor?.name }</Link>,
+	},
+	{
+		accessor: "manufacturer.name",
+		title: "Manufacturer",
+		sortable: true,
+		render: (license) => <Link href={ Routes.license(license) }>{ license.manufacturer?.name }</Link>,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (license) => (
+			<Group wrap="nowrap" gap="sm" justify="flex-end">
+				{ license.qty_available && <CheckoutButton
+					href={ Routes.checkoutLicense(license) }
+					disabled={ license.qty_available < 1 }
+					tooltipMessage={ license.qty_available < 1 && "There are none to checkout" }
+					label={ license.name }
+				/> }
+				<EditButton href={ Routes.editLicense(license) } />
+			</Group>
+		),
+	},
+]
+
+interface LicensesTableProps {
+	records: Schema.LicensesIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const LicensesTable = ({ records, pagination, model }: LicensesTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell sort="qty">Seats</Table.HeadCell>
-					<Table.HeadCell sort="licenser_name">Licensed To Name</Table.HeadCell>
-					<Table.HeadCell sort="licenser_email">Licensed To Email</Table.HeadCell>
-					<Table.HeadCell sort="reassignable">Reassignable</Table.HeadCell>
-					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
-					<Table.HeadCell sort="purchased_at">Purchase Date</Table.HeadCell>
-					<Table.HeadCell sort="expires_at">Expire Date</Table.HeadCell>
-					<Table.HeadCell sort="terminates_at">Termination Date</Table.HeadCell>
-					<Table.HeadCell sort="maintained">Maintained</Table.HeadCell>
-					<Table.HeadCell sort="category.name">Category</Table.HeadCell>
-					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
-					<Table.HeadCell sort="manufacturers.name">Manufacturer</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (license: Schema.LicensesIndex) => (
-					<Table.Row key={ license.id }>
-
-						<Table.Cell nowrap>
-							<Link href={ Routes.license(license) }>{ license.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.license(license) }>{ license.qty }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.license(license) }>{ license.licenser_name }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.license(license) }>{ license.licenser_email }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.license(license) }>{ license.reassignable }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Money>{ license.cost }</Money>
-						</Table.Cell>
-
-						<Table.Cell>{ license.purchased_at && formatter.date.short(license.purchased_at) }</Table.Cell>
-
-						<Table.Cell>{ license.expires_at && formatter.date.short(license.expires_at) }</Table.Cell>
-
-						<Table.Cell>{ license.terminates_at && formatter.date.short(license.terminates_at) }</Table.Cell>
-
-						<Table.Cell>{ license.maintained }</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.license(license) }>{ license.category?.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.license(license) }>{ license.vendor?.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.license(license) }>{ license.manufacturer?.name }</Link>
-						</Table.Cell>
-
-
-						<Table.Cell fitContent>
-							<Group wrap="nowrap" gap="sm">
-								{ license.qty_available && <CheckoutButton
-									href={ Routes.checkoutLicense(license) }
-									disabled={ license.qty_available < 1 }
-									tooltipMessage={ license.qty_available < 1 && "There are none to checkout" }
-									label={ license.name }
-								/> }
-								<EditButton href={ Routes.editLicense(license) } />
-							</Group>
-						</Table.Cell>
-
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ licensesColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

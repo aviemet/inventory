@@ -16,8 +16,8 @@ describe("Items/New", () => {
 	test("renders without error", () => {
 		const item = createMockItemsFormData()
 
-		expect(() => {
-			render(<NewItem item={ item } />)
-		}).not.toThrow()
+		const { container } = render(<NewItem item={ item } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

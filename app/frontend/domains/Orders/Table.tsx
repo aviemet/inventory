@@ -1,54 +1,66 @@
-import { DateTimeFormatter, Link, Money, Table } from "@/components"
+import { type DataTableColumn } from "mantine-datatable"
+
+import { DateTimeFormatter, Link, Money } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const OrdersTable = (props: TableProps) => {
+const ordersColumns: DataTableColumn<Schema.OrdersIndex>[] = [
+	{
+		accessor: "number",
+		title: "Order #",
+		sortable: true,
+		render: (order) => <Link href={ Routes.order(order) }>{ order.number }</Link>,
+	},
+	{
+		accessor: "vendor.name",
+		title: "Vendor",
+		sortable: true,
+		render: (order) => order.vendor ? <Link href={ Routes.vendor(order.vendor.slug) }>{ order.vendor.name }</Link> : null,
+	},
+	{
+		accessor: "cost",
+		title: "Total",
+		sortable: true,
+		render: (order) => <Money>{ order.cost }</Money>,
+	},
+	{
+		accessor: "ordered_at",
+		title: "Purchase Date",
+		sortable: true,
+		render: (order) => <DateTimeFormatter>{ order.ordered_at }</DateTimeFormatter>,
+	},
+	{
+		accessor: "delivered_at",
+		title: "Received Date",
+		sortable: true,
+		render: (order) => <DateTimeFormatter>{ order.delivered_at }</DateTimeFormatter>,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (order) => <EditButton href={ Routes.editOrder(order) } label={ `Order number ${order.number}` } />,
+	},
+]
+
+import { Table } from "@/components"
+
+interface OrdersTableProps {
+	records: Schema.OrdersIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const OrdersTable = ({ records, pagination, model }: OrdersTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="name" hideable={ false }>Order #</Table.HeadCell>
-					<Table.HeadCell sort="vendor.name">Vendor</Table.HeadCell>
-					<Table.HeadCell sort="cost">Total</Table.HeadCell>
-					<Table.HeadCell sort="ordered_at">Purchase Date</Table.HeadCell>
-					<Table.HeadCell sort="delivered_at">Received Date</Table.HeadCell>
-					<Table.HeadCell className="text-right">Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (order: Schema.OrdersIndex) => (
-					<Table.Row key={ order.id }>
-						<Table.Cell nowrap>
-							<Link href={ Routes.order(order) }>{ order.number }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							{ order.vendor && <Link href={ Routes.vendor(order.vendor.slug) }>
-								{ order.vendor?.name }
-							</Link> }
-						</Table.Cell>
-
-						<Table.Cell nowrap>
-							<Money>{ order.cost }</Money>
-						</Table.Cell>
-
-						<Table.Cell nowrap>
-							<DateTimeFormatter>{ order.ordered_at }</DateTimeFormatter>
-						</Table.Cell>
-
-						<Table.Cell nowrap>
-							<DateTimeFormatter>{ order.delivered_at }</DateTimeFormatter>
-						</Table.Cell>
-
-						<Table.Cell fitContent>
-							<EditButton href={ Routes.editOrder(order) } label={ `Order number ${order.number}` } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ ordersColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
+
 export default OrdersTable

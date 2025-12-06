@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import AccessoryForm from "@/domains/Accessories/Form"
 import { Routes } from "@/lib"
 
-import AccessoryForm from "@/domains/Accessories/Form"
 
 interface EditAccessoryProps {
 	accessory: Schema.AccessoriesEdit

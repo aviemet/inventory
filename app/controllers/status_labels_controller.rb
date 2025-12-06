@@ -3,7 +3,7 @@ class StatusLabelsController < ApplicationController
   expose :status_labels, -> { search(StatusLabel.all) }
   expose :status_label, id: ->{ params[:slug] }, find_by: :slug
 
-  strong_params :status_label, permit: [:name]
+  strong_params :status_label, [:name]
 
   sortable_fields %w(name status_type assets.count)
 

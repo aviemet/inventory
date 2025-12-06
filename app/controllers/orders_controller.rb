@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   expose :orders, -> { search(@active_company.orders.includes_associated) }
   expose :order, scope: ->{ @active_company.orders }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
-  strong_params :order, permit: [:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping, :tax, :discount, :vendor_id]
+  strong_params :order, [:number, :user_id, :notes, :submitted_at, :ordered_at, :expected_at, :delivered_at, :canceled_at, :returned_at, :discount_description, :returned_reason, :canceled_reason, :shipping, :tax, :discount, :vendor_id]
 
   sortable_fields %w(number users.person.full_name submitted_at ordered_at delivered_at canceled_at returned_at vendors.name)
 

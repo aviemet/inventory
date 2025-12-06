@@ -4,7 +4,7 @@ class NetworksController < ApplicationController
   expose :networks, -> { search(@active_company.networks) }
   expose :network, scope: ->{ @active_company.networks }, find: ->(id, scope){ scope.find(id) }
 
-  strong_params :network, permit: [:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes]
+  strong_params :network, [:name, :address, :gateway, :dhcp_start, :dhcp_end, :vlan_id, :notes]
 
   sortable_fields %w(name address gateway dhcp_start dhcp_end vlan_id)
 

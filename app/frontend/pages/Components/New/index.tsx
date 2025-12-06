@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import ComponentForm from "@/domains/Components/Form"
 import { Routes } from "@/lib"
 
-import ComponentForm from "@/domains/Components/Form"
 
 interface NewComponentProps {
 	component: Schema.ComponentsFormData

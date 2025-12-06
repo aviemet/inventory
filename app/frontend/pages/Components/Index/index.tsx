@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import ComponentsTable from "@/domains/Components/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import ComponentsTable from "@/domains/Components/Table"
 
 interface ComponentsIndexProps {
 	components: Schema.Item[]
@@ -15,14 +14,13 @@ const ComponentsIndex = ({ components, pagination }: ComponentsIndexProps) => {
 		<IndexPageTemplate
 			title="Components"
 			model="components"
-			rows={ components }
 			pagination={ pagination }
 			deleteRoute={ Routes.components() }
 			menuOptions={ [
 				{ label: "New Component", href: Routes.newComponent(), icon: <NewIcon /> },
 			] }
 		>
-			<ComponentsTable />
+			<ComponentsTable records={ components } pagination={ pagination } model="components" />
 		</IndexPageTemplate>
 	)
 }

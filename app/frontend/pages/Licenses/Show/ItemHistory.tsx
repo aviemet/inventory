@@ -1,4 +1,3 @@
-
 import { Title, History } from "@/components"
 
 import { ShowLicenseProps } from "."

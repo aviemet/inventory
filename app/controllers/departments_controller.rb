@@ -5,7 +5,7 @@ class DepartmentsController < ApplicationController
   expose :departments, -> { search(@active_company.departments.includes_associated) }
   expose :department, id: ->{ params[:slug] }, scope: ->{ @active_company.departments.includes_associated }, find_by: :slug
 
-  strong_params :department, permit: [:name, :slug, :location_id, :notes]
+  strong_params :department, [:name, :slug, :location_id, :notes]
 
   sortable_fields %w(name items.count accessories.count components.count consumables.count people.count)
 

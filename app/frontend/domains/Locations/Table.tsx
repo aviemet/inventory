@@ -1,67 +1,83 @@
-import { Link, Table } from "@/components"
+import { type DataTableColumn } from "mantine-datatable"
+
+import { Link } from "@/components"
 import { EditButton } from "@/components/Button"
-import { TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const LocationsTable = (props: TableProps) => {
+const locationsColumns: DataTableColumn<Schema.LocationsIndex>[] = [
+	{
+		accessor: "name",
+		title: "Name",
+		sortable: true,
+		render: (location) => <Link href={ Routes.location(location.slug) }>{ location.name }</Link>,
+	},
+	{
+		accessor: "parent.name",
+		title: "Parent",
+		sortable: true,
+		render: (location) => location.parent ? <Link href={ Routes.location(location.parent.slug!) }>{ location.parent.name }</Link> : null,
+	},
+	{
+		accessor: "items",
+		title: "Assets",
+		sortable: true,
+		render: (location) => <Link href={ Routes.items() }>{ location.counts.items }</Link>,
+	},
+	{
+		accessor: "accessories",
+		title: "Accessories",
+		sortable: true,
+		render: (location) => <Link href={ Routes.accessories() }>{ location.counts.accessories }</Link>,
+	},
+	{
+		accessor: "consumables",
+		title: "Consumables",
+		sortable: true,
+		render: (location) => <Link href={ Routes.consumables() }>{ location.counts.consumables }</Link>,
+	},
+	{
+		accessor: "components",
+		title: "Components",
+		sortable: true,
+		render: (location) => <Link href={ Routes.components() }>{ location.counts.components }</Link>,
+	},
+	{
+		accessor: "licenses",
+		title: "Licenses",
+		sortable: true,
+		render: (location) => <Link href={ Routes.licenses() }>{ location.counts.licenses }</Link>,
+	},
+	{
+		accessor: "people",
+		title: "People",
+		sortable: true,
+		render: (location) => <Link href={ Routes.people() }>{ location.counts.people }</Link>,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (location) => <EditButton href={ Routes.editLocation(location.slug) } label={ location.name } />,
+	},
+]
+
+import { Table } from "@/components"
+
+interface LocationsTableProps {
+	records: Schema.LocationsIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const LocationsTable = ({ records, pagination, model }: LocationsTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell sort="name">Parent</Table.HeadCell>
-					<Table.HeadCell sort="items">Assets</Table.HeadCell>
-					<Table.HeadCell sort="accessories">Accessories</Table.HeadCell>
-					<Table.HeadCell sort="consumables">Consumables</Table.HeadCell>
-					<Table.HeadCell sort="components">Components</Table.HeadCell>
-					<Table.HeadCell sort="licenses">Licenses</Table.HeadCell>
-					<Table.HeadCell sort="people">People</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (location: Schema.LocationsIndex) => (
-					<Table.Row key={ location.id }>
-						<Table.Cell nowrap>
-							<Link href={ Routes.location(location.slug) }>{ location.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							{ location.parent && <Link href={ Routes.location(location.parent.slug!) }>{ location!.parent!.name }</Link> }
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.items() }>{ location!.counts.items }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.accessories() }>{ location!.counts.accessories }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.consumables() }>{ location!.counts.consumables }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.components() }>{ location!.counts.components }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.licenses() }>{ location!.counts.licenses }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.people() }>{ location!.counts.people }</Link>
-						</Table.Cell>
-
-						<Table.Cell fitContent>
-							<EditButton href={ Routes.editLocation(location.slug) } label={ location.name } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ locationsColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

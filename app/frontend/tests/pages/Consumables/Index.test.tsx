@@ -13,9 +13,9 @@ describe("Consumables/Index", () => {
 		const consumables = [createMockConsumablesIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<ConsumablesIndex consumables={ consumables } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<ConsumablesIndex consumables={ consumables } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple consumables", () => {
@@ -25,17 +25,17 @@ describe("Consumables/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<ConsumablesIndex consumables={ consumables } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<ConsumablesIndex consumables={ consumables } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty consumables array", () => {
 		const consumables: Schema.ConsumablesIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<ConsumablesIndex consumables={ consumables } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<ConsumablesIndex consumables={ consumables } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

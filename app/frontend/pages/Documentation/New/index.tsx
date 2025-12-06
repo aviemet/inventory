@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import DocumentationForm from "@/domains/Documentation/Form"
 import { Routes } from "@/lib"
 
-import DocumentationForm from "@/domains/Documentation/Form"
 
 interface NewDocumentationProps {
 	documentation: Schema.DocumentationsFormData

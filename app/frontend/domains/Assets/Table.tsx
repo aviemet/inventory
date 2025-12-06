@@ -1,83 +1,100 @@
+import { type DataTableColumn } from "mantine-datatable"
+
 import { Group, Link, Money, Table } from "@/components"
 import { EditButton, CheckoutButton, CheckinButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const AssetTable = (props: TableProps) => {
+const assetsColumns: DataTableColumn<Schema.AssetsIndex>[] = [
+	{
+		accessor: "name",
+		title: "Name",
+		sortable: true,
+		render: (asset) => <Link href={ Routes.asset(asset) }>{ asset.name }</Link>,
+	},
+	{
+		accessor: "model.name",
+		title: "Model",
+		sortable: true,
+		render: (asset) => asset.model ? <Link href={ Routes.asset(asset) }>{ asset.model.name }</Link> : null,
+	},
+	{
+		accessor: "asset_tag",
+		title: "Asset Tag",
+		sortable: true,
+	},
+	{
+		accessor: "serial",
+		title: "Serial",
+		sortable: true,
+	},
+	{
+		accessor: "category.name",
+		title: "Category",
+		sortable: true,
+		render: (asset) => asset.category ? <Link href={ Routes.asset(asset) }>{ asset.category.name }</Link> : null,
+	},
+	{
+		accessor: "manufacturer.name",
+		title: "Manufacturer",
+		sortable: true,
+		render: (asset) => asset.manufacturer ? <Link href={ Routes.asset(asset) }>{ asset.manufacturer.name }</Link> : null,
+	},
+	{
+		accessor: "vendor.name",
+		title: "Vendor",
+		sortable: true,
+		render: (asset) => asset.vendor ? <Link href={ Routes.asset(asset) }>{ asset.vendor.name }</Link> : null,
+	},
+	{
+		accessor: "cost",
+		title: "Cost",
+		sortable: true,
+		render: (asset) => <Money currency={ asset.cost_currency }>{ asset.cost }</Money>,
+	},
+	{
+		accessor: "department.name",
+		title: "Department",
+		sortable: true,
+		render: (asset) => asset.department ? <Link href={ Routes.asset(asset) }>{ asset.department.name }</Link> : null,
+	},
+	{
+		accessor: "type",
+		title: "Asset Type",
+		sortable: true,
+		render: (asset) => <Link href={ Routes.asset(asset) }>{ asset.type }</Link>,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (asset) => (
+			<Group wrap="nowrap" gap="sm" justify="flex-end">
+				{ asset.available_to_checkout ?
+					<CheckoutButton href={ Routes.checkoutAsset(asset) } label={ asset.name } />
+					:
+					<CheckinButton href={ Routes.checkinAsset(asset) } label={ asset.name } />
+				}
+				<EditButton href={ Routes.editAsset(asset) } label={ asset.name } />
+			</Group>
+		),
+	},
+]
+
+interface AssetTableProps {
+	records: Schema.AssetsIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const AssetTable = ({ records, pagination, model }: AssetTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell sort="models.name">Model</Table.HeadCell>
-					<Table.HeadCell sort="asset_tag">Asset Tag</Table.HeadCell>
-					<Table.HeadCell sort="serial">Serial</Table.HeadCell>
-					<Table.HeadCell sort="categories.name">Category</Table.HeadCell>
-					<Table.HeadCell sort="manufacturers.name">Manufacturer</Table.HeadCell>
-					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
-					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
-					<Table.HeadCell sort="departments.name">Department</Table.HeadCell>
-					<Table.HeadCell sort="type">Asset Type</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (asset: Schema.AssetsIndex) => {
-					return (
-						<Table.Row key={ asset.id }>
-
-							<Table.Cell>
-								<Link href={ Routes.asset(asset) }>{ asset.name }</Link>
-							</Table.Cell>
-
-							<Table.Cell >
-								<Link href={ Routes.asset(asset) }>{ asset.model?.name }</Link>
-							</Table.Cell>
-
-							<Table.Cell>{ asset.asset_tag }</Table.Cell>
-
-							<Table.Cell>{ asset.serial }</Table.Cell>
-
-							<Table.Cell>
-								<Link href={ Routes.asset(asset) }>{ asset.category?.name }</Link>
-							</Table.Cell>
-
-							<Table.Cell>
-								<Link href={ Routes.asset(asset) }>{ asset.manufacturer?.name }</Link>
-							</Table.Cell>
-
-							<Table.Cell>
-								<Link href={ Routes.asset(asset) }>{ asset.vendor?.name }</Link>
-							</Table.Cell>
-
-							<Table.Cell>
-								<Money currency={ asset.cost_currency }>{ asset.cost }</Money>
-							</Table.Cell>
-
-							<Table.Cell >
-								<Link href={ Routes.asset(asset) }>{ asset.department?.name }</Link>
-							</Table.Cell>
-
-							<Table.Cell >
-								<Link href={ Routes.asset(asset) }>{ asset.type }</Link>
-							</Table.Cell>
-
-							<Table.Cell fitContent>
-								<Group wrap="nowrap" gap="sm">
-									{ asset.available_to_checkout ?
-										<CheckoutButton href={ Routes.checkoutAsset(asset) } label={ asset.name } />
-										:
-										<CheckinButton href={ Routes.checkinAsset(asset) } label={ asset.name } />
-									}
-									<EditButton href={ Routes.editAsset(asset) } label={ asset.name } />
-								</Group>
-							</Table.Cell>
-						</Table.Row>
-					)
-				} } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ assetsColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

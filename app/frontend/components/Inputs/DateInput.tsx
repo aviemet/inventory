@@ -1,14 +1,12 @@
 import { DatePickerInput, type DatePickerInputProps } from "@mantine/dates"
-import React, { useEffect, useState, forwardRef } from "react"
+import { useMemo, forwardRef } from "react"
 
 import { CalendarIcon } from "@/components/Icons"
-import { isUnset } from "@/lib"
 
 import { InputWrapper } from "./InputWrapper"
 import { Label } from "./Label"
 
 import { type DateInputValue, type BaseInputProps } from "."
-
 
 export interface DateInputProps
 	extends
@@ -41,35 +39,23 @@ export const DateInput = forwardRef<HTMLButtonElement, DateInputProps>((
 ) => {
 	const inputId = id || name
 
-	const [localValue, setLocalValue] = useState<DateInputValue>(value)
-	const [datePickerType, setDatePickerType] = useState(type)
+	const normalizedValue = useMemo(() => {
+		const val = value ?? null
+		if(type === "range") {
+			if(Array.isArray(val)) {
+				return val.length === 2 ? val : [val[0] ?? null, null]
+			}
+			if(val !== null && val !== undefined) {
+				return [val, null]
+			}
+			return [null, null]
+		}
+		return Array.isArray(val) ? (val[0] ?? null) : (val ?? null)
+	}, [value, type])
 
 	const handleChange = (changeValue: DateInputValue | undefined) => {
-		setLocalValue(changeValue)
-
-		onChange?.(changeValue)
+		onChange?.(changeValue ?? null)
 	}
-
-	// Allow a Date input's type to change
-	useEffect(() => {
-		if(datePickerType === type) return
-
-		// DatesRangeValue and Date[] are the Array type options
-		if(type === "range") {
-			if(Array.isArray(localValue)) {
-				// An array of length 2 indicates it's already a range of dates
-				if(localValue.length !== 2) {
-					setLocalValue([localValue[0], null])
-				}
-			} else {
-				setLocalValue(localValue ? [localValue] : null)
-			}
-		} else {
-			setLocalValue(Array.isArray(localValue) ? localValue[0] : null)
-		}
-
-		setDatePickerType(type)
-	}, [type, datePickerType, localValue])
 
 	return (
 		<InputWrapper wrapper={ wrapper } wrapperProps={ wrapperProps }>
@@ -80,8 +66,9 @@ export const DateInput = forwardRef<HTMLButtonElement, DateInputProps>((
 				ref={ ref }
 				id={ inputId }
 				name={ name }
-				value={ isUnset(localValue) ? undefined : localValue }
-				type={ datePickerType }
+				// @ts-expect-error - TypeScript can't narrow conditional types when type prop is dynamic
+				value={ normalizedValue }
+				type={ type }
 				onChange={ handleChange }
 				radius={ radius }
 				size={ size }

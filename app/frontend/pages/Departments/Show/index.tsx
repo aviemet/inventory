@@ -1,4 +1,3 @@
-
 import { Tabs, Page } from "@/components"
 import { Routes } from "@/lib"
 import { type PaginatedModel } from "@/types/PaginatedModel"

@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
-  strong_params :contact, permit: [:notes]
+  strong_params :contact, [:notes]
 
   def index
     @contacts = Contact.all

@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import AccessoriesTable from "@/domains/Accessories/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import AccessoriesTable from "@/domains/Accessories/Table"
 
 interface AccessoriesIndexProps {
 	accessories: Schema.AccessoriesIndex[]
@@ -15,14 +14,13 @@ const AccessoriesIndex = ({ accessories, pagination }: AccessoriesIndexProps) =>
 		<IndexPageTemplate
 			title="Accessories"
 			model="accessories"
-			rows={ accessories }
 			pagination={ pagination }
 			deleteRoute={ Routes.accessories() }
 			menuOptions={ [
 				{ label: "Create New Accessory", href: Routes.newAccessory(), icon: <NewIcon /> },
 			] }
 		>
-			<AccessoriesTable />
+			<AccessoriesTable records={ accessories } pagination={ pagination } model="accessories" />
 		</IndexPageTemplate>
 	)
 }

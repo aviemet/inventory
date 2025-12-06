@@ -1,4 +1,3 @@
-
 interface EmailProps {
 	email: Schema.Email
 }

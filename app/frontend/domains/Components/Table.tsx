@@ -1,87 +1,98 @@
-import { Group, Link, Money, Table } from "@/components"
+import { type DataTableColumn } from "mantine-datatable"
+
+import { Group, Link, Money } from "@/components"
 import { EditButton, CheckoutButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const ComponentsTable = (props: TableProps) => {
+const componentsColumns: DataTableColumn<Schema.ComponentsIndex>[] = [
+	{
+		accessor: "name",
+		title: "Name",
+		sortable: true,
+		render: (component) => <Link href={ Routes.component({ id: component.id }) }>{ component.name }</Link>,
+	},
+	{
+		accessor: "model.name",
+		title: "Model",
+		sortable: true,
+		render: (component) => component?.model?.slug ? <Link href={ Routes.model(component.model.slug) }>{ component.model.name }</Link> : null,
+	},
+	{
+		accessor: "serial",
+		title: "Serial",
+		sortable: true,
+		render: (component) => <Link href={ Routes.component({ id: component.id }) }>{ component.serial }</Link>,
+	},
+	{
+		accessor: "category.name",
+		title: "Category",
+		sortable: true,
+		render: (component) => component?.category?.slug ? <Link href={ Routes.category(component.category.slug) }>{ component.category.name }</Link> : null,
+	},
+	{
+		accessor: "manufacturer.name",
+		title: "Manufacturer",
+		sortable: true,
+		render: (component) => component?.manufacturer?.slug ? <Link href={ Routes.manufacturer(component.manufacturer.slug) }>{ component.manufacturer.name }</Link> : null,
+	},
+	{
+		accessor: "vendor.name",
+		title: "Vendor",
+		sortable: true,
+		render: (component) => component?.vendor?.slug ? <Link href={ Routes.vendor(component.vendor.slug) }>{ component.vendor.name }</Link> : null,
+	},
+	{
+		accessor: "cost",
+		title: "Cost",
+		sortable: true,
+		render: (component) => <Money currency={ component.cost_currency }>{ component.cost }</Money>,
+	},
+	{
+		accessor: "qty",
+		title: "Avail. / Qty",
+		sortable: true,
+		render: (component) => `${component.qty_available} / ${component.qty}`,
+	},
+	{
+		accessor: "min_qty",
+		title: "Min Qty",
+		sortable: true,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (component) => (
+			<Group wrap="nowrap" gap="sm" justify="flex-end">
+				<CheckoutButton
+					href={ Routes.checkoutComponent({ id: component.id }) }
+					disabled={ component.qty_available < 1 }
+					tooltipMessage={ component.qty_available < 1 && "There are none to checkout" }
+					label={ component.name }
+				/>
+				<EditButton href={ Routes.editComponent({ id: component.id }) } label={ component.name } />
+			</Group>
+		),
+	},
+]
+
+import { Table } from "@/components"
+
+interface ComponentsTableProps {
+	records: Schema.ComponentsIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const ComponentsTable = ({ records, pagination, model }: ComponentsTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell sort="models.name">Model</Table.HeadCell>
-					<Table.HeadCell sort="serial">Serial</Table.HeadCell>
-					<Table.HeadCell sort="categories.name">Category</Table.HeadCell>
-					<Table.HeadCell sort="manufacturers.name">Manufacturer</Table.HeadCell>
-					<Table.HeadCell sort="vendors.name">Vendor</Table.HeadCell>
-					<Table.HeadCell sort="cost_cents">Cost</Table.HeadCell>
-					<Table.HeadCell sort="departments.name">Avail. / Qty</Table.HeadCell>
-					<Table.HeadCell sort="departments.name">Min Qty</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (component: Schema.ComponentsIndex) => (
-					<Table.Row key={ component.id }>
-
-						<Table.Cell nowrap>
-							<Link href={ Routes.component({ id: component.id }) }>{ component.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							{ component?.model?.slug && <Link href={ Routes.model(component.model.slug) }>
-								{ component.model.name }
-							</Link> }
-						</Table.Cell>
-
-						<Table.Cell>
-							<Link href={ Routes.component({ id: component.id }) }>{ component.serial }</Link>
-						</Table.Cell>
-
-						<Table.Cell>
-							{ component?.category?.slug && <Link href={ Routes.category(component.category.slug) }>
-								{ component.category.name }
-							</Link> }
-						</Table.Cell>
-
-						<Table.Cell>
-							{ component?.manufacturer?.slug && <Link href={ Routes.manufacturer(component.manufacturer.slug) }>
-								{ component.manufacturer!.name }
-							</Link> }
-						</Table.Cell>
-
-						<Table.Cell>
-							{ component?.vendor?.slug && <Link href={ Routes.vendor(component.vendor.slug) }>
-								{ component.vendor.name }
-							</Link> }
-						</Table.Cell>
-
-						<Table.Cell>
-							<Money currency={ component.cost_currency }>{ component.cost }</Money>
-						</Table.Cell>
-
-						<Table.Cell nowrap>{ `${component.qty_available} / ${component.qty}` }</Table.Cell>
-
-						<Table.Cell>{ component.min_qty }</Table.Cell>
-
-						<Table.Cell fitContent>
-							<Group wrap="nowrap" gap="sm">
-								<CheckoutButton
-									href={ Routes.checkoutComponent({ id: component.id }) }
-									disabled={ component.qty_available < 1 }
-									tooltipMessage={ component.qty_available < 1 && "There are none to checkout" }
-									label={ component.name }
-								/>
-
-								<EditButton href={ Routes.editComponent({ id: component.id }) } label={ component.name } />
-							</Group>
-						</Table.Cell>
-
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ componentsColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

@@ -18,29 +18,4 @@ describe("Table.HeadCell", () => {
 		expect(screen.getByText("Header")).toBeInTheDocument()
 	})
 
-	it("renders with sort prop", () => {
-		render(
-			<Table>
-				<Table.Head>
-					<Table.Row>
-						<Table.HeadCell sort="name">Header</Table.HeadCell>
-					</Table.Row>
-				</Table.Head>
-			</Table>
-		)
-		expect(screen.getByText("Header")).toBeInTheDocument()
-	})
-
-	it("renders with hideable prop", () => {
-		render(
-			<Table>
-				<Table.Head>
-					<Table.Row>
-						<Table.HeadCell hideable="name">Header</Table.HeadCell>
-					</Table.Row>
-				</Table.Head>
-			</Table>
-		)
-		expect(screen.getByText("Header")).toBeInTheDocument()
-	})
 })

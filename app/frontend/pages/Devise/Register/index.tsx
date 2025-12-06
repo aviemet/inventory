@@ -4,6 +4,7 @@ import { Title, Tile } from "@/components"
 import { Form, TextInput, PasswordInput, Submit, Field } from "@/components/Form"
 import { Routes } from "@/lib"
 import { usePageProps } from "@/lib/hooks"
+import { withLayout } from "@/lib/withLayout"
 
 type RegisterFormData = {
 	user: {
@@ -120,4 +121,4 @@ const Register = () => {
 	)
 }
 
-export default Register
+export default withLayout(Register, "auth")

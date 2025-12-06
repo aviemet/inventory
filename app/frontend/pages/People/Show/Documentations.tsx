@@ -1,22 +1,24 @@
-
-import { Table } from "@/components"
 import DocumentationTable from "@/domains/Documentation/Table"
+import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
+import { type PaginatedModel } from "@/types/PaginatedModel"
 
-interface ItemDocumentationProps {
-	item: Schema.ItemsShow
+interface PersonDocumentationProps {
+	person: Schema.PeopleShow
+	documentations?: PaginatedModel<Schema.DocumentationsIndex[]>
 }
 
-const Documentations = ({ item }: ItemDocumentationProps) => {
+const Documentations = ({ person, documentations }: PersonDocumentationProps) => {
 	return (
-		<Table.TableProvider
-			selectable
-			rows={ item?.documentations ?? [] }
+		<ShowPageTableTemplate
+			title="Documentations"
+			model="documentations"
 		>
-			<Table.SearchInput />
-
-			<DocumentationTable />
-
-		</Table.TableProvider>
+			<DocumentationTable
+				records={ documentations?.data ?? [] }
+				pagination={ documentations?.pagination }
+				model={ documentations ? "documentations" : undefined }
+			/>
+		</ShowPageTableTemplate>
 	)
 }
 

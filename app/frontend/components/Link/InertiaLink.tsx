@@ -52,6 +52,7 @@ export const InertiaLinkComponent = forwardRef<HTMLAnchorElement, LinkProps>((
 		href: processedHref,
 		style: [{ "&:hover": { textDecoration: "none" } }, style],
 		c: "bright",
+		px: "sm",
 	}
 
 	const mergedButtonProps = Object.assign(

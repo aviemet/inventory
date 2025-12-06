@@ -6,6 +6,6 @@ interface ButtonLinkProps
 	extends ButtonProps,
 	Omit<React.ComponentPropsWithoutRef<typeof Link>, "color" | "size" | "style"> {}
 
-export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>((props, ref) => (
-	<Button { ...props } ref={ ref } component={ Link } />
-))
+export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>((props, ref) => {
+	return <Button { ...props } ref={ ref } component={ Link } />
+})

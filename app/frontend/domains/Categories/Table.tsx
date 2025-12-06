@@ -1,42 +1,51 @@
-import { Link, Table } from "@/components"
+import { type DataTableColumn } from "mantine-datatable"
+
+import { Link } from "@/components"
 import { EditButton } from "@/components/Button"
-import { type TableProps } from "@/components/Table/Table"
 import { Routes } from "@/lib"
 
-const CategoriesTable = (props: TableProps) => {
+const categoriesColumns: DataTableColumn<Schema.CategoriesIndex>[] = [
+	{
+		accessor: "name",
+		title: "Name",
+		sortable: true,
+		render: (category) => <Link href={ Routes.category(category.slug) }>{ category.name }</Link>,
+	},
+	{
+		accessor: "categorizable_type",
+		title: "Type",
+		sortable: true,
+	},
+	{
+		accessor: "qty",
+		title: "Qty",
+		sortable: false,
+	},
+	{
+		accessor: "actions",
+		title: "Actions",
+		sortable: false,
+		textAlign: "right",
+		render: (category) => <EditButton href={ Routes.editCategory(category.slug) } label={ category.name } />,
+	},
+]
+
+import { Table } from "@/components"
+
+interface CategoriesTableProps {
+	records: Schema.CategoriesIndex[]
+	pagination: Schema.Pagination
+	model: string
+}
+
+const CategoriesTable = ({ records, pagination, model }: CategoriesTableProps) => {
 	return (
-		<Table { ...props }>
-			<Table.Head>
-				<Table.Row>
-					<Table.HeadCell sort="name" hideable={ false }>Name</Table.HeadCell>
-					<Table.HeadCell sort="categorizable_type">Type</Table.HeadCell>
-					<Table.HeadCell>Qty</Table.HeadCell>
-					<Table.HeadCell style={ { textAlign: "right", paddingRight: "1rem" } }>Actions</Table.HeadCell>
-				</Table.Row>
-			</Table.Head>
-
-			<Table.Body>
-				<Table.RowIterator render={ (category: Schema.CategoriesIndex) => (
-					<Table.Row key={ category.id }>
-						<Table.Cell nowrap>
-							<Link href={ Routes.category(category.slug) }>{ category.name }</Link>
-						</Table.Cell>
-
-						<Table.Cell nowrap>
-							{ category.categorizable_type }
-						</Table.Cell>
-
-						<Table.Cell nowrap>
-							{ category.qty }
-						</Table.Cell>
-
-						<Table.Cell fitContent>
-							<EditButton href={ Routes.editCategory(category.slug) } label={ category.name } />
-						</Table.Cell>
-					</Table.Row>
-				) } />
-			</Table.Body>
-		</Table>
+		<Table.DataTable
+			columns={ categoriesColumns }
+			records={ records }
+			pagination={ pagination }
+			model={ model }
+		/>
 	)
 }
 

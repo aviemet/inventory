@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import GroupForm from "@/domains/PersonGroups/Form"
 import { Routes } from "@/lib"
 
-import GroupForm from "@/domains/PersonGroups/Form"
 
 interface UpdateGroupProps {
 	person_group: Schema.PersonGroupsEdit

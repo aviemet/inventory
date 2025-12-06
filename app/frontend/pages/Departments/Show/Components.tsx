@@ -1,11 +1,10 @@
-
 import { Section } from "@/components"
 import { NewIcon } from "@/components/Icons"
+import ComponentsTable from "@/domains/Components/Table"
 import ShowPageTableTemplate from "@/features/ShowPageTableTemplate"
 import { Routes } from "@/lib"
 import { type PaginatedModel } from "@/types/PaginatedModel"
 
-import ComponentsTable from "@/domains/Components/Table"
 
 interface DetailsProps {
 	department: Schema.Department
@@ -18,13 +17,11 @@ const Details = ({ department, components }: DetailsProps) => {
 			<ShowPageTableTemplate
 				title={ `${department.name} Components` }
 				model="components"
-				rows={ components?.data }
-				pagination={ components?.pagination }
 				menuOptions={ [
 					{ label: "New Component", href: Routes.newComponent(), icon: <NewIcon /> },
 				] }
 			>
-				<ComponentsTable wrapper={ false } />
+				<ComponentsTable records={ components?.data ?? [] } pagination={ components?.pagination } model="components" />
 			</ShowPageTableTemplate>
 		</Section>
 	)

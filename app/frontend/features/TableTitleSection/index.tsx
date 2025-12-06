@@ -1,17 +1,19 @@
-import React from "react"
 import { router } from "@inertiajs/react"
 import { Box, Title, Group, Divider } from "@mantine/core"
+import { useDisclosure } from "@mantine/hooks"
+import React from "react"
 
 import { Menu } from "@/components"
 import { TrashIcon, type Icon } from "@/components/Icons"
-import { useTableContext } from "@/components/Table/TableContext"
 
+import DeleteConfirmationModal from "./DeleteConfirmationModal"
 import * as classes from "../IndexPageTemplate/IndexPage.css"
 
 export interface IndexTableTitleSectionProps {
 	children: React.ReactNode
 	title: string
 	deleteRoute?: string
+	selectedRecords?: readonly { id: string }[]
 	menuOptions?: {
 		label: string
 		href: string
@@ -19,51 +21,77 @@ export interface IndexTableTitleSectionProps {
 	}[]
 }
 
-const IndexTableTitleSection = ({ children, title, deleteRoute, menuOptions }: IndexTableTitleSectionProps) => {
-	const { tableState: { selected } } = useTableContext()
+const IndexTableTitleSection = ({ children, title, deleteRoute, selectedRecords = [], menuOptions }: IndexTableTitleSectionProps) => {
+	const [opened, { open, close }] = useDisclosure(false)
 
-	const deleteRecords = () => {
+	const selectedIds = React.useMemo(() => {
+		return selectedRecords.map(record => record.id).filter((id): id is string => id !== null && id !== undefined)
+	}, [selectedRecords])
+
+	const handleDeleteClick = () => {
+		if(selectedIds.length > 0) {
+			open()
+		}
+	}
+
+	const confirmDelete = () => {
 		if(!deleteRoute) return
 
-		router.visit(deleteRoute, {
-			method: "delete",
-			data: { ids: Array.from(selected) },
+		const ids = selectedIds
+		const url = new URL(deleteRoute, window.location.origin)
+		ids.forEach(id => {
+			url.searchParams.append("ids[]", String(id))
 		})
+
+		router.visit(url.pathname + url.search, {
+			method: "delete",
+		})
+
+		close()
 	}
 
 	return (
-		<Group justify="space-between" align="start" style={ { marginBottom: 12 } } gap="sm">
-			<Group justify="space-between" className={ classes.title }>
-				<Title>
-					{ title }
-				</Title>
-				<Menu position="bottom-end">
-					<Menu.Target />
+		<>
+			<DeleteConfirmationModal
+				opened={ opened }
+				onClose={ close }
+				onConfirm={ confirmDelete }
+				selectedRecords={ selectedRecords }
+			/>
 
-					<Menu.Dropdown>
-						{ menuOptions && menuOptions.map(({ label, href, icon }, index) => {
-							return (
-								<Menu.Link key={ index } href={ href } leftSection={ icon ? icon : undefined }>
-									{ label }
-								</Menu.Link>
-							)
-						}) }
+			<Group justify="space-between" align="start" style={ { marginBottom: 12 } } gap="sm">
+				<Group justify="space-between" className={ classes.title }>
+					<Title>
+						{ title }
+					</Title>
+					<Menu position="bottom-end">
+						<Menu.Target />
 
-						{ deleteRoute && selected.size > 0 && <>
-							<Divider />
+						<Menu.Dropdown>
+							{ menuOptions && menuOptions.map(({ label, href, icon }, index) => {
+								return (
+									<Menu.Link key={ index } href={ href } leftSection={ icon ? icon : undefined }>
+										{ label }
+									</Menu.Link>
+								)
+							}) }
 
-							<Menu.Item leftSection={ <TrashIcon size={ 14 } color="red" /> } onClick={ deleteRecords }>
-								Delete
-							</Menu.Item>
-						</> }
+							{ deleteRoute && selectedIds.length > 0 && <>
+								<Divider />
 
-					</Menu.Dropdown>
-				</Menu>
+								<Menu.Item leftSection={ <TrashIcon size={ 14 } color="red" /> } onClick={ handleDeleteClick }>
+									Delete
+								</Menu.Item>
+							</> }
+
+						</Menu.Dropdown>
+					</Menu>
+				</Group>
+				{ !!children && <Box className={ classes.content }>
+					{ children }
+				</Box> }
 			</Group>
-			{ !!children && <Box className={ classes.content }>
-				{ children }
-			</Box> }
-		</Group>
+		</>
 	)
 }
 

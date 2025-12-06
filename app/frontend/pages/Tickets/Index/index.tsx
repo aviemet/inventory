@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import TicketsTable from "@/domains/Tickets/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import TicketsTable from "@/domains/Tickets/Table"
 
 interface TicketsIndexProps {
 	tickets: Schema.TicketsIndex[]
@@ -16,14 +15,13 @@ const TicketsIndex = ({ tickets, pagination }: TicketsIndexProps) => {
 		<IndexPageTemplate
 			title={ title }
 			model="tickets"
-			rows={ tickets }
 			pagination={ pagination }
 			deleteRoute={ Routes.tickets() }
 			menuOptions={ [
 				{ label: "New Ticket", href: Routes.newTicket(), icon: <NewIcon /> },
 			] }
 		>
-			<TicketsTable />
+			<TicketsTable records={ tickets } pagination={ pagination } model="tickets" />
 		</IndexPageTemplate>
 	)
 }

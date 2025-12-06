@@ -6,15 +6,14 @@ import { useLocation, usePageProps } from "@/lib/hooks"
 import useLayoutStore from "@/lib/store/LayoutStore"
 import { useUpdateTablePreferences } from "@/queries"
 
-
-import * as classes from "../Table.css"
+import * as classes from "./Pagination.css"
 
 interface LimitSelectProps extends SelectProps {
 	pagination: Schema.Pagination
 	model: string
 }
 
-export function LimitSelect({ pagination, model }: LimitSelectProps) {
+export function LimitSelect({ pagination, model, className }: LimitSelectProps) {
 	const { auth: { user } } = usePageProps()
 	const location = useLocation()
 	const defaultLimit = useLayoutStore(state => state.defaults.tableRecordsLimit)
@@ -29,7 +28,6 @@ export function LimitSelect({ pagination, model }: LimitSelectProps) {
 			[model]: { limit },
 		}, {
 			onSuccess: () => {
-				// Redirect to first page if new limit puts page out of bounds of records
 				if(parseInt(limit) * (pagination.current_page - 1) > pagination.count) {
 					location.params.delete("page")
 					router.get(
@@ -50,7 +48,7 @@ export function LimitSelect({ pagination, model }: LimitSelectProps) {
 			mx={ 4 }
 			my={ 0 }
 			withCheckIcon={ false }
-			className={ clsx(classes.limitSelect) }
+			className={ clsx(classes.limitSelect, className) }
 			rightSectionWidth="1rem"
 			defaultValue={ String(pagination.limit) || String(defaultLimit) }
 			data={ [

@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import StatusLabelsTable from "@/domains/StatusLabels/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import StatusLabelsTable from "@/domains/StatusLabels/Table"
 
 interface StatusLabelsIndexProps {
 	status_labels: Schema.StatusLabelsIndex[]
@@ -16,14 +15,13 @@ const StatusLabelsIndex = ({ status_labels, pagination }: StatusLabelsIndexProps
 			title="Support StatusLabels"
 			model="status_labels"
 			search={ false }
-			rows={ status_labels }
 			pagination={ pagination }
 			deleteRoute={ Routes.statusLabels() }
 			menuOptions={ [
 				{ label: "New Status Label", href: Routes.newStatusLabel(), icon: <NewIcon /> },
 			] }
 		>
-			<StatusLabelsTable />
+			<StatusLabelsTable records={ status_labels } pagination={ pagination } model="status_labels" />
 		</IndexPageTemplate>
 	)
 }

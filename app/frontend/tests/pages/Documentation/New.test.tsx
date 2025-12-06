@@ -16,8 +16,8 @@ describe("Documentation/New", () => {
 	test("renders without error", () => {
 		const documentation = createMockDocumentationsFormData()
 
-		expect(() => {
-			render(<NewDocumentation documentation={ documentation } />)
-		}).not.toThrow()
+		const { container } = render(<NewDocumentation documentation={ documentation } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

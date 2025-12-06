@@ -2,13 +2,11 @@ import React from "react"
 
 import { Page, Table } from "@/components"
 import { type Breadcrumb } from "@/components/Breadcrumbs"
-import { type TableRowData } from "@/components/Table/TableContext"
 
 import TableTitleSection, { IndexTableTitleSectionProps } from "../TableTitleSection"
 
 interface IndexPageTemplateProps extends IndexTableTitleSectionProps {
 	model: string
-	rows: readonly TableRowData[]
 	pagination: Schema.Pagination
 	search?: boolean
 	breadcrumbs?: Breadcrumb[]
@@ -19,37 +17,28 @@ const IndexPageTemplate = ({
 	children,
 	title,
 	model,
-	rows,
-	pagination,
 	search = true,
 	breadcrumbs,
 	menuOptions,
 	advancedSearch,
 	deleteRoute,
+	selectedRecords = [],
 }: IndexPageTemplateProps) => {
 	return (
 		<Page title={ title } breadcrumbs={ breadcrumbs ?? [
 			{ title, href: window.location.href },
 		] }>
 			<Table.Section>
-				<Table.TableProvider
-					selectable
-					model={ model }
-					rows={ rows }
-					pagination={ pagination }
+				<TableTitleSection
+					title={ title }
+					menuOptions={ menuOptions }
+					deleteRoute={ deleteRoute }
+					selectedRecords={ selectedRecords }
 				>
-					<TableTitleSection
-						title={ title }
-						menuOptions={ menuOptions }
-						deleteRoute={ deleteRoute }
-					>
-						{ search && <Table.SearchInput advancedSearch={ advancedSearch } /> }
-					</TableTitleSection>
+					{ search && <Table.SearchInput model={ model } advancedSearch={ advancedSearch } /> }
+				</TableTitleSection>
 
-					{ children }
-
-					<Table.Pagination />
-				</Table.TableProvider>
+				{ children }
 			</Table.Section>
 		</Page>
 	)

@@ -1,8 +1,7 @@
-
 import { Title, Page, Section } from "@/components"
+import ContractForm from "@/domains/Contracts/Form"
 import { Routes } from "@/lib"
 
-import ContractForm from "@/domains/Contracts/Form"
 
 interface UpdateContractProps {
 	contract: Schema.ContractsEdit

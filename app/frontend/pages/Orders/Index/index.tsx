@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import OrdersTable from "@/domains/Orders/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import OrdersTable from "@/domains/Orders/Table"
 
 interface OrdersIndexProps {
 	orders: Schema.OrdersIndex[]
@@ -15,14 +14,13 @@ const OrdersIndex = ({ orders, pagination }: OrdersIndexProps) => {
 		<IndexPageTemplate
 			title="Orders"
 			model="orders"
-			rows={ orders }
 			pagination={ pagination }
 			deleteRoute={ Routes.orders() }
 			menuOptions={ [
 				{ label: "New Order", href: Routes.newOrder(), icon: <NewIcon /> },
 			] }
 		>
-			<OrdersTable />
+			<OrdersTable records={ orders } pagination={ pagination } model="orders" />
 		</IndexPageTemplate>
 	)
 }

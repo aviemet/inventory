@@ -32,6 +32,7 @@ export {
 	TbArrowLeftSquare as ArrowRLeftSquareIcon,
 	TbCircleDot as CircleDotIcon,
 	TbSquarePlus as ReplenishIcon,
+	TbTrashXFilled as TrashIcon,
 } from "react-icons/tb"
 
 export {
@@ -47,7 +48,7 @@ export {
 	MdViewColumn as ColumnsIcon,
 	MdAdd as NewIcon,
 	MdOutlineScreenSearchDesktop as ModelsIcon,
-	MdOutlineDelete as TrashIcon,
+	// MdOutlineDelete as TrashIcon,
 	MdCalendarMonth as CalendarIcon,
 } from "react-icons/md"
 

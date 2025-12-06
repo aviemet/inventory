@@ -1,5 +1,5 @@
-import React from "react"
 import { ActionIcon, ActionIconProps, useMantineColorScheme } from "@mantine/core"
+import React from "react"
 
 import { SunIcon, MoonStarsIcon } from "@/components/Icons"
 

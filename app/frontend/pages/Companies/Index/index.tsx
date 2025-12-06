@@ -1,9 +1,8 @@
-
 import { NewIcon } from "@/components/Icons"
+import CompaniesTable from "@/domains/Companies/Table"
 import { IndexPageTemplate } from "@/features"
 import { Routes } from "@/lib"
 
-import CompaniesTable from "@/domains/Companies/Table"
 
 interface CompaniesIndexProps {
 	companies: Schema.CompaniesIndex[]
@@ -15,14 +14,13 @@ const CompaniesIndex = ({ companies, pagination }: CompaniesIndexProps) => {
 		<IndexPageTemplate
 			title="Companies"
 			model="companies"
-			rows={ companies }
 			pagination={ pagination }
 			deleteRoute={ Routes.companies() }
 			menuOptions={ [
 				{ label: "New Company", href: Routes.newCompany(), icon: <NewIcon /> },
 			] }
 		>
-			<CompaniesTable />
+			<CompaniesTable records={ companies } pagination={ pagination } model="companies" />
 		</IndexPageTemplate>
 	)
 }

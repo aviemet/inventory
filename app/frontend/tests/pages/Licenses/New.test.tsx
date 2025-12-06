@@ -16,8 +16,8 @@ describe("Licenses/New", () => {
 	test("renders without error", () => {
 		const license = createMockLicensesFormData()
 
-		expect(() => {
-			render(<NewLicense license={ license } />)
-		}).not.toThrow()
+		const { container } = render(<NewLicense license={ license } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })

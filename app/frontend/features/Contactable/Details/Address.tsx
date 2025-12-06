@@ -1,4 +1,3 @@
-
 interface AddressProps {
 	address: Schema.Address
 }

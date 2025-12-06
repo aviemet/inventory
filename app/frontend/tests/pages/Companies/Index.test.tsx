@@ -13,9 +13,9 @@ describe("Companies/Index", () => {
 		const companies = [createMockCompaniesIndex()]
 		const pagination = createMockPagination()
 
-		expect(() => {
-			render(<CompaniesIndex companies={ companies } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<CompaniesIndex companies={ companies } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with multiple companies", () => {
@@ -25,17 +25,17 @@ describe("Companies/Index", () => {
 		]
 		const pagination = createMockPagination({ count: 2 })
 
-		expect(() => {
-			render(<CompaniesIndex companies={ companies } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<CompaniesIndex companies={ companies } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 
 	test("renders with empty companies array", () => {
 		const companies: Schema.CompaniesIndex[] = []
 		const pagination = createMockPagination({ count: 0 })
 
-		expect(() => {
-			render(<CompaniesIndex companies={ companies } pagination={ pagination } />)
-		}).not.toThrow()
+		const { container } = render(<CompaniesIndex companies={ companies } pagination={ pagination } />)
+
+		expect(container.firstChild).toBeInTheDocument()
 	})
 })
