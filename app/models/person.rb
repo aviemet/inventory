@@ -79,4 +79,10 @@ class Person < ApplicationRecord
     self.location || self.department&.location
   end
 
+  def has_role_with_groups?(role_name, resource = nil)
+    return true if has_role?(role_name, resource)
+
+    groups.any? { |group| group.has_role?(role_name, resource) }
+  end
+
 end

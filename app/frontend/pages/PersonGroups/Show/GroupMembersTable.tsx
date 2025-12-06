@@ -1,6 +1,6 @@
 import { type DataTableColumn } from "mantine-datatable"
 
-import { Link } from "@/components"
+import { Link, Table } from "@/components"
 import { CheckIcon, CrossIcon } from "@/components/Icons"
 import { Routes } from "@/lib"
 

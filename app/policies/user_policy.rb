@@ -3,10 +3,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update_table_preferences?
-    standard_auth(:update)
+    standard_authorized?(:update)
   end
 
   def update_user_preferences?
-    standard_auth(:update)
+    standard_authorized?(:update)
   end
 end

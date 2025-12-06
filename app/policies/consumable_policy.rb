@@ -3,6 +3,6 @@ class ConsumablePolicy < ApplicationPolicy
   end
 
   def checkout?
-    standard_auth(:checkout)
+    standard_authorized?(:checkout)
   end
 end

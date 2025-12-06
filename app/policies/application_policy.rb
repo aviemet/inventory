@@ -22,15 +22,15 @@ class ApplicationPolicy
   end
 
   def index?
-    standard_auth(:index)
+    standard_authorized?(:index)
   end
 
   def show?
-    standard_auth(:show)
+    standard_authorized?(:show)
   end
 
   def create?
-    standard_auth(:create)
+    standard_authorized?(:create)
   end
 
   def new?
@@ -38,7 +38,7 @@ class ApplicationPolicy
   end
 
   def update?
-    standard_auth(:update)
+    standard_authorized?(:update)
   end
 
   def edit?
@@ -46,13 +46,33 @@ class ApplicationPolicy
   end
 
   def destroy?
-    standard_auth(:destroy)
+    standard_authorized?(:destroy)
   end
 
   private
 
-  def standard_auth(_action)
-    user.has_role?(:super_admin) ||
-      user.person.roles.include?(Company.first.roles.find_by(name: :admin))
+  def standard_authorized?(action)
+    return true if user.has_role?(:super_admin)
+
+    return false unless user.person
+
+    person = user.person
+    return false unless person.company
+
+    admin_role = person.company.roles.find_by(name: :admin)
+    return true if admin_role && person.roles.include?(admin_role)
+
+    resource_class = record_class
+    return false unless resource_class
+
+    person.has_role_with_groups?(action, resource_class)
+  end
+
+  def record_class
+    if record.is_a?(Class)
+      record
+    elsif record.respond_to?(:class)
+      record.class
+    end
   end
 end

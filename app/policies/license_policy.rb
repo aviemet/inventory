@@ -3,10 +3,10 @@ class LicensePolicy < ApplicationPolicy
   end
 
   def checkout?
-    standard_auth(:checkout)
+    standard_authorized?(:checkout)
   end
 
   def checkin?
-    standard_auth(:checkin)
+    standard_authorized?(:checkin)
   end
 end
